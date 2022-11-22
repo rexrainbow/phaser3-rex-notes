@@ -15340,12 +15340,12 @@
     return result;
   };
 
-  var Merge$3 = Phaser.Utils.Objects.Merge;
+  var Merge$2 = Phaser.Utils.Objects.Merge;
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunWordWrap$1.call(this, Merge$3(config, this.wrapConfig));
+    return RunWordWrap$1.call(this, Merge$2(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
@@ -15584,12 +15584,12 @@
     return result;
   };
 
-  var Merge$2 = Phaser.Utils.Objects.Merge;
+  var Merge$1 = Phaser.Utils.Objects.Merge;
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunVerticalWrap$1.call(this, Merge$2(config, this.wrapConfig));
+    return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
   var GetValue$28 = Phaser.Utils.Objects.GetValue;
@@ -47042,19 +47042,83 @@
   });
   SetValue$1(window, 'RexPlugins.UI.Sides', Sides);
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
-  var Make$1 = function Make(name, config, style) {
-    var gameObject;
-    var builder = this.builders[name];
-    if (builder) {
-      if (style === undefined) {
-        style = this.styles;
-      } else if (typeof style === 'string') {
-        style = GetValue$f(this.styles, style) || {};
-      }
-      gameObject = builder(this.scene, config, style);
+  var Title = /*#__PURE__*/function (_Label) {
+    _inherits(Title, _Label);
+    var _super = _createSuper(Title);
+    function Title(scene, config) {
+      var _this;
+      _classCallCheck(this, Title);
+      config = BuildDisplayLabelConfig(scene, config);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexTweaker.Title';
+      return _this;
     }
+    _createClass(Title, [{
+      key: "setTitle",
+      value: function setTitle(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        config = DeepClone(config);
+        config.text = config.text || config.title || '';
+        this.resetDisplayContent(config);
+        return this;
+      }
+    }]);
+    return Title;
+  }(Label$1);
+
+  var CreateTitleLabel = function CreateTitleLabel(scene, config, style) {
+    var gameObject = new Title(scene, style);
+    scene.add.existing(gameObject);
     return gameObject;
+  };
+
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var AddFolder = function AddFolder(config) {
+    var scene = this.scene;
+
+    // Create Folder-title
+    var titleStyle = GetValue$f(this.styles, 'folder.title') || {};
+    var folderTitle = CreateTitleLabel(scene, config, titleStyle);
+
+    // Add Folder-title to Tweaker
+    this.add(folderTitle, {
+      expand: true
+    });
+
+    // Set content
+    folderTitle.setTitle(config);
+
+    // Create child tweaker
+    var childTweaker = new TweakerShell(scene, {
+      styles: this.styles,
+      background: GetValue$f(this.styles, 'folder.background') || {},
+      space: GetValue$f(this.styles, 'folder.space') || {}
+    });
+    childTweaker.setOrigin(0.5, 0);
+    scene.add.existing(childTweaker);
+
+    // Add child tweaker to Tweaker
+    this.add(childTweaker, {
+      expand: true
+    });
+
+    // On-click callback, to expand or collapse child tweaker
+    var duration = GetValue$f(this.styles, 'folder.transition.duration', 200);
+    childTweaker.isExpanded = true;
+    folderTitle.onClick(function () {
+      if (childTweaker.isExpanded) {
+        childTweaker.once('scaledown.complete', function () {
+          this.setChildScale(childTweaker, 1, 1).hide(childTweaker).getTopmostSizer().layout();
+        }, this).scaleDown(duration, 'y');
+      } else {
+        this.show(childTweaker).getTopmostSizer().layout();
+        childTweaker.popUp(duration, 'y');
+      }
+      childTweaker.isExpanded = !childTweaker.isExpanded;
+    }, this);
+    return childTweaker;
   };
 
   var StringType = 'string';
@@ -47111,67 +47175,6 @@
     return true;
   };
 
-  var AddInput = function AddInput(object, key, config) {
-    if (config === undefined) {
-      config = {};
-    }
-    if (!config.title) {
-      config.title = key;
-    }
-    config.view = GetInputType(object[key], config);
-
-    // Create InputRow
-    var inputSizer = this.make('inputRow', config, 'inputRow');
-
-    // Add InputRow to Tweaker
-    this.add(inputSizer, {
-      expand: true
-    });
-
-    // Set content
-    inputSizer.setTitle(config).setBindingTarget(object, key);
-    return this;
-  };
-
-  var methods$2 = {
-    make: Make$1,
-    addInput: AddInput
-  };
-
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
-  var TweakerShell = /*#__PURE__*/function (_Sizer) {
-    _inherits(TweakerShell, _Sizer);
-    var _super = _createSuper(TweakerShell);
-    function TweakerShell(scene, config) {
-      var _this;
-      _classCallCheck(this, TweakerShell);
-      if (config === undefined) {
-        config = {};
-      }
-      if (config.orientation === undefined) {
-        config.orientation = 'y';
-      }
-
-      // Create sizer
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexTweakerShell';
-      _this.builders = GetValue$e(config, 'builders') || {};
-      _this.styles = GetValue$e(config, 'styles') || {};
-      var background = _this.make('background', undefined, 'background');
-      if (background) {
-        _this.addBackground(background);
-      }
-      return _this;
-    }
-    return _createClass(TweakerShell);
-  }(Sizer);
-  Object.assign(TweakerShell.prototype, methods$2);
-
-  var CreateBackground = function CreateBackground(scene, config, style, gameObject) {
-    // TODO: Might create nine-slice as background
-    return CreateRoundRectangle$1(scene, style);
-  };
-
   var BindingTargetMethods = {
     setupBinding: function setupBinding() {
       var inputField = this.childrenMap.inputField;
@@ -47207,7 +47210,7 @@
     }
   };
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var InputRow = /*#__PURE__*/function (_Sizer) {
     _inherits(InputRow, _Sizer);
     var _super = _createSuper(InputRow);
@@ -47219,12 +47222,12 @@
       var inputTitle = config.inputTitle;
       var inputField = config.inputField;
       var background = config.background;
-      var proportion = GetValue$d(config, 'proportion.title', 1);
+      var proportion = GetValue$e(config, 'proportion.title', 1);
       _this.add(inputTitle, {
         proportion: proportion,
         expand: true
       });
-      var proportion = GetValue$d(config, 'proportion.inputField', 2);
+      var proportion = GetValue$e(config, 'proportion.inputField', 2);
       _this.add(inputField, {
         proportion: proportion,
         expand: true
@@ -47247,40 +47250,6 @@
     return InputRow;
   }(Sizer);
   Object.assign(InputRow.prototype, BindingTargetMethods);
-
-  var Title = /*#__PURE__*/function (_Label) {
-    _inherits(Title, _Label);
-    var _super = _createSuper(Title);
-    function Title(scene, config) {
-      var _this;
-      _classCallCheck(this, Title);
-      config = BuildDisplayLabelConfig(scene, config);
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexTweaker.Title';
-      return _this;
-    }
-    _createClass(Title, [{
-      key: "setTitle",
-      value: function setTitle(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        config = DeepClone(config);
-        config.text = config.text || config.title || '';
-        this.resetDisplayContent(config);
-        return this;
-      }
-    }]);
-    return Title;
-  }(Label$1);
-
-  var CreateTitleLabel = function CreateTitleLabel(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new Title(scene, style);
-      scene.add.existing(gameObject);
-    }
-    return gameObject;
-  };
 
   var InputFiledBase = /*#__PURE__*/function (_Sizer) {
     _inherits(InputFiledBase, _Sizer);
@@ -47396,11 +47365,9 @@
     return TextInput;
   }(InputFiledBase);
 
-  var CreateTextInput = function CreateTextInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new TextInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateTextInput = function CreateTextInput(scene, config, style) {
+    var gameObject = new TextInput(scene, style);
+    scene.add.existing(gameObject);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
   };
@@ -47454,11 +47421,9 @@
     return NumberInput;
   }(InputFiledBase);
 
-  var CreateNumberInput = function CreateNumberInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new NumberInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateNumberInput = function CreateNumberInput(scene, config, style) {
+    var gameObject = new NumberInput(scene, style);
+    scene.add.existing(gameObject);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
   };
@@ -47490,7 +47455,7 @@
     return gameObject;
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var Linear$1 = Phaser.Math.Linear;
   var SnapFloor = Phaser.Math.Snap.Floor;
   var RangeInput = /*#__PURE__*/function (_InputFiledBase) {
@@ -47506,9 +47471,9 @@
       _this.type = 'rexTweaker.RangeInput';
       var sliderConfig = config.slider;
       var trackSizeKey = _this.orientation === 0 ? 'track.height' : 'track.width';
-      var trackSize = GetValue$c(sliderConfig, trackSizeKey);
+      var trackSize = GetValue$d(sliderConfig, trackSizeKey);
       var slider = CreateSlider$1(scene, sliderConfig);
-      var proportion = GetValue$c(config, 'proportion.range.slider', 2);
+      var proportion = GetValue$d(config, 'proportion.range.slider', 2);
       var expand = trackSize === undefined;
       _this.add(slider, {
         proportion: proportion,
@@ -47516,7 +47481,7 @@
       });
       var inputTextConfig = config.inputNumber || config.inputText;
       var inputText = CreateInputText$1(scene, inputTextConfig).setNumberInput();
-      var proportion = GetValue$c(config, 'proportion.range.inputText', 1);
+      var proportion = GetValue$d(config, 'proportion.range.inputText', 1);
       _this.add(inputText, {
         proportion: proportion,
         expand: true
@@ -47571,11 +47536,9 @@
     return RangeInput;
   }(InputFiledBase);
 
-  var CreateRangeInput = function CreateRangeInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new RangeInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateRangeInput = function CreateRangeInput(scene, config, style) {
+    var gameObject = new RangeInput(scene, style);
+    scene.add.existing(gameObject);
     gameObject.setRange(config.min, config.max, config.step);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
@@ -47786,11 +47749,9 @@
     return ListInput;
   }(InputFiledBase);
 
-  var CreateListInput = function CreateListInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new ListInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateListInput = function CreateListInput(scene, config, style) {
+    var gameObject = new ListInput(scene, style);
+    scene.add.existing(gameObject);
     gameObject.setOptions(config.options);
     return gameObject;
   };
@@ -47870,11 +47831,9 @@
     return ButtonsInput;
   }(InputFiledBase);
 
-  var CreateButtonsInput = function CreateButtonsInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new ButtonsInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateButtonsInput = function CreateButtonsInput(scene, config, style) {
+    var gameObject = new ButtonsInput(scene, style);
+    scene.add.existing(gameObject);
     gameObject.setOptions(config.options);
     return gameObject;
   };
@@ -47942,11 +47901,9 @@
     return CheckboxInput;
   }(InputFiledBase);
 
-  var CreateCheckboxInput = function CreateCheckboxInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new CheckboxInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateCheckboxInput = function CreateCheckboxInput(scene, config, style) {
+    var gameObject = new CheckboxInput(scene, style);
+    scene.add.existing(gameObject);
     return gameObject;
   };
 
@@ -47996,15 +47953,13 @@
     return ColorInput;
   }(InputFiledBase);
 
-  var CreateColorInput = function CreateColorInput(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new ColorInput(scene, style);
-      scene.add.existing(gameObject);
-    }
+  var CreateColorInput = function CreateColorInput(scene, config, style) {
+    var gameObject = new ColorInput(scene, style);
+    scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateInputField = function CreateInputField(scene, config, style, gameObject) {
+  var CreateInputField = function CreateInputField(scene, config, style) {
     var viewType = config.view;
     var callback;
     switch (viewType) {
@@ -48040,52 +47995,83 @@
     return gameObject;
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
-  var CreateInputRow = function CreateInputRow(scene, config, style, gameObject) {
-    if (!gameObject) {
-      var titleStyle = GetValue$b(style, 'title') || {};
-      var inputTitle = CreateTitleLabel(scene, config, titleStyle);
-      var inputField = CreateInputField(scene, config, style);
-      var backgroundStyle = GetValue$b(style, 'background') || {};
-      var background = CreateRoundRectangle$1(scene, backgroundStyle);
-      var inputSizerconfig = _objectSpread2(_objectSpread2(_objectSpread2({}, config), style), {}, {
-        inputTitle: inputTitle,
-        inputField: inputField,
-        background: background
-      });
-      gameObject = new InputRow(scene, inputSizerconfig);
-      scene.add.existing(gameObject);
-    }
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var CreateInputRow = function CreateInputRow(scene, config, style) {
+    var titleStyle = GetValue$c(style, 'title') || {};
+    var inputTitle = CreateTitleLabel(scene, config, titleStyle);
+    var inputField = CreateInputField(scene, config, style);
+    var backgroundStyle = GetValue$c(style, 'background') || {};
+    var background = CreateRoundRectangle$1(scene, backgroundStyle);
+    var inputSizerconfig = _objectSpread2(_objectSpread2(_objectSpread2({}, config), style), {}, {
+      inputTitle: inputTitle,
+      inputField: inputField,
+      background: background
+    });
+    var gameObject = new InputRow(scene, inputSizerconfig);
+    scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateFolderBackground = function CreateFolderBackground(scene, config, style, gameObject) {
-    style.folderBackground || {};
-    return CreateRoundRectangle$1(scene, config);
+  var AddInput = function AddInput(object, key, config) {
+    if (config === undefined) {
+      config = {};
+    }
+    if (!config.title) {
+      config.title = key;
+    }
+    config.view = GetInputType(object[key], config);
+
+    // Create InputRow
+    var inputSizer = CreateInputRow(this.scene, config, this.styles.inputRow);
+
+    // Add InputRow to Tweaker
+    this.add(inputSizer, {
+      expand: true
+    });
+
+    // Set content
+    inputSizer.setTitle(config).setBindingTarget(object, key);
+    return this;
   };
 
-  var CreateFolderTitle = function CreateFolderTitle(scene, config, style, gameObject) {
-    style = style.folderTitle || {};
-    return CreateTitleLabel(scene, config, style, gameObject);
+  var methods$2 = {
+    addFolder: AddFolder,
+    addInput: AddInput
   };
 
-  // function (scene, config, style, gameObject) { return gameObject; }
-
-  var Builders$1 = {
-    background: CreateBackground,
-    // Input
-    inputRow: CreateInputRow,
-    inputField: CreateInputField,
-    textInput: CreateTextInput,
-    numberInput: CreateNumberInput,
-    rangeInput: CreateRangeInput,
-    // Folder
-    folderBackground: CreateFolderBackground,
-    folderTitle: CreateFolderTitle
+  var CreateBackground = function CreateBackground(scene, config, style) {
+    // TODO: Might create nine-slice as background
+    return CreateRoundRectangle$1(scene, style);
   };
 
-  Phaser.Utils.Objects.GetValue;
-  var Merge$1 = Phaser.Utils.Objects.Merge;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var TweakerShell = /*#__PURE__*/function (_Sizer) {
+    _inherits(TweakerShell, _Sizer);
+    var _super = _createSuper(TweakerShell);
+    function TweakerShell(scene, config) {
+      var _this;
+      _classCallCheck(this, TweakerShell);
+      if (config === undefined) {
+        config = {};
+      }
+      if (config.orientation === undefined) {
+        config.orientation = 'y';
+      }
+
+      // Create sizer
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexTweakerShell';
+      _this.styles = GetValue$b(config, 'styles') || {};
+      var background = CreateBackground(scene, undefined, config.background);
+      if (background) {
+        _this.addBackground(background);
+      }
+      return _this;
+    }
+    return _createClass(TweakerShell);
+  }(Sizer);
+  Object.assign(TweakerShell.prototype, methods$2);
+
   var Tweaker = /*#__PURE__*/function (_TweakerShell) {
     _inherits(Tweaker, _TweakerShell);
     var _super = _createSuper(Tweaker);
@@ -48099,17 +48085,8 @@
         config.styles = {}; // TODO: Default styles
       }
 
-      if (config.builders === undefined) {
-        config.builders = {};
-      }
-      config.builders = Merge$1(config.builders, Builders$1);
-
-      // Overwrite space parameter
-      var space = config.styles.space;
-      if (space) {
-        config.space = space;
-        delete config.styles.space;
-      }
+      config.background = config.styles.background || {};
+      config.space = config.styles.space || {};
 
       // Create sizer
       _this = _super.call(this, scene, config);

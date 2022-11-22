@@ -26,12 +26,39 @@ var AddFolder = function (config) {
         space: GetValue(this.styles, 'folder.space') || {}
     });
     scene.add.existing(childTweaker);
+    childTweaker.setOrigin(0.5, 0);
 
     // Add child tweaker to Tweaker
     this.add(
         childTweaker,
         { expand: true }
     );
+
+    // On-click callback, to expand or collapse child tweaker
+    var duration = GetValue(this.styles, 'folder.transition.duration', 200);
+    childTweaker.isExpanded = true;
+    folderTitle.onClick(function () {
+        if (childTweaker.isExpanded) {
+            childTweaker
+                .once('scaledown.complete', function () {
+                    this
+                        .setChildScale(childTweaker, 1, 1)
+                        .hide(childTweaker)
+                        .getTopmostSizer().layout()
+                }, this)
+                .scaleDown(duration, 'y')
+
+        } else {
+            this
+                .show(childTweaker)
+                .getTopmostSizer().layout()
+
+            childTweaker
+                .popUp(duration, 'y')
+        }
+
+        childTweaker.isExpanded = !childTweaker.isExpanded;
+    }, this)
 
     return childTweaker;
 }
