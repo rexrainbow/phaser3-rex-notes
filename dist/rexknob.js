@@ -733,7 +733,7 @@
     }
   };
 
-  var Scale$1 = {
+  var Scale$2 = {
     updateChildScale: function updateChildScale(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
@@ -1850,7 +1850,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2826,6 +2826,8 @@
     return height;
   };
 
+  var PostResolveSize = function PostResolveSize(width, height) {};
+
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -2993,6 +2995,8 @@
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
     if (this.sizerEventsEnable) {
@@ -3149,7 +3153,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -3166,10 +3172,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -3235,6 +3239,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -4117,7 +4130,7 @@
   var GetValue$s = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$5 = Phaser.Math.Linear;
-  var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
+  var Scale$1 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
     var _super = _createSuper(Scale);
     function Scale(gameObject, config) {
@@ -4270,7 +4283,7 @@
       ease: ease
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -4284,7 +4297,7 @@
     }
 
     // Ease from current scale to 0
-    if (destroyMode instanceof Scale) {
+    if (destroyMode instanceof Scale$1) {
       scale = destroyMode;
       destroyMode = undefined;
     }
@@ -4313,7 +4326,7 @@
     config.duration = duration;
     config.ease = ease;
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -4367,7 +4380,7 @@
       repeat: repeat
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -5951,35 +5964,53 @@
   };
 
   var ClickMethods = {
-    onClick: function onClick(callback, scope, config) {
-      if (!callback) {
+    onClick: function onClick(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._click === undefined) {
-        this._click = new Button(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._click.on('click', callback, scope);
+      if (gameObject._click === undefined) {
+        gameObject._click = new Button(gameObject, config);
+      }
+      gameObject._click.on('click', callback, scope);
       return this;
     },
-    offClick: function offClick(callback, scope) {
-      if (this._click === undefined) {
+    offClick: function offClick(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.off('click', callback, scope);
+      gameObject._click.off('click', callback, scope);
       return this;
     },
-    enableClick: function enableClick(enabled) {
-      if (this._click === undefined) {
+    enableClick: function enableClick(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(enabled);
+      gameObject._click.setEnable(enabled);
       return this;
     },
-    disableClick: function disableClick() {
-      if (this._click === undefined) {
+    disableClick: function disableClick(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(false);
+      gameObject._click.setEnable(false);
       return this;
     }
   };
@@ -6186,35 +6217,53 @@
   };
 
   var ClickOutsideMethods = {
-    onClickOutside: function onClickOutside(callback, scope, config) {
-      if (!callback) {
+    onClickOutside: function onClickOutside(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._clickOutside === undefined) {
-        this._clickOutside = new ClickOutside(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._clickOutside.on('clickoutside', callback, scope);
+      if (gameObject._clickOutside === undefined) {
+        gameObject._clickOutside = new ClickOutside(gameObject, config);
+      }
+      gameObject._clickOutside.on('clickoutside', callback, scope);
       return this;
     },
-    offClickOutside: function offClickOutside(callback, scope) {
-      if (this._clickOutside === undefined) {
+    offClickOutside: function offClickOutside(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.off('clickoutside', callback, scope);
+      gameObject._clickOutside.off('clickoutside', callback, scope);
       return this;
     },
-    enableClickOutside: function enableClickOutside(enabled) {
-      if (this._clickOutside === undefined) {
+    enableClickOutside: function enableClickOutside(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(enabled);
+      gameObject._clickOutside.setEnable(enabled);
       return this;
     },
-    disableClickOutside: function disableClickOutside() {
-      if (this._clickOutside === undefined) {
+    disableClickOutside: function disableClickOutside(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(false);
+      gameObject._clickOutside.setEnable(false);
       return this;
     }
   };
@@ -6865,35 +6914,53 @@
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope, config) {
-      if (!callback) {
+    onTouching: function onTouching(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._inTouching === undefined) {
-        this._inTouching = new InTouching(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._inTouching.on('intouch', callback, scope);
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('intouch', callback, scope);
       return this;
     },
-    offTouching: function offTouching(callback, scope) {
-      if (this._inTouching === undefined) {
+    offTouching: function offTouching(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.off('intouch', callback, scope);
+      gameObject._inTouching.off('intouch', callback, scope);
       return this;
     },
-    enableTouching: function enableTouching(enabled) {
-      if (this._inTouching === undefined) {
+    enableTouching: function enableTouching(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(enabled);
+      gameObject._inTouching.setEnable(enabled);
       return this;
     },
-    disableTouching: function disableTouching() {
-      if (this._inTouching === undefined) {
+    disableTouching: function disableTouching(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(false);
+      gameObject._inTouching.setEnable(false);
       return this;
     }
   };
@@ -8452,6 +8519,7 @@
     resolveWidth: ResolveWidth,
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveHeight: ResolveHeight,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -9290,7 +9358,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -10027,17 +10095,35 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
+    clear: function clear() {
+      this.start();
+      return this;
+    },
     start: function start() {
       this.startAt();
       return this;
     },
     startAt: function startAt(x, y) {
       this.restorePathData();
+      this.accumulationLengths = undefined;
       StartAt(x, y, this.pathData);
+      this.firstPointX = x;
+      this.firstPointY = y;
       this.lastPointX = x;
       this.lastPointY = y;
-      this.accumulationLengths = undefined;
       return this;
     },
     lineTo: function lineTo(x, y, relative) {
@@ -10066,9 +10152,8 @@
         anticlockwise = false;
       }
       ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
-      var pathDataCnt = this.pathData.length;
-      this.lastPointX = this.pathData[pathDataCnt - 2];
-      this.lastPointY = this.pathData[pathDataCnt - 1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
       return this;
     },
     arc: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
@@ -10108,7 +10193,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -10127,6 +10212,18 @@
       PointRotateAround$1(point, centerX, centerY, angle);
       pathData[i] = point.x;
       pathData[i + 1] = point.y;
+    }
+    return pathData;
+  };
+
+  var Scale = function Scale(centerX, centerY, scaleX, scaleY, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      var x = pathData[i] - centerX;
+      var y = pathData[i + 1] - centerY;
+      x *= scaleX;
+      y *= scaleY;
+      pathData[i] = x + centerX;
+      pathData[i + 1] = y + centerY;
     }
     return pathData;
   };
@@ -10162,6 +10259,23 @@
       }
       return this;
     },
+    scale: function scale(centerX, centerY, scaleX, scaleY) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var x = this.lastCX - centerX;
+        var y = this.lastCY - centerY;
+        x *= scaleX;
+        y *= scaleY;
+        this.lastCX = x + centerX;
+        this.lastCY = y + centerY;
+      }
+      return this;
+    },
     offset: function offset(x, y) {
       Offset(x, y, this.pathData);
       return this;
@@ -10182,21 +10296,56 @@
     return dest;
   };
 
+  var SavePathDataMethods = {
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
+      return this;
+    }
+  };
+
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
   var Linear = Phaser.Math.Linear;
-  var AddDisplayPathSegment = function AddDisplayPathSegment(startT, endT) {
-    var startL = this.totalPathLength * startT;
-    var endL = this.totalPathLength * endT;
-    var pathData = this.pathData,
-      pathDataRef = this.pathDataSave;
-    var accumulationLengths = this.accumulationLengths,
-      d;
+  var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
+    if (endT === undefined) {
+      endT = startT;
+      startT = 0;
+    }
+    startT = WrapT(startT);
+    endT = WrapT(endT);
+    if (startT === endT) {
+      return;
+    }
+    var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
+    var startL = totalPathLength * startT;
+    var endL = totalPathLength * endT;
+    if (startT < endT) {
+      AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+    } else {
+      AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+    }
+    DuplicateLast(destPathData);
+  };
+  var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
-    var pIdx;
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
-      pIdx = i * 2;
-      d = accumulationLengths[i];
+      var pIdx = i * 2;
+      var d = accumulationLengths[i];
       if (skipState) {
         if (d < startL) {
           continue;
@@ -10206,14 +10355,14 @@
           // d > startL
           var deltaD = d - accumulationLengths[i - 1];
           var t = 1 - (d - startL) / deltaD;
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
           skipState = false;
         }
       }
       if (d <= endL) {
-        pathData.push(pathDataRef[pIdx]);
-        pathData.push(pathDataRef[pIdx + 1]);
+        destPathData.push(srcPathData[pIdx]);
+        destPathData.push(srcPathData[pIdx + 1]);
         if (d === endL) {
           break;
         }
@@ -10221,8 +10370,8 @@
         // d > endL
         var deltaD = d - accumulationLengths[i - 1];
         var t = 1 - (d - endL) / deltaD;
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
         break;
       }
     }
@@ -10233,7 +10382,9 @@
     return Linear(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    if (t % 1 === 0) {
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
       return 1;
     }
     return Wrap(t, 0, 1);
@@ -10262,41 +10413,39 @@
       this.totalPathLength = accumulationLength;
       return this;
     },
-    savePathData: function savePathData() {
-      if (this.pathDataSaved) {
-        return this;
-      }
-      this.pathDataSave = _toConsumableArray(this.pathData);
-      this.pathData.length = 0;
-      this.pathDataSaved = true;
-      return this;
-    },
-    restorePathData: function restorePathData() {
-      if (!this.pathDataSaved) {
-        return this;
-      }
-      Copy(this.pathData, this.pathDataSave);
-      this.pathDataSave = undefined;
-      this.pathDataSaved = false;
-      return this;
-    },
     setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
-      if (endT === undefined) {
-        endT = startT;
-        startT = 0;
-      }
-      startT = WrapT(startT);
-      endT = WrapT(endT);
       if (!this.pathDataSaved) {
         this.updateAccumulationLengths();
         this.savePathData();
       }
       this.pathData.length = 0;
-      if (startT === endT) ; else if (startT < endT) {
-        AddDisplayPathSegment.call(this, startT, endT);
+      AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+      return this;
+    },
+    appendFromPathSegment: function appendFromPathSegment(src, startT, endT) {
+      if (startT === undefined) {
+        var _this$pathData;
+        (_this$pathData = this.pathData).push.apply(_this$pathData, _toConsumableArray(src.pathData));
       } else {
-        AddDisplayPathSegment.call(this, startT, 1);
-        AddDisplayPathSegment.call(this, 0, endT);
+        src.updateAccumulationLengths();
+        AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+      }
+      this.firstPointX = this.pathData[0];
+      this.firstPointY = this.pathData[1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
+      return this;
+    }
+  };
+
+  var GraphicsMethods = {
+    draw: function draw(graphics, isFill, isStroke) {
+      var points = this.toPoints();
+      if (isFill) {
+        graphics.fillPoints(points, this.closePath, this.closePath);
+      }
+      if (isStroke) {
+        graphics.strokePoints(points, this.closePath, this.closePath);
       }
       return this;
     }
@@ -10335,6 +10484,8 @@
       this.pathData = pathData;
       this.closePath = false;
       this.setIterations(32);
+      this.firstPointX = undefined;
+      this.firstPointY = undefined;
       this.lastPointX = undefined;
       this.lastPointY = undefined;
       this.accumulationLengths = undefined;
@@ -10355,67 +10506,62 @@
       value: function toPolygon(polygon) {
         return ToPolygon(this.pathData, polygon);
       }
-    }, {
-      key: "draw",
-      value: function draw(graphics, isFill, isStroke) {
-        var points = this.toPoints();
-        if (isFill) {
-          graphics.fillPoints(points, this.closePath, this.closePath);
-        }
-        if (isStroke) {
-          graphics.strokePoints(points, this.closePath, this.closePath);
-        }
-        return this;
-      }
     }]);
     return PathDataBuilder;
   }();
-  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods);
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+  Phaser.Utils.Objects.GetValue;
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var RadToDeg = Phaser.Math.RadToDeg;
-  var UpdateShapes = function UpdateShapes() {
-    var x = this.radius;
-    var lineWidth = this.thickness * this.radius;
-    var barRadius = this.radius - lineWidth / 2;
-    var centerRadius = this.radius - lineWidth;
+  var ShapesUpdateMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+    },
+    updateShapes: function updateShapes() {
+      var x = this.radius;
+      var lineWidth = this.thickness * this.radius;
+      var barRadius = this.radius - lineWidth / 2;
+      var centerRadius = this.radius - lineWidth;
 
-    // Track shape
-    var trackShape = this.getShape('track');
-    if (this.trackColor != null && lineWidth > 0) {
-      trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
-    } else {
-      trackShape.reset();
-    }
-
-    // Bar shape
-    var barShape = this.getShape('bar');
-    if (this.barColor != null && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 361; // overshoot 1
+      // Track shape
+      var trackShape = this.getShape('track');
+      if (this.trackColor != null && lineWidth > 0) {
+        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
       } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = RadToDeg(this.startAngle);
-        var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
+        trackShape.reset();
       }
-      barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
-    } else {
-      barShape.reset();
-    }
 
-    // Center shape
-    var centerShape = this.getShape('center');
-    if (this.centerColor && centerRadius > 0) {
-      centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
-    } else {
-      centerShape.reset();
+      // Bar shape
+      var barShape = this.getShape('bar');
+      if (this.barColor != null && barRadius > 0) {
+        var anticlockwise, startAngle, endAngle;
+        if (this.value === 1) {
+          anticlockwise = false;
+          startAngle = 0;
+          endAngle = 361; // overshoot 1
+        } else {
+          anticlockwise = this.anticlockwise;
+          startAngle = RadToDeg(this.startAngle);
+          var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
+          endAngle = deltaAngle + startAngle;
+        }
+        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+      } else {
+        barShape.reset();
+      }
+
+      // Center shape
+      var centerShape = this.getShape('center');
+      if (this.centerColor && centerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      } else {
+        centerShape.reset();
+      }
     }
   };
 
@@ -10437,11 +10583,13 @@
         barColor = GetValue$1(config, 'barColor', undefined);
         value = GetValue$1(config, 'value', 0);
       }
+      if (radius === undefined) {
+        radius = 1;
+      }
       var width = radius * 2;
       _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
       _this.bootProgressBase(config);
-      _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
       _this.setRadius(radius);
       _this.setTrackColor(GetValue$1(config, 'trackColor', undefined));
       _this.setBarColor(barColor);
@@ -10449,6 +10597,7 @@
       _this.setThickness(GetValue$1(config, 'thickness', 0.2));
       _this.setStartAngle(GetValue$1(config, 'startAngle', DefaultStartAngle));
       _this.setAnticlockwise(GetValue$1(config, 'anticlockwise', false));
+      _this.buildShapes();
       _this.setValue(value);
       return _this;
     }
@@ -10577,10 +10726,7 @@
     }]);
     return CircularProgress;
   }(ProgressBase(BaseShapes));
-  var Methods = {
-    updateShapes: UpdateShapes
-  };
-  Object.assign(CircularProgress.prototype, Methods);
+  Object.assign(CircularProgress.prototype, ShapesUpdateMethods);
 
   var GetDistance = Phaser.Math.Distance.Between;
   var IsLocalPointInKnob = function IsLocalPointInKnob(knob, localX, localY) {

@@ -73,6 +73,7 @@ declare namespace DynamicText {
         },
         ascent?: number,
         lineHeight?: number,
+        useDefaultTextHeight?: boolean,
         maxLines?: number,
         wrapWidth?: number,
         letterSpacing?: number,

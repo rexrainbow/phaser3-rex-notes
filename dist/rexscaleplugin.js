@@ -236,7 +236,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -253,10 +255,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -322,6 +322,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -1009,6 +1018,40 @@
     yoyo: 2
   };
 
+  var ScaleDown = function ScaleDown(gameObject, duration, orientation, ease, scale) {
+    if (ease === undefined) {
+      ease = 'Linear';
+    }
+    var config = {};
+    config.mode = 0;
+    switch (orientation) {
+      case 0:
+      case 'x':
+        config.end = {
+          x: 0
+        };
+        break;
+      case 1:
+      case 'y':
+        config.end = {
+          y: 0
+        };
+        break;
+      default:
+        config.end = 0;
+        break;
+    }
+    config.duration = duration;
+    config.ease = ease;
+    if (scale === undefined) {
+      scale = new Scale(gameObject, config);
+    } else {
+      scale.resetFromJSON(config);
+    }
+    scale.restart();
+    return scale;
+  };
+
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
     if (ease === undefined) {
       ease = 'Linear';
@@ -1175,6 +1218,7 @@
     return ScalePlugin;
   }(Phaser.Plugins.BasePlugin); // mixin
   var methods = {
+    scaleDown: ScaleDown,
     scaleDownDestroy: ScaleDownDestroy,
     popup: PopUp,
     yoyo: Yoyo

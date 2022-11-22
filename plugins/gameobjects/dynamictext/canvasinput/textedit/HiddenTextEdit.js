@@ -1,14 +1,25 @@
 import HiddenTextEditBase from '../../../../behaviors/hiddentextedit/HiddenTextEditBase.js';
 import NumberInputUpdateCallback from '../../../../behaviors/hiddentextedit/defaultcallbacks/NumberInputUpdateCallback.js';
+import SelectRange from './SelectRange.js';
+import MoveCursor from './MoveCursor.js';
+import ClearSelectRange from './ClearSelectRange.js';
+import ClearCursor from './ClearCursor.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-
         super(gameObject, config);
         // this.parent = gameObject;
+
+        this.setSelectAllWhenFocusEnable(GetValue(config, 'selectAll', false));
+
+        this.cursorMoveStartIndex = null;
+        this.prevCursorPosition = null;
+        this.prevSelectionStart = null;
+        this.prevSelectionEnd = null;
+        this.firstClickAfterOpen = false;
+
 
         gameObject
             // Open editor by 'pointerdown' event
@@ -16,19 +27,39 @@ class HiddenTextEdit extends HiddenTextEditBase {
             .on('pointerdown', function (pointer, localX, localY, event) {
                 var child = gameObject.getNearestChild(localX, localY);
                 var charIndex = gameObject.getCharIndex(child);
-                this.setCursorPosition(charIndex);
+
+                if (!this.selectAllWhenFocus || !this.firstClickAfterOpen) {
+                    this.setCursorPosition(charIndex);
+                }
+
+                this.cursorMoveStartIndex = charIndex;
+                this.firstClickAfterOpen = false;
+            }, this)
+            .on('pointermove', function (pointer, localX, localY, event) {
+                if (!pointer.isDown) {
+                    return;
+                }
+                var child = gameObject.getNearestChild(localX, localY);
+                var charIndex = gameObject.getCharIndex(child);
+                if (this.cursorMoveStartIndex < charIndex) {
+                    this.selectText(this.cursorMoveStartIndex, charIndex + 1);
+                } else {
+                    this.selectText(charIndex, this.cursorMoveStartIndex + 1);
+                }
             }, this)
 
         this
             .on('open', function () {
+                if (this.selectAllWhenFocus) {
+                    this.selectAll();
+                }
+                this.firstClickAfterOpen = true;
+
                 gameObject.emit('open');
-            })
+            }, this)
             .on('close', function () {
                 gameObject.emit('close');
-            })
-            .on('nan', function (text) {
-                gameObject.emit('nan', text);
-            })
+            }, this)
     }
 
     initText() {
@@ -54,25 +85,17 @@ class HiddenTextEdit extends HiddenTextEditBase {
             textObject.emit('textchange', text, textObject, this);
         }
 
-        var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
-        if (this.prevCursorPosition !== cursorPosition) {
-            if (this.prevCursorPosition != null) {
-                if (this.prevCursorPosition > text.length) {
-                    this.prevCursorPosition = null;
-                }
+        if (this.isOpened) {
+            if (this.selectionStart !== this.selectionEnd) {
+                ClearCursor(this);
+                SelectRange(this);
+            } else {
+                ClearSelectRange(this);
+                MoveCursor(this);
             }
-
-            if (this.prevCursorPosition != null) {
-                var child = textObject.getCharChild(this.prevCursorPosition);
-                textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
-            }
-            if (cursorPosition != null) {
-                var child = textObject.getCharChild(cursorPosition);
-                textObject.emit('cursorin', child, cursorPosition, textObject);
-            }
-            textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
-
-            this.prevCursorPosition = cursorPosition;
+        } else {
+            ClearSelectRange(this);
+            ClearCursor(this);
         }
 
         return this;
@@ -80,6 +103,15 @@ class HiddenTextEdit extends HiddenTextEditBase {
 
     setNumberInput() {
         this.onUpdateCallback = NumberInputUpdateCallback;
+        return this;
+    }
+
+    setSelectAllWhenFocusEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.selectAllWhenFocus = enable;
         return this;
     }
 }

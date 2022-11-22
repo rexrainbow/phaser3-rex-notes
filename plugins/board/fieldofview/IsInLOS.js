@@ -24,6 +24,11 @@ var IsInLOS = function (chess, visiblePoints, originTileXY) {
         console.log('Visible test from (' + originTileXY.x + ',' + originTileXY.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
     }
 
+    if (!globTileXYArray0) {
+        globTileXYArray0 = [];
+        globTileXYArray1 = [];
+    }
+
     var out = board.tileXYToWorldXY(originTileXY.x, originTileXY.y, true);
     var startX = out.x,
         startY = out.y;
@@ -48,7 +53,7 @@ var IsInLOS = function (chess, visiblePoints, originTileXY) {
     isVisivle = this.isPathVisible(globTileXYArray0, visiblePoints);
     if (isVisivle) {
         globTileXYArray0.length = 0;
-        drawLine(
+        DrawLine(
             this.debugGraphics,
             this.debugVisibleLineColor,
             startX, startY, endX, endY
@@ -74,7 +79,7 @@ var IsInLOS = function (chess, visiblePoints, originTileXY) {
     }
     globTileXYArray0.length = 0;
     globTileXYArray1.length = 0;
-    drawLine(
+    DrawLine(
         this.debugGraphics,
         ((isVisivle) ? this.debugVisibleLineColor : this.debugInvisibleLineColor),
         startX, startY, endX, endY
@@ -82,12 +87,12 @@ var IsInLOS = function (chess, visiblePoints, originTileXY) {
     return isVisivle;
 }
 
-var drawLine = function (graphics, color, startX, startY, endX, endY) {
+var DrawLine = function (graphics, color, startX, startY, endX, endY) {
     if (graphics && (color !== undefined)) {
         graphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
     }
 }
 
-var globTileXYArray0 = [],
-    globTileXYArray1 = [];
+var globTileXYArray0,
+    globTileXYArray1;
 export default IsInLOS;

@@ -19,8 +19,7 @@ class Demo extends Phaser.Scene {
             .on('destroy', function () {
                 console.log('Button destroy')
             })
-        this.plugins.get('rexModal').add(button, {
-            manualClose: false,
+        this.plugins.get('rexModal').add(button, {       
             duration: {
                 in: 1000,
                 hold: 1000,

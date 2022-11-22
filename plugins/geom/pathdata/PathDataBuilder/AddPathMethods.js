@@ -3,8 +3,13 @@ import LineTo from '../LineTo.js';
 import ArcTo from '../ArcTo.js';
 import QuadraticBezierTo from '../QuadraticBezierTo.js';
 import CubicBezierCurveTo from '../QuadraticBezierTo.js';
+import DuplicateLast from '../DuplicateLast.js';
 
 export default {
+    clear() {
+        this.start();
+        return this;
+    },
 
     start() {
         this.startAt();
@@ -13,10 +18,14 @@ export default {
 
     startAt(x, y) {
         this.restorePathData();
+        this.accumulationLengths = undefined;
+
         StartAt(x, y, this.pathData);
+        this.firstPointX = x;
+        this.firstPointY = y;
         this.lastPointX = x;
         this.lastPointY = y;
-        this.accumulationLengths = undefined;
+
         return this;
     },
 
@@ -59,9 +68,8 @@ export default {
             this.pathData
         );
 
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
         return this;
     },
 
@@ -118,7 +126,7 @@ export default {
     },
 
     end() {
-        this.pathData.push(this.lastPointX, this.lastPointY);
+        DuplicateLast(this.pathData);
         return this;
     },
 

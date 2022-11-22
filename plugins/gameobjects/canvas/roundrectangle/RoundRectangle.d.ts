@@ -8,7 +8,10 @@ declare namespace RoundRectangle {
         tl?: (number | { x?: number, y?: number }),
         tr?: (number | { x?: number, y?: number }),
         bl?: (number | { x?: number, y?: number }),
-        br?: (number | { x?: number, y?: number })
+        br?: (number | { x?: number, y?: number }),
+
+        x?: number,
+        y?: number,
     }
 
 }
@@ -20,9 +23,9 @@ declare class RoundRectangle extends Canvas {
         y: number,
         width: number,
         height: number,
-        radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
+        radiusConfig?: number | RoundRectangle.IRadiusConfig |
             ({
-                radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
+                radius?: (number | RoundRectangle.IRadiusConfig),
                 iteration?: number
             }),
         fillStyle?: number | string | null,
@@ -49,9 +52,9 @@ declare class RoundRectangle extends Canvas {
         lineWidth?: number,
     ): this;
 
-    radius: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig;
+    radius: number | RoundRectangle.IRadiusConfig;
     setRadius(
-        value?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig
+        value?: number | RoundRectangle.IRadiusConfig
     ): this;
 
     iteration: number;

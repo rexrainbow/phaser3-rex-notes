@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var txt0 = CreateCanvasInput(this, 'Apple').setPosition(400, 200)
+        var txt0 = CreateCanvasInput(this, 'Apple012345678901234567890123456789').setPosition(400, 200)
         var txt1 = CreateCanvasInput(this, 'A').setPosition(400, 300).appendText('pple')
         var txt2 = CreateCanvasInput(this, 'Apple').setPosition(400, 400).setReadOnly()
     }
@@ -51,6 +51,8 @@ var CreateCanvasInput = function (scene, text) {
             // },
 
             text: text,
+
+            selectAll: true
         }
     )
 }

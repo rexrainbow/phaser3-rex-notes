@@ -15,7 +15,7 @@ class DropDownList extends Label {
         var listConfig = GetValue(config, 'list');
         this.setWrapEnable(GetValue(listConfig, 'wrap', false));
         this.setCreateButtonCallback(GetValue(listConfig, 'createButtonCallback'));
-        this.setCreateBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
+        this.setCreateListBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
@@ -23,7 +23,7 @@ class DropDownList extends Label {
         this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
         this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
         this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));
-        this.settListTTransitOutCallback(GetValue(listConfig, 'transitOut'));
+        this.settListTransitOutCallback(GetValue(listConfig, 'transitOut'));
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
         this.setListBounds(GetValue(listConfig, 'bounds'));
@@ -51,7 +51,6 @@ class DropDownList extends Label {
         }
 
         super.destroy(fromScene);
-        this.removeDelayCall();
     }
 
     setOptions(options) {

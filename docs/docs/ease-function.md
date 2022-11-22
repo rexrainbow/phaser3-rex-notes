@@ -27,7 +27,7 @@ Ease functions, built-in method of phaser.
     - Quintic ease-in/out : `Phaser.Math.Easing.Quintic.InOut`
 - Sinusoidal
     - Sinusoidal ease-out : `Phaser.Math.Easing.Sine.Out`
-    - Sinusoidal ease-in : `Phaser.Math.Easing.Sine.in`
+    - Sinusoidal ease-in : `Phaser.Math.Easing.Sine.In`
     - Sinusoidal ease-in/out : `Phaser.Math.Easing.Sine.InOut`
 - Exponential
     - Exponential ease-out : `Phaser.Math.Easing.Expo.Out`

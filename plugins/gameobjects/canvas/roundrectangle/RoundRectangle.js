@@ -6,6 +6,12 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class RoundRectangle extends Canvas {
     constructor(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 1; }
+        if (height === undefined) { height = width; }
+        if (radiusConfig === undefined) { radiusConfig = 0; }
+
         super(scene, x, y, width, height);
         this.type = 'rexRoundRectangleCanvas';
 

@@ -1,6 +1,7 @@
-import Factory from './gameobjects/dynamictext/canvasinput/Factory';
-import Creator from './gameobjects/dynamictext/canvasinput/Creator.js';
+import CanvasInputFactory from './gameobjects/dynamictext/canvasinput/Factory';
+import CanvasInputCreator from './gameobjects/dynamictext/canvasinput/Creator.js';
 import CanvasInput from './gameobjects/dynamictext/canvasinput/CanvasInput.js';
+
 import SetValue from './utils/object/SetValue.js';
 
 class CanvasInputPlugin extends Phaser.Plugins.BasePlugin {
@@ -9,7 +10,7 @@ class CanvasInputPlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexCanvasInput', Factory, Creator);
+        pluginManager.registerGameObject('rexCanvasInput', CanvasInputFactory, CanvasInputCreator);
     }
 
     start() {

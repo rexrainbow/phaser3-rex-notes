@@ -1,3 +1,5 @@
+import InterpolateColor32 from './InterpolateColor32.js';
+
 const Color = Phaser.Display.Color;
 
 export default {
@@ -25,4 +27,6 @@ export default {
         }
         return out;
     },
+
+    interpolateColor32: InterpolateColor32,
 }

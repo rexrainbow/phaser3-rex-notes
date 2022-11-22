@@ -153,19 +153,24 @@ var txt = scene.add.rexCanvasInput({
             bottom: 0
         },
         lineHeight: undefined,
-        maxLines: undefined,
+        useDefaultLineHeight: true,
+        maxLines: 1,
         wrapWidth: undefined,
         letterSpacing: 0,
         hAlign: 0,
-        vAlign: 0,
-        charWrap: false
+        vAlign: 'center',  // For single line text input
+        charWrap: true,    // For single line text input
     },
     
     // Parameters of hidden-text-editor   
     // inputType: 'text',  // 'text'|'password'|'textarea'|...                
+    
+    // readOnly: false,
+    // maxLength: undefined,
+    // minLength: undefined,
+    // selectAll: false,
 
     // enterClose: true,
-    // readOnly: false,
 
     // Callbacks
     // onOpen: function (textObject, hiddenInputText) {
@@ -202,6 +207,10 @@ var txt = scene.add.rexCanvasInput({
 ```
 
 - Parameters of [DynamicText](dynamictext.md#create-instance)...
+    - `wrap` : Some default value in `wrap` are changed
+        - `wrap.useDefaultLineHeight` : Default value is `true`
+        - `wrap.maxLines` : Default value is `1`
+        - `wrap.vAlign` : Default value is `'center'`
 - Parameters of hidden-text-editor
     - `inputType` : Type of element
         - `'text'`, `'password'`, `'textarea'`, ...
@@ -209,6 +218,8 @@ var txt = scene.add.rexCanvasInput({
     - `readOnly` : 
         - `true` : un-editable.
         - `false` : Editable. Defaule behavior.
+    - `maxLength`, `minLength` : Maximun or minimun of input characters
+    - `selectAll` : Set to `true` to select all characters when focusing.
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript

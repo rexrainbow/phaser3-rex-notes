@@ -1,5 +1,5 @@
 import InputFiledBase from './InputFieldBase.js';
-import CreateCanvasInput from '../utils/CreateCanvasInput.js';
+import CreateInputText from '../../../utils/build/CreateInputText.js';
 
 class NumberInput extends InputFiledBase {
     constructor(scene, config) {
@@ -11,7 +11,7 @@ class NumberInput extends InputFiledBase {
         this.type = 'rexTweaker.NumberInput';
 
         var inputTextConfig = config.inputNumber || config.inputText;
-        var inputText = CreateCanvasInput(scene, inputTextConfig)
+        var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
         this.add(
@@ -34,7 +34,6 @@ class NumberInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
-
 
         var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText(text);

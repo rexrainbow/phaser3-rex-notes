@@ -103,6 +103,7 @@ nav:
             - Custom progress: shape-custom-progress.md
             - Full window rectangle: shape-fullwindowrectangle.md
             - Cover: shape-cover.md
+            - Checkbox: shape-checkbox.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
@@ -164,6 +165,7 @@ nav:
         - Modal:
             - Modal behavior: modal.md
             - Modal promise: modal-promise.md        
+        - Drop down: dropdown.md
         - Arcade:
             - Engine:
                 - World: arcade-world.md
@@ -411,6 +413,10 @@ nav:
     - Toast: ui-toast.md    
     - Tabs: ui-tabs.md        
     - Holy grail: ui-holygrail.md
+    - Color input:
+        - Color input: ui-colorinput.md
+        - Color picker: ui-colorpicker.md
+        - Color components: ui-colorcomponents.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md

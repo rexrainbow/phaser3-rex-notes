@@ -213,7 +213,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -230,10 +232,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -300,6 +300,15 @@
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
       }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
     }]);
     return ComponentBase;
   }();
@@ -326,23 +335,34 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setHitAreaMode(GetValue(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue(o, "enable", true));
+        this.setEnable(GetValue(o, 'enable', true));
+        this.setStopMode(GetValue(o, 'stopAllLevels', true));
         return this;
       }
     }, {
       key: "boot",
       value: function boot() {
         this.parent.on('pointerdown', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerup', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointermove', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerover', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerout', function (pointer, event) {
-          event.stopPropagation();
-        });
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerup', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointermove', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerover', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerout', function (pointer, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this);
       }
     }, {
       key: "setHitAreaMode",
@@ -378,6 +398,15 @@
           this.parent.disableInteractive();
         }
         this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setStopMode",
+      value: function setStopMode(allLevels) {
+        if (allLevels === undefined) {
+          allLevels = true;
+        }
+        this.stopAllLevels = allLevels;
         return this;
       }
     }, {

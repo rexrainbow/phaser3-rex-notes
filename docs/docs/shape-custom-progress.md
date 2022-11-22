@@ -167,6 +167,7 @@ var customProgress = scene.add.rexCustomProgress({
             - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
             - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
             - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+            - `'roundRectangle'` : Create [Round rectangle shape](shape-custom-shapes.md#round-rectangle).
             - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
     - A plain object with `shapeType: name`, or `shapeType: number`
         - `shapeType` : `arc`, `circle`, `ellipse`, `line`, `rectangle`, `triangle`

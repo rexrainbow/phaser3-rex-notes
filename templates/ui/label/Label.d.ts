@@ -31,6 +31,18 @@ declare namespace Label {
 
         align?: AlignTypes,
     }
+
+    interface IResetDisplayContentConfig {
+        text?: string,
+
+        icon?: string | Phaser.Textures.Texture,
+        iconFrame?: string | number,
+        iconSize?: number,
+
+        action?: string | Phaser.Textures.Texture,
+        actionFrame?: string | number,
+        actionSize?: number,
+    }
 }
 
 declare class Label extends Sizer {
@@ -76,4 +88,7 @@ declare class Label extends Sizer {
     actionWidth: number;
     actionHeight: number;
 
+    resetDisplayContent(
+        config?: Label.IResetDisplayContentConfig
+    ): this;
 }

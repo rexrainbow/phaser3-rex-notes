@@ -1,6 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateSlider from '../utils/CreateSlider.js';
-import CreateCanvasInput from '../utils/CreateCanvasInput.js';
+import CreateInputText from '../../../utils/build/CreateInputText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Linear = Phaser.Math.Linear;
@@ -28,7 +28,7 @@ class RangeInput extends InputFiledBase {
         );
 
         var inputTextConfig = config.inputNumber || config.inputText;
-        var inputText = CreateCanvasInput(scene, inputTextConfig)
+        var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
         var proportion = GetValue(config, 'proportion.range.inputText', 1);

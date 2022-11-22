@@ -403,18 +403,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
@@ -562,6 +555,21 @@
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -578,12 +586,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -865,6 +867,21 @@
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
       var _this;
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexRoundRectangleCanvas';
       var radius = GetValue(radiusConfig, 'radius', radiusConfig);

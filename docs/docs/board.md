@@ -437,7 +437,7 @@ var distance = board.getDistance(tileA, tileB);
     ```
     - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
     - `radius` : Radius of the ring.
-- Get array of tile position within a filled ring.
+- Get array of tile position within a filled ring. `centerTileXY` will be included.
     ```javascript
     var out = board.filledRingToTileXYArray(centerTileXY, radius);
     var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar);
@@ -447,6 +447,23 @@ var distance = board.getDistance(tileA, tileB);
     - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
     - `radius` : Radius of the ring.
     - `nearToFar` : From near ring to far ring. Default value is `true`.
+
+### Ring -> chess
+
+- Get array of chess around a ring.
+    ```javascript
+    var out = board.ringToChessArray(centerTileXY, radius, tileZ);
+    // var out = board.ringToChessArray(centerTileXY, radius, tileZ, out);
+    ```
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
+- Get array of chess within a filled ring. Chess at `centerTileXY` will be included.
+    ```javascript
+    var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ);
+    var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ, nearToFar);
+    // var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ, out);
+    // var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ, nearToFar, out);
+    ```
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
 
 ### Shape -> tile position
 

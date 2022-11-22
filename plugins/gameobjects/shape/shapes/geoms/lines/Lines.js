@@ -127,6 +127,13 @@ class Lines extends PathBase {
         return this;
     }
 
+    scale(centerX, centerY, scaleX, scaleY) {
+        this.builder.scale(centerX, centerY, scaleX, scaleY);
+
+        this.dirty = true;
+        return this;
+    }
+
     offset(x, y) {
         this.builder.offset(x, y);
 
@@ -136,6 +143,16 @@ class Lines extends PathBase {
 
     toPolygon(polygon) {
         return this.builder.toPolygon(polygon);
+    }
+
+    appendPathFrom(src, startT, endT) {
+        this.builder.appendFromPathSegment(src.builder, startT, endT);
+        return this;
+    }
+
+    copyPathFrom(src, startT, endT) {
+        this.builder.clear().appendFromPathSegment(src.builder, startT, endT);
+        return this;
     }
 
     setDisplayPathSegment(startT, endT) {

@@ -48,6 +48,7 @@
 1. [Curve/Spiral](curve-spiral.md): Spiral curve.
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
+1. [Drop down](dropdown.md): Drop down game object below another target game object.
 1. [Dynamic text](dynamictext.md): Control position, angle of each character drawn on a canvas.
 1. [Ease-data](easedata.md): Easing data value of game object's data-manager.
 1. [Ease-move](easemove.md): Ease-move game object.
@@ -148,6 +149,7 @@
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shader/warp](shader-warp.md): Warp post processing filter. 
 1. [Shake-position](shake-position.md): Shake position of game object.
+1. [Shape/Checkbox](shape-checkbox.md): Checkbox input with drawing checker path animation.
 1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
 1. [Shape/Cover](shape-cover.md): Rectangle shape covered full window, and block all touch events.
 1. [Shape/Custom progress](shape-custom-progress.md): Custom progress bar shape.
@@ -177,6 +179,9 @@
 1. [UI/badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI/chart](ui-chart.md): Draw chart on canvas.
+1. [UI/color components](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
+1. [UI/color input](ui-colorinput.md): Color value input field.
+1. [UI/color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
 1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [UI/Drop down list](ui-dropdownlist.md): A label can open a drop-down list panel.
 1. [UI/fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.

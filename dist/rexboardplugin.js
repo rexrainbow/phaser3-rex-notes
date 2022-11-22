@@ -857,7 +857,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -874,10 +876,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -943,6 +943,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -4508,12 +4517,35 @@
       out = [];
     }
     centerTileXY = this.chessToTileXYZ(centerTileXY);
-    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray$1);
     var tileXY;
-    for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
-      tileXY = globTileArray[i];
+    for (var i = 0, cnt = globTileArray$1.length; i < cnt; i++) {
+      tileXY = globTileArray$1[i];
       if (this.contains(tileXY.x, tileXY.y)) {
         out.push(tileXY);
+      }
+    }
+    globTileArray$1.length = 0;
+    return out;
+  };
+  var globTileArray$1 = [];
+
+  var RingToChessArray = function RingToChessArray(centerTileXY, radius, tileZ, out) {
+    if (Array.isArray(tileZ)) {
+      out = tileZ;
+      tileZ = undefined;
+    }
+    if (out === undefined) {
+      out = [];
+    }
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
+    var tileXY, chess;
+    for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
+      tileXY = globTileArray[i];
+      chess = this.tileXYZToChess(tileXY.x, tileXY.y, tileZ);
+      if (chess) {
+        out.push(chess);
       }
     }
     globTileArray.length = 0;
@@ -4541,6 +4573,26 @@
     for (var i = 0; i <= radius; i++) {
       level = nearToFar ? i : radius - i;
       this.ringToTileXYArray(centerTileXY, level, out);
+    }
+    return out;
+  };
+
+  var FilledRingToChessArray = function FilledRingToChessArray(centerTileXY, radius, tileZ, nearToFar, out) {
+    if (IsArray(nearToFar)) {
+      out = nearToFar;
+      nearToFar = undefined;
+    }
+    if (nearToFar === undefined) {
+      nearToFar = true;
+    }
+    if (out === undefined) {
+      out = [];
+    }
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    var level;
+    for (var i = 0; i <= radius; i++) {
+      level = nearToFar ? i : radius - i;
+      this.ringToChessArray(centerTileXY, level, tileZ, out);
     }
     return out;
   };
@@ -4696,7 +4748,9 @@
     areNeighbors: AreNeighbors,
     mapNeighbors: MapNeighbors,
     ringToTileXYArray: RingToTileXYArray$2,
+    ringToChessArray: RingToChessArray,
     filledRingToTileXYArray: FilledRingToTileXYArray,
+    filledRingToChessArray: FilledRingToChessArray,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker
   }, _defineProperty(_getChessData$getChes, "getGridPoints", GetGridPoints$2), _defineProperty(_getChessData$getChes, "chessToBoard", GetBoard), _getChessData$getChes);
@@ -10743,13 +10797,13 @@
               this.parent.off('destroy', this.onParentDestroy, this);
             }
             // Attach event
-            this.parent = gameObject;
+            this.setParent(gameObject);
             if (this.parent && this.parent.once) {
               this.parent.once('destroy', this.onParentDestroy, this);
             }
           }
         } else {
-          this.parent = undefined;
+          this.setParent();
           this.chessData = undefined;
         }
         return this;
@@ -10978,6 +11032,10 @@
     if (this.debugLog) {
       console.log('Visible test from (' + originTileXY.x + ',' + originTileXY.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
     }
+    if (!globTileXYArray0) {
+      globTileXYArray0 = [];
+      globTileXYArray1 = [];
+    }
     var out = board.tileXYToWorldXY(originTileXY.x, originTileXY.y, true);
     var startX = out.x,
       startY = out.y;
@@ -11004,7 +11062,7 @@
     isVisivle = this.isPathVisible(globTileXYArray0, visiblePoints);
     if (isVisivle) {
       globTileXYArray0.length = 0;
-      drawLine(this.debugGraphics, this.debugVisibleLineColor, startX, startY, endX, endY);
+      DrawLine(this.debugGraphics, this.debugVisibleLineColor, startX, startY, endX, endY);
       return true;
     }
 
@@ -11026,16 +11084,15 @@
     }
     globTileXYArray0.length = 0;
     globTileXYArray1.length = 0;
-    drawLine(this.debugGraphics, isVisivle ? this.debugVisibleLineColor : this.debugInvisibleLineColor, startX, startY, endX, endY);
+    DrawLine(this.debugGraphics, isVisivle ? this.debugVisibleLineColor : this.debugInvisibleLineColor, startX, startY, endX, endY);
     return isVisivle;
   };
-  var drawLine = function drawLine(graphics, color, startX, startY, endX, endY) {
+  var DrawLine = function DrawLine(graphics, color, startX, startY, endX, endY) {
     if (graphics && color !== undefined) {
       graphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
     }
   };
-  var globTileXYArray0 = [],
-    globTileXYArray1 = [];
+  var globTileXYArray0, globTileXYArray1;
 
   var LOS = function LOS(chessArray, visiblePoints, originTileXY, out) {
     // chessArray: array of chess object or tileXY
@@ -11089,15 +11146,20 @@
       out = [];
     }
     var board = this.board;
-    var myTileXYZ = this.chessData.tileXYZ;
-    var isAnyVisible,
-      radius = 1,
+    var myTileXYZ = this.chessData.tileXYZ,
       targetTileXY;
-    do {
+    var isAnyVisible, hasAnyTestingTileXY;
+    var radius = 1;
+    while (true) {
       isAnyVisible = false;
+      hasAnyTestingTileXY = false;
       board.ringToTileXYArray(myTileXYZ, radius, globRing);
       for (var i = 0, cnt = globRing.length; i < cnt; i++) {
         targetTileXY = globRing[i];
+        if (!board.contains(targetTileXY.x, targetTileXY.y)) {
+          continue;
+        }
+        hasAnyTestingTileXY = true;
         if (this.isInLOS(targetTileXY, visiblePoints, originTileXY)) {
           isAnyVisible = true;
           out.push(targetTileXY);
@@ -11105,7 +11167,16 @@
       }
       radius++;
       globRing.length = 0;
-    } while (isAnyVisible);
+      if (!this.perspectiveEnable && !isAnyVisible) {
+        if (!isAnyVisible) {
+          break;
+        }
+      } else {
+        if (!hasAnyTestingTileXY) {
+          break;
+        }
+      }
+    }
     return out;
   };
   var globRing = [];
@@ -11128,13 +11199,17 @@
     function FieldOfView(gameObject, config) {
       var _this;
       _classCallCheck(this, FieldOfView);
+      if (IsPlainObject(gameObject)) {
+        config = gameObject;
+        gameObject = undefined;
+      }
       _this = _super.call(this, gameObject, {
         eventEmitter: false
       });
       // No event emitter
       // this.parent = gameObject;
 
-      _this.chessData = GetChessData(gameObject);
+      _this.setChess(gameObject);
       _this.resetFromJSON(config);
       return _this;
     }
@@ -11161,6 +11236,7 @@
         this.setEdgeBlockerTest(edgeBlockerTest);
         this.setPreTestFunction(preTestCallback, preTestCallbackScope);
         this.setCostFunction(costCallback, costCallbackScope);
+        this.setPerspectiveEnable(GetValue$c(o, 'perspective', false));
         this.setDebugGraphics(GetValue$c(o, 'debug.graphics', undefined));
         this.setDebugLineColor(GetValue$c(o, 'debug.visibleLineColor', 0x00ff00), GetValue$c(o, 'debug.invisibleLineColor', 0xff0000));
         this.setDebugLog(GetValue$c(o, 'debug.log', false));
@@ -11178,11 +11254,39 @@
         _get(_getPrototypeOf(FieldOfView.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
+      key: "setChess",
+      value: function setChess(gameObject) {
+        if (gameObject) {
+          this.chessData = GetChessData(gameObject);
+          if (this.parent !== gameObject) {
+            // Remove attatched event from previous gameObject
+            if (this.parent && this.parent.once) {
+              this.parent.off('destroy', this.onParentDestroy, this);
+            }
+            // Attach event
+            this.setParent(gameObject);
+            if (this.parent && this.parent.once) {
+              this.parent.once('destroy', this.onParentDestroy, this);
+            }
+          }
+        } else {
+          this.setParent();
+          this.chessData = undefined;
+        }
+        return this;
+      }
+    }, {
       key: "face",
       get: function get() {
         return this._face;
       },
       set: function set(direction) {
+        if (!this.chessData) {
+          if (this._face === undefined) {
+            this._face = 0;
+          }
+          return;
+        }
         direction = this.board.grid.directionNormalize(direction);
         this._face = direction;
         if (this.coneMode === 0) ; else {
@@ -11265,6 +11369,15 @@
       value: function setPreTestFunction(callback, scope) {
         this.preTestCallback = callback;
         this.preTestCallbackScope = scope;
+        return this;
+      }
+    }, {
+      key: "setPerspectiveEnable",
+      value: function setPerspectiveEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.perspectiveEnable = enable;
         return this;
       }
     }, {

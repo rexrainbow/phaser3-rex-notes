@@ -5,6 +5,7 @@ import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import HiddenEdit from './hiddenedit/HiddenEdit.js';
+import Checkbox from './checkbox/Checkbox.js';
 
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
@@ -23,6 +24,10 @@ import CustomProgress from './customprogress/CustomProgress.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
+import ColorInput from './colorinput/colorinput/ColorInput.js';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
+import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
 import Chart from './chart/Chart.js';
 
 import Sizer from './sizer/Sizer.js';
@@ -106,6 +111,7 @@ export {
     BBCodeText,
     TagText,
     HiddenEdit,
+    Checkbox,
 
     Container,
     Canvas,
@@ -116,6 +122,10 @@ export {
     CanvasInput,
     FullWindowRectangle,
     Cover,
+    ColorComponents,
+    ColorInput,
+    ColorInputBase,
+    ColorPicker,
     Chart,
     CircularProgress,
     CircularProgressCanvas,

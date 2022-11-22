@@ -1,7 +1,5 @@
 import InputFiledBase from './InputFieldBase.js';
-import BuildListConfig from '../utils/BuildListConfig.js';
-import CreateList from '../utils/CreateList.js';
-import SetLabelData from '../utils/SetLabelData.js';
+import CreateDropDownList from '../../../utils/build/CreateDropDownList.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 
 
@@ -14,8 +12,7 @@ class ListInput extends InputFiledBase {
         super(scene);
         this.type = 'rexTweaker.ListInput';
 
-        var listConfig = BuildListConfig(scene, config.list);
-        var list = CreateList(scene, listConfig);
+        var list = CreateDropDownList(scene, config.list);
 
         this.add(
             list,
@@ -42,7 +39,7 @@ class ListInput extends InputFiledBase {
 
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
-        SetLabelData(list, { text: text });
+        list.resetDisplayContent({ text: text });
         super.value = value;
     }
 

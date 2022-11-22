@@ -479,18 +479,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
@@ -1364,6 +1357,21 @@
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -1380,12 +1388,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -3330,9 +3332,10 @@
     var ascent = GetValue$3(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-      // Calculate lineHeight        
+      // Calculate lineHeight
+      var useDefaultTextHeight = GetValue$3(config, 'useDefaultTextHeight', false);
       maxLines = GetValue$3(config, 'maxLines', 0);
-      if (this.fixedHeight > 0) {
+      if (this.fixedHeight > 0 && !useDefaultTextHeight) {
         var innerHeight = this.fixedHeight - paddingVertical;
         if (maxLines > 0) {
           // Calculate lineHeight via maxLines, in fixedHeight mode

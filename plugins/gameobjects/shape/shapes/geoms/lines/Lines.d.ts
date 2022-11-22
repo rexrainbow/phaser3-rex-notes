@@ -4,6 +4,8 @@ export default class Lines extends PathBase {
     setIterations(iterations: number): this;
     iterations: number;
 
+    firstPointX: number;
+    firstPointY: number;
     lastPointX: number;
     lastPointY: number;
 
@@ -50,4 +52,25 @@ export default class Lines extends PathBase {
         centerX: number, centerY: number,
         angle: number
     ): this;
+
+    scale(
+        centerX: number, centerY: number,
+        scaleX: number, scaleY: number
+    ): this;
+
+    offset(x: number, y: number): this;
+
+    savePathData(): this;
+    restorePathData(): this;
+
+    appendPathFrom(src: Lines): this;
+    appendPathFrom(src: Lines, endT: number): this;
+    appendPathFrom(src: Lines, startT: number, endT: number): this;
+
+    copyPathFrom(src: Lines): this;
+    copyPathFrom(src: Lines, endT: number): this;
+    copyPathFrom(src: Lines, startT: number, endT: number): this;
+
+    setDisplayPathSegment(endT: number): this;
+    setDisplayPathSegment(startT: number, endT: number): this;
 }

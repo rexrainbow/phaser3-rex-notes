@@ -16,6 +16,9 @@ declare namespace CircleMaskImage {
         },
 
         backgroundColor?: string,
+
+        strokeColor?: string,
+        strokeLineWidth?: number,
     }
 }
 

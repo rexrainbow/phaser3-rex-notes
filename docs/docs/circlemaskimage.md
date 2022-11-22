@@ -97,7 +97,12 @@ var game = new Phaser.Game(config);
 ```javascript
 var image = scene.add.rexCircleMaskImage(x, y, key, frame, {
     maskType: 0,
-    // radius: undefined
+    // radius: undefined,
+
+    // backgroundColor: undefined,
+    
+    // strokeColor: undefined,
+    // strokeWidth: 0,
 });
 ```
 
@@ -106,7 +111,12 @@ or
 ```javascript
 var image = scene.add.rexCircleMaskImage(x, y, key, {
     maskType: 0,
-    // radius: undefined
+    // radius: undefined,
+
+    // backgroundColor: undefined,
+
+    // strokeColor: undefined,
+    // strokeWidth: 0,
 });
 ```
 
@@ -144,6 +154,11 @@ var image = scene.add.rexCircleMaskImage(x, y, key, {
                 br: {x : radiusX, y: radiusY},
             }
             ```
+- `backgroundColor` : Fill background with color.
+    - `undefined`, or `null` : No background filling. Default behavior.
+- `strokeColor` : Add stroke around masked image.
+    - `undefined`, or `null` : No stroke line. Default behavior.
+- `strokeWidth` : Stroke line width.
 
 
 Add image from JSON
@@ -157,6 +172,11 @@ var image = scene.make.rexCircleMaskImage({
     maskType: 0,
     // radius: undefined
     // origin: {x: 0.5, y: 0.5},
+
+    // backgroundColor: undefined,
+
+    // strokeColor: undefined,
+    // strokeWidth: 0,
     
     add: true
 });

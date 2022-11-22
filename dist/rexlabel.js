@@ -2826,6 +2826,8 @@
     return height;
   };
 
+  var PostResolveSize = function PostResolveSize(width, height) {};
+
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -2993,6 +2995,8 @@
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
     if (this.sizerEventsEnable) {
@@ -3149,7 +3153,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -3166,10 +3172,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -3235,6 +3239,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -5951,35 +5964,53 @@
   };
 
   var ClickMethods = {
-    onClick: function onClick(callback, scope, config) {
-      if (!callback) {
+    onClick: function onClick(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._click === undefined) {
-        this._click = new Button(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._click.on('click', callback, scope);
+      if (gameObject._click === undefined) {
+        gameObject._click = new Button(gameObject, config);
+      }
+      gameObject._click.on('click', callback, scope);
       return this;
     },
-    offClick: function offClick(callback, scope) {
-      if (this._click === undefined) {
+    offClick: function offClick(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.off('click', callback, scope);
+      gameObject._click.off('click', callback, scope);
       return this;
     },
-    enableClick: function enableClick(enabled) {
-      if (this._click === undefined) {
+    enableClick: function enableClick(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(enabled);
+      gameObject._click.setEnable(enabled);
       return this;
     },
-    disableClick: function disableClick() {
-      if (this._click === undefined) {
+    disableClick: function disableClick(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(false);
+      gameObject._click.setEnable(false);
       return this;
     }
   };
@@ -6186,35 +6217,53 @@
   };
 
   var ClickOutsideMethods = {
-    onClickOutside: function onClickOutside(callback, scope, config) {
-      if (!callback) {
+    onClickOutside: function onClickOutside(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._clickOutside === undefined) {
-        this._clickOutside = new ClickOutside(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._clickOutside.on('clickoutside', callback, scope);
+      if (gameObject._clickOutside === undefined) {
+        gameObject._clickOutside = new ClickOutside(gameObject, config);
+      }
+      gameObject._clickOutside.on('clickoutside', callback, scope);
       return this;
     },
-    offClickOutside: function offClickOutside(callback, scope) {
-      if (this._clickOutside === undefined) {
+    offClickOutside: function offClickOutside(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.off('clickoutside', callback, scope);
+      gameObject._clickOutside.off('clickoutside', callback, scope);
       return this;
     },
-    enableClickOutside: function enableClickOutside(enabled) {
-      if (this._clickOutside === undefined) {
+    enableClickOutside: function enableClickOutside(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(enabled);
+      gameObject._clickOutside.setEnable(enabled);
       return this;
     },
-    disableClickOutside: function disableClickOutside() {
-      if (this._clickOutside === undefined) {
+    disableClickOutside: function disableClickOutside(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(false);
+      gameObject._clickOutside.setEnable(false);
       return this;
     }
   };
@@ -6865,35 +6914,53 @@
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope, config) {
-      if (!callback) {
+    onTouching: function onTouching(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._inTouching === undefined) {
-        this._inTouching = new InTouching(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._inTouching.on('intouch', callback, scope);
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('intouch', callback, scope);
       return this;
     },
-    offTouching: function offTouching(callback, scope) {
-      if (this._inTouching === undefined) {
+    offTouching: function offTouching(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.off('intouch', callback, scope);
+      gameObject._inTouching.off('intouch', callback, scope);
       return this;
     },
-    enableTouching: function enableTouching(enabled) {
-      if (this._inTouching === undefined) {
+    enableTouching: function enableTouching(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(enabled);
+      gameObject._inTouching.setEnable(enabled);
       return this;
     },
-    disableTouching: function disableTouching() {
-      if (this._inTouching === undefined) {
+    disableTouching: function disableTouching(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(false);
+      gameObject._inTouching.setEnable(false);
       return this;
     }
   };
@@ -8452,6 +8519,7 @@
     resolveWidth: ResolveWidth$1,
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveHeight: ResolveHeight$1,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -9009,8 +9077,8 @@
     return width;
   };
 
-  var ResolveHeight = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$1.call(this, parent, height);
+  var ResolveHeight = function ResolveHeight(height) {
+    var height = ResolveHeight$1.call(this, height);
 
     // Get proportionLength
     if (this.proportionLength === undefined && this.orientation === 1) {
@@ -9739,12 +9807,6 @@
       value: function setIconSize(width, height) {
         this.iconWidth = width;
         this.iconHeight = height;
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
       }
     }, {
@@ -9800,13 +9862,14 @@
       value: function setActionSize(width, height) {
         this.actionWidth = width;
         this.actionHeight = height;
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
+      }
+    }, {
+      key: "preLayout",
+      value: function preLayout() {
+        _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
       }
     }, {
       key: "runLayout",
@@ -9814,8 +9877,6 @@
         if (this.ignoreLayout) {
           return this;
         }
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
         _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
@@ -9844,6 +9905,40 @@
         var actionMask = this.childrenMap.actionMask;
         if (actionMask) {
           actionMask.resize();
+        }
+        return this;
+      }
+    }, {
+      key: "resetDisplayContent",
+      value: function resetDisplayContent(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        var text = config.text || '';
+        this.setText(text);
+        var iconGameObjct = this.childrenMap.icon;
+        if (iconGameObjct) {
+          if (config.icon === undefined) {
+            this.hide(iconGameObjct);
+          } else {
+            this.show(iconGameObjct);
+          }
+          if (config.iconSize) {
+            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+          }
+          this.setIconTexture(config.icon, config.iconFrame);
+        }
+        var actionGameObjct = this.childrenMap.action;
+        if (actionGameObjct) {
+          if (config.action === undefined) {
+            this.hide(actionGameObjct);
+          } else {
+            this.show(actionGameObjct);
+          }
+          if (config.actionSize) {
+            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+          }
+          this.setActionTexture(config.action, config.actionFrame);
         }
         return this;
       }

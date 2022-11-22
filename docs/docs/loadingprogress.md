@@ -86,7 +86,6 @@ var loadingProgress = scene.plugins.get('rexLoadingProgress').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitIn.
 - `transitOut` : Tween behavior of closing dialog.
     - Custom callback
         ```javascript
@@ -94,7 +93,6 @@ var loadingProgress = scene.plugins.get('rexLoadingProgress').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitOut.
 
 ### Events
 

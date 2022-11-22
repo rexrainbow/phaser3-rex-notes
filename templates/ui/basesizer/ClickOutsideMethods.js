@@ -1,41 +1,65 @@
 import ClickOutside from '../clickoutside/ClickOutside.js';
 
 export default {
-    onClickOutside(callback, scope, config) {
-        if (!callback) {
+    onClickOutside(gameObject, callback, scope, config) {
+        if (!gameObject) {
             return this;
         }
-        if (this._clickOutside === undefined) {
-            this._clickOutside = new ClickOutside(this, config);
+
+        if (typeof (gameObject) === 'function') {
+            config = scope;
+            scope = callback;
+            callback = gameObject;
+            gameObject = this;
         }
-        this._clickOutside.on('clickoutside', callback, scope);
+
+        if (gameObject._clickOutside === undefined) {
+            gameObject._clickOutside = new ClickOutside(gameObject, config);
+        }
+        gameObject._clickOutside.on('clickoutside', callback, scope);
+
         return this;
     },
 
-    offClickOutside(callback, scope) {
-        if (this._clickOutside === undefined) {
-            return this;
+    offClickOutside(gameObject, callback, scope) {
+        if (typeof (gameObject) === 'function') {
+            scope = callback;
+            callback = gameObject;
+            gameObject = this;
         }
 
-        this._clickOutside.off('clickoutside', callback, scope);
+        if (gameObject._clickOutside === undefined) {
+            return this;
+        }
+        gameObject._clickOutside.off('clickoutside', callback, scope);
+
         return this;
     },
 
-    enableClickOutside(enabled) {
-        if (this._clickOutside === undefined) {
-            return this;
+    enableClickOutside(gameObject, enabled) {
+        if (gameObject && typeof (gameObject) !== 'object') {
+            enabled = gameObject;
+            gameObject = this;
         }
 
-        this._clickOutside.setEnable(enabled);
+        if (gameObject._clickOutside === undefined) {
+            return this;
+        }
+        gameObject._clickOutside.setEnable(enabled);
+
         return this;
     },
 
-    disableClickOutside() {
-        if (this._clickOutside === undefined) {
-            return this;
+    disableClickOutside(gameObject) {
+        if (gameObject && typeof (gameObject) !== 'object') {
+            gameObject = this;
         }
 
-        this._clickOutside.setEnable(false);
+        if (gameObject._clickOutside === undefined) {
+            return this;
+        }
+        gameObject._clickOutside.setEnable(false);
+
         return this;
     }
 }

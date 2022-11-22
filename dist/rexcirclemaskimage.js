@@ -380,18 +380,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
@@ -501,6 +494,21 @@
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -517,12 +525,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -780,6 +782,9 @@
         }
         var maskType = GetValue(config, 'maskType', 0);
         var backgroundColor = GetValue(config, 'backgroundColor', undefined);
+        var strokeColor = GetValue(config, 'strokeColor', undefined);
+        var defaultStrokeWidth = strokeColor != null ? 10 : 0;
+        var strokeWidth = GetValue(config, 'strokeWidth', defaultStrokeWidth);
         if (maskType === undefined) {
           maskType = 0;
         } else if (typeof maskType === 'string') {
@@ -792,51 +797,65 @@
           this.dirty = true;
           return this;
         }
-        var hasBackgroundColor = backgroundColor != null;
-        if (!hasBackgroundColor) {
-          // No background color -- draw image first
-          this.loadTexture(key, frame);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+        if (!textureFrame) {
+          return this;
         }
-
-        // Draw mask
+        // Resize to frame size
+        if (textureFrame.cutWidth !== this.width || textureFrame.cutHeight !== this.height) {
+          this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
+        } else {
+          this.clear();
+        }
         var canvas = this.canvas,
           ctx = this.context;
         var width = canvas.width,
           height = canvas.height;
+
+        // Fill background
+        if (backgroundColor != null) {
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(0, 0, width, height);
+        }
         ctx.save();
-        ctx.globalCompositeOperation = hasBackgroundColor ? 'source-over' : 'destination-in';
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle
+        // Build clip path 
+        var halfStrokeLineWidth = strokeWidth / 2;
         switch (maskType) {
+          case 1:
+            // ellipse
+            var centerX = Math.floor(width / 2);
+            var centerY = Math.floor(height / 2);
+            var radiusX = centerX - halfStrokeLineWidth;
+            var radiusY = centerY - halfStrokeLineWidth;
+            ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
+            break;
           case 2:
             var radiusConfig = GetValue(config, 'radius', 0);
             var iteration = GetValue(config, 'iteration', undefined);
-            AddRoundRectanglePath(ctx, 0, 0, width, height, radiusConfig, iteration);
+            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeWidth, height - strokeWidth, radiusConfig, iteration);
             break;
           default:
-            // circle, ellipse
+            // circle
             var centerX = Math.floor(width / 2);
             var centerY = Math.floor(height / 2);
-            if (maskType === 0) {
-              ctx.arc(centerX, centerY, Math.min(centerX, centerY), 0, 2 * Math.PI);
-            } else {
-              ctx.ellipse(centerX, centerY, centerX, centerY, 0, 0, 2 * Math.PI);
-            }
+            var radius = Math.min(centerX, centerY) - halfStrokeLineWidth;
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
             break;
         }
-        if (hasBackgroundColor) {
-          ctx.fillStyle = backgroundColor;
+
+        // Draw stroke line
+        if (strokeColor != null) {
+          ctx.strokeStyle = strokeColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.stroke();
         }
-        ctx.fill();
+
+        // Clip frame image
+        ctx.clip();
+        this.loadTexture(key, frame);
         ctx.restore();
-        if (hasBackgroundColor) {
-          // Has background color -- draw image last
-          ctx.save();
-          ctx.globalCompositeOperation = 'destination-atop';
-          this.loadTexture(key, frame);
-          ctx.restore();
-        }
         this.dirty = true;
         return this;
       }

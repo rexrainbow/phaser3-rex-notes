@@ -9,6 +9,7 @@ Pop-up modal dialog, then scale-down this dialog.
 
 - [Manual](https://codepen.io/rexrainbow/pen/KKvmzod)
 - [Timeout](https://codepen.io/rexrainbow/pen/xxLdEbv)
+- [Touch outside](https://codepen.io/rexrainbow/pen/XWYzGax)
 - [Custom transit](https://codepen.io/rexrainbow/pen/yLvwxJX)
 
 ## Usage
@@ -66,8 +67,11 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
     // },
     // cover: false, 
 
-    // manualClose: true,
-    // anyTouchClose: true,
+    // When to close modal dialog?
+    // touchOutsideClose: false,
+    // anyTouchClose: false,
+    // timeOutClose: false,
+    // manualClose: false,
 
     // duration: {
     //     in: 200,
@@ -96,16 +100,20 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
         }
         ```
-- `manualClose` :
-    - `true` : Close modal dialog via `modal.requestClose()` method. Default behavior.
-    - `false` : Close modal dialog when timeout (`duration.hold`), or any-touch (if set `anyTouchClose` to `true`)
-- `anyTouchClose` :
-    - `true` : When `manualClose` set to `false`, close modal dialog when timeout, or any-touch.
-    - `false` : Disable any-touch feature.
+- `touchOutsideClose` : Set to `true` to close modal dialog when clicking out side of gameObject. 
+    - Default value is `false`.  Will be set to `false` if `anyTouchClose` is set to `true`.
+- `anyTouchClose` : Set to `true` to close modal dialog when any clicking. 
+    - Default value is `false`.
+- `timeOutClose` : Set to `true` to close modal dialog when holding time out (`duration.hold`).
+    - If `duration.hold` is given, default value is `true`. Otherwise default value is `false`.
+- `manualClose` : Set to `true` to close modal dialog via `modal.requestClose()` method.
+    - Default value is `false`. When this parameter is `true`, other closing methods will be disabled.
+    - If `touchOutsideClose`,  `anyTouchClose`, and `timeOutClose` are `false`, it is equal to `manualClose`.
 - `duration` : Duration of transition-in, hold, trantion-out.
     - `duration.in` : Duration of transition-in (open dialog).
     - `duration.out` : Duration of transition-out (close dialog).
-    - `duration.hold` : Duration of hold. Used in `manualClose` is set to `false`.
+    - `duration.hold` : Duration of hold.
+        - `-1` : Disable `timeOutClose`.
 - `transitIn` : Tween behavior of opening dialog.
     - `0`, `'popUp'` : Pop up dialog from `0` to current scale.
     - `1`, `'fadeIn'` : Fade in dialog
@@ -115,7 +123,6 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitIn.
 - `transitOut` : Tween behavior of closing dialog.
     - `0`, `'scaleDown'` : Scale down dialog
     - `1`, `'fadeOut'` : Fade out dialog
@@ -125,7 +132,6 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitOut.
 - `destroy`
     - `true` : Destroy dialog when closing completed. Default behavior.
     - `fasle` : Don't destroy dialog.
@@ -143,21 +149,6 @@ modal.requestClose();
     })
     ```
 
-```mermaid
-graph TB
-
-Modal["add('gameObject, config)"]
-OnOpen["modal.on('open')"]
-RequestCloseEvent["modal.requestClose(closeEventData)"]
-TimeOut["Timeout<br>Any touch"]
-OnClose["modal.on('close', function(closeEventData) {})"]
-
-Modal --> |Transition-in| OnOpen
-OnOpen --> |manualClose| RequestCloseEvent
-OnOpen --> |Not manualClose| TimeOut
-RequestCloseEvent --> |Transition-out| OnClose
-TimeOut --> |Transition-out| OnClose
-```
 
 ### Events
 

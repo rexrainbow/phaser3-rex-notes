@@ -1,5 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
+import InjectDefaultConfig from './methods/InjectDefaultConfig.js';
 import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
@@ -20,6 +21,8 @@ class CanvasInput extends DynamicText {
         if (config === undefined) {
             config = {};
         }
+
+        InjectDefaultConfig(config);
 
         // Set text later
         var text = config.text;
@@ -110,14 +113,7 @@ class CanvasInput extends DynamicText {
             return;
         }
 
-        if (value === '') {
-            this.popChild(this.lastInsertCursor);
-            this.removeChildren();
-            super.addChild(this.lastInsertCursor, 0);
-        } else {
-            this.moveChildToLast(this.lastInsertCursor);
-            SetText(this, value);
-        }
+        SetText(this, value);
 
         this._text = value;
     }
@@ -239,6 +235,32 @@ class CanvasInput extends DynamicText {
     setNumberInput() {
         this.textEdit.setNumberInput();
         this.parseTextCallback = Number;
+        return this;
+    }
+
+    get maxLength() {
+        return this.textEdit.maxLength;
+    }
+
+    set maxLength(value) {
+        this.textEdit.maxLength = value
+    }
+
+    setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+    }
+
+    get minLength() {
+        return this.textEdit.minLength;
+    }
+
+    set minLength(value) {
+        this.textEdit.minLength = value;
+    }
+
+    setMinLength(value) {
+        this.minLength = value;
         return this;
     }
 

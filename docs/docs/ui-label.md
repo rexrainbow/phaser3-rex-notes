@@ -295,6 +295,29 @@ See also - [dirty](ui-basesizer.md#dirty)
     var frameName = label.frame.name;
     ```
 
+### Reset display content
+
+```javascript
+label.resetDisplayContent({
+    text: '',
+
+    icon: undefined, iconFrame: undefined,
+    iconSize: undefined,
+
+    action: undefined, actionFrame: undefined,
+    actionSize: undefined,
+
+});
+```
+
+- `text` : Set text string.
+- `icon`, `iconFrame` : Set texture of icon game object.
+    - `undefined`, or `null` : Hide icon game object.
+- `iconSize` : Set display size of icon game object.
+- `action`, `actionFrame` : Set texture of action game object.
+    - `undefined`, or `null` : Hide action game object.
+- `actionSize` : Set display size of action game object.
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

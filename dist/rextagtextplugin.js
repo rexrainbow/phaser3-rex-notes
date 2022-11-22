@@ -1215,6 +1215,21 @@
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -1231,12 +1246,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -2970,21 +2979,14 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Text, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
         if (this.style.rtl) {
           RemoveFromDOM(this.canvas);
         }
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         this.canvasText.destroy();
         this.canvasText = undefined;
         if (this._imageManager) {

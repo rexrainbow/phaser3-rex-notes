@@ -1,5 +1,5 @@
 import InputRow from '../gameobjects/inputrow/InputRow.js';
-import CreateRoundRectangle from '../gameobjects/utils/CreateRoundRectangle.js';
+import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
 import CreateTitleLabel from './CreateTitleLabel.js';
 import CreateInputField from './CreateInputField.js';
 

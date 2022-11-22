@@ -10,7 +10,7 @@ const Earcut = Phaser.Geom.Polygon.Earcut;
 
 class RoundRectangle extends Shape {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth;
+        var strokeColor, strokeAlpha, strokeWidth, shapeType;
         if (IsPlainObject(x)) {
             var config = x;
 
@@ -25,22 +25,29 @@ class RoundRectangle extends Shape {
             strokeColor = config.strokeColor;
             strokeAlpha = config.strokeAlpha;
             strokeWidth = config.strokeWidth;
+
+            shapeType = config.shape;
         }
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = 0;
-        }
-        if (radiusConfig === undefined) {
-            radiusConfig = 0;
-        }
+
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 1; }
+        if (height === undefined) { height = width; }
+        if (radiusConfig === undefined) { radiusConfig = 0; }
+        if (shapeType === undefined) { shapeType = 0; }
 
         var geom = new GeomRoundRectangle();  // Configurate it later
         super(scene, 'rexRoundRectangleShape', geom);
 
-        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
-        geom.setTo(0, 0, width, height, radius);
+        this.setShapeType(shapeType);
+
+        if (this.shapeType === 0) {
+            var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+            geom.setTo(0, 0, width, height, radius);
+        } else {
+            var radius = { x: (width / 2), y: (height / 2) };
+            geom.setTo(0, 0, width, height, radius);
+        }
 
         var iteration = GetValue(radiusConfig, 'iteration', undefined);
         this.setIteration(iteration);
@@ -67,32 +74,14 @@ class RoundRectangle extends Shape {
 
         pathData.length = 0;
 
-        var cornerRadius = geom.cornerRadius,
+        var width = geom.width, height = geom.height,
+            cornerRadius = geom.cornerRadius,
             radius,
             iteration = this.iteration + 1;
-        // bottom-right
-        radius = cornerRadius.br;
-        if (isArcCorner(radius)) {
-            var centerX = geom.width - radius.x;
-            var centerY = geom.height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
-        } else {
-            LineTo(geom.width, geom.height, pathData);
-        }
-
-        // bottom-left
-        radius = cornerRadius.bl;
-        if (isArcCorner(radius)) {
-            var centerX = radius.x;
-            var centerY = geom.height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
-        } else {
-            LineTo(0, geom.height, pathData);
-        }
 
         // top-left
         radius = cornerRadius.tl;
-        if (isArcCorner(radius)) {
+        if (IsArcCorner(radius)) {
             var centerX = radius.x;
             var centerY = radius.y;
             ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
@@ -102,16 +91,45 @@ class RoundRectangle extends Shape {
 
         // top-right
         radius = cornerRadius.tr;
-        if (isArcCorner(radius)) {
-            var centerX = geom.width - radius.x;
+        if (IsArcCorner(radius)) {
+            var centerX = width - radius.x;
             var centerY = radius.y;
             ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
         } else {
-            LineTo(geom.width, 0, pathData);
+            LineTo(width, 0, pathData);
+        }
+
+        // bottom-right
+        radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+        } else {
+            LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+        } else {
+            LineTo(0, height, pathData);
         }
 
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
+        return this;
+    }
+
+    setShapeType(shapeType) {
+        if (typeof (shapeType) === 'string') {
+            shapeType = ShapeTypeMap[shapeType];
+        }
+
+        this.shapeType = shapeType;
         return this;
     }
 
@@ -138,6 +156,14 @@ class RoundRectangle extends Shape {
             return this;
         }
         this.geom.setSize(width, height);
+
+        if (this.shapeType === 1) {
+            this.setRadius({
+                x: (width / 2),
+                y: (height / 2)
+            })
+        }
+
         this.updateDisplayOrigin();
         this.dirty = true;
 
@@ -151,34 +177,6 @@ class RoundRectangle extends Shape {
 
     resize(width, height) {
         this.setSize(width, height);
-        return this;
-    }
-
-    get iteration() {
-        return this._iteration;
-    }
-
-    set iteration(value) {
-        // Set iteration first time
-        if (this._iteration === undefined) {
-            this._iteration = value;
-            return;
-        }
-
-        // Change iteration value
-        if (this._iteration === value) {
-            return;
-        }
-
-        this._iteration = value;
-        this.dirty = true;
-    }
-
-    setIteration(iteration) {
-        if (iteration === undefined) {
-            iteration = 6;
-        }
-        this.iteration = iteration;
         return this;
     }
 
@@ -279,10 +277,44 @@ class RoundRectangle extends Shape {
     setCornerRadius(value) {
         return this.setRadius(value);
     }
+
+    get iteration() {
+        return this._iteration;
+    }
+
+    set iteration(value) {
+        // Set iteration first time
+        if (this._iteration === undefined) {
+            this._iteration = value;
+            return;
+        }
+
+        // Change iteration value
+        if (this._iteration === value) {
+            return;
+        }
+
+        this._iteration = value;
+        this.dirty = true;
+    }
+
+    setIteration(iteration) {
+        if (iteration === undefined) {
+            iteration = 6;
+        }
+        this.iteration = iteration;
+        return this;
+    }
+
 }
 
-var isArcCorner = function (radius) {
+var IsArcCorner = function (radius) {
     return ((radius.x !== 0) && (radius.y !== 0));
+}
+
+const ShapeTypeMap = {
+    rectangle: 0,
+    circle: 1
 }
 
 

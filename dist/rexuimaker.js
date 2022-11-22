@@ -5281,6 +5281,21 @@
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -5297,12 +5312,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -7036,21 +7045,14 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Text, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
         if (this.style.rtl) {
           RemoveFromDOM(this.canvas);
         }
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         this.canvasText.destroy();
         this.canvasText = undefined;
         if (this._imageManager) {
@@ -8011,7 +8013,7 @@
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, RoundRectangle);
-      var strokeColor, strokeAlpha, strokeWidth;
+      var strokeColor, strokeAlpha, strokeWidth, shapeType;
       if (IsPlainObject$l(x)) {
         var config = x;
         x = config.x;
@@ -8024,6 +8026,7 @@
         strokeColor = config.strokeColor;
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
+        shapeType = config.shape;
       }
       if (x === undefined) {
         x = 0;
@@ -8031,13 +8034,31 @@
       if (y === undefined) {
         y = 0;
       }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
+      if (shapeType === undefined) {
+        shapeType = 0;
+      }
       var geom = new RoundRectangle$1(); // Configurate it later
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
-      var radius = GetValue$1j(radiusConfig, 'radius', radiusConfig);
-      geom.setTo(0, 0, width, height, radius);
+      _this.setShapeType(shapeType);
+      if (_this.shapeType === 0) {
+        var radius = GetValue$1j(radiusConfig, 'radius', radiusConfig);
+        geom.setTo(0, 0, width, height, radius);
+      } else {
+        var radius = {
+          x: width / 2,
+          y: height / 2
+        };
+        geom.setTo(0, 0, width, height, radius);
+      }
       var iteration = GetValue$1j(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
@@ -8060,32 +8081,15 @@
         var geom = this.geom;
         var pathData = this.pathData;
         pathData.length = 0;
-        var cornerRadius = geom.cornerRadius,
+        var width = geom.width,
+          height = geom.height,
+          cornerRadius = geom.cornerRadius,
           radius,
           iteration = this.iteration + 1;
-        // bottom-right
-        radius = cornerRadius.br;
-        if (isArcCorner(radius)) {
-          var centerX = geom.width - radius.x;
-          var centerY = geom.height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
-        } else {
-          LineTo(geom.width, geom.height, pathData);
-        }
-
-        // bottom-left
-        radius = cornerRadius.bl;
-        if (isArcCorner(radius)) {
-          var centerX = radius.x;
-          var centerY = geom.height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
-        } else {
-          LineTo(0, geom.height, pathData);
-        }
 
         // top-left
         radius = cornerRadius.tl;
-        if (isArcCorner(radius)) {
+        if (IsArcCorner(radius)) {
           var centerX = radius.x;
           var centerY = radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
@@ -8095,15 +8099,44 @@
 
         // top-right
         radius = cornerRadius.tr;
-        if (isArcCorner(radius)) {
-          var centerX = geom.width - radius.x;
+        if (IsArcCorner(radius)) {
+          var centerX = width - radius.x;
           var centerY = radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
         } else {
-          LineTo(geom.width, 0, pathData);
+          LineTo(width, 0, pathData);
+        }
+
+        // bottom-right
+        radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+          var centerX = width - radius.x;
+          var centerY = height - radius.y;
+          ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+        } else {
+          LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+          var centerX = radius.x;
+          var centerY = height - radius.y;
+          ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+        } else {
+          LineTo(0, height, pathData);
         }
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut$1(pathData);
+        return this;
+      }
+    }, {
+      key: "setShapeType",
+      value: function setShapeType(shapeType) {
+        if (typeof shapeType === 'string') {
+          shapeType = ShapeTypeMap[shapeType];
+        }
+        this.shapeType = shapeType;
         return this;
       }
     }, {
@@ -8133,6 +8166,12 @@
           return this;
         }
         this.geom.setSize(width, height);
+        if (this.shapeType === 1) {
+          this.setRadius({
+            x: width / 2,
+            y: height / 2
+          });
+        }
         this.updateDisplayOrigin();
         this.dirty = true;
         var input = this.input;
@@ -8146,34 +8185,6 @@
       key: "resize",
       value: function resize(width, height) {
         this.setSize(width, height);
-        return this;
-      }
-    }, {
-      key: "iteration",
-      get: function get() {
-        return this._iteration;
-      },
-      set: function set(value) {
-        // Set iteration first time
-        if (this._iteration === undefined) {
-          this._iteration = value;
-          return;
-        }
-
-        // Change iteration value
-        if (this._iteration === value) {
-          return;
-        }
-        this._iteration = value;
-        this.dirty = true;
-      }
-    }, {
-      key: "setIteration",
-      value: function setIteration(iteration) {
-        if (iteration === undefined) {
-          iteration = 6;
-        }
-        this.iteration = iteration;
         return this;
       }
     }, {
@@ -8280,11 +8291,43 @@
       value: function setCornerRadius(value) {
         return this.setRadius(value);
       }
+    }, {
+      key: "iteration",
+      get: function get() {
+        return this._iteration;
+      },
+      set: function set(value) {
+        // Set iteration first time
+        if (this._iteration === undefined) {
+          this._iteration = value;
+          return;
+        }
+
+        // Change iteration value
+        if (this._iteration === value) {
+          return;
+        }
+        this._iteration = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "setIteration",
+      value: function setIteration(iteration) {
+        if (iteration === undefined) {
+          iteration = 6;
+        }
+        this.iteration = iteration;
+        return this;
+      }
     }]);
     return RoundRectangle;
   }(Shape$1);
-  var isArcCorner = function isArcCorner(radius) {
+  var IsArcCorner = function IsArcCorner(radius) {
     return radius.x !== 0 && radius.y !== 0;
+  };
+  var ShapeTypeMap = {
+    rectangle: 0,
+    circle: 1
   };
   Object.assign(RoundRectangle.prototype, Render$3);
 
@@ -8559,7 +8602,7 @@
     return this;
   };
 
-  var Methods$7 = {
+  var Methods$6 = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -8671,7 +8714,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$7);
+    Object.assign(NinePatch.prototype, Methods$6);
     return NinePatch;
   };
 
@@ -8707,7 +8750,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$6 = {
+  var Methods$5 = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -8722,7 +8765,7 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
-  Object.assign(NinePatch$1.prototype, Methods$6);
+  Object.assign(NinePatch$1.prototype, Methods$5);
 
   var CreateNinePatch = function CreateNinePatch(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -9778,7 +9821,7 @@
     }
   };
 
-  var Methods$5 = {
+  var Methods$4 = {
     _drawImage: DrawImage,
     _drawTileSprite: DrawTileSprite
   };
@@ -9805,7 +9848,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$5);
+  Object.assign(NinePatch.prototype, Methods$4);
 
   var CreateNinePatch2 = function CreateNinePatch2(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -10054,18 +10097,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
@@ -10210,6 +10246,9 @@
         }
         var maskType = GetValue$1c(config, 'maskType', 0);
         var backgroundColor = GetValue$1c(config, 'backgroundColor', undefined);
+        var strokeColor = GetValue$1c(config, 'strokeColor', undefined);
+        var defaultStrokeWidth = strokeColor != null ? 10 : 0;
+        var strokeWidth = GetValue$1c(config, 'strokeWidth', defaultStrokeWidth);
         if (maskType === undefined) {
           maskType = 0;
         } else if (typeof maskType === 'string') {
@@ -10222,51 +10261,65 @@
           this.dirty = true;
           return this;
         }
-        var hasBackgroundColor = backgroundColor != null;
-        if (!hasBackgroundColor) {
-          // No background color -- draw image first
-          this.loadTexture(key, frame);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+        if (!textureFrame) {
+          return this;
         }
-
-        // Draw mask
+        // Resize to frame size
+        if (textureFrame.cutWidth !== this.width || textureFrame.cutHeight !== this.height) {
+          this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
+        } else {
+          this.clear();
+        }
         var canvas = this.canvas,
           ctx = this.context;
         var width = canvas.width,
           height = canvas.height;
+
+        // Fill background
+        if (backgroundColor != null) {
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(0, 0, width, height);
+        }
         ctx.save();
-        ctx.globalCompositeOperation = hasBackgroundColor ? 'source-over' : 'destination-in';
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle
+        // Build clip path 
+        var halfStrokeLineWidth = strokeWidth / 2;
         switch (maskType) {
+          case 1:
+            // ellipse
+            var centerX = Math.floor(width / 2);
+            var centerY = Math.floor(height / 2);
+            var radiusX = centerX - halfStrokeLineWidth;
+            var radiusY = centerY - halfStrokeLineWidth;
+            ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
+            break;
           case 2:
             var radiusConfig = GetValue$1c(config, 'radius', 0);
             var iteration = GetValue$1c(config, 'iteration', undefined);
-            AddRoundRectanglePath(ctx, 0, 0, width, height, radiusConfig, iteration);
+            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeWidth, height - strokeWidth, radiusConfig, iteration);
             break;
           default:
-            // circle, ellipse
+            // circle
             var centerX = Math.floor(width / 2);
             var centerY = Math.floor(height / 2);
-            if (maskType === 0) {
-              ctx.arc(centerX, centerY, Math.min(centerX, centerY), 0, 2 * Math.PI);
-            } else {
-              ctx.ellipse(centerX, centerY, centerX, centerY, 0, 0, 2 * Math.PI);
-            }
+            var radius = Math.min(centerX, centerY) - halfStrokeLineWidth;
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
             break;
         }
-        if (hasBackgroundColor) {
-          ctx.fillStyle = backgroundColor;
+
+        // Draw stroke line
+        if (strokeColor != null) {
+          ctx.strokeStyle = strokeColor;
+          ctx.lineWidth = strokeWidth;
+          ctx.stroke();
         }
-        ctx.fill();
+
+        // Clip frame image
+        ctx.clip();
+        this.loadTexture(key, frame);
         ctx.restore();
-        if (hasBackgroundColor) {
-          // Has background color -- draw image last
-          ctx.save();
-          ctx.globalCompositeOperation = 'destination-atop';
-          this.loadTexture(key, frame);
-          ctx.restore();
-        }
         this.dirty = true;
         return this;
       }
@@ -10903,7 +10956,7 @@
     }
   };
 
-  var Scale$1 = {
+  var Scale$2 = {
     updateChildScale: function updateChildScale(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
@@ -11980,7 +12033,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$a, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$a, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -12952,6 +13005,8 @@
     return height;
   };
 
+  var PostResolveSize = function PostResolveSize(width, height) {};
+
   var GetChildWidth$1 = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -13119,6 +13174,8 @@
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
     if (this.sizerEventsEnable) {
@@ -13275,7 +13332,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -13292,10 +13351,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -13361,6 +13418,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -14243,7 +14309,7 @@
   var GetValue$$ = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$6 = Phaser.Math.Linear;
-  var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
+  var Scale$1 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
     var _super = _createSuper(Scale);
     function Scale(gameObject, config) {
@@ -14396,7 +14462,7 @@
       ease: ease
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -14410,7 +14476,7 @@
     }
 
     // Ease from current scale to 0
-    if (destroyMode instanceof Scale) {
+    if (destroyMode instanceof Scale$1) {
       scale = destroyMode;
       destroyMode = undefined;
     }
@@ -14439,7 +14505,7 @@
     config.duration = duration;
     config.ease = ease;
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -14493,7 +14559,7 @@
       repeat: repeat
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -16077,35 +16143,53 @@
   };
 
   var ClickMethods = {
-    onClick: function onClick(callback, scope, config) {
-      if (!callback) {
+    onClick: function onClick(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._click === undefined) {
-        this._click = new Button(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._click.on('click', callback, scope);
+      if (gameObject._click === undefined) {
+        gameObject._click = new Button(gameObject, config);
+      }
+      gameObject._click.on('click', callback, scope);
       return this;
     },
-    offClick: function offClick(callback, scope) {
-      if (this._click === undefined) {
+    offClick: function offClick(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.off('click', callback, scope);
+      gameObject._click.off('click', callback, scope);
       return this;
     },
-    enableClick: function enableClick(enabled) {
-      if (this._click === undefined) {
+    enableClick: function enableClick(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(enabled);
+      gameObject._click.setEnable(enabled);
       return this;
     },
-    disableClick: function disableClick() {
-      if (this._click === undefined) {
+    disableClick: function disableClick(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(false);
+      gameObject._click.setEnable(false);
       return this;
     }
   };
@@ -16312,35 +16396,53 @@
   };
 
   var ClickOutsideMethods = {
-    onClickOutside: function onClickOutside(callback, scope, config) {
-      if (!callback) {
+    onClickOutside: function onClickOutside(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._clickOutside === undefined) {
-        this._clickOutside = new ClickOutside(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._clickOutside.on('clickoutside', callback, scope);
+      if (gameObject._clickOutside === undefined) {
+        gameObject._clickOutside = new ClickOutside(gameObject, config);
+      }
+      gameObject._clickOutside.on('clickoutside', callback, scope);
       return this;
     },
-    offClickOutside: function offClickOutside(callback, scope) {
-      if (this._clickOutside === undefined) {
+    offClickOutside: function offClickOutside(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.off('clickoutside', callback, scope);
+      gameObject._clickOutside.off('clickoutside', callback, scope);
       return this;
     },
-    enableClickOutside: function enableClickOutside(enabled) {
-      if (this._clickOutside === undefined) {
+    enableClickOutside: function enableClickOutside(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(enabled);
+      gameObject._clickOutside.setEnable(enabled);
       return this;
     },
-    disableClickOutside: function disableClickOutside() {
-      if (this._clickOutside === undefined) {
+    disableClickOutside: function disableClickOutside(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(false);
+      gameObject._clickOutside.setEnable(false);
       return this;
     }
   };
@@ -16941,35 +17043,53 @@
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope, config) {
-      if (!callback) {
+    onTouching: function onTouching(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._inTouching === undefined) {
-        this._inTouching = new InTouching(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._inTouching.on('intouch', callback, scope);
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('intouch', callback, scope);
       return this;
     },
-    offTouching: function offTouching(callback, scope) {
-      if (this._inTouching === undefined) {
+    offTouching: function offTouching(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.off('intouch', callback, scope);
+      gameObject._inTouching.off('intouch', callback, scope);
       return this;
     },
-    enableTouching: function enableTouching(enabled) {
-      if (this._inTouching === undefined) {
+    enableTouching: function enableTouching(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(enabled);
+      gameObject._inTouching.setEnable(enabled);
       return this;
     },
-    disableTouching: function disableTouching() {
-      if (this._inTouching === undefined) {
+    disableTouching: function disableTouching(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(false);
+      gameObject._inTouching.setEnable(false);
       return this;
     }
   };
@@ -18528,6 +18648,7 @@
     resolveWidth: ResolveWidth$2,
     resolveChildrenWidth: ResolveChildrenWidth$1,
     resolveHeight: ResolveHeight$2,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth$1,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$3,
@@ -19085,8 +19206,8 @@
     return width;
   };
 
-  var ResolveHeight$1 = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$2.call(this, parent, height);
+  var ResolveHeight$1 = function ResolveHeight(height) {
+    var height = ResolveHeight$2.call(this, height);
 
     // Get proportionLength
     if (this.proportionLength === undefined && this.orientation === 1) {
@@ -20205,8 +20326,8 @@
     return width;
   };
 
-  var ResolveHeight = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$2.call(this, parent, height);
+  var ResolveHeight = function ResolveHeight(height) {
+    var height = ResolveHeight$2.call(this, height);
 
     // Get proportionLength    
     if (this.proportionHeightLength === undefined) {
@@ -22417,12 +22538,6 @@
       value: function setIconSize(width, height) {
         this.iconWidth = width;
         this.iconHeight = height;
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
       }
     }, {
@@ -22478,13 +22593,14 @@
       value: function setActionSize(width, height) {
         this.actionWidth = width;
         this.actionHeight = height;
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
+      }
+    }, {
+      key: "preLayout",
+      value: function preLayout() {
+        _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
       }
     }, {
       key: "runLayout",
@@ -22492,8 +22608,6 @@
         if (this.ignoreLayout) {
           return this;
         }
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
         _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
@@ -22522,6 +22636,40 @@
         var actionMask = this.childrenMap.actionMask;
         if (actionMask) {
           actionMask.resize();
+        }
+        return this;
+      }
+    }, {
+      key: "resetDisplayContent",
+      value: function resetDisplayContent(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        var text = config.text || '';
+        this.setText(text);
+        var iconGameObjct = this.childrenMap.icon;
+        if (iconGameObjct) {
+          if (config.icon === undefined) {
+            this.hide(iconGameObjct);
+          } else {
+            this.show(iconGameObjct);
+          }
+          if (config.iconSize) {
+            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+          }
+          this.setIconTexture(config.icon, config.iconFrame);
+        }
+        var actionGameObjct = this.childrenMap.action;
+        if (actionGameObjct) {
+          if (config.action === undefined) {
+            this.hide(actionGameObjct);
+          } else {
+            this.show(actionGameObjct);
+          }
+          if (config.actionSize) {
+            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+          }
+          this.setActionTexture(config.action, config.actionFrame);
         }
         return this;
       }
@@ -23431,10 +23579,10 @@
     }
   };
 
-  var Methods$4 = {
+  var Methods$3 = {
     getLines: GetLines$1
   };
-  Object.assign(Methods$4, SetContentMethods, GetPageMethods, ShowMethods);
+  Object.assign(Methods$3, SetContentMethods, GetPageMethods, ShowMethods);
 
   var GetValue$o = Phaser.Utils.Objects.GetValue;
   var Clamp$5 = Phaser.Math.Clamp;
@@ -23586,7 +23734,7 @@
     }]);
     return TextPage;
   }(ComponentBase);
-  Object.assign(TextPage.prototype, Methods$4);
+  Object.assign(TextPage.prototype, Methods$3);
 
   var GetWrapText = function GetWrapText(textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
@@ -25681,6 +25829,8 @@
         this.setDragThreshold(GetValue$e(o, 'threshold', 10));
         this.setSlidingDeceleration(GetValue$e(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue$e(o, 'backDeceleration', 2000));
+        var dragRatio = GetValue$e(o, 'dragReverse', false) ? -1 : 1;
+        this.setDragRatio(dragRatio);
         var bounds = GetValue$e(o, 'bounds', undefined);
         if (bounds) {
           this.setBounds(bounds);
@@ -25764,6 +25914,12 @@
       key: "setBackDeceleration",
       value: function setBackDeceleration(dec) {
         this.backDeceleration = dec;
+        return this;
+      }
+    }, {
+      key: "setDragRatio",
+      value: function setDragRatio(ratio) {
+        this.dragRatio = ratio;
         return this;
       }
     }, {
@@ -25890,28 +26046,34 @@
     }, {
       key: "dragDelta",
       get: function get() {
+        var delta;
         if (this.orientationMode === 0) {
           // y
-          return this.dragState.dy;
+          delta = this.dragState.dy;
         } else if (this.orientationMode === 1) {
           // x
-          return this.dragState.dx;
+          delta = this.dragState.dx;
         } else {
-          return 0;
+          delta = 0;
         }
+        delta *= this.dragRatio;
+        return delta;
       }
     }, {
       key: "dragSpeed",
       get: function get() {
+        var speed;
         if (this.orientationMode === 0) {
           // y
-          return this.dragState.speedY;
+          speed = this.dragState.speedY;
         } else if (this.orientationMode === 1) {
           // x
-          return this.dragState.speedX;
+          speed = this.dragState.speedX;
         } else {
-          return 0;
+          speed = 0;
         }
+        speed *= this.dragRatio;
+        return speed;
       }
 
       // enter_DRAG
@@ -26624,13 +26786,13 @@
     }]);
     return Scrollable;
   }(Sizer);
-  var Methods$3 = {
+  var Methods$2 = {
     resizeController: ResizeController,
     updateController: UpdateController
   };
 
   // mixin
-  Object.assign(Scrollable.prototype, Methods$3);
+  Object.assign(Scrollable.prototype, Methods$2);
 
   var SetText$1 = function SetText(text) {
     if (text !== undefined) {
@@ -26793,7 +26955,7 @@
     }
   };
 
-  var Methods$2 = {
+  var Methods$1 = {
     setText: SetText$1,
     updateTextObject: UpdateTextObject,
     preLayout: PreLayout,
@@ -27072,7 +27234,7 @@
   var CreateDefaultTextObject = function CreateDefaultTextObject(scene) {
     return scene.add.text(0, 0, '');
   };
-  Object.assign(TextBlock.prototype, Methods$2);
+  Object.assign(TextBlock.prototype, Methods$1);
 
   var InjectProperties = function InjectProperties(textBlock) {
     Object.defineProperty(textBlock, 'childOY', {
@@ -28037,7 +28199,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -28606,17 +28768,35 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
+    clear: function clear() {
+      this.start();
+      return this;
+    },
     start: function start() {
       this.startAt();
       return this;
     },
     startAt: function startAt(x, y) {
       this.restorePathData();
+      this.accumulationLengths = undefined;
       StartAt(x, y, this.pathData);
+      this.firstPointX = x;
+      this.firstPointY = y;
       this.lastPointX = x;
       this.lastPointY = y;
-      this.accumulationLengths = undefined;
       return this;
     },
     lineTo: function lineTo(x, y, relative) {
@@ -28645,9 +28825,8 @@
         anticlockwise = false;
       }
       ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
-      var pathDataCnt = this.pathData.length;
-      this.lastPointX = this.pathData[pathDataCnt - 2];
-      this.lastPointY = this.pathData[pathDataCnt - 1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
       return this;
     },
     arc: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
@@ -28687,7 +28866,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -28706,6 +28885,18 @@
       PointRotateAround$1(point, centerX, centerY, angle);
       pathData[i] = point.x;
       pathData[i + 1] = point.y;
+    }
+    return pathData;
+  };
+
+  var Scale = function Scale(centerX, centerY, scaleX, scaleY, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      var x = pathData[i] - centerX;
+      var y = pathData[i + 1] - centerY;
+      x *= scaleX;
+      y *= scaleY;
+      pathData[i] = x + centerX;
+      pathData[i + 1] = y + centerY;
     }
     return pathData;
   };
@@ -28741,8 +28932,46 @@
       }
       return this;
     },
+    scale: function scale(centerX, centerY, scaleX, scaleY) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var x = this.lastCX - centerX;
+        var y = this.lastCY - centerY;
+        x *= scaleX;
+        y *= scaleY;
+        this.lastCX = x + centerX;
+        this.lastCY = y + centerY;
+      }
+      return this;
+    },
     offset: function offset(x, y) {
       Offset(x, y, this.pathData);
+      return this;
+    }
+  };
+
+  var SavePathDataMethods = {
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
       return this;
     }
   };
@@ -28750,18 +28979,32 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
   var Linear = Phaser.Math.Linear;
-  var AddDisplayPathSegment = function AddDisplayPathSegment(startT, endT) {
-    var startL = this.totalPathLength * startT;
-    var endL = this.totalPathLength * endT;
-    var pathData = this.pathData,
-      pathDataRef = this.pathDataSave;
-    var accumulationLengths = this.accumulationLengths,
-      d;
+  var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
+    if (endT === undefined) {
+      endT = startT;
+      startT = 0;
+    }
+    startT = WrapT(startT);
+    endT = WrapT(endT);
+    if (startT === endT) {
+      return;
+    }
+    var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
+    var startL = totalPathLength * startT;
+    var endL = totalPathLength * endT;
+    if (startT < endT) {
+      AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+    } else {
+      AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+    }
+    DuplicateLast(destPathData);
+  };
+  var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
-    var pIdx;
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
-      pIdx = i * 2;
-      d = accumulationLengths[i];
+      var pIdx = i * 2;
+      var d = accumulationLengths[i];
       if (skipState) {
         if (d < startL) {
           continue;
@@ -28771,14 +29014,14 @@
           // d > startL
           var deltaD = d - accumulationLengths[i - 1];
           var t = 1 - (d - startL) / deltaD;
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
           skipState = false;
         }
       }
       if (d <= endL) {
-        pathData.push(pathDataRef[pIdx]);
-        pathData.push(pathDataRef[pIdx + 1]);
+        destPathData.push(srcPathData[pIdx]);
+        destPathData.push(srcPathData[pIdx + 1]);
         if (d === endL) {
           break;
         }
@@ -28786,8 +29029,8 @@
         // d > endL
         var deltaD = d - accumulationLengths[i - 1];
         var t = 1 - (d - endL) / deltaD;
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
         break;
       }
     }
@@ -28798,7 +29041,9 @@
     return Linear(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    if (t % 1 === 0) {
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
       return 1;
     }
     return Wrap(t, 0, 1);
@@ -28827,41 +29072,39 @@
       this.totalPathLength = accumulationLength;
       return this;
     },
-    savePathData: function savePathData() {
-      if (this.pathDataSaved) {
-        return this;
-      }
-      this.pathDataSave = _toConsumableArray(this.pathData);
-      this.pathData.length = 0;
-      this.pathDataSaved = true;
-      return this;
-    },
-    restorePathData: function restorePathData() {
-      if (!this.pathDataSaved) {
-        return this;
-      }
-      Copy(this.pathData, this.pathDataSave);
-      this.pathDataSave = undefined;
-      this.pathDataSaved = false;
-      return this;
-    },
     setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
-      if (endT === undefined) {
-        endT = startT;
-        startT = 0;
-      }
-      startT = WrapT(startT);
-      endT = WrapT(endT);
       if (!this.pathDataSaved) {
         this.updateAccumulationLengths();
         this.savePathData();
       }
       this.pathData.length = 0;
-      if (startT === endT) ; else if (startT < endT) {
-        AddDisplayPathSegment.call(this, startT, endT);
+      AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+      return this;
+    },
+    appendFromPathSegment: function appendFromPathSegment(src, startT, endT) {
+      if (startT === undefined) {
+        var _this$pathData;
+        (_this$pathData = this.pathData).push.apply(_this$pathData, _toConsumableArray(src.pathData));
       } else {
-        AddDisplayPathSegment.call(this, startT, 1);
-        AddDisplayPathSegment.call(this, 0, endT);
+        src.updateAccumulationLengths();
+        AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+      }
+      this.firstPointX = this.pathData[0];
+      this.firstPointY = this.pathData[1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
+      return this;
+    }
+  };
+
+  var GraphicsMethods = {
+    draw: function draw(graphics, isFill, isStroke) {
+      var points = this.toPoints();
+      if (isFill) {
+        graphics.fillPoints(points, this.closePath, this.closePath);
+      }
+      if (isStroke) {
+        graphics.strokePoints(points, this.closePath, this.closePath);
       }
       return this;
     }
@@ -28900,6 +29143,8 @@
       this.pathData = pathData;
       this.closePath = false;
       this.setIterations(32);
+      this.firstPointX = undefined;
+      this.firstPointY = undefined;
       this.lastPointX = undefined;
       this.lastPointY = undefined;
       this.accumulationLengths = undefined;
@@ -28920,67 +29165,62 @@
       value: function toPolygon(polygon) {
         return ToPolygon(this.pathData, polygon);
       }
-    }, {
-      key: "draw",
-      value: function draw(graphics, isFill, isStroke) {
-        var points = this.toPoints();
-        if (isFill) {
-          graphics.fillPoints(points, this.closePath, this.closePath);
-        }
-        if (isStroke) {
-          graphics.strokePoints(points, this.closePath, this.closePath);
-        }
-        return this;
-      }
     }]);
     return PathDataBuilder;
   }();
-  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods);
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+  Phaser.Utils.Objects.GetValue;
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var RadToDeg = Phaser.Math.RadToDeg;
-  var UpdateShapes = function UpdateShapes() {
-    var x = this.radius;
-    var lineWidth = this.thickness * this.radius;
-    var barRadius = this.radius - lineWidth / 2;
-    var centerRadius = this.radius - lineWidth;
+  var ShapesUpdateMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+    },
+    updateShapes: function updateShapes() {
+      var x = this.radius;
+      var lineWidth = this.thickness * this.radius;
+      var barRadius = this.radius - lineWidth / 2;
+      var centerRadius = this.radius - lineWidth;
 
-    // Track shape
-    var trackShape = this.getShape('track');
-    if (this.trackColor != null && lineWidth > 0) {
-      trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
-    } else {
-      trackShape.reset();
-    }
-
-    // Bar shape
-    var barShape = this.getShape('bar');
-    if (this.barColor != null && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 361; // overshoot 1
+      // Track shape
+      var trackShape = this.getShape('track');
+      if (this.trackColor != null && lineWidth > 0) {
+        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
       } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = RadToDeg(this.startAngle);
-        var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
+        trackShape.reset();
       }
-      barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
-    } else {
-      barShape.reset();
-    }
 
-    // Center shape
-    var centerShape = this.getShape('center');
-    if (this.centerColor && centerRadius > 0) {
-      centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
-    } else {
-      centerShape.reset();
+      // Bar shape
+      var barShape = this.getShape('bar');
+      if (this.barColor != null && barRadius > 0) {
+        var anticlockwise, startAngle, endAngle;
+        if (this.value === 1) {
+          anticlockwise = false;
+          startAngle = 0;
+          endAngle = 361; // overshoot 1
+        } else {
+          anticlockwise = this.anticlockwise;
+          startAngle = RadToDeg(this.startAngle);
+          var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
+          endAngle = deltaAngle + startAngle;
+        }
+        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+      } else {
+        barShape.reset();
+      }
+
+      // Center shape
+      var centerShape = this.getShape('center');
+      if (this.centerColor && centerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      } else {
+        centerShape.reset();
+      }
     }
   };
 
@@ -29002,11 +29242,13 @@
         barColor = GetValue$3(config, 'barColor', undefined);
         value = GetValue$3(config, 'value', 0);
       }
+      if (radius === undefined) {
+        radius = 1;
+      }
       var width = radius * 2;
       _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
       _this.bootProgressBase(config);
-      _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
       _this.setRadius(radius);
       _this.setTrackColor(GetValue$3(config, 'trackColor', undefined));
       _this.setBarColor(barColor);
@@ -29014,6 +29256,7 @@
       _this.setThickness(GetValue$3(config, 'thickness', 0.2));
       _this.setStartAngle(GetValue$3(config, 'startAngle', DefaultStartAngle));
       _this.setAnticlockwise(GetValue$3(config, 'anticlockwise', false));
+      _this.buildShapes();
       _this.setValue(value);
       return _this;
     }
@@ -29142,10 +29385,7 @@
     }]);
     return CircularProgress;
   }(ProgressBase(BaseShapes));
-  var Methods$1 = {
-    updateShapes: UpdateShapes
-  };
-  Object.assign(CircularProgress.prototype, Methods$1);
+  Object.assign(CircularProgress.prototype, ShapesUpdateMethods);
 
   var GetDistance = Phaser.Math.Distance.Between;
   var IsLocalPointInKnob = function IsLocalPointInKnob(knob, localX, localY) {

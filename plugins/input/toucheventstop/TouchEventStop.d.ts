@@ -6,6 +6,7 @@ declare namespace TouchEventStop {
     interface IConfig {
         hitAreaMode?: HitAreaMode,
         enable?: boolean,
+        stopAllLevels?: boolean,
     }
 }
 
@@ -22,4 +23,6 @@ declare class TouchEventStop extends Phaser.Events.EventEmitter {
     setEnable(enable?: boolean): this;
     toggleEnable(): this;
     enable: boolean;
+
+    setStopMode(stopAllLevels?: boolean): this;
 }

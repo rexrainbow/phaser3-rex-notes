@@ -84,6 +84,9 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 1. [Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
+1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
+1. [Color input](ui-colorinput.md): Color number (`0x0`~`0xffffff`) or color string (`'#000000'`~`'#ffffff'`, or `'red'`) input field.
+1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Drop down list](ui-dropdownlist.md): A [label](ui-label.md) can open a drop-down list panel.
 1. [Fix-width-buttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
@@ -343,6 +346,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     class MyLineProgress extends RexPlugins.UI.LinerProgressCanvas {
         constructor(scene, x, y, width, height, barColor, value, config) {
             super(scene, x, y, width, height, barColor, value, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [Checkbox](shape-checkbox.md): Checkbox [input](button.md) with drawing checker path animation.
+    ```javascript
+    var checkbox = scene.rexUI.add.checkbox(x, y, width, height, color, config);
+    ```
+    or
+    ```javascript
+    class MyCheckbox extends RexPlugins.UI.Checkbox {
+        constructor(scene, x, y, width, height, color, config) {
+            super(scene, x, y, width, height, color, config);
             // ...
             scene.add.existing(this);
         }

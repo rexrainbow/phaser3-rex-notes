@@ -222,7 +222,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -520,7 +520,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -537,10 +539,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -606,6 +606,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;
@@ -1867,17 +1876,35 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
+    clear: function clear() {
+      this.start();
+      return this;
+    },
     start: function start() {
       this.startAt();
       return this;
     },
     startAt: function startAt(x, y) {
       this.restorePathData();
+      this.accumulationLengths = undefined;
       StartAt(x, y, this.pathData);
+      this.firstPointX = x;
+      this.firstPointY = y;
       this.lastPointX = x;
       this.lastPointY = y;
-      this.accumulationLengths = undefined;
       return this;
     },
     lineTo: function lineTo(x, y, relative) {
@@ -1906,9 +1933,8 @@
         anticlockwise = false;
       }
       ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
-      var pathDataCnt = this.pathData.length;
-      this.lastPointX = this.pathData[pathDataCnt - 2];
-      this.lastPointY = this.pathData[pathDataCnt - 1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
       return this;
     },
     arc: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
@@ -1948,7 +1974,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -1967,6 +1993,18 @@
       PointRotateAround$1(point, centerX, centerY, angle);
       pathData[i] = point.x;
       pathData[i + 1] = point.y;
+    }
+    return pathData;
+  };
+
+  var Scale = function Scale(centerX, centerY, scaleX, scaleY, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      var x = pathData[i] - centerX;
+      var y = pathData[i + 1] - centerY;
+      x *= scaleX;
+      y *= scaleY;
+      pathData[i] = x + centerX;
+      pathData[i + 1] = y + centerY;
     }
     return pathData;
   };
@@ -2002,6 +2040,23 @@
       }
       return this;
     },
+    scale: function scale(centerX, centerY, scaleX, scaleY) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var x = this.lastCX - centerX;
+        var y = this.lastCY - centerY;
+        x *= scaleX;
+        y *= scaleY;
+        this.lastCX = x + centerX;
+        this.lastCY = y + centerY;
+      }
+      return this;
+    },
     offset: function offset(x, y) {
       Offset(x, y, this.pathData);
       return this;
@@ -2022,21 +2077,56 @@
     return dest;
   };
 
+  var SavePathDataMethods = {
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
+      return this;
+    }
+  };
+
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
   var Linear$1 = Phaser.Math.Linear;
-  var AddDisplayPathSegment = function AddDisplayPathSegment(startT, endT) {
-    var startL = this.totalPathLength * startT;
-    var endL = this.totalPathLength * endT;
-    var pathData = this.pathData,
-      pathDataRef = this.pathDataSave;
-    var accumulationLengths = this.accumulationLengths,
-      d;
+  var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
+    if (endT === undefined) {
+      endT = startT;
+      startT = 0;
+    }
+    startT = WrapT(startT);
+    endT = WrapT(endT);
+    if (startT === endT) {
+      return;
+    }
+    var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
+    var startL = totalPathLength * startT;
+    var endL = totalPathLength * endT;
+    if (startT < endT) {
+      AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+    } else {
+      AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+    }
+    DuplicateLast(destPathData);
+  };
+  var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
-    var pIdx;
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
-      pIdx = i * 2;
-      d = accumulationLengths[i];
+      var pIdx = i * 2;
+      var d = accumulationLengths[i];
       if (skipState) {
         if (d < startL) {
           continue;
@@ -2046,14 +2136,14 @@
           // d > startL
           var deltaD = d - accumulationLengths[i - 1];
           var t = 1 - (d - startL) / deltaD;
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-          pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+          destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
           skipState = false;
         }
       }
       if (d <= endL) {
-        pathData.push(pathDataRef[pIdx]);
-        pathData.push(pathDataRef[pIdx + 1]);
+        destPathData.push(srcPathData[pIdx]);
+        destPathData.push(srcPathData[pIdx + 1]);
         if (d === endL) {
           break;
         }
@@ -2061,8 +2151,8 @@
         // d > endL
         var deltaD = d - accumulationLengths[i - 1];
         var t = 1 - (d - endL) / deltaD;
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-        pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+        destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
         break;
       }
     }
@@ -2073,7 +2163,9 @@
     return Linear$1(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    if (t % 1 === 0) {
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
       return 1;
     }
     return Wrap(t, 0, 1);
@@ -2102,41 +2194,39 @@
       this.totalPathLength = accumulationLength;
       return this;
     },
-    savePathData: function savePathData() {
-      if (this.pathDataSaved) {
-        return this;
-      }
-      this.pathDataSave = _toConsumableArray(this.pathData);
-      this.pathData.length = 0;
-      this.pathDataSaved = true;
-      return this;
-    },
-    restorePathData: function restorePathData() {
-      if (!this.pathDataSaved) {
-        return this;
-      }
-      Copy(this.pathData, this.pathDataSave);
-      this.pathDataSave = undefined;
-      this.pathDataSaved = false;
-      return this;
-    },
     setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
-      if (endT === undefined) {
-        endT = startT;
-        startT = 0;
-      }
-      startT = WrapT(startT);
-      endT = WrapT(endT);
       if (!this.pathDataSaved) {
         this.updateAccumulationLengths();
         this.savePathData();
       }
       this.pathData.length = 0;
-      if (startT === endT) ; else if (startT < endT) {
-        AddDisplayPathSegment.call(this, startT, endT);
+      AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+      return this;
+    },
+    appendFromPathSegment: function appendFromPathSegment(src, startT, endT) {
+      if (startT === undefined) {
+        var _this$pathData;
+        (_this$pathData = this.pathData).push.apply(_this$pathData, _toConsumableArray(src.pathData));
       } else {
-        AddDisplayPathSegment.call(this, startT, 1);
-        AddDisplayPathSegment.call(this, 0, endT);
+        src.updateAccumulationLengths();
+        AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+      }
+      this.firstPointX = this.pathData[0];
+      this.firstPointY = this.pathData[1];
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
+      return this;
+    }
+  };
+
+  var GraphicsMethods = {
+    draw: function draw(graphics, isFill, isStroke) {
+      var points = this.toPoints();
+      if (isFill) {
+        graphics.fillPoints(points, this.closePath, this.closePath);
+      }
+      if (isStroke) {
+        graphics.strokePoints(points, this.closePath, this.closePath);
       }
       return this;
     }
@@ -2175,6 +2265,8 @@
       this.pathData = pathData;
       this.closePath = false;
       this.setIterations(32);
+      this.firstPointX = undefined;
+      this.firstPointY = undefined;
       this.lastPointX = undefined;
       this.lastPointY = undefined;
       this.accumulationLengths = undefined;
@@ -2195,24 +2287,14 @@
       value: function toPolygon(polygon) {
         return ToPolygon(this.pathData, polygon);
       }
-    }, {
-      key: "draw",
-      value: function draw(graphics, isFill, isStroke) {
-        var points = this.toPoints();
-        if (isFill) {
-          graphics.fillPoints(points, this.closePath, this.closePath);
-        }
-        if (isStroke) {
-          graphics.strokePoints(points, this.closePath, this.closePath);
-        }
-        return this;
-      }
     }]);
     return PathDataBuilder;
   }();
-  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods);
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+  Phaser.Utils.Objects.GetValue;
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 

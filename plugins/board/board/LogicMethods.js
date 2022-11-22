@@ -79,7 +79,9 @@ import AreNeighbors from './neighbors/AreNeighbors.js';
 import MapNeighbors from './neighbors/MapNeighobrs.js';
 
 import RingToTileXYArray from './ring/RingToTileXYArray.js';
+import RingToChessArray from './ring/RingToChessArray.js';
 import FilledRingToTileXYArray from './ring/FilledRingToTileXYArray.js';
+import FilledRingToChessArray from './ring/FilledRingToChessArray.js';
 
 import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
@@ -168,7 +170,9 @@ export default {
     mapNeighbors: MapNeighbors,
 
     ringToTileXYArray: RingToTileXYArray,
+    ringToChessArray: RingToChessArray,
     filledRingToTileXYArray: FilledRingToTileXYArray,
+    filledRingToChessArray: FilledRingToChessArray,
 
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,

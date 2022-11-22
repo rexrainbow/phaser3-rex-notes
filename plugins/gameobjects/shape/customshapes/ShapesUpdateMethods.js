@@ -6,6 +6,7 @@ import {
     Line,
     Lines,
     Rectangle,
+    RoundRectangle,
     Triangle
 } from '../shapes/geoms';
 
@@ -17,6 +18,7 @@ const ShapeClasses = {
     line: Line,
     lines: Lines,
     rectangle: Rectangle,
+    roundRectangle: RoundRectangle,
     triangle: Triangle
 }
 

@@ -439,6 +439,7 @@ var result = txt.runWordWrap({
     },
     ascent: undefined,
     lineHeight: undefined,
+    useDefaultTextHeight: false,
     maxLines: undefined,
     wrapWidth: undefined,
     letterSpacing: 0,
@@ -453,6 +454,9 @@ var result = txt.runWordWrap({
 - `ascent`, `lineHeight` : Height of first line and remainder lines
     - `ascent` will set to `lineHeight` if `ascent` is `undefined` but `lineHeight` is not `undefined` (backward compatible)
     - Get `ascent`, `lineHeight` from default text style and test string, if `ascent`, `lineHeight` are both `undefined`
+- `useDefaultTextHeight` : If parameter `lineHeight` is not given,
+    - `false` : Set line height to (*total line height / maxLines*), if parameter `maxLines` is larger than `0`. Default behavior.
+    - `true` : Set line height to default text height.
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
     - `undefined` : It will be set if `lineHeight` and `height` is given

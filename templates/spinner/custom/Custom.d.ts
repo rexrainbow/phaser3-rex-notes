@@ -14,9 +14,10 @@ declare namespace Custom {
     type Line = Geoms.Line;
     type Lines = Geoms.Lines;
     type Rectangle = Geoms.Rectangle;
+    type RoundRectangle = Geoms.RoundRectangle;
     type Triangle = Geoms.Triangle;
     type ShapeTypes = Arc | Circle | Curve | Ellipse |
-        Line | Lines | Rectangle | Triangle;
+        Line | Lines | Rectangle | RoundRectangle | Triangle;
 
     interface IConfig extends Base.IConfig {
         create?: {

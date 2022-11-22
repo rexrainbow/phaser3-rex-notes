@@ -69,6 +69,20 @@ class Demo extends Phaser.Scene {
                 }
             )
             .addInput(
+                gameObject, 'visible',
+                {
+                    icon: 'settings',           // Title icon
+                }
+            )
+            .addInput(
+                gameObject, 'fillColor',
+                {
+                    title: 'color',             // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                }
+            )
+            .addInput(
                 gameObject, 'name',
                 {
                     icon: 'settings',           // Title icon
@@ -88,7 +102,7 @@ var CreatePanel = function (scene) {
 
         styles: {
             background: {
-                radius: 20,
+                radius: 10,
                 color: 0x0,
                 strokeColor: 0x888888
             },
@@ -99,8 +113,8 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
-                    iconSize: 20,
-                    space: { icon: 3 }
+                    iconSize: 30,
+                    space: { icon: 2 }
                 },
 
                 inputText: {
@@ -145,7 +159,9 @@ var CreatePanel = function (scene) {
                     button: {
                         background: {
                             color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT
+                            strokeColor: COLOR_LIGHT,
+
+                            'active.color': COLOR_LIGHT,
                         },
                         space: { left: 5, right: 5, top: 8, bottom: 8 }
                     },
@@ -160,15 +176,46 @@ var CreatePanel = function (scene) {
                     space: { left: 8, right: 8, top: 8, bottom: 8 }
                 },
 
+                checkbox: {
+                    color: COLOR_LIGHT,
+                    boxStrokeColor: COLOR_DARK,
+                    uncheckedColor: COLOR_DARK,
+                },
+
+                colorInput: {
+                    colorPicker: {
+                        background: { color: 0x0, strokeColor: COLOR_LIGHT },
+                    },
+
+                    colorComponents: {
+                        inputText: {
+                            background: {
+                                color: COLOR_DARK
+                            },
+                            focusStyle: {
+                                color: COLOR_PRIMARY,
+                            },
+                            style: {
+                                backgroundBottomY: 4,
+                                backgroundHeight: 18,
+                            },
+                            cursorStyle: {
+                                color: 'black',
+                                backgroundColor: 'white',
+                            }
+                        }
+                    }
+                },
+
                 proportion: {
                     title: 1,
-                    inputField: 2,
+                    inputField: 1.5,
                     range: { slider: 2, inputText: 1 }
                 }
             },
 
             space: {
-                left: 20, right: 20, top: 20, bottom: 20
+                left: 10, right: 10, top: 10, bottom: 10
             }
         },
     })

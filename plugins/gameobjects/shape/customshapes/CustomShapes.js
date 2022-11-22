@@ -14,9 +14,22 @@ class CustomShapes extends BaseShapes {
             width = GetValue(config, 'width', 2);
             height = GetValue(config, 'height', 2);
         }
+
         super(scene, x, y, width, height);
         this.type = GetValue(config, 'type', 'rexCustomShapes');
         this.buildShapes(config);
+    }
+
+    get centerX() {
+        return this.width / 2;
+    }
+
+    get centerY() {
+        return this.height / 2;
+    }
+
+    get radius() {
+        return Math.min(this.centerX, this.centerY);
     }
 
     worldToLocalXY(worldX, worldY, camera, out) {

@@ -14,9 +14,10 @@ declare namespace CustomShapes {
     type Line = Geoms.Line;
     type Lines = Geoms.Lines;
     type Rectangle = Geoms.Rectangle;
+    type RoundRectangle = Geoms.RoundRectangle;
     type Triangle = Geoms.Triangle;
     type ShapeTypes = Arc | Circle | Curve | Ellipse |
-        Line | Lines | Rectangle | Triangle;
+        Line | Lines | Rectangle | RoundRectangle | Triangle;
 
     type ShapeMapType = {
         arc?: NameTypes,
@@ -26,6 +27,7 @@ declare namespace CustomShapes {
         line?: NameTypes,
         lines?: NameTypes,
         rectangle?: NameTypes,
+        roundRectangle?: NameTypes,
         triangle?: NameTypes,
     };
     type ShapeArrayType = {

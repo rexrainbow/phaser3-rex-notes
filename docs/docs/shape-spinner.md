@@ -279,13 +279,14 @@ var customSpinner = this.rexSpinner.add.custom({
 - `create` : Callback to create shapes
     - A plain object with `shapeType: name`, or `shapeType: number`
         - `shapeType` : 
-            - `'arc'` : Create [Arc shape](shape-spinner.md#arc).
-            - `'circle'` : Create [Circle shape](shape-spinner.md#circle).
-            - `'ellipse'` : Create [Ellipse shape](shape-spinner.md#ellipse).
-            - `'line'` : Create [Line shape](shape-spinner.md#line).
-            - `'lines'` : Create [Lines shape](shape-spinner.md#lines).
-            - `'rectangle'` : Create [Rectangle shape](shape-spinner.md#rectangle).
-            - `'triangle'` : Create [Triangle shape](shape-spinner.md#triangle).
+            - `'arc'` : Create [Arc shape](shape-custom-shapes.md#arc).
+            - `'circle'` : Create [Circle shape](shape-custom-shapes.md#circle).
+            - `'ellipse'` : Create [Ellipse shape](shape-custom-shapes.md#ellipse).
+            - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
+            - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
+            - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+            - `'roundRectangle'` : Create [Round rectangle shape](shape-custom-shapes.md#round-rectangle).
+            - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
         - `nameArray` : An array of unique string name for each shape.
         - `name` : An unique string name of this shape.
         - `number` : Amount of shapes to create.

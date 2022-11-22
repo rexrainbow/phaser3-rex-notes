@@ -9,6 +9,7 @@ Custom shapes on shape.
 
 - [Speech bubble](https://codepen.io/rexrainbow/pen/vYgjyPJ)
 - [Jigsaw](https://codepen.io/rexrainbow/pen/vYZNZwr)
+- [Checkbox](https://codepen.io/rexrainbow/pen/jOKroer)
 - [World to localXY](https://codepen.io/rexrainbow/pen/PoeMXXQ)
 
 ## Usage
@@ -277,6 +278,7 @@ var out = customShapes.worldToLocalXY(worldX, worldY, camera, out);
         - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
         - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
         - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+        - `'roundRectangle'` : Create [Round rectangle shape](shape-custom-shapes.md#round-rectangle).
         - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
     - `name` : A string name of this shape.
 
@@ -454,6 +456,22 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         lines.end();
         ```
+- Copy path from another lines
+    ```javascript
+    lines.copyPathFrom(srcLine);
+    ```
+    or
+    ```javascript
+    lines.copyPathFrom(srcLine, startT, endT);
+    ```
+- Append path from another lines
+    ```javascript
+    lines.appendPathFrom(srcLine);
+    ```
+    or
+    ```javascript
+    lines.appendPathFrom(srcLine, startT, endT);
+    ```
 
 ###### Transform
 
@@ -495,6 +513,13 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
             hitAreaCallback: Phaser.Geom.Polygon.Contains,
         })
         ```
+- Position of first or last point
+    ```javascript
+    var p0x = lines.firstPointX;
+    var p0y = lines.firstPointY;
+    var pNx = lines.lastPointX;
+    var pNy = lines.lastPointY;
+    ```
 
 ##### Rectangle
 
@@ -527,6 +552,67 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         rectangle.width = width;
         rectangle.height = height;
+        ```
+
+##### Round rectangle
+
+- Top-left
+    - Get
+        ```javascript
+        var left = roundRectangle.x;
+        var top = roundRectangle.y;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setTopLeftPosition(x, y);
+        ```
+        or
+        ```javascript
+        roundRectangle.x = left;
+        roundRectangle.y = top;
+        ```
+- Size
+    - Get
+        ```javascript
+        var width = roundRectangle.width;
+        var height = roundRectangle.height;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setSize(width, height);
+        ```
+        or
+        ```javascript
+        roundRectangle.width = width;
+        roundRectangle.height = height;
+        ```
+- Radius
+    - Get
+        ```javascript
+        var radius = roundRectangle.radius;
+        ```
+        or
+        ```javascript
+        var radiusTL = roundRectangle.radiusTL;
+        var radiusTR = roundRectangle.radiusTR;
+        var radiusBL = roundRectangle.radiusBL;
+        var radiusBR = roundRectangle.radiusBR;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setRadius(radius);
+        // roundRectangle.radius = radius;
+        ```
+        or
+        ```javascript
+        roundRectangle.setRadius({
+            tl: radiusTL, tr: radiusTR,
+            bl: radiusBL, br: radiusBR,
+        });
+        // roundRectangle.radiusTL = radiusTL;
+        // roundRectangle.radiusTR = radiusTR;
+        // roundRectangle.radiusBL = radiusBL;
+        // roundRectangle.radiusBR = radiusBR;
         ```
 
 ##### Triangle
@@ -628,33 +714,33 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 - Center position
     - Get
         ```javascript
-        var x = arc.x;
-        var y = arc.y;
+        var x = circle.x;
+        var y = circle.y;
         ```
     - Set
         ```javascript
-        arc.setCenterPosition(x, y);
+        circle.setCenterPosition(x, y);
         ```
         or
         ```javascript
-        arc.x = x;
-        arc.y = y;
+        circle.x = x;
+        circle.y = y;
         ```
 - Radius
     - Get
         ```javascript
-        var radiusX = arc.radiusX;
-        var radiusY = arc.radiusY;
+        var radiusX = circle.radiusX;
+        var radiusY = circle.radiusY;
         ```
     - Set
         ```javascript
-        arc.setRadius(radiusX, radiusY);
+        circle.setRadius(radiusX, radiusY);
         // arc.setRadius(radius);
         ```
         or
         ```javascript
-        arc.radiusX = radiusX;
-        arc.radiusY = radiusY;
+        circle.radiusX = radiusX;
+        circle.radiusY = radiusY;
         ```
 
 ##### Ellipse

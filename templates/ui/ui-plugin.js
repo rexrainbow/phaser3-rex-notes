@@ -7,6 +7,7 @@ import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import HiddenEditFactory from './hiddenedit/Factory.js';
+import CheckboxFactory from './checkbox/Factory.js';
 
 import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';
@@ -25,6 +26,10 @@ import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
+import ColorInputFactory from './colorinput/colorinput/Factory.js';
+import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
+import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
+import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';

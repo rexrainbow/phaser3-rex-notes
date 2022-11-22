@@ -1,7 +1,7 @@
 import ResolveHeightBase from '../basesizer/ResolveHeight.js';
 
-var ResolveHeight = function (parent, height) {
-    var height = ResolveHeightBase.call(this, parent, height);
+var ResolveHeight = function (height) {
+    var height = ResolveHeightBase.call(this, height);
 
     // Get proportionLength    
     if (this.proportionHeightLength === undefined) {

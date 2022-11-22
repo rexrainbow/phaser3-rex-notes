@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         // Rectangle
@@ -40,6 +40,13 @@ class Demo extends Phaser.Scene {
         }, 0x008888);
         // Round-rectangle
         this.add.rexRoundRectangle(400, 300, 120, 60, 30, 0x008888);
+        // Circle
+        this.add.rexRoundRectangle({
+            x: 550, y: 300,
+            width: 100,
+            color: 0x008888,
+            shape: 'circle'
+        });
 
         // Round-rectangle
         this.add.rexRoundRectangle(100, 450, 100, 100, {
@@ -80,7 +87,7 @@ class Demo extends Phaser.Scene {
         }, 0x008888);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

@@ -16,6 +16,8 @@ declare namespace Modal {
 
         manualClose?: boolean,
 
+        clickOutsideClose?: boolean,
+
         anyTouchClose?: boolean,
 
         duration?: {

@@ -14,16 +14,51 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'image').setOrigin(0);
-        
-        this.add.rexCircleMaskImage(200, 300, 'image');
 
-        this.add.rexCircleMaskImage(400, 300, 'image', {
+        this.add.rexCircleMaskImage(100, 200, 'image');
+
+        this.add.rexCircleMaskImage(300, 200, 'image', {
             maskType: 'ellipse'
         });
 
-        this.add.rexCircleMaskImage(600, 300, 'image', {
+        this.add.rexCircleMaskImage(500, 200, 'image', {
             maskType: 'roundRectangle',
             radius: 20
+        });
+
+        // Width stroke line
+        this.add.rexCircleMaskImage(100, 350, 'image', {
+            strokeColor: 'gray',
+            strokeWidth: 10
+        });
+
+        this.add.rexCircleMaskImage(300, 350, 'image', {
+            maskType: 'ellipse',
+            strokeColor: 'gray',
+            strokeWidth: 10
+        });
+
+        this.add.rexCircleMaskImage(500, 350, 'image', {
+            maskType: 'roundRectangle',
+            radius: 20,
+            strokeColor: 'gray',
+            strokeWidth: 10
+        });
+
+        // With background
+        this.add.rexCircleMaskImage(100, 500, 'image', {
+            backgroundColor: 'yellow'
+        });
+
+        this.add.rexCircleMaskImage(300, 500, 'image', {
+            maskType: 'ellipse',
+            backgroundColor: 'yellow'
+        });
+
+        this.add.rexCircleMaskImage(500, 500, 'image', {
+            maskType: 'roundRectangle',
+            radius: 20,
+            backgroundColor: 'yellow'
         });
     }
 
