@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Methods from './methods/Methods.js';
+import CreateBackground from './builders/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,7 +21,7 @@ class TweakerShell extends Sizer {
         this.builders = GetValue(config, 'builders') || {};
         this.styles = GetValue(config, 'styles') || {};
 
-        var background = this.make('background', undefined, 'background');
+        var background = CreateBackground(scene, undefined, this.styles.background);
         if (background) {
             this.addBackground(background);
         }

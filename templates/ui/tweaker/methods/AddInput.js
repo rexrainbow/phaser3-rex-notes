@@ -1,4 +1,5 @@
 import GetInputType from '../utils/inputs/GetInputType.js';
+import CreateInputRow from '../builders/CreateInputRow.js';
 
 var AddInput = function (object, key, config) {
     if (config === undefined) {
@@ -12,7 +13,7 @@ var AddInput = function (object, key, config) {
     config.view = GetInputType(object[key], config);
 
     // Create InputRow
-    var inputSizer = this.make('inputRow', config, 'inputRow');
+    var inputSizer = CreateInputRow(this.scene, config, this.styles.inputRow);
 
     // Add InputRow to Tweaker
     this.add(
