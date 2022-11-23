@@ -10,7 +10,7 @@ var AddFolder = function (config) {
     folderStyle.child = this.styles;
     var folder = CreateFolder(scene, config, folderStyle);
 
-    // Add Folder
+    // Add folder
     this.add(
         folder,
         { expand: true }

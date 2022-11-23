@@ -68,10 +68,11 @@ class Demo extends Phaser.Scene {
                     view: 'buttons'             // Buttons list
                 }
             )
+            .addSeparator()
 
         panel
             .addFolder({
-                title: 'Representation'
+                title: 'Display'
             })
             .addInput(
                 gameObject, 'alpha',
@@ -95,6 +96,7 @@ class Demo extends Phaser.Scene {
             )
 
         panel
+            .addSeparator()
             .addInput(
                 gameObject, 'name',
                 {
@@ -231,7 +233,7 @@ var CreatePanel = function (scene) {
                 title: {
                     iconSize: 30,
                     background: { color: COLOR_DARK },
-                    space: { top: 5, icon: 2 }
+                    space: { icon: 2 }
                 },
 
                 background: {
@@ -241,6 +243,11 @@ var CreatePanel = function (scene) {
                 space: {
                     left: 10, right: 0, top: 5, bottom: 5, item: 3
                 }
+            },
+
+            separator: {
+                height: 5,
+                color: COLOR_DARK
             },
 
             space: {
