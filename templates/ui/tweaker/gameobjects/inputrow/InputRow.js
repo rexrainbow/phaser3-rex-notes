@@ -24,7 +24,9 @@ class InputRow extends Sizer {
             { proportion: proportion, expand: true, }
         );
 
-        this.addBackground(background);
+        if (background) {
+            this.addBackground(background);
+        }
 
         this.addChildrenMap('title', inputTitle);
         this.addChildrenMap('inputField', inputField);
