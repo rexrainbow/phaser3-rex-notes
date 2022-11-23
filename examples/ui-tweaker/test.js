@@ -27,7 +27,8 @@ class Demo extends Phaser.Scene {
 
         panel
             .addFolder({
-                title: 'Position'
+                title: 'Position',
+                expanded: false
             })
             .addInput(
                 gameObject, 'x',
@@ -121,7 +122,7 @@ var CreatePanel = function (scene) {
 
             inputRow: {
                 background: {
-                    strokeColor: COLOR_LIGHT
+                    strokeColor: COLOR_PRIMARY
                 },
 
                 title: {
@@ -230,16 +231,20 @@ var CreatePanel = function (scene) {
                 title: {
                     iconSize: 30,
                     background: { color: COLOR_DARK },
-                    space: { top: 10, icon: 2 }
+                    space: { top: 5, icon: 2 }
+                },
+
+                background: {
+                    strokeColor: COLOR_DARK
                 },
 
                 space: {
-                    left: 10, right: 0, top: 5, bottom: 5
+                    left: 10, right: 0, top: 5, bottom: 5, item: 3
                 }
             },
 
             space: {
-                left: 10, right: 10, top: 10, bottom: 10
+                left: 10, right: 10, top: 10, bottom: 10, item: 3
             }
         },
     })

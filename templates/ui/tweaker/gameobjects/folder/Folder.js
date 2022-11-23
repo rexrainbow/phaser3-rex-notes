@@ -1,8 +1,13 @@
 import Sizer from '../../../sizer/Sizer.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class Folder extends Sizer {
     constructor(scene, config) {
         super(scene, { orientation: 1 });
+        this.type = 'rexTweaker.Folder';
+
+        this.expanded = true;
 
         var title = config.title;
         var child = config.child;
@@ -13,6 +18,7 @@ class Folder extends Sizer {
             { proportion: 0, expand: true, }
         );
 
+        child.setOrigin(0.5, 0);
         this.add(
             child,
             { proportion: 0, expand: true, }
@@ -26,9 +32,11 @@ class Folder extends Sizer {
         this.addChildrenMap('child', child);
         this.addChildrenMap('background', background);
 
-        child.expanded = true;
+        this.setTransitionDuration(GetValue(config, 'transition.duration', 200));
 
-        title.onClick(this.toggle, this);
+        title.onClick(function () {
+            this.toggle()
+        }, this);
     }
 
     setTransitionDuration(duration) {
@@ -42,30 +50,38 @@ class Folder extends Sizer {
         return this;
     }
 
-    expand() {
-        var child = this.childrenMap.child;
-        if (child.expanded) {
+    expand(transitionDuration) {
+        if (this.expanded) {
             return this;
         }
 
+        if (transitionDuration === undefined) {
+            transitionDuration = this.transitionDuration;
+        }
+
+        var child = this.childrenMap.child;
         this
             .show(child)
             .getTopmostSizer().layout()
 
         child
-            .popUp(this.transitionDuration, 'y')
+            .popUp(transitionDuration, 'y')
 
-        child.expanded = true;
+        this.expanded = true;
 
         return this;
     }
 
-    collapse() {
-        var child = this.childrenMap.child;
-        if (!child.expanded) {
+    collapse(transitionDuration) {
+        if (!this.expanded) {
             return this;
         }
 
+        if (transitionDuration === undefined) {
+            transitionDuration = this.transitionDuration;
+        }
+
+        var child = this.childrenMap.child;
         child
             .once('scaledown.complete', function () {
                 this
@@ -73,18 +89,18 @@ class Folder extends Sizer {
                     .hide(child)
                     .getTopmostSizer().layout()
             }, this)
-            .scaleDown(this.transitionDuration, 'y')
+            .scaleDown(transitionDuration, 'y')
 
-        child.expanded = false;
+        this.expanded = false;
 
         return this;
     }
 
-    toggle() {
-        if (child.expanded) {
-            this.collapse();
+    toggle(transitionDuration) {
+        if (this.expanded) {
+            this.collapse(transitionDuration);
         } else {
-            this.expand();
+            this.expand(transitionDuration);
         }
 
         return this;
