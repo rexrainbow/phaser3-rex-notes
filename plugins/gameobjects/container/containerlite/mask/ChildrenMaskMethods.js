@@ -82,8 +82,8 @@ export default {
             return this;
         }
 
-        if (this.layer) {
-            this.layer.setMask(this.childrenMask);
+        if (this.privateRenderLayer) {
+            this.privateRenderLayer.setMask(this.childrenMask);
         } else if (this.maskLayer) {
             // 1. Add parent and children into layer
             this.addToLayer(this.maskLayer);
