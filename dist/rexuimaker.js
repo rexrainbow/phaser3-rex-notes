@@ -27390,7 +27390,7 @@
   };
 
   var ContainerSetChildVisible = ContainerLite.prototype.setChildVisible;
-  var SwapPage = function SwapPage(key) {
+  var SwapPage = function SwapPage(key, fadeInDuration) {
     this._previousKey = this._currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
@@ -27411,8 +27411,11 @@
     if (currentPage) {
       ContainerSetChildVisible.call(this, currentPage, true);
       this.emit('pagevisible', currentPage, this._currentKey, this);
-      if (this.fadeInDuration > 0) {
-        currentPage.setAlpha(0).fadeIn(this.fadeInDuration, 1);
+      if (fadeInDuration === undefined) {
+        fadeInDuration = this.fadeInDuration;
+      }
+      if (fadeInDuration > 0) {
+        currentPage.setAlpha(0).fadeIn(fadeInDuration, 1);
       }
     }
     return this;

@@ -213,6 +213,7 @@ pages.addPage(child,
 
 ```javascript
 pages.swapPage(key);
+// pages.swapPage(key, fadeInDuration);
 ```
 
 - `key` : Unique name of this page.

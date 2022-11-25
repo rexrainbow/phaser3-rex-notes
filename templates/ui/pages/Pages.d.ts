@@ -56,7 +56,10 @@ declare class Pages extends OverlapSizer {
         }
     ): this;
 
-    swapPage(key: string): this;
+    swapPage(
+        key: string,
+        fadeInDuration?: number
+    ): this;
     currentKey: string;
     readonly previousKey: string;
     keys: string[];

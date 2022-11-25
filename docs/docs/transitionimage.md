@@ -215,6 +215,13 @@ image.transit({
 
 Fire `'complete'` event when transition completed.
 
+#### Current texture
+
+```javascript
+var textureKey = image.texture.key;
+var frameName = image.frame.name;
+```
+
 ### Set transition callbacks
 
 - Set transition direction

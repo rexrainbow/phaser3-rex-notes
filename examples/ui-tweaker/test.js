@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.circle(400, 300, 20, 0xff0000)
+        var gameObject = this.add.circle(400, 300, 20, 0xff0000).setStrokeStyle(4, 0xffffff)
             .setName('abc');
 
         var panel = CreatePanel(this)
@@ -70,10 +70,15 @@ class Demo extends Phaser.Scene {
             )
             .addSeparator()
 
-        panel
-            .addFolder({
-                title: 'Display'
+        var pages = panel
+            .addTab({
+                pages: [
+                    { title: 'Display' },
+                    { title: 'Color' }
+                ]
             })
+
+        pages[0]
             .addInput(
                 gameObject, 'alpha',
                 {
@@ -86,12 +91,30 @@ class Demo extends Phaser.Scene {
                     icon: 'settings',           // Title icon
                 }
             )
+
+        pages[1]
             .addInput(
                 gameObject, 'fillColor',
                 {
                     title: 'color',             // Custom title
                     icon: 'settings',           // Title icon
                     view: 'color',
+                }
+            )
+            .addInput(
+                gameObject, 'strokeColor',
+                {
+                    title: 'stroke',            // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                }
+            )
+            .addInput(
+                gameObject, 'lineWidth',
+                {
+                    title: 'stroke-\nwidth',       // Custom title
+                    icon: 'settings',           // Title icon
+                    min: 0, max: 10,            // Range
                 }
             )
 
@@ -243,6 +266,23 @@ var CreatePanel = function (scene) {
                 space: {
                     left: 10, right: 0, top: 5, bottom: 5, item: 3
                 }
+            },
+
+            tab: {
+                tab: {
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_PRIMARY,
+                        'active.color': COLOR_PRIMARY,
+                    },
+                    space: { left: 3, right: 3, top: 3, bottom: 3 }
+                },
+                tabs: {
+                    space: { item: 3 }
+                },
+                pages: {
+                    fadeIn: 300
+                },
             },
 
             separator: {

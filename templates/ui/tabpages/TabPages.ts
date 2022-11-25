@@ -55,9 +55,12 @@ declare class TabPages extends Sizer {
         destroyChild?: boolean
     ): this;
 
-    swapPage(key: string): this;
-    swapFirstPage(): this;
-    swapLastPage(): this;
+    swapPage(
+        key: string,
+        fadeInDuration?: number
+    ): this;
+    swapFirstPage(fadeInDuration?: number): this;
+    swapLastPage(fadeInDuration?: number): this;
 
     currentKey: string;
     readonly previousKey: string;

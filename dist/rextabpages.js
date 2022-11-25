@@ -11123,7 +11123,7 @@
   };
 
   var ContainerSetChildVisible = ContainerLite.prototype.setChildVisible;
-  var SwapPage$1 = function SwapPage(key) {
+  var SwapPage$1 = function SwapPage(key, fadeInDuration) {
     this._previousKey = this._currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
@@ -11144,8 +11144,11 @@
     if (currentPage) {
       ContainerSetChildVisible.call(this, currentPage, true);
       this.emit('pagevisible', currentPage, this._currentKey, this);
-      if (this.fadeInDuration > 0) {
-        currentPage.setAlpha(0).fadeIn(this.fadeInDuration, 1);
+      if (fadeInDuration === undefined) {
+        fadeInDuration = this.fadeInDuration;
+      }
+      if (fadeInDuration > 0) {
+        currentPage.setAlpha(0).fadeIn(fadeInDuration, 1);
       }
     }
     return this;
@@ -11270,7 +11273,7 @@
     return this;
   };
 
-  var SwapPage = function SwapPage(key) {
+  var SwapPage = function SwapPage(key, fadeInDuration) {
     var index;
     if (typeof key === 'number') {
       index = key;
@@ -11278,16 +11281,28 @@
       index = this.getPageIndex(key);
     }
     if (index != null) {
+      // Override fadeInDuration
+      var fadeInDurationSave;
+      if (fadeInDuration !== undefined) {
+        fadeInDurationSave = this.childrenMap.pages.fadeInDuration;
+        this.childrenMap.pages.fadeInDuration = fadeInDuration;
+      }
       this.childrenMap.tabs.emitButtonClick(index);
+
+      // Restore fadeInDuration
+      if (fadeInDurationSave !== undefined) {
+        this.childrenMap.pages.fadeInDuration = fadeInDurationSave;
+      }
     }
     return this;
   };
-  var SwapFirstPage = function SwapFirstPage() {
-    this.swapPage(0);
+  var SwapFirstPage = function SwapFirstPage(fadeInDuration) {
+    this.swapPage(0, fadeInDuration);
     return this;
   };
-  var SwapLastPage = function SwapLastPage() {
-    this.swapPage(this.getElement('tabs.buttons').length - 1);
+  var SwapLastPage = function SwapLastPage(fadeInDuration) {
+    var index = this.getElement('tabs.buttons').length - 1;
+    this.swapPage(index, fadeInDuration);
     return this;
   };
   var SwapPageMethods = {
