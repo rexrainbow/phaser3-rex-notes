@@ -112,11 +112,22 @@ class Demo extends Phaser.Scene {
             .addInput(
                 gameObject, 'lineWidth',
                 {
-                    title: 'stroke-\nwidth',       // Custom title
+                    title: 'stroke-\nwidth',    // Custom title
                     icon: 'settings',           // Title icon
                     min: 0, max: 10,            // Range
                 }
             )
+            .addButton({
+                title: 'New-\ncolor',
+                icon: 'settings',             // Title icon
+
+                label: 'Random',
+                callback: function () {
+                    var fillColor = Phaser.Math.Between(0, 0x1000000);
+                    gameObject.fillColor = fillColor;
+                    gameObject.strokeColor = 0x1000000 - fillColor;
+                }
+            })
 
         panel
             .addSeparator()

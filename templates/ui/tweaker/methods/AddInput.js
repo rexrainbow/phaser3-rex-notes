@@ -24,10 +24,8 @@ var AddInput = function (object, key, config) {
         { expand: true }
     );
 
-    // Set content
-    inputSizer
-        .setTitle(config)
-        .setBindingTarget(object, key)
+    // Bind target
+    inputSizer.setBindingTarget(object, key)
 
     return this;
 }

@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var AddFolder = function (config) {
     var scene = this.scene;
 
-    // Create Folder-title
+    // Create folder
     var folderStyle = GetValue(this.styles, 'folder') || {};
     folderStyle.tweaker = this.styles;
     var folder = CreateFolder(scene, config, folderStyle);
