@@ -93,30 +93,6 @@ class Demo extends Phaser.Scene {
             )
 
         pages[1]
-            .addInput(
-                gameObject, 'fillColor',
-                {
-                    title: 'color',             // Custom title
-                    icon: 'settings',           // Title icon
-                    view: 'color',
-                }
-            )
-            .addInput(
-                gameObject, 'strokeColor',
-                {
-                    title: 'stroke',            // Custom title
-                    icon: 'settings',           // Title icon
-                    view: 'color',
-                }
-            )
-            .addInput(
-                gameObject, 'lineWidth',
-                {
-                    title: 'stroke-\nwidth',    // Custom title
-                    icon: 'settings',           // Title icon
-                    min: 0, max: 10,            // Range
-                }
-            )
             .addButton({
                 title: 'New-\ncolor',
                 icon: 'settings',             // Title icon
@@ -128,6 +104,32 @@ class Demo extends Phaser.Scene {
                     gameObject.strokeColor = 0x1000000 - fillColor;
                 }
             })
+            .addInput(
+                gameObject, 'fillColor',
+                {
+                    title: 'color',             // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                    monitor: true,
+                }
+            )
+            .addInput(
+                gameObject, 'strokeColor',
+                {
+                    title: 'stroke',            // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                    monitor: true,
+                }
+            )
+            .addInput(
+                gameObject, 'lineWidth',
+                {
+                    title: 'stroke-\nwidth',    // Custom title
+                    icon: 'settings',           // Title icon
+                    min: 0, max: 10,            // Range
+                }
+            )
 
         panel
             .addSeparator()

@@ -1,5 +1,6 @@
 import Sizer from '../../../sizer/Sizer.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
+import MonitorTargetMethods from './MonitorTargetMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -36,6 +37,17 @@ class InputRow extends Sizer {
 
     }
 
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+
+        this.stopMonitorTarget();
+
+        super.destroy(fromScene);
+    }
+
     setTitle(config) {
         var title = this.childrenMap.title;
         title.setTitle(config);
@@ -47,6 +59,7 @@ class InputRow extends Sizer {
 Object.assign(
     InputRow.prototype,
     BindingTargetMethods,
+    MonitorTargetMethods,
 )
 
 export default InputRow;

@@ -47487,6 +47487,37 @@
     }
   };
 
+  var MonitorTargetMethods = {
+    startMonitorTarget: function startMonitorTarget() {
+      if (this.isMonitoring) {
+        return this;
+      }
+      this.isMonitoring = true;
+      this.scene.events.on('postupdate', this.onMonitorTarget, this);
+      return this;
+    },
+    stopMonitorTarget: function stopMonitorTarget() {
+      if (!this.isMonitoring) {
+        return this;
+      }
+      this.isMonitoring = false;
+      this.scene.events.off('postupdate', this.onMonitorTarget, this);
+      return this;
+    },
+    onMonitorTarget: function onMonitorTarget() {
+      if (!this.bindTarget) {
+        return;
+      }
+      var newValue = this.bindTarget[this.bindTargetKey];
+      var inputField = this.childrenMap.inputField;
+      if (inputField.value === newValue) {
+        return;
+      }
+      // Sync new value
+      inputField.setValue(newValue);
+    }
+  };
+
   var GetValue$i = Phaser.Utils.Objects.GetValue;
   var InputRow = /*#__PURE__*/function (_Sizer) {
     _inherits(InputRow, _Sizer);
@@ -47519,6 +47550,16 @@
       return _this;
     }
     _createClass(InputRow, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
+        }
+        this.stopMonitorTarget();
+        _get(_getPrototypeOf(InputRow.prototype), "destroy", this).call(this, fromScene);
+      }
+    }, {
       key: "setTitle",
       value: function setTitle(config) {
         var title = this.childrenMap.title;
@@ -47528,7 +47569,7 @@
     }]);
     return InputRow;
   }(Sizer);
-  Object.assign(InputRow.prototype, BindingTargetMethods);
+  Object.assign(InputRow.prototype, BindingTargetMethods, MonitorTargetMethods);
 
   var InputFiledBase = /*#__PURE__*/function (_Sizer) {
     _inherits(InputFiledBase, _Sizer);
@@ -48210,6 +48251,9 @@
 
     // Bind target
     inputSizer.setBindingTarget(object, key);
+    if (config.monitor) {
+      inputSizer.startMonitorTarget();
+    }
     return this;
   };
 
