@@ -7,8 +7,9 @@ var AddFolder = function (config) {
 
     // Create Folder-title
     var folderStyle = GetValue(this.styles, 'folder') || {};
-    folderStyle.child = this.styles;
+    folderStyle.tweaker = this.styles;
     var folder = CreateFolder(scene, config, folderStyle);
+    delete folderStyle.tweaker
 
     // Add folder
     this.add(

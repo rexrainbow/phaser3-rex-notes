@@ -1,5 +1,5 @@
 import CreateTitleLabel from './CreateTitleLabel.js';
-import TweakerShell from '../TweakerShell.js';
+import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 import CreateBackground from './CreateBackground.js';
 import Folder from '../gameobjects/folder/Folder.js';
 
@@ -10,11 +10,10 @@ var CreateFolder = function (scene, config, style) {
     var titleStyle = GetValue(style, 'title') || {};
     var title = CreateTitleLabel(scene, config, titleStyle);
 
-    var child = new TweakerShell(scene, {
-        styles: GetValue(style, 'child'),
+    var child = CreateTweaker(scene, {
+        styles: GetValue(style, 'tweaker'),
         space: GetValue(style, 'space') || {}
     });
-    scene.add.existing(child);
 
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
