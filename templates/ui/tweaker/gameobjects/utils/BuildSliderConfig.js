@@ -14,12 +14,6 @@ var BuildSliderConfig = function (scene, config) {
 
     var thumbConfig = config.thumb;
     if (thumbConfig) {
-        var thumbSize = thumbConfig.size;
-        if (thumbSize) {
-            thumbConfig.width = thumbSize;
-            thumbConfig.height = thumbSize;
-        }
-
         config.thumb = CreateRoundRectangle(scene, thumbConfig);
     }
 

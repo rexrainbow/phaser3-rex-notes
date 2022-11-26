@@ -73,9 +73,10 @@ import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
 import TextEditFactory from './textedit/Factory';
 import TextPlayerFactory from './textplayer/Factory';
+import TitleLabelFactory from './titlelabel/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
-import TitleLabelFactory from './titlelabel/Factory';
+import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import Edit from './textedit/Edit';
@@ -172,6 +173,7 @@ declare class Factories {
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
     touchEventStop: typeof TouchEventStopFactory;
+    tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
 }
 
@@ -294,9 +296,10 @@ import TapClass from './tap/Tap';
 import TextAreaClass from './textarea/TextArea';
 import TextBoxClass from './textbox/TextBox';
 import TextPlayerClass from './textplayer/TextPlayer';
+import TitleLabelClass from './titlelabel/TitleLabel';
 import ToastClass from './toast/Toast';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
-import TitleLabellClass from './titlelabel/TitleLabel';
+import TweakerClass from './tweaker/Tweaker';
 
 declare namespace UIPlugins {
     type AlphaMaskImage = AlphaMaskImageClass;
@@ -370,7 +373,8 @@ declare namespace UIPlugins {
     type TextArea = TextAreaClass;
     type TextBox = TextBoxClass;
     type TextPlayer = TextPlayerClass;
+    type TitleLabel = TitleLabelClass;
     type Toast = ToastClass;
     type TouchEventStop = TouchEventStopClass;
-    type TitleLabel = TitleLabellClass;
+    type Tweaker = TweakerClass;
 }

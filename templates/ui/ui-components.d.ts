@@ -60,6 +60,7 @@ import TabPages from './tabpages/TabPages';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
+import Tweaker from './tweaker/Tweaker';
 // import Sides from './sides/Sides';
 
 import Click from './click/Click';
@@ -166,6 +167,7 @@ export {
     TextArea,
     ScrollablePanel,
     Toast,
+    Tweaker,
     // Sides,
 
     Click,

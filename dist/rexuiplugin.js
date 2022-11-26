@@ -31394,6 +31394,10 @@
       this.colorPickerCreateBackgroundCallback = callback;
       return this;
     },
+    setColorPickerHPalettePosition: function setColorPickerHPalettePosition(position) {
+      this.colorPickerHPalettePosition = position;
+      return this;
+    },
     setColorPickerExpandDirection: function setColorPickerExpandDirection(direction) {
       if (typeof direction === 'string') {
         direction = ColorPickerExpandDirections[direction];
@@ -32755,6 +32759,9 @@
       height: height,
       background: background,
       space: this.colorPickerSpace,
+      hPalette: {
+        position: this.colorPickerHPalettePosition
+      },
       colorComponents: colorComponentsConfig,
       value: this.value
     });
@@ -33278,6 +33285,7 @@
           createBackgroundCallback = GetValue$1g(colorPickerConfig, 'createBackgroundCallback');
         }
         _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
+        _this.setColorPickerHPalettePosition(GetValue$1g(colorPickerConfig, 'hPalettePosition', 0));
         _this.setColorPickerExpandDirection(GetValue$1g(colorPickerConfig, 'expandDirection'));
         _this.setColorPickerEaseInDuration(GetValue$1g(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue$1g(colorPickerConfig, 'easeOut', 500));
@@ -47758,11 +47766,6 @@
     }
     var thumbConfig = config.thumb;
     if (thumbConfig) {
-      var thumbSize = thumbConfig.size;
-      if (thumbSize) {
-        thumbConfig.width = thumbSize;
-        thumbConfig.height = thumbSize;
-      }
       config.thumb = CreateRoundRectangle$1(scene, thumbConfig);
     }
     return config;

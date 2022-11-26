@@ -76,10 +76,12 @@ const ColorPickerConfig = {
     //     })
     // },
 
+    // hPalettePosition: 'right',
+
     space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 }
 
-const ColorComponentsConfig = {  
+const ColorComponentsConfig = {
     space: { item: 8 }
 }
 

@@ -60,6 +60,7 @@ import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import ScrollBar from './scrollbar/ScrollBar.js';
 import Toast from './toast/Toast.js';
+import Tweaker from './tweaker/Tweaker.js';
 import Sides from './sides/Sides.js';
 
 import Click from './click/Click.js';
@@ -166,6 +167,7 @@ export {
     ScrollablePanel,
     ScrollBar,
     Toast,
+    Tweaker,
     Sides,
 
     Click,

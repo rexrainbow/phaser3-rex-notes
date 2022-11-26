@@ -102,6 +102,8 @@ var colorInput = scene.rexUI.add.colorInput({
         //     return gameObject;
         // }
 
+        hPalettePosition: 'bottom',
+
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
     },
 
@@ -173,6 +175,11 @@ var colorInput = scene.rexUI.add.colorInput({
             return gameObject;
         }
         ```
+    - `colorPicker.hPalettePosition` : Position of h-palette.
+        - `'bottom'` or `0` : Place h-palette at bottom side of sv-palette.
+        - `'left'` or `1` : Place h-palette at left side of sv-palette.
+        - `'top'` or `2` : Place h-palette at top side of sv-palette.
+        - `'right'` or `3` : Place h-palette at right side of sv-palette.
     - `colorPicker.space` : Padding space around color picker. Default value is
         ```javascript
         { left: 10, right: 10, top: 10, bottom: 10, item: 8 }

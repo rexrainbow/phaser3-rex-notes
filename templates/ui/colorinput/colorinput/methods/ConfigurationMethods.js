@@ -5,6 +5,11 @@ var methods = {
         return this;
     },
 
+    setColorPickerHPalettePosition(position) {
+        this.colorPickerHPalettePosition = position;
+        return this;
+    },
+
     setColorPickerExpandDirection(direction) {
         if (typeof (direction) === 'string') {
             direction = ColorPickerExpandDirections[direction];

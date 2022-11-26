@@ -196,7 +196,7 @@ var CreatePanel = function (scene) {
                     },
                     thumb: {
                         color: COLOR_LIGHT,
-                        size: 16,
+                        width: 16, height: 16,
                     },
                 },
 

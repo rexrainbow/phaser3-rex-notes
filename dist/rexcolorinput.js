@@ -16022,6 +16022,10 @@
       this.colorPickerCreateBackgroundCallback = callback;
       return this;
     },
+    setColorPickerHPalettePosition: function setColorPickerHPalettePosition(position) {
+      this.colorPickerHPalettePosition = position;
+      return this;
+    },
     setColorPickerExpandDirection: function setColorPickerExpandDirection(direction) {
       if (typeof direction === 'string') {
         direction = ColorPickerExpandDirections[direction];
@@ -17920,6 +17924,9 @@
       height: height,
       background: background,
       space: this.colorPickerSpace,
+      hPalette: {
+        position: this.colorPickerHPalettePosition
+      },
       colorComponents: colorComponentsConfig,
       value: this.value
     });
@@ -18443,6 +18450,7 @@
           createBackgroundCallback = GetValue(colorPickerConfig, 'createBackgroundCallback');
         }
         _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
+        _this.setColorPickerHPalettePosition(GetValue(colorPickerConfig, 'hPalettePosition', 0));
         _this.setColorPickerExpandDirection(GetValue(colorPickerConfig, 'expandDirection'));
         _this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));
