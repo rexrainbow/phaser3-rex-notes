@@ -10,11 +10,15 @@ class Title extends Label {
     }
 
     setTitle(config) {
-        if (config === undefined) {
-            config = {};
+        config = (config) ? DeepClone(config) : {};
+
+        if (config.hasOwnProperty('text')) {
+            // Do nothing
+        } else if (config.hasOwnProperty('title')) {
+            config.text = config.title;
+        } else {
+            config.text = '';
         }
-        config = DeepClone(config);
-        config.text = config.text || config.title || '';
 
         this.resetDisplayContent(config);
 

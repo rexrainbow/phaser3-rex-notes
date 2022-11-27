@@ -10725,11 +10725,12 @@
     _createClass(Title, [{
       key: "setTitle",
       value: function setTitle(config) {
-        if (config === undefined) {
-          config = {};
+        config = config ? DeepClone(config) : {};
+        if (config.hasOwnProperty('text')) ; else if (config.hasOwnProperty('title')) {
+          config.text = config.title;
+        } else {
+          config.text = '';
         }
-        config = DeepClone(config);
-        config.text = config.text || config.title || '';
         this.resetDisplayContent(config);
         return this;
       }
