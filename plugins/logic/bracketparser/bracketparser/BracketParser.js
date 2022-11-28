@@ -306,7 +306,7 @@ const BypassValueConverter = function (s) { return s; }
 
 const EscapeString = function (s) {
     var result = [];
-    for (var c of s) {
+    for (var i = 0, c = ''; c = s.charAt(i); i++) {
         if (c === '[') {
             result.push('\\[');
         } else if (c === ']') {

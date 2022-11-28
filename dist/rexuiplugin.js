@@ -259,57 +259,6 @@
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-    if (!it) {
-      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-        if (it) o = it;
-        var i = 0;
-        var F = function () {};
-        return {
-          s: F,
-          n: function () {
-            if (i >= o.length) return {
-              done: true
-            };
-            return {
-              done: false,
-              value: o[i++]
-            };
-          },
-          e: function (e) {
-            throw e;
-          },
-          f: F
-        };
-      }
-      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    var normalCompletion = true,
-      didErr = false,
-      err;
-    return {
-      s: function () {
-        it = it.call(o);
-      },
-      n: function () {
-        var step = it.next();
-        normalCompletion = step.done;
-        return step;
-      },
-      e: function (e) {
-        didErr = true;
-        err = e;
-      },
-      f: function () {
-        try {
-          if (!normalCompletion && it.return != null) it.return();
-        } finally {
-          if (didErr) throw err;
-        }
-      }
-    };
-  }
 
   var ObjectFactory = /*#__PURE__*/function () {
     function ObjectFactory(scene) {
@@ -18400,23 +18349,14 @@
   };
   var EscapeString = function EscapeString(s) {
     var result = [];
-    var _iterator = _createForOfIteratorHelper(s),
-      _step;
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var c = _step.value;
-        if (c === '[') {
-          result.push('\\[');
-        } else if (c === ']') {
-          result.push('\\]');
-        } else {
-          result.push(c);
-        }
+    for (var i = 0, c = ''; c = s.charAt(i); i++) {
+      if (c === '[') {
+        result.push('\\[');
+      } else if (c === ']') {
+        result.push('\\]');
+      } else {
+        result.push(c);
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
     }
     return result.join('');
   };
