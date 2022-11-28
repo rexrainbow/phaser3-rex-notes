@@ -1,4 +1,5 @@
 import Sizer from '../../../sizer/Sizer.js';
+import ExpandMethods from './ExpandMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -50,61 +51,16 @@ class Folder extends Sizer {
         return this;
     }
 
-    expand(transitionDuration) {
-        if (this.expanded) {
-            return this;
-        }
-
-        if (transitionDuration === undefined) {
-            transitionDuration = this.transitionDuration;
-        }
-
+    setBindingTarget(target) {
         var child = this.childrenMap.child;
-        this
-            .show(child)
-            .getTopmostSizer().layout()
-
-        child
-            .popUp(transitionDuration, 'y')
-
-        this.expanded = true;
-
-        return this;
-    }
-
-    collapse(transitionDuration) {
-        if (!this.expanded) {
-            return this;
-        }
-
-        if (transitionDuration === undefined) {
-            transitionDuration = this.transitionDuration;
-        }
-
-        var child = this.childrenMap.child;
-        child
-            .once('scaledown.complete', function () {
-                this
-                    .setChildScale(child, 1, 1)
-                    .hide(child)
-                    .getTopmostSizer().layout()
-            }, this)
-            .scaleDown(transitionDuration, 'y')
-
-        this.expanded = false;
-
-        return this;
-    }
-
-    toggle(transitionDuration) {
-        if (this.expanded) {
-            this.collapse(transitionDuration);
-        } else {
-            this.expand(transitionDuration);
-        }
-
+        child.setBindingTarget(target);
         return this;
     }
 }
+
+Object.assign(
+    Folder.prototype,
+    ExpandMethods,
+)
 
 export default Folder;

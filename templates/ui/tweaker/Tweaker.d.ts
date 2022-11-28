@@ -130,6 +130,9 @@ declare namespace Tweaker {
     }
 
     interface IAddInputConfig {
+        bindingTarget?: Object,
+        bindingKey?: string,
+
         view?: 'string' | 'number' | 'range' | 'list' | 'buttons' | 'boolean' | 'color',
 
         icon?: string,
@@ -150,25 +153,39 @@ declare namespace Tweaker {
         inputTextReadOnly?: boolean,
 
         monitor?: boolean,
+
+        key?: string,
     }
 
     interface IAddButtonConfig {
+        bindingTarget?: Object,
+
         icon?: string,
+        iconFrame?: string,
+        iconSize?: number,
 
         title: string,
 
         label: string,
 
-        callback: () => void,
+        callback: (bindingTarget: Object) => void,
+
+        key?: string,
     }
 
     interface IAddTabConfig {
-        pages: { title: string }[]
+        pages: {
+            title: string,
+
+            key?: string,
+        }[]
     }
 
     interface IAddFolderConfig {
         title: string,
         expanded?: boolean,
+
+        key?: string,
     }
 }
 
@@ -184,18 +201,26 @@ declare class Tweaker extends Sizer {
         config?: Tweaker.IAddInputConfig
     ): this;
 
+
+    addInput(
+        config?: Tweaker.IAddInputConfig
+    ): this;
+
     addButton(
         config: Tweaker.IAddButtonConfig
     ): this;
 
     addSeparator(): this;
 
-    addTab(
-        config: Tweaker.IAddTabConfig
-    ): Tweaker[];
-
     addFolder(
         config: Tweaker.IAddFolderConfig
     ): Tweaker;
 
+    addTab(
+        config: Tweaker.IAddTabConfig
+    ): Tweaker[];
+
+    setBindingTarget(
+        object: Object
+    ): this;
 }

@@ -8,9 +8,10 @@ var AddTab = function (config) {
     // Create tab
     var tabStyle = GetValue(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;
-    var tab = CreateTab(scene, config, tabStyle);
+    tabStyle.root = this.root;
+    var tab = CreateTab(scene, config, tabStyle).swapFirstPage(0);
     delete tabStyle.tweaker;
-    tab.swapFirstPage(0);
+    delete tabStyle.root;
 
     // Add tab
     this.add(
@@ -18,10 +19,17 @@ var AddTab = function (config) {
         { expand: true }
     );
 
-    var pageCount = (GetValue(config, 'pages') || []).length;
+    var pagesConfig = GetValue(config, 'pages') || [];
     var pages = [];
-    for (var i = 0; i < pageCount; i++) {
-        pages.push(tab.getPage(i));
+    for (var i = 0, cnt = pagesConfig.length; i < cnt; i++) {
+        var childTweaker = tab.getPage(i);
+
+        var key = pagesConfig[i].key;
+        if (key) {
+            this.root.addChildrenMap(key, childTweaker);
+        }
+
+        pages.push(childTweaker);
     }
 
     return pages;

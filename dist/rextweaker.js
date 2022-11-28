@@ -9382,7 +9382,7 @@
     }
   };
 
-  var ExpandMethods = {
+  var ExpandMethods$1 = {
     getChildExpand: function getChildExpand(gameObject) {
       return this.getSizerConfig(gameObject).expand;
     },
@@ -9403,7 +9403,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$b, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$b, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods$1);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -10755,6 +10755,44 @@
     return CreateRoundRectangle(scene, style);
   };
 
+  var ExpandMethods = {
+    expand: function expand(transitionDuration) {
+      if (this.expanded) {
+        return this;
+      }
+      if (transitionDuration === undefined) {
+        transitionDuration = this.transitionDuration;
+      }
+      var child = this.childrenMap.child;
+      this.show(child).getTopmostSizer().layout();
+      child.popUp(transitionDuration, 'y');
+      this.expanded = true;
+      return this;
+    },
+    collapse: function collapse(transitionDuration) {
+      if (!this.expanded) {
+        return this;
+      }
+      if (transitionDuration === undefined) {
+        transitionDuration = this.transitionDuration;
+      }
+      var child = this.childrenMap.child;
+      child.once('scaledown.complete', function () {
+        this.setChildScale(child, 1, 1).hide(child).getTopmostSizer().layout();
+      }, this).scaleDown(transitionDuration, 'y');
+      this.expanded = false;
+      return this;
+    },
+    toggle: function toggle(transitionDuration) {
+      if (this.expanded) {
+        this.collapse(transitionDuration);
+      } else {
+        this.expand(transitionDuration);
+      }
+      return this;
+    }
+  };
+
   var GetValue$O = Phaser.Utils.Objects.GetValue;
   var Folder = /*#__PURE__*/function (_Sizer) {
     _inherits(Folder, _Sizer);
@@ -10805,59 +10843,28 @@
         return this;
       }
     }, {
-      key: "expand",
-      value: function expand(transitionDuration) {
-        if (this.expanded) {
-          return this;
-        }
-        if (transitionDuration === undefined) {
-          transitionDuration = this.transitionDuration;
-        }
+      key: "setBindingTarget",
+      value: function setBindingTarget(target) {
         var child = this.childrenMap.child;
-        this.show(child).getTopmostSizer().layout();
-        child.popUp(transitionDuration, 'y');
-        this.expanded = true;
-        return this;
-      }
-    }, {
-      key: "collapse",
-      value: function collapse(transitionDuration) {
-        if (!this.expanded) {
-          return this;
-        }
-        if (transitionDuration === undefined) {
-          transitionDuration = this.transitionDuration;
-        }
-        var child = this.childrenMap.child;
-        child.once('scaledown.complete', function () {
-          this.setChildScale(child, 1, 1).hide(child).getTopmostSizer().layout();
-        }, this).scaleDown(transitionDuration, 'y');
-        this.expanded = false;
-        return this;
-      }
-    }, {
-      key: "toggle",
-      value: function toggle(transitionDuration) {
-        if (this.expanded) {
-          this.collapse(transitionDuration);
-        } else {
-          this.expand(transitionDuration);
-        }
+        child.setBindingTarget(target);
         return this;
       }
     }]);
     return Folder;
   }(Sizer);
+  Object.assign(Folder.prototype, ExpandMethods);
 
   var GetValue$N = Phaser.Utils.Objects.GetValue;
   var CreateFolder = function CreateFolder(scene, config, style) {
     // Create Folder-title
     var titleStyle = GetValue$N(style, 'title') || {};
     var title = CreateTitleLabel(scene, config, titleStyle);
-    var child = CreateTweaker(scene, {
+    var tweakerConfig = {
+      root: GetValue$N(style, 'root'),
       styles: GetValue$N(style, 'tweaker'),
       space: GetValue$N(style, 'space') || {}
-    });
+    };
+    var child = CreateTweaker(scene, tweakerConfig);
     var backgroundStyle = GetValue$N(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
     var folder = new Folder(scene, {
@@ -10879,8 +10886,10 @@
     // Create folder
     var folderStyle = GetValue$M(this.styles, 'folder') || {};
     folderStyle.tweaker = this.styles;
+    folderStyle.root = this.root;
     var folder = CreateFolder(scene, config, folderStyle);
     delete folderStyle.tweaker;
+    delete folderStyle.root;
 
     // Add folder
     this.add(folder, {
@@ -10893,7 +10902,11 @@
     if (!expanded) {
       folder.collapse(0);
     }
-    return folder.getElement('child');
+    var childTweaker = folder.getElement('child');
+    if (config.key) {
+      this.root.addChildrenMap(config.key, childTweaker);
+    }
+    return childTweaker;
   };
 
   var SizerAdd$2 = Sizer.prototype.add;
@@ -12760,7 +12773,7 @@
 
   var GetValue$C = Phaser.Utils.Objects.GetValue;
   var SizerAdd = Sizer.prototype.add;
-  var TabPages = /*#__PURE__*/function (_Sizer) {
+  var TabPages$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(TabPages, _Sizer);
     var _super = _createSuper(TabPages);
     function TabPages(scene, config) {
@@ -12871,7 +12884,27 @@
     }]);
     return TabPages;
   }(Sizer);
-  Object.assign(TabPages.prototype, methods$6);
+  Object.assign(TabPages$1.prototype, methods$6);
+
+  var TabPages = /*#__PURE__*/function (_TabPagesBase) {
+    _inherits(TabPages, _TabPagesBase);
+    var _super = _createSuper(TabPages);
+    function TabPages() {
+      _classCallCheck(this, TabPages);
+      return _super.apply(this, arguments);
+    }
+    _createClass(TabPages, [{
+      key: "setBindingTarget",
+      value: function setBindingTarget(target) {
+        var children = this.childrenMap.pages.children;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+          children[i].setBindingTarget(target);
+        }
+        return this;
+      }
+    }]);
+    return TabPages;
+  }(TabPages$1);
 
   var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
     if (delimiter === undefined) {
@@ -13044,6 +13077,7 @@
     scene.add.existing(tabPages);
     var tabConfig = GetValue$B(style, 'tab');
     var tweakerConfig = {
+      root: GetValue$B(style, 'root'),
       styles: GetValue$B(style, 'tweaker')
     };
     var pages = GetValue$B(config, 'pages') || [];
@@ -13072,18 +13106,24 @@
     // Create tab
     var tabStyle = GetValue$A(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;
-    var tab = CreateTab(scene, config, tabStyle);
+    tabStyle.root = this.root;
+    var tab = CreateTab(scene, config, tabStyle).swapFirstPage(0);
     delete tabStyle.tweaker;
-    tab.swapFirstPage(0);
+    delete tabStyle.root;
 
     // Add tab
     this.add(tab, {
       expand: true
     });
-    var pageCount = (GetValue$A(config, 'pages') || []).length;
+    var pagesConfig = GetValue$A(config, 'pages') || [];
     var pages = [];
-    for (var i = 0; i < pageCount; i++) {
-      pages.push(tab.getPage(i));
+    for (var i = 0, cnt = pagesConfig.length; i < cnt; i++) {
+      var childTweaker = tab.getPage(i);
+      var key = pagesConfig[i].key;
+      if (key) {
+        this.root.addChildrenMap(key, childTweaker);
+      }
+      pages.push(childTweaker);
     }
     return pages;
   };
@@ -13148,31 +13188,31 @@
       inputField
       // Set text value to object when closing editor
       .on('valuechange', function (value) {
-        if (!this.bindTarget) {
+        if (!this.bindingTarget) {
           return;
         }
-        this.bindTarget[this.bindTargetKey] = value;
+        this.bindingTarget[this.bindTargetKey] = value;
       }, this);
       return this;
     },
     setBindingTarget: function setBindingTarget(target, key) {
-      this.bindTarget = target;
+      this.bindingTarget = target;
       if (key !== undefined) {
         this.setBindingTargetKey(key);
       }
+      this.syncTargetValue();
       return this;
     },
     setBindingTargetKey: function setBindingTargetKey(key) {
       this.bindTargetKey = key;
-      this.syncTargetValue();
       return this;
     },
     syncTargetValue: function syncTargetValue() {
-      if (!this.bindTarget) {
+      if (!this.bindingTarget || !this.bindTargetKey) {
         return this;
       }
       var inputField = this.childrenMap.inputField;
-      inputField.setValue(this.bindTarget[this.bindTargetKey]);
+      inputField.setValue(this.bindingTarget[this.bindTargetKey]);
       return this;
     }
   };
@@ -13195,10 +13235,10 @@
       return this;
     },
     onMonitorTarget: function onMonitorTarget() {
-      if (!this.bindTarget) {
+      if (!this.bindingTarget) {
         return;
       }
-      var newValue = this.bindTarget[this.bindTargetKey];
+      var newValue = this.bindingTarget[this.bindTargetKey];
       var inputField = this.childrenMap.inputField;
       if (inputField.value === newValue) {
         return;
@@ -23677,13 +23717,19 @@
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var AddInput = function AddInput(object, key, config) {
-    if (config === undefined) {
+    if (arguments.length === 1) {
+      config = object;
+      object = config.bindingTarget;
+      key = config.bindingKey;
+    } else if (config === undefined) {
       config = {};
     }
     if (!config.title) {
       config.title = key;
     }
-    config.view = GetInputType(object[key], config);
+    if (!config.view) {
+      config.view = GetInputType(object[key], config);
+    }
 
     // Create InputRow
     var inputRowStyle = GetValue$4(this.styles, 'inputRow');
@@ -23698,6 +23744,9 @@
     inputSizer.setBindingTarget(object, key);
     if (config.monitor) {
       inputSizer.startMonitorTarget();
+    }
+    if (config.key) {
+      this.root.addChildrenMap(config.key, inputSizer);
     }
     return this;
   };
@@ -23725,9 +23774,6 @@
       buttons: buttons,
       expand: buttons.length === 1
     });
-    buttonsSizer.on('button.click', function (button) {
-      button.callback();
-    });
 
     // Background
     var backgroundStyle = GetValue$3(style, 'background') || {};
@@ -23741,6 +23787,9 @@
     }));
     scene.add.existing(inputRow);
     inputRow.setTitle(config);
+    buttonsSizer.on('button.click', function (button) {
+      button.callback(inputRow.bindingTarget);
+    });
     return inputRow;
   };
 
@@ -23755,7 +23804,11 @@
         label: config.label,
         callback: config.callback
       }];
+      delete config.label;
+      delete config.callback;
     }
+    var target = config.bindingTarget;
+    delete config.bindingTarget;
 
     // Create buttons
     var buttonsStyle = GetValue$2(this.styles, 'inputRow') || {};
@@ -23765,6 +23818,14 @@
     this.add(buttons, {
       expand: true
     });
+
+    // Set binding target
+    if (target) {
+      buttons.setBindingTarget(target);
+    }
+    if (config.key) {
+      this.root.addChildrenMap(config.key, buttons);
+    }
     return this;
   };
 
@@ -23783,13 +23844,26 @@
     return this;
   };
 
+  var SetBindingTarget = function SetBindingTarget(target) {
+    var children = this.sizerChildren;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (!child.setBindingTarget) {
+        continue;
+      }
+      child.setBindingTarget(target);
+    }
+    return this;
+  };
+
   var methods = {
     addFolder: AddFolder,
     addTab: AddTab,
     addInput: AddInput,
     addButton: AddButtons,
     addButtons: AddButtons,
-    addSeparator: AddSeparator
+    addSeparator: AddSeparator,
+    setBindingTarget: SetBindingTarget
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -23839,6 +23913,7 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker';
+      _this.root = config.root || _assertThisInitialized(_this);
       return _this;
     }
     return _createClass(Tweaker);

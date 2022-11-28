@@ -16,6 +16,8 @@ class Tweaker extends TweakerShell {
         // Create sizer
         super(scene, config);
         this.type = 'rexTweaker';
+
+        this.root = config.root || this;
     }
 }
 

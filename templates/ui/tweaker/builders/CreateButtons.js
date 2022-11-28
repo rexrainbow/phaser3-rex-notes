@@ -30,11 +30,6 @@ var CreateButtons = function (scene, config, style) {
         expand: (buttons.length === 1),
     })
 
-    buttonsSizer
-        .on('button.click', function (button) {
-            button.callback()
-        })
-
     // Background
     var backgroundStyle = GetValue(style, 'background') || {};
     var background = CreateRoundRectangle(scene, backgroundStyle);
@@ -50,6 +45,11 @@ var CreateButtons = function (scene, config, style) {
     scene.add.existing(inputRow);
 
     inputRow.setTitle(config);
+
+    buttonsSizer
+        .on('button.click', function (button) {
+            button.callback(inputRow.bindingTarget);
+        })
 
     return inputRow;
 }

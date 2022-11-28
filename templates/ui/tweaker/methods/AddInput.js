@@ -4,7 +4,11 @@ import CreateInputRow from '../builders/CreateInputRow.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddInput = function (object, key, config) {
-    if (config === undefined) {
+    if (arguments.length === 1) {
+        config = object;
+        object = config.bindingTarget;
+        key = config.bindingKey;
+    } else if (config === undefined) {
         config = {};
     }
 
@@ -12,7 +16,9 @@ var AddInput = function (object, key, config) {
         config.title = key;
     }
 
-    config.view = GetInputType(object[key], config);
+    if (!config.view) {
+        config.view = GetInputType(object[key], config);
+    }
 
     // Create InputRow
     var inputRowStyle = GetValue(this.styles, 'inputRow');
@@ -29,6 +35,10 @@ var AddInput = function (object, key, config) {
 
     if (config.monitor) {
         inputSizer.startMonitorTarget();
+    }
+
+    if (config.key) {
+        this.root.addChildrenMap(config.key, inputSizer);
     }
 
     return this;

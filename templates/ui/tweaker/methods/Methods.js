@@ -3,6 +3,7 @@ import AddTab from './AddTab.js';
 import AddInput from './AddInput.js';
 import AddButtons from './AddButtons.js';
 import AddSeparator from './AddSeparator.js';
+import SetBindingTarget from './SetBindingTarget.js';
 
 var methods = {
     addFolder: AddFolder,
@@ -11,6 +12,8 @@ var methods = {
     addButton: AddButtons,
     addButtons: AddButtons,
     addSeparator: AddSeparator,
+
+    setBindingTarget: SetBindingTarget,
 }
 
 export default methods;

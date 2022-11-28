@@ -8,8 +8,11 @@ var AddFolder = function (config) {
     // Create folder
     var folderStyle = GetValue(this.styles, 'folder') || {};
     folderStyle.tweaker = this.styles;
+    folderStyle.root = this.root;
     var folder = CreateFolder(scene, config, folderStyle);
-    delete folderStyle.tweaker
+    delete folderStyle.tweaker;
+    delete folderStyle.root;
+
 
     // Add folder
     this.add(
@@ -25,7 +28,13 @@ var AddFolder = function (config) {
         folder.collapse(0);
     }
 
-    return folder.getElement('child');
+    var childTweaker = folder.getElement('child');
+
+    if (config.key) {
+        this.root.addChildrenMap(config.key, childTweaker);
+    }
+
+    return childTweaker;
 }
 
 export default AddFolder;

@@ -14,7 +14,12 @@ var AddButtons = function (config) {
             label: config.label,
             callback: config.callback
         }];
+        delete config.label;
+        delete config.callback;
     }
+
+    var target = config.bindingTarget;
+    delete config.bindingTarget;
 
     // Create buttons
     var buttonsStyle = GetValue(this.styles, 'inputRow') || {};
@@ -25,6 +30,15 @@ var AddButtons = function (config) {
         buttons,
         { expand: true }
     );
+
+    // Set binding target
+    if (target) {
+        buttons.setBindingTarget(target);
+    }
+
+    if (config.key) {
+        this.root.addChildrenMap(config.key, buttons);
+    }
 
     return this;
 }

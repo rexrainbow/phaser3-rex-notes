@@ -1,4 +1,4 @@
-import TabPages from '../../tabpages/TabPages.js';
+import TabPages from '../gameobjects/tabpages/TabPages.js';
 import CreateInteractiveLabel from '../../utils/build/CreateInteractiveLabel.js';
 import CreateTweaker from '../gameobjects/utils/CreateTweaker';
 
@@ -10,6 +10,7 @@ var CreateTab = function (scene, config, style) {
 
     var tabConfig = GetValue(style, 'tab');
     var tweakerConfig = {
+        root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker')
     }
     var pages = GetValue(config, 'pages') || [];

@@ -4,36 +4,38 @@ export default {
         inputField
             // Set text value to object when closing editor
             .on('valuechange', function (value) {
-                if (!this.bindTarget) {
+                if (!this.bindingTarget) {
                     return;
                 }
-                this.bindTarget[this.bindTargetKey] = value;
+                this.bindingTarget[this.bindTargetKey] = value;
             }, this);
 
         return this;
     },
 
     setBindingTarget(target, key) {
-        this.bindTarget = target;
+        this.bindingTarget = target;
+
         if (key !== undefined) {
             this.setBindingTargetKey(key);
         }
+
+        this.syncTargetValue();
         return this;
     },
 
     setBindingTargetKey(key) {
         this.bindTargetKey = key;
-        this.syncTargetValue();
         return this;
     },
 
     syncTargetValue() {
-        if (!this.bindTarget) {
+        if (!this.bindingTarget || !this.bindTargetKey) {
             return this;
         }
 
         var inputField = this.childrenMap.inputField;
-        inputField.setValue(this.bindTarget[this.bindTargetKey]);
+        inputField.setValue(this.bindingTarget[this.bindTargetKey]);
 
         return this;
     },

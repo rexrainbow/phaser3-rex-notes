@@ -16,11 +16,13 @@ declare namespace Pages {
         left?: number,
         right?: number,
         top?: number,
-        bottom?: number
+        bottom?: number,
     };
 
     interface IConfig extends OverlapSizer.IConfig {
-        swapMode?: 0 | 1 | 'invisible' | 'destroy'
+        fadeIn?: number,
+
+        swapMode?: 0 | 1 | 'invisible' | 'destroy',
     }
 
 }

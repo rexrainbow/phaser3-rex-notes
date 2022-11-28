@@ -20,11 +20,11 @@ export default {
     },
 
     onMonitorTarget() {
-        if (!this.bindTarget) {
+        if (!this.bindingTarget) {
             return;
         }
 
-        var newValue = this.bindTarget[this.bindTargetKey];
+        var newValue = this.bindingTarget[this.bindTargetKey];
         var inputField = this.childrenMap.inputField;
         if (inputField.value === newValue) {
             return;

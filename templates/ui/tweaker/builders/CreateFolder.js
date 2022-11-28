@@ -10,10 +10,12 @@ var CreateFolder = function (scene, config, style) {
     var titleStyle = GetValue(style, 'title') || {};
     var title = CreateTitleLabel(scene, config, titleStyle);
 
-    var child = CreateTweaker(scene, {
+    var tweakerConfig = {
+        root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
         space: GetValue(style, 'space') || {}
-    });
+    }
+    var child = CreateTweaker(scene, tweakerConfig);
 
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
