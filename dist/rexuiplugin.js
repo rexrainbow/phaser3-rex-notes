@@ -259,6 +259,57 @@
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+        var F = function () {};
+        return {
+          s: F,
+          n: function () {
+            if (i >= o.length) return {
+              done: true
+            };
+            return {
+              done: false,
+              value: o[i++]
+            };
+          },
+          e: function (e) {
+            throw e;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var normalCompletion = true,
+      didErr = false,
+      err;
+    return {
+      s: function () {
+        it = it.call(o);
+      },
+      n: function () {
+        var step = it.next();
+        normalCompletion = step.done;
+        return step;
+      },
+      e: function (e) {
+        didErr = true;
+        err = e;
+      },
+      f: function () {
+        try {
+          if (!normalCompletion && it.return != null) it.return();
+        } finally {
+          if (didErr) throw err;
+        }
+      }
+    };
+  }
 
   var ObjectFactory = /*#__PURE__*/function () {
     function ObjectFactory(scene) {
@@ -18042,25 +18093,32 @@
     return values;
   };
 
-  var DefaultTagExpression = "[!$a-z0-9-_.]+";
-  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
-  var BypassValueConverter = function BypassValueConverter(s) {
-    return s;
-  };
   var BracketParser = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
       this.setEventEmitter(GetValue$2S(config, 'eventEmitter', undefined));
 
-      // Parameters for regex
-      this.setTagExpression(GetValue$2S(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$2S(config, 'regex.value', DefaultValueExpression));
-      // Value convert
-      this.setValueConverter(GetValue$2S(config, 'valueConvert', true));
       // Brackets and generate regex
       var delimiters = GetValue$2S(config, 'delimiters', '<>');
+      var tagExpression = GetValue$2S(config, 'regex.tag');
+      if (tagExpression === undefined) {
+        tagExpression = "[^=".concat(EscapeString(delimiters[0])).concat(EscapeString(delimiters[1]), "]+");
+        // console.log(tagExpression)
+      }
+
+      var valueExpression = GetValue$2S(config, 'regex.value');
+      if (valueExpression === undefined) {
+        valueExpression = "[^=".concat(EscapeString(delimiters[0])).concat(EscapeString(delimiters[1]), "]+");
+        // console.log(valueExpression)
+      }
+
+      // Parameters for regex
+      this.setTagExpression(tagExpression);
+      this.setValueExpression(valueExpression);
       this.setDelimiters(delimiters[0], delimiters[1]);
+      // Value convert
+      this.setValueConverter(GetValue$2S(config, 'valueConvert', true));
       // Loop
       this.setLoopEnable(GetValue$2S(config, 'loop', false));
       this.isRunning = false;
@@ -18337,6 +18395,31 @@
     }]);
     return BracketParser;
   }();
+  var BypassValueConverter = function BypassValueConverter(s) {
+    return s;
+  };
+  var EscapeString = function EscapeString(s) {
+    var result = [];
+    var _iterator = _createForOfIteratorHelper(s),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var c = _step.value;
+        if (c === '[') {
+          result.push('\\[');
+        } else if (c === ']') {
+          result.push('\\]');
+        } else {
+          result.push(c);
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    return result.join('');
+  };
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
   var OnParseColorTag = function OnParseColorTag(textPlayer, parser, config) {

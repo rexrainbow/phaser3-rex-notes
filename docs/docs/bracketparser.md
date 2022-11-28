@@ -78,8 +78,8 @@ var parser = scene.plugins.get('rexBracketParser').add({
     // delimiters: '<>', // or ['<', '>']
     // valueConvert: true,
     // regex : {
-    //     tag: '[!$a-z0-9-_.]+',
-    //     value: '[ !$a-z0-9-_.#,|&]+'
+    //     tag: undefined,
+    //     value: undefined
     // },
 });
 ```
@@ -97,8 +97,10 @@ var parser = scene.plugins.get('rexBracketParser').add({
         }
         ```
 - `regex` :
-    - `regex.tag` : Expression of parse tag. Default value is `'[!$a-z0-9-_.]+'`.
-    - `regex.value` : Expression of parse value. Default value is `'[ !$a-z0-9-_.#,|&]+'`.
+    - `regex.tag` : Expression of parse tag. 
+        - `undefined` : Default value is any character except left-delimiter, right-delimiter, and `'='`.
+    - `regex.value` : Expression of parse value.
+        - `undefined` : Default value is any character except left-delimiter, right-delimiter, and `'='`.    
 
 #### Tag and content
 
@@ -111,9 +113,6 @@ Assume that left-delimiter and right-delimiter is `'<>'`
             - Boolean
             - null
             - String
-                - `'a'-'z'`, `'A'-'Z'`,
-                - String mix with `0-9`
-                - `'#'`, `'-'`, `'.'`
     - Start-tag with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
 - End-tag : `'<\TAG>'`
 - Content : Any string outside of tag-start, or tag-end.

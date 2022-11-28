@@ -4,23 +4,32 @@ import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
-const DefaultTagExpression = `[!$a-z0-9-_.]+`;
-const DefaultValueExpression = `[ !$a-z0-9-_.#,|&]+`;
-const BypassValueConverter = function (s) { return s; }
-
 class BracketParser {
     constructor(config) {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
-        // Parameters for regex
-        this.setTagExpression(GetValue(config, 'regex.tag', DefaultTagExpression));
-        this.setValueExpression(GetValue(config, 'regex.value', DefaultValueExpression));
-        // Value convert
-        this.setValueConverter(GetValue(config, 'valueConvert', true));
         // Brackets and generate regex
         var delimiters = GetValue(config, 'delimiters', '<>');
+
+        var tagExpression = GetValue(config, 'regex.tag');
+        if (tagExpression === undefined) {
+            tagExpression = `[^=${EscapeString(delimiters[0])}${EscapeString(delimiters[1])}]+`;
+            // console.log(tagExpression)
+        }
+
+        var valueExpression = GetValue(config, 'regex.value');
+        if (valueExpression === undefined) {
+            valueExpression = `[^=${EscapeString(delimiters[0])}${EscapeString(delimiters[1])}]+`;
+            // console.log(valueExpression)
+        }
+
+        // Parameters for regex
+        this.setTagExpression(tagExpression);
+        this.setValueExpression(valueExpression);
         this.setDelimiters(delimiters[0], delimiters[1]);
+        // Value convert
+        this.setValueConverter(GetValue(config, 'valueConvert', true));
         // Loop
         this.setLoopEnable(GetValue(config, 'loop', false));
 
@@ -293,6 +302,21 @@ class BracketParser {
     }
 }
 
+const BypassValueConverter = function (s) { return s; }
+
+const EscapeString = function (s) {
+    var result = [];
+    for (var c of s) {
+        if (c === '[') {
+            result.push('\\[');
+        } else if (c === ']') {
+            result.push('\\]');
+        } else {
+            result.push(c);
+        }
+    }
+    return result.join('');
+}
 
 Object.assign(
     BracketParser.prototype,
