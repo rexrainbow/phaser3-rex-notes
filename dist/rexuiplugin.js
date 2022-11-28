@@ -18348,17 +18348,7 @@
     return s;
   };
   var EscapeString = function EscapeString(s) {
-    var result = [];
-    for (var i = 0, c = ''; c = s.charAt(i); i++) {
-      if (c === '[') {
-        result.push('\\[');
-      } else if (c === ']') {
-        result.push('\\]');
-      } else {
-        result.push(c);
-      }
-    }
-    return result.join('');
+    return s.replaceAll('[', '\\[').replaceAll(']', '\\]');
   };
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
