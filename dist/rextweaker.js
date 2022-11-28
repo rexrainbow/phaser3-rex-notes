@@ -13107,7 +13107,7 @@
     var tabStyle = GetValue$A(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;
     tabStyle.root = this.root;
-    var tab = CreateTab(scene, config, tabStyle).swapFirstPage(0);
+    var tab = CreateTab(scene, config, tabStyle);
     delete tabStyle.tweaker;
     delete tabStyle.root;
 
@@ -13117,14 +13117,20 @@
     });
     var pagesConfig = GetValue$A(config, 'pages') || [];
     var pages = [];
+    var shownPageIndex = 0;
     for (var i = 0, cnt = pagesConfig.length; i < cnt; i++) {
       var childTweaker = tab.getPage(i);
+      var isPageShown = pagesConfig[i].show;
+      if (isPageShown) {
+        shownPageIndex = i;
+      }
       var key = pagesConfig[i].key;
       if (key) {
         this.root.addChildrenMap(key, childTweaker);
       }
       pages.push(childTweaker);
     }
+    tab.swapPage(shownPageIndex, 0);
     return pages;
   };
 

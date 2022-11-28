@@ -176,6 +176,7 @@ declare namespace Tweaker {
     interface IAddTabConfig {
         pages: {
             title: string,
+            show?: boolean,
 
             key?: string,
         }[]

@@ -1073,8 +1073,14 @@ Tab containes pages. Each page is a tweaker game object.
 ```javascript
 var childrenTweakers = tweaker.addTab({
     pages: [
-        {title: titleA},
-        {title: titleB},
+        {
+            title: titleA, 
+            // show: false
+        },
+        {
+            title: titleB
+            // show: false
+        },
         // ...
     ]
 });
@@ -1084,7 +1090,15 @@ var childrenTweakers = tweaker.addTab({
 ```
 
 - `childrenTweakers` : Array of children tweaker game object. Add input rows by `addInput` method.
-- `pages` : Array of pages' title (`{title: titlaA}`).
+- `pages` : Array of page setting.
+    ```javascript
+    {
+        title: titleA,
+        show: false,
+    }
+    ```
+    - `title` : Display text of page title
+    - `show` : Set to `true` to show this page at beginning
 
 
 Style of tab is defined in `styles.tab` of config

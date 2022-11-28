@@ -103,7 +103,7 @@ var SetupContent = function (panel) {
         .addTab({
             pages: [
                 { title: 'Display' },
-                { title: 'Color' }
+                { title: 'Color', show: true }
             ]
         })
 
