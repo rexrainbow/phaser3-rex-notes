@@ -82,14 +82,78 @@ var tweaker = scene.rexUI.add.tweaker({
     // height: undefined,
 
     styles : {
+        inputRow: {
+            background: {
+
+            },
+
+            title: {
+
+            },
+
+            inputText: {
+
+            },
+
+            list: {
+                label: {
+
+                },
+
+                button: {
+
+                }
+            },
+
+            button: {
+
+            },
+
+            slider: {
+                track: {
+
+                },
+
+                indicator: {
+
+                },
+
+                thumb: {
+
+                }
+            },
+
+            colorInput: {
+                colorPicker: {
+
+                },
+
+                colorComponents: {
+                    inputText: {
+                        
+                    }
+                }
+            },
+
+            checkbox: {
+
+            }
+        },
+
+        separator: {
+
+        },
+
         folder: {
         },
 
         tab: {
         },
+
+        space: {
+            left: 0, right: 0, top: 0, bottom: 0, item: 0
+        }
     },
-
-
 
 
     // name: '',
@@ -111,7 +175,10 @@ var tweaker = scene.rexUI.add.tweaker({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-
+- `styles` : Styles settings of input rows, separator, folder, and tab. See [Styles chapter](ui-tweaker.md#styles) for more detail.
+    - `styles.space` : Pads spaces.
+        - `styles.space.left`, `styles.space.right`, `styles.space.top`, `styles.space.bottom` : Space of bounds.
+        - `styles.space.item` : Space between 2 input rows.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -146,7 +213,9 @@ An input row can fine-tuning properties of target object.
 `object[key]` is a text value.
 
 ```javascript
-tweaker.addInput(object, key, {
+tweaker.addInput(object, key, {    
+    // view: 'string',
+
     // icon: undefined,
     // iconFrame: undefined,
     // iconSize: undefined,
@@ -159,6 +228,30 @@ tweaker.addInput(object, key, {
 })
 ```
 
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'string',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `string`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -168,12 +261,17 @@ tweaker.addInput(object, key, {
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
+
+See [Styles of text input](ui-tweaker.md#styles-of-text-input)
+
 #### Text input from list
 
 `object[key]` is a text value.
 
 ```javascript
 tweaker.addInput(object, key, {
+    // view: 'list',
+
     // icon: undefined,
     // iconFrame: undefined,
     // iconSize: undefined,
@@ -192,6 +290,36 @@ tweaker.addInput(object, key, {
 })
 ```
 
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'list',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `list`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -204,6 +332,8 @@ tweaker.addInput(object, key, {
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
+
+See [Styles of list input](ui-tweaker.md#styles-of-list-input)
 
 #### Text input from buttons
 
@@ -231,6 +361,36 @@ tweaker.addInput(object, key, {
 })
 ```
 
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    view: 'buttons',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `buttons`.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -244,14 +404,536 @@ tweaker.addInput(object, key, {
     - `undefined` : Don't add this child. Default value.
 
 
-Style of color input is defined in `styles.inputRow.button` of config
+See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
+
+#### Number input row
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'number',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'number',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `number`, if `bindingTarget` is not given.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of text input](ui-tweaker.md#styles-of-text-input)
+
+
+
+##### Number input in a range
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'range',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    min: minValue, 
+    max: maxValue,
+
+    // format: function(value) { return s; },
+    // inputTextReadOnly: false,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'range',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    min: minValue, 
+    max: maxValue,
+
+    // format: function(value) { return s; },
+    // inputTextReadOnly: false,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `range`, if `bindingTarget` is not given.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `min`, `max` : Minimum, maximun value of range.
+- `format` : Callback to return formatted string for input text field.
+    ```javascript
+    function(value) {
+        return s;
+    }
+    ```
+- `inputTextReadOnly` :
+    - `false` : Input text field is editable. Default behavior.
+    - `true` : Input text field is read-only.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of range input](ui-tweaker.md#styles-of-range-inputut)
+
+
+#### Number input from list
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'list',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'list',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `list`, if `bindingTarget` is not given.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `options` : Option list, each item contains
+    - `text` : Display text.
+    - `value` : Set `key` to this value.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of list input](ui-tweaker.md#styles-of-list-input)
+
+
+#### Number input from buttons
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    view: 'buttons',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    view: 'buttons',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    options: [
+        {text: text0, value: value0},
+        {text: text1, value: value1},
+        // ...
+    ],
+
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `buttons`.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `options` : Option list, each item contains
+    - `text` : Display text.
+    - `value` : Set `key` to this value.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
+
+
+##### Color input
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    view: 'color',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    view: 'color',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `color`.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+See [Styles of color input](ui-tweaker.md#styles-of-color-input)
+
+
+#### Boolean input row
+
+`object[key]` is a boolean value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'boolean',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'boolean',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `boolean`, if `bindingTarget` is not given.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+See [Styles of boolean input](ui-tweaker.md#styles-of-boolean-input)
+
+
+### Add button
+
+```javascript
+tweaker.addButton({
+    // bindingTarget: object,
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    title: undefined,
+
+    label: undefined,
+
+    callback: function(target) {},
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target will pass to callback. Optional.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label.
+- `label` : Display text of button.
+- `callback` : Callback when clicking button
+    ```javascript
+    function(target) { }
+    ```
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of botton](ui-tweaker.md#styles-of-botton)
+
+
+### Add separator
+
+```javascript
+tweaker.addSeparator();
+```
+
+
+See [Styles of separator](ui-tweaker.md#styles-of-separator)
+
+
+### Add folder
+
+Folder contains collapsible child tweaker game object.
+
+```javascript
+var childTweaker = tweaker.addFolder({
+    title: titleA,
+
+    // expanded: true,
+});
+
+// childTweaker.addInput(...)
+```
+
+- `childTweaker` : Child tweaker game object. Add input rows by `addInput` method.
+- `title` Title of folder. Click title can collapse or expand child tweaker game object.
+- `expanded` : 
+    - `true` : Expand child tweaker game object at beginning. Default behavior.
+    - `false` : Collapse child tweaker game object at beginning.
+
+
+See [Styles of folder](ui-tweaker.md#styles-of-folder)
+
+
+### Add tab
+
+Tab containes pages. Each page is a tweaker game object.
+
+```javascript
+var childrenTweakers = tweaker.addTab({
+    pages: [
+        {
+            title: titleA, 
+            // show: false
+        },
+        {
+            title: titleB
+            // show: false
+        },
+        // ...
+    ]
+});
+
+// childrenTweakers[0].addInput(...)
+// childrenTweakers[1].addInput(...)
+```
+
+- `childrenTweakers` : Array of children tweaker game object. Add input rows by `addInput` method.
+- `pages` : Array of page setting.
+    ```javascript
+    {
+        title: titleA,
+        show: false,
+    }
+    ```
+    - `title` : Display text of page title
+    - `show` : Set to `true` to show this page at beginning
+
+
+See [Styles of tab](ui-tweaker.md#styles-of-tab)
+
+
+### Styles
+
+#### Styles of text input 
+
+Style of text/number input is defined in 
+
+- `styles.inputRow.title`
+- `styles.inputRow.inputText` 
+- `styles.inputRow.background`
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
 
-            button: {
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
                 background: {
                     radius: 0,
                     // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
@@ -262,7 +944,7 @@ Style of color input is defined in `styles.inputRow.button` of config
                     strokeAlpha: undefined,
                     strokeWidth: undefined,
                 },
-
+    
                 text: {
                     fontFamily: 'Courier',
                     fontSize: '16px',
@@ -295,130 +977,67 @@ Style of color input is defined in `styles.inputRow.button` of config
                     left: 0, right: 0, top: 0, bottom:0, 
                     icon: 0, text: 0
                 }
-            }
+            },
 
-        }
-    }
-}
-```
+            inputText: {
+                background: {
+                    color: null,
+                    color2: null,
+                    horizontalGradient: true,
 
+                    stroke: null,
+                    strokeThickness: 2,
 
-#### Number input row
+                    cornerRadius: 0,
+                    cornerIteration: null
+                },
+                focusStyle: {
+                    // color:
+                    // color2:
+                    // horizontalGradient:
 
-`object[key]` is a number value.
+                    // stroke:
+                    // strokeThickness:
 
-```javascript
-tweaker.addInput(object, key, {
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-    
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-##### Number input in a range
-
-`object[key]` is a number value.
-
-```javascript
-tweaker.addInput(object, key, {
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-
-    min: minValue, 
-    max: maxValue,
-
-    // format: function(value) { return s; },
-    // inputTextReadOnly: false,
-    
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `min`, `max` : Minimum, maximun value of range.
-- `format` : Callback to return formatted string for input text field.
-    ```javascript
-    function(value) {
-        return s;
-    }
-    ```
-- `inputTextReadOnly` :
-    - `false` : Input text field is editable. Default behavior.
-    - `true` : Input text field is read-only.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-Style of range input is defined in `styles.inputRow.slider` of config
-
-```javascript
-{
-    styles: {
-        inputRow: {
-            slider: {
-                track: {
-                    height: 0,
-
-                    radius: 0,
-                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-
-                    color: undefined,
-                    alpha: undefined,
-                    strokeColor: undefined,
-                    strokeAlpha: undefined,
-                    strokeWidth: undefined,
+                    // cornerRadius:
+                    // cornerIteration:
                 },
 
-                indicator: {
-                    height: 0,
-
-                    radius: 0,
-                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-
-                    color: undefined,
-                    alpha: undefined,
-                    strokeColor: undefined,
-                    strokeAlpha: undefined,
-                    strokeWidth: undefined,
+                style: {
+                    bold: false,
+                    italic: false,
+                    fontSize: '16px',
+                    fontFamily: 'Courier',
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadowColor: null,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 0,
+                    backgroundColor: null,
+                    backgroundHeight: undefined,
+                    backgroundBottomY: undefined,
+                    offsetX: 0,
+                    offsetY: 0
                 },
-
-                thumb: {
-                    width: 0, height: 0,
-
-                    radius: 0,
-                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-
-                    color: undefined,
-                    alpha: undefined,
-                    strokeColor: undefined,
-                    strokeAlpha: undefined,
-                    strokeWidth: undefined,
+                cursorStyle: {
+                    // bold:
+                    // italic:
+                    // fontSize:
+                    // fontFamily:
+                    // color:
+                    // stroke:
+                    // strokeThickness:
+                    // shadowColor:
+                    // shadowOffsetX:
+                    // shadowOffsetY:
+                    // shadowBlur:
+                    // backgroundColor:
+                    // backgroundHeight:
+                    // backgroundBottomY:
+                    // offsetX:
+                    // offsetY:
                 }
             }
         }
@@ -427,49 +1046,75 @@ Style of range input is defined in `styles.inputRow.slider` of config
 ```
 
 
-#### Number input from list
+#### Styles of list input 
 
-`object[key]` is a number value.
+Style of text/number list input is defined in 
 
-```javascript
-tweaker.addInput(object, key, {
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-
-    options: [
-        {text: text0, value: value0},
-        {text: text1, value: value1},
-        // ...
-    ],
-    
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `options` : Option list, each item contains
-    - `text` : Display text.
-    - `value` : Set `key` to this value.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-Style of list input is defined in `styles.inputRow.list` of config
+- `styles.inputRow.title`
+- `styles.inputRow.list` 
+- `styles.inputRow.background`
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
+
             list: {
                 label: {
                     background: {
@@ -570,57 +1215,82 @@ Style of list input is defined in `styles.inputRow.list` of config
                     }
                 }
             }
+
         }
     }
 }
 ```
 
 
-#### Number input from buttons
+#### Styles of buttons input
 
-`object[key]` is a number value.
+Style of buttons input is defined in 
 
-```javascript
-tweaker.addInput(object, key, {
-    view: 'buttons',
+- `styles.inputRow.title`
+- `styles.inputRow.button` 
+- `styles.inputRow.background`
 
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-
-    options: [
-        {text: text0, value: value0},
-        {text: text1, value: value1},
-        // ...
-    ],
-
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `options` : Option list, each item contains
-    - `text` : Display text.
-    - `value` : Set `key` to this value.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-Style of color input is defined in `styles.inputRow.button` of config
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
 
             button: {
                 background: {
@@ -674,42 +1344,316 @@ Style of color input is defined in `styles.inputRow.button` of config
 ```
 
 
-##### Color input
+#### Styles of range input
 
-`object[key]` is a number value.
+Style of range input is defined in 
 
-```javascript
-tweaker.addInput(object, key, {
-    view: 'color',
-
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-    
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-Style of color input is defined in `styles.inputRow.colorInput` of config
+- `styles.inputRow.title`, 
+- `styles.inputRow.slider`
+- `styles.inputRow.inputText` 
+- `styles.inputRow.background`
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
+
+            slider: {
+                track: {
+                    height: 0,
+
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                indicator: {
+                    height: 0,
+
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                thumb: {
+                    width: 0, height: 0,
+
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                }
+            }
+
+            inputText: {
+                background: {
+                    color: null,
+                    color2: null,
+                    horizontalGradient: true,
+
+                    stroke: null,
+                    strokeThickness: 2,
+
+                    cornerRadius: 0,
+                    cornerIteration: null
+                },
+                focusStyle: {
+                    // color:
+                    // color2:
+                    // horizontalGradient:
+
+                    // stroke:
+                    // strokeThickness:
+
+                    // cornerRadius:
+                    // cornerIteration:
+                },
+
+                style: {
+                    bold: false,
+                    italic: false,
+                    fontSize: '16px',
+                    fontFamily: 'Courier',
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadowColor: null,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 0,
+                    backgroundColor: null,
+                    backgroundHeight: undefined,
+                    backgroundBottomY: undefined,
+                    offsetX: 0,
+                    offsetY: 0
+                },
+                cursorStyle: {
+                    // bold:
+                    // italic:
+                    // fontSize:
+                    // fontFamily:
+                    // color:
+                    // stroke:
+                    // strokeThickness:
+                    // shadowColor:
+                    // shadowOffsetX:
+                    // shadowOffsetY:
+                    // shadowBlur:
+                    // backgroundColor:
+                    // backgroundHeight:
+                    // backgroundBottomY:
+                    // offsetX:
+                    // offsetY:
+                }
+            }
+
+        }
+    }
+}
+```
+
+
+#### Styles of color input
+
+Style of color input is defined in 
+
+- `styles.inputRow.title`, 
+- `styles.inputRow.inputText` 
+- `styles.inputRow.colorInput`
+- `styles.inputRow.background`
+
+```javascript
+{
+    styles: {
+        inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
+
+            inputText: {
+                background: {
+                    color: null,
+                    color2: null,
+                    horizontalGradient: true,
+
+                    stroke: null,
+                    strokeThickness: 2,
+
+                    cornerRadius: 0,
+                    cornerIteration: null
+                },
+                focusStyle: {
+                    // color:
+                    // color2:
+                    // horizontalGradient:
+
+                    // stroke:
+                    // strokeThickness:
+
+                    // cornerRadius:
+                    // cornerIteration:
+                },
+
+                style: {
+                    bold: false,
+                    italic: false,
+                    fontSize: '16px',
+                    fontFamily: 'Courier',
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadowColor: null,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 0,
+                    backgroundColor: null,
+                    backgroundHeight: undefined,
+                    backgroundBottomY: undefined,
+                    offsetX: 0,
+                    offsetY: 0
+                },
+                cursorStyle: {
+                    // bold:
+                    // italic:
+                    // fontSize:
+                    // fontFamily:
+                    // color:
+                    // stroke:
+                    // strokeThickness:
+                    // shadowColor:
+                    // shadowOffsetX:
+                    // shadowOffsetY:
+                    // shadowBlur:
+                    // backgroundColor:
+                    // backgroundHeight:
+                    // backgroundBottomY:
+                    // offsetX:
+                    // offsetY:
+                }
+            },
 
             colorInput: {
                 colorPicker: {
@@ -789,6 +1733,7 @@ Style of color input is defined in `styles.inputRow.colorInput` of config
 
                     }
                 }
+
             }
         }
     }
@@ -796,40 +1741,75 @@ Style of color input is defined in `styles.inputRow.colorInput` of config
 ```
 
 
-#### Boolean input row
-
-`object[key]` is a boolean value.
-
-```javascript
-tweaker.addInput(object, key, {
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
-
-    // title: undefined,
-    
-    // monitor: false,
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label. Default value is equal to `key`.
-- `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
-    - `true` : Update input text from current object, in `postupdate` event of scene.
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
+#### Styles of boolean input
 
 
-Style of boolean input is defined in `styles.inputRow.checkbox` of config
+Style of boolean input is defined in 
+
+- `styles.inputRow.title`, 
+- `styles.inputRow.checkbox`
+- `styles.inputRow.background`
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
 
             checkbox: {
                 color: 0x005cb2,
@@ -857,42 +1837,74 @@ Style of boolean input is defined in `styles.inputRow.checkbox` of config
 }
 ```
 
-### Add button
+#### Styles of botton
 
-```javascript
-tweaker.addButton({
-    // icon: undefined,
-    // iconFrame: undefined,
-    // iconSize: undefined,
+Style of button is defined in 
 
-    title: undefined,
-
-    label: undefined,
-
-    callback: function() {},
-
-    // key: undefined,
-})
-```
-
-- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
-- `iconSize` : Fixed icon size
-- `title` : Display text of title-label.
-- `label` : Display text of button.
-- `callback` : Callback when clicking button
-    ```javascript
-    function() { }
-    ```
-- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
-
-
-Style of button is defined in `styles.inputRow.button` of config
+- `styles.inputRow.title`, 
+- `styles.inputRow.button`
+- `styles.inputRow.background`
 
 ```javascript
 {
     styles: {
         inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
 
             button: {
                 background: {
@@ -939,19 +1951,17 @@ Style of button is defined in `styles.inputRow.button` of config
                     icon: 0, text: 0
                 }
             }
-
         }
     }
 }
 ```
 
-### Add separator
 
-```javascript
-tweaker.addSeparator();
-```
+#### Styles of separator
 
-Style of separator is defined in `styles.separator` of config
+Style of separator is defined in 
+
+- `styles.separator`
 
 ```javascript
 {
@@ -973,28 +1983,11 @@ Style of separator is defined in `styles.separator` of config
 ```
 
 
-### Add folder
+#### Styles of folder
 
-Folder contains collapsible child tweaker game object.
+Style of folder is defined in 
 
-```javascript
-var childTweaker = tweaker.addFolder({
-    title: titleA,
-
-    // expanded: true,
-});
-
-// childTweaker.addInput(...)
-```
-
-- `childTweaker` : Child tweaker game object. Add input rows by `addInput` method.
-- `title` Title of folder. Click title can collapse or expand child tweaker game object.
-- `expanded` : 
-    - `true` : Expand child tweaker game object at beginning. Default behavior.
-    - `false` : Collapse child tweaker game object at beginning.
-
-
-Style of folder is defined in `styles.folder` of config
+- `styles.folder`
 
 ```javascript
 {
@@ -1066,42 +2059,11 @@ Style of folder is defined in `styles.folder` of config
 ```
 
 
-### Add tab
+#### Styles of tab
 
-Tab containes pages. Each page is a tweaker game object.
+Style of tab is defined in 
 
-```javascript
-var childrenTweakers = tweaker.addTab({
-    pages: [
-        {
-            title: titleA, 
-            // show: false
-        },
-        {
-            title: titleB
-            // show: false
-        },
-        // ...
-    ]
-});
-
-// childrenTweakers[0].addInput(...)
-// childrenTweakers[1].addInput(...)
-```
-
-- `childrenTweakers` : Array of children tweaker game object. Add input rows by `addInput` method.
-- `pages` : Array of page setting.
-    ```javascript
-    {
-        title: titleA,
-        show: false,
-    }
-    ```
-    - `title` : Display text of page title
-    - `show` : Set to `true` to show this page at beginning
-
-
-Style of tab is defined in `styles.tab` of config
+- `styles.tab`
 
 ```javascript
 {
@@ -1177,6 +2139,15 @@ Style of tab is defined in `styles.tab` of config
 ```
 
 
+### Bind target
+
+All input rows will bind to this new target, and update display status.
+
+```javascript
+tweaker.setBindingTarget(object);
+```
+
+
 ### Get element
 
 - Get by name
@@ -1195,4 +2166,3 @@ Style of tab is defined in `styles.tab` of config
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 
-### Events

@@ -208,6 +208,7 @@
 1. [UI/text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
 1. [UI/title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
 1. [UI/toast](ui-toast.md): Show text message for a short while.
+1. [UI/tweaker](ui-tweaker.md): Fine-tuning properties of target object.
 1. [Unique item list](uniqueitemlist.md): List of unique items. Support array and set methods.
 1. [Viewport-coordinate](viewport-coordinate.md): Attach `vpx`, `vpy` properties to a game object, to set position according to proportion of viewport.
 1. [Virtual joystick](virtualjoystick.md): Simulate cursor keys according to touch events.

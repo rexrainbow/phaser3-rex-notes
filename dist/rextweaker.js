@@ -13141,8 +13141,6 @@
   var ButtonsType = 'buttons';
   var BooleanType = 'boolean';
   var ColorType = 'color';
-  var Pointer2dType = 'pointer2d';
-  var Pointer3dType = 'pointer3d';
 
   var GetInputType = function GetInputType(value, config) {
     // Force input type to view
@@ -13162,16 +13160,18 @@
         return StringType;
       case 'boolean':
         return BooleanType;
-      case 'object':
-        if (HasProperties(value, 'r', 'g', 'b')) {
-          return ColorType;
-        }
-        if (HasProperties(value, 'x', 'y', 'z')) {
-          return Pointer3dType;
-        }
-        if (HasProperties(value, 'x', 'y')) {
-          return Pointer2dType;
-        }
+
+      // case 'object':
+      //     if (HasProperties(value, 'r', 'g', 'b')) {
+      //         return ColorType;
+      //     }
+      //     if (HasProperties(value, 'x', 'y', 'z')) {
+      //         return Pointer3dType;
+      //     }
+      //     if (HasProperties(value, 'x', 'y')) {
+      //         return Pointer2dType;
+      //     }
+
       default:
         return StringType;
     }

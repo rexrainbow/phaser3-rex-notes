@@ -112,6 +112,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 1. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
 1. [Toast](ui-toast.md): Show text message for a short while.
+1. [Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
 
 !!! note "Scroll-able table"
     There are 3 kinds of scroll-able tables :
