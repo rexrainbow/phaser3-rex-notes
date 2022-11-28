@@ -281,7 +281,7 @@ var colorComponents = scene.rexUI.add.colorComponents({
             space: {left: 0, right: 0, top: 0, bottom: 0}
         }
         ```
-        - `formatLable.background` : Parameters to create [round rectangle](shape-roundrectangle.me) game object.
+        - `formatLable.background` : Parameters to create [round rectangle](shape-roundrectangle.md) game object.
         - `formatLable.text` : Text style to create [text.md] game object.
         - `formatLabel.space` : Padding space around format label.    
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)

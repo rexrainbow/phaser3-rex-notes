@@ -168,7 +168,7 @@ var colorInput = scene.rexUI.add.colorInput({
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)
 - `colorPicker` : Configuration of a drop-down [color picker](ui-colorpicker.md), triggered by clicking swatch.
     - `colorPicker.width`, `colorPicker.height` : Sizer of color picker. Default value is `180`x`170`
-    - `colorPicker.background` : Parameters to create [round rectangle](shape-roundrectangle.me) game object, optional.
+    - `colorPicker.background` : Parameters to create [round rectangle](shape-roundrectangle.md) game object, optional.
     - `colorPicker.createBackgroundCallback` : Callback to create background game object, optional.
         ```javascript
         function(scene) {
