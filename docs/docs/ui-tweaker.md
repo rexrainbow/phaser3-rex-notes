@@ -465,7 +465,7 @@ See [Styles of text input](ui-tweaker.md#styles-of-text-input)
 
 
 
-##### Number input in a range
+#### Number input in a range
 
 `object[key]` is a number value.
 
@@ -688,7 +688,7 @@ tweaker.addInput({
 See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
 
 
-##### Color input
+#### Color input
 
 `object[key]` is a number value.
 
