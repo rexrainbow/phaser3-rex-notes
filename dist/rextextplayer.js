@@ -7198,22 +7198,19 @@
 
       // Brackets and generate regex
       var delimiters = GetValue$d(config, 'delimiters', '<>');
-      var tagExpression = GetValue$d(config, 'regex.tag');
-      if (tagExpression === undefined) {
-        tagExpression = "[^=".concat(EscapeString(delimiters[0])).concat(EscapeString(delimiters[1]), "]+");
-        // console.log(tagExpression)
-      }
+      var delimiterLeft = delimiters[0];
+      var delimiterRight = delimiters[1];
+      var defaultExpression = "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
+      var tagExpression = GetValue$d(config, 'regex.tag', defaultExpression);
+      // console.log(tagExpression)
 
-      var valueExpression = GetValue$d(config, 'regex.value');
-      if (valueExpression === undefined) {
-        valueExpression = "[^=".concat(EscapeString(delimiters[0])).concat(EscapeString(delimiters[1]), "]+");
-        // console.log(valueExpression)
-      }
+      var valueExpression = GetValue$d(config, 'regex.value', defaultExpression);
+      // console.log(valueExpression)
 
       // Parameters for regex
       this.setTagExpression(tagExpression);
       this.setValueExpression(valueExpression);
-      this.setDelimiters(delimiters[0], delimiters[1]);
+      this.setDelimiters(delimiterLeft, delimiterRight);
       // Value convert
       this.setValueConverter(GetValue$d(config, 'valueConvert', true));
       // Loop
@@ -7494,9 +7491,6 @@
   }();
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
-  };
-  var EscapeString = function EscapeString(s) {
-    return s.replaceAll('[', '\\[').replaceAll(']', '\\]');
   };
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 

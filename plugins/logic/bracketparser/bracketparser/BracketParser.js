@@ -11,23 +11,20 @@ class BracketParser {
 
         // Brackets and generate regex
         var delimiters = GetValue(config, 'delimiters', '<>');
+        var delimiterLeft = delimiters[0];
+        var delimiterRight = delimiters[1];
+        var defaultExpression = `[^=${EscapeRegex(delimiterLeft)}${EscapeRegex(delimiterRight)}]+`;
 
-        var tagExpression = GetValue(config, 'regex.tag');
-        if (tagExpression === undefined) {
-            tagExpression = `[^=${EscapeString(delimiters[0])}${EscapeString(delimiters[1])}]+`;
-            // console.log(tagExpression)
-        }
+        var tagExpression = GetValue(config, 'regex.tag', defaultExpression);
+        // console.log(tagExpression)
 
-        var valueExpression = GetValue(config, 'regex.value');
-        if (valueExpression === undefined) {
-            valueExpression = `[^=${EscapeString(delimiters[0])}${EscapeString(delimiters[1])}]+`;
-            // console.log(valueExpression)
-        }
+        var valueExpression = GetValue(config, 'regex.value', defaultExpression);
+        // console.log(valueExpression)
 
         // Parameters for regex
         this.setTagExpression(tagExpression);
         this.setValueExpression(valueExpression);
-        this.setDelimiters(delimiters[0], delimiters[1]);
+        this.setDelimiters(delimiterLeft, delimiterRight);
         // Value convert
         this.setValueConverter(GetValue(config, 'valueConvert', true));
         // Loop
@@ -303,10 +300,6 @@ class BracketParser {
 }
 
 const BypassValueConverter = function (s) { return s; }
-
-const EscapeString = function (s) {
-    return s.replaceAll('[', '\\[').replaceAll(']', '\\]');
-}
 
 Object.assign(
     BracketParser.prototype,
