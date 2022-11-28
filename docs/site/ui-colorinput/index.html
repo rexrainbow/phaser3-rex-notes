@@ -7980,6 +7980,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-tweaker/" class="md-nav__link">
+        Tweaker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-chart/" class="md-nav__link">
         Chart
       </a>
@@ -8954,17 +8968,19 @@
         <span class="c1">//     return gameObject;</span>
         <span class="c1">// }</span>
 
-        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span> <span class="nx">left</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
+        <span class="c1">// hPalettePosition: &#39;bottom&#39;,</span>
+
+        <span class="c1">// space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }</span>
     <span class="p">},</span>
 
     <span class="nx">colorComponents</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="c1">// height: undefined,</span>
 
-        <span class="nx">formatLabel</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="c1">// formatLabel: undefined,</span>
 
-        <span class="nx">inputText</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="c1">// inputText: undefined,</span>
 
-        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
+        <span class="c1">// space: { item: 8 }</span>
     <span class="p">},</span>
 
     <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">colorInput</span><span class="p">)</span> <span class="p">{</span>
@@ -9032,9 +9048,17 @@
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>colorPicker.hPalettePosition</code> : Position of h-palette.<ul>
+<li><code>'bottom'</code> or <code>0</code> : Place h-palette at bottom side of sv-palette.</li>
+<li><code>'left'</code> or <code>1</code> : Place h-palette at left side of sv-palette.</li>
+<li><code>'top'</code> or <code>2</code> : Place h-palette at top side of sv-palette.</li>
+<li><code>'right'</code> or <code>3</code> : Place h-palette at right side of sv-palette.</li>
+</ul>
+</li>
 <li><code>colorPicker.space</code> : Padding space around color picker. Default value is
     <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">left</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
 </code></pre></div></li>
+<li><code>false</code> : No color picker.</li>
 </ul>
 </li>
 <li><code>colorComponents</code> : Configuration of <a href="../ui-colorcomponents/">color components</a> inside the drop down color picker.<ul>
@@ -9060,6 +9084,7 @@
 <li><code>colorComponents.space</code> : Padding space around color components. Default value is
     <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
 </code></pre></div></li>
+<li><code>false</code> : No color components.</li>
 </ul>
 </li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>

@@ -8,6 +8,7 @@ Fine-tuning properties of target object.
 ## Live demos
 
 - [Tweaker](https://codepen.io/rexrainbow/pen/YzvPOGM)
+- [Bind target](https://codepen.io/rexrainbow/pen/vYraBBY)
 
 ## Usage
 
