@@ -102,19 +102,19 @@ var colorInput = scene.rexUI.add.colorInput({
         //     return gameObject;
         // }
 
-        hPalettePosition: 'bottom',
+        // hPalettePosition: 'bottom',
 
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
+        // space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
     },
 
     colorComponents: {
-        height: undefined,
+        // height: undefined,
         
-        formatLabel: undefined,
+        // formatLabel: undefined,
 
-        inputText: undefined,
+        // inputText: undefined,
 
-        space: { item: 8 }
+        // space: { item: 8 }
     },
 
     valuechangeCallback: function(newValue, oldValue, colorInput) {

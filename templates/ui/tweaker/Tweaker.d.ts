@@ -133,6 +133,8 @@ declare namespace Tweaker {
         view?: 'string' | 'number' | 'range' | 'list' | 'buttons' | 'boolean' | 'color',
 
         icon?: string,
+        iconFrame?: string,
+        iconSize?: number,
 
         title?: string,
 
