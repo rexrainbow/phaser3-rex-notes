@@ -270,7 +270,7 @@ Tag format in
 
 - [bracket-parser](bracketparser.md): 
     ```
-    <TAG=value0,value1,value2>
+    <TAG=value0,value1>
     ```
     - Carried parameters is an array, more compactly.
 - [bracket-parser2](bracketparser2.md): 
