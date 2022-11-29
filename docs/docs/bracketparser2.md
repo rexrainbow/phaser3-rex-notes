@@ -7,7 +7,7 @@ A lite-weight delimiter parser.
 
 ## Live demoes
 
-- [Basic](https://codepen.io/rexrainbow/pen/bGwYNoX)
+- [Basic](https://codepen.io/rexrainbow/pen/RwJByMd)
 
 ## Usage
 

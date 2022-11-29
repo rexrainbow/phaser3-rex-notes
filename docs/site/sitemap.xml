@@ -211,6 +211,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/bracketparser2/</loc>
+         <lastmod>2022-11-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/buffdata/</loc>
          <lastmod>2022-11-29</lastmod>
          <changefreq>daily</changefreq>
