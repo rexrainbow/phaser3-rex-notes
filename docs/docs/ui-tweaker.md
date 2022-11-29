@@ -909,6 +909,17 @@ var childrenTweakers = tweaker.addTab({
 See [Styles of tab](ui-tweaker.md#styles-of-tab)
 
 
+### Layout children
+
+Arrange position of all elements.
+
+```javascript
+tweaker.layout();
+```
+
+See also - [dirty](ui-basesizer.md#dirty)
+
+
 ### Styles
 
 #### Styles of text input 

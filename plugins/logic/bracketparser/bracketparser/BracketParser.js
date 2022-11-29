@@ -1,6 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import TokenExpressionMethods from './TokenExpressionMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
@@ -9,22 +9,12 @@ class BracketParser {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        // Parameters for regex
+        this.setTagExpression(GetValue(config, 'regex.tag', undefined));
+        this.setValueExpression(GetValue(config, 'regex.value', undefined));
         // Brackets and generate regex
         var delimiters = GetValue(config, 'delimiters', '<>');
-        var delimiterLeft = delimiters[0];
-        var delimiterRight = delimiters[1];
-        var defaultExpression = `[^=${EscapeRegex(delimiterLeft)}${EscapeRegex(delimiterRight)}]+`;
-
-        var tagExpression = GetValue(config, 'regex.tag', defaultExpression);
-        // console.log(tagExpression)
-
-        var valueExpression = GetValue(config, 'regex.value', defaultExpression);
-        // console.log(valueExpression)
-
-        // Parameters for regex
-        this.setTagExpression(tagExpression);
-        this.setValueExpression(valueExpression);
-        this.setDelimiters(delimiterLeft, delimiterRight);
+        this.setDelimiters(delimiters[0], delimiters[1]);
         // Value convert
         this.setValueConverter(GetValue(config, 'valueConvert', true));
         // Loop
@@ -47,16 +37,6 @@ class BracketParser {
         this.shutdown();
     }
 
-    setTagExpression(express) {
-        this.tagExpression = express;
-        return this;
-    }
-
-    setValueExpression(express) {
-        this.valueExpression = express;
-        return this;
-    }
-
     setValueConverter(converter) {
         if (converter === true) {
             converter = DefaultValueConverter;
@@ -64,25 +44,6 @@ class BracketParser {
             converter = BypassValueConverter;
         }
         this.valueConverter = converter;
-        return this;
-    }
-
-    setDelimiters(delimiterLeft, delimiterRight) {
-        if (delimiterRight === undefined) {
-            delimiterRight = delimiterLeft[1];
-            delimiterLeft = delimiterLeft[0];
-        }
-        this.delimiterLeft = delimiterLeft;
-        this.delimiterRight = delimiterRight;
-
-        delimiterLeft = EscapeRegex(delimiterLeft);
-        delimiterRight = EscapeRegex(delimiterRight);
-        var tagOn = `${delimiterLeft}(${this.tagExpression})(=(${this.valueExpression}))?${delimiterRight}`;
-        var tagOff = `${delimiterLeft}\/(${this.tagExpression})${delimiterRight}`;
-
-        this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp(`${tagOn}|${tagOff}`, 'gi');
         return this;
     }
 
@@ -281,29 +242,14 @@ class BracketParser {
         this.emit('resume', this);
     }
 
-    getTagOnRegString(tagExpression, valueExpression) {
-        if (tagExpression === undefined) {
-            tagExpression = this.tagExpression;
-        }
-        if (valueExpression === undefined) {
-            valueExpression = this.valueExpression;
-        }
-        return `${EscapeRegex(this.delimiterLeft)}(${tagExpression})(=(${valueExpression}))?${EscapeRegex(this.delimiterRight)}`;
-    }
-
-    getTagOffRegString(tagExpression) {
-        if (tagExpression === undefined) {
-            tagExpression = this.tagExpression;
-        }
-        return `${EscapeRegex(this.delimiterLeft)}\/(${tagExpression})${EscapeRegex(this.delimiterRight)}`;
-    }
 }
 
 const BypassValueConverter = function (s) { return s; }
 
 Object.assign(
     BracketParser.prototype,
-    EventEmitterMethods
+    EventEmitterMethods,
+    TokenExpressionMethods
 );
 
 export default BracketParser;

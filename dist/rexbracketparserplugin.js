@@ -201,6 +201,67 @@
     }
   };
 
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var GetDefaultValueExpression = function GetDefaultValueExpression(delimiterLeft, delimiterRight) {
+    return "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
+  };
+  var TokenExpressionMethods = {
+    setTagExpression: function setTagExpression(express) {
+      this.isDefaultTagExpression = !express;
+      this.tagExpression = express;
+      return this;
+    },
+    setValueExpression: function setValueExpression(express) {
+      this.isDefaultValueExpression = !express;
+      this.valueExpression = express;
+      return this;
+    },
+    setDelimiters: function setDelimiters(delimiterLeft, delimiterRight) {
+      if (delimiterRight === undefined) {
+        delimiterRight = delimiterLeft[1];
+        delimiterLeft = delimiterLeft[0];
+      }
+      this.delimiterLeft = delimiterLeft;
+      this.delimiterRight = delimiterRight;
+      if (this.isDefaultTagExpression) {
+        this.tagExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+      }
+      if (this.isDefaultValueExpression) {
+        this.valueExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+      }
+      delimiterLeft = EscapeRegex(delimiterLeft);
+      delimiterRight = EscapeRegex(delimiterRight);
+      var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
+      var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
+      this.reTagOn = RegExp(tagOn, 'i');
+      this.reTagOff = RegExp(tagOff, 'i');
+      this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
+      return this;
+    },
+    getTagOnRegString: function getTagOnRegString(tagExpression, valueExpression) {
+      if (tagExpression === undefined) {
+        tagExpression = this.tagExpression;
+      }
+      if (valueExpression === undefined) {
+        valueExpression = this.valueExpression;
+      }
+      return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
+    },
+    getTagOffRegString: function getTagOffRegString(tagExpression) {
+      if (tagExpression === undefined) {
+        tagExpression = this.tagExpression;
+      }
+      return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
+    }
+  };
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -251,14 +312,6 @@
     }
   };
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
   var TypeConvert = function TypeConvert(s) {
@@ -298,21 +351,12 @@
       // Event emitter
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+      // Parameters for regex
+      this.setTagExpression(GetValue(config, 'regex.tag', undefined));
+      this.setValueExpression(GetValue(config, 'regex.value', undefined));
       // Brackets and generate regex
       var delimiters = GetValue(config, 'delimiters', '<>');
-      var delimiterLeft = delimiters[0];
-      var delimiterRight = delimiters[1];
-      var defaultExpression = "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
-      var tagExpression = GetValue(config, 'regex.tag', defaultExpression);
-      // console.log(tagExpression)
-
-      var valueExpression = GetValue(config, 'regex.value', defaultExpression);
-      // console.log(valueExpression)
-
-      // Parameters for regex
-      this.setTagExpression(tagExpression);
-      this.setValueExpression(valueExpression);
-      this.setDelimiters(delimiterLeft, delimiterRight);
+      this.setDelimiters(delimiters[0], delimiters[1]);
       // Value convert
       this.setValueConverter(GetValue(config, 'valueConvert', true));
       // Loop
@@ -336,18 +380,6 @@
         this.shutdown();
       }
     }, {
-      key: "setTagExpression",
-      value: function setTagExpression(express) {
-        this.tagExpression = express;
-        return this;
-      }
-    }, {
-      key: "setValueExpression",
-      value: function setValueExpression(express) {
-        this.valueExpression = express;
-        return this;
-      }
-    }, {
       key: "setValueConverter",
       value: function setValueConverter(converter) {
         if (converter === true) {
@@ -356,24 +388,6 @@
           converter = BypassValueConverter;
         }
         this.valueConverter = converter;
-        return this;
-      }
-    }, {
-      key: "setDelimiters",
-      value: function setDelimiters(delimiterLeft, delimiterRight) {
-        if (delimiterRight === undefined) {
-          delimiterRight = delimiterLeft[1];
-          delimiterLeft = delimiterLeft[0];
-        }
-        this.delimiterLeft = delimiterLeft;
-        this.delimiterRight = delimiterRight;
-        delimiterLeft = EscapeRegex(delimiterLeft);
-        delimiterRight = EscapeRegex(delimiterRight);
-        var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
-        var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
-        this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
         return this;
       }
     }, {
@@ -569,32 +583,13 @@
         this.isPaused = false;
         this.emit('resume', this);
       }
-    }, {
-      key: "getTagOnRegString",
-      value: function getTagOnRegString(tagExpression, valueExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-        if (valueExpression === undefined) {
-          valueExpression = this.valueExpression;
-        }
-        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
-      }
-    }, {
-      key: "getTagOffRegString",
-      value: function getTagOffRegString(tagExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
-      }
     }]);
     return BracketParser;
   }();
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
   };
-  Object.assign(BracketParser.prototype, EventEmitterMethods);
+  Object.assign(BracketParser.prototype, EventEmitterMethods, TokenExpressionMethods);
 
   var BracketParserPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BracketParserPlugin, _Phaser$Plugins$BaseP);
