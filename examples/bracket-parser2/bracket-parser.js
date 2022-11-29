@@ -16,10 +16,11 @@ class Demo extends Phaser.Scene {
         var source = `\
 [[
     fn0 
-    p0=0 
-    p1=abc
-    p2="def ghi"
-    p3=false
+    p0 = 0 
+    p1 = abc
+    p2 = "def ghi"
+    p3 = false
+    p4 = [1,2,3]    
 ]]
 Phaser
 

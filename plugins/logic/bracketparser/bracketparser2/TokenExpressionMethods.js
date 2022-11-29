@@ -1,6 +1,15 @@
 import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 import ParseValue from './ParseValue.js';
 
+var CreateQuotesExpression = function (leftQuote, rightQuote) {
+    if (rightQuote === undefined) {
+        rightQuote = leftQuote;
+    }
+    leftQuote = EscapeRegex(leftQuote);
+    rightQuote = EscapeRegex(rightQuote);
+    return `${leftQuote}[^${leftQuote}${rightQuote}]+${rightQuote}`
+}
+
 export default {
     setDelimiters(delimiterLeft, delimiterRight) {
         if (delimiterRight === undefined) {
@@ -14,15 +23,16 @@ export default {
         delimiterRight = EscapeRegex(delimiterRight);
 
         var varName = `[^ =\n]+`;  // Any character except space ,'=', and '\n'
-        var varStringValue = `'[^']+'|"[^"]+"`;
-        var varValue = `${varStringValue}|${varName}`;  // Any character except '='
+        var varStringValue = `${CreateQuotesExpression('"')}|${CreateQuotesExpression("'")}`;
+        var varArrayValue = CreateQuotesExpression('[', ']');
+        var varDictionaryValue = CreateQuotesExpression('{', '}');
+        var varValue = `${varStringValue}|${varArrayValue}|${varDictionaryValue}|${varName}`;  // Any character except '='
         var escapeSpace = `[ \n]*`;
 
         this.reCmdName = RegExp(`${escapeSpace}(${varName})${escapeSpace}`, 'i');
         this.reValuePair = RegExp(`(${varName})${escapeSpace}=${escapeSpace}(${varValue})${escapeSpace}`, 'gi');
 
-        var commandString = `[^${delimiterLeft}${delimiterRight}]+`;  // Any character except delimiter
-        this.reSplit = RegExp(`${delimiterLeft}(${commandString})${delimiterRight}`, 'gi');
+        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, 'gs');
         return this;
     },
 
