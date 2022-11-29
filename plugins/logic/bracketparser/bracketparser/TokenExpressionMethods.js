@@ -1,6 +1,6 @@
 import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 
-var GetDefaultValueExpression = function (delimiterLeft, delimiterRight) {
+var GetDefaultTokenExpression = function (delimiterLeft, delimiterRight) {
     return `[^=${EscapeRegex(delimiterLeft)}${EscapeRegex(delimiterRight)}]+`;
 }
 
@@ -26,11 +26,11 @@ export default {
         this.delimiterRight = delimiterRight;
 
         if (this.isDefaultTagExpression) {
-            this.tagExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+            this.tagExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
         }
 
         if (this.isDefaultValueExpression) {
-            this.valueExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+            this.valueExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
         }
 
         delimiterLeft = EscapeRegex(delimiterLeft);
