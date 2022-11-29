@@ -21,7 +21,8 @@ class BracketParser {
         this.isPaused = false;
         this.skipEventFlag = false;
         this.justCompleted = false;
-        this.lastTag = null;
+        this.lastTagStart = null;
+        this.lastTagEnd = null;
         this.lastContent = null;
     }
 
@@ -62,7 +63,8 @@ class BracketParser {
         }
         this.progressIndex = index;
         this.reSplit.lastIndex = index;
-        this.lastTag = null;
+        this.lastTagStart = null;
+        this.lastTagEnd = null;
         this.lastContent = null;
         this.justCompleted = false;
         this.isRunning = false;
@@ -185,13 +187,23 @@ class BracketParser {
     onTag(tagContent) {
         var tag = this.parseTag(tagContent);
 
-        this.skipEventFlag = false;
-        this.emit(`tag.${tag.name}`, tag.payload);
-        if (!this.skipEventFlag) {
-            this.emit('tag', tag.name, tag.payload);
+        var isCloseTag = (tag.name.charAt(0) === '/');
+        if (isCloseTag) {
+            tag.name = tag.name.substring(1, tag.name.length);
         }
 
-        this.lastTag = tag;
+        var eventPrefix = (isCloseTag) ? '-' : '+';
+        this.skipEventFlag = false;
+        this.emit(`${eventPrefix}${tag.name}`, tag.payload);
+        if (!this.skipEventFlag) {
+            this.emit(eventPrefix, tag.name, tag.payload);
+        }
+
+        if (!isCloseTag) {
+            this.lastTagStart = tag;
+        } else {
+            this.lastTagEnd = tag;
+        }
     }
 
     onStart() {

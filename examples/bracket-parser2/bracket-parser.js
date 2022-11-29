@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import BracketParser from '../../plugins/logic/bracketparser/bracketparser2/BracketParser.js';
+import BracketParserPlugin from '../../plugins/bracketparser2-plugin.js';
+
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,33 +19,45 @@ class Demo extends Phaser.Scene {
     p0=0 
     p1=abc
     p2="def ghi"
+    p3=false
 ]]
 Phaser
 
-[[
-    fn1
-    p0=0 
-    p1=abc
-    p2="def ghi"
-]] 
+[[pause]]
+
+[[fn1]] 
+ABC
+[[/fn1]] 
 End
 `;
 
         console.log(source);
 
-        var parser = new BracketParser({
+        var parser = this.plugins.get('rexBracketParserPlugin').add({
             delimiters: ['[[', ']]']
         })
         parser
             .on('content', function (content) {
                 console.log('content:', content);
             })
-            .on('tag', function (name, payload) {
-                console.log(`Tag:${name}, payload=${JSON.stringify(payload)}`);
+            .on('+pause', function () {
+                console.log('--- Pause ---');
+                parser.pause(); // Pause parsing
+                // parser.skipEvent();  // Don't fire '+' event
+            })
+            .on('+', function (name, payload) {
+                console.log(`+${name}, payload=${JSON.stringify(payload)}`);
+            })
+            .on('-', function (name, payload) {
+                console.log(`-${name}, payload=${JSON.stringify(payload)}`);
             })
 
             .start(source);
 
+        this.input.on('pointerdown', function () {
+            console.log('=== Continue ===')
+            parser.next();
+        })
     }
 
     update() { }
@@ -60,6 +73,14 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+
+    plugins: {
+        global: [{
+            key: 'rexBracketParserPlugin',
+            plugin: BracketParserPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

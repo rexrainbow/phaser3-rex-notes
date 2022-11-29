@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbracketparserplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbracketparser2plugin = factory());
 })(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
@@ -94,31 +94,6 @@
       return _possibleConstructorReturn(this, result);
     };
   }
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-  }
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-  }
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-  }
-  function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-  }
-  function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-    return arr2;
-  }
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -209,20 +184,18 @@
   var re0 = /[|\\{}()[\]^$+*?.]/g;
   var re1 = /-/g;
 
-  var GetDefaultTokenExpression = function GetDefaultTokenExpression(delimiterLeft, delimiterRight) {
-    return "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
+  var ParseValue = function ParseValue(text, valueConverter) {
+    if (text == null) {
+      return null;
+    }
+    var firstChar = text.charAt(0);
+    if (firstChar === '"' || firstChar === "'") {
+      return text.substring(1, text.length - 1);
+    }
+    return valueConverter(text);
   };
+
   var TokenExpressionMethods = {
-    setTagExpression: function setTagExpression(express) {
-      this.isDefaultTagExpression = !express;
-      this.tagExpression = express;
-      return this;
-    },
-    setValueExpression: function setValueExpression(express) {
-      this.isDefaultValueExpression = !express;
-      this.valueExpression = express;
-      return this;
-    },
     setDelimiters: function setDelimiters(delimiterLeft, delimiterRight) {
       if (delimiterRight === undefined) {
         delimiterRight = delimiterLeft[1];
@@ -230,35 +203,34 @@
       }
       this.delimiterLeft = delimiterLeft;
       this.delimiterRight = delimiterRight;
-      if (this.isDefaultTagExpression) {
-        this.tagExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
-      }
-      if (this.isDefaultValueExpression) {
-        this.valueExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
-      }
       delimiterLeft = EscapeRegex(delimiterLeft);
       delimiterRight = EscapeRegex(delimiterRight);
-      var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
-      var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
-      this.reTagOn = RegExp(tagOn, 'i');
-      this.reTagOff = RegExp(tagOff, 'i');
-      this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
+      var varName = "[^ =\n]+"; // Any character except space ,'=', and '\n'
+      var varStringValue = "'[^']+'|\"[^\"]+\"";
+      var varValue = "".concat(varStringValue, "|").concat(varName); // Any character except '='
+      var escapeSpace = "[ \n]*";
+      this.reCmdName = RegExp("".concat(escapeSpace, "(").concat(varName, ")").concat(escapeSpace), 'i');
+      this.reValuePair = RegExp("(".concat(varName, ")").concat(escapeSpace, "=").concat(escapeSpace, "(").concat(varValue, ")").concat(escapeSpace), 'gi');
+      var commandString = "[^".concat(delimiterLeft).concat(delimiterRight, "]+"); // Any character except delimiter
+      this.reSplit = RegExp("".concat(delimiterLeft, "(").concat(commandString, ")").concat(delimiterRight), 'gi');
       return this;
     },
-    getTagOnRegString: function getTagOnRegString(tagExpression, valueExpression) {
-      if (tagExpression === undefined) {
-        tagExpression = this.tagExpression;
+    parseTag: function parseTag(tagContent) {
+      var regexResult = tagContent.match(this.reCmdName);
+      var name = regexResult[1];
+      tagContent = tagContent.substring(regexResult[0].length, tagContent.length);
+      var payload = {};
+      while (true) {
+        var regexResult = this.reValuePair.exec(tagContent);
+        if (!regexResult) {
+          break;
+        }
+        payload[regexResult[1]] = ParseValue(regexResult[2], this.valueConverter);
       }
-      if (valueExpression === undefined) {
-        valueExpression = this.valueExpression;
-      }
-      return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
-    },
-    getTagOffRegString: function getTagOffRegString(tagExpression) {
-      if (tagExpression === undefined) {
-        tagExpression = this.tagExpression;
-      }
-      return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
+      return {
+        name: name,
+        payload: payload
+      };
     }
   };
 
@@ -334,26 +306,12 @@
     return s;
   };
 
-  var ParseValue = function ParseValue(text, valueConverter) {
-    if (text == null) {
-      return [];
-    }
-    var values = text.split(',');
-    for (var i = 0, cnt = values.length; i < cnt; i++) {
-      values[i] = valueConverter(values[i]);
-    }
-    return values;
-  };
-
   var BracketParser = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
-      // Parameters for regex
-      this.setTagExpression(GetValue(config, 'regex.tag', undefined));
-      this.setValueExpression(GetValue(config, 'regex.value', undefined));
       // Brackets and generate regex
       var delimiters = GetValue(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
@@ -469,9 +427,8 @@
             this.isRunning = false;
             return;
           }
-          var match = regexResult[0];
           var matchEnd = this.reSplit.lastIndex;
-          var matchStart = matchEnd - match.length;
+          var matchStart = matchEnd - regexResult[0].length;
 
           // Process content between previous tag and current tag            
           if (this.progressIndex < matchStart) {
@@ -484,11 +441,7 @@
           }
 
           // Process current tag
-          if (this.reTagOff.test(match)) {
-            this.onTagEnd(match);
-          } else {
-            this.onTagStart(match);
-          }
+          this.onTag(regexResult[1]);
           this.progressIndex = matchEnd;
           // Might pause here
           if (this.isPaused) {
@@ -532,28 +485,24 @@
         this.lastContent = content;
       }
     }, {
-      key: "onTagStart",
-      value: function onTagStart(tagContent) {
-        var regexResult = tagContent.match(this.reTagOn);
-        var tag = regexResult[1];
-        var values = ParseValue(regexResult[3], this.valueConverter);
-        this.skipEventFlag = false;
-        this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
-        if (!this.skipEventFlag) {
-          this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
+      key: "onTag",
+      value: function onTag(tagContent) {
+        var tag = this.parseTag(tagContent);
+        var isCloseTag = tag.name.charAt(0) === '/';
+        if (isCloseTag) {
+          tag.name = tag.name.substring(1, tag.name.length);
         }
-        this.lastTagStart = tag;
-      }
-    }, {
-      key: "onTagEnd",
-      value: function onTagEnd(tagContent) {
-        var tag = tagContent.match(this.reTagOff)[1];
+        var eventPrefix = isCloseTag ? '-' : '+';
         this.skipEventFlag = false;
-        this.emit("-".concat(tag));
+        this.emit("".concat(eventPrefix).concat(tag.name), tag.payload);
         if (!this.skipEventFlag) {
-          this.emit('-', tag);
+          this.emit(eventPrefix, tag.name, tag.payload);
         }
-        this.lastTagEnd = tag;
+        if (!isCloseTag) {
+          this.lastTagStart = tag;
+        } else {
+          this.lastTagEnd = tag;
+        }
       }
     }, {
       key: "onStart",

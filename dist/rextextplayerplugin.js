@@ -7157,7 +7157,7 @@
   var re0 = /[|\\{}()[\]^$+*?.]/g;
   var re1 = /-/g;
 
-  var GetDefaultValueExpression = function GetDefaultValueExpression(delimiterLeft, delimiterRight) {
+  var GetDefaultTokenExpression = function GetDefaultTokenExpression(delimiterLeft, delimiterRight) {
     return "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
   };
   var TokenExpressionMethods = {
@@ -7179,10 +7179,10 @@
       this.delimiterLeft = delimiterLeft;
       this.delimiterRight = delimiterRight;
       if (this.isDefaultTagExpression) {
-        this.tagExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+        this.tagExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
       }
       if (this.isDefaultValueExpression) {
-        this.valueExpression = GetDefaultValueExpression(delimiterLeft, delimiterRight);
+        this.valueExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
       }
       delimiterLeft = EscapeRegex(delimiterLeft);
       delimiterRight = EscapeRegex(delimiterRight);

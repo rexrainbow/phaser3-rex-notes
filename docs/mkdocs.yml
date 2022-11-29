@@ -294,6 +294,7 @@ nav:
         - Dialog-quest: dialog-quest.md
     - Bracket parser: 
         - Bracket parser: bracketparser.md
+        - Bracket parser 2: bracketparser2.md
         - Tag player: tagplayer.md
 - Data:
     - Data manager: 
