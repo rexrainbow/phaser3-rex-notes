@@ -54,7 +54,4 @@ declare class BracketParser extends EventEmitter {
     readonly isPaused: boolean;
 
     setDelimiters(delimiterLeft: string, delimiterRight?: string): this;
-
-    getTagOnRegString(tagExpression?: string, valueExpression?: string): string;
-    getTagOffRegString(tagExpression?: string): string;
 }

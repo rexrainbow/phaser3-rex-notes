@@ -112,6 +112,8 @@ Assume that left-delimiter and right-delimiter is `'<>'`
     - payload will be `{param0:value0, param1:value1}`
     - `value` : If `valueConvert` is `true`,
         - String with `'...'`, or `"..."`
+        - JSON array with `[...]`
+        - JSON object with `{...}`
         - Number
         - Boolean
         - null
@@ -132,6 +134,8 @@ Assume that left-delimiter and right-delimiter is `'<>'`
     - payload will be `{param0:value0, param1:value1}`
     - `value` : If `valueConvert` is `true`,
         - String with `'...'`, or `"..."`
+        - JSON array with `[...]`
+        - JSON object with `{...}`
         - Number
         - Boolean
         - null

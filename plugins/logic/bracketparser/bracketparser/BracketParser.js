@@ -129,9 +129,8 @@ class BracketParser {
                 return;
             }
 
-            var match = regexResult[0];
             var matchEnd = this.reSplit.lastIndex;
-            var matchStart = matchEnd - match.length;
+            var matchStart = matchEnd - regexResult[0].length;
 
             // Process content between previous tag and current tag            
             if (this.progressIndex < matchStart) {
@@ -144,11 +143,7 @@ class BracketParser {
             }
 
             // Process current tag
-            if (this.reTagOff.test(match)) {
-                this.onTagEnd(match);
-            } else {
-                this.onTagStart(match);
-            }
+            this.onTag(regexResult[1]);
 
             this.progressIndex = matchEnd;
             // Might pause here
@@ -192,30 +187,25 @@ class BracketParser {
         this.lastContent = content;
     }
 
-    onTagStart(tagContent) {
-        var regexResult = tagContent.match(this.reTagOn);
-        var tag = regexResult[1];
-        var values = ParseValue(regexResult[3], this.valueConverter);
+    onTag(tagContent) {
+        var regexResult = tagContent.match(this.reTag);
 
+        var tagName = regexResult[1];
         this.skipEventFlag = false;
-        this.emit(`+${tag}`, ...values);
-        if (!this.skipEventFlag) {
-            this.emit('+', tag, ...values);
+        if (tagName.charAt(0) !== '/') {
+            var values = ParseValue(regexResult[3], this.valueConverter);
+            this.emit(`+${tagName}`, ...values);
+            if (!this.skipEventFlag) {
+                this.emit('+', tagName, ...values);
+            }
+            this.lastTagStart = tagName;
+        } else {
+            this.emit(`-${tagName}`);
+            if (!this.skipEventFlag) {
+                this.emit('-', tagName);
+            }
+            this.lastTagEnd = tagName;
         }
-
-        this.lastTagStart = tag;
-    }
-
-    onTagEnd(tagContent) {
-        var tag = tagContent.match(this.reTagOff)[1];
-
-        this.skipEventFlag = false;
-        this.emit(`-${tag}`);
-        if (!this.skipEventFlag) {
-            this.emit('-', tag);
-        }
-
-        this.lastTagEnd = tag;
     }
 
     onStart() {

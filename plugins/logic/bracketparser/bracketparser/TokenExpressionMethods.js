@@ -36,29 +36,11 @@ export default {
         delimiterLeft = EscapeRegex(delimiterLeft);
         delimiterRight = EscapeRegex(delimiterRight);
 
-        var tagOn = `${delimiterLeft}(${this.tagExpression})(=(${this.valueExpression}))?${delimiterRight}`;
-        var tagOff = `${delimiterLeft}\/(${this.tagExpression})${delimiterRight}`;
+        var tag = `(${this.tagExpression})(=(${this.valueExpression}))?`;
+        this.reTag = RegExp(tag, 'i');
 
-        this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp(`${tagOn}|${tagOff}`, 'gi');
+        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, 'gi');
+
         return this;
     },
-
-    getTagOnRegString(tagExpression, valueExpression) {
-        if (tagExpression === undefined) {
-            tagExpression = this.tagExpression;
-        }
-        if (valueExpression === undefined) {
-            valueExpression = this.valueExpression;
-        }
-        return `${EscapeRegex(this.delimiterLeft)}(${tagExpression})(=(${valueExpression}))?${EscapeRegex(this.delimiterRight)}`;
-    },
-
-    getTagOffRegString(tagExpression) {
-        if (tagExpression === undefined) {
-            tagExpression = this.tagExpression;
-        }
-        return `${EscapeRegex(this.delimiterLeft)}\/(${tagExpression})${EscapeRegex(this.delimiterRight)}`;
-    }
 }
