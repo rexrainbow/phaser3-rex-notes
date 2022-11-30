@@ -94,6 +94,29 @@
       return _possibleConstructorReturn(this, result);
     };
   }
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+    return object;
+  }
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+        return desc.value;
+      };
+    }
+    return _get.apply(this, arguments);
+  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -176,64 +199,6 @@
     }
   };
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
-  var ParseValue = function ParseValue(text, valueConverter) {
-    if (text == null) {
-      return null;
-    }
-    var firstChar = text.charAt(0);
-    if (firstChar === '"' || firstChar === "'") {
-      return text.substring(1, text.length - 1);
-    }
-    return valueConverter(text);
-  };
-
-  var TokenExpressionMethods = {
-    setDelimiters: function setDelimiters(delimiterLeft, delimiterRight) {
-      if (delimiterRight === undefined) {
-        delimiterRight = delimiterLeft[1];
-        delimiterLeft = delimiterLeft[0];
-      }
-      this.delimiterLeft = delimiterLeft;
-      this.delimiterRight = delimiterRight;
-      delimiterLeft = EscapeRegex(delimiterLeft);
-      delimiterRight = EscapeRegex(delimiterRight);
-      var varName = "[^ =\n]+"; // Any character except space ,'=', and '\n'
-      var varStringValue = "'[^']+'|\"[^\"]+\"";
-      var varValue = "".concat(varStringValue, "|").concat(varName); // Any character except '='
-      var escapeSpace = "[ \n]*";
-      this.reCmdName = RegExp("".concat(escapeSpace, "(").concat(varName, ")").concat(escapeSpace), 'i');
-      this.reValuePair = RegExp("(".concat(varName, ")").concat(escapeSpace, "=").concat(escapeSpace, "(").concat(varValue, ")").concat(escapeSpace), 'gi');
-      var commandString = "[^".concat(delimiterLeft).concat(delimiterRight, "]+"); // Any character except delimiter
-      this.reSplit = RegExp("".concat(delimiterLeft, "(").concat(commandString, ")").concat(delimiterRight), 'gi');
-      return this;
-    },
-    parseTag: function parseTag(tagContent) {
-      var regexResult = tagContent.match(this.reCmdName);
-      var name = regexResult[1];
-      tagContent = tagContent.substring(regexResult[0].length, tagContent.length);
-      var payload = {};
-      while (true) {
-        var regexResult = this.reValuePair.exec(tagContent);
-        if (!regexResult) {
-          break;
-        }
-        payload[regexResult[1]] = ParseValue(regexResult[2], this.valueConverter);
-      }
-      return {
-        name: name,
-        payload: payload
-      };
-    }
-  };
-
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -306,19 +271,20 @@
     return s;
   };
 
-  var BracketParser = /*#__PURE__*/function () {
+  var BracketParser$1 = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
-      // Brackets and generate regex
-      var delimiters = GetValue(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]);
       // Value convert
       this.setValueConverter(GetValue(config, 'valueConvert', true));
       // Loop
       this.setLoopEnable(GetValue(config, 'loop', false));
+
+      // Brackets and generate regex
+      var delimiters = GetValue(config, 'delimiters', '<>');
+      this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -336,6 +302,19 @@
       key: "destroy",
       value: function destroy() {
         this.shutdown();
+      }
+
+      // Override
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (delimiterRight === undefined) {
+          delimiterRight = delimiterLeft[1];
+          delimiterLeft = delimiterLeft[0];
+        }
+        this.delimiterLeft = delimiterLeft;
+        this.delimiterRight = delimiterRight;
+        return this;
       }
     }, {
       key: "setValueConverter",
@@ -484,26 +463,11 @@
         this.emit('content', content);
         this.lastContent = content;
       }
+
+      // Override
     }, {
       key: "onTag",
-      value: function onTag(tagContent) {
-        var tag = this.parseTag(tagContent);
-        var isCloseTag = tag.name.charAt(0) === '/';
-        if (isCloseTag) {
-          tag.name = tag.name.substring(1, tag.name.length);
-        }
-        var eventPrefix = isCloseTag ? '-' : '+';
-        this.skipEventFlag = false;
-        this.emit("".concat(eventPrefix).concat(tag.name), tag.payload);
-        if (!this.skipEventFlag) {
-          this.emit(eventPrefix, tag.name, tag.payload);
-        }
-        if (!isCloseTag) {
-          this.lastTagStart = tag;
-        } else {
-          this.lastTagEnd = tag;
-        }
-      }
+      value: function onTag(tagContent) {}
     }, {
       key: "onStart",
       value: function onStart() {
@@ -538,7 +502,104 @@
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
   };
-  Object.assign(BracketParser.prototype, EventEmitterMethods, TokenExpressionMethods);
+  Object.assign(BracketParser$1.prototype, EventEmitterMethods);
+
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var ParseValue = function ParseValue(text, valueConverter) {
+    if (text == null) {
+      return null;
+    }
+    var lastTextIndex = text.length - 1;
+    var firstChar = text.charAt(0);
+    var lastChar = text.charAt(lastTextIndex);
+    if (firstChar === '"' && lastChar === '"' || firstChar === '"' && lastChar === '"') {
+      // Is a quotes string
+      return text.substring(1, lastTextIndex);
+    } else if (firstChar === '[' && lastChar === ']' || firstChar === '{' && lastChar === '}') {
+      // Is an array or a dictionary
+      try {
+        return JSON.parse(text);
+      } catch (_unused) {
+        return text;
+      }
+    }
+    return valueConverter(text);
+  };
+
+  var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
+    _inherits(BracketParser, _BracketParserBase);
+    var _super = _createSuper(BracketParser);
+    function BracketParser() {
+      _classCallCheck(this, BracketParser);
+      return _super.apply(this, arguments);
+    }
+    _createClass(BracketParser, [{
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
+        delimiterLeft = EscapeRegex(this.delimiterLeft);
+        delimiterRight = EscapeRegex(this.delimiterRight);
+        this.reTagName = RegExp(reTagName, 'i');
+        this.reParamPair = RegExp(reParamPair, 'gi');
+        this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), 'gs');
+        return this;
+      }
+    }, {
+      key: "onTag",
+      value: function onTag(tagContent) {
+        var regexResult = tagContent.match(this.reTagName);
+        var tagName = regexResult[1];
+        this.reParamPair.lastIndex = regexResult.index + regexResult[0].length;
+        var payload = {};
+        while (true) {
+          var regexResult = this.reParamPair.exec(tagContent);
+          if (!regexResult) {
+            break;
+          }
+          payload[regexResult[1]] = ParseValue(regexResult[2], this.valueConverter);
+        }
+        var isEndTag = tagName.charAt(0) === '/';
+        if (isEndTag) {
+          tagName = tagName.substring(1, tagName.length);
+        }
+        var eventPrefix = isEndTag ? '-' : '+';
+        this.skipEventFlag = false;
+        this.emit("".concat(eventPrefix).concat(tagName), payload);
+        if (!this.skipEventFlag) {
+          this.emit(eventPrefix, tagName, payload);
+        }
+        if (!isEndTag) {
+          this.lastTagStart = tagName;
+        } else {
+          this.lastTagEnd = tagName;
+        }
+      }
+    }]);
+    return BracketParser;
+  }(BracketParser$1);
+  var CreateQuotesExpression = function CreateQuotesExpression(leftQuote, rightQuote) {
+    if (rightQuote === undefined) {
+      rightQuote = leftQuote;
+    }
+    leftQuote = EscapeRegex(leftQuote);
+    rightQuote = EscapeRegex(rightQuote);
+    return "".concat(leftQuote, "[^").concat(leftQuote).concat(rightQuote, "]+").concat(rightQuote);
+  };
+  var varName = "[^ =\n]+"; // Any character except space ,'=', and '\n'
+  var varStringValue = "".concat(CreateQuotesExpression('"'), "|").concat(CreateQuotesExpression("'"));
+  var varArrayValue = CreateQuotesExpression('[', ']');
+  var varDictionaryValue = CreateQuotesExpression('{', '}');
+  var varValue = "".concat(varStringValue, "|").concat(varArrayValue, "|").concat(varDictionaryValue, "|").concat(varName); // Any character except '='
+  var escapeSpace = "[ \n]*";
+  var reTagName = "".concat(escapeSpace, "(").concat(varName, ")").concat(escapeSpace);
+  var reParamPair = "(".concat(varName, ")").concat(escapeSpace, "=").concat(escapeSpace, "(").concat(varValue, ")").concat(escapeSpace);
 
   var BracketParserPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BracketParserPlugin, _Phaser$Plugins$BaseP);

@@ -7149,67 +7149,6 @@
   }(Canvas);
   Object.assign(DynamicText.prototype, Methods$3);
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
-  var GetDefaultTokenExpression = function GetDefaultTokenExpression(delimiterLeft, delimiterRight) {
-    return "[^=".concat(EscapeRegex(delimiterLeft)).concat(EscapeRegex(delimiterRight), "]+");
-  };
-  var TokenExpressionMethods = {
-    setTagExpression: function setTagExpression(express) {
-      this.isDefaultTagExpression = !express;
-      this.tagExpression = express;
-      return this;
-    },
-    setValueExpression: function setValueExpression(express) {
-      this.isDefaultValueExpression = !express;
-      this.valueExpression = express;
-      return this;
-    },
-    setDelimiters: function setDelimiters(delimiterLeft, delimiterRight) {
-      if (delimiterRight === undefined) {
-        delimiterRight = delimiterLeft[1];
-        delimiterLeft = delimiterLeft[0];
-      }
-      this.delimiterLeft = delimiterLeft;
-      this.delimiterRight = delimiterRight;
-      if (this.isDefaultTagExpression) {
-        this.tagExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
-      }
-      if (this.isDefaultValueExpression) {
-        this.valueExpression = GetDefaultTokenExpression(delimiterLeft, delimiterRight);
-      }
-      delimiterLeft = EscapeRegex(delimiterLeft);
-      delimiterRight = EscapeRegex(delimiterRight);
-      var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
-      var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
-      this.reTagOn = RegExp(tagOn, 'i');
-      this.reTagOff = RegExp(tagOff, 'i');
-      this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
-      return this;
-    },
-    getTagOnRegString: function getTagOnRegString(tagExpression, valueExpression) {
-      if (tagExpression === undefined) {
-        tagExpression = this.tagExpression;
-      }
-      if (valueExpression === undefined) {
-        valueExpression = this.valueExpression;
-      }
-      return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
-    },
-    getTagOffRegString: function getTagOffRegString(tagExpression) {
-      if (tagExpression === undefined) {
-        tagExpression = this.tagExpression;
-      }
-      return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
-    }
-  };
-
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
   var TypeConvert = function TypeConvert(s) {
@@ -7232,33 +7171,20 @@
     return s;
   };
 
-  var ParseValue = function ParseValue(text, valueConverter) {
-    if (text == null) {
-      return [];
-    }
-    var values = text.split(',');
-    for (var i = 0, cnt = values.length; i < cnt; i++) {
-      values[i] = valueConverter(values[i]);
-    }
-    return values;
-  };
-
-  var BracketParser = /*#__PURE__*/function () {
+  var BracketParser$1 = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
       this.setEventEmitter(GetValue$d(config, 'eventEmitter', undefined));
 
-      // Parameters for regex
-      this.setTagExpression(GetValue$d(config, 'regex.tag', undefined));
-      this.setValueExpression(GetValue$d(config, 'regex.value', undefined));
-      // Brackets and generate regex
-      var delimiters = GetValue$d(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]);
       // Value convert
       this.setValueConverter(GetValue$d(config, 'valueConvert', true));
       // Loop
       this.setLoopEnable(GetValue$d(config, 'loop', false));
+
+      // Brackets and generate regex
+      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -7276,6 +7202,19 @@
       key: "destroy",
       value: function destroy() {
         this.shutdown();
+      }
+
+      // Override
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (delimiterRight === undefined) {
+          delimiterRight = delimiterLeft[1];
+          delimiterLeft = delimiterLeft[0];
+        }
+        this.delimiterLeft = delimiterLeft;
+        this.delimiterRight = delimiterRight;
+        return this;
       }
     }, {
       key: "setValueConverter",
@@ -7367,9 +7306,8 @@
             this.isRunning = false;
             return;
           }
-          var match = regexResult[0];
           var matchEnd = this.reSplit.lastIndex;
-          var matchStart = matchEnd - match.length;
+          var matchStart = matchEnd - regexResult[0].length;
 
           // Process content between previous tag and current tag            
           if (this.progressIndex < matchStart) {
@@ -7382,11 +7320,7 @@
           }
 
           // Process current tag
-          if (this.reTagOff.test(match)) {
-            this.onTagEnd(match);
-          } else {
-            this.onTagStart(match);
-          }
+          this.onTag(regexResult[1]);
           this.progressIndex = matchEnd;
           // Might pause here
           if (this.isPaused) {
@@ -7429,30 +7363,11 @@
         this.emit('content', content);
         this.lastContent = content;
       }
+
+      // Override
     }, {
-      key: "onTagStart",
-      value: function onTagStart(tagContent) {
-        var regexResult = tagContent.match(this.reTagOn);
-        var tag = regexResult[1];
-        var values = ParseValue(regexResult[3], this.valueConverter);
-        this.skipEventFlag = false;
-        this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
-        if (!this.skipEventFlag) {
-          this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
-        }
-        this.lastTagStart = tag;
-      }
-    }, {
-      key: "onTagEnd",
-      value: function onTagEnd(tagContent) {
-        var tag = tagContent.match(this.reTagOff)[1];
-        this.skipEventFlag = false;
-        this.emit("-".concat(tag));
-        if (!this.skipEventFlag) {
-          this.emit('-', tag);
-        }
-        this.lastTagEnd = tag;
-      }
+      key: "onTag",
+      value: function onTag(tagContent) {}
     }, {
       key: "onStart",
       value: function onStart() {
@@ -7487,7 +7402,102 @@
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
   };
-  Object.assign(BracketParser.prototype, EventEmitterMethods, TokenExpressionMethods);
+  Object.assign(BracketParser$1.prototype, EventEmitterMethods);
+
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var ParseValue = function ParseValue(text, valueConverter) {
+    if (text == null) {
+      return [];
+    }
+    var values = text.split(',');
+    for (var i = 0, cnt = values.length; i < cnt; i++) {
+      values[i] = valueConverter(values[i]);
+    }
+    return values;
+  };
+
+  var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
+    _inherits(BracketParser, _BracketParserBase);
+    var _super = _createSuper(BracketParser);
+    function BracketParser(config) {
+      var _this;
+      _classCallCheck(this, BracketParser);
+      _this = _super.call(this, config);
+
+      // Parameters for regex
+      _this.setTagExpression(GetValue$d(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$d(config, 'regex.value', undefined));
+      // Brackets and generate regex
+      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      _this.setDelimiters(delimiters[0], delimiters[1]);
+      return _this;
+    }
+    _createClass(BracketParser, [{
+      key: "setTagExpression",
+      value: function setTagExpression(express) {
+        this.useDefaultTagExpression = !express;
+        this.tagExpression = express;
+        return this;
+      }
+    }, {
+      key: "setValueExpression",
+      value: function setValueExpression(express) {
+        this.useDefaultValueExpression = !express;
+        this.valueExpression = express;
+        return this;
+      }
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
+        if (this.useDefaultTagExpression) {
+          this.tagExpression = "[^=]+";
+        }
+        if (this.useDefaultValueExpression) {
+          this.valueExpression = "[^=]+";
+        }
+        delimiterLeft = EscapeRegex(this.delimiterLeft);
+        delimiterRight = EscapeRegex(this.delimiterRight);
+        var tag = "(".concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?");
+        this.reTag = RegExp(tag, 'i');
+        this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), 'gi');
+        return this;
+      }
+    }, {
+      key: "onTag",
+      value: function onTag(tagContent) {
+        var regexResult = tagContent.match(this.reTag);
+        var tagName = regexResult[1];
+        var isEndTag = tagName.charAt(0) === '/';
+        if (isEndTag) {
+          tagName = tagName.substring(1, tagName.length);
+        }
+        this.skipEventFlag = false;
+        if (!isEndTag) {
+          var values = ParseValue(regexResult[3], this.valueConverter);
+          this.emit.apply(this, ["+".concat(tagName)].concat(_toConsumableArray(values)));
+          if (!this.skipEventFlag) {
+            this.emit.apply(this, ['+', tagName].concat(_toConsumableArray(values)));
+          }
+          this.lastTagStart = tagName;
+        } else {
+          this.emit("-".concat(tagName));
+          if (!this.skipEventFlag) {
+            this.emit('-', tagName);
+          }
+          this.lastTagEnd = tagName;
+        }
+      }
+    }]);
+    return BracketParser;
+  }(BracketParser$1);
 
   var OnParseColorTag = function OnParseColorTag(textPlayer, parser, config) {
     var tagName = 'color';

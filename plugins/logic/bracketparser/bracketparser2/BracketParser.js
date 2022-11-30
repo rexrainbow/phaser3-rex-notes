@@ -31,19 +31,19 @@ class BracketParser extends BracketParserBase {
             payload[regexResult[1]] = ParseValue(regexResult[2], this.valueConverter);
         }
 
-        var isCloseTag = (tagName.charAt(0) === '/');
-        if (isCloseTag) {
+        var isEndTag = (tagName.charAt(0) === '/');
+        if (isEndTag) {
             tagName = tagName.substring(1, tagName.length);
         }
 
-        var eventPrefix = (isCloseTag) ? '-' : '+';
+        var eventPrefix = (isEndTag) ? '-' : '+';
         this.skipEventFlag = false;
         this.emit(`${eventPrefix}${tagName}`, payload);
         if (!this.skipEventFlag) {
             this.emit(eventPrefix, tagName, payload);
         }
 
-        if (!isCloseTag) {
+        if (!isEndTag) {
             this.lastTagStart = tagName;
         } else {
             this.lastTagEnd = tagName;

@@ -54,13 +54,13 @@ class BracketParser extends BracketParserBase {
 
         var tagName = regexResult[1];
 
-        var isCloseTag = (tagName.charAt(0) === '/');
-        if (isCloseTag) {
+        var isEndTag = (tagName.charAt(0) === '/');
+        if (isEndTag) {
             tagName = tagName.substring(1, tagName.length);
         }
 
         this.skipEventFlag = false;
-        if (!isCloseTag) {
+        if (!isEndTag) {
             var values = ParseValue(regexResult[3], this.valueConverter);
             this.emit(`+${tagName}`, ...values);
             if (!this.skipEventFlag) {
