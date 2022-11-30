@@ -76,11 +76,7 @@ A lite-weight delimiter parser.
 ```javascript
 var parser = scene.plugins.get('rexBracketParser').add({
     // delimiters: '<>', // or ['<', '>']
-    // valueConvert: true,
-    // regex : {
-    //     tag: undefined,
-    //     value: undefined
-    // },
+    // valueConvert: true,   
 });
 ```
 
@@ -96,11 +92,6 @@ var parser = scene.plugins.get('rexBracketParser').add({
             return s;
         }
         ```
-- `regex` :
-    - `regex.tag` : Expression of parse tag. 
-        - `undefined` : Default value is any character except left-delimiter, right-delimiter, and `'='`.
-    - `regex.value` : Expression of parse value.
-        - `undefined` : Default value is any character except left-delimiter, right-delimiter, and `'='`.    
 
 #### Tag and content
 
