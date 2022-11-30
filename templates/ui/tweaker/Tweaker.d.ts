@@ -61,6 +61,10 @@ declare namespace Tweaker {
         background?: IInteractiveRoundRectangleConfig,
     }
 
+    interface IButtonConfig extends IInteractiveLabelConfig {
+        expand?: boolean,
+    }
+
 
     interface IConfig extends Sizer.IConfig {
         styles: {
@@ -85,7 +89,7 @@ declare namespace Tweaker {
                     button?: IInteractiveLabelConfig,
                 },
 
-                button?: IInteractiveLabelConfig,
+                button?: IButtonConfig,
 
                 checkbox?: Checkbox.IConfig,
 
