@@ -1,22 +1,7 @@
-import EventEmitter from '../../../utils/eventemitter/EventEmitter';
+import BracketParserBase from '../bracketparserbase/BracketParser';
 export default BracketParser;
 
 declare namespace BracketParser {
-    type ValueConvertCallback = (s: string) => any;
-
-    interface IConfig {
-        delimiters?: string | [string, string],
-        valueConvert?: boolean | ValueConvertCallback,
-        regex?: {
-            tag?: string,
-            value?: string,
-        },
-
-        eventEmitter?: EventEmitter | false,
-
-        loop?: boolean
-    }
-
     namespace Events {
         type StartCallbackType = (parser: BracketParser) => void;
         type CompleteCallbackType = (parser: BracketParser) => void;
@@ -31,27 +16,5 @@ declare namespace BracketParser {
     }
 }
 
-declare class BracketParser extends EventEmitter {
-    constructor(
-        config?: BracketParser.IConfig
-    );
-
-    start(text: string): this;
-
-    pause(): this;
-    pauseUntilEvent(
-        eventEmitter: EventEmitter,
-        eventName: string
-    ): this;
-
-    next(): this;
-
-    restart(): this;
-
-    skipEvent(): this;
-
-    readonly isRunning: boolean;
-    readonly isPaused: boolean;
-
-    setDelimiters(delimiterLeft: string, delimiterRight?: string): this;
+declare class BracketParser extends BracketParserBase {
 }
