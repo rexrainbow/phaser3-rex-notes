@@ -1,6 +1,7 @@
 import BracketParserBase from '../bracketparserbase/BracketParser.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import ParseValue from './ParseValue.js';
+import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 
 class BracketParser extends BracketParserBase {
     constructor(config) {
@@ -23,13 +24,17 @@ class BracketParser extends BracketParserBase {
     }
 
     setTagExpression(express) {
-        this.useDefaultTagExpression = (!express);
+        if (!express) {
+            express = DefaultTokenExpression;
+        }
         this.tagExpression = express;
         return this;
     }
 
     setValueExpression(express) {
-        this.useDefaultValueExpression = (!express);
+        if (!express) {
+            express = DefaultTokenExpression;
+        }
         this.valueExpression = express;
         return this;
     }
@@ -37,16 +42,19 @@ class BracketParser extends BracketParserBase {
     setDelimiters(delimiterLeft, delimiterRight) {
         super.setDelimiters(delimiterLeft, delimiterRight);
 
-        if (this.useDefaultTagExpression) {
-            this.tagExpression = `[^=]+`;
-        }
-
-        if (this.useDefaultValueExpression) {
-            this.valueExpression = `[^=]+`;
-        }
-
         var tag = `(${this.tagExpression})(=(${this.valueExpression}))?`;
         this.reTag = RegExp(tag, 'i');
+
+        if ((this.tagExpression !== DefaultTokenExpression) || (this.valueExpression !== DefaultTokenExpression)) {
+            var startTagExpression = `${this.tagExpression}(=${this.valueExpression})?`
+            var endTagExpression = `/${this.tagExpression}`;
+
+            delimiterLeft = EscapeRegex(this.delimiterLeft);
+            delimiterRight = EscapeRegex(this.delimiterRight);
+
+            var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
+            this.reSplit = RegExp(`${delimiterLeft}((${startTagExpression})|(${endTagExpression}))${delimiterRight}`, flag);
+        }
 
         return this;
     }
@@ -78,5 +86,7 @@ class BracketParser extends BracketParserBase {
         }
     }
 }
+
+const DefaultTokenExpression = `[^=]+`;
 
 export default BracketParser;

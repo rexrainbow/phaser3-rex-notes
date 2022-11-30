@@ -18314,14 +18314,18 @@
     _createClass(BracketParser, [{
       key: "setTagExpression",
       value: function setTagExpression(express) {
-        this.useDefaultTagExpression = !express;
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
         this.tagExpression = express;
         return this;
       }
     }, {
       key: "setValueExpression",
       value: function setValueExpression(express) {
-        this.useDefaultValueExpression = !express;
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
         this.valueExpression = express;
         return this;
       }
@@ -18329,14 +18333,16 @@
       key: "setDelimiters",
       value: function setDelimiters(delimiterLeft, delimiterRight) {
         _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
-        if (this.useDefaultTagExpression) {
-          this.tagExpression = "[^=]+";
-        }
-        if (this.useDefaultValueExpression) {
-          this.valueExpression = "[^=]+";
-        }
         var tag = "(".concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?");
         this.reTag = RegExp(tag, 'i');
+        if (this.tagExpression !== DefaultTokenExpression || this.valueExpression !== DefaultTokenExpression) {
+          var startTagExpression = "".concat(this.tagExpression, "(=").concat(this.valueExpression, ")?");
+          var endTagExpression = "/".concat(this.tagExpression);
+          delimiterLeft = EscapeRegex(this.delimiterLeft);
+          delimiterRight = EscapeRegex(this.delimiterRight);
+          var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
+          this.reSplit = RegExp("".concat(delimiterLeft, "((").concat(startTagExpression, ")|(").concat(endTagExpression, "))").concat(delimiterRight), flag);
+        }
         return this;
       }
     }, {
@@ -18367,6 +18373,7 @@
     }]);
     return BracketParser;
   }(BracketParser$1);
+  var DefaultTokenExpression = "[^=]+";
 
   var OnParseColorTag = function OnParseColorTag(textPlayer, parser, config) {
     var tagName = 'color';
