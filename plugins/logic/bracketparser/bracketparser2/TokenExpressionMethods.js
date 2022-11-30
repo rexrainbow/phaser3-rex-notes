@@ -10,6 +10,15 @@ var CreateQuotesExpression = function (leftQuote, rightQuote) {
     return `${leftQuote}[^${leftQuote}${rightQuote}]+${rightQuote}`
 }
 
+const varName = `[^ =\n]+`;  // Any character except space ,'=', and '\n'
+const varStringValue = `${CreateQuotesExpression('"')}|${CreateQuotesExpression("'")}`;
+const varArrayValue = CreateQuotesExpression('[', ']');
+const varDictionaryValue = CreateQuotesExpression('{', '}');
+const varValue = `${varStringValue}|${varArrayValue}|${varDictionaryValue}|${varName}`;  // Any character except '='
+const escapeSpace = `[ \n]*`;
+const reTagName = `${escapeSpace}(${varName})${escapeSpace}`;
+const reParamPair = `(${varName})${escapeSpace}=${escapeSpace}(${varValue})${escapeSpace}`
+
 export default {
     setDelimiters(delimiterLeft, delimiterRight) {
         if (delimiterRight === undefined) {
@@ -22,28 +31,21 @@ export default {
         delimiterLeft = EscapeRegex(delimiterLeft);
         delimiterRight = EscapeRegex(delimiterRight);
 
-        var varName = `[^ =\n]+`;  // Any character except space ,'=', and '\n'
-        var varStringValue = `${CreateQuotesExpression('"')}|${CreateQuotesExpression("'")}`;
-        var varArrayValue = CreateQuotesExpression('[', ']');
-        var varDictionaryValue = CreateQuotesExpression('{', '}');
-        var varValue = `${varStringValue}|${varArrayValue}|${varDictionaryValue}|${varName}`;  // Any character except '='
-        var escapeSpace = `[ \n]*`;
-
-        this.reCmdName = RegExp(`${escapeSpace}(${varName})${escapeSpace}`, 'i');
-        this.reValuePair = RegExp(`(${varName})${escapeSpace}=${escapeSpace}(${varValue})${escapeSpace}`, 'gi');
+        this.reTagName = RegExp(reTagName, 'i');
+        this.reParamPair = RegExp(reParamPair, 'gi');
 
         this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, 'gs');
         return this;
     },
 
     parseTag(tagContent) {
-        var regexResult = tagContent.match(this.reCmdName);
+        var regexResult = tagContent.match(this.reTagName);
         var name = regexResult[1];
-        tagContent = tagContent.substring(regexResult[0].length, tagContent.length);
 
+        this.reParamPair.lastIndex = regexResult.index + regexResult[0].length;
         var payload = {};
         while (true) {
-            var regexResult = this.reValuePair.exec(tagContent);
+            var regexResult = this.reParamPair.exec(tagContent);
             if (!regexResult) {
                 break;
             }

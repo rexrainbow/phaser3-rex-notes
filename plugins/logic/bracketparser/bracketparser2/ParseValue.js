@@ -3,16 +3,24 @@ var ParseValue = function (text, valueConverter) {
         return null;
     }
 
+    var lastTextIndex = text.length - 1;
     var firstChar = text.charAt(0);
-    var lastChar = text.charAt(text.length - 1);
-    if ((firstChar === '"') && (lastChar === '"')) {
-        return text.substring(1, text.length - 1);
-    } else if ((firstChar === '"') && (lastChar === '"')) {
-        return text.substring(1, text.length - 1);
-    } else if ((firstChar === '[') && (lastChar === ']')) {
-        return JSON.parse(text)
-    } else if ((firstChar === '{') && (lastChar === '}')) {
-        return JSON.parse(text)
+    var lastChar = text.charAt(lastTextIndex);
+
+    if (
+        ((firstChar === '"') && (lastChar === '"')) ||
+        ((firstChar === '"') && (lastChar === '"'))
+    ) {
+        // Is a quotes string
+        return text.substring(1, lastTextIndex);
+    } else if (((firstChar === '[') && (lastChar === ']')) ||
+        ((firstChar === '{') && (lastChar === '}'))) {
+        // Is an array or a dictionary
+        try {
+            return JSON.parse(text);
+        } catch {
+            return text;
+        }
     }
 
     return valueConverter(text);
