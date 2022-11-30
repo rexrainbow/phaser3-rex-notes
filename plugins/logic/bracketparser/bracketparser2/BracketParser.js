@@ -4,16 +4,24 @@ import ParseValue from './ParseValue.js';
 
 
 class BracketParser extends BracketParserBase {
+    constructor(config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        if (!config.hasOwnProperty('multipleLinesTag')) {
+            config.multipleLinesTag = true;
+        }
+
+        super(config);
+    }
+
     setDelimiters(delimiterLeft, delimiterRight) {
         super.setDelimiters(delimiterLeft, delimiterRight);
-
-        delimiterLeft = EscapeRegex(this.delimiterLeft);
-        delimiterRight = EscapeRegex(this.delimiterRight);
 
         this.reTagName = RegExp(reTagName, 'i');
         this.reParamPair = RegExp(reParamPair, 'gi');
 
-        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, 'gs');
         return this;
     }
 

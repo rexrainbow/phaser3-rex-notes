@@ -1,10 +1,17 @@
 import BracketParserBase from '../bracketparserbase/BracketParser.js';
-import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import ParseValue from './ParseValue.js';
 
 class BracketParser extends BracketParserBase {
     constructor(config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        if (!config.hasOwnProperty('multipleLinesTag')) {
+            config.multipleLinesTag = false;
+        }
+
         super(config);
 
         // Parameters for regex
@@ -38,13 +45,8 @@ class BracketParser extends BracketParserBase {
             this.valueExpression = `[^=]+`;
         }
 
-        delimiterLeft = EscapeRegex(this.delimiterLeft);
-        delimiterRight = EscapeRegex(this.delimiterRight);
-
         var tag = `(${this.tagExpression})(=(${this.valueExpression}))?`;
         this.reTag = RegExp(tag, 'i');
-
-        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, 'gi');
 
         return this;
     }

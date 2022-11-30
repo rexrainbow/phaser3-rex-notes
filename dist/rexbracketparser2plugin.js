@@ -271,6 +271,14 @@
     return s;
   };
 
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
   var BracketParser$1 = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
@@ -283,6 +291,7 @@
       this.setLoopEnable(GetValue(config, 'loop', false));
 
       // Brackets and generate regex
+      this.setMultipleLinesTagEnable(GetValue(config, 'multipleLinesTag', false));
       var delimiters = GetValue(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
@@ -303,6 +312,15 @@
       value: function destroy() {
         this.shutdown();
       }
+    }, {
+      key: "setMultipleLinesTagEnable",
+      value: function setMultipleLinesTagEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.multipleLinesTagEnable = enable;
+        return this;
+      }
 
       // Override
     }, {
@@ -314,6 +332,10 @@
         }
         this.delimiterLeft = delimiterLeft;
         this.delimiterRight = delimiterRight;
+        delimiterLeft = EscapeRegex(this.delimiterLeft);
+        delimiterRight = EscapeRegex(this.delimiterRight);
+        var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
+        this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), flag);
         return this;
       }
     }, {
@@ -504,14 +526,6 @@
   };
   Object.assign(BracketParser$1.prototype, EventEmitterMethods);
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
   var ParseValue = function ParseValue(text, valueConverter) {
     if (text == null) {
       return null;
@@ -536,19 +550,22 @@
   var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
     _inherits(BracketParser, _BracketParserBase);
     var _super = _createSuper(BracketParser);
-    function BracketParser() {
+    function BracketParser(config) {
       _classCallCheck(this, BracketParser);
-      return _super.apply(this, arguments);
+      if (config === undefined) {
+        config = {};
+      }
+      if (!config.hasOwnProperty('multipleLinesTag')) {
+        config.multipleLinesTag = true;
+      }
+      return _super.call(this, config);
     }
     _createClass(BracketParser, [{
       key: "setDelimiters",
       value: function setDelimiters(delimiterLeft, delimiterRight) {
         _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
-        delimiterLeft = EscapeRegex(this.delimiterLeft);
-        delimiterRight = EscapeRegex(this.delimiterRight);
         this.reTagName = RegExp(reTagName, 'i');
         this.reParamPair = RegExp(reParamPair, 'gi');
-        this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), 'gs');
         return this;
       }
     }, {

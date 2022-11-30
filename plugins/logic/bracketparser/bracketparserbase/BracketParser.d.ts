@@ -5,6 +5,7 @@ declare namespace BracketParser {
     type ValueConvertCallback = (s: string) => any;
 
     interface IConfig {
+        multipleLinesTag?: boolean,
         delimiters?: string | [string, string],
         valueConvert?: boolean | ValueConvertCallback,
 

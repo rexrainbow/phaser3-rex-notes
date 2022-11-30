@@ -1,6 +1,7 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
+import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 
 class BracketParser {
     constructor(config) {
@@ -13,6 +14,7 @@ class BracketParser {
         this.setLoopEnable(GetValue(config, 'loop', false));
 
         // Brackets and generate regex
+        this.setMultipleLinesTagEnable(GetValue(config, 'multipleLinesTag', false));
         var delimiters = GetValue(config, 'delimiters', '<>');
         this.setDelimiters(delimiters[0], delimiters[1]);
 
@@ -33,6 +35,14 @@ class BracketParser {
         this.shutdown();
     }
 
+    setMultipleLinesTagEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.multipleLinesTagEnable = enable;
+        return this;
+    }
+
     // Override
     setDelimiters(delimiterLeft, delimiterRight) {
         if (delimiterRight === undefined) {
@@ -41,6 +51,12 @@ class BracketParser {
         }
         this.delimiterLeft = delimiterLeft;
         this.delimiterRight = delimiterRight;
+
+        delimiterLeft = EscapeRegex(this.delimiterLeft);
+        delimiterRight = EscapeRegex(this.delimiterRight);
+
+        var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
+        this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, flag);
 
         return this;
     }

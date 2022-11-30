@@ -2,6 +2,12 @@ import BracketParserBase from '../bracketparserbase/BracketParser';
 export default BracketParser;
 
 declare namespace BracketParser {
+    interface IConfig extends BracketParserBase.IConfig {
+        regex?: {
+            tag?: string,
+            value?: string,
+        }
+    }
     namespace Events {
         type StartCallbackType = (parser: BracketParser) => void;
         type CompleteCallbackType = (parser: BracketParser) => void;
@@ -17,4 +23,5 @@ declare namespace BracketParser {
 }
 
 declare class BracketParser extends BracketParserBase {
+    constructor(config?: BracketParser.IConfig);
 }
