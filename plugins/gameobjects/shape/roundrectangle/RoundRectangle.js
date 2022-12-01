@@ -53,16 +53,12 @@ class RoundRectangle extends Shape {
         this.setIteration(iteration);
         this.setPosition(x, y);
 
-        if (fillColor !== undefined) {
-            this.setFillStyle(fillColor, fillAlpha);
-        }
+        this.setFillStyle(fillColor, fillAlpha);
 
-        if (strokeColor !== undefined) {
-            if (strokeWidth === undefined) {
-                strokeWidth = 2;
-            }
-            this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
+        if ((strokeColor !== undefined) && (strokeWidth === undefined)) {
+            strokeWidth = 2;
         }
+        this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
 
         this.updateDisplayOrigin();
         this.dirty = true;
