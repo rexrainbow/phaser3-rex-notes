@@ -1,7 +1,7 @@
 import {
     StringType, NumberType, RangeType,
     ListType, ButtonsType,
-    BooleanType, ColorType, Pointer2dType, Pointer3dType,
+    BooleanType, ColorType,
 } from '../utils/inputs/InputTypes.js';
 import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
