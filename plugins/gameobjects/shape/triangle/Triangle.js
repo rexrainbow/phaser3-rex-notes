@@ -1,13 +1,14 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './ShapesUpdateMethods.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg
 
 class Triangle extends BaseShapes {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth, radius, direction;
+        var strokeColor, strokeAlpha, strokeWidth, direction, radius;
         if (IsPlainObject(x)) {
             var config = x;
 
@@ -23,21 +24,19 @@ class Triangle extends BaseShapes {
             strokeAlpha = config.strokeAlpha;
             strokeWidth = config.strokeWidth;
 
-            radius = config.radius;
             direction = config.direction;
+            radius = config.radius;
         }
 
         if (x === undefined) { x = 0; }
         if (y === undefined) { y = 0; }
         if (width === undefined) { width = 1; }
         if (height === undefined) { height = width; }
-        if (radius === undefined) { radius = 1; }
         if (direction === undefined) { direction = 0; }
+        if (radius === undefined) { radius = undefined; }
 
         super(scene, x, y, width, height);
         this.type = 'rexTriangle';
-
-        this.setRadius(radius);
 
         this.setFillStyle(fillColor, fillAlpha);
 
@@ -47,6 +46,8 @@ class Triangle extends BaseShapes {
         this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
 
         this.setDirection(direction);
+
+        this.setRadius(radius);
 
         this.buildShapes();
 
@@ -63,6 +64,10 @@ class Triangle extends BaseShapes {
 
     setRadius(radius) {
         this.radius = radius;
+
+        // 0: fit mode
+        // 1: circle mode
+        this.shapeMode = (radius == null) ? 0 : 1;
         return this;
     }
 
@@ -98,25 +103,78 @@ class Triangle extends BaseShapes {
     }
 
     set direction(value) {
+        if (typeof (value) === 'string') {
+            value = DirectionNameMap[value];
+        }
+        value = value % 4;
         this._direction = value;
-        this.verticeRotation = DirectionToRadMap[value];
+        this.verticeRotation = DegToRad(value * 90);
     }
 
     setDirection(direction) {
         this.direction = direction;
         return this;
     }
+
+    setPadding(left, top, right, bottom) {
+
+        if (typeof left === 'object') {
+            var config = left;
+
+            //  If they specify x and/or y this applies to all
+            var x = GetValue(config, 'x', null);
+
+            if (x !== null) {
+                left = x;
+                right = x;
+            }
+            else {
+                left = GetValue(config, 'left', 0);
+                right = GetValue(config, 'right', left);
+            }
+
+            var y = GetValue(config, 'y', null);
+
+            if (y !== null) {
+                top = y;
+                bottom = y;
+            }
+            else {
+                top = GetValue(config, 'top', 0);
+                bottom = GetValue(config, 'bottom', top);
+            }
+        }
+        else {
+            if (left === undefined) { left = 0; }
+            if (top === undefined) { top = left; }
+            if (right === undefined) { right = left; }
+            if (bottom === undefined) { bottom = top; }
+        }
+
+        if (this.padding === undefined) {
+            this.padding = {};
+        }
+
+        this.dirty = this.dirty ||
+            (this.padding.left != left) ||
+            (this.padding.top != top) ||
+            (this.padding.right != right) ||
+            (this.padding.bottom != bottom);
+
+        this.padding.left = left;
+        this.padding.top = top;
+        this.padding.right = right;
+        this.padding.bottom = bottom;
+
+        // Switch to fit mode
+        this.setRadius();
+
+        return this;
+    }
 }
 
-const RAD_RIGHT = DegToRad(0);
-const RAD_DOWN = DegToRad(90);
-const RAD_LEFT = DegToRad(180);
-const RAD_UP = DegToRad(270);
-const DirectionToRadMap = {
-    0: RAD_RIGHT, right: RAD_RIGHT,
-    1: RAD_DOWN, down: RAD_DOWN,
-    2: RAD_LEFT, left: RAD_LEFT,
-    3: RAD_UP, up: RAD_UP,
+const DirectionNameMap = {
+    right: 0, down: 1, left: 2, up: 3
 }
 
 Object.assign(

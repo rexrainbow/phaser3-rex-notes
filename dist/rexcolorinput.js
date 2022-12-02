@@ -9917,15 +9917,11 @@
       var iteration = GetValue$p(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
-      if (fillColor !== undefined) {
-        _this.setFillStyle(fillColor, fillAlpha);
+      _this.setFillStyle(fillColor, fillAlpha);
+      if (strokeColor !== undefined && strokeWidth === undefined) {
+        strokeWidth = 2;
       }
-      if (strokeColor !== undefined) {
-        if (strokeWidth === undefined) {
-          strokeWidth = 2;
-        }
-        _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
-      }
+      _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       _this.updateDisplayOrigin();
       _this.dirty = true;
       return _this;

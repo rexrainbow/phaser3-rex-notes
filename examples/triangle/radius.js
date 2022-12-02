@@ -12,8 +12,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var triangle = this.add.rexTriangle(400, 300, 100, 100, 0x888888);
-        this.add.existing(triangle);
+        var triangle = this.add.rexTriangle(400, 300, 100, 100, 0x888888)
+            .setRadius(1);
 
         var graphics = this.add.graphics({
             lineStyle: {
@@ -25,7 +25,6 @@ class Demo extends Phaser.Scene {
         var gui = new Dat.GUI();
         gui.add(triangle, 'verticeAngle', 0, 359);
         gui.add(triangle, 'radius', 0, 1);
-
     }
 
     update() { }
