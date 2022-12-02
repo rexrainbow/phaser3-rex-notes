@@ -23179,12 +23179,12 @@
               y: top
             },
             b: {
-              x: right,
-              y: top
+              x: left,
+              y: bottom
             },
             c: {
-              x: centerX,
-              y: bottom
+              x: right,
+              y: centerY
             }
           },
           1: {
@@ -23194,12 +23194,12 @@
               y: top
             },
             b: {
-              x: right,
-              y: bottom
+              x: left,
+              y: top
             },
             c: {
-              x: left,
-              y: centerY
+              x: centerX,
+              y: bottom
             }
           },
           2: {
@@ -23209,12 +23209,12 @@
               y: bottom
             },
             b: {
-              x: left,
-              y: bottom
+              x: right,
+              y: top
             },
             c: {
-              x: centerX,
-              y: top
+              x: left,
+              y: centerY
             }
           },
           3: {
@@ -23224,12 +23224,12 @@
               y: bottom
             },
             b: {
-              x: left,
-              y: top
+              x: right,
+              y: bottom
             },
             c: {
-              x: right,
-              y: centerY
+              x: centerX,
+              y: top
             }
           }
         };
@@ -23442,7 +23442,7 @@
   };
   Object.assign(Triangle.prototype, ShapesUpdateMethods$1);
 
-  ObjectFactory.register('lineProgress', function (x, y, width, height, fillColor, fillAlpha) {
+  ObjectFactory.register('triangle', function (x, y, width, height, fillColor, fillAlpha) {
     var gameObject = new Triangle(this.scene, x, y, width, height, fillColor, fillAlpha);
     this.scene.add.existing(gameObject);
     return gameObject;

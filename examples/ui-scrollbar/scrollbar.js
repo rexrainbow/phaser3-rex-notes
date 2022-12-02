@@ -45,8 +45,8 @@ var CreateHorizontalScrollBar = function (scene) {
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK),
 
         buttons: {
-            left: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_PRIMARY),
-            right: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_PRIMARY),
+            left: scene.rexUI.add.triangle(0, 0, 20, 20, COLOR_PRIMARY).setPadding(3).setDirection('left'),
+            right: scene.rexUI.add.triangle(0, 0, 20, 20, COLOR_PRIMARY).setPadding(3).setDirection('right'),
         },
 
         slider: {
@@ -68,8 +68,8 @@ var CreateVerticalScrollBar = function (scene) {
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK),
 
         buttons: {
-            left: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_PRIMARY),
-            right: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_PRIMARY),
+            left: scene.rexUI.add.triangle(0, 0, 20, 20, COLOR_PRIMARY).setPadding(3).setDirection('up'),
+            right: scene.rexUI.add.triangle(0, 0, 20, 20, COLOR_PRIMARY).setPadding(3).setDirection('down'),
         },
 
         slider: {

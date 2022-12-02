@@ -30,16 +30,16 @@ export default {
 
             var pointsMapping = {
                 0: {  // right
-                    a: { x: left, y: top }, b: { x: right, y: top }, c: { x: centerX, y: bottom }
+                    a: { x: left, y: top }, b: { x: left, y: bottom }, c: { x: right, y: centerY }
                 },
                 1: {  // down
-                    a: { x: right, y: top }, b: { x: right, y: bottom }, c: { x: left, y: centerY }
+                    a: { x: right, y: top }, b: { x: left, y: top }, c: { x: centerX, y: bottom }
                 },
                 2: {  // left
-                    a: { x: right, y: bottom }, b: { x: left, y: bottom }, c: { x: centerX, y: top }
+                    a: { x: right, y: bottom }, b: { x: right, y: top }, c: { x: left, y: centerY }
                 },
                 3: {  // up
-                    a: { x: left, y: bottom }, b: { x: left, y: top }, c: { x: right, y: centerY }
+                    a: { x: left, y: bottom }, b: { x: right, y: bottom }, c: { x: centerX, y: top }
                 }
             }
 
