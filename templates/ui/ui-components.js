@@ -18,6 +18,7 @@ import CircularProgress from './circularprogress/CircularProgress.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import LineProgress from './lineprogress/LineProgress.js';
 import LineProgressCanvas from './lineprogresscanvas/LineProgressCanvas.js';
+import Tirangle from './triangle/Triangle.js';
 import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
@@ -132,6 +133,7 @@ export {
     CircularProgressCanvas,
     LineProgress,
     LineProgressCanvas,
+    Tirangle,
     Knob,
     CustomShapes,
     CustomProgress,

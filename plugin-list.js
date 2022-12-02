@@ -237,6 +237,8 @@ module.exports = {
     'customshapes': './templates/ui/customshapes/CustomShapes.js',
     'customprogress': './templates/ui/customprogress/CustomProgress.js',
     'colorcomponents': './templates/ui/colorinput/colorcomponents/ColorComponents.js',
+    'checkbox': './templates/ui/checkbox/Checkbox.js',
+    'triangle': './templates/ui/triangle/Triangle.js',
     'colorinput': './templates/ui/colorinput/colorinput/ColorInput.js',
     'colorpicker': './templates/ui/colorinput/colorpicker/ColorPicker.js',
     'chart': './templates/ui/chart/Chart.js',

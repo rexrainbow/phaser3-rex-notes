@@ -8,7 +8,7 @@ const RadToDeg = Phaser.Math.RadToDeg
 
 class Triangle extends BaseShapes {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth, direction, radius;
+        var strokeColor, strokeAlpha, strokeWidth, direction, padding, radius;
         if (IsPlainObject(x)) {
             var config = x;
 
@@ -25,6 +25,7 @@ class Triangle extends BaseShapes {
             strokeWidth = config.strokeWidth;
 
             direction = config.direction;
+            padding = config.padding;
             radius = config.radius;
         }
 
@@ -33,6 +34,7 @@ class Triangle extends BaseShapes {
         if (width === undefined) { width = 1; }
         if (height === undefined) { height = width; }
         if (direction === undefined) { direction = 0; }
+        if (padding === undefined) { padding = 0; }
         if (radius === undefined) { radius = undefined; }
 
         super(scene, x, y, width, height);
@@ -47,28 +49,12 @@ class Triangle extends BaseShapes {
 
         this.setDirection(direction);
 
+        this.setPadding(padding);
+
         this.setRadius(radius);
 
         this.buildShapes();
 
-    }
-
-    get radius() {
-        return this._radius;
-    }
-
-    set radius(value) {
-        this.dirty = this.dirty || (this._radius != value);
-        this._radius = value;
-    }
-
-    setRadius(radius) {
-        this.radius = radius;
-
-        // 0: fit mode
-        // 1: circle mode
-        this.shapeMode = (radius == null) ? 0 : 1;
-        return this;
     }
 
     get verticeRotation() {
@@ -171,6 +157,25 @@ class Triangle extends BaseShapes {
 
         return this;
     }
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(value) {
+        this.dirty = this.dirty || (this._radius != value);
+        this._radius = value;
+    }
+
+    setRadius(radius) {
+        this.radius = radius;
+
+        // 0: fit mode
+        // 1: circle mode
+        this.shapeMode = (radius == null) ? 0 : 1;
+        return this;
+    }
+
 }
 
 const DirectionNameMap = {

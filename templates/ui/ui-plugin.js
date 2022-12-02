@@ -20,6 +20,7 @@ import CircularProgressFactory from './circularprogress/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import LineProgressFactory from './lineprogress/Factory.js';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory.js';
+import TriangleFactory from './triangle/Factory.js';
 import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';

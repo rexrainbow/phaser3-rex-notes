@@ -76,6 +76,7 @@ import TextPlayerFactory from './textplayer/Factory';
 import TitleLabelFactory from './titlelabel/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
+import TriangleFactory from './triangle/Factory';
 import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -173,6 +174,7 @@ declare class Factories {
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
     touchEventStop: typeof TouchEventStopFactory;
+    triangle: typeof TriangleFactory;
     tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
 }
@@ -299,6 +301,7 @@ import TextPlayerClass from './textplayer/TextPlayer';
 import TitleLabelClass from './titlelabel/TitleLabel';
 import ToastClass from './toast/Toast';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
+import TriangleClass from './triangle/Triangle';
 import TweakerClass from './tweaker/Tweaker';
 
 declare namespace UIPlugins {
@@ -376,5 +379,6 @@ declare namespace UIPlugins {
     type TitleLabel = TitleLabelClass;
     type Toast = ToastClass;
     type TouchEventStop = TouchEventStopClass;
+    type Triangle = TriangleClass;
     type Tweaker = TweakerClass;
 }

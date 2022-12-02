@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextriangleplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextriangle = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -1680,109 +1680,6 @@
   };
   Object.assign(Triangle.prototype, ShapesUpdateMethods);
 
-  function Factory (x, y, width, height, fillColor, fillAlpha) {
-    var gameObject = new Triangle(this.scene, x, y, width, height, fillColor, fillAlpha);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  }
-
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
-    if (config === undefined) {
-      config = {};
-    }
-    if (addToScene !== undefined) {
-      config.add = addToScene;
-    }
-    var gameObject = new Triangle(this.scene, config);
-    BuildGameObject(this.scene, gameObject, config);
-    return gameObject;
-  }
-
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
-          }
-          entry[key] = newEntry;
-        }
-        entry = entry[key];
-      }
-    }
-    return entry;
-  };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
-
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
-  };
-
-  var TrianglePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(TrianglePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(TrianglePlugin);
-    function TrianglePlugin(pluginManager) {
-      var _this;
-      _classCallCheck(this, TrianglePlugin);
-      _this = _super.call(this, pluginManager);
-
-      //  Register our new Game Object type
-      pluginManager.registerGameObject('rexTriangle', Factory, Creator);
-      return _this;
-    }
-    _createClass(TrianglePlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-      }
-    }]);
-    return TrianglePlugin;
-  }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.GameObjects.Triangle', Triangle);
-
-  return TrianglePlugin;
+  return Triangle;
 
 }));

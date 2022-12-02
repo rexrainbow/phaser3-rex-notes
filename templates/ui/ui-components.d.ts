@@ -16,6 +16,7 @@ import CircularProgress from './circularprogress/CircularProgress';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas';
 import LineProgress from './lineprogress/LineProgress';
 import LineProgressCanvas from './lineprogresscanvas/LineProgressCanvas';
+import Triangle from './triangle/Triangle';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
@@ -130,6 +131,7 @@ export {
     CircularProgressCanvas,
     LineProgress,
     LineProgressCanvas,
+    Triangle,
     Knob,
     CustomShapes,
     CustomProgress,
