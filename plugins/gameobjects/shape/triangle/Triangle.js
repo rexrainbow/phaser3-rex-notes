@@ -108,7 +108,7 @@ class Triangle extends BaseShapes {
         }
         value = value % 4;
         this._direction = value;
-        this.verticeRotation = DegToRad(value * 90);
+        this.verticeAngle = value * 90;
     }
 
     setDirection(direction) {

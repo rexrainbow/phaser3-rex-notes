@@ -1013,8 +1013,8 @@
   };
 
   var DistanceBetween = Phaser.Math.Distance.Between;
-  var Wrap = Phaser.Math.Wrap;
-  var Linear = Phaser.Math.Linear;
+  var Wrap$1 = Phaser.Math.Wrap;
+  var Linear$1 = Phaser.Math.Linear;
   var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
       endT = startT;
@@ -1074,7 +1074,7 @@
   var GetInterpolation = function GetInterpolation(pathData, i0, i1, t) {
     var p0 = pathData[i0],
       p1 = pathData[i1];
-    return Linear(p0, p1, t);
+    return Linear$1(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
     if (t === 0) {
@@ -1082,7 +1082,7 @@
     } else if (t % 1 === 0) {
       return 1;
     }
-    return Wrap(t, 0, 1);
+    return Wrap$1(t, 0, 1);
   };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {
@@ -1389,6 +1389,8 @@
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var Rad120 = DegToRad$1(120);
+  var Wrap = Phaser.Math.Wrap;
+  var Linear = Phaser.Math.Linear;
   var ShapesUpdateMethods = {
     buildShapes: function buildShapes() {
       this.addShape(new Lines().setName('triangle'));
@@ -1407,24 +1409,81 @@
         left += padding.left;
         bottom -= padding.bottom;
         top += padding.top;
-        switch (this.direction) {
-          case 0:
+        var pointsMapping = {
+          0: {
             // right
-            triangle.startAt(left, top).lineTo(left, bottom).lineTo(right, centerY).close();
-            break;
-          case 1:
+            a: {
+              x: left,
+              y: top
+            },
+            b: {
+              x: right,
+              y: top
+            },
+            c: {
+              x: centerX,
+              y: bottom
+            }
+          },
+          1: {
             // down
-            triangle.startAt(left, top).lineTo(right, top).lineTo(centerX, bottom).close();
-            break;
-          case 2:
+            a: {
+              x: right,
+              y: top
+            },
+            b: {
+              x: right,
+              y: bottom
+            },
+            c: {
+              x: left,
+              y: centerY
+            }
+          },
+          2: {
             // left
-            triangle.startAt(right, top).lineTo(right, bottom).lineTo(left, centerY).close();
-            break;
-          case 3:
+            a: {
+              x: right,
+              y: bottom
+            },
+            b: {
+              x: left,
+              y: bottom
+            },
+            c: {
+              x: centerX,
+              y: top
+            }
+          },
+          3: {
             // up
-            triangle.startAt(left, bottom).lineTo(right, bottom).lineTo(centerX, top).close();
-            break;
-        }
+            a: {
+              x: left,
+              y: bottom
+            },
+            b: {
+              x: left,
+              y: top
+            },
+            c: {
+              x: right,
+              y: centerY
+            }
+          }
+        };
+        var wrapDirection = Wrap(this.verticeAngle / 90, 0, 4);
+        var indexT0 = Math.floor(wrapDirection),
+          indexT1 = (indexT0 + 1) % 4,
+          t = wrapDirection - indexT0;
+        var pointsT0 = pointsMapping[indexT0],
+          pointsT1 = pointsMapping[indexT1];
+        var pointAx = Linear(pointsT0.a.x, pointsT1.a.x, t);
+        var pointAy = Linear(pointsT0.a.y, pointsT1.a.y, t);
+        var pointBx = Linear(pointsT0.b.x, pointsT1.b.x, t);
+        var pointBy = Linear(pointsT0.b.y, pointsT1.b.y, t);
+        var pointCx = Linear(pointsT0.c.x, pointsT1.c.x, t);
+        var pointCy = Linear(pointsT0.c.y, pointsT1.c.y, t);
+        triangle.startAt(pointAx, pointAy).lineTo(pointBx, pointBy).lineTo(pointCx, pointCy).close();
       } else {
         var radius = Math.min(centerX, centerY) * this.radius,
           verticeRotation = this.verticeRotation;
@@ -1547,7 +1606,7 @@
         }
         value = value % 4;
         this._direction = value;
-        this.verticeRotation = DegToRad(value * 90);
+        this.verticeAngle = value * 90;
       }
     }, {
       key: "setDirection",

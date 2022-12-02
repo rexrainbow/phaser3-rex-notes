@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(triangle.getBounds())
 
         var gui = new Dat.GUI();
-        gui.add(triangle, 'verticeAngle', 0, 359);
+        gui.add(triangle, 'verticeAngle', 0, 360);
         gui.add(triangle, 'radius', 0, 1);
     }
 

@@ -2,6 +2,8 @@ import { Lines } from '../shapes/geoms';
 
 const DegToRad = Phaser.Math.DegToRad;
 const Rad120 = DegToRad(120);
+const Wrap = Phaser.Math.Wrap;
+const Linear = Phaser.Math.Linear;
 
 export default {
     buildShapes() {
@@ -25,32 +27,38 @@ export default {
             left += padding.left;
             bottom -= padding.bottom;
             top += padding.top;
-            switch (this.direction) {
-                case 0:  // right
-                    triangle
-                        .startAt(left, top).lineTo(left, bottom).lineTo(right, centerY)
-                        .close()
-                    break;
 
-                case 1:  // down
-                    triangle
-                        .startAt(left, top).lineTo(right, top).lineTo(centerX, bottom)
-                        .close()
-                    break;
-
-                case 2:  // left
-                    triangle
-                        .startAt(right, top).lineTo(right, bottom).lineTo(left, centerY)
-                        .close()
-                    break;
-
-                case 3:  // up
-                    triangle
-                        .startAt(left, bottom).lineTo(right, bottom).lineTo(centerX, top)
-                        .close()
-                    break;
-
+            var pointsMapping = {
+                0: {  // right
+                    a: { x: left, y: top }, b: { x: right, y: top }, c: { x: centerX, y: bottom }
+                },
+                1: {  // down
+                    a: { x: right, y: top }, b: { x: right, y: bottom }, c: { x: left, y: centerY }
+                },
+                2: {  // left
+                    a: { x: right, y: bottom }, b: { x: left, y: bottom }, c: { x: centerX, y: top }
+                },
+                3: {  // up
+                    a: { x: left, y: bottom }, b: { x: left, y: top }, c: { x: right, y: centerY }
+                }
             }
+
+            var wrapDirection = Wrap((this.verticeAngle / 90), 0, 4);
+            var indexT0 = Math.floor(wrapDirection),
+                indexT1 = (indexT0 + 1) % 4,
+                t = wrapDirection - indexT0;
+            var pointsT0 = pointsMapping[indexT0],
+                pointsT1 = pointsMapping[indexT1];
+            var pointAx = Linear(pointsT0.a.x, pointsT1.a.x, t);
+            var pointAy = Linear(pointsT0.a.y, pointsT1.a.y, t);
+            var pointBx = Linear(pointsT0.b.x, pointsT1.b.x, t);
+            var pointBy = Linear(pointsT0.b.y, pointsT1.b.y, t);
+            var pointCx = Linear(pointsT0.c.x, pointsT1.c.x, t);
+            var pointCy = Linear(pointsT0.c.y, pointsT1.c.y, t);
+
+            triangle
+                .startAt(pointAx, pointAy).lineTo(pointBx, pointBy).lineTo(pointCx, pointCy)
+                .close()
 
         } else {
             var radius = Math.min(centerX, centerY) * this.radius,

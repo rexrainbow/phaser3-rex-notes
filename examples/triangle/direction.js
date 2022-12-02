@@ -30,6 +30,9 @@ class Demo extends Phaser.Scene {
         })
         print.text = `Direction=${triangle.direction}`;
 
+        var gui = new Dat.GUI();
+        gui.add(triangle, 'verticeAngle', 0, 360);
+
     }
 
     update() { }
