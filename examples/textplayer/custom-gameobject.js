@@ -19,7 +19,7 @@ Once upon a time...[r]
 [char.B.x.toRight=100,1000]
 [wait=1000]
 
-Good bye...
+Goodbye...
 
 [wait=500]
 
