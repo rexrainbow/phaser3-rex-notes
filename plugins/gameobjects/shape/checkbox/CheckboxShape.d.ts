@@ -73,6 +73,6 @@ declare class Checkbox extends BaseShapes {
     checkerColor: number;
     checkAlpha: number;
 
-    setCheckerAnimDuration(duration: number): this;
+    setCheckerAnimationDuration(duration: number): this;
     checkerAnimDuration: number;
 }

@@ -21947,7 +21947,7 @@
   };
 
   var CheckerAnimationMethods = {
-    setCheckerAnimDuration: function setCheckerAnimDuration(duration) {
+    setCheckerAnimationDuration: function setCheckerAnimationDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
@@ -22011,7 +22011,7 @@
       _this.setBoxStrokeStyle(GetValue$d(config, 'boxLineWidth', 4), GetValue$d(config, 'boxStrokeColor', color), GetValue$d(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$d(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$d(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue$d(config, 'checkerColor', 0xffffff), GetValue$d(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue$d(config, 'animationDuration', 150));
+      _this.setCheckerAnimationDuration(GetValue$d(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue$d(config, 'checked', false));
       return _this;

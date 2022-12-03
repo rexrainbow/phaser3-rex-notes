@@ -1,5 +1,6 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './methods/ShapesUpdateMethods.js';
+import EaseDirectionMethods from './methods/EaseDirectionMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -57,53 +58,58 @@ class Triangle extends BaseShapes {
 
     }
 
-    get verticeRotation() {
-        return this._verticeRotation;
-    }
-
-    set verticeRotation(value) {
-        this.dirty = this.dirty || (this._verticeRotation != value);
-        this._verticeRotation = value;
-    }
-
-    setVerticeRotation(rotation) {
-        this.verticeRotation = rotation;
-        return this;
-    }
-
-    get verticeAngle() {
-        return RadToDeg(this.verticeRotation);
-    }
-
-    set verticeAngle(value) {
-        this.verticeRotation = DegToRad(value);
-    }
-
-    setVerticeAngle(angle) {
-        this.verticeAngle = angle;
-        return this;
-    }
-
     get direction() {
         return this._direction;
     }
 
     set direction(value) {
-        if (typeof (value) === 'string') {
-            value = DirectionNameMap[value];
-        }
-        value = value % 4;
-        this._direction = value;
+        this._direction = ParseDirection(value);
         this.verticeAngle = value * 90;
     }
 
-    setDirection(direction) {
+    setDirection(direction, easeDuration) {
+        direction = ParseDirection(direction);
+
+        if (
+            (easeDuration !== undefined) && (easeDuration > 0) &&
+            (this.direction !== undefined) && (this.direction !== direction)
+        ) {
+            this.previousDirection = this.direction;
+            this.setEaseDirectionDuration(easeDuration);
+        } else {
+            this.previousDirection = undefined;
+        }
+
         this.direction = direction;
+
+        if (this.previousDirection !== undefined) {
+            this.playEaseDirectionation();
+        } else {
+            this.stopEaseDirection();
+        }
+
         return this;
     }
 
-    setPadding(left, top, right, bottom) {
+    toggleDirection(easeDuration) {
+        this.setDirection((this.direction + 2), easeDuration);
+        return this;
+    }
 
+    get easeDirectionProgress() {
+        return this._easeDirectionProgress;
+    }
+
+    set easeDirectionProgress(value) {
+        if (this._easeDirectionProgress === value) {
+            return;
+        }
+
+        this._easeDirectionProgress = value;
+        this.dirty = true;
+    }
+
+    setPadding(left, top, right, bottom) {
         if (typeof left === 'object') {
             var config = left;
 
@@ -176,15 +182,50 @@ class Triangle extends BaseShapes {
         return this;
     }
 
+    get verticeRotation() {
+        return this._verticeRotation;
+    }
+
+    set verticeRotation(value) {
+        this.dirty = this.dirty || (this._verticeRotation != value);
+        this._verticeRotation = value;
+    }
+
+    setVerticeRotation(rotation) {
+        this.verticeRotation = rotation;
+        return this;
+    }
+
+    get verticeAngle() {
+        return RadToDeg(this.verticeRotation);
+    }
+
+    set verticeAngle(value) {
+        this.verticeRotation = DegToRad(value);
+    }
+
+    setVerticeAngle(angle) {
+        this.verticeAngle = angle;
+        return this;
+    }
+
 }
 
 const DirectionNameMap = {
     right: 0, down: 1, left: 2, up: 3
 }
+var ParseDirection = function (direction) {
+    if (typeof (direction) === 'string') {
+        direction = DirectionNameMap[direction];
+    }
+    direction = direction % 4;
+    return direction;
+}
 
 Object.assign(
     Triangle.prototype,
-    ShapesUpdateMethods
+    ShapesUpdateMethods,
+    EaseDirectionMethods,
 )
 
 export default Triangle;

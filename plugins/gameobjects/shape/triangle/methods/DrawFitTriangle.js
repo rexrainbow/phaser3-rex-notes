@@ -12,47 +12,46 @@ var DrawFitTriangle = function () {
     var centerX = (left + right) / 2;
     var centerY = (top + bottom) / 2;
 
-    /*
-    {
+    var points = {
         0: {  // right
             a: { x: left, y: top }, b: { x: left, y: bottom }, c: { x: right, y: centerY }
         },
         1: {  // down
-            a: { x: right, y: top }, b: { x: left, y: top }, c: { x: centerX, y: bottom }
+            a: { x: left, y: top }, b: { x: right, y: top }, c: { x: centerX, y: bottom }
         },
         2: {  // left
-            a: { x: right, y: bottom }, b: { x: right, y: top }, c: { x: left, y: centerY }
+            a: { x: right, y: top }, b: { x: right, y: bottom }, c: { x: left, y: centerY }
         },
         3: {  // up
             a: { x: left, y: bottom }, b: { x: right, y: bottom }, c: { x: centerX, y: top }
         }
     }
-    */
 
-    switch (this.direction) {
-        case 0: // right
-            triangle
-                .startAt(left, top).lineTo(left, bottom).lineTo(right, centerY)
-                .close();
+    if (this.previousDirection === undefined) {
+        var currentTrianglePoints = points[this.direction];
+        var pa = currentTrianglePoints.a,
+            pb = currentTrianglePoints.b,
+            pc = currentTrianglePoints.c;
 
-            break;
-        case 1: // down
-            triangle
-                .startAt(right, top).lineTo(left, top).lineTo(centerX, bottom)
-                .close();
-            break;
+        triangle
+            .startAt(pa.x, pa.y).lineTo(pb.x, pb.y).lineTo(pc.x, pc.y)
+            .close();
 
-        case 2: // left
-            triangle
-                .startAt(right, bottom).lineTo(right, top).lineTo(left, centerY)
-                .close();
-            break;
+    } else {
+        var p0 = points[this.previousDirection];
+        var p1 = points[this.direction];
+        var t = this.easeDirectionProgress;
+        var pax = Linear(p0.a.x, p1.a.x, t);
+        var pay = Linear(p0.a.y, p1.a.y, t);
+        var pbx = Linear(p0.b.x, p1.b.x, t);
+        var pby = Linear(p0.b.y, p1.b.y, t);
+        var pcx = Linear(p0.c.x, p1.c.x, t);
+        var pcy = Linear(p0.c.y, p1.c.y, t);
 
-        case 3: // up
-            triangle
-                .startAt(left, bottom).lineTo(right, bottom).lineTo(centerX, top)
-                .close();
-            break;
+        triangle
+            .startAt(pax, pay).lineTo(pbx, pby).lineTo(pcx, pcy)
+            .close();
+
     }
 
 }

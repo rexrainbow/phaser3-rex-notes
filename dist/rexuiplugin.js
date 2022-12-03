@@ -7675,7 +7675,7 @@
   };
 
   var GetValue$2F = Phaser.Utils.Objects.GetValue;
-  var Wrap$3 = Phaser.Math.Wrap;
+  var Wrap$2 = Phaser.Math.Wrap;
   var HiddenTextEdit$1 = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
     var _super = _createSuper(HiddenTextEdit);
@@ -7759,7 +7759,7 @@
           cursor = ' ';
         }
         var timerValue = this.cursorFlashTimer + GetTickDelta(this.scene);
-        this.cursorFlashTimer = Wrap$3(timerValue, 0, this.cursorFlashDuration);
+        this.cursorFlashTimer = Wrap$2(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }
     }]);
@@ -8837,7 +8837,7 @@
   };
 
   var DistanceBetween$7 = Phaser.Math.Distance.Between;
-  var Wrap$2 = Phaser.Math.Wrap;
+  var Wrap$1 = Phaser.Math.Wrap;
   var Linear$b = Phaser.Math.Linear;
   var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
@@ -8906,7 +8906,7 @@
     } else if (t % 1 === 0) {
       return 1;
     }
-    return Wrap$2(t, 0, 1);
+    return Wrap$1(t, 0, 1);
   };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {
@@ -10382,7 +10382,7 @@
   }(EaseValueTaskBase);
 
   var CheckerAnimationMethods = {
-    setCheckerAnimDuration: function setCheckerAnimDuration(duration) {
+    setCheckerAnimationDuration: function setCheckerAnimationDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
@@ -10446,7 +10446,7 @@
       _this.setBoxStrokeStyle(GetValue$2y(config, 'boxLineWidth', 4), GetValue$2y(config, 'boxStrokeColor', color), GetValue$2y(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2y(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2y(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue$2y(config, 'checkerColor', 0xffffff), GetValue$2y(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue$2y(config, 'animationDuration', 150));
+      _this.setCheckerAnimationDuration(GetValue$2y(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue$2y(config, 'checked', false));
       return _this;
@@ -23149,108 +23149,155 @@
   });
   SetValue$1(window, 'RexPlugins.UI.LineProgressCanvas', LineProgress);
 
+  Phaser.Math.Wrap;
+  var Linear$7 = Phaser.Math.Linear;
+  var DrawFitTriangle = function DrawFitTriangle() {
+    var triangle = this.getShape('triangle');
+    var padding = this.padding;
+    var right = this.width - padding.right;
+    var left = 0 + padding.left;
+    var bottom = this.height - padding.bottom;
+    var top = 0 + padding.top;
+    var centerX = (left + right) / 2;
+    var centerY = (top + bottom) / 2;
+    var points = {
+      0: {
+        // right
+        a: {
+          x: left,
+          y: top
+        },
+        b: {
+          x: left,
+          y: bottom
+        },
+        c: {
+          x: right,
+          y: centerY
+        }
+      },
+      1: {
+        // down
+        a: {
+          x: left,
+          y: top
+        },
+        b: {
+          x: right,
+          y: top
+        },
+        c: {
+          x: centerX,
+          y: bottom
+        }
+      },
+      2: {
+        // left
+        a: {
+          x: right,
+          y: top
+        },
+        b: {
+          x: right,
+          y: bottom
+        },
+        c: {
+          x: left,
+          y: centerY
+        }
+      },
+      3: {
+        // up
+        a: {
+          x: left,
+          y: bottom
+        },
+        b: {
+          x: right,
+          y: bottom
+        },
+        c: {
+          x: centerX,
+          y: top
+        }
+      }
+    };
+    if (this.previousDirection === undefined) {
+      var currentTrianglePoints = points[this.direction];
+      var pa = currentTrianglePoints.a,
+        pb = currentTrianglePoints.b,
+        pc = currentTrianglePoints.c;
+      triangle.startAt(pa.x, pa.y).lineTo(pb.x, pb.y).lineTo(pc.x, pc.y).close();
+    } else {
+      var p0 = points[this.previousDirection];
+      var p1 = points[this.direction];
+      var t = this.easeDirectionProgress;
+      var pax = Linear$7(p0.a.x, p1.a.x, t);
+      var pay = Linear$7(p0.a.y, p1.a.y, t);
+      var pbx = Linear$7(p0.b.x, p1.b.x, t);
+      var pby = Linear$7(p0.b.y, p1.b.y, t);
+      var pcx = Linear$7(p0.c.x, p1.c.x, t);
+      var pcy = Linear$7(p0.c.y, p1.c.y, t);
+      triangle.startAt(pax, pay).lineTo(pbx, pby).lineTo(pcx, pcy).close();
+    }
+  };
+
   var DegToRad$6 = Phaser.Math.DegToRad;
   var Rad120 = DegToRad$6(120);
-  var Wrap$1 = Phaser.Math.Wrap;
-  var Linear$7 = Phaser.Math.Linear;
+  var DrawCircleVerticesTriangle = function DrawCircleVerticesTriangle(triangle) {
+    var triangle = this.getShape('triangle');
+    var centerX = this.width / 2,
+      centerY = this.height / 2;
+    var radius = Math.min(centerX, centerY) * this.radius,
+      verticeRotation = this.verticeRotation;
+    triangle.startAt(centerX + radius * Math.cos(verticeRotation), centerY + radius * Math.sin(verticeRotation)).lineTo(centerX + radius * Math.cos(verticeRotation + Rad120), centerY + radius * Math.sin(verticeRotation + Rad120)).lineTo(centerX + radius * Math.cos(verticeRotation - Rad120), centerY + radius * Math.sin(verticeRotation - Rad120)).close();
+  };
+
   var ShapesUpdateMethods$1 = {
     buildShapes: function buildShapes() {
       this.addShape(new Lines().setName('triangle'));
     },
     updateShapes: function updateShapes() {
-      var right = this.width,
-        left = 0,
-        bottom = this.height,
-        top = 0;
-      var centerX = right / 2,
-        centerY = bottom / 2;
-      var triangle = this.getShape('triangle').fillStyle(this.fillColor, this.fillAlpha).lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+      // Set style
+      this.getShape('triangle').fillStyle(this.fillColor, this.fillAlpha).lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+
+      // Set points
       if (this.shapeMode === 0) {
-        var padding = this.padding;
-        right -= padding.right;
-        left += padding.left;
-        bottom -= padding.bottom;
-        top += padding.top;
-        var pointsMapping = {
-          0: {
-            // right
-            a: {
-              x: left,
-              y: top
-            },
-            b: {
-              x: left,
-              y: bottom
-            },
-            c: {
-              x: right,
-              y: centerY
-            }
-          },
-          1: {
-            // down
-            a: {
-              x: right,
-              y: top
-            },
-            b: {
-              x: left,
-              y: top
-            },
-            c: {
-              x: centerX,
-              y: bottom
-            }
-          },
-          2: {
-            // left
-            a: {
-              x: right,
-              y: bottom
-            },
-            b: {
-              x: right,
-              y: top
-            },
-            c: {
-              x: left,
-              y: centerY
-            }
-          },
-          3: {
-            // up
-            a: {
-              x: left,
-              y: bottom
-            },
-            b: {
-              x: right,
-              y: bottom
-            },
-            c: {
-              x: centerX,
-              y: top
-            }
-          }
-        };
-        var wrapDirection = Wrap$1(this.verticeAngle / 90, 0, 4);
-        var indexT0 = Math.floor(wrapDirection),
-          indexT1 = (indexT0 + 1) % 4,
-          t = wrapDirection - indexT0;
-        var pointsT0 = pointsMapping[indexT0],
-          pointsT1 = pointsMapping[indexT1];
-        var pointAx = Linear$7(pointsT0.a.x, pointsT1.a.x, t);
-        var pointAy = Linear$7(pointsT0.a.y, pointsT1.a.y, t);
-        var pointBx = Linear$7(pointsT0.b.x, pointsT1.b.x, t);
-        var pointBy = Linear$7(pointsT0.b.y, pointsT1.b.y, t);
-        var pointCx = Linear$7(pointsT0.c.x, pointsT1.c.x, t);
-        var pointCy = Linear$7(pointsT0.c.y, pointsT1.c.y, t);
-        triangle.startAt(pointAx, pointAy).lineTo(pointBx, pointBy).lineTo(pointCx, pointCy).close();
+        DrawFitTriangle.call(this);
       } else {
-        var radius = Math.min(centerX, centerY) * this.radius,
-          verticeRotation = this.verticeRotation;
-        triangle.startAt(centerX + radius * Math.cos(verticeRotation), centerY + radius * Math.sin(verticeRotation)).lineTo(centerX + radius * Math.cos(verticeRotation + Rad120), centerY + radius * Math.sin(verticeRotation + Rad120)).lineTo(centerX + radius * Math.cos(verticeRotation - Rad120), centerY + radius * Math.sin(verticeRotation - Rad120)).close();
+        DrawCircleVerticesTriangle.call(this);
       }
+    }
+  };
+
+  var EaseDirectionMethods = {
+    setEaseDirectionDuration: function setEaseDirectionDuration(duration) {
+      if (duration === undefined) {
+        duration = 0;
+      }
+      this.easeDirectionDuration = duration;
+      return this;
+    },
+    playEaseDirectionation: function playEaseDirectionation() {
+      if (this.easeDirectionProgressTask === undefined) {
+        this.easeDirectionProgressTask = new EaseValueTask(this, {
+          eventEmitter: null
+        });
+      }
+      this.easeDirectionProgressTask.restart({
+        key: 'easeDirectionProgress',
+        from: 0,
+        to: 1,
+        duration: this.easeDirectionDuration
+      });
+      return this;
+    },
+    stopEaseDirection: function stopEaseDirection() {
+      if (this.easeDirectionProgressTask === undefined) {
+        return this;
+      }
+      this.easeDirectionProgressTask.stop();
+      return this;
     }
   };
 
@@ -23315,52 +23362,49 @@
       return _this;
     }
     _createClass(Triangle, [{
-      key: "verticeRotation",
-      get: function get() {
-        return this._verticeRotation;
-      },
-      set: function set(value) {
-        this.dirty = this.dirty || this._verticeRotation != value;
-        this._verticeRotation = value;
-      }
-    }, {
-      key: "setVerticeRotation",
-      value: function setVerticeRotation(rotation) {
-        this.verticeRotation = rotation;
-        return this;
-      }
-    }, {
-      key: "verticeAngle",
-      get: function get() {
-        return RadToDeg$5(this.verticeRotation);
-      },
-      set: function set(value) {
-        this.verticeRotation = DegToRad$5(value);
-      }
-    }, {
-      key: "setVerticeAngle",
-      value: function setVerticeAngle(angle) {
-        this.verticeAngle = angle;
-        return this;
-      }
-    }, {
       key: "direction",
       get: function get() {
         return this._direction;
       },
       set: function set(value) {
-        if (typeof value === 'string') {
-          value = DirectionNameMap[value];
-        }
-        value = value % 4;
-        this._direction = value;
+        this._direction = ParseDirection(value);
         this.verticeAngle = value * 90;
       }
     }, {
       key: "setDirection",
-      value: function setDirection(direction) {
+      value: function setDirection(direction, easeDuration) {
+        direction = ParseDirection(direction);
+        if (easeDuration !== undefined && easeDuration > 0 && this.direction !== undefined && this.direction !== direction) {
+          this.previousDirection = this.direction;
+          this.setEaseDirectionDuration(easeDuration);
+        } else {
+          this.previousDirection = undefined;
+        }
         this.direction = direction;
+        if (this.previousDirection !== undefined) {
+          this.playEaseDirectionation();
+        } else {
+          this.stopEaseDirection();
+        }
         return this;
+      }
+    }, {
+      key: "toggleDirection",
+      value: function toggleDirection(easeDuration) {
+        this.setDirection(this.direction + 2, easeDuration);
+        return this;
+      }
+    }, {
+      key: "easeDirectionProgress",
+      get: function get() {
+        return this._easeDirectionProgress;
+      },
+      set: function set(value) {
+        if (this._easeDirectionProgress === value) {
+          return;
+        }
+        this._easeDirectionProgress = value;
+        this.dirty = true;
       }
     }, {
       key: "setPadding",
@@ -23431,6 +23475,35 @@
         this.shapeMode = radius == null ? 0 : 1;
         return this;
       }
+    }, {
+      key: "verticeRotation",
+      get: function get() {
+        return this._verticeRotation;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._verticeRotation != value;
+        this._verticeRotation = value;
+      }
+    }, {
+      key: "setVerticeRotation",
+      value: function setVerticeRotation(rotation) {
+        this.verticeRotation = rotation;
+        return this;
+      }
+    }, {
+      key: "verticeAngle",
+      get: function get() {
+        return RadToDeg$5(this.verticeRotation);
+      },
+      set: function set(value) {
+        this.verticeRotation = DegToRad$5(value);
+      }
+    }, {
+      key: "setVerticeAngle",
+      value: function setVerticeAngle(angle) {
+        this.verticeAngle = angle;
+        return this;
+      }
     }]);
     return Triangle;
   }(BaseShapes);
@@ -23440,7 +23513,14 @@
     left: 2,
     up: 3
   };
-  Object.assign(Triangle.prototype, ShapesUpdateMethods$1);
+  var ParseDirection = function ParseDirection(direction) {
+    if (typeof direction === 'string') {
+      direction = DirectionNameMap[direction];
+    }
+    direction = direction % 4;
+    return direction;
+  };
+  Object.assign(Triangle.prototype, ShapesUpdateMethods$1, EaseDirectionMethods);
 
   ObjectFactory.register('triangle', function (x, y, width, height, fillColor, fillAlpha) {
     var gameObject = new Triangle(this.scene, x, y, width, height, fillColor, fillAlpha);

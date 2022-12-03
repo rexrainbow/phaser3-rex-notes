@@ -44,13 +44,11 @@ declare class Triangle extends BaseShapes {
         fillColor?: number, fillAlpha?: number
     );
 
-    setVerticeRotation(rotation: number): this;
-    verticeRotation: number;
-
-    setVerticeAngle(angle: number): this;
-    verticeAngle: number;
-
-    setDirection(direction: Triangle.DirectionType): this;
+    setDirection(
+        direction: Triangle.DirectionType,
+        easeDuration?: number
+    ): this;
+    toggleDirection(easeDuration?: number): this;
     direction: number;
 
     setPadding(left?: number, top?: number, right?: number, bottom?: number): this;
@@ -61,4 +59,11 @@ declare class Triangle extends BaseShapes {
 
     setRadius(radius?: number): this;
     radius: number;
+
+    setVerticeRotation(rotation: number): this;
+    verticeRotation: number;
+
+    setVerticeAngle(angle: number): this;
+    verticeAngle: number;
+
 }

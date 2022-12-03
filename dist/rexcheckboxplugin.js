@@ -2538,7 +2538,7 @@
   }(EaseValueTaskBase);
 
   var CheckerAnimationMethods = {
-    setCheckerAnimDuration: function setCheckerAnimDuration(duration) {
+    setCheckerAnimationDuration: function setCheckerAnimationDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
@@ -2602,7 +2602,7 @@
       _this.setBoxStrokeStyle(GetValue$2(config, 'boxLineWidth', 4), GetValue$2(config, 'boxStrokeColor', color), GetValue$2(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue$2(config, 'checkerColor', 0xffffff), GetValue$2(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue$2(config, 'animationDuration', 150));
+      _this.setCheckerAnimationDuration(GetValue$2(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue$2(config, 'checked', false));
       return _this;
