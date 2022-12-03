@@ -1,5 +1,5 @@
 import BaseShapes from '../shapes/BaseShapes.js';
-import ShapesUpdateMethods from './ShapesUpdateMethods.js';
+import ShapesUpdateMethods from './methods/ShapesUpdateMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

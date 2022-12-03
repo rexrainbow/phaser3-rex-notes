@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import TrianglePlugin from '../../plugins/triangle-plugin.js';
-import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -29,9 +28,6 @@ class Demo extends Phaser.Scene {
             print.text = `Direction=${triangle.direction}`;
         })
         print.text = `Direction=${triangle.direction}`;
-
-        var gui = new Dat.GUI();
-        gui.add(triangle, 'verticeAngle', 0, 360);
 
     }
 
