@@ -22,9 +22,10 @@ declare namespace Triangle {
         strokeColor?: number,
         strokeAlpha?: number,
         strokeWidth?: number,
+        arrowOnly?: boolean,
 
         direction?: DirectionType,
-
+        easeDuration?: number,
         padding?: number | IPaddingConfig,
 
         radius?: number,
@@ -43,6 +44,12 @@ declare class Triangle extends BaseShapes {
         width?: number, height?: number,
         fillColor?: number, fillAlpha?: number
     );
+
+    setArrowOnly(enable?: boolean): this;
+    arrowOnly: boolean;
+
+    setEaseDuration(duration?: number): this;
+    easeDuration: number;
 
     setDirection(
         direction: Triangle.DirectionType,

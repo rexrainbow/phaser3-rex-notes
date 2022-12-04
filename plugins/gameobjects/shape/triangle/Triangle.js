@@ -9,7 +9,7 @@ const RadToDeg = Phaser.Math.RadToDeg
 
 class Triangle extends BaseShapes {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth;
+        var strokeColor, strokeAlpha, strokeWidth, arrowOnly;
         var direction, easeDuration, padding;
         var radius;
         if (IsPlainObject(x)) {
@@ -26,6 +26,7 @@ class Triangle extends BaseShapes {
             strokeColor = config.strokeColor;
             strokeAlpha = config.strokeAlpha;
             strokeWidth = config.strokeWidth;
+            arrowOnly = config.arrowOnly;
 
             direction = config.direction;
             easeDuration = config.easeDuration;
@@ -38,6 +39,8 @@ class Triangle extends BaseShapes {
         if (y === undefined) { y = 0; }
         if (width === undefined) { width = 1; }
         if (height === undefined) { height = width; }
+
+        if (arrowOnly === undefined) { arrowOnly = false; }
         if (direction === undefined) { direction = 0; }
         if (easeDuration === undefined) { easeDuration = 0; }
         if (padding === undefined) { padding = 0; }
@@ -53,6 +56,8 @@ class Triangle extends BaseShapes {
         }
         this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
 
+        this.setArrowOnly(arrowOnly);
+
         this.setDirection(direction, easeDuration);
 
         this.setPadding(padding);
@@ -63,25 +68,42 @@ class Triangle extends BaseShapes {
 
     }
 
+    get arrowOnly() {
+        return this._arrowOnly;
+    }
+
+    set arrowOnly(value) {
+        this.dirty = this.dirty || (this._arrowOnly != value);
+        this._arrowOnly = value;
+    }
+
+    setArrowOnly(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.arrowOnly = enable;
+        return this;
+    }
+
     get direction() {
         return this._direction;
     }
 
     set direction(value) {
         value = ParseDirection(value);
+        if (this._direction === value) {
+            return;
+        }
 
-        if (
-            (this.easeDuration > 0) &&
-            (this._direction !== undefined) && (this._direction !== value)
-        ) {
+        if ((this.easeDuration > 0) && (this._direction !== undefined)) {
             this.previousDirection = this._direction;
         } else {
             this.previousDirection = undefined;
         }
 
         this._direction = value;
-
         this.verticeAngle = value * 90;
+        this.dirty = true;
 
         if (this.previousDirection !== undefined) {
             this.playEaseDirectionation();

@@ -23168,12 +23168,12 @@
           y: top
         },
         b: {
-          x: left,
-          y: bottom
-        },
-        c: {
           x: right,
           y: centerY
+        },
+        c: {
+          x: left,
+          y: bottom
         }
       },
       1: {
@@ -23183,12 +23183,12 @@
           y: top
         },
         b: {
-          x: right,
-          y: top
-        },
-        c: {
           x: centerX,
           y: bottom
+        },
+        c: {
+          x: right,
+          y: top
         }
       },
       2: {
@@ -23198,12 +23198,12 @@
           y: top
         },
         b: {
-          x: right,
-          y: bottom
-        },
-        c: {
           x: left,
           y: centerY
+        },
+        c: {
+          x: right,
+          y: bottom
         }
       },
       3: {
@@ -23213,32 +23213,43 @@
           y: bottom
         },
         b: {
-          x: right,
-          y: bottom
-        },
-        c: {
           x: centerX,
           y: top
+        },
+        c: {
+          x: right,
+          y: bottom
         }
       }
     };
+    var pax, pay, pbx, pby, pcx, pcy;
     if (this.previousDirection === undefined) {
       var currentTrianglePoints = points[this.direction];
       var pa = currentTrianglePoints.a,
         pb = currentTrianglePoints.b,
         pc = currentTrianglePoints.c;
-      triangle.startAt(pa.x, pa.y).lineTo(pb.x, pb.y).lineTo(pc.x, pc.y).close();
+      pax = pa.x;
+      pay = pa.y;
+      pbx = pb.x;
+      pby = pb.y;
+      pcx = pc.x;
+      pcy = pc.y;
     } else {
       var p0 = points[this.previousDirection];
       var p1 = points[this.direction];
       var t = this.easeDirectionProgress;
-      var pax = Linear$7(p0.a.x, p1.a.x, t);
-      var pay = Linear$7(p0.a.y, p1.a.y, t);
-      var pbx = Linear$7(p0.b.x, p1.b.x, t);
-      var pby = Linear$7(p0.b.y, p1.b.y, t);
-      var pcx = Linear$7(p0.c.x, p1.c.x, t);
-      var pcy = Linear$7(p0.c.y, p1.c.y, t);
-      triangle.startAt(pax, pay).lineTo(pbx, pby).lineTo(pcx, pcy).close();
+      pax = Linear$7(p0.a.x, p1.a.x, t);
+      pay = Linear$7(p0.a.y, p1.a.y, t);
+      pbx = Linear$7(p0.b.x, p1.b.x, t);
+      pby = Linear$7(p0.b.y, p1.b.y, t);
+      pcx = Linear$7(p0.c.x, p1.c.x, t);
+      pcy = Linear$7(p0.c.y, p1.c.y, t);
+    }
+    triangle.startAt(pax, pay).lineTo(pbx, pby).lineTo(pcx, pcy);
+    if (!this.arrowOnly) {
+      triangle.close();
+    } else {
+      triangle.end();
     }
   };
 
@@ -23250,7 +23261,12 @@
       centerY = this.height / 2;
     var radius = Math.min(centerX, centerY) * this.radius,
       verticeRotation = this.verticeRotation;
-    triangle.startAt(centerX + radius * Math.cos(verticeRotation), centerY + radius * Math.sin(verticeRotation)).lineTo(centerX + radius * Math.cos(verticeRotation + Rad120), centerY + radius * Math.sin(verticeRotation + Rad120)).lineTo(centerX + radius * Math.cos(verticeRotation - Rad120), centerY + radius * Math.sin(verticeRotation - Rad120)).close();
+    triangle.startAt(centerX + radius * Math.cos(verticeRotation + Rad120), centerY + radius * Math.sin(verticeRotation + Rad120)).lineTo(centerX + radius * Math.cos(verticeRotation), centerY + radius * Math.sin(verticeRotation)).lineTo(centerX + radius * Math.cos(verticeRotation - Rad120), centerY + radius * Math.sin(verticeRotation - Rad120));
+    if (!this.arrowOnly) {
+      triangle.close();
+    } else {
+      triangle.end();
+    }
   };
 
   var ShapesUpdateMethods$1 = {
@@ -23259,7 +23275,12 @@
     },
     updateShapes: function updateShapes() {
       // Set style
-      this.getShape('triangle').fillStyle(this.fillColor, this.fillAlpha).lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+      var triangle = this.getShape('triangle');
+      if (!this.arrowOnly) {
+        triangle.fillStyle(this.fillColor, this.fillAlpha).lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+      } else {
+        triangle.fillStyle().lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+      }
 
       // Set points
       if (this.shapeMode === 0) {
@@ -23271,11 +23292,11 @@
   };
 
   var EaseDirectionMethods = {
-    setEaseDirectionDuration: function setEaseDirectionDuration(duration) {
+    setEaseDuration: function setEaseDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
-      this.easeDirectionDuration = duration;
+      this.easeDuration = duration;
       return this;
     },
     playEaseDirectionation: function playEaseDirectionation() {
@@ -23288,7 +23309,7 @@
         key: 'easeDirectionProgress',
         from: 0,
         to: 1,
-        duration: this.easeDirectionDuration
+        duration: this.easeDuration
       });
       return this;
     },
@@ -23311,7 +23332,9 @@
     function Triangle(scene, x, y, width, height, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, Triangle);
-      var strokeColor, strokeAlpha, strokeWidth, direction, padding, radius;
+      var strokeColor, strokeAlpha, strokeWidth, arrowOnly;
+      var direction, easeDuration, padding;
+      var radius;
       if (IsPlainObject$y(x)) {
         var config = x;
         x = config.x;
@@ -23323,7 +23346,9 @@
         strokeColor = config.strokeColor;
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
+        arrowOnly = config.arrowOnly;
         direction = config.direction;
+        easeDuration = config.easeDuration;
         padding = config.padding;
         radius = config.radius;
       }
@@ -23339,8 +23364,14 @@
       if (height === undefined) {
         height = width;
       }
+      if (arrowOnly === undefined) {
+        arrowOnly = false;
+      }
       if (direction === undefined) {
         direction = 0;
+      }
+      if (easeDuration === undefined) {
+        easeDuration = 0;
       }
       if (padding === undefined) {
         padding = 0;
@@ -23355,37 +23386,62 @@
         strokeWidth = 2;
       }
       _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
-      _this.setDirection(direction);
+      _this.setArrowOnly(arrowOnly);
+      _this.setDirection(direction, easeDuration);
       _this.setPadding(padding);
       _this.setRadius(radius);
       _this.buildShapes();
       return _this;
     }
     _createClass(Triangle, [{
+      key: "arrowOnly",
+      get: function get() {
+        return this._arrowOnly;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._arrowOnly != value;
+        this._arrowOnly = value;
+      }
+    }, {
+      key: "setArrowOnly",
+      value: function setArrowOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.arrowOnly = enable;
+        return this;
+      }
+    }, {
       key: "direction",
       get: function get() {
         return this._direction;
       },
       set: function set(value) {
-        this._direction = ParseDirection(value);
-        this.verticeAngle = value * 90;
-      }
-    }, {
-      key: "setDirection",
-      value: function setDirection(direction, easeDuration) {
-        direction = ParseDirection(direction);
-        if (easeDuration !== undefined && easeDuration > 0 && this.direction !== undefined && this.direction !== direction) {
-          this.previousDirection = this.direction;
-          this.setEaseDirectionDuration(easeDuration);
+        value = ParseDirection(value);
+        if (this._direction === value) {
+          return;
+        }
+        if (this.easeDuration > 0 && this._direction !== undefined) {
+          this.previousDirection = this._direction;
         } else {
           this.previousDirection = undefined;
         }
-        this.direction = direction;
+        this._direction = value;
+        this.verticeAngle = value * 90;
+        this.dirty = true;
         if (this.previousDirection !== undefined) {
           this.playEaseDirectionation();
         } else {
           this.stopEaseDirection();
         }
+      }
+    }, {
+      key: "setDirection",
+      value: function setDirection(direction, easeDuration) {
+        if (easeDuration !== undefined) {
+          this.setEaseDuration(easeDuration);
+        }
+        this.direction = direction;
         return this;
       }
     }, {

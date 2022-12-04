@@ -12,18 +12,24 @@ var DrawCircleVerticesTriangle = function (triangle) {
 
     triangle
         .startAt(
-            centerX + radius * Math.cos(verticeRotation),
-            centerY + radius * Math.sin(verticeRotation)
-        )
-        .lineTo(
             centerX + radius * Math.cos(verticeRotation + Rad120),
             centerY + radius * Math.sin(verticeRotation + Rad120)
+        )
+        .lineTo(
+            centerX + radius * Math.cos(verticeRotation),
+            centerY + radius * Math.sin(verticeRotation)
         )
         .lineTo(
             centerX + radius * Math.cos(verticeRotation - Rad120),
             centerY + radius * Math.sin(verticeRotation - Rad120)
         )
-        .close()
+
+    if (!this.arrowOnly) {
+        triangle.close();
+    } else {
+        triangle.end();
+    }
+
 }
 
 export default DrawCircleVerticesTriangle;

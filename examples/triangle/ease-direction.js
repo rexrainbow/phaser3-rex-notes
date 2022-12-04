@@ -14,8 +14,11 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
         var triangle = this.add.rexTriangle(400, 300, 100, 100, 0x888888)
+            .setStrokeStyle(4, 0xffffff)
             .setPadding(10)
             .setDirection('up')
+
+        // triangle.setArrowOnly()
 
         var graphics = this.add.graphics({
             lineStyle: {

@@ -10,9 +10,17 @@ export default {
 
     updateShapes() {
         // Set style
-        this.getShape('triangle')
-            .fillStyle(this.fillColor, this.fillAlpha)
-            .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+        var triangle = this.getShape('triangle');
+
+        if (!this.arrowOnly) {
+            triangle
+                .fillStyle(this.fillColor, this.fillAlpha)
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+        } else {
+            triangle
+                .fillStyle()
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+        }
 
         // Set points
         if (this.shapeMode === 0) {

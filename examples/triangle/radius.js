@@ -13,6 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var triangle = this.add.rexTriangle(400, 300, 100, 100, 0x888888)
+            .setStrokeStyle(4, 0xffffff)
             .setRadius(1);
 
         var graphics = this.add.graphics({
@@ -25,6 +26,7 @@ class Demo extends Phaser.Scene {
         var gui = new Dat.GUI();
         gui.add(triangle, 'verticeAngle', 0, 360);
         gui.add(triangle, 'radius', 0, 1);
+        gui.add(triangle, 'arrowOnly');
     }
 
     update() { }
