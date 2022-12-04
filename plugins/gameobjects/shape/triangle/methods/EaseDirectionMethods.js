@@ -1,11 +1,11 @@
 import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
 
 export default {
-    setEaseDirectionDuration(duration) {
+    setEaseDuration(duration) {
         if (duration === undefined) {
             duration = 0;
         }
-        this.easeDirectionDuration = duration;
+        this.easeDuration = duration;
         return this;
     },
 
@@ -18,7 +18,7 @@ export default {
             key: 'easeDirectionProgress',
             from: 0,
             to: 1,
-            duration: this.easeDirectionDuration,
+            duration: this.easeDuration,
         });
 
         return this;

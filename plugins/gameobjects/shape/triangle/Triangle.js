@@ -9,7 +9,9 @@ const RadToDeg = Phaser.Math.RadToDeg
 
 class Triangle extends BaseShapes {
     constructor(scene, x, y, width, height, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth, direction, padding, radius;
+        var strokeColor, strokeAlpha, strokeWidth;
+        var direction, easeDuration, padding;
+        var radius;
         if (IsPlainObject(x)) {
             var config = x;
 
@@ -26,7 +28,9 @@ class Triangle extends BaseShapes {
             strokeWidth = config.strokeWidth;
 
             direction = config.direction;
+            easeDuration = config.easeDuration;
             padding = config.padding;
+
             radius = config.radius;
         }
 
@@ -35,6 +39,7 @@ class Triangle extends BaseShapes {
         if (width === undefined) { width = 1; }
         if (height === undefined) { height = width; }
         if (direction === undefined) { direction = 0; }
+        if (easeDuration === undefined) { easeDuration = 0; }
         if (padding === undefined) { padding = 0; }
         if (radius === undefined) { radius = undefined; }
 
@@ -48,7 +53,7 @@ class Triangle extends BaseShapes {
         }
         this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
 
-        this.setDirection(direction);
+        this.setDirection(direction, easeDuration);
 
         this.setPadding(padding);
 
@@ -63,31 +68,34 @@ class Triangle extends BaseShapes {
     }
 
     set direction(value) {
-        this._direction = ParseDirection(value);
-        this.verticeAngle = value * 90;
-    }
-
-    setDirection(direction, easeDuration) {
-        direction = ParseDirection(direction);
+        value = ParseDirection(value);
 
         if (
-            (easeDuration !== undefined) && (easeDuration > 0) &&
-            (this.direction !== undefined) && (this.direction !== direction)
+            (this.easeDuration > 0) &&
+            (this._direction !== undefined) && (this._direction !== value)
         ) {
-            this.previousDirection = this.direction;
-            this.setEaseDirectionDuration(easeDuration);
+            this.previousDirection = this._direction;
         } else {
             this.previousDirection = undefined;
         }
 
-        this.direction = direction;
+        this._direction = value;
+
+        this.verticeAngle = value * 90;
 
         if (this.previousDirection !== undefined) {
             this.playEaseDirectionation();
         } else {
             this.stopEaseDirection();
         }
+    }
 
+    setDirection(direction, easeDuration) {
+        if (easeDuration !== undefined) {
+            this.setEaseDuration(easeDuration);
+        }
+
+        this.direction = direction;
         return this;
     }
 
