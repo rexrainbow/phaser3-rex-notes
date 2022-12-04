@@ -2050,6 +2050,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shape-triangle2/" class="md-nav__link">
+        Triangle 2
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9022,11 +9036,7 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBracketParser&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="c1">// delimiters: &#39;&lt;&gt;&#39;, // or [&#39;&lt;&#39;, &#39;&gt;&#39;]</span>
-    <span class="c1">// valueConvert: true,</span>
-    <span class="c1">// regex : {</span>
-    <span class="c1">//     tag: undefined,</span>
-    <span class="c1">//     value: undefined</span>
-    <span class="c1">// },</span>
+    <span class="c1">// valueConvert: true,   </span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9043,17 +9053,6 @@
     <span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-</ul>
-</li>
-<li><code>regex</code> :<ul>
-<li><code>regex.tag</code> : Expression of parse tag. <ul>
-<li><code>undefined</code> : Default value is any character except left-delimiter, right-delimiter, and <code>'='</code>.</li>
-</ul>
-</li>
-<li><code>regex.value</code> : Expression of parse value.<ul>
-<li><code>undefined</code> : Default value is any character except left-delimiter, right-delimiter, and <code>'='</code>.    </li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
