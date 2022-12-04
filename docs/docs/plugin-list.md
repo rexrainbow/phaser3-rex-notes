@@ -159,6 +159,7 @@
 1. [Shape/Line progress](shape-lineprogress.md): Horizontal line progress bar shape.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
+1. [Shape/Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.
 1. [Shatter/Image](shatter-image.md): Shatter image to triangle faces.
 1. [Shatter/Render texture](shatter-rendertexture.md): Shatter render texture to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.

@@ -368,6 +368,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.
+    ```javascript
+    var triangle = scene.rexUI.add.triangle(x, y, width, height, fillColor, fillAlpha);
+    ```
+    or
+    ```javascript
+    class MyTriangle extends RexPlugins.UI.Triangle {
+        constructor(scene, x, y, width, height, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects
