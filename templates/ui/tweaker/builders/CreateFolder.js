@@ -1,4 +1,4 @@
-import CreateTitleLabel from './CreateTitleLabel.js';
+import FolderTitle from '../gameobjects/label/FolderTitle.js';
 import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 import CreateBackground from './CreateBackground.js';
 import Folder from '../gameobjects/folder/Folder.js';
@@ -8,7 +8,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateFolder = function (scene, config, style) {
     // Create Folder-title
     var titleStyle = GetValue(style, 'title') || {};
-    var title = CreateTitleLabel(scene, config, titleStyle);
+    var title = new FolderTitle(scene, titleStyle);
+    scene.add.existing(title);
 
     var tweakerConfig = {
         root: GetValue(style, 'root'),

@@ -2050,7 +2050,9 @@ Style of folder is defined in
                 space: {
                     left: 0, right: 0, top: 0, bottom:0, 
                     icon: 0, text: 0
-                }
+                },
+
+                expandedIconColor: undefined,
             },
 
             background: {

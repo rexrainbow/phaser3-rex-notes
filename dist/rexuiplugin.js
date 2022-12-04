@@ -47560,11 +47560,61 @@
     return Title;
   }(Label$1);
 
-  var CreateTitleLabel = function CreateTitleLabel(scene, config, style) {
-    var gameObject = new Title(scene, style);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
+  var FolderTitle = /*#__PURE__*/function (_Title) {
+    _inherits(FolderTitle, _Title);
+    var _super = _createSuper(FolderTitle);
+    function FolderTitle(scene, config) {
+      var _this;
+      _classCallCheck(this, FolderTitle);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexTweaker.FolderTitle';
+      var expandedIcon = new Triangle(scene, {
+        color: config.expandedIconColor
+      });
+      scene.add.existing(expandedIcon);
+      _this.addSpace().add(expandedIcon, {
+        proportion: 0,
+        expand: false,
+        padding: 1
+      });
+      _this.addChildrenMap('expandedIcon', expandedIcon);
+      return _this;
+    }
+    _createClass(FolderTitle, [{
+      key: "preLayout",
+      value: function preLayout() {
+        var expandedIcon = this.childrenMap.expandedIcon;
+        expandedIcon.resize(1, 1);
+      }
+    }, {
+      key: "postResolveSize",
+      value: function postResolveSize(width, height) {
+        var expandedIcon = this.childrenMap.expandedIcon;
+        var size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(expandedIcon, 'top') - this.getChildOuterPadding(expandedIcon, 'bottom');
+        expandedIcon.resize(size, size);
+
+        // Recalculate proportionLength
+        this.proportionLength = undefined;
+        this._childrenWidth = undefined;
+        this.resolveWidth(width, true);
+      }
+    }, {
+      key: "setExpandedState",
+      value: function setExpandedState(expanded) {
+        if (expanded === undefined) {
+          expanded = true;
+        }
+        var direction = expanded ? 'down' : 'right';
+        var expandedIcon = this.childrenMap.expandedIcon;
+        expandedIcon.setDirection(direction);
+        return this;
+      }
+    }]);
+    return FolderTitle;
+  }(Title);
 
   var CreateTweaker = function CreateTweaker(scene, config) {
     var tweaker = new TweakerShell(scene, config);
@@ -47585,6 +47635,8 @@
       if (transitionDuration === undefined) {
         transitionDuration = this.transitionDuration;
       }
+      var title = this.childrenMap.title;
+      title.setExpandedState(true);
       var child = this.childrenMap.child;
       this.show(child).getTopmostSizer().layout();
       child.popUp(transitionDuration, 'y');
@@ -47598,6 +47650,8 @@
       if (transitionDuration === undefined) {
         transitionDuration = this.transitionDuration;
       }
+      var title = this.childrenMap.title;
+      title.setExpandedState(false);
       var child = this.childrenMap.child;
       child.once('scaledown.complete', function () {
         this.setChildScale(child, 1, 1).hide(child).getTopmostSizer().layout();
@@ -47680,7 +47734,8 @@
   var CreateFolder = function CreateFolder(scene, config, style) {
     // Create Folder-title
     var titleStyle = GetValue$n(style, 'title') || {};
-    var title = CreateTitleLabel(scene, config, titleStyle);
+    var title = new FolderTitle(scene, titleStyle);
+    scene.add.existing(title);
     var tweakerConfig = {
       root: GetValue$n(style, 'root'),
       styles: GetValue$n(style, 'tweaker'),
@@ -48093,6 +48148,12 @@
     return InputRow;
   }(Sizer);
   Object.assign(InputRow.prototype, BindingTargetMethods, MonitorTargetMethods);
+
+  var CreateTitleLabel = function CreateTitleLabel(scene, config, style) {
+    var gameObject = new Title(scene, style);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
 
   var InputFiledBase = /*#__PURE__*/function (_Sizer) {
     _inherits(InputFiledBase, _Sizer);

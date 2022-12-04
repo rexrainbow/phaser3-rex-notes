@@ -269,7 +269,9 @@ var CreatePanel = function (scene) {
                 title: {
                     iconSize: 30,
                     background: { color: COLOR_DARK },
-                    space: { icon: 2 }
+                    space: { icon: 2 },
+
+                    expandedIconColor: COLOR_PRIMARY,
                 },
 
                 background: {

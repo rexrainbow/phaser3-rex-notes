@@ -8,6 +8,9 @@ export default {
             transitionDuration = this.transitionDuration;
         }
 
+        var title = this.childrenMap.title;
+        title.setExpandedState(true);
+
         var child = this.childrenMap.child;
         this
             .show(child)
@@ -29,6 +32,9 @@ export default {
         if (transitionDuration === undefined) {
             transitionDuration = this.transitionDuration;
         }
+
+        var title = this.childrenMap.title;
+        title.setExpandedState(false);
 
         var child = this.childrenMap.child;
         child
