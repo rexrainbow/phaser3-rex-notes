@@ -280,7 +280,9 @@ var CreatePanel = function (scene) {
 
                 space: {
                     left: 10, right: 0, top: 5, bottom: 5, item: 3
-                }
+                },
+
+                expandedIconColor: COLOR_PRIMARY,
             },
 
             tab: {
