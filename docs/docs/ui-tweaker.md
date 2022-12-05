@@ -2052,7 +2052,17 @@ Style of folder is defined in
                     icon: 0, text: 0
                 },
 
-                expandedIconColor: undefined,
+                expandedIcon: {
+                    color: undefined,
+                    alpha: 1,
+
+                    strokeColor: undefined,
+                    strokeAlpha: 1,
+                    strokeWidth: 1,
+                    arrowOnly: false,
+
+                    easeDuration: 0,
+                }
             },
 
             background: {

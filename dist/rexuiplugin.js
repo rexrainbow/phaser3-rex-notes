@@ -47571,9 +47571,7 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker.FolderTitle';
-      var expandedIcon = new Triangle(scene, {
-        color: config.expandedIconColor
-      });
+      var expandedIcon = new Triangle(scene, config.expandedIcon);
       scene.add.existing(expandedIcon);
       _this.addSpace().add(expandedIcon, {
         proportion: 0,

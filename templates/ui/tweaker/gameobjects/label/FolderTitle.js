@@ -10,9 +10,7 @@ class FolderTitle extends Title {
         super(scene, config);
         this.type = 'rexTweaker.FolderTitle';
 
-        var expandedIcon = new Triangle(scene, {
-            color: config.expandedIconColor,
-        })
+        var expandedIcon = new Triangle(scene, config.expandedIcon)
         scene.add.existing(expandedIcon);
 
         this

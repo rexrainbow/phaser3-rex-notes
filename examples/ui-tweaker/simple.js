@@ -271,7 +271,9 @@ var CreatePanel = function (scene) {
                     background: { color: COLOR_DARK },
                     space: { icon: 2 },
 
-                    expandedIconColor: COLOR_PRIMARY,
+                    expandedIcon: {
+                        color: COLOR_PRIMARY,
+                    },
                 },
 
                 background: {
@@ -281,8 +283,6 @@ var CreatePanel = function (scene) {
                 space: {
                     left: 10, right: 0, top: 5, bottom: 5, item: 3
                 },
-
-                expandedIconColor: COLOR_PRIMARY,
             },
 
             tab: {

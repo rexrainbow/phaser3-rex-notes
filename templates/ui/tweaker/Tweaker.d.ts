@@ -65,6 +65,20 @@ declare namespace Tweaker {
         expand?: boolean,
     }
 
+    interface IFolderTitleConfig extends ILabelConfig {
+        expandedIcon?: {
+            color?: number,
+            alpha?: number,
+
+            strokeColor?: number,
+            strokeAlpha?: number,
+            strokeWidth?: number,
+            arrowOnly?: boolean,
+
+            easeDuration?: number,
+        }
+    }
+
 
     interface IConfig extends Sizer.IConfig {
         styles: {
@@ -114,8 +128,6 @@ declare namespace Tweaker {
                     left?: number, right?: number, top?: number, bottom?: number,
                     item?: number
                 },
-
-                expandedIconColor?: number,
             },
 
             tab?: {
