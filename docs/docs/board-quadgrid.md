@@ -103,11 +103,19 @@ var tileXY = grid.getTileXY(worldX, worldY);  // tileXY: {x, y}
 
 ### Directions
 
-- `0` : Left
+- `0` : Right
 - `1` : Down
-- `2` : Right
+- `2` : Left
 - `3` : Up
-- `4` : Left-down
-- `5` : Down-right
-- `6` : Right-up
-- `7` : Up-left
+- `4` : Right-down
+- `5` : Left-down
+- `6` : Left-up
+- `7` : Right-up
+
+```
+6|3|7
+-+-+-
+2|A|0
+-+-+-
+5|1|4
+```
