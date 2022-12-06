@@ -1,4 +1,4 @@
-import BaseShapes from "../shapes/BaseShapes";
+import BaseShapes from '../shapes/BaseShapes';
 import * as Geoms from '../shapes/geoms/';
 
 export default CustomShapes;
@@ -32,7 +32,7 @@ declare namespace CustomShapes {
     };
     type ShapeArrayType = {
         name: string,
-        type: 'arc' | 'circle' | 'curve' | 'ellipse' | 'line' | 'rectangle' | 'triangle'
+        type: 'arc' | 'circle' | 'curve' | 'ellipse' | 'line' | 'lines' | 'rectangle' | 'triangle'
     }[];
     type CreatrShapeCallbackType = (this: CustomShapes) => void
 

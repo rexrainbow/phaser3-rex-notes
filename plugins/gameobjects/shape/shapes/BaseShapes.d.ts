@@ -12,6 +12,7 @@ export default class BaseShapes extends Phaser.GameObjects.Shape {
     resize(width: number, height: number): this;
     width: number;
     height: number;
+    isSizeChanged: boolean;
 
     setFillStyle(color: number, alpha: number): this;
     fillColor: number;
