@@ -3448,7 +3448,7 @@
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.fadein';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.fadeIn(duration, red, green, blue);
+      tagPlayer.targetCamera.fadeIn(duration, red, green, blue);
       parser.skipEvent();
     });
   };
@@ -3456,7 +3456,7 @@
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.fadeout';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.fadeOut(duration, red, green, blue);
+      tagPlayer.targetCamera.fadeOut(duration, red, green, blue);
       parser.skipEvent();
     });
   };
@@ -3464,7 +3464,7 @@
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.shake';
     parser.on("+".concat(tagName), function (duration, intensity) {
-      tagPlayer.camera.shake(duration, intensity);
+      tagPlayer.targetCamera.shake(duration, intensity);
       parser.skipEvent();
     });
   };
@@ -3472,7 +3472,7 @@
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.flash';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.flash(duration, red, green, blue);
+      tagPlayer.targetCamera.flash(duration, red, green, blue);
       parser.skipEvent();
     });
   };
@@ -3480,10 +3480,10 @@
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.zoom';
     parser.on("+".concat(tagName), function (value) {
-      tagPlayer.camera.setZoom(value);
+      tagPlayer.targetCamera.setZoom(value);
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
-      tagPlayer.camera.zoomTo(value, duration, ease);
+      tagPlayer.targetCamera.zoomTo(value, duration, ease);
       parser.skipEvent();
     });
   };
@@ -3492,11 +3492,11 @@
   var OnParseRotateCameraTag = function OnParseRotateCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.rotate';
     parser.on("+".concat(tagName), function (value) {
-      tagPlayer.camera.setRotation(DegToRad(value));
+      tagPlayer.targetCamera.setRotation(DegToRad(value));
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
       value = DegToRad(value);
-      tagPlayer.camera.rotateTo(DegToRad(value), false, duration, ease);
+      tagPlayer.targetCamera.rotateTo(DegToRad(value), false, duration, ease);
       parser.skipEvent();
     });
   };
@@ -3504,11 +3504,11 @@
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(tagPlayer, parser, config) {
     var tagName = 'camera.scroll';
     parser.on("+".concat(tagName), function (x, y) {
-      tagPlayer.camera.setScroll(x, y);
+      tagPlayer.targetCamera.setScroll(x, y);
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (x, y, duration, ease) {
       // this: tagPlayer
-      var camera = tagPlayer.camera;
+      var camera = tagPlayer.targetCamera;
       var xSave = camera.scrollX;
       var ySave = camera.scrollY;
       camera.setScroll(x, y);
@@ -4697,7 +4697,7 @@
   };
 
   var SetTargetCamera = function SetTargetCamera(camera) {
-    this.camera = camera;
+    this.targetCamera = camera;
     return this;
   };
 
@@ -4836,7 +4836,7 @@
   };
   var WaitCameraEffect = function WaitCameraEffect(tagPlayer, effectName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope, "camera.".concat(effectName));
-    var camera = tagPlayer.camera;
+    var camera = tagPlayer.targetCamera;
     var effect, completeEventName;
     switch (effectName) {
       case 'camera.fadein':
@@ -5181,7 +5181,7 @@
           return;
         }
         ClearEvents(this);
-        this.camera = undefined;
+        this.targetCamera = undefined;
         _get(_getPrototypeOf(TagPlayer.prototype), "destroy", this).call(this);
         this.destroyManagers(fromScene);
         this.scene = undefined;

@@ -89,12 +89,16 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
     addGameObjectManager(config: TagPlayer.IGameObjectConfig): this;
 
     play(commands: string): this;
+    playPromise(commands: string): Promise<any>;
+
     pause(): this;
     pauseUntilEvent(
         eventEmitter: Phaser.Events.EventEmitter,
         eventName: string
     ): this;
+
     resume(): this;
+
     isPlaying: boolean;
 
     setTimeScale(timeScale: number): this;
@@ -102,6 +106,9 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
 
     setClickTarget(clickTarget: TagPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TagPlayer.ClickTrgetTypes;
+
+    setTargetCamera(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
+    readonly targetCamera: Phaser.Cameras.Scene2D.BaseCamera;
 
     getGameObject(
         goType: string,

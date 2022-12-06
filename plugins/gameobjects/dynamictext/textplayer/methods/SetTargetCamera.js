@@ -1,5 +1,5 @@
 var SetTargetCamera = function (camera) {
-    this.camera = camera;
+    this.targetCamera = camera;
     return this;
 }
 

@@ -88,7 +88,7 @@ class TextPlayer extends Extend(DynamicText) {
         }
         this._imageManager = undefined;
 
-        this.camera = undefined;
+        this.targetCamera = undefined;
 
         this.clickEE = undefined;
 

@@ -2,13 +2,13 @@ var OnParseScrollCameraTag = function (tagPlayer, parser, config) {
     var tagName = 'camera.scroll';
     parser
         .on(`+${tagName}`, function (x, y) {
-            tagPlayer.camera.setScroll(x, y);
+            tagPlayer.targetCamera.setScroll(x, y);
 
             parser.skipEvent();
         })
         .on(`+${tagName}.to`, function (x, y, duration, ease) {
             // this: tagPlayer
-            var camera = tagPlayer.camera;
+            var camera = tagPlayer.targetCamera;
             var xSave = camera.scrollX;
             var ySave = camera.scrollY;
             camera.setScroll(x, y);

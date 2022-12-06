@@ -16,7 +16,7 @@ var OnParseFlashCameraTag = function (textPlayer, parser, config) {
 
 var PlayFlashEffect = function (params) {
     // this: textPlayer
-    this.camera.flash(...params);
+    this.targetCamera.flash(...params);
 }
 
 export default OnParseFlashCameraTag;

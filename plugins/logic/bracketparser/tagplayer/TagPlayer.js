@@ -64,7 +64,7 @@ class TagPlayer extends Extend(EventEmitter) {
 
         ClearEvents(this);
 
-        this.camera = undefined;
+        this.targetCamera = undefined;
 
         super.destroy();
 

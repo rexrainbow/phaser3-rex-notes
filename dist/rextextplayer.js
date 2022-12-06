@@ -8024,9 +8024,9 @@
     });
   };
   var PlayFadeInEffect = function PlayFadeInEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).fadeIn.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).fadeIn.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(textPlayer, parser, config) {
@@ -8045,9 +8045,9 @@
     });
   };
   var PlayFadeOutEffect = function PlayFadeOutEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).fadeOut.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).fadeOut.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(textPlayer, parser, config) {
@@ -8066,9 +8066,9 @@
     });
   };
   var PlayShakeEffect = function PlayShakeEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).shake.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).shake.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(textPlayer, parser, config) {
@@ -8087,9 +8087,9 @@
     });
   };
   var PlayFlashEffect = function PlayFlashEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).flash.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).flash.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(textPlayer, parser, config) {
@@ -8120,12 +8120,12 @@
   };
   var Zoom = function Zoom(value) {
     // this: textPlayer
-    this.camera.setZoom(value);
+    this.targetCamera.setZoom(value);
   };
   var ZoomTo = function ZoomTo(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).zoomTo.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).zoomTo.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var DegToRad = Phaser.Math.DegToRad;
@@ -8159,7 +8159,7 @@
   };
   var Rotate = function Rotate(value) {
     // this: textPlayer
-    this.camera.setRotation(value);
+    this.targetCamera.setRotation(value);
   };
   var RotateTo = function RotateTo(params) {
     var value = params[0];
@@ -8167,7 +8167,7 @@
     var ease = params[2];
 
     // this: textPlayer
-    this.camera.rotateTo(value, false, duration, ease);
+    this.targetCamera.rotateTo(value, false, duration, ease);
   };
 
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(textPlayer, parser, config) {
@@ -8197,9 +8197,9 @@
     });
   };
   var Scroll = function Scroll(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).setScroll.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).setScroll.apply(_this$targetCamera, _toConsumableArray(params));
   };
   var ScrollTo = function ScrollTo(params) {
     var x = params[0];
@@ -8208,7 +8208,7 @@
     var ease = params[3];
 
     // this: textPlayer
-    var camera = this.camera;
+    var camera = this.targetCamera;
     var xSave = camera.scrollX;
     var ySave = camera.scrollY;
     camera.setScroll(x, y);
@@ -8659,7 +8659,7 @@
   };
   var WaitCameraEffect = function WaitCameraEffect(textPlayer, effectName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, "camera.".concat(effectName));
-    var camera = textPlayer.camera;
+    var camera = textPlayer.targetCamera;
     var effect, completeEventName;
     switch (effectName) {
       case 'camera.fadein':
@@ -9785,7 +9785,7 @@
   };
 
   var SetTargetCamera = function SetTargetCamera(camera) {
-    this.camera = camera;
+    this.targetCamera = camera;
     return this;
   };
 
@@ -10049,7 +10049,7 @@
           this._imageManager.destroy(fromScene);
         }
         this._imageManager = undefined;
-        this.camera = undefined;
+        this.targetCamera = undefined;
         this.clickEE = undefined;
         this.destroyManagers(fromScene);
         _get(_getPrototypeOf(TextPlayer.prototype), "destroy", this).call(this, fromScene);

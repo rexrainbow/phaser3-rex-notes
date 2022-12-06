@@ -139,6 +139,8 @@ declare class TextPlayer extends DynamicText {
         config?: TextPlayer.IConfig
     );
 
+    addGameObjectManager(config: TextPlayer.IGameObjectConfig): this;
+
     play(content: string): this;
     playPromise(content: string): Promise<any>;
 
@@ -162,7 +164,10 @@ declare class TextPlayer extends DynamicText {
     ignoreNextPageInput(enable?: boolean): this;
     setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TextPlayer.ClickTrgetTypes;
-    
+
+    setTargetCamera(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
+    readonly targetCamera: Phaser.Cameras.Scene2D.BaseCamera;
+
     getGameObject(
         goType: string,
         name: string

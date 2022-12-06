@@ -19,7 +19,7 @@ var IsWaitCameraEffect = function (name) {
 var WaitCameraEffect = function (textPlayer, effectName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, `camera.${effectName}`);
 
-    var camera = textPlayer.camera;
+    var camera = textPlayer.targetCamera;
 
     var effect, completeEventName;
     switch (effectName) {
