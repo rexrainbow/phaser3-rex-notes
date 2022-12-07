@@ -5210,6 +5210,9 @@
   var IsNewLineChar = function IsNewLineChar(bob) {
     return bob.type === CharTypeName && bob.text === '\n';
   };
+  var IsPageBreakChar = function IsPageBreakChar(bob) {
+    return bob.type === CharTypeName && bob.text === '\f';
+  };
   var IsSpaceChar = function IsSpaceChar(bob) {
     return bob.type === CharTypeName && bob.text === ' ';
   };
@@ -5320,7 +5323,9 @@
     }, {
       key: "updateTextSize",
       value: function updateTextSize() {
-        if (this.text === '\n' || this.text === '') {
+        var text = this.text;
+        // Is new-line, page-break, or empty character
+        if (text === '\n' || text === '\f' || text === '') {
           this.textWidth = 0;
           this.textHeight = 0;
           this.ascent = 0;
@@ -5370,7 +5375,8 @@
     }, {
       key: "willRender",
       get: function get() {
-        if (this.text === '\n') {
+        var text = this.text;
+        if (text === '\n' || text === '\f') {
           return false;
         }
         return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
@@ -6001,13 +6007,14 @@
         currentIndex++;
         continue;
       }
-      if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
+      var text = child.type === CharTypeName ? child.text : null;
+      if (text !== null && text !== ' ' && text !== '\n' && text !== '\f') {
         word.push(child);
         wordWidth += child.outerWidth;
         currentIndex++;
         // Continue
       } else {
-        // Get image child, a space, or a new-line
+        // Get image child, a space, a new-line, or page-break
         if (currentIndex === startIndex) {
           // Single child
           word.push(child);
@@ -6229,9 +6236,11 @@
       childIndex += charCnt;
       // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-      if (remainderWidth < wordWidth || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(word[0]);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderWidth < wordWidth || isControlChar) {
         // Add to result
-        if (isNewLineChar) {
+        if (isControlChar) {
           var _char = word[0];
           _char.setActive().setPosition(x, y);
           resultChildren.push(_char);
@@ -6249,10 +6258,10 @@
         maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
         lastLineWidth = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result
           continue;
         }
@@ -6480,7 +6489,9 @@
       var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
       // Next line
       var isNewLineChar = IsNewLineChar(_char);
-      if (remainderHeight < childHeight || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(_char);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
           _char.setActive().setPosition(x, y).setOrigin(0.5);
@@ -6499,10 +6510,10 @@
         maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
         lastLineHeight = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result                
           continue;
         }

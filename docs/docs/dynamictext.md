@@ -427,6 +427,11 @@ txt.appendImage(key, frame, {
 
 ### Wrap
 
+Control characters :
+
+- `'\n'` : New line
+- `'\f'` : Page break
+
 #### Horizontal wrap
 
 ```javascript

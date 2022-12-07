@@ -8,6 +8,10 @@ var IsNewLineChar = function (bob) {
     return (bob.type === CharTypeName) && (bob.text === '\n');
 }
 
+var IsPageBreakChar = function (bob) {
+    return (bob.type === CharTypeName) && (bob.text === '\f');
+}
+
 var IsSpaceChar = function (bob) {
     return (bob.type === CharTypeName) && (bob.text === ' ');
 }
@@ -27,6 +31,7 @@ export {
     SpaceTypeName,
     CmdTypeName,
     IsNewLineChar,
+    IsPageBreakChar,
     IsSpaceChar,
     IsChar,
     IsCommand
