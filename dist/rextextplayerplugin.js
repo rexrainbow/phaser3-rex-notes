@@ -8273,6 +8273,19 @@
     });
   };
 
+  var OnParsePageBreakTag = function OnParsePageBreakTag(textPlayer, parser, config) {
+    var tagNames = ['pagebreak', 'pb'];
+    for (var i = 0, cnt = tagNames.length; i < cnt; i++) {
+      var tagName = tagNames[i];
+      parser.on("+".concat(tagName), function () {
+        AppendText.call(textPlayer, '\f');
+        parser.skipEvent();
+      }).on("-".concat(tagName), function () {
+        parser.skipEvent();
+      });
+    }
+  };
+
   var OnParseContentOff = function OnParseContentOff(textPlayer, parser, config) {
     var tagName = 'content.off';
     parser.on("+".concat(tagName), function () {
@@ -8347,7 +8360,7 @@
     );
   };
 
-  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParsePageBreakTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks$2.length; i < cnt; i++) {
       ParseCallbacks$2[i](textPlayer, parser, config);

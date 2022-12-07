@@ -13,7 +13,7 @@ var content = `
 
 [wait=1200]
 
-Once upon a time...[r]
+Once upon a time...[pb]
 
 [char.A.x.toLeft=100,1000]
 [char.B.x.toRight=100,1000]

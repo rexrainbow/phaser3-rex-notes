@@ -703,6 +703,10 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - New line : `[r]`
     - New line via `\n` will be ignored.
 
+#### Page break
+
+- `[pagebreak]`, or `[pb]` : Put remainder characters to next page. 
+
 #### Image
 
 `[img=key]`

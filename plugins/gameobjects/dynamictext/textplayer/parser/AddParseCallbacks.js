@@ -30,6 +30,7 @@ import ParseRotateCameraTag from './camera/OnParseRotateCameraTag.js';
 import ParseScrollCameraTag from './camera/OnParseScrollCameraTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
+import ParsePageBreakTag from './content/OnParsePageBreakTag.js';
 import ParseContentOff from './content/OnParseContentOff.js';
 import ParseContentOn from './content/OnParseContentOn.js';
 import ParseContent from './content/OnParseContent.js';
@@ -52,7 +53,7 @@ const ParseCallbacks = [
 
     ParseWaitTag,
 
-    ParseNewLineTag,
+    ParseNewLineTag, ParsePageBreakTag,
     ParseContentOff, ParseContentOn,
     ParseContent,
 
