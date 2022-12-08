@@ -37,7 +37,6 @@ class Demo extends Phaser.Scene {
                 } else {
                     this.scale.startFullscreen();
                     // On start fulll screen
-                    debugger
                 }
             }, this);
     }
