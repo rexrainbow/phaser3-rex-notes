@@ -9,6 +9,7 @@
 
 - [Input text](https://codepen.io/rexrainbow/pen/WBxveQ)
 - [Number input](https://codepen.io/rexrainbow/pen/mddNbPj)
+- [In fullscreen](https://codepen.io/rexrainbow/pen/poKYPvG)
 
 ## Usage
 
