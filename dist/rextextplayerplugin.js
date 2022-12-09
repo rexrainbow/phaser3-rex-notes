@@ -8550,6 +8550,10 @@
       }
     }
 
+    // Set to min size
+    if (this.minSizeEnable) {
+      this.textPlayer.setToMinSize();
+    }
     this.inTypingProcessLoop = false;
   };
 

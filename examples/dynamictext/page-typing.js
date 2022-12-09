@@ -71,6 +71,7 @@ var TypingNextPage = function (text, config) {
                 targets[i].setVisible(false);
             }
             text.background.stroke = 'green';
+            text.setToMinSize();
         },
         onUpdate: function (tween, target) {
             if (!target.visible) {
