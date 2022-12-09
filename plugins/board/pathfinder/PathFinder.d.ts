@@ -51,6 +51,8 @@ declare class PathFinder {
         config?: PathFinder.IConfig
     );
 
+    destroy(): void;
+
     setChess(gameObject: Phaser.GameObjects.GameObject): this;
     readonly gameObject: Phaser.GameObjects.GameObject;
     readonly board: Board;
