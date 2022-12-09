@@ -25,7 +25,7 @@ declare namespace TextPlayer {
         minSizeEnable?: boolean,
 
         fadeOutPage?: (children: DynamicText.RenderChildTypes[])
-            => Phaser.Events.EventEmitter | Promise<any>;
+            => void | Phaser.Events.EventEmitter | Promise<any>;
     }
 
     interface IConfigImages {
