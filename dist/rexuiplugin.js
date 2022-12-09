@@ -19302,7 +19302,10 @@
       this.emit(PageFadeOutCompleteEvent);
       return this;
     }
-    var waitObject = this.fadeOutPageCallback(this.children, this.fadeOutPageDuration);
+    var renderableChildren = this.children.filter(function (child) {
+      return child.renderable;
+    });
+    var waitObject = this.fadeOutPageCallback(renderableChildren, this.fadeOutPageDuration);
     if (!waitObject) {
       this.emit(PageFadeOutCompleteEvent);
     } else if (waitObject.once) {
@@ -19847,9 +19850,7 @@
       this.setSkipSpaceEnable(GetValue$29(config, 'skipSpace', false));
       this.setAnimationConfig(GetValue$29(config, 'animation', undefined));
       this.setMinSizeEnable(GetValue$29(config, 'minSizeEnable', false));
-      var fadeOutPageConfig = GetValue$29(config, 'fadeOutPage');
-      this.setFadeOutPageCallback(GetValue$29(fadeOutPageConfig, 'callback', fadeOutPageConfig));
-      this.setFadeOutPageDuration(GetValue$29(fadeOutPageConfig, 'duration', 250));
+      this.setFadeOutPageCallback(GetValue$29(config, 'fadeOutPage'));
     }
     _createClass(TypeWriter, [{
       key: "destroy",
@@ -19892,12 +19893,6 @@
       key: "setFadeOutPageCallback",
       value: function setFadeOutPageCallback(callback) {
         this.fadeOutPageCallback = callback;
-        return this;
-      }
-    }, {
-      key: "setFadeOutPageDuration",
-      value: function setFadeOutPageDuration(duration) {
-        this.fadeOutPageDuration = duration;
         return this;
       }
     }, {

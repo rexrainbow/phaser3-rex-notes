@@ -6,7 +6,8 @@ var FadeOutPage = function () {
         return this;
     }
 
-    var waitObject = this.fadeOutPageCallback(this.children, this.fadeOutPageDuration);
+    var renderableChildren = this.children.filter(function (child) { return child.renderable });
+    var waitObject = this.fadeOutPageCallback(renderableChildren, this.fadeOutPageDuration);
     if (!waitObject) {
         this.emit(PageFadeOutCompleteEvent);
     } else if (waitObject.once) {
