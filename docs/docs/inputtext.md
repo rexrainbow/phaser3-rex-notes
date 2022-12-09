@@ -23,6 +23,7 @@
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -52,6 +53,7 @@
     import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -84,6 +86,7 @@
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        

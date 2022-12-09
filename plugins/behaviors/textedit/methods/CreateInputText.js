@@ -48,7 +48,12 @@ var CreateInputText = function (text, config) {
         GetValue(config, 'height', text.height),
         config
     );
-    inputText.setOrigin(text.originX, text.originY);
+
+    inputText
+        // Sync origin
+        .setOrigin(text.originX, text.originY)
+        // Sync scrollFactor
+        .setScrollFactor(text.scrollFactorX, text.scrollFactorY)
 
     var textParentContainer = text.parentContainer;
     if (!textParentContainer) {

@@ -21,6 +21,7 @@ Play youtube video on iframe.
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -50,6 +51,7 @@ Play youtube video on iframe.
     import YoutubePlayerPlugin from 'phaser3-rex-plugins/plugins/youtubeplayer-plugin.js';
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -84,6 +86,7 @@ Play youtube video on iframe.
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        

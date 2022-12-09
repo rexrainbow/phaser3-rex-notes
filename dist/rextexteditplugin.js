@@ -796,7 +796,11 @@
     // }
 
     var inputText = new InputText(scene, text.x, text.y, GetValue$2(config, 'width', text.width), GetValue$2(config, 'height', text.height), config);
-    inputText.setOrigin(text.originX, text.originY);
+    inputText
+    // Sync origin
+    .setOrigin(text.originX, text.originY)
+    // Sync scrollFactor
+    .setScrollFactor(text.scrollFactorX, text.scrollFactorY);
     var textParentContainer = text.parentContainer;
     if (!textParentContainer) {
       scene.add.existing(inputText);

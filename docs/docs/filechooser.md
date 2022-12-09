@@ -22,6 +22,7 @@ Create a transparent file chooser button (`<input type="file">`).
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -51,6 +52,7 @@ Create a transparent file chooser button (`<input type="file">`).
     import FileChooserPlugin from 'phaser3-rex-plugins/plugins/filechooser-plugin.js';
     var config = {    
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -83,6 +85,7 @@ Create a transparent file chooser button (`<input type="file">`).
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
