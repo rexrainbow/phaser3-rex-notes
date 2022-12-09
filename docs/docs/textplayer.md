@@ -163,9 +163,17 @@ var txt = scene.add.rexTextPlayer({
 
             }
         },
+
         // skipSpace: false,
 
         // minSizeEnable: false,
+    
+        fadeOutPage: undefined,  // Default: no fade-out-page animation
+        fadeOutPage: function(children) {
+            return eventEmitter;
+            return promise;
+        },
+
     },
 
     images: {
@@ -298,10 +306,23 @@ var txt = scene.add.rexTextPlayer({
         - [child](dynamictext.md#child)
     - `typing.skipSpace` :
         - `false` : Will have delay when typing space character. Default behavior.
-        - `true` : Typing space character immediately. 
+        - `true` : Typing space character immediately.
     - `typing.minSizeEnable` : 
         - `true` : Resize to minimun size for showing all visible characters.
         - `false` : Won't resize during typing. Default behavior.
+    - `typing.fadeOutPage` : Callback to fade-out characters of previous page.
+        - `undefined` : Default value, no fade-out-page animation.
+        - Callback
+            ```javascript
+            function(characters) {
+                return tween;  // eventEmitter
+                return promise;
+            }
+            ```
+            - `characters` : Fade out targets.
+            - Return value could be tween object (event emitter), or promise object.
+                - Tween object : Wait until `'complete'` event triggering.
+                - Promise object : Wait until promoise resolving.
 - `parser` : Configuration of parser.
     - `parser.delimiters` : Delimiters of tag. Default value is `'[]'`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.

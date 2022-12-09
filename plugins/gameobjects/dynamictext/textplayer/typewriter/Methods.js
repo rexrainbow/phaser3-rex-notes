@@ -1,4 +1,5 @@
 import TypingSpeedMethods from './TypingSpeedMethods.js';
+import FadeOutPage from './FadeOutPage.js';
 import Start from './Start.js';
 import Typing from './Typing.js';
 import Pause from './Pause.js';
@@ -13,6 +14,7 @@ import SetSkipSoundEffect from './SetSkipSoundEffect.js';
 import SkipCurrentTypingDelay from './SkipCurrentTypingDelay.js';
 
 var Methods = {
+    fadeOutPage: FadeOutPage,
     start: Start,
     typing: Typing,
     pause: Pause,

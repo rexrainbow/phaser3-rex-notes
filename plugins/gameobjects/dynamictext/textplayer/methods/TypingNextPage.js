@@ -7,6 +7,13 @@ var TypingNextPage = function () {
         return this;
     }
 
+    this.typeWriter
+        .once('page.fadeout', _TypingNextPage, this)
+        .fadeOutPage();
+    return this;
+}
+
+var _TypingNextPage = function () {
     var result = this.runWrap(this.lastWrapResult);
     this.lastWrapResult = result;
 

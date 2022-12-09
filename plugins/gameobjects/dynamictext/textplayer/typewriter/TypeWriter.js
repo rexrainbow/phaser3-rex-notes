@@ -21,6 +21,11 @@ class TypeWriter {
         this.setSkipSpaceEnable(GetValue(config, 'skipSpace', false));
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
         this.setMinSizeEnable(GetValue(config, 'minSizeEnable', false));
+
+        var fadeOutPageConfig = GetValue(config, 'fadeOutPage');
+        this.setFadeOutPageCallback(GetValue(fadeOutPageConfig, 'callback', fadeOutPageConfig));
+        this.setFadeOutPageDuration(GetValue(fadeOutPageConfig, 'duration', 250));
+
     }
 
     destroy() {
@@ -61,6 +66,16 @@ class TypeWriter {
         }
 
         this.animationConfig = config;
+        return this;
+    }
+
+    setFadeOutPageCallback(callback) {
+        this.fadeOutPageCallback = callback;
+        return this;
+    }
+
+    setFadeOutPageDuration(duration) {
+        this.fadeOutPageDuration = duration;
         return this;
     }
 

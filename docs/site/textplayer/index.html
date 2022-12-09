@@ -9469,9 +9469,17 @@
 
             <span class="p">}</span>
         <span class="p">},</span>
+
         <span class="c1">// skipSpace: false,</span>
 
         <span class="c1">// minSizeEnable: false,</span>
+
+        <span class="nx">fadeOutPage</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// Default: no fade-out-page animation</span>
+        <span class="nx">fadeOutPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">eventEmitter</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+        <span class="p">},</span>
+
     <span class="p">},</span>
 
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
@@ -9648,12 +9656,30 @@
 </li>
 <li><code>typing.skipSpace</code> :<ul>
 <li><code>false</code> : Will have delay when typing space character. Default behavior.</li>
-<li><code>true</code> : Typing space character immediately. </li>
+<li><code>true</code> : Typing space character immediately.</li>
 </ul>
 </li>
 <li><code>typing.minSizeEnable</code> : <ul>
 <li><code>true</code> : Resize to minimun size for showing all visible characters.</li>
 <li><code>false</code> : Won't resize during typing. Default behavior.</li>
+</ul>
+</li>
+<li><code>typing.fadeOutPage</code> : Callback to fade-out characters of previous page.<ul>
+<li><code>undefined</code> : Default value, no fade-out-page animation.</li>
+<li>Callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">characters</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">tween</span><span class="p">;</span>  <span class="c1">// eventEmitter</span>
+    <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>characters</code> : Fade out targets.</li>
+<li>Return value could be tween object (event emitter), or promise object.<ul>
+<li>Tween object : Wait until <code>'complete'</code> event triggering.</li>
+<li>Promise object : Wait until promoise resolving.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

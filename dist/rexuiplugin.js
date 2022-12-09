@@ -19296,6 +19296,30 @@
     }
   };
 
+  var PageFadeOutCompleteEvent = 'page.fadeout';
+  var FadeOutPage = function FadeOutPage() {
+    if (!this.fadeOutPageCallback || !this.children) {
+      this.emit(PageFadeOutCompleteEvent);
+      return this;
+    }
+    var waitObject = this.fadeOutPageCallback(this.children, this.fadeOutPageDuration);
+    if (!waitObject) {
+      this.emit(PageFadeOutCompleteEvent);
+    } else if (waitObject.once) {
+      waitObject.once('complete', function () {
+        this.emit(PageFadeOutCompleteEvent);
+      }, this);
+    } else if (waitObject.then) {
+      var self = this;
+      waitObject.then(function () {
+        self.emit(PageFadeOutCompleteEvent);
+      });
+    } else {
+      this.emit(PageFadeOutCompleteEvent);
+    }
+    return this;
+  };
+
   var WaitEvent = function WaitEvent(eventEmitter, eventName) {
     return new Promise(function (resolve, reject) {
       eventEmitter.once(eventName, function () {
@@ -19788,6 +19812,7 @@
   };
 
   var Methods$9 = {
+    fadeOutPage: FadeOutPage,
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -19822,6 +19847,9 @@
       this.setSkipSpaceEnable(GetValue$29(config, 'skipSpace', false));
       this.setAnimationConfig(GetValue$29(config, 'animation', undefined));
       this.setMinSizeEnable(GetValue$29(config, 'minSizeEnable', false));
+      var fadeOutPageConfig = GetValue$29(config, 'fadeOutPage');
+      this.setFadeOutPageCallback(GetValue$29(fadeOutPageConfig, 'callback', fadeOutPageConfig));
+      this.setFadeOutPageDuration(GetValue$29(fadeOutPageConfig, 'duration', 250));
     }
     _createClass(TypeWriter, [{
       key: "destroy",
@@ -19858,6 +19886,18 @@
           config.onStart = SetChildVisible;
         }
         this.animationConfig = config;
+        return this;
+      }
+    }, {
+      key: "setFadeOutPageCallback",
+      value: function setFadeOutPageCallback(callback) {
+        this.fadeOutPageCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setFadeOutPageDuration",
+      value: function setFadeOutPageDuration(duration) {
+        this.fadeOutPageDuration = duration;
         return this;
       }
     }, {
@@ -20586,6 +20626,10 @@
     if (!this.isPlaying || this.isPageTyping) {
       return this;
     }
+    this.typeWriter.once('page.fadeout', _TypingNextPage, this).fadeOutPage();
+    return this;
+  };
+  var _TypingNextPage = function _TypingNextPage() {
     var result = this.runWrap(this.lastWrapResult);
     this.lastWrapResult = result;
     this.emit('page.start');
