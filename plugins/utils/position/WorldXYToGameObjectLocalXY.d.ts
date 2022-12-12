@@ -5,5 +5,5 @@ declare function WorldXYToGameObjectLocalXY(
     worldX: number,
     worldY: number,
     camera?: Phaser.Cameras.Scene2D.Camera,
-    out?: { x: number, y: number }
+    out?: { x: number, y: number } | true
 ): { x: number, y: number };

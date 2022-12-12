@@ -2545,7 +2545,7 @@
 
   Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$3 = Phaser.Math.RotateAround;
+  var RotateAround$2 = Phaser.Math.RotateAround;
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -2616,7 +2616,7 @@
       includeParent = false;
     }
     if (gameObject.rotation !== 0) {
-      RotateAround$3(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
@@ -3645,7 +3645,7 @@
     }
   };
 
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
   var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
     if (out === undefined) {
       out = {};
@@ -3658,7 +3658,7 @@
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
     if (bob.rotation !== 0) {
-      RotateAround$2(out, 0, 0, -bob.rotation);
+      RotateAround$1(out, 0, 0, -bob.rotation);
     }
     return out;
   };
@@ -3683,7 +3683,7 @@
   };
   var globBounds;
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround = Phaser.Math.RotateAround;
   var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
     if (out === undefined) {
       out = {};
@@ -3696,7 +3696,7 @@
     out.x = bobX;
     out.y = bobY;
     if (bob.rotation !== 0) {
-      RotateAround$1(out, 0, 0, bob.rotation);
+      RotateAround(out, 0, 0, bob.rotation);
     }
     out.x = out.x * bob.scaleX + bob.drawX;
     out.y = out.y * bob.scaleY + bob.drawY;
@@ -3704,25 +3704,28 @@
   };
   var globPoint;
 
-  var RotateAround = Phaser.Math.RotateAround;
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
   var GameObjectLocalXYToWorldXY = function GameObjectLocalXYToWorldXY(gameObject, localX, localY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globOut;
     }
-    out.x = localX - gameObject.width * gameObject.originX;
-    out.y = localY - gameObject.height * gameObject.originY;
-    // Scale
-    out.x *= gameObject.scaleX;
-    out.y *= gameObject.scaleY;
-    // Rotate
-    RotateAround(out, 0, 0, gameObject.rotation);
-    // Transform
-    out.x += gameObject.x;
-    out.y += gameObject.y;
+    var px = localX - gameObject.width * gameObject.originX;
+    var py = localY - gameObject.height * gameObject.originY;
+    if (tempMatrix === undefined) {
+      tempMatrix = new TransformMatrix();
+      parentMatrix = new TransformMatrix();
+    }
+    if (gameObject.parentContainer) {
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+    } else {
+      tempMatrix.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+    }
+    tempMatrix.transformPoint(px, py, out);
     return out;
   };
+  var tempMatrix, parentMatrix;
   var globOut = {};
 
   var BobPositionToWorldPosition = function BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out) {

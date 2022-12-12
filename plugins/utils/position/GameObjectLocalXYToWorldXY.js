@@ -1,4 +1,4 @@
-const RotateAround = Phaser.Math.RotateAround;
+const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
 
 var GameObjectLocalXYToWorldXY = function (gameObject, localX, localY, out) {
     if (out === undefined) {
@@ -7,20 +7,27 @@ var GameObjectLocalXYToWorldXY = function (gameObject, localX, localY, out) {
         out = globOut;
     }
 
-    out.x = localX - (gameObject.width * gameObject.originX);
-    out.y = localY - (gameObject.height * gameObject.originY);
-    // Scale
-    out.x *= gameObject.scaleX;
-    out.y *= gameObject.scaleY;
-    // Rotate
-    RotateAround(out, 0, 0, gameObject.rotation);
-    // Transform
-    out.x += gameObject.x;
-    out.y += gameObject.y;
+    var px = localX - (gameObject.width * gameObject.originX);
+    var py = localY - (gameObject.height * gameObject.originY);
+
+    if (tempMatrix === undefined) {
+        tempMatrix = new TransformMatrix();
+        parentMatrix = new TransformMatrix();
+    }
+
+    if (gameObject.parentContainer) {
+        gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+    }
+    else {
+        tempMatrix.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+    }
+
+    tempMatrix.transformPoint(px, py, out);
 
     return out;
 }
 
+var tempMatrix, parentMatrix;
 var globOut = {};
 
 export default GameObjectLocalXYToWorldXY
