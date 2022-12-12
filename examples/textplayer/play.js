@@ -75,9 +75,7 @@ class Demo extends Phaser.Scene {
                         duration: 1000,
                         yoyo: true,
                         onStart: function (char) {
-                            char
-                                .setVisible()
-                                .setData('y', char.y);
+                            char.setVisible().setData('y', char.y);
                         },
                         onProgress: function (char, t) {
                             var p0 = char.getData('y');

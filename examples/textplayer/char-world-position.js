@@ -64,23 +64,35 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC[pb]`
                             char.setScale(t, t);
                         }
                     },
-
-                    fadeOutPage: function (characters) {
-                        return scene.tweens.add({
-                            targets: characters,
-                            scaleX: 0,
-                            scaleY: 0,
-                            duration: 250,
-                            delay: scene.tweens.stagger(20, { from: 'last' })
-                        })
-                    },
-
                 },
 
                 clickTarget: this,
-                nextPageInput: 'click|2000'
+                nextPageInput: 'click'
             }
         )
+            .setAngle(-45)
+
+        var charDots = [];
+        text
+            .on('page.start', function () {
+                for (var i = 0, cnt = charDots.length; i < cnt; i++) {
+                    charDots[i].destroy();
+                }
+                charDots.length = 0;
+            })
+            .on('typing', function (child) {
+                var worldXY = text.getCharWorldPosition(child, true);
+                var dot = this.add.circle(0, 0, 20, 0x00ff00).setRandomPosition()
+                this.tweens.add({
+                    targets: dot,
+                    x: worldXY.x,
+                    y: worldXY.y,
+                    radius: 2,
+                    duration: 200
+                })
+                charDots.push(dot);
+            }, this)
+
 
         var print = this.add.text(0, 580, 'Click to start');
         this.input.once('pointerdown', function () {

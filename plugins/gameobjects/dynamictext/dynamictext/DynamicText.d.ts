@@ -296,4 +296,30 @@ declare class DynamicText extends Canvas {
         stroke?: string | number | null,
         strokeThickness?: number,
     ): this;
+
+    getNearestChild(
+        localX: number,
+        localY: number
+    ): DynamicText.BobBase;
+
+    getCharWorldPosition(
+        child: DynamicText.BobBase,
+        offsetX?: number, offsetY?: number, out?: { x?: number, y?: number }
+    ): { x: number, y: number };
+
+    getCharWorldPosition(
+        child: DynamicText.BobBase,
+        out?: { x?: number, y?: number }
+    ): { x: number, y: number };
+
+    getCharWorldPosition(
+        childIndex: number,
+        offsetX?: number, offsetY?: number, out?: { x?: number, y?: number }
+    ): { x: number, y: number };
+
+    getCharWorldPosition(
+        childIndex: number,
+        out?: { x?: number, y?: number }
+    ): { x: number, y: number };
+
 }

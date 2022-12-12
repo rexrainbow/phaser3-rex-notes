@@ -1,6 +1,6 @@
 const RotateAround = Phaser.Math.RotateAround;
 
-var BobPositionToCanvasPosition = function (bobX, bobY, bob, out) {
+var BobPositionToCanvasPosition = function (bob, bobX, bobY, out) {
     if (out === undefined) {
         out = {};
     } else if (out === true) {
