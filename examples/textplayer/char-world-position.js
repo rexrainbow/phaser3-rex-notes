@@ -81,7 +81,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC[pb]`
                 charDots.length = 0;
             })
             .on('typing', function (child) {
-                var worldXY = text.getCharWorldPosition(child, true);
+                var worldXY = child.getWorldPosition();
                 var dot = this.add.circle(0, 0, 20, 0x00ff00).setRandomPosition()
                 this.tweens.add({
                     targets: dot,

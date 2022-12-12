@@ -9367,6 +9367,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/LYxoRWJ">Page typing</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/JjEQXqj">Align, rotation, drawBelowCallback</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNBKpYG">Vertical wrap</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/oNyRYZj">Character's world position</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/GRdrLrw">Child input event</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -10036,6 +10037,14 @@ or</p>
 </li>
 </ul>
 </li>
+<li>World position
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">getWorldPosition</span><span class="p">();</span>
+<span class="c1">// out = child.getWorldPosition(out);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharWorldPosition</span><span class="p">(</span><span class="kr">char</span><span class="p">);</span>
+<span class="c1">// out = txt.getCharWorldPosition(char, out);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="character">Character<a class="headerlink" href="#character" title="Permanent link">&para;</a></h4>
 <h5 id="text-style">Text-style<a class="headerlink" href="#text-style" title="Permanent link">&para;</a></h5>

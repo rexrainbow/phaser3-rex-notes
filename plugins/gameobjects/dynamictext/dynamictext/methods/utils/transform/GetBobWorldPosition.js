@@ -1,6 +1,6 @@
 import BobPositionToWorldPosition from './BobPositionToWorldPosition.js';
 
-var GetBobWorldPosition = function (bob, offsetX, offsetY, out) {
+var GetBobWorldPosition = function (dynamicText, bob, offsetX, offsetY, out) {
     if (typeof (offsetX) !== 'number') {
         out = offsetX;
         offsetX = 0;
@@ -8,7 +8,7 @@ var GetBobWorldPosition = function (bob, offsetX, offsetY, out) {
     }
     var bobX = bob.drawCenterX + offsetX;
     var bobY = bob.drawCenterY + offsetY;
-    return BobPositionToWorldPosition.call(this, bob, bobX, bobY, out);
+    return BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out);
 }
 
 export default GetBobWorldPosition;

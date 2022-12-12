@@ -13076,8 +13076,72 @@
   };
   var globBounds;
 
+  var RotateAround$5 = Phaser.Math.RotateAround;
+  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+      out = globPoint;
+    }
+    out.x = bobX;
+    out.y = bobY;
+    if (bob.rotation !== 0) {
+      RotateAround$5(out, 0, 0, bob.rotation);
+    }
+    out.x = out.x * bob.scaleX + bob.drawX;
+    out.y = out.y * bob.scaleY + bob.drawY;
+    return out;
+  };
+  var globPoint;
+
+  var RotateAround$4 = Phaser.Math.RotateAround;
+  var GameObjectLocalXYToWorldXY = function GameObjectLocalXYToWorldXY(gameObject, localX, localY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut$2;
+    }
+    out.x = localX - gameObject.width * gameObject.originX;
+    out.y = localY - gameObject.height * gameObject.originY;
+    // Scale
+    out.x *= gameObject.scaleX;
+    out.y *= gameObject.scaleY;
+    // Rotate
+    RotateAround$4(out, 0, 0, gameObject.rotation);
+    // Transform
+    out.x += gameObject.x;
+    out.y += gameObject.y;
+    return out;
+  };
+  var globOut$2 = {};
+
+  var BobPositionToWorldPosition = function BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out) {
+    var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
+    var worldXY = GameObjectLocalXYToWorldXY(dynamicText, localXY.x, localXY.y, out);
+    return worldXY;
+  };
+
+  var GetBobWorldPosition = function GetBobWorldPosition(dynamicText, bob, offsetX, offsetY, out) {
+    if (typeof offsetX !== 'number') {
+      out = offsetX;
+      offsetX = 0;
+      offsetY = 0;
+    }
+    var bobX = bob.drawCenterX + offsetX;
+    var bobY = bob.drawCenterY + offsetY;
+    return BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out);
+  };
+
+  var GetWorldPosition = function GetWorldPosition(offsetX, offsetY, out) {
+    return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
+  };
+
   var Methods$c = {
-    contains: Contains$1
+    contains: Contains$1,
+    getWorldPosition: GetWorldPosition
   };
   Object.assign(Methods$c, RenderMethods);
 
@@ -15742,27 +15806,6 @@
     return this.lastAppendedChildren;
   };
 
-  var RotateAround$5 = Phaser.Math.RotateAround;
-  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      if (globPoint === undefined) {
-        globPoint = {};
-      }
-      out = globPoint;
-    }
-    out.x = bobX;
-    out.y = bobY;
-    if (bob.rotation !== 0) {
-      RotateAround$5(out, 0, 0, bob.rotation);
-    }
-    out.x = out.x * bob.scaleX + bob.drawX;
-    out.y = out.y * bob.scaleY + bob.drawY;
-    return out;
-  };
-  var globPoint;
-
   var GetBobCenterPosition = function GetBobCenterPosition(bob, offsetX, offsetY, out) {
     if (typeof offsetX !== 'number') {
       out = offsetX;
@@ -15792,49 +15835,11 @@
     return nearestChild;
   };
 
-  var RotateAround$4 = Phaser.Math.RotateAround;
-  var GameObjectLocalXYToWorldXY = function GameObjectLocalXYToWorldXY(gameObject, localX, localY, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = globOut$2;
-    }
-    out.x = localX - gameObject.width * gameObject.originX;
-    out.y = localY - gameObject.height * gameObject.originY;
-    // Scale
-    out.x *= gameObject.scaleX;
-    out.y *= gameObject.scaleY;
-    // Rotate
-    RotateAround$4(out, 0, 0, gameObject.rotation);
-    // Transform
-    out.x += gameObject.x;
-    out.y += gameObject.y;
-    return out;
-  };
-  var globOut$2 = {};
-
-  var BobPositionToWorldPosition = function BobPositionToWorldPosition(bob, bobX, bobY, out) {
-    var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
-    var worldXY = GameObjectLocalXYToWorldXY(this, localXY.x, localXY.y, out);
-    return worldXY;
-  };
-
-  var GetBobWorldPosition = function GetBobWorldPosition(bob, offsetX, offsetY, out) {
-    if (typeof offsetX !== 'number') {
-      out = offsetX;
-      offsetX = 0;
-      offsetY = 0;
-    }
-    var bobX = bob.drawCenterX + offsetX;
-    var bobY = bob.drawCenterY + offsetY;
-    return BobPositionToWorldPosition.call(this, bob, bobX, bobY, out);
-  };
-
   var GetCharWorldPosition = function GetCharWorldPosition(child, offsetX, offsetY, out) {
     if (typeof child === 'number') {
       child = this.getCharChild(child, true);
     }
-    return GetBobWorldPosition.call(this, child, offsetX, offsetY, out);
+    return GetBobWorldPosition(this, child, offsetX, offsetY, out);
   };
 
   var SetToMinSize = function SetToMinSize() {

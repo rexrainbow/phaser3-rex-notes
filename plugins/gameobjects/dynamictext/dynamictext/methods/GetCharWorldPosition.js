@@ -5,7 +5,7 @@ var GetCharWorldPosition = function (child, offsetX, offsetY, out) {
         child = this.getCharChild(child, true);
     }
 
-    return GetBobWorldPosition.call(this, child, offsetX, offsetY, out);
+    return GetBobWorldPosition(this, child, offsetX, offsetY, out);
 }
 
 export default GetCharWorldPosition;
