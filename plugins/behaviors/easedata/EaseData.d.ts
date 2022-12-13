@@ -1,12 +1,13 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default EaseData;
 
 declare namespace EaseData {
-    interface IConfig {
+    interface IConfig extends ComponentBase.IConfig {
     }
 }
 
-
-declare class EaseData extends Phaser.Events.EventEmitter {
+declare class EaseData extends ComponentBase {
     easeTo(
         key: string,
         value: number,

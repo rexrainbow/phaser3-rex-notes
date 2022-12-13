@@ -1,4 +1,4 @@
-import EventEmitter from "../../../utils/eventemitter/EventEmitter";
+import ComponentBase from '../../../utils/componentbase/ComponentBase.js';
 
 export default Player;
 
@@ -6,14 +6,12 @@ declare namespace Player {
     type TimeUnitType = 0 | 1 | 'ms' | 's' | 'sec';
     type DtModeType = 0 | 1 | 'abs' | 'absolute' | 'inc' | 'increment';
 
-    interface IConfig {
+    interface IConfig extends ComponentBase.IConfig {
         timeUnit?: TimeUnitType
         dtMode?: DtModeType,
         commands?: any[],
         timeScale?: number,
         scope?: object,
-
-        eventEmitter?: EventEmitter | false,
     }
 
     interface ILoadConfig {
@@ -31,7 +29,7 @@ declare namespace Player {
     }
 }
 
-declare class Player extends EventEmitter {
+declare class Player extends ComponentBase {
     constructor(
         parent: Phaser.Scene | Phaser.GameObjects.GameObject,
         config?: Player.IConfig

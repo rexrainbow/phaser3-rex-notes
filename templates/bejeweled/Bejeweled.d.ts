@@ -1,3 +1,4 @@
+import ComponentBase from '../../plugins/utils/componentbase/ComponentBase';
 import Board from '../../plugins/board/board/Board';
 import Match from '../../plugins/board/match/Match';
 import MoveTo from '../../plugins/board/moveto/MoveTo';
@@ -123,7 +124,7 @@ declare namespace Bejeweled {
     }
 }
 
-declare class Bejeweled extends Phaser.Events.EventEmitter {
+declare class Bejeweled extends ComponentBase {
     constructor(
         scene: Phaser.Scene,
         config?: Bejeweled.IConfig

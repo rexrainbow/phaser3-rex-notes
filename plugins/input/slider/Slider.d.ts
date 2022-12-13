@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Slider;
 
 declare namespace Slider {
@@ -20,7 +22,7 @@ declare namespace Slider {
     }
 }
 
-declare class Slider extends Phaser.Events.EventEmitter {
+declare class Slider extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Slider.IConfig

@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Boids;
 
 declare namespace Boids {
@@ -20,7 +22,7 @@ declare namespace Boids {
     }
 }
 
-declare class Boids {
+declare class Boids extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Boids.IConfig

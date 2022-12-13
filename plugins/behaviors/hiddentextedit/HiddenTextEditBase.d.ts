@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default HiddenTextEditBase;
 
 declare namespace HiddenTextEditBase {
@@ -64,7 +66,7 @@ declare namespace HiddenTextEditBase {
     ) => string;
 }
 
-declare class HiddenTextEditBase extends Phaser.Events.EventEmitter {
+declare class HiddenTextEditBase extends ComponentBase {
     constructor(
         textObject: Phaser.GameObjects.GameObject,
         config?: HiddenTextEditBase.IConfig
