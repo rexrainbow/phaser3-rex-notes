@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default MouseWheelScroller;
 
 declare namespace MouseWheelScroller {
@@ -16,7 +18,7 @@ declare namespace MouseWheelScroller {
     }
 }
 
-declare class MouseWheelScroller extends Phaser.Events.EventEmitter {
+declare class MouseWheelScroller extends ComponentBase {
     constructor(
         scene: Phaser.Scene,
         config?: MouseWheelScroller.IConfig

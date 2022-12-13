@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Transition;
 
 declare namespace Transition {
@@ -21,7 +23,7 @@ declare namespace Transition {
     }
 }
 
-declare class Transition extends Phaser.Events.EventEmitter {
+declare class Transition extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Transition.IConfig

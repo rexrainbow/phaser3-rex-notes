@@ -1,10 +1,10 @@
-import TickTask from '../timerticktask/TimerTask.js';
+import TimerTask from '../timerticktask/TimerTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
-class EaseValueTaskBase extends TickTask {
+class EaseValueTaskBase extends TimerTask {
     resetFromJSON(o) {
         this.timer.resetFromJSON(GetValue(o, 'timer'));
         this.setEnable(GetValue(o, 'enable', true));

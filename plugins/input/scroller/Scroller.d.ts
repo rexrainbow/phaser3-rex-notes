@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Scroller;
 
 declare namespace Scroller {
@@ -34,7 +36,7 @@ declare namespace Scroller {
     }
 }
 
-declare class Scroller extends Phaser.Events.EventEmitter {
+declare class Scroller extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Scroller.IConfig

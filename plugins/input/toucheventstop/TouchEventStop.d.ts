@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default TouchEventStop;
 
 declare namespace TouchEventStop {
@@ -10,7 +12,7 @@ declare namespace TouchEventStop {
     }
 }
 
-declare class TouchEventStop extends Phaser.Events.EventEmitter {
+declare class TouchEventStop extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: TouchEventStop.IConfig

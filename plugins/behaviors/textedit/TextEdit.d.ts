@@ -1,3 +1,4 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import InputText from '../../inputtext';
 
 export default TextEdit;
@@ -25,7 +26,7 @@ declare namespace TextEdit {
     }
 }
 
-declare class TextEdit extends Phaser.Events.EventEmitter {
+declare class TextEdit extends ComponentBase {
     constructor(
         textObject: Phaser.GameObjects.GameObject
     );

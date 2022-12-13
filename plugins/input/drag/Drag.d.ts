@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Drag;
 
 declare namespace Drag {
@@ -10,7 +12,7 @@ declare namespace Drag {
     }
 }
 
-declare class Drag extends Phaser.Events.EventEmitter {
+declare class Drag extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Drag.IConfig

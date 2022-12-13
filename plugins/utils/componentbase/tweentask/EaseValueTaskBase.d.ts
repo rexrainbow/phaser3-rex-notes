@@ -1,6 +1,8 @@
+import TimerTask from '../timerticktask/TimerTask.js';
+
 export default EaseValueTaskBase;
 
-declare class EaseValueTaskBase extends Phaser.Events.EventEmitter {
+declare class EaseValueTaskBase extends TimerTask {
     setDelay(time: number): this;
     delay: number;
 

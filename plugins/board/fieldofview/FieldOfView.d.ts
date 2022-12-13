@@ -1,3 +1,4 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import { TileXYType } from '../types/Position';
 import Board from '../board/Board';
 
@@ -50,7 +51,7 @@ declare namespace FieldOfView {
     }
 }
 
-declare class FieldOfView<ChessType = Phaser.GameObjects.GameObject> {
+declare class FieldOfView<ChessType = Phaser.GameObjects.GameObject> extends ComponentBase {
     constructor(
         gameObject: ChessType,
         config?: FieldOfView.IConfig

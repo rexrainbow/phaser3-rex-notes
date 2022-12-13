@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default TouchState;
 
 declare namespace TouchState {
@@ -7,7 +9,7 @@ declare namespace TouchState {
     }
 }
 
-declare class TouchState extends Phaser.Events.EventEmitter {
+declare class TouchState extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: TouchState.IConfig
