@@ -71,7 +71,7 @@ Last line`;
             backgroundHorizontalGradient: false,
             backgroundStrokeColor: 'red',
             backgroundStrokeLineWidth: 2,
-            backgroundCornerRadius: 20,
+            backgroundCornerRadius: -20,
             // backgroundCornerIteration: 0,
             padding: 20
         })

@@ -647,6 +647,11 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         // roundRectangle.radiusBL = radiusBL;
         // roundRectangle.radiusBR = radiusBR;
         ```
+        - `radius` :
+            - `0`  : No round corner
+            - `> 0` : Convex round corner
+            - `< 0` : Concave round corner
+
 
 ##### Triangle
 

@@ -124,7 +124,12 @@ Default style
     backgroundHorizontalGradient: true,
     backgroundStrokeColor: null,  // null, css string, or number
     backgroundStrokeLineWidth: 2,
-    backgroundCornerRadius: 0,
+
+    backgroundCornerRadius: 0,  
+    // 0   : no round corner, 
+    // > 0 : convex round corner
+    // < 0 : concave round corner
+
     backgroundCornerIteration: null,    
     color: '#fff',  // null, css string, or number
     stroke: '#fff',  // null, css string, or number
@@ -408,6 +413,10 @@ txt.setFontStyle(style);
             var radius = txt.style.backgroundCornerRadius;
             var iteration = txt.style.backgroundCornerIteration;
             ```
+            - `radius` :
+                - `0`  : No round corner
+                - `> 0` : Convex round corner
+                - `< 0` : Concave round corner
         - Set
             ```javascript
             txt.setBackgroundCornerRadius(radius);

@@ -233,6 +233,9 @@ var txt = scene.add.rexTextPlayer({
         - `null` : No stroke.
     - `background.strokeThickness` : Line width of stroke.
     - `background.cornerRadius` : Corner-radius of round rectangle.
+        - `0`  : No round corner
+        - `> 0` : Convex round corner
+        - `< 0` : Concave round corner    
     - `background.cornerIteration` : Iteration of corner-radius.
         - `null` : Draw corner-radius via arc directly.
         - A number : Draw corner-radius via lines

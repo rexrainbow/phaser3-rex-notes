@@ -3038,8 +3038,10 @@
         return this._radiusTL;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusTL !== value;
-        this._radiusTL = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusTL !== value || this._convexTL !== isConvex;
+        this._convexTL = isConvex;
+        this._radiusTL = Math.abs(value);
       }
     }, {
       key: "radiusTR",
@@ -3047,8 +3049,10 @@
         return this._radiusTR;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusTR !== value;
-        this._radiusTR = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusTR !== value || this._convexTR !== isConvex;
+        this._convexTR = isConvex;
+        this._radiusTR = Math.abs(value);
       }
     }, {
       key: "radiusBL",
@@ -3056,8 +3060,10 @@
         return this._radiusBL;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusBL !== value;
-        this._radiusBL = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusBL !== value || this._convexBL !== isConvex;
+        this._convexBL = isConvex;
+        this._radiusBL = Math.abs(value);
       }
     }, {
       key: "radiusBR",
@@ -3065,8 +3071,10 @@
         return this._radiusBR;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusBR !== value;
-        this._radiusBR = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusBR !== value || this._convexBR !== isConvex;
+        this._convexBR = isConvex;
+        this._radiusBR = Math.abs(value);
       }
     }, {
       key: "radius",
@@ -3123,9 +3131,15 @@
         // top-left
         radius = this.radiusTL;
         if (radius > 0) {
-          var centerX = radius;
-          var centerY = radius;
-          ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+          if (this._convexTL) {
+            var centerX = radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius, radius, 90, 0, true, iterations, pathData);
+          }
         } else {
           LineTo(0, 0, pathData);
         }
@@ -3133,9 +3147,15 @@
         // top-right
         radius = this.radiusTR;
         if (radius > 0) {
-          var centerX = width - radius;
-          var centerY = radius;
-          ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+          if (this._convexTR) {
+            var centerX = width - radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+          } else {
+            var centerX = width;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius, radius, 180, 90, true, iterations, pathData);
+          }
         } else {
           LineTo(width, 0, pathData);
         }
@@ -3143,9 +3163,15 @@
         // bottom-right
         radius = this.radiusBR;
         if (radius > 0) {
-          var centerX = width - radius;
-          var centerY = height - radius;
-          ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+          if (this._convexBR) {
+            var centerX = width - radius;
+            var centerY = height - radius;
+            ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+          } else {
+            var centerX = width;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius, radius, 270, 180, true, iterations, pathData);
+          }
         } else {
           LineTo(width, height, pathData);
         }
@@ -3153,9 +3179,15 @@
         // bottom-left
         radius = this.radiusBL;
         if (radius > 0) {
-          var centerX = radius;
-          var centerY = height - radius;
-          ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+          if (this._convexBL) {
+            var centerX = radius;
+            var centerY = height - radius;
+            ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius, radius, 360, 270, true, iterations, pathData);
+          }
         } else {
           LineTo(0, height, pathData);
         }

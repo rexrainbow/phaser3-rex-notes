@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
 
                 background: {
                     stroke: 'white',
-                    cornerRadius: 20
+                    cornerRadius: -20
                 },
 
                 innerBounds: {
