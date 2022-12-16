@@ -139,18 +139,20 @@ class RoundRectangle {
 
 var GetRadius = function (radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-        return {
+        radius = {
             x: defaultRadiusX,
             y: defaultRadiusY
         };
     } else if (typeof (radius) === 'number') {
-        return {
+        radius = {
             x: radius,
             y: radius
         };
-    } else {
-        return radius;
     }
+
+    SetConvex(radius);
+    return radius;
+
 }
 
 var SetRadius = function (radius, value) {
@@ -161,5 +163,15 @@ var SetRadius = function (radius, value) {
         radius.x = GetValue(value, 'x', 0);
         radius.y = GetValue(value, 'y', 0);
     }
+
+    SetConvex(radius);
 }
+
+var SetConvex = function (radius) {
+    radius.convex = (radius.x >= 0) || (radius.y >= 0);
+
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
+}
+
 export default RoundRectangle;

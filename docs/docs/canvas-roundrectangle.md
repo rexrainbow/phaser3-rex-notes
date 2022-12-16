@@ -155,6 +155,10 @@ var rect = scene.add.rexRoundRectangleCanvas(x, y, width, height, radiusConfig, 
     - `true` : Horizontal gradient.
     - `false` : Vertical gradient.
 
+!!! note Convex or concave
+    If `radius` >= 0, draw convex corner, else draw concave corner
+
+
 #### Deform
 
 - Rectangle, set radius of 4 corners to `0`.
@@ -308,6 +312,9 @@ var rect = scene.add.rexRoundRectangleCanvas(x, y, width, height, radiusConfig, 
                 }
                 ```
 
+!!! note Convex or concave
+    If `radius` >= 0, draw convex corner, else draw concave corner
+
 ### Iteration
 
 - Get
@@ -335,7 +342,7 @@ See [game object](gameobject.md)
 
 - Gradient
     - Canvas-RoundRectangle can fill with gradient color.
-    - Shape-Roundrectangle does not have radient color.
+    - Shape-Roundrectangle can't fill gradient color.
 - Drawing method
     - Canvas-RoundRectangle draw shape on canvas, then map this canvas to frame buffer.
     - Shape-Roundrectangle draw shape on frame buffer directly without drawing to canvas first.

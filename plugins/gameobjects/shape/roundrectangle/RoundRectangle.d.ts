@@ -4,6 +4,12 @@ export default RoundRectangle;
 
 declare namespace RoundRectangle {
 
+    type CornerRadiusType = {
+        x: number,
+        y: number,
+        convex: boolean
+    };
+
     interface IRadiusConfig {
         tl?: (number | { x?: number, y?: number }),
         tr?: (number | { x?: number, y?: number }),
@@ -89,9 +95,9 @@ declare class RoundRectangle extends Phaser.GameObjects.Shape {
     radiusBR: number;
 
     readonly cornerRadius: {
-        tl: { x: number, y: number },
-        tr: { x: number, y: number },
-        bl: { x: number, y: number },
-        br: { x: number, y: number }
+        tl: RoundRectangle.CornerRadiusType,
+        tr: RoundRectangle.CornerRadiusType,
+        bl: RoundRectangle.CornerRadiusType,
+        br: RoundRectangle.CornerRadiusType,
     };
 }

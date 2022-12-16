@@ -75,42 +75,66 @@ class RoundRectangle extends Shape {
             radius,
             iteration = this.iteration + 1;
 
-        // top-left
+        // Top-left
         radius = cornerRadius.tl;
         if (IsArcCorner(radius)) {
-            var centerX = radius.x;
-            var centerY = radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
+            if (radius.convex) {
+                var centerX = radius.x;
+                var centerY = radius.y;
+                ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
+            } else {
+                var centerX = 0;
+                var centerY = 0;
+                ArcTo(centerX, centerY, radius.x, radius.y, 90, 0, true, iteration, pathData);
+            }
         } else {
             LineTo(0, 0, pathData);
         }
 
-        // top-right
+        // Top-right
         radius = cornerRadius.tr;
         if (IsArcCorner(radius)) {
-            var centerX = width - radius.x;
-            var centerY = radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
+            if (radius.convex) {
+                var centerX = width - radius.x;
+                var centerY = radius.y;
+                ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
+            } else {
+                var centerX = width;
+                var centerY = 0;
+                ArcTo(centerX, centerY, radius.x, radius.y, 180, 90, true, iteration, pathData);
+            }
         } else {
             LineTo(width, 0, pathData);
         }
 
-        // bottom-right
+        // Bottom-right
         radius = cornerRadius.br;
         if (IsArcCorner(radius)) {
-            var centerX = width - radius.x;
-            var centerY = height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+            if (radius.convex) {
+                var centerX = width - radius.x;
+                var centerY = height - radius.y;
+                ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+            } else {
+                var centerX = width;
+                var centerY = height;
+                ArcTo(centerX, centerY, radius.x, radius.y, 270, 180, true, iteration, pathData);
+            }
         } else {
             LineTo(width, height, pathData);
         }
 
-        // bottom-left
+        // Bottom-left
         radius = cornerRadius.bl;
         if (IsArcCorner(radius)) {
-            var centerX = radius.x;
-            var centerY = height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+            if (radius.convex) {
+                var centerX = radius.x;
+                var centerY = height - radius.y;
+                ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+            } else {
+                var centerX = 0;
+                var centerY = height;
+                ArcTo(centerX, centerY, radius.x, radius.y, 360, 270, true, iteration, pathData);
+            }
         } else {
             LineTo(0, height, pathData);
         }
@@ -250,7 +274,7 @@ class RoundRectangle extends Shape {
         if (value === undefined) {
             value = 0;
         }
-        this.radiuBL = value;
+        this.radiusBL = value;
         return this;
     }
 
