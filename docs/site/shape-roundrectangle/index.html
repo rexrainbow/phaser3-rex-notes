@@ -9097,8 +9097,9 @@
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>radius</code> : <ul>
-<li>If <code>radius</code> &gt;= 0 : Convex corner.</li>
-<li>Else, <code>radius</code> &lt; 0 : Concave corner.</li>
+<li><code>0</code>  : No round corner</li>
+<li><code>&gt; 0</code> : Convex round corner</li>
+<li><code>&lt; 0</code> : Concave round corner</li>
 </ul>
 </li>
 <li><code>iteration</code> : Number of interpolation points in each round corner. Default value is <code>4</code>.<ul>
@@ -9112,10 +9113,6 @@
 </ul>
 </li>
 </ul>
-<div class="admonition note convex or concave">
-<p class="admonition-title">Note</p>
-<p>If <code>radius</code> &gt;= 0, draw convex corner, else draw concave corner</p>
-</div>
 <h4 id="deform">Deform<a class="headerlink" href="#deform" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Rectangle, set radius of 4 corners to <code>0</code>.
@@ -9273,7 +9270,12 @@
 <span class="nx">rect</span><span class="p">.</span><span class="nx">radiusBR</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>  <span class="c1">// number, or {x,y}</span>
 </code></pre></div><ul>
 <li><code>radius</code> :<ul>
-<li>Number : 4 corners with the same radius.</li>
+<li>Number : 4 corners with the same radius.<ul>
+<li><code>0</code>  : No round corner</li>
+<li><code>&gt; 0</code> : Convex round corner</li>
+<li><code>&lt; 0</code> : Concave round corner</li>
+</ul>
+</li>
 <li>JSON<ul>
 <li>4 corners with the same radius X/Y
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -9304,10 +9306,6 @@
 </ul>
 </li>
 </ul>
-<div class="admonition note convex or concave">
-<p class="admonition-title">Note</p>
-<p>If <code>radius</code> &gt;= 0, draw convex corner, else draw concave corner</p>
-</div>
 <h3 id="iteration">Iteration<a class="headerlink" href="#iteration" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get

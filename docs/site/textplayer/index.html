@@ -9554,7 +9554,12 @@
 </ul>
 </li>
 <li><code>background.strokeThickness</code> : Line width of stroke.</li>
-<li><code>background.cornerRadius</code> : Corner-radius of round rectangle.</li>
+<li><code>background.cornerRadius</code> : Corner-radius of round rectangle.<ul>
+<li><code>0</code>  : No round corner</li>
+<li><code>&gt; 0</code> : Convex round corner</li>
+<li><code>&lt; 0</code> : Concave round corner    </li>
+</ul>
+</li>
 <li><code>background.cornerIteration</code> : Iteration of corner-radius.<ul>
 <li><code>null</code> : Draw corner-radius via arc directly.</li>
 <li>A number : Draw corner-radius via lines</li>
