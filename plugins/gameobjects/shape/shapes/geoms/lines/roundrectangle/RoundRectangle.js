@@ -71,6 +71,28 @@ class RoundRectangle extends PathBase {
         return this;
     }
 
+    get centerX() {
+        return this.x + (this.width / 2);
+    }
+
+    set centerX(value) {
+        this.x = value - (this.width / 2);
+    }
+
+    get centerY() {
+        return this.y + (this.height / 2);
+    }
+
+    set centerY(value) {
+        this.y = value - (this.height / 2);
+    }
+
+    setCenterPosition(x, y) {
+        this.centerX = x;
+        this.centerY = y;
+        return this;
+    }
+
     get radiusTL() {
         return this._radiusTL;
     }

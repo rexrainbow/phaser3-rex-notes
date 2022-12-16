@@ -4012,8 +4012,8 @@
   var GetValue$1i = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
-    _inherits(EaseValueTaskBase, _TickTask);
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
     var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
@@ -11861,6 +11861,29 @@
       value: function setSize(width, height) {
         this.width = width;
         this.height = height;
+        return this;
+      }
+    }, {
+      key: "centerX",
+      get: function get() {
+        return this.x + this.width / 2;
+      },
+      set: function set(value) {
+        this.x = value - this.width / 2;
+      }
+    }, {
+      key: "centerY",
+      get: function get() {
+        return this.y + this.height / 2;
+      },
+      set: function set(value) {
+        this.y = value - this.height / 2;
+      }
+    }, {
+      key: "setCenterPosition",
+      value: function setCenterPosition(x, y) {
+        this.centerX = x;
+        this.centerY = y;
         return this;
       }
     }, {

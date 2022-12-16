@@ -3991,8 +3991,8 @@
   var GetValue$I = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
-    _inherits(EaseValueTaskBase, _TickTask);
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
     var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
@@ -13206,6 +13206,10 @@
         cellHeight = config.cellWidth;
         columns = GetValue$5(config, 'rows', config.columns);
       }
+      if (!columns) {
+        columns = 1; // Default columns
+      }
+
       _this.expandCellSize = cellWidth === undefined;
       if (_this.expandCellSize) {
         var width = scrollY ? _this.width : _this.height;

@@ -148,6 +148,7 @@ var customShapes = scene.add.rexCustomShapes({
             - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
             - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
             - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+            - `'roundRectangle'` : Create [Round rectangle shape](shape-custom-shapes.md#round-rectangle).
             - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
     - A plain object with `shapeType: name`, or `shapeType: number`
         - `shapeType` : `arc`, `circle`, `ellipse`, `line`, `rectangle`, `triangle`
@@ -538,6 +539,22 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         rectangle.x = left;
         rectangle.y = top;
         ```
+- Center
+    - Get
+        ```javascript
+        var centerX = rectangle.centerX;
+        var centerY = rectangle.centerY;
+        ```        
+    - Set
+        ```javascript
+        rectangle.setCenterPosition(x, y);
+        ```
+        or
+        ```javascript
+        rectangle.centerX = centerX;
+        rectangle.centerY = centerY;
+        ```
+        - Will change `rectangle.x`, `rectangle.y`
 - Size
     - Get
         ```javascript
@@ -571,6 +588,22 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         roundRectangle.x = left;
         roundRectangle.y = top;
         ```
+- Center
+    - Get
+        ```javascript
+        var centerX = roundRectangle.centerX;
+        var centerY = roundRectangle.centerY;
+        ```        
+    - Set
+        ```javascript
+        roundRectangle.setCenterPosition(x, y);
+        ```
+        or
+        ```javascript
+        roundRectangle.centerX = centerX;
+        roundRectangle.centerY = centerY;
+        ```
+        - Will change `roundRectangle.x`, `roundRectangle.y`
 - Size
     - Get
         ```javascript

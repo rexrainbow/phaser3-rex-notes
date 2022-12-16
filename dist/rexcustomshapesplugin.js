@@ -1831,6 +1831,29 @@
         return this;
       }
     }, {
+      key: "centerX",
+      get: function get() {
+        return this.x + this.width / 2;
+      },
+      set: function set(value) {
+        this.x = value - this.width / 2;
+      }
+    }, {
+      key: "centerY",
+      get: function get() {
+        return this.y + this.height / 2;
+      },
+      set: function set(value) {
+        this.y = value - this.height / 2;
+      }
+    }, {
+      key: "setCenterPosition",
+      value: function setCenterPosition(x, y) {
+        this.centerX = x;
+        this.centerY = y;
+        return this;
+      }
+    }, {
       key: "updateData",
       value: function updateData() {
         this.pathData.length = 0;
@@ -1961,6 +1984,29 @@
       value: function setSize(width, height) {
         this.width = width;
         this.height = height;
+        return this;
+      }
+    }, {
+      key: "centerX",
+      get: function get() {
+        return this.x + this.width / 2;
+      },
+      set: function set(value) {
+        this.x = value - this.width / 2;
+      }
+    }, {
+      key: "centerY",
+      get: function get() {
+        return this.y + this.height / 2;
+      },
+      set: function set(value) {
+        this.y = value - this.height / 2;
+      }
+    }, {
+      key: "setCenterPosition",
+      value: function setCenterPosition(x, y) {
+        this.centerX = x;
+        this.centerY = y;
         return this;
       }
     }, {

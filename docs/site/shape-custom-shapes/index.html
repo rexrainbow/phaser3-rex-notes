@@ -9314,6 +9314,7 @@
 <li><code>'line'</code> : Create <a href="./#line">Line shape</a>.</li>
 <li><code>'lines'</code> : Create <a href="./#lines">Lines shape</a>.</li>
 <li><code>'rectangle'</code> : Create <a href="./#rectangle">Rectangle shape</a>.</li>
+<li><code>'roundRectangle'</code> : Create <a href="./#round-rectangle">Round rectangle shape</a>.</li>
 <li><code>'triangle'</code> : Create <a href="./#triangle">Triangle shape</a>.</li>
 </ul>
 </li>
@@ -9690,6 +9691,23 @@ or
 </code></pre></div></li>
 </ul>
 </li>
+<li>Center<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="nx">centerX</span><span class="p">;</span>
+<span class="nx">rectangle</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="nx">centerY</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>Will change <code>rectangle.x</code>, <code>rectangle.y</code></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Size<ul>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
@@ -9719,6 +9737,23 @@ or
     <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
 <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">top</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+</li>
+<li>Center<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="nx">centerX</span><span class="p">;</span>
+<span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="nx">centerY</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>Will change <code>roundRectangle.x</code>, <code>roundRectangle.y</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Size<ul>

@@ -14,5 +14,8 @@ export default class Rectangle extends BaseGeom {
     width: number;
     height: number;
 
-    
+    setCenterPosition(x: number, y: number): this;
+    centerX: number;
+    centerY: number;
+
 }

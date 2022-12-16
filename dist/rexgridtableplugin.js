@@ -3924,6 +3924,10 @@
         cellHeight = config.cellWidth;
         columns = GetValue$1(config, 'rows', config.columns);
       }
+      if (!columns) {
+        columns = 1; // Default columns
+      }
+
       _this.expandCellSize = cellWidth === undefined;
       if (_this.expandCellSize) {
         var width = scrollY ? _this.width : _this.height;
