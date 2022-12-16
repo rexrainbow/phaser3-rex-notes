@@ -68,6 +68,7 @@ declare class Sizer extends BaseSizer {
     setOrientation(
         orientation?: Sizer.OrientationTypes
     ): this;
+    orientation: number;
 
     setRTL(enable?: boolean): this;
 
