@@ -14,7 +14,7 @@ import Mask from './Mask.js';
 import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
-import AddToContainer from './AddToContainer.js';
+import P3Container from './P3Container.js';
 import Layer from './Layer.js';
 import RenderTexture from './RenderTexture.js';
 
@@ -44,7 +44,7 @@ Object.assign(
     Depth,
     Children,
     Tween,
-    AddToContainer,
+    P3Container,
     Layer,
     RenderTexture,
 );

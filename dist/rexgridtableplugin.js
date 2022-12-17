@@ -435,6 +435,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+    this.addToParentContainer(gameObject);
     this.addToRenderLayer(gameObject);
     return this;
   };
@@ -1348,30 +1349,65 @@
     }
   };
 
-  var AddToContainer = function AddToContainer(layer) {
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    layer.add(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var RemoveFromContainer = function RemoveFromContainer() {
-    if (!this.parentContainer) {
+  var P3Container = {
+    addToContainer: function addToContainer(p3Container) {
+      this._setParentContainerFlag = true;
+      var gameObjects = this.getAllChildren([this]);
+      SortGameObjectsByDepth(gameObjects);
+      p3Container.add(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    addToLayer: function addToLayer(layer) {
+      this.addToContainer(layer);
+      return this;
+    },
+    removeFromContainer: function removeFromContainer() {
+      if (!this.parentContainer) {
+        return this;
+      }
+      this._setParentContainerFlag = true;
+      var gameObjects = this.getAllChildren([this]);
+      SortGameObjectsByDepth(gameObjects);
+      gameObjects.reverse();
+      this.parentContainer.remove(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    getParentContainer: function getParentContainer() {
+      if (this.parentContainer) {
+        return this.parentContainer;
+      }
+
+      // One of parent container has a layer
+      var parent = this.getParent();
+      while (parent) {
+        var p3Container = parent.parentContainer;
+        if (p3Container) {
+          return p3Container;
+        }
+        parent = parent.getParent();
+      }
+      return null;
+    },
+    addToParentContainer: function addToParentContainer(gameObject) {
+      // Don't add to layer if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      }
+      var p3Container = this.getParentContainer();
+      if (!p3Container) {
+        return this;
+      }
+      if (gameObject.isRexContainerLite) {
+        // Add containerLite and its children
+        gameObject.addToContainer(p3Container);
+      } else {
+        // Add gameObject directly
+        p3Container.add(gameObject);
+      }
       return this;
     }
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    gameObjects.reverse();
-    this.parentContainer.remove(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var AddToContainer$1 = {
-    addToLayer: AddToContainer,
-    addToContainer: AddToContainer,
-    removeFromContainer: RemoveFromContainer
   };
 
   var Layer = {
@@ -1850,7 +1886,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);

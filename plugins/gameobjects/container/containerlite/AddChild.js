@@ -19,6 +19,7 @@ var Add = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
+    this.addToParentContainer(gameObject);
     this.addToRenderLayer(gameObject);
 
     return this;
