@@ -5,7 +5,7 @@ export default {
         }
 
         if (duration === undefined) {
-            duration = this.childExpander.transitInTime;
+            duration = this.childTransition.transitInTime;
         }
 
         this.expanded = true;
@@ -20,7 +20,7 @@ export default {
             .show(child)
             .getTopmostSizer().layout()
 
-        this.childExpander
+        this.childTransition
             .once('open', function () {
                 this.emit('expand.complete', this);
             }, this)
@@ -37,7 +37,7 @@ export default {
         }
 
         if (duration === undefined) {
-            duration = this.childExpander.transitOutTime;
+            duration = this.childTransition.transitOutTime;
         }
 
         this.expanded = false;
@@ -48,7 +48,7 @@ export default {
         title.emit('folder.collapse', duration, this);
         child.emit('folder.collapse', duration, this);
 
-        this.childExpander
+        this.childTransition
             .once('close', function () {
                 this
                     .setChildScale(child, 1, 1)

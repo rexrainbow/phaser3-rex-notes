@@ -10,7 +10,7 @@ var DefaultCollapseCallback = function (gameObject, duration) {
 
 export default {
     setTransitionDuration(duration) {
-        this.childExpander
+        this.childTransition
             .setTransitInTime(duration)
             .setTransitOutTime(duration);
 
@@ -21,7 +21,7 @@ export default {
         if (callback === undefined) {
             callback = DefaultExpandCallback.bind(this);
         }
-        this.childExpander.setTransitInCallback(callback);
+        this.childTransition.setTransitInCallback(callback);
         return this;
     },
 
@@ -29,7 +29,7 @@ export default {
         if (callback === undefined) {
             callback = DefaultCollapseCallback.bind(this);
         }
-        this.childExpander.setTransitOutCallback(callback);
+        this.childTransition.setTransitOutCallback(callback);
         return this;
     }
 }

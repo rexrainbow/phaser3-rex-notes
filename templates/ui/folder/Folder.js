@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer';
-import ChildExpander from './methods/ChildExpander.js';
+import ChildTransition from './methods/ChildTransition.js';
 import ExpandMethods from './methods/ExpandMethods.js';
 import ClickMethods from '../basesizer/ClickMethods';
 import ConfigurationMethods from './methods/ConfigurationMethods.js';
@@ -42,7 +42,7 @@ class Folder extends Sizer {
         );
 
         // child
-        this.childExpander = new ChildExpander(child);
+        this.childTransition = new ChildTransition(child);
 
         var customOrigin = GetValue(config, 'customOrigin', false);
         if (!customOrigin) {

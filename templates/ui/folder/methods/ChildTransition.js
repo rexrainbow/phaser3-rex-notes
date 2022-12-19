@@ -1,6 +1,6 @@
 import OpenCloseTransition from '../../../../plugins/behaviors/openclosetransition/OpenCloseTransition.js';
 
-class Expander extends OpenCloseTransition {
+class Transition extends OpenCloseTransition {
     constructor(gameObject, config) {
         if (config === undefined) {
             config = {};
@@ -23,4 +23,4 @@ class Expander extends OpenCloseTransition {
 
 }
 
-export default Expander;
+export default Transition;
