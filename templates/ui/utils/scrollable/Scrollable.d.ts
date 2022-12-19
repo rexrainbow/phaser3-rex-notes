@@ -5,7 +5,7 @@ export default Scrollable;
 
 declare namespace Scrollable {
 
-    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal';
+    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal' | 'x' | 'y';
     type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
     type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
     type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'

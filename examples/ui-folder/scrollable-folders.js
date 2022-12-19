@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400,
             y: 300,
-            width: 260, height: 300,
+            height: 300,
 
             scrollMode: 'y',
 
