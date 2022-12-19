@@ -24,6 +24,7 @@ class DropDown extends OpenCloseTransition {
         }
         config.manualClose = true;
         config.clickOutsideClose = true;
+        config.destroy = true;
 
         super(gameObject, config);
         // this.parent = gameObject;

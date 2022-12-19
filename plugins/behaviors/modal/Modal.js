@@ -21,6 +21,8 @@ class Modal extends OpenCloseTransition {
             config.transitOut = TransitionMode.scaleDown;
         }
 
+        config.destroy = true;
+
         super(gameObject, config);
         // this.parent = gameObject;
         // this.scene

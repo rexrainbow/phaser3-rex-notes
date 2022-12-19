@@ -8,12 +8,8 @@ export default {
     // Override
     onClose() {
         if (this.oneShotMode) {
-            if (this.destroyParent) {
-                this.parent.destroy();
-                // Will invoke `this.destroy()`
-            } else {
-                this.destroy();
-            }
+            this.parent.destroy();
+            // Will invoke `this.destroy()`
         }
     },
 

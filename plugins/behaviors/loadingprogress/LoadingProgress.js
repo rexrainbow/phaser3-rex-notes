@@ -19,6 +19,8 @@ class LoadingProgress extends OpenCloseTransition {
             config.transitOut = ScaleDown;
         }
 
+        config.destroy = true;
+
         super(gameObject, config);
         // this.parent = gameObject;
         // this.scene

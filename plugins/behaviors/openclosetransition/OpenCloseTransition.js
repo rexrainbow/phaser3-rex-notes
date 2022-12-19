@@ -15,8 +15,7 @@ class Transition extends ComponentBase {
         this.setTransitInCallback(GetValue(config, 'transitIn'));
         this.setTransitOutCallback(GetValue(config, 'transitOut'));
 
-        this.oneShotMode = GetValue(config, 'oneShot', true);
-        this.destroyParent = GetValue(config, 'destroy', true);
+        this.oneShotMode = GetValue(config, 'destroy', false);
 
         this.delayCallTimer = undefined;
         this._state = new State(this, { eventEmitter: false });
