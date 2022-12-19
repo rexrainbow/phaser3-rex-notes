@@ -1,4 +1,4 @@
-import Transition from '../transition/Transition.js';
+import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import PopUp from '../../popup.js';
 import ScaleDown from '../scale/ScaleDown.js';
 import SetPosition from './SetPosition.js';
@@ -6,7 +6,7 @@ import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class DropDown extends Transition {
+class DropDown extends OpenCloseTransition {
     constructor(gameObject, config) {
         if (config === undefined) {
             config = {};
@@ -50,7 +50,7 @@ class DropDown extends Transition {
             this.once('open', this.touchOutsideClose, this);
         }
 
-        this.start();
+        this.requestOpen();
     }
 
     shutdown(fromScene) {

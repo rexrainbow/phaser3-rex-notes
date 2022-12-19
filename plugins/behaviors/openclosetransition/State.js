@@ -1,5 +1,15 @@
 import FSM from '../../fsm.js';
 
+/*
+graph TD
+
+IDLE --> TRAN_OPEN
+TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
+OPEN --> TRANS_CLOSE
+TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
+CLOSE --> IDLE
+*/
+
 class State extends FSM {
     constructor(parent, config) {
         super(config);
@@ -23,8 +33,8 @@ class State extends FSM {
     }
     enter_TRANS_OPNE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionIn();
-        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
+        var delay = transitionBehavior.runTransitionInCallback();
+        transitionBehavior.delayCall(delay, this.next, this);
     }
     exit_TRANS_OPNE() {
         var transitionBehavior = this.parent;
@@ -32,7 +42,7 @@ class State extends FSM {
     }
     // TRANS_OPNE
 
-    // OPEN -> TRANS_CLOSE    
+    // OPEN -> TRANS_CLOSE
     next_OPEN() {
         return 'TRANS_CLOSE';
     }
@@ -52,8 +62,8 @@ class State extends FSM {
     }
     enter_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionOut();
-        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
+        var delay = transitionBehavior.runTransitionOutCallback();
+        transitionBehavior.delayCall(delay, this.next, this);
     }
     exit_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
@@ -61,12 +71,14 @@ class State extends FSM {
     }
     // TRANS_CLOSE
 
-    // CLOSE
+    // CLOSE -> IDLE
     next_CLOSE() {
+        return 'IDLE';
     }
     enter_CLOSE() {
         var transitionBehavior = this.parent;
         transitionBehavior.onClose();
+        this.next();
     }
     exit_CLOSE() {
     }

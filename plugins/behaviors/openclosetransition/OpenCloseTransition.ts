@@ -19,6 +19,7 @@ declare namespace Transition {
 
         transitOut?: TransitCallbackType,
 
+        oneShot?: boolean,
         destroy?: boolean,
     }
 }
@@ -29,5 +30,11 @@ declare class Transition extends ComponentBase {
         config?: Transition.IConfig
     );
 
-    requestClose(closeEventData: any): this;
+    requestOpen(duration?: number): this;
+    open(duration?: number): this;
+    onOpen(): void;
+
+    requestClose(closeEventData: any, duration?: number): this;
+    close(duration?: number): this;
+    onClose(): void;
 }

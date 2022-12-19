@@ -1,4 +1,4 @@
-import Transition from '../transition/Transition.js';
+import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import CreateCover from './CreateCover.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
 import {
@@ -9,7 +9,7 @@ import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Modal extends Transition {
+class Modal extends OpenCloseTransition {
     constructor(gameObject, config) {
         if (config === undefined) {
             config = {};
@@ -63,7 +63,7 @@ class Modal extends Transition {
             this.once('open', this.touchOutsideClose, this);
         }
 
-        this.start();
+        this.requestOpen();
     }
 
     shutdown(fromScene) {
@@ -152,7 +152,6 @@ class Modal extends Transition {
 
     onClose() {
         this.emit('close', this.closeEventData);
-
         super.onClose();
     }
 
