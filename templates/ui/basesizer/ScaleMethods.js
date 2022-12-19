@@ -33,22 +33,22 @@ export default {
             ease = config.ease;
         }
 
-        var isInit = (this._scale === undefined);
+        var isInit = (this._scaleBehavior === undefined);
 
-        this._scale = PopUp(this, duration, orientation, ease, this._scale);
+        this._scaleBehavior = PopUp(this, duration, orientation, ease, this._scaleBehavior);
 
         if (isInit) {
-            OnInitScale(this, this._scale);
+            OnInitScale(this, this._scaleBehavior);
         }
 
-        this._scale.completeEventName = 'popup.complete';
+        this._scaleBehavior.completeEventName = 'popup.complete';
 
         return this;
     },
 
     popUpPromise(duration, orientation, ease) {
         this.popUp(duration, orientation, ease);
-        return WaitComplete(this._scale);
+        return WaitComplete(this._scaleBehavior);
     },
 
     scaleDownDestroy(duration, orientation, ease, destroyMode) {
@@ -60,22 +60,22 @@ export default {
             destroyMode = config.destroy;
         }
 
-        var isInit = (this._scale === undefined);
+        var isInit = (this._scaleBehavior === undefined);
 
-        this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
+        this._scaleBehavior = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scaleBehavior);
 
         if (isInit) {
-            OnInitScale(this, this._scale);
+            OnInitScale(this, this._scaleBehavior);
         }
 
-        this._scale.completeEventName = 'scaledown.complete';
+        this._scaleBehavior.completeEventName = 'scaledown.complete';
 
         return this;
     },
 
     scaleDownDestroyPromise(duration, orientation, ease, destroyMode) {
         this.scaleDownDestroy(duration, orientation, ease, destroyMode);
-        return WaitComplete(this._scale);
+        return WaitComplete(this._scaleBehavior);
     },
 
     scaleDown(duration, orientation, ease) {
@@ -85,7 +85,7 @@ export default {
 
     scaleDownPromise(duration, orientation, ease) {
         this.scaleDown(duration, orientation, ease);
-        return WaitComplete(this._scale);
+        return WaitComplete(this._scaleBehavior);
     },
 
     scaleYoyo(duration, peakValue, repeat, orientation, ease) {
@@ -98,22 +98,22 @@ export default {
             ease = config.ease;
         }
 
-        var isInit = (this._scale === undefined);
+        var isInit = (this._scaleBehavior === undefined);
 
-        this._scale = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scale);
+        this._scaleBehavior = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scaleBehavior);
 
         if (isInit) {
-            OnInitScale(this, this._scale);
+            OnInitScale(this, this._scaleBehavior);
         }
 
-        this._scale.completeEventName = 'scaleyoyo.complete';
+        this._scaleBehavior.completeEventName = 'scaleyoyo.complete';
 
         return this;
     },
 
     scaleYoyoPromise(duration, peakValue, repeat, orientation, ease) {
         this.scaleYoyo(duration, peakValue, repeat, orientation, ease);
-        return WaitComplete(this._scale);
+        return WaitComplete(this._scaleBehavior);
     },
 
 
