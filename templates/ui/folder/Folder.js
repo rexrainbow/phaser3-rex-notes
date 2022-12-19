@@ -1,6 +1,8 @@
 import Sizer from '../sizer/Sizer';
+import ChildExpander from './methods/ChildExpander.js';
 import ExpandMethods from './methods/ExpandMethods.js';
 import ClickMethods from '../basesizer/ClickMethods';
+import ConfigurationMethods from './methods/ConfigurationMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,6 +10,10 @@ class Folder extends Sizer {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
+        }
+
+        if (!config.hasOwnProperty('orientation')) {
+            config.orientation = 1;
         }
 
         super(scene, config);
@@ -20,28 +26,37 @@ class Folder extends Sizer {
         var title = config.title;
         var child = config.child;
 
+        // background
         if (background) {
             this.addBackground(background);
         }
 
+        // title
+        var align = GetValue(config, 'align.title', 'left');
+        var expand = GetValue(config, 'expand.title', true);
         this.add(
             title,
             {
-                proportion: 0,
-                expand: GetValue(config, 'expand.title', true),
+                proportion: 0, align: align, expand: expand,
             }
         );
 
-        if (this.orientation === 1) { // y
-            child.setOrigin(0.5, 0);
-        } else {
-            child.setOrigin(0, 0.5);
+        // child
+        this.childExpander = new ChildExpander(child);
+
+        var customOrigin = GetValue(config, 'customOrigin', false);
+        if (!customOrigin) {
+            child.setOrigin(0, 0);
         }
+
+        var align = GetValue(config, 'align.child', 'left');
+        var expand = GetValue(config, 'expand.child', true);
+        var proportion = (expand) ? 1 : 0;
         this.add(
             child,
             {
-                proportion: 0,
-                expand: GetValue(config, 'expand.child', true),
+                proportion: proportion, align: align, expand: expand,
+
             }
         );
 
@@ -50,9 +65,16 @@ class Folder extends Sizer {
         this.addChildrenMap('background', background);
 
         this.setTransitionDuration(GetValue(config, 'transition.duration', 200));
+        this.setExpandCallback(GetValue(config, 'expandCallback', undefined));
+        this.setCollapseCallback(GetValue(config, 'collapseCallback', undefined));
 
         if (GetValue(config, 'toggleByClickingTitle', true)) {
-            ClickMethods.onClick.call(title, this.toggle, this)
+            ClickMethods.onClick.call(
+                title,
+                function () {
+                    this.toggle();
+                },
+                this)
         }
 
         if (!GetValue(config, 'expanded', true)) {
@@ -60,16 +82,12 @@ class Folder extends Sizer {
         }
     }
 
-    setTransitionDuration(duration) {
-        this.transitionDuration = duration;
-        return this;
-    }
-
 }
 
 Object.assign(
     Folder.prototype,
     ExpandMethods,
+    ConfigurationMethods,
 )
 
 export default Folder;

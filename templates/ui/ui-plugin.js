@@ -60,7 +60,7 @@ import BadgeLabelFactory from './badgelabel/Factory.js';
 import PagesFactory from './pages/Factory.js';
 import PerspectiveCardFactory from './perspectivecard/Factory.js';
 import TabPagesFactory from './tabpages/Factory.js';
-//import FolderFactory from './folder/Factory.js';
+import FolderFactory from './folder/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';

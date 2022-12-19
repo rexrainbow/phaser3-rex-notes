@@ -14,7 +14,9 @@ class State extends FSM {
     constructor(parent, config) {
         super(config);
         this.parent = parent;
-        this.init();
+
+        var initState = config.initState || 'IDLE';
+        this.start(initState);
     }
 
     init() {

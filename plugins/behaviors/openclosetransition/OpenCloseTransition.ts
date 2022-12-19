@@ -1,8 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
 
-export default Transition;
+export default OpenCloseTransition;
 
-declare namespace Transition {
+declare namespace OpenCloseTransition {
     type TransitCallbackType = (
         gameObject: Phaser.GameObjects.GameObject,
         duration: number
@@ -21,14 +21,31 @@ declare namespace Transition {
 
         oneShot?: boolean,
         destroy?: boolean,
+        opened?: boolean,
     }
 }
 
-declare class Transition extends ComponentBase {
+declare class OpenCloseTransition extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: Transition.IConfig
+        config?: OpenCloseTransition.IConfig
     );
+
+    setTransitInTime(duration: number): this;
+    transitInTime: number;
+
+    setTransitOutTime(duration: number): this;
+    transitOutTime: number;
+
+    setTransitInCallback(
+        callback?: OpenCloseTransition.TransitCallbackType
+    ): this;
+    transitInCallback: OpenCloseTransition.TransitCallbackType;
+
+    setTransitOutCallback(
+        callback?: OpenCloseTransition.TransitCallbackType
+    ): this;
+    transitOutCallback: OpenCloseTransition.TransitCallbackType;
 
     requestOpen(duration?: number): this;
     open(duration?: number): this;

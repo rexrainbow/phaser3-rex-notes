@@ -18,7 +18,10 @@ class Transition extends ComponentBase {
         this.oneShotMode = GetValue(config, 'destroy', false);
 
         this.delayCallTimer = undefined;
-        this._state = new State(this, { eventEmitter: false });
+        this._state = new State(this, {
+            eventEmitter: false,
+            initState: GetValue(config, 'opened', false) ? 'OPEN' : 'IDLE'
+        });
         this.closeEventData = undefined;
     }
 

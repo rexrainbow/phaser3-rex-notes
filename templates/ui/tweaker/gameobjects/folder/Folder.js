@@ -19,7 +19,7 @@ class Folder extends Sizer {
             { proportion: 0, expand: true, }
         );
 
-        child.setOrigin(0.5, 0);
+        child.setOrigin(0, 0);
         this.add(
             child,
             { proportion: 0, expand: true, }
