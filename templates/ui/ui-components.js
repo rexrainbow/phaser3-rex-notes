@@ -57,6 +57,7 @@ import BadgeLabel from './badgelabel/BadgeLabel.js';
 import Pages from './pages/Pages.js';
 import PerspectiveCard from './perspectivecard/PerspectiveCard.js';
 import TabPages from './tabpages/TabPages.js';
+import Folder from './folder/Folder.js';
 import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import ScrollBar from './scrollbar/ScrollBar.js';
@@ -165,6 +166,7 @@ export {
     Pages,
     PerspectiveCard,
     TabPages,
+    Folder,
     TextArea,
     ScrollablePanel,
     ScrollBar,

@@ -8959,15 +8959,21 @@
 </ul>
 </li>
 <li><code>duration</code> : Duration of transition-in, hold, trantion-out.<ul>
-<li><code>duration.in</code> : Duration of transition-in (open dialog).</li>
-<li><code>duration.out</code> : Duration of transition-out (close dialog).</li>
+<li><code>duration.in</code> : Duration of transition-in (open dialog).<ul>
+<li><code>0</code> : No transition, open dialog immediately.</li>
+</ul>
+</li>
+<li><code>duration.out</code> : Duration of transition-out (close dialog).<ul>
+<li><code>0</code> : No transition, close dialog immediately.</li>
+</ul>
+</li>
 <li><code>duration.hold</code> : Duration of hold.<ul>
 <li><code>-1</code> : Disable <code>timeOutClose</code>.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>transitIn</code> : Tween behavior of opening dialog.<ul>
+<li><code>transitIn</code> : Transition behavior of opening dialog.<ul>
 <li><code>0</code>, <code>'popUp'</code> : Pop up dialog from <code>0</code> to current scale.</li>
 <li><code>1</code>, <code>'fadeIn'</code> : Fade in dialog</li>
 <li>Custom callback

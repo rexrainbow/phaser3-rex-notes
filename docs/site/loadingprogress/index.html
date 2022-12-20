@@ -8893,8 +8893,14 @@
 <ul>
 <li><code>gameObject</code> : Game object for presenting loading-progress.</li>
 <li><code>duration</code> : Duration of transition-in, trantion-out.<ul>
-<li><code>duration.in</code> : Duration of transition-in (open dialog).</li>
-<li><code>duration.out</code> : Duration of transition-out (close dialog). Game object will be destroyed after transiting out.</li>
+<li><code>duration.in</code> : Duration of transition-in (open dialog).<ul>
+<li><code>0</code> : No transition, open dialog immediately.- </li>
+</ul>
+</li>
+<li><code>duration.out</code> : Duration of transition-out (close dialog). Game object will be destroyed after transiting out.<ul>
+<li><code>0</code> : No transition, close dialog immediately.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>progress</code> : Callback of loading-progress
