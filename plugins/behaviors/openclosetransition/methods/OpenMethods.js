@@ -10,19 +10,7 @@ export default {
     },
 
     requestOpen(duration) {
-        // Only can close modal in IDLE state
-        if (this._state.state !== 'IDLE') {
-            return this;
-        }
-
-        this.open(duration);
-
-        return this;
-    },
-
-    open(duration) {
-        // Do nothing if current state is TRANS_OPNE already
-        if (this._state.state === 'TRANS_OPNE') {
+        if (!this._state.canOpen) {
             return this;
         }
 
@@ -34,7 +22,7 @@ export default {
         this._state.goto('TRANS_OPNE');
 
         this.transitInTime = transitionTimeSave;
+
         return this;
     },
-
 }

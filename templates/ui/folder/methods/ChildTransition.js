@@ -6,8 +6,6 @@ class Transition extends OpenCloseTransition {
             config = {};
         }
         config.destroy = false;
-        config.opened = true;
-
         super(gameObject, config);
     }
 

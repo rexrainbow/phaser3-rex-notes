@@ -10,6 +10,8 @@ var DefaultCollapseCallback = function (gameObject, duration) {
 
 export default {
     setTransitionDuration(duration) {
+        this.transitionDuration = duration;
+
         this.childTransition
             .setTransitInTime(duration)
             .setTransitOutTime(duration);

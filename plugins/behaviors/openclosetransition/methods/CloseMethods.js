@@ -14,22 +14,13 @@ export default {
     },
 
     requestClose(closeEventData, duration) {
-        // Only can close modal in OPEN state
-        if (this._state.state !== 'OPEN') {
+        if (!this._state.canClose) {
             return this;
         }
+
+        if (this._state)
 
         this.closeEventData = (arguments.length > 0) ? closeEventData : this.parent;
-        this.close(duration);
-
-        return this;
-    },
-
-    close(duration) {
-        // Do nothing if current state is TRANS_CLOSE already
-        if (this._state.state === 'TRANS_CLOSE') {
-            return this;
-        }
 
         var transitionTimeSave = this.transitOutTime;
         if (duration !== undefined) {
@@ -42,5 +33,4 @@ export default {
 
         return this;
     },
-
 }

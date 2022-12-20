@@ -4,7 +4,7 @@ import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Transition extends ComponentBase {
+class OpenCloseTransition extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
@@ -20,7 +20,7 @@ class Transition extends ComponentBase {
         this.delayCallTimer = undefined;
         this._state = new State(this, {
             eventEmitter: false,
-            initState: GetValue(config, 'opened', false) ? 'OPEN' : 'IDLE'
+            initState: GetValue(config, 'initState', 'IDLE')
         });
         this.closeEventData = undefined;
     }
@@ -46,8 +46,8 @@ class Transition extends ComponentBase {
 }
 
 Object.assign(
-    Transition.prototype,
+    OpenCloseTransition.prototype,
     Methods,
 )
 
-export default Transition;
+export default OpenCloseTransition;

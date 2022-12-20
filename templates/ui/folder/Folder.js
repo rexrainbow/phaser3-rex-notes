@@ -19,7 +19,7 @@ class Folder extends Sizer {
         super(scene, config);
         this.type = 'rexFolder';
 
-        this.expanded = true;
+        this.expanded = undefined;
         this.expandDirection = (this.orientation === 1) ? 'y' : 'x';
 
         var background = config.background;
@@ -64,9 +64,10 @@ class Folder extends Sizer {
         this.addChildrenMap('child', child);
         this.addChildrenMap('background', background);
 
-        this.setTransitionDuration(GetValue(config, 'transition.duration', 200));
-        this.setExpandCallback(GetValue(config, 'expandCallback', undefined));
-        this.setCollapseCallback(GetValue(config, 'collapseCallback', undefined));
+        var transitionConfig = config.transition;
+        this.setTransitionDuration(GetValue(transitionConfig, 'duration', 200));
+        this.setExpandCallback(GetValue(transitionConfig, 'expandCallback', undefined));
+        this.setCollapseCallback(GetValue(transitionConfig, 'collapseCallback', undefined));
 
         if (GetValue(config, 'toggleByClickingTitle', true)) {
             ClickMethods.onClick.call(
@@ -77,11 +78,32 @@ class Folder extends Sizer {
                 this)
         }
 
-        if (!GetValue(config, 'expanded', true)) {
+        var onExpandStart = config.onExpandStart;
+        if (onExpandStart) {
+            this.on('expand.start', onExpandStart);
+        }
+
+        var onExpandComplete = config.onExpandComplete;
+        if (onExpandComplete) {
+            this.on('expand.complete', onExpandComplete);
+        }
+
+        var onCollapseStart = config.onCollapseStart;
+        if (onCollapseStart) {
+            this.on('collapse.start', onCollapseStart);
+        }
+
+        var onCollapseComplete = config.onCollapseComplete;
+        if (onCollapseComplete) {
+            this.on('collapse.complete', onCollapseComplete);
+        }
+
+        if (GetValue(config, 'expanded', true)) {
+            this.expand(0);
+        } else {
             this.collapse(0);
         }
     }
-
 }
 
 Object.assign(

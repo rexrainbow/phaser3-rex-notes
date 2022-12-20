@@ -90,6 +90,10 @@ var CreatePanel = function (scene) {
             CreateFolder(scene, 'FolderD', ['AA3', 'BB3', 'CC3', 'DD3']),
             { expand: true }
         )
+        .add(
+            CreateFolder(scene, 'FolderE', ['AA4', 'BB4', 'CC4', 'DD4']),
+            { expand: true }
+        )
 }
 
 var CreateFolder = function (scene, folderName, buttonNames) {
@@ -100,7 +104,7 @@ var CreateFolder = function (scene, folderName, buttonNames) {
         buttons.push(CreateLabel(scene, buttonNames[i]));
     }
 
-    return scene.rexUI.add.folder({
+    var folder = scene.rexUI.add.folder({
         background: background,
 
         title: CreateLabel(scene, folderName),
@@ -112,17 +116,40 @@ var CreateFolder = function (scene, folderName, buttonNames) {
             space: { item: 3 }
         }),
 
+        transition: {
+            // duration: 200,
+        },
+
         expand: {
             title: false,
             child: true,
         },
 
-        // expanded: false,
-
         space: {
             left: 10, right: 10, top: 10, bottom: 10, item: 3
-        }
+        },
+
+        onExpandStart(folder) {
+            console.log(`Expand ${folderName}`)
+            folder.getElement('background').setFillStyle()
+        },
+
+        onExpandComplete(folder) {
+
+        },
+
+        onCollapseStart(folder) {
+            console.log(`Collapse ${folderName}`)
+        },
+
+        onCollapseComplete(folder) {
+            folder.getElement('background').setFillStyle(COLOR_DARK)
+        },
+
+        expanded: false,
     })
+
+    return folder;
 }
 
 var CreateLabel = function (scene, text) {

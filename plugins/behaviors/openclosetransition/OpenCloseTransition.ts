@@ -48,10 +48,8 @@ declare class OpenCloseTransition extends ComponentBase {
     transitOutCallback: OpenCloseTransition.TransitCallbackType;
 
     requestOpen(duration?: number): this;
-    open(duration?: number): this;
     onOpen(): void;
 
     requestClose(closeEventData: any, duration?: number): this;
-    close(duration?: number): this;
     onClose(): void;
 }

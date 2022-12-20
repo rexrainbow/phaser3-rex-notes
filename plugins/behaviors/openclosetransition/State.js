@@ -7,7 +7,7 @@ IDLE --> TRAN_OPEN
 TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
 OPEN --> TRANS_CLOSE
 TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
-CLOSE --> IDLE
+CLOSE --> TRAN_OPEN
 */
 
 class State extends FSM {
@@ -35,8 +35,12 @@ class State extends FSM {
     }
     enter_TRANS_OPNE() {
         var transitionBehavior = this.parent;
-        var delay = transitionBehavior.runTransitionInCallback();
-        transitionBehavior.delayCall(delay, this.next, this);
+        if (transitionBehavior.transitInTime > 0) {
+            var delay = transitionBehavior.runTransitionInCallback();
+            transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+            this.next();
+        }
     }
     exit_TRANS_OPNE() {
         var transitionBehavior = this.parent;
@@ -64,8 +68,12 @@ class State extends FSM {
     }
     enter_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
-        var delay = transitionBehavior.runTransitionOutCallback();
-        transitionBehavior.delayCall(delay, this.next, this);
+        if (transitionBehavior.transitOutTime > 0) {
+            var delay = transitionBehavior.runTransitionOutCallback();
+            transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+            this.next();
+        }
     }
     exit_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
@@ -73,18 +81,25 @@ class State extends FSM {
     }
     // TRANS_CLOSE
 
-    // CLOSE -> IDLE
+    // CLOSE -> TRANS_OPNE
     next_CLOSE() {
-        return 'IDLE';
+        return 'TRANS_OPNE';
     }
     enter_CLOSE() {
         var transitionBehavior = this.parent;
         transitionBehavior.onClose();
-        this.next();
     }
     exit_CLOSE() {
     }
     // CLOSE
+
+    get canOpen() {
+        return (this.state === 'IDLE') || (this.state === 'CLOSE');
+    }
+
+    get canClose() {
+        return (this.state === 'IDLE') || (this.state === 'OPEN');
+    }
 }
 
 export default State;
