@@ -31,6 +31,7 @@ import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
+import FolderFactory from './folder/Factory';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory';
 import GridSizerFactory from './gridsizer/Factory';
@@ -130,6 +131,7 @@ declare class Factories {
     flip: typeof FlipFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
     fixWidthSizer: typeof FixWidthSizerFactory;
+    folder: typeof FolderFactory;
     fullWindowRectangle: typeof FullWindowRectangleFactory;
     gridButtons: typeof GridButtonsFactory;
     gridSizer: typeof GridSizerFactory;
@@ -257,6 +259,7 @@ import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
 import { Fade as FadeClass } from './fade/Fade.js';
 import FlipClass from './flip/Flip';
 import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
+import FolderClass from './folder/Folder';
 import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
 import FixWidthSizerClass from './fixwidthsizer/FixWidthSizer';
 import GridButtonsClass from './gridbuttons/GridButtons';
@@ -334,6 +337,7 @@ declare namespace UIPlugins {
     type Fade = FadeClass;
     type Flip = FlipClass;
     type FixWidthButtons = FixWidthButtonsClass;
+    type Folder = FolderClass;
     type FullWindowRectangle = FullWindowRectangleClass;
     type FixWidthSizer = FixWidthSizerClass;
     type GridButtons = GridButtonsClass;

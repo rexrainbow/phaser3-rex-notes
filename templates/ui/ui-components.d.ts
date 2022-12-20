@@ -58,6 +58,7 @@ import BadgeLabel from './badgelabel/BadgeLabel';
 import Pages from './pages/Pages';
 import PerspectiveCard from './perspectivecard/PerspectiveCard';
 import TabPages from './tabpages/TabPages';
+import Folder from './folder/Folder';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
@@ -166,6 +167,7 @@ export {
     Pages,
     PerspectiveCard,
     TabPages,
+    Folder,
     TextArea,
     ScrollablePanel,
     Toast,

@@ -41,10 +41,19 @@ class Folder extends Sizer {
             }
         );
 
+        if (GetValue(config, 'toggleByClickingTitle', true)) {
+            ClickMethods.onClick.call(
+                title,
+                function () {
+                    this.toggle();
+                },
+                this)
+        }
+
         // child
         this.childTransition = new ChildTransition(child);
 
-        var customOrigin = GetValue(config, 'customOrigin', false);
+        var customOrigin = GetValue(config, 'customChildOrigin', false);
         if (!customOrigin) {
             child.setOrigin(0, 0);
         }
@@ -68,15 +77,6 @@ class Folder extends Sizer {
         this.setTransitionDuration(GetValue(transitionConfig, 'duration', 200));
         this.setExpandCallback(GetValue(transitionConfig, 'expandCallback', undefined));
         this.setCollapseCallback(GetValue(transitionConfig, 'collapseCallback', undefined));
-
-        if (GetValue(config, 'toggleByClickingTitle', true)) {
-            ClickMethods.onClick.call(
-                title,
-                function () {
-                    this.toggle();
-                },
-                this)
-        }
 
         var onExpandStart = config.onExpandStart;
         if (onExpandStart) {
