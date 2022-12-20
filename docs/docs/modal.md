@@ -111,10 +111,12 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
     - If `touchOutsideClose`,  `anyTouchClose`, and `timeOutClose` are `false`, it is equal to `manualClose`.
 - `duration` : Duration of transition-in, hold, trantion-out.
     - `duration.in` : Duration of transition-in (open dialog).
+        - `0` : No transition, open dialog immediately.
     - `duration.out` : Duration of transition-out (close dialog).
+        - `0` : No transition, close dialog immediately.
     - `duration.hold` : Duration of hold.
         - `-1` : Disable `timeOutClose`.
-- `transitIn` : Tween behavior of opening dialog.
+- `transitIn` : Transition behavior of opening dialog.
     - `0`, `'popUp'` : Pop up dialog from `0` to current scale.
     - `1`, `'fadeIn'` : Fade in dialog
     - Custom callback

@@ -1903,11 +1903,11 @@
     return this;
   };
 
-  var methods$e = {
+  var methods$f = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$e, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods$f, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2176,7 +2176,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$e);
+  Object.assign(ContainerLite.prototype, methods$f);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -4483,17 +4483,17 @@
         orientation = config.orientation;
         ease = config.ease;
       }
-      var isInit = this._scale === undefined;
-      this._scale = PopUp(this, duration, orientation, ease, this._scale);
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = PopUp(this, duration, orientation, ease, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scale);
+        OnInitScale(this, this._scaleBehavior);
       }
-      this._scale.completeEventName = 'popup.complete';
+      this._scaleBehavior.completeEventName = 'popup.complete';
       return this;
     },
     popUpPromise: function popUpPromise(duration, orientation, ease) {
       this.popUp(duration, orientation, ease);
-      return WaitComplete(this._scale);
+      return WaitComplete(this._scaleBehavior);
     },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
       if (IsPlainObject$h(duration)) {
@@ -4503,17 +4503,17 @@
         ease = config.ease;
         destroyMode = config.destroy;
       }
-      var isInit = this._scale === undefined;
-      this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scale);
+        OnInitScale(this, this._scaleBehavior);
       }
-      this._scale.completeEventName = 'scaledown.complete';
+      this._scaleBehavior.completeEventName = 'scaledown.complete';
       return this;
     },
     scaleDownDestroyPromise: function scaleDownDestroyPromise(duration, orientation, ease, destroyMode) {
       this.scaleDownDestroy(duration, orientation, ease, destroyMode);
-      return WaitComplete(this._scale);
+      return WaitComplete(this._scaleBehavior);
     },
     scaleDown: function scaleDown(duration, orientation, ease) {
       this.scaleDownDestroy(duration, orientation, ease, false);
@@ -4521,7 +4521,7 @@
     },
     scaleDownPromise: function scaleDownPromise(duration, orientation, ease) {
       this.scaleDown(duration, orientation, ease);
-      return WaitComplete(this._scale);
+      return WaitComplete(this._scaleBehavior);
     },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
       if (IsPlainObject$h(duration)) {
@@ -4532,17 +4532,17 @@
         orientation = config.orientation;
         ease = config.ease;
       }
-      var isInit = this._scale === undefined;
-      this._scale = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scale);
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scale);
+        OnInitScale(this, this._scaleBehavior);
       }
-      this._scale.completeEventName = 'scaleyoyo.complete';
+      this._scaleBehavior.completeEventName = 'scaleyoyo.complete';
       return this;
     },
     scaleYoyoPromise: function scaleYoyoPromise(duration, peakValue, repeat, orientation, ease) {
       this.scaleYoyo(duration, peakValue, repeat, orientation, ease);
-      return WaitComplete(this._scale);
+      return WaitComplete(this._scaleBehavior);
     }
   };
 
@@ -8474,10 +8474,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$d = {
+  var methods$e = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$d);
+  Object.assign(Rotate.prototype, methods$e);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -8568,7 +8568,7 @@
     return this;
   };
 
-  var methods$c = {
+  var methods$d = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -8603,7 +8603,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$c, PaddingMethods, AddChildMethods$6, RemoveChildMethods$5, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$d, PaddingMethods, AddChildMethods$6, RemoveChildMethods$5, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$W = Phaser.Utils.Objects.GetValue;
   var Base$1 = /*#__PURE__*/function (_Container) {
@@ -8850,7 +8850,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base$1.prototype, methods$c);
+  Object.assign(Base$1.prototype, methods$d);
 
   var GetChildrenWidth$2 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -9428,7 +9428,7 @@
     }
   };
 
-  var methods$b = {
+  var methods$c = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -9439,7 +9439,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$b, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods$1);
+  Object.assign(methods$c, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods$1);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -9550,7 +9550,7 @@
     }]);
     return Sizer;
   }(Base$1);
-  Object.assign(Sizer.prototype, methods$b);
+  Object.assign(Sizer.prototype, methods$c);
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
@@ -12677,7 +12677,7 @@
         proportion: 0,
         expand: true
       });
-      child.setOrigin(0.5, 0);
+      child.setOrigin(0, 0);
       _this.add(child, {
         proportion: 0,
         expand: true
@@ -13276,10 +13276,10 @@
     }]);
     return ButtonGroup;
   }();
-  var methods$a = {
+  var methods$b = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods, methods$a);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods, methods$b);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -13736,7 +13736,7 @@
     }
   };
 
-  var methods$9 = {
+  var methods$a = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getChildrenSizers: GetChildrenSizers$1,
@@ -13744,7 +13744,7 @@
     layoutChildren: LayoutChildren$1,
     runWidthWrap: RunWidthWrap
   };
-  Object.assign(methods$9, AddChildMethods$3, RemoveChildMethods$2);
+  Object.assign(methods$a, AddChildMethods$3, RemoveChildMethods$2);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {
@@ -13901,7 +13901,7 @@
     'justify-bottom': 4,
     'justify-center': 5
   };
-  Object.assign(FixWidthSizer.prototype, methods$9);
+  Object.assign(FixWidthSizer.prototype, methods$a);
 
   var SizerAdd$1 = FixWidthSizer.prototype.add;
   var Add$2 = function Add(gameObject) {
@@ -14315,7 +14315,7 @@
     }
   };
 
-  var methods$8 = {
+  var methods$9 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -14323,7 +14323,7 @@
     getChildrenSizers: GetChildrenSizers,
     layoutChildren: LayoutChildren
   };
-  Object.assign(methods$8, AddChildMethods$1, RemoveChildMethods);
+  Object.assign(methods$9, AddChildMethods$1, RemoveChildMethods);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -14379,7 +14379,7 @@
     }]);
     return OverlapSizer;
   }(Base$1);
-  Object.assign(OverlapSizer.prototype, methods$8);
+  Object.assign(OverlapSizer.prototype, methods$9);
 
   var OverlapSizerAdd = OverlapSizer.prototype.add;
   var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
@@ -14438,12 +14438,12 @@
     return this.sizerChildren.hasOwnProperty(key);
   };
 
-  var methods$7 = {
+  var methods$8 = {
     getPage: GetPage$1,
     swapPage: SwapPage$1,
     hasPage: HasPage
   };
-  Object.assign(methods$7, AddChildMethods);
+  Object.assign(methods$8, AddChildMethods);
 
   var GetValue$E = Phaser.Utils.Objects.GetValue;
   var Pages = /*#__PURE__*/function (_OverlapSizer) {
@@ -14507,7 +14507,7 @@
     }]);
     return Pages;
   }(OverlapSizer);
-  Object.assign(Pages.prototype, methods$7);
+  Object.assign(Pages.prototype, methods$8);
   var SWAPMODE = {
     invisible: 0,
     destroy: 1
@@ -14628,14 +14628,14 @@
     return this.getElement('tabs.buttons')[index];
   };
 
-  var methods$6 = {
+  var methods$7 = {
     getPageKey: GetPageKeyByIndex,
     getPageIndex: GetPageIndexByKey,
     addPage: AddPage,
     getPage: GetPage,
     getTab: GetTab
   };
-  Object.assign(methods$6, SwapPageMethods, RemovePageMethods);
+  Object.assign(methods$7, SwapPageMethods, RemovePageMethods);
 
   var GetValue$C = Phaser.Utils.Objects.GetValue;
   var SizerAdd = Sizer.prototype.add;
@@ -14750,7 +14750,7 @@
     }]);
     return TabPages;
   }(Sizer);
-  Object.assign(TabPages$1.prototype, methods$6);
+  Object.assign(TabPages$1.prototype, methods$7);
 
   var TabPages = /*#__PURE__*/function (_TabPagesBase) {
     _inherits(TabPages, _TabPagesBase);
@@ -21460,13 +21460,13 @@
     click: 1,
     none: -1
   };
-  var methods$5 = {
+  var methods$6 = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndoint,
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods$5);
+  Object.assign(Slider.prototype, methods$6);
 
   var BuildSliderConfig = function BuildSliderConfig(scene, config) {
     config = config ? DeepClone(config) : {};
@@ -21602,7 +21602,7 @@
     return listConfig;
   };
 
-  var methods$4 = {
+  var methods$5 = {
     setWrapEnable: function setWrapEnable(enable) {
       if (enable === undefined) {
         enable = true;
@@ -21753,6 +21753,15 @@
     return listPanel;
   };
 
+  /*
+  graph TD
+
+  IDLE --> TRAN_OPEN
+  TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
+  OPEN --> TRANS_CLOSE
+  TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
+  CLOSE --> TRAN_OPEN
+  */
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
     var _super = _createSuper(State);
@@ -21761,7 +21770,8 @@
       _classCallCheck(this, State);
       _this = _super.call(this, config);
       _this.parent = parent;
-      _this.init();
+      var initState = config.initState || 'IDLE';
+      _this.start(initState);
       return _this;
     }
     _createClass(State, [{
@@ -21788,8 +21798,12 @@
       key: "enter_TRANS_OPNE",
       value: function enter_TRANS_OPNE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionIn();
-        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
+        if (transitionBehavior.transitInTime > 0) {
+          var delay = transitionBehavior.runTransitionInCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
       }
     }, {
       key: "exit_TRANS_OPNE",
@@ -21799,7 +21813,7 @@
       }
       // TRANS_OPNE
 
-      // OPEN -> TRANS_CLOSE    
+      // OPEN -> TRANS_CLOSE
     }, {
       key: "next_OPEN",
       value: function next_OPEN() {
@@ -21829,8 +21843,12 @@
       key: "enter_TRANS_CLOSE",
       value: function enter_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionOut();
-        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
+        if (transitionBehavior.transitOutTime > 0) {
+          var delay = transitionBehavior.runTransitionOutCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
       }
     }, {
       key: "exit_TRANS_CLOSE",
@@ -21840,10 +21858,12 @@
       }
       // TRANS_CLOSE
 
-      // CLOSE
+      // CLOSE -> TRANS_OPNE
     }, {
       key: "next_CLOSE",
-      value: function next_CLOSE() {}
+      value: function next_CLOSE() {
+        return 'TRANS_OPNE';
+      }
     }, {
       key: "enter_CLOSE",
       value: function enter_CLOSE() {
@@ -21854,6 +21874,16 @@
       key: "exit_CLOSE",
       value: function exit_CLOSE() {}
       // CLOSE
+    }, {
+      key: "canOpen",
+      value: function canOpen() {
+        return this.state === 'IDLE' || this.state === 'CLOSE';
+      }
+    }, {
+      key: "canClose",
+      value: function canClose() {
+        return this.state === 'IDLE' || this.state === 'OPEN';
+      }
     }]);
     return State;
   }(FSM);
@@ -21880,13 +21910,109 @@
     return timer;
   };
 
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.delayCallTimer) {
+        this.delayCallTimer.remove(false);
+        this.delayCallTimer = undefined;
+      }
+      return this;
+    }
+  };
+
+  var ConfigurationMethods = {
+    setTransitInTime: function setTransitInTime(time) {
+      this.transitInTime = time;
+      return this;
+    },
+    setTransitOutTime: function setTransitOutTime(time) {
+      this.transitOutTime = time;
+      return this;
+    },
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitInCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    },
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitOutCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    }
+  };
+
+  var OpenMethods = {
+    // Interanl method
+    runTransitionInCallback: function runTransitionInCallback() {
+      this.transitInCallback(this.parent, this.transitInTime);
+      return this.transitInTime;
+    },
+    // Override
+    onOpen: function onOpen() {},
+    requestOpen: function requestOpen(openEventData, duration) {
+      if (!this._state.canOpen()) {
+        return this;
+      }
+      this.openEventData = arguments.length > 0 ? openEventData : this.parent;
+      var transitionTimeSave = this.transitInTime;
+      if (duration !== undefined) {
+        this.transitInTime = duration;
+      }
+      this._state["goto"]('TRANS_OPNE');
+      this.transitInTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var CloseMethods = {
+    // Interanl method
+    runTransitionOutCallback: function runTransitionOutCallback() {
+      this.transitOutCallback(this.parent, this.transitOutTime);
+      return this.transitOutTime;
+    },
+    // Override
+    onClose: function onClose() {
+      if (this.oneShotMode) {
+        this.parent.destroy();
+        // Will invoke `this.destroy()`
+      }
+    },
+    requestClose: function requestClose(closeEventData, duration) {
+      if (!this._state.canClose) {
+        return this;
+      }
+      this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
+      var transitionTimeSave = this.transitOutTime;
+      if (duration !== undefined) {
+        this.transitOutTime = duration;
+      }
+      this._state["goto"]('TRANS_CLOSE');
+      this.transitOutTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var methods$4 = {};
+  Object.assign(methods$4, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
+
   var GetValue$i = Phaser.Utils.Objects.GetValue;
-  var Transition = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Transition, _ComponentBase);
-    var _super = _createSuper(Transition);
-    function Transition(gameObject, config) {
+  var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(OpenCloseTransition, _ComponentBase);
+    var _super = _createSuper(OpenCloseTransition);
+    function OpenCloseTransition(gameObject, config) {
       var _this;
-      _classCallCheck(this, Transition);
+      _classCallCheck(this, OpenCloseTransition);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -21895,20 +22021,17 @@
       _this.setTransitOutTime(GetValue$i(config, 'duration.out', 200));
       _this.setTransitInCallback(GetValue$i(config, 'transitIn'));
       _this.setTransitOutCallback(GetValue$i(config, 'transitOut'));
-      _this.destroyParent = GetValue$i(config, 'destroy', true);
+      _this.oneShotMode = GetValue$i(config, 'destroy', false);
       _this.delayCallTimer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
-        eventEmitter: false
+        eventEmitter: false,
+        initState: GetValue$i(config, 'initState', 'IDLE')
       });
+      _this.openEventData = undefined;
       _this.closeEventData = undefined;
       return _this;
     }
-    _createClass(Transition, [{
-      key: "start",
-      value: function start() {
-        this._state.next();
-      }
-    }, {
+    _createClass(OpenCloseTransition, [{
       key: "state",
       get: function get() {
         return this._state.state;
@@ -21922,99 +22045,15 @@
         }
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
+        this.openEventData = undefined;
         this.closeEventData = undefined;
         this.removeDelayCall();
-        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        var duration = this.transitInTime;
-        this.transitInCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        var duration = this.transitOutTime;
-        this.transitOutCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "onOpen",
-      value: function onOpen() {}
-    }, {
-      key: "onClose",
-      value: function onClose() {
-        if (this.destroyParent) {
-          this.parent.destroy();
-          // Will invoke `this.destroy()`
-        } else {
-          this.destroy();
-        }
-      }
-    }, {
-      key: "delayCall",
-      value: function delayCall(delay, callback, scope) {
-        // Invoke callback under scene's 'postupdate' event
-        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
-        return this;
-      }
-    }, {
-      key: "removeDelayCall",
-      value: function removeDelayCall() {
-        if (this.delayCallTimer) {
-          this.delayCallTimer.remove(false);
-          this.delayCallTimer = undefined;
-        }
-        return this;
-      }
-    }, {
-      key: "setTransitInTime",
-      value: function setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitOutTime",
-      value: function setTransitOutTime(time) {
-        this.transitOutTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInCallback",
-      value: function setTransitInCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitInCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setTransitOutCallback",
-      value: function setTransitOutCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitOutCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "requestClose",
-      value: function requestClose(closeEventData) {
-        // Only can close modal in OPEN state
-        if (this._state.state === 'OPEN') {
-          this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
-          this._state.next(); // OPEN -> TRANS_CLOSE 
-        }
-
-        return this;
+        _get(_getPrototypeOf(OpenCloseTransition.prototype), "shutdown", this).call(this, fromScene);
       }
     }]);
-    return Transition;
+    return OpenCloseTransition;
   }(ComponentBase);
+  Object.assign(OpenCloseTransition.prototype, methods$4);
 
   var ScaleDown = function ScaleDown(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
@@ -22099,8 +22138,8 @@
   };
 
   var GetValue$g = Phaser.Utils.Objects.GetValue;
-  var DropDown = /*#__PURE__*/function (_Transition) {
-    _inherits(DropDown, _Transition);
+  var DropDown = /*#__PURE__*/function (_OpenCloseTransition) {
+    _inherits(DropDown, _OpenCloseTransition);
     var _super = _createSuper(DropDown);
     function DropDown(gameObject, config) {
       var _this;
@@ -22121,6 +22160,7 @@
       }
       config.manualClose = true;
       config.clickOutsideClose = true;
+      config.destroy = true;
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -22143,7 +22183,7 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.start();
+      _this.requestOpen();
       return _this;
     }
     _createClass(DropDown, [{
@@ -22193,7 +22233,7 @@
       }
     }]);
     return DropDown;
-  }(Transition);
+  }(OpenCloseTransition);
 
   var OpenListPanel = function OpenListPanel() {
     if (this.listPanel) {
@@ -22270,7 +22310,7 @@
     closeListPanel: CloseListPanel,
     toggleListPanel: ToggleListPanel
   };
-  Object.assign(Methods, methods$4);
+  Object.assign(Methods, methods$5);
 
   var GetValue$f = Phaser.Utils.Objects.GetValue;
   var DropDownList = /*#__PURE__*/function (_Label) {

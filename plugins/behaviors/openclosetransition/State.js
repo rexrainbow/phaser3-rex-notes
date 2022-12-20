@@ -93,11 +93,11 @@ class State extends FSM {
     }
     // CLOSE
 
-    get canOpen() {
+    canOpen() {
         return (this.state === 'IDLE') || (this.state === 'CLOSE');
     }
 
-    get canClose() {
+    canClose() {
         return (this.state === 'IDLE') || (this.state === 'OPEN');
     }
 }

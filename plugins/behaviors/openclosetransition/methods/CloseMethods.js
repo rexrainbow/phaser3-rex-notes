@@ -18,8 +18,6 @@ export default {
             return this;
         }
 
-        if (this._state)
-
         this.closeEventData = (arguments.length > 0) ? closeEventData : this.parent;
 
         var transitionTimeSave = this.transitOutTime;

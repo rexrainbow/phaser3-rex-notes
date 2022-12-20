@@ -96,7 +96,9 @@ var dropDown = scene.plugins.get('rexDropDown').add(gameObject, {
     - Default value is `false`.
 - `duration` : Duration of transition-in, hold, trantion-out.
     - `duration.in` : Duration of transition-in (open dialog).
+        - `0` : No transition, open dialog immediately.
     - `duration.out` : Duration of transition-out (close dialog).
+        - `0` : No transition, close dialog immediately.
 - `transitIn` : Tween behavior of opening dialog. Default behavior is scale up the height of game object.       
     - Custom callback
         ```javascript

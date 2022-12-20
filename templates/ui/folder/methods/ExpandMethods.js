@@ -25,7 +25,7 @@ export default {
             .once('open', function () {
                 this.emit('expand.complete', this);
             }, this)
-            .requestOpen(duration);
+            .requestOpen(null, duration);
 
         return this;
     },

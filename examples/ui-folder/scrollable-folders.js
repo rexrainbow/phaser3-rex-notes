@@ -104,7 +104,7 @@ var CreateFolder = function (scene, folderName, buttonNames) {
         buttons.push(CreateLabel(scene, buttonNames[i]));
     }
 
-    var folder = scene.rexUI.add.folder({
+    return scene.rexUI.add.folder({
         background: background,
 
         title: CreateLabel(scene, folderName),
@@ -149,7 +149,6 @@ var CreateFolder = function (scene, folderName, buttonNames) {
         expanded: false,
     })
 
-    return folder;
 }
 
 var CreateLabel = function (scene, text) {

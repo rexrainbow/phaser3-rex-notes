@@ -22,6 +22,7 @@ class OpenCloseTransition extends ComponentBase {
             eventEmitter: false,
             initState: GetValue(config, 'initState', 'IDLE')
         });
+        this.openEventData = undefined;
         this.closeEventData = undefined;
     }
 
@@ -37,6 +38,7 @@ class OpenCloseTransition extends ComponentBase {
 
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
+        this.openEventData = undefined;
         this.closeEventData = undefined;
 
         this.removeDelayCall();

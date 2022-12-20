@@ -9,10 +9,12 @@ export default {
     onOpen() {
     },
 
-    requestOpen(duration) {
-        if (!this._state.canOpen) {
+    requestOpen(openEventData, duration) {
+        if (!this._state.canOpen()) {
             return this;
         }
+
+        this.openEventData = (arguments.length > 0) ? openEventData : this.parent;
 
         var transitionTimeSave = this.transitInTime;
         if (duration !== undefined) {
