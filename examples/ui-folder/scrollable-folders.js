@@ -98,23 +98,25 @@ var CreatePanel = function (scene) {
 
 var CreateFolder = function (scene, folderName, buttonNames) {
     var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT);
+    var child = scene.rexUI.add.sizer({
+        orientation: 'y',
+        space: { item: 3 }
+    })
 
-    var buttons = [];
     for (var i = 0, cnt = buttonNames.length; i < cnt; i++) {
-        buttons.push(CreateLabel(scene, buttonNames[i]));
+        child.add(
+            CreateLabel(scene, buttonNames[i]),
+            { expand: true }
+        )
     }
+
+    var title = CreateLabel(scene, folderName);
 
     return scene.rexUI.add.folder({
         background: background,
 
-        title: CreateLabel(scene, folderName),
-        child: scene.rexUI.add.buttons({
-            orientation: 'y',
-
-            buttons: buttons,
-
-            space: { item: 3 }
-        }),
+        title: title,
+        child: child,
 
         transition: {
             // duration: 200,
