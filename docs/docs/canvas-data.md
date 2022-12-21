@@ -155,3 +155,10 @@ var data = canvasData.get(x, y);
 - `data` :
     - `true`, or `false` in result of `canvasObjectToBitmap` method
     - Color32 in result of `textureTColorMap` method
+
+#### Size
+
+```javascript
+var width = canvasData.width;
+var height = canvasData.height;
+```
