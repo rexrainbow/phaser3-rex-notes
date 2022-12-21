@@ -14,7 +14,7 @@ var BuildDisplayLabelConfig = function (scene, config) {
         config.icon = CreateImage(scene, config.icon);
     }
 
-    if (config.action != null) {
+    if (config.action !== null) {
         config.action = CreateImage(scene, config.action);
     }
 

@@ -2713,9 +2713,56 @@
     }
   };
 
+  var GetParent = function GetParent(gameObject, name) {
+    var parent;
+    if (name === undefined) {
+      if (gameObject.hasOwnProperty('rexContainer')) {
+        parent = gameObject.rexContainer.parent;
+        if (parent && !parent.isRexSizer) {
+          parent = null;
+        }
+      }
+    } else {
+      parent = GetParent(gameObject);
+      while (parent) {
+        if (parent.name === name) {
+          break;
+        }
+        parent = GetParent(parent);
+      }
+    }
+    return parent;
+  };
+  var GetTopmostParent = function GetTopmostParent(gameObject) {
+    var parent = GetParent(gameObject);
+    while (parent) {
+      gameObject = parent;
+      parent = GetParent(parent);
+    }
+    return gameObject;
+  };
+  var GetParentSizerMethods = {
+    getParentSizer: function getParentSizer(gameObject, name) {
+      if (typeof gameObject === 'string') {
+        name = gameObject;
+        gameObject = undefined;
+      }
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      return GetParent(gameObject, name);
+    },
+    getTopmostSizer: function getTopmostSizer(gameObject) {
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      return GetTopmostParent(gameObject);
+    }
+  };
+
   var RemoveChildMethods$1 = {
     removeFromParentSizer: function removeFromParentSizer() {
-      var parent = this.getParentSizer();
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
       if (parent) {
         parent.remove(this);
       }
@@ -4457,7 +4504,7 @@
 
     // Update local state
     scale.on('update', function () {
-      var parent = gameObject.getParentSizer();
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
       if (parent) {
         parent.resetChildPositionState(gameObject);
       }
@@ -4682,7 +4729,7 @@
 
     // Update local state
     fade.on('update', function () {
-      var parent = gameObject.getParentSizer();
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
       if (parent) {
         parent.resetChildAlphaState(gameObject);
       }
@@ -4941,7 +4988,7 @@
 
     // Update local state
     easeMove.on('update', function () {
-      var parent = gameObject.getParentSizer();
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
       if (parent) {
         parent.resetChildPositionState(gameObject);
       }
@@ -5629,53 +5676,6 @@
       }
     }
     return null;
-  };
-
-  var GetParent = function GetParent(gameObject, name) {
-    var parent;
-    if (name === undefined) {
-      if (gameObject.hasOwnProperty('rexContainer')) {
-        parent = gameObject.rexContainer.parent;
-        if (parent && !parent.isRexSizer) {
-          parent = null;
-        }
-      }
-    } else {
-      parent = GetParent(gameObject);
-      while (parent) {
-        if (parent.name === name) {
-          break;
-        }
-        parent = GetParent(parent);
-      }
-    }
-    return parent;
-  };
-  var GetTopmostParent = function GetTopmostParent(gameObject) {
-    var parent = GetParent(gameObject);
-    while (parent) {
-      gameObject = parent;
-      parent = GetParent(parent);
-    }
-    return gameObject;
-  };
-  var GetParentSizerMethods = {
-    getParentSizer: function getParentSizer(gameObject, name) {
-      if (typeof gameObject === 'string') {
-        name = gameObject;
-        gameObject = undefined;
-      }
-      if (gameObject === undefined) {
-        gameObject = this;
-      }
-      return GetParent(gameObject, name);
-    },
-    getTopmostSizer: function getTopmostSizer(gameObject) {
-      if (gameObject === undefined) {
-        gameObject = this;
-      }
-      return GetTopmostParent(gameObject);
-    }
   };
 
   var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {

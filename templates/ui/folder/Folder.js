@@ -100,9 +100,10 @@ class Folder extends Sizer {
             this.on('collapse.complete', onCollapseComplete);
         }
 
-        if (GetValue(config, 'expanded', true)) {
+        var initialExpanded = GetValue(config, 'expanded');
+        if (initialExpanded === true) {
             this.expand(0);
-        } else {
+        } else if (initialExpanded === false) {
             this.collapse(0);
         }
     }

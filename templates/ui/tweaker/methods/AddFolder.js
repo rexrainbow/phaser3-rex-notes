@@ -24,7 +24,9 @@ var AddFolder = function (config) {
     folder.setTitle(config);
 
     var expanded = GetValue(config, 'expanded', true);
-    if (!expanded) {
+    if (expanded) {
+        folder.expand(0);
+    } else {
         folder.collapse(0);
     }
 
