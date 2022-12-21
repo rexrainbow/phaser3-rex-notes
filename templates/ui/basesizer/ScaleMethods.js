@@ -2,6 +2,7 @@ import PopUp from '../../../plugins/popup.js';
 import ScaleDownDestroy from '../../../plugins/scale-down-destroy.js';
 import Yoyo from '../../../plugins/behaviors/scale/Yoyo.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
+import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -17,7 +18,7 @@ var OnInitScale = function (gameObject, scale) {
 
     // Update local state
     scale.on('update', function () {
-        var parent = gameObject.getParentSizer();
+        var parent = GetParentSizerMethods.getParentSizer(gameObject)
         if (parent) {
             parent.resetChildPositionState(gameObject);
         }

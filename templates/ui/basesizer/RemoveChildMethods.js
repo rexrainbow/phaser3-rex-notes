@@ -1,6 +1,8 @@
+import GetParentSizerMethods from './GetParentSizerMethods.js';
+
 export default {
     removeFromParentSizer() {
-        var parent = this.getParentSizer();
+        var parent = GetParentSizerMethods.getParentSizer(gameObject);
         if (parent) {
             parent.remove(this);
         }

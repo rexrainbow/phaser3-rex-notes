@@ -1,5 +1,6 @@
 import { EaseMoveTo, EaseMoveFrom } from '../easemove/EaseMove.js';
 import { WaitComplete } from '../utils/WaitEvent.js';
+import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -16,7 +17,7 @@ var OnInitEaseMove = function (gameObject, easeMove) {
 
     // Update local state
     easeMove.on('update', function () {
-        var parent = gameObject.getParentSizer();
+        var parent = GetParentSizerMethods.getParentSizer(gameObject);
         if (parent) {
             parent.resetChildPositionState(gameObject);
         }
