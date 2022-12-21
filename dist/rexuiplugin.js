@@ -46112,28 +46112,6 @@
       _this.setExpandCallback(GetValue$w(transitionConfig, 'expandCallback', undefined));
       _this.setCollapseCallback(GetValue$w(transitionConfig, 'collapseCallback', undefined));
       _this.reLayoutTarget = GetValue$w(config, 'reLayoutTarget', undefined);
-      var onExpandStart = config.onExpandStart;
-      if (onExpandStart) {
-        _this.on('expand.start', onExpandStart);
-      }
-      var onExpandComplete = config.onExpandComplete;
-      if (onExpandComplete) {
-        _this.on('expand.complete', onExpandComplete);
-      }
-      var onCollapseStart = config.onCollapseStart;
-      if (onCollapseStart) {
-        _this.on('collapse.start', onCollapseStart);
-      }
-      var onCollapseComplete = config.onCollapseComplete;
-      if (onCollapseComplete) {
-        _this.on('collapse.complete', onCollapseComplete);
-      }
-      var initialExpanded = GetValue$w(config, 'expanded');
-      if (initialExpanded === true) {
-        _this.expand(0);
-      } else if (initialExpanded === false) {
-        _this.collapse(0);
-      }
       return _this;
     }
     return _createClass(Folder);

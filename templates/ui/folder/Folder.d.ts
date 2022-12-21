@@ -32,13 +32,6 @@ declare namespace Folder {
         },
 
         reLayoutTarget?: Phaser.GameObjects.GameObject,
-
-        onExpandStart?: (folder: this) => void,
-        onExpandComplete?: (folder: this) => void,
-        onCollapseStart?: (folder: this) => void,
-        onCollapseComplete?: (folder: this) => void,
-
-        expanded?: boolean,
     }
 }
 

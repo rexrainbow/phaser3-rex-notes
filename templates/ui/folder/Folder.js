@@ -79,33 +79,6 @@ class Folder extends Sizer {
         this.setCollapseCallback(GetValue(transitionConfig, 'collapseCallback', undefined));
 
         this.reLayoutTarget = GetValue(config, 'reLayoutTarget', undefined);
-
-        var onExpandStart = config.onExpandStart;
-        if (onExpandStart) {
-            this.on('expand.start', onExpandStart);
-        }
-
-        var onExpandComplete = config.onExpandComplete;
-        if (onExpandComplete) {
-            this.on('expand.complete', onExpandComplete);
-        }
-
-        var onCollapseStart = config.onCollapseStart;
-        if (onCollapseStart) {
-            this.on('collapse.start', onCollapseStart);
-        }
-
-        var onCollapseComplete = config.onCollapseComplete;
-        if (onCollapseComplete) {
-            this.on('collapse.complete', onCollapseComplete);
-        }
-
-        var initialExpanded = GetValue(config, 'expanded');
-        if (initialExpanded === true) {
-            this.expand(0);
-        } else if (initialExpanded === false) {
-            this.collapse(0);
-        }
     }
 }
 

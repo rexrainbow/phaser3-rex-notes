@@ -130,26 +130,20 @@ var CreateFolder = function (scene, folderName, buttonNames) {
         space: {
             left: 10, right: 10, top: 10, bottom: 10, item: 3
         },
-
-        onExpandStart(folder) {
-            console.log(`Expand ${folderName}`)
-            folder.getElement('background').setFillStyle()
-        },
-
-        onExpandComplete(folder) {
-
-        },
-
-        onCollapseStart(folder) {
-            console.log(`Collapse ${folderName}`)
-        },
-
-        onCollapseComplete(folder) {
-            folder.getElement('background').setFillStyle(COLOR_DARK)
-        },
-
         expanded: false,
     })
+        .on('expand.start', function (folder) {
+            console.log(`Expand ${folderName}`)
+            folder.getElement('background').setFillStyle()
+        })
+        .on('collapse.start', function (folder) {
+            console.log(`Collapse ${folderName}`)
+        })
+        .on('collapse.complete', function (folder) {
+            folder.getElement('background').setFillStyle(COLOR_DARK)
+        })
+        // .expand(0)
+        .collapse(0)
 
 }
 
