@@ -19,7 +19,7 @@ export default {
         layoutTarget.layout();
 
         title.emit('folder.expand', duration, this);
-        child.emit('child.expand', duration, this);
+        child.emit('folder.expand', duration, this);
         this.emit('expand.start', this);
 
         this.childTransition
@@ -46,7 +46,7 @@ export default {
         var child = this.childrenMap.child;
 
         title.emit('folder.collapse', duration, this);
-        child.emit('child.collapse', duration, this);
+        child.emit('folder.collapse', duration, this);
         this.emit('collapse.start', this);
 
         this.childTransition
