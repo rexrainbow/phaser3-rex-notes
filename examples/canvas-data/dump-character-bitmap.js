@@ -14,15 +14,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var txt = this.add.rexBBCodeText(0, 0, '樂', {
+        var char = '樂'
+        var txt = this.add.rexBBCodeText(0, 0, char, {
             fixedWidth: 32, fixedHeight: 32,
             fontSize: 32,
             halign: 'center', valign: 'center',
-            testString: '樂'
+            testString: char
         });
+        var canvasData = this.plugins.get('rexCanvasData').textObjectToBitmap(txt);
 
         var dumpResult = '';
-        var canvasData = this.plugins.get('rexCanvasData').textObjectToBitmap(txt);
         for (var y = 0; y < canvasData.height; y++) {
             for (var x = 0; x < canvasData.width; x++) {
                 dumpResult += canvasData.get(x, y) ? '1' : '0';
