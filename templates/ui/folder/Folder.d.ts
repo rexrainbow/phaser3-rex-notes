@@ -31,6 +31,8 @@ declare namespace Folder {
             collapseCallback?: OpenCloseTransition.TransitCallbackType,
         },
 
+        reLayoutTarget?: Phaser.GameObjects.GameObject,
+
         onExpandStart?: (folder: this) => void,
         onExpandComplete?: (folder: this) => void,
         onCollapseStart?: (folder: this) => void,

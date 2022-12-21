@@ -13,9 +13,10 @@ export default {
         var title = this.childrenMap.title;
         var child = this.childrenMap.child;
 
-        this
-            .show(child)
-            .getTopmostSizer().layout()
+        this.show(child);
+
+        var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
+        layoutTarget.layout();
 
         title.emit('folder.expand', duration, this);
         child.emit('child.expand', duration, this);
@@ -50,10 +51,11 @@ export default {
 
         this.childTransition
             .once('close', function () {
-                this
-                    .setChildScale(child, 1, 1)
-                    .hide(child)
-                    .getTopmostSizer().layout()
+                this.setChildScale(child, 1, 1).hide(child);
+
+                var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
+                layoutTarget.layout();
+
                 this.emit('collapse.complete', this);
             }, this)
             .requestClose(null, duration);
