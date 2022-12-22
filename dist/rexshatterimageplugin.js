@@ -414,17 +414,28 @@
       centerX = Clamp(center.x, left, right);
       centerY = Clamp(center.y, top, bottom);
     }
-    var vertices = [];
-    vertices.push([centerX, centerY]);
     var ringRadiusList = GetValue$2(config, 'ringRadiusList', DefaultRingRadiusList$1);
     var ringSamples = GetValue$2(config, 'samplesPerRing', 12);
     var variation = GetValue$2(config, 'variation', 0.25);
+    var triangleOutput = GetValue$2(config, 'triangleOutput', true);
     if (IsFunction(ringRadiusList)) {
       ringRadiusList = ringRadiusList(width, height);
     }
-    var radius = Math.min(width, height);
     var randMin = 1 - variation,
       randMax = 1 + variation;
+    for (var i = 0; i < 10; i++) {
+      // Can generate triangles 10 times
+      try {
+        var vertices = GenerateVertices(centerX, centerY, width, height, ringRadiusList, ringSamples, randMin, randMax, left, right, top, bottom);
+        return Triangulate(vertices, triangleOutput);
+      } catch (e) {}
+    }
+    throw new Error("Generate triangles fail");
+  };
+  var GenerateVertices = function GenerateVertices(centerX, centerY, width, height, ringRadiusList, ringSamples, randMin, randMax, left, right, top, bottom) {
+    var vertices = [];
+    vertices.push([centerX, centerY]);
+    var radius = Math.min(width, height);
     for (var i = 0, cnt = ringRadiusList.length; i < cnt; i++) {
       AddRingVertices(vertices, centerX, centerY, radius * ringRadiusList[i], ringSamples, randMin, randMax, left, right, top, bottom);
     }
@@ -432,8 +443,7 @@
     // Vertices outside of rectangle
     var radius = Math.max(width, height) * 2;
     AddRingVertices(vertices, centerX, centerY, radius, ringSamples, randMin, randMax, left, right, top, bottom);
-    var triangleOutput = GetValue$2(config, 'triangleOutput', true);
-    return Triangulate(vertices, triangleOutput);
+    return vertices;
   };
   var TWO_PI = Math.PI * 2;
   var AddRingVertices = function AddRingVertices(vertices, centerX, centerY, radius, amount, randMin, randMax, leftBound, rightBound, topBound, bottomBound) {

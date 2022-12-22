@@ -44,14 +44,22 @@ var ShatterRectangleToTriangles = function (config) {
     var randMin = 1 - variation,
         randMax = 1 + variation;
 
-    var vertices = GenerateVertices(
-        centerX, centerY,
-        width, height, ringRadiusList, ringSamples,
-        randMin, randMax,
-        left, right, top, bottom
-    )
+    for (var i = 0; i < 10; i++) {
+        // Can generate triangles 10 times
+        try {
+            var vertices = GenerateVertices(
+                centerX, centerY,
+                width, height, ringRadiusList, ringSamples,
+                randMin, randMax,
+                left, right, top, bottom
+            )
+            return Triangulate(vertices, triangleOutput);
+        } catch (e) {
 
-    return Triangulate(vertices, triangleOutput);
+        }
+    }
+
+    throw new Error("Generate triangles fail");
 }
 
 var GenerateVertices = function (

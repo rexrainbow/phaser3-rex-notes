@@ -13088,6 +13088,22 @@
       _this.setExpandCallback(GetValue$N(transitionConfig, 'expandCallback', undefined));
       _this.setCollapseCallback(GetValue$N(transitionConfig, 'collapseCallback', undefined));
       _this.reLayoutTarget = GetValue$N(config, 'reLayoutTarget', undefined);
+      var onExpandStart = config.onExpandStart;
+      if (onExpandStart) {
+        _this.on('expand.start', onExpandStart);
+      }
+      var onExpandComplete = config.onExpandComplete;
+      if (onExpandComplete) {
+        _this.on('expand.complete', onExpandComplete);
+      }
+      var onCollapseStart = config.onCollapseStart;
+      if (onCollapseStart) {
+        _this.on('collapse.start', onCollapseStart);
+      }
+      var onCollapseComplete = config.onCollapseComplete;
+      if (onCollapseComplete) {
+        _this.on('collapse.complete', onCollapseComplete);
+      }
       return _this;
     }
     return _createClass(Folder);
