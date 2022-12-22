@@ -47,11 +47,13 @@ declare class Folder extends Sizer {
     );
 
     setTransitionDuration(duration?: number): this;
+    transitionDuration: number;
+
     setExpandCallback(callback?: OpenCloseTransition.TransitCallbackType): this;
     setCollapseCallback(callback?: OpenCloseTransition.TransitCallbackType): this;
 
     expand(duration?: number): this;
     collapse(duration?: number): this;
     toggle(duration?: number): this;
-
+    readonly expanded: boolean;
 }

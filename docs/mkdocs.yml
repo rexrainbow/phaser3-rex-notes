@@ -412,7 +412,8 @@ nav:
     - Drop down list: ui-dropdownlist.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
-    - Tabs: ui-tabs.md        
+    - Tabs: ui-tabs.md
+    - Folder: ui-folder.md     
     - Holy grail: ui-holygrail.md
     - Color input:
         - Color input: ui-colorinput.md

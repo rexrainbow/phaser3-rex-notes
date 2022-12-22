@@ -91,6 +91,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Drop down list](ui-dropdownlist.md): A [label](ui-label.md) can open a drop-down list panel.
 1. [Fix-width-buttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 1. [Fix-width-sizer](ui-fixwidthsizer.md): Layout children game objects into lines.
+1. [Folder](ui-folder.md): A container with a title, foldable child, and background.
 1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [Grid-table](ui-gridtable.md): A container with a [grid table](gridtable.md), slider, and scroller.

@@ -55,7 +55,8 @@ class Folder extends Sizer {
 
         var customOrigin = GetValue(config, 'customChildOrigin', false);
         if (!customOrigin) {
-            child.setOrigin(0, 0);
+            var origin = (!this.rtl) ? 0 : 1;
+            child.setOrigin(origin);
         }
 
         var align = GetValue(config, 'align.child', 'left');
