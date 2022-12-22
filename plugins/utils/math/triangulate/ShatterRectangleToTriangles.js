@@ -32,20 +32,38 @@ var ShatterRectangleToTriangles = function (config) {
         centerY = Clamp(center.y, top, bottom);
     }
 
-    var vertices = [];
-    vertices.push([centerX, centerY]);
-
     var ringRadiusList = GetValue(config, 'ringRadiusList', DefaultRingRadiusList);
     var ringSamples = GetValue(config, 'samplesPerRing', 12);
     var variation = GetValue(config, 'variation', 0.25);
+    var triangleOutput = GetValue(config, 'triangleOutput', true);
 
     if (IsFunction(ringRadiusList)) {
         ringRadiusList = ringRadiusList(width, height);
     }
 
-    var radius = Math.min(width, height);
     var randMin = 1 - variation,
         randMax = 1 + variation;
+
+    var vertices = GenerateVertices(
+        centerX, centerY,
+        width, height, ringRadiusList, ringSamples,
+        randMin, randMax,
+        left, right, top, bottom
+    )
+
+    return Triangulate(vertices, triangleOutput);
+}
+
+var GenerateVertices = function (
+    centerX, centerY,
+    width, height, ringRadiusList, ringSamples,
+    randMin, randMax,
+    left, right, top, bottom
+) {
+    var vertices = [];
+    vertices.push([centerX, centerY]);
+
+    var radius = Math.min(width, height);
     for (var i = 0, cnt = ringRadiusList.length; i < cnt; i++) {
         AddRingVertices(
             vertices,
@@ -64,8 +82,7 @@ var ShatterRectangleToTriangles = function (config) {
         left, right, top, bottom
     )
 
-    var triangleOutput = GetValue(config, 'triangleOutput', true);
-    return Triangulate(vertices, triangleOutput);
+    return vertices;
 }
 
 const TWO_PI = Math.PI * 2;
