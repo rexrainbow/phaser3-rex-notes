@@ -46077,7 +46077,7 @@
       }
 
       // title
-      var align = GetValue$w(config, 'align.title', 'left');
+      var align = GetValue$w(config, 'align.title', _this.orientation === 1 ? 'left' : 'top');
       var expand = GetValue$w(config, 'expand.title', true);
       _this.add(title, {
         proportion: 0,
@@ -46094,7 +46094,8 @@
       _this.childTransition = new Transition(child);
       var customOrigin = GetValue$w(config, 'customChildOrigin', false);
       if (!customOrigin) {
-        child.setOrigin(0, 0);
+        var origin = !_this.rtl ? 0 : 1;
+        child.setOrigin(origin);
       }
       var align = GetValue$w(config, 'align.child', 'left');
       var expand = GetValue$w(config, 'expand.child', true);

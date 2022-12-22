@@ -13053,7 +13053,7 @@
       }
 
       // title
-      var align = GetValue$N(config, 'align.title', 'left');
+      var align = GetValue$N(config, 'align.title', _this.orientation === 1 ? 'left' : 'top');
       var expand = GetValue$N(config, 'expand.title', true);
       _this.add(title, {
         proportion: 0,
@@ -13070,7 +13070,8 @@
       _this.childTransition = new Transition(child);
       var customOrigin = GetValue$N(config, 'customChildOrigin', false);
       if (!customOrigin) {
-        child.setOrigin(0, 0);
+        var origin = !_this.rtl ? 0 : 1;
+        child.setOrigin(origin);
       }
       var align = GetValue$N(config, 'align.child', 'left');
       var expand = GetValue$N(config, 'expand.child', true);

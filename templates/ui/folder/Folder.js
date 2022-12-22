@@ -32,7 +32,8 @@ class Folder extends Sizer {
         }
 
         // title
-        var align = GetValue(config, 'align.title', 'left');
+        var defaultAlign = (this.orientation === 1) ? 'left' : 'top';
+        var align = GetValue(config, 'align.title', defaultAlign);
         var expand = GetValue(config, 'expand.title', true);
         this.add(
             title,
