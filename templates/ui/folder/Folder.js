@@ -42,13 +42,21 @@ class Folder extends Sizer {
             }
         );
 
-        if (GetValue(config, 'toggleByClickingTitle', true)) {
+        var toggleByTarget = GetValue(config, 'toggleByTarget', undefined);
+        var toggleClickConfig = GetValue(config, 'toggleClickConfig');
+
+        if (toggleByTarget === undefined) {
+            toggleByTarget = title;
+        }
+        if (toggleByTarget) {
             ClickMethods.onClick.call(
-                title,
+                toggleByTarget,
                 function () {
                     this.toggle();
                 },
-                this)
+                this,
+                toggleClickConfig
+            );
         }
 
         // child

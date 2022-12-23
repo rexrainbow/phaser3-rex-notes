@@ -9006,11 +9006,17 @@
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
-    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
-    <span class="c1">// toggleByClickingTitle: true,</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>    
 
     <span class="nx">child</span><span class="o">:</span> <span class="nx">childGameObject</span><span class="p">,</span>
     <span class="c1">// customChildOrigin: false,</span>
+
+    <span class="nx">toggleByTarget</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">toggleClickConfig</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
+        <span class="nx">clickInterval</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
+        <span class="nx">threshold</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">},</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
@@ -9083,15 +9089,18 @@
 </li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of folder.</li>
 <li><code>title</code> : Game object of title, required.</li>
-<li><code>toggleByClickingTitle</code> : <ul>
-<li><code>true</code> : Expand or collapse child when clicking title game object. Default behavior.</li>
-<li><code>false</code> : Don't register clicking event.</li>
-</ul>
-</li>
 <li><code>child</code> : Game object of child, required.</li>
 <li><code>customChildOrigin</code> : <ul>
 <li><code>false</code> : Set origin of child to <code>0</code>, or <code>1</code> (if <code>rtl</code> is set to <code>true</code>). Default behavior.</li>
 <li><code>true</code> : Don't change origin of child.</li>
+</ul>
+</li>
+<li><code>toggleByTarget</code> : Toggle expanding/collapsing by clicking this target game object<ul>
+<li><code>undefined</code> : Toggle by clicking title game object.</li>
+</ul>
+</li>
+<li><code>toggleClickConfig</code> : Configuration of <a href="../button/#create-instance">clicking behavior</a><ul>
+<li><code>undefined</code> : Use default configuration.</li>
 </ul>
 </li>
 <li><code>align.title</code>, <code>align.child</code> : Alignment of title, child game objects.    <ul>

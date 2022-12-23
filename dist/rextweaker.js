@@ -13053,17 +13053,23 @@
       }
 
       // title
-      var align = GetValue$N(config, 'align.title', _this.orientation === 1 ? 'left' : 'top');
+      var defaultAlign = _this.orientation === 1 ? 'left' : 'top';
+      var align = GetValue$N(config, 'align.title', defaultAlign);
       var expand = GetValue$N(config, 'expand.title', true);
       _this.add(title, {
         proportion: 0,
         align: align,
         expand: expand
       });
-      if (GetValue$N(config, 'toggleByClickingTitle', true)) {
-        ClickMethods.onClick.call(title, function () {
+      var toggleByTarget = GetValue$N(config, 'toggleByTarget', undefined);
+      var toggleClickConfig = GetValue$N(config, 'toggleClickConfig');
+      if (toggleByTarget === undefined) {
+        toggleByTarget = title;
+      }
+      if (toggleByTarget) {
+        ClickMethods.onClick.call(toggleByTarget, function () {
           this.toggle();
-        }, _assertThisInitialized(_this));
+        }, _assertThisInitialized(_this), toggleClickConfig);
       }
 
       // child

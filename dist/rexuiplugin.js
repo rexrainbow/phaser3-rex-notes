@@ -46077,17 +46077,23 @@
       }
 
       // title
-      var align = GetValue$w(config, 'align.title', _this.orientation === 1 ? 'left' : 'top');
+      var defaultAlign = _this.orientation === 1 ? 'left' : 'top';
+      var align = GetValue$w(config, 'align.title', defaultAlign);
       var expand = GetValue$w(config, 'expand.title', true);
       _this.add(title, {
         proportion: 0,
         align: align,
         expand: expand
       });
-      if (GetValue$w(config, 'toggleByClickingTitle', true)) {
-        ClickMethods.onClick.call(title, function () {
+      var toggleByTarget = GetValue$w(config, 'toggleByTarget', undefined);
+      var toggleClickConfig = GetValue$w(config, 'toggleClickConfig');
+      if (toggleByTarget === undefined) {
+        toggleByTarget = title;
+      }
+      if (toggleByTarget) {
+        ClickMethods.onClick.call(toggleByTarget, function () {
           this.toggle();
-        }, _assertThisInitialized(_this));
+        }, _assertThisInitialized(_this), toggleClickConfig);
       }
 
       // child

@@ -86,11 +86,17 @@ var folder = scene.rexUI.add.folder({
 
     background: backgroundGameObject,
 
-    title: titleGameObject,
-    // toggleByClickingTitle: true,
+    title: titleGameObject,    
     
     child: childGameObject,
     // customChildOrigin: false,
+
+    toggleByTarget: undefined,
+    toggleClickConfig: {
+        mode:'pointerup',
+        clickInterval: 100,
+        threshold: undefined,
+    },
 
     align: {
         title: 'left',
@@ -151,13 +157,14 @@ var folder = scene.rexUI.add.folder({
     - `false` : Layout children from left to right. Default behavior.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of folder.
 - `title` : Game object of title, required.
-- `toggleByClickingTitle` : 
-    - `true` : Expand or collapse child when clicking title game object. Default behavior.
-    - `false` : Don't register clicking event.
 - `child` : Game object of child, required.
 - `customChildOrigin` : 
     - `false` : Set origin of child to `0`, or `1` (if `rtl` is set to `true`). Default behavior.
     - `true` : Don't change origin of child.
+- `toggleByTarget` : Toggle expanding/collapsing by clicking this target game object
+    - `undefined` : Toggle by clicking title game object.
+- `toggleClickConfig` : Configuration of [clicking behavior](button.md#create-instance)
+    - `undefined` : Use default configuration.
 - `align.title`, `align.child` : Alignment of title, child game objects.    
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top. Default behavior.
     - `'center'` : Align game objects at center.

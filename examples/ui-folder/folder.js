@@ -41,6 +41,9 @@ var CreateFolder = function (scene, orientation, folderName, buttonNames) {
 
         title: title.setDraggable(),
         child: child,
+        toggleClickConfig: {
+            threshold: 10,
+        },
 
         transition: {
             // duration: 200,

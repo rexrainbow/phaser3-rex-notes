@@ -10,10 +10,16 @@ declare namespace Folder {
         background?: Phaser.GameObjects.GameObject,
 
         title: Phaser.GameObjects.GameObject,
-        toggleByClickingTitle?: boolean,
 
         child: Phaser.GameObjects.GameObject,
         customChildOrigin?: boolean,
+
+        toggleByTarget?: Phaser.GameObjects.GameObject,
+        toggleClickConfig?: {
+            mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
+            clickInterval?: number,
+            threshold?: number,
+        },
 
         align?: {
             title?: Sizer.AlignTypes,
