@@ -15991,7 +15991,12 @@
   var SetDraggable = function SetDraggable(senser, draggable) {
     var senserType = _typeof(senser);
     if (senserType === 'string') {
-      senser = this.getElement(senser);
+      var senserName = senser;
+      senser = this.getElement(senserName);
+      if (!senser) {
+        console.error("Can get element '".concat(senserName, "'"));
+        return this;
+      }
     } else if (senser === undefined || senserType != 'object') {
       draggable = senser;
       senser = this;
@@ -15999,7 +16004,7 @@
     if (draggable === undefined) {
       draggable = true;
     }
-    if (senser.input && senser.input.hasOwnProperty('draggable')) {
+    if (senser.input && senser.input._dragTopmostSizer) {
       // Draggable is already registered
       senser.input.draggable = draggable;
     } else if (draggable) {
@@ -16018,6 +16023,7 @@
         var topmostParent = this.getTopmostSizer();
         topmostParent.emit('sizer.dragend', pointer, dragX, dragY, dropped);
       }, this);
+      senser.input._dragTopmostSizer = true;
     } else ;
     return this;
   };
@@ -18784,7 +18790,10 @@
         _this.setAnchor(anchorConfig);
       }
       _this.setInnerPadding(GetValue$F(config, 'space', 0));
-      _this.setDraggable(GetValue$F(config, 'draggable', false));
+      var draggable = GetValue$F(config, 'draggable', false);
+      if (draggable) {
+        _this.setDraggable(draggable);
+      }
       _this.setSizerEventsEnable(GetValue$F(config, 'sizerEvents', false));
       _this.setDirty(true);
       if (GetValue$F(config, 'enableLayer', false)) {

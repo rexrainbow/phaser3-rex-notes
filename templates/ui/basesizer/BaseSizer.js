@@ -25,7 +25,12 @@ class Base extends Container {
         }
 
         this.setInnerPadding(GetValue(config, 'space', 0));
-        this.setDraggable(GetValue(config, 'draggable', false));
+
+        var draggable = GetValue(config, 'draggable', false);
+        if (draggable) {
+            this.setDraggable(draggable);
+        }
+
         this.setSizerEventsEnable(GetValue(config, 'sizerEvents', false));
         this.setDirty(true);
 

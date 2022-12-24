@@ -39,7 +39,7 @@ var CreateFolder = function (scene, orientation, folderName, buttonNames) {
     return scene.rexUI.add.folder({
         orientation: orientation,
 
-        title: title.setDraggable(),
+        title: title,
         child: child,
         toggleClickConfig: {
             threshold: 10,
@@ -57,9 +57,9 @@ var CreateFolder = function (scene, orientation, folderName, buttonNames) {
         space: {
             left: 10, right: 10, top: 10, bottom: 10, item: 3
         },
-        expanded: false,
     })
         .setOrigin(0)
+        .setDraggable('title')
         .expand(0)
     //.collapse(0)
 
