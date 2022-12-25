@@ -21347,17 +21347,27 @@
   };
 
   var InjectDefaultConfig = function InjectDefaultConfig(config) {
+    var isSingleLineMode = !config.textArea;
     if (!HasValue(config, 'wrap.vAlign')) {
-      SetValue$1(config, 'wrap.vAlign', 'center');
+      var defaultValue = isSingleLineMode ? 'center' : 'top';
+      SetValue$1(config, 'wrap.vAlign', defaultValue);
     }
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue$1(config, 'wrap.charWrap', true);
     }
     if (!HasValue(config, 'wrap.maxLines')) {
-      SetValue$1(config, 'wrap.maxLines', 1);
+      var defaultValue = isSingleLineMode ? 1 : undefined;
+      SetValue$1(config, 'wrap.maxLines', defaultValue);
     }
     if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
       SetValue$1(config, 'wrap.useDefaultTextHeight', true);
+    }
+    if (!config.edit) {
+      config.edit = {};
+    }
+    if (!HasValue(config.edit, 'inputType')) {
+      var defaultValue = isSingleLineMode ? 'text' : 'textarea';
+      SetValue$1(config.edit, 'inputType', defaultValue);
     }
     return config;
   };

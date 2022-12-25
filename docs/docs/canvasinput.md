@@ -161,6 +161,8 @@ var txt = scene.add.rexCanvasInput({
         vAlign: 'center',  // For single line text input
         charWrap: true,    // For single line text input
     },
+
+    textArea: false,
     
     // Parameters of hidden-text-editor   
     // inputType: 'text',  // 'text'|'password'|'textarea'|...                
@@ -206,6 +208,9 @@ var txt = scene.add.rexCanvasInput({
 });
 ```
 
+- `textArea` : 
+    - `false` : Single line text input. Default behavior.
+    - `true` : Multiple lines text input.
 - Parameters of [DynamicText](dynamictext.md#create-instance)...
     - `wrap` : Some default value in `wrap` are changed
         - `wrap.useDefaultLineHeight` : Default value is `true`

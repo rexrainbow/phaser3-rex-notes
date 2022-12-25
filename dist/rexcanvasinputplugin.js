@@ -5627,17 +5627,27 @@
   };
 
   var InjectDefaultConfig = function InjectDefaultConfig(config) {
+    var isSingleLineMode = !config.textArea;
     if (!HasValue(config, 'wrap.vAlign')) {
-      SetValue(config, 'wrap.vAlign', 'center');
+      var defaultValue = isSingleLineMode ? 'center' : 'top';
+      SetValue(config, 'wrap.vAlign', defaultValue);
     }
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue(config, 'wrap.charWrap', true);
     }
     if (!HasValue(config, 'wrap.maxLines')) {
-      SetValue(config, 'wrap.maxLines', 1);
+      var defaultValue = isSingleLineMode ? 1 : undefined;
+      SetValue(config, 'wrap.maxLines', defaultValue);
     }
     if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
       SetValue(config, 'wrap.useDefaultTextHeight', true);
+    }
+    if (!config.edit) {
+      config.edit = {};
+    }
+    if (!HasValue(config.edit, 'inputType')) {
+      var defaultValue = isSingleLineMode ? 'text' : 'textarea';
+      SetValue(config.edit, 'inputType', defaultValue);
     }
     return config;
   };

@@ -54,6 +54,8 @@ declare namespace CanvasInput {
     }
 
     interface IConfig extends DynamicText.IConfig {
+        textArea?: boolean;
+
         edit?: HiddenTextEdit.IConfig;
 
         background?: IConfigBackground,
