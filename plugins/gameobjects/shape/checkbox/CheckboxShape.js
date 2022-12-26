@@ -58,6 +58,14 @@ class CheckboxShape extends BaseShapes {
             GetValue(config, 'checkerAlpha', 1)
         );
 
+        this.setBoxSize(
+            GetValue(config, 'boxSize', 1)
+        );
+
+        this.setCheckerSize(
+            GetValue(config, 'checkerSize', 1)
+        )
+
         this.setCheckerAnimationDuration(
             GetValue(config, 'animationDuration', 150)
         );

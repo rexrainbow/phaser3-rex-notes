@@ -8,6 +8,7 @@ A container with a title, foldable child, and background.
 ## Live demos
 
 - [Scrollable folders](https://codepen.io/rexrainbow/pen/wvxvYOM)
+- [Folders](https://codepen.io/rexrainbow/pen/jOpPLqz)
 
 ## Usage
 

@@ -13,6 +13,9 @@ declare namespace Checkbox {
         boxLineWidth?: number, boxStrokeColor?: number, boxStrokeAlpha?: number,
         uncheckedBoxStrokeColor?: number, uncheckedBoxStrokeAlpha?: number,
 
+        boxSize?: number,
+        checkerSize?: number,
+
         checkerColor?: number, checkerAlpha?: number,
 
         circleBox?: boolean,
