@@ -22792,6 +22792,19 @@
     }
   };
 
+  var SizeMethods = {
+    setBoxSize: function setBoxSize(size) {
+      this.dirty = this.dirty || this.boxSize !== size;
+      this.boxSize = size;
+      return this;
+    },
+    setCheckerSize: function setCheckerSize(size) {
+      this.dirty = this.dirty || this.checkerSize !== size;
+      this.checkerSize = size;
+      return this;
+    }
+  };
+
   var ShapesUpdateMethods = {
     buildShapes: function buildShapes() {
       this.addShape(new RoundRectangle$1().setName('box')).addShape(new Lines().setName('checker'));
@@ -22810,19 +22823,24 @@
 
       // Setup shapes
       if (this.isSizeChanged) {
+        // Box
+        var posOffset = width * (1 - this.boxSize) / 2;
         var halfBoxLineWidth = boxLineWidth / 2;
-        var boxInnerWidth = width - boxLineWidth;
-        boxShape.setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth).setSize(boxInnerWidth, boxInnerWidth);
+        var boxInnerWidth = width * this.boxSize - boxLineWidth;
+        boxShape.setTopLeftPosition(x + halfBoxLineWidth + posOffset, y + halfBoxLineWidth + posOffset).setSize(boxInnerWidth, boxInnerWidth);
         if (this.isCircleShape) {
           boxShape.setRadius(boxInnerWidth / 2);
         } else {
           boxShape.setRadius(0);
         }
-        var unit = width / 4;
+
+        // Checker
+        var posOffset = width * (1 - this.checkerSize) / 2;
+        var unit = width * this.checkerSize / 4;
         var u1 = unit * 1,
           u2 = unit * 2,
           u3 = unit * 3;
-        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x, y).end();
+        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x + posOffset, y + posOffset).end();
       }
 
       // Set styles
@@ -22873,7 +22891,7 @@
   };
 
   var methods$3 = {};
-  Object.assign(methods$3, StyleMethods, ShapesUpdateMethods, CheckerAnimationMethods);
+  Object.assign(methods$3, StyleMethods, SizeMethods, ShapesUpdateMethods, CheckerAnimationMethods);
 
   var GetValue$d = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -22906,6 +22924,8 @@
       _this.setBoxStrokeStyle(GetValue$d(config, 'boxLineWidth', 4), GetValue$d(config, 'boxStrokeColor', color), GetValue$d(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$d(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$d(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue$d(config, 'checkerColor', 0xffffff), GetValue$d(config, 'checkerAlpha', 1));
+      _this.setBoxSize(GetValue$d(config, 'boxSize', 1));
+      _this.setCheckerSize(GetValue$d(config, 'checkerSize', 1));
       _this.setCheckerAnimationDuration(GetValue$d(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue$d(config, 'checked', false));

@@ -290,7 +290,16 @@
       vertices.push(vertex);
       controlPoints.push(new ControlPoint(quad, vertex));
     }
-    var indices = isNinePointMode ? NinePointsIndices : FourPointsIndices;
+    var indices;
+    if (isNinePointMode) {
+      indices = NinePointsIndices;
+    } else {
+      if (!quad.fourPointsModeRTL) {
+        indices = FourPointsIndices;
+      } else {
+        indices = FourPointsIndicesRTL;
+      }
+    }
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
       var vert1 = vertices[indices[i + 0]];
       var vert2 = vertices[indices[i + 1]];
@@ -320,6 +329,7 @@
   2, 3,
   */
   var FourPointsIndices = [0, 2, 3, 0, 3, 1];
+  var FourPointsIndicesRTL = [1, 3, 2, 1, 2, 0];
 
   /*
   0, 1, 2,
@@ -388,6 +398,7 @@
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
       _this.isNinePointMode = GetValue$5(config, 'ninePointMode', false);
+      _this.fourPointsModeRTL = GetValue$5(config, 'rtl', false);
       _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
       _this.hideCCW = false;

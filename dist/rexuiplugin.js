@@ -8133,6 +8133,19 @@
     }
   };
 
+  var SizeMethods = {
+    setBoxSize: function setBoxSize(size) {
+      this.dirty = this.dirty || this.boxSize !== size;
+      this.boxSize = size;
+      return this;
+    },
+    setCheckerSize: function setCheckerSize(size) {
+      this.dirty = this.dirty || this.checkerSize !== size;
+      this.checkerSize = size;
+      return this;
+    }
+  };
+
   var FillStyle = function FillStyle(color, alpha) {
     if (color == null) {
       this.isFilled = false;
@@ -9869,19 +9882,24 @@
 
       // Setup shapes
       if (this.isSizeChanged) {
+        // Box
+        var posOffset = width * (1 - this.boxSize) / 2;
         var halfBoxLineWidth = boxLineWidth / 2;
-        var boxInnerWidth = width - boxLineWidth;
-        boxShape.setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth).setSize(boxInnerWidth, boxInnerWidth);
+        var boxInnerWidth = width * this.boxSize - boxLineWidth;
+        boxShape.setTopLeftPosition(x + halfBoxLineWidth + posOffset, y + halfBoxLineWidth + posOffset).setSize(boxInnerWidth, boxInnerWidth);
         if (this.isCircleShape) {
           boxShape.setRadius(boxInnerWidth / 2);
         } else {
           boxShape.setRadius(0);
         }
-        var unit = width / 4;
+
+        // Checker
+        var posOffset = width * (1 - this.checkerSize) / 2;
+        var unit = width * this.checkerSize / 4;
         var u1 = unit * 1,
           u2 = unit * 2,
           u3 = unit * 3;
-        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x, y).end();
+        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x + posOffset, y + posOffset).end();
       }
 
       // Set styles
@@ -10544,7 +10562,7 @@
   };
 
   var methods$p = {};
-  Object.assign(methods$p, StyleMethods$1, ShapesUpdateMethods$3, CheckerAnimationMethods);
+  Object.assign(methods$p, StyleMethods$1, SizeMethods, ShapesUpdateMethods$3, CheckerAnimationMethods);
 
   var GetValue$2y = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
@@ -10577,6 +10595,8 @@
       _this.setBoxStrokeStyle(GetValue$2y(config, 'boxLineWidth', 4), GetValue$2y(config, 'boxStrokeColor', color), GetValue$2y(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2y(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2y(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue$2y(config, 'checkerColor', 0xffffff), GetValue$2y(config, 'checkerAlpha', 1));
+      _this.setBoxSize(GetValue$2y(config, 'boxSize', 1));
+      _this.setCheckerSize(GetValue$2y(config, 'checkerSize', 1));
       _this.setCheckerAnimationDuration(GetValue$2y(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue$2y(config, 'checked', false));
@@ -54744,7 +54764,16 @@
       vertices.push(vertex);
       controlPoints.push(new ControlPoint(quad, vertex));
     }
-    var indices = isNinePointMode ? NinePointsIndices : FourPointsIndices;
+    var indices;
+    if (isNinePointMode) {
+      indices = NinePointsIndices;
+    } else {
+      if (!quad.fourPointsModeRTL) {
+        indices = FourPointsIndices;
+      } else {
+        indices = FourPointsIndicesRTL;
+      }
+    }
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
       var vert1 = vertices[indices[i + 0]];
       var vert2 = vertices[indices[i + 1]];
@@ -54774,6 +54803,7 @@
   2, 3,
   */
   var FourPointsIndices = [0, 2, 3, 0, 3, 1];
+  var FourPointsIndicesRTL = [1, 3, 2, 1, 2, 0];
 
   /*
   0, 1, 2,
@@ -54842,6 +54872,7 @@
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
       _this.isNinePointMode = GetValue$7(config, 'ninePointMode', false);
+      _this.fourPointsModeRTL = GetValue$7(config, 'rtl', false);
       _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
       _this.hideCCW = false;

@@ -92,12 +92,16 @@ var image = scene.add.rexQuadImage({
     key,
     // frame: null,
     // ninePointMode: false,
+    // rtl: false
 });
 ```
 
 - `ninePointMode` :
     - `true` : Add 9 vertex control points.
     - `false` : Add 4 vertex control points. Default behavior.
+- `rtl` : Diagonal direction in 4 vertices mode.
+    - `true` : Diagonal from right to left
+    - `false` : Diagonal from left to right. Default behavior.
 
 Add quadimage from JSON
 
@@ -110,6 +114,7 @@ var quadimage = scene.make.rexQuadImage({
     frame: null,
 
     // ninePointMode: false,
+    // rtl: false
 
     add: true
 });

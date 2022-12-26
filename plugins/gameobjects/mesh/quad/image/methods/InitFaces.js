@@ -15,8 +15,17 @@ var InitFaces = function (quad) {
         vertices.push(vertex);
         controlPoints.push(new ControlPoint(quad, vertex));
     }
+    var indices;
+    if (isNinePointMode) {
+        indices = NinePointsIndices;
+    } else {
+        if (!quad.fourPointsModeRTL) {
+            indices = FourPointsIndices;
+        } else {
+            indices = FourPointsIndicesRTL;
+        }
+    }
 
-    var indices = (isNinePointMode) ? NinePointsIndices : FourPointsIndices;
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
         var vert1 = vertices[indices[i + 0]];
         var vert2 = vertices[indices[i + 1]];
@@ -50,6 +59,12 @@ const FourPointsIndices = [
     0, 2, 3,
     0, 3, 1
 ];
+
+const FourPointsIndicesRTL = [
+    1, 3, 2,
+    1, 2, 0
+];
+
 
 /*
 0, 1, 2,
