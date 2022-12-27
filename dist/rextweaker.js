@@ -22896,6 +22896,7 @@
   var GetValue$d = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DefaultBoxFillColor = 0x005cb2;
+  var DefaultCheckerColor = 0xffffff;
   var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
     _inherits(CheckboxShape, _BaseShapes);
     var _super = _createSuper(CheckboxShape);
@@ -22923,7 +22924,7 @@
       _this.setUncheckedBoxFillStyle(GetValue$d(config, 'uncheckedColor', null), GetValue$d(config, 'uncheckedBoxFillAlpha', 1));
       _this.setBoxStrokeStyle(GetValue$d(config, 'boxLineWidth', 4), GetValue$d(config, 'boxStrokeColor', color), GetValue$d(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$d(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$d(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
-      _this.setCheckerStyle(GetValue$d(config, 'checkerColor', 0xffffff), GetValue$d(config, 'checkerAlpha', 1));
+      _this.setCheckerStyle(GetValue$d(config, 'checkerColor', DefaultCheckerColor), GetValue$d(config, 'checkerAlpha', 1));
       _this.setBoxSize(GetValue$d(config, 'boxSize', 1));
       _this.setCheckerSize(GetValue$d(config, 'checkerSize', 1));
       _this.setCheckerAnimationDuration(GetValue$d(config, 'animationDuration', 150));

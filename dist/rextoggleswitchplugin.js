@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcheckbox = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextoggleswitchplugin = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -412,76 +412,100 @@
   Object.assign(BaseShapes.prototype, Render);
 
   var StyleMethods$1 = {
-    setBoxFillStyle: function setBoxFillStyle(color, alpha) {
+    setTrackFillStyle: function setTrackFillStyle(color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.boxFillColor !== color || this.boxFillAlpha !== alpha;
-      this.boxFillColor = color;
-      this.boxFillAlpha = alpha;
+      this.dirty = this.dirty || this.trackFillColor !== color || this.trackFillAlpha !== alpha;
+      this.trackFillColor = color;
+      this.trackFillAlpha = alpha;
       return this;
     },
-    setUncheckedBoxFillStyle: function setUncheckedBoxFillStyle(color, alpha) {
+    setUncheckedTrackFillStyle: function setUncheckedTrackFillStyle(color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.uncheckedBoxFillColor !== color || this.uncheckedBoxFillAlpha !== alpha;
-      this.uncheckedBoxFillColor = color;
-      this.uncheckedBoxFillAlpha = alpha;
+      this.dirty = this.dirty || this.uncheckedTrackFillColor !== color || this.uncheckedTrackFillAlpha !== alpha;
+      this.uncheckedTrackFillColor = color;
+      this.uncheckedTrackFillAlpha = alpha;
       return this;
     },
-    setBoxStrokeStyle: function setBoxStrokeStyle(lineWidth, color, alpha) {
+    setTrackStrokeStyle: function setTrackStrokeStyle(lineWidth, color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.boxLineWidth !== lineWidth || this.boxStrokeColor !== color || this.boxStrokeAlpha !== alpha;
-      this.boxLineWidth = lineWidth;
-      this.boxStrokeColor = color;
-      this.boxStrokeAlpha = alpha;
+      this.dirty = this.dirty || this.trackLineWidth !== lineWidth || this.trackStrokeColor !== color || this.trackStrokeAlpha !== alpha;
+      this.trackLineWidth = lineWidth;
+      this.trackStrokeColor = color;
+      this.trackStrokeAlpha = alpha;
       return this;
     },
-    setUncheckedBoxStrokeStyle: function setUncheckedBoxStrokeStyle(lineWidth, color, alpha) {
+    setUncheckedTrackStrokeStyle: function setUncheckedTrackStrokeStyle(lineWidth, color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.uncheckedBoxLineWidth !== lineWidth || this.uncheckedBoxStrokeColor !== color || this.uncheckedBoxStrokeAlpha !== alpha;
-      this.uncheckedBoxLineWidth = lineWidth;
-      this.uncheckedBoxStrokeColor = color;
-      this.uncheckedBoxStrokeAlpha = alpha;
+      this.dirty = this.dirty || this.uncheckedTrackLineWidth !== lineWidth || this.uncheckedTrackStrokeColor !== color || this.uncheckedTrackStrokeAlpha !== alpha;
+      this.uncheckedTrackLineWidth = lineWidth;
+      this.uncheckedTrackStrokeColor = color;
+      this.uncheckedTrackStrokeAlpha = alpha;
       return this;
     },
-    setCheckerStyle: function setCheckerStyle(color, alpha) {
+    setThumbStyle: function setThumbStyle(color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.checkerColor !== color || this.checkAlpha !== alpha;
-      this.checkerColor = color;
-      this.checkAlpha = alpha;
+      this.dirty = this.dirty || this.thumbColor !== color || this.checkAlpha !== alpha;
+      this.thumbColor = color;
+      this.thumbAlpha = alpha;
       return this;
     },
-    setBoxShape: function setBoxShape(isCircleShape) {
-      if (isCircleShape === undefined) {
-        isCircleShape = false;
+    setThumbStrokeStyle: function setThumbStrokeStyle(lineWidth, color, alpha) {
+      if (alpha === undefined) {
+        alpha = 1;
       }
-      if (this.isCircleShape === isCircleShape) {
-        return this;
-      }
-      this.isCircleShape = isCircleShape;
-      this.isSizeChanged = true;
-      this.dirty = true;
+      this.dirty = this.dirty || this.thumbLineWidth !== lineWidth || this.thumbStrokeColor !== color || this.thumbStrokeAlpha !== alpha;
+      this.thumbLineWidth = lineWidth;
+      this.thumbStrokeColor = color;
+      this.thumbStrokeAlpha = alpha;
       return this;
     }
   };
 
   var SizeMethods = {
-    setBoxSize: function setBoxSize(size) {
-      this.dirty = this.dirty || this.boxSize !== size;
-      this.boxSize = size;
+    setTrackSize: function setTrackSize(width, height) {
+      this.dirty = this.dirty || this.trackWidth !== width || this.trackHeight !== height;
+      this.trackWidth = width;
+      this.trackHeight = height;
       return this;
     },
-    setCheckerSize: function setCheckerSize(size) {
-      this.dirty = this.dirty || this.checkerSize !== size;
-      this.checkerSize = size;
+    setTrackConerRadius: function setTrackConerRadius(radius) {
+      this.dirty = this.dirty || this.trackRadius !== radius;
+      this.trackRadius = radius;
+      return this;
+    },
+    setThumbSize: function setThumbSize(width, height) {
+      if (height === undefined) {
+        height = width;
+      }
+      this.dirty = this.dirty || this.thumbWidth !== width || this.thumbHeight !== height;
+      this.thumbWidth = width;
+      this.thumbHeight = height;
+      return this;
+    },
+    setThumbConerRadius: function setThumbConerRadius(radius) {
+      this.dirty = this.dirty || this.thumbRadius !== radius;
+      this.thumbRadius = radius;
+      return this;
+    }
+  };
+
+  var PositionMethods = {
+    setThumbPosition: function setThumbPosition(left, right) {
+      if (right === undefined) {
+        right = 1 - left;
+      }
+      this.thumbLeftX = left;
+      this.thumbRightX = right;
       return this;
     }
   };
@@ -540,7 +564,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$a = function GetValue(source, key, defaultValue) {
+  var GetValue$8 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -589,7 +613,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$a(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1089,7 +1113,7 @@
 
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
-  var Linear$1 = Phaser.Math.Linear;
+  var Linear$3 = Phaser.Math.Linear;
   var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
       endT = startT;
@@ -1149,7 +1173,7 @@
   var GetInterpolation = function GetInterpolation(pathData, i0, i1, t) {
     var p0 = pathData[i0],
       p1 = pathData[i1];
-    return Linear$1(p0, p1, t);
+    return Linear$3(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
     if (t === 0) {
@@ -1281,184 +1305,9 @@
   }();
   Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
-  var Lines = /*#__PURE__*/function (_PathBase) {
-    _inherits(Lines, _PathBase);
-    var _super = _createSuper(Lines);
-    function Lines() {
-      var _this;
-      _classCallCheck(this, Lines);
-      _this = _super.call(this);
-      _this.builder = new PathDataBuilder(_this.pathData);
-      return _this;
-    }
-    _createClass(Lines, [{
-      key: "iterations",
-      get: function get() {
-        return this.builder.iterations;
-      },
-      set: function set(value) {
-        this.dirty = this.dirty || this.builder.iterations !== value;
-        this.builder.setIterations(value);
-      }
-    }, {
-      key: "setIterations",
-      value: function setIterations(iterations) {
-        this.iterations = iterations;
-        return this;
-      }
-    }, {
-      key: "lastPointX",
-      get: function get() {
-        return this.builder.lastPointX;
-      }
-    }, {
-      key: "lastPointY",
-      get: function get() {
-        return this.builder.lastPointY;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.builder.start();
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "startAt",
-      value: function startAt(x, y) {
-        this.builder.startAt(x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "lineTo",
-      value: function lineTo(x, y, relative) {
-        this.builder.lineTo(x, y, relative);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "verticalLineTo",
-      value: function verticalLineTo(x, relative) {
-        this.builder.verticalLineTo(x, relative);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "horizontalLineTo",
-      value: function horizontalLineTo(y, relative) {
-        this.builder.horizontalLineTo(y, relative);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "ellipticalArc",
-      value: function ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
-        this.builder.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "arc",
-      value: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
-        this.builder.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "quadraticBezierTo",
-      value: function quadraticBezierTo(cx, cy, x, y) {
-        this.builder.quadraticBezierTo(cx, cy, x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "smoothQuadraticBezierTo",
-      value: function smoothQuadraticBezierTo(x, y) {
-        this.builder.smoothQuadraticBezierTo(x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "cubicBezierCurveTo",
-      value: function cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-        this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "smoothCubicBezierCurveTo",
-      value: function smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-        this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        this.builder.close();
-        this.closePath = this.builder.closePath;
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "end",
-      value: function end() {
-        this.builder.end();
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "rotateAround",
-      value: function rotateAround(centerX, centerY, angle) {
-        this.builder.rotateAround(centerX, centerY, angle);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "scale",
-      value: function scale(centerX, centerY, scaleX, scaleY) {
-        this.builder.scale(centerX, centerY, scaleX, scaleY);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "offset",
-      value: function offset(x, y) {
-        this.builder.offset(x, y);
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "toPolygon",
-      value: function toPolygon(polygon) {
-        return this.builder.toPolygon(polygon);
-      }
-    }, {
-      key: "appendPathFrom",
-      value: function appendPathFrom(src, startT, endT) {
-        this.builder.appendFromPathSegment(src.builder, startT, endT);
-        return this;
-      }
-    }, {
-      key: "copyPathFrom",
-      value: function copyPathFrom(src, startT, endT) {
-        this.builder.clear().appendFromPathSegment(src.builder, startT, endT);
-        return this;
-      }
-    }, {
-      key: "setDisplayPathSegment",
-      value: function setDisplayPathSegment(startT, endT) {
-        this.builder.setDisplayPathSegment(startT, endT);
-        return this;
-      }
-    }]);
-    return Lines;
-  }(PathBase);
-
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     var _super = _createSuper(RoundRectangle);
@@ -1620,10 +1469,10 @@
           this.radiusBL = value;
           this.radiusBR = value;
         } else {
-          this.radiusTL = GetValue$9(value, 'tl', 0);
-          this.radiusTR = GetValue$9(value, 'tr', 0);
-          this.radiusBL = GetValue$9(value, 'bl', 0);
-          this.radiusBR = GetValue$9(value, 'br', 0);
+          this.radiusTL = GetValue$7(value, 'tl', 0);
+          this.radiusTR = GetValue$7(value, 'tr', 0);
+          this.radiusBL = GetValue$7(value, 'bl', 0);
+          this.radiusBR = GetValue$7(value, 'br', 0);
         }
       }
     }, {
@@ -1734,57 +1583,80 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * Calculates a linear (interpolation) value over t.
+   *
+   * @function Phaser.Math.Linear
+   * @since 3.0.0
+   *
+   * @param {number} p0 - The first point.
+   * @param {number} p1 - The second point.
+   * @param {number} t - The percentage between p0 and p1 to return, represented as a number between 0 and 1.
+   *
+   * @return {number} The step t% of the way between p0 and p1.
+   */
+  var Linear$2 = function Linear(p0, p1, t) {
+    return (p1 - p0) * t + p0;
+  };
+
+  var GetR = function GetR(colorInt) {
+    return colorInt >> 16 & 0xff;
+  };
+  var GetG = function GetG(colorInt) {
+    return colorInt >> 8 & 0xff;
+  };
+  var GetB = function GetB(colorInt) {
+    return colorInt & 0xff;
+  };
+
+  var MixColor = function MixColor(color0, color1, t) {
+    var r = Linear$2(GetR(color0), GetR(color1), t);
+    var g = Linear$2(GetG(color0), GetG(color1), t);
+    var b = Linear$2(GetB(color0), GetB(color1), t);
+    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
+  };
+
+  var Linear$1 = Phaser.Math.Linear;
   var ShapesUpdateMethods = {
     buildShapes: function buildShapes() {
-      this.addShape(new RoundRectangle().setName('box')).addShape(new Lines().setName('checker'));
+      this.addShape(new RoundRectangle().setName('track')).addShape(new RoundRectangle().setName('thumb'));
     },
     updateShapes: function updateShapes() {
-      var centerX = this.width / 2,
-        centerY = this.height / 2,
-        radius = Math.min(centerX, centerY);
-      var width = radius * 2;
-      var x = centerX - radius,
-        y = centerY - radius;
-      var boxLineWidth = this.boxLineWidth;
-      var checkLineWidth = Math.max(width / 10, 2);
-      var boxShape = this.getShape('box');
-      var checkerShape = this.getShape('checker');
+      var width = this.width,
+        height = this.height;
+      var toggleAnimProgress = this.value ? this.toggleAnimProgress : 1 - this.toggleAnimProgress;
 
-      // Setup shapes
+      // Track
+      var trackShape = this.getShape('track');
       if (this.isSizeChanged) {
-        // Box
-        var posOffset = width * (1 - this.boxSize) / 2;
-        var halfBoxLineWidth = boxLineWidth / 2;
-        var boxInnerWidth = width * this.boxSize - boxLineWidth;
-        boxShape.setTopLeftPosition(x + halfBoxLineWidth + posOffset, y + halfBoxLineWidth + posOffset).setSize(boxInnerWidth, boxInnerWidth);
-        if (this.isCircleShape) {
-          boxShape.setRadius(boxInnerWidth / 2);
-        } else {
-          boxShape.setRadius(0);
-        }
-
-        // Checker
-        var posOffset = width * (1 - this.checkerSize) / 2;
-        var unit = width * this.checkerSize / 4;
-        var u1 = unit * 1,
-          u2 = unit * 2,
-          u3 = unit * 3;
-        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x + posOffset, y + posOffset).end();
+        var trackWidth = width * this.trackWidth,
+          trackHeight = height * this.trackHeight,
+          trackX = (width - trackWidth) / 2,
+          trackY = (height - trackHeight) / 2,
+          trackRadius = height * this.trackRadius;
+        trackShape.setTopLeftPosition(trackX, trackY).setSize(trackWidth, trackHeight).setRadius(trackRadius);
       }
+      var trackFillColor = MixColor(this.uncheckedTrackFillColor, this.trackFillColor, toggleAnimProgress);
+      trackShape.fillStyle(trackFillColor, this.trackFillAlpha).lineStyle(this.trackLineWidth, this.trackStrokeColor, this.trackStrokeAlpha);
 
-      // Set styles
-      if (this.checked) {
-        boxShape.fillStyle(this.boxFillColor, this.boxFillAlpha).lineStyle(boxLineWidth, this.boxStrokeColor, this.boxStrokeAlpha);
-        checkerShape.lineStyle(checkLineWidth, this.checkerColor);
-      } else {
-        boxShape.fillStyle(this.uncheckedBoxFillColor, this.uncheckedBoxFillAlpha).lineStyle(boxLineWidth, this.uncheckedBoxStrokeColor, this.uncheckedBoxStrokeAlpha);
-        checkerShape.lineStyle();
+      // Thumb
+      var thumbShape = this.getShape('thumb');
+      if (this.isSizeChanged) {
+        var thumbWidth = width * this.thumbWidth,
+          thumbHeight = height * this.thumbHeight,
+          thumbRadius = height * this.thumbRadius;
+        thumbShape.setSize(thumbWidth, thumbHeight).setRadius(thumbRadius);
       }
-
-      // Play checker animation
-      if (this.checked) {
-        checkerShape.setDisplayPathSegment(this.checkerAnimProgress);
-      }
+      var thumbX = Linear$1(this.thumbLeftX, this.thumbRightX, toggleAnimProgress) * width;
+      var thumbY = height / 2;
+      thumbShape.setCenterPosition(thumbX, thumbY);
+      thumbShape.fillStyle(this.thumbColor, this.thumbAlpha).lineStyle(this.thumbLineWidth, this.thumbStrokeColor, this.thumbStrokeAlpha);
     }
   };
 
@@ -1912,7 +1784,7 @@
     }
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -1921,7 +1793,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$8(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -1998,7 +1870,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     var _super = _createSuper(TickTask);
@@ -2009,7 +1881,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$7(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -2126,7 +1998,7 @@
     'always': 2
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     var _super = _createSuper(SceneUpdateTickTask);
@@ -2140,7 +2012,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$6(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$4(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -2176,7 +2048,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -2186,15 +2058,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$5(o, 'state', IDLE);
-        this.timeScale = GetValue$5(o, 'timeScale', 1);
-        this.delay = GetValue$5(o, 'delay', 0);
-        this.repeat = GetValue$5(o, 'repeat', 0);
-        this.repeatCounter = GetValue$5(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$5(o, 'repeatDelay', 0);
-        this.duration = GetValue$5(o, 'duration', 0);
-        this.nowTime = GetValue$5(o, 'nowTime', 0);
-        this.justRestart = GetValue$5(o, 'justRestart', false);
+        this.state = GetValue$3(o, 'state', IDLE);
+        this.timeScale = GetValue$3(o, 'timeScale', 1);
+        this.delay = GetValue$3(o, 'delay', 0);
+        this.repeat = GetValue$3(o, 'repeat', 0);
+        this.repeatCounter = GetValue$3(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$3(o, 'repeatDelay', 0);
+        this.duration = GetValue$3(o, 'duration', 0);
+        this.nowTime = GetValue$3(o, 'nowTime', 0);
+        this.justRestart = GetValue$3(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -2423,8 +2295,8 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
@@ -2436,13 +2308,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$4(o, 'timer'));
-        this.setEnable(GetValue$4(o, 'enable', true));
-        this.setTarget(GetValue$4(o, 'target', this.parent));
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        this.setEase(GetValue$4(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$4(o, 'repeat', 0));
+        this.timer.resetFromJSON(GetValue$2(o, 'timer'));
+        this.setEnable(GetValue$2(o, 'enable', true));
+        this.setTarget(GetValue$2(o, 'target', this.parent));
+        this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
+        this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
+        this.setEase(GetValue$2(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$2(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -2562,7 +2434,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Linear = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -2585,15 +2457,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$3(config, 'key', 'value');
+        this.propertyKey = GetValue$1(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$3(config, 'from', currentValue);
-        this.toValue = GetValue$3(config, 'to', currentValue);
-        this.setEase(GetValue$3(config, 'ease', this.ease));
-        this.setDuration(GetValue$3(config, 'duration', this.duration));
-        this.setRepeat(GetValue$3(config, 'repeat', 0));
-        this.setDelay(GetValue$3(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$1(config, 'from', currentValue);
+        this.toValue = GetValue$1(config, 'to', currentValue);
+        this.setEase(GetValue$1(config, 'ease', this.ease));
+        this.setDuration(GetValue$1(config, 'duration', this.duration));
+        this.setRepeat(GetValue$1(config, 'repeat', 0));
+        this.setDelay(GetValue$1(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -2610,80 +2482,88 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var CheckerAnimationMethods = {
-    setCheckerAnimationDuration: function setCheckerAnimationDuration(duration) {
+  var ToggleAnimationMethods = {
+    setToggleAnimationDuration: function setToggleAnimationDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
-      this.checkerAnimDuration = duration;
+      this.toggleAnimDuration = duration;
       return this;
     },
-    playCheckerAnimation: function playCheckerAnimation() {
-      if (this.checkerAnimProgressTask === undefined) {
-        this.checkerAnimProgressTask = new EaseValueTask(this, {
+    playToggleAnimation: function playToggleAnimation() {
+      if (this.toggleAnimProgressTask === undefined) {
+        this.toggleAnimProgressTask = new EaseValueTask(this, {
           eventEmitter: null
         });
       }
-      this.checkerAnimProgressTask.restart({
-        key: 'checkerAnimProgress',
+      this.toggleAnimProgressTask.restart({
+        key: 'toggleAnimProgress',
         from: 0,
         to: 1,
-        duration: this.checkerAnimDuration
+        duration: this.toggleAnimDuration
       });
       return this;
     },
-    stopCheckerAnimation: function stopCheckerAnimation() {
-      if (this.checkerAnimProgressTask === undefined) {
+    stopToggleAnimation: function stopToggleAnimation() {
+      if (this.toggleAnimProgressTask === undefined) {
         return this;
       }
-      this.checkerAnimProgressTask.stop();
+      this.toggleAnimProgressTask.stop();
       return this;
     }
   };
 
   var methods = {};
-  Object.assign(methods, StyleMethods$1, SizeMethods, ShapesUpdateMethods, CheckerAnimationMethods);
+  Object.assign(methods, StyleMethods$1, SizeMethods, PositionMethods, ShapesUpdateMethods, ToggleAnimationMethods);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GrayScale = function GrayScale(color) {
+    var shade = 0.3 * GetR(color) + 0.59 * GetG(color) + 0.11 * GetB(color);
+    return (shade & 0xff) << 16 | (shade & 0xff) << 8 | shade & 0xff;
+  };
+
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var DefaultBoxFillColor = 0x005cb2;
-  var DefaultCheckerColor = 0xffffff;
-  var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
-    _inherits(CheckboxShape, _BaseShapes);
-    var _super = _createSuper(CheckboxShape);
-    function CheckboxShape(scene, x, y, width, height, color, config) {
+  var DefaultTrackFillColor = 0x005cb2;
+  var DefaultThumbFillColor = 0xffffff;
+  var ToggleSwitchShape = /*#__PURE__*/function (_BaseShapes) {
+    _inherits(ToggleSwitchShape, _BaseShapes);
+    var _super = _createSuper(ToggleSwitchShape);
+    function ToggleSwitchShape(scene, x, y, width, height, color, config) {
       var _this;
-      _classCallCheck(this, CheckboxShape);
+      _classCallCheck(this, ToggleSwitchShape);
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue$2(config, 'x', 0);
-        y = GetValue$2(config, 'y', 0);
-        width = GetValue$2(config, 'width', 2);
-        height = GetValue$2(config, 'height', 2);
-        color = GetValue$2(config, 'color', DefaultBoxFillColor);
+        x = GetValue(config, 'x', 0);
+        y = GetValue(config, 'y', 0);
+        width = GetValue(config, 'width', 2);
+        height = GetValue(config, 'height', 2);
+        color = GetValue(config, 'color', DefaultTrackFillColor);
       } else if (IsPlainObject(color)) {
         config = color;
-        color = GetValue$2(config, 'color', DefaultBoxFillColor);
+        color = GetValue(config, 'color', DefaultTrackFillColor);
       }
       _this = _super.call(this, scene, x, y, width, height);
-      _this.type = 'rexCheckbox';
+      _this.type = 'rexToggleSwitch';
       if (color === undefined) {
-        color = DefaultBoxFillColor;
+        color = DefaultTrackFillColor;
       }
-      _this.setBoxShape(GetValue$2(config, 'circleBox', false));
-      _this.setBoxFillStyle(color, GetValue$2(config, 'boxFillAlpha', 1));
-      _this.setUncheckedBoxFillStyle(GetValue$2(config, 'uncheckedColor', null), GetValue$2(config, 'uncheckedBoxFillAlpha', 1));
-      _this.setBoxStrokeStyle(GetValue$2(config, 'boxLineWidth', 4), GetValue$2(config, 'boxStrokeColor', color), GetValue$2(config, 'boxStrokeAlpha', 1));
-      _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
-      _this.setCheckerStyle(GetValue$2(config, 'checkerColor', DefaultCheckerColor), GetValue$2(config, 'checkerAlpha', 1));
-      _this.setBoxSize(GetValue$2(config, 'boxSize', 1));
-      _this.setCheckerSize(GetValue$2(config, 'checkerSize', 1));
-      _this.setCheckerAnimationDuration(GetValue$2(config, 'animationDuration', 150));
+      _this.setTrackFillStyle(color, GetValue(config, 'trackFillAlpha', 1));
+      _this.setUncheckedTrackFillStyle(GetValue(config, 'uncheckedColor', GrayScale(color)), GetValue(config, 'uncheckedTrackFillAlpha', 1));
+      _this.setTrackStrokeStyle(GetValue(config, 'trackLineWidth', 4), GetValue(config, 'trackStrokeColor', null), GetValue(config, 'trackStrokeAlpha', 1));
+      _this.setUncheckedTrackStrokeStyle(_this.trackLineWidth, GetValue(config, 'uncheckedTrackStrokeColor', _this.trackStrokeColor), GetValue(config, 'uncheckedTrackStrokeAlpha', _this.trackStrokeAlpha));
+      _this.setThumbStyle(GetValue(config, 'thumbColor', DefaultThumbFillColor), GetValue(config, 'thumbAlpha', 1));
+      _this.setThumbStrokeStyle(GetValue(config, 'thumbLineWidth', 2), GetValue(config, 'thumbStrokeColor', null), GetValue(config, 'thumbStrokeAlpha', 1));
+      _this.setTrackSize(GetValue(config, 'trackWidth', 0.9), GetValue(config, 'trackHeight', 0.5));
+      _this.setTrackConerRadius(GetValue(config, 'trackConerRadius', _this.trackHeight / 2));
+      _this.setThumbSize(GetValue(config, 'thumbWidth', _this.trackHeight * 0.9), GetValue(config, 'thumbHeight', undefined));
+      _this.setThumbConerRadius(GetValue(config, 'thumbConerRadius', _this.thumbHeight / 2));
+      _this.setThumbPosition(GetValue(config, 'thumbLeft', 0.3), GetValue(config, 'thumbRight', 0.7));
+      _this.setToggleAnimationDuration(GetValue(config, 'animationDuration', 150));
       _this.buildShapes();
-      _this.setChecked(GetValue$2(config, 'checked', false));
+      _this.setValue(GetValue(config, 'value', false), 0);
       return _this;
     }
-    _createClass(CheckboxShape, [{
+    _createClass(ToggleSwitchShape, [{
       key: "value",
       get: function get() {
         return this._value;
@@ -2695,298 +2575,152 @@
         }
         this.dirty = true;
         this._value = value;
-        if (value) {
-          this.playCheckerAnimation();
-        } else {
-          this.stopCheckerAnimation();
-        }
+        this.playToggleAnimation();
         this.emit('valuechange', value);
       }
     }, {
       key: "setValue",
-      value: function setValue(value) {
-        this.value = value;
-        return this;
-      }
-    }, {
-      key: "checked",
-      get: function get() {
-        return this.value;
-      },
-      set: function set(value) {
-        this.value = value;
-      }
-    }, {
-      key: "setChecked",
-      value: function setChecked(checked) {
-        if (checked === undefined) {
-          checked = true;
+      value: function setValue(value, duration) {
+        if (duration === undefined) {
+          duration = this.toggleAnimDuration;
         }
-        this.checked = checked;
+        var durationSave = this.toggleAnimDuration;
+        this.toggleAnimDuration = duration;
+        this.value = value;
+        this.toggleAnimDuration = durationSave;
         return this;
       }
     }, {
-      key: "toggleChecked",
-      value: function toggleChecked() {
-        this.checked = !this.checked;
+      key: "toggleValue",
+      value: function toggleValue(duration) {
+        this.setValue(!this.value, duration);
         return this;
       }
     }, {
-      key: "checkerAnimProgress",
+      key: "toggleAnimProgress",
       get: function get() {
-        return this._checkerAnimProgress;
+        return this._toggleAnimProgress;
       },
       set: function set(value) {
-        if (this._checkerAnimProgress === value) {
+        if (this._toggleAnimProgress === value) {
           return;
         }
-        this._checkerAnimProgress = value;
+        this._toggleAnimProgress = value;
         this.dirty = true;
       }
     }]);
-    return CheckboxShape;
+    return ToggleSwitchShape;
   }(BaseShapes);
-  Object.assign(CheckboxShape.prototype, methods);
+  Object.assign(ToggleSwitchShape.prototype, methods);
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Button = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Button, _ComponentBase);
-    var _super = _createSuper(Button);
-    function Button(gameObject, config) {
-      var _this;
-      _classCallCheck(this, Button);
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
+  function Factory (x, y, width, height, color, config) {
+    var gameObject = new ToggleSwitchShape(this.scene, x, y, width, height, color, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
 
-      _this._enable = undefined;
-      gameObject.setInteractive(GetValue$1(config, "inputConfig", undefined));
-      _this.resetFromJSON(config);
-      _this.boot();
-      return _this;
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
     }
-    _createClass(Button, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.pointer = undefined;
-        this.lastClickTime = undefined;
-        this.setEnable(GetValue$1(o, "enable", true));
-        this.setMode(GetValue$1(o, "mode", 1));
-        this.setClickInterval(GetValue$1(o, "clickInterval", 100));
-        this.setDragThreshold(GetValue$1(o, 'threshold', undefined));
-        return this;
-      }
-    }, {
-      key: "boot",
-      value: function boot() {
-        var gameObject = this.parent;
-        gameObject.on('pointerdown', this.onPress, this);
-        gameObject.on('pointerup', this.onRelease, this);
-        gameObject.on('pointerout', this.onPointOut, this);
-        gameObject.on('pointermove', this.onMove, this);
-        gameObject.on('pointerover', this.onOver, this);
-        gameObject.on('pointerout', this.onOut, this);
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+    var width = GetAdvancedValue(config, 'width', undefined);
+    var height = GetAdvancedValue(config, 'height', width);
+    var color = GetAdvancedValue(config, 'color', 0x005cb2);
+    var gameObject = new ToggleSwitchShape(this.scene, 0, 0, width, height, color, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
+  }
 
-        // GameObject events will be removed when this gameObject destroyed 
-        // this.parent.on('pointerdown', this.onPress, this);
-        // this.parent.on('pointerup', this.onRelease, this);
-        // this.parent.on('pointerout', this.onPointOut, this);
-        // this.parent.on('pointermove', this.onMove, this);
-        this.pointer = null;
-        _get(_getPrototypeOf(Button.prototype), "shutdown", this).call(this, fromScene);
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
       }
-    }, {
-      key: "enable",
-      get: function get() {
-        return this._enable;
-      },
-      set: function set(e) {
-        if (this._enable === e) {
-          return;
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+          entry[key] = newEntry;
         }
-        if (!e) {
-          this.cancel();
-        }
-        this._enable = e;
-        var eventName = e ? 'enable' : 'disable';
-        this.emit(eventName, this, this.parent);
+        entry = entry[key];
       }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }, {
-      key: "setMode",
-      value: function setMode(m) {
-        if (typeof m === 'string') {
-          m = CLICKMODE[m];
-        }
-        this.mode = m;
-        return this;
-      }
-    }, {
-      key: "setClickInterval",
-      value: function setClickInterval(interval) {
-        this.clickInterval = interval; // ms
-        return this;
-      }
-    }, {
-      key: "setDragThreshold",
-      value: function setDragThreshold(distance) {
-        this.dragThreshold = distance;
-        return this;
-      }
+    }
+    return entry;
+  };
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
 
-      // internal
-    }, {
-      key: "onPress",
-      value: function onPress(pointer, localX, localY, event) {
-        if (this.pointer !== undefined) {
-          return;
-        }
-        this.pointer = pointer;
-        if (this.mode === 0) {
-          this.click(pointer.downTime, pointer, event);
-        }
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
       }
-    }, {
-      key: "onRelease",
-      value: function onRelease(pointer, localX, localY, event) {
-        if (this.pointer !== pointer) {
-          return;
-        }
-        if (this.mode === 1) {
-          this.click(pointer.upTime, pointer, event);
-        }
-        this.pointer = undefined;
+      // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
       }
-    }, {
-      key: "onPointOut",
-      value: function onPointOut(pointer, event) {
-        if (this.pointer !== pointer) {
-          return;
-        }
-        this.cancel();
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
       }
-    }, {
-      key: "onMove",
-      value: function onMove(pointer, localX, localY, event) {
-        if (this.pointer !== pointer) {
-          return;
-        }
-        if (this.dragThreshold === undefined) {
-          return;
-        }
-        if (pointer.getDistance() >= this.dragThreshold) {
-          this.cancel();
-        }
-      }
-    }, {
-      key: "click",
-      value: function click(nowTime, pointer, event) {
-        if (!this.enable) {
-          return this;
-        }
-        if (nowTime === undefined) {
-          // fires 'click' event manually
-          this.emit('click', this, this.parent, pointer, event);
-          return this;
-        }
-        this.pointer = undefined;
-        var lastClickTime = this.lastClickTime;
-        if (lastClickTime !== undefined && nowTime - lastClickTime <= this.clickInterval) {
-          return this;
-        }
-        this.lastClickTime = nowTime;
-        this.emit('click', this, this.parent, pointer, event);
-        return this;
-      }
-    }, {
-      key: "cancel",
-      value: function cancel() {
-        this.pointer = undefined;
-        return this;
-      }
-    }, {
-      key: "onOver",
-      value: function onOver(pointer, localX, localY, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('over', this, this.parent, pointer, event);
-        return this;
-      }
-    }, {
-      key: "onOut",
-      value: function onOut(pointer, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('out', this, this.parent, pointer, event);
-        return this;
-      }
-    }]);
-    return Button;
-  }(ComponentBase);
-  var CLICKMODE = {
-    press: 0,
-    pointerdown: 0,
-    release: 1,
-    pointerup: 1
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+    return target;
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var Checkbox = /*#__PURE__*/function (_CheckboxShape) {
-    _inherits(Checkbox, _CheckboxShape);
-    var _super = _createSuper(Checkbox);
-    function Checkbox(scene, x, y, width, height, color, config) {
+  var ToggleSwitchPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(ToggleSwitchPlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(ToggleSwitchPlugin);
+    function ToggleSwitchPlugin(pluginManager) {
       var _this;
-      _classCallCheck(this, Checkbox);
-      _this = _super.call(this, scene, x, y, width, height, color, config);
-      _this._click = new Button(_assertThisInitialized(_this), GetValue(config, 'click'));
-      _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
-      _this.setReadOnly(GetValue(config, 'readOnly', false));
+      _classCallCheck(this, ToggleSwitchPlugin);
+      _this = _super.call(this, pluginManager);
+
+      //  Register our new Game Object type
+      pluginManager.registerGameObject('rexToggleSwitch', Factory, Creator);
+      // pluginManager.registerGameObject('rexToggleSwitchShape', ToggleSwitchShapeFactory, ToggleSwitchShapeCreator);
       return _this;
     }
-    _createClass(Checkbox, [{
-      key: "readOnly",
-      get: function get() {
-        return !this._click.enable;
-      },
-      set: function set(value) {
-        this._click.enable = !value;
-      }
-    }, {
-      key: "setReadOnly",
-      value: function setReadOnly(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        this.readOnly = enable;
-        return this;
+    _createClass(ToggleSwitchPlugin, [{
+      key: "start",
+      value: function start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-    return Checkbox;
-  }(CheckboxShape);
+    return ToggleSwitchPlugin;
+  }(Phaser.Plugins.BasePlugin);
+  SetValue(window, 'RexPlugins.GameObjects.ToggleSwitch', ToggleSwitchShape);
 
-  return Checkbox;
+  return ToggleSwitchPlugin;
 
 }));

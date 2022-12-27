@@ -4,6 +4,7 @@ import Methods from './methods/Methods.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DefaultBoxFillColor = 0x005cb2;
+const DefaultCheckerColor = 0xffffff;
 
 class CheckboxShape extends BaseShapes {
     constructor(scene, x, y, width, height, color, config) {
@@ -54,7 +55,7 @@ class CheckboxShape extends BaseShapes {
 
 
         this.setCheckerStyle(
-            GetValue(config, 'checkerColor', 0xffffff),
+            GetValue(config, 'checkerColor', DefaultCheckerColor),
             GetValue(config, 'checkerAlpha', 1)
         );
 

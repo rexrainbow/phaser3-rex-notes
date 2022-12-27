@@ -19,6 +19,7 @@ module.exports = {
     'customprogressplugin': './plugins/customprogress-plugin.js',
     'checkboxplugin': './plugins/checkbox-plugin.js',
     'triangleplugin': './plugins/triangle-plugin.js',
+    'toggleswitchplugin': './plugins/toggleswitch-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
     'canvasinputplugin': './plugins/canvasinput-plugin.js',
