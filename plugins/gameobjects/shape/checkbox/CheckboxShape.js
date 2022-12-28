@@ -73,9 +73,11 @@ class CheckboxShape extends BaseShapes {
 
         this.buildShapes();
 
-        this.setChecked(
-            GetValue(config, 'checked', false)
-        )
+        var value = GetValue(config, 'checked');
+        if (value === undefined) {
+            value = GetValue(config, 'value', false);
+        }
+        this.setValue(value);
     }
 
     get value() {
@@ -106,6 +108,11 @@ class CheckboxShape extends BaseShapes {
         return this;
     }
 
+    toggleValue() {
+        this.setValue(!this.value);
+        return this;
+    }
+
     get checked() {
         return this.value;
     }
@@ -118,12 +125,12 @@ class CheckboxShape extends BaseShapes {
         if (checked === undefined) {
             checked = true;
         }
-        this.checked = checked;
+        this.setValue(checked);
         return this;
     }
 
     toggleChecked() {
-        this.checked = !this.checked;
+        this.toggleValue();
         return this;
     }
 

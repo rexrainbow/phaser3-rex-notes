@@ -70,10 +70,12 @@ class ToggleSwitchShape extends BaseShapes {
             GetValue(config, 'trackConerRadius', this.trackHeight / 2)
         );
 
-        this.setThumbSize(
-            GetValue(config, 'thumbWidth', this.trackHeight * 0.9),
-            GetValue(config, 'thumbHeight', undefined),
-        );
+        var thumbHeight = GetValue(config, 'thumbHeight', undefined);
+        var thumbWidth = GetValue(config, 'thumbWidth', thumbHeight);
+        if (thumbWidth === undefined) {
+            thumbWidth = this.trackHeight * 0.9;
+        }
+        this.setThumbSize(thumbWidth, thumbHeight);
 
         this.setThumbConerRadius(
             GetValue(config, 'thumbConerRadius', this.thumbHeight / 2)
@@ -81,7 +83,7 @@ class ToggleSwitchShape extends BaseShapes {
 
         this.setThumbPosition(
             GetValue(config, 'thumbLeft', 0.3),
-            GetValue(config, 'thumbRight', 0.7),
+            GetValue(config, 'thumbRight', undefined),
         )
 
         this.setToggleAnimationDuration(

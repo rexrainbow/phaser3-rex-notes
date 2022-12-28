@@ -47,11 +47,13 @@ declare class Checkbox extends BaseShapes {
         config?: Checkbox.IConfig
     );
 
+    setValue(value: boolean): this;
+    toggleValue(): this;
+    value: boolean;
+
     setChecked(checked?: boolean): this;
     toggleChecked(): this;
     checked: boolean;
-    setValue(value: boolean): this;
-    value: boolean;
 
     setBoxShape(isCircleShape?: boolean): this;
 

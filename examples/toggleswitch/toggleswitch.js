@@ -11,18 +11,26 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var toggleSwitch = this.add.rexToggleSwitch(400, 300, 100, 100, 0x039be5);
-
-        this.input.on('pointerup', function () {
-            toggleSwitch.toggleValue();
-        })
+        var toggleSwitch0 = this.add.rexToggleSwitch(300, 300, 100, 100, 0x039be5);
+        var toggleSwitch1 = this.add.rexToggleSwitch(400, 300, 100, 100, 0x039be5, {
+            trackHeight: 0.3,
+            thumbHeight: 0.5,           
+        });
+        var toggleSwitch2 = this.add.rexToggleSwitch(500, 300, 100, 100, 0x006db3, {
+            trackHeight: 0.2,
+            thumbHeight: 0.4,
+            thumbLeft: 0.25,
+            thumbColor: 0x63ccff
+        });
 
         var graphics = this.add.graphics({
             lineStyle: {
                 width: 2, color: 0xff0000, alpha: 1
             }
         })
-            .strokeRectShape(toggleSwitch.getBounds())
+            .strokeRectShape(toggleSwitch0.getBounds())
+            .strokeRectShape(toggleSwitch1.getBounds())
+            .strokeRectShape(toggleSwitch2.getBounds())
     }
 
     update() { }

@@ -10600,7 +10600,11 @@
       _this.setCheckerSize(GetValue$2y(config, 'checkerSize', 1));
       _this.setCheckerAnimationDuration(GetValue$2y(config, 'animationDuration', 150));
       _this.buildShapes();
-      _this.setChecked(GetValue$2y(config, 'checked', false));
+      var value = GetValue$2y(config, 'checked');
+      if (value === undefined) {
+        value = GetValue$2y(config, 'value', false);
+      }
+      _this.setValue(value);
       return _this;
     }
     _createClass(CheckboxShape, [{
@@ -10629,6 +10633,12 @@
         return this;
       }
     }, {
+      key: "toggleValue",
+      value: function toggleValue() {
+        this.setValue(!this.value);
+        return this;
+      }
+    }, {
       key: "checked",
       get: function get() {
         return this.value;
@@ -10642,13 +10652,13 @@
         if (checked === undefined) {
           checked = true;
         }
-        this.checked = checked;
+        this.setValue(checked);
         return this;
       }
     }, {
       key: "toggleChecked",
       value: function toggleChecked() {
-        this.checked = !this.checked;
+        this.toggleValue();
         return this;
       }
     }, {
@@ -10882,7 +10892,9 @@
       _classCallCheck(this, Checkbox);
       _this = _super.call(this, scene, x, y, width, height, color, config);
       _this._click = new Button(_assertThisInitialized(_this), GetValue$2w(config, 'click'));
-      _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
+      _this._click.on('click', function () {
+        this.toggleValue();
+      }, _assertThisInitialized(_this));
       _this.setReadOnly(GetValue$2w(config, 'readOnly', false));
       return _this;
     }

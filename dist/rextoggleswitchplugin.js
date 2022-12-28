@@ -564,7 +564,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$8 = function GetValue(source, key, defaultValue) {
+  var GetValue$a = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -613,7 +613,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$a(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1307,7 +1307,7 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     var _super = _createSuper(RoundRectangle);
@@ -1469,10 +1469,10 @@
           this.radiusBL = value;
           this.radiusBR = value;
         } else {
-          this.radiusTL = GetValue$7(value, 'tl', 0);
-          this.radiusTR = GetValue$7(value, 'tr', 0);
-          this.radiusBL = GetValue$7(value, 'bl', 0);
-          this.radiusBR = GetValue$7(value, 'br', 0);
+          this.radiusTL = GetValue$9(value, 'tl', 0);
+          this.radiusTR = GetValue$9(value, 'tr', 0);
+          this.radiusBL = GetValue$9(value, 'bl', 0);
+          this.radiusBR = GetValue$9(value, 'br', 0);
         }
       }
     }, {
@@ -1784,7 +1784,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -1793,7 +1793,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$8(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -1870,7 +1870,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     var _super = _createSuper(TickTask);
@@ -1881,7 +1881,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$7(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -1998,7 +1998,7 @@
     'always': 2
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     var _super = _createSuper(SceneUpdateTickTask);
@@ -2012,7 +2012,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$4(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$6(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -2048,7 +2048,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -2058,15 +2058,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$3(o, 'state', IDLE);
-        this.timeScale = GetValue$3(o, 'timeScale', 1);
-        this.delay = GetValue$3(o, 'delay', 0);
-        this.repeat = GetValue$3(o, 'repeat', 0);
-        this.repeatCounter = GetValue$3(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$3(o, 'repeatDelay', 0);
-        this.duration = GetValue$3(o, 'duration', 0);
-        this.nowTime = GetValue$3(o, 'nowTime', 0);
-        this.justRestart = GetValue$3(o, 'justRestart', false);
+        this.state = GetValue$5(o, 'state', IDLE);
+        this.timeScale = GetValue$5(o, 'timeScale', 1);
+        this.delay = GetValue$5(o, 'delay', 0);
+        this.repeat = GetValue$5(o, 'repeat', 0);
+        this.repeatCounter = GetValue$5(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$5(o, 'repeatDelay', 0);
+        this.duration = GetValue$5(o, 'duration', 0);
+        this.nowTime = GetValue$5(o, 'nowTime', 0);
+        this.justRestart = GetValue$5(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -2295,8 +2295,8 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
@@ -2308,13 +2308,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$2(o, 'timer'));
-        this.setEnable(GetValue$2(o, 'enable', true));
-        this.setTarget(GetValue$2(o, 'target', this.parent));
-        this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$2(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$2(o, 'repeat', 0));
+        this.timer.resetFromJSON(GetValue$4(o, 'timer'));
+        this.setEnable(GetValue$4(o, 'enable', true));
+        this.setTarget(GetValue$4(o, 'target', this.parent));
+        this.setDelay(GetAdvancedValue$2(o, 'delay', 0));
+        this.setDuration(GetAdvancedValue$2(o, 'duration', 1000));
+        this.setEase(GetValue$4(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$4(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -2434,7 +2434,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Linear = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -2457,15 +2457,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$1(config, 'key', 'value');
+        this.propertyKey = GetValue$3(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$1(config, 'from', currentValue);
-        this.toValue = GetValue$1(config, 'to', currentValue);
-        this.setEase(GetValue$1(config, 'ease', this.ease));
-        this.setDuration(GetValue$1(config, 'duration', this.duration));
-        this.setRepeat(GetValue$1(config, 'repeat', 0));
-        this.setDelay(GetValue$1(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$3(config, 'from', currentValue);
+        this.toValue = GetValue$3(config, 'to', currentValue);
+        this.setEase(GetValue$3(config, 'ease', this.ease));
+        this.setDuration(GetValue$3(config, 'duration', this.duration));
+        this.setRepeat(GetValue$3(config, 'repeat', 0));
+        this.setDelay(GetValue$3(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -2521,7 +2521,7 @@
     return (shade & 0xff) << 16 | (shade & 0xff) << 8 | shade & 0xff;
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DefaultTrackFillColor = 0x005cb2;
   var DefaultThumbFillColor = 0xffffff;
@@ -2533,34 +2533,39 @@
       _classCallCheck(this, ToggleSwitchShape);
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        width = GetValue(config, 'width', 2);
-        height = GetValue(config, 'height', 2);
-        color = GetValue(config, 'color', DefaultTrackFillColor);
+        x = GetValue$2(config, 'x', 0);
+        y = GetValue$2(config, 'y', 0);
+        width = GetValue$2(config, 'width', 2);
+        height = GetValue$2(config, 'height', 2);
+        color = GetValue$2(config, 'color', DefaultTrackFillColor);
       } else if (IsPlainObject(color)) {
         config = color;
-        color = GetValue(config, 'color', DefaultTrackFillColor);
+        color = GetValue$2(config, 'color', DefaultTrackFillColor);
       }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexToggleSwitch';
       if (color === undefined) {
         color = DefaultTrackFillColor;
       }
-      _this.setTrackFillStyle(color, GetValue(config, 'trackFillAlpha', 1));
-      _this.setUncheckedTrackFillStyle(GetValue(config, 'uncheckedColor', GrayScale(color)), GetValue(config, 'uncheckedTrackFillAlpha', 1));
-      _this.setTrackStrokeStyle(GetValue(config, 'trackLineWidth', 4), GetValue(config, 'trackStrokeColor', null), GetValue(config, 'trackStrokeAlpha', 1));
-      _this.setUncheckedTrackStrokeStyle(_this.trackLineWidth, GetValue(config, 'uncheckedTrackStrokeColor', _this.trackStrokeColor), GetValue(config, 'uncheckedTrackStrokeAlpha', _this.trackStrokeAlpha));
-      _this.setThumbStyle(GetValue(config, 'thumbColor', DefaultThumbFillColor), GetValue(config, 'thumbAlpha', 1));
-      _this.setThumbStrokeStyle(GetValue(config, 'thumbLineWidth', 2), GetValue(config, 'thumbStrokeColor', null), GetValue(config, 'thumbStrokeAlpha', 1));
-      _this.setTrackSize(GetValue(config, 'trackWidth', 0.9), GetValue(config, 'trackHeight', 0.5));
-      _this.setTrackConerRadius(GetValue(config, 'trackConerRadius', _this.trackHeight / 2));
-      _this.setThumbSize(GetValue(config, 'thumbWidth', _this.trackHeight * 0.9), GetValue(config, 'thumbHeight', undefined));
-      _this.setThumbConerRadius(GetValue(config, 'thumbConerRadius', _this.thumbHeight / 2));
-      _this.setThumbPosition(GetValue(config, 'thumbLeft', 0.3), GetValue(config, 'thumbRight', 0.7));
-      _this.setToggleAnimationDuration(GetValue(config, 'animationDuration', 150));
+      _this.setTrackFillStyle(color, GetValue$2(config, 'trackFillAlpha', 1));
+      _this.setUncheckedTrackFillStyle(GetValue$2(config, 'uncheckedColor', GrayScale(color)), GetValue$2(config, 'uncheckedTrackFillAlpha', 1));
+      _this.setTrackStrokeStyle(GetValue$2(config, 'trackLineWidth', 4), GetValue$2(config, 'trackStrokeColor', null), GetValue$2(config, 'trackStrokeAlpha', 1));
+      _this.setUncheckedTrackStrokeStyle(_this.trackLineWidth, GetValue$2(config, 'uncheckedTrackStrokeColor', _this.trackStrokeColor), GetValue$2(config, 'uncheckedTrackStrokeAlpha', _this.trackStrokeAlpha));
+      _this.setThumbStyle(GetValue$2(config, 'thumbColor', DefaultThumbFillColor), GetValue$2(config, 'thumbAlpha', 1));
+      _this.setThumbStrokeStyle(GetValue$2(config, 'thumbLineWidth', 2), GetValue$2(config, 'thumbStrokeColor', null), GetValue$2(config, 'thumbStrokeAlpha', 1));
+      _this.setTrackSize(GetValue$2(config, 'trackWidth', 0.9), GetValue$2(config, 'trackHeight', 0.5));
+      _this.setTrackConerRadius(GetValue$2(config, 'trackConerRadius', _this.trackHeight / 2));
+      var thumbHeight = GetValue$2(config, 'thumbHeight', undefined);
+      var thumbWidth = GetValue$2(config, 'thumbWidth', thumbHeight);
+      if (thumbWidth === undefined) {
+        thumbWidth = _this.trackHeight * 0.9;
+      }
+      _this.setThumbSize(thumbWidth, thumbHeight);
+      _this.setThumbConerRadius(GetValue$2(config, 'thumbConerRadius', _this.thumbHeight / 2));
+      _this.setThumbPosition(GetValue$2(config, 'thumbLeft', 0.3), GetValue$2(config, 'thumbRight', undefined));
+      _this.setToggleAnimationDuration(GetValue$2(config, 'animationDuration', 150));
       _this.buildShapes();
-      _this.setValue(GetValue(config, 'value', false), 0);
+      _this.setValue(GetValue$2(config, 'value', false), 0);
       return _this;
     }
     _createClass(ToggleSwitchShape, [{
@@ -2613,7 +2618,271 @@
   }(BaseShapes);
   Object.assign(ToggleSwitchShape.prototype, methods);
 
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var Button = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Button, _ComponentBase);
+    var _super = _createSuper(Button);
+    function Button(gameObject, config) {
+      var _this;
+      _classCallCheck(this, Button);
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+
+      _this._enable = undefined;
+      gameObject.setInteractive(GetValue$1(config, "inputConfig", undefined));
+      _this.resetFromJSON(config);
+      _this.boot();
+      return _this;
+    }
+    _createClass(Button, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.pointer = undefined;
+        this.lastClickTime = undefined;
+        this.setEnable(GetValue$1(o, "enable", true));
+        this.setMode(GetValue$1(o, "mode", 1));
+        this.setClickInterval(GetValue$1(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$1(o, 'threshold', undefined));
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        var gameObject = this.parent;
+        gameObject.on('pointerdown', this.onPress, this);
+        gameObject.on('pointerup', this.onRelease, this);
+        gameObject.on('pointerout', this.onPointOut, this);
+        gameObject.on('pointermove', this.onMove, this);
+        gameObject.on('pointerover', this.onOver, this);
+        gameObject.on('pointerout', this.onOut, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.on('pointerdown', this.onPress, this);
+        // this.parent.on('pointerup', this.onRelease, this);
+        // this.parent.on('pointerout', this.onPointOut, this);
+        // this.parent.on('pointermove', this.onMove, this);
+        this.pointer = null;
+        _get(_getPrototypeOf(Button.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+        if (!e) {
+          this.cancel();
+        }
+        this._enable = e;
+        var eventName = e ? 'enable' : 'disable';
+        this.emit(eventName, this, this.parent);
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "setMode",
+      value: function setMode(m) {
+        if (typeof m === 'string') {
+          m = CLICKMODE[m];
+        }
+        this.mode = m;
+        return this;
+      }
+    }, {
+      key: "setClickInterval",
+      value: function setClickInterval(interval) {
+        this.clickInterval = interval; // ms
+        return this;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+
+      // internal
+    }, {
+      key: "onPress",
+      value: function onPress(pointer, localX, localY, event) {
+        if (this.pointer !== undefined) {
+          return;
+        }
+        this.pointer = pointer;
+        if (this.mode === 0) {
+          this.click(pointer.downTime, pointer, event);
+        }
+      }
+    }, {
+      key: "onRelease",
+      value: function onRelease(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        if (this.mode === 1) {
+          this.click(pointer.upTime, pointer, event);
+        }
+        this.pointer = undefined;
+      }
+    }, {
+      key: "onPointOut",
+      value: function onPointOut(pointer, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        this.cancel();
+      }
+    }, {
+      key: "onMove",
+      value: function onMove(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        if (this.dragThreshold === undefined) {
+          return;
+        }
+        if (pointer.getDistance() >= this.dragThreshold) {
+          this.cancel();
+        }
+      }
+    }, {
+      key: "click",
+      value: function click(nowTime, pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        if (nowTime === undefined) {
+          // fires 'click' event manually
+          this.emit('click', this, this.parent, pointer, event);
+          return this;
+        }
+        this.pointer = undefined;
+        var lastClickTime = this.lastClickTime;
+        if (lastClickTime !== undefined && nowTime - lastClickTime <= this.clickInterval) {
+          return this;
+        }
+        this.lastClickTime = nowTime;
+        this.emit('click', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        this.pointer = undefined;
+        return this;
+      }
+    }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.emit('out', this, this.parent, pointer, event);
+        return this;
+      }
+    }]);
+    return Button;
+  }(ComponentBase);
+  var CLICKMODE = {
+    press: 0,
+    pointerdown: 0,
+    release: 1,
+    pointerup: 1
+  };
+
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var ToggleSwitch = /*#__PURE__*/function (_ToggleSwitchShape) {
+    _inherits(ToggleSwitch, _ToggleSwitchShape);
+    var _super = _createSuper(ToggleSwitch);
+    function ToggleSwitch(scene, x, y, width, height, color, config) {
+      var _this;
+      _classCallCheck(this, ToggleSwitch);
+      _this = _super.call(this, scene, x, y, width, height, color, config);
+      _this._click = new Button(_assertThisInitialized(_this), GetValue(config, 'click'));
+      _this._click.on('click', function () {
+        this.toggleValue();
+      }, _assertThisInitialized(_this));
+      _this.setReadOnly(GetValue(config, 'readOnly', false));
+      return _this;
+    }
+    _createClass(ToggleSwitch, [{
+      key: "readOnly",
+      get: function get() {
+        return !this._click.enable;
+      },
+      set: function set(value) {
+        this._click.enable = !value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.readOnly = enable;
+        return this;
+      }
+    }]);
+    return ToggleSwitch;
+  }(ToggleSwitchShape);
+
   function Factory (x, y, width, height, color, config) {
+    var gameObject = new ToggleSwitch(this.scene, x, y, width, height, color, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+    var width = GetAdvancedValue$1(config, 'width', undefined);
+    var height = GetAdvancedValue$1(config, 'height', width);
+    var color = GetAdvancedValue$1(config, 'color', 0x005cb2);
+    var gameObject = new ToggleSwitch(this.scene, 0, 0, width, height, color, config);
+    BuildGameObject$1(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  function ToggleSwitchShapeFactory (x, y, width, height, color, config) {
     var gameObject = new ToggleSwitchShape(this.scene, x, y, width, height, color, config);
     this.scene.add.existing(gameObject);
     return gameObject;
@@ -2621,7 +2890,7 @@
 
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
+  function ToggleSwitchShapeCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
@@ -2707,7 +2976,7 @@
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexToggleSwitch', Factory, Creator);
-      // pluginManager.registerGameObject('rexToggleSwitchShape', ToggleSwitchShapeFactory, ToggleSwitchShapeCreator);
+      pluginManager.registerGameObject('rexToggleSwitchShape', ToggleSwitchShapeFactory, ToggleSwitchShapeCreator);
       return _this;
     }
     _createClass(ToggleSwitchPlugin, [{
@@ -2719,7 +2988,8 @@
     }]);
     return ToggleSwitchPlugin;
   }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.GameObjects.ToggleSwitch', ToggleSwitchShape);
+  SetValue(window, 'RexPlugins.GameObjects.ToggleSwitch', ToggleSwitch);
+  SetValue(window, 'RexPlugins.GameObjects.ToggleSwitchShape', ToggleSwitchShape);
 
   return ToggleSwitchPlugin;
 
