@@ -421,33 +421,13 @@
       this.trackFillAlpha = alpha;
       return this;
     },
-    setUncheckedTrackFillStyle: function setUncheckedTrackFillStyle(color, alpha) {
+    setFalseValueTrackFillStyle: function setFalseValueTrackFillStyle(color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
       }
-      this.dirty = this.dirty || this.uncheckedTrackFillColor !== color || this.uncheckedTrackFillAlpha !== alpha;
-      this.uncheckedTrackFillColor = color;
-      this.uncheckedTrackFillAlpha = alpha;
-      return this;
-    },
-    setTrackStrokeStyle: function setTrackStrokeStyle(lineWidth, color, alpha) {
-      if (alpha === undefined) {
-        alpha = 1;
-      }
-      this.dirty = this.dirty || this.trackLineWidth !== lineWidth || this.trackStrokeColor !== color || this.trackStrokeAlpha !== alpha;
-      this.trackLineWidth = lineWidth;
-      this.trackStrokeColor = color;
-      this.trackStrokeAlpha = alpha;
-      return this;
-    },
-    setUncheckedTrackStrokeStyle: function setUncheckedTrackStrokeStyle(lineWidth, color, alpha) {
-      if (alpha === undefined) {
-        alpha = 1;
-      }
-      this.dirty = this.dirty || this.uncheckedTrackLineWidth !== lineWidth || this.uncheckedTrackStrokeColor !== color || this.uncheckedTrackStrokeAlpha !== alpha;
-      this.uncheckedTrackLineWidth = lineWidth;
-      this.uncheckedTrackStrokeColor = color;
-      this.uncheckedTrackStrokeAlpha = alpha;
+      this.dirty = this.dirty || this.falseValueTrackColor !== color || this.uncheckedTrackFillAlpha !== alpha;
+      this.falseValueTrackColor = color;
+      this.falseValueTrackFillAlpha = alpha;
       return this;
     },
     setThumbStyle: function setThumbStyle(color, alpha) {
@@ -457,16 +437,6 @@
       this.dirty = this.dirty || this.thumbColor !== color || this.checkAlpha !== alpha;
       this.thumbColor = color;
       this.thumbAlpha = alpha;
-      return this;
-    },
-    setThumbStrokeStyle: function setThumbStrokeStyle(lineWidth, color, alpha) {
-      if (alpha === undefined) {
-        alpha = 1;
-      }
-      this.dirty = this.dirty || this.thumbLineWidth !== lineWidth || this.thumbStrokeColor !== color || this.thumbStrokeAlpha !== alpha;
-      this.thumbLineWidth = lineWidth;
-      this.thumbStrokeColor = color;
-      this.thumbStrokeAlpha = alpha;
       return this;
     }
   };
@@ -506,6 +476,13 @@
       }
       this.thumbLeftX = left;
       this.thumbRightX = right;
+      return this;
+    },
+    setRTL: function setRTL(rtl) {
+      if (rtl === undefined) {
+        rtl = true;
+      }
+      this.rtl = rtl;
       return this;
     }
   };
@@ -1642,8 +1619,9 @@
           trackRadius = height * this.trackRadius;
         trackShape.setTopLeftPosition(trackX, trackY).setSize(trackWidth, trackHeight).setRadius(trackRadius);
       }
-      var trackFillColor = MixColor(this.uncheckedTrackFillColor, this.trackFillColor, toggleAnimProgress);
-      trackShape.fillStyle(trackFillColor, this.trackFillAlpha).lineStyle(this.trackLineWidth, this.trackStrokeColor, this.trackStrokeAlpha);
+      var trackFillColor = MixColor(this.falseValueTrackColor, this.trackFillColor, toggleAnimProgress);
+      var trackFillAlpha = Linear$1(this.falseValueTrackFillAlpha, this.trackFillAlpha, toggleAnimProgress);
+      trackShape.fillStyle(trackFillColor, trackFillAlpha);
 
       // Thumb
       var thumbShape = this.getShape('thumb');
@@ -1654,9 +1632,12 @@
         thumbShape.setSize(thumbWidth, thumbHeight).setRadius(thumbRadius);
       }
       var thumbX = Linear$1(this.thumbLeftX, this.thumbRightX, toggleAnimProgress) * width;
+      if (this.rtl) {
+        thumbX = width - thumbX;
+      }
       var thumbY = height / 2;
       thumbShape.setCenterPosition(thumbX, thumbY);
-      thumbShape.fillStyle(this.thumbColor, this.thumbAlpha).lineStyle(this.thumbLineWidth, this.thumbStrokeColor, this.thumbStrokeAlpha);
+      thumbShape.fillStyle(this.thumbColor, this.thumbAlpha);
     }
   };
 
@@ -2548,11 +2529,8 @@
         color = DefaultTrackFillColor;
       }
       _this.setTrackFillStyle(color, GetValue$2(config, 'trackFillAlpha', 1));
-      _this.setUncheckedTrackFillStyle(GetValue$2(config, 'uncheckedColor', GrayScale(color)), GetValue$2(config, 'uncheckedTrackFillAlpha', 1));
-      _this.setTrackStrokeStyle(GetValue$2(config, 'trackLineWidth', 4), GetValue$2(config, 'trackStrokeColor', null), GetValue$2(config, 'trackStrokeAlpha', 1));
-      _this.setUncheckedTrackStrokeStyle(_this.trackLineWidth, GetValue$2(config, 'uncheckedTrackStrokeColor', _this.trackStrokeColor), GetValue$2(config, 'uncheckedTrackStrokeAlpha', _this.trackStrokeAlpha));
+      _this.setFalseValueTrackFillStyle(GetValue$2(config, 'falseValueTrackColor', GrayScale(color)), GetValue$2(config, 'falseValueTrackFillAlpha', 1));
       _this.setThumbStyle(GetValue$2(config, 'thumbColor', DefaultThumbFillColor), GetValue$2(config, 'thumbAlpha', 1));
-      _this.setThumbStrokeStyle(GetValue$2(config, 'thumbLineWidth', 2), GetValue$2(config, 'thumbStrokeColor', null), GetValue$2(config, 'thumbStrokeAlpha', 1));
       _this.setTrackSize(GetValue$2(config, 'trackWidth', 0.9), GetValue$2(config, 'trackHeight', 0.5));
       _this.setTrackConerRadius(GetValue$2(config, 'trackConerRadius', _this.trackHeight / 2));
       var thumbHeight = GetValue$2(config, 'thumbHeight', undefined);
@@ -2563,6 +2541,7 @@
       _this.setThumbSize(thumbWidth, thumbHeight);
       _this.setThumbConerRadius(GetValue$2(config, 'thumbConerRadius', _this.thumbHeight / 2));
       _this.setThumbPosition(GetValue$2(config, 'thumbLeft', 0.3), GetValue$2(config, 'thumbRight', undefined));
+      _this.setRTL(GetValue$2(config, 'rtl', false));
       _this.setToggleAnimationDuration(GetValue$2(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setValue(GetValue$2(config, 'value', false), 0);

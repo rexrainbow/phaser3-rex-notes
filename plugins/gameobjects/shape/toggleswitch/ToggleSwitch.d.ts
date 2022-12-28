@@ -1,34 +1,34 @@
-import CheckboxShape from './CheckboxShape';
+import ToggleSwitchShape from './ToggleSwitchShape';
 import Click from '../../../input/button/Button';
 
-export default Checkbox;
+export default ToggleSwitch;
 
-declare namespace Checkbox {
-    interface IConfig extends CheckboxShape.IConfig {
+declare namespace ToggleSwitch {
+    interface IConfig extends ToggleSwitchShape.IConfig {
         readOnly?: boolean;
         input?: Click.IConfig,
     }
 }
 
-declare class Checkbox extends CheckboxShape {
+declare class ToggleSwitch extends ToggleSwitchShape {
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
         color?: number,
-        config?: Checkbox.IConfig
+        config?: ToggleSwitch.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
         width?: number, height?: number,
-        config?: Checkbox.IConfig
+        config?: ToggleSwitch.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
-        config?: Checkbox.IConfig
+        config?: ToggleSwitch.IConfig
     );
 
     setReadOnly(readOnly?: boolean): this;

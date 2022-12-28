@@ -23,6 +23,7 @@ declare namespace Checkbox {
         animationDuration?: number,
 
         checked?: boolean,
+        value?: boolean,
     }
 }
 

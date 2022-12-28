@@ -33,32 +33,14 @@ class ToggleSwitchShape extends BaseShapes {
             GetValue(config, 'trackFillAlpha', 1)
         );
 
-        this.setUncheckedTrackFillStyle(
-            GetValue(config, 'uncheckedColor', GrayScale(color)),
-            GetValue(config, 'uncheckedTrackFillAlpha', 1)
+        this.setFalseValueTrackFillStyle(
+            GetValue(config, 'falseValueTrackColor', GrayScale(color)),
+            GetValue(config, 'falseValueTrackFillAlpha', 1)
         )
-
-        this.setTrackStrokeStyle(
-            GetValue(config, 'trackLineWidth', 4),
-            GetValue(config, 'trackStrokeColor', null),
-            GetValue(config, 'trackStrokeAlpha', 1)
-        );
-
-        this.setUncheckedTrackStrokeStyle(
-            this.trackLineWidth,
-            GetValue(config, 'uncheckedTrackStrokeColor', this.trackStrokeColor),
-            GetValue(config, 'uncheckedTrackStrokeAlpha', this.trackStrokeAlpha)
-        );
 
         this.setThumbStyle(
             GetValue(config, 'thumbColor', DefaultThumbFillColor),
             GetValue(config, 'thumbAlpha', 1)
-        );
-
-        this.setThumbStrokeStyle(
-            GetValue(config, 'thumbLineWidth', 2),
-            GetValue(config, 'thumbStrokeColor', null),
-            GetValue(config, 'thumbStrokeAlpha', 1)
         );
 
         this.setTrackSize(
@@ -85,6 +67,8 @@ class ToggleSwitchShape extends BaseShapes {
             GetValue(config, 'thumbLeft', 0.3),
             GetValue(config, 'thumbRight', undefined),
         )
+
+        this.setRTL(GetValue(config, 'rtl', false));
 
         this.setToggleAnimationDuration(
             GetValue(config, 'animationDuration', 150)

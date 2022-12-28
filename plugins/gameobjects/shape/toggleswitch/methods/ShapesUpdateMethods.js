@@ -32,10 +32,10 @@ export default {
 
         }
 
-        var trackFillColor = MixColor(this.uncheckedTrackFillColor, this.trackFillColor, toggleAnimProgress)
+        var trackFillColor = MixColor(this.falseValueTrackColor, this.trackFillColor, toggleAnimProgress);
+        var trackFillAlpha = Linear(this.falseValueTrackFillAlpha, this.trackFillAlpha, toggleAnimProgress);
         trackShape
-            .fillStyle(trackFillColor, this.trackFillAlpha)
-            .lineStyle(this.trackLineWidth, this.trackStrokeColor, this.trackStrokeAlpha)
+            .fillStyle(trackFillColor, trackFillAlpha)
 
         // Thumb
         var thumbShape = this.getShape('thumb');
@@ -48,15 +48,17 @@ export default {
                 .setSize(thumbWidth, thumbHeight)
                 .setRadius(thumbRadius);
         }
-        
+
         var thumbX = Linear(this.thumbLeftX, this.thumbRightX, toggleAnimProgress) * width;
+        if (this.rtl) {
+            thumbX = width - thumbX;
+        }
         var thumbY = height / 2;
         thumbShape
             .setCenterPosition(thumbX, thumbY)
 
         thumbShape
             .fillStyle(this.thumbColor, this.thumbAlpha)
-            .lineStyle(this.thumbLineWidth, this.thumbStrokeColor, this.thumbStrokeAlpha)
     }
 
 
