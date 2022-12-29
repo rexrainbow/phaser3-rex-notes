@@ -138,6 +138,10 @@ var tweaker = scene.rexUI.add.tweaker({
 
             checkbox: {
 
+            },
+
+            toggleSwitch: {
+
             }
         },
 
@@ -252,7 +256,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `string`, if `bindingTarget` is not given.
+- `view` : Set to `'string'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -320,7 +324,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `list`, if `bindingTarget` is not given.
+- `view` : Set to `'list'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -391,7 +395,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `buttons`.
+- `view` : Set to `'buttons'`.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -450,7 +454,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `number`, if `bindingTarget` is not given.
+- `view` : Set to `'number'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -520,7 +524,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `range`, if `bindingTarget` is not given.
+- `view` : Set to `'range'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -599,7 +603,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `list`, if `bindingTarget` is not given.
+- `view` : Set to `'list'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -671,7 +675,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `buttons`.
+- `view` : Set to `'buttons'`.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -731,7 +735,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `color`.
+- `view` : Set to `'color'`.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -771,6 +775,7 @@ tweaker.addInput({
     bindingTarget: object,
     bindingKey: key,
     // view: 'boolean',
+    // view: 'toggleSwitch',
 
     // icon: undefined,
     // iconFrame: undefined,
@@ -787,7 +792,9 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `boolean`, if `bindingTarget` is not given.
+- `view` : Set to `'boolean'`, or `'toggleSwitch'`, if `bindingTarget` is not given.
+    - `'boolean'` : Checkbox input. Default behavior.
+    - `'toggleSwitch'` : Toggle switch input.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -1761,7 +1768,7 @@ Style of color input is defined in
 Style of boolean input is defined in 
 
 - `styles.inputRow.title`, 
-- `styles.inputRow.checkbox`
+- `styles.inputRow.checkbox`, or `styles.inputRow.toggleSwitch`
 - `styles.inputRow.background`
 
 ```javascript
@@ -1825,6 +1832,7 @@ Style of boolean input is defined in
                 }
             },
 
+            // For checkbox view
             checkbox: {
                 color: 0x005cb2,
                 boxFillAlpha: 1,
@@ -1841,6 +1849,33 @@ Style of boolean input is defined in
                 checkerAlpha: 1,
 
                 circleBox: false
+
+                animationDuration: 150,
+
+                readOnly: false,
+            },
+
+            // For toggle switch view
+            toggleSwitch: {
+                color: 0x005cb2,
+                trackFillAlpha: 1,
+                falseValueTrackColor: undefined,
+                falseValueTrackFillAlpha: 1,
+
+                thumbColor: 0xffffff,
+                thumbAlpha: 1,
+
+                trackWidth: 0.9,
+                trackHeight: 0.5,
+                trackCornerRadius: (trackHeight * 0.5),
+
+                thumbHeight: (trackHeight * 0.9),
+                thumbWidth: (thumbHeight),
+                thumbCornerRadius: (thumbHeight * 0.5),
+
+                thumbLeft: 0.3,
+                thumbRight: (1 - thumbLeft),
+                rtl: false,
 
                 animationDuration: 150,
 

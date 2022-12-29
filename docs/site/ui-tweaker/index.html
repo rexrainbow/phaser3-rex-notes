@@ -9418,6 +9418,10 @@
 
             <span class="nx">checkbox</span><span class="o">:</span> <span class="p">{</span>
 
+            <span class="p">},</span>
+
+            <span class="nx">toggleSwitch</span><span class="o">:</span> <span class="p">{</span>
+
             <span class="p">}</span>
         <span class="p">},</span>
 
@@ -9538,7 +9542,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>string</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'string'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9604,7 +9608,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>list</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'list'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9675,7 +9679,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>buttons</code>.</li>
+<li><code>view</code> : Set to <code>'buttons'</code>.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9734,7 +9738,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>number</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'number'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9800,7 +9804,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>range</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'range'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9877,7 +9881,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>list</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'list'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -9948,7 +9952,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>buttons</code>.</li>
+<li><code>view</code> : Set to <code>'buttons'</code>.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -10007,7 +10011,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>color</code>.</li>
+<li><code>view</code> : Set to <code>'color'</code>.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -10043,6 +10047,7 @@
     <span class="nx">bindingTarget</span><span class="o">:</span> <span class="nx">object</span><span class="p">,</span>
     <span class="nx">bindingKey</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
     <span class="c1">// view: &#39;boolean&#39;,</span>
+    <span class="c1">// view: &#39;toggleSwitch&#39;,</span>
 
     <span class="c1">// icon: undefined,</span>
     <span class="c1">// iconFrame: undefined,</span>
@@ -10061,7 +10066,11 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>boolean</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'boolean'</code>, or <code>'toggleSwitch'</code>, if <code>bindingTarget</code> is not given.<ul>
+<li><code>'boolean'</code> : Checkbox input. Default behavior.</li>
+<li><code>'toggleSwitch'</code> : Toggle switch input.</li>
+</ul>
+</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -10990,7 +10999,7 @@
 <p>Style of boolean input is defined in </p>
 <ul>
 <li><code>styles.inputRow.title</code>, </li>
-<li><code>styles.inputRow.checkbox</code></li>
+<li><code>styles.inputRow.checkbox</code>, or <code>styles.inputRow.toggleSwitch</code></li>
 <li><code>styles.inputRow.background</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -11053,6 +11062,7 @@
                 <span class="p">}</span>
             <span class="p">},</span>
 
+            <span class="c1">// For checkbox view</span>
             <span class="nx">checkbox</span><span class="o">:</span> <span class="p">{</span>
                 <span class="nx">color</span><span class="o">:</span> <span class="mh">0x005cb2</span><span class="p">,</span>
                 <span class="nx">boxFillAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
@@ -11069,6 +11079,33 @@
                 <span class="nx">checkerAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
 
                 <span class="nx">circleBox</span><span class="o">:</span> <span class="kc">false</span>
+
+                <span class="nx">animationDuration</span><span class="o">:</span> <span class="mf">150</span><span class="p">,</span>
+
+                <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="p">},</span>
+
+            <span class="c1">// For toggle switch view</span>
+            <span class="nx">toggleSwitch</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">color</span><span class="o">:</span> <span class="mh">0x005cb2</span><span class="p">,</span>
+                <span class="nx">trackFillAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+                <span class="nx">falseValueTrackColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+                <span class="nx">falseValueTrackFillAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+
+                <span class="nx">thumbColor</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+                <span class="nx">thumbAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+
+                <span class="nx">trackWidth</span><span class="o">:</span> <span class="mf">0.9</span><span class="p">,</span>
+                <span class="nx">trackHeight</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="nx">trackCornerRadius</span><span class="o">:</span> <span class="p">(</span><span class="nx">trackHeight</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">),</span>
+
+                <span class="nx">thumbHeight</span><span class="o">:</span> <span class="p">(</span><span class="nx">trackHeight</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">),</span>
+                <span class="nx">thumbWidth</span><span class="o">:</span> <span class="p">(</span><span class="nx">thumbHeight</span><span class="p">),</span>
+                <span class="nx">thumbCornerRadius</span><span class="o">:</span> <span class="p">(</span><span class="nx">thumbHeight</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">),</span>
+
+                <span class="nx">thumbLeft</span><span class="o">:</span> <span class="mf">0.3</span><span class="p">,</span>
+                <span class="nx">thumbRight</span><span class="o">:</span> <span class="p">(</span><span class="mf">1</span> <span class="o">-</span> <span class="nx">thumbLeft</span><span class="p">),</span>
+                <span class="nx">rtl</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
                 <span class="nx">animationDuration</span><span class="o">:</span> <span class="mf">150</span><span class="p">,</span>
 
