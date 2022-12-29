@@ -6,6 +6,7 @@ import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import HiddenEdit from './hiddenedit/HiddenEdit.js';
 import Checkbox from './checkbox/Checkbox.js';
+import ToggleSwitch from './toggleswitch/ToggleSwitch.js';
 
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
@@ -115,6 +116,7 @@ export {
     TagText,
     HiddenEdit,
     Checkbox,
+    ToggleSwitch,
 
     Container,
     Canvas,

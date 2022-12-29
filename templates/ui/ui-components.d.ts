@@ -4,6 +4,7 @@ import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
 import HiddenEdit from './hiddenedit/HiddenEdit';
 import Checkbox from './checkbox/Checkbox';
+import ToggleSwitch from './toggleswitch/ToggleSwitch';
 
 import Container from './container/Container';
 import Canvas from './canvas/Canvas';
@@ -113,6 +114,7 @@ export {
     TagText,
     HiddenEdit,
     Checkbox,
+    ToggleSwitch,
 
     Container,
     Canvas,

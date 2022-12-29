@@ -8,6 +8,7 @@ import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import HiddenEditFactory from './hiddenedit/Factory.js';
 import CheckboxFactory from './checkbox/Factory.js';
+import ToggleSwitchFactory from './toggleswitch/Factory.js';
 
 import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';

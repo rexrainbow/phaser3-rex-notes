@@ -23,7 +23,10 @@ class Demo extends Phaser.Scene {
             thumbHeight: 0.5,
         });
 
-        var toggleSwitch3 = this.add.rexToggleSwitch(500, 300, 100, 100, 0x006db3, {
+        var toggleSwitch3 = this.add.rexToggleSwitch(500, 300, 100, 100, {
+            color: 0x006db3,
+            falseValueTrackColor: 0x7f0000,
+
             trackHeight: 0.2,
             thumbHeight: 0.4,
             thumbLeft: 0.25,
