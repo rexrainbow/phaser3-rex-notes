@@ -104,6 +104,7 @@ nav:
             - Full window rectangle: shape-fullwindowrectangle.md
             - Cover: shape-cover.md
             - Checkbox: shape-checkbox.md
+            - Toggle switch: shape-toggleswitch.md
             - Triangle 2: shape-triangle2.md
         - Canvas:
             - Canvas: canvas.md

@@ -2263,6 +2263,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../shape-toggleswitch/" class="md-nav__link">
+        Toggle switch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../shape-triangle2/" class="md-nav__link">
         Triangle 2
       </a>
@@ -9058,6 +9072,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><a href="https://codepen.io/rexrainbow/pen/poVPGKe">Text input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOxarOO">Number input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOKOJoV">With rexui-Label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/PoBPmzR">Text area</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasinput">Sample code</a></p>
@@ -9193,6 +9208,8 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
         <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// For single line text input</span>
     <span class="p">},</span>
 
+    <span class="nx">textArea</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="c1">// Parameters of hidden-text-editor   </span>
     <span class="c1">// inputType: &#39;text&#39;,  // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...                </span>
 
@@ -9237,6 +9254,11 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
+<li><code>textArea</code> : <ul>
+<li><code>false</code> : Single line text input. Default behavior.</li>
+<li><code>true</code> : Multiple lines text input.</li>
+</ul>
+</li>
 <li>Parameters of <a href="../dynamictext/#create-instance">DynamicText</a>...<ul>
 <li><code>wrap</code> : Some default value in <code>wrap</code> are changed<ul>
 <li><code>wrap.useDefaultLineHeight</code> : Default value is <code>true</code></li>

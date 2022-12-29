@@ -2204,6 +2204,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size-ratio" class="md-nav__link">
+    Size ratio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -2226,6 +2233,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shape-toggleswitch/" class="md-nav__link">
+        Toggle switch
+      </a>
     </li>
   
 
@@ -8955,6 +8976,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size-ratio" class="md-nav__link">
+    Size ratio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9088,11 +9116,14 @@
     <span class="nx">checkerColor</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
     <span class="nx">checkerAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
 
+    <span class="c1">// boxSize: 1,</span>
+    <span class="c1">// checkerSize: 1,</span>
+
     <span class="nx">circleBox</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="nx">animationDuration</span><span class="o">:</span> <span class="mf">150</span><span class="p">,</span>
 
-    <span class="nx">checked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">checked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// or value: false,</span>
 
     <span class="nx">click</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="c1">// click: {</span>
@@ -9107,7 +9138,7 @@
 <li><code>width</code>, <code>height</code> : Size of checkbox.</li>
 <li>Box fill style<ul>
 <li><code>color</code>, <code>boxFillAlpha</code> : Box color and alpha of checked        </li>
-<li><code>uncheckedColor</code>, <code>uncheckedBoxFillAlpha</code> : : Box color and alpha of unchecked</li>
+<li><code>uncheckedColor</code>, <code>uncheckedBoxFillAlpha</code> : Box color and alpha of unchecked</li>
 </ul>
 </li>
 <li>Box stroke style<ul>
@@ -9124,6 +9155,7 @@
 <li><code>true</code> : Circle shape box    </li>
 </ul>
 </li>
+<li><code>boxSize</code>, <code>checkerSize</code> : Size ratio of box, and checker. Default value is <code>1</code>.</li>
 <li><code>animationDuration</code> : Duration of drawing path of checker.</li>
 <li><code>checked</code> : Initial value of checked.</li>
 <li><code>click</code> : Configuration of <a href="../button/#create-instance">click input</a><ul>
@@ -9309,6 +9341,20 @@
 <span class="nx">checkbox</span><span class="p">.</span><span class="nx">displayHeight</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="size-ratio">Size ratio<a class="headerlink" href="#size-ratio" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">boxSize</span> <span class="o">=</span> <span class="nx">checkbox</span><span class="p">.</span><span class="nx">boxSize</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">checkerSize</span> <span class="o">=</span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">checkerSize</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>boxSize</code>, <code>checkerSize</code> : Size ratio of box, and checker</li>
+</ul>
+</li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">checkbox</span><span class="p">.</span><span class="nx">setBoxSize</span><span class="p">(</span><span class="nx">sizeRatio</span><span class="p">);</span>
+<span class="nx">checkbox</span><span class="p">.</span><span class="nx">setCheckerSize</span><span class="p">(</span><span class="nx">sizeRatio</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On value change
@@ -9348,13 +9394,13 @@
       
       
         
-        <a href="../shape-triangle2/" class="md-footer__link md-footer__link--next" aria-label="Next: Triangle 2" rel="next">
+        <a href="../shape-toggleswitch/" class="md-footer__link md-footer__link--next" aria-label="Next: Toggle switch" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Triangle 2
+              Toggle switch
             </div>
           </div>
           <div class="md-footer__button md-icon">

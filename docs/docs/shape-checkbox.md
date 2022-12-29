@@ -121,7 +121,7 @@ var checkbox = scene.add.rexCheckbox({
 
     animationDuration: 150,
 
-    checked: false,
+    checked: false, // or value: false,
 
     click: undefined,
     // click: {
@@ -136,7 +136,7 @@ var checkbox = scene.add.rexCheckbox({
 - `width`, `height` : Size of checkbox.
 - Box fill style
     - `color`, `boxFillAlpha` : Box color and alpha of checked        
-    - `uncheckedColor`, `uncheckedBoxFillAlpha` : : Box color and alpha of unchecked
+    - `uncheckedColor`, `uncheckedBoxFillAlpha` : Box color and alpha of unchecked
 - Box stroke style
     - `boxLineWidth`, `boxStrokeColor`, `boxStrokeAlpha` : Box stroke color and alpha of checked.
     - `uncheckedBoxStrokeColor`, `uncheckedBoxStrokeAlpha` : Box stroke color and alpha of unchecked.

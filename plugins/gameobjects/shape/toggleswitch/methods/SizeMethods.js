@@ -9,7 +9,7 @@ export default {
         return this;
     },
 
-    setTrackConerRadius(radius) {
+    setTrackRadius(radius) {
         this.dirty = this.dirty ||
             (this.trackRadius !== radius);
 
@@ -30,7 +30,7 @@ export default {
         return this;
     },
 
-    setThumbConerRadius(radius) {       
+    setThumbRadius(radius) {       
         this.dirty = this.dirty ||
             (this.thumbRadius !== radius);
 

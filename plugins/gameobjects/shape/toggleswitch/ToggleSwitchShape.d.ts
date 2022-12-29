@@ -13,10 +13,10 @@ declare namespace ToggleSwitch {
         thumbColor?: number, thumbAlpha?: number,
 
         trackWidth?: number, trackHeight?: number,
-        trackConerRadius?: number,
+        trackRadius?: number,
 
         thumbWidth?: number, thumbHeight?: number,
-        thumbConerRadius?: number,
+        thumbRadius?: number,
 
         thumbLeft?: number, thumbRight?: number,
         rtl?: boolean,
@@ -66,13 +66,13 @@ declare class ToggleSwitch extends BaseShapes {
     setTrackSize(width: number, height: number): this;
     trackWidth: number;
     trackHeight: number;
-    setTrackConerRadius(radius: number): this;
+    setTrackRadius(radius: number): this;
     trackRadius: number;
 
     setThumbSize(width: number, height: number): this;
     thumbWidth: number;
     thumbHeight: number;
-    setThumbConerRadius(radius: number): this;
+    setThumbRadius(radius: number): this;
     thumbRadius: number;
 
     setThumbPosition(left: number, right?: number): this;

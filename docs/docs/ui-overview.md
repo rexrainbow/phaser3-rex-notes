@@ -369,6 +369,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Toggle switch](shape-toggleswitch.md): Toggle-switch input.
+    ```javascript
+    var toggleSwitch = scene.rexUI.add.toggleSwitch(x, y, width, height, color, config);
+    ```
+    or
+    ```javascript
+    class MyToggleSwitch extends RexPlugins.UI.ToggleSwitch {
+        constructor(scene, x, y, width, height, color, config) {
+            super(scene, x, y, width, height, color, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.
     ```javascript
     var triangle = scene.rexUI.add.triangle(x, y, width, height, fillColor, fillAlpha);

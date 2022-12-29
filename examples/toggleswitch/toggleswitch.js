@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
         var toggleSwitch0 = this.add.rexToggleSwitch(200, 300, 100, 100, 0x039be5);
 
         var toggleSwitch1 = this.add.rexToggleSwitch(300, 300, 100, 100, 0x039be5, {
-            trackConerRadius: 0.1,
-            thumbConerRadius: 0.1
+            trackRadius: 0.1,
+            thumbRadius: 0.1
         });
 
         var toggleSwitch2 = this.add.rexToggleSwitch(400, 300, 100, 100, 0x039be5, {

@@ -448,7 +448,7 @@
       this.trackHeight = height;
       return this;
     },
-    setTrackConerRadius: function setTrackConerRadius(radius) {
+    setTrackRadius: function setTrackRadius(radius) {
       this.dirty = this.dirty || this.trackRadius !== radius;
       this.trackRadius = radius;
       return this;
@@ -462,7 +462,7 @@
       this.thumbHeight = height;
       return this;
     },
-    setThumbConerRadius: function setThumbConerRadius(radius) {
+    setThumbRadius: function setThumbRadius(radius) {
       this.dirty = this.dirty || this.thumbRadius !== radius;
       this.thumbRadius = radius;
       return this;
@@ -2532,14 +2532,14 @@
       _this.setFalseValueTrackFillStyle(GetValue$2(config, 'falseValueTrackColor', GrayScale(color)), GetValue$2(config, 'falseValueTrackFillAlpha', 1));
       _this.setThumbStyle(GetValue$2(config, 'thumbColor', DefaultThumbFillColor), GetValue$2(config, 'thumbAlpha', 1));
       _this.setTrackSize(GetValue$2(config, 'trackWidth', 0.9), GetValue$2(config, 'trackHeight', 0.5));
-      _this.setTrackConerRadius(GetValue$2(config, 'trackConerRadius', _this.trackHeight / 2));
+      _this.setTrackRadius(GetValue$2(config, 'trackRadius', _this.trackHeight * 0.5));
       var thumbHeight = GetValue$2(config, 'thumbHeight', undefined);
       var thumbWidth = GetValue$2(config, 'thumbWidth', thumbHeight);
       if (thumbWidth === undefined) {
         thumbWidth = _this.trackHeight * 0.9;
       }
       _this.setThumbSize(thumbWidth, thumbHeight);
-      _this.setThumbConerRadius(GetValue$2(config, 'thumbConerRadius', _this.thumbHeight / 2));
+      _this.setThumbRadius(GetValue$2(config, 'thumbRadius', _this.thumbHeight * 0.5));
       _this.setThumbPosition(GetValue$2(config, 'thumbLeft', 0.3), GetValue$2(config, 'thumbRight', undefined));
       _this.setRTL(GetValue$2(config, 'rtl', false));
       _this.setToggleAnimationDuration(GetValue$2(config, 'animationDuration', 150));
