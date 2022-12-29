@@ -48835,6 +48835,7 @@
   var ListType = 'list';
   var ButtonsType = 'buttons';
   var BooleanType = 'boolean';
+  var ToggleSwitchType = 'toggleSwitch';
   var ColorType = 'color';
 
   var GetInputType = function GetInputType(value, config) {
@@ -48855,18 +48856,6 @@
         return StringType;
       case 'boolean':
         return BooleanType;
-
-      // case 'object':
-      //     if (HasProperties(value, 'r', 'g', 'b')) {
-      //         return ColorType;
-      //     }
-      //     if (HasProperties(value, 'x', 'y', 'z')) {
-      //         return Pointer3dType;
-      //     }
-      //     if (HasProperties(value, 'x', 'y')) {
-      //         return Pointer2dType;
-      //     }
-
       default:
         return StringType;
     }
@@ -49561,6 +49550,76 @@
     return gameObject;
   };
 
+  var CreateToggleSwitch = function CreateToggleSwitch(scene, config) {
+    var gameObject = new ToggleSwitch(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var ToggleSwitchInput = /*#__PURE__*/function (_InputFiledBase) {
+    _inherits(ToggleSwitchInput, _InputFiledBase);
+    var _super = _createSuper(ToggleSwitchInput);
+    function ToggleSwitchInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ToggleSwitchInput);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene);
+      _this.type = 'rexTweaker.ToggleSwitchInput';
+      var toggleSwitchConfig = config.toggleSwitch;
+      var toggleSwitch = CreateToggleSwitch(scene, toggleSwitchConfig);
+      _this.addSpace().add(toggleSwitch, {
+        proportion: 0,
+        expand: false
+      });
+      _this.addChildrenMap('toggleSwitch', toggleSwitch);
+      toggleSwitch.on('valuechange', function (value) {
+        this.setValue(value);
+      }, _assertThisInitialized(_this));
+      return _this;
+    }
+    _createClass(ToggleSwitchInput, [{
+      key: "preLayout",
+      value: function preLayout() {
+        var toggleSwitch = this.childrenMap.toggleSwitch;
+        toggleSwitch.resize(1, 1);
+      }
+    }, {
+      key: "postResolveSize",
+      value: function postResolveSize(width, height) {
+        var toggleSwitch = this.childrenMap.toggleSwitch;
+        var innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(toggleSwitch, 'top') - this.getChildOuterPadding(toggleSwitch, 'bottom');
+        var innerWidth = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(toggleSwitch, 'left') - this.getChildOuterPadding(toggleSwitch, 'right');
+        toggleSwitch.resize(Math.min(innerHeight * 1.2, innerWidth), innerHeight);
+
+        // Recalculate proportionLength
+        this.proportionLength = undefined;
+        this._childrenWidth = undefined;
+        this.resolveWidth(width, true);
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        this.childrenMap.toggleSwitch.setValue(value);
+        _set(_getPrototypeOf(ToggleSwitchInput.prototype), "value", value, this, true);
+      }
+    }]);
+    return ToggleSwitchInput;
+  }(InputFiledBase);
+
+  var CreateToggleSwitchInput = function CreateToggleSwitchInput(scene, config, style) {
+    var gameObject = new ToggleSwitchInput(scene, style);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var CreateColorInput$1 = function CreateColorInput(scene, config) {
     config = config ? DeepClone(config) : {};
     var inputText = new ColorInput$1(scene, config);
@@ -49634,6 +49693,9 @@
         break;
       case BooleanType:
         callback = CreateCheckboxInput;
+        break;
+      case ToggleSwitchType:
+        callback = CreateToggleSwitchInput;
         break;
       case ColorType:
         callback = CreateColorInput;

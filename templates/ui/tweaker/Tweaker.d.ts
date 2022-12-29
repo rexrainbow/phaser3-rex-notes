@@ -4,6 +4,7 @@ import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
 import InputText from '../canvasinput/CanvasInput';
 import Checkbox from '../checkbox/Checkbox';
+import ToggleSwitch from '../toggleswitch/ToggleSwitch';
 import ColorInput from '../colorinput/colorinput/ColorInput';
 
 export default Tweaker;
@@ -106,6 +107,8 @@ declare namespace Tweaker {
                 button?: IButtonConfig,
 
                 checkbox?: Checkbox.IConfig,
+
+                toggleSwitch?: ToggleSwitch.IConfig,
 
                 colorInput?: ColorInput.IConfig,
 

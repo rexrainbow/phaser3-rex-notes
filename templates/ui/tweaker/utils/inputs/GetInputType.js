@@ -1,6 +1,6 @@
 import {
     StringType, NumberType, RangeType, ListType,
-    BooleanType, ColorType, Pointer2dType, Pointer3dType,
+    BooleanType,
 } from './InputTypes.js';
 
 
@@ -27,17 +27,6 @@ var GetInputType = function (value, config) {
 
         case 'boolean':
             return BooleanType;
-
-        // case 'object':
-        //     if (HasProperties(value, 'r', 'g', 'b')) {
-        //         return ColorType;
-        //     }
-        //     if (HasProperties(value, 'x', 'y', 'z')) {
-        //         return Pointer3dType;
-        //     }
-        //     if (HasProperties(value, 'x', 'y')) {
-        //         return Pointer2dType;
-        //     }
 
         default:
             return StringType;

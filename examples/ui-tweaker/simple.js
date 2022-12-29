@@ -89,6 +89,7 @@ class Demo extends Phaser.Scene {
                 gameObject, 'visible',
                 {
                     icon: 'settings',           // Title icon
+                    // view: 'toggleSwitch'        // Toggle-switch
                 }
             )
 
@@ -231,6 +232,11 @@ var CreatePanel = function (scene) {
                     color: COLOR_LIGHT,
                     boxStrokeColor: COLOR_DARK,
                     uncheckedColor: COLOR_DARK,
+                },
+
+                toggleSwitch: {
+                    color: COLOR_LIGHT,
+                    falseValueTrackColor: COLOR_PRIMARY,
                 },
 
                 colorInput: {
