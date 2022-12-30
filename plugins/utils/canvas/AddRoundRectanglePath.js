@@ -22,7 +22,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     if (IsArcCorner(radius)) {
         radiusX = radius.x * scaleRX;
         radiusY = radius.y * scaleRY;
-        if (radius.convex) {
+        if (IsConvexArc(radius)) {
             centerX = radiusX;
             centerY = radiusY;
             ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
@@ -40,7 +40,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     if (IsArcCorner(radius)) {
         radiusX = radius.x * scaleRX;
         radiusY = radius.y * scaleRY;
-        if (radius.convex) {
+        if (IsConvexArc(radius)) {
             centerX = width - radiusX;
             centerY = radiusY;
             ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
@@ -58,7 +58,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     if (IsArcCorner(radius)) {
         radiusX = radius.x * scaleRX;
         radiusY = radius.y * scaleRY;
-        if (radius.convex) {
+        if (IsConvexArc(radius)) {
             centerX = width - radiusX;
             centerY = height - radiusY;
             ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
@@ -76,7 +76,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     if (IsArcCorner(radius)) {
         radiusX = radius.x * scaleRX;
         radiusY = radius.y * scaleRY;
-        if (radius.convex) {
+        if (IsConvexArc(radius)) {
             centerX = radiusX;
             centerY = height - radiusY;
             ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
@@ -91,6 +91,11 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
 
     context.closePath();
     context.restore();
+}
+
+var IsConvexArc = function (radius) {
+    return (!radius.hasOwnProperty('convex')) ||  // radius does not have convex property
+        radius.convex;
 }
 
 var IsArcCorner = function (radius) {
