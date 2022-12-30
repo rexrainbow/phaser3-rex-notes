@@ -99,7 +99,7 @@ var IsConvexArc = function (radius) {
 }
 
 var IsArcCorner = function (radius) {
-    return ((radius.x !== 0) && (radius.y !== 0));
+    return ((radius.x > 0) && (radius.y > 0));
 }
 
 var ArcTo = function (
