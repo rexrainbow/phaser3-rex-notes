@@ -20,8 +20,8 @@ var DrawRoundRectangleBackground = function (
         strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth);   // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context,
         x, x,
         width, height,
