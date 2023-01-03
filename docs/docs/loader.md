@@ -39,6 +39,10 @@ scene.load.setPath(path)
     ```javascript
     scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {}, scope);
     ```
+- Add loading file event
+    ```javascript
+    scene.load.on('addfile', function(key, type, loader, file) {}, scope);
+    ```
 - Start loading
     ```javascript
     scene.load.once('start', function(){}, scope);
@@ -69,9 +73,14 @@ scene.load.setPath(path)
     scene.load.once('loaderror', function(fileObj){}, scope);
     ```
 - All loading completed
-    ```javascript
-    scene.load.once('complete', function(){}, scope);
-    ```
+    - Before releasing resources
+        ```javascript
+        scene.load.once('postprocess', function(loader){}, scope);
+        ```
+    - After releasing resources
+        ```javascript
+        scene.load.once('complete', function(loader){}, scope);
+        ```
 - Scene's `'preupdate'`, `'update'`, `'postupdate'`, `'render'` events will be triggered during preload stage.
 
 ### Status of loader

@@ -9279,6 +9279,9 @@
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;filecomplete-&#39;</span> <span class="o">+</span> <span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Add loading file event
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addfile&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">loader</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Start loading
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9304,9 +9307,15 @@
 <li>Loading a file object failed
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
-<li>All loading completed
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="nx">scope</span><span class="p">);</span>
+<li>All loading completed<ul>
+<li>Before releasing resources
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;postprocess&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">loader</span><span class="p">){},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+<li>After releasing resources
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">loader</span><span class="p">){},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Scene's <code>'preupdate'</code>, <code>'update'</code>, <code>'postupdate'</code>, <code>'render'</code> events will be triggered during preload stage.</li>
 </ul>
 <h3 id="status-of-loader">Status of loader<a class="headerlink" href="#status-of-loader" title="Permanent link">&para;</a></h3>
