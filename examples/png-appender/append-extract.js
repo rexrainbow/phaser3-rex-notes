@@ -1,6 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import PNGAppenderPlugin from '../../plugins/pngappender-plugin.js';
 import BinaryToTextureCache from '../../plugins/utils/loader/BinaryToTextureCache.js';
+import { saveAs } from 'file-saver';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -26,6 +27,9 @@ class Demo extends Phaser.Scene {
             this.add.image(400, 300, 'image').setScale(0.5);
         }, this)
         this.load.start();
+
+        var blob = new Blob([buf]);
+        saveAs(blob, 'test.png');
     }
 }
 

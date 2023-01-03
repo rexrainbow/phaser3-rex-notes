@@ -7,5 +7,5 @@ type DataType = BasicDataType | DictDataType | ListDateType;
 
 declare function AppendData(
     pngBuffer: Uint8Array,
-    data: DataType,
+    data: DataType | Uint8Array,
 ): Uint8Array;

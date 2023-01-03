@@ -8,7 +8,11 @@ var AppendData = function (pngBuffer, data) {
     // JSON -> string -> Uint8Array
     var dataUint8Array;
     if (data != null) {
-        dataUint8Array = (new TextEncoder()).encode(JSON.stringify(data));
+        if (IsUint8ArrayObject(data)) {
+            dataUint8Array = data;
+        } else {
+            dataUint8Array = (new TextEncoder()).encode(JSON.stringify(data));
+        }
     } else {
         dataUint8Array = [];
     }
@@ -19,6 +23,10 @@ var AppendData = function (pngBuffer, data) {
         .writeUint8Array(dataUint8Array)
 
     return writer.buf;
+}
+
+var IsUint8ArrayObject = function (obj) {
+    return (typeof (obj) === 'object') && (obj.constructor === Uint8Array);
 }
 
 export default AppendData;

@@ -6,5 +6,6 @@ type ListDateType = (BasicDataType | ListDateType | DictDataType)[];
 type DataType = BasicDataType | DictDataType | ListDateType;
 
 declare function ExtractData(
-    pngBuffer: Uint8Array
-): DataType
+    pngBuffer: Uint8Array,
+    isUint8Array?: boolean,
+): DataType | Uint8Array;
