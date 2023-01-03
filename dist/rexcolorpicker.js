@@ -11109,7 +11109,7 @@
     return RoundRectangle;
   }(Shape);
   var IsArcCorner = function IsArcCorner(radius) {
-    return radius.x !== 0 && radius.y !== 0;
+    return radius.x > 0 && radius.y > 0;
   };
   var ShapeTypeMap = {
     rectangle: 0,

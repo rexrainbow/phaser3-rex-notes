@@ -154,6 +154,7 @@ module.exports = {
     'buffdataplugin': './plugins/buffdata-plugin.js',
     'canvasdataplugin': './plugins/canvasdata-plugin.js',
     'uniqueitemlistplugin': './plugins/uniqueitemlist-plugin.js',
+    'pngappenderplugin': './plugins/pngappender-plugin.js',
 
     // storage
     'localforagefilesplugin': './plugins/localforage-files-plugin.js',

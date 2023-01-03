@@ -7,7 +7,7 @@ var ExtractData = function (pngBuffer) {
     var data = pngChunks.getData(MyDataChunkType);
 
     // Uint8Array -> string -> JSON
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
         return null;
     }
 

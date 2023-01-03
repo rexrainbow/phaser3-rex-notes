@@ -5475,7 +5475,7 @@
     if (IsArcCorner$1(radius)) {
       radiusX = radius.x * scaleRX;
       radiusY = radius.y * scaleRY;
-      if (radius.convex) {
+      if (IsConvexArc(radius)) {
         centerX = radiusX;
         centerY = radiusY;
         ArcTo$1(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
@@ -5493,7 +5493,7 @@
     if (IsArcCorner$1(radius)) {
       radiusX = radius.x * scaleRX;
       radiusY = radius.y * scaleRY;
-      if (radius.convex) {
+      if (IsConvexArc(radius)) {
         centerX = width - radiusX;
         centerY = radiusY;
         ArcTo$1(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
@@ -5511,7 +5511,7 @@
     if (IsArcCorner$1(radius)) {
       radiusX = radius.x * scaleRX;
       radiusY = radius.y * scaleRY;
-      if (radius.convex) {
+      if (IsConvexArc(radius)) {
         centerX = width - radiusX;
         centerY = height - radiusY;
         ArcTo$1(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
@@ -5529,7 +5529,7 @@
     if (IsArcCorner$1(radius)) {
       radiusX = radius.x * scaleRX;
       radiusY = radius.y * scaleRY;
-      if (radius.convex) {
+      if (IsConvexArc(radius)) {
         centerX = radiusX;
         centerY = height - radiusY;
         ArcTo$1(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
@@ -5544,8 +5544,13 @@
     context.closePath();
     context.restore();
   };
+  var IsConvexArc = function IsConvexArc(radius) {
+    return !radius.hasOwnProperty('convex') ||
+    // radius does not have convex property
+    radius.convex;
+  };
   var IsArcCorner$1 = function IsArcCorner(radius) {
-    return radius.x !== 0 && radius.y !== 0;
+    return radius.x > 0 && radius.y > 0;
   };
   var ArcTo$1 = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration) {
     // startAngle, endAngle: 0 ~ 360
@@ -5606,8 +5611,8 @@
       strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth); // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
@@ -8372,7 +8377,7 @@
     return RoundRectangle;
   }(Shape$1);
   var IsArcCorner = function IsArcCorner(radius) {
-    return radius.x !== 0 && radius.y !== 0;
+    return radius.x > 0 && radius.y > 0;
   };
   var ShapeTypeMap = {
     rectangle: 0,
