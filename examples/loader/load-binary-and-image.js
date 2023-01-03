@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import BinaryToTextureCache from '../../plugins/utils/loader/BinaryToTextureCache.js';
+import LoadBinaryAndImage from '../../plugins/utils/loader/LoadBinaryAndImage';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,10 +9,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.binary('card', 'assets/images/card2.png', Uint8Array);
-        this.load.once('filecomplete-binary-card', function () {
-            BinaryToTextureCache(this, 'card', 'card', 'png');
-        }, this);
+        LoadBinaryAndImage(this, 'card', 'assets/images/card2.png');
     }
 
     create() {
