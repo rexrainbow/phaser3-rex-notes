@@ -1,13 +1,11 @@
-import PNGChunks from './PNGChunks.js';
-import { MyDataChunkType } from './ChunkTypes.js';
+import GetChunkEndByteIndex from './GetChunkEndByteIndex.js';
 
 var ExtractData = function (pngBuffer) {
-    // Get myData chunk
-    var pngChunks = new PNGChunks(pngBuffer);
-    var data = pngChunks.getData(MyDataChunkType);
-
+    // Get End of last png chunk (IEND)        
+    var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');    
     // Uint8Array -> string -> JSON
-    if (!data || data.length === 0) {
+    var data = pngBuffer.slice(pngByteLength);
+    if (data.length === 0) {
         return null;
     }
 

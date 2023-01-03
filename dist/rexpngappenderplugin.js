@@ -173,75 +173,19 @@
     return Uint8ArrayReader;
   }();
 
-  var CHUNKSTART = 0;
-  var CHUNKEND = 1;
-  var CHUNKDATA = 2;
-  var PNGChunks = /*#__PURE__*/function () {
-    function PNGChunks(pngBuffer) {
-      _classCallCheck(this, PNGChunks);
-      this.reader = new Uint8ArrayReader(pngBuffer);
+  var GetChunkEndByteIndex = function GetChunkEndByteIndex(pngBuffer, chunkType) {
+    var reader = new Uint8ArrayReader(pngBuffer);
+    reader.seek(8); // Skip png header
+    while (!reader.outOfArray) {
+      var dataLength = reader.readUint32(true);
+      if (chunkType === reader.readString(4)) {
+        return reader.pointer + dataLength + 4;
+      } else {
+        reader.seekForward(dataLength + 4);
+      }
     }
-    _createClass(PNGChunks, [{
-      key: "pointer",
-      get: function get() {
-        return this.reader.pointer;
-      }
-    }, {
-      key: "seekToChunk",
-      value: function seekToChunk(targetChunkType, position) {
-        if (position === undefined) {
-          position = CHUNKSTART;
-        }
-        this.reader.seek(8); // Skip header
-        while (!this.reader.outOfArray) {
-          var dataLength = this.reader.readUint32(true);
-          var chunkType = this.reader.readString(4);
-          if (targetChunkType === chunkType) {
-            switch (position) {
-              case CHUNKSTART:
-                this.reader.seekBack(8);
-                return true;
-              case CHUNKEND:
-                this.reader.seekForward(dataLength + 4);
-                return true;
-              case CHUNKDATA:
-                return true;
-            }
-            break;
-          } else {
-            this.reader.seekForward(dataLength + 4);
-          }
-        }
-        return false;
-      }
-    }, {
-      key: "seekToChunkStart",
-      value: function seekToChunkStart(chunkType) {
-        return this.seekToChunk(chunkType, CHUNKSTART);
-      }
-    }, {
-      key: "seekToChunkEnd",
-      value: function seekToChunkEnd(chunkType) {
-        return this.seekToChunk(chunkType, CHUNKEND);
-      }
-    }, {
-      key: "getData",
-      value: function getData(chunkType) {
-        var hasChunk = this.seekToChunkStart(chunkType);
-        if (!hasChunk) {
-          return null;
-        }
-        var dataLength = this.reader.readUint32(true);
-        var startPointer = this.reader.pointer + 4;
-        var endPointer = startPointer + dataLength;
-        this.reader.seek(endPointer);
-        return this.reader.buf.slice(startPointer, endPointer);
-      }
-    }]);
-    return PNGChunks;
-  }();
-
-  var MyDataChunkType = 'PHSR';
+    return -1;
+  };
 
   var Uint32ToByteArray = function Uint32ToByteArray(value, bigEndian, output) {
     if (bigEndian === undefined) {
@@ -315,10 +259,8 @@
   }();
 
   var AppendData = function AppendData(pngBuffer, data) {
-    // Get End of last png chunk (IEND)
-    var pngChunks = new PNGChunks(pngBuffer);
-    pngChunks.seekToChunkEnd('IEND');
-    var pngByteLength = pngChunks.pointer;
+    // Get End of last png chunk (IEND)        
+    var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
 
     // JSON -> string -> Uint8Array
     var dataUint8Array;
@@ -328,20 +270,17 @@
       dataUint8Array = [];
     }
 
-    // Merge png chunks with myData chunk
-    var outputArrayLength = pngByteLength + (4 + 4 + dataUint8Array.length + 4);
-    var writer = new Uint8ArrayWriter(outputArrayLength);
-    writer.writeUint8Array(pngBuffer.slice(0, pngByteLength)).writeUint32(dataUint8Array.length, true).writeString(MyDataChunkType).writeUint8Array(dataUint8Array).writeUint32(0);
+    // Append dataUint8Array after png-chunks  
+    var writer = new Uint8ArrayWriter(pngByteLength + dataUint8Array.length).writeUint8Array(pngBuffer.slice(0, pngByteLength)).writeUint8Array(dataUint8Array);
     return writer.buf;
   };
 
   var ExtractData = function ExtractData(pngBuffer) {
-    // Get myData chunk
-    var pngChunks = new PNGChunks(pngBuffer);
-    var data = pngChunks.getData(MyDataChunkType);
-
+    // Get End of last png chunk (IEND)        
+    var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
     // Uint8Array -> string -> JSON
-    if (!data || data.length === 0) {
+    var data = pngBuffer.slice(pngByteLength);
+    if (data.length === 0) {
       return null;
     }
     data = new TextDecoder().decode(data);
