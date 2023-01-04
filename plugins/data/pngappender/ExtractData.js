@@ -5,8 +5,12 @@ var ExtractData = function (pngBuffer) {
     var reader = new Uint8ArrayReader(pngBuffer);
 
     // Get End of last png chunk (IEND)        
-    var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
+    var pngByteLength = GetChunkEndByteIndex(reader, 'IEND');
     reader.seek(pngByteLength);
+    if (reader.outOfArray) {
+        return null;
+    }
+
     // Get header0, header1
     var header0 = reader.readUint32();
     var dataType = header0 & 0xf;

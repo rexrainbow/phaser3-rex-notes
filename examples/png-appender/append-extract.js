@@ -15,12 +15,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var src = { a: 10, b: 20, message: 'hello' };
+        var pngBuffer = this.cache.binary.get('image');
+        var result = this.plugins.get('rexPNGAppender')
+            .extract(pngBuffer);
+        console.log(result); // null, no custom data found
+
+        var customData = { a: 10, b: 20, message: 'hello' };
         var buf = this.plugins.get('rexPNGAppender')
-            .append(this.cache.binary.get('image'), src);
+            .append(pngBuffer, customData);
         var result = this.plugins.get('rexPNGAppender')
             .extract(buf);
-        console.log(result);
+        console.log(result); // equal to customData
 
         BinaryToTextureCache(this, buf, 'image', 'png');
         this.load.once('filecomplete-image-image', function () {
@@ -28,8 +33,8 @@ class Demo extends Phaser.Scene {
         }, this)
         this.load.start();
 
-        var blob = new Blob([buf]);
-        saveAs(blob, 'test.png');
+        // var blob = new Blob([buf]);
+        // saveAs(blob, 'test.png');
     }
 }
 

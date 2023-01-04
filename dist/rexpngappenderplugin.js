@@ -188,7 +188,12 @@
   }();
 
   var GetChunkEndByteIndex = function GetChunkEndByteIndex(pngBuffer, chunkType) {
-    var reader = new Uint8ArrayReader(pngBuffer);
+    var reader;
+    if (pngBuffer instanceof Uint8ArrayReader) {
+      reader = pngBuffer;
+    } else {
+      reader = new Uint8ArrayReader(pngBuffer);
+    }
     reader.seek(8); // Skip png header
     while (!reader.outOfArray) {
       var dataLength = reader.readUint32(true);
@@ -310,8 +315,12 @@
     var reader = new Uint8ArrayReader(pngBuffer);
 
     // Get End of last png chunk (IEND)        
-    var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
+    var pngByteLength = GetChunkEndByteIndex(reader, 'IEND');
     reader.seek(pngByteLength);
+    if (reader.outOfArray) {
+      return null;
+    }
+
     // Get header0, header1
     var header0 = reader.readUint32();
     var dataType = header0 & 0xf;
