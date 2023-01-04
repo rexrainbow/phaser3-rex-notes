@@ -320,6 +320,7 @@ nav:
     - Configuration data: config-data.md
     - Canvas image data: canvas-data.md
     - Tiled map data: tiledmapdata.md
+    - PNG Appender: png-appender.md
 - Math:
     - Max, min:
         - Interpolation: interpolation.md
