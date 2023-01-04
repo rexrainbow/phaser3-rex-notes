@@ -48,7 +48,12 @@ class Uint8ArrayReader {
     }
 
     readUint8Array(size) {
-        var data = this.buf.slice(this.pointer, this.pointer + size);
+        var data;
+        if (size !== undefined) {
+            data = this.buf.slice(this.pointer, this.pointer + size);
+        } else {
+            data = this.buf.slice(this.pointer);
+        }
         this.pointer += data.length;
         return data;
     }

@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpngappenderplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -160,7 +169,12 @@
     }, {
       key: "readUint8Array",
       value: function readUint8Array(size) {
-        var data = this.buf.slice(this.pointer, this.pointer + size);
+        var data;
+        if (size !== undefined) {
+          data = this.buf.slice(this.pointer, this.pointer + size);
+        } else {
+          data = this.buf.slice(this.pointer);
+        }
         this.pointer += data.length;
         return data;
       }
@@ -261,30 +275,58 @@
   var AppendData = function AppendData(pngBuffer, data) {
     // Get End of last png chunk (IEND)        
     var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
-
-    // JSON -> string -> Uint8Array
+    var isUint8Array = (typeof obj === "undefined" ? "undefined" : _typeof(obj)) === 'object' && obj.constructor === Uint8Array;
+    var dataType = isUint8Array ? 1 : 0;
+    var header0 = dataType;
+    var header1 = 0;
     var dataUint8Array;
-    if (data != null) {
-      dataUint8Array = new TextEncoder().encode(JSON.stringify(data));
+    if (isUint8Array) {
+      dataUint8Array = data;
     } else {
-      dataUint8Array = [];
+      if (data != null) {
+        // JSON -> string -> Uint8Array
+        data = JSON.stringify(data);
+        dataUint8Array = new TextEncoder().encode(data);
+      } else {
+        dataUint8Array = new Uint8Array(0);
+      }
     }
 
-    // Append dataUint8Array after png-chunks  
-    var writer = new Uint8ArrayWriter(pngByteLength + dataUint8Array.length).writeUint8Array(pngBuffer.slice(0, pngByteLength)).writeUint8Array(dataUint8Array);
+    // Append dataUint8Array after png-chunks
+    var outputLength = pngByteLength + 8 + dataUint8Array.length;
+    var writer = new Uint8ArrayWriter(outputLength)
+    // png-buffer
+    .writeUint8Array(pngBuffer.slice(0, pngByteLength))
+    // header0: dataType
+    .writeUint32(header0)
+    // header1: 0x0
+    .writeUint32(header1)
+    // myData
+    .writeUint8Array(dataUint8Array);
     return writer.buf;
   };
 
   var ExtractData = function ExtractData(pngBuffer) {
+    var reader = new Uint8ArrayReader(pngBuffer);
+
     // Get End of last png chunk (IEND)        
     var pngByteLength = GetChunkEndByteIndex(pngBuffer, 'IEND');
-    // Uint8Array -> string -> JSON
-    var data = pngBuffer.slice(pngByteLength);
-    if (data.length === 0) {
-      return null;
+    reader.seek(pngByteLength);
+    // Get header0, header1
+    var header0 = reader.readUint32();
+    var dataType = header0 & 0xf;
+    reader.readUint32();
+    // Get myData
+    var data = reader.readUint8Array();
+    if (dataType === 0) {
+      if (data.length === 0) {
+        return null;
+      } else {
+        // Uint8Array -> string -> JSON
+        data = new TextDecoder().decode(data);
+        data = JSON.parse(data);
+      }
     }
-    data = new TextDecoder().decode(data);
-    data = JSON.parse(data);
     return data;
   };
 
