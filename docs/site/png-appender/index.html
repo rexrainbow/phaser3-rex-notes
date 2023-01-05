@@ -8895,7 +8895,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexpngappenderplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpngappenderplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Append, or extract data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexpngappenderplugin&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">resultBuffer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexpngappenderplugin&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexpngappenderplugin&#39;</span><span class="p">).</span><span class="nx">extract</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -8922,7 +8922,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Append, or extract data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPNGAppender&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">resultBuffer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPNGAppender&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPNGAppender&#39;</span><span class="p">).</span><span class="nx">extract</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -8935,7 +8935,7 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">PNGAppender</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/pngappender.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Append, or extract data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">PNGAppender</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">resultBuffer</span> <span class="o">=</span> <span class="nx">PNGAppender</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">PNGAppender</span><span class="p">.</span><span class="nx">extract</span><span class="p">(</span><span class="nx">pngBuffer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -8962,6 +8962,10 @@
 </code></pre></div>
 <ul>
 <li><code>pngBuffer</code> : PNG data loaded from <a href="../loader/#binary">binary loader</a>.</li>
+<li><code>data</code> : User data.<ul>
+<li><code>null</code> : This <code>pngBuffer</code> does not have user data.</li>
+</ul>
+</li>
 </ul>
 
               

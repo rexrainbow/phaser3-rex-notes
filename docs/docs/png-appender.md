@@ -23,7 +23,7 @@ Append user data below tail of PNG data, or extract this user data from PNG data
     ```
 - Append, or extract data
     ```javascript
-    var buffer = scene.plugins.get('rexpngappenderplugin').append(pngBuffer, data);
+    var resultBuffer = scene.plugins.get('rexpngappenderplugin').append(pngBuffer, data);
     var data = scene.plugins.get('rexpngappenderplugin').extract(pngBuffer);
     ```
 
@@ -53,7 +53,7 @@ Append user data below tail of PNG data, or extract this user data from PNG data
     ```
 - Append, or extract data
     ```javascript
-    var buffer = scene.plugins.get('rexPNGAppender').append(pngBuffer, data);
+    var resultBuffer = scene.plugins.get('rexPNGAppender').append(pngBuffer, data);
     var data = scene.plugins.get('rexPNGAppender').extract(pngBuffer);
     ```
 
@@ -69,7 +69,7 @@ Append user data below tail of PNG data, or extract this user data from PNG data
     ```
 - Append, or extract data
     ```javascript
-    var buffer = PNGAppender.append(pngBuffer, data);
+    var resultBuffer = PNGAppender.append(pngBuffer, data);
     var data = PNGAppender.extract(pngBuffer);
     ```
 
@@ -96,3 +96,5 @@ var data = scene.plugins.get('rexPNGAppender').extract(pngBuffer);
 ```
 
 - `pngBuffer` : PNG data loaded from [binary loader](loader.md#binary).
+- `data` : User data.
+    - `null` : This `pngBuffer` does not have user data.
