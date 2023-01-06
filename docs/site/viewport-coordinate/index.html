@@ -8912,10 +8912,12 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Attach <code>vpx</code>, <code>vpy</code> properties.
+<li>Attach <code>vpx</code>, <code>vpy</code>, <code>vpxOffset</code>, <code>vpyOffset</code> properties.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexViewportCoordinate&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">viewport</span><span class="p">,</span> <span class="nx">vpx</span><span class="p">,</span> <span class="nx">vpy</span><span class="p">);</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpx</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpxOffset</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpyOffset</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-method">Import method<a class="headerlink" href="#import-method" title="Permanent link">&para;</a></h4>
@@ -8926,10 +8928,12 @@
 <li>Import method
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">AddViewportCoordinateProperties</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/viewportcoordinate.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Attach <code>vpx</code>, <code>vpy</code> properties.
+<li>Attach <code>vpx</code>, <code>vpy</code>, <code>vpxOffset</code>, <code>vpyOffset</code> properties.
     <div class="highlight"><pre><span></span><code><span class="nx">AddViewportCoordinateProperties</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">viewport</span><span class="p">,</span> <span class="nx">vpx</span><span class="p">,</span> <span class="nx">vpy</span><span class="p">);</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpx</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpxOffset</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">vpyOffset</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="attach-properties">Attach properties<a class="headerlink" href="#attach-properties" title="Permanent link">&para;</a></h3>
@@ -8937,12 +8941,13 @@
 </code></pre></div>
 <ul>
 <li><code>vpx</code>, <code>vpy</code> : Proportion of viewport.</li>
+<li><code>vpxOffset</code>, <code>vpyOffset</code> : Offset of position.</li>
 <li><code>viewport</code> : Viewport in <a href="../geom-rectangle/">rectangle</a></li>
 <li><code>transformCallback</code> : Transform callback.<ul>
 <li><code>undefined</code> : Use default transform callback.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">viewport</span><span class="p">,</span> <span class="nx">vpx</span><span class="p">,</span> <span class="nx">vpy</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">viewport</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">viewport</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">vpx</span><span class="p">);</span>
-    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">viewport</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">viewport</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">vpy</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">vpx</span><span class="p">,</span> <span class="nx">vpy</span><span class="p">,</span> <span class="nx">vpxOffset</span><span class="p">,</span> <span class="nx">vpyOffset</span><span class="p">,</span> <span class="nx">viewport</span><span class="p">,</span> <span class="nx">out</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">viewport</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">viewport</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">vpx</span><span class="p">)</span> <span class="o">+</span> <span class="nx">vpxOffset</span><span class="p">;</span>
+    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">viewport</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">viewport</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">vpy</span><span class="p">)</span> <span class="o">+</span> <span class="nx">vpyOffset</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -8950,7 +8955,7 @@
 </ul>
 <p>Changing </p>
 <ul>
-<li><code>gameObject.vpx</code>, or <code>gameObject.vpy</code>, or</li>
+<li><code>gameObject.vpx</code>, <code>gameObject.vpy</code>, <code>gameObject.vpxOffset</code>, <code>gameObject.vpyOffset</code></li>
 <li><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code> of viewport (a <a href="../geom-rectangle/">rectangle</a>)</li>
 </ul>
 <p>Will change position (<code>x</code> , <code>y</code>) of game object.</p>

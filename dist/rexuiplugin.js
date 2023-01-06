@@ -17980,28 +17980,46 @@
     return viewport;
   };
 
-  var VPXYToXY = function VPXYToXY(vpx, vpy, viewport, out) {
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = GlobXY;
     }
-    out.x = viewport.x + viewport.width * vpx;
-    out.y = viewport.y + viewport.height * vpy;
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
     return out;
   };
   var GlobXY = {};
 
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
       return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
     }
     if (vpx === undefined) {
       vpx = 0.5;
     }
     if (vpy === undefined) {
       vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
     }
     if (transformCallback === undefined) {
       transformCallback = VPXYToXY;
@@ -18012,7 +18030,7 @@
 
     // Set position of game object when view-port changed.
     var Transform = function Transform() {
-      transformCallback(vpx, vpy, viewport, gameObject);
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
     };
     events.on('update', Transform);
     gameObject.once('destroy', function () {
@@ -18037,6 +18055,28 @@
       set: function set(value) {
         if (vpy !== value) {
           vpy = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
           Transform();
         }
       }
