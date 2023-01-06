@@ -30669,11 +30669,6 @@
         return this.height / 2;
       }
     }, {
-      key: "radius",
-      get: function get() {
-        return Math.min(this.centerX, this.centerY);
-      }
-    }, {
       key: "worldToLocalXY",
       value: function worldToLocalXY(worldX, worldY, camera, out) {
         if (typeof camera === 'boolean') {
