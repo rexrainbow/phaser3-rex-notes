@@ -4,10 +4,10 @@ var GetOuterViewport = function (scaleOuter, out) {
         out = new Rectangle();
     }
 
-    var scale = scaleOuter.zoom;
+    var scale = 1 / scaleOuter.zoom;
     var displaySize = scaleOuter.scene.sys.scale.displaySize;
-    out.width = displaySize.width / scale;
-    out.height = displaySize.height / scale;
+    out.width = displaySize.width * scale;
+    out.height = displaySize.height * scale;
 
     var gameConfig = scaleOuter.scene.game.config;
     out.centerX = gameConfig.width / 2;

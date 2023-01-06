@@ -1290,7 +1290,8 @@
         syncPosition: false,
         syncRotation: false,
         syncScale: false,
-        syncAlpha: false
+        syncAlpha: false,
+        syncScrollFactor: false
       });
     } else {
       scene.children.moveBelow(cover, gameObject);

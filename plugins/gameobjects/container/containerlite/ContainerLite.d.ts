@@ -18,8 +18,12 @@ declare namespace ContainerLite {
     }
 
     interface IAddChildConfig {
-        syncPosition?: boolean
-        syncRotation?: boolean
+        syncPosition?: boolean,
+        syncRotation?: boolean,
+        syncScale?: boolean,
+        syncAlpha?: boolean,
+        syncScrollFactor?: boolean,
+
     }
 }
 

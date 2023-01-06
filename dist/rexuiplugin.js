@@ -11533,6 +11533,7 @@
     state.syncRotation = GetValue$2v(config, 'syncRotation', true);
     state.syncScale = GetValue$2v(config, 'syncScale', true);
     state.syncAlpha = GetValue$2v(config, 'syncAlpha', true);
+    state.syncScrollFactor = GetValue$2v(config, 'syncScrollFactor', true);
   };
   var AddChild$2 = {
     // Can override this method
@@ -12005,9 +12006,11 @@
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var localState = GetLocalState(child);
-      var parent = localState.parent;
-      child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      var state = GetLocalState(child);
+      var parent = state.parent;
+      if (state.syncScrollFactor) {
+        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      }
       return this;
     },
     syncScrollFactor: function syncScrollFactor() {
@@ -56327,7 +56330,8 @@
         syncPosition: false,
         syncRotation: false,
         syncScale: false,
-        syncAlpha: false
+        syncAlpha: false,
+        syncScrollFactor: false
       });
     } else {
       scene.children.moveBelow(cover, gameObject);

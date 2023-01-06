@@ -1221,6 +1221,7 @@
     state.syncRotation = GetValue$d(config, 'syncRotation', true);
     state.syncScale = GetValue$d(config, 'syncScale', true);
     state.syncAlpha = GetValue$d(config, 'syncAlpha', true);
+    state.syncScrollFactor = GetValue$d(config, 'syncScrollFactor', true);
   };
   var AddChild = {
     // Can override this method
@@ -1693,9 +1694,11 @@
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var localState = GetLocalState(child);
-      var parent = localState.parent;
-      child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      var state = GetLocalState(child);
+      var parent = state.parent;
+      if (state.syncScrollFactor) {
+        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      }
       return this;
     },
     syncScrollFactor: function syncScrollFactor() {
