@@ -5,7 +5,7 @@ export default FixWidthSizer;
 
 declare namespace FixWidthSizer {
     type AlignTypes = 0 | 1 | 2 | 3 | 4 | 5 |
-        'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-cneter';
+        'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-center';
 
     type PaddingTypes = number |
     {
