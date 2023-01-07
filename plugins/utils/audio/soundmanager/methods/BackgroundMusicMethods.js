@@ -1,5 +1,5 @@
-import FadeIn from '../../../audio/fade/FadeIn.js';
-import FadeOut from '../../../audio/fade/FadeOut.js';
+import FadeIn from '../../../../audio/fade/FadeIn.js';
+import FadeOut from '../../../../audio/fade/FadeOut.js';
 
 export default {
     setBackgroundMusicLoopValue(value) {
