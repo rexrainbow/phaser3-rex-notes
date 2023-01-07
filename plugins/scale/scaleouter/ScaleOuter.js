@@ -2,7 +2,10 @@ import CheckScaleMode from './CheckScaleMode.js';
 import GetScaleOutCameraParameters from './GetScaleOuterCameraParameters.js';
 import GetInnerViewport from './GetInnerViewport.js';
 import GetOuterViewport from './GetOuterViewport.js';
+import ShrinkByRatio from '../../utils/geom/rectangle/ShrinkByRatio.js';
 
+const Rectangle = Phaser.Geom.Rectangle;
+const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom
 const SetStruct = Phaser.Structs.Set;
 
 class ScaleOuter {
@@ -14,8 +17,10 @@ class ScaleOuter {
         this.scrollX = 0;
         this.scrollY = 0;
         this.zoom = 1;
+
         this._innerViewport = undefined;
         this._outerViewport = undefined;
+        this._shrinkOuterViewport = undefined;
 
         this.boot();
     }
@@ -41,6 +46,7 @@ class ScaleOuter {
         this.scene = undefined;
         this._innerViewport = undefined;
         this._outerViewport = undefined;
+        this._shrinkOuterViewport = undefined;
     }
 
     start() {
@@ -73,6 +79,29 @@ class ScaleOuter {
 
     get outerViewport() {
         return this._outerViewport;
+    }
+
+    getShrinkOuterViewport(maxRatio, minRatio, out) {
+        if (typeof (minRatio) !== 'number') {
+            out = minRatio;
+            minRatio = undefined;
+        }
+
+        if (out === undefined) {
+            out = new Rectangle();
+        } else if (out === true) {
+            if (this._shrinkOuterViewport === undefined) {
+                this._shrinkOuterViewport = new Rectangle();
+            }
+            out = this._shrinkOuterViewport;
+        }
+
+        CopyRectangle(this._outerViewport, out);
+        ShrinkByRatio(out, maxRatio, minRatio);
+        out.centerX = this._outerViewport.centerX;
+        out.centerY = this._outerViewport.centerY;
+
+        return out;
     }
 
     // Internal methods

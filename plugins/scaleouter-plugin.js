@@ -55,6 +55,10 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
     get outerViewport() {
         return this.scaleOuter.outerViewport;
     }
+
+    getShrinkOuterViewport(maxRatio, minRatio, out) {
+        return this.scaleOuter.getShrinkOuterViewport(maxRatio, minRatio, out);
+    }
 }
 
 export default ScaleOuterPlugin;

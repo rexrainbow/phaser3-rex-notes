@@ -1197,7 +1197,102 @@
     }
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var BackgroundMusic2Methods = {
+    setBackgroundMusic2LoopValue: function setBackgroundMusic2LoopValue(value) {
+      this.backgroundMusic2LoopValue = value;
+      return this;
+    },
+    setBackgroundMusic2FadeTime: function setBackgroundMusic2FadeTime(time) {
+      this.backgroundMusic2FadeTime = time;
+      return this;
+    },
+    getBackgroundMusic2: function getBackgroundMusic2() {
+      return this.backgroundMusic2;
+    },
+    // Internal method
+    setCurrentBackgroundMusic2: function setCurrentBackgroundMusic2(music) {
+      this.backgroundMusic2 = music;
+      if (music) {
+        music.setLoop(this.backgroundMusic2LoopValue);
+        music.once('complete', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2.destroy();
+            this.backgroundMusic2 = undefined;
+          }
+        }, this).once('destroy', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2 = undefined;
+          }
+        }, this);
+        if (!music.isPlaying) {
+          music.play();
+        }
+      }
+      return this;
+    },
+    playBackgroundMusic2: function playBackgroundMusic2(key) {
+      // Don't re-play the same background music
+      if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
+        return this;
+      }
+      this.stopBackgroundMusic2(); // Stop previous background music
+
+      this.setCurrentBackgroundMusic2(this.sound.add(key));
+      if (this.backgroundMusic2FadeTime > 0) {
+        this.fadeInBackgroundMusic2(this.backgroundMusic2FadeTime);
+      }
+      return this;
+    },
+    pauseBackgroundMusic2: function pauseBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.pause();
+      }
+      return this;
+    },
+    resumeBackgroundMusic2: function resumeBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.resume();
+      }
+      return this;
+    },
+    stopBackgroundMusic2: function stopBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        if (this.backgroundMusic2FadeTime > 0) {
+          this.fadeOutBackgroundMusic2(this.backgroundMusic2FadeTime, true);
+        } else {
+          this.backgroundMusic2.stop();
+          this.backgroundMusic2.destroy();
+          this.backgroundMusic2 = undefined;
+        }
+      }
+      return this;
+    },
+    fadeInBackgroundMusic2: function fadeInBackgroundMusic2(time) {
+      if (this.backgroundMusic2) {
+        FadeIn(this.backgroundMusic2, time, this.backgroundMusic2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutBackgroundMusic2: function fadeOutBackgroundMusic2(time, isStopped) {
+      if (this.backgroundMusic2) {
+        FadeOut(this.backgroundMusic2, time, isStopped);
+      }
+      return this;
+    },
+    crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
+      var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
+      this.backgroundMusic2FadeTime = 0;
+      this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
+      this.backgroundMusic2FadeTime = backgroundMusic2FadeTimeSave;
+      return this;
+    },
+    setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
+      this.backgroundMusic2Volume = volume;
+      return this;
+    }
+  };
+
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var SoundEffectsMethods = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
@@ -1216,13 +1311,13 @@
         if (!this.sound) {
           return;
         }
-        RemoveItem$1(this.soundEffects, soundEffect);
+        RemoveItem$2(this.soundEffects, soundEffect);
       }, this).once('destroy', function () {
         // SoundManager has been destroyed
         if (!this.sound) {
           return;
         }
-        RemoveItem$1(this.soundEffects, soundEffect);
+        RemoveItem$2(this.soundEffects, soundEffect);
       }, this).play();
       return this;
     },
@@ -1264,6 +1359,76 @@
     }
   };
 
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var SoundEffects2Methods = {
+    getSoundEffects2: function getSoundEffects2() {
+      return this.soundEffects2;
+    },
+    getLastSoundEffect2: function getLastSoundEffect2() {
+      return this.soundEffects2[this.soundEffects2.length - 1];
+    },
+    playSoundEffect2: function playSoundEffect2(key) {
+      var soundEffect = this.sound.add(key);
+      soundEffect.setVolume(this.soundEffects2Volume);
+      this.soundEffects2.push(soundEffect);
+      soundEffect.once('complete', function () {
+        soundEffect.destroy();
+
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$1(this.soundEffects2, soundEffect);
+      }, this).once('destroy', function () {
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$1(this.soundEffects2, soundEffect);
+      }, this).play();
+      return this;
+    },
+    fadeInSoundEffect2: function fadeInSoundEffect2(time) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeIn(soundEffect, time, this.soundEffects2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutSoundEffect2: function fadeOutSoundEffect2(time, isStopped) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeOut(soundEffect, time, isStopped);
+      }
+      return this;
+    },
+    fadeOutAllSoundEffects2: function fadeOutAllSoundEffects2(time, isStopped) {
+      for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+        FadeOut(this.soundEffects2[i], time, isStopped);
+      }
+      return this;
+    },
+    setSoundEffect2Volume: function setSoundEffect2Volume(volume, lastSoundEffect) {
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setVolume(volume);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Volume = volume;
+      }
+      return this;
+    }
+  };
+
+  var Methods$4 = {};
+  Object.assign(Methods$4, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(game, config) {
@@ -1273,30 +1438,50 @@
       // Background music will be (fade out)destroyed when play next one.
       this.backgroundMusic = undefined;
       this._backgroundMusicVolume = GetValue$9(config, 'bgm.volume', 1);
+      this.setBackgroundMusicLoopValue(GetValue$9(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$9(config, 'bgm.fade', 500));
+      this.backgroundMusic2 = undefined;
+      this._backgroundMusic2Volume = GetValue$9(config, 'bgm2.volume', 1);
+      this.setBackgroundMusic2LoopValue(GetValue$9(config, 'bgm2.loop', true));
+      this.setBackgroundMusic2FadeTime(GetValue$9(config, 'bgm2.fade', 500));
 
       // Sound effect will be destroyed when completed
       this.soundEffects = [];
       this._soundEffectsVolume = GetValue$9(config, 'soundEffect.volume', 1);
-      this.setBackgroundMusicLoopValue(GetValue$9(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$9(config, 'bgm.fade', 500));
+      this.soundEffects2 = [];
+      this._soundEffects2Volume = GetValue$9(config, 'soundEffect2.volume', 1);
       var initialBackgroundMusic = GetValue$9(config, 'bgm.initial', undefined);
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
+      }
+      var initialBackgroundMusic2 = GetValue$9(config, 'bgm2.initial', undefined);
+      if (initialBackgroundMusic2) {
+        this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
       }
     }
     _createClass(SoundManager, [{
       key: "destroy",
       value: function destroy() {
+        if (this.backgroundMusic) {
+          this.backgroundMusic.destroy();
+        }
+        this.backgroundMusic = undefined;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.destroy();
+        }
+        this.backgroundMusic2 = undefined;
         if (this.soundEffects.length) {
           for (var i = this.soundEffects.length - 1; i >= 0; i--) {
             this.soundEffects[i].destroy();
           }
         }
         this.soundEffects.length = 0;
-        if (this.backgroundMusic) {
-          this.backgroundMusic.destroy();
+        if (this.soundEffects2.length) {
+          for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+            this.soundEffects2[i].destroy();
+          }
         }
-        this.backgroundMusic = undefined;
+        this.soundEffects2.length = 0;
         this.sound = undefined;
         return this;
       }
@@ -1309,6 +1494,17 @@
         this._backgroundMusicVolume = value;
         if (this.backgroundMusic) {
           this.backgroundMusic.setVolume(value);
+        }
+      }
+    }, {
+      key: "backgroundMusic2Volume",
+      get: function get() {
+        return this._backgroundMusic2Volume;
+      },
+      set: function set(value) {
+        this._backgroundMusic2Volume = value;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.setVolume(value);
         }
       }
     }, {
@@ -1326,7 +1522,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, BackgroundMusicMethods, SoundEffectsMethods);
+  Object.assign(SoundManager.prototype, Methods$4);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -3396,12 +3592,32 @@
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
     });
+    var tagName = 'se2';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      if (this.skipSoundEffect) {
+        return;
+      }
+      tagPlayer.soundManager.playSoundEffect2(name); // this: tagPlayer
+      if (fadeInTime) {
+        tagPlayer.soundManager.fadeInSoundEffect2(fadeInTime);
+      }
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
   };
 
   var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(tagPlayer, parser, config) {
     var tagName = 'se.fadein';
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInSoundEffect(time);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      tagPlayer.soundManager.fadeInSoundEffect2(time);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -3417,12 +3633,27 @@
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
     });
+    var tagName = 'se2.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      tagPlayer.soundManager.fadeOutSoundEffect2(time, isStopped);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
   };
 
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
     var tagName = 'se.volume';
     parser.on("+".concat(tagName), function (volume) {
       tagPlayer.soundManager.setSoundEffectVolume(volume, true);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.volume';
+    parser.on("+".concat(tagName), function (volume) {
+      tagPlayer.soundManager.setSoundEffectVolume2(volume, true);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -3441,12 +3672,30 @@
       tagPlayer.soundManager.stopBackgroundMusic();
       parser.skipEvent();
     });
+    var tagName = 'bgm2';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      tagPlayer.soundManager.playBackgroundMusic2(name);
+      if (fadeInTime) {
+        tagPlayer.soundManager.fadeInBackgroundMusic2(fadeInTime);
+      }
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      tagPlayer.soundManager.stopBackgroundMusic2();
+      parser.skipEvent();
+    });
   };
 
   var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(tagPlayer, parser, config) {
     var tagName = 'bgm.fadein';
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInBackgroundMusic(time);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      tagPlayer.soundManager.fadeInBackgroundMusic2(time);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -3462,12 +3711,27 @@
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
     });
+    var tagName = 'bgm2.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      tagPlayer.soundManager.fadeOutBackgroundMusic2(time, isStopped);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
   };
 
   var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(tagPlayer, parser, config) {
     var tagName = 'bgm.cross';
     parser.on("+".concat(tagName), function (name, fadeTime) {
       tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.cross';
+    parser.on("+".concat(tagName), function (name, fadeTime) {
+      tagPlayer.soundManager.crossFadeBackgroundMusic2(name, fadeTime);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -3481,6 +3745,14 @@
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       tagPlayer.soundManager.resumeBackgroundMusic();
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.pause';
+    parser.on("+".concat(tagName), function () {
+      tagPlayer.soundManager.pauseBackgroundMusic2();
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      tagPlayer.soundManager.resumeBackgroundMusic2();
       parser.skipEvent();
     });
   };
