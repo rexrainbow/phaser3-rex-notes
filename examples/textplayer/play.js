@@ -25,9 +25,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[custom=10,20][/custom][bgm=theme0][color=#FFF8DC][b][space=30]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[custom=10,20][/custom][bgm2=theme0][color=#FFF8DC][b][space=30]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [se=explosion][wait=se][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
-[bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm=theme1]
+[bgm2.pause][click][/bgm2.pause][color=green]open[/color] source HTML5 game framework[r][bgm2=theme1]
 
 [color=#008B8B][wait=enter|click]that offers WebGL and Canvas [wait=custom]rendering across desktop and mobile web browsers[r]
 [color=#FF7F50][speed=0][align=left]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]
@@ -95,7 +95,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 sounds: {
-                    bgm: {
+                    bgm2: {
                         loop: true,
                         fade: 1000
                     }

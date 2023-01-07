@@ -1,13 +1,11 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParsePauseBackgroundMusicTag = function (textPlayer, parser, config) {
     var tagName = 'bgm.pause';
     parser
         .on(`+${tagName}`, function () {
             AppendCommandBase.call(textPlayer,
-                'bgm.pause',           // name
+                tagName,               // name
                 PauseBackgroundMusic,  // callback
                 undefined,             // params
                 textPlayer,            // scope
@@ -23,6 +21,28 @@ var OnParsePauseBackgroundMusicTag = function (textPlayer, parser, config) {
             );
             parser.skipEvent();
         })
+
+
+    var tagName = 'bgm2.pause';
+    parser
+        .on(`+${tagName}`, function () {
+            AppendCommandBase.call(textPlayer,
+                tagName,               // name
+                PauseBackgroundMusic2, // callback
+                undefined,             // params
+                textPlayer,            // scope
+            );
+            parser.skipEvent();
+        })
+        .on(`-${tagName}`, function () {
+            AppendCommandBase.call(textPlayer,
+                'bgm2.resume',          // name
+                ResumeBackgroundMusic2, // callback
+                undefined,              // params
+                textPlayer,             // scope
+            );
+            parser.skipEvent();
+        })
 }
 
 var PauseBackgroundMusic = function () {
@@ -33,6 +53,16 @@ var PauseBackgroundMusic = function () {
 var ResumeBackgroundMusic = function () {
     // this: textPlayer
     this.soundManager.resumeBackgroundMusic();
+}
+
+var PauseBackgroundMusic2 = function () {
+    // this: textPlayer
+    this.soundManager.pauseBackgroundMusic2();
+}
+
+var ResumeBackgroundMusic2 = function () {
+    // this: textPlayer
+    this.soundManager.resumeBackgroundMusic2();
 }
 
 export default OnParsePauseBackgroundMusicTag;

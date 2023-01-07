@@ -5,7 +5,7 @@ var OnParseFlashCameraTag = function (textPlayer, parser, config) {
     parser
         .on(`+${tagName}`, function (duration, red, green, blue) {
             AppendCommandBase.call(textPlayer,
-                'camera.flash',                // name
+                tagName,                       // name
                 PlayFlashEffect,               // callback
                 [duration, red, green, blue],  // params
                 textPlayer,                    // scope

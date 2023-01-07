@@ -5,7 +5,7 @@ var OnParseShakeCameraTag = function (textPlayer, parser, config) {
     parser
         .on(`+${tagName}`, function (duration, intensity) {
             AppendCommandBase.call(textPlayer,
-                'camera.shake',         // name
+                tagName,                // name
                 PlayShakeEffect,        // callback
                 [duration, intensity],  // params
                 textPlayer,             // scope

@@ -5,7 +5,7 @@ var OnParseZoomCameraTag = function (textPlayer, parser, config) {
     parser
         .on(`+${tagName}`, function (value) {
             AppendCommandBase.call(textPlayer,
-                'camera.zoom',   // name
+                tagName,         // name
                 Zoom,            // callback
                 value,           // params
                 textPlayer,      // scope
