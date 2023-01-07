@@ -1,4 +1,4 @@
-var ShrinkByRatio = function (rectangle, maxRatio, minRatio) {
+var ShrinkSizeByRatio = function (rectangle, maxRatio, minRatio) {
     var width = rectangle.width,
         height = rectangle.height,
         ratio = width / height;
@@ -11,6 +11,7 @@ var ShrinkByRatio = function (rectangle, maxRatio, minRatio) {
         rectangle.height = width / minRatio; // Shrink height
     }
 
+    return rectangle;
 }
 
-export default ShrinkByRatio;
+export default ShrinkSizeByRatio;

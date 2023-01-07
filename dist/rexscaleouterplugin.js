@@ -180,7 +180,7 @@
     return out;
   };
 
-  var ShrinkByRatio = function ShrinkByRatio(rectangle, maxRatio, minRatio) {
+  var ShrinkSizeByRatio = function ShrinkSizeByRatio(rectangle, maxRatio, minRatio) {
     var width = rectangle.width,
       height = rectangle.height,
       ratio = width / height;
@@ -191,6 +191,8 @@
     if (minRatio !== undefined && ratio < minRatio) {
       rectangle.height = width / minRatio; // Shrink height
     }
+
+    return rectangle;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
@@ -271,8 +273,8 @@
         return this._outerViewport;
       }
     }, {
-      key: "getShrinkOuterViewport",
-      value: function getShrinkOuterViewport(maxRatio, minRatio, out) {
+      key: "getShrinkedOuterViewport",
+      value: function getShrinkedOuterViewport(maxRatio, minRatio, out) {
         if (typeof minRatio !== 'number') {
           out = minRatio;
           minRatio = undefined;
@@ -286,7 +288,7 @@
           out = this._shrinkOuterViewport;
         }
         CopyRectangle(this._outerViewport, out);
-        ShrinkByRatio(out, maxRatio, minRatio);
+        ShrinkSizeByRatio(out, maxRatio, minRatio);
         out.centerX = this._outerViewport.centerX;
         out.centerY = this._outerViewport.centerY;
         return out;
@@ -391,9 +393,9 @@
         return this.scaleOuter.outerViewport;
       }
     }, {
-      key: "getShrinkOuterViewport",
-      value: function getShrinkOuterViewport(maxRatio, minRatio, out) {
-        return this.scaleOuter.getShrinkOuterViewport(maxRatio, minRatio, out);
+      key: "getShrinkedOuterViewport",
+      value: function getShrinkedOuterViewport(maxRatio, minRatio, out) {
+        return this.scaleOuter.getShrinkedOuterViewport(maxRatio, minRatio, out);
       }
     }]);
     return ScaleOuterPlugin;

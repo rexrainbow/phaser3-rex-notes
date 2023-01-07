@@ -2,7 +2,7 @@ import CheckScaleMode from './CheckScaleMode.js';
 import GetScaleOutCameraParameters from './GetScaleOuterCameraParameters.js';
 import GetInnerViewport from './GetInnerViewport.js';
 import GetOuterViewport from './GetOuterViewport.js';
-import ShrinkByRatio from '../../utils/geom/rectangle/ShrinkByRatio.js';
+import ShrinkSizeByRatio from './ShrinkSizeByRatio.js'
 
 const Rectangle = Phaser.Geom.Rectangle;
 const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom
@@ -81,7 +81,7 @@ class ScaleOuter {
         return this._outerViewport;
     }
 
-    getShrinkOuterViewport(maxRatio, minRatio, out) {
+    getShrinkedOuterViewport(maxRatio, minRatio, out) {
         if (typeof (minRatio) !== 'number') {
             out = minRatio;
             minRatio = undefined;
@@ -97,7 +97,7 @@ class ScaleOuter {
         }
 
         CopyRectangle(this._outerViewport, out);
-        ShrinkByRatio(out, maxRatio, minRatio);
+        ShrinkSizeByRatio(out, maxRatio, minRatio);
         out.centerX = this._outerViewport.centerX;
         out.centerY = this._outerViewport.centerY;
 

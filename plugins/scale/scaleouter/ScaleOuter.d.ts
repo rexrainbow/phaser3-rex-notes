@@ -21,7 +21,7 @@ declare class ScaleOuter {
     readonly innerViewport: Phaser.Geom.Rectangle;
     readonly outerViewport: Phaser.Geom.Rectangle;
 
-    getShrinkOuterViewport(
+    getShrinkedOuterViewport(
         maxRatio: number,
         minRatio?: number,
         out?: Phaser.Geom.Rectangle | true,

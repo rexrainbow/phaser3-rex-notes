@@ -17,7 +17,7 @@ class Game extends Phaser.Scene {
         this.scale.on('resize', function () {
             var innerViewport = this.rexScaleOuter.innerViewport;
             var outerViewport = this.rexScaleOuter.outerViewport;
-            var shrinkOuterViewport = this.rexScaleOuter.getShrinkOuterViewport(2);
+            var shrinkedOuterViewport = this.rexScaleOuter.getShrinkedOuterViewport(2);
             graphics
                 .clear()
                 .lineStyle(10, 0x00ff00)
@@ -25,7 +25,7 @@ class Game extends Phaser.Scene {
                 .lineStyle(10, 0xff0000)
                 .strokeRectShape(outerViewport)
                 .lineStyle(10, 0x0000ff)
-                .strokeRectShape(shrinkOuterViewport)
+                .strokeRectShape(shrinkedOuterViewport)
         }, this);
 
         // Manual scale
