@@ -45,10 +45,10 @@ scene.anims.create({
         {
             key: '',
             frame: '', // string, or number
-            duration: 0,
-            visible: true
+            duration: 0
         }
         ```
+        - `duration` : Additional time (in ms) that this frame should appear for during playback.
     - Every frame in the atlas
         ```javascript
         scene.anims.generateFrameNames(key);
