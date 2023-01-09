@@ -13,16 +13,18 @@ Animation and animations manager.
 ```javascript
 scene.anims.create({
     key: '',
+
     frames: [],
-    skipMissedFrames: true,
+
+    sortFrames: true,
     defaultTextureKey: null,
-    startFrame: 0,
+    skipMissedFrames: true,
+
 
     // time
     delay: 0,
-    frameRate: null,
     duration: null,
-    timeScale: 1,
+    frameRate: null,
 
     // repeat
     repeat: 0,              // set to (-1) to repeat forever
@@ -30,11 +32,13 @@ scene.anims.create({
     yoyo: false,
 
     // visible
+    showBeforeDelay: false,
     showOnStart: false,
     hideOnComplete: false
 });
 ```
 
+- `key` : Unique key of this animation data
 - `frames` : An array of `{key, frame}`
     - Properties
         ```javascript
@@ -76,6 +80,19 @@ scene.anims.create({
         });
         ```
         - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
+- `sortFrames` : Frame names numerically sorted. Default value is `true`.
+- `defaultTextureKey` : The key of the texture all frames of the animation will use. Can be overridden on a per frame basis.
+- `skipMissedFrames` : Skip frames if the time lags, or always advanced anyway? Default value is `true`.
+- `delay` : Delay before starting playback. Value given in milliseconds.
+- `duration` : How long the animation should play for in milliseconds. If not given its derived from `frameRate`.
+- `frameRate` : The frame rate of playback in frames per second. Default value is `24`.
+- `repeat` : Number of times to repeat the animation. Default value is `0`.
+    - `-1` : Infinity
+- `repeatDelay` : Delay before the animation repeats. Value given in milliseconds.
+- `yoyo` : Should the animation yoyo? (reverse back down to the start) before repeating? Default value is `false`.
+- `showBeforeDelay` :  If this animation has a delay, should it show the first frame immediately (`true`), or only after the delay (`false`)
+- `showOnStart` : Should `sprite.visible = true` when the animation starts to play? This happens _after_ any delay, if set. Default value is `false`.
+- `hideOnComplete` : Should sprite.visible = false when the animation finishes? Default value is `false`.
 
 ##### Add from Aseprite
 
