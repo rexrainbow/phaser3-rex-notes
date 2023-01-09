@@ -1,5 +1,4 @@
 import phaser from 'phaser/src/phaser.js';
-import LoadBinaryAndImage from '../../plugins/utils/loader/LoadBinaryAndImage';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,7 +8,15 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        LoadBinaryAndImage(this, 'card', 'assets/images/card2.png');
+        var key = 'card';
+        this.load.binary('card', 'assets/images/card2.png', Uint8Array);
+        this.load.once(`filecomplete-binary-${key}`, function () {
+            var buffer = this.cache.binary.get(key);
+
+            var blob = new Blob([buffer], { type: 'image/png' });
+            var url = window.URL.createObjectURL(blob);
+            this.load.image(key, url);
+        }, this);
     }
 
     create() {
