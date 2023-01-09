@@ -169,6 +169,7 @@ container.pin(child, {
     // syncRotation: true,
     // syncScale : true,
     // syncAlpha: true,
+    // syncScrollFactor: true,
 });
 ```
 
@@ -185,6 +186,10 @@ container.pin(child, {
 - `syncAlpha` : 
     - `true` : Sync alpha of child, default behavior.
     - `false` : Don't sync alpha of child. 
+- `syncScrollFactor` : 
+    - `true` : Sync scrollFactor of child, default behavior.
+    - `false` : Don't sync scrollFactor of child. 
+
 
 
 Or add(pin) children

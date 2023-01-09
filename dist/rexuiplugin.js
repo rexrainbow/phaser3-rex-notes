@@ -20780,8 +20780,14 @@
       } else if (name === 'se') {
         var music = textPlayer.soundManager.getLastSoundEffect();
         WaitMusic(textPlayer, music, callback, args, scope);
+      } else if (name === 'se2') {
+        var music = textPlayer.soundManager.getLastSoundEffect2();
+        WaitMusic(textPlayer, music, callback, args, scope);
       } else if (name === 'bgm') {
         var music = textPlayer.soundManager.getBackgroundMusic();
+        WaitMusic(textPlayer, music, callback, args, scope);
+      } else if (name === 'bgm2') {
+        var music = textPlayer.soundManager.getBackgroundMusic2();
         WaitMusic(textPlayer, music, callback, args, scope);
       } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
         WaitKeyDown(textPlayer, name, callback, args, scope);

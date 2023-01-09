@@ -31,8 +31,16 @@ var WaitMultiple = function (tagPlayer, names, callback, args, scope) {
             var music = tagPlayer.soundManager.getLastSoundEffect();
             WaitMusic(tagPlayer, music, callback, args, scope);
 
+        } else if (name === 'se2') {
+            var music = tagPlayer.soundManager.getLastSoundEffect2();
+            WaitMusic(tagPlayer, music, callback, args, scope);
+
         } else if (name === 'bgm') {
             var music = tagPlayer.soundManager.getBackgroundMusic();
+            WaitMusic(tagPlayer, music, callback, args, scope);
+
+        } else if (name === 'bgm2') {
+            var music = tagPlayer.soundManager.getBackgroundMusic2();
             WaitMusic(tagPlayer, music, callback, args, scope);
 
         } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {

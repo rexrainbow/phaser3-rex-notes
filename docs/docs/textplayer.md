@@ -199,6 +199,11 @@ var txt = scene.add.rexTextPlayer({
             initial: undefinied,
             loop: true,
             fade: 500
+        },
+        bgm2: {
+            initial: undefinied,
+            loop: true,
+            fade: 500
         }
     },
 
@@ -358,12 +363,12 @@ var txt = scene.add.rexTextPlayer({
     - `sprites.symbols` : Convert string value to number value when Set or Ease property of game object.    
         - A plain object contains string key and number value.
 - `sounds` : Configuration of sound effect, or background music.
-    - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
+    - `sounds.bgm.initial`, `sounds.bgm2.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
-    - `sounds.bgm.loop` :
+    - `sounds.bgm.loop`, `sounds.bgm2.loop` :
         - `true` : Loop background music, default behavior.
         - `false` : Play background music once.
-    - `sounds.bgm.fade` :
+    - `sounds.bgm.fade`, `sounds.bgm2.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
 - `nextPageInput` : Wait condition to type next page
@@ -813,26 +818,26 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 #### Sound effect
 
-- Play : `[se=key]`
+- Play : `[se=key]`, `[se2=key]`
     - Sound effect will be destroyed when complete
-- Play with fade in volume : `[se=key,1000]`
-- Fade in volume : `[se.fadein=1000]`
-- Fade out volume : `[se.fadeout=1000]`
-- Fade out volume then stop : `[se.fadeout=1000,stop]`
-- Set volume : `[se.volume=1]`
+- Play with fade in volume : `[se=key,1000]`, `[se2=key,1000]`
+- Fade in volume : `[se.fadein=1000]`, `[se2.fadein=1000]`
+- Fade out volume : `[se.fadeout=1000]`, `[se2.fadeout=1000]`
+- Fade out volume then stop : `[se.fadeout=1000,stop]`, `[se2.fadeout=1000,stop]`
+- Set volume : `[se.volume=1]`, `[se2.volume=1]`
 
 #### Background music
 
-- Play, stop : `[bgm=key]`, `[/bgm]`
+- Play, stop : `[bgm=key]`, `[/bgm]`, [bgm2=key]`, `[/bgm2]`
     - Previous background music will be stopped and destroyed.
-    - Cross fade to next background music if `sounds.bgm.fade` is not `0`
-- Play with fade in volume : `[bgm=key,1000]`
-- Pause, resume : `[bgm.pause]`, `[/bgm.pause]`
-- Fade in volume : `[bgm.fadein=1000]`
-- Fade out volume : `[bgm.fadeout=1000]`
-- Fade out volume then stop : `[bgm.fadeout=1000,stop]`
-- Cross fade to another background music : `[bgm.cross=key,10000]`
-- Set volume : `[bgm.volume=1]`
+    - Cross fade to next background music if `sounds.bgm.fade`/`sounds.bgm2.fade` is not `0`
+- Play with fade in volume : `[bgm=key,1000]`, `[bgm2=key,1000]`
+- Pause, resume : `[bgm.pause]`, `[/bgm.pause]`, `[bgm2.pause]`, `[/bgm2.pause]`
+- Fade in volume : `[bgm.fadein=1000]`, `[bgm2.fadein=1000]`
+- Fade out volume : `[bgm.fadeout=1000]`, `[bgm2.fadeout=1000]`
+- Fade out volume then stop : `[bgm.fadeout=1000,stop]`, `[bgm2.fadeout=1000,stop]`
+- Cross fade to another background music : `[bgm.cross=key,10000]`, `[bgm2.cross=key,10000]`
+- Set volume : `[bgm.volume=1]`, `[bgm2.volume=1]`
 
 #### Camera
 
@@ -870,14 +875,14 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
         txt.on('wait.time', function(time) {
         })
        ```
-- Wait sound effect : `[wait=se]`
+- Wait sound effect : `[wait=se]`, `[wait=se2]`
     - Also fire event `'wait.music'`
        ```javascript
         txt.on('wait.music', function(music) {
             // var key = music.key;
         })
        ```
-- Wait background music : `[wait=bgm]`
+- Wait background music : `[wait=bgm]`, `[wait=bgm2]`
     - Also fire event `'wait.music'`
        ```javascript
         txt.on('wait.music', function(music) {
