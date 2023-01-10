@@ -1,4 +1,4 @@
-import TickTask from '../../utils/componentbase/TickTask';
+import TickTask from '../../utils/componentbase/TickTask.js';
 import Timer from '../../utils/componentbase/timerticktask/Timer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

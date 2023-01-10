@@ -67,6 +67,7 @@ class MoveTo extends TickTask {
         this.targetX = x;
         this.targetY = y;
         super.start();
+        this.emit('start', this.parent, this);
         return this;
     }
 

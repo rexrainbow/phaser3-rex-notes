@@ -2900,6 +2900,19 @@
     Start moving
   </a>
   
+    <nav class="md-nav" aria-label="Start moving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#target-position" class="md-nav__link">
+    Target position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8896,6 +8909,19 @@
     Start moving
   </a>
   
+    <nav class="md-nav" aria-label="Start moving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#target-position" class="md-nav__link">
+    Target position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9069,6 +9095,10 @@
 </ul>
 </li>
 </ul>
+<h4 id="target-position">Target position<a class="headerlink" href="#target-position" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">targetX</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">targetX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">targetY</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">targetY</span><span class="p">;</span>
+</code></pre></div>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Enable (default)
@@ -9101,6 +9131,9 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>On start moving
+    <div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">moveTo</span><span class="p">){});</span>
+</code></pre></div></li>
 <li>On reached target
     <div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">moveTo</span><span class="p">){});</span>
 <span class="c1">// moveTo.once(&#39;complete&#39;, function(gameObject, moveTo){});</span>

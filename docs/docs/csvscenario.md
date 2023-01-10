@@ -121,9 +121,29 @@ scenario.start({
     // offset: 0
 })
 ```
+```javascript
+scenario.play({
+    // label: '',
+    // offset: 0
+})
+```
+
 
 - `label` : Go to the label and execute. '' label is starting from 1st instruction
 - `offset` : Offset time
+
+or
+
+```javascript
+scenario.playPromise({
+    // label: '',
+    // offset: 0
+})
+    .then(function(){
+        // On complete
+    })
+```
+
 
 ### Events
 

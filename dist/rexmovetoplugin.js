@@ -590,6 +590,7 @@
         this.targetX = x;
         this.targetY = y;
         _get(_getPrototypeOf(MoveTo.prototype), "start", this).call(this);
+        this.emit('start', this.parent, this);
         return this;
       }
     }, {

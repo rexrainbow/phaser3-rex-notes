@@ -3,6 +3,7 @@ import GetValue from '../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.min.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
+import { WaitComplete } from '../../../utils/promise/WaitEvent.js';
 
 
 class CSVScenario {
@@ -112,6 +113,17 @@ class CSVScenario {
         this.isRunning = true;
         this.runNextCmd();
         return true;
+    }
+
+    play(config) {
+        this.start(config);
+        return this;
+    }
+
+    playPromise(config) {
+        var promise = WaitComplete(this);
+        this.start(config);
+        return promise;
     }
 
     getIndex(label) {

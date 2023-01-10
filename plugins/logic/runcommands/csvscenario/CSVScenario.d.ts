@@ -52,13 +52,11 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
     ): this;
     scope: object;
 
-    append(
-        csvString: string
-    ): this;
+    append(csvString: string): this;
 
-    start(
-        config?: CSVScenario.IStartConfig
-    ): this;
+    start(config?: CSVScenario.IStartConfig): this;
+    play(config?: CSVScenario.IStartConfig): this;
+    playPromise(config?: CSVScenario.IStartConfig): Promise<any>;
 
     continue(eventName: string): this;
     continue(force: true): this;

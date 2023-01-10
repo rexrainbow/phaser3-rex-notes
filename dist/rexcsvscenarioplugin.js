@@ -862,6 +862,17 @@
     return CmdHandlers;
   }();
 
+  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
+    return new Promise(function (resolve, reject) {
+      eventEmitter.once(eventName, function () {
+        resolve();
+      });
+    });
+  };
+  var WaitComplete = function WaitComplete(eventEmitter) {
+    return WaitEvent(eventEmitter, 'complete');
+  };
+
   var CSVScenario = /*#__PURE__*/function () {
     function CSVScenario(scene, config) {
       _classCallCheck(this, CSVScenario);
@@ -972,6 +983,19 @@
         this.isRunning = true;
         this.runNextCmd();
         return true;
+      }
+    }, {
+      key: "play",
+      value: function play(config) {
+        this.start(config);
+        return this;
+      }
+    }, {
+      key: "playPromise",
+      value: function playPromise(config) {
+        var promise = WaitComplete(this);
+        this.start(config);
+        return promise;
       }
     }, {
       key: "getIndex",
