@@ -29,6 +29,10 @@ class BracketParser extends BracketParserBase {
         var regexResult = tagContent.match(this.reTagName);
         var tagName = regexResult[1];
 
+        if (this.translateTagNameCallback) {
+            tagName = this.translateTagNameCallback(tagName);
+        }
+
         this.reParamPair.lastIndex = regexResult.index + regexResult[0].length;
         var payload = {};
         while (true) {

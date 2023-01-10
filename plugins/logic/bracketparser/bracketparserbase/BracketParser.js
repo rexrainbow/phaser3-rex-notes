@@ -18,6 +18,9 @@ class BracketParser {
         var delimiters = GetValue(config, 'delimiters', '<>');
         this.setDelimiters(delimiters[0], delimiters[1]);
 
+        // Translate tagName callback
+        this.setTranslateTagNameCallback(GetValue(config, 'translateTagNameCallback'));
+
         this.isRunning = false;
         this.isPaused = false;
         this.skipEventFlag = false;
@@ -58,6 +61,11 @@ class BracketParser {
         var flag = (this.multipleLinesTagEnable) ? 'gs' : 'gi';
         this.reSplit = RegExp(`${delimiterLeft}(.+?)${delimiterRight}`, flag);
 
+        return this;
+    }
+
+    setTranslateTagNameCallback(callback) {
+        this.translateTagNameCallback = callback;
         return this;
     }
 

@@ -3,11 +3,13 @@ export default BracketParser;
 
 declare namespace BracketParser {
     type ValueConvertCallback = (s: string) => any;
+    type TranslateTagNameCallbackType = (s: string) => string;
 
     interface IConfig {
         multipleLinesTag?: boolean,
         delimiters?: string | [string, string],
         valueConvert?: boolean | ValueConvertCallback,
+        translateTagNameCallback?: TranslateTagNameCallbackType,
 
         eventEmitter?: EventEmitter | false,
 
@@ -38,4 +40,5 @@ declare class BracketParser extends EventEmitter {
     readonly isPaused: boolean;
 
     setDelimiters(delimiterLeft: string, delimiterRight?: string): this;
+    setTranslateTagNameCallback(callback?: BracketParser.TranslateTagNameCallbackType): this;
 }

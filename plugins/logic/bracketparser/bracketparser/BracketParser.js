@@ -61,12 +61,15 @@ class BracketParser extends BracketParserBase {
 
     onTag(tagContent) {
         var regexResult = tagContent.match(this.reTag);
-
         var tagName = regexResult[1];
-
+       
         var isEndTag = (tagName.charAt(0) === '/');
         if (isEndTag) {
             tagName = tagName.substring(1, tagName.length);
+        }
+
+        if (this.translateTagNameCallback) {
+            tagName = this.translateTagNameCallback(tagName);
         }
 
         this.skipEventFlag = false;

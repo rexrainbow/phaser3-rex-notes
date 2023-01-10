@@ -7521,6 +7521,9 @@
       this.setMultipleLinesTagEnable(GetValue$d(config, 'multipleLinesTag', false));
       var delimiters = GetValue$d(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
+
+      // Translate tagName callback
+      this.setTranslateTagNameCallback(GetValue$d(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -7563,6 +7566,12 @@
         delimiterRight = EscapeRegex(this.delimiterRight);
         var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
         this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), flag);
+        return this;
+      }
+    }, {
+      key: "setTranslateTagNameCallback",
+      value: function setTranslateTagNameCallback(callback) {
+        this.translateTagNameCallback = callback;
         return this;
       }
     }, {
@@ -7828,6 +7837,9 @@
         var isEndTag = tagName.charAt(0) === '/';
         if (isEndTag) {
           tagName = tagName.substring(1, tagName.length);
+        }
+        if (this.translateTagNameCallback) {
+          tagName = this.translateTagNameCallback(tagName);
         }
         this.skipEventFlag = false;
         if (!isEndTag) {

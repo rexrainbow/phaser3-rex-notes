@@ -129,7 +129,8 @@ var txt = scene.add.rexTextPlayer({
 
     parser: {
         delimiters: '[]',
-        comment: '//'
+        comment: '//',
+        // translateTagNameCallback: undefined,
     }
 
     wrap: {
@@ -336,6 +337,14 @@ var txt = scene.add.rexTextPlayer({
     - `parser.delimiters` : Delimiters of tag. Default value is `'[]'`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.
         - `null`, or `false` : No comment line.
+    - `parser.translateTagNameCallback` : Callback to translate tag-name
+        - `undefined` : Use original tag-name. Default behavior.
+        - A function, return new tag name.
+            ```javascript
+            function(tagName) {
+                return newTagName;
+            }
+            ```
 - `images` : Configuration of images.
 - `sprites` : Configuration of sprites.
     - `sprites.createCallback` : 

@@ -5,7 +5,8 @@ export default TagPlayer;
 declare namespace TagPlayer {
     interface IConfigParser {
         delimiters?: string,
-        comment?: string
+        comment?: string,
+        translateTagNameCallback?: (s: string) => string,
     }
 
     interface IConfigSounds {

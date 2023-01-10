@@ -9,7 +9,8 @@ declare namespace TextPlayer {
 
     interface IConfigParser {
         delimiters?: string,
-        comment?: string
+        comment?: string,
+        translateTagNameCallback?: (s: string) => string,
     }
 
     interface IConfigTyping {

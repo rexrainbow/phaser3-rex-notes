@@ -79,7 +79,8 @@ Text commands to control sprites, texts, sound effect or backgroun music.
 var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     parser: {
         delimiters: '[]',
-        comment: '//'
+        comment: '//',
+        // translateTagNameCallback: undefined,
     }
 
     sprites: {
@@ -123,6 +124,14 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
         - A array with 2 strings. e.x. `['[[',']]']`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.
         - `null`, or `false` : No comment line.
+    - `parser.translateTagNameCallback` : Callback to translate tag-name
+        - `undefined` : Use original tag-name. Default behavior.
+        - A function, return new tag name.
+            ```javascript
+            function(tagName) {
+                return newTagName;
+            }
+            ```
 - `sprites` : Configuration of sprites.
     - `sprites.createGameObject` : 
         - `'sprite'` : Create sprite game object. Default behavior.
