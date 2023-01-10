@@ -1,3 +1,5 @@
+import Managers from '../../runcommands/managers/Managers';
+
 export default TagPlayer;
 
 declare namespace TagPlayer {
@@ -11,30 +13,16 @@ declare namespace TagPlayer {
             initial?: string,
             loop?: boolean,
             fade?: number
-        }
-    }
-
-    type CreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        ...args: any[]
-    ) => Phaser.GameObjects.GameObject
-
-    interface IGameObjectConfig {
-        createGameObject: CreateGameObjectCallbackType,
-
-        fade?: number | {
-            mode?: 0 | 1 | 'tint' | 'alpha',
-            time?: number
         },
-
-        viewportCoordinate?: boolean | {
-            enable?: boolean,
-            viewport?: Phaser.Geom.Rectangle
+        bgm2?: {
+            initial?: string,
+            loop?: boolean,
+            fade?: number
         }
     }
 
     interface ISpriteGameObjectConfig {
-        createGameObject?: 'sprite' | 'image' | CreateGameObjectCallbackType,
+        createGameObject?: 'sprite' | 'image' | Managers.CreateGameObjectCallbackType,
 
         fade?: number | {
             mode?: 0 | 1 | 'tint' | 'alpha',
@@ -48,7 +36,7 @@ declare namespace TagPlayer {
     }
 
     interface ITextGameObjectConfig {
-        createGameObject?: CreateGameObjectCallbackType,
+        createGameObject?: Managers.CreateGameObjectCallbackType,
 
         fade?: number | {
             mode?: 0 | 1 | 'tint' | 'alpha',
@@ -68,7 +56,7 @@ declare namespace TagPlayer {
     interface IConfig {
         parser?: IConfigParser,
 
-        sounds?: IConfigSounds
+        sounds?: Managers.IConfigSounds,
 
         sprites?: ISpriteGameObjectConfig | false,
 
@@ -86,7 +74,9 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
         config?: TagPlayer.IConfig
     );
 
-    addGameObjectManager(config: TagPlayer.IGameObjectConfig): this;
+    destroy(fromScene?: boolean): this;
+
+    addGameObjectManager(config: Managers.IGameObjectConfig): this;
 
     play(commands: string): this;
     playPromise(commands: string): Promise<any>;

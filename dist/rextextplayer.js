@@ -2043,6 +2043,34 @@
     return this;
   };
 
+  var SetTimeScale = function SetTimeScale(value) {
+    this.timeline.timeScale = value;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].setTimeScale(value);
+    }
+    return this;
+  };
+
+  var GetTimeScale = function GetTimeScale() {
+    return this.timeline.timeScale;
+  };
+
+  var DestroyManagers = function DestroyManagers(fromScene) {
+    if (this.soundManager) {
+      this.soundManager.destroy();
+    }
+    this.soundManager = undefined;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].destroy(fromScene);
+      delete this.gameObjectManagers[name];
+    }
+    if (this.timeline) {
+      this.timeline.destroy();
+    }
+    this.timeline = undefined;
+    this.managersScene = undefined;
+  };
+
   var PropertyMethods$1 = {
     hasProperty: function hasProperty(property) {
       var gameObject = this.gameObject;
@@ -3063,46 +3091,6 @@
     return this;
   };
 
-  var GetGameObjectManager = function GetGameObjectManager(name) {
-    return this.gameObjectManagers[name];
-  };
-
-  var GetGameObjectManagerNames = function GetGameObjectManagerNames() {
-    var names = [];
-    for (var name in this.gameObjectManagers) {
-      names.push(name);
-    }
-    return names;
-  };
-
-  var SetTimeScale = function SetTimeScale(value) {
-    this.timeline.timeScale = value;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].setTimeScale(value);
-    }
-    return this;
-  };
-
-  var GetTimeScale = function GetTimeScale() {
-    return this.timeline.timeScale;
-  };
-
-  var DestroyManagers = function DestroyManagers(fromScene) {
-    if (this.soundManager) {
-      this.soundManager.destroy();
-    }
-    this.soundManager = undefined;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].destroy(fromScene);
-      delete this.gameObjectManagers[name];
-    }
-    if (this.timeline) {
-      this.timeline.destroy();
-    }
-    this.timeline = undefined;
-    this.managersScene = undefined;
-  };
-
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: AddGameObjectManager,
     getGameObjectManager: function getGameObjectManager(name) {
@@ -3212,9 +3200,6 @@
     }(BaseClass);
     var Methods = {
       initManagers: InitManagers,
-      addGameObjectManager: AddGameObjectManager,
-      getGameObjectManager: GetGameObjectManager,
-      getGameObjectManagerNames: GetGameObjectManagerNames,
       setTimeScale: SetTimeScale,
       getTimeScale: GetTimeScale,
       destroyManagers: DestroyManagers
