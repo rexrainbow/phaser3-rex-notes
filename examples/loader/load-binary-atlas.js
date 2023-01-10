@@ -1,5 +1,4 @@
 import phaser from 'phaser/src/phaser.js';
-import WaitEventsPlugin from '../../plugins/waitevents-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,26 +8,30 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        var atlasKey = 'knight'
+        var atlasKey = 'knight';
         var imageKey = `atlas-${atlasKey}-image`, imageType = 'png';
         var jsonKey = `atlas-${atlasKey}-json`;
-        var waitEvents = this.plugins.get('rexWaitEvents').add(function () {
+        var LoadAltas = function () {
             var imageBuffer = this.cache.binary.get(imageKey);
+            var jsonBuffer = this.cache.binary.get(jsonKey);
+            if (!imageBuffer || !jsonBuffer) {
+                return;
+            }
+
             var imageBlob = new Blob([imageBuffer], { type: `image/${imageType}` });
             var imageURL = window.URL.createObjectURL(imageBlob);
 
-            var jsonBuffer = this.cache.binary.get(jsonKey);
             var jsonBlob = new Blob([jsonBuffer], { type: 'application/json' });
             var jsonURL = window.URL.createObjectURL(jsonBlob);
 
             this.load.atlas(atlasKey, imageURL, jsonURL);
-        }, this);
+        };
 
         this.load.binary(imageKey, 'assets/animations/knight.png', Uint8Array);
-        waitEvents.waitEvent(this.load, `filecomplete-binary-${imageKey}`);
+        this.load.once(`filecomplete-binary-${imageKey}`, LoadAltas, this);
 
         this.load.binary(jsonKey, 'assets/animations/knight.json', Uint8Array);
-        waitEvents.waitEvent(this.load, `filecomplete-binary-${jsonKey}`);
+        this.load.once(`filecomplete-binary-${jsonKey}`, LoadAltas, this);
 
     }
 
@@ -57,16 +60,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        global: [
-            {
-                key: 'rexWaitEvents',
-                plugin: WaitEventsPlugin,
-                start: true
-            },
-        ]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
