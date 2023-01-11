@@ -74,8 +74,41 @@ Run script in csv format. Csv could be edited by excel or google document.
 ### Create instance
 
 ```javascript
-var scenario = scene.plugins.get('rexCSVScenario').add(scene);
+var scenario = scene.plugins.get('rexCSVScenario').add(scene, {
+    // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
+    // prefix: /^#([a-zA-Z]+)/
+    // argsConvert: true,
+    // argsConvertScope: undefined,
+    // delimiter: ','
+    // translateCommandNameCallback: undefined,
+});
 ```
+
+- `csvString` : Commands in csv-string.
+- `scope` : Running commands via methods in this scope object.
+    - Get scope : `var scope = scenario.scope`
+- `timeUnit`: time-unit of dt, for [delay-execution](csvscenario.md#delay-execution)
+    - `'ms'`, or `0` : dt in millisecond
+    - `'s'`, `'sec'`, or 1 : dt in second
+- `prefix`: regex of picking control instructions
+- `argsConvert`: A callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function)
+    - `true` : Use defaule value converter. Values will be converted to *number* (include hex number string like *'0xFF'*), *boolean*, *null*, or *string*.
+    - Function object:
+        ```javascript
+        function(s) {
+            return s;
+        }
+        ```
+- `argsConvertScope`: scope of argsConvert
+- `delimiter` : Delimiter of CSV string.
+- `translateCommandNameCallback` : Callback to translate custom command name
+    - `undefined` : Use original custom command name. Default behavior.
+    - A function, return new custom command name.
+        ```javascript
+        function(commandName) {
+            return newCommandName;
+        }
+        ```
 
 ### Load csv script
 
@@ -85,7 +118,8 @@ scenario.load(csvString, scope, {
     // prefix: /^#([a-zA-Z]+)/
     // argsConvert: true,
     // argsConvertScope: undefined,
-    // delimiter: ','
+    // delimiter: ',',
+    // translateCommandNameCallback: undefined,
 })
 ```
 

@@ -901,6 +901,7 @@
         this.cmdHandlers.resetFromJSON(GetValue$4(o, 'handlers', undefined));
         this.instMem.resetFromJSON(GetValue$4(o, 'instMem', undefined));
         this.delimiter = GetValue$4(o, 'delimiter', ',');
+        this.translateCommandNameCallback = GetValue$4(o, 'translateCommandNameCallback', undefined);
         return this;
       }
     }, {
@@ -957,6 +958,7 @@
         this.argsConvertScope = GetValue$4(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
         this.delimiter = GetValue$4(config, 'delimiter', this.delimiter);
+        this.translateCommandNameCallback = GetValue$4(config, 'translateCommandNameCallback', this.translateCommandNameCallback);
         this.append(strCmd);
         return this;
       }
@@ -1167,15 +1169,14 @@
           item = arr[i];
           name = item[0];
           if (name === '-') {
-            this.appendCommand(item);
+            this.appendCustomCommand(item);
           } else if (!isNaN(name)) {
             var time = parseFloat(name);
             if (time > 0) {
               // insert 'wait' command
               this.appendCommand(['wait', time]);
             }
-            item[0] = '-';
-            this.appendCommand(item);
+            this.appendCustomCommand(item);
           } else if (prefix.test(name)) {
             var innerMatch = name.match(prefix);
             item[0] = innerMatch[1].toLowerCase();
@@ -1204,6 +1205,15 @@
           this.instMem.append(inst);
         }
         return true;
+      }
+    }, {
+      key: "appendCustomCommand",
+      value: function appendCustomCommand(inst) {
+        inst[0] = '-';
+        if (this.translateCommandNameCallback) {
+          inst[1] = this.translateCommandNameCallback(inst[1]);
+        }
+        return this.appendCommand(inst);
       }
     }, {
       key: "runNextCmd",

@@ -9221,7 +9221,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tagPlayer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTagPlayerPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">delimiters</span><span class="o">:</span> <span class="s1">&#39;[]&#39;</span><span class="p">,</span>
-        <span class="nx">comment</span><span class="o">:</span> <span class="s1">&#39;//&#39;</span>
+        <span class="nx">comment</span><span class="o">:</span> <span class="s1">&#39;//&#39;</span><span class="p">,</span>
+        <span class="c1">// translateTagNameCallback: undefined,</span>
     <span class="p">}</span>
 
     <span class="nx">sprites</span><span class="o">:</span> <span class="p">{</span>
@@ -9267,6 +9268,15 @@
 </li>
 <li><code>parser.comment</code> : Start word of a comment line. Default value is <code>'//'</code>.<ul>
 <li><code>null</code>, or <code>false</code> : No comment line.</li>
+</ul>
+</li>
+<li><code>parser.translateTagNameCallback</code> : Callback to translate tag-name<ul>
+<li><code>undefined</code> : Use original tag-name. Default behavior.</li>
+<li>A function, return new tag name.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">newTagName</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>

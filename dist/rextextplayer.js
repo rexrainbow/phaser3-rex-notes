@@ -3076,23 +3076,21 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods$5);
 
-  var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
-    if (config === undefined) {
-      config = {};
-    }
-    if (GameObjectManagerClass === undefined) {
-      GameObjectManagerClass = GOManager;
-    }
-    if (!config.createGameObjectScope) {
-      config.createGameObjectScope = this;
-    }
-    var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-    this.gameObjectManagers[config.name] = gameobjectManager;
-    return this;
-  };
-
   var GameObjectManagerMethods$1 = {
-    addGameObjectManager: AddGameObjectManager,
+    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (config === undefined) {
+        config = {};
+      }
+      if (GameObjectManagerClass === undefined) {
+        GameObjectManagerClass = GOManager;
+      }
+      if (!config.createGameObjectScope) {
+        config.createGameObjectScope = this;
+      }
+      var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
+      this.gameObjectManagers[config.name] = gameobjectManager;
+      return this;
+    },
     getGameObjectManager: function getGameObjectManager(name) {
       return this.gameObjectManagers[name];
     },
@@ -10357,6 +10355,7 @@
   };
 
   var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseEaseGameObjectPropertyTag];
+  var AddGameObjectManager = GameObjectManagerMethods$1.addGameObjectManager;
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
       if (config === undefined) {

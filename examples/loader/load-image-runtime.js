@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
         // Load file in create stage
         this.load
             .image('mushroom', 'assets/images/mushroom.png')
-            .once('complete', function () {
+            .once('filecomplete-image-mushroom', function () {
                 this.add.image(350, 300, 'mushroom');
             }, this)
             .start();
@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         setTimeout(function () {
             scene.load
                 .image('dude', 'assets/images/phaser-dude.png')
-                .once('complete', function () {
+                .once('filecomplete-image-dude', function () {
                     scene.add.image(450, 300, 'dude');
                 })
                 .start();

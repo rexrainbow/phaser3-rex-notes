@@ -9,7 +9,8 @@ declare namespace CSVScenario {
         prefix?: RegExp,
         argsConvert?: true | ConvertCallbackType,
         argsConvertScope?: object,
-        delimiter?: string
+        delimiter?: string,
+        translateCommandNameCallback?: (commandName: string) => string,
     }
 
     interface IStartConfig {
