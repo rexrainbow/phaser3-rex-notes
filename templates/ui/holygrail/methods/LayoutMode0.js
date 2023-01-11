@@ -1,9 +1,4 @@
 /*
-Mode0:
-
-- expand.leftSide= false
-- expand.rightSide= false
-
 Elements:
     ```
     HHH
