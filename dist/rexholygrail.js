@@ -9857,6 +9857,9 @@
         _this.addBackground(background);
       }
       var layoutMode = GetValue(config, 'layoutMode', 0);
+      if (typeof layoutMode === 'string') {
+        layoutMode = LayoutModesMap[layoutMode.toUpperCase()];
+      }
       var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
       layoutCallback.call(_assertThisInitialized(_this), config);
       _this.addChildrenMap('background', config.background);
@@ -9869,6 +9872,12 @@
     }
     return _createClass(HolyGrail);
   }(Sizer);
+  var LayoutModesMap = {
+    'FFF': 0,
+    'LFF': 1,
+    'FFR': 2,
+    'LFR': 3
+  };
 
   return HolyGrail;
 

@@ -9,6 +9,7 @@ Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_de
 
 - [Simple](https://codepen.io/rexrainbow/pen/abEMByR)
 - [Align](https://codepen.io/rexrainbow/pen/GRyeboN)
+- [Layout modes](https://codepen.io/rexrainbow/pen/YzjVYNq)
 
 ## Usage
 
@@ -95,6 +96,8 @@ var holyGrail = scene.rexUI.add.holyGrail({
 
     footer: footerGameObject,
 
+    layoutMode: 0,
+
     // Space
     space: {
         left: 0,
@@ -161,7 +164,12 @@ var holyGrail = scene.rexUI.add.holyGrail({
 - `rightSide` : Game object of rightSide, optional.
     - Will fixed width (`proportion=0`) and expand height (`expand=true`) width default setting.
 - `footer` : Game object of footer, optional.
-    -- Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
+    - Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
+- `layoutMode` : Expand left side, right side to bottom row.
+    - `0`, or `'FFF'` : Bottom row is footer. Default behavior.
+    - `1`, or `'LFF'` : Left side will expand down to bottom row.
+    - `2`, or `'FFR'` : Right side will expand down to bottom row.
+    - `3`, or `'LFR'` : Left side and right side will expand down to bottom row.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.header` : 

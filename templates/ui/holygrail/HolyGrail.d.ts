@@ -31,6 +31,8 @@ declare namespace HolyGrail {
 
         footer?: Phaser.GameObjects.GameObject,
 
+        layoutMode?: 0 | 1 | 2 | 3 | 'FFF' | 'LFF' | 'FFR' | 'LFR',
+
         proportion?: {
             header?: number,
             leftSide?: number,
