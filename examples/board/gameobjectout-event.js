@@ -17,7 +17,12 @@ class Demo extends Phaser.Scene {
 
     create() {
         var board = this.rexBoard.add.board({
-            grid: getQuadGrid(this),
+            grid: this.rexBoard.add.quadGrid({
+                x: 100,
+                y: 100,
+                cellWidth: 50,
+                cellHeight: 50,
+            }),
             width: 4,
             height: 4
         })
@@ -37,16 +42,6 @@ class Demo extends Phaser.Scene {
     }
 
     update(time, delta) { }
-}
-
-var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
-        x: 100,
-        y: 100,
-        cellWidth: 50,
-        cellHeight: 50,
-    });
-    return grid;
 }
 
 var config = {
