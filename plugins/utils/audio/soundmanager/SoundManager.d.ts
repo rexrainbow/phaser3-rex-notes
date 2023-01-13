@@ -47,6 +47,30 @@ declare class SoundManager {
     setBackgroundMusicVolume(volume: number): this;
     backgroundMusicVolume: number;
 
+    // Background music2
+    setBackgroundMusic2LoopValue(value: boolean): this;
+
+    setBackgroundMusic2FadeTime(time: number): this;
+
+    getBackgroundMusic2(): Phaser.Sound.BaseSound;
+
+    playBackgroundMusic2(key: string): this;
+
+    pauseBackgroundMusic2(): this;
+
+    resumeBackgroundMusic2(): this;
+
+    stopBackgroundMusic2(): this;
+
+    fadeInBackgroundMusic2(time: number): this;
+
+    fadeOutBackgroundMusic2(time: number, isStopped?: boolean): this;
+
+    crossFadeBackgroundMusic2(key: string, time: number): this;
+
+    setBackgroundMusicVolume2(volume: number): this;
+    backgroundMusicVolume2: number;
+
 
     // Sound effect
     getSoundEffects(): Phaser.Sound.BaseSound[];
@@ -63,4 +87,22 @@ declare class SoundManager {
 
     setSoundEffectVolume(volume: number, lastSoundEffect?: boolean): this;
     soundEffectsVolume: number;
+
+
+    // Sound effect2
+    getSoundEffects2(): Phaser.Sound.BaseSound[];
+
+    getLastSoundEffect2(): Phaser.Sound.BaseSound;
+
+    playSoundEffect2(key: string): this;
+
+    fadeInSoundEffect2(time: number): this;
+
+    fadeOutSoundEffect2(time: number, isStopped?: boolean): this;
+
+    fadeOutAllSoundEffects2(time: number, isStopped?: boolean): this;
+
+    setSoundEffect2Volume(volume: number, lastSoundEffect?: boolean): this;
+    soundEffects2Volume: number;
+
 }
