@@ -6733,6 +6733,7 @@
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
       // Move outside
+      EmitChessEvent('gameobjectout', 'board.pointerout', board, this.prevTilePosition.x, this.prevTilePosition.y, pointer);
       if (this.pointer === pointer) {
         // Release touch pointer
         this.pointer = null;

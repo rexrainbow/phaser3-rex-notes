@@ -27,11 +27,19 @@ var OnPointerMove = function (pointer) {
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
         // Move outside
+        EmitChessEvent(
+            'gameobjectout',
+            'board.pointerout',
+            board, this.prevTilePosition.x, this.prevTilePosition.y,
+            pointer
+        );
+
         if (this.pointer === pointer) { // Release touch pointer
             this.pointer = null;
         }
         return;
     }
+
     if (this.pointer === null) { // Catch new touch pointer
         this.pointer = pointer;
     }
