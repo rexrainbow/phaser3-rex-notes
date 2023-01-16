@@ -11,6 +11,8 @@ class SceneA extends Phaser.Scene {
     preload() { }
 
     create() {
+        this.scene.moveUp();
+
         this.input.topOnly = false;
         CreateGameObjects(this)
             .setPosition(200, 300)
@@ -32,8 +34,16 @@ class SceneB extends Phaser.Scene {
     preload() { }
 
     create() {
+        var bg = this.add.rectangle(400, 300, 800, 600, 0x555555)
+            .setName(`${this.sys.settings.key}-BG`)
+            .setInteractive()
+            .on('pointerdown', function () {
+                console.log(`Click ${this.name}`)
+            })
+
         CreateGameObjects(this)
             .setPosition(600, 300)
+
 
     }
 
