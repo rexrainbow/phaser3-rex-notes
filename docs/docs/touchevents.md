@@ -188,6 +188,8 @@ If set to `false` it will emit events from all Game Objects below a Pointer, not
     scene.input.setTopOnly(topOnly);
     ```
 
+Each scene can has its own `scene.input.topOnly` setting.
+
 ### Touch events
 
 Trigger these events from top scene to bottom scene.
