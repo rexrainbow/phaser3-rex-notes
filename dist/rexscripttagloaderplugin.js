@@ -95,24 +95,6 @@
     };
   }
 
-  var LoadScript = function LoadScript(url, onload) {
-    var scripts = document.getElementsByTagName('script');
-    for (var i = 0, cnt = scripts.length; i < cnt; i++) {
-      if (scripts[i].src.indexOf(url) != -1) {
-        if (onload) {
-          onload();
-        }
-        return;
-      }
-    }
-    var newScriptTag = document.createElement('script');
-    newScriptTag.setAttribute('src', url);
-    if (onload) {
-      newScriptTag.onload = onload;
-    }
-    document.head.appendChild(newScriptTag);
-  };
-
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
@@ -169,7 +151,44 @@
     return AwaitFile;
   }(Phaser.Loader.File);
 
-  var loaderCallback = function loaderCallback(url) {
+  var LoadScript = function LoadScript(url, onload) {
+    var scripts = document.getElementsByTagName('script');
+    for (var i = 0, cnt = scripts.length; i < cnt; i++) {
+      if (scripts[i].src.indexOf(url) != -1) {
+        if (onload) {
+          onload();
+        }
+        return;
+      }
+    }
+    var newScriptTag = document.createElement('script');
+    newScriptTag.setAttribute('src', url);
+    if (onload) {
+      newScriptTag.onload = onload;
+    }
+    document.head.appendChild(newScriptTag);
+  };
+
+  var LoadScriptPromise = function LoadScriptPromise(url) {
+    return new Promise(function (resolve, reject) {
+      LoadScript(url, resolve);
+    });
+  };
+
+  var Delay = function Delay(time, result) {
+    if (time === undefined) {
+      time = 0;
+    }
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, time);
+    });
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetFastValue = Phaser.Utils.Objects.GetFastValue;
+  var LoaderCallback = function LoaderCallback(url) {
     if (Array.isArray(url)) {
       for (var i = 0, cnt = url.length; i < cnt; i++) {
         this.addFile(CreateAwiatFile(this, url[i]));
@@ -179,9 +198,29 @@
     }
     return this;
   };
-  var CreateAwiatFile = function CreateAwiatFile(loader, url) {
+  var CreateAwiatFile = function CreateAwiatFile(loader, url, availableTest) {
+    if (IsPlainObject(url)) {
+      var config = url;
+      url = GetFastValue(config, 'url');
+      availableTest = GetFastValue(config, 'availableTest');
+    }
     var callback = function callback(successCallback, failureCallback) {
-      LoadScript(url, successCallback);
+      LoadScriptPromise(url).then(function () {
+        if (!availableTest) {
+          return Promise.resolve();
+        }
+        var AvailableTestPromise = function AvailableTestPromise() {
+          if (availableTest()) {
+            return Promise.resolve();
+          }
+          return Delay(10).then(function () {
+            return AvailableTestPromise();
+          });
+        };
+        return AvailableTestPromise();
+      }).then(function () {
+        successCallback();
+      });
     };
     return new AwaitFile(loader, {
       type: 'scriptTag',
@@ -198,13 +237,13 @@
       var _this;
       _classCallCheck(this, ScriptTagLoaderPlugin);
       _this = _super.call(this, pluginManager);
-      pluginManager.registerFileType('rexScriptTag', loaderCallback);
+      pluginManager.registerFileType('rexScriptTag', LoaderCallback);
       return _this;
     }
     _createClass(ScriptTagLoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
-        scene.sys.load['rexScriptTag'] = loaderCallback;
+        scene.sys.load['rexScriptTag'] = LoaderCallback;
       }
     }]);
     return ScriptTagLoaderPlugin;

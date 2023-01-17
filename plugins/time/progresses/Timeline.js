@@ -82,6 +82,10 @@ class Timeline extends Clock {
     update(time, delta) {
         super.update(time, delta);
 
+        if (!this.isRunning) {
+            return;
+        }
+
         this.timers.push(...this.addedTimers);
         this.addedTimers.length = 0;
         var pendingTimers = [];

@@ -1922,6 +1922,9 @@
       value: function update(time, delta) {
         var _this$timers;
         _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
+        if (!this.isRunning) {
+          return;
+        }
         (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
         this.addedTimers.length = 0;
         var pendingTimers = [];
