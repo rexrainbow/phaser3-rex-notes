@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import FontSizeResize from '../../plugins/utils/text/fontsizeresize/FontSizeResize.js';
+import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
                 top: 20, bottom: 20, left: 20, right: 20
             }
         });
-        FontSizeResize(textObject, 300);
+        SetFontSizeToFitWidth(textObject, 300);
 
         console.log(textObject.style.fontSize);
         console.log(textObject.width, textObject.height);
