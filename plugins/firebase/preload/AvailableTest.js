@@ -5,7 +5,7 @@ var AvailableTestPromise = function (config) {
         return Promise.resolve();
     }
     
-    // console.log('tset again')
+    // console.log('test again')
     return Delay(10)
         .then(function () {
             return AvailableTestPromise(config);

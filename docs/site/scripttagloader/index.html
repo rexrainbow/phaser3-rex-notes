@@ -8937,12 +8937,30 @@
 </code></pre></div></li>
 <li>Start loading task
     <div class="highlight"><pre><span></span><code><span class="nx">ScriptTagLoader</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// ScriptTagLoader.call(scene.load, url, availableTest);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="load-script-tag">Load script tag<a class="headerlink" href="#load-script-tag" title="Permanent link">&para;</a></h3>
 <p>In preload stage:</p>
 <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexScriptTag</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+<span class="c1">// this.load.rexScriptTag(url, availableTest);</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexScriptTag</span><span class="p">({</span>
+    <span class="nx">url</span><span class="o">:</span> <span class="nx">url</span><span class="p">,</span>
+    <span class="nx">availableTest</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>availableTest</code> : Callback invoked after loading script tag, optional. 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>        
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>Wait until <code>availableTest</code> return <code>true</code>.</li>
+</ul>
+</li>
+</ul>
 <h3 id="compare-with-script-loader">Compare with script loader<a class="headerlink" href="#compare-with-script-loader" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Built-in script loader uses AJAX to load text as script, which might have CORS issue.</li>

@@ -84,6 +84,7 @@ Load script tag in preload stage.
 - Start loading task
     ```javascript
     ScriptTagLoader.call(scene.load, url);
+    // ScriptTagLoader.call(scene.load, url, availableTest);
     ```
 
 ### Load script tag
@@ -92,7 +93,25 @@ In preload stage:
 
 ```javascript
 this.load.rexScriptTag(url);
+// this.load.rexScriptTag(url, availableTest);
 ```
+
+or
+
+```javascript
+this.load.rexScriptTag({
+    url: url,
+    availableTest: undefined
+});
+```
+
+- `availableTest` : Callback invoked after loading script tag, optional. 
+    ```javascript
+    function() {        
+        return true;
+    }
+    ```
+    - Wait until `availableTest` return `true`.
 
 ### Compare with script loader
 
