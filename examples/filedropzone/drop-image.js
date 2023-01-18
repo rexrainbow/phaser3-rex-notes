@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import FileChooserPlugin from '../../plugins/filechooser-plugin.js';
+import FileDropZonePlugin from '../../plugins/filedropzone-plugin.js';
 import CanvasPlugin from '../../plugins/canvas-plugin.js';
 import FitTo from '../../plugins/utils/size/FitTo.js';
 
@@ -26,13 +26,12 @@ class Demo extends Phaser.Scene {
             this.setDisplaySize(newSize.width, newSize.height);
         }).bind(canvas)
 
-        // Create a transparent file chooser
-        this.add.rexFileChooser({
-            accept: 'image/*'
-        })
+        var fileDropZone = this.add.rexFileDropZone()
             .syncTo(cover)
-            .on('change', function (gameObject) {
-                var files = gameObject.files;
+            .on('drop', function () {
+                var files = fileDropZone.files;
+                console.log('drop', files);
+
                 if (files.length === 0) {
                     return;
                 }
@@ -65,8 +64,8 @@ var config = {
     plugins: {
         global: [
             {
-                key: 'rexFileChooser',
-                plugin: FileChooserPlugin,
+                key: 'rexFileDropZone',
+                plugin: FileDropZonePlugin,
                 start: true
             },
             {

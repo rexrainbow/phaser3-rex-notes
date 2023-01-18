@@ -8,6 +8,7 @@ Create a div element for dropping file(s).
 ## Live demos
 
 - [Drop text file](https://codepen.io/rexrainbow/pen/oNMGmeX)
+- [Drop image file](https://codepen.io/rexrainbow/pen/jOpGRdw)
 
 ## Usage
 
