@@ -3,6 +3,11 @@ export default FileChooser;
 declare namespace FileChooser {
 
     interface IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+
         accept?: string,
         multiple?: boolean
     }
@@ -39,4 +44,24 @@ declare class FileChooser extends Phaser.GameObjects.DOMElement {
 
     setMultiple(multiple?: boolean): this;
 
+    loadFile(
+        file: File,
+        loaderType: string,
+        key: string,
+        cacheType?: string
+    ): this;
+
+    loadFile(
+        file: File,
+        loaderType: string,
+        key: string,
+        cacheType?: string
+    ): this;
+
+    loadFilePromise(
+        file: File,
+        loaderType: string,
+        key: string,
+        cacheType?: string
+    ): Promise<any>;
 }

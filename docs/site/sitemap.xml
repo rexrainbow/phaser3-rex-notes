@@ -506,6 +506,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/filedropzone/</loc>
+         <lastmod>2023-01-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/firebase-auth/</loc>
          <lastmod>2023-01-18</lastmod>
          <changefreq>daily</changefreq>

@@ -26,7 +26,7 @@ class FileDropZone extends DOMElement {
             config = {};
         }
 
-        var element = document.createElement(GetValue(config, 'type', 'div'));
+        var element = document.createElement('div');
 
         var style = GetValue(config, 'style', undefined);
         super(scene, x, y, element, style);

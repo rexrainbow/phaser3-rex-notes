@@ -134,6 +134,7 @@ nav:
         - DOM element: domelement.md
         - Input text: inputtext.md        
         - File chooser: filechooser.md
+        - File drop zone: filedropzone.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
         - Actions:

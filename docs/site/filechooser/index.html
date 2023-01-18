@@ -2760,6 +2760,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-file-to-cache" class="md-nav__link">
+    Load file to cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-object-url" class="md-nav__link">
     Create object URL
   </a>
@@ -2782,6 +2789,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filedropzone/" class="md-nav__link">
+        File drop zone
+      </a>
     </li>
   
 
@@ -8939,6 +8960,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-file-to-cache" class="md-nav__link">
+    Load file to cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-object-url" class="md-nav__link">
     Create object URL
   </a>
@@ -9161,6 +9189,26 @@
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
+<h3 id="load-file-to-cache">Load file to cache<a class="headerlink" href="#load-file-to-cache" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">loaderType</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+<span class="c1">// fileChooser.loadFile(file, loaderType, key, cahceType);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">loadFilePromise</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">loaderType</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">cahceType</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>file</code> : File object, see <a href="./#events">Events</a></li>
+<li><code>loaderType</code> : <code>image</code>, <code>text</code>, <code>binary</code>, ... See <a href="../loader/">Loader</a></li>
+<li><code>key</code> : Unique string key.</li>
+<li><code>cahceType</code> : <ul>
+<li><code>undefined</code> : Use default value.</li>
+</ul>
+</li>
+<li><code>content</code> : Content of file.</li>
+</ul>
 <h3 id="create-object-url">Create object URL<a class="headerlink" href="#create-object-url" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL">Create object url</a>
@@ -9246,13 +9294,13 @@
       
       
         
-        <a href="../youtubeplayer/" class="md-footer__link md-footer__link--next" aria-label="Next: Youtube player" rel="next">
+        <a href="../filedropzone/" class="md-footer__link md-footer__link--next" aria-label="Next: File drop zone" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Youtube player
+              File drop zone
             </div>
           </div>
           <div class="md-footer__button md-icon">
