@@ -1,4 +1,6 @@
 import Resize from '../utils/Resize.js';
+import SyncTo from '../utils/SyncTo.js';
+import LoadFileMethods from '../utils/LoadFileMethods.js';
 import ClickPromose from './ClickPromise.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
@@ -100,22 +102,17 @@ class FileChooser extends DOMElement {
     get files() {
         return this.fileInput.files;
     }
-
-    syncTo(gameObject) {
-        this.setOrigin(gameObject.originX, gameObject.originY);
-        this.setPosition(gameObject.x, gameObject.y);
-        this.resize(gameObject.displayWidth, gameObject.displayHeight);
-        return this;
-    }
 }
 
 var methods = {
-    resize: Resize
+    resize: Resize,
+    syncTo: SyncTo,
 }
 
 Object.assign(
     FileChooser.prototype,
-    methods
+    methods,
+    LoadFileMethods,
 );
 
 export default FileChooser;

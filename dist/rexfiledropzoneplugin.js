@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfilechooserplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfiledropzoneplugin = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -104,97 +104,6 @@
     };
   }
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var CreateFileInput = function CreateFileInput(config) {
-    var fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    var accept = GetValue$2(config, 'accept', '');
-    var multiple = GetValue$2(config, 'multiple', false);
-    fileInput.setAttribute('accept', accept);
-    if (multiple) {
-      fileInput.setAttribute('multiple', '');
-    } else {
-      fileInput.removeAttribute('multiple');
-    }
-    return fileInput;
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
-    return new Promise(function (resolve, reject) {
-      eventEmitter.once(eventName, function () {
-        resolve();
-      });
-    });
-  };
-
-  var Delay = function Delay(time, result) {
-    if (time === undefined) {
-      time = 0;
-    }
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, time);
-    });
-  };
-
-  var ClickPromise = function ClickPromise(_ref) {
-    var game = _ref.game,
-      fileInput = _ref.fileInput,
-      closeDelay = _ref.closeDelay;
-    return WaitEvent(GetGame(game).events, 'focus').then(function () {
-      return Delay(closeDelay);
-    }).then(function () {
-      var result = {
-        files: fileInput.files
-      };
-      return Promise.resolve(result);
-    });
-  };
-
-  // Note: Not working in iOS9+
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Open = function Open(game, config) {
-    // game: game, scene, or game object
-    var closeDelay = GetValue$1(config, 'closeDelay', 200);
-    var fileInput = CreateFileInput(config);
-    fileInput.click();
-    return ClickPromise({
-      game: game,
-      fileInput: fileInput,
-      closeDelay: closeDelay
-    }).then(function (result) {
-      fileInput.remove();
-      return Promise.resolve(result);
-    });
-  };
-
   var Resize = function Resize(width, height) {
     if (this.scene.sys.scale.autoRound) {
       width = Math.floor(width);
@@ -288,15 +197,48 @@
     loadFilePromise: LoadFilePromise
   };
 
+  var ElementEvents = {
+    dragenter: 'dragenter',
+    dragleave: 'dragleave',
+    dragover: 'dragover',
+    drop: 'drop',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress'
+  };
+
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, preventDefault) {
+    var _loop = function _loop(elementEventName) {
+      // Note: Don't use `var` here
+      element.addEventListener(elementEventName, function (e) {
+        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        if (preventDefault) {
+          e.preventDefault();
+        }
+      });
+    };
+    for (var elementEventName in elementEvents) {
+      _loop(elementEventName);
+    }
+  };
+
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var FileChooser = /*#__PURE__*/function (_DOMElement) {
-    _inherits(FileChooser, _DOMElement);
-    var _super = _createSuper(FileChooser);
-    function FileChooser(scene, x, y, width, height, config) {
+  var FileDropZone = /*#__PURE__*/function (_DOMElement) {
+    _inherits(FileDropZone, _DOMElement);
+    var _super = _createSuper(FileDropZone);
+    function FileDropZone(scene, x, y, width, height, config) {
       var _this;
-      _classCallCheck(this, FileChooser);
+      _classCallCheck(this, FileDropZone);
       if (IsPlainObject(x)) {
         config = x;
         x = GetValue(config, 'x', 0);
@@ -308,105 +250,39 @@
         width = GetValue(config, 'width', 0);
         height = GetValue(config, 'height', 0);
       }
-
-      // Create a hidden file input
-      var inputElement = document.createElement('input');
-      inputElement.type = 'file';
-      var inputStyle = inputElement.style;
-      inputStyle.display = 'none';
-
-      // Create a label parent
-      var labelElement = document.createElement('label');
-      labelElement.appendChild(inputElement);
+      if (config === undefined) {
+        config = {};
+      }
+      var element = document.createElement(GetValue(config, 'type', 'div'));
       var style = GetValue(config, 'style', undefined);
-      _this = _super.call(this, scene, x, y, labelElement, style);
-      _this.type = 'rexFileChooser';
-      _this.resetFromJSON(config);
+      _this = _super.call(this, scene, x, y, element, style);
+      _this.type = 'rexFileDropZone';
       _this.resize(width, height);
+      _this._files = [];
 
-      // Register events
-      var self = _assertThisInitialized(_this);
-      inputElement.onchange = function () {
-        self.emit('change', self);
-      };
-      _this.setCloseDelay(GetValue(config, 'closeDelay', 200));
-      inputElement.onclick = function () {
-        ClickPromise({
-          game: scene,
-          fileInput: inputElement,
-          closeDelay: self.closeDelay
-        }).then(function () {
-          self.emit('select', self);
-        });
-      };
+      // Apply events
+      RouteEvents(_assertThisInitialized(_this), element, ElementEvents, true);
+      _this.on('drop', function (gameObject, e) {
+        this._files = e.dataTransfer.files;
+      }, _assertThisInitialized(_this));
       return _this;
     }
-    _createClass(FileChooser, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(config) {
-        this.setAccept(GetValue(config, 'accept', ''));
-        this.setMultiple(GetValue(config, 'multiple', false));
-        return this;
-      }
-    }, {
-      key: "setAccept",
-      value: function setAccept(accept) {
-        if (accept === undefined) {
-          accept = '';
-        }
-        this.fileInput.setAttribute('accept', accept);
-        return this;
-      }
-    }, {
-      key: "setMultiple",
-      value: function setMultiple(enabled) {
-        if (enabled === undefined) {
-          enabled = true;
-        }
-        if (enabled) {
-          this.fileInput.setAttribute('multiple', '');
-        } else {
-          this.fileInput.removeAttribute('multiple');
-        }
-        return this;
-      }
-    }, {
-      key: "setCloseDelay",
-      value: function setCloseDelay(delay) {
-        if (delay === undefined) {
-          delay = 200;
-        }
-        this.closeDelay = delay;
-        return this;
-      }
-    }, {
-      key: "fileInput",
-      get: function get() {
-        return this.node.children[0];
-      }
-    }, {
-      key: "open",
-      value: function open() {
-        // Only work under any touch event
-        this.fileInput.click();
-        return this;
-      }
-    }, {
+    _createClass(FileDropZone, [{
       key: "files",
       get: function get() {
-        return this.fileInput.files;
+        return this._files;
       }
     }]);
-    return FileChooser;
+    return FileDropZone;
   }(DOMElement);
   var methods = {
     resize: Resize,
     syncTo: SyncTo
   };
-  Object.assign(FileChooser.prototype, methods, LoadFileMethods);
+  Object.assign(FileDropZone.prototype, methods, LoadFileMethods);
 
   function Factory (x, y, width, height, config) {
-    var gameObject = new FileChooser(this.scene, x, y, width, height, config);
+    var gameObject = new FileDropZone(this.scene, x, y, width, height, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
@@ -422,7 +298,7 @@
     }
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', undefined);
-    var gameObject = new FileChooser(this.scene, 0, 0, width, height, config);
+    var gameObject = new FileDropZone(this.scene, 0, 0, width, height, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -488,19 +364,19 @@
     return target;
   };
 
-  var FileChooserPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(FileChooserPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(FileChooserPlugin);
-    function FileChooserPlugin(pluginManager) {
+  var FileDropZonePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(FileDropZonePlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(FileDropZonePlugin);
+    function FileDropZonePlugin(pluginManager) {
       var _this;
-      _classCallCheck(this, FileChooserPlugin);
+      _classCallCheck(this, FileDropZonePlugin);
       _this = _super.call(this, pluginManager);
 
       //  Register our new Game Object type
-      pluginManager.registerGameObject('rexFileChooser', Factory, Creator);
+      pluginManager.registerGameObject('rexFileDropZone', Factory, Creator);
       return _this;
     }
-    _createClass(FileChooserPlugin, [{
+    _createClass(FileDropZonePlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -511,13 +387,13 @@
     }, {
       key: "open",
       value: function open(config) {
-        return Open(this.game, config);
+        return OpenFileChooser(this.game, config);
       }
     }]);
-    return FileChooserPlugin;
+    return FileDropZonePlugin;
   }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.GameObjects.FileChooser', FileChooser);
+  SetValue(window, 'RexPlugins.GameObjects.FileDropZone', FileDropZone);
 
-  return FileChooserPlugin;
+  return FileDropZonePlugin;
 
 }));

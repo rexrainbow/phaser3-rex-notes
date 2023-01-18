@@ -41,7 +41,7 @@ scene.load.setPath(path)
     ```
 - Add loading file event
     ```javascript
-    scene.load.on('addfile', function(key, type, loader, file) {}, scope);
+    scene.load.on('addfile', function(key, type, file) {}, scope);
     ```
 - Start loading
     ```javascript
@@ -191,6 +191,13 @@ scene.load.animation(key, url);
 // scene.load.animation(key, url, dataKey, xhrSettings);
 ```
 
+Get data from json cache
+
+```javascript
+var cache = scene.json;
+var data = cache.get(key);
+```
+
 #### Audio
 
 ```javascript
@@ -233,6 +240,13 @@ scene.load.video(key, url, loadEvent, asBlob, noAudio);
     - `'canplaythrough'` : The video can be played all the way through, without stopping.
 - `asBlob` : Load the video as a data blob, or via the Video element? Default value is `false`.
 - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+
+Get data from video cache
+
+```javascript
+var cache = scene.video;
+var data = cache.get(key);
+```
 
 #### Bitmap font
 
@@ -536,6 +550,21 @@ cache.remove(key);
 var cache = scene.cache.text;
 var hasData = cache.has(key);
 ```
+
+#### Cache events
+
+- Add any item
+    ```javascript
+    cache.events.on('add', function(cache, key, item){
+
+    })
+    ```
+- Remove any item
+    ```javascript
+    cache.events.on('remove', function(cache, key, item){
+
+    })
+    ```
 
 ### Replace
 

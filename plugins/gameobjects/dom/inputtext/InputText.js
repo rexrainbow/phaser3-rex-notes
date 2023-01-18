@@ -3,7 +3,7 @@ import {
     ElementProperties,
     StyleProperties,
     ElementEvents
-} from './InputTextProperties.js'
+} from './InputTextProperties.js';
 import SetPrpoerties from '../utils/SetProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
 import StopPropagationTouchEvents from '../utils/StopPropagationTouchEvents.js';

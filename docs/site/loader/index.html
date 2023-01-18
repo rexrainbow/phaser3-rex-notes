@@ -827,6 +827,19 @@
     Data in cache
   </a>
   
+    <nav class="md-nav" aria-label="Data in cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-events" class="md-nav__link">
+    Cache events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9226,6 +9239,19 @@
     Data in cache
   </a>
   
+    <nav class="md-nav" aria-label="Data in cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-events" class="md-nav__link">
+    Cache events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9294,7 +9320,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;filecomplete-&#39;</span> <span class="o">+</span> <span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add loading file event
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addfile&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">loader</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addfile&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Start loading
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){},</span> <span class="nx">scope</span><span class="p">);</span>
@@ -9416,6 +9442,10 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 <span class="c1">// scene.load.animation(key, url, dataKey, xhrSettings);</span>
 </code></pre></div>
+<p>Get data from json cache</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">json</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
 <span class="c1">// scene.load.audio(key, urls, {instances: 1}, xhrSettings);</span>
@@ -9452,6 +9482,10 @@
 <li><code>asBlob</code> : Load the video as a data blob, or via the Video element? Default value is <code>false</code>.</li>
 <li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it. Default value is <code>false</code>.</li>
 </ul>
+<p>Get data from video cache</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">video</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">fontDataURL</span><span class="p">);</span>
 <span class="c1">// scene.load.bitmapFont(key, textureURL, fontDataURL, textureXhrSettings, fontDataXhrSettings);</span>
@@ -9675,6 +9709,19 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">hasData</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+<h4 id="cache-events">Cache events<a class="headerlink" href="#cache-events" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add any item
+    <div class="highlight"><pre><span></span><code><span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">item</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Remove any item
+    <div class="highlight"><pre><span></span><code><span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">item</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
 <h3 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="./#release-data">Remove key</a>.</li>

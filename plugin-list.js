@@ -114,8 +114,9 @@ module.exports = {
     // camera
     'scaleouterplugin': './plugins/scaleouter-plugin.js',
 
-    // file chooser
+    // file input
     'filechooserplugin': './plugins/filechooser-plugin.js',
+    'filedropzoneplugin': './plugins/filedropzone-plugin.js',
 
     // member of scene
     // sound

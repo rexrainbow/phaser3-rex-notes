@@ -182,11 +182,14 @@
     return out;
   };
 
-  var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, preventDefault) {
     var _loop = function _loop(elementEventName) {
       // Note: Don't use `var` here
       element.addEventListener(elementEventName, function (e) {
         gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        if (preventDefault) {
+          e.preventDefault();
+        }
       });
     };
     for (var elementEventName in elementEvents) {
