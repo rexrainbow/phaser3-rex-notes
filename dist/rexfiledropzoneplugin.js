@@ -211,6 +211,19 @@
     }
   };
 
+  var StopPropagationTouchEvents = function StopPropagationTouchEvents(element) {
+    // Don't propagate touch/mouse events to parent(game canvas)
+    element.addEventListener('touchstart', callback, false);
+    element.addEventListener('touchmove', callback, false);
+    element.addEventListener('touchend', callback, false);
+    element.addEventListener('mousedown', callback, false);
+    element.addEventListener('mouseup', callback, false);
+    element.addEventListener('mousemove', callback, false);
+  };
+  var callback = function callback(e) {
+    e.stopPropagation();
+  };
+
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -234,7 +247,7 @@
       if (config === undefined) {
         config = {};
       }
-      var element = document.createElement(GetValue(config, 'type', 'div'));
+      var element = document.createElement('div');
       var style = GetValue(config, 'style', undefined);
       _this = _super.call(this, scene, x, y, element, style);
       _this.type = 'rexFileDropZone';
@@ -243,6 +256,7 @@
 
       // Apply events
       RouteEvents(_assertThisInitialized(_this), element, ElementEvents, true);
+      StopPropagationTouchEvents(element);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
       }, _assertThisInitialized(_this));

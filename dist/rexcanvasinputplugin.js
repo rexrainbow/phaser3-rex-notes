@@ -4880,7 +4880,11 @@
 
     // Don't propagate touch/mouse events to parent(game canvas)
     StopPropagationTouchEvents(element);
-    document.body.appendChild(element);
+
+    // Attach element to fullscreenTarget in full screen mode
+    var scaleManager = parent.scene.sys.scale;
+    var parentElement = scaleManager.isFullscreen ? scaleManager.fullscreenTarget : document.body;
+    parentElement.appendChild(element);
     return element;
   };
 
@@ -4920,7 +4924,10 @@
     if (!element) {
       return;
     }
-    document.body.removeChild(element);
+    var parentElement = element.parentElement;
+    if (parentElement) {
+      parentElement.removeChild(element);
+    }
   };
 
   var Close = function Close() {

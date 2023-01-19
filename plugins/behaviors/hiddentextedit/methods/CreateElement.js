@@ -38,7 +38,10 @@ var CreateElement = function (parent, config) {
     // Don't propagate touch/mouse events to parent(game canvas)
     StopPropagationTouchEvents(element);
 
-    document.body.appendChild(element);
+    // Attach element to fullscreenTarget in full screen mode
+    var scaleManager = parent.scene.sys.scale;
+    var parentElement = (scaleManager.isFullscreen) ? scaleManager.fullscreenTarget : document.body;
+    parentElement.appendChild(element);
 
     return element;
 }
