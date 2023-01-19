@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
 
         var fileDropZone = this.add.rexFileDropZone({
             filters: {
-                image: function(file) {
+                image: function (file) {
                     return file.name.match(/\.(jpg|jpeg|png|gif)$/i)
                 }
             }
@@ -41,10 +41,8 @@ class Demo extends Phaser.Scene {
                     return;
                 }
 
-                var url = URL.createObjectURL(files[0]);
-                canvas.loadFromURLPromise(url)
+                canvas.loadFromFilePromise(files[0])
                     .then(function () {
-                        URL.revokeObjectURL(url);
                         canvas.fitTo(cover);
                     })
             })

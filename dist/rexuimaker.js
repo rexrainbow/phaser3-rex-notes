@@ -9966,33 +9966,6 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
     drawFrame: function drawFrame(key, frame, x, y, width, height) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
@@ -10104,7 +10077,7 @@
 
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
-  var Canvas = /*#__PURE__*/function (_GameObject) {
+  var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
@@ -10257,9 +10230,66 @@
     return Canvas;
   }(GameObject);
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip,
+  Phaser.Class.mixin(Canvas$1, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip,
   // Components.FX,  // Open for 3.60
   Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
+
+  var LoadImageMethods = {
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+        if (callback) {
+          callback();
+        }
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    loadFromFile: function loadFromFile(file, callback) {
+      var url = URL.createObjectURL(file);
+      this.loadFromURL(url, function () {
+        URL.revokeObjectURL(url);
+        if (callback) {
+          callback();
+        }
+      });
+      return this;
+    },
+    loadFromFilePromise: function loadFromFilePromise(file) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromFile(file, resolve);
+      });
+    }
+  };
+
+  var Canvas = /*#__PURE__*/function (_CanvasBase) {
+    _inherits(Canvas, _CanvasBase);
+    var _super = _createSuper(Canvas);
+    function Canvas() {
+      _classCallCheck(this, Canvas);
+      return _super.apply(this, arguments);
+    }
+    return _createClass(Canvas);
+  }(Canvas$1);
+  Object.assign(Canvas.prototype, LoadImageMethods);
 
   var CreateCanvas = function CreateCanvas(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -10386,7 +10416,7 @@
       }
     }]);
     return CircleMaskImage;
-  }(Canvas);
+  }(Canvas$1);
   var MASKTYPE = {
     circle: 0,
     ellipse: 1,

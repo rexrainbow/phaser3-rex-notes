@@ -37,10 +37,8 @@ class Demo extends Phaser.Scene {
                     return;
                 }
 
-                var url = URL.createObjectURL(files[0]);
-                canvas.loadFromURLPromise(url)
+                canvas.loadFromFilePromise(files[0])
                     .then(function () {
-                        URL.revokeObjectURL(url);
                         canvas.fitTo(cover);
                     })
             })

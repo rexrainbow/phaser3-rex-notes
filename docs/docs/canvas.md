@@ -209,6 +209,23 @@ canvas.drawFrame(key, frame);
     - `type` : A DOMString indicating the image format. The default format type is image/png.
     - `encoderOptions` : A Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp.
 
+### File
+
+- Load image from File object
+    ```javascript
+    canvas.loadFromFile(file);
+    // canvas.loadFromFile(file, callback);
+    ```
+    or
+    ```javascript
+    canvas.loadFromFilePromise(file)
+        .then(function() {
+            
+        })
+    ```
+    - `file` : File object
+    - `callback` : Load complete callback.
+
 ### Pixel color
 
 - Get color

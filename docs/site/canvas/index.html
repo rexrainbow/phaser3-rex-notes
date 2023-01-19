@@ -2265,6 +2265,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pixel-color" class="md-nav__link">
     Pixel color
   </a>
@@ -8976,6 +8983,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#file" class="md-nav__link">
+    File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pixel-color" class="md-nav__link">
     Pixel color
   </a>
@@ -9201,6 +9215,23 @@
 <li><code>dataURL</code> : A base64 string.</li>
 <li><code>type</code> : A DOMString indicating the image format. The default format type is image/png.</li>
 <li><code>encoderOptions</code> : A Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp.</li>
+</ul>
+</li>
+</ul>
+<h3 id="file">File<a class="headerlink" href="#file" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Load image from File object
+    <div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadFromFile</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="c1">// canvas.loadFromFile(file, callback);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadFromFilePromise</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">})</span>
+</code></pre></div><ul>
+<li><code>file</code> : File object</li>
+<li><code>callback</code> : Load complete callback.</li>
 </ul>
 </li>
 </ul>

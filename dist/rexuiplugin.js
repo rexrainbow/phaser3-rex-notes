@@ -2719,33 +2719,6 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
     drawFrame: function drawFrame(key, frame, x, y, width, height) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
@@ -2893,7 +2866,7 @@
 
   var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$3 = Phaser.GameObjects.GameObject;
-  var Canvas = /*#__PURE__*/function (_GameObject) {
+  var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
@@ -3046,7 +3019,7 @@
     return Canvas;
   }(GameObject$3);
   var Components$3 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip,
+  Phaser.Class.mixin(Canvas$1, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip,
   // Components.FX,  // Open for 3.60
   Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Tint, Components$3.Transform, Components$3.Visible, Render$2, CanvasMethods, TextureMethods]);
 
@@ -3389,7 +3362,7 @@
       }
     }]);
     return RoundRectangle;
-  }(Canvas);
+  }(Canvas$1);
 
   ObjectFactory.register('roundRectangleCanvas', function (x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
     var gameObject = new RoundRectangle$2(this.scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
@@ -13196,6 +13169,63 @@
   });
   SetValue$1(window, 'RexPlugins.UI.Container', ContainerLite);
 
+  var LoadImageMethods = {
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+        if (callback) {
+          callback();
+        }
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    loadFromFile: function loadFromFile(file, callback) {
+      var url = URL.createObjectURL(file);
+      this.loadFromURL(url, function () {
+        URL.revokeObjectURL(url);
+        if (callback) {
+          callback();
+        }
+      });
+      return this;
+    },
+    loadFromFilePromise: function loadFromFilePromise(file) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromFile(file, resolve);
+      });
+    }
+  };
+
+  var Canvas = /*#__PURE__*/function (_CanvasBase) {
+    _inherits(Canvas, _CanvasBase);
+    var _super = _createSuper(Canvas);
+    function Canvas() {
+      _classCallCheck(this, Canvas);
+      return _super.apply(this, arguments);
+    }
+    return _createClass(Canvas);
+  }(Canvas$1);
+  Object.assign(Canvas.prototype, LoadImageMethods);
+
   ObjectFactory.register('canvas', function (x, y, width, height) {
     var gameObject = new Canvas(this.scene, x, y, width, height);
     this.scene.add.existing(gameObject);
@@ -13315,7 +13345,7 @@
       }
     }]);
     return CircleMaskImage;
-  }(Canvas);
+  }(Canvas$1);
   var MASKTYPE = {
     circle: 0,
     ellipse: 1,
@@ -13417,7 +13447,7 @@
       }
     }]);
     return AlphaMaskImage;
-  }(Canvas);
+  }(Canvas$1);
 
   ObjectFactory.register('alphaMaskImage', function (x, y, key, frame, config) {
     var gameObject = new AlphaMaskImage(this.scene, x, y, key, frame, config);
@@ -16797,7 +16827,7 @@
       }
     }]);
     return DynamicText;
-  }(Canvas);
+  }(Canvas$1);
   Object.assign(DynamicText.prototype, Methods$c);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -23763,7 +23793,7 @@
       }
     }]);
     return CircularProgress;
-  }(ProgressBase(Canvas));
+  }(ProgressBase(Canvas$1));
 
   ObjectFactory.register('circularProgressCanvas', function (x, y, radius, barColor, value, config) {
     var gameObject = new CircularProgress(this.scene, x, y, radius, barColor, value, config);
@@ -24272,7 +24302,7 @@
       }
     }]);
     return LineProgress;
-  }(ProgressBase(Canvas));
+  }(ProgressBase(Canvas$1));
 
   ObjectFactory.register('circularProgressCanvas', function (x, y, width, height, barColor, value, config) {
     var gameObject = new LineProgress(this.scene, x, y, width, height, barColor, value, config);

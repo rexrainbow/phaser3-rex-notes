@@ -1,5 +1,5 @@
 import VideoBase from '../videobase/VideoBase.js';
-import Canvas from '../../canvas/Canvas.js';
+import Canvas from '../../canvas/canvasbase/Canvas.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

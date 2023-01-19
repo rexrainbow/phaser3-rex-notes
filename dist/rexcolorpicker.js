@@ -9914,33 +9914,6 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
     drawFrame: function drawFrame(key, frame, x, y, width, height) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
@@ -10088,7 +10061,7 @@
 
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
-  var Canvas = /*#__PURE__*/function (_GameObject) {
+  var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
@@ -10241,9 +10214,66 @@
     return Canvas;
   }(GameObject);
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
+  Phaser.Class.mixin(Canvas$1, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
   // Components.FX,  // Open for 3.60
   Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render$1, CanvasMethods, TextureMethods]);
+
+  var LoadImageMethods = {
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+        if (callback) {
+          callback();
+        }
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    loadFromFile: function loadFromFile(file, callback) {
+      var url = URL.createObjectURL(file);
+      this.loadFromURL(url, function () {
+        URL.revokeObjectURL(url);
+        if (callback) {
+          callback();
+        }
+      });
+      return this;
+    },
+    loadFromFilePromise: function loadFromFilePromise(file) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromFile(file, resolve);
+      });
+    }
+  };
+
+  var Canvas = /*#__PURE__*/function (_CanvasBase) {
+    _inherits(Canvas, _CanvasBase);
+    var _super = _createSuper(Canvas);
+    function Canvas() {
+      _classCallCheck(this, Canvas);
+      return _super.apply(this, arguments);
+    }
+    return _createClass(Canvas);
+  }(Canvas$1);
+  Object.assign(Canvas.prototype, LoadImageMethods);
 
   var Color$2 = Phaser.Display.Color;
   var Percent$2 = Phaser.Math.Percent;
