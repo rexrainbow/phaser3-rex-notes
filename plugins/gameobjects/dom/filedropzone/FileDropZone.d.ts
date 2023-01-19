@@ -8,6 +8,9 @@ declare namespace FileDropZone {
         width?: number,
         height?: number,
 
+        filters?: {
+            [filterType: string]: (file: File) => boolean
+        }
 
     }
 }

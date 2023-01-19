@@ -253,12 +253,21 @@
       _this.type = 'rexFileDropZone';
       _this.resize(width, height);
       _this._files = [];
+      _this.filters = config.filters;
 
       // Apply events
       RouteEvents(_assertThisInitialized(_this), element, ElementEvents, true);
       StopPropagationTouchEvents(element);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
+        if (this.filters) {
+          for (var filterType in this.filters) {
+            var files = this._files.filter(this.filters[filterType]);
+            if (files.length > 0) {
+              this.emit("drop.".concat(filterType), files);
+            }
+          }
+        }
       }, _assertThisInitialized(_this));
       return _this;
     }

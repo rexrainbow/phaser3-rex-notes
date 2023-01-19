@@ -9062,11 +9062,20 @@
 <h3 id="add-file-drop-zone-object">Add file-drop-zone object<a class="headerlink" href="#add-file-drop-zone-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileDropZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexFileDropZone</span><span class="p">({</span>
     <span class="c1">// style: { },</span>
+
+    <span class="c1">// filters: { filterType: (file) =&gt; boolean }</span>
 <span class="p">});</span>
 <span class="c1">// var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);</span>
 </code></pre></div>
 <ul>
 <li><code>style</code> : CSS style of div element.</li>
+<li><code>filters</code> : Filter methods, optional. For example, image files filter, will fire <code>'drop.image'</code> event
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">image</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\.(jpg|jpeg|png|gif)$/i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -9105,9 +9114,13 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Drop file(s)
+<li>Drop files
     <div class="highlight"><pre><span></span><code><span class="nx">fileDropZone</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileDropZone</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">fileDropZone</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Drop filtered files
+    <div class="highlight"><pre><span></span><code><span class="nx">fileDropZone</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop.&#39;</span> <span class="o">+</span> <span class="nx">filterType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
 </code></pre></div></li>
 <li>Drag-enter/drag-leave/drag-over file(s)

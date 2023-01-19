@@ -26,10 +26,15 @@ class Demo extends Phaser.Scene {
             this.setDisplaySize(newSize.width, newSize.height);
         }).bind(canvas)
 
-        var fileDropZone = this.add.rexFileDropZone()
+        var fileDropZone = this.add.rexFileDropZone({
+            filters: {
+                image: function(file) {
+                    return file.name.match(/\.(jpg|jpeg|png|gif)$/i)
+                }
+            }
+        })
             .syncTo(cover)
-            .on('drop', function () {
-                var files = fileDropZone.files;
+            .on('drop.image', function (files) {
                 console.log('drop', files);
 
                 if (files.length === 0) {

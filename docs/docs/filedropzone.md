@@ -110,11 +110,21 @@ Create a div element for dropping file(s).
 ```javascript
 var fileDropZone = scene.add.rexFileDropZone({
     // style: { },
+    
+    // filters: { filterType: (file) => boolean }
 });
 // var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);
 ```
 
 - `style` : CSS style of div element.
+- `filters` : Filter methods, optional. For example, image files filter, will fire `'drop.image'` event
+    ```javascript
+    {
+        image: function(file) { 
+            return file.name.match(/\.(jpg|jpeg|png|gif)$/i)
+        }
+    }
+    ```
 
 ### Custom class
 
@@ -157,10 +167,15 @@ var files = fileDropZone.files;
 
 ### Events
 
-- Drop file(s)
+- Drop files
     ```javascript
     fileDropZone.on('drop', function(fileDropZone) {
         var files = fileDropZone.files;
+    })
+    ```
+- Drop filtered files
+    ```javascript
+    fileDropZone.on('drop.' + filterType, function(files) {
     })
     ```
 - Drag-enter/drag-leave/drag-over file(s)

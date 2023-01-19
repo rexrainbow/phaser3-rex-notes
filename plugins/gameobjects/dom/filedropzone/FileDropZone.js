@@ -35,6 +35,7 @@ class FileDropZone extends DOMElement {
         this.resize(width, height);
 
         this._files = [];
+        this.filters = config.filters;
 
         // Apply events
         RouteEvents(this, element, ElementEvents, true);
@@ -43,6 +44,15 @@ class FileDropZone extends DOMElement {
         this
             .on('drop', function (gameObject, e) {
                 this._files = e.dataTransfer.files;
+
+                if (this.filters) {
+                    for (var filterType in this.filters) {
+                        var files = this._files.filter(this.filters[filterType]);
+                        if (files.length > 0) {
+                            this.emit(`drop.${filterType}`, files);
+                        }
+                    }
+                }
             }, this)
     }
 
