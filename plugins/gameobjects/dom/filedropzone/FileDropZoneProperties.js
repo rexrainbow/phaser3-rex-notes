@@ -1,8 +1,11 @@
-const ElementEvents = {
+const DragDropEvents = {
     dragenter: 'dragenter',
     dragleave: 'dragleave',
     dragover: 'dragover',
     drop: 'drop',
+};
+
+const ElementEvents = {
 
     click: 'click',
     dblclick: 'dblclick',
@@ -22,5 +25,6 @@ const ElementEvents = {
 
 
 export {
+    DragDropEvents,
     ElementEvents
 };

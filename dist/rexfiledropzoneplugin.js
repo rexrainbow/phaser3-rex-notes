@@ -178,11 +178,13 @@
     loadFilePromise: LoadFilePromise
   };
 
-  var ElementEvents = {
+  var DragDropEvents = {
     dragenter: 'dragenter',
     dragleave: 'dragleave',
     dragover: 'dragover',
-    drop: 'drop',
+    drop: 'drop'
+  };
+  var ElementEvents = {
     click: 'click',
     dblclick: 'dblclick',
     mousedown: 'pointerdown',
@@ -209,19 +211,6 @@
     for (var elementEventName in elementEvents) {
       _loop(elementEventName);
     }
-  };
-
-  var StopPropagationTouchEvents = function StopPropagationTouchEvents(element) {
-    // Don't propagate touch/mouse events to parent(game canvas)
-    element.addEventListener('touchstart', callback, false);
-    element.addEventListener('touchmove', callback, false);
-    element.addEventListener('touchend', callback, false);
-    element.addEventListener('mousedown', callback, false);
-    element.addEventListener('mouseup', callback, false);
-    element.addEventListener('mousemove', callback, false);
-  };
-  var callback = function callback(e) {
-    e.stopPropagation();
   };
 
   var DOMElement = Phaser.GameObjects.DOMElement;
@@ -256,8 +245,8 @@
       _this.filters = config.filters;
 
       // Apply events
-      RouteEvents(_assertThisInitialized(_this), element, ElementEvents, true);
-      StopPropagationTouchEvents(element);
+      RouteEvents(_assertThisInitialized(_this), element, DragDropEvents, true);
+      RouteEvents(_assertThisInitialized(_this), element, ElementEvents);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
         if (this._files && this.filters) {

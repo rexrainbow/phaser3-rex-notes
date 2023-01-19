@@ -1,9 +1,8 @@
 import Resize from '../utils/Resize.js';
 import SyncTo from '../utils/SyncTo.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
-import { ElementEvents } from './FileDropZoneProperties.js';
+import { DragDropEvents, ElementEvents } from './FileDropZoneProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
-import StopPropagationTouchEvents from '../utils/StopPropagationTouchEvents.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -38,8 +37,8 @@ class FileDropZone extends DOMElement {
         this.filters = config.filters;
 
         // Apply events
-        RouteEvents(this, element, ElementEvents, true);
-        StopPropagationTouchEvents(element);
+        RouteEvents(this, element, DragDropEvents, true);
+        RouteEvents(this, element, ElementEvents);
 
         this
             .on('drop', function (gameObject, e) {
