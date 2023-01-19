@@ -260,11 +260,18 @@
       StopPropagationTouchEvents(element);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
-        if (this.filters) {
+        if (this._files && this.filters) {
           for (var filterType in this.filters) {
-            var files = this._files.filter(this.filters[filterType]);
-            if (files.length > 0) {
-              this.emit("drop.".concat(filterType), files);
+            var filterCallback = this.filters[filterType];
+            var filteredFiles = [];
+            for (var i = 0, cnt = this._files.length; i < cnt; i++) {
+              var file = this._files[i];
+              if (filterCallback(file)) {
+                filteredFiles.push(file);
+              }
+            }
+            if (filteredFiles.length > 0) {
+              this.emit("drop.".concat(filterType), filteredFiles);
             }
           }
         }
