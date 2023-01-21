@@ -247,6 +247,61 @@ holyGrail.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+### Re-build
+
+Destroy current elements then add elements with new config.
+
+```javascript
+holyGrail.build({
+    // Elements
+    background: backgroundGameObject,
+
+    header: headerGameObject,
+
+    leftSide: leftSideGameObject,
+
+    content: contentGameObject,
+
+    rightSide: rightSideGameObject,
+
+    footer: footerGameObject,
+
+    layoutMode: 0,
+
+    // Space
+    space: {        
+        header: 0,  // {left, right, top, bottom}
+        footer: 0,  // {left, right, top, bottom}
+        leftSide: 0, // {left, right, top, bottom}
+        rightSide: 0, // {left, right, top, bottom}
+    },
+
+    // proportion: {
+    //     header: 0,
+    //     footer: 0,
+    //     leftSide: 0,
+    //     rightSide: 0,
+    //     content: 1,
+    // },
+
+    // expand: {
+    //     header: true,
+    //     footer: true,
+    //     leftSide: true,
+    //     rightSide: true,
+    //     content: false,
+    // },
+
+    // align: {
+    //     header: 'center',
+    //     footer: 'center',
+    //     leftSide: 'center',
+    //     rightSide: 'center',
+    //     content: 'center',
+    // },
+})
+```
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
