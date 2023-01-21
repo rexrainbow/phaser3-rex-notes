@@ -1,6 +1,6 @@
 import ComponentBase from '../componentbase/ComponentBase';
 
-class Commands extends ComponentBase {
+class CommandHub extends ComponentBase {
     addCommand(name, callback, scope) {
         if (this.hasOwnProperty(name)) {
             console.warn(`Command '${name}' has been added`);
@@ -33,9 +33,4 @@ class Commands extends ComponentBase {
 
 }
 
-Object.assign(
-    Commands.prototype,
-    EventEmitterMethods
-);
-
-export default Commands;
+export default CommandHub;
