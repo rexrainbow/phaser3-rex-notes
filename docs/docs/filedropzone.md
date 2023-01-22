@@ -196,7 +196,7 @@ var files = fileDropZone.files;
 
 ```javascript
 fileDropZone.loadFile(file, loaderType, key);
-// fileDropZone.loadFile(file, loaderType, key, cahceType);
+// fileDropZone.loadFile(file, loaderType, key, cahceType, onComplete);
 ```
 
 or
@@ -213,6 +213,7 @@ fileDropZone.loadFilePromise(file, loaderType, key, cahceType)
 - `key` : Unique string key.
 - `cahceType` : 
     - `undefined` : Use default value.
+- `onComplete` : Callback invoked when file loaded to cache.
 - `content` : Content of file.
 
 ### Create object URL

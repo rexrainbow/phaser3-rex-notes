@@ -55,7 +55,8 @@ declare class FileChooser extends Phaser.GameObjects.DOMElement {
         file: File,
         loaderType: string,
         key: string,
-        cacheType?: string
+        cacheType?: string,
+        onComplete?: (data: any) => void
     ): this;
 
     loadFilePromise(

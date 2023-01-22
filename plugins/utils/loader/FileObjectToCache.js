@@ -3,15 +3,17 @@ var FileObjectToCache = function (scene, file, loaderType, key, cacheType, onCom
         cacheType = GetDefaultCacheType(loaderType);
     }
 
-    var cache = scene.cache[cacheType];
-    cache.remove(key);
+    var cache = GetCache(scene, cacheType);
+    if (cache.exists(key)) {
+        cache.remove(key);
+    }
 
     var url = window.URL.createObjectURL(file);
 
     var loader = scene.load;
     if (onComplete) {
-        loader.once(`filecomplete-${loaderType}-${key}`, function (key, type, file) {
-            onComplete(file);
+        loader.once(`filecomplete-${loaderType}-${key}`, function (key, type, data) {
+            onComplete(data);
         })
     }
     loader[loaderType](key, url);
@@ -36,6 +38,16 @@ var GetDefaultCacheType = function (loaderType) {
 
         default: return loaderType;
     }
+}
+
+var GetCache = function (scene, cacheType) {
+    var cache;
+    if (cacheType === 'textures') {
+        cache = scene.sys.textures;
+    } else {
+        cache = scene.sys.cache[cacheType];
+    }
+    return cache;
 }
 
 export default FileObjectToCache;

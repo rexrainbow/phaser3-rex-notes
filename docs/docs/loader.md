@@ -30,6 +30,28 @@ scene.load.start();                     // start loading
 scene.load.setPath(path)
 ```
 
+### More configurations
+
+More configurations in game config
+
+```javascript
+loader:{
+    baseURL: '',
+    path: '',
+    enableParallel: true,
+    maxParallelDownloads: 4,
+    crossOrigin: undefined,
+    responseType: '',
+    async: true,
+    user: '',
+    password: '',
+    timeout: 0,
+    withCredentials: false,
+    imageLoadType: 'XHR',    // 'HTMLImageElement' 
+    localScheme: [ 'file://', 'capacitor://' ]
+},
+```
+
 ### Events
 
 - Load file complete event
