@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
+import RoundRecrangle from '../../../plugins/roundrectangle';
 
 export default NumberBar;
 
@@ -25,10 +26,10 @@ declare namespace NumberBar {
         iconMask?: boolean,
 
         slider?: {
-            background?: Phaser.GameObjects.GameObject,
-            track?: Phaser.GameObjects.GameObject,
-            indicator?: Phaser.GameObjects.GameObject,
-            thumb?: Phaser.GameObjects.GameObject,
+            background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+            track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+            indicator?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+            thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
             input?: SliderInputTypes,
             gap?: number,
             easeValue?: {

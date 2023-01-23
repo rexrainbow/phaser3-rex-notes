@@ -7940,6 +7940,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#re-build" class="md-nav__link">
+    Re-build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8895,6 +8902,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#re-build" class="md-nav__link">
+    Re-build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9208,6 +9222,57 @@
 <div class="highlight"><pre><span></span><code><span class="nx">holyGrail</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h3 id="re-build">Re-build<a class="headerlink" href="#re-build" title="Permanent link">&para;</a></h3>
+<p>Destroy current elements then add elements with new config.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">holyGrail</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span>
+    <span class="c1">// Elements</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">header</span><span class="o">:</span> <span class="nx">headerGameObject</span><span class="p">,</span>
+
+    <span class="nx">leftSide</span><span class="o">:</span> <span class="nx">leftSideGameObject</span><span class="p">,</span>
+
+    <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
+
+    <span class="nx">rightSide</span><span class="o">:</span> <span class="nx">rightSideGameObject</span><span class="p">,</span>
+
+    <span class="nx">footer</span><span class="o">:</span> <span class="nx">footerGameObject</span><span class="p">,</span>
+
+    <span class="nx">layoutMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+    <span class="c1">// Space</span>
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>        
+        <span class="nx">header</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// {left, right, top, bottom}</span>
+        <span class="nx">footer</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// {left, right, top, bottom}</span>
+        <span class="nx">leftSide</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// {left, right, top, bottom}</span>
+        <span class="nx">rightSide</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// {left, right, top, bottom}</span>
+    <span class="p">},</span>
+
+    <span class="c1">// proportion: {</span>
+    <span class="c1">//     header: 0,</span>
+    <span class="c1">//     footer: 0,</span>
+    <span class="c1">//     leftSide: 0,</span>
+    <span class="c1">//     rightSide: 0,</span>
+    <span class="c1">//     content: 1,</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// expand: {</span>
+    <span class="c1">//     header: true,</span>
+    <span class="c1">//     footer: true,</span>
+    <span class="c1">//     leftSide: true,</span>
+    <span class="c1">//     rightSide: true,</span>
+    <span class="c1">//     content: false,</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// align: {</span>
+    <span class="c1">//     header: &#39;center&#39;,</span>
+    <span class="c1">//     footer: &#39;center&#39;,</span>
+    <span class="c1">//     leftSide: &#39;center&#39;,</span>
+    <span class="c1">//     rightSide: &#39;center&#39;,</span>
+    <span class="c1">//     content: &#39;center&#39;,</span>
+    <span class="c1">// },</span>
+<span class="p">})</span>
+</code></pre></div>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>

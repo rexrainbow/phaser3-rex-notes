@@ -615,6 +615,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#more-configurations" class="md-nav__link">
+    More configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9041,6 +9048,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#more-configurations" class="md-nav__link">
+    More configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9326,6 +9340,24 @@
 <h3 id="set-path">Set path<a class="headerlink" href="#set-path" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">setPath</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span>
 </code></pre></div>
+<h3 id="more-configurations">More configurations<a class="headerlink" href="#more-configurations" title="Permanent link">&para;</a></h3>
+<p>More configurations in game config</p>
+<div class="highlight"><pre><span></span><code><span class="nx">loader</span><span class="o">:</span><span class="p">{</span>
+    <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">enableParallel</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
+    <span class="nx">crossOrigin</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="k">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">imageLoadType</span><span class="o">:</span> <span class="s1">&#39;XHR&#39;</span><span class="p">,</span>    <span class="c1">// &#39;HTMLImageElement&#39; </span>
+    <span class="nx">localScheme</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;file://&#39;</span><span class="p">,</span> <span class="s1">&#39;capacitor://&#39;</span> <span class="p">]</span>
+<span class="p">},</span>
+</code></pre></div>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Load file complete event
@@ -9608,14 +9640,14 @@
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>A glsl file can contain multiple shaders, all separated by a frontmatter block.</p>
-<div class="highlight"><pre><span></span><code><span class="o">---</span>
-<span class="n">name</span><span class="o">:</span> 
-<span class="n">type</span><span class="o">:</span> 
-<span class="o">---</span>
+<div class="highlight"><pre><span></span><code><span class="o">---</span><span class="w"></span>
+<span class="n">name</span><span class="o">:</span><span class="w"> </span>
+<span class="n">type</span><span class="o">:</span><span class="w"> </span>
+<span class="o">---</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>

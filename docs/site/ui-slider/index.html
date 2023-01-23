@@ -9080,9 +9080,47 @@
     <span class="nx">reverseAxis</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+    <span class="cm">/* </span>
+<span class="cm">    background: { </span>
+<span class="cm">        radius: 0, </span>
+<span class="cm">        color: undefined, alpha: 1,</span>
+<span class="cm">        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">        shape: undefined</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+
     <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
+    <span class="cm">/* </span>
+<span class="cm">    track: { </span>
+<span class="cm">        width: 1, height: 1,</span>
+<span class="cm">        radius: 0, </span>
+<span class="cm">        color: undefined, alpha: 1,</span>
+<span class="cm">        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">        shape: undefined</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>    
+
     <span class="nx">indicator</span><span class="o">:</span> <span class="nx">indicatorGameObject</span><span class="p">,</span>
+    <span class="cm">/* </span>
+<span class="cm">    indicator: { </span>
+<span class="cm">        width: 1, height: 1,</span>
+<span class="cm">        radius: 0, </span>
+<span class="cm">        color: undefined, alpha: 1,</span>
+<span class="cm">        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">        shape: undefined</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+
     <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+    <span class="cm">/* </span>
+<span class="cm">    thumb: { </span>
+<span class="cm">        width: 1, height: 1,</span>
+<span class="cm">        radius: 0, </span>
+<span class="cm">        color: undefined, alpha: 1,</span>
+<span class="cm">        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">        shape: undefined</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
 
     <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;drag&#39;</span><span class="p">,</span>
 
@@ -9141,10 +9179,57 @@
 <li><code>true</code> : Map left/top to <code>1</code>, and right/bottom to <code>0</code>.</li>
 </ul>
 </li>
-<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of slider.</li>
-<li><code>track</code> : Game object of track, optional. This track game object will be resized to fit the size of slider, with <em>space</em>.</li>
-<li><code>indicator</code> : Game object of indicator, optional.</li>
-<li><code>thumb</code> : Game object of thumb, optional.</li>
+<li><code>background</code> : <ul>
+<li><a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of slider.</li>
+<li>A plain object to create <a href="../shape-roundrectangle/#create-shape-object">round rectangle shape</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> 
+    <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> 
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+    <span class="nx">shape</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>track</code> : <ul>
+<li>Game object of track, optional. This track game object will be resized to fit the size of slider, with <em>space</em>.</li>
+<li>A plain object to create <a href="../shape-roundrectangle/#create-shape-object">round rectangle shape</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> 
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> 
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+    <span class="nx">shape</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>indicator</code> : <ul>
+<li>Game object of indicator, optional.</li>
+<li>A plain object to create <a href="../shape-roundrectangle/#create-shape-object">round rectangle shape</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> 
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> 
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+    <span class="nx">shape</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>thumb</code> : <ul>
+<li>Game object of thumb, optional.</li>
+<li>A plain object to create <a href="../shape-roundrectangle/#create-shape-object">round rectangle shape</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> 
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> 
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+    <span class="nx">shape</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>input</code> :<ul>
 <li><code>'pan'</code>, <code>'drag'</code>, or <code>0</code> : Control slider by panning/dragging thumb game object. Default setting.</li>
 <li><code>'click'</code>, or <code>1</code> : Control slider by touching track game object.</li>

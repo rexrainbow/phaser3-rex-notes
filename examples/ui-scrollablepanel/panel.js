@@ -65,6 +65,11 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
+            // slider: {
+            //     track: { width: 20, radius: 10, color: COLOR_DARK },
+            //     thumb: { radius: 13, color: COLOR_LIGHT }
+            // },
+
             scroller: {
                 // pointerOutRelease: false,
             },

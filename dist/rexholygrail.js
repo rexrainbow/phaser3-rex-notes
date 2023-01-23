@@ -205,7 +205,7 @@
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var Base$1 = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
     var _super = _createSuper(Base);
@@ -274,7 +274,7 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem$2(this.children, gameObjects,
+        RemoveItem$3(this.children, gameObjects,
         // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
@@ -1885,11 +1885,11 @@
     return this;
   };
 
-  var methods$3 = {
+  var methods$4 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods$4, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2158,7 +2158,7 @@
     }]);
     return ContainerLite;
   }(Base$1);
-  Object.assign(ContainerLite.prototype, methods$3);
+  Object.assign(ContainerLite.prototype, methods$4);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -2707,6 +2707,20 @@
     }
   };
 
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var ContainerRemove = ContainerLite.prototype.remove;
+  var RemoveChild = function RemoveChild(gameObject, destroyChild) {
+    if (this.isBackground(gameObject)) {
+      RemoveItem$2(this.backgroundChildren, gameObject);
+    }
+    ContainerRemove.call(this, gameObject, destroyChild);
+    if (!destroyChild && this.sizerEventsEnable) {
+      gameObject.emit('sizer.remove', gameObject, this);
+      this.emit('remove', gameObject, this);
+    }
+    return this;
+  };
+
   var GetParent = function GetParent(gameObject, name) {
     var parent;
     if (name === undefined) {
@@ -2754,11 +2768,32 @@
     }
   };
 
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods$1 = {
     removeFromParentSizer: function removeFromParentSizer() {
       var parent = GetParentSizerMethods.getParentSizer(gameObject);
       if (parent) {
         parent.remove(this);
+      }
+      return this;
+    },
+    removeBackground: function removeBackground(gameObject, destroyChild) {
+      if (this.backgroundChildren === undefined) {
+        return this;
+      }
+      if (this.getParentSizer(gameObject) !== this) {
+        return this;
+      }
+      RemoveItem$1(this.backgroundChildren, gameObject);
+      RemoveChild.call(this, gameObject, destroyChild);
+      return this;
+    },
+    removeAllBackgrounds: function removeAllBackgrounds(destroyChild) {
+      if (this.backgroundChildren === undefined) {
+        return this;
+      }
+      for (var i = this.backgroundChildren.length - 1; i >= 0; i--) {
+        this.remove(this.backgroundChildren[i], destroyChild);
       }
       return this;
     }
@@ -8462,10 +8497,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$2 = {
+  var methods$3 = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$2);
+  Object.assign(Rotate.prototype, methods$3);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -8556,7 +8591,7 @@
     return this;
   };
 
-  var methods$1 = {
+  var methods$2 = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -8591,7 +8626,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$1, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$2, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
@@ -8841,7 +8876,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base.prototype, methods$1);
+  Object.assign(Base.prototype, methods$2);
 
   var GetChildrenWidth = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -9327,20 +9362,6 @@
     }
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var ContainerRemove = ContainerLite.prototype.remove;
-  var RemoveChild = function RemoveChild(gameObject, destroyChild) {
-    if (this.isBackground(gameObject)) {
-      RemoveItem$1(this.backgroundChildren, gameObject);
-    }
-    ContainerRemove.call(this, gameObject, destroyChild);
-    if (!destroyChild && this.sizerEventsEnable) {
-      gameObject.emit('sizer.remove', gameObject, this);
-      this.emit('remove', gameObject, this);
-    }
-    return this;
-  };
-
   var ContainerClear = ContainerLite.prototype.clear;
   var ClearChildren = function ClearChildren(destroyChild) {
     if (this.backgroundChildren) {
@@ -9419,7 +9440,7 @@
     }
   };
 
-  var methods = {
+  var methods$1 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -9430,7 +9451,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$1, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -9541,7 +9562,7 @@
     }]);
     return Sizer;
   }(Base);
-  Object.assign(Sizer.prototype, methods);
+  Object.assign(Sizer.prototype, methods$1);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GetAddChildConfig = function GetAddChildConfig(config, key, defaultValues) {
@@ -9837,6 +9858,34 @@
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var LayoutCallbacks = [LayoutMode0$1, LayoutMode1, LayoutMode2, LayoutMode0];
+  var Build = function Build(config) {
+    this.clear(true);
+
+    // Add Background
+    var background = GetValue(config, 'background', undefined);
+    if (background) {
+      this.addBackground(background);
+    }
+    var layoutMode = GetValue(config, 'layoutMode', 0);
+    if (typeof layoutMode === 'string') {
+      layoutMode = LayoutModesMap[layoutMode.toUpperCase()];
+    }
+    var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
+    layoutCallback.call(this, config);
+    this.addChildrenMap('background', config.background);
+    this.addChildrenMap('header', config.header);
+    this.addChildrenMap('leftSide', config.leftSide);
+    this.addChildrenMap('content', config.content);
+    this.addChildrenMap('rightSide', config.rightSide);
+    this.addChildrenMap('footer', config.footer);
+  };
+  var LayoutModesMap = {
+    'FFF': 0,
+    'LFF': 1,
+    'FFR': 2,
+    'LFR': 3
+  };
+
   var HolyGrail = /*#__PURE__*/function (_Sizer) {
     _inherits(HolyGrail, _Sizer);
     var _super = _createSuper(HolyGrail);
@@ -9850,34 +9899,15 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexHolyGrail';
-
-      // Add Background
-      var background = GetValue(config, 'background', undefined);
-      if (background) {
-        _this.addBackground(background);
-      }
-      var layoutMode = GetValue(config, 'layoutMode', 0);
-      if (typeof layoutMode === 'string') {
-        layoutMode = LayoutModesMap[layoutMode.toUpperCase()];
-      }
-      var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
-      layoutCallback.call(_assertThisInitialized(_this), config);
-      _this.addChildrenMap('background', config.background);
-      _this.addChildrenMap('header', config.header);
-      _this.addChildrenMap('leftSide', config.leftSide);
-      _this.addChildrenMap('content', config.content);
-      _this.addChildrenMap('rightSide', config.rightSide);
-      _this.addChildrenMap('footer', config.footer);
+      _this.build(config);
       return _this;
     }
     return _createClass(HolyGrail);
   }(Sizer);
-  var LayoutModesMap = {
-    'FFF': 0,
-    'LFF': 1,
-    'FFR': 2,
-    'LFR': 3
+  var methods = {
+    build: Build
   };
+  Object.assign(HolyGrail.prototype, methods);
 
   return HolyGrail;
 

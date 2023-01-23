@@ -9136,7 +9136,7 @@
 </ul>
 <h3 id="load-file-to-cache">Load file to cache<a class="headerlink" href="#load-file-to-cache" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">fileDropZone</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">loaderType</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
-<span class="c1">// fileDropZone.loadFile(file, loaderType, key, cahceType);</span>
+<span class="c1">// fileDropZone.loadFile(file, loaderType, key, cahceType, onComplete);</span>
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">fileDropZone</span><span class="p">.</span><span class="nx">loadFilePromise</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">loaderType</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">cahceType</span><span class="p">)</span>
@@ -9152,6 +9152,7 @@
 <li><code>undefined</code> : Use default value.</li>
 </ul>
 </li>
+<li><code>onComplete</code> : Callback invoked when file loaded to cache.</li>
 <li><code>content</code> : Content of file.</li>
 </ul>
 <h3 id="create-object-url">Create object URL<a class="headerlink" href="#create-object-url" title="Permanent link">&para;</a></h3>

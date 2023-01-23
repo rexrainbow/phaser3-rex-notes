@@ -102,7 +102,27 @@ var panel = scene.rexUI.add.scrollablePanel({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         // input: 'drag',
         // position: 'right',
         // adaptThumbSize: false,
@@ -202,9 +222,53 @@ var panel = scene.rexUI.add.scrollablePanel({
             - `1`, or `'everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.
         - `false` : No mask
 - `slider` : Componments of slider, optional.
-    - `slider.background` : Game object of slider background, optional.
-    - `slider.track` : Game object of track.
-    - `slider.thumb` : Game object of thumb.
+    - `slider.background` : 
+        - [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.track` : 
+        - Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.indicator` : 
+        - Game object of indicator, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.thumb` : 
+        - Game object of thumb, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
     - `slider.input` :
         - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.

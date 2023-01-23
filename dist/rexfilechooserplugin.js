@@ -221,13 +221,15 @@
     if (cacheType === undefined) {
       cacheType = GetDefaultCacheType(loaderType);
     }
-    var cache = scene.cache[cacheType];
-    cache.remove(key);
+    var cache = GetCache(scene, cacheType);
+    if (cache.exists(key)) {
+      cache.remove(key);
+    }
     var url = window.URL.createObjectURL(file);
     var loader = scene.load;
     if (onComplete) {
-      loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, file) {
-        onComplete(file);
+      loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
+        onComplete(data);
       });
     }
     loader[loaderType](key, url);
@@ -249,17 +251,26 @@
         return loaderType;
     }
   };
+  var GetCache = function GetCache(scene, cacheType) {
+    var cache;
+    if (cacheType === 'textures') {
+      cache = scene.sys.textures;
+    } else {
+      cache = scene.sys.cache[cacheType];
+    }
+    return cache;
+  };
 
-  var LoadFile = function LoadFile(file, loaderType, key, cacheType) {
+  var LoadFile = function LoadFile(file, loaderType, key, cacheType, onComplete) {
     var scene = this.scene;
-    FileObjectToCache(scene, file, loaderType, key, cacheType);
+    FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
     return this;
   };
   var LoadFilePromise = function LoadFilePromise(file, loaderType, key, cacheType) {
     var scene = this.scene;
     return new Promise(function (resolve, reject) {
-      var onComplete = function onComplete(file) {
-        resolve(file);
+      var onComplete = function onComplete(data) {
+        resolve(data);
       };
       FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
     });

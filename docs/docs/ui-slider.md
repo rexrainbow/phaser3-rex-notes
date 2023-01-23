@@ -88,9 +88,47 @@ var slider = scene.rexUI.add.slider({
     reverseAxis: false,
 
     background: backgroundGameObject,
+    /* 
+    background: { 
+        radius: 0, 
+        color: undefined, alpha: 1,
+        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+        shape: undefined
+    }
+    */
+
     track: trackGameObject,
+    /* 
+    track: { 
+        width: 1, height: 1,
+        radius: 0, 
+        color: undefined, alpha: 1,
+        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+        shape: undefined
+    }
+    */    
+
     indicator: indicatorGameObject,
+    /* 
+    indicator: { 
+        width: 1, height: 1,
+        radius: 0, 
+        color: undefined, alpha: 1,
+        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+        shape: undefined
+    }
+    */
+
     thumb: thumbGameObject,
+    /* 
+    thumb: { 
+        width: 1, height: 1,
+        radius: 0, 
+        color: undefined, alpha: 1,
+        strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+        shape: undefined
+    }
+    */
 
     input: 'drag',
 
@@ -137,10 +175,53 @@ var slider = scene.rexUI.add.slider({
 - `reverseAxis` : 
     - `false` : Map left/top to `0`, and right/bottom to `1`. Default behavior.
     - `true` : Map left/top to `1`, and right/bottom to `0`.
-- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
-- `track` : Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
-- `indicator` : Game object of indicator, optional.
-- `thumb` : Game object of thumb, optional.
+- `background` : 
+    - [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
+    - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+        ```javascript
+        { 
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        ```
+- `track` : 
+    - Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
+    - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+        ```javascript
+        { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        ```
+- `indicator` : 
+    - Game object of indicator, optional.
+    - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+        ```javascript
+        { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        ```
+- `thumb` : 
+    - Game object of thumb, optional.
+    - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+        ```javascript
+        { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        ```
 - `input` :
     - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
     - `'click'`, or `1` : Control slider by touching track game object.

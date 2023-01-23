@@ -1,4 +1,5 @@
 import Sizer from '../../sizer/Sizer';
+import RoundRecrangle from '../../../../plugins/roundrectangle';
 
 
 export default Scrollable;
@@ -24,9 +25,9 @@ declare namespace Scrollable {
 
         slider?: (
             {
-                background?: Phaser.GameObjects.GameObject,
-                track?: Phaser.GameObjects.GameObject,
-                thumb?: Phaser.GameObjects.GameObject,
+                background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+                track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+                thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
                 input?: SliderInputTypes,
                 position?: SliderPositionTypes,
                 adaptThumbSize?: boolean,

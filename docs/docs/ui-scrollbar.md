@@ -90,10 +90,49 @@ var scrollBar = scene.rexUI.add.scrollBar({
 
     background: backgroundGameObject,    
     slider: {
-        background: sliderBackgroundGameObject,
-        track: sliderTrackGameObject,
-        indicator: sliderIndicatorGameObject,
-        thumb: sliderThumbGameObject,
+        background: backgroundGameObject,
+        /* 
+        background: { 
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
+        track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */    
+
+        indicator: indicatorGameObject,
+        /* 
+        indicator: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
+        thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         input: 'drag',
         gap: undefined,        
         easeValue: {
@@ -149,10 +188,53 @@ var scrollBar = scene.rexUI.add.scrollBar({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of scrollBar.
 - `slider` : Slider game object which composed of
     - `slider.width` : Fixed width of slider, optional. Width of slider will be extended if this value is not set.
-    - `slider.background` : Game object of slider background, optional.
-    - `slider.track` : Game object of slider track.
-    - `slider.indicator` : Game object of slider indicator, optional.
-    - `slider.thumb` : Game object of slider thumb, optional.
+    - `slider.background` : 
+        - [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.track` : 
+        - Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.indicator` : 
+        - Game object of indicator, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.thumb` : 
+        - Game object of thumb, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
     - `slider.input` :
         - `'pan'`, `'drag'`, or `0` : Control knob by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
