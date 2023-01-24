@@ -1906,11 +1906,11 @@
     return this;
   };
 
-  var methods$g = {
+  var methods$h = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$g, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods$h, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2179,7 +2179,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$g);
+  Object.assign(ContainerLite.prototype, methods$h);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -8518,10 +8518,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$f = {
+  var methods$g = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$f);
+  Object.assign(Rotate.prototype, methods$g);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -8612,7 +8612,7 @@
     return this;
   };
 
-  var methods$e = {
+  var methods$f = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -8647,7 +8647,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$e, PaddingMethods, AddChildMethods$6, RemoveChildMethods$5, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$f, PaddingMethods, AddChildMethods$6, RemoveChildMethods$5, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$Y = Phaser.Utils.Objects.GetValue;
   var Base$1 = /*#__PURE__*/function (_Container) {
@@ -8897,7 +8897,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base$1.prototype, methods$e);
+  Object.assign(Base$1.prototype, methods$f);
 
   var GetChildrenWidth$2 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -9461,7 +9461,7 @@
     }
   };
 
-  var methods$d = {
+  var methods$e = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -9472,7 +9472,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$d, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods$1);
+  Object.assign(methods$e, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods$1);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -9583,7 +9583,7 @@
     }]);
     return Sizer;
   }(Base$1);
-  Object.assign(Sizer.prototype, methods$d);
+  Object.assign(Sizer.prototype, methods$e);
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
@@ -9736,6 +9736,43 @@
     return gameObject;
   };
 
+  var ResetDisplayContent = function ResetDisplayContent() {
+    if (config === undefined) {
+      config = {};
+    }
+    var text = config.text || '';
+    this.setText(text);
+    var iconGameObjct = this.childrenMap.icon;
+    if (iconGameObjct) {
+      if (config.icon === undefined) {
+        this.hide(iconGameObjct);
+      } else {
+        this.show(iconGameObjct);
+      }
+      if (config.iconSize) {
+        iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+      }
+      this.setIconTexture(config.icon, config.iconFrame);
+    }
+    var actionGameObjct = this.childrenMap.action;
+    if (actionGameObjct) {
+      if (config.action === undefined) {
+        this.hide(actionGameObjct);
+      } else {
+        this.show(actionGameObjct);
+      }
+      if (config.actionSize) {
+        actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+      }
+      this.setActionTexture(config.action, config.actionFrame);
+    }
+    return this;
+  };
+
+  var methods$d = {
+    resetDisplayContent: ResetDisplayContent
+  };
+
   var GetValue$V = Phaser.Utils.Objects.GetValue;
   var Label$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
@@ -9756,9 +9793,7 @@
       var actionMask = GetValue$V(config, 'actionMask', undefined);
       // Align
       var align = GetValue$V(config, 'align', undefined); // undefined/left/top: no space
-      // Space
-      var iconSpace = GetValue$V(config, 'space.icon', 0);
-      var textSpace = GetValue$V(config, 'space.text', 0);
+
       if (background) {
         _this.addBackground(background);
       }
@@ -9768,6 +9803,7 @@
         _this.addSpace();
       }
       if (icon) {
+        var iconSpace = GetValue$V(config, 'space.icon', 0);
         var padding;
         if (_this.orientation === 0) {
           if (text || action) {
@@ -9789,11 +9825,17 @@
         if (iconMask) {
           iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
         }
-      }
 
-      var iconSize = GetValue$V(config, 'iconSize');
-      _this.setIconSize(GetValue$V(config, 'iconWidth', iconSize), GetValue$V(config, 'iconHeight', iconSize));
+        _this.squareFitIcon = GetValue$V(config, 'squareFitIcon', false);
+        if (_this.squareFitIcon) {
+          _this.setIconSize();
+        } else {
+          var iconSize = GetValue$V(config, 'iconSize', undefined);
+          _this.setIconSize(GetValue$V(config, 'iconWidth', iconSize), GetValue$V(config, 'iconHeight', iconSize));
+        }
+      }
       if (text) {
+        var textSpace = GetValue$V(config, 'space.text', 0);
         var expandTextWidth = GetValue$V(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue$V(config, 'expandTextHeight', false);
         var proportion, padding, expand;
@@ -9825,10 +9867,15 @@
         if (actionMask) {
           actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
         }
-      }
 
-      var actionSize = GetValue$V(config, 'actionSize');
-      _this.setActionSize(GetValue$V(config, 'actionWidth', actionSize), GetValue$V(config, 'actionHeight', actionSize));
+        _this.squareFitAction = GetValue$V(config, 'squareFitAction', false);
+        if (_this.squareFitAction) {
+          _this.setActionSize();
+        } else {
+          var actionSize = GetValue$V(config, 'actionSize');
+          _this.setActionSize(GetValue$V(config, 'actionWidth', actionSize), GetValue$V(config, 'actionHeight', actionSize));
+        }
+      }
 
       // Add space
       if (align === 'center') {
@@ -9882,8 +9929,10 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.iconWidth !== undefined) {
+          SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+          this.resetChildScaleState(imageObject);
+        }
         return this;
       }
     }, {
@@ -9925,8 +9974,10 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.actionWidth !== undefined) {
+          SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+          this.resetChildScaleState(imageObject);
+        }
         return this;
       }
     }, {
@@ -9957,9 +10008,61 @@
     }, {
       key: "preLayout",
       value: function preLayout() {
+        var icon = this.childrenMap.icon;
+        if (icon) {
+          if (this.squareFitIcon) {
+            ResizeGameObject(icon, 2, 2);
+          } else if (this.iconWidth !== undefined) {
+            SetDisplaySize(icon, this.iconWidth, this.iconHeight);
+          }
+        }
+        var action = this.childrenMap.action;
+        if (action) {
+          if (this.squareFitAction) {
+            ResizeGameObject(action, 2, 2);
+          } else if (this.actionWidth !== undefined) {
+            SetDisplaySize(action, this.actionWidth, this.actionHeight);
+          }
+        }
         _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
+      }
+    }, {
+      key: "postResolveSize",
+      value: function postResolveSize(width, height) {
+        var resetProportionLength = false;
+        var icon = this.childrenMap.icon;
+        if (icon && this.squareFitIcon) {
+          var size;
+          if (this.orientation === 0) {
+            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(icon, 'top') - this.getChildOuterPadding(icon, 'bottom');
+          } else {
+            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(icon, 'left') - this.getChildOuterPadding(icon, 'right');
+          }
+          ResizeGameObject(icon, size, size);
+          if (icon.isRexSizer) {
+            icon.setMinSize(size, size);
+          }
+          resetProportionLength = true;
+        }
+        var action = this.childrenMap.action;
+        if (action && this.squareFitAction) {
+          var size;
+          if (this.orientation === 0) {
+            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(action, 'top') - this.getChildOuterPadding(action, 'bottom');
+          } else {
+            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(action, 'left') - this.getChildOuterPadding(action, 'right');
+          }
+          ResizeGameObject(action, size, size);
+          if (action.isRexSizer) {
+            action.setMinSize(size, size);
+          }
+          resetProportionLength = true;
+        }
+        if (resetProportionLength) {
+          this.proportionLength = undefined;
+          this._childrenWidth = undefined;
+          this.resolveWidth(width, true);
+        }
       }
     }, {
       key: "runLayout",
@@ -9998,43 +10101,10 @@
         }
         return this;
       }
-    }, {
-      key: "resetDisplayContent",
-      value: function resetDisplayContent(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        var text = config.text || '';
-        this.setText(text);
-        var iconGameObjct = this.childrenMap.icon;
-        if (iconGameObjct) {
-          if (config.icon === undefined) {
-            this.hide(iconGameObjct);
-          } else {
-            this.show(iconGameObjct);
-          }
-          if (config.iconSize) {
-            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
-          }
-          this.setIconTexture(config.icon, config.iconFrame);
-        }
-        var actionGameObjct = this.childrenMap.action;
-        if (actionGameObjct) {
-          if (config.action === undefined) {
-            this.hide(actionGameObjct);
-          } else {
-            this.show(actionGameObjct);
-          }
-          if (config.actionSize) {
-            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
-          }
-          this.setActionTexture(config.action, config.actionFrame);
-        }
-        return this;
-      }
     }]);
     return Label;
   }(Sizer);
+  Object.assign(Label$1.prototype, methods$d);
 
   var DeepClone = function DeepClone(inObject) {
     var outObject;

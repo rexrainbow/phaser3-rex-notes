@@ -1885,11 +1885,11 @@
     return this;
   };
 
-  var methods$7 = {
+  var methods$8 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$7, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods$8, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2158,7 +2158,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$7);
+  Object.assign(ContainerLite.prototype, methods$8);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -8497,10 +8497,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$6 = {
+  var methods$7 = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$6);
+  Object.assign(Rotate.prototype, methods$7);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -8591,7 +8591,7 @@
     return this;
   };
 
-  var methods$5 = {
+  var methods$6 = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -8626,7 +8626,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$5, PaddingMethods, AddChildMethods$2, RemoveChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$6, PaddingMethods, AddChildMethods$2, RemoveChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$t = Phaser.Utils.Objects.GetValue;
   var Base$1 = /*#__PURE__*/function (_Container) {
@@ -8876,7 +8876,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base$1.prototype, methods$5);
+  Object.assign(Base$1.prototype, methods$6);
 
   var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -9440,7 +9440,7 @@
     }
   };
 
-  var methods$4 = {
+  var methods$5 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -9451,7 +9451,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$4, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$5, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -9562,7 +9562,7 @@
     }]);
     return Sizer;
   }(Base$1);
-  Object.assign(Sizer.prototype, methods$4);
+  Object.assign(Sizer.prototype, methods$5);
 
   var GetValue$q = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
@@ -16201,7 +16201,7 @@
     return ColorInput;
   }(Sizer);
 
-  var methods$3 = {
+  var methods$4 = {
     // Color picker
     setCreateColorPickerBackgroundCallback: function setCreateColorPickerBackgroundCallback(callback) {
       this.colorPickerCreateBackgroundCallback = callback;
@@ -16541,7 +16541,7 @@
     }
   };
 
-  var methods$2 = {
+  var methods$3 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -16549,7 +16549,7 @@
     getChildrenSizers: GetChildrenSizers,
     layoutChildren: LayoutChildren
   };
-  Object.assign(methods$2, AddChildMethods, RemoveChildMethods);
+  Object.assign(methods$3, AddChildMethods, RemoveChildMethods);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -16605,7 +16605,7 @@
     }]);
     return OverlapSizer;
   }(Base$1);
-  Object.assign(OverlapSizer.prototype, methods$2);
+  Object.assign(OverlapSizer.prototype, methods$3);
 
   var LoadImageMethods = {
     loadFromURL: function loadFromURL(url, callback) {
@@ -17456,6 +17456,43 @@
     return gameObject;
   };
 
+  var ResetDisplayContent = function ResetDisplayContent() {
+    if (config === undefined) {
+      config = {};
+    }
+    var text = config.text || '';
+    this.setText(text);
+    var iconGameObjct = this.childrenMap.icon;
+    if (iconGameObjct) {
+      if (config.icon === undefined) {
+        this.hide(iconGameObjct);
+      } else {
+        this.show(iconGameObjct);
+      }
+      if (config.iconSize) {
+        iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+      }
+      this.setIconTexture(config.icon, config.iconFrame);
+    }
+    var actionGameObjct = this.childrenMap.action;
+    if (actionGameObjct) {
+      if (config.action === undefined) {
+        this.hide(actionGameObjct);
+      } else {
+        this.show(actionGameObjct);
+      }
+      if (config.actionSize) {
+        actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+      }
+      this.setActionTexture(config.action, config.actionFrame);
+    }
+    return this;
+  };
+
+  var methods$2 = {
+    resetDisplayContent: ResetDisplayContent
+  };
+
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var Label = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
@@ -17476,9 +17513,7 @@
       var actionMask = GetValue$7(config, 'actionMask', undefined);
       // Align
       var align = GetValue$7(config, 'align', undefined); // undefined/left/top: no space
-      // Space
-      var iconSpace = GetValue$7(config, 'space.icon', 0);
-      var textSpace = GetValue$7(config, 'space.text', 0);
+
       if (background) {
         _this.addBackground(background);
       }
@@ -17488,6 +17523,7 @@
         _this.addSpace();
       }
       if (icon) {
+        var iconSpace = GetValue$7(config, 'space.icon', 0);
         var padding;
         if (_this.orientation === 0) {
           if (text || action) {
@@ -17509,11 +17545,17 @@
         if (iconMask) {
           iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
         }
-      }
 
-      var iconSize = GetValue$7(config, 'iconSize');
-      _this.setIconSize(GetValue$7(config, 'iconWidth', iconSize), GetValue$7(config, 'iconHeight', iconSize));
+        _this.squareFitIcon = GetValue$7(config, 'squareFitIcon', false);
+        if (_this.squareFitIcon) {
+          _this.setIconSize();
+        } else {
+          var iconSize = GetValue$7(config, 'iconSize', undefined);
+          _this.setIconSize(GetValue$7(config, 'iconWidth', iconSize), GetValue$7(config, 'iconHeight', iconSize));
+        }
+      }
       if (text) {
+        var textSpace = GetValue$7(config, 'space.text', 0);
         var expandTextWidth = GetValue$7(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue$7(config, 'expandTextHeight', false);
         var proportion, padding, expand;
@@ -17545,10 +17587,15 @@
         if (actionMask) {
           actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
         }
-      }
 
-      var actionSize = GetValue$7(config, 'actionSize');
-      _this.setActionSize(GetValue$7(config, 'actionWidth', actionSize), GetValue$7(config, 'actionHeight', actionSize));
+        _this.squareFitAction = GetValue$7(config, 'squareFitAction', false);
+        if (_this.squareFitAction) {
+          _this.setActionSize();
+        } else {
+          var actionSize = GetValue$7(config, 'actionSize');
+          _this.setActionSize(GetValue$7(config, 'actionWidth', actionSize), GetValue$7(config, 'actionHeight', actionSize));
+        }
+      }
 
       // Add space
       if (align === 'center') {
@@ -17602,8 +17649,10 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.iconWidth !== undefined) {
+          SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+          this.resetChildScaleState(imageObject);
+        }
         return this;
       }
     }, {
@@ -17645,8 +17694,10 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.actionWidth !== undefined) {
+          SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+          this.resetChildScaleState(imageObject);
+        }
         return this;
       }
     }, {
@@ -17677,9 +17728,61 @@
     }, {
       key: "preLayout",
       value: function preLayout() {
+        var icon = this.childrenMap.icon;
+        if (icon) {
+          if (this.squareFitIcon) {
+            ResizeGameObject(icon, 2, 2);
+          } else if (this.iconWidth !== undefined) {
+            SetDisplaySize(icon, this.iconWidth, this.iconHeight);
+          }
+        }
+        var action = this.childrenMap.action;
+        if (action) {
+          if (this.squareFitAction) {
+            ResizeGameObject(action, 2, 2);
+          } else if (this.actionWidth !== undefined) {
+            SetDisplaySize(action, this.actionWidth, this.actionHeight);
+          }
+        }
         _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
+      }
+    }, {
+      key: "postResolveSize",
+      value: function postResolveSize(width, height) {
+        var resetProportionLength = false;
+        var icon = this.childrenMap.icon;
+        if (icon && this.squareFitIcon) {
+          var size;
+          if (this.orientation === 0) {
+            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(icon, 'top') - this.getChildOuterPadding(icon, 'bottom');
+          } else {
+            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(icon, 'left') - this.getChildOuterPadding(icon, 'right');
+          }
+          ResizeGameObject(icon, size, size);
+          if (icon.isRexSizer) {
+            icon.setMinSize(size, size);
+          }
+          resetProportionLength = true;
+        }
+        var action = this.childrenMap.action;
+        if (action && this.squareFitAction) {
+          var size;
+          if (this.orientation === 0) {
+            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(action, 'top') - this.getChildOuterPadding(action, 'bottom');
+          } else {
+            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(action, 'left') - this.getChildOuterPadding(action, 'right');
+          }
+          ResizeGameObject(action, size, size);
+          if (action.isRexSizer) {
+            action.setMinSize(size, size);
+          }
+          resetProportionLength = true;
+        }
+        if (resetProportionLength) {
+          this.proportionLength = undefined;
+          this._childrenWidth = undefined;
+          this.resolveWidth(width, true);
+        }
       }
     }, {
       key: "runLayout",
@@ -17718,43 +17821,10 @@
         }
         return this;
       }
-    }, {
-      key: "resetDisplayContent",
-      value: function resetDisplayContent(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        var text = config.text || '';
-        this.setText(text);
-        var iconGameObjct = this.childrenMap.icon;
-        if (iconGameObjct) {
-          if (config.icon === undefined) {
-            this.hide(iconGameObjct);
-          } else {
-            this.show(iconGameObjct);
-          }
-          if (config.iconSize) {
-            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
-          }
-          this.setIconTexture(config.icon, config.iconFrame);
-        }
-        var actionGameObjct = this.childrenMap.action;
-        if (actionGameObjct) {
-          if (config.action === undefined) {
-            this.hide(actionGameObjct);
-          } else {
-            this.show(actionGameObjct);
-          }
-          if (config.actionSize) {
-            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
-          }
-          this.setActionTexture(config.action, config.actionFrame);
-        }
-        return this;
-      }
     }]);
     return Label;
   }(Sizer);
+  Object.assign(Label.prototype, methods$2);
 
   var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
     config = BuildDisplayLabelConfig(scene, config);
@@ -18697,7 +18767,7 @@
   var methods = {
     openColorPicker: OpenColorPicker
   };
-  Object.assign(methods, methods$3);
+  Object.assign(methods, methods$4);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ColorInput = /*#__PURE__*/function (_ColorInputBase) {

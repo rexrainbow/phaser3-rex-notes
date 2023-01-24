@@ -92,6 +92,7 @@ var label = scene.rexUI.add.label({
 
     icon: iconGameObject,
     // iconMask: false,
+    // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
     
     text: textGameObject,
@@ -100,6 +101,7 @@ var label = scene.rexUI.add.label({
 
     action: actionGameObject,
     // actionMask: false,
+    // squareFitAction: false,
     // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
 
     align: undefined,
@@ -143,6 +145,9 @@ var label = scene.rexUI.add.label({
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `squareFitIcon` : 
+    - `true` : Resize icon size to square to fit label height/width.
+    - `false` : Ignore this feature. Default behavior.
 - `iconSize` : Set display size of icon game object to `iconSize`x`iconSize`
 - `iconWidth` : Set display width of icon game object to `iconWidth`. 
     - If `iconHeight` is `undefined`, set `scaleY` of icon game object to `scaleX` of icon game object, to keep size ratio.
@@ -157,6 +162,9 @@ var label = scene.rexUI.add.label({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `squareFitAction` : 
+    - `true` : Resize action icon size to square to fit label height/width.
+    - `false` : Ignore this feature. Default behavior.
 - `actionSize` : Set display size of action game object to `actionSize`x`actionSize`
 - `actionWidth` : Set display width of action game object to `actionWidth`. 
     - If `actionHeight` is `undefined`, set `scaleY` of action game object to `scaleX` of action game object, to keep size ratio.

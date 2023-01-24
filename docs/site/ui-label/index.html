@@ -9082,6 +9082,7 @@
 
     <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
     <span class="c1">// iconMask: false,</span>
+    <span class="c1">// squareFitIcon: false,</span>
     <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
@@ -9090,6 +9091,7 @@
 
     <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
     <span class="c1">// actionMask: false,</span>
+    <span class="c1">// squareFitAction: false,</span>
     <span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -9147,6 +9149,11 @@
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
 </ul>
 </li>
+<li><code>squareFitIcon</code> : <ul>
+<li><code>true</code> : Resize icon size to square to fit label height/width.</li>
+<li><code>false</code> : Ignore this feature. Default behavior.</li>
+</ul>
+</li>
 <li><code>iconSize</code> : Set display size of icon game object to <code>iconSize</code>x<code>iconSize</code></li>
 <li><code>iconWidth</code> : Set display width of icon game object to <code>iconWidth</code>. <ul>
 <li>If <code>iconHeight</code> is <code>undefined</code>, set <code>scaleY</code> of icon game object to <code>scaleX</code> of icon game object, to keep size ratio.</li>
@@ -9169,6 +9176,11 @@
 <li><code>action</code> : Game object of action icon, optional.</li>
 <li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
+</ul>
+</li>
+<li><code>squareFitAction</code> : <ul>
+<li><code>true</code> : Resize action icon size to square to fit label height/width.</li>
+<li><code>false</code> : Ignore this feature. Default behavior.</li>
 </ul>
 </li>
 <li><code>actionSize</code> : Set display size of action game object to <code>actionSize</code>x<code>actionSize</code></li>

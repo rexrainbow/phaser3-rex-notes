@@ -1,6 +1,8 @@
 import Sizer from '../sizer/Sizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import SetDisplaySize from '../../../plugins/utils/size/SetDisplaySize.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -19,9 +21,7 @@ class Label extends Sizer {
         var actionMask = GetValue(config, 'actionMask', undefined);
         // Align
         var align = GetValue(config, 'align', undefined); // undefined/left/top: no space
-        // Space
-        var iconSpace = GetValue(config, 'space.icon', 0);
-        var textSpace = GetValue(config, 'space.text', 0);
+
 
         if (background) {
             this.addBackground(background);
@@ -37,6 +37,7 @@ class Label extends Sizer {
         }
 
         if (icon) {
+            var iconSpace = GetValue(config, 'space.icon', 0);
             var padding;
             if (this.orientation === 0) {
                 if (text || action) {
@@ -56,14 +57,22 @@ class Label extends Sizer {
             if (iconMask) {
                 iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
             }
+
+            this.squareFitIcon = GetValue(config, 'squareFitIcon', false);
+            if (this.squareFitIcon) {
+                this.setIconSize();
+            } else {
+                var iconSize = GetValue(config, 'iconSize', undefined);
+                this.setIconSize(
+                    GetValue(config, 'iconWidth', iconSize),
+                    GetValue(config, 'iconHeight', iconSize)
+                );
+            }
         }
-        var iconSize = GetValue(config, 'iconSize');
-        this.setIconSize(
-            GetValue(config, 'iconWidth', iconSize),
-            GetValue(config, 'iconHeight', iconSize)
-        );
+
 
         if (text) {
+            var textSpace = GetValue(config, 'space.text', 0);
             var expandTextWidth = GetValue(config, 'expandTextWidth', false);
             var expandTextHeight = GetValue(config, 'expandTextHeight', false);
             var proportion, padding, expand;
@@ -93,12 +102,18 @@ class Label extends Sizer {
             if (actionMask) {
                 actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
             }
+
+            this.squareFitAction = GetValue(config, 'squareFitAction', false);
+            if (this.squareFitAction) {
+                this.setActionSize();
+            } else {
+                var actionSize = GetValue(config, 'actionSize');
+                this.setActionSize(
+                    GetValue(config, 'actionWidth', actionSize),
+                    GetValue(config, 'actionHeight', actionSize)
+                );
+            }
         }
-        var actionSize = GetValue(config, 'actionSize');
-        this.setActionSize(
-            GetValue(config, 'actionWidth', actionSize),
-            GetValue(config, 'actionHeight', actionSize)
-        );
 
         // Add space
         if (align === 'center') {
@@ -148,8 +163,10 @@ class Label extends Sizer {
         }
         imageObject.setTexture(key, frame);
 
-        SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.iconWidth !== undefined) {
+            SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+            this.resetChildScaleState(imageObject);
+        }
 
         return this;
     }
@@ -189,8 +206,10 @@ class Label extends Sizer {
         }
         imageObject.setTexture(key, frame);
 
-        SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
-        this.resetChildScaleState(imageObject);
+        if (this.actionWidth !== undefined) {
+            SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+            this.resetChildScaleState(imageObject);
+        }
 
         return this;
     }
@@ -219,9 +238,77 @@ class Label extends Sizer {
     }
 
     preLayout() {
+        var icon = this.childrenMap.icon;
+        if (icon) {
+            if (this.squareFitIcon) {
+                ResizeGameObject(icon, 2, 2);
+            } else if (this.iconWidth !== undefined) {
+                SetDisplaySize(icon, this.iconWidth, this.iconHeight);
+            }
+        }
+
+        var action = this.childrenMap.action;
+        if (action) {
+            if (this.squareFitAction) {
+                ResizeGameObject(action, 2, 2);
+            } else if (this.actionWidth !== undefined) {
+                SetDisplaySize(action, this.actionWidth, this.actionHeight);
+            }
+        }
+
         super.preLayout();
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
+    }
+
+    postResolveSize(width, height) {
+        var resetProportionLength = false;
+
+        var icon = this.childrenMap.icon;
+        if (icon && this.squareFitIcon) {
+            var size;
+            if (this.orientation === 0) {
+                size = height
+                    - this.getInnerPadding('top') - this.getInnerPadding('bottom')
+                    - this.getChildOuterPadding(icon, 'top') - this.getChildOuterPadding(icon, 'bottom');
+            } else {
+                size = width
+                    - this.getInnerPadding('left') - this.getInnerPadding('right')
+                    - this.getChildOuterPadding(icon, 'left') - this.getChildOuterPadding(icon, 'right');
+            }
+
+            ResizeGameObject(icon, size, size);
+            if (icon.isRexSizer) {
+                icon.setMinSize(size, size)
+            }
+
+            resetProportionLength = true;
+        }
+
+        var action = this.childrenMap.action;
+        if (action && this.squareFitAction) {
+            var size;
+            if (this.orientation === 0) {
+                size = height
+                    - this.getInnerPadding('top') - this.getInnerPadding('bottom')
+                    - this.getChildOuterPadding(action, 'top') - this.getChildOuterPadding(action, 'bottom');
+            } else {
+                size = width
+                    - this.getInnerPadding('left') - this.getInnerPadding('right')
+                    - this.getChildOuterPadding(action, 'left') - this.getChildOuterPadding(action, 'right');
+            }
+
+            ResizeGameObject(action, size, size);
+            if (action.isRexSizer) {
+                action.setMinSize(size, size)
+            }
+
+            resetProportionLength = true;
+        }
+
+        if (resetProportionLength) {
+            this.proportionLength = undefined;
+            this._childrenWidth = undefined;
+            this.resolveWidth(width, true);
+        }
     }
 
     runLayout(parent, newWidth, newHeight) {
@@ -259,43 +346,11 @@ class Label extends Sizer {
         }
         return this;
     }
-
-    resetDisplayContent(config) {
-        if (config === undefined) {
-            config = {};
-        }
-
-        var text = config.text || '';
-        this.setText(text);
-
-        var iconGameObjct = this.childrenMap.icon;
-        if (iconGameObjct) {
-            if (config.icon === undefined) {
-                this.hide(iconGameObjct);
-            } else {
-                this.show(iconGameObjct);
-            }
-            if (config.iconSize) {
-                iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
-            }
-            this.setIconTexture(config.icon, config.iconFrame);
-        }
-
-        var actionGameObjct = this.childrenMap.action;
-        if (actionGameObjct) {
-            if (config.action === undefined) {
-                this.hide(actionGameObjct);
-            } else {
-                this.show(actionGameObjct);
-            }
-            if (config.actionSize) {
-                actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
-            }
-            this.setActionTexture(config.action, config.actionFrame);
-        }
-
-        return this;
-    }
 }
+
+Object.assign(
+    Label.prototype,
+    Methods,
+)
 
 export default Label;

@@ -192,6 +192,11 @@ var files = fileDropZone.files;
     })
     ```
 
+
+!!! warning
+    Game objects under this file drop zone can't receive touch input events.
+
+
 ### Load file to cache
 
 ```javascript
