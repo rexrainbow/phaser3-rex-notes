@@ -92,6 +92,18 @@ var intouching = scene.plugins.get('rexInTouching').add(gameObject, {
         // ...
     }, scope);
     ```
+- Touching-start
+    ```javascript
+    intouching.on('touchstart', function (intouching, gameObject) {
+        // ...
+    }, scope);
+    ```
+- Touching-end
+    ```javascript
+    intouching.on('touchend', function (intouching, gameObject) {
+        // ...
+    }, scope);
+    ```
 
 ### In touching
 
