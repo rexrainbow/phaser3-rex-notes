@@ -2947,7 +2947,7 @@
     return height;
   };
 
-  var PostResolveSize = function PostResolveSize(width, height) {};
+  var PostResolveSize$1 = function PostResolveSize(width, height) {};
 
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
@@ -8599,7 +8599,7 @@
     resolveWidth: ResolveWidth$1,
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveHeight: ResolveHeight$1,
-    postResolveSize: PostResolveSize,
+    postResolveSize: PostResolveSize$1,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -8635,7 +8635,7 @@
     function Base(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, Base);
-      _this = _super.call(this, scene, x, y, 2, 2);
+      _this = _super.call(this, scene, x, y, 1, 1);
       _this.isRexSizer = true;
       _this.setMinSize(minWidth, minHeight);
       _this.setName(GetValue$5(config, 'name', ''));
@@ -9042,10 +9042,63 @@
   };
 
   var PreLayout = function PreLayout() {
+    // Resize child to 1x1 for ratio-fit 
+    this.hasRatioFitChild = false;
+    var children = this.sizerChildren;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (child.rexSizer.hidden) {
+        continue;
+      }
+      if (!child.rexSizer.fitRatio) {
+        continue;
+      }
+      ResizeGameObject(child, 1, 1);
+      this.hasRatioFitChild = true;
+    }
     this._childrenProportion = undefined;
     this.proportionLength = undefined;
     PreLayout$1.call(this);
     return this;
+  };
+
+  var PostResolveSize = function PostResolveSize(width, height) {
+    if (this.hasRatioFitChild) {
+      // Resize child for ratio-fit 
+      var innerHeight;
+      if (this.orientation === 0) {
+        innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom');
+      } else {
+        width - this.getInnerPadding('left') - this.getInnerPadding('right');
+      }
+      var children = this.sizerChildren,
+        childWidth,
+        childHeight;
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+        if (child.rexSizer.hidden) {
+          continue;
+        }
+        var fitRatio = child.rexSizer.fitRatio;
+        if (!fitRatio) {
+          continue;
+        }
+        if (this.orientation === 0) {
+          childHeight = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+          childWidth = childHeight * fitRatio;
+        } else {
+          childWidth = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+          childHeight = childWidth / fitRatio;
+        }
+        ResizeGameObject(child, childWidth, childHeight);
+        if (child.isRexSizer) {
+          child.setMinSize(childWidth, childHeight);
+        }
+      }
+      this.proportionLength = undefined;
+      this._childrenWidth = undefined;
+      this.resolveWidth(width, true);
+    }
   };
 
   var CheckSize = function CheckSize(child, parent) {
@@ -9236,7 +9289,7 @@
     min: 0,
     full: -1
   };
-  var Add = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight) {
+  var Add = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight, fitRatio) {
     AddChild.call(this, gameObject);
     var isRexSpace = gameObject.isRexSpace;
     var proportionType = _typeof(proportion);
@@ -9256,7 +9309,9 @@
         minWidth = GetValue$4(config, 'minWidth', undefined);
         minHeight = GetValue$4(config, 'minHeight', undefined);
       }
+      fitRatio = GetValue$4(config, 'fitRatio', 0); // width/height
     }
+
     if (typeof align === 'string') {
       align = AlignConst[align];
     }
@@ -9286,11 +9341,15 @@
         minHeight = gameObject._minHeight;
       }
     }
+    if (fitRatio === undefined) {
+      fitRatio = 0;
+    }
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
     config.expand = expand;
+    config.fitRatio = proportion === 0 ? fitRatio : 0;
     if (index === undefined || index >= this.sizerChildren.length) {
       this.sizerChildren.push(gameObject);
     } else {
@@ -9447,6 +9506,7 @@
     getExpandedChildHeight: GetExpandedChildHeight,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
+    postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight

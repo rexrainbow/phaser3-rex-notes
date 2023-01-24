@@ -7,7 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
-        super(scene, x, y, 2, 2);
+        super(scene, x, y, 1, 1);
 
         this.isRexSizer = true;
         this.setMinSize(minWidth, minHeight);

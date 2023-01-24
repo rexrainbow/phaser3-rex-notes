@@ -231,7 +231,8 @@ sizer.add(child,
         key: undefined,
         index: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```
@@ -280,6 +281,9 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     `orientation` is `y`, and `proportion` is not `0`, or
     `orientation` is `x`, and `expand` is `true`
     - Default value is current display height.
+- `fitRatio` : Resize child to fit sizer height/width before layout children, when `proportion` is set to `0`.
+    - `0` : Ignore this feature. Default behavior.
+    - `> 0` : Fit ratio (width/height). `1` is square.
 
 ### Insert child
 
@@ -292,7 +296,8 @@ sizer.insert(index, child,
         expand: false,
         key: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```
@@ -315,7 +320,8 @@ sizer.insertAtPosition(x, y,
         expand: false,
         key: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```

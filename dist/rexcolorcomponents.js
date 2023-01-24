@@ -2947,7 +2947,7 @@
     return height;
   };
 
-  var PostResolveSize = function PostResolveSize(width, height) {};
+  var PostResolveSize$1 = function PostResolveSize(width, height) {};
 
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
@@ -8599,7 +8599,7 @@
     resolveWidth: ResolveWidth$1,
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveHeight: ResolveHeight$1,
-    postResolveSize: PostResolveSize,
+    postResolveSize: PostResolveSize$1,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -8635,7 +8635,7 @@
     function Base(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, Base);
-      _this = _super.call(this, scene, x, y, 2, 2);
+      _this = _super.call(this, scene, x, y, 1, 1);
       _this.isRexSizer = true;
       _this.setMinSize(minWidth, minHeight);
       _this.setName(GetValue$j(config, 'name', ''));
@@ -9042,10 +9042,63 @@
   };
 
   var PreLayout = function PreLayout() {
+    // Resize child to 1x1 for ratio-fit 
+    this.hasRatioFitChild = false;
+    var children = this.sizerChildren;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (child.rexSizer.hidden) {
+        continue;
+      }
+      if (!child.rexSizer.fitRatio) {
+        continue;
+      }
+      ResizeGameObject(child, 1, 1);
+      this.hasRatioFitChild = true;
+    }
     this._childrenProportion = undefined;
     this.proportionLength = undefined;
     PreLayout$1.call(this);
     return this;
+  };
+
+  var PostResolveSize = function PostResolveSize(width, height) {
+    if (this.hasRatioFitChild) {
+      // Resize child for ratio-fit 
+      var innerHeight;
+      if (this.orientation === 0) {
+        innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom');
+      } else {
+        width - this.getInnerPadding('left') - this.getInnerPadding('right');
+      }
+      var children = this.sizerChildren,
+        childWidth,
+        childHeight;
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+        if (child.rexSizer.hidden) {
+          continue;
+        }
+        var fitRatio = child.rexSizer.fitRatio;
+        if (!fitRatio) {
+          continue;
+        }
+        if (this.orientation === 0) {
+          childHeight = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+          childWidth = childHeight * fitRatio;
+        } else {
+          childWidth = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+          childHeight = childWidth / fitRatio;
+        }
+        ResizeGameObject(child, childWidth, childHeight);
+        if (child.isRexSizer) {
+          child.setMinSize(childWidth, childHeight);
+        }
+      }
+      this.proportionLength = undefined;
+      this._childrenWidth = undefined;
+      this.resolveWidth(width, true);
+    }
   };
 
   var CheckSize = function CheckSize(child, parent) {
@@ -9236,7 +9289,7 @@
     min: 0,
     full: -1
   };
-  var Add = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight) {
+  var Add = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight, fitRatio) {
     AddChild$1.call(this, gameObject);
     var isRexSpace = gameObject.isRexSpace;
     var proportionType = _typeof(proportion);
@@ -9256,7 +9309,9 @@
         minWidth = GetValue$i(config, 'minWidth', undefined);
         minHeight = GetValue$i(config, 'minHeight', undefined);
       }
+      fitRatio = GetValue$i(config, 'fitRatio', 0); // width/height
     }
+
     if (typeof align === 'string') {
       align = AlignConst[align];
     }
@@ -9286,11 +9341,15 @@
         minHeight = gameObject._minHeight;
       }
     }
+    if (fitRatio === undefined) {
+      fitRatio = 0;
+    }
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
     config.expand = expand;
+    config.fitRatio = proportion === 0 ? fitRatio : 0;
     if (index === undefined || index >= this.sizerChildren.length) {
       this.sizerChildren.push(gameObject);
     } else {
@@ -9447,6 +9506,7 @@
     getExpandedChildHeight: GetExpandedChildHeight,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
+    postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
@@ -10490,7 +10550,7 @@
     return gameObject;
   };
 
-  var ResetDisplayContent = function ResetDisplayContent() {
+  var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
     }
@@ -10572,18 +10632,17 @@
             };
           }
         }
+        var fitRatio = GetValue$e(config, 'squareFitIcon', false) ? 1 : 0;
         _this.add(icon, {
           proportion: 0,
-          padding: padding
+          padding: padding,
+          fitRatio: fitRatio
         });
         if (iconMask) {
           iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
         }
 
-        _this.squareFitIcon = GetValue$e(config, 'squareFitIcon', false);
-        if (_this.squareFitIcon) {
-          _this.setIconSize();
-        } else {
+        if (!fitRatio) {
           var iconSize = GetValue$e(config, 'iconSize', undefined);
           _this.setIconSize(GetValue$e(config, 'iconWidth', iconSize), GetValue$e(config, 'iconHeight', iconSize));
         }
@@ -10617,15 +10676,16 @@
         });
       }
       if (action) {
-        _this.add(action);
+        var fitRatio = GetValue$e(config, 'squareFitAction', false) ? 1 : 0;
+        _this.add(action, {
+          proportion: 0,
+          fitRatio: fitRatio
+        });
         if (actionMask) {
           actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
         }
 
-        _this.squareFitAction = GetValue$e(config, 'squareFitAction', false);
-        if (_this.squareFitAction) {
-          _this.setActionSize();
-        } else {
+        if (!fitRatio) {
           var actionSize = GetValue$e(config, 'actionSize');
           _this.setActionSize(GetValue$e(config, 'actionWidth', actionSize), GetValue$e(config, 'actionHeight', actionSize));
         }
@@ -10763,60 +10823,14 @@
       key: "preLayout",
       value: function preLayout() {
         var icon = this.childrenMap.icon;
-        if (icon) {
-          if (this.squareFitIcon) {
-            ResizeGameObject(icon, 2, 2);
-          } else if (this.iconWidth !== undefined) {
-            SetDisplaySize(icon, this.iconWidth, this.iconHeight);
-          }
+        if (icon && this.iconWidth !== undefined) {
+          SetDisplaySize(icon, this.iconWidth, this.iconHeight);
         }
         var action = this.childrenMap.action;
-        if (action) {
-          if (this.squareFitAction) {
-            ResizeGameObject(action, 2, 2);
-          } else if (this.actionWidth !== undefined) {
-            SetDisplaySize(action, this.actionWidth, this.actionHeight);
-          }
+        if (action && this.actionWidth !== undefined) {
+          SetDisplaySize(action, this.actionWidth, this.actionHeight);
         }
         _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
-      }
-    }, {
-      key: "postResolveSize",
-      value: function postResolveSize(width, height) {
-        var resetProportionLength = false;
-        var icon = this.childrenMap.icon;
-        if (icon && this.squareFitIcon) {
-          var size;
-          if (this.orientation === 0) {
-            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(icon, 'top') - this.getChildOuterPadding(icon, 'bottom');
-          } else {
-            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(icon, 'left') - this.getChildOuterPadding(icon, 'right');
-          }
-          ResizeGameObject(icon, size, size);
-          if (icon.isRexSizer) {
-            icon.setMinSize(size, size);
-          }
-          resetProportionLength = true;
-        }
-        var action = this.childrenMap.action;
-        if (action && this.squareFitAction) {
-          var size;
-          if (this.orientation === 0) {
-            size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(action, 'top') - this.getChildOuterPadding(action, 'bottom');
-          } else {
-            size = width - this.getInnerPadding('left') - this.getInnerPadding('right') - this.getChildOuterPadding(action, 'left') - this.getChildOuterPadding(action, 'right');
-          }
-          ResizeGameObject(action, size, size);
-          if (action.isRexSizer) {
-            action.setMinSize(size, size);
-          }
-          resetProportionLength = true;
-        }
-        if (resetProportionLength) {
-          this.proportionLength = undefined;
-          this._childrenWidth = undefined;
-          this.resolveWidth(width, true);
-        }
       }
     }, {
       key: "runLayout",

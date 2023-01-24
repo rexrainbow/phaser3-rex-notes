@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
 
         var sizer = this.rexUI.add.sizer({
             x: 400, y: 300,
-            width: 400, height: 400,
+            width: 300, height: 400,
             orientation: 1
         })
 

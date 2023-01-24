@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
-import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import SetDisplaySize from '../../../plugins/utils/size/SetDisplaySize.js';
 import Methods from './methods/Methods.js';
 
@@ -48,20 +47,18 @@ class Label extends Sizer {
                     padding = { bottom: iconSpace };
                 }
             }
+            var fitRatio = GetValue(config, 'squareFitIcon', false) ? 1 : 0;
 
             this.add(
                 icon,
-                { proportion: 0, padding: padding, }
+                { proportion: 0, padding: padding, fitRatio: fitRatio }
             );
 
             if (iconMask) {
                 iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
             }
 
-            this.squareFitIcon = GetValue(config, 'squareFitIcon', false);
-            if (this.squareFitIcon) {
-                this.setIconSize();
-            } else {
+            if (!fitRatio) {
                 var iconSize = GetValue(config, 'iconSize', undefined);
                 this.setIconSize(
                     GetValue(config, 'iconWidth', iconSize),
@@ -97,16 +94,17 @@ class Label extends Sizer {
         }
 
         if (action) {
-            this.add(action);
+            var fitRatio = GetValue(config, 'squareFitAction', false) ? 1 : 0;
+            this.add(
+                action,
+                { proportion: 0, fitRatio: fitRatio }
+            );
 
             if (actionMask) {
                 actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
             }
 
-            this.squareFitAction = GetValue(config, 'squareFitAction', false);
-            if (this.squareFitAction) {
-                this.setActionSize();
-            } else {
+            if (!fitRatio) {
                 var actionSize = GetValue(config, 'actionSize');
                 this.setActionSize(
                     GetValue(config, 'actionWidth', actionSize),
@@ -239,76 +237,16 @@ class Label extends Sizer {
 
     preLayout() {
         var icon = this.childrenMap.icon;
-        if (icon) {
-            if (this.squareFitIcon) {
-                ResizeGameObject(icon, 2, 2);
-            } else if (this.iconWidth !== undefined) {
-                SetDisplaySize(icon, this.iconWidth, this.iconHeight);
-            }
+        if (icon && (this.iconWidth !== undefined)) {
+            SetDisplaySize(icon, this.iconWidth, this.iconHeight);
         }
 
         var action = this.childrenMap.action;
-        if (action) {
-            if (this.squareFitAction) {
-                ResizeGameObject(action, 2, 2);
-            } else if (this.actionWidth !== undefined) {
-                SetDisplaySize(action, this.actionWidth, this.actionHeight);
-            }
+        if (action && (this.actionWidth !== undefined)) {
+            SetDisplaySize(action, this.actionWidth, this.actionHeight);
         }
 
         super.preLayout();
-    }
-
-    postResolveSize(width, height) {
-        var resetProportionLength = false;
-
-        var icon = this.childrenMap.icon;
-        if (icon && this.squareFitIcon) {
-            var size;
-            if (this.orientation === 0) {
-                size = height
-                    - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-                    - this.getChildOuterPadding(icon, 'top') - this.getChildOuterPadding(icon, 'bottom');
-            } else {
-                size = width
-                    - this.getInnerPadding('left') - this.getInnerPadding('right')
-                    - this.getChildOuterPadding(icon, 'left') - this.getChildOuterPadding(icon, 'right');
-            }
-
-            ResizeGameObject(icon, size, size);
-            if (icon.isRexSizer) {
-                icon.setMinSize(size, size)
-            }
-
-            resetProportionLength = true;
-        }
-
-        var action = this.childrenMap.action;
-        if (action && this.squareFitAction) {
-            var size;
-            if (this.orientation === 0) {
-                size = height
-                    - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-                    - this.getChildOuterPadding(action, 'top') - this.getChildOuterPadding(action, 'bottom');
-            } else {
-                size = width
-                    - this.getInnerPadding('left') - this.getInnerPadding('right')
-                    - this.getChildOuterPadding(action, 'left') - this.getChildOuterPadding(action, 'right');
-            }
-
-            ResizeGameObject(action, size, size);
-            if (action.isRexSizer) {
-                action.setMinSize(size, size)
-            }
-
-            resetProportionLength = true;
-        }
-
-        if (resetProportionLength) {
-            this.proportionLength = undefined;
-            this._childrenWidth = undefined;
-            this.resolveWidth(width, true);
-        }
     }
 
     runLayout(parent, newWidth, newHeight) {

@@ -1,4 +1,4 @@
-var ResetDisplayContent = function () {
+var ResetDisplayContent = function (config) {
     if (config === undefined) {
         config = {};
     }

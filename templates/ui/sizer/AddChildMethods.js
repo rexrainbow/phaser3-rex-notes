@@ -13,7 +13,14 @@ const PROPORTIONMODE = {
     full: -1,
 }
 
-var Add = function (gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight) {
+var Add = function (
+    gameObject,
+    proportion, align, paddingConfig, expand,
+    childKey, index,
+    minWidth, minHeight,
+    fitRatio,
+) {
+
     AddChild.call(this, gameObject);
 
     var isRexSpace = gameObject.isRexSpace;
@@ -37,6 +44,8 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
             minWidth = GetValue(config, 'minWidth', undefined);
             minHeight = GetValue(config, 'minHeight', undefined);
         }
+
+        fitRatio = GetValue(config, 'fitRatio', 0);  // width/height
     }
 
     if (typeof (align) === 'string') {
@@ -71,11 +80,17 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
         }
     }
 
+    if (fitRatio === undefined) {
+        fitRatio = 0;
+    }
+
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
     config.expand = expand;
+    config.fitRatio = (proportion === 0) ? fitRatio : 0;
+
     if ((index === undefined) || (index >= this.sizerChildren.length)) {
         this.sizerChildren.push(gameObject);
     } else {
@@ -97,7 +112,7 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
                 // Might have minHeight value, or still undefined
                 gameObject.minHeight = minHeight;
             } else {
-                 // Might have minWidth value, or still undefined
+                // Might have minWidth value, or still undefined
                 gameObject.minWidth = minWidth;
             }
         }
@@ -106,6 +121,7 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
     if (childKey !== undefined) {
         this.addChildrenMap(childKey, gameObject)
     }
+
     return this;
 };
 

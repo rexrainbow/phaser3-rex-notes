@@ -84,7 +84,8 @@ declare class Sizer extends BaseSizer {
             key?: string,
             index?: number,
             minWidth?: number,
-            minHeight?: number
+            minHeight?: number,
+            fitRatio?: number,
         }
     ): this;
 
@@ -97,7 +98,8 @@ declare class Sizer extends BaseSizer {
         key?: string,
         index?: number,
         minWidth?: number,
-        minHeight?: number
+        minHeight?: number,
+        fitRatio?: number,
     ): this;
 
     insert(

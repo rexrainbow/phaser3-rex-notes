@@ -9300,7 +9300,8 @@
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">fitRatio</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -9361,6 +9362,11 @@
 <li>Default value is current display height.</li>
 </ul>
 </li>
+<li><code>fitRatio</code> : Resize child to fit sizer height/width before layout children, when <code>proportion</code> is set to <code>0</code>.<ul>
+<li><code>0</code> : Ignore this feature. Default behavior.</li>
+<li><code>&gt; 0</code> : Fit ratio (width/height). <code>1</code> is square.</li>
+</ul>
+</li>
 </ul>
 <h3 id="insert-child">Insert child<a class="headerlink" href="#insert-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> 
@@ -9371,7 +9377,8 @@
         <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">fitRatio</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -9388,7 +9395,8 @@
         <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">fitRatio</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>

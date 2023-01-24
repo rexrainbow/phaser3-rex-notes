@@ -30,7 +30,7 @@ class ColorInput extends Sizer {
         if (swatch) {
             this.add(
                 swatch,
-                { proportion: 0, expand: false }
+                { proportion: 0, expand: false, fitRatio: 1 }
             );
         }
 
@@ -57,29 +57,6 @@ class ColorInput extends Sizer {
         }
 
         this.setValue(GetValue(config, 'value', 0x0));
-    }
-
-    preLayout() {
-        var swatch = this.childrenMap.swatch;
-
-        if (swatch && swatch.expandSquare) {
-            swatch.resize(1, 1);
-        }
-    }
-
-    postResolveSize(width, height) {
-        var swatch = this.childrenMap.swatch;
-        if (swatch && swatch.expandSquare) {
-            var size = height
-                - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-                - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
-            swatch.resize(size, size);
-
-            // Recalculate proportionLength
-            this.proportionLength = undefined;
-            this._childrenWidth = undefined;
-            this.resolveWidth(width, true);
-        }
     }
 
     get value() {
