@@ -1,5 +1,4 @@
 export default function (
     textObject: Phaser.GameObjects.GameObject,
-    minWidth?: number,
-    maxHeight?: number,
+    minWidth?: number
 ): Phaser.GameObjects.GameObject;
