@@ -10196,10 +10196,17 @@
 <ul>
 <li>Add in-touching event
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">onTouching</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-<span class="c1">// sizer.onClick(callback, scope, config);</span>
+<span class="c1">// sizer.onTouching(callback, scope, config);</span>
 </code></pre></div></li>
 <li>Turn off in-touching event
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">offTouching</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add touching-end event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">onTouchingEnd</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="c1">// sizer.onTouchingEnd(callback, scope, config);</span>
+</code></pre></div></li>
+<li>Turn off touching-end event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">offTouchingEnd</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Enable in-touching event
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">enableTouching</span><span class="p">();</span>

@@ -16,6 +16,7 @@ declare class InTouching extends ComponentBase {
         config?: InTouching.IConfig
     )
 
+    prevIsInTouch: boolean;
     isInTouching: boolean;
 
     setEnable(enable?: boolean): this;

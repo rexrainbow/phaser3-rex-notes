@@ -834,11 +834,20 @@ Invoke callbeack if pointer is inside hitarea every tick.
 - Add in-touching event
     ```javascript
     sizer.onTouching(callback, scope);
-    // sizer.onClick(callback, scope, config);
+    // sizer.onTouching(callback, scope, config);
     ```
 - Turn off in-touching event
     ```javascript
     sizer.offTouching(callback, scope);
+    ```
+- Add touching-end event
+    ```javascript
+    sizer.onTouchingEnd(callback, scope);
+    // sizer.onTouchingEnd(callback, scope, config);
+    ```
+- Turn off touching-end event
+    ```javascript
+    sizer.offTouchingEnd(callback, scope);
     ```
 - Enable in-touching event
     ```javascript

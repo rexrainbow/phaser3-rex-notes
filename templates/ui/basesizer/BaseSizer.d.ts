@@ -591,6 +591,38 @@ declare class BaseSizer extends ContainerLite {
         scope?: object
     ): this;
 
+    onTouchingEnd(
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    onTouchingEnd(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    offTouchingEnd(
+        callback: Function,
+        scope?: object
+    ): this;
+
+    offTouchingEnd(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: object
+    ): this;
+
     enableTouching(enable?: boolean): this;
 
     enableTouching(

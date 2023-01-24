@@ -28254,6 +28254,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.pointer = undefined;
+        this.prevIsInTouch = false;
         this.isInTouching = false;
         this.setEnable(GetValue$1V(o, 'enable', true));
         this.setCooldown(GetValue$1V(o, 'cooldown', undefined));
@@ -28296,6 +28297,7 @@
           return;
         }
         if (!e) {
+          this.prevIsInTouch = false;
           this.isInTouching = false;
           this.pointer = undefined;
         }
@@ -28358,6 +28360,10 @@
         if (this.isInTouching && this.cooldown.request()) {
           this.emit('intouch', this, this.parent, this.pointer);
         }
+        if (this.prevIsInTouch && !this.isInTouching) {
+          this.emit('touchend', this, this.parent);
+        }
+        this.prevIsInTouch = this.isInTouching;
       }
     }]);
     return InTouching;
@@ -28390,6 +28396,34 @@
         return this;
       }
       gameObject._inTouching.off('intouch', callback, scope);
+      return this;
+    },
+    onTouchingEnd: function onTouchingEnd(gameObject, callback, scope, config) {
+      if (!gameObject) {
+        return this;
+      }
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('touchend', callback, scope);
+      return this;
+    },
+    offTouchingEnd: function offTouchingEnd(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
+        return this;
+      }
+      gameObject._inTouching.off('touchend', callback, scope);
       return this;
     },
     enableTouching: function enableTouching(gameObject, enabled) {
