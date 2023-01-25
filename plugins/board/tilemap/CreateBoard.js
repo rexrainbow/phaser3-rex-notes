@@ -1,9 +1,19 @@
 import Board from '../board/board.js';
 
-var BuildBoard = function (tilemap) {
+var CreateBoard = function (tilemap) {
+    var board = new Board(tilemap.scene, {
+        grid: CreateGridConfig(tilemap),
+        width: tilemap.width,
+        height: tilemap.height
+    })
+
+    return board;
+}
+
+var CreateGridConfig = function (tilemap) {
     var grid = {
         cellWidth: tilemap.tileWidth,
-        cellHeight: tilemap.cellHeight,
+        cellHeight: tilemap.tileHeight,
     }
 
     switch (tilemap.orientation) {
@@ -29,13 +39,13 @@ var BuildBoard = function (tilemap) {
             break;
     }
 
-    var board = new Board(tilemap.scene, {
-        grid: grid,
-        width: tilemap.width,
-        height: tilemap.height
-    })
+    var layer = tilemap.layers[0];
+    if (layer) {
+        grid.x = layer.x;
+        grid.y = layer.y;
+    }
 
-    return board;
+    return grid;
 }
 
-export default BuildBoard;
+export default CreateBoard;

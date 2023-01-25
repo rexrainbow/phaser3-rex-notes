@@ -6987,6 +6987,9 @@
       key: "preupdate",
       value: function preupdate(time, delta) {
         this.cooldown.update(time, delta);
+        if (!this.prevIsInTouch && this.isInTouching) {
+          this.emit('touchstart', this, this.parent);
+        }
         if (this.isInTouching && this.cooldown.request()) {
           this.emit('intouch', this, this.parent, this.pointer);
         }

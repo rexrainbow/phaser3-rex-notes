@@ -9,7 +9,8 @@ import FieldOfView from './board/fieldofview/FieldOfView';
 import Monopoly from './board/monopoly/Monopoly';
 import MiniBoard from './board/miniboard/MiniBoard';
 import HexagonMap from './board/hexagonmap/index';
-import CreateTileTexture from './board/texture/CreateTileTexture'
+import CreateTileTexture from './board/texture/CreateTileTexture';
+import CreateBoardFromTilemap from './board/tilemap/CreateBoardFromTilemap';
 
 export {
     Board,
@@ -23,5 +24,6 @@ export {
     Monopoly,
     MiniBoard,
     HexagonMap,
-    CreateTileTexture
+    CreateTileTexture,
+    CreateBoardFromTilemap
 };

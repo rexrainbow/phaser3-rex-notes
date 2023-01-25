@@ -1114,10 +1114,10 @@
     }]);
     return Chess;
   }(ComponentBase);
-  var methods$7 = {
+  var methods$8 = {
     getTileDirection: GetTileDirection
   };
-  Object.assign(Chess.prototype, methods$7);
+  Object.assign(Chess.prototype, methods$8);
 
   var IsUID = function IsUID(object) {
     var type = _typeof(object);
@@ -5115,7 +5115,7 @@
     }]);
     return Quad;
   }();
-  var methods$6 = {
+  var methods$7 = {
     getWorldXY: GetWorldX$2,
     getWorldX: GetWorldX$1,
     getWorldY: GetWorldY$1,
@@ -5123,7 +5123,7 @@
     getTileX: GetTileX$1,
     getTileY: GetTileY$1
   };
-  Object.assign(Quad.prototype, methods$6);
+  Object.assign(Quad.prototype, methods$7);
   var ORIENTATIONTYPE = {
     'orthogonal': 0,
     'isometric': 1,
@@ -5541,7 +5541,7 @@
   var ALLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
   var HALFDIR4 = [0, 1];
   var HALFDIR8 = [0, 1, 4, 5];
-  var methods$5 = {
+  var methods$6 = {
     saveOrigin: SaveOrigin,
     restoreOrigin: RestoreOrigin,
     getTileXYAtDirection: GetTileXAtDirection$1,
@@ -5558,7 +5558,7 @@
     getBounds: GetBounds$3,
     ringToTileXYArray: RingToTileXYArray$1
   };
-  Object.assign(QuadGrid.prototype, methods$5);
+  Object.assign(QuadGrid.prototype, methods$6);
 
   var SQRT3$1 = Math.sqrt(3);
   var Width = function Width(hexagon) {
@@ -5888,7 +5888,7 @@
     }]);
     return Hexagon;
   }();
-  var methods$4 = {
+  var methods$5 = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
@@ -5896,7 +5896,7 @@
     getTileX: GetTileX,
     getTileY: GetTileY
   };
-  Object.assign(Hexagon.prototype, methods$4);
+  Object.assign(Hexagon.prototype, methods$5);
   var STAGGERAXIS = {
     'y': 0,
     'x': 1
@@ -6418,7 +6418,7 @@
   }(Hexagon);
   var ALLDIR = [0, 1, 2, 3, 4, 5];
   var HALFDIR = [0, 1, 2];
-  var methods$3 = {
+  var methods$4 = {
     saveOrigin: SaveOrigin,
     restoreOrigin: RestoreOrigin,
     getTileXYAtDirection: GetTileXAtDirection,
@@ -6435,14 +6435,14 @@
     getBounds: GetBounds$2,
     ringToTileXYArray: RingToTileXYArray
   };
-  Object.assign(HexagonGrid.prototype, methods$3);
+  Object.assign(HexagonGrid.prototype, methods$4);
 
   var DefaultGrids = {
     quadGrid: QuadGrid,
     hexagonGrid: HexagonGrid
   };
 
-  var Board$1 = /*#__PURE__*/function (_EE) {
+  var Board$2 = /*#__PURE__*/function (_EE) {
     _inherits(Board, _EE);
     var _super = _createSuper(Board);
     function Board(scene, config) {
@@ -6568,7 +6568,7 @@
     }]);
     return Board;
   }(EventEmitter);
-  Object.assign(Board$1.prototype, LogicMethods);
+  Object.assign(Board$2.prototype, LogicMethods);
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var TouchZone = /*#__PURE__*/function (_Zone) {
@@ -8358,7 +8358,7 @@
   };
   var ViewportBounds;
 
-  var Board = /*#__PURE__*/function (_LogicBoard) {
+  var Board$1 = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
     var _super = _createSuper(Board);
     function Board() {
@@ -8381,12 +8381,12 @@
       }
     }]);
     return Board;
-  }(Board$1);
-  var methods$2 = {
+  }(Board$2);
+  var methods$3 = {
     setInteractive: SetInteractive$1,
     forEachCullTileXY: ForEachCullTileXY
   };
-  Object.assign(Board.prototype, methods$2);
+  Object.assign(Board$1.prototype, methods$3);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -8450,9 +8450,9 @@
   };
 
   ObjectFactory.register('board', function (config) {
-    return new Board(this.scene, config);
+    return new Board$1(this.scene, config);
   });
-  SetValue(window, 'RexPlugins.Board.Board', Board);
+  SetValue(window, 'RexPlugins.Board.Board', Board$1);
 
   ObjectFactory.register('hexagonGrid', function (config) {
     return new HexagonGrid(config);
@@ -9575,13 +9575,13 @@
     }]);
     return MoveTo;
   }(SceneUpdateTickTask);
-  var methods$1 = {
+  var methods$2 = {
     canMoveTo: CanMoveToTile,
     moveTo: MoveToTile,
     moveToward: MoveToward,
     moveToRandomNeighbor: MoveToRandomNeighbor
   };
-  Object.assign(MoveTo.prototype, methods$1);
+  Object.assign(MoveTo.prototype, methods$2);
 
   ObjectFactory.register('moveTo', function (gameObject, config) {
     var klass = IsMiniBoardObject(gameObject) ? MoveTo : MoveTo$1;
@@ -13319,11 +13319,11 @@
     return this;
   };
 
-  var methods = {
+  var methods$1 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -13592,7 +13592,7 @@
     }]);
     return ContainerLite;
   }(Base);
-  Object.assign(ContainerLite.prototype, methods);
+  Object.assign(ContainerLite.prototype, methods$1);
 
   var AddChess = function AddChess(gameObject, tileX, tileY, tileZ) {
     var grid = this.grid;
@@ -14275,7 +14275,7 @@
         infinity: true,
         wrap: false
       };
-      _this.board = new Board$1(scene, boardConfig);
+      _this.board = new Board$2(scene, boardConfig);
       _this.mainBoardRef = new MainBoardReference();
       _this.lastMainBoardRef = new MainBoardReference();
       _this.resetFromJSON(config);
@@ -14602,6 +14602,120 @@
     CreatePolygonTexture(board.scene, key, board.getGridPoints(0, 0, true), fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);
   };
 
+  var Board = /*#__PURE__*/function (_LogicBoard) {
+    _inherits(Board, _LogicBoard);
+    var _super = _createSuper(Board);
+    function Board() {
+      _classCallCheck(this, Board);
+      return _super.apply(this, arguments);
+    }
+    _createClass(Board, [{
+      key: "touchZone",
+      get: function get() {
+        if (this.input) {
+          return this.input.touchZone;
+        } else {
+          return null;
+        }
+      }
+    }, {
+      key: "getTouchZone",
+      value: function getTouchZone() {
+        return this.touchZone;
+      }
+    }]);
+    return Board;
+  }(Board$2);
+  var methods = {
+    setInteractive: SetInteractive$1,
+    forEachCullTileXY: ForEachCullTileXY
+  };
+  Object.assign(Board.prototype, methods);
+
+  var CreateBoard = function CreateBoard(tilemap) {
+    var board = new Board(tilemap.scene, {
+      grid: CreateGridConfig(tilemap),
+      width: tilemap.width,
+      height: tilemap.height
+    });
+    return board;
+  };
+  var CreateGridConfig = function CreateGridConfig(tilemap) {
+    var grid = {
+      cellWidth: tilemap.tileWidth,
+      cellHeight: tilemap.tileHeight
+    };
+    switch (tilemap.orientation) {
+      case 0:
+        // ORTHOGONAL
+        grid.gridType = 'quadGrid';
+        grid.type = 'orthogonal';
+        break;
+      case 1:
+        // ISOMETRIC
+        grid.gridType = 'quadGrid';
+        grid.type = 'isometric';
+        break;
+      case 3:
+        // HEXAGONAL
+        grid.gridType = 'hexagonGrid';
+        grid.staggeraxis = 'y';
+        grid.staggerindex = 'odd';
+        break;
+      default:
+        // ORTHOGONAL
+        grid.gridType = 'quadGrid';
+        grid.type = 'orthogonal';
+        break;
+    }
+    var layer = tilemap.layers[0];
+    if (layer) {
+      grid.x = layer.x;
+      grid.y = layer.y;
+    }
+    return grid;
+  };
+
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
+  var AddLayers = function AddLayers(board, tilemap, layers) {
+    if (layers === undefined) {
+      layers = tilemap.layers;
+    } else if (!Array.isArray(layers)) {
+      layers = [layers];
+    }
+    for (var i = 0, cnt = layers.length; i < cnt; i++) {
+      var layer = layers[i];
+      if (typeof layer === 'string') {
+        layer = tilemap.getLayer(layer);
+      }
+      if (IsGameObject(layer)) {
+        layer = layer.layer;
+      }
+      AddLayer(board, layer);
+    }
+  };
+  var AddLayer = function AddLayer(board, layer) {
+    var tileZ = layer.name;
+    var layerData = layer.data;
+    for (var y = 0, ycnt = layerData.length; y < ycnt; y++) {
+      var layerRow = layerData[y];
+      for (var x = 0, xcnt = layerRow.length; x < xcnt; x++) {
+        var tile = layerRow[x];
+        board.addChess(tile, x, y, tileZ, false);
+      }
+    }
+  };
+
+  var CreateBoardFromTilemap = function CreateBoardFromTilemap(tilemap, layers) {
+    var board = CreateBoard(tilemap);
+    AddLayers(board, tilemap, layers);
+    return board;
+  };
+
   var BoardPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(BoardPlugin, _Phaser$Plugins$Scene);
     var _super = _createSuper(BoardPlugin);
@@ -14614,6 +14728,7 @@
       // Helper functions
       _this.hexagonMap = HexagonMap;
       _this.createTileTexture = CreateTileTexture;
+      _this.createBoardFromTilemap = CreateBoardFromTilemap;
       return _this;
     }
     _createClass(BoardPlugin, [{
