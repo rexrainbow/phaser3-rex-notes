@@ -20,6 +20,8 @@
 1. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
 1. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Board/Shape](board-shape.md): Grid (polygon) shape object.
+1. [Board/Tilemap](board-tilemap.md): Create board from [tilemap](tilemap.md).
+1. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture) of tile.
 1. [Bounds](bounds.md): Clamp game object inside target bounds.
 1. [Bracket parser](bracketparser.md): A lite-weight bracket parser.
 1. [Bracket parser2](bracketparser2.md): A lite-weight bracket parser.

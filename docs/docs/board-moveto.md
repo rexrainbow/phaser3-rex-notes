@@ -76,9 +76,14 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 ```javascript
 var moveTo = scene.rexBoard.add.moveTo(chess, {
     // speed: 400,
+
     // rotateToTarget: false,
+
     // occupiedTest: false,
     // blockerTest: false,
+    // moveableTest: undefined,
+    // moveableTestScope: undefined,
+    
     // sneak: false,
 })
 ```
@@ -87,6 +92,18 @@ var moveTo = scene.rexBoard.add.moveTo(chess, {
 - `rotateToTarget` : Set `true` to change angle towards path.
 - `occupiedTest` : Set `true` to test if target tile position is occupied or not, in moveable testing.
 - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker) in moveable testing.
+- `moveableTest`, `moveableTestScope` : Custom moveable test callback
+    ```javascript
+    function(fromTileXYZ, toTileXYZ, direction, board) {
+        return true;
+    }
+    ```
+    - `fromTileXYZ`, `toTileXYZ` : Move chess from tileXYZ `{x, y, z}`, to tileXYZ `{x, y, z}`
+    - `direction` :
+        - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
+        - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
+        - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+    - `board` : [Board object](board.md).
 - `sneak` : Set `true` to allow changing tileZ when target tile position is occupied. Changing back when target tile position is not occupied.
     - `occupiedTest` will be ignored when `sneak` is `true`.
 

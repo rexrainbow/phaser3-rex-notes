@@ -439,6 +439,7 @@ nav:
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
     - Tile texture: board-texture.md
+    - Tilemap: board-tilemap.md
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md

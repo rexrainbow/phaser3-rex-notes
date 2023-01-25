@@ -8399,22 +8399,36 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../board-tilemap/" class="md-nav__link">
+        Tilemap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_13" type="checkbox" id="__nav_16_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_14" type="checkbox" id="__nav_16_14" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_16_13">
+        <label class="md-nav__link" for="__nav_16_14">
           Mini board
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Mini board" data-md-level="2">
-        <label class="md-nav__title" for="__nav_16_13">
+        <label class="md-nav__title" for="__nav_16_14">
           <span class="md-nav__icon md-icon"></span>
           Mini board
         </label>
@@ -9146,9 +9160,14 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">moveTo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// speed: 400,</span>
+
     <span class="c1">// rotateToTarget: false,</span>
+
     <span class="c1">// occupiedTest: false,</span>
     <span class="c1">// blockerTest: false,</span>
+    <span class="c1">// moveableTest: undefined,</span>
+    <span class="c1">// moveableTestScope: undefined,</span>
+
     <span class="c1">// sneak: false,</span>
 <span class="p">})</span>
 </code></pre></div>
@@ -9157,6 +9176,21 @@
 <li><code>rotateToTarget</code> : Set <code>true</code> to change angle towards path.</li>
 <li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not, in moveable testing.</li>
 <li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in moveable testing.</li>
+<li><code>moveableTest</code>, <code>moveableTestScope</code> : Custom moveable test callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">fromTileXYZ</span><span class="p">,</span> <span class="nx">toTileXYZ</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>fromTileXYZ</code>, <code>toTileXYZ</code> : Move chess from tileXYZ <code>{x, y, z}</code>, to tileXYZ <code>{x, y, z}</code></li>
+<li><code>direction</code> :<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+<li><code>board</code> : <a href="../board/">Board object</a>.</li>
+</ul>
+</li>
 <li><code>sneak</code> : Set <code>true</code> to allow changing tileZ when target tile position is occupied. Changing back when target tile position is not occupied.<ul>
 <li><code>occupiedTest</code> will be ignored when <code>sneak</code> is <code>true</code>.</li>
 </ul>

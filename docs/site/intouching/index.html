@@ -8326,22 +8326,36 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../board-tilemap/" class="md-nav__link">
+        Tilemap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_13" type="checkbox" id="__nav_16_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_14" type="checkbox" id="__nav_16_14" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_16_13">
+        <label class="md-nav__link" for="__nav_16_14">
           Mini board
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Mini board" data-md-level="2">
-        <label class="md-nav__title" for="__nav_16_13">
+        <label class="md-nav__title" for="__nav_16_14">
           <span class="md-nav__icon md-icon"></span>
           Mini board
         </label>
@@ -9012,6 +9026,16 @@
 <ul>
 <li>In-touching
     <div class="highlight"><pre><span></span><code><span class="nx">intouching</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;intouch&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">intouching</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Touching-start
+    <div class="highlight"><pre><span></span><code><span class="nx">intouching</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchstart&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">intouching</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Touching-end
+    <div class="highlight"><pre><span></span><code><span class="nx">intouching</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchend&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">intouching</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

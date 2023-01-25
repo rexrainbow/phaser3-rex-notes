@@ -8581,22 +8581,36 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../board-tilemap/" class="md-nav__link">
+        Tilemap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_13" type="checkbox" id="__nav_16_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16_14" type="checkbox" id="__nav_16_14" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_16_13">
+        <label class="md-nav__link" for="__nav_16_14">
           Mini board
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Mini board" data-md-level="2">
-        <label class="md-nav__title" for="__nav_16_13">
+        <label class="md-nav__title" for="__nav_16_14">
           <span class="md-nav__icon md-icon"></span>
           Mini board
         </label>
@@ -9451,10 +9465,10 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="hierarchy">Hierarchy<a class="headerlink" href="#hierarchy" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>graph TD
+<pre class="mermaid"><code>graph TB
 
-map --&gt; layerA
-map --&gt; layerB
+tilemap --&gt; layerA["layerA&lt;br&gt;(Game object)"]
+tilemap --&gt; layerB
 
 layerA --&gt; tilesA["tiles&lt;br&gt;(layer.data[x][y])"]
 layerB --&gt; tilesB["tiles"]</code></pre>
