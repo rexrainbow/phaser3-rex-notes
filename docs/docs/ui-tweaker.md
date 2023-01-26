@@ -81,8 +81,11 @@ var tweaker = scene.rexUI.add.tweaker({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // orientation: 0,
 
     styles : {
+        itemWidth : 0,
+
         inputRow: {
             background: {
 
@@ -180,7 +183,11 @@ var tweaker = scene.rexUI.add.tweaker({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `orientation` : Main orientation of the tweaker.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
+    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom. Default value is `1`.
 - `styles` : Styles settings of input rows, separator, folder, and tab. See [Styles chapter](ui-tweaker.md#styles) for more detail.
+    - `style.itemWidth` : Width of input row, used if `orientation` is set to `'y'`(`1`).
     - `styles.space` : Pads spaces.
         - `styles.space.left`, `styles.space.right`, `styles.space.top`, `styles.space.bottom` : Space of bounds.
         - `styles.space.item` : Space between 2 input rows.

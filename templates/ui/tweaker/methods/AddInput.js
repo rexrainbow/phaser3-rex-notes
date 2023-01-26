@@ -24,10 +24,18 @@ var AddInput = function (object, key, config) {
     var inputRowStyle = GetValue(this.styles, 'inputRow');
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
 
+    var proportion;
+    if (this.orientation === 1) { // y
+        proportion = 0;
+    } else { // x
+        proportion = (this.itemWidth > 0) ? 0 : 1;
+        inputSizer.setMinWidth(this.itemWidth);
+    }
+
     // Add InputRow to Tweaker
     this.add(
         inputSizer,
-        { expand: true }
+        { proportion: proportion, expand: true }
     );
 
     // Bind target

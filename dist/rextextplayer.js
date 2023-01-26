@@ -2893,17 +2893,27 @@
   };
 
   var GetValue$g = Phaser.Utils.Objects.GetValue;
-  var DrawBounds = function DrawBounds(gameObject, graphics, config) {
-    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-    if (!canDrawBound) {
-      return;
-    }
+  var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
     var color, lineWidth;
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$g(config, 'color');
       lineWidth = GetValue$g(config, 'lineWidth');
+      GetValue$g(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, color, lineWidth);
+      }
+    } else {
+      Draw(gameObjects, graphics, color, lineWidth);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, color, lineWidth, padding) {
+    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
+    if (!canDrawBound) {
+      return;
     }
     if (color === undefined) {
       color = 0xffffff;
@@ -2911,13 +2921,36 @@
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
     this.forEachGO(function (gameObject) {

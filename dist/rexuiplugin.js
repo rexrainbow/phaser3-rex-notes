@@ -11509,11 +11509,22 @@
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$2w(config, 'syncPosition', true);
-    state.syncRotation = GetValue$2w(config, 'syncRotation', true);
-    state.syncScale = GetValue$2w(config, 'syncScale', true);
-    state.syncAlpha = GetValue$2w(config, 'syncAlpha', true);
-    state.syncScrollFactor = GetValue$2w(config, 'syncScrollFactor', true);
+    if (config === undefined) {
+      config = true;
+    }
+    if (typeof config === 'boolean') {
+      state.syncPosition = config;
+      state.syncRotation = config;
+      state.syncScale = config;
+      state.syncAlpha = config;
+      state.syncScrollFactor = config;
+    } else {
+      state.syncPosition = GetValue$2w(config, 'syncPosition', true);
+      state.syncRotation = GetValue$2w(config, 'syncRotation', true);
+      state.syncScale = GetValue$2w(config, 'syncScale', true);
+      state.syncAlpha = GetValue$2w(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$2w(config, 'syncScrollFactor', true);
+    }
   };
   var AddChild$2 = {
     // Can override this method
@@ -12819,17 +12830,27 @@
   };
 
   var GetValue$2u = Phaser.Utils.Objects.GetValue;
-  var DrawBounds$2 = function DrawBounds(gameObject, graphics, config) {
-    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-    if (!canDrawBound) {
-      return;
-    }
+  var DrawBounds$2 = function DrawBounds(gameObjects, graphics, config) {
     var color, lineWidth;
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$2u(config, 'color');
       lineWidth = GetValue$2u(config, 'lineWidth');
+      GetValue$2u(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, color, lineWidth);
+      }
+    } else {
+      Draw(gameObjects, graphics, color, lineWidth);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, color, lineWidth, padding) {
+    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
+    if (!canDrawBound) {
+      return;
     }
     if (color === undefined) {
       color = 0xffffff;
@@ -12837,25 +12858,50 @@
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var GetValue$2t = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(graphics, config) {
     var drawContainer = GetValue$2t(config, 'drawContainer', true);
-    var gameObjects = this.getAllVisibleChildren([this]);
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-      var gameObject = gameObjects[i];
-      if (!drawContainer && gameObject.isRexContainerLite) {
-        continue;
-      }
-      DrawBounds$2(gameObject, graphics, config);
+    var gameObjects = GetValue$2t(config, 'children');
+    if (gameObjects === undefined) {
+      gameObjects = this.getAllVisibleChildren([this]);
     }
+    if (!drawContainer) {
+      gameObjects = gameObjects.filter(function (gameObject) {
+        return !gameObject.isRexContainerLite;
+      });
+    }
+    DrawBounds$2(gameObjects, graphics, config);
     return this;
   };
 
@@ -50590,9 +50636,19 @@
     // Create InputRow
     var inputRowStyle = GetValue$f(this.styles, 'inputRow');
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
+    var proportion;
+    if (this.orientation === 1) {
+      // y
+      proportion = 0;
+    } else {
+      // x
+      proportion = this.itemWidth > 0 ? 0 : 1;
+      inputSizer.setMinWidth(this.itemWidth);
+    }
 
     // Add InputRow to Tweaker
     this.add(inputSizer, {
+      proportion: proportion,
       expand: true
     });
 
@@ -50733,13 +50789,14 @@
         config = {};
       }
       if (config.orientation === undefined) {
-        config.orientation = 'y';
+        config.orientation = 1;
       }
 
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweakerShell';
       _this.styles = GetValue$b(config, 'styles') || {};
+      _this.itemWidth = GetValue$b(_this.styles, 'itemWidth', 0);
       var background = CreateBackground(scene, undefined, config.background);
       if (background) {
         _this.addBackground(background);

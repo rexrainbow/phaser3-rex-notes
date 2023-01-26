@@ -11,7 +11,7 @@ class TweakerShell extends Sizer {
         }
 
         if (config.orientation === undefined) {
-            config.orientation = 'y';
+            config.orientation = 1;
         }
 
         // Create sizer
@@ -19,6 +19,7 @@ class TweakerShell extends Sizer {
         this.type = 'rexTweakerShell';
 
         this.styles = GetValue(config, 'styles') || {};
+        this.itemWidth = GetValue(this.styles, 'itemWidth', 0);
 
         var background = CreateBackground(scene, undefined, config.background);
         if (background) {

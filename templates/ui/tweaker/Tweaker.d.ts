@@ -83,6 +83,8 @@ declare namespace Tweaker {
 
     interface IConfig extends Sizer.IConfig {
         styles: {
+            itemWidth?: number,
+
             background?: IRoundRectangleConfig,
 
             inputRow?: {

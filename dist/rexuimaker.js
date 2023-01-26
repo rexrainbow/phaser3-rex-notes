@@ -10774,11 +10774,22 @@
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$1c(config, 'syncPosition', true);
-    state.syncRotation = GetValue$1c(config, 'syncRotation', true);
-    state.syncScale = GetValue$1c(config, 'syncScale', true);
-    state.syncAlpha = GetValue$1c(config, 'syncAlpha', true);
-    state.syncScrollFactor = GetValue$1c(config, 'syncScrollFactor', true);
+    if (config === undefined) {
+      config = true;
+    }
+    if (typeof config === 'boolean') {
+      state.syncPosition = config;
+      state.syncRotation = config;
+      state.syncScale = config;
+      state.syncAlpha = config;
+      state.syncScrollFactor = config;
+    } else {
+      state.syncPosition = GetValue$1c(config, 'syncPosition', true);
+      state.syncRotation = GetValue$1c(config, 'syncRotation', true);
+      state.syncScale = GetValue$1c(config, 'syncScale', true);
+      state.syncAlpha = GetValue$1c(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$1c(config, 'syncScrollFactor', true);
+    }
   };
   var AddChild$1 = {
     // Can override this method
@@ -12084,17 +12095,27 @@
   };
 
   var GetValue$1a = Phaser.Utils.Objects.GetValue;
-  var DrawBounds$2 = function DrawBounds(gameObject, graphics, config) {
-    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-    if (!canDrawBound) {
-      return;
-    }
+  var DrawBounds$2 = function DrawBounds(gameObjects, graphics, config) {
     var color, lineWidth;
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$1a(config, 'color');
       lineWidth = GetValue$1a(config, 'lineWidth');
+      GetValue$1a(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, color, lineWidth);
+      }
+    } else {
+      Draw(gameObjects, graphics, color, lineWidth);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, color, lineWidth, padding) {
+    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
+    if (!canDrawBound) {
+      return;
     }
     if (color === undefined) {
       color = 0xffffff;
@@ -12102,25 +12123,50 @@
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var GetValue$19 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(graphics, config) {
     var drawContainer = GetValue$19(config, 'drawContainer', true);
-    var gameObjects = this.getAllVisibleChildren([this]);
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-      var gameObject = gameObjects[i];
-      if (!drawContainer && gameObject.isRexContainerLite) {
-        continue;
-      }
-      DrawBounds$2(gameObject, graphics, config);
+    var gameObjects = GetValue$19(config, 'children');
+    if (gameObjects === undefined) {
+      gameObjects = this.getAllVisibleChildren([this]);
     }
+    if (!drawContainer) {
+      gameObjects = gameObjects.filter(function (gameObject) {
+        return !gameObject.isRexContainerLite;
+      });
+    }
+    DrawBounds$2(gameObjects, graphics, config);
     return this;
   };
 
