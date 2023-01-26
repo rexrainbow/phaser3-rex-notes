@@ -273,9 +273,9 @@ var panel = scene.rexUI.add.scrollablePanel({
         - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
         - `'none'`, or `-1` : Disable sider controlling.
-    - `slider.position` : Position of this sldier.
-        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
-        - `1`, `'left'`, `'top'` : Sldier at left/top side.
+    - `slider.position` : Position of this slider.
+        - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Slider at left/top side.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.
