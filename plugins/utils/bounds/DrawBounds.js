@@ -7,19 +7,29 @@ import {
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var DrawBounds = function (gameObject, graphics, config) {
-    var canDrawBound = gameObject.getBounds ||
-        ((gameObject.width !== undefined) && (gameObject.height !== undefined));
-    if (!canDrawBound) {
-        return;
-    }
-
+var DrawBounds = function (gameObjects, graphics, config) {
     var color, lineWidth;
     if (typeof (config) === 'number') {
         color = config;
     } else {
         color = GetValue(config, 'color');
         lineWidth = GetValue(config, 'lineWidth');
+    }
+
+    if (Array.isArray(gameObjects)) {
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            Draw(gameObjects[i], graphics, color, lineWidth);
+        }
+    } else {
+        Draw(gameObjects, graphics, color, lineWidth);
+    }
+}
+
+var Draw = function (gameObject, graphics, color, lineWidth) {
+    var canDrawBound = gameObject.getBounds ||
+        ((gameObject.width !== undefined) && (gameObject.height !== undefined));
+    if (!canDrawBound) {
+        return;
     }
 
     if (color === undefined) {

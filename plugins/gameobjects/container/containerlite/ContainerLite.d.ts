@@ -25,6 +25,13 @@ declare namespace ContainerLite {
         syncScrollFactor?: boolean,
 
     }
+
+    interface IDrawBoundsConfig {
+        drawContainer?: boolean,
+        children?: Phaser.GameObjects.GameObject,
+        color?: number,
+        lineWidth?: number,
+    }
 }
 
 declare class ContainerLite extends Base {
@@ -335,10 +342,7 @@ declare class ContainerLite extends Base {
 
     drawBounds(
         graphics: Phaser.GameObjects.Graphics,
-        config?: {
-            color?: number,
-            lineWidth?: number,
-        }
+        config?: ContainerLite.IDrawBoundsConfig,
     ): this;
 
 }
