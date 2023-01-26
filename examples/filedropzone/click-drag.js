@@ -19,18 +19,16 @@ class Demo extends Phaser.Scene {
 
         fileDropZone
             .on('drop', function () {
-                var files = fileDropZone.files;
-                console.log('drop', files);
+                console.log('Drop file');
+            })
 
-                if (files.length === 0) {
-                    return;
-                }
-
-                fileDropZone
-                    .loadFilePromise(files[0], 'text', 'file')
-                    .then(function (content) {
-                        console.log(content);
-                    })
+        this.add.rectangle(400, 300, 200, 200, 0x00ff00)
+            .setInteractive({ draggable: true })
+            .on('pointerdown', function () {
+                console.log('Click game object');
+            })
+            .on('dragstart', function( ) {
+                console.log('Drag-start game object');
             })
     }
 
