@@ -31,6 +31,7 @@ declare namespace ContainerLite {
         children?: Phaser.GameObjects.GameObject,
         color?: number,
         lineWidth?: number,
+        padding?: number,
     }
 }
 
@@ -56,7 +57,7 @@ declare class ContainerLite extends Base {
 
     pin(
         gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        config?: ContainerLite.IAddChildConfig | boolean
     ): this;
 
     unpin(
@@ -74,7 +75,7 @@ declare class ContainerLite extends Base {
 
     pinLocal(
         child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        config?: ContainerLite.IAddChildConfig | boolean
     ): this;
 
     addLocalMultiple(

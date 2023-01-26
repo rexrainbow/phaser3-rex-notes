@@ -652,15 +652,21 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
     container.drawBounds(graphics, {
         // color: 0xffffff,
         // lineWidth: 1,
-        // drawContainer: true
+        // padding: 0,
+        // drawContainer: true,
+        // children: undefined,
     });
     ```
     - `graphics` : [Graphics game object](graphics.md)
     - `color` : Default value is `0xffffff`.
     - `lineWidth` : Default value is `1`.
+    - `padding` : Extra space around bounds. Default value is `0`.
     - `drawContainer` : 
         - `true` : Draw all children game objects included containerLite. Default behavior.
         - `false` : Draw all children game objects excluded containerLite
+    - `children` : 
+        - Array of game objects : Only draw bounds of these children
+        - `undefined` : Draw bounds of all children
 
 ### Scroll factor
 
