@@ -178,6 +178,8 @@ declare namespace Tweaker {
         monitor?: boolean,
 
         key?: string,
+
+        onValueChange?: (value: any) => void,
     }
 
     interface IAddButtonConfig {

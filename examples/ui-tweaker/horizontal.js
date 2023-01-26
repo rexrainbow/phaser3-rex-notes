@@ -31,6 +31,7 @@ class Demo extends Phaser.Scene {
                     format(value) {             // Formatter of text
                         return value.toFixed(2);
                     },
+                    onValueChange(value) { console.log(`x=${value}`) }
                 }
             )
             .addInput(
@@ -40,6 +41,7 @@ class Demo extends Phaser.Scene {
                     format(value) {             // Formatter of text
                         return value.toFixed(2);
                     },
+                    onValueChange(value) { console.log(`y=${value}`) }
                 }
             )
             .layout();

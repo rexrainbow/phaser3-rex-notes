@@ -238,6 +238,8 @@ tweaker.addInput(object, key, {
     // monitor: false,
 
     // key: undefined,
+
+    // onValueChange: undefined,
 })
 ```
 
@@ -258,6 +260,8 @@ tweaker.addInput({
     // monitor: false,
 
     // key: undefined,
+
+    // onValueChange: undefined,
 })
 ```
 
@@ -273,6 +277,14 @@ tweaker.addInput({
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
+- `onValueChange` : 
+    - Callback invoked when binding value changing.
+        ```javascript
+        function(newValue) { 
+        
+        }
+        ```
+    - `undefined` : Ignore this feature. Default value.
 
 
 See [Styles of text input](ui-tweaker.md#styles-of-text-input)

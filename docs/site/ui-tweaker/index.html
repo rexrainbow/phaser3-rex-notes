@@ -9569,6 +9569,8 @@
     <span class="c1">// monitor: false,</span>
 
     <span class="c1">// key: undefined,</span>
+
+    <span class="c1">// onValueChange: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 <p>or</p>
@@ -9586,6 +9588,8 @@
     <span class="c1">// monitor: false,</span>
 
     <span class="c1">// key: undefined,</span>
+
+    <span class="c1">// onValueChange: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -9605,6 +9609,15 @@
 </li>
 <li><code>key</code> : Add this child into childMap, which could be read back by <code>tweaker.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Don't add this child. Default value.</li>
+</ul>
+</li>
+<li><code>onValueChange</code> : <ul>
+<li>Callback invoked when binding value changing.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span> 
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>undefined</code> : Ignore this feature. Default value.</li>
 </ul>
 </li>
 </ul>
