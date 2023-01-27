@@ -10437,7 +10437,6 @@
     }
     var swatch = new RoundRectangle(scene, config);
     scene.add.existing(swatch);
-    swatch.expandSquare = true;
     return swatch;
   };
 
@@ -16239,30 +16238,46 @@
       // Add elements
       var background = GetValue$b(config, 'background', undefined);
       var swatch = CreateSwatch(scene, GetValue$b(config, 'swatch'));
-      var inputTextConfig = GetValue$b(config, 'inputText');
-      var inputText = CreateInputText(scene, inputTextConfig);
+      var inputTextConfig = GetValue$b(config, 'inputText', true);
+      var inputText;
+      if (inputTextConfig) {
+        inputText = CreateInputText(scene, inputTextConfig);
+      }
       if (background) {
         _this.addBackground(background);
       }
       if (swatch) {
+        var swatchSize = GetValue$b(config, 'swatchSize');
+        var squareExpandSwatch;
+        if (swatchSize !== undefined) {
+          ResizeGameObject(swatch, swatchSize, swatchSize);
+          squareExpandSwatch = false;
+        } else {
+          squareExpandSwatch = GetValue$b(config, 'squareExpandSwatch', true);
+        }
+        var fitRatio = squareExpandSwatch ? 1 : 0;
         _this.add(swatch, {
           proportion: 0,
           expand: false,
-          fitRatio: 1
+          fitRatio: fitRatio
         });
       }
-      var proportion = GetValue$b(inputTextConfig, 'width') === undefined ? 1 : 0;
-      var expand = GetValue$b(inputTextConfig, 'height') === undefined ? true : false;
-      _this.add(inputText, {
-        proportion: proportion,
-        expand: expand
-      });
+      if (inputText) {
+        var proportion = GetValue$b(inputTextConfig, 'width') === undefined ? 1 : 0;
+        var expand = GetValue$b(inputTextConfig, 'height') === undefined ? true : false;
+        _this.add(inputText, {
+          proportion: proportion,
+          expand: expand
+        });
+      }
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('swatch', swatch);
       _this.addChildrenMap('inputText', inputText);
-      inputText.on('close', function () {
-        this.setValue(inputText.value);
-      }, _assertThisInitialized(_this));
+      if (inputText) {
+        inputText.on('close', function () {
+          this.setValue(inputText.value);
+        }, _assertThisInitialized(_this));
+      }
       var callback = GetValue$b(config, 'valuechangeCallback', null);
       if (callback !== null) {
         var scope = GetValue$b(config, 'valuechangeCallbackScope', undefined);
@@ -16281,7 +16296,9 @@
           value = ColorStringToInteger(value);
           if (value == null) {
             var inputText = this.childrenMap.inputText;
-            inputText.setText(GetHexColorString(this._value));
+            if (inputText) {
+              inputText.setText(GetHexColorString(this._value));
+            }
             return;
           }
         } else {
@@ -16296,7 +16313,9 @@
           SetSwatchColor(swatch, value);
         }
         var inputText = this.childrenMap.inputText;
-        inputText.setText(GetHexColorString(value));
+        if (inputText) {
+          inputText.setText(GetHexColorString(value));
+        }
         this.emit('valuechange', this._value);
       }
     }, {
@@ -18808,7 +18827,9 @@
     if (this.colorPicker) {
       return;
     }
-    var colorPicker = CreateColorPicker.call(this);
+
+    // Layout it to get full height
+    var colorPicker = CreateColorPicker.call(this).layout();
     var dropDownBehavior = new DropDown(colorPicker, {
       // Transition
       duration: {
@@ -18880,8 +18901,8 @@
         _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
         _this.setColorPickerHPalettePosition(GetValue(colorPickerConfig, 'hPalettePosition', 0));
         _this.setColorPickerExpandDirection(GetValue(colorPickerConfig, 'expandDirection'));
-        _this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
-        _this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));
+        _this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 200));
+        _this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 200));
         _this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
         _this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));

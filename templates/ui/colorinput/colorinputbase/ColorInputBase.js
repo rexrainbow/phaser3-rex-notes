@@ -4,6 +4,7 @@ import CreateInputText from '../../utils/build/CreateInputText.js';
 import ColorStringToInteger from '../../../../plugins/utils/color/ColorStringToInteger.js';
 import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString.js';
 import SetSwatchColor from './methods/SetSwatchColor.js';
+import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -33,9 +34,19 @@ class ColorInput extends Sizer {
         }
 
         if (swatch) {
+            var swatchSize = GetValue(config, 'swatchSize');
+            var squareExpandSwatch;
+            if (swatchSize !== undefined) {
+                ResizeGameObject(swatch, swatchSize, swatchSize);
+                squareExpandSwatch = false;
+            } else {
+                squareExpandSwatch = GetValue(config, 'squareExpandSwatch', true);
+            }
+
+            var fitRatio = (squareExpandSwatch) ? 1 : 0;
             this.add(
                 swatch,
-                { proportion: 0, expand: false, fitRatio: 1 }
+                { proportion: 0, expand: false, fitRatio: fitRatio }
             );
         }
 

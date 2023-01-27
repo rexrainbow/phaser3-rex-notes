@@ -9,6 +9,8 @@ declare namespace ColorInputBase {
         background?: Phaser.GameObjects.GameObject,
 
         swatch?: Phaser.GameObjects.GameObject | RoundRectangle.IConfig,
+        swatchSize?: number,
+        squareExpandSwatch?: boolean,
 
         inputText?: CanvasInput.IConfig,
 

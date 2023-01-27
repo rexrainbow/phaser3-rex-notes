@@ -32999,7 +32999,6 @@
     }
     var swatch = new RoundRectangle$3(scene, config);
     scene.add.existing(swatch);
-    swatch.expandSquare = true;
     return swatch;
   };
 
@@ -33081,30 +33080,46 @@
       // Add elements
       var background = GetValue$1q(config, 'background', undefined);
       var swatch = CreateSwatch(scene, GetValue$1q(config, 'swatch'));
-      var inputTextConfig = GetValue$1q(config, 'inputText');
-      var inputText = CreateInputText$1(scene, inputTextConfig);
+      var inputTextConfig = GetValue$1q(config, 'inputText', true);
+      var inputText;
+      if (inputTextConfig) {
+        inputText = CreateInputText$1(scene, inputTextConfig);
+      }
       if (background) {
         _this.addBackground(background);
       }
       if (swatch) {
+        var swatchSize = GetValue$1q(config, 'swatchSize');
+        var squareExpandSwatch;
+        if (swatchSize !== undefined) {
+          ResizeGameObject(swatch, swatchSize, swatchSize);
+          squareExpandSwatch = false;
+        } else {
+          squareExpandSwatch = GetValue$1q(config, 'squareExpandSwatch', true);
+        }
+        var fitRatio = squareExpandSwatch ? 1 : 0;
         _this.add(swatch, {
           proportion: 0,
           expand: false,
-          fitRatio: 1
+          fitRatio: fitRatio
         });
       }
-      var proportion = GetValue$1q(inputTextConfig, 'width') === undefined ? 1 : 0;
-      var expand = GetValue$1q(inputTextConfig, 'height') === undefined ? true : false;
-      _this.add(inputText, {
-        proportion: proportion,
-        expand: expand
-      });
+      if (inputText) {
+        var proportion = GetValue$1q(inputTextConfig, 'width') === undefined ? 1 : 0;
+        var expand = GetValue$1q(inputTextConfig, 'height') === undefined ? true : false;
+        _this.add(inputText, {
+          proportion: proportion,
+          expand: expand
+        });
+      }
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('swatch', swatch);
       _this.addChildrenMap('inputText', inputText);
-      inputText.on('close', function () {
-        this.setValue(inputText.value);
-      }, _assertThisInitialized(_this));
+      if (inputText) {
+        inputText.on('close', function () {
+          this.setValue(inputText.value);
+        }, _assertThisInitialized(_this));
+      }
       var callback = GetValue$1q(config, 'valuechangeCallback', null);
       if (callback !== null) {
         var scope = GetValue$1q(config, 'valuechangeCallbackScope', undefined);
@@ -33123,7 +33138,9 @@
           value = ColorStringToInteger(value);
           if (value == null) {
             var inputText = this.childrenMap.inputText;
-            inputText.setText(GetHexColorString(this._value));
+            if (inputText) {
+              inputText.setText(GetHexColorString(this._value));
+            }
             return;
           }
         } else {
@@ -33138,7 +33155,9 @@
           SetSwatchColor(swatch, value);
         }
         var inputText = this.childrenMap.inputText;
-        inputText.setText(GetHexColorString(value));
+        if (inputText) {
+          inputText.setText(GetHexColorString(value));
+        }
         this.emit('valuechange', this._value);
       }
     }, {
@@ -35056,7 +35075,9 @@
     if (this.colorPicker) {
       return;
     }
-    var colorPicker = CreateColorPicker.call(this);
+
+    // Layout it to get full height
+    var colorPicker = CreateColorPicker.call(this).layout();
     var dropDownBehavior = new DropDown(colorPicker, {
       // Transition
       duration: {
@@ -35128,8 +35149,8 @@
         _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
         _this.setColorPickerHPalettePosition(GetValue$1i(colorPickerConfig, 'hPalettePosition', 0));
         _this.setColorPickerExpandDirection(GetValue$1i(colorPickerConfig, 'expandDirection'));
-        _this.setColorPickerEaseInDuration(GetValue$1i(colorPickerConfig, 'easeIn', 500));
-        _this.setColorPickerEaseOutDuration(GetValue$1i(colorPickerConfig, 'easeOut', 500));
+        _this.setColorPickerEaseInDuration(GetValue$1i(colorPickerConfig, 'easeIn', 200));
+        _this.setColorPickerEaseOutDuration(GetValue$1i(colorPickerConfig, 'easeOut', 200));
         _this.setColorPickerTransitInCallback(GetValue$1i(colorPickerConfig, 'transitIn'));
         _this.setColorPickerTransitOutCallback(GetValue$1i(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue$1i(colorPickerConfig, 'bounds'));
@@ -50058,23 +50079,7 @@
     return gameObject;
   };
 
-  var BuildSliderConfig = function BuildSliderConfig(scene, config) {
-    config = config ? DeepClone(config) : {};
-    if (config.track) {
-      config.track = CreateRoundRectangle$1(scene, config.track);
-    }
-    if (config.indicator) {
-      config.indicator = CreateRoundRectangle$1(scene, config.indicator);
-    }
-    var thumbConfig = config.thumb;
-    if (thumbConfig) {
-      config.thumb = CreateRoundRectangle$1(scene, thumbConfig);
-    }
-    return config;
-  };
-
   var CreateSlider$1 = function CreateSlider(scene, config) {
-    config = BuildSliderConfig(scene, config);
     var gameObject = new Slider$1(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
