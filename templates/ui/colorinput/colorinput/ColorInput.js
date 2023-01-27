@@ -41,8 +41,8 @@ class ColorInput extends ColorInputBase {
 
             this.setColorPickerHPalettePosition(GetValue(colorPickerConfig, 'hPalettePosition', 0));
             this.setColorPickerExpandDirection(GetValue(colorPickerConfig, 'expandDirection'));
-            this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
-            this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));
+            this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 200));
+            this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 200));
             this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
             this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitOut'));
             this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));
