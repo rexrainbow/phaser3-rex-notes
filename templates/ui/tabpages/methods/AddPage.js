@@ -6,8 +6,8 @@ var AddPage = function (key, tabGameObject, pageGameObject) {
     if (IsPlainObject(key)) {
         var config = key;
         key = GetValue(config, 'key');
-        tabGameObject = GetValue(config, 'tab');
-        pageGameObject = GetValue(config, 'page');
+        tabGameObject = GetValue(config, 'tabGameObject');
+        pageGameObject = GetValue(config, 'pageGameObject');
     }
 
     if (!key) {
