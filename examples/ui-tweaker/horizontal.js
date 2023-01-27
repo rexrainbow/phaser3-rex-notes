@@ -44,6 +44,13 @@ class Demo extends Phaser.Scene {
                     onValueChange(value) { console.log(`y=${value}`) }
                 }
             )
+            .addInput(
+                gameObject, 'fillColor',
+                {
+                    title: 'color',             // Custom title
+                    view: 'color',
+                }
+            )
             .layout();
 
     }
@@ -58,7 +65,7 @@ var CreatePanel = function (scene) {
         height: 60,
 
         styles: {
-            itemWidth: 200,
+            // itemWidth: 200,
 
             background: {
                 radius: 10,
@@ -73,7 +80,7 @@ var CreatePanel = function (scene) {
 
                 title: {
                     iconSize: 30,
-                    space: { left: 5 }
+                    space: { left: 5, right: 5 }
                 },
 
                 inputText: {
@@ -94,6 +101,7 @@ var CreatePanel = function (scene) {
                 },
 
                 slider: {
+                    width: 100,
                     track: {
                         color: COLOR_DARK,
                         height: 8,
@@ -147,77 +155,22 @@ var CreatePanel = function (scene) {
                 },
 
                 colorInput: {
+                    swatchSize: 30,
+
+                    inputText: false,
+
                     colorPicker: {
                         background: { color: 0x0, strokeColor: COLOR_LIGHT },
                     },
 
-                    colorComponents: {
-                        inputText: {
-                            background: {
-                                color: COLOR_DARK
-                            },
-                            focusStyle: {
-                                color: COLOR_PRIMARY,
-                            },
-                            style: {
-                                backgroundBottomY: 4,
-                                backgroundHeight: 18,
-                            },
-                            cursorStyle: {
-                                color: 'black',
-                                backgroundColor: 'white',
-                            }
-                        }
-                    }
+                    colorComponents: false
                 },
 
                 proportion: {
-                    title: 1,
-                    inputField: 5,
-                    range: { slider: 3, inputText: 2 }
+                    title: 0,
+                    inputField: 0,
+                    range: { slider: 0, inputText: 0 }
                 }
-            },
-
-            folder: {
-                title: {
-                    iconSize: 30,
-                    background: { color: COLOR_DARK },
-                    space: { icon: 2 },
-
-                    expandedIcon: {
-                        color: COLOR_PRIMARY,
-                    },
-                },
-
-                background: {
-                    strokeColor: COLOR_DARK
-                },
-
-                space: {
-                    left: 10, right: 0, top: 5, bottom: 5, item: 3
-                },
-            },
-
-            tab: {
-                tab: {
-                    background: {
-                        color: COLOR_DARK,
-                        strokeColor: COLOR_PRIMARY,
-                        'active.color': COLOR_PRIMARY,
-                    },
-                    space: { left: 3, right: 3, top: 3, bottom: 3 }
-                },
-                tabs: {
-                    space: { item: 3 }
-                },
-                pages: {
-                    fadeIn: 300
-                },
-            },
-
-            separator: {
-                height: 5,
-                color: COLOR_DARK
             },
 
             space: {
