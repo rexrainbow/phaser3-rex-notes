@@ -1697,6 +1697,71 @@ Style of color input is defined in
             },
 
             colorInput: {
+                // swatchSize: undefined,
+
+                inputText: {
+                    background: {
+                        color: null,
+                        color2: null,
+                        horizontalGradient: true,
+    
+                        stroke: null,
+                        strokeThickness: 2,
+    
+                        cornerRadius: 0,
+                        cornerIteration: null
+                    },
+                    focusStyle: {
+                        // color:
+                        // color2:
+                        // horizontalGradient:
+    
+                        // stroke:
+                        // strokeThickness:
+    
+                        // cornerRadius:
+                        // cornerIteration:
+                    },
+
+                    style: {
+                        bold: false,
+                        italic: false,
+                        fontSize: '16px',
+                        fontFamily: 'Courier',
+                        color: '#fff',
+                        stroke: '#fff',
+                        strokeThickness: 0,
+                        shadowColor: null,
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                        shadowBlur: 0,
+                        backgroundColor: null,
+                        backgroundHeight: undefined,
+                        backgroundBottomY: undefined,
+                        offsetX: 0,
+                        offsetY: 0
+                    },
+                    cursorStyle: {
+                        // bold:
+                        // italic:
+                        // fontSize:
+                        // fontFamily:
+                        // color:
+                        // stroke:
+                        // strokeThickness:
+                        // shadowColor:
+                        // shadowOffsetX:
+                        // shadowOffsetY:
+                        // shadowBlur:
+                        // backgroundColor:
+                        // backgroundHeight:
+                        // backgroundBottomY:
+                        // offsetX:
+                        // offsetY:
+                    }
+                },                
+                // inputText: false,
+
                 colorPicker: {
                     background: {
                         radius: 0,
@@ -1774,6 +1839,8 @@ Style of color input is defined in
 
                     }
                 }
+
+                // colorComponents: false,
 
             }
         }

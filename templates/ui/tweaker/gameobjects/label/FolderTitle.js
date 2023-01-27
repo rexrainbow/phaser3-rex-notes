@@ -17,28 +17,10 @@ class FolderTitle extends Title {
             .addSpace()
             .add(
                 expandedIcon,
-                { proportion: 0, expand: false, padding: 1, }
+                { proportion: 0, expand: false, padding: 1, fitRatio: 1 }
             );
 
         this.addChildrenMap('expandedIcon', expandedIcon);
-    }
-
-    preLayout() {
-        var expandedIcon = this.childrenMap.expandedIcon;
-        expandedIcon.resize(1, 1);
-    }
-
-    postResolveSize(width, height) {
-        var expandedIcon = this.childrenMap.expandedIcon;
-        var size = height
-            - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-            - this.getChildOuterPadding(expandedIcon, 'top') - this.getChildOuterPadding(expandedIcon, 'bottom');
-        expandedIcon.resize(size, size);
-
-        // Recalculate proportionLength
-        this.proportionLength = undefined;
-        this._childrenWidth = undefined;
-        this.resolveWidth(width, true);
     }
 
     setExpandedState(expanded) {

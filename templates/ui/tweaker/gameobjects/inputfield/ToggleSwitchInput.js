@@ -17,7 +17,7 @@ class ToggleSwitchInput extends InputFiledBase {
             .addSpace()
             .add(
                 toggleSwitch,
-                { proportion: 0, expand: false }
+                { proportion: 0, expand: false, fitRatio: 1 }
             )
 
         this.addChildrenMap('toggleSwitch', toggleSwitch);
@@ -25,27 +25,6 @@ class ToggleSwitchInput extends InputFiledBase {
         toggleSwitch.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
-    }
-
-    preLayout() {
-        var toggleSwitch = this.childrenMap.toggleSwitch;
-        toggleSwitch.resize(1, 1);
-    }
-
-    postResolveSize(width, height) {
-        var toggleSwitch = this.childrenMap.toggleSwitch;
-        var innerHeight = height
-            - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-            - this.getChildOuterPadding(toggleSwitch, 'top') - this.getChildOuterPadding(toggleSwitch, 'bottom');
-        var innerWidth = width
-            - this.getInnerPadding('left') - this.getInnerPadding('right')
-            - this.getChildOuterPadding(toggleSwitch, 'left') - this.getChildOuterPadding(toggleSwitch, 'right')
-        toggleSwitch.resize(Math.min(innerHeight * 1.2, innerWidth), innerHeight);
-
-        // Recalculate proportionLength
-        this.proportionLength = undefined;
-        this._childrenWidth = undefined;
-        this.resolveWidth(width, true);
     }
 
     get value() {

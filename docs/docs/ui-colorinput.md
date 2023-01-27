@@ -88,7 +88,11 @@ var colorInput = scene.rexUI.add.colorInput({
     // swatch: swatchGameObject,
     // swatch: false,
 
+    // swatchSize: undefined,
+    // squareExpandSwatch: true,
+
     inputText: inputTextConfig,
+    // inputText: false,
 
     colorPicker : {
         width: 160, height: 170,
@@ -116,6 +120,7 @@ var colorInput = scene.rexUI.add.colorInput({
 
         // space: { item: 8 }
     },
+    // colorComponents: false,
 
     valuechangeCallback: function(newValue, oldValue, colorInput) {
     },
@@ -165,6 +170,12 @@ var colorInput = scene.rexUI.add.colorInput({
         ```
     - An Image or Sprite game object : Tint this game object for displaying color value.
     - `false` : No swatch game object.
+- `swatchSize` :
+    - A number : Size of swatch.
+    - `undefined` : Expand size to fit inner height of color input. Default behavior.
+- `squareExpandSwatch`
+    - `true` : Expand size to fit inner height of color input. Default behavior if `swatchSize` is set to `undefined`, or not given
+    - `false` : Keep current size of swatch.
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)
 - `colorPicker` : Configuration of a drop-down [color picker](ui-colorpicker.md), triggered by clicking swatch.
     - `colorPicker.width`, `colorPicker.height` : Sizer of color picker. Default value is `180`x`170`
