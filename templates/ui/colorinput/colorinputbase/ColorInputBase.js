@@ -19,9 +19,14 @@ class ColorInput extends Sizer {
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
+
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
-        var inputTextConfig = GetValue(config, 'inputText');
-        var inputText = CreateInputText(scene, inputTextConfig);
+
+        var inputTextConfig = GetValue(config, 'inputText', true);
+        var inputText;
+        if (inputTextConfig) {
+            inputText = CreateInputText(scene, inputTextConfig);
+        }
 
         if (background) {
             this.addBackground(background);
@@ -34,21 +39,25 @@ class ColorInput extends Sizer {
             );
         }
 
-        var proportion = (GetValue(inputTextConfig, 'width') === undefined) ? 1 : 0;
-        var expand = (GetValue(inputTextConfig, 'height') === undefined) ? true : false;
-        this.add(
-            inputText,
-            { proportion: proportion, expand: expand }
-        )
+        if (inputText) {
+            var proportion = (GetValue(inputTextConfig, 'width') === undefined) ? 1 : 0;
+            var expand = (GetValue(inputTextConfig, 'height') === undefined) ? true : false;
+            this.add(
+                inputText,
+                { proportion: proportion, expand: expand }
+            )
+        }
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('swatch', swatch);
         this.addChildrenMap('inputText', inputText);
 
-        inputText.on('close', function () {
-            this.setValue(inputText.value);
-        }, this);
 
+        if (inputText) {
+            inputText.on('close', function () {
+                this.setValue(inputText.value);
+            }, this);
+        }
 
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {
@@ -68,7 +77,9 @@ class ColorInput extends Sizer {
             value = ColorStringToInteger(value);
             if (value == null) {
                 var inputText = this.childrenMap.inputText;
-                inputText.setText(GetHexColorString(this._value));
+                if (inputText) {
+                    inputText.setText(GetHexColorString(this._value));
+                }
                 return;
             }
         } else {
@@ -87,7 +98,9 @@ class ColorInput extends Sizer {
         }
 
         var inputText = this.childrenMap.inputText;
-        inputText.setText(GetHexColorString(value));
+        if (inputText) {
+            inputText.setText(GetHexColorString(value));
+        }
 
         this.emit('valuechange', this._value);
     }
