@@ -1,6 +1,8 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateToggleSwitch from '../utils/CreateToggleSwitch.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class ToggleSwitchInput extends InputFiledBase {
     constructor(scene, config) {
         if (config === undefined) {
@@ -13,11 +15,18 @@ class ToggleSwitchInput extends InputFiledBase {
         var toggleSwitchConfig = config.toggleSwitch;
         var toggleSwitch = CreateToggleSwitch(scene, toggleSwitchConfig);
 
+        var size = GetValue(toggleSwitchConfig, 'size');
+        if (size !== undefined) {
+            toggleSwitch.setSize(size, size);
+        }
+
+        var fitRatio = (size !== undefined) ? 0 : 1;
+
         this
             .addSpace()
             .add(
                 toggleSwitch,
-                { proportion: 0, expand: false, fitRatio: 1 }
+                { proportion: 0, expand: false, fitRatio: fitRatio }
             )
 
         this.addChildrenMap('toggleSwitch', toggleSwitch);

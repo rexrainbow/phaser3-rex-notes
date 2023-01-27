@@ -51,6 +51,12 @@ class Demo extends Phaser.Scene {
                     view: 'color',
                 }
             )
+            .addInput(
+                gameObject, 'visible',
+                {
+                    // view: 'toggleSwitch'        // Toggle-switch
+                }
+            )
             .layout();
 
     }
@@ -144,6 +150,7 @@ var CreatePanel = function (scene) {
                 },
 
                 checkbox: {
+                    size: 30,
                     color: COLOR_LIGHT,
                     boxStrokeColor: COLOR_DARK,
                     uncheckedColor: COLOR_DARK,

@@ -1,6 +1,8 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateCheckbox from '../utils/CreateCheckbox.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class CheckboxInput extends InputFiledBase {
     constructor(scene, config) {
         if (config === undefined) {
@@ -13,9 +15,15 @@ class CheckboxInput extends InputFiledBase {
         var checkboxConfig = config.checkbox;
         var checkbox = CreateCheckbox(scene, checkboxConfig);
 
+        var size = GetValue(checkboxConfig, 'size');
+        if (size !== undefined) {
+            checkbox.setSize(size, size);
+        }
+
+        var fitRatio = (size !== undefined) ? 0 : 1;
         this.add(
             checkbox,
-            { proportion: 0, expand: false, fitRatio: 1 }
+            { proportion: 0, expand: false, fitRatio: fitRatio }
         )
 
         this.addChildrenMap('checkbox', checkbox);

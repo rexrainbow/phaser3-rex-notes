@@ -1634,68 +1634,6 @@ Style of color input is defined in
                 }
             },
 
-            inputText: {
-                background: {
-                    color: null,
-                    color2: null,
-                    horizontalGradient: true,
-
-                    stroke: null,
-                    strokeThickness: 2,
-
-                    cornerRadius: 0,
-                    cornerIteration: null
-                },
-                focusStyle: {
-                    // color:
-                    // color2:
-                    // horizontalGradient:
-
-                    // stroke:
-                    // strokeThickness:
-
-                    // cornerRadius:
-                    // cornerIteration:
-                },
-
-                style: {
-                    bold: false,
-                    italic: false,
-                    fontSize: '16px',
-                    fontFamily: 'Courier',
-                    color: '#fff',
-                    stroke: '#fff',
-                    strokeThickness: 0,
-                    shadowColor: null,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 0,
-                    shadowBlur: 0,
-                    backgroundColor: null,
-                    backgroundHeight: undefined,
-                    backgroundBottomY: undefined,
-                    offsetX: 0,
-                    offsetY: 0
-                },
-                cursorStyle: {
-                    // bold:
-                    // italic:
-                    // fontSize:
-                    // fontFamily:
-                    // color:
-                    // stroke:
-                    // strokeThickness:
-                    // shadowColor:
-                    // shadowOffsetX:
-                    // shadowOffsetY:
-                    // shadowBlur:
-                    // backgroundColor:
-                    // backgroundHeight:
-                    // backgroundBottomY:
-                    // offsetX:
-                    // offsetY:
-                }
-            },
-
             colorInput: {
                 // swatchSize: undefined,
 
@@ -1921,6 +1859,8 @@ Style of boolean input is defined in
 
             // For checkbox view
             checkbox: {
+                // size: undefined,
+
                 color: 0x005cb2,
                 boxFillAlpha: 1,
                 uncheckedColor: null,
@@ -1944,6 +1884,8 @@ Style of boolean input is defined in
 
             // For toggle switch view
             toggleSwitch: {
+                // size: undefined,
+                
                 color: 0x005cb2,
                 trackFillAlpha: 1,
                 falseValueTrackColor: undefined,
