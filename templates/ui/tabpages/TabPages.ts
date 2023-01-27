@@ -27,6 +27,12 @@ declare namespace TabPages {
 
     }
 
+    interface IAddPageConfig {
+        key?: string,
+        tab: Phaser.GameObjects.GameObject,
+        page: Phaser.GameObjects.GameObject
+    }
+
 }
 
 declare class TabPages extends Sizer {
@@ -44,11 +50,7 @@ declare class TabPages extends Sizer {
         pageGameObject: Phaser.GameObjects.GameObject
     ): this;
 
-    addPage(config: {
-        key?: string,
-        tabGameObject: Phaser.GameObjects.GameObject,
-        pageGameObject: Phaser.GameObjects.GameObject
-    }): this;
+    addPage(config: TabPages.IAddPageConfig): this;
 
     removePage(
         key: string,
