@@ -1650,7 +1650,10 @@ Style of color input is defined in
             },
 
             colorInput: {
-                // swatchSize: undefined,
+                swatch: {
+                    radius: 0,
+                    size: undefined,
+                },
 
                 inputText: {
                     background: {

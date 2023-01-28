@@ -179,7 +179,8 @@ var CreateColorInput5 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
 
-        swatchSize: 20,
+        swatch: { size: 20, },
+        // swatchSize: 20,
 
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },

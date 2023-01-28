@@ -7,6 +7,7 @@ import SetSwatchColor from './methods/SetSwatchColor.js';
 import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
 
 class ColorInput extends Sizer {
@@ -21,6 +22,11 @@ class ColorInput extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
 
+        var swatchConfig = GetValue(config, 'swatch');
+        var swatchSize;
+        if (IsPlainObject(swatchConfig)) {
+            swatchSize = GetValue(swatchConfig, 'size');
+        }
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
 
         var inputTextConfig = GetValue(config, 'inputText', true);
@@ -34,7 +40,7 @@ class ColorInput extends Sizer {
         }
 
         if (swatch) {
-            var swatchSize = GetValue(config, 'swatchSize');
+            swatchSize = GetValue(config, 'swatchSize', swatchSize);
             var squareExpandSwatch;
             if (swatchSize !== undefined) {
                 ResizeGameObject(swatch, swatchSize, swatchSize);

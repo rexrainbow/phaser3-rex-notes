@@ -9049,10 +9049,11 @@
 
     <span class="nx">swatch</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="c1">// swatch: { shape: &#39;circle&#39; },</span>
+    <span class="c1">// swatch: { size: 30 },</span>
     <span class="c1">// swatch: swatchGameObject,</span>
     <span class="c1">// swatch: false,</span>
 
-    <span class="c1">// swatchSize: undefined,</span>
+    <span class="c1">// swatchSize: undefined,  // or swatch: { size }</span>
     <span class="c1">// squareExpandSwatch: true,</span>
 
     <span class="nx">inputText</span><span class="o">:</span> <span class="nx">inputTextConfig</span><span class="p">,</span>
@@ -9137,7 +9138,19 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">radius</span><span class="o">:</span> <span class="mf">10</span> <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">radius</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">size</span><span class="o">:</span> <span class="mf">30</span> <span class="p">}</span>
+</code></pre></div><ul>
+<li><code>shape</code> : (Round-) Rectangle or circle<ul>
+<li><code>0</code>, or <code>'rectangle'</code> : (Round-) Rectangle shape.</li>
+<li><code>1</code>, or <code>'circle'</code> : Circle shape.</li>
+</ul>
+</li>
+<li><code>radius</code> : Radius of round rectangle.</li>
+<li><code>size</code> : Size of swatch. Equal to <code>swatchSize</code> parameter.</li>
+</ul>
+</li>
 <li>An Image or Sprite game object : Tint this game object for displaying color value.</li>
 <li><code>false</code> : No swatch game object.</li>
 </ul>

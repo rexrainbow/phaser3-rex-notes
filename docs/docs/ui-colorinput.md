@@ -85,10 +85,11 @@ var colorInput = scene.rexUI.add.colorInput({
 
     swatch: undefined,
     // swatch: { shape: 'circle' },
+    // swatch: { size: 30 },
     // swatch: swatchGameObject,
     // swatch: false,
 
-    // swatchSize: undefined,
+    // swatchSize: undefined,  // or swatch: { size }
     // squareExpandSwatch: true,
 
     inputText: inputTextConfig,
@@ -168,6 +169,15 @@ var colorInput = scene.rexUI.add.colorInput({
         ```javascript
         { radius: 10 }
         ```
+        or
+        ```javascript
+        { radius: 10, size: 30 }
+        ```
+        - `shape` : (Round-) Rectangle or circle
+            - `0`, or `'rectangle'` : (Round-) Rectangle shape.
+            - `1`, or `'circle'` : Circle shape.
+        - `radius` : Radius of round rectangle.
+        - `size` : Size of swatch. Equal to `swatchSize` parameter.
     - An Image or Sprite game object : Tint this game object for displaying color value.
     - `false` : No swatch game object.
 - `swatchSize` :

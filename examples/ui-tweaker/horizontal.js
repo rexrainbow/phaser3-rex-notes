@@ -159,7 +159,9 @@ var CreatePanel = function (scene) {
                 },
 
                 colorInput: {
-                    swatchSize: 30,
+                    swatch: {
+                        radius: 10, size: 30
+                    },
 
                     inputText: false,
 
