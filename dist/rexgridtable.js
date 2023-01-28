@@ -14639,7 +14639,7 @@
 
   var SetItems = function SetItems(items) {
     if (items === undefined) {
-      this.items.length = 0;
+      this.items = [];
     } else {
       this.items = items;
     }

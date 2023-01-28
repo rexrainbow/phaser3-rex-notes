@@ -217,11 +217,40 @@
     return this;
   };
 
-  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
+  var GetCache = function GetCache(game, loaderType, cacheType) {
     if (cacheType === undefined) {
-      cacheType = GetDefaultCacheType(loaderType);
+      switch (loaderType) {
+        case 'image':
+        case 'svg':
+          cacheType = 'textures';
+          break;
+        case 'animation':
+          cacheType = 'json';
+          break;
+        case 'tilemapTiledJSON':
+        case 'tilemapCSV':
+          cacheType = 'tilemap';
+          break;
+        case 'glsl':
+          cacheType = 'shader';
+          break;
+        default:
+          cacheType = loaderType;
+          break;
+      }
     }
-    var cache = GetCache(scene, cacheType);
+    game = GetGame(game);
+    var cache;
+    if (cacheType === 'textures') {
+      cache = game.textures;
+    } else {
+      cache = game.cache[cacheType];
+    }
+    return cache;
+  };
+
+  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
+    var cache = GetCache(scene, loaderType, cacheType);
     if (cache.exists(key)) {
       cache.remove(key);
     }
@@ -234,31 +263,6 @@
     }
     loader[loaderType](key, url);
     loader.start();
-  };
-  var GetDefaultCacheType = function GetDefaultCacheType(loaderType) {
-    switch (loaderType) {
-      case 'image':
-      case 'svg':
-        return 'textures';
-      case 'animation':
-        return 'json';
-      case 'tilemapTiledJSON':
-      case 'tilemapCSV':
-        return 'tilemap';
-      case 'glsl':
-        return 'shader';
-      default:
-        return loaderType;
-    }
-  };
-  var GetCache = function GetCache(scene, cacheType) {
-    var cache;
-    if (cacheType === 'textures') {
-      cache = scene.sys.textures;
-    } else {
-      cache = scene.sys.cache[cacheType];
-    }
-    return cache;
   };
 
   var LoadFile = function LoadFile(file, loaderType, key, cacheType, onComplete) {

@@ -126,11 +126,66 @@
     return this;
   };
 
-  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
-    if (cacheType === undefined) {
-      cacheType = GetDefaultCacheType(loaderType);
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
-    var cache = GetCache(scene, cacheType);
+  };
+
+  var GetCache = function GetCache(game, loaderType, cacheType) {
+    if (cacheType === undefined) {
+      switch (loaderType) {
+        case 'image':
+        case 'svg':
+          cacheType = 'textures';
+          break;
+        case 'animation':
+          cacheType = 'json';
+          break;
+        case 'tilemapTiledJSON':
+        case 'tilemapCSV':
+          cacheType = 'tilemap';
+          break;
+        case 'glsl':
+          cacheType = 'shader';
+          break;
+        default:
+          cacheType = loaderType;
+          break;
+      }
+    }
+    game = GetGame(game);
+    var cache;
+    if (cacheType === 'textures') {
+      cache = game.textures;
+    } else {
+      cache = game.cache[cacheType];
+    }
+    return cache;
+  };
+
+  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
+    var cache = GetCache(scene, loaderType, cacheType);
     if (cache.exists(key)) {
       cache.remove(key);
     }
@@ -143,31 +198,6 @@
     }
     loader[loaderType](key, url);
     loader.start();
-  };
-  var GetDefaultCacheType = function GetDefaultCacheType(loaderType) {
-    switch (loaderType) {
-      case 'image':
-      case 'svg':
-        return 'textures';
-      case 'animation':
-        return 'json';
-      case 'tilemapTiledJSON':
-      case 'tilemapCSV':
-        return 'tilemap';
-      case 'glsl':
-        return 'shader';
-      default:
-        return loaderType;
-    }
-  };
-  var GetCache = function GetCache(scene, cacheType) {
-    var cache;
-    if (cacheType === 'textures') {
-      cache = scene.sys.textures;
-    } else {
-      cache = scene.sys.cache[cacheType];
-    }
-    return cache;
   };
 
   var LoadFile = function LoadFile(file, loaderType, key, cacheType, onComplete) {
