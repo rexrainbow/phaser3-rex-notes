@@ -20,7 +20,8 @@ class RangeInput extends InputFiledBase {
         var trackSize = GetValue(sliderConfig, trackSizeKey);
         var slider = CreateSlider(scene, sliderConfig);
 
-        var proportion = GetValue(config, 'proportion.range.slider', 2);
+        var defaultProportion = (config.parentOrientation === 1) ? 2 : 0;
+        var proportion = GetValue(config, 'proportion.range.slider', defaultProportion);
         var expand = (trackSize === undefined);
         this.add(
             slider,
@@ -31,7 +32,8 @@ class RangeInput extends InputFiledBase {
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
-        var proportion = GetValue(config, 'proportion.range.inputText', 1);
+        var defaultProportion = (config.parentOrientation === 1) ? 1 : 0;
+        var proportion = GetValue(config, 'proportion.range.inputText', defaultProportion);
         this.add(
             inputText,
             { proportion: proportion, expand: true }

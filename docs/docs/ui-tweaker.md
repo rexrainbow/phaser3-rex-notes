@@ -1078,6 +1078,10 @@ Style of text/number input is defined in
                     // offsetX:
                     // offsetY:
                 }
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
         }
     }
@@ -1253,8 +1257,11 @@ Style of text/number list input is defined in
                         icon: 0, text: 0
                     }
                 }
-            }
+            },
 
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
+            }
         }
     }
 }
@@ -1377,6 +1384,10 @@ Style of buttons input is defined in
                 },
 
                 expand: true
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
 
         }
@@ -1556,6 +1567,10 @@ Style of range input is defined in
                     // offsetX:
                     // offsetY:
                 }
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
 
         }
@@ -1780,6 +1795,10 @@ Style of color input is defined in
 
                 // colorComponents: false,
 
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
         }
     }
@@ -1909,6 +1928,10 @@ Style of boolean input is defined in
                 animationDuration: 150,
 
                 readOnly: false,
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
         }
     }
@@ -2028,6 +2051,10 @@ Style of button is defined in
                     left: 0, right: 0, top: 0, bottom:0, 
                     icon: 0, text: 0
                 }
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0
             }
         }
     }

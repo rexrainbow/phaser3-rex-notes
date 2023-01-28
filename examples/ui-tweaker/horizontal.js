@@ -71,12 +71,10 @@ var CreatePanel = function (scene) {
         height: 60,
 
         styles: {
-            // itemWidth: 200,
-
             background: {
                 radius: 10,
                 color: 0x0,
-                strokeColor: 0xffffff,
+                strokeColor: COLOR_LIGHT,
             },
 
             inputRow: {
@@ -85,8 +83,7 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
-                    iconSize: 30,
-                    space: { left: 5, right: 5 }
+                    space: { right: 5 }
                 },
 
                 inputText: {
@@ -107,7 +104,7 @@ var CreatePanel = function (scene) {
                 },
 
                 slider: {
-                    width: 100,
+                    width: 80,
                     track: {
                         color: COLOR_DARK,
                         height: 8,
@@ -173,15 +170,13 @@ var CreatePanel = function (scene) {
                     colorComponents: false
                 },
 
-                proportion: {
-                    title: 0,
-                    inputField: 0,
-                    range: { slider: 0, inputText: 0 }
+                space: {
+                    left: 10, right: 10
                 }
             },
 
             space: {
-                left: 10, right: 10, top: 10, bottom: 10, item: 3
+                left: 10, right: 10, top: 10, bottom: 10, item: 5
             }
         },
     })

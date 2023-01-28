@@ -49838,12 +49838,14 @@
       var inputTitle = config.inputTitle;
       var inputField = config.inputField;
       var background = config.background;
-      var proportion = GetValue$l(config, 'proportion.title', 1);
+      var defaultProportion = config.parentOrientation === 1 ? 1 : 0;
+      var proportion = GetValue$l(config, 'proportion.title', defaultProportion);
       _this.add(inputTitle, {
         proportion: proportion,
         expand: true
       });
-      var proportion = GetValue$l(config, 'proportion.inputField', 2);
+      var defaultProportion = config.parentOrientation === 1 ? 2 : 0;
+      var proportion = GetValue$l(config, 'proportion.inputField', defaultProportion);
       _this.add(inputField, {
         proportion: proportion,
         expand: true
@@ -50086,7 +50088,8 @@
       var trackSizeKey = _this.orientation === 0 ? 'track.height' : 'track.width';
       var trackSize = GetValue$k(sliderConfig, trackSizeKey);
       var slider = CreateSlider$1(scene, sliderConfig);
-      var proportion = GetValue$k(config, 'proportion.range.slider', 2);
+      var defaultProportion = config.parentOrientation === 1 ? 2 : 0;
+      var proportion = GetValue$k(config, 'proportion.range.slider', defaultProportion);
       var expand = trackSize === undefined;
       _this.add(slider, {
         proportion: proportion,
@@ -50094,7 +50097,8 @@
       });
       var inputTextConfig = config.inputNumber || config.inputText;
       var inputText = CreateInputText$1(scene, inputTextConfig).setNumberInput();
-      var proportion = GetValue$k(config, 'proportion.range.inputText', 1);
+      var defaultProportion = config.parentOrientation === 1 ? 1 : 0;
+      var proportion = GetValue$k(config, 'proportion.range.inputText', defaultProportion);
       _this.add(inputText, {
         proportion: proportion,
         expand: true
@@ -50600,6 +50604,7 @@
 
     // Create InputRow
     var inputRowStyle = GetValue$f(this.styles, 'inputRow');
+    inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
     var proportion;
     if (this.orientation === 1) {
@@ -50765,6 +50770,7 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweakerShell';
       _this.styles = GetValue$b(config, 'styles') || {};
+      _this.styles.orientation = _this.orientation;
       _this.itemWidth = GetValue$b(_this.styles, 'itemWidth', 0);
       var background = CreateBackground(scene, undefined, config.background);
       if (background) {
