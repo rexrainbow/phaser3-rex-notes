@@ -221,7 +221,7 @@
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
           scene.sys.scale.on('resize', this.scale, this);
-          scene.sys.events.once('preupdate', this.start, this);
+          scene.sys.game.events.once('prestep', this.start, this);
         }
         scene.sys.events.on('shutdown', function () {
           // cameras of this scene will be destroyed when scene shutdown
@@ -254,7 +254,7 @@
       value: function stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.sys.events.off('preupdate', this.start, this);
+        scene.sys.game.events.off('prestep', this.start, this);
         return this;
       }
     }, {

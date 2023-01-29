@@ -1,5 +1,6 @@
 import Resize from '../utils/Resize.js';
 import SyncTo from '../utils/SyncTo.js';
+import ConfigurationMethods from './ConfigurationMethods.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
 import { DragDropEvents, ElementEvents } from './FileDropZoneProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
@@ -34,10 +35,19 @@ class FileDropZone extends DOMElement {
         this.resize(width, height);
 
         this._files = [];
-        this.filters = config.filters;
+        this.setDropEnable(GetValue(config, 'dropEnable', true));
+
+        var filters = GetValue(config, 'filters');
+        if (filters) {
+            this.addFilters(filters);
+        }
 
         // Apply events
-        RouteEvents(this, element, DragDropEvents, true);
+        RouteEvents(this, element, DragDropEvents, {
+            preventDefault: true,
+            preTest(gameObject) { return gameObject.dropEnable; }
+        });
+
         RouteEvents(this, element, ElementEvents);
 
         this
@@ -77,6 +87,7 @@ var methods = {
 Object.assign(
     FileDropZone.prototype,
     methods,
+    ConfigurationMethods,
     LoadFileMethods,
 );
 

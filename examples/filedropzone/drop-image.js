@@ -46,6 +46,14 @@ class Demo extends Phaser.Scene {
                         canvas.fitTo(cover);
                     })
             })
+
+
+        this.add.text(0, 300, 'Enable')
+            .setInteractive()
+            .on('pointerdown', function () {
+                fileDropZone.toggleDropEnable();
+                this.text = (this.text === 'Enable') ? 'Disable' : 'Enable';
+            })
     }
 
     update() { }

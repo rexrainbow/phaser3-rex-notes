@@ -111,12 +111,16 @@ Create a div element for dropping file(s).
 var fileDropZone = scene.add.rexFileDropZone({
     // style: { },
     
+    // dropEnable: true,
     // filters: { filterType: (file) => boolean }
 });
 // var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);
 ```
 
 - `style` : CSS style of div element.
+- `dropEnable` :
+    - `true` : Fire [drop events](filedropzone.md#events) when dropping files. Default behavior.
+    - `false` : Won't fire [drop events](filedropzone.md#events).
 - `filters` : Filter methods, optional. For example, image files filter, will fire `'drop.image'` event
     ```javascript
     {
@@ -196,6 +200,21 @@ var files = fileDropZone.files;
 !!! warning
     Game objects under this file drop zone can't receive touch input events.
 
+### Enable drop events
+
+- Enable
+    ```javascript
+    fileDropZone.setDropEnable();
+    // fileDropZone.setDropEnable(true);
+    ```
+- Disable
+    ```javascript
+    fileDropZone.setDropEnable(false);
+    ```
+- Toggle
+    ```javascript
+    fileDropZone.toggleDropEnable();
+    ```
 
 ### Load file to cache
 

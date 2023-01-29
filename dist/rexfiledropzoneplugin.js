@@ -126,6 +126,36 @@
     return this;
   };
 
+  var ConfigurationMethods = {
+    setDropEnable: function setDropEnable(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      this.dropEnable = enable;
+      return this;
+    },
+    toggleDropEnable: function toggleDropEnable() {
+      this.dropEnable = !this.dropEnable;
+      return this;
+    },
+    addFilter: function addFilter(name, callback) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      this.filters[name] = callback;
+      return this;
+    },
+    addFilters: function addFilters(filters) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      for (var name in filters) {
+        this.filters[name] = filters[name];
+      }
+      return this;
+    }
+  };
+
   var GameClass = Phaser.Game;
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
@@ -239,11 +269,16 @@
     keypress: 'keypress'
   };
 
-  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, preventDefault) {
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, config) {
+    var preventDefault = GetValue$1(config, 'preventDefault', false);
+    var preTest = GetValue$1(config, 'preTest');
     var _loop = function _loop(elementEventName) {
       // Note: Don't use `var` here
       element.addEventListener(elementEventName, function (e) {
-        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        if (!preTest || preTest(gameObject, elementEventName)) {
+          gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        }
         if (preventDefault) {
           e.preventDefault();
         }
@@ -283,10 +318,19 @@
       _this.type = 'rexFileDropZone';
       _this.resize(width, height);
       _this._files = [];
-      _this.filters = config.filters;
+      _this.setDropEnable(GetValue(config, 'dropEnable', true));
+      var filters = GetValue(config, 'filters');
+      if (filters) {
+        _this.addFilters(filters);
+      }
 
       // Apply events
-      RouteEvents(_assertThisInitialized(_this), element, DragDropEvents, true);
+      RouteEvents(_assertThisInitialized(_this), element, DragDropEvents, {
+        preventDefault: true,
+        preTest: function preTest(gameObject) {
+          return gameObject.dropEnable;
+        }
+      });
       RouteEvents(_assertThisInitialized(_this), element, ElementEvents);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
@@ -320,7 +364,7 @@
     resize: Resize,
     syncTo: SyncTo
   };
-  Object.assign(FileDropZone.prototype, methods, LoadFileMethods);
+  Object.assign(FileDropZone.prototype, methods, ConfigurationMethods, LoadFileMethods);
 
   function Factory (x, y, width, height, config) {
     var gameObject = new FileDropZone(this.scene, x, y, width, height, config);
