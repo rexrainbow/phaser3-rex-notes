@@ -30,6 +30,11 @@ class Demo extends Phaser.Scene {
             .on('dragstart', function( ) {
                 console.log('Drag-start game object');
             })
+
+        /*
+        1. DOM game object always put above game canvas, i.e. render above any other kind of game object.
+        2. DOM game object will receive touch event even if it is not the first touched game object.
+        */
     }
 
     update() { }

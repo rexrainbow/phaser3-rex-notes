@@ -9,6 +9,7 @@ Create a div element for dropping file(s).
 
 - [Drop text file](https://codepen.io/rexrainbow/pen/oNMGmeX)
 - [Drop image file](https://codepen.io/rexrainbow/pen/jOpGRdw)
+- [Interactve with other game objects](https://codepen.io/rexrainbow/pen/MWBBXGY)
 
 ## Usage
 
@@ -250,3 +251,8 @@ fileDropZone.loadFilePromise(file, loaderType, key, cahceType)
     ```javascript
     URL.createObjectURL(objectURL);
     ```
+
+### Interactive with other game objects
+
+1. DOM game object always put above game canvas, i.e. file-drop-zone will render above any other kind of game object.
+1. DOM game object will receive touch event even if it is not the first touched game object.
