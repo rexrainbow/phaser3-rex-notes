@@ -280,7 +280,7 @@ tweaker.addInput({
 - `onValueChange` : 
     - Callback invoked when binding value changing.
         ```javascript
-        function(newValue) { 
+        function(newValue, oldValue) { 
         
         }
         ```

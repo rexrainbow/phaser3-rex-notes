@@ -11,8 +11,9 @@ class InputFiledBase extends Sizer {
             return;
         }
 
+        var oldValue = this._value;
         this._value = value;
-        this.emit('valuechange', value);
+        this.emit('valuechange', value, oldValue);
     }
 
     getValue() {
