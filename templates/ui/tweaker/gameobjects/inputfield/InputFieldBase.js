@@ -20,11 +20,11 @@ class InputFiledBase extends Sizer {
         }
 
         var oldValue = this._value;
-        var bindingTarget = this.bindingTarget;
-        var bindingKey = this.bindingKey;
-
         this._value = value;
-        this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
+
+        if (this.listenerCount('valuechange') > 0) {
+            this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        }
     }
 
     getValue() {
