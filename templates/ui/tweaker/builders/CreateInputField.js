@@ -60,6 +60,10 @@ var CreateInputField = function (scene, config, style) {
     // Extra settings
     gameObject.setTextFormatCallback(config.format);
 
+    if (config.onValueChange) {
+        gameObject.on('valuechange', config.onValueChange);
+    }
+
     return gameObject;
 }
 

@@ -1,6 +1,14 @@
 import Sizer from '../../../sizer/Sizer.js';
 
 class InputFiledBase extends Sizer {
+    get bindingTarget() {
+        return this.getParentSizer().bindingTarget;
+    }
+
+    get bindingKey() {
+        return this.getParentSizer().bindTargetKey;
+    }
+
     get value() {
         return this._value;
     }
@@ -12,8 +20,11 @@ class InputFiledBase extends Sizer {
         }
 
         var oldValue = this._value;
+        var bindingTarget = this.bindingTarget;
+        var bindingKey = this.bindingKey;
+
         this._value = value;
-        this.emit('valuechange', value, oldValue);
+        this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
     }
 
     getValue() {

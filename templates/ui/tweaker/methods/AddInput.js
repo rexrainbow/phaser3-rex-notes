@@ -46,11 +46,6 @@ var AddInput = function (object, key, config) {
         inputSizer.startMonitorTarget();
     }
 
-    if (config.onValueChange) {
-        var inputField = inputSizer.childrenMap.inputField;
-        inputField.on('valuechange', config.onValueChange);
-    }
-
     if (config.key) {
         this.root.addChildrenMap(config.key, inputSizer);
     }
