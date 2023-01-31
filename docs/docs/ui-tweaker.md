@@ -240,6 +240,7 @@ tweaker.addInput(object, key, {
     // key: undefined,
 
     // onValueChange: undefined,
+    // onValidate: undefined,
 })
 ```
 
@@ -262,6 +263,7 @@ tweaker.addInput({
     // key: undefined,
 
     // onValueChange: undefined,
+    // onValidate: undefined,
 })
 ```
 
@@ -285,7 +287,16 @@ tweaker.addInput({
         }
         ```
     - `undefined` : Ignore this feature. Default value.
-
+- `onValidate` : 
+    - Callback invoked when new value input.
+        ```javascript
+        function(newValue, oldValue, bindingTarget, bindingKey) { 
+            return true;
+        }
+        ```
+        - `true` : Accept this new value.
+        - `false` : Reject this new value.
+    - `undefined` : Always accept new value changing. Default behavior.
 
 See [Styles of text input](ui-tweaker.md#styles-of-text-input)
 

@@ -44,9 +44,12 @@ class ToggleSwitchInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         this.childrenMap.toggleSwitch.setValue(value);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 }
 

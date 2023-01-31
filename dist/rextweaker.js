@@ -15795,19 +15795,39 @@
       return _super.apply(this, arguments);
     }
     _createClass(InputFiledBase, [{
+      key: "bindingTarget",
+      get: function get() {
+        return this.getParentSizer().bindingTarget;
+      }
+    }, {
+      key: "bindingKey",
+      get: function get() {
+        return this.getParentSizer().bindTargetKey;
+      }
+    }, {
       key: "value",
       get: function get() {
         return this._value;
-      }
-
+      },
+      set:
       // Override
-      ,
-      set: function set(value) {
+      function set(value) {
         if (this._value === value) {
           return;
         }
+        var oldValue = this._value;
         this._value = value;
-        this.emit('valuechange', value);
+        if (this.listenerCount('valuechange') > 0) {
+          this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        }
+      }
+    }, {
+      key: "validate",
+      value: function validate(newValue) {
+        if (!this.validateCallback) {
+          return true;
+        }
+        return this.validateCallback(newValue, this._value, this.bindingTarget, this.bindingKey);
       }
     }, {
       key: "getValue",
@@ -15846,6 +15866,12 @@
       key: "setTextFormatCallback",
       value: function setTextFormatCallback(callback) {
         this.textFormatCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setValidateCallback",
+      value: function setValidateCallback(callback) {
+        this.validateCallback = callback;
         return this;
       }
     }]);
@@ -21486,9 +21512,13 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText(text);
-        _set(_getPrototypeOf(TextInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(TextInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {
       key: "setInputTextReadOnly",
@@ -21542,9 +21572,13 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText(text);
-        _set(_getPrototypeOf(NumberInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(NumberInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {
       key: "setInputTextReadOnly",
@@ -22146,10 +22180,14 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText('').setText(text);
         this.childrenMap.slider.setValue(value, this.minValue, this.maxValue);
-        _set(_getPrototypeOf(RangeInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(RangeInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {
       key: "setRange",
@@ -22764,12 +22802,16 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
         list.resetDisplayContent({
           text: text
         });
-        _set(_getPrototypeOf(ListInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(ListInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {
       key: "setOptions",
@@ -22846,10 +22888,14 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
         SetButtonsActiveStateByText(list.childrenMap.buttons, text);
-        _set(_getPrototypeOf(ButtonsInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(ButtonsInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {
       key: "setOptions",
@@ -23237,8 +23283,12 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         this.childrenMap.checkbox.setValue(value);
-        _set(_getPrototypeOf(CheckboxInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(CheckboxInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }]);
     return CheckboxInput;
@@ -23622,8 +23672,12 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         this.childrenMap.toggleSwitch.setValue(value);
-        _set(_getPrototypeOf(ToggleSwitchInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(ToggleSwitchInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }]);
     return ToggleSwitchInput;
@@ -25169,8 +25223,12 @@
         if (this._value === value) {
           return;
         }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
         this.childrenMap.colorInput.setValue(value);
-        _set(_getPrototypeOf(ColorInput.prototype), "value", value, this, true);
+        _set(_getPrototypeOf(ColorInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }]);
     return ColorInput;
@@ -25218,6 +25276,12 @@
 
     // Extra settings
     gameObject.setTextFormatCallback(config.format);
+    if (config.onValueChange) {
+      gameObject.on('valuechange', config.onValueChange);
+    }
+    if (config.onValidate) {
+      gameObject.setValidateCallback(config.onValidate);
+    }
     return gameObject;
   };
 
@@ -25283,10 +25347,6 @@
     inputSizer.setBindingTarget(object, key);
     if (config.monitor) {
       inputSizer.startMonitorTarget();
-    }
-    if (config.onValueChange) {
-      var inputField = inputSizer.childrenMap.inputField;
-      inputField.on('valuechange', config.onValueChange);
     }
     if (config.key) {
       this.root.addChildrenMap(config.key, inputSizer);

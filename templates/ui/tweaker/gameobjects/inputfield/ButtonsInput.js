@@ -50,11 +50,14 @@ class ButtonsInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
         SetButtonsActiveStateByText(list.childrenMap.buttons, text);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 
     setOptions(options) {

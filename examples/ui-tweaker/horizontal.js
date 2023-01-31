@@ -31,7 +31,9 @@ class Demo extends Phaser.Scene {
                     format(value) {             // Formatter of text
                         return value.toFixed(2);
                     },
-                    onValueChange(value) { console.log(`x=${value}`) }
+                    onValueChange(value, oldeValue, target, key) {
+                        console.log(`${key}=${value}`)
+                    },
                 }
             )
             .addInput(
@@ -41,7 +43,10 @@ class Demo extends Phaser.Scene {
                     format(value) {             // Formatter of text
                         return value.toFixed(2);
                     },
-                    onValueChange(value) { console.log(`y=${value}`) }
+                    onValueChange(value, oldeValue, target, key) {
+                        console.log(`${key}=${value}`)
+                    },
+                    onValidate(newValue) { return (newValue < 400) }
                 }
             )
             .addInput(
@@ -49,6 +54,12 @@ class Demo extends Phaser.Scene {
                 {
                     title: 'color',             // Custom title
                     view: 'color',
+                    onValidate(newValue) {
+                        var r = (newValue >> 16) & 0xff;
+                        var g = (newValue >> 8) & 0xff;
+                        var b = (newValue >> 0) & 0xff;
+                        return ((r + g + b) / 3) < 128;
+                    }
                 }
             )
             .addInput(

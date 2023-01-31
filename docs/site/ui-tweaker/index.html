@@ -9571,6 +9571,7 @@
     <span class="c1">// key: undefined,</span>
 
     <span class="c1">// onValueChange: undefined,</span>
+    <span class="c1">// onValidate: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 <p>or</p>
@@ -9590,6 +9591,7 @@
     <span class="c1">// key: undefined,</span>
 
     <span class="c1">// onValueChange: undefined,</span>
+    <span class="c1">// onValidate: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -9618,6 +9620,19 @@
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>undefined</code> : Ignore this feature. Default value.</li>
+</ul>
+</li>
+<li><code>onValidate</code> : <ul>
+<li>Callback invoked when new value input.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">bindingTarget</span><span class="p">,</span> <span class="nx">bindingKey</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>true</code> : Accept this new value.</li>
+<li><code>false</code> : Reject this new value.</li>
+</ul>
+</li>
+<li><code>undefined</code> : Always accept new value changing. Default behavior.</li>
 </ul>
 </li>
 </ul>

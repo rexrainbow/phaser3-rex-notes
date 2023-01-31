@@ -13,6 +13,13 @@ class InputFiledBase extends Sizer {
         return this._value;
     }
 
+    validate(newValue) {
+        if (!this.validateCallback) {
+            return true;
+        }
+        return this.validateCallback(newValue, this._value, this.bindingTarget, this.bindingKey);
+    }
+
     // Override
     set value(value) {
         if (this._value === value) {
@@ -55,6 +62,11 @@ class InputFiledBase extends Sizer {
 
     setTextFormatCallback(callback) {
         this.textFormatCallback = callback;
+        return this;
+    }
+
+    setValidateCallback(callback) {
+        this.validateCallback = callback;
         return this;
     }
 

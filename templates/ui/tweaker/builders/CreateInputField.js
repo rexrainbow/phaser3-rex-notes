@@ -64,6 +64,10 @@ var CreateInputField = function (scene, config, style) {
         gameObject.on('valuechange', config.onValueChange);
     }
 
+    if (config.onValidate) {
+        gameObject.setValidateCallback(config.onValidate);
+    }
+
     return gameObject;
 }
 
