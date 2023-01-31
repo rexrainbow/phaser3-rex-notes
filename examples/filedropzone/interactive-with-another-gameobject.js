@@ -25,7 +25,13 @@ class Demo extends Phaser.Scene {
         this.add.rectangle(400, 300, 200, 200, 0x00ff00)
             .setInteractive({ draggable: true })
             .on('pointerdown', function () {
-                console.log('Click game object');
+                console.log('Pointer down on game object');
+            })
+            .on('pointerup', function () {
+                console.log('Pointer up on game object');
+            })
+            .on('pointermove', function () {
+                console.log('Pointer moving on game object');
             })
             .on('dragstart', function( ) {
                 console.log('Drag-start game object');
@@ -34,6 +40,8 @@ class Demo extends Phaser.Scene {
         /*
         1. DOM game object always put above game canvas, i.e. render above any other kind of game object.
         2. DOM game object will receive touch event even if it is not the first touched game object.
+        3. P3's 'pointerdown', 'pointerup' events will be fired above/under DOM game object.
+        4. P3's 'pointermove' event won't be fired above/under DOM game object with 'dragenter', 'dragover' events.
         */
     }
 
