@@ -570,7 +570,8 @@ cache.remove(key);
 
 ```javascript
 var cache = scene.cache.text;
-var hasData = cache.has(key);
+var hasData = cache.exists(key);
+// var hasData = cache.has(key);
 ```
 
 #### Cache events
