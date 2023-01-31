@@ -1,8 +1,7 @@
+import GetValue from '../../utils/object/GetValue.js';
 import ArrayCopy from '../../utils/array/Copy.js';
 import TypeConvert from '../../utils/string/TypeConvert.js';
 import IsArray from '../../utils/object/IsArray.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RunCommands = function (queue, scope, config) {
     var reverse = GetValue(config, 'reverse', false);
