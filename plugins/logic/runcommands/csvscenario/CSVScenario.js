@@ -132,7 +132,7 @@ class CSVScenario {
     getIndex(label) {
         var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
-            this.error('Label: ' + label + ' is not found');
+            this.error(`Label: ${label} is not found`);
         }
         return index;
     }
@@ -305,7 +305,7 @@ class CSVScenario {
                 var isValid = this.appendCommand(item);
 
                 if (!isValid) {
-                    this.error('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
+                    this.error(`Line ${i}: ${JSON.stringify(item)} is not a valid command`);
                 }
 
             } else {

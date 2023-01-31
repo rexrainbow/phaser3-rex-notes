@@ -45,7 +45,7 @@ class CustomCmd extends BaseCmd {
 
     run(inst) {
         if (!this.validate(inst)) {
-            this.scenario.emit('invalidcommand', GetFunctionName(inst));
+            this.scenario.error(`Command '${GetFunctionName(inst)}' is not found in scope`);
             return;
         }
 

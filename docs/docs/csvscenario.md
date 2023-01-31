@@ -235,6 +235,7 @@ Format:
     ```javascript
     var methodName = scenario.lastCustomCommandName;
     ```
+- An `error` event will be fired if `fnName` is invalid in `scope`.
 
 ##### Delay execution
 

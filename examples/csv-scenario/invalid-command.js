@@ -44,8 +44,8 @@ class Demo extends Phaser.Scene {
             .on('log', function (msg) {
                 console.log(msg)
             })
-            .on('invalidcommand', function(name){
-                console.log(`Invalid command: '${name}'`)
+            .on('error', function(msg){
+                console.error(msg)
             })
             .load(csvString, myCmds, {
                 timeUnit: 'sec'
