@@ -127,4 +127,5 @@ layerManager.addToLayer(name, gameObject);
 
 ```javascript
 var hasLayer = layerManager.has(name);
+// var hasLayer = layerManager.exists(name);
 ```
