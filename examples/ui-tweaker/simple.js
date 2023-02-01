@@ -263,12 +263,6 @@ var CreatePanel = function (scene) {
                         }
                     }
                 },
-
-                proportion: {
-                    title: 1,
-                    inputField: 1.5,
-                    range: { slider: 2, inputText: 1 }
-                }
             },
 
             folder: {

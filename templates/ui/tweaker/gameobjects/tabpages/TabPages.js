@@ -1,13 +1,18 @@
 import TabPagesBase from '../../../tabpages/TabPages.js';
+import BindingTargetMethods from './BindingTargetMethods.js';
+import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 
 class TabPages extends TabPagesBase {
-    setBindingTarget(target) {
-        var children = this.childrenMap.pages.children;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            children[i].setBindingTarget(target);
-        }
-        return this;
+    constructor(scene, config) {
+        super(scene, config);
+        this.type = 'rexTweaker.TabPages';
     }
 }
+
+Object.assign(
+    TabPages.prototype,
+    BindingTargetMethods,
+    InputRowTitleWidthMethods,
+)
 
 export default TabPages;

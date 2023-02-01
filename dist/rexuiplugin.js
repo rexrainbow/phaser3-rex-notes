@@ -49440,6 +49440,28 @@
     return CreateRoundRectangle$1(scene, style);
   };
 
+  var BindingTargetMethods$2 = {
+    setBindingTarget: function setBindingTarget(target) {
+      var child = this.childrenMap.child; // tweaker
+      child.setBindingTarget(target);
+      return this;
+    }
+  };
+
+  var InputRowTitleWidthMethods$1 = {
+    getMaxInputRowTitleWidth: function getMaxInputRowTitleWidth() {
+      var child = this.childrenMap.child; // tweaker
+      var titleWidth = child.getMaxInputRowTitleWidth();
+      return titleWidth + this.getInnerPadding('left');
+    },
+    setInputRowTitleWidth: function setInputRowTitleWidth(width) {
+      width -= this.getInnerPadding('left');
+      var child = this.childrenMap.child; // tweaker
+      child.setInputRowTitleWidth(width);
+      return this;
+    }
+  };
+
   var Folder = /*#__PURE__*/function (_FolderBase) {
     _inherits(Folder, _FolderBase);
     var _super = _createSuper(Folder);
@@ -49457,16 +49479,10 @@
         title.setTitle(config);
         return this;
       }
-    }, {
-      key: "setBindingTarget",
-      value: function setBindingTarget(target) {
-        var child = this.childrenMap.child;
-        child.setBindingTarget(target);
-        return this;
-      }
     }]);
     return Folder;
   }(Folder$1);
+  Object.assign(Folder.prototype, BindingTargetMethods$2, InputRowTitleWidthMethods$1);
 
   var GetValue$q = Phaser.Utils.Objects.GetValue;
   var CreateFolder = function CreateFolder(scene, config, style) {
@@ -49532,25 +49548,48 @@
     return childTweaker;
   };
 
+  var BindingTargetMethods$1 = {
+    setBindingTarget: function setBindingTarget(target) {
+      var children = this.childrenMap.pages.children;
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        children[i].setBindingTarget(target);
+      }
+      return this;
+    }
+  };
+
+  var InputRowTitleWidthMethods = {
+    getMaxInputRowTitleWidth: function getMaxInputRowTitleWidth() {
+      var maxTitleWidth = 0;
+      var children = this.childrenMap.pages.children; // tweaker array
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        maxTitleWidth = Math.max(maxTitleWidth, children[i].getMaxInputRowTitleWidth());
+      }
+      return maxTitleWidth + this.getInnerPadding('left');
+    },
+    setInputRowTitleWidth: function setInputRowTitleWidth(width) {
+      width -= this.getInnerPadding('left');
+      var children = this.childrenMap.pages.children; // tweaker array
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        children[i].setInputRowTitleWidth(width);
+      }
+      return this;
+    }
+  };
+
   var TabPages = /*#__PURE__*/function (_TabPagesBase) {
     _inherits(TabPages, _TabPagesBase);
     var _super = _createSuper(TabPages);
-    function TabPages() {
+    function TabPages(scene, config) {
+      var _this;
       _classCallCheck(this, TabPages);
-      return _super.apply(this, arguments);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexTweaker.TabPages';
+      return _this;
     }
-    _createClass(TabPages, [{
-      key: "setBindingTarget",
-      value: function setBindingTarget(target) {
-        var children = this.childrenMap.pages.children;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-          children[i].setBindingTarget(target);
-        }
-        return this;
-      }
-    }]);
-    return TabPages;
+    return _createClass(TabPages);
   }(TabPages$1);
+  Object.assign(TabPages.prototype, BindingTargetMethods$1, InputRowTitleWidthMethods);
 
   var CreateButtonRoundRectangleBackground = function CreateButtonRoundRectangleBackground(scene, config) {
     var gameObject = new RoundRectangle(scene, config);
@@ -49831,6 +49870,28 @@
     }
   };
 
+  var MinTitleWidthMethods = {
+    getMinTitleWidth: function getMinTitleWidth() {
+      var title = this.childrenMap.title;
+      if (!title) {
+        return 0;
+      }
+      var padding = title.rexSizer.padding;
+      var titleWidth = this.getChildWidth(this.childrenMap.title) + padding.left + padding.right;
+      return titleWidth + this.getInnerPadding('left');
+    },
+    setMinTitleWidth: function setMinTitleWidth(width) {
+      var title = this.childrenMap.title;
+      if (!title) {
+        return this;
+      }
+      var padding = title.rexSizer.padding;
+      width -= padding.left + padding.right;
+      title.minWidth = width;
+      return this;
+    }
+  };
+
   var GetValue$m = Phaser.Utils.Objects.GetValue;
   var InputRow = /*#__PURE__*/function (_Sizer) {
     _inherits(InputRow, _Sizer);
@@ -49843,13 +49904,12 @@
       var inputTitle = config.inputTitle;
       var inputField = config.inputField;
       var background = config.background;
-      var defaultProportion = config.parentOrientation === 1 ? 1 : 0;
-      var proportion = GetValue$m(config, 'proportion.title', defaultProportion);
+      var proportion = GetValue$m(config, 'proportion.title', 0);
       _this.add(inputTitle, {
         proportion: proportion,
         expand: true
       });
-      var defaultProportion = config.parentOrientation === 1 ? 2 : 0;
+      var defaultProportion = config.parentOrientation === 1 ? 1 : 0;
       var proportion = GetValue$m(config, 'proportion.inputField', defaultProportion);
       _this.add(inputField, {
         proportion: proportion,
@@ -49881,10 +49941,19 @@
         title.setTitle(config);
         return this;
       }
+    }, {
+      key: "preLayout",
+      value: function preLayout() {
+        var title = this.childrenMap.title;
+        if (title) {
+          title.minWidth = 0;
+        }
+        _get(_getPrototypeOf(InputRow.prototype), "preLayout", this).call(this);
+      }
     }]);
     return InputRow;
   }(Sizer);
-  Object.assign(InputRow.prototype, BindingTargetMethods, MonitorTargetMethods);
+  Object.assign(InputRow.prototype, BindingTargetMethods, MonitorTargetMethods, MinTitleWidthMethods);
 
   var CreateTitleLabel = function CreateTitleLabel(scene, config, style) {
     var gameObject = new Title(scene, style);
@@ -50807,6 +50876,44 @@
     return this;
   };
 
+  var GetMaxInputRowTitleWidth = function GetMaxInputRowTitleWidth() {
+    var maxTitleWidth = 0;
+    var children = this.sizerChildren;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (child.rexSizer.hidden) {
+        continue;
+      }
+      if (child.getMinTitleWidth) {
+        // InputRow
+        maxTitleWidth = Math.max(maxTitleWidth, child.getMinTitleWidth());
+      } else if (child.getMaxInputRowTitleWidth) {
+        // Folder, TabPages
+        maxTitleWidth = Math.max(maxTitleWidth, child.getMaxInputRowTitleWidth());
+      }
+    }
+    return maxTitleWidth + this.getInnerPadding('left');
+  };
+
+  var SetInputRowTitleWidth = function SetInputRowTitleWidth(width) {
+    width -= this.getInnerPadding('left');
+    var children = this.sizerChildren;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (child.rexSizer.hidden) {
+        continue;
+      }
+      if (child.setMinTitleWidth) {
+        // InputRow
+        child.setMinTitleWidth(width);
+      } else if (child.setInputRowTitleWidth) {
+        // Folder, TabPages
+        child.setInputRowTitleWidth(width);
+      }
+    }
+    return this;
+  };
+
   var methods$2 = {
     addFolder: AddFolder,
     addTab: AddTab,
@@ -50814,7 +50921,9 @@
     addButton: AddButtons,
     addButtons: AddButtons,
     addSeparator: AddSeparator,
-    setBindingTarget: SetBindingTarget
+    setBindingTarget: SetBindingTarget,
+    getMaxInputRowTitleWidth: GetMaxInputRowTitleWidth,
+    setInputRowTitleWidth: SetInputRowTitleWidth
   };
 
   var GetValue$c = Phaser.Utils.Objects.GetValue;
@@ -50834,16 +50943,41 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweakerShell';
+      _this.root = config.root || _assertThisInitialized(_this);
       _this.styles = GetValue$c(config, 'styles') || {};
       _this.styles.orientation = _this.orientation;
       _this.itemWidth = GetValue$c(_this.styles, 'itemWidth', 0);
+      if (_this.root === _assertThisInitialized(_this) && _this.orientation === 1) {
+        var alignTitle = GetValue$c(config, 'inputRow.alignTitle');
+        if (alignTitle === undefined) {
+          var titleProportion = GetValue$c(_this.styles, 'inputRow.proportion.title');
+          alignTitle = !titleProportion;
+        } else {
+          if (alignTitle) {
+            // Override title proportion to 0
+            SetValue$1(_this.styles, 'inputRow.proportion.title', 0);
+          }
+        }
+        _this.alignInputRowTitle = alignTitle;
+      } else {
+        _this.alignInputRowTitle = false;
+      }
       var background = CreateBackground(scene, undefined, config.background);
       if (background) {
         _this.addBackground(background);
       }
       return _this;
     }
-    return _createClass(TweakerShell);
+    _createClass(TweakerShell, [{
+      key: "preLayout",
+      value: function preLayout() {
+        _get(_getPrototypeOf(TweakerShell.prototype), "preLayout", this).call(this);
+        if (this.alignInputRowTitle) {
+          this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
+        }
+      }
+    }]);
+    return TweakerShell;
   }(Sizer);
   Object.assign(TweakerShell.prototype, methods$2);
 
@@ -50866,7 +51000,6 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker';
-      _this.root = config.root || _assertThisInitialized(_this);
       return _this;
     }
     return _createClass(Tweaker);

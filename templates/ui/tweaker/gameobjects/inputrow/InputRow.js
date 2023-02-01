@@ -1,6 +1,7 @@
 import Sizer from '../../../sizer/Sizer.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import MonitorTargetMethods from './MonitorTargetMethods.js';
+import MinTitleWidthMethods from './MinTitleWidthMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,14 +14,13 @@ class InputRow extends Sizer {
         var inputField = config.inputField;
         var background = config.background;
 
-        var defaultProportion = (config.parentOrientation === 1) ? 1 : 0;
-        var proportion = GetValue(config, 'proportion.title', defaultProportion);
+        var proportion = GetValue(config, 'proportion.title', 0);
         this.add(
             inputTitle,
             { proportion: proportion, expand: true, }
         );
 
-        var defaultProportion = (config.parentOrientation === 1) ? 2 : 0;
+        var defaultProportion = (config.parentOrientation === 1) ? 1 : 0;
         var proportion = GetValue(config, 'proportion.inputField', defaultProportion);
         this.add(
             inputField,
@@ -56,12 +56,21 @@ class InputRow extends Sizer {
         return this;
     }
 
+    preLayout() {
+        var title = this.childrenMap.title;
+        if (title) {
+            title.minWidth = 0;
+        }
+
+        super.preLayout();
+    }
 }
 
 Object.assign(
     InputRow.prototype,
     BindingTargetMethods,
     MonitorTargetMethods,
+    MinTitleWidthMethods,
 )
 
 export default InputRow;

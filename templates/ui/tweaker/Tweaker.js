@@ -17,7 +17,6 @@ class Tweaker extends TweakerShell {
         super(scene, config);
         this.type = 'rexTweaker';
 
-        this.root = config.root || this;
     }
 }
 

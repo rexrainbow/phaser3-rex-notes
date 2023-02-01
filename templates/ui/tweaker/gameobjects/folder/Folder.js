@@ -1,4 +1,6 @@
 import FolderBase from '../../../folder/Folder.js';
+import BindingTargetMethods from './BindingTargetMethods.js';
+import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 
 class Folder extends FolderBase {
     constructor(scene, config) {
@@ -12,11 +14,12 @@ class Folder extends FolderBase {
         return this;
     }
 
-    setBindingTarget(target) {
-        var child = this.childrenMap.child;
-        child.setBindingTarget(target);
-        return this;
-    }
 }
+
+Object.assign(
+    Folder.prototype,
+    BindingTargetMethods,
+    InputRowTitleWidthMethods,
+)
 
 export default Folder;
