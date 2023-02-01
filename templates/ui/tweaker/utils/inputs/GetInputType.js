@@ -4,7 +4,7 @@ import {
 } from './InputTypes.js';
 
 
-var GetInputType = function (value, config) {
+var GetInputType = function (object, key, config) {
     // Force input type to view
     if (config.view) {
         return config.view;
@@ -13,6 +13,12 @@ var GetInputType = function (value, config) {
     if (config.options) {
         return ListType;
     }
+
+    if (!object) {
+        return StringType;
+    }
+
+    var value = object[key];
 
     switch (typeof (value)) {
         case 'number':

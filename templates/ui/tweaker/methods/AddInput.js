@@ -17,7 +17,7 @@ var AddInput = function (object, key, config) {
     }
 
     if (!config.view) {
-        config.view = GetInputType(object[key], config);
+        config.view = GetInputType(object, key, config);
     }
 
     // Create InputRow
