@@ -133,12 +133,13 @@ var table = scene.rexUI.add.gridTable({
         // }
     },
 
-    scroller: {
-        threshold: 10,
-        slidingDeceleration: 5000,
-        backDeceleration: 2000,
-        pointerOutRelease: true,
-    },
+    // scroller: {
+    //     threshold: 10,
+    //     slidingDeceleration: 5000,
+    //     backDeceleration: 2000,
+    //     pointerOutRelease: true,
+    //     dragRate: 1,
+    // },
 
     mouseWheelScroller: false,
     // mouseWheelScroller: {
@@ -293,6 +294,7 @@ var table = scene.rexUI.add.gridTable({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
+    - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 

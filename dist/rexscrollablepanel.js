@@ -11776,8 +11776,9 @@
         this.setDragThreshold(GetValue$6(o, 'threshold', 10));
         this.setSlidingDeceleration(GetValue$6(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue$6(o, 'backDeceleration', 2000));
-        var dragRatio = GetValue$6(o, 'dragReverse', false) ? -1 : 1;
-        this.setDragRatio(dragRatio);
+        var dragRate = GetValue$6(o, 'dragRate', 1);
+        dragRate = dragRate * (GetValue$6(o, 'dragReverse', false) ? -1 : 1);
+        this.setDragRate(dragRate);
         var bounds = GetValue$6(o, 'bounds', undefined);
         if (bounds) {
           this.setBounds(bounds);
@@ -11864,9 +11865,9 @@
         return this;
       }
     }, {
-      key: "setDragRatio",
-      value: function setDragRatio(ratio) {
-        this.dragRatio = ratio;
+      key: "setDragRate",
+      value: function setDragRate(ratio) {
+        this.dragRate = ratio;
         return this;
       }
     }, {
@@ -12003,7 +12004,7 @@
         } else {
           delta = 0;
         }
-        delta *= this.dragRatio;
+        delta *= this.dragRate;
         return delta;
       }
     }, {
@@ -12019,7 +12020,7 @@
         } else {
           speed = 0;
         }
-        speed *= this.dragRatio;
+        speed *= this.dragRate;
         return speed;
       }
 

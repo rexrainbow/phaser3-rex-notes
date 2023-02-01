@@ -703,6 +703,9 @@
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
     },
+    exists: function exists(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
     get: function get(name) {
       return this.bobs[name];
     },

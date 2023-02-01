@@ -9211,12 +9211,13 @@
         <span class="c1">// }</span>
     <span class="p">},</span>
 
-    <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">threshold</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-        <span class="nx">slidingDeceleration</span><span class="o">:</span> <span class="mf">5000</span><span class="p">,</span>
-        <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mf">2000</span><span class="p">,</span>
-        <span class="nx">pointerOutRelease</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">},</span>
+    <span class="c1">// scroller: {</span>
+    <span class="c1">//     threshold: 10,</span>
+    <span class="c1">//     slidingDeceleration: 5000,</span>
+    <span class="c1">//     backDeceleration: 2000,</span>
+    <span class="c1">//     pointerOutRelease: true,</span>
+    <span class="c1">//     dragRate: 1,</span>
+    <span class="c1">// },</span>
 
     <span class="nx">mouseWheelScroller</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="c1">// mouseWheelScroller: {</span>
@@ -9425,6 +9426,7 @@
 </ul>
 </li>
 <li><code>scroller.pointerOutRelease</code> : Set to <code>true</code> to release input control when pointer out of gameObject.</li>
+<li><code>scroller.dragRate</code> : Rate of dragging distance/dragging speed. Default value is <code>1</code>.</li>
 <li>Set to <code>false</code> to skip creating scroller.</li>
 </ul>
 </li>

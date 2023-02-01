@@ -16,7 +16,9 @@ declare namespace Scroller {
         threshold?: number,
         slidingDeceleration?: number,
         backDeceleration?: number,
+
         dragReverse?: boolean,
+        dragRate?: number,
 
         enable?: boolean,
         orientation?: OrientationType,

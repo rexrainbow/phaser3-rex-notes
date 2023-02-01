@@ -18399,6 +18399,9 @@
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
     },
+    exists: function exists(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
     get: function get(name) {
       return this.bobs[name];
     },
@@ -40948,8 +40951,9 @@
         this.setDragThreshold(GetValue$$(o, 'threshold', 10));
         this.setSlidingDeceleration(GetValue$$(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue$$(o, 'backDeceleration', 2000));
-        var dragRatio = GetValue$$(o, 'dragReverse', false) ? -1 : 1;
-        this.setDragRatio(dragRatio);
+        var dragRate = GetValue$$(o, 'dragRate', 1);
+        dragRate = dragRate * (GetValue$$(o, 'dragReverse', false) ? -1 : 1);
+        this.setDragRate(dragRate);
         var bounds = GetValue$$(o, 'bounds', undefined);
         if (bounds) {
           this.setBounds(bounds);
@@ -41036,9 +41040,9 @@
         return this;
       }
     }, {
-      key: "setDragRatio",
-      value: function setDragRatio(ratio) {
-        this.dragRatio = ratio;
+      key: "setDragRate",
+      value: function setDragRate(ratio) {
+        this.dragRate = ratio;
         return this;
       }
     }, {
@@ -41175,7 +41179,7 @@
         } else {
           delta = 0;
         }
-        delta *= this.dragRatio;
+        delta *= this.dragRate;
         return delta;
       }
     }, {
@@ -41191,7 +41195,7 @@
         } else {
           speed = 0;
         }
-        speed *= this.dragRatio;
+        speed *= this.dragRate;
         return speed;
       }
 

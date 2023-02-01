@@ -49,6 +49,7 @@ declare namespace Scrollable {
                 threshold?: number,
                 slidingDeceleration?: number | false,
                 backDeceleration?: number | false,
+                dragRate?: number,
             } |
             boolean
         ),
