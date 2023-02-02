@@ -2,7 +2,7 @@ import Resize from '../utils/Resize.js';
 import SyncTo from '../utils/SyncTo.js';
 import ConfigurationMethods from './ConfigurationMethods.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
-import { DragDropEvents, ElementEvents } from './FileDropZoneProperties.js';
+import { DragDropEvents } from './FileDropZoneProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
@@ -47,8 +47,6 @@ class FileDropZone extends DOMElement {
             preventDefault: true,
             preTest(gameObject) { return gameObject.dropEnable; }
         });
-
-        RouteEvents(this, element, ElementEvents);
 
         this
             .on('drop', function (gameObject, e) {
