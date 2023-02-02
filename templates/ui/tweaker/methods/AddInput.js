@@ -21,7 +21,7 @@ var AddInput = function (object, key, config) {
     }
 
     // Create InputRow
-    var inputRowStyle = GetValue(this.styles, 'inputRow');
+    var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
 

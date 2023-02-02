@@ -1,6 +1,7 @@
 import Container from '../containerlite/ContainerLite.js';
 import FitToSize from '../../../utils/size/FitTo.js';
 import FlipMethods from '../utils/FlipMethods.js';
+import HasTexture from '../../../utils/texture/HasTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -91,9 +92,10 @@ class ImageBox extends Container {
 
     setTexture(texture, frame) {
         var image = this.image;
-        if (texture !== undefined) {
+        image.setTexture(texture, frame);
+
+        if (HasTexture(this, texture, frame)) {
             this.setChildVisible(image, true);
-            image.setTexture(texture, frame);
             this.fitImage();
 
         } else {
