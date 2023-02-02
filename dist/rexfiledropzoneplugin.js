@@ -255,19 +255,6 @@
     dragover: 'dragover',
     drop: 'drop'
   };
-  var ElementEvents = {
-    click: 'click',
-    dblclick: 'dblclick',
-    mousedown: 'pointerdown',
-    mousemove: 'pointermove',
-    mouseup: 'pointerup',
-    touchstart: 'pointerdown',
-    touchmove: 'pointermove',
-    touchend: 'pointerup',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    keypress: 'keypress'
-  };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var RouteEvents = function RouteEvents(gameObject, element, elementEvents, config) {
@@ -331,7 +318,6 @@
           return gameObject.dropEnable;
         }
       });
-      RouteEvents(_assertThisInitialized(_this), element, ElementEvents);
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
         if (this._files && this.filters) {

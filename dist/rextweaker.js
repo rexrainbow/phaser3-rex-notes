@@ -15665,7 +15665,7 @@
   var ToggleSwitchType = 'toggleSwitch';
   var ColorType = 'color';
 
-  var GetInputType = function GetInputType(value, config) {
+  var GetInputType = function GetInputType(object, key, config) {
     // Force input type to view
     if (config.view) {
       return config.view;
@@ -15673,6 +15673,10 @@
     if (config.options) {
       return ListType;
     }
+    if (!object) {
+      return StringType;
+    }
+    var value = object[key];
     switch (_typeof(value)) {
       case 'number':
         if (HasProperties(config, 'min', 'max')) {
@@ -25389,7 +25393,7 @@
       config.title = key;
     }
     if (!config.view) {
-      config.view = GetInputType(object[key], config);
+      config.view = GetInputType(object, key, config);
     }
 
     // Create InputRow

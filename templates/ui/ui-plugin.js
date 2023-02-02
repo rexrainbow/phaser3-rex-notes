@@ -26,6 +26,7 @@ import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
+import ImageBoxFactory from './imagebox/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
 import ColorInputFactory from './colorinput/colorinput/Factory.js';

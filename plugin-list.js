@@ -30,6 +30,7 @@ module.exports = {
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
+    'imageboxplugin': './plugins/imagebox-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',

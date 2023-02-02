@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextransitionimageplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.reximageboxplugin = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -422,7 +422,7 @@
     }
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
@@ -477,11 +477,11 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
     } else {
-      state.syncPosition = GetValue$c(config, 'syncPosition', true);
-      state.syncRotation = GetValue$c(config, 'syncRotation', true);
-      state.syncScale = GetValue$c(config, 'syncScale', true);
-      state.syncAlpha = GetValue$c(config, 'syncAlpha', true);
-      state.syncScrollFactor = GetValue$c(config, 'syncScrollFactor', true);
+      state.syncPosition = GetValue$4(config, 'syncPosition', true);
+      state.syncRotation = GetValue$4(config, 'syncRotation', true);
+      state.syncScale = GetValue$4(config, 'syncScale', true);
+      state.syncAlpha = GetValue$4(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$4(config, 'syncScrollFactor', true);
     }
   };
   var AddChild = {
@@ -595,14 +595,14 @@
     }
   };
 
-  var RotateAround$3 = Phaser.Math.RotateAround;
+  var RotateAround$2 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y;
       // Rotate
-      RotateAround$3(point, 0, 0, -this.rotation);
+      RotateAround$2(point, 0, 0, -this.rotation);
       // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -613,7 +613,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY;
       // Rotate
-      RotateAround$3(point, 0, 0, this.rotation);
+      RotateAround$2(point, 0, 0, this.rotation);
       // Transform
       point.x += this.x;
       point.y += this.y;
@@ -1514,7 +1514,7 @@
 
   var Rectangle$1 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
@@ -1643,7 +1643,7 @@
       includeParent = false;
     }
     if (gameObject.rotation !== 0) {
-      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
@@ -1723,20 +1723,20 @@
     return out;
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    var x = GetValue$b(config, 'x', undefined);
-    var y = GetValue$b(config, 'y', undefined);
-    var width = GetValue$b(config, 'width', undefined);
-    var height = GetValue$b(config, 'height', undefined);
-    var originX = GetValue$b(config, 'originX', 0);
-    var originY = GetValue$b(config, 'originY', 0);
-    var padding = GetValue$b(config, 'padding', 0);
+    var x = GetValue$3(config, 'x', undefined);
+    var y = GetValue$3(config, 'y', undefined);
+    var width = GetValue$3(config, 'width', undefined);
+    var height = GetValue$3(config, 'height', undefined);
+    var originX = GetValue$3(config, 'originX', 0);
+    var originY = GetValue$3(config, 'originY', 0);
+    var padding = GetValue$3(config, 'padding', 0);
     var scrollX, scrollY;
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
@@ -1827,15 +1827,15 @@
     }
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
     var color, lineWidth;
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$a(config, 'color');
-      lineWidth = GetValue$a(config, 'lineWidth');
-      GetValue$a(config, 'padding', 0);
+      color = GetValue$2(config, 'color');
+      lineWidth = GetValue$2(config, 'lineWidth');
+      GetValue$2(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -1887,10 +1887,10 @@
     y: 0
   }];
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
-    var drawContainer = GetValue$9(config, 'drawContainer', true);
-    var gameObjects = GetValue$9(config, 'children');
+    var drawContainer = GetValue$1(config, 'drawContainer', true);
+    var gameObjects = GetValue$1(config, 'children');
     if (gameObjects === undefined) {
       gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -1903,7 +1903,7 @@
     return this;
   };
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround = Phaser.Math.RotateAround;
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
       originY = originX;
@@ -1912,7 +1912,7 @@
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
     };
-    RotateAround$1(deltaXY, 0, 0, gameObject.rotation);
+    RotateAround(deltaXY, 0, 0, gameObject.rotation);
     gameObject.originX = originX;
     gameObject.originY = originY;
     gameObject.x = gameObject.x + deltaXY.x;
@@ -1931,11 +1931,11 @@
     return this;
   };
 
-  var methods$1 = {
+  var methods = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
+  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2204,1299 +2204,31 @@
     }]);
     return ContainerLite;
   }(Base);
-  Object.assign(ContainerLite.prototype, methods$1);
+  Object.assign(ContainerLite.prototype, methods);
 
-  var SetTransitionCallbackMethods = {
-    setTransitionStartCallback: function setTransitionStartCallback(callback, scope) {
-      this.onStartCallback = callback;
-      this.onStartCallbackScope = scope;
-      return this;
-    },
-    setTransitionProgressCallback: function setTransitionProgressCallback(callback, scope) {
-      this.onProgressCallback = callback;
-      this.onProgressCallbackScope = scope;
-      return this;
-    },
-    setTransitionCompleteCallback: function setTransitionCompleteCallback(callback, scope) {
-      this.onCompleteCallback = callback;
-      this.onCompleteCallbackScope = scope;
-      return this;
+  var FitTo = function FitTo(child, parent, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalSize;
     }
+    if (child.width <= parent.width && child.height <= parent.height) {
+      out.width = child.width;
+      out.height = child.height;
+      return out;
+    }
+    var childRatio = child.width / child.height;
+    out.width = Math.min(child.width, parent.width);
+    out.height = Math.min(child.height, parent.height);
+    var ratio = out.width / out.height;
+    if (ratio < childRatio) {
+      out.height = out.width / childRatio;
+    } else if (ratio > childRatio) {
+      out.width = out.height * childRatio;
+    }
+    return out;
   };
-
-  var EventEmitterMethods = {
-    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
-      if (EventEmitterClass === undefined) {
-        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-      }
-
-      this._privateEE = eventEmitter === true || eventEmitter === undefined;
-      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
-      return this;
-    },
-    destroyEventEmitter: function destroyEventEmitter() {
-      if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.shutdown();
-      }
-      return this;
-    },
-    getEventEmitter: function getEventEmitter() {
-      return this._eventEmitter;
-    },
-    on: function on() {
-      if (this._eventEmitter) {
-        this._eventEmitter.on.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    once: function once() {
-      if (this._eventEmitter) {
-        this._eventEmitter.once.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    off: function off() {
-      if (this._eventEmitter) {
-        this._eventEmitter.off.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    emit: function emit(event) {
-      if (this._eventEmitter && event) {
-        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    addListener: function addListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeListener: function removeListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeAllListeners: function removeAllListeners() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    listenerCount: function listenerCount() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-      }
-      return 0;
-    },
-    listeners: function listeners() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    },
-    eventNames: function eventNames() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    }
-  };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
-
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$8(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
-        }
-
-        // bob object does not have event emitter
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
-        }
-
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
-        return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
-
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
-  var TickTask = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
-    function TickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
-      _this._isRunning = false;
-      _this.isPaused = false;
-      _this.tickingState = false;
-      _this.setTickingMode(GetValue$7(config, 'tickingMode', 1));
-      // boot() later
-      return _this;
-    }
-
-    // override
-    _createClass(TickTask, [{
-      key: "boot",
-      value: function boot() {
-        if (this.tickingMode === 2 && !this.tickingState) {
-          this.startTicking();
-        }
-      }
-
-      // override
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        this.stop();
-        if (this.tickingState) {
-          this.stopTicking();
-        }
-        _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "setTickingMode",
-      value: function setTickingMode(mode) {
-        if (typeof mode === 'string') {
-          mode = TICKINGMODE[mode];
-        }
-        this.tickingMode = mode;
-      }
-
-      // override
-    }, {
-      key: "startTicking",
-      value: function startTicking() {
-        this.tickingState = true;
-      }
-
-      // override
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        this.tickingState = false;
-      }
-    }, {
-      key: "isRunning",
-      get: function get() {
-        return this._isRunning;
-      },
-      set: function set(value) {
-        if (this._isRunning === value) {
-          return;
-        }
-        this._isRunning = value;
-        if (this.tickingMode === 1 && value != this.tickingState) {
-          if (value) {
-            this.startTicking();
-          } else {
-            this.stopTicking();
-          }
-        }
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.isPaused = false;
-        this.isRunning = true;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        // Only can ba paused in running state
-        if (this.isRunning) {
-          this.isPaused = true;
-          this.isRunning = false;
-        }
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        // Only can ba resumed in paused state (paused from running state)
-        if (this.isPaused) {
-          this.isRunning = true;
-        }
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.isPaused = false;
-        this.isRunning = false;
-        return this;
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        this.isPaused = false;
-        this.isRunning = false;
-        this.emit('complete', this.parent, this);
-      }
-    }]);
-    return TickTask;
-  }(ComponentBase);
-  var TICKINGMODE = {
-    'no': 0,
-    'lazy': 1,
-    'always': 2
-  };
-
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
-    _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
-    function SceneUpdateTickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
-
-      // scene update : update, preupdate, postupdate, prerender, render
-      // game update : step, poststep, 
-
-      // If this.scene is not available, use game's 'step' event
-      var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$6(config, 'tickEventName', defaultEventName);
-      _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
-      return _this;
-    }
-    _createClass(SceneUpdateTickTask, [{
-      key: "startTicking",
-      value: function startTicking() {
-        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-        if (this.isSceneTicker) {
-          this.scene.sys.events.on(this.tickEventName, this.update, this);
-        } else {
-          this.game.events.on(this.tickEventName, this.update, this);
-        }
-      }
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-        if (this.isSceneTicker && this.scene) {
-          // Scene might be destoryed
-          this.scene.sys.events.off(this.tickEventName, this.update, this);
-        } else if (this.game) {
-          this.game.events.off(this.tickEventName, this.update, this);
-        }
-      }
-
-      // update(time, delta) {
-      //     
-      // }
-    }]);
-    return SceneUpdateTickTask;
-  }(TickTask);
-  var IsGameUpdateEvent = function IsGameUpdateEvent(eventName) {
-    return eventName === 'step' || eventName === 'poststep';
-  };
-
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
-  var Clamp$1 = Phaser.Math.Clamp;
-  var Timer = /*#__PURE__*/function () {
-    function Timer(config) {
-      _classCallCheck(this, Timer);
-      this.resetFromJSON(config);
-    }
-    _createClass(Timer, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.state = GetValue$5(o, 'state', IDLE);
-        this.timeScale = GetValue$5(o, 'timeScale', 1);
-        this.delay = GetValue$5(o, 'delay', 0);
-        this.repeat = GetValue$5(o, 'repeat', 0);
-        this.repeatCounter = GetValue$5(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$5(o, 'repeatDelay', 0);
-        this.duration = GetValue$5(o, 'duration', 0);
-        this.nowTime = GetValue$5(o, 'nowTime', 0);
-        this.justRestart = GetValue$5(o, 'justRestart', false);
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          state: this.state,
-          timeScale: this.timeScale,
-          delay: this.delay,
-          repeat: this.repeat,
-          repeatCounter: this.repeatCounter,
-          repeatDelay: this.repeatDelay,
-          duration: this.duration,
-          nowTime: this.nowTime,
-          justRestart: this.justRestart
-        };
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {}
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(timeScale) {
-        this.timeScale = timeScale;
-        return this;
-      }
-    }, {
-      key: "setDelay",
-      value: function setDelay(delay) {
-        if (delay === undefined) {
-          delay = 0;
-        }
-        this.delay = delay;
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(duration) {
-        this.duration = duration;
-        return this;
-      }
-    }, {
-      key: "setRepeat",
-      value: function setRepeat(repeat) {
-        this.repeat = repeat;
-        return this;
-      }
-    }, {
-      key: "setRepeatInfinity",
-      value: function setRepeatInfinity() {
-        this.repeat = -1;
-        return this;
-      }
-    }, {
-      key: "setRepeatDelay",
-      value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.nowTime = this.delay > 0 ? -this.delay : 0;
-        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
-        this.repeatCounter = 0;
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.state = IDLE;
-        return this;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (this.state === IDLE || this.state === DONE || delta === 0 || this.timeScale === 0) {
-          return;
-        }
-        this.nowTime += delta * this.timeScale;
-        this.justRestart = false;
-        if (this.nowTime >= this.duration) {
-          if (this.repeat === -1 || this.repeatCounter < this.repeat) {
-            this.repeatCounter++;
-            this.justRestart = true;
-            this.nowTime -= this.duration;
-            if (this.repeatDelay > 0) {
-              this.nowTime -= this.repeatDelay;
-              this.state = REPEATDELAY;
-            }
-          } else {
-            this.nowTime = this.duration;
-            this.state = DONE;
-          }
-        } else if (this.nowTime >= 0) {
-          this.state = COUNTDOWN;
-        }
-      }
-    }, {
-      key: "t",
-      get: function get() {
-        var t;
-        switch (this.state) {
-          case IDLE:
-          case DELAY:
-          case REPEATDELAY:
-            t = 0;
-            break;
-          case COUNTDOWN:
-            t = this.nowTime / this.duration;
-            break;
-          case DONE:
-            t = 1;
-            break;
-        }
-        return Clamp$1(t, 0, 1);
-      },
-      set: function set(value) {
-        value = Clamp$1(value, -1, 1);
-        if (value < 0) {
-          this.state = DELAY;
-          this.nowTime = -this.delay * value;
-        } else {
-          this.state = COUNTDOWN;
-          this.nowTime = this.duration * value;
-          if (value === 1 && this.repeat !== 0) {
-            this.repeatCounter++;
-          }
-        }
-      }
-    }, {
-      key: "setT",
-      value: function setT(t) {
-        this.t = t;
-        return this;
-      }
-    }, {
-      key: "isIdle",
-      get: function get() {
-        return this.state === IDLE;
-      }
-    }, {
-      key: "isDelay",
-      get: function get() {
-        return this.state === DELAY;
-      }
-    }, {
-      key: "isCountDown",
-      get: function get() {
-        return this.state === COUNTDOWN;
-      }
-    }, {
-      key: "isRunning",
-      get: function get() {
-        return this.state === DELAY || this.state === COUNTDOWN;
-      }
-    }, {
-      key: "isDone",
-      get: function get() {
-        return this.state === DONE;
-      }
-    }, {
-      key: "isOddIteration",
-      get: function get() {
-        return (this.repeatCounter & 1) === 1;
-      }
-    }, {
-      key: "isEvenIteration",
-      get: function get() {
-        return (this.repeatCounter & 1) === 0;
-      }
-    }]);
-    return Timer;
-  }();
-  var IDLE = 0;
-  var DELAY = 1;
-  var COUNTDOWN = 2;
-  var REPEATDELAY = 3;
-  var DONE = -1;
-
-  var TimerTickTask = /*#__PURE__*/function (_TickTask) {
-    _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
-    function TimerTickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
-      _this.timer = new Timer();
-      // boot() later 
-      return _this;
-    }
-
-    // override
-    _createClass(TimerTickTask, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
-        this.timer.destroy();
-        this.timer = undefined;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.timer.start();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.timer.stop();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
-        return this;
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        this.timer.stop();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
-        return this;
-      }
-    }]);
-    return TimerTickTask;
-  }(SceneUpdateTickTask);
-
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
-    _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
-    function EaseValueTaskBase() {
-      _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
-    }
-    _createClass(EaseValueTaskBase, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$4(o, 'timer'));
-        this.setEnable(GetValue$4(o, 'enable', true));
-        this.setTarget(GetValue$4(o, 'target', this.parent));
-        this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$4(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$4(o, 'repeat', 0));
-        return this;
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e == undefined) {
-          e = true;
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "setTarget",
-      value: function setTarget(target) {
-        if (target === undefined) {
-          target = this.parent;
-        }
-        this.target = target;
-        return this;
-      }
-    }, {
-      key: "setDelay",
-      value: function setDelay(time) {
-        this.delay = time;
-        // Assign `this.timer.setRepeat(repeat)` manually
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(time) {
-        this.duration = time;
-        return this;
-      }
-    }, {
-      key: "setRepeat",
-      value: function setRepeat(repeat) {
-        this.repeat = repeat;
-        // Assign `this.timer.setRepeat(repeat)` manually
-        return this;
-      }
-    }, {
-      key: "setRepeatDelay",
-      value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay;
-        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
-        return this;
-      }
-    }, {
-      key: "setEase",
-      value: function setEase(ease) {
-        if (ease === undefined) {
-          ease = 'Linear';
-        }
-        this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "start",
-      value: function start() {
-        // Ignore start if timer is running, i.e. in DELAY, o RUN state
-        if (this.timer.isRunning) {
-          return this;
-        }
-        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "restart",
-      value: function restart() {
-        this.timer.stop();
-        this.start.apply(this, arguments);
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop(toEnd) {
-        if (toEnd === undefined) {
-          toEnd = false;
-        }
-        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
-        if (toEnd) {
-          this.timer.setT(1);
-          this.updateGameObject(this.target, this.timer);
-          this.complete();
-        }
-        return this;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (!this.isRunning || !this.enable || !this.parent.active) {
-          return this;
-        }
-        var target = this.target,
-          timer = this.timer;
-        timer.update(time, delta);
-
-        // isDelay, isCountDown, isDone
-        if (!timer.isDelay) {
-          this.updateGameObject(target, timer);
-        }
-        this.emit('update', target, this);
-        if (timer.isDone) {
-          this.complete();
-        }
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {}
-    }]);
-    return EaseValueTaskBase;
-  }(TimerTickTask);
-
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
-  var Linear = Phaser.Math.Linear;
-  var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
-    _inherits(EaseValueTask, _EaseValueTaskBase);
-    var _super = _createSuper(EaseValueTask);
-    function EaseValueTask(gameObject, config) {
-      var _this;
-      _classCallCheck(this, EaseValueTask);
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
-      // this.timer
-
-      _this.resetFromJSON();
-      _this.boot();
-      return _this;
-    }
-    _createClass(EaseValueTask, [{
-      key: "start",
-      value: function start(config) {
-        if (this.timer.isRunning) {
-          return this;
-        }
-        var target = this.target;
-        this.propertyKey = GetValue$3(config, 'key', 'value');
-        var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$3(config, 'from', currentValue);
-        this.toValue = GetValue$3(config, 'to', currentValue);
-        this.setEase(GetValue$3(config, 'ease', this.ease));
-        this.setDuration(GetValue$3(config, 'duration', this.duration));
-        this.setRepeat(GetValue$3(config, 'repeat', 0));
-        this.setDelay(GetValue$3(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
-        this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
-        target[this.propertyKey] = this.fromValue;
-        _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {
-        var t = timer.t;
-        t = this.easeFn(t);
-        target[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
-      }
-    }]);
-    return EaseValueTask;
-  }(EaseValueTaskBase);
-
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var DirMode = {
-    out: 0,
-    "in": 1
-  };
-  var TransitionMethods = {
-    setTransitionDirection: function setTransitionDirection(dir) {
-      if (typeof dir === 'string') {
-        dir = DirMode[dir];
-      }
-      this.dir = dir;
-      return this;
-    },
-    setDuration: function setDuration(duration) {
-      this.duration = duration;
-      return this;
-    },
-    setEaseFunction: function setEaseFunction(ease) {
-      this.easeFunction = ease;
-      return this;
-    },
-    setNextTexture: function setNextTexture(texture, frame) {
-      this.nextImage.setTexture(texture, frame);
-      return this;
-    },
-    transit: function transit(texture, frame) {
-      if (this.isRunning) {
-        this.ignoreCompleteEvent = true;
-        this.stop();
-        this.ignoreCompleteEvent = false;
-      }
-      if (IsPlainObject$2(texture)) {
-        var config = texture;
-        texture = GetValue$2(config, 'key', undefined);
-        frame = GetValue$2(config, 'frame', undefined);
-        this.setDuration(GetValue$2(config, 'duration', this.duration)).setEaseFunction(GetValue$2(config, 'ease', this.easeFunction)).setTransitionDirection(GetValue$2(config, 'dir', this.dir));
-        var maskGameObject = GetValue$2(config, 'mask', undefined);
-        if (maskGameObject) {
-          this.setMaskGameObject(maskGameObject);
-        }
-        this.setMaskEnable(maskGameObject === true);
-        var onStart = GetValue$2(config, 'onStart', undefined);
-        var onProgress = GetValue$2(config, 'onProgress', undefined);
-        var onComplete = GetValue$2(config, 'onComplete', undefined);
-        if (onStart !== undefined || onProgress !== undefined || onComplete !== undefined) {
-          this.setTransitionStartCallback(onStart, GetValue$2(config, 'onStartScope', undefined)).setTransitionProgressCallback(onProgress, GetValue$2(config, 'onProgressScope', undefined)).setTransitionCompleteCallback(onComplete, GetValue$2(config, 'onCompleteScope', undefined));
-        }
-      }
-      this.setNextTexture(texture, frame);
-      this.start();
-      return this;
-    },
-    start: function start() {
-      if (this.easeValueTask === undefined) {
-        this.easeValueTask = new EaseValueTask(this, {
-          eventEmitter: null
-        });
-      }
-      this.easeValueTask.restart({
-        key: 't',
-        from: 0,
-        to: 1,
-        duration: this.duration,
-        ease: this.easeFunction
-      });
-      return this;
-    },
-    pause: function pause() {
-      if (this.easeValueTask) {
-        this.easeValueTask.pause();
-      }
-      return this;
-    },
-    resume: function resume() {
-      if (this.easeValueTask) {
-        this.easeValueTask.resume();
-      }
-      return this;
-    },
-    stop: function stop() {
-      if (this.easeValueTask) {
-        this.easeValueTask.stop();
-      }
-      this.setT(1);
-      return this;
-    }
-  };
-
-  var DrawShape = function DrawShape(width, height, padding, originX, originY) {
-    this.clear().fillStyle(0xffffff);
-    switch (this.shape) {
-      case 1:
-        // circle
-        var radius = Math.min(width, height) / 2;
-        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
-        break;
-      default:
-        // 0|'rectangle'
-        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
-        break;
-    }
-  };
-
-  var Graphics = Phaser.GameObjects.Graphics;
-  var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
-    _inherits(DefaultMaskGraphics, _Graphics);
-    var _super = _createSuper(DefaultMaskGraphics);
-    function DefaultMaskGraphics(parent, shape, padding) {
-      var _this;
-      _classCallCheck(this, DefaultMaskGraphics);
-      if (shape === undefined) {
-        shape = 0;
-      }
-      if (typeof shape === 'string') {
-        shape = SHAPEMODE[shape];
-      }
-      if (padding === undefined) {
-        padding = 0;
-      }
-      _this = _super.call(this, parent.scene);
-      _this.parent = parent;
-      _this.shape = shape;
-      _this.padding = padding;
-      _this.setPosition().resize().setVisible(false);
-      // Don't add it to display list
-      return _this;
-    }
-    _createClass(DefaultMaskGraphics, [{
-      key: "destroy",
-      value: function destroy() {
-        this.parent = undefined;
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
-        return this;
-      }
-    }, {
-      key: "setPosition",
-      value: function setPosition(x, y) {
-        var parent = this.parent;
-        if (x === undefined) {
-          x = parent.x;
-        }
-        if (y === undefined) {
-          y = parent.y;
-        }
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height, padding) {
-        var parent = this.parent;
-        if (width === undefined) {
-          width = parent.width;
-        }
-        if (height === undefined) {
-          height = parent.height;
-        }
-        if (padding === undefined) {
-          padding = this.padding;
-        }
-        if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
-          return this;
-        }
-        this.widthSave = width;
-        this.heightSave = height;
-        this.paddingSave = padding;
-        this.originXSave = parent.originX;
-        this.originYSave = parent.originY;
-        DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(originX, originY) {
-        if (originY === undefined) {
-          originY = originX;
-        }
-        var parent = this.parent;
-        if (originX === undefined) {
-          originX = parent.originX;
-        }
-        if (originY === undefined) {
-          originY = parent.originY;
-        }
-        if (this.originXSave === originX && this.originYSave === originY) {
-          return this;
-        }
-        this.originXSave = originX;
-        this.originYSave = originY;
-        DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
-        return this;
-      }
-    }]);
-    return DefaultMaskGraphics;
-  }(Graphics);
-  var SHAPEMODE = {
-    rectangle: 0,
-    circle: 1
-  };
-
-  var MaskMethods = {
-    setMaskGameObject: function setMaskGameObject(gameObject) {
-      if (!gameObject) {
-        this.removeMaskGameObject();
-        return this;
-      }
-      if (this.maskGameObject) {
-        if (gameObject === true && this.maskGameObject instanceof DefaultMaskGraphics) {
-          return this;
-        }
-        if (this.maskGameObject === gameObject) {
-          return this;
-        }
-
-        // Remove previous Mask Game Object
-        this.removeMaskGameObject();
-      }
-
-      // Add new Mask Game Object
-      if (gameObject === true) {
-        gameObject = new DefaultMaskGraphics(this);
-      }
-      this.maskGameObject = gameObject;
-      this.maskGameObject.resize(this.width, this.height).setOrigin(this.originX, this.originY).setPosition(0, 0).setScale(1).setVisible(false);
-      this.addLocal(this.maskGameObject);
-      this.childrenMask = this.maskGameObject.createGeometryMask();
-      return this;
-    },
-    removeMaskGameObject: function removeMaskGameObject() {
-      this.backImage.clearMask();
-      this.frontImage.clearMask();
-      this.childrenMask = undefined;
-      this.remove(this.maskGameObject, true);
-      this.maskGameObject = undefined;
-      return this;
-    },
-    setImageMaskEnable: function setImageMaskEnable(gameObject, enable, invertAlpha) {
-      if (enable === undefined) {
-        enable = true;
-      }
-
-      // Use DefaultMaskGraphics if not given
-      if (!this.childrenMask) {
-        this.setMaskGameObject(true);
-      }
-      if (enable) {
-        gameObject.setMask(this.childrenMask);
-        if (invertAlpha) {
-          this.childrenMask.setInvertAlpha();
-        }
-      } else {
-        gameObject.clearMask();
-      }
-      return this;
-    },
-    setCurrentImageMaskEnable: function setCurrentImageMaskEnable(enable, invertAlpha) {
-      this.setImageMaskEnable(this.currentImage, enable, invertAlpha);
-      return this;
-    },
-    setNextImageMaskEnable: function setNextImageMaskEnable(enable, invertAlpha) {
-      this.setImageMaskEnable(this.nextImage, enable, invertAlpha);
-      return this;
-    },
-    setCellImagesMaskEnable: function setCellImagesMaskEnable(enable, invertAlpha) {
-      var cellImages = this.getCellImages();
-      for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-        this.setImageMaskEnable(cellImages[i], enable, invertAlpha);
-      }
-      return this;
-    },
-    setMaskEnable: function setMaskEnable(enable, invertAlpha) {
-      this.setImageMaskEnable(this.backImage, enable, invertAlpha);
-      this.setImageMaskEnable(this.frontImage, enable, invertAlpha);
-      this.setCellImagesMaskEnable(enable, invertAlpha);
-      return this;
-    }
-  };
-
-  var GetFrameNameCallback = function GetFrameNameCallback(baseFrameName, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = ',';
-    }
-    var callback;
-    if (baseFrameName === '__BASE') {
-      callback = function callback(colIndex, rowIndex) {
-        return "".concat(colIndex).concat(delimiter).concat(rowIndex);
-      };
-    } else {
-      callback = function callback(colIndex, rowIndex) {
-        return "".concat(baseFrameName, "_").concat(colIndex).concat(delimiter).concat(rowIndex);
-      };
-    }
-    return callback;
-  };
-
-  var GridCut = function GridCut(scene, key, frame, columns, rows, getFrameNameCallback) {
-    if (frame == null) {
-      frame = '__BASE';
-    }
-    if (!getFrameNameCallback) {
-      getFrameNameCallback = GetFrameNameCallback(frame, getFrameNameCallback);
-    }
-    var texture = scene.sys.textures.get(key);
-    var isRenderTexture = texture.source[0].isRenderTexture;
-    var baseFrame = _typeof(frame) === 'object' ? frame : texture.get(frame);
-    var baseWidth = baseFrame.width,
-      baseHeight = baseFrame.height;
-    var cellX, cellY, cellName;
-    var cellWidth = baseWidth / columns,
-      cellHeight = baseHeight / rows;
-    var offsetX = 0,
-      offsetY = 0;
-    for (var y = 0; y < rows; y++) {
-      offsetX = 0;
-      for (var x = 0; x < columns; x++) {
-        cellName = getFrameNameCallback(x, y);
-        cellX = offsetX + baseFrame.cutX;
-        if (!isRenderTexture) {
-          cellY = offsetY + baseFrame.cutY;
-        } else {
-          cellY = baseHeight - offsetY - cellHeight + baseFrame.cutY;
-        }
-        texture.add(cellName, 0, cellX, cellY, cellWidth, cellHeight);
-        offsetX += cellWidth;
-      }
-      offsetY += cellHeight;
-    }
-    return {
-      getFrameNameCallback: getFrameNameCallback,
-      cellWidth: cellWidth,
-      cellHeight: cellHeight,
-      columns: columns,
-      rows: rows
-    };
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var DefaultImageClass = Phaser.GameObjects.Image;
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var RotateAround = Phaser.Math.RotateAround;
-  var GridCutImage = function GridCutImage(gameObject, columns, rows, config) {
-    if (IsPlainObject$1(columns)) {
-      config = columns;
-      columns = GetValue$1(config, 'columns', 1);
-      rows = GetValue$1(config, 'rows', 1);
-    }
-    var createImageCallback = GetValue$1(config, 'onCreateImage');
-    if (!createImageCallback) {
-      var ImageClass = GetValue$1(config, 'ImageClass', DefaultImageClass);
-      createImageCallback = function createImageCallback(scene, key, frame) {
-        return new ImageClass(scene, 0, 0, key, frame);
-      };
-    }
-    var originX = GetValue$1(config, 'originX', 0.5);
-    var originY = GetValue$1(config, 'originY', 0.5);
-    var addToScene = GetValue$1(config, 'add', true);
-    var align = GetValue$1(config, 'align', addToScene);
-    var imageObjectPool = GetValue$1(config, 'objectPool', undefined);
-    var scene = gameObject.scene;
-    var texture = gameObject.texture;
-    var frame = gameObject.frame;
-    var result = GridCut(scene, texture, frame, columns, rows);
-    var getFrameNameCallback = result.getFrameNameCallback;
-    var scaleX = gameObject.scaleX,
-      scaleY = gameObject.scaleY;
-    var rotation = gameObject.rotation;
-    var topLeft = gameObject.getTopLeft(),
-      startX = topLeft.x,
-      startY = topLeft.y;
-    var cellGameObjects = [];
-    var cellWidth = result.cellWidth * scaleX,
-      cellHeight = result.cellHeight * scaleY;
-    for (var y = 0; y < rows; y++) {
-      for (var x = 0; x < columns; x++) {
-        var cellGameObject;
-        var frameName = getFrameNameCallback(x, y);
-        if (imageObjectPool && imageObjectPool.length > 0) {
-          cellGameObject = imageObjectPool.pop().setTexture(texture, frameName);
-        } else {
-          cellGameObject = createImageCallback(scene, texture, frameName);
-        }
-        if (addToScene) {
-          scene.add.existing(cellGameObject);
-        }
-        var cellTLX = startX + cellWidth * x;
-        var cellTLY = startY + cellHeight * y;
-        var cellX = cellTLX + originX * cellWidth;
-        var cellY = cellTLY + originY * cellHeight;
-        if (align) {
-          cellGameObject.setOrigin(originX, originY).setPosition(cellX, cellY).setScale(scaleX, scaleY).setRotation(rotation);
-          RotateAround(cellGameObject, startX, startY, rotation);
-        }
-        cellGameObjects.push(cellGameObject);
-      }
-    }
-    return cellGameObjects;
-  };
-
-  var GridCutMethods = {
-    gridCutImage: function gridCutImage(gameObject, columns, rows, config) {
-      if (config === undefined) {
-        config = {};
-      }
-      config.objectPool = this.imagesPool;
-      var cellImages = GridCutImage(gameObject, columns, rows, config),
-        cellImage;
-      for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-        cellImage = cellImages[i];
-        cellImage.setVisible(true);
-        this.add(cellImage);
-      }
-      this.cellImages = cellImages;
-      this.setChildLocalVisible(gameObject, false); // Set cut target to invisible
-      return cellImages;
-    },
-    gridCutCurrentImage: function gridCutCurrentImage(columns, rows, config) {
-      return this.gridCutImage(this.currentImage, columns, rows, config);
-    },
-    gridCutNextImage: function gridCutNextImage(columns, rows, config) {
-      return this.gridCutImage(this.nextImage, columns, rows, config);
-    },
-    getCellImages: function getCellImages() {
-      return this.cellImages;
-    },
-    freeCellImages: function freeCellImages() {
-      var _this$imagesPool;
-      if (this.cellImages.length === 0) {
-        return this;
-      }
-      var texture = this.cellImages[0].texture;
-      var cellImages = this.cellImages,
-        cellImage,
-        frameName;
-      for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-        cellImage = cellImages[i];
-
-        // Reset property of cell image
-        this.setChildLocalAlpha(cellImage, 1).setChildLocalScale(cellImage, 1).setChildLocalVisible(cellImage, false);
-        cellImage.clearMask();
-
-        // Remove frame object
-        frameName = cellImage.frame.name;
-        cellImage.setTexture();
-        texture.remove(frameName);
-      }
-      (_this$imagesPool = this.imagesPool).push.apply(_this$imagesPool, _toConsumableArray(cellImages));
-      cellImages.length = 0;
-      return this;
-    }
-  };
+  var globalSize = {};
 
   var FlipMethods = {
     setFlipX: function setFlipX(value) {
@@ -3527,26 +2259,14 @@
     }
   };
 
-  var methods = {};
-  Object.assign(methods, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
-
-  var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
-  var OnProgress = function OnProgress(parent, currentImage, nextImage, t) {
-    parent.setChildLocalAlpha(currentImage, 1 - t).setChildLocalAlpha(nextImage, t);
-  };
-  var OnComplete = function OnComplete(parent, currentImage, nextImage, t) {
-    parent.setChildLocalAlpha(currentImage, 1);
-  };
-
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Clamp = Phaser.Math.Clamp;
-  var TransitionImage = /*#__PURE__*/function (_Container) {
-    _inherits(TransitionImage, _Container);
-    var _super = _createSuper(TransitionImage);
-    function TransitionImage(scene, x, y, texture, frame, config) {
+  var ImageBox = /*#__PURE__*/function (_Container) {
+    _inherits(ImageBox, _Container);
+    var _super = _createSuper(ImageBox);
+    function ImageBox(scene, x, y, texture, frame, config) {
       var _this;
-      _classCallCheck(this, TransitionImage);
+      _classCallCheck(this, ImageBox);
       if (IsPlainObject(x)) {
         config = x;
         x = GetValue(config, 'x', 0);
@@ -3557,90 +2277,25 @@
         config = frame;
         frame = undefined;
       }
-      var backImage = GetValue(config, 'back', undefined);
-      var frontImage = GetValue(config, 'front', undefined);
-      if (!backImage) {
-        backImage = scene.add.image(x, y, texture, frame);
-      }
-      if (!frontImage) {
-        frontImage = scene.add.image(x, y, texture, frame);
-      }
-      var width = GetValue(config, 'width', frontImage.width);
-      var height = GetValue(config, 'height', frontImage.height);
-      _this = _super.call(this, scene, x, y, width, height);
-      _this.type = 'rexTransitionImage';
-      backImage.setVisible(false);
-      _this.addMultiple([backImage, frontImage]);
-      _this.backImage = backImage;
-      _this.frontImage = frontImage;
-      _this.maskGameObject = undefined;
-      _this.cellImages = [];
-      _this.imagesPool = [];
-
-      // Transition parameters
-      var onStart = GetValue(config, 'onStart', undefined);
-      var onProgress = GetValue(config, 'onProgress', undefined);
-      var onComplete = GetValue(config, 'onComplete', undefined);
-      var dir = GetValue(config, 'dir', 0);
-      if (onStart === undefined && onProgress === undefined && onComplete === undefined) {
-        onStart = OnStart;
-        onProgress = OnProgress;
-        onComplete = OnComplete;
-        dir = 0;
-      }
-      _this.setTransitionStartCallback(onStart, GetValue(config, 'onStartScope', undefined)).setTransitionProgressCallback(onProgress, GetValue(config, 'onProgressScope', undefined)).setTransitionCompleteCallback(onComplete, GetValue(config, 'onCompleteScope', undefined)).setTransitionDirection(dir).setDuration(GetValue(config, 'duration', 1000)).setEaseFunction(GetValue(config, 'ease', 'Linear'));
-      var maskGameObject = GetValue(config, 'mask', undefined);
-      if (maskGameObject) {
-        _this.setMaskGameObject(maskGameObject);
-      }
-      _this.setMaskEnable(false);
-      _this.ignoreCompleteEvent = false;
+      var image = scene.add.image(x, y, texture, frame);
+      _this = _super.call(this, scene, x, y, 1, 1);
+      _this.type = 'rexImageBox';
+      _this.add(image);
+      _this.image = image;
+      var width = GetValue(config, 'width', image.width);
+      var height = GetValue(config, 'height', image.height);
+      _this.resize(width, height);
       return _this;
     }
-    _createClass(TransitionImage, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-          return;
-        }
-        if (this.childrenMask) {
-          this.childrenMask.destroy();
-          this.childrenMask = undefined;
-        }
-        this.backImage = undefined;
-        this.frontImage = undefined;
-        this.maskGameObject = undefined;
-        this.cellImages.length = 0;
-        this.imagesPool.length = 0;
-        _get(_getPrototypeOf(TransitionImage.prototype), "destroy", this).call(this, fromScene);
-        this.onStartCallback = undefined;
-        this.onStartCallbackScope = undefined;
-        this.onProgressCallback = undefined;
-        this.onProgressCallbackScope = undefined;
-        this.onCompleteCallback = undefined;
-        this.onCompleteCallbackScope = undefined;
-        this.easeValueTask = undefined;
-      }
-    }, {
-      key: "currentImage",
-      get: function get() {
-        return this.dir === 0 ? this.frontImage : this.backImage;
-      }
-    }, {
-      key: "nextImage",
-      get: function get() {
-        return this.dir === 0 ? this.backImage : this.frontImage;
-      }
-    }, {
+    _createClass(ImageBox, [{
       key: "texture",
       get: function get() {
-        return this.nextImage.texture;
+        return this.image.texture;
       }
     }, {
       key: "frame",
       get: function get() {
-        return this.nextImage.frame;
+        return this.image.frame;
       }
     }, {
       key: "flipX",
@@ -3652,8 +2307,7 @@
           return;
         }
         this._flipX = value;
-        this.backImage.setFlipX(value);
-        this.frontImage.setFlipX(value);
+        this.image.setFlipX(value);
       }
     }, {
       key: "flipY",
@@ -3665,94 +2319,41 @@
           return;
         }
         this._flipY = value;
-        this.backImage.setFlipY(value);
-        this.frontImage.setFlipY(value);
+        this.image.setFlipY(value);
       }
     }, {
-      key: "t",
-      get: function get() {
-        return this._t;
-      },
-      set: function set(value) {
-        value = Clamp(value, 0, 1);
-        if (this._t === value) {
-          return;
-        }
-        this._t = value;
-        var currentImage = this.currentImage;
-        var nextImage = this.nextImage;
-
-        // Start
-        if (value === 0) {
-          this.setChildVisible(this.frontImage, true).setChildVisible(this.backImage, true);
-          RunCallback(this.onStartCallback, this.onStartCallbackScope, this, currentImage, nextImage, value);
-        }
-
-        // Progress
-        RunCallback(this.onProgressCallback, this.onProgressCallbackScope, this, currentImage, nextImage, value);
-
-        // Complete
-        if (value === 1) {
-          RunCallback(this.onCompleteCallback, this.onCompleteCallbackScope, this, currentImage, nextImage, value);
-          var key = nextImage.texture.key,
-            frame = nextImage.frame.name;
-          this.frontImage.setTexture(key, frame);
-          this.backImage.setTexture(key, frame);
-          this.setChildVisible(this.frontImage, true).setChildVisible(this.backImage, false).setMaskEnable(false).freeCellImages();
-        }
-        if (value === 1 && !this.ignoreCompleteEvent) {
-          this.emit('complete');
-        }
-      }
-    }, {
-      key: "setT",
-      value: function setT(value) {
-        this.t = value;
+      key: "fitImage",
+      value: function fitImage() {
+        var image = this.image;
+        var result = FitTo(image, {
+          width: this.displayWidth,
+          height: this.displayHeight
+        }, true);
+        image.setDisplaySize(result.width, result.height);
+        this.resetChildScaleState(image);
         return this;
       }
     }, {
-      key: "isRunning",
-      get: function get() {
-        return this.easeValueTask ? this.easeValueTask.isRunning : false;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(originX, originY) {
-        _get(_getPrototypeOf(TransitionImage.prototype), "setOrigin", this).call(this, originX, originY);
-        this.backImage.setOrigin(originX, originY);
-        this.frontImage.setOrigin(originX, originY);
-        if (this.maskGameObject) {
-          this.maskGameObject.setOrigin(originX, originY);
-        }
+      key: "resize",
+      value: function resize(width, height) {
+        _get(_getPrototypeOf(ImageBox.prototype), "resize", this).call(this, width, height);
+        this.fitImage();
         return this;
       }
     }, {
       key: "setTexture",
       value: function setTexture(texture, frame) {
-        // Without transition
-        this.frontImage.setTexture(texture, frame);
-        this.backImage.setTexture(texture, frame).setVisible(false);
+        this.image.setTexture(texture, frame);
+        this.fitImage();
         return this;
       }
     }]);
-    return TransitionImage;
+    return ImageBox;
   }(ContainerLite);
-  var RunCallback = function RunCallback(callback, scope, parent, currentImage, nextImage, t) {
-    if (!callback) {
-      return;
-    }
-    if (scope) {
-      callback.call(scope, parent, currentImage, nextImage, t);
-    } else {
-      callback(parent, currentImage, nextImage, t);
-    }
-  };
-
-  // mixin
-  Object.assign(TransitionImage.prototype, methods);
+  Object.assign(ImageBox.prototype, FlipMethods);
 
   function Factory (x, y, texture, frame, config) {
-    var gameObject = new TransitionImage(this.scene, x, y, texture, frame, config);
+    var gameObject = new ImageBox(this.scene, x, y, texture, frame, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
@@ -3768,7 +2369,7 @@
     }
     var key = GetAdvancedValue(config, 'key', null);
     var frame = GetAdvancedValue(config, 'frame', null);
-    var gameObject = new TransitionImage(this.scene, 0, 0, key, frame, config);
+    var gameObject = new ImageBox(this.scene, 0, 0, key, frame, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -3834,29 +2435,29 @@
     return target;
   };
 
-  var TransitionImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(TransitionImagePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(TransitionImagePlugin);
-    function TransitionImagePlugin(pluginManager) {
+  var ImageBoxPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(ImageBoxPlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(ImageBoxPlugin);
+    function ImageBoxPlugin(pluginManager) {
       var _this;
-      _classCallCheck(this, TransitionImagePlugin);
+      _classCallCheck(this, ImageBoxPlugin);
       _this = _super.call(this, pluginManager);
 
       //  Register our new Game Object type
-      pluginManager.registerGameObject('rexTransitionImage', Factory, Creator);
+      pluginManager.registerGameObject('rexImageBox', Factory, Creator);
       return _this;
     }
-    _createClass(TransitionImagePlugin, [{
+    _createClass(ImageBoxPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-    return TransitionImagePlugin;
+    return ImageBoxPlugin;
   }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.GameObjects.TransitionImage', TransitionImage);
+  SetValue(window, 'RexPlugins.GameObjects.ImageBox', ImageBox);
 
-  return TransitionImagePlugin;
+  return ImageBoxPlugin;
 
 }));
