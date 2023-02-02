@@ -18,7 +18,10 @@ class ImageBox extends Container {
             frame = undefined;
         }
 
-        var image = scene.add.image(x, y, texture, frame);
+        var image = GetValue(config, 'image');
+        if (!image) {
+            image = scene.add.image(x, y, texture, frame);
+        }
 
         super(scene, x, y, 1, 1);
         this.type = 'rexImageBox';

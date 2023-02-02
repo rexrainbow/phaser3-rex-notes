@@ -9,6 +9,8 @@ declare namespace ImageBox {
         texture?: string, frame?: string,
 
         width?: number, height?: number,
+
+        image?: Phaser.GameObjects.GameObject,
     }
 }
 
@@ -30,6 +32,8 @@ declare class ImageBox extends ContainerLite {
         scene: Phaser.Scene,
         config?: ImageBox.IConfig
     );
+
+    image: Phaser.GameObjects.GameObject;
 
     setTexture(texture?: string, frame?: string): this;
     texture: Phaser.Textures.Texture;
