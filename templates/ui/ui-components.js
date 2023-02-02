@@ -23,8 +23,8 @@ import Tirangle from './triangle/Triangle.js';
 import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
-import ImageBox from './imagebox/ImageBox.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
+import ImageBox from './imagebox/ImageBox.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
@@ -141,8 +141,8 @@ export {
     Knob,
     CustomShapes,
     CustomProgress,
-    ImageBox,
     TransitionImage,
+    ImageBox,
 
     Sizer,
     GridSizer,

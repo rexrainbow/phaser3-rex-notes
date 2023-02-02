@@ -21,8 +21,8 @@ import Triangle from './triangle/Triangle';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
-import ImageBox from './imagebox/ImageBox';
 import TransitionImage from './transitionimage/TransitionImage';
+import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents';
@@ -139,8 +139,8 @@ export {
     Knob,
     CustomShapes,
     CustomProgress,
-    ImageBox,
     TransitionImage,
+    ImageBox,
     NinePatch,
     NinePatch2,
 

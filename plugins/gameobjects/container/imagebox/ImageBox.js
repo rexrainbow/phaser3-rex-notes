@@ -21,6 +21,11 @@ class ImageBox extends Container {
         var image = GetValue(config, 'image');
         if (!image) {
             image = scene.add.image(x, y, texture, frame);
+            if (texture === undefined) {
+                image.setVisible(false);
+            }
+        } else {
+            image.setPosition(x, y).setOrigin(0.5);
         }
 
         super(scene, x, y, 1, 1);
@@ -71,7 +76,7 @@ class ImageBox extends Container {
     fitImage() {
         var image = this.image;
 
-        var result = FitToSize(image, { width: this.displayWidth, height: this.displayHeight }, true);
+        var result = FitToSize(image, { width: this.width, height: this.height }, true);
         image.setDisplaySize(result.width, result.height);
         this.resetChildScaleState(image);
         return this;
@@ -85,8 +90,16 @@ class ImageBox extends Container {
     }
 
     setTexture(texture, frame) {
-        this.image.setTexture(texture, frame);
-        this.fitImage();
+        var image = this.image;
+        if (texture !== undefined) {
+            this.setChildVisible(image, true);
+            image.setTexture(texture, frame);
+            this.fitImage();
+
+        } else {
+            this.setChildVisible(image, false);
+
+        }
         return this;
     }
 }

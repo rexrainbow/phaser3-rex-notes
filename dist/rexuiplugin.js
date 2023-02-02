@@ -32115,7 +32115,15 @@
         config = frame;
         frame = undefined;
       }
-      var image = scene.add.image(x, y, texture, frame);
+      var image = GetValue$1x(config, 'image');
+      if (!image) {
+        image = scene.add.image(x, y, texture, frame);
+        if (texture === undefined) {
+          image.setVisible(false);
+        }
+      } else {
+        image.setPosition(x, y).setOrigin(0.5);
+      }
       _this = _super.call(this, scene, x, y, 1, 1);
       _this.type = 'rexImageBox';
       _this.add(image);
@@ -32164,8 +32172,8 @@
       value: function fitImage() {
         var image = this.image;
         var result = FitTo(image, {
-          width: this.displayWidth,
-          height: this.displayHeight
+          width: this.width,
+          height: this.height
         }, true);
         image.setDisplaySize(result.width, result.height);
         this.resetChildScaleState(image);
@@ -32181,8 +32189,14 @@
     }, {
       key: "setTexture",
       value: function setTexture(texture, frame) {
-        this.image.setTexture(texture, frame);
-        this.fitImage();
+        var image = this.image;
+        if (texture !== undefined) {
+          this.setChildVisible(image, true);
+          image.setTexture(texture, frame);
+          this.fitImage();
+        } else {
+          this.setChildVisible(image, false);
+        }
         return this;
       }
     }]);
