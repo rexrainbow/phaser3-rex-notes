@@ -2259,41 +2259,9 @@
     }
   };
 
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
+  Phaser.Game;
 
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var HasTexture = function HasTexture(game, key, frame) {
-    game = GetGame(game);
-    var cache = game.textures;
-    var hasTexture = cache.exists(key);
-    if (frame === undefined) {
-      return hasTexture;
-    }
-    return cache.get(key).has(frame);
-  };
+  Phaser.Scene;
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -2389,7 +2357,7 @@
       value: function setTexture(texture, frame) {
         var image = this.image;
         image.setTexture(texture, frame);
-        if (HasTexture(this, texture, frame)) {
+        if (texture !== null) {
           this.setChildVisible(image, true);
           this.fitImage();
         } else {

@@ -87,7 +87,7 @@
 1. [Grid cut image](gridcutimage.md): Create image game objects in grids, to assemble target texture.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hidden input text](hiddeninputtext.md): An invisible Input DOM element to receive character input and display on text game object.
-1. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.
+1. [Image box](imagebox.md): Keep aspect ratio of image game object when scale-down resizing.
 1. [Image URI loader](imageuriloader.md): Load image by uri in preload stage.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.

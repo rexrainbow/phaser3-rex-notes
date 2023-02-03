@@ -6,17 +6,15 @@ import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
-import HiddenEditFactory from './hiddenedit/Factory.js';
-import CheckboxFactory from './checkbox/Factory.js';
-import ToggleSwitchFactory from './toggleswitch/Factory.js';
-
-import ContainerFactory from './container/Factory.js';
-import CanvasFactory from './canvas/Factory.js';
-import CircleMaskImageFactory from './circlemaskimage/Factory.js';
-import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import DynamicTextFactory from './dynamictext/Factory.js';
 import TextPlayerFactory from './textplayer/Factory.js';
 import CanvasInputFactory from './canvasinput/Factory.js';
+import HiddenEditFactory from './hiddenedit/Factory.js';
+import CheckboxFactory from './checkbox/Factory.js';
+import ToggleSwitchFactory from './toggleswitch/Factory.js';
+import CanvasFactory from './canvas/Factory.js';
+import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import LineProgressFactory from './lineprogress/Factory.js';
@@ -29,12 +27,12 @@ import TransitionImageFactory from './transitionimage/Factory.js';
 import ImageBoxFactory from './imagebox/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
-import ColorInputFactory from './colorinput/colorinput/Factory.js';
-import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
-import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
-import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
+import InputTextFactory from './inputtext/Factory';
+import FileChooserFactory from './filechooser/Factory.js';
+import FileDropZoneFactory from './filedropzone/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
+import ContainerFactory from './container/Factory.js';
 import SizerFactory from './sizer/Factory.js';
 import GridSizerFactory from './gridsizer/Factory.js';
 import FixWidthSizerFactory from './fixwidthsizer/Factory.js';
@@ -66,6 +64,10 @@ import FolderFactory from './folder/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
+import ColorInputFactory from './colorinput/colorinput/Factory.js';
+import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
+import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
+import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import SidesFactory from './sides/Factory.js';
 import TweakerFactory from './tweaker/Factory.js';
 import MakerFactory from './maker/Factory.js';
@@ -103,6 +105,7 @@ import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
+import { OpenFileChooser } from './filechooser/FileChooser.js';
 import Make from './maker/YAMLMake.js';
 import Maker from './maker/Maker.js';
 import yaml from './yaml/yaml.js';
@@ -168,6 +171,7 @@ var methods = {
     modalPromise: ModalPromise,
     modalClose: ModalClose,
     requestDrag: RequestDrag,
+    openFileChooser: OpenFileChooser,
 
     yaml: yaml,
 }

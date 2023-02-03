@@ -4,17 +4,16 @@ import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
+import DynamicText from './dynamictext/DynamicText.js';
+import TextPlayer from './textplayer/TextPlayer.js';
+import CanvasInput from './canvasinput/CanvasInput.js';
 import HiddenEdit from './hiddenedit/HiddenEdit.js';
 import Checkbox from './checkbox/Checkbox.js';
 import ToggleSwitch from './toggleswitch/ToggleSwitch.js';
 
-import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import AlphaMaskImage from './alphamaskimage/AlphaMaskImage.js';
-import DynamicText from './dynamictext/DynamicText.js';
-import TextPlayer from './textplayer/TextPlayer.js';
-import CanvasInput from './canvasinput/CanvasInput.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import LineProgress from './lineprogress/LineProgress.js';
@@ -27,12 +26,12 @@ import TransitionImage from './transitionimage/TransitionImage.js';
 import ImageBox from './imagebox/ImageBox.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
-import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
-import ColorInput from './colorinput/colorinput/ColorInput.js';
-import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
-import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
+import InputText from './inputtext/InputText.js';
+import { FileChooser } from './filechooser/FileChooser.js';
+import FileDropZone from './filedropzone/FileDropZone.js';
 import Chart from './chart/Chart.js';
 
+import Container from './container/Container.js';
 import Sizer from './sizer/Sizer.js';
 import GridSizer from './gridsizer/GridSizer.js';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer.js';
@@ -64,6 +63,10 @@ import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import ScrollBar from './scrollbar/ScrollBar.js';
 import Toast from './toast/Toast.js';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
+import ColorInput from './colorinput/colorinput/ColorInput.js';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
+import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
 import Tweaker from './tweaker/Tweaker.js';
 import Sides from './sides/Sides.js';
 
@@ -105,6 +108,7 @@ import DelayPromise from '../../plugins/utils/promise/Delay.js'
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
+import { OpenFileChooser } from './filechooser/FileChooser.js';
 
 const FontSizeResize = SetFontSizeToFitWidth;
 
@@ -115,23 +119,20 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
-    HiddenEdit,
-    Checkbox,
-    ToggleSwitch,
-
-    Container,
-    Canvas,
-    CircleMaskImage,
-    AlphaMaskImage,
     DynamicText,
     TextPlayer,
     CanvasInput,
+    HiddenEdit,
+    Checkbox,
+    ToggleSwitch,
+    Canvas,
+    CircleMaskImage,
+    AlphaMaskImage,
     FullWindowRectangle,
     Cover,
-    ColorComponents,
-    ColorInput,
-    ColorInputBase,
-    ColorPicker,
+    InputText,
+    FileChooser,
+    FileDropZone,
     Chart,
     CircularProgress,
     CircularProgressCanvas,
@@ -144,6 +145,7 @@ export {
     TransitionImage,
     ImageBox,
 
+    Container,
     Sizer,
     GridSizer,
     FixWidthSizer,
@@ -175,6 +177,10 @@ export {
     ScrollablePanel,
     ScrollBar,
     Toast,
+    ColorComponents,
+    ColorInput,
+    ColorInputBase,
+    ColorPicker,
     Tweaker,
     Sides,
 
@@ -217,4 +223,5 @@ export {
     GetViewport,
     SetChildrenInteractive,
     RequestDrag,
+    OpenFileChooser,
 }

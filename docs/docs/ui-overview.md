@@ -559,6 +559,54 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     }
     ```
 
+### Dom game objects
+
+1. [Input text](inputtext.md): [Input DOM element](https://www.w3schools.com/tags/tag_input.asp).
+    ```javascript
+    var image = scene.rexUI.add.inputText(config);
+    ```
+    or
+    ```javascript
+    class MyInputText extends RexPlugins.UI.InputText {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [File chooser](filechooser.md): Create a transparent file chooser button (`<input type="file">`).
+    ```javascript
+    var image = scene.rexUI.add.fileChooser(config);
+    ```
+    or
+    ```javascript
+    class MyFileChooser extends RexPlugins.UI.FileChooser {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [File drop zone](filedropzone.md): Create a div element for dropping file(s).
+    ```javascript
+    var image = scene.rexUI.add.fileDropZone(config);
+    ```
+    or
+    ```javascript
+    class MyFileDropZpne extends RexPlugins.UI.FileDropZpne {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
 ### Touch input
 
 1. [Click](button.md): Fires 'click' event when touch releasd after pressed.

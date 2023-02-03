@@ -29,6 +29,8 @@ import DragFactory from './drag/Factory';
 import DropDownListFactory from './dropdownlist/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
+import FileChooserFactory from './filechooser/Factory';
+import FileDropZoneFactory from './filedropzone/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
 import FolderFactory from './folder/Factory';
@@ -39,6 +41,7 @@ import GridTableFactory from './gridtable/Factory';
 import HiddenEditFactory from './hiddenedit/Factory';
 import HolyGrailFactory from './holygrail/Factory';
 import ImageBoxFactory from './imagebox/Factory';
+import InputTextFactory from './inputtext/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory';
@@ -95,6 +98,7 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
+import { OpenFileChooser } from './filechooser/FileChooser';
 import Make from './maker/YAMLMake';
 import MakerClass from './maker/Maker';
 import yaml from './yaml/yaml';
@@ -131,6 +135,8 @@ declare class Factories {
     dropDownList: typeof DropDownListFactory;
     dynamicTextFactory: typeof DynamicTextFactory;
     flip: typeof FlipFactory;
+    fileChooser: typeof FileChooserFactory;
+    fileDropZone: typeof FileDropZoneFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
     fixWidthSizer: typeof FixWidthSizerFactory;
     folder: typeof FolderFactory;
@@ -142,6 +148,7 @@ declare class Factories {
     holyGrail: typeof HolyGrailFactory;
     knob: typeof KnobFactory;
     imageBox: typeof ImageBoxFactory;
+    inputText: typeof InputTextFactory;
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
     lineProgressCanvas: typeof LineProgressCanvasFactory;
@@ -211,6 +218,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     fontSizeResize: typeof SetFontSizeToFitWidth;  // Backward compatibility
     setFontSizeToFitWidth: typeof SetFontSizeToFitWidth;
     requestDrag: typeof RequestDrag;
+    openFileChooser: typeof OpenFileChooser;
 
     isInTouching(
         gameObject: Phaser.GameObjects.GameObject,
@@ -262,6 +270,8 @@ import DynamicTextClass from './dynamictext/DynamicText';
 import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
 import { Fade as FadeClass } from './fade/Fade.js';
 import FlipClass from './flip/Flip';
+import { FileChooser as FileChooserClass } from './filechooser/FileChooser';
+import FileDropZoneClass from './filedropzone/FileDropZone';
 import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
 import FolderClass from './folder/Folder';
 import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
@@ -272,6 +282,7 @@ import GridTableClass from './gridtable/GridTable';
 import HiddenTextEditClass from './hiddenedit/HiddenEdit.js';
 import HolyGrailClass from './holygrail/HolyGrail';
 import ImageBoxClass from './imagebox/ImageBox';
+import InputTextClass from './inputtext/InputText';
 import InTouchingClass from './intouching/InTouching';
 import KnobClass from './knob/Knob';
 import LabelClass from './label/Label';
@@ -342,6 +353,8 @@ declare namespace UIPlugins {
     type EaseMove = EaseMoveClass;
     type Fade = FadeClass;
     type Flip = FlipClass;
+    type FileChooser = FileChooserClass;
+    type FileDropZone = FileDropZoneClass;
     type FixWidthButtons = FixWidthButtonsClass;
     type Folder = FolderClass;
     type FullWindowRectangle = FullWindowRectangleClass;
@@ -352,6 +365,7 @@ declare namespace UIPlugins {
     type HiddenEdit = HiddenTextEditClass;
     type HolyGrail = HolyGrailClass;
     type ImageBox = ImageBoxClass;
+    type InputText = InputTextClass;
     type InTouching = InTouchingClass;
     type Knob = KnobClass;
     type Label = LabelClass;

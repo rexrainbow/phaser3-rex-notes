@@ -2,17 +2,15 @@ import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
-import HiddenEdit from './hiddenedit/HiddenEdit';
-import Checkbox from './checkbox/Checkbox';
-import ToggleSwitch from './toggleswitch/ToggleSwitch';
-
-import Container from './container/Container';
-import Canvas from './canvas/Canvas';
-import CircleMaskImage from './circlemaskimage/CircleMaskImage';
-import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import DynamicText from './dynamictext/DynamicText';
 import TextPlayer from './textplayer/TextPlayer';
 import CanvasInput from './canvasinput/CanvasInput';
+import HiddenEdit from './hiddenedit/HiddenEdit';
+import Checkbox from './checkbox/Checkbox';
+import ToggleSwitch from './toggleswitch/ToggleSwitch';
+import Canvas from './canvas/Canvas';
+import CircleMaskImage from './circlemaskimage/CircleMaskImage';
+import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import CircularProgress from './circularprogress/CircularProgress';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas';
 import LineProgress from './lineprogress/LineProgress';
@@ -25,14 +23,14 @@ import TransitionImage from './transitionimage/TransitionImage';
 import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
-import ColorComponents from './colorinput/colorcomponents/ColorComponents';
-import ColorInput from './colorinput/colorinput/ColorInput';
-import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
-import ColorPicker from './colorinput/colorpicker/ColorPicker';
+import InputText from './inputtext/InputText';
+import { FileChooser } from './filechooser/FileChooser';
+import FileDropZone from './filedropzone/FileDropZone';
 import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 import NinePatch2 from './ninepatch2/NinePatch';
 
+import Container from './container/Container';
 import Sizer from './sizer/Sizer';
 import GridSizer from './gridsizer/GridSizer';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer';
@@ -64,6 +62,10 @@ import Folder from './folder/Folder';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents';
+import ColorInput from './colorinput/colorinput/ColorInput';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
+import ColorPicker from './colorinput/colorpicker/ColorPicker';
 import Tweaker from './tweaker/Tweaker';
 // import Sides from './sides/Sides';
 
@@ -105,6 +107,7 @@ import DelayPromise from '../../plugins/utils/promise/Delay'
 import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
+import { OpenFileChooser } from './filechooser/FileChooser';
 
 type FontSizeResize = typeof SetFontSizeToFitWidth;
 
@@ -113,23 +116,21 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
+    DynamicText,
+    TextPlayer,
+    CanvasInput,
     HiddenEdit,
     Checkbox,
     ToggleSwitch,
-
     Container,
     Canvas,
     CircleMaskImage,
     AlphaMaskImage,
-    DynamicText,
-    TextPlayer,
-    CanvasInput,
     FullWindowRectangle,
     Cover,
-    ColorComponents,
-    ColorInput,
-    ColorInputBase,
-    ColorPicker,
+    InputText,
+    FileChooser,
+    FileDropZone,
     Chart,
     CircularProgress,
     CircularProgressCanvas,
@@ -175,6 +176,10 @@ export {
     TextArea,
     ScrollablePanel,
     Toast,
+    ColorComponents,
+    ColorInput,
+    ColorInputBase,
+    ColorPicker,
     Tweaker,
     // Sides,
 
@@ -216,5 +221,6 @@ export {
     DelayPromise,
     GetViewport,
     SetChildrenInteractive,
-    RequestDrag
+    RequestDrag,
+    OpenFileChooser,
 }

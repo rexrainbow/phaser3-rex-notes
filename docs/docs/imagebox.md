@@ -1,6 +1,6 @@
 ## Introduction
 
-Keep aspect ratio of image game object after scale-down resizing.
+Keep aspect ratio of image game object when scale-down resizing.
 
 - Author: Rex
 - Game object
