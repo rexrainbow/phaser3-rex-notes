@@ -815,6 +815,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../imagebox/" class="md-nav__link">
+        Image box
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../transitionimage/" class="md-nav__link">
         Transition image
       </a>
@@ -7341,6 +7355,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scaled-image" class="md-nav__link">
+    Scaled image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#transition-image" class="md-nav__link">
     Transition image
   </a>
@@ -9016,6 +9037,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scaled-image" class="md-nav__link">
+    Scaled image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#transition-image" class="md-nav__link">
     Transition image
   </a>
@@ -9604,6 +9632,22 @@
 </li>
 </ul>
 </li>
+</ol>
+<h3 id="scaled-image">Scaled image<a class="headerlink" href="#scaled-image" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="../imagebox/">Image box</a>: Keep aspect ratio of image game object after scale-down resizing.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imageBox</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyTransitionImage</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ImageBox</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ol>
 <h3 id="transition-image">Transition image<a class="headerlink" href="#transition-image" title="Permanent link">&para;</a></h3>
 <ol>

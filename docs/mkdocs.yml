@@ -33,7 +33,8 @@ nav:
             - Video: video.md
             - Circle mask image: circlemaskimage.md
             - Alpha mask image: alphamaskimage.md
-            - Transition image: transitionimage.md
+            - Image box: imagebox.md
+            - Transition image: transitionimage.md            
         - Multiple images: 
             - Blitter: blitter.md
             - Particles:

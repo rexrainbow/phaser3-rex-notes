@@ -523,6 +523,24 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
 
 
+### Scaled image
+
+1. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.
+    ```javascript
+    var image = scene.rexUI.add.imageBox(x, y, texture, frame, config);
+    ```
+    or
+    ```javascript
+    class MyTransitionImage extends RexPlugins.UI.ImageBox {
+        constructor(scene, x, y, texture, frame, config) {
+            super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
 ### Transition image
 
 1. [Transition image](transitionimage.md): Transit texture to another one.

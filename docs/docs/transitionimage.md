@@ -158,7 +158,7 @@ var image = scene.make.rexTransitionImage({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var transitionimage = new MyTransitionImage(scene, x, y, width, height);
+    var transitionimage = new MyTransitionImage(scene, x, y, texture, frame, config);
     ```
 
 ### Transit

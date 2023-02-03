@@ -94,7 +94,7 @@ class ImageBox extends Container {
         var image = this.image;
         image.setTexture(texture, frame);
 
-        if (HasTexture(this, texture, frame)) {
+        if (texture !== null) {
             this.setChildVisible(image, true);
             this.fitImage();
 
