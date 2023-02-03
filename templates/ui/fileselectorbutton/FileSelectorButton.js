@@ -29,6 +29,7 @@ class FileSelectorButton extends Label {
                 return;
             }
 
+            files = Array.from(files);
             this.emit('select', files, this);
         }, this)
 

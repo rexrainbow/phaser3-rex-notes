@@ -10460,6 +10460,7 @@
         if (files.length === 0) {
           return;
         }
+        files = Array.from(files);
         this.emit('select', files, this);
       }, _assertThisInitialized(_this));
       return _this;
