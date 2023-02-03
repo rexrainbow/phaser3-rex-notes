@@ -1631,6 +1631,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-fileselectorbutton/</loc>
+         <lastmod>2023-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-fixwidthbuttons/</loc>
          <lastmod>2023-02-03</lastmod>
          <changefreq>daily</changefreq>

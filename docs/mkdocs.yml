@@ -398,6 +398,7 @@ nav:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md
         - Fix-width buttons: ui-fixwidthbuttons.md
+        - File selector button: ui-fileselectorbutton.md
     - Scrollable:
         - Scroll-able panel: ui-scrollablepanel.md
         - Grid table: ui-gridtable.md
