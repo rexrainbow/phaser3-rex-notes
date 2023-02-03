@@ -43,6 +43,7 @@ import NameValueLabel from './namevaluelabel/NameValueLabel';
 import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
+import FileSelectorButton from './fileselectorbutton/FileSelectorButton';
 import Dialog from './dialog/Dialog';
 import Choices from './choices/Choices';
 import HolyGrail from './holygrail/HolyGrail';
@@ -157,6 +158,7 @@ export {
     Buttons,
     GridButtons,
     FixWidthButtons,
+    FileSelectorButton,
     Dialog,
     Choices,
     HolyGrail,

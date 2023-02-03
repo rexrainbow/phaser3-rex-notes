@@ -228,6 +228,7 @@ module.exports = {
     'buttons': './templates/ui/buttons/Buttons.js',
     'gridbuttons': './templates/ui/gridbuttons/GridButtons.js',
     'fixwidthbuttons': './templates/ui/fixwidthbuttons/FixWidthButtons.js',
+    'fileselectorbutton': './templates/ui/fileselectorbutton/FileSelectorButton.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
     'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',
@@ -246,6 +247,8 @@ module.exports = {
     'triangle': './templates/ui/triangle/Triangle.js',
     'colorinput': './templates/ui/colorinput/colorinput/ColorInput.js',
     'colorpicker': './templates/ui/colorinput/colorpicker/ColorPicker.js',
+    'filechooser': './templates/ui/filechooser/FileChooser.js',
+    'filedropzone': './templates/ui/filedropzone/FileDropZone.js',
     'chart': './templates/ui/chart/Chart.js',
     'dialog': './templates/ui/dialog/Dialog.js',
     'choices': './templates/ui/choices/Choices.js',
@@ -286,6 +289,7 @@ module.exports = {
     'tweaker': './templates/ui/tweaker/Tweaker.js',
     'sides': './templates/ui/sides/Sides.js',
     'uimaker': './templates/ui/maker/Maker.js',
+
     // spinner
     'audiospinner': './templates/spinner/audio/Audio.js',
     'ballspinner': './templates/spinner/ball/Ball.js',

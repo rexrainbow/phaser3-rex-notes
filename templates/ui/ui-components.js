@@ -44,6 +44,7 @@ import NameValueLabel from './namevaluelabel/NameValueLabel.js';
 import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
+import FileSelectorButton from './fileselectorbutton/FileSelectorButton.js';
 import Dialog from './dialog/Dialog.js';
 import Choices from './choices/Choices.js';
 import HolyGrail from './holygrail/HolyGrail.js';
@@ -158,6 +159,7 @@ export {
     Buttons,
     GridButtons,
     FixWidthButtons,
+    FileSelectorButton,
     Dialog,
     Choices,
     HolyGrail,
