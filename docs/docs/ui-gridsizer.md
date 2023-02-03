@@ -490,4 +490,4 @@ sizer.resetGrid(column, row, columnProportions, rowProportions, space);
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

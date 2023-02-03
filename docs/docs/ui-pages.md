@@ -282,7 +282,7 @@ pages.setFadeInDuration(duration);
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 

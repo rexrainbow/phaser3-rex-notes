@@ -231,4 +231,4 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md).
+See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
