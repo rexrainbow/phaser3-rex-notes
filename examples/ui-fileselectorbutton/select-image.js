@@ -37,8 +37,9 @@ class Demo extends Phaser.Scene {
                     text: this.add.text(0, 0, 'Import image file'),
                     space: { left: 5, right: 5, top: 5, bottom: 5 },
 
-                    accept: 'image/*',
-                    selectFileCallback(files, fileSelectorButton) {
+                    accept: 'image/*'
+                })
+                    .on('select', function (files, fileSelectorButton) {
                         console.log(files);
                         var topUI = fileSelectorButton.getTopmostSizer();
                         var imageBox = topUI.getByName('imageBox', true);
@@ -47,8 +48,7 @@ class Demo extends Phaser.Scene {
                             .then(function () {
                                 imageBox.resize(imageBox.width, imageBox.height);
                             })
-                    }
-                }),
+                    }),
                 { proportion: 0, expand: true }
             )
             .add(

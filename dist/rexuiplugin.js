@@ -37352,10 +37352,6 @@
       _this.addChildrenMap('fileChooser', fileChooser);
       _this.setAccept(GetValue$1e(config, 'accept', ''));
       _this.setMultiple(GetValue$1e(config, 'multiple', false));
-      var selectFileCallback = GetValue$1e(config, 'selectFileCallback');
-      if (selectFileCallback) {
-        _this.on('select', selectFileCallback);
-      }
       fileChooser.on('change', function (gameObject) {
         var files = gameObject.files;
         if (files.length === 0) {

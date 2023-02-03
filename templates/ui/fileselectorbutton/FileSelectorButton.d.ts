@@ -3,16 +3,9 @@ import Label from '../label/Label';
 export default FileSelectorButton;
 
 declare namespace FileSelectorButton {
-    type SelectFileCallbackType = (
-        files: File[],
-        fileSelectorButton: FileSelectorButton,
-    ) => void;
-
     interface IConfig extends Label.IConfig {
         accept?: string,
         multiple?: boolean,
-
-        selectFileCallback?: SelectFileCallbackType
     }
 }
 

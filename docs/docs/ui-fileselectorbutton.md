@@ -151,8 +151,7 @@ var button = scene.add.fileSelectorButton({
     // enableLayer: false,
 
     // accept: '',
-    // multiple: false
-    // selectFileCallback: undefined,
+    // multiple: false,
 });
 // var fileChooser = scene.add.fileSelectorButton(x, y, width, height, config);
 ```
@@ -224,12 +223,7 @@ var button = scene.add.fileSelectorButton({
     - `'video/*'` : The user can pick all video files.
     - `file_extension` : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from.
 - `multiple` : Set `true` to select multiple files.
-- `selectFileCallback` : Callback invoked after selecting file(s).
-    ```javascript
-    function(files, button) {
 
-    }
-    ```
 
 ### Custom class
 

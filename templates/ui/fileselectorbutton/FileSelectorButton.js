@@ -18,20 +18,16 @@ class FileSelectorButton extends Label {
         this.setAccept(GetValue(config, 'accept', ''));
         this.setMultiple(GetValue(config, 'multiple', false));
 
-        var selectFileCallback = GetValue(config, 'selectFileCallback');
-        if (selectFileCallback) {
-            this.on('select', selectFileCallback);
-        }
+        fileChooser
+            .on('change', function (gameObject) {
+                var files = gameObject.files;
+                if (files.length === 0) {
+                    return;
+                }
 
-        fileChooser.on('change', function (gameObject) {
-            var files = gameObject.files;
-            if (files.length === 0) {
-                return;
-            }
-
-            files = Array.from(files);
-            this.emit('select', files, this);
-        }, this)
+                files = Array.from(files);
+                this.emit('select', files, this);
+            }, this)
 
     }
 
