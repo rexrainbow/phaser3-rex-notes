@@ -15900,7 +15900,9 @@
         }
         var oldValue = this._value;
         this._value = value;
-        this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        if (!this.syncValueFlag) {
+          this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        }
       }
     }, {
       key: "validate",
@@ -15921,6 +15923,12 @@
         this.value = value;
         return this;
       }
+
+      /* 
+      Internal method invoked when 
+      - inputRow.setBindingTarget(target), or 
+      - inputRow.syncTargetValue()
+      */
     }, {
       key: "syncValue",
       value: function syncValue(value) {

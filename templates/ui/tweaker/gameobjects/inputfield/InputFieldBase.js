@@ -29,7 +29,9 @@ class InputFiledBase extends Sizer {
         var oldValue = this._value;
         this._value = value;
 
-        this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        if (!this.syncValueFlag) {
+            this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+        }
     }
 
     getValue() {
@@ -41,6 +43,11 @@ class InputFiledBase extends Sizer {
         return this;
     }
 
+    /* 
+    Internal method invoked when 
+    - inputRow.setBindingTarget(target), or 
+    - inputRow.syncTargetValue()
+    */
     syncValue(value) {
         this.syncValueFlag = true;
         this.value = value;

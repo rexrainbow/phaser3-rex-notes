@@ -12,8 +12,14 @@ class Tree {
     }
 
     getFullPath(keys) {
-        if ((typeof (keys) === 'string') && (keys.charAt(0) === '.') && (this.refPath !== '')) {
-            keys = `${this.refPath}${keys}`;
+        if ((typeof (keys) === 'string') && (keys.charAt(0) === '.')) {
+            if (keys === '.') {
+                keys = this.refPath;
+            } else if (this.refPath !== '') {
+                keys = `${this.refPath}${keys}`;
+            } else { // this.refPath === ''
+                keys = keys.substring(1);
+            }
         }
         return keys;
     }
