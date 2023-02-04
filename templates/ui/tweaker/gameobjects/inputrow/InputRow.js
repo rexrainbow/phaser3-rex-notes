@@ -10,6 +10,10 @@ class InputRow extends Sizer {
         super(scene, config);
         this.type = 'rexTweaker.InputRow';
 
+        this.bindingTarget = undefined;
+        this.bindTargetKey = undefined;
+        this.autoUpdateEnable = true;
+
         var inputTitle = config.inputTitle;
         var inputField = config.inputField;
         var background = config.background;

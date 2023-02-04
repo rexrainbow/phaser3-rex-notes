@@ -15709,11 +15709,18 @@
       inputField
       // Set text value to object when closing editor
       .on('valuechange', function (value) {
-        if (!this.bindingTarget) {
+        if (!this.bindingTarget || !this.autoUpdateEnable) {
           return;
         }
         this.bindingTarget[this.bindTargetKey] = value;
       }, this);
+      return this;
+    },
+    setAutoUpdateEnable: function setAutoUpdateEnable(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      this.autoUpdateEnable = enable;
       return this;
     },
     setBindingTarget: function setBindingTarget(target, key) {
@@ -15733,7 +15740,7 @@
         return this;
       }
       var inputField = this.childrenMap.inputField;
-      inputField.setValue(this.bindingTarget[this.bindTargetKey]);
+      inputField.syncValue(this.bindingTarget[this.bindTargetKey]);
       return this;
     }
   };
@@ -15765,7 +15772,7 @@
         return;
       }
       // Sync new value
-      inputField.setValue(newValue);
+      inputField.syncValue(newValue);
     }
   };
 
@@ -15800,6 +15807,9 @@
       _classCallCheck(this, InputRow);
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker.InputRow';
+      _this.bindingTarget = undefined;
+      _this.bindTargetKey = undefined;
+      _this.autoUpdateEnable = true;
       var inputTitle = config.inputTitle;
       var inputField = config.inputField;
       var background = config.background;
@@ -15890,14 +15900,12 @@
         }
         var oldValue = this._value;
         this._value = value;
-        if (this.listenerCount('valuechange') > 0) {
-          this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
-        }
+        this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
       }
     }, {
       key: "validate",
       value: function validate(newValue) {
-        if (!this.validateCallback) {
+        if (this.syncValueFlag || !this.validateCallback) {
           return true;
         }
         return this.validateCallback(newValue, this._value, this.bindingTarget, this.bindingKey);
@@ -15911,6 +15919,14 @@
       key: "setValue",
       value: function setValue(value) {
         this.value = value;
+        return this;
+      }
+    }, {
+      key: "syncValue",
+      value: function syncValue(value) {
+        this.syncValueFlag = true;
+        this.value = value;
+        this.syncValueFlag = false;
         return this;
       }
 
@@ -25349,12 +25365,6 @@
 
     // Extra settings
     gameObject.setTextFormatCallback(config.format);
-    if (config.onValueChange) {
-      gameObject.on('valuechange', config.onValueChange);
-    }
-    if (config.onValidate) {
-      gameObject.setValidateCallback(config.onValidate);
-    }
     return gameObject;
   };
 
@@ -25400,6 +25410,7 @@
     var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
+    var inputField = inputSizer.childrenMap.inputField;
     var proportion;
     if (this.orientation === 1) {
       // y
@@ -25415,8 +25426,15 @@
       proportion: proportion,
       expand: true
     });
+    if (config.onValueChange) {
+      inputField.on('valuechange', config.onValueChange);
+    }
+    if (config.onValidate) {
+      inputField.setValidateCallback(config.onValidate);
+    }
 
     // Bind target
+    inputSizer.setAutoUpdateEnable(config.autoUpdate);
     inputSizer.setBindingTarget(object, key);
     if (config.monitor) {
       inputSizer.startMonitorTarget();

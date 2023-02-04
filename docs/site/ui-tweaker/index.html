@@ -9598,8 +9598,9 @@
 
     <span class="c1">// key: undefined,</span>
 
-    <span class="c1">// onValueChange: undefined,</span>
+    <span class="c1">// autoUpdate: true,</span>
     <span class="c1">// onValidate: undefined,</span>
+    <span class="c1">// onValueChange: undefined,    </span>
 <span class="p">})</span>
 </code></pre></div>
 <p>or</p>
@@ -9618,8 +9619,9 @@
 
     <span class="c1">// key: undefined,</span>
 
-    <span class="c1">// onValueChange: undefined,</span>
+    <span class="c1">// autoUpdate: true,</span>
     <span class="c1">// onValidate: undefined,</span>
+    <span class="c1">// onValueChange: undefined,    </span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -9641,13 +9643,9 @@
 <li><code>undefined</code> : Don't add this child. Default value.</li>
 </ul>
 </li>
-<li><code>onValueChange</code> : <ul>
-<li>Callback invoked when binding value changing.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">bindingTarget</span><span class="p">,</span> <span class="nx">bindingKey</span><span class="p">)</span> <span class="p">{</span> 
-
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>undefined</code> : Ignore this feature. Default value.</li>
+<li><code>autoUpdate</code> : <ul>
+<li><code>true</code> : Update binding key when user input. Default behavior.</li>
+<li><code>false</code> : Use <code>onValueChange</code> to set value of binding key when user input.</li>
 </ul>
 </li>
 <li><code>onValidate</code> : <ul>
@@ -9661,6 +9659,15 @@
 </ul>
 </li>
 <li><code>undefined</code> : Always accept new value changing. Default behavior.</li>
+</ul>
+</li>
+<li><code>onValueChange</code> : <ul>
+<li>Callback invoked when binding value changing.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">bindingTarget</span><span class="p">,</span> <span class="nx">bindingKey</span><span class="p">)</span> <span class="p">{</span> 
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>undefined</code> : Ignore this feature. Default value.</li>
 </ul>
 </li>
 </ul>

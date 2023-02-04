@@ -49,7 +49,8 @@ var AddInput = function (object, key, config) {
     }
 
     // Bind target
-    inputSizer.setBindingTarget(object, key, config.autoUpdate);
+    inputSizer.setAutoUpdateEnable(config.autoUpdate);
+    inputSizer.setBindingTarget(object, key);
 
     if (config.monitor) {
         inputSizer.startMonitorTarget();

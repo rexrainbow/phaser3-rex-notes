@@ -4,7 +4,7 @@ export default {
         inputField
             // Set text value to object when closing editor
             .on('valuechange', function (value) {
-                if (!this.bindingTarget || !this.autoUpdateBindingKey) {
+                if (!this.bindingTarget || !this.autoUpdateEnable) {
                     return;
                 }
 
@@ -14,13 +14,16 @@ export default {
         return this;
     },
 
-    setBindingTarget(target, key, autoUpdate) {
-        if (autoUpdate === undefined) {
-            autoUpdate = true;
+    setAutoUpdateEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
+        this.autoUpdateEnable = enable;
+        return this;
+    },
 
+    setBindingTarget(target, key) {
         this.bindingTarget = target;
-        this.autoUpdateBindingKey = autoUpdate;
 
         if (key !== undefined) {
             this.setBindingTargetKey(key);
@@ -45,5 +48,6 @@ export default {
 
         return this;
     },
+
 
 }

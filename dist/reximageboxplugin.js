@@ -2334,8 +2334,8 @@
         this.image.setFlipY(value);
       }
     }, {
-      key: "fitImage",
-      value: function fitImage() {
+      key: "scaleImage",
+      value: function scaleImage() {
         var image = this.image;
         var result = FitTo(image, {
           width: this.width,
@@ -2349,7 +2349,7 @@
       key: "resize",
       value: function resize(width, height) {
         _get(_getPrototypeOf(ImageBox.prototype), "resize", this).call(this, width, height);
-        this.fitImage();
+        this.scaleImage();
         return this;
       }
     }, {
@@ -2359,7 +2359,7 @@
         image.setTexture(texture, frame);
         if (texture !== null) {
           this.setChildVisible(image, true);
-          this.fitImage();
+          this.scaleImage();
         } else {
           this.setChildVisible(image, false);
         }
