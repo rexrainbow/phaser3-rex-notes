@@ -24,6 +24,7 @@ var AddInput = function (object, key, config) {
     var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow(this.scene, config, inputRowStyle);
+    var inputField = inputSizer.childrenMap.inputField;
 
     var proportion;
     if (this.orientation === 1) { // y
@@ -39,8 +40,16 @@ var AddInput = function (object, key, config) {
         { proportion: proportion, expand: true }
     );
 
+    if (config.onValueChange) {
+        inputField.on('valuechange', config.onValueChange);
+    }
+
+    if (config.onValidate) {
+        inputField.setValidateCallback(config.onValidate);
+    }
+
     // Bind target
-    inputSizer.setBindingTarget(object, key);
+    inputSizer.setBindingTarget(object, key, config.autoUpdate);
 
     if (config.monitor) {
         inputSizer.startMonitorTarget();

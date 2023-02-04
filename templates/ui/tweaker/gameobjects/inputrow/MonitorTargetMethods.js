@@ -30,7 +30,7 @@ export default {
             return;
         }
         // Sync new value
-        inputField.setValue(newValue, true);
+        inputField.syncValue(newValue);
 
     },
 }

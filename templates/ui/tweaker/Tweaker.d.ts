@@ -155,6 +155,7 @@ declare namespace Tweaker {
     interface IAddInputConfig {
         bindingTarget?: Object,
         bindingKey?: string,
+        autoUpdate?: boolean,
 
         view?: 'string' | 'number' | 'range' | 'list' | 'buttons' | 'boolean' | 'color',
 
@@ -179,7 +180,15 @@ declare namespace Tweaker {
 
         key?: string,
 
-        onValueChange?: (value: any) => void,
+        onValidate?: (
+            newValue: any, oldValue: any,
+            bindingTarget: Object, bindingKey: string
+        ) => boolean;
+
+        onValueChange?: (
+            newValue: any, oldValue: any,
+            bindingTarget: Object, bindingKey: string
+        ) => void,
     }
 
     interface IAddButtonConfig {

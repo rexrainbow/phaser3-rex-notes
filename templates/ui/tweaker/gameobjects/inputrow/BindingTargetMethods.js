@@ -4,17 +4,23 @@ export default {
         inputField
             // Set text value to object when closing editor
             .on('valuechange', function (value) {
-                if (!this.bindingTarget || inputField.valueFromTarget) {
+                if (!this.bindingTarget || !this.autoUpdateBindingKey) {
                     return;
                 }
+
                 this.bindingTarget[this.bindTargetKey] = value;
             }, this);
 
         return this;
     },
 
-    setBindingTarget(target, key) {
+    setBindingTarget(target, key, autoUpdate) {
+        if (autoUpdate === undefined) {
+            autoUpdate = true;
+        }
+
         this.bindingTarget = target;
+        this.autoUpdateBindingKey = autoUpdate;
 
         if (key !== undefined) {
             this.setBindingTargetKey(key);
@@ -35,7 +41,7 @@ export default {
         }
 
         var inputField = this.childrenMap.inputField;
-        inputField.setValue(this.bindingTarget[this.bindTargetKey], true);
+        inputField.syncValue(this.bindingTarget[this.bindTargetKey]);
 
         return this;
     },

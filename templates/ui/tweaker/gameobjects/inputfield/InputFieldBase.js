@@ -1,11 +1,6 @@
 import Sizer from '../../../sizer/Sizer.js';
 
 class InputFiledBase extends Sizer {
-    constructor(scene, config) {
-        super(scene, config);
-        this.valueFromTarget = true;
-    }
-
     get bindingTarget() {
         return this.getParentSizer().bindingTarget;
     }
@@ -19,7 +14,7 @@ class InputFiledBase extends Sizer {
     }
 
     validate(newValue) {
-        if (this.valueFromTarget || !this.validateCallback) {
+        if (this.syncValueFlag || !this.validateCallback) {
             return true;
         }
         return this.validateCallback(newValue, this._value, this.bindingTarget, this.bindingKey);
@@ -41,16 +36,15 @@ class InputFiledBase extends Sizer {
         return this.value;
     }
 
-    setValue(value, valueFromTarget) {
-        if (valueFromTarget === undefined) {
-            valueFromTarget = false;
-        }
-
-        this.valueFromTarget = valueFromTarget;
-
+    setValue(value) {
         this.value = value;
+        return this;
+    }
 
-        this.valueFromTarget = true;
+    syncValue(value) {
+        this.syncValueFlag = true;
+        this.value = value;
+        this.syncValueFlag = false;
 
         return this;
     }

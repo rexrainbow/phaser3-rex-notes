@@ -43,10 +43,10 @@ class Demo extends Phaser.Scene {
                     format(value) {             // Formatter of text
                         return value.toFixed(2);
                     },
+                    onValidate(newValue) { return (newValue < 400) },
                     onValueChange(value, oldeValue, target, key) {
                         console.log(`${key}=${value}`)
                     },
-                    onValidate(newValue) { return (newValue < 400) }
                 }
             )
             .addInput(
