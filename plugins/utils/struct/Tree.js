@@ -3,8 +3,27 @@ import Clear from '../object/Clear.js';
 import DeepClone from '../object/DeepClone.js';
 
 class Tree {
-    constructor() {
-        this.data = {};
+    constructor(data) {
+        if (data === undefined) {
+            data = {};
+        }
+        this.data = data;
+        this.refPath = '';
+    }
+
+    getFullPath(keys) {
+        if ((typeof (keys) === 'string') && (keys.charAt(0) === '.') && (this.refPath !== '')) {
+            keys = `${this.refPath}${keys}`;
+        }
+        return keys;
+    }
+
+    setRefPath(keys) {
+        if (keys === undefined) {
+            keys = '';
+        }
+        this.refPath = this.getFullPath(keys);
+        return this;
     }
 
     setValue(keys, value) {
@@ -13,7 +32,7 @@ class Tree {
         } else if (value === undefined) {
             this.data = keys; // JSON keys
         } else {
-            SetValue(this.data, keys, value);
+            SetValue(this.data, this.getFullPath(keys), value);
         }
         return this;
     }
@@ -23,17 +42,10 @@ class Tree {
             return this.data;
         } else {
             if (typeof (keys) === 'string') {
-                keys = keys.split('.');
+                keys = this.getFullPath(keys).split('.');
             }
 
-            var entry = this.data;
-            for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                if (!IsObject(entry)) {
-                    return undefined;
-                }
-                entry = entry[keys[i]];
-            }
-            return entry;
+            return GetEntry(this.data, keys);
         }
     }
 
@@ -46,18 +58,11 @@ class Tree {
             this.clear();
         } else {
             if (typeof (keys) === 'string') {
-                keys = keys.split('.');
+                keys = this.getFullPath(keys).split('.');
             }
 
             var lastKey = keys.pop();
-            var entry = this.data;
-            for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                if (!IsObject(entry)) {
-                    // Stop here
-                    return this;
-                }
-                entry = entry[keys[i]];
-            }
+            var entry = GetEntry(this.data, keys);
 
             if (IsObject(entry)) {
                 delete entry[lastKey];
@@ -67,14 +72,47 @@ class Tree {
         return this;
     }
 
+    hasKey(keys) {
+        if (typeof (keys) === 'string') {
+            keys = this.getFullPath(keys).split('.');
+        }
+
+        var lastKey = keys.pop();
+        var entry = GetEntry(this.data, keys);
+        if (!IsObject(entry)) {
+            return false;
+        }
+
+        return entry.hasOwnProperty(lastKey)
+    }
+
     clear() {
         Clear(this.data);
         return this;
+    }
+
+    clone(cloneData) {
+        var data = (cloneData) ? this.cloneValue() : this.data;
+        var tree = new Tree(data);
+        tree.setRefPath(this.refPath);
+        return tree;
     }
 }
 
 var IsObject = function (obj) {
     return (obj != null) && (typeof (obj) === 'object')
 }
+
+var GetEntry = function (data, keys) {
+    var entry = data;
+    for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        if (!IsObject(entry)) {
+            return undefined;
+        }
+        entry = entry[keys[i]];
+    }
+    return entry;
+}
+
 
 export default Tree;
