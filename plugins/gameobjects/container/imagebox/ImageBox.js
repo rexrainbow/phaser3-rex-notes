@@ -74,7 +74,7 @@ class ImageBox extends Container {
         this.image.setFlipY(value);
     }
 
-    fitImage() {
+    scaleImage() {
         var image = this.image;
 
         var result = FitToSize(image, { width: this.width, height: this.height }, true);
@@ -86,7 +86,7 @@ class ImageBox extends Container {
     resize(width, height) {
         super.resize(width, height);
 
-        this.fitImage();
+        this.scaleImage();
         return this;
     }
 
@@ -96,7 +96,7 @@ class ImageBox extends Container {
 
         if (texture !== null) {
             this.setChildVisible(image, true);
-            this.fitImage();
+            this.scaleImage();
 
         } else {
             this.setChildVisible(image, false);

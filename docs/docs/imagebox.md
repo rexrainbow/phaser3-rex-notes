@@ -160,6 +160,14 @@ image.setTexture();
 
 Will set internal image game object to invisible.
 
+### Scale image
+
+```javascript
+image.scaleImage();
+```
+
+`image.resize(width, height)`, or `image.setTexture(key, frame)` will invoke this method internally.
+
 ### Internal image game object
 
 ```javascript
