@@ -12,8 +12,13 @@ declare namespace NameValueLabel {
             left?: number, right?: number, top?: number, bottom?: number,
 
             icon?: number, iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
-            text?: number,
-            separator?: number, separatorLeft?: number, separatorRight?: number,
+
+            name?: number, 
+            value?: number,
+
+            bar?: number, barBottom?: number, barLeft?: number, barRight?: number,
+
+            action?: number, actionTop?: number, actionBottom?: number, actionLeft?: number, actionRight?: number,
         },
 
         background?: Phaser.GameObjects.GameObject,
@@ -21,19 +26,18 @@ declare namespace NameValueLabel {
         icon?: Phaser.GameObjects.GameObject,
         iconMask?: boolean,
 
-        textOrientation?: Sizer.OrientationTypes;
-        title?: Phaser.GameObjects.GameObject,
-        text?: Phaser.GameObjects.GameObject,
+        nameText?: Phaser.GameObjects.GameObject,
+        valueText?: Phaser.GameObjects.GameObject,
         bar?: Phaser.GameObjects.GameObject | LineProgressCanvas.IConfig,
+
+        action?: Phaser.GameObjects.GameObject,
+        actionMask?: boolean,
 
         valueTextFormatCallback?: (
             value: number,
             min: number,
             max: number
         ) => string,
-
-        action?: Phaser.GameObjects.GameObject,
-        actionMask?: boolean,
 
         align?: {
             text?: 'left' | 'right' | 'center' | number,
@@ -54,13 +58,11 @@ declare class NameValueLabel extends Sizer {
         config?: NameValueLabel.IConfig
     );
 
-    title: string;
-    setTitle(text: string): this;
-    appendTitle(text: string): this;
+    nameText: string;
+    setNameText(value?:string):this;
 
-    text: string;
-    setText(text: string): this;
-    appendText(text: string): this;
+    valueText: string;
+    setValueText(value?:string):this;
 
     barValue: number;
     setBarValue(

@@ -36,8 +36,8 @@ declare class ImageBox extends ContainerLite {
     image: Phaser.GameObjects.GameObject;
 
     setTexture(texture?: string, frame?: string): this;
-    texture: Phaser.Textures.Texture;
-    frame: Phaser.Textures.Frame;
+    readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
+    readonly frame: Phaser.Textures.Frame;
 
     setFlipX(value: boolean): this;
     setFlipY(value: boolean): this;
