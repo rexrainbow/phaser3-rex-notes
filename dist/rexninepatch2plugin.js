@@ -390,7 +390,7 @@
   }();
 
   var GameObject = Phaser.GameObjects.GameObject;
-  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
@@ -400,7 +400,7 @@
     function Blitter(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, Blitter);
-      if (IsPlainObject$3(x)) {
+      if (IsPlainObject$4(x)) {
         config = x;
         x = GetValue$4(config, 'x', 0);
         y = GetValue$4(config, 'y', 0);
@@ -483,6 +483,49 @@
     }
   };
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * This is a slightly modified version of jQuery.isPlainObject.
+   * A plain object is an object whose internal class property is [object Object].
+   *
+   * @function Phaser.Utils.Objects.IsPlainObject
+   * @since 3.0.0
+   *
+   * @param {object} obj - The object to inspect.
+   *
+   * @return {boolean} `true` if the object is plain, otherwise `false`.
+   */
+  var IsPlainObject$3 = function IsPlainObject(obj) {
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
+      return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try {
+      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+  };
+
   var DeepClone = function DeepClone(inObject) {
     var outObject;
     var value;
@@ -494,11 +537,15 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    for (key in inObject) {
-      value = inObject[key];
+    if (IsPlainObject$3(inObject)) {
+      for (key in inObject) {
+        value = inObject[key];
 
-      //  Recursively (deep) copy for nested objects, including arrays
-      outObject[key] = DeepClone(value);
+        //  Recursively (deep) copy for nested objects, including arrays
+        outObject[key] = DeepClone(value);
+      }
+    } else {
+      outObject = inObject;
     }
     return outObject;
   };

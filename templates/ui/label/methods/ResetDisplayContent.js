@@ -1,6 +1,10 @@
 var ResetDisplayContent = function (config) {
     if (config === undefined) {
         config = {};
+    } else if (typeof (config) === 'string') {
+        config = {
+            text: config,
+        }
     }
 
     var text = config.text || '';

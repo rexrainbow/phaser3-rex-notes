@@ -1,14 +1,23 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
-import CreateRoundRectangle from './CreateRoundRectangle.js';
-import CreateText from './CreateText.js';
+import CreateBackground from './CreateBackground.js';
+import CreateBBCodeText from './CreateBBCodeText.js';
 import CreateImage from './CreateImage.js';
 
-var BuildDisplayLabelConfig = function (scene, config) {
-    config = (config) ? DeepClone(config) : {};
+var BuildDisplayLabelConfig = function (scene, config, deepCloneConfig) {
+    if (deepCloneConfig === undefined) {
+        deepCloneConfig = true;
+    }
 
-    config.background = CreateRoundRectangle(scene, config.background);
+    if (deepCloneConfig) {
+        config = (config) ? DeepClone(config) : {};
+    } else if (!config) {
+        config = {};
+    }
 
-    config.text = CreateText(scene, config.text);
+
+    config.background = CreateBackground(scene, config.background);
+
+    config.text = CreateBBCodeText(scene, config.text);
 
     if (config.icon !== null) {
         config.icon = CreateImage(scene, config.icon);

@@ -48,6 +48,7 @@ import FixWidthButtonsFactory from './fixwidthbuttons/Factory.js';
 import FileSelectorButtonFactory from './fileselectorbutton/Factory.js';
 import DialogFactory from './dialog/Factory.js';
 import ChoicesFactory from './choices/Factory.js';
+import ConfirmDialogFactory from './confirmdialog/Factory.js';
 import HolyGrailFactory from './holygrail/Factory.js';
 import TabsFactory from './tabs/Factory.js';
 import SliderFactory from './slider/Factory.js';

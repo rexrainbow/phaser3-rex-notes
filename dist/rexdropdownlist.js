@@ -9861,6 +9861,10 @@
   var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
+    } else if (typeof config === 'string') {
+      config = {
+        text: config
+      };
     }
     var text = config.text || '';
     this.setText(text);

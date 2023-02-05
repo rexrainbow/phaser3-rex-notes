@@ -91,6 +91,7 @@ declare class Label extends Sizer {
     actionHeight: number;
 
     resetDisplayContent(
-        config?: Label.IResetDisplayContentConfig
+        config?: string | Label.IResetDisplayContentConfig
     ): this;
+
 }

@@ -40,8 +40,7 @@ class Demo extends Phaser.Scene {
                 panel.setBindingTarget(circle1);
             })
 
-        // Bind target later
-        // panel.setBindingTarget(circle0);
+        panel.setBindingTarget(circle0);
     }
 
     update() {

@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer';
+import BBCodeText from '../bbcodetext/BBCodeText';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
@@ -43,7 +44,7 @@ declare namespace Tweaker {
     interface ILabelConfig {
         background?: IRoundRectangleConfig,
 
-        text?: Phaser.GameObjects.TextStyle,
+        text?: BBCodeText.TextStyle,
 
         iconMask?: boolean,
         iconSize?: number, iconWidth?: number, iconHeight?: number,
