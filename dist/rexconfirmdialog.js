@@ -12485,7 +12485,803 @@
     }
   };
 
+  /*
+  graph TD
+
+  IDLE --> TRAN_OPEN
+  TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
+  OPEN --> TRANS_CLOSE
+  TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
+  CLOSE --> TRAN_OPEN
+  */
+  var State = /*#__PURE__*/function (_FSM) {
+    _inherits(State, _FSM);
+    var _super = _createSuper(State);
+    function State(parent, config) {
+      var _this;
+      _classCallCheck(this, State);
+      _this = _super.call(this, config);
+      _this.parent = parent;
+      var initState = config.initState || 'IDLE';
+      _this.start(initState);
+      return _this;
+    }
+    _createClass(State, [{
+      key: "init",
+      value: function init() {
+        this.start('IDLE');
+      }
+
+      // IDLE -> TRANS_OPNE
+    }, {
+      key: "next_IDLE",
+      value: function next_IDLE() {
+        return 'TRANS_OPNE';
+      }
+      // IDLE
+
+      // TRANS_OPNE -> OPEN
+    }, {
+      key: "next_TRANS_OPNE",
+      value: function next_TRANS_OPNE() {
+        return 'OPEN';
+      }
+    }, {
+      key: "enter_TRANS_OPNE",
+      value: function enter_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        if (transitionBehavior.transitInTime > 0) {
+          var delay = transitionBehavior.runTransitionInCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
+      }
+    }, {
+      key: "exit_TRANS_OPNE",
+      value: function exit_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // TRANS_OPNE
+
+      // OPEN -> TRANS_CLOSE
+    }, {
+      key: "next_OPEN",
+      value: function next_OPEN() {
+        return 'TRANS_CLOSE';
+      }
+    }, {
+      key: "enter_OPEN",
+      value: function enter_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onOpen();
+      }
+    }, {
+      key: "exit_OPEN",
+      value: function exit_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // OPEN
+
+      // TRANS_CLOSE -> CLOSE
+    }, {
+      key: "next_TRANS_CLOSE",
+      value: function next_TRANS_CLOSE() {
+        return 'CLOSE';
+      }
+    }, {
+      key: "enter_TRANS_CLOSE",
+      value: function enter_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        if (transitionBehavior.transitOutTime > 0) {
+          var delay = transitionBehavior.runTransitionOutCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
+      }
+    }, {
+      key: "exit_TRANS_CLOSE",
+      value: function exit_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // TRANS_CLOSE
+
+      // CLOSE -> TRANS_OPNE
+    }, {
+      key: "next_CLOSE",
+      value: function next_CLOSE() {
+        return 'TRANS_OPNE';
+      }
+    }, {
+      key: "enter_CLOSE",
+      value: function enter_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onClose();
+      }
+    }, {
+      key: "exit_CLOSE",
+      value: function exit_CLOSE() {}
+      // CLOSE
+    }, {
+      key: "canOpen",
+      value: function canOpen() {
+        return this.state === 'IDLE' || this.state === 'CLOSE';
+      }
+    }, {
+      key: "canClose",
+      value: function canClose() {
+        return this.state === 'IDLE' || this.state === 'OPEN';
+      }
+    }]);
+    return State;
+  }(FSM);
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay,
+    // delay
+    sceneEE.once,
+    // callback
+    [
+    // Event name of scene
+    'postupdate',
+    // Callback
+    function () {
+      callback.call(scope, args);
+    }],
+    // args
+    sceneEE // scope, scene's EE
+    );
+
+    return timer;
+  };
+
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.delayCallTimer) {
+        this.delayCallTimer.remove(false);
+        this.delayCallTimer = undefined;
+      }
+      return this;
+    }
+  };
+
+  var ConfigurationMethods = {
+    setTransitInTime: function setTransitInTime(time) {
+      this.transitInTime = time;
+      return this;
+    },
+    setTransitOutTime: function setTransitOutTime(time) {
+      this.transitOutTime = time;
+      return this;
+    },
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitInCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    },
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitOutCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    }
+  };
+
+  var OpenMethods = {
+    // Interanl method
+    runTransitionInCallback: function runTransitionInCallback() {
+      this.transitInCallback(this.parent, this.transitInTime);
+      return this.transitInTime;
+    },
+    // Override
+    onOpen: function onOpen() {},
+    requestOpen: function requestOpen(openEventData, duration) {
+      if (!this._state.canOpen()) {
+        return this;
+      }
+      this.openEventData = arguments.length > 0 ? openEventData : this.parent;
+      var transitionTimeSave = this.transitInTime;
+      if (duration !== undefined) {
+        this.transitInTime = duration;
+      }
+      this._state["goto"]('TRANS_OPNE');
+      this.transitInTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var CloseMethods = {
+    // Interanl method
+    runTransitionOutCallback: function runTransitionOutCallback() {
+      this.transitOutCallback(this.parent, this.transitOutTime);
+      return this.transitOutTime;
+    },
+    // Override
+    onClose: function onClose() {
+      if (this.oneShotMode) {
+        this.parent.destroy();
+        // Will invoke `this.destroy()`
+      }
+    },
+    requestClose: function requestClose(closeEventData, duration) {
+      if (!this._state.canClose) {
+        return this;
+      }
+      this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
+      var transitionTimeSave = this.transitOutTime;
+      if (duration !== undefined) {
+        this.transitOutTime = duration;
+      }
+      this._state["goto"]('TRANS_CLOSE');
+      this.transitOutTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var methods$4 = {};
+  Object.assign(methods$4, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
+
   var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(OpenCloseTransition, _ComponentBase);
+    var _super = _createSuper(OpenCloseTransition);
+    function OpenCloseTransition(gameObject, config) {
+      var _this;
+      _classCallCheck(this, OpenCloseTransition);
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+      // this.scene
+
+      _this.setTransitInTime(GetValue$c(config, 'duration.in', 200));
+      _this.setTransitOutTime(GetValue$c(config, 'duration.out', 200));
+      _this.setTransitInCallback(GetValue$c(config, 'transitIn'));
+      _this.setTransitOutCallback(GetValue$c(config, 'transitOut'));
+      _this.oneShotMode = GetValue$c(config, 'destroy', false);
+      _this.delayCallTimer = undefined;
+      _this._state = new State(_assertThisInitialized(_this), {
+        eventEmitter: false,
+        initState: GetValue$c(config, 'initState', 'IDLE')
+      });
+      _this.openEventData = undefined;
+      _this.closeEventData = undefined;
+      return _this;
+    }
+    _createClass(OpenCloseTransition, [{
+      key: "state",
+      get: function get() {
+        return this._state.state;
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.transitInCallback = undefined;
+        this.transitOutCallback = undefined;
+        this.openEventData = undefined;
+        this.closeEventData = undefined;
+        this.removeDelayCall();
+        _get(_getPrototypeOf(OpenCloseTransition.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }]);
+    return OpenCloseTransition;
+  }(ComponentBase);
+  Object.assign(OpenCloseTransition.prototype, methods$4);
+
+  var Rectangle$1 = Phaser.GameObjects.Rectangle;
+  var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
+    _inherits(FullWindowRectangle, _Rectangle);
+    var _super = _createSuper(FullWindowRectangle);
+    function FullWindowRectangle(scene, color, alpha) {
+      var _this;
+      _classCallCheck(this, FullWindowRectangle);
+      _this = _super.call(this, scene, 0, 0, 2, 2, color, 1);
+      _this.setAlpha(alpha);
+      _this.setScrollFactor(0);
+      _this.boot();
+      return _this;
+    }
+    _createClass(FullWindowRectangle, [{
+      key: "boot",
+      value: function boot() {
+        var scene = this.scene;
+        scene.sys.events.on('prerender', this.resize, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        // preDestroy method does not have fromScene parameter
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
+        }
+        this.scene.sys.events.off('prerender', this.resize, this);
+        _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
+      }
+    }, {
+      key: "tint",
+      get: function get() {
+        return this.fillColor;
+      },
+      set: function set(value) {
+        this.setFillStyle(value, this.fillAlpha);
+      }
+    }, {
+      key: "resize",
+      value: function resize() {
+        var scene = this.scene;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
+        var gameWidth = gameSize.width,
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
+        var x = gameWidth / 2,
+          y = gameHeight / 2,
+          width = gameWidth * scale,
+          height = gameHeight * scale;
+        if (this.x !== x || this.y !== y) {
+          this.setPosition(x, y);
+        }
+        if (this.width !== width || this.height !== height) {
+          this.setSize(width, height).setOrigin(0.5);
+        }
+      }
+    }]);
+    return FullWindowRectangle;
+  }(Rectangle$1);
+
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var TouchEventStop = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(TouchEventStop, _ComponentBase);
+    var _super = _createSuper(TouchEventStop);
+    function TouchEventStop(gameObject, config) {
+      var _this;
+      _classCallCheck(this, TouchEventStop);
+      _this = _super.call(this, gameObject, {
+        eventEmitter: false
+      });
+      // No event emitter
+      // this.parent = gameObject;
+
+      _this.resetFromJSON(config);
+      _this.boot();
+      return _this;
+    }
+    _createClass(TouchEventStop, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setHitAreaMode(GetValue$b(o, 'hitAreaMode', 0));
+        this.setEnable(GetValue$b(o, 'enable', true));
+        this.setStopMode(GetValue$b(o, 'stopAllLevels', true));
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        this.parent.on('pointerdown', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerup', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointermove', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerover', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerout', function (pointer, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this);
+      }
+    }, {
+      key: "setHitAreaMode",
+      value: function setHitAreaMode(mode) {
+        if (typeof mode === 'string') {
+          mode = HitAreaMode[mode];
+        }
+        var gameObject = this.parent;
+        if (gameObject.input) {
+          gameObject.removeInteractive();
+        }
+        if (mode === 0) {
+          gameObject.setInteractive();
+        } else {
+          gameObject.setInteractive({
+            hitArea: {},
+            hitAreaCallback: function hitAreaCallback() {
+              return true;
+            }
+          });
+        }
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+        if (e) {
+          this.parent.setInteractive();
+        } else {
+          this.parent.disableInteractive();
+        }
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setStopMode",
+      value: function setStopMode(allLevels) {
+        if (allLevels === undefined) {
+          allLevels = true;
+        }
+        this.stopAllLevels = allLevels;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }]);
+    return TouchEventStop;
+  }(ComponentBase);
+  var HitAreaMode = {
+    "default": 0,
+    fullWindow: 1
+  };
+
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var Cover = /*#__PURE__*/function (_FullWindowRectangle) {
+    _inherits(Cover, _FullWindowRectangle);
+    var _super = _createSuper(Cover);
+    function Cover(scene, config) {
+      var _this;
+      _classCallCheck(this, Cover);
+      var fillColor = GetValue$a(config, 'color', 0x0);
+      var fillAlpha = GetValue$a(config, 'alpha', 0.8);
+      _this = _super.call(this, scene, fillColor, fillAlpha);
+      _this.touchEventStop = new TouchEventStop(_assertThisInitialized(_this), {
+        hitAreaMode: 1
+      });
+      return _this;
+    }
+    return _createClass(Cover);
+  }(FullWindowRectangle);
+
+  var CreateCover = function CreateCover(gameObject, config) {
+    var scene = gameObject.scene;
+    var cover = new Cover(scene, config);
+    scene.add.existing(cover);
+
+    // Put cover behind game object
+    if (gameObject.isRexContainerLite) {
+      gameObject.moveDepthBelow(cover);
+      gameObject.pin(cover, {
+        syncPosition: false,
+        syncRotation: false,
+        syncScale: false,
+        syncAlpha: false,
+        syncScrollFactor: false
+      });
+    } else {
+      scene.children.moveBelow(cover, gameObject);
+    }
+    return cover;
+  };
+
+  var DefaultTransitCallbacks = {
+    popUp: PopUp,
+    scaleDown: function scaleDown(gameObject, duration) {
+      // Don't destroy here
+      ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
+    },
+    fadeIn: FadeIn,
+    fadeOut: function fadeOut(gameObject, duration) {
+      // Don't destroy here
+      FadeOutDestroy(gameObject, duration, false);
+    }
+  };
+
+  var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
+    FadeIn(cover, duration, cover.alpha);
+  };
+  var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
+    FadeOutDestroy(cover, duration, false);
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
+    _inherits(Modal, _OpenCloseTransition);
+    var _super = _createSuper(Modal);
+    function Modal(gameObject, config) {
+      var _this;
+      _classCallCheck(this, Modal);
+      if (config === undefined) {
+        config = {};
+      }
+      if (config.transitIn == null) {
+        config.transitIn = TransitionMode.popUp;
+      }
+      if (config.transitOut == null) {
+        config.transitOut = TransitionMode.scaleDown;
+      }
+      config.destroy = true;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+      // this.scene
+
+      // Cover : key of modal, to block touch input        
+      var coverConfig = GetValue$9(config, 'cover');
+      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
+      if (_this.cover) {
+        _this.setCoverTransitInCallback(GetValue$9(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+        _this.setCoverTransitOutCallback(GetValue$9(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+      }
+
+      // Close conditions:
+      var touchOutsideClose = GetValue$9(config, 'touchOutsideClose', false);
+      var timeOutDuration = GetValue$9(config, 'duration.hold', -1);
+      var timeOutClose = GetValue$9(config, 'timeOutClose', timeOutDuration >= 0);
+      var anyTouchClose = GetValue$9(config, 'anyTouchClose', false);
+      var manualClose = GetValue$9(config, 'manualClose', false);
+      if (manualClose) {
+        touchOutsideClose = false;
+        anyTouchClose = false;
+        timeOutClose = false;
+      }
+      if (anyTouchClose) {
+        touchOutsideClose = false;
+      }
+      if (timeOutClose) {
+        _this.setDisplayTime(timeOutDuration);
+      } else {
+        _this.setDisplayTime(-1);
+      }
+
+      // Registet touch-close event after opened
+      if (anyTouchClose) {
+        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
+      } else if (touchOutsideClose) {
+        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
+      }
+      _this.requestOpen();
+      return _this;
+    }
+    _createClass(Modal, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // Registered in touchOutsideClose(), or anyTouchClose()
+        if (!this.cover) {
+          this.scene.input.off('pointerup', this.touchCloseCallback, this);
+        }
+        if (this.cover && !fromScene) {
+          this.cover.destroy();
+          this.cover = undefined;
+        }
+        _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "touchOutsideClose",
+      value: function touchOutsideClose() {
+        if (this.cover) {
+          this.cover.on('pointerup', this.touchCloseCallback, this);
+        } else {
+          this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        }
+        this.clickOutsideTest = true;
+        return this;
+      }
+    }, {
+      key: "anyTouchClose",
+      value: function anyTouchClose() {
+        if (this.cover) {
+          this.cover.once('pointerup', this.touchCloseCallback, this);
+        } else {
+          this.scene.input.once('pointerup', this.touchCloseCallback, this);
+        }
+        return this;
+      }
+    }, {
+      key: "touchCloseCallback",
+      value: function touchCloseCallback(pointer) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+          return;
+        }
+        this.requestClose();
+      }
+    }, {
+      key: "transitionIn",
+      value: function transitionIn() {
+        _get(_getPrototypeOf(Modal.prototype), "transitionIn", this).call(this);
+        var duration = this.transitInTime;
+        var cover = this.cover;
+        if (cover && this.coverTransitInCallback) {
+          this.coverTransitInCallback(cover, duration);
+        }
+        return this;
+      }
+    }, {
+      key: "transitionOut",
+      value: function transitionOut() {
+        _get(_getPrototypeOf(Modal.prototype), "transitionOut", this).call(this);
+        var duration = this.transitOutTime;
+        var cover = this.cover;
+        if (cover && this.coverTransitOutCallback) {
+          this.coverTransitOutCallback(cover, duration);
+        }
+        return this;
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {
+        var duration = this.displayTime;
+        if (duration >= 0) {
+          this.delayCall(duration, this.requestClose,
+          // callback
+          this // scope
+          );
+        }
+
+        this.emit('open', this.parent, this);
+        _get(_getPrototypeOf(Modal.prototype), "onOpen", this).call(this);
+      }
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        this.emit('close', this.closeEventData);
+        _get(_getPrototypeOf(Modal.prototype), "onClose", this).call(this);
+      }
+    }, {
+      key: "setDisplayTime",
+      value: function setDisplayTime(time) {
+        this.displayTime = time;
+        return this;
+      }
+    }, {
+      key: "setTransitInCallback",
+      value: function setTransitInCallback(callback) {
+        if (typeof callback === 'string') {
+          callback = TransitionMode[callback];
+        }
+        switch (callback) {
+          case TransitionMode.popUp:
+            callback = DefaultTransitCallbacks.popUp;
+            break;
+          case TransitionMode.fadeIn:
+            callback = DefaultTransitCallbacks.fadeIn;
+            break;
+        }
+        _get(_getPrototypeOf(Modal.prototype), "setTransitInCallback", this).call(this, callback);
+        // callback = function(gameObject, duration) {}
+        return this;
+      }
+    }, {
+      key: "setTransitOutCallback",
+      value: function setTransitOutCallback(callback) {
+        if (typeof callback === 'string') {
+          callback = TransitionMode[callback];
+        }
+        switch (callback) {
+          case TransitionMode.scaleDown:
+            callback = DefaultTransitCallbacks.scaleDown;
+            break;
+          case TransitionMode.fadeOut:
+            callback = DefaultTransitCallbacks.fadeOut;
+            break;
+        }
+        _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback);
+        // callback = function(gameObject, duration) {}
+        return this;
+      }
+    }, {
+      key: "setCoverTransitInCallback",
+      value: function setCoverTransitInCallback(callback) {
+        this.coverTransitInCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setCoverTransitOutCallback",
+      value: function setCoverTransitOutCallback(callback) {
+        this.coverTransitOutCallback = callback;
+        return this;
+      }
+    }]);
+    return Modal;
+  }(OpenCloseTransition);
+  var TransitionMode = {
+    popUp: 0,
+    fadeIn: 1,
+    scaleDown: 0,
+    fadeOut: 1
+  };
+
+  var Modal = function Modal(gameObject, config) {
+    var modalBehavior = new Modal$1(gameObject, config);
+
+    // Route modal's 'open', 'close' event
+    modalBehavior.on('open', function () {
+      gameObject.emit('modal.open', modalBehavior);
+    });
+    modalBehavior.on('close', function (closeEventData) {
+      gameObject.emit('modal.close', closeEventData, modalBehavior);
+    });
+
+    // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
+    gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
+    modalBehavior.on('close', function () {
+      gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
+    });
+    return modalBehavior;
+  };
+  var ModalClose = function ModalClose(gameObject, closeEventData) {
+    gameObject.emit('modal.requestClose', closeEventData);
+  };
+
+  var ModalMethods = {
+    modal: function modal(config, onClose) {
+      if (IsFunction(config)) {
+        onClose = config;
+        config = undefined;
+      }
+      this.on('button.click', function (button, groupName, index, pointer, event) {
+        ModalClose(this, {
+          index: index,
+          text: button.text
+        });
+      }, this);
+      var modalBehavior = Modal(this, config);
+      if (onClose) {
+        modalBehavior.once('close', function (closeEventData) {
+          onClose(closeEventData);
+        });
+      }
+      return this;
+    },
+    modalPromise: function modalPromise(config) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.modal(config, resolve);
+      });
+    }
+  };
+
+  var Methods = {};
+  Object.assign(Methods, ButtonMethods, ModalMethods);
+
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var Dialog = /*#__PURE__*/function (_Sizer) {
     _inherits(Dialog, _Sizer);
     var _super = _createSuper(Dialog);
@@ -12499,24 +13295,24 @@
       config.orientation = 1; // Top to bottom
       _this = _super.call(this, scene, config);
       _this.type = 'rexDialog';
-      _this.eventEmitter = GetValue$c(config, 'eventEmitter', _assertThisInitialized(_this));
+      _this.eventEmitter = GetValue$8(config, 'eventEmitter', _assertThisInitialized(_this));
 
       // Add elements
-      var background = GetValue$c(config, 'background', undefined);
-      var title = GetValue$c(config, 'title', undefined);
-      var toolbar = GetValue$c(config, 'toolbar', undefined);
-      var toolbarBackground = GetValue$c(config, 'toolbarBackground', undefined);
-      var leftToolbar = GetValue$c(config, 'leftToolbar', undefined);
-      var leftToolbarBackground = GetValue$c(config, 'leftToolbarBackground', undefined);
-      var content = GetValue$c(config, 'content', undefined);
-      var description = GetValue$c(config, 'description', undefined);
+      var background = GetValue$8(config, 'background', undefined);
+      var title = GetValue$8(config, 'title', undefined);
+      var toolbar = GetValue$8(config, 'toolbar', undefined);
+      var toolbarBackground = GetValue$8(config, 'toolbarBackground', undefined);
+      var leftToolbar = GetValue$8(config, 'leftToolbar', undefined);
+      var leftToolbarBackground = GetValue$8(config, 'leftToolbarBackground', undefined);
+      var content = GetValue$8(config, 'content', undefined);
+      var description = GetValue$8(config, 'description', undefined);
       var choicesSizer;
-      var choices = GetValue$c(config, 'choices', undefined);
-      var choicesBackground = GetValue$c(config, 'choicesBackground', undefined);
+      var choices = GetValue$8(config, 'choices', undefined);
+      var choicesBackground = GetValue$8(config, 'choicesBackground', undefined);
       var actionsSizer;
-      var actions = GetValue$c(config, 'actions', undefined);
-      var actionsBackground = GetValue$c(config, 'actionsBackground', undefined);
-      var clickConfig = GetValue$c(config, 'click', undefined);
+      var actions = GetValue$8(config, 'actions', undefined);
+      var actionsBackground = GetValue$8(config, 'actionsBackground', undefined);
+      var clickConfig = GetValue$8(config, 'click', undefined);
       if (background) {
         _this.addBackground(background);
       }
@@ -12529,7 +13325,7 @@
           orientation: 0,
           // Left-right
           space: {
-            item: GetValue$c(config, 'space.toolbarItem', 0)
+            item: GetValue$8(config, 'space.toolbarItem', 0)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter
@@ -12544,7 +13340,7 @@
           orientation: 0,
           // Left-right
           space: {
-            item: GetValue$c(config, 'space.leftToolbarItem', 0)
+            item: GetValue$8(config, 'space.leftToolbarItem', 0)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter
@@ -12553,8 +13349,8 @@
 
       // title or toolbar or leftToolbar
       if (title || toolbar || leftToolbar) {
-        var titleExpandWidth = !!title && GetValue$c(config, 'expand.title', true);
-        var titleAlign = GetValue$c(config, 'align.title', 'center');
+        var titleExpandWidth = !!title && GetValue$8(config, 'expand.title', true);
+        var titleAlign = GetValue$8(config, 'align.title', 'center');
         var useOverlapSizer =
         // Has title, title is not exapnd-width, title align to center
         title && !titleExpandWidth && titleAlign === 'center' ||
@@ -12588,8 +13384,8 @@
             titleSizer.addSpace();
           }
           var padding = {
-            left: GetValue$c(config, 'space.titleLeft', 0),
-            right: GetValue$c(config, 'space.titleRight', 0)
+            left: GetValue$8(config, 'space.titleLeft', 0),
+            right: GetValue$8(config, 'space.titleRight', 0)
           };
           var proportion = titleExpandWidth ? 1 : 0;
           titleSizer.add(title, {
@@ -12618,14 +13414,14 @@
         }
 
         // Add sizer to dialog
-        var titleSpace = GetValue$c(config, 'space.title', 0);
+        var titleSpace = GetValue$8(config, 'space.title', 0);
         var padding;
         if (content || description || choices || actions) {
           padding = {
             bottom: titleSpace
           };
         }
-        var proportion = GetValue$c(config, 'proportion.title', 0);
+        var proportion = GetValue$8(config, 'proportion.title', 0);
         _this.add(titleSizer, {
           padding: padding,
           proportion: proportion,
@@ -12633,15 +13429,15 @@
         });
       }
       if (content) {
-        var align = GetValue$c(config, 'align.content', 'center');
-        var contentSpace = GetValue$c(config, 'space.content', 0);
+        var align = GetValue$8(config, 'align.content', 'center');
+        var contentSpace = GetValue$8(config, 'space.content', 0);
         var padding = {
-          left: GetValue$c(config, 'space.contentLeft', 0),
-          right: GetValue$c(config, 'space.contentRight', 0),
+          left: GetValue$8(config, 'space.contentLeft', 0),
+          right: GetValue$8(config, 'space.contentRight', 0),
           bottom: description || choices || actions ? contentSpace : 0
         };
-        var proportion = GetValue$c(config, 'proportion.content', 0);
-        var expand = GetValue$c(config, 'expand.content', true);
+        var proportion = GetValue$8(config, 'proportion.content', 0);
+        var expand = GetValue$8(config, 'expand.content', true);
         _this.add(content, {
           align: align,
           padding: padding,
@@ -12650,15 +13446,15 @@
         });
       }
       if (description) {
-        var align = GetValue$c(config, 'align.description', 'center');
-        var descriptionSpace = GetValue$c(config, 'space.description', 0);
+        var align = GetValue$8(config, 'align.description', 'center');
+        var descriptionSpace = GetValue$8(config, 'space.description', 0);
         var padding = {
-          left: GetValue$c(config, 'space.descriptionLeft', 0),
-          right: GetValue$c(config, 'space.descriptionRight', 0),
+          left: GetValue$8(config, 'space.descriptionLeft', 0),
+          right: GetValue$8(config, 'space.descriptionRight', 0),
           bottom: choices || actions ? descriptionSpace : 0
         };
-        var proportion = GetValue$c(config, 'proportion.description', 0);
-        var expand = GetValue$c(config, 'expand.description', true);
+        var proportion = GetValue$8(config, 'proportion.description', 0);
+        var expand = GetValue$8(config, 'expand.description', true);
         _this.add(description, {
           align: align,
           padding: padding,
@@ -12667,29 +13463,29 @@
         });
       }
       if (choices) {
-        var choicesType = GetValue$c(config, 'choicesType', '').split('-');
+        var choicesType = GetValue$8(config, 'choicesType', '').split('-');
         var ButtonsClass = Contains(choicesType, 'wrap') ? Buttons : Contains(choicesType, 'grid') ? GridButtons : Buttons$1;
         var buttonsType = Contains(choicesType, 'radio') ? 'radio' : Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
         var space = {
-          left: GetValue$c(config, 'space.choicesBackgroundLeft', 0),
-          right: GetValue$c(config, 'space.choicesBackgroundRight', 0),
-          top: GetValue$c(config, 'space.choicesBackgroundTop', 0),
-          bottom: GetValue$c(config, 'space.choicesBackgroundBottom', 0)
+          left: GetValue$8(config, 'space.choicesBackgroundLeft', 0),
+          right: GetValue$8(config, 'space.choicesBackgroundRight', 0),
+          top: GetValue$8(config, 'space.choicesBackgroundTop', 0),
+          bottom: GetValue$8(config, 'space.choicesBackgroundBottom', 0)
         };
-        var itemSpace = GetValue$c(config, 'space.choice', 0);
+        var itemSpace = GetValue$8(config, 'space.choice', 0);
         if (ButtonsClass === Buttons$1) {
           space.item = itemSpace;
         } else if (ButtonsClass === Buttons) {
           space.item = itemSpace;
-          space.line = GetValue$c(config, 'space.choiceLine', itemSpace);
+          space.line = GetValue$8(config, 'space.choiceLine', itemSpace);
         } else {
           // GridButtons
-          space.column = GetValue$c(config, 'space.choiceColumn', itemSpace);
-          space.row = GetValue$c(config, 'space.choiceRow', itemSpace);
+          space.column = GetValue$8(config, 'space.choiceColumn', itemSpace);
+          space.row = GetValue$8(config, 'space.choiceRow', itemSpace);
         }
         var choicesConfig = {
-          width: GetValue$c(config, 'choicesWidth', undefined),
-          height: GetValue$c(config, 'choicesHeight', undefined),
+          width: GetValue$8(config, 'choicesWidth', undefined),
+          height: GetValue$8(config, 'choicesHeight', undefined),
           groupName: 'choices',
           buttonsType: buttonsType,
           background: choicesBackground,
@@ -12697,22 +13493,22 @@
           space: space,
           click: clickConfig,
           eventEmitter: _this.eventEmitter,
-          setValueCallback: GetValue$c(config, 'choicesSetValueCallback', undefined),
-          setValueCallbackScope: GetValue$c(config, 'choicesSetValueCallbackScope', undefined)
+          setValueCallback: GetValue$8(config, 'choicesSetValueCallback', undefined),
+          setValueCallbackScope: GetValue$8(config, 'choicesSetValueCallbackScope', undefined)
         };
         if (ButtonsClass === Buttons$1) {
           choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
         }
         choicesSizer = new ButtonsClass(scene, choicesConfig);
-        var choicesSpace = GetValue$c(config, 'space.choices', 0);
+        var choicesSpace = GetValue$8(config, 'space.choices', 0);
         var padding = {
-          left: GetValue$c(config, 'space.choicesLeft', 0),
-          right: GetValue$c(config, 'space.choicesRight', 0),
+          left: GetValue$8(config, 'space.choicesLeft', 0),
+          right: GetValue$8(config, 'space.choicesRight', 0),
           bottom: actions ? choicesSpace : 0
         };
-        var align = GetValue$c(config, 'align.choices', 'center');
-        var proportion = GetValue$c(config, 'proportion.choices', 0);
-        var expand = GetValue$c(config, 'expand.choices', true);
+        var align = GetValue$8(config, 'align.choices', 'center');
+        var proportion = GetValue$8(config, 'proportion.choices', 0);
+        var expand = GetValue$8(config, 'expand.choices', true);
         _this.add(choicesSizer, {
           align: align,
           padding: padding,
@@ -12728,18 +13524,18 @@
           orientation: 0,
           // Left-right
           space: {
-            item: GetValue$c(config, 'space.action', 0)
+            item: GetValue$8(config, 'space.action', 0)
           },
-          expand: GetValue$c(config, 'expand.actions', false),
-          align: GetValue$c(config, 'align.actions', 'center'),
+          expand: GetValue$8(config, 'expand.actions', false),
+          align: GetValue$8(config, 'align.actions', 'center'),
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
         var padding = {
-          left: GetValue$c(config, 'space.actionsLeft', 0),
-          right: GetValue$c(config, 'space.actionsRight', 0)
+          left: GetValue$8(config, 'space.actionsLeft', 0),
+          right: GetValue$8(config, 'space.actionsRight', 0)
         };
-        var proportion = GetValue$c(config, 'proportion.action', 0);
+        var proportion = GetValue$8(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
           align: 'center',
           padding: padding,
@@ -12785,7 +13581,7 @@
       dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
     });
   };
-  Object.assign(Dialog.prototype, ButtonMethods);
+  Object.assign(Dialog.prototype, Methods);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -12854,7 +13650,7 @@
     return outObject;
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -12955,14 +13751,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$b(value, 'x', 0);
-          defaultRadiusY = GetValue$b(value, 'y', 0);
+          defaultRadiusX = GetValue$7(value, 'x', 0);
+          defaultRadiusY = GetValue$7(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$b(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$b(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$b(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$b(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$7(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$7(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$7(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$7(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -13023,8 +13819,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$b(value, 'x', 0);
-      radius.y = GetValue$b(value, 'y', 0);
+      radius.x = GetValue$7(value, 'x', 0);
+      radius.y = GetValue$7(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -13225,7 +14021,7 @@
 
   var Shape = Phaser.GameObjects.Shape;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
@@ -13270,7 +14066,7 @@
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue$a(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$6(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -13279,7 +14075,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue$a(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$6(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -14095,7 +14891,7 @@
   };
 
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(text, style, propertyMap) {
       _classCallCheck(this, TextStyle);
@@ -14195,7 +14991,7 @@
           var postCallback = prop[2];
           if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
             // Callback & scope should be set without processing the values
-            this[key] = GetValue$9(style, objKey, defaultValue);
+            this[key] = GetValue$5(style, objKey, defaultValue);
           } else {
             var value = GetAdvancedValue(style, objKey, defaultValue);
             if (postCallback) {
@@ -14206,7 +15002,7 @@
         }
 
         //  Allow for 'font' override
-        var font = GetValue$9(style, 'font', null);
+        var font = GetValue$5(style, 'font', null);
         if (font === null) {
           this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
         } else {
@@ -14214,19 +15010,19 @@
         }
 
         //  Allow for 'fill' to be used in place of 'color'
-        var fill = GetValue$9(style, 'fill', null);
+        var fill = GetValue$5(style, 'fill', null);
         if (fill !== null) {
           this.color = GetStyle(fill);
         }
-        var metrics = GetValue$9(style, 'metrics', false);
+        var metrics = GetValue$5(style, 'metrics', false);
 
         //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
         //  Doing this is reset if you then change the font of this TextStyle after creation
         if (metrics) {
           this.metrics = {
-            ascent: GetValue$9(metrics, 'ascent', 0),
-            descent: GetValue$9(metrics, 'descent', 0),
-            fontSize: GetValue$9(metrics, 'fontSize', 0)
+            ascent: GetValue$5(metrics, 'ascent', 0),
+            descent: GetValue$5(metrics, 'descent', 0),
+            fontSize: GetValue$5(metrics, 'fontSize', 0)
           };
         } else if (updateText || !this.metrics) {
           this.metrics = MeasureText(this);
@@ -14295,9 +15091,9 @@
           this.fontSize = '';
           this.fontStyle = '';
         } else {
-          this.fontFamily = GetValue$9(font, 'fontFamily', 'Courier');
-          this.fontSize = GetValue$9(font, 'fontSize', '16px');
-          this.fontStyle = GetValue$9(font, 'fontStyle', '');
+          this.fontFamily = GetValue$5(font, 'fontFamily', 'Courier');
+          this.fontSize = GetValue$5(font, 'fontSize', '16px');
+          this.fontStyle = GetValue$5(font, 'fontStyle', '');
         }
         return this.update(true);
       }
@@ -14604,9 +15400,9 @@
             this.fontSize = '';
             this.fontStyle = '';
           } else {
-            this.fontFamily = GetValue$9(font, 'fontFamily', this.fontFamily);
-            this.fontSize = GetValue$9(font, 'fontSize', this.fontSize);
-            this.fontStyle = GetValue$9(font, 'fontStyle', this.fontStyle);
+            this.fontFamily = GetValue$5(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue$5(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue$5(font, 'fontStyle', this.fontStyle);
           }
         }
         return this.parent.updateText(true);
@@ -14967,7 +15763,7 @@
     }
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var NO_NEWLINE$3 = CONST.NO_NEWLINE;
   var RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
   var Pen = /*#__PURE__*/function () {
@@ -14980,17 +15776,17 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         // (txt, x, y, width, prop, newLineMode, startIndex)
-        this.text = GetValue$8(o, 'text', '');
-        this.x = GetValue$8(o, 'x', 0);
-        this.y = GetValue$8(o, 'y', 0);
-        this.width = GetValue$8(o, 'width', 0);
-        var prop = GetValue$8(o, 'prop', null);
+        this.text = GetValue$4(o, 'text', '');
+        this.x = GetValue$4(o, 'x', 0);
+        this.y = GetValue$4(o, 'y', 0);
+        this.width = GetValue$4(o, 'width', 0);
+        var prop = GetValue$4(o, 'prop', null);
         if (prop === null) {
           prop = {};
         }
         this.prop = prop;
-        this.newLineMode = GetValue$8(o, 'newLineMode', 0);
-        this.startIndex = GetValue$8(o, 'startIndex', 0);
+        this.newLineMode = GetValue$4(o, 'newLineMode', 0);
+        this.startIndex = GetValue$4(o, 'startIndex', 0);
       }
     }, {
       key: "plainText",
@@ -15361,7 +16157,7 @@
     return Stack;
   }();
 
-  var Rectangle$1 = Phaser.Geom.Rectangle;
+  var Rectangle = Phaser.Geom.Rectangle;
   var RectanglePool = new Stack();
   var HitAreaManager = /*#__PURE__*/function () {
     function HitAreaManager() {
@@ -15384,7 +16180,7 @@
       value: function add(key, x, y, width, height) {
         var rectangle = RectanglePool.pop();
         if (rectangle === null) {
-          rectangle = new Rectangle$1(x, y, width, height);
+          rectangle = new Rectangle(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
@@ -15583,17 +16379,17 @@
     return retLines;
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var NO_WRAP = CONST.NO_WRAP;
   var NO_NEWLINE = CONST.NO_NEWLINE;
   var CanvasText = /*#__PURE__*/function () {
     function CanvasText(config) {
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
-      this.context = GetValue$7(config, 'context', null);
+      this.context = GetValue$3(config, 'context', null);
       this.canvas = this.context.canvas;
-      this.parser = GetValue$7(config, 'parser', null);
-      this.defaultStyle = GetValue$7(config, 'style', null);
+      this.parser = GetValue$3(config, 'parser', null);
+      this.defaultStyle = GetValue$3(config, 'style', null);
       this.autoRound = true;
       this.pensPool = config.pensPool; // Required
       this.linesPool = config.linesPool; // Required
@@ -15880,10 +16676,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$4 = {
+  var methods$3 = {
     setInteractive: SetInteractive
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$4);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$3);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -15926,7 +16722,7 @@
     return WrapTextLinesPool;
   }(Stack);
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var AddImage = function AddImage(key, config) {
     if (config === undefined) {
       config = {
@@ -15958,9 +16754,9 @@
       frame: frameKey,
       width: width,
       height: height,
-      y: GetValue$6(config, 'y', 0),
-      left: GetValue$6(config, 'left', 0),
-      right: GetValue$6(config, 'right', 0)
+      y: GetValue$2(config, 'y', 0),
+      left: GetValue$2(config, 'left', 0),
+      right: GetValue$2(config, 'right', 0)
     };
   };
 
@@ -16049,10 +16845,10 @@
     }]);
     return ImageManager;
   }();
-  var methods$3 = {
+  var methods$2 = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$3);
+  Object.assign(ImageManager.prototype, methods$2);
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
     var textures = scene.sys.textures;
@@ -16094,7 +16890,7 @@
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
 
@@ -16110,10 +16906,10 @@
       _classCallCheck(this, Text);
       if (IsPlainObject(x)) {
         var config = x;
-        x = GetValue$5(config, 'x', 0);
-        y = GetValue$5(config, 'y', 0);
-        text = GetValue$5(config, 'text', '');
-        style = GetValue$5(config, 'style');
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        text = GetValue$1(config, 'text', '');
+        style = GetValue$1(config, 'style');
       }
       if (x === undefined) {
         x = 0;
@@ -16142,7 +16938,7 @@
         }
       }
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
-      var imageData = GetValue$5(style, 'images', undefined);
+      var imageData = GetValue$1(style, 'images', undefined);
       if (imageData) {
         _this.addImage(imageData);
       }
@@ -16178,7 +16974,7 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
         _this.frame.source.glTexture = null;
       }
-      var sharedPoolMode = GetValue$5(style, 'sharedPool', true);
+      var sharedPoolMode = GetValue$1(style, 'sharedPool', true);
       var pensPool, linesPool, wrapTextLinesPool;
       if (sharedPoolMode) {
         // Use pools first time
@@ -16305,21 +17101,21 @@
           var config = left;
 
           //  If they specify x and/or y this applies to all
-          var x = GetValue$5(config, 'x', null);
+          var x = GetValue$1(config, 'x', null);
           if (x !== null) {
             left = x;
             right = x;
           } else {
-            left = GetValue$5(config, 'left', 0);
-            right = GetValue$5(config, 'right', left);
+            left = GetValue$1(config, 'left', 0);
+            right = GetValue$1(config, 'right', left);
           }
-          var y = GetValue$5(config, 'y', null);
+          var y = GetValue$1(config, 'y', null);
           if (y !== null) {
             top = y;
             bottom = y;
           } else {
-            top = GetValue$5(config, 'top', 0);
-            bottom = GetValue$5(config, 'bottom', top);
+            top = GetValue$1(config, 'top', 0);
+            bottom = GetValue$1(config, 'bottom', top);
           }
         } else {
           if (left === undefined) {
@@ -16962,13 +17758,13 @@
     }]);
     return Parser;
   }();
-  var methods$2 = {
+  var methods$1 = {
     splitText: SplitText,
     tagTextToProp: TagTextToProp,
     propToContextStyle: PropToContextStyle,
     propToTagText: PropToTagText
   };
-  Object.assign(Parser.prototype, methods$2);
+  Object.assign(Parser.prototype, methods$1);
 
   var BBCodeText = /*#__PURE__*/function (_Text) {
     _inherits(BBCodeText, _Text);
@@ -17165,7 +17961,7 @@
     return gameObject;
   };
 
-  var ResetDisplayContent$1 = function ResetDisplayContent(config) {
+  var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
     } else if (typeof config === 'string') {
@@ -17202,11 +17998,11 @@
     return this;
   };
 
-  var methods$1 = {
-    resetDisplayContent: ResetDisplayContent$1
+  var methods = {
+    resetDisplayContent: ResetDisplayContent
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var Label = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
     var _super = _createSuper(Label);
@@ -17218,14 +18014,14 @@
       _this.type = 'rexLabel';
 
       // Add elements
-      var background = GetValue$4(config, 'background', undefined);
-      var icon = GetValue$4(config, 'icon', undefined);
-      var iconMask = GetValue$4(config, 'iconMask', undefined);
-      var text = GetValue$4(config, 'text', undefined);
-      var action = GetValue$4(config, 'action', undefined);
-      var actionMask = GetValue$4(config, 'actionMask', undefined);
+      var background = GetValue(config, 'background', undefined);
+      var icon = GetValue(config, 'icon', undefined);
+      var iconMask = GetValue(config, 'iconMask', undefined);
+      var text = GetValue(config, 'text', undefined);
+      var action = GetValue(config, 'action', undefined);
+      var actionMask = GetValue(config, 'actionMask', undefined);
       // Align
-      var align = GetValue$4(config, 'align', undefined); // undefined/left/top: no space
+      var align = GetValue(config, 'align', undefined); // undefined/left/top: no space
 
       if (background) {
         _this.addBackground(background);
@@ -17236,7 +18032,7 @@
         _this.addSpace();
       }
       if (icon) {
-        var iconSpace = GetValue$4(config, 'space.icon', 0);
+        var iconSpace = GetValue(config, 'space.icon', 0);
         var padding;
         if (_this.orientation === 0) {
           if (text || action) {
@@ -17251,7 +18047,7 @@
             };
           }
         }
-        var fitRatio = GetValue$4(config, 'squareFitIcon', false) ? 1 : 0;
+        var fitRatio = GetValue(config, 'squareFitIcon', false) ? 1 : 0;
         _this.add(icon, {
           proportion: 0,
           padding: padding,
@@ -17262,14 +18058,14 @@
         }
 
         if (!fitRatio) {
-          var iconSize = GetValue$4(config, 'iconSize', undefined);
-          _this.setIconSize(GetValue$4(config, 'iconWidth', iconSize), GetValue$4(config, 'iconHeight', iconSize));
+          var iconSize = GetValue(config, 'iconSize', undefined);
+          _this.setIconSize(GetValue(config, 'iconWidth', iconSize), GetValue(config, 'iconHeight', iconSize));
         }
       }
       if (text) {
-        var textSpace = GetValue$4(config, 'space.text', 0);
-        var expandTextWidth = GetValue$4(config, 'expandTextWidth', false);
-        var expandTextHeight = GetValue$4(config, 'expandTextHeight', false);
+        var textSpace = GetValue(config, 'space.text', 0);
+        var expandTextWidth = GetValue(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue(config, 'expandTextHeight', false);
         var proportion, padding, expand;
         if (_this.orientation === 0) {
           proportion = expandTextWidth ? 1 : 0;
@@ -17295,7 +18091,7 @@
         });
       }
       if (action) {
-        var fitRatio = GetValue$4(config, 'squareFitAction', false) ? 1 : 0;
+        var fitRatio = GetValue(config, 'squareFitAction', false) ? 1 : 0;
         _this.add(action, {
           proportion: 0,
           fitRatio: fitRatio
@@ -17305,8 +18101,8 @@
         }
 
         if (!fitRatio) {
-          var actionSize = GetValue$4(config, 'actionSize');
-          _this.setActionSize(GetValue$4(config, 'actionWidth', actionSize), GetValue$4(config, 'actionHeight', actionSize));
+          var actionSize = GetValue(config, 'actionSize');
+          _this.setActionSize(GetValue(config, 'actionWidth', actionSize), GetValue(config, 'actionHeight', actionSize));
         }
       }
 
@@ -17491,7 +18287,7 @@
     }]);
     return Label;
   }(Sizer);
-  Object.assign(Label.prototype, methods$1);
+  Object.assign(Label.prototype, methods);
 
   var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
     config = BuildDisplayLabelConfig(scene, config);
@@ -17499,833 +18295,6 @@
     scene.add.existing(gameObject);
     return gameObject;
   };
-
-  var ResetDisplayContent = function ResetDisplayContent(config) {
-    if (config === undefined) {
-      config = {};
-    }
-    var title = this.childrenMap.title;
-    title.resetDisplayContent(config.title);
-    var content = this.childrenMap.content;
-    content.resetDisplayContent(config.content);
-    var buttonA = this.childrenMap.actions[0];
-    if (buttonA) {
-      buttonA.resetDisplayContent(config.buttonA);
-    }
-    var buttonB = this.childrenMap.actions[1];
-    if (buttonB) {
-      buttonB.resetDisplayContent(config.buttonB);
-    }
-    return this;
-  };
-
-  /*
-  graph TD
-
-  IDLE --> TRAN_OPEN
-  TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
-  OPEN --> TRANS_CLOSE
-  TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
-  CLOSE --> TRAN_OPEN
-  */
-  var State = /*#__PURE__*/function (_FSM) {
-    _inherits(State, _FSM);
-    var _super = _createSuper(State);
-    function State(parent, config) {
-      var _this;
-      _classCallCheck(this, State);
-      _this = _super.call(this, config);
-      _this.parent = parent;
-      var initState = config.initState || 'IDLE';
-      _this.start(initState);
-      return _this;
-    }
-    _createClass(State, [{
-      key: "init",
-      value: function init() {
-        this.start('IDLE');
-      }
-
-      // IDLE -> TRANS_OPNE
-    }, {
-      key: "next_IDLE",
-      value: function next_IDLE() {
-        return 'TRANS_OPNE';
-      }
-      // IDLE
-
-      // TRANS_OPNE -> OPEN
-    }, {
-      key: "next_TRANS_OPNE",
-      value: function next_TRANS_OPNE() {
-        return 'OPEN';
-      }
-    }, {
-      key: "enter_TRANS_OPNE",
-      value: function enter_TRANS_OPNE() {
-        var transitionBehavior = this.parent;
-        if (transitionBehavior.transitInTime > 0) {
-          var delay = transitionBehavior.runTransitionInCallback();
-          transitionBehavior.delayCall(delay, this.next, this);
-        } else {
-          this.next();
-        }
-      }
-    }, {
-      key: "exit_TRANS_OPNE",
-      value: function exit_TRANS_OPNE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // TRANS_OPNE
-
-      // OPEN -> TRANS_CLOSE
-    }, {
-      key: "next_OPEN",
-      value: function next_OPEN() {
-        return 'TRANS_CLOSE';
-      }
-    }, {
-      key: "enter_OPEN",
-      value: function enter_OPEN() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.onOpen();
-      }
-    }, {
-      key: "exit_OPEN",
-      value: function exit_OPEN() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // OPEN
-
-      // TRANS_CLOSE -> CLOSE
-    }, {
-      key: "next_TRANS_CLOSE",
-      value: function next_TRANS_CLOSE() {
-        return 'CLOSE';
-      }
-    }, {
-      key: "enter_TRANS_CLOSE",
-      value: function enter_TRANS_CLOSE() {
-        var transitionBehavior = this.parent;
-        if (transitionBehavior.transitOutTime > 0) {
-          var delay = transitionBehavior.runTransitionOutCallback();
-          transitionBehavior.delayCall(delay, this.next, this);
-        } else {
-          this.next();
-        }
-      }
-    }, {
-      key: "exit_TRANS_CLOSE",
-      value: function exit_TRANS_CLOSE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // TRANS_CLOSE
-
-      // CLOSE -> TRANS_OPNE
-    }, {
-      key: "next_CLOSE",
-      value: function next_CLOSE() {
-        return 'TRANS_OPNE';
-      }
-    }, {
-      key: "enter_CLOSE",
-      value: function enter_CLOSE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.onClose();
-      }
-    }, {
-      key: "exit_CLOSE",
-      value: function exit_CLOSE() {}
-      // CLOSE
-    }, {
-      key: "canOpen",
-      value: function canOpen() {
-        return this.state === 'IDLE' || this.state === 'CLOSE';
-      }
-    }, {
-      key: "canClose",
-      value: function canClose() {
-        return this.state === 'IDLE' || this.state === 'OPEN';
-      }
-    }]);
-    return State;
-  }(FSM);
-
-  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'postupdate' event
-    var scene = gameObject.scene;
-    var sceneEE = scene.sys.events;
-    var timer = scene.time.delayedCall(delay,
-    // delay
-    sceneEE.once,
-    // callback
-    [
-    // Event name of scene
-    'postupdate',
-    // Callback
-    function () {
-      callback.call(scope, args);
-    }],
-    // args
-    sceneEE // scope, scene's EE
-    );
-
-    return timer;
-  };
-
-  var DelayCallMethods = {
-    delayCall: function delayCall(delay, callback, scope) {
-      // Invoke callback under scene's 'postupdate' event
-      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
-      return this;
-    },
-    removeDelayCall: function removeDelayCall() {
-      if (this.delayCallTimer) {
-        this.delayCallTimer.remove(false);
-        this.delayCallTimer = undefined;
-      }
-      return this;
-    }
-  };
-
-  var ConfigurationMethods = {
-    setTransitInTime: function setTransitInTime(time) {
-      this.transitInTime = time;
-      return this;
-    },
-    setTransitOutTime: function setTransitOutTime(time) {
-      this.transitOutTime = time;
-      return this;
-    },
-    setTransitInCallback: function setTransitInCallback(callback) {
-      if (!callback) {
-        callback = NOOP;
-      }
-      this.transitInCallback = callback;
-      // callback = function(gameObject, duration) {}
-      return this;
-    },
-    setTransitOutCallback: function setTransitOutCallback(callback) {
-      if (!callback) {
-        callback = NOOP;
-      }
-      this.transitOutCallback = callback;
-      // callback = function(gameObject, duration) {}
-      return this;
-    }
-  };
-
-  var OpenMethods = {
-    // Interanl method
-    runTransitionInCallback: function runTransitionInCallback() {
-      this.transitInCallback(this.parent, this.transitInTime);
-      return this.transitInTime;
-    },
-    // Override
-    onOpen: function onOpen() {},
-    requestOpen: function requestOpen(openEventData, duration) {
-      if (!this._state.canOpen()) {
-        return this;
-      }
-      this.openEventData = arguments.length > 0 ? openEventData : this.parent;
-      var transitionTimeSave = this.transitInTime;
-      if (duration !== undefined) {
-        this.transitInTime = duration;
-      }
-      this._state["goto"]('TRANS_OPNE');
-      this.transitInTime = transitionTimeSave;
-      return this;
-    }
-  };
-
-  var CloseMethods = {
-    // Interanl method
-    runTransitionOutCallback: function runTransitionOutCallback() {
-      this.transitOutCallback(this.parent, this.transitOutTime);
-      return this.transitOutTime;
-    },
-    // Override
-    onClose: function onClose() {
-      if (this.oneShotMode) {
-        this.parent.destroy();
-        // Will invoke `this.destroy()`
-      }
-    },
-    requestClose: function requestClose(closeEventData, duration) {
-      if (!this._state.canClose) {
-        return this;
-      }
-      this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
-      var transitionTimeSave = this.transitOutTime;
-      if (duration !== undefined) {
-        this.transitOutTime = duration;
-      }
-      this._state["goto"]('TRANS_CLOSE');
-      this.transitOutTime = transitionTimeSave;
-      return this;
-    }
-  };
-
-  var methods = {};
-  Object.assign(methods, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
-
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
-  var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(OpenCloseTransition, _ComponentBase);
-    var _super = _createSuper(OpenCloseTransition);
-    function OpenCloseTransition(gameObject, config) {
-      var _this;
-      _classCallCheck(this, OpenCloseTransition);
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
-      // this.scene
-
-      _this.setTransitInTime(GetValue$3(config, 'duration.in', 200));
-      _this.setTransitOutTime(GetValue$3(config, 'duration.out', 200));
-      _this.setTransitInCallback(GetValue$3(config, 'transitIn'));
-      _this.setTransitOutCallback(GetValue$3(config, 'transitOut'));
-      _this.oneShotMode = GetValue$3(config, 'destroy', false);
-      _this.delayCallTimer = undefined;
-      _this._state = new State(_assertThisInitialized(_this), {
-        eventEmitter: false,
-        initState: GetValue$3(config, 'initState', 'IDLE')
-      });
-      _this.openEventData = undefined;
-      _this.closeEventData = undefined;
-      return _this;
-    }
-    _createClass(OpenCloseTransition, [{
-      key: "state",
-      get: function get() {
-        return this._state.state;
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        this.transitInCallback = undefined;
-        this.transitOutCallback = undefined;
-        this.openEventData = undefined;
-        this.closeEventData = undefined;
-        this.removeDelayCall();
-        _get(_getPrototypeOf(OpenCloseTransition.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }]);
-    return OpenCloseTransition;
-  }(ComponentBase);
-  Object.assign(OpenCloseTransition.prototype, methods);
-
-  var Rectangle = Phaser.GameObjects.Rectangle;
-  var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
-    _inherits(FullWindowRectangle, _Rectangle);
-    var _super = _createSuper(FullWindowRectangle);
-    function FullWindowRectangle(scene, color, alpha) {
-      var _this;
-      _classCallCheck(this, FullWindowRectangle);
-      _this = _super.call(this, scene, 0, 0, 2, 2, color, 1);
-      _this.setAlpha(alpha);
-      _this.setScrollFactor(0);
-      _this.boot();
-      return _this;
-    }
-    _createClass(FullWindowRectangle, [{
-      key: "boot",
-      value: function boot() {
-        var scene = this.scene;
-        scene.sys.events.on('prerender', this.resize, this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        // preDestroy method does not have fromScene parameter
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-          return;
-        }
-        this.scene.sys.events.off('prerender', this.resize, this);
-        _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        return this.fillColor;
-      },
-      set: function set(value) {
-        this.setFillStyle(value, this.fillAlpha);
-      }
-    }, {
-      key: "resize",
-      value: function resize() {
-        var scene = this.scene;
-        var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
-        var gameWidth = gameSize.width,
-          gameHeight = gameSize.height,
-          scale = 1 / camera.zoom;
-        var x = gameWidth / 2,
-          y = gameHeight / 2,
-          width = gameWidth * scale,
-          height = gameHeight * scale;
-        if (this.x !== x || this.y !== y) {
-          this.setPosition(x, y);
-        }
-        if (this.width !== width || this.height !== height) {
-          this.setSize(width, height).setOrigin(0.5);
-        }
-      }
-    }]);
-    return FullWindowRectangle;
-  }(Rectangle);
-
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var TouchEventStop = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TouchEventStop, _ComponentBase);
-    var _super = _createSuper(TouchEventStop);
-    function TouchEventStop(gameObject, config) {
-      var _this;
-      _classCallCheck(this, TouchEventStop);
-      _this = _super.call(this, gameObject, {
-        eventEmitter: false
-      });
-      // No event emitter
-      // this.parent = gameObject;
-
-      _this.resetFromJSON(config);
-      _this.boot();
-      return _this;
-    }
-    _createClass(TouchEventStop, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.setHitAreaMode(GetValue$2(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue$2(o, 'enable', true));
-        this.setStopMode(GetValue$2(o, 'stopAllLevels', true));
-        return this;
-      }
-    }, {
-      key: "boot",
-      value: function boot() {
-        this.parent.on('pointerdown', function (pointer, localX, localY, event) {
-          if (this.stopAllLevels) {
-            event.stopPropagation();
-          }
-        }, this).on('pointerup', function (pointer, localX, localY, event) {
-          if (this.stopAllLevels) {
-            event.stopPropagation();
-          }
-        }, this).on('pointermove', function (pointer, localX, localY, event) {
-          if (this.stopAllLevels) {
-            event.stopPropagation();
-          }
-        }, this).on('pointerover', function (pointer, localX, localY, event) {
-          if (this.stopAllLevels) {
-            event.stopPropagation();
-          }
-        }, this).on('pointerout', function (pointer, event) {
-          if (this.stopAllLevels) {
-            event.stopPropagation();
-          }
-        }, this);
-      }
-    }, {
-      key: "setHitAreaMode",
-      value: function setHitAreaMode(mode) {
-        if (typeof mode === 'string') {
-          mode = HitAreaMode[mode];
-        }
-        var gameObject = this.parent;
-        if (gameObject.input) {
-          gameObject.removeInteractive();
-        }
-        if (mode === 0) {
-          gameObject.setInteractive();
-        } else {
-          gameObject.setInteractive({
-            hitArea: {},
-            hitAreaCallback: function hitAreaCallback() {
-              return true;
-            }
-          });
-        }
-        return this;
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-        if (e) {
-          this.parent.setInteractive();
-        } else {
-          this.parent.disableInteractive();
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "setStopMode",
-      value: function setStopMode(allLevels) {
-        if (allLevels === undefined) {
-          allLevels = true;
-        }
-        this.stopAllLevels = allLevels;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }]);
-    return TouchEventStop;
-  }(ComponentBase);
-  var HitAreaMode = {
-    "default": 0,
-    fullWindow: 1
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Cover = /*#__PURE__*/function (_FullWindowRectangle) {
-    _inherits(Cover, _FullWindowRectangle);
-    var _super = _createSuper(Cover);
-    function Cover(scene, config) {
-      var _this;
-      _classCallCheck(this, Cover);
-      var fillColor = GetValue$1(config, 'color', 0x0);
-      var fillAlpha = GetValue$1(config, 'alpha', 0.8);
-      _this = _super.call(this, scene, fillColor, fillAlpha);
-      _this.touchEventStop = new TouchEventStop(_assertThisInitialized(_this), {
-        hitAreaMode: 1
-      });
-      return _this;
-    }
-    return _createClass(Cover);
-  }(FullWindowRectangle);
-
-  var CreateCover = function CreateCover(gameObject, config) {
-    var scene = gameObject.scene;
-    var cover = new Cover(scene, config);
-    scene.add.existing(cover);
-
-    // Put cover behind game object
-    if (gameObject.isRexContainerLite) {
-      gameObject.moveDepthBelow(cover);
-      gameObject.pin(cover, {
-        syncPosition: false,
-        syncRotation: false,
-        syncScale: false,
-        syncAlpha: false,
-        syncScrollFactor: false
-      });
-    } else {
-      scene.children.moveBelow(cover, gameObject);
-    }
-    return cover;
-  };
-
-  var DefaultTransitCallbacks = {
-    popUp: PopUp,
-    scaleDown: function scaleDown(gameObject, duration) {
-      // Don't destroy here
-      ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
-    },
-    fadeIn: FadeIn,
-    fadeOut: function fadeOut(gameObject, duration) {
-      // Don't destroy here
-      FadeOutDestroy(gameObject, duration, false);
-    }
-  };
-
-  var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
-    FadeIn(cover, duration, cover.alpha);
-  };
-  var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
-    FadeOutDestroy(cover, duration, false);
-  };
-
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
-    _inherits(Modal, _OpenCloseTransition);
-    var _super = _createSuper(Modal);
-    function Modal(gameObject, config) {
-      var _this;
-      _classCallCheck(this, Modal);
-      if (config === undefined) {
-        config = {};
-      }
-      if (config.transitIn == null) {
-        config.transitIn = TransitionMode.popUp;
-      }
-      if (config.transitOut == null) {
-        config.transitOut = TransitionMode.scaleDown;
-      }
-      config.destroy = true;
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
-      // this.scene
-
-      // Cover : key of modal, to block touch input        
-      var coverConfig = GetValue(config, 'cover');
-      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
-      if (_this.cover) {
-        _this.setCoverTransitInCallback(GetValue(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
-        _this.setCoverTransitOutCallback(GetValue(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
-      }
-
-      // Close conditions:
-      var touchOutsideClose = GetValue(config, 'touchOutsideClose', false);
-      var timeOutDuration = GetValue(config, 'duration.hold', -1);
-      var timeOutClose = GetValue(config, 'timeOutClose', timeOutDuration >= 0);
-      var anyTouchClose = GetValue(config, 'anyTouchClose', false);
-      var manualClose = GetValue(config, 'manualClose', false);
-      if (manualClose) {
-        touchOutsideClose = false;
-        anyTouchClose = false;
-        timeOutClose = false;
-      }
-      if (anyTouchClose) {
-        touchOutsideClose = false;
-      }
-      if (timeOutClose) {
-        _this.setDisplayTime(timeOutDuration);
-      } else {
-        _this.setDisplayTime(-1);
-      }
-
-      // Registet touch-close event after opened
-      if (anyTouchClose) {
-        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
-      } else if (touchOutsideClose) {
-        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
-      }
-      _this.requestOpen();
-      return _this;
-    }
-    _createClass(Modal, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // Registered in touchOutsideClose(), or anyTouchClose()
-        if (!this.cover) {
-          this.scene.input.off('pointerup', this.touchCloseCallback, this);
-        }
-        if (this.cover && !fromScene) {
-          this.cover.destroy();
-          this.cover = undefined;
-        }
-        _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "touchOutsideClose",
-      value: function touchOutsideClose() {
-        if (this.cover) {
-          this.cover.on('pointerup', this.touchCloseCallback, this);
-        } else {
-          this.scene.input.on('pointerup', this.touchCloseCallback, this);
-        }
-        this.clickOutsideTest = true;
-        return this;
-      }
-    }, {
-      key: "anyTouchClose",
-      value: function anyTouchClose() {
-        if (this.cover) {
-          this.cover.once('pointerup', this.touchCloseCallback, this);
-        } else {
-          this.scene.input.once('pointerup', this.touchCloseCallback, this);
-        }
-        return this;
-      }
-    }, {
-      key: "touchCloseCallback",
-      value: function touchCloseCallback(pointer) {
-        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
-          return;
-        }
-        this.requestClose();
-      }
-    }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionIn", this).call(this);
-        var duration = this.transitInTime;
-        var cover = this.cover;
-        if (cover && this.coverTransitInCallback) {
-          this.coverTransitInCallback(cover, duration);
-        }
-        return this;
-      }
-    }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionOut", this).call(this);
-        var duration = this.transitOutTime;
-        var cover = this.cover;
-        if (cover && this.coverTransitOutCallback) {
-          this.coverTransitOutCallback(cover, duration);
-        }
-        return this;
-      }
-    }, {
-      key: "onOpen",
-      value: function onOpen() {
-        var duration = this.displayTime;
-        if (duration >= 0) {
-          this.delayCall(duration, this.requestClose,
-          // callback
-          this // scope
-          );
-        }
-
-        this.emit('open', this.parent, this);
-        _get(_getPrototypeOf(Modal.prototype), "onOpen", this).call(this);
-      }
-    }, {
-      key: "onClose",
-      value: function onClose() {
-        this.emit('close', this.closeEventData);
-        _get(_getPrototypeOf(Modal.prototype), "onClose", this).call(this);
-      }
-    }, {
-      key: "setDisplayTime",
-      value: function setDisplayTime(time) {
-        this.displayTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInCallback",
-      value: function setTransitInCallback(callback) {
-        if (typeof callback === 'string') {
-          callback = TransitionMode[callback];
-        }
-        switch (callback) {
-          case TransitionMode.popUp:
-            callback = DefaultTransitCallbacks.popUp;
-            break;
-          case TransitionMode.fadeIn:
-            callback = DefaultTransitCallbacks.fadeIn;
-            break;
-        }
-        _get(_getPrototypeOf(Modal.prototype), "setTransitInCallback", this).call(this, callback);
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setTransitOutCallback",
-      value: function setTransitOutCallback(callback) {
-        if (typeof callback === 'string') {
-          callback = TransitionMode[callback];
-        }
-        switch (callback) {
-          case TransitionMode.scaleDown:
-            callback = DefaultTransitCallbacks.scaleDown;
-            break;
-          case TransitionMode.fadeOut:
-            callback = DefaultTransitCallbacks.fadeOut;
-            break;
-        }
-        _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback);
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setCoverTransitInCallback",
-      value: function setCoverTransitInCallback(callback) {
-        this.coverTransitInCallback = callback;
-        return this;
-      }
-    }, {
-      key: "setCoverTransitOutCallback",
-      value: function setCoverTransitOutCallback(callback) {
-        this.coverTransitOutCallback = callback;
-        return this;
-      }
-    }]);
-    return Modal;
-  }(OpenCloseTransition);
-  var TransitionMode = {
-    popUp: 0,
-    fadeIn: 1,
-    scaleDown: 0,
-    fadeOut: 1
-  };
-
-  var Modal = function Modal(gameObject, config) {
-    var modalBehavior = new Modal$1(gameObject, config);
-
-    // Route modal's 'open', 'close' event
-    modalBehavior.on('open', function () {
-      gameObject.emit('modal.open', modalBehavior);
-    });
-    modalBehavior.on('close', function (closeEventData) {
-      gameObject.emit('modal.close', closeEventData, modalBehavior);
-    });
-
-    // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
-    gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    modalBehavior.on('close', function () {
-      gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    });
-    return modalBehavior;
-  };
-  var ModalClose = function ModalClose(gameObject, closeEventData) {
-    gameObject.emit('modal.requestClose', closeEventData);
-  };
-
-  var ModalMethods = {
-    modal: function modal(config, onClose) {
-      if (IsFunction(config)) {
-        onClose = config;
-        config = {};
-      }
-      if (config === undefined) {
-        config = {};
-      }
-      this.on('button.click', function (button, groupName, index, pointer, event) {
-        ModalClose(this, {
-          index: index,
-          text: button.text
-        });
-      }, this);
-      var zeroButtonMode = this.buttonMode === 0;
-      if (!config.hasOwnProperty('anyTouchClose')) {
-        config.anyTouchClose = zeroButtonMode;
-      }
-      if (!config.hasOwnProperty('manualClose')) {
-        config.manualClose = !zeroButtonMode;
-      }
-      var modalBehavior = Modal(this, config);
-      if (onClose) {
-        modalBehavior.once('close', function (closeEventData) {
-          onClose(closeEventData);
-        });
-      }
-      return this;
-    },
-    modalPromise: function modalPromise(config) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.modal(config, resolve);
-      });
-    }
-  };
-
-  var Methods = {
-    resetDisplayContent: ResetDisplayContent
-  };
-  Object.assign(Methods, ModalMethods);
 
   var ConfirmDialog = /*#__PURE__*/function (_Dialog) {
     _inherits(ConfirmDialog, _Dialog);
@@ -18357,9 +18326,49 @@
       _this.buttonMode = buttonMode;
       return _this;
     }
-    return _createClass(ConfirmDialog);
+    _createClass(ConfirmDialog, [{
+      key: "resetDisplayContent",
+      value: function resetDisplayContent(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        var title = this.childrenMap.title;
+        title.resetDisplayContent(config.title);
+        var content = this.childrenMap.content;
+        content.resetDisplayContent(config.content);
+        var buttonA = this.childrenMap.actions[0];
+        if (buttonA) {
+          buttonA.resetDisplayContent(config.buttonA);
+        }
+        var buttonB = this.childrenMap.actions[1];
+        if (buttonB) {
+          buttonB.resetDisplayContent(config.buttonB);
+        }
+        return this;
+      }
+    }, {
+      key: "modal",
+      value: function modal(config, onClose) {
+        if (IsFunction(config)) {
+          onClose = config;
+          config = undefined;
+        }
+        if (config === undefined) {
+          config = {};
+        }
+        var zeroButtonMode = this.buttonMode === 0;
+        if (!config.hasOwnProperty('anyTouchClose')) {
+          config.anyTouchClose = zeroButtonMode;
+        }
+        if (!config.hasOwnProperty('manualClose')) {
+          config.manualClose = !zeroButtonMode;
+        }
+        _get(_getPrototypeOf(ConfirmDialog.prototype), "modal", this).call(this, config, onClose);
+        return this;
+      }
+    }]);
+    return ConfirmDialog;
   }(Dialog);
-  Object.assign(ConfirmDialog.prototype, Methods);
 
   return ConfirmDialog;
 

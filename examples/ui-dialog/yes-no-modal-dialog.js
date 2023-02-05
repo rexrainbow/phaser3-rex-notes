@@ -22,21 +22,20 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
-        this.rexUI.modalPromise(
-            // Game object
-            CreateDialog(this).setPosition(400, 300),
-            // Config
-            {
+        CreateDialog(this)
+            .setPosition(400, 300)
+            .layout()
+            .modalPromise({
                 manaulClose: true,
                 duration: {
                     in: 500,
                     out: 500
                 }
-            }
-        )
-            .then(function (result) {
-                print.text += `Click button ${result.index}: ${result.text}\n`;
             })
+            .then(function (data) {
+                print.text += `${JSON.stringify(data)}\n`;
+            })
+
     }
 
     update() { }
@@ -87,12 +86,6 @@ var CreateDialog = function (scene) {
             content: false,  // Content is a pure text object
         }
     })
-        .layout();
-
-    dialog
-        .on('button.click', function (button, groupName, index, pointer, event) {
-            dialog.emit('modal.requestClose', { index: index, text: button.text });
-        })
         .on('button.over', function (button, groupName, index, pointer, event) {
             button.getElement('background').setStrokeStyle(1, 0xffffff);
         })

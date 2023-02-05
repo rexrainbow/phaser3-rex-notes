@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
+import { ModalBehavoir } from '../modal/Modal';
 
 export default Dialog;
 
@@ -277,4 +278,17 @@ declare class Dialog extends Sizer {
     clearChoicesButtonStates(): this;
 
     getChoicesSelectButtonName(): string;
+
+    modal(
+        config?: ModalBehavoir.IConfig,
+        onClose?: (closeEventData: any) => void
+    ): this;
+
+    modal(
+        onClose?: (closeEventData: any) => void
+    ): this;
+
+    modalPromise(
+        config?: ModalBehavoir.IConfig
+    ): Promise<any>;
 }

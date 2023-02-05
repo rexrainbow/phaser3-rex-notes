@@ -1,7 +1,6 @@
 import Dialog from '../dialog/Dialog';
 import BBCodeText from '../bbcodetext/BBCodeText';
 import Label from '../label/Label';
-import { ModalBehavoir } from '../modal/Modal';
 
 export default ConfirmDialog;
 
@@ -120,17 +119,4 @@ declare class ConfirmDialog extends Dialog {
     resetDisplayContent(
         config?: ConfirmDialog.IResetDisplayContentConfig
     ): this;
-
-    modal(
-        config?: ModalBehavoir.IConfig,
-        onClose?: (closeEventData: any) => void
-    ): this;
-
-    modal(
-        onClose?: (closeEventData: any) => void
-    ): this;
-
-    modalPromise(
-        config?: ModalBehavoir.IConfig
-    ): Promise<any>
 }

@@ -5,27 +5,13 @@ export default {
     modal(config, onClose) {
         if (IsFunction(config)) {
             onClose = config;
-            config = {};
-        }
-
-        if (config === undefined) {
-            config = {};
+            config = undefined;
         }
 
         this
             .on('button.click', function (button, groupName, index, pointer, event) {
                 ModalClose(this, { index: index, text: button.text });
             }, this)
-
-        var zeroButtonMode = (this.buttonMode === 0);
-
-        if (!config.hasOwnProperty('anyTouchClose')) {
-            config.anyTouchClose = zeroButtonMode;
-        }
-
-        if (!config.hasOwnProperty('manualClose')) {
-            config.manualClose = !zeroButtonMode;
-        }
 
         var modalBehavior = Modal(this, config);
 

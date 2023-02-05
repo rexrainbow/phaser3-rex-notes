@@ -35423,7 +35423,7 @@
     return gameObject;
   };
 
-  var ResetDisplayContent$1 = function ResetDisplayContent(config) {
+  var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
     } else if (typeof config === 'string') {
@@ -35461,7 +35461,7 @@
   };
 
   var methods$g = {
-    resetDisplayContent: ResetDisplayContent$1
+    resetDisplayContent: ResetDisplayContent
   };
 
   var GetValue$1l = Phaser.Utils.Objects.GetValue;
@@ -37707,516 +37707,6 @@
     }
   };
 
-  var GetValue$1d = Phaser.Utils.Objects.GetValue;
-  var Dialog = /*#__PURE__*/function (_Sizer) {
-    _inherits(Dialog, _Sizer);
-    var _super = _createSuper(Dialog);
-    function Dialog(scene, config) {
-      var _this;
-      _classCallCheck(this, Dialog);
-      if (config === undefined) {
-        config = {};
-      }
-      // Create sizer        
-      config.orientation = 1; // Top to bottom
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexDialog';
-      _this.eventEmitter = GetValue$1d(config, 'eventEmitter', _assertThisInitialized(_this));
-
-      // Add elements
-      var background = GetValue$1d(config, 'background', undefined);
-      var title = GetValue$1d(config, 'title', undefined);
-      var toolbar = GetValue$1d(config, 'toolbar', undefined);
-      var toolbarBackground = GetValue$1d(config, 'toolbarBackground', undefined);
-      var leftToolbar = GetValue$1d(config, 'leftToolbar', undefined);
-      var leftToolbarBackground = GetValue$1d(config, 'leftToolbarBackground', undefined);
-      var content = GetValue$1d(config, 'content', undefined);
-      var description = GetValue$1d(config, 'description', undefined);
-      var choicesSizer;
-      var choices = GetValue$1d(config, 'choices', undefined);
-      var choicesBackground = GetValue$1d(config, 'choicesBackground', undefined);
-      var actionsSizer;
-      var actions = GetValue$1d(config, 'actions', undefined);
-      var actionsBackground = GetValue$1d(config, 'actionsBackground', undefined);
-      var clickConfig = GetValue$1d(config, 'click', undefined);
-      if (background) {
-        _this.addBackground(background);
-      }
-      var toolbarSizer;
-      if (toolbar) {
-        toolbarSizer = new Buttons$1(scene, {
-          groupName: 'toolbar',
-          background: toolbarBackground,
-          buttons: toolbar,
-          orientation: 0,
-          // Left-right
-          space: {
-            item: GetValue$1d(config, 'space.toolbarItem', 0)
-          },
-          click: clickConfig,
-          eventEmitter: _this.eventEmitter
-        });
-      }
-      var leftToolbarSizer;
-      if (leftToolbar) {
-        leftToolbarSizer = new Buttons$1(scene, {
-          groupName: 'leftToolbar',
-          background: leftToolbarBackground,
-          buttons: leftToolbar,
-          orientation: 0,
-          // Left-right
-          space: {
-            item: GetValue$1d(config, 'space.leftToolbarItem', 0)
-          },
-          click: clickConfig,
-          eventEmitter: _this.eventEmitter
-        });
-      }
-
-      // title or toolbar or leftToolbar
-      if (title || toolbar || leftToolbar) {
-        var titleExpandWidth = !!title && GetValue$1d(config, 'expand.title', true);
-        var titleAlign = GetValue$1d(config, 'align.title', 'center');
-        var useOverlapSizer =
-        // Has title, title is not exapnd-width, title align to center
-        title && !titleExpandWidth && titleAlign === 'center' ||
-        // No title
-        !title && (toolbar || leftToolbar);
-        var useSizer = !useOverlapSizer;
-        var titleSizer;
-        if (useSizer) {
-          titleSizer = new Sizer(scene, {
-            orientation: 0
-          });
-        } else {
-          titleSizer = new OverlapSizer(scene);
-        }
-        var titleChildExpand = useSizer ? true : {
-          height: true
-        };
-
-        // Add leftToolbar
-        if (leftToolbarSizer) {
-          titleSizer.add(leftToolbarSizer, {
-            align: 'left',
-            expand: titleChildExpand
-          });
-        }
-
-        // Add title
-        if (title) {
-          // Add space if not expand, align to right
-          if (useSizer && !titleExpandWidth && titleAlign === 'right') {
-            titleSizer.addSpace();
-          }
-          var padding = {
-            left: GetValue$1d(config, 'space.titleLeft', 0),
-            right: GetValue$1d(config, 'space.titleRight', 0)
-          };
-          var proportion = titleExpandWidth ? 1 : 0;
-          titleSizer.add(title, {
-            align: titleAlign,
-            proportion: proportion,
-            expand: titleChildExpand,
-            padding: padding
-          });
-
-          // Add space if not expand, align to left
-          if (useSizer && !titleExpandWidth && titleAlign === 'left') {
-            titleSizer.addSpace();
-          }
-        }
-
-        // Add toolbar
-        if (toolbarSizer) {
-          // Add space if not title
-          if (useSizer && !title) {
-            titleSizer.addSpace();
-          }
-          titleSizer.add(toolbarSizer, {
-            align: 'right',
-            expand: titleChildExpand
-          });
-        }
-
-        // Add sizer to dialog
-        var titleSpace = GetValue$1d(config, 'space.title', 0);
-        var padding;
-        if (content || description || choices || actions) {
-          padding = {
-            bottom: titleSpace
-          };
-        }
-        var proportion = GetValue$1d(config, 'proportion.title', 0);
-        _this.add(titleSizer, {
-          padding: padding,
-          proportion: proportion,
-          expand: true
-        });
-      }
-      if (content) {
-        var align = GetValue$1d(config, 'align.content', 'center');
-        var contentSpace = GetValue$1d(config, 'space.content', 0);
-        var padding = {
-          left: GetValue$1d(config, 'space.contentLeft', 0),
-          right: GetValue$1d(config, 'space.contentRight', 0),
-          bottom: description || choices || actions ? contentSpace : 0
-        };
-        var proportion = GetValue$1d(config, 'proportion.content', 0);
-        var expand = GetValue$1d(config, 'expand.content', true);
-        _this.add(content, {
-          align: align,
-          padding: padding,
-          proportion: proportion,
-          expand: expand
-        });
-      }
-      if (description) {
-        var align = GetValue$1d(config, 'align.description', 'center');
-        var descriptionSpace = GetValue$1d(config, 'space.description', 0);
-        var padding = {
-          left: GetValue$1d(config, 'space.descriptionLeft', 0),
-          right: GetValue$1d(config, 'space.descriptionRight', 0),
-          bottom: choices || actions ? descriptionSpace : 0
-        };
-        var proportion = GetValue$1d(config, 'proportion.description', 0);
-        var expand = GetValue$1d(config, 'expand.description', true);
-        _this.add(description, {
-          align: align,
-          padding: padding,
-          proportion: proportion,
-          expand: expand
-        });
-      }
-      if (choices) {
-        var choicesType = GetValue$1d(config, 'choicesType', '').split('-');
-        var ButtonsClass = Contains(choicesType, 'wrap') ? Buttons : Contains(choicesType, 'grid') ? GridButtons : Buttons$1;
-        var buttonsType = Contains(choicesType, 'radio') ? 'radio' : Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
-        var space = {
-          left: GetValue$1d(config, 'space.choicesBackgroundLeft', 0),
-          right: GetValue$1d(config, 'space.choicesBackgroundRight', 0),
-          top: GetValue$1d(config, 'space.choicesBackgroundTop', 0),
-          bottom: GetValue$1d(config, 'space.choicesBackgroundBottom', 0)
-        };
-        var itemSpace = GetValue$1d(config, 'space.choice', 0);
-        if (ButtonsClass === Buttons$1) {
-          space.item = itemSpace;
-        } else if (ButtonsClass === Buttons) {
-          space.item = itemSpace;
-          space.line = GetValue$1d(config, 'space.choiceLine', itemSpace);
-        } else {
-          // GridButtons
-          space.column = GetValue$1d(config, 'space.choiceColumn', itemSpace);
-          space.row = GetValue$1d(config, 'space.choiceRow', itemSpace);
-        }
-        var choicesConfig = {
-          width: GetValue$1d(config, 'choicesWidth', undefined),
-          height: GetValue$1d(config, 'choicesHeight', undefined),
-          groupName: 'choices',
-          buttonsType: buttonsType,
-          background: choicesBackground,
-          buttons: choices,
-          space: space,
-          click: clickConfig,
-          eventEmitter: _this.eventEmitter,
-          setValueCallback: GetValue$1d(config, 'choicesSetValueCallback', undefined),
-          setValueCallbackScope: GetValue$1d(config, 'choicesSetValueCallbackScope', undefined)
-        };
-        if (ButtonsClass === Buttons$1) {
-          choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
-        }
-        choicesSizer = new ButtonsClass(scene, choicesConfig);
-        var choicesSpace = GetValue$1d(config, 'space.choices', 0);
-        var padding = {
-          left: GetValue$1d(config, 'space.choicesLeft', 0),
-          right: GetValue$1d(config, 'space.choicesRight', 0),
-          bottom: actions ? choicesSpace : 0
-        };
-        var align = GetValue$1d(config, 'align.choices', 'center');
-        var proportion = GetValue$1d(config, 'proportion.choices', 0);
-        var expand = GetValue$1d(config, 'expand.choices', true);
-        _this.add(choicesSizer, {
-          align: align,
-          padding: padding,
-          proportion: proportion,
-          expand: expand
-        });
-      }
-      if (actions) {
-        actionsSizer = new Buttons$1(scene, {
-          groupName: 'actions',
-          background: actionsBackground,
-          buttons: actions,
-          orientation: 0,
-          // Left-right
-          space: {
-            item: GetValue$1d(config, 'space.action', 0)
-          },
-          expand: GetValue$1d(config, 'expand.actions', false),
-          align: GetValue$1d(config, 'align.actions', 'center'),
-          click: clickConfig,
-          eventEmitter: _this.eventEmitter
-        });
-        var padding = {
-          left: GetValue$1d(config, 'space.actionsLeft', 0),
-          right: GetValue$1d(config, 'space.actionsRight', 0)
-        };
-        var proportion = GetValue$1d(config, 'proportion.action', 0);
-        _this.add(actionsSizer, {
-          align: 'center',
-          padding: padding,
-          proportion: proportion,
-          expand: true
-        });
-      }
-      EmitButtonEvent(_assertThisInitialized(_this), 'click');
-      EmitButtonEvent(_assertThisInitialized(_this), 'over');
-      EmitButtonEvent(_assertThisInitialized(_this), 'out');
-      EmitButtonEvent(_assertThisInitialized(_this), 'enable');
-      EmitButtonEvent(_assertThisInitialized(_this), 'disalbe');
-      _this.addChildrenMap('background', background);
-      _this.addChildrenMap('title', title);
-      _this.addChildrenMap('toolbar', toolbar);
-      _this.addChildrenMap('leftToolbar', leftToolbar);
-      _this.addChildrenMap('content', content);
-      _this.addChildrenMap('description', description);
-      _this.addChildrenMap('choices', choicesSizer ? choicesSizer.buttons : undefined);
-      _this.addChildrenMap('actions', actionsSizer ? actionsSizer.buttons : undefined);
-      _this.addChildrenMap('choicesSizer', choicesSizer);
-      _this.addChildrenMap('actionsSizer', actionsSizer);
-      _this.addChildrenMap('toolbarSizer', toolbarSizer);
-      _this.addChildrenMap('leftToolbarSizer', leftToolbarSizer);
-      return _this;
-    }
-    return _createClass(Dialog);
-  }(Sizer);
-  var Contains = function Contains(arr, item) {
-    return arr.indexOf(item) !== -1;
-  };
-  var ButtonsGroupEventNameMap = {
-    actions: 'action',
-    choices: 'choice',
-    toolbar: 'toolbar',
-    leftToolbar: 'leftToolbar'
-  };
-  var EmitButtonEvent = function EmitButtonEvent(dialog, postEventName) {
-    dialog.on("button.".concat(postEventName), function (button, groupName, index, pointer, event) {
-      if (!ButtonsGroupEventNameMap.hasOwnProperty(groupName)) {
-        return;
-      }
-      dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
-    });
-  };
-  Object.assign(Dialog.prototype, ButtonMethods$1);
-
-  ObjectFactory.register('dialog', function (config) {
-    var gameObject = new Dialog(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue(window, 'RexPlugins.UI.Dialog', Dialog);
-
-  var Choices = /*#__PURE__*/function (_Dialog) {
-    _inherits(Choices, _Dialog);
-    var _super = _createSuper(Choices);
-    // Assume that each child is a Label or a text game object
-
-    function Choices(scene, config) {
-      var _this;
-      _classCallCheck(this, Choices);
-      if (config === undefined) {
-        config = {};
-      }
-      if (!config.hasOwnProperty('choices')) {
-        config.choices = [];
-      }
-      var createChoiceCallback, createChoiceCallbackScope;
-      if (typeof config.choices === 'function') {
-        createChoiceCallback = config.choices;
-        createChoiceCallbackScope = undefined;
-        config.choices = [];
-      } else {
-        createChoiceCallback = config.createChoiceCallback;
-        createChoiceCallbackScope = config.createChoiceCallbackScope;
-      }
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexChoices';
-      _this.setCreateChoiceCallback(createChoiceCallback, createChoiceCallbackScope);
-      return _this;
-    }
-    _createClass(Choices, [{
-      key: "setCreateChoiceCallback",
-      value: function setCreateChoiceCallback(callback, scope) {
-        this.createChoiceCallback = callback;
-        this.createChoiceCallbackScope = scope;
-        return this;
-      }
-    }, {
-      key: "setChildText",
-      value: function setChildText(child, text) {
-        if (typeof child === 'string') {
-          child = this.childrenMap[child];
-        }
-        if (!child) {
-          return this;
-        }
-        if (text) {
-          child.show().setText(text);
-        } else {
-          child.hide();
-        }
-        return this;
-      }
-    }, {
-      key: "setTitle",
-      value: function setTitle(text) {
-        this.setChildText('title', text);
-        return this;
-      }
-    }, {
-      key: "setContent",
-      value: function setContent(text) {
-        this.setChildText('content', text);
-        return this;
-      }
-    }, {
-      key: "setDescription",
-      value: function setDescription(text) {
-        this.setChildText('description', text);
-        return this;
-      }
-    }, {
-      key: "setChoices",
-      value: function setChoices(textArray) {
-        var choices = this.childrenMap.choices;
-        if (textArray.length > choices.length) {
-          var callback = this.createChoiceCallback;
-          var scope = this.createChoiceCallbackScope;
-          if (callback) {
-            for (var i = 0, cnt = textArray.length - choices.length; i < cnt; i++) {
-              var gameObject;
-              if (scope) {
-                gameObject = callback.call(scope, this.scene);
-              } else {
-                gameObject = callback(this.scene);
-              }
-              this.addChoice(gameObject);
-            }
-          }
-        }
-        for (var i = 0, cnt = choices.length; i < cnt; i++) {
-          this.setChildText(choices[i], textArray[i]);
-        }
-        return this;
-      }
-    }, {
-      key: "setText",
-      value: function setText(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        this.setTitle(config.title).setContent(config.content).setDescription(config.description).setChoices(config.choices);
-        return this;
-      }
-    }, {
-      key: "clickChoicePromise",
-      value: function clickChoicePromise(config) {
-        if (config) {
-          this.setText(config).layout();
-        }
-        var self = this;
-        return new Promise(function (resolve, reject) {
-          self.once('choice.click', function (button, index, pointer, event) {
-            resolve({
-              button: button,
-              index: index,
-              pointer: pointer
-            });
-          });
-        });
-      }
-    }]);
-    return Choices;
-  }(Dialog);
-
-  ObjectFactory.register('choices', function (config) {
-    var gameObject = new Choices(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue(window, 'RexPlugins.UI.Choices', Choices);
-
-  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$3(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var CreateBackground$2 = function CreateBackground(scene, config) {
-    var gameObject = CreateRoundRectangle$1(scene, config);
-    // TODO: Create nine-slice background game object
-    return gameObject;
-  };
-
-  var CreateBBCodeText$1 = function CreateBBCodeText(scene, style) {
-    var gameObject = new BBCodeText(scene, 0, 0, '', style);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var PhaserImage$1 = Phaser.GameObjects.Image;
-  var CreateImage$1 = function CreateImage(scene, config) {
-    var gameObject = new PhaserImage$1(scene, 0, 0, '');
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config, deepCloneConfig) {
-    if (deepCloneConfig === undefined) {
-      deepCloneConfig = true;
-    }
-    if (deepCloneConfig) {
-      config = config ? DeepClone(config) : {};
-    } else if (!config) {
-      config = {};
-    }
-    config.background = CreateBackground$2(scene, config.background);
-    config.text = CreateBBCodeText$1(scene, config.text);
-    if (config.icon !== null) {
-      config.icon = CreateImage$1(scene, config.icon);
-    }
-    if (config.action !== null) {
-      config.action = CreateImage$1(scene, config.action);
-    }
-    return config;
-  };
-
-  var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
-    config = BuildDisplayLabelConfig(scene, config);
-    var gameObject = new Label$1(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var ResetDisplayContent = function ResetDisplayContent(config) {
-    if (config === undefined) {
-      config = {};
-    }
-    var title = this.childrenMap.title;
-    title.resetDisplayContent(config.title);
-    var content = this.childrenMap.content;
-    content.resetDisplayContent(config.content);
-    var buttonA = this.childrenMap.actions[0];
-    if (buttonA) {
-      buttonA.resetDisplayContent(config.buttonA);
-    }
-    var buttonB = this.childrenMap.actions[1];
-    if (buttonB) {
-      buttonB.resetDisplayContent(config.buttonB);
-    }
-    return this;
-  };
-
   /*
   graph TD
 
@@ -38470,7 +37960,7 @@
   var methods$e = {};
   Object.assign(methods$e, DelayCallMethods$1, ConfigurationMethods$1, OpenMethods, CloseMethods);
 
-  var GetValue$1c = Phaser.Utils.Objects.GetValue;
+  var GetValue$1d = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
     _inherits(OpenCloseTransition, _ComponentBase);
     var _super = _createSuper(OpenCloseTransition);
@@ -38481,15 +37971,15 @@
       // this.parent = gameObject;
       // this.scene
 
-      _this.setTransitInTime(GetValue$1c(config, 'duration.in', 200));
-      _this.setTransitOutTime(GetValue$1c(config, 'duration.out', 200));
-      _this.setTransitInCallback(GetValue$1c(config, 'transitIn'));
-      _this.setTransitOutCallback(GetValue$1c(config, 'transitOut'));
-      _this.oneShotMode = GetValue$1c(config, 'destroy', false);
+      _this.setTransitInTime(GetValue$1d(config, 'duration.in', 200));
+      _this.setTransitOutTime(GetValue$1d(config, 'duration.out', 200));
+      _this.setTransitInCallback(GetValue$1d(config, 'transitIn'));
+      _this.setTransitOutCallback(GetValue$1d(config, 'transitOut'));
+      _this.oneShotMode = GetValue$1d(config, 'destroy', false);
       _this.delayCallTimer = undefined;
       _this._state = new State$3(_assertThisInitialized(_this), {
         eventEmitter: false,
-        initState: GetValue$1c(config, 'initState', 'IDLE')
+        initState: GetValue$1d(config, 'initState', 'IDLE')
       });
       _this.openEventData = undefined;
       _this.closeEventData = undefined;
@@ -38560,7 +38050,7 @@
     FadeOutDestroy(cover, duration, false);
   };
 
-  var GetValue$1b = Phaser.Utils.Objects.GetValue;
+  var GetValue$1c = Phaser.Utils.Objects.GetValue;
   var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
     _inherits(Modal, _OpenCloseTransition);
     var _super = _createSuper(Modal);
@@ -38582,19 +38072,19 @@
       // this.scene
 
       // Cover : key of modal, to block touch input        
-      var coverConfig = GetValue$1b(config, 'cover');
+      var coverConfig = GetValue$1c(config, 'cover');
       _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
       if (_this.cover) {
-        _this.setCoverTransitInCallback(GetValue$1b(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
-        _this.setCoverTransitOutCallback(GetValue$1b(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+        _this.setCoverTransitInCallback(GetValue$1c(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+        _this.setCoverTransitOutCallback(GetValue$1c(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
       }
 
       // Close conditions:
-      var touchOutsideClose = GetValue$1b(config, 'touchOutsideClose', false);
-      var timeOutDuration = GetValue$1b(config, 'duration.hold', -1);
-      var timeOutClose = GetValue$1b(config, 'timeOutClose', timeOutDuration >= 0);
-      var anyTouchClose = GetValue$1b(config, 'anyTouchClose', false);
-      var manualClose = GetValue$1b(config, 'manualClose', false);
+      var touchOutsideClose = GetValue$1c(config, 'touchOutsideClose', false);
+      var timeOutDuration = GetValue$1c(config, 'duration.hold', -1);
+      var timeOutClose = GetValue$1c(config, 'timeOutClose', timeOutDuration >= 0);
+      var anyTouchClose = GetValue$1c(config, 'anyTouchClose', false);
+      var manualClose = GetValue$1c(config, 'manualClose', false);
       if (manualClose) {
         touchOutsideClose = false;
         anyTouchClose = false;
@@ -38805,10 +38295,7 @@
     modal: function modal(config, onClose) {
       if (IsFunction(config)) {
         onClose = config;
-        config = {};
-      }
-      if (config === undefined) {
-        config = {};
+        config = undefined;
       }
       this.on('button.click', function (button, groupName, index, pointer, event) {
         ModalClose(this, {
@@ -38816,13 +38303,6 @@
           text: button.text
         });
       }, this);
-      var zeroButtonMode = this.buttonMode === 0;
-      if (!config.hasOwnProperty('anyTouchClose')) {
-        config.anyTouchClose = zeroButtonMode;
-      }
-      if (!config.hasOwnProperty('manualClose')) {
-        config.manualClose = !zeroButtonMode;
-      }
       var modalBehavior = Modal(this, config);
       if (onClose) {
         modalBehavior.once('close', function (closeEventData) {
@@ -38839,10 +38319,499 @@
     }
   };
 
-  var Methods$6 = {
-    resetDisplayContent: ResetDisplayContent
+  var Methods$6 = {};
+  Object.assign(Methods$6, ButtonMethods$1, ModalMethods);
+
+  var GetValue$1b = Phaser.Utils.Objects.GetValue;
+  var Dialog = /*#__PURE__*/function (_Sizer) {
+    _inherits(Dialog, _Sizer);
+    var _super = _createSuper(Dialog);
+    function Dialog(scene, config) {
+      var _this;
+      _classCallCheck(this, Dialog);
+      if (config === undefined) {
+        config = {};
+      }
+      // Create sizer        
+      config.orientation = 1; // Top to bottom
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexDialog';
+      _this.eventEmitter = GetValue$1b(config, 'eventEmitter', _assertThisInitialized(_this));
+
+      // Add elements
+      var background = GetValue$1b(config, 'background', undefined);
+      var title = GetValue$1b(config, 'title', undefined);
+      var toolbar = GetValue$1b(config, 'toolbar', undefined);
+      var toolbarBackground = GetValue$1b(config, 'toolbarBackground', undefined);
+      var leftToolbar = GetValue$1b(config, 'leftToolbar', undefined);
+      var leftToolbarBackground = GetValue$1b(config, 'leftToolbarBackground', undefined);
+      var content = GetValue$1b(config, 'content', undefined);
+      var description = GetValue$1b(config, 'description', undefined);
+      var choicesSizer;
+      var choices = GetValue$1b(config, 'choices', undefined);
+      var choicesBackground = GetValue$1b(config, 'choicesBackground', undefined);
+      var actionsSizer;
+      var actions = GetValue$1b(config, 'actions', undefined);
+      var actionsBackground = GetValue$1b(config, 'actionsBackground', undefined);
+      var clickConfig = GetValue$1b(config, 'click', undefined);
+      if (background) {
+        _this.addBackground(background);
+      }
+      var toolbarSizer;
+      if (toolbar) {
+        toolbarSizer = new Buttons$1(scene, {
+          groupName: 'toolbar',
+          background: toolbarBackground,
+          buttons: toolbar,
+          orientation: 0,
+          // Left-right
+          space: {
+            item: GetValue$1b(config, 'space.toolbarItem', 0)
+          },
+          click: clickConfig,
+          eventEmitter: _this.eventEmitter
+        });
+      }
+      var leftToolbarSizer;
+      if (leftToolbar) {
+        leftToolbarSizer = new Buttons$1(scene, {
+          groupName: 'leftToolbar',
+          background: leftToolbarBackground,
+          buttons: leftToolbar,
+          orientation: 0,
+          // Left-right
+          space: {
+            item: GetValue$1b(config, 'space.leftToolbarItem', 0)
+          },
+          click: clickConfig,
+          eventEmitter: _this.eventEmitter
+        });
+      }
+
+      // title or toolbar or leftToolbar
+      if (title || toolbar || leftToolbar) {
+        var titleExpandWidth = !!title && GetValue$1b(config, 'expand.title', true);
+        var titleAlign = GetValue$1b(config, 'align.title', 'center');
+        var useOverlapSizer =
+        // Has title, title is not exapnd-width, title align to center
+        title && !titleExpandWidth && titleAlign === 'center' ||
+        // No title
+        !title && (toolbar || leftToolbar);
+        var useSizer = !useOverlapSizer;
+        var titleSizer;
+        if (useSizer) {
+          titleSizer = new Sizer(scene, {
+            orientation: 0
+          });
+        } else {
+          titleSizer = new OverlapSizer(scene);
+        }
+        var titleChildExpand = useSizer ? true : {
+          height: true
+        };
+
+        // Add leftToolbar
+        if (leftToolbarSizer) {
+          titleSizer.add(leftToolbarSizer, {
+            align: 'left',
+            expand: titleChildExpand
+          });
+        }
+
+        // Add title
+        if (title) {
+          // Add space if not expand, align to right
+          if (useSizer && !titleExpandWidth && titleAlign === 'right') {
+            titleSizer.addSpace();
+          }
+          var padding = {
+            left: GetValue$1b(config, 'space.titleLeft', 0),
+            right: GetValue$1b(config, 'space.titleRight', 0)
+          };
+          var proportion = titleExpandWidth ? 1 : 0;
+          titleSizer.add(title, {
+            align: titleAlign,
+            proportion: proportion,
+            expand: titleChildExpand,
+            padding: padding
+          });
+
+          // Add space if not expand, align to left
+          if (useSizer && !titleExpandWidth && titleAlign === 'left') {
+            titleSizer.addSpace();
+          }
+        }
+
+        // Add toolbar
+        if (toolbarSizer) {
+          // Add space if not title
+          if (useSizer && !title) {
+            titleSizer.addSpace();
+          }
+          titleSizer.add(toolbarSizer, {
+            align: 'right',
+            expand: titleChildExpand
+          });
+        }
+
+        // Add sizer to dialog
+        var titleSpace = GetValue$1b(config, 'space.title', 0);
+        var padding;
+        if (content || description || choices || actions) {
+          padding = {
+            bottom: titleSpace
+          };
+        }
+        var proportion = GetValue$1b(config, 'proportion.title', 0);
+        _this.add(titleSizer, {
+          padding: padding,
+          proportion: proportion,
+          expand: true
+        });
+      }
+      if (content) {
+        var align = GetValue$1b(config, 'align.content', 'center');
+        var contentSpace = GetValue$1b(config, 'space.content', 0);
+        var padding = {
+          left: GetValue$1b(config, 'space.contentLeft', 0),
+          right: GetValue$1b(config, 'space.contentRight', 0),
+          bottom: description || choices || actions ? contentSpace : 0
+        };
+        var proportion = GetValue$1b(config, 'proportion.content', 0);
+        var expand = GetValue$1b(config, 'expand.content', true);
+        _this.add(content, {
+          align: align,
+          padding: padding,
+          proportion: proportion,
+          expand: expand
+        });
+      }
+      if (description) {
+        var align = GetValue$1b(config, 'align.description', 'center');
+        var descriptionSpace = GetValue$1b(config, 'space.description', 0);
+        var padding = {
+          left: GetValue$1b(config, 'space.descriptionLeft', 0),
+          right: GetValue$1b(config, 'space.descriptionRight', 0),
+          bottom: choices || actions ? descriptionSpace : 0
+        };
+        var proportion = GetValue$1b(config, 'proportion.description', 0);
+        var expand = GetValue$1b(config, 'expand.description', true);
+        _this.add(description, {
+          align: align,
+          padding: padding,
+          proportion: proportion,
+          expand: expand
+        });
+      }
+      if (choices) {
+        var choicesType = GetValue$1b(config, 'choicesType', '').split('-');
+        var ButtonsClass = Contains(choicesType, 'wrap') ? Buttons : Contains(choicesType, 'grid') ? GridButtons : Buttons$1;
+        var buttonsType = Contains(choicesType, 'radio') ? 'radio' : Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
+        var space = {
+          left: GetValue$1b(config, 'space.choicesBackgroundLeft', 0),
+          right: GetValue$1b(config, 'space.choicesBackgroundRight', 0),
+          top: GetValue$1b(config, 'space.choicesBackgroundTop', 0),
+          bottom: GetValue$1b(config, 'space.choicesBackgroundBottom', 0)
+        };
+        var itemSpace = GetValue$1b(config, 'space.choice', 0);
+        if (ButtonsClass === Buttons$1) {
+          space.item = itemSpace;
+        } else if (ButtonsClass === Buttons) {
+          space.item = itemSpace;
+          space.line = GetValue$1b(config, 'space.choiceLine', itemSpace);
+        } else {
+          // GridButtons
+          space.column = GetValue$1b(config, 'space.choiceColumn', itemSpace);
+          space.row = GetValue$1b(config, 'space.choiceRow', itemSpace);
+        }
+        var choicesConfig = {
+          width: GetValue$1b(config, 'choicesWidth', undefined),
+          height: GetValue$1b(config, 'choicesHeight', undefined),
+          groupName: 'choices',
+          buttonsType: buttonsType,
+          background: choicesBackground,
+          buttons: choices,
+          space: space,
+          click: clickConfig,
+          eventEmitter: _this.eventEmitter,
+          setValueCallback: GetValue$1b(config, 'choicesSetValueCallback', undefined),
+          setValueCallbackScope: GetValue$1b(config, 'choicesSetValueCallbackScope', undefined)
+        };
+        if (ButtonsClass === Buttons$1) {
+          choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
+        }
+        choicesSizer = new ButtonsClass(scene, choicesConfig);
+        var choicesSpace = GetValue$1b(config, 'space.choices', 0);
+        var padding = {
+          left: GetValue$1b(config, 'space.choicesLeft', 0),
+          right: GetValue$1b(config, 'space.choicesRight', 0),
+          bottom: actions ? choicesSpace : 0
+        };
+        var align = GetValue$1b(config, 'align.choices', 'center');
+        var proportion = GetValue$1b(config, 'proportion.choices', 0);
+        var expand = GetValue$1b(config, 'expand.choices', true);
+        _this.add(choicesSizer, {
+          align: align,
+          padding: padding,
+          proportion: proportion,
+          expand: expand
+        });
+      }
+      if (actions) {
+        actionsSizer = new Buttons$1(scene, {
+          groupName: 'actions',
+          background: actionsBackground,
+          buttons: actions,
+          orientation: 0,
+          // Left-right
+          space: {
+            item: GetValue$1b(config, 'space.action', 0)
+          },
+          expand: GetValue$1b(config, 'expand.actions', false),
+          align: GetValue$1b(config, 'align.actions', 'center'),
+          click: clickConfig,
+          eventEmitter: _this.eventEmitter
+        });
+        var padding = {
+          left: GetValue$1b(config, 'space.actionsLeft', 0),
+          right: GetValue$1b(config, 'space.actionsRight', 0)
+        };
+        var proportion = GetValue$1b(config, 'proportion.action', 0);
+        _this.add(actionsSizer, {
+          align: 'center',
+          padding: padding,
+          proportion: proportion,
+          expand: true
+        });
+      }
+      EmitButtonEvent(_assertThisInitialized(_this), 'click');
+      EmitButtonEvent(_assertThisInitialized(_this), 'over');
+      EmitButtonEvent(_assertThisInitialized(_this), 'out');
+      EmitButtonEvent(_assertThisInitialized(_this), 'enable');
+      EmitButtonEvent(_assertThisInitialized(_this), 'disalbe');
+      _this.addChildrenMap('background', background);
+      _this.addChildrenMap('title', title);
+      _this.addChildrenMap('toolbar', toolbar);
+      _this.addChildrenMap('leftToolbar', leftToolbar);
+      _this.addChildrenMap('content', content);
+      _this.addChildrenMap('description', description);
+      _this.addChildrenMap('choices', choicesSizer ? choicesSizer.buttons : undefined);
+      _this.addChildrenMap('actions', actionsSizer ? actionsSizer.buttons : undefined);
+      _this.addChildrenMap('choicesSizer', choicesSizer);
+      _this.addChildrenMap('actionsSizer', actionsSizer);
+      _this.addChildrenMap('toolbarSizer', toolbarSizer);
+      _this.addChildrenMap('leftToolbarSizer', leftToolbarSizer);
+      return _this;
+    }
+    return _createClass(Dialog);
+  }(Sizer);
+  var Contains = function Contains(arr, item) {
+    return arr.indexOf(item) !== -1;
   };
-  Object.assign(Methods$6, ModalMethods);
+  var ButtonsGroupEventNameMap = {
+    actions: 'action',
+    choices: 'choice',
+    toolbar: 'toolbar',
+    leftToolbar: 'leftToolbar'
+  };
+  var EmitButtonEvent = function EmitButtonEvent(dialog, postEventName) {
+    dialog.on("button.".concat(postEventName), function (button, groupName, index, pointer, event) {
+      if (!ButtonsGroupEventNameMap.hasOwnProperty(groupName)) {
+        return;
+      }
+      dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
+    });
+  };
+  Object.assign(Dialog.prototype, Methods$6);
+
+  ObjectFactory.register('dialog', function (config) {
+    var gameObject = new Dialog(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.Dialog', Dialog);
+
+  var Choices = /*#__PURE__*/function (_Dialog) {
+    _inherits(Choices, _Dialog);
+    var _super = _createSuper(Choices);
+    // Assume that each child is a Label or a text game object
+
+    function Choices(scene, config) {
+      var _this;
+      _classCallCheck(this, Choices);
+      if (config === undefined) {
+        config = {};
+      }
+      if (!config.hasOwnProperty('choices')) {
+        config.choices = [];
+      }
+      var createChoiceCallback, createChoiceCallbackScope;
+      if (typeof config.choices === 'function') {
+        createChoiceCallback = config.choices;
+        createChoiceCallbackScope = undefined;
+        config.choices = [];
+      } else {
+        createChoiceCallback = config.createChoiceCallback;
+        createChoiceCallbackScope = config.createChoiceCallbackScope;
+      }
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexChoices';
+      _this.setCreateChoiceCallback(createChoiceCallback, createChoiceCallbackScope);
+      return _this;
+    }
+    _createClass(Choices, [{
+      key: "setCreateChoiceCallback",
+      value: function setCreateChoiceCallback(callback, scope) {
+        this.createChoiceCallback = callback;
+        this.createChoiceCallbackScope = scope;
+        return this;
+      }
+    }, {
+      key: "setChildText",
+      value: function setChildText(child, text) {
+        if (typeof child === 'string') {
+          child = this.childrenMap[child];
+        }
+        if (!child) {
+          return this;
+        }
+        if (text) {
+          child.show().setText(text);
+        } else {
+          child.hide();
+        }
+        return this;
+      }
+    }, {
+      key: "setTitle",
+      value: function setTitle(text) {
+        this.setChildText('title', text);
+        return this;
+      }
+    }, {
+      key: "setContent",
+      value: function setContent(text) {
+        this.setChildText('content', text);
+        return this;
+      }
+    }, {
+      key: "setDescription",
+      value: function setDescription(text) {
+        this.setChildText('description', text);
+        return this;
+      }
+    }, {
+      key: "setChoices",
+      value: function setChoices(textArray) {
+        var choices = this.childrenMap.choices;
+        if (textArray.length > choices.length) {
+          var callback = this.createChoiceCallback;
+          var scope = this.createChoiceCallbackScope;
+          if (callback) {
+            for (var i = 0, cnt = textArray.length - choices.length; i < cnt; i++) {
+              var gameObject;
+              if (scope) {
+                gameObject = callback.call(scope, this.scene);
+              } else {
+                gameObject = callback(this.scene);
+              }
+              this.addChoice(gameObject);
+            }
+          }
+        }
+        for (var i = 0, cnt = choices.length; i < cnt; i++) {
+          this.setChildText(choices[i], textArray[i]);
+        }
+        return this;
+      }
+    }, {
+      key: "setText",
+      value: function setText(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        this.setTitle(config.title).setContent(config.content).setDescription(config.description).setChoices(config.choices);
+        return this;
+      }
+    }, {
+      key: "clickChoicePromise",
+      value: function clickChoicePromise(config) {
+        if (config) {
+          this.setText(config).layout();
+        }
+        var self = this;
+        return new Promise(function (resolve, reject) {
+          self.once('choice.click', function (button, index, pointer, event) {
+            resolve({
+              button: button,
+              index: index,
+              pointer: pointer
+            });
+          });
+        });
+      }
+    }]);
+    return Choices;
+  }(Dialog);
+
+  ObjectFactory.register('choices', function (config) {
+    var gameObject = new Choices(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.Choices', Choices);
+
+  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle$3(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateBackground$2 = function CreateBackground(scene, config) {
+    var gameObject = CreateRoundRectangle$1(scene, config);
+    // TODO: Create nine-slice background game object
+    return gameObject;
+  };
+
+  var CreateBBCodeText$1 = function CreateBBCodeText(scene, style) {
+    var gameObject = new BBCodeText(scene, 0, 0, '', style);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var PhaserImage$1 = Phaser.GameObjects.Image;
+  var CreateImage$1 = function CreateImage(scene, config) {
+    var gameObject = new PhaserImage$1(scene, 0, 0, '');
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config, deepCloneConfig) {
+    if (deepCloneConfig === undefined) {
+      deepCloneConfig = true;
+    }
+    if (deepCloneConfig) {
+      config = config ? DeepClone(config) : {};
+    } else if (!config) {
+      config = {};
+    }
+    config.background = CreateBackground$2(scene, config.background);
+    config.text = CreateBBCodeText$1(scene, config.text);
+    if (config.icon !== null) {
+      config.icon = CreateImage$1(scene, config.icon);
+    }
+    if (config.action !== null) {
+      config.action = CreateImage$1(scene, config.action);
+    }
+    return config;
+  };
+
+  var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
+    config = BuildDisplayLabelConfig(scene, config);
+    var gameObject = new Label$1(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
 
   var ConfirmDialog = /*#__PURE__*/function (_Dialog) {
     _inherits(ConfirmDialog, _Dialog);
@@ -38874,9 +38843,49 @@
       _this.buttonMode = buttonMode;
       return _this;
     }
-    return _createClass(ConfirmDialog);
+    _createClass(ConfirmDialog, [{
+      key: "resetDisplayContent",
+      value: function resetDisplayContent(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        var title = this.childrenMap.title;
+        title.resetDisplayContent(config.title);
+        var content = this.childrenMap.content;
+        content.resetDisplayContent(config.content);
+        var buttonA = this.childrenMap.actions[0];
+        if (buttonA) {
+          buttonA.resetDisplayContent(config.buttonA);
+        }
+        var buttonB = this.childrenMap.actions[1];
+        if (buttonB) {
+          buttonB.resetDisplayContent(config.buttonB);
+        }
+        return this;
+      }
+    }, {
+      key: "modal",
+      value: function modal(config, onClose) {
+        if (IsFunction(config)) {
+          onClose = config;
+          config = undefined;
+        }
+        if (config === undefined) {
+          config = {};
+        }
+        var zeroButtonMode = this.buttonMode === 0;
+        if (!config.hasOwnProperty('anyTouchClose')) {
+          config.anyTouchClose = zeroButtonMode;
+        }
+        if (!config.hasOwnProperty('manualClose')) {
+          config.manualClose = !zeroButtonMode;
+        }
+        _get(_getPrototypeOf(ConfirmDialog.prototype), "modal", this).call(this, config, onClose);
+        return this;
+      }
+    }]);
+    return ConfirmDialog;
   }(Dialog);
-  Object.assign(ConfirmDialog.prototype, Methods$6);
 
   ObjectFactory.register('confirmDialog', function (config) {
     var gameObject = new ConfirmDialog(this.scene, config);

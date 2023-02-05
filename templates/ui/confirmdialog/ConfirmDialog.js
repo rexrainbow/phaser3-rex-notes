@@ -2,7 +2,7 @@ import Dialog from '../dialog/Dialog.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateDisplayLabel from '../utils/build/CreateDisplayLabel.js';
-import Methods from './methods/Methods.js';
+import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 
 class ConfirmDialog extends Dialog {
     constructor(scene, config) {
@@ -45,11 +45,55 @@ class ConfirmDialog extends Dialog {
 
         this.buttonMode = buttonMode;
     }
-}
 
-Object.assign(
-    ConfirmDialog.prototype,
-    Methods,
-)
+    resetDisplayContent(config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var title = this.childrenMap.title;
+        title.resetDisplayContent(config.title);
+
+        var content = this.childrenMap.content;
+        content.resetDisplayContent(config.content);
+
+        var buttonA = this.childrenMap.actions[0];
+        if (buttonA) {
+            buttonA.resetDisplayContent(config.buttonA);
+        }
+
+        var buttonB = this.childrenMap.actions[1];
+        if (buttonB) {
+            buttonB.resetDisplayContent(config.buttonB);
+        }
+
+        return this;
+    }
+
+    modal(config, onClose) {
+        if (IsFunction(config)) {
+            onClose = config;
+            config = undefined;
+        }
+
+        if (config === undefined) {
+            config = {};
+        }
+
+        var zeroButtonMode = (this.buttonMode === 0);
+
+        if (!config.hasOwnProperty('anyTouchClose')) {
+            config.anyTouchClose = zeroButtonMode;
+        }
+
+        if (!config.hasOwnProperty('manualClose')) {
+            config.manualClose = !zeroButtonMode;
+        }
+
+        super.modal(config, onClose);
+
+        return this;
+    }
+}
 
 export default ConfirmDialog;
