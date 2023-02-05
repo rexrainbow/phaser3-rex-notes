@@ -179,7 +179,7 @@ declare class Factories {
     space: typeof SpaceFactory;
     swipe: typeof SwipeFactory;
     tabs: typeof TabsFactory;
-    TabPages: typeof TabPagesFactory;
+    tabPages: typeof TabPagesFactory;
     tagText: typeof TagTextFactory;
     tap: typeof TapFactory;
     textArea: typeof TextAreaFactory;
