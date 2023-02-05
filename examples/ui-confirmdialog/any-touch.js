@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
 
         this.rexUI.add.confirmDialog({
             x: 400, y: 300,
+            width: 300,
 
             space: { left: 20, right: 20, top: 20, bottom: 20, title: 20, content: 30, action: 15, },
 
@@ -54,31 +55,16 @@ class Demo extends Phaser.Scene {
                 },
             },
 
-            buttonMode: 2,
-            button: {
-                space: { left: 10, right: 10, top: 10, bottom: 10 },
-                background: {
-                    color: COLOR_DARK,
-                    strokeColor: COLOR_LIGHT,
-                    radius: 10,
-                }
-            },
-
-            align: {
-                actions: 'right'
-            },
+            buttonMode: 0,
         })
             .setDraggable('title')
             .resetDisplayContent({
                 title: 'Title',
-                content: 'Do you want to build a snow man?',
-                buttonA: 'Yes',
-                buttonB: 'No'
+                content: "Hello."
             })
             .layout()
             .modalPromise()
-            .then(function (data) {
-                print.text = JSON.stringify(data);
+            .then(function () {
             })
     }
 

@@ -38816,7 +38816,13 @@
           text: button.text
         });
       }, this);
-      config.manualClose = this.buttonMode !== 0;
+      var zeroButtonMode = this.buttonMode === 0;
+      if (!config.hasOwnProperty('anyTouchClose')) {
+        config.anyTouchClose = zeroButtonMode;
+      }
+      if (!config.hasOwnProperty('manualClose')) {
+        config.manualClose = !zeroButtonMode;
+      }
       var modalBehavior = Modal(this, config);
       if (onClose) {
         modalBehavior.once('close', function (closeEventData) {
