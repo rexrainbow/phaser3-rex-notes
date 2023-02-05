@@ -252,6 +252,7 @@ module.exports = {
     'chart': './templates/ui/chart/Chart.js',
     'dialog': './templates/ui/dialog/Dialog.js',
     'choices': './templates/ui/choices/Choices.js',
+    'confirmdialog': './templates/ui/confirmdialog/ConfirmDialog.js',
     'fixwidthsizer': './templates/ui/fixwidthsizer/FixWidthSizer.js',
     'overlapsizer': './templates/ui/overlapsizer/OverlapSizer.js',
     'flip': './templates/ui/flip/Flip.js',
