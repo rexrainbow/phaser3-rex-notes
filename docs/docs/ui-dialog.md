@@ -332,24 +332,65 @@ dialog.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+
 ### Modal
 
+Pop this dialog as modal dialog, clicking any action button to close this modal dialog.
+
 ```javascript
-scene.rexUI.modalPromise(dialog, config)
-    .then(function(closeEventData) {
+dialog.modal({
+    // cover: {
+    //     color: 0x0,
+    //     alpha: 0.8,
+    //     transitIn: function(gameObject, duration) { },
+    //     transitOut: function(gameObject, duration) { },
+    // },
+    // cover: false, 
+
+    // When to close modal dialog?
+    // touchOutsideClose: false,
+    // anyTouchClose: false,
+    // timeOutClose: false,
+    // manualClose: false,
+
+    // duration: {
+    //     in: 200,
+    //     hold: 2000,
+    //     out: 200
+    // }
+
+    // transitIn: 0,
+    // transitOut: 0,
+
+    // destroy: true
+});
+// dialog.modal(config, onClose);
+```
+
+or
+
+```javascript
+dialog
+    .modalPromise(config)
+    .then(function(data){
+        
     })
 ```
 
 - `config` : See [Modal behavior](modal.md#create-instance)
+- `onClose` : Callback when closing modal dialog
+    ```javascript
+    function(data) {
+        // var index = data.index;
+        // var text = data.text;
+        // var button = data.button;
+    }
+    ```
+    - `data` : Contains these properties
+        - `data.index` : Index of clicking action button
+        - `data.text` : `button.text`, this property is valided if button game object is a label.
+        - `data.button` : Clicked button game object.
 
-#### Close modal dialog
-
-```javascript
-dialog.emit('modal.requestClose');
-// dialog.emit('modal.requestClose', closeEventData);
-```
-
-- Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
 
 ### Other properties
 
@@ -764,61 +805,3 @@ dialog.forEachLeftToolbar(callback, scope);
     }, scope);
     ```
     - Can be used to replace *setValueCallback*.
-
-### Modal
-
-Pop this dialog as modal dialog, clicking any action button to close this modal dialog.
-
-```javascript
-dialog.modal({
-    // cover: {
-    //     color: 0x0,
-    //     alpha: 0.8,
-    //     transitIn: function(gameObject, duration) { },
-    //     transitOut: function(gameObject, duration) { },
-    // },
-    // cover: false, 
-
-    // When to close modal dialog?
-    // touchOutsideClose: false,
-    // anyTouchClose: false,
-    // timeOutClose: false,
-    // manualClose: false,
-
-    // duration: {
-    //     in: 200,
-    //     hold: 2000,
-    //     out: 200
-    // }
-
-    // transitIn: 0,
-    // transitOut: 0,
-
-    // destroy: true
-});
-// dialog.modal(config, onClose);
-```
-
-or
-
-```javascript
-dialog
-    .modalPromise(config)
-    .then(function(data){
-        
-    })
-```
-
-- `config` : See [Modal behavior](modal.md#create-instance)
-- `onClose` : Callback when closing modal dialog
-    ```javascript
-    function(data) {
-        // var index = data.index;
-        // var text = data.text;
-        // var button = data.button;
-    }
-    ```
-    - `data` : Contains these properties
-        - `data.index` : Index of clicking action button
-        - `data.text` : `button.text`, this property is valided if button game object is a label.
-        - `data.button` : Clicked button game object.
