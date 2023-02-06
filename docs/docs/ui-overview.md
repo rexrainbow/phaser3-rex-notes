@@ -106,6 +106,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Pages](ui-pages.md): A container with pages, only current page is visible.
 1. [Perspective card](ui-perspectivecard.md): A container with front and back faces.
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
+1. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md) composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action.
 1. [Sizer](ui-sizer.md): Layout children game objects.
 1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
 1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.

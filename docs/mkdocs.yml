@@ -391,6 +391,7 @@ nav:
         - Overlap sizer: ui-overlapsizer.md
     - Label:
         - Label: ui-label.md
+        - Simple label: ui-simplelabel.md
         - Title label: ui-titlelabel.md
         - Name value label: ui-namevaluelabel.md
         - Badge label: ui-badgelabel.md

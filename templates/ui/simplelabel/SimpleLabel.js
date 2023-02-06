@@ -5,6 +5,7 @@ class SimpleLabel extends Label {
     constructor(scene, config) {
         config = BuildDisplayLabelConfig(scene, config);
         super(scene, config);
+        this.type = 'rexSimpleLabel';
     }
 }
 
