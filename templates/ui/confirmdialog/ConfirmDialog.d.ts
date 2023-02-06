@@ -1,5 +1,5 @@
 import Dialog from '../dialog/Dialog';
-import BBCodeText from '../bbcodetext/BBCodeText';
+import SimpleLabel from '../simplelabel/SimpleLabel';
 import Label from '../label/Label';
 
 export default ConfirmDialog;
@@ -24,24 +24,6 @@ declare namespace ConfirmDialog {
         strokeColor?: number,
         strokeAlpha?: number,
         strokeWidth?: number,
-    }
-
-    interface ILabelConfig {
-        background?: IRoundRectangleConfig,
-
-        text?: BBCodeText.TextStyle,
-
-        iconMask?: boolean,
-        iconSize?: number, iconWidth?: number, iconHeight?: number,
-        actionMask?: boolean,
-        actionSize?: number, actionWidth?: number, actionHeight?: number,
-
-        space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
-
-            icon?: number,
-            text?: number,
-        },
     }
 
     type AlignTypes = number | 'left' | 'center' | 'right';
@@ -72,14 +54,14 @@ declare namespace ConfirmDialog {
 
         background?: IRoundRectangleConfig,
 
-        title?: ILabelConfig,
+        title?: SimpleLabel.IConfig,
 
-        content?: ILabelConfig,
+        content?: SimpleLabel.IConfig,
 
         buttonMode?: 0 | 1 | 2;
-        buttonA?: ILabelConfig,
-        buttonB?: ILabelConfig,
-        button?: ILabelConfig,
+        buttonA?: SimpleLabel.IConfig,
+        buttonB?: SimpleLabel.IConfig,
+        button?: SimpleLabel.IConfig,
 
         proportion?: {
             title?: number,

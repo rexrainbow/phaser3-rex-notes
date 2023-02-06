@@ -259,6 +259,7 @@ module.exports = {
     'gridsizer': './templates/ui/gridsizer/GridSizer.js',
     'gridtable': './templates/ui/gridtable/GridTable.js',
     'label': './templates/ui/label/Label.js',
+    'simplelabel': './templates/ui/simplelabel/SimpleLabel.js',
     'titlelabel': './templates/ui/titlelabel/TitleLabel.js',
     'namevaluelabel': './templates/ui/namevaluelabel/NameValueLabel.js',
     'menu': './templates/ui/menu/Menu.js',

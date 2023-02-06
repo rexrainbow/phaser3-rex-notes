@@ -66,6 +66,7 @@ import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import ScrollablePanelFactory from './scrollablepanel/Factory';
 import ScrollBarFactory from './scrollbar/Factory';
+import SimpleLabelFactory from './simplelabel/Factory';
 import SizerFactory from './sizer/Factory';
 import ShakeFactory from './shake/Factory';
 import SkewFactory from './skew/Factory';
@@ -174,6 +175,7 @@ declare class Factories {
     roundRectangle: typeof RoundRectangleFactory;
     scrollablePanel: typeof ScrollablePanelFactory;
     scrollBar: typeof ScrollBarFactory;
+    simpleLabel: typeof SimpleLabelFactory;
     sizer: typeof SizerFactory;
     shake: typeof ShakeFactory;
     skew: typeof SkewFactory;
@@ -310,6 +312,7 @@ import RoundRectangleCanvasClass from './roundrectanglecanvas/RoundRectangleCanv
 import RoundRectangleClass from './roundrectangle/RoundRectangle';
 import ScrollablePanelClass from './scrollablepanel/ScrollablePanel';
 import ScrollBarClass from './scrollbar/ScrollBar';
+import SimpleLabelClass from './simplelabel/SimpleLabel';
 import SizerClass from './sizer/Sizer';
 import ShakeClass from './shake/Shake';
 import SkewClass from './skew/Skew';
@@ -396,6 +399,7 @@ declare namespace UIPlugins {
     type RoundRectangle = RoundRectangleClass;
     type ScrollablePanel = ScrollablePanelClass;
     type ScrollBar = ScrollBarClass;
+    type SimpleLabel = SimpleLabelClass;
     type Sizer = SizerClass;
     type shake = ShakeClass;
     type skew = SkewClass;

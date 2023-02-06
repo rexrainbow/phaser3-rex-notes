@@ -38,6 +38,7 @@ import OverlapSizer from './overlapsizer/OverlapSizer';
 
 import Space from './space/Space';
 import Label from './label/Label';
+import SimpleLabel from './simplelabel/SimpleLabel';
 import TitleLabel from './titlelabel/TitleLabel';
 import NameValueLabel from './namevaluelabel/NameValueLabel';
 import Buttons from './buttons/Buttons';
@@ -154,6 +155,7 @@ export {
 
     Space,
     Label,
+    SimpleLabel,
     TitleLabel,
     NameValueLabel,
     Buttons,

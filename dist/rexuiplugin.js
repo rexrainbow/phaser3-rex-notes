@@ -35758,6 +35758,69 @@
   });
   SetValue(window, 'RexPlugins.UI.Label', Label$1);
 
+  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle$3(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateBackground$2 = function CreateBackground(scene, config) {
+    var gameObject = CreateRoundRectangle$1(scene, config);
+    // TODO: Create nine-slice background game object
+    return gameObject;
+  };
+
+  var CreateBBCodeText$1 = function CreateBBCodeText(scene, style) {
+    var gameObject = new BBCodeText(scene, 0, 0, '', style);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var PhaserImage$1 = Phaser.GameObjects.Image;
+  var CreateImage$1 = function CreateImage(scene, config) {
+    var gameObject = new PhaserImage$1(scene, 0, 0, '');
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config, deepCloneConfig) {
+    if (deepCloneConfig === undefined) {
+      deepCloneConfig = true;
+    }
+    if (deepCloneConfig) {
+      config = config ? DeepClone(config) : {};
+    } else if (!config) {
+      config = {};
+    }
+    config.background = CreateBackground$2(scene, config.background);
+    config.text = CreateBBCodeText$1(scene, config.text);
+    if (config.icon !== null) {
+      config.icon = CreateImage$1(scene, config.icon);
+    }
+    if (config.action !== null) {
+      config.action = CreateImage$1(scene, config.action);
+    }
+    return config;
+  };
+
+  var SimpleLabel = /*#__PURE__*/function (_Label) {
+    _inherits(SimpleLabel, _Label);
+    var _super = _createSuper(SimpleLabel);
+    function SimpleLabel(scene, config) {
+      _classCallCheck(this, SimpleLabel);
+      config = BuildDisplayLabelConfig(scene, config);
+      return _super.call(this, scene, config);
+    }
+    return _createClass(SimpleLabel);
+  }(Label$1);
+
+  ObjectFactory.register('simpleLabel', function (config) {
+    var gameObject = new SimpleLabel(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.SimpleLabel', SimpleLabel);
+
   var GetValue$1k = Phaser.Utils.Objects.GetValue;
   var TitleLabel = /*#__PURE__*/function (_Sizer) {
     _inherits(TitleLabel, _Sizer);
@@ -38789,51 +38852,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.Choices', Choices);
-
-  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$3(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var CreateBackground$2 = function CreateBackground(scene, config) {
-    var gameObject = CreateRoundRectangle$1(scene, config);
-    // TODO: Create nine-slice background game object
-    return gameObject;
-  };
-
-  var CreateBBCodeText$1 = function CreateBBCodeText(scene, style) {
-    var gameObject = new BBCodeText(scene, 0, 0, '', style);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var PhaserImage$1 = Phaser.GameObjects.Image;
-  var CreateImage$1 = function CreateImage(scene, config) {
-    var gameObject = new PhaserImage$1(scene, 0, 0, '');
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config, deepCloneConfig) {
-    if (deepCloneConfig === undefined) {
-      deepCloneConfig = true;
-    }
-    if (deepCloneConfig) {
-      config = config ? DeepClone(config) : {};
-    } else if (!config) {
-      config = {};
-    }
-    config.background = CreateBackground$2(scene, config.background);
-    config.text = CreateBBCodeText$1(scene, config.text);
-    if (config.icon !== null) {
-      config.icon = CreateImage$1(scene, config.icon);
-    }
-    if (config.action !== null) {
-      config.action = CreateImage$1(scene, config.action);
-    }
-    return config;
-  };
 
   var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
     config = BuildDisplayLabelConfig(scene, config);

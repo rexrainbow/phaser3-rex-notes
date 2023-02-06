@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer';
-import BBCodeText from '../bbcodetext/BBCodeText';
+import SimpleLabel from '../simplelabel/SimpleLabel';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
@@ -41,25 +41,7 @@ declare namespace Tweaker {
         'active.strokeWidth'?: number,
     }
 
-    interface ILabelConfig {
-        background?: IRoundRectangleConfig,
-
-        text?: BBCodeText.TextStyle,
-
-        iconMask?: boolean,
-        iconSize?: number, iconWidth?: number, iconHeight?: number,
-        actionMask?: boolean,
-        actionSize?: number, actionWidth?: number, actionHeight?: number,
-
-        space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
-
-            icon?: number,
-            text?: number,
-        },
-    }
-
-    interface IInteractiveLabelConfig extends ILabelConfig {
+    interface IInteractiveLabelConfig extends SimpleLabel.IConfig {
         background?: IInteractiveRoundRectangleConfig,
     }
 
@@ -67,7 +49,7 @@ declare namespace Tweaker {
         expand?: boolean,
     }
 
-    interface IFolderTitleConfig extends ILabelConfig {
+    interface IFolderTitleConfig extends SimpleLabel.IConfig {
         expandedIcon?: {
             color?: number,
             alpha?: number,
@@ -91,7 +73,7 @@ declare namespace Tweaker {
             inputRow?: {
                 background?: IRoundRectangleConfig,
 
-                title?: ILabelConfig,
+                title?: SimpleLabel.IConfig,
 
                 inputText?: InputText.IConfig,
 
@@ -102,7 +84,7 @@ declare namespace Tweaker {
                 },
 
                 list?: {
-                    label?: ILabelConfig,
+                    label?: SimpleLabel.IConfig,
 
                     button?: IInteractiveLabelConfig,
                 },
@@ -126,7 +108,7 @@ declare namespace Tweaker {
             },
 
             folder?: {
-                title?: ILabelConfig,
+                title?: SimpleLabel.IConfig,
 
                 background?: IRoundRectangleConfig,
 
