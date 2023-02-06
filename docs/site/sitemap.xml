@@ -1726,6 +1726,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-simplelabel/</loc>
+         <lastmod>2023-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-sizer/</loc>
          <lastmod>2023-02-06</lastmod>
          <changefreq>daily</changefreq>
