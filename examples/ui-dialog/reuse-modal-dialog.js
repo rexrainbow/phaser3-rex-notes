@@ -25,16 +25,15 @@ class Demo extends Phaser.Scene {
         var dialog = CreateDialog(this)
             .setPosition(400, 300)
             .layout()
-            .setVisible(false);
+            .hide();
 
 
         this.add.rectangle(200, 200, 100, 100, 0xff0000)
             .setInteractive()
             .on('pointerdown', function () {
                 dialog
+                    .show()
                     .bringToTop()
-                    .setVisible(true)
-                    .setScale(1)
                     .modalPromise({
                         manaulClose: true,
                         duration: {

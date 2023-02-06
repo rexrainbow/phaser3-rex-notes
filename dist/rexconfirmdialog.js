@@ -12488,11 +12488,11 @@
   /*
   graph TD
 
-  IDLE --> TRAN_OPEN
-  TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
-  OPEN --> TRANS_CLOSE
-  TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
-  CLOSE --> TRAN_OPEN
+  IDLE --> |"requestOpen()"| TRANS_OPNE["TRAN_OPEN<br>runTransitionInCallback()"]
+  TRANS_OPNE --> |transitInTime| OPEN
+  OPEN --> |"requestClose()"| TRANS_CLOSE["TRANS_CLOSE<br>runTransitionOutCallback()"]
+  TRANS_CLOSE --> |transitOutTime| CLOSE
+  CLOSE --> |"requestOpen()"| TRANS_OPNE
   */
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
@@ -12685,7 +12685,7 @@
   };
 
   var OpenMethods = {
-    // Interanl method
+    // Override
     runTransitionInCallback: function runTransitionInCallback() {
       this.transitInCallback(this.parent, this.transitInTime);
       return this.transitInTime;
@@ -12708,13 +12708,14 @@
   };
 
   var CloseMethods = {
-    // Interanl method
+    // Override
     runTransitionOutCallback: function runTransitionOutCallback() {
       this.transitOutCallback(this.parent, this.transitOutTime);
       return this.transitOutTime;
     },
     // Override
     onClose: function onClose() {
+      // Destroy parent and this behavior
       if (this.oneShotMode) {
         this.parent.destroy();
         // Will invoke `this.destroy()`
@@ -12984,13 +12985,7 @@
     // Put cover behind game object
     if (gameObject.isRexContainerLite) {
       gameObject.moveDepthBelow(cover);
-      gameObject.pin(cover, {
-        syncPosition: false,
-        syncRotation: false,
-        syncScale: false,
-        syncAlpha: false,
-        syncScrollFactor: false
-      });
+      gameObject.pin(cover, false);
     } else {
       scene.children.moveBelow(cover, gameObject);
     }
@@ -12998,12 +12993,27 @@
   };
 
   var DefaultTransitCallbacks = {
-    popUp: PopUp,
+    popUp: function popUp(gameObject, duration) {
+      if (gameObject._modalScaleSave !== undefined) {
+        gameObject.scaleX = gameObject._modalScaleSave;
+        gameObject.scaleY = gameObject._modalScaleSave;
+      } else {
+        gameObject._modalScaleSave = gameObject.scaleX;
+      }
+      PopUp(gameObject, duration);
+    },
     scaleDown: function scaleDown(gameObject, duration) {
       // Don't destroy here
       ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
     },
-    fadeIn: FadeIn,
+    fadeIn: function fadeIn(gameObject, duration) {
+      if (gameObject._modalAlphaSave !== undefined) {
+        gameObject.alpha = gameObject._modalAlphaSave;
+      } else {
+        gameObject._modalAlphaSave = gameObject.alpha;
+      }
+      FadeIn(gameObject, duration);
+    },
     fadeOut: function fadeOut(gameObject, duration) {
       // Don't destroy here
       FadeOutDestroy(gameObject, duration, false);
@@ -13011,6 +13021,11 @@
   };
 
   var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
+    if (cover._modalAlphaSave !== undefined) {
+      cover.alpha = cover._modalAlphaSave;
+    } else {
+      cover._modalAlphaSave = cover.alpha;
+    }
     FadeIn(cover, duration, cover.alpha);
   };
   var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
@@ -13033,7 +13048,7 @@
       if (config.transitOut == null) {
         config.transitOut = TransitionMode.scaleDown;
       }
-      config.destroy = true;
+      config.destroy = GetValue$9(config, 'destroy', true);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -13123,26 +13138,24 @@
         this.requestClose();
       }
     }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionIn", this).call(this);
-        var duration = this.transitInTime;
+      key: "runTransitionInCallback",
+      value: function runTransitionInCallback() {
+        var duration = _get(_getPrototypeOf(Modal.prototype), "runTransitionInCallback", this).call(this);
         var cover = this.cover;
         if (cover && this.coverTransitInCallback) {
           this.coverTransitInCallback(cover, duration);
         }
-        return this;
+        return duration;
       }
     }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionOut", this).call(this);
-        var duration = this.transitOutTime;
+      key: "runTransitionOutCallback",
+      value: function runTransitionOutCallback() {
+        var duration = _get(_getPrototypeOf(Modal.prototype), "runTransitionOutCallback", this).call(this);
         var cover = this.cover;
         if (cover && this.coverTransitOutCallback) {
           this.coverTransitOutCallback(cover, duration);
         }
-        return this;
+        return duration;
       }
     }, {
       key: "onOpen",
@@ -13241,9 +13254,12 @@
 
     // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
     gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    modalBehavior.on('close', function () {
-      gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    });
+    /*
+    It is not necessary to turn off gameObject's 'modal.requestClose' event because that :
+      - If `config.destroy` is `undefined` (or `true), gameObject and modalBehavior will be destroyed
+    - If `config.destroy` is `false` (for reusing dialog), keeping gameObject and modalBehavior 
+    */
+
     return modalBehavior;
   };
   var ModalClose = function ModalClose(gameObject, closeEventData) {
@@ -13256,18 +13272,25 @@
         onClose = config;
         config = undefined;
       }
-      this.on('button.click', function (button, groupName, index, pointer, event) {
-        ModalClose(this, {
-          index: index,
-          text: button.text
-        });
-      }, this);
-      var modalBehavior = Modal(this, config);
-      if (onClose) {
-        modalBehavior.once('close', function (closeEventData) {
-          onClose(closeEventData);
-        });
+      if (this._modalBehavior === undefined) {
+        var OnButtonClick = function OnButtonClick(button, groupName, index, pointer, event) {
+          if (groupName !== 'actions') {
+            return;
+          }
+          var closeEventData = {
+            index: index,
+            text: button.text,
+            button: button
+          };
+          ModalClose(this, closeEventData);
+        };
+        this.on('button.click', OnButtonClick, this);
+        this._modalBehavior = Modal(this, config);
       }
+      if (onClose) {
+        this._modalBehavior.once('close', onClose);
+      }
+      this._modalBehavior.requestOpen();
       return this;
     },
     modalPromise: function modalPromise(config) {

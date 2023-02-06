@@ -1,5 +1,5 @@
 export default {
-    // Interanl method
+    // Override
     runTransitionInCallback() {
         this.transitInCallback(this.parent, this.transitInTime);
         return this.transitInTime;

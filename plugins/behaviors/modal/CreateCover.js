@@ -8,13 +8,7 @@ var CreateCover = function (gameObject, config) {
     // Put cover behind game object
     if (gameObject.isRexContainerLite) {
         gameObject.moveDepthBelow(cover);
-        gameObject.pin(cover, {
-            syncPosition: false,
-            syncRotation: false,
-            syncScale: false,
-            syncAlpha: false,
-            syncScrollFactor: false,
-        });
+        gameObject.pin(cover, false);
     } else {
         scene.children.moveBelow(cover, gameObject);
     }

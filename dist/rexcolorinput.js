@@ -21546,11 +21546,11 @@
   /*
   graph TD
 
-  IDLE --> TRAN_OPEN
-  TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
-  OPEN --> TRANS_CLOSE
-  TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
-  CLOSE --> TRAN_OPEN
+  IDLE --> |"requestOpen()"| TRANS_OPNE["TRAN_OPEN<br>runTransitionInCallback()"]
+  TRANS_OPNE --> |transitInTime| OPEN
+  OPEN --> |"requestClose()"| TRANS_CLOSE["TRANS_CLOSE<br>runTransitionOutCallback()"]
+  TRANS_CLOSE --> |transitOutTime| CLOSE
+  CLOSE --> |"requestOpen()"| TRANS_OPNE
   */
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
@@ -21743,7 +21743,7 @@
   };
 
   var OpenMethods = {
-    // Interanl method
+    // Override
     runTransitionInCallback: function runTransitionInCallback() {
       this.transitInCallback(this.parent, this.transitInTime);
       return this.transitInTime;
@@ -21766,13 +21766,14 @@
   };
 
   var CloseMethods = {
-    // Interanl method
+    // Override
     runTransitionOutCallback: function runTransitionOutCallback() {
       this.transitOutCallback(this.parent, this.transitOutTime);
       return this.transitOutTime;
     },
     // Override
     onClose: function onClose() {
+      // Destroy parent and this behavior
       if (this.oneShotMode) {
         this.parent.destroy();
         // Will invoke `this.destroy()`

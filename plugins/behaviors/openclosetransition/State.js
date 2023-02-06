@@ -3,11 +3,11 @@ import FSM from '../../fsm.js';
 /*
 graph TD
 
-IDLE --> TRAN_OPEN
-TRAN_OPEN --> |TransitionIn<br>transitInTime| OPEN
-OPEN --> TRANS_CLOSE
-TRANS_CLOSE --> |TransitionOut<br>transitOutTime| CLOSE
-CLOSE --> TRAN_OPEN
+IDLE --> |"requestOpen()"| TRANS_OPNE["TRAN_OPEN<br>runTransitionInCallback()"]
+TRANS_OPNE --> |transitInTime| OPEN
+OPEN --> |"requestClose()"| TRANS_CLOSE["TRANS_CLOSE<br>runTransitionOutCallback()"]
+TRANS_CLOSE --> |transitOutTime| CLOSE
+CLOSE --> |"requestOpen()"| TRANS_OPNE
 */
 
 class State extends FSM {
