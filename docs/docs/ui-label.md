@@ -316,7 +316,7 @@ label.resetDisplayContent({
     action: undefined, actionFrame: undefined,
     actionSize: undefined,
 
-});
+})
 ```
 
 - `text` : Set text string.
@@ -326,6 +326,8 @@ label.resetDisplayContent({
 - `action`, `actionFrame` : Set texture of action game object.
     - `undefined`, or `null` : Hide action game object.
 - `actionSize` : Set display size of action game object.
+
+Run `label.layout()` after this method, to layout children again.
 
 ### Other properties
 

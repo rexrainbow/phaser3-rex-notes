@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create [label](ui-label.md) composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action.
+Using json style to create [label](ui-label.md) composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action icon.
 
 - Author: Rex
 - Game object
@@ -164,6 +164,8 @@ label.resetDisplayContent({
 - `action`, `actionFrame` : Set texture of action game object.
     - `undefined`, or `null` : Hide action game object.
 - `actionSize` : Set display size of action game object.
+
+Run `label.layout()` after this method, to layout children again.
 
 ### Layout children
 
