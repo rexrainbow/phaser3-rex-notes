@@ -135,8 +135,15 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
         }
         ```
 - `destroy`
-    - `true` : Destroy dialog when closing completed. Default behavior.
-    - `fasle` : Don't destroy dialog.
+    - `true` : Destroy dialog game object and this behavior when closing completed. Default behavior.
+    - `fasle` : Keep dialog game object and this behavior when closing completed. Could [reuse it](modal.md#open) later.
+
+
+### Open
+
+- Will open modal dialog game object (run transition-in callback) when creating this behavior
+- Invoke `modal.requestOpen()` to open modal dialog game object again, after closing modal dialog.
+    - Set `destroy` to `false` to reuse dialog game object and this behavior.
 
 ### Close
 

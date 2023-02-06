@@ -3322,6 +3322,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#open" class="md-nav__link">
+    Open
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#close" class="md-nav__link">
     Close
   </a>
@@ -8913,6 +8920,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#open" class="md-nav__link">
+    Open
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#close" class="md-nav__link">
     Close
   </a>
@@ -9092,8 +9106,16 @@
 </ul>
 </li>
 <li><code>destroy</code><ul>
-<li><code>true</code> : Destroy dialog when closing completed. Default behavior.</li>
-<li><code>fasle</code> : Don't destroy dialog.</li>
+<li><code>true</code> : Destroy dialog game object and this behavior when closing completed. Default behavior.</li>
+<li><code>fasle</code> : Keep dialog game object and this behavior when closing completed. Could <a href="./#open">reuse it</a> later.</li>
+</ul>
+</li>
+</ul>
+<h3 id="open">Open<a class="headerlink" href="#open" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Will open modal dialog game object (run transition-in callback) when creating this behavior</li>
+<li>Invoke <code>modal.requestOpen()</code> to open modal dialog game object again, after closing modal dialog.<ul>
+<li>Set <code>destroy</code> to <code>false</code> to reuse dialog game object and this behavior.</li>
 </ul>
 </li>
 </ul>

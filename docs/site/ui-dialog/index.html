@@ -7992,6 +7992,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modal_1" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9168,6 +9175,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modal_1" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9948,6 +9962,61 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Can be used to replace <em>setValueCallback</em>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="modal_1">Modal<a class="headerlink" href="#modal_1" title="Permanent link">&para;</a></h3>
+<p>Pop this dialog as modal dialog, clicking any action button to close this modal dialog.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">modal</span><span class="p">({</span>
+    <span class="c1">// cover: {</span>
+    <span class="c1">//     color: 0x0,</span>
+    <span class="c1">//     alpha: 0.8,</span>
+    <span class="c1">//     transitIn: function(gameObject, duration) { },</span>
+    <span class="c1">//     transitOut: function(gameObject, duration) { },</span>
+    <span class="c1">// },</span>
+    <span class="c1">// cover: false, </span>
+
+    <span class="c1">// When to close modal dialog?</span>
+    <span class="c1">// touchOutsideClose: false,</span>
+    <span class="c1">// anyTouchClose: false,</span>
+    <span class="c1">// timeOutClose: false,</span>
+    <span class="c1">// manualClose: false,</span>
+
+    <span class="c1">// duration: {</span>
+    <span class="c1">//     in: 200,</span>
+    <span class="c1">//     hold: 2000,</span>
+    <span class="c1">//     out: 200</span>
+    <span class="c1">// }</span>
+
+    <span class="c1">// transitIn: 0,</span>
+    <span class="c1">// transitOut: 0,</span>
+
+    <span class="c1">// destroy: true</span>
+<span class="p">});</span>
+<span class="c1">// dialog.modal(config, onClose);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">dialog</span>
+    <span class="p">.</span><span class="nx">modalPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+
+    <span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a></li>
+<li><code>onClose</code> : Callback when closing modal dialog
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var index = data.index;</span>
+    <span class="c1">// var text = data.text;</span>
+    <span class="c1">// var button = data.button;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>data</code> : Contains these properties<ul>
+<li><code>data.index</code> : Index of clicking action button</li>
+<li><code>data.text</code> : <code>button.text</code>, this property is valided if button game object is a label.</li>
+<li><code>data.button</code> : Clicked button game object.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
