@@ -7,6 +7,7 @@ export default {
 
     // Override
     onClose() {
+        // Destroy parent and this behavior
         if (this.oneShotMode) {
             this.parent.destroy();
             // Will invoke `this.destroy()`

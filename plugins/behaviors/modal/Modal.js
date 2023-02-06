@@ -21,11 +21,15 @@ class Modal extends OpenCloseTransition {
             config.transitOut = TransitionMode.scaleDown;
         }
 
+        var destroyParent = GetValue(config, 'destroy', true);
+
         config.destroy = true;
 
         super(gameObject, config);
         // this.parent = gameObject;
         // this.scene
+
+        this.destroyParent = destroyParent;
 
         // Cover : key of modal, to block touch input        
         var coverConfig = GetValue(config, 'cover');
@@ -154,7 +158,12 @@ class Modal extends OpenCloseTransition {
 
     onClose() {
         this.emit('close', this.closeEventData);
-        super.onClose();
+
+        if (this.destroyParent) {
+            this.parent.destroy();
+        } else {
+            this.destroy();
+        }
     }
 
     setDisplayTime(time) {

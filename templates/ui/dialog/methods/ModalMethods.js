@@ -8,15 +8,28 @@ export default {
             config = undefined;
         }
 
-        this
-            .on('button.click', function (button, groupName, index, pointer, event) {
-                ModalClose(this, { index: index, text: button.text });
-            }, this)
+        var dialog = this;
 
-        var modalBehavior = Modal(this, config);
+        var OnButtonClick = function (button, groupName, index, pointer, event) {
+            if (groupName !== 'actions') {
+                return;
+            }
+
+            var closeEventData = {
+                index: index,
+                text: button.text,
+                button: button,
+            }
+            ModalClose(dialog, closeEventData);
+        }
+
+        dialog.on('button.click', OnButtonClick);
+
+        var modalBehavior = Modal(dialog, config);
 
         if (onClose) {
             modalBehavior.once('close', function (closeEventData) {
+                dialog.off('button.click', OnButtonClick);
                 onClose(closeEventData);
             });
         }

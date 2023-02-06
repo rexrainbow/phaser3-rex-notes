@@ -78,7 +78,10 @@ class Demo extends Phaser.Scene {
             .layout()
             .modalPromise()
             .then(function (data) {
-                print.text = JSON.stringify(data);
+                print.text = `\
+index: ${data.index}
+text : ${data.text}
+`
             })
     }
 

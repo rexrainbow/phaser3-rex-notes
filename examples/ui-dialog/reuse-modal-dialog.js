@@ -22,22 +22,36 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
-        CreateDialog(this)
+        var dialog = CreateDialog(this)
             .setPosition(400, 300)
             .layout()
-            .modalPromise({
-                manaulClose: true,
-                duration: {
-                    in: 500,
-                    out: 500
-                }
-            })
-            .then(function (data) {
-                print.text = `\
+            .setVisible(false);
+
+
+        this.add.rectangle(200, 200, 100, 100, 0xff0000)
+            .setInteractive()
+            .on('pointerdown', function () {
+                dialog
+                    .bringToTop()
+                    .setVisible(true)
+                    .setScale(1)
+                    .modalPromise({
+                        manaulClose: true,
+                        duration: {
+                            in: 500,
+                            out: 500
+                        },
+                        destroy: false
+                    })
+                    .then(function (data) {
+                        print.text = `\
 index: ${data.index}
 text : ${data.text}
 `
+                    })
             })
+
+
 
     }
 
