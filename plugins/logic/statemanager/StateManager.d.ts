@@ -32,6 +32,9 @@ declare class StateManager extends StateManagerBase {
         states: { [name: string]: StateManager.IState },
     ): this;
 
+    readonly _scene: Phaser.Scene;
+    getScene(): Phaser.Scene;
+
     update(
         time: number,
         delta: number

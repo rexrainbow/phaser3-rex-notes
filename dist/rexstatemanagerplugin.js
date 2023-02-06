@@ -502,6 +502,11 @@
         _get(_getPrototypeOf(StateManager.prototype), "shutdown", this).call(this);
       }
     }, {
+      key: "getScene",
+      value: function getScene() {
+        return this._scene;
+      }
+    }, {
       key: "update",
       value: function update(time, delta) {
         this.runMethod('update', time, delta);

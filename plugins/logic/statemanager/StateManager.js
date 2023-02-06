@@ -8,6 +8,7 @@ class StateManager extends StateManagerBase {
 
         this._scene = GetValue(config, 'scene', undefined);
     }
+
     shutdown() {
         this.stopUpdate();
         this.stopPreUpdate();
@@ -15,6 +16,10 @@ class StateManager extends StateManagerBase {
         this._scene = undefined;
 
         super.shutdown();
+    }
+
+    getScene() {
+        return this._scene;
     }
 
     update(time, delta) {
