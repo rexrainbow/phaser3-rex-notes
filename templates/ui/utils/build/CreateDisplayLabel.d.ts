@@ -1,15 +1,14 @@
-import Label from '../../label/Label';
-import BuildDisplayLabelConfig from './BuildDisplayLabelConfig';
+import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 
 export default CreateDisplayLabel;
 
 declare namespace CreateDisplayLabel {
-    interface IConfig extends BuildDisplayLabelConfig.IConfig {
+    interface IConfig extends SimpleLabel.IConfig {
 
     }
 }
 
 declare function CreateDisplayLabel(
     scene: Phaser.Scene,
-    config?: CreateDisplayLabel.IConfig
-): Label;
+    config?: SimpleLabel.IConfig
+): SimpleLabel;

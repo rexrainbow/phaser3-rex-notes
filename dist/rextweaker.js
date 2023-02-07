@@ -27989,9 +27989,22 @@
     right: 3
   };
 
+  var SimpleLabel = /*#__PURE__*/function (_Label) {
+    _inherits(SimpleLabel, _Label);
+    var _super = _createSuper(SimpleLabel);
+    function SimpleLabel(scene, config) {
+      var _this;
+      _classCallCheck(this, SimpleLabel);
+      config = BuildDisplayLabelConfig(scene, config);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexSimpleLabel';
+      return _this;
+    }
+    return _createClass(SimpleLabel);
+  }(Label$1);
+
   var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
-    config = BuildDisplayLabelConfig(scene, config);
-    var gameObject = new Label$1(scene, config);
+    var gameObject = new SimpleLabel(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
   };

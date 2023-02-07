@@ -38898,8 +38898,7 @@
   SetValue(window, 'RexPlugins.UI.Choices', Choices);
 
   var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
-    config = BuildDisplayLabelConfig(scene, config);
-    var gameObject = new Label$1(scene, config);
+    var gameObject = new SimpleLabel(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
   };

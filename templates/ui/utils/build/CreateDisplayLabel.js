@@ -1,9 +1,7 @@
-import BuildDisplayLabelConfig from './BuildDisplayLabelConfig.js';
-import Label from '../../label/Label.js';
+import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 
 var CreateDisplayLabel = function (scene, config) {
-    config = BuildDisplayLabelConfig(scene, config);
-    var gameObject = new Label(scene, config);
+    var gameObject = new SimpleLabel(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
 }
