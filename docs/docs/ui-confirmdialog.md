@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-label](ui-simplelabel.md) title, [simple-label](ui-simplelabel.md) content, 0/1/2 [simple-label](ui-simplelabel.md) action button(s).
+Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-label](ui-simplelabel.md) title, [simple-label](ui-simplelabel.md) content, with [simple-label](ui-simplelabel.md) 0, 1, or 2 action button(s).
 
 - Author: Rex
 - Game object
