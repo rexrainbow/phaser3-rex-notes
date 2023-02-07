@@ -1621,6 +1621,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-confirmdialog/</loc>
+         <lastmod>2023-02-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-dialog/</loc>
          <lastmod>2023-02-07</lastmod>
          <changefreq>daily</changefreq>

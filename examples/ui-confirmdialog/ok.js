@@ -26,10 +26,8 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
-        this.rexUI.add.confirmDialog({
-            x: 400, y: 300,
+        var style = {
             width: 300,
-
             space: { left: 20, right: 20, top: 20, bottom: 20, title: 20, content: 30, action: 15, },
 
             background: {
@@ -66,9 +64,11 @@ class Demo extends Phaser.Scene {
             },
 
             align: {
-                actions: 'center'
+                actions: 'right'
             },
-        })
+        }
+        this.rexUI.add.confirmDialog(style)
+            .setPosition(400, 300)
             .setDraggable('title')
             .resetDisplayContent({
                 title: 'Title',

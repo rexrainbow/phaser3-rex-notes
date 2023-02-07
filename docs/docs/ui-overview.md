@@ -87,6 +87,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [Color input](ui-colorinput.md): Color number (`0x0`~`0xffffff`) or color string (`'#000000'`~`'#ffffff'`, or `'red'`) input field.
 1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
+1. [Confirm dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Drop down list](ui-dropdownlist.md): A [label](ui-label.md) can open a drop-down list panel.
 1. [File selector button](ui-fileselectorbutton.md): A transparent file chooser button above a Label.

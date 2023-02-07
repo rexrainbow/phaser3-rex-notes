@@ -5,7 +5,7 @@ import Label from '../label/Label';
 
 export default ConfirmDialog;
 
-declare namespace ConfirmDialog {    
+declare namespace ConfirmDialog {
     type AlignTypes = number | 'left' | 'center' | 'right';
 
     interface IConfigClick {
@@ -14,6 +14,11 @@ declare namespace ConfirmDialog {
     }
 
     interface IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
 
@@ -39,9 +44,9 @@ declare namespace ConfirmDialog {
         content?: SimpleLabel.IConfig,
 
         buttonMode?: 0 | 1 | 2;
+        button?: SimpleLabel.IConfig,
         buttonA?: SimpleLabel.IConfig,
         buttonB?: SimpleLabel.IConfig,
-        button?: SimpleLabel.IConfig,
 
         proportion?: {
             title?: number,

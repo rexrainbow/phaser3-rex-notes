@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create [label](ui-label.md) composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action icon.
+Using json style to create [label](ui-label.md), composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action icon.
 
 - Author: Rex
 - Game object
@@ -100,30 +100,30 @@ var label = scene.rexUI.add.simpleLabel({
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
-    // text: {
-    //     fontFamily: 'Courier',
-    //     fontSize: '16px',
-    //     fontStyle: '',
-    //     backgroundColor: null,
-    //     color: '#fff',
-    //     stroke: '#fff',
-    //     strokeThickness: 0,
-    //     shadow: {
-    //         offsetX: 0,
-    //         offsetY: 0,
-    //         color: '#000',
-    //         blur: 0,
-    //         stroke: false,
-    //         fill: false
-    //     },                  
-    //     padding: {
-    //         left: 0,
-    //         right: 0,
-    //         top: 0,
-    //         bottom: 0,
-    //     },
-    //     // more text styles
-    // },
+    text: {
+        fontFamily: 'Courier',
+        fontSize: '16px',
+        fontStyle: '',
+        backgroundColor: null,
+        color: '#fff',
+        stroke: '#fff',
+        strokeThickness: 0,
+        shadow: {
+            offsetX: 0,
+            offsetY: 0,
+            color: '#000',
+            blur: 0,
+            stroke: false,
+            fill: false
+        },                  
+        padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+        },
+        // more text styles
+    },
     // expandTextWidth: false,
     // expandTextHeight: false,
 
@@ -144,6 +144,24 @@ var label = scene.rexUI.add.simpleLabel({
     // enableLayer: false,
 });
 ```
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyLabel extends RexPlugins.UI.SimpleLabel {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var label = new MyLabel(scene, config);
+    ```
 
 ### Reset display content
 

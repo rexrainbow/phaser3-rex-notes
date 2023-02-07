@@ -1,4 +1,5 @@
 import Label from '../../label/Label';
+import Sizer from '../../sizer/Sizer';
 import CreateBackground from './CreateBackground';
 import CreateBBCodeText from './CreateBBCodeText';
 
@@ -6,6 +7,13 @@ export default BuildDisplayLabelConfig;
 
 declare namespace BuildDisplayLabelConfig {
     interface IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+        orientation?: Sizer.OrientationTypes,
+        rtl?: boolean,
+
         background?: CreateBackground.IConfig,
 
         iconMask?: boolean,
