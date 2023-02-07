@@ -1,31 +1,11 @@
 import Dialog from '../dialog/Dialog';
+import CreateBackground from '../utils/build/CreateBackground';
 import SimpleLabel from '../simplelabel/SimpleLabel';
 import Label from '../label/Label';
 
 export default ConfirmDialog;
 
-declare namespace ConfirmDialog {
-    interface IRoundRectangleConfig {
-        width?: number,
-        height?: number,
-        radius?: number | {
-            tl?: (number | { x?: number, y?: number }),
-            tr?: (number | { x?: number, y?: number }),
-            bl?: (number | { x?: number, y?: number }),
-            br?: (number | { x?: number, y?: number }),
-
-            x?: number,
-            y?: number,
-        },
-
-        color?: number,
-        alpha?: number,
-
-        strokeColor?: number,
-        strokeAlpha?: number,
-        strokeWidth?: number,
-    }
-
+declare namespace ConfirmDialog {    
     type AlignTypes = number | 'left' | 'center' | 'right';
 
     interface IConfigClick {
@@ -52,7 +32,7 @@ declare namespace ConfirmDialog {
             action?: number,
         };
 
-        background?: IRoundRectangleConfig,
+        background?: CreateBackground.IConfig,
 
         title?: SimpleLabel.IConfig,
 

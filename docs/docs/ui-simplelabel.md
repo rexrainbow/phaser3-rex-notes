@@ -23,7 +23,7 @@ Using json style to create [label](ui-label.md) composed of [round-rectangle](sh
     ```
 - Add label object
     ```javascript
-    var label = scene.rexUI.add.simpleLabel(config);
+    var label = scene.rexUI.add.simpleLabel(style).resetDisplayContent(config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Using json style to create [label](ui-label.md) composed of [round-rectangle](sh
     ```
 - Add label object
     ```javascript
-    var label = scene.rexUI.add.simpleLabel(config);
+    var label = scene.rexUI.add.simpleLabel(style).resetDisplayContent(config);
     ```
 
 #### Import class
@@ -67,8 +67,9 @@ Using json style to create [label](ui-label.md) composed of [round-rectangle](sh
     ```
 - Add label object
     ```javascript    
-    var label = new SimpleLabel(scene, config);
+    var label = new SimpleLabel(scene, style);
     scene.add.existing(label);
+    label.resetDisplayContent(config)
     ```
 
 ### Add label object
@@ -99,33 +100,35 @@ var label = scene.rexUI.add.simpleLabel({
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
-    text: {
-        fontFamily: 'Courier',
-        fontSize: '16px',
-        fontStyle: '',
-        backgroundColor: null,
-        color: '#fff',
-        stroke: '#fff',
-        strokeThickness: 0,
-        shadow: {
-            offsetX: 0,
-            offsetY: 0,
-            color: '#000',
-            blur: 0,
-            stroke: false,
-            fill: false
-        },                  
-        padding: {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-        },
-        // more text styles
-    },
+    // text: {
+    //     fontFamily: 'Courier',
+    //     fontSize: '16px',
+    //     fontStyle: '',
+    //     backgroundColor: null,
+    //     color: '#fff',
+    //     stroke: '#fff',
+    //     strokeThickness: 0,
+    //     shadow: {
+    //         offsetX: 0,
+    //         offsetY: 0,
+    //         color: '#000',
+    //         blur: 0,
+    //         stroke: false,
+    //         fill: false
+    //     },                  
+    //     padding: {
+    //         left: 0,
+    //         right: 0,
+    //         top: 0,
+    //         bottom: 0,
+    //     },
+    //     // more text styles
+    // },
+    // expandTextWidth: false,
+    // expandTextHeight: false,
 
-    // actionMask: false,
     // squareFitAction: false,
+    // actionMask: false,
     // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
 
     space: {
@@ -133,7 +136,7 @@ var label = scene.rexUI.add.simpleLabel({
         icon: 0, text: 0
     }
 
-    align: undefined,
+    align: undefined,  // 'left' | 'top' | 'right' | 'bottom' | 'center
 
     // name: '',
     // draggable: false,

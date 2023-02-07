@@ -14417,9 +14417,12 @@
     _inherits(SimpleLabel, _Label);
     var _super = _createSuper(SimpleLabel);
     function SimpleLabel(scene, config) {
+      var _this;
       _classCallCheck(this, SimpleLabel);
       config = BuildDisplayLabelConfig(scene, config);
-      return _super.call(this, scene, config);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexSimpleLabel';
+      return _this;
     }
     return _createClass(SimpleLabel);
   }(Label);

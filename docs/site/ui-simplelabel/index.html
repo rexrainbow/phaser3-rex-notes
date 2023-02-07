@@ -8977,7 +8977,7 @@
   <h1>Simple label</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Using json style to create <a href="../ui-label/">label</a> composed of <a href="../shape-roundrectangle/">round-rectangle</a> background, <a href="../image/">image</a> icon, <a href="../bbcodetext/">BBCodeText</a> text, <a href="../image/">image</a> action.</p>
+<p>Using json style to create <a href="../ui-label/">label</a> composed of <a href="../shape-roundrectangle/">round-rectangle</a> background, <a href="../image/">image</a> icon, <a href="../bbcodetext/">BBCodeText</a> text, <a href="../image/">image</a> action icon.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -8995,7 +8995,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add label object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9021,7 +9021,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add label object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9033,8 +9033,9 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SimpleLabel</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add label object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">SimpleLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">SimpleLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+<span class="nx">label</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-label-object">Add label object<a class="headerlink" href="#add-label-object" title="Permanent link">&para;</a></h3>
@@ -9063,33 +9064,35 @@
     <span class="c1">// squareFitIcon: false,</span>
     <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
-    <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-        <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-        <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-        <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-            <span class="nx">blur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
-        <span class="p">},</span>                  
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="c1">// more text styles</span>
-    <span class="p">},</span>
+    <span class="c1">// text: {</span>
+    <span class="c1">//     fontFamily: &#39;Courier&#39;,</span>
+    <span class="c1">//     fontSize: &#39;16px&#39;,</span>
+    <span class="c1">//     fontStyle: &#39;&#39;,</span>
+    <span class="c1">//     backgroundColor: null,</span>
+    <span class="c1">//     color: &#39;#fff&#39;,</span>
+    <span class="c1">//     stroke: &#39;#fff&#39;,</span>
+    <span class="c1">//     strokeThickness: 0,</span>
+    <span class="c1">//     shadow: {</span>
+    <span class="c1">//         offsetX: 0,</span>
+    <span class="c1">//         offsetY: 0,</span>
+    <span class="c1">//         color: &#39;#000&#39;,</span>
+    <span class="c1">//         blur: 0,</span>
+    <span class="c1">//         stroke: false,</span>
+    <span class="c1">//         fill: false</span>
+    <span class="c1">//     },                  </span>
+    <span class="c1">//     padding: {</span>
+    <span class="c1">//         left: 0,</span>
+    <span class="c1">//         right: 0,</span>
+    <span class="c1">//         top: 0,</span>
+    <span class="c1">//         bottom: 0,</span>
+    <span class="c1">//     },</span>
+    <span class="c1">//     // more text styles</span>
+    <span class="c1">// },</span>
+    <span class="c1">// expandTextWidth: false,</span>
+    <span class="c1">// expandTextHeight: false,</span>
 
-    <span class="c1">// actionMask: false,</span>
     <span class="c1">// squareFitAction: false,</span>
+    <span class="c1">// actionMask: false,</span>
     <span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
 
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
@@ -9097,7 +9100,7 @@
         <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">}</span>
 
-    <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// &#39;left&#39; | &#39;top&#39; | &#39;right&#39; | &#39;bottom&#39; | &#39;center</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false,</span>
@@ -9130,6 +9133,7 @@
 </li>
 <li><code>actionSize</code> : Set display size of action game object.</li>
 </ul>
+<p>Run <code>label.layout()</code> after this method, to layout children again.</p>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all elements.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

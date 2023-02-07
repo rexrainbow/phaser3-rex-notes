@@ -1,4 +1,6 @@
 import Sizer from '../sizer/Sizer';
+import RoundRectangle from '../roundrectangle/RoundRectangle';
+import CreateBackground from '../utils/build/CreateBackground';
 import SimpleLabel from '../simplelabel/SimpleLabel';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
@@ -11,28 +13,7 @@ import ColorInput from '../colorinput/colorinput/ColorInput';
 export default Tweaker;
 
 declare namespace Tweaker {
-    interface IRoundRectangleConfig {
-        width?: number,
-        height?: number,
-        radius?: number | {
-            tl?: (number | { x?: number, y?: number }),
-            tr?: (number | { x?: number, y?: number }),
-            bl?: (number | { x?: number, y?: number }),
-            br?: (number | { x?: number, y?: number }),
-
-            x?: number,
-            y?: number,
-        },
-
-        color?: number,
-        alpha?: number,
-
-        strokeColor?: number,
-        strokeAlpha?: number,
-        strokeWidth?: number,
-    }
-
-    interface IInteractiveRoundRectangleConfig extends IRoundRectangleConfig {
+    interface IInteractiveRoundRectangleConfig extends RoundRectangle.IConfig {
         'active.color'?: number,
         'active.alpha'?: number,
 
@@ -68,19 +49,19 @@ declare namespace Tweaker {
         styles: {
             itemWidth?: number,
 
-            background?: IRoundRectangleConfig,
+            background?: CreateBackground.IConfig,
 
             inputRow?: {
-                background?: IRoundRectangleConfig,
+                background?: CreateBackground.IConfig,
 
                 title?: SimpleLabel.IConfig,
 
                 inputText?: InputText.IConfig,
 
                 slider?: {
-                    track: IRoundRectangleConfig,
-                    indicator: IRoundRectangleConfig,
-                    thumb: IRoundRectangleConfig,
+                    track: RoundRectangle.IConfig,
+                    indicator: RoundRectangle.IConfig,
+                    thumb: RoundRectangle.IConfig,
                 },
 
                 list?: {
@@ -110,7 +91,7 @@ declare namespace Tweaker {
             folder?: {
                 title?: SimpleLabel.IConfig,
 
-                background?: IRoundRectangleConfig,
+                background?: CreateBackground.IConfig,
 
                 space?: {
                     left?: number, right?: number, top?: number, bottom?: number,
@@ -126,7 +107,7 @@ declare namespace Tweaker {
                 pages?: Pages.IConfig,
             },
 
-            separator?: IRoundRectangleConfig,
+            separator?: RoundRectangle.IConfig,
 
             space?: {
                 left?: number, right?: number, top?: number, bottom?: number,

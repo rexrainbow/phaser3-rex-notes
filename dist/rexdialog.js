@@ -13286,7 +13286,8 @@
           var closeEventData = {
             index: index,
             text: button.text,
-            button: button
+            button: button,
+            dialog: this
           };
           ModalClose(this, closeEventData);
         };

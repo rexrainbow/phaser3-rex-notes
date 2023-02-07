@@ -384,12 +384,14 @@ dialog
         // var index = data.index;
         // var text = data.text;
         // var button = data.button;
+        // var dialog = data.dialog;
     }
     ```
     - `data` : Contains these properties
         - `data.index` : Index of clicking action button
         - `data.text` : `button.text`, this property is valided if button game object is a label.
         - `data.button` : Clicked button game object.
+        - `data.dialog` : This dialog game object.
 
 
 ### Other properties
