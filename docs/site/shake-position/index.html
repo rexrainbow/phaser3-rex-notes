@@ -3001,6 +3001,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-axis-mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9072,6 +9079,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-axis-mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9176,6 +9190,7 @@
     <span class="c1">// duration: 500,</span>
     <span class="c1">// magnitude: 10,</span>
     <span class="c1">// magnitudeMode: 1, // 0|&#39;constant&#39;|1|&#39;decay&#39;</span>
+    <span class="c1">// axis: 0,      //0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9189,6 +9204,12 @@
 <li><code>magnitudeMode</code> :<ul>
 <li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
 <li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
+</ul>
+</li>
+<li><code>axis</code> :<ul>
+<li><code>'both'</code>,<code>'h&amp;v'</code>, <code>'x&amp;y'</code>, or <code>0</code> : Changing position on all directions.</li>
+<li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>1</code> : Changing position on horizontal/x axis.</li>
+<li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>2</code> : Changing position on vertical/y axis.</li>
 </ul>
 </li>
 </ul>
@@ -9249,6 +9270,17 @@
 <li><code>magnitudeMode</code> :<ul>
 <li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
 <li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
+</ul>
+</li>
+</ul>
+<h3 id="set-axis-mode">Set axis mode<a class="headerlink" href="#set-axis-mode" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">shake</span><span class="p">.</span><span class="nx">setAxisMode</span><span class="p">(</span><span class="nx">axis</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>axis</code> : <ul>
+<li><code>'both'</code>,<code>'h&amp;v'</code>, <code>'x&amp;y'</code>, or <code>0</code> : Dragging on all directions.</li>
+<li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>1</code> : Dragging on horizontal/x axis.</li>
+<li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>2</code> : Dragging on vertical/y axis.</li>
 </ul>
 </li>
 </ul>

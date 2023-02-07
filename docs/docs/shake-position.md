@@ -79,6 +79,7 @@ var shake = scene.plugins.get('rexShake').add(gameObject, {
     // duration: 500,
     // magnitude: 10,
     // magnitudeMode: 1, // 0|'constant'|1|'decay'
+    // axis: 0,      //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical'|'v'
 });
 ```
 
@@ -90,6 +91,10 @@ var shake = scene.plugins.get('rexShake').add(gameObject, {
 - `magnitudeMode` :
     - `'constant'`, or `0` : Constant strength of the shake.
     - `'decay'`, or `1` : Decay the strength of the shake.
+- `axis` :
+    - `'both'`,`'h&v'`, `'x&y'`, or `0` : Changing position on all directions.
+    - `'horizontal'`,`'h'`, `'x'`, or `1` : Changing position on horizontal/x axis.
+    - `'vertical'`,`'v'`, `'y'`, or `2` : Changing position on vertical/y axis.
 
 ### Start shaking
 
@@ -168,6 +173,17 @@ shake.setMagnitudeMode(magnitudeMode);
 - `magnitudeMode` :
     - `'constant'`, or `0` : Constant strength of the shake.
     - `'decay'`, or `1` : Decay the strength of the shake.
+
+### Set axis mode
+
+```javascript
+shake.setAxisMode(axis);
+```
+
+- `axis` : 
+    - `'both'`,`'h&v'`, `'x&y'`, or `0` : Dragging on all directions.
+    - `'horizontal'`,`'h'`, `'x'`, or `1` : Dragging on horizontal/x axis.
+    - `'vertical'`,`'v'`, `'y'`, or `2` : Dragging on vertical/y axis.
 
 ### Events
 
