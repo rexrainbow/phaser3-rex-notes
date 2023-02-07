@@ -5352,14 +5352,14 @@
           var x = this.ox + Math.cos(a) * magnitude;
           var y = this.oy + Math.sin(a) * magnitude;
           switch (this.axisMode) {
-            case 0:
-              gameObject.x = x;
-              gameObject.y = y;
-              break;
             case 1:
               gameObject.x = x;
               break;
             case 2:
+              gameObject.y = y;
+              break;
+            default:
+              gameObject.x = x;
               gameObject.y = y;
               break;
           }
@@ -5377,23 +5377,15 @@
         }
         var gameObject = this.parent;
         switch (this.axisMode) {
-          case 0:
-            if (this.ox !== gameObject.x) {
-              gameObject.x = this.ox;
-            }
-            if (this.oy !== gameObject.y) {
-              gameObject.y = this.oy;
-            }
-            break;
           case 1:
-            if (this.ox !== gameObject.x) {
-              gameObject.x = this.ox;
-            }
+            gameObject.x = this.ox;
             break;
           case 2:
-            if (this.oy !== gameObject.y) {
-              gameObject.y = this.oy;
-            }
+            gameObject.y = this.oy;
+            break;
+          default:
+            gameObject.x = this.ox;
+            gameObject.y = this.oy;
             break;
         }
         this.ox = undefined;
