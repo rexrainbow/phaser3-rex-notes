@@ -300,4 +300,6 @@ declare class Dialog extends Sizer {
     modalPromise(
         config?: ModalBehavoir.IConfig
     ): Promise<Dialog.CloseEventDataType | Dialog>;
+
+    modalClose(closeEventData?: Dialog.CloseEventDataType): this;
 }

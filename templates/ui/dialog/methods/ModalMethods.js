@@ -1,6 +1,22 @@
 import { Modal, ModalClose } from '../../modal/Modal.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
+var OnCreateModalBehavior = function (dialog) {
+    dialog.on('button.click', function (button, groupName, index, pointer, event) {
+        if (groupName !== 'actions') {
+            return;
+        }
+
+        var closeEventData = {
+            index: index,
+            text: button.text,
+            button: button,
+            dialog: dialog
+        }
+        dialog.modalClose(closeEventData);
+    });
+}
+
 export default {
     modal(config, onClose) {
         if (IsFunction(config)) {
@@ -9,22 +25,7 @@ export default {
         }
 
         if (this._modalBehavior === undefined) {
-            var OnButtonClick = function (button, groupName, index, pointer, event) {
-                if (groupName !== 'actions') {
-                    return;
-                }
-
-                var closeEventData = {
-                    index: index,
-                    text: button.text,
-                    button: button,
-                    dialog: this
-                }
-                ModalClose(this, closeEventData);
-            }
-
-            this.on('button.click', OnButtonClick, this);
-
+            OnCreateModalBehavior(this);
             this._modalBehavior = Modal(this, config);
         }
 
@@ -42,5 +43,10 @@ export default {
         return new Promise(function (resolve, reject) {
             self.modal(config, resolve);
         });
+    },
+
+    modalClose(closeEventData) {
+        ModalClose(this, closeEventData);
+        return this;
     }
 }
