@@ -8,6 +8,7 @@ Using json style to create [label](ui-label.md), composed of [round-rectangle](s
 ## Live demos
 
 - [Style](https://codepen.io/rexrainbow/pen/vYaPwwq)
+- [Bitmaptext](https://codepen.io/rexrainbow/pen/jOpoqzP)
 
 ## Usage
 

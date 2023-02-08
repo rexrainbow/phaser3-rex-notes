@@ -9038,7 +9038,7 @@
   <h1>Simple label</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Using json style to create <a href="../ui-label/">label</a>, composed of <a href="../shape-roundrectangle/">round-rectangle</a> background, <a href="../image/">image</a> icon, <a href="../bbcodetext/">BBCodeText</a> text, <a href="../image/">image</a> action icon.</p>
+<p>Using json style to create <a href="../ui-label/">label</a>, composed of <a href="../shape-roundrectangle/">round-rectangle</a> background, <a href="../image/">image</a> icon, <a href="../bbcodetext/">BBCodeText</a>/<a href="../text/">built-in text</a>/<a href="../bitmaptext/">bitmaptext</a> text, <a href="../image/">image</a> action icon.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -9046,6 +9046,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYaPwwq">Style</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOpoqzP">Bitmaptext</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-simplelabel">Sample code</a></p>
@@ -9125,7 +9126,9 @@
     <span class="c1">// squareFitIcon: false,</span>
     <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
+    <span class="c1">// Create bbcodetext</span>
     <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// $type: &#39;bbcodetext&#39;,   // &#39;bbcodetext&#39;, &#39;text&#39;</span>
         <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
         <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
         <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -9149,6 +9152,14 @@
         <span class="p">},</span>
         <span class="c1">// more text styles</span>
     <span class="p">},</span>
+
+    <span class="c1">// Create bitmaptext</span>
+    <span class="c1">// text: {</span>
+    <span class="c1">//     key: &#39;&#39;,</span>
+    <span class="c1">//     size: undefined,</span>
+    <span class="c1">//     color: undefined,</span>
+    <span class="c1">// }</span>
+
     <span class="c1">// expandTextWidth: false,</span>
     <span class="c1">// expandTextHeight: false,</span>
 
@@ -9169,6 +9180,19 @@
     <span class="c1">// enableLayer: false,</span>
 <span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>text</code> : <ul>
+<li><a href="../bbcodetext/#add-text-object">Style of bbcodetext</a></li>
+<li>Style of bitmaptext
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>            
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
