@@ -9,6 +9,7 @@ A container with a text, slider, and scroller.
 
 - [Text-area](https://codepen.io/rexrainbow/pen/JzBZzy)
 - [Bitmap text](https://codepen.io/rexrainbow/pen/YzNRRaz)
+- [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
 
 ## Usage
 

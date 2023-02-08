@@ -630,11 +630,12 @@ sizer.pushIntoBounds(bounds);
 1. Assign `sizer.onCreateModalBehavior` callback, or register events to close modal sizer directly.
     - onCreateModalBehavior : 
         ```javascript
-        sizer.onCreateModalBehavior = function(sizer) {
+        sizer.onCreateModalBehavior = function(sizer, config) {
             // ...
             sizer.modalClose(data);
         }
         ```
+        - `config` : Passed from `sizer.modal(config)`
     - Close modal sizer
         ```javascript
         sizer.modalClose(data);

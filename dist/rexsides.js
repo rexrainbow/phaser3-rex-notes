@@ -6953,7 +6953,7 @@
 
   var ModalMethods = {
     // Override
-    // onCreateModalBehavior(self) { },
+    // onCreateModalBehavior(self, config) { },
     modal: function modal(config, onClose) {
       if (IsFunction(config)) {
         onClose = config;
@@ -6961,7 +6961,7 @@
       }
       if (this._modalBehavior === undefined) {
         if (this.onCreateModalBehavior) {
-          this.onCreateModalBehavior(this);
+          this.onCreateModalBehavior(this, config);
         }
         this._modalBehavior = Modal(this, config);
       }

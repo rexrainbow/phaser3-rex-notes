@@ -7378,6 +7378,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modal" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-properties-of-child" class="md-nav__link">
     Set properties of child
   </a>
@@ -9283,6 +9290,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modal" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-properties-of-child" class="md-nav__link">
     Set properties of child
   </a>
@@ -10120,6 +10134,70 @@
 </ul>
 </li>
 </ul>
+<h3 id="modal">Modal<a class="headerlink" href="#modal" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Assign <code>sizer.onCreateModalBehavior</code> callback, or register events to close modal sizer directly.<ul>
+<li>onCreateModalBehavior : 
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">onCreateModalBehavior</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">sizer</span><span class="p">.</span><span class="nx">modalClose</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>config</code> : Passed from <code>sizer.modal(config)</code></li>
+</ul>
+</li>
+<li>Close modal sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">modalClose</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Pop this modal sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">modal</span><span class="p">({</span>
+    <span class="c1">// cover: {</span>
+    <span class="c1">//     color: 0x0,</span>
+    <span class="c1">//     alpha: 0.8,</span>
+    <span class="c1">//     transitIn: function(gameObject, duration) { },</span>
+    <span class="c1">//     transitOut: function(gameObject, duration) { },</span>
+    <span class="c1">// },</span>
+    <span class="c1">// cover: false, </span>
+
+    <span class="c1">// When to close modal dialog?</span>
+    <span class="c1">// touchOutsideClose: false,</span>
+    <span class="c1">// anyTouchClose: false,</span>
+    <span class="c1">// timeOutClose: false,</span>
+    <span class="c1">// manualClose: false,</span>
+
+    <span class="c1">// duration: {</span>
+    <span class="c1">//     in: 200,</span>
+    <span class="c1">//     hold: 2000,</span>
+    <span class="c1">//     out: 200</span>
+    <span class="c1">// }</span>
+
+    <span class="c1">// transitIn: 0,</span>
+    <span class="c1">// transitOut: 0,</span>
+
+    <span class="c1">// destroy: true</span>
+<span class="p">});</span>
+<span class="c1">// sizer.modal(config, onClose);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="p">.</span><span class="nx">modalPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+
+    <span class="p">})</span>
+</code></pre></div><ul>
+<li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a></li>
+<li><code>onClose</code> : Callback when closing modal dialog
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>      
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>data</code> : Object passed from <code>sizer.modalClose(data)</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 <h3 id="set-properties-of-child">Set properties of child<a class="headerlink" href="#set-properties-of-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildRotation</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">rotation</span><span class="p">);</span>

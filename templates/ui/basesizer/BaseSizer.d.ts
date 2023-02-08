@@ -47,7 +47,11 @@ declare namespace BaseSizer {
         scaleX: number, scaleY: number
     }
 
-    type OnModalCloseCallbackType = (data: Object) => void;
+    type OnModalCloseCallbackType = (
+        data: Object,
+        config: ModalBehavoir.IConfig
+    ) => void;
+
 }
 
 declare class BaseSizer extends ContainerLite {

@@ -3,7 +3,7 @@ import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 
 export default {
     // Override
-    // onCreateModalBehavior(self) { },
+    // onCreateModalBehavior(self, config) { },
 
     modal(config, onClose) {
         if (IsFunction(config)) {
@@ -13,7 +13,7 @@ export default {
 
         if (this._modalBehavior === undefined) {
             if (this.onCreateModalBehavior) {
-                this.onCreateModalBehavior(this);
+                this.onCreateModalBehavior(this, config);
             }
             this._modalBehavior = Modal(this, config);
         }
