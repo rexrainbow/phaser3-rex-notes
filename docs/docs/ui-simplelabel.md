@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create [label](ui-label.md), composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md) text, [image](image.md) action icon.
+Using json style to create [label](ui-label.md), composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md)/[built-in text](text.md)/[bitmaptext](bitmaptext.md) text, [image](image.md) action icon.
 
 - Author: Rex
 - Game object
@@ -100,7 +100,9 @@ var label = scene.rexUI.add.simpleLabel({
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
+    // Create bbcodetext
     text: {
+        // $type: 'bbcodetext',   // 'bbcodetext', 'text'
         fontFamily: 'Courier',
         fontSize: '16px',
         fontStyle: '',
@@ -124,6 +126,14 @@ var label = scene.rexUI.add.simpleLabel({
         },
         // more text styles
     },
+
+    // Create bitmaptext
+    // text: {
+    //     key: '',
+    //     size: undefined,
+    //     color: undefined,
+    // }
+
     // expandTextWidth: false,
     // expandTextHeight: false,
 
@@ -144,6 +154,17 @@ var label = scene.rexUI.add.simpleLabel({
     // enableLayer: false,
 });
 ```
+
+- `text` : 
+    - [Style of bbcodetext](bbcodetext.md#add-text-object)
+    - Style of bitmaptext
+        ```javascript
+        {            
+            key: '',
+            size: undefined,
+            color: undefined,
+        }
+        ``` 
 
 ### Custom class
 

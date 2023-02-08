@@ -1,12 +1,26 @@
+import BBCodeText from '../../bbcodetext/BBCodeText';
+
 export default CreateText;
 
 declare namespace CreateText {
-    interface IConfig extends Phaser.GameObjects.TextStyle {
-
+    interface IBitmapTextConfig {
+        $type?: 'bitmaptext',
+        key: string,
+        size?: number, fontSize?: number,
+        color?: number,
     }
+
+    interface ITextConfig extends Phaser.GameObjects.TextStyle {
+        $type?: 'text',
+    }
+
+    interface IBBCodeTextConfig extends BBCodeText.TextStyle {
+        $type?: 'bbcodetext',
+    }
+
 }
 
 declare function CreateText(
     scene: Phaser.Scene,
-    config?: CreateText.IConfig
+    config?: CreateText.IBitmapTextConfig | CreateText.ITextConfig | CreateText.IBBCodeTextConfig
 ): Phaser.GameObjects.Text;

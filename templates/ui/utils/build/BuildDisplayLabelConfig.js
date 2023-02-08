@@ -1,6 +1,6 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from './CreateBackground.js';
-import CreateBBCodeText from './CreateBBCodeText.js';
+import CreateText from './CreateText.js';
 import CreateImage from './CreateImage.js';
 
 var BuildDisplayLabelConfig = function (scene, config, deepCloneConfig) {
@@ -17,7 +17,7 @@ var BuildDisplayLabelConfig = function (scene, config, deepCloneConfig) {
 
     config.background = CreateBackground(scene, config.background);
 
-    config.text = CreateBBCodeText(scene, config.text);
+    config.text = CreateText(scene, config.text);
 
     if (config.icon !== null) {
         config.icon = CreateImage(scene, config.icon);
