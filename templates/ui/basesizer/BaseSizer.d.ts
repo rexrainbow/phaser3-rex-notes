@@ -5,6 +5,7 @@ import Click from '../click/Click';
 import ClickOutside from '../clickoutside/ClickOutside';
 import InTouching from '../intouching/InTouching';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
+import { ModalBehavoir } from '../modal/Modal';
 
 export default BaseSizer;
 
@@ -45,6 +46,8 @@ declare namespace BaseSizer {
         displayWidth: number, displayHeight: number,
         scaleX: number, scaleY: number
     }
+
+    type OnModalCloseCallbackType = (data: Object) => void;
 }
 
 declare class BaseSizer extends ContainerLite {
@@ -649,6 +652,23 @@ declare class BaseSizer extends ContainerLite {
     isShow(
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;
+
+    onCreateModalBehavior: (self: this) => void;
+
+    modal(
+        config?: ModalBehavoir.IConfig,
+        onClose?: BaseSizer.OnModalCloseCallbackType
+    ): this;
+
+    modal(
+        onClose?: BaseSizer.OnModalCloseCallbackType
+    ): this;
+
+    modalPromise(
+        config?: ModalBehavoir.IConfig
+    ): Promise<Object>;
+
+    modalClose(closeEventData?: Object): this;
 
     broadcastEvent(
         event: string,

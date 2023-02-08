@@ -624,6 +624,68 @@ sizer.pushIntoBounds(bounds);
         sizer.on('easedata.complete', function(key, sizer) { });
         ```
 
+
+### Modal
+
+1. Assign `sizer.onCreateModalBehavior` callback, or register events to close modal sizer directly.
+    - onCreateModalBehavior : 
+        ```javascript
+        sizer.onCreateModalBehavior = function(sizer) {
+            // ...
+            sizer.modalClose(data);
+        }
+        ```
+    - Close modal sizer
+        ```javascript
+        sizer.modalClose(data);
+        ```
+2. Pop this modal sizer
+    ```javascript
+    sizer.modal({
+        // cover: {
+        //     color: 0x0,
+        //     alpha: 0.8,
+        //     transitIn: function(gameObject, duration) { },
+        //     transitOut: function(gameObject, duration) { },
+        // },
+        // cover: false, 
+    
+        // When to close modal dialog?
+        // touchOutsideClose: false,
+        // anyTouchClose: false,
+        // timeOutClose: false,
+        // manualClose: false,
+    
+        // duration: {
+        //     in: 200,
+        //     hold: 2000,
+        //     out: 200
+        // }
+    
+        // transitIn: 0,
+        // transitOut: 0,
+    
+        // destroy: true
+    });
+    // sizer.modal(config, onClose);
+    ```
+    or
+    ```javascript
+    sizer
+        .modalPromise(config)
+        .then(function(data){
+            
+        })
+    ```
+    - `config` : See [Modal behavior](modal.md#create-instance)
+    - `onClose` : Callback when closing modal dialog
+        ```javascript
+        function(data) {      
+        }
+        ```
+        - `data` : Object passed from `sizer.modalClose(data)`.
+
+
 ### Set properties of child
 
 ```javascript
