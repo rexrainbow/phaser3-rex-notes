@@ -58484,7 +58484,8 @@
         style.wrapWidth = wrapWidth;
         style.maxLines = 0;
       }
-      textObject.setFixedSize(width, 0); // Redraw text
+      textObject.fixedWidth = width;
+      textObject.updateText(); // Redraw text
 
       textObject.minHeight = textObject.height;
       return textObject;
