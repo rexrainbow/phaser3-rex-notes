@@ -148,6 +148,7 @@ var label = scene.rexUI.add.label({
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `squareFitIcon` : 
     - `true` : Resize icon size to square to fit label height/width.
+        - Can't work wit `expandTextWidth: true`
     - `false` : Ignore this feature. Default behavior.
 - `iconSize` : Set display size of icon game object to `iconSize`x`iconSize`
 - `iconWidth` : Set display width of icon game object to `iconWidth`. 
@@ -159,6 +160,7 @@ var label = scene.rexUI.add.label({
     - `false` : Keep width of text to original size. Default behavior.
     - `true` : Expand width of text object. Will set display width by default.
         - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
+        - Can't work with `squareFitIcon: true`.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.

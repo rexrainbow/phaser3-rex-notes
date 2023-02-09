@@ -175,6 +175,10 @@ class Label extends Sizer {
     }
 
     setIconSize(width, height) {
+        if (height === undefined) {
+            height = width;
+        }
+
         this.iconWidth = width;
         this.iconHeight = height;
 
@@ -229,6 +233,10 @@ class Label extends Sizer {
     }
 
     setActionSize(width, height) {
+        if (height === undefined) {
+            height = width;
+        }
+
         this.actionWidth = width;
         this.actionHeight = height;
 

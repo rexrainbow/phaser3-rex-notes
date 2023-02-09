@@ -17,8 +17,13 @@ var ResetDisplayContent = function (config) {
         } else {
             this.show(iconGameObjct);
         }
-        if (config.iconSize) {
-            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+        var iconSize = config.iconSize;
+        if (iconSize) {
+            this.setChildDisplaySize(iconGameObjct, iconSize, iconSize);
+
+            if (this.iconWidth !== undefined) {
+                this.setIconSize(iconSize);
+            }
         }
         this.setIconTexture(config.icon, config.iconFrame);
     }
@@ -30,8 +35,14 @@ var ResetDisplayContent = function (config) {
         } else {
             this.show(actionGameObjct);
         }
-        if (config.actionSize) {
-            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+        var actionSize = config.actionSize;
+        if (actionSize) {
+            this.setChildDisplaySize(actionGameObjct, actionSize, actionSize);
+
+            if (this.actionWidth !== undefined) {
+                this.setActionSize(actionSize);
+            }
+
         }
         this.setActionTexture(config.action, config.actionFrame);
     }

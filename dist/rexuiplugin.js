@@ -36118,8 +36118,12 @@
       } else {
         this.show(iconGameObjct);
       }
-      if (config.iconSize) {
-        iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+      var iconSize = config.iconSize;
+      if (iconSize) {
+        this.setChildDisplaySize(iconGameObjct, iconSize, iconSize);
+        if (this.iconWidth !== undefined) {
+          this.setIconSize(iconSize);
+        }
       }
       this.setIconTexture(config.icon, config.iconFrame);
     }
@@ -36130,8 +36134,12 @@
       } else {
         this.show(actionGameObjct);
       }
-      if (config.actionSize) {
-        actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+      var actionSize = config.actionSize;
+      if (actionSize) {
+        this.setChildDisplaySize(actionGameObjct, actionSize, actionSize);
+        if (this.actionWidth !== undefined) {
+          this.setActionSize(actionSize);
+        }
       }
       this.setActionTexture(config.action, config.actionFrame);
     }
@@ -36313,6 +36321,9 @@
     }, {
       key: "setIconSize",
       value: function setIconSize(width, height) {
+        if (height === undefined) {
+          height = width;
+        }
         this.iconWidth = width;
         this.iconHeight = height;
         return this;
@@ -36370,6 +36381,9 @@
     }, {
       key: "setActionSize",
       value: function setActionSize(width, height) {
+        if (height === undefined) {
+          height = width;
+        }
         this.actionWidth = width;
         this.actionHeight = height;
         return this;
