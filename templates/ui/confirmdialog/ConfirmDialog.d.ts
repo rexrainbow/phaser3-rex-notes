@@ -13,6 +13,11 @@ declare namespace ConfirmDialog {
         clickInterval?: number
     }
 
+    type CreateGameObjectCallbackType = (
+        scene: Phaser.Scene,
+        config?: Object
+    ) => Phaser.GameObjects.GameObject;
+
     interface IConfig {
         x?: number,
         y?: number,
@@ -47,6 +52,15 @@ declare namespace ConfirmDialog {
         button?: SimpleLabel.IConfig,
         buttonA?: SimpleLabel.IConfig,
         buttonB?: SimpleLabel.IConfig,
+
+        creators?: {
+            background?: CreateGameObjectCallbackType,
+            title?: SimpleLabel.ICreatorsConfig,
+            content?: SimpleLabel.ICreatorsConfig,
+            button?: SimpleLabel.ICreatorsConfig,
+            buttonA?: SimpleLabel.ICreatorsConfig,
+            buttonB?: SimpleLabel.ICreatorsConfig,
+        },
 
         proportion?: {
             title?: number,

@@ -9,6 +9,7 @@ Using json style to create [label](ui-label.md).
 
 - [Style](https://codepen.io/rexrainbow/pen/vYaPwwq)
 - [Bitmaptext](https://codepen.io/rexrainbow/pen/jOpoqzP)
+- [Wrap text](https://codepen.io/rexrainbow/pen/xxJoJLW)
 
 ## Usage
 
@@ -175,20 +176,20 @@ var label = scene.rexUI.add.simpleLabel({
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
-- `creators` : A series of callback for creating background, text, icon, action icon game object.
-    - `creators.background` : Callback for creating background. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
+- `creators` : A series of callback to create background, text, icon, action icon game object.
+    - `creators.background` : Callback to create background. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
         ```javascript
         function(scene, config)  {
             return gameObject;
         }
         ```
-    - `creators.text` : Callback for creating text. Default behavior is creating a [bbcodetext](bbcodetext.md).
+    - `creators.text` : Callback to create text. Default behavior is creating a [bbcodetext](bbcodetext.md).
         ```javascript
         function(scene, config)  {
             return gameObject;
         }
         ```
-    - `creators.icon` : Callback for creating icon. Default behavior is creating a [image](image.md).
+    - `creators.icon` : Callback to create icon. Default behavior is creating a [image](image.md).
         ```javascript
         function(scene, config)  {
             return gameObject;

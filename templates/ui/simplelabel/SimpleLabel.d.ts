@@ -7,7 +7,7 @@ declare namespace SimpleLabel {
     interface IConfig extends BuildDisplayLabelConfig.IConfig {
     }
 
-    interface ICreators extends BuildDisplayLabelConfig.ICreators {
+    interface ICreatorsConfig extends BuildDisplayLabelConfig.ICreators {
     }
 }
 
@@ -15,7 +15,7 @@ declare class SimpleLabel extends Label {
     constructor(
         scene: Phaser.Scene,
         config?: SimpleLabel.IConfig,
-        creators?: SimpleLabel.ICreators
+        creators?: SimpleLabel.ICreatorsConfig
     );
 
 }

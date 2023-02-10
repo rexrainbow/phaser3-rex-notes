@@ -4,15 +4,24 @@ import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateDisplayLabel from '../utils/build/CreateDisplayLabel.js';
 import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class ConfirmDialog extends Dialog {
     constructor(scene, config) {
         config = (config) ? DeepClone(config) : {};
 
-        config.background = CreateBackground(scene, config.background);
+        var creators = config.creators || {};
 
-        config.title = CreateDisplayLabel(scene, config.title);
+        var createBackground = GetValue(creators, 'background', CreateBackground);
+        if (createBackground) {
+            config.background = createBackground(scene, config.background);
+        } else {
+            delete config.background;
+        }
 
-        config.content = CreateDisplayLabel(scene, config.content);
+        config.title = CreateDisplayLabel(scene, config.title, creators.title);
+
+        config.content = CreateDisplayLabel(scene, config.content, creators.content);
 
         var buttonMode = config.buttonMode;
         if (buttonMode === undefined) {
@@ -21,17 +30,21 @@ class ConfirmDialog extends Dialog {
                     0;
         }
 
+        var buttonAConfig = config.buttonA || config.button;
+        var buttonACreator = creators.buttonA || creators.button;
+        var buttonBConfig = config.buttonB || config.button;
+        var buttonBCreator = creators.buttonB || creators.button;
         switch (buttonMode) {
             case 2:
                 config.actions = [
-                    CreateDisplayLabel(scene, config.buttonA || config.button),
-                    CreateDisplayLabel(scene, config.buttonB || config.button),
+                    CreateDisplayLabel(scene, buttonAConfig, buttonACreator),
+                    CreateDisplayLabel(scene, buttonBConfig, buttonBCreator),
                 ]
                 break;
 
             case 1:
                 config.actions = [
-                    CreateDisplayLabel(scene, config.buttonA || config.button),
+                    CreateDisplayLabel(scene, buttonAConfig, buttonACreator),
                 ]
                 break;
 

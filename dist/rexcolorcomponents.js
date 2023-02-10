@@ -19190,8 +19190,8 @@
     return _createClass(SimpleLabel);
   }(Label);
 
-  var CreateDisplayLabel = function CreateDisplayLabel(scene, config) {
-    var gameObject = new SimpleLabel(scene, config);
+  var CreateDisplayLabel = function CreateDisplayLabel(scene, config, creators) {
+    var gameObject = new SimpleLabel(scene, config, creators);
     scene.add.existing(gameObject);
     return gameObject;
   };

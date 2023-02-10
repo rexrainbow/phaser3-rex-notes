@@ -9047,6 +9047,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYaPwwq">Style</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOpoqzP">Bitmaptext</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/xxJoJLW">Wrap text</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-simplelabel">Sample code</a></p>
@@ -9203,18 +9204,18 @@
 <li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
 </ul>
 </li>
-<li><code>creators</code> : A series of callback for creating background, text, icon, action icon game object.<ul>
-<li><code>creators.background</code> : Callback for creating background. Default behavior is creating a <a href="../shape-roundrectangle/">round-rectangle-shape</a>.
+<li><code>creators</code> : A series of callback to create background, text, icon, action icon game object.<ul>
+<li><code>creators.background</code> : Callback to create background. Default behavior is creating a <a href="../shape-roundrectangle/">round-rectangle-shape</a>.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>creators.text</code> : Callback for creating text. Default behavior is creating a <a href="../bbcodetext/">bbcodetext</a>.
+<li><code>creators.text</code> : Callback to create text. Default behavior is creating a <a href="../bbcodetext/">bbcodetext</a>.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>creators.icon</code> : Callback for creating icon. Default behavior is creating a <a href="../image/">image</a>.
+<li><code>creators.icon</code> : Callback to create icon. Default behavior is creating a <a href="../image/">image</a>.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>

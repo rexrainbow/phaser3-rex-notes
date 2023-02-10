@@ -284,6 +284,15 @@ var dialog = scene.rexUI.add.confirmDialog({
     // buttonA:
     // buttonB:
 
+    creators: {
+        background: undefined,
+        title: undefined,
+        content: undefined,
+        button: undefined,
+        buttonA: undefined,
+        buttonB: undefined,
+    },
+
     // Space
     space: {
         left: 0,
@@ -352,6 +361,22 @@ var dialog = scene.rexUI.add.confirmDialog({
     - `0` : No action button, any touch can close modal dialog
     - `1`, `2` : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.
 - `button` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
+- `creators` : Callbacks for creating components.
+    - `creators.background` : Callback to create background of dialog. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ``` 
+    - `creators.title`, `creators.content`, `creators.button`, `creators.buttonA`, `creators.buttonB` : Creators of [simple-label](ui-simplelabel.md), included these properties
+        ```javascript
+        {
+            background: undefined,
+            text: undefined,
+            icon: undefined,
+            action: undefined,
+        }
+        ```
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.title` : Space between title game object and below game object.
