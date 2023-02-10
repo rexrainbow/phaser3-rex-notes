@@ -4,7 +4,12 @@ declare namespace DrawBounds {
     interface IConfig {
         color?: number,
         lineWidth?: number,
+
+        fillColor?: number,
+        fillAlpha?: number,
+
         padding?: number,
+
     }
 }
 

@@ -2810,32 +2810,40 @@
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
-    var color, lineWidth;
+    var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
-      color = config;
+      strokeColor = config;
     } else {
-      color = GetValue$5(config, 'color');
+      strokeColor = GetValue$5(config, 'color');
       lineWidth = GetValue$5(config, 'lineWidth');
-      GetValue$5(config, 'padding', 0);
+      fillColor = GetValue$5(config, 'fillColor');
+      fillAlpha = GetValue$5(config, 'fillAlpha', 1);
+      padding = GetValue$5(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Draw(gameObjects[i], graphics, color, lineWidth);
+        Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
       }
     } else {
-      Draw(gameObjects, graphics, color, lineWidth);
+      Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
     }
   };
-  var Draw = function Draw(gameObject, graphics, color, lineWidth, padding) {
+  var Draw = function Draw(gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
     if (!canDrawBound) {
       return;
     }
-    if (color === undefined) {
-      color = 0xffffff;
+    if (strokeColor === undefined) {
+      strokeColor = 0xffffff;
     }
     if (lineWidth === undefined) {
       lineWidth = 1;
+    }
+    if (fillColor === undefined) {
+      fillColor = null;
+    }
+    if (fillAlpha === undefined) {
+      fillAlpha = 1;
     }
     if (padding === undefined) {
       padding = 0;
@@ -2852,7 +2860,12 @@
     var p3 = GetBottomLeft(gameObject, Points[3]);
     p3.x -= padding;
     p3.y += padding;
-    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+    if (fillColor !== null) {
+      graphics.fillStyle(fillColor, fillAlpha).fillPoints(Points, true, true);
+    }
+    if (strokeColor !== null) {
+      graphics.lineStyle(lineWidth, strokeColor).strokePoints(Points, true, true);
+    }
   };
   var Points = [{
     x: 0,
