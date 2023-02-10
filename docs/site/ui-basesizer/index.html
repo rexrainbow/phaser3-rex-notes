@@ -7441,6 +7441,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-pointer-in-bounds" class="md-nav__link">
+    Is pointer in bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#in-touching" class="md-nav__link">
     In touching
   </a>
@@ -9353,6 +9360,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-pointer-in-bounds" class="md-nav__link">
+    Is pointer in bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#in-touching" class="md-nav__link">
     In touching
   </a>
@@ -10371,6 +10385,22 @@
 <li>Disable click-outside event
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">disableClickOutside</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="is-pointer-in-bounds">Is pointer in bounds<a class="headerlink" href="#is-pointer-in-bounds" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is current sizer clicking
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isClicked</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isPointerInBounds</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Is a child clicking
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isClicked</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isPointerInBounds</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isClicked</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isPointerInBounds</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>child</code> : Game object of child</li>
+<li><code>elementName</code> : Element name for retrieveing child game object.</li>
+</ul>
+</li>
 </ul>
 <h3 id="in-touching">In touching<a class="headerlink" href="#in-touching" title="Permanent link">&para;</a></h3>
 <p>Invoke callbeack if pointer is inside hitarea every tick.</p>

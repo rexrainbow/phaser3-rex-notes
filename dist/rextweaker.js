@@ -7929,6 +7929,17 @@
   }(ComponentBase);
 
   var TouchingMethods = {
+    isPointerInBounds: function isPointerInBounds(target) {
+      if (target === undefined) {
+        target = this;
+      } else if (typeof target === 'string') {
+        target = this.getElement(target);
+      }
+      if (!target) {
+        return false;
+      }
+      return IsPointerInBounds(target);
+    },
     onTouching: function onTouching(gameObject, callback, scope, config) {
       if (!gameObject) {
         return this;

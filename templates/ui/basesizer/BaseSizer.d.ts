@@ -566,6 +566,10 @@ declare class BaseSizer extends ContainerLite {
 
     disableClickOutside(gameObject: Phaser.GameObjects.GameObject): this;
 
+    isPointerInBounds(): boolean;
+    isPointerInBounds(gameObject: Phaser.GameObjects.GameObject): boolean;
+    isPointerInBounds(name: string): boolean;
+
     onTouching(
         callback: (
             inTouch: InTouching,

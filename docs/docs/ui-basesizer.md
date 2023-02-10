@@ -890,6 +890,23 @@ clickOutside.on('clickoutside', callback, scope);
     sizer.disableClickOutside(child);
     ```
 
+### Is pointer in bounds
+
+- Is current sizer clicking
+    ```javascript
+    var isClicked = sizer.isPointerInBounds();
+    ```
+- Is a child clicking
+    ```javascript
+    var isClicked = sizer.isPointerInBounds(child);
+    ```
+    or
+    ```javascript
+    var isClicked = sizer.isPointerInBounds(elementName);
+    ```
+    - `child` : Game object of child
+    - `elementName` : Element name for retrieveing child game object.
+
 ### In touching
 
 Invoke callbeack if pointer is inside hitarea every tick.

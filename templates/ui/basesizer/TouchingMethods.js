@@ -1,6 +1,21 @@
 import InTouching from '../intouching/InTouching.js';
+import IsPointerInBounds from '../../../plugins/utils/input/IsPointerInBounds.js';
 
 export default {
+    isPointerInBounds(target) {
+        if (target === undefined) {
+            target = this;
+        } else if (typeof (target) === 'string') {
+            target = this.getElement(target);
+        }
+
+        if (!target) {
+            return false;
+        }
+
+        return IsPointerInBounds(target);
+    },
+
     onTouching(gameObject, callback, scope, config) {
         if (!gameObject) {
             return this;
@@ -97,5 +112,7 @@ export default {
         gameObject._inTouching.setEnable(false);
 
         return this;
-    }
+    },
+
+
 }
