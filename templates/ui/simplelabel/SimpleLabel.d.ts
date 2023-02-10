@@ -6,12 +6,16 @@ export default SimpleLabel;
 declare namespace SimpleLabel {
     interface IConfig extends BuildDisplayLabelConfig.IConfig {
     }
+
+    interface ICreators extends BuildDisplayLabelConfig.ICreators {
+    }
 }
 
 declare class SimpleLabel extends Label {
     constructor(
         scene: Phaser.Scene,
-        config?: SimpleLabel.IConfig
+        config?: SimpleLabel.IConfig,
+        creators?: SimpleLabel.ICreators
     );
 
 }

@@ -21,6 +21,7 @@ declare namespace BuildDisplayLabelConfig {
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
         text?: CreateBBCodeText.IConfig,
+        wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 
@@ -37,10 +38,22 @@ declare namespace BuildDisplayLabelConfig {
 
         align?: Label.AlignTypes,
     }
+
+    type CreateGameObjectCallbackType = (
+        scene: Phaser.Scene,
+        config?: Object
+    ) => Phaser.GameObjects.GameObject;
+
+    interface ICreators {
+        background?: CreateGameObjectCallbackType,
+        text?: CreateGameObjectCallbackType,
+        icon?: CreateGameObjectCallbackType,
+        action?: CreateGameObjectCallbackType,
+    }
 }
 
 declare function BuildDisplayLabelConfig(
     scene: Phaser.Scene,
     config?: BuildDisplayLabelConfig.IConfig,
-    deepCloneConfig?: boolean
+    creators?: BuildDisplayLabelConfig.ICreators,
 ): Label.IConfig

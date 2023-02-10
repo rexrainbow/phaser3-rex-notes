@@ -9254,7 +9254,10 @@
 </ul>
 </li>
 <li><code>squareFitIcon</code> : <ul>
-<li><code>true</code> : Resize icon size to square to fit label height/width.</li>
+<li><code>true</code> : Resize icon size to square to fit label height/width.<ul>
+<li>Can't work wit <code>expandTextWidth: true</code></li>
+</ul>
+</li>
 <li><code>false</code> : Ignore this feature. Default behavior.</li>
 </ul>
 </li>
@@ -9272,6 +9275,7 @@
 <li><code>false</code> : Keep width of text to original size. Default behavior.</li>
 <li><code>true</code> : Expand width of text object. Will set display width by default.<ul>
 <li>Must set to <code>true</code> if using <a href="../ui-overview/#behaviors-of-text"><code>scene.rexUI.wrapExpandText</code> method</a> with any text game object.</li>
+<li>Can't work with <code>squareFitIcon: true</code>.</li>
 </ul>
 </li>
 </ul>

@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create [label](ui-label.md), composed of [round-rectangle](shape-roundrectangle.md) background, [image](image.md) icon, [BBCodeText](bbcodetext.md)/[built-in text](text.md)/[bitmaptext](bitmaptext.md) text, [image](image.md) action icon.
+Using json style to create [label](ui-label.md).
 
 - Author: Rex
 - Game object
@@ -25,6 +25,7 @@ Using json style to create [label](ui-label.md), composed of [round-rectangle](s
 - Add label object
     ```javascript
     var label = scene.rexUI.add.simpleLabel(style).resetDisplayContent(config);
+    //var label = scene.rexUI.add.simpleLabel(style, creators).resetDisplayContent(config);
     ```
 
 #### Import plugin
@@ -54,6 +55,7 @@ Using json style to create [label](ui-label.md), composed of [round-rectangle](s
 - Add label object
     ```javascript
     var label = scene.rexUI.add.simpleLabel(style).resetDisplayContent(config);
+    //var label = scene.rexUI.add.simpleLabel(style, creators).resetDisplayContent(config);
     ```
 
 #### Import class
@@ -69,6 +71,7 @@ Using json style to create [label](ui-label.md), composed of [round-rectangle](s
 - Add label object
     ```javascript    
     var label = new SimpleLabel(scene, style);
+    // var label = new SimpleLabel(scene, style, creators);
     scene.add.existing(label);
     label.resetDisplayContent(config)
     ```
@@ -133,7 +136,9 @@ var label = scene.rexUI.add.simpleLabel({
     //     key: '',
     //     size: undefined,
     //     color: undefined,
-    // }
+    // },
+
+    // wrapText: false,
 
     // expandTextWidth: false,
     // expandTextHeight: false,
@@ -153,7 +158,7 @@ var label = scene.rexUI.add.simpleLabel({
     // draggable: false,
     // sizerEvents: false,
     // enableLayer: false,
-});
+}, creators);
 ```
 
 - `text` : 
@@ -166,6 +171,35 @@ var label = scene.rexUI.add.simpleLabel({
             color: undefined,
         }
         ``` 
+- `wrapText` : Enable WrapExpandText feature.
+    - `false`, `0` : No WrapExpandText feature. Default behavior.
+    - `true`, `1`, `'word'` : Word WrapExpandText.
+    - `2`, `'char'` : Character WrapExpandText.
+- `creators` : A series of callback for creating background, text, icon, action icon game object.
+    - `creators.background` : Callback for creating background. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ```
+    - `creators.text` : Callback for creating text. Default behavior is creating a [bbcodetext](bbcodetext.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ```
+    - `creators.icon` : Callback for creating icon. Default behavior is creating a [image](image.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ```
+    - `creators.action` : Callback for creating action-icon. Default behavior is creating a [image](image.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ```
 
 ### Custom class
 

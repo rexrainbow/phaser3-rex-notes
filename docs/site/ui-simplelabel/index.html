@@ -9038,7 +9038,7 @@
   <h1>Simple label</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Using json style to create <a href="../ui-label/">label</a>, composed of <a href="../shape-roundrectangle/">round-rectangle</a> background, <a href="../image/">image</a> icon, <a href="../bbcodetext/">BBCodeText</a>/<a href="../text/">built-in text</a>/<a href="../bitmaptext/">bitmaptext</a> text, <a href="../image/">image</a> action icon.</p>
+<p>Using json style to create <a href="../ui-label/">label</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -9058,6 +9058,7 @@
 </code></pre></div></li>
 <li>Add label object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">//var label = scene.rexUI.add.simpleLabel(style, creators).resetDisplayContent(config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9084,6 +9085,7 @@
 </code></pre></div></li>
 <li>Add label object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleLabel</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">//var label = scene.rexUI.add.simpleLabel(style, creators).resetDisplayContent(config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9096,6 +9098,7 @@
 </code></pre></div></li>
 <li>Add label object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">SimpleLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+<span class="c1">// var label = new SimpleLabel(scene, style, creators);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
 <span class="nx">label</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
 </code></pre></div></li>
@@ -9158,7 +9161,9 @@
     <span class="c1">//     key: &#39;&#39;,</span>
     <span class="c1">//     size: undefined,</span>
     <span class="c1">//     color: undefined,</span>
-    <span class="c1">// }</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// wrapText: false,</span>
 
     <span class="c1">// expandTextWidth: false,</span>
     <span class="c1">// expandTextHeight: false,</span>
@@ -9178,7 +9183,7 @@
     <span class="c1">// draggable: false,</span>
     <span class="c1">// sizerEvents: false,</span>
     <span class="c1">// enableLayer: false,</span>
-<span class="p">});</span>
+<span class="p">},</span> <span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>text</code> : <ul>
@@ -9188,6 +9193,35 @@
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">size</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
+<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
+<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
+<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+</ul>
+</li>
+<li><code>creators</code> : A series of callback for creating background, text, icon, action icon game object.<ul>
+<li><code>creators.background</code> : Callback for creating background. Default behavior is creating a <a href="../shape-roundrectangle/">round-rectangle-shape</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>creators.text</code> : Callback for creating text. Default behavior is creating a <a href="../bbcodetext/">bbcodetext</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>creators.icon</code> : Callback for creating icon. Default behavior is creating a <a href="../image/">image</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>creators.action</code> : Callback for creating action-icon. Default behavior is creating a <a href="../image/">image</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
