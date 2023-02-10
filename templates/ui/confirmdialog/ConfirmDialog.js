@@ -7,10 +7,12 @@ import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ConfirmDialog extends Dialog {
-    constructor(scene, config) {
+    constructor(scene, config, creators) {
         config = (config) ? DeepClone(config) : {};
 
-        var creators = config.creators || {};
+        if (creators === undefined) {
+            creators = {};
+        }
 
         var createBackground = GetValue(creators, 'background', CreateBackground);
         if (createBackground) {
@@ -31,20 +33,20 @@ class ConfirmDialog extends Dialog {
         }
 
         var buttonAConfig = config.buttonA || config.button;
-        var buttonACreator = creators.buttonA || creators.button;
+        var buttonACreators = creators.buttonA || creators.button;
         var buttonBConfig = config.buttonB || config.button;
-        var buttonBCreator = creators.buttonB || creators.button;
+        var buttonBCreators = creators.buttonB || creators.button;
         switch (buttonMode) {
             case 2:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreator),
-                    CreateDisplayLabel(scene, buttonBConfig, buttonBCreator),
+                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
+                    CreateDisplayLabel(scene, buttonBConfig, buttonBCreators),
                 ]
                 break;
 
             case 1:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreator),
+                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
                 ]
                 break;
 

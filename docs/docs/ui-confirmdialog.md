@@ -26,6 +26,7 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 - Add dialog object
     ```javascript
     var dialog = scene.rexUI.add.confirmDialog(style).resetDisplayContent(config);
+    // var dialog = scene.rexUI.add.confirmDialog(style, creators).resetDisplayContent(config);
     ```
 
 #### Import plugin
@@ -55,6 +56,7 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 - Add dialog object
     ```javascript
     var dialog = scene.rexUI.add.confirmDialog(style).resetDisplayContent(config);
+    // var dialog = scene.rexUI.add.confirmDialog(style, creators).resetDisplayContent(config);
     ```
 
 #### Import class
@@ -70,6 +72,7 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 - Add dialog object
     ```javascript    
     var dialog = new ConfirmDialog(scene, config);
+    // var dialog = new ConfirmDialog(scene, config, creators);
     scene.add.existing(dialog);
     dialog.resetDisplayContent(config);
     ```
@@ -284,15 +287,6 @@ var dialog = scene.rexUI.add.confirmDialog({
     // buttonA:
     // buttonB:
 
-    creators: {
-        background: undefined,
-        title: undefined,
-        content: undefined,
-        button: undefined,
-        buttonA: undefined,
-        buttonB: undefined,
-    },
-
     // Space
     space: {
         left: 0,
@@ -339,7 +333,7 @@ var dialog = scene.rexUI.add.confirmDialog({
     // draggable: false,
     // sizerEvents: false,
     // enableLayer: false,
-});
+}, creators);
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
@@ -361,22 +355,6 @@ var dialog = scene.rexUI.add.confirmDialog({
     - `0` : No action button, any touch can close modal dialog
     - `1`, `2` : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.
 - `button` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
-- `creators` : Callbacks for creating components.
-    - `creators.background` : Callback to create background of dialog. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
-        ```javascript
-        function(scene, config)  {
-            return gameObject;
-        }
-        ``` 
-    - `creators.title`, `creators.content`, `creators.button`, `creators.buttonA`, `creators.buttonB` : Creators of [simple-label](ui-simplelabel.md), included these properties
-        ```javascript
-        {
-            background: undefined,
-            text: undefined,
-            icon: undefined,
-            action: undefined,
-        }
-        ```
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.title` : Space between title game object and below game object.
@@ -410,14 +388,40 @@ var dialog = scene.rexUI.add.confirmDialog({
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+- `creators` : Callbacks for creating components.
+    ```javascript
+    {
+        background: undefined,
+        title: undefined,
+        content: undefined,
+        button: undefined,
+        buttonA: undefined,
+        buttonB: undefined,
+    }
+    ```
+    - `creators.background` : Callback to create background of dialog. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
+        ```javascript
+        function(scene, config)  {
+            return gameObject;
+        }
+        ``` 
+    - `creators.title`, `creators.content`, `creators.button`, `creators.buttonA`, `creators.buttonB` : Creators of [simple-label](ui-simplelabel.md), included these properties
+        ```javascript
+        {
+            background: undefined,
+            text: undefined,
+            icon: undefined,
+            action: undefined,
+        }
+        ```
 
 ### Custom class
 
 - Define class
     ```javascript
     class MyDialog extends RexPlugins.UI.ConfirmDialog {
-        constructor(scene, config) {
-            super(scene, config);
+        constructor(scene, config, creators) {
+            super(scene, config, creators);
             // ...
             scene.add.existing(this);
         }
@@ -426,7 +430,7 @@ var dialog = scene.rexUI.add.confirmDialog({
     ```
 - Create instance
     ```javascript
-    var dialog = new MyDialog(scene, config);
+    var dialog = new MyDialog(scene, config, creators);
     ```
 
 ### Reset display content

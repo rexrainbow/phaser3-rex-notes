@@ -9073,6 +9073,7 @@
 </code></pre></div></li>
 <li>Add dialog object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">confirmDialog</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var dialog = scene.rexUI.add.confirmDialog(style, creators).resetDisplayContent(config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9099,6 +9100,7 @@
 </code></pre></div></li>
 <li>Add dialog object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">confirmDialog</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var dialog = scene.rexUI.add.confirmDialog(style, creators).resetDisplayContent(config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9111,6 +9113,7 @@
 </code></pre></div></li>
 <li>Add dialog object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">ConfirmDialog</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var dialog = new ConfirmDialog(scene, config, creators);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">dialog</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9323,15 +9326,6 @@
     <span class="c1">// buttonA:</span>
     <span class="c1">// buttonB:</span>
 
-    <span class="nx">creators</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">background</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">content</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">button</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">buttonA</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">buttonB</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="p">},</span>
-
     <span class="c1">// Space</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9378,7 +9372,7 @@
     <span class="c1">// draggable: false,</span>
     <span class="c1">// sizerEvents: false,</span>
     <span class="c1">// enableLayer: false,</span>
-<span class="p">});</span>
+<span class="p">},</span> <span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
@@ -9410,22 +9404,6 @@
 </ul>
 </li>
 <li><code>button</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a></li>
-<li><code>creators</code> : Callbacks for creating components.<ul>
-<li><code>creators.background</code> : Callback to create background of dialog. Default behavior is creating a <a href="../shape-roundrectangle/">round-rectangle-shape</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>creators.title</code>, <code>creators.content</code>, <code>creators.button</code>, <code>creators.buttonA</code>, <code>creators.buttonB</code> : Creators of <a href="../ui-simplelabel/">simple-label</a>, included these properties
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">background</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">icon</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.title</code> : Space between title game object and below game object.</li>
@@ -9475,13 +9453,38 @@
 <li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
 </ul>
 </li>
+<li><code>creators</code> : Callbacks for creating components.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">content</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">button</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">buttonA</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">buttonB</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>creators.background</code> : Callback to create background of dialog. Default behavior is creating a <a href="../shape-roundrectangle/">round-rectangle-shape</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>creators.title</code>, <code>creators.content</code>, <code>creators.button</code>, <code>creators.buttonA</code>, <code>creators.buttonB</code> : Creators of <a href="../ui-simplelabel/">simple-label</a>, included these properties
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
     <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyDialog</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ConfirmDialog</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">creators</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">creators</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -9489,7 +9492,7 @@
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyDialog</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyDialog</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">creators</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="reset-display-content">Reset display content<a class="headerlink" href="#reset-display-content" title="Permanent link">&para;</a></h3>

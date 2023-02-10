@@ -53,15 +53,6 @@ declare namespace ConfirmDialog {
         buttonA?: SimpleLabel.IConfig,
         buttonB?: SimpleLabel.IConfig,
 
-        creators?: {
-            background?: CreateGameObjectCallbackType,
-            title?: SimpleLabel.ICreatorsConfig,
-            content?: SimpleLabel.ICreatorsConfig,
-            button?: SimpleLabel.ICreatorsConfig,
-            buttonA?: SimpleLabel.ICreatorsConfig,
-            buttonB?: SimpleLabel.ICreatorsConfig,
-        },
-
         proportion?: {
             title?: number,
             content?: number,
@@ -89,12 +80,22 @@ declare namespace ConfirmDialog {
         buttonA?: string | Label.IResetDisplayContentConfig,
         buttonB?: string | Label.IResetDisplayContentConfig,
     }
+
+    interface ICreatorsConfig {
+        background?: CreateGameObjectCallbackType,
+        title?: SimpleLabel.ICreatorsConfig,
+        content?: SimpleLabel.ICreatorsConfig,
+        button?: SimpleLabel.ICreatorsConfig,
+        buttonA?: SimpleLabel.ICreatorsConfig,
+        buttonB?: SimpleLabel.ICreatorsConfig,
+    }
 }
 
 declare class ConfirmDialog extends Dialog {
     constructor(
         scene: Phaser.Scene,
-        config?: ConfirmDialog.IConfig
+        config?: ConfirmDialog.IConfig,
+        creators?: ConfirmDialog.ICreatorsConfig
     );
 
     resetDisplayContent(

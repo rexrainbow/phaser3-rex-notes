@@ -22295,11 +22295,13 @@
   var ConfirmDialog = /*#__PURE__*/function (_Dialog) {
     _inherits(ConfirmDialog, _Dialog);
     var _super = _createSuper(ConfirmDialog);
-    function ConfirmDialog(scene, config) {
+    function ConfirmDialog(scene, config, creators) {
       var _this;
       _classCallCheck(this, ConfirmDialog);
       config = config ? DeepClone(config) : {};
-      var creators = config.creators || {};
+      if (creators === undefined) {
+        creators = {};
+      }
       var createBackground = GetValue(creators, 'background', CreateBackground);
       if (createBackground) {
         config.background = createBackground(scene, config.background);
@@ -22313,15 +22315,15 @@
         buttonMode = !!config.buttonA && !!config.buttonB ? 2 : !!config.buttonA || !!config.button ? 1 : 0;
       }
       var buttonAConfig = config.buttonA || config.button;
-      var buttonACreator = creators.buttonA || creators.button;
+      var buttonACreators = creators.buttonA || creators.button;
       var buttonBConfig = config.buttonB || config.button;
-      var buttonBCreator = creators.buttonB || creators.button;
+      var buttonBCreators = creators.buttonB || creators.button;
       switch (buttonMode) {
         case 2:
-          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreator), CreateDisplayLabel(scene, buttonBConfig, buttonBCreator)];
+          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreators), CreateDisplayLabel(scene, buttonBConfig, buttonBCreators)];
           break;
         case 1:
-          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreator)];
+          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreators)];
           break;
         default:
           config.actions = [];

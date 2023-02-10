@@ -207,8 +207,8 @@ var label = scene.rexUI.add.simpleLabel({
 - Define class
     ```javascript
     class MyLabel extends RexPlugins.UI.SimpleLabel {
-        constructor(scene, config) {
-            super(scene, config);
+        constructor(scene, config, creators) {
+            super(scene, config, creators);
             // ...
             scene.add.existing(this);
         }
@@ -217,7 +217,7 @@ var label = scene.rexUI.add.simpleLabel({
     ```
 - Create instance
     ```javascript
-    var label = new MyLabel(scene, config);
+    var label = new MyLabel(scene, config, creators);
     ```
 
 ### Reset display content
