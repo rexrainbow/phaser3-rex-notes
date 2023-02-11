@@ -681,7 +681,7 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
 container.changeOrigin(originX, originY);
 ```
 
-This method also wull reset all local state of children.
+This method also will reset all local state of children.
 
 ### Add to container
 
