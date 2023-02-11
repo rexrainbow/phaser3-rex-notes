@@ -146,6 +146,11 @@ var tweaker = scene.rexUI.add.tweaker({
 
             toggleSwitch: {
 
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         },
 
@@ -161,7 +166,7 @@ var tweaker = scene.rexUI.add.tweaker({
 
         space: {
             left: 0, right: 0, top: 0, bottom: 0, item: 0
-        }
+        },
     },
 
 
@@ -1097,7 +1102,8 @@ Style of text/number input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         }
     }
@@ -1276,7 +1282,8 @@ Style of text/number list input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         }
     }
@@ -1403,7 +1410,8 @@ Style of buttons input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
 
         }
@@ -1586,7 +1594,8 @@ Style of range input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
 
         }
@@ -1817,7 +1826,8 @@ Style of color input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         }
     }
@@ -1950,7 +1960,8 @@ Style of boolean input is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         }
     }
@@ -2073,7 +2084,8 @@ Style of button is defined in
             },
 
             space: {
-                left: 0, right: 0, top: 0, bottom: 0
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
             }
         }
     }

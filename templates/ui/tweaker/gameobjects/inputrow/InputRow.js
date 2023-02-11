@@ -19,9 +19,16 @@ class InputRow extends Sizer {
         var background = config.background;
 
         var proportion = GetValue(config, 'proportion.title', 0);
+        var titleSpace = GetValue(config, 'space.title', 0);
+        var padding;
+        if (this.orientation === 0) {
+            padding = { right: titleSpace };
+        } else {
+            padding = { bottom: titleSpace };
+        }
         this.add(
             inputTitle,
-            { proportion: proportion, expand: true, }
+            { proportion: proportion, expand: true, padding: padding }
         );
 
         var defaultProportion = (config.parentOrientation === 1) ? 1 : 0;

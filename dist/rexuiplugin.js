@@ -51608,9 +51608,21 @@
       var inputField = config.inputField;
       var background = config.background;
       var proportion = GetValue$i(config, 'proportion.title', 0);
+      var titleSpace = GetValue$i(config, 'space.title', 0);
+      var padding;
+      if (_this.orientation === 0) {
+        padding = {
+          right: titleSpace
+        };
+      } else {
+        padding = {
+          bottom: titleSpace
+        };
+      }
       _this.add(inputTitle, {
         proportion: proportion,
-        expand: true
+        expand: true,
+        padding: padding
       });
       var defaultProportion = config.parentOrientation === 1 ? 1 : 0;
       var proportion = GetValue$i(config, 'proportion.inputField', defaultProportion);
