@@ -23,7 +23,16 @@ declare namespace Text {
         left?: number
     };
 
+    interface ImageData {
+        key: string, frame?: string,
+        width?: number, height?: number,
+        y?: number,
+        left?: number, right?: number,
+    }
+
     interface TextStyle extends TextStyleBase {
+        images?: ImageData[],
+        interactive?: boolean,
     }
 
     namespace Events {

@@ -129,12 +129,26 @@ export default {
         context.restore();
 
         if (pen.hasAreaMarker && (pen.width > 0)) {
+            var data;
+            var areaKey = pen.prop.area;
+            if (areaKey) {
+                data = {
+                    key: areaKey
+                };
+            } else {
+                var url = pen.prop.url;
+                data = {
+                    key: `url:${url}`,
+                    url: url
+                };
+            }
+
             this.hitAreaManager.add(
-                pen.prop.area, // key
-                offsetX, // x
+                offsetX,                       // x
                 (offsetY - this.startYOffset), // y
-                pen.width, // width
-                this.defaultStyle.lineHeight // height
+                pen.width,                     // width
+                this.defaultStyle.lineHeight,  // height
+                data
             );
         }
     },

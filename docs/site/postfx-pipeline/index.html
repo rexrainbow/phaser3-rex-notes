@@ -4715,6 +4715,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unregister-post-fx-pipeline" class="md-nav__link">
+    Unregister post-fx pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#color-matrix" class="md-nav__link">
     Color matrix
   </a>
@@ -9011,6 +9018,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unregister-post-fx-pipeline" class="md-nav__link">
+    Unregister post-fx pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#color-matrix" class="md-nav__link">
     Color matrix
   </a>
@@ -9194,6 +9208,10 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Or register post-fx pipeline at runtime
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineManager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">;</span>
+<span class="nx">pipelineManager</span><span class="p">.</span><span class="nx">addPostPipeline</span><span class="p">(</span><span class="nx">PostFxName</span><span class="p">,</span> <span class="nx">MyPostFxClass</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
 <ul>
@@ -9215,6 +9233,10 @@
 </ul>
 <h3 id="remove-post-fx-pipeline">Remove post-fx pipeline<a class="headerlink" href="#remove-post-fx-pipeline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="unregister-post-fx-pipeline">Unregister post-fx pipeline<a class="headerlink" href="#unregister-post-fx-pipeline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineManager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">;</span>
+<span class="nx">pipelineManager</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">PostFxName</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="color-matrix">Color matrix<a class="headerlink" href="#color-matrix" title="Permanent link">&para;</a></h3>
 <p>Use color martix to change RGB render result, and more...</p>

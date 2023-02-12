@@ -68,7 +68,7 @@ class Pen {
     }
 
     get hasAreaMarker() {
-        return !!this.prop.area;
+        return !!this.prop.area || !!this.prop.url;
     }
 };
 

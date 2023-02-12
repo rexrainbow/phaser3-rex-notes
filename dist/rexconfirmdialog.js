@@ -16370,16 +16370,28 @@
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
-        this.hitAreaManager.add(pen.prop.area,
-        // key
-        offsetX,
+        var data;
+        var areaKey = pen.prop.area;
+        if (areaKey) {
+          data = {
+            key: areaKey
+          };
+        } else {
+          var url = pen.prop.url;
+          data = {
+            key: "url:".concat(url),
+            url: url
+          };
+        }
+        this.hitAreaManager.add(offsetX,
         // x
         offsetY - this.startYOffset,
         // y
         pen.width,
         // width
-        this.defaultStyle.lineHeight // height
-        );
+        this.defaultStyle.lineHeight,
+        // height
+        data);
       }
     },
     clear: function clear() {
@@ -16499,7 +16511,7 @@
     }, {
       key: "hasAreaMarker",
       get: function get() {
-        return !!this.prop.area;
+        return !!this.prop.area || !!this.prop.url;
       }
     }]);
     return Pen;
@@ -16833,19 +16845,23 @@
     }, {
       key: "clear",
       value: function clear() {
+        // Reuse hitArea(rectangle) later
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          Clear(this.hitAreas[i].data);
+        }
         RectanglePool.pushMultiple(this.hitAreas);
         return this;
       }
     }, {
       key: "add",
-      value: function add(key, x, y, width, height) {
+      value: function add(x, y, width, height, data) {
         var rectangle = RectanglePool.pop();
         if (rectangle === null) {
           rectangle = new Rectangle$1(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
-        rectangle.key = key;
+        rectangle.data = data;
         this.hitAreas.push(rectangle);
         return this;
       }
@@ -16855,6 +16871,17 @@
         for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
           var hitArea = this.hitAreas[i];
           if (hitArea.contains(x, y)) {
+            return hitArea;
+          }
+        }
+        return null;
+      }
+    }, {
+      key: "getByKey",
+      value: function getByKey(key) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          var hitArea = this.hitAreas[i];
+          if (hitArea.data.key === key) {
             return hitArea;
           }
         }
@@ -16892,36 +16919,50 @@
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY, event);
+    var key = area.data.key;
+    FireEvent.call(this, 'areadown', key, pointer, localX, localY, event);
+    area.data.isDown = true;
   };
   var OnAreaUp = function OnAreaUp(pointer, localX, localY, event) {
     var area = this.hitAreaManager.getFirst(localX, localY);
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY, event);
+    var areaData = area.data;
+    var key = areaData.key;
+    FireEvent.call(this, 'areaup', key, pointer, localX, localY, event);
+    if (areaData.isDown) {
+      FireEvent.call(this, 'areaclick', key, pointer, localX, localY, event);
+      var url = areaData.url;
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
+    areaData.isDown = false;
   };
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
     if (localX === null) {
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
         FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+        this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
         this.lastHitAreaKey = null;
       }
       return;
     }
     var area = this.hitAreaManager.getFirst(localX, localY);
-    var hitAreaKey = area ? area.key : null;
-    if (this.lastHitAreaKey === hitAreaKey) {
+    var key = area ? area.data.key : null;
+    if (this.lastHitAreaKey === key) {
       return;
     }
     if (this.lastHitAreaKey !== null) {
       FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+      this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
     }
-    if (hitAreaKey !== null) {
-      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY, event);
+    if (key !== null) {
+      FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
     }
-    this.lastHitAreaKey = hitAreaKey;
+    this.lastHitAreaKey = key;
   };
   var FireEvent = function FireEvent(eventName, key, pointer, localX, localY, event) {
     this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY, event);
@@ -17677,6 +17718,9 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
+      if (GetValue$b(style, 'interactive', false)) {
+        _this.setInteractive();
+      }
       return _this;
     }
     _createClass(Text, [{
@@ -18044,6 +18088,9 @@
   var AREA = 'area';
   var AREA_OPEN = GetOpenTagRegString(AREA, STR_PARAM);
   var AREA_CLOSE = GetCloseTagRegString(AREA);
+  var URL = 'url';
+  var URL_OPEN = GetOpenTagRegString(URL, STR_PARAM);
+  var URL_CLOSE = GetCloseTagRegString(URL);
   var ALIGN = 'align';
   var ALIGN_OPEN = GetOpenTagRegString(ALIGN, STR_PARAM);
   var ALIGN_CLOSE = GetCloseTagRegString(ALIGN);
@@ -18075,9 +18122,11 @@
   var RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
   var RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
   var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
+  var RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
+  var RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
   var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
   var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
 
   var SplitText = function SplitText(text, mode) {
     var result = [];
@@ -18222,6 +18271,11 @@
         UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
       } else if (RE_AREA_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'area');
+      } else if (RE_URL_OPEN.test(text)) {
+        var innerMatch = text.match(RE_URL_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'url', innerMatch[1]);
+      } else if (RE_URL_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'url');
       } else if (RE_ALIGN_OPEN.test(text)) {
         var innerMatch = text.match(RE_ALIGN_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
@@ -18381,6 +18435,7 @@
         case 'y':
         case 'img':
         case 'area':
+        case 'url':
         case 'align':
           headers.push("[".concat(k, "=").concat(value, "]"));
           break;

@@ -158,6 +158,10 @@ class Text extends TextBase {
         }
 
         this.setText(text);
+
+        if (GetValue(style, 'interactive', false)) {
+            this.setInteractive();
+        }
     }
 
     preDestroy() {

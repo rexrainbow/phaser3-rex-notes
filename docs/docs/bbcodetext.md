@@ -95,6 +95,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
+- Url link : `[url=http...]text[/url]`
+    - Click this area to open web page on a new tab (`window.open(url, '_blank')`)
+    - Will register hit area with key `url:http...`
 - Line alignment : 
     - `[align=left]text[/align]`, 
     - `[align=center]text[/align]`, 
@@ -173,11 +176,13 @@ Default style
     //     fontSize: 0
     // },
 
-    // images: {
-    //    key: { y:-8 }
-    // },
+    // images: [
+    //    { key: 'icon', y: -8 },
+    // ],
 
     // sharedPool: true,
+
+    // interactive: false
 }
 ```
 
@@ -236,6 +241,9 @@ var txt = scene.make.rexBBCodeText({
 - `sharedPool` : 
     - `true` : Use shared resouce pools during game. Default behavior.
     - `false` : Use local resource pools, will be free when game object destroying.
+- `interactive` :
+    - `true` : Invoke `txt.setInteractive()` for hit-area tag, or url tag.
+    - `false` : Do nothing. Default behavior.
 
 ### Custom class
 
@@ -519,6 +527,18 @@ Size of hit-area is word-width x line-height, or image-width x line-height.
     or
     ```javascript
     txt.on('areadown-' + key, function(pointer, localX, localY, event){
+
+    }, scope)
+    ```
+- Pointer click : pointer down then up, without pointer out
+    ```javascript
+    txt.on('areaclick', function(key, pointer, localX, localY, event){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaclick-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```

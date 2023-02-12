@@ -1662,16 +1662,28 @@
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
-        this.hitAreaManager.add(pen.prop.area,
-        // key
-        offsetX,
+        var data;
+        var areaKey = pen.prop.area;
+        if (areaKey) {
+          data = {
+            key: areaKey
+          };
+        } else {
+          var url = pen.prop.url;
+          data = {
+            key: "url:".concat(url),
+            url: url
+          };
+        }
+        this.hitAreaManager.add(offsetX,
         // x
         offsetY - this.startYOffset,
         // y
         pen.width,
         // width
-        this.defaultStyle.lineHeight // height
-        );
+        this.defaultStyle.lineHeight,
+        // height
+        data);
       }
     },
     clear: function clear() {
@@ -1791,7 +1803,7 @@
     }, {
       key: "hasAreaMarker",
       get: function get() {
-        return !!this.prop.area;
+        return !!this.prop.area || !!this.prop.url;
       }
     }]);
     return Pen;
@@ -2169,19 +2181,23 @@
     }, {
       key: "clear",
       value: function clear() {
+        // Reuse hitArea(rectangle) later
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          Clear(this.hitAreas[i].data);
+        }
         RectanglePool.pushMultiple(this.hitAreas);
         return this;
       }
     }, {
       key: "add",
-      value: function add(key, x, y, width, height) {
+      value: function add(x, y, width, height, data) {
         var rectangle = RectanglePool.pop();
         if (rectangle === null) {
           rectangle = new Rectangle(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
-        rectangle.key = key;
+        rectangle.data = data;
         this.hitAreas.push(rectangle);
         return this;
       }
@@ -2191,6 +2207,17 @@
         for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
           var hitArea = this.hitAreas[i];
           if (hitArea.contains(x, y)) {
+            return hitArea;
+          }
+        }
+        return null;
+      }
+    }, {
+      key: "getByKey",
+      value: function getByKey(key) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          var hitArea = this.hitAreas[i];
+          if (hitArea.data.key === key) {
             return hitArea;
           }
         }
@@ -2228,36 +2255,50 @@
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY, event);
+    var key = area.data.key;
+    FireEvent.call(this, 'areadown', key, pointer, localX, localY, event);
+    area.data.isDown = true;
   };
   var OnAreaUp = function OnAreaUp(pointer, localX, localY, event) {
     var area = this.hitAreaManager.getFirst(localX, localY);
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY, event);
+    var areaData = area.data;
+    var key = areaData.key;
+    FireEvent.call(this, 'areaup', key, pointer, localX, localY, event);
+    if (areaData.isDown) {
+      FireEvent.call(this, 'areaclick', key, pointer, localX, localY, event);
+      var url = areaData.url;
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
+    areaData.isDown = false;
   };
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
     if (localX === null) {
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
         FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+        this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
         this.lastHitAreaKey = null;
       }
       return;
     }
     var area = this.hitAreaManager.getFirst(localX, localY);
-    var hitAreaKey = area ? area.key : null;
-    if (this.lastHitAreaKey === hitAreaKey) {
+    var key = area ? area.data.key : null;
+    if (this.lastHitAreaKey === key) {
       return;
     }
     if (this.lastHitAreaKey !== null) {
       FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+      this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
     }
-    if (hitAreaKey !== null) {
-      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY, event);
+    if (key !== null) {
+      FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
     }
-    this.lastHitAreaKey = hitAreaKey;
+    this.lastHitAreaKey = key;
   };
   var FireEvent = function FireEvent(eventName, key, pointer, localX, localY, event) {
     this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY, event);
@@ -3013,6 +3054,9 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
+      if (GetValue$1(style, 'interactive', false)) {
+        _this.setInteractive();
+      }
       return _this;
     }
     _createClass(Text, [{

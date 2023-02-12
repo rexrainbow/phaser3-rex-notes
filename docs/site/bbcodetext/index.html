@@ -9366,6 +9366,11 @@
 <li>Superscript, subscript : <code>[y=-12]text[y]</code></li>
 <li>Image : <code>[img=imgKey]</code></li>
 <li>Hit area of words : <code>[area=key]text[/area]</code></li>
+<li>Url link : <code>[url=http...]text[/url]</code><ul>
+<li>Click this area to open web page on a new tab (<code>window.open(url, '_blank')</code>)</li>
+<li>Will register hit area with key <code>url:http...</code></li>
+</ul>
+</li>
 <li>Line alignment : <ul>
 <li><code>[align=left]text[/align]</code>, </li>
 <li><code>[align=center]text[/align]</code>, </li>
@@ -9443,11 +9448,13 @@
     <span class="c1">//     fontSize: 0</span>
     <span class="c1">// },</span>
 
-    <span class="c1">// images: {</span>
-    <span class="c1">//    key: { y:-8 }</span>
-    <span class="c1">// },</span>
+    <span class="c1">// images: [</span>
+    <span class="c1">//    { key: &#39;icon&#39;, y: -8 },</span>
+    <span class="c1">// ],</span>
 
     <span class="c1">// sharedPool: true,</span>
+
+    <span class="c1">// interactive: false</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>or</p>
@@ -9506,6 +9513,11 @@
 <li><code>sharedPool</code> : <ul>
 <li><code>true</code> : Use shared resouce pools during game. Default behavior.</li>
 <li><code>false</code> : Use local resource pools, will be free when game object destroying.</li>
+</ul>
+</li>
+<li><code>interactive</code> :<ul>
+<li><code>true</code> : Invoke <code>txt.setInteractive()</code> for hit-area tag, or url tag.</li>
+<li><code>false</code> : Do nothing. Default behavior.</li>
 </ul>
 </li>
 </ul>
@@ -9823,6 +9835,16 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areadown-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Pointer click : pointer down then up, without pointer out
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaclick&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaclick-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
 </code></pre></div></li>

@@ -29,6 +29,7 @@ var PropToTagText = function (text, prop, prevProp) {
             case 'y':
             case 'img':
             case 'area':
+            case 'url':
             case 'align':
                 headers.push(`[${k}=${value}]`);
                 break;

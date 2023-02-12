@@ -14,6 +14,7 @@ import {
     RE_OFFSETY_OPEN, RE_OFFSETY_CLOSE,
     RE_IMAGE_OPEN, RE_IMAGE_CLOSE,
     RE_AREA_OPEN, RE_AREA_CLOSE,
+    RE_URL_OPEN, RE_URL_CLOSE,
     RE_ALIGN_OPEN, RE_ALIGN_CLOSE
 } from './tags.js';
 
@@ -130,12 +131,18 @@ var TagTextToProp = function (text, prevProp) {
         } else if (RE_AREA_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'area');
 
+        } else if (RE_URL_OPEN.test(text)) {
+            var innerMatch = text.match(RE_URL_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'url', innerMatch[1]);
+        } else if (RE_URL_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'url');
+
         } else if (RE_ALIGN_OPEN.test(text)) {
             var innerMatch = text.match(RE_ALIGN_OPEN);
             UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
         } else if (RE_ALIGN_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'align');
-
+        
         } else {
             plainText = text;
         }
