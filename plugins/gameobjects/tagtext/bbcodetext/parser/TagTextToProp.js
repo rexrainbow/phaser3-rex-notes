@@ -1,4 +1,7 @@
 import {
+    ESC, RAW, BLOD, ITALICS, WEIGHT, SIZE, COLOR, UNDERLINE,
+    SHADOW, STROKE, OFFSETY, IMAGE, AREA, ALIGN,
+
     RE_ESC_OPEN, RE_ESC_CLOSE,
     RE_RAW_OPEN, RE_RAW_CLOSE,
 
@@ -54,87 +57,87 @@ var TagTextToProp = function (text, prevProp) {
 
     } else {
         if (RE_ESC_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'esc', true);
+            UpdateProp(prevProp, PROP_ADD, ESC, true);
         } else if (RE_ESC_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'esc');
+            UpdateProp(prevProp, PROP_REMOVE, ESC);
 
         } else if (RE_RAW_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'raw', true);
+            UpdateProp(prevProp, PROP_ADD, RAW, true);
         } else if (RE_RAW_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'raw');
+            UpdateProp(prevProp, PROP_REMOVE, RAW);
 
         } else if (RE_BLOD_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'b', true);
+            UpdateProp(prevProp, PROP_ADD, BLOD, true);
         } else if (RE_BLOD_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'b');
+            UpdateProp(prevProp, PROP_REMOVE, BLOD);
 
         } else if (RE_ITALICS_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'i', true);
+            UpdateProp(prevProp, PROP_ADD, ITALICS, true);
         } else if (RE_ITALICS_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'i');
+            UpdateProp(prevProp, PROP_REMOVE, ITALICS);
 
         } else if (RE_WEIGHT_OPEN.test(text)) {
             var innerMatch = text.match(RE_WEIGHT_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, WEIGHT, innerMatch[1]);
         } else if (RE_WEIGHT_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'weight');
+            UpdateProp(prevProp, PROP_REMOVE, WEIGHT);
 
         } else if (RE_SIZE_OPEN.test(text)) {
             var innerMatch = text.match(RE_SIZE_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'size', `${innerMatch[1]}px`);
+            UpdateProp(prevProp, PROP_ADD, SIZE, `${innerMatch[1]}px`);
         } else if (RE_SIZE_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'size');
+            UpdateProp(prevProp, PROP_REMOVE, SIZE);
 
         } else if (RE_COLOR_OPEN.test(text)) {
             var innerMatch = text.match(RE_COLOR_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, COLOR, innerMatch[1]);
         } else if (RE_COLOR_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'color');
+            UpdateProp(prevProp, PROP_REMOVE, COLOR);
 
         } else if (RE_UNDERLINE_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'u', true);
+            UpdateProp(prevProp, PROP_ADD, UNDERLINE, true);
         } else if (RE_UNDERLINE_OPENC.test(text)) {
             var innerMatch = text.match(RE_UNDERLINE_OPENC);
-            UpdateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, UNDERLINE, innerMatch[1]);
         } else if (RE_UNDERLINE_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'u');
+            UpdateProp(prevProp, PROP_REMOVE, UNDERLINE);
 
         } else if (RE_SHADOW_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'shadow', true);
+            UpdateProp(prevProp, PROP_ADD, SHADOW, true);
         } else if (RE_SHADOW_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'shadow');
+            UpdateProp(prevProp, PROP_REMOVE, SHADOW);
 
         } else if (RE_STROKE_OPEN.test(text)) {
-            UpdateProp(prevProp, PROP_ADD, 'stroke', true);
+            UpdateProp(prevProp, PROP_ADD, STROKE, true);
         } else if (RE_STROKE_OPENC.test(text)) {
             var innerMatch = text.match(RE_STROKE_OPENC);
-            UpdateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, STROKE, innerMatch[1]);
         } else if (RE_STROKE_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'stroke');
+            UpdateProp(prevProp, PROP_REMOVE, STROKE);
 
         } else if (RE_OFFSETY_OPEN.test(text)) {
             var innerMatch = text.match(RE_OFFSETY_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));
+            UpdateProp(prevProp, PROP_ADD, OFFSETY, parseFloat(innerMatch[1]));
         } else if (RE_OFFSETY_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'y');
+            UpdateProp(prevProp, PROP_REMOVE, OFFSETY);
 
         } else if (RE_IMAGE_OPEN.test(text)) {
             var innerMatch = text.match(RE_IMAGE_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, IMAGE, innerMatch[1]);
         } else if (RE_IMAGE_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'img');
+            UpdateProp(prevProp, PROP_REMOVE, IMAGE);
 
         } else if (RE_AREA_OPEN.test(text)) {
             var innerMatch = text.match(RE_AREA_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, AREA, innerMatch[1]);
         } else if (RE_AREA_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'area');
+            UpdateProp(prevProp, PROP_REMOVE, AREA);
 
         } else if (RE_ALIGN_OPEN.test(text)) {
             var innerMatch = text.match(RE_ALIGN_OPEN);
-            UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, ALIGN, innerMatch[1]);
         } else if (RE_ALIGN_CLOSE.test(text)) {
-            UpdateProp(prevProp, PROP_REMOVE, 'align');
+            UpdateProp(prevProp, PROP_REMOVE, ALIGN);
 
         } else {
             plainText = text;

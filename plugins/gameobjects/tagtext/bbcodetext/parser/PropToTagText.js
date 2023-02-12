@@ -1,3 +1,8 @@
+import {
+    ESC, RAW, BLOD, ITALICS, WEIGHT, SIZE, COLOR, UNDERLINE,
+    SHADOW, STROKE, OFFSETY, IMAGE, AREA, ALIGN,
+} from './tags.js';
+
 var PropToTagText = function (text, prop, prevProp) {
     if (prevProp == null) {
         prevProp = EMPTYPROP;
@@ -19,21 +24,21 @@ var PropToTagText = function (text, prop, prevProp) {
         }
 
         switch (k) {
-            case 'size':
+            case SIZE:
                 headers.push(`[size=${value.replace('px', '')}]`);
                 break;
 
-            case 'color':
-            case 'weight':
-            case 'stroke':
-            case 'y':
-            case 'img':
-            case 'area':
-            case 'align':
+            case COLOR:
+            case WEIGHT:
+            case STROKE:
+            case OFFSETY:
+            case IMAGE:
+            case AREA:
+            case ALIGN:
                 headers.push(`[${k}=${value}]`);
                 break;
 
-            case 'u':
+            case UNDERLINE:
                 if (value === true) {
                     headers.push('[u]');
                 } else {
