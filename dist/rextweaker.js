@@ -13878,10 +13878,17 @@
     }
     if (this.lastHitAreaKey !== null) {
       FireEvent$1.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
-      this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
+      var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+      if (this.urlTagCursorStyle && !!prevHitArea.data.url) {
+        this.scene.input.manager.canvas.style.cursor = '';
+      }
+      prevHitArea.isDown = false;
     }
     if (key !== null) {
       FireEvent$1.call(this, 'areaover', key, pointer, localX, localY, event);
+      if (this.urlTagCursorStyle && !!area.data.url) {
+        this.scene.input.manager.canvas.style.cursor = this.urlTagCursorStyle;
+      }
     }
     this.lastHitAreaKey = key;
   };
@@ -14009,6 +14016,7 @@
     function CanvasText(config) {
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
+      this.scene = this.parent.scene;
       this.context = GetValue$W(config, 'context', null);
       this.canvas = this.context.canvas;
       this.parser = GetValue$W(config, 'parser', null);
@@ -14022,6 +14030,7 @@
       this._tmpPenManager = null;
       this.hitAreaManager = new HitAreaManager();
       this.lastHitAreaKey = null;
+      this.urlTagCursorStyle = null;
       var context = this.context;
       this.getTextWidth = function (text) {
         return context.measureText(text).width;
@@ -14030,6 +14039,8 @@
     _createClass(CanvasText, [{
       key: "destroy",
       value: function destroy() {
+        this.parent = undefined;
+        this.scene = undefined;
         this.context = undefined;
         this.canvas = undefined;
         this.parser = undefined;
@@ -14639,6 +14650,7 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
+      _this.setUrlTagCursorStyle(GetValue$U(style, 'urlTagCursorStyle', 'pointer'));
       if (GetValue$U(style, 'interactive', false)) {
         _this.setInteractive();
       }
@@ -14869,6 +14881,20 @@
           this.canvasText.setInteractive();
         }
         return this;
+      }
+    }, {
+      key: "setUrlTagCursorStyle",
+      value: function setUrlTagCursorStyle(cursor) {
+        this.urlTagCursorStyle = cursor;
+        return this;
+      }
+    }, {
+      key: "urlTagCursorStyle",
+      get: function get() {
+        return this.canvasText.urlTagCursorStyle;
+      },
+      set: function set(value) {
+        this.canvasText.urlTagCursorStyle = value;
       }
     }, {
       key: "getWrappedText",

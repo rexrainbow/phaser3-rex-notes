@@ -33,6 +33,7 @@ declare namespace Text {
     interface TextStyle extends TextStyleBase {
         images?: ImageData[],
         interactive?: boolean,
+        urlCursor?: string,
     }
 
     namespace Events {
@@ -206,6 +207,9 @@ declare class Text extends CanvasGameObjectBase {
         x?: number, y?: number,
         width?: number, height?: number
     ): this;
+
+    setUrlTagCursor(cursor?: string): this;
+    urlTagCursor: string;
 
     style: {
         color: string | null,

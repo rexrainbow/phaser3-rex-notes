@@ -65,10 +65,20 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
 
     if (this.lastHitAreaKey !== null) {
         FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
-        this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
+
+        var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+        if (this.urlTagCursorStyle && !!prevHitArea.data.url) {
+            this.scene.input.manager.canvas.style.cursor = '';
+        }
+
+        prevHitArea.isDown = false;
     }
     if (key !== null) {
         FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
+
+        if (this.urlTagCursorStyle && !!area.data.url) {
+            this.scene.input.manager.canvas.style.cursor = this.urlTagCursorStyle;
+        }
     }
 
     this.lastHitAreaKey = key;

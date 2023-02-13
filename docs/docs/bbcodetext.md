@@ -182,6 +182,7 @@ Default style
 
     // sharedPool: true,
 
+    // urlTagCursorStyle: 'pointer',
     // interactive: false
 }
 ```
@@ -241,6 +242,7 @@ var txt = scene.make.rexBBCodeText({
 - `sharedPool` : 
     - `true` : Use shared resouce pools during game. Default behavior.
     - `false` : Use local resource pools, will be free when game object destroying.
+- `urlTagCursorStyle` : Cursor style when cursor moving over a url tag. Default value is `'pointer'`.
 - `interactive` :
     - `true` : Invoke `txt.setInteractive()` for hit-area tag, or url tag.
     - `false` : Do nothing. Default behavior.

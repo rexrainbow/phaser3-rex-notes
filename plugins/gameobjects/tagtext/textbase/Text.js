@@ -159,6 +159,8 @@ class Text extends TextBase {
 
         this.setText(text);
 
+        this.setUrlTagCursorStyle(GetValue(style, 'urlTagCursorStyle', 'pointer'));
+
         if (GetValue(style, 'interactive', false)) {
             this.setInteractive();
         }
@@ -422,6 +424,19 @@ class Text extends TextBase {
         }
 
         return this;
+    }
+
+    setUrlTagCursorStyle(cursor) {
+        this.urlTagCursorStyle = cursor;
+        return this;
+    }
+
+    get urlTagCursorStyle() {
+        return this.canvasText.urlTagCursorStyle;
+    }
+
+    set urlTagCursorStyle(value) {
+        this.canvasText.urlTagCursorStyle = value;
     }
 
     getWrappedText(text, start, end) {
