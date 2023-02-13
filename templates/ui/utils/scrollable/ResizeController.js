@@ -14,8 +14,14 @@ var ResizeController = function () {
     }
     this.updateController();
 
-    if (this.adaptThumbSizeMode) {
-        AdaptThumbSize.call(this);
+    if (slider) {
+        if (this.hideUnscrollableSlider) {
+            this.setChildVisible(slider, this.isOverflow);
+        }
+
+        if (this.adaptThumbSizeMode) {
+            AdaptThumbSize.call(this);
+        }
     }
 
     return this;

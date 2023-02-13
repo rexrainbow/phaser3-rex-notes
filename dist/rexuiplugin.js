@@ -619,7 +619,7 @@
     //  NOOP
   };
 
-  var Methods$i = {
+  var Methods$j = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -731,7 +731,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$i);
+    Object.assign(NinePatch.prototype, Methods$j);
     return NinePatch;
   };
 
@@ -767,7 +767,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$h = {
+  var Methods$i = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -782,7 +782,7 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
-  Object.assign(NinePatch$1.prototype, Methods$h);
+  Object.assign(NinePatch$1.prototype, Methods$i);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -988,7 +988,7 @@
     }
   };
 
-  var methods$z = {
+  var methods$y = {
     setTexture: SetTexture,
     resize: Resize$1,
     setSize: Resize$1,
@@ -999,7 +999,7 @@
     getLastAppendedChildren: GetLastAppendedChildren$1,
     getChildren: GetChildren$1
   };
-  Object.assign(methods$z, TintMethods);
+  Object.assign(methods$y, TintMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -1166,7 +1166,7 @@
     return childA._depth - childB._depth;
   };
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$z]);
+  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$y]);
 
   var ImageTypeName$1 = 'image';
 
@@ -1898,11 +1898,11 @@
     }]);
     return ImageData;
   }(RenderBase$1);
-  var methods$y = {
+  var methods$x = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
   };
-  Object.assign(ImageData$1.prototype, methods$y);
+  Object.assign(ImageData$1.prototype, methods$x);
 
   var AddImage$2 = function AddImage(blitter, config) {
     if (typeof config === 'string') {
@@ -1951,7 +1951,7 @@
     }
   };
 
-  var Methods$g = {
+  var Methods$h = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -1978,7 +1978,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$g);
+  Object.assign(NinePatch.prototype, Methods$h);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -5557,10 +5557,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$x = {
+  var methods$w = {
     setInteractive: SetInteractive$1
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$x);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$w);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -5726,10 +5726,10 @@
     }]);
     return ImageManager;
   }();
-  var methods$w = {
+  var methods$v = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$w);
+  Object.assign(ImageManager.prototype, methods$v);
 
   var IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
@@ -6632,13 +6632,13 @@
     }]);
     return Parser;
   }();
-  var methods$v = {
+  var methods$u = {
     splitText: SplitText,
     tagTextToProp: TagTextToProp,
     propToContextStyle: PropToContextStyle,
     propToTagText: PropToTagText
   };
-  Object.assign(Parser$2.prototype, methods$v);
+  Object.assign(Parser$2.prototype, methods$u);
 
   var BBCodeText = /*#__PURE__*/function (_Text) {
     _inherits(BBCodeText, _Text);
@@ -7264,11 +7264,11 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var Methods$f = {
+  var Methods$g = {
     contains: Contains$1,
     getWorldPosition: GetWorldPosition
   };
-  Object.assign(Methods$f, RenderMethods);
+  Object.assign(Methods$g, RenderMethods);
 
   var DegToRad$c = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
@@ -7671,7 +7671,7 @@
     }]);
     return RenderBase;
   }(Base$2);
-  Object.assign(RenderBase.prototype, Methods$f);
+  Object.assign(RenderBase.prototype, Methods$g);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -10206,7 +10206,7 @@
     }
   };
 
-  var Methods$e = {
+  var Methods$f = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -10255,7 +10255,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$e, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$f, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -10371,7 +10371,7 @@
     }]);
     return DynamicText;
   }(Canvas$1);
-  Object.assign(DynamicText.prototype, Methods$e);
+  Object.assign(DynamicText.prototype, Methods$f);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -11654,8 +11654,8 @@
     }
   };
 
-  var Methods$d = {};
-  Object.assign(Methods$d, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$e = {};
+  Object.assign(Methods$e, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$2H = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -11750,7 +11750,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$d);
+  Object.assign(SoundManager.prototype, Methods$e);
 
   var GetValue$2G = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -13139,10 +13139,10 @@
     return this;
   };
 
-  var Methods$c = {
+  var Methods$d = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$c, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$d, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -13286,7 +13286,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$c);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$d);
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
@@ -15456,7 +15456,7 @@
     return this;
   };
 
-  var Methods$b = {
+  var Methods$c = {
     fadeOutPage: FadeOutPage,
     start: Start,
     typing: Typing,
@@ -15471,7 +15471,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$b, TypingSpeedMethods$1);
+  Object.assign(Methods$c, TypingSpeedMethods$1);
 
   var GetValue$2A = Phaser.Utils.Objects.GetValue;
   var TypeWriter = /*#__PURE__*/function () {
@@ -15578,7 +15578,7 @@
       }
     }
   };
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$b);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$c);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -15656,8 +15656,8 @@
     }
   };
 
-  var Methods$a = {};
-  Object.assign(Methods$a, AnimationMethods);
+  var Methods$b = {};
+  Object.assign(Methods$b, AnimationMethods);
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
@@ -15696,7 +15696,7 @@
     }
     return scene.add.image(0, 0, textureKey, frameName);
   };
-  Object.assign(SpriteManager.prototype, Methods$a);
+  Object.assign(SpriteManager.prototype, Methods$b);
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
     // goType.name.play
@@ -16387,7 +16387,7 @@
     }
   };
 
-  var Methods$9 = {
+  var Methods$a = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -16398,7 +16398,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$9, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
+  Object.assign(Methods$a, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -16516,7 +16516,7 @@
     }]);
     return TextPlayer;
   }(Extend(DynamicText));
-  Object.assign(TextPlayer.prototype, Methods$9);
+  Object.assign(TextPlayer.prototype, Methods$a);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -16763,7 +16763,7 @@
     return this;
   };
 
-  var Methods$8 = {
+  var Methods$9 = {
     open: Open$2,
     close: Close$1
   };
@@ -17130,7 +17130,7 @@
     }]);
     return HiddenTextEditBase;
   }(ComponentBase);
-  Object.assign(HiddenTextEditBase.prototype, Methods$8);
+  Object.assign(HiddenTextEditBase.prototype, Methods$9);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -20507,8 +20507,8 @@
     }
   };
 
-  var methods$u = {};
-  Object.assign(methods$u, StyleMethods$2, SizeMethods$1, ShapesUpdateMethods$4, CheckerAnimationMethods);
+  var methods$t = {};
+  Object.assign(methods$t, StyleMethods$2, SizeMethods$1, ShapesUpdateMethods$4, CheckerAnimationMethods);
 
   var GetValue$2q = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$J = Phaser.Utils.Objects.IsPlainObject;
@@ -20622,7 +20622,7 @@
     }]);
     return CheckboxShape;
   }(BaseShapes);
-  Object.assign(CheckboxShape.prototype, methods$u);
+  Object.assign(CheckboxShape.prototype, methods$t);
 
   var GetValue$2p = Phaser.Utils.Objects.GetValue;
   var Button = /*#__PURE__*/function (_ComponentBase) {
@@ -21050,8 +21050,8 @@
     }
   };
 
-  var methods$t = {};
-  Object.assign(methods$t, StyleMethods, SizeMethods, PositionMethods, ShapesUpdateMethods$3, ToggleAnimationMethods);
+  var methods$s = {};
+  Object.assign(methods$s, StyleMethods, SizeMethods, PositionMethods, ShapesUpdateMethods$3, ToggleAnimationMethods);
 
   var GrayScale = function GrayScale(color) {
     var shade = 0.3 * GetR(color) + 0.59 * GetG(color) + 0.11 * GetB(color);
@@ -21151,7 +21151,7 @@
     }]);
     return ToggleSwitchShape;
   }(BaseShapes);
-  Object.assign(ToggleSwitchShape.prototype, methods$t);
+  Object.assign(ToggleSwitchShape.prototype, methods$s);
 
   var GetValue$2m = Phaser.Utils.Objects.GetValue;
   var ToggleSwitch = /*#__PURE__*/function (_ToggleSwitchShape) {
@@ -22426,10 +22426,10 @@
     }]);
     return LineProgress;
   }(ProgressBase(BaseShapes));
-  var Methods$7 = {
+  var Methods$8 = {
     updateShapes: UpdateShapes
   };
-  Object.assign(LineProgress$1.prototype, Methods$7);
+  Object.assign(LineProgress$1.prototype, Methods$8);
 
   ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
     var gameObject = new LineProgress$1(this.scene, x, y, width, height, barColor, value, config);
@@ -24655,11 +24655,11 @@
     return this;
   };
 
-  var methods$s = {
+  var methods$r = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$s, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
+  Object.assign(methods$r, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -24928,7 +24928,7 @@
     }]);
     return ContainerLite;
   }(Base$1);
-  Object.assign(ContainerLite.prototype, methods$s);
+  Object.assign(ContainerLite.prototype, methods$r);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -28065,7 +28065,7 @@
     }
   };
 
-  var ConfigurationMethods$2 = {
+  var ConfigurationMethods$1 = {
     setTransitInTime: function setTransitInTime(time) {
       this.transitInTime = time;
       return this;
@@ -28144,8 +28144,8 @@
     }
   };
 
-  var methods$r = {};
-  Object.assign(methods$r, DelayCallMethods$1, ConfigurationMethods$2, OpenMethods, CloseMethods);
+  var methods$q = {};
+  Object.assign(methods$q, DelayCallMethods$1, ConfigurationMethods$1, OpenMethods, CloseMethods);
 
   var GetValue$24 = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
@@ -28194,7 +28194,7 @@
     }]);
     return OpenCloseTransition;
   }(ComponentBase);
-  Object.assign(OpenCloseTransition.prototype, methods$r);
+  Object.assign(OpenCloseTransition.prototype, methods$q);
 
   var Rectangle = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
@@ -31156,10 +31156,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$q = {
+  var methods$p = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$q);
+  Object.assign(Rotate.prototype, methods$p);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -31250,7 +31250,7 @@
     return this;
   };
 
-  var methods$p = {
+  var methods$o = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -31285,7 +31285,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$p, PaddingMethods, AddChildMethods$8, RemoveChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods$1, GetShownChildrenMethods);
+  Object.assign(methods$o, PaddingMethods, AddChildMethods$8, RemoveChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods$1, GetShownChildrenMethods);
 
   var GetValue$1K = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
@@ -31535,7 +31535,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base.prototype, methods$p);
+  Object.assign(Base.prototype, methods$o);
 
   var GetChildrenWidth$4 = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -31820,7 +31820,7 @@
     }
   };
 
-  var methods$o = {
+  var methods$n = {
     getChildrenWidth: GetChildrenWidth$4,
     getChildrenHeight: GetChildrenHeight$4,
     getExpandedChildWidth: GetExpandedChildWidth$2,
@@ -31828,7 +31828,7 @@
     getChildrenSizers: GetChildrenSizers$4,
     layoutChildren: LayoutChildren$5
   };
-  Object.assign(methods$o, AddChildMethods$7, RemoveChildMethods$6);
+  Object.assign(methods$n, AddChildMethods$7, RemoveChildMethods$6);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -31884,7 +31884,7 @@
     }]);
     return OverlapSizer;
   }(Base);
-  Object.assign(OverlapSizer.prototype, methods$o);
+  Object.assign(OverlapSizer.prototype, methods$n);
 
   var GetDistance = Phaser.Math.Distance.Between;
   var IsLocalPointInKnob = function IsLocalPointInKnob(knob, localX, localY) {
@@ -32854,8 +32854,8 @@
     }
   };
 
-  var methods$n = {};
-  Object.assign(methods$n, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
+  var methods$m = {};
+  Object.assign(methods$m, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
 
   var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
   var OnProgress = function OnProgress(parent, currentImage, nextImage, t) {
@@ -33076,7 +33076,7 @@
   };
 
   // mixin
-  Object.assign(TransitionImage.prototype, methods$n);
+  Object.assign(TransitionImage.prototype, methods$m);
 
   ObjectFactory.register('transitionImage', function (x, y, texture, frame, config) {
     var gameObject = new TransitionImage(this.scene, x, y, texture, frame, config);
@@ -33603,10 +33603,10 @@
     }]);
     return InputText;
   }(DOMElement$2);
-  var methods$m = {
+  var methods$l = {
     resize: Resize
   };
-  Object.assign(InputText.prototype, methods$m);
+  Object.assign(InputText.prototype, methods$l);
 
   ObjectFactory.register('inputText', function (config) {
     var gameObject = new InputText(this.scene, config);
@@ -33857,11 +33857,11 @@
     }]);
     return FileChooser;
   }(DOMElement$1);
-  var methods$l = {
+  var methods$k = {
     resize: Resize,
     syncTo: SyncTo
   };
-  Object.assign(FileChooser.prototype, methods$l, LoadFileMethods);
+  Object.assign(FileChooser.prototype, methods$k, LoadFileMethods);
 
   ObjectFactory.register('fileChooser', function (config) {
     var gameObject = new FileChooser(this.scene, config);
@@ -33870,7 +33870,7 @@
   });
   SetValue(window, 'RexPlugins.UI.FileChooser', FileChooser);
 
-  var ConfigurationMethods$1 = {
+  var DropEnableMethods = {
     setDropEnable: function setDropEnable(enable) {
       if (enable === undefined) {
         enable = true;
@@ -33881,7 +33881,10 @@
     toggleDropEnable: function toggleDropEnable() {
       this.dropEnable = !this.dropEnable;
       return this;
-    },
+    }
+  };
+
+  var FilterMethods = {
     addFilter: function addFilter(name, callback) {
       if (!this.filters) {
         this.filters = {};
@@ -33899,6 +33902,12 @@
       return this;
     }
   };
+
+  var Methods$7 = {
+    resize: Resize,
+    syncTo: SyncTo
+  };
+  Object.assign(Methods$7, DropEnableMethods, FilterMethods, LoadFileMethods);
 
   var DragDropEvents = {
     dragenter: 'dragenter',
@@ -33977,11 +33986,7 @@
     }]);
     return FileDropZone;
   }(DOMElement);
-  var methods$k = {
-    resize: Resize,
-    syncTo: SyncTo
-  };
-  Object.assign(FileDropZone.prototype, methods$k, ConfigurationMethods$1, LoadFileMethods);
+  Object.assign(FileDropZone.prototype, Methods$7);
 
   ObjectFactory.register('fileDropZone', function (config) {
     var gameObject = new FileDropZone(this.scene, config);
@@ -41659,6 +41664,7 @@
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
         slider = new Slider(scene, sliderConfig);
         sliderPadding = GetValue$10(config, 'space.slider', 0);
+        parent.hideUnscrollableSlider = GetValue$10(sliderConfig, 'hideUnscrollableSlider', false);
         parent.adaptThumbSizeMode = GetValue$10(sliderConfig, 'adaptThumbSize', false);
         parent.minThumbSize = GetValue$10(sliderConfig, 'minThumbSize', undefined);
       } else {
@@ -41750,8 +41756,13 @@
       slider.setEnable(bottomChildOY !== topChildOY);
     }
     this.updateController();
-    if (this.adaptThumbSizeMode) {
-      AdaptThumbSize.call(this);
+    if (slider) {
+      if (this.hideUnscrollableSlider) {
+        this.setChildVisible(slider, this.isOverflow);
+      }
+      if (this.adaptThumbSizeMode) {
+        AdaptThumbSize.call(this);
+      }
     }
     return this;
   };

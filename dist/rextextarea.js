@@ -13148,6 +13148,7 @@
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
         slider = new Slider(scene, sliderConfig);
         sliderPadding = GetValue$3(config, 'space.slider', 0);
+        parent.hideUnscrollableSlider = GetValue$3(sliderConfig, 'hideUnscrollableSlider', false);
         parent.adaptThumbSizeMode = GetValue$3(sliderConfig, 'adaptThumbSize', false);
         parent.minThumbSize = GetValue$3(sliderConfig, 'minThumbSize', undefined);
       } else {
@@ -13239,8 +13240,13 @@
       slider.setEnable(bottomChildOY !== topChildOY);
     }
     this.updateController();
-    if (this.adaptThumbSizeMode) {
-      AdaptThumbSize.call(this);
+    if (slider) {
+      if (this.hideUnscrollableSlider) {
+        this.setChildVisible(slider, this.isOverflow);
+      }
+      if (this.adaptThumbSizeMode) {
+        AdaptThumbSize.call(this);
+      }
     }
     return this;
   };

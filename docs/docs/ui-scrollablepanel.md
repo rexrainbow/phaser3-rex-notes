@@ -125,6 +125,8 @@ var panel = scene.rexUI.add.scrollablePanel({
 
         // input: 'drag',
         // position: 'right',
+
+        // hideUnscrollableSlider: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
 
@@ -277,6 +279,9 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `slider.position` : Position of this slider.
         - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
         - `1`, `'left'`, `'top'` : Slider at left/top side.
+    - `slider.hideUnscrollableSlider` :
+        - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
+        - `true` : Set slider to invisible if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.

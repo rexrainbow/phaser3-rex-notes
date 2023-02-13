@@ -120,9 +120,31 @@ var table = scene.rexUI.add.gridTable({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         // input: 'drag',
         // position: 'right',
+
+        // hideUnscrollableSlider: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
         
@@ -276,6 +298,9 @@ var table = scene.rexUI.add.gridTable({
     - `slider.position` : Position of this slider.
         - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
         - `1`, `'left'`, `'top'` : Slider at left/top side.
+    - `slider.hideUnscrollableSlider` :
+        - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
+        - `true` : Set slider to invisible if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.

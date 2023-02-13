@@ -30,6 +30,8 @@ declare namespace Scrollable {
                 thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
                 input?: SliderInputTypes,
                 position?: SliderPositionTypes,
+
+                hideUnscrollableSlider?: boolean,
                 adaptThumbSize?: boolean,
                 minThumbSize?: number,
 

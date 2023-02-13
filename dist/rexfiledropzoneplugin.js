@@ -126,36 +126,6 @@
     return this;
   };
 
-  var ConfigurationMethods = {
-    setDropEnable: function setDropEnable(enable) {
-      if (enable === undefined) {
-        enable = true;
-      }
-      this.dropEnable = enable;
-      return this;
-    },
-    toggleDropEnable: function toggleDropEnable() {
-      this.dropEnable = !this.dropEnable;
-      return this;
-    },
-    addFilter: function addFilter(name, callback) {
-      if (!this.filters) {
-        this.filters = {};
-      }
-      this.filters[name] = callback;
-      return this;
-    },
-    addFilters: function addFilters(filters) {
-      if (!this.filters) {
-        this.filters = {};
-      }
-      for (var name in filters) {
-        this.filters[name] = filters[name];
-      }
-      return this;
-    }
-  };
-
   var GameClass = Phaser.Game;
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
@@ -248,6 +218,45 @@
     loadFile: LoadFile,
     loadFilePromise: LoadFilePromise
   };
+
+  var DropEnableMethods = {
+    setDropEnable: function setDropEnable(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      this.dropEnable = enable;
+      return this;
+    },
+    toggleDropEnable: function toggleDropEnable() {
+      this.dropEnable = !this.dropEnable;
+      return this;
+    }
+  };
+
+  var FilterMethods = {
+    addFilter: function addFilter(name, callback) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      this.filters[name] = callback;
+      return this;
+    },
+    addFilters: function addFilters(filters) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      for (var name in filters) {
+        this.filters[name] = filters[name];
+      }
+      return this;
+    }
+  };
+
+  var Methods = {
+    resize: Resize,
+    syncTo: SyncTo
+  };
+  Object.assign(Methods, DropEnableMethods, FilterMethods, LoadFileMethods);
 
   var DragDropEvents = {
     dragenter: 'dragenter',
@@ -346,11 +355,7 @@
     }]);
     return FileDropZone;
   }(DOMElement);
-  var methods = {
-    resize: Resize,
-    syncTo: SyncTo
-  };
-  Object.assign(FileDropZone.prototype, methods, ConfigurationMethods, LoadFileMethods);
+  Object.assign(FileDropZone.prototype, Methods);
 
   function Factory (x, y, width, height, config) {
     var gameObject = new FileDropZone(this.scene, x, y, width, height, config);

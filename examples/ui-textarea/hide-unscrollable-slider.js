@@ -30,6 +30,9 @@ class Demo extends Phaser.Scene {
             slider: {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+
+                hideUnscrollableSlider: true,
+                // adaptThumbSize: true,
             },
 
             mouseWheelScroller: {
@@ -57,12 +60,8 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        textArea.setChildVisible(textArea.getElement('slider'), textArea.isOverflow);
-
         this.input.once('pointerdown', function () {
-            textArea.setText(CreateContent(100));
-
-            textArea.setChildVisible(textArea.getElement('slider'), textArea.isOverflow);
+            textArea.setText(CreateContent(50));
 
         })
 

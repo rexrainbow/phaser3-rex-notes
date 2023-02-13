@@ -71,6 +71,7 @@ var CreateScrollableSizer = function (parent, config) {
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
             slider = new Slider(scene, sliderConfig);
             sliderPadding = GetValue(config, 'space.slider', 0);
+            parent.hideUnscrollableSlider = GetValue(sliderConfig, 'hideUnscrollableSlider', false);
             parent.adaptThumbSizeMode = GetValue(sliderConfig, 'adaptThumbSize', false);
             parent.minThumbSize = GetValue(sliderConfig, 'minThumbSize', undefined);
         } else {
