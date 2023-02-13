@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
         2. DOM game object will receive touch event even if it is not the first touched game object.
         3. P3's 'pointerdown', 'pointerup' events will be fired above/under DOM game object.
         4. P3's 'pointermove' event won't be fired above/under DOM game object with 'dragenter', 'dragover' events,
-           unless setting DOM game object to be **invisilbe**
+           unless setting DOM game object to be **invisilbe**.
         */
     }
 

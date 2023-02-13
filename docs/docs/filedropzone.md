@@ -257,4 +257,5 @@ fileDropZone.loadFilePromise(file, loaderType, key, cahceType)
 1. DOM game object always put above game canvas, i.e. file-drop-zone will render above any other kind of game object.
 1. DOM game object will receive touch event even if it is not the first touched game object.
 1. P3's `'pointerdown'`, `'pointerup'` events will be fired above/under DOM game object.
-1. P3's `'pointermove'` event won't be fired above/under DOM game object which has `'dragenter'`, `'dragover'` events.
+1. P3's `'pointermove'` event won't be fired above/under DOM game object which has `'dragenter'`, `'dragover'` events,
+   unless setting DOM game object to be **invisilbe**.
