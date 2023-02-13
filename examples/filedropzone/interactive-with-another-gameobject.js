@@ -18,6 +18,7 @@ class Demo extends Phaser.Scene {
         })
 
         fileDropZone
+            // .setVisible(false)
             .on('drop', function () {
                 console.log('Drop file');
             })
@@ -33,7 +34,7 @@ class Demo extends Phaser.Scene {
             .on('pointermove', function () {
                 console.log('Pointer moving on game object');
             })
-            .on('dragstart', function( ) {
+            .on('dragstart', function () {
                 console.log('Drag-start game object');
             })
 
@@ -41,7 +42,8 @@ class Demo extends Phaser.Scene {
         1. DOM game object always put above game canvas, i.e. render above any other kind of game object.
         2. DOM game object will receive touch event even if it is not the first touched game object.
         3. P3's 'pointerdown', 'pointerup' events will be fired above/under DOM game object.
-        4. P3's 'pointermove' event won't be fired above/under DOM game object with 'dragenter', 'dragover' events.
+        4. P3's 'pointermove' event won't be fired above/under DOM game object with 'dragenter', 'dragover' events,
+           unless setting DOM game object to be **invisilbe**
         */
     }
 
