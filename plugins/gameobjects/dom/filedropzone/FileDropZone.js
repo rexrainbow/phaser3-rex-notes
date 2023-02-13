@@ -1,7 +1,4 @@
-import Resize from '../utils/Resize.js';
-import SyncTo from '../utils/SyncTo.js';
-import ConfigurationMethods from './ConfigurationMethods.js';
-import LoadFileMethods from '../utils/LoadFileMethods.js';
+import Methods from './methods/Methods.js';
 import { DragDropEvents } from './FileDropZoneProperties.js';
 import RouteEvents from '../utils/RouteEvents.js';
 
@@ -77,16 +74,9 @@ class FileDropZone extends DOMElement {
     }
 }
 
-var methods = {
-    resize: Resize,
-    syncTo: SyncTo,
-}
-
 Object.assign(
     FileDropZone.prototype,
-    methods,
-    ConfigurationMethods,
-    LoadFileMethods,
+    Methods,
 );
 
 export default FileDropZone;

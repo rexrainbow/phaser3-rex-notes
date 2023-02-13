@@ -1,18 +1,4 @@
 export default {
-    setDropEnable(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        this.dropEnable = enable;
-        return this;
-    },
-
-    toggleDropEnable() {
-        this.dropEnable = !this.dropEnable;
-        return this;
-    },
-
     addFilter(name, callback) {
         if (!this.filters) {
             this.filters = {};
@@ -29,5 +15,5 @@ export default {
             this.filters[name] = filters[name];
         }
         return this;
-    }
+    },
 }
