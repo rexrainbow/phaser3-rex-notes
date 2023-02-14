@@ -48,8 +48,7 @@ declare namespace BaseSizer {
     }
 
     type OnModalCloseCallbackType = (
-        data: Object,
-        config: ModalBehavoir.IConfig
+        data: Object
     ) => void;
 
 }

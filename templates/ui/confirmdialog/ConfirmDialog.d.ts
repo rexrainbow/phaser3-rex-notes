@@ -1,6 +1,7 @@
 import Dialog from '../dialog/Dialog';
 import CreateBackground from '../utils/build/CreateBackground';
 import SimpleLabel from '../simplelabel/SimpleLabel';
+import CreateTextArea from '../utils/build/CreateTextArea';
 import Label from '../label/Label';
 
 export default ConfirmDialog;
@@ -46,7 +47,7 @@ declare namespace ConfirmDialog {
 
         title?: SimpleLabel.IConfig,
 
-        content?: SimpleLabel.IConfig,
+        content?: SimpleLabel.IConfig | CreateTextArea.IConfig,
 
         buttonMode?: 0 | 1 | 2;
         button?: SimpleLabel.IConfig,
@@ -84,7 +85,7 @@ declare namespace ConfirmDialog {
     interface ICreatorsConfig {
         background?: CreateGameObjectCallbackType,
         title?: SimpleLabel.ICreatorsConfig,
-        content?: SimpleLabel.ICreatorsConfig,
+        content?: SimpleLabel.ICreatorsConfig | CreateTextArea.ICreatorsConfig,
         button?: SimpleLabel.ICreatorsConfig,
         buttonA?: SimpleLabel.ICreatorsConfig,
         buttonB?: SimpleLabel.ICreatorsConfig,

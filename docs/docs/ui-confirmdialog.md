@@ -10,6 +10,7 @@ Using json style to create confirm [dialog](ui-dialog.md), composed of [simple-l
 - [Yes-no buttons](https://codepen.io/rexrainbow/pen/zYLbNzb)
 - [Ok button](https://codepen.io/rexrainbow/pen/poZYRVO)
 - [Any-touch closing](https://codepen.io/rexrainbow/pen/jOpJyRe)
+- [TextArea content](https://codepen.io/rexrainbow/pen/mdGdypN)
 
 ## Usage
 

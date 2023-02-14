@@ -1,7 +1,7 @@
 import Label from '../../label/Label';
 import Sizer from '../../sizer/Sizer';
 import CreateBackground from './CreateBackground';
-import CreateBBCodeText from './CreateBBCodeText';
+import CreateText from './CreateText';
 
 export default BuildDisplayLabelConfig;
 
@@ -20,7 +20,7 @@ declare namespace BuildDisplayLabelConfig {
         squareFitIcon?: boolean,
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
-        text?: CreateBBCodeText.IConfig,
+        text?: CreateText.IConfig,
         wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,

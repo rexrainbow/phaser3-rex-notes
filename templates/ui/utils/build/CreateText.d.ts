@@ -18,9 +18,11 @@ declare namespace CreateText {
         $type?: 'bbcodetext',
     }
 
+    type IConfig = IBitmapTextConfig | ITextConfig | IBBCodeTextConfig;
+
 }
 
 declare function CreateText(
     scene: Phaser.Scene,
-    config?: CreateText.IBitmapTextConfig | CreateText.ITextConfig | CreateText.IBBCodeTextConfig
+    config?: CreateText.IConfig
 ): Phaser.GameObjects.Text;
