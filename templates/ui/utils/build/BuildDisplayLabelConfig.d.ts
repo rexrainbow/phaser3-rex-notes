@@ -1,5 +1,6 @@
 import Label from '../../label/Label';
 import Sizer from '../../sizer/Sizer';
+import { GeneralCreateGameObjectCallbackType } from './GeneralCreateGameObjectCallbackType';
 import CreateBackground from './CreateBackground';
 import CreateText from './CreateText';
 
@@ -39,16 +40,11 @@ declare namespace BuildDisplayLabelConfig {
         align?: Label.AlignTypes,
     }
 
-    type CreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        config?: Object
-    ) => Phaser.GameObjects.GameObject;
-
     interface ICreators {
-        background?: CreateGameObjectCallbackType,
-        text?: CreateGameObjectCallbackType,
-        icon?: CreateGameObjectCallbackType,
-        action?: CreateGameObjectCallbackType,
+        background?: GeneralCreateGameObjectCallbackType,
+        text?: GeneralCreateGameObjectCallbackType,
+        icon?: GeneralCreateGameObjectCallbackType,
+        action?: GeneralCreateGameObjectCallbackType,
     }
 }
 

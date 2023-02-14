@@ -1,4 +1,5 @@
 import Dialog from '../dialog/Dialog';
+import { GeneralCreateGameObjectCallbackType } from '../utils/build/GeneralCreateGameObjectCallbackType';
 import CreateBackground from '../utils/build/CreateBackground';
 import SimpleLabel from '../simplelabel/SimpleLabel';
 import CreateTextArea from '../utils/build/CreateTextArea';
@@ -13,11 +14,6 @@ declare namespace ConfirmDialog {
         mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
         clickInterval?: number
     }
-
-    type CreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        config?: Object
-    ) => Phaser.GameObjects.GameObject;
 
     interface IConfig {
         x?: number,
@@ -83,7 +79,7 @@ declare namespace ConfirmDialog {
     }
 
     interface ICreatorsConfig {
-        background?: CreateGameObjectCallbackType,
+        background?: GeneralCreateGameObjectCallbackType,
         title?: SimpleLabel.ICreatorsConfig,
         content?: SimpleLabel.ICreatorsConfig | CreateTextArea.ICreatorsConfig,
         button?: SimpleLabel.ICreatorsConfig,

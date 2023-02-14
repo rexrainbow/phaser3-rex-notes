@@ -1,4 +1,5 @@
 import TextArea from '../../textarea/TextArea';
+import { GeneralCreateGameObjectCallbackType } from './GeneralCreateGameObjectCallbackType';
 import CreateBackground from './CreateBackground';
 import CreateText from './CreateText';
 
@@ -69,16 +70,11 @@ declare namespace CreateTextArea {
 
     }
 
-    type CreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        config?: Object
-    ) => Phaser.GameObjects.GameObject;
-
     interface ICreatorsConfig {
-        background?: CreateGameObjectCallbackType,
-        text?: CreateGameObjectCallbackType,
-        track?: CreateGameObjectCallbackType,
-        thumb?: CreateGameObjectCallbackType,
+        background?: GeneralCreateGameObjectCallbackType,
+        text?: GeneralCreateGameObjectCallbackType,
+        track?: GeneralCreateGameObjectCallbackType,
+        thumb?: GeneralCreateGameObjectCallbackType,
     }
 }
 

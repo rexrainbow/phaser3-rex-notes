@@ -9062,6 +9062,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/zYLbNzb">Yes-no buttons</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/poZYRVO">Ok button</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOpJyRe">Any-touch closing</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/mdGdypN">TextArea content</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-confirmdialog">Sample code</a></p>
@@ -9138,6 +9139,7 @@
         <span class="nx">strokeWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="c1">// SimpleLabelConfig</span>
     <span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// width: undefined,</span>
         <span class="c1">// height: undefined,</span>
@@ -9199,132 +9201,101 @@
         <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// &#39;left&#39; | &#39;top&#39; | &#39;right&#39; | &#39;bottom&#39; | &#39;center        </span>
     <span class="p">},</span>
 
-    <span class="nx">content</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// width: undefined,</span>
-        <span class="c1">// height: undefined,</span>
+    <span class="nx">content</span><span class="o">:</span> <span class="nx">SimpleLabelConfig</span><span class="p">,</span>
 
-        <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="c1">// rtl: false,</span>
+    <span class="cm">/* TextArea</span>
+<span class="cm">    content: {</span>
+<span class="cm">        space: { left: 0, right: 0, top: 0, bottom: 0, text: 0, },</span>
 
-        <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+<span class="cm">        background: {</span>
+<span class="cm">            radius: 0,</span>
+<span class="cm">            // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
 
-            <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">alpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="p">},</span>
+<span class="cm">            color: undefined,</span>
+<span class="cm">            alpha: undefined,</span>
+<span class="cm">            strokeColor: undefined,</span>
+<span class="cm">            strokeAlpha: undefined,</span>
+<span class="cm">            strokeWidth: undefined,</span>
+<span class="cm">        },</span>
 
-        <span class="c1">// iconMask: false,</span>
-        <span class="c1">// squareFitIcon: false,</span>
-        <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
+<span class="cm">        text: {</span>
+<span class="cm">            fontFamily: &#39;Courier&#39;,</span>
+<span class="cm">            fontSize: &#39;16px&#39;,</span>
+<span class="cm">            fontStyle: &#39;&#39;,</span>
+<span class="cm">            backgroundColor: null,</span>
+<span class="cm">            color: &#39;#fff&#39;,</span>
+<span class="cm">            stroke: &#39;#fff&#39;,</span>
+<span class="cm">            strokeThickness: 0,</span>
+<span class="cm">            shadow: {</span>
+<span class="cm">                offsetX: 0,</span>
+<span class="cm">                offsetY: 0,</span>
+<span class="cm">                color: &#39;#000&#39;,</span>
+<span class="cm">                blur: 0,</span>
+<span class="cm">                stroke: false,</span>
+<span class="cm">                fill: false</span>
+<span class="cm">            },                  </span>
+<span class="cm">            padding: {</span>
+<span class="cm">                left: 0,</span>
+<span class="cm">                right: 0,</span>
+<span class="cm">                top: 0,</span>
+<span class="cm">                bottom: 0,</span>
+<span class="cm">            },</span>
+<span class="cm">            // more text styles</span>
+<span class="cm">        },</span>
 
-        <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-            <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-            <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-            <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-                <span class="nx">blur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
-            <span class="p">},</span>                  
-            <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="c1">// more text styles</span>
-        <span class="p">},</span>
-        <span class="c1">// expandTextWidth: false,</span>
-        <span class="c1">// expandTextHeight: false,</span>
+<span class="cm">        // textWidth: undefined,</span>
+<span class="cm">        // textHeight: undefined,</span>
+<span class="cm">        // textMask: false,</span>
+<span class="cm">        // alwaysScrollable: false,</span>
 
-        <span class="c1">// squareFitAction: false,</span>
-        <span class="c1">// actionMask: false,</span>
-        <span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
+<span class="cm">        slider: {</span>
+<span class="cm">            track: { </span>
+<span class="cm">                width: 1, height: 1,</span>
+<span class="cm">                radius: 0, </span>
+<span class="cm">                color: undefined, alpha: 1,</span>
+<span class="cm">                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">                shape: undefined</span>
+<span class="cm">            },</span>
 
-        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span> 
-            <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span>
-        <span class="p">}</span>
+<span class="cm">            thumb: { </span>
+<span class="cm">                width: 1, height: 1,</span>
+<span class="cm">                radius: 0, </span>
+<span class="cm">                color: undefined, alpha: 1,</span>
+<span class="cm">                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">                shape: undefined</span>
+<span class="cm">            },</span>
 
-        <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// &#39;left&#39; | &#39;top&#39; | &#39;right&#39; | &#39;bottom&#39; | &#39;center        </span>
-    <span class="p">},</span>
+<span class="cm">            // input: &#39;drag&#39;,</span>
+<span class="cm">            // position: &#39;right&#39;,</span>
+
+<span class="cm">            // hideUnscrollableSlider: false,</span>
+<span class="cm">            // adaptThumbSize: false,</span>
+<span class="cm">            // minThumbSize: undefined,</span>
+<span class="cm">        },</span>
+
+<span class="cm">        // scroller: {</span>
+<span class="cm">        //     threshold: 10,</span>
+<span class="cm">        //     slidingDeceleration: 5000,</span>
+<span class="cm">        //     backDeceleration: 2000,</span>
+<span class="cm">        //     pointerOutRelease: true,</span>
+<span class="cm">        //     dragRate: 1,</span>
+<span class="cm">        // },</span>
+
+<span class="cm">        mouseWheelScroller: false,</span>
+<span class="cm">        // mouseWheelScroller: {</span>
+<span class="cm">        //     focus: false,</span>
+<span class="cm">        //     speed: 0.1</span>
+<span class="cm">        // },</span>
+
+<span class="cm">        clamplChildOY: false,</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
 
     <span class="nx">buttonMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// 0|1|2</span>
 
-    <span class="nx">button</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// width: undefined,</span>
-        <span class="c1">// height: undefined,</span>
-
-        <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="c1">// rtl: false,</span>
-
-        <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
-
-            <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">alpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">strokeWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="p">},</span>
-
-        <span class="c1">// iconMask: false,</span>
-        <span class="c1">// squareFitIcon: false,</span>
-        <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
-
-        <span class="nx">text</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-            <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-            <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-            <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-                <span class="nx">blur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-                <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
-            <span class="p">},</span>                  
-            <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="c1">// more text styles</span>
-        <span class="p">},</span>
-        <span class="c1">// expandTextWidth: false,</span>
-        <span class="c1">// expandTextHeight: false,</span>
-
-        <span class="c1">// squareFitAction: false,</span>
-        <span class="c1">// actionMask: false,</span>
-        <span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
-
-        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span> 
-            <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span>
-        <span class="p">}</span>
-
-        <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// &#39;left&#39; | &#39;top&#39; | &#39;right&#39; | &#39;bottom&#39; | &#39;center        </span>
-    <span class="p">},</span>
-
-    <span class="c1">// buttonA:</span>
-    <span class="c1">// buttonB:</span>
+    <span class="nx">button</span><span class="o">:</span> <span class="nx">SimpleLabelConfig</span><span class="p">,</span>
+    <span class="c1">// buttonA: SimpleLabelConfig</span>
+    <span class="c1">// buttonB: SimpleLabelConfig</span>
 
     <span class="c1">// Space</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
@@ -9397,7 +9368,11 @@
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a></li>
 <li><code>title</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a></li>
-<li><code>content</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a></li>
+<li><code>content</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a>, or <a href="../ui-textarea/#add-text-area-object">TextArea</a><ul>
+<li>Style with <code>slider</code>, or <code>scroller</code> properties : <a href="../ui-textarea/#add-text-area-object">TextArea</a></li>
+<li>Otherwise : <a href="../ui-simplelabel/#add-label-object">SimpleLabel</a></li>
+</ul>
+</li>
 <li><code>buttonMode</code> : <code>0</code>, <code>1</code>, or <code>2</code><ul>
 <li><code>0</code> : No action button, any touch can close modal dialog</li>
 <li><code>1</code>, <code>2</code> : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.</li>

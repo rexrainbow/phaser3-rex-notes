@@ -100,6 +100,7 @@ var dialog = scene.rexUI.add.confirmDialog({
         strokeWidth: undefined,
     },
 
+    // SimpleLabelConfig
     title: {
         // width: undefined,
         // height: undefined,
@@ -161,13 +162,12 @@ var dialog = scene.rexUI.add.confirmDialog({
         align: undefined,  // 'left' | 'top' | 'right' | 'bottom' | 'center        
     },
 
+    content: SimpleLabelConfig,
+
+    /* TextArea
     content: {
-        // width: undefined,
-        // height: undefined,
-    
-        orientation: 0,
-        // rtl: false,
-    
+        space: { left: 0, right: 0, top: 0, bottom: 0, text: 0, },
+
         background: {
             radius: 0,
             // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
@@ -178,11 +178,7 @@ var dialog = scene.rexUI.add.confirmDialog({
             strokeAlpha: undefined,
             strokeWidth: undefined,
         },
-        
-        // iconMask: false,
-        // squareFitIcon: false,
-        // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
-    
+
         text: {
             fontFamily: 'Courier',
             fontSize: '16px',
@@ -207,86 +203,60 @@ var dialog = scene.rexUI.add.confirmDialog({
             },
             // more text styles
         },
-        // expandTextWidth: false,
-        // expandTextHeight: false,
-    
-        // squareFitAction: false,
-        // actionMask: false,
-        // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
-    
-        space: {
-            left: 0, right: 0, top: 0, bottom:0, 
-            icon: 0, text: 0
-        }
-    
-        align: undefined,  // 'left' | 'top' | 'right' | 'bottom' | 'center        
-    },
+
+        // textWidth: undefined,
+        // textHeight: undefined,
+        // textMask: false,
+        // alwaysScrollable: false,
+
+        slider: {
+            track: { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            },
+
+            thumb: { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            },
+
+            // input: 'drag',
+            // position: 'right',
+
+            // hideUnscrollableSlider: false,
+            // adaptThumbSize: false,
+            // minThumbSize: undefined,
+        },
+
+        // scroller: {
+        //     threshold: 10,
+        //     slidingDeceleration: 5000,
+        //     backDeceleration: 2000,
+        //     pointerOutRelease: true,
+        //     dragRate: 1,
+        // },
+
+        mouseWheelScroller: false,
+        // mouseWheelScroller: {
+        //     focus: false,
+        //     speed: 0.1
+        // },
+
+        clamplChildOY: false,
+    }
+    */
 
     buttonMode: 0,  // 0|1|2
 
-    button: {
-        // width: undefined,
-        // height: undefined,
-    
-        orientation: 0,
-        // rtl: false,
-    
-        background: {
-            radius: 0,
-            // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-        
-            color: undefined,
-            alpha: undefined,
-            strokeColor: undefined,
-            strokeAlpha: undefined,
-            strokeWidth: undefined,
-        },
-        
-        // iconMask: false,
-        // squareFitIcon: false,
-        // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
-    
-        text: {
-            fontFamily: 'Courier',
-            fontSize: '16px',
-            fontStyle: '',
-            backgroundColor: null,
-            color: '#fff',
-            stroke: '#fff',
-            strokeThickness: 0,
-            shadow: {
-                offsetX: 0,
-                offsetY: 0,
-                color: '#000',
-                blur: 0,
-                stroke: false,
-                fill: false
-            },                  
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-            },
-            // more text styles
-        },
-        // expandTextWidth: false,
-        // expandTextHeight: false,
-    
-        // squareFitAction: false,
-        // actionMask: false,
-        // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
-    
-        space: {
-            left: 0, right: 0, top: 0, bottom:0, 
-            icon: 0, text: 0
-        }
-    
-        align: undefined,  // 'left' | 'top' | 'right' | 'bottom' | 'center        
-    },
-
-    // buttonA:
-    // buttonB:
+    button: SimpleLabelConfig,
+    // buttonA: SimpleLabelConfig
+    // buttonB: SimpleLabelConfig
 
     // Space
     space: {
@@ -351,7 +321,9 @@ var dialog = scene.rexUI.add.confirmDialog({
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
 - `title` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
-- `content` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
+- `content` : [Styles of simple-label](ui-simplelabel.md#add-label-object), or [TextArea](ui-textarea.md#add-text-area-object)
+    - Style with `slider`, or `scroller` properties : [TextArea](ui-textarea.md#add-text-area-object)
+    - Otherwise : [SimpleLabel](ui-simplelabel.md#add-label-object)
 - `buttonMode` : `0`, `1`, or `2`
     - `0` : No action button, any touch can close modal dialog
     - `1`, `2` : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.
