@@ -14042,6 +14042,7 @@
       _this._visibleLinesCount = undefined;
       _this._textHeight = undefined;
       _this._textVisibleHeight = undefined;
+      _this._textObjectRealHeight = 0;
       _this.lines = undefined;
       // Text object : array of string
       // Tag text object : pens-manager

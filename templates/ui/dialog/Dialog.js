@@ -259,7 +259,7 @@ class Dialog extends Sizer {
         EmitButtonEvent(this, 'over');
         EmitButtonEvent(this, 'out');
         EmitButtonEvent(this, 'enable');
-        EmitButtonEvent(this, 'disalbe');
+        EmitButtonEvent(this, 'disable');
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('title', title);

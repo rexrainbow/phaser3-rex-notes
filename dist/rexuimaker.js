@@ -24674,7 +24674,7 @@
       EmitButtonEvent(_assertThisInitialized(_this), 'over');
       EmitButtonEvent(_assertThisInitialized(_this), 'out');
       EmitButtonEvent(_assertThisInitialized(_this), 'enable');
-      EmitButtonEvent(_assertThisInitialized(_this), 'disalbe');
+      EmitButtonEvent(_assertThisInitialized(_this), 'disable');
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('title', title);
       _this.addChildrenMap('toolbar', toolbar);
@@ -28389,6 +28389,7 @@
       _this._visibleLinesCount = undefined;
       _this._textHeight = undefined;
       _this._textVisibleHeight = undefined;
+      _this._textObjectRealHeight = 0;
       _this.lines = undefined;
       // Text object : array of string
       // Tag text object : pens-manager

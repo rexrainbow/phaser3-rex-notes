@@ -37,6 +37,7 @@ class TextBlock extends BaseSizer {
         this._visibleLinesCount = undefined;
         this._textHeight = undefined;
         this._textVisibleHeight = undefined;
+        this._textObjectRealHeight = 0;
 
         this.lines = undefined;
         // Text object : array of string

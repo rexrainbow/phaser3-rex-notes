@@ -568,49 +568,6 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     ```
     - `index` : A number index, or a button game object.
 
-#### Enable/disable input of button
-
-- Enable choice/action/toolbar/left-toolbar button
-    ```javascript
-    dialog.setChoiceEnable(index);
-    dialog.setActionEnable(index);
-    dialog.setToolbarEnable(index);
-    dialog.setLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-- Enable all buttons
-    ```javascript
-    dialog.setAllButtonsEnable();
-    ```
-- Disable choice/action/toolbar/left-toolbar button's input
-    ```javascript
-    dialog.setChoiceEnable(index, false);
-    dialog.setActionEnable(index, false);
-    dialog.setToolbarEnable(index, false);
-    dialog.setLeftToolbarEnable(index, false);
-    ```
-    - `index` : A number index, or a button game object.
-- Disable all buttons
-    ```javascript
-    dialog.setAllButtonsEnable(false);
-    ```
-- Toggle choice/action/toolbar/left-toolbar button's input
-    ```javascript
-    dialog.toggleChoiceEnable(index);
-    dialog.toggleActionEnable(index);
-    dialog.toggleToolbarEnable(index);
-    dialog.toggleLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-- Get choice/action/toolbar/left-toolbar button's input enable
-    ```javascript
-    var enabled = dialog.getChoiceEnable(index);
-    var enabled = dialog.getActionEnable(index);
-    var enabled = dialog.getToolbarEnable(index);
-    var enabled = dialog.getLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-
 ### Get element
 
 - Get element
@@ -722,6 +679,49 @@ dialog.addLeftToolbar(gameObject);
     dialog.clearLeftToolbar(destroyChild);
     ```
     - `destroyChild` : Set `true` to destroy button game object.
+
+### Enable/disable input of button
+
+- Enable choice/action/toolbar/left-toolbar button
+    ```javascript
+    dialog.setChoiceEnable(index);
+    dialog.setActionEnable(index);
+    dialog.setToolbarEnable(index);
+    dialog.setLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Enable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable();
+    ```
+- Disable choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.setChoiceEnable(index, false);
+    dialog.setActionEnable(index, false);
+    dialog.setToolbarEnable(index, false);
+    dialog.setLeftToolbarEnable(index, false);
+    ```
+    - `index` : A number index, or a button game object.
+- Disable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable(false);
+    ```
+- Toggle choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.toggleChoiceEnable(index);
+    dialog.toggleActionEnable(index);
+    dialog.toggleToolbarEnable(index);
+    dialog.toggleLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Get choice/action/toolbar/left-toolbar button's input enable
+    ```javascript
+    var enabled = dialog.getChoiceEnable(index);
+    var enabled = dialog.getActionEnable(index);
+    var enabled = dialog.getToolbarEnable(index);
+    var enabled = dialog.getLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
 
 ### Show/hide button
 

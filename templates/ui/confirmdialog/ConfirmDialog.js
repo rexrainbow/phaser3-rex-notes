@@ -2,7 +2,11 @@ import Dialog from '../dialog/Dialog.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateDisplayLabel from '../utils/build/CreateDisplayLabel.js';
+import CreateContent from './methods/CreateContent.js';
 import IsFunction from '../../../plugins/utils/object/IsFunction.js';
+import SetValue from '../../../plugins/utils/object/SetValue.js';
+import HasValue from '../../../plugins/utils/object/HasValue.js';
+import TextArea from '../textarea/TextArea.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -23,7 +27,12 @@ class ConfirmDialog extends Dialog {
 
         config.title = CreateDisplayLabel(scene, config.title, creators.title);
 
-        config.content = CreateDisplayLabel(scene, config.content, creators.content);
+        config.content = CreateContent(scene, config.content, creators.content);
+        if (config.content instanceof TextArea) {
+            if (HasValue(config, 'height') && !HasValue(config, 'proportion.content')) {
+                SetValue(config, 'proportion.content', 1);
+            }
+        }
 
         var buttonMode = config.buttonMode;
         if (buttonMode === undefined) {
@@ -70,7 +79,14 @@ class ConfirmDialog extends Dialog {
         title.resetDisplayContent(config.title);
 
         var content = this.childrenMap.content;
-        content.resetDisplayContent(config.content);
+        if (content.resetDisplayContent) {
+            // Label
+            content.resetDisplayContent(config.content);
+        } else {
+            // TextArea
+            var text = config.content || '';
+            content.setText(text)
+        }
 
         var buttonA = this.childrenMap.actions[0];
         if (buttonA) {
