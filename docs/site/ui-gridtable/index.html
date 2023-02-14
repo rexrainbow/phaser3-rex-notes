@@ -9287,9 +9287,31 @@
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// background: sliderBackgroundGameObject,</span>
         <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
+        <span class="cm">/* </span>
+<span class="cm">        track: { </span>
+<span class="cm">            width: 1, height: 1,</span>
+<span class="cm">            radius: 0, </span>
+<span class="cm">            color: undefined, alpha: 1,</span>
+<span class="cm">            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">            shape: undefined</span>
+<span class="cm">        }</span>
+<span class="cm">        */</span>
+
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+        <span class="cm">/* </span>
+<span class="cm">        thumb: { </span>
+<span class="cm">            width: 1, height: 1,</span>
+<span class="cm">            radius: 0, </span>
+<span class="cm">            color: undefined, alpha: 1,</span>
+<span class="cm">            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,</span>
+<span class="cm">            shape: undefined</span>
+<span class="cm">        }</span>
+<span class="cm">        */</span>
+
         <span class="c1">// input: &#39;drag&#39;,</span>
         <span class="c1">// position: &#39;right&#39;,</span>
+
+        <span class="c1">// hideUnscrollableSlider: false,</span>
         <span class="c1">// adaptThumbSize: false,</span>
         <span class="c1">// minThumbSize: undefined,</span>
 
@@ -9483,6 +9505,11 @@
 <li><code>slider.position</code> : Position of this slider.<ul>
 <li><code>0</code>, <code>'right'</code>, <code>'bottom'</code> : Slider at right/bottom side. Default value.</li>
 <li><code>1</code>, <code>'left'</code>, <code>'top'</code> : Slider at left/top side.</li>
+</ul>
+</li>
+<li><code>slider.hideUnscrollableSlider</code> :<ul>
+<li><code>false</code> : Slider is always visible no matter it is scrollable or not. Default behavior.</li>
+<li><code>true</code> : Set slider to invisible if it is unscrollable.</li>
 </ul>
 </li>
 <li><code>slider.adaptThumbSize</code> :<ul>
