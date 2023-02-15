@@ -93,7 +93,7 @@ import TextEdit from './textedit/TextEdit.js';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
-import { Maker, YAMLMake as Make } from './maker/index.js';
+// import { Maker, YAMLMake as Make } from './maker/index.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -210,7 +210,7 @@ export {
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
     Modal, ModalPromise, ModalClose,
-    Maker, Make,
+    // Maker, Make,
 
     GetParentSizer,
     GetTopmostSizer,

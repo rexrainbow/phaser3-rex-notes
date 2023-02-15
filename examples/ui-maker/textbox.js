@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 import Handlebars from 'handlebars';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -75,7 +75,7 @@ var CreateTextBox = function (scene, x, y, config) {
     var fixedHeight = GetValue(config, 'fixedHeight', 0);
     var wrapWidth = GetValue(config, 'wrapWidth', fixedWidth);
 
-    var maker = scene.rexUI.add.maker();
+    var maker = new Maker(scene);
     var data = Handlebars.compile(UIContent)({
         COLOR_PRIMARY: COLOR_PRIMARY,
         COLOR_LIGHT: COLOR_LIGHT,
@@ -136,15 +136,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
-
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

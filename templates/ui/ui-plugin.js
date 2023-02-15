@@ -109,8 +109,8 @@ import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 import { OpenFileChooser } from './filechooser/FileChooser.js';
-import Make from './maker/YAMLMake.js';
-import Maker from './maker/Maker.js';
+// import Make from './maker/YAMLMake.js';
+// import Maker from './maker/Maker.js';
 import yaml from './yaml/yaml.js';
 
 
@@ -137,17 +137,16 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         return GetViewport(this.scene, this.scene.cameras.main, true);
     }
 
-    make(data, view, styles, customBuilders) {
-        return Make(this.scene, data, view, styles, customBuilders);
-    }
+    // make(data, view, styles, customBuilders) {
+    //     return Make(this.scene, data, view, styles, customBuilders);
+    // }
 
-    get maker() {
-        if (!this._maker) {
-            this._maker = new Maker(this.scene);
-        }
-
-        return this._maker;
-    }
+    //get maker() {
+    //    if (!this._maker) {
+    //        this._maker = new Maker(this.scene);
+    //    }
+    //    return this._maker;
+    //}
 
 }
 

@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 
 const content = `
 $type: Slider
@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var maker = this.rexUI.add.maker();
+        var maker = new Maker(this);
         var slider = maker.make(content)
             .setPosition(400, 300)
             .layout();
@@ -56,15 +56,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
-
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
