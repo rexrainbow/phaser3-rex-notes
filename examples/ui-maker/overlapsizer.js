@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 import Handlebars from 'handlebars';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -73,7 +73,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var maker = this.rexUI.add.maker();
+        var maker = new Maker(this);
         var data = Handlebars.compile(content)({
             COLOR_PRIMARY: COLOR_PRIMARY,
             COLOR_LIGHT: COLOR_LIGHT,
@@ -96,15 +96,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
-
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

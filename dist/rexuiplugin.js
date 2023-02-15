@@ -58897,19 +58897,17 @@
       get: function get() {
         return GetViewport(this.scene, this.scene.cameras.main, true);
       }
-    }, {
-      key: "make",
-      value: function make(data, view, styles, customBuilders) {
-        return YAMLMake(this.scene, data, view, styles, customBuilders);
-      }
-    }, {
-      key: "maker",
-      get: function get() {
-        if (!this._maker) {
-          this._maker = new Maker(this.scene);
-        }
-        return this._maker;
-      }
+
+      // make(data, view, styles, customBuilders) {
+      //     return Make(this.scene, data, view, styles, customBuilders);
+      // }
+
+      //get maker() {
+      //    if (!this._maker) {
+      //        this._maker = new Maker(this.scene);
+      //    }
+      //    return this._maker;
+      //}
     }]);
     return UIPlugin;
   }(Phaser.Plugins.ScenePlugin);
