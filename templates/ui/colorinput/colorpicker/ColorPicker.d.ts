@@ -16,6 +16,7 @@ declare namespace ColorPicker {
         },
 
         valuechangeCallback: (newValue: number, oldValue: number, colorPicker: ColorPicker) => void,
+        valuechangeCallbackScope?: Object,
 
         value?: number,
     }
