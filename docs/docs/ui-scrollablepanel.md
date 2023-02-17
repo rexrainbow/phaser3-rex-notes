@@ -512,9 +512,9 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
         ```javascript
         var background = panel.getElement('background');
         ```
-    - Panel game object
+    - Child-panel game object
         ```javascript
-        var panel = panel.getElement('panel');
+        var childPanel = panel.getElement('panel');
         ```
     - Layer of panel, assigned at config `panel.mask.layer`.
         ```javascript
