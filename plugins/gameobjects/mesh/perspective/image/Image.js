@@ -33,6 +33,22 @@ class Image extends Mesh {
         this.resetVerts(gridWidth, gridHeight);
     }
 
+    get originX() {
+        return 0.5;
+    }
+
+    get originY() {
+        return 0.5;
+    }
+
+    get displayOriginX() {
+        return this.width * 0.5;
+    }
+
+    get displayOriginY() {
+        return this.height * 0.5;
+    }
+
     resetPerspective() {
         this.setPerspective(this.width, this.height, FOV);
         return this;
@@ -181,6 +197,7 @@ class Image extends Mesh {
         this.tint = color;
         return this;
     }
+
 }
 
 export default Image;
