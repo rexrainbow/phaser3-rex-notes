@@ -1331,9 +1331,21 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 
 ### Is in touching
 
-```javascript
-var isTouching = sizer.isInTouching();
-```
+- Is this sizer in touching?
+    ```javascript
+    var isTouching = sizer.isInTouching();
+    ```
+- Is child of this sizer in touching?
+    ```javascript    
+    var isTouching = sizer.isInTouching(child);
+    ```
+    or
+    ```javascript
+    var isTouching = sizer.isInTouching(childKey);
+    ```
+    - `child` : Child game object.
+    - `childKey` : Get child game object back via `sizer.getElement(childKey)`. See also [sizer.addChildrenMap(key, child)](ui-basesizer.md#get-child)
+
 
 ### Change properties of child
 

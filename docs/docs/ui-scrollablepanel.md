@@ -516,6 +516,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
         ```javascript
         var childPanel = panel.getElement('panel');
         ```
+    - Child-panel mask game object, which is a graphics game object.
+        ```javascript
+        var maskGameObject = panel.getElement('mask');
+        ```
     - Layer of panel, assigned at config `panel.mask.layer`.
         ```javascript
         var layer = panel.getElement('panelLayer');
@@ -594,5 +598,5 @@ See [Base-sizer](ui-basesizer.md#set-children-interactive)
 When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elements will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
 
 - Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
-- Test if pointer is under panel via [`panel.isInTouching()`](ui-basesizer.md#is-in-touching), during input events' callback.
+- Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
 - To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.

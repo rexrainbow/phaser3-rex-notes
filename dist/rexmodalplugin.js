@@ -2403,7 +2403,7 @@
 
   var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
     // Can't get bounds
-    if (!gameObject || !gameObject.getBounds) {
+    if (!gameObject) {
       return false;
     }
     if (preTest && !preTest(gameObject, x, y)) {

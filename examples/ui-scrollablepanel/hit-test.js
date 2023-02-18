@@ -60,9 +60,10 @@ class Demo extends Phaser.Scene {
         for (var i = 0, cnt = items.length; i < cnt; i++) {
             let item = items[i];
             item.onClick(function () {
-                if (!scrollablePanel.isInTouching()) {
+                if (!scrollablePanel.isInTouching('mask')) {
                     return;
                 }
+
                 print.text += `Click ${item.text}\n`
             })
         }

@@ -2,7 +2,7 @@ import { GetBounds } from './GetBounds.js';
 
 var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
     // Can't get bounds
-    if (!gameObject || !gameObject.getBounds) {
+    if (!gameObject) {
         return false;
     }
 

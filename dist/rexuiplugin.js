@@ -28448,7 +28448,7 @@
 
   var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
     // Can't get bounds
-    if (!gameObject || !gameObject.getBounds) {
+    if (!gameObject) {
       return false;
     }
     if (preTest && !preTest(gameObject, x, y)) {
@@ -28759,9 +28759,20 @@
     }
   };
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var IsInTouching = function IsInTouching(pointer, gameObject) {
+    if (IsGameObject(pointer) || typeof pointer === 'string') {
+      gameObject = pointer;
+      pointer = undefined;
+    }
     if (gameObject === undefined) {
       gameObject = this;
+    } else if (typeof gameObject === 'string') {
+      gameObject = this.getElement(gameObject);
     }
     return IsPointerInBounds(gameObject, pointer);
   };
@@ -32534,14 +32545,14 @@
         if (padding === undefined) {
           padding = this.padding;
         }
-        if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
+        if (this.width === width && this.height === height && this.paddingSave === padding) {
           return this;
         }
-        this.widthSave = width;
-        this.heightSave = height;
+        this.width = width;
+        this.height = height;
+        this.originX = parent.originX;
+        this.originY = parent.originY;
         this.paddingSave = padding;
-        this.originXSave = parent.originX;
-        this.originYSave = parent.originY;
         DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
         return this;
       }
@@ -32558,12 +32569,12 @@
         if (originY === undefined) {
           originY = parent.originY;
         }
-        if (this.originXSave === originX && this.originYSave === originY) {
+        if (this.originX === originX && this.originY === originY) {
           return this;
         }
-        this.originXSave = originX;
-        this.originYSave = originY;
-        DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
+        this.originX = originX;
+        this.originY = originY;
+        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
         return this;
       }
     }]);
@@ -48645,6 +48656,7 @@
 
       // Create mask of child object
       _this.setupChildrenMask(GetValue$w(config, 'mask', undefined));
+      _this.maskGameObject = MaskToGameObject(_this.childrenMask);
       return _this;
     }
     _createClass(ScrollableBlock, [{
@@ -48847,6 +48859,7 @@
       _this = _super.call(this, scene, config);
       _this.addChildrenMap('panel', scrollableBlock.child);
       _this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
+      _this.addChildrenMap('mask', scrollableBlock.maskGameObject);
       return _this;
     }
     _createClass(ScrollablePanel, [{
@@ -49375,11 +49388,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.Toast', Toast);
-
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
-  };
 
   var CreateSwatch = function CreateSwatch(scene, config) {
     if (config === false) {

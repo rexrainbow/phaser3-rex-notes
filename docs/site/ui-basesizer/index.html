@@ -10845,8 +10845,21 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 </code></pre></div></li>
 </ul>
 <h3 id="is-in-touching">Is in touching<a class="headerlink" href="#is-in-touching" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">();</span>
+<ul>
+<li>Is this sizer in touching?
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Is child of this sizer in touching?
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">(</span><span class="nx">childKey</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>child</code> : Child game object.</li>
+<li><code>childKey</code> : Get child game object back via <code>sizer.getElement(childKey)</code>. See also <a href="./#get-child">sizer.addChildrenMap(key, child)</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="change-properties-of-child">Change properties of child<a class="headerlink" href="#change-properties-of-child" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../containerlite/#set-properties-of-child">Set property of child from sizer</a></li>

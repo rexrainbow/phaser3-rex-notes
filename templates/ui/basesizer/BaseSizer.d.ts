@@ -194,6 +194,16 @@ declare class BaseSizer extends ContainerLite {
 
     isInTouching(): boolean;
 
+    isInTouching(
+        pointer: Phaser.Input.Pointer,
+        gameObject?: Phaser.GameObjects.GameObject | string
+    ): boolean;
+
+    isInTouching(
+        gameObject?: Phaser.GameObjects.GameObject | string
+    ): boolean;
+
+
     moveFrom(
         duration: number,
         x: number,
