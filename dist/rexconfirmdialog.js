@@ -17692,7 +17692,7 @@
 
       //  Set the resolution
       _this.frame.source.resolution = _this.style.resolution;
-      if (_this.renderer.gl) {
+      if (_this.renderer && _this.renderer.gl) {
         //  Clear the default 1x1 glTexture, as we override it later
 
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
@@ -18686,7 +18686,7 @@
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-      if (this.renderer.gl) {
+      if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
