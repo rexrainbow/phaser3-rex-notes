@@ -11,6 +11,9 @@ Render a group of textured vertices and manipulate the view of those vertices, s
 
 ### Quad
 
+!!! note 
+    See also [Plane](plane.md)
+
 1. Load texture
     ```javascript
     scene.load.image(key, url);
@@ -202,6 +205,19 @@ Mesh is composed of triangle faces.
 var faces = mesh.faces;
 ```
 
+#### Contains
+
+- Has any face which contains point
+    ```javascript
+    var isHit = mesh.hasFaceAt(worldX, worldY);
+    // var isHit = mesh.hasFaceAt(worldX, worldY, camera);
+    ```
+- Get face contains point
+    ```javascript
+    var face = mesh.getFaceAt(worldX, worldY);
+    // var face = mesh.getFaceAt(worldX, worldY, camera);
+    ```
+
 #### Properties
 
 - Alpha
@@ -279,6 +295,15 @@ var vertices = mesh.vertices;
     ```javascript
     mesh.ignoreDirtyCache = false;
     ```
+
+### Interactive
+
+!!! note
+    Mesh game object cannot be enabled for input.
+
+```javascript
+var isHit = mesh.hasFaceAt(worldX, worldY);
+```
 
 ### Debug
 

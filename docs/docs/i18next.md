@@ -73,6 +73,8 @@ i18next.init({
 i18next.changeLanguage("en");
 ```
 
+Fire event `'languageChanged'`.
+
 ### Translate
 
 ```javascript
@@ -81,3 +83,11 @@ var result = i18next.t(key);
 ```
 
 Default namespace is `'translation'`.
+
+### Events
+
+- On language changed, triggered by `i18next.changeLanguage(lng)`.
+    ```javascript
+    i18next.on('languageChanged', function (lng) {
+    });
+    ```

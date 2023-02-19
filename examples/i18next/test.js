@@ -20,6 +20,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        i18next.on('languageChanged', function (lng) {
+            console.log(`Change language to ${lng}`);
+        })
+
         i18next.changeLanguage('en');
         console.log(i18next.t('key'))
         // console.log(i18next.t('key', { ns: 'translation' }))
