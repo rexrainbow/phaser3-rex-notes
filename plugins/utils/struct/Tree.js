@@ -110,15 +110,16 @@ var IsObject = function (obj) {
 }
 
 var GetEntry = function (data, keys) {
+    if (keys[0] === '') {
+        return data;
+    }
+
     var entry = data;
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
         if (!IsObject(entry)) {
             return undefined;
         }
-        var key = keys[i];
-        if (key !== '') {
-            entry = entry[key];
-        }
+        entry = entry[keys[i]];
     }
     return entry;
 }
