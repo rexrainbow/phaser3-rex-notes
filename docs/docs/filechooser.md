@@ -231,7 +231,7 @@ fileChooser.loadFilePromise(file, loaderType, key, cahceType)
     ```
 - [Release object url](https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL)
     ```javascript
-    URL.createObjectURL(objectURL);
+    URL.revokeObjectURL(objectURL);
     ```
     
 ### Open file chooser
