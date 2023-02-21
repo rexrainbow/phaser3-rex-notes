@@ -115,7 +115,10 @@ var GetEntry = function (data, keys) {
         if (!IsObject(entry)) {
             return undefined;
         }
-        entry = entry[keys[i]];
+        var key = keys[i];
+        if (key !== '') {
+            entry = entry[key];
+        }
     }
     return entry;
 }
