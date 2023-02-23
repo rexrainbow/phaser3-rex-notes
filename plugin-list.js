@@ -107,6 +107,7 @@ module.exports = {
     'texttypingplugin': './plugins/texttyping-plugin.js',
     'textpageplugin': './plugins/textpage-plugin.js',
     'texteditplugin': './plugins/textedit-plugin.js',
+    'texttranslationplugin': './plugins/texttranslation-plugin.js',
 
     // extend of particles
     'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
