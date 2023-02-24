@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.plugins.get('TextTranslation').initI18Next({
+        this.translation.initI18Next({
             resources: {
                 'en': {
                     'ui': {
@@ -30,15 +30,15 @@ class Demo extends Phaser.Scene {
 
     create() {
         var textObject = this.add.text(100, 300, '');
-        textObject.translation = this.plugins.get('TextTranslation').add(textObject);
+        textObject.translation = this.translation.add(textObject);
         textObject.translation.setText('save');
 
         var bbCodeTextObject = this.add.rexBBCodeText(300, 300, '');
-        bbCodeTextObject.translation = this.plugins.get('TextTranslation').add(bbCodeTextObject);
+        bbCodeTextObject.translation = this.translation.add(bbCodeTextObject);
         bbCodeTextObject.translation.setText('save');
 
         this.input.once('pointerdown', function () {
-            this.plugins.get('TextTranslation').changeLanguage('zh');
+            this.translation.changeLanguage('zh');
         }, this)
 
     }
@@ -61,7 +61,8 @@ var config = {
             {
                 key: 'TextTranslation',
                 plugin: TextTranslationPlugin,
-                start: true
+                start: true,
+                mapping: 'translation'  // Get TextTranslationPlugin via scene.translation
             },
             {
                 key: 'BBCodeTextPlugin',
