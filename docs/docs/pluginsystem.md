@@ -39,6 +39,7 @@ Plugin system, built-in system of phaser.
 - Load plugin in scene
     ```javascript
     scene.load.plugin(key, url, true);
+    // scene.load.plugin(key, url, true, mapping);
     ```
     - `url` : File url or class instance.
 
