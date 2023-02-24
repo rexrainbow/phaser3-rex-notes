@@ -1593,6 +1593,9 @@
     return obj != null && _typeof(obj) === 'object';
   };
   var GetEntry = function GetEntry(data, keys) {
+    if (keys[0] === '') {
+      return data;
+    }
     var entry = data;
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
       if (!IsObject(entry)) {

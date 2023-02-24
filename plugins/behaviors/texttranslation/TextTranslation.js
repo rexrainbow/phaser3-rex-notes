@@ -50,7 +50,10 @@ class TextTranslation extends ComponentBase {
         if (typeof (key) === 'string') {
             this.interpolations[key] = value;
         } else {
-            Object.assign(this.interpolations, key);
+            var data = key;
+            for (key in data) {
+                this.interpolations[key] = data[key];
+            }
         }
         return this;
     }

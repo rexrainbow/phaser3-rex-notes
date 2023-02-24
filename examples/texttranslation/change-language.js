@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import i18next from 'i18next';
-import TextTranslationPlugin from '../../plugins/TextTranslation-plugin.js';
+import TextTranslationPlugin from '../../plugins/texttranslation-plugin.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        i18next.init({
+        this.plugins.get('TextTranslation').initI18Next({
             resources: {
                 'en': {
                     'ui': {
@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
             },
             lng: 'en',
             ns: 'ui'
-        });  // Can run `18next.init()` before creating game instance
+        })
     }
 
     create() {
