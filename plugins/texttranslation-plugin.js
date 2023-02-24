@@ -17,6 +17,11 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         return this;
     }
 
+    changeLanguage(lng) {
+        i18next.changeLanguage(lng);
+        return this;
+    }
+
     add(gameObject, config) {
         return new TextTranslation(gameObject, config);
     }

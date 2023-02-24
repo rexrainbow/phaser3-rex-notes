@@ -3072,6 +3072,12 @@
         return this;
       }
     }, {
+      key: "changeLanguage",
+      value: function changeLanguage(lng) {
+        instance.changeLanguage(lng);
+        return this;
+      }
+    }, {
       key: "add",
       value: function add(gameObject, config) {
         return new TextTranslation(gameObject, config);

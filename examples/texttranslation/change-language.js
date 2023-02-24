@@ -1,5 +1,4 @@
 import phaser from 'phaser/src/phaser.js';
-import i18next from 'i18next';
 import TextTranslationPlugin from '../../plugins/texttranslation-plugin.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
@@ -39,8 +38,8 @@ class Demo extends Phaser.Scene {
         bbCodeTextObject.translation.setText('save');
 
         this.input.once('pointerdown', function () {
-            i18next.changeLanguage('zh');
-        })
+            this.plugins.get('TextTranslation').changeLanguage('zh');
+        }, this)
 
     }
 
