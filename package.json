@@ -64,7 +64,6 @@
         "@types/js-yaml": "^4.0.5",
         "file-saver": "^2.0.5",
         "pako": "^2.1.0",
-        "i18next": "^22.4.9",
         "i18next-http-backend": "^2.1.1"
     },
     "dependencies": {
@@ -72,6 +71,7 @@
         "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
         "papaparse": "^5.3.2",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "i18next": "^22.4.9"
     }
 }
