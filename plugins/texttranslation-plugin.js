@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import Backend from 'i18next-http-backend';
 import TextTranslation from './texttranslation.js';
 
 class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
@@ -15,7 +16,7 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     initI18Next(config) {
-        i18next.init(config);
+        i18next.use(Backend).init(config);
         return this;
     }
 
