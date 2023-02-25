@@ -27,6 +27,8 @@ class Demo extends Phaser.Scene {
             lng: 'en',
             ns: 'ui'
         })
+
+        TextTranslationBehavior.setI18Next(i18next);
     }
 
     create() {

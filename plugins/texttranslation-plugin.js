@@ -5,6 +5,8 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
+
+        TextTranslation.setI18Next(i18next);
     }
 
     start() {

@@ -1,9 +1,13 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import i18next from 'i18next';
 
+var i18next;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TextTranslation extends ComponentBase {
+    static setI18Next(obj) {
+        i18next = obj;
+    }
+
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
