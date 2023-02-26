@@ -70,8 +70,7 @@ class TextTranslation extends ComponentBase {
         value = value.toString() || ''
         this._translationKey = value;
 
-        var text = i18next.t(value, this.interpolations);
-        this.setTextCallback(this.parent, text);
+        this.updateText();
     }
 
     setTranslationKey(txt) {
@@ -80,7 +79,8 @@ class TextTranslation extends ComponentBase {
     }
 
     updateText() {
-        this.setText(this.translationKey);
+        var text = i18next.t(this.translationKey, this.interpolations);
+        this.setTextCallback(this.parent, text);
         return this;
     }
 

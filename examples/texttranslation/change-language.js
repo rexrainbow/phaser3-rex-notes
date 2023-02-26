@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.translation.initI18Next({
+        this.load.rexInitI18Next({
             resources: {
                 'en': {
                     'ui': {
@@ -30,12 +30,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         var textObject = this.add.text(100, 300, '');
-        textObject.translation = this.translation.add(textObject);
-        textObject.translation.setText('save');
+        textObject.translation = this.translation.add(textObject, {
+            translationKey: 'save'
+        });
 
         var bbCodeTextObject = this.add.rexBBCodeText(300, 300, '');
-        bbCodeTextObject.translation = this.translation.add(bbCodeTextObject);
-        bbCodeTextObject.translation.setText('save');
+        bbCodeTextObject.translation = this.translation.add(bbCodeTextObject, {
+            translationKey: 'save'
+        });
 
         this.input.once('pointerdown', function () {
             this.translation.changeLanguage('zh');

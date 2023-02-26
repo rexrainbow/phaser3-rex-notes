@@ -1,15 +1,32 @@
+import AwaitFile from './loader/awaitloader/AwaitFile.js';
 import i18next from 'i18next';
 import Backend from 'i18next-http-backend';
-import Awaitloader from './awaitloader.js';
-import IsSceneObject from './utils/system/IsSceneObject';
-import NOOP from './utils/object/NOOP.js';
 import TextTranslation from './texttranslation.js';
+
+var CreateAwiatFile = function (loader, config) {
+    var callback = function (successCallback, failureCallback) {
+        i18next.use(Backend).init(config, successCallback);
+    }
+
+    return new AwaitFile(loader, {
+        type: 'initi18next',
+        config: {
+            callback: callback
+        }
+    });
+}
+
+var LoaderCallback = function (config) {
+    this.addFile(CreateAwiatFile(this, config));
+    return this;
+}
 
 class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
 
+        pluginManager.registerFileType('rexInitI18Next', LoaderCallback);
         this.i18next = i18next;
         TextTranslation.setI18Next(i18next);
     }
@@ -19,27 +36,8 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    initI18Next(scene, config, onComplete) {
-        if (IsSceneObject(scene)) {
-            Awaitloader.call(scene.load, function (successCallback, failureCallback) {
-                if (!onComplete) {
-                    onComplete = successCallback;
-                } else {
-                    var onComplete_ = onComplete;
-                    onComplete = function () {
-                        onComplete_()
-                        successCallback()
-                    }
-                }
-                i18next.use(Backend).init(config, onComplete);
-            })
-        } else {
-            onComplete = config || NOOP;
-            config = scene;
-            scene = undefined;
-            i18next.use(Backend).init(config, onComplete);
-        }
-        return this;
+    addToScene(scene) {
+        scene.sys.load['rexInitI18Next'] = LoaderCallback;
     }
 
     changeLanguage(lng, onComplete) {

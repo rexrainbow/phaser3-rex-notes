@@ -1,6 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import i18next from 'i18next';
 import TextTranslationBehavior from '../../plugins/texttranslation.js';
+import Awaitloader from '../../plugins/awaitloader.js';
 import BBCodeText from '../../plugins/bbcodetext.js';
 
 class Demo extends Phaser.Scene {
@@ -11,35 +12,39 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        i18next.init({
-            resources: {
-                'en': {
-                    'ui': {
-                        'save': 'Save'
-                    }
-                },
-                'zh': {
-                    'ui': {
-                        'save': '儲存'
-                    }
-                },
-            },
-            lng: 'en',
-            ns: 'ui'
+        Awaitloader.call(this.load, function (successCallback, failureCallback) {
+            i18next
+                .init({
+                    resources: {
+                        'en': {
+                            'ui': {
+                                'save': 'Save'
+                            }
+                        },
+                        'zh': {
+                            'ui': {
+                                'save': '儲存'
+                            }
+                        },
+                    },
+                    lng: 'en',
+                    ns: 'ui'
+                }, successCallback);
         })
-
         TextTranslationBehavior.setI18Next(i18next);
     }
 
     create() {
         var textObject = this.add.text(100, 300, '');
-        textObject.translation = new TextTranslationBehavior(textObject);
-        textObject.translation.setText('save');
+        textObject.translation = new TextTranslationBehavior(textObject, {
+            translationKey: 'save'
+        });
 
         var bbCodeTextObject = new BBCodeText(this, 300, 300, '');
         this.add.existing(bbCodeTextObject);
-        bbCodeTextObject.translation = new TextTranslationBehavior(bbCodeTextObject);
-        bbCodeTextObject.translation.setText('save');
+        bbCodeTextObject.translation = new TextTranslationBehavior(bbCodeTextObject, {
+            translationKey: 'save'
+        });
 
         this.input.once('pointerdown', function () {
             i18next.changeLanguage('zh');
