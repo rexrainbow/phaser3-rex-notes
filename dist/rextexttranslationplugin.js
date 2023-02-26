@@ -3435,7 +3435,6 @@
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
 
-      _this._source = '';
       _this.resetFromJSON(config);
       _this.onLanguageChanged = _this.updateText.bind(_assertThisInitialized$1(_this));
       i18next.on('languageChanged', _this.onLanguageChanged);
@@ -3446,6 +3445,7 @@
       value: function resetFromJSON(o) {
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
         this.setInterpolation(GetValue(o, 'interpolations'));
+        this.setTranslationKey(GetValue(o, 'translationKey', ''));
         return this;
       }
     }, {
@@ -3487,26 +3487,26 @@
         return this;
       }
     }, {
-      key: "source",
+      key: "translationKey",
       get: function get() {
-        return this._source;
+        return this._translationKey;
       },
       set: function set(value) {
         value = value.toString() || '';
-        this._source = value;
+        this._translationKey = value;
         var text = i18next.t(value, this.interpolations);
         this.setTextCallback(this.parent, text);
       }
     }, {
-      key: "setText",
-      value: function setText(txt) {
-        this.source = txt;
+      key: "setTranslationKey",
+      value: function setTranslationKey(txt) {
+        this.translationKey = txt;
         return this;
       }
     }, {
       key: "updateText",
       value: function updateText() {
-        this.setText(this.source);
+        this.setText(this.translationKey);
         return this;
       }
     }], [{

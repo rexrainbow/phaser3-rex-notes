@@ -58966,8 +58966,7 @@
     modalPromise: ModalPromise,
     modalClose: ModalClose,
     requestDrag: RequestDrag,
-    openFileChooser: Open$1,
-    yaml: jsYaml
+    openFileChooser: Open$1
   };
   Object.assign(UIPlugin.prototype, methods);
 

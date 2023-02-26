@@ -102,9 +102,6 @@ import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import { OpenFileChooser } from './filechooser/FileChooser';
-// import Make from './maker/YAMLMake';
-// import MakerClass from './maker/Maker';
-import yaml from './yaml/yaml';
 
 export default UIPlugins;
 
@@ -234,17 +231,6 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     ): boolean;
 
     readonly viewport: Phaser.Geom.Rectangle;
-
-    // make(
-    //     data: Object | string,
-    //     view?: Object | string,
-    //     styles?: Object | string,
-    //     customBuilders?: Make.BuildersType
-    // ): Phaser.GameObjects.GameObject;
-
-    // readonly maker: MakerClass;
-
-    yaml: typeof yaml;
 }
 
 

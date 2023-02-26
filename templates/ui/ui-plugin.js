@@ -109,9 +109,6 @@ import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 import { OpenFileChooser } from './filechooser/FileChooser.js';
-// import Make from './maker/YAMLMake.js';
-// import Maker from './maker/Maker.js';
-import yaml from './yaml/yaml.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -174,8 +171,6 @@ var methods = {
     modalClose: ModalClose,
     requestDrag: RequestDrag,
     openFileChooser: OpenFileChooser,
-
-    yaml: yaml,
 }
 
 Object.assign(
