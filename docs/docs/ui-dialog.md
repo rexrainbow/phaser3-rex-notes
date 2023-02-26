@@ -599,7 +599,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
         ```javascript
         var button = dialog.getElement('choices[' + index + ']');
         ```
-    - Acrion button game object
+    - Action button game object
         ```javascript
         var buttons = dialog.getElement('actions');
         ```

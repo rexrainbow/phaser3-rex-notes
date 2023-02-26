@@ -68,6 +68,11 @@ class ConfirmDialog extends Dialog {
         this.type = 'rexConfirmDialog';
 
         this.buttonMode = buttonMode;
+
+        var buttons = this.childrenMap.actions;
+        this.addChildrenMap('buttonA', buttons[0]);
+        this.addChildrenMap('buttonB', buttons[1]);
+
     }
 
     resetDisplayContent(config) {

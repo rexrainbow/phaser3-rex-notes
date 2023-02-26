@@ -42088,6 +42088,9 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexConfirmDialog';
       _this.buttonMode = buttonMode;
+      var buttons = _this.childrenMap.actions;
+      _this.addChildrenMap('buttonA', buttons[0]);
+      _this.addChildrenMap('buttonB', buttons[1]);
       return _this;
     }
     _createClass(ConfirmDialog, [{

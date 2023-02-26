@@ -12,7 +12,6 @@ class TextTranslation extends ComponentBase {
         super(gameObject, config);
         // this.parent = gameObject;
 
-        this._source = '';
         this.resetFromJSON(config);
 
         this.onLanguageChanged = this.updateText.bind(this);
@@ -22,6 +21,7 @@ class TextTranslation extends ComponentBase {
     resetFromJSON(o) {
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
         this.setInterpolation(GetValue(o, 'interpolations'));
+        this.setTranslationKey(GetValue(o, 'translationKey', ''));
         return this;
     }
 
@@ -62,25 +62,25 @@ class TextTranslation extends ComponentBase {
         return this;
     }
 
-    get source() {
-        return this._source;
+    get translationKey() {
+        return this._translationKey;
     }
 
-    set source(value) {
+    set translationKey(value) {
         value = value.toString() || ''
-        this._source = value;
+        this._translationKey = value;
 
         var text = i18next.t(value, this.interpolations);
         this.setTextCallback(this.parent, text);
     }
 
-    setText(txt) {
-        this.source = txt;
+    setTranslationKey(txt) {
+        this.translationKey = txt;
         return this;
     }
 
     updateText() {
-        this.setText(this.source);
+        this.setText(this.translationKey);
         return this;
     }
 

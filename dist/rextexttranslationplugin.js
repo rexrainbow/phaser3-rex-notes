@@ -3120,6 +3120,105 @@
   }();
   Backend.type = 'backend';
 
+  var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+  var UUID = Phaser.Utils.String.UUID;
+  var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
+    _inherits$1(AwaitFile, _Phaser$Loader$File);
+    var _super = _createSuper$4(AwaitFile);
+    function AwaitFile(loader, fileConfig) {
+      _classCallCheck$2(this, AwaitFile);
+      if (!fileConfig.hasOwnProperty('type')) {
+        fileConfig.type = 'await';
+      }
+      if (!fileConfig.hasOwnProperty('url')) {
+        fileConfig.url = '';
+      }
+      if (!fileConfig.hasOwnProperty('key')) {
+        fileConfig.key = UUID();
+      }
+      return _super.call(this, loader, fileConfig);
+    }
+    _createClass$2(AwaitFile, [{
+      key: "load",
+      value: function load() {
+        if (this.state === FILE_POPULATED) {
+          //  Can happen for example in a JSONFile if they've provided a JSON object instead of a URL
+          this.loader.nextFile(this, true);
+        } else {
+          // start loading task
+          var config = this.config;
+          var callback = config.callback;
+          var scope = config.scope;
+          var successCallback = this.onLoad.bind(this);
+          var failureCallback = this.onError.bind(this);
+          if (callback) {
+            if (scope) {
+              callback.call(scope, successCallback, failureCallback);
+            } else {
+              callback(successCallback, failureCallback);
+            }
+          } else {
+            this.onLoad();
+          }
+        }
+      }
+    }, {
+      key: "onLoad",
+      value: function onLoad() {
+        this.loader.nextFile(this, true);
+      }
+    }, {
+      key: "onError",
+      value: function onError() {
+        this.loader.nextFile(this, false);
+      }
+    }]);
+    return AwaitFile;
+  }(Phaser.Loader.File);
+
+  var IsFunction = function IsFunction(obj) {
+    return obj && typeof obj === 'function';
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var loaderCallback = function loaderCallback(key, config) {
+    if (IsFunction(key)) {
+      var callback = key;
+      var scope = config;
+      config = {
+        config: {
+          callback: callback,
+          scope: scope
+        }
+      };
+    } else if (IsPlainObject(key)) {
+      config = key;
+      if (!config.hasOwnProperty('config')) {
+        config = {
+          config: config
+        };
+      }
+    } else {
+      config = {
+        key: key,
+        config: config
+      };
+    }
+    this.addFile(new AwaitFile(this, config));
+    return this;
+  };
+
+  Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var NOOP = function NOOP() {
+    //  NOOP
+  };
+
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -3199,11 +3298,6 @@
       }
       return [];
     }
-  };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
   };
 
   var GetSceneObject = function GetSceneObject(object) {
@@ -3434,6 +3528,7 @@
       var _this;
       _classCallCheck$2(this, TextTranslationPlugin);
       _this = _super.call(this, pluginManager);
+      _this.i18next = instance;
       TextTranslation.setI18Next(instance);
       return _this;
     }
@@ -3445,14 +3540,32 @@
       }
     }, {
       key: "initI18Next",
-      value: function initI18Next(config) {
-        instance.use(Backend).init(config);
+      value: function initI18Next(scene, config, onComplete) {
+        if (IsSceneObject(scene)) {
+          loaderCallback.call(scene.load, function (successCallback, failureCallback) {
+            if (!onComplete) {
+              onComplete = successCallback;
+            } else {
+              var onComplete_ = onComplete;
+              onComplete = function onComplete() {
+                onComplete_();
+                successCallback();
+              };
+            }
+            instance.use(Backend).init(config, onComplete);
+          });
+        } else {
+          onComplete = config || NOOP;
+          config = scene;
+          scene = undefined;
+          instance.use(Backend).init(config, onComplete);
+        }
         return this;
       }
     }, {
       key: "changeLanguage",
-      value: function changeLanguage(lng) {
-        instance.changeLanguage(lng);
+      value: function changeLanguage(lng, onComplete) {
+        instance.changeLanguage(lng, onComplete);
         return this;
       }
     }, {

@@ -544,6 +544,38 @@ dialog
         - `data.button` : Clicked button game object.
         - `data.dialog` : This dialog game object.
 
+### Get element
+
+- Get element
+    - Background game object
+        ```javascript
+        var background = dialog.getElement('background');
+        ```
+    - Title game object
+        ```javascript
+        var title = dialog.getElement('title');
+        ```
+    - Content game object
+        ```javascript
+        var content = dialog.getElement('content');
+        ```
+    - Buttons game object
+        ```javascript
+        var buttonA = dialog.getElement('buttonA');
+        var buttonB = dialog.getElement('buttonB');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = dialog.getElement('#' + name);
+    // var gameObject = dialog.getElement('#' + name, recursive);
+    ```
+    or
+    ```javascript
+    var gameObject = dialog.getByName(name);
+    // var gameObject = dialog.getByName(name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
+
 
 ### Other properties
 
