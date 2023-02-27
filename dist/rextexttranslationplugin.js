@@ -3522,15 +3522,20 @@
         scene.sys.load['rexInitI18Next'] = LoaderCallback;
       }
     }, {
+      key: "add",
+      value: function add(gameObject, config) {
+        return new TextTranslation(gameObject, config);
+      }
+    }, {
       key: "changeLanguage",
       value: function changeLanguage(lng, onComplete) {
         instance.changeLanguage(lng, onComplete);
         return this;
       }
     }, {
-      key: "add",
-      value: function add(gameObject, config) {
-        return new TextTranslation(gameObject, config);
+      key: "t",
+      value: function t(translationKey, interpolations) {
+        return instance.t(translationKey, interpolations);
       }
     }]);
     return TextTranslationPlugin;

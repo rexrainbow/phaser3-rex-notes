@@ -11446,7 +11446,7 @@
   };
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length === 0) {
+    if (gameObjects.length <= 1) {
       return gameObjects;
     }
     if (descending === undefined) {
@@ -11815,10 +11815,19 @@
       if (!this.parentContainer) {
         return this;
       }
+
+      // Will add gameObjects to scene
+      var gameObjects = this.getAllChildren([this]).filter(function (gameObject) {
+        return !!gameObject.scene;
+      });
+      if (gameObjects.length === 0) {
+        return this;
+      }
       this._setParentContainerFlag = true;
-      var gameObjects = this.getAllChildren([this]);
-      SortGameObjectsByDepth(gameObjects);
-      gameObjects.reverse();
+      if (gameObjects.length > 1) {
+        SortGameObjectsByDepth(gameObjects);
+        gameObjects.reverse();
+      }
       this.parentContainer.remove(gameObjects);
       this._setParentContainerFlag = false;
       return this;

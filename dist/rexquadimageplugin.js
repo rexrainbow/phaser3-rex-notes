@@ -737,7 +737,7 @@
   };
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length === 0) {
+    if (gameObjects.length <= 1) {
       return gameObjects;
     }
     if (descending === undefined) {
