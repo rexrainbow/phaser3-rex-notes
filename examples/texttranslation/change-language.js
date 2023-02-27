@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.rexInitI18Next({
+        this.translation.initI18Next(this, {
             resources: {
                 'en': {
                     'ui': {

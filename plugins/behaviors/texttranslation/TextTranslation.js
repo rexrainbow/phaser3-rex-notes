@@ -22,6 +22,9 @@ class TextTranslation extends ComponentBase {
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
         this.setInterpolation(GetValue(o, 'interpolations'));
         this.setTranslationKey(GetValue(o, 'translationKey', ''));
+        if (GetValue(o, 'updateText', true)) {
+            this.updateText();
+        }
         return this;
     }
 
@@ -62,19 +65,8 @@ class TextTranslation extends ComponentBase {
         return this;
     }
 
-    get translationKey() {
-        return this._translationKey;
-    }
-
-    set translationKey(value) {
-        value = value.toString() || ''
-        this._translationKey = value;
-
-        this.updateText();
-    }
-
-    setTranslationKey(txt) {
-        this.translationKey = txt;
+    setTranslationKey(key) {
+        this.translationKey = key;
         return this;
     }
 

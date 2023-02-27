@@ -2298,6 +2298,16 @@ tweaker.setBindingTarget(object);
 
 ### Get element
 
+- Get by key
+    ```javascript
+    var gameObject = tweaker.getElement(key);
+    ```
+    - `key` : Add by `key` parameter in `tweaker.addInput(config)` method
+        ```javascript
+        tweaker.addInput({
+            key: ...
+        })
+        ```
 - Get by name
     ```javascript
     var gameObject = tweaker.getElement('#' + name);

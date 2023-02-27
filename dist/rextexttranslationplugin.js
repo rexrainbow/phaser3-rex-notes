@@ -183,6 +183,40 @@
     return AwaitFile;
   }(Phaser.Loader.File);
 
+  var IsFunction = function IsFunction(obj) {
+    return obj && typeof obj === 'function';
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var loaderCallback = function loaderCallback(key, config) {
+    if (IsFunction(key)) {
+      var callback = key;
+      var scope = config;
+      config = {
+        config: {
+          callback: callback,
+          scope: scope
+        }
+      };
+    } else if (IsPlainObject(key)) {
+      config = key;
+      if (!config.hasOwnProperty('config')) {
+        config = {
+          config: config
+        };
+      }
+    } else {
+      config = {
+        key: key,
+        config: config
+      };
+    }
+    this.addFile(new AwaitFile(this, config));
+    return this;
+  };
+
+  Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
+
   function _typeof$3(obj) {
     "@babel/helpers - typeof";
 
@@ -3408,6 +3442,9 @@
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
         this.setInterpolation(GetValue(o, 'interpolations'));
         this.setTranslationKey(GetValue(o, 'translationKey', ''));
+        if (GetValue(o, 'updateText', true)) {
+          this.updateText();
+        }
         return this;
       }
     }, {
@@ -3449,19 +3486,9 @@
         return this;
       }
     }, {
-      key: "translationKey",
-      get: function get() {
-        return this._translationKey;
-      },
-      set: function set(value) {
-        value = value.toString() || '';
-        this._translationKey = value;
-        this.updateText();
-      }
-    }, {
       key: "setTranslationKey",
-      value: function setTranslationKey(txt) {
-        this.translationKey = txt;
+      value: function setTranslationKey(key) {
+        this.translationKey = key;
         return this;
       }
     }, {
@@ -3483,21 +3510,6 @@
     gameObject.setText(text);
   };
 
-  var CreateAwiatFile = function CreateAwiatFile(loader, config) {
-    var callback = function callback(successCallback, failureCallback) {
-      instance.use(Backend).init(config, successCallback);
-    };
-    return new AwaitFile(loader, {
-      type: 'initi18next',
-      config: {
-        callback: callback
-      }
-    });
-  };
-  var LoaderCallback = function LoaderCallback(config) {
-    this.addFile(CreateAwiatFile(this, config));
-    return this;
-  };
   var TextTranslationPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits$1(TextTranslationPlugin, _Phaser$Plugins$BaseP);
     var _super = _createSuper$4(TextTranslationPlugin);
@@ -3505,7 +3517,6 @@
       var _this;
       _classCallCheck$2(this, TextTranslationPlugin);
       _this = _super.call(this, pluginManager);
-      pluginManager.registerFileType('rexInitI18Next', LoaderCallback);
       _this.i18next = instance;
       TextTranslation.setI18Next(instance);
       return _this;
@@ -3517,9 +3528,12 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }, {
-      key: "addToScene",
-      value: function addToScene(scene) {
-        scene.sys.load['rexInitI18Next'] = LoaderCallback;
+      key: "initI18Next",
+      value: function initI18Next(scene, config) {
+        loaderCallback.call(scene.load, function (successCallback, failureCallback) {
+          instance.use(Backend).init(config, successCallback);
+        });
+        return this;
       }
     }, {
       key: "add",
