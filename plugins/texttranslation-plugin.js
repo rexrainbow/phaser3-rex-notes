@@ -40,15 +40,18 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         scene.sys.load['rexInitI18Next'] = LoaderCallback;
     }
 
+    add(gameObject, config) {
+        return new TextTranslation(gameObject, config);
+    }
+
     changeLanguage(lng, onComplete) {
         i18next.changeLanguage(lng, onComplete);
         return this;
     }
 
-    add(gameObject, config) {
-        return new TextTranslation(gameObject, config);
+    t(translationKey, interpolations) {
+        return i18next.t(translationKey, interpolations);
     }
-
 }
 
 export default TextTranslationPlugin;
