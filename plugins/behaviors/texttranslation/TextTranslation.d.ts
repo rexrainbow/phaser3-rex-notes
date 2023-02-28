@@ -24,7 +24,7 @@ declare class TextTranslation extends ComponentBase {
         config?: TextTranslation.IConfig
     );
 
-    setInterpolation(interpolations: TextTranslation.InterpolationsType): this;
+    setInterpolations(interpolations: TextTranslation.InterpolationsType): this;
     updateInterpolation(key: string, value: any): this;
     updateInterpolation(interpolations: TextTranslation.InterpolationsType): this;
     interpolations: TextTranslation.InterpolationsType;

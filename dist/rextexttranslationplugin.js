@@ -3440,7 +3440,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
-        this.setInterpolation(GetValue(o, 'interpolations'));
+        this.setInterpolations(GetValue(o, 'interpolations'));
         this.setTranslationKey(GetValue(o, 'translationKey', ''));
         if (GetValue(o, 'updateText', true)) {
           this.updateText();
@@ -3464,8 +3464,8 @@
         return this;
       }
     }, {
-      key: "setInterpolation",
-      value: function setInterpolation(interpolations) {
+      key: "setInterpolations",
+      value: function setInterpolations(interpolations) {
         if (interpolations === undefined) {
           interpolations = {};
         }

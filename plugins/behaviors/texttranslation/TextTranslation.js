@@ -20,7 +20,7 @@ class TextTranslation extends ComponentBase {
 
     resetFromJSON(o) {
         this.setSetTextCallback(GetValue(o, 'setText', DefaultSetTextCallback));
-        this.setInterpolation(GetValue(o, 'interpolations'));
+        this.setInterpolations(GetValue(o, 'interpolations'));
         this.setTranslationKey(GetValue(o, 'translationKey', ''));
         if (GetValue(o, 'updateText', true)) {
             this.updateText();
@@ -44,7 +44,7 @@ class TextTranslation extends ComponentBase {
         return this;
     }
 
-    setInterpolation(interpolations) {
+    setInterpolations(interpolations) {
         if (interpolations === undefined) {
             interpolations = {};
         }
