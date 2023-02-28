@@ -1676,6 +1676,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../texttranslation/" class="md-nav__link">
+        Translation
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -6977,13 +6991,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-translations" class="md-nav__link">
-    Add translations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#change-language" class="md-nav__link">
     Change language
   </a>
@@ -6993,6 +7000,13 @@
           <li class="md-nav__item">
   <a href="#translate" class="md-nav__link">
     Translate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -8923,13 +8937,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-translations" class="md-nav__link">
-    Add translations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#change-language" class="md-nav__link">
     Change language
   </a>
@@ -8939,6 +8946,13 @@
           <li class="md-nav__item">
   <a href="#translate" class="md-nav__link">
     Translate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -8975,65 +8989,71 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Install i18next from npm
+<li>Install i18next, i18next-http-backend from npm
     <div class="highlight"><pre><span></span><code>npm i i18next
+npm i i18next-http-backend
 </code></pre></div></li>
 <li>Import i18next
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">i18next</span> <span class="kr">from</span> <span class="s1">&#39;i18next&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Backend</span> <span class="kr">from</span> <span class="s1">&#39;i18next-http-backend&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Initialize
-    <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Backend</span><span class="p">).</span><span class="nx">init</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Translation
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">i18next</span><span class="p">.</span><span class="nx">t</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="initialize">Initialize<a class="headerlink" href="#initialize" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="nx">lng</span><span class="o">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="c1">// if you&#39;re using a language detector, do not define the lng option</span>
-    <span class="nx">debug</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">resources</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">fallbackLng</span><span class="o">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
-        <span class="nx">en</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">translation</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="nx">i18next</span>
+    <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Backend</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+        <span class="nx">lng</span><span class="o">:</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+        <span class="nx">ns</span><span class="o">:</span> <span class="s1">&#39;translation&#39;</span><span class="p">,</span>
+
+        <span class="c1">// resources: {</span>
+        <span class="c1">//     &#39;dev&#39;: {</span>
+        <span class="c1">//         &#39;translation&#39;: {</span>
+        <span class="c1">//             key: value,  </span>
+        <span class="c1">//         }</span>
+        <span class="c1">//     }</span>
+        <span class="c1">// }</span>
+
+        <span class="c1">// debug: true,</span>
+    <span class="p">})</span>
 </code></pre></div>
-<h3 id="add-translations">Add translations<a class="headerlink" href="#add-translations" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Add translations data at initialize
-    <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="c1">// ...</span>
-    <span class="nx">resources</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">en</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">translation</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">})</span>
+<li><code>lng</code> : Language to use. Will fallback to <code>'dev'</code>.</li>
+<li><code>ns</code> : String or array of namespaces to load. Default value is <code>'translation'</code>.</li>
+<li><code>debug</code> : Logs info level to console output. Helps finding issues with loading not working. Default value is <code>false</code>.</li>
+<li><code>resources</code> : Resources to initialize with.</li>
+<li><code>backend.loadPath</code> : Path where resources get loaded from, or a function returning a path.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">lngs</span><span class="p">,</span> <span class="nx">namespaces</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">customPath</span><span class="p">;</span> 
+<span class="p">}</span>
 </code></pre></div></li>
-<li>Add translations data
-    <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">addResources</span><span class="p">(</span><span class="nx">lng</span><span class="p">,</span> <span class="nx">ns</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>
-<span class="p">})</span>
-</code></pre></div><ul>
-<li><code>ns</code> : Default namespace is <code>"translation"</code>.</li>
+<li><code>backend.parse</code> : Parse data after it has been fetched. Optional.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> 
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-</li>
-<li>Load </li>
-</ul>
+<p>See also <a href="https://www.i18next.com/overview/configuration-options">Configuration Options</a>, and <a href="https://github.com/i18next/i18next-http-backend#backend-options">Backend Options</a></p>
 <h3 id="change-language">Change language<a class="headerlink" href="#change-language" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">changeLanguage</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">);</span>
 </code></pre></div>
+<p>Fire event <code>'languageChanged'</code>.</p>
 <h3 id="translate">Translate<a class="headerlink" href="#translate" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">i18next</span><span class="p">.</span><span class="nx">t</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var result = i18next.t(key, { ns: &#39;translation&#39; });</span>
+<span class="c1">// var result = i18next.t(key, interpolation);</span>
 </code></pre></div>
-<p>Default namespace is <code>'translation'</code>.</p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On language changed, triggered by <code>i18next.changeLanguage(lng)</code>.
+    <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;languageChanged&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">lng</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
 
               
             </article>

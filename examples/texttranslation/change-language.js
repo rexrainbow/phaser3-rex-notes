@@ -10,6 +10,10 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.translation.on('languageChanged', function (lng) {
+            console.log(`Change language to '${lng}'`)
+        })
+
         this.translation.initI18Next(this, {
             resources: {
                 'en': {
@@ -42,7 +46,6 @@ class Demo extends Phaser.Scene {
         this.input.once('pointerdown', function () {
             this.translation.changeLanguage('zh');
         }, this)
-
     }
 
     update() { }

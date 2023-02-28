@@ -8,17 +8,19 @@ i18next is a very popular internationalization framework for browser or any othe
 
 ### Import class
 
-- Install i18next from npm
+- Install i18next, i18next-http-backend from npm
     ```
     npm i i18next
+    npm i i18next-http-backend
     ```
 - Import i18next
     ```javascript
     import i18next from 'i18next';
+    import Backend from 'i18next-http-backend';
     ```
 - Initialize
     ```javascript
-    i18next.init(config);
+    i18next.use(Backend).init(config);
     ```
 - Translation
     ```javascript
@@ -29,43 +31,42 @@ i18next is a very popular internationalization framework for browser or any othe
 ### Initialize
 
 ```javascript
-i18next.init({
-    lng: 'en', // if you're using a language detector, do not define the lng option
-    debug: true,
-    resources: {
-        fallbackLng: "en",
-        en: {
-            translation: {
-                key: value
-            }
-        }
-    }
-})
+i18next
+    .use(Backend)
+    .init({
+        lng: 'dev',
+        ns: 'translation',
+    
+        // resources: {
+        //     'dev': {
+        //         'translation': {
+        //             key: value,  
+        //         }
+        //     }
+        // }
+    
+        // debug: true,
+    })
 ```
 
-### Add translations
+- `lng` : Language to use. Will fallback to `'dev'`.
+- `ns` : String or array of namespaces to load. Default value is `'translation'`.
+- `debug` : Logs info level to console output. Helps finding issues with loading not working. Default value is `false`.
+- `resources` : Resources to initialize with.
+- `backend.loadPath` : Path where resources get loaded from, or a function returning a path.
+    ```javascript
+    function(lngs, namespaces) { 
+        return customPath; 
+    }
+    ```
+- `backend.parse` : Parse data after it has been fetched. Optional.
+    ```javascript
+    function(data) { 
+        return JSON.parse(data); 
+    }
+    ```
 
-- Add translations data at initialize
-    ```javascript
-    i18next.init({
-        // ...
-        resources: {
-            en: {
-                translation: {
-                    key: value
-                }
-            }
-        }
-    })
-    ```
-- Add translations data
-    ```javascript
-    i18next.addResources(lng, ns, {
-        key: value
-    })
-    ```
-    - `ns` : Default namespace is `"translation"`.
-- Load 
+See also [Configuration Options](https://www.i18next.com/overview/configuration-options), and [Backend Options](https://github.com/i18next/i18next-http-backend#backend-options)
 
 ### Change language
 
@@ -79,10 +80,8 @@ Fire event `'languageChanged'`.
 
 ```javascript
 var result = i18next.t(key);
-// var result = i18next.t(key, { ns: 'translation' });
+// var result = i18next.t(key, interpolation);
 ```
-
-Default namespace is `'translation'`.
 
 ### Events
 

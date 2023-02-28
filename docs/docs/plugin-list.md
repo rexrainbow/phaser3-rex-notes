@@ -180,6 +180,7 @@
 1. [Text/Edit](textedit.md): Create an input text object above a text object to edit string content.
 1. [Text/Typing](texttyping.md): Typing text on text object.
 1. [Text/Page](textpage.md): Display text page by page on text object.
+1. [Text/Translation](texttranslation.md): Apply translated string ([i18next](https://www.i18next.com/)) to text object.
 1. [Text player](textplayer.md): Typing characters on dynamic text, waiting click or key enter, play sound effect or backgroun music.
 1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
 1. [Touch state](touchstate.md): Store current touch input properties.

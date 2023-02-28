@@ -1789,6 +1789,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../texttranslation/" class="md-nav__link">
+        Translation
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9040,6 +9054,7 @@
                 <span class="nx">plugin</span><span class="o">:</span> <span class="nx">pluginKlass</span><span class="p">,</span>
                 <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
                 <span class="c1">// mapping: memberName  // member name in each scene instance, optional</span>
+                <span class="c1">// data: undefined</span>
             <span class="p">},</span>
             <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -9049,10 +9064,14 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>pluginKlass</code> : Class instance</li>
+<li><code>start</code> : Whether the plugin should be started automatically.</li>
+<li><code>mapping</code> : If this plugin is to be injected into the Scene Systems, this is the property key map used.</li>
+<li><code>data</code> : Arbitrary data passed to the plugin's <code>init()</code> method.</li>
 </ul>
 </li>
 <li>Load plugin in scene
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="c1">// scene.load.plugin(key, url, true, mapping);</span>
 </code></pre></div><ul>
 <li><code>url</code> : File url or class instance.</li>
 </ul>
@@ -9074,7 +9093,7 @@
             <span class="p">{</span>
                 <span class="nx">key</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
                 <span class="nx">plugin</span><span class="o">:</span> <span class="nx">pluginKlass</span><span class="p">,</span>
-                <span class="nx">mapping</span><span class="o">:</span> <span class="nx">sceneKey</span>     <span class="c1">// member name in each scene instance</span>
+                <span class="nx">mapping</span><span class="o">:</span> <span class="nx">sceneKey</span><span class="p">,</span>    <span class="c1">// member name in each scene instance</span>
             <span class="p">},</span>
             <span class="c1">// ...</span>
         <span class="p">]</span>

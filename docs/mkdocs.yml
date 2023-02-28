@@ -80,6 +80,7 @@ nav:
             - Page: textpage.md
             - Edit: textedit.md
             - Hidden edit: hiddeninputtext.md
+            - Translation: texttranslation.md
     - Graphics:
         - Graphics: graphics.md
         - Render texture: rendertexture.md

@@ -12,6 +12,10 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        i18next.on('languageChanged', function (lng) {
+            console.log(`Change language to '${lng}'`)
+        });
+
         Awaitloader.call(this.load, function (successCallback, failureCallback) {
             i18next
                 .init({

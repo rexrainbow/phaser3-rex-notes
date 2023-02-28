@@ -1173,6 +1173,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#contains" class="md-nav__link">
+    Contains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#properties" class="md-nav__link">
     Properties
   </a>
@@ -1214,6 +1221,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive" class="md-nav__link">
+    Interactive
+  </a>
   
 </li>
         
@@ -1839,6 +1853,20 @@
     <li class="md-nav__item">
       <a href="../hiddeninputtext/" class="md-nav__link">
         Hidden edit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../texttranslation/" class="md-nav__link">
+        Translation
       </a>
     </li>
   
@@ -9054,6 +9082,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#contains" class="md-nav__link">
+    Contains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#properties" class="md-nav__link">
     Properties
   </a>
@@ -9099,6 +9134,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interactive" class="md-nav__link">
+    Interactive
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#debug" class="md-nav__link">
     Debug
   </a>
@@ -9140,6 +9182,10 @@
 </div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="quad">Quad<a class="headerlink" href="#quad" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See also <a href="../plane/">Plane</a></p>
+</div>
 <ol>
 <li>Load texture
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
@@ -9335,6 +9381,17 @@
 <p>Mesh is composed of triangle faces.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">faces</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">faces</span><span class="p">;</span>
 </code></pre></div>
+<h4 id="contains">Contains<a class="headerlink" href="#contains" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Has any face which contains point
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isHit</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">hasFaceAt</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+<span class="c1">// var isHit = mesh.hasFaceAt(worldX, worldY, camera);</span>
+</code></pre></div></li>
+<li>Get face contains point
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">getFaceAt</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+<span class="c1">// var face = mesh.getFaceAt(worldX, worldY, camera);</span>
+</code></pre></div></li>
+</ul>
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Alpha<ul>
@@ -9412,6 +9469,13 @@
     <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">ignoreDirtyCache</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="interactive">Interactive<a class="headerlink" href="#interactive" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mesh game object cannot be enabled for input.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isHit</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">hasFaceAt</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Set debug <a href="../graphics/">Graphics</a>
