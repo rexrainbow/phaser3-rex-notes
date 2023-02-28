@@ -11,10 +11,10 @@ declare namespace TextTranslation {
     type InterpolationsType = { [name: string]: any };
 
     interface IConfig {
-        setText?: SetTextCallbackType,
-        interpolations?: InterpolationsType,
         translationKey?: string,
+        interpolation?: InterpolationsType,
         updateText?: boolean,
+        setText?: SetTextCallbackType,
     }
 }
 
@@ -24,10 +24,10 @@ declare class TextTranslation extends ComponentBase {
         config?: TextTranslation.IConfig
     );
 
-    setInterpolations(interpolations: TextTranslation.InterpolationsType): this;
+    setInterpolation(interpolation: TextTranslation.InterpolationsType): this;
     updateInterpolation(key: string, value: any): this;
-    updateInterpolation(interpolations: TextTranslation.InterpolationsType): this;
-    interpolations: TextTranslation.InterpolationsType;
+    updateInterpolation(interpolation: TextTranslation.InterpolationsType): this;
+    interpolation: TextTranslation.InterpolationsType;
 
     setTranslationKey(key: string): this;
     translationKey: string;
