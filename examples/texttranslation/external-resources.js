@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
         });
 
         this.input.once('pointerdown', function () {
-            this.translation.changeLanguage('zh-tw');
+            this.translation.changeLanguage('zh-TW');
         }, this)
 
     }
