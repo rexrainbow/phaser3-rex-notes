@@ -8,6 +8,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 ## Live demos
 
 - [Inline resources](https://codepen.io/rexrainbow/pen/xxaEVBq)
+- [External resources](https://codepen.io/rexrainbow/pen/dyqNdbB)
 
 ## Usage
 
