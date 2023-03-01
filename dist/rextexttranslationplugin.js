@@ -3455,6 +3455,7 @@
           return;
         }
         i18next.off('languageChanged', this.onLanguageChanged);
+        this.interpolation = null;
         _get(_getPrototypeOf$1(TextTranslation.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -3466,15 +3467,15 @@
     }, {
       key: "setInterpolation",
       value: function setInterpolation(interpolation) {
-        if (interpolation === undefined) {
-          interpolation = {};
-        }
         this.interpolation = interpolation;
         return this;
       }
     }, {
       key: "updateInterpolation",
       value: function updateInterpolation(key, value) {
+        if (!this.interpolation) {
+          this.interpolation = {};
+        }
         if (typeof key === 'string') {
           this.interpolation[key] = value;
         } else {
@@ -3523,11 +3524,11 @@
       _this.i18next = instance;
       TextTranslation.setI18Next(instance);
 
-      // Route 'languageChanged' event
-      var self = _assertThisInitialized$1(_this);
-      instance.on('languageChanged', function (lng) {
-        self.emit('languageChanged', lng);
-      });
+      // Route 'languageChanged' event        
+      _this.onLanguageChanged = function (lng) {
+        this.emit('languageChanged', lng);
+      }.bind(_assertThisInitialized$1(_this));
+      instance.on('languageChanged', _this.onLanguageChanged);
       return _this;
     }
     _createClass$2(TextTranslationPlugin, [{
@@ -3539,6 +3540,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
+        instance.off('languageChanged', this.onLanguageChanged);
         _get(_getPrototypeOf$1(TextTranslationPlugin.prototype), "destroy", this).call(this);
         this.destroyEventEmitter();
       }

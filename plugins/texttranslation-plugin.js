@@ -15,11 +15,11 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         this.i18next = i18next;
         TextTranslation.setI18Next(i18next);
 
-        // Route 'languageChanged' event
-        var self = this;
-        i18next.on('languageChanged', function (lng) {
-            self.emit('languageChanged', lng);
-        });
+        // Route 'languageChanged' event        
+        this.onLanguageChanged = (function (lng) {
+            this.emit('languageChanged', lng);
+        }).bind(this);
+        i18next.on('languageChanged', this.onLanguageChanged);
     }
 
     start() {
@@ -28,6 +28,8 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     destroy() {
+        i18next.off('languageChanged', this.onLanguageChanged);
+
         super.destroy();
 
         this.destroyEventEmitter();

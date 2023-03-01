@@ -35,6 +35,7 @@ class TextTranslation extends ComponentBase {
         }
 
         i18next.off('languageChanged', this.onLanguageChanged);
+        this.interpolation = null;
 
         super.shutdown(fromScene);
     }
@@ -45,15 +46,15 @@ class TextTranslation extends ComponentBase {
     }
 
     setInterpolation(interpolation) {
-        if (interpolation === undefined) {
-            interpolation = {};
-        }
-
         this.interpolation = interpolation;
         return this;
     }
 
     updateInterpolation(key, value) {
+        if (!this.interpolation) {
+            this.interpolation = {};
+        }
+
         if (typeof (key) === 'string') {
             this.interpolation[key] = value;
         } else {
