@@ -302,6 +302,18 @@ i18next.changeLanguage(language, onComplete);
 
 All translation behavior will update text object after changing language.
 
+### Set default namespace
+
+```javascript
+scene.plugins.get('rexTextTranslation').setDefaultNamespace(namespace);
+```
+
+or
+
+```javascript
+i18next.setDefaultNamespace(namespace);
+```
+
 ### Translate string
 
 ```javascript

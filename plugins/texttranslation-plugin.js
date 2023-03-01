@@ -52,6 +52,11 @@ class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         return this;
     }
 
+    setDefaultNamespace(namespace) {
+        i18next.setDefaultNamespace(namespace);
+        return this;
+    }
+
     t(translationKey, interpolation) {
         return i18next.t(translationKey, interpolation);
     }

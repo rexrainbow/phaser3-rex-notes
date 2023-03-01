@@ -1816,6 +1816,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-default-namespace" class="md-nav__link">
+    Set default namespace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#translate-string" class="md-nav__link">
     Translate string
   </a>
@@ -9072,6 +9079,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-default-namespace" class="md-nav__link">
+    Set default namespace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#translate-string" class="md-nav__link">
     Translate string
   </a>
@@ -9374,6 +9388,12 @@ npm i i18next-http-backend
 <div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">changeLanguage</span><span class="p">(</span><span class="nx">language</span><span class="p">,</span> <span class="nx">onComplete</span><span class="p">);</span>
 </code></pre></div>
 <p>All translation behavior will update text object after changing language.</p>
+<h3 id="set-default-namespace">Set default namespace<a class="headerlink" href="#set-default-namespace" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTranslation&#39;</span><span class="p">).</span><span class="nx">setDefaultNamespace</span><span class="p">(</span><span class="nx">namespace</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">i18next</span><span class="p">.</span><span class="nx">setDefaultNamespace</span><span class="p">(</span><span class="nx">namespace</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="translate-string">Translate string<a class="headerlink" href="#translate-string" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTranslation&#39;</span><span class="p">).</span><span class="nx">t</span><span class="p">(</span><span class="nx">translationKey</span><span class="p">,</span> <span class="nx">interpolation</span><span class="p">);</span>
 </code></pre></div>

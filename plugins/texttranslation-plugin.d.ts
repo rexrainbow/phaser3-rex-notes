@@ -28,6 +28,8 @@ declare class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
         onComplete?: Function
     ): this;
 
+    setDefaultNamespace(namespace: string): this;
+
     t(
         translationKey: string,
         interpolations?: { [name: string]: any }

@@ -3564,6 +3564,12 @@
         return this;
       }
     }, {
+      key: "setDefaultNamespace",
+      value: function setDefaultNamespace(namespace) {
+        instance.setDefaultNamespace(namespace);
+        return this;
+      }
+    }, {
       key: "t",
       value: function t(translationKey, interpolation) {
         return instance.t(translationKey, interpolation);

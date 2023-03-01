@@ -76,6 +76,12 @@ i18next.changeLanguage("en");
 
 Fire event `'languageChanged'`.
 
+### Set default namespace
+
+```javascript
+i18next.setDefaultNamespace(namespace);
+```
+
 ### Translate
 
 ```javascript
