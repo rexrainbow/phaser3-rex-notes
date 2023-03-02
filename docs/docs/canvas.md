@@ -178,11 +178,14 @@ var canvas = scene.make.rexCanvas({
 
 ```javascript
 canvas.drawFrame(key, frame);
-// canvas.drawFrame(key, frame, x, y, width, height);
+// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight);
+// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight);
 ```
 
-- `x`, `y` : Top-left position of pasted frame. Default value is `0`, `0`
-- `width`, `height` : Size of pasted frame. Default value is origin size of frame.
+- `dx`, `dy` : Top-left position in this canvas. Default value is `0`, `0`.
+- `dWidth`, `dHeight` : The size to draw the image in this canvas. Default value is origin size of frame.
+- `sxOffset`, `syOffset` : Offset position of source frame.  Default value is `0`, `0`
+- `sWidth`, `sHeight` : The size of the sub-rectangle of the source frame to draw into this canvas. Default value is origin size of frame.
 
 ### Data URL
 

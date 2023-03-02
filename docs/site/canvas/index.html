@@ -9317,11 +9317,14 @@
 </ul>
 <h3 id="paste-frame">Paste frame<a class="headerlink" href="#paste-frame" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-<span class="c1">// canvas.drawFrame(key, frame, x, y, width, height);</span>
+<span class="c1">// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight);</span>
+<span class="c1">// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight);</span>
 </code></pre></div>
 <ul>
-<li><code>x</code>, <code>y</code> : Top-left position of pasted frame. Default value is <code>0</code>, <code>0</code></li>
-<li><code>width</code>, <code>height</code> : Size of pasted frame. Default value is origin size of frame.</li>
+<li><code>dx</code>, <code>dy</code> : Top-left position in this canvas. Default value is <code>0</code>, <code>0</code>.</li>
+<li><code>dWidth</code>, <code>dHeight</code> : The size to draw the image in this canvas. Default value is origin size of frame.</li>
+<li><code>sxOffset</code>, <code>syOffset</code> : Offset position of source frame.  Default value is <code>0</code>, <code>0</code></li>
+<li><code>sWidth</code>, <code>sHeight</code> : The size of the sub-rectangle of the source frame to draw into this canvas. Default value is origin size of frame.</li>
 </ul>
 <h3 id="data-url">Data URL<a class="headerlink" href="#data-url" title="Permanent link">&para;</a></h3>
 <ul>

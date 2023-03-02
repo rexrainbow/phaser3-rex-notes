@@ -2766,24 +2766,42 @@
       this.dirty = true;
       return this;
     },
-    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
         return this;
       }
-      if (x === undefined) {
-        x = 0;
+      var frameWidth = textureFrame.cutWidth,
+        frameHeight = textureFrame.cutHeight;
+      if (dx === undefined) {
+        dx = 0;
       }
-      if (y === undefined) {
-        y = 0;
+      if (dy === undefined) {
+        dy = 0;
       }
-      if (width === undefined) {
-        width = textureFrame.cutWidth;
+      if (dWidth === undefined) {
+        dWidth = frameWidth;
       }
-      if (height === undefined) {
-        height = textureFrame.cutHeight;
+      if (dHeight === undefined) {
+        dHeight = frameHeight;
       }
-      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      if (sxOffset === undefined) {
+        sxOffset = 0;
+      }
+      if (syOffset === undefined) {
+        syOffset = 0;
+      }
+      if (sWidth === undefined) {
+        sWidth = frameWidth;
+      }
+      if (sHeight === undefined) {
+        sHeight = frameHeight;
+      }
+      var sx = textureFrame.cutX + sxOffset;
+      var sy = textureFrame.cutY + syOffset;
+      this.context.drawImage(textureFrame.source.image,
+      // image
+      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.dirty = true;
       return this;
     },

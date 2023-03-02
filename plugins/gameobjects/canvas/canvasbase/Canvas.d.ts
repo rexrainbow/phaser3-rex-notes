@@ -42,8 +42,14 @@ export default class Canvas extends CanvasGameObjectBase {
     drawFrame(
         key: string,
         frame?: string,
-        x?: number, y?: number,
-        width?: number, height?: number,
+        dx?: number,
+        dy?: number,
+        dWidth?: number,
+        dHeight?: number,
+        sxOffset?: number,
+        syOffset?: number,
+        sWidth?: number,
+        sHeight?: number,
     ): this;
 
     getDataURL(
