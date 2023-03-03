@@ -200,7 +200,7 @@
     renderCanvas: CanvasRenderer
   };
 
-  var SetTexture$1 = function SetTexture(key, frame) {
+  var SetTexture = function SetTexture(key, frame) {
     this.texture = this.scene.sys.textures.get(key);
     this.frame = this.texture.get(frame);
     return this;
@@ -289,7 +289,7 @@
   };
 
   var methods$1 = {
-    setTexture: SetTexture$1,
+    setTexture: SetTexture,
     resize: Resize,
     setSize: Resize,
     addChild: AddChild,
@@ -550,7 +550,10 @@
     return outObject;
   };
 
-  var SetTexture = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
+    if (!key) {
+      return this;
+    }
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -807,7 +810,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -879,7 +882,7 @@
         var maxFixedPartScaleX = GetValue$2(config, 'maxFixedPartScaleX', maxFixedPartScale);
         var maxFixedPartScaleY = GetValue$2(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
       }
       _createClass(NinePatch, [{
@@ -908,7 +911,12 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
           this.updateTexture();
           return this;
         }
@@ -1448,20 +1456,13 @@
     var ty = -displayOriginY;
     var tw = tx + width;
     var th = ty + height;
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
     var tint = GetTint(this.tint, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
+    pipeline.batchQuad(this.parent, quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7], u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
@@ -1715,15 +1716,15 @@
       return _super.apply(this, arguments);
     }
     _createClass(NinePatch, [{
-      key: "setTexture",
-      value: function setTexture(key, baseFrameName, columns, rows) {
-        SetTexture$1.call(this, key, '__BASE');
+      key: "setBaseTexture",
+      value: function setBaseTexture(key, baseFrameName, columns, rows) {
+        SetTexture.call(this, key, '__BASE');
 
         // Not initialized yet
         if (!this.columns) {
           return this;
         }
-        _get(_getPrototypeOf(NinePatch.prototype), "setTexture", this).call(this, key, baseFrameName, columns, rows);
+        _get(_getPrototypeOf(NinePatch.prototype), "setBaseTexture", this).call(this, key, baseFrameName, columns, rows);
         return this;
       }
     }]);

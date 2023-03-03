@@ -1753,13 +1753,20 @@
     return out;
   };
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var GetValue$1E = Phaser.Utils.Objects.GetValue;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+  var UUID$2 = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
     var x = GetValue$1E(config, 'x', undefined);
     var y = GetValue$1E(config, 'y', undefined);
     var width = GetValue$1E(config, 'width', undefined);
@@ -1795,17 +1802,26 @@
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture;
-    // Configurate render texture
-    if (tempRT) {
-      var scene = gameObjects[0].scene;
+    var scene = gameObjects[0].scene;
+
+    // Snapshot on dynamicTexture directly
+    if (saveTexture && !renderTexture) {
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID$2(), width, height);
+    }
+
+    // Return a renderTexture
+    if (!renderTexture) {
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+      renderTexture.setPosition(x, y);
+    }
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
-    renderTexture.setOrigin(originX, originY);
+    if (renderTexture.setOrigin) {
+      renderTexture.setOrigin(originX, originY);
+    }
     renderTexture.camera.setScroll(scrollX, scrollY);
 
     // Draw gameObjects
@@ -1815,11 +1831,22 @@
     // Save render result to texture    
     var saveTexture = config.saveTexture;
     if (saveTexture) {
-      renderTexture.saveTexture(saveTexture);
-    }
-    // Destroy render texture if tempRT and saveTexture
-    if (tempRT && saveTexture) {
-      renderTexture.destroy();
+      if (IsGameObject(renderTexture)) {
+        renderTexture.saveTexture(saveTexture);
+      } else {
+        var dynamicTexture = renderTexture;
+        var textureManager = dynamicTexture.manager;
+        if (textureManager.exists(dynamicTexture.key)) {
+          // Rename texture
+          textureManager.renameTexture(dynamicTexture.key, key);
+        } else {
+          // Add texture to texture manager
+          dynamicTexture.key = key;
+          textureManager.list[key] = dynamicTexture;
+          textureManager.emit('addtexture', key, dynamicTexture);
+          textureManager.emit("addtexture-".concat(key), dynamicTexture);
+        }
+      }
     }
     return renderTexture;
   };
@@ -7032,11 +7059,6 @@
       }
       return false;
     }
-  };
-
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
   };
 
   var IsInTouching = function IsInTouching(pointer, gameObject) {
