@@ -5,8 +5,24 @@ var OnParseSetBackgroundMusicVolumeTag = function (textPlayer, parser, config) {
     parser
         .on(`+${tagName}`, function (volume) {
             AppendCommandBase.call(textPlayer,
-                'bgm.volume',              // name
+                tagName,                   // name
                 SetBackgroundMusicVolume,  // callback
+                volume,                    // params
+                textPlayer,                // scope
+            );
+            parser.skipEvent();
+        })
+        .on(`-${tagName}`, function () {
+            parser.skipEvent();
+        })
+
+
+    var tagName = 'bgm2.volume';
+    parser
+        .on(`+${tagName}`, function (volume) {
+            AppendCommandBase.call(textPlayer,
+                tagName,                   // name
+                SetBackgroundMusicVolume2, // callback
                 volume,                    // params
                 textPlayer,                // scope
             );
@@ -22,4 +38,8 @@ var SetBackgroundMusicVolume = function (volume) {
     this.soundManager.setBackgroundMusicVolume(volume);
 }
 
+var SetBackgroundMusicVolume2 = function (volume) {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusicVolume2(volume);
+}
 export default OnParseSetBackgroundMusicVolumeTag;

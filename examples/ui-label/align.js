@@ -17,19 +17,41 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.rexUI.add.sizer({
-            x: 400, y: 300,
-            width: 500, height: 50,
+            x: 400, y: 100,
+            width: 700, height: 50,
             orientation: 0
         })
             .add(
-                createLabel(this, 'button0'),  // child
-                1,                             // proportion
-                'center'                       // align
+                createLabel(this, 'b0', 'left'),  // child
+                { proportion: 1, expand: true }
             )
             .add(
-                createLabel(this, 'button1'),  // child
-                1,                             // proportion
-                'center'                       // align
+                createLabel(this, 'b1', 'center'),  // child
+                { proportion: 1, expand: true }
+            )
+            .add(
+                createLabel(this, 'b2', 'right'),  // child
+                { proportion: 1, expand: true }
+            )
+            .layout()
+
+        this.rexUI.add.sizer({
+            x: 400, y: 300,
+            width: 300, height: 50,
+            orientation: 1
+        })
+            .setOrigin(0.5, 0)
+            .add(
+                createLabel(this, 'b0', 'left'),  // child
+                { proportion: 1, expand: true }
+            )
+            .add(
+                createLabel(this, 'b1', 'center'),  // child
+                { proportion: 1, expand: true }
+            )
+            .add(
+                createLabel(this, 'b2', 'right'),  // child
+                { proportion: 1, expand: true }
             )
             .layout()
     }
@@ -37,12 +59,12 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text) {
+var createLabel = function (scene, text, align) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, text),
         icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-        align: 'center',
+        align: align,
         space: {
             left: 20,
             right: 20,

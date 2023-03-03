@@ -27,6 +27,10 @@ declare class RoundRectangle extends PathBase {
     width: number;
     height: number;
 
+    setCenterPosition(x: number, y: number): this;
+    centerX: number;
+    centerY: number;
+
     setRadius(radius: number | RoundRectangle.IRadius): this;
     radiusTL: number;
     radiusTR: number;

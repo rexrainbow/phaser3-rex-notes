@@ -48,6 +48,8 @@ export default class Lines extends PathBase {
 
     close(): this;
 
+    end(): this;
+
     rotateAround(
         centerX: number, centerY: number,
         angle: number

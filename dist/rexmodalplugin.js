@@ -337,10 +337,6 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var NOOP = function NOOP() {
-    //  NOOP
-  };
-
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -787,6 +783,15 @@
     return FSM;
   }(FSM$1);
 
+  /*
+  graph TD
+
+  IDLE --> |"requestOpen()"| TRANS_OPNE["TRAN_OPEN<br>runTransitionInCallback()"]
+  TRANS_OPNE --> |transitInTime| OPEN
+  OPEN --> |"requestClose()"| TRANS_CLOSE["TRANS_CLOSE<br>runTransitionOutCallback()"]
+  TRANS_CLOSE --> |transitOutTime| CLOSE
+  CLOSE --> |"requestOpen()"| TRANS_OPNE
+  */
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
     var _super = _createSuper(State);
@@ -795,7 +800,8 @@
       _classCallCheck(this, State);
       _this = _super.call(this, config);
       _this.parent = parent;
-      _this.init();
+      var initState = config.initState || 'IDLE';
+      _this.start(initState);
       return _this;
     }
     _createClass(State, [{
@@ -822,8 +828,12 @@
       key: "enter_TRANS_OPNE",
       value: function enter_TRANS_OPNE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionIn();
-        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
+        if (transitionBehavior.transitInTime > 0) {
+          var delay = transitionBehavior.runTransitionInCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
       }
     }, {
       key: "exit_TRANS_OPNE",
@@ -833,7 +843,7 @@
       }
       // TRANS_OPNE
 
-      // OPEN -> TRANS_CLOSE    
+      // OPEN -> TRANS_CLOSE
     }, {
       key: "next_OPEN",
       value: function next_OPEN() {
@@ -863,8 +873,12 @@
       key: "enter_TRANS_CLOSE",
       value: function enter_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
-        transitionBehavior.transitionOut();
-        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
+        if (transitionBehavior.transitOutTime > 0) {
+          var delay = transitionBehavior.runTransitionOutCallback();
+          transitionBehavior.delayCall(delay, this.next, this);
+        } else {
+          this.next();
+        }
       }
     }, {
       key: "exit_TRANS_CLOSE",
@@ -874,10 +888,12 @@
       }
       // TRANS_CLOSE
 
-      // CLOSE
+      // CLOSE -> TRANS_OPNE
     }, {
       key: "next_CLOSE",
-      value: function next_CLOSE() {}
+      value: function next_CLOSE() {
+        return 'TRANS_OPNE';
+      }
     }, {
       key: "enter_CLOSE",
       value: function enter_CLOSE() {
@@ -888,6 +904,16 @@
       key: "exit_CLOSE",
       value: function exit_CLOSE() {}
       // CLOSE
+    }, {
+      key: "canOpen",
+      value: function canOpen() {
+        return this.state === 'IDLE' || this.state === 'CLOSE';
+      }
+    }, {
+      key: "canClose",
+      value: function canClose() {
+        return this.state === 'IDLE' || this.state === 'OPEN';
+      }
     }]);
     return State;
   }(FSM);
@@ -914,13 +940,114 @@
     return timer;
   };
 
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.delayCallTimer) {
+        this.delayCallTimer.remove(false);
+        this.delayCallTimer = undefined;
+      }
+      return this;
+    }
+  };
+
+  var NOOP = function NOOP() {
+    //  NOOP
+  };
+
+  var ConfigurationMethods = {
+    setTransitInTime: function setTransitInTime(time) {
+      this.transitInTime = time;
+      return this;
+    },
+    setTransitOutTime: function setTransitOutTime(time) {
+      this.transitOutTime = time;
+      return this;
+    },
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitInCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    },
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitOutCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    }
+  };
+
+  var OpenMethods = {
+    // Override
+    runTransitionInCallback: function runTransitionInCallback() {
+      this.transitInCallback(this.parent, this.transitInTime);
+      return this.transitInTime;
+    },
+    // Override
+    onOpen: function onOpen() {},
+    requestOpen: function requestOpen(openEventData, duration) {
+      if (!this._state.canOpen()) {
+        return this;
+      }
+      this.openEventData = arguments.length > 0 ? openEventData : this.parent;
+      var transitionTimeSave = this.transitInTime;
+      if (duration !== undefined) {
+        this.transitInTime = duration;
+      }
+      this._state["goto"]('TRANS_OPNE');
+      this.transitInTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var CloseMethods = {
+    // Override
+    runTransitionOutCallback: function runTransitionOutCallback() {
+      this.transitOutCallback(this.parent, this.transitOutTime);
+      return this.transitOutTime;
+    },
+    // Override
+    onClose: function onClose() {
+      // Destroy parent and this behavior
+      if (this.oneShotMode) {
+        this.parent.destroy();
+        // Will invoke `this.destroy()`
+      }
+    },
+    requestClose: function requestClose(closeEventData, duration) {
+      if (!this._state.canClose) {
+        return this;
+      }
+      this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
+      var transitionTimeSave = this.transitOutTime;
+      if (duration !== undefined) {
+        this.transitOutTime = duration;
+      }
+      this._state["goto"]('TRANS_CLOSE');
+      this.transitOutTime = transitionTimeSave;
+      return this;
+    }
+  };
+
+  var methods = {};
+  Object.assign(methods, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
+
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var Transition = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Transition, _ComponentBase);
-    var _super = _createSuper(Transition);
-    function Transition(gameObject, config) {
+  var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(OpenCloseTransition, _ComponentBase);
+    var _super = _createSuper(OpenCloseTransition);
+    function OpenCloseTransition(gameObject, config) {
       var _this;
-      _classCallCheck(this, Transition);
+      _classCallCheck(this, OpenCloseTransition);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -929,20 +1056,17 @@
       _this.setTransitOutTime(GetValue$9(config, 'duration.out', 200));
       _this.setTransitInCallback(GetValue$9(config, 'transitIn'));
       _this.setTransitOutCallback(GetValue$9(config, 'transitOut'));
-      _this.destroyParent = GetValue$9(config, 'destroy', true);
+      _this.oneShotMode = GetValue$9(config, 'destroy', false);
       _this.delayCallTimer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
-        eventEmitter: false
+        eventEmitter: false,
+        initState: GetValue$9(config, 'initState', 'IDLE')
       });
+      _this.openEventData = undefined;
       _this.closeEventData = undefined;
       return _this;
     }
-    _createClass(Transition, [{
-      key: "start",
-      value: function start() {
-        this._state.next();
-      }
-    }, {
+    _createClass(OpenCloseTransition, [{
       key: "state",
       get: function get() {
         return this._state.state;
@@ -956,99 +1080,15 @@
         }
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
+        this.openEventData = undefined;
         this.closeEventData = undefined;
         this.removeDelayCall();
-        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        var duration = this.transitInTime;
-        this.transitInCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        var duration = this.transitOutTime;
-        this.transitOutCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "onOpen",
-      value: function onOpen() {}
-    }, {
-      key: "onClose",
-      value: function onClose() {
-        if (this.destroyParent) {
-          this.parent.destroy();
-          // Will invoke `this.destroy()`
-        } else {
-          this.destroy();
-        }
-      }
-    }, {
-      key: "delayCall",
-      value: function delayCall(delay, callback, scope) {
-        // Invoke callback under scene's 'postupdate' event
-        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
-        return this;
-      }
-    }, {
-      key: "removeDelayCall",
-      value: function removeDelayCall() {
-        if (this.delayCallTimer) {
-          this.delayCallTimer.remove(false);
-          this.delayCallTimer = undefined;
-        }
-        return this;
-      }
-    }, {
-      key: "setTransitInTime",
-      value: function setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitOutTime",
-      value: function setTransitOutTime(time) {
-        this.transitOutTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInCallback",
-      value: function setTransitInCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitInCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setTransitOutCallback",
-      value: function setTransitOutCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitOutCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "requestClose",
-      value: function requestClose(closeEventData) {
-        // Only can close modal in OPEN state
-        if (this._state.state === 'OPEN') {
-          this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
-          this._state.next(); // OPEN -> TRANS_CLOSE 
-        }
-
-        return this;
+        _get(_getPrototypeOf(OpenCloseTransition.prototype), "shutdown", this).call(this, fromScene);
       }
     }]);
-    return Transition;
+    return OpenCloseTransition;
   }(ComponentBase);
+  Object.assign(OpenCloseTransition.prototype, methods);
 
   var Rectangle$1 = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
@@ -1247,6 +1287,13 @@
     // Put cover behind game object
     if (gameObject.isRexContainerLite) {
       gameObject.moveDepthBelow(cover);
+      gameObject.pin(cover, {
+        syncPosition: false,
+        syncRotation: false,
+        syncScale: false,
+        syncAlpha: false,
+        syncScrollFactor: false
+      });
     } else {
       scene.children.moveBelow(cover, gameObject);
     }
@@ -1681,8 +1728,8 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
-    _inherits(EaseValueTaskBase, _TickTask);
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
     var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
@@ -2160,12 +2207,27 @@
   };
 
   var DefaultTransitCallbacks = {
-    popUp: PopUp,
+    popUp: function popUp(gameObject, duration) {
+      if (gameObject._modalScaleSave !== undefined) {
+        gameObject.scaleX = gameObject._modalScaleSave;
+        gameObject.scaleY = gameObject._modalScaleSave;
+      } else {
+        gameObject._modalScaleSave = gameObject.scaleX;
+      }
+      PopUp(gameObject, duration);
+    },
     scaleDown: function scaleDown(gameObject, duration) {
       // Don't destroy here
       ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
     },
-    fadeIn: FadeIn,
+    fadeIn: function fadeIn(gameObject, duration) {
+      if (gameObject._modalAlphaSave !== undefined) {
+        gameObject.alpha = gameObject._modalAlphaSave;
+      } else {
+        gameObject._modalAlphaSave = gameObject.alpha;
+      }
+      FadeIn(gameObject, duration);
+    },
     fadeOut: function fadeOut(gameObject, duration) {
       // Don't destroy here
       FadeOutDestroy(gameObject, duration, false);
@@ -2173,6 +2235,11 @@
   };
 
   var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
+    if (cover._modalAlphaSave !== undefined) {
+      cover.alpha = cover._modalAlphaSave;
+    } else {
+      cover._modalAlphaSave = cover.alpha;
+    }
     FadeIn(cover, duration, cover.alpha);
   };
   var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
@@ -2336,7 +2403,7 @@
 
   var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
     // Can't get bounds
-    if (!gameObject || !gameObject.getBounds) {
+    if (!gameObject) {
       return false;
     }
     if (preTest && !preTest(gameObject, x, y)) {
@@ -2353,8 +2420,8 @@
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Modal$1 = /*#__PURE__*/function (_Transition) {
-    _inherits(Modal, _Transition);
+  var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
+    _inherits(Modal, _OpenCloseTransition);
     var _super = _createSuper(Modal);
     function Modal(gameObject, config) {
       var _this;
@@ -2368,6 +2435,7 @@
       if (config.transitOut == null) {
         config.transitOut = TransitionMode.scaleDown;
       }
+      config.destroy = GetValue(config, 'destroy', true);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -2406,7 +2474,7 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.start();
+      _this.requestOpen();
       return _this;
     }
     _createClass(Modal, [{
@@ -2457,26 +2525,24 @@
         this.requestClose();
       }
     }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionIn", this).call(this);
-        var duration = this.transitInTime;
+      key: "runTransitionInCallback",
+      value: function runTransitionInCallback() {
+        var duration = _get(_getPrototypeOf(Modal.prototype), "runTransitionInCallback", this).call(this);
         var cover = this.cover;
         if (cover && this.coverTransitInCallback) {
           this.coverTransitInCallback(cover, duration);
         }
-        return this;
+        return duration;
       }
     }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        _get(_getPrototypeOf(Modal.prototype), "transitionOut", this).call(this);
-        var duration = this.transitOutTime;
+      key: "runTransitionOutCallback",
+      value: function runTransitionOutCallback() {
+        var duration = _get(_getPrototypeOf(Modal.prototype), "runTransitionOutCallback", this).call(this);
         var cover = this.cover;
         if (cover && this.coverTransitOutCallback) {
           this.coverTransitOutCallback(cover, duration);
         }
-        return this;
+        return duration;
       }
     }, {
       key: "onOpen",
@@ -2554,7 +2620,7 @@
       }
     }]);
     return Modal;
-  }(Transition);
+  }(OpenCloseTransition);
   var TransitionMode = {
     popUp: 0,
     fadeIn: 1,
@@ -2575,9 +2641,12 @@
 
     // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
     gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    modalBehavior.on('close', function () {
-      gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    });
+    /*
+    It is not necessary to turn off gameObject's 'modal.requestClose' event because that :
+      - If `config.destroy` is `undefined` (or `true), gameObject and modalBehavior will be destroyed
+    - If `config.destroy` is `false` (for reusing dialog), keeping gameObject and modalBehavior 
+    */
+
     return modalBehavior;
   };
   var ModalPromise = function ModalPromise(gameObject, config) {

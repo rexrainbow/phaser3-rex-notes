@@ -114,11 +114,14 @@ var checkbox = scene.add.rexCheckbox({
     checkerColor: 0xffffff,
     checkerAlpha: 1,
 
+    // boxSize: 1,
+    // checkerSize: 1,
+
     circleBox: false,
 
     animationDuration: 150,
 
-    checked: false,
+    checked: false, // or value: false,
 
     click: undefined,
     // click: {
@@ -133,7 +136,7 @@ var checkbox = scene.add.rexCheckbox({
 - `width`, `height` : Size of checkbox.
 - Box fill style
     - `color`, `boxFillAlpha` : Box color and alpha of checked        
-    - `uncheckedColor`, `uncheckedBoxFillAlpha` : : Box color and alpha of unchecked
+    - `uncheckedColor`, `uncheckedBoxFillAlpha` : Box color and alpha of unchecked
 - Box stroke style
     - `boxLineWidth`, `boxStrokeColor`, `boxStrokeAlpha` : Box stroke color and alpha of checked.
     - `uncheckedBoxStrokeColor`, `uncheckedBoxStrokeAlpha` : Box stroke color and alpha of unchecked.
@@ -142,6 +145,7 @@ var checkbox = scene.add.rexCheckbox({
 - `circleBox` : Shape of box
     - `false` : Rectangle shape box. Default behavior.
     - `true` : Circle shape box    
+- `boxSize`, `checkerSize` : Size ratio of box, and checker. Default value is `1`.
 - `animationDuration` : Duration of drawing path of checker.
 - `checked` : Initial value of checked.
 - `click` : Configuration of [click input](button.md#create-instance)
@@ -340,6 +344,20 @@ var checkbox = scene.add.rexCheckbox({
     ```javascript
     checkbox.displayWidth = width;
     checkbox.displayHeight = height;
+    ```
+
+### Size ratio
+
+- Get
+    ```javascript
+    var boxSize = checkbox.boxSize;
+    var checkerSize =checkbox.checkerSize;
+    ```
+    - `boxSize`, `checkerSize` : Size ratio of box, and checker
+- Set
+    ```javascript
+    checkbox.setBoxSize(sizeRatio);
+    checkbox.setCheckerSize(sizeRatio);
     ```
 
 ### Events

@@ -35,11 +35,11 @@ class TransitionImage extends Container {
         var height = GetValue(config, 'height', frontImage.height);
 
         super(scene, x, y, width, height);
+        this.type = 'rexTransitionImage';
 
         backImage.setVisible(false);
         this.addMultiple([backImage, frontImage])
 
-        this.type = 'rexTransitionImage';
         this.backImage = backImage;
         this.frontImage = frontImage;
         this.maskGameObject = undefined;

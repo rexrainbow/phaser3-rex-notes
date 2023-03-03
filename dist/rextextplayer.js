@@ -884,8 +884,8 @@
   var GetValue$m = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
-    _inherits(EaseValueTaskBase, _TickTask);
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
     var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
@@ -1284,7 +1284,102 @@
     }
   };
 
-  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var BackgroundMusic2Methods = {
+    setBackgroundMusic2LoopValue: function setBackgroundMusic2LoopValue(value) {
+      this.backgroundMusic2LoopValue = value;
+      return this;
+    },
+    setBackgroundMusic2FadeTime: function setBackgroundMusic2FadeTime(time) {
+      this.backgroundMusic2FadeTime = time;
+      return this;
+    },
+    getBackgroundMusic2: function getBackgroundMusic2() {
+      return this.backgroundMusic2;
+    },
+    // Internal method
+    setCurrentBackgroundMusic2: function setCurrentBackgroundMusic2(music) {
+      this.backgroundMusic2 = music;
+      if (music) {
+        music.setLoop(this.backgroundMusic2LoopValue);
+        music.once('complete', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2.destroy();
+            this.backgroundMusic2 = undefined;
+          }
+        }, this).once('destroy', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2 = undefined;
+          }
+        }, this);
+        if (!music.isPlaying) {
+          music.play();
+        }
+      }
+      return this;
+    },
+    playBackgroundMusic2: function playBackgroundMusic2(key) {
+      // Don't re-play the same background music
+      if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
+        return this;
+      }
+      this.stopBackgroundMusic2(); // Stop previous background music
+
+      this.setCurrentBackgroundMusic2(this.sound.add(key));
+      if (this.backgroundMusic2FadeTime > 0) {
+        this.fadeInBackgroundMusic2(this.backgroundMusic2FadeTime);
+      }
+      return this;
+    },
+    pauseBackgroundMusic2: function pauseBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.pause();
+      }
+      return this;
+    },
+    resumeBackgroundMusic2: function resumeBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.resume();
+      }
+      return this;
+    },
+    stopBackgroundMusic2: function stopBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        if (this.backgroundMusic2FadeTime > 0) {
+          this.fadeOutBackgroundMusic2(this.backgroundMusic2FadeTime, true);
+        } else {
+          this.backgroundMusic2.stop();
+          this.backgroundMusic2.destroy();
+          this.backgroundMusic2 = undefined;
+        }
+      }
+      return this;
+    },
+    fadeInBackgroundMusic2: function fadeInBackgroundMusic2(time) {
+      if (this.backgroundMusic2) {
+        FadeIn(this.backgroundMusic2, time, this.backgroundMusic2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutBackgroundMusic2: function fadeOutBackgroundMusic2(time, isStopped) {
+      if (this.backgroundMusic2) {
+        FadeOut(this.backgroundMusic2, time, isStopped);
+      }
+      return this;
+    },
+    crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
+      var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
+      this.backgroundMusic2FadeTime = 0;
+      this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
+      this.backgroundMusic2FadeTime = backgroundMusic2FadeTimeSave;
+      return this;
+    },
+    setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
+      this.backgroundMusic2Volume = volume;
+      return this;
+    }
+  };
+
+  var RemoveItem$4 = Phaser.Utils.Array.Remove;
   var SoundEffectsMethods = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
@@ -1303,13 +1398,13 @@
         if (!this.sound) {
           return;
         }
-        RemoveItem$3(this.soundEffects, soundEffect);
+        RemoveItem$4(this.soundEffects, soundEffect);
       }, this).once('destroy', function () {
         // SoundManager has been destroyed
         if (!this.sound) {
           return;
         }
-        RemoveItem$3(this.soundEffects, soundEffect);
+        RemoveItem$4(this.soundEffects, soundEffect);
       }, this).play();
       return this;
     },
@@ -1351,6 +1446,76 @@
     }
   };
 
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var SoundEffects2Methods = {
+    getSoundEffects2: function getSoundEffects2() {
+      return this.soundEffects2;
+    },
+    getLastSoundEffect2: function getLastSoundEffect2() {
+      return this.soundEffects2[this.soundEffects2.length - 1];
+    },
+    playSoundEffect2: function playSoundEffect2(key) {
+      var soundEffect = this.sound.add(key);
+      soundEffect.setVolume(this.soundEffects2Volume);
+      this.soundEffects2.push(soundEffect);
+      soundEffect.once('complete', function () {
+        soundEffect.destroy();
+
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$3(this.soundEffects2, soundEffect);
+      }, this).once('destroy', function () {
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$3(this.soundEffects2, soundEffect);
+      }, this).play();
+      return this;
+    },
+    fadeInSoundEffect2: function fadeInSoundEffect2(time) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeIn(soundEffect, time, this.soundEffects2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutSoundEffect2: function fadeOutSoundEffect2(time, isStopped) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeOut(soundEffect, time, isStopped);
+      }
+      return this;
+    },
+    fadeOutAllSoundEffects2: function fadeOutAllSoundEffects2(time, isStopped) {
+      for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+        FadeOut(this.soundEffects2[i], time, isStopped);
+      }
+      return this;
+    },
+    setSoundEffect2Volume: function setSoundEffect2Volume(volume, lastSoundEffect) {
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setVolume(volume);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Volume = volume;
+      }
+      return this;
+    }
+  };
+
+  var Methods$6 = {};
+  Object.assign(Methods$6, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+
   var GetValue$k = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(game, config) {
@@ -1360,30 +1525,50 @@
       // Background music will be (fade out)destroyed when play next one.
       this.backgroundMusic = undefined;
       this._backgroundMusicVolume = GetValue$k(config, 'bgm.volume', 1);
+      this.setBackgroundMusicLoopValue(GetValue$k(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$k(config, 'bgm.fade', 500));
+      this.backgroundMusic2 = undefined;
+      this._backgroundMusic2Volume = GetValue$k(config, 'bgm2.volume', 1);
+      this.setBackgroundMusic2LoopValue(GetValue$k(config, 'bgm2.loop', true));
+      this.setBackgroundMusic2FadeTime(GetValue$k(config, 'bgm2.fade', 500));
 
       // Sound effect will be destroyed when completed
       this.soundEffects = [];
       this._soundEffectsVolume = GetValue$k(config, 'soundEffect.volume', 1);
-      this.setBackgroundMusicLoopValue(GetValue$k(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$k(config, 'bgm.fade', 500));
+      this.soundEffects2 = [];
+      this._soundEffects2Volume = GetValue$k(config, 'soundEffect2.volume', 1);
       var initialBackgroundMusic = GetValue$k(config, 'bgm.initial', undefined);
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
+      }
+      var initialBackgroundMusic2 = GetValue$k(config, 'bgm2.initial', undefined);
+      if (initialBackgroundMusic2) {
+        this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
       }
     }
     _createClass(SoundManager, [{
       key: "destroy",
       value: function destroy() {
+        if (this.backgroundMusic) {
+          this.backgroundMusic.destroy();
+        }
+        this.backgroundMusic = undefined;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.destroy();
+        }
+        this.backgroundMusic2 = undefined;
         if (this.soundEffects.length) {
           for (var i = this.soundEffects.length - 1; i >= 0; i--) {
             this.soundEffects[i].destroy();
           }
         }
         this.soundEffects.length = 0;
-        if (this.backgroundMusic) {
-          this.backgroundMusic.destroy();
+        if (this.soundEffects2.length) {
+          for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+            this.soundEffects2[i].destroy();
+          }
         }
-        this.backgroundMusic = undefined;
+        this.soundEffects2.length = 0;
         this.sound = undefined;
         return this;
       }
@@ -1396,6 +1581,17 @@
         this._backgroundMusicVolume = value;
         if (this.backgroundMusic) {
           this.backgroundMusic.setVolume(value);
+        }
+      }
+    }, {
+      key: "backgroundMusic2Volume",
+      get: function get() {
+        return this._backgroundMusic2Volume;
+      },
+      set: function set(value) {
+        this._backgroundMusic2Volume = value;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.setVolume(value);
         }
       }
     }, {
@@ -1413,7 +1609,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, BackgroundMusicMethods, SoundEffectsMethods);
+  Object.assign(SoundManager.prototype, Methods$6);
 
   var GetValue$j = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -1813,6 +2009,9 @@
       value: function update(time, delta) {
         var _this$timers;
         _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
+        if (!this.isRunning) {
+          return;
+        }
         (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
         this.addedTimers.length = 0;
         var pendingTimers = [];
@@ -1845,6 +2044,34 @@
     this.timeline = new Timeline(this);
     this.managersScene = scene;
     return this;
+  };
+
+  var SetTimeScale = function SetTimeScale(value) {
+    this.timeline.timeScale = value;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].setTimeScale(value);
+    }
+    return this;
+  };
+
+  var GetTimeScale = function GetTimeScale() {
+    return this.timeline.timeScale;
+  };
+
+  var DestroyManagers = function DestroyManagers(fromScene) {
+    if (this.soundManager) {
+      this.soundManager.destroy();
+    }
+    this.soundManager = undefined;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].destroy(fromScene);
+      delete this.gameObjectManagers[name];
+    }
+    if (this.timeline) {
+      this.timeline.destroy();
+    }
+    this.timeline = undefined;
+    this.managersScene = undefined;
   };
 
   var PropertyMethods$1 = {
@@ -2242,28 +2469,46 @@
     return viewport;
   };
 
-  var VPXYToXY = function VPXYToXY(vpx, vpy, viewport, out) {
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = GlobXY;
     }
-    out.x = viewport.x + viewport.width * vpx;
-    out.y = viewport.y + viewport.height * vpy;
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
     return out;
   };
   var GlobXY = {};
 
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
       return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
     }
     if (vpx === undefined) {
       vpx = 0.5;
     }
     if (vpy === undefined) {
       vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
     }
     if (transformCallback === undefined) {
       transformCallback = VPXYToXY;
@@ -2274,7 +2519,7 @@
 
     // Set position of game object when view-port changed.
     var Transform = function Transform() {
-      transformCallback(vpx, vpy, viewport, gameObject);
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
     };
     events.on('update', Transform);
     gameObject.once('destroy', function () {
@@ -2303,12 +2548,37 @@
         }
       }
     });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
+          Transform();
+        }
+      }
+    });
     Transform();
   };
 
   var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var AddMethods = {
     has: function has(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    exists: function exists(name) {
       return this.bobs.hasOwnProperty(name);
     },
     get: function get(name) {
@@ -2626,31 +2896,77 @@
   };
 
   var GetValue$g = Phaser.Utils.Objects.GetValue;
-  var DrawBounds = function DrawBounds(gameObject, graphics, config) {
+  var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
+    var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+    if (typeof config === 'number') {
+      strokeColor = config;
+    } else {
+      strokeColor = GetValue$g(config, 'color');
+      lineWidth = GetValue$g(config, 'lineWidth');
+      fillColor = GetValue$g(config, 'fillColor');
+      fillAlpha = GetValue$g(config, 'fillAlpha', 1);
+      padding = GetValue$g(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+      }
+    } else {
+      Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
     if (!canDrawBound) {
       return;
     }
-    var color, lineWidth;
-    if (typeof config === 'number') {
-      color = config;
-    } else {
-      color = GetValue$g(config, 'color');
-      lineWidth = GetValue$g(config, 'lineWidth');
-    }
-    if (color === undefined) {
-      color = 0xffffff;
+    if (strokeColor === undefined) {
+      strokeColor = 0xffffff;
     }
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
-    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+    if (fillColor === undefined) {
+      fillColor = null;
+    }
+    if (fillAlpha === undefined) {
+      fillAlpha = 1;
+    }
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
+    if (fillColor !== null) {
+      graphics.fillStyle(fillColor, fillAlpha).fillPoints(Points, true, true);
+    }
+    if (strokeColor !== null) {
+      graphics.lineStyle(lineWidth, strokeColor).strokePoints(Points, true, true);
+    }
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
     this.forEachGO(function (gameObject) {
@@ -2812,63 +3128,21 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods$5);
 
-  var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
-    if (config === undefined) {
-      config = {};
-    }
-    if (GameObjectManagerClass === undefined) {
-      GameObjectManagerClass = GOManager;
-    }
-    if (!config.createGameObjectScope) {
-      config.createGameObjectScope = this;
-    }
-    var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-    this.gameObjectManagers[config.name] = gameobjectManager;
-    return this;
-  };
-
-  var GetGameObjectManager = function GetGameObjectManager(name) {
-    return this.gameObjectManagers[name];
-  };
-
-  var GetGameObjectManagerNames = function GetGameObjectManagerNames() {
-    var names = [];
-    for (var name in this.gameObjectManagers) {
-      names.push(name);
-    }
-    return names;
-  };
-
-  var SetTimeScale = function SetTimeScale(value) {
-    this.timeline.timeScale = value;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].setTimeScale(value);
-    }
-    return this;
-  };
-
-  var GetTimeScale = function GetTimeScale() {
-    return this.timeline.timeScale;
-  };
-
-  var DestroyManagers = function DestroyManagers(fromScene) {
-    if (this.soundManager) {
-      this.soundManager.destroy();
-    }
-    this.soundManager = undefined;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].destroy(fromScene);
-      delete this.gameObjectManagers[name];
-    }
-    if (this.timeline) {
-      this.timeline.destroy();
-    }
-    this.timeline = undefined;
-    this.managersScene = undefined;
-  };
-
   var GameObjectManagerMethods$1 = {
-    addGameObjectManager: AddGameObjectManager,
+    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (config === undefined) {
+        config = {};
+      }
+      if (GameObjectManagerClass === undefined) {
+        GameObjectManagerClass = GOManager;
+      }
+      if (!config.createGameObjectScope) {
+        config.createGameObjectScope = this;
+      }
+      var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
+      this.gameObjectManagers[config.name] = gameobjectManager;
+      return this;
+    },
     getGameObjectManager: function getGameObjectManager(name) {
       return this.gameObjectManagers[name];
     },
@@ -2976,9 +3250,6 @@
     }(BaseClass);
     var Methods = {
       initManagers: InitManagers,
-      addGameObjectManager: AddGameObjectManager,
-      getGameObjectManager: GetGameObjectManager,
-      getGameObjectManagerNames: GetGameObjectManagerNames,
       setTimeScale: SetTimeScale,
       getTimeScale: GetTimeScale,
       destroyManagers: DestroyManagers
@@ -3042,51 +3313,42 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
-    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
         return this;
       }
-      if (x === undefined) {
-        x = 0;
+      var frameWidth = textureFrame.cutWidth,
+        frameHeight = textureFrame.cutHeight;
+      if (dx === undefined) {
+        dx = 0;
       }
-      if (y === undefined) {
-        y = 0;
+      if (dy === undefined) {
+        dy = 0;
       }
-      if (width === undefined) {
-        width = textureFrame.cutWidth;
+      if (dWidth === undefined) {
+        dWidth = frameWidth;
       }
-      if (height === undefined) {
-        height = textureFrame.cutHeight;
+      if (dHeight === undefined) {
+        dHeight = frameHeight;
       }
-      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      if (sxOffset === undefined) {
+        sxOffset = 0;
+      }
+      if (syOffset === undefined) {
+        syOffset = 0;
+      }
+      if (sWidth === undefined) {
+        sWidth = frameWidth;
+      }
+      if (sHeight === undefined) {
+        sHeight = frameHeight;
+      }
+      var sx = textureFrame.cutX + sxOffset;
+      var sy = textureFrame.cutY + syOffset;
+      this.context.drawImage(textureFrame.source.image,
+      // image
+      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.dirty = true;
       return this;
     },
@@ -3171,7 +3433,7 @@
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-      if (this.renderer.gl) {
+      if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
@@ -3683,8 +3945,75 @@
   };
   var globBounds;
 
+  var RotateAround = Phaser.Math.RotateAround;
+  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+      out = globPoint;
+    }
+    out.x = bobX;
+    out.y = bobY;
+    if (bob.rotation !== 0) {
+      RotateAround(out, 0, 0, bob.rotation);
+    }
+    out.x = out.x * bob.scaleX + bob.drawX;
+    out.y = out.y * bob.scaleY + bob.drawY;
+    return out;
+  };
+  var globPoint;
+
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var GameObjectLocalXYToWorldXY = function GameObjectLocalXYToWorldXY(gameObject, localX, localY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+    var px = localX - gameObject.width * gameObject.originX;
+    var py = localY - gameObject.height * gameObject.originY;
+    if (tempMatrix === undefined) {
+      tempMatrix = new TransformMatrix();
+      parentMatrix = new TransformMatrix();
+    }
+    if (gameObject.parentContainer) {
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+    } else {
+      tempMatrix.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+    }
+    tempMatrix.transformPoint(px, py, out);
+    return out;
+  };
+  var tempMatrix, parentMatrix;
+  var globOut = {};
+
+  var BobPositionToWorldPosition = function BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out) {
+    var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
+    var worldXY = GameObjectLocalXYToWorldXY(dynamicText, localXY.x, localXY.y, out);
+    return worldXY;
+  };
+
+  var GetBobWorldPosition = function GetBobWorldPosition(dynamicText, bob, offsetX, offsetY, out) {
+    if (typeof offsetX !== 'number') {
+      out = offsetX;
+      offsetX = 0;
+      offsetY = 0;
+    }
+    var bobX = bob.drawCenterX + offsetX;
+    var bobY = bob.drawCenterY + offsetY;
+    return BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out);
+  };
+
+  var GetWorldPosition = function GetWorldPosition(offsetX, offsetY, out) {
+    return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
+  };
+
   var Methods$4 = {
-    contains: Contains
+    contains: Contains,
+    getWorldPosition: GetWorldPosition
   };
   Object.assign(Methods$4, RenderMethods);
 
@@ -4288,18 +4617,18 @@
   }();
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-      return {
+      radius = {
         x: defaultRadiusX,
         y: defaultRadiusY
       };
     } else if (typeof radius === 'number') {
-      return {
+      radius = {
         x: radius,
         y: radius
       };
-    } else {
-      return radius;
     }
+    SetConvex(radius);
+    return radius;
   };
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
@@ -4309,13 +4638,15 @@
       radius.x = GetValue$b(value, 'x', 0);
       radius.y = GetValue$b(value, 'y', 0);
     }
+    SetConvex(radius);
+  };
+  var SetConvex = function SetConvex(radius) {
+    radius.convex = radius.x >= 0 || radius.y >= 0;
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
   };
 
   var DegToRad$1 = Phaser.Math.DegToRad;
-  var Rad0 = DegToRad$1(0);
-  var Rad90 = DegToRad$1(90);
-  var Rad180 = DegToRad$1(180);
-  var Rad270 = DegToRad$1(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -4328,68 +4659,100 @@
     context.beginPath();
     context.translate(x, y);
 
-    // Bottom-right
-    radius = cornerRadius.br;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = height - radiusY;
-    context.moveTo(width, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
-    } else {
-      context.lineTo(width, height);
-      context.lineTo(centerX, height);
-    }
-
-    // Bottom-left
-    radius = cornerRadius.bl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = height - radiusY;
-    context.lineTo(radiusX, height);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
-    } else {
-      context.lineTo(0, height);
-      context.lineTo(0, centerY);
-    }
-
     // Top-left
     radius = cornerRadius.tl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = radiusY;
-    context.lineTo(0, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
+      }
     } else {
       context.lineTo(0, 0);
-      context.lineTo(centerX, 0);
     }
 
     // Top-right
     radius = cornerRadius.tr;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = radiusY;
-    context.lineTo(centerX, 0);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
+      } else {
+        centerX = width;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 90, true, iteration);
+      }
     } else {
       context.lineTo(width, 0);
-      context.lineTo(width, centerY);
+    }
+
+    // Bottom-right
+    radius = cornerRadius.br;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
+      } else {
+        centerX = width;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 180, true, iteration);
+      }
+    } else {
+      context.lineTo(width, height);
+    }
+
+    // Bottom-left
+    radius = cornerRadius.bl;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 360, 270, true, iteration);
+      }
+    } else {
+      context.lineTo(0, height);
     }
     context.closePath();
     context.restore();
   };
-  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+  var IsConvexArc = function IsConvexArc(radius) {
+    return !radius.hasOwnProperty('convex') ||
+    // radius does not have convex property
+    radius.convex;
+  };
+  var IsArcCorner = function IsArcCorner(radius) {
+    return radius.x > 0 && radius.y > 0;
+  };
+  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration) {
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && endAngle > startAngle) {
+      endAngle -= 360;
+    } else if (!antiClockWise && endAngle < startAngle) {
+      endAngle += 360;
+    }
+    startAngle = DegToRad$1(startAngle);
+    endAngle = DegToRad$1(endAngle);
     if (iteration == null) {
       // undefined, or null
-      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
     } else {
       iteration += 1;
       var x, y, angle;
@@ -4437,8 +4800,8 @@
       strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth); // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
@@ -5210,6 +5573,9 @@
   var IsNewLineChar = function IsNewLineChar(bob) {
     return bob.type === CharTypeName && bob.text === '\n';
   };
+  var IsPageBreakChar = function IsPageBreakChar(bob) {
+    return bob.type === CharTypeName && bob.text === '\f';
+  };
   var IsSpaceChar = function IsSpaceChar(bob) {
     return bob.type === CharTypeName && bob.text === ' ';
   };
@@ -5320,7 +5686,9 @@
     }, {
       key: "updateTextSize",
       value: function updateTextSize() {
-        if (this.text === '\n' || this.text === '') {
+        var text = this.text;
+        // Is new-line, page-break, or empty character
+        if (text === '\n' || text === '\f' || text === '') {
           this.textWidth = 0;
           this.textHeight = 0;
           this.ascent = 0;
@@ -5370,7 +5738,8 @@
     }, {
       key: "willRender",
       get: function get() {
-        if (this.text === '\n') {
+        var text = this.text;
+        if (text === '\n' || text === '\f') {
           return false;
         }
         return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
@@ -5951,6 +6320,49 @@
     return this;
   };
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * This is a slightly modified version of jQuery.isPlainObject.
+   * A plain object is an object whose internal class property is [object Object].
+   *
+   * @function Phaser.Utils.Objects.IsPlainObject
+   * @since 3.0.0
+   *
+   * @param {object} obj - The object to inspect.
+   *
+   * @return {boolean} `true` if the object is plain, otherwise `false`.
+   */
+  var IsPlainObject$2 = function IsPlainObject(obj) {
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
+      return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try {
+      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+  };
+
   var DeepClone = function DeepClone(inObject) {
     var outObject;
     var value;
@@ -5962,11 +6374,15 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    for (key in inObject) {
-      value = inObject[key];
+    if (IsPlainObject$2(inObject)) {
+      for (key in inObject) {
+        value = inObject[key];
 
-      //  Recursively (deep) copy for nested objects, including arrays
-      outObject[key] = DeepClone(value);
+        //  Recursively (deep) copy for nested objects, including arrays
+        outObject[key] = DeepClone(value);
+      }
+    } else {
+      outObject = inObject;
     }
     return outObject;
   };
@@ -6001,13 +6417,14 @@
         currentIndex++;
         continue;
       }
-      if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
+      var text = child.type === CharTypeName ? child.text : null;
+      if (text !== null && text !== ' ' && text !== '\n' && text !== '\f') {
         word.push(child);
         wordWidth += child.outerWidth;
         currentIndex++;
         // Continue
       } else {
-        // Get image child, a space, or a new-line
+        // Get image child, a space, a new-line, or page-break
         if (currentIndex === startIndex) {
           // Single child
           word.push(child);
@@ -6229,9 +6646,11 @@
       childIndex += charCnt;
       // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-      if (remainderWidth < wordWidth || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(word[0]);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderWidth < wordWidth || isControlChar) {
         // Add to result
-        if (isNewLineChar) {
+        if (isControlChar) {
           var _char = word[0];
           _char.setActive().setPosition(x, y);
           resultChildren.push(_char);
@@ -6249,10 +6668,10 @@
         maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
         lastLineWidth = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result
           continue;
         }
@@ -6480,7 +6899,9 @@
       var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
       // Next line
       var isNewLineChar = IsNewLineChar(_char);
-      if (remainderHeight < childHeight || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(_char);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
           _char.setActive().setPosition(x, y).setOrigin(0.5);
@@ -6499,10 +6920,10 @@
         maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
         lastLineHeight = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result                
           continue;
         }
@@ -6701,29 +7122,15 @@
     return this.lastAppendedChildren;
   };
 
-  var RotateAround = Phaser.Math.RotateAround;
-  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bobX, bobY, bob, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      if (globPoint === undefined) {
-        globPoint = {};
-      }
-      out = globPoint;
+  var GetBobCenterPosition = function GetBobCenterPosition(bob, offsetX, offsetY, out) {
+    if (typeof offsetX !== 'number') {
+      out = offsetX;
+      offsetX = 0;
+      offsetY = 0;
     }
-    out.x = bobX;
-    out.y = bobY;
-    if (bob.rotation !== 0) {
-      RotateAround(out, 0, 0, bob.rotation);
-    }
-    out.x = out.x * bob.scaleX + bob.drawX;
-    out.y = out.y * bob.scaleY + bob.drawY;
-    return out;
-  };
-  var globPoint;
-
-  var GetBobCenterPosition = function GetBobCenterPosition(bob, out) {
-    return BobPositionToCanvasPosition(bob.drawCenterX, bob.drawCenterY, bob, out);
+    var bobX = bob.drawCenterX + offsetX;
+    var bobY = bob.drawCenterY + offsetY;
+    return BobPositionToCanvasPosition(bob, bobX, bobY, out);
   };
 
   var GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
@@ -6742,6 +7149,13 @@
       }
     });
     return nearestChild;
+  };
+
+  var GetCharWorldPosition = function GetCharWorldPosition(child, offsetX, offsetY, out) {
+    if (typeof child === 'number') {
+      child = this.getCharChild(child, true);
+    }
+    return GetBobWorldPosition(this, child, offsetX, offsetY, out);
   };
 
   var SetToMinSize = function SetToMinSize() {
@@ -7024,6 +7438,7 @@
     getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getNearestChild: GetNearestChild,
+    getCharWorldPosition: GetCharWorldPosition,
     setToMinSize: SetToMinSize,
     getCharChildIndex: GetCharChildIndex,
     getCharChild: GetCharChild,
@@ -7149,14 +7564,6 @@
   }(Canvas);
   Object.assign(DynamicText.prototype, Methods$3);
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
   var TypeConvert = function TypeConvert(s) {
@@ -7179,38 +7586,32 @@
     return s;
   };
 
-  var ParseValue = function ParseValue(text, valueConverter) {
-    if (text == null) {
-      return [];
-    }
-    var values = text.split(',');
-    for (var i = 0, cnt = values.length; i < cnt; i++) {
-      values[i] = valueConverter(values[i]);
-    }
-    return values;
-  };
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
 
-  var DefaultTagExpression = "[!$a-z0-9-_.]+";
-  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
-  var BypassValueConverter = function BypassValueConverter(s) {
-    return s;
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
   };
-  var BracketParser = /*#__PURE__*/function () {
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var BracketParser$1 = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
       this.setEventEmitter(GetValue$d(config, 'eventEmitter', undefined));
 
-      // Parameters for regex
-      this.setTagExpression(GetValue$d(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$d(config, 'regex.value', DefaultValueExpression));
       // Value convert
       this.setValueConverter(GetValue$d(config, 'valueConvert', true));
-      // Brackets and generate regex
-      var delimiters = GetValue$d(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]);
       // Loop
       this.setLoopEnable(GetValue$d(config, 'loop', false));
+
+      // Brackets and generate regex
+      this.setMultipleLinesTagEnable(GetValue$d(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      this.setDelimiters(delimiters[0], delimiters[1]);
+
+      // Translate tagName callback
+      this.setTranslateTagNameCallback(GetValue$d(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -7230,15 +7631,35 @@
         this.shutdown();
       }
     }, {
-      key: "setTagExpression",
-      value: function setTagExpression(express) {
-        this.tagExpression = express;
+      key: "setMultipleLinesTagEnable",
+      value: function setMultipleLinesTagEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.multipleLinesTagEnable = enable;
+        return this;
+      }
+
+      // Override
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (delimiterRight === undefined) {
+          delimiterRight = delimiterLeft[1];
+          delimiterLeft = delimiterLeft[0];
+        }
+        this.delimiterLeft = delimiterLeft;
+        this.delimiterRight = delimiterRight;
+        delimiterLeft = EscapeRegex(this.delimiterLeft);
+        delimiterRight = EscapeRegex(this.delimiterRight);
+        var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
+        this.reSplit = RegExp("".concat(delimiterLeft, "(.+?)").concat(delimiterRight), flag);
         return this;
       }
     }, {
-      key: "setValueExpression",
-      value: function setValueExpression(express) {
-        this.valueExpression = express;
+      key: "setTranslateTagNameCallback",
+      value: function setTranslateTagNameCallback(callback) {
+        this.translateTagNameCallback = callback;
         return this;
       }
     }, {
@@ -7250,24 +7671,6 @@
           converter = BypassValueConverter;
         }
         this.valueConverter = converter;
-        return this;
-      }
-    }, {
-      key: "setDelimiters",
-      value: function setDelimiters(delimiterLeft, delimiterRight) {
-        if (delimiterRight === undefined) {
-          delimiterRight = delimiterLeft[1];
-          delimiterLeft = delimiterLeft[0];
-        }
-        this.delimiterLeft = delimiterLeft;
-        this.delimiterRight = delimiterRight;
-        delimiterLeft = EscapeRegex(delimiterLeft);
-        delimiterRight = EscapeRegex(delimiterRight);
-        var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
-        var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
-        this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
         return this;
       }
     }, {
@@ -7349,9 +7752,8 @@
             this.isRunning = false;
             return;
           }
-          var match = regexResult[0];
           var matchEnd = this.reSplit.lastIndex;
-          var matchStart = matchEnd - match.length;
+          var matchStart = matchEnd - regexResult[0].length;
 
           // Process content between previous tag and current tag            
           if (this.progressIndex < matchStart) {
@@ -7364,11 +7766,7 @@
           }
 
           // Process current tag
-          if (this.reTagOff.test(match)) {
-            this.onTagEnd(match);
-          } else {
-            this.onTagStart(match);
-          }
+          this.onTag(regexResult[1]);
           this.progressIndex = matchEnd;
           // Might pause here
           if (this.isPaused) {
@@ -7411,30 +7809,11 @@
         this.emit('content', content);
         this.lastContent = content;
       }
+
+      // Override
     }, {
-      key: "onTagStart",
-      value: function onTagStart(tagContent) {
-        var regexResult = tagContent.match(this.reTagOn);
-        var tag = regexResult[1];
-        var values = ParseValue(regexResult[3], this.valueConverter);
-        this.skipEventFlag = false;
-        this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
-        if (!this.skipEventFlag) {
-          this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
-        }
-        this.lastTagStart = tag;
-      }
-    }, {
-      key: "onTagEnd",
-      value: function onTagEnd(tagContent) {
-        var tag = tagContent.match(this.reTagOff)[1];
-        this.skipEventFlag = false;
-        this.emit("-".concat(tag));
-        if (!this.skipEventFlag) {
-          this.emit('-', tag);
-        }
-        this.lastTagEnd = tag;
-      }
+      key: "onTag",
+      value: function onTag(tagContent) {}
     }, {
       key: "onStart",
       value: function onStart() {
@@ -7463,29 +7842,113 @@
         this.isPaused = false;
         this.emit('resume', this);
       }
-    }, {
-      key: "getTagOnRegString",
-      value: function getTagOnRegString(tagExpression, valueExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-        if (valueExpression === undefined) {
-          valueExpression = this.valueExpression;
-        }
-        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
-      }
-    }, {
-      key: "getTagOffRegString",
-      value: function getTagOffRegString(tagExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
-      }
     }]);
     return BracketParser;
   }();
-  Object.assign(BracketParser.prototype, EventEmitterMethods);
+  var BypassValueConverter = function BypassValueConverter(s) {
+    return s;
+  };
+  Object.assign(BracketParser$1.prototype, EventEmitterMethods);
+
+  var ParseValue = function ParseValue(text, valueConverter) {
+    if (text == null) {
+      return [];
+    }
+    var values = text.split(',');
+    for (var i = 0, cnt = values.length; i < cnt; i++) {
+      values[i] = valueConverter(values[i]);
+    }
+    return values;
+  };
+
+  var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
+    _inherits(BracketParser, _BracketParserBase);
+    var _super = _createSuper(BracketParser);
+    function BracketParser(config) {
+      var _this;
+      _classCallCheck(this, BracketParser);
+      if (config === undefined) {
+        config = {};
+      }
+      if (!config.hasOwnProperty('multipleLinesTag')) {
+        config.multipleLinesTag = false;
+      }
+      _this = _super.call(this, config);
+
+      // Parameters for regex
+      _this.setTagExpression(GetValue$d(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$d(config, 'regex.value', undefined));
+      // Brackets and generate regex
+      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      _this.setDelimiters(delimiters[0], delimiters[1]);
+      return _this;
+    }
+    _createClass(BracketParser, [{
+      key: "setTagExpression",
+      value: function setTagExpression(express) {
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
+        this.tagExpression = express;
+        return this;
+      }
+    }, {
+      key: "setValueExpression",
+      value: function setValueExpression(express) {
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
+        this.valueExpression = express;
+        return this;
+      }
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
+        var tag = "(".concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?");
+        this.reTag = RegExp(tag, 'i');
+        if (this.tagExpression !== DefaultTokenExpression || this.valueExpression !== DefaultTokenExpression) {
+          var startTagExpression = "".concat(this.tagExpression, "(=").concat(this.valueExpression, ")?");
+          var endTagExpression = "/".concat(this.tagExpression);
+          delimiterLeft = EscapeRegex(this.delimiterLeft);
+          delimiterRight = EscapeRegex(this.delimiterRight);
+          var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
+          this.reSplit = RegExp("".concat(delimiterLeft, "((").concat(startTagExpression, ")|(").concat(endTagExpression, "))").concat(delimiterRight), flag);
+        }
+        return this;
+      }
+    }, {
+      key: "onTag",
+      value: function onTag(tagContent) {
+        var regexResult = tagContent.match(this.reTag);
+        var tagName = regexResult[1];
+        var isEndTag = tagName.charAt(0) === '/';
+        if (isEndTag) {
+          tagName = tagName.substring(1, tagName.length);
+        }
+        if (this.translateTagNameCallback) {
+          tagName = this.translateTagNameCallback(tagName);
+        }
+        this.skipEventFlag = false;
+        if (!isEndTag) {
+          var values = ParseValue(regexResult[3], this.valueConverter);
+          this.emit.apply(this, ["+".concat(tagName)].concat(_toConsumableArray(values)));
+          if (!this.skipEventFlag) {
+            this.emit.apply(this, ['+', tagName].concat(_toConsumableArray(values)));
+          }
+          this.lastTagStart = tagName;
+        } else {
+          this.emit("-".concat(tagName));
+          if (!this.skipEventFlag) {
+            this.emit('-', tagName);
+          }
+          this.lastTagEnd = tagName;
+        }
+      }
+    }]);
+    return BracketParser;
+  }(BracketParser$1);
+  var DefaultTokenExpression = "[^=]+";
 
   var OnParseColorTag = function OnParseColorTag(textPlayer, parser, config) {
     var tagName = 'color';
@@ -7732,9 +8195,24 @@
   var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(textPlayer, parser, config) {
     var tagName = 'se';
     parser.on("+".concat(tagName), function (name, fadeInTime) {
-      AppendCommand$3.call(textPlayer, 'se',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlaySoundEffect,
+      // callback
+      [name, fadeInTime],
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      PlaySoundEffect2,
       // callback
       [name, fadeInTime],
       // params
@@ -7757,13 +8235,39 @@
       this.soundManager.fadeInSoundEffect(fadeInTime);
     }
   };
+  var PlaySoundEffect2 = function PlaySoundEffect2(params) {
+    if (this.skipSoundEffect) {
+      return;
+    }
+    var name = params[0];
+    var fadeInTime = params[1];
+    this.soundManager.playSoundEffect2(name); // this: textPlayer
+    if (fadeInTime) {
+      this.soundManager.fadeInSoundEffect2(fadeInTime);
+    }
+  };
 
   var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(textPlayer, parser, config) {
     var tagName = 'se.fadein';
     parser.on("+".concat(tagName), function (time) {
-      AppendCommand$3.call(textPlayer, 'se.fadein',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       FadeInSoundEffect,
+      // callback
+      time,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      FadeInSoundEffect2,
       // callback
       time,
       // params
@@ -7779,14 +8283,34 @@
     // this: textPlayer
     this.soundManager.fadeInSoundEffect(time);
   };
+  var FadeInSoundEffect2 = function FadeInSoundEffect2(time) {
+    // this: textPlayer
+    this.soundManager.fadeInSoundEffect2(time);
+  };
 
   var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(textPlayer, parser, config) {
     var tagName = 'se.fadeout';
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
-      AppendCommand$3.call(textPlayer, 'se.fadeout',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       FadeOutSoundEffect,
+      // callback
+      [time, isStopped],
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      FadeOutSoundEffect2,
       // callback
       [time, isStopped],
       // params
@@ -7803,13 +8327,33 @@
     // this: textPlayer
     (_this$soundManager = this.soundManager).fadeOutSoundEffect.apply(_this$soundManager, _toConsumableArray(params));
   };
+  var FadeOutSoundEffect2 = function FadeOutSoundEffect2(params) {
+    var _this$soundManager2;
+    // this: textPlayer
+    (_this$soundManager2 = this.soundManager).fadeOutSoundEffect2.apply(_this$soundManager2, _toConsumableArray(params));
+  };
 
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(textPlayer, parser, config) {
     var tagName = 'se.volume';
     parser.on("+".concat(tagName), function (volume) {
-      AppendCommand$3.call(textPlayer, 'se.volume',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       SetSoundEffectVolume,
+      // callback
+      volume,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.volume';
+    parser.on("+".concat(tagName), function (volume) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetSoundEffectVolume2,
       // callback
       volume,
       // params
@@ -7825,11 +8369,15 @@
     // this: textPlayer
     this.soundManager.setSoundEffectVolume(volume, true);
   };
+  var SetSoundEffectVolume2 = function SetSoundEffectVolume2(volume) {
+    // this: textPlayer
+    this.soundManager.setSoundEffectVolume2(volume, true);
+  };
 
   var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm';
     parser.on("+".concat(tagName), function (name, fadeInTime) {
-      AppendCommand$3.call(textPlayer, 'bgm',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlayBackgroundMusic,
       // callback
@@ -7843,6 +8391,30 @@
       AppendCommand$3.call(textPlayer, 'bgm.stop',
       // name
       StopBackgroundMusic,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      PlayBackgroundMusic2,
+      // callback
+      [name, fadeInTime],
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, 'bgm2.stop',
+      // name
+      StopBackgroundMusic2,
       // callback
       undefined,
       // params
@@ -7866,13 +8438,42 @@
     // this: textPlayer
     this.soundManager.stopBackgroundMusic();
   };
+  var PlayBackgroundMusic2 = function PlayBackgroundMusic2(params) {
+    var name = params[0];
+    var fadeInTime = params[1];
+
+    // this: textPlayer
+    this.soundManager.playBackgroundMusic2(name);
+    if (fadeInTime) {
+      this.soundManager.fadeInBackgroundMusic2(fadeInTime);
+    }
+  };
+  var StopBackgroundMusic2 = function StopBackgroundMusic2() {
+    // this: textPlayer
+    this.soundManager.stopBackgroundMusic2();
+  };
 
   var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm.fadein';
     parser.on("+".concat(tagName), function (time) {
-      AppendCommand$3.call(textPlayer, 'bgm.fadein',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       FadeInBackgroundMusic,
+      // callback
+      time,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      FadeInBackgroundMusic2,
       // callback
       time,
       // params
@@ -7888,14 +8489,34 @@
     // this: textPlayer
     this.soundManager.fadeInBackgroundMusic(time);
   };
+  var FadeInBackgroundMusic2 = function FadeInBackgroundMusic2(time) {
+    // this: textPlayer
+    this.soundManager.fadeInBackgroundMusic2(time);
+  };
 
   var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm.fadeout';
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
-      AppendCommand$3.call(textPlayer, 'bgm.fadeout',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       FadeOutBackgroundMusic,
+      // callback
+      [time, isStopped],
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      FadeOutBackgroundMusic2,
       // callback
       [time, isStopped],
       // params
@@ -7912,13 +8533,33 @@
     // this: textPlayer
     (_this$soundManager = this.soundManager).fadeOutBackgroundMusic.apply(_this$soundManager, _toConsumableArray(params));
   };
+  var FadeOutBackgroundMusic2 = function FadeOutBackgroundMusic2(params) {
+    var _this$soundManager2;
+    // this: textPlayer
+    (_this$soundManager2 = this.soundManager).fadeOutBackgroundMusic2.apply(_this$soundManager2, _toConsumableArray(params));
+  };
 
   var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm.cross';
     parser.on("+".concat(tagName), function (name, fadeTime) {
-      AppendCommand$3.call(textPlayer, 'bgm.cross',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       CrossFadeBackgroundMusic,
+      // callback
+      [name, fadeTime],
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.cross';
+    parser.on("+".concat(tagName), function (name, fadeTime) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      CrossFadeBackgroundMusic2,
       // callback
       [name, fadeTime],
       // params
@@ -7935,12 +8576,16 @@
     // this: textPlayer
     (_this$soundManager = this.soundManager).crossFadeBackgroundMusic.apply(_this$soundManager, _toConsumableArray(params));
   };
+  var CrossFadeBackgroundMusic2 = function CrossFadeBackgroundMusic2(params) {
+    var _this$soundManager2;
+    // this: textPlayer
+    (_this$soundManager2 = this.soundManager).crossFadeBackgroundMusic2.apply(_this$soundManager2, _toConsumableArray(params));
+  };
 
-  Phaser.Utils.Objects.GetValue;
   var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm.pause';
     parser.on("+".concat(tagName), function () {
-      AppendCommand$3.call(textPlayer, 'bgm.pause',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PauseBackgroundMusic,
       // callback
@@ -7962,6 +8607,30 @@
 
       parser.skipEvent();
     });
+    var tagName = 'bgm2.pause';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      PauseBackgroundMusic2,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, 'bgm2.resume',
+      // name
+      ResumeBackgroundMusic2,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    });
   };
   var PauseBackgroundMusic = function PauseBackgroundMusic() {
     // this: textPlayer
@@ -7971,11 +8640,19 @@
     // this: textPlayer
     this.soundManager.resumeBackgroundMusic();
   };
+  var PauseBackgroundMusic2 = function PauseBackgroundMusic2() {
+    // this: textPlayer
+    this.soundManager.pauseBackgroundMusic2();
+  };
+  var ResumeBackgroundMusic2 = function ResumeBackgroundMusic2() {
+    // this: textPlayer
+    this.soundManager.resumeBackgroundMusic2();
+  };
 
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.fadein';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      AppendCommand$3.call(textPlayer, 'camera.fadein',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlayFadeInEffect,
       // callback
@@ -7988,15 +8665,15 @@
     });
   };
   var PlayFadeInEffect = function PlayFadeInEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).fadeIn.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).fadeIn.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.fadeout';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      AppendCommand$3.call(textPlayer, 'camera.fadeout',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlayFadeOutEffect,
       // callback
@@ -8009,15 +8686,15 @@
     });
   };
   var PlayFadeOutEffect = function PlayFadeOutEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).fadeOut.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).fadeOut.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.shake';
     parser.on("+".concat(tagName), function (duration, intensity) {
-      AppendCommand$3.call(textPlayer, 'camera.shake',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlayShakeEffect,
       // callback
@@ -8030,15 +8707,15 @@
     });
   };
   var PlayShakeEffect = function PlayShakeEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).shake.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).shake.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.flash';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      AppendCommand$3.call(textPlayer, 'camera.flash',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       PlayFlashEffect,
       // callback
@@ -8051,15 +8728,15 @@
     });
   };
   var PlayFlashEffect = function PlayFlashEffect(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).flash.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).flash.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.zoom';
     parser.on("+".concat(tagName), function (value) {
-      AppendCommand$3.call(textPlayer, 'camera.zoom',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       Zoom,
       // callback
@@ -8084,12 +8761,12 @@
   };
   var Zoom = function Zoom(value) {
     // this: textPlayer
-    this.camera.setZoom(value);
+    this.targetCamera.setZoom(value);
   };
   var ZoomTo = function ZoomTo(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).zoomTo.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).zoomTo.apply(_this$targetCamera, _toConsumableArray(params));
   };
 
   var DegToRad = Phaser.Math.DegToRad;
@@ -8097,7 +8774,7 @@
     var tagName = 'camera.rotate';
     parser.on("+".concat(tagName), function (value) {
       value = DegToRad(value);
-      AppendCommand$3.call(textPlayer, 'camera.rotate',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       Rotate,
       // callback
@@ -8123,7 +8800,7 @@
   };
   var Rotate = function Rotate(value) {
     // this: textPlayer
-    this.camera.setRotation(value);
+    this.targetCamera.setRotation(value);
   };
   var RotateTo = function RotateTo(params) {
     var value = params[0];
@@ -8131,13 +8808,13 @@
     var ease = params[2];
 
     // this: textPlayer
-    this.camera.rotateTo(value, false, duration, ease);
+    this.targetCamera.rotateTo(value, false, duration, ease);
   };
 
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.scroll';
     parser.on("+".concat(tagName), function (x, y) {
-      AppendCommand$3.call(textPlayer, 'camera.scroll',
+      AppendCommand$3.call(textPlayer, tagName,
       // name
       Scroll,
       // callback
@@ -8161,9 +8838,9 @@
     });
   };
   var Scroll = function Scroll(params) {
-    var _this$camera;
+    var _this$targetCamera;
     // this: textPlayer
-    (_this$camera = this.camera).setScroll.apply(_this$camera, _toConsumableArray(params));
+    (_this$targetCamera = this.targetCamera).setScroll.apply(_this$targetCamera, _toConsumableArray(params));
   };
   var ScrollTo = function ScrollTo(params) {
     var x = params[0];
@@ -8172,7 +8849,7 @@
     var ease = params[3];
 
     // this: textPlayer
-    var camera = this.camera;
+    var camera = this.targetCamera;
     var xSave = camera.scrollX;
     var ySave = camera.scrollY;
     camera.setScroll(x, y);
@@ -8224,6 +8901,19 @@
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
     });
+  };
+
+  var OnParsePageBreakTag = function OnParsePageBreakTag(textPlayer, parser, config) {
+    var tagNames = ['pagebreak', 'pb'];
+    for (var i = 0, cnt = tagNames.length; i < cnt; i++) {
+      var tagName = tagNames[i];
+      parser.on("+".concat(tagName), function () {
+        AppendText.call(textPlayer, '\f');
+        parser.skipEvent();
+      }).on("-".concat(tagName), function () {
+        parser.skipEvent();
+      });
+    }
   };
 
   var OnParseContentOff = function OnParseContentOff(textPlayer, parser, config) {
@@ -8300,7 +8990,7 @@
     );
   };
 
-  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParsePageBreakTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks$2.length; i < cnt; i++) {
       ParseCallbacks$2[i](textPlayer, parser, config);
@@ -8386,6 +9076,33 @@
       this.speed = speed;
       return this;
     }
+  };
+
+  var PageFadeOutCompleteEvent = 'page.fadeout';
+  var FadeOutPage = function FadeOutPage() {
+    if (!this.fadeOutPageCallback || !this.children) {
+      this.emit(PageFadeOutCompleteEvent);
+      return this;
+    }
+    var renderableChildren = this.children.filter(function (child) {
+      return child.renderable;
+    });
+    var waitObject = this.fadeOutPageCallback(renderableChildren, this.fadeOutPageDuration);
+    if (!waitObject) {
+      this.emit(PageFadeOutCompleteEvent);
+    } else if (waitObject.once) {
+      waitObject.once('complete', function () {
+        this.emit(PageFadeOutCompleteEvent);
+      }, this);
+    } else if (waitObject.then) {
+      var self = this;
+      waitObject.then(function () {
+        self.emit(PageFadeOutCompleteEvent);
+      });
+    } else {
+      this.emit(PageFadeOutCompleteEvent);
+    }
+    return this;
   };
 
   var WaitEvent = function WaitEvent(eventEmitter, eventName) {
@@ -8490,6 +9207,10 @@
       }
     }
 
+    // Set to min size
+    if (this.minSizeEnable) {
+      this.textPlayer.setToMinSize();
+    }
     this.inTypingProcessLoop = false;
   };
 
@@ -8623,7 +9344,7 @@
   };
   var WaitCameraEffect = function WaitCameraEffect(textPlayer, effectName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, "camera.".concat(effectName));
-    var camera = textPlayer.camera;
+    var camera = textPlayer.targetCamera;
     var effect, completeEventName;
     switch (effectName) {
       case 'camera.fadein':
@@ -8798,8 +9519,14 @@
       } else if (name === 'se') {
         var music = textPlayer.soundManager.getLastSoundEffect();
         WaitMusic(textPlayer, music, callback, args, scope);
+      } else if (name === 'se2') {
+        var music = textPlayer.soundManager.getLastSoundEffect2();
+        WaitMusic(textPlayer, music, callback, args, scope);
       } else if (name === 'bgm') {
         var music = textPlayer.soundManager.getBackgroundMusic();
+        WaitMusic(textPlayer, music, callback, args, scope);
+      } else if (name === 'bgm2') {
+        var music = textPlayer.soundManager.getBackgroundMusic2();
         WaitMusic(textPlayer, music, callback, args, scope);
       } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
         WaitKeyDown(textPlayer, name, callback, args, scope);
@@ -8876,6 +9603,7 @@
   };
 
   var Methods$2 = {
+    fadeOutPage: FadeOutPage,
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -8910,6 +9638,7 @@
       this.setSkipSpaceEnable(GetValue$2(config, 'skipSpace', false));
       this.setAnimationConfig(GetValue$2(config, 'animation', undefined));
       this.setMinSizeEnable(GetValue$2(config, 'minSizeEnable', false));
+      this.setFadeOutPageCallback(GetValue$2(config, 'fadeOutPage'));
     }
     _createClass(TypeWriter, [{
       key: "destroy",
@@ -8946,6 +9675,12 @@
           config.onStart = SetChildVisible;
         }
         this.animationConfig = config;
+        return this;
+      }
+    }, {
+      key: "setFadeOutPageCallback",
+      value: function setFadeOutPageCallback(callback) {
+        this.fadeOutPageCallback = callback;
         return this;
       }
     }, {
@@ -9710,6 +10445,7 @@
   };
 
   var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseEaseGameObjectPropertyTag];
+  var AddGameObjectManager = GameObjectManagerMethods$1.addGameObjectManager;
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
       if (config === undefined) {
@@ -9749,7 +10485,7 @@
   };
 
   var SetTargetCamera = function SetTargetCamera(camera) {
-    this.camera = camera;
+    this.targetCamera = camera;
     return this;
   };
 
@@ -9802,6 +10538,10 @@
     if (!this.isPlaying || this.isPageTyping) {
       return this;
     }
+    this.typeWriter.once('page.fadeout', _TypingNextPage, this).fadeOutPage();
+    return this;
+  };
+  var _TypingNextPage = function _TypingNextPage() {
     var result = this.runWrap(this.lastWrapResult);
     this.lastWrapResult = result;
     this.emit('page.start');
@@ -10013,7 +10753,7 @@
           this._imageManager.destroy(fromScene);
         }
         this._imageManager = undefined;
-        this.camera = undefined;
+        this.targetCamera = undefined;
         this.clickEE = undefined;
         this.destroyManagers(fromScene);
         _get(_getPrototypeOf(TextPlayer.prototype), "destroy", this).call(this, fromScene);

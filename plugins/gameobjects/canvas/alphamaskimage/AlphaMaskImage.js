@@ -1,4 +1,4 @@
-import Canvas from '../canvas/Canvas.js';
+import Canvas from '../canvasbase/Canvas.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

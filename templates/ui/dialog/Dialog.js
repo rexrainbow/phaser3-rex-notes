@@ -3,7 +3,7 @@ import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import Buttons from '../buttons/Buttons.js';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import GridButtons from '../gridbuttons/GridButtons.js';
-import ButtonMethods from './ButtonMethods.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -259,7 +259,7 @@ class Dialog extends Sizer {
         EmitButtonEvent(this, 'over');
         EmitButtonEvent(this, 'out');
         EmitButtonEvent(this, 'enable');
-        EmitButtonEvent(this, 'disalbe');
+        EmitButtonEvent(this, 'disable');
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('title', title);
@@ -298,7 +298,7 @@ var EmitButtonEvent = function (dialog, postEventName) {
 
 Object.assign(
     Dialog.prototype,
-    ButtonMethods
+    Methods
 );
 
 export default Dialog;

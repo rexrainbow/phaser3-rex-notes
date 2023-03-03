@@ -1,4 +1,4 @@
-import Canvas from '../canvas/Canvas.js';
+import Canvas from '../canvasbase/Canvas.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
 

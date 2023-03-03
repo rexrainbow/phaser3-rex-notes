@@ -102,9 +102,31 @@ var panel = scene.rexUI.add.scrollablePanel({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         // input: 'drag',
         // position: 'right',
+
+        // hideUnscrollableSlider: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
 
@@ -117,12 +139,13 @@ var panel = scene.rexUI.add.scrollablePanel({
         // }
     },
 
-    scroller: {
-        threshold: 10,
-        slidingDeceleration: 5000,
-        backDeceleration: 2000,
-        pointerOutRelease: true,
-    },
+    // scroller: {
+    //     threshold: 10,
+    //     slidingDeceleration: 5000,
+    //     backDeceleration: 2000,
+    //     pointerOutRelease: true,
+    //     dragRate: 1,
+    // },
 
     mouseWheelScroller: false,
     // mouseWheelScroller: {
@@ -190,8 +213,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `scrollMode` : Scroll panel vertically, or horizontally.
-    - `0`, `'vertical'`, or `'v'` : Scroll panel vertically. Default value.
-    - `1`, `'horizontal'`, or `'h'` : Scroll panel horizontally.
+    - `0`, `'vertical'`, or `'v'`, `'y'` : Scroll panel vertically. Default value.
+    - `1`, `'horizontal'`, or `'h'`. `'x'` : Scroll panel horizontally.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of scroll-able panel.
 - `panel` : Configuration of panel game object.
     - `panel.child` : Panel game object.
@@ -202,16 +225,63 @@ var panel = scene.rexUI.add.scrollablePanel({
             - `1`, or `'everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.
         - `false` : No mask
 - `slider` : Componments of slider, optional.
-    - `slider.background` : Game object of slider background, optional.
-    - `slider.track` : Game object of track.
-    - `slider.thumb` : Game object of thumb.
+    - `slider.background` : 
+        - [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.track` : 
+        - Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.indicator` : 
+        - Game object of indicator, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
+    - `slider.thumb` : 
+        - Game object of thumb, optional.
+        - A plain object to create [round rectangle shape](shape-roundrectangle.md#create-shape-object)
+            ```javascript
+            { 
+                width: 1, height: 1,
+                radius: 0, 
+                color: undefined, alpha: 1,
+                strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                shape: undefined
+            }
+            ```
     - `slider.input` :
         - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
         - `'none'`, or `-1` : Disable sider controlling.
-    - `slider.position` : Position of this sldier.
-        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
-        - `1`, `'left'`, `'top'` : Sldier at left/top side.
+    - `slider.position` : Position of this slider.
+        - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Slider at left/top side.
+    - `slider.hideUnscrollableSlider` :
+        - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
+        - `true` : Set slider to invisible if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.
@@ -230,6 +300,7 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
+    - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
@@ -432,7 +503,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Get element
 
@@ -441,9 +512,13 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         ```javascript
         var background = panel.getElement('background');
         ```
-    - Panel game object
+    - Child-panel game object
         ```javascript
-        var panel = panel.getElement('panel');
+        var childPanel = panel.getElement('panel');
+        ```
+    - Child-panel mask game object, which is a graphics game object.
+        ```javascript
+        var maskGameObject = panel.getElement('mask');
         ```
     - Layer of panel, assigned at config `panel.mask.layer`.
         ```javascript
@@ -523,5 +598,5 @@ See [Base-sizer](ui-basesizer.md#set-children-interactive)
 When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elements will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
 
 - Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
-- Test if pointer is under panel via [`panel.isInTouching()`](ui-basesizer.md#is-in-touching), during input events' callback.
+- Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
 - To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.

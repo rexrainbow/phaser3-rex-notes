@@ -1,4 +1,4 @@
-// import * as Phaser from 'phaser';
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 export default ClickOutside;
 
@@ -34,7 +34,7 @@ declare namespace ClickOutside {
     }
 }
 
-declare class ClickOutside extends Phaser.Events.EventEmitter {
+declare class ClickOutside extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: ClickOutside.IConfig

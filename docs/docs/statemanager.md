@@ -285,6 +285,11 @@ states.toggleEnable();
     states.stopPreUpdate();
     states.stopPostUpdate();
     ```
+- Get scene
+    ```javascript
+    var scene = states.getScene();
+    // var scene = states._scene;
+    ```
 
 ### Remove state
 

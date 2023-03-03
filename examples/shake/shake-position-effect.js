@@ -14,8 +14,9 @@ class Demo extends Phaser.Scene {
         var dot = this.add.circle(200, 200, 20, 0x888888);
         dot.shake = this.plugins.get('rexShake').add(dot, {
             duration: 1000,
-            // magnitude: 50,
-            mode: 'effect'
+            // magnitude: 100,
+            mode: 'effect',
+            // axis: 'x'
         }).on('complete', function () {
             console.log('complete');
         })

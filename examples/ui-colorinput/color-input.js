@@ -28,19 +28,27 @@ class Demo extends Phaser.Scene {
             )
             .add(
                 CreateColorInput0(this),
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
             )
             .add(
                 CreateColorInput1(this),
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
             )
             .add(
                 CreateColorInput2(this),
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
             )
             .add(
                 CreateColorInput3(this),
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
+            )
+            .add(
+                CreateColorInput4(this),
+                { proportion: 0, expand: true }
+            )
+            .add(
+                CreateColorInput5(this),
+                { proportion: 0, expand: true }
             )
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000)
@@ -76,10 +84,12 @@ const ColorPickerConfig = {
     //     })
     // },
 
+    // hPalettePosition: 'right',
+
     space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 }
 
-const ColorComponentsConfig = {  
+const ColorComponentsConfig = {
     space: { item: 8 }
 }
 
@@ -99,9 +109,11 @@ var CreateColorInput0 = function (scene) {
 var CreateColorInput1 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
+
         swatch: {
             shape: 'circle'
         },
+
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
@@ -115,9 +127,11 @@ var CreateColorInput1 = function (scene) {
 var CreateColorInput2 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
+
         swatch: {
             radius: 12,
         },
+
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
@@ -131,7 +145,9 @@ var CreateColorInput2 = function (scene) {
 var CreateColorInput3 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
+
         swatch: scene.add.image(0, 0, 'img'),
+
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
@@ -141,6 +157,41 @@ var CreateColorInput3 = function (scene) {
         value: Phaser.Math.Between(0, 0x1000000)
     })
 }
+
+var CreateColorInput4 = function (scene) {
+    return scene.rexUI.add.colorInput({
+        height: 60,
+
+        swatch: scene.add.image(0, 0, 'img').setScale(0.5),
+        squareExpandSwatch: false,
+
+        inputText: InputTextConfig,
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
+
+        colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
+
+        value: Phaser.Math.Between(0, 0x1000000)
+    })
+}
+
+var CreateColorInput5 = function (scene) {
+    return scene.rexUI.add.colorInput({
+        height: 60,
+
+        swatch: { size: 20, },
+        // swatchSize: 20,
+
+        inputText: InputTextConfig,
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
+
+        colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
+
+        value: Phaser.Math.Between(0, 0x1000000)
+    })
+}
+
 
 var config = {
     type: Phaser.AUTO,

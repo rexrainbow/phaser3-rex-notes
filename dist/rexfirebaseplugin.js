@@ -258,7 +258,7 @@
       return Promise.resolve();
     }
 
-    // console.log('tset again')
+    // console.log('test again')
     return Delay(10).then(function () {
       return AvailableTestPromise(config);
     });
@@ -809,7 +809,7 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+  var GetEntry$1 = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
@@ -861,7 +861,7 @@
         keys = keys.split(delimiter);
       }
       var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
+      var entry = GetEntry$1(target, keys);
       entry[lastKey] = value;
     }
     return target;
@@ -1537,21 +1537,53 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    for (key in inObject) {
-      value = inObject[key];
+    if (IsPlainObject(inObject)) {
+      for (key in inObject) {
+        value = inObject[key];
 
-      //  Recursively (deep) copy for nested objects, including arrays
-      outObject[key] = DeepClone(value);
+        //  Recursively (deep) copy for nested objects, including arrays
+        outObject[key] = DeepClone(value);
+      }
+    } else {
+      outObject = inObject;
     }
     return outObject;
   };
 
   var Tree = /*#__PURE__*/function () {
-    function Tree() {
+    function Tree(data) {
       _classCallCheck(this, Tree);
-      this.data = {};
+      if (data === undefined) {
+        data = {};
+      }
+      this.data = data;
+      this.refPath = '';
     }
     _createClass(Tree, [{
+      key: "getFullPath",
+      value: function getFullPath(keys) {
+        if (typeof keys === 'string' && keys.charAt(0) === '.') {
+          if (keys === '.') {
+            keys = this.refPath;
+          } else if (this.refPath !== '') {
+            keys = "".concat(this.refPath).concat(keys);
+          } else {
+            // this.refPath === ''
+            keys = keys.substring(1);
+          }
+        }
+        return keys;
+      }
+    }, {
+      key: "setRefPath",
+      value: function setRefPath(keys) {
+        if (keys === undefined) {
+          keys = '';
+        }
+        this.refPath = this.getFullPath(keys);
+        return this;
+      }
+    }, {
       key: "setValue",
       value: function setValue(keys, value) {
         if (keys === undefined) {
@@ -1559,7 +1591,7 @@
         } else if (value === undefined) {
           this.data = keys; // JSON keys
         } else {
-          SetValue(this.data, keys, value);
+          SetValue(this.data, this.getFullPath(keys), value);
         }
         return this;
       }
@@ -1570,16 +1602,9 @@
           return this.data;
         } else {
           if (typeof keys === 'string') {
-            keys = keys.split('.');
+            keys = this.getFullPath(keys).split('.');
           }
-          var entry = this.data;
-          for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            if (!IsObject(entry)) {
-              return undefined;
-            }
-            entry = entry[keys[i]];
-          }
-          return entry;
+          return GetEntry(this.data, keys);
         }
       }
     }, {
@@ -1594,17 +1619,10 @@
           this.clear();
         } else {
           if (typeof keys === 'string') {
-            keys = keys.split('.');
+            keys = this.getFullPath(keys).split('.');
           }
           var lastKey = keys.pop();
-          var entry = this.data;
-          for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            if (!IsObject(entry)) {
-              // Stop here
-              return this;
-            }
-            entry = entry[keys[i]];
-          }
+          var entry = GetEntry(this.data, keys);
           if (IsObject(entry)) {
             delete entry[lastKey];
           }
@@ -1612,16 +1630,50 @@
         return this;
       }
     }, {
+      key: "hasKey",
+      value: function hasKey(keys) {
+        if (typeof keys === 'string') {
+          keys = this.getFullPath(keys).split('.');
+        }
+        var lastKey = keys.pop();
+        var entry = GetEntry(this.data, keys);
+        if (!IsObject(entry)) {
+          return false;
+        }
+        return entry.hasOwnProperty(lastKey);
+      }
+    }, {
       key: "clear",
       value: function clear() {
         Clear$1(this.data);
         return this;
+      }
+    }, {
+      key: "clone",
+      value: function clone(cloneData) {
+        var data = cloneData ? this.cloneValue() : this.data;
+        var tree = new Tree(data);
+        tree.setRefPath(this.refPath);
+        return tree;
       }
     }]);
     return Tree;
   }();
   var IsObject = function IsObject(obj) {
     return obj != null && _typeof(obj) === 'object';
+  };
+  var GetEntry = function GetEntry(data, keys) {
+    if (keys[0] === '') {
+      return data;
+    }
+    var entry = data;
+    for (var i = 0, cnt = keys.length; i < cnt; i++) {
+      if (!IsObject(entry)) {
+        return undefined;
+      }
+      entry = entry[keys[i]];
+    }
+    return entry;
   };
 
   var BaseUpdater = /*#__PURE__*/function () {

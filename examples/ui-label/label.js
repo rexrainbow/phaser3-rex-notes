@@ -27,12 +27,8 @@ class Demo extends Phaser.Scene {
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_DARK).setName('iconH'),
             action: this.add.image(0, 0, 'close').setTint(COLOR_LIGHT),
             space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-                icon: 10,
-                text: 10,
+                left: 20, right: 20, top: 20, bottom: 20,
+                icon: 10, text: 10,
             }
         });
 
@@ -43,12 +39,8 @@ class Demo extends Phaser.Scene {
             icon: this.rexUI.add.roundRectangle(0, 0, 2, 2, 80, COLOR_DARK).setName('iconV'),
             action: this.add.image(0, 0, 'close').setTint(COLOR_LIGHT),
             space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-                icon: 10,
-                text: 10,
+                left: 20, right: 20, top: 20, bottom: 20,
+                icon: 10, text: 10,
             }
         });
 
@@ -57,19 +49,11 @@ class Demo extends Phaser.Scene {
         })
             .add(
                 horizonLabel, // Game object
-                0, // Proportion
-                'center', // Align
-                0, // Padding
-                true // Expand
+                { proportion: 0, expand: true }
             )
             .add(
                 verticalLabel, // Game object
-                0, // Proportion
-                'center', // Align
-                {
-                    top: 20
-                }, // Padding
-                true // Expand
+                { proportion: 0, padding: { top: 20 }, expand: true }
             )
             .layout()
 

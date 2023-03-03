@@ -2,8 +2,17 @@ import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import BuildDisplayLabelConfig from './BuildDisplayLabelConfig.js';
 import CreateInteractiveLabel from './CreateInteractiveLabel.js';
 
-var BuildListConfig = function (scene, config) {
-    config = (config) ? DeepClone(config) : {};
+var BuildListConfig = function (scene, config, deepCloneConfig) {
+    if (deepCloneConfig === undefined) {
+        deepCloneConfig = true;
+    }
+
+    if (deepCloneConfig) {
+        config = (config) ? DeepClone(config) : {};
+    } else if (!config) {
+        config = {};
+    }
+
 
     var labelConfig = config.label || config.button;
     var listButtonConfig = config.button || config.label;

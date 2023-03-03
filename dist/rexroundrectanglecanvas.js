@@ -182,51 +182,42 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
-    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
         return this;
       }
-      if (x === undefined) {
-        x = 0;
+      var frameWidth = textureFrame.cutWidth,
+        frameHeight = textureFrame.cutHeight;
+      if (dx === undefined) {
+        dx = 0;
       }
-      if (y === undefined) {
-        y = 0;
+      if (dy === undefined) {
+        dy = 0;
       }
-      if (width === undefined) {
-        width = textureFrame.cutWidth;
+      if (dWidth === undefined) {
+        dWidth = frameWidth;
       }
-      if (height === undefined) {
-        height = textureFrame.cutHeight;
+      if (dHeight === undefined) {
+        dHeight = frameHeight;
       }
-      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      if (sxOffset === undefined) {
+        sxOffset = 0;
+      }
+      if (syOffset === undefined) {
+        syOffset = 0;
+      }
+      if (sWidth === undefined) {
+        sWidth = frameWidth;
+      }
+      if (sHeight === undefined) {
+        sHeight = frameHeight;
+      }
+      var sx = textureFrame.cutX + sxOffset;
+      var sy = textureFrame.cutY + syOffset;
+      this.context.drawImage(textureFrame.source.image,
+      // image
+      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.dirty = true;
       return this;
     },
@@ -311,7 +302,7 @@
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-      if (this.renderer.gl) {
+      if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
@@ -702,18 +693,18 @@
   }();
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-      return {
+      radius = {
         x: defaultRadiusX,
         y: defaultRadiusY
       };
     } else if (typeof radius === 'number') {
-      return {
+      radius = {
         x: radius,
         y: radius
       };
-    } else {
-      return radius;
     }
+    SetConvex(radius);
+    return radius;
   };
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
@@ -723,13 +714,15 @@
       radius.x = GetValue$1(value, 'x', 0);
       radius.y = GetValue$1(value, 'y', 0);
     }
+    SetConvex(radius);
+  };
+  var SetConvex = function SetConvex(radius) {
+    radius.convex = radius.x >= 0 || radius.y >= 0;
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
   };
 
   var DegToRad = Phaser.Math.DegToRad;
-  var Rad0 = DegToRad(0);
-  var Rad90 = DegToRad(90);
-  var Rad180 = DegToRad(180);
-  var Rad270 = DegToRad(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle$1(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -742,68 +735,100 @@
     context.beginPath();
     context.translate(x, y);
 
-    // Bottom-right
-    radius = cornerRadius.br;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = height - radiusY;
-    context.moveTo(width, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
-    } else {
-      context.lineTo(width, height);
-      context.lineTo(centerX, height);
-    }
-
-    // Bottom-left
-    radius = cornerRadius.bl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = height - radiusY;
-    context.lineTo(radiusX, height);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
-    } else {
-      context.lineTo(0, height);
-      context.lineTo(0, centerY);
-    }
-
     // Top-left
     radius = cornerRadius.tl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = radiusY;
-    context.lineTo(0, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
+      }
     } else {
       context.lineTo(0, 0);
-      context.lineTo(centerX, 0);
     }
 
     // Top-right
     radius = cornerRadius.tr;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = radiusY;
-    context.lineTo(centerX, 0);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
+      } else {
+        centerX = width;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 90, true, iteration);
+      }
     } else {
       context.lineTo(width, 0);
-      context.lineTo(width, centerY);
+    }
+
+    // Bottom-right
+    radius = cornerRadius.br;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
+      } else {
+        centerX = width;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 180, true, iteration);
+      }
+    } else {
+      context.lineTo(width, height);
+    }
+
+    // Bottom-left
+    radius = cornerRadius.bl;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 360, 270, true, iteration);
+      }
+    } else {
+      context.lineTo(0, height);
     }
     context.closePath();
     context.restore();
   };
-  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+  var IsConvexArc = function IsConvexArc(radius) {
+    return !radius.hasOwnProperty('convex') ||
+    // radius does not have convex property
+    radius.convex;
+  };
+  var IsArcCorner = function IsArcCorner(radius) {
+    return radius.x > 0 && radius.y > 0;
+  };
+  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration) {
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && endAngle > startAngle) {
+      endAngle -= 360;
+    } else if (!antiClockWise && endAngle < startAngle) {
+      endAngle += 360;
+    }
+    startAngle = DegToRad(startAngle);
+    endAngle = DegToRad(endAngle);
     if (iteration == null) {
       // undefined, or null
-      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
     } else {
       iteration += 1;
       var x, y, angle;
@@ -851,8 +876,8 @@
       strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth); // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 

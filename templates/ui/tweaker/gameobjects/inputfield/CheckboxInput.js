@@ -1,6 +1,8 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateCheckbox from '../utils/CreateCheckbox.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class CheckboxInput extends InputFiledBase {
     constructor(scene, config) {
         if (config === undefined) {
@@ -13,9 +15,15 @@ class CheckboxInput extends InputFiledBase {
         var checkboxConfig = config.checkbox;
         var checkbox = CreateCheckbox(scene, checkboxConfig);
 
+        var size = GetValue(checkboxConfig, 'size');
+        if (size !== undefined) {
+            checkbox.setSize(size, size);
+        }
+
+        var fitRatio = (size !== undefined) ? 0 : 1;
         this.add(
             checkbox,
-            { proportion: 0, expand: false }
+            { proportion: 0, expand: false, fitRatio: fitRatio }
         )
 
         this.addChildrenMap('checkbox', checkbox);
@@ -23,24 +31,6 @@ class CheckboxInput extends InputFiledBase {
         checkbox.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
-    }
-
-    preLayout() {
-        var checkbox = this.childrenMap.checkbox;
-        checkbox.resize(1, 1);
-    }
-
-    postResolveSize(width, height) {
-        var checkbox = this.childrenMap.checkbox;
-        var size = height
-            - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-            - this.getChildOuterPadding(checkbox, 'top') - this.getChildOuterPadding(checkbox, 'bottom');
-        checkbox.resize(size, size);
-
-        // Recalculate proportionLength
-        this.proportionLength = undefined;
-        this._childrenWidth = undefined;
-        this.resolveWidth(width, true);
     }
 
     get value() {
@@ -51,9 +41,12 @@ class CheckboxInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         this.childrenMap.checkbox.setValue(value);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 }
 

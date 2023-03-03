@@ -1,5 +1,5 @@
-import CheckboxShape from './CheckboxShape.js';
-import Click from '../../../input/button/Button.js';
+import CheckboxShape from './CheckboxShape';
+import Click from '../../../input/button/Button';
 
 export default Checkbox;
 

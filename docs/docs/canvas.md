@@ -178,11 +178,14 @@ var canvas = scene.make.rexCanvas({
 
 ```javascript
 canvas.drawFrame(key, frame);
-// canvas.drawFrame(key, frame, x, y, width, height);
+// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight);
+// canvas.drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight);
 ```
 
-- `x`, `y` : Top-left position of pasted frame. Default value is `0`, `0`
-- `width`, `height` : Size of pasted frame. Default value is origin size of frame.
+- `dx`, `dy` : Top-left position in this canvas. Default value is `0`, `0`.
+- `dWidth`, `dHeight` : The size to draw the image in this canvas. Default value is origin size of frame.
+- `sxOffset`, `syOffset` : Offset position of source frame.  Default value is `0`, `0`
+- `sWidth`, `sHeight` : The size of the sub-rectangle of the source frame to draw into this canvas. Default value is origin size of frame.
 
 ### Data URL
 
@@ -208,6 +211,23 @@ canvas.drawFrame(key, frame);
     - `dataURL` : A base64 string.
     - `type` : A DOMString indicating the image format. The default format type is image/png.
     - `encoderOptions` : A Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp.
+
+### File
+
+- Load image from File object
+    ```javascript
+    canvas.loadFromFile(file);
+    // canvas.loadFromFile(file, callback);
+    ```
+    or
+    ```javascript
+    canvas.loadFromFilePromise(file)
+        .then(function() {
+            
+        })
+    ```
+    - `file` : File object
+    - `callback` : Load complete callback.
 
 ### Pixel color
 

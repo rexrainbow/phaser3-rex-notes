@@ -8,7 +8,9 @@ declare namespace Image {
         x: number, y: number,
         key?: string,
         frame?: string,
+
         ninePointMode?: boolean,
+        rtl?: boolean,
     }
 
     class ControlPoint {

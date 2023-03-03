@@ -154,6 +154,10 @@ rotateTo.setSpeed(speed);
 
 ### Events
 
+- On rotating start
+    ```javascript
+    rotateTo.on('start', function(gameObject, rotateTo){});
+    ```
 - On reached target
     ```javascript
     rotateTo.on('complete', function(gameObject, rotateTo){});

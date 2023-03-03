@@ -33,7 +33,8 @@ nav:
             - Video: video.md
             - Circle mask image: circlemaskimage.md
             - Alpha mask image: alphamaskimage.md
-            - Transition image: transitionimage.md
+            - Image box: imagebox.md
+            - Transition image: transitionimage.md            
         - Multiple images: 
             - Blitter: blitter.md
             - Particles:
@@ -79,6 +80,7 @@ nav:
             - Page: textpage.md
             - Edit: textedit.md
             - Hidden edit: hiddeninputtext.md
+            - Translation: texttranslation.md
     - Graphics:
         - Graphics: graphics.md
         - Render texture: rendertexture.md
@@ -104,6 +106,8 @@ nav:
             - Full window rectangle: shape-fullwindowrectangle.md
             - Cover: shape-cover.md
             - Checkbox: shape-checkbox.md
+            - Toggle switch: shape-toggleswitch.md
+            - Triangle 2: shape-triangle2.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
@@ -132,6 +136,7 @@ nav:
         - DOM element: domelement.md
         - Input text: inputtext.md        
         - File chooser: filechooser.md
+        - File drop zone: filedropzone.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
         - Actions:
@@ -295,6 +300,7 @@ nav:
         - Dialog-quest: dialog-quest.md
     - Bracket parser: 
         - Bracket parser: bracketparser.md
+        - Bracket parser 2: bracketparser2.md
         - Tag player: tagplayer.md
 - Data:
     - Data manager: 
@@ -318,6 +324,7 @@ nav:
     - Configuration data: config-data.md
     - Canvas image data: canvas-data.md
     - Tiled map data: tiledmapdata.md
+    - PNG Appender: png-appender.md
 - Math:
     - Max, min:
         - Interpolation: interpolation.md
@@ -359,6 +366,7 @@ nav:
         - Format: format.md
         - Mustache: mustache.md
         - Handlebars : handlebars.md
+    - i18next: i18next.md
     - Pad: pad.md
     - Capitalizes first: capitalizes-first.md
     - Reverse: reverse-string.md
@@ -386,6 +394,7 @@ nav:
         - Overlap sizer: ui-overlapsizer.md
     - Label:
         - Label: ui-label.md
+        - Simple label: ui-simplelabel.md
         - Title label: ui-titlelabel.md
         - Name value label: ui-namevaluelabel.md
         - Badge label: ui-badgelabel.md
@@ -393,6 +402,7 @@ nav:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md
         - Fix-width buttons: ui-fixwidthbuttons.md
+        - File selector button: ui-fileselectorbutton.md
     - Scrollable:
         - Scroll-able panel: ui-scrollablepanel.md
         - Grid table: ui-gridtable.md
@@ -406,17 +416,21 @@ nav:
         - Pages: ui-pages.md
         - Tab pages: ui-tabpages.md
         - Perspective card: ui-perspectivecard.md
-    - Dialog: ui-dialog.md
+    - Dialog:
+        - Dialog: ui-dialog.md
+        - Confirm dialog: ui-confirmdialog.md
     - Menu: ui-menu.md
     - Drop down list: ui-dropdownlist.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
-    - Tabs: ui-tabs.md        
+    - Tabs: ui-tabs.md
+    - Folder: ui-folder.md     
     - Holy grail: ui-holygrail.md
     - Color input:
         - Color input: ui-colorinput.md
         - Color picker: ui-colorpicker.md
         - Color components: ui-colorcomponents.md
+    - Tweaker: ui-tweaker.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md
@@ -433,6 +447,7 @@ nav:
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
     - Tile texture: board-texture.md
+    - Tilemap: board-tilemap.md
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md

@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default PathFollower;
 
 declare namespace PathFollower {
@@ -16,7 +18,7 @@ declare namespace PathFollower {
     }
 }
 
-declare class PathFollower extends Phaser.Events.EventEmitter {
+declare class PathFollower extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: PathFollower.IConfig

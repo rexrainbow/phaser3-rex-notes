@@ -2,34 +2,35 @@ import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
-import HiddenEdit from './hiddenedit/HiddenEdit';
-import Checkbox from './checkbox/Checkbox';
-
-import Container from './container/Container';
-import Canvas from './canvas/Canvas';
-import CircleMaskImage from './circlemaskimage/CircleMaskImage';
-import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import DynamicText from './dynamictext/DynamicText';
 import TextPlayer from './textplayer/TextPlayer';
 import CanvasInput from './canvasinput/CanvasInput';
+import HiddenEdit from './hiddenedit/HiddenEdit';
+import Checkbox from './checkbox/Checkbox';
+import ToggleSwitch from './toggleswitch/ToggleSwitch';
+import Canvas from './canvas/Canvas';
+import CircleMaskImage from './circlemaskimage/CircleMaskImage';
+import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import CircularProgress from './circularprogress/CircularProgress';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas';
 import LineProgress from './lineprogress/LineProgress';
 import LineProgressCanvas from './lineprogresscanvas/LineProgressCanvas';
+import Triangle from './triangle/Triangle';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import TransitionImage from './transitionimage/TransitionImage';
+import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
-import ColorComponents from './colorinput/colorcomponents/ColorComponents';
-import ColorInput from './colorinput/colorinput/ColorInput';
-import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
-import ColorPicker from './colorinput/colorpicker/ColorPicker';
+import InputText from './inputtext/InputText';
+import { FileChooser } from './filechooser/FileChooser';
+import FileDropZone from './filedropzone/FileDropZone';
 import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 import NinePatch2 from './ninepatch2/NinePatch';
 
+import Container from './container/Container';
 import Sizer from './sizer/Sizer';
 import GridSizer from './gridsizer/GridSizer';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer';
@@ -37,13 +38,16 @@ import OverlapSizer from './overlapsizer/OverlapSizer';
 
 import Space from './space/Space';
 import Label from './label/Label';
+import SimpleLabel from './simplelabel/SimpleLabel';
 import TitleLabel from './titlelabel/TitleLabel';
 import NameValueLabel from './namevaluelabel/NameValueLabel';
 import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
+import FileSelectorButton from './fileselectorbutton/FileSelectorButton';
 import Dialog from './dialog/Dialog';
 import Choices from './choices/Choices';
+import ConfirmDialog from './confirmdialog/ConfirmDialog';
 import HolyGrail from './holygrail/HolyGrail';
 import Tabs from './tabs/Tabs';
 import Slider from './slider/Slider';
@@ -57,9 +61,15 @@ import BadgeLabel from './badgelabel/BadgeLabel';
 import Pages from './pages/Pages';
 import PerspectiveCard from './perspectivecard/PerspectiveCard';
 import TabPages from './tabpages/TabPages';
+import Folder from './folder/Folder';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents';
+import ColorInput from './colorinput/colorinput/ColorInput';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
+import ColorPicker from './colorinput/colorpicker/ColorPicker';
+import Tweaker from './tweaker/Tweaker';
 // import Sides from './sides/Sides';
 
 import Click from './click/Click';
@@ -82,7 +92,7 @@ import TextEdit from './textedit/TextEdit';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
-import { Maker, YAMLMake as Make } from './maker/index';
+// import { Maker, YAMLMake as Make } from './maker/index';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds';
@@ -100,6 +110,7 @@ import DelayPromise from '../../plugins/utils/promise/Delay'
 import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
+import { OpenFileChooser } from './filechooser/FileChooser';
 
 type FontSizeResize = typeof SetFontSizeToFitWidth;
 
@@ -108,31 +119,32 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
+    DynamicText,
+    TextPlayer,
+    CanvasInput,
     HiddenEdit,
     Checkbox,
-
+    ToggleSwitch,
     Container,
     Canvas,
     CircleMaskImage,
     AlphaMaskImage,
-    DynamicText,
-    TextPlayer,
-    CanvasInput,
     FullWindowRectangle,
     Cover,
-    ColorComponents,
-    ColorInput,
-    ColorInputBase,
-    ColorPicker,
+    InputText,
+    FileChooser,
+    FileDropZone,
     Chart,
     CircularProgress,
     CircularProgressCanvas,
     LineProgress,
     LineProgressCanvas,
+    Triangle,
     Knob,
     CustomShapes,
     CustomProgress,
     TransitionImage,
+    ImageBox,
     NinePatch,
     NinePatch2,
 
@@ -143,13 +155,16 @@ export {
 
     Space,
     Label,
+    SimpleLabel,
     TitleLabel,
     NameValueLabel,
     Buttons,
     GridButtons,
     FixWidthButtons,
+    FileSelectorButton,
     Dialog,
     Choices,
+    ConfirmDialog,
     HolyGrail,
     Tabs,
     Slider,
@@ -163,9 +178,15 @@ export {
     Pages,
     PerspectiveCard,
     TabPages,
+    Folder,
     TextArea,
     ScrollablePanel,
     Toast,
+    ColorComponents,
+    ColorInput,
+    ColorInputBase,
+    ColorPicker,
+    Tweaker,
     // Sides,
 
     Click,
@@ -188,7 +209,7 @@ export {
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
     Modal, ModalPromise, ModalClose,
-    Maker, Make,
+    // Maker, Make,
 
     GetParentSizer,
     GetTopmostSizer,
@@ -206,5 +227,6 @@ export {
     DelayPromise,
     GetViewport,
     SetChildrenInteractive,
-    RequestDrag
+    RequestDrag,
+    OpenFileChooser,
 }

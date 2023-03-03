@@ -332,28 +332,71 @@ dialog.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+
 ### Modal
 
+Pop this dialog as modal dialog, clicking any action button to close this modal dialog.
+
 ```javascript
-scene.rexUI.modalPromise(dialog, config)
-    .then(function(closeEventData) {
+dialog.modal({
+    // cover: {
+    //     color: 0x0,
+    //     alpha: 0.8,
+    //     transitIn: function(gameObject, duration) { },
+    //     transitOut: function(gameObject, duration) { },
+    // },
+    // cover: false, 
+
+    // When to close modal dialog?
+    // touchOutsideClose: false,
+    // anyTouchClose: false,
+    // timeOutClose: false,
+    // manualClose: false,
+
+    // duration: {
+    //     in: 200,
+    //     hold: 2000,
+    //     out: 200
+    // }
+
+    // transitIn: 0,
+    // transitOut: 0,
+
+    // destroy: true
+});
+// dialog.modal(config, onClose);
+```
+
+or
+
+```javascript
+dialog
+    .modalPromise(config)
+    .then(function(data){
+        
     })
 ```
 
 - `config` : See [Modal behavior](modal.md#create-instance)
+- `onClose` : Callback when closing modal dialog
+    ```javascript
+    function(data) {
+        // var index = data.index;
+        // var text = data.text;
+        // var button = data.button;
+        // var dialog = data.dialog;
+    }
+    ```
+    - `data` : Contains these properties
+        - `data.index` : Index of clicking action button
+        - `data.text` : `button.text`, this property is valided if button game object is a label.
+        - `data.button` : Clicked button game object.
+        - `data.dialog` : This dialog game object.
 
-#### Close modal dialog
-
-```javascript
-dialog.emit('modal.requestClose');
-// dialog.emit('modal.requestClose', closeEventData);
-```
-
-- Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 
@@ -525,49 +568,6 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     ```
     - `index` : A number index, or a button game object.
 
-#### Enable/disable input of button
-
-- Enable choice/action/toolbar/left-toolbar button
-    ```javascript
-    dialog.setChoiceEnable(index);
-    dialog.setActionEnable(index);
-    dialog.setToolbarEnable(index);
-    dialog.setLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-- Enable all buttons
-    ```javascript
-    dialog.setAllButtonsEnable();
-    ```
-- Disable choice/action/toolbar/left-toolbar button's input
-    ```javascript
-    dialog.setChoiceEnable(index, false);
-    dialog.setActionEnable(index, false);
-    dialog.setToolbarEnable(index, false);
-    dialog.setLeftToolbarEnable(index, false);
-    ```
-    - `index` : A number index, or a button game object.
-- Disable all buttons
-    ```javascript
-    dialog.setAllButtonsEnable(false);
-    ```
-- Toggle choice/action/toolbar/left-toolbar button's input
-    ```javascript
-    dialog.toggleChoiceEnable(index);
-    dialog.toggleActionEnable(index);
-    dialog.toggleToolbarEnable(index);
-    dialog.toggleLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-- Get choice/action/toolbar/left-toolbar button's input enable
-    ```javascript
-    var enabled = dialog.getChoiceEnable(index);
-    var enabled = dialog.getActionEnable(index);
-    var enabled = dialog.getToolbarEnable(index);
-    var enabled = dialog.getLeftToolbarEnable(index);
-    ```
-    - `index` : A number index, or a button game object.
-
 ### Get element
 
 - Get element
@@ -599,7 +599,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         ```javascript
         var button = dialog.getElement('choices[' + index + ']');
         ```
-    - Acrion button game object
+    - Action button game object
         ```javascript
         var buttons = dialog.getElement('actions');
         ```
@@ -679,6 +679,49 @@ dialog.addLeftToolbar(gameObject);
     dialog.clearLeftToolbar(destroyChild);
     ```
     - `destroyChild` : Set `true` to destroy button game object.
+
+### Enable/disable input of button
+
+- Enable choice/action/toolbar/left-toolbar button
+    ```javascript
+    dialog.setChoiceEnable(index);
+    dialog.setActionEnable(index);
+    dialog.setToolbarEnable(index);
+    dialog.setLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Enable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable();
+    ```
+- Disable choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.setChoiceEnable(index, false);
+    dialog.setActionEnable(index, false);
+    dialog.setToolbarEnable(index, false);
+    dialog.setLeftToolbarEnable(index, false);
+    ```
+    - `index` : A number index, or a button game object.
+- Disable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable(false);
+    ```
+- Toggle choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.toggleChoiceEnable(index);
+    dialog.toggleActionEnable(index);
+    dialog.toggleToolbarEnable(index);
+    dialog.toggleLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Get choice/action/toolbar/left-toolbar button's input enable
+    ```javascript
+    var enabled = dialog.getChoiceEnable(index);
+    var enabled = dialog.getActionEnable(index);
+    var enabled = dialog.getToolbarEnable(index);
+    var enabled = dialog.getLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
 
 ### Show/hide button
 

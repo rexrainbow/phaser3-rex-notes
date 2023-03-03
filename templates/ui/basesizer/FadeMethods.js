@@ -1,5 +1,6 @@
 import { FadeIn, FadeOutDestroy } from '../fade/Fade.js';
-import { WaitComplete } from '../utils/WaitEvent.js'
+import { WaitComplete } from '../utils/WaitEvent.js';
+import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -15,7 +16,7 @@ var OnInitFade = function (gameObject, fade) {
 
     // Update local state
     fade.on('update', function () {
-        var parent = gameObject.getParentSizer();
+        var parent = GetParentSizerMethods.getParentSizer(gameObject);
         if (parent) {
             parent.resetChildAlphaState(gameObject);
         }

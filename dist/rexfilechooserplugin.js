@@ -210,6 +210,80 @@
     return this;
   };
 
+  var SyncTo = function SyncTo(gameObject) {
+    this.setOrigin(gameObject.originX, gameObject.originY);
+    this.setPosition(gameObject.x, gameObject.y);
+    this.resize(gameObject.displayWidth, gameObject.displayHeight);
+    return this;
+  };
+
+  var GetCache = function GetCache(game, loaderType, cacheType) {
+    if (cacheType === undefined) {
+      switch (loaderType) {
+        case 'image':
+        case 'svg':
+          cacheType = 'textures';
+          break;
+        case 'animation':
+          cacheType = 'json';
+          break;
+        case 'tilemapTiledJSON':
+        case 'tilemapCSV':
+          cacheType = 'tilemap';
+          break;
+        case 'glsl':
+          cacheType = 'shader';
+          break;
+        default:
+          cacheType = loaderType;
+          break;
+      }
+    }
+    game = GetGame(game);
+    var cache;
+    if (cacheType === 'textures') {
+      cache = game.textures;
+    } else {
+      cache = game.cache[cacheType];
+    }
+    return cache;
+  };
+
+  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
+    var cache = GetCache(scene, loaderType, cacheType);
+    if (cache.exists(key)) {
+      cache.remove(key);
+    }
+    var url = window.URL.createObjectURL(file);
+    var loader = scene.load;
+    if (onComplete) {
+      loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
+        onComplete(data);
+      });
+    }
+    loader[loaderType](key, url);
+    loader.start();
+  };
+
+  var LoadFile = function LoadFile(file, loaderType, key, cacheType, onComplete) {
+    var scene = this.scene;
+    FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
+    return this;
+  };
+  var LoadFilePromise = function LoadFilePromise(file, loaderType, key, cacheType) {
+    var scene = this.scene;
+    return new Promise(function (resolve, reject) {
+      var onComplete = function onComplete(data) {
+        resolve(data);
+      };
+      FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
+    });
+  };
+  var LoadFileMethods = {
+    loadFile: LoadFile,
+    loadFilePromise: LoadFilePromise
+  };
+
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -318,21 +392,14 @@
       get: function get() {
         return this.fileInput.files;
       }
-    }, {
-      key: "syncTo",
-      value: function syncTo(gameObject) {
-        this.setOrigin(gameObject.originX, gameObject.originY);
-        this.setPosition(gameObject.x, gameObject.y);
-        this.resize(gameObject.displayWidth, gameObject.displayHeight);
-        return this;
-      }
     }]);
     return FileChooser;
   }(DOMElement);
   var methods = {
-    resize: Resize
+    resize: Resize,
+    syncTo: SyncTo
   };
-  Object.assign(FileChooser.prototype, methods);
+  Object.assign(FileChooser.prototype, methods, LoadFileMethods);
 
   function Factory (x, y, width, height, config) {
     var gameObject = new FileChooser(this.scene, x, y, width, height, config);

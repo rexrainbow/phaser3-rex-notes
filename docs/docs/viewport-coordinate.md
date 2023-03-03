@@ -52,11 +52,13 @@ Attach `vpx`, `vpy` properties to a game object, to set position according to pr
     };
     var game = new Phaser.Game(config);
     ```
-- Attach `vpx`, `vpy` properties.
+- Attach `vpx`, `vpy`, `vpxOffset`, `vpyOffset` properties.
     ```javascript
     scene.plugins.get('rexViewportCoordinate').add(gameObject, viewport, vpx, vpy);
     gameObject.vpx = 0.5;
     gameObject.vpy = 0.5;
+    gameObject.vpxOffset = 0;
+    gameObject.vpyOffset = 0;
     ```
 
 #### Import method
@@ -69,11 +71,13 @@ Attach `vpx`, `vpy` properties to a game object, to set position according to pr
     ```javascript
     import AddViewportCoordinateProperties from 'phaser3-rex-plugins/plugins/viewportcoordinate.js';
     ```
-- Attach `vpx`, `vpy` properties.
+- Attach `vpx`, `vpy`, `vpxOffset`, `vpyOffset` properties.
     ```javascript
     AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy);
     gameObject.vpx = 0.5;
     gameObject.vpy = 0.5;
+    gameObject.vpxOffset = 0;
+    gameObject.vpyOffset = 0;
     ```
 
 ### Attach properties
@@ -83,19 +87,20 @@ scene.plugins.get('rexViewportCoordinate').add(gameObject, viewport, vpx, vpy, t
 ```
 
 - `vpx`, `vpy` : Proportion of viewport.
+- `vpxOffset`, `vpyOffset` : Offset of position.
 - `viewport` : Viewport in [rectangle](geom-rectangle.md)
 - `transformCallback` : Transform callback.
     - `undefined` : Use default transform callback.
         ```javascript
-        function(gameObject, viewport, vpx, vpy) {
-            gameObject.x = viewport.x + (viewport.width * vpx);
-            gameObject.y = viewport.y + (viewport.height * vpy);
+        function(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
+            gameObject.x = viewport.x + (viewport.width * vpx) + vpxOffset;
+            gameObject.y = viewport.y + (viewport.height * vpy) + vpyOffset;
         }
         ```
 
 Changing 
 
-- `gameObject.vpx`, or `gameObject.vpy`, or
+- `gameObject.vpx`, `gameObject.vpy`, `gameObject.vpxOffset`, `gameObject.vpyOffset`
 - `x`, `y`, `width`, `height` of viewport (a [rectangle](geom-rectangle.md))
 
 Will change position (`x` , `y`) of game object.

@@ -8,7 +8,7 @@ var OnParseRotateCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (value) {
             value = DegToRad(value);
             AppendCommandBase.call(textPlayer,
-                'camera.rotate',  // name
+                tagName,          // name
                 Rotate,           // callback
                 value,            // params
                 textPlayer,       // scope
@@ -29,7 +29,7 @@ var OnParseRotateCameraTag = function (textPlayer, parser, config) {
 
 var Rotate = function (value) {
     // this: textPlayer
-    this.camera.setRotation(value);
+    this.targetCamera.setRotation(value);
 }
 
 var RotateTo = function (params) {
@@ -38,7 +38,7 @@ var RotateTo = function (params) {
     var ease = params[2];
 
     // this: textPlayer
-    this.camera.rotateTo(value, false, duration, ease);
+    this.targetCamera.rotateTo(value, false, duration, ease);
 }
 
 export default OnParseRotateCameraTag;

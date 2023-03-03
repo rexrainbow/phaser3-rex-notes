@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
+import { ModalBehavoir } from '../modal/Modal';
 
 export default Dialog;
 
@@ -101,6 +102,15 @@ declare namespace Dialog {
 
         click?: IConfigClick
     }
+
+    type CloseEventDataType = {
+        index: number,
+        text: string,
+        button: Phaser.GameObjects.GameObject,
+        dialog: Dialog
+    }
+
+    type OnModalCloseCallbackType = (data: CloseEventDataType | Dialog) => void;
 }
 
 declare class Dialog extends Sizer {
@@ -277,4 +287,19 @@ declare class Dialog extends Sizer {
     clearChoicesButtonStates(): this;
 
     getChoicesSelectButtonName(): string;
+
+    modal(
+        config?: ModalBehavoir.IConfig,
+        onClose?: Dialog.OnModalCloseCallbackType
+    ): this;
+
+    modal(
+        onClose?: Dialog.OnModalCloseCallbackType
+    ): this;
+
+    modalPromise(
+        config?: ModalBehavoir.IConfig
+    ): Promise<Dialog.CloseEventDataType | Dialog>;
+
+    modalClose(closeEventData?: Dialog.CloseEventDataType): this;
 }

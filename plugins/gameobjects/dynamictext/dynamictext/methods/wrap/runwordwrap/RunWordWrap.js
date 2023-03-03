@@ -1,7 +1,7 @@
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
-import { IsNewLineChar } from '../../../bob/Types.js';
+import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
 import GetDefaultTextHeight from './GetDefaultTextHeight.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -126,9 +126,11 @@ var RunWordWrap = function (config) {
         childIndex += charCnt;
         // Next line
         var isNewLineChar = IsNewLineChar(word[0]);
-        if ((remainderWidth < wordWidth) || isNewLineChar) {
+        var isPageBreakChar = IsPageBreakChar(word[0]);
+        var isControlChar = isNewLineChar || isPageBreakChar;
+        if ((remainderWidth < wordWidth) || isControlChar) {
             // Add to result
-            if (isNewLineChar) {
+            if (isControlChar) {
                 var char = word[0];
                 char.setActive().setPosition(x, y);
                 resultChildren.push(char);
@@ -145,9 +147,11 @@ var RunWordWrap = function (config) {
             lastLineWidth = 0;
             lastLine = [];
 
-            if (!showAllLines && (resultLines.length === maxLines)) {  // Exceed maxLines
+            var isPageEnd = isPageBreakChar ||
+                (!showAllLines && (resultLines.length === maxLines)); // Exceed maxLines
+            if (isPageEnd) {
                 break;
-            } else if (isNewLineChar) {  // Already add to result
+            } else if (isControlChar) {  // Already add to result
                 continue;
             }
         }

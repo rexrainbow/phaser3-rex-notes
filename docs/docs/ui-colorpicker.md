@@ -233,4 +233,4 @@ Change value will also change the position of marker on H-palette and SV-palette
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

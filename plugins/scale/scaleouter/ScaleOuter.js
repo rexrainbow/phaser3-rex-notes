@@ -2,7 +2,10 @@ import CheckScaleMode from './CheckScaleMode.js';
 import GetScaleOutCameraParameters from './GetScaleOuterCameraParameters.js';
 import GetInnerViewport from './GetInnerViewport.js';
 import GetOuterViewport from './GetOuterViewport.js';
+import ShrinkSizeByRatio from './ShrinkSizeByRatio.js'
 
+const Rectangle = Phaser.Geom.Rectangle;
+const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom
 const SetStruct = Phaser.Structs.Set;
 
 class ScaleOuter {
@@ -14,8 +17,10 @@ class ScaleOuter {
         this.scrollX = 0;
         this.scrollY = 0;
         this.zoom = 1;
+
         this._innerViewport = undefined;
         this._outerViewport = undefined;
+        this._shrinkOuterViewport = undefined;
 
         this.boot();
     }
@@ -24,7 +29,7 @@ class ScaleOuter {
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
             scene.sys.scale.on('resize', this.scale, this);
-            scene.sys.events.once('preupdate', this.start, this);
+            scene.sys.game.events.once('prestep',this.start, this);
         }
 
         scene.sys.events.on('shutdown', function () {
@@ -41,6 +46,7 @@ class ScaleOuter {
         this.scene = undefined;
         this._innerViewport = undefined;
         this._outerViewport = undefined;
+        this._shrinkOuterViewport = undefined;
     }
 
     start() {
@@ -57,7 +63,7 @@ class ScaleOuter {
     stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.sys.events.off('preupdate', this.start, this);
+        scene.sys.game.events.off('prestep',this.start, this);
         return this;
     }
 
@@ -73,6 +79,29 @@ class ScaleOuter {
 
     get outerViewport() {
         return this._outerViewport;
+    }
+
+    getShrinkedOuterViewport(maxRatio, minRatio, out) {
+        if (typeof (minRatio) !== 'number') {
+            out = minRatio;
+            minRatio = undefined;
+        }
+
+        if (out === undefined) {
+            out = new Rectangle();
+        } else if (out === true) {
+            if (this._shrinkOuterViewport === undefined) {
+                this._shrinkOuterViewport = new Rectangle();
+            }
+            out = this._shrinkOuterViewport;
+        }
+
+        CopyRectangle(this._outerViewport, out);
+        ShrinkSizeByRatio(out, maxRatio, minRatio);
+        out.centerX = this._outerViewport.centerX;
+        out.centerY = this._outerViewport.centerY;
+
+        return out;
     }
 
     // Internal methods

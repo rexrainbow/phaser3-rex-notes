@@ -10,6 +10,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 - [Page typing](https://codepen.io/rexrainbow/pen/LYxoRWJ)
 - [Align, rotation, drawBelowCallback](https://codepen.io/rexrainbow/pen/JjEQXqj)
 - [Vertical wrap](https://codepen.io/rexrainbow/pen/oNBKpYG)
+- [Character's world position](https://codepen.io/rexrainbow/pen/oNyRYZj)
 - [Child input event](https://codepen.io/rexrainbow/pen/GRdrLrw)
 
 ## Usage
@@ -427,6 +428,11 @@ txt.appendImage(key, frame, {
 
 ### Wrap
 
+Control characters :
+
+- `'\n'` : New line
+- `'\f'` : Page break
+
 #### Horizontal wrap
 
 ```javascript
@@ -669,6 +675,16 @@ txt.setWrapConfig(config);
                 // ...
             }
             ```
+- World position
+    ```javascript
+    var worldXY = child.getWorldPosition();
+    // out = child.getWorldPosition(out);
+    ```
+    or
+    ```javascript
+    var worldXY = txt.getCharWorldPosition(char);
+    // out = txt.getCharWorldPosition(char, out);
+    ```
 
 #### Character
 

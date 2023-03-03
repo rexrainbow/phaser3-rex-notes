@@ -3,7 +3,10 @@ var RemoveElement = function (element) {
         return;
     }
 
-    document.body.removeChild(element);
+    var parentElement = element.parentElement;
+    if (parentElement) {
+        parentElement.removeChild(element);
+    }
 }
 
 export default RemoveElement;

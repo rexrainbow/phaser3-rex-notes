@@ -1,4 +1,3 @@
-import Container from '../container/Container.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import AddChild from './utils/AddChild.js';
 

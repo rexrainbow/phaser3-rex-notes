@@ -166,7 +166,7 @@
     select: 'select'
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
       out = {};
@@ -174,7 +174,7 @@
     var property, value;
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
-      value = GetValue$1(config, key, property[1]);
+      value = GetValue$2(config, key, property[1]);
       if (value !== undefined) {
         out[property[0]] = value;
       }
@@ -182,11 +182,19 @@
     return out;
   };
 
-  var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, config) {
+    var preventDefault = GetValue$1(config, 'preventDefault', false);
+    var preTest = GetValue$1(config, 'preTest');
     var _loop = function _loop(elementEventName) {
       // Note: Don't use `var` here
       element.addEventListener(elementEventName, function (e) {
-        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        if (!preTest || preTest(gameObject, elementEventName)) {
+          gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        }
+        if (preventDefault) {
+          e.preventDefault();
+        }
       });
     };
     for (var elementEventName in elementEvents) {

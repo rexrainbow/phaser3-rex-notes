@@ -19,6 +19,7 @@ var Add = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
+    this.addToParentContainer(gameObject);
     this.addToRenderLayer(gameObject);
 
     return this;
@@ -59,10 +60,24 @@ var AddLocal = function (gameObject, config) {
 }
 
 var SetupSyncFlags = function (state, config) {
-    state.syncPosition = GetValue(config, 'syncPosition', true);
-    state.syncRotation = GetValue(config, 'syncRotation', true);
-    state.syncScale = GetValue(config, 'syncScale', true);
-    state.syncAlpha = GetValue(config, 'syncAlpha', true);
+    if (config === undefined) {
+        config = true;
+    }
+
+    if (typeof (config) === 'boolean') {
+        state.syncPosition = config;
+        state.syncRotation = config;
+        state.syncScale = config;
+        state.syncAlpha = config;
+        state.syncScrollFactor = config;
+    } else {
+        state.syncPosition = GetValue(config, 'syncPosition', true);
+        state.syncRotation = GetValue(config, 'syncRotation', true);
+        state.syncScale = GetValue(config, 'syncScale', true);
+        state.syncAlpha = GetValue(config, 'syncAlpha', true);
+        state.syncScrollFactor = GetValue(config, 'syncScrollFactor', true);
+    }
+
 }
 
 export default {

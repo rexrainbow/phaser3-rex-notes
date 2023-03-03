@@ -18,8 +18,8 @@ class Demo extends Phaser.Scene {
         var s1 = `1234[area=ABC] [color=yellow]ABC[/color] [/area]5678
 [area=DEF] DEF [/area] 90 [area=GHI]GHI[/area]
 
-[area=url:https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html]Document[/area]
-[area=url:https://github.com/rexrainbow/phaser3-rex-notes/]Github[/area]
+[url=https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html]Document[/url]
+[url=https://github.com/rexrainbow/phaser3-rex-notes/]Github[/url]
 [area=KEY][img=key][/area]
 `;
         var text = this.add.rexBBCodeText(400, 30, s1, {
@@ -33,45 +33,30 @@ class Demo extends Phaser.Scene {
 
             images: {
                 key: { y: -8 }
-            }
+            },
+
+            interactive: true
         })
             .drawAreaBounds(this.add.graphics(), 0xff0000)
 
         var scene = this;
         text
-            .setInteractive()
             .on('areadown', function (key) {
-                if (!IsURLKey(key)) {
-                    print.text += `Click area:${key}\n`
-                }
+                print.text += `Down area:${key}\n`;
             })
-            .on('areaup', function (key) {
-                if (IsURLKey(key)) {
-                    window.open(GetURL(key), '_blank');
-                }
+            .on('areaclick', function (key) {
+                print.text += `Click area:${key}\n`;
             })
             .on('areaover', function (key) {
                 print.text += `Over area:${key}\n`;
-
-                scene.input.manager.canvas.style.cursor = 'pointer';
             })
             .on('areaout', function (key) {
                 print.text += `Out area:${key}\n`;
-
-                scene.input.manager.canvas.style.cursor = '';
             })
 
     }
 
     update() { }
-}
-
-var IsURLKey = function (key) {
-    return (key.substring(0, 4) === 'url:');
-}
-
-var GetURL = function (key) {
-    return key.substring(4, key.length);
 }
 
 var config = {

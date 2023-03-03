@@ -7,7 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
-        super(scene, x, y, 2, 2);
+        super(scene, x, y, 1, 1);
 
         this.isRexSizer = true;
         this.setMinSize(minWidth, minHeight);
@@ -25,7 +25,12 @@ class Base extends Container {
         }
 
         this.setInnerPadding(GetValue(config, 'space', 0));
-        this.setDraggable(GetValue(config, 'draggable', false));
+
+        var draggable = GetValue(config, 'draggable', false);
+        if (draggable) {
+            this.setDraggable(draggable);
+        }
+
         this.setSizerEventsEnable(GetValue(config, 'sizerEvents', false));
         this.setDirty(true);
 

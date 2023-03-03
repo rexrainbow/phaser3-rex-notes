@@ -13,9 +13,12 @@ var Modal = function (gameObject, config) {
 
     // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
     gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    modalBehavior.on('close', function () {
-        gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
-    })
+    /*
+    It is not necessary to turn off gameObject's 'modal.requestClose' event because that :
+
+    - If `config.destroy` is `undefined` (or `true), gameObject and modalBehavior will be destroyed
+    - If `config.destroy` is `false` (for reusing dialog), keeping gameObject and modalBehavior 
+    */
 
     return modalBehavior;
 }

@@ -4,16 +4,33 @@ import FadeIn from '../../fade-in.js';
 import FadeOutDestroy from '../../fade-out-destroy.js';
 
 export default {
-    popUp: PopUp,
+    popUp(gameObject, duration) {
+        if (gameObject._modalScaleSave !== undefined) {
+            gameObject.scaleX = gameObject._modalScaleSave;
+            gameObject.scaleY = gameObject._modalScaleSave;
+        } else {
+            gameObject._modalScaleSave = gameObject.scaleX;
+        }
 
-    scaleDown: function (gameObject, duration) {
+        PopUp(gameObject, duration);
+    },
+
+    scaleDown(gameObject, duration) {
         // Don't destroy here
         ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
     },
 
-    fadeIn: FadeIn,
+    fadeIn(gameObject, duration) {
+        if (gameObject._modalAlphaSave !== undefined) {
+            gameObject.alpha = gameObject._modalAlphaSave;
+        } else {
+            gameObject._modalAlphaSave = gameObject.alpha;
+        }
 
-    fadeOut: function (gameObject, duration) {
+        FadeIn(gameObject, duration);
+    },
+
+    fadeOut(gameObject, duration) {
         // Don't destroy here
         FadeOutDestroy(gameObject, duration, false);
     },

@@ -12,9 +12,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var source = '<fn0>Hello<fn1=0>World<pause><fn2=abcd, -3.2, 1.5><aa>Phaser3</aa>End';
+        var source = '[[fn0]]Hello[[fn1=0]]World[[pause]][[fn2=abcd, -3.2, 1.5]][[aa]]Phaser3[[/aa]]End';
+        console.log(source);
+
         var parser = this.plugins.get('rexBracketParserPlugin').add({
-            // delimiters: '<>'
+            delimiters: ['[[', ']]']
         });
         parser
             .on('content', function (content) {
@@ -28,8 +30,8 @@ class Demo extends Phaser.Scene {
                 console.log(`Run fn1(${value})`);
                 // parser.skipEvent();  // Don't fire '+' event
             })
-            .on('+fn2', function (values) {
-                console.log(`Run fn2(${JSON.stringify(values)})`);
+            .on('+fn2', function (value0, value1, value2) {
+                console.log(`Run fn2(${value0}, ${value1}, ${value2})`);
                 // parser.skipEvent();  // Don't fire '+' event
             })
             .on('+pause', function () {
@@ -43,7 +45,7 @@ class Demo extends Phaser.Scene {
             .on('-', function (tag) {
                 console.log('tag-end:', tag);
             })
-            .on('start', function(){
+            .on('start', function () {
                 console.log('start');
             })
             .on('complete', function () {

@@ -12,7 +12,8 @@ import MonopolyFactory from './board/monopoly/Factory';
 import MiniBoardFactory from './board/miniboard/Factory';
 
 import HexagonMap from './board/hexagonmap/index';
-import CreateTileTexture from './board/texture/CreateTileTexture'
+import CreateTileTexture from './board/texture/CreateTileTexture';
+import CreateBoardFromTilemap from './board/tilemap/CreateBoardFromTilemap';
 
 export default BoardPlugin;
 
@@ -34,6 +35,7 @@ declare class BoardPlugin extends Phaser.Plugins.ScenePlugin {
 
     hexagonMap: HexagonMap;
     createTileTexture: typeof CreateTileTexture;
+    createBoardFromTilemap: typeof CreateBoardFromTilemap;
 }
 
 import BoardClass from './board/board/Board';

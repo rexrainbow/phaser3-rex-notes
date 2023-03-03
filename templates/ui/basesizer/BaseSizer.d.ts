@@ -5,6 +5,7 @@ import Click from '../click/Click';
 import ClickOutside from '../clickoutside/ClickOutside';
 import InTouching from '../intouching/InTouching';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
+import { ModalBehavoir } from '../modal/Modal';
 
 export default BaseSizer;
 
@@ -45,6 +46,11 @@ declare namespace BaseSizer {
         displayWidth: number, displayHeight: number,
         scaleX: number, scaleY: number
     }
+
+    type OnModalCloseCallbackType = (
+        data: Object
+    ) => void;
+
 }
 
 declare class BaseSizer extends ContainerLite {
@@ -187,6 +193,16 @@ declare class BaseSizer extends ContainerLite {
     ): BaseSizer.PrevState;
 
     isInTouching(): boolean;
+
+    isInTouching(
+        pointer: Phaser.Input.Pointer,
+        gameObject?: Phaser.GameObjects.GameObject | string
+    ): boolean;
+
+    isInTouching(
+        gameObject?: Phaser.GameObjects.GameObject | string
+    ): boolean;
+
 
     moveFrom(
         duration: number,
@@ -559,6 +575,10 @@ declare class BaseSizer extends ContainerLite {
 
     disableClickOutside(gameObject: Phaser.GameObjects.GameObject): this;
 
+    isPointerInBounds(): boolean;
+    isPointerInBounds(gameObject: Phaser.GameObjects.GameObject): boolean;
+    isPointerInBounds(name: string): boolean;
+
     onTouching(
         callback: (
             inTouch: InTouching,
@@ -586,6 +606,38 @@ declare class BaseSizer extends ContainerLite {
     ): this;
 
     offTouching(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: object
+    ): this;
+
+    onTouchingEnd(
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    onTouchingEnd(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    offTouchingEnd(
+        callback: Function,
+        scope?: object
+    ): this;
+
+    offTouchingEnd(
         gameObject: Phaser.GameObjects.GameObject,
         callback: Function,
         scope?: object
@@ -617,6 +669,23 @@ declare class BaseSizer extends ContainerLite {
     isShow(
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;
+
+    onCreateModalBehavior: (self: this) => void;
+
+    modal(
+        config?: ModalBehavoir.IConfig,
+        onClose?: BaseSizer.OnModalCloseCallbackType
+    ): this;
+
+    modal(
+        onClose?: BaseSizer.OnModalCloseCallbackType
+    ): this;
+
+    modalPromise(
+        config?: ModalBehavoir.IConfig
+    ): Promise<Object>;
+
+    modalClose(closeEventData?: Object): this;
 
     broadcastEvent(
         event: string,

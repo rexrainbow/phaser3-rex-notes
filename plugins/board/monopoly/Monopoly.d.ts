@@ -1,3 +1,4 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 import { TileXYType } from '../types/Position';
 import Board from '../board/Board';
 
@@ -29,7 +30,7 @@ declare namespace Monopoly {
     }
 }
 
-declare class Monopoly<ChessType = Phaser.GameObjects.GameObject> {
+declare class Monopoly<ChessType = Phaser.GameObjects.GameObject> extends ComponentBase {
     constructor(
         gameObject: ChessType,
         config?: Monopoly.IConfig

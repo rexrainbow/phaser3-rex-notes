@@ -18,6 +18,8 @@ module.exports = {
     'lineprogressplugin': './plugins/lineprogress-plugin.js',
     'customprogressplugin': './plugins/customprogress-plugin.js',
     'checkboxplugin': './plugins/checkbox-plugin.js',
+    'toggleswitchplugin': './plugins/toggleswitch-plugin.js',
+    'triangleplugin': './plugins/triangle-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
     'canvasinputplugin': './plugins/canvasinput-plugin.js',
@@ -28,6 +30,7 @@ module.exports = {
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
+    'imageboxplugin': './plugins/imagebox-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',
@@ -104,6 +107,7 @@ module.exports = {
     'texttypingplugin': './plugins/texttyping-plugin.js',
     'textpageplugin': './plugins/textpage-plugin.js',
     'texteditplugin': './plugins/textedit-plugin.js',
+    'texttranslationplugin': './plugins/texttranslation-plugin.js',
 
     // extend of particles
     'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
@@ -112,8 +116,9 @@ module.exports = {
     // camera
     'scaleouterplugin': './plugins/scaleouter-plugin.js',
 
-    // file chooser
+    // file input
     'filechooserplugin': './plugins/filechooser-plugin.js',
+    'filedropzoneplugin': './plugins/filedropzone-plugin.js',
 
     // member of scene
     // sound
@@ -136,6 +141,7 @@ module.exports = {
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
+    'bracketparser2plugin': './plugins/bracketparser2-plugin.js',
     'tagplayerplugin': './plugins/tagplayer-plugin.js',
 
     // time
@@ -151,6 +157,7 @@ module.exports = {
     'buffdataplugin': './plugins/buffdata-plugin.js',
     'canvasdataplugin': './plugins/canvasdata-plugin.js',
     'uniqueitemlistplugin': './plugins/uniqueitemlist-plugin.js',
+    'pngappenderplugin': './plugins/pngappender-plugin.js',
 
     // storage
     'localforagefilesplugin': './plugins/localforage-files-plugin.js',
@@ -222,6 +229,7 @@ module.exports = {
     'buttons': './templates/ui/buttons/Buttons.js',
     'gridbuttons': './templates/ui/gridbuttons/GridButtons.js',
     'fixwidthbuttons': './templates/ui/fixwidthbuttons/FixWidthButtons.js',
+    'fileselectorbutton': './templates/ui/fileselectorbutton/FileSelectorButton.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
     'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',
@@ -235,17 +243,24 @@ module.exports = {
     'customshapes': './templates/ui/customshapes/CustomShapes.js',
     'customprogress': './templates/ui/customprogress/CustomProgress.js',
     'colorcomponents': './templates/ui/colorinput/colorcomponents/ColorComponents.js',
+    'checkbox': './templates/ui/checkbox/Checkbox.js',
+    'toggleswitch': './templates/ui/toggleswitch/ToggleSwitch.js',
+    'triangle': './templates/ui/triangle/Triangle.js',
     'colorinput': './templates/ui/colorinput/colorinput/ColorInput.js',
     'colorpicker': './templates/ui/colorinput/colorpicker/ColorPicker.js',
+    'filechooser': './templates/ui/filechooser/FileChooser.js',
+    'filedropzone': './templates/ui/filedropzone/FileDropZone.js',
     'chart': './templates/ui/chart/Chart.js',
     'dialog': './templates/ui/dialog/Dialog.js',
     'choices': './templates/ui/choices/Choices.js',
+    'confirmdialog': './templates/ui/confirmdialog/ConfirmDialog.js',
     'fixwidthsizer': './templates/ui/fixwidthsizer/FixWidthSizer.js',
     'overlapsizer': './templates/ui/overlapsizer/OverlapSizer.js',
     'flip': './templates/ui/flip/Flip.js',
     'gridsizer': './templates/ui/gridsizer/GridSizer.js',
     'gridtable': './templates/ui/gridtable/GridTable.js',
     'label': './templates/ui/label/Label.js',
+    'simplelabel': './templates/ui/simplelabel/SimpleLabel.js',
     'titlelabel': './templates/ui/titlelabel/TitleLabel.js',
     'namevaluelabel': './templates/ui/namevaluelabel/NameValueLabel.js',
     'menu': './templates/ui/menu/Menu.js',
@@ -274,8 +289,10 @@ module.exports = {
     'textarea': './templates/ui/textarea/TextArea.js',
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
+    'tweaker': './templates/ui/tweaker/Tweaker.js',
     'sides': './templates/ui/sides/Sides.js',
     'uimaker': './templates/ui/maker/Maker.js',
+
     // spinner
     'audiospinner': './templates/spinner/audio/Audio.js',
     'ballspinner': './templates/spinner/ball/Ball.js',

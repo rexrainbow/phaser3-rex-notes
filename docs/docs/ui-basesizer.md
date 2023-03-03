@@ -624,6 +624,69 @@ sizer.pushIntoBounds(bounds);
         sizer.on('easedata.complete', function(key, sizer) { });
         ```
 
+
+### Modal
+
+1. Assign `sizer.onCreateModalBehavior` callback, or register events to close modal sizer directly.
+    - onCreateModalBehavior : 
+        ```javascript
+        sizer.onCreateModalBehavior = function(sizer, config) {
+            // ...
+            sizer.modalClose(data);
+        }
+        ```
+        - `config` : Passed from `sizer.modal(config)`
+    - Close modal sizer
+        ```javascript
+        sizer.modalClose(data);
+        ```
+2. Pop this modal sizer
+    ```javascript
+    sizer.modal({
+        // cover: {
+        //     color: 0x0,
+        //     alpha: 0.8,
+        //     transitIn: function(gameObject, duration) { },
+        //     transitOut: function(gameObject, duration) { },
+        // },
+        // cover: false, 
+    
+        // When to close modal dialog?
+        // touchOutsideClose: false,
+        // anyTouchClose: false,
+        // timeOutClose: false,
+        // manualClose: false,
+    
+        // duration: {
+        //     in: 200,
+        //     hold: 2000,
+        //     out: 200
+        // }
+    
+        // transitIn: 0,
+        // transitOut: 0,
+    
+        // destroy: true
+    });
+    // sizer.modal(config, onClose);
+    ```
+    or
+    ```javascript
+    sizer
+        .modalPromise(config)
+        .then(function(data){
+            
+        })
+    ```
+    - `config` : See [Modal behavior](modal.md#create-instance)
+    - `onClose` : Callback when closing modal dialog
+        ```javascript
+        function(data) {      
+        }
+        ```
+        - `data` : Object passed from `sizer.modalClose(data)`.
+
+
 ### Set properties of child
 
 ```javascript
@@ -827,6 +890,23 @@ clickOutside.on('clickoutside', callback, scope);
     sizer.disableClickOutside(child);
     ```
 
+### Is pointer in bounds
+
+- Is current sizer clicking
+    ```javascript
+    var isClicked = sizer.isPointerInBounds();
+    ```
+- Is a child clicking
+    ```javascript
+    var isClicked = sizer.isPointerInBounds(child);
+    ```
+    or
+    ```javascript
+    var isClicked = sizer.isPointerInBounds(elementName);
+    ```
+    - `child` : Game object of child
+    - `elementName` : Element name for retrieveing child game object.
+
 ### In touching
 
 Invoke callbeack if pointer is inside hitarea every tick.
@@ -834,11 +914,20 @@ Invoke callbeack if pointer is inside hitarea every tick.
 - Add in-touching event
     ```javascript
     sizer.onTouching(callback, scope);
-    // sizer.onClick(callback, scope, config);
+    // sizer.onTouching(callback, scope, config);
     ```
 - Turn off in-touching event
     ```javascript
     sizer.offTouching(callback, scope);
+    ```
+- Add touching-end event
+    ```javascript
+    sizer.onTouchingEnd(callback, scope);
+    // sizer.onTouchingEnd(callback, scope, config);
+    ```
+- Turn off touching-end event
+    ```javascript
+    sizer.offTouchingEnd(callback, scope);
     ```
 - Enable in-touching event
     ```javascript
@@ -1242,9 +1331,21 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 
 ### Is in touching
 
-```javascript
-var isTouching = sizer.isInTouching();
-```
+- Is this sizer in touching?
+    ```javascript
+    var isTouching = sizer.isInTouching();
+    ```
+- Is child of this sizer in touching?
+    ```javascript    
+    var isTouching = sizer.isInTouching(child);
+    ```
+    or
+    ```javascript
+    var isTouching = sizer.isInTouching(childKey);
+    ```
+    - `child` : Child game object.
+    - `childKey` : Get child game object back via `sizer.getElement(childKey)`. See also [sizer.addChildrenMap(key, child)](ui-basesizer.md#get-child)
+
 
 ### Change properties of child
 

@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default TextPage;
 
 declare namespace TextPage {
@@ -8,7 +10,7 @@ declare namespace TextPage {
     }
 }
 
-declare class TextPage {
+declare class TextPage extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: TextPage.IConfig

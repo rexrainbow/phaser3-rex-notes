@@ -23,6 +23,7 @@ Plugin system, built-in system of phaser.
                     plugin: pluginKlass,
                     start: true
                     // mapping: memberName  // member name in each scene instance, optional
+                    // data: undefined
                 },
                 // ...
             ]
@@ -32,9 +33,13 @@ Plugin system, built-in system of phaser.
     var game = new Phaser.Game(config);
     ```
     - `pluginKlass` : Class instance
+    - `start` : Whether the plugin should be started automatically.
+    - `mapping` : If this plugin is to be injected into the Scene Systems, this is the property key map used.
+    - `data` : Arbitrary data passed to the plugin's `init()` method.
 - Load plugin in scene
     ```javascript
     scene.load.plugin(key, url, true);
+    // scene.load.plugin(key, url, true, mapping);
     ```
     - `url` : File url or class instance.
 
@@ -59,7 +64,7 @@ var pluginInst = scene.plugins.get(key);
                 {
                     key: key,
                     plugin: pluginKlass,
-                    mapping: sceneKey     // member name in each scene instance
+                    mapping: sceneKey,    // member name in each scene instance
                 },
                 // ...
             ]

@@ -2,7 +2,7 @@ import GetLocalState from './utils/GetLocalState.js';
 
 export default {
     enableLayer() {
-        if (this.layer) {
+        if (this.privateRenderLayer) {
             return this;
         }
 
@@ -13,29 +13,29 @@ export default {
 
         this.addToLayer(layer);
 
-        this.layer = layer;
+        this.privateRenderLayer = layer;
 
         return this;
     },
 
     getLayer() {
-        if (!this.layer) {
+        if (!this.privateRenderLayer) {
             this.enableLayer();
         }
 
-        return this.layer;
+        return this.privateRenderLayer;
     },
 
     getRenderLayer() {
         // This containerLite has a layer
-        if (this.layer) {
-            return this.layer;
+        if (this.privateRenderLayer) {
+            return this.privateRenderLayer;
         }
 
         // One of parent container has a layer
         var parent = this.getParent();
         while (parent) {
-            var layer = parent.layer;
+            var layer = parent.privateRenderLayer;
             if (layer) {
                 return layer;
             }

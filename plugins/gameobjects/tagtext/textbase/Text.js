@@ -102,7 +102,7 @@ class Text extends TextBase {
         //  Set the resolution
         this.frame.source.resolution = this.style.resolution;
 
-        if (this.renderer.gl) {
+        if (this.renderer && this.renderer.gl) {
             //  Clear the default 1x1 glTexture, as we override it later
 
             this.renderer.deleteTexture(this.frame.source.glTexture);
@@ -158,6 +158,12 @@ class Text extends TextBase {
         }
 
         this.setText(text);
+
+        this.setUrlTagCursorStyle(GetValue(style, 'urlTagCursorStyle', 'pointer'));
+
+        if (GetValue(style, 'interactive', false)) {
+            this.setInteractive();
+        }
     }
 
     preDestroy() {
@@ -418,6 +424,19 @@ class Text extends TextBase {
         }
 
         return this;
+    }
+
+    setUrlTagCursorStyle(cursor) {
+        this.urlTagCursorStyle = cursor;
+        return this;
+    }
+
+    get urlTagCursorStyle() {
+        return this.canvasText.urlTagCursorStyle;
+    }
+
+    set urlTagCursorStyle(value) {
+        this.canvasText.urlTagCursorStyle = value;
     }
 
     getWrappedText(text, start, end) {

@@ -66,6 +66,7 @@ class RotateTo extends TickTask {
             this.setSpeed(speed);
         }
         super.start();
+        this.emit('start', this.parent, this);
         return this;
     }
 

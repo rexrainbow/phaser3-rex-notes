@@ -1,11 +1,12 @@
 import Sizer from '../../sizer/Sizer';
+import RoundRecrangle from '../../../../plugins/roundrectangle';
 
 
 export default Scrollable;
 
 declare namespace Scrollable {
 
-    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal';
+    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal' | 'x' | 'y';
     type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
     type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
     type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'
@@ -24,11 +25,13 @@ declare namespace Scrollable {
 
         slider?: (
             {
-                background?: Phaser.GameObjects.GameObject,
-                track?: Phaser.GameObjects.GameObject,
-                thumb?: Phaser.GameObjects.GameObject,
+                background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+                track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+                thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
                 input?: SliderInputTypes,
                 position?: SliderPositionTypes,
+
+                hideUnscrollableSlider?: boolean,
                 adaptThumbSize?: boolean,
                 minThumbSize?: number,
 
@@ -48,6 +51,7 @@ declare namespace Scrollable {
                 threshold?: number,
                 slidingDeceleration?: number | false,
                 backDeceleration?: number | false,
+                dragRate?: number,
             } |
             boolean
         ),

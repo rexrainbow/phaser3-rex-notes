@@ -243,6 +243,19 @@ tabPages.addPage({
     ```javascript
     tabPages.swapLastPage();
     ```
+- Swap page without fade-in transition
+    ```javascript
+    tabPages.swapPage(key, 0);
+    ```
+    ```javascript
+    tabPages.swapPage(index, 0);
+    ```
+    ```javascript
+    tabPages.swapFirstPage(0);
+    ```
+    ```javascript
+    tabPages.swapLastPage(0);
+    ```
 
 ### Remove page
 
@@ -304,7 +317,7 @@ tabPages.addPage({
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md), [Pages](ui-pages.md), [Buttons](ui-buttons.md)
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md), [Pages](ui-pages.md), [Buttons](ui-buttons.md)
 
 ### Events
 

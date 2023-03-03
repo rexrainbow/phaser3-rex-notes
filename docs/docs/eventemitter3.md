@@ -88,3 +88,17 @@ var names = ee.eventNames();
     once: once
 }
 ```
+
+### Custom event emitter class
+
+```javascript
+class MyEventEmitter extends Phaser.Events.EventEmitter {
+    // construct() {
+    //     super();
+    // }
+
+    // destroy() {
+    //     super.destroy();
+    // }
+}
+```

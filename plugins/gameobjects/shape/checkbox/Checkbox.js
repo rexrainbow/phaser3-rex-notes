@@ -8,7 +8,9 @@ class Checkbox extends CheckboxShape {
         super(scene, x, y, width, height, color, config);
 
         this._click = new Click(this, GetValue(config, 'click'));
-        this._click.on('click', this.toggleChecked, this);
+        this._click.on('click', function () {
+            this.toggleValue();
+        }, this);
 
         this.setReadOnly(GetValue(config, 'readOnly', false));
     }

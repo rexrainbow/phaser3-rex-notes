@@ -79,7 +79,7 @@ Viewer of grid table, to manipulate game object of each visible cell.
 ### Create instance
 
 ```javascript
-var config = {
+var table = scene.add.rexGridTable(x, y, width, height, {
     scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
     cellsCount: 0,
     columns: 1,
@@ -103,8 +103,7 @@ var config = {
         // layer: undefined,
     },
     // enableLayer: false
-}
-var table = scene.add.rexGridTable(x, y, width, height, config);
+});
 ```
 
 - `scrollMode` :

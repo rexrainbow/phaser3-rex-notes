@@ -1,7 +1,7 @@
 import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
 
 export default {
-    setCheckerAnimDuration(duration) {
+    setCheckerAnimationDuration(duration) {
         if (duration === undefined) {
             duration = 0;
         }

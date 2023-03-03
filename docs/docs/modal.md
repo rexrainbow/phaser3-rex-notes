@@ -111,10 +111,12 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
     - If `touchOutsideClose`,  `anyTouchClose`, and `timeOutClose` are `false`, it is equal to `manualClose`.
 - `duration` : Duration of transition-in, hold, trantion-out.
     - `duration.in` : Duration of transition-in (open dialog).
+        - `0` : No transition, open dialog immediately.
     - `duration.out` : Duration of transition-out (close dialog).
+        - `0` : No transition, close dialog immediately.
     - `duration.hold` : Duration of hold.
         - `-1` : Disable `timeOutClose`.
-- `transitIn` : Tween behavior of opening dialog.
+- `transitIn` : Transition behavior of opening dialog.
     - `0`, `'popUp'` : Pop up dialog from `0` to current scale.
     - `1`, `'fadeIn'` : Fade in dialog
     - Custom callback
@@ -133,8 +135,15 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
         }
         ```
 - `destroy`
-    - `true` : Destroy dialog when closing completed. Default behavior.
-    - `fasle` : Don't destroy dialog.
+    - `true` : Destroy dialog game object and this behavior when closing completed. Default behavior.
+    - `fasle` : Keep dialog game object and this behavior when closing completed. Could [reuse it](modal.md#open) later.
+
+
+### Open
+
+- Will open modal dialog game object (run transition-in callback) when creating this behavior
+- Invoke `modal.requestOpen()` to open modal dialog game object again, after closing modal dialog.
+    - Set `destroy` to `false` to reuse dialog game object and this behavior.
 
 ### Close
 

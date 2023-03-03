@@ -1,6 +1,7 @@
 // import * as Phaser from 'phaser';
-import DynamicText from "../dynamictext/DynamicText";
+import DynamicText from '../dynamictext/DynamicText';
 import Parser from '../../../bracketparser';
+import Managers from '../../../logic/runcommands/managers/Managers';
 
 export default TextPlayer;
 
@@ -8,7 +9,8 @@ declare namespace TextPlayer {
 
     interface IConfigParser {
         delimiters?: string,
-        comment?: string
+        comment?: string,
+        translateTagNameCallback?: (s: string) => string,
     }
 
     interface IConfigTyping {
@@ -23,6 +25,9 @@ declare namespace TextPlayer {
         },
         skipSpace?: boolean,
         minSizeEnable?: boolean,
+
+        fadeOutPage?: (children: DynamicText.RenderChildTypes[])
+            => void | Phaser.Events.EventEmitter | Promise<any>;
     }
 
     interface IConfigImages {
@@ -34,35 +39,8 @@ declare namespace TextPlayer {
         }
     }
 
-    interface IConfigSounds {
-        bgm?: {
-            initial?: string,
-            loop?: boolean,
-            fade?: number
-        }
-    }
-
-    type CreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        ...args: any[]
-    ) => Phaser.GameObjects.GameObject
-
-    interface IGameObjectConfig {
-        createGameObject: CreateGameObjectCallbackType,
-
-        fade?: number | {
-            mode?: 0 | 1 | 'tint' | 'alpha',
-            time?: number
-        },
-
-        viewportCoordinate?: boolean | {
-            enable?: boolean,
-            viewport?: Phaser.Geom.Rectangle
-        }
-    }
-
     interface ISpriteGameObjectConfig {
-        createGameObject?: 'sprite' | 'image' | CreateGameObjectCallbackType,
+        createGameObject?: 'sprite' | 'image' | Managers.CreateGameObjectCallbackType,
 
         fade?: number | {
             mode?: 0 | 1 | 'tint' | 'alpha',
@@ -86,7 +64,7 @@ declare namespace TextPlayer {
 
         images?: IConfigImages,
 
-        sounds?: IConfigSounds
+        sounds?: Managers.IConfigSounds,
 
         sprites?: ISpriteGameObjectConfig | false,
 
@@ -139,6 +117,8 @@ declare class TextPlayer extends DynamicText {
         config?: TextPlayer.IConfig
     );
 
+    addGameObjectManager(config: Managers.IGameObjectConfig): this;
+
     play(content: string): this;
     playPromise(content: string): Promise<any>;
 
@@ -162,7 +142,10 @@ declare class TextPlayer extends DynamicText {
     ignoreNextPageInput(enable?: boolean): this;
     setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TextPlayer.ClickTrgetTypes;
-    
+
+    setTargetCamera(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
+    readonly targetCamera: Phaser.Cameras.Scene2D.BaseCamera;
+
     getGameObject(
         goType: string,
         name: string

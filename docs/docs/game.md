@@ -121,7 +121,10 @@ or
         async: true,
         user: '',
         password: '',
-        timeout: 0
+        timeout: 0,
+        withCredentials: false,
+        imageLoadType: 'XHR',    // 'HTMLImageElement' 
+        localScheme: [ 'file://', 'capacitor://' ]
     },
 
     images: {

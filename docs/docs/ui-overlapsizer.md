@@ -327,4 +327,4 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

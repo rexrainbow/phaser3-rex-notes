@@ -41,6 +41,7 @@ import GetActiveChildren from './GetActiveChildren.js';
 import GetCharChildren from './GetCharChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetNearestChild from './GetNearestChild.js';
+import GetCharWorldPosition from './GetCharWorldPosition.js';
 import SetToMinSize from './SetToMinSize.js';
 import GetCharChildIndex from './GetCharChildIndex.js';
 import GetCharChild from './GetCharChild.js';
@@ -97,6 +98,7 @@ var Methods = {
     getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getNearestChild: GetNearestChild,
+    getCharWorldPosition: GetCharWorldPosition,
 
     setToMinSize: SetToMinSize,
 

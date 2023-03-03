@@ -1,3 +1,5 @@
+import ComponentBase from '../../../utils/componentbase/ComponentBase';
+
 export default Recorder;
 
 declare namespace Recorder {
@@ -6,7 +8,7 @@ declare namespace Recorder {
     }
 }
 
-declare class Recorder {
+declare class Recorder extends ComponentBase {
     constructor(
         parent: Phaser.Scene | Phaser.GameObjects.GameObject,
     );

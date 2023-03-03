@@ -6,8 +6,25 @@ var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (time, isStopped) {
             isStopped = (isStopped === 'stop');
             AppendCommandBase.call(textPlayer,
-                'bgm.fadeout',           // name
+                tagName,                 // name
                 FadeOutBackgroundMusic,  // callback
+                [time, isStopped],       // params
+                textPlayer,              // scope
+            );
+            parser.skipEvent();
+        })
+        .on(`-${tagName}`, function () {
+            parser.skipEvent();
+        })
+
+
+    var tagName = 'bgm2.fadeout';
+    parser
+        .on(`+${tagName}`, function (time, isStopped) {
+            isStopped = (isStopped === 'stop');
+            AppendCommandBase.call(textPlayer,
+                tagName,                 // name
+                FadeOutBackgroundMusic2, // callback
                 [time, isStopped],       // params
                 textPlayer,              // scope
             );
@@ -21,6 +38,11 @@ var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
 var FadeOutBackgroundMusic = function (params) {
     // this: textPlayer
     this.soundManager.fadeOutBackgroundMusic(...params);
+}
+
+var FadeOutBackgroundMusic2 = function (params) {
+    // this: textPlayer
+    this.soundManager.fadeOutBackgroundMusic2(...params);
 }
 
 export default OnParseFadeOutBackgroundMusicTag;

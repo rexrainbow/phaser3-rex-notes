@@ -1,8 +1,11 @@
-import LoadScript from '../../utils/loader/LoadScript.js';
 import AwaitFile from '../awaitloader/AwaitFile.js';
+import LoadScriptPromise from '../../utils/loader/LoadScriptPromise.js';
+import Delay from '../../utils/promise/Delay.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-const loaderCallback = function (url) {
+const LoaderCallback = function (url) {
     if (Array.isArray(url)) {
         for (var i = 0, cnt = url.length; i < cnt; i++) {
             this.addFile(CreateAwiatFile(this, url[i]));
@@ -13,9 +16,36 @@ const loaderCallback = function (url) {
     return this;
 }
 
-var CreateAwiatFile = function (loader, url) {
+var CreateAwiatFile = function (loader, url, availableTest) {
+    if (IsPlainObject(url)) {
+        var config = url;
+        url = GetFastValue(config, 'url');
+        availableTest = GetFastValue(config, 'availableTest');
+    }
+
     var callback = function (successCallback, failureCallback) {
-        LoadScript(url, successCallback);
+
+        LoadScriptPromise(url)
+            .then(function () {
+                if (!availableTest) {
+                    return Promise.resolve();
+                }
+
+                var AvailableTestPromise = function () {
+                    if (availableTest()) {
+                        return Promise.resolve();
+                    }
+
+                    return Delay(10)
+                        .then(function () {
+                            return AvailableTestPromise();
+                        });
+                }
+                return AvailableTestPromise();
+            })
+            .then(function () {
+                successCallback()
+            })
     }
 
     return new AwaitFile(loader, {
@@ -24,4 +54,4 @@ var CreateAwiatFile = function (loader, url) {
     });
 }
 
-export default loaderCallback;
+export default LoaderCallback;

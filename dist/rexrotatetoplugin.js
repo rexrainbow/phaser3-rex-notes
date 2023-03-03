@@ -631,6 +631,7 @@
           this.setSpeed(speed);
         }
         _get(_getPrototypeOf(RotateTo.prototype), "start", this).call(this);
+        this.emit('start', this.parent, this);
         return this;
       }
     }, {

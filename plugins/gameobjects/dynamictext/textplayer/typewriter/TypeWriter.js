@@ -21,6 +21,9 @@ class TypeWriter {
         this.setSkipSpaceEnable(GetValue(config, 'skipSpace', false));
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
         this.setMinSizeEnable(GetValue(config, 'minSizeEnable', false));
+
+        this.setFadeOutPageCallback(GetValue(config, 'fadeOutPage'));
+
     }
 
     destroy() {
@@ -61,6 +64,11 @@ class TypeWriter {
         }
 
         this.animationConfig = config;
+        return this;
+    }
+
+    setFadeOutPageCallback(callback) {
+        this.fadeOutPageCallback = callback;
         return this;
     }
 

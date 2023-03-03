@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default InTouching;
 
 declare namespace InTouching {
@@ -8,12 +10,13 @@ declare namespace InTouching {
     }
 }
 
-declare class InTouching extends Phaser.Events.EventEmitter {
+declare class InTouching extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: InTouching.IConfig
     )
 
+    prevIsInTouch: boolean;
     isInTouching: boolean;
 
     setEnable(enable?: boolean): this;

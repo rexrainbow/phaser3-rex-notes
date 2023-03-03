@@ -13,6 +13,7 @@ const NO_NEWLINE = CONST.NO_NEWLINE;
 class CanvasText {
     constructor(config) {
         this.parent = config.parent;
+        this.scene = this.parent.scene;
         this.context = GetValue(config, 'context', null);
         this.canvas = this.context.canvas;
         this.parser = GetValue(config, 'parser', null);
@@ -28,6 +29,7 @@ class CanvasText {
 
         this.hitAreaManager = new HitAreaManager();
         this.lastHitAreaKey = null;
+        this.urlTagCursorStyle = null;
 
         var context = this.context;
         this.getTextWidth = function (text) {
@@ -36,6 +38,8 @@ class CanvasText {
     }
 
     destroy() {
+        this.parent = undefined;
+        this.scene = undefined;
         this.context = undefined;
         this.canvas = undefined;
         this.parser = undefined;

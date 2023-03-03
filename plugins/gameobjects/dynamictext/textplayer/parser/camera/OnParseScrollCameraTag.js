@@ -5,7 +5,7 @@ var OnParseScrollCameraTag = function (textPlayer, parser, config) {
     parser
         .on(`+${tagName}`, function (x, y) {
             AppendCommand.call(textPlayer,
-                'camera.scroll',  // name
+                tagName,          // name
                 Scroll,           // callback
                 [x, y],           // params
                 textPlayer,       // scope
@@ -25,7 +25,7 @@ var OnParseScrollCameraTag = function (textPlayer, parser, config) {
 
 var Scroll = function (params) {
     // this: textPlayer
-    this.camera.setScroll(...params);
+    this.targetCamera.setScroll(...params);
 }
 
 var ScrollTo = function (params) {
@@ -35,7 +35,7 @@ var ScrollTo = function (params) {
     var ease = params[3];
 
     // this: textPlayer
-    var camera = this.camera;
+    var camera = this.targetCamera;
     var xSave = camera.scrollX;
     var ySave = camera.scrollY;
     camera.setScroll(x, y);

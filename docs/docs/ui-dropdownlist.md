@@ -373,7 +373,7 @@ var dropDownList = scene.rexUI.add.dropDownList({
 
 ### Other properties
 
-See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 

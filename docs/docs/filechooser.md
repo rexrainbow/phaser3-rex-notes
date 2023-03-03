@@ -22,6 +22,7 @@ Create a transparent file chooser button (`<input type="file">`).
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -51,6 +52,7 @@ Create a transparent file chooser button (`<input type="file">`).
     import FileChooserPlugin from 'phaser3-rex-plugins/plugins/filechooser-plugin.js';
     var config = {    
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -83,6 +85,7 @@ Create a transparent file chooser button (`<input type="file">`).
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -197,6 +200,29 @@ fileChooser.setAccept(accept);
     })
     ```
 
+### Load file to cache
+
+```javascript
+fileChooser.loadFile(file, loaderType, key);
+// fileChooser.loadFile(file, loaderType, key, cahceType);
+```
+
+or
+
+```javascript
+fileChooser.loadFilePromise(file, loaderType, key, cahceType)
+    .then(function(content) {
+
+    })
+```
+
+- `file` : File object, see [Events](filechooser.md#events)
+- `loaderType` : `image`, `text`, `binary`, ... See [Loader](loader.md)
+- `key` : Unique string key.
+- `cahceType` : 
+    - `undefined` : Use default value.
+- `content` : Content of file.
+
 ### Create object URL
 
 - [Create object url](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL)
@@ -205,7 +231,7 @@ fileChooser.setAccept(accept);
     ```
 - [Release object url](https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL)
     ```javascript
-    URL.createObjectURL(objectURL);
+    URL.revokeObjectURL(objectURL);
     ```
     
 ### Open file chooser

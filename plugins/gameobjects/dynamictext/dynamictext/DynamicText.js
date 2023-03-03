@@ -1,4 +1,4 @@
-import Canvas from '../../canvas/canvas/Canvas.js';
+import Canvas from '../../canvas/canvasbase/Canvas.js';
 import { SetPadding } from '../../../utils/padding/PaddingMethods';
 import Background from './bob/background/Background.js';
 import InnerBounds from './bob/innerbounds/InnerBounds.js';

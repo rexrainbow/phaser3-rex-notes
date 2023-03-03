@@ -159,51 +159,42 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
-    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
         return this;
       }
-      if (x === undefined) {
-        x = 0;
+      var frameWidth = textureFrame.cutWidth,
+        frameHeight = textureFrame.cutHeight;
+      if (dx === undefined) {
+        dx = 0;
       }
-      if (y === undefined) {
-        y = 0;
+      if (dy === undefined) {
+        dy = 0;
       }
-      if (width === undefined) {
-        width = textureFrame.cutWidth;
+      if (dWidth === undefined) {
+        dWidth = frameWidth;
       }
-      if (height === undefined) {
-        height = textureFrame.cutHeight;
+      if (dHeight === undefined) {
+        dHeight = frameHeight;
       }
-      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      if (sxOffset === undefined) {
+        sxOffset = 0;
+      }
+      if (syOffset === undefined) {
+        syOffset = 0;
+      }
+      if (sWidth === undefined) {
+        sWidth = frameWidth;
+      }
+      if (sHeight === undefined) {
+        sHeight = frameHeight;
+      }
+      var sx = textureFrame.cutX + sxOffset;
+      var sy = textureFrame.cutY + syOffset;
+      this.context.drawImage(textureFrame.source.image,
+      // image
+      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.dirty = true;
       return this;
     },
@@ -288,7 +279,7 @@
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-      if (this.renderer.gl) {
+      if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
@@ -333,7 +324,7 @@
 
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
-  var Canvas = /*#__PURE__*/function (_GameObject) {
+  var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
@@ -486,9 +477,66 @@
     return Canvas;
   }(GameObject);
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
+  Phaser.Class.mixin(Canvas$1, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
   // Components.FX,  // Open for 3.60
   Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
+
+  var LoadImageMethods = {
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+        if (callback) {
+          callback();
+        }
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    loadFromFile: function loadFromFile(file, callback) {
+      var url = URL.createObjectURL(file);
+      this.loadFromURL(url, function () {
+        URL.revokeObjectURL(url);
+        if (callback) {
+          callback();
+        }
+      });
+      return this;
+    },
+    loadFromFilePromise: function loadFromFilePromise(file) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromFile(file, resolve);
+      });
+    }
+  };
+
+  var Canvas = /*#__PURE__*/function (_CanvasBase) {
+    _inherits(Canvas, _CanvasBase);
+    var _super = _createSuper(Canvas);
+    function Canvas() {
+      _classCallCheck(this, Canvas);
+      return _super.apply(this, arguments);
+    }
+    return _createClass(Canvas);
+  }(Canvas$1);
+  Object.assign(Canvas.prototype, LoadImageMethods);
 
   function Factory (x, y, width, height) {
     var gameObject = new Canvas(this.scene, x, y, width, height);

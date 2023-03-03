@@ -40,6 +40,10 @@ var CreateColorPicker = function (scene) {
         background: background,
         space: this.colorPickerSpace,
 
+        hPalette: {
+            position: this.colorPickerHPalettePosition,
+        },
+
         colorComponents: colorComponentsConfig,
 
         value: this.value

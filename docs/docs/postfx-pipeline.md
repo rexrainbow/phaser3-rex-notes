@@ -137,6 +137,11 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     };
     var game = new Phaser.Game(config);
     ```
+- Or register post-fx pipeline at runtime
+    ```javascript
+    var pipelineManager = scene.sys.renderer.pipelines;
+    pipelineManager.addPostPipeline(PostFxName, MyPostFxClass);
+    ```
 
 ### Apply effect
 
@@ -164,6 +169,13 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
 
 ```javascript
 gameObject.removePostPipeline(MyPostFxClass);
+```
+
+### Unregister post-fx pipeline
+
+```javascript
+var pipelineManager = scene.sys.renderer.pipelines;
+pipelineManager.remove(PostFxName);
 ```
 
 ### Color matrix

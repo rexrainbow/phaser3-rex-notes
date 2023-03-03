@@ -207,7 +207,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$4 = function GetValue(source, key, defaultValue) {
+  var GetValue$3 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -291,7 +291,7 @@
     return out;
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var InstMem = /*#__PURE__*/function () {
     function InstMem(scenario) {
       _classCallCheck(this, InstMem);
@@ -303,14 +303,14 @@
     _createClass(InstMem, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var queue = GetValue$3(o, 'queue', undefined);
+        var queue = GetValue$2(o, 'queue', undefined);
         if (queue === undefined) {
           Clear(this.queue);
         } else {
           Clone(queue, this.queue);
         }
-        this.currentIdx = GetValue$3(o, 'curIdx', -1);
-        this.nextIdx = GetValue$3(o, 'nextIdx', 0);
+        this.currentIdx = GetValue$2(o, 'curIdx', -1);
+        this.nextIdx = GetValue$2(o, 'nextIdx', 0);
         return this;
       }
     }, {
@@ -420,9 +420,8 @@
     return Object.prototype.toString.call(obj) === '[object Array]';
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var RunCommands = function RunCommands(queue, scope, config) {
-    var reverse = GetValue$2(config, 'reverse', false);
+    var reverse = GetValue$3(config, 'reverse', false);
     var retVal;
     if (IsArray(queue[0])) {
       if (!reverse) {
@@ -440,8 +439,8 @@
     return retVal;
   };
   var RunCommand = function RunCommand(cmd, scope, config) {
-    var argsConvert = GetValue$2(config, 'argsConvert', undefined);
-    var argsConvertScope = GetValue$2(config, 'argsConvertScope', undefined);
+    var argsConvert = GetValue$3(config, 'argsConvert', undefined);
+    var argsConvertScope = GetValue$3(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
     if (argsConvert) {
@@ -462,7 +461,7 @@
     if (typeof fnName === 'string') {
       fn = scope[fnName];
       if (fn == null) {
-        fn = GetValue$2(scope, fnName, null);
+        fn = GetValue$3(scope, fnName, null);
       }
     } else {
       fn = fnName;
@@ -518,10 +517,13 @@
     }, {
       key: "run",
       value: function run(inst) {
-        var scenario = this.scenario;
+        if (!this.validate(inst)) {
+          this.scenario.error("Command '".concat(GetFunctionName(inst), "' is not found in scope"));
+          return;
+        }
         var command = inst[1];
         this.lastMethodName = command[0];
-        var task = RunCommands(command, scenario.scope);
+        var task = RunCommands(command, this.scenario.scope);
         if (task && typeof task.once === 'function') {
           task.once('complete', this.resume, this);
           this.pause();
@@ -529,6 +531,20 @@
         } else {
           this.task = undefined;
         }
+      }
+    }, {
+      key: "validate",
+      value: function validate(inst) {
+        var fnName = GetFunctionName(inst);
+        if (fnName === null) {
+          return false;
+        }
+        var scope = this.scenario.scope;
+        var fn = scope[fnName];
+        if (fn == null) {
+          fn = GetValue$3(scope, fnName, null);
+        }
+        return !!fn;
       }
     }, {
       key: "pause",
@@ -546,6 +562,17 @@
     }]);
     return CustomCmd;
   }(BaseCmd);
+  var GetFunctionName = function GetFunctionName(inst) {
+    var command = inst[1];
+    if (!command) {
+      return null;
+    }
+    var fnName = command[0];
+    if (!fnName) {
+      return null;
+    }
+    return fnName;
+  };
 
   var WaitCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(WaitCmd, _BaseCmd);
@@ -862,11 +889,22 @@
     return CmdHandlers;
   }();
 
+  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
+    return new Promise(function (resolve, reject) {
+      eventEmitter.once(eventName, function () {
+        resolve();
+      });
+    });
+  };
+  var WaitComplete = function WaitComplete(eventEmitter) {
+    return WaitEvent(eventEmitter, 'complete');
+  };
+
   var CSVScenario = /*#__PURE__*/function () {
     function CSVScenario(scene, config) {
       _classCallCheck(this, CSVScenario);
       // Event emitter
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$3(config, 'eventEmitter', undefined));
       this.scene = scene;
       this.timer = undefined;
       this._timeScale = 1;
@@ -879,17 +917,18 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this._inRunCmdLoop = false;
-        this.isRunning = GetValue$4(o, 'state', false);
-        this.isPaused = GetValue$4(o, 'pause', false);
-        this.waitEvent = GetValue$4(o, 'wait', undefined);
-        this.scope = GetValue$4(o, 'scope', undefined);
-        this.timeUnit = GetValue$4(o, 'timeUnit', 0);
-        this.cmdPrefix = GetValue$4(o, 'prefix', DEFAULT_PREFIX);
-        this.argsConvert = GetValue$4(o, 'argsConvert', true);
-        this.argsConvertScope = GetValue$4(o, 'argsConvertScope', undefined);
-        this.cmdHandlers.resetFromJSON(GetValue$4(o, 'handlers', undefined));
-        this.instMem.resetFromJSON(GetValue$4(o, 'instMem', undefined));
-        this.delimiter = GetValue$4(o, 'delimiter', ',');
+        this.isRunning = GetValue$3(o, 'state', false);
+        this.isPaused = GetValue$3(o, 'pause', false);
+        this.waitEvent = GetValue$3(o, 'wait', undefined);
+        this.scope = GetValue$3(o, 'scope', undefined);
+        this.timeUnit = GetValue$3(o, 'timeUnit', 0);
+        this.cmdPrefix = GetValue$3(o, 'prefix', DEFAULT_PREFIX);
+        this.argsConvert = GetValue$3(o, 'argsConvert', true);
+        this.argsConvertScope = GetValue$3(o, 'argsConvertScope', undefined);
+        this.cmdHandlers.resetFromJSON(GetValue$3(o, 'handlers', undefined));
+        this.instMem.resetFromJSON(GetValue$3(o, 'instMem', undefined));
+        this.delimiter = GetValue$3(o, 'delimiter', ',');
+        this.translateCommandNameCallback = GetValue$3(o, 'translateCommandNameCallback', undefined);
         return this;
       }
     }, {
@@ -934,18 +973,19 @@
       key: "load",
       value: function load(strCmd, scope, config) {
         this.clear();
-        this.timeUnit = GetValue$4(config, 'timeUnit', this.timeUnit);
+        this.timeUnit = GetValue$3(config, 'timeUnit', this.timeUnit);
         if (typeof this.timeUnit === 'string') {
           this.timeUnit = TIMEUNITMODE[this.timeUnit];
         }
-        this.cmdPrefix = GetValue$4(config, 'prefix', this.cmdPrefix);
+        this.cmdPrefix = GetValue$3(config, 'prefix', this.cmdPrefix);
         if (typeof this.cmdPrefix === 'string') {
           this.cmdPrefix = new RegExp(this.cmdPrefix);
         }
-        this.argsConvert = GetValue$4(config, 'argsConvert', this.argsConvert);
-        this.argsConvertScope = GetValue$4(config, 'argsConvertScope', this.argsConvertScope);
+        this.argsConvert = GetValue$3(config, 'argsConvert', this.argsConvert);
+        this.argsConvertScope = GetValue$3(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
-        this.delimiter = GetValue$4(config, 'delimiter', this.delimiter);
+        this.delimiter = GetValue$3(config, 'delimiter', this.delimiter);
+        this.translateCommandNameCallback = GetValue$3(config, 'translateCommandNameCallback', this.translateCommandNameCallback);
         this.append(strCmd);
         return this;
       }
@@ -960,8 +1000,8 @@
       key: "start",
       value: function start(config) {
         this.stop();
-        var label = GetValue$4(config, 'label', '');
-        this.offset = GetValue$4(config, 'offset', 0);
+        var label = GetValue$3(config, 'label', '');
+        this.offset = GetValue$3(config, 'offset', 0);
         if (this.isDebugMode) {
           this.log('Start at Label: ' + label);
         }
@@ -974,11 +1014,24 @@
         return true;
       }
     }, {
+      key: "play",
+      value: function play(config) {
+        this.start(config);
+        return this;
+      }
+    }, {
+      key: "playPromise",
+      value: function playPromise(config) {
+        var promise = WaitComplete(this);
+        this.start(config);
+        return promise;
+      }
+    }, {
       key: "getIndex",
       value: function getIndex(label) {
         var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
-          this.error('Label: ' + label + ' is not found');
+          this.error("Label: ".concat(label, " is not found"));
         }
         return index;
       }
@@ -1143,21 +1196,20 @@
           item = arr[i];
           name = item[0];
           if (name === '-') {
-            this.appendCommand(item);
+            this.appendCustomCommand(item);
           } else if (!isNaN(name)) {
             var time = parseFloat(name);
             if (time > 0) {
               // insert 'wait' command
               this.appendCommand(['wait', time]);
             }
-            item[0] = '-';
-            this.appendCommand(item);
+            this.appendCustomCommand(item);
           } else if (prefix.test(name)) {
             var innerMatch = name.match(prefix);
             item[0] = innerMatch[1].toLowerCase();
             var isValid = this.appendCommand(item);
             if (!isValid) {
-              this.error('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
+              this.error("Line ".concat(i, ": ").concat(JSON.stringify(item), " is not a valid command"));
             }
           } else {
             // insert 'wait' command
@@ -1180,6 +1232,15 @@
           this.instMem.append(inst);
         }
         return true;
+      }
+    }, {
+      key: "appendCustomCommand",
+      value: function appendCustomCommand(inst) {
+        inst[0] = '-';
+        if (this.translateCommandNameCallback) {
+          inst[1] = this.translateCommandNameCallback(inst[1]);
+        }
+        return this.appendCommand(inst);
       }
     }, {
       key: "runNextCmd",

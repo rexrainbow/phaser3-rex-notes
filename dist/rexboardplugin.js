@@ -1114,10 +1114,10 @@
     }]);
     return Chess;
   }(ComponentBase);
-  var methods$7 = {
+  var methods$8 = {
     getTileDirection: GetTileDirection
   };
-  Object.assign(Chess.prototype, methods$7);
+  Object.assign(Chess.prototype, methods$8);
 
   var IsUID = function IsUID(object) {
     var type = _typeof(object);
@@ -5115,7 +5115,7 @@
     }]);
     return Quad;
   }();
-  var methods$6 = {
+  var methods$7 = {
     getWorldXY: GetWorldX$2,
     getWorldX: GetWorldX$1,
     getWorldY: GetWorldY$1,
@@ -5123,7 +5123,7 @@
     getTileX: GetTileX$1,
     getTileY: GetTileY$1
   };
-  Object.assign(Quad.prototype, methods$6);
+  Object.assign(Quad.prototype, methods$7);
   var ORIENTATIONTYPE = {
     'orthogonal': 0,
     'isometric': 1,
@@ -5541,7 +5541,7 @@
   var ALLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
   var HALFDIR4 = [0, 1];
   var HALFDIR8 = [0, 1, 4, 5];
-  var methods$5 = {
+  var methods$6 = {
     saveOrigin: SaveOrigin,
     restoreOrigin: RestoreOrigin,
     getTileXYAtDirection: GetTileXAtDirection$1,
@@ -5558,7 +5558,7 @@
     getBounds: GetBounds$3,
     ringToTileXYArray: RingToTileXYArray$1
   };
-  Object.assign(QuadGrid.prototype, methods$5);
+  Object.assign(QuadGrid.prototype, methods$6);
 
   var SQRT3$1 = Math.sqrt(3);
   var Width = function Width(hexagon) {
@@ -5888,7 +5888,7 @@
     }]);
     return Hexagon;
   }();
-  var methods$4 = {
+  var methods$5 = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
@@ -5896,7 +5896,7 @@
     getTileX: GetTileX,
     getTileY: GetTileY
   };
-  Object.assign(Hexagon.prototype, methods$4);
+  Object.assign(Hexagon.prototype, methods$5);
   var STAGGERAXIS = {
     'y': 0,
     'x': 1
@@ -6418,7 +6418,7 @@
   }(Hexagon);
   var ALLDIR = [0, 1, 2, 3, 4, 5];
   var HALFDIR = [0, 1, 2];
-  var methods$3 = {
+  var methods$4 = {
     saveOrigin: SaveOrigin,
     restoreOrigin: RestoreOrigin,
     getTileXYAtDirection: GetTileXAtDirection,
@@ -6435,14 +6435,14 @@
     getBounds: GetBounds$2,
     ringToTileXYArray: RingToTileXYArray
   };
-  Object.assign(HexagonGrid.prototype, methods$3);
+  Object.assign(HexagonGrid.prototype, methods$4);
 
   var DefaultGrids = {
     quadGrid: QuadGrid,
     hexagonGrid: HexagonGrid
   };
 
-  var Board$1 = /*#__PURE__*/function (_EE) {
+  var Board$2 = /*#__PURE__*/function (_EE) {
     _inherits(Board, _EE);
     var _super = _createSuper(Board);
     function Board(scene, config) {
@@ -6568,7 +6568,7 @@
     }]);
     return Board;
   }(EventEmitter);
-  Object.assign(Board$1.prototype, LogicMethods);
+  Object.assign(Board$2.prototype, LogicMethods);
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var TouchZone = /*#__PURE__*/function (_Zone) {
@@ -6733,6 +6733,7 @@
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
       // Move outside
+      EmitChessEvent('gameobjectout', 'board.pointerout', board, this.prevTilePosition.x, this.prevTilePosition.y, pointer);
       if (this.pointer === pointer) {
         // Release touch pointer
         this.pointer = null;
@@ -8357,7 +8358,7 @@
   };
   var ViewportBounds;
 
-  var Board = /*#__PURE__*/function (_LogicBoard) {
+  var Board$1 = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
     var _super = _createSuper(Board);
     function Board() {
@@ -8380,12 +8381,12 @@
       }
     }]);
     return Board;
-  }(Board$1);
-  var methods$2 = {
+  }(Board$2);
+  var methods$3 = {
     setInteractive: SetInteractive$1,
     forEachCullTileXY: ForEachCullTileXY
   };
-  Object.assign(Board.prototype, methods$2);
+  Object.assign(Board$1.prototype, methods$3);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -8449,9 +8450,9 @@
   };
 
   ObjectFactory.register('board', function (config) {
-    return new Board(this.scene, config);
+    return new Board$1(this.scene, config);
   });
-  SetValue(window, 'RexPlugins.Board.Board', Board);
+  SetValue(window, 'RexPlugins.Board.Board', Board$1);
 
   ObjectFactory.register('hexagonGrid', function (config) {
     return new HexagonGrid(config);
@@ -9023,6 +9024,7 @@
         this.targetX = x;
         this.targetY = y;
         _get(_getPrototypeOf(MoveTo.prototype), "start", this).call(this);
+        this.emit('start', this.parent, this);
         return this;
       }
     }, {
@@ -9573,13 +9575,13 @@
     }]);
     return MoveTo;
   }(SceneUpdateTickTask);
-  var methods$1 = {
+  var methods$2 = {
     canMoveTo: CanMoveToTile,
     moveTo: MoveToTile,
     moveToward: MoveToward,
     moveToRandomNeighbor: MoveToRandomNeighbor
   };
-  Object.assign(MoveTo.prototype, methods$1);
+  Object.assign(MoveTo.prototype, methods$2);
 
   ObjectFactory.register('moveTo', function (gameObject, config) {
     var klass = IsMiniBoardObject(gameObject) ? MoveTo : MoveTo$1;
@@ -11907,6 +11909,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+    this.addToParentContainer(gameObject);
     this.addToRenderLayer(gameObject);
     return this;
   };
@@ -11938,10 +11941,22 @@
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$3(config, 'syncPosition', true);
-    state.syncRotation = GetValue$3(config, 'syncRotation', true);
-    state.syncScale = GetValue$3(config, 'syncScale', true);
-    state.syncAlpha = GetValue$3(config, 'syncAlpha', true);
+    if (config === undefined) {
+      config = true;
+    }
+    if (typeof config === 'boolean') {
+      state.syncPosition = config;
+      state.syncRotation = config;
+      state.syncScale = config;
+      state.syncAlpha = config;
+      state.syncScrollFactor = config;
+    } else {
+      state.syncPosition = GetValue$3(config, 'syncPosition', true);
+      state.syncRotation = GetValue$3(config, 'syncRotation', true);
+      state.syncScale = GetValue$3(config, 'syncScale', true);
+      state.syncAlpha = GetValue$3(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$3(config, 'syncScrollFactor', true);
+    }
   };
   var AddChild = {
     // Can override this method
@@ -12414,9 +12429,11 @@
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var localState = GetLocalState(child);
-      var parent = localState.parent;
-      child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      var state = GetLocalState(child);
+      var parent = state.parent;
+      if (state.syncScrollFactor) {
+        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      }
       return this;
     },
     syncScrollFactor: function syncScrollFactor() {
@@ -12468,7 +12485,7 @@
   };
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length === 0) {
+    if (gameObjects.length <= 1) {
       return gameObjects;
     }
     if (descending === undefined) {
@@ -12820,35 +12837,79 @@
     }
   };
 
-  var AddToContainer = function AddToContainer(layer) {
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    layer.add(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var RemoveFromContainer = function RemoveFromContainer() {
-    if (!this.parentContainer) {
+  var P3Container = {
+    addToContainer: function addToContainer(p3Container) {
+      this._setParentContainerFlag = true;
+      var gameObjects = this.getAllChildren([this]);
+      SortGameObjectsByDepth(gameObjects);
+      p3Container.add(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    addToLayer: function addToLayer(layer) {
+      this.addToContainer(layer);
+      return this;
+    },
+    removeFromContainer: function removeFromContainer() {
+      if (!this.parentContainer) {
+        return this;
+      }
+
+      // Will add gameObjects to scene
+      var gameObjects = this.getAllChildren([this]).filter(function (gameObject) {
+        return !!gameObject.scene;
+      });
+      if (gameObjects.length === 0) {
+        return this;
+      }
+      this._setParentContainerFlag = true;
+      if (gameObjects.length > 1) {
+        SortGameObjectsByDepth(gameObjects);
+        gameObjects.reverse();
+      }
+      this.parentContainer.remove(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    getParentContainer: function getParentContainer() {
+      if (this.parentContainer) {
+        return this.parentContainer;
+      }
+
+      // One of parent container has a layer
+      var parent = this.getParent();
+      while (parent) {
+        var p3Container = parent.parentContainer;
+        if (p3Container) {
+          return p3Container;
+        }
+        parent = parent.getParent();
+      }
+      return null;
+    },
+    addToParentContainer: function addToParentContainer(gameObject) {
+      // Don't add to layer if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      }
+      var p3Container = this.getParentContainer();
+      if (!p3Container) {
+        return this;
+      }
+      if (gameObject.isRexContainerLite) {
+        // Add containerLite and its children
+        gameObject.addToContainer(p3Container);
+      } else {
+        // Add gameObject directly
+        p3Container.add(gameObject);
+      }
       return this;
     }
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    gameObjects.reverse();
-    this.parentContainer.remove(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var AddToContainer$1 = {
-    addToLayer: AddToContainer,
-    addToContainer: AddToContainer,
-    removeFromContainer: RemoveFromContainer
   };
 
   var Layer = {
     enableLayer: function enableLayer() {
-      if (this.layer) {
+      if (this.privateRenderLayer) {
         return this;
       }
       var layer = this.scene.add.layer();
@@ -12856,25 +12917,25 @@
 
       this.moveDepthBelow(layer);
       this.addToLayer(layer);
-      this.layer = layer;
+      this.privateRenderLayer = layer;
       return this;
     },
     getLayer: function getLayer() {
-      if (!this.layer) {
+      if (!this.privateRenderLayer) {
         this.enableLayer();
       }
-      return this.layer;
+      return this.privateRenderLayer;
     },
     getRenderLayer: function getRenderLayer() {
       // This containerLite has a layer
-      if (this.layer) {
-        return this.layer;
+      if (this.privateRenderLayer) {
+        return this.privateRenderLayer;
       }
 
       // One of parent container has a layer
       var parent = this.getParent();
       while (parent) {
-        var layer = parent.layer;
+        var layer = parent.privateRenderLayer;
         if (layer) {
           return layer;
         }
@@ -13210,43 +13271,91 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var DrawBounds$1 = function DrawBounds(gameObject, graphics, config) {
+  var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
+    var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+    if (typeof config === 'number') {
+      strokeColor = config;
+    } else {
+      strokeColor = GetValue$1(config, 'color');
+      lineWidth = GetValue$1(config, 'lineWidth');
+      fillColor = GetValue$1(config, 'fillColor');
+      fillAlpha = GetValue$1(config, 'fillAlpha', 1);
+      padding = GetValue$1(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+      }
+    } else {
+      Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
     if (!canDrawBound) {
       return;
     }
-    var color, lineWidth;
-    if (typeof config === 'number') {
-      color = config;
-    } else {
-      color = GetValue$1(config, 'color');
-      lineWidth = GetValue$1(config, 'lineWidth');
-    }
-    if (color === undefined) {
-      color = 0xffffff;
+    if (strokeColor === undefined) {
+      strokeColor = 0xffffff;
     }
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
-    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+    if (fillColor === undefined) {
+      fillColor = null;
+    }
+    if (fillAlpha === undefined) {
+      fillAlpha = 1;
+    }
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
+    if (fillColor !== null) {
+      graphics.fillStyle(fillColor, fillAlpha).fillPoints(Points, true, true);
+    }
+    if (strokeColor !== null) {
+      graphics.lineStyle(lineWidth, strokeColor).strokePoints(Points, true, true);
+    }
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
     var drawContainer = GetValue(config, 'drawContainer', true);
-    var gameObjects = this.getAllVisibleChildren([this]);
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-      var gameObject = gameObjects[i];
-      if (!drawContainer && gameObject.isRexContainerLite) {
-        continue;
-      }
-      DrawBounds$1(gameObject, graphics, config);
+    var gameObjects = GetValue(config, 'children');
+    if (gameObjects === undefined) {
+      gameObjects = this.getAllVisibleChildren([this]);
     }
+    if (!drawContainer) {
+      gameObjects = gameObjects.filter(function (gameObject) {
+        return !gameObject.isRexContainerLite;
+      });
+    }
+    DrawBounds$1(gameObjects, graphics, config);
     return this;
   };
 
@@ -13278,11 +13387,11 @@
     return this;
   };
 
-  var methods = {
+  var methods$1 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -13303,7 +13412,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
-      _this.layer = undefined;
+      _this.privateRenderLayer = undefined;
       if (children) {
         _this.add(children);
       }
@@ -13318,9 +13427,9 @@
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
-        if (this.layer) {
-          this.layer.list.length = 0; // Remove all children without trigger callback
-          this.layer.destroy();
+        if (this.privateRenderLayer) {
+          this.privateRenderLayer.list.length = 0; // Remove all children without trigger callback
+          this.privateRenderLayer.destroy();
         }
       }
     }, {
@@ -13551,7 +13660,7 @@
     }]);
     return ContainerLite;
   }(Base);
-  Object.assign(ContainerLite.prototype, methods);
+  Object.assign(ContainerLite.prototype, methods$1);
 
   var AddChess = function AddChess(gameObject, tileX, tileY, tileZ) {
     var grid = this.grid;
@@ -14234,7 +14343,7 @@
         infinity: true,
         wrap: false
       };
-      _this.board = new Board$1(scene, boardConfig);
+      _this.board = new Board$2(scene, boardConfig);
       _this.mainBoardRef = new MainBoardReference();
       _this.lastMainBoardRef = new MainBoardReference();
       _this.resetFromJSON(config);
@@ -14561,6 +14670,120 @@
     CreatePolygonTexture(board.scene, key, board.getGridPoints(0, 0, true), fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);
   };
 
+  var Board = /*#__PURE__*/function (_LogicBoard) {
+    _inherits(Board, _LogicBoard);
+    var _super = _createSuper(Board);
+    function Board() {
+      _classCallCheck(this, Board);
+      return _super.apply(this, arguments);
+    }
+    _createClass(Board, [{
+      key: "touchZone",
+      get: function get() {
+        if (this.input) {
+          return this.input.touchZone;
+        } else {
+          return null;
+        }
+      }
+    }, {
+      key: "getTouchZone",
+      value: function getTouchZone() {
+        return this.touchZone;
+      }
+    }]);
+    return Board;
+  }(Board$2);
+  var methods = {
+    setInteractive: SetInteractive$1,
+    forEachCullTileXY: ForEachCullTileXY
+  };
+  Object.assign(Board.prototype, methods);
+
+  var CreateBoard = function CreateBoard(tilemap) {
+    var board = new Board(tilemap.scene, {
+      grid: CreateGridConfig(tilemap),
+      width: tilemap.width,
+      height: tilemap.height
+    });
+    return board;
+  };
+  var CreateGridConfig = function CreateGridConfig(tilemap) {
+    var grid = {
+      cellWidth: tilemap.tileWidth,
+      cellHeight: tilemap.tileHeight
+    };
+    switch (tilemap.orientation) {
+      case 0:
+        // ORTHOGONAL
+        grid.gridType = 'quadGrid';
+        grid.type = 'orthogonal';
+        break;
+      case 1:
+        // ISOMETRIC
+        grid.gridType = 'quadGrid';
+        grid.type = 'isometric';
+        break;
+      case 3:
+        // HEXAGONAL
+        grid.gridType = 'hexagonGrid';
+        grid.staggeraxis = 'y';
+        grid.staggerindex = 'odd';
+        break;
+      default:
+        // ORTHOGONAL
+        grid.gridType = 'quadGrid';
+        grid.type = 'orthogonal';
+        break;
+    }
+    var layer = tilemap.layers[0];
+    if (layer) {
+      grid.x = layer.x;
+      grid.y = layer.y;
+    }
+    return grid;
+  };
+
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
+  var AddLayers = function AddLayers(board, tilemap, layers) {
+    if (layers === undefined) {
+      layers = tilemap.layers;
+    } else if (!Array.isArray(layers)) {
+      layers = [layers];
+    }
+    for (var i = 0, cnt = layers.length; i < cnt; i++) {
+      var layer = layers[i];
+      if (typeof layer === 'string') {
+        layer = tilemap.getLayer(layer);
+      }
+      if (IsGameObject(layer)) {
+        layer = layer.layer;
+      }
+      AddLayer(board, layer);
+    }
+  };
+  var AddLayer = function AddLayer(board, layer) {
+    var tileZ = layer.name;
+    var layerData = layer.data;
+    for (var y = 0, ycnt = layerData.length; y < ycnt; y++) {
+      var layerRow = layerData[y];
+      for (var x = 0, xcnt = layerRow.length; x < xcnt; x++) {
+        var tile = layerRow[x];
+        board.addChess(tile, x, y, tileZ, false);
+      }
+    }
+  };
+
+  var CreateBoardFromTilemap = function CreateBoardFromTilemap(tilemap, layers) {
+    var board = CreateBoard(tilemap);
+    AddLayers(board, tilemap, layers);
+    return board;
+  };
+
   var BoardPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(BoardPlugin, _Phaser$Plugins$Scene);
     var _super = _createSuper(BoardPlugin);
@@ -14573,6 +14796,7 @@
       // Helper functions
       _this.hexagonMap = HexagonMap;
       _this.createTileTexture = CreateTileTexture;
+      _this.createBoardFromTilemap = CreateBoardFromTilemap;
       return _this;
     }
     _createClass(BoardPlugin, [{

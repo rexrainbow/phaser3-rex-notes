@@ -4,14 +4,16 @@ export default ShakePosition;
 
 declare namespace ShakePosition {
 
-    type ModeType = 0 | 1 | 'effect' | 'behavior';
+    type ModeType = 0 | 1 | 'effect' | 'behavior';    
     type MagnitudeModeType = 0 | 1 | 'constant' | 'decay';
+    type AixsModeType = 0 | 1 | 2 | 'both' | 'h&v' | 'horizontal' | 'h' | 'vertical' | 'v';
 
     interface IConfig {
         mode?: ModeType,
         duration?: number,
         magnitude?: number,
-        magnitudeMode?: MagnitudeModeType
+        magnitudeMode?: MagnitudeModeType,
+        axis?: AixsModeType,
     }
 
     namespace Events {
@@ -49,5 +51,8 @@ declare class ShakePosition extends TickTask {
 
     setMagnitudeMode(magnitudeMode: ShakePosition.MagnitudeModeType): this;
     magnitudeMode: number;
+
+    setAxisMode(axisMode: ShakePosition.AixsModeType): this;
+    axisMode: number;
 
 }

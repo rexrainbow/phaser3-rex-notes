@@ -20,8 +20,11 @@
 1. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
 1. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Board/Shape](board-shape.md): Grid (polygon) shape object.
+1. [Board/Tilemap](board-tilemap.md): Create board from [tilemap](tilemap.md).
+1. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture) of tile.
 1. [Bounds](bounds.md): Clamp game object inside target bounds.
 1. [Bracket parser](bracketparser.md): A lite-weight bracket parser.
+1. [Bracket parser2](bracketparser2.md): A lite-weight bracket parser.
 1. [Buff data](buffdata.md): Data manager with buffs.
 1. [Build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
 1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
@@ -58,14 +61,15 @@
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [File chooser](filechooser.md): Create a transparent file chooser button.
-1. [Firebase/broadcast](firebase-broadcast.md): Broadcast real-time messages, using firebase-database.
-1. [Firebase/files](firebase-files.md): Save JSON data, using firebase-firestore.
+1. [File drop zone](filedropzone.md): Create a div element for dropping file(s).
+1. [Firebase/Broadcast](firebase-broadcast.md): Broadcast real-time messages, using firebase-database.
+1. [Firebase/Files](firebase-files.md): Save JSON data, using firebase-firestore.
 1. [Firebase/ID-alias](firebase-idalias.md): Map an unique ID to another unique ID, using firebase-firestore.
 1. [Firebase/Item-table](firebase-itemtable.md): 1d/2d/3d table, using firebase-database.
-1. [Firebase/leaderboard](firebase-leaderboard.md): Descending sort scores, using firebase-firestore.
-1. [Firebase/messages](firebase-messages.md): Store messages in firebase-firestore.
-1. [Firebase/online-user-list](firebase-onlineuserlist.md): Online user list, using firebase-database.
-1. [Firebase/single-room](firebase-singleroom.md): Chat room, using firebase-database.
+1. [Firebase/Leaderboard](firebase-leaderboard.md): Descending sort scores, using firebase-firestore.
+1. [Firebase/Messages](firebase-messages.md): Store messages in firebase-firestore.
+1. [Firebase/Online-user-list](firebase-onlineuserlist.md): Online user list, using firebase-database.
+1. [Firebase/Single-room](firebase-singleroom.md): Chat room, using firebase-database.
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
@@ -83,6 +87,7 @@
 1. [Grid cut image](gridcutimage.md): Create image game objects in grids, to assemble target texture.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hidden input text](hiddeninputtext.md): An invisible Input DOM element to receive character input and display on text game object.
+1. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.
 1. [Image URI loader](imageuriloader.md): Load image by uri in preload stage.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
@@ -92,8 +97,8 @@
 1. [Line](line.md): Draw a line with start/end/body textures.
 1. [Live2d](live2d.md): Display [live2d](https://www.live2d.com/en/) model.
 1. [Loading-progress](loadingprogress.md): Pop-up dialog for loading-progress, then scale-down this dialog.
-1. [LocalForage/files](localforage-files.md): Save JSON data, using localforage.
-1. [LocalStorage/data](localstorage-data.md): Sync data from data manager to local-storage.
+1. [LocalForage/Files](localforage-files.md): Save JSON data, using localforage.
+1. [LocalStorage/Data](localstorage-data.md): Sync data from data manager to local-storage.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
@@ -111,6 +116,7 @@
 1. [Perspective/ImageCarousel](perspective-imagecarousel.md): Display list of images.
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 1. [Perspective/Sprite](perspective-sprite.md): Play animation on perspective-image..
+1. [PNG appender](png-appender.md): Append user data below tail of PNG data, or extract this user data from PNG data.
 1. [polar-coordinate](polar-coordinate.md): Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` properties to a game object.
 1. [Pop up](popup.md): Scale up game object.
 1. [Quad/Image](quad-image.md): Image with 4 or 9 vertex control points.
@@ -128,26 +134,26 @@
 1. [Script-tag loader](scripttagloader.md): Load script tag in preload stage.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
-1. [Shader/barrel](shader-barrel.md): Barrel post processing filter.
-1. [Shader/color-replace](shader-colorreplace.md): Replace color post processing filter.
-1. [Shader/cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
-1. [Shader/dissolve](shader-dissolve.md): Dissolve transition post processing filter.
-1. [Shader/drop-shadow](shader-dropshadow.md): Drop-shadow post processing filter.
-1. [Shader/fish-eye](shader-fisheye.md): Fish-eye post processing filter.
-1. [Shader/glow-filter](shader-glowfilter.md): Glow post processing filter.
-1. [Shader/glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
-1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.
-1. [Shader/horri-fi](shader-horrifi.md): 6-in-1 post processing filter.
-1. [Shader/hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
-1. [Shader/inverse](shader-inverse.md): Inverse color post processing filter.
-1. [Shader/kawaseblur](shader-kawaseblur.md): Kawase-blur post processing filter.
-1. [Shader/outline](shader-outline.md): Outline post processing filter, ported from pixi.
-1. [Shader/pixelation](shader-pixelation.md): Pixelation post processing filter.
-1. [Shader/shockwave](shader-shockwave.md): Shockwave post processing filter.
-1. [Shader/split](shader-split.md): Split image into 4 parts.
-1. [Shader/swirl](shader-swirl.md): Swirl post processing filter.
-1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
-1. [Shader/warp](shader-warp.md): Warp post processing filter. 
+1. [Shader/Barrel](shader-barrel.md): Barrel post processing filter.
+1. [Shader/Color-replace](shader-colorreplace.md): Replace color post processing filter.
+1. [Shader/Cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
+1. [Shader/Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
+1. [Shader/Drop-shadow](shader-dropshadow.md): Drop-shadow post processing filter.
+1. [Shader/Fish-eye](shader-fisheye.md): Fish-eye post processing filter.
+1. [Shader/Glow-filter](shader-glowfilter.md): Glow post processing filter.
+1. [Shader/Glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
+1. [Shader/Gray-scale](shader-grayscale.md): Gray scale post processing filter.
+1. [Shader/Horri-fi](shader-horrifi.md): 6-in-1 post processing filter.
+1. [Shader/Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
+1. [Shader/Inverse](shader-inverse.md): Inverse color post processing filter.
+1. [Shader/Kawaseblur](shader-kawaseblur.md): Kawase-blur post processing filter.
+1. [Shader/Outline](shader-outline.md): Outline post processing filter, ported from pixi.
+1. [Shader/Pixelation](shader-pixelation.md): Pixelation post processing filter.
+1. [Shader/Shockwave](shader-shockwave.md): Shockwave post processing filter.
+1. [Shader/Split](shader-split.md): Split image into 4 parts.
+1. [Shader/Swirl](shader-swirl.md): Swirl post processing filter.
+1. [Shader/Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
+1. [Shader/Warp](shader-warp.md): Warp post processing filter. 
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Shape/Checkbox](shape-checkbox.md): Checkbox input with drawing checker path animation.
 1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
@@ -158,6 +164,8 @@
 1. [Shape/Line progress](shape-lineprogress.md): Horizontal line progress bar shape.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
+1. [Shape/Toggle-switch](shape-toggleswitch.md): Toggle-switch input.
+1. [Shape/Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.
 1. [Shatter/Image](shatter-image.md): Shatter image to triangle faces.
 1. [Shatter/Render texture](shatter-rendertexture.md): Shatter render texture to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
@@ -169,51 +177,57 @@
 1. [Tag-text](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP/Player](tcrp-player.md): Run commands on time.
 1. [TCRP/Recorder](tcrp-recoder.md): Store commands with time.
-1. [Text/edit](textedit.md): Create an input text object above a text object to edit string content.
-1. [Text/typing](texttyping.md): Typing text on text object.
-1. [Text/page](textpage.md): Display text page by page on text object.
+1. [Text/Edit](textedit.md): Create an input text object above a text object to edit string content.
+1. [Text/Typing](texttyping.md): Typing text on text object.
+1. [Text/Page](textpage.md): Display text page by page on text object.
+1. [Text/Translation](texttranslation.md): Apply translated string ([i18next](https://www.i18next.com/)) to text object.
 1. [Text player](textplayer.md): Typing characters on dynamic text, waiting click or key enter, play sound effect or backgroun music.
 1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
 1. [Touch state](touchstate.md): Store current touch input properties.
 1. [Transition image](transitionimage.md): Transit texture to another one.
-1. [UI/badge label](ui-badgelabel.md): A container with badges above a main item.
-1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
-1. [UI/chart](ui-chart.md): Draw chart on canvas.
-1. [UI/color components](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
-1. [UI/color input](ui-colorinput.md): Color value input field.
-1. [UI/color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
-1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
-1. [UI/Drop down list](ui-dropdownlist.md): A label can open a drop-down list panel.
-1. [UI/fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
-1. [UI/fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
-1. [UI/grid buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
-1. [UI/grid sizer](ui-gridsizer.md): Layout children game objects in grids.
-1. [UI/gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
-1. [UI/holy grail](ui-holygrail.md): Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_design)) style.
-1. [UI/Knob](ui-knob.md): A knob button based on circular progress.
-1. [UI/label](ui-label.md): A game object container with an icon, text, and background.
-1. [UI/menu](ui-menu.md): A container with buttons and sub-menu.
-1. [UI/name-value label](ui-namevaluelabel.md): A container with name text, value text in a row, with a horizontal line progress bar, and an icon, background.
-1. [UI/number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
-1. [UI/overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.
-1. [UI/pages](ui-pages.md): A container with pages, only current page is visible.
-1. [UI/perspective card](ui-perspectivecard.md): A container with front and back faces.
-1. [UI/scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
-1. [UI/scroll bar](ui-scrollbar.md): A container with slider, two buttons, and background.
-1. [UI/sizer](ui-sizer.md): Layout children game objects.
-1. [UI/slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [UI/tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
-1. [UI/tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
-1. [UI/text area](ui-textarea.md): A container with a text, slider, and scroller.
-1. [UI/text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
-1. [UI/title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
-1. [UI/toast](ui-toast.md): Show text message for a short while.
-1. [Unique item list](uniqueitemlist.md): List of unique items. Support array and set methods.
-1. [Viewport-coordinate](viewport-coordinate.md): Attach `vpx`, `vpy` properties to a game object, to set position according to proportion of viewport.
-1. [Virtual joystick](virtualjoystick.md): Simulate cursor keys according to touch events.
-1. [Wait events](waitevents.md): Wait fired events or callbacks.
-1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
-1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
-1. [YML-Achievements](ymlachievements.md): Achievements in a YAML table.
-1. [YML-Conditions table](ymlconditionstable.md): Check conditions to find passed tests listed in a YAML table.
-1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
+1. [UI/Badge label](ui-badgelabel.md): A container with badges above a main item.
+1. [UI/Buttons](ui-buttons.md): A container with a group of buttons.
+1. [UI/Chart](ui-chart.md): Draw chart on canvas.
+1. [UI/Color components](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
+1. [UI/Color input](ui-colorinput.md): Color value input field.
+1. [UI/Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
+2. [UI/Confrim dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
+3. [UI/Dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
+4. [UI/Drop down list](ui-dropdownlist.md): A label can open a drop-down list panel.
+5. [UI/File selector button](ui-fileselectorbutton.md): A transparent file chooser button above a Label.
+6. [UI/Fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
+7. [UI/Fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
+8. [UI/Folder](ui-folder.md): A container with a title, foldable child, and background.
+9. [UI/Grid buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
+10. [UI/Grid sizer](ui-gridsizer.md): Layout children game objects in grids.
+11. [UI/Gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
+12. [UI/Holy grail](ui-holygrail.md): Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_design)) style.
+13. [UI/Knob](ui-knob.md): A knob button based on circular progress.
+14. [UI/Label](ui-label.md): A game object container with an icon, text, and background.
+15. [UI/Menu](ui-menu.md): A container with buttons and sub-menu.
+16. [UI/Name-value label](ui-namevaluelabel.md): A container with name text, value text in a row, with a horizontal line progress bar, 1d an icon, background.
+17. [UI/Number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
+18. [UI/Overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.
+19. [UI/Pages](ui-pages.md): A container with pages, only current page is visible.
+20. [UI/Perspective card](ui-perspectivecard.md): A container with front and back faces.
+21. [UI/Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
+22. [UI/Scroll bar](ui-scrollbar.md): A container with slider, two buttons, and background.
+23. [UI/Simple label](ui-simplelabel.md): Using json style to create label.
+24. [UI/Sizer](ui-sizer.md): Layout children game objects.
+25. [UI/Slider](ui-slider.md): A container with a track, indicator, thumb and background.
+26. [UI/Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
+27. [UI/Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
+28. [UI/Text area](ui-textarea.md): A container with a text, slider, and scroller.
+29. [UI/Text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
+30. [UI/Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
+31. [UI/Toast](ui-toast.md): Show text message for a short while.
+32. [UI/Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
+33. [Unique item list](uniqueitemlist.md): List of unique items. Support array and set methods.
+34. [Viewport-coordinate](viewport-coordinate.md): Attach `vpx`, `vpy` properties to a game object, to set position according to proportion of viewport.
+35. [Virtual joystick](virtualjoystick.md): Simulate cursor keys according to touch events.
+36. [Wait events](waitevents.md): Wait fired events or callbacks.
+37. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
+38. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
+39. [YML-Achievements](ymlachievements.md): Achievements in a YAML table.
+40. [YML-Conditions table](ymlconditionstable.md): Check conditions to find passed tests listed in a YAML table.
+41. [Youtube player](youtubeplayer.md): Play youtube video on iframe.

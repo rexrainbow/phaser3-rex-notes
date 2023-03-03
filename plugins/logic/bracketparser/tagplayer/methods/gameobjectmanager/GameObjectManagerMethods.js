@@ -1,4 +1,4 @@
-import AddGameObjectManager from '../../../../../utils/managers/AddGameObjectManager.js';
+import GameObjectManagerMethods from '../../../../../utils/managers/GameObjectManagerMethods.js';
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
 import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
@@ -9,6 +9,8 @@ const ParseCallbacks = [
     OnParseCallGameObjectMethodTag,
     OnParseEaseGameObjectPropertyTag
 ];
+
+const AddGameObjectManager = GameObjectManagerMethods.addGameObjectManager;
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {

@@ -169,6 +169,7 @@ container.pin(child, {
     // syncRotation: true,
     // syncScale : true,
     // syncAlpha: true,
+    // syncScrollFactor: true,
 });
 ```
 
@@ -185,6 +186,10 @@ container.pin(child, {
 - `syncAlpha` : 
     - `true` : Sync alpha of child, default behavior.
     - `false` : Don't sync alpha of child. 
+- `syncScrollFactor` : 
+    - `true` : Sync scrollFactor of child, default behavior.
+    - `false` : Don't sync scrollFactor of child. 
+
 
 
 Or add(pin) children
@@ -647,15 +652,21 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
     container.drawBounds(graphics, {
         // color: 0xffffff,
         // lineWidth: 1,
-        // drawContainer: true
+        // padding: 0,
+        // drawContainer: true,
+        // children: undefined,
     });
     ```
     - `graphics` : [Graphics game object](graphics.md)
     - `color` : Default value is `0xffffff`.
     - `lineWidth` : Default value is `1`.
+    - `padding` : Extra space around bounds. Default value is `0`.
     - `drawContainer` : 
         - `true` : Draw all children game objects included containerLite. Default behavior.
         - `false` : Draw all children game objects excluded containerLite
+    - `children` : 
+        - Array of game objects : Only draw bounds of these children
+        - `undefined` : Draw bounds of all children
 
 ### Scroll factor
 
@@ -670,7 +681,7 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
 container.changeOrigin(originX, originY);
 ```
 
-This method also wull reset all local state of children.
+This method also will reset all local state of children.
 
 ### Add to container
 

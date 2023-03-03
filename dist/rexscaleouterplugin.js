@@ -121,14 +121,16 @@
   var WarnCounter = 0;
   var CheckScaleMode = function CheckScaleMode(scene) {
     var scaleManager = scene.sys.scale;
-    if (scaleManager.scaleMode !== Phaser.Scale.RESIZE) {
-      if (WarnCounter === 0) {
-        console.warn('Scale outer only works with RESIZE scale mode');
-      }
-      WarnCounter++;
-      return false;
+    if (scaleManager.scaleMode === Phaser.Scale.RESIZE) {
+      return true;
     }
-    return true;
+
+    // Not RESIZE mode
+    if (WarnCounter === 0) {
+      console.warn('Scale outer only works with RESIZE scale mode');
+    }
+    WarnCounter++;
+    return false;
   };
 
   var GetScaleOutCameraParameters = function GetScaleOutCameraParameters(scene, out) {
@@ -153,10 +155,10 @@
     return out;
   };
 
-  var Rectangle$1 = Phaser.Geom.Rectangle;
+  var Rectangle$2 = Phaser.Geom.Rectangle;
   var GetInnerViewport = function GetInnerViewport(scaleOuter, out) {
     if (out === undefined) {
-      out = new Rectangle$1();
+      out = new Rectangle$2();
     }
     var gameConfig = scaleOuter.scene.game.config;
     var width = gameConfig.width,
@@ -165,21 +167,38 @@
     return out;
   };
 
-  var Rectangle = Phaser.Geom.Rectangle;
+  var Rectangle$1 = Phaser.Geom.Rectangle;
   var GetOuterViewport = function GetOuterViewport(scaleOuter, out) {
     if (out === undefined) {
-      out = new Rectangle();
+      out = new Rectangle$1();
     }
-    var scale = scaleOuter.zoom;
+    var scale = 1 / scaleOuter.zoom;
     var displaySize = scaleOuter.scene.sys.scale.displaySize;
-    out.width = displaySize.width / scale;
-    out.height = displaySize.height / scale;
+    out.width = displaySize.width * scale;
+    out.height = displaySize.height * scale;
     var gameConfig = scaleOuter.scene.game.config;
     out.centerX = gameConfig.width / 2;
     out.centerY = gameConfig.height / 2;
     return out;
   };
 
+  var ShrinkSizeByRatio = function ShrinkSizeByRatio(rectangle, maxRatio, minRatio) {
+    var width = rectangle.width,
+      height = rectangle.height,
+      ratio = width / height;
+    if (maxRatio !== undefined && ratio > maxRatio) {
+      rectangle.width = height * maxRatio; // Shrink width
+    }
+
+    if (minRatio !== undefined && ratio < minRatio) {
+      rectangle.height = width / minRatio; // Shrink height
+    }
+
+    return rectangle;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+  var CopyRectangle = Phaser.Geom.Rectangle.CopyFrom;
   var SetStruct = Phaser.Structs.Set;
   var ScaleOuter = /*#__PURE__*/function () {
     function ScaleOuter(scene) {
@@ -193,6 +212,7 @@
       this.zoom = 1;
       this._innerViewport = undefined;
       this._outerViewport = undefined;
+      this._shrinkOuterViewport = undefined;
       this.boot();
     }
     _createClass(ScaleOuter, [{
@@ -201,7 +221,7 @@
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
           scene.sys.scale.on('resize', this.scale, this);
-          scene.sys.events.once('preupdate', this.start, this);
+          scene.sys.game.events.once('prestep', this.start, this);
         }
         scene.sys.events.on('shutdown', function () {
           // cameras of this scene will be destroyed when scene shutdown
@@ -217,6 +237,7 @@
         this.scene = undefined;
         this._innerViewport = undefined;
         this._outerViewport = undefined;
+        this._shrinkOuterViewport = undefined;
       }
     }, {
       key: "start",
@@ -233,7 +254,7 @@
       value: function stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.sys.events.off('preupdate', this.start, this);
+        scene.sys.game.events.off('prestep', this.start, this);
         return this;
       }
     }, {
@@ -252,6 +273,27 @@
       key: "outerViewport",
       get: function get() {
         return this._outerViewport;
+      }
+    }, {
+      key: "getShrinkedOuterViewport",
+      value: function getShrinkedOuterViewport(maxRatio, minRatio, out) {
+        if (typeof minRatio !== 'number') {
+          out = minRatio;
+          minRatio = undefined;
+        }
+        if (out === undefined) {
+          out = new Rectangle();
+        } else if (out === true) {
+          if (this._shrinkOuterViewport === undefined) {
+            this._shrinkOuterViewport = new Rectangle();
+          }
+          out = this._shrinkOuterViewport;
+        }
+        CopyRectangle(this._outerViewport, out);
+        ShrinkSizeByRatio(out, maxRatio, minRatio);
+        out.centerX = this._outerViewport.centerX;
+        out.centerY = this._outerViewport.centerY;
+        return out;
       }
 
       // Internal methods
@@ -351,6 +393,11 @@
       key: "outerViewport",
       get: function get() {
         return this.scaleOuter.outerViewport;
+      }
+    }, {
+      key: "getShrinkedOuterViewport",
+      value: function getShrinkedOuterViewport(maxRatio, minRatio, out) {
+        return this.scaleOuter.getShrinkedOuterViewport(maxRatio, minRatio, out);
       }
     }]);
     return ScaleOuterPlugin;

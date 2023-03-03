@@ -30,6 +30,28 @@ scene.load.start();                     // start loading
 scene.load.setPath(path)
 ```
 
+### More configurations
+
+More configurations in game config
+
+```javascript
+loader:{
+    baseURL: '',
+    path: '',
+    enableParallel: true,
+    maxParallelDownloads: 4,
+    crossOrigin: undefined,
+    responseType: '',
+    async: true,
+    user: '',
+    password: '',
+    timeout: 0,
+    withCredentials: false,
+    imageLoadType: 'XHR',    // 'HTMLImageElement' 
+    localScheme: [ 'file://', 'capacitor://' ]
+},
+```
+
 ### Events
 
 - Load file complete event
@@ -38,6 +60,10 @@ scene.load.setPath(path)
     ```
     ```javascript
     scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {}, scope);
+    ```
+- Add loading file event
+    ```javascript
+    scene.load.on('addfile', function(key, type, file) {}, scope);
     ```
 - Start loading
     ```javascript
@@ -69,9 +95,14 @@ scene.load.setPath(path)
     scene.load.once('loaderror', function(fileObj){}, scope);
     ```
 - All loading completed
-    ```javascript
-    scene.load.once('complete', function(){}, scope);
-    ```
+    - Before releasing resources
+        ```javascript
+        scene.load.once('postprocess', function(loader){}, scope);
+        ```
+    - After releasing resources
+        ```javascript
+        scene.load.once('complete', function(loader){}, scope);
+        ```
 - Scene's `'preupdate'`, `'update'`, `'postupdate'`, `'render'` events will be triggered during preload stage.
 
 ### Status of loader
@@ -182,6 +213,13 @@ scene.load.animation(key, url);
 // scene.load.animation(key, url, dataKey, xhrSettings);
 ```
 
+Get data from json cache
+
+```javascript
+var cache = scene.json;
+var data = cache.get(key);
+```
+
 #### Audio
 
 ```javascript
@@ -224,6 +262,13 @@ scene.load.video(key, url, loadEvent, asBlob, noAudio);
     - `'canplaythrough'` : The video can be played all the way through, without stopping.
 - `asBlob` : Load the video as a data blob, or via the Video element? Default value is `false`.
 - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+
+Get data from video cache
+
+```javascript
+var cache = scene.video;
+var data = cache.get(key);
+```
 
 #### Bitmap font
 
@@ -525,8 +570,24 @@ cache.remove(key);
 
 ```javascript
 var cache = scene.cache.text;
-var hasData = cache.has(key);
+var hasData = cache.exists(key);
+// var hasData = cache.has(key);
 ```
+
+#### Cache events
+
+- Add any item
+    ```javascript
+    cache.events.on('add', function(cache, key, item){
+
+    })
+    ```
+- Remove any item
+    ```javascript
+    cache.events.on('remove', function(cache, key, item){
+
+    })
+    ```
 
 ### Replace
 

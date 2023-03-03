@@ -68,7 +68,7 @@ Horizontal line progress bar shape.
 - Add line-progress object
     ```javascript
     var lineProgress = new LineProgress(scene, x, y, width, height, barColor, value, config);
-    scene.add.existing(image);
+    scene.add.existing(lineProgress);
     ```
 
 ### Install plugin

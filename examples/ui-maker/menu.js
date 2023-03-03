@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 
 const content = `
 .mylabel:
@@ -94,7 +94,8 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateMenu = function (scene, x, y, onClick) {
-    var menu = scene.rexUI.maker.make(content)
+    var maker = new Maker(scene);
+    var menu = maker.make(content)
         .setPosition(x, y)
 
     menu
@@ -126,15 +127,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
-
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

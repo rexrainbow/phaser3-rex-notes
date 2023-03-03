@@ -19,12 +19,15 @@ var GetWord = function (children, startIndex, charMode, result) {
             continue;
         }
 
-        if ((child.type === CharTypeName) && (child.text !== ' ') && (child.text !== '\n')) {
+        var text = (child.type === CharTypeName) ? child.text : null;
+        if ((text !== null) &&
+            (text !== ' ') && (text !== '\n') && (text !== '\f')
+        ) {
             word.push(child);
             wordWidth += child.outerWidth;
             currentIndex++;
             // Continue
-        } else {  // Get image child, a space, or a new-line
+        } else {  // Get image child, a space, a new-line, or page-break
             if (currentIndex === startIndex) { // Single child
                 word.push(child);
                 wordWidth += child.outerWidth;

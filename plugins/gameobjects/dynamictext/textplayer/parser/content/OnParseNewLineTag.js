@@ -7,7 +7,7 @@ var OnParseNewLineTag = function (textPlayer, parser, config) {
             AppendTextBase.call(textPlayer, '\n');
             parser.skipEvent();
         })
-        .on(`-${tagName}`, function () {            
+        .on(`-${tagName}`, function () {
             parser.skipEvent();
         })
 }

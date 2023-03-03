@@ -1,18 +1,17 @@
 import phaser from 'phaser/src/phaser.js';
 import CSVScenarioPlugin from '../../plugins/csvscenario-plugin.js';
-import Extend from '../../plugins/utils/managers/Extend.js';
+import ManagersBase from '../../plugins/logic/runcommands/managers/Managers.js';
 
 var csvString = `\
 -,add-sprite,A,dude,,
 -,set-sprite-position,A,1,1,,
 -,move-sprite,A,0.5,0.5,1000`;
 
-class Managers extends Extend(Phaser.Events.EventEmitter) {
+class Managers extends ManagersBase {
     constructor(scene) {
-        super();
+        super(scene);
 
         this
-            .initManagers(scene)
             .addGameObjectManager({
                 name: 'sprite',
                 createGameObject(scene, key, frame) {
@@ -20,10 +19,6 @@ class Managers extends Extend(Phaser.Events.EventEmitter) {
                 },
                 viewportCoordinate: true,
             })
-    }
-
-    destroy() {
-        this.destroyManagers();
     }
 
     ['add-sprite'](name, key, frame) {

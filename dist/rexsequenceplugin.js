@@ -198,7 +198,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$1 = function GetValue(source, key, defaultValue) {
+  var GetValue = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -266,7 +266,6 @@
     return Object.prototype.toString.call(obj) === '[object Array]';
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
   var RunCommands = function RunCommands(queue, scope, config) {
     var reverse = GetValue(config, 'reverse', false);
     var retVal;
@@ -322,15 +321,15 @@
     function Sequence(config) {
       _classCallCheck(this, Sequence);
       // Event emitter
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
       this.commands = [];
       this.scope = undefined;
       this.config = undefined;
       this.index = 0;
       this.indexStep = 1; // 1, or -1
-      this.setYoyo(GetValue$1(config, 'yoyo', false));
-      this.setRepeat(GetValue$1(config, 'repeat', 0));
-      this.setLoop(GetValue$1(config, 'loop', false));
+      this.setYoyo(GetValue(config, 'yoyo', false));
+      this.setRepeat(GetValue(config, 'repeat', 0));
+      this.setLoop(GetValue(config, 'loop', false));
       this.state = 0; // 0: idle, 1: run, 2: run-last, 3: completed
       this.task = undefined;
     }
@@ -352,9 +351,9 @@
       key: "load",
       value: function load(commands, scope, config) {
         this.stop();
-        this.setYoyo(GetValue$1(config, 'yoyo', this.yoyo));
-        this.setRepeat(GetValue$1(config, 'repeat', this.repeat));
-        this.setLoop(GetValue$1(config, 'loop', this.loop));
+        this.setYoyo(GetValue(config, 'yoyo', this.yoyo));
+        this.setRepeat(GetValue(config, 'repeat', this.repeat));
+        this.setLoop(GetValue(config, 'loop', this.loop));
         this.commands = Copy(this.commands, commands);
         this.scope = scope;
         this.config = config;

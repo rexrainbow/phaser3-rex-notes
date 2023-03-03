@@ -473,6 +473,19 @@
     }
   };
 
+  var SizeMethods = {
+    setBoxSize: function setBoxSize(size) {
+      this.dirty = this.dirty || this.boxSize !== size;
+      this.boxSize = size;
+      return this;
+    },
+    setCheckerSize: function setCheckerSize(size) {
+      this.dirty = this.dirty || this.checkerSize !== size;
+      this.checkerSize = size;
+      return this;
+    }
+  };
+
   var FillStyle = function FillStyle(color, alpha) {
     if (color == null) {
       this.isFilled = false;
@@ -1529,13 +1542,38 @@
         return this;
       }
     }, {
+      key: "centerX",
+      get: function get() {
+        return this.x + this.width / 2;
+      },
+      set: function set(value) {
+        this.x = value - this.width / 2;
+      }
+    }, {
+      key: "centerY",
+      get: function get() {
+        return this.y + this.height / 2;
+      },
+      set: function set(value) {
+        this.y = value - this.height / 2;
+      }
+    }, {
+      key: "setCenterPosition",
+      value: function setCenterPosition(x, y) {
+        this.centerX = x;
+        this.centerY = y;
+        return this;
+      }
+    }, {
       key: "radiusTL",
       get: function get() {
         return this._radiusTL;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusTL !== value;
-        this._radiusTL = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusTL !== value || this._convexTL !== isConvex;
+        this._convexTL = isConvex;
+        this._radiusTL = Math.abs(value);
       }
     }, {
       key: "radiusTR",
@@ -1543,8 +1581,10 @@
         return this._radiusTR;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusTR !== value;
-        this._radiusTR = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusTR !== value || this._convexTR !== isConvex;
+        this._convexTR = isConvex;
+        this._radiusTR = Math.abs(value);
       }
     }, {
       key: "radiusBL",
@@ -1552,8 +1592,10 @@
         return this._radiusBL;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusBL !== value;
-        this._radiusBL = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusBL !== value || this._convexBL !== isConvex;
+        this._convexBL = isConvex;
+        this._radiusBL = Math.abs(value);
       }
     }, {
       key: "radiusBR",
@@ -1561,8 +1603,10 @@
         return this._radiusBR;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._radiusBR !== value;
-        this._radiusBR = value;
+        var isConvex = value > 0;
+        this.dirty = this.dirty || this._radiusBR !== value || this._convexBR !== isConvex;
+        this._convexBR = isConvex;
+        this._radiusBR = Math.abs(value);
       }
     }, {
       key: "radius",
@@ -1619,9 +1663,15 @@
         // top-left
         radius = this.radiusTL;
         if (radius > 0) {
-          var centerX = radius;
-          var centerY = radius;
-          ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+          if (this._convexTL) {
+            var centerX = radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius, radius, 90, 0, true, iterations, pathData);
+          }
         } else {
           LineTo(0, 0, pathData);
         }
@@ -1629,9 +1679,15 @@
         // top-right
         radius = this.radiusTR;
         if (radius > 0) {
-          var centerX = width - radius;
-          var centerY = radius;
-          ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+          if (this._convexTR) {
+            var centerX = width - radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+          } else {
+            var centerX = width;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius, radius, 180, 90, true, iterations, pathData);
+          }
         } else {
           LineTo(width, 0, pathData);
         }
@@ -1639,9 +1695,15 @@
         // bottom-right
         radius = this.radiusBR;
         if (radius > 0) {
-          var centerX = width - radius;
-          var centerY = height - radius;
-          ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+          if (this._convexBR) {
+            var centerX = width - radius;
+            var centerY = height - radius;
+            ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+          } else {
+            var centerX = width;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius, radius, 270, 180, true, iterations, pathData);
+          }
         } else {
           LineTo(width, height, pathData);
         }
@@ -1649,9 +1711,15 @@
         // bottom-left
         radius = this.radiusBL;
         if (radius > 0) {
-          var centerX = radius;
-          var centerY = height - radius;
-          ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+          if (this._convexBL) {
+            var centerX = radius;
+            var centerY = height - radius;
+            ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius, radius, 360, 270, true, iterations, pathData);
+          }
         } else {
           LineTo(0, height, pathData);
         }
@@ -1684,19 +1752,24 @@
 
       // Setup shapes
       if (this.isSizeChanged) {
+        // Box
+        var posOffset = width * (1 - this.boxSize) / 2;
         var halfBoxLineWidth = boxLineWidth / 2;
-        var boxInnerWidth = width - boxLineWidth;
-        boxShape.setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth).setSize(boxInnerWidth, boxInnerWidth);
+        var boxInnerWidth = width * this.boxSize - boxLineWidth;
+        boxShape.setTopLeftPosition(x + halfBoxLineWidth + posOffset, y + halfBoxLineWidth + posOffset).setSize(boxInnerWidth, boxInnerWidth);
         if (this.isCircleShape) {
           boxShape.setRadius(boxInnerWidth / 2);
         } else {
           boxShape.setRadius(0);
         }
-        var unit = width / 4;
+
+        // Checker
+        var posOffset = width * (1 - this.checkerSize) / 2;
+        var unit = width * this.checkerSize / 4;
         var u1 = unit * 1,
           u2 = unit * 2,
           u3 = unit * 3;
-        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x, y).end();
+        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x + posOffset, y + posOffset).end();
       }
 
       // Set styles
@@ -2353,8 +2426,8 @@
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
-    _inherits(EaseValueTaskBase, _TickTask);
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
     var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
@@ -2538,7 +2611,7 @@
   }(EaseValueTaskBase);
 
   var CheckerAnimationMethods = {
-    setCheckerAnimDuration: function setCheckerAnimDuration(duration) {
+    setCheckerAnimationDuration: function setCheckerAnimationDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
@@ -2569,11 +2642,12 @@
   };
 
   var methods = {};
-  Object.assign(methods, StyleMethods$1, ShapesUpdateMethods, CheckerAnimationMethods);
+  Object.assign(methods, StyleMethods$1, SizeMethods, ShapesUpdateMethods, CheckerAnimationMethods);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DefaultBoxFillColor = 0x005cb2;
+  var DefaultCheckerColor = 0xffffff;
   var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
     _inherits(CheckboxShape, _BaseShapes);
     var _super = _createSuper(CheckboxShape);
@@ -2601,10 +2675,16 @@
       _this.setUncheckedBoxFillStyle(GetValue$2(config, 'uncheckedColor', null), GetValue$2(config, 'uncheckedBoxFillAlpha', 1));
       _this.setBoxStrokeStyle(GetValue$2(config, 'boxLineWidth', 4), GetValue$2(config, 'boxStrokeColor', color), GetValue$2(config, 'boxStrokeAlpha', 1));
       _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
-      _this.setCheckerStyle(GetValue$2(config, 'checkerColor', 0xffffff), GetValue$2(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue$2(config, 'animationDuration', 150));
+      _this.setCheckerStyle(GetValue$2(config, 'checkerColor', DefaultCheckerColor), GetValue$2(config, 'checkerAlpha', 1));
+      _this.setBoxSize(GetValue$2(config, 'boxSize', 1));
+      _this.setCheckerSize(GetValue$2(config, 'checkerSize', 1));
+      _this.setCheckerAnimationDuration(GetValue$2(config, 'animationDuration', 150));
       _this.buildShapes();
-      _this.setChecked(GetValue$2(config, 'checked', false));
+      var value = GetValue$2(config, 'checked');
+      if (value === undefined) {
+        value = GetValue$2(config, 'value', false);
+      }
+      _this.setValue(value);
       return _this;
     }
     _createClass(CheckboxShape, [{
@@ -2633,6 +2713,12 @@
         return this;
       }
     }, {
+      key: "toggleValue",
+      value: function toggleValue() {
+        this.setValue(!this.value);
+        return this;
+      }
+    }, {
       key: "checked",
       get: function get() {
         return this.value;
@@ -2646,13 +2732,13 @@
         if (checked === undefined) {
           checked = true;
         }
-        this.checked = checked;
+        this.setValue(checked);
         return this;
       }
     }, {
       key: "toggleChecked",
       value: function toggleChecked() {
-        this.checked = !this.checked;
+        this.toggleValue();
         return this;
       }
     }, {
@@ -2886,7 +2972,9 @@
       _classCallCheck(this, Checkbox);
       _this = _super.call(this, scene, x, y, width, height, color, config);
       _this._click = new Button(_assertThisInitialized(_this), GetValue(config, 'click'));
-      _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
+      _this._click.on('click', function () {
+        this.toggleValue();
+      }, _assertThisInitialized(_this));
       _this.setReadOnly(GetValue(config, 'readOnly', false));
       return _this;
     }

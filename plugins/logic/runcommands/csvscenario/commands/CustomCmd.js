@@ -1,4 +1,5 @@
 import BaseCmd from './BaseCmd.js';
+import GetValue from '../../../../utils/object/GetValue.js';
 import RunCommands from '../../../../runcommands.js';
 import TypeConvert from '../../../../utils/string/TypeConvert.js';
 
@@ -43,10 +44,14 @@ class CustomCmd extends BaseCmd {
     }
 
     run(inst) {
-        var scenario = this.scenario;
+        if (!this.validate(inst)) {
+            this.scenario.error(`Command '${GetFunctionName(inst)}' is not found in scope`);
+            return;
+        }
+
         var command = inst[1];
         this.lastMethodName = command[0];
-        var task = RunCommands(command, scenario.scope);
+        var task = RunCommands(command, this.scenario.scope);
         if (task && (typeof (task.once) === 'function')) {
             task.once('complete', this.resume, this);
             this.pause();
@@ -54,6 +59,20 @@ class CustomCmd extends BaseCmd {
         } else {
             this.task = undefined;
         }
+    }
+
+    validate(inst) {
+        var fnName = GetFunctionName(inst);
+        if (fnName === null) {
+            return false;
+        }
+
+        var scope = this.scenario.scope;
+        var fn = scope[fnName];
+        if (fn == null) {
+            fn = GetValue(scope, fnName, null);
+        }
+        return !!fn;
     }
 
     pause() {
@@ -68,6 +87,18 @@ class CustomCmd extends BaseCmd {
     }
 }
 
-var CMD = [];
+var GetFunctionName = function (inst) {
+    var command = inst[1];
+    if (!command) {
+        return null;
+    }
+
+    var fnName = command[0];
+    if (!fnName) {
+        return null;
+    }
+
+    return fnName;
+}
 
 export default CustomCmd;

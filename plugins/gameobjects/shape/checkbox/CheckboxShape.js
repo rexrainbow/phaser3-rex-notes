@@ -4,6 +4,7 @@ import Methods from './methods/Methods.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DefaultBoxFillColor = 0x005cb2;
+const DefaultCheckerColor = 0xffffff;
 
 class CheckboxShape extends BaseShapes {
     constructor(scene, x, y, width, height, color, config) {
@@ -54,19 +55,29 @@ class CheckboxShape extends BaseShapes {
 
 
         this.setCheckerStyle(
-            GetValue(config, 'checkerColor', 0xffffff),
+            GetValue(config, 'checkerColor', DefaultCheckerColor),
             GetValue(config, 'checkerAlpha', 1)
         );
 
-        this.setCheckerAnimDuration(
+        this.setBoxSize(
+            GetValue(config, 'boxSize', 1)
+        );
+
+        this.setCheckerSize(
+            GetValue(config, 'checkerSize', 1)
+        )
+
+        this.setCheckerAnimationDuration(
             GetValue(config, 'animationDuration', 150)
         );
 
         this.buildShapes();
 
-        this.setChecked(
-            GetValue(config, 'checked', false)
-        )
+        var value = GetValue(config, 'checked');
+        if (value === undefined) {
+            value = GetValue(config, 'value', false);
+        }
+        this.setValue(value);
     }
 
     get value() {
@@ -97,6 +108,11 @@ class CheckboxShape extends BaseShapes {
         return this;
     }
 
+    toggleValue() {
+        this.setValue(!this.value);
+        return this;
+    }
+
     get checked() {
         return this.value;
     }
@@ -109,12 +125,12 @@ class CheckboxShape extends BaseShapes {
         if (checked === undefined) {
             checked = true;
         }
-        this.checked = checked;
+        this.setValue(checked);
         return this;
     }
 
     toggleChecked() {
-        this.checked = !this.checked;
+        this.toggleValue();
         return this;
     }
 

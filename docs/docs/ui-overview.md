@@ -87,10 +87,13 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [Color input](ui-colorinput.md): Color number (`0x0`~`0xffffff`) or color string (`'#000000'`~`'#ffffff'`, or `'red'`) input field.
 1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
+1. [Confirm dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Drop down list](ui-dropdownlist.md): A [label](ui-label.md) can open a drop-down list panel.
+1. [File selector button](ui-fileselectorbutton.md): A transparent file chooser button above a Label.
 1. [Fix-width-buttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 1. [Fix-width-sizer](ui-fixwidthsizer.md): Layout children game objects into lines.
+1. [Folder](ui-folder.md): A container with a title, foldable child, and background.
 1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [Grid-table](ui-gridtable.md): A container with a [grid table](gridtable.md), slider, and scroller.
@@ -104,14 +107,16 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Pages](ui-pages.md): A container with pages, only current page is visible.
 1. [Perspective card](ui-perspectivecard.md): A container with front and back faces.
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
-1. [Sizer](ui-sizer.md): Layout children game objects.
-1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
-1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
-1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
-1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
-1. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
-1. [Toast](ui-toast.md): Show text message for a short while.
+2. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md).
+3. [Sizer](ui-sizer.md): Layout children game objects.
+4. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
+5. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
+6. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
+7. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
+8. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
+9. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
+10. [Toast](ui-toast.md): Show text message for a short while.
+11. [Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
 
 !!! note "Scroll-able table"
     There are 3 kinds of scroll-able tables :
@@ -367,6 +372,36 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Toggle switch](shape-toggleswitch.md): Toggle-switch input.
+    ```javascript
+    var toggleSwitch = scene.rexUI.add.toggleSwitch(x, y, width, height, color, config);
+    ```
+    or
+    ```javascript
+    class MyToggleSwitch extends RexPlugins.UI.ToggleSwitch {
+        constructor(scene, x, y, width, height, color, config) {
+            super(scene, x, y, width, height, color, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.
+    ```javascript
+    var triangle = scene.rexUI.add.triangle(x, y, width, height, fillColor, fillAlpha);
+    ```
+    or
+    ```javascript
+    class MyTriangle extends RexPlugins.UI.Triangle {
+        constructor(scene, x, y, width, height, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects
@@ -491,6 +526,24 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
 
 
+### Scaled image
+
+1. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.
+    ```javascript
+    var image = scene.rexUI.add.imageBox(x, y, texture, frame, config);
+    ```
+    or
+    ```javascript
+    class MyTransitionImage extends RexPlugins.UI.ImageBox {
+        constructor(scene, x, y, texture, frame, config) {
+            super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
 ### Transition image
 
 1. [Transition image](transitionimage.md): Transit texture to another one.
@@ -502,6 +555,54 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     class MyTransitionImage extends RexPlugins.UI.TransitionImage {
         constructor(scene, x, y, texture, frame, config) {
             super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
+### Dom game objects
+
+1. [Input text](inputtext.md): [Input DOM element](https://www.w3schools.com/tags/tag_input.asp).
+    ```javascript
+    var image = scene.rexUI.add.inputText(config);
+    ```
+    or
+    ```javascript
+    class MyInputText extends RexPlugins.UI.InputText {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [File chooser](filechooser.md): Create a transparent file chooser button (`<input type="file">`).
+    ```javascript
+    var image = scene.rexUI.add.fileChooser(config);
+    ```
+    or
+    ```javascript
+    class MyFileChooser extends RexPlugins.UI.FileChooser {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [File drop zone](filedropzone.md): Create a div element for dropping file(s).
+    ```javascript
+    var image = scene.rexUI.add.fileDropZone(config);
+    ```
+    or
+    ```javascript
+    class MyFileDropZpne extends RexPlugins.UI.FileDropZpne {
+        constructor(scene, config) {
+            super(scene, config);
             // ...
             scene.add.existing(this);
         }

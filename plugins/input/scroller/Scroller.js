@@ -55,8 +55,9 @@ class Scroller extends ComponentBase {
         this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue(o, 'backDeceleration', 2000));
 
-        var dragRatio = GetValue(o, 'dragReverse', false) ? -1 : 1;
-        this.setDragRatio(dragRatio);
+        var dragRate = GetValue(o, 'dragRate', 1);
+        dragRate = dragRate * (GetValue(o, 'dragReverse', false) ? -1 : 1);
+        this.setDragRate(dragRate);
 
         var bounds = GetValue(o, 'bounds', undefined);
         if (bounds) {
@@ -141,8 +142,8 @@ class Scroller extends ComponentBase {
         return this;
     }
 
-    setDragRatio(ratio) {
-        this.dragRatio = ratio;
+    setDragRate(ratio) {
+        this.dragRate = ratio;
         return this;
     }
 
@@ -265,7 +266,7 @@ class Scroller extends ComponentBase {
         } else {
             delta = 0;
         }
-        delta *= this.dragRatio;
+        delta *= this.dragRate;
         return delta;
     }
 
@@ -278,7 +279,7 @@ class Scroller extends ComponentBase {
         } else {
             speed = 0;
         }
-        speed *= this.dragRatio;
+        speed *= this.dragRate;
         return speed;
     }
 

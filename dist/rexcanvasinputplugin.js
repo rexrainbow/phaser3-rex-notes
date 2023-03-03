@@ -258,51 +258,42 @@
       this.dirty = true;
       return this;
     },
-    loadFromURL: function loadFromURL(url, callback) {
-      var self = this;
-      var img = new Image();
-      img.onload = function () {
-        if (self.width !== img.width || self.height !== img.height) {
-          self.resize(img.width, img.height);
-        } else {
-          self.clear();
-        }
-        self.context.drawImage(img, 0, 0);
-        self.updateTexture();
-        if (callback) {
-          callback();
-        }
-        img.onload = null;
-        img.src = '';
-        img.remove();
-      };
-      img.src = url;
-      return this;
-    },
-    loadFromURLPromise: function loadFromURLPromise(url) {
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        self.loadFromURL(url, resolve);
-      });
-    },
-    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
       if (!textureFrame) {
         return this;
       }
-      if (x === undefined) {
-        x = 0;
+      var frameWidth = textureFrame.cutWidth,
+        frameHeight = textureFrame.cutHeight;
+      if (dx === undefined) {
+        dx = 0;
       }
-      if (y === undefined) {
-        y = 0;
+      if (dy === undefined) {
+        dy = 0;
       }
-      if (width === undefined) {
-        width = textureFrame.cutWidth;
+      if (dWidth === undefined) {
+        dWidth = frameWidth;
       }
-      if (height === undefined) {
-        height = textureFrame.cutHeight;
+      if (dHeight === undefined) {
+        dHeight = frameHeight;
       }
-      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      if (sxOffset === undefined) {
+        sxOffset = 0;
+      }
+      if (syOffset === undefined) {
+        syOffset = 0;
+      }
+      if (sWidth === undefined) {
+        sWidth = frameWidth;
+      }
+      if (sHeight === undefined) {
+        sHeight = frameHeight;
+      }
+      var sx = textureFrame.cutX + sxOffset;
+      var sy = textureFrame.cutY + syOffset;
+      this.context.drawImage(textureFrame.source.image,
+      // image
+      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.dirty = true;
       return this;
     },
@@ -387,7 +378,7 @@
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-      if (this.renderer.gl) {
+      if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
@@ -899,8 +890,75 @@
   };
   var globBounds;
 
+  var RotateAround = Phaser.Math.RotateAround;
+  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+      out = globPoint;
+    }
+    out.x = bobX;
+    out.y = bobY;
+    if (bob.rotation !== 0) {
+      RotateAround(out, 0, 0, bob.rotation);
+    }
+    out.x = out.x * bob.scaleX + bob.drawX;
+    out.y = out.y * bob.scaleY + bob.drawY;
+    return out;
+  };
+  var globPoint;
+
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var GameObjectLocalXYToWorldXY = function GameObjectLocalXYToWorldXY(gameObject, localX, localY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+    var px = localX - gameObject.width * gameObject.originX;
+    var py = localY - gameObject.height * gameObject.originY;
+    if (tempMatrix === undefined) {
+      tempMatrix = new TransformMatrix();
+      parentMatrix = new TransformMatrix();
+    }
+    if (gameObject.parentContainer) {
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+    } else {
+      tempMatrix.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+    }
+    tempMatrix.transformPoint(px, py, out);
+    return out;
+  };
+  var tempMatrix, parentMatrix;
+  var globOut = {};
+
+  var BobPositionToWorldPosition = function BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out) {
+    var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
+    var worldXY = GameObjectLocalXYToWorldXY(dynamicText, localXY.x, localXY.y, out);
+    return worldXY;
+  };
+
+  var GetBobWorldPosition = function GetBobWorldPosition(dynamicText, bob, offsetX, offsetY, out) {
+    if (typeof offsetX !== 'number') {
+      out = offsetX;
+      offsetX = 0;
+      offsetY = 0;
+    }
+    var bobX = bob.drawCenterX + offsetX;
+    var bobY = bob.drawCenterY + offsetY;
+    return BobPositionToWorldPosition(dynamicText, bob, bobX, bobY, out);
+  };
+
+  var GetWorldPosition = function GetWorldPosition(offsetX, offsetY, out) {
+    return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
+  };
+
   var Methods$2 = {
-    contains: Contains
+    contains: Contains,
+    getWorldPosition: GetWorldPosition
   };
   Object.assign(Methods$2, RenderMethods);
 
@@ -1504,18 +1562,18 @@
   }();
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-      return {
+      radius = {
         x: defaultRadiusX,
         y: defaultRadiusY
       };
     } else if (typeof radius === 'number') {
-      return {
+      radius = {
         x: radius,
         y: radius
       };
-    } else {
-      return radius;
     }
+    SetConvex(radius);
+    return radius;
   };
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
@@ -1525,13 +1583,15 @@
       radius.x = GetValue$d(value, 'x', 0);
       radius.y = GetValue$d(value, 'y', 0);
     }
+    SetConvex(radius);
+  };
+  var SetConvex = function SetConvex(radius) {
+    radius.convex = radius.x >= 0 || radius.y >= 0;
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
   };
 
   var DegToRad = Phaser.Math.DegToRad;
-  var Rad0 = DegToRad(0);
-  var Rad90 = DegToRad(90);
-  var Rad180 = DegToRad(180);
-  var Rad270 = DegToRad(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -1544,68 +1604,100 @@
     context.beginPath();
     context.translate(x, y);
 
-    // Bottom-right
-    radius = cornerRadius.br;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = height - radiusY;
-    context.moveTo(width, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
-    } else {
-      context.lineTo(width, height);
-      context.lineTo(centerX, height);
-    }
-
-    // Bottom-left
-    radius = cornerRadius.bl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = height - radiusY;
-    context.lineTo(radiusX, height);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
-    } else {
-      context.lineTo(0, height);
-      context.lineTo(0, centerY);
-    }
-
     // Top-left
     radius = cornerRadius.tl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = radiusY;
-    context.lineTo(0, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
+      }
     } else {
       context.lineTo(0, 0);
-      context.lineTo(centerX, 0);
     }
 
     // Top-right
     radius = cornerRadius.tr;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = radiusY;
-    context.lineTo(centerX, 0);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
+      } else {
+        centerX = width;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 90, true, iteration);
+      }
     } else {
       context.lineTo(width, 0);
-      context.lineTo(width, centerY);
+    }
+
+    // Bottom-right
+    radius = cornerRadius.br;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
+      } else {
+        centerX = width;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 180, true, iteration);
+      }
+    } else {
+      context.lineTo(width, height);
+    }
+
+    // Bottom-left
+    radius = cornerRadius.bl;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 360, 270, true, iteration);
+      }
+    } else {
+      context.lineTo(0, height);
     }
     context.closePath();
     context.restore();
   };
-  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+  var IsConvexArc = function IsConvexArc(radius) {
+    return !radius.hasOwnProperty('convex') ||
+    // radius does not have convex property
+    radius.convex;
+  };
+  var IsArcCorner = function IsArcCorner(radius) {
+    return radius.x > 0 && radius.y > 0;
+  };
+  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration) {
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && endAngle > startAngle) {
+      endAngle -= 360;
+    } else if (!antiClockWise && endAngle < startAngle) {
+      endAngle += 360;
+    }
+    startAngle = DegToRad(startAngle);
+    endAngle = DegToRad(endAngle);
     if (iteration == null) {
       // undefined, or null
-      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
     } else {
       iteration += 1;
       var x, y, angle;
@@ -1653,8 +1745,8 @@
       strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth); // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
@@ -2426,6 +2518,9 @@
   var IsNewLineChar = function IsNewLineChar(bob) {
     return bob.type === CharTypeName && bob.text === '\n';
   };
+  var IsPageBreakChar = function IsPageBreakChar(bob) {
+    return bob.type === CharTypeName && bob.text === '\f';
+  };
   var IsChar = function IsChar(bob) {
     return bob.type === CharTypeName;
   };
@@ -2530,7 +2625,9 @@
     }, {
       key: "updateTextSize",
       value: function updateTextSize() {
-        if (this.text === '\n' || this.text === '') {
+        var text = this.text;
+        // Is new-line, page-break, or empty character
+        if (text === '\n' || text === '\f' || text === '') {
           this.textWidth = 0;
           this.textHeight = 0;
           this.ascent = 0;
@@ -2580,7 +2677,8 @@
     }, {
       key: "willRender",
       get: function get() {
-        if (this.text === '\n') {
+        var text = this.text;
+        if (text === '\n' || text === '\f') {
           return false;
         }
         return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
@@ -3161,6 +3259,49 @@
     return this;
   };
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * This is a slightly modified version of jQuery.isPlainObject.
+   * A plain object is an object whose internal class property is [object Object].
+   *
+   * @function Phaser.Utils.Objects.IsPlainObject
+   * @since 3.0.0
+   *
+   * @param {object} obj - The object to inspect.
+   *
+   * @return {boolean} `true` if the object is plain, otherwise `false`.
+   */
+  var IsPlainObject$2 = function IsPlainObject(obj) {
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
+      return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try {
+      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+  };
+
   var DeepClone = function DeepClone(inObject) {
     var outObject;
     var value;
@@ -3172,11 +3313,15 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    for (key in inObject) {
-      value = inObject[key];
+    if (IsPlainObject$2(inObject)) {
+      for (key in inObject) {
+        value = inObject[key];
 
-      //  Recursively (deep) copy for nested objects, including arrays
-      outObject[key] = DeepClone(value);
+        //  Recursively (deep) copy for nested objects, including arrays
+        outObject[key] = DeepClone(value);
+      }
+    } else {
+      outObject = inObject;
     }
     return outObject;
   };
@@ -3211,13 +3356,14 @@
         currentIndex++;
         continue;
       }
-      if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
+      var text = child.type === CharTypeName ? child.text : null;
+      if (text !== null && text !== ' ' && text !== '\n' && text !== '\f') {
         word.push(child);
         wordWidth += child.outerWidth;
         currentIndex++;
         // Continue
       } else {
-        // Get image child, a space, or a new-line
+        // Get image child, a space, a new-line, or page-break
         if (currentIndex === startIndex) {
           // Single child
           word.push(child);
@@ -3439,9 +3585,11 @@
       childIndex += charCnt;
       // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-      if (remainderWidth < wordWidth || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(word[0]);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderWidth < wordWidth || isControlChar) {
         // Add to result
-        if (isNewLineChar) {
+        if (isControlChar) {
           var _char = word[0];
           _char.setActive().setPosition(x, y);
           resultChildren.push(_char);
@@ -3459,10 +3607,10 @@
         maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
         lastLineWidth = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result
           continue;
         }
@@ -3690,7 +3838,9 @@
       var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
       // Next line
       var isNewLineChar = IsNewLineChar(_char);
-      if (remainderHeight < childHeight || isNewLineChar) {
+      var isPageBreakChar = IsPageBreakChar(_char);
+      var isControlChar = isNewLineChar || isPageBreakChar;
+      if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
           _char.setActive().setPosition(x, y).setOrigin(0.5);
@@ -3709,10 +3859,10 @@
         maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
         lastLineHeight = 0;
         lastLine = [];
-        if (!showAllLines && resultLines.length === maxLines) {
-          // Exceed maxLines
+        var isPageEnd = isPageBreakChar || !showAllLines && resultLines.length === maxLines; // Exceed maxLines
+        if (isPageEnd) {
           break;
-        } else if (isNewLineChar) {
+        } else if (isControlChar) {
           // Already add to result                
           continue;
         }
@@ -3911,29 +4061,15 @@
     return this.lastAppendedChildren;
   };
 
-  var RotateAround = Phaser.Math.RotateAround;
-  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bobX, bobY, bob, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      if (globPoint === undefined) {
-        globPoint = {};
-      }
-      out = globPoint;
+  var GetBobCenterPosition = function GetBobCenterPosition(bob, offsetX, offsetY, out) {
+    if (typeof offsetX !== 'number') {
+      out = offsetX;
+      offsetX = 0;
+      offsetY = 0;
     }
-    out.x = bobX;
-    out.y = bobY;
-    if (bob.rotation !== 0) {
-      RotateAround(out, 0, 0, bob.rotation);
-    }
-    out.x = out.x * bob.scaleX + bob.drawX;
-    out.y = out.y * bob.scaleY + bob.drawY;
-    return out;
-  };
-  var globPoint;
-
-  var GetBobCenterPosition = function GetBobCenterPosition(bob, out) {
-    return BobPositionToCanvasPosition(bob.drawCenterX, bob.drawCenterY, bob, out);
+    var bobX = bob.drawCenterX + offsetX;
+    var bobY = bob.drawCenterY + offsetY;
+    return BobPositionToCanvasPosition(bob, bobX, bobY, out);
   };
 
   var GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
@@ -3952,6 +4088,13 @@
       }
     });
     return nearestChild;
+  };
+
+  var GetCharWorldPosition = function GetCharWorldPosition(child, offsetX, offsetY, out) {
+    if (typeof child === 'number') {
+      child = this.getCharChild(child, true);
+    }
+    return GetBobWorldPosition(this, child, offsetX, offsetY, out);
   };
 
   var SetToMinSize = function SetToMinSize() {
@@ -4234,6 +4377,7 @@
     getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getNearestChild: GetNearestChild,
+    getCharWorldPosition: GetCharWorldPosition,
     setToMinSize: SetToMinSize,
     getCharChildIndex: GetCharChildIndex,
     getCharChild: GetCharChild,
@@ -4774,7 +4918,11 @@
 
     // Don't propagate touch/mouse events to parent(game canvas)
     StopPropagationTouchEvents(element);
-    document.body.appendChild(element);
+
+    // Attach element to fullscreenTarget in full screen mode
+    var scaleManager = parent.scene.sys.scale;
+    var parentElement = scaleManager.isFullscreen ? scaleManager.fullscreenTarget : document.body;
+    parentElement.appendChild(element);
     return element;
   };
 
@@ -4814,7 +4962,10 @@
     if (!element) {
       return;
     }
-    document.body.removeChild(element);
+    var parentElement = element.parentElement;
+    if (parentElement) {
+      parentElement.removeChild(element);
+    }
   };
 
   var Close = function Close() {
@@ -5526,17 +5677,27 @@
   };
 
   var InjectDefaultConfig = function InjectDefaultConfig(config) {
+    var isSingleLineMode = !config.textArea;
     if (!HasValue(config, 'wrap.vAlign')) {
-      SetValue(config, 'wrap.vAlign', 'center');
+      var defaultValue = isSingleLineMode ? 'center' : 'top';
+      SetValue(config, 'wrap.vAlign', defaultValue);
     }
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue(config, 'wrap.charWrap', true);
     }
     if (!HasValue(config, 'wrap.maxLines')) {
-      SetValue(config, 'wrap.maxLines', 1);
+      var defaultValue = isSingleLineMode ? 1 : undefined;
+      SetValue(config, 'wrap.maxLines', defaultValue);
     }
     if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
       SetValue(config, 'wrap.useDefaultTextHeight', true);
+    }
+    if (!config.edit) {
+      config.edit = {};
+    }
+    if (!HasValue(config.edit, 'inputType')) {
+      var defaultValue = isSingleLineMode ? 'text' : 'textarea';
+      SetValue(config.edit, 'inputType', defaultValue);
     }
     return config;
   };

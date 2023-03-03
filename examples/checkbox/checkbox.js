@@ -17,7 +17,18 @@ class Demo extends Phaser.Scene {
 
             checked: true,
             // animationDuration: 2000
-        });
+
+            // boxSize: 0.5,
+            // checkerSize: 1.5
+        })
+
+        
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 2, color: 0xff0000, alpha: 1
+            }
+        })
+            .strokeRectShape(checkbox.getBounds())
     }
 
     update() { }

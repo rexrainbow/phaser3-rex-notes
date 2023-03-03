@@ -686,6 +686,7 @@
         this.setMode(GetValue(o, 'mode', 1));
         this.isRunning = GetValue(o, 'isRunning', false);
         this.setMagnitudeMode(GetValue(o, 'magnitudeMode', 1));
+        this.setAxisMode(GetValue(o, "axis", 0));
         this.setDuration(GetValue(o, 'duration', 500));
         this.setMagnitude(GetValue(o, 'magnitude', 10));
         this.ox = GetValue(o, 'ox', undefined);
@@ -777,6 +778,15 @@
         return this;
       }
     }, {
+      key: "setAxisMode",
+      value: function setAxisMode(m) {
+        if (typeof m === 'string') {
+          m = DIRECTIONNODE[m];
+        }
+        this.axisMode = m;
+        return this;
+      }
+    }, {
       key: "setDuration",
       value: function setDuration(duration) {
         this.duration = duration;
@@ -838,9 +848,20 @@
               magnitude *= 1 - this.timer.t;
             }
           var a = Math.random() * Math.PI * 2;
-          var offsetX = Math.cos(a) * magnitude;
-          var offsetY = Math.sin(a) * magnitude;
-          gameObject.setPosition(this.ox + offsetX, this.oy + offsetY);
+          var x = this.ox + Math.cos(a) * magnitude;
+          var y = this.oy + Math.sin(a) * magnitude;
+          switch (this.axisMode) {
+            case 1:
+              gameObject.x = x;
+              break;
+            case 2:
+              gameObject.y = y;
+              break;
+            default:
+              gameObject.x = x;
+              gameObject.y = y;
+              break;
+          }
         }
         return this;
       }
@@ -854,10 +875,18 @@
           return this;
         }
         var gameObject = this.parent;
-        if (this.ox === gameObject.x && this.oy === gameObject.y) {
-          return this;
+        switch (this.axisMode) {
+          case 1:
+            gameObject.x = this.ox;
+            break;
+          case 2:
+            gameObject.y = this.oy;
+            break;
+          default:
+            gameObject.x = this.ox;
+            gameObject.y = this.oy;
+            break;
         }
-        gameObject.setPosition(this.ox, this.oy);
         this.ox = undefined;
         this.oy = undefined;
         return this;
@@ -868,6 +897,17 @@
   var MODE = {
     effect: 0,
     behavior: 1
+  };
+  var DIRECTIONNODE = {
+    'both': 0,
+    'h&v': 0,
+    'x&y': 0,
+    'horizontal': 1,
+    'h': 1,
+    'x': 1,
+    'vertical': 2,
+    'v': 2,
+    'y': 2
   };
   var MANITUDEMODE = {
     constant: 0,

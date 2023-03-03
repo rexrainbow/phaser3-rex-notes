@@ -18,8 +18,20 @@ declare namespace ContainerLite {
     }
 
     interface IAddChildConfig {
-        syncPosition?: boolean
-        syncRotation?: boolean
+        syncPosition?: boolean,
+        syncRotation?: boolean,
+        syncScale?: boolean,
+        syncAlpha?: boolean,
+        syncScrollFactor?: boolean,
+
+    }
+
+    interface IDrawBoundsConfig {
+        drawContainer?: boolean,
+        children?: Phaser.GameObjects.GameObject,
+        color?: number,
+        lineWidth?: number,
+        padding?: number,
     }
 }
 
@@ -45,7 +57,7 @@ declare class ContainerLite extends Base {
 
     pin(
         gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        config?: ContainerLite.IAddChildConfig | boolean
     ): this;
 
     unpin(
@@ -63,7 +75,7 @@ declare class ContainerLite extends Base {
 
     pinLocal(
         child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        config?: ContainerLite.IAddChildConfig | boolean
     ): this;
 
     addLocalMultiple(
@@ -331,10 +343,7 @@ declare class ContainerLite extends Base {
 
     drawBounds(
         graphics: Phaser.GameObjects.Graphics,
-        config?: {
-            color?: number,
-            lineWidth?: number,
-        }
+        config?: ContainerLite.IDrawBoundsConfig,
     ): this;
 
 }

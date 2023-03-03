@@ -1,22 +1,47 @@
 import phaser from 'phaser/src/phaser.js';
 
-class Demo extends Phaser.Scene {
+class SceneA extends Phaser.Scene {
     constructor() {
         super({
-            key: 'examples'
+            key: 'sceneA'
         })
     }
 
     init() {
-        console.log('Scene init')
+        console.log('SceneA init')
     }
 
     preload() {
-        console.log('Scene preload')
+        console.log('SceneA preload')
     }
 
     create() {
-        console.log('Scene create')
+        console.log('SceneA create')
+        this.scene.launch('sceneB');
+    }
+
+    update() {
+
+    }
+}
+
+class SceneB extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'sceneB'
+        })
+    }
+
+    init() {
+        console.log('SceneB init')
+    }
+
+    preload() {
+        console.log('SceneB preload')
+    }
+
+    create() {
+        console.log('SceneB create')
     }
 
     update() {
@@ -37,17 +62,20 @@ var config = {
         preBoot: function () { console.log('Game preBoot') },
         postBoot: function () { console.log('Game postBoot') },
     },
-    scene: Demo
+    scene: [SceneA, SceneB]
 };
 
 var game = new Phaser.Game(config);
 console.log('Game created');
 
 /*
-1. Game created
-2. Game preBoot
-3. Scene init
-4. Scene preload
-5. Scene create
-6. Game postBoot
+Game preBoot
+Game created
+SceneA init
+SceneA preload
+SceneA create
+Game postBoot
+SceneB init
+SceneB preload
+SceneB create
 */

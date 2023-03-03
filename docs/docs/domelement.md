@@ -19,6 +19,7 @@ Carry DOM element, built-in game object of phaser.
 var config = {
     // ...
     parent: divId,
+    // fullscreenTarget: divId, // For fullscreen
     dom: {
         createContainer: true
     },

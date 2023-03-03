@@ -11,12 +11,24 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        // Load file in create stage
         this.load
-            .image('classroom', 'assets/images/backgrounds/classroom.png')
-            .once('complete', function () {
-                this.add.image(0, 0, 'classroom').setOrigin(0);
+            .image('mushroom', 'assets/images/mushroom.png')
+            .once('filecomplete-image-mushroom', function () {
+                this.add.image(350, 300, 'mushroom');
             }, this)
             .start();
+
+        // Load file out of preload/create stage
+        var scene = this;
+        setTimeout(function () {
+            scene.load
+                .image('dude', 'assets/images/phaser-dude.png')
+                .once('filecomplete-image-dude', function () {
+                    scene.add.image(450, 300, 'dude');
+                })
+                .start();
+        }, 500)
     }
 
     update() { }

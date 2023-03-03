@@ -85,10 +85,15 @@ var colorInput = scene.rexUI.add.colorInput({
 
     swatch: undefined,
     // swatch: { shape: 'circle' },
+    // swatch: { size: 30 },
     // swatch: swatchGameObject,
     // swatch: false,
 
+    // swatchSize: undefined,  // or swatch: { size }
+    // squareExpandSwatch: true,
+
     inputText: inputTextConfig,
+    // inputText: false,
 
     colorPicker : {
         width: 160, height: 170,
@@ -102,18 +107,21 @@ var colorInput = scene.rexUI.add.colorInput({
         //     return gameObject;
         // }
 
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
+        // hPalettePosition: 'bottom',
+
+        // space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
     },
 
     colorComponents: {
-        height: undefined,
+        // height: undefined,
         
-        formatLabel: undefined,
+        // formatLabel: undefined,
 
-        inputText: undefined,
+        // inputText: undefined,
 
-        space: { item: 8 }
+        // space: { item: 8 }
     },
+    // colorComponents: false,
 
     valuechangeCallback: function(newValue, oldValue, colorInput) {
     },
@@ -161,18 +169,38 @@ var colorInput = scene.rexUI.add.colorInput({
         ```javascript
         { radius: 10 }
         ```
+        or
+        ```javascript
+        { radius: 10, size: 30 }
+        ```
+        - `shape` : (Round-) Rectangle or circle
+            - `0`, or `'rectangle'` : (Round-) Rectangle shape.
+            - `1`, or `'circle'` : Circle shape.
+        - `radius` : Radius of round rectangle.
+        - `size` : Size of swatch. Equal to `swatchSize` parameter.
     - An Image or Sprite game object : Tint this game object for displaying color value.
     - `false` : No swatch game object.
+- `swatchSize` :
+    - A number : Size of swatch.
+    - `undefined` : Expand size to fit inner height of color input. Default behavior.
+- `squareExpandSwatch`
+    - `true` : Expand size to fit inner height of color input. Default behavior if `swatchSize` is set to `undefined`, or not given
+    - `false` : Keep current size of swatch.
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)
 - `colorPicker` : Configuration of a drop-down [color picker](ui-colorpicker.md), triggered by clicking swatch.
     - `colorPicker.width`, `colorPicker.height` : Sizer of color picker. Default value is `180`x`170`
-    - `colorPicker.background` : Parameters to create [round rectangle](shape-roundrectangle.me) game object, optional.
+    - `colorPicker.background` : Parameters to create [round rectangle](shape-roundrectangle.md) game object, optional.
     - `colorPicker.createBackgroundCallback` : Callback to create background game object, optional.
         ```javascript
         function(scene) {
             return gameObject;
         }
         ```
+    - `colorPicker.hPalettePosition` : Position of h-palette.
+        - `'bottom'` or `0` : Place h-palette at bottom side of sv-palette.
+        - `'left'` or `1` : Place h-palette at left side of sv-palette.
+        - `'top'` or `2` : Place h-palette at top side of sv-palette.
+        - `'right'` or `3` : Place h-palette at right side of sv-palette.
     - `colorPicker.space` : Padding space around color picker. Default value is
         ```javascript
         { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
@@ -305,4 +333,4 @@ Change value will also change the position of marker on H-palette and SV-palette
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

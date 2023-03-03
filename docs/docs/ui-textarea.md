@@ -9,6 +9,9 @@ A container with a text, slider, and scroller.
 
 - [Text-area](https://codepen.io/rexrainbow/pen/JzBZzy)
 - [Bitmap text](https://codepen.io/rexrainbow/pen/YzNRRaz)
+- [Hide unscrollable slider](https://codepen.io/rexrainbow/pen/vYzYBWX)
+- [Append text](https://codepen.io/rexrainbow/pen/rNZaEgO)
+- [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
 
 ## Usage
 
@@ -94,10 +97,33 @@ var textArea = scene.rexUI.add.textArea({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
+
         // indicator: indicatorGameObject,
         thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         // input: 'drag',
         // position: 'right',
+
+        // hideUnscrollableSlider: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
         
@@ -108,12 +134,13 @@ var textArea = scene.rexUI.add.textArea({
         // }
     },
 
-    scroller: {
-        threshold: 10,
-        slidingDeceleration: 5000,
-        backDeceleration: 2000,
-        pointerOutRelease: true,
-    },
+    // scroller: {
+    //     threshold: 10,
+    //     slidingDeceleration: 5000,
+    //     backDeceleration: 2000,
+    //     pointerOutRelease: true,
+    //     dragRate: 1,
+    // },
 
     mouseWheelScroller: false,
     // mouseWheelScroller: {
@@ -198,9 +225,12 @@ var textArea = scene.rexUI.add.textArea({
         - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
         - `'none'`, or `-1` : Disable sider controlling.
-    - `slider.position` : Position of this sldier.
-        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
-        - `1`, `'left'`, `'top'` : Sldier at left/top side.
+    - `slider.position` : Position of this slider.
+        - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Slider at left/top side.
+    - `slider.hideUnscrollableSlider` :
+        - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
+        - `true` : Set slider to invisible if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.
@@ -219,6 +249,7 @@ var textArea = scene.rexUI.add.textArea({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
+    - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
@@ -431,7 +462,7 @@ var linesCount = textArea.linesCount;
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Get element
 

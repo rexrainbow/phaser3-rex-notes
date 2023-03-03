@@ -11,6 +11,7 @@ A container with an icon, text, and background.
 - [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
 - [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
 - [Text wrap in vertical label](https://codepen.io/rexrainbow/pen/vYRymQq)
+- [Square fit icon](https://codepen.io/rexrainbow/pen/xxJWGza)
 - [Icon size](https://codepen.io/rexrainbow/pen/jOKPKWa)
 
 ## Usage
@@ -92,6 +93,7 @@ var label = scene.rexUI.add.label({
 
     icon: iconGameObject,
     // iconMask: false,
+    // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
     
     text: textGameObject,
@@ -100,6 +102,7 @@ var label = scene.rexUI.add.label({
 
     action: actionGameObject,
     // actionMask: false,
+    // squareFitAction: false,
     // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
 
     align: undefined,
@@ -143,6 +146,10 @@ var label = scene.rexUI.add.label({
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `squareFitIcon` : 
+    - `true` : Resize icon size to square to fit label height/width.
+        - Can't work wit `expandTextWidth: true`
+    - `false` : Ignore this feature. Default behavior.
 - `iconSize` : Set display size of icon game object to `iconSize`x`iconSize`
 - `iconWidth` : Set display width of icon game object to `iconWidth`. 
     - If `iconHeight` is `undefined`, set `scaleY` of icon game object to `scaleX` of icon game object, to keep size ratio.
@@ -153,10 +160,14 @@ var label = scene.rexUI.add.label({
     - `false` : Keep width of text to original size. Default behavior.
     - `true` : Expand width of text object. Will set display width by default.
         - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
+        - Can't work with `squareFitIcon: true`.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `squareFitAction` : 
+    - `true` : Resize action icon size to square to fit label height/width.
+    - `false` : Ignore this feature. Default behavior.
 - `actionSize` : Set display size of action game object to `actionSize`x`actionSize`
 - `actionWidth` : Set display width of action game object to `actionWidth`. 
     - If `actionHeight` is `undefined`, set `scaleY` of action game object to `scaleX` of action game object, to keep size ratio.
@@ -307,7 +318,7 @@ label.resetDisplayContent({
     action: undefined, actionFrame: undefined,
     actionSize: undefined,
 
-});
+})
 ```
 
 - `text` : Set text string.
@@ -318,6 +329,8 @@ label.resetDisplayContent({
     - `undefined`, or `null` : Hide action game object.
 - `actionSize` : Set display size of action game object.
 
+Run `label.layout()` after this method, to layout children again.
+
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

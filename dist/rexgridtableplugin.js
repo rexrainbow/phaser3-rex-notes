@@ -435,6 +435,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+    this.addToParentContainer(gameObject);
     this.addToRenderLayer(gameObject);
     return this;
   };
@@ -466,10 +467,22 @@
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$8(config, 'syncPosition', true);
-    state.syncRotation = GetValue$8(config, 'syncRotation', true);
-    state.syncScale = GetValue$8(config, 'syncScale', true);
-    state.syncAlpha = GetValue$8(config, 'syncAlpha', true);
+    if (config === undefined) {
+      config = true;
+    }
+    if (typeof config === 'boolean') {
+      state.syncPosition = config;
+      state.syncRotation = config;
+      state.syncScale = config;
+      state.syncAlpha = config;
+      state.syncScrollFactor = config;
+    } else {
+      state.syncPosition = GetValue$8(config, 'syncPosition', true);
+      state.syncRotation = GetValue$8(config, 'syncRotation', true);
+      state.syncScale = GetValue$8(config, 'syncScale', true);
+      state.syncAlpha = GetValue$8(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$8(config, 'syncScrollFactor', true);
+    }
   };
   var AddChild = {
     // Can override this method
@@ -942,9 +955,11 @@
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var localState = GetLocalState(child);
-      var parent = localState.parent;
-      child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      var state = GetLocalState(child);
+      var parent = state.parent;
+      if (state.syncScrollFactor) {
+        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+      }
       return this;
     },
     syncScrollFactor: function syncScrollFactor() {
@@ -996,7 +1011,7 @@
   };
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length === 0) {
+    if (gameObjects.length <= 1) {
       return gameObjects;
     }
     if (descending === undefined) {
@@ -1348,35 +1363,79 @@
     }
   };
 
-  var AddToContainer = function AddToContainer(layer) {
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    layer.add(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var RemoveFromContainer = function RemoveFromContainer() {
-    if (!this.parentContainer) {
+  var P3Container = {
+    addToContainer: function addToContainer(p3Container) {
+      this._setParentContainerFlag = true;
+      var gameObjects = this.getAllChildren([this]);
+      SortGameObjectsByDepth(gameObjects);
+      p3Container.add(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    addToLayer: function addToLayer(layer) {
+      this.addToContainer(layer);
+      return this;
+    },
+    removeFromContainer: function removeFromContainer() {
+      if (!this.parentContainer) {
+        return this;
+      }
+
+      // Will add gameObjects to scene
+      var gameObjects = this.getAllChildren([this]).filter(function (gameObject) {
+        return !!gameObject.scene;
+      });
+      if (gameObjects.length === 0) {
+        return this;
+      }
+      this._setParentContainerFlag = true;
+      if (gameObjects.length > 1) {
+        SortGameObjectsByDepth(gameObjects);
+        gameObjects.reverse();
+      }
+      this.parentContainer.remove(gameObjects);
+      this._setParentContainerFlag = false;
+      return this;
+    },
+    getParentContainer: function getParentContainer() {
+      if (this.parentContainer) {
+        return this.parentContainer;
+      }
+
+      // One of parent container has a layer
+      var parent = this.getParent();
+      while (parent) {
+        var p3Container = parent.parentContainer;
+        if (p3Container) {
+          return p3Container;
+        }
+        parent = parent.getParent();
+      }
+      return null;
+    },
+    addToParentContainer: function addToParentContainer(gameObject) {
+      // Don't add to layer if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      }
+      var p3Container = this.getParentContainer();
+      if (!p3Container) {
+        return this;
+      }
+      if (gameObject.isRexContainerLite) {
+        // Add containerLite and its children
+        gameObject.addToContainer(p3Container);
+      } else {
+        // Add gameObject directly
+        p3Container.add(gameObject);
+      }
       return this;
     }
-    this._setParentContainerFlag = true;
-    var gameObjects = this.getAllChildren([this]);
-    SortGameObjectsByDepth(gameObjects);
-    gameObjects.reverse();
-    this.parentContainer.remove(gameObjects);
-    this._setParentContainerFlag = false;
-    return this;
-  };
-  var AddToContainer$1 = {
-    addToLayer: AddToContainer,
-    addToContainer: AddToContainer,
-    removeFromContainer: RemoveFromContainer
   };
 
   var Layer = {
     enableLayer: function enableLayer() {
-      if (this.layer) {
+      if (this.privateRenderLayer) {
         return this;
       }
       var layer = this.scene.add.layer();
@@ -1384,25 +1443,25 @@
 
       this.moveDepthBelow(layer);
       this.addToLayer(layer);
-      this.layer = layer;
+      this.privateRenderLayer = layer;
       return this;
     },
     getLayer: function getLayer() {
-      if (!this.layer) {
+      if (!this.privateRenderLayer) {
         this.enableLayer();
       }
-      return this.layer;
+      return this.privateRenderLayer;
     },
     getRenderLayer: function getRenderLayer() {
       // This containerLite has a layer
-      if (this.layer) {
-        return this.layer;
+      if (this.privateRenderLayer) {
+        return this.privateRenderLayer;
       }
 
       // One of parent container has a layer
       var parent = this.getParent();
       while (parent) {
-        var layer = parent.layer;
+        var layer = parent.privateRenderLayer;
         if (layer) {
           return layer;
         }
@@ -1778,43 +1837,91 @@
   };
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var DrawBounds$1 = function DrawBounds(gameObject, graphics, config) {
+  var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
+    var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+    if (typeof config === 'number') {
+      strokeColor = config;
+    } else {
+      strokeColor = GetValue$6(config, 'color');
+      lineWidth = GetValue$6(config, 'lineWidth');
+      fillColor = GetValue$6(config, 'fillColor');
+      fillAlpha = GetValue$6(config, 'fillAlpha', 1);
+      padding = GetValue$6(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+      }
+    } else {
+      Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
     if (!canDrawBound) {
       return;
     }
-    var color, lineWidth;
-    if (typeof config === 'number') {
-      color = config;
-    } else {
-      color = GetValue$6(config, 'color');
-      lineWidth = GetValue$6(config, 'lineWidth');
-    }
-    if (color === undefined) {
-      color = 0xffffff;
+    if (strokeColor === undefined) {
+      strokeColor = 0xffffff;
     }
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
-    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+    if (fillColor === undefined) {
+      fillColor = null;
+    }
+    if (fillAlpha === undefined) {
+      fillAlpha = 1;
+    }
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
+    if (fillColor !== null) {
+      graphics.fillStyle(fillColor, fillAlpha).fillPoints(Points, true, true);
+    }
+    if (strokeColor !== null) {
+      graphics.lineStyle(lineWidth, strokeColor).strokePoints(Points, true, true);
+    }
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
     var drawContainer = GetValue$5(config, 'drawContainer', true);
-    var gameObjects = this.getAllVisibleChildren([this]);
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-      var gameObject = gameObjects[i];
-      if (!drawContainer && gameObject.isRexContainerLite) {
-        continue;
-      }
-      DrawBounds$1(gameObject, graphics, config);
+    var gameObjects = GetValue$5(config, 'children');
+    if (gameObjects === undefined) {
+      gameObjects = this.getAllVisibleChildren([this]);
     }
+    if (!drawContainer) {
+      gameObjects = gameObjects.filter(function (gameObject) {
+        return !gameObject.isRexContainerLite;
+      });
+    }
+    DrawBounds$1(gameObjects, graphics, config);
     return this;
   };
 
@@ -1850,7 +1957,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -1871,7 +1978,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
-      _this.layer = undefined;
+      _this.privateRenderLayer = undefined;
       if (children) {
         _this.add(children);
       }
@@ -1886,9 +1993,9 @@
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
-        if (this.layer) {
-          this.layer.list.length = 0; // Remove all children without trigger callback
-          this.layer.destroy();
+        if (this.privateRenderLayer) {
+          this.privateRenderLayer.list.length = 0; // Remove all children without trigger callback
+          this.privateRenderLayer.destroy();
         }
       }
     }, {
@@ -3087,14 +3194,14 @@
         if (padding === undefined) {
           padding = this.padding;
         }
-        if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
+        if (this.width === width && this.height === height && this.paddingSave === padding) {
           return this;
         }
-        this.widthSave = width;
-        this.heightSave = height;
+        this.width = width;
+        this.height = height;
+        this.originX = parent.originX;
+        this.originY = parent.originY;
         this.paddingSave = padding;
-        this.originXSave = parent.originX;
-        this.originYSave = parent.originY;
         DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
         return this;
       }
@@ -3111,12 +3218,12 @@
         if (originY === undefined) {
           originY = parent.originY;
         }
-        if (this.originXSave === originX && this.originYSave === originY) {
+        if (this.originX === originX && this.originY === originY) {
           return this;
         }
-        this.originXSave = originX;
-        this.originYSave = originY;
-        DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
+        this.originX = originX;
+        this.originY = originY;
+        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
         return this;
       }
     }]);
@@ -3208,8 +3315,8 @@
       ) {
         return this;
       }
-      if (this.layer) {
-        this.layer.setMask(this.childrenMask);
+      if (this.privateRenderLayer) {
+        this.privateRenderLayer.setMask(this.childrenMask);
       } else if (this.maskLayer) {
         // 1. Add parent and children into layer
         this.addToLayer(this.maskLayer);
@@ -3924,6 +4031,10 @@
         cellHeight = config.cellWidth;
         columns = GetValue$1(config, 'rows', config.columns);
       }
+      if (!columns) {
+        columns = 1; // Default columns
+      }
+
       _this.expandCellSize = cellWidth === undefined;
       if (_this.expandCellSize) {
         var width = scrollY ? _this.width : _this.height;

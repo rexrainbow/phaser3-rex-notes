@@ -116,6 +116,13 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
     ```
     - `angle` : Angle in radian.
 
+#### Target position
+
+```javascript
+var targetX = moveTo.targetX;
+var targetY = moveTo.targetY;
+```
+
 ### Enable
 
 - Enable (default)
@@ -160,6 +167,10 @@ moveTo.setRotateToTarget(rotateToTarget);
 
 ### Events
 
+- On start moving
+    ```javascript
+    moveTo.on('start', function(gameObject, moveTo){});
+    ```
 - On reached target
     ```javascript
     moveTo.on('complete', function(gameObject, moveTo){});

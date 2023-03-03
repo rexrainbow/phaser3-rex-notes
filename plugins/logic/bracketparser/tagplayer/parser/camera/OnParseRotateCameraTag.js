@@ -4,13 +4,13 @@ var OnParseRotateCameraTag = function (tagPlayer, parser, config) {
     var tagName = 'camera.rotate';
     parser
         .on(`+${tagName}`, function (value) {
-            tagPlayer.camera.setRotation(DegToRad(value));
+            tagPlayer.targetCamera.setRotation(DegToRad(value));
 
             parser.skipEvent();
         })
         .on(`+${tagName}.to`, function (value, duration, ease) {
             value = DegToRad(value);
-            tagPlayer.camera.rotateTo(DegToRad(value), false, duration, ease);
+            tagPlayer.targetCamera.rotateTo(DegToRad(value), false, duration, ease);
 
             parser.skipEvent();
         })

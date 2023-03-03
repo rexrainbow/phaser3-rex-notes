@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import CreateRoundRectangle from '../utils/build/CreateRoundRectangle.js';
 import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
 import OnDragThumb from './OnDragThumb.js';
 import OnTouchTrack from './OnTouchTrack.js';
@@ -8,6 +9,7 @@ import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
 const SnapTo = Phaser.Math.Snap.To;
 
@@ -28,10 +30,16 @@ class Slider extends ProgressBase(Sizer) {
         var thumb = GetValue(config, 'thumb', undefined);
 
         if (background) {
+            if (IsPlainObject(background)) {
+                background = CreateRoundRectangle(scene, background);
+            }
             this.addBackground(background);
         }
 
         if (track) {
+            if (IsPlainObject(track)) {
+                track = CreateRoundRectangle(scene, track);
+            }
             this.add(track,
                 {
                     proportion: 1,
@@ -43,10 +51,16 @@ class Slider extends ProgressBase(Sizer) {
         }
 
         if (indicator) {
+            if (IsPlainObject(indicator)) {
+                indicator = CreateRoundRectangle(scene, indicator);
+            }
             this.pin(indicator); // Put into container but not layout it
         }
 
         if (thumb) {
+            if (IsPlainObject(thumb)) {
+                thumb = CreateRoundRectangle(scene, thumb);
+            }
             this.pin(thumb); // Put into container but not layout it
 
         }

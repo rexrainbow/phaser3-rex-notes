@@ -51,15 +51,15 @@ class DefaultMaskGraphics extends Graphics {
         if (padding === undefined) {
             padding = this.padding;
         }
-        if ((this.widthSave === width) && (this.heightSave === height) && (this.paddingSave === padding)) {
+        if ((this.width === width) && (this.height === height) && (this.paddingSave === padding)) {
             return this;
         }
 
-        this.widthSave = width;
-        this.heightSave = height;
+        this.width = width;
+        this.height = height;
+        this.originX = parent.originX;
+        this.originY = parent.originY;
         this.paddingSave = padding;
-        this.originXSave = parent.originX;
-        this.originYSave = parent.originY;
 
         DrawShape.call(this,
             width, height, padding,
@@ -81,15 +81,15 @@ class DefaultMaskGraphics extends Graphics {
         if (originY === undefined) {
             originY = parent.originY;
         }
-        if ((this.originXSave === originX) && (this.originYSave === originY)) {
+        if ((this.originX === originX) && (this.originY === originY)) {
             return this;
         }
 
-        this.originXSave = originX;
-        this.originYSave = originY;
+        this.originX = originX;
+        this.originY = originY;
 
         DrawShape.call(this,
-            this.widthSave, this.heightSave, this.paddingSave,
+            this.width, this.height, this.paddingSave,
             originX, originY,
         );
         return this;

@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default TextTyping;
 
 declare namespace TextTyping {
@@ -18,7 +20,7 @@ declare namespace TextTyping {
     }
 }
 
-declare class TextTyping extends Phaser.Events.EventEmitter {
+declare class TextTyping extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: TextTyping.IConfig

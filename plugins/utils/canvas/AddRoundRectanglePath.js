@@ -1,10 +1,6 @@
 import RoundRectangle from '../../geom/roundrectangle/RoundRectangle.js';
 
 const DegToRad = Phaser.Math.DegToRad;
-const Rad0 = DegToRad(0);
-const Rad90 = DegToRad(90);
-const Rad180 = DegToRad(180);
-const Rad270 = DegToRad(270);
 
 var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),
@@ -21,69 +17,112 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
 
     context.translate(x, y);
 
-    // Bottom-right
-    radius = cornerRadius.br;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = height - radiusY;
-    context.moveTo(width, centerY);
-    if ((radiusX > 0) && (radiusY > 0)) {
-        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
-    } else {
-        context.lineTo(width, height);
-        context.lineTo(centerX, height);
-    }
-
-    // Bottom-left
-    radius = cornerRadius.bl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = height - radiusY;
-    context.lineTo(radiusX, height);
-    if ((radiusX > 0) && (radiusY > 0)) {
-        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
-    } else {
-        context.lineTo(0, height);
-        context.lineTo(0, centerY);
-    }
-
     // Top-left
     radius = cornerRadius.tl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = radiusY;
-    context.lineTo(0, centerY);
-    if ((radiusX > 0) && (radiusY > 0)) {
-        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    if (IsArcCorner(radius)) {
+        radiusX = radius.x * scaleRX;
+        radiusY = radius.y * scaleRY;
+        if (IsConvexArc(radius)) {
+            centerX = radiusX;
+            centerY = radiusY;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
+        } else {
+            centerX = 0;
+            centerY = 0;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
+        }
     } else {
         context.lineTo(0, 0);
-        context.lineTo(centerX, 0);
     }
 
     // Top-right
     radius = cornerRadius.tr;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = radiusY;
-    context.lineTo(centerX, 0);
-    if ((radiusX > 0) && (radiusY > 0)) {
-        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    if (IsArcCorner(radius)) {
+        radiusX = radius.x * scaleRX;
+        radiusY = radius.y * scaleRY;
+        if (IsConvexArc(radius)) {
+            centerX = width - radiusX;
+            centerY = radiusY;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
+        } else {
+            centerX = width;
+            centerY = 0;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 90, true, iteration);
+        }
     } else {
         context.lineTo(width, 0);
-        context.lineTo(width, centerY);
+    }
+
+    // Bottom-right
+    radius = cornerRadius.br;
+    if (IsArcCorner(radius)) {
+        radiusX = radius.x * scaleRX;
+        radiusY = radius.y * scaleRY;
+        if (IsConvexArc(radius)) {
+            centerX = width - radiusX;
+            centerY = height - radiusY;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
+        } else {
+            centerX = width;
+            centerY = height;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 180, true, iteration);
+        }
+    } else {
+        context.lineTo(width, height);
+    }
+
+    // Bottom-left
+    radius = cornerRadius.bl;
+    if (IsArcCorner(radius)) {
+        radiusX = radius.x * scaleRX;
+        radiusY = radius.y * scaleRY;
+        if (IsConvexArc(radius)) {
+            centerX = radiusX;
+            centerY = height - radiusY;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
+        } else {
+            centerX = 0;
+            centerY = height;
+            ArcTo(context, centerX, centerY, radiusX, radiusY, 360, 270, true, iteration);
+        }
+    } else {
+        context.lineTo(0, height);
     }
 
     context.closePath();
     context.restore();
 }
 
-var ArcTo = function (context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+var IsConvexArc = function (radius) {
+    return (!radius.hasOwnProperty('convex')) ||  // radius does not have convex property
+        radius.convex;
+}
+
+var IsArcCorner = function (radius) {
+    return ((radius.x > 0) && (radius.y > 0));
+}
+
+var ArcTo = function (
+    context,
+    centerX, centerY,
+    radiusX, radiusY,
+    startAngle, endAngle,
+    antiClockWise,
+    iteration
+) {
+
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && (endAngle > startAngle)) {
+        endAngle -= 360;
+    } else if (!antiClockWise && (endAngle < startAngle)) {
+        endAngle += 360;
+    }
+
+    startAngle = DegToRad(startAngle);
+    endAngle = DegToRad(endAngle);
+
     if (iteration == null) {  // undefined, or null
-        context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+        context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
     } else {
         iteration += 1;
         var x, y, angle;

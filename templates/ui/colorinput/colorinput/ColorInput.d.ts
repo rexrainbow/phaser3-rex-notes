@@ -20,6 +20,8 @@ declare namespace ColorInput {
                 scene: Phaser.Scene,
             ) => Phaser.GameObjects.GameObject,
 
+            hPalettePosition?: 0 | 1 | 2 | 3 | 'bottom' | 'left' | 'top' | 'right',
+
             expandDirection?: 0 | 1 | 'down' | 'up',
 
             easeIn?: number, easeOut?: number,

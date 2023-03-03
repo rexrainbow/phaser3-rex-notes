@@ -7,7 +7,7 @@ declare namespace ColorPicker {
         background?: Phaser.GameObjects.GameObject,
 
         hPalette?: {
-            position?: 'bottom' | 0 | 'left' | 1 | 'top' | 2 | 'right' | 3,
+            position?: 0 | 1 | 2 | 3 | 'bottom' | 'left' | 'top' | 'right',
             size?: number, width?: number, height?: number,
         },
 
@@ -16,6 +16,7 @@ declare namespace ColorPicker {
         },
 
         valuechangeCallback: (newValue: number, oldValue: number, colorPicker: ColorPicker) => void,
+        valuechangeCallbackScope?: Object,
 
         value?: number,
     }

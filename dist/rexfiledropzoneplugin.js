@@ -1,0 +1,475 @@
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfiledropzoneplugin = factory());
+})(this, (function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
+    return Constructor;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+    return _setPrototypeOf(o, p);
+  }
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+    return _assertThisInitialized(self);
+  }
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+        result;
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  var Resize = function Resize(width, height) {
+    if (this.scene.sys.scale.autoRound) {
+      width = Math.floor(width);
+      height = Math.floor(height);
+    }
+    if (this.width === width && this.height === height) {
+      return this;
+    }
+    var style = this.node.style;
+    style.width = "".concat(width, "px");
+    style.height = "".concat(height, "px");
+    this.updateSize();
+    return this;
+  };
+
+  var SyncTo = function SyncTo(gameObject) {
+    this.setOrigin(gameObject.originX, gameObject.originY);
+    this.setPosition(gameObject.x, gameObject.y);
+    this.resize(gameObject.displayWidth, gameObject.displayHeight);
+    return this;
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetCache = function GetCache(game, loaderType, cacheType) {
+    if (cacheType === undefined) {
+      switch (loaderType) {
+        case 'image':
+        case 'svg':
+          cacheType = 'textures';
+          break;
+        case 'animation':
+          cacheType = 'json';
+          break;
+        case 'tilemapTiledJSON':
+        case 'tilemapCSV':
+          cacheType = 'tilemap';
+          break;
+        case 'glsl':
+          cacheType = 'shader';
+          break;
+        default:
+          cacheType = loaderType;
+          break;
+      }
+    }
+    game = GetGame(game);
+    var cache;
+    if (cacheType === 'textures') {
+      cache = game.textures;
+    } else {
+      cache = game.cache[cacheType];
+    }
+    return cache;
+  };
+
+  var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
+    var cache = GetCache(scene, loaderType, cacheType);
+    if (cache.exists(key)) {
+      cache.remove(key);
+    }
+    var url = window.URL.createObjectURL(file);
+    var loader = scene.load;
+    if (onComplete) {
+      loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
+        onComplete(data);
+      });
+    }
+    loader[loaderType](key, url);
+    loader.start();
+  };
+
+  var LoadFile = function LoadFile(file, loaderType, key, cacheType, onComplete) {
+    var scene = this.scene;
+    FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
+    return this;
+  };
+  var LoadFilePromise = function LoadFilePromise(file, loaderType, key, cacheType) {
+    var scene = this.scene;
+    return new Promise(function (resolve, reject) {
+      var onComplete = function onComplete(data) {
+        resolve(data);
+      };
+      FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete);
+    });
+  };
+  var LoadFileMethods = {
+    loadFile: LoadFile,
+    loadFilePromise: LoadFilePromise
+  };
+
+  var DropEnableMethods = {
+    setDropEnable: function setDropEnable(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      this.dropEnable = enable;
+      return this;
+    },
+    toggleDropEnable: function toggleDropEnable() {
+      this.dropEnable = !this.dropEnable;
+      return this;
+    }
+  };
+
+  var FilterMethods = {
+    addFilter: function addFilter(name, callback) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      this.filters[name] = callback;
+      return this;
+    },
+    addFilters: function addFilters(filters) {
+      if (!this.filters) {
+        this.filters = {};
+      }
+      for (var name in filters) {
+        this.filters[name] = filters[name];
+      }
+      return this;
+    }
+  };
+
+  var Methods = {
+    resize: Resize,
+    syncTo: SyncTo
+  };
+  Object.assign(Methods, DropEnableMethods, FilterMethods, LoadFileMethods);
+
+  var DragDropEvents = {
+    dragenter: 'dragenter',
+    dragleave: 'dragleave',
+    dragover: 'dragover',
+    drop: 'drop'
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, config) {
+    var preventDefault = GetValue$1(config, 'preventDefault', false);
+    var preTest = GetValue$1(config, 'preTest');
+    var _loop = function _loop(elementEventName) {
+      // Note: Don't use `var` here
+      element.addEventListener(elementEventName, function (e) {
+        if (!preTest || preTest(gameObject, elementEventName)) {
+          gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        }
+        if (preventDefault) {
+          e.preventDefault();
+        }
+      });
+    };
+    for (var elementEventName in elementEvents) {
+      _loop(elementEventName);
+    }
+  };
+
+  var DOMElement = Phaser.GameObjects.DOMElement;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var FileDropZone = /*#__PURE__*/function (_DOMElement) {
+    _inherits(FileDropZone, _DOMElement);
+    var _super = _createSuper(FileDropZone);
+    function FileDropZone(scene, x, y, width, height, config) {
+      var _this;
+      _classCallCheck(this, FileDropZone);
+      if (IsPlainObject(x)) {
+        config = x;
+        x = GetValue(config, 'x', 0);
+        y = GetValue(config, 'y', 0);
+        width = GetValue(config, 'width', 0);
+        height = GetValue(config, 'height', 0);
+      } else if (IsPlainObject(width)) {
+        config = width;
+        width = GetValue(config, 'width', 0);
+        height = GetValue(config, 'height', 0);
+      }
+      if (config === undefined) {
+        config = {};
+      }
+      var element = document.createElement('div');
+      var style = GetValue(config, 'style', undefined);
+      _this = _super.call(this, scene, x, y, element, style);
+      _this.type = 'rexFileDropZone';
+      _this.resize(width, height);
+      _this._files = [];
+      _this.setDropEnable(GetValue(config, 'dropEnable', true));
+      var filters = GetValue(config, 'filters');
+      if (filters) {
+        _this.addFilters(filters);
+      }
+
+      // Apply events
+      RouteEvents(_assertThisInitialized(_this), element, DragDropEvents, {
+        preventDefault: true,
+        preTest: function preTest(gameObject) {
+          return gameObject.dropEnable;
+        }
+      });
+      _this.on('drop', function (gameObject, e) {
+        this._files = e.dataTransfer.files;
+        if (this._files && this.filters) {
+          for (var filterType in this.filters) {
+            var filterCallback = this.filters[filterType];
+            var filteredFiles = [];
+            for (var i = 0, cnt = this._files.length; i < cnt; i++) {
+              var file = this._files[i];
+              if (filterCallback(file)) {
+                filteredFiles.push(file);
+              }
+            }
+            if (filteredFiles.length > 0) {
+              this.emit("drop.".concat(filterType), filteredFiles);
+            }
+          }
+        }
+      }, _assertThisInitialized(_this));
+      return _this;
+    }
+    _createClass(FileDropZone, [{
+      key: "files",
+      get: function get() {
+        return this._files;
+      }
+    }]);
+    return FileDropZone;
+  }(DOMElement);
+  Object.assign(FileDropZone.prototype, Methods);
+
+  function Factory (x, y, width, height, config) {
+    var gameObject = new FileDropZone(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+    var width = GetAdvancedValue(config, 'width', undefined);
+    var height = GetAdvancedValue(config, 'height', undefined);
+    var gameObject = new FileDropZone(this.scene, 0, 0, width, height, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+          entry[key] = newEntry;
+        }
+        entry = entry[key];
+      }
+    }
+    return entry;
+  };
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      }
+      // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+    return target;
+  };
+
+  var FileDropZonePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(FileDropZonePlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(FileDropZonePlugin);
+    function FileDropZonePlugin(pluginManager) {
+      var _this;
+      _classCallCheck(this, FileDropZonePlugin);
+      _this = _super.call(this, pluginManager);
+
+      //  Register our new Game Object type
+      pluginManager.registerGameObject('rexFileDropZone', Factory, Creator);
+      return _this;
+    }
+    _createClass(FileDropZonePlugin, [{
+      key: "start",
+      value: function start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+
+      // Note: Not working in iOS9+
+    }, {
+      key: "open",
+      value: function open(config) {
+        return OpenFileChooser(this.game, config);
+      }
+    }]);
+    return FileDropZonePlugin;
+  }(Phaser.Plugins.BasePlugin);
+  SetValue(window, 'RexPlugins.GameObjects.FileDropZone', FileDropZone);
+
+  return FileDropZonePlugin;
+
+}));

@@ -1,3 +1,5 @@
+import IsPlainObject from './IsPlainObject.js';
+
 var DeepClone = function (inObject) {
     var outObject;
     var value;
@@ -11,11 +13,16 @@ var DeepClone = function (inObject) {
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
 
-    for (key in inObject) {
-        value = inObject[key];
+    if (IsPlainObject(inObject)) {
+        for (key in inObject) {
+            value = inObject[key];
 
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
+            //  Recursively (deep) copy for nested objects, including arrays
+            outObject[key] = DeepClone(value);
+        }
+
+    } else {
+        outObject = inObject;
     }
 
     return outObject;

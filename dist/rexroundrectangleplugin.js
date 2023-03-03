@@ -255,18 +255,18 @@
   }();
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-      return {
+      radius = {
         x: defaultRadiusX,
         y: defaultRadiusY
       };
     } else if (typeof radius === 'number') {
-      return {
+      radius = {
         x: radius,
         y: radius
       };
-    } else {
-      return radius;
     }
+    SetConvex(radius);
+    return radius;
   };
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
@@ -276,6 +276,12 @@
       radius.x = GetValue$2(value, 'x', 0);
       radius.y = GetValue$2(value, 'y', 0);
     }
+    SetConvex(radius);
+  };
+  var SetConvex = function SetConvex(radius) {
+    radius.convex = radius.x >= 0 || radius.y >= 0;
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
   };
 
   var LineTo = function LineTo(x, y, pathData) {
@@ -526,15 +532,11 @@
       var iteration = GetValue$1(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
-      if (fillColor !== undefined) {
-        _this.setFillStyle(fillColor, fillAlpha);
+      _this.setFillStyle(fillColor, fillAlpha);
+      if (strokeColor !== undefined && strokeWidth === undefined) {
+        strokeWidth = 2;
       }
-      if (strokeColor !== undefined) {
-        if (strokeWidth === undefined) {
-          strokeWidth = 2;
-        }
-        _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
-      }
+      _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       _this.updateDisplayOrigin();
       _this.dirty = true;
       return _this;
@@ -551,42 +553,66 @@
           radius,
           iteration = this.iteration + 1;
 
-        // top-left
+        // Top-left
         radius = cornerRadius.tl;
         if (IsArcCorner(radius)) {
-          var centerX = radius.x;
-          var centerY = radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
+          if (radius.convex) {
+            var centerX = radius.x;
+            var centerY = radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius.x, radius.y, 90, 0, true, iteration, pathData);
+          }
         } else {
           LineTo(0, 0, pathData);
         }
 
-        // top-right
+        // Top-right
         radius = cornerRadius.tr;
         if (IsArcCorner(radius)) {
-          var centerX = width - radius.x;
-          var centerY = radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
+          if (radius.convex) {
+            var centerX = width - radius.x;
+            var centerY = radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
+          } else {
+            var centerX = width;
+            var centerY = 0;
+            ArcTo(centerX, centerY, radius.x, radius.y, 180, 90, true, iteration, pathData);
+          }
         } else {
           LineTo(width, 0, pathData);
         }
 
-        // bottom-right
+        // Bottom-right
         radius = cornerRadius.br;
         if (IsArcCorner(radius)) {
-          var centerX = width - radius.x;
-          var centerY = height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+          if (radius.convex) {
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+          } else {
+            var centerX = width;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius.x, radius.y, 270, 180, true, iteration, pathData);
+          }
         } else {
           LineTo(width, height, pathData);
         }
 
-        // bottom-left
+        // Bottom-left
         radius = cornerRadius.bl;
         if (IsArcCorner(radius)) {
-          var centerX = radius.x;
-          var centerY = height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+          if (radius.convex) {
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+          } else {
+            var centerX = 0;
+            var centerY = height;
+            ArcTo(centerX, centerY, radius.x, radius.y, 360, 270, true, iteration, pathData);
+          }
         } else {
           LineTo(0, height, pathData);
         }
@@ -730,7 +756,7 @@
         if (value === undefined) {
           value = 0;
         }
-        this.radiuBL = value;
+        this.radiusBL = value;
         return this;
       }
     }, {
@@ -787,7 +813,7 @@
     return RoundRectangle;
   }(Shape);
   var IsArcCorner = function IsArcCorner(radius) {
-    return radius.x !== 0 && radius.y !== 0;
+    return radius.x > 0 && radius.y > 0;
   };
   var ShapeTypeMap = {
     rectangle: 0,

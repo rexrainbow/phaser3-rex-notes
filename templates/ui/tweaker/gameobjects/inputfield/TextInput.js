@@ -33,10 +33,13 @@ class TextInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText(text);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 
     setInputTextReadOnly(enable) {

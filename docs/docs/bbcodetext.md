@@ -95,6 +95,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
+- Url link : `[url=http...]text[/url]`
+    - Click this area to open web page on a new tab (`window.open(url, '_blank')`)
+    - Will register hit area with key `url:http...`
 - Line alignment : 
     - `[align=left]text[/align]`, 
     - `[align=center]text[/align]`, 
@@ -124,7 +127,12 @@ Default style
     backgroundHorizontalGradient: true,
     backgroundStrokeColor: null,  // null, css string, or number
     backgroundStrokeLineWidth: 2,
-    backgroundCornerRadius: 0,
+
+    backgroundCornerRadius: 0,  
+    // 0   : no round corner, 
+    // > 0 : convex round corner
+    // < 0 : concave round corner
+
     backgroundCornerIteration: null,    
     color: '#fff',  // null, css string, or number
     stroke: '#fff',  // null, css string, or number
@@ -168,11 +176,14 @@ Default style
     //     fontSize: 0
     // },
 
-    // images: {
-    //    key: { y:-8 }
-    // },
+    // images: [
+    //    { key: 'icon', y: -8 },
+    // ],
 
     // sharedPool: true,
+
+    // urlTagCursorStyle: 'pointer',
+    // interactive: false
 }
 ```
 
@@ -231,6 +242,10 @@ var txt = scene.make.rexBBCodeText({
 - `sharedPool` : 
     - `true` : Use shared resouce pools during game. Default behavior.
     - `false` : Use local resource pools, will be free when game object destroying.
+- `urlTagCursorStyle` : Cursor style when cursor moving over a url tag. Default value is `'pointer'`.
+- `interactive` :
+    - `true` : Invoke `txt.setInteractive()` for hit-area tag, or url tag.
+    - `false` : Do nothing. Default behavior.
 
 ### Custom class
 
@@ -408,6 +423,10 @@ txt.setFontStyle(style);
             var radius = txt.style.backgroundCornerRadius;
             var iteration = txt.style.backgroundCornerIteration;
             ```
+            - `radius` :
+                - `0`  : No round corner
+                - `> 0` : Convex round corner
+                - `< 0` : Concave round corner
         - Set
             ```javascript
             txt.setBackgroundCornerRadius(radius);
@@ -510,6 +529,18 @@ Size of hit-area is word-width x line-height, or image-width x line-height.
     or
     ```javascript
     txt.on('areadown-' + key, function(pointer, localX, localY, event){
+
+    }, scope)
+    ```
+- Pointer click : pointer down then up, without pointer out
+    ```javascript
+    txt.on('areaclick', function(key, pointer, localX, localY, event){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaclick-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```

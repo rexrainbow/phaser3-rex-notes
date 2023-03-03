@@ -1,4 +1,4 @@
-import ContainerLite from "../containerlite/ContainerLite";
+import ContainerLite from '../containerlite/ContainerLite';
 
 export default TransitionImage;
 
@@ -33,7 +33,7 @@ declare namespace TransitionImage {
     }
 
     interface IConfig extends ITransitConfig {
-        x?: number, y?: number
+        x?: number, y?: number,
     }
 }
 
@@ -55,6 +55,9 @@ declare class TransitionImage extends ContainerLite {
         scene: Phaser.Scene,
         config?: TransitionImage.IConfig
     );
+
+    texture: Phaser.Textures.Texture;
+    frame: Phaser.Textures.Frame;
 
     setTransitionDirection(
         dir: TransitionImage.TransitionDirectionType
@@ -91,12 +94,11 @@ declare class TransitionImage extends ContainerLite {
     resume(): this;
     stop(): this;
 
-    flipX: boolean;
-    flipY: boolean;
     setFlipX(value: boolean): this;
     setFlipY(value: boolean): this;
     toggleFlipX(): this;
     toggleFlipY(): this;
     setFlip(x: boolean, y: boolean): this;
-
+    flipX: boolean;
+    flipY: boolean;
 }

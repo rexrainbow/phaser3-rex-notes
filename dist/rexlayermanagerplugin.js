@@ -594,28 +594,46 @@
     return viewport;
   };
 
-  var VPXYToXY = function VPXYToXY(vpx, vpy, viewport, out) {
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = GlobXY;
     }
-    out.x = viewport.x + viewport.width * vpx;
-    out.y = viewport.y + viewport.height * vpy;
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
     return out;
   };
   var GlobXY = {};
 
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
       return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
     }
     if (vpx === undefined) {
       vpx = 0.5;
     }
     if (vpy === undefined) {
       vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
     }
     if (transformCallback === undefined) {
       transformCallback = VPXYToXY;
@@ -626,7 +644,7 @@
 
     // Set position of game object when view-port changed.
     var Transform = function Transform() {
-      transformCallback(vpx, vpy, viewport, gameObject);
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
     };
     events.on('update', Transform);
     gameObject.once('destroy', function () {
@@ -655,12 +673,37 @@
         }
       }
     });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
+          Transform();
+        }
+      }
+    });
     Transform();
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
   var AddMethods = {
     has: function has(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    exists: function exists(name) {
       return this.bobs.hasOwnProperty(name);
     },
     get: function get(name) {
@@ -978,31 +1021,77 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var DrawBounds = function DrawBounds(gameObject, graphics, config) {
+  var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
+    var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+    if (typeof config === 'number') {
+      strokeColor = config;
+    } else {
+      strokeColor = GetValue$2(config, 'color');
+      lineWidth = GetValue$2(config, 'lineWidth');
+      fillColor = GetValue$2(config, 'fillColor');
+      fillAlpha = GetValue$2(config, 'fillAlpha', 1);
+      padding = GetValue$2(config, 'padding', 0);
+    }
+    if (Array.isArray(gameObjects)) {
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+      }
+    } else {
+      Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+    }
+  };
+  var Draw = function Draw(gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
     if (!canDrawBound) {
       return;
     }
-    var color, lineWidth;
-    if (typeof config === 'number') {
-      color = config;
-    } else {
-      color = GetValue$2(config, 'color');
-      lineWidth = GetValue$2(config, 'lineWidth');
-    }
-    if (color === undefined) {
-      color = 0xffffff;
+    if (strokeColor === undefined) {
+      strokeColor = 0xffffff;
     }
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-    Points[0] = GetTopLeft(gameObject, Points[0]);
-    Points[1] = GetTopRight(gameObject, Points[1]);
-    Points[2] = GetBottomRight(gameObject, Points[2]);
-    Points[3] = GetBottomLeft(gameObject, Points[3]);
-    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+    if (fillColor === undefined) {
+      fillColor = null;
+    }
+    if (fillAlpha === undefined) {
+      fillAlpha = 1;
+    }
+    if (padding === undefined) {
+      padding = 0;
+    }
+    var p0 = GetTopLeft(gameObject, Points[0]);
+    p0.x -= padding;
+    p0.y -= padding;
+    var p1 = GetTopRight(gameObject, Points[1]);
+    p1.x += padding;
+    p1.y -= padding;
+    var p2 = GetBottomRight(gameObject, Points[2]);
+    p2.x += padding;
+    p2.y += padding;
+    var p3 = GetBottomLeft(gameObject, Points[3]);
+    p3.x -= padding;
+    p3.y += padding;
+    if (fillColor !== null) {
+      graphics.fillStyle(fillColor, fillAlpha).fillPoints(Points, true, true);
+    }
+    if (strokeColor !== null) {
+      graphics.lineStyle(lineWidth, strokeColor).strokePoints(Points, true, true);
+    }
   };
-  var Points = [undefined, undefined, undefined, undefined];
+  var Points = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
 
   var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
     this.forEachGO(function (gameObject) {
@@ -1165,7 +1254,7 @@
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length === 0) {
+    if (gameObjects.length <= 1) {
       return gameObjects;
     }
     if (descending === undefined) {

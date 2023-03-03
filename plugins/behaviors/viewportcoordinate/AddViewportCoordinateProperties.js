@@ -1,18 +1,28 @@
 import MonitorViewport from './MonitorViewport.js';
 import VPXYToXY from './VPXYToXY.js';
 
-var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy, transformCallback) {
+var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
         return gameObject;
     }
 
-    if (vpx === undefined) {
-        vpx = 0.5;
+    if (typeof (vpx) === 'function') {
+        transformCallback = vpx;
+        vpx = undefined;
     }
-    if (vpy === undefined) {
-        vpy = 0.5;
+
+    if (typeof (vpxOffset) === 'function') {
+        transformCallback = vpxOffset;
+        vpxOffset = undefined;
     }
+
+
+    if (vpx === undefined) { vpx = 0.5; }
+    if (vpy === undefined) { vpy = 0.5; }
+    if (vpxOffset === undefined) { vpxOffset = 0; }
+    if (vpyOffset === undefined) { vpyOffset = 0; }
+
     if (transformCallback === undefined) {
         transformCallback = VPXYToXY;
     }
@@ -24,8 +34,9 @@ var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy, 
 
     // Set position of game object when view-port changed.
     var Transform = function () {
-        transformCallback(vpx, vpy, viewport, gameObject);
+        transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
     }
+
     events.on('update', Transform);
     gameObject.once('destroy', function () {
         events.off('update', Transform);
@@ -51,6 +62,30 @@ var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy, 
         set: function (value) {
             if (vpy !== value) {
                 vpy = value;
+                Transform();
+            }
+        },
+    });
+
+    Object.defineProperty(gameObject, 'vpxOffset', {
+        get: function () {
+            return vpxOffset;
+        },
+        set: function (value) {
+            if (vpxOffset !== value) {
+                vpxOffset = value;
+                Transform();
+            }
+        },
+    });
+
+    Object.defineProperty(gameObject, 'vpyOffset', {
+        get: function () {
+            return vpyOffset;
+        },
+        set: function (value) {
+            if (vpyOffset !== value) {
+                vpyOffset = value;
                 Transform();
             }
         },

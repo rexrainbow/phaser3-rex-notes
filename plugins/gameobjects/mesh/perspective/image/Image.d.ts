@@ -25,6 +25,11 @@ declare class Image extends Phaser.GameObjects.Mesh {
         config?: Image.IConfig
     )
 
+    readonly originX: number;
+    readonly originY: number;
+    readonly displayOriginX: number;
+    readonly displayOriginY: number;
+
     transformVerts(
         x?: number, y?: number, z?: number,
         rotateX?: number, rotateY?: number, rotateZ?: number

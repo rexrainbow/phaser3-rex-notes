@@ -54,6 +54,8 @@ declare namespace CanvasInput {
     }
 
     interface IConfig extends DynamicText.IConfig {
+        textArea?: boolean;
+
         edit?: HiddenTextEdit.IConfig;
 
         background?: IConfigBackground,
@@ -86,6 +88,21 @@ declare namespace CanvasInput {
 }
 
 declare class CanvasInput extends DynamicText {
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        fixedWidth?: number, fixedHeight?: number,
+        config?: CanvasInput.IConfig
+    );
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        config?: CanvasInput.IConfig
+    );
+    constructor(
+        scene: Phaser.Scene,
+        config?: CanvasInput.IConfig
+    );
 
     setText(text: string): this;
     appendText(text: string): this;

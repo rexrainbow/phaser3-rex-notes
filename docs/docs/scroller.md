@@ -82,7 +82,10 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     // threshold: 10,
     // slidingDeceleration: 5000,
     // backDeceleration: 2000,
+
     // dragReverse: false,
+    // dragRate: 1,
+
     // enable: true,
     // orientation: 'vertical',
     // pointerOutRelease: true,
@@ -111,6 +114,7 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
         - Use this mode when scrolling by position of game object.
     - `true` : Dragging up will increase value, dragging down will decrease value.
         - Use this mode when scrolling by camera.
+- `dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
 - `enable` : Set true to get dragging events.
 - `orientation` :
     - `'vertical'`,`'v'`, `'y'`, or `0` : dragging on vertical/y axis.

@@ -67,6 +67,10 @@ const AREA = 'area';
 const AREA_OPEN = GetOpenTagRegString(AREA, STR_PARAM);
 const AREA_CLOSE = GetCloseTagRegString(AREA);
 
+const URL = 'url';
+const URL_OPEN = GetOpenTagRegString(URL, STR_PARAM);
+const URL_CLOSE = GetCloseTagRegString(URL);
+
 const ALIGN = 'align';
 const ALIGN_OPEN = GetOpenTagRegString(ALIGN, STR_PARAM);
 const ALIGN_CLOSE = GetCloseTagRegString(ALIGN);
@@ -113,6 +117,9 @@ const RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
 const RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i')
 const RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
 
+const RE_URL_OPEN = new RegExp(URL_OPEN, 'i')
+const RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
+
 const RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i')
 const RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
 
@@ -132,6 +139,7 @@ const RE_SPLITTEXT = new RegExp([
     OFFSETY_OPEN, OFFSETY_CLOSE,
     IMAGE_OPEN, IMAGE_CLOSE,
     AREA_OPEN, AREA_CLOSE,
+    URL_OPEN, URL_CLOSE,
     ALIGN_OPEN, ALIGN_CLOSE
 ].join('|'), 'ig');
 
@@ -152,6 +160,7 @@ export {
     RE_OFFSETY_OPEN, RE_OFFSETY_CLOSE,
     RE_IMAGE_OPEN, RE_IMAGE_CLOSE,
     RE_AREA_OPEN, RE_AREA_CLOSE,
+    RE_URL_OPEN, RE_URL_CLOSE,
     RE_ALIGN_OPEN, RE_ALIGN_CLOSE,
 
     RE_SPLITTEXT,

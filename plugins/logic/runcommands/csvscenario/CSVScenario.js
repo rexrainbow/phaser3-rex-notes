@@ -3,6 +3,7 @@ import GetValue from '../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.min.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
+import { WaitComplete } from '../../../utils/promise/WaitEvent.js';
 
 
 class CSVScenario {
@@ -32,6 +33,7 @@ class CSVScenario {
         this.cmdHandlers.resetFromJSON(GetValue(o, 'handlers', undefined));
         this.instMem.resetFromJSON(GetValue(o, 'instMem', undefined));
         this.delimiter = GetValue(o, 'delimiter', ',');
+        this.translateCommandNameCallback = GetValue(o, 'translateCommandNameCallback', undefined);
         return this;
     }
 
@@ -86,6 +88,8 @@ class CSVScenario {
         this.scope = scope;
 
         this.delimiter = GetValue(config, 'delimiter', this.delimiter);
+        this.translateCommandNameCallback = GetValue(config, 'translateCommandNameCallback', this.translateCommandNameCallback);
+
         this.append(strCmd);
         return this;
     }
@@ -114,10 +118,21 @@ class CSVScenario {
         return true;
     }
 
+    play(config) {
+        this.start(config);
+        return this;
+    }
+
+    playPromise(config) {
+        var promise = WaitComplete(this);
+        this.start(config);
+        return promise;
+    }
+
     getIndex(label) {
         var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
-            this.error('Label: ' + label + ' is not found');
+            this.error(`Label: ${label} is not found`);
         }
         return index;
     }
@@ -274,7 +289,7 @@ class CSVScenario {
             item = arr[i];
             name = item[0];
             if (name === '-') {
-                this.appendCommand(item);
+                this.appendCustomCommand(item);
 
             } else if (!isNaN(name)) {
                 var time = parseFloat(name);
@@ -282,8 +297,7 @@ class CSVScenario {
                     // insert 'wait' command
                     this.appendCommand(['wait', time]);
                 }
-                item[0] = '-';
-                this.appendCommand(item);
+                this.appendCustomCommand(item);
 
             } else if (prefix.test(name)) {
                 var innerMatch = name.match(prefix);
@@ -291,7 +305,7 @@ class CSVScenario {
                 var isValid = this.appendCommand(item);
 
                 if (!isValid) {
-                    this.error('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
+                    this.error(`Line ${i}: ${JSON.stringify(item)} is not a valid command`);
                 }
 
             } else {
@@ -315,6 +329,14 @@ class CSVScenario {
             this.instMem.append(inst);
         }
         return true;
+    }
+
+    appendCustomCommand(inst) {
+        inst[0] = '-';
+        if (this.translateCommandNameCallback) {
+            inst[1] = this.translateCommandNameCallback(inst[1]);
+        }
+        return this.appendCommand(inst);
     }
 
     runNextCmd() {

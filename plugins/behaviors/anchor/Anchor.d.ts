@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default Anchor;
 
 declare namespace Anchor {
@@ -30,13 +32,11 @@ declare namespace Anchor {
     }
 }
 
-declare class Anchor {
+declare class Anchor extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Anchor.IConfig
     );
-
-    destroy(): void;
 
     resetFromJSON(config: Anchor.IConfig): this;
 

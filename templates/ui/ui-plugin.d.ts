@@ -19,7 +19,7 @@ import ColorComponentsFactory from './colorinput/colorcomponents/Factory';
 import ColorInputFactory from './colorinput/colorinput/Factory';
 import ColorInputLiteFactory from './colorinput/colorinputbase/Factory';
 import ColorPickerFactory from './colorinput/colorpicker/Factory';
-import InTouchingFactory from './intouching/Factory';
+import ConfirmDialogFactory from './confirmdialog/Factory';
 import ContainerFactory from './container/Factory';
 import CoverFactory from './cover/Factory';
 import CustomProgressFactory from './customprogress/Factory';
@@ -29,14 +29,21 @@ import DragFactory from './drag/Factory';
 import DropDownListFactory from './dropdownlist/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
+import FileChooserFactory from './filechooser/Factory';
+import FileDropZoneFactory from './filedropzone/Factory';
+import FileSelectorButtonFactory from './fileselectorbutton/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
+import FolderFactory from './folder/Factory';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory';
 import GridSizerFactory from './gridsizer/Factory';
 import GridTableFactory from './gridtable/Factory';
 import HiddenEditFactory from './hiddenedit/Factory';
 import HolyGrailFactory from './holygrail/Factory';
+import ImageBoxFactory from './imagebox/Factory';
+import InputTextFactory from './inputtext/Factory';
+import InTouchingFactory from './intouching/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory';
@@ -59,6 +66,7 @@ import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import ScrollablePanelFactory from './scrollablepanel/Factory';
 import ScrollBarFactory from './scrollbar/Factory';
+import SimpleLabelFactory from './simplelabel/Factory';
 import SizerFactory from './sizer/Factory';
 import ShakeFactory from './shake/Factory';
 import SkewFactory from './skew/Factory';
@@ -73,9 +81,12 @@ import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
 import TextEditFactory from './textedit/Factory';
 import TextPlayerFactory from './textplayer/Factory';
-import ToastFactory from './toast/Factory';
-import TouchEventStopFactory from './toucheventstop/Factory';
 import TitleLabelFactory from './titlelabel/Factory';
+import ToastFactory from './toast/Factory';
+import ToggleSwitchFactory from './toggleswitch/Factory';
+import TouchEventStopFactory from './toucheventstop/Factory';
+import TriangleFactory from './triangle/Factory';
+import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import Edit from './textedit/Edit';
@@ -90,9 +101,7 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
-import Make from './maker/YAMLMake';
-import MakerClass from './maker/Maker';
-import yaml from './yaml/yaml';
+import { OpenFileChooser } from './filechooser/FileChooser';
 
 export default UIPlugins;
 
@@ -116,6 +125,7 @@ declare class Factories {
     colorInput: typeof ColorInputFactory;
     colorInputLite: typeof ColorInputLiteFactory;
     colorPicker: typeof ColorPickerFactory;
+    confirmDialog: typeof ConfirmDialogFactory;
     inTouching: typeof InTouchingFactory;
     container: typeof ContainerFactory;
     cover: typeof CoverFactory;
@@ -126,8 +136,12 @@ declare class Factories {
     dropDownList: typeof DropDownListFactory;
     dynamicTextFactory: typeof DynamicTextFactory;
     flip: typeof FlipFactory;
+    fileChooser: typeof FileChooserFactory;
+    fileDropZone: typeof FileDropZoneFactory;
+    fileSelectorButton: typeof FileSelectorButtonFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
     fixWidthSizer: typeof FixWidthSizerFactory;
+    folder: typeof FolderFactory;
     fullWindowRectangle: typeof FullWindowRectangleFactory;
     gridButtons: typeof GridButtonsFactory;
     gridSizer: typeof GridSizerFactory;
@@ -135,6 +149,8 @@ declare class Factories {
     hiddenEdit: typeof HiddenEditFactory;
     holyGrail: typeof HolyGrailFactory;
     knob: typeof KnobFactory;
+    imageBox: typeof ImageBoxFactory;
+    inputText: typeof InputTextFactory;
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
     lineProgressCanvas: typeof LineProgressCanvasFactory;
@@ -156,6 +172,7 @@ declare class Factories {
     roundRectangle: typeof RoundRectangleFactory;
     scrollablePanel: typeof ScrollablePanelFactory;
     scrollBar: typeof ScrollBarFactory;
+    simpleLabel: typeof SimpleLabelFactory;
     sizer: typeof SizerFactory;
     shake: typeof ShakeFactory;
     skew: typeof SkewFactory;
@@ -163,7 +180,7 @@ declare class Factories {
     space: typeof SpaceFactory;
     swipe: typeof SwipeFactory;
     tabs: typeof TabsFactory;
-    TabPages: typeof TabPagesFactory;
+    tabPages: typeof TabPagesFactory;
     tagText: typeof TagTextFactory;
     tap: typeof TapFactory;
     textArea: typeof TextAreaFactory;
@@ -171,7 +188,10 @@ declare class Factories {
     textEdit: typeof TextEditFactory;
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
+    toggleSwitch: typeof ToggleSwitchFactory;
     touchEventStop: typeof TouchEventStopFactory;
+    triangle: typeof TriangleFactory;
+    tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
 }
 
@@ -201,6 +221,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     fontSizeResize: typeof SetFontSizeToFitWidth;  // Backward compatibility
     setFontSizeToFitWidth: typeof SetFontSizeToFitWidth;
     requestDrag: typeof RequestDrag;
+    openFileChooser: typeof OpenFileChooser;
 
     isInTouching(
         gameObject: Phaser.GameObjects.GameObject,
@@ -210,17 +231,6 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     ): boolean;
 
     readonly viewport: Phaser.Geom.Rectangle;
-
-    make(
-        data: Object | string,
-        view?: Object | string,
-        styles?: Object | string,
-        customBuilders?: Make.BuildersType
-    ): Phaser.GameObjects.GameObject;
-
-    readonly maker: MakerClass;
-
-    yaml: typeof yaml;
 }
 
 
@@ -241,6 +251,7 @@ import ColorComponentsClass from './colorinput/colorcomponents/ColorComponents';
 import ColorInputClass from './colorinput/colorinput/ColorInput';
 import ColorInputLiteClass from './colorinput/colorinputbase/ColorInputBase';
 import ColorPickerClass from './colorinput/colorpicker/ColorPicker';
+import ConfirmDialogClass from './confirmdialog/ConfirmDialog';
 import ContainerClass from './container/Container';
 import CoverClass from './cover/Cover';
 import CustomProgressClass from './customprogress/CustomProgress';
@@ -252,7 +263,11 @@ import DynamicTextClass from './dynamictext/DynamicText';
 import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
 import { Fade as FadeClass } from './fade/Fade.js';
 import FlipClass from './flip/Flip';
+import { FileChooser as FileChooserClass } from './filechooser/FileChooser';
+import FileDropZoneClass from './filedropzone/FileDropZone';
+import FileSelectorButtonClass from './fileselectorbutton/FileSelectorButton';
 import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
+import FolderClass from './folder/Folder';
 import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
 import FixWidthSizerClass from './fixwidthsizer/FixWidthSizer';
 import GridButtonsClass from './gridbuttons/GridButtons';
@@ -260,6 +275,8 @@ import GridSizerClass from './gridsizer/GridSizer';
 import GridTableClass from './gridtable/GridTable';
 import HiddenTextEditClass from './hiddenedit/HiddenEdit.js';
 import HolyGrailClass from './holygrail/HolyGrail';
+import ImageBoxClass from './imagebox/ImageBox';
+import InputTextClass from './inputtext/InputText';
 import InTouchingClass from './intouching/InTouching';
 import KnobClass from './knob/Knob';
 import LabelClass from './label/Label';
@@ -281,6 +298,7 @@ import RoundRectangleCanvasClass from './roundrectanglecanvas/RoundRectangleCanv
 import RoundRectangleClass from './roundrectangle/RoundRectangle';
 import ScrollablePanelClass from './scrollablepanel/ScrollablePanel';
 import ScrollBarClass from './scrollbar/ScrollBar';
+import SimpleLabelClass from './simplelabel/SimpleLabel';
 import SizerClass from './sizer/Sizer';
 import ShakeClass from './shake/Shake';
 import SkewClass from './skew/Skew';
@@ -294,9 +312,12 @@ import TapClass from './tap/Tap';
 import TextAreaClass from './textarea/TextArea';
 import TextBoxClass from './textbox/TextBox';
 import TextPlayerClass from './textplayer/TextPlayer';
+import TitleLabelClass from './titlelabel/TitleLabel';
 import ToastClass from './toast/Toast';
+import ToggleSwitchClass from './toggleswitch/ToggleSwitch';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
-import TitleLabellClass from './titlelabel/TitleLabel';
+import TriangleClass from './triangle/Triangle';
+import TweakerClass from './tweaker/Tweaker';
 
 declare namespace UIPlugins {
     type AlphaMaskImage = AlphaMaskImageClass;
@@ -317,6 +338,7 @@ declare namespace UIPlugins {
     type ColorInputBase = ColorInputLiteClass;
     type ColorPicker = ColorPickerClass;
     type Container = ContainerClass;
+    type ConfirmDialog = ConfirmDialogClass;
     type Cover = CoverClass;
     type CustomProgress = CustomProgressClass;
     type CustomShapes = CustomShapesClass;
@@ -327,7 +349,11 @@ declare namespace UIPlugins {
     type EaseMove = EaseMoveClass;
     type Fade = FadeClass;
     type Flip = FlipClass;
+    type FileChooser = FileChooserClass;
+    type FileDropZone = FileDropZoneClass;
+    type FileSelectorButton = FileSelectorButtonClass;
     type FixWidthButtons = FixWidthButtonsClass;
+    type Folder = FolderClass;
     type FullWindowRectangle = FullWindowRectangleClass;
     type FixWidthSizer = FixWidthSizerClass;
     type GridButtons = GridButtonsClass;
@@ -335,12 +361,14 @@ declare namespace UIPlugins {
     type GridTable = GridTableClass;
     type HiddenEdit = HiddenTextEditClass;
     type HolyGrail = HolyGrailClass;
+    type ImageBox = ImageBoxClass;
+    type InputText = InputTextClass;
     type InTouching = InTouchingClass;
     type Knob = KnobClass;
     type Label = LabelClass;
     type LineProgress = LineProgressClass;
     type LineProgressCanvas = LineProgressCanvasClass;
-    type maker = MakerClass;
+    // type maker = MakerClass;
     type Menu = MenuClass;
     type NameValueLabel = NameValueLabelClass;
     type NinePatch = NinePatchClass;
@@ -357,6 +385,7 @@ declare namespace UIPlugins {
     type RoundRectangle = RoundRectangleClass;
     type ScrollablePanel = ScrollablePanelClass;
     type ScrollBar = ScrollBarClass;
+    type SimpleLabel = SimpleLabelClass;
     type Sizer = SizerClass;
     type shake = ShakeClass;
     type skew = SkewClass;
@@ -370,7 +399,10 @@ declare namespace UIPlugins {
     type TextArea = TextAreaClass;
     type TextBox = TextBoxClass;
     type TextPlayer = TextPlayerClass;
+    type TitleLabel = TitleLabelClass;
     type Toast = ToastClass;
+    type ToggleSwitch = ToggleSwitchClass;
     type TouchEventStop = TouchEventStopClass;
-    type TitleLabel = TitleLabellClass;
+    type Triangle = TriangleClass;
+    type Tweaker = TweakerClass;
 }

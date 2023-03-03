@@ -1,3 +1,5 @@
+import AddPolygonPath from './AddPolygonPath.js';
+
 var DrawPolygon = function (
     canvas, context,
     points,
@@ -9,20 +11,10 @@ var DrawPolygon = function (
     if (lineJoin === undefined) {
         lineJoin = 'round';
     }
-    context.beginPath();
+
+    AddPolygonPath(context, points);
 
     context.lineJoin = lineJoin;
-
-    var point = points[0];
-
-    context.moveTo(point.x, point.y);
-
-    for (var i = 1, cnt = points.length; i < cnt; i++) {
-        point = points[i];
-        context.lineTo(point.x, point.y);
-    }
-
-    context.closePath();
 
     if (fillStyle != null) {
         context.fillStyle = fillStyle;

@@ -8,6 +8,10 @@ export default {
         return this.bobs.hasOwnProperty(name);
     },
 
+    exists(name) {
+        return this.bobs.hasOwnProperty(name);
+    },
+
     get(name) {
         return this.bobs[name];
     },

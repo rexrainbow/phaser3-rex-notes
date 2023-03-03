@@ -100,7 +100,9 @@ class CharData extends RenderBase {
     }
 
     updateTextSize() {
-        if ((this.text === '\n') || (this.text === '')) {
+        var text = this.text;
+        // Is new-line, page-break, or empty character
+        if ((text === '\n') || (text === '\f') || (text === '')) {
             this.textWidth = 0;
             this.textHeight = 0;
             this.ascent = 0;
@@ -153,7 +155,8 @@ class CharData extends RenderBase {
     }
 
     get willRender() {
-        if (this.text === '\n') {
+        var text = this.text;
+        if ((text === '\n') || (text === '\f')) {
             return false;
         }
 

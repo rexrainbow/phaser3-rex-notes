@@ -161,7 +161,7 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `orientation` : Main orientation of the sizer.
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right. Default value is `0`.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `rtl` :     
     - `false` : Layout children from left to right. Default behavior.
@@ -231,7 +231,8 @@ sizer.add(child,
         key: undefined,
         index: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```
@@ -280,6 +281,9 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     `orientation` is `y`, and `proportion` is not `0`, or
     `orientation` is `x`, and `expand` is `true`
     - Default value is current display height.
+- `fitRatio` : Resize child to fit sizer height/width before layout children, when `proportion` is set to `0`.
+    - `0` : Ignore this feature. Default behavior.
+    - `> 0` : Fit ratio (width/height). `1` is square.
 
 ### Insert child
 
@@ -292,7 +296,8 @@ sizer.insert(index, child,
         expand: false,
         key: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```
@@ -315,7 +320,8 @@ sizer.insertAtPosition(x, y,
         expand: false,
         key: undefined,
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        fitRatio: 0,
     }
 );
 ```
@@ -431,4 +437,4 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

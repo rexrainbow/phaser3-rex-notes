@@ -10,7 +10,7 @@ class ColorInput extends InputFiledBase {
         super(scene);
         this.type = 'rexTweaker.ColorInput';
 
-        var colorInputConfig = config.colorInput;        
+        var colorInputConfig = config.colorInput;
         var colorInput = CreateColorInput(scene, colorInputConfig);
 
         this.add(
@@ -33,9 +33,12 @@ class ColorInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         this.childrenMap.colorInput.setValue(value);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 }
 

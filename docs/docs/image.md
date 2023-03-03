@@ -31,7 +31,7 @@ var image = scene.make.image({
     // frame: '',
 
     // angle: 0,
-    // alpha: 1
+    // alpha: 1,
     // flipX: true,
     // flipY: true,
     // scale : {

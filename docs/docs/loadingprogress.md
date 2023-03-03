@@ -71,7 +71,9 @@ var loadingProgress = scene.plugins.get('rexLoadingProgress').add(gameObject, {
 - `gameObject` : Game object for presenting loading-progress.
 - `duration` : Duration of transition-in, trantion-out.
     - `duration.in` : Duration of transition-in (open dialog).
+        - `0` : No transition, open dialog immediately.- 
     - `duration.out` : Duration of transition-out (close dialog). Game object will be destroyed after transiting out.
+        - `0` : No transition, close dialog immediately.
 - `progress` : Callback of loading-progress
     ```javascript
     function(gameObject, progress) {

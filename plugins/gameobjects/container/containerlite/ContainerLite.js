@@ -18,7 +18,7 @@ class ContainerLite extends Base {
         this._mask = null;
         this._scrollFactorX = 1;
         this._scrollFactorY = 1;
-        this.layer = undefined;
+        this.privateRenderLayer = undefined;
 
         if (children) {
             this.add(children);
@@ -34,9 +34,9 @@ class ContainerLite extends Base {
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         super.destroy(fromScene);
 
-        if (this.layer) {
-            this.layer.list.length = 0;  // Remove all children without trigger callback
-            this.layer.destroy();
+        if (this.privateRenderLayer) {
+            this.privateRenderLayer.list.length = 0;  // Remove all children without trigger callback
+            this.privateRenderLayer.destroy();
         }
     }
 

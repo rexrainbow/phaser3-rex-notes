@@ -6,32 +6,33 @@ import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
-import HiddenEditFactory from './hiddenedit/Factory.js';
-import CheckboxFactory from './checkbox/Factory.js';
-
-import ContainerFactory from './container/Factory.js';
-import CanvasFactory from './canvas/Factory.js';
-import CircleMaskImageFactory from './circlemaskimage/Factory.js';
-import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import DynamicTextFactory from './dynamictext/Factory.js';
 import TextPlayerFactory from './textplayer/Factory.js';
 import CanvasInputFactory from './canvasinput/Factory.js';
+import HiddenEditFactory from './hiddenedit/Factory.js';
+import CheckboxFactory from './checkbox/Factory.js';
+import ToggleSwitchFactory from './toggleswitch/Factory.js';
+import CanvasFactory from './canvas/Factory.js';
+import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import LineProgressFactory from './lineprogress/Factory.js';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory.js';
+import TriangleFactory from './triangle/Factory.js';
 import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
+import ImageBoxFactory from './imagebox/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
-import ColorInputFactory from './colorinput/colorinput/Factory.js';
-import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
-import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
-import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
+import InputTextFactory from './inputtext/Factory';
+import FileChooserFactory from './filechooser/Factory.js';
+import FileDropZoneFactory from './filedropzone/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
+import ContainerFactory from './container/Factory.js';
 import SizerFactory from './sizer/Factory.js';
 import GridSizerFactory from './gridsizer/Factory.js';
 import FixWidthSizerFactory from './fixwidthsizer/Factory.js';
@@ -39,13 +40,16 @@ import OverlapSizerFactory from './overlapsizer/Factory.js';
 
 import SpaceFactory from './space/Factory.js';
 import LabelFactory from './label/Factory.js';
+import SimpleLabelFactory from './simplelabel/Factory.js';
 import TitleLabelFactory from './titlelabel/Factory.js';
 import NameValueLabelFactory from './namevaluelabel/Factory.js';
 import ButtonsFactory from './buttons/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory.js';
-import FixWidthButtons from './fixwidthbuttons/Factory.js';
+import FixWidthButtonsFactory from './fixwidthbuttons/Factory.js';
+import FileSelectorButtonFactory from './fileselectorbutton/Factory.js';
 import DialogFactory from './dialog/Factory.js';
 import ChoicesFactory from './choices/Factory.js';
+import ConfirmDialogFactory from './confirmdialog/Factory.js';
 import HolyGrailFactory from './holygrail/Factory.js';
 import TabsFactory from './tabs/Factory.js';
 import SliderFactory from './slider/Factory.js';
@@ -59,9 +63,14 @@ import BadgeLabelFactory from './badgelabel/Factory.js';
 import PagesFactory from './pages/Factory.js';
 import PerspectiveCardFactory from './perspectivecard/Factory.js';
 import TabPagesFactory from './tabpages/Factory.js';
+import FolderFactory from './folder/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
+import ColorInputFactory from './colorinput/colorinput/Factory.js';
+import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
+import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
+import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import SidesFactory from './sides/Factory.js';
 import TweakerFactory from './tweaker/Factory.js';
 import MakerFactory from './maker/Factory.js';
@@ -99,9 +108,7 @@ import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
-import Make from './maker/YAMLMake.js';
-import Maker from './maker/Maker.js';
-import yaml from './yaml/yaml.js';
+import { OpenFileChooser } from './filechooser/FileChooser.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -127,17 +134,16 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         return GetViewport(this.scene, this.scene.cameras.main, true);
     }
 
-    make(data, view, styles, customBuilders) {
-        return Make(this.scene, data, view, styles, customBuilders);
-    }
+    // make(data, view, styles, customBuilders) {
+    //     return Make(this.scene, data, view, styles, customBuilders);
+    // }
 
-    get maker() {
-        if (!this._maker) {
-            this._maker = new Maker(this.scene);
-        }
-
-        return this._maker;
-    }
+    //get maker() {
+    //    if (!this._maker) {
+    //        this._maker = new Maker(this.scene);
+    //    }
+    //    return this._maker;
+    //}
 
 }
 
@@ -164,8 +170,7 @@ var methods = {
     modalPromise: ModalPromise,
     modalClose: ModalClose,
     requestDrag: RequestDrag,
-
-    yaml: yaml,
+    openFileChooser: OpenFileChooser,
 }
 
 Object.assign(

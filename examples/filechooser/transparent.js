@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import FileChooserPlugin from '../../plugins/filechooser-plugin.js'
-import CanvasPlugin from '../../plugins/canvas-plugin.js'
+import FileChooserPlugin from '../../plugins/filechooser-plugin.js';
+import CanvasPlugin from '../../plugins/canvas-plugin.js';
 import FitTo from '../../plugins/utils/size/FitTo.js';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -37,10 +37,8 @@ class Demo extends Phaser.Scene {
                     return;
                 }
 
-                var url = URL.createObjectURL(files[0]);
-                canvas.loadFromURLPromise(url)
+                canvas.loadFromFilePromise(files[0])
                     .then(function () {
-                        URL.revokeObjectURL(url);
                         canvas.fitTo(cover);
                     })
             })

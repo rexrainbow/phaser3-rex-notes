@@ -1,4 +1,4 @@
-import Transition from '../transition/Transition.js';
+import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import PopUp from '../../popup.js';
 import ScaleDown from '../scale/ScaleDown.js';
 import NOOP from '../../utils/object/NOOP.js';
@@ -7,7 +7,7 @@ import GetProgress from './GetProgress.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class LoadingProgress extends Transition {
+class LoadingProgress extends OpenCloseTransition {
     constructor(gameObject, config) {
         if (config === undefined) {
             config = {};
@@ -18,6 +18,8 @@ class LoadingProgress extends Transition {
         if (!config.hasOwnProperty('transitOut')) {
             config.transitOut = ScaleDown;
         }
+
+        config.destroy = true;
 
         super(gameObject, config);
         // this.parent = gameObject;
@@ -43,7 +45,7 @@ class LoadingProgress extends Transition {
             self.once('close', successCallback);
         })
 
-        super.start();
+        this.requestOpen();
     }
 
     onOpen() {

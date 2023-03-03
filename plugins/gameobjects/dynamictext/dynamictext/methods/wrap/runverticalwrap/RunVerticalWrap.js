@@ -1,6 +1,6 @@
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import AlignLines from './AlignLines.js';
-import { IsNewLineChar } from '../../../bob/Types.js';
+import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -117,7 +117,9 @@ var RunVerticalWrap = function (config) {
         var childHeight = ((fixedChildHeight !== undefined) ? fixedChildHeight : char.height) + letterSpacing;
         // Next line
         var isNewLineChar = IsNewLineChar(char);
-        if ((remainderHeight < childHeight) || isNewLineChar) {
+        var isPageBreakChar = IsPageBreakChar(char);
+        var isControlChar = isNewLineChar || isPageBreakChar;
+        if ((remainderHeight < childHeight) || isControlChar) {
             // Add to result
             if (isNewLineChar) {
                 char.setActive().setPosition(x, y).setOrigin(0.5);
@@ -135,9 +137,11 @@ var RunVerticalWrap = function (config) {
             lastLineHeight = 0;
             lastLine = [];
 
-            if (!showAllLines && (resultLines.length === maxLines)) {  // Exceed maxLines
+            var isPageEnd = isPageBreakChar ||
+                (!showAllLines && (resultLines.length === maxLines)); // Exceed maxLines
+            if (isPageEnd) {
                 break;
-            } else if (isNewLineChar) {  // Already add to result                
+            } else if (isControlChar) {  // Already add to result                
                 continue;
             }
         }

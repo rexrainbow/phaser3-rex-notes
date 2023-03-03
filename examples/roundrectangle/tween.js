@@ -51,6 +51,21 @@ class Demo extends Phaser.Scene {
             repeat: -1, // -1: infinity
             yoyo: true
         });
+
+        var rect4 = this.add.rexRoundRectangle(450, 450, 100, 100, -50, 0x008888);
+        rect4.t = 0;
+        this.tweens.add({
+            targets: rect4,
+            t: 1,
+            ease: 'Linear', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 2000,
+            repeat: -1, // -1: infinity
+            yoyo: true,
+
+            onUpdate(tween, target) {
+                rect4.radius = -50 + (100 * target.t);
+            }
+        });
     }
 
     update() { }

@@ -11,6 +11,7 @@ Custom progress bar based on [custom-shapes](shape-custom-shapes.md).
 - [Round rectangle](https://codepen.io/rexrainbow/pen/yLKVEjM)
 - [Orb](https://codepen.io/rexrainbow/pen/RwModwb)
 - [Trapezoid Mask](https://codepen.io/rexrainbow/pen/BaZKBpj)
+- [Round rectangles mask](https://codepen.io/rexrainbow/pen/MWXNxNg)
 - [Slash effect with rexUI](https://codepen.io/rexrainbow/pen/QWmaozV)
 - [Path segment animation](https://codepen.io/rexrainbow/pen/abKNWNq)
 

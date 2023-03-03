@@ -18,6 +18,7 @@ class Image extends Mesh {
         super(scene, x, y, key, frame);
         this.type = 'rexQuadImage';
         this.isNinePointMode = GetValue(config, 'ninePointMode', false);
+        this.fourPointsModeRTL = GetValue(config, 'rtl', false);
         this.controlPoints = [];
 
         InitFaces(this);

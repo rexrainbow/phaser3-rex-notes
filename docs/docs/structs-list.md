@@ -60,6 +60,12 @@ var child = list.count(property, value);
 // value: the value to test the property against. Must pass a strict (`===`) comparison check.
 ```
 
+### Get children
+
+```javascript
+var children = list.list;
+```
+
 ### Sort children
 
 - Sort by property

@@ -11,6 +11,9 @@ declare namespace CanvasData {
 
 declare class CanvasData {
 
+    readonly width: number;
+    readonly height: number;
+
     destroy(): void;
 
     color32ToColorInt(value: number): number;

@@ -28,10 +28,6 @@ class CustomShapes extends BaseShapes {
         return this.height / 2;
     }
 
-    get radius() {
-        return Math.min(this.centerX, this.centerY);
-    }
-
     worldToLocalXY(worldX, worldY, camera, out) {
         if (typeof (camera) === 'boolean') {
             out = camera;

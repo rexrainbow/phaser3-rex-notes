@@ -9,10 +9,10 @@ Display of tiles map, built-in game object of phaser.
 ### Hierarchy
 
 ```mermaid
-graph TD
+graph TB
 
-map --> layerA
-map --> layerB
+tilemap --> layerA["layerA<br>(Game object)"]
+tilemap --> layerB
 
 layerA --> tilesA["tiles<br>(layer.data[x][y])"]
 layerB --> tilesB["tiles"]

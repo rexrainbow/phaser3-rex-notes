@@ -1,6 +1,8 @@
+import ComponentBase from '../ComponentBase';
+
 export default TweenTask;
 
-declare class TweenTask extends Phaser.Events.EventEmitter {
+declare class TweenTask extends ComponentBase {
     start(config: Object): this;
     stop(): this;
     restart(config: Object): this;

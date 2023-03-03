@@ -24,6 +24,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -58,6 +59,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
     import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        
@@ -95,6 +97,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
     ```javascript
     var config = {
         parent: divId,
+        // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
         },        

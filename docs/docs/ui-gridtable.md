@@ -120,9 +120,31 @@ var table = scene.rexUI.add.gridTable({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        /* 
+        track: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         thumb: thumbGameObject,
+        /* 
+        thumb: { 
+            width: 1, height: 1,
+            radius: 0, 
+            color: undefined, alpha: 1,
+            strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+            shape: undefined
+        }
+        */
+
         // input: 'drag',
         // position: 'right',
+
+        // hideUnscrollableSlider: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
         
@@ -133,12 +155,13 @@ var table = scene.rexUI.add.gridTable({
         // }
     },
 
-    scroller: {
-        threshold: 10,
-        slidingDeceleration: 5000,
-        backDeceleration: 2000,
-        pointerOutRelease: true,
-    },
+    // scroller: {
+    //     threshold: 10,
+    //     slidingDeceleration: 5000,
+    //     backDeceleration: 2000,
+    //     pointerOutRelease: true,
+    //     dragRate: 1,
+    // },
 
     mouseWheelScroller: false,
     // mouseWheelScroller: {
@@ -227,8 +250,8 @@ var table = scene.rexUI.add.gridTable({
     - Set `width` to `undefined`, and `table.width` is not `undefined`, will count width via table + slider.
     - Set `height` to `undefined`, and `table.height` is not `undefined`, will count height via table + slider.
 - `scrollMode` : Scroll grid table vertically, or horizontally.
-    - `0`, `'vertical'`, or `'v'` : Scroll grid table vertically. Default value.
-    - `1`, `'horizontal'`, or `'h'` : Scroll grid table horizontally.
+    - `0`, `'vertical'`, or `'v'`, `'y'` : Scroll panel vertically. Default value.
+    - `1`, `'horizontal'`, or `'h'`. `'x'` : Scroll panel horizontally.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `table` : Configuration of grid table core.
     - `table.width` : Width of table, in pixels.
@@ -272,9 +295,12 @@ var table = scene.rexUI.add.gridTable({
         - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
         - `'none'`, or `-1` : Disable sider controlling.
-    - `slider.position` : Position of this sldier.
-        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
-        - `1`, `'left'`, `'top'` : Sldier at left/top side.
+    - `slider.position` : Position of this slider.
+        - `0`, `'right'`, `'bottom'` : Slider at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Slider at left/top side.
+    - `slider.hideUnscrollableSlider` :
+        - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
+        - `true` : Set slider to invisible if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.
@@ -293,6 +319,7 @@ var table = scene.rexUI.add.gridTable({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
+    - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
@@ -557,7 +584,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 

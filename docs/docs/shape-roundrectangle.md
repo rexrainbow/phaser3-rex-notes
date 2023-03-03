@@ -153,8 +153,13 @@ var rect = scene.add.rexRoundRectangle({
                 iteration: 0
             }
             ```
+            - `radius` : 
+                - `0`  : No round corner
+                - `> 0` : Convex round corner
+                - `< 0` : Concave round corner
             - `iteration` : Number of interpolation points in each round corner. Default value is `4`.
                 - `0` : Draw a straight line instead of arc.
+
 
 #### Deform
 
@@ -305,10 +310,10 @@ var rect = scene.add.rexRoundRectangle({
     - `cornerRadius` : JSON object of 4 corners.
         ```javascript
         {
-            tl: {x : radiusX, y: radiusY},
-            tr: {x : radiusX, y: radiusY},
-            bl: {x : radiusX, y: radiusY},
-            br: {x : radiusX, y: radiusY},
+            tl: {x : radiusX, y: radiusY, convex : true},
+            tr: {x : radiusX, y: radiusY, convex : true},
+            bl: {x : radiusX, y: radiusY, convex : true},
+            br: {x : radiusX, y: radiusY, convex : true},
         }
         ```
 - Set
@@ -329,6 +334,9 @@ var rect = scene.add.rexRoundRectangle({
     ```
     - `radius` :
         - Number : 4 corners with the same radius.
+            - `0`  : No round corner
+            - `> 0` : Convex round corner
+            - `< 0` : Concave round corner
         - JSON
             - 4 corners with the same radius X/Y
                 ```javascript
@@ -354,7 +362,7 @@ var rect = scene.add.rexRoundRectangle({
                     bl: {x : radiusX, y: radiusY},
                     br: {x : radiusX, y: radiusY},
                 }
-                ```
+
 
 ### Iteration
 

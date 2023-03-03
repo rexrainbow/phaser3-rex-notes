@@ -101,7 +101,12 @@ Default style
     backgroundHorizontalGradient: true,
     backgroundStrokeColor: null,
     backgroundStrokeLineWidth: 2,
+    
     backgroundCornerRadius: 0,
+    // 0   : no round corner, 
+    // > 0 : convex round corner
+    // < 0 : concave round corner
+
     backgroundCornerIteration: null, 
     color: '#fff',
     stroke: '#fff',
@@ -425,6 +430,10 @@ txt.setFontStyle(style);
             txt.setBackgroundCornerRadius(radius);
             // txt.setBackgroundCornerRadius(radius, iteration);
             ```
+            - `radius` :
+                - `0`  : No round corner
+                - `> 0` : Convex round corner
+                - `< 0` : Concave round corner
             - `iteration` : 
                 - `undefined` : Round rectangle
                 - `0` : Octagon

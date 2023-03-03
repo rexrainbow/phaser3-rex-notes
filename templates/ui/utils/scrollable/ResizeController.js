@@ -1,8 +1,6 @@
 import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
 import Sizer from '../../sizer/Sizer.js';
 
-const SizerRunLayout = Sizer.prototype.runLayout;
-
 var ResizeController = function () {
     var topChildOY = this.topChildOY;
     var bottomChildOY = this.bottomChildOY;
@@ -16,8 +14,14 @@ var ResizeController = function () {
     }
     this.updateController();
 
-    if (this.adaptThumbSizeMode) {
-        AdaptThumbSize.call(this);
+    if (slider) {
+        if (this.hideUnscrollableSlider) {
+            this.setChildVisible(slider, this.isOverflow);
+        }
+
+        if (this.adaptThumbSizeMode) {
+            AdaptThumbSize.call(this);
+        }
     }
 
     return this;

@@ -1339,18 +1339,18 @@
   }();
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
-      return {
+      radius = {
         x: defaultRadiusX,
         y: defaultRadiusY
       };
     } else if (typeof radius === 'number') {
-      return {
+      radius = {
         x: radius,
         y: radius
       };
-    } else {
-      return radius;
     }
+    SetConvex(radius);
+    return radius;
   };
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
@@ -1360,13 +1360,15 @@
       radius.x = GetValue$4(value, 'x', 0);
       radius.y = GetValue$4(value, 'y', 0);
     }
+    SetConvex(radius);
+  };
+  var SetConvex = function SetConvex(radius) {
+    radius.convex = radius.x >= 0 || radius.y >= 0;
+    radius.x = Math.abs(radius.x);
+    radius.y = Math.abs(radius.y);
   };
 
   var DegToRad = Phaser.Math.DegToRad;
-  var Rad0 = DegToRad(0);
-  var Rad90 = DegToRad(90);
-  var Rad180 = DegToRad(180);
-  var Rad270 = DegToRad(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -1379,68 +1381,100 @@
     context.beginPath();
     context.translate(x, y);
 
-    // Bottom-right
-    radius = cornerRadius.br;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = height - radiusY;
-    context.moveTo(width, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
-    } else {
-      context.lineTo(width, height);
-      context.lineTo(centerX, height);
-    }
-
-    // Bottom-left
-    radius = cornerRadius.bl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = height - radiusY;
-    context.lineTo(radiusX, height);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
-    } else {
-      context.lineTo(0, height);
-      context.lineTo(0, centerY);
-    }
-
     // Top-left
     radius = cornerRadius.tl;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = radiusX;
-    centerY = radiusY;
-    context.lineTo(0, centerY);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 270, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
+      }
     } else {
       context.lineTo(0, 0);
-      context.lineTo(centerX, 0);
     }
 
     // Top-right
     radius = cornerRadius.tr;
-    radiusX = radius.x * scaleRX;
-    radiusY = radius.y * scaleRY;
-    centerX = width - radiusX;
-    centerY = radiusY;
-    context.lineTo(centerX, 0);
-    if (radiusX > 0 && radiusY > 0) {
-      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 360, false, iteration);
+      } else {
+        centerX = width;
+        centerY = 0;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 180, 90, true, iteration);
+      }
     } else {
       context.lineTo(width, 0);
-      context.lineTo(width, centerY);
+    }
+
+    // Bottom-right
+    radius = cornerRadius.br;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = width - radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 0, 90, false, iteration);
+      } else {
+        centerX = width;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 270, 180, true, iteration);
+      }
+    } else {
+      context.lineTo(width, height);
+    }
+
+    // Bottom-left
+    radius = cornerRadius.bl;
+    if (IsArcCorner(radius)) {
+      radiusX = radius.x * scaleRX;
+      radiusY = radius.y * scaleRY;
+      if (IsConvexArc(radius)) {
+        centerX = radiusX;
+        centerY = height - radiusY;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 180, false, iteration);
+      } else {
+        centerX = 0;
+        centerY = height;
+        ArcTo(context, centerX, centerY, radiusX, radiusY, 360, 270, true, iteration);
+      }
+    } else {
+      context.lineTo(0, height);
     }
     context.closePath();
     context.restore();
   };
-  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+  var IsConvexArc = function IsConvexArc(radius) {
+    return !radius.hasOwnProperty('convex') ||
+    // radius does not have convex property
+    radius.convex;
+  };
+  var IsArcCorner = function IsArcCorner(radius) {
+    return radius.x > 0 && radius.y > 0;
+  };
+  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration) {
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && endAngle > startAngle) {
+      endAngle -= 360;
+    } else if (!antiClockWise && endAngle < startAngle) {
+      endAngle += 360;
+    }
+    startAngle = DegToRad(startAngle);
+    endAngle = DegToRad(endAngle);
     if (iteration == null) {
       // undefined, or null
-      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
     } else {
       iteration += 1;
       var x, y, angle;
@@ -1488,8 +1522,8 @@
       strokeLineWidth = 0;
     }
     var x = strokeLineWidth / 2;
-    width -= strokeLineWidth;
-    height -= strokeLineWidth;
+    width = Math.max(1, width - strokeLineWidth); // Min width is 1
+    height = Math.max(1, height - strokeLineWidth); // Min height is 1
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
@@ -1605,16 +1639,28 @@
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
-        this.hitAreaManager.add(pen.prop.area,
-        // key
-        offsetX,
+        var data;
+        var areaKey = pen.prop.area;
+        if (areaKey) {
+          data = {
+            key: areaKey
+          };
+        } else {
+          var url = pen.prop.url;
+          data = {
+            key: "url:".concat(url),
+            url: url
+          };
+        }
+        this.hitAreaManager.add(offsetX,
         // x
         offsetY - this.startYOffset,
         // y
         pen.width,
         // width
-        this.defaultStyle.lineHeight // height
-        );
+        this.defaultStyle.lineHeight,
+        // height
+        data);
       }
     },
     clear: function clear() {
@@ -1734,7 +1780,7 @@
     }, {
       key: "hasAreaMarker",
       get: function get() {
-        return !!this.prop.area;
+        return !!this.prop.area || !!this.prop.url;
       }
     }]);
     return Pen;
@@ -2112,19 +2158,23 @@
     }, {
       key: "clear",
       value: function clear() {
+        // Reuse hitArea(rectangle) later
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          Clear(this.hitAreas[i].data);
+        }
         RectanglePool.pushMultiple(this.hitAreas);
         return this;
       }
     }, {
       key: "add",
-      value: function add(key, x, y, width, height) {
+      value: function add(x, y, width, height, data) {
         var rectangle = RectanglePool.pop();
         if (rectangle === null) {
           rectangle = new Rectangle(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
-        rectangle.key = key;
+        rectangle.data = data;
         this.hitAreas.push(rectangle);
         return this;
       }
@@ -2134,6 +2184,17 @@
         for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
           var hitArea = this.hitAreas[i];
           if (hitArea.contains(x, y)) {
+            return hitArea;
+          }
+        }
+        return null;
+      }
+    }, {
+      key: "getByKey",
+      value: function getByKey(key) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          var hitArea = this.hitAreas[i];
+          if (hitArea.data.key === key) {
             return hitArea;
           }
         }
@@ -2171,36 +2232,57 @@
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY, event);
+    var key = area.data.key;
+    FireEvent.call(this, 'areadown', key, pointer, localX, localY, event);
+    area.data.isDown = true;
   };
   var OnAreaUp = function OnAreaUp(pointer, localX, localY, event) {
     var area = this.hitAreaManager.getFirst(localX, localY);
     if (area === null) {
       return;
     }
-    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY, event);
+    var areaData = area.data;
+    var key = areaData.key;
+    FireEvent.call(this, 'areaup', key, pointer, localX, localY, event);
+    if (areaData.isDown) {
+      FireEvent.call(this, 'areaclick', key, pointer, localX, localY, event);
+      var url = areaData.url;
+      if (url) {
+        window.open(url, '_blank');
+      }
+    }
+    areaData.isDown = false;
   };
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
     if (localX === null) {
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
         FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+        this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
         this.lastHitAreaKey = null;
       }
       return;
     }
     var area = this.hitAreaManager.getFirst(localX, localY);
-    var hitAreaKey = area ? area.key : null;
-    if (this.lastHitAreaKey === hitAreaKey) {
+    var key = area ? area.data.key : null;
+    if (this.lastHitAreaKey === key) {
       return;
     }
     if (this.lastHitAreaKey !== null) {
       FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+      var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+      if (this.urlTagCursorStyle && !!prevHitArea.data.url) {
+        this.scene.input.manager.canvas.style.cursor = '';
+      }
+      prevHitArea.isDown = false;
     }
-    if (hitAreaKey !== null) {
-      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY, event);
+    if (key !== null) {
+      FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
+      if (this.urlTagCursorStyle && !!area.data.url) {
+        this.scene.input.manager.canvas.style.cursor = this.urlTagCursorStyle;
+      }
     }
-    this.lastHitAreaKey = hitAreaKey;
+    this.lastHitAreaKey = key;
   };
   var FireEvent = function FireEvent(eventName, key, pointer, localX, localY, event) {
     this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY, event);
@@ -2326,6 +2408,7 @@
     function CanvasText(config) {
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
+      this.scene = this.parent.scene;
       this.context = GetValue$2(config, 'context', null);
       this.canvas = this.context.canvas;
       this.parser = GetValue$2(config, 'parser', null);
@@ -2339,6 +2422,7 @@
       this._tmpPenManager = null;
       this.hitAreaManager = new HitAreaManager();
       this.lastHitAreaKey = null;
+      this.urlTagCursorStyle = null;
       var context = this.context;
       this.getTextWidth = function (text) {
         return context.measureText(text).width;
@@ -2347,6 +2431,8 @@
     _createClass(CanvasText, [{
       key: "destroy",
       value: function destroy() {
+        this.parent = undefined;
+        this.scene = undefined;
         this.context = undefined;
         this.canvas = undefined;
         this.parser = undefined;
@@ -2908,7 +2994,7 @@
 
       //  Set the resolution
       _this.frame.source.resolution = _this.style.resolution;
-      if (_this.renderer.gl) {
+      if (_this.renderer && _this.renderer.gl) {
         //  Clear the default 1x1 glTexture, as we override it later
 
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
@@ -2956,6 +3042,10 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
+      _this.setUrlTagCursorStyle(GetValue(style, 'urlTagCursorStyle', 'pointer'));
+      if (GetValue(style, 'interactive', false)) {
+        _this.setInteractive();
+      }
       return _this;
     }
     _createClass(Text, [{
@@ -3185,6 +3275,20 @@
         return this;
       }
     }, {
+      key: "setUrlTagCursorStyle",
+      value: function setUrlTagCursorStyle(cursor) {
+        this.urlTagCursorStyle = cursor;
+        return this;
+      }
+    }, {
+      key: "urlTagCursorStyle",
+      get: function get() {
+        return this.canvasText.urlTagCursorStyle;
+      },
+      set: function set(value) {
+        this.canvasText.urlTagCursorStyle = value;
+      }
+    }, {
       key: "getWrappedText",
       value: function getWrappedText(text, start, end) {
         text = this.canvasText.getText(text, start, end, true);
@@ -3323,6 +3427,9 @@
   var AREA = 'area';
   var AREA_OPEN = GetOpenTagRegString(AREA, STR_PARAM);
   var AREA_CLOSE = GetCloseTagRegString(AREA);
+  var URL = 'url';
+  var URL_OPEN = GetOpenTagRegString(URL, STR_PARAM);
+  var URL_CLOSE = GetCloseTagRegString(URL);
   var ALIGN = 'align';
   var ALIGN_OPEN = GetOpenTagRegString(ALIGN, STR_PARAM);
   var ALIGN_CLOSE = GetCloseTagRegString(ALIGN);
@@ -3354,9 +3461,11 @@
   var RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
   var RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
   var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
+  var RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
+  var RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
   var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
   var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
 
   var SplitText = function SplitText(text, mode) {
     var result = [];
@@ -3501,6 +3610,11 @@
         UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
       } else if (RE_AREA_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'area');
+      } else if (RE_URL_OPEN.test(text)) {
+        var innerMatch = text.match(RE_URL_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'url', innerMatch[1]);
+      } else if (RE_URL_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'url');
       } else if (RE_ALIGN_OPEN.test(text)) {
         var innerMatch = text.match(RE_ALIGN_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
@@ -3660,6 +3774,7 @@
         case 'y':
         case 'img':
         case 'area':
+        case 'url':
         case 'align':
           headers.push("[".concat(k, "=").concat(value, "]"));
           break;

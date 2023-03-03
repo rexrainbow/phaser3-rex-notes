@@ -83,6 +83,11 @@ var Typing = function (offsetTime) {
 
     }
 
+    // Set to min size
+    if (this.minSizeEnable) {
+        this.textPlayer.setToMinSize();
+    }
+
     this.inTypingProcessLoop = false;
 }
 

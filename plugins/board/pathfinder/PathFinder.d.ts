@@ -1,3 +1,4 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
 import { TileXYType } from '../types/Position';
 import Board from '../board/Board';
 
@@ -41,7 +42,7 @@ declare namespace PathFinder {
 
 }
 
-declare class PathFinder {
+declare class PathFinder extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: PathFinder.IConfig

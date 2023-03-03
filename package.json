@@ -1,6 +1,6 @@
 {
     "name": "phaser3-rex-plugins",
-    "version": "1.1.75",
+    "version": "1.1.82",
     "description": "Plugins of phaser3",
     "author": "Rex",
     "files": [
@@ -61,13 +61,17 @@
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
         "webpack-shell-plugin": "^0.5.0",
-        "@types/js-yaml": "^4.0.5"
+        "@types/js-yaml": "^4.0.5",
+        "file-saver": "^2.0.5",
+        "pako": "^2.1.0"
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
         "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
         "papaparse": "^5.3.2",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "i18next": "^22.4.9",
+        "i18next-http-backend": "^2.1.1"
     }
 }

@@ -9,6 +9,7 @@ Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_de
 
 - [Simple](https://codepen.io/rexrainbow/pen/abEMByR)
 - [Align](https://codepen.io/rexrainbow/pen/GRyeboN)
+- [Layout modes](https://codepen.io/rexrainbow/pen/YzjVYNq)
 
 ## Usage
 
@@ -95,6 +96,8 @@ var holyGrail = scene.rexUI.add.holyGrail({
 
     footer: footerGameObject,
 
+    layoutMode: 0,
+
     // Space
     space: {
         left: 0,
@@ -161,7 +164,12 @@ var holyGrail = scene.rexUI.add.holyGrail({
 - `rightSide` : Game object of rightSide, optional.
     - Will fixed width (`proportion=0`) and expand height (`expand=true`) width default setting.
 - `footer` : Game object of footer, optional.
-    -- Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
+    - Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
+- `layoutMode` : Expand left side, right side to bottom row.
+    - `0`, or `'FFF'` : Bottom row is footer. Default behavior.
+    - `1`, or `'LFF'` : Left side will expand down to bottom row.
+    - `2`, or `'FFR'` : Right side will expand down to bottom row.
+    - `3`, or `'LFR'` : Left side and right side will expand down to bottom row.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.header` : 
@@ -239,9 +247,64 @@ holyGrail.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+### Re-build
+
+Destroy current elements then add elements with new config.
+
+```javascript
+holyGrail.build({
+    // Elements
+    background: backgroundGameObject,
+
+    header: headerGameObject,
+
+    leftSide: leftSideGameObject,
+
+    content: contentGameObject,
+
+    rightSide: rightSideGameObject,
+
+    footer: footerGameObject,
+
+    layoutMode: 0,
+
+    // Space
+    space: {        
+        header: 0,  // {left, right, top, bottom}
+        footer: 0,  // {left, right, top, bottom}
+        leftSide: 0, // {left, right, top, bottom}
+        rightSide: 0, // {left, right, top, bottom}
+    },
+
+    // proportion: {
+    //     header: 0,
+    //     footer: 0,
+    //     leftSide: 0,
+    //     rightSide: 0,
+    //     content: 1,
+    // },
+
+    // expand: {
+    //     header: true,
+    //     footer: true,
+    //     leftSide: true,
+    //     rightSide: true,
+    //     content: false,
+    // },
+
+    // align: {
+    //     header: 'center',
+    //     footer: 'center',
+    //     leftSide: 'center',
+    //     rightSide: 'center',
+    //     content: 'center',
+    // },
+})
+```
+
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Get element
 

@@ -33,7 +33,9 @@ declare namespace TagText {
 
         img?: string,
 
-        area?: string
+        area?: string,
+
+        url?: string,
     }
 
     interface TextStyle extends Text.TextStyle {

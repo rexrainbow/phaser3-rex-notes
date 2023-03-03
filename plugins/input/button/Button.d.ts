@@ -1,4 +1,4 @@
-// import * as Phaser from 'phaser';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 export default Button;
 
@@ -35,7 +35,7 @@ declare namespace Button {
     }
 }
 
-declare class Button extends Phaser.Events.EventEmitter {
+declare class Button extends ComponentBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Button.IConfig

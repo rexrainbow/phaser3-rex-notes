@@ -315,7 +315,7 @@ Change value will also change the position of knob thumb and width of knob indic
 
 ### Other properties
 
-See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md).
+See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 

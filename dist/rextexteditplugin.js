@@ -251,7 +251,7 @@
     }
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -260,7 +260,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -422,7 +422,7 @@
     select: 'select'
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
       out = {};
@@ -430,7 +430,7 @@
     var property, value;
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
-      value = GetValue$4(config, key, property[1]);
+      value = GetValue$5(config, key, property[1]);
       if (value !== undefined) {
         out[property[0]] = value;
       }
@@ -438,11 +438,19 @@
     return out;
   };
 
-  var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents, config) {
+    var preventDefault = GetValue$4(config, 'preventDefault', false);
+    var preTest = GetValue$4(config, 'preTest');
     var _loop = function _loop(elementEventName) {
       // Note: Don't use `var` here
       element.addEventListener(elementEventName, function (e) {
-        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        if (!preTest || preTest(gameObject, elementEventName)) {
+          gameObject.emit(elementEvents[elementEventName], gameObject, e);
+        }
+        if (preventDefault) {
+          e.preventDefault();
+        }
       });
     };
     for (var elementEventName in elementEvents) {
@@ -796,7 +804,11 @@
     // }
 
     var inputText = new InputText(scene, text.x, text.y, GetValue$2(config, 'width', text.width), GetValue$2(config, 'height', text.height), config);
-    inputText.setOrigin(text.originX, text.originY);
+    inputText
+    // Sync origin
+    .setOrigin(text.originX, text.originY)
+    // Sync scrollFactor
+    .setScrollFactor(text.scrollFactorX, text.scrollFactorY);
     var textParentContainer = text.parentContainer;
     if (!textParentContainer) {
       scene.add.existing(inputText);

@@ -41,7 +41,11 @@ Tested with Aseprite 1.2.25
 
 ### Atlas-packer
 
-[Atlas-packer](https://gammafp.com/tool/atlas-packer/)
+- [gammafp/Atlas-packer](https://gammafp.com/tool/atlas-packer/)
+
+## Animation
+
+- [gammafp/Animator](https://gammafp.com/tool/animator/)
 
 ## Bitmap font
 

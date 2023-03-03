@@ -13,6 +13,9 @@ declare namespace Checkbox {
         boxLineWidth?: number, boxStrokeColor?: number, boxStrokeAlpha?: number,
         uncheckedBoxStrokeColor?: number, uncheckedBoxStrokeAlpha?: number,
 
+        boxSize?: number,
+        checkerSize?: number,
+
         checkerColor?: number, checkerAlpha?: number,
 
         circleBox?: boolean,
@@ -20,6 +23,7 @@ declare namespace Checkbox {
         animationDuration?: number,
 
         checked?: boolean,
+        value?: boolean,
     }
 }
 
@@ -44,11 +48,13 @@ declare class Checkbox extends BaseShapes {
         config?: Checkbox.IConfig
     );
 
+    setValue(value: boolean): this;
+    toggleValue(): this;
+    value: boolean;
+
     setChecked(checked?: boolean): this;
     toggleChecked(): this;
     checked: boolean;
-    setValue(value: boolean): this;
-    value: boolean;
 
     setBoxShape(isCircleShape?: boolean): this;
 
@@ -73,6 +79,6 @@ declare class Checkbox extends BaseShapes {
     checkerColor: number;
     checkAlpha: number;
 
-    setCheckerAnimDuration(duration: number): this;
+    setCheckerAnimationDuration(duration: number): this;
     checkerAnimDuration: number;
 }

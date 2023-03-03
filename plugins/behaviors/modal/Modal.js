@@ -1,4 +1,4 @@
-import Transition from '../transition/Transition.js';
+import OpenCloseTransition from '../openclosetransition/OpenCloseTransition.js';
 import CreateCover from './CreateCover.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
 import {
@@ -9,7 +9,7 @@ import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Modal extends Transition {
+class Modal extends OpenCloseTransition {
     constructor(gameObject, config) {
         if (config === undefined) {
             config = {};
@@ -20,6 +20,8 @@ class Modal extends Transition {
         if (config.transitOut == null) {
             config.transitOut = TransitionMode.scaleDown;
         }
+
+        config.destroy = GetValue(config, 'destroy', true);
 
         super(gameObject, config);
         // this.parent = gameObject;
@@ -63,7 +65,7 @@ class Modal extends Transition {
             this.once('open', this.touchOutsideClose, this);
         }
 
-        this.start();
+        this.requestOpen();
     }
 
     shutdown(fromScene) {
@@ -111,28 +113,26 @@ class Modal extends Transition {
         this.requestClose();
     }
 
-    transitionIn() {
-        super.transitionIn();
+    runTransitionInCallback() {
+        var duration = super.runTransitionInCallback();
 
-        var duration = this.transitInTime;
         var cover = this.cover;
         if (cover && this.coverTransitInCallback) {
             this.coverTransitInCallback(cover, duration);
         }
 
-        return this;
+        return duration;
     }
 
-    transitionOut() {
-        super.transitionOut();
+    runTransitionOutCallback() {
+        var duration = super.runTransitionOutCallback();
 
-        var duration = this.transitOutTime;
         var cover = this.cover;
         if (cover && this.coverTransitOutCallback) {
             this.coverTransitOutCallback(cover, duration);
         }
 
-        return this;
+        return duration;
     }
 
     onOpen() {

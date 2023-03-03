@@ -1,8 +1,11 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateButtons from '../utils/CreateButtons.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateInteractiveLabel from '../../../utils/build/CreateInteractiveLabel.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 import SetButtonsActiveStateByText from '../utils/SetButtonsActiveState.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ButtonsInput extends InputFiledBase {
     constructor(scene, config) {
@@ -13,8 +16,17 @@ class ButtonsInput extends InputFiledBase {
         super(scene);
         this.type = 'rexTweaker.ButtonsInput';
 
-        var list = CreateButtons(scene);
-        list.labelConfig = config.button || {};
+        var buttonConfig = (config.button) ? DeepClone(config.button) : {};
+        var buttonExpand = GetValue(buttonConfig, 'expand', true);
+        if (buttonExpand) {
+            buttonConfig.align = 'center';
+        }
+        delete buttonConfig.expand;
+
+        var list = CreateButtons(scene, {
+            expand: buttonExpand
+        });
+        list.buttonConfig = buttonConfig;
 
         this.add(
             list,
@@ -38,11 +50,14 @@ class ButtonsInput extends InputFiledBase {
         if (this._value === value) {
             return;
         }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
 
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
         SetButtonsActiveStateByText(list.childrenMap.buttons, text);
-        super.value = value;
+        super.value = value;  // Fire 'valuechange' event
     }
 
     setOptions(options) {
@@ -50,11 +65,11 @@ class ButtonsInput extends InputFiledBase {
         list.options = options;
 
         var scene = this.scene;
-        var labelConfig = list.labelConfig;
+        var buttonConfig = list.buttonConfig;
         list.clearButtons(true);
         for (var i = 0, cnt = options.length; i < cnt; i++) {
             var option = options[i];
-            var button = CreateInteractiveLabel(scene, labelConfig)
+            var button = CreateInteractiveLabel(scene, buttonConfig)
                 .setActiveState(false)
                 .resetDisplayContent({ text: option.text })
 

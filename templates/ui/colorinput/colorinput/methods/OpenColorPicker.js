@@ -6,7 +6,8 @@ var OpenColorPicker = function () {
         return;
     }
 
-    var colorPicker = CreateColorPicker.call(this);
+    // Layout it to get full height
+    var colorPicker = CreateColorPicker.call(this).layout();
 
     var dropDownBehavior = new DropDown(colorPicker, {
         // Transition
