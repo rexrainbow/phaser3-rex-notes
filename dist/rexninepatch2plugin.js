@@ -200,7 +200,7 @@
     renderCanvas: CanvasRenderer
   };
 
-  var SetTexture$1 = function SetTexture(key, frame) {
+  var SetTexture = function SetTexture(key, frame) {
     this.texture = this.scene.sys.textures.get(key);
     this.frame = this.texture.get(frame);
     return this;
@@ -289,7 +289,7 @@
   };
 
   var methods$1 = {
-    setTexture: SetTexture$1,
+    setTexture: SetTexture,
     resize: Resize,
     setSize: Resize,
     addChild: AddChild,
@@ -550,7 +550,7 @@
     return outObject;
   };
 
-  var SetTexture = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -807,7 +807,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -879,7 +879,7 @@
         var maxFixedPartScaleX = GetValue$2(config, 'maxFixedPartScaleX', maxFixedPartScale);
         var maxFixedPartScaleY = GetValue$2(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
       }
       _createClass(NinePatch, [{
@@ -1717,7 +1717,7 @@
     _createClass(NinePatch, [{
       key: "setTexture",
       value: function setTexture(key, baseFrameName, columns, rows) {
-        SetTexture$1.call(this, key, '__BASE');
+        SetTexture.call(this, key, '__BASE');
 
         // Not initialized yet
         if (!this.columns) {

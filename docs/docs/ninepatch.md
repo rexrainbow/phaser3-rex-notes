@@ -236,8 +236,8 @@ Will [update texture](ninepatch.md#update-texture)
 ### Set texture of source image
 
 ```javascript
-ninePatch.setTexture(key, baseFrame, columns, rows);
-// ninePatch.setTexture(key, columns, rows);
+ninePatch.setBaseTexture(key, baseFrame, columns, rows);
+// ninePatch.setBaseTexture(key, columns, rows);
 ```
 
 - `key` : Texture key of source image.

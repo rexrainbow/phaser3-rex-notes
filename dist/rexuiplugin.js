@@ -366,7 +366,7 @@
     return outObject;
   };
 
-  var SetTexture$1 = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -623,7 +623,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture$1,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -695,7 +695,7 @@
         var maxFixedPartScaleX = GetValue$3a(config, 'maxFixedPartScaleX', maxFixedPartScale);
         var maxFixedPartScaleY = GetValue$3a(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
       }
       _createClass(NinePatch, [{
@@ -22456,12 +22456,9 @@
   });
   SetValue(window, 'RexPlugins.UI.LineProgress', LineProgress$1);
 
-  var DrawPolygon = function DrawPolygon(canvas, context, points, fillStyle, strokeStyle, lineWidth, lineJoin) {
-    if (lineJoin === undefined) {
-      lineJoin = 'round';
-    }
+  var AddPolygonPath = function AddPolygonPath(context, points) {
+    context.save();
     context.beginPath();
-    context.lineJoin = lineJoin;
     var point = points[0];
     context.moveTo(point.x, point.y);
     for (var i = 1, cnt = points.length; i < cnt; i++) {
@@ -22469,6 +22466,15 @@
       context.lineTo(point.x, point.y);
     }
     context.closePath();
+    context.restore();
+  };
+
+  var DrawPolygon = function DrawPolygon(canvas, context, points, fillStyle, strokeStyle, lineWidth, lineJoin) {
+    if (lineJoin === undefined) {
+      lineJoin = 'round';
+    }
+    AddPolygonPath(context, points);
+    context.lineJoin = lineJoin;
     if (fillStyle != null) {
       context.fillStyle = fillStyle;
       context.fill();

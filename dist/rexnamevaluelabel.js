@@ -11169,12 +11169,9 @@
     }
   };
 
-  var DrawPolygon = function DrawPolygon(canvas, context, points, fillStyle, strokeStyle, lineWidth, lineJoin) {
-    if (lineJoin === undefined) {
-      lineJoin = 'round';
-    }
+  var AddPolygonPath = function AddPolygonPath(context, points) {
+    context.save();
     context.beginPath();
-    context.lineJoin = lineJoin;
     var point = points[0];
     context.moveTo(point.x, point.y);
     for (var i = 1, cnt = points.length; i < cnt; i++) {
@@ -11182,6 +11179,15 @@
       context.lineTo(point.x, point.y);
     }
     context.closePath();
+    context.restore();
+  };
+
+  var DrawPolygon = function DrawPolygon(canvas, context, points, fillStyle, strokeStyle, lineWidth, lineJoin) {
+    if (lineJoin === undefined) {
+      lineJoin = 'round';
+    }
+    AddPolygonPath(context, points);
+    context.lineJoin = lineJoin;
     if (fillStyle != null) {
       context.fillStyle = fillStyle;
       context.fill();

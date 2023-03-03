@@ -8535,7 +8535,7 @@
     }
   };
 
-  var SetTexture$1 = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -8788,7 +8788,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture$1,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -8860,7 +8860,7 @@
         var maxFixedPartScaleX = GetValue$1l(config, 'maxFixedPartScaleX', maxFixedPartScale);
         var maxFixedPartScaleY = GetValue$1l(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
       }
       _createClass(NinePatch, [{

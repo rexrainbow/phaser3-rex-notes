@@ -1,5 +1,5 @@
 import SetGetFrameNameCallback from './texture/SetGetFrameNameCallback.js';
-import SetTexture from './texture/SetTexture.js';
+import SetBaseTexture from './texture/SetBaseTexture.js';
 import UpdateTexture from './texture/UpdateTexture.js';
 import SetStretchMode from './texture/SetStretchMode.js';
 import GetStretchMode from './texture/GetStretchMode.js';
@@ -11,7 +11,7 @@ export default {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,

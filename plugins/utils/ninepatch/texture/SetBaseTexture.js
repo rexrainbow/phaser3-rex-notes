@@ -1,6 +1,6 @@
 import DeepClone from '../../object/DeepClone.js';
 
-var SetTexture = function (key, baseFrameName, columns, rows) {
+var SetBaseTexture = function (key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
         rows = columns;
         columns = baseFrameName;
@@ -131,4 +131,4 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
     return this;
 }
 
-export default SetTexture;
+export default SetBaseTexture;
