@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import CreateRoundRectangle from '../utils/build/CreateRoundRectangle.js';
+import CreateBackground from '../utils/build/CreateBackground.js';
 import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
 import OnDragThumb from './OnDragThumb.js';
 import OnTouchTrack from './OnTouchTrack.js';
@@ -31,14 +31,14 @@ class Slider extends ProgressBase(Sizer) {
 
         if (background) {
             if (IsPlainObject(background)) {
-                background = CreateRoundRectangle(scene, background);
+                background = CreateBackground(scene, background);
             }
             this.addBackground(background);
         }
 
         if (track) {
             if (IsPlainObject(track)) {
-                track = CreateRoundRectangle(scene, track);
+                track = CreateBackground(scene, track);
             }
             this.add(track,
                 {
@@ -52,14 +52,14 @@ class Slider extends ProgressBase(Sizer) {
 
         if (indicator) {
             if (IsPlainObject(indicator)) {
-                indicator = CreateRoundRectangle(scene, indicator);
+                indicator = CreateBackground(scene, indicator);
             }
             this.pin(indicator); // Put into container but not layout it
         }
 
         if (thumb) {
             if (IsPlainObject(thumb)) {
-                thumb = CreateRoundRectangle(scene, thumb);
+                thumb = CreateBackground(scene, thumb);
             }
             this.pin(thumb); // Put into container but not layout it
 
