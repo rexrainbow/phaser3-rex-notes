@@ -28,6 +28,12 @@ class FileSelectorButton extends Label {
                 files = Array.from(files);
                 this.emit('select', files, this);
             }, this)
+            .on('pointerover', function () {
+                this.emit('pointerover')
+            }, this)
+            .on('pointerout', function () {
+                this.emit('pointerout')
+            }, this)
 
     }
 

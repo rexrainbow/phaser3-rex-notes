@@ -1,7 +1,14 @@
 import Resize from '../utils/Resize.js';
+import {
+    ElementProperties,
+    StyleProperties,
+    InputElementEvents, LabelElementEvents
+} from './FileChooserProperties.js';
 import SyncTo from '../utils/SyncTo.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
 import ClickPromose from './ClickPromise.js';
+import SetPrpoerties from '../utils/SetProperties.js';
+import RouteEvents from '../utils/RouteEvents.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -25,11 +32,13 @@ class FileChooser extends DOMElement {
         var inputElement = document.createElement('input');
         inputElement.type = 'file';
         var inputStyle = inputElement.style;
-        inputStyle.display = 'none';
+        inputStyle.display = 'none';       
 
         // Create a label parent
         var labelElement = document.createElement('label');
         labelElement.appendChild(inputElement);
+
+        SetPrpoerties(ElementProperties, config, labelElement);
 
         var style = GetValue(config, 'style', undefined);
         super(scene, x, y, labelElement, style);
@@ -38,22 +47,22 @@ class FileChooser extends DOMElement {
         this.resize(width, height);
 
         // Register events
-        var self = this;
-        inputElement.onchange = function () {
-            self.emit('change', self);
-        }
+        RouteEvents(this, inputElement, InputElementEvents);
+        RouteEvents(this, labelElement, LabelElementEvents);
 
         this.setCloseDelay(GetValue(config, 'closeDelay', 200));
-        inputElement.onclick = function () {
+
+        var self = this;
+        inputElement.addEventListener('click', function (e) {
             ClickPromose({
                 game: scene,
                 fileInput: inputElement,
                 closeDelay: self.closeDelay
             })
                 .then(function () {
-                    self.emit('select', self);
+                    self.emit('select', self, e);
                 })
-        }
+        });
     }
 
     resetFromJSON(config) {
