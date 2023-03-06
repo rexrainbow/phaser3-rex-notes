@@ -2431,7 +2431,25 @@
       },
       set: function set(value) {
         this._fillColor = value;
-        this.isFilled = value != null;
+        this.isFilled = value != null && this._fillAlpha > 0;
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this._fillAlpha = value;
+        this.isFilled = value > 0 && this._fillColor != null;
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this._strokeColor = value;
+        this.isStroked = value != null && this._lineWidth > 0;
       }
     }, {
       key: "lineWidth",
@@ -2440,7 +2458,7 @@
       },
       set: function set(value) {
         this._lineWidth = value;
-        this.isStroked = value > 0;
+        this.isStroked = value > 0 && this._strokeColor != null;
       }
     }, {
       key: "updateData",

@@ -35,13 +35,13 @@ class Demo extends Phaser.Scene {
         })
             .layout()
             .on('button.statechange', function (button, index, value, previousValue) {
-                button.getElement('background').setActiveState(value);
+                button.setActiveState(value);
             })
             .on('button.over', function (button, index, pointer, event) {
-                button.getElement('background').setHoverState(true);
+                button.setHoverState(true);
             })
             .on('button.out', function (button, index, pointer, event) {
-                button.getElement('background').setHoverState(false);
+                button.setHoverState(false);
             })
 
 
@@ -51,8 +51,8 @@ class Demo extends Phaser.Scene {
 }
 
 var createButton = function (scene, text) {
-    return scene.rexUI.add.label({
-        background: scene.rexUI.add.statesRoundRectangle({
+    return scene.rexUI.add.simpleLabel({
+        background: {
             radius: 10,
 
             color: COLOR_DARK,
@@ -61,13 +61,14 @@ var createButton = function (scene, text) {
             strokeWidth: 0,
             'hover.strokeColor': 0xffffff,
             'hover.strokeWidth': 2
-        }),
-        text: scene.add.text(0, 0, text, {
+        },
+        text: {
             fontSize: 18
-        }),
+        },
         space: { left: 10, right: 10, top: 10, bottom: 10 },
         name: text
-    });
+    })
+        .resetDisplayContent(text);
 }
 
 var config = {

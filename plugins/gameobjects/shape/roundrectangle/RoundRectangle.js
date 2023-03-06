@@ -70,7 +70,25 @@ class RoundRectangle extends Shape {
 
     set fillColor(value) {
         this._fillColor = value;
-        this.isFilled = (value != null);
+        this.isFilled = (value != null) && (this._fillAlpha > 0);
+    }
+
+    get fillAlpha() {
+        return this._fillAlpha;
+    }
+
+    set fillAlpha(value) {
+        this._fillAlpha = value;
+        this.isFilled = (value > 0) && (this._fillColor != null);
+    }
+
+    get strokeColor() {
+        return this._strokeColor;
+    }
+
+    set strokeColor(value) {
+        this._strokeColor = value;
+        this.isStroked = (value != null) && (this._lineWidth > 0);
     }
 
     get lineWidth() {
@@ -79,7 +97,7 @@ class RoundRectangle extends Shape {
 
     set lineWidth(value) {
         this._lineWidth = value;
-        this.isStroked = (value > 0);
+        this.isStroked = (value > 0) && (this._strokeColor != null);
     }
 
     updateData() {
