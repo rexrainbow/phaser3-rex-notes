@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import IsGameObject from '../../../../plugins/utils/system/IsGameObject.js';
-import CreateDisplayLabel from '../../utils/build/CreateDisplayLabel.js';
+import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -25,7 +25,7 @@ class ColorComponents extends Sizer {
 
         var formatLabel = GetValue(config, 'formatLabel', undefined);
         if (!IsGameObject(formatLabel)) {
-            formatLabel = CreateDisplayLabel(scene, formatLabel)
+            formatLabel = CreateLabel(scene, formatLabel)
                 .resetDisplayContent();
         }
 

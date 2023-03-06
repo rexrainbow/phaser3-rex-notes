@@ -1,7 +1,6 @@
 import RoundRectangle from '../roundrectangle/RoundRectangle.js';
-import ExtractByPrefix from '../../../plugins/utils/object/ExtractByPrefix.js';
-import GetPartialData from '../../../plugins/utils/object/GetPartialData.js';
-import IsKeyValueEqual from '../../../plugins/utils/object/IsKeyValueEqual.js';
+import ExtractStyle from './methods/ExtractStyle.js';
+import SetStateMethods from './methods/SetStateMethods.js';
 
 class StatesRoundRectangle extends RoundRectangle {
     constructor(scene, config) {
@@ -10,14 +9,9 @@ class StatesRoundRectangle extends RoundRectangle {
         }
         super(scene, config);
 
-        var activeStyle = ExtractByPrefix(config, 'active');
-        for (var name in activeStyle) {
-            var propertyName = PropertiesMap[name] || name;
-            var value = activeStyle[name];
-            delete activeStyle[name];
-            activeStyle[propertyName] = value;
-        }
-        this.activeStyle = activeStyle;
+        this.activeStyle = ExtractStyle(config, 'active', PropertiesMap);
+        this.hoverStyle = ExtractStyle(config, 'hover', PropertiesMap);
+        this.disableStyle = ExtractStyle(config, 'disable', PropertiesMap);
     }
 
     modifyStyle(style) {
@@ -27,46 +21,37 @@ class StatesRoundRectangle extends RoundRectangle {
         return this;
     }
 
-    setActiveState(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        if (this.activeState === enable) {
-            return this;
-        }
-
-        this.activeState = enable;
-
-        if (enable) {
-            var activeStyle = this.activeStyle;
-
-            var styleSave = GetPartialData(this, activeStyle);
-            if (IsKeyValueEqual(activeStyle, styleSave)) {
-                return;
-            }
-
-            this.styleSave = styleSave;
-            this.modifyStyle(activeStyle);
-        } else {
-            if (!this.styleSave) {
-                return this;
-            }
-
-            this.modifyStyle(this.styleSave);
-            this.styleSave = undefined;
-        }
-
-        return this;
+    get fillColor() {
+        return this._fillColor;
     }
+
+    set fillColor(value) {
+        this._fillColor = value;
+        this.isFilled = (value != null);
+    }
+
+    get lineWidth() {
+        return this._lineWidth;
+    }
+
+    set lineWidth(value) {
+        this._lineWidth = value;
+        this.isStroked = (value > 0);
+    }
+
 }
 
 const PropertiesMap = {
     color: 'fillColor',
     alpha: 'fillAlpha',
-    strokeColor: 'strokeColor',
-    strokeAlpha: 'strokeAlpha',
+    // strokeColor: 'strokeColor',
+    // strokeAlpha: 'strokeAlpha',
     strokeWidth: 'lineWidth',
 }
+
+Object.assign(
+    StatesRoundRectangle.prototype,
+    SetStateMethods
+)
 
 export default StatesRoundRectangle;

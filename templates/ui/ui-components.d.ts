@@ -1,4 +1,5 @@
 import RoundRectangle from './roundrectangle/RoundRectangle';
+import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
@@ -116,6 +117,7 @@ type FontSizeResize = typeof SetFontSizeToFitWidth;
 
 export {
     RoundRectangle,
+    StatesRoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
     TagText,

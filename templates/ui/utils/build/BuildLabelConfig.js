@@ -8,7 +8,7 @@ import DefaultCreateImage from './CreateImage.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var BuildDisplayLabelConfig = function (scene, config, creators) {
+var BuildLabelConfig = function (scene, config, creators) {
     config = (config) ? DeepClone(config) : {};
 
     var createBackground = GetValue(creators, 'background', DefaultCreateBackground);
@@ -57,4 +57,4 @@ var BuildDisplayLabelConfig = function (scene, config, creators) {
     return config;
 }
 
-export default BuildDisplayLabelConfig;
+export default BuildLabelConfig;

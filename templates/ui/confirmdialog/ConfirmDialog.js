@@ -1,7 +1,7 @@
 import Dialog from '../dialog/Dialog.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
-import CreateDisplayLabel from '../utils/build/CreateDisplayLabel.js';
+import CreateLabel from '../utils/build/CreateLabel.js';
 import CreateContent from './methods/CreateContent.js';
 import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
@@ -25,7 +25,7 @@ class ConfirmDialog extends Dialog {
             delete config.background;
         }
 
-        config.title = CreateDisplayLabel(scene, config.title, creators.title);
+        config.title = CreateLabel(scene, config.title, creators.title);
 
         config.content = CreateContent(scene, config.content, creators.content);
         if (config.content instanceof TextArea) {
@@ -48,14 +48,14 @@ class ConfirmDialog extends Dialog {
         switch (buttonMode) {
             case 2:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
-                    CreateDisplayLabel(scene, buttonBConfig, buttonBCreators),
+                    CreateLabel(scene, buttonAConfig, buttonACreators),
+                    CreateLabel(scene, buttonBConfig, buttonBCreators),
                 ]
                 break;
 
             case 1:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
+                    CreateLabel(scene, buttonAConfig, buttonACreators),
                 ]
                 break;
 
@@ -73,6 +73,18 @@ class ConfirmDialog extends Dialog {
         this.addChildrenMap('buttonA', buttons[0]);
         this.addChildrenMap('buttonB', buttons[1]);
 
+        // Interactive
+        this
+            .on('action.over', function (button, index, pointer, event) {
+                if (button.setHoverState) {
+                    button.setHoverState(true);
+                }
+            })
+            .on('action.out', function (button, index, pointer, event) {
+                if (button.setHoverState) {
+                    button.setHoverState(false);
+                }
+            })
     }
 
     resetDisplayContent(config) {

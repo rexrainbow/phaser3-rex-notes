@@ -4,9 +4,9 @@ import { GeneralCreateGameObjectCallbackType } from './GeneralCreateGameObjectCa
 import CreateBackground from './CreateBackground';
 import CreateText from './CreateText';
 
-export default BuildDisplayLabelConfig;
+export default BuildLabelConfig;
 
-declare namespace BuildDisplayLabelConfig {
+declare namespace BuildLabelConfig {
     interface IConfig {
         x?: number,
         y?: number,
@@ -48,8 +48,8 @@ declare namespace BuildDisplayLabelConfig {
     }
 }
 
-declare function BuildDisplayLabelConfig(
+declare function BuildLabelConfig(
     scene: Phaser.Scene,
-    config?: BuildDisplayLabelConfig.IConfig,
-    creators?: BuildDisplayLabelConfig.ICreators,
+    config?: BuildLabelConfig.IConfig,
+    creators?: BuildLabelConfig.ICreators,
 ): Label.IConfig

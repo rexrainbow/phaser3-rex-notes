@@ -1,8 +1,8 @@
 import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 
-export default CreateDisplayLabel;
+export default CreateLabel;
 
-declare namespace CreateDisplayLabel {
+declare namespace CreateLabel {
     interface IConfig extends SimpleLabel.IConfig {
 
     }
@@ -12,7 +12,7 @@ declare namespace CreateDisplayLabel {
     }
 }
 
-declare function CreateDisplayLabel(
+declare function CreateLabel(
     scene: Phaser.Scene,
     config?: SimpleLabel.IConfig,
     creators?: SimpleLabel.ICreatorsConfig,

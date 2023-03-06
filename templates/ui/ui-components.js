@@ -1,6 +1,7 @@
 import NinePatch from './ninepatch/NinePatch.js';
 import NinePatch2 from './ninepatch2/NinePatch.js';
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
+import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
@@ -119,6 +120,7 @@ export {
     NinePatch,
     NinePatch2,
     RoundRectangle,
+    StatesRoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
