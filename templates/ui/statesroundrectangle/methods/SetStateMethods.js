@@ -1,5 +1,5 @@
-import GetPartialData from '../../../../utils/object/GetPartialData.js';
-import IsKeyValueEqual from '../../../../utils/object/IsKeyValueEqual.js';
+import GetPartialData from '../../../../plugins/utils/object/GetPartialData.js';
+import IsKeyValueEqual from '../../../../plugins/utils/object/IsKeyValueEqual.js';
 
 var ApplyStyle = function (gameObject, newStyle) {
     if (!newStyle) {
