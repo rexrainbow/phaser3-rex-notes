@@ -64,6 +64,24 @@ class RoundRectangle extends Shape {
         this.dirty = true;
     }
 
+    get fillColor() {
+        return this._fillColor;
+    }
+
+    set fillColor(value) {
+        this._fillColor = value;
+        this.isFilled = (value != null);
+    }
+
+    get lineWidth() {
+        return this._lineWidth;
+    }
+
+    set lineWidth(value) {
+        this._lineWidth = value;
+        this.isStroked = (value > 0);
+    }
+
     updateData() {
         var geom = this.geom;
         var pathData = this.pathData;

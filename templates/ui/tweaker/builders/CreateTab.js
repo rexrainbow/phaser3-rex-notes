@@ -1,5 +1,5 @@
 import TabPages from '../gameobjects/tabpages/TabPages.js';
-import CreateInteractiveLabel from '../../utils/build/CreateInteractiveLabel.js';
+import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateTweaker from '../gameobjects/utils/CreateTweaker';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -18,7 +18,7 @@ var CreateTab = function (scene, config, style) {
         var page = pages[i];
         tabPages.addPage({
             key: page.title,
-            tab: CreateInteractiveLabel(scene, tabConfig)
+            tab: CreateLabel(scene, tabConfig)
                 .setActiveState(false)
                 .resetDisplayContent({ text: page.title }),
             page: CreateTweaker(scene, tweakerConfig)

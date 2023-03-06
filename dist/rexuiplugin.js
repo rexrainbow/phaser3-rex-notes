@@ -1988,7 +1988,7 @@
   SetValue(window, 'RexPlugins.UI.NinePatch2', NinePatch);
 
   var GetValue$35 = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle$4 = /*#__PURE__*/function () {
+  var RoundRectangle$3 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
       if (x === undefined) {
@@ -2360,7 +2360,7 @@
   var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
-  var RoundRectangle$3 = /*#__PURE__*/function (_Shape) {
+  var RoundRectangle$2 = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
     var _super = _createSuper(RoundRectangle);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
@@ -2399,7 +2399,7 @@
       if (shapeType === undefined) {
         shapeType = 0;
       }
-      var geom = new RoundRectangle$4(); // Configurate it later
+      var geom = new RoundRectangle$3(); // Configurate it later
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
@@ -2425,6 +2425,24 @@
       return _this;
     }
     _createClass(RoundRectangle, [{
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this._fillColor = value;
+        this.isFilled = value != null;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this._lineWidth = value;
+        this.isStroked = value > 0;
+      }
+    }, {
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;
@@ -2702,14 +2720,190 @@
     rectangle: 0,
     circle: 1
   };
-  Object.assign(RoundRectangle$3.prototype, Render$3);
+  Object.assign(RoundRectangle$2.prototype, Render$3);
 
   ObjectFactory.register('roundRectangle', function (x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-    var gameObject = new RoundRectangle$3(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
+    var gameObject = new RoundRectangle$2(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$3);
+  SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$2);
+
+  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+    if (out === undefined) {
+      out = {};
+    }
+    if (!obj) {
+      return out;
+    }
+    if (prefix in obj) {
+      return Object.assign(out, obj[prefix]);
+    }
+    prefix += delimiter;
+    for (var key in obj) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+      out[key.replace(prefix, '')] = obj[key];
+    }
+    return out;
+  };
+
+  var ExtractStyle = function ExtractStyle(config, prefix, propertiesMap) {
+    var result = ExtractByPrefix(config, prefix);
+    if (propertiesMap) {
+      for (var name in result) {
+        if (propertiesMap.hasOwnProperty(name)) {
+          result[propertiesMap[name]] = result[name];
+          delete result[name];
+        }
+      }
+    }
+    return result;
+  };
+
+  var GetPartialData = function GetPartialData(obj, keys, out) {
+    if (out === undefined) {
+      out = {};
+    }
+    if (Array.isArray(keys)) {
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        out[key] = obj[key];
+      }
+    } else {
+      for (var key in keys) {
+        out[key] = obj[key];
+      }
+    }
+    return out;
+  };
+
+  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
+    for (var key in objA) {
+      if (!(key in objB)) {
+        return false;
+      }
+      if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+    for (var key in objB) {
+      if (!(key in objA)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  var ApplyStyle = function ApplyStyle(gameObject, newStyle) {
+    if (!newStyle) {
+      return undefined;
+    }
+    var currentStyle = GetPartialData(gameObject, newStyle);
+    if (!IsKeyValueEqual(currentStyle, newStyle)) {
+      gameObject.modifyStyle(newStyle);
+      return currentStyle;
+    } else {
+      return undefined;
+    }
+  };
+  var SetStateMethods = {
+    setActiveState: function setActiveState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.activeState === enable) {
+        return this;
+      }
+      this.activeState = enable;
+      if (enable) {
+        this.activeStyleSave = ApplyStyle(this, this.activeStyle);
+      } else {
+        ApplyStyle(this, this.activeStyleSave);
+        this.activeStyleSave = undefined;
+      }
+      return this;
+    },
+    setHoverState: function setHoverState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.hoverState === enable) {
+        return this;
+      }
+      this.hoverState = enable;
+      if (enable) {
+        this.hoverStyleSave = ApplyStyle(this, this.hoverStyle);
+      } else {
+        ApplyStyle(this, this.hoverStyleSave);
+        this.hoverStyleSave = undefined;
+      }
+      return this;
+    },
+    setDisableState: function setDisableState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.disableState === enable) {
+        return this;
+      }
+      this.disableState = enable;
+      if (enable) {
+        this.disableStyleSave = ApplyStyle(this, this.disableStyle);
+      } else {
+        ApplyStyle(this, this.disableStyleSave);
+        this.disableStyleSave = undefined;
+      }
+      return this;
+    }
+  };
+
+  var StatesRoundRectangle = /*#__PURE__*/function (_RoundRectangle) {
+    _inherits(StatesRoundRectangle, _RoundRectangle);
+    var _super = _createSuper(StatesRoundRectangle);
+    function StatesRoundRectangle(scene, config) {
+      var _this;
+      _classCallCheck(this, StatesRoundRectangle);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene, config);
+      _this.activeStyle = ExtractStyle(config, 'active', PropertiesMap);
+      _this.hoverStyle = ExtractStyle(config, 'hover', PropertiesMap);
+      _this.disableStyle = ExtractStyle(config, 'disable', PropertiesMap);
+      return _this;
+    }
+    _createClass(StatesRoundRectangle, [{
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        for (var key in style) {
+          this[key] = style[key];
+        }
+        return this;
+      }
+    }]);
+    return StatesRoundRectangle;
+  }(RoundRectangle$2);
+  var PropertiesMap = {
+    color: 'fillColor',
+    alpha: 'fillAlpha',
+    // strokeColor: 'strokeColor',
+    // strokeAlpha: 'strokeAlpha',
+    strokeWidth: 'lineWidth'
+  };
+  Object.assign(StatesRoundRectangle.prototype, SetStateMethods);
+
+  ObjectFactory.register('statesRoundRectangle', function (config) {
+    var gameObject = new StatesRoundRectangle(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.StatesRoundRectangle', StatesRoundRectangle);
 
   // copy from Phaser.GameObjects.Text
 
@@ -3128,7 +3322,7 @@
 
   var DegToRad$d = Phaser.Math.DegToRad;
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
-    var geom = new RoundRectangle$4(x, y, width, height, radiusConfig),
+    var geom = new RoundRectangle$3(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
       minHeight = geom.minHeight,
       scaleRX = width >= minWidth ? 1 : width / minWidth,
@@ -3290,7 +3484,7 @@
   };
 
   var GetValue$33 = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle$2 = /*#__PURE__*/function (_Canvas) {
+  var RoundRectangle$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(RoundRectangle, _Canvas);
     var _super = _createSuper(RoundRectangle);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
@@ -3430,11 +3624,11 @@
   }(Canvas$1);
 
   ObjectFactory.register('roundRectangleCanvas', function (x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
-    var gameObject = new RoundRectangle$2(this.scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+    var gameObject = new RoundRectangle$1(this.scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle$2);
+  SetValue(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle$1);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -17432,64 +17626,6 @@
     return config;
   };
 
-  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
-    if (out === undefined) {
-      out = {};
-    }
-    if (!obj) {
-      return out;
-    }
-    if (prefix in obj) {
-      return Object.assign(out, obj[prefix]);
-    }
-    prefix += delimiter;
-    for (var key in obj) {
-      if (!key.startsWith(prefix)) {
-        continue;
-      }
-      out[key.replace(prefix, '')] = obj[key];
-    }
-    return out;
-  };
-
-  var GetPartialData = function GetPartialData(obj, keys, out) {
-    if (out === undefined) {
-      out = {};
-    }
-    if (Array.isArray(keys)) {
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        out[key] = obj[key];
-      }
-    } else {
-      for (var key in keys) {
-        out[key] = obj[key];
-      }
-    }
-    return out;
-  };
-
-  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
-    for (var key in objA) {
-      if (!(key in objB)) {
-        return false;
-      }
-      if (objA[key] !== objB[key]) {
-        return false;
-      }
-    }
-    for (var key in objB) {
-      if (!(key in objA)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   var RegisterCursorStyle = function RegisterCursorStyle(cursorStyle) {
     if (IsEmpty(cursorStyle)) {
       return;
@@ -19949,7 +20085,7 @@
   }(BaseGeom);
 
   var GetValue$2u = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle$1 = /*#__PURE__*/function (_PathBase) {
+  var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     var _super = _createSuper(RoundRectangle);
     function RoundRectangle(x, y, width, height, radius, iterations) {
@@ -20394,7 +20530,7 @@
 
   var ShapesUpdateMethods$4 = {
     buildShapes: function buildShapes() {
-      this.addShape(new RoundRectangle$1().setName('box')).addShape(new Lines().setName('checker'));
+      this.addShape(new RoundRectangle().setName('box')).addShape(new Lines().setName('checker'));
     },
     updateShapes: function updateShapes() {
       var centerX = this.width / 2,
@@ -20998,7 +21134,7 @@
   var Linear$9 = Phaser.Math.Linear;
   var ShapesUpdateMethods$3 = {
     buildShapes: function buildShapes() {
-      this.addShape(new RoundRectangle$1().setName('track')).addShape(new RoundRectangle$1().setName('thumb'));
+      this.addShape(new RoundRectangle().setName('track')).addShape(new RoundRectangle().setName('thumb'));
     },
     updateShapes: function updateShapes() {
       var width = this.width,
@@ -32196,7 +32332,7 @@
     line: Line,
     lines: Lines,
     rectangle: Rectangle$2,
-    roundRectangle: RoundRectangle$1,
+    roundRectangle: RoundRectangle,
     triangle: Triangle$1
   };
   var GetValue$1I = Phaser.Utils.Objects.GetValue;
@@ -36305,7 +36441,7 @@
   };
 
   var GetValue$1o = Phaser.Utils.Objects.GetValue;
-  var Label$1 = /*#__PURE__*/function (_Sizer) {
+  var Label = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
     var _super = _createSuper(Label);
     function Label(scene, config) {
@@ -36595,24 +36731,20 @@
     }]);
     return Label;
   }(Sizer);
-  Object.assign(Label$1.prototype, methods$f);
+  Object.assign(Label.prototype, methods$f);
 
   ObjectFactory.register('label', function (config) {
-    var gameObject = new Label$1(this.scene, config);
+    var gameObject = new Label(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Label', Label$1);
-
-  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$3(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
+  SetValue(window, 'RexPlugins.UI.Label', Label);
 
   var CreateBackground$2 = function CreateBackground(scene, config) {
-    var gameObject = CreateRoundRectangle$1(scene, config);
+    var gameObject = new StatesRoundRectangle(scene, config);
     // TODO: Create nine-slice background game object
+
+    scene.add.existing(gameObject);
     return gameObject;
   };
 
@@ -36726,7 +36858,7 @@
   };
 
   var GetValue$1m = Phaser.Utils.Objects.GetValue;
-  var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config, creators) {
+  var BuildLabelConfig = function BuildLabelConfig(scene, config, creators) {
     config = config ? DeepClone(config) : {};
     var createBackground = GetValue$1m(creators, 'background', CreateBackground$2);
     var createText = GetValue$1m(creators, 'text', CreateText$1);
@@ -36772,13 +36904,41 @@
     function SimpleLabel(scene, config, creators) {
       var _this;
       _classCallCheck(this, SimpleLabel);
-      config = BuildDisplayLabelConfig(scene, config, creators);
+      config = BuildLabelConfig(scene, config, creators);
       _this = _super.call(this, scene, config);
       _this.type = 'rexSimpleLabel';
       return _this;
     }
-    return _createClass(SimpleLabel);
-  }(Label$1);
+    _createClass(SimpleLabel, [{
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        var background = this.childrenMap.background;
+        if (background && background.setActiveState) {
+          background.setActiveState(enable);
+        }
+        return this;
+      }
+    }, {
+      key: "setHoverState",
+      value: function setHoverState(enable) {
+        var background = this.childrenMap.background;
+        if (background && background.setHoverState) {
+          background.setHoverState(enable);
+        }
+        return this;
+      }
+    }, {
+      key: "setDisableState",
+      value: function setDisableState(enable) {
+        var background = this.childrenMap.background;
+        if (background && background.setDisableState) {
+          background.setDisableState(enable);
+        }
+        return this;
+      }
+    }]);
+    return SimpleLabel;
+  }(Label);
 
   ObjectFactory.register('simpleLabel', function (config, creators) {
     var gameObject = new SimpleLabel(this.scene, config, creators);
@@ -38445,7 +38605,7 @@
       }
     }]);
     return FileSelectorButton;
-  }(Label$1);
+  }(Label);
   Object.assign(FileSelectorButton.prototype, FileChooserMethods);
 
   ObjectFactory.register('fileSelectorButton', function (config) {
@@ -39195,7 +39355,7 @@
   });
   SetValue(window, 'RexPlugins.UI.Choices', Choices);
 
-  var CreateDisplayLabel = function CreateDisplayLabel(scene, config, creators) {
+  var CreateLabel$1 = function CreateLabel(scene, config, creators) {
     var gameObject = new SimpleLabel(scene, config, creators);
     scene.add.existing(gameObject);
     return gameObject;
@@ -39451,13 +39611,13 @@
       var thumb = GetValue$1c(config, 'thumb', undefined);
       if (background) {
         if (IsPlainObject$d(background)) {
-          background = CreateRoundRectangle$1(scene, background);
+          background = CreateBackground$2(scene, background);
         }
         _this.addBackground(background);
       }
       if (track) {
         if (IsPlainObject$d(track)) {
-          track = CreateRoundRectangle$1(scene, track);
+          track = CreateBackground$2(scene, track);
         }
         _this.add(track, {
           proportion: 1,
@@ -39468,14 +39628,14 @@
       }
       if (indicator) {
         if (IsPlainObject$d(indicator)) {
-          indicator = CreateRoundRectangle$1(scene, indicator);
+          indicator = CreateBackground$2(scene, indicator);
         }
         _this.pin(indicator); // Put into container but not layout it
       }
 
       if (thumb) {
         if (IsPlainObject$d(thumb)) {
-          thumb = CreateRoundRectangle$1(scene, thumb);
+          thumb = CreateBackground$2(scene, thumb);
         }
         _this.pin(thumb); // Put into container but not layout it
       }
@@ -42068,7 +42228,7 @@
         gameObject = new CreateTextArea$1(scene, config, creators);
         break;
       default:
-        gameObject = new CreateDisplayLabel(scene, config, creators);
+        gameObject = new CreateLabel$1(scene, config, creators);
         break;
     }
     scene.add.existing(gameObject);
@@ -42092,7 +42252,7 @@
       } else {
         delete config.background;
       }
-      config.title = CreateDisplayLabel(scene, config.title, creators.title);
+      config.title = CreateLabel$1(scene, config.title, creators.title);
       config.content = CreateContent(scene, config.content, creators.content);
       if (config.content instanceof TextArea) {
         if (HasValue(config, 'height') && !HasValue(config, 'proportion.content')) {
@@ -42109,10 +42269,10 @@
       var buttonBCreators = creators.buttonB || creators.button;
       switch (buttonMode) {
         case 2:
-          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreators), CreateDisplayLabel(scene, buttonBConfig, buttonBCreators)];
+          config.actions = [CreateLabel$1(scene, buttonAConfig, buttonACreators), CreateLabel$1(scene, buttonBConfig, buttonBCreators)];
           break;
         case 1:
-          config.actions = [CreateDisplayLabel(scene, buttonAConfig, buttonACreators)];
+          config.actions = [CreateLabel$1(scene, buttonAConfig, buttonACreators)];
           break;
         default:
           config.actions = [];
@@ -42124,6 +42284,17 @@
       var buttons = _this.childrenMap.actions;
       _this.addChildrenMap('buttonA', buttons[0]);
       _this.addChildrenMap('buttonB', buttons[1]);
+
+      // Interactive
+      _this.on('action.over', function (button, index, pointer, event) {
+        if (button.setHoverState) {
+          button.setHoverState(true);
+        }
+      }).on('action.out', function (button, index, pointer, event) {
+        if (button.setHoverState) {
+          button.setHoverState(false);
+        }
+      });
       return _this;
     }
     _createClass(ConfirmDialog, [{
@@ -45647,7 +45818,7 @@
       }
     }]);
     return DropDownList;
-  }(Label$1);
+  }(Label);
   Object.assign(DropDownList.prototype, Methods$2);
 
   ObjectFactory.register('dropDownList', function (config) {
@@ -46404,7 +46575,7 @@
       }
     }]);
     return TextBox;
-  }(Label$1);
+  }(Label);
   var createDefaultTextObject$1 = function createDefaultTextObject(scene) {
     return scene.add.text(0, 0, '', {
       wordWrap: {
@@ -49410,7 +49581,7 @@
       }
     }]);
     return Toast;
-  }(Label$1);
+  }(Label);
   var TransitionMode = {
     popUp: 0,
     fadeIn: 1,
@@ -49431,7 +49602,7 @@
     } else if (IsGameObject(config)) {
       return config;
     }
-    var swatch = new RoundRectangle$3(scene, config);
+    var swatch = new RoundRectangle$2(scene, config);
     scene.add.existing(swatch);
     return swatch;
   };
@@ -49917,7 +50088,7 @@
       scene.add.existing(paletteCanvas);
       _this.type = 'rexColorPicker.HPalette';
       paletteCanvas.setInteractive().on('pointerdown', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this)).on('pointermove', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this));
-      var marker = new RoundRectangle$3(scene, {
+      var marker = new RoundRectangle$2(scene, {
         strokeColor: 0xffffff,
         strokeWidth: 2
       });
@@ -50105,7 +50276,7 @@
       scene.add.existing(paletteCanvas);
       _this.type = 'rexColorPicker.SVPalette';
       paletteCanvas.setInteractive().on('pointerdown', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this)).on('pointermove', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this));
-      var marker = new RoundRectangle$3(scene, {
+      var marker = new RoundRectangle$2(scene, {
         radius: 5,
         strokeColor: 0xffffff,
         strokeWidth: 2
@@ -50352,7 +50523,7 @@
       var background = GetValue$q(config, 'background', undefined);
       var formatLabel = GetValue$q(config, 'formatLabel', undefined);
       if (!IsGameObject(formatLabel)) {
-        formatLabel = CreateDisplayLabel(scene, formatLabel).resetDisplayContent();
+        formatLabel = CreateLabel$1(scene, formatLabel).resetDisplayContent();
       }
       var components = [];
       if (config.inputText0 && config.inputText1 && config.inputText2) {
@@ -50703,7 +50874,7 @@
         var background = GetValue$o(colorPickerConfig, 'background');
         if (background) {
           createBackgroundCallback = function createBackgroundCallback(scene) {
-            return CreateRoundRectangle$1(scene, background);
+            return CreateBackground$2(scene, background);
           };
         } else {
           createBackgroundCallback = GetValue$o(colorPickerConfig, 'createBackgroundCallback');
@@ -51280,7 +51451,7 @@
     function Title(scene, config) {
       var _this;
       _classCallCheck(this, Title);
-      config = BuildDisplayLabelConfig(scene, config);
+      config = BuildLabelConfig(scene, config);
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker.Title';
       return _this;
@@ -51299,7 +51470,7 @@
       }
     }]);
     return Title;
-  }(Label$1);
+  }(Label);
 
   var FolderTitle = /*#__PURE__*/function (_Title) {
     _inherits(FolderTitle, _Title);
@@ -51346,7 +51517,7 @@
 
   var CreateBackground = function CreateBackground(scene, config, style) {
     // TODO: Might create nine-slice as background
-    return CreateRoundRectangle$1(scene, style);
+    return CreateBackground$2(scene, style);
   };
 
   var BindingTargetMethods$2 = {
@@ -51500,126 +51671,6 @@
   }(TabPages$1);
   Object.assign(TabPages.prototype, BindingTargetMethods$1, InputRowTitleWidthMethods);
 
-  var CreateButtonRoundRectangleBackground = function CreateButtonRoundRectangleBackground(scene, config) {
-    var gameObject = new RoundRectangle(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-  var RoundRectangle = /*#__PURE__*/function (_RoundRectangleBase) {
-    _inherits(RoundRectangle, _RoundRectangleBase);
-    var _super = _createSuper(RoundRectangle);
-    function RoundRectangle(scene, config) {
-      var _this;
-      _classCallCheck(this, RoundRectangle);
-      if (config === undefined) {
-        config = {};
-      }
-      _this = _super.call(this, scene, config);
-      var activeStyle = ExtractByPrefix(config, 'active');
-      for (var name in activeStyle) {
-        var propertyName = StyleToProperty[name] || name;
-        var value = activeStyle[name];
-        delete activeStyle[name];
-        activeStyle[propertyName] = value;
-      }
-      _this.activeStyle = activeStyle;
-      return _this;
-    }
-    _createClass(RoundRectangle, [{
-      key: "modifyStyle",
-      value: function modifyStyle(style) {
-        for (var key in style) {
-          this[key] = style[key];
-        }
-        return this;
-      }
-    }, {
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        if (this.activeState === enable) {
-          return this;
-        }
-        this.activeState = enable;
-        if (enable) {
-          var activeStyle = this.activeStyle;
-          var styleSave = GetPartialData(this, activeStyle);
-          if (IsKeyValueEqual(activeStyle, styleSave)) {
-            return;
-          }
-          this.styleSave = styleSave;
-          this.modifyStyle(activeStyle);
-        } else {
-          if (!this.styleSave) {
-            return this;
-          }
-          this.modifyStyle(this.styleSave);
-          this.styleSave = undefined;
-        }
-        return this;
-      }
-    }]);
-    return RoundRectangle;
-  }(RoundRectangle$3);
-  var StyleToProperty = {
-    color: 'fillColor',
-    alpha: 'fillAlpha',
-    strokeColor: 'strokeColor',
-    strokeAlpha: 'strokeAlpha',
-    strokeWidth: 'lineWidth'
-  };
-
-  var CreateBBCodeText$1 = function CreateBBCodeText(scene, style) {
-    var gameObject = new BBCodeText(scene, 0, 0, '', style);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var BuildInteractiveLabelConfig = function BuildInteractiveLabelConfig(scene, config, deepCloneConfig) {
-    if (deepCloneConfig === undefined) {
-      deepCloneConfig = true;
-    }
-    if (deepCloneConfig) {
-      config = config ? DeepClone(config) : {};
-    } else if (!config) {
-      config = {};
-    }
-    config.background = CreateButtonRoundRectangleBackground(scene, config.background);
-    config.text = CreateBBCodeText$1(scene, config.text);
-    if (config.icon !== null) {
-      config.icon = CreateImage$1(scene, config.icon);
-    }
-    if (config.action !== null) {
-      config.action = CreateImage$1(scene, config.action);
-    }
-    return config;
-  };
-
-  var CreateInteractiveLabel = function CreateInteractiveLabel(scene, config) {
-    config = BuildInteractiveLabelConfig(scene, config);
-    var gameObject = new Label(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-  var Label = /*#__PURE__*/function (_LabelBase) {
-    _inherits(Label, _LabelBase);
-    var _super = _createSuper(Label);
-    function Label() {
-      _classCallCheck(this, Label);
-      return _super.apply(this, arguments);
-    }
-    _createClass(Label, [{
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        this.childrenMap.background.setActiveState(enable);
-        return this;
-      }
-    }]);
-    return Label;
-  }(Label$1);
-
   var GetValue$k = Phaser.Utils.Objects.GetValue;
   var CreateTab = function CreateTab(scene, config, style) {
     var tabPages = new TabPages(scene, style);
@@ -51634,7 +51685,7 @@
       var page = pages[i];
       tabPages.addPage({
         key: page.title,
-        tab: CreateInteractiveLabel(scene, tabConfig).setActiveState(false).resetDisplayContent({
+        tab: CreateLabel$1(scene, tabConfig).setActiveState(false).resetDisplayContent({
           text: page.title
         }),
         page: CreateTweaker(scene, tweakerConfig)
@@ -52248,10 +52299,10 @@
     var listButtonConfig = config.button || config.label;
     delete config.label;
     delete config.button;
-    var listConfig = BuildDisplayLabelConfig(scene, labelConfig);
+    var listConfig = BuildLabelConfig(scene, labelConfig);
     listConfig.list = config;
     listConfig.list.createButtonCallback = function (scene, option) {
-      var gameObject = CreateInteractiveLabel(scene, listButtonConfig).resetDisplayContent({
+      var gameObject = CreateLabel$1(scene, listButtonConfig).resetDisplayContent({
         text: option.text
       });
       return gameObject;
@@ -52428,7 +52479,7 @@
         list.clearButtons(true);
         for (var i = 0, cnt = options.length; i < cnt; i++) {
           var option = options[i];
-          var button = CreateInteractiveLabel(scene, buttonConfig).setActiveState(false).resetDisplayContent({
+          var button = CreateLabel$1(scene, buttonConfig).setActiveState(false).resetDisplayContent({
             text: option.text
           });
           list.addButton(button);
@@ -52683,7 +52734,7 @@
 
     // Background
     var backgroundStyle = GetValue$d(style, 'background') || {};
-    var background = CreateRoundRectangle$1(scene, backgroundStyle);
+    var background = CreateBackground$2(scene, backgroundStyle);
     var inputRow = new InputRow(scene, _objectSpread2(_objectSpread2(_objectSpread2({}, config), style), {}, {
       inputTitle: inputTitle,
       inputField: inputField,
@@ -52749,6 +52800,12 @@
     return this;
   };
 
+  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle$2(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var CreateButtons$1 = function CreateButtons(scene, config, style) {
     // Title
@@ -52760,7 +52817,7 @@
     var buttonStyle = GetValue$c(style, 'button') || {};
     var buttons = [];
     for (var i = 0, cnt = buttonsConfig.length; i < cnt; i++) {
-      var button = CreateDisplayLabel(scene, buttonStyle);
+      var button = CreateLabel$1(scene, buttonStyle);
       buttons.push(button);
       var buttonConfig = buttonsConfig[i];
       button.resetDisplayContent({
@@ -56995,7 +57052,7 @@
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObject = new RoundRectangle$3(scene, data);
+    var gameObject = new RoundRectangle$2(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -57221,7 +57278,7 @@
   };
 
   var CreateLabel = function CreateLabel(scene, data, view, styles, customBuilders) {
-    return CreateAnyLabel(scene, data, view, styles, customBuilders, Label$1);
+    return CreateAnyLabel(scene, data, view, styles, customBuilders, Label);
   };
 
   var CreateBadgeLabel = function CreateBadgeLabel(scene, data, view, styles, customBuilders) {

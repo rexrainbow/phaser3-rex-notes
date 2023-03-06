@@ -1,7 +1,7 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateButtons from '../utils/CreateButtons.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import CreateInteractiveLabel from '../../../utils/build/CreateInteractiveLabel.js';
+import CreateLabel from '../../../utils/build/CreateLabel.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 import SetButtonsActiveStateByText from '../utils/SetButtonsActiveState.js';
 
@@ -69,7 +69,7 @@ class ButtonsInput extends InputFiledBase {
         list.clearButtons(true);
         for (var i = 0, cnt = options.length; i < cnt; i++) {
             var option = options[i];
-            var button = CreateInteractiveLabel(scene, buttonConfig)
+            var button = CreateLabel(scene, buttonConfig)
                 .setActiveState(false)
                 .resetDisplayContent({ text: option.text })
 

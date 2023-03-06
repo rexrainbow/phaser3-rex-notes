@@ -20,25 +20,6 @@ class StatesRoundRectangle extends RoundRectangle {
         }
         return this;
     }
-
-    get fillColor() {
-        return this._fillColor;
-    }
-
-    set fillColor(value) {
-        this._fillColor = value;
-        this.isFilled = (value != null);
-    }
-
-    get lineWidth() {
-        return this._lineWidth;
-    }
-
-    set lineWidth(value) {
-        this._lineWidth = value;
-        this.isStroked = (value > 0);
-    }
-
 }
 
 const PropertiesMap = {
