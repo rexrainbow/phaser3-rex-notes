@@ -16,16 +16,33 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var style = {
+            background: {
+                radius: 10,
+
+                color: COLOR_DARK,
+                'active.color': COLOR_PRIMARY,
+
+                strokeWidth: 0,
+                'hover.strokeColor': 0xffffff,
+                'hover.strokeWidth': 2
+            },
+            text: {
+                fontSize: 18
+            },
+            space: { left: 10, right: 10, top: 10, bottom: 10 },
+        }
+
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,
             width: 200,
             orientation: 'y',
 
             buttons: [
-                createButton(this, 'AAA'),
-                createButton(this, 'BBB'),
-                createButton(this, 'CCC'),
-                createButton(this, 'DDD'),
+                createButton(this, style, 'AAA'),
+                createButton(this, style, 'BBB'),
+                createButton(this, style, 'CCC'),
+                createButton(this, style, 'DDD'),
             ],
 
             space: { item: 8 },
@@ -50,25 +67,10 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, text) {
-    return scene.rexUI.add.simpleLabel({
-        background: {
-            radius: 10,
-
-            color: COLOR_DARK,
-            'active.color': COLOR_PRIMARY,
-
-            strokeWidth: 0,
-            'hover.strokeColor': 0xffffff,
-            'hover.strokeWidth': 2
-        },
-        text: {
-            fontSize: 18
-        },
-        space: { left: 10, right: 10, top: 10, bottom: 10 },
-        name: text
-    })
-        .resetDisplayContent(text);
+var createButton = function (scene, style, text) {
+    return scene.rexUI.add.simpleLabel(style)
+        .resetDisplayContent(text)
+        .setName(text);
 }
 
 var config = {
