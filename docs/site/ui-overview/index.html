@@ -8280,6 +8280,53 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15_19" type="checkbox" id="__nav_15_19" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15_19">
+          Background
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Background" data-md-level="2">
+        <label class="md-nav__title" for="__nav_15_19">
+          <span class="md-nav__icon md-icon"></span>
+          Background
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-statesroundrectangle/" class="md-nav__link">
+        State round rectangle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../ui-chart/" class="md-nav__link">
         Chart
@@ -9407,6 +9454,19 @@
 </ol>
 <h3 id="background-objects">Background objects<a class="headerlink" href="#background-objects" title="Permanent link">&para;</a></h3>
 <ol>
+<li><a href="../ui-statesroundrectangle/">States round-rectangle</a>: Using plain object to create <a href="../shape-roundrectangle/">round rectangle</a>, with active, hover, disable styles.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesRoundRectangle</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyRoundRectangle</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesRoundRectangle</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><a href="../shape-roundrectangle/">Round-rectangle</a>: Round rectangle shape.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div>

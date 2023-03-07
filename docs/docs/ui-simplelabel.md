@@ -1,6 +1,6 @@
 ## Introduction
 
-Using json style to create [label](ui-label.md).
+Using plain object to create [label](ui-label.md).
 
 - Author: Rex
 - Game object
@@ -90,15 +90,41 @@ var label = scene.rexUI.add.simpleLabel({
     orientation: 0,
     // rtl: false,
 
-    background: {
-        radius: 0,
+    background: {            
+        // color: 0xffffff,
+        // alpha: 1,
+        // strokeColor: 0xffffff,
+        // strokeAlpha: 1,
+        // strokeWidth: 2,
+        // radius: 0,
         // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-    
-        color: undefined,
-        alpha: undefined,
-        strokeColor: undefined,
-        strokeAlpha: undefined,
-        strokeWidth: undefined,
+        
+        // Style override in active state
+        // 'active.color': undefined,
+        // 'active.alpha': undefined,
+        // 'active.strokeColor': undefined,
+        // 'active.strokeAlpha': undefined,
+        // 'active.strokeWidth': undefined,
+        // 'active.radius': undefined,
+        // 'active.xxx': ...
+        
+        // Style override in hover state
+        // 'hover.color': undefined,
+        // 'hover.alpha': undefined,
+        // 'hover.strokeColor': undefined,
+        // 'hover.strokeAlpha': undefined,
+        // 'hover.strokeWidth': undefined,
+        // 'hover.radius': undefined,
+        // 'hover.xxx': ...
+        
+        // Style override in disable state
+        // 'disable.color': undefined,
+        // 'disable.alpha': undefined,
+        // 'disable.strokeColor': undefined,
+        // 'disable.strokeAlpha': undefined,
+        // 'disable.strokeWidth': undefined,
+        // 'disable.radius': undefined,
+        // 'disable.xxx': ...
     },
     
     // iconMask: false,
@@ -177,7 +203,7 @@ var label = scene.rexUI.add.simpleLabel({
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
 - `creators` : A series of callback to create background, text, icon, action icon game object.
-    - `creators.background` : Callback to create background. Default behavior is creating a [round-rectangle-shape](shape-roundrectangle.md).
+    - `creators.background` : Callback to create background. Default behavior is creating a [states round rectangle](ui-statesroundrectangle.md).
         ```javascript
         function(scene, config)  {
             return gameObject;
@@ -254,6 +280,41 @@ label.layout();
 ```
 
 See also - [dirty](ui-basesizer.md#dirty)
+
+### Set state
+
+Override/restore properties of background game object.
+
+!!! note 
+    Assume that background game object is [states round rectangle game object](ui-statesroundrectangle.md).)
+
+#### Active state
+
+- Enable active state
+    ```javascript
+    label.setActiveState();
+    // label.setActiveState(true);
+    ```
+    - Override properties of background declared in config with prefix `'active.'` parameters.    
+- Disable active state
+    ```javascript
+    label.setActiveState(false);
+    ```
+    - Restore properties of background.
+
+#### Hover state
+
+- Enable active state
+    ```javascript
+    label.setHoverState();
+    // label.setHoverState(true);
+    ```
+    - Override properties of background declared in config with prefix `'hover.'` parameters
+- Disable active state
+    ```javascript
+    label.setHoverState(false);
+    ```
+    - Restore properties of background.
 
 ### Other properties
 

@@ -16,16 +16,27 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var bgStyle = {
+            radius: 10,
+
+            color: COLOR_DARK,
+            'active.color': COLOR_PRIMARY,
+
+            strokeWidth: 0,
+            'hover.strokeColor': 0xffffff,
+            'hover.strokeWidth': 2
+        }
+
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,
             width: 200,
             orientation: 'y',
 
             buttons: [
-                createButton(this, 'AAA'),
-                createButton(this, 'BBB'),
-                createButton(this, 'CCC'),
-                createButton(this, 'DDD'),
+                createButton(this, 'AAA', bgStyle),
+                createButton(this, 'BBB', bgStyle),
+                createButton(this, 'CCC', bgStyle),
+                createButton(this, 'DDD', bgStyle),
             ],
 
             space: { item: 8 },
@@ -50,18 +61,9 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, text) {
+var createButton = function (scene, text, bgStyle) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.statesRoundRectangle({
-            radius: 10,
-
-            color: COLOR_DARK,
-            'active.color': COLOR_PRIMARY,
-
-            strokeWidth: 0,
-            'hover.strokeColor': 0xffffff,
-            'hover.strokeWidth': 2
-        }),
+        background: scene.rexUI.add.statesRoundRectangle(bgStyle),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),

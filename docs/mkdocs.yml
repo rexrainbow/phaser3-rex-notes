@@ -430,6 +430,8 @@ nav:
         - Color picker: ui-colorpicker.md
         - Color components: ui-colorcomponents.md
     - Tweaker: ui-tweaker.md
+    - Background:
+        - State round rectangle: ui-statesroundrectangle.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md

@@ -145,6 +145,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 ### Background objects
 
+1. [States round-rectangle](ui-statesroundrectangle.md): Using plain object to create [round rectangle](shape-roundrectangle.md), with active, hover, disable styles.
+    ```javascript
+    var rect = scene.rexUI.add.statesRoundRectangle(config);
+    ```
+    or
+    ```javascript
+    class MyRoundRectangle extends RexPlugins.UI.StatesRoundRectangle {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Round-rectangle](shape-roundrectangle.md): Round rectangle shape.
     ```javascript
     var shape = scene.rexUI.add.roundRectangle(x, y, width, height, radius, fillColor);
