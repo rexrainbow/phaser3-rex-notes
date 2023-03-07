@@ -1,4 +1,5 @@
 import Dialog from '../dialog/Dialog.js';
+import ResetDisplayContent from './methods/ResetDisplayContent.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';
@@ -34,17 +35,19 @@ class ConfirmDialog extends Dialog {
             }
         }
 
+        var defaultButtonConfig = config.button;
+        var buttonAConfig = config.buttonA || defaultButtonConfig;
+        var buttonBConfig = config.buttonB || defaultButtonConfig;
         var buttonMode = config.buttonMode;
         if (buttonMode === undefined) {
-            buttonMode = (!!config.buttonA && !!config.buttonB) ? 2 :
-                (!!config.buttonA || !!config.button) ? 1 :
+            buttonMode = (!!buttonAConfig && !!buttonBConfig) ? 2 :
+                (!!buttonAConfig) ? 1 :
                     0;
         }
 
-        var buttonAConfig = config.buttonA || config.button;
-        var buttonACreators = creators.buttonA || creators.button;
-        var buttonBConfig = config.buttonB || config.button;
-        var buttonBCreators = creators.buttonB || creators.button;
+        var defaultButtonCreator = creators.button;
+        var buttonACreators = creators.buttonA || defaultButtonCreator;
+        var buttonBCreators = creators.buttonB || defaultButtonCreator;
         switch (buttonMode) {
             case 2:
                 config.actions = [
@@ -59,9 +62,17 @@ class ConfirmDialog extends Dialog {
                 ]
                 break;
 
+            case 0:
+                break;
+
             default:
                 config.actions = [];
                 break;
+        }
+
+        var defaultChoiceConfig = config.choiceButton;
+        if (defaultChoiceConfig) {
+            config.choices = [];
         }
 
         super(scene, config);
@@ -69,9 +80,15 @@ class ConfirmDialog extends Dialog {
 
         this.buttonMode = buttonMode;
 
+        this.defaultActionConfig = defaultButtonConfig;
+        this.defaultActionButtonCreator = defaultButtonCreator;
+
+        this.defaultChoiceConfig = defaultChoiceConfig;
+        this.defaultChoiceCreator = creators.choiceButton;
+
         var buttons = this.childrenMap.actions;
-        this.addChildrenMap('buttonA', buttons[0]);
-        this.addChildrenMap('buttonB', buttons[1]);
+        this.addChildrenMap('buttonA', (buttons) ? buttons[0] : null);
+        this.addChildrenMap('buttonB', (buttons) ? buttons[1] : null);
 
         // Interactive
         this
@@ -85,37 +102,16 @@ class ConfirmDialog extends Dialog {
                     button.setHoverState(false);
                 }
             })
-    }
-
-    resetDisplayContent(config) {
-        if (config === undefined) {
-            config = {};
-        }
-
-        var title = this.childrenMap.title;
-        title.resetDisplayContent(config.title);
-
-        var content = this.childrenMap.content;
-        if (content.resetDisplayContent) {
-            // Label
-            content.resetDisplayContent(config.content);
-        } else {
-            // TextArea
-            var text = config.content || '';
-            content.setText(text)
-        }
-
-        var buttonA = this.childrenMap.actions[0];
-        if (buttonA) {
-            buttonA.resetDisplayContent(config.buttonA);
-        }
-
-        var buttonB = this.childrenMap.actions[1];
-        if (buttonB) {
-            buttonB.resetDisplayContent(config.buttonB);
-        }
-
-        return this;
+            .on('choice.over', function (button, index, pointer, event) {
+                if (button.setHoverState) {
+                    button.setHoverState(true);
+                }
+            })
+            .on('choice.out', function (button, index, pointer, event) {
+                if (button.setHoverState) {
+                    button.setHoverState(false);
+                }
+            })
     }
 
     modal(config, onClose) {
@@ -143,5 +139,14 @@ class ConfirmDialog extends Dialog {
         return this;
     }
 }
+
+var Methods = {
+    resetDisplayContent: ResetDisplayContent,
+}
+
+Object.assign(
+    ConfirmDialog.prototype,
+    Methods
+)
 
 export default ConfirmDialog;
