@@ -70,7 +70,7 @@ class ConfirmDialog extends Dialog {
                 break;
         }
 
-        var defaultChoiceConfig = config.choiceButton;
+        var defaultChoiceConfig = config.choice;
         if (defaultChoiceConfig) {
             config.choices = [];
         }
@@ -84,7 +84,7 @@ class ConfirmDialog extends Dialog {
         this.defaultActionButtonCreator = defaultButtonCreator;
 
         this.defaultChoiceConfig = defaultChoiceConfig;
-        this.defaultChoiceCreator = creators.choiceButton;
+        this.defaultChoiceCreator = creators.choice;
 
         var buttons = this.childrenMap.actions;
         this.addChildrenMap('buttonA', (buttons) ? buttons[0] : null);

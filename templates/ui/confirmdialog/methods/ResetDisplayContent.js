@@ -55,14 +55,14 @@ var ResetDisplayContent = function (config) {
     }
 
     var defaultChoiceConfig = this.defaultChoiceConfig;
-    var buttonContentArray = config.choiceButtons;
+    var buttonContentArray = config.choices;
     if (defaultChoiceConfig && buttonContentArray) {
         var scene = this.scene;
-        var choiceButtons = this.childrenMap.choices;
+        var choices = this.childrenMap.choices;
         var defaultActionButtonCreator = this.defaultActionButtonCreator;
         for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
             var buttonContent = buttonContentArray[i];
-            var button = choiceButtons[i];
+            var button = choices[i];
             if (!button) {
                 button = CreateLabel(scene, defaultChoiceConfig, defaultActionButtonCreator);
                 this.addChoice(button);
@@ -70,8 +70,8 @@ var ResetDisplayContent = function (config) {
             button.show().resetDisplayContent(buttonContent);
         }
 
-        for (var i = buttonContentArray.length - 1, cnt = choiceButtons.length; i < cnt; i++) {
-            choiceButtons[i].hide();
+        for (var i = buttonContentArray.length - 1, cnt = choices.length; i < cnt; i++) {
+            choices[i].hide();
         }
     }
 

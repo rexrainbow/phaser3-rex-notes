@@ -70,7 +70,7 @@ class Demo extends Phaser.Scene {
                 }
             },
 
-            choiceButton: {
+            choice: {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
                 background: {
                     color: COLOR_DARK,
@@ -91,7 +91,7 @@ class Demo extends Phaser.Scene {
             .resetDisplayContent({
                 title: 'Title',
                 content: "Hello.",
-                choiceButtons: [
+                choices: [
                     'A',
                     'B',
                     'C',
