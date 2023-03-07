@@ -65,7 +65,11 @@ class Modal extends OpenCloseTransition {
             this.once('open', this.touchOutsideClose, this);
         }
 
-        this.requestOpen();
+        if (GetValue(config, 'openOnStart', true)) {
+            // Run this.requestOpen() next tick
+            // User can register events before this.requestOpen()
+            this.delayCall(0, this.requestOpen, this);
+        }
     }
 
     shutdown(fromScene) {

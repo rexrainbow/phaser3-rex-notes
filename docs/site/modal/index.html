@@ -9124,7 +9124,8 @@
     <span class="c1">// transitIn: 0,</span>
     <span class="c1">// transitOut: 0,</span>
 
-    <span class="c1">// destroy: true</span>
+    <span class="c1">// destroy: true,</span>
+    <span class="c1">// openOnStart: true</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9199,10 +9200,16 @@
 <li><code>fasle</code> : Keep dialog game object and this behavior when closing completed. Could <a href="./#open">reuse it</a> later.</li>
 </ul>
 </li>
+<li><code>openOnStart</code>:<ul>
+<li><code>true</code> : Open dialog game object (<code>modal.requestOpen()</code>) at beginning. Default behavior.</li>
+<li><code>false</code> : Open dialog game object manually.</li>
+</ul>
+</li>
 </ul>
 <h3 id="open">Open<a class="headerlink" href="#open" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Will open modal dialog game object (run transition-in callback) when creating this behavior</li>
+<li>Will open modal dialog game object (run transition-in callback) when creating this behavior, 
+  if <code>openOnStart</code> is set to <code>true</code>.</li>
 <li>Invoke <code>modal.requestOpen()</code> to open modal dialog game object again, after closing modal dialog.<ul>
 <li>Set <code>destroy</code> to <code>false</code> to reuse dialog game object and this behavior.</li>
 </ul>

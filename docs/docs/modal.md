@@ -82,7 +82,8 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
     // transitIn: 0,
     // transitOut: 0,
 
-    // destroy: true
+    // destroy: true,
+    // openOnStart: true
 });
 ```
 
@@ -137,11 +138,15 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 - `destroy`
     - `true` : Destroy dialog game object and this behavior when closing completed. Default behavior.
     - `fasle` : Keep dialog game object and this behavior when closing completed. Could [reuse it](modal.md#open) later.
+- `openOnStart`:
+    - `true` : Open dialog game object (`modal.requestOpen()`) at beginning. Default behavior.
+    - `false` : Open dialog game object manually.
 
 
 ### Open
 
-- Will open modal dialog game object (run transition-in callback) when creating this behavior
+- Will open modal dialog game object (run transition-in callback) when creating this behavior, 
+  if `openOnStart` is set to `true`.
 - Invoke `modal.requestOpen()` to open modal dialog game object again, after closing modal dialog.
     - Set `destroy` to `false` to reuse dialog game object and this behavior.
 
