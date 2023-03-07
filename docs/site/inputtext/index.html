@@ -2836,6 +2836,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#interactive-with-other-game-objects" class="md-nav__link">
+    Interactive with other game objects
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9195,6 +9202,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#interactive-with-other-game-objects" class="md-nav__link">
+    Interactive with other game objects
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9242,7 +9256,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -9270,7 +9292,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
@@ -9300,7 +9330,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -9606,6 +9644,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="nx">enableCapture</span><span class="p">,</span> <span class="nx">emitOnRepeat</span><span class="p">);</span>
 </code></pre></div>
 <p>Set <code>enableCapture</code> to <code>false</code> to bypass key input to this input-text game objecct.</p>
+<h3 id="interactive-with-other-game-objects">Interactive with other game objects<a class="headerlink" href="#interactive-with-other-game-objects" title="Permanent link">&para;</a></h3>
+<p>See <a href="../domelement/#interactive-with-other-game-objects">dom-element's Interactive with other game objects</a></p>
 
               
             </article>

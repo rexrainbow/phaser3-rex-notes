@@ -9144,7 +9144,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -9172,7 +9180,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span> 
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
@@ -9202,7 +9218,15 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>        
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -9348,13 +9372,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="interactive-with-other-game-objects">Interactive with other game objects<a class="headerlink" href="#interactive-with-other-game-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li>DOM game object always put above game canvas, i.e. file-drop-zone will render above any other kind of game object.</li>
-<li>DOM game object will receive touch event even if it is not the first touched game object.</li>
-<li>P3's <code>'pointerdown'</code>, <code>'pointerup'</code> events will be fired above/under DOM game object.</li>
-<li>P3's <code>'pointermove'</code> event won't be fired above/under DOM game object which has <code>'dragenter'</code>, <code>'dragover'</code> events,
-   unless setting DOM game object to be <strong>invisilbe</strong>.</li>
-</ol>
+<p>See <a href="../domelement/#interactive-with-other-game-objects">dom-element's Interactive with other game objects</a></p>
 
               
             </article>

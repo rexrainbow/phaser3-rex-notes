@@ -27,7 +27,15 @@ Create an [input text object](inputtext.md) above a text object to edit string c
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -62,7 +70,15 @@ Create an [input text object](inputtext.md) above a text object to edit string c
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             global: [{
@@ -100,7 +116,15 @@ Create an [input text object](inputtext.md) above a text object to edit string c
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -263,3 +287,8 @@ var inputText = editor.inputText.node;
 ### Bypass key input
 
 See [InputText/Bypass key input](inputtext.md#bypass-key-input)
+
+
+### Interactive with other game objects
+
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)

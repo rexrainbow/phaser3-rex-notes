@@ -2774,6 +2774,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interactive-with-other-game-objects" class="md-nav__link">
+    Interactive with other game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9105,6 +9112,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interactive-with-other-game-objects" class="md-nav__link">
+    Interactive with other game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9156,6 +9170,14 @@
     <span class="c1">// fullscreenTarget: divId, // For fullscreen</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
+        <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">target</span><span class="o">:</span> <span class="nx">divId</span>
+        <span class="p">},</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -9317,6 +9339,15 @@
 <span class="nx">domElement</span><span class="p">.</span><span class="nx">rotate3d</span><span class="p">.</span><span class="nx">w</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate3d">Reference</a></p>
+<h3 id="interactive-with-other-game-objects">Interactive with other game objects<a class="headerlink" href="#interactive-with-other-game-objects" title="Permanent link">&para;</a></h3>
+<ol>
+<li>DOM game object always put above game canvas, i.e. DOM game object will render above any other kind of game object.</li>
+<li>DOM game object will receive touch event even if it is not the first touched game object.</li>
+<li>P3's <code>'pointerdown'</code>, <code>'pointerup'</code> events will be fired above/under DOM game object.</li>
+<li>P3's <code>'pointermove'</code> event won't be fired above/under DOM game object, except </li>
+<li>Setting DOM game object to be invisilbe.</li>
+<li>Assign input.mouse.target parameter of game config.</li>
+</ol>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
 

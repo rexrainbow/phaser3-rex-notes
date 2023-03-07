@@ -24,7 +24,15 @@ A transparent file chooser button (`<input type="file">`) above a [Label](ui-lab
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -54,7 +62,15 @@ A transparent file chooser button (`<input type="file">`) above a [Label](ui-lab
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             scene: [{
@@ -87,7 +103,15 @@ A transparent file chooser button (`<input type="file">`) above a [Label](ui-lab
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -368,6 +392,12 @@ fileChooser.loadFilePromise(file, loaderType, key, cahceType)
     ```javascript
     URL.createObjectURL(objectURL);
     ```
+
+
+### Interactive with other game objects
+
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)
+
 
 ### Other properties
 

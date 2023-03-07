@@ -26,7 +26,15 @@
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -56,7 +64,15 @@
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             global: [{
@@ -89,7 +105,15 @@
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -439,3 +463,8 @@ var keyObj = scene.input.keyboard.addKey('W', enableCapture, emitOnRepeat);
 ```
 
 Set `enableCapture` to `false` to bypass key input to this input-text game objecct.
+
+
+### Interactive with other game objects
+
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)
