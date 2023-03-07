@@ -10,6 +10,7 @@ Using plain object to create [label](ui-label.md).
 - [Style](https://codepen.io/rexrainbow/pen/vYaPwwq)
 - [Bitmaptext](https://codepen.io/rexrainbow/pen/jOpoqzP)
 - [Wrap text](https://codepen.io/rexrainbow/pen/xxJoJLW)
+- [Buttons](https://codepen.io/rexrainbow/pen/YzOxKRM)
 
 ## Usage
 
