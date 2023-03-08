@@ -619,7 +619,7 @@
     //  NOOP
   };
 
-  var Methods$j = {
+  var Methods$k = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -731,7 +731,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$j);
+    Object.assign(NinePatch.prototype, Methods$k);
     return NinePatch;
   };
 
@@ -767,7 +767,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$i = {
+  var Methods$j = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -782,7 +782,7 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
-  Object.assign(NinePatch$1.prototype, Methods$i);
+  Object.assign(NinePatch$1.prototype, Methods$j);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -1951,7 +1951,7 @@
     }
   };
 
-  var Methods$h = {
+  var Methods$i = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -1978,7 +1978,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$h);
+  Object.assign(NinePatch.prototype, Methods$i);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -7494,11 +7494,11 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var Methods$g = {
+  var Methods$h = {
     contains: Contains$1,
     getWorldPosition: GetWorldPosition
   };
-  Object.assign(Methods$g, RenderMethods);
+  Object.assign(Methods$h, RenderMethods);
 
   var DegToRad$c = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
@@ -7901,7 +7901,7 @@
     }]);
     return RenderBase;
   }(Base$2);
-  Object.assign(RenderBase.prototype, Methods$g);
+  Object.assign(RenderBase.prototype, Methods$h);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -10436,7 +10436,7 @@
     }
   };
 
-  var Methods$f = {
+  var Methods$g = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -10485,7 +10485,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$f, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$g, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -10601,7 +10601,7 @@
     }]);
     return DynamicText;
   }(Canvas$1);
-  Object.assign(DynamicText.prototype, Methods$f);
+  Object.assign(DynamicText.prototype, Methods$g);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -11884,8 +11884,8 @@
     }
   };
 
-  var Methods$e = {};
-  Object.assign(Methods$e, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$f = {};
+  Object.assign(Methods$f, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$2J = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -11980,7 +11980,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$e);
+  Object.assign(SoundManager.prototype, Methods$f);
 
   var GetValue$2I = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -13369,10 +13369,10 @@
     return this;
   };
 
-  var Methods$d = {
+  var Methods$e = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$d, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$e, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -13516,7 +13516,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$d);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$e);
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
@@ -15686,7 +15686,7 @@
     return this;
   };
 
-  var Methods$c = {
+  var Methods$d = {
     fadeOutPage: FadeOutPage,
     start: Start,
     typing: Typing,
@@ -15701,7 +15701,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$c, TypingSpeedMethods$1);
+  Object.assign(Methods$d, TypingSpeedMethods$1);
 
   var GetValue$2C = Phaser.Utils.Objects.GetValue;
   var TypeWriter = /*#__PURE__*/function () {
@@ -15808,7 +15808,7 @@
       }
     }
   };
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$c);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$d);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -15886,8 +15886,8 @@
     }
   };
 
-  var Methods$b = {};
-  Object.assign(Methods$b, AnimationMethods);
+  var Methods$c = {};
+  Object.assign(Methods$c, AnimationMethods);
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
@@ -15926,7 +15926,7 @@
     }
     return scene.add.image(0, 0, textureKey, frameName);
   };
-  Object.assign(SpriteManager.prototype, Methods$b);
+  Object.assign(SpriteManager.prototype, Methods$c);
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
     // goType.name.play
@@ -16617,7 +16617,7 @@
     }
   };
 
-  var Methods$a = {
+  var Methods$b = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -16628,7 +16628,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$a, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
+  Object.assign(Methods$b, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -16746,7 +16746,7 @@
     }]);
     return TextPlayer;
   }(Extend(DynamicText));
-  Object.assign(TextPlayer.prototype, Methods$a);
+  Object.assign(TextPlayer.prototype, Methods$b);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -16993,7 +16993,7 @@
     return this;
   };
 
-  var Methods$9 = {
+  var Methods$a = {
     open: Open$2,
     close: Close$1
   };
@@ -17360,7 +17360,7 @@
     }]);
     return HiddenTextEditBase;
   }(ComponentBase);
-  Object.assign(HiddenTextEditBase.prototype, Methods$9);
+  Object.assign(HiddenTextEditBase.prototype, Methods$a);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -22598,10 +22598,10 @@
     }]);
     return LineProgress;
   }(ProgressBase(BaseShapes));
-  var Methods$8 = {
+  var Methods$9 = {
     updateShapes: UpdateShapes
   };
-  Object.assign(LineProgress$1.prototype, Methods$8);
+  Object.assign(LineProgress$1.prototype, Methods$9);
 
   ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
     var gameObject = new LineProgress$1(this.scene, x, y, width, height, barColor, value, config);
@@ -34105,11 +34105,11 @@
     }
   };
 
-  var Methods$7 = {
+  var Methods$8 = {
     resize: Resize,
     syncTo: SyncTo
   };
-  Object.assign(Methods$7, DropEnableMethods, FilterMethods, LoadFileMethods);
+  Object.assign(Methods$8, DropEnableMethods, FilterMethods, LoadFileMethods);
 
   var DragDropEvents = {
     dragenter: 'dragenter',
@@ -34188,7 +34188,7 @@
     }]);
     return FileDropZone;
   }(DOMElement);
-  Object.assign(FileDropZone.prototype, Methods$7);
+  Object.assign(FileDropZone.prototype, Methods$8);
 
   ObjectFactory.register('fileDropZone', function (config) {
     var gameObject = new FileDropZone(this.scene, config);
@@ -36413,7 +36413,7 @@
     return gameObject;
   };
 
-  var ResetDisplayContent = function ResetDisplayContent(config) {
+  var ResetDisplayContent$1 = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
     } else if (typeof config === 'string') {
@@ -36459,7 +36459,7 @@
   };
 
   var methods$f = {
-    resetDisplayContent: ResetDisplayContent
+    resetDisplayContent: ResetDisplayContent$1
   };
 
   var GetValue$1o = Phaser.Utils.Objects.GetValue;
@@ -37735,39 +37735,74 @@
     }
   };
 
+  var OnButtonStateChange = function OnButtonStateChange(button, value, previousValue) {
+    if (!button) {
+      return;
+    }
+    var callback = this.setValueCallback;
+    var scope = this.setValueCallbackScope;
+    if (callback) {
+      if (scope) {
+        callback.call(scope, button, value, previousValue);
+      } else {
+        callback(button, value, previousValue);
+      }
+    }
+    this.fireEvent('button.statechange', button, value, previousValue);
+  };
+
+  var InjectSelectedProperty = function InjectSelectedProperty(gameObject) {
+    var self = this;
+    gameObject._selected = undefined;
+    Object.defineProperty(gameObject, 'selected', {
+      get: function get() {
+        return gameObject._selected;
+      },
+      set: function set(newValue) {
+        if (gameObject._selected === newValue) {
+          return;
+        }
+        var previousValue = gameObject._selected;
+        gameObject._selected = newValue;
+        OnButtonStateChange.call(self, gameObject, newValue, previousValue);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    gameObject.selected = false;
+  };
+
   var AddMethods = {
     add: function add(gameObject) {
       this.buttons.push(gameObject);
-      if (this.buttonsType) {
-        var key = gameObject.name;
-        if (key === '') {
-          console.error("".concat(this.parent.constructor.name, ": Button key is an empty string"));
-        } else if (this.buttonMap.hasOwnProperty(key)) {
-          console.error("".concat(this.parent.constructor.name, ": Duplicate button key '").concat(key, "'"));
-        }
-        this.buttonMap[key] = gameObject;
-        this.dataManager.set(key, undefined).set(key, false); // Trigger data event 'changedata'
-      }
 
       //Default: Fire 'click' event when touch released after pressed.
-      gameObject._buttonBehavior = new Button(gameObject, this.clickConfig);
-      gameObject._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer, event) {
-        this.fireEvent('button.click', gameObject, pointer, event);
-      }, this).on('enable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.enable', gameObject);
-      }, this).on('disable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.disable', gameObject);
-      }, this);
-      gameObject.on('pointerover', function (pointer, localX, localY, event) {
-        this.fireEvent('button.over', gameObject, pointer, event);
-      }, this).on('pointerout', function (pointer, event) {
-        this.fireEvent('button.out', gameObject, pointer, event);
-      }, this);
+      if (!gameObject._click) {
+        gameObject._click = new Button(gameObject, this.clickConfig);
+        gameObject._click.on('click', function (buttonBehavior, gameObject, pointer, event) {
+          this.fireEvent('button.click', gameObject, pointer, event);
+        }, this).on('enable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.enable', gameObject);
+        }, this).on('disable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.disable', gameObject);
+        }, this);
+        gameObject.on('pointerover', function (pointer, localX, localY, event) {
+          this.fireEvent('button.over', gameObject, pointer, event);
+        }, this).on('pointerout', function (pointer, event) {
+          this.fireEvent('button.out', gameObject, pointer, event);
+        }, this);
+      }
+      if (this.buttonsType) {
+        if (gameObject.name === undefined) {
+          console.error("".concat(this.parent.constructor.name, ": Option button miss value"));
+        }
+        InjectSelectedProperty.call(this, gameObject);
+      }
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.add(gameObject[i]);
+        this.add(gameObjects[i]);
       }
       return this;
     }
@@ -37776,22 +37811,20 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var RemoveMethods = {
     remove: function remove(gameObject) {
-      RemoveItem(this.buttons, gameObject);
       if (this.buttonsType) {
-        var key = gameObject.name;
-        delete this.buttonMap[key];
-        this.dataManager.remove(key);
+        delete gameObject.selected;
       }
+      RemoveItem(this.buttons, gameObject);
       return this;
     },
     clear: function clear() {
-      this.buttons.length = 0;
       if (this.buttonsType) {
-        for (var key in this.buttonMap) {
-          delete this.buttonMap[key];
-          this.dataManager.remove(key);
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+          delete buttons[i].selected;
         }
       }
+      this.buttons.length = 0;
       return this;
     }
   };
@@ -37829,126 +37862,102 @@
   };
 
   var GetValue$1j = Phaser.Utils.Objects.GetValue;
-  var Initialize = function Initialize(config) {
-    // Assign this.dataManager
-    var dataManager = GetValue$1j(config, 'dataManager', undefined);
-    if (dataManager === undefined) {
-      var parent = this.parent;
-      parent.setDataEnabled();
-      dataManager = parent.data;
-    }
-    this.dataManager = dataManager;
-
-    // Assign this.setValueCallback, this.setValueCallbackScope
-    var setValueCallback, setValueCallbackScope;
-    setValueCallback = GetValue$1j(config, 'setValueCallback', undefined);
-    setValueCallbackScope = GetValue$1j(config, 'setValueCallbackScope', undefined);
-    if (setValueCallback === undefined) {
-      setValueCallback = GetValue$1j(config, 'setButtonStateCallback', undefined);
-      setValueCallbackScope = GetValue$1j(config, 'setButtonStateCallbackScope', undefined);
-    }
-    this.setValueCallback = setValueCallback;
-    this.setValueCallbackScope = setValueCallbackScope;
-
-    // Register event callback
-    dataManager.events.on("changedata", function (parent, key, value, previousValue) {
-      var button = this.buttonMap[key];
-      if (!button) {
-        return;
-      }
-      var callback = this.setValueCallback;
-      var scope = this.setValueCallbackScope;
-      if (callback) {
-        if (scope) {
-          callback.call(scope, button, value, previousValue);
-        } else {
-          callback(button, value, previousValue);
-        }
-      }
-      this.fireEvent('button.statechange', button, value, previousValue);
-    }, this);
-  };
-  var SetTypeMethods = {
+  var ButtonsTypeMethods = {
     setButtonsType: function setButtonsType(config) {
       if (config === undefined) {
         config = {};
       }
       var buttonsType = GetValue$1j(config, 'buttonsType', config.type);
       this.buttonsType = buttonsType;
+      if (!this.buttonsType) {
+        return this;
+      }
+
+      // Assign this.setValueCallback, this.setValueCallbackScope
+      var setValueCallback, setValueCallbackScope;
+      setValueCallback = GetValue$1j(config, 'setValueCallback', undefined);
+      setValueCallbackScope = GetValue$1j(config, 'setValueCallbackScope', undefined);
+      if (setValueCallback === undefined) {
+        setValueCallback = GetValue$1j(config, 'setButtonStateCallback', undefined);
+        setValueCallbackScope = GetValue$1j(config, 'setButtonStateCallbackScope', undefined);
+      }
+      this.setValueCallback = setValueCallback;
+      this.setValueCallbackScope = setValueCallbackScope;
       switch (buttonsType) {
         case 'radio':
-          this.setRadioType(config);
+          this.setRadioType();
           break;
         case 'checkboxes':
-          this.setCheckboxesType(config);
+          this.setCheckboxesType();
           break;
       }
       return this;
     },
-    setRadioType: function setRadioType(config) {
-      Initialize.call(this, config);
-      var radioValue = undefined;
+    setRadioType: function setRadioType() {
       var parent = this.parent,
-        buttons = this.buttons,
-        dataManager = this.dataManager;
+        buttons = this.buttons;
+      parent._value = undefined;
+      var selectedIndex = undefined;
       Object.defineProperty(parent, 'value', {
         get: function get() {
-          return radioValue;
+          return parent._value;
         },
         set: function set(newValue) {
-          if (newValue === radioValue) {
+          if (parent._value === newValue) {
             return;
           }
-          radioValue = newValue;
-          // Update state of button -> Fire `changedata-btnName` event -> setValueCallback                
-          buttons.forEach(function (button) {
-            var key = button.name;
-            var state = dataManager.get(key);
-            if (key === newValue) {
-              if (!state) {
-                dataManager.set(key, true);
+          parent._value = newValue;
+          for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (button.rexSizer.hidden) {
+              continue;
+            }
+            if (selectedIndex === undefined) {
+              if (button.name === newValue) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             } else {
-              if (state) {
-                dataManager.set(key, false);
+              if (selectedIndex === i) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             }
-          });
+          }
         },
         enumerable: true,
         configurable: true
       });
       parent.on('button.click', function (button) {
+        selectedIndex = this.buttons.indexOf(button);
         parent.value = button.name;
-      });
-      // button.click event -> parent.value -> dataManager -> changedata event -> ...
-      // parent.value -> dataManager -> changedata event -> ...
-
+        selectedIndex = undefined;
+      }, this);
       return this;
     },
-    setCheckboxesType: function setCheckboxesType(config) {
-      Initialize.call(this, config);
-      var parent = this.parent,
-        dataManager = this.dataManager;
+    setCheckboxesType: function setCheckboxesType() {
+      var parent = this.parent;
       parent.on('button.click', function (button) {
-        dataManager.toggle(button.name);
+        button.selected = !button.selected;
       });
-      // button.click event -> dataManager -> changedata event -> ...
-      // dataManager.set() -> changedata event -> ...
-
       return this;
     },
     // Common
     clearAllButtonsState: function clearAllButtonsState() {
-      for (var key in this.buttonMap) {
-        this.dataManager.set(key, false);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        buttons[i].selected = false;
       }
       return this;
     },
     getAllButtonsState: function getAllButtonsState() {
       var states = {};
-      for (var key in this.buttonMap) {
-        states[key] = this.dataManager.get(key);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        states[button.name] = button.selected;
       }
       return states;
     },
@@ -37965,11 +37974,25 @@
       if (state === undefined) {
         state = true;
       }
-      this.dataManager.set(name, state);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          button.selected = state;
+          break;
+        }
+      }
       return this;
     },
     getButtonState: function getButtonState(name) {
-      return this.dataManager.get(name);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          return button.selected;
+        }
+      }
+      return undefined;
     }
   };
 
@@ -38034,10 +38057,10 @@
       if (index === undefined || typeof index === 'boolean') {
         enabled = index;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.setEnable(enabled);
+          buttons[i]._click.setEnable(enabled);
         }
       } else {
-        this.getButton(index)._buttonBehavior.setEnable(enabled);
+        this.getButton(index)._click.setEnable(enabled);
       }
       return this;
     },
@@ -38046,10 +38069,10 @@
       var buttons = this.buttons;
       if (index === undefined || typeof index === 'boolean') {
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.toggleEnable();
+          buttons[i]._click.toggleEnable();
         }
       } else {
-        this.getButton(index)._buttonBehavior.toggleEnable();
+        this.getButton(index)._click.toggleEnable();
       }
       return this;
     },
@@ -38057,7 +38080,7 @@
       if (index === undefined) {
         index = 0;
       }
-      return this.getButton(index)._buttonBehavior.enable;
+      return this.getButton(index)._click.enable;
     },
     emitButtonClick: function emitButtonClick(index) {
       // index or button game object
@@ -38101,7 +38124,6 @@
       this.clickConfig = config.clickConfig;
       this.buttonsType = undefined;
       this.buttons = [];
-      this.buttonMap = {};
     }
     _createClass(ButtonGroup, [{
       key: "destroy",
@@ -38117,7 +38139,7 @@
   var methods$e = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods$2, methods$e);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods$2, methods$e);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -38935,8 +38957,8 @@
     }
   };
 
-  var Methods$6 = {};
-  Object.assign(Methods$6, ButtonMethods$1, ModalMethods);
+  var Methods$7 = {};
+  Object.assign(Methods$7, ButtonMethods$1, ModalMethods);
 
   var GetValue$1e = Phaser.Utils.Objects.GetValue;
   var Dialog = /*#__PURE__*/function (_Sizer) {
@@ -39238,7 +39260,7 @@
       dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
     });
   };
-  Object.assign(Dialog.prototype, Methods$6);
+  Object.assign(Dialog.prototype, Methods$7);
 
   ObjectFactory.register('dialog', function (config) {
     var gameObject = new Dialog(this.scene, config);
@@ -39381,6 +39403,105 @@
     var gameObject = new SimpleLabel(scene, config, creators);
     scene.add.existing(gameObject);
     return gameObject;
+  };
+
+  var ResetDisplayContent = function ResetDisplayContent(config) {
+    if (config === undefined) {
+      config = {};
+    }
+    ResetTitle.call(this, config);
+    ResetContent.call(this, config);
+    ResetActions.call(this, config);
+    ResetChoices.call(this, config);
+    return this;
+  };
+  var ResetTitle = function ResetTitle(config) {
+    var title = this.childrenMap.title;
+    title.resetDisplayContent(config.title);
+  };
+  var ResetContent = function ResetContent(config) {
+    var content = this.childrenMap.content;
+    if (content.resetDisplayContent) {
+      // Label
+      content.resetDisplayContent(config.content);
+    } else {
+      // TextArea
+      var text = config.content || '';
+      content.setText(text);
+    }
+  };
+  var ResetActions = function ResetActions(config) {
+    var actionButtons = this.childrenMap.actions;
+    if (!actionButtons) {
+      return;
+    }
+    var buttonContentArray = config.buttons;
+    if (!buttonContentArray) {
+      var buttonA = actionButtons[0];
+      if (buttonA) {
+        buttonA.resetDisplayContent(config.buttonA);
+      }
+      var buttonB = actionButtons[1];
+      if (buttonB) {
+        buttonB.resetDisplayContent(config.buttonB);
+      }
+    } else {
+      var scene = this.scene;
+      var defaultActionConfig = this.defaultActionConfig;
+      var defaultActionButtonCreator = this.defaultActionButtonCreator;
+      for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
+        var buttonContent = buttonContentArray[i];
+        var button = actionButtons[i];
+        if (!button) {
+          button = CreateLabel$1(scene, defaultActionConfig, defaultActionButtonCreator);
+          this.addAction(button);
+        }
+        button.show().resetDisplayContent(buttonContent);
+      }
+      this.buttonMode = buttonContentArray.length;
+      for (var i = buttonContentArray.length - 1, cnt = actionButtons.length; i < cnt; i++) {
+        actionButtons[i].hide();
+      }
+    }
+  };
+  var ResetChoices = function ResetChoices(config) {
+    var choices = this.childrenMap.choices;
+    if (!choices) {
+      return;
+    }
+    var buttonContentArray = config.choices;
+    if (!buttonContentArray) {
+      buttonContentArray = [];
+    }
+    var scene = this.scene;
+    var defaultChoiceConfig = this.defaultChoiceConfig;
+    var defaultActionButtonCreator = this.defaultActionButtonCreator;
+    for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
+      var buttonContent = buttonContentArray[i];
+      var button = choices[i];
+      if (!button) {
+        button = CreateLabel$1(scene, defaultChoiceConfig, defaultActionButtonCreator);
+        this.addChoice(button);
+      }
+      button.show().resetDisplayContent(buttonContent);
+    }
+    for (var i = buttonContentArray.length - 1, cnt = choices.length; i < cnt; i++) {
+      choices[i].hide();
+    }
+  };
+
+  var OnPointerOverCallback = function OnPointerOverCallback(button) {
+    if (button.setHoverState) {
+      button.setHoverState(true);
+    }
+  };
+  var OnPointerOutCallback = function OnPointerOutCallback(button) {
+    if (button.setHoverState) {
+      button.setHoverState(false);
+    }
+  };
+  var RegisterEvents = function RegisterEvents() {
+    this.on('action.over', OnPointerOverCallback).on('action.out', OnPointerOutCallback).on('choice.over', OnPointerOverCallback).on('choice.out', OnPointerOutCallback);
   };
 
   var SCROLLMODE$1 = {
@@ -41548,13 +41669,13 @@
     }]);
     return Scrollable;
   }(Sizer);
-  var Methods$5 = {
+  var Methods$6 = {
     resizeController: ResizeController,
     updateController: UpdateController
   };
 
   // mixin
-  Object.assign(Scrollable.prototype, Methods$5);
+  Object.assign(Scrollable.prototype, Methods$6);
 
   var TextType = 0;
   var TagTextType = 1;
@@ -41793,7 +41914,7 @@
     }
   };
 
-  var Methods$4 = {
+  var Methods$5 = {
     setText: SetText$1,
     updateTextObject: UpdateTextObject,
     preLayout: PreLayout,
@@ -42073,7 +42194,7 @@
   var CreateDefaultTextObject = function CreateDefaultTextObject(scene) {
     return scene.add.text(0, 0, '');
   };
-  Object.assign(TextBlock.prototype, Methods$4);
+  Object.assign(TextBlock.prototype, Methods$5);
 
   var InjectProperties$1 = function InjectProperties(textBlock) {
     Object.defineProperty(textBlock, 'childOY', {
@@ -42281,14 +42402,16 @@
           SetValue(config, 'proportion.content', 1);
         }
       }
+      var defaultButtonConfig = config.button;
+      var buttonAConfig = config.buttonA || defaultButtonConfig;
+      var buttonBConfig = config.buttonB || defaultButtonConfig;
       var buttonMode = config.buttonMode;
       if (buttonMode === undefined) {
-        buttonMode = !!config.buttonA && !!config.buttonB ? 2 : !!config.buttonA || !!config.button ? 1 : 0;
+        buttonMode = !!buttonAConfig && !!buttonBConfig ? 2 : !!buttonAConfig ? 1 : 0;
       }
-      var buttonAConfig = config.buttonA || config.button;
-      var buttonACreators = creators.buttonA || creators.button;
-      var buttonBConfig = config.buttonB || config.button;
-      var buttonBCreators = creators.buttonB || creators.button;
+      var defaultButtonCreator = creators.button;
+      var buttonACreators = creators.buttonA || defaultButtonCreator;
+      var buttonBCreators = creators.buttonB || defaultButtonCreator;
       switch (buttonMode) {
         case 2:
           config.actions = [CreateLabel$1(scene, buttonAConfig, buttonACreators), CreateLabel$1(scene, buttonBConfig, buttonBCreators)];
@@ -42296,57 +42419,32 @@
         case 1:
           config.actions = [CreateLabel$1(scene, buttonAConfig, buttonACreators)];
           break;
+        case 0:
+          break;
         default:
           config.actions = [];
           break;
       }
+      var defaultChoiceConfig = config.choice;
+      if (defaultChoiceConfig) {
+        config.choices = [];
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexConfirmDialog';
       _this.buttonMode = buttonMode;
+      _this.defaultActionConfig = defaultButtonConfig;
+      _this.defaultActionButtonCreator = defaultButtonCreator;
+      _this.defaultChoiceConfig = defaultChoiceConfig;
+      _this.defaultChoiceCreator = creators.choice;
       var buttons = _this.childrenMap.actions;
-      _this.addChildrenMap('buttonA', buttons[0]);
-      _this.addChildrenMap('buttonB', buttons[1]);
+      _this.addChildrenMap('buttonA', buttons ? buttons[0] : null);
+      _this.addChildrenMap('buttonB', buttons ? buttons[1] : null);
 
       // Interactive
-      _this.on('action.over', function (button, index, pointer, event) {
-        if (button.setHoverState) {
-          button.setHoverState(true);
-        }
-      }).on('action.out', function (button, index, pointer, event) {
-        if (button.setHoverState) {
-          button.setHoverState(false);
-        }
-      });
+      RegisterEvents.call(_assertThisInitialized(_this));
       return _this;
     }
     _createClass(ConfirmDialog, [{
-      key: "resetDisplayContent",
-      value: function resetDisplayContent(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        var title = this.childrenMap.title;
-        title.resetDisplayContent(config.title);
-        var content = this.childrenMap.content;
-        if (content.resetDisplayContent) {
-          // Label
-          content.resetDisplayContent(config.content);
-        } else {
-          // TextArea
-          var text = config.content || '';
-          content.setText(text);
-        }
-        var buttonA = this.childrenMap.actions[0];
-        if (buttonA) {
-          buttonA.resetDisplayContent(config.buttonA);
-        }
-        var buttonB = this.childrenMap.actions[1];
-        if (buttonB) {
-          buttonB.resetDisplayContent(config.buttonB);
-        }
-        return this;
-      }
-    }, {
       key: "modal",
       value: function modal(config, onClose) {
         if (IsFunction(config)) {
@@ -42369,6 +42467,10 @@
     }]);
     return ConfirmDialog;
   }(Dialog);
+  var Methods$4 = {
+    resetDisplayContent: ResetDisplayContent
+  };
+  Object.assign(ConfirmDialog.prototype, Methods$4);
 
   ObjectFactory.register('confirmDialog', function (config, creators) {
     var gameObject = new ConfirmDialog(this.scene, config, creators);
@@ -52345,23 +52447,21 @@
     return gameObject;
   };
 
-  var GetOptionText = function GetOptionText(options, value) {
+  var GetOptionIndex = function GetOptionIndex(options, value) {
     for (var i = 0, cnt = options.length; i < cnt; i++) {
       var option = options[i];
       if (option.value === value) {
-        return option.text;
+        return i;
       }
     }
     return undefined;
   };
-  var GetOptionValue = function GetOptionValue(options, text) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-      var option = options[i];
-      if (option.text === text) {
-        return option.value;
-      }
+  var GetOptionText = function GetOptionText(options, value) {
+    var index = GetOptionIndex(options, value);
+    if (index == null) {
+      return undefined;
     }
-    return undefined;
+    return options[index].text;
   };
 
   var ListInput = /*#__PURE__*/function (_InputFiledBase) {
@@ -52382,8 +52482,12 @@
       });
       _this.addChildrenMap('list', list);
       list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-        var value = GetOptionValue(list.options, button.text);
-        this.setValue(value);
+        var option = list.options[index];
+        if (!option) {
+          return; // ??
+        }
+
+        this.setValue(option.value);
       }, _assertThisInitialized(_this));
       return _this;
     }
@@ -52430,13 +52534,13 @@
     return gameObject;
   };
 
-  var SetButtonsActiveStateByText = function SetButtonsActiveStateByText(buttons, text) {
+  var SetButtonsActiveStateByIndex = function SetButtonsActiveStateByIndex(buttons, index) {
     for (var i = 0, cnt = buttons.length; i < cnt; i++) {
       var button = buttons[i];
       if (!button) {
         continue;
       }
-      button.setActiveState(button.text === text);
+      button.setActiveState(i === index);
     }
   };
 
@@ -52468,8 +52572,14 @@
       });
       _this.addChildrenMap('list', list);
       list.on('button.click', function (button, index, pointer, event) {
-        var value = GetOptionValue(list.options, button.text);
-        this.setValue(value);
+        var option = list.options[index];
+        if (!option) {
+          return; // ??
+        }
+
+        this._selectedIndex = index;
+        this.setValue(option.value);
+        this._selectedIndex = undefined;
       }, _assertThisInitialized(_this));
       return _this;
     }
@@ -52487,8 +52597,11 @@
         }
 
         var list = this.childrenMap.list;
-        var text = GetOptionText(list.options, value);
-        SetButtonsActiveStateByText(list.childrenMap.buttons, text);
+        var index = this._selectedIndex; // See list's 'button.click' event
+        if (index === undefined) {
+          index = GetOptionIndex(list.options, value);
+        }
+        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         _set(_getPrototypeOf(ButtonsInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {

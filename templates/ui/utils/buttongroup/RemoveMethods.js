@@ -2,26 +2,24 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 
 export default {
     remove(gameObject) {
-        RemoveItem(this.buttons, gameObject);
-
         if (this.buttonsType) {
-            var key = gameObject.name;
-            delete this.buttonMap[key];
-            this.dataManager.remove(key);
+            delete gameObject.selected;
         }
+
+        RemoveItem(this.buttons, gameObject);
 
         return this;
     },
 
     clear() {
-        this.buttons.length = 0;
-
         if (this.buttonsType) {
-            for (var key in this.buttonMap) {
-                delete this.buttonMap[key];
-                this.dataManager.remove(key);
+            var buttons = this.buttons;
+            for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+                delete buttons[i].selected;
             }
         }
+
+        this.buttons.length = 0;
 
         return this;
     }

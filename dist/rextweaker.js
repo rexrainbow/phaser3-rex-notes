@@ -21748,39 +21748,74 @@
     }
   };
 
+  var OnButtonStateChange = function OnButtonStateChange(button, value, previousValue) {
+    if (!button) {
+      return;
+    }
+    var callback = this.setValueCallback;
+    var scope = this.setValueCallbackScope;
+    if (callback) {
+      if (scope) {
+        callback.call(scope, button, value, previousValue);
+      } else {
+        callback(button, value, previousValue);
+      }
+    }
+    this.fireEvent('button.statechange', button, value, previousValue);
+  };
+
+  var InjectSelectedProperty = function InjectSelectedProperty(gameObject) {
+    var self = this;
+    gameObject._selected = undefined;
+    Object.defineProperty(gameObject, 'selected', {
+      get: function get() {
+        return gameObject._selected;
+      },
+      set: function set(newValue) {
+        if (gameObject._selected === newValue) {
+          return;
+        }
+        var previousValue = gameObject._selected;
+        gameObject._selected = newValue;
+        OnButtonStateChange.call(self, gameObject, newValue, previousValue);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    gameObject.selected = false;
+  };
+
   var AddMethods = {
     add: function add(gameObject) {
       this.buttons.push(gameObject);
-      if (this.buttonsType) {
-        var key = gameObject.name;
-        if (key === '') {
-          console.error("".concat(this.parent.constructor.name, ": Button key is an empty string"));
-        } else if (this.buttonMap.hasOwnProperty(key)) {
-          console.error("".concat(this.parent.constructor.name, ": Duplicate button key '").concat(key, "'"));
-        }
-        this.buttonMap[key] = gameObject;
-        this.dataManager.set(key, undefined).set(key, false); // Trigger data event 'changedata'
-      }
 
       //Default: Fire 'click' event when touch released after pressed.
-      gameObject._buttonBehavior = new Button(gameObject, this.clickConfig);
-      gameObject._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer, event) {
-        this.fireEvent('button.click', gameObject, pointer, event);
-      }, this).on('enable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.enable', gameObject);
-      }, this).on('disable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.disable', gameObject);
-      }, this);
-      gameObject.on('pointerover', function (pointer, localX, localY, event) {
-        this.fireEvent('button.over', gameObject, pointer, event);
-      }, this).on('pointerout', function (pointer, event) {
-        this.fireEvent('button.out', gameObject, pointer, event);
-      }, this);
+      if (!gameObject._click) {
+        gameObject._click = new Button(gameObject, this.clickConfig);
+        gameObject._click.on('click', function (buttonBehavior, gameObject, pointer, event) {
+          this.fireEvent('button.click', gameObject, pointer, event);
+        }, this).on('enable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.enable', gameObject);
+        }, this).on('disable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.disable', gameObject);
+        }, this);
+        gameObject.on('pointerover', function (pointer, localX, localY, event) {
+          this.fireEvent('button.over', gameObject, pointer, event);
+        }, this).on('pointerout', function (pointer, event) {
+          this.fireEvent('button.out', gameObject, pointer, event);
+        }, this);
+      }
+      if (this.buttonsType) {
+        if (gameObject.name === undefined) {
+          console.error("".concat(this.parent.constructor.name, ": Option button miss value"));
+        }
+        InjectSelectedProperty.call(this, gameObject);
+      }
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.add(gameObject[i]);
+        this.add(gameObjects[i]);
       }
       return this;
     }
@@ -21789,22 +21824,20 @@
   var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var RemoveMethods = {
     remove: function remove(gameObject) {
-      RemoveItem$2(this.buttons, gameObject);
       if (this.buttonsType) {
-        var key = gameObject.name;
-        delete this.buttonMap[key];
-        this.dataManager.remove(key);
+        delete gameObject.selected;
       }
+      RemoveItem$2(this.buttons, gameObject);
       return this;
     },
     clear: function clear() {
-      this.buttons.length = 0;
       if (this.buttonsType) {
-        for (var key in this.buttonMap) {
-          delete this.buttonMap[key];
-          this.dataManager.remove(key);
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+          delete buttons[i].selected;
         }
       }
+      this.buttons.length = 0;
       return this;
     }
   };
@@ -21842,126 +21875,102 @@
   };
 
   var GetValue$E = Phaser.Utils.Objects.GetValue;
-  var Initialize = function Initialize(config) {
-    // Assign this.dataManager
-    var dataManager = GetValue$E(config, 'dataManager', undefined);
-    if (dataManager === undefined) {
-      var parent = this.parent;
-      parent.setDataEnabled();
-      dataManager = parent.data;
-    }
-    this.dataManager = dataManager;
-
-    // Assign this.setValueCallback, this.setValueCallbackScope
-    var setValueCallback, setValueCallbackScope;
-    setValueCallback = GetValue$E(config, 'setValueCallback', undefined);
-    setValueCallbackScope = GetValue$E(config, 'setValueCallbackScope', undefined);
-    if (setValueCallback === undefined) {
-      setValueCallback = GetValue$E(config, 'setButtonStateCallback', undefined);
-      setValueCallbackScope = GetValue$E(config, 'setButtonStateCallbackScope', undefined);
-    }
-    this.setValueCallback = setValueCallback;
-    this.setValueCallbackScope = setValueCallbackScope;
-
-    // Register event callback
-    dataManager.events.on("changedata", function (parent, key, value, previousValue) {
-      var button = this.buttonMap[key];
-      if (!button) {
-        return;
-      }
-      var callback = this.setValueCallback;
-      var scope = this.setValueCallbackScope;
-      if (callback) {
-        if (scope) {
-          callback.call(scope, button, value, previousValue);
-        } else {
-          callback(button, value, previousValue);
-        }
-      }
-      this.fireEvent('button.statechange', button, value, previousValue);
-    }, this);
-  };
-  var SetTypeMethods = {
+  var ButtonsTypeMethods = {
     setButtonsType: function setButtonsType(config) {
       if (config === undefined) {
         config = {};
       }
       var buttonsType = GetValue$E(config, 'buttonsType', config.type);
       this.buttonsType = buttonsType;
+      if (!this.buttonsType) {
+        return this;
+      }
+
+      // Assign this.setValueCallback, this.setValueCallbackScope
+      var setValueCallback, setValueCallbackScope;
+      setValueCallback = GetValue$E(config, 'setValueCallback', undefined);
+      setValueCallbackScope = GetValue$E(config, 'setValueCallbackScope', undefined);
+      if (setValueCallback === undefined) {
+        setValueCallback = GetValue$E(config, 'setButtonStateCallback', undefined);
+        setValueCallbackScope = GetValue$E(config, 'setButtonStateCallbackScope', undefined);
+      }
+      this.setValueCallback = setValueCallback;
+      this.setValueCallbackScope = setValueCallbackScope;
       switch (buttonsType) {
         case 'radio':
-          this.setRadioType(config);
+          this.setRadioType();
           break;
         case 'checkboxes':
-          this.setCheckboxesType(config);
+          this.setCheckboxesType();
           break;
       }
       return this;
     },
-    setRadioType: function setRadioType(config) {
-      Initialize.call(this, config);
-      var radioValue = undefined;
+    setRadioType: function setRadioType() {
       var parent = this.parent,
-        buttons = this.buttons,
-        dataManager = this.dataManager;
+        buttons = this.buttons;
+      parent._value = undefined;
+      var selectedIndex = undefined;
       Object.defineProperty(parent, 'value', {
         get: function get() {
-          return radioValue;
+          return parent._value;
         },
         set: function set(newValue) {
-          if (newValue === radioValue) {
+          if (parent._value === newValue) {
             return;
           }
-          radioValue = newValue;
-          // Update state of button -> Fire `changedata-btnName` event -> setValueCallback                
-          buttons.forEach(function (button) {
-            var key = button.name;
-            var state = dataManager.get(key);
-            if (key === newValue) {
-              if (!state) {
-                dataManager.set(key, true);
+          parent._value = newValue;
+          for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (button.rexSizer.hidden) {
+              continue;
+            }
+            if (selectedIndex === undefined) {
+              if (button.name === newValue) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             } else {
-              if (state) {
-                dataManager.set(key, false);
+              if (selectedIndex === i) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             }
-          });
+          }
         },
         enumerable: true,
         configurable: true
       });
       parent.on('button.click', function (button) {
+        selectedIndex = this.buttons.indexOf(button);
         parent.value = button.name;
-      });
-      // button.click event -> parent.value -> dataManager -> changedata event -> ...
-      // parent.value -> dataManager -> changedata event -> ...
-
+        selectedIndex = undefined;
+      }, this);
       return this;
     },
-    setCheckboxesType: function setCheckboxesType(config) {
-      Initialize.call(this, config);
-      var parent = this.parent,
-        dataManager = this.dataManager;
+    setCheckboxesType: function setCheckboxesType() {
+      var parent = this.parent;
       parent.on('button.click', function (button) {
-        dataManager.toggle(button.name);
+        button.selected = !button.selected;
       });
-      // button.click event -> dataManager -> changedata event -> ...
-      // dataManager.set() -> changedata event -> ...
-
       return this;
     },
     // Common
     clearAllButtonsState: function clearAllButtonsState() {
-      for (var key in this.buttonMap) {
-        this.dataManager.set(key, false);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        buttons[i].selected = false;
       }
       return this;
     },
     getAllButtonsState: function getAllButtonsState() {
       var states = {};
-      for (var key in this.buttonMap) {
-        states[key] = this.dataManager.get(key);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        states[button.name] = button.selected;
       }
       return states;
     },
@@ -21978,11 +21987,25 @@
       if (state === undefined) {
         state = true;
       }
-      this.dataManager.set(name, state);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          button.selected = state;
+          break;
+        }
+      }
       return this;
     },
     getButtonState: function getButtonState(name) {
-      return this.dataManager.get(name);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          return button.selected;
+        }
+      }
+      return undefined;
     }
   };
 
@@ -22047,10 +22070,10 @@
       if (index === undefined || typeof index === 'boolean') {
         enabled = index;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.setEnable(enabled);
+          buttons[i]._click.setEnable(enabled);
         }
       } else {
-        this.getButton(index)._buttonBehavior.setEnable(enabled);
+        this.getButton(index)._click.setEnable(enabled);
       }
       return this;
     },
@@ -22059,10 +22082,10 @@
       var buttons = this.buttons;
       if (index === undefined || typeof index === 'boolean') {
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.toggleEnable();
+          buttons[i]._click.toggleEnable();
         }
       } else {
-        this.getButton(index)._buttonBehavior.toggleEnable();
+        this.getButton(index)._click.toggleEnable();
       }
       return this;
     },
@@ -22070,7 +22093,7 @@
       if (index === undefined) {
         index = 0;
       }
-      return this.getButton(index)._buttonBehavior.enable;
+      return this.getButton(index)._click.enable;
     },
     emitButtonClick: function emitButtonClick(index) {
       // index or button game object
@@ -22114,7 +22137,6 @@
       this.clickConfig = config.clickConfig;
       this.buttonsType = undefined;
       this.buttons = [];
-      this.buttonMap = {};
     }
     _createClass(ButtonGroup, [{
       key: "destroy",
@@ -22130,7 +22152,7 @@
   var methods$b = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods, methods$b);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods, methods$b);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -26982,23 +27004,21 @@
     return gameObject;
   };
 
-  var GetOptionText = function GetOptionText(options, value) {
+  var GetOptionIndex = function GetOptionIndex(options, value) {
     for (var i = 0, cnt = options.length; i < cnt; i++) {
       var option = options[i];
       if (option.value === value) {
-        return option.text;
+        return i;
       }
     }
     return undefined;
   };
-  var GetOptionValue = function GetOptionValue(options, text) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-      var option = options[i];
-      if (option.text === text) {
-        return option.value;
-      }
+  var GetOptionText = function GetOptionText(options, value) {
+    var index = GetOptionIndex(options, value);
+    if (index == null) {
+      return undefined;
     }
-    return undefined;
+    return options[index].text;
   };
 
   var ListInput = /*#__PURE__*/function (_InputFiledBase) {
@@ -27019,8 +27039,12 @@
       });
       _this.addChildrenMap('list', list);
       list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-        var value = GetOptionValue(list.options, button.text);
-        this.setValue(value);
+        var option = list.options[index];
+        if (!option) {
+          return; // ??
+        }
+
+        this.setValue(option.value);
       }, _assertThisInitialized(_this));
       return _this;
     }
@@ -27067,13 +27091,13 @@
     return gameObject;
   };
 
-  var SetButtonsActiveStateByText = function SetButtonsActiveStateByText(buttons, text) {
+  var SetButtonsActiveStateByIndex = function SetButtonsActiveStateByIndex(buttons, index) {
     for (var i = 0, cnt = buttons.length; i < cnt; i++) {
       var button = buttons[i];
       if (!button) {
         continue;
       }
-      button.setActiveState(button.text === text);
+      button.setActiveState(i === index);
     }
   };
 
@@ -27105,8 +27129,14 @@
       });
       _this.addChildrenMap('list', list);
       list.on('button.click', function (button, index, pointer, event) {
-        var value = GetOptionValue(list.options, button.text);
-        this.setValue(value);
+        var option = list.options[index];
+        if (!option) {
+          return; // ??
+        }
+
+        this._selectedIndex = index;
+        this.setValue(option.value);
+        this._selectedIndex = undefined;
       }, _assertThisInitialized(_this));
       return _this;
     }
@@ -27124,8 +27154,11 @@
         }
 
         var list = this.childrenMap.list;
-        var text = GetOptionText(list.options, value);
-        SetButtonsActiveStateByText(list.childrenMap.buttons, text);
+        var index = this._selectedIndex; // See list's 'button.click' event
+        if (index === undefined) {
+          index = GetOptionIndex(list.options, value);
+        }
+        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         _set(_getPrototypeOf(ButtonsInput.prototype), "value", value, this, true); // Fire 'valuechange' event
       }
     }, {

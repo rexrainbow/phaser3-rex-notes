@@ -11052,39 +11052,74 @@
     }
   };
 
+  var OnButtonStateChange = function OnButtonStateChange(button, value, previousValue) {
+    if (!button) {
+      return;
+    }
+    var callback = this.setValueCallback;
+    var scope = this.setValueCallbackScope;
+    if (callback) {
+      if (scope) {
+        callback.call(scope, button, value, previousValue);
+      } else {
+        callback(button, value, previousValue);
+      }
+    }
+    this.fireEvent('button.statechange', button, value, previousValue);
+  };
+
+  var InjectSelectedProperty = function InjectSelectedProperty(gameObject) {
+    var self = this;
+    gameObject._selected = undefined;
+    Object.defineProperty(gameObject, 'selected', {
+      get: function get() {
+        return gameObject._selected;
+      },
+      set: function set(newValue) {
+        if (gameObject._selected === newValue) {
+          return;
+        }
+        var previousValue = gameObject._selected;
+        gameObject._selected = newValue;
+        OnButtonStateChange.call(self, gameObject, newValue, previousValue);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    gameObject.selected = false;
+  };
+
   var AddMethods = {
     add: function add(gameObject) {
       this.buttons.push(gameObject);
-      if (this.buttonsType) {
-        var key = gameObject.name;
-        if (key === '') {
-          console.error("".concat(this.parent.constructor.name, ": Button key is an empty string"));
-        } else if (this.buttonMap.hasOwnProperty(key)) {
-          console.error("".concat(this.parent.constructor.name, ": Duplicate button key '").concat(key, "'"));
-        }
-        this.buttonMap[key] = gameObject;
-        this.dataManager.set(key, undefined).set(key, false); // Trigger data event 'changedata'
-      }
 
       //Default: Fire 'click' event when touch released after pressed.
-      gameObject._buttonBehavior = new Button(gameObject, this.clickConfig);
-      gameObject._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer, event) {
-        this.fireEvent('button.click', gameObject, pointer, event);
-      }, this).on('enable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.enable', gameObject);
-      }, this).on('disable', function (buttonBehavior, gameObject) {
-        this.fireEvent('button.disable', gameObject);
-      }, this);
-      gameObject.on('pointerover', function (pointer, localX, localY, event) {
-        this.fireEvent('button.over', gameObject, pointer, event);
-      }, this).on('pointerout', function (pointer, event) {
-        this.fireEvent('button.out', gameObject, pointer, event);
-      }, this);
+      if (!gameObject._click) {
+        gameObject._click = new Button(gameObject, this.clickConfig);
+        gameObject._click.on('click', function (buttonBehavior, gameObject, pointer, event) {
+          this.fireEvent('button.click', gameObject, pointer, event);
+        }, this).on('enable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.enable', gameObject);
+        }, this).on('disable', function (buttonBehavior, gameObject) {
+          this.fireEvent('button.disable', gameObject);
+        }, this);
+        gameObject.on('pointerover', function (pointer, localX, localY, event) {
+          this.fireEvent('button.over', gameObject, pointer, event);
+        }, this).on('pointerout', function (pointer, event) {
+          this.fireEvent('button.out', gameObject, pointer, event);
+        }, this);
+      }
+      if (this.buttonsType) {
+        if (gameObject.name === undefined) {
+          console.error("".concat(this.parent.constructor.name, ": Option button miss value"));
+        }
+        InjectSelectedProperty.call(this, gameObject);
+      }
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.add(gameObject[i]);
+        this.add(gameObjects[i]);
       }
       return this;
     }
@@ -11093,22 +11128,20 @@
   var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var RemoveMethods = {
     remove: function remove(gameObject) {
-      RemoveItem$3(this.buttons, gameObject);
       if (this.buttonsType) {
-        var key = gameObject.name;
-        delete this.buttonMap[key];
-        this.dataManager.remove(key);
+        delete gameObject.selected;
       }
+      RemoveItem$3(this.buttons, gameObject);
       return this;
     },
     clear: function clear() {
-      this.buttons.length = 0;
       if (this.buttonsType) {
-        for (var key in this.buttonMap) {
-          delete this.buttonMap[key];
-          this.dataManager.remove(key);
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+          delete buttons[i].selected;
         }
       }
+      this.buttons.length = 0;
       return this;
     }
   };
@@ -11146,126 +11179,102 @@
   };
 
   var GetValue$G = Phaser.Utils.Objects.GetValue;
-  var Initialize = function Initialize(config) {
-    // Assign this.dataManager
-    var dataManager = GetValue$G(config, 'dataManager', undefined);
-    if (dataManager === undefined) {
-      var parent = this.parent;
-      parent.setDataEnabled();
-      dataManager = parent.data;
-    }
-    this.dataManager = dataManager;
-
-    // Assign this.setValueCallback, this.setValueCallbackScope
-    var setValueCallback, setValueCallbackScope;
-    setValueCallback = GetValue$G(config, 'setValueCallback', undefined);
-    setValueCallbackScope = GetValue$G(config, 'setValueCallbackScope', undefined);
-    if (setValueCallback === undefined) {
-      setValueCallback = GetValue$G(config, 'setButtonStateCallback', undefined);
-      setValueCallbackScope = GetValue$G(config, 'setButtonStateCallbackScope', undefined);
-    }
-    this.setValueCallback = setValueCallback;
-    this.setValueCallbackScope = setValueCallbackScope;
-
-    // Register event callback
-    dataManager.events.on("changedata", function (parent, key, value, previousValue) {
-      var button = this.buttonMap[key];
-      if (!button) {
-        return;
-      }
-      var callback = this.setValueCallback;
-      var scope = this.setValueCallbackScope;
-      if (callback) {
-        if (scope) {
-          callback.call(scope, button, value, previousValue);
-        } else {
-          callback(button, value, previousValue);
-        }
-      }
-      this.fireEvent('button.statechange', button, value, previousValue);
-    }, this);
-  };
-  var SetTypeMethods = {
+  var ButtonsTypeMethods = {
     setButtonsType: function setButtonsType(config) {
       if (config === undefined) {
         config = {};
       }
       var buttonsType = GetValue$G(config, 'buttonsType', config.type);
       this.buttonsType = buttonsType;
+      if (!this.buttonsType) {
+        return this;
+      }
+
+      // Assign this.setValueCallback, this.setValueCallbackScope
+      var setValueCallback, setValueCallbackScope;
+      setValueCallback = GetValue$G(config, 'setValueCallback', undefined);
+      setValueCallbackScope = GetValue$G(config, 'setValueCallbackScope', undefined);
+      if (setValueCallback === undefined) {
+        setValueCallback = GetValue$G(config, 'setButtonStateCallback', undefined);
+        setValueCallbackScope = GetValue$G(config, 'setButtonStateCallbackScope', undefined);
+      }
+      this.setValueCallback = setValueCallback;
+      this.setValueCallbackScope = setValueCallbackScope;
       switch (buttonsType) {
         case 'radio':
-          this.setRadioType(config);
+          this.setRadioType();
           break;
         case 'checkboxes':
-          this.setCheckboxesType(config);
+          this.setCheckboxesType();
           break;
       }
       return this;
     },
-    setRadioType: function setRadioType(config) {
-      Initialize.call(this, config);
-      var radioValue = undefined;
+    setRadioType: function setRadioType() {
       var parent = this.parent,
-        buttons = this.buttons,
-        dataManager = this.dataManager;
+        buttons = this.buttons;
+      parent._value = undefined;
+      var selectedIndex = undefined;
       Object.defineProperty(parent, 'value', {
         get: function get() {
-          return radioValue;
+          return parent._value;
         },
         set: function set(newValue) {
-          if (newValue === radioValue) {
+          if (parent._value === newValue) {
             return;
           }
-          radioValue = newValue;
-          // Update state of button -> Fire `changedata-btnName` event -> setValueCallback                
-          buttons.forEach(function (button) {
-            var key = button.name;
-            var state = dataManager.get(key);
-            if (key === newValue) {
-              if (!state) {
-                dataManager.set(key, true);
+          parent._value = newValue;
+          for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (button.rexSizer.hidden) {
+              continue;
+            }
+            if (selectedIndex === undefined) {
+              if (button.name === newValue) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             } else {
-              if (state) {
-                dataManager.set(key, false);
+              if (selectedIndex === i) {
+                button.selected = true;
+              } else {
+                button.selected = false;
               }
             }
-          });
+          }
         },
         enumerable: true,
         configurable: true
       });
       parent.on('button.click', function (button) {
+        selectedIndex = this.buttons.indexOf(button);
         parent.value = button.name;
-      });
-      // button.click event -> parent.value -> dataManager -> changedata event -> ...
-      // parent.value -> dataManager -> changedata event -> ...
-
+        selectedIndex = undefined;
+      }, this);
       return this;
     },
-    setCheckboxesType: function setCheckboxesType(config) {
-      Initialize.call(this, config);
-      var parent = this.parent,
-        dataManager = this.dataManager;
+    setCheckboxesType: function setCheckboxesType() {
+      var parent = this.parent;
       parent.on('button.click', function (button) {
-        dataManager.toggle(button.name);
+        button.selected = !button.selected;
       });
-      // button.click event -> dataManager -> changedata event -> ...
-      // dataManager.set() -> changedata event -> ...
-
       return this;
     },
     // Common
     clearAllButtonsState: function clearAllButtonsState() {
-      for (var key in this.buttonMap) {
-        this.dataManager.set(key, false);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        buttons[i].selected = false;
       }
       return this;
     },
     getAllButtonsState: function getAllButtonsState() {
       var states = {};
-      for (var key in this.buttonMap) {
-        states[key] = this.dataManager.get(key);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        states[button.name] = button.selected;
       }
       return states;
     },
@@ -11282,11 +11291,25 @@
       if (state === undefined) {
         state = true;
       }
-      this.dataManager.set(name, state);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          button.selected = state;
+          break;
+        }
+      }
       return this;
     },
     getButtonState: function getButtonState(name) {
-      return this.dataManager.get(name);
+      var buttons = this.buttons;
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.name === name) {
+          return button.selected;
+        }
+      }
+      return undefined;
     }
   };
 
@@ -11351,10 +11374,10 @@
       if (index === undefined || typeof index === 'boolean') {
         enabled = index;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.setEnable(enabled);
+          buttons[i]._click.setEnable(enabled);
         }
       } else {
-        this.getButton(index)._buttonBehavior.setEnable(enabled);
+        this.getButton(index)._click.setEnable(enabled);
       }
       return this;
     },
@@ -11363,10 +11386,10 @@
       var buttons = this.buttons;
       if (index === undefined || typeof index === 'boolean') {
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          buttons[i]._buttonBehavior.toggleEnable();
+          buttons[i]._click.toggleEnable();
         }
       } else {
-        this.getButton(index)._buttonBehavior.toggleEnable();
+        this.getButton(index)._click.toggleEnable();
       }
       return this;
     },
@@ -11374,7 +11397,7 @@
       if (index === undefined) {
         index = 0;
       }
-      return this.getButton(index)._buttonBehavior.enable;
+      return this.getButton(index)._click.enable;
     },
     emitButtonClick: function emitButtonClick(index) {
       // index or button game object
@@ -11418,7 +11441,6 @@
       this.clickConfig = config.clickConfig;
       this.buttonsType = undefined;
       this.buttons = [];
-      this.buttonMap = {};
     }
     _createClass(ButtonGroup, [{
       key: "destroy",
@@ -11434,7 +11456,7 @@
   var methods$8 = {
     fireEvent: FireEvent$1
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods$1, methods$8);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods$1, methods$8);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -13409,8 +13431,8 @@
     }
   };
 
-  var Methods$4 = {};
-  Object.assign(Methods$4, ButtonMethods, ModalMethods);
+  var Methods$5 = {};
+  Object.assign(Methods$5, ButtonMethods, ModalMethods);
 
   var GetValue$x = Phaser.Utils.Objects.GetValue;
   var Dialog = /*#__PURE__*/function (_Sizer) {
@@ -13712,7 +13734,500 @@
       dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
     });
   };
-  Object.assign(Dialog.prototype, Methods$4);
+  Object.assign(Dialog.prototype, Methods$5);
+
+  var DrawShape = function DrawShape(width, height, padding, originX, originY) {
+    this.clear().fillStyle(0xffffff);
+    switch (this.shape) {
+      case 1:
+        // circle
+        var radius = Math.min(width, height) / 2;
+        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
+        break;
+      default:
+        // 0|'rectangle'
+        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
+        break;
+    }
+  };
+
+  var Graphics = Phaser.GameObjects.Graphics;
+  var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
+    _inherits(DefaultMaskGraphics, _Graphics);
+    var _super = _createSuper(DefaultMaskGraphics);
+    function DefaultMaskGraphics(parent, shape, padding) {
+      var _this;
+      _classCallCheck(this, DefaultMaskGraphics);
+      if (shape === undefined) {
+        shape = 0;
+      }
+      if (typeof shape === 'string') {
+        shape = SHAPEMODE[shape];
+      }
+      if (padding === undefined) {
+        padding = 0;
+      }
+      _this = _super.call(this, parent.scene);
+      _this.parent = parent;
+      _this.shape = shape;
+      _this.padding = padding;
+      _this.setPosition().resize().setVisible(false);
+      // Don't add it to display list
+      return _this;
+    }
+    _createClass(DefaultMaskGraphics, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent = undefined;
+        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        var parent = this.parent;
+        if (x === undefined) {
+          x = parent.x;
+        }
+        if (y === undefined) {
+          y = parent.y;
+        }
+        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height, padding) {
+        var parent = this.parent;
+        if (width === undefined) {
+          width = parent.width;
+        }
+        if (height === undefined) {
+          height = parent.height;
+        }
+        if (padding === undefined) {
+          padding = this.padding;
+        }
+        if (this.width === width && this.height === height && this.paddingSave === padding) {
+          return this;
+        }
+        this.width = width;
+        this.height = height;
+        this.originX = parent.originX;
+        this.originY = parent.originY;
+        this.paddingSave = padding;
+        DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
+        return this;
+      }
+    }, {
+      key: "setOrigin",
+      value: function setOrigin(originX, originY) {
+        if (originY === undefined) {
+          originY = originX;
+        }
+        var parent = this.parent;
+        if (originX === undefined) {
+          originX = parent.originX;
+        }
+        if (originY === undefined) {
+          originY = parent.originY;
+        }
+        if (this.originX === originX && this.originY === originY) {
+          return this;
+        }
+        this.originX = originX;
+        this.originY = originY;
+        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
+        return this;
+      }
+    }]);
+    return DefaultMaskGraphics;
+  }(Graphics);
+  var SHAPEMODE = {
+    rectangle: 0,
+    circle: 1
+  };
+
+  var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
+    var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
+    if (maskTarget && !maskTarget.isRexSizer) {
+      // Sizer game object can't apply mask
+      var mask = maskGameObject.createGeometryMask();
+      maskTarget.setMask(mask);
+      this.once('destroy', function () {
+        maskTarget.setMask();
+        mask.destroy();
+      });
+    }
+    this.pin(maskGameObject);
+    return maskGameObject;
+  };
+
+  var SetDisplaySize = function SetDisplaySize(gameObject, width, height) {
+    if (!gameObject) {
+      return;
+    }
+    var unknownWidth = width == null;
+    var unknownHeight = height == null;
+    if (unknownWidth && unknownHeight) {
+      return gameObject;
+    }
+    if (!unknownWidth) {
+      gameObject.displayWidth = width;
+    }
+    if (!unknownHeight) {
+      gameObject.displayHeight = height;
+    }
+    if (unknownWidth) {
+      gameObject.scaleX = gameObject.scaleY;
+    }
+    if (unknownHeight) {
+      gameObject.scaleY = gameObject.scaleX;
+    }
+    return gameObject;
+  };
+
+  var ResetDisplayContent$1 = function ResetDisplayContent(config) {
+    if (config === undefined) {
+      config = {};
+    } else if (typeof config === 'string') {
+      config = {
+        text: config
+      };
+    }
+    var text = config.text || '';
+    this.setText(text);
+    var iconGameObjct = this.childrenMap.icon;
+    if (iconGameObjct) {
+      if (config.icon === undefined) {
+        this.hide(iconGameObjct);
+      } else {
+        this.show(iconGameObjct);
+      }
+      var iconSize = config.iconSize;
+      if (iconSize) {
+        this.setChildDisplaySize(iconGameObjct, iconSize, iconSize);
+        if (this.iconWidth !== undefined) {
+          this.setIconSize(iconSize);
+        }
+      }
+      this.setIconTexture(config.icon, config.iconFrame);
+    }
+    var actionGameObjct = this.childrenMap.action;
+    if (actionGameObjct) {
+      if (config.action === undefined) {
+        this.hide(actionGameObjct);
+      } else {
+        this.show(actionGameObjct);
+      }
+      var actionSize = config.actionSize;
+      if (actionSize) {
+        this.setChildDisplaySize(actionGameObjct, actionSize, actionSize);
+        if (this.actionWidth !== undefined) {
+          this.setActionSize(actionSize);
+        }
+      }
+      this.setActionTexture(config.action, config.actionFrame);
+    }
+    return this;
+  };
+
+  var methods$5 = {
+    resetDisplayContent: ResetDisplayContent$1
+  };
+
+  var GetValue$w = Phaser.Utils.Objects.GetValue;
+  var Label = /*#__PURE__*/function (_Sizer) {
+    _inherits(Label, _Sizer);
+    var _super = _createSuper(Label);
+    function Label(scene, config) {
+      var _this;
+      _classCallCheck(this, Label);
+      // Create sizer
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexLabel';
+
+      // Add elements
+      var background = GetValue$w(config, 'background', undefined);
+      var icon = GetValue$w(config, 'icon', undefined);
+      var iconMask = GetValue$w(config, 'iconMask', undefined);
+      var text = GetValue$w(config, 'text', undefined);
+      var action = GetValue$w(config, 'action', undefined);
+      var actionMask = GetValue$w(config, 'actionMask', undefined);
+      // Align
+      var align = GetValue$w(config, 'align', undefined); // undefined/left/top: no space
+
+      if (background) {
+        _this.addBackground(background);
+      }
+
+      // Add space
+      if (align === 'right' || align === 'bottom' || align === 'center') {
+        _this.addSpace();
+      }
+      if (icon) {
+        var iconSpace = GetValue$w(config, 'space.icon', 0);
+        var padding;
+        if (_this.orientation === 0) {
+          if (text || action) {
+            padding = {
+              right: iconSpace
+            };
+          }
+        } else {
+          if (text || action) {
+            padding = {
+              bottom: iconSpace
+            };
+          }
+        }
+        var fitRatio = GetValue$w(config, 'squareFitIcon', false) ? 1 : 0;
+        _this.add(icon, {
+          proportion: 0,
+          padding: padding,
+          fitRatio: fitRatio
+        });
+        if (iconMask) {
+          iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
+        }
+
+        if (!fitRatio) {
+          var iconSize = GetValue$w(config, 'iconSize', undefined);
+          _this.setIconSize(GetValue$w(config, 'iconWidth', iconSize), GetValue$w(config, 'iconHeight', iconSize));
+        }
+      }
+      if (text) {
+        var textSpace = GetValue$w(config, 'space.text', 0);
+        var expandTextWidth = GetValue$w(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue$w(config, 'expandTextHeight', false);
+        var proportion, padding, expand;
+        if (_this.orientation === 0) {
+          proportion = expandTextWidth ? 1 : 0;
+          if (action) {
+            padding = {
+              right: textSpace
+            };
+          }
+          expand = expandTextHeight;
+        } else {
+          proportion = expandTextHeight ? 1 : 0;
+          if (action) {
+            padding = {
+              bottom: textSpace
+            };
+          }
+          expand = expandTextWidth;
+        }
+        _this.add(text, {
+          proportion: proportion,
+          expand: expand,
+          padding: padding
+        });
+      }
+      if (action) {
+        var fitRatio = GetValue$w(config, 'squareFitAction', false) ? 1 : 0;
+        _this.add(action, {
+          proportion: 0,
+          fitRatio: fitRatio
+        });
+        if (actionMask) {
+          actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
+        }
+
+        if (!fitRatio) {
+          var actionSize = GetValue$w(config, 'actionSize');
+          _this.setActionSize(GetValue$w(config, 'actionWidth', actionSize), GetValue$w(config, 'actionHeight', actionSize));
+        }
+      }
+
+      // Add space
+      if (align === 'center') {
+        _this.addSpace();
+      }
+      _this.addChildrenMap('background', background);
+      _this.addChildrenMap('icon', icon);
+      _this.addChildrenMap('iconMask', iconMask);
+      _this.addChildrenMap('text', text);
+      _this.addChildrenMap('action', action);
+      _this.addChildrenMap('actionMask', actionMask);
+      return _this;
+    }
+
+    // Access text game object
+    _createClass(Label, [{
+      key: "text",
+      get: function get() {
+        var textObject = this.childrenMap.text;
+        if (textObject === undefined) {
+          return '';
+        }
+        return textObject.text;
+      },
+      set: function set(value) {
+        var textObject = this.childrenMap.text;
+        if (textObject === undefined) {
+          return;
+        }
+        textObject.setText(value);
+      }
+    }, {
+      key: "setText",
+      value: function setText(value) {
+        this.text = value;
+        return this;
+      }
+    }, {
+      key: "appendText",
+      value: function appendText(value) {
+        this.text += value;
+        return this;
+      }
+
+      // Access icon game object
+    }, {
+      key: "setIconTexture",
+      value: function setIconTexture(key, frame) {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+          return this;
+        }
+        imageObject.setTexture(key, frame);
+        if (this.iconWidth !== undefined) {
+          SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+          this.resetChildScaleState(imageObject);
+        }
+        return this;
+      }
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        this.setIconTexture(key, frame);
+        return this;
+      }
+    }, {
+      key: "setIconSize",
+      value: function setIconSize(width, height) {
+        if (height === undefined) {
+          height = width;
+        }
+        this.iconWidth = width;
+        this.iconHeight = height;
+        return this;
+      }
+    }, {
+      key: "texture",
+      get: function get() {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.texture;
+      }
+    }, {
+      key: "frame",
+      get: function get() {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.frame;
+      }
+    }, {
+      key: "setActionTexture",
+      value: function setActionTexture(key, frame) {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return this;
+        }
+        imageObject.setTexture(key, frame);
+        if (this.actionWidth !== undefined) {
+          SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+          this.resetChildScaleState(imageObject);
+        }
+        return this;
+      }
+    }, {
+      key: "actionTexture",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.texture;
+      }
+    }, {
+      key: "actionFrame",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.frame;
+      }
+    }, {
+      key: "setActionSize",
+      value: function setActionSize(width, height) {
+        if (height === undefined) {
+          height = width;
+        }
+        this.actionWidth = width;
+        this.actionHeight = height;
+        return this;
+      }
+    }, {
+      key: "preLayout",
+      value: function preLayout() {
+        var icon = this.childrenMap.icon;
+        if (icon && this.iconWidth !== undefined) {
+          SetDisplaySize(icon, this.iconWidth, this.iconHeight);
+        }
+        var action = this.childrenMap.action;
+        if (action && this.actionWidth !== undefined) {
+          SetDisplaySize(action, this.actionWidth, this.actionHeight);
+        }
+        _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
+      }
+    }, {
+      key: "runLayout",
+      value: function runLayout(parent, newWidth, newHeight) {
+        if (this.ignoreLayout) {
+          return this;
+        }
+        _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
+        // Pin icon-mask to icon game object
+        var iconMask = this.childrenMap.iconMask;
+        if (iconMask) {
+          iconMask.setPosition();
+          this.resetChildPositionState(iconMask);
+        }
+        // Pin action-mask to action game object
+        var actionMask = this.childrenMap.actionMask;
+        if (actionMask) {
+          actionMask.setPosition();
+          this.resetChildPositionState(actionMask);
+        }
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        _get(_getPrototypeOf(Label.prototype), "resize", this).call(this, width, height);
+        // Resize icon-mask to icon game object
+        var iconMask = this.childrenMap.iconMask;
+        if (iconMask) {
+          iconMask.resize();
+        }
+        // Resize action-mask to icon game object
+        var actionMask = this.childrenMap.actionMask;
+        if (actionMask) {
+          actionMask.resize();
+        }
+        return this;
+      }
+    }]);
+    return Label;
+  }(Sizer);
+  Object.assign(Label.prototype, methods$5);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -13781,7 +14296,68 @@
     return outObject;
   };
 
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+          entry[key] = newEntry;
+        }
+        entry = entry[key];
+      }
+    }
+    return entry;
+  };
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      }
+      // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+    return target;
+  };
+
+  var GetValue$v = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -13882,14 +14458,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$w(value, 'x', 0);
-          defaultRadiusY = GetValue$w(value, 'y', 0);
+          defaultRadiusX = GetValue$v(value, 'x', 0);
+          defaultRadiusY = GetValue$v(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$w(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$w(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$w(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$w(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$v(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$v(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$v(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$v(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -13950,8 +14526,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$w(value, 'x', 0);
-      radius.y = GetValue$w(value, 'y', 0);
+      radius.x = GetValue$v(value, 'x', 0);
+      radius.y = GetValue$v(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -14152,7 +14728,7 @@
 
   var Shape = Phaser.GameObjects.Shape;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
+  var GetValue$u = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
@@ -14197,7 +14773,7 @@
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue$v(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$u(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -14206,7 +14782,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue$v(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$u(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -14709,560 +15285,6 @@
 
     scene.add.existing(gameObject);
     return gameObject;
-  };
-
-  var DrawShape = function DrawShape(width, height, padding, originX, originY) {
-    this.clear().fillStyle(0xffffff);
-    switch (this.shape) {
-      case 1:
-        // circle
-        var radius = Math.min(width, height) / 2;
-        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
-        break;
-      default:
-        // 0|'rectangle'
-        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
-        break;
-    }
-  };
-
-  var Graphics = Phaser.GameObjects.Graphics;
-  var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
-    _inherits(DefaultMaskGraphics, _Graphics);
-    var _super = _createSuper(DefaultMaskGraphics);
-    function DefaultMaskGraphics(parent, shape, padding) {
-      var _this;
-      _classCallCheck(this, DefaultMaskGraphics);
-      if (shape === undefined) {
-        shape = 0;
-      }
-      if (typeof shape === 'string') {
-        shape = SHAPEMODE[shape];
-      }
-      if (padding === undefined) {
-        padding = 0;
-      }
-      _this = _super.call(this, parent.scene);
-      _this.parent = parent;
-      _this.shape = shape;
-      _this.padding = padding;
-      _this.setPosition().resize().setVisible(false);
-      // Don't add it to display list
-      return _this;
-    }
-    _createClass(DefaultMaskGraphics, [{
-      key: "destroy",
-      value: function destroy() {
-        this.parent = undefined;
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
-        return this;
-      }
-    }, {
-      key: "setPosition",
-      value: function setPosition(x, y) {
-        var parent = this.parent;
-        if (x === undefined) {
-          x = parent.x;
-        }
-        if (y === undefined) {
-          y = parent.y;
-        }
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height, padding) {
-        var parent = this.parent;
-        if (width === undefined) {
-          width = parent.width;
-        }
-        if (height === undefined) {
-          height = parent.height;
-        }
-        if (padding === undefined) {
-          padding = this.padding;
-        }
-        if (this.width === width && this.height === height && this.paddingSave === padding) {
-          return this;
-        }
-        this.width = width;
-        this.height = height;
-        this.originX = parent.originX;
-        this.originY = parent.originY;
-        this.paddingSave = padding;
-        DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(originX, originY) {
-        if (originY === undefined) {
-          originY = originX;
-        }
-        var parent = this.parent;
-        if (originX === undefined) {
-          originX = parent.originX;
-        }
-        if (originY === undefined) {
-          originY = parent.originY;
-        }
-        if (this.originX === originX && this.originY === originY) {
-          return this;
-        }
-        this.originX = originX;
-        this.originY = originY;
-        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
-        return this;
-      }
-    }]);
-    return DefaultMaskGraphics;
-  }(Graphics);
-  var SHAPEMODE = {
-    rectangle: 0,
-    circle: 1
-  };
-
-  var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
-    var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
-    if (maskTarget && !maskTarget.isRexSizer) {
-      // Sizer game object can't apply mask
-      var mask = maskGameObject.createGeometryMask();
-      maskTarget.setMask(mask);
-      this.once('destroy', function () {
-        maskTarget.setMask();
-        mask.destroy();
-      });
-    }
-    this.pin(maskGameObject);
-    return maskGameObject;
-  };
-
-  var SetDisplaySize = function SetDisplaySize(gameObject, width, height) {
-    if (!gameObject) {
-      return;
-    }
-    var unknownWidth = width == null;
-    var unknownHeight = height == null;
-    if (unknownWidth && unknownHeight) {
-      return gameObject;
-    }
-    if (!unknownWidth) {
-      gameObject.displayWidth = width;
-    }
-    if (!unknownHeight) {
-      gameObject.displayHeight = height;
-    }
-    if (unknownWidth) {
-      gameObject.scaleX = gameObject.scaleY;
-    }
-    if (unknownHeight) {
-      gameObject.scaleY = gameObject.scaleX;
-    }
-    return gameObject;
-  };
-
-  var ResetDisplayContent = function ResetDisplayContent(config) {
-    if (config === undefined) {
-      config = {};
-    } else if (typeof config === 'string') {
-      config = {
-        text: config
-      };
-    }
-    var text = config.text || '';
-    this.setText(text);
-    var iconGameObjct = this.childrenMap.icon;
-    if (iconGameObjct) {
-      if (config.icon === undefined) {
-        this.hide(iconGameObjct);
-      } else {
-        this.show(iconGameObjct);
-      }
-      var iconSize = config.iconSize;
-      if (iconSize) {
-        this.setChildDisplaySize(iconGameObjct, iconSize, iconSize);
-        if (this.iconWidth !== undefined) {
-          this.setIconSize(iconSize);
-        }
-      }
-      this.setIconTexture(config.icon, config.iconFrame);
-    }
-    var actionGameObjct = this.childrenMap.action;
-    if (actionGameObjct) {
-      if (config.action === undefined) {
-        this.hide(actionGameObjct);
-      } else {
-        this.show(actionGameObjct);
-      }
-      var actionSize = config.actionSize;
-      if (actionSize) {
-        this.setChildDisplaySize(actionGameObjct, actionSize, actionSize);
-        if (this.actionWidth !== undefined) {
-          this.setActionSize(actionSize);
-        }
-      }
-      this.setActionTexture(config.action, config.actionFrame);
-    }
-    return this;
-  };
-
-  var methods$5 = {
-    resetDisplayContent: ResetDisplayContent
-  };
-
-  var GetValue$u = Phaser.Utils.Objects.GetValue;
-  var Label = /*#__PURE__*/function (_Sizer) {
-    _inherits(Label, _Sizer);
-    var _super = _createSuper(Label);
-    function Label(scene, config) {
-      var _this;
-      _classCallCheck(this, Label);
-      // Create sizer
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexLabel';
-
-      // Add elements
-      var background = GetValue$u(config, 'background', undefined);
-      var icon = GetValue$u(config, 'icon', undefined);
-      var iconMask = GetValue$u(config, 'iconMask', undefined);
-      var text = GetValue$u(config, 'text', undefined);
-      var action = GetValue$u(config, 'action', undefined);
-      var actionMask = GetValue$u(config, 'actionMask', undefined);
-      // Align
-      var align = GetValue$u(config, 'align', undefined); // undefined/left/top: no space
-
-      if (background) {
-        _this.addBackground(background);
-      }
-
-      // Add space
-      if (align === 'right' || align === 'bottom' || align === 'center') {
-        _this.addSpace();
-      }
-      if (icon) {
-        var iconSpace = GetValue$u(config, 'space.icon', 0);
-        var padding;
-        if (_this.orientation === 0) {
-          if (text || action) {
-            padding = {
-              right: iconSpace
-            };
-          }
-        } else {
-          if (text || action) {
-            padding = {
-              bottom: iconSpace
-            };
-          }
-        }
-        var fitRatio = GetValue$u(config, 'squareFitIcon', false) ? 1 : 0;
-        _this.add(icon, {
-          proportion: 0,
-          padding: padding,
-          fitRatio: fitRatio
-        });
-        if (iconMask) {
-          iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
-        }
-
-        if (!fitRatio) {
-          var iconSize = GetValue$u(config, 'iconSize', undefined);
-          _this.setIconSize(GetValue$u(config, 'iconWidth', iconSize), GetValue$u(config, 'iconHeight', iconSize));
-        }
-      }
-      if (text) {
-        var textSpace = GetValue$u(config, 'space.text', 0);
-        var expandTextWidth = GetValue$u(config, 'expandTextWidth', false);
-        var expandTextHeight = GetValue$u(config, 'expandTextHeight', false);
-        var proportion, padding, expand;
-        if (_this.orientation === 0) {
-          proportion = expandTextWidth ? 1 : 0;
-          if (action) {
-            padding = {
-              right: textSpace
-            };
-          }
-          expand = expandTextHeight;
-        } else {
-          proportion = expandTextHeight ? 1 : 0;
-          if (action) {
-            padding = {
-              bottom: textSpace
-            };
-          }
-          expand = expandTextWidth;
-        }
-        _this.add(text, {
-          proportion: proportion,
-          expand: expand,
-          padding: padding
-        });
-      }
-      if (action) {
-        var fitRatio = GetValue$u(config, 'squareFitAction', false) ? 1 : 0;
-        _this.add(action, {
-          proportion: 0,
-          fitRatio: fitRatio
-        });
-        if (actionMask) {
-          actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
-        }
-
-        if (!fitRatio) {
-          var actionSize = GetValue$u(config, 'actionSize');
-          _this.setActionSize(GetValue$u(config, 'actionWidth', actionSize), GetValue$u(config, 'actionHeight', actionSize));
-        }
-      }
-
-      // Add space
-      if (align === 'center') {
-        _this.addSpace();
-      }
-      _this.addChildrenMap('background', background);
-      _this.addChildrenMap('icon', icon);
-      _this.addChildrenMap('iconMask', iconMask);
-      _this.addChildrenMap('text', text);
-      _this.addChildrenMap('action', action);
-      _this.addChildrenMap('actionMask', actionMask);
-      return _this;
-    }
-
-    // Access text game object
-    _createClass(Label, [{
-      key: "text",
-      get: function get() {
-        var textObject = this.childrenMap.text;
-        if (textObject === undefined) {
-          return '';
-        }
-        return textObject.text;
-      },
-      set: function set(value) {
-        var textObject = this.childrenMap.text;
-        if (textObject === undefined) {
-          return;
-        }
-        textObject.setText(value);
-      }
-    }, {
-      key: "setText",
-      value: function setText(value) {
-        this.text = value;
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        this.text += value;
-        return this;
-      }
-
-      // Access icon game object
-    }, {
-      key: "setIconTexture",
-      value: function setIconTexture(key, frame) {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return this;
-        }
-        imageObject.setTexture(key, frame);
-        if (this.iconWidth !== undefined) {
-          SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
-          this.resetChildScaleState(imageObject);
-        }
-        return this;
-      }
-    }, {
-      key: "setTexture",
-      value: function setTexture(key, frame) {
-        this.setIconTexture(key, frame);
-        return this;
-      }
-    }, {
-      key: "setIconSize",
-      value: function setIconSize(width, height) {
-        if (height === undefined) {
-          height = width;
-        }
-        this.iconWidth = width;
-        this.iconHeight = height;
-        return this;
-      }
-    }, {
-      key: "texture",
-      get: function get() {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return undefined;
-        }
-        return imageObject.texture;
-      }
-    }, {
-      key: "frame",
-      get: function get() {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return undefined;
-        }
-        return imageObject.frame;
-      }
-    }, {
-      key: "setActionTexture",
-      value: function setActionTexture(key, frame) {
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return this;
-        }
-        imageObject.setTexture(key, frame);
-        if (this.actionWidth !== undefined) {
-          SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
-          this.resetChildScaleState(imageObject);
-        }
-        return this;
-      }
-    }, {
-      key: "actionTexture",
-      get: function get() {
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return undefined;
-        }
-        return imageObject.texture;
-      }
-    }, {
-      key: "actionFrame",
-      get: function get() {
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return undefined;
-        }
-        return imageObject.frame;
-      }
-    }, {
-      key: "setActionSize",
-      value: function setActionSize(width, height) {
-        if (height === undefined) {
-          height = width;
-        }
-        this.actionWidth = width;
-        this.actionHeight = height;
-        return this;
-      }
-    }, {
-      key: "preLayout",
-      value: function preLayout() {
-        var icon = this.childrenMap.icon;
-        if (icon && this.iconWidth !== undefined) {
-          SetDisplaySize(icon, this.iconWidth, this.iconHeight);
-        }
-        var action = this.childrenMap.action;
-        if (action && this.actionWidth !== undefined) {
-          SetDisplaySize(action, this.actionWidth, this.actionHeight);
-        }
-        _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
-      }
-    }, {
-      key: "runLayout",
-      value: function runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-          return this;
-        }
-        _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
-        // Pin icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-          iconMask.setPosition();
-          this.resetChildPositionState(iconMask);
-        }
-        // Pin action-mask to action game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-          actionMask.setPosition();
-          this.resetChildPositionState(actionMask);
-        }
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        _get(_getPrototypeOf(Label.prototype), "resize", this).call(this, width, height);
-        // Resize icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-          iconMask.resize();
-        }
-        // Resize action-mask to icon game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-          actionMask.resize();
-        }
-        return this;
-      }
-    }]);
-    return Label;
-  }(Sizer);
-  Object.assign(Label.prototype, methods$5);
-
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
-          }
-          entry[key] = newEntry;
-        }
-        entry = entry[key];
-      }
-    }
-    return entry;
-  };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
-
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
   };
 
   /**
@@ -19401,11 +19423,11 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var Methods$3 = {
+  var Methods$4 = {
     contains: Contains,
     getWorldPosition: GetWorldPosition
   };
-  Object.assign(Methods$3, RenderMethods);
+  Object.assign(Methods$4, RenderMethods);
 
   var DegToRad = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -19808,7 +19830,7 @@
     }]);
     return RenderBase;
   }(Base);
-  Object.assign(RenderBase.prototype, Methods$3);
+  Object.assign(RenderBase.prototype, Methods$4);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -22337,7 +22359,7 @@
     }
   };
 
-  var Methods$2 = {
+  var Methods$3 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -22386,7 +22408,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$2, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -22502,7 +22524,7 @@
     }]);
     return DynamicText;
   }(Canvas);
-  Object.assign(DynamicText.prototype, Methods$2);
+  Object.assign(DynamicText.prototype, Methods$3);
 
   var BitmapTextKlass = Phaser.GameObjects.BitmapText;
   var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
@@ -22665,6 +22687,105 @@
     var gameObject = new SimpleLabel(scene, config, creators);
     scene.add.existing(gameObject);
     return gameObject;
+  };
+
+  var ResetDisplayContent = function ResetDisplayContent(config) {
+    if (config === undefined) {
+      config = {};
+    }
+    ResetTitle.call(this, config);
+    ResetContent.call(this, config);
+    ResetActions.call(this, config);
+    ResetChoices.call(this, config);
+    return this;
+  };
+  var ResetTitle = function ResetTitle(config) {
+    var title = this.childrenMap.title;
+    title.resetDisplayContent(config.title);
+  };
+  var ResetContent = function ResetContent(config) {
+    var content = this.childrenMap.content;
+    if (content.resetDisplayContent) {
+      // Label
+      content.resetDisplayContent(config.content);
+    } else {
+      // TextArea
+      var text = config.content || '';
+      content.setText(text);
+    }
+  };
+  var ResetActions = function ResetActions(config) {
+    var actionButtons = this.childrenMap.actions;
+    if (!actionButtons) {
+      return;
+    }
+    var buttonContentArray = config.buttons;
+    if (!buttonContentArray) {
+      var buttonA = actionButtons[0];
+      if (buttonA) {
+        buttonA.resetDisplayContent(config.buttonA);
+      }
+      var buttonB = actionButtons[1];
+      if (buttonB) {
+        buttonB.resetDisplayContent(config.buttonB);
+      }
+    } else {
+      var scene = this.scene;
+      var defaultActionConfig = this.defaultActionConfig;
+      var defaultActionButtonCreator = this.defaultActionButtonCreator;
+      for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
+        var buttonContent = buttonContentArray[i];
+        var button = actionButtons[i];
+        if (!button) {
+          button = CreateLabel(scene, defaultActionConfig, defaultActionButtonCreator);
+          this.addAction(button);
+        }
+        button.show().resetDisplayContent(buttonContent);
+      }
+      this.buttonMode = buttonContentArray.length;
+      for (var i = buttonContentArray.length - 1, cnt = actionButtons.length; i < cnt; i++) {
+        actionButtons[i].hide();
+      }
+    }
+  };
+  var ResetChoices = function ResetChoices(config) {
+    var choices = this.childrenMap.choices;
+    if (!choices) {
+      return;
+    }
+    var buttonContentArray = config.choices;
+    if (!buttonContentArray) {
+      buttonContentArray = [];
+    }
+    var scene = this.scene;
+    var defaultChoiceConfig = this.defaultChoiceConfig;
+    var defaultActionButtonCreator = this.defaultActionButtonCreator;
+    for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
+      var buttonContent = buttonContentArray[i];
+      var button = choices[i];
+      if (!button) {
+        button = CreateLabel(scene, defaultChoiceConfig, defaultActionButtonCreator);
+        this.addChoice(button);
+      }
+      button.show().resetDisplayContent(buttonContent);
+    }
+    for (var i = buttonContentArray.length - 1, cnt = choices.length; i < cnt; i++) {
+      choices[i].hide();
+    }
+  };
+
+  var OnPointerOverCallback = function OnPointerOverCallback(button) {
+    if (button.setHoverState) {
+      button.setHoverState(true);
+    }
+  };
+  var OnPointerOutCallback = function OnPointerOutCallback(button) {
+    if (button.setHoverState) {
+      button.setHoverState(false);
+    }
+  };
+  var RegisterEvents = function RegisterEvents() {
+    this.on('action.over', OnPointerOverCallback).on('action.out', OnPointerOutCallback).on('choice.over', OnPointerOverCallback).on('choice.out', OnPointerOutCallback);
   };
 
   var SCROLLMODE = {
@@ -24976,13 +25097,13 @@
     }]);
     return Scrollable;
   }(Sizer);
-  var Methods$1 = {
+  var Methods$2 = {
     resizeController: ResizeController,
     updateController: UpdateController
   };
 
   // mixin
-  Object.assign(Scrollable.prototype, Methods$1);
+  Object.assign(Scrollable.prototype, Methods$2);
 
   var TextType = 0;
   var TagTextType = 1;
@@ -25221,7 +25342,7 @@
     }
   };
 
-  var Methods = {
+  var Methods$1 = {
     setText: SetText$1,
     updateTextObject: UpdateTextObject,
     preLayout: PreLayout,
@@ -25501,7 +25622,7 @@
   var CreateDefaultTextObject = function CreateDefaultTextObject(scene) {
     return scene.add.text(0, 0, '');
   };
-  Object.assign(TextBlock.prototype, Methods);
+  Object.assign(TextBlock.prototype, Methods$1);
 
   var InjectProperties = function InjectProperties(textBlock) {
     Object.defineProperty(textBlock, 'childOY', {
@@ -25733,14 +25854,16 @@
           SetValue(config, 'proportion.content', 1);
         }
       }
+      var defaultButtonConfig = config.button;
+      var buttonAConfig = config.buttonA || defaultButtonConfig;
+      var buttonBConfig = config.buttonB || defaultButtonConfig;
       var buttonMode = config.buttonMode;
       if (buttonMode === undefined) {
-        buttonMode = !!config.buttonA && !!config.buttonB ? 2 : !!config.buttonA || !!config.button ? 1 : 0;
+        buttonMode = !!buttonAConfig && !!buttonBConfig ? 2 : !!buttonAConfig ? 1 : 0;
       }
-      var buttonAConfig = config.buttonA || config.button;
-      var buttonACreators = creators.buttonA || creators.button;
-      var buttonBConfig = config.buttonB || config.button;
-      var buttonBCreators = creators.buttonB || creators.button;
+      var defaultButtonCreator = creators.button;
+      var buttonACreators = creators.buttonA || defaultButtonCreator;
+      var buttonBCreators = creators.buttonB || defaultButtonCreator;
       switch (buttonMode) {
         case 2:
           config.actions = [CreateLabel(scene, buttonAConfig, buttonACreators), CreateLabel(scene, buttonBConfig, buttonBCreators)];
@@ -25748,57 +25871,32 @@
         case 1:
           config.actions = [CreateLabel(scene, buttonAConfig, buttonACreators)];
           break;
+        case 0:
+          break;
         default:
           config.actions = [];
           break;
       }
+      var defaultChoiceConfig = config.choice;
+      if (defaultChoiceConfig) {
+        config.choices = [];
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexConfirmDialog';
       _this.buttonMode = buttonMode;
+      _this.defaultActionConfig = defaultButtonConfig;
+      _this.defaultActionButtonCreator = defaultButtonCreator;
+      _this.defaultChoiceConfig = defaultChoiceConfig;
+      _this.defaultChoiceCreator = creators.choice;
       var buttons = _this.childrenMap.actions;
-      _this.addChildrenMap('buttonA', buttons[0]);
-      _this.addChildrenMap('buttonB', buttons[1]);
+      _this.addChildrenMap('buttonA', buttons ? buttons[0] : null);
+      _this.addChildrenMap('buttonB', buttons ? buttons[1] : null);
 
       // Interactive
-      _this.on('action.over', function (button, index, pointer, event) {
-        if (button.setHoverState) {
-          button.setHoverState(true);
-        }
-      }).on('action.out', function (button, index, pointer, event) {
-        if (button.setHoverState) {
-          button.setHoverState(false);
-        }
-      });
+      RegisterEvents.call(_assertThisInitialized(_this));
       return _this;
     }
     _createClass(ConfirmDialog, [{
-      key: "resetDisplayContent",
-      value: function resetDisplayContent(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        var title = this.childrenMap.title;
-        title.resetDisplayContent(config.title);
-        var content = this.childrenMap.content;
-        if (content.resetDisplayContent) {
-          // Label
-          content.resetDisplayContent(config.content);
-        } else {
-          // TextArea
-          var text = config.content || '';
-          content.setText(text);
-        }
-        var buttonA = this.childrenMap.actions[0];
-        if (buttonA) {
-          buttonA.resetDisplayContent(config.buttonA);
-        }
-        var buttonB = this.childrenMap.actions[1];
-        if (buttonB) {
-          buttonB.resetDisplayContent(config.buttonB);
-        }
-        return this;
-      }
-    }, {
       key: "modal",
       value: function modal(config, onClose) {
         if (IsFunction(config)) {
@@ -25821,6 +25919,10 @@
     }]);
     return ConfirmDialog;
   }(Dialog);
+  var Methods = {
+    resetDisplayContent: ResetDisplayContent
+  };
+  Object.assign(ConfirmDialog.prototype, Methods);
 
   return ConfirmDialog;
 

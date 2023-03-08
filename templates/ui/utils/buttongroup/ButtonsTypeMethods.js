@@ -1,34 +1,4 @@
-import OnButtonStateChange from './OnButtonStateChange.js';
-
 const GetValue = Phaser.Utils.Objects.GetValue;
-
-var Initialize = function (config) {
-    // Assign this.dataManager
-    var dataManager = GetValue(config, 'dataManager', undefined);
-    if (dataManager === undefined) {
-        var parent = this.parent;
-        parent.setDataEnabled();
-        dataManager = parent.data;
-    }
-    this.dataManager = dataManager;
-
-    // Assign this.setValueCallback, this.setValueCallbackScope
-    var setValueCallback, setValueCallbackScope;
-    setValueCallback = GetValue(config, 'setValueCallback', undefined);
-    setValueCallbackScope = GetValue(config, 'setValueCallbackScope', undefined);
-    if (setValueCallback === undefined) {
-        setValueCallback = GetValue(config, 'setButtonStateCallback', undefined);
-        setValueCallbackScope = GetValue(config, 'setButtonStateCallbackScope', undefined);
-    }
-    this.setValueCallback = setValueCallback;
-    this.setValueCallbackScope = setValueCallbackScope;
-
-    // Register event callback
-    dataManager.events.on(`changedata`, function (parent, key, value, previousValue) {
-        var button = this.buttonMap[key];
-        OnButtonStateChange.call(this, button, value, previousValue);
-    }, this)
-}
 
 export default {
     setButtonsType(config) {
@@ -38,88 +8,109 @@ export default {
 
         var buttonsType = GetValue(config, 'buttonsType', config.type);
         this.buttonsType = buttonsType;
+
+        if (!this.buttonsType) {
+            return this;
+        }
+
+        // Assign this.setValueCallback, this.setValueCallbackScope
+        var setValueCallback, setValueCallbackScope;
+        setValueCallback = GetValue(config, 'setValueCallback', undefined);
+        setValueCallbackScope = GetValue(config, 'setValueCallbackScope', undefined);
+        if (setValueCallback === undefined) {
+            setValueCallback = GetValue(config, 'setButtonStateCallback', undefined);
+            setValueCallbackScope = GetValue(config, 'setButtonStateCallbackScope', undefined);
+        }
+        this.setValueCallback = setValueCallback;
+        this.setValueCallbackScope = setValueCallbackScope;
+
         switch (buttonsType) {
             case 'radio':
-                this.setRadioType(config);
+                this.setRadioType();
                 break;
             case 'checkboxes':
-                this.setCheckboxesType(config);
+                this.setCheckboxesType();
                 break;
         }
 
         return this;
     },
 
-    setRadioType(config) {
-        Initialize.call(this, config);
-
-        var radioValue = undefined;
+    setRadioType() {
         var parent = this.parent,
-            buttons = this.buttons,
-            dataManager = this.dataManager;
+            buttons = this.buttons;
+        parent._value = undefined;
+        var selectedIndex = undefined;
         Object.defineProperty(parent, 'value', {
             get: function () {
-                return radioValue;
+                return parent._value;
             },
             set: function (newValue) {
-                if (newValue === radioValue) {
+                if (parent._value === newValue) {
                     return;
                 }
-                radioValue = newValue;
-                // Update state of button -> Fire `changedata-btnName` event -> setValueCallback                
-                buttons.forEach(function (button) {
-                    var key = button.name;
-                    var state = dataManager.get(key);
-                    if (key === newValue) {
-                        if (!state) {
-                            dataManager.set(key, true);
+
+                parent._value = newValue;
+
+                for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+                    var button = buttons[i];
+
+                    if (button.rexSizer.hidden) {
+                        continue;
+                    }
+
+                    if (selectedIndex === undefined) {
+                        if (button.name === newValue) {
+                            button.selected = true;
+                        } else {
+                            button.selected = false;
                         }
                     } else {
-                        if (state) {
-                            dataManager.set(key, false);
+                        if (selectedIndex === i) {
+                            button.selected = true;
+                        } else {
+                            button.selected = false;
                         }
                     }
-                });
+                }
             },
             enumerable: true,
             configurable: true
         });
 
         parent.on('button.click', function (button) {
+            selectedIndex = this.buttons.indexOf(button);
             parent.value = button.name;
-        });
-        // button.click event -> parent.value -> dataManager -> changedata event -> ...
-        // parent.value -> dataManager -> changedata event -> ...
+            selectedIndex = undefined;
+        }, this);
 
         return this;
     },
 
-    setCheckboxesType(config) {
-        Initialize.call(this, config);
-
-        var parent = this.parent,
-            dataManager = this.dataManager;
+    setCheckboxesType() {
+        var parent = this.parent;
         parent.on('button.click', function (button) {
-            dataManager.toggle(button.name);
+            button.selected = !button.selected;
         });
-        // button.click event -> dataManager -> changedata event -> ...
-        // dataManager.set() -> changedata event -> ...
 
         return this;
     },
 
     // Common
     clearAllButtonsState() {
-        for (var key in this.buttonMap) {
-            this.dataManager.set(key, false);
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            buttons[i].selected = false;
         }
         return this;
     },
 
     getAllButtonsState() {
-        var states = {}
-        for (var key in this.buttonMap) {
-            states[key] = this.dataManager.get(key);
+        var states = {};
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            states[button.name] = button.selected;
         }
         return states;
     },
@@ -139,11 +130,26 @@ export default {
         if (state === undefined) {
             state = true;
         }
-        this.dataManager.set(name, state);
+
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (button.name === name) {
+                button.selected = state;
+                break;
+            }
+        }
         return this;
     },
 
     getButtonState(name) {
-        return this.dataManager.get(name);
+        var buttons = this.buttons;
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (button.name === name) {
+                return button.selected;
+            }
+        }
+        return undefined;
     }
 }

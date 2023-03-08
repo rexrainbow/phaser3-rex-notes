@@ -13,7 +13,6 @@ class ButtonGroup {
 
         this.buttonsType = undefined;
         this.buttons = [];
-        this.buttonMap = {};
     }
 
     destroy() {
