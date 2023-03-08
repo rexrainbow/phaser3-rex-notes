@@ -5985,6 +5985,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delet-all-keys" class="md-nav__link">
+    Delet all keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events_1" class="md-nav__link">
     Events
   </a>
@@ -9206,6 +9213,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delet-all-keys" class="md-nav__link">
+    Delet all keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events_1" class="md-nav__link">
     Events
   </a>
@@ -9354,6 +9368,10 @@ or
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>Get and remove that key.</p>
+<h4 id="delet-all-keys">Delet all keys<a class="headerlink" href="#delet-all-keys" title="Permanent link">&para;</a></h4>
+<p>Delete all data in this Data Manager and unfreeze it.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+</code></pre></div>
 <h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
 <p>Fires <code>removedata</code> event when a key is removed.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
