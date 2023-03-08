@@ -32,10 +32,10 @@ export default {
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             enabled = index;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                buttons[i]._buttonBehavior.setEnable(enabled);
+                buttons[i]._click.setEnable(enabled);
             }
         } else {
-            this.getButton(index)._buttonBehavior.setEnable(enabled);
+            this.getButton(index)._click.setEnable(enabled);
         }
         return this;
     },
@@ -45,10 +45,10 @@ export default {
         var buttons = this.buttons;
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                buttons[i]._buttonBehavior.toggleEnable();
+                buttons[i]._click.toggleEnable();
             }
         } else {
-            this.getButton(index)._buttonBehavior.toggleEnable();
+            this.getButton(index)._click.toggleEnable();
         }
         return this;
     },
@@ -57,7 +57,7 @@ export default {
         if (index === undefined) {
             index = 0;
         }
-        return this.getButton(index)._buttonBehavior.enable;
+        return this.getButton(index)._click.enable;
     },
 
     emitButtonClick(index) {

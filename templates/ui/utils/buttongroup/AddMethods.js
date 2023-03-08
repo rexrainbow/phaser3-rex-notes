@@ -18,9 +18,9 @@ export default {
         }
 
         //Default: Fire 'click' event when touch released after pressed.
-        gameObject._buttonBehavior = new Click(gameObject, this.clickConfig);
+        gameObject._click = new Click(gameObject, this.clickConfig);
 
-        gameObject._buttonBehavior
+        gameObject._click
             .on('click', function (buttonBehavior, gameObject, pointer, event) {
                 this.fireEvent('button.click', gameObject, pointer, event);
             }, this)
