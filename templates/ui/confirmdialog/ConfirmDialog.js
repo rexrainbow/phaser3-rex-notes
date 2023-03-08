@@ -1,5 +1,6 @@
 import Dialog from '../dialog/Dialog.js';
 import ResetDisplayContent from './methods/ResetDisplayContent.js';
+import RegisterEvents from './methods/RegisterEvents.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';
@@ -91,27 +92,7 @@ class ConfirmDialog extends Dialog {
         this.addChildrenMap('buttonB', (buttons) ? buttons[1] : null);
 
         // Interactive
-        this
-            .on('action.over', function (button, index, pointer, event) {
-                if (button.setHoverState) {
-                    button.setHoverState(true);
-                }
-            })
-            .on('action.out', function (button, index, pointer, event) {
-                if (button.setHoverState) {
-                    button.setHoverState(false);
-                }
-            })
-            .on('choice.over', function (button, index, pointer, event) {
-                if (button.setHoverState) {
-                    button.setHoverState(true);
-                }
-            })
-            .on('choice.out', function (button, index, pointer, event) {
-                if (button.setHoverState) {
-                    button.setHoverState(false);
-                }
-            })
+        RegisterEvents.call(this);
     }
 
     modal(config, onClose) {
