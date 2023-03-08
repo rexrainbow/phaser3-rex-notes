@@ -1,3 +1,5 @@
+import OnButtonStateChange from './OnButtonStateChange.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var Initialize = function (config) {
@@ -24,21 +26,7 @@ var Initialize = function (config) {
     // Register event callback
     dataManager.events.on(`changedata`, function (parent, key, value, previousValue) {
         var button = this.buttonMap[key];
-        if (!button) {
-            return;
-        }
-
-        var callback = this.setValueCallback;
-        var scope = this.setValueCallbackScope;
-        if (callback) {
-            if (scope) {
-                callback.call(scope, button, value, previousValue);
-            } else {
-                callback(button, value, previousValue);
-            }
-        }
-
-        this.fireEvent('button.statechange', button, value, previousValue);
+        OnButtonStateChange.call(this, button, value, previousValue);
     }, this)
 }
 
