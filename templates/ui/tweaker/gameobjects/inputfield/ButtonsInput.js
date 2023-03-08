@@ -40,7 +40,9 @@ class ButtonsInput extends InputFiledBase {
             if (!option) {
                 return;  // ??
             }
+            this._selectedIndex = index;
             this.setValue(option.value);
+            this._selectedIndex = undefined;
         }, this);
 
     }
@@ -58,7 +60,10 @@ class ButtonsInput extends InputFiledBase {
         }
 
         var list = this.childrenMap.list;
-        var index = GetOptionIndex(list.options, value);
+        var index = this._selectedIndex;  // See list's 'button.click' event
+        if (index === undefined) {
+            index = GetOptionIndex(list.options, value);
+        }
         SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         super.value = value;  // Fire 'valuechange' event
     }
