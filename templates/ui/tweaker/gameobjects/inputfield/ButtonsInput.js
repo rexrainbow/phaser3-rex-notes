@@ -2,8 +2,8 @@ import InputFiledBase from './InputFieldBase.js';
 import CreateButtons from '../utils/CreateButtons.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateLabel from '../../../utils/build/CreateLabel.js';
-import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
-import SetButtonsActiveStateByText from '../utils/SetButtonsActiveState.js';
+import { GetOptionIndex } from '../../utils/OptionsMethods.js';
+import SetButtonsActiveStateByIndex from '../utils/SetButtonsActiveState.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -36,8 +36,11 @@ class ButtonsInput extends InputFiledBase {
         this.addChildrenMap('list', list);
 
         list.on('button.click', function (button, index, pointer, event) {
-            var value = GetOptionValue(list.options, button.text);
-            this.setValue(value);
+            var option = list.options[index];
+            if (!option) {
+                return;  // ??
+            }
+            this.setValue(option.value);
         }, this);
 
     }
@@ -55,8 +58,8 @@ class ButtonsInput extends InputFiledBase {
         }
 
         var list = this.childrenMap.list;
-        var text = GetOptionText(list.options, value);
-        SetButtonsActiveStateByText(list.childrenMap.buttons, text);
+        var index = GetOptionIndex(list.options, value);
+        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         super.value = value;  // Fire 'valuechange' event
     }
 
