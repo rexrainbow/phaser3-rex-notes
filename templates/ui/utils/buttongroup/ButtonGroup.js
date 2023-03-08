@@ -1,7 +1,7 @@
 import AddMethods from './AddMethods.js';
 import RemoveMethods from './RemoveMethods.js';
 import FireEvent from './FireEvent.js';
-import SetTypeMethods from './SetTypeMethods.js';
+import ButtonsTypeMethods from './ButtonsTypeMethods.js';
 import ButtonMethods from './ButtonMethods.js';
 
 class ButtonGroup {
@@ -32,7 +32,7 @@ Object.assign(
     ButtonGroup.prototype,
     AddMethods,
     RemoveMethods,
-    SetTypeMethods,
+    ButtonsTypeMethods,
     ButtonMethods,
     methods
 );
