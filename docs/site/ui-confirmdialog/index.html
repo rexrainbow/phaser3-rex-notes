@@ -9387,6 +9387,11 @@
     <span class="c1">// buttonA: SimpleLabelConfig</span>
     <span class="c1">// buttonB: SimpleLabelConfig</span>
 
+    <span class="c1">// choice: SimpleLabelConfig,</span>
+    <span class="c1">// choicesType</span>
+    <span class="c1">// choicesWidth: undefined,</span>
+    <span class="c1">// choicesHeight: undefined,</span>
+
     <span class="c1">// Space</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9397,31 +9402,46 @@
         <span class="nx">title</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">titleLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">titleRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
         <span class="nx">content</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">contentLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">contentRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
         <span class="nx">actionsLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">actionsRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-
         <span class="nx">action</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+        <span class="nx">choices</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choice</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choiceLine</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choiceColumn</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">choiceRow</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">proportion</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">title</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">content</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">actions</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choices</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">expand</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">title</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">content</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">actions</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">choices</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">actions</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">choices</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">click</span><span class="o">:</span> <span class="p">{</span>
@@ -9468,7 +9488,42 @@
 <li><code>1</code>, <code>2</code> : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.</li>
 </ul>
 </li>
-<li><code>button</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a></li>
+<li><code>button</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a>, optional.</li>
+<li><code>choice</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a>, optional.</li>
+<li><code>choicesType</code> : Sizer type (<a href="../ui-buttons/">Buttons</a>/<a href="../ui-fixwidthbuttons/">FixWidthButtons</a>/<a href="../ui-gridbuttons/">GridButtons</a>) and behavior (<code>''</code>/<code>'radio'</code>/<code>'checkboxes'</code>) of choice buttons.<ul>
+<li><code>undefined</code>, <code>''</code>, or <code>'y'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal without any extra behavior, default behavior.</li>
+<li><code>'radio'</code>, or <code>'x-radio'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal, with radio behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code>.</li>
+</ul>
+</li>
+<li><code>'checkboxes'</code>, or <code>'x-checkboxes'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal, with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
+</ul>
+</li>
+<li><code>'wrap'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> without any extra behavior, default behavior.</li>
+<li><code>'wrap-radio'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> with radio behavior.<ul>
+<li>Name of Selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code></li>
+</ul>
+</li>
+<li><code>'wrap-checkboxes'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
+</ul>
+</li>
+<li><code>'grid'</code> : <a href="../ui-gridbuttons/">GridButtons</a> without any extra behavior, default behavior.</li>
+<li><code>'grid-radio'</code> : <a href="../ui-gridbuttons/">GridButtons</a> with radio behavior.<ul>
+<li>Name of Selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code></li>
+</ul>
+</li>
+<li><code>'grid-checkboxes'</code> : <a href="../ui-gridbuttons/">GridButtons</a> with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.        </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>choicesWidth</code>, <code>choicesHeight</code> : Minimum width, minimum height of choices.<ul>
+<li>Must assign <code>choicesHeight</code> value if using <a href="../ui-gridbuttons/">GridButtons</a> choices.</li>
+</ul>
+</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.title</code> : Space between title game object and below game object.</li>
@@ -9613,12 +9668,33 @@
         <span class="nx">actionSize</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="p">},</span>
+
+    <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+            <span class="nx">icon</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">iconFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">iconSize</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+            <span class="nx">action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">actionFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">actionSize</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="p">},</span>        
+        <span class="c1">// ...</span>
+    <span class="p">]</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>title</code>, <code>content</code>,<code>buttonA</code>, <code>buttonB</code> : Display content<ul>
 <li>A string : Set text of simple lable</li>
 <li>Configuration of <a href="../ui-simplelabel/#reset-display-content"><code>simpleLabel.resetDisplayContent(config)</code></a> : Set icon, text, action icon of simple label.</li>
+</ul>
+</li>
+<li><code>choices</code> : Array of display content<ul>
+<li>A string : Set text of simple lable, also use this string as option value.</li>
+<li>Configuration of <a href="../ui-simplelabel/#reset-display-content"><code>simpleLabel.resetDisplayContent(config)</code></a> : Set icon, text, action icon of simple label.<ul>
+<li>Property <code>value</code> : Option value.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -9671,6 +9747,7 @@
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var index = data.index;</span>
     <span class="c1">// var text = data.text;</span>
+    <span class="c1">// var value = data.value;</span>
     <span class="c1">// var button = data.button;</span>
     <span class="c1">// var dialog = data.dialog;</span>
 <span class="p">}</span>
@@ -9678,6 +9755,12 @@
 <li><code>data</code> : Contains these properties<ul>
 <li><code>data.index</code> : Index of clicking action button</li>
 <li><code>data.text</code> : <code>button.text</code>, this property is valided if button game object is a label.</li>
+<li><code>data.value</code> :<ul>
+<li>A single value : Return selected value, if <code>choicesType</code> is <code>'radio'</code></li>
+<li>A dictionary contains <code>{value: boolean}</code> : Return selected values, if <code>choicesType</code> is <code>'checkboxes'</code></li>
+<li><code>undefined</code> : Default value</li>
+</ul>
+</li>
 <li><code>data.button</code> : Clicked button game object.</li>
 <li><code>data.dialog</code> : This dialog game object.</li>
 </ul>
