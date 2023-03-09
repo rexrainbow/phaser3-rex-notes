@@ -106,7 +106,7 @@ class Demo extends Phaser.Scene {
             })
             .layout()
 
-        // Enable action button until first clicking of any choice button
+        // Disable action button until first clicking of any choice button
         dialog
             .setActionEnable(0, false)
             .once('choice.click', function () {
