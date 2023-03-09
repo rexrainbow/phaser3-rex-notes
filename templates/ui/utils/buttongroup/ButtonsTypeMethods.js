@@ -54,7 +54,6 @@ export default {
 
                 for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                     var button = buttons[i];
-
                     if (button.rexSizer.hidden) {
                         continue;
                     }
@@ -100,7 +99,8 @@ export default {
     clearAllButtonsState() {
         var buttons = this.buttons;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-            buttons[i].selected = false;
+            var button = buttons[i];
+            button.selected = false;
         }
         return this;
     },
@@ -110,6 +110,9 @@ export default {
         var buttons = this.buttons;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
             var button = buttons[i];
+            if (button.rexSizer.hidden) {
+                continue;
+            }
             states[button.name] = button.selected;
         }
         return states;
@@ -134,6 +137,9 @@ export default {
         var buttons = this.buttons;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
             var button = buttons[i];
+            if (button.rexSizer.hidden) {
+                continue;
+            }
             if (button.name === name) {
                 button.selected = state;
                 break;
@@ -146,6 +152,9 @@ export default {
         var buttons = this.buttons;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
             var button = buttons[i];
+            if (button.rexSizer.hidden) {
+                continue;
+            }
             if (button.name === name) {
                 return button.selected;
             }
