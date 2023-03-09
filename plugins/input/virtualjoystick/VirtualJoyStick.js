@@ -104,19 +104,31 @@ class VirtualJoyStick {
     }
 
     setPosition(x, y) {
+        if ((this.x === x) && (this.y === y)) {
+            return this;
+        }
+
         this.x = x;
         this.y = y;
+
+        this.forceUpdateThumb();
         return this;
     }
 
-    set x(x) {
-        this.base.x = x;
-        this.thumb.x = x;
+    set x(value) {
+        if (this.x === value) {
+            return;
+        }
+        this.base.x = value;
+        this.thumb.x = value;
     }
 
-    set y(y) {
-        this.base.y = y;
-        this.thumb.y = y;
+    set y(value) {
+        if (this.y === value) {
+            return;
+        }
+        this.base.y = value;
+        this.thumb.y = value;
     }
 
     get x() {
@@ -215,6 +227,7 @@ class VirtualJoyStick {
         this.on('update', this.update, this);
     }
 
+    // Internal method
     update() {
         var touchCursor = this.touchCursor;
         // Start from (0,0)
@@ -235,6 +248,10 @@ class VirtualJoyStick {
         return this;
     }
 
+    forceUpdateThumb() {
+        this.touchCursor.forceUpdate();
+        return this;
+    }
 }
 
 Object.assign(

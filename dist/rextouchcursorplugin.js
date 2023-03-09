@@ -744,6 +744,16 @@
         this.emit('update');
         this.emit('pointerup', pointer);
       }
+    }, {
+      key: "forceUpdate",
+      value: function forceUpdate() {
+        var pointer = this.pointer;
+        if (!pointer || !pointer.isDown) {
+          return this;
+        }
+        this.onKeyDown(pointer);
+        return this;
+      }
     }]);
     return TouchCursor;
   }(VectorToCursorKeys);

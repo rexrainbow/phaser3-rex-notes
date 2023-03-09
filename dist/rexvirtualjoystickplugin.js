@@ -744,6 +744,16 @@
         this.emit('update');
         this.emit('pointerup', pointer);
       }
+    }, {
+      key: "forceUpdate",
+      value: function forceUpdate() {
+        var pointer = this.pointer;
+        if (!pointer || !pointer.isDown) {
+          return this;
+        }
+        this.onKeyDown(pointer);
+        return this;
+      }
     }]);
     return TouchCursor;
   }(VectorToCursorKeys);
@@ -862,8 +872,12 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
+        if (this.x === x && this.y === y) {
+          return this;
+        }
         this.x = x;
         this.y = y;
+        this.forceUpdateThumb();
         return this;
       }
     }, {
@@ -871,18 +885,24 @@
       get: function get() {
         return this.base.x;
       },
-      set: function set(x) {
-        this.base.x = x;
-        this.thumb.x = x;
+      set: function set(value) {
+        if (this.x === value) {
+          return;
+        }
+        this.base.x = value;
+        this.thumb.x = value;
       }
     }, {
       key: "y",
       get: function get() {
         return this.base.y;
       },
-      set: function set(y) {
-        this.base.y = y;
-        this.thumb.y = y;
+      set: function set(value) {
+        if (this.y === value) {
+          return;
+        }
+        this.base.y = value;
+        this.thumb.y = value;
       }
     }, {
       key: "setVisible",
@@ -977,6 +997,8 @@
       value: function boot() {
         this.on('update', this.update, this);
       }
+
+      // Internal method
     }, {
       key: "update",
       value: function update() {
@@ -997,6 +1019,12 @@
         }
         this.thumb.x = x;
         this.thumb.y = y;
+        return this;
+      }
+    }, {
+      key: "forceUpdateThumb",
+      value: function forceUpdateThumb() {
+        this.touchCursor.forceUpdate();
         return this;
       }
     }]);
