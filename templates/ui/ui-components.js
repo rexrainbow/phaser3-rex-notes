@@ -48,7 +48,6 @@ import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
 import FileSelectorButton from './fileselectorbutton/FileSelectorButton.js';
 import Dialog from './dialog/Dialog.js';
-import Choices from './choices/Choices.js';
 import ConfirmDialog from './confirmdialog/ConfirmDialog.js';
 import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
@@ -166,7 +165,6 @@ export {
     FixWidthButtons,
     FileSelectorButton,
     Dialog,
-    Choices,
     ConfirmDialog,
     HolyGrail,
     Tabs,
