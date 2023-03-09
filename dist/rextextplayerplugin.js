@@ -6337,7 +6337,7 @@
    *
    * @return {boolean} `true` if the object is plain, otherwise `false`.
    */
-  var IsPlainObject$2 = function IsPlainObject(obj) {
+  var IsPlainObject$3 = function IsPlainObject(obj) {
     // Not plain objects:
     // - Any object or value whose internal [[Class]] property is not "[object Object]"
     // - DOM nodes
@@ -6374,7 +6374,7 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$2(inObject)) {
+    if (IsPlainObject$3(inObject)) {
       for (key in inObject) {
         value = inObject[key];
 
@@ -7492,7 +7492,7 @@
     return PoolManager;
   }();
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
@@ -7500,13 +7500,13 @@
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
-      if (IsPlainObject$1(x)) {
+      if (IsPlainObject$2(x)) {
         config = x;
         x = GetValue$4(config, 'x', 0);
         y = GetValue$4(config, 'y', 0);
         fixedWidth = GetValue$4(config, 'width', 0);
         fixedHeight = GetValue$4(config, 'height', 0);
-      } else if (IsPlainObject$1(fixedWidth)) {
+      } else if (IsPlainObject$2(fixedWidth)) {
         config = fixedWidth;
         fixedWidth = GetValue$4(config, 'width', 0);
         fixedHeight = GetValue$4(config, 'height', 0);
@@ -9726,9 +9726,13 @@
   };
   Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$2);
 
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
-    if (config === undefined) {
+    if (IsPlainObject$1(key)) {
+      config = key;
+      key = config.key;
+    } else if (config === undefined) {
       config = {
         key: key
       };
@@ -9760,19 +9764,21 @@
       height: height,
       y: GetValue$1(config, 'y', 0),
       left: GetValue$1(config, 'left', 0),
-      right: GetValue$1(config, 'right', 0)
+      right: GetValue$1(config, 'right', 0),
+      originX: GetValue$1(config, 'originX', 0),
+      originY: GetValue$1(config, 'originY', 0)
     };
   };
 
   var DrawImage = function DrawImage(key, context, x, y, autoRound) {
     var imgData = this.get(key);
-    x += imgData.left;
-    y += imgData.y;
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+    x += imgData.left - imgData.originX * frame.cutWidth;
+    y += imgData.y - imgData.originY * frame.cutHeight;
     if (autoRound) {
       x = Math.round(x);
       y = Math.round(y);
     }
-    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, imgData.width, imgData.height);
   };
 

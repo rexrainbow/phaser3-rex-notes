@@ -2748,9 +2748,13 @@
     return WrapTextLinesPool;
   }(Stack);
 
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var AddImage = function AddImage(key, config) {
-    if (config === undefined) {
+    if (IsPlainObject$1(key)) {
+      config = key;
+      key = config.key;
+    } else if (config === undefined) {
       config = {
         key: key
       };
@@ -2782,19 +2786,21 @@
       height: height,
       y: GetValue$1(config, 'y', 0),
       left: GetValue$1(config, 'left', 0),
-      right: GetValue$1(config, 'right', 0)
+      right: GetValue$1(config, 'right', 0),
+      originX: GetValue$1(config, 'originX', 0),
+      originY: GetValue$1(config, 'originY', 0)
     };
   };
 
   var DrawImage = function DrawImage(key, context, x, y, autoRound) {
     var imgData = this.get(key);
-    x += imgData.left;
-    y += imgData.y;
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+    x += imgData.left - imgData.originX * frame.cutWidth;
+    y += imgData.y - imgData.originY * frame.cutHeight;
     if (autoRound) {
       x = Math.round(x);
       y = Math.round(y);
     }
-    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, imgData.width, imgData.height);
   };
 

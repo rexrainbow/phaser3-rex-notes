@@ -316,7 +316,7 @@
    *
    * @return {boolean} `true` if the object is plain, otherwise `false`.
    */
-  var IsPlainObject$T = function IsPlainObject(obj) {
+  var IsPlainObject$U = function IsPlainObject(obj) {
     // Not plain objects:
     // - Any object or value whose internal [[Class]] property is not "[object Object]"
     // - DOM nodes
@@ -353,7 +353,7 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$T(inObject)) {
+    if (IsPlainObject$U(inObject)) {
       for (key in inObject) {
         value = inObject[key];
 
@@ -566,10 +566,10 @@
     }
   };
 
-  var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3b = Phaser.Utils.Objects.GetValue;
   var SetStretchMode = function SetStretchMode(mode) {
-    if (IsPlainObject$S(mode)) {
+    if (IsPlainObject$T(mode)) {
       this.stretchMode.edge = parseMode(GetValue$3b(mode, 'edge', 0));
       this.stretchMode.internal = parseMode(GetValue$3b(mode, 'internal', 0));
     } else {
@@ -631,7 +631,7 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3a = Phaser.Utils.Objects.GetValue;
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
@@ -640,7 +640,7 @@
       function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         var _this;
         _classCallCheck(this, NinePatch);
-        if (IsPlainObject$R(x)) {
+        if (IsPlainObject$S(x)) {
           config = x;
           x = GetValue$3a(config, 'x', 0);
           y = GetValue$3a(config, 'y', 0);
@@ -650,7 +650,7 @@
           baseFrame = GetValue$3a(config, 'baseFrame', undefined);
           columns = GetValue$3a(config, 'columns', undefined);
           rows = GetValue$3a(config, 'rows', undefined);
-        } else if (IsPlainObject$R(width)) {
+        } else if (IsPlainObject$S(width)) {
           config = width;
           width = GetValue$3a(config, 'width', 1);
           height = GetValue$3a(config, 'height', 1);
@@ -658,13 +658,13 @@
           baseFrame = GetValue$3a(config, 'baseFrame', undefined);
           columns = GetValue$3a(config, 'columns', undefined);
           rows = GetValue$3a(config, 'rows', undefined);
-        } else if (IsPlainObject$R(key)) {
+        } else if (IsPlainObject$S(key)) {
           config = key;
           key = GetValue$3a(config, 'key', undefined);
           baseFrame = GetValue$3a(config, 'baseFrame', undefined);
           columns = GetValue$3a(config, 'columns', undefined);
           rows = GetValue$3a(config, 'rows', undefined);
-        } else if (IsPlainObject$R(baseFrame)) {
+        } else if (IsPlainObject$S(baseFrame)) {
           config = baseFrame;
           baseFrame = GetValue$3a(config, 'baseFrame', undefined);
           columns = GetValue$3a(config, 'columns', undefined);
@@ -674,7 +674,7 @@
           rows = columns;
           columns = baseFrame;
           baseFrame = GetValue$3a(config, 'baseFrame', undefined);
-        } else if (IsPlainObject$R(columns)) {
+        } else if (IsPlainObject$S(columns)) {
           config = columns;
           columns = GetValue$3a(config, 'columns', undefined);
           rows = GetValue$3a(config, 'rows', undefined);
@@ -1090,7 +1090,7 @@
   }();
 
   var GameObject$4 = Phaser.GameObjects.GameObject;
-  var IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$38 = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
@@ -1100,7 +1100,7 @@
     function Blitter(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, Blitter);
-      if (IsPlainObject$Q(x)) {
+      if (IsPlainObject$R(x)) {
         config = x;
         x = GetValue$38(config, 'x', 0);
         y = GetValue$38(config, 'y', 0);
@@ -1743,7 +1743,7 @@
     ctx.restore();
   };
 
-  var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
   var ImageData$1 = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
     var _super = _createSuper(ImageData);
@@ -1769,7 +1769,7 @@
     }, {
       key: "setFrame",
       value: function setFrame(frame) {
-        if (arguments.length > 0 && !IsPlainObject$P(frame)) {
+        if (arguments.length > 0 && !IsPlainObject$Q(frame)) {
           frame = this.parent.texture.get(frame);
         }
         this.frame = frame;
@@ -2357,7 +2357,7 @@
   };
 
   var Shape$1 = Phaser.GameObjects.Shape;
-  var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle$2 = /*#__PURE__*/function (_Shape) {
@@ -2367,7 +2367,7 @@
       var _this;
       _classCallCheck(this, RoundRectangle);
       var strokeColor, strokeAlpha, strokeWidth, shapeType;
-      if (IsPlainObject$O(x)) {
+      if (IsPlainObject$P(x)) {
         var config = x;
         x = config.x;
         y = config.y;
@@ -5833,9 +5833,13 @@
     return WrapTextLinesPool;
   }(Stack);
 
+  var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2$ = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
-    if (config === undefined) {
+    if (IsPlainObject$O(key)) {
+      config = key;
+      key = config.key;
+    } else if (config === undefined) {
       config = {
         key: key
       };
@@ -5867,19 +5871,21 @@
       height: height,
       y: GetValue$2$(config, 'y', 0),
       left: GetValue$2$(config, 'left', 0),
-      right: GetValue$2$(config, 'right', 0)
+      right: GetValue$2$(config, 'right', 0),
+      originX: GetValue$2$(config, 'originX', 0),
+      originY: GetValue$2$(config, 'originY', 0)
     };
   };
 
   var DrawImage = function DrawImage(key, context, x, y, autoRound) {
     var imgData = this.get(key);
-    x += imgData.left;
-    y += imgData.y;
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+    x += imgData.left - imgData.originX * frame.cutWidth;
+    y += imgData.y - imgData.originY * frame.cutHeight;
     if (autoRound) {
       x = Math.round(x);
       y = Math.round(y);
     }
-    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, imgData.width, imgData.height);
   };
 
@@ -37948,7 +37954,8 @@
     clearAllButtonsState: function clearAllButtonsState() {
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-        buttons[i].selected = false;
+        var button = buttons[i];
+        button.selected = false;
       }
       return this;
     },
@@ -37957,6 +37964,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         states[button.name] = button.selected;
       }
       return states;
@@ -37977,6 +37987,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           button.selected = state;
           break;
@@ -37988,6 +38001,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           return button.selected;
         }
@@ -39279,136 +39295,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.Dialog', Dialog);
-
-  var Choices = /*#__PURE__*/function (_Dialog) {
-    _inherits(Choices, _Dialog);
-    var _super = _createSuper(Choices);
-    // Assume that each child is a Label or a text game object
-
-    function Choices(scene, config) {
-      var _this;
-      _classCallCheck(this, Choices);
-      if (config === undefined) {
-        config = {};
-      }
-      if (!config.hasOwnProperty('choices')) {
-        config.choices = [];
-      }
-      var createChoiceCallback, createChoiceCallbackScope;
-      if (typeof config.choices === 'function') {
-        createChoiceCallback = config.choices;
-        createChoiceCallbackScope = undefined;
-        config.choices = [];
-      } else {
-        createChoiceCallback = config.createChoiceCallback;
-        createChoiceCallbackScope = config.createChoiceCallbackScope;
-      }
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexChoices';
-      _this.setCreateChoiceCallback(createChoiceCallback, createChoiceCallbackScope);
-      return _this;
-    }
-    _createClass(Choices, [{
-      key: "setCreateChoiceCallback",
-      value: function setCreateChoiceCallback(callback, scope) {
-        this.createChoiceCallback = callback;
-        this.createChoiceCallbackScope = scope;
-        return this;
-      }
-    }, {
-      key: "setChildText",
-      value: function setChildText(child, text) {
-        if (typeof child === 'string') {
-          child = this.childrenMap[child];
-        }
-        if (!child) {
-          return this;
-        }
-        if (text) {
-          child.show().setText(text);
-        } else {
-          child.hide();
-        }
-        return this;
-      }
-    }, {
-      key: "setTitle",
-      value: function setTitle(text) {
-        this.setChildText('title', text);
-        return this;
-      }
-    }, {
-      key: "setContent",
-      value: function setContent(text) {
-        this.setChildText('content', text);
-        return this;
-      }
-    }, {
-      key: "setDescription",
-      value: function setDescription(text) {
-        this.setChildText('description', text);
-        return this;
-      }
-    }, {
-      key: "setChoices",
-      value: function setChoices(textArray) {
-        var choices = this.childrenMap.choices;
-        if (textArray.length > choices.length) {
-          var callback = this.createChoiceCallback;
-          var scope = this.createChoiceCallbackScope;
-          if (callback) {
-            for (var i = 0, cnt = textArray.length - choices.length; i < cnt; i++) {
-              var gameObject;
-              if (scope) {
-                gameObject = callback.call(scope, this.scene);
-              } else {
-                gameObject = callback(this.scene);
-              }
-              this.addChoice(gameObject);
-            }
-          }
-        }
-        for (var i = 0, cnt = choices.length; i < cnt; i++) {
-          this.setChildText(choices[i], textArray[i]);
-        }
-        return this;
-      }
-    }, {
-      key: "setText",
-      value: function setText(config) {
-        if (config === undefined) {
-          config = {};
-        }
-        this.setTitle(config.title).setContent(config.content).setDescription(config.description).setChoices(config.choices);
-        return this;
-      }
-    }, {
-      key: "clickChoicePromise",
-      value: function clickChoicePromise(config) {
-        if (config) {
-          this.setText(config).layout();
-        }
-        var self = this;
-        return new Promise(function (resolve, reject) {
-          self.once('choice.click', function (button, index, pointer, event) {
-            resolve({
-              button: button,
-              index: index,
-              pointer: pointer
-            });
-          });
-        });
-      }
-    }]);
-    return Choices;
-  }(Dialog);
-
-  ObjectFactory.register('choices', function (config) {
-    var gameObject = new Choices(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue(window, 'RexPlugins.UI.Choices', Choices);
 
   var CreateLabel$1 = function CreateLabel(scene, config, creators) {
     var gameObject = new SimpleLabel(scene, config, creators);

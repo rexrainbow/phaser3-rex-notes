@@ -4105,7 +4105,7 @@
    *
    * @return {boolean} `true` if the object is plain, otherwise `false`.
    */
-  var IsPlainObject$o = function IsPlainObject(obj) {
+  var IsPlainObject$p = function IsPlainObject(obj) {
     // Not plain objects:
     // - Any object or value whose internal [[Class]] property is not "[object Object]"
     // - DOM nodes
@@ -4142,7 +4142,7 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$o(inObject)) {
+    if (IsPlainObject$p(inObject)) {
       for (key in inObject) {
         value = inObject[key];
 
@@ -6884,9 +6884,13 @@
     return WrapTextLinesPool;
   }(Stack);
 
+  var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1p = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
-    if (config === undefined) {
+    if (IsPlainObject$o(key)) {
+      config = key;
+      key = config.key;
+    } else if (config === undefined) {
       config = {
         key: key
       };
@@ -6918,19 +6922,21 @@
       height: height,
       y: GetValue$1p(config, 'y', 0),
       left: GetValue$1p(config, 'left', 0),
-      right: GetValue$1p(config, 'right', 0)
+      right: GetValue$1p(config, 'right', 0),
+      originX: GetValue$1p(config, 'originX', 0),
+      originY: GetValue$1p(config, 'originY', 0)
     };
   };
 
   var DrawImage$2 = function DrawImage(key, context, x, y, autoRound) {
     var imgData = this.get(key);
-    x += imgData.left;
-    y += imgData.y;
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+    x += imgData.left - imgData.originX * frame.cutWidth;
+    y += imgData.y - imgData.originY * frame.cutHeight;
     if (autoRound) {
       x = Math.round(x);
       y = Math.round(y);
     }
-    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, imgData.width, imgData.height);
   };
 
@@ -22914,7 +22920,8 @@
     clearAllButtonsState: function clearAllButtonsState() {
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-        buttons[i].selected = false;
+        var button = buttons[i];
+        button.selected = false;
       }
       return this;
     },
@@ -22923,6 +22930,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         states[button.name] = button.selected;
       }
       return states;
@@ -22943,6 +22953,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           button.selected = state;
           break;
@@ -22954,6 +22967,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           return button.selected;
         }

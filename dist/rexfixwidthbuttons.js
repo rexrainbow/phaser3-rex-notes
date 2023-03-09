@@ -10718,7 +10718,8 @@
     clearAllButtonsState: function clearAllButtonsState() {
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-        buttons[i].selected = false;
+        var button = buttons[i];
+        button.selected = false;
       }
       return this;
     },
@@ -10727,6 +10728,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         states[button.name] = button.selected;
       }
       return states;
@@ -10747,6 +10751,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           button.selected = state;
           break;
@@ -10758,6 +10765,9 @@
       var buttons = this.buttons;
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         var button = buttons[i];
+        if (button.rexSizer.hidden) {
+          continue;
+        }
         if (button.name === name) {
           return button.selected;
         }
