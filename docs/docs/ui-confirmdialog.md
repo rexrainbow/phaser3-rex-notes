@@ -258,6 +258,11 @@ var dialog = scene.rexUI.add.confirmDialog({
     button: SimpleLabelConfig,
     // buttonA: SimpleLabelConfig
     // buttonB: SimpleLabelConfig
+    
+    // choice: SimpleLabelConfig,
+    // choicesType
+    // choicesWidth: undefined,
+    // choicesHeight: undefined,
 
     // Space
     space: {
@@ -269,31 +274,46 @@ var dialog = scene.rexUI.add.confirmDialog({
         title: 0,
         titleLeft: 0,
         titleRight: 0,
+
         content: 0,
         contentLeft: 0,
         contentRight: 0,
+
         actionsLeft: 0,
         actionsRight: 0,
-
         action: 0,
+
+        choices: 0,
+        choicesLeft: 0,
+        choicesRight: 0,
+        choice: 0,
+        choiceLine: 0,
+        choiceColumn: 0, choiceRow: 0,
+        choicesBackgroundLeft: 0,
+        choicesBackgroundRight: 0,
+        choicesBackgroundTop: 0,
+        choicesBackgroundBottom: 0,
     },
 
     proportion: {
         title: 0,
         content: 0,
         actions: 0,
+        choices: 0,
     },
 
     expand: {
         title: true,
         content: true,
         actions: false,
+        choices: true,
     },
 
     align: {
         title: 'center',
         content: 'center',
         actions: 'center',
+        choices: 'center',
     },
 
     click: {
@@ -328,7 +348,26 @@ var dialog = scene.rexUI.add.confirmDialog({
 - `buttonMode` : `0`, `1`, or `2`
     - `0` : No action button, any touch can close modal dialog
     - `1`, `2` : Dialog with 1 or 2 action buttons, clicking any action button to close modal dialog.
-- `button` : [Styles of simple-label](ui-simplelabel.md#add-label-object)
+- `button` : [Styles of simple-label](ui-simplelabel.md#add-label-object), optional.
+- `choice` : [Styles of simple-label](ui-simplelabel.md#add-label-object), optional.
+- `choicesType` : Sizer type ([Buttons](ui-buttons.md)/[FixWidthButtons](ui-fixwidthbuttons.md)/[GridButtons](ui-gridbuttons.md)) and behavior (`''`/`'radio'`/`'checkboxes'`) of choice buttons.
+    - `undefined`, `''`, or `'y'` : [Buttons](ui-buttons.md) in vertical/horizontal without any extra behavior, default behavior.
+    - `'radio'`, or `'x-radio'` : [Buttons](ui-buttons.md) in vertical/horizontal, with radio behavior.
+        - Name of selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`.
+    - `'checkboxes'`, or `'x-checkboxes'` : [Buttons](ui-buttons.md) in vertical/horizontal, with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
+    - `'wrap'` : [FixWidthButtons](ui-fixwidthbuttons.md) without any extra behavior, default behavior.
+    - `'wrap-radio'` : [FixWidthButtons](ui-fixwidthbuttons.md) with radio behavior.
+        - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
+    - `'wrap-checkboxes'` : [FixWidthButtons](ui-fixwidthbuttons.md) with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
+    - `'grid'` : [GridButtons](ui-gridbuttons.md) without any extra behavior, default behavior.
+    - `'grid-radio'` : [GridButtons](ui-gridbuttons.md) with radio behavior.
+        - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
+    - `'grid-checkboxes'` : [GridButtons](ui-gridbuttons.md) with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.        
+- `choicesWidth`, `choicesHeight` : Minimum width, minimum height of choices.
+    - Must assign `choicesHeight` value if using [GridButtons](ui-gridbuttons.md) choices.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.title` : Space between title game object and below game object.
@@ -465,12 +504,29 @@ dialog.resetDisplayContent({
         actionSize: undefined,
     
     },
+
+    choices: [
+        {
+            text: '', value: undefined,
+    
+            icon: undefined, iconFrame: undefined,
+            iconSize: undefined,
+    
+            action: undefined, actionFrame: undefined,
+            actionSize: undefined,
+        },        
+        // ...
+    ]
 });
 ```
 
 - `title`, `content`,`buttonA`, `buttonB` : Display content
     - A string : Set text of simple lable
     - Configuration of [`simpleLabel.resetDisplayContent(config)`](ui-simplelabel.md#reset-display-content) : Set icon, text, action icon of simple label.
+- `choices` : Array of display content
+    - A string : Set text of simple lable, also use this string as option value.
+    - Configuration of [`simpleLabel.resetDisplayContent(config)`](ui-simplelabel.md#reset-display-content) : Set icon, text, action icon of simple label.
+        - Property `value` : Option value.
 
 Run `dialog.layout()` after this method, to layout children again.
 
@@ -535,6 +591,7 @@ dialog
     function(data) {
         // var index = data.index;
         // var text = data.text;
+        // var value = data.value;
         // var button = data.button;
         // var dialog = data.dialog;
     }
@@ -542,6 +599,10 @@ dialog
     - `data` : Contains these properties
         - `data.index` : Index of clicking action button
         - `data.text` : `button.text`, this property is valided if button game object is a label.
+        - `data.value` :
+            - A single value : Return selected value, if `choicesType` is `'radio'`
+            - A dictionary contains `{value: boolean}` : Return selected values, if `choicesType` is `'checkboxes'`
+            - `undefined` : Default value
         - `data.button` : Clicked button game object.
         - `data.dialog` : This dialog game object.
 

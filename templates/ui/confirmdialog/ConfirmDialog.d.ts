@@ -60,9 +60,9 @@ declare namespace ConfirmDialog {
         buttonB?: SimpleLabel.IConfig,
 
         choicesType?: string,
+        choice?: SimpleLabel.IConfig,
         choicesWidth?: number,
         choicesHeight?: number,
-        choice?: SimpleLabel.IConfig,
 
         proportion?: {
             title?: number,
