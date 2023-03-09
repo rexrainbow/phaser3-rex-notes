@@ -63,21 +63,25 @@ class Demo extends Phaser.Scene {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
                 background: {
                     color: COLOR_DARK,
-                    strokeColor: COLOR_LIGHT,
+                    strokeColor: undefined,
                     radius: 10,
 
                     'hover.strokeColor': 0xffffff,
+                    'hover.strokeWidth': 2,
+                    'disable.color': 0x333333,
                 }
             },
 
+            choicesType: 'radio',
             choice: {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
                 background: {
                     color: COLOR_DARK,
-                    strokeColor: COLOR_LIGHT,
+                    strokeColor: null,
                     radius: 10,
 
                     'hover.strokeColor': 0xffffff,
+                    'active.color': COLOR_LIGHT,
                 }
             },
 
@@ -85,26 +89,37 @@ class Demo extends Phaser.Scene {
                 actions: 'right'
             },
         }
-        this.rexUI.add.confirmDialog(style)
+
+        var dialog = this.rexUI.add.confirmDialog(style)
             .setPosition(400, 300)
             .setDraggable('title')
             .resetDisplayContent({
                 title: 'Title',
                 content: "Hello.",
                 choices: [
-                    'A',
-                    'B',
-                    'C',
-                    'D'
+                    'A', // { text: 'A', value: 10 },
+                    'B', // { text: 'B', value: 20 },
+                    'C', // { text: 'C', value: 30 },
+                    'D', // { text: 'D', value: 40 },
                 ],
                 buttonA: 'Ok'
             })
             .layout()
+
+        // Enable action button until first clicking of any choice button
+        dialog
+            .setActionEnable(0, false)
+            .once('choice.click', function () {
+                this.setActionEnable(0);
+            })
+
+        dialog
             .modalPromise()
             .then(function (data) {
                 print.text = `\
 index: ${data.index}
 text : ${data.text}
+value : ${data.value}
 `
             })
     }

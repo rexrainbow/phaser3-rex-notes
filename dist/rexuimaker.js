@@ -24500,6 +24500,16 @@
           button: button,
           dialog: self
         };
+        switch (self.buttonsType) {
+          case 'radio':
+            closeEventData.value = self.getChoicesSelectedButtonName();
+            break;
+          case 'checkboxes':
+            closeEventData.value = self.getChoicesButtonStates();
+            break;
+          default:
+            closeEventData.value = undefined;
+        }
         self.modalClose(closeEventData);
       });
     }
@@ -24742,6 +24752,7 @@
           proportion: proportion,
           expand: expand
         });
+        _this.buttonsType = buttonsType;
       }
       if (actions) {
         actionsSizer = new Buttons$1(scene, {

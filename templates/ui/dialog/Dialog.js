@@ -230,6 +230,8 @@ class Dialog extends Sizer {
                 choicesSizer,
                 { align: align, padding: padding, proportion: proportion, expand: expand }
             );
+
+            this.buttonsType = buttonsType;
         }
 
         if (actions) {

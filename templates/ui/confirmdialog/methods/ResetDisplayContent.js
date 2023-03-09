@@ -64,7 +64,7 @@ var ResetActions = function (config) {
 
         this.buttonMode = buttonContentArray.length;
 
-        for (var i = buttonContentArray.length - 1, cnt = actionButtons.length; i < cnt; i++) {
+        for (var i = buttonContentArray.length, cnt = actionButtons.length; i < cnt; i++) {
             actionButtons[i].hide();
         }
     }
@@ -86,15 +86,28 @@ var ResetChoices = function (config) {
     var defaultActionButtonCreator = this.defaultActionButtonCreator;
     for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
         var buttonContent = buttonContentArray[i];
+        if (typeof (buttonContent) === 'string') {
+            buttonContent = { text: buttonContent };
+        }
+
         var button = choices[i];
         if (!button) {
             button = CreateLabel(scene, defaultChoiceConfig, defaultActionButtonCreator);
             this.addChoice(button);
         }
-        button.show().resetDisplayContent(buttonContent);
+
+        button.show().resetDisplayContent(buttonContent)
+
+        var optionValue;
+        if (buttonContent.hasOwnProperty('value')) {
+            optionValue = buttonContent.value;
+        } else {
+            optionValue = buttonContent.text;
+        }
+        button.setName(optionValue)
     }
 
-    for (var i = buttonContentArray.length - 1, cnt = choices.length; i < cnt; i++) {
+    for (var i = buttonContentArray.length, cnt = choices.length; i < cnt; i++) {
         choices[i].hide();
     }
 }

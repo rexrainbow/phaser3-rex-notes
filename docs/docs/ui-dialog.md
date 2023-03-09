@@ -767,7 +767,7 @@ dialog.forEachLeftToolbar(callback, scope);
 
 - Read state
     ```javascript
-    var value = dialog.getSelectedButtonName();
+    var value = dialog.getChoicesSelectedButtonName();
     ```
 - Set state
     ```javascript

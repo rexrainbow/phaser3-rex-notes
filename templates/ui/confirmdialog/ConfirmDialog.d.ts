@@ -32,11 +32,20 @@ declare namespace ConfirmDialog {
             contentLeft?: number,
             contentRight?: number,
 
-            choicesRight?: number,
             actionsLeft?: number,
             actionsRight?: number,
-
             action?: number,
+
+            choices?: number,
+            choicesLeft?: number,
+            choicesRight?: number,
+            choice?: number,
+            choiceLine?: number,
+            choiceColumn?: number, choiceRow?: number,
+            choicesBackgroundLeft?: number,
+            choicesBackgroundRight?: number,
+            choicesBackgroundTop?: number,
+            choicesBackgroundBottom?: number,
         };
 
         background?: CreateBackground.IConfig,
@@ -50,32 +59,48 @@ declare namespace ConfirmDialog {
         buttonA?: SimpleLabel.IConfig,
         buttonB?: SimpleLabel.IConfig,
 
+        choicesType?: string,
+        choicesWidth?: number,
+        choicesHeight?: number,
+        choice?: SimpleLabel.IConfig,
+
         proportion?: {
             title?: number,
             content?: number,
             actions?: number,
+            choices?: number,
         },
 
         expand?: {
             title?: boolean,
             content?: boolean,
             actions?: boolean,
+            choices?: boolean,
         },
 
         align?: {
             title?: AlignTypes,
             content?: AlignTypes,
             actions?: AlignTypes,
+            choices?: AlignTypes,
         },
 
         click?: IConfigClick
     }
 
+    interface IResetChoiceDisplayContentConfig extends Label.IResetDisplayContentConfig {
+        value?: any;
+    }
+
     interface IResetDisplayContentConfig {
         title?: string | Label.IResetDisplayContentConfig,
+
         content?: string | Label.IResetDisplayContentConfig,
+
         buttonA?: string | Label.IResetDisplayContentConfig,
         buttonB?: string | Label.IResetDisplayContentConfig,
+
+        choices?: (string | IResetChoiceDisplayContentConfig)[]
     }
 
     interface ICreatorsConfig {
@@ -85,6 +110,7 @@ declare namespace ConfirmDialog {
         button?: SimpleLabel.ICreatorsConfig,
         buttonA?: SimpleLabel.ICreatorsConfig,
         buttonB?: SimpleLabel.ICreatorsConfig,
+        choice?: SimpleLabel.ICreatorsConfig,
     }
 }
 

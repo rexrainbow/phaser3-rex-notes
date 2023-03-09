@@ -6727,7 +6727,7 @@
   };
 
   var GetValue$11 = Phaser.Utils.Objects.GetValue;
-  var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
+  var Modal$2 = /*#__PURE__*/function (_OpenCloseTransition) {
     _inherits(Modal, _OpenCloseTransition);
     var _super = _createSuper(Modal);
     function Modal(gameObject, config) {
@@ -6939,8 +6939,8 @@
     fadeOut: 1
   };
 
-  var Modal = function Modal(gameObject, config) {
-    var modalBehavior = new Modal$1(gameObject, config);
+  var Modal$1 = function Modal(gameObject, config) {
+    var modalBehavior = new Modal$2(gameObject, config);
 
     // Route modal's 'open', 'close' event
     modalBehavior.on('open', function () {
@@ -6980,7 +6980,7 @@
         if (this.onCreateModalBehavior) {
           this.onCreateModalBehavior(this, config);
         }
-        this._modalBehavior = Modal(this, config);
+        this._modalBehavior = Modal$1(this, config);
       }
       if (onClose) {
         this._modalBehavior.once('close', onClose);
@@ -13426,6 +13426,16 @@
           button: button,
           dialog: self
         };
+        switch (self.buttonsType) {
+          case 'radio':
+            closeEventData.value = self.getChoicesSelectedButtonName();
+            break;
+          case 'checkboxes':
+            closeEventData.value = self.getChoicesButtonStates();
+            break;
+          default:
+            closeEventData.value = undefined;
+        }
         self.modalClose(closeEventData);
       });
     }
@@ -13668,6 +13678,7 @@
           proportion: proportion,
           expand: expand
         });
+        _this.buttonsType = buttonsType;
       }
       if (actions) {
         actionsSizer = new Buttons$1(scene, {
@@ -22743,7 +22754,7 @@
         button.show().resetDisplayContent(buttonContent);
       }
       this.buttonMode = buttonContentArray.length;
-      for (var i = buttonContentArray.length - 1, cnt = actionButtons.length; i < cnt; i++) {
+      for (var i = buttonContentArray.length, cnt = actionButtons.length; i < cnt; i++) {
         actionButtons[i].hide();
       }
     }
@@ -22762,16 +22773,52 @@
     var defaultActionButtonCreator = this.defaultActionButtonCreator;
     for (var i = 0, cnt = buttonContentArray.length; i < cnt; i++) {
       var buttonContent = buttonContentArray[i];
+      if (typeof buttonContent === 'string') {
+        buttonContent = {
+          text: buttonContent
+        };
+      }
       var button = choices[i];
       if (!button) {
         button = CreateLabel(scene, defaultChoiceConfig, defaultActionButtonCreator);
         this.addChoice(button);
       }
       button.show().resetDisplayContent(buttonContent);
+      var optionValue;
+      if (buttonContent.hasOwnProperty('value')) {
+        optionValue = buttonContent.value;
+      } else {
+        optionValue = buttonContent.text;
+      }
+      button.setName(optionValue);
     }
-    for (var i = buttonContentArray.length - 1, cnt = choices.length; i < cnt; i++) {
+    for (var i = buttonContentArray.length, cnt = choices.length; i < cnt; i++) {
       choices[i].hide();
     }
+  };
+
+  var Modal = function Modal(config, onClose) {
+    if (IsFunction(config)) {
+      onClose = config;
+      config = undefined;
+    }
+    if (config === undefined) {
+      config = {};
+    }
+    var zeroButtonMode = this.buttonMode === 0;
+    if (!config.hasOwnProperty('anyTouchClose')) {
+      config.anyTouchClose = zeroButtonMode;
+    }
+    if (!config.hasOwnProperty('manualClose')) {
+      config.manualClose = !zeroButtonMode;
+    }
+    ModalMethods$1.modal.call(this, config, onClose);
+    return this;
+  };
+
+  var Methods$2 = {
+    resetDisplayContent: ResetDisplayContent,
+    modal: Modal
   };
 
   var OnPointerOverCallback = function OnPointerOverCallback(button) {
@@ -22784,8 +22831,23 @@
       button.setHoverState(false);
     }
   };
+  var OnChoiceButtonStateChange = function OnChoiceButtonStateChange(button, groupName, index, value) {
+    if (button.setActiveState) {
+      button.setActiveState(value);
+    }
+  };
+  var OnButtonEnable = function OnButtonEnable(button) {
+    if (button.setDisableState) {
+      button.setDisableState(false);
+    }
+  };
+  var OnButtonDisable = function OnButtonDisable(button) {
+    if (button.setDisableState) {
+      button.setDisableState(true);
+    }
+  };
   var RegisterEvents = function RegisterEvents() {
-    this.on('action.over', OnPointerOverCallback).on('action.out', OnPointerOutCallback).on('choice.over', OnPointerOverCallback).on('choice.out', OnPointerOutCallback);
+    this.on('button.over', OnPointerOverCallback).on('button.out', OnPointerOutCallback).on('button.enable', OnButtonEnable).on('button.disable', OnButtonDisable).on('button.statechange', OnChoiceButtonStateChange);
   };
 
   var SCROLLMODE = {
@@ -25097,13 +25159,13 @@
     }]);
     return Scrollable;
   }(Sizer);
-  var Methods$2 = {
+  var Methods$1 = {
     resizeController: ResizeController,
     updateController: UpdateController
   };
 
   // mixin
-  Object.assign(Scrollable.prototype, Methods$2);
+  Object.assign(Scrollable.prototype, Methods$1);
 
   var TextType = 0;
   var TagTextType = 1;
@@ -25342,7 +25404,7 @@
     }
   };
 
-  var Methods$1 = {
+  var Methods = {
     setText: SetText$1,
     updateTextObject: UpdateTextObject,
     preLayout: PreLayout,
@@ -25622,7 +25684,7 @@
   var CreateDefaultTextObject = function CreateDefaultTextObject(scene) {
     return scene.add.text(0, 0, '');
   };
-  Object.assign(TextBlock.prototype, Methods$1);
+  Object.assign(TextBlock.prototype, Methods);
 
   var InjectProperties = function InjectProperties(textBlock) {
     Object.defineProperty(textBlock, 'childOY', {
@@ -25896,33 +25958,9 @@
       RegisterEvents.call(_assertThisInitialized(_this));
       return _this;
     }
-    _createClass(ConfirmDialog, [{
-      key: "modal",
-      value: function modal(config, onClose) {
-        if (IsFunction(config)) {
-          onClose = config;
-          config = undefined;
-        }
-        if (config === undefined) {
-          config = {};
-        }
-        var zeroButtonMode = this.buttonMode === 0;
-        if (!config.hasOwnProperty('anyTouchClose')) {
-          config.anyTouchClose = zeroButtonMode;
-        }
-        if (!config.hasOwnProperty('manualClose')) {
-          config.manualClose = !zeroButtonMode;
-        }
-        _get(_getPrototypeOf(ConfirmDialog.prototype), "modal", this).call(this, config, onClose);
-        return this;
-      }
-    }]);
-    return ConfirmDialog;
+    return _createClass(ConfirmDialog);
   }(Dialog);
-  var Methods = {
-    resetDisplayContent: ResetDisplayContent
-  };
-  Object.assign(ConfirmDialog.prototype, Methods);
+  Object.assign(ConfirmDialog.prototype, Methods$2);
 
   return ConfirmDialog;
 

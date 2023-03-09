@@ -32,11 +32,6 @@ declare namespace Dialog {
             choices?: number,
             choicesLeft?: number,
             choicesRight?: number,
-            actionsLeft?: number,
-            actionsRight?: number,
-
-            toolbarItem?: number,
-            leftToolbarItem?: number,
 
             choice?: number,
             choiceLine?: number,
@@ -46,7 +41,14 @@ declare namespace Dialog {
             choicesBackgroundTop?: number,
             choicesBackgroundBottom?: number,
 
+            actionsLeft?: number,
+            actionsRight?: number,
+
             action?: number,
+
+            toolbarItem?: number,
+            leftToolbarItem?: number,
+
         };
 
         background?: Phaser.GameObjects.GameObject,
@@ -69,11 +71,9 @@ declare namespace Dialog {
         choicesWidth?: number,
         choicesHeight?: number,
         choices?: Phaser.GameObjects.GameObject[],
-
         choicesBackground?: Phaser.GameObjects.GameObject,
 
         actions?: Phaser.GameObjects.GameObject[],
-
         actionsBackground?: Phaser.GameObjects.GameObject,
 
         proportion?: {
@@ -107,7 +107,8 @@ declare namespace Dialog {
         index: number,
         text: string,
         button: Phaser.GameObjects.GameObject,
-        dialog: Dialog
+        dialog: Dialog,
+        value: any
     }
 
     type OnModalCloseCallbackType = (data: CloseEventDataType | Dialog) => void;

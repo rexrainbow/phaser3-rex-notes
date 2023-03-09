@@ -1,11 +1,10 @@
 import Dialog from '../dialog/Dialog.js';
-import ResetDisplayContent from './methods/ResetDisplayContent.js';
+import Methods from './methods/Methods.js';
 import RegisterEvents from './methods/RegisterEvents.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';
 import CreateContent from './methods/CreateContent.js';
-import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 import HasValue from '../../../plugins/utils/object/HasValue.js';
 import TextArea from '../textarea/TextArea.js';
@@ -94,35 +93,6 @@ class ConfirmDialog extends Dialog {
         // Interactive
         RegisterEvents.call(this);
     }
-
-    modal(config, onClose) {
-        if (IsFunction(config)) {
-            onClose = config;
-            config = undefined;
-        }
-
-        if (config === undefined) {
-            config = {};
-        }
-
-        var zeroButtonMode = (this.buttonMode === 0);
-
-        if (!config.hasOwnProperty('anyTouchClose')) {
-            config.anyTouchClose = zeroButtonMode;
-        }
-
-        if (!config.hasOwnProperty('manualClose')) {
-            config.manualClose = !zeroButtonMode;
-        }
-
-        super.modal(config, onClose);
-
-        return this;
-    }
-}
-
-var Methods = {
-    resetDisplayContent: ResetDisplayContent,
 }
 
 Object.assign(
