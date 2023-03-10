@@ -1239,11 +1239,11 @@ Style of text/number list input is defined in
                         strokeAlpha: undefined,
                         strokeWidth: undefined,
     
-                        'active.color': undefined,
-                        'active.alpha': undefined,
-                        'active.strokeColor': undefined,
-                        'active.strokeAlpha': undefined,
-                        'active.strokeWidth': undefined,
+                        'hover.color': undefined,
+                        'hover.alpha': undefined,
+                        'hover.strokeColor': undefined,
+                        'hover.strokeAlpha': undefined,
+                        'hover.strokeWidth': undefined,
                     },
 
                     text: {

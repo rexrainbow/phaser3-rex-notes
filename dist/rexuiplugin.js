@@ -45878,6 +45878,59 @@
   });
   SetValue(window, 'RexPlugins.UI.DropDownList', DropDownList);
 
+  var BuildListConfig = function BuildListConfig(scene, config, creators) {
+    config = config ? DeepClone(config) : {};
+    if (creators === undefined) {
+      creators = {};
+    }
+    var labelConfig = config.label || config.button;
+    var listButtonConfig = config.button || config.label;
+    delete config.label;
+    delete config.button;
+    var labelCreator = creators.label || creators.button || creators;
+    var listButtonCreator = creators.button || creators.label || creators;
+    var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
+    listConfig.list = config;
+    listConfig.list.createButtonCallback = function (scene, option) {
+      var gameObject = CreateLabel$1(scene, listButtonConfig, listButtonCreator).resetDisplayContent({
+        text: option.text
+      });
+      return gameObject;
+    };
+    listConfig.list.onButtonOver = function (button, index, pointer, event) {
+      if (button.setHoverState) {
+        button.setHoverState(true);
+      }
+    };
+    listConfig.list.onButtonOut = function (button, index, pointer, event) {
+      if (button.setHoverState) {
+        button.setHoverState(false);
+      }
+    };
+    return listConfig;
+  };
+
+  var SimpleDropDownList = /*#__PURE__*/function (_DropDownList) {
+    _inherits(SimpleDropDownList, _DropDownList);
+    var _super = _createSuper(SimpleDropDownList);
+    function SimpleDropDownList(scene, config, creators) {
+      var _this;
+      _classCallCheck(this, SimpleDropDownList);
+      config = BuildListConfig(scene, config, creators);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexSimpleDropDownList';
+      return _this;
+    }
+    return _createClass(SimpleDropDownList);
+  }(DropDownList);
+
+  ObjectFactory.register('simpleDropDownList', function (config, creators) {
+    var gameObject = new SimpleDropDownList(this.scene, config, creators);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.SimpleDropDownList', SimpleDropDownList);
+
   var GetLines = function GetLines(startLineIndex, endLineIdx) {
     if (startLineIndex === undefined) {
       startLineIndex = this.startLineIndex;
@@ -52334,29 +52387,6 @@
     gameObject.setRange(config.min, config.max, config.step);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
-  };
-
-  var BuildListConfig = function BuildListConfig(scene, config) {
-    config = config ? DeepClone(config) : {};
-    var labelConfig = config.label || config.button;
-    var listButtonConfig = config.button || config.label;
-    delete config.label;
-    delete config.button;
-    var listConfig = BuildLabelConfig(scene, labelConfig);
-    listConfig.list = config;
-    listConfig.list.createButtonCallback = function (scene, option) {
-      var gameObject = CreateLabel$1(scene, listButtonConfig).resetDisplayContent({
-        text: option.text
-      });
-      return gameObject;
-    };
-    listConfig.list.onButtonOver = function (button, index, pointer, event) {
-      button.setActiveState(true);
-    };
-    listConfig.list.onButtonOut = function (button, index, pointer, event) {
-      button.setActiveState(false);
-    };
-    return listConfig;
   };
 
   var CreateDropDownList = function CreateDropDownList(scene, config) {

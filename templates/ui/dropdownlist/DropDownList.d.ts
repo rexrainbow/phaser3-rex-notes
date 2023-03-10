@@ -58,7 +58,6 @@ declare namespace DropDownList {
         left?: number, right?: number, top?: number, bottom?: number, item?: number, line?: number
     }
 
-
     interface IConfig extends Label.IConfig {
         options?: any[],
         list?: {
