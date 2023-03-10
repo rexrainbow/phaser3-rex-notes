@@ -56,6 +56,7 @@ import SliderFactory from './slider/Factory.js';
 import GridTableFactory from './gridtable/Factory.js';
 import MenuFactory from './menu/Factory.js';
 import DropDownListFactory from './dropdownlist/Factory.js';
+import SimpleDropDownListFactory from './simpledropdownlist/Factory.js';
 import TextBoxFactory from './textbox/Factory.js';
 import NumberBarFactory from './numberbar/Factory.js';
 import ScrollBarFactory from './scrollbar/Factory.js';

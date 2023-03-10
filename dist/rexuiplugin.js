@@ -45895,6 +45895,9 @@
       var gameObject = CreateLabel$1(scene, listButtonConfig, listButtonCreator).resetDisplayContent({
         text: option.text
       });
+      if (option.hasOwnProperty('value')) {
+        gameObject.value = option.value;
+      }
       return gameObject;
     };
     listConfig.list.onButtonOver = function (button, index, pointer, event) {
@@ -52431,12 +52434,7 @@
       });
       _this.addChildrenMap('list', list);
       list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-        var option = list.options[index];
-        if (!option) {
-          return; // ??
-        }
-
-        this.setValue(option.value);
+        this.setValue(button.value);
       }, _assertThisInitialized(_this));
       return _this;
     }

@@ -54,6 +54,7 @@ import Slider from './slider/Slider';
 import GridTable from './gridtable/GridTable';
 import Menu from './menu/Menu';
 import DropDownList from './dropdownlist/DropDownList';
+import SimpleDropDownList from './simpledropdownlist/SimpleLabel';
 import TextBox from './textbox/TextBox';
 import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';
@@ -171,6 +172,7 @@ export {
     GridTable,
     Menu,
     DropDownList,
+    SimpleDropDownList,
     TextBox,
     NumberBar,
     ScrollBar,

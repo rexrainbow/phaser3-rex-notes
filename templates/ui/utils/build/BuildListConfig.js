@@ -20,6 +20,10 @@ var BuildListConfig = function (scene, config, creators) {
     listConfig.list.createButtonCallback = function (scene, option) {
         var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator)
             .resetDisplayContent({ text: option.text })
+
+        if (option.hasOwnProperty('value')) {
+            gameObject.value = option.value;
+        }
         return gameObject;
     }
     listConfig.list.onButtonOver = function (button, index, pointer, event) {

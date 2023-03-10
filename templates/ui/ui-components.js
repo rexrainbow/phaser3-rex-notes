@@ -55,6 +55,7 @@ import Slider from './slider/Slider.js';
 import GridTable from './gridtable/GridTable.js';
 import Menu from './menu/Menu.js';
 import DropDownList from './dropdownlist/DropDownList.js';
+import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList.js';
 import TextBox from './textbox/TextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import BadgeLabel from './badgelabel/BadgeLabel.js';
@@ -172,6 +173,7 @@ export {
     GridTable,
     Menu,
     DropDownList,
+    SimpleDropDownList,
     TextBox,
     NumberBar,
     BadgeLabel,

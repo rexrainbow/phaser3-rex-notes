@@ -264,6 +264,7 @@ module.exports = {
     'namevaluelabel': './templates/ui/namevaluelabel/NameValueLabel.js',
     'menu': './templates/ui/menu/Menu.js',
     'dropdownlist': './templates/ui/dropdownlist/DropDownList.js',
+    'simpledropdownlist': './templates/ui/simpledropdownlist/SimpleDropDownList.js',
     'ninepatch': './templates/ui/ninepatch/NinePatch.js',
     'badgelabel': './templates/ui/badgelabel/BadgeLabel.js',
     'pages': './templates/ui/pages/Pages.js',

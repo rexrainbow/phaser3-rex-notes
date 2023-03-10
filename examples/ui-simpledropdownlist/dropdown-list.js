@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import SimpleDropDownList from '../../templates/ui/simpledropdownlist/SimpleDropDownList.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -16,19 +15,6 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var stringOption = false;
-        var options;
-        if (stringOption) {
-            options = ['A', 'BB', 'CCC', 'DDDD'];
-        } else {
-            options = [
-                { text: 'A', value: 0 },
-                { text: 'BB', value: 10 },
-                { text: 'CCC', value: 100 },
-                { text: 'DDDD', value: 1000 },
-            ]
-        }
-
         var style = {
             label: {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
@@ -54,14 +40,25 @@ class Demo extends Phaser.Scene {
             }
         }
 
-        var dropDownList = new SimpleDropDownList(this, style)
-        this.add.existing(dropDownList);
+        var options = [
+            { text: 'A', value: 0 },
+            { text: 'BB', value: 10 },
+            { text: 'CCC', value: 100 },
+            { text: 'DDDD', value: 1000 },
+        ]
 
-        dropDownList
+        var dropDownList = this.rexUI.add.simpleDropDownList(style)
             .resetDisplayContent('-- Select --')
             .setOptions(options)
             .setPosition(400, 300)
             .layout()
+
+        var print = this.add.text(0, 0, '')
+        dropDownList
+            .on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
+                dropDownList.setText(button.text)
+                print.text += `Click ${button.text}, value = ${button.value}\n`
+            },);
 
     }
 

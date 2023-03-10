@@ -21,12 +21,8 @@ class ListInput extends InputFiledBase {
 
         this.addChildrenMap('list', list);
 
-        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-            var option = list.options[index];
-            if (!option) {
-                return;  // ??
-            }
-            this.setValue(option.value);
+        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {           
+            this.setValue(button.value);
         }, this);
 
     }
