@@ -28,8 +28,8 @@ export default {
                     this.fireEvent('button.out', gameObject, pointer, event);
                 }, this)
         }
-        
-        if (this.buttonsType) {            
+
+        if (this.buttonsType) {
             if (gameObject.name === undefined) {
                 console.error(`${this.parent.constructor.name}: Option button miss value`)
             }
