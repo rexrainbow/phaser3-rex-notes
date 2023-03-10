@@ -360,12 +360,7 @@ var dialog = scene.rexUI.add.confirmDialog({
     - `'wrap-radio'` : [FixWidthButtons](ui-fixwidthbuttons.md) with radio behavior.
         - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
     - `'wrap-checkboxes'` : [FixWidthButtons](ui-fixwidthbuttons.md) with checkboxes behavior.
-        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
-    - `'grid'` : [GridButtons](ui-gridbuttons.md) without any extra behavior, default behavior.
-    - `'grid-radio'` : [GridButtons](ui-gridbuttons.md) with radio behavior.
-        - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
-    - `'grid-checkboxes'` : [GridButtons](ui-gridbuttons.md) with checkboxes behavior.
-        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.        
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.    
 - `choicesWidth`, `choicesHeight` : Minimum width, minimum height of choices.
     - Must assign `choicesHeight` value if using [GridButtons](ui-gridbuttons.md) choices.
 - `space` : Pads spaces

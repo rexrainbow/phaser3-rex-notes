@@ -26,6 +26,8 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
+        // 'radio', 'x-radio', 'wrap-radio',
+        var choicesType = 'radio';
         var style = {
             width: 300,
             space: {
@@ -63,7 +65,7 @@ class Demo extends Phaser.Scene {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
                 background: {
                     color: COLOR_DARK,
-                    strokeColor: undefined,
+                    strokeWidth: 0,
                     radius: 10,
 
                     'hover.strokeColor': 0xffffff,
@@ -72,15 +74,16 @@ class Demo extends Phaser.Scene {
                 }
             },
 
-            choicesType: 'radio',
+            choicesType: choicesType,
             choice: {
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
                 background: {
                     color: COLOR_DARK,
-                    strokeColor: null,
+                    strokeWidth: 0,
                     radius: 10,
 
                     'hover.strokeColor': 0xffffff,
+                    'hover.strokeWidth': 2,
                     'active.color': COLOR_LIGHT,
                 }
             },
@@ -101,6 +104,13 @@ class Demo extends Phaser.Scene {
                     'B', // { text: 'B', value: 20 },
                     'C', // { text: 'C', value: 30 },
                     'D', // { text: 'D', value: 40 },
+                    // 'E', // { text: 'E', value: 50 },
+                    // 'F', // { text: 'F', value: 60 },
+                    // 'G', // { text: 'G', value: 70 },
+                    // 'H', // { text: 'H', value: 80 },
+                    // 'I', // { text: 'I', value: 90 },
+                    // 'J', // { text: 'J', value: 100 },
+                    // 'K', // { text: 'K', value: 110 },
                 ],
                 buttonA: 'Ok'
             })

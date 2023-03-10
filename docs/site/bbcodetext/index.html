@@ -9523,9 +9523,9 @@
     <span class="c1">//     fontSize: 0</span>
     <span class="c1">// },</span>
 
-    <span class="c1">// images: [</span>
-    <span class="c1">//    { key: &#39;icon&#39;, y: -8 },</span>
-    <span class="c1">// ],</span>
+    <span class="c1">// images: {</span>
+    <span class="c1">//     imgKey: {y: -8}</span>
+    <span class="c1">// }</span>
 
     <span class="c1">// sharedPool: true,</span>
 
@@ -9881,7 +9881,9 @@
     <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">originX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">originY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>imgKey</code> : Image key used in text content, i.e. <code>[img=imgKey]</code>.</li>
@@ -9892,6 +9894,8 @@
 <li><code>y</code> : Extra offset y.</li>
 <li><code>left</code> : Left padding space.</li>
 <li><code>Right</code> : Right padding space.</li>
+<li><code>originX</code> : Offset x via frame width * <code>originX</code></li>
+<li><code>originY</code> : Offset y via frame height * <code>originY</code></li>
 </ul>
 </li>
 <li>Add some image render informations
