@@ -94,6 +94,18 @@ class DropDownList extends Label {
             }
         }
 
+        this.emit('valuechange', this, value, previousValue);
+
+    }
+
+    emitButtonClick(index) {
+        var option = this.options[index];
+        if (!option) {
+            return this;
+        }
+
+        this.emit('button.click', this, undefined, option, index);
+        return this;
     }
 
 }

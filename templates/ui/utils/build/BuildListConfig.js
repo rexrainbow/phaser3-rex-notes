@@ -17,6 +17,7 @@ var BuildListConfig = function (scene, config, creators) {
 
     var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
     listConfig.list = config;
+
     listConfig.list.createButtonCallback = function (scene, option) {
         var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator)
             .resetDisplayContent({ text: option.text })
@@ -26,6 +27,7 @@ var BuildListConfig = function (scene, config, creators) {
         }
         return gameObject;
     }
+
     listConfig.list.onButtonOver = function (button, index, pointer, event) {
         if (button.setHoverState) {
             button.setHoverState(true);

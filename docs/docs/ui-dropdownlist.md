@@ -244,8 +244,12 @@ var dropDownList = scene.rexUI.add.dropDownList({
         - `left`, `right`, `top`, `bottom`, `item` : For [sizer](ui-sizer.md) layout. (`list.wrap` is `false`)
         - `left`, `right`, `top`, `bottom`, `item`, `line` : For [fixwidth-sizer](ui-fixwidthsizer.md) layout. (`list.wrap` is `true`)
     - `list.draggable` : Set `true` to drag top-most object.
-- `value` : 
-- `setValueCallback`, `setValueCallbackScope` :
+- `value`, `setValueCallback`, `setValueCallbackScope` : See [value](ui-dropdownlist.md#value)
+    ```javascript
+    function(dropDownList, value, previousValue) {
+
+    }
+    ```
 - Properties of [Label](ui-label.md#add-label-object)
     - `x`, `y` : Position of this object, it is valid when this object is the top object.
     - `anchor` : See [anchor](anchor.md#create-instance).
@@ -339,6 +343,27 @@ var dropDownList = scene.rexUI.add.dropDownList({
     dropDownList.onClick(callback, scope);
     ```
 
+#### Emit button click event
+
+```javascript
+dropDownList.emitButtonClick(index);
+```
+
+- `index` : Index of option.
+
+Will fire `'button.click'` event
+
+```javascript
+dropDownList.on('button.click', function(dropDownList, listPanel, button, index, pointer, event) {
+    // ...
+}, scope);
+```
+
+- `listPanel` : `undefined`
+- `button` : Option
+- `pointer` : `undefined`
+- `event` : `undefined`
+
 ### Value
 
 - Set value under `list.onButtonClick` callback.
@@ -349,7 +374,14 @@ var dropDownList = scene.rexUI.add.dropDownList({
     ```javascript
     dropDownList.value = value;
     ```
-    - Will invoke `setValueCallback` when value changed.
+    - When value changing
+        - Will invoke `setValueCallback`
+            ```javascript
+            function(dropDownList, value, previousValue) {
+                
+            }
+            ```        
+        - Will fire `'valuechange'` event
 - Get
     ```javascript
     var value = dropDownList.value;
@@ -419,3 +451,9 @@ See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object
     - `index` : Index of triggered button.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
+- On value changing
+    ```javascript
+    dropDownList.on('valuechange', function(dropDownList, value, previousValue) {
+        // ...
+    }, scope);
+    ```
