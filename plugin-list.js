@@ -93,6 +93,7 @@ module.exports = {
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',
     'boundsplugin': './plugins/bounds-plugin.js',
+    'stepplugin': './plugins/step-plugin.js',
     'modalplugin': './plugins/modal-plugin.js',
     'dropdownplugin': './plugins/dropdown-plugin.js',
     'particlesalongboundsplugin': './plugins/particlesalongbounds-plugin.js',
