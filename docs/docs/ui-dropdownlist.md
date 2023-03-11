@@ -232,8 +232,9 @@ var dropDownList = scene.rexUI.add.dropDownList({
     - `list.height` : Minimum height.
         - `undefined` : Default value.
     - `list.alignParent` : Align x position to label.
-        - `icon` : Align x position to *icon* game object of parent label.
-        - `text` : Align x position to *text* game object of parent label.    
+        - `'icon'` : Align x position to *icon* game object of parent label.
+        - `'text'` : Align x position to *text* game object of parent label. Default behavior
+        - `'label'`, or `null` : Align x position to parent label.        
     - `list.expandDirection` :
         - `0`, `'down'` : Expand list down. i.e. list panel will put below parent label.
         - `1`, `'up'` : Expand list up. i.e. list panel will put above parent label.

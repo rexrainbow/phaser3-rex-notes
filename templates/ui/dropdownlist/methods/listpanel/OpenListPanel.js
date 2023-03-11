@@ -25,6 +25,14 @@ var OpenListPanel = function () {
             this.emit('button.out', this, listPanel, button, index, pointer, event);
         }, this);
 
+
+    var alignTargetX;
+    if (!this.listAlignMode || (this.listAlignMode === 'label')) {
+        alignTargetX = this;
+    } else {
+        this.getElement(this.listAlignMode)
+    }
+
     var dropDownBehavior = new DropDown(listPanel, {
         // Transition
         duration: {
@@ -37,7 +45,7 @@ var OpenListPanel = function () {
         // Position
         expandDirection: this.listExpandDirection,
 
-        alignTargetX: this.getElement(this.listAlignMode),
+        alignTargetX: alignTargetX,
         alignTargetY: this,
 
         bounds: this.listBounds,
