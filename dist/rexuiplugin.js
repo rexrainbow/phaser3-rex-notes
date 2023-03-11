@@ -45747,7 +45747,7 @@
     if (!this.listAlignMode || this.listAlignMode === 'label') {
       alignTargetX = this;
     } else {
-      this.getElement(this.listAlignMode);
+      alignTargetX = this.getElement(this.listAlignMode);
     }
     var dropDownBehavior = new DropDown(listPanel, {
       // Transition
@@ -45932,7 +45932,7 @@
     var labelCreator = creators.label || creators.button || creators;
     var listButtonCreator = creators.button || creators.label || creators;
     var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
-    listConfig.list = config;
+    listConfig.list = config.list || {};
     listConfig.list.createButtonCallback = function (scene, option) {
       var gameObject = CreateLabel$1(scene, listButtonConfig, listButtonCreator).resetDisplayContent({
         text: option.text

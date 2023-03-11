@@ -30,7 +30,7 @@ var OpenListPanel = function () {
     if (!this.listAlignMode || (this.listAlignMode === 'label')) {
         alignTargetX = this;
     } else {
-        this.getElement(this.listAlignMode)
+        alignTargetX = this.getElement(this.listAlignMode)
     }
 
     var dropDownBehavior = new DropDown(listPanel, {

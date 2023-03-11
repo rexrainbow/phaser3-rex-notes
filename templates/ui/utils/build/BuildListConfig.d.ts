@@ -8,17 +8,21 @@ declare namespace BuildListConfig {
         label?: BuildLabelConfig.IConfig,
         button?: BuildLabelConfig.IConfig,
 
-        easeIn?: number;
-        easeOut?: number;
+        list?: {
+            easeIn?: number;
+            easeOut?: number;
 
-        wrap?: boolean;
-        width?: number;
-        height?: number;
-        alignParent?: DropDownList.AlignParentType;
-        expandDirection?: DropDownList.ExpandDirectionType;
-        bounds?: Phaser.Geom.Rectangle;
-        space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType;
-        draggable?: boolean;
+            wrap?: boolean;
+            width?: number;
+            height?: number;
+            alignParent?: DropDownList.AlignParentType;
+            expandDirection?: DropDownList.ExpandDirectionType;
+            bounds?: Phaser.Geom.Rectangle;
+
+            space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType;
+
+            draggable?: boolean;
+        },
     }
 
     interface ICreators extends BuildLabelConfig.ICreators {

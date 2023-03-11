@@ -16,7 +16,7 @@ var BuildListConfig = function (scene, config, creators) {
     var listButtonCreator = creators.button || creators.label || creators;
 
     var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
-    listConfig.list = config;
+    listConfig.list = config.list || {};
 
     listConfig.list.createButtonCallback = function (scene, option) {
         var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator)
