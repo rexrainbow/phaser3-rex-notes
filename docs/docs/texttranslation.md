@@ -9,6 +9,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 
 - [Inline resources](https://codepen.io/rexrainbow/pen/xxaEVBq)
 - [External resources](https://codepen.io/rexrainbow/pen/dyqNdbB)
+- [External yaml resource](https://codepen.io/rexrainbow/pen/LYJeJrw)
 
 ## Usage
 
