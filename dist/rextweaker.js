@@ -11711,6 +11711,18 @@
         this._fillAlpha = value;
         this.isFilled = value > 0 && this._fillColor != null;
       }
+
+      // Fully override setFillStyle method
+    }, {
+      key: "setFillStyle",
+      value: function setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+        return this;
+      }
     }, {
       key: "strokeColor",
       get: function get() {
@@ -11728,6 +11740,19 @@
       set: function set(value) {
         this._lineWidth = value;
         this.isStroked = value > 0 && this._strokeColor != null;
+      }
+
+      // Fully override setStrokeStyle method
+    }, {
+      key: "setStrokeStyle",
+      value: function setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+        return this;
       }
     }, {
       key: "updateData",

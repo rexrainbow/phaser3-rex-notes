@@ -82,6 +82,18 @@ class RoundRectangle extends Shape {
         this.isFilled = (value > 0) && (this._fillColor != null);
     }
 
+    // Fully override setFillStyle method
+    setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+
+        return this;
+    }
+
     get strokeColor() {
         return this._strokeColor;
     }
@@ -98,6 +110,19 @@ class RoundRectangle extends Shape {
     set lineWidth(value) {
         this._lineWidth = value;
         this.isStroked = (value > 0) && (this._strokeColor != null);
+    }
+
+    // Fully override setStrokeStyle method
+    setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+
+        return this;
     }
 
     updateData() {
