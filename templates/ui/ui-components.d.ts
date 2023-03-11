@@ -54,7 +54,7 @@ import Slider from './slider/Slider';
 import GridTable from './gridtable/GridTable';
 import Menu from './menu/Menu';
 import DropDownList from './dropdownlist/DropDownList';
-import SimpleDropDownList from './simpledropdownlist/SimpleLabel';
+import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList';
 import TextBox from './textbox/TextBox';
 import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';

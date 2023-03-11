@@ -91,7 +91,7 @@ var label = scene.rexUI.add.simpleLabel({
     orientation: 0,
     // rtl: false,
 
-    background: {            
+    background: {
         // color: 0xffffff,
         // alpha: 1,
         // strokeColor: 0xffffff,

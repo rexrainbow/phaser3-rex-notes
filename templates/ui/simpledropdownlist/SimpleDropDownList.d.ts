@@ -1,4 +1,4 @@
-import Label from '../label/Label';
+import DropDownList from '../dropdownlist/DropDownList';
 import BuildListConfig from '../utils/build/BuildListConfig';
 
 export default SimpleDropDownList;
@@ -11,7 +11,7 @@ declare namespace SimpleDropDownList {
     }
 }
 
-declare class SimpleDropDownList extends Label {
+declare class SimpleDropDownList extends DropDownList {
     constructor(
         scene: Phaser.Scene,
         config?: SimpleDropDownList.IConfig,

@@ -21511,7 +21511,26 @@
       _this.type = 'rexSimpleDropDownList';
       return _this;
     }
-    return _createClass(SimpleDropDownList);
+    _createClass(SimpleDropDownList, [{
+      key: "setOptions",
+      value: function setOptions(options) {
+        if (options === undefined) {
+          options = [];
+        }
+        for (var i = 0, cnt = options.length; i < cnt; i++) {
+          var option = options[i];
+          if (typeof option === 'string') {
+            options[i] = {
+              text: option,
+              value: option
+            };
+          }
+        }
+        _get(_getPrototypeOf(SimpleDropDownList.prototype), "setOptions", this).call(this, options);
+        return this;
+      }
+    }]);
+    return SimpleDropDownList;
   }(DropDownList);
 
   return SimpleDropDownList;

@@ -7,6 +7,21 @@ class SimpleDropDownList extends DropDownList {
         super(scene, config);
         this.type = 'rexSimpleDropDownList';
     }
+
+    setOptions(options) {
+        if (options === undefined) {
+            options = [];
+        }
+        for (var i = 0, cnt = options.length; i < cnt; i++) {
+            var option = options[i];
+            if (typeof (option) === 'string') {
+                options[i] = { text: option, value: option };
+            }
+        }
+        super.setOptions(options);
+        return this;
+    }
+
 }
 
 export default SimpleDropDownList;

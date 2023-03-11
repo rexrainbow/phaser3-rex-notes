@@ -299,7 +299,7 @@ import RoundRectangleCanvasClass from './roundrectanglecanvas/RoundRectangleCanv
 import RoundRectangleClass from './roundrectangle/RoundRectangle';
 import ScrollablePanelClass from './scrollablepanel/ScrollablePanel';
 import ScrollBarClass from './scrollbar/ScrollBar';
-import SimpleDropDownListClass from './simpledropdownlist/SimpleLabel';
+import SimpleDropDownListClass from './simpledropdownlist/SimpleDropDownList';
 import SimpleLabelClass from './simplelabel/SimpleLabel';
 import SizerClass from './sizer/Sizer';
 import ShakeClass from './shake/Shake';

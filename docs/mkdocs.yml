@@ -419,7 +419,9 @@ nav:
         - Dialog: ui-dialog.md
         - Confirm dialog: ui-confirmdialog.md
     - Menu: ui-menu.md
-    - Drop down list: ui-dropdownlist.md
+    - Drop down list:
+        - Drop down list: ui-dropdownlist.md
+        - Simple drop down list: ui-simpledropdownlist.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
     - Tabs: ui-tabs.md
