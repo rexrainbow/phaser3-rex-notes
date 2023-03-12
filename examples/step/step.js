@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
             });
 
         var stepBehavior =  this.plugins.get('rexStep').add(gameObject, {
-            step: 10
+            stepLength: 10
         })
 
         var fadeOutDestroy = this.plugins.get('rexFade').fadeOutDestroy;

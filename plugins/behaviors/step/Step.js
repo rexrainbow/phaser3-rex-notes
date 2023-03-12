@@ -13,8 +13,7 @@ class Step extends TickTask {
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
-        this.setStepMode(GetValue(o, 'mode', 0));
-        this.setStepLength(GetValue(o, 'step', 5));
+        this.setStepLength(GetValue(o, 'stepLength', 5));
     }
 
     toJSON() {
@@ -37,14 +36,6 @@ class Step extends TickTask {
             this.preY = gameObject.y;
         }
 
-        return this;
-    }
-
-    setStepMode(mode) {
-        if (typeof (mode) === 'string') {
-            mode = StepMode[mode];
-        }
-        this.stepMode = mode;
         return this;
     }
 
@@ -78,22 +69,8 @@ class Step extends TickTask {
         }
 
         this.cancelStepFlag = false;
-        switch (this.stepMode) {
-            case 1: // 'x,y'
-                this.step(x0, y0, x1, y0, this.stepLength);
-                this.step(x1, y0, x1, y1, this.stepLength);
-                break;
 
-            case 2: // 'y,x'
-                this.step(x0, y0, x0, y1, this.stepLength);
-                this.step(x0, y1, x1, y1, this.stepLength);
-                break;
-
-            default:
-                this.step(x0, y0, x1, y1, this.stepLength);
-                break;
-
-        }
+        this.step(x0, y0, x1, y1, this.stepLength);
 
         this.preX = x1;
         this.preY = y1;

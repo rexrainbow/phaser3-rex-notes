@@ -533,8 +533,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
-        this.setStepMode(GetValue(o, 'mode', 0));
-        this.setStepLength(GetValue(o, 'step', 5));
+        this.setStepLength(GetValue(o, 'stepLength', 5));
       }
     }, {
       key: "toJSON",
@@ -556,15 +555,6 @@
           this.preX = gameObject.x;
           this.preY = gameObject.y;
         }
-        return this;
-      }
-    }, {
-      key: "setStepMode",
-      value: function setStepMode(mode) {
-        if (typeof mode === 'string') {
-          mode = StepMode[mode];
-        }
-        this.stepMode = mode;
         return this;
       }
     }, {
@@ -597,21 +587,7 @@
           return this;
         }
         this.cancelStepFlag = false;
-        switch (this.stepMode) {
-          case 1:
-            // 'x,y'
-            this.step(x0, y0, x1, y0, this.stepLength);
-            this.step(x1, y0, x1, y1, this.stepLength);
-            break;
-          case 2:
-            // 'y,x'
-            this.step(x0, y0, x0, y1, this.stepLength);
-            this.step(x0, y1, x1, y1, this.stepLength);
-            break;
-          default:
-            this.step(x0, y0, x1, y1, this.stepLength);
-            break;
-        }
+        this.step(x0, y0, x1, y1, this.stepLength);
         this.preX = x1;
         this.preY = y1;
         return this;
@@ -646,13 +622,6 @@
     }]);
     return Step;
   }(SceneUpdateTickTask);
-  var StepMode = {
-    linear: 0,
-    'x,y': 1,
-    'h,v': 1,
-    'y,x': 2,
-    'v,h': 2
-  };
 
   var StepPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(StepPlugin, _Phaser$Plugins$BaseP);
