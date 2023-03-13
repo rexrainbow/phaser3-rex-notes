@@ -3,7 +3,7 @@ const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 var TestFont = function (familyName, testString) {
     // Get canvas from pool
     var canvas = CanvasPool.create();
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', { willReadFrequently: true });
 
     // Resize canvas
     var font = `8px ${familyName}`;

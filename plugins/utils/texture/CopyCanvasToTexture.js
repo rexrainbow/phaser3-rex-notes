@@ -30,7 +30,7 @@ var CopyCanvasToTexture = function (scene, srcCanvas, key, x, y, width, height) 
         destCanvas.height = height;
     }
 
-    var destCtx = destCanvas.getContext('2d');
+    var destCtx = destCanvas.getContext('2d', { willReadFrequently: true });
     destCtx.clearRect(0, 0, width, height);
     destCtx.drawImage(srcCanvas, x, y, width, height);
     if (renderer.gl && texture) {

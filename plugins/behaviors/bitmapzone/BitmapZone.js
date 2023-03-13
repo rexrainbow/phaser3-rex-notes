@@ -15,7 +15,7 @@ class BitmapZone {
         var width = GetValue(config, 'width', canvas.width - x);
         var height = GetValue(config, 'height', canvas.height - y);
 
-        var context = canvas.getContext('2d');
+        var context = canvas.getContext('2d', { willReadFrequently: true });
         var imgData = context.getImageData(x, y, width, height).data;
         var data = this.data;
         data.length = 0;

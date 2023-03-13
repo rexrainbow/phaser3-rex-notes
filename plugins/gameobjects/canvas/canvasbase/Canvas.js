@@ -30,7 +30,7 @@ class Canvas extends GameObject {
         width = Math.max(Math.ceil(width * this.resolution), 1);
         height = Math.max(Math.ceil(height * this.resolution), 1);
         this.canvas = CanvasPool.create(this, width, height);
-        this.context = this.canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d', { willReadFrequently: true });
         this.dirty = false;
 
         this.setPosition(x, y);

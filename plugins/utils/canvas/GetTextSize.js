@@ -7,7 +7,7 @@ var GetTextSize = function (text, font, out) {
     
     var canvas = CanvasPool.create();
 
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', { willReadFrequently: true });
     context.font = font;
 
     var metrics = context.measureText(text);

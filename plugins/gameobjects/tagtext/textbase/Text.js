@@ -46,7 +46,7 @@ class Text extends TextBase {
 
         this.canvas = CanvasPool.create(this);
 
-        this.context = this.canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d', { willReadFrequently: true });
 
         this._imageManager = undefined;
 

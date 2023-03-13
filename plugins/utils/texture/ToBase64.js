@@ -4,7 +4,7 @@ var ToBase64 = function (gameObject, type, encoderOptions) {
     var frame = gameObject.frame;
     var cd = frame.canvasData;
     var canvas = CanvasPool.create2D(this, cd.width, cd.height);
-    var ctx = canvas.getContext('2d');
+    var ctx = canvas.getContext('2d', { willReadFrequently: true });
 
     ctx.drawImage(
         frame.source.image,
