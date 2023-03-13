@@ -543,18 +543,30 @@
         };
       }
     }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(value) {
+        value = !!value;
+        if (this._enable === value) {
+          return this;
+        }
+        this._enable = value;
+        this.isRunning = value;
+        if (value) {
+          var gameObject = this.parent;
+          this.preX = gameObject.x;
+          this.preY = gameObject.y;
+        }
+      }
+    }, {
       key: "setEnable",
       value: function setEnable(e) {
         if (e == undefined) {
           e = true;
         }
         this.enable = e;
-        this.isRunning = e;
-        if (e) {
-          var gameObject = this.parent;
-          this.preX = gameObject.x;
-          this.preY = gameObject.y;
-        }
         return this;
       }
     }, {
@@ -609,14 +621,20 @@
           stepY = dy / steps;
         var xt, yt;
         var gameObject = this.parent;
+        var points = [];
         for (var i = 1; i <= steps; i++) {
           xt = x0 + stepX * i;
           yt = y0 + stepY * i;
+          points.push({
+            x: xt,
+            y: yt
+          });
           this.emit('step', gameObject, this, xt, yt);
           if (this.cancelStepFlag) {
             break;
           }
         }
+        this.emit('steps', gameObject, this, points);
         return this;
       }
     }]);

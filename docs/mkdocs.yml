@@ -148,6 +148,7 @@ nav:
             - Move to: moveto.md
             - Ease-move: easemove.md
             - Shake position: shake-position.md
+            - Step: step.md
         - Rotate to: rotateto.md
         - Rotate: rotate.md
         - Flash: flash.md

@@ -173,6 +173,7 @@
 1. [Skew/RenderTexture](skew-rendertexture.md): Skewable render texture.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [State manager](statemanager.md): Another version of Finite state machine.
+1. [Step](step.md): Interpolate points between previous position and current position with fixed step length.
 1. [Tag-player](tagplayer.md): Text commands to control sprites, texts, sound effect or backgroun music.
 1. [Tag-text](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP/Player](tcrp-player.md): Run commands on time.
