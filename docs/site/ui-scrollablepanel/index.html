@@ -7827,6 +7827,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#steps-of-building-a-scrollable-panel" class="md-nav__link">
+    Steps of building a scrollable panel
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9342,6 +9349,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#steps-of-building-a-scrollable-panel" class="md-nav__link">
+    Steps of building a scrollable panel
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9983,6 +9997,16 @@ User can inject it by</p>
 <li>Test if pointer is inside the mask of panel via <a href="../ui-basesizer/#is-in-touching"><code>panel.isInTouching('mask')</code></a>, during input events' callback.</li>
 <li>To recognize pointer-down and dragging-start, use press's <a href="../gesture-press/#pressing-start"><code>pressstart</code></a> event.</li>
 </ul>
+<h2 id="steps-of-building-a-scrollable-panel">Steps of building a scrollable panel<a class="headerlink" href="#steps-of-building-a-scrollable-panel" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Build child panel from bottom to top<ul>
+<li>Child panel might be composed of sizers (<a href="../ui-sizer/">sizer</a>/<a href="../ui-fixwidthsizer/">fix-width sizer</a>/<a href="../ui-gridsizer/">grid sizer</a>)</li>
+<li>Return child sizer from method</li>
+</ul>
+</li>
+<li>Build scrollable panel</li>
+<li>Add interactive events</li>
+</ol>
 
               
             </article>

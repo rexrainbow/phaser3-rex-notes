@@ -600,3 +600,11 @@ When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value),
 - Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
 - Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
 - To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.
+  
+## Steps of building a scrollable panel
+
+1. Build child panel from bottom to top
+    - Child panel might be composed of sizers ([sizer](ui-sizer.md)/[fix-width sizer](ui-fixwidthsizer.md)/[grid sizer](ui-gridsizer.md))
+    - Return child sizer from method
+1. Build scrollable panel
+1. Add interactive events
