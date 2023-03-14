@@ -63,11 +63,12 @@
         "webpack-shell-plugin": "^0.5.0",
         "@types/js-yaml": "^4.0.5",
         "file-saver": "^2.0.5",
-        "pako": "^2.1.0"
+        "pako": "^2.1.0",
+        "handlebars": "^4.7.7",
+        "howler": "^2.2.3"
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
-        "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
         "papaparse": "^5.3.2",
         "webfontloader": "^1.6.28",
