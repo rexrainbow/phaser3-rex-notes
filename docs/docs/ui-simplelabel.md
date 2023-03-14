@@ -317,6 +317,20 @@ Override/restore properties of background game object.
     ```
     - Restore properties of background.
 
+#### Disable state
+
+- Enable disable state
+    ```javascript
+    label.setDisableState();
+    // label.setDisableState(true);
+    ```
+    - Override properties of background declared in config with prefix `'disable.'` parameters
+- Disable disable state
+    ```javascript
+    label.setDisableState(false);
+    ```
+    - Restore properties of background.
+
 ### Other properties
 
 See [label](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
