@@ -2,6 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import { Howl, Howler } from 'howler';
 import AwaitLoaderPlugin from '../../../plugins/awaitloader-plugin.js';
 
+var T0, T1;
 class SceneA extends Phaser.Scene {
     constructor() {
         super({
@@ -27,9 +28,14 @@ class SceneA extends Phaser.Scene {
             }, this);
 
         }
+
+        T0 = performance.now();
     }
 
     create() {
+        T1 = performance.now();
+        console.log(T1 - T0);
+
         this.add.text(0, 0, 'SceneA')
         this.input.once('pointerdown', function () {
             console.log(this.howlSounds.length)
