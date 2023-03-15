@@ -2,6 +2,8 @@ import phaser from 'phaser/src/phaser.js';
 import HowlerSoundManager from '../../plugins/utils/audio/howlersoundmanager/HowlerSoundManager';
 import Awaitloader from '../../plugins/awaitloader.js';
 
+var howlSoundManager = new HowlerSoundManager();
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -10,28 +12,28 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.howlSoundManager = new HowlerSoundManager();
         Awaitloader.call(this.load, function (successCallback, failureCallback) {
-            this.howlSoundManager.load('highscore', [
+            howlSoundManager.load('highscore', [
                 'assets/audio/oedipus_wizball_highscore.ogg',
                 'assets/audio/oedipus_wizball_highscore.mp3'
-            ], successCallback)
-        }, this)
+            ], successCallback, failureCallback)
+        })
     }
 
     create() {
+        this.add.text(0, 0, 'Any click')
         this.input.once('pointerdown', function () {
             this.time.delayedCall(0, function () {
-                this.howlSoundManager.play('highscore')
-            }, [], this)
+                howlSoundManager.play('highscore', true)
+            })
 
             this.time.delayedCall(100, function () {
-                this.howlSoundManager.play('highscore')
-            }, [], this)
+                howlSoundManager.play('highscore', true)
+            })
 
             this.time.delayedCall(200, function () {
-                this.howlSoundManager.play('highscore')
-            }, [], this)
+                howlSoundManager.play('highscore', true)
+            })
 
 
         }, this)

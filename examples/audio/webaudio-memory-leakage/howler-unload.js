@@ -42,6 +42,7 @@ class SceneA extends Phaser.Scene {
             for (var i = 0, cnt = this.howlSounds.length; i < cnt; i++) {
                 this.howlSounds[i].unload()
             }
+            Howler.unload();
             this.scene.start('SceneB')
         }, this)
     }
