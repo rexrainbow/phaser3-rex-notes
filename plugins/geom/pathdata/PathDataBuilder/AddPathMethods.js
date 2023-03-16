@@ -2,7 +2,7 @@ import StartAt from '../StartAt.js';
 import LineTo from '../LineTo.js';
 import ArcTo from '../ArcTo.js';
 import QuadraticBezierTo from '../QuadraticBezierTo.js';
-import CubicBezierCurveTo from '../QuadraticBezierTo.js';
+import CubicBezierCurveTo from '../CubicBezierCurveTo.js';
 import DuplicateLast from '../DuplicateLast.js';
 
 export default {
