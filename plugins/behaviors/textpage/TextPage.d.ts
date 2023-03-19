@@ -31,9 +31,9 @@ declare class TextPage extends ComponentBase {
     showNextPage(): this;
     showPreviousPage(): this;
 
-    getPage(pageIndex?: number): this;
-    getNextPage(): this;
-    getPreviousPage(): this;
+    getPage(pageIndex?: number): string;
+    getNextPage(): string;
+    getPreviousPage(): string;
 
     readonly isLastPage: boolean;
     readonly isFirstPage: boolean;
