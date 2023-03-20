@@ -1,8 +1,8 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
 import TextBlock from './textblock/TextBlock.js';
 import InjectProperties from './InjectProperties.js';
-import SetText from './SetText.js';
-import AppendText from './AppendText.js';
+import SetTextMethods from './SetTextMethods.js';
+import ScrollMethods from './ScrollMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -65,13 +65,10 @@ class TextArea extends Scrollable {
     }
 }
 
-var methods = {
-    setText: SetText,
-    appendText: AppendText,
-}
 Object.assign(
     TextArea.prototype,
-    methods
+    SetTextMethods,
+    ScrollMethods,
 );
 
 export default TextArea;
