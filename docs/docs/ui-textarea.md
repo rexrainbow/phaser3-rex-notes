@@ -341,6 +341,14 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Scroll content
 
+- Scroll down a line
+    ```javascript
+    textArea.scrollLine();
+    ```
+- Scroll down lines
+    ```javascript
+    textArea.scrollLine(lineCount);
+    ```
 - Set
     ```javascript
     textArea.childOY = oy;
