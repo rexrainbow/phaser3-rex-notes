@@ -36,24 +36,30 @@ class Demo extends Phaser.Scene {
         };
         var table = this.add.rexGridTable(400, 300, 250, 300, {
             cellHeight: 1,
-            cellsCount: 100,
+            cellsCount: 30,
             columns: 1,
             cellVisibleCallback: onCellVisible.bind(this),
+            clamplTableOXY: false,
+
             mask: {
                 padding: 2,
             }
         })
-            .scrollToRow(30)
+            .scrollToRow(25)
 
-        this.input.on('pointerdown', function () {
-            table.scrollToNextRow()
-        })
+        var graphics = this.add.graphics().setDepth(1)
 
         // Draw bound
-        //table.drawBounds(
-        //    this.add.graphics().setDepth(1),
-        //    0xff0000
-        //);
+        table.drawBounds(graphics, 0xff0000);
+
+        this.input.on('pointerdown', function () {
+            graphics.clear();
+
+            table
+                .scrollToNextRow()
+                .drawBounds(graphics, 0xff0000)
+        })
+
 
     }
 

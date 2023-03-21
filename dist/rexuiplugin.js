@@ -11049,7 +11049,7 @@
   };
 
   var GetValue$2M = Phaser.Utils.Objects.GetValue;
-  var Clamp$f = Phaser.Math.Clamp;
+  var Clamp$e = Phaser.Math.Clamp;
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
@@ -11181,10 +11181,10 @@
             t = 1;
             break;
         }
-        return Clamp$f(t, 0, 1);
+        return Clamp$e(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$f(value, -1, 1);
+        value = Clamp$e(value, -1, 1);
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
@@ -12144,7 +12144,7 @@
     return t;
   };
 
-  var Clamp$e = Phaser.Math.Clamp;
+  var Clamp$d = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(timeline, config) {
       _classCallCheck(this, Timer);
@@ -12234,7 +12234,7 @@
       key: "getProgress",
       value: function getProgress() {
         var value = 1 - this.remainder / this.duration;
-        value = Clamp$e(value, 0, 1);
+        value = Clamp$d(value, 0, 1);
         if (this.yoyo) {
           value = Yoyo$1(value);
         }
@@ -12243,7 +12243,7 @@
     }, {
       key: "setProgress",
       value: function setProgress(value) {
-        value = Clamp$e(value, 0, 1);
+        value = Clamp$d(value, 0, 1);
         this.remainder = this.duration * (1 - value);
       }
     }, {
@@ -21813,7 +21813,7 @@
   };
 
   var GetValue$2l = Phaser.Utils.Objects.GetValue;
-  var Clamp$d = Phaser.Math.Clamp;
+  var Clamp$c = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
@@ -21840,7 +21840,7 @@
           return this._value;
         },
         set: function set(value) {
-          value = Clamp$d(value, 0, 1);
+          value = Clamp$c(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -21906,7 +21906,7 @@
 
   var GetValue$2k = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$c = Phaser.Math.Clamp;
+  var Clamp$b = Phaser.Math.Clamp;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
   var CircularProgress$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
@@ -22037,7 +22037,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$c(value, 0, 1);
+        value = Clamp$b(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -22185,7 +22185,7 @@
 
   var GetValue$2j = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$b = Phaser.Math.Clamp;
+  var Clamp$a = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
@@ -22323,7 +22323,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$b(value, 0, 1);
+        value = Clamp$a(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -33126,7 +33126,7 @@
 
   var IsPlainObject$p = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1D = Phaser.Utils.Objects.GetValue;
-  var Clamp$a = Phaser.Math.Clamp;
+  var Clamp$9 = Phaser.Math.Clamp;
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
     var _super = _createSuper(TransitionImage);
@@ -33260,7 +33260,7 @@
         return this._t;
       },
       set: function set(value) {
-        value = Clamp$a(value, 0, 1);
+        value = Clamp$9(value, 0, 1);
         if (this._t === value) {
           return;
         }
@@ -37447,7 +37447,7 @@
     return value.toString();
   };
 
-  var Clamp$9 = Phaser.Math.Clamp;
+  var Clamp$8 = Phaser.Math.Clamp;
   var SetValueMethods = {
     setValueTextFormatCallback: function setValueTextFormatCallback(callback, scope) {
       this.valueTextFormatCallback = callback;
@@ -37483,7 +37483,7 @@
       return this;
     },
     setValue: function setValue(value, min, max) {
-      value = Clamp$9(value, min, max);
+      value = Clamp$8(value, min, max);
       this.value = value;
       this.minValue = min;
       this.maxValue = max;
@@ -39732,7 +39732,7 @@
 
   var GetValue$1c = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$8 = Phaser.Math.Clamp;
+  var Clamp$7 = Phaser.Math.Clamp;
   var SnapTo = Phaser.Math.Snap.To;
   var Slider$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(Slider, _ProgressBase);
@@ -39859,7 +39859,7 @@
           value = SnapTo(value, this.gap);
         }
         var oldValue = this._value;
-        this._value = Clamp$8(value, 0, 1);
+        this._value = Clamp$7(value, 0, 1);
         if (oldValue !== this._value) {
           this.updateThumb(this._value);
           this.updateIndicator(this._value);
@@ -40654,7 +40654,7 @@
   }();
 
   var GetValue$18 = Phaser.Utils.Objects.GetValue;
-  var Clamp$7 = Phaser.Math.Clamp;
+  var Clamp$6 = Phaser.Math.Clamp;
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
     var _super = _createSuper(Scroller);
@@ -40852,7 +40852,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$7(value, this.minValue, this.maxValue);
+          value = Clamp$6(value, this.minValue, this.maxValue);
         }
         this.value = value;
         return this;
@@ -41345,7 +41345,7 @@
   };
 
   var GetValue$15 = Phaser.Utils.Objects.GetValue;
-  var Clamp$6 = Phaser.Math.Clamp;
+  var Clamp$5 = Phaser.Math.Clamp;
   var Scrollable = /*#__PURE__*/function (_Sizer) {
     _inherits(Scrollable, _Sizer);
     var _super = _createSuper(Scrollable);
@@ -41529,7 +41529,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$6(value, this.bottomChildOY, this.topChildOY);
+          value = Clamp$5(value, this.bottomChildOY, this.topChildOY);
         }
         this.childOY = value;
         return this;
@@ -41547,7 +41547,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$6(value, 0, 1);
+          value = Clamp$5(value, 0, 1);
         }
         this.t = value;
         return this;
@@ -42240,21 +42240,18 @@
     }
   };
 
-  var Clamp$5 = Phaser.Math.Clamp;
+  Phaser.Math.Clamp;
   var ScrollMethods$1 = {
-    scrollToLine: function scrollToLine(lineIndex, clamp) {
-      if (clamp) {
-        lineIndex = Clamp$5(lineIndex, 0, this.linesCount);
-      }
+    scrollToLine: function scrollToLine(lineIndex) {
       this.setChildOY(-this.lineHeight * lineIndex);
       return this;
     },
-    scrollToNextLine: function scrollToNextLine(lineCount, clamp) {
+    scrollToNextLine: function scrollToNextLine(lineCount) {
       if (lineCount === undefined) {
         lineCount = 1;
       }
       var lineIndex = this.lineIndex + lineCount;
-      this.scrollToLine(lineIndex, clamp);
+      this.scrollToLine(lineIndex);
       return this;
     }
   };
@@ -44546,10 +44543,10 @@
     }, {
       key: "scrollToRow",
       value: function scrollToRow(rowIndex) {
-        do {
-          var height = this.table.rowIndexToHeight(0, rowIndex - 1);
-          this.setTableOY(-height).updateTable();
-        } while (this.startRowIndex !== rowIndex);
+        // To get all height of cells
+        this.scrollToBottom();
+        var height = this.table.rowIndexToHeight(0, rowIndex - 1);
+        this.setTableOY(-height).updateTable();
         return this;
       }
     }, {

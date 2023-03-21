@@ -184,10 +184,11 @@ class GridTable extends ContainerLite {
     }
 
     scrollToRow(rowIndex) {
-        do {
-            var height = this.table.rowIndexToHeight(0, rowIndex - 1)
-            this.setTableOY(-height).updateTable();
-        } while (this.startRowIndex !== rowIndex)
+        // To get all height of cells
+        this.scrollToBottom();
+
+        var height = this.table.rowIndexToHeight(0, rowIndex - 1)
+        this.setTableOY(-height).updateTable();
         return this;
     }
 

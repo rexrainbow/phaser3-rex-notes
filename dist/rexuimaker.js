@@ -14419,7 +14419,7 @@
   };
 
   var GetValue$15 = Phaser.Utils.Objects.GetValue;
-  var Clamp$8 = Phaser.Math.Clamp;
+  var Clamp$7 = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
@@ -14551,10 +14551,10 @@
             t = 1;
             break;
         }
-        return Clamp$8(t, 0, 1);
+        return Clamp$7(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$8(value, -1, 1);
+        value = Clamp$7(value, -1, 1);
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
@@ -25014,7 +25014,7 @@
     }
   };
 
-  var Clamp$7 = Phaser.Math.Clamp;
+  var Clamp$6 = Phaser.Math.Clamp;
   var GetPageMethods = {
     getPage: function getPage(idx) {
       if (idx === undefined) {
@@ -25033,7 +25033,7 @@
       return this;
     },
     setPageIndex: function setPageIndex(idx) {
-      idx = Clamp$7(idx, 0, this.pageCount - 1);
+      idx = Clamp$6(idx, 0, this.pageCount - 1);
       this.pageIndex = idx;
       this.startLineIndex = this.pageStartIndexes[idx];
       this.endLineIndex = this.pageStartIndexes[idx + 1];
@@ -25118,7 +25118,7 @@
   Object.assign(Methods$3, SetContentMethods, GetPageMethods, ShowMethods);
 
   var GetValue$o = Phaser.Utils.Objects.GetValue;
-  var Clamp$6 = Phaser.Math.Clamp;
+  var Clamp$5 = Phaser.Math.Clamp;
   var TextPage = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextPage, _ComponentBase);
     var _super = _createSuper(TextPage);
@@ -25226,7 +25226,7 @@
         return this._startLineIndex;
       },
       set: function set(value) {
-        value = Clamp$6(value, 0, this.totalLinesCount - 1);
+        value = Clamp$5(value, 0, this.totalLinesCount - 1);
         this._startLineIndex = value;
       }
     }, {
@@ -26020,7 +26020,7 @@
   };
 
   var GetValue$l = Phaser.Utils.Objects.GetValue;
-  var Clamp$5 = Phaser.Math.Clamp;
+  var Clamp$4 = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
@@ -26047,7 +26047,7 @@
           return this._value;
         },
         set: function set(value) {
-          value = Clamp$5(value, 0, 1);
+          value = Clamp$4(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -26274,7 +26274,7 @@
 
   var GetValue$k = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$4 = Phaser.Math.Clamp;
+  var Clamp$3 = Phaser.Math.Clamp;
   var SnapTo$1 = Phaser.Math.Snap.To;
   var Slider$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(Slider, _ProgressBase);
@@ -26401,7 +26401,7 @@
           value = SnapTo$1(value, this.gap);
         }
         var oldValue = this._value;
-        this._value = Clamp$4(value, 0, 1);
+        this._value = Clamp$3(value, 0, 1);
         if (oldValue !== this._value) {
           this.updateThumb(this._value);
           this.updateIndicator(this._value);
@@ -27503,7 +27503,7 @@
   }();
 
   var GetValue$e = Phaser.Utils.Objects.GetValue;
-  var Clamp$3 = Phaser.Math.Clamp;
+  var Clamp$2 = Phaser.Math.Clamp;
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
     var _super = _createSuper(Scroller);
@@ -27701,7 +27701,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$3(value, this.minValue, this.maxValue);
+          value = Clamp$2(value, this.minValue, this.maxValue);
         }
         this.value = value;
         return this;
@@ -28194,7 +28194,7 @@
   };
 
   var GetValue$b = Phaser.Utils.Objects.GetValue;
-  var Clamp$2 = Phaser.Math.Clamp;
+  var Clamp$1 = Phaser.Math.Clamp;
   var Scrollable = /*#__PURE__*/function (_Sizer) {
     _inherits(Scrollable, _Sizer);
     var _super = _createSuper(Scrollable);
@@ -28378,7 +28378,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$2(value, this.bottomChildOY, this.topChildOY);
+          value = Clamp$1(value, this.bottomChildOY, this.topChildOY);
         }
         this.childOY = value;
         return this;
@@ -28396,7 +28396,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$2(value, 0, 1);
+          value = Clamp$1(value, 0, 1);
         }
         this.t = value;
         return this;
@@ -29013,21 +29013,18 @@
     }
   };
 
-  var Clamp$1 = Phaser.Math.Clamp;
+  Phaser.Math.Clamp;
   var ScrollMethods = {
-    scrollToLine: function scrollToLine(lineIndex, clamp) {
-      if (clamp) {
-        lineIndex = Clamp$1(lineIndex, 0, this.linesCount);
-      }
+    scrollToLine: function scrollToLine(lineIndex) {
       this.setChildOY(-this.lineHeight * lineIndex);
       return this;
     },
-    scrollToNextLine: function scrollToNextLine(lineCount, clamp) {
+    scrollToNextLine: function scrollToNextLine(lineCount) {
       if (lineCount === undefined) {
         lineCount = 1;
       }
       var lineIndex = this.lineIndex + lineCount;
-      this.scrollToLine(lineIndex, clamp);
+      this.scrollToLine(lineIndex);
       return this;
     }
   };
