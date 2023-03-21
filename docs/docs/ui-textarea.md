@@ -11,6 +11,7 @@ A container with a text, slider, and scroller.
 - [Bitmap text](https://codepen.io/rexrainbow/pen/YzNRRaz)
 - [Hide unscrollable slider](https://codepen.io/rexrainbow/pen/vYzYBWX)
 - [Append text](https://codepen.io/rexrainbow/pen/rNZaEgO)
+- [Scroll to line](https://codepen.io/rexrainbow/pen/yLxxWaY)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
 
 ## Usage
