@@ -396,6 +396,19 @@ See also - [dirty](ui-basesizer.md#dirty)
     var t = textArea.t;
     ```
 
+#### Scroll to top/bottom
+
+- Scroll to top
+    ```javascript
+    textArea.scrollToTop();
+    ```
+    - Equal to `textArea.t = 0;`
+- Scroll to bottom
+    ```javascript
+    textArea.scrollToBottom();
+    ```
+    - Equal to `textArea.t = 1;`
+
 #### Scroll to line
 
 - Scroll to next line
@@ -414,19 +427,6 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var lineIndex = textArea.lineIndex;
     ```
-
-#### Scroll to top/bottom
-
-- Scroll to top
-    ```javascript
-    textArea.scrollToTop();
-    ```
-    - Equal to `textArea.t = 0;`
-- Scroll to bottom
-    ```javascript
-    textArea.scrollToBottom();
-    ```
-    - Equal to `textArea.t = 1;`
 
 #### Enable/disable scrolling
 

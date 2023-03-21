@@ -530,6 +530,25 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - Equal to `table.t = 1;`
 
+#### Scroll to row
+
+- Scroll to next row
+    ```javascript
+    table.scrollToNextRow();
+    ```
+- Scroll to next n row
+    ```javascript
+    table.scrollToNextRow(n);
+    ```
+- Scroll to row
+    ```javascript
+    table.scrollToRow(rowIndex);
+    ```
+- Get current row index
+    ```javascript
+    var rowIndex = table.startRowIndex;
+    ```
+
 #### Enable/disable scrolling
 
 - Slider

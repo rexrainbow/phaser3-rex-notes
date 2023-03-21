@@ -129,7 +129,15 @@ class Table {
         return ((idx >= 0) && (idx < this.cells.length));
     }
 
-    heightToRowIndex(height, isCeil) {
+    heightToRowIndex(height, isCeil, nextVisible) {
+        if (height === 0) {
+            return 0;
+        }
+
+        if (nextVisible === undefined) {
+            nextVisible = false;
+        }
+
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
             var rowIdx = height / this.defaultCellHeight;
@@ -139,6 +147,9 @@ class Table {
                 rowIdx = Math.floor(rowIdx);
             }
 
+            if (nextVisible && (rowIdx === (height / this.defaultCellHeight))) {
+                rowIdx += 1;
+            }
             return rowIdx;
         }
 
@@ -156,6 +167,9 @@ class Table {
             if ((remainder > 0) && isValidIdx) {
                 rowIdx += 1;
             } else if (remainder === 0) {
+                if (nextVisible) {
+                    rowIdx += 1;
+                }
                 return rowIdx;
             } else {
                 if (isCeil) {
@@ -175,6 +189,10 @@ class Table {
     }
 
     widthToColIndex(width, isCeil) {
+        if (width === 0) {
+            return 0;
+        }
+
         var colIdx = width / this.defaultCellWidth;
         if (isCeil) {
             colIdx = Math.ceil(colIdx);

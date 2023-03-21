@@ -42241,7 +42241,7 @@
   };
 
   var Clamp$5 = Phaser.Math.Clamp;
-  var ScrollMethods = {
+  var ScrollMethods$1 = {
     scrollToLine: function scrollToLine(lineIndex, clamp) {
       if (clamp) {
         lineIndex = Clamp$5(lineIndex, 0, this.linesCount);
@@ -42338,7 +42338,7 @@
     }]);
     return TextArea;
   }(Scrollable);
-  Object.assign(TextArea.prototype, SetTextMethods, ScrollMethods);
+  Object.assign(TextArea.prototype, SetTextMethods, ScrollMethods$1);
 
   var GetValue$12 = Phaser.Utils.Objects.GetValue;
   var CreateTextArea$1 = function CreateTextArea(scene, config, creators) {
@@ -43548,7 +43548,14 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil) {
+      value: function heightToRowIndex(height, isCeil, nextVisible) {
+        if (height === 0) {
+          return 0;
+        }
+        if (nextVisible === undefined) {
+          nextVisible = false;
+        }
+
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
@@ -43556,6 +43563,9 @@
             rowIdx = Math.ceil(rowIdx);
           } else {
             rowIdx = Math.floor(rowIdx);
+          }
+          if (nextVisible && rowIdx === height / this.defaultCellHeight) {
+            rowIdx += 1;
           }
           return rowIdx;
         }
@@ -43573,6 +43583,9 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
+            if (nextVisible) {
+              rowIdx += 1;
+            }
             return rowIdx;
           } else {
             if (isCeil) {
@@ -43590,6 +43603,9 @@
     }, {
       key: "widthToColIndex",
       value: function widthToColIndex(width, isCeil) {
+        if (width === 0) {
+          return 0;
+        }
         var colIdx = width / this.defaultCellWidth;
         if (isCeil) {
           colIdx = Math.ceil(colIdx);
@@ -44040,26 +44056,19 @@
       return;
     }
     var table = this.table;
-    var startRowIdx = table.heightToRowIndex(-this.tableOY);
-    if (startRowIdx <= 0) {
-      startRowIdx = 0; //Turn -0 to 0
-    }
-
-    var rowIdx = startRowIdx;
-    var startColIdx = table.widthToColIndex(-this.tableOX);
-    if (startColIdx <= 0) {
-      startColIdx = 0; //Turn -0 to 0
-    }
-
-    var colIdx = startColIdx;
-    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    var startRowIndex = table.heightToRowIndex(-this.tableOY, false, true);
+    var rowIndex = startRowIndex;
+    this.startRowIndex = rowIndex;
+    var startColumnIndex = table.widthToColIndex(-this.tableOX);
+    var columnIndex = startColumnIndex;
+    var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     var bottomBound = this.bottomBound;
     var rightBound = this.rightBound;
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
-    var startCellTLX = this.getCellTLX(colIdx),
+    var startCellTLX = this.getCellTLX(columnIndex),
       cellTLX = startCellTLX;
-    var cellTLY = this.getCellTLY(rowIdx);
+    var cellTLY = this.getCellTLY(rowIndex);
     while (cellTLY < bottomBound && cellIdx <= lastIdx) {
       if (this.table.isValidCellIdx(cellIdx)) {
         var cell = table.getCell(cellIdx, true);
@@ -44083,16 +44092,16 @@
           cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
-      if (cellTLX < rightBound && colIdx < lastColIdx) {
-        cellTLX += table.getColWidth(colIdx);
-        colIdx += 1;
+      if (cellTLX < rightBound && columnIndex < lastColIdx) {
+        cellTLX += table.getColWidth(columnIndex);
+        columnIndex += 1;
       } else {
         cellTLX = startCellTLX;
-        cellTLY += table.getRowHeight(rowIdx);
-        colIdx = startColIdx;
-        rowIdx += 1;
+        cellTLY += table.getRowHeight(rowIndex);
+        columnIndex = startColumnIndex;
+        rowIndex += 1;
       }
-      cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+      cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     }
   };
 
@@ -44535,6 +44544,24 @@
         return this;
       }
     }, {
+      key: "scrollToRow",
+      value: function scrollToRow(rowIndex) {
+        do {
+          var height = this.table.rowIndexToHeight(0, rowIndex - 1);
+          this.setTableOY(-height).updateTable();
+        } while (this.startRowIndex !== rowIndex);
+        return this;
+      }
+    }, {
+      key: "scrollToNextRow",
+      value: function scrollToNextRow(rowCount) {
+        if (rowCount === undefined) {
+          rowCount = 1;
+        }
+        this.scrollToRow(this.startRowIndex + rowCount);
+        return this;
+      }
+    }, {
       key: "getCell",
       value: function getCell(cellIdx) {
         return this.table.getCell(cellIdx, true);
@@ -44900,6 +44927,19 @@
     return this;
   };
 
+  var ScrollMethods = {
+    scrollToRow: function scrollToRow(rowIndex) {
+      var table = this.childrenMap.child;
+      table.scrollToRow(rowIndex);
+      return this;
+    },
+    scrollToNextRow: function scrollToNextRow(rowCount) {
+      var table = this.childrenMap.child;
+      table.scrollToNextRow(rowCount);
+      return this;
+    }
+  };
+
   var GetValue$R = Phaser.Utils.Objects.GetValue;
   var GridTable = /*#__PURE__*/function (_Scrollable) {
     _inherits(GridTable, _Scrollable);
@@ -45017,13 +45057,19 @@
           this.resizeControllerFlag = false;
         }
       }
+    }, {
+      key: "startRowIndex",
+      get: function get() {
+        var table = this.childrenMap.child;
+        return table.startRowIndex;
+      }
     }]);
     return GridTable;
   }(Scrollable);
   var methods$9 = {
     setItems: SetItems
   };
-  Object.assign(GridTable.prototype, methods$9);
+  Object.assign(GridTable.prototype, ScrollMethods, methods$9);
 
   ObjectFactory.register('gridTable', function (config) {
     var gameObject = new GridTable(this.scene, config);

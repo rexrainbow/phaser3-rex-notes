@@ -6,16 +6,11 @@ var ShowCells = function () {
     }
     var table = this.table;
 
-    var startRowIndex = table.heightToRowIndex(-this.tableOY);
-    if (startRowIndex <= 0) {
-        startRowIndex = 0;  //Turn -0 to 0
-    }
+    var startRowIndex = table.heightToRowIndex(-this.tableOY, false, true);
     var rowIndex = startRowIndex;
+    this.startRowIndex = rowIndex;
 
     var startColumnIndex = table.widthToColIndex(-this.tableOX);
-    if (startColumnIndex <= 0) {
-        startColumnIndex = 0;  //Turn -0 to 0
-    }
     var columnIndex = startColumnIndex;
 
     var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
