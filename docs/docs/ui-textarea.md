@@ -341,10 +341,6 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Scroll content
 
-- Scroll down a line
-    ```javascript
-    textArea.scrollLine();
-    ```
 - Scroll down lines
     ```javascript
     textArea.scrollLine(lineCount);
@@ -397,6 +393,25 @@ See also - [dirty](ui-basesizer.md#dirty)
 - Get
     ```javascript
     var t = textArea.t;
+    ```
+
+#### Scroll to line
+
+- Scroll to next line
+    ```javascript
+    textArea.scrollToNextLine();
+    ```
+- Scroll to next n line
+    ```javascript
+    textArea.scrollToNextLine(n);
+    ```
+- Scroll to line
+    ```javascript
+    textArea.scrollToLine(lineIndex);
+    ```
+- Get current line index
+    ```javascript
+    var lineIndex = textArea.lineIndex;
     ```
 
 #### Scroll to top/bottom

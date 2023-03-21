@@ -14134,7 +14134,9 @@
       out = {};
     }
     var canvas = CanvasPool$3.create(this);
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', {
+      willReadFrequently: true
+    });
     textStyle.syncFont(canvas, context);
     var metrics = context.measureText(testString);
     var width = Math.ceil(metrics.width * textStyle.baselineX);
@@ -14469,7 +14471,9 @@
     var canvas = CanvasPool$2.create(this);
 
     // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', {
+      willReadFrequently: true
+    });
     textStyle.syncFont(canvas, context);
     var metrics = context.measureText(textStyle.testString);
     if ('actualBoundingBoxAscent' in metrics) {
@@ -16614,7 +16618,9 @@
     if (destCanvas.height !== height) {
       destCanvas.height = height;
     }
-    var destCtx = destCanvas.getContext('2d');
+    var destCtx = destCanvas.getContext('2d', {
+      willReadFrequently: true
+    });
     destCtx.clearRect(0, 0, width, height);
     destCtx.drawImage(srcCanvas, x, y, width, height);
     if (renderer.gl && texture) {
@@ -16659,7 +16665,9 @@
       _this.setOrigin(0, 0);
       _this.initPipeline();
       _this.canvas = CanvasPool$1.create(_assertThisInitialized(_this));
-      _this.context = _this.canvas.getContext('2d');
+      _this.context = _this.canvas.getContext('2d', {
+        willReadFrequently: true
+      });
       _this._imageManager = undefined;
       if (style) {
         // Override align
@@ -17787,7 +17795,9 @@
       width = Math.max(Math.ceil(width * _this.resolution), 1);
       height = Math.max(Math.ceil(height * _this.resolution), 1);
       _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
-      _this.context = _this.canvas.getContext('2d');
+      _this.context = _this.canvas.getContext('2d', {
+        willReadFrequently: true
+      });
       _this.dirty = false;
       _this.setPosition(x, y);
       _this.setOrigin(0.5, 0.5);

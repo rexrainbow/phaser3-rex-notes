@@ -7765,6 +7765,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-to-line" class="md-nav__link">
+    Scroll to line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-to-topbottom" class="md-nav__link">
     Scroll to top/bottom
   </a>
@@ -9213,6 +9220,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-to-line" class="md-nav__link">
+    Scroll to line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-to-topbottom" class="md-nav__link">
     Scroll to top/bottom
   </a>
@@ -9658,6 +9672,9 @@
 </ul>
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Scroll down lines
+    <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollLine</span><span class="p">(</span><span class="nx">lineCount</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">childOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
 <span class="c1">// textArea.setChildOY(oy);</span>
@@ -9695,6 +9712,21 @@
 </code></pre></div></li>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h4 id="scroll-to-line">Scroll to line<a class="headerlink" href="#scroll-to-line" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Scroll to next line
+    <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToNextLine</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Scroll to next n line
+    <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToNextLine</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Scroll to line
+    <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToLine</span><span class="p">(</span><span class="nx">lineIndex</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get current line index
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">lineIndex</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">lineIndex</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="scroll-to-topbottom">Scroll to top/bottom<a class="headerlink" href="#scroll-to-topbottom" title="Permanent link">&para;</a></h4>

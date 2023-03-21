@@ -1,11 +1,22 @@
+const Clamp = Phaser.Math.Clamp;
+
 export default {
-    scrollLine(lineCount) {
+    scrollToLine(lineIndex, clamp) {
+        if (clamp) {
+            lineIndex = Clamp(lineIndex, 0, this.linesCount);
+        }
+
+        this.setChildOY(-this.lineHeight * lineIndex);
+        return this;
+    },
+
+    scrollToNextLine(lineCount, clamp) {
         if (lineCount === undefined) {
             lineCount = 1;
         }
-        var child = this.childrenMap.child;
-        var lineHeight = (child.textLineHeight + child.textLineSpacing) * lineCount;
-        this.addChildOY(-lineHeight);
+
+        var lineIndex = this.lineIndex + lineCount;
+        this.scrollToLine(lineIndex, clamp);
         return this;
     }
 }
