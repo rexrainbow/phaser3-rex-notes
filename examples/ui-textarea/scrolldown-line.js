@@ -40,14 +40,14 @@ class Demo extends Phaser.Scene {
         this.add.text(0, 580, 'Scolll 50 lines')
             .setInteractive()
             .on('pointerdown', function () {
-                var t0 = textArea.t;
+                var y0 = textArea.childOY;
                 textArea.scrollToNextLine(50);
-                var t1 = textArea.t;
+                var y1 = textArea.childOY;
 
-                textArea.t = t0;
+                textArea.childOY = y0;
                 this.tweens.add({
                     targets: textArea,
-                    t: t1,
+                    childOY: y1,
                     duration: 1000
                 })
             }, this)
