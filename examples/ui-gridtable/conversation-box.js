@@ -47,6 +47,13 @@ class ConversationBox extends RexPlugins.UI.Sizer {
         return this;
     }
 
+    clearAllMessages() {
+        this.messages.length = 0;
+        var table = this.getElement('messages');
+        table.setItems(this.messages);
+        return this;
+    }
+
     appendMessage(config) {
         this.messages.push({
             text: config.text,
@@ -125,8 +132,8 @@ var CreateTable = function (scene, config) {
     }
 
     config.background = CreateBackground(scene, config.background);
-    config.slider = false;
-    config.scroller = false;
+    config.slider = false;   // No slider
+    config.scroller = false; // No scroller
 
     config.table = {
         mask: { padding: 2 },
@@ -142,9 +149,10 @@ var CreateTable = function (scene, config) {
             cellContainer = CreateMessageBox(scene, config);
         }
 
-        var wrapWidth = (cell.width < 100) ? cell.width : (cell.width - 30);
+        var wrapWidth = (cell.width < 150) ? cell.width : (cell.width - 50);
         var textObject = cellContainer.getElement('text');
         textObject
+            .setFixedSize(wrapWidth, 0)
             .setWordWrapWidth(wrapWidth)
             .setText(item.text)
             .updateText(true)
@@ -166,19 +174,15 @@ var CreateMessageBox = function (scene, config) {
     })
 
     var textObject = label.getElement('text');
-    textObject
-        .setOrigin(0)
-        .setWrapMode('word');
+    textObject.setWrapMode('word');
 
-    var typing = scene.rexUI.add.textTyping(textObject, config.typing)
+    textObject.typing = scene.rexUI.add.textTyping(textObject, config.typing)
         .on('type', function () {
             label.getTopmostSizer().emit('type');
         })
         .on('complete', function () {
             label.getTopmostSizer().emit('type.complete');
         })
-
-    textObject.typing = typing;
 
     return label;
 }
@@ -227,7 +231,7 @@ class Demo extends Phaser.Scene {
             },
 
             messages: {
-                space: { top: 10, bottom: 10 },
+                space: { left: 10, right: 10, top: 10, bottom: 10, },
                 background: {
                     color: COLOR_DARK
                 },
@@ -261,7 +265,7 @@ class Demo extends Phaser.Scene {
         await conversationBox.scrollUpPromise();
         await conversationBox
             .appendMessage({
-                text: 'BBBB BBBB BBBB BBBB',
+                text: 'BBBB BBBB BBBB BBBB BBBB BBBB BBBB BBBB',
                 align: 'right'
             })
             .typingLastMessagePromise()
