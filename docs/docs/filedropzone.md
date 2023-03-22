@@ -137,7 +137,7 @@ var fileDropZone = scene.add.rexFileDropZone({
     // style: { },
     
     // dropEnable: true,
-    // filters: { filterType: (file) => boolean }
+    // filters: { filterType: (file, files) => boolean }
 });
 // var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);
 ```
@@ -149,7 +149,7 @@ var fileDropZone = scene.add.rexFileDropZone({
 - `filters` : Filter methods, optional. For example, image files filter, will fire `'drop.image'` event
     ```javascript
     {
-        image: function(file) { 
+        image: function(file, files) { 
             return file.name.match(/\.(jpg|jpeg|png|gif)$/i)
         }
     }

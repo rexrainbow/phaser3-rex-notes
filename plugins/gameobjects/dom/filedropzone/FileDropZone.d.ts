@@ -2,7 +2,10 @@ export default FileDropZone;
 
 declare namespace FileDropZone {
 
-    type FilterCallbackType = (file: File) => boolean;
+    type FilterCallbackType = (
+        file: File,
+        files: File[]
+    ) => boolean;
 
     type FiltersType = { [filterType: string]: FilterCallbackType }
 
