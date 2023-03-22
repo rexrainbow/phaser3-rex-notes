@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -18,70 +17,23 @@ class ConversationBox extends RexPlugins.UI.Sizer {
 
         this.messages = [];
 
-        var background = new RexPlugins.UI.RoundRectangle(scene, config.background);
-        scene.add.existing(background);
+        var background = CreateBackground(scene, config.background);
         this.addBackground(background);
 
         var labelConfig = (config.label) ? Clone(config.label) : {};
         labelConfig.orientation = 'y';
-        var labelA = new RexPlugins.UI.SimpleLabel(scene, labelConfig);
-        labelA.resetDisplayContent();
-        scene.add.existing(labelA);
+
+        var labelA = CreateLabel(scene, labelConfig);
         this.add(labelA, { key: 'labelA' });
 
-        var messagesConfig = (config.messages) ? Clone(config.messages) : {};
-        var messageBackground = new RexPlugins.UI.RoundRectangle(scene, messagesConfig.background);
-        scene.add.existing(messageBackground);
-        messagesConfig.background = messageBackground;
-
-        messagesConfig.table = {
-            mask: { padding: 2 },
-            interactive: false,
-            reuseCellContainer: true,
-            slider: false,
-            scroller: false,
-            clamplChildOY: false,
-        }
-
-        var messageTextStyle = messagesConfig.text;
-        var TextTypingFactory = scene.plugins.get('rexTextTyping');
-        var messageTypingConfig = messagesConfig.typing || {};
-        messagesConfig.createCellContainerCallback = function (cell, cellContainer) {
-            var scene = cell.scene,
-                item = cell.item;
-            if (cellContainer === null) { // No reusable cell container, create a new one
-                cellContainer = new RexPlugins.UI.BBCodeText(scene, 0, 0, '', messageTextStyle);
-                cellContainer.setOrigin(0);
-                scene.add.existing(cellContainer);
-
-                cellContainer.setWrapMode('word');
-
-                cellContainer.typing = TextTypingFactory.add(cellContainer, messageTypingConfig);
-            }
-
-            var wrapWidth = (cell.width < 100) ? cell.width : (cell.width - 30);
-            cellContainer
-                .setWordWrapWidth(wrapWidth)
-                .setText(item.text)
-                .updateText(true)
-
-            cell.setCellContainerAlign(item.align);
-
-            cell.height = cellContainer.height;
-
-            return cellContainer; // or null
-        }
-        messagesConfig.items = this.messages;
-        var messages = new RexPlugins.UI.GridTable(scene, messagesConfig);
-        scene.add.existing(messages);
+        var tableConfig = (config.messages) ? Clone(config.messages) : {};
+        var table = CreateTable(scene, tableConfig);
         this.add(
-            messages,
+            table,
             { proportion: 1, expand: true, key: 'messages' }
         );
 
-        var labelB = new RexPlugins.UI.SimpleLabel(scene, labelConfig);
-        labelB.resetDisplayContent();
-        scene.add.existing(labelB);
+        var labelB = CreateLabel(scene, labelConfig);
         this.add(labelB, { key: 'labelB' });
     }
 
@@ -107,20 +59,138 @@ class ConversationBox extends RexPlugins.UI.Sizer {
 
     typingLastMessage() {
         var table = this.getElement('messages');
-        var textObject = table.getCell(table.items.length - 1).getContainer();
+        var textObject = table.getCell(table.items.length - 1).getContainer().getElement('text');
         textObject.typing.start(textObject.text);
         return this;
     }
 
-    scrollUp() {
+    typingLastMessagePromise() {
+        var self = this;
+        return new Promise(function (resolve, reject) {
+            self
+                .once('type.complete', resolve)
+                .typingLastMessage()
+        });
+    }
+
+    scrollUp(duration) {
+        if (duration === undefined) {
+            duration = 333;
+        }
+
         if (this.messages.length === 0) {
+            this.emit('scrollup.complete');
             return this;
         }
 
         var table = this.getElement('messages');
+        var y0 = table.childOY;
         table.scrollToNextRow();
+        var y1 = table.childOY;
+
+        table.childOY = y0;
+        this.scene.tweens.add({
+            targets: table,
+            childOY: y1,
+            duration: duration
+        })
+            .once('complete', function () {
+                this.emit('scrollup.complete');
+            }, this)
+
         return this;
     }
+
+    scrollUpPromise(duration) {
+        var self = this;
+        return new Promise(function (resolve, reject) {
+            self
+                .once('scrollup.complete', resolve)
+                .scrollUp(duration)
+        });
+    }
+}
+
+var CreateBackground = function (scene, config) {
+    return scene.rexUI.add.roundRectangle(config);
+}
+
+var CreateLabel = function (scene, config) {
+    return scene.rexUI.add.simpleLabel(config).resetDisplayContent();
+}
+
+var CreateTable = function (scene, config) {
+    if (config === undefined) {
+        config = {};
+    }
+
+    config.background = CreateBackground(scene, config.background);
+    config.slider = false;
+    config.scroller = false;
+
+    config.table = {
+        mask: { padding: 2 },
+        interactive: false,
+        reuseCellContainer: true,
+        clamplChildOY: false,
+    }
+
+    config.createCellContainerCallback = function (cell, cellContainer) {
+        var scene = cell.scene,
+            item = cell.item;
+        if (cellContainer === null) { // No reusable cell container, create a new one
+            cellContainer = CreateMessageBox(scene, config);
+        }
+
+        var wrapWidth = (cell.width < 100) ? cell.width : (cell.width - 30);
+        var textObject = cellContainer.getElement('text');
+        textObject
+            .setWordWrapWidth(wrapWidth)
+            .setText(item.text)
+            .updateText(true)
+
+        cellContainer.setDirty(true).layout().setDirty(false);
+
+        cell.height = cellContainer.height;
+        cell.setCellContainerAlign(item.align);
+
+        return cellContainer; // or null
+    }
+
+    return scene.rexUI.add.gridTable(config);
+}
+
+var CreateMessageBox = function (scene, config) {
+    var label = CreateLabel(scene, {
+        text: config.text
+    })
+
+    var textObject = label.getElement('text');
+    textObject
+        .setOrigin(0)
+        .setWrapMode('word');
+
+    var typing = scene.rexUI.add.textTyping(textObject, config.typing)
+        .on('type', function () {
+            label.getTopmostSizer().emit('type');
+        })
+        .on('complete', function () {
+            label.getTopmostSizer().emit('type.complete');
+        })
+
+    textObject.typing = typing;
+
+    return label;
+}
+
+var CreateDummyTexture = function (scene, key, width, height) {
+    scene.add.graphics()
+        .fillStyle(0x333333)
+        .lineStyle(2, 0xffffff)
+        .fillRect(0, 0, width, height)
+        .strokeRect(0, 0, width, height)
+        .generateTexture(key, width, height)
+        .destroy()
 }
 
 class Demo extends Phaser.Scene {
@@ -131,17 +201,10 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        var imageWidth = 160, imageHeight = 200;
-        this.add.graphics()
-            .fillStyle(0x333333)
-            .lineStyle(2, 0xffffff)
-            .fillRect(0, 0, imageWidth, imageHeight)
-            .strokeRect(0, 0, imageWidth, imageHeight)
-            .generateTexture('char', imageWidth, imageHeight)
-            .destroy()
+        CreateDummyTexture(this, 'char', 160, 200);
     }
 
-    create() {
+    async create() {
         var conversationBox = new ConversationBox(this, {
             x: 400, y: 400,
             width: 700, height: 300,
@@ -187,18 +250,21 @@ class Demo extends Phaser.Scene {
             })
             .layout()
 
+        await conversationBox.scrollUpPromise();
+        await conversationBox
             .appendMessage({
-                text: 'AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA \
-AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA \
-AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA',
+                text: 'AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA AAAA',
                 align: 'left'
             })
-            .typingLastMessage()
+            .typingLastMessagePromise()
 
-            .drawBounds(
-                this.add.graphics(),
-                0xff0000
-            )
+        await conversationBox.scrollUpPromise();
+        await conversationBox
+            .appendMessage({
+                text: 'BBBB BBBB BBBB BBBB',
+                align: 'right'
+            })
+            .typingLastMessagePromise()
     }
 
     update() { }
@@ -215,14 +281,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [
-            {
-                key: 'rexTextTyping',
-                plugin: TextTypingPlugin,
-                start: true
-            }
-
-        ],
         scene: [
             {
                 key: 'rexUI',
