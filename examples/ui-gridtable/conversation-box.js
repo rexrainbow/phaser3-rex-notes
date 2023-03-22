@@ -67,7 +67,7 @@ class ConversationBox extends RexPlugins.UI.Sizer {
     typingLastMessage() {
         var table = this.getElement('messages');
         var textObject = table.getCell(table.items.length - 1).getContainer().getElement('text');
-        textObject.typing.start(textObject.text);
+        textObject.typing.start(textObject.src);
         return this;
     }
 
@@ -151,6 +151,7 @@ var CreateTable = function (scene, config) {
 
         var wrapWidth = (cell.width < 150) ? cell.width : (cell.width - 50);
         var textObject = cellContainer.getElement('text');
+        textObject.src = item.text;
         textObject
             .setFixedSize(wrapWidth, 0)
             .setWordWrapWidth(wrapWidth)
@@ -240,6 +241,7 @@ class Demo extends Phaser.Scene {
                 },
                 typing: {
                     speed: 100,
+                    wrap: true
                 }
             }
         })
