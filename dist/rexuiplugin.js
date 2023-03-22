@@ -58894,6 +58894,16 @@
   });
   SetValue(window, 'RexPlugins.UI.Anchor', Anchor);
 
+  ObjectFactory.register('textTyping', function (gameObject, config) {
+    return new TextTyping(gameObject, config);
+  });
+  SetValue(window, 'RexPlugins.UI.TextTyping', TextTyping);
+
+  ObjectFactory.register('textPage', function (gameObject, config) {
+    return new TextPage(gameObject, config);
+  });
+  SetValue(window, 'RexPlugins.UI.TextPage', TextPage);
+
   var LastOpenedEditor = undefined;
   var SetLastOpenedEditor = function SetLastOpenedEditor(editor) {
     if (editor === LastOpenedEditor) {

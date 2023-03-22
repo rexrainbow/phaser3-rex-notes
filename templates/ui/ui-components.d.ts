@@ -89,6 +89,8 @@ import TouchEventStop from './toucheventstop/TouchEventStop';
 import Perspective from './perspective/Perspective';
 import Skew from './skew/Skew';
 import Anchor from './anchor/Anchor';
+import TextTyping from './texttyping/TextTyping';
+import TextPage from './textpage/TextPage';
 import TextEdit from './textedit/TextEdit';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -207,6 +209,8 @@ export {
     Perspective,
     Skew,
     Anchor,
+    TextTyping,
+    TextPage,
     TextEdit,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,

@@ -92,6 +92,8 @@ import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
 import SkewFactory from './skew/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
+import TextTypingFactory from './texttyping/Factory.js';
+import TextPageFactory from './textpage/Factory.js';
 import TextEditFactory from './textedit/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';

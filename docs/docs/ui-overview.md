@@ -540,7 +540,14 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
-
+1. [Text typing](texttyping.md)
+    ```javascript
+    var textTyping = scene.rexUI.textTyping(textObject, config);
+    ```
+2. [Text page](textpage.md)
+    ```javascript
+    var textPage = scene.rexUI.textPage(textObject, config);
+    ```
 
 ### Scaled image
 
