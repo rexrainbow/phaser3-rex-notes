@@ -14322,12 +14322,9 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil, nextVisible) {
+      value: function heightToRowIndex(height, isCeil) {
         if (height === 0) {
           return 0;
-        }
-        if (nextVisible === undefined) {
-          nextVisible = false;
         }
 
         // defaultCellHeightMode
@@ -14337,9 +14334,6 @@
             rowIdx = Math.ceil(rowIdx);
           } else {
             rowIdx = Math.floor(rowIdx);
-          }
-          if (nextVisible && rowIdx === height / this.defaultCellHeight) {
-            rowIdx += 1;
           }
           return rowIdx;
         }
@@ -14357,9 +14351,6 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
-            if (nextVisible) {
-              rowIdx += 1;
-            }
             return rowIdx;
           } else {
             if (isCeil) {
@@ -14957,9 +14948,13 @@
       return;
     }
     var table = this.table;
-    var startRowIndex = table.heightToRowIndex(-this.tableOY, false, true);
+    var startRowIndex = table.heightToRowIndex(-this.tableOY);
     var rowIndex = startRowIndex;
-    this.startRowIndex = rowIndex;
+    if (table.rowIndexToHeight(0, rowIndex) === -this.tableOY) {
+      this.startRowIndex = rowIndex + 1;
+    } else {
+      this.startRowIndex = rowIndex;
+    }
     var startColumnIndex = table.widthToColIndex(-this.tableOX);
     var columnIndex = startColumnIndex;
     var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
