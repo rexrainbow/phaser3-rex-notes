@@ -9356,7 +9356,7 @@
     <span class="c1">// style: { },</span>
 
     <span class="c1">// dropEnable: true,</span>
-    <span class="c1">// filters: { filterType: (file) =&gt; boolean }</span>
+    <span class="c1">// filters: { filterType: (file, files) =&gt; boolean }</span>
 <span class="p">});</span>
 <span class="c1">// var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);</span>
 </code></pre></div>
@@ -9369,7 +9369,7 @@
 </li>
 <li><code>filters</code> : Filter methods, optional. For example, image files filter, will fire <code>'drop.image'</code> event
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">image</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">image</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="p">{</span> 
         <span class="k">return</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\.(jpg|jpeg|png|gif)$/i</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
