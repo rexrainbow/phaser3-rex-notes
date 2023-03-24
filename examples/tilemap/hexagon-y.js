@@ -8,8 +8,8 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('tiles', 'assets/tilemaps/hexagon/tileset.png');
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/hexagon/mapdata.json');
+        this.load.image('tiles', 'assets/tilemaps/hexagon/tileset-y.png');
+        this.load.tilemapTiledJSON('map', 'assets/tilemaps/hexagon/mapdata-y.json');
     }
 
     create() {
