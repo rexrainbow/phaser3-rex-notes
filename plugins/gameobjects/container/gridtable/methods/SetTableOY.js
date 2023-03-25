@@ -6,9 +6,9 @@ var SetTableOY = function (oy) {
     var tableOYExeceedBottom = (oy < this.bottomTableOY);
     if (this.clampTableOXY) {
         var rowCount = table.rowCount;
-        var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
+        var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);
 
-        // less then 1 page            
+        // less then 1 page
         if (rowCount < visibleRowCount) {
             oy = 0;
         } else if (tableOYExceedTop) {

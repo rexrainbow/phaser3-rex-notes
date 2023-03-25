@@ -14322,7 +14322,17 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil) {
+      value: function heightToRowIndex(height, roundMode) {
+        if (roundMode === undefined) {
+          roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 : plus one if rowIdx is an integer, else floor
+        */
+
         if (height === 0) {
           return 0;
         }
@@ -14330,10 +14340,21 @@
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
-          if (isCeil) {
-            rowIdx = Math.ceil(rowIdx);
-          } else {
-            rowIdx = Math.floor(rowIdx);
+          switch (roundMode) {
+            case 0:
+              rowIdx = Math.floor(rowIdx);
+              break;
+            case 1:
+              rowIdx = Math.ceil(rowIdx);
+              break;
+            default:
+              // 2
+              if (Number.isInteger(rowIdx)) {
+                rowIdx += 1;
+              } else {
+                rowIdx = Math.floor(rowIdx);
+              }
+              break;
           }
           return rowIdx;
         }
@@ -14351,9 +14372,12 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
+            if (roundMode === 2) {
+              rowIdx += 1;
+            }
             return rowIdx;
           } else {
-            if (isCeil) {
+            if (roundMode === 1) {
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
@@ -14545,9 +14569,9 @@
     var tableOYExeceedBottom = oy < this.bottomTableOY;
     if (this.clampTableOXY) {
       var rowCount = table.rowCount;
-      var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
+      var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);
 
-      // less then 1 page            
+      // less then 1 page
       if (rowCount < visibleRowCount) {
         oy = 0;
       } else if (tableOYExceedTop) {
@@ -14948,13 +14972,8 @@
       return;
     }
     var table = this.table;
-    var startRowIndex = table.heightToRowIndex(-this.tableOY);
-    var rowIndex = startRowIndex;
-    if (table.rowIndexToHeight(0, rowIndex) === -this.tableOY) {
-      this.startRowIndex = rowIndex + 1;
-    } else {
-      this.startRowIndex = rowIndex;
-    }
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
     var startColumnIndex = table.widthToColIndex(-this.tableOX);
     var columnIndex = startColumnIndex;
     var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
@@ -15101,7 +15120,7 @@
     var offsetTableOY = this.tableOY - (this.scrollMode === 0 ? y : x);
     var offsetTableOX = this.tableOX - (this.scrollMode === 0 ? x : y);
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-offsetTableOY);
+    var rowIdx = table.heightToRowIndex(-offsetTableOY, 0);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     if (cellIdx === null) {

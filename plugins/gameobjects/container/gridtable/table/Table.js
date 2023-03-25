@@ -129,7 +129,17 @@ class Table {
         return ((idx >= 0) && (idx < this.cells.length));
     }
 
-    heightToRowIndex(height, isCeil) {
+    heightToRowIndex(height, roundMode) {
+        if (roundMode === undefined) {
+            roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 : plus one if rowIdx is an integer, else floor
+        */
+
         if (height === 0) {
             return 0;
         }
@@ -137,10 +147,22 @@ class Table {
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
             var rowIdx = height / this.defaultCellHeight;
-            if (isCeil) {
-                rowIdx = Math.ceil(rowIdx);
-            } else {
-                rowIdx = Math.floor(rowIdx);
+            switch (roundMode) {
+                case 0:
+                    rowIdx = Math.floor(rowIdx);
+                    break;
+
+                case 1:
+                    rowIdx = Math.ceil(rowIdx);
+                    break;
+
+                default: // 2
+                    if (Number.isInteger(rowIdx)) {
+                        rowIdx += 1;
+                    } else {
+                        rowIdx = Math.floor(rowIdx);
+                    }
+                    break;
             }
 
             return rowIdx;
@@ -160,9 +182,12 @@ class Table {
             if ((remainder > 0) && isValidIdx) {
                 rowIdx += 1;
             } else if (remainder === 0) {
+                if (roundMode === 2) {
+                    rowIdx += 1;
+                }
                 return rowIdx;
             } else {
-                if (isCeil) {
+                if (roundMode === 1) {
                     var preRowIdx = rowIdx;
                     rowIdx += 1;
                     isValidIdx = (rowIdx >= 0) && (rowIdx < rowCount);

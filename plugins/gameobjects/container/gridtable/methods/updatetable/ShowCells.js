@@ -6,14 +6,8 @@ var ShowCells = function () {
     }
     var table = this.table;
 
-    var startRowIndex = table.heightToRowIndex(-this.tableOY);
-    var rowIndex = startRowIndex;
-
-    if (table.rowIndexToHeight(0, rowIndex) === -this.tableOY) {
-        this.startRowIndex = rowIndex + 1;
-    } else {
-        this.startRowIndex = rowIndex;
-    }
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
 
     var startColumnIndex = table.widthToColIndex(-this.tableOX);
     var columnIndex = startColumnIndex;

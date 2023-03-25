@@ -33976,18 +33976,31 @@
   };
 
   var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
-    var cache = GetCache(scene, loaderType, cacheType);
-    if (cache.exists(key)) {
-      cache.remove(key);
+    // Remove data from cache
+    if (cacheType === null || cacheType === false) ; else if (IsFunction(cacheType)) {
+      cacheType();
+    } else {
+      var cache = GetCache(scene, loaderType, cacheType);
+      if (cache.exists(key)) {
+        cache.remove(key);
+      }
     }
-    var url = window.URL.createObjectURL(file);
+
+    // Add filecomplete event
     var loader = scene.load;
     if (onComplete) {
       loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
         onComplete(data);
       });
     }
-    loader[loaderType](key, url);
+
+    // Load file from url
+    if (IsFunction(file)) {
+      file();
+    } else {
+      var url = window.URL.createObjectURL(file);
+      loader[loaderType](key, url);
+    }
     loader.start();
   };
 
@@ -34224,13 +34237,14 @@
       });
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
-        if (this._files && this.filters) {
+        var files = this._files;
+        if (files && this.filters) {
           for (var filterType in this.filters) {
             var filterCallback = this.filters[filterType];
             var filteredFiles = [];
-            for (var i = 0, cnt = this._files.length; i < cnt; i++) {
-              var file = this._files[i];
-              if (filterCallback(file)) {
+            for (var i = 0, cnt = files.length; i < cnt; i++) {
+              var file = files[i];
+              if (filterCallback(file, files)) {
                 filteredFiles.push(file);
               }
             }
@@ -43550,7 +43564,17 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil) {
+      value: function heightToRowIndex(height, roundMode) {
+        if (roundMode === undefined) {
+          roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 : plus one if rowIdx is an integer, else floor
+        */
+
         if (height === 0) {
           return 0;
         }
@@ -43558,10 +43582,21 @@
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
-          if (isCeil) {
-            rowIdx = Math.ceil(rowIdx);
-          } else {
-            rowIdx = Math.floor(rowIdx);
+          switch (roundMode) {
+            case 0:
+              rowIdx = Math.floor(rowIdx);
+              break;
+            case 1:
+              rowIdx = Math.ceil(rowIdx);
+              break;
+            default:
+              // 2
+              if (Number.isInteger(rowIdx)) {
+                rowIdx += 1;
+              } else {
+                rowIdx = Math.floor(rowIdx);
+              }
+              break;
           }
           return rowIdx;
         }
@@ -43579,9 +43614,12 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
+            if (roundMode === 2) {
+              rowIdx += 1;
+            }
             return rowIdx;
           } else {
-            if (isCeil) {
+            if (roundMode === 1) {
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
@@ -43773,9 +43811,9 @@
     var tableOYExeceedBottom = oy < this.bottomTableOY;
     if (this.clampTableOXY) {
       var rowCount = table.rowCount;
-      var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
+      var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);
 
-      // less then 1 page            
+      // less then 1 page
       if (rowCount < visibleRowCount) {
         oy = 0;
       } else if (tableOYExceedTop) {
@@ -44049,13 +44087,8 @@
       return;
     }
     var table = this.table;
-    var startRowIndex = table.heightToRowIndex(-this.tableOY);
-    var rowIndex = startRowIndex;
-    if (table.rowIndexToHeight(0, rowIndex) === -this.tableOY) {
-      this.startRowIndex = rowIndex + 1;
-    } else {
-      this.startRowIndex = rowIndex;
-    }
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
     var startColumnIndex = table.widthToColIndex(-this.tableOX);
     var columnIndex = startColumnIndex;
     var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
@@ -44202,7 +44235,7 @@
     var offsetTableOY = this.tableOY - (this.scrollMode === 0 ? y : x);
     var offsetTableOX = this.tableOX - (this.scrollMode === 0 ? x : y);
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-offsetTableOY);
+    var rowIdx = table.heightToRowIndex(-offsetTableOY, 0);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     if (cellIdx === null) {
