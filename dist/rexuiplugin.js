@@ -45600,6 +45600,13 @@
       this.listAlignMode = mode;
       return this;
     },
+    setListAlignmentSide: function setListAlignmentSide(side) {
+      if (side === undefined) {
+        side = '';
+      }
+      this.listAlignSide = side;
+      return this;
+    },
     setListSpace: function setListSpace(space) {
       if (space === undefined) {
         space = {};
@@ -45728,16 +45735,24 @@
     var alignTargetY = GetValue$P(config, 'alignTargetY', alignTargetX);
     var alignOffsetX = GetValue$P(config, 'alignOffsetX', 0);
     var alignOffsetY = GetValue$P(config, 'alignOffsetY', 0);
+    var alignSide = GetValue$P(config, 'alignSide', '');
+    var alignRight = alignSide.includes('right');
     var positionBounds = GetValue$P(config, 'bounds');
 
     // Expand direction
     var isExpandDown = expandDirection === 0;
     var isExpandUp = expandDirection === 1;
     var flexExpand = !isExpandDown && !isExpandUp;
+    var originX = alignRight ? 1 : 0;
     var originY = isExpandDown || flexExpand ? 0 : 1;
-    gameObject.setOrigin(0, originY);
-    var x = alignTargetX.getTopLeft().x;
-    var y = alignTargetY.getBottomLeft().y;
+    gameObject.setOrigin(originX, originY);
+    var x, y;
+    if (alignRight) {
+      x = alignTargetX.getTopRight().x;
+    } else {
+      x = alignTargetX.getTopLeft().x;
+    }
+    y = alignTargetY.getBottomLeft().y;
     gameObject.setPosition(x + alignOffsetX, y + alignOffsetY);
     var bounds = positionBounds;
     if (!bounds) {
@@ -45888,6 +45903,7 @@
       expandDirection: this.listExpandDirection,
       alignTargetX: alignTargetX,
       alignTargetY: this,
+      alignSide: this.listAlignSide,
       bounds: this.listBounds,
       // Close condition
       anyTouchClose: true
@@ -45960,6 +45976,7 @@
       _this.settListTransitOutCallback(GetValue$N(listConfig, 'transitOut'));
       _this.setListSize(GetValue$N(listConfig, 'width'), GetValue$N(listConfig, 'height'));
       _this.setListAlignmentMode(GetValue$N(listConfig, 'alignParent', 'text'));
+      _this.setListAlignmentSide(GetValue$N(listConfig, 'alignSide', ''));
       _this.setListBounds(GetValue$N(listConfig, 'bounds'));
       _this.setListSpace(GetValue$N(listConfig, 'space'));
       _this.setListDraggable(GetValue$N(listConfig, 'draggable', false));

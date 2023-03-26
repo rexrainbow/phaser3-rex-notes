@@ -17,9 +17,10 @@ class Demo extends Phaser.Scene {
         var tileset = map.addTilesetImage('tileset', 'tiles');
         map.createLayer('Calque 1', tileset, 100, 100);
 
-        this.input.on('pointerdown', function(pointer) {
+        var print = this.add.text(0, 0, '');
+        this.input.on('pointerdown', function (pointer) {
             var tileXY = map.worldToTileXY(pointer.worldX, pointer.worldY);
-            console.log(tileXY)
+            print.text = `${tileXY.x},${tileXY.y}`;
         });
     }
 

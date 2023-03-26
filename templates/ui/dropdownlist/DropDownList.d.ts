@@ -75,6 +75,7 @@ declare namespace DropDownList {
             width?: number;
             height?: number;
             alignParent?: AlignParentType;
+            alignSide?: string;
             expandDirection?: ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
 
@@ -120,6 +121,7 @@ declare class DropDownList extends Label {
     setListSize(width?: number, height?: number): this;
 
     setListAlignmentMode(mode?: DropDownList.AlignParentType): this;
+    setListAlignmentSide(side?: string): this;
     setListBounds(bounds: Phaser.Geom.Rectangle): this;
 
     setListSpace(space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType): this;

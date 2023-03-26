@@ -12,6 +12,8 @@ var SetPosition = function (gameObject, config) {
     var alignTargetY = GetValue(config, 'alignTargetY', alignTargetX);
     var alignOffsetX = GetValue(config, 'alignOffsetX', 0);
     var alignOffsetY = GetValue(config, 'alignOffsetY', 0);
+    var alignSide = GetValue(config, 'alignSide', '');
+    var alignRight = alignSide.includes('right');
 
     var positionBounds = GetValue(config, 'bounds');
 
@@ -20,11 +22,18 @@ var SetPosition = function (gameObject, config) {
     var isExpandUp = (expandDirection === 1);
     var flexExpand = !isExpandDown && !isExpandUp;
 
+    var originX = (alignRight) ? 1 : 0;
     var originY = (isExpandDown || flexExpand) ? 0 : 1;
-    gameObject.setOrigin(0, originY);
+    gameObject.setOrigin(originX, originY);
 
-    var x = alignTargetX.getTopLeft().x;
-    var y = alignTargetY.getBottomLeft().y;
+    var x, y;
+    if (alignRight) {
+        x = alignTargetX.getTopRight().x;
+    } else {
+        x = alignTargetX.getTopLeft().x;
+    }
+
+    y = alignTargetY.getBottomLeft().y;
     gameObject.setPosition(
         x + alignOffsetX,
         y + alignOffsetY

@@ -47,6 +47,7 @@ var OpenListPanel = function () {
 
         alignTargetX: alignTargetX,
         alignTargetY: this,
+        alignSide: this.listAlignSide,
 
         bounds: this.listBounds,
 
