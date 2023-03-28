@@ -31,6 +31,8 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
 
 - [Official demos](https://labs.phaser.io/index.html?dir=3.60/fx/&q=)
 
+## Usage
+
 ### Barrel
 
 - Add pre-fx to game object
@@ -42,7 +44,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
         - Used when `amount` is larger than `1`.
     - `amount` : The amount of distortion applied to the barrel effect.
         - `1` : No distortion
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addBarrel(amount);
+    ```
     ```javascript
     var effect = camera.postFX.addBarrel(amount);
     ```
@@ -73,7 +78,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `blurStrength` , `strength` : The strength of the blur/blend process of the bloom effect. Default value is `1`.
     - `steps` : The number of steps to run the Bloom effect for. This value should always be an integer. Default value is `4`.
         - The higher the value, the smoother the Bloom, but at the cost of exponentially more gl operations.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addBloom(color, offsetX, offsetY, blurStrength, strength, steps);
+    ```
     ```javascript
     var effect = camera.postFX.addBloom(color, offsetX, offsetY, blurStrength, strength, steps);
     ```
@@ -113,7 +121,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `color` : The color of the blur, as a hex value. Default value is `0xffffff`.
     - `steps` : The number of steps to run the blur effect for. This value should always be an integer.
         - The higher the value, the smoother the blur, but at the cost of exponentially more gl operations.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addBlur(quality, x, y, strength, color, steps);
+    ```
     ```javascript
     var effect = camera.postFX.addBlur(quality, x, y, strength, color, steps);
     ```
@@ -147,7 +158,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `radius` : The radius of the bokeh effect. Default value is `0.5`.
     - `amount` : The amount of the bokeh effect. Default value is `1`.
     - `contrast` : The color contrast of the bokeh effect. Default value is `0.2`.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addBlur(quality, x, y, strength, color, steps);
+    ```
     ```javascript
     var effect = camera.postFX.addBokeh(radius, amount, contrast);
     ```
@@ -180,7 +194,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `contrast` : The color contrast of the bokeh effect. Default value is `0.2`.
     - `blurX`, `blurY` : The amount of horizontal/vertical blur.
     - `strength` : The strength of the blur.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
+    ```
     ```javascript
     var effect = camera.postFX.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
     ```
@@ -217,7 +234,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `scale` : The scale of the circle. Default value is `1`.
         - `1` : Full size of the underlying texture.
     - `feather` : The amount of feathering to apply to the circle from the ring. Default value is `0.005`.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addCircle(thickness, color, backgroundColor, scale, feather);
+    ```
     ```javascript
     var effect = camera.postFX.addCircle(thickness, color, backgroundColor, scale, feather);
     ```
@@ -247,9 +267,12 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     ```javascript
     var effect = gameObject.preFX.addColorMatrix();
     ```
-- Add post-fx to camera
+- Add post-fx to game object, or camera
     ```javascript
-    var effect = camera.postFX.addColorMatrix(quality, x, y, strength, color, steps);
+    var effect = gameObject.postFX.addColorMatrix();
+    ```
+    ```javascript
+    var effect = camera.postFX.addColorMatrix();
     ```
 - Disable effect
     ```javascript
@@ -405,7 +428,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `texture` : The unique string-based key of the texture to use for displacement, which must exist in the Texture Manager. Default value is `'__WHITE'`.
         - You can only use a whole texture, not a frame from a texture atlas or sprite sheet.
     - `x`, `y` : The amount of horizontal/vertical displacement to apply. Default value is `0.005`.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addDisplacement(texture, x, y);
+    ```
     ```javascript
     var effect = camera.postFX.addDisplacement(texture, x, y);
     ```
@@ -446,7 +472,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
         - `true` : Only the glow is drawn
         - `false` : Draw glow and texture. Default behavior.
     - `quality` : Only available for PostFX. Sets the quality of this Glow effect. Default is 0.1. Cannot be changed post-creation.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addGlow(color, outerStrength, innerStrength, knockout, quality, distance);
+    ```
     ```javascript
     var effect = camera.postFX.addGlow(color, outerStrength, innerStrength, knockout, quality, distance);
     ```
@@ -484,7 +513,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `size` : How many 'chunks' the gradient is divided in to, as spread over the entire height of the texture.
         - `0` : Smooth gradient. Default behavior.
         - Others : Retro chunky effect.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addGradient(color1, color2, alpha, fromX, fromY, toX, toY, size);
+    ```
     ```javascript
     var effect = camera.postFX.addGradient(color1, color2, alpha, fromX, fromY, toX, toY, size);
     ```    
@@ -518,7 +550,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     var effect = gameObject.preFX.addPixelate(amount);
     ```   
     - `amount` : The amount of pixelation to apply, in pixels.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addPixelate(amount);
+    ```
     ```javascript
     var effect = camera.postFX.addPixelate(amount);
     ```    
@@ -553,7 +588,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `color` : The color of the shadow. Default value is `0x000000`.
     - `samples` : The number of samples that the shadow effect will run for. An integer between `1` and `12`.
     - `intensity` : The intensity of the shadow effect. Default value is `1`.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addShadow(x, y, decay, power, color, samples, intensity);
+    ```
     ```javascript
     var effect = camera.postFX.addShadow(x, y, decay, power, color, samples, intensity);
     ```    
@@ -589,7 +627,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `lineWidth` : The line width of the Shine effect. Default value is `0.5`.
     - `gradient` : The gradient of the Shine effect. Default value is `3`.
     - `reveal` : Does this Shine effect reveal or get added to its target?
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addShine(speed, lineWidth, gradient, reveal);
+    ```
     ```javascript
     var effect = camera.postFX.addShine(speed, lineWidth, gradient, reveal);
     ```
@@ -621,7 +662,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `x`, `y` : The horizontal/vertical offset of the vignette effect. Value is between `0` and `1`. Default value is `0.5`.
     - `radius` : The radius of the vignette effect. Value is between `0` and `1`. Default value is `0.5`.
     - `strength` : The strength of the vignette effect. Default value is `0.5`.
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addVignette(x, y, radius, strength);
+    ```
     ```javascript
     var effect = camera.postFX.addVignette(x, y, radius, strength);
     ```
@@ -657,7 +701,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `axis` : The axis of the wipe effect.
         - `0` : Left to right, or right to left
         - `1` : Bottom to top, or top to bottom
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addWipe(wipeWidth, direction, axis);
+    ```
     ```javascript
     var effect = camera.postFX.addWipe(wipeWidth, direction, axis);
     ```
@@ -692,7 +739,10 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     - `axis` : The axis of the wipe effect.
         - `0` : Left to right, or right to left
         - `1` : Bottom to top, or top to bottom
-- Add post-fx to camera
+- Add post-fx to game object, or camera
+    ```javascript
+    var effect = gameObject.postFX.addReveal(wipeWidth, direction, axis);
+    ```
     ```javascript
     var effect = camera.postFX.addReveal(wipeWidth, direction, axis);
     ```
@@ -713,3 +763,30 @@ Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSp
     effect.direction = direction;  // 0, 1
     effect.axis = axis;  // 0, 1
     ```
+
+### Remove all effects
+
+```javascript
+gameObject.preFX.clear();
+```
+```javascript
+gameObject.postFX.clear();
+```
+```javascript
+camera.postFX.clear();
+```
+
+### Disable all effects
+
+```javascript
+gameObject.preFX.disable();
+// gameObject.preFX.disable(true);  // Also remove all effects
+```
+```javascript
+gameObject.postFX.disable();
+// gameObject.postFX.disable(true);  // Also remove all effects
+```
+```javascript
+camera.postFX.disable();
+// camera.postFX.disable(true);  // Also remove all effects
+```

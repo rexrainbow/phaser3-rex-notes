@@ -4677,7 +4677,14 @@
     Live demos
   </a>
   
-    <nav class="md-nav" aria-label="Live demos">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4788,6 +4795,20 @@
           <li class="md-nav__item">
   <a href="#reveal" class="md-nav__link">
     Reveal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-all-effects" class="md-nav__link">
+    Remove all effects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-all-effects" class="md-nav__link">
+    Disable all effects
   </a>
   
 </li>
@@ -9118,7 +9139,14 @@
     Live demos
   </a>
   
-    <nav class="md-nav" aria-label="Live demos">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -9233,6 +9261,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#remove-all-effects" class="md-nav__link">
+    Remove all effects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-all-effects" class="md-nav__link">
+    Disable all effects
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9289,6 +9331,7 @@
 <ul>
 <li><a href="https://labs.phaser.io/index.html?dir=3.60/fx/&amp;q=">Official demos</a></li>
 </ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="barrel">Barrel<a class="headerlink" href="#barrel" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add pre-fx to game object
@@ -9305,7 +9348,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBarrel</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBarrel</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9334,7 +9379,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBloom</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">,</span> <span class="nx">blurStrength</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBloom</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">,</span> <span class="nx">blurStrength</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9374,7 +9421,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBlur</span><span class="p">(</span><span class="nx">quality</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBlur</span><span class="p">(</span><span class="nx">quality</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9404,7 +9453,9 @@
 <li><code>contrast</code> : The color contrast of the bokeh effect. Default value is <code>0.2</code>.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBlur</span><span class="p">(</span><span class="nx">quality</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addBokeh</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">contrast</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9433,7 +9484,9 @@
 <li><code>strength</code> : The strength of the blur.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addTiltShift</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">contrast</span><span class="p">,</span> <span class="nx">blurX</span><span class="p">,</span> <span class="nx">blurY</span><span class="p">,</span> <span class="nx">strength</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addTiltShift</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">contrast</span><span class="p">,</span> <span class="nx">blurX</span><span class="p">,</span> <span class="nx">blurY</span><span class="p">,</span> <span class="nx">strength</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9468,7 +9521,9 @@
 <li><code>feather</code> : The amount of feathering to apply to the circle from the ring. Default value is <code>0.005</code>.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addCircle</span><span class="p">(</span><span class="nx">thickness</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="p">,</span> <span class="nx">scale</span><span class="p">,</span> <span class="nx">feather</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addCircle</span><span class="p">(</span><span class="nx">thickness</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="p">,</span> <span class="nx">scale</span><span class="p">,</span> <span class="nx">feather</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9492,8 +9547,10 @@
 <li>Add pre-fx to game object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">preFX</span><span class="p">.</span><span class="nx">addColorMatrix</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Add post-fx to camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addColorMatrix</span><span class="p">(</span><span class="nx">quality</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">strength</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">steps</span><span class="p">);</span>
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addColorMatrix</span><span class="p">();</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addColorMatrix</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Disable effect
     <div class="highlight"><pre><span></span><code><span class="nx">effect</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
@@ -9705,7 +9762,9 @@
 <li><code>x</code>, <code>y</code> : The amount of horizontal/vertical displacement to apply. Default value is <code>0.005</code>.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addDisplacement</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addDisplacement</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9747,7 +9806,9 @@
 <li><code>quality</code> : Only available for PostFX. Sets the quality of this Glow effect. Default is 0.1. Cannot be changed post-creation.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addGlow</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">outerStrength</span><span class="p">,</span> <span class="nx">innerStrength</span><span class="p">,</span> <span class="nx">knockout</span><span class="p">,</span> <span class="nx">quality</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addGlow</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">outerStrength</span><span class="p">,</span> <span class="nx">innerStrength</span><span class="p">,</span> <span class="nx">knockout</span><span class="p">,</span> <span class="nx">quality</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>quality</code> : Sets the quality of this Glow effect. Default is <code>0.1</code>. Cannot be changed post-creation.</li>
@@ -9785,7 +9846,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addGradient</span><span class="p">(</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">fromX</span><span class="p">,</span> <span class="nx">fromY</span><span class="p">,</span> <span class="nx">toX</span><span class="p">,</span> <span class="nx">toY</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addGradient</span><span class="p">(</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">fromX</span><span class="p">,</span> <span class="nx">fromY</span><span class="p">,</span> <span class="nx">toX</span><span class="p">,</span> <span class="nx">toY</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9815,7 +9878,9 @@
 <li><code>amount</code> : The amount of pixelation to apply, in pixels.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addPixelate</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addPixelate</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9848,7 +9913,9 @@
 <li><code>intensity</code> : The intensity of the shadow effect. Default value is <code>1</code>.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">decay</span><span class="p">,</span> <span class="nx">power</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">samples</span><span class="p">,</span> <span class="nx">intensity</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">decay</span><span class="p">,</span> <span class="nx">power</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">samples</span><span class="p">,</span> <span class="nx">intensity</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9880,7 +9947,9 @@
 <li><code>reveal</code> : Does this Shine effect reveal or get added to its target?</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addShine</span><span class="p">(</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">gradient</span><span class="p">,</span> <span class="nx">reveal</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addShine</span><span class="p">(</span><span class="nx">speed</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">gradient</span><span class="p">,</span> <span class="nx">reveal</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9908,7 +9977,9 @@
 <li><code>strength</code> : The strength of the vignette effect. Default value is <code>0.5</code>.</li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addVignette</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">strength</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addVignette</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">strength</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9944,7 +10015,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addWipe</span><span class="p">(</span><span class="nx">wipeWidth</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">axis</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addWipe</span><span class="p">(</span><span class="nx">wipeWidth</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">axis</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9979,7 +10052,9 @@
 </li>
 </ul>
 </li>
-<li>Add post-fx to camera
+<li>Add post-fx to game object, or camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addReveal</span><span class="p">(</span><span class="nx">wipeWidth</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">axis</span><span class="p">);</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">effect</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">addReveal</span><span class="p">(</span><span class="nx">wipeWidth</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">axis</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Disable effect
@@ -9996,6 +10071,23 @@
 <span class="nx">effect</span><span class="p">.</span><span class="nx">axis</span> <span class="o">=</span> <span class="nx">axis</span><span class="p">;</span>  <span class="c1">// 0, 1</span>
 </code></pre></div></li>
 </ul>
+<h3 id="remove-all-effects">Remove all effects<a class="headerlink" href="#remove-all-effects" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">preFX</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div></p>
+<h3 id="disable-all-effects">Disable all effects<a class="headerlink" href="#disable-all-effects" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">preFX</span><span class="p">.</span><span class="nx">disable</span><span class="p">();</span>
+<span class="c1">// gameObject.preFX.disable(true);  // Also remove all effects</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">disable</span><span class="p">();</span>
+<span class="c1">// gameObject.postFX.disable(true);  // Also remove all effects</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">disable</span><span class="p">();</span>
+<span class="c1">// camera.postFX.disable(true);  // Also remove all effects</span>
+</code></pre></div></p>
 
               
             </article>
