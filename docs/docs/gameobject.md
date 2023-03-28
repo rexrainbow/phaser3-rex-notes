@@ -253,6 +253,10 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 
 See [Mask](mask.md).
 
+### Built-in shader effects
+
+See [built-in shader effects](shader-builtin.md)
+
 ### Post-fx pipeline
 
 #### Register post-fx pipeline
