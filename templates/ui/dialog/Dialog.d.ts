@@ -103,6 +103,10 @@ declare namespace Dialog {
         click?: IConfigClick
     }
 
+    interface IModalConfig extends ModalBehavoir.IConfig {
+        defaultBehavior?: boolean,
+    }
+
     type CloseEventDataType = {
         index: number,
         text: string,
@@ -290,7 +294,7 @@ declare class Dialog extends Sizer {
     getChoicesSelectButtonName(): string;
 
     modal(
-        config?: ModalBehavoir.IConfig,
+        config?: Dialog.IModalConfig,
         onClose?: Dialog.OnModalCloseCallbackType
     ): this;
 
@@ -299,7 +303,7 @@ declare class Dialog extends Sizer {
     ): this;
 
     modalPromise(
-        config?: ModalBehavoir.IConfig
+        config?: Dialog.IModalConfig,
     ): Promise<Dialog.CloseEventDataType | Dialog>;
 
     modalClose(closeEventData?: Dialog.CloseEventDataType): this;
