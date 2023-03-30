@@ -1,3 +1,5 @@
+import ModalMethods from '../../basesizer/ModalMethods.js';
+
 export default {
     onCreateModalBehavior(self) {
         self.on('button.click', function (button, groupName, index, pointer, event) {
@@ -27,4 +29,15 @@ export default {
             self.modalClose(closeEventData);
         });
     },
+
+    modal(config, onClose) {
+        if (config && (config.defaultBehavior === false)) {
+            this.onCreateModalBehavior = false;
+        } else {
+            delete this.onCreateModalBehavior;
+        }
+
+        ModalMethods.modal.call(this, config, onClose);
+        return this;
+    }
 }

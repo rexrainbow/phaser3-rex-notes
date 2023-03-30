@@ -362,7 +362,9 @@ dialog.modal({
     // transitIn: 0,
     // transitOut: 0,
 
-    // destroy: true
+    // destroy: true,
+
+    // defaultBehavior: true,
 });
 // dialog.modal(config, onClose);
 ```
@@ -378,6 +380,9 @@ dialog
 ```
 
 - `config` : See [Modal behavior](modal.md#create-instance)
+    - `config.defaultBehavior` :
+        - `undefined`, or `true` : Will close modal dialog when clicking any action button.
+        - `false` : Disable default behavior.
 - `onClose` : Callback when closing modal dialog
     ```javascript
     function(data) {

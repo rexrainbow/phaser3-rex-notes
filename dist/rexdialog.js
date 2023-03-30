@@ -13453,6 +13453,15 @@
         }
         self.modalClose(closeEventData);
       });
+    },
+    modal: function modal(config, onClose) {
+      if (config && config.defaultBehavior === false) {
+        this.onCreateModalBehavior = false;
+      } else {
+        delete this.onCreateModalBehavior;
+      }
+      ModalMethods$1.modal.call(this, config, onClose);
+      return this;
     }
   };
 
