@@ -55,7 +55,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -89,7 +90,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -132,7 +134,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -169,7 +172,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -205,7 +209,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -245,7 +250,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -278,7 +284,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -439,7 +446,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -485,7 +493,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     - `distance` : Sets the distance of this Glow effect. Default is `10`. Cannot be changed post-creation.
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -524,7 +533,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```    
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -561,7 +571,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```    
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -599,7 +610,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```    
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -638,7 +650,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -673,7 +686,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -712,7 +726,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
@@ -750,7 +765,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Disable effect
     ```javascript
-    effect.active = false;
+    effect.setActive(false);
+    // effect.active = false;
     ```
 - Remove effect
     ```javascript
