@@ -9808,7 +9808,14 @@
     <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a></li>
+<li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a><ul>
+<li><code>config.defaultBehavior</code> :<ul>
+<li><code>undefined</code>, or <code>true</code> : Will close modal dialog when clicking any action button.</li>
+<li><code>false</code> : Disable default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>onClose</code> : Callback when closing modal dialog
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var index = data.index;</span>

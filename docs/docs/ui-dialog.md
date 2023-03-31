@@ -382,7 +382,7 @@ dialog
 - `config` : See [Modal behavior](modal.md#create-instance)
     - `config.defaultBehavior` :
         - `undefined`, or `true` : Will close modal dialog when clicking any action button.
-        - `false` : Disable default behavior.
+        - `false` : Disable default behavior. User has to invoke `dialog.modalClose(data)` manually.
 - `onClose` : Callback when closing modal dialog
     ```javascript
     function(data) {
