@@ -41,6 +41,7 @@ nav:
                 - Particles: particles.md
                 - Bitmap zone: bitmapzone.md
             - Tile sprite: tilesprite.md
+            - Nine slice : nineslice.md
             - Nine patch: ninepatch.md
             - Nine patch2: ninepatch2.md
             - Line: line.md

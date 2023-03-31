@@ -969,6 +969,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../nineslice/" class="md-nav__link">
+        Nine slice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -1108,6 +1122,13 @@
           <li class="md-nav__item">
   <a href="#update-texture" class="md-nav__link">
     Update texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare-with-nine-slice" class="md-nav__link">
+    Compare with nine-slice
   </a>
   
 </li>
@@ -9207,6 +9228,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#compare-with-nine-slice" class="md-nav__link">
+    Compare with nine-slice
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9536,6 +9564,15 @@
 <h3 id="update-texture">Update texture<a class="headerlink" href="#update-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="compare-with-nine-slice">Compare with <a href="../nineslice/">nine-slice</a><a class="headerlink" href="#compare-with-nine-slice" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Nine-slice has better render performance.<ul>
+<li>Nine-patch extends from <a href="../rendertexture/">render-texture</a>, which will create a new texture, then draw frames on it.</li>
+</ul>
+</li>
+<li>Nine-slice is webgl mode only.</li>
+<li>Nine-slice does not have <code>flip</code>, <code>crop</code> methods.</li>
+</ul>
 
               
             </article>
@@ -9549,7 +9586,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../tilesprite/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Tile sprite" rel="prev">
+        <a href="../nineslice/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Nine slice" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -9558,7 +9595,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Tile sprite
+              Nine slice
             </div>
           </div>
         </a>
