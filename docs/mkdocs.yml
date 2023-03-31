@@ -48,6 +48,7 @@ nav:
         - Shader: shader.md        
     - Mesh:
         - Mesh: mesh.md
+        - Plane: plane.md
         - Perspective:
             - Image: perspective-image.md
             - Render texture: perspective-rendertexture.md

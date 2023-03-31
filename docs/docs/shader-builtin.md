@@ -2,24 +2,26 @@
 
 Built-in pre-fx, and post-fx shader effects.
 
-- [Barrel Distortion](shader-builtin.md#barrel)
-- [Bloom](shader-builtin.md#bloom)
-- [Blur](shader-builtin.md#blur)
-- [Bokeh](shader-builtin.md#bokeh) / [Tilt Shift](shader-builtin.md#tilt-shift)
-- [Circle Outline](shader-builtin.md#circle-outline)
-- [Color Matrix](shader-builtin.md#colormatrix)
-- [Glow](shader-builtin.md#glow)
-- [Displacement](shader-builtin.md#displacement)
-- [Gradient](shader-builtin.md#gradient)
-- [Pixelate](shader-builtin.md#pixelate)
-- [Shine](shader-builtin.md#shine)
-- [Shadow](shader-builtin.md#shadow)
-- [Vignette](shader-builtin.md#vignette)
-- [Wipe](shader-builtin.md#wipe) / [Reveal](shader-builtin.md#reveal)
+- [Barrel Distortion](shader-builtin.md#barrel) : A nice pinch / bulge distortion effect.
+- [Bloom](shader-builtin.md#bloom) : Add bloom to any Game Object, with custom offset, blur strength, steps and color.
+- [Blur](shader-builtin.md#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
+- [Bokeh](shader-builtin.md#bokeh) / [Tilt Shift](shader-builtin.md#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
+- [Circle Outline](shader-builtin.md#circle-outline) : Add a circular ring around any Game Object, useful for masking / avatar frames, with custom color, width and background color.
+- [Color Matrix](shader-builtin.md#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
+- [Glow](shader-builtin.md#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
+- [Displacement](shader-builtin.md#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
+- [Gradient](shader-builtin.md#gradient) : Draw a gradient between two colors across any Game Object, with optional 'chunky' mode for classic retro style games.
+- [Pixelate](shader-builtin.md#pixelate) : Make any Game Object appear pixelated, to a varying degree.
+- [Shine](shader-builtin.md#shine) : Run a 'shine' effect across a Game Object, either additively or as part of a reveal.
+- [Shadow](shader-builtin.md#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
+- [Vignette](shader-builtin.md#vignette) : Apply a vignette around a Game Object, with custom offset position, radius and color.
+- [Wipe](shader-builtin.md#wipe) / [Reveal](shader-builtin.md#reveal) : Set a Game Object to 'wipe' or 'reveal' with custom line width, direction and axis of the effect.
 
-All Game Objects support Post FX. These are effects applied after the Game Object has been rendered.
 
 Texture-based Game Objects also support Pre FX, including: Image, Sprite, TileSprite, Text, RenderTexture, Video.
+
+All Game Objects and camera support Post FX. These are effects applied after the Game Object has been rendered.
+
 
 - Author: Richard Davey
 - Pre-fx, and Post-fx shader effects
