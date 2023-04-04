@@ -1,4 +1,4 @@
-import Board from '../board/board.js';
+import Board from '../board/Board.js';
 
 var CreateBoard = function (tilemap) {
     var board = new Board(tilemap.scene, {
