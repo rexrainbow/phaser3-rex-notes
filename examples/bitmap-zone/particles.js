@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BitmapZonePlugin from '../../plugins/bitmapzone-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -13,18 +13,19 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var textObject = this.add.text(400, 300, 'Phaser3', {
+        var textObject = this.add.text(0, 0, 'Phaser3', {
             fontSize: '160px'
         })
             .setOrigin(0.5)
             .setVisible(false);
 
         var textZone = this.plugins.get('rexBitmapZone').add(textObject);
-        var particles = this.add.particles('flares').setPosition(textObject.x, textObject.y);
-        var emitter = particles.createEmitter({
+
+        var emitter = this.add.particles(400, 300, 'flares', {
             blendMode: 'ADD',
             scale: { start: 0.1, end: 0.2 },
             quantity: 10,
+            advance: 1000,
             speed: 8,
             gravityY: -20,
             emitZone: {

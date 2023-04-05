@@ -147,6 +147,7 @@ var particles = scene.add.particles(x, y, texture, {
         }
         ```
 - `active` : Whether this emitter updates itself and its particles.
+    - `false` : Equal to pause.
 - `advance` : If you wish to *fast forward* the emitter in time, set this value to a number representing the amount of ms the emitter should advance.
 - `blendMode` : See [blend mode](blendmode.md)
 - `colorEase` : The string-based name of the Easing function to use if you have enabled Particle color interpolation via the `color` property, otherwise has no effect.
@@ -185,6 +186,7 @@ var particles = scene.add.particles(x, y, texture, {
 - `radial` : A radial emitter will emit particles in all directions between angle min and max,
 - `emitting` : Controls if the emitter is currently emitting a particle flow (when frequency >= 0). 
   Already alive particles will continue to update until they expire.
+    - `false` : Equal to stop
 - `tintFill` : 
 - `timeScale` : The time rate applied to active particles, affecting lifespan, movement, and tweens. Values larger than 1 are faster than normal.
 - `trackVisible` : Whether the emitter's `visible` state will track the follow target's visibility state.
