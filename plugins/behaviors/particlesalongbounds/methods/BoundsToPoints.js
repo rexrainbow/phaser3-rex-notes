@@ -1,4 +1,4 @@
-import GetBoundsConfig from '../../utils/bounds/GetBoundsConfig.js';
+import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
 const Rectangle = Phaser.Geom.Rectangle;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,5 +1,5 @@
 import CreateEmitterConfig from './CreateEmitterConfig.js';
-import BuildRepeatEdgeEmitter from '../../utils/particles/BuildRepeatEdgeEmitter.js';
+import BuildRepeatEdgeEmitter from '../../../utils/particles/BuildRepeatEdgeEmitter.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Vector2 = Phaser.Math.Vector2;
