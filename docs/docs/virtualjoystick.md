@@ -180,9 +180,9 @@ Position of base game object.
     ```
 - Set
     ```javascript
-    joystick.x = x;
-    joystick.y = y;
     joystick.setPosition(x ,y);
+    // joystick.x = x;
+    // joystick.y = y;
     ```
 
 ### Scroll factor

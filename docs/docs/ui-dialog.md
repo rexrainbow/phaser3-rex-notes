@@ -362,7 +362,9 @@ dialog.modal({
     // transitIn: 0,
     // transitOut: 0,
 
-    // destroy: true
+    // destroy: true,
+
+    // defaultBehavior: true,
 });
 // dialog.modal(config, onClose);
 ```
@@ -378,6 +380,9 @@ dialog
 ```
 
 - `config` : See [Modal behavior](modal.md#create-instance)
+    - `config.defaultBehavior` :
+        - `undefined`, or `true` : Will close modal dialog when clicking any action button.
+        - `false` : Disable default behavior. User has to invoke `dialog.modalClose(data)` manually.
 - `onClose` : Callback when closing modal dialog
     ```javascript
     function(data) {
@@ -767,7 +772,7 @@ dialog.forEachLeftToolbar(callback, scope);
 
 - Read state
     ```javascript
-    var value = dialog.getSelectedButtonName();
+    var value = dialog.getChoicesSelectedButtonName();
     ```
 - Set state
     ```javascript
@@ -795,12 +800,6 @@ dialog.forEachLeftToolbar(callback, scope);
 #### Events
 
 - On button state changed. For Checkboxes/radio
-    ```javascript
-    dialog.on('button.statechange', function(button, index, value, previousValue) {
-        // ...
-    }, scope);
-    ```
-    or
     ```javascript
     dialog.on('button.statechange', function(button, groupName, index, value, previousValue) {
         // ...

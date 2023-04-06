@@ -2817,11 +2817,16 @@
   };
 
   var GetParent = function GetParent(gameObject, name) {
-    var parent;
+    var parent = null;
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
-        if (parent && !parent.isRexSizer) {
+        if (parent) {
+          if (!parent.isRexSizer) {
+            // Try to get sizer parent
+            parent = GetParent(parent);
+          }
+        } else {
           parent = null;
         }
       }
@@ -6808,7 +6813,11 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.requestOpen();
+      if (GetValue$E(config, 'openOnStart', true)) {
+        // Run this.requestOpen() next tick
+        // User can register events before this.requestOpen()
+        _this.delayCall(0, _this.requestOpen, _assertThisInitialized(_this));
+      }
       return _this;
     }
     _createClass(Modal, [{
@@ -11088,6 +11097,67 @@
       return _this;
     }
     _createClass(RoundRectangle, [{
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this._fillColor = value;
+        this.isFilled = value != null && this._fillAlpha > 0;
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this._fillAlpha = value;
+        this.isFilled = value > 0 && this._fillColor != null;
+      }
+
+      // Fully override setFillStyle method
+    }, {
+      key: "setFillStyle",
+      value: function setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+        return this;
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this._strokeColor = value;
+        this.isStroked = value != null && this._lineWidth > 0;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this._lineWidth = value;
+        this.isStroked = value > 0 && this._strokeColor != null;
+      }
+
+      // Fully override setStrokeStyle method
+    }, {
+      key: "setStrokeStyle",
+      value: function setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+        return this;
+      }
+    }, {
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;
@@ -11367,8 +11437,179 @@
   };
   Object.assign(RoundRectangle.prototype, Render);
 
-  var CreateRoundRectangle = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle(scene, config);
+  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+    if (out === undefined) {
+      out = {};
+    }
+    if (!obj) {
+      return out;
+    }
+    if (prefix in obj) {
+      return Object.assign(out, obj[prefix]);
+    }
+    prefix += delimiter;
+    for (var key in obj) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+      out[key.replace(prefix, '')] = obj[key];
+    }
+    return out;
+  };
+
+  var ExtractStyle = function ExtractStyle(config, prefix, propertiesMap) {
+    var result = ExtractByPrefix(config, prefix);
+    if (propertiesMap) {
+      for (var name in result) {
+        if (propertiesMap.hasOwnProperty(name)) {
+          result[propertiesMap[name]] = result[name];
+          delete result[name];
+        }
+      }
+    }
+    return result;
+  };
+
+  var GetPartialData = function GetPartialData(obj, keys, out) {
+    if (out === undefined) {
+      out = {};
+    }
+    if (Array.isArray(keys)) {
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        out[key] = obj[key];
+      }
+    } else {
+      for (var key in keys) {
+        out[key] = obj[key];
+      }
+    }
+    return out;
+  };
+
+  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
+    for (var key in objA) {
+      if (!(key in objB)) {
+        return false;
+      }
+      if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+    for (var key in objB) {
+      if (!(key in objA)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  var ApplyStyle = function ApplyStyle(gameObject, newStyle) {
+    if (!newStyle) {
+      return undefined;
+    }
+    var currentStyle = GetPartialData(gameObject, newStyle);
+    if (!IsKeyValueEqual(currentStyle, newStyle)) {
+      gameObject.modifyStyle(newStyle);
+      return currentStyle;
+    } else {
+      return undefined;
+    }
+  };
+  var SetStateMethods = {
+    setActiveState: function setActiveState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.activeState === enable) {
+        return this;
+      }
+      this.activeState = enable;
+      if (enable) {
+        this.activeStyleSave = ApplyStyle(this, this.activeStyle);
+      } else {
+        ApplyStyle(this, this.activeStyleSave);
+        this.activeStyleSave = undefined;
+      }
+      return this;
+    },
+    setHoverState: function setHoverState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.hoverState === enable) {
+        return this;
+      }
+      this.hoverState = enable;
+      if (enable) {
+        this.hoverStyleSave = ApplyStyle(this, this.hoverStyle);
+      } else {
+        ApplyStyle(this, this.hoverStyleSave);
+        this.hoverStyleSave = undefined;
+      }
+      return this;
+    },
+    setDisableState: function setDisableState(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+      if (this.disableState === enable) {
+        return this;
+      }
+      this.disableState = enable;
+      if (enable) {
+        this.disableStyleSave = ApplyStyle(this, this.disableStyle);
+      } else {
+        ApplyStyle(this, this.disableStyleSave);
+        this.disableStyleSave = undefined;
+      }
+      return this;
+    }
+  };
+
+  var StatesRoundRectangle = /*#__PURE__*/function (_RoundRectangle) {
+    _inherits(StatesRoundRectangle, _RoundRectangle);
+    var _super = _createSuper(StatesRoundRectangle);
+    function StatesRoundRectangle(scene, config) {
+      var _this;
+      _classCallCheck(this, StatesRoundRectangle);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene, config);
+      _this.activeStyle = ExtractStyle(config, 'active', PropertiesMap);
+      _this.hoverStyle = ExtractStyle(config, 'hover', PropertiesMap);
+      _this.disableStyle = ExtractStyle(config, 'disable', PropertiesMap);
+      return _this;
+    }
+    _createClass(StatesRoundRectangle, [{
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        for (var key in style) {
+          this[key] = style[key];
+        }
+        return this;
+      }
+    }]);
+    return StatesRoundRectangle;
+  }(RoundRectangle);
+  var PropertiesMap = {
+    color: 'fillColor',
+    alpha: 'fillAlpha',
+    // strokeColor: 'strokeColor',
+    // strokeAlpha: 'strokeAlpha',
+    strokeWidth: 'lineWidth'
+  };
+  Object.assign(StatesRoundRectangle.prototype, SetStateMethods);
+
+  var CreateBackground = function CreateBackground(scene, config) {
+    var gameObject = new StatesRoundRectangle(scene, config);
+    // TODO: Create nine-slice background game object
+
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -11749,13 +11990,13 @@
       var thumb = GetValue$f(config, 'thumb', undefined);
       if (background) {
         if (IsPlainObject(background)) {
-          background = CreateRoundRectangle(scene, background);
+          background = CreateBackground(scene, background);
         }
         _this.addBackground(background);
       }
       if (track) {
         if (IsPlainObject(track)) {
-          track = CreateRoundRectangle(scene, track);
+          track = CreateBackground(scene, track);
         }
         _this.add(track, {
           proportion: 1,
@@ -11766,14 +12007,14 @@
       }
       if (indicator) {
         if (IsPlainObject(indicator)) {
-          indicator = CreateRoundRectangle(scene, indicator);
+          indicator = CreateBackground(scene, indicator);
         }
         _this.pin(indicator); // Put into container but not layout it
       }
 
       if (thumb) {
         if (IsPlainObject(thumb)) {
-          thumb = CreateRoundRectangle(scene, thumb);
+          thumb = CreateBackground(scene, thumb);
         }
         _this.pin(thumb); // Put into container but not layout it
       }
@@ -14103,14 +14344,39 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil) {
+      value: function heightToRowIndex(height, roundMode) {
+        if (roundMode === undefined) {
+          roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 : plus one if rowIdx is an integer, else floor
+        */
+
+        if (height === 0) {
+          return 0;
+        }
+
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
-          if (isCeil) {
-            rowIdx = Math.ceil(rowIdx);
-          } else {
-            rowIdx = Math.floor(rowIdx);
+          switch (roundMode) {
+            case 0:
+              rowIdx = Math.floor(rowIdx);
+              break;
+            case 1:
+              rowIdx = Math.ceil(rowIdx);
+              break;
+            default:
+              // 2
+              if (Number.isInteger(rowIdx)) {
+                rowIdx += 1;
+              } else {
+                rowIdx = Math.floor(rowIdx);
+              }
+              break;
           }
           return rowIdx;
         }
@@ -14128,9 +14394,12 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
+            if (roundMode === 2) {
+              rowIdx += 1;
+            }
             return rowIdx;
           } else {
-            if (isCeil) {
+            if (roundMode === 1) {
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
@@ -14145,6 +14414,9 @@
     }, {
       key: "widthToColIndex",
       value: function widthToColIndex(width, isCeil) {
+        if (width === 0) {
+          return 0;
+        }
         var colIdx = width / this.defaultCellWidth;
         if (isCeil) {
           colIdx = Math.ceil(colIdx);
@@ -14319,9 +14591,9 @@
     var tableOYExeceedBottom = oy < this.bottomTableOY;
     if (this.clampTableOXY) {
       var rowCount = table.rowCount;
-      var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
+      var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);
 
-      // less then 1 page            
+      // less then 1 page
       if (rowCount < visibleRowCount) {
         oy = 0;
       } else if (tableOYExceedTop) {
@@ -14722,26 +14994,18 @@
       return;
     }
     var table = this.table;
-    var startRowIdx = table.heightToRowIndex(-this.tableOY);
-    if (startRowIdx <= 0) {
-      startRowIdx = 0; //Turn -0 to 0
-    }
-
-    var rowIdx = startRowIdx;
-    var startColIdx = table.widthToColIndex(-this.tableOX);
-    if (startColIdx <= 0) {
-      startColIdx = 0; //Turn -0 to 0
-    }
-
-    var colIdx = startColIdx;
-    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
+    var startColumnIndex = table.widthToColIndex(-this.tableOX);
+    var columnIndex = startColumnIndex;
+    var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     var bottomBound = this.bottomBound;
     var rightBound = this.rightBound;
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
-    var startCellTLX = this.getCellTLX(colIdx),
+    var startCellTLX = this.getCellTLX(columnIndex),
       cellTLX = startCellTLX;
-    var cellTLY = this.getCellTLY(rowIdx);
+    var cellTLY = this.getCellTLY(rowIndex);
     while (cellTLY < bottomBound && cellIdx <= lastIdx) {
       if (this.table.isValidCellIdx(cellIdx)) {
         var cell = table.getCell(cellIdx, true);
@@ -14765,16 +15029,16 @@
           cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
-      if (cellTLX < rightBound && colIdx < lastColIdx) {
-        cellTLX += table.getColWidth(colIdx);
-        colIdx += 1;
+      if (cellTLX < rightBound && columnIndex < lastColIdx) {
+        cellTLX += table.getColWidth(columnIndex);
+        columnIndex += 1;
       } else {
         cellTLX = startCellTLX;
-        cellTLY += table.getRowHeight(rowIdx);
-        colIdx = startColIdx;
-        rowIdx += 1;
+        cellTLY += table.getRowHeight(rowIndex);
+        columnIndex = startColumnIndex;
+        rowIndex += 1;
       }
-      cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+      cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     }
   };
 
@@ -14878,7 +15142,7 @@
     var offsetTableOY = this.tableOY - (this.scrollMode === 0 ? y : x);
     var offsetTableOX = this.tableOX - (this.scrollMode === 0 ? x : y);
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-offsetTableOY);
+    var rowIdx = table.heightToRowIndex(-offsetTableOY, 0);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     if (cellIdx === null) {
@@ -15214,6 +15478,24 @@
         do {
           this.t = 1;
         } while (this.t !== 1);
+        return this;
+      }
+    }, {
+      key: "scrollToRow",
+      value: function scrollToRow(rowIndex) {
+        // To get all height of cells
+        this.scrollToBottom();
+        var height = this.table.rowIndexToHeight(0, rowIndex - 1);
+        this.setTableOY(-height).updateTable();
+        return this;
+      }
+    }, {
+      key: "scrollToNextRow",
+      value: function scrollToNextRow(rowCount) {
+        if (rowCount === undefined) {
+          rowCount = 1;
+        }
+        this.scrollToRow(this.startRowIndex + rowCount);
         return this;
       }
     }, {
@@ -15582,6 +15864,19 @@
     return this;
   };
 
+  var ScrollMethods = {
+    scrollToRow: function scrollToRow(rowIndex) {
+      var table = this.childrenMap.child;
+      table.scrollToRow(rowIndex);
+      return this;
+    },
+    scrollToNextRow: function scrollToNextRow(rowCount) {
+      var table = this.childrenMap.child;
+      table.scrollToNextRow(rowCount);
+      return this;
+    }
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var GridTable = /*#__PURE__*/function (_Scrollable) {
     _inherits(GridTable, _Scrollable);
@@ -15699,13 +15994,19 @@
           this.resizeControllerFlag = false;
         }
       }
+    }, {
+      key: "startRowIndex",
+      get: function get() {
+        var table = this.childrenMap.child;
+        return table.startRowIndex;
+      }
     }]);
     return GridTable;
   }(Scrollable);
   var methods = {
     setItems: SetItems
   };
-  Object.assign(GridTable.prototype, methods);
+  Object.assign(GridTable.prototype, ScrollMethods, methods);
 
   return GridTable;
 

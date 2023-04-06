@@ -259,7 +259,9 @@
     if (destCanvas.height !== height) {
       destCanvas.height = height;
     }
-    var destCtx = destCanvas.getContext('2d');
+    var destCtx = destCanvas.getContext('2d', {
+      willReadFrequently: true
+    });
     destCtx.clearRect(0, 0, width, height);
     destCtx.drawImage(srcCanvas, x, y, width, height);
     if (renderer.gl && texture) {
@@ -350,7 +352,9 @@
       width = Math.max(Math.ceil(width * _this.resolution), 1);
       height = Math.max(Math.ceil(height * _this.resolution), 1);
       _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
-      _this.context = _this.canvas.getContext('2d');
+      _this.context = _this.canvas.getContext('2d', {
+        willReadFrequently: true
+      });
       _this.dirty = false;
       _this.setPosition(x, y);
       _this.setOrigin(0.5, 0.5);

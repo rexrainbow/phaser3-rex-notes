@@ -12,6 +12,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Messages
     - [Demo 1](https://codepen.io/rexrainbow/pen/bGgKbmv)
     - [Demo 2](https://codepen.io/rexrainbow/pen/XWqvQMQ)
+    - [Demo 3](https://codepen.io/rexrainbow/pen/OJoBopj)
 - Sizer cell: 
     - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
@@ -529,6 +530,25 @@ See also - [dirty](ui-basesizer.md#dirty)
     table.scrollToBottom();
     ```
     - Equal to `table.t = 1;`
+
+#### Scroll to row
+
+- Scroll to next row
+    ```javascript
+    table.scrollToNextRow();
+    ```
+- Scroll to next n row
+    ```javascript
+    table.scrollToNextRow(n);
+    ```
+- Scroll to row
+    ```javascript
+    table.scrollToRow(rowIndex);
+    ```
+- Get current row index
+    ```javascript
+    var rowIndex = table.startRowIndex;
+    ```
 
 #### Enable/disable scrolling
 

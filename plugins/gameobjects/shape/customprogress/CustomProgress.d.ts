@@ -21,7 +21,7 @@ declare namespace CustomProgress {
         customProgress: CustomProgress
     ) => void;
 
-    interface IConfig extends CustomShapes.IConfig {
+    interface IConfig extends Omit<CustomShapes.IConfig, 'update'> {
         value?: number,
 
         update?: (this: CustomProgress) => void;

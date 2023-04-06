@@ -1,6 +1,6 @@
 import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
 import CreateTitleLabel from './CreateTitleLabel.js';
-import CreateDisplayLabel from '../../utils/build/CreateDisplayLabel.js';
+import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateButtonsSizer from '../gameobjects/utils/CreateButtons.js';
 import InputRow from '../gameobjects/inputrow/InputRow.js';
 
@@ -16,7 +16,7 @@ var CreateButtons = function (scene, config, style) {
     var buttonStyle = GetValue(style, 'button') || {};
     var buttons = [];
     for (var i = 0, cnt = buttonsConfig.length; i < cnt; i++) {
-        var button = CreateDisplayLabel(scene, buttonStyle);
+        var button = CreateLabel(scene, buttonStyle);
         buttons.push(button);
 
         var buttonConfig = buttonsConfig[i];

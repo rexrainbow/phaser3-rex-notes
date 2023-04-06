@@ -6,27 +6,21 @@ var ShowCells = function () {
     }
     var table = this.table;
 
-    var startRowIdx = table.heightToRowIndex(-this.tableOY);
-    if (startRowIdx <= 0) {
-        startRowIdx = 0;  //Turn -0 to 0
-    }
-    var rowIdx = startRowIdx;
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
 
-    var startColIdx = table.widthToColIndex(-this.tableOX);
-    if (startColIdx <= 0) {
-        startColIdx = 0;  //Turn -0 to 0
-    }
-    var colIdx = startColIdx;
+    var startColumnIndex = table.widthToColIndex(-this.tableOX);
+    var columnIndex = startColumnIndex;
 
-    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     var bottomBound = this.bottomBound;
     var rightBound = this.rightBound;
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
 
-    var startCellTLX = this.getCellTLX(colIdx),
+    var startCellTLX = this.getCellTLX(columnIndex),
         cellTLX = startCellTLX;
-    var cellTLY = this.getCellTLY(rowIdx);
+    var cellTLY = this.getCellTLY(rowIndex);
     while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
         if (this.table.isValidCellIdx(cellIdx)) {
             var cell = table.getCell(cellIdx, true);
@@ -52,18 +46,18 @@ var ShowCells = function () {
             }
         }
 
-        if ((cellTLX < rightBound) && (colIdx < lastColIdx)) {
-            cellTLX += table.getColWidth(colIdx);
-            colIdx += 1;
+        if ((cellTLX < rightBound) && (columnIndex < lastColIdx)) {
+            cellTLX += table.getColWidth(columnIndex);
+            columnIndex += 1;
         } else {
             cellTLX = startCellTLX;
-            cellTLY += table.getRowHeight(rowIdx);
+            cellTLY += table.getRowHeight(rowIndex);
 
-            colIdx = startColIdx;
-            rowIdx += 1;
+            columnIndex = startColumnIndex;
+            rowIndex += 1;
         }
 
-        cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+        cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     }
 }
 

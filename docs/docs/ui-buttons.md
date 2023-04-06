@@ -475,20 +475,12 @@ buttons.forEachButtton(callback, scope);
 - Read state
     ```javascript
     var state = buttons.getButtonState(key);
-    ```
-    or
-    ```javascript
-    var state = buttons.getData(key);
-    ```    
+    ```   
     - `key` : `name` property of a button game object. (i.e. `button.name`)
     - `state` : `true`, or `false`
 - Set state
     ```javascript
     buttons.setButtonState(key, state);
-    ```
-    or
-    ```javascript
-    buttons.setData(key, state);
     ```
     - `key` : `name` property of a button game object. (i.e. `button.name`)
     - `state` : `true`, or `false`

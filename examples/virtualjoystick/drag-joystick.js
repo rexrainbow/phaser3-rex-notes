@@ -45,14 +45,13 @@ class Demo extends Phaser.Scene {
     update() {
         var joyStick = this.joyStick;
         if (joyStick.enable && joyStick.force > 100) {
-            let tolerance = 100 / joyStick.force;
+            let pointerX = joyStick.pointer.position.x;
+            let pointerY = joyStick.pointer.position.y;
+            let tolerance = 100 / joyStick.force;       
             joyStick.setPosition(
-                joyStick.pointer.position.x - joyStick.forceX * tolerance,
-                joyStick.pointer.position.y - joyStick.forceY * tolerance
+                pointerX - joyStick.forceX * tolerance,
+                pointerY - joyStick.forceY * tolerance
             )
-
-            joyStick.thumb.x = joyStick.pointer.position.x;
-            joyStick.thumb.y = joyStick.pointer.position.y;
         }
     }
 }

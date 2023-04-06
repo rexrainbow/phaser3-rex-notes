@@ -56,4 +56,8 @@ declare class GridTable extends Scrollable {
 
     getCell(cellIndex: number): GridTableCore.CellData;
     getCellContainer(cellIndex: number): Phaser.GameObjects.GameObject | null;
+    startRowIndex: number;
+
+    scrollToRow(rowIndex: number): this;
+    scrollToNextRow(rowCount?: number): this;
 }

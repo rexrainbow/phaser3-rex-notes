@@ -1,5 +1,5 @@
 import InputRow from '../gameobjects/inputrow/InputRow.js';
-import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
+import CreateBackground from '../../utils/build/CreateBackground.js';
 import CreateTitleLabel from './CreateTitleLabel.js';
 import CreateInputField from './CreateInputField.js';
 
@@ -15,7 +15,7 @@ var CreateInputRow = function (scene, config, style) {
 
     // Background
     var backgroundStyle = GetValue(style, 'background') || {};
-    var background = CreateRoundRectangle(scene, backgroundStyle);
+    var background = CreateBackground(scene, backgroundStyle);
 
     var inputRow = new InputRow(scene, {
         ...config,

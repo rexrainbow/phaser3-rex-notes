@@ -59,7 +59,10 @@ class Demo extends Phaser.Scene {
                 background: {
                     color: COLOR_DARK,
                     strokeColor: COLOR_LIGHT,
-                    radius: 10,
+                    radius: 0,
+
+                    'hover.strokeColor': 0xffffff,
+                    'hover.radius': 15,
                 }
             },
 

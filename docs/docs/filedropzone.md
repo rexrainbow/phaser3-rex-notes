@@ -26,7 +26,15 @@ Create a div element for dropping file(s).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -56,7 +64,15 @@ Create a div element for dropping file(s).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        }, 
         // ...
         plugins: {
             global: [{
@@ -89,7 +105,15 @@ Create a div element for dropping file(s).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -113,7 +137,7 @@ var fileDropZone = scene.add.rexFileDropZone({
     // style: { },
     
     // dropEnable: true,
-    // filters: { filterType: (file) => boolean }
+    // filters: { filterType: (file, files) => boolean }
 });
 // var fileDropZone = scene.add.rexFileDropZone(x, y, width, height, config);
 ```
@@ -125,7 +149,7 @@ var fileDropZone = scene.add.rexFileDropZone({
 - `filters` : Filter methods, optional. For example, image files filter, will fire `'drop.image'` event
     ```javascript
     {
-        image: function(file) { 
+        image: function(file, files) { 
             return file.name.match(/\.(jpg|jpeg|png|gif)$/i)
         }
     }
@@ -254,8 +278,4 @@ fileDropZone.loadFilePromise(file, loaderType, key, cahceType)
 
 ### Interactive with other game objects
 
-1. DOM game object always put above game canvas, i.e. file-drop-zone will render above any other kind of game object.
-1. DOM game object will receive touch event even if it is not the first touched game object.
-1. P3's `'pointerdown'`, `'pointerup'` events will be fired above/under DOM game object.
-1. P3's `'pointermove'` event won't be fired above/under DOM game object which has `'dragenter'`, `'dragover'` events,
-   unless setting DOM game object to be **invisilbe**.
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)

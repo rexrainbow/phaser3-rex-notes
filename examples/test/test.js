@@ -1,31 +1,8 @@
-import phaser from 'phaser/src/phaser.js';
-
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'examples'
-        })
-    }
-
-    preload() {
-    }
-
-    create() {
-    }
-
-    update() { }
-}
-
-var config = {
-    type: Phaser.AUTO,
-    parent: 'phaser-example',
-    width: 800,
-    height: 600,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
-    scene: Demo
-};
-
-var game = new Phaser.Game(config);
+var startT = Date.now();
+var elaspedTime = 0; // Load from localStorage
+setInterval(function(){
+    var curT = Date.now();
+    elaspedTime += curT - startT;
+    startT = curT;
+    console.log(elaspedTime)
+}, 1000)

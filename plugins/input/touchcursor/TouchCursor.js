@@ -140,6 +140,16 @@ class TouchCursor extends VectorToCursorKeys {
         this.emit('pointerup', pointer);
     }
 
+    forceUpdate() {
+        var pointer = this.pointer;
+        if (!pointer || !pointer.isDown) {
+            return this;
+        }
+
+        this.onKeyDown(pointer);
+        return this;
+    }
+
 }
 
 Object.assign(

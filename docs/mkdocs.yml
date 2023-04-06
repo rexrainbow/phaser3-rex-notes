@@ -41,12 +41,14 @@ nav:
                 - Particles: particles.md
                 - Bitmap zone: bitmapzone.md
             - Tile sprite: tilesprite.md
+            - Nine slice : nineslice.md
             - Nine patch: ninepatch.md
             - Nine patch2: ninepatch2.md
             - Line: line.md
         - Shader: shader.md        
     - Mesh:
         - Mesh: mesh.md
+        - Plane: plane.md
         - Perspective:
             - Image: perspective-image.md
             - Render texture: perspective-rendertexture.md
@@ -148,6 +150,7 @@ nav:
             - Move to: moveto.md
             - Ease-move: easemove.md
             - Shake position: shake-position.md
+            - Step: step.md
         - Rotate to: rotateto.md
         - Rotate: rotate.md
         - Flash: flash.md
@@ -242,6 +245,7 @@ nav:
     - Tween task: tween.md
     - Timeline: tween-timeline.md
 - Shader effects:
+    - Built-in shader effects : shader-builtin.md
     - Post fx pipeline: postfx-pipeline.md    
     - Color:
         - Glow: shader-glowfilter.md
@@ -420,7 +424,9 @@ nav:
         - Dialog: ui-dialog.md
         - Confirm dialog: ui-confirmdialog.md
     - Menu: ui-menu.md
-    - Drop down list: ui-dropdownlist.md
+    - Drop down list:
+        - Drop down list: ui-dropdownlist.md
+        - Simple drop down list: ui-simpledropdownlist.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
     - Tabs: ui-tabs.md
@@ -431,6 +437,8 @@ nav:
         - Color picker: ui-colorpicker.md
         - Color components: ui-colorcomponents.md
     - Tweaker: ui-tweaker.md
+    - Background:
+        - State round rectangle: ui-statesroundrectangle.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md

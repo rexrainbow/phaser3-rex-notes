@@ -2817,11 +2817,16 @@
   };
 
   var GetParent = function GetParent(gameObject, name) {
-    var parent;
+    var parent = null;
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
-        if (parent && !parent.isRexSizer) {
+        if (parent) {
+          if (!parent.isRexSizer) {
+            // Try to get sizer parent
+            parent = GetParent(parent);
+          }
+        } else {
           parent = null;
         }
       }
@@ -6808,7 +6813,11 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.requestOpen();
+      if (GetValue$m(config, 'openOnStart', true)) {
+        // Run this.requestOpen() next tick
+        // User can register events before this.requestOpen()
+        _this.delayCall(0, _this.requestOpen, _assertThisInitialized(_this));
+      }
       return _this;
     }
     _createClass(Modal, [{

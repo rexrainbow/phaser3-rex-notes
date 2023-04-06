@@ -1,6 +1,6 @@
 import ColorInputBase from '../colorinputbase/ColorInputBase.js';
 import Methods from './methods/Methods.js';
-import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
+import CreateBackground from '../../utils/build/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -32,7 +32,7 @@ class ColorInput extends ColorInputBase {
             var background = GetValue(colorPickerConfig, 'background');
             if (background) {
                 createBackgroundCallback = function (scene) {
-                    return CreateRoundRectangle(scene, background);
+                    return CreateBackground(scene, background);
                 }
             } else {
                 createBackgroundCallback = GetValue(colorPickerConfig, 'createBackgroundCallback');

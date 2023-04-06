@@ -1,6 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateDropDownList from '../../../utils/build/CreateDropDownList.js';
-import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
+import { GetOptionText } from '../../utils/OptionsMethods.js';
 
 
 class ListInput extends InputFiledBase {
@@ -21,9 +21,8 @@ class ListInput extends InputFiledBase {
 
         this.addChildrenMap('list', list);
 
-        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-            var value = GetOptionValue(list.options, button.text);
-            this.setValue(value);
+        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {           
+            this.setValue(button.value);
         }, this);
 
     }

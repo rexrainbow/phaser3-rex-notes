@@ -249,19 +249,36 @@
       return cache;
     };
 
+    var IsFunction = function IsFunction(obj) {
+      return obj && typeof obj === 'function';
+    };
+
     var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
-      var cache = GetCache(scene, loaderType, cacheType);
-      if (cache.exists(key)) {
-        cache.remove(key);
+      // Remove data from cache
+      if (cacheType === null || cacheType === false) ; else if (IsFunction(cacheType)) {
+        cacheType();
+      } else {
+        var cache = GetCache(scene, loaderType, cacheType);
+        if (cache.exists(key)) {
+          cache.remove(key);
+        }
       }
-      var url = window.URL.createObjectURL(file);
+
+      // Add filecomplete event
       var loader = scene.load;
       if (onComplete) {
         loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
           onComplete(data);
         });
       }
-      loader[loaderType](key, url);
+
+      // Load file from url
+      if (IsFunction(file)) {
+        file();
+      } else {
+        var url = window.URL.createObjectURL(file);
+        loader[loaderType](key, url);
+      }
       loader.start();
     };
 

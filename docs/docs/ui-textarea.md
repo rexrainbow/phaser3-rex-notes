@@ -11,6 +11,7 @@ A container with a text, slider, and scroller.
 - [Bitmap text](https://codepen.io/rexrainbow/pen/YzNRRaz)
 - [Hide unscrollable slider](https://codepen.io/rexrainbow/pen/vYzYBWX)
 - [Append text](https://codepen.io/rexrainbow/pen/rNZaEgO)
+- [Scroll to line](https://codepen.io/rexrainbow/pen/yLxxWaY)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
 
 ## Usage
@@ -341,6 +342,10 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Scroll content
 
+- Scroll down lines
+    ```javascript
+    textArea.scrollLine(lineCount);
+    ```
 - Set
     ```javascript
     textArea.childOY = oy;
@@ -403,6 +408,25 @@ See also - [dirty](ui-basesizer.md#dirty)
     textArea.scrollToBottom();
     ```
     - Equal to `textArea.t = 1;`
+
+#### Scroll to line
+
+- Scroll to next line
+    ```javascript
+    textArea.scrollToNextLine();
+    ```
+- Scroll to next n line
+    ```javascript
+    textArea.scrollToNextLine(n);
+    ```
+- Scroll to line
+    ```javascript
+    textArea.scrollToLine(lineIndex);
+    ```
+- Get current line index
+    ```javascript
+    var lineIndex = textArea.lineIndex;
+    ```
 
 #### Enable/disable scrolling
 

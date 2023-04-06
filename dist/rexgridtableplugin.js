@@ -2754,14 +2754,39 @@
       }
     }, {
       key: "heightToRowIndex",
-      value: function heightToRowIndex(height, isCeil) {
+      value: function heightToRowIndex(height, roundMode) {
+        if (roundMode === undefined) {
+          roundMode = 0;
+        }
+        /*
+        roundMode:
+        - 0 : floor
+        - 1 : ceil
+        - 2 : plus one if rowIdx is an integer, else floor
+        */
+
+        if (height === 0) {
+          return 0;
+        }
+
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
-          if (isCeil) {
-            rowIdx = Math.ceil(rowIdx);
-          } else {
-            rowIdx = Math.floor(rowIdx);
+          switch (roundMode) {
+            case 0:
+              rowIdx = Math.floor(rowIdx);
+              break;
+            case 1:
+              rowIdx = Math.ceil(rowIdx);
+              break;
+            default:
+              // 2
+              if (Number.isInteger(rowIdx)) {
+                rowIdx += 1;
+              } else {
+                rowIdx = Math.floor(rowIdx);
+              }
+              break;
           }
           return rowIdx;
         }
@@ -2779,9 +2804,12 @@
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
+            if (roundMode === 2) {
+              rowIdx += 1;
+            }
             return rowIdx;
           } else {
-            if (isCeil) {
+            if (roundMode === 1) {
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
@@ -2796,6 +2824,9 @@
     }, {
       key: "widthToColIndex",
       value: function widthToColIndex(width, isCeil) {
+        if (width === 0) {
+          return 0;
+        }
         var colIdx = width / this.defaultCellWidth;
         if (isCeil) {
           colIdx = Math.ceil(colIdx);
@@ -2970,9 +3001,9 @@
     var tableOYExeceedBottom = oy < this.bottomTableOY;
     if (this.clampTableOXY) {
       var rowCount = table.rowCount;
-      var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
+      var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);
 
-      // less then 1 page            
+      // less then 1 page
       if (rowCount < visibleRowCount) {
         oy = 0;
       } else if (tableOYExceedTop) {
@@ -3693,26 +3724,18 @@
       return;
     }
     var table = this.table;
-    var startRowIdx = table.heightToRowIndex(-this.tableOY);
-    if (startRowIdx <= 0) {
-      startRowIdx = 0; //Turn -0 to 0
-    }
-
-    var rowIdx = startRowIdx;
-    var startColIdx = table.widthToColIndex(-this.tableOX);
-    if (startColIdx <= 0) {
-      startColIdx = 0; //Turn -0 to 0
-    }
-
-    var colIdx = startColIdx;
-    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    var rowIndex = this.startRowIndex;
+    var startColumnIndex = table.widthToColIndex(-this.tableOX);
+    var columnIndex = startColumnIndex;
+    var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     var bottomBound = this.bottomBound;
     var rightBound = this.rightBound;
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
-    var startCellTLX = this.getCellTLX(colIdx),
+    var startCellTLX = this.getCellTLX(columnIndex),
       cellTLX = startCellTLX;
-    var cellTLY = this.getCellTLY(rowIdx);
+    var cellTLY = this.getCellTLY(rowIndex);
     while (cellTLY < bottomBound && cellIdx <= lastIdx) {
       if (this.table.isValidCellIdx(cellIdx)) {
         var cell = table.getCell(cellIdx, true);
@@ -3736,16 +3759,16 @@
           cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
-      if (cellTLX < rightBound && colIdx < lastColIdx) {
-        cellTLX += table.getColWidth(colIdx);
-        colIdx += 1;
+      if (cellTLX < rightBound && columnIndex < lastColIdx) {
+        cellTLX += table.getColWidth(columnIndex);
+        columnIndex += 1;
       } else {
         cellTLX = startCellTLX;
-        cellTLY += table.getRowHeight(rowIdx);
-        colIdx = startColIdx;
-        rowIdx += 1;
+        cellTLY += table.getRowHeight(rowIndex);
+        columnIndex = startColumnIndex;
+        rowIndex += 1;
       }
-      cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+      cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
     }
   };
 
@@ -3849,7 +3872,7 @@
     var offsetTableOY = this.tableOY - (this.scrollMode === 0 ? y : x);
     var offsetTableOX = this.tableOX - (this.scrollMode === 0 ? x : y);
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-offsetTableOY);
+    var rowIdx = table.heightToRowIndex(-offsetTableOY, 0);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     if (cellIdx === null) {
@@ -4185,6 +4208,24 @@
         do {
           this.t = 1;
         } while (this.t !== 1);
+        return this;
+      }
+    }, {
+      key: "scrollToRow",
+      value: function scrollToRow(rowIndex) {
+        // To get all height of cells
+        this.scrollToBottom();
+        var height = this.table.rowIndexToHeight(0, rowIndex - 1);
+        this.setTableOY(-height).updateTable();
+        return this;
+      }
+    }, {
+      key: "scrollToNextRow",
+      value: function scrollToNextRow(rowCount) {
+        if (rowCount === undefined) {
+          rowCount = 1;
+        }
+        this.scrollToRow(this.startRowIndex + rowCount);
         return this;
       }
     }, {

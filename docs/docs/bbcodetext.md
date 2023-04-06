@@ -176,9 +176,9 @@ Default style
     //     fontSize: 0
     // },
 
-    // images: [
-    //    { key: 'icon', y: -8 },
-    // ],
+    // images: {
+    //     imgKey: {y: -8}
+    // }
 
     // sharedPool: true,
 
@@ -497,7 +497,9 @@ txt.setFontStyle(style);
         height: undefined,
         y: 0,
         left: 0,
-        right: 0
+        right: 0,
+        originX: 0,
+        originY: 0,
     });
     ```
     - `imgKey` : Image key used in text content, i.e. `[img=imgKey]`.
@@ -508,6 +510,8 @@ txt.setFontStyle(style);
     - `y` : Extra offset y.
     - `left` : Left padding space.
     - `Right` : Right padding space.
+    - `originX` : Offset x via frame width * `originX`
+    - `originY` : Offset y via frame height * `originY`
 - Add some image render informations
     ```javascript
     txt.addImage(data);

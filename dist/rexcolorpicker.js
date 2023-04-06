@@ -2817,11 +2817,16 @@
   };
 
   var GetParent = function GetParent(gameObject, name) {
-    var parent;
+    var parent = null;
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
-        if (parent && !parent.isRexSizer) {
+        if (parent) {
+          if (!parent.isRexSizer) {
+            // Try to get sizer parent
+            parent = GetParent(parent);
+          }
+        } else {
           parent = null;
         }
       }
@@ -6808,7 +6813,11 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.requestOpen();
+      if (GetValue$p(config, 'openOnStart', true)) {
+        // Run this.requestOpen() next tick
+        // User can register events before this.requestOpen()
+        _this.delayCall(0, _this.requestOpen, _assertThisInitialized(_this));
+      }
       return _this;
     }
     _createClass(Modal, [{
@@ -11103,7 +11112,9 @@
     if (destCanvas.height !== height) {
       destCanvas.height = height;
     }
-    var destCtx = destCanvas.getContext('2d');
+    var destCtx = destCanvas.getContext('2d', {
+      willReadFrequently: true
+    });
     destCtx.clearRect(0, 0, width, height);
     destCtx.drawImage(srcCanvas, x, y, width, height);
     if (renderer.gl && texture) {
@@ -11194,7 +11205,9 @@
       width = Math.max(Math.ceil(width * _this.resolution), 1);
       height = Math.max(Math.ceil(height * _this.resolution), 1);
       _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
-      _this.context = _this.canvas.getContext('2d');
+      _this.context = _this.canvas.getContext('2d', {
+        willReadFrequently: true
+      });
       _this.dirty = false;
       _this.setPosition(x, y);
       _this.setOrigin(0.5, 0.5);
@@ -11978,6 +11991,67 @@
       return _this;
     }
     _createClass(RoundRectangle, [{
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this._fillColor = value;
+        this.isFilled = value != null && this._fillAlpha > 0;
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this._fillAlpha = value;
+        this.isFilled = value > 0 && this._fillColor != null;
+      }
+
+      // Fully override setFillStyle method
+    }, {
+      key: "setFillStyle",
+      value: function setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+        return this;
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this._strokeColor = value;
+        this.isStroked = value != null && this._lineWidth > 0;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this._lineWidth = value;
+        this.isStroked = value > 0 && this._strokeColor != null;
+      }
+
+      // Fully override setStrokeStyle method
+    }, {
+      key: "setStrokeStyle",
+      value: function setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+        return this;
+      }
+    }, {
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import SpiralCurvePlugin from '../../plugins/spiralcurve-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -17,8 +17,8 @@ class Demo extends Phaser.Scene {
         var cycle = 5;
         var curve = this.plugins.get('rexSpiralCurve').add({
             // Origin
-            startX: 400, startY: 400,
-            endX: 400, endY: 200,
+            startX: 0, startY: 0,
+            endX: 0, endY: -200,
             // Radius
             startXRadius: 100, endXRadius: 30,
             startYRadius: 50, endYRadius: 15,
@@ -26,8 +26,7 @@ class Demo extends Phaser.Scene {
             startAngle: 0, endAngle: (360 * cycle)
         });
 
-        var particles = this.add.particles('flares');
-        var emitter = particles.createEmitter({
+        var emitter = this.add.particles(400, 300, 'flares', {
             scale: { start: 0.5, end: 0.3 },
             alpha: { start: 1, end: 0 },
             lifespan: 2000,

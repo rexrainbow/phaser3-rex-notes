@@ -1,0 +1,65 @@
+{
+       "compressionlevel": -1,
+       "height": 4,
+       "hexsidelength": 18,
+       "infinite": false,
+       "layers": [
+              {
+                     "data": [
+                            2,
+                            3,
+                            1,
+                            3,
+                            4,
+                            2,
+                            2,
+                            1,
+                            3,
+                            2,
+                            3,
+                            4,
+                            1,
+                            0,
+                            3,
+                            0
+                     ],
+                     "height": 4,
+                     "id": 1,
+                     "name": "Calque 1",
+                     "opacity": 1,
+                     "type": "tilelayer",
+                     "visible": true,
+                     "width": 4,
+                     "x": 0,
+                     "y": 0
+              }
+       ],
+       "nextlayerid": 2,
+       "nextobjectid": 1,
+       "orientation": "hexagonal",
+       "renderorder": "right-down",
+       "staggeraxis": "x",
+       "staggerindex": "odd",
+       "tiledversion": "1.10.0",
+       "tileheight": 36,
+       "tilesets": [
+              {
+                     "columns": 2,
+                     "firstgid": 1,
+                     "image": "C:\/Users\/rdave\/Downloads\/svipal.github.io-master\/svipal.github.io-master\/assets\/tilesets\/tileset.png",
+                     "imageheight": 73,
+                     "imagewidth": 85,
+                     "margin": 0,
+                     "name": "tileset",
+                     "spacing": 1,
+                     "tilecount": 4,
+                     "tileheight": 36,
+                     "tilewidth": 42,
+                     "transparentcolor": "#ffffff"
+              }
+       ],
+       "tilewidth": 42,
+       "type": "map",
+       "version": "1.10",
+       "width": 4
+}

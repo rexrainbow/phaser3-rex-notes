@@ -1,4 +1,4 @@
-import CreateDisplayLabel from '../../utils/build/CreateDisplayLabel.js';
+import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateTextArea from '../../utils/build/CreateTextArea.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -21,7 +21,7 @@ var CreateContent = function (scene, config, creators) {
             break;
 
         default:
-            gameObject = new CreateDisplayLabel(scene, config, creators);
+            gameObject = new CreateLabel(scene, config, creators);
             break;
     }
 

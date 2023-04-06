@@ -1,9 +1,10 @@
 import Dialog from '../dialog/Dialog.js';
+import Methods from './methods/Methods.js';
+import RegisterEvents from './methods/RegisterEvents.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
-import CreateDisplayLabel from '../utils/build/CreateDisplayLabel.js';
+import CreateLabel from '../utils/build/CreateLabel.js';
 import CreateContent from './methods/CreateContent.js';
-import IsFunction from '../../../plugins/utils/object/IsFunction.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 import HasValue from '../../../plugins/utils/object/HasValue.js';
 import TextArea from '../textarea/TextArea.js';
@@ -25,7 +26,7 @@ class ConfirmDialog extends Dialog {
             delete config.background;
         }
 
-        config.title = CreateDisplayLabel(scene, config.title, creators.title);
+        config.title = CreateLabel(scene, config.title, creators.title);
 
         config.content = CreateContent(scene, config.content, creators.content);
         if (config.content instanceof TextArea) {
@@ -34,29 +35,34 @@ class ConfirmDialog extends Dialog {
             }
         }
 
+        var defaultButtonConfig = config.button;
+        var buttonAConfig = config.buttonA || defaultButtonConfig;
+        var buttonBConfig = config.buttonB || defaultButtonConfig;
         var buttonMode = config.buttonMode;
         if (buttonMode === undefined) {
-            buttonMode = (!!config.buttonA && !!config.buttonB) ? 2 :
-                (!!config.buttonA || !!config.button) ? 1 :
+            buttonMode = (!!buttonAConfig && !!buttonBConfig) ? 2 :
+                (!!buttonAConfig) ? 1 :
                     0;
         }
 
-        var buttonAConfig = config.buttonA || config.button;
-        var buttonACreators = creators.buttonA || creators.button;
-        var buttonBConfig = config.buttonB || config.button;
-        var buttonBCreators = creators.buttonB || creators.button;
+        var defaultButtonCreator = creators.button;
+        var buttonACreators = creators.buttonA || defaultButtonCreator;
+        var buttonBCreators = creators.buttonB || defaultButtonCreator;
         switch (buttonMode) {
             case 2:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
-                    CreateDisplayLabel(scene, buttonBConfig, buttonBCreators),
+                    CreateLabel(scene, buttonAConfig, buttonACreators),
+                    CreateLabel(scene, buttonBConfig, buttonBCreators),
                 ]
                 break;
 
             case 1:
                 config.actions = [
-                    CreateDisplayLabel(scene, buttonAConfig, buttonACreators),
+                    CreateLabel(scene, buttonAConfig, buttonACreators),
                 ]
+                break;
+
+            case 0:
                 break;
 
             default:
@@ -64,72 +70,34 @@ class ConfirmDialog extends Dialog {
                 break;
         }
 
+        var defaultChoiceConfig = config.choice;
+        if (defaultChoiceConfig) {
+            config.choices = [];
+        }
+
         super(scene, config);
         this.type = 'rexConfirmDialog';
 
         this.buttonMode = buttonMode;
 
+        this.defaultActionConfig = defaultButtonConfig;
+        this.defaultActionButtonCreator = defaultButtonCreator;
+
+        this.defaultChoiceConfig = defaultChoiceConfig;
+        this.defaultChoiceCreator = creators.choice;
+
         var buttons = this.childrenMap.actions;
-        this.addChildrenMap('buttonA', buttons[0]);
-        this.addChildrenMap('buttonB', buttons[1]);
+        this.addChildrenMap('buttonA', (buttons) ? buttons[0] : null);
+        this.addChildrenMap('buttonB', (buttons) ? buttons[1] : null);
 
-    }
-
-    resetDisplayContent(config) {
-        if (config === undefined) {
-            config = {};
-        }
-
-        var title = this.childrenMap.title;
-        title.resetDisplayContent(config.title);
-
-        var content = this.childrenMap.content;
-        if (content.resetDisplayContent) {
-            // Label
-            content.resetDisplayContent(config.content);
-        } else {
-            // TextArea
-            var text = config.content || '';
-            content.setText(text)
-        }
-
-        var buttonA = this.childrenMap.actions[0];
-        if (buttonA) {
-            buttonA.resetDisplayContent(config.buttonA);
-        }
-
-        var buttonB = this.childrenMap.actions[1];
-        if (buttonB) {
-            buttonB.resetDisplayContent(config.buttonB);
-        }
-
-        return this;
-    }
-
-    modal(config, onClose) {
-        if (IsFunction(config)) {
-            onClose = config;
-            config = undefined;
-        }
-
-        if (config === undefined) {
-            config = {};
-        }
-
-        var zeroButtonMode = (this.buttonMode === 0);
-
-        if (!config.hasOwnProperty('anyTouchClose')) {
-            config.anyTouchClose = zeroButtonMode;
-        }
-
-        if (!config.hasOwnProperty('manualClose')) {
-            config.manualClose = !zeroButtonMode;
-        }
-
-        super.modal(config, onClose);
-
-        return this;
+        // Interactive
+        RegisterEvents.call(this);
     }
 }
+
+Object.assign(
+    ConfirmDialog.prototype,
+    Methods
+)
 
 export default ConfirmDialog;

@@ -1,11 +1,11 @@
 import phaser from 'phaser/src/phaser.js';
 
-var audioContext;
-try {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-} catch (e) {
-    console.error(e);
+
+var CreateNewAudioContext = function () {
+    return new (window.AudioContext || window.webkitAudioContext)();
 }
+
+var audioContext = CreateNewAudioContext();
 
 class SceneA extends Phaser.Scene {
     constructor() {
@@ -54,8 +54,9 @@ class SceneB extends Phaser.Scene {
     create() {
         this.add.text(0, 0, 'SceneB')
 
-        audioContext.close()
-        audioContext = null;
+        audioContext = CreateNewAudioContext();
+        this.sound.setAudioContext(audioContext);
+
         // Still has memory leakage
     }
 

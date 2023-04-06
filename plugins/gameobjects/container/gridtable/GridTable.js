@@ -183,6 +183,23 @@ class GridTable extends ContainerLite {
         return this;
     }
 
+    scrollToRow(rowIndex) {
+        // To get all height of cells
+        this.scrollToBottom();
+
+        var height = this.table.rowIndexToHeight(0, rowIndex - 1)
+        this.setTableOY(-height).updateTable();
+        return this;
+    }
+
+    scrollToNextRow(rowCount) {
+        if (rowCount === undefined) {
+            rowCount = 1;
+        }
+        this.scrollToRow(this.startRowIndex + rowCount);
+        return this;
+    }
+
     getCell(cellIdx) {
         return this.table.getCell(cellIdx, true);
     }

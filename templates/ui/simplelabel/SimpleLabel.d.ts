@@ -1,13 +1,13 @@
 import Label from '../label/Label';
-import BuildDisplayLabelConfig from '../utils/build/BuildDisplayLabelConfig';
+import BuildLabelConfig from '../utils/build/BuildLabelConfig';
 
 export default SimpleLabel;
 
 declare namespace SimpleLabel {
-    interface IConfig extends BuildDisplayLabelConfig.IConfig {
+    interface IConfig extends BuildLabelConfig.IConfig {
     }
 
-    interface ICreatorsConfig extends BuildDisplayLabelConfig.ICreators {
+    interface ICreatorsConfig extends BuildLabelConfig.ICreators {
     }
 }
 
@@ -18,4 +18,7 @@ declare class SimpleLabel extends Label {
         creators?: SimpleLabel.ICreatorsConfig
     );
 
+    setActiveState(enable?: boolean): this;
+    setHoverState(enable?: boolean): this;
+    setDisableState(enable?: boolean): this;
 }

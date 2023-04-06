@@ -26,6 +26,7 @@ class DropDownList extends Label {
         this.settListTransitOutCallback(GetValue(listConfig, 'transitOut'));
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
+        this.setListAlignmentSide(GetValue(listConfig, 'alignSide', ''));
         this.setListBounds(GetValue(listConfig, 'bounds'));
         this.setListSpace(GetValue(listConfig, 'space'));
         this.setListDraggable(GetValue(listConfig, 'draggable', false));
@@ -94,6 +95,18 @@ class DropDownList extends Label {
             }
         }
 
+        this.emit('valuechange', this, value, previousValue);
+
+    }
+
+    emitButtonClick(index) {
+        var option = this.options[index];
+        if (!option) {
+            return this;
+        }
+
+        this.emit('button.click', this, undefined, option, index);
+        return this;
     }
 
 }

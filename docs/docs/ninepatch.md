@@ -315,3 +315,11 @@ ninePatch.setGetFrameNameCallback(callback);
 ```javascript
 ninePatch.updateTexture();
 ```
+
+### Compare with [nine-slice](nineslice.md)
+
+- Nine-slice is a built-in game object.
+- Nine-slice has better render performance.
+    - Nine-patch extends from [render-texture](rendertexture.md), which will create a new texture, then draw frames on it.
+- Nine-slice is webgl mode only.
+- Nine-slice does not have `flip`, `crop` methods.

@@ -2817,11 +2817,16 @@
   };
 
   var GetParent = function GetParent(gameObject, name) {
-    var parent;
+    var parent = null;
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
-        if (parent && !parent.isRexSizer) {
+        if (parent) {
+          if (!parent.isRexSizer) {
+            // Try to get sizer parent
+            parent = GetParent(parent);
+          }
+        } else {
           parent = null;
         }
       }
@@ -6808,7 +6813,11 @@
       } else if (touchOutsideClose) {
         _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
-      _this.requestOpen();
+      if (GetValue$n(config, 'openOnStart', true)) {
+        // Run this.requestOpen() next tick
+        // User can register events before this.requestOpen()
+        _this.delayCall(0, _this.requestOpen, _assertThisInitialized(_this));
+      }
       return _this;
     }
     _createClass(Modal, [{
@@ -11210,18 +11219,31 @@
   };
 
   var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
-    var cache = GetCache(scene, loaderType, cacheType);
-    if (cache.exists(key)) {
-      cache.remove(key);
+    // Remove data from cache
+    if (cacheType === null || cacheType === false) ; else if (IsFunction(cacheType)) {
+      cacheType();
+    } else {
+      var cache = GetCache(scene, loaderType, cacheType);
+      if (cache.exists(key)) {
+        cache.remove(key);
+      }
     }
-    var url = window.URL.createObjectURL(file);
+
+    // Add filecomplete event
     var loader = scene.load;
     if (onComplete) {
       loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
         onComplete(data);
       });
     }
-    loader[loaderType](key, url);
+
+    // Load file from url
+    if (IsFunction(file)) {
+      file();
+    } else {
+      var url = window.URL.createObjectURL(file);
+      loader[loaderType](key, url);
+    }
     loader.start();
   };
 

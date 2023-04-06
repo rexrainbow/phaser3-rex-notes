@@ -25,7 +25,15 @@ Create a transparent file chooser button (`<input type="file">`).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -55,7 +63,15 @@ Create a transparent file chooser button (`<input type="file">`).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             global: [{
@@ -88,7 +104,15 @@ Create a transparent file chooser button (`<input type="file">`).
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -273,3 +297,8 @@ scene.plugins.get('rexFileChooser').open({
             var objectURL = URL.createObjectURL(file);
             ```
     - Length `files` is 0 : User cancels file chooser dialog.
+
+
+### Interactive with other game objects
+
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)

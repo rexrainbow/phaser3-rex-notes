@@ -12,15 +12,27 @@ class Tree {
     }
 
     getFullPath(keys) {
-        if ((typeof (keys) === 'string') && (keys.charAt(0) === '.')) {
+        if (typeof (keys) === 'string') {
             if (keys === '.') {
                 keys = this.refPath;
-            } else if (this.refPath !== '') {
-                keys = `${this.refPath}${keys}`;
-            } else { // this.refPath === ''
-                keys = keys.substring(1);
+            } else if (keys.startsWith('..')) {
+                if (this.refPath !== '') {
+                    var refPathKeys = this.refPath.split('.');
+                    refPathKeys.pop()
+                    keys = `${refPathKeys.join('.')}${keys.substring(1)}`;
+                } else { // this.refPath === ''
+                    keys = keys.substring(2);
+                }
+
+            } else if (keys.startsWith('.')) {
+                if (this.refPath !== '') {
+                    keys = `${this.refPath}${keys}`;
+                } else { // this.refPath === ''
+                    keys = keys.substring(1);
+                }
             }
         }
+
         return keys;
     }
 

@@ -6,7 +6,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
     }
 
     var canvas = CanvasPool.create(this);
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', { willReadFrequently: true });
 
     textStyle.syncFont(canvas, context);
 

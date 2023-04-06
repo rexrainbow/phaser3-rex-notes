@@ -24,7 +24,15 @@ Play youtube video on iframe.
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -54,7 +62,15 @@ Play youtube video on iframe.
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             global: [{
@@ -89,7 +105,15 @@ Play youtube video on iframe.
         // fullscreenTarget: divId, // For fullscreen
         dom: {
             createContainer: true
-        },        
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
     };
     var game = new Phaser.Game(config);
@@ -324,3 +348,8 @@ player.resize(width, height);
 
 !!! warning "No `Playback time changed` event"
     Get playback time every tick might cause playing video lagging.
+
+
+### Interactive with other game objects
+
+See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)

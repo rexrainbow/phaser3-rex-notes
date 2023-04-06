@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerlinGrivatyWellPlugin from '../../plugins/perlingrivatywell-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -15,20 +15,19 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var particles = this.add.particles('flares');
-        var emitter = particles.createEmitter({
+        var emitter = this.add.particles(0, 0, 'flares', {
             speed: 300,
             lifespan: 1000,
             scale: 0.1,
             quantity: 5
-        })
-            .setPosition(400, 300)
+        });
 
         var perlinGrivatyWell = this.plugins.get('rexPerlinGrivatyWell').add();
-        particles.addGravityWell(perlinGrivatyWell);
+        emitter.addParticleProcessor(perlinGrivatyWell);
 
-        this.input.on('pointermove', function (pointer) {
-            emitter.setPosition(pointer.x, pointer.y)
+        this.input.on('pointermove', function (pointer) {            
+            emitter.particleX = pointer.x;
+            emitter.particleY = pointer.y;
         })
     }
 

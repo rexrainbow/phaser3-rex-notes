@@ -64,7 +64,7 @@ class CanvasData {
                 height = canvas.height - y;
             }
             this.resize(width, height);
-            var context = canvas.getContext('2d');
+            var context = canvas.getContext('2d', { willReadFrequently: true });
             var imgData = context.getImageData(x, y, width, height).data;
             var pixels = imgData.length, imgDataIndex;
             var value;

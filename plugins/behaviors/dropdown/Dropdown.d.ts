@@ -23,6 +23,7 @@ declare namespace DropDown {
         alignTargetY?: Phaser.GameObjects.GameObject,
         alignOffsetX?: number,
         alignOffsetY?: number,
+        alignSide?: string,
 
         bounds?: Phaser.Geom.Rectangle,
 

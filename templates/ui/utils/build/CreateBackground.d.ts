@@ -1,9 +1,9 @@
-import RoundRectangle from '../../roundrectangle/RoundRectangle';
+import StatesRoundRectangle from '../../statesroundrectangle/StatesRoundRectangle';
 
 export default CreateBackground;
 
 declare namespace CreateBackground {
-    interface IConfig extends RoundRectangle.IConfig {
+    interface IConfig extends StatesRoundRectangle.IConfig {
 
     }
 }
@@ -11,4 +11,4 @@ declare namespace CreateBackground {
 declare function CreateBackground(
     scene: Phaser.Scene,
     config?: CreateBackground.IConfig
-): RoundRectangle
+): StatesRoundRectangle

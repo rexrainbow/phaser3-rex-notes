@@ -215,11 +215,10 @@ See [Sprite's animation section](sprite.md#animation).
 
 ### Interactive
 
-!!! note
-    Plane(mesh) game object cannot be enabled for input.
+To test if pointer is at any face of this mesh game object.
 
 ```javascript
-var isHit = plane.hasFaceAt(worldX, worldY);
+plane.setInteractive();
 ```
 
 ### Other properties

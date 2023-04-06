@@ -5,7 +5,7 @@ var PointToCellIndex = function (x, y) {
     var offsetTableOX = this.tableOX - ((this.scrollMode === 0) ? x : y);
 
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-offsetTableOY);
+    var rowIdx = table.heightToRowIndex(-offsetTableOY, 0);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     if (cellIdx === null) {

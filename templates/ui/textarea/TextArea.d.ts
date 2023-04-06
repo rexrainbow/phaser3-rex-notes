@@ -39,5 +39,10 @@ declare class TextArea extends Scrollable {
     setText(text: string): this;
     appendText(text: string): this;
 
+    scrollToLine(lineIndex: number): this;
+    scrollToNextLine(lineCount?: number): this;
+    readonly lineIndex: number;
+
+    readonly lineHeight: number;
     readonly linesCount: number;
 }

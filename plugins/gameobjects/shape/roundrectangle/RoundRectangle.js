@@ -64,6 +64,67 @@ class RoundRectangle extends Shape {
         this.dirty = true;
     }
 
+    get fillColor() {
+        return this._fillColor;
+    }
+
+    set fillColor(value) {
+        this._fillColor = value;
+        this.isFilled = (value != null) && (this._fillAlpha > 0);
+    }
+
+    get fillAlpha() {
+        return this._fillAlpha;
+    }
+
+    set fillAlpha(value) {
+        this._fillAlpha = value;
+        this.isFilled = (value > 0) && (this._fillColor != null);
+    }
+
+    // Fully override setFillStyle method
+    setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+
+        return this;
+    }
+
+    get strokeColor() {
+        return this._strokeColor;
+    }
+
+    set strokeColor(value) {
+        this._strokeColor = value;
+        this.isStroked = (value != null) && (this._lineWidth > 0);
+    }
+
+    get lineWidth() {
+        return this._lineWidth;
+    }
+
+    set lineWidth(value) {
+        this._lineWidth = value;
+        this.isStroked = (value > 0) && (this._strokeColor != null);
+    }
+
+    // Fully override setStrokeStyle method
+    setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+
+        return this;
+    }
+
     updateData() {
         var geom = this.geom;
         var pathData = this.pathData;

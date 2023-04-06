@@ -1,5 +1,5 @@
-import CreateParticles from './CreateParticles.js';
-import CreateEmitter from './CreateEmitter.js';
+import CreateParticles from './methods/CreateParticles.js';
+import CreateEmitter from './methods/CreateEmitter.js';
 
 var ParticlesAlongBounds = function (gameObject, config, particles) {
     if (config === undefined) {

@@ -184,19 +184,36 @@
     return cache;
   };
 
+  var IsFunction = function IsFunction(obj) {
+    return obj && typeof obj === 'function';
+  };
+
   var FileObjectToCache = function FileObjectToCache(scene, file, loaderType, key, cacheType, onComplete) {
-    var cache = GetCache(scene, loaderType, cacheType);
-    if (cache.exists(key)) {
-      cache.remove(key);
+    // Remove data from cache
+    if (cacheType === null || cacheType === false) ; else if (IsFunction(cacheType)) {
+      cacheType();
+    } else {
+      var cache = GetCache(scene, loaderType, cacheType);
+      if (cache.exists(key)) {
+        cache.remove(key);
+      }
     }
-    var url = window.URL.createObjectURL(file);
+
+    // Add filecomplete event
     var loader = scene.load;
     if (onComplete) {
       loader.once("filecomplete-".concat(loaderType, "-").concat(key), function (key, type, data) {
         onComplete(data);
       });
     }
-    loader[loaderType](key, url);
+
+    // Load file from url
+    if (IsFunction(file)) {
+      file();
+    } else {
+      var url = window.URL.createObjectURL(file);
+      loader[loaderType](key, url);
+    }
     loader.start();
   };
 
@@ -329,13 +346,14 @@
       });
       _this.on('drop', function (gameObject, e) {
         this._files = e.dataTransfer.files;
-        if (this._files && this.filters) {
+        var files = this._files;
+        if (files && this.filters) {
           for (var filterType in this.filters) {
             var filterCallback = this.filters[filterType];
             var filteredFiles = [];
-            for (var i = 0, cnt = this._files.length; i < cnt; i++) {
-              var file = this._files[i];
-              if (filterCallback(file)) {
+            for (var i = 0, cnt = files.length; i < cnt; i++) {
+              var file = files[i];
+              if (filterCallback(file, files)) {
                 filteredFiles.push(file);
               }
             }

@@ -1,6 +1,7 @@
 import NinePatch from './ninepatch/NinePatch.js';
 import NinePatch2 from './ninepatch2/NinePatch.js';
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
+import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
@@ -47,7 +48,6 @@ import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
 import FileSelectorButton from './fileselectorbutton/FileSelectorButton.js';
 import Dialog from './dialog/Dialog.js';
-import Choices from './choices/Choices.js';
 import ConfirmDialog from './confirmdialog/ConfirmDialog.js';
 import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
@@ -55,6 +55,7 @@ import Slider from './slider/Slider.js';
 import GridTable from './gridtable/GridTable.js';
 import Menu from './menu/Menu.js';
 import DropDownList from './dropdownlist/DropDownList.js';
+import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList.js';
 import TextBox from './textbox/TextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import BadgeLabel from './badgelabel/BadgeLabel.js';
@@ -89,6 +90,8 @@ import TouchEventStop from './toucheventstop/TouchEventStop.js';
 import Perspective from './perspective/Perspective.js';
 import Skew from './skew/Skew.js';
 import Anchor from './anchor/Anchor.js';
+import TextTyping from './texttyping/TextTyping.js';
+import TextPage from './textpage/TextPage.js';
 import TextEdit from './textedit/TextEdit.js';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js';
@@ -119,6 +122,7 @@ export {
     NinePatch,
     NinePatch2,
     RoundRectangle,
+    StatesRoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
@@ -164,7 +168,6 @@ export {
     FixWidthButtons,
     FileSelectorButton,
     Dialog,
-    Choices,
     ConfirmDialog,
     HolyGrail,
     Tabs,
@@ -172,6 +175,7 @@ export {
     GridTable,
     Menu,
     DropDownList,
+    SimpleDropDownList,
     TextBox,
     NumberBar,
     BadgeLabel,
@@ -206,6 +210,8 @@ export {
     Perspective,
     Skew,
     Anchor,
+    TextTyping,
+    TextPage,
     TextEdit,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,

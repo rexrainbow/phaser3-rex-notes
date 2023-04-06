@@ -31,6 +31,8 @@ declare namespace Modal {
         transitOut?: 0 | 1 | 'scaleDown' | 'fadeOut' | TransitCallbackType,
 
         destroy?: boolean,
+
+        openOnStart?: boolean,
     }
 }
 

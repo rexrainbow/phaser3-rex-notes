@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 300)
             .layout()
             .modalPromise({
+                // defaultBehavior: false,
                 manaulClose: true,
                 duration: {
                     in: 500,

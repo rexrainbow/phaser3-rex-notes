@@ -1562,14 +1562,25 @@
     _createClass(Tree, [{
       key: "getFullPath",
       value: function getFullPath(keys) {
-        if (typeof keys === 'string' && keys.charAt(0) === '.') {
+        if (typeof keys === 'string') {
           if (keys === '.') {
             keys = this.refPath;
-          } else if (this.refPath !== '') {
-            keys = "".concat(this.refPath).concat(keys);
-          } else {
-            // this.refPath === ''
-            keys = keys.substring(1);
+          } else if (keys.startsWith('..')) {
+            if (this.refPath !== '') {
+              var refPathKeys = this.refPath.split('.');
+              refPathKeys.pop();
+              keys = "".concat(refPathKeys.join('.')).concat(keys.substring(1));
+            } else {
+              // this.refPath === ''
+              keys = keys.substring(2);
+            }
+          } else if (keys.startsWith('.')) {
+            if (this.refPath !== '') {
+              keys = "".concat(this.refPath).concat(keys);
+            } else {
+              // this.refPath === ''
+              keys = keys.substring(1);
+            }
           }
         }
         return keys;

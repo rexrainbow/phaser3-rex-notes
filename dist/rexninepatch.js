@@ -210,9 +210,6 @@
   };
 
   var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
-    if (!key) {
-      return this;
-    }
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -570,12 +567,7 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
-            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
-          } else {
-            // Use setSize method for alternative 
-            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
-          }
+          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
           this.updateTexture();
           return this;
         }

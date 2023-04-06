@@ -1,6 +1,6 @@
 import Label from '../label/Label.js';
-import TextPage from '../../../plugins/textpage.js';
-import TextTyping from '../../../plugins/texttyping.js';
+import TextPage from '../textpage/TextPage.js';
+import TextTyping from '../texttyping/TextTyping.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

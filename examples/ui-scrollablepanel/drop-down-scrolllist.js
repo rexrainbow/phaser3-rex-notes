@@ -62,32 +62,25 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
     }
 
     var menu;
-    scene.rexUI.add.click(label)
-        .on('click', function () {
-            if (!menu) {
-                var menuX = label.getElement('text').getTopLeft().x,
-                    menuY = label.bottom;
-                menu = CreatePopupList(scene, menuX, menuY, menuHeight, options, function (button) {
-                    label.setData('value', button.text);
-                    menu.scaleDownDestroy(100, 'y');
-                    menu = undefined;
-                });
+    label.onClick(function () {
+        if (menu) {
+            return;
+        }
 
-                // Any pointerup to close menu
-                scene.time.delayedCall(0, function () {
-                    scene.input.once('pointerup', function () {
-                        if (menu) {
-                            menu.scaleDownDestroy(100, 'y');
-                            menu = undefined;
-                        }
-                    })
-                });
+        var menuX = label.getElement('text').getTopLeft().x,
+            menuY = label.bottom;
+        menu = CreatePopupList(scene, menuX, menuY, menuHeight, options, function (button) {
+            label.setData('value', button.text);
+            menu.scaleDownDestroy(100, 'y');
+            menu = undefined;
+        });
 
-            } else {
-                menu.scaleDownDestroy(100, 'y');
-                menu = undefined;
-            }
-        })
+        // Close menu when clicking outside of menu
+        menu.onClickOutside(function () {
+            menu.scaleDownDestroy(100, 'y');
+            menu = undefined;
+        });
+    })
 
     return label;
 }

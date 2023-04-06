@@ -85,7 +85,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
 1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
-1. [Color input](ui-colorinput.md): Color number (`0x0`~`0xffffff`) or color string (`'#000000'`~`'#ffffff'`, or `'red'`) input field.
+1. [Color input](ui-colorinput.md): Color number or color string input field.
 1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
 1. [Confirm dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
@@ -107,16 +107,17 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Pages](ui-pages.md): A container with pages, only current page is visible.
 1. [Perspective card](ui-perspectivecard.md): A container with front and back faces.
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
-2. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md).
-3. [Sizer](ui-sizer.md): Layout children game objects.
-4. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
-5. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
-6. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
-7. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
-8. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
-9. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
-10. [Toast](ui-toast.md): Show text message for a short while.
-11. [Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
+1. [Simple drop down list](ui-simpledropdownlist.md): Using plain object to create [drop down list](ui-simpledropdownlist.md).
+1. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md).
+1. [Sizer](ui-sizer.md): Layout children game objects.
+1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
+1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
+1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
+1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
+1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
+1. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
+1. [Toast](ui-toast.md): Show text message for a short while.
+1. [Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
 
 !!! note "Scroll-able table"
     There are 3 kinds of scroll-able tables :
@@ -145,6 +146,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 ### Background objects
 
+1. [States round-rectangle](ui-statesroundrectangle.md): Using plain object to create [round rectangle](shape-roundrectangle.md), with active, hover, disable styles.
+    ```javascript
+    var rect = scene.rexUI.add.statesRoundRectangle(config);
+    ```
+    or
+    ```javascript
+    class MyRoundRectangle extends RexPlugins.UI.StatesRoundRectangle {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Round-rectangle](shape-roundrectangle.md): Round rectangle shape.
     ```javascript
     var shape = scene.rexUI.add.roundRectangle(x, y, width, height, radius, fillColor);
@@ -524,7 +540,14 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
-
+1. [Text typing](texttyping.md)
+    ```javascript
+    var textTyping = scene.rexUI.textTyping(textObject, config);
+    ```
+2. [Text page](textpage.md)
+    ```javascript
+    var textPage = scene.rexUI.textPage(textObject, config);
+    ```
 
 ### Scaled image
 

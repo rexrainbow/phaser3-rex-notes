@@ -229,7 +229,9 @@
             height = canvas.height - y;
           }
           this.resize(width, height);
-          var context = canvas.getContext('2d');
+          var context = canvas.getContext('2d', {
+            willReadFrequently: true
+          });
           var imgData = context.getImageData(x, y, width, height).data;
           var pixels = imgData.length,
             imgDataIndex;
@@ -456,7 +458,9 @@
   var DrawFrame = function DrawFrame(frame, canvas) {
     canvas.width = frame.cutWidth;
     canvas.height = frame.cutHeight;
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', {
+      willReadFrequently: true
+    });
     context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight);
     return canvas;
   };

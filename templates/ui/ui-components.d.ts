@@ -1,4 +1,5 @@
 import RoundRectangle from './roundrectangle/RoundRectangle';
+import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
@@ -46,7 +47,6 @@ import GridButtons from './gridbuttons/GridButtons';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
 import FileSelectorButton from './fileselectorbutton/FileSelectorButton';
 import Dialog from './dialog/Dialog';
-import Choices from './choices/Choices';
 import ConfirmDialog from './confirmdialog/ConfirmDialog';
 import HolyGrail from './holygrail/HolyGrail';
 import Tabs from './tabs/Tabs';
@@ -54,6 +54,7 @@ import Slider from './slider/Slider';
 import GridTable from './gridtable/GridTable';
 import Menu from './menu/Menu';
 import DropDownList from './dropdownlist/DropDownList';
+import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList';
 import TextBox from './textbox/TextBox';
 import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';
@@ -88,6 +89,8 @@ import TouchEventStop from './toucheventstop/TouchEventStop';
 import Perspective from './perspective/Perspective';
 import Skew from './skew/Skew';
 import Anchor from './anchor/Anchor';
+import TextTyping from './texttyping/TextTyping';
+import TextPage from './textpage/TextPage';
 import TextEdit from './textedit/TextEdit';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -116,6 +119,7 @@ type FontSizeResize = typeof SetFontSizeToFitWidth;
 
 export {
     RoundRectangle,
+    StatesRoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
@@ -163,7 +167,6 @@ export {
     FixWidthButtons,
     FileSelectorButton,
     Dialog,
-    Choices,
     ConfirmDialog,
     HolyGrail,
     Tabs,
@@ -171,6 +174,7 @@ export {
     GridTable,
     Menu,
     DropDownList,
+    SimpleDropDownList,
     TextBox,
     NumberBar,
     ScrollBar,
@@ -205,6 +209,8 @@ export {
     Perspective,
     Skew,
     Anchor,
+    TextTyping,
+    TextPage,
     TextEdit,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,

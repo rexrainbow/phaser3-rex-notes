@@ -1,9 +1,9 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateButtons from '../utils/CreateButtons.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import CreateInteractiveLabel from '../../../utils/build/CreateInteractiveLabel.js';
-import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
-import SetButtonsActiveStateByText from '../utils/SetButtonsActiveState.js';
+import CreateLabel from '../../../utils/build/CreateLabel.js';
+import { GetOptionIndex } from '../../utils/OptionsMethods.js';
+import SetButtonsActiveStateByIndex from '../utils/SetButtonsActiveState.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -36,8 +36,13 @@ class ButtonsInput extends InputFiledBase {
         this.addChildrenMap('list', list);
 
         list.on('button.click', function (button, index, pointer, event) {
-            var value = GetOptionValue(list.options, button.text);
-            this.setValue(value);
+            var option = list.options[index];
+            if (!option) {
+                return;  // ??
+            }
+            this._selectedIndex = index;
+            this.setValue(option.value);
+            this._selectedIndex = undefined;
         }, this);
 
     }
@@ -55,8 +60,11 @@ class ButtonsInput extends InputFiledBase {
         }
 
         var list = this.childrenMap.list;
-        var text = GetOptionText(list.options, value);
-        SetButtonsActiveStateByText(list.childrenMap.buttons, text);
+        var index = this._selectedIndex;  // See list's 'button.click' event
+        if (index === undefined) {
+            index = GetOptionIndex(list.options, value);
+        }
+        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         super.value = value;  // Fire 'valuechange' event
     }
 
@@ -69,7 +77,7 @@ class ButtonsInput extends InputFiledBase {
         list.clearButtons(true);
         for (var i = 0, cnt = options.length; i < cnt; i++) {
             var option = options[i];
-            var button = CreateInteractiveLabel(scene, buttonConfig)
+            var button = CreateLabel(scene, buttonConfig)
                 .setActiveState(false)
                 .resetDisplayContent({ text: option.text })
 

@@ -21,7 +21,7 @@ var MeasureText = function (textStyle) {
     var canvas = CanvasPool.create(this);
 
     // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', { willReadFrequently: true });
 
     textStyle.syncFont(canvas, context);
 

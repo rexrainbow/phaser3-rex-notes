@@ -298,11 +298,10 @@ var vertices = mesh.vertices;
 
 ### Interactive
 
-!!! note
-    Mesh game object cannot be enabled for input.
+To test if pointer is at any face of this mesh game object.
 
 ```javascript
-var isHit = mesh.hasFaceAt(worldX, worldY);
+mesh.setInteractive();
 ```
 
 ### Debug

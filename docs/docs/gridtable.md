@@ -363,6 +363,25 @@ It is equal to `cellInvisibleCallback` in configuration.
 table.scrollToBottom();
 ```
 
+#### Scroll to row
+
+- Scroll to next row
+    ```javascript
+    table.scrollToNextRow();
+    ```
+- Scroll to next n row
+    ```javascript
+    table.scrollToNextRow(n);
+    ```
+- Scroll to row
+    ```javascript
+    table.scrollToRow(rowIndex);
+    ```
+- Get current row index
+    ```javascript
+    var rowIndex = table.startRowIndex;
+    ```
+
 ### Refresh table content
 
 - Refresh all visible cells.

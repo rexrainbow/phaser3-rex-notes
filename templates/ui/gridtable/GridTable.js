@@ -6,6 +6,7 @@ import TableOnCellVisible from './TableOnCellVisible.js';
 import TableSetInteractive from './input/TableSetInteractive.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import SetItems from './SetItems.js';
+import ScrollMethods from './ScrollMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -120,6 +121,11 @@ class GridTable extends Scrollable {
             this.resizeControllerFlag = false;
         }
     }
+
+    get startRowIndex() {
+        var table = this.childrenMap.child;
+        return table.startRowIndex;
+    }
 }
 
 var methods = {
@@ -127,7 +133,8 @@ var methods = {
 }
 Object.assign(
     GridTable.prototype,
-    methods
+    ScrollMethods,
+    methods,
 );
 
 export default GridTable;

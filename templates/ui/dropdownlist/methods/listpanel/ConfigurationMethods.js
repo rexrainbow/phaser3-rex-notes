@@ -94,6 +94,15 @@ var methods = {
         return this;
     },
 
+    setListAlignmentSide(side) {
+        if (side === undefined) {
+            side = '';
+        }
+
+        this.listAlignSide = side;
+        return this;
+    },
+
     setListSpace(space) {
         if (space === undefined) {
             space = {};

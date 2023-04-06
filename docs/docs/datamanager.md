@@ -122,6 +122,14 @@ var value = parent.data.pop(key);
 
 Get and remove that key.
 
+#### Delet all keys
+
+Delete all data in this Data Manager and unfreeze it.
+
+```javascript
+parent.data.reset();
+```
+
 #### Events
 
 Fires `removedata` event when a key is removed.
