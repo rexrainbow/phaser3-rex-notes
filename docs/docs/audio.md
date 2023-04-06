@@ -71,7 +71,7 @@ scene.sound.decodeAudio(audioFiles);
         - An audio media-type data uri
         - An ArrayBuffer instance
 
-##### Decoded events
+#### Decoded events
 
 - Finished decoding an audio data
     ```javascript
@@ -108,6 +108,17 @@ sound.play(config);
 */
 ```
 
+### Position of the Spatial Audio listener
+
+```javascript
+scene.sound.setListenerPosition(x, y)
+```
+
+- `x`, `y` : The x/y position of the Spatial Audio listener. Default value is center of the game canvas.
+
+!!! note
+    Web audio only
+
 ### Sound instance
 
 #### Create sound instance
@@ -130,9 +141,44 @@ var music = scene.sound.add(key, config);
     detune: 0,
     seek: 0,
     loop: false,
-    delay: 0
+    delay: 0,
+
+    // source of the spatial sound
+    source: {
+        x: 0,
+        y: 0,
+        z: 0,
+        panningModel: 'equalpower',
+        distanceModel: 'inverse',
+        orientationX: 0,
+        orientationY: 0,
+        orientationZ: -1,
+        refDistance: 1,
+        maxDistance: 10000,
+        rolloffFactor: 1,
+        coneInnerAngle: 360,
+        coneOuterAngle: 0,
+        coneOuterGain: 0,
+        follow: undefined
+    }
 }
 ```
+
+- `source` : Source of the spatial sound
+    - `x`, `y` : The horizontal/vertical position of the audio in a right-hand Cartesian coordinate system.
+    - `z` : Represents the longitudinal (back and forth) position of the audio in a right-hand Cartesian coordinate system.
+    - `panningModel` : An enumerated value determining which spatialization algorithm to use to position the audio in 3D space.
+        - `'equalpower'`
+        - `'HRTF'`
+    - `orientationX`, `orientationY` : The horizontal/vertical position of the audio source's vector in a right-hand Cartesian coordinate system.
+    - `orientationZ` : Represents the longitudinal (back and forth) position of the audio source's vector in a right-hand Cartesian coordinate system.
+    - `refDistance` : A double value representing the reference distance for reducing volume as the audio source moves further from the listener. For distances greater than this the volume will be reduced based on `rolloffFactor` and `distanceModel`.
+    - `maxDistance` : The maximum distance between the audio source and the listener, after which the volume is not reduced any further.
+    - `rolloffFactor` : A double value describing how quickly the volume is reduced as the source moves away from the listener. This value is used by all distance models.
+    - `coneInnerAngle` : The angle, in degrees, of a cone inside of which there will be no volume reduction.
+    - `coneOuterAngle` : The angle, in degrees, of a cone outside of which the volume will be reduced by a constant value, defined by the `coneOuterGain` property.
+    - `coneOuterGain` : The amount of volume reduction outside the cone defined by the `coneOuterAngle` attribute. Its default value is `0`, meaning that no sound can be heard. A value between `0` and `1`.
+    - `follow` : Set this Sound object to automatically track the x/y position of this object. Can be a Phaser Game Object, Vec2 or anything that exposes public x/y properties.
 
 #### Play sound instance
 

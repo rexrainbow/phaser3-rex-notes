@@ -191,9 +191,11 @@ nav:
                 - Attractor: matterjs-attractor.md
     - Textures:
         - Textures: textures.md
-        - Canvas texture: canvas-texture.md 
-        - Canvas frame manager: canvasframemanager.md
-        - Character cache: charactercache.md
+        - Canvas texture:
+            - Canvas texture: canvas-texture.md
+            - Canvas frame manager: canvasframemanager.md
+            - Character cache: charactercache.md
+        - Dynamic texture: dynamic-texture.md        
     - Display:
         - Mask: mask.md
         - Blend mode: blendmode.md

@@ -271,3 +271,20 @@ scene.scene.transition({
     ```javascript
     scene.events.on('transitionwake', function(fromScene, duration){ });
     ```
+
+## System scene
+
+A default empty Scene that lives outside of the Scene list, 
+but can be used by plugins and managers that need access to a live Scene, 
+without being tied to one.
+
+
+```javascript
+var scene = scene.scene.get('__SYSTEM');
+```
+
+or
+
+```javascript
+var scene = scene.scene.systemScene;
+```
