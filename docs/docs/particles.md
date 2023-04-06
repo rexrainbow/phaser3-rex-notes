@@ -152,7 +152,17 @@ var particles = scene.add.particles(x, y, texture, {
 - `blendMode` : See [blend mode](blendmode.md)
 - `colorEase` : The string-based name of the Easing function to use if you have enabled Particle color interpolation via the `color` property, otherwise has no effect.
 - `deathCallback`, `deathCallbackScope`
+    ```javascript
+    function(particle) {
+
+    }
+    ```
 - `emitCallback`, `emitCallbackScope`
+    ```javascript
+    function(particle, emitter) {
+
+    }
+    ```
 - `duration` : Limit the emitter to emit particles for a maximum of `duration` ms. 
     - `0` : Forever, default behavior.
 - `follow` : A Game Object whose position is used as the particle origin.

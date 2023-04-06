@@ -166,6 +166,10 @@ texture.add(name, sourceIndex, x, y, width, height);
         ```javascript
         texture.batchDrawFrame(key, frame, x, y, alpha, tint);
         ```
+    - Draw repeat frames
+        ```javascript
+        texture.repeat(key, frame, x, y, width, height, alpha, tint, true);
+        ```
 3. End
     ```javascript
     texture.endDraw();
