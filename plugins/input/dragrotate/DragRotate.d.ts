@@ -16,7 +16,7 @@ declare namespace DragRotate {
     }
 }
 
-declare class DragRotate {
+declare class DragRotate extends Phaser.Events.EventEmitter {
     constructor(
         scene: Phaser.Scene,
         config?: DragRotate.IConfig
