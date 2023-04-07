@@ -10093,15 +10093,10 @@
       return _super.apply(this, arguments);
     }
     _createClass(NinePatch, [{
-      key: "setTexture",
-      value: function setTexture(key, baseFrameName, columns, rows) {
-        SetTexture.call(this, key, '__BASE');
-
-        // Not initialized yet
-        if (!this.columns) {
-          return this;
-        }
-        _get(_getPrototypeOf(NinePatch.prototype), "setTexture", this).call(this, key, baseFrameName, columns, rows);
+      key: "setBaseTexture",
+      value: function setBaseTexture(key, baseFrameName, columns, rows) {
+        this.setTexture(key, baseFrameName);
+        _get(_getPrototypeOf(NinePatch.prototype), "setBaseTexture", this).call(this, key, baseFrameName, columns, rows);
         return this;
       }
     }]);

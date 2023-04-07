@@ -1,18 +1,11 @@
 import Blitter from '../blitterbase/BlitterBase.js'
 import NinePatchBase from '../../../utils/ninepatch/NinePatch.js';
 import Methods from './Methods.js';
-import SetTexture from '../blitterbase/methods/SetTexture.js';
 
 class NinePatch extends NinePatchBase(Blitter, 'rexNinePatch2') {
-    setTexture(key, baseFrameName, columns, rows) {
-        SetTexture.call(this, key, '__BASE');
-
-        // Not initialized yet
-        if (!this.columns) {
-            return this;
-        }
-
-        super.setTexture(key, baseFrameName, columns, rows);
+    setBaseTexture(key, baseFrameName, columns, rows) {
+        this.setTexture(key, baseFrameName);
+        super.setBaseTexture(key, baseFrameName, columns, rows);
         return this;
     }
 }
