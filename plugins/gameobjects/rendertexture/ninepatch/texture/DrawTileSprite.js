@@ -1,7 +1,7 @@
-import MakeChildImageGameObject from '../../utils/MakeChildImageGameObject.js';
+import GetStampGameObject from '../../utils/GetStampGameObject.js';
 
 var DrawTileSprite = function (key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite')
+    var gameObject = GetStampGameObject(this, 'TileSprite')
         .setTexture(key, frame)
         .setSize(width, height);
 

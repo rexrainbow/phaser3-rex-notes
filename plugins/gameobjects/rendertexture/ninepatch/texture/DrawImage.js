@@ -1,7 +1,7 @@
-import MakeChildImageGameObject from '../../utils/MakeChildImageGameObject.js';
+import GetStampGameObject from '../../utils/GetStampGameObject.js';
 
 var DrawImage = function (key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_image', 'image')
+    var gameObject = GetStampGameObject(this,'Image')
         .setTexture(key, frame)
         .setDisplaySize(width, height);
 
