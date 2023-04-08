@@ -2,20 +2,26 @@ import GetGame from '../../../utils/system/GetGame';
 
 const GameObjectClasses = Phaser.GameObjects;
 
-var GameObjects = {};
+var GameObjects = undefined;
+
 var GetStampGameObject = function (gameObject, className) {
+    if (!GameObjects) {
+        GameObjects = {};
+
+        GetGame(gameObject).events.once('destroy', function () {
+            for (var name in GameObjects) {
+                GameObjects[name].destroy();
+            }
+            GameObjects = undefined;
+        });
+    }
+
     if (!GameObjects.hasOwnProperty(className)) {
-        var game = GetGame(gameObject);
-        var scene = game.scene.systemScene;
+        var scene = GetGame(gameObject).scene.systemScene;
         var gameObject = new GameObjectClasses[className](scene);
         gameObject.setOrigin(0);
 
         GameObjects[className] = gameObject;
-
-        scene.events.on("shutdown", function () {
-            gameObject.destroy();
-            delete GameObjects[className];
-        });
     }
 
     return GameObjects[className];

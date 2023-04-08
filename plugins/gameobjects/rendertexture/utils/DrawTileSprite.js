@@ -1,4 +1,4 @@
-import GetStampGameObject from '../../utils/GetStampGameObject.js';
+import GetStampGameObject from './GetStampGameObject.js';
 
 var DrawTileSprite = function (key, frame, x, y, width, height) {
     var gameObject = GetStampGameObject(this, 'TileSprite')

@@ -1,4 +1,5 @@
-import MakeChildImageGameObject from '../utils/MakeChildImageGameObject.js';
+import DrawImage from '../utils/DrawImage.js';
+import DrawTileSprite from '../utils/DrawTileSprite.js';
 
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
@@ -74,21 +75,22 @@ var UpdateTexture = function () {
 
     // Draw line body
     if (lineBodyFrame && (remainderWidth > 0) && (lineBodyHeight > 0)) {
-        var lineBody;
-        if (this.lineBodyExtendMode === 0) {
-            lineBody = MakeChildImageGameObject(this, '_image', 'image');
-            lineBody
-                .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
-                .setDisplaySize(remainderWidth, lineBodyHeight);
-        } else {
-            lineBody = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
-            lineBody
-                .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
-                .setSize(remainderWidth, lineBodyHeight);
-        }
         offsetX = (lineStartFrame) ? lineStartFrame.cutWidth : 0;
-        offsetY = (this.height - lineBody.displayHeight) / 2;
-        this.draw(lineBody, offsetX, offsetY);
+        offsetY = (this.height - lineBodyHeight) / 2;
+
+        if (this.lineBodyExtendMode === 0) {
+            DrawImage.call(this,
+                this.lineBodyTexture, this.lineBodyFrameName,
+                offsetX, offsetY,
+                remainderWidth, lineBodyHeight
+            );
+        } else {
+            DrawTileSprite.call(this,
+                this.lineBodyTexture, this.lineBodyFrameName,
+                offsetX, offsetY,
+                remainderWidth, lineBodyHeight
+            );
+        }
     }
 
     var originX = 1 - ((width - lineStartOffset) / width);

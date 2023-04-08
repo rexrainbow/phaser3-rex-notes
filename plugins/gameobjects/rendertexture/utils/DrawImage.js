@@ -1,7 +1,7 @@
-import GetStampGameObject from '../../utils/GetStampGameObject.js';
+import GetStampGameObject from './GetStampGameObject.js';
 
 var DrawImage = function (key, frame, x, y, width, height) {
-    var gameObject = GetStampGameObject(this,'Image')
+    var gameObject = GetStampGameObject(this, 'Image')
         .setTexture(key, frame)
         .setDisplaySize(width, height);
 
