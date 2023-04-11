@@ -112,7 +112,8 @@ texture.stamp(key, frame, x, y, {
     originX: 0.5,
     originY: 0.5,
     blendMode: 0,
-    erase: false
+    erase: false,
+    skipBatch: false
 })
 ```
 
@@ -166,7 +167,14 @@ texture.add(name, sourceIndex, x, y, width, height);
         ```javascript
         texture.batchDrawFrame(key, frame, x, y, alpha, tint);
         ```
-    - Draw repeat frames
+    - Draw image
+        ```javascript
+        texture.stamp(key, frame, x, y, {
+            // ...
+            skipBatch: true
+        })
+        ```
+    - Draw repeat images
         ```javascript
         texture.repeat(key, frame, x, y, width, height, alpha, tint, true);
         ```

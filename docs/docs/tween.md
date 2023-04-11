@@ -65,31 +65,31 @@ var tween = scene.tweens.add({
     delay: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
 
     // tween duration
-    duration: 1000,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
+    duration: 1000,
     ease: 'Linear',
     easeParams: null,
 
     onActive: function () {},
-    onUpdate: function () {},
+    onUpdate: function (tween, target, key, current, previous, param) {},
     onUpdateScope: callbackScope,
     onUpdateParams: [],
 
     // delay between tween and yoyo
-    hold: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
+    hold: 0,
     yoyo: false,  // true to tween backward
     flipX: false,
     flipY: false,
-    onYoyo: function () {},
+    onYoyo: function (tween, target, key, current, previous, param) {},
     onYoyoScope: callbackScope,
     onYoyoParams: [],
 
     // repeat count (-1: infinite)
-    repeat: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
-    onRepeat: function () {},
+    repeat: 0,
+    onRepeat: function (tween, target, key, current, previous, param) {},
     onRepeatScope: callbackScope,
     onRepeatParams: [],
     // delay to next pass
-    repeatDelay: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
+    repeatDelay: 0,
 
     // loop count (-1: infinite)
     loop: 0,
@@ -105,6 +105,10 @@ var tween = scene.tweens.add({
     onCompleteScope: callbackScope,
     onCompleteParams: [],
     // timming/callback of each state
+
+    onStop: function () {}, 
+    onPause: function () {}, 
+    onResume: function () {}, 
 
     // properties:
     x: '+=600',        // start from current value
@@ -146,20 +150,17 @@ var tween = scene.tweens.add({
         ....
     },
 
-    offset: null,
-    useFrames: false
+    persist: false,
+
+    interpolation: null,
+    interpolationData: null,
+
 });
 ```
 
 - `targets` : The targets the tween is updating.
 - `delay` : The time the tween will wait before it first starts
     - A number, for all targets
-    - A callback function : 
-        ```javascript
-        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
-            return delay;
-        }
-        ```
     - A callback function, built via stagger builder :
         - From `0` to `endValue` : 
             - `scene.tweens.stagger(endValue)`
@@ -190,43 +191,11 @@ var tween = scene.tweens.add({
             - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], from: 'center'})`
             - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], from: 'center', ease: 'cubic.inout'})`
 - `duration` : The duration of the tween
-    - A number, for all targets
-    - A callback function : 
-        ```javascript
-        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
-            return duration;
-        }
-        ```
-    - A callback function, built via stagger builder
 - `ease` : The ease function used by the tween
 - `easeParams` : The parameters to go with the ease function (if any)
 - `hold` : The time the tween will pause before running a yoyo
-    - A number, for all targets
-    - A callback function : 
-        ```javascript
-        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
-            return hold;
-        }
-        ```
-    - A callback function, built via stagger builder
 - `repeat` : The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)
-    - A number, for all targets
-    - A callback function : 
-        ```javascript
-        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
-            return duration;
-        }
-        ```
-    - A callback function, built via stagger builder
 - `repeatDelay` : The time the tween will pause for before starting a repeat. The tween holds in the start state.
-    - A number, for all targets
-    - A callback function : 
-        ```javascript
-        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
-            return duration;
-        }
-        ```
-    - A callback function, built via stagger builder
 - `yoyo` : boolean - Does the tween reverse itself (yoyo) when it reaches the end?
 - `flipX` : flip X the GameObject on tween end
 - `flipY` : flip Y the GameObject on tween end
@@ -235,7 +204,6 @@ var tween = scene.tweens.add({
 - `loop` : `-1` for an infinite loop
 - `loopDelay`
 - `paused` : Does the tween start in a paused state, or playing?
-- `useFrames` : Use frames or milliseconds?
 - `props` : The properties being tweened by the tween
 - `onActive` : Tween becomes active within the Tween Manager.
     ```javascript
@@ -247,28 +215,43 @@ var tween = scene.tweens.add({
     ```
 - `onUpdate` : Callback which fired when tween task updated
     ```javascript
-    function(tween, target) { }
+    function(tween, target, key, current, previous, param) { }
     ```
 - `onComplete` : Tween completes or is stopped.
     ```javascript
     function(tween, targets) { }
     ```
-- `onYoyo` : A tween property yoyos.
+- `onYoyo` : A function to call each time the tween yoyos. Called once per property per target.
     ```javascript
-    function(tween, key, target) { }
+    function(tween, target, key, current, previous, param) { }
     ```
-- `onLoop` : A tween loops, after any loop delay expires.
-    ```javascript
-    function(tween, targets) { }
-    ```
-- `onRepeat` : A tween property repeats, after any repeat delay expires.
-    ```javascript
-    function(tween, target) { }
-    ```
-- `onStop` : A tween property stopped.
+- `onLoop` : A function to call each time the tween loops.
     ```javascript
     function(tween, targets) { }
     ```
+- `onRepeat` : A function to call each time the tween repeats. Called once per property per target.
+    ```javascript
+    function(tween, target, key, current, previous, param) { }
+    ```
+- `onStop` : A function to call when the tween is stopped.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onPause` : A function to call when the tween is paused.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onResume` : A function to call when the tween is resumed after being paused.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `persist` : Will the Tween be automatically destroyed on completion, or retained for future playback?
+- `interpolation` : The interpolation function to use if the `value` given is an array of numbers.
+
+
+!!! note
+    Tween task will not manipulate any property that begins with an **underscore**.
+
 
 #### Ease equations
 
@@ -345,23 +328,49 @@ tween.play();
 tween.restart();
 ```
 
+### Seek
+
+```javascript
+tween.seek(amount);
+// tween.seek(amount, delta, emit);
+```
+
+- `amount` : The number of milliseconds to seek into the Tween from the beginning.
+- `delta` : The size of each step when seeking through the Tween. Default value is `16.6` (1000/60)
+- `emit` : While seeking, should the Tween emit any of its events or callbacks? The default is `false`.
+
 ### Remove task
+
+Removes this Tween from the TweenManager
 
 ```javascript
 tween.remove();
 ```
 
-### Get tweens
+### Destroy task
 
-Returns an array of all Tweens or Timelines in the Tween Manager which affect the given target or array of targets.
+Free tween task from memory
 
 ```javascript
-var tweens = scene.tweens.getTweensOf(target);
-// var tweens = scene.tweens.getTweensOf(target, includePending);
+tween.destroy();
 ```
 
-- `tweens` : Array of tweens, or timelines.
-- `includePending` : Set `true` to search pending tweens.
+!!! note
+    A Tween that has been destroyed cannot ever be played or used again.
+
+### Get tweens
+
+- Tweens of a target
+    ```javascript
+    var tweens = scene.tweens.getTweensOf(target);
+    // var tweens = scene.tweens.getTweensOf(target, includePending);
+    ```
+    - `tweens` : Array of tweens, or timelines.
+    - `includePending` : Set `true` to search pending tweens.
+- All tweens
+    ```javascript
+    var tweens = scene.tweens.getTweens();
+    ```
 
 ### Time-scale
 
@@ -441,6 +450,38 @@ scene.tweens.timeScale = timescale;
     }, scope);
     ```
 
+### Set callbacks
+
+```javascript
+tween.setCallback(type, callback, param);
+```
+
+- `type` : 
+    - `'onActive'` : When the Tween is first created it moves to an 'active' state when added to the Tween Manager. 'Active' does not mean 'playing'.
+    - `'onStart'` : When the Tween starts playing after a delayed or paused state. This will happen at the same time as `onActive` if the tween has no delay and isn't paused.
+    - `'onLoop'` : When a Tween loops, if it has been set to do so. This happens _after_ the `loopDelay` expires, if set.
+    - `'onComplete'` : When the Tween finishes playback fully. Never invoked if the Tween is set to repeat infinitely.
+    - `'onStop'` : Invoked only if the `Tween.stop` method is called.
+    - `'onPause'` : Invoked only if the `Tween.pause` method is called. Not invoked if the Tween Manager is paused.
+    - `'onResume'` : Invoked only if the `Tween.resume` method is called. Not invoked if the Tween Manager is resumed.
+    - `'onYoyo'` : When a TweenData starts a yoyo. This happens _after_ the `hold` delay expires, if set.
+    - `'onRepeat'` : When a TweenData repeats playback. This happens _after_ the `repeatDelay` expires, if set.
+    - `'onUpdate'` : When a TweenData updates a property on a source target during playback.
+- `callback` :
+    - `'onRepeat'`, `'onUpdate'`, `'onYoyo'`
+        ```javascript
+        function(tween, targets, key, current, previous, param) {
+            
+        }
+        ```
+    - `'onActive'`, `'onLoop'`, `'onPause'`, `'onResume'`, `'onComplete'`, `'onStart'`, `'onStop'`, 
+        ```javascript
+        function(tween, targets, param) {
+            
+        }
+        ```
+
+
 ### State
 
 - Is playing
@@ -501,31 +542,27 @@ var tween = scene.tweens.add({
 graph TB
 
 Start((Start)) --> CallbackOnStart
-CallbackOnStart>"Callback: onStart"] --> ActiveDelay["delay"]
-ActiveDelay --> DurationForward["Tween forward<br>Callback: onUpdate<br>(duration)"]
+CallbackOnStart>"Callback: onStart"] --> ActiveDelay(("delay"))
+ActiveDelay --> DurationForward
 
-subgraph A pass
-
-DurationForward --> Hold["hold"]
-Hold --> IsYoyo{Is yoyo}
+DurationForward(("Tween forward<br>Callback: onUpdate<br>(duration)")) --> Hold["hold"]
+Hold((hold)) --> IsYoyo{Is yoyo}
 IsYoyo --> |Yes| CallbackOnYoyo>"Callback: onYoyo"]
-CallbackOnYoyo --> DurationBackward["Tween backword<br>Callback: onUpdate<br>(duration)"]
+CallbackOnYoyo --> DurationBackward(("Tween backword<br>Callback: onUpdate<br>(duration)"))
 DurationBackward --> IsRepeat{"Repeat count > 0"}
 IsYoyo --> |No| IsRepeat
 IsRepeat --> |Yes| CallbackOnRepeat>"Callback: onRepeat"]
-CallbackOnRepeat --> RepeatDelay["repeatDelay"]
+CallbackOnRepeat --> RepeatDelay(("repeatDelay"))
 RepeatDelay --> DurationForward
-
-end
 
 IsRepeat --> |No| IsLoop{"Loop count > 0"}
 
 IsLoop --> |Yes| CallbackOnLoop
-CallbackOnLoop>"Callback: onLoop"] --> LoopDelay["loopDelay"]
+CallbackOnLoop>"Callback: onLoop"] --> LoopDelay(("loopDelay"))
 LoopDelay --> DurationForward
 
 IsLoop --> |No| CompleteDelay
-CompleteDelay["completeDelay"] --> CallbackOnComplete>"Callback: onComplete"]
+CompleteDelay(("completeDelay")) --> CallbackOnComplete>"Callback: onComplete"]
 CallbackOnComplete --> End((End))
 ```
 
