@@ -6,10 +6,10 @@ var ShowCells = function () {
     }
     var table = this.table;
 
-    this.startRowIndex = table.heightToRowIndex(-this.tableOY, 2);
+    this.startRowIndex = Math.max(table.heightToRowIndex(-this.tableOY, 2), 0);
     var rowIndex = this.startRowIndex;
 
-    var startColumnIndex = table.widthToColIndex(-this.tableOX);
+    var startColumnIndex = Math.max(table.widthToColIndex(-this.tableOX), 0);
     var columnIndex = startColumnIndex;
 
     var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
