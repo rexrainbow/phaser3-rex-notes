@@ -20,9 +20,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var items = CreateItems(100);
+        var items = CreateItems(60);
 
-        var gridTable = this.rexUI.add.gridTable({
+        var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400, y: 300,
             width: 300, height: 420,
 
@@ -33,16 +33,11 @@ class Demo extends Phaser.Scene {
                 color: COLOR_PRIMARY
             }),
 
-            table: {
-                cellHeight: 80,
-
-                columns: 2,
-
+            panel: {
+                child: CreateGrid(this, items, 2),
                 mask: {
                     padding: 2,
                 },
-
-                reuseCellContainer: true,
             },
 
             slider: {
@@ -57,57 +52,29 @@ class Demo extends Phaser.Scene {
                 }),
             },
 
-            // mouseWheelScroller: {
-            //     focus: false,
-            //     speed: 0.1
-            // },
-
             space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
 
-                table: 10,
-            },
-
-            createCellContainerCallback: function (cell, cellContainer) {
-                var scene = cell.scene,
-                    width = cell.width,
-                    height = cell.height,
-                    item = cell.item,
-                    index = cell.index;
-                if (cellContainer === null) {
-                    cellContainer = CreateCellContainer(scene)
-                }
-
-                // Set properties from item value
-                cellContainer.setMinSize(width, height); // Size might changed in this demo
-
-                var icon = cellContainer.getElement('icon');
-                if (item.textureKey) {
-                    icon.setTexture(item.textureKey).setTint(item.color)
-                }
-                cellContainer.setChildVisible(icon, !!item.textureKey);
-
-                var idText = cellContainer.getElement('id');
-                idText.setText(item.id);
-
-                return cellContainer;
-            },
-            items: items
+                panel: 10,
+            }
         })
             .layout()
 
-
-        gridTable
-            .on(`cell.pressstart`, function (cellContainer, cellIndex, pointer) {
-                var item = items[cellIndex];
-                if (!item.textureKey) {
+        scrollablePanel.setChildrenInteractive({
+            targets: [
+                scrollablePanel.getByName('table', true),
+            ]
+        })
+            .on('child.pressstart', function (child) {
+                var item = child.getData('item');
+                if (!item || !item.textureKey) {
                     return;
                 }
 
-                var icon = cellContainer.getElement('icon');
+                var icon = child.getElement('icon');
                 if (this.rexUI.isInTouching(icon)) {
                     // Create a new game object for dragging
                     var dragObject = this.add.image(icon.x, icon.y, '');
@@ -116,16 +83,45 @@ class Demo extends Phaser.Scene {
 
                     // icon has be removed, set it to invisible
                     item.textureKey = undefined;
-                    cellContainer.setChildVisible(icon, false);
+                    child.setChildVisible(icon, false);
                 }
-            }, this);
+            }, this)
     }
 
     update() { }
 }
 
-var CreateCellContainer = function (scene) {
-    return scene.rexUI.add.overlapSizer()
+var CreateGrid = function (scene, items, col) {
+    if (col === undefined) {
+        col = 1;
+    }
+
+    return scene.rexUI.add.gridSizer({
+        column: col,
+        row: Math.ceil(items.length / col),
+
+        columnProportions: 1,
+
+        createCellContainerCallback: function (scene, x, y, config, gridSizer) {
+            config.expand = true;
+
+            var item = items[(y * col) + x];
+            var cellContainer = CreateCellContainer(scene).setData('item', item);
+            if (item) {
+                cellContainer.getElement('icon').setTexture(item.textureKey).setTint(item.color);
+                cellContainer.getElement('id').setText(item.id);
+            }
+            return cellContainer;
+        },
+
+        name: 'table'
+    })
+}
+
+var CreateCellContainer = function (scene, item) {
+    return scene.rexUI.add.overlapSizer({
+        height: 80
+    })
         .addBackground(scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK))
         .add(
             scene.add.image(0, 0, ''),
