@@ -1,6 +1,6 @@
 import SkewImage from '../skewimage/SkewImage.js';
+import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 
-const RT = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -14,13 +14,12 @@ class SkewRenderTexture extends SkewImage {
             height = GetValue(config, 'height', 32);
         }
 
-        // render-texture -> skew-image
-        var rt = (new RT(scene, x, y, width, height))
-            .setOrigin(0.5);
+        // dynamic-texture -> quad-image
+        var texture = CreateDynamicTexture(scene, width, height);
 
-        super(scene, x, y, rt.texture.key, null);
+        super(scene, x, y, texture, null);
         this.type = 'rexSkewRenderTexture';
-        this.rt = rt;
+        this.rt = this.texture;
     }
 
     destroy(fromScene) {

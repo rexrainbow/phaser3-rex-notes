@@ -1,7 +1,7 @@
 import Image from '../image/Image.js';
+import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
 import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
 
-const RT = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,13 +15,12 @@ class RenderTexture extends Image {
             height = GetValue(config, 'height', 32);
         }
 
-        // render-texture -> perspective-image
-        var rt = (new RT(scene, x, y, width, height))
-            .setOrigin(0.5);
+        // dynamic-texture -> quad-image
+        var texture = CreateDynamicTexture(scene, width, height);
 
-        super(scene, x, y, rt.texture.key, null, config);
+        super(scene, x, y, texture, null, config);
         this.type = 'rexPerspectiveRenderTexture';
-        this.rt = rt;
+        this.rt = this.texture;
     }
 
     destroy(fromScene) {

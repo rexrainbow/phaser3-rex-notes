@@ -92,7 +92,12 @@ var NinePatchBase = function (GOClass, type) {
                 return this;
             }
 
-            super.resize(width, height);
+            if (super.resize) {
+                super.resize(width, height);
+            } else {
+                // Use setSize method for alternative 
+                super.setSize(width, height);
+            }
             this.updateTexture();
 
             return this;

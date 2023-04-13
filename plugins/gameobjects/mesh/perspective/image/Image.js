@@ -81,7 +81,6 @@ class Image extends Mesh {
 
             widthSegments: Math.ceil(frameWidth / this.gridWidth),
             heightSegments: Math.ceil(frameHeight / this.gridHeight),
-            flipY: this.frame.source.isRenderTexture
         });
 
         // Recover vertices transform

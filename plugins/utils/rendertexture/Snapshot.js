@@ -1,8 +1,11 @@
 import GetBoundsOfGameObjects from '../bounds/GetBoundsOfGameObjects.js';
 import Clone from '../object/Clone.js';
 import SortGameObjectsByDepth from '../system/SortGameObjectsByDepth.js';
+import IsGameObject from '../system/IsGameObject.js';
 
 var GetValue = Phaser.Utils.Objects.GetValue;
+var DynamicTexture = Phaser.Textures.DynamicTexture;
+var UUID = Phaser.Utils.String.UUID;
 
 var Snapshot = function (config) {
     if (!config) {
@@ -10,7 +13,7 @@ var Snapshot = function (config) {
     }
 
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
     var x = GetValue(config, 'x', undefined);
     var y = GetValue(config, 'y', undefined);
     var width = GetValue(config, 'width', undefined);
@@ -48,18 +51,30 @@ var Snapshot = function (config) {
     width += (padding * 2);
     height += (padding * 2);
 
-    var tempRT = !renderTexture;
-    // Configurate render texture
-    if (tempRT) {
-        var scene = gameObjects[0].scene;
+    var scene = gameObjects[0].scene;
+
+    // Snapshot on dynamicTexture directly
+    if (saveTexture && !renderTexture) {
+        renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
+    }
+
+    // Return a renderTexture
+    if (!renderTexture) {
         renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
 
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+        renderTexture.setPosition(x, y);
+    }
+
     if ((renderTexture.width !== width) || (renderTexture.height !== height)) {
         renderTexture.setSize(width, height);
     }
-    renderTexture.setOrigin(originX, originY);
+
+    if (renderTexture.setOrigin) {
+        renderTexture.setOrigin(originX, originY);
+    }
+
     renderTexture.camera.setScroll(scrollX, scrollY);
 
     // Draw gameObjects
@@ -69,11 +84,22 @@ var Snapshot = function (config) {
     // Save render result to texture    
     var saveTexture = config.saveTexture;
     if (saveTexture) {
-        renderTexture.saveTexture(saveTexture);
-    }
-    // Destroy render texture if tempRT and saveTexture
-    if (tempRT && saveTexture) {
-        renderTexture.destroy();
+        if (IsGameObject(renderTexture)) {
+            renderTexture.saveTexture(saveTexture);
+        } else {
+            var dynamicTexture = renderTexture;
+            var textureManager = dynamicTexture.manager;
+            if (textureManager.exists(dynamicTexture.key)) {
+                // Rename texture
+                textureManager.renameTexture(dynamicTexture.key, key);
+            } else {
+                // Add texture to texture manager
+                dynamicTexture.key = key;
+                textureManager.list[key] = dynamicTexture;
+                textureManager.emit('addtexture', key, dynamicTexture);
+                textureManager.emit(`addtexture-${key}`, dynamicTexture);
+            }
+        }
     }
 
     return renderTexture;

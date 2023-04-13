@@ -57,6 +57,8 @@ var UpdateTexture = function () {
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0, offsetY = 0;
     var imageType;
+
+    this._beginDraw();
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
         row = this.rows.data[j];
         rowHeight = (row.stretch === 0) ? (row.height * fixedPartScaleY) : (proportionHeight * row.stretch);
@@ -98,6 +100,7 @@ var UpdateTexture = function () {
 
         offsetY += rowHeight;
     }
+    this._endDraw();
 }
 
 export default UpdateTexture;

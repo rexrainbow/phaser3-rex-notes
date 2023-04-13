@@ -233,7 +233,7 @@ ninePatch.resize(width, height);
 
 Will [update texture](ninepatch.md#update-texture)
 
-### Set texture of source image
+### Set base texture of source image
 
 ```javascript
 ninePatch.setBaseTexture(key, baseFrame, columns, rows);
