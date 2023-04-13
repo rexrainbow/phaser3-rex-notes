@@ -62,6 +62,10 @@ Execute callback when time-out, built-in object of phaser.
     scene.time.addEvent(timer);
     ```
 
+!!! note
+    Throw error message if `delay : 0` with (`repeat > 0` or `loop: true`)
+
+
 ### Pause/resume
 
 - Pause timer

@@ -240,12 +240,14 @@ class TextTyping extends ComponentBase {
         }
 
         this.timer = this.scene.time.addEvent({
-            delay: 0,
+            delay: 0.0001,
             startAt: startAt,
             loop: true,
             callback: this.onTyping,
             callbackScope: this
         });
+        // Note: Throw error message if delay is 0 with repeat/loop
+
         return this;
     }
 
