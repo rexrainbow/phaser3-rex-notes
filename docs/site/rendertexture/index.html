@@ -3818,6 +3818,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15_2" type="checkbox" id="__nav_4_15_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_15_2">
+          Canvas texture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Canvas texture" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_15_2">
+          <span class="md-nav__icon md-icon"></span>
+          Canvas texture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../canvas-texture/" class="md-nav__link">
         Canvas texture
@@ -3849,6 +3875,27 @@
     <li class="md-nav__item">
       <a href="../charactercache/" class="md-nav__link">
         Character cache
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-texture/" class="md-nav__link">
+        Dynamic texture
       </a>
     </li>
   
@@ -9272,7 +9319,7 @@
   <h1>Render texture</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Paste textures, built-in game object of phaser.</p>
+<p>Paste game objects or textures on <a href="../dynamic-texture/">dynaimc texture</a>, built-in game object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
@@ -9282,13 +9329,6 @@
 <li>Create an empty render texture object.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Create render texture and load texture.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>key</code> : The texture key to make the RenderTexture from.</li>
-<li><code>frame</code> : The frame to make the RenderTexture from.</li>
-</ul>
-</li>
 </ul>
 <p>Add render texture from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">({</span>
@@ -9296,8 +9336,6 @@
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="c1">// key: undefined,</span>
-    <span class="c1">// frame: undefined,</span>
 
     <span class="c1">// angle: 0,</span>
     <span class="c1">// alpha: 1</span>

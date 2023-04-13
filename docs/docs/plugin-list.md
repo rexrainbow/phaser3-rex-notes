@@ -1,7 +1,7 @@
 ## List of my plugins
 
 !!! note "Version of phaser3"
-    Please upgrade your phaser3 to version >= **3.55.2**.
+    Please upgrade your phaser3 to version >= **3.60.0**.
 
 1. [Achievements](achievements.md): Achievements in a csv table.
 1. [Alpha mask image](alphamaskimage.md): Load a texture, then apply an alpha mask from another texture.

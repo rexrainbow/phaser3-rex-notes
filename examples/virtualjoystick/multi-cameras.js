@@ -1,4 +1,4 @@
-import '../../../phaser/src/phaser.js';
+import 'phaser/src/phaser.js';
 import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {

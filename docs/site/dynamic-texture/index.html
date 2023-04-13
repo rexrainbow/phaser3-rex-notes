@@ -10,14 +10,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/dynamic-texture/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Timer - Notes of Phaser 3</title>
+        <title>Dynamic texture - Notes of Phaser 3</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Timer
+              Dynamic texture
             
           </span>
         </div>
@@ -637,12 +637,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -3619,12 +3621,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15" type="checkbox" id="__nav_4_15" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15" type="checkbox" id="__nav_4_15" checked>
       
       
       
@@ -3734,11 +3738,158 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../dynamic-texture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Dynamic texture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Dynamic texture
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-dynamic-texture" class="md-nav__link">
+    Create dynamic texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-size" class="md-nav__link">
+    Set size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill-color" class="md-nav__link">
+    Fill color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-game-object" class="md-nav__link">
+    Draw game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase-game-object" class="md-nav__link">
+    Erase game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-frame" class="md-nav__link">
+    Draw frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-repeat-frames" class="md-nav__link">
+    Draw repeat frames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-frame_1" class="md-nav__link">
+    Draw frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-draw" class="md-nav__link">
+    Batch draw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+    <nav class="md-nav" aria-label="Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#snapshot-area" class="md-nav__link">
+    Snapshot area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-color-of-a-pixel" class="md-nav__link">
+    Get color of a pixel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -7151,14 +7302,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
       
       
       
@@ -7240,96 +7389,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Timer
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../timer/" class="md-nav__link">
         Timer
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#start-timer" class="md-nav__link">
-    Start timer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pauseresume" class="md-nav__link">
-    Pause/resume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stop" class="md-nav__link">
-    Stop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" class="md-nav__link">
-    Time scale
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -9120,37 +9184,99 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#start-timer" class="md-nav__link">
-    Start timer
+  <a href="#create-dynamic-texture" class="md-nav__link">
+    Create dynamic texture
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pauseresume" class="md-nav__link">
-    Pause/resume
+  <a href="#set-size" class="md-nav__link">
+    Set size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#stop" class="md-nav__link">
-    Stop
+  <a href="#fill-color" class="md-nav__link">
+    Fill color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#time-scale" class="md-nav__link">
-    Time scale
+  <a href="#clear" class="md-nav__link">
+    Clear
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
+  <a href="#draw-game-object" class="md-nav__link">
+    Draw game object
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erase-game-object" class="md-nav__link">
+    Erase game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-frame" class="md-nav__link">
+    Draw frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-repeat-frames" class="md-nav__link">
+    Draw repeat frames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-frame_1" class="md-nav__link">
+    Draw frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-draw" class="md-nav__link">
+    Batch draw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+    <nav class="md-nav" aria-label="Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#snapshot-area" class="md-nav__link">
+    Snapshot area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-color-of-a-pixel" class="md-nav__link">
+    Get color of a pixel
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -9171,125 +9297,208 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/timer.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/dynamic-texture.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-  <h1>Timer</h1>
+  <h1>Dynamic texture</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Execute callback when time-out, built-in object of phaser.</p>
+<p>Canvas Dynamic Texture stored in <a href="../textures/">texture cache</a>, built-in object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="start-timer">Start timer<a class="headerlink" href="#start-timer" title="Permanent link">&para;</a></h3>
+<h3 id="create-dynamic-texture">Create dynamic texture<a class="headerlink" href="#create-dynamic-texture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addDynamicTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+<p>Disable <code>texture.isSpriteTexture</code> if this texture is not a base texture for Sprite Game Objects.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setIsSpriteTexture</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="c1">// texture.isSpriteTexture = false;</span>
+</code></pre></div>
+<h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="fill-color">Fill color<a class="headerlink" href="#fill-color" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
+<span class="c1">// texture.fill(rgb, alpha, x, y, width, height);</span>
+</code></pre></div>
 <ul>
-<li>Looped timer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>                <span class="c1">// ms</span>
-    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="c1">//args: [],</span>
-    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
-    <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-</code></pre></div></li>
-<li>Repeat timer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>                <span class="c1">// ms</span>
-    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="c1">//args: [],</span>
-    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">4</span>
-<span class="p">});</span>
-</code></pre></div></li>
-<li>Oneshot timer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>  <span class="c1">// delay in ms</span>
-</code></pre></div></li>
-<li>All properties of timer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>                <span class="c1">// ms</span>
-    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="nx">args</span><span class="o">:</span> <span class="p">[],</span>
-    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
-    <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">startAt</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">timeScale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span>
-<span class="p">});</span>
-</code></pre></div></li>
-<li>Reuse timer
-    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">reset</span><span class="p">({</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>                <span class="c1">// ms</span>
-    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="nx">args</span><span class="o">:</span> <span class="p">[],</span>
-    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
-    <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">startAt</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">timeScale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span>
+<li><code>rgb</code> : The number color to fill this Dynamic Texture with.</li>
+<li><code>alpha</code> : The alpha value used by the fill. Default value is <code>1</code>.</li>
+<li><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code> : The area of the fill rectangle. Default behavior is filling whole size.</li>
+</ul>
+<h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="draw-game-object">Draw game object<a class="headerlink" href="#draw-game-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">entries</span><span class="p">);</span>
+<span class="c1">// texture.draw(entries,x, y);</span>
+<span class="c1">// texture.draw(entries, x, y, alpha, tint);</span>
+</code></pre></div>
+<ul>
+<li><code>entries</code> : <ul>
+<li>Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.</li>
+<li>Tilemap Layers.</li>
+<li>A Group. The contents of which will be iterated and drawn in turn.</li>
+<li>A Container. The contents of which will be iterated fully, and drawn in turn.</li>
+<li>A Scene Display List. Pass in <code>Scene.children</code> to draw the whole list.</li>
+<li>Another Dynamic Texture, or a Render Texture.</li>
+<li>A Texture Frame instance.</li>
+<li>A string. This is used to look-up the texture from the Texture Manager.</li>
+</ul>
+</li>
+<li><code>x</code>, <code>y</code> : The x/y position to draw the Frame at, or the offset applied to the object.<ul>
+<li>If the object is a Group, Container or Display List, the coordinates are <em>added</em> to the positions of the children.</li>
+<li>For all other types of object, the coordinates are exact.</li>
+</ul>
+</li>
+<li><code>alpha</code>, <code>tint</code> : Only used by Texture Frames.<ul>
+<li>Game Objects use their own alpha and tint values when being drawn.</li>
+</ul>
+</li>
+</ul>
+<h3 id="erase-game-object">Erase game object<a class="headerlink" href="#erase-game-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">entries</span><span class="p">);</span>
+<span class="c1">// texture.erase(entries, x, y);</span>
+</code></pre></div>
+<ul>
+<li><code>entries</code> : <ul>
+<li>Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.</li>
+<li>Tilemap Layers.</li>
+<li>A Group. The contents of which will be iterated and drawn in turn.</li>
+<li>A Container. The contents of which will be iterated fully, and drawn in turn.</li>
+<li>A Scene Display List. Pass in <code>Scene.children</code> to draw the whole list.</li>
+<li>Another Dynamic Texture, or a Render Texture.</li>
+<li>A Texture Frame instance.</li>
+<li>A string. This is used to look-up the texture from the Texture Manager.</li>
+</ul>
+</li>
+<li><code>x</code>, <code>y</code> : The x/y position to draw the Frame at, or the offset applied to the object.<ul>
+<li>If the object is a Group, Container or Display List, the coordinates are <em>added</em> to the positions of the children.</li>
+<li>For all other types of object, the coordinates are exact.</li>
+</ul>
+</li>
+</ul>
+<h3 id="draw-frame">Draw frame<a class="headerlink" href="#draw-frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// texture.drawFrame(key, frame, x, y, alpha, tint);</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> : Top-left position</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">tint</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+    <span class="nx">angle</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">scale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">scaleX</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">scaleY</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">originX</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="nx">originY</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="nx">blendMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">erase</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">skipBatch</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">})</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="draw-repeat-frames">Draw repeat frames<a class="headerlink" href="#draw-repeat-frames" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Repeat frames full of size
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Repeat in an area
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// texture.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="pauseresume">Pause/resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
+<h3 id="draw-frame_1">Draw frame<a class="headerlink" href="#draw-frame_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">sourceIndex</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
 <ul>
-<li>Pause timer
-    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<li><code>name</code> : The name of this Frame. The name is unique within the Texture.</li>
+<li><code>sourceIndex</code> : The index of the TextureSource that this Frame is a part of.</li>
+<li><code>x</code> : The x coordinate of the top-left of this Frame.</li>
+<li><code>y</code> : The y coordinate of the top-left of this Frame.</li>
+<li><code>width</code> : The width of this Frame.</li>
+<li><code>height</code> : The height of this Frame.</li>
+</ul>
+<h3 id="batch-draw">Batch draw<a class="headerlink" href="#batch-draw" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Begin
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">beginDraw</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Resume timer
-    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<li>Draw<ul>
+<li>Draw game object
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">batchDraw</span><span class="p">(</span><span class="nx">entries</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">tint</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>entries</code> : <ul>
+<li>Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.</li>
+<li>Tilemap Layers.</li>
+<li>A Group. The contents of which will be iterated and drawn in turn.</li>
+<li>A Container. The contents of which will be iterated fully, and drawn in turn.</li>
+<li>A Scene Display List. Pass in <code>Scene.children</code> to draw the whole list.</li>
+<li>Another Dynamic Texture, or a Render Texture.</li>
+<li>A Texture Frame instance.</li>
+<li>A string. This is used to look-up the texture from the Texture Manager.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Draw frame
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">batchDrawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">tint</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Is paused
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span>
+<li>Draw image
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">skipBatch</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Draw repeat images
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">tint</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+</li>
+<li>End
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">endDraw</span><span class="p">();</span>
+</code></pre></div></li>
+</ol>
+<h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
+<h4 id="snapshot-area">Snapshot area<a class="headerlink" href="#snapshot-area" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// texture.snapshot(callback, type, encoderOptions);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">snapshotArea</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">encoderOptions</span><span class="p">);</span>
+</code></pre></div>
 <ul>
-<li>Stop a running timer
-    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Remove from timeline's all internal lists, for timer re-using
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">removeEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
-</code></pre></div></li>
+<li><code>callback</code> : The Function to invoke after the snapshot image is created.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">imageElement</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>imageElement</code> : HTMLImageElement.</li>
 </ul>
-<h3 id="time-scale">Time scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">2</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-</code></pre></div></li>
+</li>
+<li><code>type</code> : The format of the image to create, usually <code>'image/png'</code> or <code>'image/jpeg'</code>. Default value is <code>'image/png'</code>.</li>
+<li><code>encoderOptions</code> : The image quality, between <code>0</code> and <code>1</code>. Used for image formats with lossy compression, such as <code>'image/jpeg'</code>. Default value is <code>0.92</code>.</li>
+<li><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code> : Snapshot area.</li>
 </ul>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<h4 id="get-color-of-a-pixel">Get color of a pixel<a class="headerlink" href="#get-color-of-a-pixel" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">snapshotPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</code></pre></div>
 <ul>
-<li>Get elapsed time
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsed</span><span class="p">();</span>   <span class="c1">// ms</span>
-<span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsedSeconds</span><span class="p">();</span> <span class="c1">// sec</span>
-<span class="c1">// var elapsed = timer.elapsed;  // ms</span>
-</code></pre></div></li>
-<li>Get remaining time
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">remaining</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRemaining</span><span class="p">();</span>   <span class="c1">// ms</span>
-<span class="kd">var</span> <span class="nx">remaining</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRemainingSeconds</span><span class="p">();</span> <span class="c1">// sec</span>
-<span class="c1">// var remaining = timer.getOverallRemaining();   // ms</span>
-<span class="c1">// var remaining = timer.getOverallRemainingSeconds(); // sec</span>
-</code></pre></div></li>
-<li>Get repeat count
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">repeat</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRepeatCount</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Gets the progress of the current iteration
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getProgress</span><span class="p">();</span>  <span class="c1">// elapsed / delay</span>
-</code></pre></div></li>
-<li>Gets the progress of the timer overall, factoring in repeats.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getOverallProgress</span><span class="p">();</span>  <span class="c1">// totalElapsed / totalDuration</span>
-</code></pre></div></li>
-<li>Get delay time
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>   <span class="c1">// ms</span>
-</code></pre></div></li>
+<li><code>x</code>, <code>y</code> : The x/y coordinate of the pixel to get.</li>
+<li><code>callback</code> : The Function to invoke after the snapshot image is created.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>        
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color</a> object.</li>
+</ul>
+</li>
 </ul>
 
               
@@ -9304,7 +9513,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../luxon/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Luxon" rel="prev">
+        <a href="../charactercache/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Character cache" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -9313,20 +9522,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Luxon
+              Character cache
             </div>
           </div>
         </a>
       
       
         
-        <a href="../timeline/" class="md-footer__link md-footer__link--next" aria-label="Next: Timeline" rel="next">
+        <a href="../mask/" class="md-footer__link md-footer__link--next" aria-label="Next: Mask" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Timeline
+              Mask
             </div>
           </div>
           <div class="md-footer__button md-icon">

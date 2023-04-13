@@ -163,7 +163,6 @@ Phaser.Class.mixin(Canvas,
         Components.Crop,
         Components.Depth,
         Components.Flip,
-        // Components.FX,  // Open for 3.60
         Components.GetBounds,
         Components.Mask,
         Components.Origin,

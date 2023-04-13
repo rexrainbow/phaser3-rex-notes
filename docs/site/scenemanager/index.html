@@ -504,6 +504,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#system-scene" class="md-nav__link">
+    System scene
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3804,6 +3811,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15_2" type="checkbox" id="__nav_4_15_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_15_2">
+          Canvas texture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Canvas texture" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_15_2">
+          <span class="md-nav__icon md-icon"></span>
+          Canvas texture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../canvas-texture/" class="md-nav__link">
         Canvas texture
@@ -3835,6 +3868,27 @@
     <li class="md-nav__item">
       <a href="../charactercache/" class="md-nav__link">
         Character cache
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-texture/" class="md-nav__link">
+        Dynamic texture
       </a>
     </li>
   
@@ -9224,6 +9278,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#system-scene" class="md-nav__link">
+    System scene
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9495,6 +9556,15 @@ If not running at all, it will be started.</p>
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionwake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){</span> <span class="p">});</span>
 </code></pre></div></li>
 </ul>
+<h2 id="system-scene">System scene<a class="headerlink" href="#system-scene" title="Permanent link">&para;</a></h2>
+<p>A default empty Scene that lives outside of the Scene list, 
+but can be used by plugins and managers that need access to a live Scene, 
+without being tied to one.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;__SYSTEM&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">systemScene</span><span class="p">;</span>
+</code></pre></div>
 
               
             </article>

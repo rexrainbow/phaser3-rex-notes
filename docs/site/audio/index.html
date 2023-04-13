@@ -3660,6 +3660,32 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15_2" type="checkbox" id="__nav_4_15_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_15_2">
+          Canvas texture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Canvas texture" data-md-level="3">
+        <label class="md-nav__title" for="__nav_4_15_2">
+          <span class="md-nav__icon md-icon"></span>
+          Canvas texture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../canvas-texture/" class="md-nav__link">
         Canvas texture
@@ -3691,6 +3717,27 @@
     <li class="md-nav__item">
       <a href="../charactercache/" class="md-nav__link">
         Character cache
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-texture/" class="md-nav__link">
+        Dynamic texture
       </a>
     </li>
   
@@ -4541,18 +4588,12 @@
     Decode audio
   </a>
   
-    <nav class="md-nav" aria-label="Decode audio">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#decoded-events" class="md-nav__link">
     Decoded events
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4571,6 +4612,13 @@
           <li class="md-nav__item">
   <a href="#play-sound" class="md-nav__link">
     Play sound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-of-the-spatial-audio-listener" class="md-nav__link">
+    Position of the Spatial Audio listener
   </a>
   
 </li>
@@ -9431,18 +9479,12 @@
     Decode audio
   </a>
   
-    <nav class="md-nav" aria-label="Decode audio">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#decoded-events" class="md-nav__link">
     Decoded events
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -9461,6 +9503,13 @@
           <li class="md-nav__item">
   <a href="#play-sound" class="md-nav__link">
     Play sound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-of-the-spatial-audio-listener" class="md-nav__link">
+    Position of the Spatial Audio listener
   </a>
   
 </li>
@@ -9814,7 +9863,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="decoded-events">Decoded events<a class="headerlink" href="#decoded-events" title="Permanent link">&para;</a></h5>
+<h4 id="decoded-events">Decoded events<a class="headerlink" href="#decoded-events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Finished decoding an audio data
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;decoded&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
@@ -9838,6 +9887,16 @@
 <span class="cm">sound.play(config);</span>
 <span class="cm">*/</span>
 </code></pre></div>
+<h3 id="position-of-the-spatial-audio-listener">Position of the Spatial Audio listener<a class="headerlink" href="#position-of-the-spatial-audio-listener" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">setListenerPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> : The x/y position of the Spatial Audio listener. Default value is center of the game canvas.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Web audio only</p>
+</div>
 <h3 id="sound-instance">Sound instance<a class="headerlink" href="#sound-instance" title="Permanent link">&para;</a></h3>
 <h4 id="create-sound-instance">Create sound instance<a class="headerlink" href="#create-sound-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -9852,9 +9911,49 @@
     <span class="nx">detune</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">seek</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+    <span class="c1">// source of the spatial sound</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">z</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">panningModel</span><span class="o">:</span> <span class="s1">&#39;equalpower&#39;</span><span class="p">,</span>
+        <span class="nx">distanceModel</span><span class="o">:</span> <span class="s1">&#39;inverse&#39;</span><span class="p">,</span>
+        <span class="nx">orientationX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">orientationY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">orientationZ</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+        <span class="nx">refDistance</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+        <span class="nx">maxDistance</span><span class="o">:</span> <span class="mf">10000</span><span class="p">,</span>
+        <span class="nx">rolloffFactor</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+        <span class="nx">coneInnerAngle</span><span class="o">:</span> <span class="mf">360</span><span class="p">,</span>
+        <span class="nx">coneOuterAngle</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">coneOuterGain</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">follow</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<ul>
+<li><code>source</code> : Source of the spatial sound<ul>
+<li><code>x</code>, <code>y</code> : The horizontal/vertical position of the audio in a right-hand Cartesian coordinate system.</li>
+<li><code>z</code> : Represents the longitudinal (back and forth) position of the audio in a right-hand Cartesian coordinate system.</li>
+<li><code>panningModel</code> : An enumerated value determining which spatialization algorithm to use to position the audio in 3D space.<ul>
+<li><code>'equalpower'</code></li>
+<li><code>'HRTF'</code></li>
+</ul>
+</li>
+<li><code>orientationX</code>, <code>orientationY</code> : The horizontal/vertical position of the audio source's vector in a right-hand Cartesian coordinate system.</li>
+<li><code>orientationZ</code> : Represents the longitudinal (back and forth) position of the audio source's vector in a right-hand Cartesian coordinate system.</li>
+<li><code>refDistance</code> : A double value representing the reference distance for reducing volume as the audio source moves further from the listener. For distances greater than this the volume will be reduced based on <code>rolloffFactor</code> and <code>distanceModel</code>.</li>
+<li><code>maxDistance</code> : The maximum distance between the audio source and the listener, after which the volume is not reduced any further.</li>
+<li><code>rolloffFactor</code> : A double value describing how quickly the volume is reduced as the source moves away from the listener. This value is used by all distance models.</li>
+<li><code>coneInnerAngle</code> : The angle, in degrees, of a cone inside of which there will be no volume reduction.</li>
+<li><code>coneOuterAngle</code> : The angle, in degrees, of a cone outside of which the volume will be reduced by a constant value, defined by the <code>coneOuterGain</code> property.</li>
+<li><code>coneOuterGain</code> : The amount of volume reduction outside the cone defined by the <code>coneOuterAngle</code> attribute. Its default value is <code>0</code>, meaning that no sound can be heard. A value between <code>0</code> and <code>1</code>.</li>
+<li><code>follow</code> : Set this Sound object to automatically track the x/y position of this object. Can be a Phaser Game Object, Vec2 or anything that exposes public x/y properties.</li>
+</ul>
+</li>
+</ul>
 <h4 id="play-sound-instance">Play sound instance<a class="headerlink" href="#play-sound-instance" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start playing
