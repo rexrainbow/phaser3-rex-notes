@@ -35,6 +35,7 @@ class Demo extends Phaser.Scene {
             }, this);
 
         this.add.renderTexture(0, 0, 800, 600)
+            .setOrigin(0)
             .draw(gridGraphics)
             .setDepth(-1);
         gridGraphics.destroy()

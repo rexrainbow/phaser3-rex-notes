@@ -17,13 +17,13 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-
+        var dialog = CreateGridTable(this).layout().setPosition(400, 300);
         this.rexUI.modalPromise(
             // Game object
-            CreateGridTable(this).layout().setPosition(400, 300),
+            dialog,
             // Config
             {
-                manaulClose: true,
+                manualClose: true,
                 duration: {
                     in: 500,
                     out: 500
@@ -31,6 +31,7 @@ class Demo extends Phaser.Scene {
             }
         )
 
+        debugger
     }
 
     update() { }

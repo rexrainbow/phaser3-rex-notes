@@ -1,9 +1,9 @@
-import PostUpdateDelayCall from '../../../utils/time/PostUpdateDelayCall.js';
+import PostStepDelayCall from '../../../utils/time/PostStepDelayCall.js';
 
 export default {
     delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+        this.delayCallTimer = PostStepDelayCall(this, delay, callback, scope);
         return this;
     },
 

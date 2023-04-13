@@ -111,6 +111,7 @@ class Board extends RexPlugins.Board.Board {
             }
         })
         this.gridsTexture = scene.add.renderTexture(0, 0, 1, 1)
+            .setOrigin()
             .setDepth(-1);
 
         // Graphics and rendertexture for path

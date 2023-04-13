@@ -50,7 +50,11 @@ class RenderScene extends Phaser.Scene {
     }
 
     create() {
-        var rt = this.make.renderTexture({ x: 0, y: 0, width: 800, height: 600 }, false)
+        var rt = this.make.renderTexture({
+            x: 0, y: 0,
+            width: 800, height: 600,
+            originX: 0, originY: 0,
+        }, false)
         rt.saveTexture('game')
         this.events.on('postupdate', function () {
             rt.clear().draw(this.scene.get('Game').children, 0, 0);
