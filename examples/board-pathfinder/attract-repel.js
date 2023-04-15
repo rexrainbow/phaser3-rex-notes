@@ -90,6 +90,7 @@ class Board extends RexPlugins.Board.Board {
             gridGraphics.strokePoints(points, true);
         });
         scene.add.renderTexture(0, 0, 800, 600)
+            .setOrigin(0)
             .draw(gridGraphics)
             .setDepth(-1);
         gridGraphics.destroy();
@@ -103,6 +104,7 @@ class Board extends RexPlugins.Board.Board {
             }
         })
         this.pathTexture = scene.add.renderTexture(0, 0, 800, 600)
+            .setOrigin(0)
             .setDepth(2);
     }
 

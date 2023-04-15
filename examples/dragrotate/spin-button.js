@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var x = 400,
@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         createButton(this, x, y, 200);
     }
 
-    update() {}
+    update() { }
 }
 
 var createButton = function (scene, x, y, radius) {
@@ -46,8 +46,8 @@ var createButton = function (scene, x, y, radius) {
         .lineBetween(x + config.minRadius, y, x + config.maxRadius, y);
 
     var button = scene.add.renderTexture(config.x, config.y, width, height)
-        .draw(buttonGraphics)
         .setOrigin(0.5)
+        .draw(buttonGraphics)
         .setTint(ColorGray);
     buttonGraphics.destroy();
 

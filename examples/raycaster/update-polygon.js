@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
             targets: this.dynamicObstacles,
             angle: '+=360',
             ease: 'Bounce',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000*30,
+            duration: 1000 * 30,
             repeat: -1,           // -1: infinity
             yoyo: true
         });

@@ -34,7 +34,7 @@ var GetLineToPoints = function (line, points, out) {
             continue;
         }
 
-        if (GetLineToLine(line, segment, tempIntersect)) {
+        if (GetLineToLine(line, segment, false, tempIntersect)) {
             if (tempIntersect.z < out.d) {
                 out.x = tempIntersect.x;
                 out.y = tempIntersect.y;

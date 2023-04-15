@@ -1,5 +1,5 @@
 var AddQuestion = function (question) {
-    Polyfills(question);
+    Polyfills.call(this, question);
 
     // Remove duplicated question
     var key = question.key;

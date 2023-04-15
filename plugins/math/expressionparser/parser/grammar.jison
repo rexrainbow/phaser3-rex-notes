@@ -56,13 +56,19 @@
     }
 
     function runMethod(self, ctx, name, args, dotMode) {
-        if (dotMode === undefined) {
-            dotMode = false;
+        var names;
+        if (typeof(name) === 'string') {
+            if (dotMode) {
+                names = name.split('.');
+            } else {
+                names = [name];
+            }
+        } else {
+            names = name;
         }
 
         var callback, scope;
-        if (dotMode) {
-            var names = name.split('.');
+        if (names.length > 1) {
             var callbackName = names.pop();
             scope = self.getDotProperty(ctx, names);
             callback = scope[callbackName];

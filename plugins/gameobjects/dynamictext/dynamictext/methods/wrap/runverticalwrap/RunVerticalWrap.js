@@ -46,7 +46,7 @@ var RunVerticalWrap = function (config) {
             var innerHeight = this.fixedHeight - paddingVertical;
             fixedChildHeight = Math.floor(innerHeight / charPerLine);
         } else {
-            // Use char.heigh as fixedChildHeight
+            // Use child.heigh as fixedChildHeight
         }
     }
 
@@ -105,26 +105,26 @@ var RunVerticalWrap = function (config) {
         lastLine = [], lastLineHeight = 0, maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
         // Append non-typeable child directly
-        var char = children[childIndex];
+        var child = children[childIndex];
         childIndex++;
         if (!child.renderable) {
-            char.setActive();
-            resultChildren.push(char);
-            lastLine.push(char);
+            child.setActive();
+            resultChildren.push(child);
+            lastLine.push(child);
             continue;
         }
 
-        var childHeight = ((fixedChildHeight !== undefined) ? fixedChildHeight : char.height) + letterSpacing;
+        var childHeight = ((fixedChildHeight !== undefined) ? fixedChildHeight : child.height) + letterSpacing;
         // Next line
-        var isNewLineChar = IsNewLineChar(char);
-        var isPageBreakChar = IsPageBreakChar(char);
+        var isNewLineChar = IsNewLineChar(child);
+        var isPageBreakChar = IsPageBreakChar(child);
         var isControlChar = isNewLineChar || isPageBreakChar;
         if ((remainderHeight < childHeight) || isControlChar) {
             // Add to result
             if (isNewLineChar) {
-                char.setActive().setPosition(x, y).setOrigin(0.5);
-                resultChildren.push(char);
-                lastLine.push(char);
+                child.setActive().setPosition(x, y).setOrigin(0.5);
+                resultChildren.push(child);
+                lastLine.push(child);
             }
 
             // Move cursor
@@ -148,9 +148,9 @@ var RunVerticalWrap = function (config) {
         remainderHeight -= childHeight;
         lastLineHeight += childHeight;
 
-        char.setActive().setPosition(x, y).setOrigin(0.5);
-        resultChildren.push(char);
-        lastLine.push(char);
+        child.setActive().setPosition(x, y).setOrigin(0.5);
+        resultChildren.push(child);
+        lastLine.push(child);
         y += childHeight;
     }
 

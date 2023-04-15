@@ -123,6 +123,7 @@ class Board extends RexPlugins.Board.Board {
             }
         })
         this.pathTexture = scene.add.renderTexture(0, 0, 1, 1)
+            .setOrigin(0)
             .setDepth(2);
 
         this.pathFinder = scene.rexBoard.add.pathFinder({

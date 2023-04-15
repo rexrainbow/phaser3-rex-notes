@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
             this.add.image(1000, 800, 'mushroom'),
         ];
 
-        var rt = this.add.renderTexture(0, 0, 1, 1);
+        var rt = this.add.renderTexture(0, 0, 1, 1).setOrigin(0);
         FitToViewport(rt)
             .draw(sprites)
             .setTint(0xff0000)
