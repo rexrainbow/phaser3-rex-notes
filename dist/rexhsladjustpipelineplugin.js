@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -102,6 +102,20 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag$3 = "vec3 RGBToHSL(vec3 color) {\n  vec3 hsl = vec3(0.0, 0.0, 0.0);\n\t\n  float fmin = min(min(color.r, color.g), color.b);\n  float fmax = max(max(color.r, color.g), color.b);\n  float delta = fmax - fmin;\n\n  hsl.z = (fmax + fmin) / 2.0;\n\n  if (delta == 0.0) {\n\t\thsl.x = 0.0;\n\t\thsl.y = 0.0;\n\t} else {\n\t\tif (hsl.z < 0.5) {\n\t\t\thsl.y = delta / (fmax + fmin);\n    } else {\n      hsl.y = delta / (2.0 - fmax - fmin);\n    }\n\t\t\n\t\tfloat dR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;\n\t\tfloat dG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;\n\t\tfloat dB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;\n\n\t\tif (color.r == fmax) {\n\t\t\thsl.x = dB - dG;\n    } else if (color.g == fmax) {\n\t\t\thsl.x = (1.0 / 3.0) + dR - dB;\n\t\t} else if (color.b == fmax) {\n      hsl.x = (2.0 / 3.0) + dG - dR;\n    }\n\n\t\tif (hsl.x < 0.0) {\n\t\t\thsl.x += 1.0;\n    } else if (hsl.x > 1.0) {\n      hsl.x -= 1.0;\n    }\n\t}\n\n\treturn hsl;\n}\n";

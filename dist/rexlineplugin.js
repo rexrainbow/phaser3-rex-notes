@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -126,27 +126,76 @@
     }
     return _get.apply(this, arguments);
   }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
+  }
 
-  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
-    if (className === undefined) {
-      className = 'image';
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
-    if (!parent[key]) {
-      parent[key] = parent.scene.make[className]({
-        add: false,
-        origin: {
-          x: 0,
-          y: 0
+  };
+
+  var GameObjectClasses = Phaser.GameObjects;
+  var GameObjects = undefined;
+  var GetStampGameObject = function GetStampGameObject(gameObject, className) {
+    if (!GameObjects) {
+      GameObjects = {};
+      GetGame(gameObject).events.once('destroy', function () {
+        for (var name in GameObjects) {
+          GameObjects[name].destroy();
         }
-      });
-      parent.once('destroy', function () {
-        if (parent[key]) {
-          parent[key].destroy();
-          parent[key] = undefined;
-        }
+        GameObjects = undefined;
       });
     }
-    return parent[key];
+    if (!GameObjects.hasOwnProperty(className)) {
+      var scene = GetGame(gameObject).scene.systemScene;
+      var gameObject = new GameObjectClasses[className](scene);
+      gameObject.setOrigin(0);
+      GameObjects[className] = gameObject;
+    }
+    return GameObjects[className];
+  };
+
+  var DrawImage = function DrawImage(key, frame, x, y, width, height) {
+    var gameObject = GetStampGameObject(this, 'Image').setTexture(key, frame).setDisplaySize(width, height);
+    this.batchDraw(gameObject, x, y);
+  };
+
+  var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
+    var gameObject = GetStampGameObject(this, 'TileSprite').setTexture(key, frame).setSize(width, height);
+    this.batchDraw(gameObject, x, y);
   };
 
   var DistanceBetween = Phaser.Math.Distance.Between;
@@ -196,6 +245,8 @@
 
     var offsetX, offsetY;
     var remainderWidth = this.width;
+    this.beginDraw();
+
     // Draw line start
     if (lineStartFrame) {
       offsetX = 0;
@@ -213,18 +264,15 @@
 
     // Draw line body
     if (lineBodyFrame && remainderWidth > 0 && lineBodyHeight > 0) {
-      var lineBody;
-      if (this.lineBodyExtendMode === 0) {
-        lineBody = MakeChildImageGameObject(this, '_image', 'image');
-        lineBody.setTexture(this.lineBodyTexture, this.lineBodyFrameName).setDisplaySize(remainderWidth, lineBodyHeight);
-      } else {
-        lineBody = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
-        lineBody.setTexture(this.lineBodyTexture, this.lineBodyFrameName).setSize(remainderWidth, lineBodyHeight);
-      }
       offsetX = lineStartFrame ? lineStartFrame.cutWidth : 0;
-      offsetY = (this.height - lineBody.displayHeight) / 2;
-      this.draw(lineBody, offsetX, offsetY);
+      offsetY = (this.height - lineBodyHeight) / 2;
+      if (this.lineBodyExtendMode === 0) {
+        DrawImage.call(this, this.lineBodyTexture, this.lineBodyFrameName, offsetX, offsetY, remainderWidth, lineBodyHeight);
+      } else {
+        DrawTileSprite.call(this, this.lineBodyTexture, this.lineBodyFrameName, offsetX, offsetY, remainderWidth, lineBodyHeight);
+      }
     }
+    this.endDraw();
     var originX = 1 - (width - lineStartOffset) / width;
     this.setOrigin(originX, 0.5);
   };

@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -36,6 +36,7 @@
     return Constructor;
   }
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -173,7 +174,7 @@
   function _set(target, property, value, receiver, isStrict) {
     var s = set$1(target, property, value, receiver || target);
     if (!s && isStrict) {
-      throw new Error('failed to set property');
+      throw new TypeError('failed to set property');
     }
     return value;
   }
@@ -201,6 +202,20 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
@@ -4567,9 +4582,7 @@
     return TextBase;
   }(GameObject$3);
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip,
-  // Components.FX,  // Open for 3.60
-  Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Tint, Components$4.Transform, Components$4.Visible, Render$4]);
+  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Tint, Components$4.Transform, Components$4.Visible, Render$4]);
 
   var Pad = Phaser.Utils.String.Pad;
   var GetStyle = function GetStyle(style, canvas, context) {
@@ -8777,6 +8790,7 @@
     var offsetX = 0,
       offsetY = 0;
     var imageType;
+    this._beginDraw();
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
       rowHeight = row.stretch === 0 ? row.height * fixedPartScaleY : proportionHeight * row.stretch;
@@ -8810,6 +8824,7 @@
       }
       offsetY += rowHeight;
     }
+    this._endDraw();
   };
 
   var IsPlainObject$l = Phaser.Utils.Objects.IsPlainObject;
@@ -8862,8 +8877,10 @@
   };
 
   var Methods$7 = {
+    _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
+    _endDraw: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
     setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
@@ -8966,7 +8983,12 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
           this.updateTexture();
           return this;
         }
@@ -8977,41 +8999,61 @@
     return NinePatch;
   };
 
-  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
-    if (className === undefined) {
-      className = 'image';
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
-    if (!parent[key]) {
-      parent[key] = parent.scene.make[className]({
-        add: false,
-        origin: {
-          x: 0,
-          y: 0
+  };
+
+  var GameObjectClasses = Phaser.GameObjects;
+  var GameObjects = undefined;
+  var GetStampGameObject = function GetStampGameObject(gameObject, className) {
+    if (!GameObjects) {
+      GameObjects = {};
+      GetGame(gameObject).events.once('destroy', function () {
+        for (var name in GameObjects) {
+          GameObjects[name].destroy();
         }
-      });
-      parent.once('destroy', function () {
-        if (parent[key]) {
-          parent[key].destroy();
-          parent[key] = undefined;
-        }
+        GameObjects = undefined;
       });
     }
-    return parent[key];
+    if (!GameObjects.hasOwnProperty(className)) {
+      var scene = GetGame(gameObject).scene.systemScene;
+      var gameObject = new GameObjectClasses[className](scene);
+      gameObject.setOrigin(0);
+      GameObjects[className] = gameObject;
+    }
+    return GameObjects[className];
   };
 
   var DrawImage$1 = function DrawImage(key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_image', 'image').setTexture(key, frame).setDisplaySize(width, height);
-    this.draw(gameObject, x, y);
+    var gameObject = GetStampGameObject(this, 'Image').setTexture(key, frame).setDisplaySize(width, height);
+    this.batchDraw(gameObject, x, y);
   };
 
   var DrawTileSprite$1 = function DrawTileSprite(key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite').setTexture(key, frame).setSize(width, height);
-    this.draw(gameObject, x, y);
-  };
-
-  var Methods$6 = {
-    _drawImage: DrawImage$1,
-    _drawTileSprite: DrawTileSprite$1
+    var gameObject = GetStampGameObject(this, 'TileSprite').setTexture(key, frame).setSize(width, height);
+    this.batchDraw(gameObject, x, y);
   };
 
   var RenderTexture$1 = Phaser.GameObjects.RenderTexture;
@@ -9024,6 +9066,12 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
+  var Methods$6 = {
+    _beginDraw: RenderTexture$1.prototype.beginDraw,
+    _endDraw: RenderTexture$1.prototype.endDraw,
+    _drawImage: DrawImage$1,
+    _drawTileSprite: DrawTileSprite$1
+  };
   Object.assign(NinePatch$1.prototype, Methods$6);
 
   var CreateNinePatch = function CreateNinePatch(scene, data, view, styles, customBuilders) {
@@ -9826,20 +9874,13 @@
     var ty = -displayOriginY;
     var tw = tx + width;
     var th = ty + height;
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
     var tint = GetTint(this.tint, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
+    pipeline.batchQuad(this.parent, quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7], u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
@@ -10450,9 +10491,7 @@
     return Canvas;
   }(GameObject);
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas$1, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip,
-  // Components.FX,  // Open for 3.60
-  Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas$1, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
 
   var LoadImageMethods = {
     loadFromURL: function loadFromURL(url, callback) {
@@ -12219,13 +12258,20 @@
   };
   var GlobRect$1;
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var GetValue$1e = Phaser.Utils.Objects.GetValue;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+  var UUID$1 = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
     var x = GetValue$1e(config, 'x', undefined);
     var y = GetValue$1e(config, 'y', undefined);
     var width = GetValue$1e(config, 'width', undefined);
@@ -12261,17 +12307,26 @@
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture;
-    // Configurate render texture
-    if (tempRT) {
-      var scene = gameObjects[0].scene;
+    var scene = gameObjects[0].scene;
+
+    // Snapshot on dynamicTexture directly
+    if (saveTexture && !renderTexture) {
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID$1(), width, height);
+    }
+
+    // Return a renderTexture
+    if (!renderTexture) {
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+      renderTexture.setPosition(x, y);
+    }
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
-    renderTexture.setOrigin(originX, originY);
+    if (renderTexture.setOrigin) {
+      renderTexture.setOrigin(originX, originY);
+    }
     renderTexture.camera.setScroll(scrollX, scrollY);
 
     // Draw gameObjects
@@ -12281,11 +12336,22 @@
     // Save render result to texture    
     var saveTexture = config.saveTexture;
     if (saveTexture) {
-      renderTexture.saveTexture(saveTexture);
-    }
-    // Destroy render texture if tempRT and saveTexture
-    if (tempRT && saveTexture) {
-      renderTexture.destroy();
+      if (IsGameObject(renderTexture)) {
+        renderTexture.saveTexture(saveTexture);
+      } else {
+        var dynamicTexture = renderTexture;
+        var textureManager = dynamicTexture.manager;
+        if (textureManager.exists(dynamicTexture.key)) {
+          // Rename texture
+          textureManager.renameTexture(dynamicTexture.key, key);
+        } else {
+          // Add texture to texture manager
+          dynamicTexture.key = key;
+          textureManager.list[key] = dynamicTexture;
+          textureManager.emit('addtexture', key, dynamicTexture);
+          textureManager.emit("addtexture-".concat(key), dynamicTexture);
+        }
+      }
     }
     return renderTexture;
   };
@@ -13802,11 +13868,6 @@
     }
   };
 
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
   var GetSceneObject = function GetSceneObject(object) {
     if (object == null || _typeof(object) !== 'object') {
       return null;
@@ -13821,27 +13882,6 @@
       return object.parent.scene;
     } else {
       return null;
-    }
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
     }
   };
 
@@ -16728,32 +16768,21 @@
     return State;
   }(FSM);
 
-  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'postupdate' event
+  var PostStepDelayCall = function PostStepDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under game's 'poststep' event
     var scene = gameObject.scene;
-    var sceneEE = scene.sys.events;
-    var timer = scene.time.delayedCall(delay,
-    // delay
-    sceneEE.once,
-    // callback
-    [
-    // Event name of scene
-    'postupdate',
-    // Callback
-    function () {
-      callback.call(scope, args);
-    }],
-    // args
-    sceneEE // scope, scene's EE
-    );
-
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.game.events.once('poststep', function () {
+        callback.call(scope, args);
+      });
+    });
     return timer;
   };
 
   var DelayCallMethods$1 = {
     delayCall: function delayCall(delay, callback, scope) {
       // Invoke callback under scene's 'postupdate' event
-      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+      this.delayCallTimer = PostStepDelayCall(this, delay, callback, scope);
       return this;
     },
     removeDelayCall: function removeDelayCall() {
@@ -17453,11 +17482,6 @@
       }
       return false;
     }
-  };
-
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
   };
 
   var IsInTouching = function IsInTouching(pointer, gameObject) {
@@ -25538,12 +25562,14 @@
           startAt = timerStartAt;
         }
         this.timer = this.scene.time.addEvent({
-          delay: 0,
+          delay: 0.0001,
           startAt: startAt,
           loop: true,
           callback: this.onTyping,
           callbackScope: this
         });
+        // Note: Throw error message if delay is 0 with repeat/loop
+
         return this;
       }
     }, {
@@ -31823,6 +31849,17 @@
       // callback = function(gameObject, duration) {}
       return this;
     }
+  };
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('postupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
   };
 
   var DelayCallMethods = {

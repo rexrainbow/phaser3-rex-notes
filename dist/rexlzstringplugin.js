@@ -15,7 +15,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -94,6 +94,20 @@
       return _possibleConstructorReturn(this, result);
     };
   }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
+  }
 
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -104,9 +118,7 @@
       function o(o, r) {
         if (!t[o]) {
           t[o] = {};
-          for (var n = 0; n < o.length; n++) {
-            t[o][o.charAt(n)] = n;
-          }
+          for (var n = 0; n < o.length; n++) t[o][o.charAt(n)] = n;
         }
         return t[o][r];
       }
@@ -156,9 +168,7 @@
           },
           decompressFromUint8Array: function decompressFromUint8Array(o) {
             if (null === o || void 0 === o) return i.decompress(o);
-            for (var n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) {
-              n[e] = 256 * o[2 * e] + o[2 * e + 1];
-            }
+            for (var n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) n[e] = 256 * o[2 * e] + o[2 * e + 1];
             var s = [];
             return n.forEach(function (o) {
               s.push(r(o));
@@ -195,57 +205,33 @@
               d = [],
               m = 0,
               v = 0;
-            for (i = 0; i < o.length; i += 1) {
-              if (u = o.charAt(i), Object.prototype.hasOwnProperty.call(s, u) || (s[u] = f++, p[u] = !0), c = a + u, Object.prototype.hasOwnProperty.call(s, c)) a = c;else {
-                if (Object.prototype.hasOwnProperty.call(p, a)) {
-                  if (a.charCodeAt(0) < 256) {
-                    for (e = 0; h > e; e++) {
-                      m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
-                    }
-                    for (t = a.charCodeAt(0), e = 0; 8 > e; e++) {
-                      m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                    }
-                  } else {
-                    for (t = 1, e = 0; h > e; e++) {
-                      m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
-                    }
-                    for (t = a.charCodeAt(0), e = 0; 16 > e; e++) {
-                      m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                    }
-                  }
-                  l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
-                } else for (t = s[a], e = 0; h > e; e++) {
-                  m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+            for (i = 0; i < o.length; i += 1) if (u = o.charAt(i), Object.prototype.hasOwnProperty.call(s, u) || (s[u] = f++, p[u] = !0), c = a + u, Object.prototype.hasOwnProperty.call(s, c)) a = c;else {
+              if (Object.prototype.hasOwnProperty.call(p, a)) {
+                if (a.charCodeAt(0) < 256) {
+                  for (e = 0; h > e; e++) m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
+                  for (t = a.charCodeAt(0), e = 0; 8 > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+                } else {
+                  for (t = 1, e = 0; h > e; e++) m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
+                  for (t = a.charCodeAt(0), e = 0; 16 > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
                 }
-                l--, 0 == l && (l = Math.pow(2, h), h++), s[c] = f++, a = String(u);
-              }
+                l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
+              } else for (t = s[a], e = 0; h > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+              l--, 0 == l && (l = Math.pow(2, h), h++), s[c] = f++, a = String(u);
             }
             if ("" !== a) {
               if (Object.prototype.hasOwnProperty.call(p, a)) {
                 if (a.charCodeAt(0) < 256) {
-                  for (e = 0; h > e; e++) {
-                    m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
-                  }
-                  for (t = a.charCodeAt(0), e = 0; 8 > e; e++) {
-                    m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                  }
+                  for (e = 0; h > e; e++) m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
+                  for (t = a.charCodeAt(0), e = 0; 8 > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
                 } else {
-                  for (t = 1, e = 0; h > e; e++) {
-                    m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
-                  }
-                  for (t = a.charCodeAt(0), e = 0; 16 > e; e++) {
-                    m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                  }
+                  for (t = 1, e = 0; h > e; e++) m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
+                  for (t = a.charCodeAt(0), e = 0; 16 > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
                 }
                 l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
-              } else for (t = s[a], e = 0; h > e; e++) {
-                m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-              }
+              } else for (t = s[a], e = 0; h > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
               l--, 0 == l && (l = Math.pow(2, h), h++);
             }
-            for (t = 2, e = 0; h > e; e++) {
-              m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-            }
+            for (t = 2, e = 0; h > e; e++) m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
             for (;;) {
               if (m <<= 1, v == r - 1) {
                 d.push(n(m));
@@ -279,23 +265,15 @@
                 position: n,
                 index: 1
               };
-            for (i = 0; 3 > i; i += 1) {
-              f[i] = i;
-            }
-            for (p = 0, c = Math.pow(2, 2), a = 1; a != c;) {
-              u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-            }
+            for (i = 0; 3 > i; i += 1) f[i] = i;
+            for (p = 0, c = Math.pow(2, 2), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
             switch (p) {
               case 0:
-                for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) {
-                  u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-                }
+                for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                 l = r(p);
                 break;
               case 1:
-                for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) {
-                  u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-                }
+                for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                 l = r(p);
                 break;
               case 2:
@@ -303,20 +281,14 @@
             }
             for (f[3] = l, s = l, w.push(l);;) {
               if (A.index > o) return "";
-              for (p = 0, c = Math.pow(2, m), a = 1; a != c;) {
-                u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-              }
+              for (p = 0, c = Math.pow(2, m), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
               switch (l = p) {
                 case 0:
-                  for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) {
-                    u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-                  }
+                  for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                   f[d++] = r(p), l = d - 1, h--;
                   break;
                 case 1:
-                  for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) {
-                    u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-                  }
+                  for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                   f[d++] = r(p), l = d - 1, h--;
                   break;
                 case 2:

@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -102,6 +102,20 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var global$1 = (typeof global !== "undefined" ? global :
@@ -677,8 +691,7 @@
     */
     var parser = function () {
       var o = function o(k, v, _o, l) {
-          for (_o = _o || {}, l = k.length; l--; _o[k[l]] = v) {
-          }
+          for (_o = _o || {}, l = k.length; l--; _o[k[l]] = v);
           return _o;
         },
         $V0 = [1, 11],
@@ -1544,12 +1557,18 @@
         return callback.apply(self, mapArgs(args, ctx));
       }
       function runMethod(self, ctx, name, args, dotMode) {
-        if (dotMode === undefined) {
-          dotMode = false;
+        var names;
+        if (typeof name === 'string') {
+          if (dotMode) {
+            names = name.split('.');
+          } else {
+            names = [name];
+          }
+        } else {
+          names = name;
         }
         var callback, scope;
-        if (dotMode) {
-          var names = name.split('.');
+        if (names.length > 1) {
           var callbackName = names.pop();
           scope = self.getDotProperty(ctx, names);
           callback = scope[callbackName];

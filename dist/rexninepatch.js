@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -125,6 +125,20 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
@@ -374,6 +388,7 @@
     var offsetX = 0,
       offsetY = 0;
     var imageType;
+    this._beginDraw();
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
       rowHeight = row.stretch === 0 ? row.height * fixedPartScaleY : proportionHeight * row.stretch;
@@ -407,6 +422,7 @@
       }
       offsetY += rowHeight;
     }
+    this._endDraw();
   };
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
@@ -463,8 +479,10 @@
   };
 
   var Methods$1 = {
+    _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
+    _endDraw: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
     setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
@@ -567,7 +585,12 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
           this.updateTexture();
           return this;
         }
@@ -578,41 +601,61 @@
     return NinePatch;
   };
 
-  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
-    if (className === undefined) {
-      className = 'image';
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
-    if (!parent[key]) {
-      parent[key] = parent.scene.make[className]({
-        add: false,
-        origin: {
-          x: 0,
-          y: 0
+  };
+
+  var GameObjectClasses = Phaser.GameObjects;
+  var GameObjects = undefined;
+  var GetStampGameObject = function GetStampGameObject(gameObject, className) {
+    if (!GameObjects) {
+      GameObjects = {};
+      GetGame(gameObject).events.once('destroy', function () {
+        for (var name in GameObjects) {
+          GameObjects[name].destroy();
         }
-      });
-      parent.once('destroy', function () {
-        if (parent[key]) {
-          parent[key].destroy();
-          parent[key] = undefined;
-        }
+        GameObjects = undefined;
       });
     }
-    return parent[key];
+    if (!GameObjects.hasOwnProperty(className)) {
+      var scene = GetGame(gameObject).scene.systemScene;
+      var gameObject = new GameObjectClasses[className](scene);
+      gameObject.setOrigin(0);
+      GameObjects[className] = gameObject;
+    }
+    return GameObjects[className];
   };
 
   var DrawImage = function DrawImage(key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_image', 'image').setTexture(key, frame).setDisplaySize(width, height);
-    this.draw(gameObject, x, y);
+    var gameObject = GetStampGameObject(this, 'Image').setTexture(key, frame).setDisplaySize(width, height);
+    this.batchDraw(gameObject, x, y);
   };
 
   var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
-    var gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite').setTexture(key, frame).setSize(width, height);
-    this.draw(gameObject, x, y);
-  };
-
-  var Methods = {
-    _drawImage: DrawImage,
-    _drawTileSprite: DrawTileSprite
+    var gameObject = GetStampGameObject(this, 'TileSprite').setTexture(key, frame).setSize(width, height);
+    this.batchDraw(gameObject, x, y);
   };
 
   var RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -625,6 +668,12 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture, 'rexNinePatch'));
+  var Methods = {
+    _beginDraw: RenderTexture.prototype.beginDraw,
+    _endDraw: RenderTexture.prototype.endDraw,
+    _drawImage: DrawImage,
+    _drawTileSprite: DrawTileSprite
+  };
   Object.assign(NinePatch.prototype, Methods);
 
   return NinePatch;

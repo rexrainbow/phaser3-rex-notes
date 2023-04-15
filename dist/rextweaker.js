@@ -45,7 +45,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -57,6 +57,7 @@
     return Constructor;
   }
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -194,7 +195,7 @@
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
     if (!s && isStrict) {
-      throw new Error('failed to set property');
+      throw new TypeError('failed to set property');
     }
     return value;
   }
@@ -222,6 +223,20 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var Zone$1 = Phaser.GameObjects.Zone;
@@ -6343,32 +6358,21 @@
     return State;
   }(FSM);
 
-  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'postupdate' event
+  var PostStepDelayCall = function PostStepDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under game's 'poststep' event
     var scene = gameObject.scene;
-    var sceneEE = scene.sys.events;
-    var timer = scene.time.delayedCall(delay,
-    // delay
-    sceneEE.once,
-    // callback
-    [
-    // Event name of scene
-    'postupdate',
-    // Callback
-    function () {
-      callback.call(scope, args);
-    }],
-    // args
-    sceneEE // scope, scene's EE
-    );
-
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.game.events.once('poststep', function () {
+        callback.call(scope, args);
+      });
+    });
     return timer;
   };
 
   var DelayCallMethods = {
     delayCall: function delayCall(delay, callback, scope) {
       // Invoke callback under scene's 'postupdate' event
-      this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+      this.delayCallTimer = PostStepDelayCall(this, delay, callback, scope);
       return this;
     },
     removeDelayCall: function removeDelayCall() {
@@ -12540,9 +12544,7 @@
     return TextBase;
   }(GameObject$3);
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip,
-  // Components.FX,  // Open for 3.60
-  Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$2]);
+  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$2]);
 
   var Pad$1 = Phaser.Utils.String.Pad;
   var GetStyle = function GetStyle(style, canvas, context) {
@@ -16107,9 +16109,7 @@
     return Canvas;
   }(GameObject$1);
   var Components$1 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas$1, [Components$1.Alpha, Components$1.BlendMode, Components$1.Crop, Components$1.Depth, Components$1.Flip,
-  // Components.FX,  // Open for 3.60
-  Components$1.GetBounds, Components$1.Mask, Components$1.Origin, Components$1.Pipeline, Components$1.ScrollFactor, Components$1.Tint, Components$1.Transform, Components$1.Visible, Render$1, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas$1, [Components$1.Alpha, Components$1.BlendMode, Components$1.Crop, Components$1.Depth, Components$1.Flip, Components$1.GetBounds, Components$1.Mask, Components$1.Origin, Components$1.Pipeline, Components$1.ScrollFactor, Components$1.Tint, Components$1.Transform, Components$1.Visible, Render$1, CanvasMethods, TextureMethods]);
 
   var DataMethods = {
     enableData: function enableData() {
@@ -17833,7 +17833,8 @@
       // parent
       text,
       // text
-      this.textStyle);
+      this.textStyle) // style
+      ;
     } else {
       child.setParent(this).setActive().modifyStyle(this.textStyle).setText(text);
     }
@@ -17853,7 +17854,8 @@
         // parent
         _char,
         // text
-        this.textStyle);
+        this.textStyle) // style
+        ;
       } else {
         child.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
       }
@@ -18819,25 +18821,25 @@
       maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
       // Append non-typeable child directly
-      var _char = children[childIndex];
+      var child = children[childIndex];
       childIndex++;
       if (!child.renderable) {
-        _char.setActive();
-        resultChildren.push(_char);
-        lastLine.push(_char);
+        child.setActive();
+        resultChildren.push(child);
+        lastLine.push(child);
         continue;
       }
-      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
+      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : child.height) + letterSpacing;
       // Next line
-      var isNewLineChar = IsNewLineChar(_char);
-      var isPageBreakChar = IsPageBreakChar(_char);
+      var isNewLineChar = IsNewLineChar(child);
+      var isPageBreakChar = IsPageBreakChar(child);
       var isControlChar = isNewLineChar || isPageBreakChar;
       if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
-          _char.setActive().setPosition(x, y).setOrigin(0.5);
-          resultChildren.push(_char);
-          lastLine.push(_char);
+          child.setActive().setPosition(x, y).setOrigin(0.5);
+          resultChildren.push(child);
+          lastLine.push(child);
         }
 
         // Move cursor
@@ -18861,9 +18863,9 @@
       }
       remainderHeight -= childHeight;
       lastLineHeight += childHeight;
-      _char.setActive().setPosition(x, y).setOrigin(0.5);
-      resultChildren.push(_char);
-      lastLine.push(_char);
+      child.setActive().setPosition(x, y).setOrigin(0.5);
+      resultChildren.push(child);
+      lastLine.push(child);
       y += childHeight;
     }
     if (lastLine.length > 0) {

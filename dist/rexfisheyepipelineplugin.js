@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -102,6 +102,20 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float mode;\nuniform vec2 texSize;\nuniform vec2 center;\nuniform float radius;\nuniform float intensity;\n\nvoid main (void) {\n  vec2 tc = outTexCoord * texSize;  \n  tc -= center;\n  float dist = length(tc) / radius;\n  if (dist < 1.0) {\n    float factor;\n    if (mode > 0.0) {\n      factor = sin(dist * 1.570795);\n    } else {\n      factor = asin(dist) / 1.570795;\n    }\n    tc *= mix(1.0, factor, intensity);\n  }\n\n  tc += center;\n  gl_FragColor = texture2D(uMainSampler, tc / texSize);\n\n}\n";

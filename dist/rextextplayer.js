@@ -4,6 +4,33 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextplayer = factory());
 })(this, (function () { 'use strict';
 
+  function _iterableToArrayLimit(arr, i) {
+    var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+    if (null != _i) {
+      var _s,
+        _e,
+        _x,
+        _r,
+        _arr = [],
+        _n = !0,
+        _d = !1;
+      try {
+        if (_x = (_i = _i.call(arr)).next, 0 === i) {
+          if (Object(_i) !== _i) return;
+          _n = !1;
+        } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+      } catch (err) {
+        _d = !0, _e = err;
+      } finally {
+        try {
+          if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return;
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+      return _arr;
+    }
+  }
   function _typeof(obj) {
     "@babel/helpers - typeof";
 
@@ -24,7 +51,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -36,6 +63,7 @@
     return Constructor;
   }
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -173,7 +201,7 @@
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
     if (!s && isStrict) {
-      throw new Error('failed to set property');
+      throw new TypeError('failed to set property');
     }
     return value;
   }
@@ -195,30 +223,6 @@
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-  function _iterableToArrayLimit(arr, i) {
-    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-    if (_i == null) return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _s, _e;
-    try {
-      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -237,6 +241,20 @@
   }
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var SceneClass = Phaser.Scene;
@@ -3635,9 +3653,7 @@
     return Canvas;
   }(GameObject$1);
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
-  // Components.FX,  // Open for 3.60
-  Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var GetPadding$1 = function GetPadding(padding, key) {
@@ -5839,7 +5855,8 @@
       // parent
       text,
       // text
-      this.textStyle);
+      this.textStyle) // style
+      ;
     } else {
       child.setParent(this).setActive().modifyStyle(this.textStyle).setText(text);
     }
@@ -5859,7 +5876,8 @@
         // parent
         _char,
         // text
-        this.textStyle);
+        this.textStyle) // style
+        ;
       } else {
         child.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
       }
@@ -6892,25 +6910,25 @@
       maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
       // Append non-typeable child directly
-      var _char = children[childIndex];
+      var child = children[childIndex];
       childIndex++;
       if (!child.renderable) {
-        _char.setActive();
-        resultChildren.push(_char);
-        lastLine.push(_char);
+        child.setActive();
+        resultChildren.push(child);
+        lastLine.push(child);
         continue;
       }
-      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
+      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : child.height) + letterSpacing;
       // Next line
-      var isNewLineChar = IsNewLineChar(_char);
-      var isPageBreakChar = IsPageBreakChar(_char);
+      var isNewLineChar = IsNewLineChar(child);
+      var isPageBreakChar = IsPageBreakChar(child);
       var isControlChar = isNewLineChar || isPageBreakChar;
       if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
-          _char.setActive().setPosition(x, y).setOrigin(0.5);
-          resultChildren.push(_char);
-          lastLine.push(_char);
+          child.setActive().setPosition(x, y).setOrigin(0.5);
+          resultChildren.push(child);
+          lastLine.push(child);
         }
 
         // Move cursor
@@ -6934,9 +6952,9 @@
       }
       remainderHeight -= childHeight;
       lastLineHeight += childHeight;
-      _char.setActive().setPosition(x, y).setOrigin(0.5);
-      resultChildren.push(_char);
-      lastLine.push(_char);
+      child.setActive().setPosition(x, y).setOrigin(0.5);
+      resultChildren.push(child);
+      lastLine.push(child);
       y += childHeight;
     }
     if (lastLine.length > 0) {
@@ -10088,10 +10106,10 @@
   };
   var StopAnimation = function StopAnimation(params) {
     var goType, args;
+    // this: textPlayer
     var _params2 = _toArray(params);
     goType = _params2[0];
     args = _params2.slice(1);
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     gameObjectManager.stopAnimation.apply(gameObjectManager, _toConsumableArray(args));
   };
@@ -10130,10 +10148,10 @@
   };
   var PauseAnimation = function PauseAnimation(params) {
     var goType, args;
+    // this: textPlayer
     var _params = _toArray(params);
     goType = _params[0];
     args = _params.slice(1);
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     gameObjectManager.pauseAnimation.apply(gameObjectManager, _toConsumableArray(args));
   };
@@ -10173,10 +10191,10 @@
   };
   var ChainAnimation = function ChainAnimation(params) {
     var goType, args;
+    // this: textPlayer
     var _params = _toArray(params);
     goType = _params[0];
     args = _params.slice(1);
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     gameObjectManager.chainAnimation.apply(gameObjectManager, _toConsumableArray(args));
   };
@@ -10251,19 +10269,19 @@
   };
   var AddGameObject = function AddGameObject(params) {
     var goType, args;
+    // this: textPlayer
     var _params = _toArray(params);
     goType = _params[0];
     args = _params.slice(1);
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     gameObjectManager.add.apply(gameObjectManager, _toConsumableArray(args));
   };
   var RemoveGameObject = function RemoveGameObject(params) {
     var goType, args;
+    // this: textPlayer
     var _params2 = _toArray(params);
     goType = _params2[0];
     args = _params2.slice(1);
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     gameObjectManager.remove.apply(gameObjectManager, _toConsumableArray(args));
   };
@@ -10336,13 +10354,12 @@
   };
   var CallMethod = function CallMethod(params) {
     var goType, name, prop, args;
+    // this: textPlayer
     var _params = _toArray(params);
     goType = _params[0];
     name = _params[1];
     prop = _params[2];
     args = _params.slice(3);
-    // this: textPlayer
-
     var eventName = "".concat(goType, ".").concat(prop);
     this.emit.apply(this, [eventName, name].concat(_toConsumableArray(args)));
     if (this.listenerCount(eventName) > 0) {
@@ -10418,6 +10435,7 @@
   };
   var EaseProperty = function EaseProperty(params) {
     var goType, name, property, value, duration, ease, repeat, easeMode;
+    // this: textPlayer
     var _params = _slicedToArray(params, 8);
     goType = _params[0];
     name = _params[1];
@@ -10427,7 +10445,6 @@
     ease = _params[5];
     repeat = _params[6];
     easeMode = _params[7];
-    // this: textPlayer
     var gameObjectManager = this.getGameObjectManager(goType);
     var currentValue = gameObjectManager.getProperty(name, property);
     // Only can tween number property

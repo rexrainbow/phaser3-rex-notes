@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey$2(descriptor.key), descriptor);
     }
   }
   function _createClass$2(Constructor, protoProps, staticProps) {
@@ -125,6 +125,20 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function _toPrimitive$2(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey$2(arg) {
+    var key = _toPrimitive$2(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var EventEmitterMethods = {
@@ -715,11 +729,6 @@
     }
     return matched;
   }
-
-  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-  function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   function deepFind(obj, path) {
     var keySeparator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
     if (!obj) return undefined;
@@ -754,6 +763,11 @@
     }
     return current;
   }
+
+  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+  function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   var ResourceStore = function (_EventEmitter) {
     _inherits(ResourceStore, _EventEmitter);
     var _super = _createSuper$3(ResourceStore);
@@ -1012,14 +1026,24 @@
           if (appendNamespaceToCIMode) {
             var nsSeparator = options.nsSeparator || this.options.nsSeparator;
             if (returnDetails) {
-              resolved.res = "".concat(namespace).concat(nsSeparator).concat(key);
-              return resolved;
+              return {
+                res: "".concat(namespace).concat(nsSeparator).concat(key),
+                usedKey: key,
+                exactUsedKey: key,
+                usedLng: lng,
+                usedNS: namespace
+              };
             }
             return "".concat(namespace).concat(nsSeparator).concat(key);
           }
           if (returnDetails) {
-            resolved.res = key;
-            return resolved;
+            return {
+              res: key,
+              usedKey: key,
+              exactUsedKey: key,
+              usedLng: lng,
+              usedNS: namespace
+            };
           }
           return key;
         }
@@ -1165,6 +1189,7 @@
             var nestAft = na && na.length;
             if (nestBef < nestAft) options.nest = false;
           }
+          if (!options.lng && this.options.compatibilityAPI !== 'v1' && resolved && resolved.res) options.lng = resolved.usedLng;
           if (options.nest !== false) res = this.interpolator.nest(res, function () {
             for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
               args[_key] = arguments[_key];
@@ -1364,6 +1389,8 @@
             var lngOnly = _this.getLanguagePartFromCode(code);
             if (_this.isSupportedCode(lngOnly)) return found = lngOnly;
             found = _this.options.supportedLngs.find(function (supportedLng) {
+              if (supportedLng === lngOnly) return supportedLng;
+              if (supportedLng.indexOf('-') < 0 && lngOnly.indexOf('-') < 0) return;
               if (supportedLng.indexOf(lngOnly) === 0) return supportedLng;
             });
           });
@@ -1721,6 +1748,16 @@
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function deepFindWithDefaults(data, defaultData, key) {
+    var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
+    var ignoreJSONStructure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var path = getPathWithDefaults(data, defaultData, key);
+    if (!path && ignoreJSONStructure && typeof key === 'string') {
+      path = deepFind(data, key, keySeparator);
+      if (path === undefined) path = deepFind(defaultData, key, keySeparator);
+    }
+    return path;
+  }
   var Interpolator = function () {
     function Interpolator() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1783,7 +1820,7 @@
         }
         var handleFormat = function handleFormat(key) {
           if (key.indexOf(_this.formatSeparator) < 0) {
-            var path = getPathWithDefaults(data, defaultData, key);
+            var path = deepFindWithDefaults(data, defaultData, key, _this.options.keySeparator, _this.options.ignoreJSONStructure);
             return _this.alwaysFormat ? _this.format(path, undefined, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
               interpolationkey: key
             })) : path;
@@ -1791,7 +1828,7 @@
           var p = key.split(_this.formatSeparator);
           var k = p.shift().trim();
           var f = p.join(_this.formatSeparator).trim();
-          return _this.format(getPathWithDefaults(data, defaultData, k), f, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
+          return _this.format(deepFindWithDefaults(data, defaultData, k, _this.options.keySeparator, _this.options.ignoreJSONStructure), f, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
             interpolationkey: k
           }));
         };
@@ -1818,7 +1855,7 @@
               if (typeof missingInterpolationHandler === 'function') {
                 var temp = missingInterpolationHandler(str, match, options);
                 value = typeof temp === 'string' ? temp : '';
-              } else if (options && options.hasOwnProperty(matchedVar)) {
+              } else if (options && Object.prototype.hasOwnProperty.call(options, matchedVar)) {
                 value = '';
               } else if (skipOnVariables) {
                 value = match[0];
@@ -1967,34 +2004,34 @@
       this.logger = baseLogger.create('formatter');
       this.options = options;
       this.formats = {
-        number: createCachedFormatter(function (lng, options) {
-          var formatter = new Intl.NumberFormat(lng, options);
+        number: createCachedFormatter(function (lng, opt) {
+          var formatter = new Intl.NumberFormat(lng, _objectSpread$2({}, opt));
           return function (val) {
             return formatter.format(val);
           };
         }),
-        currency: createCachedFormatter(function (lng, options) {
-          var formatter = new Intl.NumberFormat(lng, _objectSpread$2(_objectSpread$2({}, options), {}, {
+        currency: createCachedFormatter(function (lng, opt) {
+          var formatter = new Intl.NumberFormat(lng, _objectSpread$2(_objectSpread$2({}, opt), {}, {
             style: 'currency'
           }));
           return function (val) {
             return formatter.format(val);
           };
         }),
-        datetime: createCachedFormatter(function (lng, options) {
-          var formatter = new Intl.DateTimeFormat(lng, _objectSpread$2({}, options));
+        datetime: createCachedFormatter(function (lng, opt) {
+          var formatter = new Intl.DateTimeFormat(lng, _objectSpread$2({}, opt));
           return function (val) {
             return formatter.format(val);
           };
         }),
-        relativetime: createCachedFormatter(function (lng, options) {
-          var formatter = new Intl.RelativeTimeFormat(lng, _objectSpread$2({}, options));
+        relativetime: createCachedFormatter(function (lng, opt) {
+          var formatter = new Intl.RelativeTimeFormat(lng, _objectSpread$2({}, opt));
           return function (val) {
-            return formatter.format(val, options.range || 'day');
+            return formatter.format(val, opt.range || 'day');
           };
         }),
-        list: createCachedFormatter(function (lng, options) {
-          var formatter = new Intl.ListFormat(lng, _objectSpread$2({}, options));
+        list: createCachedFormatter(function (lng, opt) {
+          var formatter = new Intl.ListFormat(lng, _objectSpread$2({}, opt));
           return function (val) {
             return formatter.format(val);
           };
@@ -2023,8 +2060,9 @@
       }
     }, {
       key: "format",
-      value: function format(value, _format, lng, options) {
+      value: function format(value, _format, lng) {
         var _this = this;
+        var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
         var formats = _format.split(this.formatSeparator);
         var result = formats.reduce(function (mem, f) {
           var _parseFormatStr = parseFormatStr(f),
@@ -2153,8 +2191,8 @@
               if (!loaded[l]) loaded[l] = {};
               var loadedKeys = q.loaded[l];
               if (loadedKeys.length) {
-                loadedKeys.forEach(function (ns) {
-                  if (loaded[l][ns] === undefined) loaded[l][ns] = true;
+                loadedKeys.forEach(function (n) {
+                  if (loaded[l][n] === undefined) loaded[l][n] = true;
                 });
               }
             });
@@ -2808,7 +2846,7 @@
         var _this7 = this;
         var deferred = defer();
         if (!this.options.ns) {
-          callback && callback();
+          if (callback) callback();
           return Promise.resolve();
         }
         if (typeof ns === 'string') ns = [ns];
@@ -3135,6 +3173,9 @@
       parsePayload: function parsePayload(namespace, key, fallbackValue) {
         return _defineProperty({}, key, fallbackValue || '');
       },
+      parseLoadPayload: function parseLoadPayload(languages, namespaces) {
+        return undefined;
+      },
       request: request,
       reloadInterval: typeof window !== 'undefined' ? false : 60 * 60 * 1000,
       customHeaders: {},
@@ -3207,7 +3248,10 @@
       key: "loadUrl",
       value: function loadUrl(url, callback, languages, namespaces) {
         var _this3 = this;
-        this.options.request(this.options, url, undefined, function (err, res) {
+        var lng = typeof languages === 'string' ? [languages] : languages;
+        var ns = typeof namespaces === 'string' ? [namespaces] : namespaces;
+        var payload = this.options.parseLoadPayload(lng, ns);
+        this.options.request(this.options, url, payload, function (err, res) {
           if (res && (res.status >= 500 && res.status < 600 || !res.status)) return callback('failed loading ' + url + '; status code: ' + res.status, true);
           if (res && res.status >= 400 && res.status < 500) return callback('failed loading ' + url + '; status code: ' + res.status, false);
           if (!res && err && err.message && err.message.indexOf('Failed to fetch') > -1) return callback('failed loading ' + url + ': ' + err.message, true);

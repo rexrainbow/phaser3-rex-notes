@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -102,6 +102,20 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 split;\nuniform float spaceLeft;\nuniform float spaceRight;\nuniform float spaceTop;\nuniform float spaceBottom;\nuniform float angle;\nuniform float shiftEnable;\n\nvec2 rotate(vec2 uv, float angle) {\n  float s = sin(angle);\n  float c = cos(angle);\n  return vec2(\n    uv.x * c + uv.y * s,\n    uv.y * c - uv.x * s\n  );\n}\n\nvoid main (void) {\n  vec2 tc = outTexCoord * texSize;  \n  tc -= split;\n  tc = rotate(tc, -angle);\n\n  if (\n    ((tc.x > -spaceLeft) && (tc.x < spaceRight)) ||\n    ((tc.y > -spaceTop) && (tc.y < spaceBottom))\n  ) {\n    gl_FragColor = vec4(0,0,0,0);\n  } else {\n    if (shiftEnable > 0.0) {\n      tc.x += (tc.x < 0.0)? spaceLeft: -spaceRight;\n      tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;\n    }\n\n    tc = rotate(tc, angle);\n    tc += split;\n    gl_FragColor = texture2D(uMainSampler, tc / texSize);\n  }\n\n}\n";

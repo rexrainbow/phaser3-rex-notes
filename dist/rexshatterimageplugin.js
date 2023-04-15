@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -125,6 +125,20 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   function createCommonjsModule(fn, module) {
@@ -256,16 +270,12 @@
            * array even if we don't, though, since we need to make a supertriangle
            * later on!) */
           vertices = vertices.slice(0);
-          if (key) for (i = n; i--;) {
-            vertices[i] = vertices[i][key];
-          }
+          if (key) for (i = n; i--;) vertices[i] = vertices[i][key];
 
           /* Make an array of indices into the vertex array, sorted by the
            * vertices' x-position. */
           indices = new Array(n);
-          for (i = n; i--;) {
-            indices[i] = i;
-          }
+          for (i = n; i--;) indices[i] = i;
           indices.sort(function (i, j) {
             return vertices[j][0] - vertices[i][0];
           });
@@ -324,13 +334,9 @@
           /* Copy any remaining open triangles to the closed list, and then
            * remove any triangles that share a vertex with the supertriangle,
            * building a list of triplets that represent triangles. */
-          for (i = open.length; i--;) {
-            closed.push(open[i]);
-          }
+          for (i = open.length; i--;) closed.push(open[i]);
           open.length = 0;
-          for (i = closed.length; i--;) {
-            if (closed[i].i < n && closed[i].j < n && closed[i].k < n) open.push(closed[i].i, closed[i].j, closed[i].k);
-          }
+          for (i = closed.length; i--;) if (closed[i].i < n && closed[i].j < n && closed[i].k < n) open.push(closed[i].i, closed[i].j, closed[i].k);
 
           /* Yay, we're done! */
           return open;

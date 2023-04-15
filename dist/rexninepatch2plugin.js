@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -150,6 +150,20 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
@@ -715,6 +729,7 @@
     var offsetX = 0,
       offsetY = 0;
     var imageType;
+    this._beginDraw();
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
       rowHeight = row.stretch === 0 ? row.height * fixedPartScaleY : proportionHeight * row.stretch;
@@ -748,6 +763,7 @@
       }
       offsetY += rowHeight;
     }
+    this._endDraw();
   };
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
@@ -804,8 +820,10 @@
   };
 
   var Methods$1 = {
+    _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
+    _endDraw: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
     setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
@@ -908,7 +926,12 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
           this.updateTexture();
           return this;
         }
@@ -1448,20 +1471,13 @@
     var ty = -displayOriginY;
     var tw = tx + width;
     var th = ty + height;
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
     var tint = GetTint(this.tint, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
+    pipeline.batchQuad(this.parent, quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7], u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {

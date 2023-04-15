@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -102,6 +102,20 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag$4 = "vec3 RGBToHSV(vec3 color) {\n  float minv, maxv, delta;\n  vec3 res;\n  minv = min(min(color.r, color.g), color.b);\n  maxv = max(max(color.r, color.g), color.b);\n  res.z = maxv;            // v\n\n  delta = maxv - minv;\n  if( maxv != 0.0 ) {\n    res.y = delta / maxv;      // s\n  } else {\n    // s = 0, v is undefined\n    res.y = 0.0;\n    res.x = -1.0;\n    return res;\n  }\n\n  if( color.r == maxv ) {\n    res.x = ( color.g - color.b ) / delta;      // between yellow & magenta\n  } else if( color.g == maxv ) {\n    res.x = 2.0 + ( color.b - color.r ) / delta;   // between cyan & yellow\n  } else {\n    res.x = 4.0 + ( color.r - color.g ) / delta;   // between magenta & cyan\n  }\n\n  res.x = res.x * 60.0;            // degrees\n  if( res.x < 0.0 ) {\n    res.x = res.x + 360.0;\n  }\n   \n  return res;\n}\n";

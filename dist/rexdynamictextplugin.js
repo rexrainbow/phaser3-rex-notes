@@ -24,7 +24,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass(Constructor, protoProps, staticProps) {
@@ -36,6 +36,7 @@
     return Constructor;
   }
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -173,7 +174,7 @@
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
     if (!s && isStrict) {
-      throw new Error('failed to set property');
+      throw new TypeError('failed to set property');
     }
     return value;
   }
@@ -201,6 +202,20 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _toPrimitive(input, hint) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 
   // copy from Phaser.GameObjects.Text
@@ -580,9 +595,7 @@
     return Canvas;
   }(GameObject$1);
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
-  // Components.FX,  // Open for 3.60
-  Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
   var GetValue$a = Phaser.Utils.Objects.GetValue;
   var GetPadding$1 = function GetPadding(padding, key) {
@@ -2778,7 +2791,8 @@
       // parent
       text,
       // text
-      this.textStyle);
+      this.textStyle) // style
+      ;
     } else {
       child.setParent(this).setActive().modifyStyle(this.textStyle).setText(text);
     }
@@ -2798,7 +2812,8 @@
         // parent
         _char,
         // text
-        this.textStyle);
+        this.textStyle) // style
+        ;
       } else {
         child.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
       }
@@ -3831,25 +3846,25 @@
       maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
       // Append non-typeable child directly
-      var _char = children[childIndex];
+      var child = children[childIndex];
       childIndex++;
       if (!child.renderable) {
-        _char.setActive();
-        resultChildren.push(_char);
-        lastLine.push(_char);
+        child.setActive();
+        resultChildren.push(child);
+        lastLine.push(child);
         continue;
       }
-      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
+      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : child.height) + letterSpacing;
       // Next line
-      var isNewLineChar = IsNewLineChar(_char);
-      var isPageBreakChar = IsPageBreakChar(_char);
+      var isNewLineChar = IsNewLineChar(child);
+      var isPageBreakChar = IsPageBreakChar(child);
       var isControlChar = isNewLineChar || isPageBreakChar;
       if (remainderHeight < childHeight || isControlChar) {
         // Add to result
         if (isNewLineChar) {
-          _char.setActive().setPosition(x, y).setOrigin(0.5);
-          resultChildren.push(_char);
-          lastLine.push(_char);
+          child.setActive().setPosition(x, y).setOrigin(0.5);
+          resultChildren.push(child);
+          lastLine.push(child);
         }
 
         // Move cursor
@@ -3873,9 +3888,9 @@
       }
       remainderHeight -= childHeight;
       lastLineHeight += childHeight;
-      _char.setActive().setPosition(x, y).setOrigin(0.5);
-      resultChildren.push(_char);
-      lastLine.push(_char);
+      child.setActive().setPosition(x, y).setOrigin(0.5);
+      resultChildren.push(child);
+      lastLine.push(child);
       y += childHeight;
     }
     if (lastLine.length > 0) {
