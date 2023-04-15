@@ -3414,7 +3414,6 @@
       getFrameNameCallback = GetFrameNameCallback(frame, getFrameNameCallback);
     }
     var texture = scene.sys.textures.get(key);
-    var isRenderTexture = texture.source[0].isRenderTexture;
     var baseFrame = _typeof(frame) === 'object' ? frame : texture.get(frame);
     var baseWidth = baseFrame.width,
       baseHeight = baseFrame.height;
@@ -3428,11 +3427,7 @@
       for (var x = 0; x < columns; x++) {
         cellName = getFrameNameCallback(x, y);
         cellX = offsetX + baseFrame.cutX;
-        if (!isRenderTexture) {
-          cellY = offsetY + baseFrame.cutY;
-        } else {
-          cellY = baseHeight - offsetY - cellHeight + baseFrame.cutY;
-        }
+        cellY = offsetY + baseFrame.cutY;
         texture.add(cellName, 0, cellX, cellY, cellWidth, cellHeight);
         offsetX += cellWidth;
       }

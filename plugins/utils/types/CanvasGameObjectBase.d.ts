@@ -65,18 +65,24 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
 
     defaultPipeline: Phaser.Renderer.WebGL.WebGLPipeline;
     pipeline: Phaser.Renderer.WebGL.WebGLPipeline;
+    pipelineData: object;
+    initPipeline(pipeline?: string | Phaser.Renderer.WebGL.WebGLPipeline): boolean;
+    setPipeline(pipeline: string | Phaser.Renderer.WebGL.WebGLPipeline, pipelineData?: object, copyData?: boolean): this;
+    setPipelineData(key: string, value?: any): this;
+    resetPipeline(resetData?: boolean): boolean;
+    getPipelineName(): string;
     hasPostPipeline: boolean;
     postPipelines: Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[];
-    pipelineData: object;
-    initPipeline(pipeline: string | Phaser.Renderer.WebGL.WebGLPipeline): boolean;
-    setPipeline(pipeline: string | Phaser.Renderer.WebGL.WebGLPipeline, pipelineData?: object, copyData?: boolean): this;
+    postPipelineData: object;
+    preFX: Phaser.GameObjects.Components.FX | null;
+    postFX: Phaser.GameObjects.Components.FX;
+    initPostPipeline(preFX?: boolean): void;
     setPostPipeline(pipelines: string | string[] | Function | Function[] | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[], pipelineData?: object, copyData?: boolean): this;
-    setPipelineData(key: string, value?: any): this;
+    setPostPipelineData(key: string, value?: any): this;
     getPostPipeline(pipeline: string | Function | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline): Phaser.Renderer.WebGL.Pipelines.PostFXPipeline | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[];
-    resetPipeline(resetPostPipelines?: boolean, resetData?: boolean): boolean;
     resetPostPipeline(resetData?: boolean): void;
     removePostPipeline(pipeline: string | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline): this;
-    getPipelineName(): string;
+    clearFX(): this;
 
     scrollFactorX: number;
     scrollFactorY: number;

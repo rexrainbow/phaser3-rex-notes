@@ -10,7 +10,6 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
     }
 
     var texture = scene.sys.textures.get(key);
-    var isRenderTexture = texture.source[0].isRenderTexture;
     var baseFrame = (typeof (frame) === 'object') ? frame : texture.get(frame);
 
     var baseWidth = baseFrame.width,
@@ -28,12 +27,7 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
             cellName = getFrameNameCallback(x, y);
 
             cellX = offsetX + baseFrame.cutX;
-
-            if (!isRenderTexture) {
-                cellY = offsetY + baseFrame.cutY;
-            } else {
-                cellY = (baseHeight - offsetY - cellHeight) + baseFrame.cutY;
-            }
+            cellY = offsetY + baseFrame.cutY;
 
             texture.add(
                 cellName, 0,

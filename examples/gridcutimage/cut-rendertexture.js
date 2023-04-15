@@ -53,7 +53,7 @@ class RenderScene extends Phaser.Scene {
         var rt = this.make.renderTexture({
             x: 0, y: 0,
             width: 800, height: 600,
-            originX: 0, originY: 0,
+            origin: 0
         }, false)
         rt.saveTexture('game')
         this.events.on('postupdate', function () {
