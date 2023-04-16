@@ -11338,7 +11338,7 @@
     return Canvas;
   }(GameObject);
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas$1, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render$1, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas$1, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.PostPipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render$1, CanvasMethods, TextureMethods]);
 
   var LoadImageMethods = {
     loadFromURL: function loadFromURL(url, callback) {

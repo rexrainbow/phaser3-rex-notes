@@ -3366,7 +3366,7 @@
     return Canvas;
   }(GameObject$3);
   var Components$3 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas$1, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Tint, Components$3.Transform, Components$3.Visible, Render$2, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas$1, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.PostPipeline, Components$3.ScrollFactor, Components$3.Tint, Components$3.Transform, Components$3.Visible, Render$2, CanvasMethods, TextureMethods]);
 
   var Pad$1 = Phaser.Utils.String.Pad;
   var GetStyle = function GetStyle(style, canvas, context) {
@@ -4018,7 +4018,7 @@
     return TextBase;
   }(GameObject$2);
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1]);
+  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.PostPipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1]);
 
   //  Key: [ Object Key, Default Value, postCallback ]
 

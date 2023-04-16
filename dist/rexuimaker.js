@@ -4582,7 +4582,7 @@
     return TextBase;
   }(GameObject$3);
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Tint, Components$4.Transform, Components$4.Visible, Render$4]);
+  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.PostPipeline, Components$4.ScrollFactor, Components$4.Tint, Components$4.Transform, Components$4.Visible, Render$4]);
 
   var Pad = Phaser.Utils.String.Pad;
   var GetStyle = function GetStyle(style, canvas, context) {
@@ -10491,7 +10491,7 @@
     return Canvas;
   }(GameObject);
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas$1, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
+  Phaser.Class.mixin(Canvas$1, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.PostPipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
 
   var LoadImageMethods = {
     loadFromURL: function loadFromURL(url, callback) {
