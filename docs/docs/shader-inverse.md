@@ -1,3 +1,6 @@
+!!! note
+    Phaser3.60 has a built-in [Color Matrix effects](shader-builtin.md#colormatrix).
+
 ## Introduction
 
 Inverse color post processing filter.

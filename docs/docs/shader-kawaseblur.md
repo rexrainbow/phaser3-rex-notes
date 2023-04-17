@@ -1,3 +1,6 @@
+!!! note
+    Phaser3.60 has a built-in [blur effect](shader-builtin.md#blur).
+
 ## Introduction
 
 Kawase-blur post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/kawase-blur/src/kawase-blur.frag)

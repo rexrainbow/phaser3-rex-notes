@@ -251,8 +251,8 @@ scene.load.audioSprite(key, jsonURL, audioURL, audioConfig);
 #### Video
 
 ```javascript
-scene.load.video(key, url, loadEvent, asBlob, noAudio);
-// scene.load.video(key, url, loadEvent, asBlob, noAudio, xhrSettings);
+scene.load.video(key, url, noAudio);
+// scene.load.video(key, url, noAudio, xhrSettings);
 ```
 
 - `url` : The absolute or relative URL to load the video files from, or a blob.
@@ -261,7 +261,8 @@ scene.load.video(key, url, loadEvent, asBlob, noAudio);
     - `'canplay'` : The video is ready to start playing.
     - `'canplaythrough'` : The video can be played all the way through, without stopping.
 - `asBlob` : Load the video as a data blob, or via the Video element? Default value is `false`.
-- `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+- `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it.
+  - `false` : Has audio track, default behavior.
 
 Get data from video cache
 

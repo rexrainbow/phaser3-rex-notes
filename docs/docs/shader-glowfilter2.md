@@ -1,3 +1,6 @@
+!!! note
+    Phaser3.60 has a built-in [Glow effect](shader-builtin.md#glow).
+
 ## Introduction
 
 Glow post processing filter, port from pixi. [Reference](https://github.com/pixijs/filters/blob/main/filters/glow/src/glow.frag)

@@ -1,3 +1,6 @@
+!!! note
+    Phaser3.60 has a built-in [pixelate effect](shader-builtin.md#pixelate).
+
 ## Introduction
 
 Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/)

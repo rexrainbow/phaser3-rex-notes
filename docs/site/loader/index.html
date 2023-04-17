@@ -9842,8 +9842,8 @@
 <li><code>audioConfig</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
 </ul>
 <h4 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
-<span class="c1">// scene.load.video(key, url, loadEvent, asBlob, noAudio, xhrSettings);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
+<span class="c1">// scene.load.video(key, url, noAudio, xhrSettings);</span>
 </code></pre></div>
 <ul>
 <li><code>url</code> : The absolute or relative URL to load the video files from, or a blob.</li>
@@ -9854,7 +9854,8 @@
 </ul>
 </li>
 <li><code>asBlob</code> : Load the video as a data blob, or via the Video element? Default value is <code>false</code>.</li>
-<li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it. Default value is <code>false</code>.</li>
+<li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it.</li>
+<li><code>false</code> : Has audio track, default behavior.</li>
 </ul>
 <p>Get data from video cache</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">video</span><span class="p">;</span>

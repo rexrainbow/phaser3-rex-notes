@@ -1,6 +1,6 @@
 ## Introduction
 
-A Video Game Object.
+Handling playback of a video file, video stream or media stream.
 
 - Author: Richard Davey
 
@@ -9,10 +9,15 @@ A Video Game Object.
 ### Load video
 
 ```javascript
-scene.load.video(key, url, loadEvent, asBlob, noAudio);
+scene.load.video(key, url, noAudio);
 ```
 
 Reference: [load video](loader.md#video)
+
+!!! note "Cross-origin"
+    Can't load video cross-origin via `scene.load.video(...)`.  
+    Using `scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)` to load video cross-origin. 
+
 
 ### Add video object
 
@@ -33,22 +38,44 @@ var video = scene.add.video(x, y, key);
 2. Play video from URL
     ```javascript
     video.loadURL(url);
-    // video.loadURL(url, loadEvent, noAudio);
+    // video.loadURL(urls, noAudio, crossOrigin);
     ```
-    - `loadEvent` : The load event to listen for when *not* loading as a blob.
-        - `'loadeddata'` : Data for the current frame is available. Default value.
-        - `'canplay'` : The video is ready to start playing.
-        - `'canplaythrough'` : The video can be played all the way through, without stopping.
-    - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+    - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it.
+        - `false` : Has audio track. Default behavior.
+    - `crossOrigin` : The value to use for the `crossOrigin` property in the video load request.  
+        - `undefined` : `crossorigin` will not be set in the request. Default behavior.
+        - `'anonymous'` 
+        - `'use-credentials'`
 
-!!! note "Control multiple video game objects independently"
-    Each `scene.load.video(key, ...)` will create a video element in cache. 
-    Video game object with the same *key* will reference the same video element and will be controlled at the same time. See this [demo](https://codepen.io/rexrainbow/pen/yLNYJdz)
+#### Load video from MediaStream
 
-    To control multiple video game objects independently :
+```javascript
+video.loadMediaStream(stream);
+// video.loadMediaStream(stream, noAudio, crossOrigin);
+```
 
-    - Load video with different key for each video game object, or  
-    - `video.loadURL(url)`
+- `stream` : The MediaStream object.
+- `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it.
+    - `false` : Has audio track. Default behavior.
+- `crossOrigin` : The value to use for the `crossOrigin` property in the video load request.  
+    - `undefined` : `crossorigin` will not be set in the request. Default behavior.
+    - `'anonymous'` 
+    - `'use-credentials'`
+
+
+```javascript
+navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    .then(function(stream) {
+        video.loadMediaStream(stream, true);
+        video.play();
+    })
+    .catch(function(err) {
+
+    })
+```
+
+- [navigator.mediaDevices.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
+
 
 ### Play
 
@@ -57,11 +84,16 @@ video.play();
 // video.play(loop, markerIn, markerOut);
 ```
 
-- `loop` : Should the video loop automatically when it reaches the end? **Not all browsers support _seamless_ video looping for all encoding formats**.
-- `markerIn`, `markerOut` : Optional in/out marker time, in *seconds*, for playback of a sequence of the video.
+- `loop` : Should the video loop automatically when it reaches the end? Please note that not all browsers support _seamless_ video looping for all encoding formats.
+- `markerIn`, `markerOut` : Optional in/out marker time, in seconds, for playback of a sequence of the video.
 
 !!! note "Play video first time"
     Call `video.play()` when playing video first time.
+
+!!! note
+    If you need audio in your videos, then you'll have to consider the fact that 
+    **the video cannot start playing until the user has interacted with the browser**, into your game flow.
+
 
 ### Pause
 
@@ -77,6 +109,7 @@ video.play();
 
 !!! note "Play video after paused"
     Call `video.setPaused(false)` to resume playing.
+
 
 ### Stop
 

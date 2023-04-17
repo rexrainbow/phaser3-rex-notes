@@ -1,3 +1,7 @@
+!!! note
+    Phaser3.60 has a built-in [barrel effect](shader-builtin.md#barrel).
+
+
 ## Introduction
 
 Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-shader-library-fish-eye-and-dome-and-barrel-distortion-post-processing-filters/)
