@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        this.print.text = this.tweens._active.length;
+        this.print.text = this.tweens.tweens.length;
     }
 }
 

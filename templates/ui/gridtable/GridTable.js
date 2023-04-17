@@ -39,8 +39,8 @@ class GridTable extends Scrollable {
         // Inject properties for scrollable interface
         InjectProperties(table);
         // Set minWidth/minHeight to 0 if tableWidth/tableHeight is undefined
-        table.minWidth = (tableWidth === undefined) ? 0 : undefined;
-        table.minHeight = (tableHeight === undefined) ? 0 : undefined;
+        table._minWidth = (tableWidth === undefined) ? 0 : undefined;
+        table._minHeight = (tableHeight === undefined) ? 0 : undefined;
 
         // Fill config of scrollable
         config.type = 'rexGridTable';
