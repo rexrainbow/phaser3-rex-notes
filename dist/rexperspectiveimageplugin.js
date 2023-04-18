@@ -293,16 +293,6 @@
         return 0.5;
       }
     }, {
-      key: "displayOriginX",
-      get: function get() {
-        return this.width * 0.5;
-      }
-    }, {
-      key: "displayOriginY",
-      get: function get() {
-        return this.height * 0.5;
-      }
-    }, {
       key: "resetPerspective",
       value: function resetPerspective() {
         this.setPerspective(this.width, this.height, FOV);

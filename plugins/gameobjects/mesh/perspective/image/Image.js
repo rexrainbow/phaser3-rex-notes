@@ -41,14 +41,6 @@ class Image extends Mesh {
         return 0.5;
     }
 
-    get displayOriginX() {
-        return this.width * 0.5;
-    }
-
-    get displayOriginY() {
-        return this.height * 0.5;
-    }
-
     resetPerspective() {
         this.setPerspective(this.width, this.height, FOV);
         return this;
