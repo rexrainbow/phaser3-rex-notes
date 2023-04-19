@@ -10523,8 +10523,10 @@
       key: "destroy",
       value: function destroy(fromScene) {
         _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-        this.rt.destroy();
-        this.rt = null;
+        if (this.rt !== null) {
+          this.rt.destroy();
+          this.rt = null;
+        }
       }
     }, {
       key: "snapshot",

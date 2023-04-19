@@ -26,8 +26,10 @@ class RenderTexture extends Image {
     destroy(fromScene) {
         super.destroy(fromScene);
 
-        this.rt.destroy();
-        this.rt = null;
+        if (this.rt !== null) {
+            this.rt.destroy();
+            this.rt = null;
+        }
     }
 
     snapshot(gameObjects, config) {
