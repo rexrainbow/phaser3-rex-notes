@@ -16,7 +16,7 @@ class FullWindowRectangle extends Rectangle {
 
     destroy(fromScene) {  // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
             return;
         }
 

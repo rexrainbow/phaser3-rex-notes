@@ -73,7 +73,7 @@ class GridSizer extends BaseSizer {
 
     destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
             return;
         }
 

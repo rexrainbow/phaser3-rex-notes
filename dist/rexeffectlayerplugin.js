@@ -210,6 +210,10 @@
     }, {
       key: "destroy",
       value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
+        }
         this.scene.game.events.off('prerender', this.drawTargets, this);
         this.scene.sys.scale.off('resize', this.onWindowResize, this);
         // Private texture will be removed by shader game object

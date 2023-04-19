@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     preload() {
     }
 
-    create() {       
+    create() {
     }
 
     update(time, delta) {

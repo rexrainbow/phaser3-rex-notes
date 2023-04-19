@@ -247,7 +247,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -2030,7 +2030,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
@@ -6518,7 +6518,7 @@
       value: function destroy(fromScene) {
         // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.scene.sys.events.off('prerender', this.resize, this);
@@ -9686,7 +9686,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -10467,18 +10467,6 @@
         } else {
           return this.vertices[0].color;
         }
-      },
-      set: function set(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          vertices[i].color = value;
-        }
-      }
-    }, {
-      key: "setTint",
-      value: function setTint(color) {
-        this.tint = color;
-        return this;
       }
     }]);
     return Image;
@@ -10522,11 +10510,13 @@
     _createClass(RenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-        if (this.rt !== null) {
-          this.rt.destroy();
-          this.rt = null;
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
         }
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+        this.rt.destroy();
+        this.rt = null;
       }
     }, {
       key: "snapshot",

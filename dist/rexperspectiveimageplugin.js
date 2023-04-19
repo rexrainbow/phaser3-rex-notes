@@ -437,18 +437,6 @@
         } else {
           return this.vertices[0].color;
         }
-      },
-      set: function set(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          vertices[i].color = value;
-        }
-      }
-    }, {
-      key: "setTint",
-      value: function setTint(color) {
-        this.tint = color;
-        return this;
       }
     }]);
     return Image;
@@ -860,11 +848,13 @@
     _createClass(RenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-        if (this.rt !== null) {
-          this.rt.destroy();
-          this.rt = null;
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
         }
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+        this.rt.destroy();
+        this.rt = null;
       }
     }, {
       key: "snapshot",
@@ -930,11 +920,11 @@
       return _this;
     }
     _createClass(Sprite, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
+      key: "preDestroy",
+      value: function preDestroy() {
+        _get(_getPrototypeOf(Sprite.prototype), "preDestroy", this).call(this);
         this.anims.destroy();
         this.anims = undefined;
-        _get(_getPrototypeOf(Sprite.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
       key: "preUpdate",
@@ -1046,7 +1036,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -2483,7 +2473,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
@@ -4554,7 +4544,7 @@
       _createClass(Base, [{
         key: "destroy",
         value: function destroy(fromScene) {
-          if (!this.scene) {
+          if (!this.scene || this.ignoreDestroy) {
             return;
           }
           this.exit();

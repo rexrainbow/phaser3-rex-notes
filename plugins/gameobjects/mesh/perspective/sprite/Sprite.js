@@ -19,10 +19,11 @@ class Sprite extends PerspectiveImage {
         this.anims = new AnimationState(this);
     }
 
-    destroy(fromScene) {
+    preDestroy() {
+        super.preDestroy();
+
         this.anims.destroy();
         this.anims = undefined;
-        super.destroy(fromScene);
     }
 
     preUpdate(time, delta) {

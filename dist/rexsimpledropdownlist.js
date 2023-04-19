@@ -247,7 +247,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -2030,7 +2030,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
@@ -6518,7 +6518,7 @@
       value: function destroy(fromScene) {
         // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.scene.sys.events.off('prerender', this.resize, this);
@@ -9686,7 +9686,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -11860,7 +11860,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
@@ -12536,7 +12536,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
@@ -12952,7 +12952,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (this.listPanel) {

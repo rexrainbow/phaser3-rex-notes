@@ -19,10 +19,6 @@ var VideoBase = function (GOClass) {
         }
 
         preDestroy() {
-            //  This Game Object has already been destroyed
-            if (!this.scene) {
-                return;
-            }
             if (this.video) {
                 this.video.pause();
                 this.video.removeAttribute('src'); // empty source

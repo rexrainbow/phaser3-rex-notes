@@ -50,8 +50,4 @@ declare class Image extends Phaser.GameObjects.Mesh {
     readonly bottomLeft: Image.ControlPoint;
     readonly bottomCenter: Image.ControlPoint;
     readonly bottomRight: Image.ControlPoint;
-
-    tint: number;
-    setTint(color: number): this;
-
 }

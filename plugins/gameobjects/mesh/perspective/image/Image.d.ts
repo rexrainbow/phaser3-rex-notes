@@ -42,7 +42,6 @@ declare class Image extends Phaser.GameObjects.Mesh {
     rotationY: number;
     rotationZ: number;
 
-    tint: number;
     setTint(color: number): this;
 
 }

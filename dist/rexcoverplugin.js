@@ -165,7 +165,7 @@
       value: function destroy(fromScene) {
         // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.scene.sys.events.off('prerender', this.resize, this);

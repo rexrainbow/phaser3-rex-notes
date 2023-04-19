@@ -177,18 +177,6 @@ class Image extends Mesh {
         }
     }
 
-    set tint(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-            vertices[i].color = value;
-        }
-    }
-
-    setTint(color) {
-        this.tint = color;
-        return this;
-    }
-
 }
 
 export default Image;

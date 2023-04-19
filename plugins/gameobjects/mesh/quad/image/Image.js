@@ -26,13 +26,18 @@ class Image extends Mesh {
         this.syncSize();
     }
 
-    preDestroy() {
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
+        super.destroy(fromScene);
+
         for (var i = 0, cnt = this.controlPoints.length; i < cnt; i++) {
             this.controlPoints[i].destroy();
         }
         this.controlPoints = undefined;
-
-        super.preDestroy();
     }
 
     resetVerts() {
@@ -93,18 +98,6 @@ class Image extends Mesh {
         } else {
             return this.vertices[0].color;
         }
-    }
-
-    set tint(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-            vertices[i].color = value;
-        }
-    }
-
-    setTint(color) {
-        this.tint = color;
-        return this;
     }
 }
 

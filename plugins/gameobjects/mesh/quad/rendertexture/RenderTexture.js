@@ -24,6 +24,11 @@ class RenderTexture extends Image {
     }
 
     destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
         super.destroy(fromScene);
 
         this.rt.destroy();

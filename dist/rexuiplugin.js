@@ -16752,7 +16752,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         ClearEvents(this);
@@ -23458,7 +23458,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -24973,7 +24973,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
@@ -28497,7 +28497,7 @@
       value: function destroy(fromScene) {
         // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.scene.sys.events.off('prerender', this.resize, this);
@@ -31611,7 +31611,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (fromScene) {
@@ -33210,7 +33210,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (this.childrenMask) {
@@ -35825,7 +35825,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(GridSizer.prototype), "destroy", this).call(this, fromScene);
@@ -38323,7 +38323,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
@@ -38497,7 +38497,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(GridButtons.prototype), "destroy", this).call(this, fromScene);
@@ -38666,7 +38666,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
@@ -42046,7 +42046,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.textObject = undefined;
@@ -44492,7 +44492,7 @@
       value: function destroy(fromScene) {
         // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.destroyChildrenMask();
@@ -45069,7 +45069,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.scene.game.events.off('poststep', this.onPostStep, this);
@@ -45505,7 +45505,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (this.isRoot && this.pointerDownOutsideCollapsing) {
@@ -46027,7 +46027,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         if (this.listPanel) {
@@ -47614,18 +47614,6 @@
         } else {
           return this.vertices[0].color;
         }
-      },
-      set: function set(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          vertices[i].color = value;
-        }
-      }
-    }, {
-      key: "setTint",
-      value: function setTint(color) {
-        this.tint = color;
-        return this;
       }
     }]);
     return Image;
@@ -47669,11 +47657,13 @@
     _createClass(RenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-        if (this.rt !== null) {
-          this.rt.destroy();
-          this.rt = null;
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
         }
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+        this.rt.destroy();
+        this.rt = null;
       }
     }, {
       key: "snapshot",
@@ -48314,7 +48304,7 @@
       _createClass(Base, [{
         key: "destroy",
         value: function destroy(fromScene) {
-          if (!this.scene) {
+          if (!this.scene || this.ignoreDestroy) {
             return;
           }
           this.exit();
@@ -49223,7 +49213,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.destroyChildrenMask();
@@ -49800,7 +49790,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.player.destroy();
@@ -52280,7 +52270,7 @@
       key: "destroy",
       value: function destroy(fromScene) {
         //  This Game Object has already been destroyed
-        if (!this.scene) {
+        if (!this.scene || this.ignoreDestroy) {
           return;
         }
         this.stopMonitorTarget();
@@ -58711,13 +58701,17 @@
       return _this;
     }
     _createClass(Image, [{
-      key: "preDestroy",
-      value: function preDestroy() {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
+        }
+        _get(_getPrototypeOf(Image.prototype), "destroy", this).call(this, fromScene);
         for (var i = 0, cnt = this.controlPoints.length; i < cnt; i++) {
           this.controlPoints[i].destroy();
         }
         this.controlPoints = undefined;
-        _get(_getPrototypeOf(Image.prototype), "preDestroy", this).call(this);
       }
     }, {
       key: "resetVerts",
@@ -58775,18 +58769,6 @@
         } else {
           return this.vertices[0].color;
         }
-      },
-      set: function set(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          vertices[i].color = value;
-        }
-      }
-    }, {
-      key: "setTint",
-      value: function setTint(color) {
-        this.tint = color;
-        return this;
       }
     }]);
     return Image;
@@ -58949,6 +58931,10 @@
     _createClass(SkewRenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
+        }
         _get(_getPrototypeOf(SkewRenderTexture.prototype), "destroy", this).call(this, fromScene);
         this.rt.destroy();
         this.rt = null;

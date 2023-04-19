@@ -749,18 +749,6 @@
         } else {
           return this.vertices[0].color;
         }
-      },
-      set: function set(value) {
-        var vertices = this.vertices;
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          vertices[i].color = value;
-        }
-      }
-    }, {
-      key: "setTint",
-      value: function setTint(color) {
-        this.tint = color;
-        return this;
       }
     }]);
     return ShatterImage;
@@ -826,11 +814,13 @@
     _createClass(RenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-        if (this.rt !== null) {
-          this.rt.destroy();
-          this.rt = null;
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
         }
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+        this.rt.destroy();
+        this.rt = null;
       }
     }]);
     return RenderTexture;
