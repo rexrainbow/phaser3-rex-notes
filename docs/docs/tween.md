@@ -497,32 +497,6 @@ tween.setCallback(type, callback, param);
     var hasStarted = tween.hasStarted;
     ```
 
-### Tween value
-
-1. Create tween task
-    ```javascript
-    var tween = scene.tweens.addCounter({
-        from: 0,
-        to: 1,
-        ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-        duration: 1000,
-        repeat: 0,            // -1: infinity
-        yoyo: false,
-    });
-    ```
-    or
-    ```javascript
-    var tween = scene.tweens.addCounter({
-        from: 0,
-        to: 1,
-        // ...
-    });
-    ```
-1. Get value
-    ```javascript
-    var value = tween.getValue();
-    ```
-
 ### Custom ease function
 
 ```javascript
@@ -534,6 +508,115 @@ var tween = scene.tweens.add({
     },
     // ...
 });
+```
+
+### Has target
+
+```javascript
+var hasTarget = tween.hasTarget(gameObject);
+```
+
+### Tween value
+
+- Create tween task
+    ```javascript
+    var tween = scene.tweens.addCounter({
+        from: 0,
+        to: 1,
+        ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+        duration: 1000,
+        repeat: 0,            // -1: infinity
+        yoyo: false,
+        onUpdate(tween, targets, key, current, previous, param) {
+            // var value = current;
+            // var value = tween.getValue();
+        }
+    });
+    ```
+    - [More config parameters...](tween.md#create-tween-task)
+- Get value
+    ```javascript
+    var value = tween.getValue();
+    ```
+
+### Chain
+
+#### Create chain
+
+```javascript
+var chain = scene.tweens.chain({
+    targets: null,
+    tweens: [
+        {
+            // targets: gameObject,
+            alpha: 1,            
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 1000,
+            repeat: 0,            // -1: infinity
+            yoyo: false
+        },        
+        // ...
+    ],
+    
+    delay: 0,
+    completeDelay: 0,
+    loop: 0,  // repeat: 0,
+    repeatDelay: 0,
+    paused: false,
+    persist: true,
+    // callbackScope: this,
+})
+```
+
+- `targets`, or `tweenConfig.targets`
+- `tweens` : Array of [tween config](tween.md#create-tween-task)
+
+
+#### Pause / Resume chain
+
+```javascript
+chain.pause();
+```
+
+```javascript
+chain.resume();
+```
+
+#### Restart chain
+
+```javascript
+chain.restart();
+```
+
+#### Add tween task
+
+```javascript
+chain.add({
+    targets: gameObject,
+    alpha: 1,            
+    ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+    duration: 1000,
+    repeat: 0,            // -1: infinity
+    yoyo: false
+})
+```
+
+or
+
+```javascript
+chain.add([tweenConfig0, tweenConfig1, ...]);
+```
+    
+#### Remove tween task
+
+```javascript
+chain.remove(tweenTask);
+```
+
+#### Has target
+
+```javascript
+var hasTarget = chain.hasTarget(gameObject);
 ```
 
 ### Flow chart
