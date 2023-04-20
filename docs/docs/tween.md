@@ -593,7 +593,7 @@ chain.restart();
 ```javascript
 chain.add({
     targets: gameObject,
-    alpha: 1,            
+    alpha: 1,
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
     repeat: 0,            // -1: infinity
