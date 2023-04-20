@@ -7301,29 +7301,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#create-timeline" class="md-nav__link">
+    Create timeline
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-or-resume" class="md-nav__link">
-    Pause or resume
+  <a href="#start" class="md-nav__link">
+    Start
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-current-game-time" class="md-nav__link">
-    Get current game-time
+  <a href="#stop" class="md-nav__link">
+    Stop
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-timeline-object" class="md-nav__link">
-    Create timeline object
+  <a href="#pause-resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-playing" class="md-nav__link">
+    Is playing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-event" class="md-nav__link">
+    Add event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-all-events" class="md-nav__link">
+    Clear all events
   </a>
   
 </li>
@@ -9113,29 +9134,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#create-timeline" class="md-nav__link">
+    Create timeline
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-or-resume" class="md-nav__link">
-    Pause or resume
+  <a href="#start" class="md-nav__link">
+    Start
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-current-game-time" class="md-nav__link">
-    Get current game-time
+  <a href="#stop" class="md-nav__link">
+    Stop
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-timeline-object" class="md-nav__link">
-    Create timeline object
+  <a href="#pause-resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-playing" class="md-nav__link">
+    Is playing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-event" class="md-nav__link">
+    Add event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-all-events" class="md-nav__link">
+    Clear all events
   </a>
   
 </li>
@@ -9165,43 +9207,115 @@
   <h1>Timeline</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Update timers, built-in object of phaser. Each scene has a timeline (<code>scene.time</code>) already.</p>
+<p>Schedule events to happen at specific times in the future, built-in object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
+<h3 id="create-timeline">Create timeline<a class="headerlink" href="#create-timeline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">timeline</span><span class="p">([</span>    
+    <span class="p">{</span>
+        <span class="nx">at</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="ow">in</span><span class="o">:</span>
+        <span class="kr">from</span><span class="o">:</span>
+
+        <span class="nx">set</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+        <span class="p">},</span>
+
+        <span class="nx">tween</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+            <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+            <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+            <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+            <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+            <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">},</span>
+
+        <span class="nx">run</span><span class="p">(</span><span class="nx">target</span><span class="p">){</span> <span class="p">},</span>
+
+        <span class="nx">sound</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+        <span class="nx">event</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+        <span class="c1">// target: this,</span>
+
+        <span class="c1">// once: false,</span>
+        <span class="c1">// stop: false,</span>
+    <span class="p">},</span>
+
+    <span class="c1">// ...</span>
+<span class="p">])</span>
+</code></pre></div>
 <ul>
-<li>
-<p>Get time-scale</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-</code></pre></div>
+<li>Time<ul>
+<li><code>at</code> : Absolute delay time after starting in ms.</li>
+<li><code>in</code> : Absolute delay time after current time in ms.</li>
+<li><code>from</code> : Relative delay time after previous event in ms</li>
+</ul>
 </li>
-<li>
-<p>Set time-scale</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">2</span><span class="p">;</span>
-</code></pre></div>
+<li>Actions :<ul>
+<li><code>set</code> : A key-value object of properties to set on the <code>target</code>.</li>
+<li><code>tween</code> : <a href="../tween/#create-tween-task">tween config</a></li>
+<li><code>run</code> : A function which will be called when the Event fires.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>sound</code> : <ul>
+<li>A string : A key from the Sound Manager to play</li>
+<li>A config object for a sound to play when the Event fires. 
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">key</span><span class="p">,</span>
+    <span class="nx">config</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>key</code> : The key of the sound to play</li>
+<li><code>config</code> : <a href="../audio/#configuration_1">config of playing sound</a></li>
+</ul>
 </li>
 </ul>
-<h3 id="pause-or-resume">Pause or resume<a class="headerlink" href="#pause-or-resume" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Pause</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div>
 </li>
-<li>
-<p>Resume</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</code></pre></div>
+<li><code>event</code> : String-based event name to emit when the Event fires. The event is emitted from the Timeline instance.
+    <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
+<li><code>target</code> : The scope (<code>this</code> object) with which to invoke the <code>run</code>.</li>
+</ul>
+</li>
+<li>Control<ul>
+<li><code>once</code> : If set, the Event will be removed from the Timeline when it fires.</li>
+<li><code>stop</code> : If set, the Timeline will stop and enter a complete state when this Event fires, even if there are other events after it.</li>
+</ul>
 </li>
 </ul>
-<h3 id="get-current-game-time">Get current game-time<a class="headerlink" href="#get-current-game-time" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
+<h3 id="start">Start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 </code></pre></div>
-<p>Game-time is not system time.</p>
-<h3 id="create-timeline-object">Create timeline object<a class="headerlink" href="#create-timeline-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeline</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Time</span><span class="p">.</span><span class="nx">Clock</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<p>Restart</p>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="pause-resume">Pause / Resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+<span class="c1">// timeline.paused = true;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+<span class="c1">// timeline.paused = false;</span>
+</code></pre></div>
+<h3 id="is-playing">Is playing<a class="headerlink" href="#is-playing" title="Permanent link">&para;</a></h3>
+<p>Timeline is currently playing, not paused or not complete.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">timeline</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="add-event">Add event<a class="headerlink" href="#add-event" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">([</span><span class="nx">config0</span><span class="p">,</span> <span class="nx">config1</span><span class="p">,</span> <span class="p">...]);</span>
+</code></pre></div>
+<h3 id="clear-all-events">Clear all events<a class="headerlink" href="#clear-all-events" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
 
               

@@ -4811,6 +4811,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-ease-function" class="md-nav__link">
+    Custom ease function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-target" class="md-nav__link">
+    Has target
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-value" class="md-nav__link">
     Tween value
   </a>
@@ -4818,9 +4832,57 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-ease-function" class="md-nav__link">
-    Custom ease function
+  <a href="#chain" class="md-nav__link">
+    Chain
   </a>
+  
+    <nav class="md-nav" aria-label="Chain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-chain" class="md-nav__link">
+    Create chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume-chain" class="md-nav__link">
+    Pause / Resume chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart-chain" class="md-nav__link">
+    Restart chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-tween-task" class="md-nav__link">
+    Add tween task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-tween-task" class="md-nav__link">
+    Remove tween task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-target_1" class="md-nav__link">
+    Has target
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -9347,6 +9409,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-ease-function" class="md-nav__link">
+    Custom ease function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-target" class="md-nav__link">
+    Has target
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-value" class="md-nav__link">
     Tween value
   </a>
@@ -9354,9 +9430,57 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-ease-function" class="md-nav__link">
-    Custom ease function
+  <a href="#chain" class="md-nav__link">
+    Chain
   </a>
+  
+    <nav class="md-nav" aria-label="Chain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-chain" class="md-nav__link">
+    Create chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume-chain" class="md-nav__link">
+    Pause / Resume chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart-chain" class="md-nav__link">
+    Restart chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-tween-task" class="md-nav__link">
+    Add tween task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-tween-task" class="md-nav__link">
+    Remove tween task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-target_1" class="md-nav__link">
+    Has target
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -9871,29 +9995,6 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasStarted</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">hasStarted</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<h3 id="tween-value">Tween value<a class="headerlink" href="#tween-value" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create tween task
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
-    <span class="kr">from</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
-    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-<span class="p">});</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
-    <span class="kr">from</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="c1">// ...</span>
-<span class="p">});</span>
-</code></pre></div></li>
-<li>Get value
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
-</code></pre></div></li>
-</ol>
 <h3 id="custom-ease-function">Custom ease function<a class="headerlink" href="#custom-ease-function" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
@@ -9903,6 +10004,88 @@
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
+</code></pre></div>
+<h3 id="has-target">Has target<a class="headerlink" href="#has-target" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasTarget</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">hasTarget</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="tween-value">Tween value<a class="headerlink" href="#tween-value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create tween task
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
+    <span class="kr">from</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">onUpdate</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// var value = current;</span>
+        <span class="c1">// var value = tween.getValue();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><a href="./#create-tween-task">More config parameters...</a></li>
+</ul>
+</li>
+<li>Get value
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="chain">Chain<a class="headerlink" href="#chain" title="Permanent link">&para;</a></h3>
+<h4 id="create-chain">Create chain<a class="headerlink" href="#create-chain" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chain</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">chain</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">tweens</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1">// targets: gameObject,</span>
+            <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>            
+            <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+            <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+            <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+            <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">},</span>        
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+
+    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">completeDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// repeat: 0,</span>
+    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">persist</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="c1">// callbackScope: this,</span>
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>targets</code>, or <code>tweenConfig.targets</code></li>
+<li><code>tweens</code> : Array of <a href="./#create-tween-task">tween config</a></li>
+</ul>
+<h4 id="pause-resume-chain">Pause / Resume chain<a class="headerlink" href="#pause-resume-chain" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre></div>
+<h4 id="restart-chain">Restart chain<a class="headerlink" href="#restart-chain" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
+</code></pre></div>
+<h4 id="add-tween-task">Add tween task<a class="headerlink" href="#add-tween-task" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">add</span><span class="p">([</span><span class="nx">tweenConfig0</span><span class="p">,</span> <span class="nx">tweenConfig1</span><span class="p">,</span> <span class="p">...]);</span>
+</code></pre></div>
+<h4 id="remove-tween-task">Remove tween task<a class="headerlink" href="#remove-tween-task" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">chain</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">tweenTask</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="has-target_1">Has target<a class="headerlink" href="#has-target_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasTarget</span> <span class="o">=</span> <span class="nx">chain</span><span class="p">.</span><span class="nx">hasTarget</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TB
