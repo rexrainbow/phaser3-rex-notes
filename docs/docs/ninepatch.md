@@ -7,7 +7,7 @@ Stretchable image.
 
 ## Live demos
 
-- [3x3](https://codepen.io/rexrainbow/pen/gOYzydR)
+- [3x3](https://codepen.io/rexrainbow/pen/gOYzydR), [3x3](https://codepen.io/rexrainbow/pen/jOeVJam)
 - [5x5](https://codepen.io/rexrainbow/pen/vYBzYer)
 - [Custom frame name](https://codepen.io/rexrainbow/pen/poJzywP)
 - [Custom base frame name](https://codepen.io/rexrainbow/pen/YzXzbNj)
