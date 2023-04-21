@@ -7,12 +7,17 @@ var SetBaseTexture = function (key, baseFrameName, columns, rows) {
         baseFrameName = undefined;
     }
 
-    if (baseFrameName === undefined) {
+    if (baseFrameName == null) {
         baseFrameName = '__BASE';
     }
 
-    columns = DeepClone(columns);
-    rows = DeepClone(rows);
+    if ((typeof (columns) === 'number') && (arguments.length >= 6)) {
+        columns = [arguments[2], undefined, arguments[3]];
+        rows = [arguments[4], undefined, arguments[5]];
+    } else {
+        columns = DeepClone(columns);
+        rows = DeepClone(rows);
+    }
 
     this.textureKey = key;
     this.baseFrameName = baseFrameName;

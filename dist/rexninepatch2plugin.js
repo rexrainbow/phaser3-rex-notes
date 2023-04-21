@@ -570,11 +570,16 @@
       columns = baseFrameName;
       baseFrameName = undefined;
     }
-    if (baseFrameName === undefined) {
+    if (baseFrameName == null) {
       baseFrameName = '__BASE';
     }
-    columns = DeepClone(columns);
-    rows = DeepClone(rows);
+    if (typeof columns === 'number' && arguments.length >= 6) {
+      columns = [arguments[2], undefined, arguments[3]];
+      rows = [arguments[4], undefined, arguments[5]];
+    } else {
+      columns = DeepClone(columns);
+      rows = DeepClone(rows);
+    }
     this.textureKey = key;
     this.baseFrameName = baseFrameName;
     this.columns.data = columns;
@@ -880,6 +885,20 @@
           config = columns;
           columns = GetValue$2(config, 'columns', undefined);
           rows = GetValue$2(config, 'rows', undefined);
+        }
+        if (columns === undefined) {
+          var leftWidth = GetValue$2(config, 'leftWidth', undefined);
+          var rightWidth = GetValue$2(config, 'rightWidth', undefined);
+          if (leftWidth !== undefined && rightWidth !== undefined) {
+            columns = [leftWidth, undefined, rightWidth];
+          }
+        }
+        if (rows === undefined) {
+          var topHeight = GetValue$2(config, 'topHeight', undefined);
+          var bottomHeight = GetValue$2(config, 'bottomHeight', undefined);
+          if (topHeight !== undefined && bottomHeight !== undefined) {
+            rows = [topHeight, undefined, bottomHeight];
+          }
         }
         _this = _super.call(this, scene);
         _this.type = type;

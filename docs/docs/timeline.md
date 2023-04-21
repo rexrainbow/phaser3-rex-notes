@@ -77,6 +77,10 @@ var timeline = scene.add.timeline([
     - `once` : If set, the Event will be removed from the Timeline when it fires.
     - `stop` : If set, the Timeline will stop and enter a complete state when this Event fires, even if there are other events after it.
 
+
+The Timeline always starts paused.
+
+
 ### Start
 
 ```javascript
@@ -131,4 +135,12 @@ timeline.add([config0, config1, ...]);
 
 ```javascript
 timeline.clear();
+```
+
+### Destroy
+
+Also remove updating.
+
+```javascript
+timeline.destroy();
 ```

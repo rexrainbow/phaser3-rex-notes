@@ -12,7 +12,12 @@ declare namespace NinePatch {
         getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
 
         columns?: (number | undefined)[],
+        leftWidth?: number,
+        rightWidth?: number,
+
         rows?: (number | undefined)[],
+        topHeight?: number,
+        bottomHeight?: number,
 
         stretchMode?: 0 | 1 | 'scale' | 'repeat' |
         {
@@ -81,6 +86,15 @@ declare class NinePatch extends Phaser.GameObjects.RenderTexture {
         baseFrame: string | undefined,
         columns: (number | undefined)[],
         rows: (number | undefined)[]
+    ): this;
+
+    setBaseTexture(
+        key: string,
+        baseFrame: string | undefined,
+        leftWidth: number,
+        rightWidth: number,
+        topHeight: number,
+        bottomHeight: number,
     ): this;
 
     setStretchMode(

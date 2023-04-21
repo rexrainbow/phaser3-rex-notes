@@ -103,8 +103,8 @@ or
 
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, {
-    columns: undefined,
-    rows: undefined,
+    columns: undefined, // leftWidth: undefined, right: undefined,
+    rows: undefined,    // topHeight: undefined, bottomHeight: undefined,
 
     // preserveRatio: true,
     // maxFixedPartScale: 1,
@@ -119,8 +119,8 @@ or
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, {
     key: undefined,
-    columns: undefined,
-    rows: undefined,
+    columns: undefined, // leftWidth: undefined, right: undefined,
+    rows: undefined,    // topHeight: undefined, bottomHeight: undefined,
 
     // preserveRatio: true,
     // maxFixedPartScale: 1,
@@ -136,8 +136,8 @@ or
 var ninePatch = scene.add.rexNinePatch(x, y, {
     width: 1, height: 1,
     key: undefined,
-    columns: undefined,
-    rows: undefined,
+    columns: undefined, // leftWidth: undefined, right: undefined,
+    rows: undefined,    // topHeight: undefined, bottomHeight: undefined,
 
     // preserveRatio: true,
     // maxFixedPartScale: 1,
@@ -154,8 +154,8 @@ var ninePatch = scene.add.rexNinePatch({
     x: 0, y: 0,
     width: 1, height: 1,
     key: undefined,
-    columns: undefined,
-    rows: undefined,
+    columns: undefined, // leftWidth: undefined, rightWidth: undefined,
+    rows: undefined,    // topHeight: undefined, bottomHeight: undefined,
 
     // preserveRatio: true,
     // maxFixedPartScale: 1,
@@ -174,10 +174,12 @@ var ninePatch = scene.add.rexNinePatch({
     - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Width of each column. `undefined` value will be replaced by remainder value from texture width.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
         - Width of even columns (column `1`, column `3`, ...) will be stretched.
+- `leftWidth`, `rightWidth` : Set `columns` to `[leftWidth, undefined, rightWidth]`, if `columns` is `undefined`.
 - `rows` : Configuration of rows. 
     - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Height of each row. `undefined` value will be replaced by remainder value from texture width.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+- `topHeight`, `bottomHeight` : Set `rows` to `[topHeight, undefined, bottomHeight]`, if `rows` is `undefined`.
 - `preserveRatio` : Preserve ratio of fixed parts (i.e. displaying in origin size). Default is `true`.
 - `maxFixedPartScale` : Max scale value of fixed-part.
 - `stretchMode` : Stretch mode of edges and internal cells.
@@ -237,12 +239,17 @@ Will [update texture](ninepatch.md#update-texture)
 
 ```javascript
 ninePatch.setBaseTexture(key, baseFrame, columns, rows);
-// ninePatch.setBaseTexture(key, columns, rows);
+```
+
+or
+
+```javascript
+ninePatch.setBaseTexture(key, baseFrame, leftWidth, rightWidth, topHeight, bottomHeight);
 ```
 
 - `key` : Texture key of source image.
 - `baseFrame` : Frame name of base texture.
-    - `undefined` : Use default base frame `'__BASE'`. Default value.
+    - `undefined`, or `null` : Use default base frame `'__BASE'`. Default value.
 - `columns` : Configuration of columns.
     - A number array, like `[20, 20, 20]` : Width of each column.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
@@ -251,6 +258,8 @@ ninePatch.setBaseTexture(key, baseFrame, columns, rows);
     - A number array, like `[20, 20, 20]` : Height of each row.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+- `leftWidth`, `rightWidth` : Set `columns` to `[leftWidth, undefined, rightWidth]`.
+- `topHeight`, `bottomHeight` : Set `rows` to `[topHeight, undefined, bottomHeight]`.
 
 Will [update texture](ninepatch.md#update-texture)
 

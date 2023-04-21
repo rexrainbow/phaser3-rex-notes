@@ -9405,8 +9405,8 @@
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// leftWidth: undefined, right: undefined,</span>
+    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>    <span class="c1">// topHeight: undefined, bottomHeight: undefined,</span>
 
     <span class="c1">// preserveRatio: true,</span>
     <span class="c1">// maxFixedPartScale: 1,</span>
@@ -9418,8 +9418,8 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// leftWidth: undefined, right: undefined,</span>
+    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>    <span class="c1">// topHeight: undefined, bottomHeight: undefined,</span>
 
     <span class="c1">// preserveRatio: true,</span>
     <span class="c1">// maxFixedPartScale: 1,</span>
@@ -9432,8 +9432,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// leftWidth: undefined, right: undefined,</span>
+    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>    <span class="c1">// topHeight: undefined, bottomHeight: undefined,</span>
 
     <span class="c1">// preserveRatio: true,</span>
     <span class="c1">// maxFixedPartScale: 1,</span>
@@ -9447,8 +9447,8 @@
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// leftWidth: undefined, rightWidth: undefined,</span>
+    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>    <span class="c1">// topHeight: undefined, bottomHeight: undefined,</span>
 
     <span class="c1">// preserveRatio: true,</span>
     <span class="c1">// maxFixedPartScale: 1,</span>
@@ -9473,6 +9473,7 @@
 </li>
 </ul>
 </li>
+<li><code>leftWidth</code>, <code>rightWidth</code> : Set <code>columns</code> to <code>[leftWidth, undefined, rightWidth]</code>, if <code>columns</code> is <code>undefined</code>.</li>
 <li><code>rows</code> : Configuration of rows. <ul>
 <li>A number array, like <code>[20, 20, 20]</code>, or <code>[20, undefined, 20]</code> : Height of each row. <code>undefined</code> value will be replaced by remainder value from texture width.<ul>
 <li>Height of odd rows (row <code>0</code>, row <code>2</code>, ...) will be origin height.</li>
@@ -9481,6 +9482,7 @@
 </li>
 </ul>
 </li>
+<li><code>topHeight</code>, <code>bottomHeight</code> : Set <code>rows</code> to <code>[topHeight, undefined, bottomHeight]</code>, if <code>rows</code> is <code>undefined</code>.</li>
 <li><code>preserveRatio</code> : Preserve ratio of fixed parts (i.e. displaying in origin size). Default is <code>true</code>.</li>
 <li><code>maxFixedPartScale</code> : Max scale value of fixed-part.</li>
 <li><code>stretchMode</code> : Stretch mode of edges and internal cells.<ul>
@@ -9542,12 +9544,14 @@
 <p>Will <a href="./#update-texture">update texture</a></p>
 <h3 id="set-base-texture-of-source-image">Set base texture of source image<a class="headerlink" href="#set-base-texture-of-source-image" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setBaseTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">);</span>
-<span class="c1">// ninePatch.setBaseTexture(key, columns, rows);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setBaseTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">leftWidth</span><span class="p">,</span> <span class="nx">rightWidth</span><span class="p">,</span> <span class="nx">topHeight</span><span class="p">,</span> <span class="nx">bottomHeight</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>key</code> : Texture key of source image.</li>
 <li><code>baseFrame</code> : Frame name of base texture.<ul>
-<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>. Default value.</li>
+<li><code>undefined</code>, or <code>null</code> : Use default base frame <code>'__BASE'</code>. Default value.</li>
 </ul>
 </li>
 <li><code>columns</code> : Configuration of columns.<ul>
@@ -9566,6 +9570,8 @@
 </li>
 </ul>
 </li>
+<li><code>leftWidth</code>, <code>rightWidth</code> : Set <code>columns</code> to <code>[leftWidth, undefined, rightWidth]</code>.</li>
+<li><code>topHeight</code>, <code>bottomHeight</code> : Set <code>rows</code> to <code>[topHeight, undefined, bottomHeight]</code>.</li>
 </ul>
 <p>Will <a href="./#update-texture">update texture</a></p>
 <h3 id="set-stretch-mode">Set stretch mode<a class="headerlink" href="#set-stretch-mode" title="Permanent link">&para;</a></h3>

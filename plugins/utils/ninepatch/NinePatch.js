@@ -46,6 +46,22 @@ var NinePatchBase = function (GOClass, type) {
                 rows = GetValue(config, 'rows', undefined);
             }
 
+            if (columns === undefined) {
+                var leftWidth = GetValue(config, 'leftWidth', undefined);
+                var rightWidth = GetValue(config, 'rightWidth', undefined);
+                if ((leftWidth !== undefined) && (rightWidth !== undefined)) {
+                    columns = [leftWidth, undefined, rightWidth];
+                }
+            }
+
+            if (rows === undefined) {
+                var topHeight = GetValue(config, 'topHeight', undefined);
+                var bottomHeight = GetValue(config, 'bottomHeight', undefined);
+                if ((topHeight !== undefined) && (bottomHeight !== undefined)) {
+                    rows = [topHeight, undefined, bottomHeight];
+                }
+            }
+
             super(scene);
             this.type = type;
             this
