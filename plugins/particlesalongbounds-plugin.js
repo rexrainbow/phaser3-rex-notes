@@ -10,8 +10,8 @@ class ParticlesAlongBoundsPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    startEffect(gamObject, config, particles) {
-        return ParticlesAlongBounds(gamObject, config, particles);
+    startEffect(gamObject, config) {
+        return ParticlesAlongBounds(gamObject, config);
     }
 }
 

@@ -383,11 +383,6 @@ emitter.setAnim(anims);
     ```
     or
     ```javascript
-    emitter.setGravityX(value);
-    emitter.setGravityY(value);
-    ```
-    or
-    ```javascript
     emitter.gravityX = x;
     emitter.gravityY = y;
     ```

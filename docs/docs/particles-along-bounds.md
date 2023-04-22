@@ -87,7 +87,6 @@ var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObj
     // tint: undefined,
 
     // repeat: 0,
-    // reuse: false,
     // gravityX: 0,
     // gravityY: 0,
     // duration: undefined
@@ -126,12 +125,6 @@ var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObj
 - `tint` : Tint changing of particle.
 - `repeat` : Fire particles around bounds repeatly.
     - `0` : Fire particles around bounds one time, default value.
-- `reuse` : Reuse this particles.
-    - `false` : Destroy particles when fire completed. Default value.
-    - `true` : Don't destroy particles when fire completed. To reuse this particles, start firing via
-        ```javascript
-        scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, config, particles);
-        ```
 - `gravityX`, `gravityY` : Gravity vector of world axis. This vector will rotate back if game object is rotated.
 - `duration` : Total duration from firing of 1st particle to destroy last particle.
     - `undefined` : Use default behavior of particles

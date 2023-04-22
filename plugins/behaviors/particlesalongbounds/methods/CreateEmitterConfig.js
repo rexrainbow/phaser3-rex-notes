@@ -3,8 +3,8 @@ import BoundsToPoints from './BoundsToPoints.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const TickTime = (1000 / 60);
 
-var CreateEmitterConfig = function (config) {
-    var points = BoundsToPoints(config.gameObject, config);
+var CreateEmitterConfig = function (gameObject, config) {
+    var points = BoundsToPoints(gameObject, config);
     var emitterConfig = {
         blendMode: GetValue(config, 'blendMode', 'ADD'),
         emitZone: {
@@ -19,6 +19,9 @@ var CreateEmitterConfig = function (config) {
         speed: GetValue(config, 'spread', 10)
     };
 
+    // stopAfter
+    var repeat = 1 + GetValue(config, 'repeat', 0);
+    emitterConfig.stopAfter = repeat * points.length;
     // Set lifespan
     var lifespan = GetValue(config, 'lifespan', 1000);
     emitterConfig.lifespan = lifespan;

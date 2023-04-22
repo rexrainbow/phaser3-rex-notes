@@ -24,22 +24,13 @@ declare namespace ParticlesAlongBounds {
         tint?: number,
 
         repeat?: number,
-        reuse?: boolean,
         gravityX?: number,
         gravityY?: number,
         duration?: number
-    }
-
-    namespace Events {
-        type CompleteCallbackType = (
-            gameObject: Phaser.GameObjects.GameObject,
-            particles: Phaser.GameObjects.Particles.ParticleEmitterManager,           
-        ) => void;
     }
 }
 
 declare function ParticlesAlongBounds(
     gameObject: Phaser.GameObjects.GameObject,
     config?: ParticlesAlongBounds.IConfig,
-    particles?: Phaser.GameObjects.Particles.ParticleEmitterManager
-): Phaser.GameObjects.Particles.ParticleEmitterManager;
+): Phaser.GameObjects.Particles.ParticleEmitter;
