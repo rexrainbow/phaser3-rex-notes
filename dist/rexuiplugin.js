@@ -592,11 +592,11 @@
   };
 
   var IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3b = Phaser.Utils.Objects.GetValue;
+  var GetValue$3c = Phaser.Utils.Objects.GetValue;
   var SetStretchMode = function SetStretchMode(mode) {
     if (IsPlainObject$T(mode)) {
-      this.stretchMode.edge = parseMode(GetValue$3b(mode, 'edge', 0));
-      this.stretchMode.internal = parseMode(GetValue$3b(mode, 'internal', 0));
+      this.stretchMode.edge = parseMode(GetValue$3c(mode, 'edge', 0));
+      this.stretchMode.internal = parseMode(GetValue$3c(mode, 'internal', 0));
     } else {
       mode = parseMode(mode);
       this.stretchMode.edge = mode;
@@ -659,7 +659,7 @@
   };
 
   var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3a = Phaser.Utils.Objects.GetValue;
+  var GetValue$3b = Phaser.Utils.Objects.GetValue;
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
       _inherits(NinePatch, _GOClass);
@@ -669,53 +669,53 @@
         _classCallCheck(this, NinePatch);
         if (IsPlainObject$S(x)) {
           config = x;
-          x = GetValue$3a(config, 'x', 0);
-          y = GetValue$3a(config, 'y', 0);
-          width = GetValue$3a(config, 'width', 1);
-          height = GetValue$3a(config, 'height', 1);
-          key = GetValue$3a(config, 'key', undefined);
-          baseFrame = GetValue$3a(config, 'baseFrame', undefined);
-          columns = GetValue$3a(config, 'columns', undefined);
-          rows = GetValue$3a(config, 'rows', undefined);
+          x = GetValue$3b(config, 'x', 0);
+          y = GetValue$3b(config, 'y', 0);
+          width = GetValue$3b(config, 'width', 1);
+          height = GetValue$3b(config, 'height', 1);
+          key = GetValue$3b(config, 'key', undefined);
+          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
+          columns = GetValue$3b(config, 'columns', undefined);
+          rows = GetValue$3b(config, 'rows', undefined);
         } else if (IsPlainObject$S(width)) {
           config = width;
-          width = GetValue$3a(config, 'width', 1);
-          height = GetValue$3a(config, 'height', 1);
-          key = GetValue$3a(config, 'key', undefined);
-          baseFrame = GetValue$3a(config, 'baseFrame', undefined);
-          columns = GetValue$3a(config, 'columns', undefined);
-          rows = GetValue$3a(config, 'rows', undefined);
+          width = GetValue$3b(config, 'width', 1);
+          height = GetValue$3b(config, 'height', 1);
+          key = GetValue$3b(config, 'key', undefined);
+          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
+          columns = GetValue$3b(config, 'columns', undefined);
+          rows = GetValue$3b(config, 'rows', undefined);
         } else if (IsPlainObject$S(key)) {
           config = key;
-          key = GetValue$3a(config, 'key', undefined);
-          baseFrame = GetValue$3a(config, 'baseFrame', undefined);
-          columns = GetValue$3a(config, 'columns', undefined);
-          rows = GetValue$3a(config, 'rows', undefined);
+          key = GetValue$3b(config, 'key', undefined);
+          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
+          columns = GetValue$3b(config, 'columns', undefined);
+          rows = GetValue$3b(config, 'rows', undefined);
         } else if (IsPlainObject$S(baseFrame)) {
           config = baseFrame;
-          baseFrame = GetValue$3a(config, 'baseFrame', undefined);
-          columns = GetValue$3a(config, 'columns', undefined);
-          rows = GetValue$3a(config, 'rows', undefined);
+          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
+          columns = GetValue$3b(config, 'columns', undefined);
+          rows = GetValue$3b(config, 'rows', undefined);
         } else if (Array.isArray(baseFrame)) {
           config = rows;
           rows = columns;
           columns = baseFrame;
-          baseFrame = GetValue$3a(config, 'baseFrame', undefined);
+          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
         } else if (IsPlainObject$S(columns)) {
           config = columns;
-          columns = GetValue$3a(config, 'columns', undefined);
-          rows = GetValue$3a(config, 'rows', undefined);
+          columns = GetValue$3b(config, 'columns', undefined);
+          rows = GetValue$3b(config, 'rows', undefined);
         }
         if (columns === undefined) {
-          var leftWidth = GetValue$3a(config, 'leftWidth', undefined);
-          var rightWidth = GetValue$3a(config, 'rightWidth', undefined);
+          var leftWidth = GetValue$3b(config, 'leftWidth', undefined);
+          var rightWidth = GetValue$3b(config, 'rightWidth', undefined);
           if (leftWidth !== undefined && rightWidth !== undefined) {
             columns = [leftWidth, undefined, rightWidth];
           }
         }
         if (rows === undefined) {
-          var topHeight = GetValue$3a(config, 'topHeight', undefined);
-          var bottomHeight = GetValue$3a(config, 'bottomHeight', undefined);
+          var topHeight = GetValue$3b(config, 'topHeight', undefined);
+          var bottomHeight = GetValue$3b(config, 'bottomHeight', undefined);
           if (topHeight !== undefined && bottomHeight !== undefined) {
             rows = [topHeight, undefined, bottomHeight];
           }
@@ -729,12 +729,12 @@
         _this._tileSprite = undefined; // Reserved for drawing image
         _this._image = undefined; // Reserved for drawing image
 
-        _this.setGetFrameNameCallback(GetValue$3a(config, 'getFrameNameCallback', undefined));
-        _this.setStretchMode(GetValue$3a(config, 'stretchMode', 0));
-        _this.setPreserveRatio(GetValue$3a(config, 'preserveRatio', true));
-        var maxFixedPartScale = GetValue$3a(config, 'maxFixedPartScale', 1);
-        var maxFixedPartScaleX = GetValue$3a(config, 'maxFixedPartScaleX', maxFixedPartScale);
-        var maxFixedPartScaleY = GetValue$3a(config, 'maxFixedPartScaleY', undefined);
+        _this.setGetFrameNameCallback(GetValue$3b(config, 'getFrameNameCallback', undefined));
+        _this.setStretchMode(GetValue$3b(config, 'stretchMode', 0));
+        _this.setPreserveRatio(GetValue$3b(config, 'preserveRatio', true));
+        var maxFixedPartScale = GetValue$3b(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$3b(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$3b(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
         _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
@@ -1112,12 +1112,12 @@
     return Stack;
   }();
 
-  var GetValue$39 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3a = Phaser.Utils.Objects.GetValue;
   var Pools$1 = {};
   var PoolManager$1 = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
-      this.pools = GetValue$39(config, 'pools', Pools$1);
+      this.pools = GetValue$3a(config, 'pools', Pools$1);
     }
     _createClass(PoolManager, [{
       key: "destroy",
@@ -1163,7 +1163,7 @@
 
   var GameObject$4 = Phaser.GameObjects.GameObject;
   var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$38 = Phaser.Utils.Objects.GetValue;
+  var GetValue$39 = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
   var Blitter = /*#__PURE__*/function (_GameObject) {
@@ -1174,10 +1174,10 @@
       _classCallCheck(this, Blitter);
       if (IsPlainObject$R(x)) {
         config = x;
-        x = GetValue$38(config, 'x', 0);
-        y = GetValue$38(config, 'y', 0);
-        texture = GetValue$38(config, 'texture');
-        frame = GetValue$38(config, 'frame');
+        x = GetValue$39(config, 'x', 0);
+        y = GetValue$39(config, 'y', 0);
+        texture = GetValue$39(config, 'texture');
+        frame = GetValue$39(config, 'frame');
       }
       if (x === undefined) {
         x = 0;
@@ -1190,7 +1190,7 @@
       _this.renderList = [];
       _this.displayListDirty = false;
       _this.lastAppendedChildren = [];
-      var reuseBob = GetValue$38(config, 'reuseBob', true);
+      var reuseBob = GetValue$39(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager$1(config) : undefined;
       _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
       return _this;
@@ -1264,7 +1264,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$37 = function GetValue(source, key, defaultValue) {
+  var GetValue$38 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -1327,7 +1327,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$37(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$38(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1435,7 +1435,7 @@
 
   var DegToRad$f = Phaser.Math.DegToRad;
   var RadToDeg$9 = Phaser.Math.RadToDeg;
-  var GetValue$36 = Phaser.Utils.Objects.GetValue;
+  var GetValue$37 = Phaser.Utils.Objects.GetValue;
   var RenderBase$1 = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
     var _super = _createSuper(RenderBase);
@@ -1680,11 +1680,11 @@
         }
 
         // ScaleX, ScaleY
-        var width = GetValue$36(o, 'width', undefined);
-        var height = GetValue$36(o, 'height', undefined);
-        var scale = GetValue$36(o, 'scale', undefined);
-        var scaleX = GetValue$36(o, 'scaleX', scale);
-        var scaleY = GetValue$36(o, 'scaleY', scale);
+        var width = GetValue$37(o, 'width', undefined);
+        var height = GetValue$37(o, 'height', undefined);
+        var scale = GetValue$37(o, 'scale', undefined);
+        var scaleX = GetValue$37(o, 'scaleX', scale);
+        var scaleY = GetValue$37(o, 'scaleY', scale);
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -1707,7 +1707,7 @@
         } else if (o.hasOwnProperty('displayHeight')) {
           this.setDisplayHeight(o.displayHeight);
         }
-        var origin = GetValue$36(o, 'origin', undefined);
+        var origin = GetValue$37(o, 'origin', undefined);
         if (origin !== undefined) {
           this.setOrigin(origin);
         } else {
@@ -2047,7 +2047,7 @@
   });
   SetValue(window, 'RexPlugins.UI.NinePatch2', NinePatch);
 
-  var GetValue$35 = Phaser.Utils.Objects.GetValue;
+  var GetValue$36 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$3 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -2148,14 +2148,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$35(value, 'x', 0);
-          defaultRadiusY = GetValue$35(value, 'y', 0);
+          defaultRadiusX = GetValue$36(value, 'x', 0);
+          defaultRadiusY = GetValue$36(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$35(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$35(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$35(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$35(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$36(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$36(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$36(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$36(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -2216,8 +2216,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$35(value, 'x', 0);
-      radius.y = GetValue$35(value, 'y', 0);
+      radius.x = GetValue$36(value, 'x', 0);
+      radius.y = GetValue$36(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -2418,7 +2418,7 @@
 
   var Shape$1 = Phaser.GameObjects.Shape;
   var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$34 = Phaser.Utils.Objects.GetValue;
+  var GetValue$35 = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle$2 = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
@@ -2463,7 +2463,7 @@
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue$34(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$35(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -2472,7 +2472,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue$34(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$35(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -3588,7 +3588,7 @@
     DrawRoundRectangleBackground(this, this.fillStyle, this.strokeStyle, this.lineWidth, this.radius, this.fillColor2, this.isHorizontalGradient, this.iteration);
   };
 
-  var GetValue$33 = Phaser.Utils.Objects.GetValue;
+  var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(RoundRectangle, _Canvas);
     var _super = _createSuper(RoundRectangle);
@@ -3612,8 +3612,8 @@
       }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexRoundRectangleCanvas';
-      var radius = GetValue$33(radiusConfig, 'radius', radiusConfig);
-      var iteration = GetValue$33(radiusConfig, 'iteration', undefined);
+      var radius = GetValue$34(radiusConfig, 'radius', radiusConfig);
+      var iteration = GetValue$34(radiusConfig, 'iteration', undefined);
       _this.setRadius(radius);
       _this.setIteration(iteration);
       _this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
@@ -4211,7 +4211,7 @@
   };
 
   var GetAdvancedValue$6 = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue$32 = Phaser.Utils.Objects.GetValue;
+  var GetValue$33 = Phaser.Utils.Objects.GetValue;
   var TextStyle$1 = /*#__PURE__*/function () {
     function TextStyle(text, style, propertyMap) {
       _classCallCheck(this, TextStyle);
@@ -4311,7 +4311,7 @@
           var postCallback = prop[2];
           if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
             // Callback & scope should be set without processing the values
-            this[key] = GetValue$32(style, objKey, defaultValue);
+            this[key] = GetValue$33(style, objKey, defaultValue);
           } else {
             var value = GetAdvancedValue$6(style, objKey, defaultValue);
             if (postCallback) {
@@ -4322,7 +4322,7 @@
         }
 
         //  Allow for 'font' override
-        var font = GetValue$32(style, 'font', null);
+        var font = GetValue$33(style, 'font', null);
         if (font === null) {
           this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
         } else {
@@ -4330,19 +4330,19 @@
         }
 
         //  Allow for 'fill' to be used in place of 'color'
-        var fill = GetValue$32(style, 'fill', null);
+        var fill = GetValue$33(style, 'fill', null);
         if (fill !== null) {
           this.color = GetStyle(fill);
         }
-        var metrics = GetValue$32(style, 'metrics', false);
+        var metrics = GetValue$33(style, 'metrics', false);
 
         //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
         //  Doing this is reset if you then change the font of this TextStyle after creation
         if (metrics) {
           this.metrics = {
-            ascent: GetValue$32(metrics, 'ascent', 0),
-            descent: GetValue$32(metrics, 'descent', 0),
-            fontSize: GetValue$32(metrics, 'fontSize', 0)
+            ascent: GetValue$33(metrics, 'ascent', 0),
+            descent: GetValue$33(metrics, 'descent', 0),
+            fontSize: GetValue$33(metrics, 'fontSize', 0)
           };
         } else if (updateText || !this.metrics) {
           this.metrics = MeasureText(this);
@@ -4411,9 +4411,9 @@
           this.fontSize = '';
           this.fontStyle = '';
         } else {
-          this.fontFamily = GetValue$32(font, 'fontFamily', 'Courier');
-          this.fontSize = GetValue$32(font, 'fontSize', '16px');
-          this.fontStyle = GetValue$32(font, 'fontStyle', '');
+          this.fontFamily = GetValue$33(font, 'fontFamily', 'Courier');
+          this.fontSize = GetValue$33(font, 'fontSize', '16px');
+          this.fontStyle = GetValue$33(font, 'fontStyle', '');
         }
         return this.update(true);
       }
@@ -4720,9 +4720,9 @@
             this.fontSize = '';
             this.fontStyle = '';
           } else {
-            this.fontFamily = GetValue$32(font, 'fontFamily', this.fontFamily);
-            this.fontSize = GetValue$32(font, 'fontSize', this.fontSize);
-            this.fontStyle = GetValue$32(font, 'fontStyle', this.fontStyle);
+            this.fontFamily = GetValue$33(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue$33(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue$33(font, 'fontStyle', this.fontStyle);
           }
         }
         return this.parent.updateText(true);
@@ -4936,7 +4936,7 @@
     }
   };
 
-  var GetValue$31 = Phaser.Utils.Objects.GetValue;
+  var GetValue$32 = Phaser.Utils.Objects.GetValue;
   var NO_NEWLINE$3 = CONST.NO_NEWLINE;
   var RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
   var Pen = /*#__PURE__*/function () {
@@ -4949,17 +4949,17 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         // (txt, x, y, width, prop, newLineMode, startIndex)
-        this.text = GetValue$31(o, 'text', '');
-        this.x = GetValue$31(o, 'x', 0);
-        this.y = GetValue$31(o, 'y', 0);
-        this.width = GetValue$31(o, 'width', 0);
-        var prop = GetValue$31(o, 'prop', null);
+        this.text = GetValue$32(o, 'text', '');
+        this.x = GetValue$32(o, 'x', 0);
+        this.y = GetValue$32(o, 'y', 0);
+        this.width = GetValue$32(o, 'width', 0);
+        var prop = GetValue$32(o, 'prop', null);
         if (prop === null) {
           prop = {};
         }
         this.prop = prop;
-        this.newLineMode = GetValue$31(o, 'newLineMode', 0);
-        this.startIndex = GetValue$31(o, 'startIndex', 0);
+        this.newLineMode = GetValue$32(o, 'newLineMode', 0);
+        this.startIndex = GetValue$32(o, 'startIndex', 0);
       }
     }, {
       key: "plainText",
@@ -5575,7 +5575,7 @@
     return retLines;
   };
 
-  var GetValue$30 = Phaser.Utils.Objects.GetValue;
+  var GetValue$31 = Phaser.Utils.Objects.GetValue;
   var NO_WRAP = CONST.NO_WRAP;
   var NO_NEWLINE = CONST.NO_NEWLINE;
   var CanvasText = /*#__PURE__*/function () {
@@ -5583,10 +5583,10 @@
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
       this.scene = this.parent.scene;
-      this.context = GetValue$30(config, 'context', null);
+      this.context = GetValue$31(config, 'context', null);
       this.canvas = this.context.canvas;
-      this.parser = GetValue$30(config, 'parser', null);
-      this.defaultStyle = GetValue$30(config, 'style', null);
+      this.parser = GetValue$31(config, 'parser', null);
+      this.defaultStyle = GetValue$31(config, 'style', null);
       this.autoRound = true;
       this.pensPool = config.pensPool; // Required
       this.linesPool = config.linesPool; // Required
@@ -5923,7 +5923,7 @@
   }(Stack);
 
   var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2$ = Phaser.Utils.Objects.GetValue;
+  var GetValue$30 = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
     if (IsPlainObject$O(key)) {
       config = key;
@@ -5958,11 +5958,11 @@
       frame: frameKey,
       width: width,
       height: height,
-      y: GetValue$2$(config, 'y', 0),
-      left: GetValue$2$(config, 'left', 0),
-      right: GetValue$2$(config, 'right', 0),
-      originX: GetValue$2$(config, 'originX', 0),
-      originY: GetValue$2$(config, 'originY', 0)
+      y: GetValue$30(config, 'y', 0),
+      left: GetValue$30(config, 'left', 0),
+      right: GetValue$30(config, 'right', 0),
+      originX: GetValue$30(config, 'originX', 0),
+      originY: GetValue$30(config, 'originY', 0)
     };
   };
 
@@ -6062,7 +6062,7 @@
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
-  var GetValue$2_ = Phaser.Utils.Objects.GetValue;
+  var GetValue$2$ = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
 
@@ -6078,10 +6078,10 @@
       _classCallCheck(this, Text);
       if (IsPlainObject$N(x)) {
         var config = x;
-        x = GetValue$2_(config, 'x', 0);
-        y = GetValue$2_(config, 'y', 0);
-        text = GetValue$2_(config, 'text', '');
-        style = GetValue$2_(config, 'style');
+        x = GetValue$2$(config, 'x', 0);
+        y = GetValue$2$(config, 'y', 0);
+        text = GetValue$2$(config, 'text', '');
+        style = GetValue$2$(config, 'style');
       }
       if (x === undefined) {
         x = 0;
@@ -6112,7 +6112,7 @@
         }
       }
       _this.style = new TextStyle$1(_assertThisInitialized(_this), style);
-      var imageData = GetValue$2_(style, 'images', undefined);
+      var imageData = GetValue$2$(style, 'images', undefined);
       if (imageData) {
         _this.addImage(imageData);
       }
@@ -6148,7 +6148,7 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
         _this.frame.source.glTexture = null;
       }
-      var sharedPoolMode = GetValue$2_(style, 'sharedPool', true);
+      var sharedPoolMode = GetValue$2$(style, 'sharedPool', true);
       var pensPool, linesPool, wrapTextLinesPool;
       if (sharedPoolMode) {
         // Use pools first time
@@ -6190,8 +6190,8 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      _this.setUrlTagCursorStyle(GetValue$2_(style, 'urlTagCursorStyle', 'pointer'));
-      if (GetValue$2_(style, 'interactive', false)) {
+      _this.setUrlTagCursorStyle(GetValue$2$(style, 'urlTagCursorStyle', 'pointer'));
+      if (GetValue$2$(style, 'interactive', false)) {
         _this.setInteractive();
       }
       return _this;
@@ -6279,21 +6279,21 @@
           var config = left;
 
           //  If they specify x and/or y this applies to all
-          var x = GetValue$2_(config, 'x', null);
+          var x = GetValue$2$(config, 'x', null);
           if (x !== null) {
             left = x;
             right = x;
           } else {
-            left = GetValue$2_(config, 'left', 0);
-            right = GetValue$2_(config, 'right', left);
+            left = GetValue$2$(config, 'left', 0);
+            right = GetValue$2$(config, 'right', left);
           }
-          var y = GetValue$2_(config, 'y', null);
+          var y = GetValue$2$(config, 'y', null);
           if (y !== null) {
             top = y;
             bottom = y;
           } else {
-            top = GetValue$2_(config, 'top', 0);
-            bottom = GetValue$2_(config, 'bottom', top);
+            top = GetValue$2$(config, 'top', 0);
+            bottom = GetValue$2$(config, 'bottom', top);
           }
         } else {
           if (left === undefined) {
@@ -6521,131 +6521,38 @@
     return Text;
   }(TextBase);
 
-  var GetOpenTagRegString = function GetOpenTagRegString(tagName, param) {
-    if (param === undefined) {
-      return "\\[".concat(tagName, "\\]");
-    } else {
-      return "\\[".concat(tagName, "=(").concat(param, ")\\]");
-    }
-  };
-  var GetCloseTagRegString = function GetCloseTagRegString(tagName) {
-    return "\\[/".concat(tagName, "\\]");
-  };
-  var NUMBER_PARAM = '[-.0-9]+';
-  var COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
-  var STR_PARAM = '[^\\]]+';
-  var ESC = 'esc';
-  var ESC_OPEN = GetOpenTagRegString(ESC);
-  var ESC_CLOSE = GetCloseTagRegString(ESC);
-  var RAW = 'raw';
-  var RAW_OPEN = GetOpenTagRegString(RAW);
-  var RAW_CLOSE = GetCloseTagRegString(RAW);
-  var BLOD = 'b';
-  var BLOD_OPEN = GetOpenTagRegString(BLOD);
-  var BLOD_CLOSE = GetCloseTagRegString(BLOD);
-  var ITALICS = 'i';
-  var ITALICS_OPEN = GetOpenTagRegString(ITALICS);
-  var ITALICS_CLOSE = GetCloseTagRegString(ITALICS);
-  var WEIGHT = 'weight';
-  var WEIGHT_OPEN = GetOpenTagRegString(WEIGHT, NUMBER_PARAM);
-  var WEIGHT_CLOSE = GetCloseTagRegString(WEIGHT);
-  var SIZE = 'size';
-  var SIZE_OPEN = GetOpenTagRegString(SIZE, NUMBER_PARAM);
-  var SIZE_CLOSE = GetCloseTagRegString(SIZE);
-  var COLOR = 'color';
-  var COLOR_OPEN = GetOpenTagRegString(COLOR, COLOR_PARAM);
-  var COLOR_CLOSE = GetCloseTagRegString(COLOR);
-  var UNDERLINE = 'u';
-  var UNDERLINE_OPEN = GetOpenTagRegString(UNDERLINE);
-  var UNDERLINE_OPENC = GetOpenTagRegString(UNDERLINE, COLOR_PARAM);
-  var UNDERLINE_CLOSE = GetCloseTagRegString(UNDERLINE);
-  var SHADOW = 'shadow';
-  var SHADOW_OPEN = GetOpenTagRegString(SHADOW);
-  var SHADOW_CLOSE = GetCloseTagRegString(SHADOW);
-  var STROKE = 'stroke';
-  var STROKE_OPEN = GetOpenTagRegString(STROKE);
-  var STROKE_OPENC = GetOpenTagRegString(STROKE, COLOR_PARAM);
-  var STROKE_CLOSE = GetCloseTagRegString(STROKE);
-  var OFFSETY = 'y';
-  var OFFSETY_OPEN = GetOpenTagRegString(OFFSETY, NUMBER_PARAM);
-  var OFFSETY_CLOSE = GetCloseTagRegString(OFFSETY);
-  var IMAGE = 'img';
-  var IMAGE_OPEN = GetOpenTagRegString(IMAGE, STR_PARAM);
-  var IMAGE_CLOSE = GetCloseTagRegString(IMAGE);
-  var AREA = 'area';
-  var AREA_OPEN = GetOpenTagRegString(AREA, STR_PARAM);
-  var AREA_CLOSE = GetCloseTagRegString(AREA);
-  var URL$1 = 'url';
-  var URL_OPEN = GetOpenTagRegString(URL$1, STR_PARAM);
-  var URL_CLOSE = GetCloseTagRegString(URL$1);
-  var ALIGN$2 = 'align';
-  var ALIGN_OPEN = GetOpenTagRegString(ALIGN$2, STR_PARAM);
-  var ALIGN_CLOSE = GetCloseTagRegString(ALIGN$2);
-  var RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
-  var RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
-  var RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
-  var RE_RAW_CLOSE = new RegExp(RAW_CLOSE, 'i');
-  var RE_BLOD_OPEN = new RegExp(BLOD_OPEN, 'i');
-  var RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
-  var RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
-  var RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
-  var RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
-  var RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
-  var RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
-  var RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
-  var RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
-  var RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
-  var RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
-  var RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
-  var RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
-  var RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
-  var RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
-  var RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
-  var RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
-  var RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
-  var RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
-  var RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
-  var RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
-  var RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
-  var RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
-  var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
-  var RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
-  var RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
-  var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
-  var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT$1 = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
-
   var SplitText = function SplitText(text, mode) {
+    var TagRegex = this.tagRegex;
     var result = [];
     var charIdx = 0;
     var rawMode = false,
       escMode = false;
     while (true) {
-      var regexResult = RE_SPLITTEXT$1.exec(text);
+      var regexResult = TagRegex.RE_SPLITTEXT.exec(text);
       if (!regexResult) {
         break;
       }
       var match = regexResult[0];
       if (escMode) {
-        if (RE_ESC_CLOSE.test(match)) {
+        if (TagRegex.RE_ESC_CLOSE.test(match)) {
           escMode = false;
         } else {
           continue; // Skip other tags
         }
       } else if (rawMode) {
-        if (RE_RAW_CLOSE.test(match)) {
+        if (TagRegex.RE_RAW_CLOSE.test(match)) {
           rawMode = false;
         } else {
           continue; // Skip other tags
         }
       } else {
-        if (RE_ESC_OPEN.test(match)) {
+        if (TagRegex.RE_ESC_OPEN.test(match)) {
           escMode = true;
-        } else if (RE_RAW_OPEN.test(match)) {
+        } else if (TagRegex.RE_RAW_OPEN.test(match)) {
           rawMode = true;
         }
       }
-      var matchEnd = RE_SPLITTEXT$1.lastIndex;
+      var matchEnd = TagRegex.RE_SPLITTEXT.lastIndex;
       var matchStart = matchEnd - match.length;
       if (charIdx < matchStart) {
         var content = text.substring(charIdx, matchStart);
@@ -6671,6 +6578,8 @@
     prevProp: null
   };
   var TagTextToProp = function TagTextToProp(text, prevProp) {
+    var TagRegex = this.tagRegex;
+
     // text : result of splitText()
     if (prevProp == null) {
       prevProp = {};
@@ -6682,91 +6591,91 @@
       UpdateProp(prevProp, PROP_REMOVE, 'img');
     }
     if (prevProp.esc) {
-      if (RE_ESC_CLOSE.test(text)) {
+      if (TagRegex.RE_ESC_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'esc');
       } else {
         plainText = text;
       }
     } else if (prevProp.raw) {
-      if (RE_RAW_CLOSE.test(text)) {
+      if (TagRegex.RE_RAW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'raw');
       } else {
         plainText = text;
       }
     } else {
-      if (RE_ESC_OPEN.test(text)) {
+      if (TagRegex.RE_ESC_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'esc', true);
-      } else if (RE_ESC_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ESC_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'esc');
-      } else if (RE_RAW_OPEN.test(text)) {
+      } else if (TagRegex.RE_RAW_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'raw', true);
-      } else if (RE_RAW_CLOSE.test(text)) {
+      } else if (TagRegex.RE_RAW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'raw');
-      } else if (RE_BLOD_OPEN.test(text)) {
+      } else if (TagRegex.RE_BLOD_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'b', true);
-      } else if (RE_BLOD_CLOSE.test(text)) {
+      } else if (TagRegex.RE_BLOD_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'b');
-      } else if (RE_ITALICS_OPEN.test(text)) {
+      } else if (TagRegex.RE_ITALICS_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'i', true);
-      } else if (RE_ITALICS_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ITALICS_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'i');
-      } else if (RE_WEIGHT_OPEN.test(text)) {
-        var innerMatch = text.match(RE_WEIGHT_OPEN);
+      } else if (TagRegex.RE_WEIGHT_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_WEIGHT_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
-      } else if (RE_WEIGHT_CLOSE.test(text)) {
+      } else if (TagRegex.RE_WEIGHT_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'weight');
-      } else if (RE_SIZE_OPEN.test(text)) {
-        var innerMatch = text.match(RE_SIZE_OPEN);
+      } else if (TagRegex.RE_SIZE_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_SIZE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'size', "".concat(innerMatch[1], "px"));
-      } else if (RE_SIZE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_SIZE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'size');
-      } else if (RE_COLOR_OPEN.test(text)) {
-        var innerMatch = text.match(RE_COLOR_OPEN);
+      } else if (TagRegex.RE_COLOR_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_COLOR_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
-      } else if (RE_COLOR_CLOSE.test(text)) {
+      } else if (TagRegex.RE_COLOR_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'color');
-      } else if (RE_UNDERLINE_OPEN.test(text)) {
+      } else if (TagRegex.RE_UNDERLINE_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'u', true);
-      } else if (RE_UNDERLINE_OPENC.test(text)) {
-        var innerMatch = text.match(RE_UNDERLINE_OPENC);
+      } else if (TagRegex.RE_UNDERLINE_OPENC.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_UNDERLINE_OPENC);
         UpdateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
-      } else if (RE_UNDERLINE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_UNDERLINE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'u');
-      } else if (RE_SHADOW_OPEN.test(text)) {
+      } else if (TagRegex.RE_SHADOW_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'shadow', true);
-      } else if (RE_SHADOW_CLOSE.test(text)) {
+      } else if (TagRegex.RE_SHADOW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'shadow');
-      } else if (RE_STROKE_OPEN.test(text)) {
+      } else if (TagRegex.RE_STROKE_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'stroke', true);
-      } else if (RE_STROKE_OPENC.test(text)) {
-        var innerMatch = text.match(RE_STROKE_OPENC);
+      } else if (TagRegex.RE_STROKE_OPENC.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_STROKE_OPENC);
         UpdateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
-      } else if (RE_STROKE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_STROKE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'stroke');
-      } else if (RE_OFFSETY_OPEN.test(text)) {
-        var innerMatch = text.match(RE_OFFSETY_OPEN);
+      } else if (TagRegex.RE_OFFSETY_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_OFFSETY_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));
-      } else if (RE_OFFSETY_CLOSE.test(text)) {
+      } else if (TagRegex.RE_OFFSETY_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'y');
-      } else if (RE_IMAGE_OPEN.test(text)) {
-        var innerMatch = text.match(RE_IMAGE_OPEN);
+      } else if (TagRegex.RE_IMAGE_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_IMAGE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);
-      } else if (RE_IMAGE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_IMAGE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'img');
-      } else if (RE_AREA_OPEN.test(text)) {
-        var innerMatch = text.match(RE_AREA_OPEN);
+      } else if (TagRegex.RE_AREA_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_AREA_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
-      } else if (RE_AREA_CLOSE.test(text)) {
+      } else if (TagRegex.RE_AREA_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'area');
-      } else if (RE_URL_OPEN.test(text)) {
-        var innerMatch = text.match(RE_URL_OPEN);
+      } else if (TagRegex.RE_URL_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_URL_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'url', innerMatch[1]);
-      } else if (RE_URL_CLOSE.test(text)) {
+      } else if (TagRegex.RE_URL_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'url');
-      } else if (RE_ALIGN_OPEN.test(text)) {
-        var innerMatch = text.match(RE_ALIGN_OPEN);
+      } else if (TagRegex.RE_ALIGN_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_ALIGN_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
-      } else if (RE_ALIGN_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ALIGN_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'align');
       } else {
         plainText = text;
@@ -6943,9 +6852,138 @@
   };
   var EMPTYPROP = {};
 
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var DelimiterLeftSave;
+  var DelimiterRightSave;
+  var TagRegexSave = {};
+  var GetOpenTagRegString = function GetOpenTagRegString(delimiterLeft, delimiterRight, tagName, param) {
+    if (param === undefined) {
+      return "".concat(delimiterLeft).concat(tagName).concat(delimiterRight);
+    } else {
+      return "".concat(delimiterLeft).concat(tagName, "=(").concat(param, ")").concat(delimiterRight);
+    }
+  };
+  var GetCloseTagRegString = function GetCloseTagRegString(delimiterLeft, delimiterRight, tagName) {
+    return "".concat(delimiterLeft, "/").concat(tagName).concat(delimiterRight);
+  };
+  var NUMBER_PARAM = '[-.0-9]+';
+  var COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
+  var STR_PARAM = '[^\\]]+';
+  var SetDelimiters = function SetDelimiters(delimiterLeft, delimiterRight) {
+    if (delimiterRight === undefined) {
+      var delimeters = delimiterLeft;
+      delimiterLeft = delimeters[0];
+      delimiterRight = delimeters[1];
+    }
+    if (DelimiterLeftSave === delimiterLeft && DelimiterRightSave === delimiterRight) {
+      return false;
+    }
+    DelimiterLeftSave = delimiterLeft;
+    DelimiterRightSave = delimiterRight;
+    delimiterLeft = EscapeRegex(delimiterLeft);
+    delimiterRight = EscapeRegex(delimiterRight);
+    var ESC = 'esc';
+    var ESC_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ESC);
+    var ESC_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ESC);
+    var RAW = 'raw';
+    var RAW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, RAW);
+    var RAW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, RAW);
+    var BLOD = 'b';
+    var BLOD_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, BLOD);
+    var BLOD_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, BLOD);
+    var ITALICS = 'i';
+    var ITALICS_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ITALICS);
+    var ITALICS_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ITALICS);
+    var WEIGHT = 'weight';
+    var WEIGHT_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, WEIGHT, NUMBER_PARAM);
+    var WEIGHT_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, WEIGHT);
+    var SIZE = 'size';
+    var SIZE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SIZE, NUMBER_PARAM);
+    var SIZE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SIZE);
+    var COLOR = 'color';
+    var COLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, COLOR, COLOR_PARAM);
+    var COLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, COLOR);
+    var UNDERLINE = 'u';
+    var UNDERLINE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
+    var UNDERLINE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE, COLOR_PARAM);
+    var UNDERLINE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
+    var SHADOW = 'shadow';
+    var SHADOW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW);
+    var SHADOW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SHADOW);
+    var STROKE = 'stroke';
+    var STROKE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE);
+    var STROKE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE, COLOR_PARAM);
+    var STROKE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STROKE);
+    var OFFSETY = 'y';
+    var OFFSETY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, OFFSETY, NUMBER_PARAM);
+    var OFFSETY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, OFFSETY);
+    var IMAGE = 'img';
+    var IMAGE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, IMAGE, STR_PARAM);
+    var IMAGE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, IMAGE);
+    var AREA = 'area';
+    var AREA_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, AREA, STR_PARAM);
+    var AREA_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, AREA);
+    var URL = 'url';
+    var URL_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, URL, STR_PARAM);
+    var URL_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, URL);
+    var ALIGN = 'align';
+    var ALIGN_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ALIGN, STR_PARAM);
+    var ALIGN_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ALIGN);
+    TagRegexSave.RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
+    TagRegexSave.RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
+    TagRegexSave.RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
+    TagRegexSave.RE_RAW_CLOSE = new RegExp(RAW_CLOSE, 'i');
+    TagRegexSave.RE_BLOD_OPEN = new RegExp(BLOD_OPEN, 'i');
+    TagRegexSave.RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
+    TagRegexSave.RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
+    TagRegexSave.RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
+    TagRegexSave.RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
+    TagRegexSave.RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
+    TagRegexSave.RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
+    TagRegexSave.RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
+    TagRegexSave.RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
+    TagRegexSave.RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
+    TagRegexSave.RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
+    TagRegexSave.RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
+    TagRegexSave.RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
+    TagRegexSave.RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
+    TagRegexSave.RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
+    TagRegexSave.RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
+    TagRegexSave.RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
+    TagRegexSave.RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
+    TagRegexSave.RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
+    TagRegexSave.RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
+    TagRegexSave.RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
+    TagRegexSave.RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
+    TagRegexSave.RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
+    TagRegexSave.RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
+    TagRegexSave.RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
+    TagRegexSave.RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
+    TagRegexSave.RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
+    TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
+    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+    return true;
+  };
+  var GetTagRegex = function GetTagRegex(delimiterLeft, delimiterRight) {
+    if (delimiterLeft !== undefined) {
+      SetDelimiters(delimiterLeft, delimiterRight);
+    }
+    return Object.assign({}, TagRegexSave);
+  };
+
+  var GetValue$2_ = Phaser.Utils.Objects.GetValue;
   var Parser$2 = /*#__PURE__*/function () {
-    function Parser() {
+    function Parser(style) {
       _classCallCheck(this, Parser);
+      var delimiters = GetValue$2_(style, 'delimiters', '[]');
+      this.tagRegex = GetTagRegex(delimiters);
     }
     _createClass(Parser, [{
       key: "getStrokeThinkness",
@@ -6957,6 +6995,14 @@
           strokeThickness = 0;
         }
         return strokeThickness;
+      }
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (SetDelimiters(delimiterLeft, delimiterRight)) {
+          this.tagRegex = GetTagRegex();
+        }
+        return this;
       }
     }]);
     return Parser;
@@ -6977,7 +7023,14 @@
       var parser = new Parser$2(style);
       return _super.call(this, scene, x, y, text, style, 'rexBBCodeText', parser);
     }
-    return _createClass(BBCodeText);
+    _createClass(BBCodeText, [{
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        this.parse.setDelimiters(delimiterLeft, delimiterRight);
+        return this;
+      }
+    }]);
+    return BBCodeText;
   }(Text);
 
   ObjectFactory.register('BBCodeText', function (x, y, text, style) {
@@ -13745,32 +13798,24 @@
     return s;
   };
 
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
   var BracketParser$1 = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
-      this.setEventEmitter(GetValue$37(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$38(config, 'eventEmitter', undefined));
 
       // Value convert
-      this.setValueConverter(GetValue$37(config, 'valueConvert', true));
+      this.setValueConverter(GetValue$38(config, 'valueConvert', true));
       // Loop
-      this.setLoopEnable(GetValue$37(config, 'loop', false));
+      this.setLoopEnable(GetValue$38(config, 'loop', false));
 
       // Brackets and generate regex
-      this.setMultipleLinesTagEnable(GetValue$37(config, 'multipleLinesTag', false));
-      var delimiters = GetValue$37(config, 'delimiters', '<>');
+      this.setMultipleLinesTagEnable(GetValue$38(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$38(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
 
       // Translate tagName callback
-      this.setTranslateTagNameCallback(GetValue$37(config, 'translateTagNameCallback'));
+      this.setTranslateTagNameCallback(GetValue$38(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -14035,10 +14080,10 @@
       _this = _super.call(this, config);
 
       // Parameters for regex
-      _this.setTagExpression(GetValue$37(config, 'regex.tag', undefined));
-      _this.setValueExpression(GetValue$37(config, 'regex.value', undefined));
+      _this.setTagExpression(GetValue$38(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$38(config, 'regex.value', undefined));
       // Brackets and generate regex
-      var delimiters = GetValue$37(config, 'delimiters', '<>');
+      var delimiters = GetValue$38(config, 'delimiters', '<>');
       _this.setDelimiters(delimiters[0], delimiters[1]);
       return _this;
     }
@@ -27830,13 +27875,13 @@
     function FSM(config) {
       _classCallCheck(this, FSM);
       // Attach get-next-state function
-      var states = GetValue$37(config, 'states', undefined);
+      var states = GetValue$38(config, 'states', undefined);
       if (states) {
         this.addStates(states);
       }
 
       // Attach extend members
-      var extend = GetValue$37(config, 'extend', undefined);
+      var extend = GetValue$38(config, 'extend', undefined);
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -27846,8 +27891,8 @@
       }
 
       // Event emitter
-      var eventEmitter = GetValue$37(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$37(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$38(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$38(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -27865,9 +27910,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$37(o, 'enable', true));
-        this.start(GetValue$37(o, 'start', undefined));
-        var init = GetValue$37(o, 'init', undefined);
+        this.setEnable(GetValue$38(o, 'enable', true));
+        this.start(GetValue$38(o, 'start', undefined));
+        var init = GetValue$38(o, 'init', undefined);
         if (init) {
           init.call(this);
         }
@@ -28104,7 +28149,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-        this._scene = GetValue$37(o, 'scene', undefined);
+        this._scene = GetValue$38(o, 'scene', undefined);
         return this;
       }
     }, {
@@ -45772,11 +45817,11 @@
 
   var GetValueFromAliasKeys = function GetValueFromAliasKeys(source, key0, key1, key2, defaultValue) {
     if (HasValue(source, key0)) {
-      return GetValue$37(source, key0);
+      return GetValue$38(source, key0);
     } else if (key1 && HasValue(source, key1)) {
-      return GetValue$37(source, key1);
+      return GetValue$38(source, key1);
     } else if (key2 && HasValue(source, key2)) {
-      return GetValue$37(source, key2);
+      return GetValue$38(source, key2);
     } else {
       return defaultValue;
     }
@@ -49473,7 +49518,7 @@
   };
 
   var RunCommands = function RunCommands(queue, scope, config) {
-    var reverse = GetValue$37(config, 'reverse', false);
+    var reverse = GetValue$38(config, 'reverse', false);
     var retVal;
     if (IsArray(queue[0])) {
       if (!reverse) {
@@ -49491,8 +49536,8 @@
     return retVal;
   };
   var RunCommand = function RunCommand(cmd, scope, config) {
-    var argsConvert = GetValue$37(config, 'argsConvert', undefined);
-    var argsConvertScope = GetValue$37(config, 'argsConvertScope', undefined);
+    var argsConvert = GetValue$38(config, 'argsConvert', undefined);
+    var argsConvertScope = GetValue$38(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
     if (argsConvert) {
@@ -49513,7 +49558,7 @@
     if (typeof fnName === 'string') {
       fn = scope[fnName];
       if (fn == null) {
-        fn = GetValue$37(scope, fnName, null);
+        fn = GetValue$38(scope, fnName, null);
       }
     } else {
       fn = fnName;

@@ -108,6 +108,10 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[raw][esc]Text[/esc][/raw]`
     - `[raw][b]Text[/b][/raw]`
 
+!!! note
+    Can set delimiter `[]` to another custom value in style of constructor.
+
+
 ### Add text object
 
 ```javascript
@@ -178,7 +182,9 @@ Default style
 
     // images: {
     //     imgKey: {y: -8}
-    // }
+    // },
+
+    // delimiters: '[]',
 
     // sharedPool: true,
 
@@ -239,6 +245,7 @@ var txt = scene.make.rexBBCodeText({
     - `valign` : Vertical alignment.
         - `'top'`, `'center'`, `'bottom'`
 - `images` : See [Image](bbcodetext.md#image)
+- `delimiters` : Delimiters of tags, default value is `[]`.
 - `sharedPool` : 
     - `true` : Use shared resouce pools during game. Default behavior.
     - `false` : Use local resource pools, will be free when game object destroying.
@@ -683,4 +690,16 @@ txt.setTestString(text);
 ```javascript
 txt.generateTexture(key);
 // txt.generateTexture(key, x, y, width, height);
+```
+
+### Delimiters
+
+```javascript
+txt.setDelimiters(delimiters);  // '<>', or ['<', '>']
+```
+
+or
+
+```javascript
+txt.setDelimiters(delimiterLeft, delimiterRight); // '<', '>'
 ```

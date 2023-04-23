@@ -6,6 +6,11 @@ class BBCodeText extends Text {
         var parser = new ParserKlass(style);
         super(scene, x, y, text, style, 'rexBBCodeText', parser);
     }
+
+    setDelimiters(delimiterLeft, delimiterRight) {
+        this.parse.setDelimiters(delimiterLeft, delimiterRight);
+        return this;
+    }
 }
 
 export default BBCodeText;

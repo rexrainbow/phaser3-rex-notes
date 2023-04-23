@@ -91,6 +91,20 @@ Hello
             padding: 20
         })
 
+        var s4 = `\
+<color=red>[color=]</color>
+<color=blue>[color=]</color>
+<color=green>[color=]</color>\
+`
+
+        this.add.rexBBCodeText(600, 300, s4, {
+            delimiters: '<>',
+            fontFamily: 'Arial',
+            fontSize: 20,
+            backgroundColor: '#555',
+            padding: 10
+        })
+
     }
 
     update() { }

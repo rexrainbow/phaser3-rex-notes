@@ -4794,7 +4794,7 @@
   };
 
   var GetAdvancedValue$4 = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue$1t = Phaser.Utils.Objects.GetValue;
+  var GetValue$1u = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(text, style, propertyMap) {
       _classCallCheck(this, TextStyle);
@@ -4894,7 +4894,7 @@
           var postCallback = prop[2];
           if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
             // Callback & scope should be set without processing the values
-            this[key] = GetValue$1t(style, objKey, defaultValue);
+            this[key] = GetValue$1u(style, objKey, defaultValue);
           } else {
             var value = GetAdvancedValue$4(style, objKey, defaultValue);
             if (postCallback) {
@@ -4905,7 +4905,7 @@
         }
 
         //  Allow for 'font' override
-        var font = GetValue$1t(style, 'font', null);
+        var font = GetValue$1u(style, 'font', null);
         if (font === null) {
           this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
         } else {
@@ -4913,19 +4913,19 @@
         }
 
         //  Allow for 'fill' to be used in place of 'color'
-        var fill = GetValue$1t(style, 'fill', null);
+        var fill = GetValue$1u(style, 'fill', null);
         if (fill !== null) {
           this.color = GetStyle(fill);
         }
-        var metrics = GetValue$1t(style, 'metrics', false);
+        var metrics = GetValue$1u(style, 'metrics', false);
 
         //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
         //  Doing this is reset if you then change the font of this TextStyle after creation
         if (metrics) {
           this.metrics = {
-            ascent: GetValue$1t(metrics, 'ascent', 0),
-            descent: GetValue$1t(metrics, 'descent', 0),
-            fontSize: GetValue$1t(metrics, 'fontSize', 0)
+            ascent: GetValue$1u(metrics, 'ascent', 0),
+            descent: GetValue$1u(metrics, 'descent', 0),
+            fontSize: GetValue$1u(metrics, 'fontSize', 0)
           };
         } else if (updateText || !this.metrics) {
           this.metrics = MeasureText(this);
@@ -4994,9 +4994,9 @@
           this.fontSize = '';
           this.fontStyle = '';
         } else {
-          this.fontFamily = GetValue$1t(font, 'fontFamily', 'Courier');
-          this.fontSize = GetValue$1t(font, 'fontSize', '16px');
-          this.fontStyle = GetValue$1t(font, 'fontStyle', '');
+          this.fontFamily = GetValue$1u(font, 'fontFamily', 'Courier');
+          this.fontSize = GetValue$1u(font, 'fontSize', '16px');
+          this.fontStyle = GetValue$1u(font, 'fontStyle', '');
         }
         return this.update(true);
       }
@@ -5303,9 +5303,9 @@
             this.fontSize = '';
             this.fontStyle = '';
           } else {
-            this.fontFamily = GetValue$1t(font, 'fontFamily', this.fontFamily);
-            this.fontSize = GetValue$1t(font, 'fontSize', this.fontSize);
-            this.fontStyle = GetValue$1t(font, 'fontStyle', this.fontStyle);
+            this.fontFamily = GetValue$1u(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue$1u(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue$1u(font, 'fontStyle', this.fontStyle);
           }
         }
         return this.parent.updateText(true);
@@ -5341,7 +5341,7 @@
     character: CONST.CHAR_WRAP
   };
 
-  var GetValue$1s = Phaser.Utils.Objects.GetValue;
+  var GetValue$1t = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -5442,14 +5442,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$1s(value, 'x', 0);
-          defaultRadiusY = GetValue$1s(value, 'y', 0);
+          defaultRadiusX = GetValue$1t(value, 'x', 0);
+          defaultRadiusY = GetValue$1t(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$1s(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$1s(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$1s(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$1s(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$1t(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$1t(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$1t(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$1t(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -5510,8 +5510,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$1s(value, 'x', 0);
-      radius.y = GetValue$1s(value, 'y', 0);
+      radius.x = GetValue$1t(value, 'x', 0);
+      radius.y = GetValue$1t(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -5858,7 +5858,7 @@
     }
   };
 
-  var GetValue$1r = Phaser.Utils.Objects.GetValue;
+  var GetValue$1s = Phaser.Utils.Objects.GetValue;
   var NO_NEWLINE$3 = CONST.NO_NEWLINE;
   var RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
   var Pen = /*#__PURE__*/function () {
@@ -5871,17 +5871,17 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         // (txt, x, y, width, prop, newLineMode, startIndex)
-        this.text = GetValue$1r(o, 'text', '');
-        this.x = GetValue$1r(o, 'x', 0);
-        this.y = GetValue$1r(o, 'y', 0);
-        this.width = GetValue$1r(o, 'width', 0);
-        var prop = GetValue$1r(o, 'prop', null);
+        this.text = GetValue$1s(o, 'text', '');
+        this.x = GetValue$1s(o, 'x', 0);
+        this.y = GetValue$1s(o, 'y', 0);
+        this.width = GetValue$1s(o, 'width', 0);
+        var prop = GetValue$1s(o, 'prop', null);
         if (prop === null) {
           prop = {};
         }
         this.prop = prop;
-        this.newLineMode = GetValue$1r(o, 'newLineMode', 0);
-        this.startIndex = GetValue$1r(o, 'startIndex', 0);
+        this.newLineMode = GetValue$1s(o, 'newLineMode', 0);
+        this.startIndex = GetValue$1s(o, 'startIndex', 0);
       }
     }, {
       key: "plainText",
@@ -6554,7 +6554,7 @@
     return retLines;
   };
 
-  var GetValue$1q = Phaser.Utils.Objects.GetValue;
+  var GetValue$1r = Phaser.Utils.Objects.GetValue;
   var NO_WRAP = CONST.NO_WRAP;
   var NO_NEWLINE = CONST.NO_NEWLINE;
   var CanvasText = /*#__PURE__*/function () {
@@ -6562,10 +6562,10 @@
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
       this.scene = this.parent.scene;
-      this.context = GetValue$1q(config, 'context', null);
+      this.context = GetValue$1r(config, 'context', null);
       this.canvas = this.context.canvas;
-      this.parser = GetValue$1q(config, 'parser', null);
-      this.defaultStyle = GetValue$1q(config, 'style', null);
+      this.parser = GetValue$1r(config, 'parser', null);
+      this.defaultStyle = GetValue$1r(config, 'style', null);
       this.autoRound = true;
       this.pensPool = config.pensPool; // Required
       this.linesPool = config.linesPool; // Required
@@ -6902,7 +6902,7 @@
   }(Stack);
 
   var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1p = Phaser.Utils.Objects.GetValue;
+  var GetValue$1q = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
     if (IsPlainObject$o(key)) {
       config = key;
@@ -6937,11 +6937,11 @@
       frame: frameKey,
       width: width,
       height: height,
-      y: GetValue$1p(config, 'y', 0),
-      left: GetValue$1p(config, 'left', 0),
-      right: GetValue$1p(config, 'right', 0),
-      originX: GetValue$1p(config, 'originX', 0),
-      originY: GetValue$1p(config, 'originY', 0)
+      y: GetValue$1q(config, 'y', 0),
+      left: GetValue$1q(config, 'left', 0),
+      right: GetValue$1q(config, 'right', 0),
+      originX: GetValue$1q(config, 'originX', 0),
+      originY: GetValue$1q(config, 'originY', 0)
     };
   };
 
@@ -7079,7 +7079,7 @@
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$2 = Phaser.GameObjects.GameObject;
-  var GetValue$1o = Phaser.Utils.Objects.GetValue;
+  var GetValue$1p = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
 
@@ -7095,10 +7095,10 @@
       _classCallCheck(this, Text);
       if (IsPlainObject$n(x)) {
         var config = x;
-        x = GetValue$1o(config, 'x', 0);
-        y = GetValue$1o(config, 'y', 0);
-        text = GetValue$1o(config, 'text', '');
-        style = GetValue$1o(config, 'style');
+        x = GetValue$1p(config, 'x', 0);
+        y = GetValue$1p(config, 'y', 0);
+        text = GetValue$1p(config, 'text', '');
+        style = GetValue$1p(config, 'style');
       }
       if (x === undefined) {
         x = 0;
@@ -7129,7 +7129,7 @@
         }
       }
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
-      var imageData = GetValue$1o(style, 'images', undefined);
+      var imageData = GetValue$1p(style, 'images', undefined);
       if (imageData) {
         _this.addImage(imageData);
       }
@@ -7165,7 +7165,7 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
         _this.frame.source.glTexture = null;
       }
-      var sharedPoolMode = GetValue$1o(style, 'sharedPool', true);
+      var sharedPoolMode = GetValue$1p(style, 'sharedPool', true);
       var pensPool, linesPool, wrapTextLinesPool;
       if (sharedPoolMode) {
         // Use pools first time
@@ -7207,8 +7207,8 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      _this.setUrlTagCursorStyle(GetValue$1o(style, 'urlTagCursorStyle', 'pointer'));
-      if (GetValue$1o(style, 'interactive', false)) {
+      _this.setUrlTagCursorStyle(GetValue$1p(style, 'urlTagCursorStyle', 'pointer'));
+      if (GetValue$1p(style, 'interactive', false)) {
         _this.setInteractive();
       }
       return _this;
@@ -7296,21 +7296,21 @@
           var config = left;
 
           //  If they specify x and/or y this applies to all
-          var x = GetValue$1o(config, 'x', null);
+          var x = GetValue$1p(config, 'x', null);
           if (x !== null) {
             left = x;
             right = x;
           } else {
-            left = GetValue$1o(config, 'left', 0);
-            right = GetValue$1o(config, 'right', left);
+            left = GetValue$1p(config, 'left', 0);
+            right = GetValue$1p(config, 'right', left);
           }
-          var y = GetValue$1o(config, 'y', null);
+          var y = GetValue$1p(config, 'y', null);
           if (y !== null) {
             top = y;
             bottom = y;
           } else {
-            top = GetValue$1o(config, 'top', 0);
-            bottom = GetValue$1o(config, 'bottom', top);
+            top = GetValue$1p(config, 'top', 0);
+            bottom = GetValue$1p(config, 'bottom', top);
           }
         } else {
           if (left === undefined) {
@@ -7538,131 +7538,38 @@
     return Text;
   }(TextBase);
 
-  var GetOpenTagRegString = function GetOpenTagRegString(tagName, param) {
-    if (param === undefined) {
-      return "\\[".concat(tagName, "\\]");
-    } else {
-      return "\\[".concat(tagName, "=(").concat(param, ")\\]");
-    }
-  };
-  var GetCloseTagRegString = function GetCloseTagRegString(tagName) {
-    return "\\[/".concat(tagName, "\\]");
-  };
-  var NUMBER_PARAM = '[-.0-9]+';
-  var COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
-  var STR_PARAM = '[^\\]]+';
-  var ESC = 'esc';
-  var ESC_OPEN = GetOpenTagRegString(ESC);
-  var ESC_CLOSE = GetCloseTagRegString(ESC);
-  var RAW = 'raw';
-  var RAW_OPEN = GetOpenTagRegString(RAW);
-  var RAW_CLOSE = GetCloseTagRegString(RAW);
-  var BLOD = 'b';
-  var BLOD_OPEN = GetOpenTagRegString(BLOD);
-  var BLOD_CLOSE = GetCloseTagRegString(BLOD);
-  var ITALICS = 'i';
-  var ITALICS_OPEN = GetOpenTagRegString(ITALICS);
-  var ITALICS_CLOSE = GetCloseTagRegString(ITALICS);
-  var WEIGHT = 'weight';
-  var WEIGHT_OPEN = GetOpenTagRegString(WEIGHT, NUMBER_PARAM);
-  var WEIGHT_CLOSE = GetCloseTagRegString(WEIGHT);
-  var SIZE = 'size';
-  var SIZE_OPEN = GetOpenTagRegString(SIZE, NUMBER_PARAM);
-  var SIZE_CLOSE = GetCloseTagRegString(SIZE);
-  var COLOR = 'color';
-  var COLOR_OPEN = GetOpenTagRegString(COLOR, COLOR_PARAM);
-  var COLOR_CLOSE = GetCloseTagRegString(COLOR);
-  var UNDERLINE = 'u';
-  var UNDERLINE_OPEN = GetOpenTagRegString(UNDERLINE);
-  var UNDERLINE_OPENC = GetOpenTagRegString(UNDERLINE, COLOR_PARAM);
-  var UNDERLINE_CLOSE = GetCloseTagRegString(UNDERLINE);
-  var SHADOW = 'shadow';
-  var SHADOW_OPEN = GetOpenTagRegString(SHADOW);
-  var SHADOW_CLOSE = GetCloseTagRegString(SHADOW);
-  var STROKE = 'stroke';
-  var STROKE_OPEN = GetOpenTagRegString(STROKE);
-  var STROKE_OPENC = GetOpenTagRegString(STROKE, COLOR_PARAM);
-  var STROKE_CLOSE = GetCloseTagRegString(STROKE);
-  var OFFSETY = 'y';
-  var OFFSETY_OPEN = GetOpenTagRegString(OFFSETY, NUMBER_PARAM);
-  var OFFSETY_CLOSE = GetCloseTagRegString(OFFSETY);
-  var IMAGE = 'img';
-  var IMAGE_OPEN = GetOpenTagRegString(IMAGE, STR_PARAM);
-  var IMAGE_CLOSE = GetCloseTagRegString(IMAGE);
-  var AREA = 'area';
-  var AREA_OPEN = GetOpenTagRegString(AREA, STR_PARAM);
-  var AREA_CLOSE = GetCloseTagRegString(AREA);
-  var URL$1 = 'url';
-  var URL_OPEN = GetOpenTagRegString(URL$1, STR_PARAM);
-  var URL_CLOSE = GetCloseTagRegString(URL$1);
-  var ALIGN$2 = 'align';
-  var ALIGN_OPEN = GetOpenTagRegString(ALIGN$2, STR_PARAM);
-  var ALIGN_CLOSE = GetCloseTagRegString(ALIGN$2);
-  var RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
-  var RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
-  var RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
-  var RE_RAW_CLOSE = new RegExp(RAW_CLOSE, 'i');
-  var RE_BLOD_OPEN = new RegExp(BLOD_OPEN, 'i');
-  var RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
-  var RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
-  var RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
-  var RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
-  var RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
-  var RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
-  var RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
-  var RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
-  var RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
-  var RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
-  var RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
-  var RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
-  var RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
-  var RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
-  var RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
-  var RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
-  var RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
-  var RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
-  var RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
-  var RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
-  var RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
-  var RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
-  var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
-  var RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
-  var RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
-  var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
-  var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
-
   var SplitText = function SplitText(text, mode) {
+    var TagRegex = this.tagRegex;
     var result = [];
     var charIdx = 0;
     var rawMode = false,
       escMode = false;
     while (true) {
-      var regexResult = RE_SPLITTEXT.exec(text);
+      var regexResult = TagRegex.RE_SPLITTEXT.exec(text);
       if (!regexResult) {
         break;
       }
       var match = regexResult[0];
       if (escMode) {
-        if (RE_ESC_CLOSE.test(match)) {
+        if (TagRegex.RE_ESC_CLOSE.test(match)) {
           escMode = false;
         } else {
           continue; // Skip other tags
         }
       } else if (rawMode) {
-        if (RE_RAW_CLOSE.test(match)) {
+        if (TagRegex.RE_RAW_CLOSE.test(match)) {
           rawMode = false;
         } else {
           continue; // Skip other tags
         }
       } else {
-        if (RE_ESC_OPEN.test(match)) {
+        if (TagRegex.RE_ESC_OPEN.test(match)) {
           escMode = true;
-        } else if (RE_RAW_OPEN.test(match)) {
+        } else if (TagRegex.RE_RAW_OPEN.test(match)) {
           rawMode = true;
         }
       }
-      var matchEnd = RE_SPLITTEXT.lastIndex;
+      var matchEnd = TagRegex.RE_SPLITTEXT.lastIndex;
       var matchStart = matchEnd - match.length;
       if (charIdx < matchStart) {
         var content = text.substring(charIdx, matchStart);
@@ -7688,6 +7595,8 @@
     prevProp: null
   };
   var TagTextToProp = function TagTextToProp(text, prevProp) {
+    var TagRegex = this.tagRegex;
+
     // text : result of splitText()
     if (prevProp == null) {
       prevProp = {};
@@ -7699,91 +7608,91 @@
       UpdateProp(prevProp, PROP_REMOVE, 'img');
     }
     if (prevProp.esc) {
-      if (RE_ESC_CLOSE.test(text)) {
+      if (TagRegex.RE_ESC_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'esc');
       } else {
         plainText = text;
       }
     } else if (prevProp.raw) {
-      if (RE_RAW_CLOSE.test(text)) {
+      if (TagRegex.RE_RAW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'raw');
       } else {
         plainText = text;
       }
     } else {
-      if (RE_ESC_OPEN.test(text)) {
+      if (TagRegex.RE_ESC_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'esc', true);
-      } else if (RE_ESC_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ESC_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'esc');
-      } else if (RE_RAW_OPEN.test(text)) {
+      } else if (TagRegex.RE_RAW_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'raw', true);
-      } else if (RE_RAW_CLOSE.test(text)) {
+      } else if (TagRegex.RE_RAW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'raw');
-      } else if (RE_BLOD_OPEN.test(text)) {
+      } else if (TagRegex.RE_BLOD_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'b', true);
-      } else if (RE_BLOD_CLOSE.test(text)) {
+      } else if (TagRegex.RE_BLOD_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'b');
-      } else if (RE_ITALICS_OPEN.test(text)) {
+      } else if (TagRegex.RE_ITALICS_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'i', true);
-      } else if (RE_ITALICS_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ITALICS_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'i');
-      } else if (RE_WEIGHT_OPEN.test(text)) {
-        var innerMatch = text.match(RE_WEIGHT_OPEN);
+      } else if (TagRegex.RE_WEIGHT_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_WEIGHT_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
-      } else if (RE_WEIGHT_CLOSE.test(text)) {
+      } else if (TagRegex.RE_WEIGHT_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'weight');
-      } else if (RE_SIZE_OPEN.test(text)) {
-        var innerMatch = text.match(RE_SIZE_OPEN);
+      } else if (TagRegex.RE_SIZE_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_SIZE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'size', "".concat(innerMatch[1], "px"));
-      } else if (RE_SIZE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_SIZE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'size');
-      } else if (RE_COLOR_OPEN.test(text)) {
-        var innerMatch = text.match(RE_COLOR_OPEN);
+      } else if (TagRegex.RE_COLOR_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_COLOR_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
-      } else if (RE_COLOR_CLOSE.test(text)) {
+      } else if (TagRegex.RE_COLOR_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'color');
-      } else if (RE_UNDERLINE_OPEN.test(text)) {
+      } else if (TagRegex.RE_UNDERLINE_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'u', true);
-      } else if (RE_UNDERLINE_OPENC.test(text)) {
-        var innerMatch = text.match(RE_UNDERLINE_OPENC);
+      } else if (TagRegex.RE_UNDERLINE_OPENC.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_UNDERLINE_OPENC);
         UpdateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
-      } else if (RE_UNDERLINE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_UNDERLINE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'u');
-      } else if (RE_SHADOW_OPEN.test(text)) {
+      } else if (TagRegex.RE_SHADOW_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'shadow', true);
-      } else if (RE_SHADOW_CLOSE.test(text)) {
+      } else if (TagRegex.RE_SHADOW_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'shadow');
-      } else if (RE_STROKE_OPEN.test(text)) {
+      } else if (TagRegex.RE_STROKE_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'stroke', true);
-      } else if (RE_STROKE_OPENC.test(text)) {
-        var innerMatch = text.match(RE_STROKE_OPENC);
+      } else if (TagRegex.RE_STROKE_OPENC.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_STROKE_OPENC);
         UpdateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
-      } else if (RE_STROKE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_STROKE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'stroke');
-      } else if (RE_OFFSETY_OPEN.test(text)) {
-        var innerMatch = text.match(RE_OFFSETY_OPEN);
+      } else if (TagRegex.RE_OFFSETY_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_OFFSETY_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));
-      } else if (RE_OFFSETY_CLOSE.test(text)) {
+      } else if (TagRegex.RE_OFFSETY_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'y');
-      } else if (RE_IMAGE_OPEN.test(text)) {
-        var innerMatch = text.match(RE_IMAGE_OPEN);
+      } else if (TagRegex.RE_IMAGE_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_IMAGE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);
-      } else if (RE_IMAGE_CLOSE.test(text)) {
+      } else if (TagRegex.RE_IMAGE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'img');
-      } else if (RE_AREA_OPEN.test(text)) {
-        var innerMatch = text.match(RE_AREA_OPEN);
+      } else if (TagRegex.RE_AREA_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_AREA_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
-      } else if (RE_AREA_CLOSE.test(text)) {
+      } else if (TagRegex.RE_AREA_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'area');
-      } else if (RE_URL_OPEN.test(text)) {
-        var innerMatch = text.match(RE_URL_OPEN);
+      } else if (TagRegex.RE_URL_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_URL_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'url', innerMatch[1]);
-      } else if (RE_URL_CLOSE.test(text)) {
+      } else if (TagRegex.RE_URL_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'url');
-      } else if (RE_ALIGN_OPEN.test(text)) {
-        var innerMatch = text.match(RE_ALIGN_OPEN);
+      } else if (TagRegex.RE_ALIGN_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_ALIGN_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
-      } else if (RE_ALIGN_CLOSE.test(text)) {
+      } else if (TagRegex.RE_ALIGN_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'align');
       } else {
         plainText = text;
@@ -7960,9 +7869,138 @@
   };
   var EMPTYPROP = {};
 
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var DelimiterLeftSave;
+  var DelimiterRightSave;
+  var TagRegexSave = {};
+  var GetOpenTagRegString = function GetOpenTagRegString(delimiterLeft, delimiterRight, tagName, param) {
+    if (param === undefined) {
+      return "".concat(delimiterLeft).concat(tagName).concat(delimiterRight);
+    } else {
+      return "".concat(delimiterLeft).concat(tagName, "=(").concat(param, ")").concat(delimiterRight);
+    }
+  };
+  var GetCloseTagRegString = function GetCloseTagRegString(delimiterLeft, delimiterRight, tagName) {
+    return "".concat(delimiterLeft, "/").concat(tagName).concat(delimiterRight);
+  };
+  var NUMBER_PARAM = '[-.0-9]+';
+  var COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
+  var STR_PARAM = '[^\\]]+';
+  var SetDelimiters = function SetDelimiters(delimiterLeft, delimiterRight) {
+    if (delimiterRight === undefined) {
+      var delimeters = delimiterLeft;
+      delimiterLeft = delimeters[0];
+      delimiterRight = delimeters[1];
+    }
+    if (DelimiterLeftSave === delimiterLeft && DelimiterRightSave === delimiterRight) {
+      return false;
+    }
+    DelimiterLeftSave = delimiterLeft;
+    DelimiterRightSave = delimiterRight;
+    delimiterLeft = EscapeRegex(delimiterLeft);
+    delimiterRight = EscapeRegex(delimiterRight);
+    var ESC = 'esc';
+    var ESC_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ESC);
+    var ESC_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ESC);
+    var RAW = 'raw';
+    var RAW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, RAW);
+    var RAW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, RAW);
+    var BLOD = 'b';
+    var BLOD_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, BLOD);
+    var BLOD_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, BLOD);
+    var ITALICS = 'i';
+    var ITALICS_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ITALICS);
+    var ITALICS_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ITALICS);
+    var WEIGHT = 'weight';
+    var WEIGHT_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, WEIGHT, NUMBER_PARAM);
+    var WEIGHT_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, WEIGHT);
+    var SIZE = 'size';
+    var SIZE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SIZE, NUMBER_PARAM);
+    var SIZE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SIZE);
+    var COLOR = 'color';
+    var COLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, COLOR, COLOR_PARAM);
+    var COLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, COLOR);
+    var UNDERLINE = 'u';
+    var UNDERLINE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
+    var UNDERLINE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE, COLOR_PARAM);
+    var UNDERLINE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
+    var SHADOW = 'shadow';
+    var SHADOW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW);
+    var SHADOW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SHADOW);
+    var STROKE = 'stroke';
+    var STROKE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE);
+    var STROKE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE, COLOR_PARAM);
+    var STROKE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STROKE);
+    var OFFSETY = 'y';
+    var OFFSETY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, OFFSETY, NUMBER_PARAM);
+    var OFFSETY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, OFFSETY);
+    var IMAGE = 'img';
+    var IMAGE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, IMAGE, STR_PARAM);
+    var IMAGE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, IMAGE);
+    var AREA = 'area';
+    var AREA_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, AREA, STR_PARAM);
+    var AREA_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, AREA);
+    var URL = 'url';
+    var URL_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, URL, STR_PARAM);
+    var URL_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, URL);
+    var ALIGN = 'align';
+    var ALIGN_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ALIGN, STR_PARAM);
+    var ALIGN_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ALIGN);
+    TagRegexSave.RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
+    TagRegexSave.RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
+    TagRegexSave.RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
+    TagRegexSave.RE_RAW_CLOSE = new RegExp(RAW_CLOSE, 'i');
+    TagRegexSave.RE_BLOD_OPEN = new RegExp(BLOD_OPEN, 'i');
+    TagRegexSave.RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
+    TagRegexSave.RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
+    TagRegexSave.RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
+    TagRegexSave.RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
+    TagRegexSave.RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
+    TagRegexSave.RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
+    TagRegexSave.RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
+    TagRegexSave.RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
+    TagRegexSave.RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
+    TagRegexSave.RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
+    TagRegexSave.RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
+    TagRegexSave.RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
+    TagRegexSave.RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
+    TagRegexSave.RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
+    TagRegexSave.RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
+    TagRegexSave.RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
+    TagRegexSave.RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
+    TagRegexSave.RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
+    TagRegexSave.RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
+    TagRegexSave.RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
+    TagRegexSave.RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
+    TagRegexSave.RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i');
+    TagRegexSave.RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
+    TagRegexSave.RE_URL_OPEN = new RegExp(URL_OPEN, 'i');
+    TagRegexSave.RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
+    TagRegexSave.RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
+    TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
+    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+    return true;
+  };
+  var GetTagRegex = function GetTagRegex(delimiterLeft, delimiterRight) {
+    if (delimiterLeft !== undefined) {
+      SetDelimiters(delimiterLeft, delimiterRight);
+    }
+    return Object.assign({}, TagRegexSave);
+  };
+
+  var GetValue$1o = Phaser.Utils.Objects.GetValue;
   var Parser = /*#__PURE__*/function () {
-    function Parser() {
+    function Parser(style) {
       _classCallCheck(this, Parser);
+      var delimiters = GetValue$1o(style, 'delimiters', '[]');
+      this.tagRegex = GetTagRegex(delimiters);
     }
     _createClass(Parser, [{
       key: "getStrokeThinkness",
@@ -7974,6 +8012,14 @@
           strokeThickness = 0;
         }
         return strokeThickness;
+      }
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (SetDelimiters(delimiterLeft, delimiterRight)) {
+          this.tagRegex = GetTagRegex();
+        }
+        return this;
       }
     }]);
     return Parser;
@@ -7994,7 +8040,14 @@
       var parser = new Parser(style);
       return _super.call(this, scene, x, y, text, style, 'rexBBCodeText', parser);
     }
-    return _createClass(BBCodeText);
+    _createClass(BBCodeText, [{
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        this.parse.setDelimiters(delimiterLeft, delimiterRight);
+        return this;
+      }
+    }]);
+    return BBCodeText;
   }(Text);
 
   var CreateBBCodeText = function CreateBBCodeText(scene, data, view, styles, customBuilders) {
