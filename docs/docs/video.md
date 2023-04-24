@@ -285,6 +285,12 @@ var texture = video.saveTexture(key);
 
 ### Events
 
+- The media source doesn't represent a supported media format.
+    ```javascript
+    video.on('unsupported', function(video, error){
+
+    }, scope);
+    ```
 - A Video is unlocked by a user gesture.
     ```javascript
     video.on('unlocked', function(video, error){
@@ -306,6 +312,18 @@ var texture = video.saveTexture(key);
 - A Video begins playback.
     ```javascript
     video.on('play', function(video){
+
+    }, scope);
+    ```
+- First started or restarted.
+    ```javascript
+    video.on('playing', function(video){
+
+    }, scope);
+    ```
+- The video has finished loading enough data for its first frame.
+    ```javascript
+    video.on('textureready', function(video){
 
     }, scope);
     ```
@@ -336,6 +354,12 @@ var texture = video.saveTexture(key);
 - Enough of the video source has been loaded, that the browser is able to render a frame from it.
     ```javascript
     video.on('created', function(video, width, height){
+
+    }, scope);
+    ```
+- Stalled by `stalled`, `suspend`, `waiting` DOM event.
+    ```javascript
+    video.on('stalled', function(video, width, height){
 
     }, scope);
     ```
