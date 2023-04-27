@@ -19,9 +19,6 @@ var CreateEmitterConfig = function (gameObject, config) {
         speed: GetValue(config, 'spread', 10)
     };
 
-    // stopAfter
-    var repeat = 1 + GetValue(config, 'repeat', 0);
-    emitterConfig.stopAfter = repeat * points.length;
     // Set lifespan
     var lifespan = GetValue(config, 'lifespan', 1000);
     emitterConfig.lifespan = lifespan;
@@ -40,6 +37,23 @@ var CreateEmitterConfig = function (gameObject, config) {
             }
         }
     }
+
+    // stopAfter
+    var repeat = 1 + GetValue(config, 'repeat', 0);
+    var totalParticleCount = repeat * points.length;
+    if (emitterConfig.hasOwnProperty('frequency')) {
+        // Can't use 'stopAfter' in this case
+        emitterConfig.emitCallback = function (particle, emitter) {
+            totalParticleCount -= 1;
+            if (totalParticleCount <= 0) {
+                emitter.stopAfter = 1;
+                emitter.stopCounter = 2;
+            }
+        }
+    } else {
+        emitterConfig.stopAfter = totalParticleCount;
+    }
+
     // Set texture frame
     var textureFrames = GetValue(config, 'textureFrames', undefined);
     if (textureFrames) {
@@ -48,16 +62,19 @@ var CreateEmitterConfig = function (gameObject, config) {
             cycle: GetValue(config, 'textureFrameCycle', true)
         }
     }
+
     // Set scale
     var scale = GetValue(config, 'scale', undefined);
     if (scale !== undefined) {
         emitterConfig.scale = scale;
     }
+
     // Set alpha
     var alpha = GetValue(config, 'alpha', undefined);
     if (alpha !== undefined) {
         emitterConfig.alpha = alpha;
     }
+
     // Set tint
     var tint = GetValue(config, 'tint', undefined);
     if (tint !== undefined) {

@@ -117,7 +117,7 @@ var particles = scene.add.particles(x, y, texture, {
     // Texture
     texture:
     frame:
-    anim:
+    anim: [],  // string, or array of string
     
     reserve: 0,
     advance: 0
@@ -171,6 +171,7 @@ var particles = scene.add.particles(x, y, texture, {
     - `0` : One particle flow cycle for each logic update (the maximum flow frequency).
     - `> 0` : The time interval between particle flow cycles in ms.
     - `-1` : Exploding emitter.
+- `hold` : Frozen or 'held in place' after it has finished its lifespan for a set number of ms 
 - `gravityX`, `gravityY`
 - `maxAliveParticles`
 - `maxParticles`
@@ -183,6 +184,17 @@ var particles = scene.add.particles(x, y, texture, {
         ```javascript
         {
             frames: [],
+            cycle: false,
+            quantity: 1
+        }
+        ```
+- `anim` : 
+    - String
+    - Array of string
+    - Configuration object :
+        ```javascript
+        {
+            anim: [],  // Array of string
             cycle: false,
             quantity: 1
         }
@@ -856,43 +868,4 @@ class MyParticle extends Phaser.GameObjects.Particles.Particle {
         /* ... */
     }
 }
-```
-
-## Mind map
-
-```mermaid
-mindmap
-  root((Particles))
-    physics      
-      speedXY
-      accelerationXY
-      maxVelocityXY
-      gravityXY
-      moveToXY
-      gravity well
-    scaleXY
-    time
-      lifespan
-      delay
-      hold
-    color
-      alpha
-      color
-      tint
-    bounds
-      rect
-      collide edges
-    position
-      particleXY
-      follow
-        follow target
-        follow offset    
-    zone
-      emit zone
-      emit edge
-      death zone
-    render order
-      sort by callback
-      sort by property    
-
 ```

@@ -4246,9 +4246,9 @@
     return gameObject;
   };
 
-  var PhaserImage = Phaser.GameObjects.Image;
+  var PhaserImage$1 = Phaser.GameObjects.Image;
   var CreateImage = function CreateImage(scene, data, view, styles, customBuilders) {
-    return CreateAnyImage(scene, data, view, styles, customBuilders, PhaserImage);
+    return CreateAnyImage(scene, data, view, styles, customBuilders, PhaserImage$1);
   };
 
   var Sprite = Phaser.GameObjects.Sprite;
@@ -26018,10 +26018,37 @@
   };
   Object.assign(StatesRoundRectangle.prototype, SetStateMethods);
 
+  var PhaserImage = Phaser.GameObjects.Image;
+  var PhaserNineSlice = Phaser.GameObjects.NineSlice;
   var CreateBackground$1 = function CreateBackground(scene, config) {
-    var gameObject = new StatesRoundRectangle(scene, config);
-    // TODO: Create nine-slice background game object
-
+    var gameObjectType;
+    if (config) {
+      if (config.hasOwnProperty('type')) {
+        gameObjectType = config.type;
+      } else {
+        if (config.hasOwnProperty('leftWidth')) {
+          gameObjectType = 'nineSlice';
+        } else if (config.hasOwnProperty('key')) {
+          gameObjectType = 'image';
+        }
+      }
+    }
+    var gameObject;
+    switch (gameObjectType) {
+      case 'image':
+        gameObject = new PhaserImage(scene, 0, 0, config.key, config.frame);
+        break;
+      case 'nineSlice':
+        if (PhaserNineSlice) {
+          gameObject = new PhaserNineSlice(scene, 0, 0, config.key, config.frame, 0, 0, config.leftWidth, config.rightHeight, config.topHeight, config.bottomHeight);
+        } else {
+          gameObject = new NinePatch$1(scene, config);
+        }
+        break;
+      default:
+        gameObject = new StatesRoundRectangle(scene, config);
+        break;
+    }
     scene.add.existing(gameObject);
     return gameObject;
   };
