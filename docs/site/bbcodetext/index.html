@@ -1734,6 +1734,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#delimiters" class="md-nav__link">
+    Delimiters
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9476,6 +9483,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#delimiters" class="md-nav__link">
+    Delimiters
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9610,6 +9624,10 @@
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Can set delimiter <code>[]</code> to another custom value in style of constructor.</p>
+</div>
 <h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
 <span class="c1">// var txt = scene.add.rexBBCodeText(x, y, &#39;[b]h[/b]ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39; });</span>
@@ -9675,7 +9693,9 @@
 
     <span class="c1">// images: {</span>
     <span class="c1">//     imgKey: {y: -8}</span>
-    <span class="c1">// }</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// delimiters: &#39;[]&#39;,</span>
 
     <span class="c1">// sharedPool: true,</span>
 
@@ -9736,6 +9756,7 @@
 </ul>
 </li>
 <li><code>images</code> : See <a href="./#image">Image</a></li>
+<li><code>delimiters</code> : Delimiters of tags, default value is <code>[]</code>.</li>
 <li><code>sharedPool</code> : <ul>
 <li><code>true</code> : Use shared resouce pools during game. Default behavior.</li>
 <li><code>false</code> : Use local resource pools, will be free when game object destroying.</li>
@@ -10184,6 +10205,12 @@
 <h3 id="save-texture">Save texture<a class="headerlink" href="#save-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// txt.generateTexture(key, x, y, width, height);</span>
+</code></pre></div>
+<h3 id="delimiters">Delimiters<a class="headerlink" href="#delimiters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDelimiters</span><span class="p">(</span><span class="nx">delimiters</span><span class="p">);</span>  <span class="c1">// &#39;&lt;&gt;&#39;, or [&#39;&lt;&#39;, &#39;&gt;&#39;]</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDelimiters</span><span class="p">(</span><span class="nx">delimiterLeft</span><span class="p">,</span> <span class="nx">delimiterRight</span><span class="p">);</span> <span class="c1">// &#39;&lt;&#39;, &#39;&gt;&#39;</span>
 </code></pre></div>
 
               

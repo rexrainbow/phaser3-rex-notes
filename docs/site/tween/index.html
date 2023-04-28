@@ -4770,6 +4770,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-task-of-a-target" class="md-nav__link">
+    Destroy task of a target
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -9368,6 +9375,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-task-of-a-target" class="md-nav__link">
+    Destroy task of a target
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -9531,13 +9545,18 @@
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="c1">// alpha: &#39;+=1&#39;,</span>
-    <span class="c1">// alpha: { from: 0, to: 1 },</span>
-    <span class="c1">// alpha: { start: 0, to: 1 },  </span>
-    <span class="c1">// alpha: { start: value0, from: value1, to: value2 },  </span>
-    <span class="c1">// alpha: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; },</span>
-    <span class="c1">// alpha: {</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="c1">// x: &#39;+=1&#39;,</span>
+    <span class="c1">// x: &#39;-=1&#39;,</span>
+    <span class="c1">// x: &#39;*=1&#39;,</span>
+    <span class="c1">// x: &#39;/=1&#39;,</span>
+    <span class="c1">// x: &#39;random(0.25, 0.75)&#39;,</span>
+    <span class="c1">// x: &#39;int(10, 100)&#39;,</span>
+    <span class="c1">// x: [100, 300, 200, 600],</span>
+    <span class="c1">// x: { from: 0, to: 1 },</span>
+    <span class="c1">// x: { start: 0, to: 1 },  </span>
+    <span class="c1">// x: { start: value0, from: value1, to: value2 },  </span>
+    <span class="c1">// x: {</span>
     <span class="c1">//      getActive: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },</span>
     <span class="c1">//      getStart: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },</span>
     <span class="c1">//      getEnd: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; }</span>
@@ -9545,7 +9564,9 @@
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
-    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+    <span class="c1">// interpolation: null,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9554,6 +9575,9 @@
 <li>Support these expressions : <code>key: '+=deltaValue'</code>, <code>key: '-=deltaValue'</code>, <code>key: '*=deltaValue'</code>, <code>key: '/=deltaValue'</code></li>
 </ul>
 </li>
+<li><code>key: 'random(10, 100)'</code> : Tween to a random float value.</li>
+<li><code>key: 'int(10, 100)'</code> : Tween to a random int value.</li>
+<li><code>key: [100, 300, 200, 600]</code> : Use <code>interpolation</code> to determine the value.</li>
 <li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>value11</code> when tween started after delay, then tween to <code>value2</code>.</li>
 <li><code>value1</code>, <code>value2</code> : A number, string, or callback(<code>function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code>)   </li>
 <li><code>key: { start: value0, to: value2 }</code> : Set the property to <code>value0</code> immediately, then tween to <code>value2</code>.<ul>
@@ -9586,7 +9610,6 @@
 
     <span class="c1">// timming/callback of each state</span>
     <span class="nx">onStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">onStartScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onStartParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// initial delay</span>
@@ -9599,7 +9622,6 @@
 
     <span class="nx">onActive</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onUpdate</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">onUpdateScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onUpdateParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// delay between tween and yoyo</span>
@@ -9608,13 +9630,11 @@
     <span class="nx">flipX</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">flipY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">onYoyo</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">onYoyoScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onYoyoParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// repeat count (-1: infinite)</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">onRepeat</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">onRepeatScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onRepeatParams</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// delay to next pass</span>
     <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9622,7 +9642,6 @@
     <span class="c1">// loop count (-1: infinite)</span>
     <span class="nx">loop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">onLoop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">onLoopScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onLoopParams</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// delay to next loop</span>
     <span class="nx">loopDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9630,7 +9649,6 @@
     <span class="c1">// delay to onComplete callback</span>
     <span class="nx">completeDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">onCompleteScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onCompleteParams</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// timming/callback of each state</span>
 
@@ -9788,7 +9806,10 @@
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>persist</code> : Will the Tween be automatically destroyed on completion, or retained for future playback?</li>
-<li><code>interpolation</code> : The interpolation function to use if the <code>value</code> given is an array of numbers.</li>
+<li><code>interpolation</code> : The interpolation function to use if the <code>value</code> given is an array of numbers.<ul>
+<li><code>'linear'</code>, <code>'bezier'</code>, <code>'catmull'</code> (or <code>'catmullrom'</code>)</li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -9890,6 +9911,12 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweens</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">getTweens</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
+<h3 id="destroy-task-of-a-target">Destroy task of a target<a class="headerlink" href="#destroy-task-of-a-target" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">killTweensOf</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>target</code> : The target to kill the tweens of. Provide an array to use multiple targets.</li>
+</ul>
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 <span class="c1">// tween.timeScale = timescale;</span>
@@ -9941,6 +9968,16 @@
 <li><code>previous</code> : The previous value of the property that was tweened, prior to this update.</li>
 </ul>
 </li>
+<li>A tween property pause.
+    <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>A tween property resume.
+    <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li>A tween property yoyos.
     <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span>
 

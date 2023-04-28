@@ -46,8 +46,7 @@ var CreateEmitterConfig = function (gameObject, config) {
         emitterConfig.emitCallback = function (particle, emitter) {
             totalParticleCount -= 1;
             if (totalParticleCount <= 0) {
-                emitter.stopAfter = 1;
-                emitter.stopCounter = 2;
+                emitter.stop();
             }
         }
     } else {

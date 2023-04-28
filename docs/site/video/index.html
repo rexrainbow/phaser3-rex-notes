@@ -9660,6 +9660,11 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>The media source doesn't represent a supported media format.
+    <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;unsupported&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li>A Video is unlocked by a user gesture.
     <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;unlocked&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
 
@@ -9677,6 +9682,16 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
 </code></pre></div></li>
 <li>A Video begins playback.
     <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>First started or restarted.
+    <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;playing&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>The video has finished loading enough data for its first frame.
+    <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;textureready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9702,6 +9717,11 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
 </code></pre></div></li>
 <li>Enough of the video source has been loaded, that the browser is able to render a frame from it.
     <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Stalled by <code>stalled</code>, <code>suspend</code>, <code>waiting</code> DOM event.
+    <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stalled&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

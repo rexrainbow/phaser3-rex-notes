@@ -11,13 +11,18 @@ Change properties by tween equations, built-in object of phaser.
 ```javascript
 var tween = scene.tweens.add({
     targets: gameObject,
-    alpha: 1,
-    // alpha: '+=1',
-    // alpha: { from: 0, to: 1 },
-    // alpha: { start: 0, to: 1 },  
-    // alpha: { start: value0, from: value1, to: value2 },  
-    // alpha: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; },
-    // alpha: {
+    x: 1,
+    // x: '+=1',
+    // x: '-=1',
+    // x: '*=1',
+    // x: '/=1',
+    // x: 'random(0.25, 0.75)',
+    // x: 'int(10, 100)',
+    // x: [100, 300, 200, 600],
+    // x: { from: 0, to: 1 },
+    // x: { start: 0, to: 1 },  
+    // x: { start: value0, from: value1, to: value2 },  
+    // x: {
     //      getActive: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },
     //      getStart: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },
     //      getEnd: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; }
@@ -25,13 +30,18 @@ var tween = scene.tweens.add({
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
     repeat: 0,            // -1: infinity
-    yoyo: false
+    yoyo: false,
+
+    // interpolation: null,
 });
 ```
 
 - `key: value2` : Tween to `value2`.
 - `key: '+=deltaValue'` : Tween to current value + deltaValue
     - Support these expressions : `key: '+=deltaValue'`, `key: '-=deltaValue'`, `key: '*=deltaValue'`, `key: '/=deltaValue'`
+- `key: 'random(10, 100)'` : Tween to a random float value.
+- `key: 'int(10, 100)'` : Tween to a random int value.
+- `key: [100, 300, 200, 600]` : Use `interpolation` to determine the value.
 - `key: { from: value1, to: value2 }` : Set the property to `value11` when tween started after delay, then tween to `value2`.
    - `value1`, `value2` : A number, string, or callback(`function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`)   
 - `key: { start: value0, to: value2 }` : Set the property to `value0` immediately, then tween to `value2`.
@@ -58,7 +68,6 @@ var tween = scene.tweens.add({
 
     // timming/callback of each state
     onStart: function () {},
-    onStartScope: callbackScope,
     onStartParams: [],
 
     // initial delay
@@ -71,7 +80,6 @@ var tween = scene.tweens.add({
 
     onActive: function () {},
     onUpdate: function (tween, target, key, current, previous, param) {},
-    onUpdateScope: callbackScope,
     onUpdateParams: [],
 
     // delay between tween and yoyo
@@ -80,13 +88,11 @@ var tween = scene.tweens.add({
     flipX: false,
     flipY: false,
     onYoyo: function (tween, target, key, current, previous, param) {},
-    onYoyoScope: callbackScope,
     onYoyoParams: [],
 
     // repeat count (-1: infinite)
     repeat: 0,
     onRepeat: function (tween, target, key, current, previous, param) {},
-    onRepeatScope: callbackScope,
     onRepeatParams: [],
     // delay to next pass
     repeatDelay: 0,
@@ -94,7 +100,6 @@ var tween = scene.tweens.add({
     // loop count (-1: infinite)
     loop: 0,
     onLoop: function () {},
-    onLoopScope: callbackScope,
     onLoopParams: [],
     // delay to next loop
     loopDelay: 0,
@@ -102,7 +107,6 @@ var tween = scene.tweens.add({
     // delay to onComplete callback
     completeDelay: 0,
     onComplete: function () {},
-    onCompleteScope: callbackScope,
     onCompleteParams: [],
     // timming/callback of each state
 
@@ -247,6 +251,7 @@ var tween = scene.tweens.add({
     ```
 - `persist` : Will the Tween be automatically destroyed on completion, or retained for future playback?
 - `interpolation` : The interpolation function to use if the `value` given is an array of numbers.
+    - `'linear'`, `'bezier'`, `'catmull'` (or `'catmullrom'`)
 
 
 !!! note
@@ -372,6 +377,14 @@ tween.destroy();
     var tweens = scene.tweens.getTweens();
     ```
 
+### Destroy task of a target
+
+```javascript
+scene.tweens.killTweensOf(target);
+```
+
+- `target` : The target to kill the tweens of. Provide an array to use multiple targets.
+
 ### Time-scale
 
 ```javascript
@@ -437,6 +450,18 @@ scene.tweens.timeScale = timescale;
     - `target` : The target object that was updated. Usually a Game Object, but can be of any type.
     - `current` : The current value of the property that was tweened.
     - `previous` : The previous value of the property that was tweened, prior to this update.
+- A tween property pause.
+    ```javascript
+    tween.on('pause', function(tween, key, target){
+
+    }, scope);
+    ```
+- A tween property resume.
+    ```javascript
+    tween.on('resume', function(tween, key, target){
+
+    }, scope);
+    ```
 - A tween property yoyos.
     ```javascript
     tween.on('yoyo', function(tween, key, target){

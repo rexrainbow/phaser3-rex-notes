@@ -9309,7 +9309,6 @@
     <span class="c1">// tint: undefined,</span>
 
     <span class="c1">// repeat: 0,</span>
-    <span class="c1">// reuse: false,</span>
     <span class="c1">// gravityX: 0,</span>
     <span class="c1">// gravityY: 0,</span>
     <span class="c1">// duration: undefined</span>
@@ -9350,13 +9349,6 @@
 <li><code>tint</code> : Tint changing of particle.</li>
 <li><code>repeat</code> : Fire particles around bounds repeatly.<ul>
 <li><code>0</code> : Fire particles around bounds one time, default value.</li>
-</ul>
-</li>
-<li><code>reuse</code> : Reuse this particles.<ul>
-<li><code>false</code> : Destroy particles when fire completed. Default value.</li>
-<li><code>true</code> : Don't destroy particles when fire completed. To reuse this particles, start firing via
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">particles</span><span class="p">);</span>
-</code></pre></div></li>
 </ul>
 </li>
 <li><code>gravityX</code>, <code>gravityY</code> : Gravity vector of world axis. This vector will rotate back if game object is rotated.</li>

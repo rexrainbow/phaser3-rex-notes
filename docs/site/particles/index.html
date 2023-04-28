@@ -1166,13 +1166,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mind-map" class="md-nav__link">
-    Mind map
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -9488,13 +9481,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#mind-map" class="md-nav__link">
-    Mind map
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -9626,7 +9612,7 @@
     <span class="c1">// Texture</span>
     <span class="nx">texture</span><span class="o">:</span>
     <span class="nx">frame</span><span class="o">:</span>
-    <span class="nx">anim</span><span class="o">:</span>
+    <span class="nx">anim</span><span class="o">:</span> <span class="p">[],</span>  <span class="c1">// string, or array of string</span>
 
     <span class="nx">reserve</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">advance</span><span class="o">:</span> <span class="mf">0</span>
@@ -9689,6 +9675,7 @@
 <li><code>-1</code> : Exploding emitter.</li>
 </ul>
 </li>
+<li><code>hold</code> : Frozen or 'held in place' after it has finished its lifespan for a set number of ms </li>
 <li><code>gravityX</code>, <code>gravityY</code></li>
 <li><code>maxAliveParticles</code></li>
 <li><code>maxParticles</code><ul>
@@ -9702,6 +9689,18 @@
 <li>Configuration object :
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>anim</code> : <ul>
+<li>String</li>
+<li>Array of string</li>
+<li>Configuration object :
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">anim</span><span class="o">:</span> <span class="p">[],</span>  <span class="c1">// Array of string</span>
     <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">}</span>
@@ -9903,10 +9902,6 @@
 </code></pre></div></li>
 <li>Gravity
     <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setParticleGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravityX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravityY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">gravityX</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
@@ -10345,41 +10340,6 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="mind-map">Mind map<a class="headerlink" href="#mind-map" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>mindmap
-  root((Particles))
-    physics      
-      speedXY
-      accelerationXY
-      maxVelocityXY
-      gravityXY
-      moveToXY
-      gravity well
-    scaleXY
-    time
-      lifespan
-      delay
-      hold
-    color
-      alpha
-      color
-      tint
-    bounds
-      rect
-      collide edges
-    position
-      particleXY
-      follow
-        follow target
-        follow offset    
-    zone
-      emit zone
-      emit edge
-      death zone
-    render order
-      sort by callback
-      sort by property    
-</code></pre>
 
               
             </article>
