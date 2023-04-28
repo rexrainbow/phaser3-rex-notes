@@ -181,7 +181,7 @@ declare class Factories {
     skew: typeof SkewFactory;
     slider: typeof SliderFactory;
     space: typeof SpaceFactory;
-    stateRoundRectangle: typeof StatesRoundRectangleFactory;
+    statesRoundRectangle: typeof StatesRoundRectangleFactory;
     swipe: typeof SwipeFactory;
     tabs: typeof TabsFactory;
     tabPages: typeof TabPagesFactory;
