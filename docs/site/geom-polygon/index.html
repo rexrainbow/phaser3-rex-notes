@@ -9322,10 +9322,11 @@
 <ul>
 <li>Get closest point of intersection between a vector and an array of polygons
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">GetLineToPolygon</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">polygons</span><span class="p">);</span>
-<span class="c1">// var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, out);</span>
+<span class="c1">// var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, isRay, out);</span>
 </code></pre></div><ul>
 <li><code>line</code> : Vector of <a href="../geom-line/">line</a> object</li>
 <li><code>polygons</code> : A single polygon, or array of polygons</li>
+<li><code>isRay</code> : Is <code>line</code> a ray or a line segment?</li>
 <li><code>out</code> :<ul>
 <li><code>out.x</code>, <code>out.y</code> : Intersection point</li>
 <li><code>out.z</code> : Closest intersection distance</li>

@@ -473,6 +473,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-view-port" class="md-nav__link">
+    Get view port
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#members" class="md-nav__link">
     Members
   </a>
@@ -9179,6 +9186,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-view-port" class="md-nav__link">
+    Get view port
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#members" class="md-nav__link">
     Members
   </a>
@@ -9328,6 +9342,15 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">setGameSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
 <p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
+<h3 id="get-view-port">Get view port<a class="headerlink" href="#get-view-port" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">viewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">getViewPort</span><span class="p">();</span>
+<span class="c1">// var viewport = scene.scale.getViewPort(camera, out);</span>
+</code></pre></div>
+<ul>
+<li><code>viewport</code> : The <a href="../geom-rectangle/">Rectangle</a> of visible area.</li>
+<li><code>camera</code> : The <a href="../camera/">camera</a> this viewport is respond upon.</li>
+<li><code>out</code> : The <a href="../geom-rectangle/">Rectangle</a> of visible area.</li>
+</ul>
 <h3 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The un-modified game size, as requested in the game config (the raw width / height), as used for world bounds, cameras, etc

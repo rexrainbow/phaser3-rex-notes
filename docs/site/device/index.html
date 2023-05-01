@@ -546,6 +546,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    Audio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#video" class="md-nav__link">
     Video
   </a>
@@ -9120,6 +9127,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#audio" class="md-nav__link">
+    Audio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#video" class="md-nav__link">
     Video
   </a>
@@ -9206,6 +9220,19 @@
 <span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">tridentVersion</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">flac</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">flac</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">aac</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">aac</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dolby</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">dolby</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">m4a</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">m4a</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">mp3</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">mp3</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">ogg</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">ogg</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">opus</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">opus</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">wav</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">wav</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">webm</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">webm</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">webAudio</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">webAudio</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">audioData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">audio</span><span class="p">.</span><span class="nx">audioData</span><span class="p">;</span>
+</code></pre></div>
 <h3 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">h264Video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">video</span><span class="p">.</span><span class="nx">h264</span><span class="p">;</span>  <span class="c1">// Can this device play h264 mp4 video files?</span>
 <span class="kd">var</span> <span class="nx">hlsVideo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">video</span><span class="p">.</span><span class="nx">hls</span><span class="p">;</span>    <span class="c1">// Can this device play hls video files?</span>

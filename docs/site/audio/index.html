@@ -10201,11 +10201,17 @@
 </ul>
 <h4 id="get-music-instance">Get music instance<a class="headerlink" href="#get-music-instance" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get first
+<li>Get first by key
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span> <span class="c1">// music instance, or null</span>
 </code></pre></div></li>
-<li>Get all
+<li>Get all by key
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">musicArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">getAll</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span> <span class="c1">// music instance, or null</span>
+</code></pre></div></li>
+<li>Get all
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">musicArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get all playing
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">musicArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">getAllPlaying</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h4 id="remove-music-instance">Remove music instance<a class="headerlink" href="#remove-music-instance" title="Permanent link">&para;</a></h4>

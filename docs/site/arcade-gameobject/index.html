@@ -9708,30 +9708,33 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">classType</span><span class="o">:</span> <span class="nx">ArcadeSprite</span><span class="p">,</span>
     <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">setCollideWorldBounds</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">setBoundsRectangle</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">setAccelerationX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setAccelerationY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">collideWorldBounds</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">customBoundsRectangle</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">accelerationX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">accelerationY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">allowDrag</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">allowGravity</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">allowRotation</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="nx">setBounceX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setBounceY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setDragX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setDragY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setGravityX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setGravityY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setFrictionX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setFrictionY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setVelocityX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setVelocityY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">allowRotation</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">useDamping</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">bounceX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">bounceY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">dragX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">dragY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">gravityX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">gravityY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">frictionX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">frictionY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">maxSpeed</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+    <span class="nx">velocityX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">velocityY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">maxVelocityX</span><span class="o">:</span> <span class="mf">10000</span><span class="p">,</span>
     <span class="nx">maxVelocityY</span><span class="o">:</span> <span class="mf">10000</span><span class="p">,</span>
-    <span class="nx">setAngularVelocity</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setAngularAcceleration</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setAngularDrag</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">setMass</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">setImmovable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">angularVelocity</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularAcceleration</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularDrag</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">mass</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">immovable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">maxSize</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
     <span class="nx">runChildUpdate</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">};</span>

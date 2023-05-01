@@ -3836,6 +3836,46 @@
     Add mask
   </a>
   
+    <nav class="md-nav" aria-label="Add mask">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-mask-object" class="md-nav__link">
+    Create mask object
+  </a>
+  
+    <nav class="md-nav" aria-label="Create mask object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bitmap-mask" class="md-nav__link">
+    Bitmap mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-mask" class="md-nav__link">
+    Geometry mask
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-mask-object" class="md-nav__link">
+    Apply mask object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3848,6 +3888,13 @@
           <li class="md-nav__item">
   <a href="#invert-alpha" class="md-nav__link">
     Invert alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-shape-game-object" class="md-nav__link">
+    Get shape game object
   </a>
   
 </li>
@@ -9112,6 +9159,46 @@
     Add mask
   </a>
   
+    <nav class="md-nav" aria-label="Add mask">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-mask-object" class="md-nav__link">
+    Create mask object
+  </a>
+  
+    <nav class="md-nav" aria-label="Create mask object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bitmap-mask" class="md-nav__link">
+    Bitmap mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-mask" class="md-nav__link">
+    Geometry mask
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-mask-object" class="md-nav__link">
+    Apply mask object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9124,6 +9211,13 @@
           <li class="md-nav__item">
   <a href="#invert-alpha" class="md-nav__link">
     Invert alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-shape-game-object" class="md-nav__link">
+    Get shape game object
   </a>
   
 </li>
@@ -9159,40 +9253,37 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="add-mask">Add mask<a class="headerlink" href="#add-mask" title="Permanent link">&para;</a></h3>
+<h4 id="create-mask-object">Create mask object<a class="headerlink" href="#create-mask-object" title="Permanent link">&para;</a></h4>
+<h5 id="bitmap-mask">Bitmap mask<a class="headerlink" href="#bitmap-mask" title="Permanent link">&para;</a></h5>
 <ol>
-<li>Create mask object<ul>
-<li>Create alpha mask from texture<ol>
-<li>Create image (<a href="../image/">image</a>, <a href="../sprite/">sprite</a>, <a href="../bitmaptext/">bitmap text</a>, <a href="../particles/">particles</a>, <a href="../text/">text</a>), or <a href="../shader/">shader</a>
+<li>Create image (<a href="../image/">image</a>, <a href="../sprite/">sprite</a>, <a href="../bitmaptext/">bitmap text</a>, <a href="../particles/">particles</a>, <a href="../text/">text</a>),or <a href="../shader/">shader</a>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">).</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create mask
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">createBitmapMask</span><span class="p">();</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Masks</span><span class="p">.</span><span class="nx">BitmapMask</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">shape</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bitmapMask</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
-</li>
-<li>Create mask from <a href="../graphics/">graphics</a>, masked pixel <em>fully visible</em> or <em>fully invisible</em> without changing its alpha (opacity).<ol>
-<li>Create graphics
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span>  <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bitmapMask</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</code></pre></div>
+<h5 id="geometry-mask">Geometry mask<a class="headerlink" href="#geometry-mask" title="Permanent link">&para;</a></h5>
+<p>The mask is essentially a clipping path which can only make a masked pixel 
+fully visible or fully invisible without changing its alpha (opacity).</p>
+<ol>
+<li>Create <a href="../graphics/">graphics</a>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">graphics</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Create mask
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">createGeometryMask</span><span class="p">();</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Masks</span><span class="p">.</span><span class="nx">GeometryMask</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">shape</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
-</li>
-</ul>
-</li>
-<li>Add mask object to image game object
-    <div class="highlight"><pre><span></span><code><span class="c1">// var image = scene.add.image(...);</span>
-<span class="nx">image</span><span class="p">.</span><span class="nx">setMask</span><span class="p">(</span><span class="nx">mask</span><span class="p">);</span> <span class="c1">// image.mask = mask;</span>
+<h4 id="apply-mask-object">Apply mask object<a class="headerlink" href="#apply-mask-object" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setMask</span><span class="p">(</span><span class="nx">mask</span><span class="p">);</span> <span class="c1">// image.mask = mask;</span>
 </code></pre></div>
-    A mask object could be added to many game objects.</li>
-</ol>
+<p>A mask object could be added to many game objects.</p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Don't put game object and its mask into a <a href="../container/">container</a> together.
@@ -9226,6 +9317,15 @@ but Bitmap Masks can't.</p>
 <li>Disable
     <div class="highlight"><pre><span></span><code><span class="nx">mask</span><span class="p">.</span><span class="nx">setInvertAlpha</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 <span class="c1">// mask.invertAlpha = false;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="get-shape-game-object">Get shape game object<a class="headerlink" href="#get-shape-game-object" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bitmap mask
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">mask</span><span class="p">.</span><span class="nx">bitmapMask</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Geometry mask
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">mask</span><span class="p">.</span><span class="nx">geometryMask</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 

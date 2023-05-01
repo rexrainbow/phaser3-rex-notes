@@ -8,7 +8,7 @@
 
 - [FAQ](https://github.com/phaser-discord/community/blob/master/FAQ.md)
 - [Official discord channel](https://discord.gg/phaser)
-- [API document](https://photonstorm.github.io/phaser3-docs/)
+- [API document](https://newdocs.phaser.io/docs/3.60.0/)
 - [Examples](https://labs.phaser.io/)
 - [Bug report](https://github.com/photonstorm/phaser/issues)
 

@@ -850,7 +850,14 @@
     Create animation
   </a>
   
-    <nav class="md-nav" aria-label="Create animation">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-aseprite-animation" class="md-nav__link">
+    Create Aseprite animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Aseprite animation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -9274,7 +9281,14 @@
     Create animation
   </a>
   
-    <nav class="md-nav" aria-label="Create animation">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-aseprite-animation" class="md-nav__link">
+    Create Aseprite animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Aseprite animation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -9475,13 +9489,22 @@
 <h4 id="create-animation">Create animation<a class="headerlink" href="#create-animation" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Global animation for all sprites
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Private animation for this sprite
     <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <p><code>config</code> : See <a href="../animation/#add-animation">Add animation section</a>.</p>
+<h4 id="create-aseprite-animation">Create Aseprite animation<a class="headerlink" href="#create-aseprite-animation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Global Aseprite animation for all sprites
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">createFromAseprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">tags</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Private Aseprite animation for this sprite
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">createFromAseprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">tags</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h5 id="remove-animation">Remove animation<a class="headerlink" href="#remove-animation" title="Permanent link">&para;</a></h5>
 <ul>
 <li>Remove from global animation manager

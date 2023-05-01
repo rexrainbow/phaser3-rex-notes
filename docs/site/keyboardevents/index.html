@@ -9257,16 +9257,22 @@
 <span class="p">});</span>  <span class="c1">// keys.up, keys.down, keys.left, keys.right</span>
 </code></pre></div></li>
 <li>Remove key object
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeAllKeys</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-<span class="c1">// scene.input.keyboard.removeAllKeys(destroy);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
+<span class="c1">// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
+<span class="c1">// scene.input.keyboard.removeKey(key, destroy, removeCapture);</span>
 </code></pre></div><ul>
 <li><code>destroy</code> : Call <code>Key.destroy</code> on each removed Key object</li>
+<li><code>removeCapture</code> : Remove all key captures for Key objects owened by this plugin?</li>
 </ul>
 </li>
 <li>Remove all key objects
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
-<span class="c1">// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
-</code></pre></div></li>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeAllKeys</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="c1">// scene.input.keyboard.removeAllKeys(destroy, removeCapture);</span>
+</code></pre></div><ul>
+<li><code>destroy</code> : Call <code>Key.destroy</code> on each removed Key object</li>
+<li><code>removeCapture</code> : Remove all key captures for Key objects owened by this plugin?</li>
+</ul>
+</li>
 <li>Key-down/key-up state
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>

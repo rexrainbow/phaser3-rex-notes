@@ -9979,9 +9979,6 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <ul>
 <li><code>gameObject.input</code> : Game object's input object.</li>
 <li><code>gameObject.input.localX</code>, <code>gameObject.input.localY</code> : Pointer to local position of texture.</li>
-<li>Always receive input events, even if it's invisible or won't render :
-    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">alwaysEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</code></pre></div></li>
 <li><code>gameObject.input.dragStartX</code>, <code>gameObject.input.dragStartY</code> : The x/y coordinate of the Game Object 
   that owns this Interactive Object when the drag started.</li>
 <li><code>gameObject.input.dragStartXGlobal</code>, <code>gameObject.input.dragStartYGlobal</code> : The x/y coordinate that 
@@ -10011,12 +10008,15 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 </ol>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Enable, draw shape of hit area.
+<li>Enable, draw shape of (shape) hit area.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">enableDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// scene.input.enableDebug(gameObject, color);</span>
 </code></pre></div></li>
 <li>Disable
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">removeDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get debug shape game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">hitAreaDebug</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="poll-rate">Poll rate<a class="headerlink" href="#poll-rate" title="Permanent link">&para;</a></h3>

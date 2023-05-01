@@ -3780,6 +3780,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-key-list-of-all-textures" class="md-nav__link">
+    Get key list of all textures
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3809,6 +3816,27 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-atlas" class="md-nav__link">
+    Add atlas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-sprite-sheet" class="md-nav__link">
+    Add sprite sheet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
   
 </li>
         
@@ -9288,6 +9316,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-key-list-of-all-textures" class="md-nav__link">
+    Get key list of all textures
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9317,6 +9352,27 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-atlas" class="md-nav__link">
+    Add atlas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-sprite-sheet" class="md-nav__link">
+    Add sprite sheet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
   
 </li>
         
@@ -9364,6 +9420,9 @@
 <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getSourceImage</span><span class="p">();</span>
 <span class="c1">// var width = image.width;</span>
 <span class="c1">// var height = image.height;</span>
+</code></pre></div></li>
+<li>Get image texture from frame object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">frameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="get-pixel">Get pixel<a class="headerlink" href="#get-pixel" title="Permanent link">&para;</a></h3>
@@ -9438,6 +9497,9 @@
 <li>Missing : <code>'__MISSING'</code></li>
 <li>4x4 white : <code>'__WHITE'</code></li>
 </ul>
+<h4 id="get-key-list-of-all-textures">Get key list of all textures<a class="headerlink" href="#get-key-list-of-all-textures" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getTextureKeys</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="frame-object">Frame object<a class="headerlink" href="#frame-object" title="Permanent link">&para;</a></h3>
 <h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
@@ -9449,6 +9511,114 @@
 <li><code>frame.cutY</code> : Y position within the source image to cut from.</li>
 <li><code>frame.cutWidth</code> : The width of the area in the source image to cut.</li>
 <li><code>frame.cutHeight</code> : The height of the area in the source image to cut.</li>
+</ul>
+<h3 id="add-atlas">Add atlas<a class="headerlink" href="#add-atlas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">HTMLImageElement</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="c1">// scene.textures.addAtlas(key, HTMLImageElement, data, dataSource);</span>
+</code></pre></div>
+<ul>
+<li><code>key</code> : The unique string-based key of the Texture.</li>
+<li><code>HTMLImageElement</code> : HTML Image element/s.</li>
+<li><code>data</code> : The Texture Atlas data/s.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1">// Location of frame image</span>
+            <span class="nx">frame</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span>
+            <span class="p">},</span>
+
+            <span class="c1">// trimmed</span>
+            <span class="nx">trimmed</span><span class="o">:</span>
+            <span class="nx">sourceSize</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span>
+            <span class="p">},</span>
+            <span class="nx">spriteSourceSize</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span>
+            <span class="p">},</span>
+
+            <span class="nx">rotated</span><span class="o">:</span>
+
+            <span class="c1">// Custom origin</span>
+            <span class="nx">anchor</span><span class="o">:</span> 
+            <span class="nx">pivot</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span>
+            <span class="p">},</span>
+
+            <span class="c1">// Other custom properties of this frame ...</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+
+    <span class="c1">// Other custom properties of this texture ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>dataSource</code> : An optional data Image element (normal map).</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addAtlas</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="c1">// scene.textures.addAtlas(undefined, texture, data, dataSource);</span>
+</code></pre></div>
+<ul>
+<li><code>texture</code> : Phaser Texture.</li>
+</ul>
+<h3 id="add-sprite-sheet">Add sprite sheet<a class="headerlink" href="#add-sprite-sheet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addSpriteSheet</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">HTMLImageElement</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// scene.textures.addAtlas(key, HTMLImageElement, config, dataSource);</span>
+</code></pre></div>
+<ul>
+<li><code>key</code> : The unique string-based key of the Texture.</li>
+<li><code>HTMLImageElement</code> : HTML Image element/s.</li>
+<li><code>config</code> : The configuration object for this Sprite Sheet.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">frameWidth</span><span class="o">:</span> <span class="p">,</span>
+    <span class="nx">frameHeight</span><span class="o">:</span> <span class="p">,</span>
+    <span class="nx">startFrame</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">endFrame</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
+    <span class="nx">margin</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">spacing</span><span class="o">:</span> <span class="mf">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>dataSource</code> : An optional data Image element (normal map).</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addSpriteSheet</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// scene.textures.addSpriteSheet(undefined, texture, config, dataSource);</span>
+</code></pre></div>
+<ul>
+<li><code>texture</code> : Phaser Texture.</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Texture manager is ready
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Add texture
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addtexture&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addtexture-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Error when adding texture
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;onerror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Remove texture
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removetexture&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removetexture-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
 </ul>
 
               

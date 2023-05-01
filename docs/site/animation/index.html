@@ -9472,13 +9472,17 @@
 <h5 id="add-from-aseprite">Add from Aseprite<a class="headerlink" href="#add-from-aseprite" title="Permanent link">&para;</a></h5>
 <p><a href="../tools/#aseprite">Aseprite</a></p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">createFromAseprite</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.anims.createFromAseprite(key, tags);</span>
+<span class="c1">// scene.anims.createFromAseprite(key, tags, target);</span>
 </code></pre></div>
 <ul>
 <li><code>key</code> : The key of the loaded Aseprite atlas.</li>
 <li><code>tags</code> :<ul>
 <li><code>undefined</code> : Load all tags.</li>
 <li>Array of string tag : Load these tags.</li>
+</ul>
+</li>
+<li><code>target</code> : Create the animations on this target Sprite. <ul>
+<li><code>undefined</code> : Created globally in this Animation Manager. Default behavior.</li>
 </ul>
 </li>
 </ul>

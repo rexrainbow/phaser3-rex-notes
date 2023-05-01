@@ -9442,6 +9442,24 @@ If not running at all, it will be started.</p>
 <li>Stop: Shoutdown, clearing display list, timers, etc. </li>
 </ul>
 </div>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var status = scene.scene.getStatus();</span>
+</code></pre></div>
+<ul>
+<li><code>status</code> :<ul>
+<li><code>Phaser.Scenes.PENDING</code>, or <code>0</code></li>
+<li><code>Phaser.Scenes.INIT</code>, or <code>1</code></li>
+<li><code>Phaser.Scenes.START</code>, or <code>2</code></li>
+<li><code>Phaser.Scenes.LOADING</code>, or <code>3</code></li>
+<li><code>Phaser.Scenes.CREATING</code>, or <code>4</code></li>
+<li><code>Phaser.Scenes.RUNNING</code>, or <code>5</code></li>
+<li><code>Phaser.Scenes.PAUSED</code>, or <code>6</code></li>
+<li><code>Phaser.Scenes.SLEEPING</code>, or <code>7</code></li>
+<li><code>Phaser.Scenes.SHUTDOWN</code>, or <code>8</code></li>
+<li><code>Phaser.Scenes.DESTROYED</code>, or <code>9</code></li>
+</ul>
+</li>
+</ul>
 <h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
@@ -9483,8 +9501,11 @@ If not running at all, it will be started.</p>
     <span class="c1">// sleep: false,</span>
     <span class="c1">// allowInput: false,</span>
 
+    <span class="c1">// onStart: null,</span>
+    <span class="c1">// onStartScope: scene,</span>
+
     <span class="c1">// onUpdate: null,</span>
-    <span class="c1">// onUpdateScope: scene</span>
+    <span class="c1">// onUpdateScope: scene,</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -9495,8 +9516,18 @@ If not running at all, it will be started.</p>
 <li><code>remove</code> : Set true to remove this scene.</li>
 <li><code>sleep</code> : Set true to sleep this scene, set false to stop this scene.</li>
 <li><code>allowInput</code> : Set true to enable input system of current scene and target scene.</li>
+<li><code>onStart</code>, <code>onStartScope</code> : Invoked when transition start
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">toScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>fromScene</code> : Current scene instance</li>
+<li><code>toScene</code> : Target scene instance</li>
+<li><code>duration</code> : Transition duration, in ms.</li>
+</ul>
+</li>
 <li><code>onUpdate</code> ,<code>onUpdateScope</code> : Transition callback in each tick.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
 </code></pre></div><ul>

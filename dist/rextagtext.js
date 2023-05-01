@@ -3047,7 +3047,6 @@
       _this.frame.source.resolution = _this.style.resolution;
       if (_this.renderer && _this.renderer.gl) {
         //  Clear the default 1x1 glTexture, as we override it later
-
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
         _this.frame.source.glTexture = null;
       }

@@ -395,6 +395,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pause-resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9209,6 +9216,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pause-resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -9250,7 +9264,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
-<p><a href="https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig">Reference</a></p>
+<p><a href="https://newdocs.phaser.io/docs/3.60.0/Phaser.Types.Core.html#.GameConfig">Reference</a></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="s1">&#39;phaser-example&#39;</span><span class="p">,</span>
@@ -9331,6 +9345,8 @@
         <span class="nx">maxLights</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
         <span class="nx">maxTextures</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
         <span class="nx">mipmapFilter</span><span class="o">:</span> <span class="s1">&#39;LINEAR&#39;</span><span class="p">,</span> <span class="c1">// &#39;NEAREST&#39;, &#39;LINEAR&#39;, &#39;NEAREST_MIPMAP_NEAREST&#39;, &#39;LINEAR_MIPMAP_NEAREST&#39;, &#39;NEAREST_MIPMAP_LINEAR&#39;, &#39;LINEAR_MIPMAP_LINEAR&#39;</span>
+        <span class="nx">autoMobilePipeline</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">defaultPipeline</span><span class="o">:</span> <span class="s1">&#39;MultiPipeline&#39;</span><span class="p">,</span>
         <span class="nx">pipeline</span><span class="o">:</span><span class="p">[]</span>
     <span class="p">},</span>
 
@@ -9393,7 +9409,9 @@
             <span class="s1">&#39;#00ffff&#39;</span><span class="p">,</span>
             <span class="s1">&#39;#000000&#39;</span>
         <span class="p">]</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">stableSort</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h2>
@@ -9461,6 +9479,18 @@
 <li>Height
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 <span class="c1">// var height = scene.game.config.height;</span>
+</code></pre></div></li>
+</ul>
+<h2 id="pause-resume">Pause / Resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pause the entire game and emit a <code>PAUSE</code> event.
+    <div class="highlight"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Resume the entire game and emit a <code>RESUME</code> event.
+    <div class="highlight"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Is paused
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
