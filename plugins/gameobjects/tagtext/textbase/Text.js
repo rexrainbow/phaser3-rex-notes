@@ -104,9 +104,7 @@ class Text extends TextBase {
 
         if (this.renderer && this.renderer.gl) {
             //  Clear the default 1x1 glTexture, as we override it later
-
             this.renderer.deleteTexture(this.frame.source.glTexture);
-
             this.frame.source.glTexture = null;
         }
 

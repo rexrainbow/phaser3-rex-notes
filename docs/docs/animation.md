@@ -100,13 +100,15 @@ scene.anims.create({
 
 ```javascript
 scene.anims.createFromAseprite(key);
-// scene.anims.createFromAseprite(key, tags);
+// scene.anims.createFromAseprite(key, tags, target);
 ```
 
 - `key` : The key of the loaded Aseprite atlas.
 - `tags` :
     - `undefined` : Load all tags.
     - Array of string tag : Load these tags.
+- `target` : Create the animations on this target Sprite. 
+    - `undefined` : Created globally in this Animation Manager. Default behavior.
 
 #### Remove animation
 

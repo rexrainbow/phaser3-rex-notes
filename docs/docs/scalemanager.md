@@ -85,6 +85,17 @@ scene.scale.setGameSize(width, height);
 
 It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. `FIT`. If you're using `NO_SCALE` and wish to change the game and canvas size directly, then please use the `resize` method instead.
 
+### Get view port
+
+```javascript
+var viewport = scene.scale.getViewPort();
+// var viewport = scene.scale.getViewPort(camera, out);
+```
+
+- `viewport` : The [Rectangle](geom-rectangle.md) of visible area.
+- `camera` : The [camera](camera.md) this viewport is respond upon.
+- `out` : The [Rectangle](geom-rectangle.md) of visible area.
+
 ### Members
 
 - The un-modified game size, as requested in the game config (the raw width / height), as used for world bounds, cameras, etc

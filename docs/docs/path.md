@@ -235,6 +235,14 @@ path.fromJSON(json);
 var curves = path.curves;
 ```
 
+#### Get curve at t
+
+```javascript
+var curve = path.getCurveAt(t);
+```
+
+- `t` : The normalized location on the Path. Between `0` and `1`
+
 ### Draw on [graphics](graphics.md)
 
 ```javascript

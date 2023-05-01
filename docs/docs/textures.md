@@ -24,6 +24,10 @@ Textures cache, built-in object of phaser.
     // var width = image.width;
     // var height = image.height;
     ```
+- Get image texture from frame object
+    ```javascript
+    var texture = scene.textures.get(frameObject);
+    ```
 
 ### Get pixel
 
@@ -129,6 +133,12 @@ var removed = texture.remove(frameName);
 - Missing : `'__MISSING'`
 - 4x4 white : `'__WHITE'`
 
+#### Get key list of all textures
+
+```javascript
+var keys = scene.textures.getTextureKeys();
+```
+
 ### Frame object
 
 ####　Get frame
@@ -144,3 +154,128 @@ var frame = scene.textures.getFrame(key, frame);
 - `frame.cutY` : Y position within the source image to cut from.
 - `frame.cutWidth` : The width of the area in the source image to cut.
 - `frame.cutHeight` : The height of the area in the source image to cut.
+
+### Add atlas
+
+```javascript
+scene.textures.addAtlas(key, HTMLImageElement, data);
+// scene.textures.addAtlas(key, HTMLImageElement, data, dataSource);
+```
+
+- `key` : The unique string-based key of the Texture.
+- `HTMLImageElement` : HTML Image element/s.
+- `data` : The Texture Atlas data/s.
+    ```javascript
+    {
+        frames: [
+            {
+                // Location of frame image
+                frame: {
+                    x, y, w, h
+                },
+
+                // trimmed
+                trimmed:
+                sourceSize: {
+                    w, h
+                },
+                spriteSourceSize: {
+                    x, y, w, h
+                },
+
+                rotated:
+
+                // Custom origin
+                anchor: 
+                pivot: {
+                    x, y
+                },
+
+                // Other custom properties of this frame ...
+            }
+        ],
+
+        // Other custom properties of this texture ...
+    }
+    ```
+- `dataSource` : An optional data Image element (normal map).
+
+or
+
+```javascript
+scene.textures.addAtlas(undefined, texture, data);
+// scene.textures.addAtlas(undefined, texture, data, dataSource);
+```
+
+- `texture` : Phaser Texture.
+
+### Add sprite sheet
+
+```javascript
+scene.textures.addSpriteSheet(key, HTMLImageElement, config);
+// scene.textures.addAtlas(key, HTMLImageElement, config, dataSource);
+```
+
+- `key` : The unique string-based key of the Texture.
+- `HTMLImageElement` : HTML Image element/s.
+- `config` : The configuration object for this Sprite Sheet.
+    ```javascript
+    {
+        frameWidth: ,
+        frameHeight: ,
+        startFrame: 0,
+        endFrame: -1,
+        margin: 0,
+        spacing: 0
+    }
+    ```
+- `dataSource` : An optional data Image element (normal map).
+
+or
+
+```javascript
+scene.textures.addSpriteSheet(undefined, texture, config);
+// scene.textures.addSpriteSheet(undefined, texture, config, dataSource);
+```
+
+- `texture` : Phaser Texture.
+
+### Events
+
+- Texture manager is ready
+    ```javascript
+    scene.textures.on('ready', function() {
+
+    })
+    ```
+- Add texture
+    ```javascript
+    scene.textures.on('addtexture', function(key) {
+
+    })
+    ```
+    or
+    ```javascript
+    scene.textures.on('addtexture-' + key, function() {
+        
+    })
+    ```
+- Error when adding texture
+    ```javascript
+    scene.textures.on('onerror', function(key) {
+        
+    })
+    ```
+- Remove texture
+    ```javascript
+    scene.textures.on('removetexture', function(key) {
+
+    })
+    ```
+    or
+    ```javascript
+    scene.textures.on('removetexture-' + key, function() {
+
+    })
+    ```
+

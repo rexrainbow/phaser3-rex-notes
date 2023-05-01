@@ -463,6 +463,11 @@ See [data manager](datamanager.md)
     - `frame` :　The name or index of the frame within the Texture.
     - `updateSize` : Should this call adjust the size of the Game Object?
     - `updateOrigin` : Should this call adjust the origin of the Game Object?
+- Set frame by frame object
+    ```javascript
+    gameObject.setFrame(frameObject);
+    gameObject.setFrame(frameObject, updateSize, updateOrigin);
+    ```
 - Applies a crop to a texture
     ```javascript
     gameObject.setCrop(x, y, width, height);

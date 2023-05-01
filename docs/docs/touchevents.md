@@ -454,10 +454,6 @@ scene.input.addPointer(num);  // total points = num + 1
 
 - `gameObject.input` : Game object's input object.
 - `gameObject.input.localX`, `gameObject.input.localY` : Pointer to local position of texture.
-- Always receive input events, even if it's invisible or won't render :
-    ```javascript
-    gameObject.input.alwaysEnabled = true;
-    ```
 - `gameObject.input.dragStartX`, `gameObject.input.dragStartY` : The x/y coordinate of the Game Object 
   that owns this Interactive Object when the drag started.
 - `gameObject.input.dragStartXGlobal`, `gameObject.input.dragStartYGlobal` : The x/y coordinate that 
@@ -493,7 +489,7 @@ Touch-position = (current-touch-position * smooth-factor) + (previous-touch-posi
 
 ### Debug
 
-- Enable, draw shape of hit area.
+- Enable, draw shape of (shape) hit area.
     ```javascript
     scene.input.enableDebug(gameObject);
     // scene.input.enableDebug(gameObject, color);
@@ -501,6 +497,10 @@ Touch-position = (current-touch-position * smooth-factor) + (previous-touch-posi
 - Disable
     ```javascript
     scene.input.removeDebug(gameObject);
+    ```
+- Get debug shape game object
+    ```javascript
+    var shape = gameObject.input.hitAreaDebug;
     ```
 
 ### Poll rate

@@ -104,6 +104,8 @@ or
         maxLights: 10,
         maxTextures: -1,
         mipmapFilter: 'LINEAR', // 'NEAREST', 'LINEAR', 'NEAREST_MIPMAP_NEAREST', 'LINEAR_MIPMAP_NEAREST', 'NEAREST_MIPMAP_LINEAR', 'LINEAR_MIPMAP_LINEAR'
+        autoMobilePipeline: true,
+        defaultPipeline: 'MultiPipeline',
         pipeline:[]
     },
 
@@ -166,7 +168,9 @@ or
             '#00ffff',
             '#000000'
         ]
-    }
+    },
+
+    stableSort: -1
 }
 ```
 
@@ -252,6 +256,21 @@ var config = game.config;
     ```javascript
     var height = game.config.height;
     // var height = scene.game.config.height;
+    ```
+
+## Pause / Resume
+
+- Pause the entire game and emit a `PAUSE` event.
+    ```javascript
+    game.pause();
+    ```
+- Resume the entire game and emit a `RESUME` event.
+    ```javascript
+    game.resume();
+    ```
+- Is paused
+    ```javascript
+    var isPaused = game.isPaused;
     ```
 
 ## Events

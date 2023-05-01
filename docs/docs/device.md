@@ -61,6 +61,22 @@ Get information of device, built-in properties of phaser.
     var version = scene.sys.game.device.browser.tridentVersion;
     ```
 
+### Audio
+
+```javascript
+var flac = scene.sys.game.device.audio.flac;
+var aac = scene.sys.game.device.audio.aac;
+var dolby = scene.sys.game.device.audio.dolby;
+var m4a = scene.sys.game.device.audio.m4a;
+var mp3 = scene.sys.game.device.audio.mp3;
+var ogg = scene.sys.game.device.audio.ogg;
+var opus = scene.sys.game.device.audio.opus;
+var wav = scene.sys.game.device.audio.wav;
+var webm = scene.sys.game.device.audio.webm;
+var webAudio = scene.sys.game.device.audio.webAudio;
+var audioData = scene.sys.game.device.audio.audioData;
+```
+
 ### Video
 
 ```javascript

@@ -140,6 +140,23 @@ var isVisible = scene.scene.isVisible(key);
     - Sleep: Pause `update` stage, and set scene invisible.
     - Stop: Shoutdown, clearing display list, timers, etc. 
 
+```javascript
+var status = scene.scene.getStatus(key);
+// var status = scene.scene.getStatus();
+```
+
+- `status` :
+    - `Phaser.Scenes.PENDING`, or `0`
+    - `Phaser.Scenes.INIT`, or `1`
+    - `Phaser.Scenes.START`, or `2`
+    - `Phaser.Scenes.LOADING`, or `3`
+    - `Phaser.Scenes.CREATING`, or `4`
+    - `Phaser.Scenes.RUNNING`, or `5`
+    - `Phaser.Scenes.PAUSED`, or `6`
+    - `Phaser.Scenes.SLEEPING`, or `7`
+    - `Phaser.Scenes.SHUTDOWN`, or `8`
+    - `Phaser.Scenes.DESTROYED`, or `9`
+
 ## Get scene
 
 ```javascript
@@ -204,8 +221,11 @@ scene.scene.transition({
     // sleep: false,
     // allowInput: false,
 
+    // onStart: null,
+    // onStartScope: scene,
+
     // onUpdate: null,
-    // onUpdateScope: scene
+    // onUpdateScope: scene,
 })
 ```
 
@@ -216,9 +236,18 @@ scene.scene.transition({
 - `remove` : Set true to remove this scene.
 - `sleep` : Set true to sleep this scene, set false to stop this scene.
 - `allowInput` : Set true to enable input system of current scene and target scene.
+- `onStart`, `onStartScope` : Invoked when transition start
+    ```javascript
+    function(fromScene, toScene, duration) {
+
+    }
+    ```
+    - `fromScene` : Current scene instance
+    - `toScene` : Target scene instance
+    - `duration` : Transition duration, in ms.
 - `onUpdate` ,`onUpdateScope` : Transition callback in each tick.
     ```javascript
-    var callback = function(progress) {
+    function(progress) {
 
     }
     ```

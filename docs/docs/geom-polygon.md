@@ -106,10 +106,11 @@ polygon.setTo(points);
 - Get closest point of intersection between a vector and an array of polygons
     ```javascript
     var result = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons);
-    // var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, out);
+    // var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, isRay, out);
     ```
     - `line` : Vector of [line](geom-line.md) object
     - `polygons` : A single polygon, or array of polygons
+    - `isRay` : Is `line` a ray or a line segment?
     - `out` :
         - `out.x`, `out.y` : Intersection point
         - `out.z` : Closest intersection distance

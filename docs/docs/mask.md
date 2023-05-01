@@ -8,39 +8,51 @@ Apply mask on game object. Built-in render of phaser.
 
 ### Add mask
 
-1. Create mask object
-    - Create alpha mask from texture
-        1. Create image ([image](image.md), [sprite](sprite.md), [bitmap text](bitmaptext.md), [particles](particles.md), [text](text.md)), or [shader](shader.md)
-            ```javascript
-            var shape = scene.add.image(x, y, key).setVisible(false);
-            ```
-        1. Create mask
-            ```javascript
-            var mask = shape.createBitmapMask();
-            ```
-            or
-            ```javascript
-            var mask = new Phaser.Display.Masks.BitmapMask(scene, shape);
-            ```
-    - Create mask from [graphics](graphics.md), masked pixel *fully visible* or *fully invisible* without changing its alpha (opacity).
-        1. Create graphics
-            ```javascript
-            var shape = scene.make.graphics();
-            ```
-        1. Create mask
-            ```javascript
-            var mask = shape.createGeometryMask();
-            ```
-            or
-            ```javascript
-            var mask = new Phaser.Display.Masks.GeometryMask(scene, shape);
-            ```
-1. Add mask object to image game object
+#### Create mask object
+
+##### Bitmap mask
+
+1. Create image ([image](image.md), [sprite](sprite.md), [bitmap text](bitmaptext.md), [particles](particles.md), [text](text.md)),or [shader](shader.md)
     ```javascript
-    // var image = scene.add.image(...);
-    image.setMask(mask); // image.mask = mask;
+    var shape = scene.add.image(x, y, key).setVisible(false);
     ```
-    A mask object could be added to many game objects.
+1. Create mask
+    ```javascript
+    var mask = shape.createBitmapMask();
+    ```
+    or
+    ```javascript
+    var mask = scene.add.bitmapMask(shape);
+    ```
+
+or
+
+```javascript
+var mask =  scene.add.bitmapMask(undefined, x, y, key, frame);
+```
+
+##### Geometry mask
+
+The mask is essentially a clipping path which can only make a masked pixel 
+fully visible or fully invisible without changing its alpha (opacity).
+
+1. Create [graphics](graphics.md)
+    ```javascript
+    var shape = scene.make.graphics();
+    ```
+1. Create mask
+    ```javascript
+    var mask = shape.createGeometryMask();
+    ```
+
+#### Apply mask object
+
+```javascript
+gameObject.setMask(mask); // image.mask = mask;
+```
+    
+A mask object could be added to many game objects.
+
 
 !!! error
     Don't put game object and its mask into a [container](container.md) together.
@@ -78,4 +90,15 @@ Only GeometryMask has `inverse alpha` feature.
     ```javascript
     mask.setInvertAlpha(false);
     // mask.invertAlpha = false;
+    ```
+
+### Get shape game object
+
+- Bitmap mask
+    ```javascript
+    var shape = mask.bitmapMask;
+    ```
+- Geometry mask
+    ```javascript
+    var shape = mask.geometryMask;
     ```

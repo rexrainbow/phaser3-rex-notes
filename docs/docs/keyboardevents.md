@@ -67,15 +67,19 @@ Built-in keyboard events of phaser.
     ```
 - Remove key object
     ```javascript
-    scene.input.keyboard.removeAllKeys(true);
-    // scene.input.keyboard.removeAllKeys(destroy);
-    ```
-    - `destroy` : Call `Key.destroy` on each removed Key object
-- Remove all key objects
-    ```javascript
     scene.input.keyboard.removeKey('W');
     // scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+    // scene.input.keyboard.removeKey(key, destroy, removeCapture);
     ```
+    - `destroy` : Call `Key.destroy` on each removed Key object
+    - `removeCapture` : Remove all key captures for Key objects owened by this plugin?
+- Remove all key objects
+    ```javascript
+    scene.input.keyboard.removeAllKeys(true);
+    // scene.input.keyboard.removeAllKeys(destroy, removeCapture);
+    ```
+    - `destroy` : Call `Key.destroy` on each removed Key object
+    - `removeCapture` : Remove all key captures for Key objects owened by this plugin?
 - Key-down/key-up state
     ```javascript
     var isDown = keyObj.isDown;

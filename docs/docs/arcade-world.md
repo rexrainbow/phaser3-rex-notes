@@ -123,6 +123,21 @@ scene.physics.resume();
     scene.physics.world.setFPS(framerate);
     ```
 
+#### Tile filter options
+
+```javascript
+var option = scene.physics.world.tileFilterOptions;
+```
+
+- `option`
+    ```javascript
+    {
+        isColliding: true,
+        isNotEmpty: true,
+        hasInterestingFace: true
+    }
+    ```
+
 ### Body
 
 #### Enable

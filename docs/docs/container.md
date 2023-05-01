@@ -253,6 +253,17 @@ container.setAll(property, value, startIndex, endIndex);
         }
         ```
 
+#### Get world position, rotation, scale
+
+```javascript
+var matrix = child.getWorldTransformMatrix();
+var x = matrix.tx;
+var y = matrix.ty;
+var rotation = matrix.rotation;
+var scaleX = matrix.scaleX;
+var scaleY = matrix.scaleY;
+```
+
 ## Compare with [group object](group.md)
 
 - Container and group objects are all have a children list.

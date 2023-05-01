@@ -509,13 +509,21 @@ music.play(markerName, config);
 
 #### Get music instance
 
-- Get first
+- Get first by key
     ```javascript
     var music = scene.sound.get(key); // music instance, or null
     ```
-- Get all
+- Get all by key
     ```javascript
     var musicArray = scene.sound.getAll(key); // music instance, or null
+    ```
+- Get all
+    ```javascript
+    var musicArray = scene.sound.getAll();
+    ```
+- Get all playing
+    ```javascript
+    var musicArray = scene.sound.getAllPlaying();
     ```
 
 #### Remove music instance

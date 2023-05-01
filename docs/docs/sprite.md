@@ -119,7 +119,7 @@ See [game object](gameobject.md)
 
 - Global animation for all sprites
     ```javascript
-    scene.anims.create(config)
+    scene.anims.create(config);
     ```
 - Private animation for this sprite
     ```javascript
@@ -127,6 +127,17 @@ See [game object](gameobject.md)
     ```
 
 `config` : See [Add animation section](animation.md#add-animation).
+
+#### Create Aseprite animation
+
+- Global Aseprite animation for all sprites
+    ```javascript
+    scene.anims.createFromAseprite(key, tags);
+    ```
+- Private Aseprite animation for this sprite
+    ```javascript
+    sprite.anims.createFromAseprite(key, tags);
+    ```
 
 ##### Remove animation
 
