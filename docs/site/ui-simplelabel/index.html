@@ -9340,6 +9340,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYaPwwq">Style</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOpoqzP">Bitmaptext</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/BaqwOqX">Nine-slice background</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/xxJoJLW">Wrap text</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzOxKRM">Buttons</a></li>
 </ul>
@@ -9409,6 +9410,7 @@
     <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// rtl: false,</span>
 
+    <span class="c1">// Round-rectangle background</span>
     <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// color: 0xffffff,</span>
         <span class="c1">// alpha: 1,</span>
@@ -9445,6 +9447,16 @@
         <span class="c1">// &#39;disable.radius&#39;: undefined,</span>
         <span class="c1">// &#39;disable.xxx&#39;: ...</span>
     <span class="p">},</span>
+
+    <span class="c1">// Nine-slice background</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="p">,</span>
+        <span class="nx">frame</span><span class="o">:</span> <span class="p">,</span>
+        <span class="nx">leftWidth</span><span class="o">:</span> <span class="p">,</span> 
+        <span class="nx">rightWidth</span><span class="o">:</span> <span class="p">,</span>
+        <span class="nx">topHeight</span><span class="o">:</span> <span class="p">,</span> 
+        <span class="nx">bottomHeight</span><span class="o">:</span> 
+    <span class="p">}</span>
 
     <span class="c1">// iconMask: false,</span>
     <span class="c1">// squareFitIcon: false,</span>
@@ -9507,6 +9519,30 @@
 <span class="p">},</span> <span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
+<li><code>background</code> : <ul>
+<li><a href="../shape-roundrectangle/">Round-rectangle</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="c1">// color: 0xffffff,</span>
+    <span class="c1">// alpha: 1,</span>
+    <span class="c1">// strokeColor: 0xffffff,</span>
+    <span class="c1">// strokeAlpha: 1,</span>
+    <span class="c1">// strokeWidth: 2,</span>
+    <span class="c1">// radius: 0,</span>
+    <span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../nineslice/">Nine-slice</a>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="p">,</span>
+    <span class="nx">leftWidth</span><span class="o">:</span> <span class="p">,</span> 
+    <span class="nx">rightWidth</span><span class="o">:</span> <span class="p">,</span>
+    <span class="nx">topHeight</span><span class="o">:</span> <span class="p">,</span> 
+    <span class="nx">bottomHeight</span><span class="o">:</span> 
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>text</code> : <ul>
 <li><a href="../bbcodetext/#add-text-object">Style of bbcodetext</a></li>
 <li>Style of bitmaptext
