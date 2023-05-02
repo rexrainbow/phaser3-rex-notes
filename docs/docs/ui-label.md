@@ -291,7 +291,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     label.appendText(text, false);
     // label.text += text;
-    ``
+    ```
 
 ### Icon texture
 
