@@ -55,7 +55,10 @@ declare class Label extends Sizer {
 
     text: string;
     setText(text: string): this;
-    appendText(text: string): this;
+    appendText(
+        text: string | number | string[],
+        addCR?: boolean
+    ): this;
 
     setTexture(
         key: string | Phaser.Textures.Texture,

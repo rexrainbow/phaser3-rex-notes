@@ -6,6 +6,7 @@ import WrapTextLinesPoolClass from './wraptext/WrapTextLinesPool.js';
 import CONST from '../../textbase/const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
+import AppendText from '../../../utils/text/AppendText.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
@@ -228,33 +229,6 @@ class Text extends TextBase {
 
         this._text = value;
         this.updateText();
-
-        return this;
-    }
-
-    appendText(value, addCR) {
-        if (!value && value !== 0) {
-            value = '';
-        }
-
-        if (addCR === undefined) {
-            addCR = true;
-        }
-
-        if (Array.isArray(value)) {
-            value = value.join('\n');
-        }
-
-        var newText;
-        if (addCR) {
-            newText = `${this._text}\n${value}`;
-        } else {
-            newText = `${this._text}${value}`;
-        }
-
-        if (newText != this._text) {
-            this.setText(newText);
-        }
 
         return this;
     }
@@ -523,4 +497,12 @@ class Text extends TextBase {
     }
 }
 
+var methods = {
+    appendText: AppendText,
+}
+
+Object.assign(
+    Text.prototype,
+    methods
+)
 export default Text;

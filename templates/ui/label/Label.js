@@ -148,11 +148,6 @@ class Label extends Sizer {
         return this;
     }
 
-    appendText(value) {
-        this.text += value;
-        return this;
-    }
-
     // Access icon game object
     setIconTexture(key, frame) {
         var imageObject = this.childrenMap.icon;

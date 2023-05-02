@@ -282,6 +282,16 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     label.text = s;
     ```
+- Append text string
+    ```javascript
+    label.appendText(text);
+    // label.text += '\n' + text;
+    ```
+    or
+    ```javascript
+    label.appendText(text, false);
+    // label.text += text;
+    ``
 
 ### Icon texture
 
