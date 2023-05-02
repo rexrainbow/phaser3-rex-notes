@@ -2639,8 +2639,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#radius" class="md-nav__link">
-    Radius
+  <a href="#size" class="md-nav__link">
+    Size
   </a>
   
 </li>
@@ -9231,8 +9231,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#radius" class="md-nav__link">
-    Radius
+  <a href="#size" class="md-nav__link">
+    Size
   </a>
   
 </li>
@@ -9384,16 +9384,28 @@
 </ul>
 </li>
 </ul>
-<h4 id="radius">Radius<a class="headerlink" href="#radius" title="Permanent link">&para;</a></h4>
+<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">light</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// light.radius = radius;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">light</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">light</span><span class="p">.</span><span class="nx">diameter</span> <span class="o">=</span> <span class="nx">diameter</span><span class="p">;</span>
+<span class="c1">// light.width = diameter;</span>
+<span class="c1">// light.height = diameter;</span>
+<span class="c1">// light.displayWidth = diameter;</span>
+<span class="c1">// light.displayHeight = diameter;</span>
 </code></pre></div></li>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">light</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">diameter</span> <span class="o">=</span> <span class="nx">light</span><span class="p">.</span><span class="nx">diameter</span><span class="p">;</span>
+<span class="c1">// var diameter = light.displayWidth;</span>
+<span class="c1">// var diameter = light.displayHeight;</span>
+<span class="c1">// var diameter = light.width;</span>
+<span class="c1">// var diameter = light.height;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="intensity">Intensity<a class="headerlink" href="#intensity" title="Permanent link">&para;</a></h4>

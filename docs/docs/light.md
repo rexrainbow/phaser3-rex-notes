@@ -92,19 +92,32 @@ scene.lights.setAmbientColor(color);
         var blue = light.color.b;
         ```
 
-#### Radius
+#### Size
 
 - Set
     ```javascript
     light.setRadius(radius);
+    // light.radius = radius;
     ```
     or
     ```javascript
-    light.radius = radius;
+    light.diameter = diameter;
+    // light.width = diameter;
+    // light.height = diameter;
+    // light.displayWidth = diameter;
+    // light.displayHeight = diameter;
     ```
 - Get
     ```javascript
     var radius = light.radius;
+    ```
+    or
+    ```javascript
+    var diameter = light.diameter;
+    // var diameter = light.displayWidth;
+    // var diameter = light.displayHeight;
+    // var diameter = light.width;
+    // var diameter = light.height;
     ```
 
 #### Intensity

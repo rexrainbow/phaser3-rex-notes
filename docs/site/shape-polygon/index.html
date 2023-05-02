@@ -1974,6 +1974,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-points" class="md-nav__link">
+    Set points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#display-size" class="md-nav__link">
     Display size
   </a>
@@ -9173,6 +9180,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-points" class="md-nav__link">
+    Set points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#display-size" class="md-nav__link">
     Display size
   </a>
@@ -9303,6 +9317,19 @@
 <p>Smooths the polygon over the number of iterations specified.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">polygon</span><span class="p">.</span><span class="nx">smooth</span><span class="p">(</span><span class="nx">iterations</span><span class="p">);</span>
 </code></pre></div>
+<h3 id="set-points">Set points<a class="headerlink" href="#set-points" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">polygon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>point</code> :<ul>
+<li>A string containing paired values separated by a single space : <code>'40 0 40 20 100 20 100 80 40 80 40 100 0 50'</code></li>
+<li>An array of Point objects : <code>[new Phaser.Point(x1, y1), ...]</code></li>
+<li>An array of objects with public x/y properties : <code>[obj1, obj2, ...]</code></li>
+<li>An array of paired numbers that represent point coordinates : <code>[x1,y1, x2,y2, ...]</code></li>
+<li>An array of arrays with two elements representing x/y coordinates : <code>[[x1, y1], [x2, y2], ...]</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="display-size">Display size<a class="headerlink" href="#display-size" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get

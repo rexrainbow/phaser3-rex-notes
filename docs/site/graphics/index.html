@@ -9526,7 +9526,11 @@
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRoundedRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>radius</code> : number or an object <code>{tl, tr, bl, br}</code></li>
+<li><code>radius</code> : number or an object <code>{tl, tr, bl, br}</code>, <ul>
+<li>Positive value : Convex corner.</li>
+<li>Negative value : Concave corner.</li>
+</ul>
+</li>
 </ul>
 <h4 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillTriangleShape</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span> <span class="c1">// triangle: {x1, y1, x2, y2, x3, y3}</span>

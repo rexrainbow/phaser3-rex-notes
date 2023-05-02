@@ -2534,6 +2534,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tile-corners" class="md-nav__link">
+    Tile corners
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#alpha" class="md-nav__link">
     Alpha
   </a>
@@ -9634,6 +9641,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tile-corners" class="md-nav__link">
+    Tile corners
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#alpha" class="md-nav__link">
     Alpha
   </a>
@@ -9842,7 +9856,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li>Add <a href="./#tileset"><code>tileset</code></a> image
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileset</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">addTilesetImage</span><span class="p">(</span><span class="nx">tilesetName</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span> <span class="c1">// key: texture key</span>
 <span class="c1">// var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName</span>
-<span class="c1">// var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);</span>
+<span class="c1">// var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid, tileOffset);</span>
 </code></pre></div><ul>
 <li><code>key</code> : The key of the Phaser.Cache image used for this tileset.<ul>
 <li><code>undefined</code> , <code>null</code> : Use <code>tilesetName</code> as default value.</li>
@@ -9861,6 +9875,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 </ul>
 </li>
 <li><code>gid</code> : If adding multiple tilesets to a blank map, specify the starting GID this set will use here.</li>
+<li><code>tileOffset</code> : <code>{x, y}</code> Tile texture drawing offset.</li>
 </ul>
 </li>
 <li>Create <a href="./#layer"><code>layer</code></a><ul>
@@ -9901,14 +9916,15 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="c1">// id: 9,</span>
 
     <span class="c1">// classType: Sprite,</span>
+    <span class="c1">// ignoreTileset</span>
     <span class="c1">// scene,</span>
     <span class="c1">// container: null,</span>
     <span class="c1">// key: null,</span>
     <span class="c1">// frame: null</span>
-<span class="p">});</span>
+<span class="p">},</span> <span class="nx">useTileset</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">createFromObjects</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span> <span class="nx">configArray</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprites</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">createFromObjects</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span> <span class="nx">configArray</span><span class="p">,</span> <span class="nx">useTileset</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>One of filter<ul>
 <li><code>gid</code> : Object GID.</li>
@@ -9917,6 +9933,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 </ul>
 </li>
 <li><code>classType</code> : Class of game object, default is <a href="../sprite/">Sprite</a>.</li>
+<li><code>ignoreTileset</code> : </li>
 <li><code>scene</code> : A Scene reference, passed to the Game Objects constructors. Default is map's scene.</li>
 <li><code>container</code> : Optional Container to which the Game Objects are added.</li>
 <li><code>key</code>, <code>frame</code> : Optional key of a Texture to be used.</li>
@@ -10292,6 +10309,12 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div>
+<h4 id="tile-corners">Tile corners<a class="headerlink" href="#tile-corners" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTileCorners</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>points</code> : Array of <a href="../vector2/">vector2</a> corresponding to the world XY location of each tile corner.</li>
+</ul>
 <h4 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set

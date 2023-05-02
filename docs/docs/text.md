@@ -186,8 +186,18 @@ var txt = scene.make.text({
     ```
 - Set
     ```javascript
-    txt.setText('world');
-    // txt.text = 'world';
+    txt.setText(text);
+    // txt.text = text;
+    ```
+- Append
+    ```javascript
+    txt.appendText(text);
+    // txt.text += '\n' + text;
+    ```
+    or
+    ```javascript
+    txt.appendText(text, false);
+    // txt.text += text;
     ```
 
 ### Set style

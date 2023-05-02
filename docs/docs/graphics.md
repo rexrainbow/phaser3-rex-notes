@@ -128,7 +128,9 @@ graphics.fillRoundedRect(x, y, width, height, radius);
 graphics.strokeRoundedRect(x, y, width, height, radius);
 ```
 
-- `radius` : number or an object `{tl, tr, bl, br}`
+- `radius` : number or an object `{tl, tr, bl, br}`, 
+    - Positive value : Convex corner.
+    - Negative value : Concave corner.
 
 #### Triangle
 

@@ -71,7 +71,7 @@ scene.load.tilemapCSV(key, url);         // CSV
     ```javascript
     var tileset = map.addTilesetImage(tilesetName, key); // key: texture key
     // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName
-    // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);
+    // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid, tileOffset);
     ```
     - `key` : The key of the Phaser.Cache image used for this tileset.
         - `undefined` , `null` : Use `tilesetName` as default value.
@@ -82,6 +82,7 @@ scene.load.tilemapCSV(key, url);         // CSV
     - `tileSpacing` The spacing between each the tile in the sheet (in pixels).
         - `undefined` : Default to `0` 
     - `gid` : If adding multiple tilesets to a blank map, specify the starting GID this set will use here.
+    - `tileOffset` : `{x, y}` Tile texture drawing offset.
 3. Create [`layer`](tilemap.md#layer)
     - Create existed layer
         ```javascript
@@ -113,21 +114,23 @@ scene.load.tilemapCSV(key, url);         // CSV
             // id: 9,
         
             // classType: Sprite,
+            // ignoreTileset
             // scene,
             // container: null,
             // key: null,
             // frame: null
-        });
+        }, useTileset);
         ```
         or
         ```javascript
-        var sprites = map.createFromObjects(layerName, configArray);
+        var sprites = map.createFromObjects(layerName, configArray, useTileset);
         ```
         - One of filter
             - `gid` : Object GID.
             - `id` : Object ID.
             - `name` : Object Name.
         - `classType` : Class of game object, default is [Sprite](sprite.md).
+        - `ignoreTileset` : 
         - `scene` : A Scene reference, passed to the Game Objects constructors. Default is map's scene.
         - `container` : Optional Container to which the Game Objects are added.
         - `key`, `frame` : Optional key of a Texture to be used.
@@ -572,6 +575,14 @@ map.forEachTile(function(tile, index, tileArray) { /* ... */ }, context,
 var x = tile.x;
 var y = tile.y;
 ```
+
+#### Tile corners
+
+```javascript
+var points = map.getTileCorners(tileX, tileY, camera, layer);
+```
+
+- `points` : Array of [vector2](vector2.md) corresponding to the world XY location of each tile corner.
 
 #### Alpha
 
