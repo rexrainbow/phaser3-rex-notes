@@ -28,7 +28,7 @@ var nineSlice = scene.add.nineslice(x, y, texture, frame, width, height, leftWid
 Add nine slice from JSON
 
 ```javascript
-var nineSlice = scene.make.image({
+var nineSlice = scene.make.nineslice({
     x: 0,
     y: 0,
     key: '',

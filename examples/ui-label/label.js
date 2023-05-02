@@ -35,7 +35,11 @@ class Demo extends Phaser.Scene {
 
         var verticalLabel = this.rexUI.add.label({
             orientation: 1,
-            background: this.add.nineslice(0, 0, 'bg', undefined, 0, 0, 20, 20, 20, 20).setAlpha(0.7).setName('bgV'),
+            background: this.make.nineslice({
+                key: 'bg',
+                leftWidth: 20, rightWidth: 20,
+                topHeight: 20, bottomHeight: 20
+            }).setAlpha(0.7).setName('bgV'),
             text: this.add.bitmapText(0, 0, 'gothic', 'Top-to-bottom').setScale(0.5),
             icon: this.rexUI.add.roundRectangle(0, 0, 2, 2, 80, COLOR_DARK).setName('iconV'),
             action: this.add.image(0, 0, 'close').setTint(COLOR_LIGHT),
