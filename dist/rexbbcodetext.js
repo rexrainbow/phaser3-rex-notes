@@ -2718,10 +2718,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$2 = {
+  var methods$3 = {
     setInteractive: SetInteractive
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$2);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$3);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -2895,10 +2895,10 @@
     }]);
     return ImageManager;
   }();
-  var methods$1 = {
+  var methods$2 = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$1);
+  Object.assign(ImageManager.prototype, methods$2);
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
     var textures = scene.sys.textures;
@@ -2936,6 +2936,28 @@
     if (renderer.gl && texture) {
       renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
     }
+  };
+
+  var AppendText = function AppendText(value, addCR) {
+    if (!value && value !== 0) {
+      value = '';
+    }
+    if (addCR === undefined) {
+      addCR = true;
+    }
+    if (Array.isArray(value)) {
+      value = value.join('\n');
+    }
+    var newText;
+    if (addCR) {
+      newText = "".concat(this.text, "\n").concat(value);
+    } else {
+      newText = "".concat(this.text).concat(value);
+    }
+    if (newText != this.text) {
+      this.setText(newText);
+    }
+    return this;
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -3137,18 +3159,6 @@
         }
         this._text = value;
         this.updateText();
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        if (value == null) {
-          return this;
-        }
-        if (Array.isArray(value)) {
-          value = value.join('\n');
-        }
-        this.setText(this.text + value.toString());
         return this;
       }
     }, {
@@ -3399,6 +3409,10 @@
     }]);
     return Text;
   }(TextBase);
+  var methods$1 = {
+    appendText: AppendText
+  };
+  Object.assign(Text.prototype, methods$1);
 
   var SplitText = function SplitText(text, mode) {
     var TagRegex = this.tagRegex;

@@ -1,6 +1,7 @@
 // Composites
 import CreateSelectorNode from './composites/Selector.js';
 import CreateSequenceNode from './composites/Sequence.js';
+import CreateParallelNode from './composites/Parallel.js';
 import CreateSwitchSelectorNode from './composites/SwitchSelector.js';
 import CreateIfSelectorNode from './composites/IfSelector.js';
 import CreateRandomSelectorNode from './composites/RandomSelector.js';
@@ -23,6 +24,7 @@ import CreateForceSuccessNode from './decorators/ForceSuccess.js';
 const CreateCompositeHandlers = {
     'selector': CreateSelectorNode,
     'sequence': CreateSequenceNode,
+    'parallel': CreateParallelNode,
     'switch-selector': CreateSwitchSelectorNode,
     'if-selector': CreateIfSelectorNode,
     'random-selector': CreateRandomSelectorNode,

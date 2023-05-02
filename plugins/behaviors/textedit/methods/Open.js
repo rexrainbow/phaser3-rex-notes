@@ -1,6 +1,7 @@
 import { SetLastOpenedEditor } from './LastOpenedEditor.js';
 import IsFunction from '../../../utils/object/IsFunction.js';
 import CreateInputTextFromText from './CreateInputText.js';
+import NextTick from '../../../utils/time/NextTick.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Merge = Phaser.Utils.Objects.Merge;
@@ -42,7 +43,7 @@ var Open = function (config, onCloseCallback) {
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
     }
     // Attach pointerdown (outside of input-text) event, at next tick
-    this.delayCall = this.scene.time.delayedCall(0, function () {
+    this.delayCall = NextTick(this.scene, function () {
         this.scene.input.once('pointerdown', this.close, this);
 
         // Open editor completly, invoke onOpenCallback
@@ -51,7 +52,7 @@ var Open = function (config, onCloseCallback) {
         }
         this.emit('open', this.parent);
 
-    }, [], this);
+    }, this);
 
     return this;
 }

@@ -84,6 +84,7 @@ class Demo extends Phaser.Scene {
 
         // Dump
         var data = tree.dump();
+        console.log(data);
         // Load
         var tree2 = btAdd.behaviorTree().load(data, {
             MyAction: PrintAction,

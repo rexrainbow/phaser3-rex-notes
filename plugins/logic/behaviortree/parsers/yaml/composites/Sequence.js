@@ -9,8 +9,8 @@ sequence:
 ```
 */
 
-var CreateSelectorNode = function (data) {
+var CreateSequenceNode = function (data) {
     return new Sequence(data);
 }
 
-export default CreateSelectorNode;
+export default CreateSequenceNode;

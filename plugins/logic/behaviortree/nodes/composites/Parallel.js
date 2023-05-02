@@ -70,10 +70,7 @@ class Parallel extends Composite {
         if (this.finishMode === 0) {
             if (mainTaskStatus !== RUNNING) {
                 // Main task is not running
-                // TODO: Abort running tasks
-                for (var childIndex in statusMap) {
-                    // this.children[childIndex].abort();
-                }
+                this.abortChildren(tick);
             }
             return mainTaskStatus;
 

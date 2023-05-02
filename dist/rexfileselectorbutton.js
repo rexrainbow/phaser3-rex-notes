@@ -10774,6 +10774,28 @@
     return gameObject;
   };
 
+  var AppendText = function AppendText(value, addCR) {
+    if (!value && value !== 0) {
+      value = '';
+    }
+    if (addCR === undefined) {
+      addCR = true;
+    }
+    if (Array.isArray(value)) {
+      value = value.join('\n');
+    }
+    var newText;
+    if (addCR) {
+      newText = "".concat(this.text, "\n").concat(value);
+    } else {
+      newText = "".concat(this.text).concat(value);
+    }
+    if (newText != this.text) {
+      this.setText(newText);
+    }
+    return this;
+  };
+
   var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
@@ -10820,6 +10842,7 @@
   };
 
   var methods$1 = {
+    appendText: AppendText,
     resetDisplayContent: ResetDisplayContent
   };
 
@@ -10961,12 +10984,6 @@
       key: "setText",
       value: function setText(value) {
         this.text = value;
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        this.text += value;
         return this;
       }
 

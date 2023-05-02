@@ -841,6 +841,10 @@
     }
   };
 
+  var NextTick = function NextTick(scene, callback, scope) {
+    return scene.time.delayedCall(0, callback, [], scope);
+  };
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Merge = Phaser.Utils.Objects.Merge;
   var Open = function Open(config, onCloseCallback) {
@@ -876,7 +880,7 @@
       this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
     }
     // Attach pointerdown (outside of input-text) event, at next tick
-    this.delayCall = this.scene.time.delayedCall(0, function () {
+    this.delayCall = NextTick(this.scene, function () {
       this.scene.input.once('pointerdown', this.close, this);
 
       // Open editor completly, invoke onOpenCallback
@@ -884,7 +888,7 @@
         onOpenCallback(this.parent);
       }
       this.emit('open', this.parent);
-    }, [], this);
+    }, this);
     return this;
   };
 

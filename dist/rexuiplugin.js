@@ -1060,7 +1060,7 @@
     }
   };
 
-  var methods$x = {
+  var methods$y = {
     setTexture: SetTexture,
     resize: Resize$1,
     setSize: Resize$1,
@@ -1071,7 +1071,7 @@
     getLastAppendedChildren: GetLastAppendedChildren$1,
     getChildren: GetChildren$1
   };
-  Object.assign(methods$x, TintMethods);
+  Object.assign(methods$y, TintMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -1238,7 +1238,7 @@
     return childA._depth - childB._depth;
   };
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$x]);
+  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$y]);
 
   var ImageTypeName$1 = 'image';
 
@@ -1963,11 +1963,11 @@
     }]);
     return ImageData;
   }(RenderBase$1);
-  var methods$w = {
+  var methods$x = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
   };
-  Object.assign(ImageData$1.prototype, methods$w);
+  Object.assign(ImageData$1.prototype, methods$x);
 
   var AddImage$2 = function AddImage(blitter, config) {
     if (typeof config === 'string') {
@@ -5876,10 +5876,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$v = {
+  var methods$w = {
     setInteractive: SetInteractive$1
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$v);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$w);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -6053,10 +6053,32 @@
     }]);
     return ImageManager;
   }();
-  var methods$u = {
+  var methods$v = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$u);
+  Object.assign(ImageManager.prototype, methods$v);
+
+  var AppendText$1 = function AppendText(value, addCR) {
+    if (!value && value !== 0) {
+      value = '';
+    }
+    if (addCR === undefined) {
+      addCR = true;
+    }
+    if (Array.isArray(value)) {
+      value = value.join('\n');
+    }
+    var newText;
+    if (addCR) {
+      newText = "".concat(this.text, "\n").concat(value);
+    } else {
+      newText = "".concat(this.text).concat(value);
+    }
+    if (newText != this.text) {
+      this.setText(newText);
+    }
+    return this;
+  };
 
   var IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
@@ -6257,18 +6279,6 @@
         }
         this._text = value;
         this.updateText();
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        if (value == null) {
-          return this;
-        }
-        if (Array.isArray(value)) {
-          value = value.join('\n');
-        }
-        this.setText(this.text + value.toString());
         return this;
       }
     }, {
@@ -6519,6 +6529,10 @@
     }]);
     return Text;
   }(TextBase);
+  var methods$u = {
+    appendText: AppendText$1
+  };
+  Object.assign(Text.prototype, methods$u);
 
   var SplitText = function SplitText(text, mode) {
     var TagRegex = this.tagRegex;
@@ -36594,6 +36608,7 @@
   };
 
   var methods$e = {
+    appendText: AppendText$1,
     resetDisplayContent: ResetDisplayContent$1
   };
 
@@ -36735,12 +36750,6 @@
       key: "setText",
       value: function setText(value) {
         this.text = value;
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        this.text += value;
         return this;
       }
 
@@ -59128,6 +59137,10 @@
     }
   };
 
+  var NextTick = function NextTick(scene, callback, scope) {
+    return scene.time.delayedCall(0, callback, [], scope);
+  };
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Merge = Phaser.Utils.Objects.Merge;
   var Open = function Open(config, onCloseCallback) {
@@ -59163,7 +59176,7 @@
       this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
     }
     // Attach pointerdown (outside of input-text) event, at next tick
-    this.delayCall = this.scene.time.delayedCall(0, function () {
+    this.delayCall = NextTick(this.scene, function () {
       this.scene.input.once('pointerdown', this.close, this);
 
       // Open editor completly, invoke onOpenCallback
@@ -59171,7 +59184,7 @@
         onOpenCallback(this.parent);
       }
       this.emit('open', this.parent);
-    }, [], this);
+    }, this);
     return this;
   };
 

@@ -1686,6 +1686,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-line-spacing" class="md-nav__link">
+    Set line spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-font-size" class="md-nav__link">
     Set font size
   </a>
@@ -9262,6 +9269,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-line-spacing" class="md-nav__link">
+    Set line spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-font-size" class="md-nav__link">
     Set font size
   </a>
@@ -9529,6 +9543,13 @@
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">letterSpacing</span> <span class="o">=</span> <span class="nx">spacing</span><span class="p">;</span>
 </code></pre></div>
 <p>Can be a positive value to increase the space, or negative to reduce it.</p>
+<h3 id="set-line-spacing">Set line spacing<a class="headerlink" href="#set-line-spacing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setLineSpacing</span><span class="p">(</span><span class="nx">spacing</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">lineSpacing</span> <span class="o">=</span> <span class="nx">spacing</span><span class="p">;</span>
+</code></pre></div>
+<p>Can be a positive value to increase the space, or negative to reduce it.</p>
 <h3 id="set-font-size">Set font size<a class="headerlink" href="#set-font-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFontSize</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
 </code></pre></div>
@@ -9657,7 +9678,7 @@
 <li><code>wrappedText</code> : Wrapped content joined with <code>'\n'</code>.</li>
 <li><code>characters</code> : Information of each character.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="kr">char</span><span class="p">,</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">line</span>
+    <span class="kr">char</span><span class="p">,</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">line</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>char</code> : Character (string).</li>
@@ -9685,17 +9706,6 @@
 </li>
 <li><code>scaleX</code>, <code>scaleY</code> : Scale of width and height.</li>
 </ul>
-<p><strong>Bitmaptext game object does not have <code>getBounds</code> method</strong>. 
-User can inject it by</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">Components</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Components</span><span class="p">;</span>
-<span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span>
-    <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">,</span>
-    <span class="p">[</span>
-        <span class="nx">Components</span><span class="p">.</span><span class="nx">ComputedSize</span><span class="p">,</span>
-        <span class="nx">Components</span><span class="p">.</span><span class="nx">GetBounds</span>
-    <span class="p">]</span>
-<span class="p">);</span>
-</code></pre></div>
 <h4 id="get-information-of-character">Get information of character<a class="headerlink" href="#get-information-of-character" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharacterAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var data = txt.getCharacterAt(x, y, camera);</span>

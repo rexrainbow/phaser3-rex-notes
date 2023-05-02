@@ -10,6 +10,7 @@ var Load = function (data, names) {
     var nodeData = data.nodes;
     var nodes = {};
     for (var i = nodeData.length - 1; i >= 0; i--) {
+        // Create nodes from bottom to top
         var spec = nodeData[i],
             className = spec.name;
 

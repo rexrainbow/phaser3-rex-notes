@@ -9105,9 +9105,15 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Linear interpolation (lerp)
+<li>Linear interpolation (lerp) two values
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Linear interpolation (lerp) two Vectors
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">LinearXY</span><span class="p">(</span><span class="nx">vector0</span><span class="p">,</span> <span class="nx">vector1</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>vector0</code>, <code>vector1</code> : <a href="../vector2/">Phaser.Math.Vector2</a></li>
+</ul>
+</li>
 <li>Smooth interpolation
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">SmoothStep</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
 </code></pre></div><ul>

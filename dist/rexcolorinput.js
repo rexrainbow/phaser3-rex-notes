@@ -1995,11 +1995,11 @@
     return this;
   };
 
-  var methods$b = {
+  var methods$c = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$b, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
+  Object.assign(methods$c, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2268,7 +2268,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$b);
+  Object.assign(ContainerLite.prototype, methods$c);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -6420,8 +6420,8 @@
     }
   };
 
-  var methods$a = {};
-  Object.assign(methods$a, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
+  var methods$b = {};
+  Object.assign(methods$b, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
 
   var GetValue$W = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
@@ -6470,7 +6470,7 @@
     }]);
     return OpenCloseTransition;
   }(ComponentBase);
-  Object.assign(OpenCloseTransition.prototype, methods$a);
+  Object.assign(OpenCloseTransition.prototype, methods$b);
 
   var Rectangle$2 = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
@@ -9496,10 +9496,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$9 = {
+  var methods$a = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$9);
+  Object.assign(Rotate.prototype, methods$a);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -9590,7 +9590,7 @@
     return this;
   };
 
-  var methods$8 = {
+  var methods$9 = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -9625,7 +9625,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$8, PaddingMethods, AddChildMethods$2, RemoveChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
+  Object.assign(methods$9, PaddingMethods, AddChildMethods$2, RemoveChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
 
   var GetValue$B = Phaser.Utils.Objects.GetValue;
   var Base$1 = /*#__PURE__*/function (_Container) {
@@ -9875,7 +9875,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base$1.prototype, methods$8);
+  Object.assign(Base$1.prototype, methods$9);
 
   var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -10498,7 +10498,7 @@
     }
   };
 
-  var methods$7 = {
+  var methods$8 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -10510,7 +10510,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$7, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$8, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -10621,7 +10621,7 @@
     }]);
     return Sizer;
   }(Base$1);
-  Object.assign(Sizer.prototype, methods$7);
+  Object.assign(Sizer.prototype, methods$8);
 
   var GetValue$y = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
@@ -13743,7 +13743,7 @@
     return children;
   };
 
-  var AppendText = function AppendText(text, style) {
+  var AppendText$1 = function AppendText(text, style) {
     var children = this.createCharChildren(text, style);
     this.addChild(children);
     return this;
@@ -13754,7 +13754,7 @@
       text = '';
     }
     this.removeChildren();
-    AppendText.call(this, text, style); // this.appendText might be override
+    AppendText$1.call(this, text, style); // this.appendText might be override
 
     this.dirty = true;
     return this;
@@ -15290,7 +15290,7 @@
     createCharChild: CreateCharChild,
     createCharChildren: CreateCharChildren,
     setText: SetText$1,
-    appendText: AppendText,
+    appendText: AppendText$1,
     insertText: InsertText,
     removeText: RemoveText,
     getText: GetText,
@@ -17396,7 +17396,7 @@
     return ColorInput;
   }(Sizer);
 
-  var methods$6 = {
+  var methods$7 = {
     // Color picker
     setCreateColorPickerBackgroundCallback: function setCreateColorPickerBackgroundCallback(callback) {
       this.colorPickerCreateBackgroundCallback = callback;
@@ -17736,7 +17736,7 @@
     }
   };
 
-  var methods$5 = {
+  var methods$6 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -17744,7 +17744,7 @@
     getChildrenSizers: GetChildrenSizers,
     layoutChildren: LayoutChildren
   };
-  Object.assign(methods$5, AddChildMethods, RemoveChildMethods);
+  Object.assign(methods$6, AddChildMethods, RemoveChildMethods);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -17800,7 +17800,7 @@
     }]);
     return OverlapSizer;
   }(Base$1);
-  Object.assign(OverlapSizer.prototype, methods$5);
+  Object.assign(OverlapSizer.prototype, methods$6);
 
   var LoadImageMethods = {
     loadFromURL: function loadFromURL(url, callback) {
@@ -18618,6 +18618,28 @@
     return gameObject;
   };
 
+  var AppendText = function AppendText(value, addCR) {
+    if (!value && value !== 0) {
+      value = '';
+    }
+    if (addCR === undefined) {
+      addCR = true;
+    }
+    if (Array.isArray(value)) {
+      value = value.join('\n');
+    }
+    var newText;
+    if (addCR) {
+      newText = "".concat(this.text, "\n").concat(value);
+    } else {
+      newText = "".concat(this.text).concat(value);
+    }
+    if (newText != this.text) {
+      this.setText(newText);
+    }
+    return this;
+  };
+
   var ResetDisplayContent = function ResetDisplayContent(config) {
     if (config === undefined) {
       config = {};
@@ -18663,7 +18685,8 @@
     return this;
   };
 
-  var methods$4 = {
+  var methods$5 = {
+    appendText: AppendText,
     resetDisplayContent: ResetDisplayContent
   };
 
@@ -18805,12 +18828,6 @@
       key: "setText",
       value: function setText(value) {
         this.text = value;
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        this.text += value;
         return this;
       }
 
@@ -18958,7 +18975,7 @@
     }]);
     return Label;
   }(Sizer);
-  Object.assign(Label.prototype, methods$4);
+  Object.assign(Label.prototype, methods$5);
 
   var ExtractStyle = function ExtractStyle(config, prefix, propertiesMap) {
     var result = ExtractByPrefix(config, prefix);
@@ -21678,10 +21695,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$3 = {
+  var methods$4 = {
     setInteractive: SetInteractive
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$3);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$4);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -21855,10 +21872,10 @@
     }]);
     return ImageManager;
   }();
-  var methods$2 = {
+  var methods$3 = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$2);
+  Object.assign(ImageManager.prototype, methods$3);
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
@@ -22059,18 +22076,6 @@
         }
         this._text = value;
         this.updateText();
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(value) {
-        if (value == null) {
-          return this;
-        }
-        if (Array.isArray(value)) {
-          value = value.join('\n');
-        }
-        this.setText(this.text + value.toString());
         return this;
       }
     }, {
@@ -22321,6 +22326,10 @@
     }]);
     return Text;
   }(TextBase);
+  var methods$2 = {
+    appendText: AppendText
+  };
+  Object.assign(Text.prototype, methods$2);
 
   var SplitText = function SplitText(text, mode) {
     var TagRegex = this.tagRegex;
@@ -23565,7 +23574,7 @@
   var methods = {
     openColorPicker: OpenColorPicker
   };
-  Object.assign(methods, methods$6);
+  Object.assign(methods, methods$7);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
