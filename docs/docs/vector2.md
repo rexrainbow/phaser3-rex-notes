@@ -42,6 +42,10 @@ var newVector = vector.clone();
     vector.rotate(delta);
     ```
     - `delta` : The angle to rotate by, in radians.
+- Project
+    ```javascript
+    vector.project(srcVector2);
+    ```
 - Set length
     ```javascript
     vector.setLength(length);

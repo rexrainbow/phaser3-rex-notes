@@ -6,10 +6,15 @@ Calculates interpolation value over t (0~1), built-in method of phaser.
 
 ## Usage
 
-- Linear interpolation (lerp)
+- Linear interpolation (lerp) two values
     ```javascript
     var result = Phaser.Math.Linear(p0, p1, t);
     ```
+- Linear interpolation (lerp) two Vectors
+    ```javascript
+    var result = Phaser.Math.LinearXY(vector0, vector1, t);
+    ```
+    - `vector0`, `vector1` : [Phaser.Math.Vector2](vector2.md)
 - Smooth interpolation
     ```javascript
     var result = Phaser.Math.Interpolation.SmoothStep(t, min, max);

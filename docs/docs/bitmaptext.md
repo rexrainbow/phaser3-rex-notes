@@ -162,6 +162,20 @@ txt.letterSpacing = spacing;
 
 Can be a positive value to increase the space, or negative to reduce it.
 
+### Set line spacing
+
+```javascript
+txt.setLineSpacing(spacing);
+```
+
+or
+
+```javascript
+txt.lineSpacing = spacing;
+```
+
+Can be a positive value to increase the space, or negative to reduce it.
+
 ### Set font size
 
 ```javascript
@@ -297,7 +311,7 @@ var bounds = txt.getTextBounds(round);
 - `characters` : Information of each character.
     ```javascript
     {
-        char, code, i, x, y, w, h, t, b, r, line
+        char, code, i, idx, x, y, w, h, t, b, r, line
     }
     ```
     - `char` : Character (string).
@@ -321,21 +335,6 @@ var bounds = txt.getTextBounds(round);
     - `w` , `h` : Width/height of word
     - `cr` : Is last word of current line
 - `scaleX`, `scaleY` : Scale of width and height.
-
-
-**Bitmaptext game object does not have `getBounds` method**. 
-User can inject it by
-
-```javascript
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(
-    Phaser.GameObjects.BitmapText,
-    [
-        Components.ComputedSize,
-        Components.GetBounds
-    ]
-);
-```
 
 #### Get information of character
 

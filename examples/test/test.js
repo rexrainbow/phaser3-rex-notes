@@ -1,4 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
+import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,6 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.add.rexBBCodeText(0,0,'Hello').appendText('World')
     }
 
     update(time, delta) {
@@ -27,7 +29,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'BBCodeTextPlugin',
+            plugin: BBCodeTextPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -64,7 +64,10 @@ declare class Text extends CanvasGameObjectBase {
 
     text: string;
     setText(text: string | number | string[]): this;
-    appendText(text: string | number | string[]): this;
+    appendText(
+        text: string | number | string[],
+        addCR?: boolean
+    ): this;
     getPlainText(
         text?: string | undefined,
         start?: number, end?: number

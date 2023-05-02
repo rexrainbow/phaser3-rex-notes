@@ -342,6 +342,16 @@ var txt = scene.make.rexBBCodeText({
     txt.setText('[b]h[/b]ello');
     // txt.text = '[b]h[/b]ello';
     ```
+- Append
+    ```javascript
+    txt.appendText(text);
+    // txt.text += '\n' + text;
+    ```
+    or
+    ```javascript
+    txt.appendText(text, false);
+    // txt.text += text;
+    ```
 
 ### Set style
 

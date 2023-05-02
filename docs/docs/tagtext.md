@@ -342,6 +342,16 @@ var txt = scene.make.rexTagText({
     txt.setText('<class="name1">wor</class>ld');
     // txt.text = '<class="name1">wor</class>ld';
     ```
+- Append
+    ```javascript
+    txt.appendText(text);
+    // txt.text += '\n' + text;
+    ```
+    or
+    ```javascript
+    txt.appendText(text, false);
+    // txt.text += text;
+    ```
 
 ### Set style
 

@@ -232,15 +232,30 @@ class Text extends TextBase {
         return this;
     }
 
-    appendText(value) {
-        if (value == null) {
-            return this;
+    appendText(value, addCR) {
+        if (!value && value !== 0) {
+            value = '';
         }
+
+        if (addCR === undefined) {
+            addCR = true;
+        }
+
         if (Array.isArray(value)) {
             value = value.join('\n');
         }
 
-        this.setText(this.text + value.toString())
+        var newText;
+        if (addCR) {
+            newText = `${this._text}\n${value}`;
+        } else {
+            newText = `${this._text}${value}`;
+        }
+
+        if (newText != this._text) {
+            this.setText(newText);
+        }
+
         return this;
     }
 
