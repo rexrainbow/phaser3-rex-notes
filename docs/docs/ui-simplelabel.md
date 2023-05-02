@@ -91,6 +91,7 @@ var label = scene.rexUI.add.simpleLabel({
     orientation: 0,
     // rtl: false,
 
+    // Round-rectangle background
     background: {
         // color: 0xffffff,
         // alpha: 1,
@@ -127,6 +128,16 @@ var label = scene.rexUI.add.simpleLabel({
         // 'disable.radius': undefined,
         // 'disable.xxx': ...
     },
+
+    // Nine-slice background
+    background: {
+        key: ,
+        frame: ,
+        leftWidth: , 
+        rightWidth: ,
+        topHeight: , 
+        bottomHeight: 
+    }
     
     // iconMask: false,
     // squareFitIcon: false,
@@ -189,6 +200,30 @@ var label = scene.rexUI.add.simpleLabel({
 }, creators);
 ```
 
+- `background` : 
+    - [Round-rectangle](shape-roundrectangle.md)
+        ```javascript
+        {
+            // color: 0xffffff,
+            // alpha: 1,
+            // strokeColor: 0xffffff,
+            // strokeAlpha: 1,
+            // strokeWidth: 2,
+            // radius: 0,
+            // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+        }
+        ```
+    - [Nine-slice](nineslice.md)
+        ```javascript
+        {
+            key: ,
+            frame: ,
+            leftWidth: , 
+            rightWidth: ,
+            topHeight: , 
+            bottomHeight: 
+        }
+        ```
 - `text` : 
     - [Style of bbcodetext](bbcodetext.md#add-text-object)
     - Style of bitmaptext

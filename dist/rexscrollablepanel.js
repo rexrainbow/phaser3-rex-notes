@@ -7108,15 +7108,19 @@
     if (!gameObject || newWidth === undefined && newHeight === undefined) {
       return;
     }
-    if (gameObject.resize) {
-      // Has `resize` method
+    if (gameObject.resize || gameObject.setSize) {
+      // Has `resize`, or `setSize` method
       if (newWidth === undefined) {
         newWidth = gameObject.width;
       }
       if (newHeight === undefined) {
         newHeight = gameObject.height;
       }
-      gameObject.resize(newWidth, newHeight);
+      if (gameObject.resize) {
+        gameObject.resize(newWidth, newHeight);
+      } else {
+        gameObject.setSize(newWidth, newHeight);
+      }
     } else {
       // Set display width/height
       if (newWidth !== undefined) {
@@ -12134,7 +12138,7 @@
         break;
       case 'nineSlice':
         if (PhaserNineSlice) {
-          gameObject = new PhaserNineSlice(scene, 0, 0, config.key, config.frame, 0, 0, config.leftWidth, config.rightHeight, config.topHeight, config.bottomHeight);
+          gameObject = new PhaserNineSlice(scene, 0, 0, config.key, config.frame, 0, 0, config.leftWidth, config.rightWidth, config.topHeight, config.bottomHeight);
         } else {
           gameObject = new NinePatch(scene, config);
         }

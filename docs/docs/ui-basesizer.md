@@ -19,6 +19,10 @@ sizer.addBackground(gameObject);
         ```javascript
         var gameObject = scene.rexUI.add.roundRectangle(x, y, width, height, radius, fillColor);
         ```    
+    - [Nine-slice](nineslice.md) game object
+        ```javascript
+        var gameObject = scene.add.nineslice(x, y, texture, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight);
+        ```
     - [Nine-patch](ninepatch.md) game object
         ```javascript
         var gameObject = scene.rexUI.add.ninePatch(x, y, width, height, key, columns, rows, config);
