@@ -50,9 +50,18 @@ class Blackboard {
         return this;
     }
 
+    setData(key, value, treeID, nodeID) {
+        this.set(key, value, treeID, nodeID);
+        return this;
+    }
+
     get(key, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
         return memory[key];
+    }
+
+    getData(key, treeID, nodeID) {
+        return this.get(key, treeID, nodeID);
     }
 
     has(key, treeID, nodeID) {
@@ -73,6 +82,10 @@ class Blackboard {
         }
     }
 
+    hasData(key, treeID, nodeID) {
+        return this.has(key, treeID, nodeID);
+    }
+
     inc(key, inc, treeID, nodeID) {
         var value;
         if (this.has(key, treeID, nodeID)) {
@@ -85,6 +98,11 @@ class Blackboard {
         return this;
     }
 
+    incData(key, inc, treeID, nodeID) {
+        this.inc(key, inc, treeID, nodeID);
+        return this;
+    }
+
     toggle(key, treeID, nodeID) {
         var value;
         if (this.has(key, treeID, nodeID)) {
@@ -94,6 +112,11 @@ class Blackboard {
         }
         value = !value;
         this.set(key, value, treeID, nodeID);
+        return this;
+    }
+
+    toggleData(key, treeID, nodeID) {
+        this.toggle(key, treeID, nodeID);
         return this;
     }
 
