@@ -4,32 +4,6 @@ import ParseNodes from './ParseNodes.js';
 import CreateIfDecorator from './CreateIfDecorator.js';
 import CreateTaskSequence from './CreateTaskSequence.js';
 
-/*
-# Title
-
-## Condition
-
-## Condition
-
-## Tag
-
-task
-
-task
-
-## Tag
-
-task
-
-task
-
-## Else
-
-task
-
-task
-*/
-
 var AddMarked = function (markedString, taskHandlers) {
     var headingTree = GetHeadingTree(markedString);
     var { conditionNodes, mainTaskNode, elseNodes } = ParseNodes(headingTree);
