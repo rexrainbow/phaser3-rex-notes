@@ -22,6 +22,7 @@ class AbortIf extends Decorator {
                 name,
                 properties: {
                     expression,
+                    returnSuccess,
                 },
             },
             nodePool

@@ -22,6 +22,7 @@ class ContinueIf extends Decorator {
                 name,
                 properties: {
                     expression,
+                    returnSuccess,
                 },
             },
             nodePool

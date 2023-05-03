@@ -19,6 +19,9 @@ class ForceFailure extends Decorator {
                 child,
                 title,
                 name,
+                properties: {
+                    returnRunning,
+                },
             },
             nodePool
         );

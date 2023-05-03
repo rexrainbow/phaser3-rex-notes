@@ -33,10 +33,6 @@ var ParseNodes = function (nodes) {
             case STATE_ELSE:
                 elseNodes.push(node);
                 break;
-
-            case STATE_END:
-                endNodes.push(node);
-                break;
         }
 
         if ((i + 1) < cnt) {

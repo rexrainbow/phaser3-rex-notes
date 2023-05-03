@@ -19,6 +19,9 @@ class ForceSuccess extends Decorator {
                 child,
                 title,
                 name,
+                properties: {
+                    returnRunning,
+                },
             },
             nodePool
         );
