@@ -6,24 +6,53 @@ import Tick from '../tick/Tick.js';
 
 class BehaviorTree {
 
-    constructor() {
+    constructor(
+        {
+            id,
+            title,
+            description
+        } = {}
+    ) {
 
-        this.id = CreateUUID();
+        if (id === undefined) {
+            id = CreateUUID();
+        }
+
+        this.id = id;
 
         this.category = TREE;
 
-        this.title = '';
+        this.title = title || '';
 
-        this.description = '';
+        this.description = description || '';
 
         this.properties = {};
 
         this._root = null;
     }
 
+    setTitle(title) {
+        this.title = title;
+        return this;
+    }
+
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
+    setDescription(description) {
+        this.description = description;
+        return this;
+    }
+
     setRoot(node) {
         this.root = node;
         return this;
+    }
+
+    getRoot() {
+        return this.root;
     }
 
     get root() {

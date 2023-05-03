@@ -1,25 +1,33 @@
-import { Sequence } from '../../nodes';
-import TypeConvert from '../../../../utils/string/TypeConvert';
+import { Sequence } from '../../behaviortree';
+import TypeConvert from '../../../utils/string/TypeConvert.js';
 import TaskAction from './TaskAction.js';
 
-var CreateTaskSequence = function (node, taskHandlers) {
-    var sequence = new Sequence();
+var CreateTaskSequence = function (node) {
     if (Array.isArray(node)) {
         var nodes = node;
-        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-            sequence.addChild(CreateTaskSequence(nodes[i]));
+        if (nodes.length === 1) {
+            return CreateTaskSequence(nodes[0]);
+
+        } else {
+            var sequence = new Sequence({ title: 'tags' });
+            for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+                sequence.addChild(CreateTaskSequence(nodes[i]));
+            }
+            return sequence;
+
         }
+
     } else {
+        var sequence = new Sequence();
         sequence.setTitle(node.title);
         var paragraphs = node.paragraphs;
         for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
             var taskData = GetTaskData(paragraphs[i]);
-            var taskAction = new TaskAction(taskData, taskHandlers);
+            var taskAction = new TaskAction(taskData);
             sequence.addChild(taskAction);
         }
+        return sequence;
     }
-
-    return sequence;
 }
 
 var GetTaskData = function (paragraph) {
@@ -28,14 +36,14 @@ var GetTaskData = function (paragraph) {
     }
 
     var lines = paragraph.text.split('\n');
-    taskData = {
+    var taskData = {
         name: lines[0],
         parameters: {}
     };
 
     var parameters = taskData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-        var [name, expression] = lines[i].split('=');
+        var [name, expression] = lines[i].trimLeft().split('=');
         parameters[name] = TypeConvert(expression);
     }
 

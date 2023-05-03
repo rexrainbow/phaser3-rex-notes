@@ -1,8 +1,8 @@
-import { Action, } from '../../nodes';
-import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
+import { Action, } from '../../behaviortree';
+import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
 
 class TaskAction extends Action {
-    constructor(config, taskHandlers) {
+    constructor(config) {
         // config: {name, parameters:{...} }        
         super({
             name: 'Task',
@@ -10,7 +10,6 @@ class TaskAction extends Action {
             properties: config,
         });
 
-        this.taskHandlers = taskHandlers;
         this.isRunning = false;
     }
 
@@ -24,7 +23,7 @@ class TaskAction extends Action {
             return;
         }
 
-        var taskHandlers = this.taskHandlers;
+        var taskHandlers = tick.taskHandlers;
         var handler = taskHandlers[taskName];
         if (!handler && taskHandlers.getHandler) {
             handler = taskHandlers.getHandler(taskName);
