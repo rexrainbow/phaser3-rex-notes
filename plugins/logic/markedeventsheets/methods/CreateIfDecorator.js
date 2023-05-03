@@ -14,7 +14,7 @@ var CreateIfDecorator = function (nodes) {
         default:
             condition = nodes.map(function (node) {
                 return `(${GetConditionString(node)})`
-            }).join(' or ');
+            }).join(' || ');
             break;
     }
 
@@ -31,7 +31,7 @@ var GetConditionString = function (node) {
         }
 
         var lines = paragraph.text.split('\n');
-        return lines.map(function (line) { return `(${line})` }).join(' and ');
+        return lines.map(function (line) { return `(${line})` }).join(' && ');
     }
     return 'true';
 }

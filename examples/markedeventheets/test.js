@@ -5,7 +5,11 @@ var content = `\
 
 ## Condition
 
-coin > 3
+coin > 5
+
+## Condition
+
+hp > 0
 
 ## Script
 
@@ -27,6 +31,7 @@ manager.addEventSheet(content);
 console.log(manager.dump())
 
 manager
-    .setData('coin', 10)
+    .setData('coin', 1)
+    .setData('hp', 4)
     .tick()
 console.log(manager.isRunning);
