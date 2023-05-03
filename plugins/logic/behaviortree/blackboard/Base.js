@@ -1,3 +1,5 @@
+import RemoveItem from '../../../utils/array/Remove.js';
+
 class Blackboard {
 
     constructor() {
@@ -13,7 +15,6 @@ class Blackboard {
         if (!this._treeMemory[treeID]) {
             this._treeMemory[treeID] = {
                 'nodeMemory': {},
-                'openNodes': [],
             };
         }
         return this._treeMemory[treeID];
@@ -51,8 +52,7 @@ class Blackboard {
     }
 
     setData(key, value, treeID, nodeID) {
-        this.set(key, value, treeID, nodeID);
-        return this;
+        return this.set(key, value, treeID, nodeID);
     }
 
     get(key, treeID, nodeID) {
@@ -69,7 +69,7 @@ class Blackboard {
         if (treeID !== undefined) {
             memory = this._treeMemory[treeID];
             if (memory && (nodeID !== undefined)) {
-                memory = treeMemory.nodeMemory[nodeID]
+                memory = treeMemory.nodeMemory[nodeID];
             }
         } else {
             memory = this._baseMemory;
@@ -99,8 +99,7 @@ class Blackboard {
     }
 
     incData(key, inc, treeID, nodeID) {
-        this.inc(key, inc, treeID, nodeID);
-        return this;
+        return this.inc(key, inc, treeID, nodeID);
     }
 
     toggle(key, treeID, nodeID) {
@@ -116,8 +115,42 @@ class Blackboard {
     }
 
     toggleData(key, treeID, nodeID) {
-        this.toggle(key, treeID, nodeID);
+        return this.toggle(key, treeID, nodeID);
+    }
+
+    removeTree(treeID) {
+        if (this._treeMemory[treeID]) {
+            delete this._treeMemory[treeID];
+        }
         return this;
+    }
+
+    removeTreeData(treeID) {
+        return this.removeTree(treeID);
+    }
+
+    removeNode(treeID, nodeID) {
+        var treeMemory = this._treeMemory[treeID];
+
+        if (treeMemory) {
+            if (treeMemory.nodeMemory[nodeID]) {
+                delete treeMemory.nodeMemory[nodeID];
+            }
+
+            var openNodes = treeMemory.$openNodes;
+            for (var i = 0, cnt = openNodes.length; i < cnt; i++) {
+                var node = openNodes[i];
+                if (node.id === nodeID) {
+                    RemoveItem(openNodes, nodeID);
+                    break;
+                }
+            }
+        }
+        return this;
+    }
+
+    removeNodeData(treeID, nodeID) {
+        return this.removeNodeData(treeID, nodeID);
     }
 
     getGlobalMemory() {

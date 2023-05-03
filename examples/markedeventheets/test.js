@@ -1,4 +1,5 @@
 import MarkedEventSheets from '../../plugins/logic/markedeventsheets/MarkedEventSheets';
+import EventEmitter from 'eventemitter3'
 
 var content = `\
 # Title
@@ -18,11 +19,14 @@ print
 
 `;
 
-var taskHandlers = {
+class TaskHandlers extends EventEmitter {
     print(config, blackboard) {
         console.log(config.text);
+        return this;
+        // Task will be running until 'complete' event fired
     }
 }
+var taskHandlers = new TaskHandlers();
 
 var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
