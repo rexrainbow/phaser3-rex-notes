@@ -23,7 +23,7 @@ class TaskAction extends Action {
             return;
         }
 
-        var taskHandlers = tick.taskHandlers;
+        var taskHandlers = tick.target;
         var handler = taskHandlers[taskName];
         if (!handler && taskHandlers.getHandler) {
             handler = taskHandlers.getHandler(taskName);
