@@ -41,7 +41,7 @@ var GetHeadingTree = function (text) {
                 if (item.lang) {
                     node.block = item.lang;
                 }
-                lastNode.paragraph.push(node);
+                lastNode.paragraphs.push(node);
                 break;
 
             // Ignore other kinds of items
@@ -54,7 +54,7 @@ var GetHeadingTree = function (text) {
 var CreateNewNode = function (title) {
     return {
         title: title,
-        paragraph: [],
+        paragraphs: [],
         children: [],
     }
 }

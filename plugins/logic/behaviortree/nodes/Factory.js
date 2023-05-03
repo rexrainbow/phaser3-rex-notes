@@ -21,6 +21,7 @@ import ShuffleSelector from './composites/ShuffleSelector.js';
 
 import Bypass from './decorators/Bypass.js';
 import ForceSuccess from './decorators/ForceSuccess.js';
+import ForceFailure from './decorators/ForceFailure.js';
 import Invert from './decorators/Invert.js';
 import TimeLimit from './decorators/TimeLimit.js';
 import Cooldown from './decorators/Cooldown.js';
@@ -85,6 +86,9 @@ ObjectFactory.register('bypass', function (config) {
 ObjectFactory.register('forceSuccess', function (config) {
     return new ForceSuccess(config);
 });
+ObjectFactory.register('forceFailure', function (config) {
+    return new ForceFailure(config);
+});
 ObjectFactory.register('invert', function (config) {
     return new Invert(config);
 });
@@ -139,6 +143,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.ShuffleSelector', ShuffleSelector);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Bypass', Bypass);
 SetValue(window, 'RexPlugins.BehaviorTree.ForceSuccess', ForceSuccess);
+SetValue(window, 'RexPlugins.BehaviorTree.ForceFailure', ForceFailure);
 SetValue(window, 'RexPlugins.BehaviorTree.Invert', Invert);
 SetValue(window, 'RexPlugins.BehaviorTree.TimeLimit', TimeLimit);
 SetValue(window, 'RexPlugins.BehaviorTree.Cooldown', Cooldown);
@@ -173,6 +178,7 @@ export {
 
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,

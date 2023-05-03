@@ -68,12 +68,7 @@ class Parallel extends Composite {
 
         var mainTaskStatus = nodeMemory.$mainTaskStatus;
         if (this.finishMode === 0) {
-            if (mainTaskStatus !== RUNNING) {
-                // Main task is not running
-                this.abortChildren(tick);
-            }
             return mainTaskStatus;
-
         } else {
             return (childIndexes.length > 0) ? RUNNING : mainTaskStatus;
         }

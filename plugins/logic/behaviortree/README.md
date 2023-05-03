@@ -4,7 +4,7 @@ Reference: https://github.com/behavior3/behavior3js/
 
 ## Nodes
 
-- Composite Nodes: [TODO] Close child nodes
+- Composite Nodes:
     - Selector : MemSelector
     - Sequence : MemSequence
     - Parallel :
@@ -14,10 +14,12 @@ Reference: https://github.com/behavior3/behavior3js/
     - SwitchSelector
     - WeightSelector : Random select a child with weight
     - ShuffleSelector : Shuffle children of selector
-- Decorators: [TODO] Abort children
+- Decorators:
     - If
     - Bypass
     - ForceSuccess
+    - ForceFailure
+    - Force
     - TimeLimit
         - Return FAILURE when timeout, else return child statue
     - Cooldown : 
@@ -28,8 +30,6 @@ Reference: https://github.com/behavior3/behavior3js/
     - RepeaterUntilSuccess
     - Invert
     - Limiter
-    - And : [TODO]
-    - Or : [TODO]
 - Actions:
     - Succeeder
     - Failer
@@ -53,9 +53,9 @@ else
 Map to
 
 - Selector
-    - ConditionA
+    - if-ConditionA
         - TaskA
-    - ConditionB
+    - if-ConditionB
         - TaskB   
     - Bypass
         - TaskC

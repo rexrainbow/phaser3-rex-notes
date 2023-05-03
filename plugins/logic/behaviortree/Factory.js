@@ -24,6 +24,7 @@ import {
 
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,
@@ -61,6 +62,7 @@ export {
     // Decorators
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,

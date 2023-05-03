@@ -1,15 +1,15 @@
 import Decorator from '../Decorator.js';
-import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
+import { FAILURE, SUCCESS, ERROR, RUNNING } from '../../constants.js';
 
 
-class ForceSuccess extends Decorator {
+class ForceFailure extends Decorator {
 
     constructor(
         {
             returnRunning = true,
             child = null,
             title,
-            name = 'ForceSuccess'
+            name = 'ForceFailure'
         } = {},
         nodePool
     ) {
@@ -38,8 +38,8 @@ class ForceSuccess extends Decorator {
         if (this.returnRunning && (status === RUNNING)) {
             return RUNNING;
         }
-        return SUCCESS;
+        return FAILURE;
     }
 };
 
-export default ForceSuccess;
+export default ForceFailure;

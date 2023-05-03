@@ -21,6 +21,7 @@ import ShuffleSelector from './composites/ShuffleSelector.js';
 
 import Bypass from './decorators/Bypass.js';
 import ForceSuccess from './decorators/ForceSuccess.js';
+import ForceFailure from './decorators/ForceFailure.js';
 import Invert from './decorators/Invert.js';
 import TimeLimit from './decorators/TimeLimit.js';
 import Cooldown from './decorators/Cooldown.js';
@@ -56,6 +57,7 @@ export {
 
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,

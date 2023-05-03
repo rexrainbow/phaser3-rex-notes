@@ -20,6 +20,7 @@ import CreateCooldownNode from './decorators/Cooldown.js';
 import CreateTimeLimitNode from './decorators/TimeLimit.js';
 import CreateInvertNode from './decorators/Invert.js';
 import CreateForceSuccessNode from './decorators/ForceSuccess.js';
+import CreateForceFailureNode from './decorators/ForceFailure.js';
 
 const CreateCompositeHandlers = {
     'selector': CreateSelectorNode,
@@ -47,6 +48,7 @@ const CreateDecoratorHandles = {
     'time-limit': CreateTimeLimitNode,
     'invert': CreateInvertNode,
     'force-true': CreateForceSuccessNode,
+    'force-false': CreateForceFailureNode,
 };
 
 export {

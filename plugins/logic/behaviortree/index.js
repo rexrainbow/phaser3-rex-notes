@@ -31,6 +31,7 @@ import {
 
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,
@@ -82,6 +83,7 @@ export {
 
     Bypass,
     ForceSuccess,
+    ForceFailure,
     Invert,
     TimeLimit,
     Cooldown,
