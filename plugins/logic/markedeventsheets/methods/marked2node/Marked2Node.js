@@ -1,5 +1,5 @@
 import GetHeadingTree from './GetHeadingTree.js';
-import { IfSelector, ForceFailure, Succeeder } from '../../behaviortree/index.js';
+import { IfSelector, ForceFailure, Succeeder } from '../../../behaviortree/index.js';
 import ParseNodes from './ParseNodes.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateTaskSequence from './CreateTaskSequence.js';

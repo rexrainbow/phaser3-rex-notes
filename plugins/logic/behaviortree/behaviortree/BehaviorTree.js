@@ -88,6 +88,21 @@ class BehaviorTree {
         return out;
     }
 
+    getChildrenNodes(parent, out) {
+        if (parent === undefined) {
+            parent = this.root;
+        }
+        if (out === undefined) {
+            out = [];
+        }
+
+        BreadthFirstSearch(parent, function (node) {
+            out.push(node)
+        });
+
+        return out;
+    }
+
     tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';

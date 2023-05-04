@@ -1,6 +1,6 @@
-import { Sequence } from '../../behaviortree';
-import TypeConvert from '../../../utils/string/TypeConvert.js';
-import TaskAction from './TaskAction.js';
+import { Sequence } from '../../../behaviortree';
+import TypeConvert from '../../../../utils/string/TypeConvert.js';
+import TaskAction from '../TaskAction.js';
 
 var CreateTaskSequence = function (node, {
     lineReturn = '\\'

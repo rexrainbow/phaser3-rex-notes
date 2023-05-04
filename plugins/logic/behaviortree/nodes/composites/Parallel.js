@@ -1,11 +1,12 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
     constructor(
         {
             finishMode = 0,
+            returnSuccess = true,
             children = [],
             services,
             title,
@@ -21,13 +22,15 @@ class Parallel extends Composite {
                 title,
                 name,
                 properties: {
-                    finishMode
+                    finishMode,
+                    returnSuccess
                 },
             },
             nodePool
         );
 
         this.finishMode = finishMode;
+        this.returnSuccess = returnSuccess;
     }
 
     open(tick) {
@@ -70,7 +73,13 @@ class Parallel extends Composite {
         if (this.finishMode === 0) {
             return mainTaskStatus;
         } else {
-            return (childIndexes.length > 0) ? RUNNING : mainTaskStatus;
+            if (childIndexes.length > 0) {
+                return RUNNING;
+            } else if (this.returnSuccess) {
+                return SUCCESS;
+            } else {
+                return mainTaskStatus;
+            }
         }
     }
 

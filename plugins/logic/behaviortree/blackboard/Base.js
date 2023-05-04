@@ -1,4 +1,3 @@
-import RemoveItem from '../../../utils/array/Remove.js';
 import DeepClone from '../../../utils/object/DeepClone.js';
 
 class Blackboard {
@@ -133,25 +132,14 @@ class Blackboard {
     removeNode(treeID, nodeID) {
         var treeMemory = this._treeMemory[treeID];
 
-        if (treeMemory) {
-            if (treeMemory.nodeMemory[nodeID]) {
-                delete treeMemory.nodeMemory[nodeID];
-            }
-
-            var openNodes = treeMemory.$openNodes;
-            for (var i = 0, cnt = openNodes.length; i < cnt; i++) {
-                var node = openNodes[i];
-                if (node.id === nodeID) {
-                    RemoveItem(openNodes, nodeID);
-                    break;
-                }
-            }
+        if (treeMemory && treeMemory.nodeMemory[nodeID]) {
+            delete treeMemory.nodeMemory[nodeID];
         }
         return this;
     }
 
     removeNodeData(treeID, nodeID) {
-        return this.removeNodeData(treeID, nodeID);
+        return this.removeNode(treeID, nodeID);
     }
 
     getGlobalMemory() {
