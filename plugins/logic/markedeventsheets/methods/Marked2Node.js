@@ -10,23 +10,16 @@ var Marked2Node = function (markedString) {
 
     var hasElseNode = elseNodes.length > 0;
 
-    var parentNode;
-    if (hasElseNode) {
-        parentNode = new Selector({ title: headingTree.title });
-    }
+    var parentNode = new Selector({ title: headingTree.title });
 
     var ifDecorator = CreateIfDecorator(conditionNodes);
     ifDecorator.addChild(CreateTaskSequence(mainTaskNode));
+    parentNode.addChild(ifDecorator);
 
     if (hasElseNode) {
-        parentNode.addChild(ifDecorator);
-
         var forceFailure = new ForceFailure();
         forceFailure.addChild(CreateTaskSequence(elseNodes[0]));
         parentNode.addChild(forceFailure);
-    } else {
-        ifDecorator.setTitle(headingTree.title);
-        parentNode = ifDecorator;
     }
 
     return parentNode;
