@@ -25,20 +25,27 @@ class TaskAction extends Action {
 
         var taskHandlers = tick.target;
         var handler = taskHandlers[taskName];
-        if (!handler && taskHandlers.getHandler) {
-            handler = taskHandlers.getHandler(taskName);
-        }
         if (!handler) {
-            return;
+            if (taskHandlers.getHandler) {
+                handler = taskHandlers.getHandler(taskName);
+            }
+            if (!handler) {
+                return;
+            }
         }
 
         var eventEmitter = handler.call(taskHandlers, taskData.parameters, tick.blackboard);
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
-            eventEmitter.once('complete', function () {
-                this.isRunning = false;
-            }, this)
+            this.$nextTick = taskHandlers.$nextTick;
+            eventEmitter.once('complete', this.onTaskComplete, this)
         }
+    }
+
+    onTaskComplete() {
+        this.isRunning = false;
+
+        this.$nextTick();
     }
 
     tick(tick) {
@@ -47,6 +54,7 @@ class TaskAction extends Action {
 
     close(tick) {
     }
+
 }
 
 export default TaskAction

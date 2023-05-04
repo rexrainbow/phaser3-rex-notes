@@ -1,7 +1,7 @@
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
 
-var DepthFirstSearch = function (root, callback) {
-    var skip = callback(root);
+var DepthFirstSearch = function (root, callback, scope) {
+    var skip = callback.call(scope, root);
 
     if (skip) {
         return;
@@ -11,19 +11,19 @@ var DepthFirstSearch = function (root, callback) {
         case COMPOSITE:
             var children = root.children;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
-                DepthFirstSearch(children[i], callback);
+                DepthFirstSearch(children[i], callback, scope);
             }
 
             var services = root.services;
             if (services) {
                 for (var i = 0, cnt = services.length; i < cnt; i++) {
-                    DepthFirstSearch(services[i], callback);
+                    DepthFirstSearch(services[i], callback, scope);
                 }
             }
             break;
 
         case DECORATOR:
-            DepthFirstSearch(root.child, callback);
+            DepthFirstSearch(root.child, callback, scope);
             break;
 
         case ACTION:
@@ -37,11 +37,11 @@ var DepthFirstSearch = function (root, callback) {
     }
 }
 
-var BreadthFirstSearch = function (root, callback) {
+var BreadthFirstSearch = function (root, callback, scope) {
     var queue = [root];
     while (queue.length > 0) {
         var current = queue.shift();
-        var skip = callback(current);
+        var skip = callback.call(scope, current);
 
         if (skip) {
             continue;

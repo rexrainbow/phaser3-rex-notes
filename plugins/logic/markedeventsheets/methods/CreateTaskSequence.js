@@ -31,32 +31,29 @@ var CreateTaskSequence = function (node) {
 }
 
 var GetTaskData = function (paragraph) {
+    var taskData;
     if (paragraph.hasOwnProperty('block')) {
-        return GetStringBlockData(paragraph);
+        taskData = ParseCommandString(paragraph.block, ',');
+        taskData.parameters.text = paragraph.text;
+    } else {
+        taskData = ParseCommandString(paragraph.text, '\n');
     }
 
-    var lines = paragraph.text.split('\n');
+    return taskData
+}
+
+var ParseCommandString = function (commandString, delimiter) {
+    var lines = commandString.split(delimiter);
     var taskData = {
         name: lines[0],
         parameters: {}
     };
-
     var parameters = taskData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
         var [name, expression] = lines[i].trimLeft().split('=');
         parameters[name] = TypeConvert(expression);
     }
-
     return taskData;
-}
-
-var GetStringBlockData = function (paragraph) {
-    return {
-        name: paragraph.block,
-        parameters: {
-            text: paragraph.text
-        }
-    }
 }
 
 export default CreateTaskSequence;

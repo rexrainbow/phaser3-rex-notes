@@ -3,6 +3,7 @@ import CreateUUID from '../utils/CreateUUID.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
 import Tick from '../tick/Tick.js';
+import { BreadthFirstSearch } from './Traversal.js';
 
 class BehaviorTree {
 
@@ -10,7 +11,8 @@ class BehaviorTree {
         {
             id,
             title,
-            description
+            description,
+            root = null
         } = {}
     ) {
 
@@ -28,7 +30,7 @@ class BehaviorTree {
 
         this.properties = {};
 
-        this._root = null;
+        this._root = root;
     }
 
     setTitle(title) {
@@ -71,14 +73,18 @@ class BehaviorTree {
         }
     }
 
-    getNodes(out) {
+    forEachNode(callback, scope) {
+        BreadthFirstSearch(this.root, callback, scope);
+        return this;
+    }
+
+    getAllNodes(out) {
         if (out === undefined) {
             out = [];
         }
-        if (this.root) {
-            this.root.getChildren(out);
-        }
-
+        this.forEachNode(function (node) {
+            out.push(node)
+        })
         return out;
     }
 
