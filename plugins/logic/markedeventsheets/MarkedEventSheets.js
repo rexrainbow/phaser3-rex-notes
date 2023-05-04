@@ -1,14 +1,16 @@
-import GetValue from '../../utils/object/GetValue.js';
 import { Blackboard, BehaviorTree, Parallel, RUNNING } from '../behaviortree';
 import Marked2Node from './methods/Marked2Node.js';
 import NOOP from '../../utils/object/NOOP.js';
 import GetCustomNodeMapping from './methods/GetCustomNodeMapping.js';
 
 class MarkedEventSheets {
-    constructor(config) {
-        this.setAutoNextTick(GetValue(config, 'autoNextTick', true));
+    constructor({
+        autoNextTick = true,
+        taskHandlers
+    } = {}) {
 
-        this.setTaskHandlers(GetValue(config, 'taskHandlers'));
+        this.setAutoNextTick(autoNextTick);
+        this.setTaskHandlers(taskHandlers);
 
         this.blackboard = new Blackboard();
 
@@ -26,10 +28,6 @@ class MarkedEventSheets {
     }
 
     setTaskHandlers(taskHandlers) {
-        if (taskHandlers) {
-            taskHandlers.$nextTick = (this.autoNextTick) ? this.tick.bind(this) : NOOP;
-        }
-
         this.taskHandlers = taskHandlers;
         return this;
     }
@@ -92,6 +90,7 @@ class MarkedEventSheets {
     }
 
     tick() {
+        this.taskHandlers.$nextTick = (this.autoNextTick) ? this.tick.bind(this) : NOOP;
         var state = this.tree.tick(this.blackboard, this.taskHandlers);
         this.isRunning = (state === RUNNING);
         return this;
