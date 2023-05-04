@@ -2,6 +2,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import { Blackboard, BehaviorTree, Parallel, RUNNING } from '../behaviortree';
 import Marked2Node from './methods/Marked2Node.js';
 import NOOP from '../../utils/object/NOOP.js';
+import GetCustomNodeMapping from './methods/GetCustomNodeMapping.js';
 
 class MarkedEventSheets {
     constructor(config) {
@@ -12,7 +13,7 @@ class MarkedEventSheets {
         this.blackboard = new Blackboard();
 
         BehaviorTree.setStartIDValue(0);
-        this.tree = new BehaviorTree({ id: 'tree' });
+        this.tree = new BehaviorTree({ id: '#tree' });
         this.tree.setRoot(new Parallel({ title: 'root', finishMode: 1 }))
     }
 
@@ -38,13 +39,33 @@ class MarkedEventSheets {
         return this;
     }
 
+    clearAllEventSheets() {
+        this.tree.setRoot(new Parallel({ title: 'root', finishMode: 1 }));
+        this.blackboard.removeTreeData(this.tree.id);
+        return this;
+    }
+
     removeEventSheet(title) {
         // TODO
         return this;
     }
 
-    dump() {
+    dumpTree() {
         return this.tree.dump();
+    }
+
+    loadTree(data) {
+        this.tree.load(data, GetCustomNodeMapping());
+        return this;
+    }
+
+    dumpData() {
+        return this.blackboard.dump();
+    }
+
+    loadData(data) {
+        this.blackboard.load(data);
+        return this;
     }
 
     setData(key, value) {

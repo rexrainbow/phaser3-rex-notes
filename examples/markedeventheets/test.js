@@ -57,9 +57,11 @@ var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
 });
 manager.addEventSheet(content);
-console.log(manager.dump())
+console.log(manager.dumpTree())
 
 manager
     .setData('coin', 1)
     .setData('hp', 4)
     .tick()
+
+console.log(manager.dumpData())

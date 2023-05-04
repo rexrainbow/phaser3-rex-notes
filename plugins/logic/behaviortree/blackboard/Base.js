@@ -1,4 +1,5 @@
 import RemoveItem from '../../../utils/array/Remove.js';
+import DeepClone from '../../../utils/object/DeepClone.js';
 
 class Blackboard {
 
@@ -163,6 +164,19 @@ class Blackboard {
 
     getNodeMemory(treeID, nodeID) {
         return this._getNodeMemory(this._getTreeMemory(treeID), nodeID);
+    }
+
+    dump() {
+        return {
+            base: DeepClone(this._baseMemory),
+            tree: DeepClone(this._treeMemory),
+        }
+    }
+
+    load(data) {
+        this._baseMemory = DeepClone(data.base);
+        this._treeMemory = DeepClone(data.tree);
+        return this;
     }
 };
 

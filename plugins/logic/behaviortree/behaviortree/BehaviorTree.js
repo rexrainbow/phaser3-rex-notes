@@ -105,8 +105,8 @@ class BehaviorTree {
         var state = this.root._execute(tick);
 
         /* POPULATE BLACKBOARD */
-        blackboard.set('$openNodes', tick._openNodes.slice(0), this.id);
-        blackboard.set('$nodeCount', tick._nodeCount, this.id);
+        // blackboard.set('$openNodes', tick._openNodes.slice(0), this.id);
+        // blackboard.set('$nodeCount', tick._nodeCount, this.id);
 
         return state;
     }
