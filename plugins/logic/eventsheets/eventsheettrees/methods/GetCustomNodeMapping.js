@@ -1,4 +1,4 @@
-import TaskAction from './TaskAction.js';
+import TaskAction from '../TaskAction.js';
 
 var customNodeClasses = [TaskAction];
 

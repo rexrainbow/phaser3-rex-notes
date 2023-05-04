@@ -12,6 +12,7 @@ class BehaviorTree {
             id,
             title,
             description,
+            properties,
             root = null
         } = {}
     ) {
@@ -28,7 +29,7 @@ class BehaviorTree {
 
         this.description = description || '';
 
-        this.properties = {};
+        this.properties = properties || {};
 
         this._root = root;
     }
@@ -122,6 +123,7 @@ class BehaviorTree {
         /* POPULATE BLACKBOARD */
         // blackboard.set('$openNodes', tick._openNodes.slice(0), this.id);
         // blackboard.set('$nodeCount', tick._nodeCount, this.id);
+        blackboard.set('$state', state, this.id);
 
         return state;
     }

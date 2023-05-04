@@ -39,7 +39,7 @@ class TaskAction extends Action {
         var eventEmitter = handler.call(taskHandlers, taskData.parameters, tick.blackboard);
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
-            this.$nextTick = taskHandlers.$nextTick;
+            this.$continue = taskHandlers.$continue;
             eventEmitter.once('complete', this.onTaskComplete, this)
         }
     }
@@ -47,7 +47,7 @@ class TaskAction extends Action {
     onTaskComplete() {
         this.isRunning = false;
 
-        this.$nextTick();
+        this.$continue();
     }
 
     tick(tick) {

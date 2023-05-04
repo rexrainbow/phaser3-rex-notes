@@ -69,16 +69,15 @@ class Parallel extends Composite {
             }
         }
 
-        var mainTaskStatus = nodeMemory.$mainTaskStatus;
         if (this.finishMode === 0) {
-            return mainTaskStatus;
+            return nodeMemory.$mainTaskStatus;
         } else {
             if (childIndexes.length > 0) {
                 return RUNNING;
             } else if (this.returnSuccess) {
                 return SUCCESS;
             } else {
-                return mainTaskStatus;
+                return nodeMemory.$mainTaskStatus;
             }
         }
     }

@@ -1,4 +1,4 @@
-import MarkedEventSheets from '../../plugins/logic/markedeventsheets/MarkedEventSheets';
+import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
@@ -33,7 +33,7 @@ var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
 });
 manager.addEventSheet(content);
-console.log(manager.dumpTree())
+console.log(manager.dumpTrees())
 
 manager
     .setData('coin', 1)

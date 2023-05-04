@@ -1,15 +1,16 @@
 import { BreadthFirstSearch } from './Traversal.js';
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
-import Clone from '../../../utils/object/Clone.js';
+import DeepClone from '../../../utils/object/DeepClone.js';
 import { GetSerialNumber } from '../utils/CreateID.js'
 
 var Dump = function () {
     var data = {
         sn: GetSerialNumber(),
+        id: this.id,
         title: this.title,
         description: this.description,
         root: (this.root) ? this.root.id : null,
-        properties: this.properties,
+        properties: DeepClone(this.properties),
         nodes: [],
     };
 
@@ -30,7 +31,7 @@ var Dump = function () {
             name: node.name,
             title: node.title,
             description: node.description,
-            properties: Clone(node.properties)
+            properties: DeepClone(node.properties)
         };
 
         switch (node.category) {
