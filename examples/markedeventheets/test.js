@@ -1,35 +1,6 @@
 import MarkedEventSheets from '../../plugins/logic/markedeventsheets/MarkedEventSheets';
 import EventEmitter from 'eventemitter3';
-
-var content = `\
-# Title
-
-## Condition
-
-coin > 5
-
-## Condition
-
-hp > 0
-
-## Script
-
-print
-  text=Hello
-
-\`\`\`print
-World
-
-
-World
-\`\`\`
-
-## Else
-
-print
-  text=Try again
-
-`;
+import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
 class TaskHandlers extends EventEmitter {
     print(config, blackboard) {

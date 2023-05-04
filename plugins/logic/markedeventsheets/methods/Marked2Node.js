@@ -1,26 +1,27 @@
 import GetHeadingTree from './GetHeadingTree.js';
-import { Selector, ForceFailure } from '../../behaviortree/index.js';
+import { IfSelector, ForceFailure, Succeeder } from '../../behaviortree/index.js';
 import ParseNodes from './ParseNodes.js';
-import CreateIfDecorator from './CreateIfDecorator.js';
+import GetConditionExpression from './GetConditionExpression.js';
 import CreateTaskSequence from './CreateTaskSequence.js';
 
 var Marked2Node = function (markedString) {
     var headingTree = GetHeadingTree(markedString);
     var { conditionNodes, mainTaskNode, elseNodes } = ParseNodes(headingTree.children);
 
-    var hasElseNode = elseNodes.length > 0;
+    var parentNode = new IfSelector({
+        title: headingTree.title,
+        expression: GetConditionExpression(conditionNodes)
+    });
 
-    var parentNode = new Selector({ title: headingTree.title });
+    parentNode.addChild(CreateTaskSequence(mainTaskNode));
 
-    var ifDecorator = CreateIfDecorator(conditionNodes);
-    ifDecorator.addChild(CreateTaskSequence(mainTaskNode));
-    parentNode.addChild(ifDecorator);
-
-    if (hasElseNode) {
-        var forceFailure = new ForceFailure();
+    var forceFailure = new ForceFailure();
+    if (elseNodes.length > 0) {
         forceFailure.addChild(CreateTaskSequence(elseNodes[0]));
-        parentNode.addChild(forceFailure);
+    } else {
+        forceFailure.addChild(new Succeeder());
     }
+    parentNode.addChild(forceFailure);
 
     return parentNode;
 }

@@ -1,28 +1,25 @@
-import { If } from '../../behaviortree';
-
-var CreateIfDecorator = function (nodes) {
-    var condition;
+var GetConditionExpression = function (nodes) {
+    var expression;
     switch (nodes.length) {
         case 0:
-            condition = 'true';
+            expression = 'true';
             break;
 
         case 1:
-            condition = GetConditionString(nodes[0]);
+            expression = GetANDExpression(nodes[0]);
             break;
 
         default:
-            condition = nodes.map(function (node) {
-                return `(${GetConditionString(node)})`
+            expression = nodes.map(function (node) {
+                return `(${GetANDExpression(node)})`
             }).join(' || ');
             break;
     }
 
-    var ifDecorator = new If({ title: 'condition', expression: condition });
-    return ifDecorator;
+    return expression;
 }
 
-var GetConditionString = function (node) {
+var GetANDExpression = function (node) {
     var paragraphs = node.paragraphs;
     for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
         var paragraph = paragraphs[i];
@@ -36,4 +33,4 @@ var GetConditionString = function (node) {
     return 'true';
 }
 
-export default CreateIfDecorator;
+export default GetConditionExpression;
