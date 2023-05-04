@@ -3,6 +3,8 @@ import {
     COMPOSITE, DECORATOR, ACTION, SERVICE
 } from './constants';
 
+import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from './utils/CreateID.js'
+
 import BehaviorTree from './behaviortree/BehaviorTree.js';
 import Blackboard from './blackboard/Blackboard.js';
 import Tick from './tick/Tick.js';
@@ -53,6 +55,11 @@ export {
     DECORATOR,
     ACTION,
     SERVICE,
+
+    CreateID,
+    SetSerialNumber,
+    SetSerialNumberPrefix,
+    GetSerialNumber,
 
     BehaviorTree,
     Blackboard,
