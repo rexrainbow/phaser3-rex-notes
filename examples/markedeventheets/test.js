@@ -24,6 +24,11 @@ World
 World
 \`\`\`
 
+## Else
+
+print
+  text=Try again
+
 `;
 
 class TaskHandlers extends EventEmitter {

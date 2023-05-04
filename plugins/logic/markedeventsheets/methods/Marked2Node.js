@@ -8,26 +8,25 @@ var Marked2Node = function (markedString) {
     var headingTree = GetHeadingTree(markedString);
     var { conditionNodes, mainTaskNode, elseNodes } = ParseNodes(headingTree.children);
 
-    var ifDecorator = CreateIfDecorator(conditionNodes)
-        .addChild(CreateTaskSequence(mainTaskNode));
+    var hasElseNode = elseNodes.length > 0;
 
     var parentNode;
-    if (elseNodes.length > 0) {
-        var forceFailure = new ForceFailure({
-            child: CreateTaskSequence(elseNodes[0])
-        })
+    if (hasElseNode) {
+        parentNode = new Selector({ title: headingTree.title });
+    }
 
-        parentNode = new Selector({
-            title: headingTree.title,
-            children: [
-                ifDecorator,
-                forceFailure
-            ]
-        });
+    var ifDecorator = CreateIfDecorator(conditionNodes);
+    ifDecorator.addChild(CreateTaskSequence(mainTaskNode));
 
+    if (hasElseNode) {
+        parentNode.addChild(ifDecorator);
+
+        var forceFailure = new ForceFailure();
+        forceFailure.addChild(CreateTaskSequence(elseNodes[0]));
+        parentNode.addChild(forceFailure);
     } else {
+        ifDecorator.setTitle(headingTree.title);
         parentNode = ifDecorator;
-
     }
 
     return parentNode;
