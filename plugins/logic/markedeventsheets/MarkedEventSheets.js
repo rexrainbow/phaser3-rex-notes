@@ -32,8 +32,10 @@ class MarkedEventSheets {
         return this;
     }
 
-    addEventSheet(markedString) {
-        this.tree.root.addChild(Marked2Node(markedString));
+    addEventSheet(markedString, {
+        lineReturn = '\\'
+    } = {}) {
+        this.tree.root.addChild(Marked2Node(markedString, { lineReturn }));
         return this;
     }
 

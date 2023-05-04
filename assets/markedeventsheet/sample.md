@@ -10,8 +10,9 @@ hp > 0
 
 ## Script
 
-print
-  text=Hello
+print\
+ text=Hello
+
 
 ```print
 World
@@ -22,5 +23,5 @@ World
 
 ## Else
 
-print
+print\
   text=Try again
