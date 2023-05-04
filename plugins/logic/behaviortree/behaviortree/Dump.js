@@ -1,14 +1,16 @@
 import { BreadthFirstSearch } from './Traversal.js';
 import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
 import Clone from '../../../utils/object/Clone.js';
+import { GetSerialNumber } from '../utils/CreateID.js'
 
 var Dump = function () {
     var data = {
+        sn: GetSerialNumber(),
         title: this.title,
         description: this.description,
         root: (this.root) ? this.root.id : null,
         properties: this.properties,
-        nodes: []
+        nodes: [],
     };
 
     if (!this.root) {

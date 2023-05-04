@@ -1,5 +1,5 @@
 import { TREE } from '../constants.js'
-import CreateUUID from '../utils/CreateUUID.js';
+import { CreateID, SetSerialNumber, GetSerialNumber } from '../utils/CreateID.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
 import Tick from '../tick/Tick.js';
@@ -17,7 +17,7 @@ class BehaviorTree {
     ) {
 
         if (id === undefined) {
-            id = CreateUUID();
+            id = CreateID();
         }
 
         this.id = id;
@@ -111,6 +111,13 @@ class BehaviorTree {
         return state;
     }
 
+    static setStartIDValue(value) {
+        SetSerialNumber(value);
+    }
+
+    static getSerialNumber() {
+        return GetSerialNumber();
+    }
 };
 
 var Methods = {

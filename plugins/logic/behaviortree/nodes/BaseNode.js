@@ -1,4 +1,4 @@
-import CreateUUID from '../utils/CreateUUID.js';
+import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
@@ -16,7 +16,7 @@ export default class BaseNode {
     ) {
 
         if (id === undefined) {
-            id = CreateUUID();
+            id = CreateID();
         }
 
         this.parent = null;

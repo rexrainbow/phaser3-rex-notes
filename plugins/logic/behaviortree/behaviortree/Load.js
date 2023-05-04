@@ -1,6 +1,9 @@
 import * as Nodes from '../nodes';
+import { SetSerialNumber } from '../utils/CreateID.js'
 
 var Load = function (data, names) {
+    SetSerialNumber(data.sn);
+
     names = names || {};
 
     this.title = data.title || this.title;

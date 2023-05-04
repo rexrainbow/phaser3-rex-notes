@@ -2,7 +2,6 @@ import {
     SUCCESS, FAILURE, RUNNING, ERROR,
     COMPOSITE, DECORATOR, ACTION, SERVICE
 } from './constants';
-import CreateUUID from './utils/CreateUUID.js';
 
 import BehaviorTree from './behaviortree/BehaviorTree.js';
 import Blackboard from './blackboard/Blackboard.js';
@@ -54,8 +53,6 @@ export {
     DECORATOR,
     ACTION,
     SERVICE,
-
-    CreateUUID,
 
     BehaviorTree,
     Blackboard,

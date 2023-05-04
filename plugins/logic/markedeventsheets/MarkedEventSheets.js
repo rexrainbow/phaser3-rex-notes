@@ -1,5 +1,5 @@
 import GetValue from '../../utils/object/GetValue.js';
-import { BehaviorTree, Parallel, Blackboard, RUNNING } from '../behaviortree';
+import { Blackboard, BehaviorTree, Parallel, RUNNING } from '../behaviortree';
 import Marked2Node from './methods/Marked2Node.js';
 import NOOP from '../../utils/object/NOOP.js';
 
@@ -10,9 +10,10 @@ class MarkedEventSheets {
         this.setTaskHandlers(GetValue(config, 'taskHandlers'));
 
         this.blackboard = new Blackboard();
-        this.tree = new BehaviorTree({
-            root: new Parallel({ title: 'root', finishMode: 1 })
-        });
+
+        BehaviorTree.setStartIDValue(0);
+        this.tree = new BehaviorTree();
+        this.tree.setRoot(new Parallel({ title: 'root', finishMode: 1 }))
     }
 
     setAutoNextTick(enabled) {
@@ -47,8 +48,26 @@ class MarkedEventSheets {
     }
 
     setData(key, value) {
-        this.blackboard.set(key, value);
+        this.blackboard.setData(key, value);
         return this;
+    }
+
+    hasData(key) {
+        return this.blackboard.hasData(key);
+    }
+
+    incData(key, inc) {
+        this.blackboard.incData(key, inc);
+        return this;
+    }
+
+    toggleData(key) {
+        this.blackboard.toggleData(key);
+        return this;
+    }
+
+    getData(key) {
+        return this.blackboard.getData(key);
     }
 
     tick() {
