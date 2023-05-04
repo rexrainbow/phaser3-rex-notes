@@ -1,5 +1,5 @@
 import { TREE } from '../constants.js'
-import { CreateID, SetSerialNumber, GetSerialNumber } from '../utils/CreateID.js';
+import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
 import Tick from '../tick/Tick.js';
@@ -117,6 +117,10 @@ class BehaviorTree {
 
     static getSerialNumber() {
         return GetSerialNumber();
+    }
+
+    static setSerialIDPrefix(prefix) {
+        SetSerialNumberPrefix(prefix);
     }
 };
 

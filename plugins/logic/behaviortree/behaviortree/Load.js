@@ -1,8 +1,11 @@
 import * as Nodes from '../nodes';
-import { SetSerialNumber } from '../utils/CreateID.js'
+import { GetSerialNumber, SetSerialNumber } from '../utils/CreateID.js'
 
 var Load = function (data, names) {
-    SetSerialNumber(data.sn);
+    var sn = data.sn;
+    if (sn != null) {
+        SetSerialNumber(Math.max(GetSerialNumber(), sn))
+    }
 
     names = names || {};
 

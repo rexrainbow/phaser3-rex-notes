@@ -1,6 +1,7 @@
 import UUID from '../../../utils/string/UUID.js';
 
 var sn = null;
+var snPrefix = '#';
 
 var SetSerialNumber = function (value) {
     if (value === undefined) {
@@ -8,6 +9,10 @@ var SetSerialNumber = function (value) {
     }
 
     sn = value;
+}
+
+var SetSerialNumberPrefix = function (prefix) {
+    snPrefix = prefix;
 }
 
 var GetSerialNumber = function () {
@@ -20,11 +25,12 @@ var CreateID = function () {
     }
 
     sn += 1;
-    return sn.toString();
+    return `${snPrefix}${sn}`;
 }
 
 export {
     CreateID,
     SetSerialNumber,
+    SetSerialNumberPrefix,
     GetSerialNumber,
 };

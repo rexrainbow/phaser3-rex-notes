@@ -12,7 +12,7 @@ class MarkedEventSheets {
         this.blackboard = new Blackboard();
 
         BehaviorTree.setStartIDValue(0);
-        this.tree = new BehaviorTree();
+        this.tree = new BehaviorTree({ id: 'tree' });
         this.tree.setRoot(new Parallel({ title: 'root', finishMode: 1 }))
     }
 
