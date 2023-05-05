@@ -10,4 +10,19 @@ set
   coin=3
 
 print
-  text=Event 0
+  text=Event 0 start
+
+wait
+
+print
+  text=Event 0 progress 0
+
+wait
+
+print
+  text=Event 0 progress 1
+
+wait
+
+print
+  text=Event 0 complete

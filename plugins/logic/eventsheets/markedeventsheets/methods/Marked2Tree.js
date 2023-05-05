@@ -1,4 +1,5 @@
 import { BehaviorTree, IfSelector, ForceFailure, Succeeder } from '../../../behaviortree/index.js';
+import EventBehaviorTree from '../../eventsheettrees/EventBehaviorTree.js';
 import GetHeadingTree from './GetHeadingTree.js';
 import GetTreeConfig from './GetTreeConfig.js';
 
@@ -19,9 +20,10 @@ var Marked2Tree = function (markedString, {
         parallel = treeConfig.parallel;
     }
 
-    var tree = new BehaviorTree({
+    var tree = new EventBehaviorTree({
         title: headingTree.title
     })
+    tree.setParallel(parallel);
 
     var rootNode = new IfSelector({
         title: 'condition',

@@ -4,8 +4,18 @@ import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel1.md';
 
 class TaskHandlers extends EventEmitter {
-    print(config, manager) {
-        console.log(config.text);
+    constructor({
+        waitDuration = 1000
+    } = {}) {
+        super();
+
+        this.defaultWaitDuration = waitDuration;
+    }
+
+    print({
+        text = ''
+    } = {}, manager) {
+        console.log(text);
     }
 
     set(config, manager) {
@@ -14,24 +24,27 @@ class TaskHandlers extends EventEmitter {
         }
     }
 
-    wait(config, manager) {
-        if (typeof (config) === 'number') {
-            config = { duration: config };
-        }
-
+    wait({
+        duration = this.defaultWaitDuration
+    } = {}, manager) {
         var self = this;
         setTimeout(function () {
             self.complete();
-        }, config.duration)
+        }, duration)
+        return this;
+    }
+
+    complete() {
+        this.emit('complete');
         return this;
     }
 }
-var taskHandlers = new TaskHandlers();
 
 var manager = new MarkedEventSheets({
-    taskHandlers: taskHandlers,
+    taskHandlers: new TaskHandlers(),
     parallel: true
 });
+
 manager
     .addEventSheet(eventSheet0)
     .addEventSheet(eventSheet1);
@@ -40,6 +53,9 @@ console.log(manager.dumpTrees())
 
 manager
     .setData('coin', 10)
+    .on('complete', function () {
+        console.log('..Execute events complete..')
+    })
     .tick()
 
 console.log(manager.dumpData())
