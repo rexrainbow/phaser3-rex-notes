@@ -21,16 +21,32 @@ var GetConditionExpression = function (nodes) {
 
 var GetANDExpression = function (node) {
     var paragraphs = node.paragraphs;
+    var lines = [];
     for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
         var paragraph = paragraphs[i];
         if (paragraph.hasOwnProperty('block')) {
             continue;
         }
 
-        var lines = paragraph.text.split('\n');
-        return lines.map(function (line) { return `(${line})` }).join(' && ');
+        lines.push(...paragraph.text.split('\n'))
     }
-    return 'true';
+
+    var expression;
+    switch (lines.length) {
+        case 0:
+            expression = 'true';
+            break;
+
+        case 1:
+            expression = lines[0];
+            break;
+
+        default:
+            expression = lines.map(function (line) { return `(${line})` }).join(' && ');
+            break;
+
+    }
+    return expression;
 }
 
 export default GetConditionExpression;
