@@ -3,14 +3,14 @@ import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
 class TaskHandlers extends EventEmitter {
-    print(config, blackboard) {
+    print(config, manager) {
         console.log(config.text);
         this.wait(1000);
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    wait(config, blackboard) {
+    wait(config, manager) {
         if (typeof (config) === 'number') {
             config = { duration: config };
         }

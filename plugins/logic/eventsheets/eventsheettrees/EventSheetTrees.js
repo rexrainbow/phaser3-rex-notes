@@ -13,6 +13,8 @@ class EventSheetTrees {
         this.setTaskHandlers(taskHandlers);
 
         this.blackboard = new Blackboard();
+        this.blackboard.treeManager = this; // For TaskAction
+
         this.trees = [];
     }
 

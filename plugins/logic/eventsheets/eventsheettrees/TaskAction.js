@@ -36,7 +36,11 @@ class TaskAction extends Action {
             }
         }
 
-        var eventEmitter = handler.call(taskHandlers, taskData.parameters, tick.blackboard);
+        var eventEmitter = handler.call(taskHandlers,
+            taskData.parameters,
+            tick.blackboard.treeManager
+        );
+
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
             this.$continue = taskHandlers.$continue;

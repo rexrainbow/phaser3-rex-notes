@@ -4,6 +4,11 @@ import { BehaviorTree } from '../../../behaviortree';
 import DeepClone from '../../../../utils/object/DeepClone.js';
 
 export default {
+    // Override it
+    addEventSheet(s, config) {
+
+    },
+
     addTree(tree) {
         this.trees.push(tree);
         return this;

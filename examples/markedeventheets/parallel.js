@@ -4,17 +4,17 @@ import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel1.md';
 
 class TaskHandlers extends EventEmitter {
-    print(config, blackboard) {
+    print(config, manager) {
         console.log(config.text);
     }
 
-    set(config, blackboard) {
+    set(config, manager) {
         for (var name in config) {
-            blackboard.set(name, config[name]);
+            manager.setData(name, config[name]);
         }
     }
 
-    wait(config, blackboard) {
+    wait(config, manager) {
         if (typeof (config) === 'number') {
             config = { duration: config };
         }
