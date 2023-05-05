@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, PENDING, ERROR } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
@@ -47,6 +47,8 @@ class Parallel extends Composite {
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
         var hasAnyFinishStatus = false;
+        var hasAnyPendingStatus = false;
+        var hasAnyRunningStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
             var status = this.children[childIndex]._execute(tick);
@@ -55,15 +57,28 @@ class Parallel extends Composite {
             if (childIndex === 0) {
                 nodeMemory.$mainTaskStatus = status;
             }
-            if ((status === SUCCESS) || (status === FAILURE)) {
-                hasAnyFinishStatus = true;
+
+            switch (status) {
+                case SUCCESS:
+                case FAILURE:
+                    hasAnyFinishStatus = true;
+                    break;
+
+                case RUNNING:
+                    hasAnyRunningStatus = true;
+                    break;
+
+                case PENDING:
+                    hasAnyPendingStatus = true;
+                    break;
             }
         }
 
         // Clear none-running child
         if (hasAnyFinishStatus) {
             for (var childIndex in statusMap) {
-                if (statusMap[childIndex] !== RUNNING) {
+                var status = statusMap[childIndex];
+                if ((status === SUCCESS) || (status === FAILURE)) {
                     RemoveItem(childIndexes, parseInt(childIndex));
                 }
             }
@@ -72,7 +87,9 @@ class Parallel extends Composite {
         if (this.finishMode === 0) {
             return nodeMemory.$mainTaskStatus;
         } else {
-            if (childIndexes.length > 0) {
+            if (hasAnyPendingStatus) {
+                return PENDING;
+            } else if (hasAnyRunningStatus) {
                 return RUNNING;
             } else if (this.returnSuccess) {
                 return SUCCESS;
