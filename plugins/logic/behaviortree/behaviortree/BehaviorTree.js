@@ -32,6 +32,8 @@ class BehaviorTree {
         this.properties = properties || {};
 
         this._root = root;
+
+        this.ticker = new Tick();
     }
 
     setTitle(title) {
@@ -109,20 +111,18 @@ class BehaviorTree {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
         }
 
-        /* CREATE TICK OBJECT */
-        // TODO: Reuse tick object
-        var tick = new Tick();
-        tick
+        var ticker = this.ticker;
+        ticker.reset()
             .setBlackBoard(blackboard).setTree(this)
             .setTarget(target)
             .reset();
 
         /* TICK NODE */
-        var state = this.root._execute(tick);
+        var state = this.root._execute(ticker);
 
         /* POPULATE BLACKBOARD */
-        // blackboard.set('$openNodes', tick._openNodes.slice(0), this.id);
-        // blackboard.set('$nodeCount', tick._nodeCount, this.id);
+        // blackboard.set('$openNodes', ticker._openNodes.slice(0), this.id);
+        // blackboard.set('$nodeCount', ticker._nodeCount, this.id);
         blackboard.set(TREE_STATE, state, this.id);
 
         return state;
