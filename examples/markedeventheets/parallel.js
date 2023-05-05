@@ -56,6 +56,6 @@ manager
     .on('complete', function () {
         console.log('..Execute events complete..')
     })
-    .tick()
+    .start()
 
 console.log(manager.dumpData())

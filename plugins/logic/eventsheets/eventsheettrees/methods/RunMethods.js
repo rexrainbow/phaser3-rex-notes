@@ -2,14 +2,19 @@ import { RUNNING, PENDING, SUCCESS, FAILURE, ERROR } from '../../../behaviortree
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 export default {
-    tick() {
+    start() {
+        if (this.isRunning) {
+            return this;
+        }
+
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
         var blackboard = this.blackboard;
         var taskHandlers = this.taskHandlers;
 
         pendingTrees.length = 0;
-        // Run parallel node, will return pending, or failure
+        this.isRunning = true;
+        // Run parallel tree, will return pending, or failure
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
 
@@ -23,12 +28,16 @@ export default {
             }
         }
 
-        this.continue();
+        this._continue();
 
         return this;
     },
 
-    continue() {
+    _continue() {
+        if (!this.isRunning || this.isPaused) {
+            return this;
+        }
+
         var trees = this.pendingTrees;
         var closedTrees = this.closedTrees;
         var blackboard = this.blackboard;
@@ -51,9 +60,25 @@ export default {
         }
 
         if (trees.length === 0) {
+            this.isRunning = false;
             this.emit('complete', this);
         }
 
         return this;
-    }
+    },
+
+    paused() {
+        this.isPaused = true;
+        return this;
+    },
+
+    resume() {
+        if (!this.isPaused) {
+            return this;
+        }
+        if (this.isRunning) {
+            this._continue();
+        }
+        return this;
+    },
 }

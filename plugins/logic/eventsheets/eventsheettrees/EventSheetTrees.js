@@ -2,7 +2,7 @@ import EventEmitter from 'eventemitter3';
 import { BehaviorTree, Blackboard } from '../../behaviortree';
 import TreeMethods from './methods/TreeMethods.js';
 import DataMethods from './methods/DataMethods.js';
-import TickMethods from './methods/TickMethods.js';
+import RunMethods from './methods/RunMethods.js';
 
 BehaviorTree.setStartIDValue(0);
 
@@ -22,12 +22,15 @@ class EventSheetTrees extends EventEmitter {
 
         this.trees = [];
         this.pendingTrees = [];
-        this.closedTrees = [];
+        this.closedTrees = [];  // Temporary tree array
+
+        this.isRunning = false;
+        this.isPaused = false;
     }
 
     setTaskHandlers(taskHandlers) {
         this.taskHandlers = taskHandlers;
-        this.taskHandlers.$continue = this.continue.bind(this);
+        this.taskHandlers.$continue = this._continue.bind(this);
         return this;
     }
 
@@ -37,7 +40,7 @@ Object.assign(
     EventSheetTrees.prototype,
     TreeMethods,
     DataMethods,
-    TickMethods,
+    RunMethods,
 )
 
 export default EventSheetTrees;

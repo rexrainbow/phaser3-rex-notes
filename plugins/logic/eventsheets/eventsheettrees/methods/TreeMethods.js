@@ -1,6 +1,6 @@
 import GetCustomNodeMapping from './GetCustomNodeMapping.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
-import { BehaviorTree } from '../../../behaviortree';
+import { BehaviorTree, PENDING, RUNNING } from '../../../behaviortree';
 import DeepClone from '../../../../utils/object/DeepClone.js';
 
 export default {
@@ -14,11 +14,17 @@ export default {
         return this;
     },
 
+    getTreeState(tree) {
+        var treeID = (typeof (tree) === 'string') ? tree : tree.id;
+        return this.blackboard.getTreeState(treeID);
+    },
+
     clearAllEventSheets() {
         this.trees.forEach(function (tree) {
             this.blackboard.removeTreeData(tree.id);
         }, this)
         this.trees.length = 0;
+        this.pendingTrees.length = 0;
         return this;
     },
 
@@ -38,11 +44,20 @@ export default {
             if (!tree.title === title) {
                 return;
             }
+            var status = this.getTreeState(tree);
+            if (status === RUNNING) {
+                // Can't remove RUNNING tree
+                return;
+            }
+
             removedTrees.push(tree);
             this.blackboard.removeTreeData(tree.id);
         }, this);
 
-        RemoveItem(this.trees, removedTrees);
+        if (removedTrees.length > 0) {
+            RemoveItem(this.trees, removedTrees);
+            RemoveItem(this.pendingTrees, removedTrees);
+        }
 
         return this;
     },

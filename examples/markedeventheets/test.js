@@ -38,6 +38,6 @@ console.log(manager.dumpTrees())
 manager
     .setData('coin', 1)
     .setData('hp', 4)
-    .tick()
+    .start()
 
 console.log(manager.dumpData())
