@@ -18,6 +18,7 @@ var Marked2Tree = function (markedString, {
     if (treeConfig.hasOwnProperty('parallel')) {
         parallel = treeConfig.parallel;
     }
+
     var tree = new BehaviorTree({
         title: headingTree.title
     })

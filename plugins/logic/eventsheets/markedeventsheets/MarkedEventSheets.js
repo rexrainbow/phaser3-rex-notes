@@ -13,12 +13,8 @@ class MarkedEventSheets extends EventSheetTrees {
 
     addEventSheet(markedString, {
         lineReturn = '\\',
-        parallel
+        parallel = this.parallel
     } = {}) {
-
-        if (parallel === undefined) {
-            parallel = this.parallel;
-        }
 
         var tree = Marked2Tree(markedString, {
             lineReturn,
