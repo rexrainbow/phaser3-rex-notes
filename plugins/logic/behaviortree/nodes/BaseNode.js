@@ -1,6 +1,6 @@
 import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
-import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR, PENDING } from '../constants.js';
 
 export default class BaseNode {
 
@@ -79,7 +79,7 @@ export default class BaseNode {
         var status = this._tick(tick);
 
         // CLOSE
-        if (status !== RUNNING) {
+        if ((status === SUCCESS) || (status === FAILURE) || (status === ERROR)) {
             this._close(tick);
         }
 
@@ -165,6 +165,10 @@ export default class BaseNode {
 
     get RUNNING() {
         return RUNNING;
+    }
+
+    get PENDING() {
+        return PENDING;
     }
 
     get ERROR() {

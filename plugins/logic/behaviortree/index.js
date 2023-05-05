@@ -1,5 +1,5 @@
 import {
-    SUCCESS, FAILURE, RUNNING, ERROR,
+    SUCCESS, FAILURE, RUNNING, ERROR, PENDING,
     COMPOSITE, DECORATOR, ACTION, SERVICE
 } from './constants';
 
@@ -50,6 +50,7 @@ export {
     FAILURE,
     RUNNING,
     ERROR,
+    PENDING,
 
     COMPOSITE,
     DECORATOR,

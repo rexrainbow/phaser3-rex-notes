@@ -1,4 +1,4 @@
-import { TREE } from '../constants.js'
+import { TREE, TREE_STATE } from '../constants.js'
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
@@ -123,7 +123,7 @@ class BehaviorTree {
         /* POPULATE BLACKBOARD */
         // blackboard.set('$openNodes', tick._openNodes.slice(0), this.id);
         // blackboard.set('$nodeCount', tick._nodeCount, this.id);
-        blackboard.set('$state', state, this.id);
+        blackboard.set(TREE_STATE, state, this.id);
 
         return state;
     }

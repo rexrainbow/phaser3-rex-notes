@@ -1,10 +1,11 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR, PENDING } from '../../constants.js';
 
 class IfSelector extends Composite {
     constructor(
         {
             expression = 'true',
+            returnPending = false,
             children = [],
             services,
             title,
@@ -20,13 +21,15 @@ class IfSelector extends Composite {
                 title,
                 name,
                 properties: {
-                    expression
+                    expression,
+                    returnPending,
                 },
             },
             nodePool
         );
 
         this.expression = this.addBooleanExpression(expression);
+        this.returnPending = returnPending;
     }
 
     open(tick) {
@@ -43,11 +46,16 @@ class IfSelector extends Composite {
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
             childIndex = tick.evalExpression(this.expression) ? 0 : 1;
+            if (this.returnPending) {
+                nodeMemory.$runningChild = childIndex;
+                return PENDING;
+            }
         }
 
         var child = this.children[childIndex];
         var status = child._execute(tick);
         nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
+
         return status;
     }
 

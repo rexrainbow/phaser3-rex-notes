@@ -45,6 +45,11 @@ class Decorator extends BaseNode {
             this.child._abort(tick);
         }
     }
+
+    openChild(tick) {
+        this.child.setOpenState(tick, true);
+        return this;
+    }
 };
 
 export default Decorator;

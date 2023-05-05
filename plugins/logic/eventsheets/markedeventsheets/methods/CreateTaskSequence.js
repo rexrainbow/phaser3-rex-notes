@@ -56,7 +56,10 @@ var ParseCommandString = function (commandString, delimiter, lineReturn) {
     };
     var parameters = taskData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-        var [name, expression] = TrimString(lines[i], lineReturn).split('=');
+        var line = TrimString(lines[i], lineReturn);
+        var index = line.indexOf('=');
+        var name = line.substring(0, index);
+        var expression = line.substring(index + 1);
         parameters[name] = TypeConvert(expression);
     }
     return taskData;

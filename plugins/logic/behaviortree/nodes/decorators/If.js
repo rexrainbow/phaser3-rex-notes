@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
+import { FAILURE, SUCCESS, ERROR, PENDING } from '../../constants.js';
 
 
 class If extends Decorator {
@@ -7,6 +7,7 @@ class If extends Decorator {
     constructor(
         {
             expression = 'true',
+            returnPending = false,
             child = null,
             title,
             name = 'If'
@@ -21,12 +22,14 @@ class If extends Decorator {
                 name,
                 properties: {
                     expression,
+                    returnPending
                 },
             },
             nodePool
         );
 
         this.expression = this.addBooleanExpression(expression);
+        this.returnPending = returnPending;
     }
 
     tick(tick) {
@@ -39,6 +42,9 @@ class If extends Decorator {
             // Return FAILURE to run next node
             if (!tick.evalExpression(this.expression)) {
                 return FAILURE;
+            } else if (this.returnPending) {
+                this.openChild(); // Open child but not run it now
+                return PENDING;
             }
         }
 

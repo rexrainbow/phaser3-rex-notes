@@ -17,7 +17,8 @@ var Marked2Tree = function (markedString, {
 
     var rootNode = new IfSelector({
         title: 'condition',
-        expression: GetConditionExpression(conditionNodes)
+        expression: GetConditionExpression(conditionNodes),
+        returnPending: true
     });
     tree.setRoot(rootNode)
 
