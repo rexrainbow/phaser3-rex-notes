@@ -3,16 +3,28 @@ import Marked2Tree from './methods/Marked2Tree.js';
 
 class MarkedEventSheets extends EventSheetTrees {
     constructor({
-        taskHandlers
+        taskHandlers,
+        parallel = false,
     } = {}) {
         super({ taskHandlers });
+
+        this.parallel = parallel;
     }
 
     addEventSheet(markedString, {
-        lineReturn = '\\'
+        lineReturn = '\\',
+        parallel
     } = {}) {
 
-        var tree = Marked2Tree(markedString, { lineReturn });
+        if (parallel === undefined) {
+            parallel = this.parallel;
+        }
+
+        var tree = Marked2Tree(markedString, {
+            lineReturn,
+            parallel
+        });
+
         this.addTree(tree);
         return this;
     }

@@ -1,4 +1,5 @@
 import { Sequence } from '../../../behaviortree';
+import ParseProperty from './ParseProperty';
 import TypeConvert from '../../../../utils/string/TypeConvert.js';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
 
@@ -56,11 +57,7 @@ var ParseCommandString = function (commandString, delimiter, lineReturn) {
     };
     var parameters = taskData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-        var line = TrimString(lines[i], lineReturn);
-        var index = line.indexOf('=');
-        var name = line.substring(0, index);
-        var expression = line.substring(index + 1);
-        parameters[name] = TypeConvert(expression);
+        ParseProperty(TrimString(lines[i], lineReturn), parameters);
     }
     return taskData;
 }

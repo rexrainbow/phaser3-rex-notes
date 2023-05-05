@@ -1,16 +1,23 @@
-import GetHeadingTree from './GetHeadingTree.js';
 import { BehaviorTree, IfSelector, ForceFailure, Succeeder } from '../../../behaviortree/index.js';
+import GetHeadingTree from './GetHeadingTree.js';
+import GetTreeConfig from './GetTreeConfig.js';
+
 import ParseNodes from './ParseNodes.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateTaskSequence from './CreateTaskSequence.js';
 
 var Marked2Tree = function (markedString, {
-    lineReturn = '\\'
+    lineReturn = '\\',
+    parallel = false,
 } = {}) {
 
     var headingTree = GetHeadingTree(markedString);
+    var treeConfig = GetTreeConfig(headingTree.paragraphs);
     var { conditionNodes, mainTaskNode, elseNodes } = ParseNodes(headingTree.children);
 
+    if (treeConfig.hasOwnProperty('parallel')) {
+        parallel = treeConfig.parallel;
+    }
     var tree = new BehaviorTree({
         title: headingTree.title
     })
@@ -18,7 +25,7 @@ var Marked2Tree = function (markedString, {
     var rootNode = new IfSelector({
         title: 'condition',
         expression: GetConditionExpression(conditionNodes),
-        returnPending: true
+        returnPending: parallel
     });
     tree.setRoot(rootNode)
 
