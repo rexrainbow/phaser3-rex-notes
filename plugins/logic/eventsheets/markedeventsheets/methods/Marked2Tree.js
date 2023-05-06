@@ -1,6 +1,5 @@
 import { ForceFailure, Succeeder } from '../../../behaviortree/index.js';
 import EventBehaviorTree from '../../eventsheettrees/EventBehaviorTree.js';
-import EventCondition from '../../eventsheettrees/EventCondition.js';
 import GetHeadingTree from './GetHeadingTree.js';
 import GetTreeConfig from './GetTreeConfig.js';
 
@@ -17,21 +16,15 @@ var Marked2Tree = function (markedString, {
     var treeConfig = GetTreeConfig(headingTree.paragraphs);
     var { conditionNodes, mainTaskNode, elseNodes } = ParseNodes(headingTree.children);
 
-    if (treeConfig.hasOwnProperty('parallel')) {
-        parallel = treeConfig.parallel;
-    }
+    var { parallel = parallel } = treeConfig;
 
     var tree = new EventBehaviorTree({
-        title: headingTree.title
+        title: headingTree.title,
+        parallel: parallel,
+        condition: GetConditionExpression(conditionNodes)
     })
-    tree.setParallel(parallel);
 
-    var rootNode = new EventCondition({
-        title: 'condition',
-        expression: GetConditionExpression(conditionNodes)
-    });
-    tree.setRoot(rootNode)
-
+    var rootNode = tree.root;
     rootNode.addChild(CreateTaskSequence(mainTaskNode), { lineReturn });
 
     var forceFailure = new ForceFailure();
