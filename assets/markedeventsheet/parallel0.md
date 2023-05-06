@@ -1,4 +1,4 @@
-# Event 0
+# Event sheet 0
 
 ## Condition
 
@@ -26,3 +26,8 @@ wait
 
 print
   text=Event 0 complete
+
+## Else
+
+print
+  text=Else, Event 0

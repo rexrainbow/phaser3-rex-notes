@@ -6,6 +6,11 @@ class Blackboard extends Base {
         return this.get(TREE_STATE, treeID);
     }
 
+    setTreeState(treeID, state) {
+        this.set(TREE_STATE, state, treeID);
+        return this;
+    }
+
     setCurrentTime(time) {
         this.set(CURRENT_TIME, time);
     }

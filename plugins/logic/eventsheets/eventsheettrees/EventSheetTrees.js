@@ -25,7 +25,6 @@ class EventSheetTrees extends EventEmitter {
         this.closedTrees = [];  // Temporary tree array
 
         this.isRunning = false;
-        this.isPaused = false;
     }
 
     setTaskHandlers(taskHandlers) {

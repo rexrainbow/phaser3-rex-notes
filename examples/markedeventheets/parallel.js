@@ -42,7 +42,7 @@ class TaskHandlers extends EventEmitter {
 
 var manager = new MarkedEventSheets({
     taskHandlers: new TaskHandlers(),
-    parallel: true
+    // parallel: true
 });
 
 manager
@@ -53,6 +53,12 @@ console.log(manager.dumpTrees())
 
 manager
     .setData('coin', 10)
+    .on('enter', function(title){
+        console.log(`..Enter event sheet '${title}'..`)
+    })
+    .on('exit', function(title){
+        console.log(`..Exit event sheet '${title}'..`)
+    })
     .on('complete', function () {
         console.log('..Execute events complete..')
     })

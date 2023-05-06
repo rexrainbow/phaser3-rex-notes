@@ -1,4 +1,4 @@
-import { RUNNING, PENDING, SUCCESS, FAILURE, ERROR } from '../../../behaviortree';
+import { RUNNING, PENDING, IDLE, SUCCESS } from '../../../behaviortree';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 export default {
@@ -24,6 +24,7 @@ export default {
                     pendingTrees.push(tree);
                 }
             } else {
+                tree.resetState(blackboard);
                 pendingTrees.push(tree);
             }
         }
@@ -34,7 +35,7 @@ export default {
     },
 
     _continue() {
-        if (!this.isRunning || this.isPaused) {
+        if (!this.isRunning) {
             return this;
         }
 
@@ -46,12 +47,28 @@ export default {
         closedTrees.length = 0;
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
-            var status = tree.tick(blackboard, taskHandlers);
             var status = blackboard.getTreeState(tree.id);
+
+            if (status === IDLE) {
+                // Will goto PENDING, or FAILURE/ERROR state
+                status = tree.tick(blackboard, taskHandlers);
+            }
+
+            var eventConditionPassed = tree.eventConditionPassed;
+            if ((status === PENDING) && eventConditionPassed) {
+                this.emit('enter', tree.title);
+            }
+
+            // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
+            status = tree.tick(blackboard, taskHandlers);
+
             if (status === RUNNING) {
                 break;
             } else {
                 closedTrees.push(tree);
+                if (eventConditionPassed) {
+                    this.emit('exit', tree.title);
+                }
             }
         }
 
@@ -64,21 +81,6 @@ export default {
             this.emit('complete', this);
         }
 
-        return this;
-    },
-
-    paused() {
-        this.isPaused = true;
-        return this;
-    },
-
-    resume() {
-        if (!this.isPaused) {
-            return this;
-        }
-        if (this.isRunning) {
-            this._continue();
-        }
         return this;
     },
 }

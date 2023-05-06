@@ -1,4 +1,4 @@
-import { TREE, TREE_STATE } from '../constants.js'
+import { TREE, TREE_STATE, IDLE } from '../constants.js'
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
@@ -112,7 +112,7 @@ class BehaviorTree {
         }
 
         var ticker = this.ticker;
-        ticker.reset()
+        ticker
             .setBlackBoard(blackboard).setTree(this)
             .setTarget(target)
             .reset();
@@ -126,6 +126,15 @@ class BehaviorTree {
         blackboard.set(TREE_STATE, state, this.id);
 
         return state;
+    }
+
+    getState(blackboard) {
+        return blackboard.get(TREE_STATE, this.id);
+    }
+
+    resetState(blackboard) {
+        blackboard.set(TREE_STATE, IDLE, this.id);
+        return this;
     }
 
     static setStartIDValue(value) {

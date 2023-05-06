@@ -5,6 +5,11 @@ class EventBehaviorTree extends BehaviorTree {
         this.properties.parallel = parallel;
         return this;
     }
+
+    get eventConditionPassed() {
+        var nodeMemory = this.root.getNodeMemory(this.ticker);
+        return (nodeMemory.$runningChild === 0);
+    }
 }
 
 export default EventBehaviorTree;
