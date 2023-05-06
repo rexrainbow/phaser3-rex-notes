@@ -1,6 +1,6 @@
 # Event sheet 0
 
-## Condition
+## [Condition]
 
 coin > 5
 
@@ -27,7 +27,7 @@ wait
 print
   text=Event 0 complete
 
-## Else
+## [Else]
 
 print
   text=Else, Event 0

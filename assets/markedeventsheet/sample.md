@@ -1,10 +1,10 @@
 # Title
 
-## Condition
+## [Condition]
 
 coin > 5
 
-## Condition
+## [Condition]
 
 hp > 0
 
@@ -21,7 +21,7 @@ World
 World
 ```
 
-## Else
+## [Else]
 
 print\
   text=Try again

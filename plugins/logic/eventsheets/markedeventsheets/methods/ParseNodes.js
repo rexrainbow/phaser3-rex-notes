@@ -49,9 +49,9 @@ var ParseNodes = function (nodes) {
 
 var GetNodeType = function (node) {
     var title = node.title.toLowerCase();
-    if (title.indexOf('condition') > -1) {
+    if (title.indexOf('[condition]') > -1) {
         return 'condition';
-    } else if (title === 'else') {
+    } else if (title === '[else]') {
         return 'else';
     }
     return ''

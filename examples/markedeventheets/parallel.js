@@ -42,7 +42,7 @@ class TaskHandlers extends EventEmitter {
 
 var manager = new MarkedEventSheets({
     taskHandlers: new TaskHandlers(),
-    // parallel: true
+    parallel: true
 });
 
 manager
