@@ -1,5 +1,6 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
+import mustache from 'mustache';
 import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel1.md';
 
@@ -13,8 +14,12 @@ class TaskHandlers extends EventEmitter {
     }
 
     print({
-        text = ''
+        text = '',
+        template
     } = {}, manager) {
+        if (template) {
+            text = mustache.render(template, manager.memoryContext);
+        }
         console.log(text);
     }
 
@@ -42,7 +47,7 @@ class TaskHandlers extends EventEmitter {
 
 var manager = new MarkedEventSheets({
     taskHandlers: new TaskHandlers(),
-    parallel: true
+    // parallel: true
 });
 
 manager
@@ -53,10 +58,13 @@ console.log(manager.dumpTrees())
 
 manager
     .setData('coin', 10)
-    .on('enter', function(title){
+    .on('enter', function (title) {
         console.log(`..Enter event sheet '${title}'..`)
     })
-    .on('exit', function(title){
+    .on('else', function (title) {
+        console.log(`..Fail event sheet '${title}'..`)
+    })
+    .on('exit', function (title) {
         console.log(`..Exit event sheet '${title}'..`)
     })
     .on('complete', function () {

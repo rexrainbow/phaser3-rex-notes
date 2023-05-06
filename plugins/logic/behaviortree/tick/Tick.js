@@ -1,6 +1,5 @@
 import RemoveItem from "../../../utils/array/Remove.js";
 import { CURRENT_TIME } from '../constants.js'
-import CreateBlackboardContext from './CreateBlackboardContext.js';
 
 class Tick {
 
@@ -20,8 +19,6 @@ class Tick {
         this._nodeCount = 0;
 
         this._currentNode = null;
-
-        this.blackboardContext = CreateBlackboardContext(this);
     }
 
     // Set members
@@ -68,7 +65,7 @@ class Tick {
     }
 
     evalExpression(expression) {
-        return expression.eval(this.blackboardContext);
+        return expression.eval(this.blackboard.globalMemoryContext);
     }
 
     _enterNode(node) {

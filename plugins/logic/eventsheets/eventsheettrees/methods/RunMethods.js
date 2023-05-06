@@ -55,8 +55,9 @@ export default {
             }
 
             var eventConditionPassed = tree.eventConditionPassed;
-            if ((status === PENDING) && eventConditionPassed) {
-                this.emit('enter', tree.title);
+            if ((status === PENDING)) {
+                var eventName = (eventConditionPassed) ? 'enter' : 'else';
+                this.emit(eventName, tree.title);
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state

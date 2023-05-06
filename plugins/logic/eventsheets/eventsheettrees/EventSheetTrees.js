@@ -19,6 +19,7 @@ class EventSheetTrees extends EventEmitter {
 
         this.blackboard = new Blackboard();
         this.blackboard.treeManager = this; // For TaskAction
+        this.memoryContext = this.blackboard.globalMemoryContext;
 
         this.trees = [];
         this.pendingTrees = [];

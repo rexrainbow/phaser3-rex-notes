@@ -27,4 +27,4 @@ print
 ## [Else]
 
 print
-  text=Else, Event 1
+  template=coin = {{coin}}

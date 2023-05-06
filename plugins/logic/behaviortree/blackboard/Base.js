@@ -1,3 +1,4 @@
+import CreateGlobalMemoryConext from './CreateGlobalMemoryContext.js';
 import DeepClone from '../../../utils/object/DeepClone.js';
 
 class Blackboard {
@@ -9,6 +10,8 @@ class Blackboard {
         // Global memory : this._baseMemory
         // Tree memory : this._treeMemory[treeID]
         // Node memory : this._treeMemory[treeID].nodeMemory[nodeID]
+
+        this.globalMemoryContext = CreateGlobalMemoryConext(this)
     }
 
     _getTreeMemory(treeID) {
