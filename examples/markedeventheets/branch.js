@@ -1,8 +1,11 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
 import mustache from 'mustache';
-import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel/parallel0.md';
-import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel/parallel1.md';
+import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/before.md';
+import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/if-a.md';
+import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/if-b.md';
+import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/else.md';
+import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/after.md';
 
 class TaskHandlers extends EventEmitter {
     constructor({
@@ -51,13 +54,16 @@ var manager = new MarkedEventSheets({
 });
 
 manager
-    .addEventSheet(eventSheet0)
-    .addEventSheet(eventSheet1);
+    .addEventSheet(beforeEventSheet)
+    .addEventSheet(ifAEventSheet)
+    .addEventSheet(ifBEventSheet)
+    .addEventSheet(elseEventSheet)
+    .addEventSheet(afterEventSheet)
 
 console.log(manager.dumpTrees())
 
 manager
-    .setData('coin', 10)
+    .setData('coin', 8)
     .on('enter', function (title) {
         console.log(`..Enter event sheet '${title}'..`)
     })

@@ -98,6 +98,6 @@ export default {
         // TODO : event sheet stack
         var title = tree.title;
         this.emit('exit', title);
-        this.memory.$previousEventTitle = title;
+        this.memory.PREVIOUS = title;
     }
 }
