@@ -27,7 +27,7 @@ wait
 print
   text=Event 0 complete
 
-## [Else]
+## [Catch]
 
 print
   template=coin = {{coin}}

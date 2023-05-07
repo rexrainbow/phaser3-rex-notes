@@ -63,6 +63,7 @@ export default class BaseNode {
     }
 
     addStringTemplateExpression(expression) {
+        // TODO: Use mustache or handlebars ?
         return new StringTemplateExpression(expression);
     }
 

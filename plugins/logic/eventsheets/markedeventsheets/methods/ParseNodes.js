@@ -1,11 +1,11 @@
 const STATE_CONDITION = 1;
 const STATE_TASK = 2;
-const STATE_ELSE = 3;
+const STATE_CATCH = 3;
 
 var ParseNodes = function (nodes) {
     var conditionNodes = [];
     var mainTaskNode = [];
-    var elseNodes = [];
+    var catchNodes = [];
 
     var state = STATE_CONDITION;
     var nextNodeType = GetNodeType(nodes[0]);
@@ -16,8 +16,8 @@ var ParseNodes = function (nodes) {
                 state = STATE_TASK;
             }
         } else if (state === STATE_TASK) {
-            if (nextNodeType === 'else') {
-                state = STATE_ELSE
+            if (nextNodeType === 'catch') {
+                state = STATE_CATCH;
             }
         }
 
@@ -30,8 +30,8 @@ var ParseNodes = function (nodes) {
                 mainTaskNode.push(node);
                 break;
 
-            case STATE_ELSE:
-                elseNodes.push(node);
+            case STATE_CATCH:
+                catchNodes.push(node);
                 break;
         }
 
@@ -43,7 +43,7 @@ var ParseNodes = function (nodes) {
     return {
         conditionNodes: conditionNodes,
         mainTaskNode: mainTaskNode,
-        elseNodes: elseNodes,
+        catchNodes: catchNodes,
     }
 }
 
@@ -51,8 +51,8 @@ var GetNodeType = function (node) {
     var title = node.title.toLowerCase();
     if (title.indexOf('[condition]') > -1) {
         return 'condition';
-    } else if (title === '[else]') {
-        return 'else';
+    } else if (title === '[catch]') {
+        return 'catch';
     }
     return ''
 }

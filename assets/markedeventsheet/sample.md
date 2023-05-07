@@ -21,7 +21,7 @@ World
 World
 ```
 
-## [Else]
+## [Catch]
 
 print\
   text=Try again
