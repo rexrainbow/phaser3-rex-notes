@@ -1,5 +1,10 @@
 # Title
 
+## Before if 
+
+print
+  text=Before if
+
 ## [If]
 
 coin < 5
@@ -34,3 +39,7 @@ print
 print
   text=Label D
 
+## After If 
+
+print
+  text=After If
