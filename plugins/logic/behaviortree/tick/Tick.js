@@ -65,7 +65,7 @@ class Tick {
     }
 
     evalExpression(expression) {
-        return expression.eval(this.blackboard.globalMemoryContext);
+        return expression.eval(this.blackboard.getGlobalMemory());
     }
 
     _enterNode(node) {

@@ -18,7 +18,7 @@ class TaskHandlers extends EventEmitter {
         template
     } = {}, manager) {
         if (template) {
-            text = mustache.render(template, manager.memoryContext);
+            text = mustache.render(template, manager.memory);
         }
         console.log(text);
     }
