@@ -61,11 +61,11 @@ manager
     .on('enter', function (title) {
         console.log(`..Enter event sheet '${title}'..`)
     })
-    .on('else', function (title) {
-        console.log(`..Fail event sheet '${title}'..`)
-    })
     .on('exit', function (title) {
         console.log(`..Exit event sheet '${title}'..`)
+    })
+    .on('catch', function (title) {
+        console.log(`..Fail event sheet '${title}'..`)
     })
     .on('complete', function () {
         console.log('..Execute events complete..')

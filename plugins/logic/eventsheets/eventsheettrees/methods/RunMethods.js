@@ -14,6 +14,7 @@ export default {
 
         pendingTrees.length = 0;
         this.isRunning = true;
+        this.memory.$previousEventTitle = null;
         // Run parallel tree, will return pending, or failure
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
@@ -56,8 +57,11 @@ export default {
 
             var eventConditionPassed = tree.eventConditionPassed;
             if ((status === PENDING)) {
-                var eventName = (eventConditionPassed) ? 'enter' : 'else';
-                this.emit(eventName, tree.title);
+                if (eventConditionPassed) {
+                    this.onEnterEventSheet(tree);
+                } else {
+                    this.emit('catch', tree.title);
+                }
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
@@ -68,7 +72,7 @@ export default {
             } else {
                 closedTrees.push(tree);
                 if (eventConditionPassed) {
-                    this.emit('exit', tree.title);
+                    this.onExitEventSheet(tree);
                 }
             }
         }
@@ -84,4 +88,16 @@ export default {
 
         return this;
     },
+
+    onEnterEventSheet(tree) {
+        // TODO : event sheet stack
+        this.emit('enter', tree.title);
+    },
+
+    onExitEventSheet(tree) {
+        // TODO : event sheet stack
+        var title = tree.title;
+        this.emit('exit', title);
+        this.memory.$previousEventTitle = title;
+    }
 }
