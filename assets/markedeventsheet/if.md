@@ -4,7 +4,7 @@
 
 coin < 5
 
-### LabelB
+### Label A
 
 print
   text=Label A
