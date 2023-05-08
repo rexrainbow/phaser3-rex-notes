@@ -1,11 +1,11 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
 import mustache from 'mustache';
-import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/before.md';
-import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/if-a.md';
-import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/if-b.md';
-import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/else.md';
-import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/after.md';
+import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/0.before.md';
+import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/1.if-a.md';
+import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/2.if-b.md';
+import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/3.else.md';
+import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/4.after.md';
 
 class TaskHandlers extends EventEmitter {
     constructor({
