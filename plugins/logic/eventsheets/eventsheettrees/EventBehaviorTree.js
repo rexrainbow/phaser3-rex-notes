@@ -18,6 +18,10 @@ class EventBehaviorTree extends BehaviorTree {
         this.setRoot(root);
     }
 
+    get isParallel() {
+        return this.properties.parallel;
+    }
+
     get eventConditionPassed() {
         var nodeMemory = this.root.getNodeMemory(this.ticker);
         return (nodeMemory.$runningChild === 0);

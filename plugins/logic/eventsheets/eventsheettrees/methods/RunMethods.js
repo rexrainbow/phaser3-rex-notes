@@ -18,13 +18,13 @@ export default {
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
 
-            if (tree.properties.parallel) {
+            tree.resetState(blackboard);
+            if (tree.isParallel) {
                 var status = tree.tick(blackboard, taskHandlers);
                 if (status === PENDING) {
                     pendingTrees.push(tree);
                 }
             } else {
-                tree.resetState(blackboard);
                 pendingTrees.push(tree);
             }
         }
