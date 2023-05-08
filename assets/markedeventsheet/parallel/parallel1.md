@@ -27,4 +27,4 @@ print
 ## [Catch]
 
 print
-  template=coin = {{coin}}
+  text=coin = {{coin}}

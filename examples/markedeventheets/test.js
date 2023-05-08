@@ -1,24 +1,29 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
+import mustache from 'mustache';
 import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
 class TaskHandlers extends EventEmitter {
-    print(config, manager) {
-        console.log(config.text);
-        this.wait(1000);
+    print({ text = '' } = {}, manager) {
+        text = mustache.render(text, manager.memory);
+        console.log(text);
+        this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    wait(config, manager) {
-        if (typeof (config) === 'number') {
-            config = { duration: config };
+    set(config, manager) {
+        for (var name in config) {
+            var value = manager.evalExpression(config[name]);
+            manager.setData(name, value);
         }
+    }
 
+    wait({ duration = 1000 } = {}, manager) {
         var self = this;
         setTimeout(function () {
             self.complete();
-        }, config.duration)
+        }, duration)
         return this;
     }
 

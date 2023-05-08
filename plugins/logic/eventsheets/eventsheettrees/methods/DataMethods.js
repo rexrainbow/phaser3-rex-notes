@@ -1,3 +1,5 @@
+import Compile from '../../../../math/expressionparser/utils/Complile.js';
+
 export default {
     setData(key, value) {
         this.blackboard.setData(key, value);
@@ -30,5 +32,13 @@ export default {
         this.blackboard.load(data);
         return this;
     },
+
+    evalExpression(expression) {
+        if (typeof (expression) === 'number') {
+            return expression;
+        }
+
+        return Compile(expression)(this.memory);
+    }
 
 }

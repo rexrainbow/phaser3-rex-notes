@@ -21,6 +21,15 @@ World
 World
 ```
 
+print\
+ text=I have {{coin}} coin
+
+set
+  coin=coin + 10
+
+print\
+ text=Now I have {{coin}} coin
+
 ## [Catch]
 
 print\
