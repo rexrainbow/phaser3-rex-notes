@@ -1,4 +1,5 @@
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
+import mustache from 'mustache';
 
 export default {
     setData(key, value) {
@@ -39,6 +40,10 @@ export default {
         }
 
         return Compile(expression)(this.memory);
+    },
+
+    renderString(template) {
+        return mustache.render(template, this.memory);
     }
 
 }

@@ -1,11 +1,10 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
-import mustache from 'mustache';
 import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
 class TaskHandlers extends EventEmitter {
     print({ text = '' } = {}, manager) {
-        text = mustache.render(text, manager.memory);
+        text = manager.renderString(text);
         console.log(text);
         this.wait({ duration: 1000 });
         return this;

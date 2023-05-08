@@ -1,6 +1,5 @@
 import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
 import EventEmitter from 'eventemitter3';
-import mustache from 'mustache';
 import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel/parallel1.md';
 
@@ -16,7 +15,7 @@ class TaskHandlers extends EventEmitter {
     print({
         text = ''
     } = {}, manager) {
-        text = mustache.render(text, manager.memory);
+        text = manager.renderString(text);
         console.log(text);
     }
 
