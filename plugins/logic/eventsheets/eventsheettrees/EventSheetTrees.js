@@ -2,6 +2,7 @@ import EventEmitter from 'eventemitter3';
 import { BehaviorTree, Blackboard } from '../../behaviortree';
 import TreeMethods from './methods/TreeMethods.js';
 import DataMethods from './methods/DataMethods.js';
+import ValueConvertMethods from './methods/ValueConvertMethods';
 import RunMethods from './methods/RunMethods.js';
 
 BehaviorTree.setStartIDValue(0);
@@ -43,6 +44,7 @@ Object.assign(
     EventSheetTrees.prototype,
     TreeMethods,
     DataMethods,
+    ValueConvertMethods,
     RunMethods,
 )
 
