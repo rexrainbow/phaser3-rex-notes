@@ -23,7 +23,7 @@ import rexCSVToArray from './plugins/csvtoarray.js';
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import AwayTimePlugin from 'phaser3-rex-plugins/plugins/awaytime-plugin.js';
+    import CSVToArrayPlugin from 'phaser3-rex-plugins/plugins/csvtoarray-plugin.js';
     var config = {
         // ...
         plugins: {
