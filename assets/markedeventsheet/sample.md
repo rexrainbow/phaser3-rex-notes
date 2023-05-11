@@ -2,11 +2,11 @@
 
 ## [Condition]
 
-coin > 5
+金幣 > 5
 
 ## [Condition]
 
-hp > 0
+hp > 3
 
 ## Script
 
@@ -22,13 +22,13 @@ World
 ```
 
 print\
- text=I have {{coin}} coin
+ text=I have {{金幣}} 金幣
 
 set
-  coin=coin + 10
+  金幣=金幣 + 10
 
 print\
- text=Now I have {{coin}} coin
+ text=Now I have {{金幣}} 金幣
 
 ## [Catch]
 

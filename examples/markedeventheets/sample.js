@@ -40,8 +40,8 @@ manager.addEventSheet(content);
 console.log(manager.dumpTrees())
 
 manager
-    .setData('coin', 1)
+    .setData('金幣', 1)
     .setData('hp', 4)
     .start()
 
-console.log(manager.dumpData())
+console.log(manager.memory)

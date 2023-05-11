@@ -31,7 +31,7 @@
 "."                                     return '.'
 'true'                                  return 'true'
 'false'                                 return 'false'
-[_$a-zA-Z]+([_$0-9a-zA-Z]+)?            return 'NAME'
+[^\s]+                                  return 'NAME'
 \"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'   return 'QUOTED_STRING'
 <<EOF>>                                 return 'EOF'
 .                                       return 'INVALID'
