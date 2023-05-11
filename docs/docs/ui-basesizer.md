@@ -56,12 +56,6 @@ sizer.addBackground(gameObject);
     var child = sizer.getElement(key);
     ```
 
-#### Depth
-
-```js
-sizer.moveDepthBelow(gameObject);
-```
-
 ### Minimum size
 
 - Get
@@ -748,6 +742,21 @@ sizer.setChildAlpha(child, alpha);
     ```javascript
     sizer.moveDepthAbove(gameObject);
     ```
+
+### Scroll factor
+
+- Set scroll factor to children
+   ```javascript
+   sizer.setScrollFactor(x, y);
+   ```
+
+### Change origin
+
+```javascript
+sizer.changeOrigin(originX, originY);
+```
+
+This method also will reset all local state of children.
 
 ### Destroy
 
