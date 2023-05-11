@@ -1,4 +1,4 @@
-import { Sequence, ForceSuccess, If } from '../../../behaviortree';
+import { Sequence, Selector, If, Succeeder } from '../../../behaviortree';
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
@@ -27,13 +27,18 @@ var CreateTaskSequence = function (node, {
     } else {
         var nodeType = GetNodeType(node, TypeNames);
         if (nodeType === 'if') {
-            var forceSuccess = new ForceSuccess();
+            var selector = new Selector();
+
             var ifDecorator = new If({
                 expression: GetConditionExpression(node)
-            })
-            forceSuccess.addChild(ifDecorator);
+            });
             ifDecorator.addChild(CreateTaskSequence(node.children));
-            return forceSuccess;
+            selector.addChild(ifDecorator)
+
+            var succeeder = new Succeeder();
+            selector.addChild(succeeder);
+
+            return selector;
         } else {
             var sequence = new Sequence();
             sequence.setTitle(node.title);

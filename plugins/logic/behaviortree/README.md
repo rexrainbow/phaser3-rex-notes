@@ -57,8 +57,7 @@ Map to
         - TaskA
     - if-ConditionB
         - TaskB   
-    - Bypass
-        - TaskC
+    - TaskC
 
 ### While
 
