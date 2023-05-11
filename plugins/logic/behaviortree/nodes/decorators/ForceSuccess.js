@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
+import { RUNNING, FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 
 class ForceSuccess extends Decorator {

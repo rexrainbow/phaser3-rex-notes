@@ -1,4 +1,8 @@
 var GetConditionExpression = function (nodes) {
+    if (!Array.isArray(nodes)) {
+        return GetANDExpression(nodes);
+    }
+
     var expression;
     switch (nodes.length) {
         case 0:

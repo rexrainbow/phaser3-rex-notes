@@ -1,7 +1,10 @@
-import { Sequence } from '../../../behaviortree';
+import { Sequence, ForceSuccess, If } from '../../../behaviortree';
+import GetNodeType from './GetNodeType.js';
+import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
-import TypeConvert from '../../../../utils/string/TypeConvert.js';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
+
+var TypeNames = ['if'];
 
 var CreateTaskSequence = function (node, {
     lineReturn = '\\'
@@ -22,15 +25,26 @@ var CreateTaskSequence = function (node, {
         }
 
     } else {
-        var sequence = new Sequence();
-        sequence.setTitle(node.title);
-        var paragraphs = node.paragraphs;
-        for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-            var taskData = GetTaskData(paragraphs[i], { lineReturn });
-            var taskAction = new TaskAction(taskData);
-            sequence.addChild(taskAction);
+        var nodeType = GetNodeType(node, TypeNames);
+        if (nodeType === 'if') {
+            var forceSuccess = new ForceSuccess();
+            var ifDecorator = new If({
+                expression: GetConditionExpression(node)
+            })
+            forceSuccess.addChild(ifDecorator);
+            ifDecorator.addChild(CreateTaskSequence(node.children));
+            return forceSuccess;
+        } else {
+            var sequence = new Sequence();
+            sequence.setTitle(node.title);
+            var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
+            for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
+                var taskData = GetTaskData(paragraphs[i], { lineReturn });
+                var taskAction = new TaskAction(taskData);
+                sequence.addChild(taskAction);
+            }
+            return sequence;
         }
-        return sequence;
     }
 }
 

@@ -14,7 +14,7 @@ var Marked2Tree = function (markedString, {
 
     var headingTree = GetHeadingTree(markedString);
     var treeConfig = GetTreeConfig(headingTree.paragraphs);
-    var { conditionNodes, mainTaskNode, catchNodes } = ParseNodes(headingTree.children);
+    var { conditionNodes, mainTaskNodes, catchNodes } = ParseNodes(headingTree.children);
 
     var { parallel = parallel } = treeConfig;
 
@@ -25,7 +25,7 @@ var Marked2Tree = function (markedString, {
     })
 
     var rootNode = tree.root;
-    rootNode.addChild(CreateTaskSequence(mainTaskNode), { lineReturn });
+    rootNode.addChild(CreateTaskSequence(mainTaskNodes), { lineReturn });
 
     var forceFailure = new ForceFailure();
     if (catchNodes.length > 0) {

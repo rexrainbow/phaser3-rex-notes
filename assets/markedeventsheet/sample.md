@@ -30,6 +30,36 @@ set
 print\
  text=Now I have {{金幣}} 金幣
 
+## Before if 
+
+print
+  text=Before if
+
+## [If]
+
+金幣 < 5
+
+### Label A
+
+print
+  text=If (金幣 < 5)
+
+
+## [If]
+
+金幣 > 10
+
+### Label B
+
+print
+  text=If (金幣 > 10)
+
+
+## After If 
+
+print
+  text=After If
+
 ## [Catch]
 
 print\
