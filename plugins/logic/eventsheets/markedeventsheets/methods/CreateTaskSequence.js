@@ -2,6 +2,7 @@ import { Sequence, Selector, If, Succeeder } from '../../../behaviortree';
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
+import TaskSequence from '../../eventsheettrees/TaskSequence';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
 
 var TypeNames = ['if', 'else'];
@@ -19,7 +20,8 @@ var CreateTaskSequence = function (node, {
             var sequence = new Sequence({ title: 'tags' });
             var lastIfSelector;
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-                var child = CreateTaskSequence(nodes[i], { lineReturn });
+                var node = nodes[i];
+                var child = CreateTaskSequence(node, { lineReturn });
                 switch (child.title) {
                     case '[if]':
                         sequence.addChild(child);
@@ -30,7 +32,8 @@ var CreateTaskSequence = function (node, {
                         if (lastIfSelector) {
                             lastIfSelector.insertChild(child, null, -1);
                         } else {
-                            // No [If] heading before this pelse] heading
+                            // No [If] heading before this [else] heading
+                            console.warn(`Can't find [If] heading before '${node.title}'`);
                         }
                         break;
 
@@ -70,11 +73,11 @@ var CreateTaskSequence = function (node, {
                     expression: GetConditionExpression(node)
                 });
                 ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+
                 return ifDecorator;
 
             default:
-                var sequence = new Sequence();
-                sequence.setTitle(node.title);
+                var sequence = new TaskSequence({ title: node.title });
                 var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
                 for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
                     var taskData = GetTaskData(paragraphs[i], { lineReturn });

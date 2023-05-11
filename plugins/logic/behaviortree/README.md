@@ -19,7 +19,6 @@ Reference: https://github.com/behavior3/behavior3js/
     - Bypass
     - ForceSuccess
     - ForceFailure
-    - Force
     - TimeLimit
         - Return FAILURE when timeout, else return child statue
     - Cooldown : 

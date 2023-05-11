@@ -36,6 +36,14 @@ var taskHandlers = new TaskHandlers();
 var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
 });
+manager.
+    on('enter.label', function (title) {
+        console.log(`Enter label '${title}'`)
+    })
+    .on('exit.label', function (title) {
+        console.log(`Exit label '${title}'`)
+    })
+
 manager.addEventSheet(content);
 console.log(manager.dumpTrees())
 

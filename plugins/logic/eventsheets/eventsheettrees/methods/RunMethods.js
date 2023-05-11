@@ -57,9 +57,9 @@ export default {
             var eventConditionPassed = tree.eventConditionPassed;
             if ((status === PENDING)) {
                 if (eventConditionPassed) {
-                    this.emit('enter', tree.title);
+                    this.emit('enter.eventsheet', tree.title);
                 } else {
-                    this.emit('catch', tree.title);
+                    this.emit('catch.eventsheet', tree.title);
                 }
             }
 
@@ -71,7 +71,7 @@ export default {
             } else {
                 closedTrees.push(tree);
                 if (eventConditionPassed) {
-                    this.emit('exit', tree.title);
+                    this.emit('exit.eventsheet', tree.title);
                 }
             }
         }

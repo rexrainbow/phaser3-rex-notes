@@ -61,13 +61,13 @@ console.log(manager.dumpTrees())
 
 manager
     .setData('coin', 8)
-    .on('enter', function (title) {
+    .on('enter.eventsheet', function (title) {
         console.log(`..Enter event sheet '${title}'..`)
     })
-    .on('exit', function (title) {
+    .on('exit.eventsheet', function (title) {
         console.log(`..Exit event sheet '${title}'..`)
     })
-    .on('catch', function (title) {
+    .on('catch.eventsheet', function (title) {
         console.log(`..Fail event sheet '${title}'..`)
     })
     .on('complete', function () {
