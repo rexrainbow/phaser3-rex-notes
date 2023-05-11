@@ -25,11 +25,11 @@ var Marked2Tree = function (markedString, {
     })
 
     var rootNode = tree.root;
-    rootNode.addChild(CreateTaskSequence(mainTaskNodes), { lineReturn });
+    rootNode.addChild(CreateTaskSequence(mainTaskNodes, { lineReturn }));
 
     var forceFailure = new ForceFailure();
     if (catchNodes.length > 0) {
-        forceFailure.addChild(CreateTaskSequence(catchNodes[0]), { lineReturn });
+        forceFailure.addChild(CreateTaskSequence(catchNodes[0], { lineReturn }));
     } else {
         forceFailure.addChild(new Succeeder());
     }

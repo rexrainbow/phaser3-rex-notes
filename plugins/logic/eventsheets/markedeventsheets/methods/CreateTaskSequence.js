@@ -4,7 +4,7 @@ import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
 
-var TypeNames = ['if'];
+var TypeNames = ['if', 'else'];
 
 var CreateTaskSequence = function (node, {
     lineReturn = '\\'
@@ -17,8 +17,29 @@ var CreateTaskSequence = function (node, {
 
         } else {
             var sequence = new Sequence({ title: 'tags' });
+            var lastIfSelector;
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-                sequence.addChild(CreateTaskSequence(nodes[i]), { lineReturn });
+                var child = CreateTaskSequence(nodes[i], { lineReturn });
+                switch (child.title) {
+                    case '[if]':
+                        sequence.addChild(child);
+                        lastIfSelector = child;
+                        break;
+
+                    case '[else]':
+                        if (lastIfSelector) {
+                            lastIfSelector.insertChild(child, null, -1);
+                        } else {
+                            // No [If] heading before this pelse] heading
+                        }
+                        break;
+
+                    default:  // Normal tasks                        
+                        sequence.addChild(child);
+                        lastIfSelector = null;
+                        break;
+                }
+
             }
             return sequence;
 
@@ -26,29 +47,38 @@ var CreateTaskSequence = function (node, {
 
     } else {
         var nodeType = GetNodeType(node, TypeNames);
-        if (nodeType === 'if') {
-            var selector = new Selector();
+        switch (nodeType) {
+            case 'if':
+                var selector = new Selector({
+                    title: '[if]'
+                });
 
-            var ifDecorator = new If({
-                expression: GetConditionExpression(node)
-            });
-            ifDecorator.addChild(CreateTaskSequence(node.children));
-            selector.addChild(ifDecorator)
+                var ifDecorator = new If({
+                    expression: GetConditionExpression(node)
+                });
+                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                selector.addChild(ifDecorator)
 
-            var succeeder = new Succeeder();
-            selector.addChild(succeeder);
+                var succeeder = new Succeeder();
+                selector.addChild(succeeder);
 
-            return selector;
-        } else {
-            var sequence = new Sequence();
-            sequence.setTitle(node.title);
-            var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
-            for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-                var taskData = GetTaskData(paragraphs[i], { lineReturn });
-                var taskAction = new TaskAction(taskData);
-                sequence.addChild(taskAction);
-            }
-            return sequence;
+                return selector;
+
+            case 'else':
+                var child = CreateTaskSequence(node.children, { lineReturn });
+                child.setTitle('[else]');
+                return child;
+
+            default:
+                var sequence = new Sequence();
+                sequence.setTitle(node.title);
+                var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
+                for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
+                    var taskData = GetTaskData(paragraphs[i], { lineReturn });
+                    var taskAction = new TaskAction(taskData);
+                    sequence.addChild(taskAction);
+                }
+                return sequence;
         }
     }
 }

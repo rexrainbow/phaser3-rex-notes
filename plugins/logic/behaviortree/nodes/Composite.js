@@ -39,6 +39,9 @@ class Composite extends BaseNode {
         }
 
         if (this.children.indexOf(node) === -1) {
+            if (index < 0) {
+                index = this.children.length + index;
+            }
             if ((index === undefined) || (index >= this.children.length)) {
                 this.children.push(node);
             } else {

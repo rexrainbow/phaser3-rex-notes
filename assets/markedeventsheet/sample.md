@@ -44,6 +44,12 @@ print
 print
   text=If (金幣 < 5)
 
+## [Else]
+
+### Label Else
+
+print
+  text=Else (金幣 < 5)
 
 ## [If]
 
