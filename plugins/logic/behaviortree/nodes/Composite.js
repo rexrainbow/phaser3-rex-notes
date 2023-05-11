@@ -33,19 +33,28 @@ class Composite extends BaseNode {
         }
     }
 
-    addChild(node, nodePool) {
+    insertChild(node, nodePool, index) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];
         }
 
         if (this.children.indexOf(node) === -1) {
-            this.children.push(node);
+            if ((index === undefined) || (index >= this.children.length)) {
+                this.children.push(node);
+            } else {
+                this.children.splice(index, 0, node);
+            }
+
             node.setParent(this);
         }
 
         return this;
     }
 
+    addChild(node, nodePool,) {
+        this.insertChild(node, nodePool);
+        return this;
+    }
 
     addService(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
