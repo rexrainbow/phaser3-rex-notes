@@ -5,36 +5,36 @@
 %%
 
 \s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b                    return 'NUMBER'
-\b0x[0-9A-Fa-f]+\b                      return 'HEXNUMBER'
-"*"                                     return '*'
-"/"                                     return '/'
-"-"                                     return '-'
-"+"                                     return '+'
-"^"                                     return '^'
-"%"                                     return '%'
-">="                                    return ">="
-"<="                                    return "<="
-">"                                     return '>'
-"<"                                     return '<'
-"=="                                    return "=="
-"!="                                    return "!="
-"||"                                    return "||"
-"&&"                                    return "&&"
-"?"                                     return "?"
-":"                                     return ":"
-"("                                     return '('
-")"                                     return ')'
-"["                                     return '['
-"]"                                     return ']'
-","                                     return ','
-"."                                     return '.'
-'true'                                  return 'true'
-'false'                                 return 'false'
-[^\s]+                                  return 'NAME'
-\"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'   return 'QUOTED_STRING'
-<<EOF>>                                 return 'EOF'
-.                                       return 'INVALID'
+[0-9]+("."[0-9]+)?\b                                 return 'NUMBER'
+\b0x[0-9A-Fa-f]+\b                                   return 'HEXNUMBER'
+"*"                                                  return '*'
+"/"                                                  return '/'
+"-"                                                  return '-'
+"+"                                                  return '+'
+"^"                                                  return '^'
+"%"                                                  return '%'
+">="                                                 return ">="
+"<="                                                 return "<="
+">"                                                  return '>'
+"<"                                                  return '<'
+"=="                                                 return "=="
+"!="                                                 return "!="
+"||"                                                 return "||"
+"&&"                                                 return "&&"
+"?"                                                  return "?"
+":"                                                  return ":"
+"("                                                  return '('
+")"                                                  return ')'
+"["                                                  return '['
+"]"                                                  return ']'
+","                                                  return ','
+"."                                                  return '.'
+'true'                                               return 'true'
+'false'                                              return 'false'
+[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.]+       return 'NAME'
+\"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'                return 'QUOTED_STRING'
+<<EOF>>                                              return 'EOF'
+.                                                    return 'INVALID'
 
 /lex
 
