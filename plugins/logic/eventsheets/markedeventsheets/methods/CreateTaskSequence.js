@@ -65,9 +65,12 @@ var CreateTaskSequence = function (node, {
                 return selector;
 
             case 'else':
-                var child = CreateTaskSequence(node.children, { lineReturn });
-                child.setTitle('[else]');
-                return child;
+                var ifDecorator = new If({
+                    title: '[else]',
+                    expression: GetConditionExpression(node)
+                });
+                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                return ifDecorator;
 
             default:
                 var sequence = new Sequence();

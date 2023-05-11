@@ -60,7 +60,6 @@ print
 print
   text=If (金幣 > 10)
 
-
 ## After If 
 
 print
