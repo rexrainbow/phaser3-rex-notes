@@ -715,38 +715,38 @@ sizer.setChildAlpha(child, alpha);
 
 ### Depth
 
-- Get depth of container
+- Get depth of sizer
     ```javascript
-    var depth = container.depth;
+    var depth = sizer.depth;
     ```
-- Set depth of container
+- Set depth of sizer
     ```javascript
-    container.setDepth(value, true);
-    // container.depth = depth;
+    sizer.setDepth(value, true);
+    // sizer.depth = depth;
     ```
-- Set depth of container and all children
+- Set depth of sizer and all children
     ```javascript
-    container.setDepth(value);
+    sizer.setDepth(value);
     ```
-- Bring this container and its children to top
+- Bring this sizer and its children to top
     ```javascript
-    container.bringToTop();
+    sizer.bringToTop();
     ```
-- Swap depth with another container
+- Swap depth with another sizer
     ```javascript
-    containerA.swapDepth(containerB);
+    sizerA.swapDepth(sizerB);
     ```
-- Increase of container and all children
+- Increase of sizer and all children
     ```javascript
-    container.incDepth(value);
+    sizer.incDepth(value);
     ```
-- Move game object below this container and all children
+- Move game object below this sizer and all children
     ```javascript
-    container.moveDepthBelow(gameObject);
+    sizer.moveDepthBelow(gameObject);
     ```
-- Move game object above this container and all children
+- Move game object above this sizer and all children
     ```javascript
-    container.moveDepthAbove(gameObject);
+    sizer.moveDepthAbove(gameObject);
     ```
 
 ### Destroy
