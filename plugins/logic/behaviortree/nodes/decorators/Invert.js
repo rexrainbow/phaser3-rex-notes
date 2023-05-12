@@ -35,7 +35,7 @@ class Invert extends Decorator {
         } else if (status === FAILURE) {
             status = SUCCESS;
         }
-        // Bypass RUNNING status
+        // Bypass RUNNING, ABORT status
 
         return status;
     }
