@@ -12,6 +12,7 @@ class EventBehaviorTree extends BehaviorTree {
 
         var { condition = 'true' } = config;
         var root = new IfSelector({
+            title: this.title,
             expression: condition,
             returnPending: true   // Always return PENDING instead of RUNNING, or SUCCESS
         })

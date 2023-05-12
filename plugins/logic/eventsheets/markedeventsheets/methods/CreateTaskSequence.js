@@ -17,11 +17,12 @@ var CreateTaskSequence = function (node, {
             return CreateTaskSequence(nodes[0], { lineReturn });
 
         } else {
-            var sequence = new Sequence({ title: 'tags' });
+            var sequence = new Sequence({ title: '[root]' });
             var lastIfSelector;
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
                 var node = nodes[i];
                 var child = CreateTaskSequence(node, { lineReturn });
+                // Construct if-branch selector
                 switch (child.title) {
                     case '[if]':
                         sequence.addChild(child);
@@ -37,7 +38,7 @@ var CreateTaskSequence = function (node, {
                         }
                         break;
 
-                    default:  // Normal tasks                        
+                    default:  // Normal tasks
                         sequence.addChild(child);
                         lastIfSelector = null;
                         break;
