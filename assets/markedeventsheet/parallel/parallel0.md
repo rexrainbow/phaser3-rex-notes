@@ -1,5 +1,7 @@
 # Event sheet 0
 
+parallel
+
 ## [Condition]
 
 coin > 5

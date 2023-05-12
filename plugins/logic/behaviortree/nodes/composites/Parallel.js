@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, PENDING, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, PENDING, ABORT, ERROR } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
@@ -49,6 +49,7 @@ class Parallel extends Composite {
         var hasAnyFinishStatus = false;
         var hasAnyPendingStatus = false;
         var hasAnyRunningStatus = false;
+        var hasAnyAbortStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
             var status = this.children[childIndex]._execute(tick);
@@ -71,6 +72,10 @@ class Parallel extends Composite {
                 case PENDING:
                     hasAnyPendingStatus = true;
                     break;
+
+                case ABORT:
+                    hasAnyAbortStatus = true;
+                    break;
             }
         }
 
@@ -87,7 +92,9 @@ class Parallel extends Composite {
         if (this.finishMode === 0) {
             return nodeMemory.$mainTaskStatus;
         } else {
-            if (hasAnyPendingStatus) {
+            if (hasAnyAbortStatus) {
+                return ABORT;
+            } else if (hasAnyPendingStatus) {
                 return PENDING;
             } else if (hasAnyRunningStatus) {
                 return RUNNING;

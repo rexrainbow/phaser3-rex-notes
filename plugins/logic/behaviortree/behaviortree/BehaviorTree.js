@@ -113,7 +113,8 @@ class BehaviorTree {
 
         var ticker = this.ticker;
         ticker
-            .setBlackBoard(blackboard).setTree(this)
+            .setBlackBoard(blackboard)
+            .setTree(this)
             .setTarget(target)
             .reset();
 

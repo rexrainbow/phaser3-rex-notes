@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class Selector extends Composite {
     constructor(
@@ -41,7 +41,7 @@ class Selector extends Composite {
             for (var i = 0, cnt = this.children.length; i < cnt; i++) {
                 status = this.children[i]._execute(tick);
 
-                if ((status === RUNNING) || (status === SUCCESS)) {
+                if ((status === RUNNING) || (status === SUCCESS) || (status === ABORT)) {
                     childIndex = i;
                     break;
                 }

@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import { FAILURE, SUCCESS, ERROR, RUNNING } from '../../constants.js';
+import { FAILURE, SUCCESS, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 
 class ForceFailure extends Decorator {
@@ -38,9 +38,12 @@ class ForceFailure extends Decorator {
         // Won't abort child
         var status = this.child._execute(tick);
 
-        if (this.returnRunning && (status === RUNNING)) {
+        if (status === ABORT) {
+            return ABORT;
+        } else if (this.returnRunning && (status === RUNNING)) {
             return RUNNING;
         }
+
         return FAILURE;
     }
 };

@@ -24,7 +24,7 @@ World
 print\
  text=I have {{金幣}} 金幣
 
-set
+set\
   金幣=金幣 + 10
 
 print\
@@ -32,7 +32,7 @@ print\
 
 ## Before if 
 
-print
+print\
   text=Before if
 
 ## [If]
@@ -41,14 +41,14 @@ print
 
 ### Label A
 
-print
+print\
   text=If (金幣 < 5)
 
 ## [Else]
 
 ### Label Else
 
-print
+print\
   text=Else (金幣 < 5)
 
 ## [If]
@@ -57,12 +57,12 @@ print
 
 ### Label B
 
-print
+print\
   text=If (金幣 > 10)
 
 ## After If 
 
-print
+print\
   text=After If
 
 ## [Catch]

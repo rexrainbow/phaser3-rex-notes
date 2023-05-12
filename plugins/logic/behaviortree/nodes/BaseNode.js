@@ -1,6 +1,6 @@
 import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
-import { SUCCESS, FAILURE, RUNNING, ERROR, PENDING } from '../constants.js';
+import { TREE, SUCCESS, FAILURE, RUNNING, PENDING, ABORT, ERROR } from '../constants.js';
 
 export default class BaseNode {
 
@@ -54,6 +54,25 @@ export default class BaseNode {
         return this;
     }
 
+    getParent() {
+        return this.parent;
+    }
+
+    getTree(tick) {
+        if (tick) {
+            return tick.tree;
+        } else {
+            var parent = this.parent;
+            while (parent) {
+                if (parent.category === TREE) {
+                    return parent;
+                }
+                parent = parent.parent;
+            }
+            return null;
+        }
+    }
+
     addExpression(expression) {
         return new Expression(expression);
     }
@@ -80,7 +99,8 @@ export default class BaseNode {
         var status = this._tick(tick);
 
         // CLOSE
-        if ((status === SUCCESS) || (status === FAILURE) || (status === ERROR)) {
+        if ((status === SUCCESS) || (status === FAILURE) ||
+            (status === ABORT) || (status === ERROR)) {
             this._close(tick);
         }
 

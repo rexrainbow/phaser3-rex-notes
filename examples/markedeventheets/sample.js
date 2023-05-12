@@ -37,10 +37,10 @@ var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
 });
 manager.
-    on('enter.label', function (title) {
+    on('label.enter', function (title) {
         console.log(`Enter label '${title}'`)
     })
-    .on('exit.label', function (title) {
+    .on('label.exit', function (title) {
         console.log(`Exit label '${title}'`)
     })
 

@@ -1,5 +1,5 @@
 import {
-    SUCCESS, FAILURE, RUNNING, ERROR, PENDING, IDLE,
+    IDLE, SUCCESS, FAILURE, RUNNING, PENDING, ABORT, ERROR,
     COMPOSITE, DECORATOR, ACTION, SERVICE
 } from './constants';
 
@@ -46,12 +46,13 @@ import {
 } from './nodes';
 
 export {
+    IDLE,
     SUCCESS,
     FAILURE,
     RUNNING,
-    ERROR,
     PENDING,
-    IDLE,
+    ABORT,
+    ERROR,
 
     COMPOSITE,
     DECORATOR,

@@ -5,7 +5,7 @@ class TaskSequence extends Sequence {
         super.open(tick);
 
         var treeManager = tick.blackboard.treeManager;
-        treeManager.emit('enter.label', this.title, treeManager);
+        treeManager.emit('label.enter', this.title, treeManager);
 
     }
 
@@ -13,7 +13,7 @@ class TaskSequence extends Sequence {
         super.close(tick);
 
         var treeManager = tick.blackboard.treeManager;
-        treeManager.emit('exit.label', this.title, treeManager);
+        treeManager.emit('label.exit', this.title, treeManager);
     }
 }
 
