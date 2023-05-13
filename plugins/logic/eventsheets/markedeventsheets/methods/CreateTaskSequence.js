@@ -111,9 +111,24 @@ var ParseCommandString = function (commandString, delimiter, lineReturn) {
         name: TrimString(lines[0], lineReturn),
         parameters: {}
     };
-    var parameters = taskData.parameters;
+
+    var parameterLines = [];
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-        ParseProperty(TrimString(lines[i], lineReturn), parameters);
+        var line = lines[i];
+        if (line.indexOf('=') > -1) {
+            parameterLines.push(line);
+        } else {
+            var lastParameterLine = parameterLines[parameterLines.length - 1];
+            if (lastParameterLine) {
+                lastParameterLine = `${TrimString(lastParameterLine, lineReturn)}\n${line}`;
+                parameterLines[parameterLines.length - 1] = lastParameterLine;
+            }
+        }
+    }
+
+    var parameters = taskData.parameters;
+    for (var i = 0, cnt = parameterLines.length; i < cnt; i++) {
+        ParseProperty(TrimString(parameterLines[i], lineReturn), parameters);
     }
     return taskData;
 }
