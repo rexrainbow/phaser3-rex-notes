@@ -31,12 +31,12 @@ export default {
             }
         }
 
-        this._continue();
+        this.continue();
 
         return this;
     },
 
-    _continue() {
+    continue() {
         if (!this.isRunning) {
             return this;
         }
@@ -117,7 +117,7 @@ export default {
     getContinueCallback() {
         var self = this;
         return function () {
-            self._continue();
+            self.continue();
         }
     }
 }

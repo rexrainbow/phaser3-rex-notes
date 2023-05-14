@@ -38,7 +38,7 @@ export default {
         })
 
         if (this.isRunning) {
-            this._continue();
+            this.continue();
         }
 
         return this;
