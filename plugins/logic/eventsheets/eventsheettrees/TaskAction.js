@@ -1,13 +1,11 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
 
-const NAME = 'MyTask';
-
 class TaskAction extends Action {
     constructor(config) {
         // config: {name, parameters:{...} }        
         super({
-            name: NAME,
+            name: 'TaskAction',
             title: config.name,
             properties: config,
         });
@@ -59,10 +57,6 @@ class TaskAction extends Action {
     }
 
     close(tick) {
-    }
-
-    static getName() {
-        return NAME;
     }
 }
 

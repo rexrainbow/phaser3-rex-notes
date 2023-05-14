@@ -1,4 +1,4 @@
-import GetCustomNodeMapping from './GetCustomNodeMapping.js';
+import CustomNodeMapping from './CustomNodeMapping.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 import { BehaviorTree, PENDING, RUNNING } from '../../../behaviortree';
 import DeepClone from '../../../../utils/object/DeepClone.js';
@@ -63,21 +63,24 @@ export default {
     },
 
     dumpTrees() {
-        var out = [];
+        var treeDataArray = [];
         this.trees.forEach(function (tree) {
-            out.push(tree.dump());
+            treeDataArray.push(tree.dump());
         })
-        return out;
+
+        return {
+            trees: treeDataArray
+        };
     },
 
-    loadTrees(dataArray) {
-        dataArray.forEach(function (data) {
+    loadTrees(data) {
+        data.trees.forEach(function (treeData) {
             var tree = new BehaviorTree({
-                id: data.id,
-                title: data.title,
-                properties: DeepClone(data.properties),
+                id: treeData.id,
+                title: treeData.title,
+                properties: DeepClone(treeData.properties),
             });
-            tree.load(data, GetCustomNodeMapping());
+            tree.load(treeData, CustomNodeMapping);
             this.trees.push(tree);
         }, this);
         return this;
