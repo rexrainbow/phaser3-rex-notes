@@ -21,13 +21,4 @@ export default {
     getData(key) {
         return this.blackboard.getData(key);
     },
-
-    dumpData() {
-        return this.blackboard.dump();
-    },
-
-    loadData(data) {
-        this.blackboard.load(data);
-        return this;
-    },
 }

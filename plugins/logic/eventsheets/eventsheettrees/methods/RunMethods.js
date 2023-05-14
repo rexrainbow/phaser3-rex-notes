@@ -7,13 +7,15 @@ export default {
             return this;
         }
 
+        this.isRunning = true;
+
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
         var blackboard = this.blackboard;
         var taskHandlers = this.taskHandlers;
 
         pendingTrees.length = 0;
-        this.isRunning = true;
+
         // Run parallel tree, will return pending, or failure
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
@@ -63,6 +65,11 @@ export default {
                 }
             }
 
+            if (!this.isRunning) {
+                // Can break here
+                break;
+            }
+
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
             status = tree.tick(blackboard, taskHandlers);
 
@@ -74,6 +81,12 @@ export default {
                     this.emit('eventsheet.exit', tree.title, this);
                 }
             }
+
+            if (!this.isRunning) {
+                // Can break here
+                break;
+            }
+
         }
 
         if (closedTrees.length > 0) {
@@ -87,4 +100,24 @@ export default {
 
         return this;
     },
+
+    stop() {
+        this.isRunning = false;
+
+        var blackboard = this.blackboard;
+        var taskHandlers = this.taskHandlers;
+        this.pendingTrees.forEach(function (tree) {
+            tree.abort(blackboard, taskHandlers);
+        })
+        this.pendingTrees.length = 0;
+
+        return this;
+    },
+
+    getContinueCallback() {
+        var self = this;
+        return function () {
+            self._continue();
+        }
+    }
 }

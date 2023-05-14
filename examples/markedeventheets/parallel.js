@@ -67,4 +67,4 @@ manager
     })
     .start()
 
-console.log(manager.dumpData())
+console.log(manager.memory)

@@ -63,18 +63,13 @@ export default {
     },
 
     dumpTrees() {
-        var treeDataArray = [];
-        this.trees.forEach(function (tree) {
-            treeDataArray.push(tree.dump());
+        return this.trees.map(function (tree) {
+            return tree.dump()
         })
-
-        return {
-            trees: treeDataArray
-        };
     },
 
     loadTrees(data) {
-        data.trees.forEach(function (treeData) {
+        data.forEach(function (treeData) {
             var tree = new BehaviorTree({
                 id: treeData.id,
                 title: treeData.title,
@@ -84,6 +79,6 @@ export default {
             this.trees.push(tree);
         }, this);
         return this;
-    }
+    },
 
 }

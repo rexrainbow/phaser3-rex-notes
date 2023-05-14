@@ -41,13 +41,16 @@ class TaskAction extends Action {
 
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
-            this.$continue = taskHandlers.$continue;
-            eventEmitter.once('complete', this.onTaskComplete, this)
+            var treeManager = tick.blackboard.treeManager;
+            this.$continue = treeManager.getContinueCallback();
+            eventEmitter.once('complete', this.onTaskComplete, this);
+            this.$eventEmitter = eventEmitter;
         }
     }
 
     onTaskComplete() {
         this.isRunning = false;
+        this.$eventEmitter = undefined;
 
         this.$continue();
     }
@@ -57,6 +60,13 @@ class TaskAction extends Action {
     }
 
     close(tick) {
+    }
+
+    abort(tick) {
+        if (this.$eventEmitter) {
+            this.$eventEmitter.off('complete', this.onTaskComplete, this);
+            this.$eventEmitter = undefined;
+        }
     }
 }
 

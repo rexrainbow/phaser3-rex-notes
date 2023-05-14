@@ -2,6 +2,7 @@ import EventEmitter from 'eventemitter3';
 import { BehaviorTree, Blackboard } from '../../behaviortree';
 import TreeMethods from './methods/TreeMethods.js';
 import DataMethods from './methods/DataMethods.js';
+import StateMethods from './methods/StateMethods';
 import ValueConvertMethods from './methods/ValueConvertMethods';
 import RunMethods from './methods/RunMethods.js';
 
@@ -26,6 +27,7 @@ class EventSheetTrees extends EventEmitter {
         this.closedTrees = [];  // Temporary tree array
 
         this.isRunning = false;
+        this._threadKey = null;
     }
 
     get memory() {
@@ -34,7 +36,6 @@ class EventSheetTrees extends EventEmitter {
 
     setTaskHandlers(taskHandlers) {
         this.taskHandlers = taskHandlers;
-        this.taskHandlers.$continue = this._continue.bind(this);
         return this;
     }
 
@@ -44,6 +45,7 @@ Object.assign(
     EventSheetTrees.prototype,
     TreeMethods,
     DataMethods,
+    StateMethods,
     ValueConvertMethods,
     RunMethods,
 )

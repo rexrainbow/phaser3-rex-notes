@@ -37,14 +37,18 @@ var manager = new MarkedEventSheets({
     taskHandlers: taskHandlers
 });
 manager.addEventSheet(content);
-console.log(manager.dumpTrees())
 
 manager.
-    on('label.enter', function (title) {
-        console.log(`Enter label '${title}'`)
-    })
-    .on('label.exit', function (title) {
-        console.log(`Exit label '${title}'`)
+    once('eventsheet.enter', function (title, manager) {
+        console.log(`eventsheet.enter: '${title}'`);
+        var stateData = manager.dumpState();
+        console.log(stateData);
+        console.log('===save state===')
+
+        setTimeout(function () {
+            console.log('===load state===')
+            manager.loadState(stateData);
+        }, 1500)
     })
 
 manager
@@ -52,4 +56,3 @@ manager
     .setData('hp', 4)
     .start()
 
-console.log(manager.memory)

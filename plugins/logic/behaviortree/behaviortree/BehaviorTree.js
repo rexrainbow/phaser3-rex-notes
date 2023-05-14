@@ -129,6 +129,27 @@ class BehaviorTree {
         return state;
     }
 
+    abort(blackboard, target) {
+        if (!blackboard) {
+            throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
+        }
+
+        var ticker = this.ticker;
+        ticker
+            .setBlackBoard(blackboard)
+            .setTree(this)
+            .setTarget(target)
+            .reset();
+
+        /* ABORT NODE */
+        this.root.abortChildren(ticker);
+
+        /* POPULATE BLACKBOARD */
+        blackboard.set(TREE_STATE, IDLE, this.id);
+
+        return IDLE;
+    }
+
     getState(blackboard) {
         return blackboard.get(TREE_STATE, this.id);
     }
