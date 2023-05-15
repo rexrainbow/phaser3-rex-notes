@@ -1,4 +1,4 @@
-import { marked } from 'marked';
+import marked from '../../../../utils/marked/marked.min.js';
 
 var GetHeadingTree = function (text) {
     var items = marked.lexer(text);
