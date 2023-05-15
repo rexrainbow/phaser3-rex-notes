@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SmoothStep = require('../SmoothStep');
+import SmoothStep from '../SmoothStep.js';
 
 /**
  * A Smooth Step interpolation method.
