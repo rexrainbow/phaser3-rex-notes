@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
+import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import ManagersBase from '../../plugins/logic/runcommands/managers/Managers.js';
 import content from 'raw-loader!/assets/markedeventsheet/manager.md';
 
@@ -91,10 +91,9 @@ class Demo extends Phaser.Scene {
     create() {
         var taskHandlers = new TaskHandlers(this);
 
-        var manager = new MarkedEventSheets({
+        var manager = this.plugins.get('rexMarkedEventSheets').add({
             taskHandlers: taskHandlers
-        });
-        manager
+        })
             .addEventSheet(content)
             .start()
 
@@ -112,7 +111,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexMarkedEventSheets',
+            plugin: MarkedEventSheetsPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

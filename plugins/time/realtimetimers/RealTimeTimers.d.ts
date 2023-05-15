@@ -1,4 +1,4 @@
-import EventEmitter from '../../utils/eventemitter/EventEmitter';
+import { EventEmitter } from 'eventemitter3';
 
 export default RealTimeTimers;
 

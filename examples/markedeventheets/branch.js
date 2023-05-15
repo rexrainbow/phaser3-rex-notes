@@ -1,4 +1,4 @@
-import MarkedEventSheets from '../../plugins/logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
+import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
 import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/0.before.md';
 import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/1.if-a.md';
