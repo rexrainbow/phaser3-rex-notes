@@ -15,15 +15,6 @@ class TaskHandlers extends ManagersBase {
                 },
                 viewportCoordinate: true,
             })
-
-        this
-            .addGameObjectManager({
-                name: 'text',
-                createGameObject(scene, style) {
-                    return scene.add.text(0, 0, '', style);
-                },
-                viewportCoordinate: true,
-            })
     }
 
     complete() {
@@ -46,25 +37,21 @@ class TaskHandlers extends ManagersBase {
     }
 
     easeSpriteProperty(config) {
-        var name = config.name;
+        var { name, duration, ease, repeat, yoyo } = config;
         delete config.name;
-
-        var duration = config.duration;
         delete config.duration;
-
-        var ease = config.ease;
         delete config.ease;
-
-        var repeat = config.repeat;
         delete config.repeat;
-
-        var isYoyo = config.yoyo;
         delete config.yoyo;
 
         for (var prop in config) {
-            this.easeGameObjectProperty('sprite', name, prop, config[prop], duration, ease, repeat, isYoyo);
+            this.easeGameObjectProperty('sprite', name, prop, config[prop], duration, ease, repeat, yoyo);
         }
         // Execute next command
+    }
+
+    runSpriteMethod(config) {
+        // TODO
     }
 
     getHandler(name, config) {
@@ -76,9 +63,13 @@ class TaskHandlers extends ManagersBase {
                     return this.setSpriteProperty;
                 } else if (tokens[2] === 'to') {
                     return this.easeSpriteProperty;
+                } else if (tokens[2] === 'yoyo') {
+                    config.yoyo = true;
+                    return this.easeSpriteProperty;
+                } else {
+                    config.methodName = tokens[2];
+                    return this.runSpriteMethod;
                 }
-
-                break;
         }
     }
 
