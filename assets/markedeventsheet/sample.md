@@ -70,6 +70,24 @@ print\
 print\
   text=After If
 
+## Before while
+
+set\
+  loopCount=3
+
+## [while]
+
+loopCount > 0
+
+### do-while
+
+print\
+  text=do-while {{loopCount}}
+
+set\
+  loopCount=loopCount-1
+
+
 ## [Catch]
 
 print\

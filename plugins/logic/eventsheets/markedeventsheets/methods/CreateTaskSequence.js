@@ -1,11 +1,11 @@
-import { Sequence, Selector, If, Succeeder } from '../../../behaviortree';
+import { Sequence, Selector, If, Succeeder, RepeatUntilFailure } from '../../../behaviortree';
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
 import TaskSequence from '../../eventsheettrees/TaskSequence';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
 
-var TypeNames = ['if', 'else'];
+var TypeNames = ['if', 'else', 'while'];
 
 var CreateTaskSequence = function (node, {
     lineReturn = '\\'
@@ -76,6 +76,16 @@ var CreateTaskSequence = function (node, {
                 ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
 
                 return ifDecorator;
+
+            case 'while':
+                var whileDecorator = new RepeatUntilFailure({ title: '[while]' })
+                var ifDecorator = new If({
+                    title: '[while]',
+                    expression: GetConditionExpression(node)
+                });
+                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                whileDecorator.addChild(ifDecorator);
+                return whileDecorator;
 
             default:
                 var sequence = new TaskSequence({ title: node.title });

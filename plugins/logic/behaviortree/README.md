@@ -68,7 +68,7 @@ while ConditionA
 Map to
 
 - RepeaterUntilFailure
-    - ConditionA
+    - if-ConditionA
         - TaskA
 
 ### Tick
