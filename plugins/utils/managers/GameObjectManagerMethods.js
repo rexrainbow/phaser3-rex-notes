@@ -18,8 +18,18 @@ export default {
         return this;
     },
 
-    getGameObjectManager(name) {
-        return this.gameObjectManagers[name];
+    getGameObjectManager(managerName, gameObjectName) {
+        if (managerName) {
+            var manager = this.gameObjectManagers[managerName]
+            return manager;
+        } else {
+            for (var managerName in this.gameObjectManagers) {
+                var manager = this.gameObjectManagers[managerName]
+                if (manager.has(gameObjectName)) {
+                    return manager;
+                }
+            }
+        }
     },
 
     getGameObjectManagerNames() {

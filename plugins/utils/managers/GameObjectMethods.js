@@ -1,11 +1,11 @@
 export default {
     createGameObject(goType, name, ...params) {
-        this.getGameObjectManager(goType).add(name, ...params);
+        this.getGameObjectManager(goType, name).add(name, ...params);
         return this;
     },
 
     destroyGameObject(goType, name) {
-        var gameObjectManager = this.getGameObjectManager(goType);
+        var gameObjectManager = this.getGameObjectManager(goType, name);
         if (name === undefined) {
             gameObjectManager.removeAll();
         } else {
@@ -15,17 +15,17 @@ export default {
     },
 
     callGameObjectMethod(goType, name, methodName, ...params) {
-        this.getGameObjectManager(goType).call(name, methodName, ...params);
+        this.getGameObjectManager(goType, name).call(name, methodName, ...params);
         return this;
     },
 
     setGameObjectProperty(goType, name, prop, value) {
-        this.getGameObjectManager(goType).setProperty(name, prop, value);
+        this.getGameObjectManager(goType, name).setProperty(name, prop, value);
         return this;
     },
 
     easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
-        this.getGameObjectManager(goType).easeProperty(
+        this.getGameObjectManager(goType, name).easeProperty(
             name, prop, value,
             duration, ease, repeat, isYoyo
         );
@@ -33,7 +33,7 @@ export default {
     },
 
     getGameObject(goType, name, out) {
-        var gameobjectManager = this.getGameObjectManager(goType);
+        var gameobjectManager = this.getGameObjectManager(goType, name);
         if (typeof (name) === 'string') {
             return gameobjectManager.getGO(name);
         } else {
@@ -52,7 +52,7 @@ export default {
     },
 
     addGameObject(goType, name, gameObject) {
-        var gameobjectManager = this.getGameObjectManager(goType);
+        var gameobjectManager = this.getGameObjectManager(goType, name);
         if (typeof (name) === 'string') {
             gameobjectManager.addGO(name, gameObject);
         } else {

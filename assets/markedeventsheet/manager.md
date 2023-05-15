@@ -3,13 +3,13 @@
 ## Script
 
 sprite
-  name=CharA
+  name=角色A
   key=dude
 
-sprite.CharA
+角色A
   vpx=0
   vpy=0.5
 
-sprite.CharA.to
+角色A.to
   vpx=0.7
   ease=Back

@@ -27,16 +27,16 @@ class TaskHandlers extends ManagersBase {
         // Execute next command
     }
 
-    setSpriteProperty(config) {
+    setGOProperty(config) {
         var name = config.name;
         delete config.name;
         for (var prop in config) {
-            this.setGameObjectProperty('sprite', name, prop, config[prop]);
+            this.setGameObjectProperty(undefined, name, prop, config[prop]);
         }
         // Execute next command
     }
 
-    easeSpriteProperty(config) {
+    easeGOProperty(config) {
         var { name, duration, ease, repeat, yoyo } = config;
         delete config.name;
         delete config.duration;
@@ -45,31 +45,29 @@ class TaskHandlers extends ManagersBase {
         delete config.yoyo;
 
         for (var prop in config) {
-            this.easeGameObjectProperty('sprite', name, prop, config[prop], duration, ease, repeat, yoyo);
+            this.easeGameObjectProperty(undefined, name, prop, config[prop], duration, ease, repeat, yoyo);
         }
         // Execute next command
     }
 
-    runSpriteMethod(config) {
+    runGOMethod(config) {
         // TODO
     }
 
     getHandler(name, config) {
         var tokens = name.split('.');
-        switch (tokens[0]) {
-            case 'sprite':
-                config.name = tokens[1];
-                if (tokens.length === 2) {
-                    return this.setSpriteProperty;
-                } else if (tokens[2] === 'to') {
-                    return this.easeSpriteProperty;
-                } else if (tokens[2] === 'yoyo') {
-                    config.yoyo = true;
-                    return this.easeSpriteProperty;
-                } else {
-                    config.methodName = tokens[2];
-                    return this.runSpriteMethod;
-                }
+
+        config.name = tokens[0];
+        if (tokens.length === 1) {
+            return this.setGOProperty;
+        } else if (tokens[1] === 'to') {
+            return this.easeGOProperty;
+        } else if (tokens[1] === 'yoyo') {
+            config.yoyo = true;
+            return this.easeGOProperty;
+        } else {
+            config.methodName = tokens[1];
+            return this.runGOMethod;
         }
     }
 
