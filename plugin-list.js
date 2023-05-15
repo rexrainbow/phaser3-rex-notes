@@ -144,6 +144,7 @@ module.exports = {
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
     'bracketparser2plugin': './plugins/bracketparser2-plugin.js',
     'tagplayerplugin': './plugins/tagplayer-plugin.js',
+    //'markedeventsheetsplugin': './plugins/markedeventsheets-plugin.js',
 
     // time
     'clockplugin': './plugins/clock-plugin.js',

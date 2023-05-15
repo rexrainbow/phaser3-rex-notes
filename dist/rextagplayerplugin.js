@@ -3048,8 +3048,18 @@
       this.gameObjectManagers[config.name] = gameobjectManager;
       return this;
     },
-    getGameObjectManager: function getGameObjectManager(name) {
-      return this.gameObjectManagers[name];
+    getGameObjectManager: function getGameObjectManager(managerName, gameObjectName) {
+      if (managerName) {
+        var manager = this.gameObjectManagers[managerName];
+        return manager;
+      } else {
+        for (var managerName in this.gameObjectManagers) {
+          var manager = this.gameObjectManagers[managerName];
+          if (manager.has(gameObjectName)) {
+            return manager;
+          }
+        }
+      }
     },
     getGameObjectManagerNames: function getGameObjectManagerNames() {
       var names = [];
@@ -3066,11 +3076,11 @@
       for (var _len = arguments.length, params = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         params[_key - 2] = arguments[_key];
       }
-      (_this$getGameObjectMa = this.getGameObjectManager(goType)).add.apply(_this$getGameObjectMa, [name].concat(params));
+      (_this$getGameObjectMa = this.getGameObjectManager(goType, name)).add.apply(_this$getGameObjectMa, [name].concat(params));
       return this;
     },
     destroyGameObject: function destroyGameObject(goType, name) {
-      var gameObjectManager = this.getGameObjectManager(goType);
+      var gameObjectManager = this.getGameObjectManager(goType, name);
       if (name === undefined) {
         gameObjectManager.removeAll();
       } else {
@@ -3083,19 +3093,19 @@
       for (var _len2 = arguments.length, params = new Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
         params[_key2 - 3] = arguments[_key2];
       }
-      (_this$getGameObjectMa2 = this.getGameObjectManager(goType)).call.apply(_this$getGameObjectMa2, [name, methodName].concat(params));
+      (_this$getGameObjectMa2 = this.getGameObjectManager(goType, name)).call.apply(_this$getGameObjectMa2, [name, methodName].concat(params));
       return this;
     },
     setGameObjectProperty: function setGameObjectProperty(goType, name, prop, value) {
-      this.getGameObjectManager(goType).setProperty(name, prop, value);
+      this.getGameObjectManager(goType, name).setProperty(name, prop, value);
       return this;
     },
     easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
-      this.getGameObjectManager(goType).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
+      this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
       return this;
     },
     getGameObject: function getGameObject(goType, name, out) {
-      var gameobjectManager = this.getGameObjectManager(goType);
+      var gameobjectManager = this.getGameObjectManager(goType, name);
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
@@ -3113,7 +3123,7 @@
       }
     },
     addGameObject: function addGameObject(goType, name, gameObject) {
-      var gameobjectManager = this.getGameObjectManager(goType);
+      var gameobjectManager = this.getGameObjectManager(goType, name);
       if (typeof name === 'string') {
         gameobjectManager.addGO(name, gameObject);
       } else {

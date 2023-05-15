@@ -141,11 +141,14 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  function getDefaultExportFromCjs (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
 
-  var delaunay = createCommonjsModule(function (module) {
+  var delaunay = {exports: {}};
+
+  delaunay.exports;
+  (function (module) {
     // https://github.com/darkskyapp/delaunay-fast/blob/master/delaunay.js
 
     var Delaunay;
@@ -362,14 +365,16 @@
       };
       module.exports = Delaunay;
     })();
-  });
+  })(delaunay);
+  var delaunayExports = delaunay.exports;
+  var Delaunay = /*@__PURE__*/getDefaultExportFromCjs(delaunayExports);
 
   var Triangle = Phaser.Geom.Triangle;
   var Triangulate = function Triangulate(vertices, triangleResult) {
     if (triangleResult === undefined) {
       triangleResult = true;
     }
-    var indices = delaunay.triangulate(vertices);
+    var indices = Delaunay.triangulate(vertices);
     if (triangleResult) {
       var triangles = [];
       for (var i = 0, cnt = indices.length; i < cnt; i += 3) {

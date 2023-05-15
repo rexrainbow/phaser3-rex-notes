@@ -109,11 +109,14 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  function getDefaultExportFromCjs (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
 
-  var lzString_min = createCommonjsModule(function (module) {
+  var lzString_min = {exports: {}};
+
+  lzString_min.exports;
+  (function (module) {
     var LZString = function () {
       function o(o, r) {
         if (!t[o]) {
@@ -305,7 +308,9 @@
       return i;
     }();
     null != module && (module.exports = LZString);
-  });
+  })(lzString_min);
+  var lzString_minExports = lzString_min.exports;
+  var lzstring = /*@__PURE__*/getDefaultExportFromCjs(lzString_minExports);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var LZStringKlass = /*#__PURE__*/function () {
@@ -352,13 +357,13 @@
       key: "compress",
       value: function compress(s) {
         var fnName = COMPRESSFNNAME[this.encoding];
-        return lzString_min[fnName](s);
+        return lzstring[fnName](s);
       }
     }, {
       key: "decompress",
       value: function decompress(s) {
         var fnName = DECOMPRESSFNNAME[this.encoding];
-        return lzString_min[fnName](s);
+        return lzstring[fnName](s);
       }
     }]);
     return LZStringKlass;
