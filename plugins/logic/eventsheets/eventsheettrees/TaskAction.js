@@ -1,5 +1,6 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
+import DeepClone from '../../../utils/object/DeepClone.js';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -23,28 +24,26 @@ class TaskAction extends Action {
             return;
         }
 
+        var taskParameters = DeepClone(taskData.parameters);
         var taskHandlers = tick.target;
         var handler = taskHandlers[taskName];
         if (!handler) {
             if (taskHandlers.getHandler) {
-                handler = taskHandlers.getHandler(taskName);
+                handler = taskHandlers.getHandler(taskName, taskParameters);
             }
             if (!handler) {
                 return;
             }
         }
 
-        var eventEmitter = handler.call(taskHandlers,
-            taskData.parameters,
-            tick.blackboard.treeManager
-        );
+        var treeManager = tick.blackboard.treeManager;
+        var eventEmitter = handler.call(taskHandlers, taskParameters, treeManager);
 
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
 
             eventEmitter.once('complete', this.onTaskComplete, this);
 
-            var treeManager = tick.blackboard.treeManager;
             this.continueCallback = treeManager.continue.bind(treeManager);
             this.continueEE = eventEmitter;
         }
