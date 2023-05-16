@@ -3158,6 +3158,13 @@
         names.push(name);
       }
       return names;
+    },
+    getGameObjectManagerName: function getGameObjectManagerName(gameObjectName) {
+      for (var managerName in this.gameObjectManagers) {
+        if (this.gameObjectManagers[managerName].has(gameObjectName)) {
+          return managerName;
+        }
+      }
     }
   };
 

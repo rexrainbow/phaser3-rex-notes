@@ -1,9 +1,8 @@
 import phaser from 'phaser/src/phaser.js';
 import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import ManagersBase from '../../plugins/logic/runcommands/managers/Managers.js';
 
-class TaskHandlers extends ManagersBase {
+class TaskHandlers extends RexPlugins.TaskHandlers {
     constructor(scene) {
         super(scene);
 
@@ -38,8 +37,11 @@ class TaskHandlers extends ManagersBase {
 
     textTyping({ name, text, speed } = {}) {
         var textBox = this.getGameObject('text', name);
-        textBox.start(text, speed);
-        return textBox;
+        textBox
+            .once('complete', this.complete, this)
+            .start(text, speed);
+
+        return this;
     }
 
     sprite({ name, key, frame, vpx = 0.5, vpy = 0.5 } = {}) {
@@ -175,17 +177,6 @@ var CreateTextBox = function (scene, wrapWidth, width, height) {
     return textBox;
 }
 
-var CreateBuiltInText = function (scene, wrapWidth, width, height) {
-    return scene.add.text(0, 0, '', {
-        fontSize: '20px',
-        wordWrap: {
-            width: wrapWidth
-        },
-        maxLines: 4
-    })
-        .setFixedSize(width, height);
-}
-
 class Demo extends Phaser.Scene {
 
     constructor() {
@@ -203,7 +194,7 @@ class Demo extends Phaser.Scene {
     create() {
         var taskHandlers = new TaskHandlers(this);
 
-        var manager = this.plugins.get('rexMarkedEventSheets').add({
+        var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
             taskHandlers: taskHandlers
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
