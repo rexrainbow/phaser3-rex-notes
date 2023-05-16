@@ -10,9 +10,11 @@ hp > 3
 
 ## Script
 
-// comment line
+// single comment line
 
+// comment line inside command lines\
 print\
+ // comment line inside command lines\
  text=Hello
 
 print\

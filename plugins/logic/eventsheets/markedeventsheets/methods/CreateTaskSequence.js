@@ -139,12 +139,15 @@ var ParseCommandString = function (commandString, delimiter, {
     lineReturn = '\\',
     commentLineStart = '\/\/',
 } = {}) {
-    var isLinesCommand = delimiter === '\n';
-
     var lines = commandString.split(delimiter);
 
-    if (isLinesCommand) {
-        if (IsCommentLine(lines[0], commentLineStart)) {
+    if (delimiter === '\n') {
+        // Discard comment lines
+        lines = lines.filter(function (line) {
+            return !line.trimLeft().startsWith(commentLineStart);
+        })
+
+        if (lines.length === 0) {
             return null;
         } else if (lines.length === 1) {
             if (IsExitCommand(lines[0])) {
