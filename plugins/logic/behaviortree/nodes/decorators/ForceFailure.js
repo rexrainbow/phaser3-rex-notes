@@ -6,7 +6,6 @@ class ForceFailure extends Decorator {
 
     constructor(
         {
-            returnRunning = true,
             child = null,
             title,
             name = 'ForceFailure'
@@ -20,13 +19,10 @@ class ForceFailure extends Decorator {
                 title,
                 name,
                 properties: {
-                    returnRunning,
                 },
             },
             nodePool
         );
-
-        this.returnRunning = returnRunning;
 
     }
 
@@ -35,16 +31,13 @@ class ForceFailure extends Decorator {
             return ERROR;
         }
 
-        // Won't abort child
         var status = this.child._execute(tick);
 
-        if (status === ABORT) {
-            return ABORT;
-        } else if (this.returnRunning && (status === RUNNING)) {
-            return RUNNING;
+        if (status === SUCCESS) {
+            return FAILURE;
         }
 
-        return FAILURE;
+        return status;
     }
 };
 

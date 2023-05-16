@@ -6,7 +6,6 @@ class ForceSuccess extends Decorator {
 
     constructor(
         {
-            returnRunning = true,
             child = null,
             title,
             name = 'ForceSuccess'
@@ -20,14 +19,10 @@ class ForceSuccess extends Decorator {
                 title,
                 name,
                 properties: {
-                    returnRunning,
                 },
             },
             nodePool
         );
-
-        this.returnRunning = returnRunning;
-
     }
 
     tick(tick) {
@@ -35,15 +30,13 @@ class ForceSuccess extends Decorator {
             return ERROR;
         }
 
-        // Won't abort child
         var status = this.child._execute(tick);
 
-        if (status === ABORT) {
-            return ABORT;
-        } else if (this.returnRunning && (status === RUNNING)) {
-            return RUNNING;
+        if (status === FAILURE) {
+            return SUCCESS;
         }
-        return SUCCESS;
+
+        return status;
     }
 };
 
