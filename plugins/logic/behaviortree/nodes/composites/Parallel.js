@@ -50,6 +50,7 @@ class Parallel extends Composite {
         var hasAnyPendingStatus = false;
         var hasAnyRunningStatus = false;
         var hasAnyAbortStatus = false;
+        var hasAnyErrorStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
             var status = this.children[childIndex]._execute(tick);
@@ -76,6 +77,10 @@ class Parallel extends Composite {
                 case ABORT:
                     hasAnyAbortStatus = true;
                     break;
+
+                case ERROR:
+                    hasAnyErrorStatus = true;
+                    break;
             }
         }
 
@@ -92,7 +97,9 @@ class Parallel extends Composite {
         if (this.finishMode === 0) {
             return nodeMemory.$mainTaskStatus;
         } else {
-            if (hasAnyAbortStatus) {
+            if (hasAnyErrorStatus) {
+                return ERROR;
+            } else if (hasAnyAbortStatus) {
                 return ABORT;
             } else if (hasAnyPendingStatus) {
                 return PENDING;

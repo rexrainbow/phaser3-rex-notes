@@ -39,7 +39,6 @@ class Repeat extends Decorator {
             return ERROR;
         }
 
-        // Won't abort child
         var nodeMemory = this.getNodeMemory(tick);
         var maxLoop = nodeMemory.$maxLoop;
         var i = nodeMemory.$i;

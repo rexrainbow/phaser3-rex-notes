@@ -27,7 +27,6 @@ class Invert extends Decorator {
             return ERROR;
         }
 
-        // Won't abort child
         var status = this.child._execute(tick);
 
         if (status === SUCCESS) {
@@ -35,7 +34,6 @@ class Invert extends Decorator {
         } else if (status === FAILURE) {
             status = SUCCESS;
         }
-        // Bypass RUNNING, ABORT status
 
         return status;
     }
