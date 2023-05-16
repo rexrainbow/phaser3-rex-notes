@@ -33,8 +33,9 @@ Reference: https://github.com/behavior3/behavior3js/
     - Succeeder
     - Failer
     - Runner
-    - Failer
     - Wait
+    - Error
+    - Abort
 
 ## Logic mapping
 

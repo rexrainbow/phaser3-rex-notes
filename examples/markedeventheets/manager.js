@@ -1,7 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import ManagersBase from '../../plugins/logic/runcommands/managers/Managers.js';
-import content from 'raw-loader!/assets/markedeventsheet/manager.md';
 
 class TaskHandlers extends ManagersBase {
     constructor(scene) {
@@ -73,9 +72,6 @@ class TaskHandlers extends ManagersBase {
 
 }
 
-
-
-
 class Demo extends Phaser.Scene {
 
     constructor() {
@@ -85,6 +81,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.text('eventSheet0', 'assets/markedeventsheet/manager.md');
         this.load.image('dude', 'assets/images/phaser-dude.png');
     }
 
@@ -94,7 +91,7 @@ class Demo extends Phaser.Scene {
         var manager = this.plugins.get('rexMarkedEventSheets').add({
             taskHandlers: taskHandlers
         })
-            .addEventSheet(content)
+            .addEventSheet(this.cache.text.get('eventSheet0'))
             .start()
 
     }
