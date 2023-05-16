@@ -1,4 +1,4 @@
-import { Sequence, Selector, If, Succeeder, RepeatUntilFailure } from '../../../behaviortree';
+import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer } from '../../../behaviortree';
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
@@ -89,39 +89,71 @@ var CreateTaskSequence = function (node, config) {
                 var sequence = new TaskSequence({ title: node.title });
                 var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
                 for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-                    var taskData = GetTaskData(paragraphs[i], config);
-                    if (taskData) {
-                        var taskAction = new TaskAction(taskData);
-                        sequence.addChild(taskAction);
+                    var commandData = GetCommandData(paragraphs[i], config);
+                    if (!commandData) {
+                        continue;
                     }
+
+                    var commandType = commandData.type;
+                    delete commandData.type;
+
+                    var actionNode;
+                    switch (commandType) {
+                        case 'exit':
+                            actionNode = new Abort({ title: '[exit]' });
+                            break;
+
+                        case 'break':
+                            actionNode = new Failer({ title: '[break]' });
+                            break;
+
+                        default:
+                            actionNode = new TaskAction(commandData);
+                            break;
+                    }
+
+                    sequence.addChild(actionNode);
+
                 }
                 return sequence;
         }
     }
 }
 
-var GetTaskData = function (paragraph, config) {
-    var taskData;
+var GetCommandData = function (paragraph, config) {
+    var commandData;
     if (paragraph.hasOwnProperty('block')) {
-        taskData = ParseCommandString(paragraph.block, ',', config);
-        taskData.parameters.text = paragraph.text;
+        commandData = ParseCommandString(paragraph.block, ',', config);
+        commandData.parameters.text = paragraph.text;
     } else {
-        taskData = ParseCommandString(paragraph.text, '\n', config);
+        commandData = ParseCommandString(paragraph.text, '\n', config);
     }
 
-    return taskData
+    return commandData;
 }
 
 var ParseCommandString = function (commandString, delimiter, {
     lineReturn = '\\',
     commentLineStart = '\/\/',
 } = {}) {
+    var isLinesCommand = delimiter === '\n';
+
     var lines = commandString.split(delimiter);
-    if (IsCommentLine(lines[0], commentLineStart)) {
-        return null;
+
+    if (isLinesCommand) {
+        if (IsCommentLine(lines[0], commentLineStart)) {
+            return null;
+        } else if (lines.length === 1) {
+            if (IsExitCommand(lines[0])) {
+                return { type: 'exit' };
+            } else if (IsBreakLabelCommand(lines[0])) {
+                return { type: 'break' };
+            }
+        }
     }
 
-    var taskData = {
+    var commandData = {
+        type: 'task',
         name: TrimString(lines[0], lineReturn),
         parameters: {}
     };
@@ -140,11 +172,11 @@ var ParseCommandString = function (commandString, delimiter, {
         }
     }
 
-    var parameters = taskData.parameters;
+    var parameters = commandData.parameters;
     for (var i = 0, cnt = parameterLines.length; i < cnt; i++) {
         ParseProperty(TrimString(parameterLines[i], lineReturn), parameters);
     }
-    return taskData;
+    return commandData;
 }
 
 var TrimString = function (s, lineReturn) {
@@ -157,5 +189,14 @@ var TrimString = function (s, lineReturn) {
 var IsCommentLine = function (s, commentLineStart) {
     return s.trimLeft().startsWith(commentLineStart);
 }
+
+var IsExitCommand = function (s) {
+    return s.trim().toLowerCase() === '[exit]';
+}
+
+var IsBreakLabelCommand = function (s) {
+    return s.trim().toLowerCase() === '[break]';
+}
+
 
 export default CreateTaskSequence;

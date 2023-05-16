@@ -1,11 +1,12 @@
 import Decorator from '../Decorator.js';
-import { SUCCESS, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, ERROR } from '../../constants.js';
 
 class RepeatUntilFailure extends Decorator {
 
     constructor(
         {
             maxLoop = -1,
+            returnSuccess = true,
             child = null,
             title,
             name = 'RepeatUntilFailure',
@@ -19,6 +20,7 @@ class RepeatUntilFailure extends Decorator {
                 title,
                 name,
                 properties: {
+                    returnSuccess,
                     maxLoop
                 },
             },
@@ -26,6 +28,7 @@ class RepeatUntilFailure extends Decorator {
         );
 
         this.maxLoopExpression = this.addExpression(maxLoop);
+        this.returnSuccess = returnSuccess;
     }
 
     open(tick) {
@@ -47,7 +50,7 @@ class RepeatUntilFailure extends Decorator {
 
         // Open child before exceed maxLoop
         // Execute child many times in a tick
-        while (maxLoop < 0 || i < maxLoop) {
+        while ((maxLoop < 0) || (i < maxLoop)) {
             status = this.child._execute(tick);
 
             if (status === SUCCESS) {
@@ -58,6 +61,11 @@ class RepeatUntilFailure extends Decorator {
         }
 
         nodeMemory.$i = i;
+
+        if ((status === this.FAILURE) && this.returnSuccess) {
+            status = SUCCESS;
+        }
+
         return status;
     }
 };

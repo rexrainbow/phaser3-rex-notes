@@ -20,6 +20,7 @@ import {
     Runner,
     Error,
     Wait,
+    Abort,
 
     Selector,
     Sequence,
@@ -78,6 +79,7 @@ export {
     Runner,
     Error,
     Wait,
+    Abort,
 
     Selector,
     Sequence,

@@ -74,6 +74,9 @@ print\
 
 ## Before while
 
+print\
+  text=Before while
+
 set\
   loopCount=3
 
@@ -89,6 +92,38 @@ print\
 set\
   loopCount=loopCount-1
 
+## After while
+
+print\
+  text=After while
+
+## Break label test
+
+print\
+  text=Before break-label
+
+[break]
+
+print\
+  text=After break-label
+
+## Exit test
+
+print\
+  text=Before exit
+
+[exit]
+
+print\
+  text=After exit
+
+## Remainder
+
+print\
+  text=Here
+
+print\
+  text=Here
 
 ## [Catch]
 

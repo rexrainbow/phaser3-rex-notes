@@ -1,4 +1,4 @@
-import { Sequence, } from '../../behaviortree';
+import { Sequence, SUCCESS, FAILURE } from '../../behaviortree';
 
 class TaskSequence extends Sequence {
     open(tick) {
@@ -7,6 +7,15 @@ class TaskSequence extends Sequence {
         var treeManager = tick.blackboard.treeManager;
         treeManager.emit('label.enter', this.title, treeManager);
 
+    }
+
+    tick(tick) {
+        var status = super.tick(tick);
+        // Turn FAILURE by SUCCESS
+        if (status === FAILURE) {
+            status = SUCCESS;
+        }
+        return status;
     }
 
     close(tick) {
