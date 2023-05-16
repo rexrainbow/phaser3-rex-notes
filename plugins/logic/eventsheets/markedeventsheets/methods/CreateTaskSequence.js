@@ -76,7 +76,10 @@ var CreateTaskSequence = function (node, config) {
                 return ifDecorator;
 
             case 'while':
-                var whileDecorator = new RepeatUntilFailure({ title: '[while]' })
+                var whileDecorator = new RepeatUntilFailure({
+                    title: '[while]',
+                    returnSuccess: true,
+                })
                 var ifDecorator = new If({
                     title: '[while]',
                     expression: GetConditionExpression(node)

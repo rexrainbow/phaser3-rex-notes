@@ -6,7 +6,7 @@ class RepeatUntilFailure extends Decorator {
     constructor(
         {
             maxLoop = -1,
-            returnSuccess = true,
+            returnSuccess = false,
             child = null,
             title,
             name = 'RepeatUntilFailure',
