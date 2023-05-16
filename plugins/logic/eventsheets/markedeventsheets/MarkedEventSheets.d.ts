@@ -5,6 +5,7 @@ export default MarkedEventSheets;
 declare namespace MarkedEventSheets {
     interface IAddEventSheet {
         lineReturn?: string,
+        commentLineStart?: string,
         parallel?: boolean,
     }
 }

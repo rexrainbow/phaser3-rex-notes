@@ -9,6 +9,7 @@ import CreateTaskSequence from './CreateTaskSequence.js';
 
 var Marked2Tree = function (markedString, {
     lineReturn = '\\',
+    commentLineStart = '\/\/',
     parallel = false,
 } = {}) {
 
@@ -17,6 +18,7 @@ var Marked2Tree = function (markedString, {
     var { conditionNodes, mainTaskNodes, catchNodes } = ParseNodes(headingTree.children);
 
     var { parallel = parallel } = treeConfig;
+    var taskSequenceConfig = { lineReturn, commentLineStart };
 
     var tree = new EventBehaviorTree({
         title: headingTree.title,
@@ -25,11 +27,11 @@ var Marked2Tree = function (markedString, {
     })
 
     var rootNode = tree.root;
-    rootNode.addChild(CreateTaskSequence(mainTaskNodes, { lineReturn }));
+    rootNode.addChild(CreateTaskSequence(mainTaskNodes, taskSequenceConfig));
 
     var forceFailure = new ForceFailure();
     if (catchNodes.length > 0) {
-        forceFailure.addChild(CreateTaskSequence(catchNodes[0], { lineReturn }));
+        forceFailure.addChild(CreateTaskSequence(catchNodes[0], taskSequenceConfig));
     } else {
         forceFailure.addChild(new Succeeder());
     }

@@ -10,6 +10,8 @@ hp > 3
 
 ## Script
 
+// comment line
+
 print\
  text=Hello
 

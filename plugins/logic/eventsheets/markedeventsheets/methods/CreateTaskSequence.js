@@ -7,21 +7,19 @@ import TaskAction from '../../eventsheettrees/TaskAction.js';
 
 var TypeNames = ['if', 'else', 'while'];
 
-var CreateTaskSequence = function (node, {
-    lineReturn = '\\'
-} = {}) {
+var CreateTaskSequence = function (node, config) {
 
     if (Array.isArray(node)) {
         var nodes = node;
         if (nodes.length === 1) {
-            return CreateTaskSequence(nodes[0], { lineReturn });
+            return CreateTaskSequence(nodes[0], config);
 
         } else {
             var sequence = new Sequence({ title: '[root]' });
             var lastIfSelector;
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
                 var node = nodes[i];
-                var child = CreateTaskSequence(node, { lineReturn });
+                var child = CreateTaskSequence(node, config);
                 // Construct if-branch selector
                 switch (child.title) {
                     case '[if]':
@@ -60,7 +58,7 @@ var CreateTaskSequence = function (node, {
                 var ifDecorator = new If({
                     expression: GetConditionExpression(node)
                 });
-                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                ifDecorator.addChild(CreateTaskSequence(node.children, config));
                 selector.addChild(ifDecorator)
 
                 var succeeder = new Succeeder();
@@ -73,7 +71,7 @@ var CreateTaskSequence = function (node, {
                     title: '[else]',
                     expression: GetConditionExpression(node)
                 });
-                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                ifDecorator.addChild(CreateTaskSequence(node.children, config));
 
                 return ifDecorator;
 
@@ -83,7 +81,7 @@ var CreateTaskSequence = function (node, {
                     title: '[while]',
                     expression: GetConditionExpression(node)
                 });
-                ifDecorator.addChild(CreateTaskSequence(node.children, { lineReturn }));
+                ifDecorator.addChild(CreateTaskSequence(node.children, config));
                 whileDecorator.addChild(ifDecorator);
                 return whileDecorator;
 
@@ -91,32 +89,38 @@ var CreateTaskSequence = function (node, {
                 var sequence = new TaskSequence({ title: node.title });
                 var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
                 for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-                    var taskData = GetTaskData(paragraphs[i], { lineReturn });
-                    var taskAction = new TaskAction(taskData);
-                    sequence.addChild(taskAction);
+                    var taskData = GetTaskData(paragraphs[i], config);
+                    if (taskData) {
+                        var taskAction = new TaskAction(taskData);
+                        sequence.addChild(taskAction);
+                    }
                 }
                 return sequence;
         }
     }
 }
 
-var GetTaskData = function (paragraph, {
-    lineReturn = '\\'
-} = {}) {
-
+var GetTaskData = function (paragraph, config) {
     var taskData;
     if (paragraph.hasOwnProperty('block')) {
-        taskData = ParseCommandString(paragraph.block, ',');
+        taskData = ParseCommandString(paragraph.block, ',', config);
         taskData.parameters.text = paragraph.text;
     } else {
-        taskData = ParseCommandString(paragraph.text, '\n', lineReturn);
+        taskData = ParseCommandString(paragraph.text, '\n', config);
     }
 
     return taskData
 }
 
-var ParseCommandString = function (commandString, delimiter, lineReturn) {
+var ParseCommandString = function (commandString, delimiter, {
+    lineReturn = '\\',
+    commentLineStart = '\/\/',
+} = {}) {
     var lines = commandString.split(delimiter);
+    if (IsCommentLine(lines[0], commentLineStart)) {
+        return null;
+    }
+
     var taskData = {
         name: TrimString(lines[0], lineReturn),
         parameters: {}
@@ -148,6 +152,10 @@ var TrimString = function (s, lineReturn) {
         s = s.substring(0, s.length - 1);
     }
     return s.trimLeft();
+}
+
+var IsCommentLine = function (s, commentLineStart) {
+    return s.trimLeft().startsWith(commentLineStart);
 }
 
 export default CreateTaskSequence;

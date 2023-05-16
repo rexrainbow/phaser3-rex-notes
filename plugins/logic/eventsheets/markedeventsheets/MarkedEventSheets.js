@@ -4,11 +4,13 @@ import Marked2Tree from './methods/Marked2Tree.js';
 class MarkedEventSheets extends EventSheetTrees {
     addEventSheet(markedString, {
         lineReturn = '\\',
-        parallel = this.parallel
+        commentLineStart = '\/\/',
+        parallel = this.parallel,
     } = {}) {
 
         var tree = Marked2Tree(markedString, {
             lineReturn,
+            commentLineStart,
             parallel
         });
 
