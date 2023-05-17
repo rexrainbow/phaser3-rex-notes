@@ -24,21 +24,20 @@ class TaskAction extends Action {
             return;
         }
 
+        var treeManager = tick.blackboard.treeManager;
         var taskParameters = DeepClone(taskData.parameters);
         var taskHandlers = tick.target;
         var handler = taskHandlers[taskName];
         if (!handler) {
             if (taskHandlers.getHandler) {
-                handler = taskHandlers.getHandler(taskName, taskParameters);
+                handler = taskHandlers.getHandler(taskName, taskParameters, treeManager);
             }
             if (!handler) {
                 return;
             }
         }
 
-        var treeManager = tick.blackboard.treeManager;
         var eventEmitter = handler.call(taskHandlers, taskParameters, treeManager);
-
         if (IsEventEmitter(eventEmitter)) {
             this.isRunning = true;
 

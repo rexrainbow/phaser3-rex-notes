@@ -27,7 +27,7 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         return this;
     }
 
-    text({ name, width, height, vpx = 0.5, vpy = 0.5 } = {}) {
+    text({ name, width, height, vpx = 0.5, vpy = 0.5 } = {}, manager) {
         this.createGameObject('text', name, width - 20, width, height);
         var gameObject = this.getGameObject('text', name);
         gameObject.vpx = vpx;
@@ -35,7 +35,7 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         // Execute next command
     }
 
-    textTyping({ name, text, speed } = {}) {
+    textTyping({ name, text, speed } = {}, manager) {
         var textBox = this.getGameObject('text', name);
         textBox
             .once('complete', this.complete, this)
@@ -45,7 +45,7 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         // Wait until typing complete
     }
 
-    sprite({ name, key, frame, vpx = 0.5, vpy = 0.5 } = {}) {
+    sprite({ name, key, frame, vpx = 0.5, vpy = 0.5 } = {}, manager) {
         this.createGameObject('sprite', name, key, frame);
         var gameObject = this.getGameObject('sprite', name);
         gameObject.vpx = vpx;
@@ -53,20 +53,20 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         // Execute next command
     }
 
-    setGOProperty(config) {
+    setGOProperty(config, manager) {
         var { name } = config;
         delete config.name;
         for (var prop in config) {
             var toValue = config[prop];
-            if (typeof (toValue) !== 'number') {
-                continue;
+            if (typeof (toValue) === 'string') {
+                toValue = manager.evalExpression(toValue);
             }
             this.setGameObjectProperty(undefined, name, prop, toValue);
         }
         // Execute next command
     }
 
-    easeGOProperty(config) {
+    easeGOProperty(config, manager) {
         var { name, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.name;
         delete config.duration;
@@ -78,8 +78,8 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         var waitProperty;
         for (var prop in config) {
             var toValue = config[prop];
-            if (typeof (toValue) !== 'number') {
-                continue;
+            if (typeof (toValue) === 'string') {
+                toValue = manager.evalExpression(toValue);
             }
             this.easeGameObjectProperty(undefined, name, prop, toValue, duration, ease, repeat, yoyo);
             waitProperty = prop;
@@ -96,11 +96,11 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         // Execute next command
     }
 
-    runGOMethod(config) {
+    runGOMethod(config, manager) {
         // TODO
     }
 
-    getHandler(name, config) {
+    getHandler(name, config, manager) {
         var tokens = name.split('.');
 
         config.name = tokens[0];
