@@ -3111,6 +3111,9 @@
       this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
       return this;
     },
+    getGameObjectTweenTask: function getGameObjectTweenTask(goType, name, property) {
+      return this.getGameObjectManager(goType, name).getTweenTask(name, property);
+    },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);
       if (typeof name === 'string') {

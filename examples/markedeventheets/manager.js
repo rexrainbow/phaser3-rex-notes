@@ -42,6 +42,7 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
             .start(text, speed);
 
         return this;
+        // Wait until typing complete
     }
 
     sprite({ name, key, frame, vpx = 0.5, vpy = 0.5 } = {}) {
@@ -62,16 +63,28 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
     }
 
     easeGOProperty(config) {
-        var { name, duration, ease, repeat, yoyo } = config;
+        var { name, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.name;
         delete config.duration;
         delete config.ease;
         delete config.repeat;
         delete config.yoyo;
+        delete config.wait;
 
+        var firstProperty;
         for (var prop in config) {
+            firstProperty = prop;
             this.easeGameObjectProperty(undefined, name, prop, config[prop], duration, ease, repeat, yoyo);
         }
+        if (wait) {
+            var tweenTask = this.getGameObjectTweenTask(undefined, name, firstProperty);
+            if (tweenTask) {
+                tweenTask.once('complete', this.complete, this);
+                return this;
+                // Wait until tween complete
+            }
+        }
+
         // Execute next command
     }
 

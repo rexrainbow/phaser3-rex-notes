@@ -74,26 +74,31 @@ declare class Managers extends Phaser.Events.EventEmitter {
         ...params: any[]
     ): this;
 
-    destroyGameObject(goType: string, name: string): this;
+    destroyGameObject(goType: string | undefined, name: string): this;
 
     callGameObjectMethod(
-        goType: string, name: string,
+        goType: string | undefined, name: string,
         methodName: string, ...params: any[]
     ): this;
 
     setGameObjectProperty(
-        goType: string, name: string,
+        goType: string | undefined, name: string,
         prop: string, value: any,
     ): this;
 
     easeGameObjectProperty(
-        goType: string, name: string,
+        goType: string | undefined, name: string,
         prop: string, value: any,
         duration?: number, ease?: string, repeat?: number, isYoyo?: boolean
     ): this;
 
+    getGameObjectTweenTask(
+        goType: string | undefined, name: string,
+        property: string | undefined
+    ): Phaser.Tweens.Tween | null;
+
     getGameObject(
-        goType: string, name: string
+        goType: string | undefined, name: string,
     ): Phaser.GameObjects.GameObject;
 
     getGameObject(

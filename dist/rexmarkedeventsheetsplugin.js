@@ -8232,14 +8232,17 @@
       if (lines.length === 0) {
         return null;
       } else if (lines.length === 1) {
-        if (IsExitCommand(lines[0])) {
+        var line = lines[0];
+        if (IsExitCommand(line)) {
           return {
             type: 'exit'
           };
-        } else if (IsBreakLabelCommand(lines[0])) {
+        } else if (IsBreakLabelCommand(line)) {
           return {
             type: 'break'
           };
+        } else if (line.indexOf(',') !== -1) {
+          lines = commandString.split(',');
         }
       }
     }
@@ -8248,22 +8251,9 @@
       name: TrimString(lines[0], lineReturn),
       parameters: {}
     };
-    var parameterLines = [];
-    for (var i = 1, cnt = lines.length; i < cnt; i++) {
-      var line = lines[i];
-      if (line.indexOf('=') > -1) {
-        parameterLines.push(line);
-      } else {
-        var lastParameterLine = parameterLines[parameterLines.length - 1];
-        if (lastParameterLine) {
-          lastParameterLine = "".concat(TrimString(lastParameterLine, lineReturn), "\n").concat(line);
-          parameterLines[parameterLines.length - 1] = lastParameterLine;
-        }
-      }
-    }
     var parameters = commandData.parameters;
-    for (var i = 0, cnt = parameterLines.length; i < cnt; i++) {
-      ParseProperty(TrimString(parameterLines[i], lineReturn), parameters);
+    for (var i = 1, cnt = lines.length; i < cnt; i++) {
+      ParseProperty(TrimString(lines[i], lineReturn), parameters);
     }
     return commandData;
   };
@@ -11292,6 +11282,9 @@
     easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
       this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
       return this;
+    },
+    getGameObjectTweenTask: function getGameObjectTweenTask(goType, name, property) {
+      return this.getGameObjectManager(goType, name).getTweenTask(name, property);
     },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);

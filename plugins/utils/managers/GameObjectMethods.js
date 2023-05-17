@@ -32,6 +32,10 @@ export default {
         return this;
     },
 
+    getGameObjectTweenTask(goType, name, property) {
+        return this.getGameObjectManager(goType, name).getTweenTask(name, property);
+    },
+
     getGameObject(goType, name, out) {
         var gameobjectManager = this.getGameObjectManager(goType, name);
         if (typeof (name) === 'string') {

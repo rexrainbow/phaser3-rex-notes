@@ -17,12 +17,6 @@ print\
  // comment line inside command lines\
  text=Hello
 
-print\
- text=World\
-\
-World
-
-
 ```print
 Line0
 
