@@ -2,11 +2,11 @@ import phaser from 'phaser/src/phaser.js';
 import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-class TaskHandlers extends RexPlugins.TaskHandlers {
+class TaskHandlers {
     constructor(scene) {
-        super(scene);
+        this.sys = new RexPlugins.TaskHandlers(scene);
 
-        this
+        this.sys
             .addGameObjectManager({
                 name: 'text',
                 createGameObject: CreateTextBox,
@@ -23,37 +23,36 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
     }
 
     complete() {
-        this.emit('complete');
-        return this;
+        this.sys.emit('complete');
     }
 
     text({ name, width, height, vpx = 0.5, vpy = 0.5 } = {}, manager) {
-        this.createGameObject('text', name, width - 20, width, height);
-        var gameObject = this.getGameObject('text', name);
+        this.sys.createGameObject('text', name, width - 20, width, height);
+        var gameObject = this.sys.getGameObject('text', name);
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
         // Execute next command
     }
 
     textTyping({ name, text, speed } = {}, manager) {
-        var textBox = this.getGameObject('text', name);
+        var textBox = this.sys.getGameObject('text', name);
         textBox
             .once('complete', this.complete, this)
             .start(text, speed);
 
-        return this;
+        return this.sys;
         // Wait until typing complete
     }
 
     sprite({ name, key, frame, vpx = 0.5, vpy = 0.5 } = {}, manager) {
-        this.createGameObject('sprite', name, key, frame);
-        var gameObject = this.getGameObject('sprite', name);
+        this.sys.createGameObject('sprite', name, key, frame);
+        var gameObject = this.sys.getGameObject('sprite', name);
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
         // Execute next command
     }
 
-    setGOProperty(config, manager) {
+    _setGOProperty(config, manager) {
         var { name } = config;
         delete config.name;
         for (var prop in config) {
@@ -61,12 +60,12 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
             if (typeof (toValue) === 'string') {
                 toValue = manager.evalExpression(toValue);
             }
-            this.setGameObjectProperty(undefined, name, prop, toValue);
+            this.sys.setGameObjectProperty(undefined, name, prop, toValue);
         }
         // Execute next command
     }
 
-    easeGOProperty(config, manager) {
+    _easeGOProperty(config, manager) {
         var { name, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.name;
         delete config.duration;
@@ -81,14 +80,14 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
             if (typeof (toValue) === 'string') {
                 toValue = manager.evalExpression(toValue);
             }
-            this.easeGameObjectProperty(undefined, name, prop, toValue, duration, ease, repeat, yoyo);
+            this.sys.easeGameObjectProperty(undefined, name, prop, toValue, duration, ease, repeat, yoyo);
             waitProperty = prop;
         }
         if (wait && waitProperty) {
-            var tweenTask = this.getGameObjectTweenTask(undefined, name, waitProperty);
+            var tweenTask = this.sys.getGameObjectTweenTask(undefined, name, waitProperty);
             if (tweenTask) {
                 tweenTask.once('complete', this.complete, this);
-                return this;
+                return this.sys;
                 // Wait until tween complete
             }
         }
@@ -96,7 +95,7 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         // Execute next command
     }
 
-    runGOMethod(config, manager) {
+    _runGOMethod(config, manager) {
         // TODO
     }
 
@@ -106,25 +105,25 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         config.name = tokens[0];
         switch (tokens.length) {
             case 1:
-                var gameObjectType = this.getGameObjectManagerName(config.name);
+                var gameObjectType = this.sys.getGameObjectManagerName(config.name);
                 if ((gameObjectType === 'text') && (config.text)) {
                     return this.textTyping;
                 } else {
-                    return this.setGOProperty;
+                    return this._setGOProperty;
                 }
 
             case 2:
                 switch (tokens[1]) {
                     case 'to':
-                        return this.easeGOProperty;
+                        return this._easeGOProperty;
 
                     case 'yoyo':
                         config.yoyo = true;
-                        return this.easeGOProperty;
+                        return this._easeGOProperty;
 
                     default:
                         config.methodName = tokens[1];
-                        return this.runGOMethod;
+                        return this._runGOMethod;
                 }
         }
     }
