@@ -115,24 +115,4 @@ export default {
         }
         return scene.tweens.add(tweenConfig);
     },
-
-    timelineChild(timelineConfig) {
-        var targets = timelineConfig.targets;
-        // Map child game objects to local states
-        if (targets) {
-            if (!Array.isArray(targets)) {
-                targets = [targets];
-            }
-
-            timelineConfig.targets = GetLocalStates(targets);
-        }
-
-        var tweens = timelineConfig.tweens;
-        for (var i = 0, cnt = tweens.length; i < cnt; i++) {
-            tweens[i] = this.createTweenChildConfig(tweens[i]);
-        }
-
-        var timeline = this.scene.tweens.timeline(timelineConfig);
-        return timeline;
-    }
 }
