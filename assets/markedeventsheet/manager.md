@@ -10,7 +10,7 @@ text
 
 sprite
   name=角色A
-  key=dude
+  key=mushroom
   vpx=0
 
 角色A.to

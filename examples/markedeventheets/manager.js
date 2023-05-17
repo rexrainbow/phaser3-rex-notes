@@ -191,7 +191,7 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.text('eventSheet0', 'assets/markedeventsheet/manager.md');
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
-        this.load.image('dude', 'assets/images/phaser-dude.png');
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
