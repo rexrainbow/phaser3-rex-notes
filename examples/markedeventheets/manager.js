@@ -54,10 +54,14 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
     }
 
     setGOProperty(config) {
-        var name = config.name;
+        var { name } = config;
         delete config.name;
         for (var prop in config) {
-            this.setGameObjectProperty(undefined, name, prop, config[prop]);
+            var toValue = config[prop];
+            if (typeof (toValue) !== 'number') {
+                continue;
+            }
+            this.setGameObjectProperty(undefined, name, prop, toValue);
         }
         // Execute next command
     }
@@ -71,13 +75,17 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
         delete config.yoyo;
         delete config.wait;
 
-        var firstProperty;
+        var waitProperty;
         for (var prop in config) {
-            firstProperty = prop;
-            this.easeGameObjectProperty(undefined, name, prop, config[prop], duration, ease, repeat, yoyo);
+            var toValue = config[prop];
+            if (typeof (toValue) !== 'number') {
+                continue;
+            }
+            this.easeGameObjectProperty(undefined, name, prop, toValue, duration, ease, repeat, yoyo);
+            waitProperty = prop;
         }
-        if (wait) {
-            var tweenTask = this.getGameObjectTweenTask(undefined, name, firstProperty);
+        if (wait && waitProperty) {
+            var tweenTask = this.getGameObjectTweenTask(undefined, name, waitProperty);
             if (tweenTask) {
                 tweenTask.once('complete', this.complete, this);
                 return this;
