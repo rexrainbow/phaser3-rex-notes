@@ -93,14 +93,17 @@ class TaskHandlers extends RexPlugins.TaskHandlers {
                 }
 
             case 2:
-                if (tokens[1] === 'to') {
-                    return this.easeGOProperty;
-                } else if (tokens[1] === 'yoyo') {
-                    config.yoyo = true;
-                    return this.easeGOProperty;
-                } else {
-                    config.methodName = tokens[1];
-                    return this.runGOMethod;
+                switch (tokens[1]) {
+                    case 'to':
+                        return this.easeGOProperty;
+
+                    case 'yoyo':
+                        config.yoyo = true;
+                        return this.easeGOProperty;
+
+                    default:
+                        config.methodName = tokens[1];
+                        return this.runGOMethod;
                 }
         }
     }

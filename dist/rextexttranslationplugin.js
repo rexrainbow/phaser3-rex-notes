@@ -1026,6 +1026,7 @@
         if (_typeof$3(options) !== 'object' && this.options.overloadTranslationOptionHandler) {
           options = this.options.overloadTranslationOptionHandler(arguments);
         }
+        if (_typeof$3(options) === 'object') options = _objectSpread$4({}, options);
         if (!options) options = {};
         if (keys === undefined || keys === null) return '';
         if (!Array.isArray(keys)) keys = [String(keys)];
