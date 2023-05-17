@@ -89,7 +89,7 @@ declare namespace GridTable {
 declare class GridTable extends ContainerLite {
 
     constructor(
-        scene: Phaser.GameObjects.GameObject,
+        scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
         config: GridTable.IConfig
