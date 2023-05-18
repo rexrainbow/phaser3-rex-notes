@@ -43,7 +43,7 @@ class TaskHandlers {
 
     textTyping({ name, text, speed } = {}, manager) {
         var textBox = this.sys.getGameObject('text', name);
-        this.sys.waitEvent(textBox, 'complete');
+        this.sys.waitEventManager.waitEvent(textBox, 'complete');
         textBox.start(text, speed);
 
         return this.sys;
@@ -84,7 +84,7 @@ class TaskHandlers {
             waitProperty = prop;
         }
         if (wait && waitProperty) {
-            return this.sys.waitGameObjectTweenComplete(undefined, name, waitProperty);
+            return this.sys.waitEventManager.waitGameObjectTweenComplete(undefined, name, waitProperty);
         }
 
         // Execute next command
@@ -94,20 +94,12 @@ class TaskHandlers {
         // TODO
     }
 
-    wait({ time, click, key, } = {}, manager) {
-        if (time) {
-            this.sys.waitTime(time);
+    wait(config, manager) {
+        var { time } = config;
+        if (time !== undefined) {
+            config.time = manager.evalExpression(time);
         }
-        if (click) {
-            this.sys.waitClick();
-        }
-        if (key) {
-            this.sys.waitKeyDown(key);
-        }
-
-        if (time || click || key) {
-            return this.sys;
-        }
+        return this.sys.waitEventManager.waitAny(config);
     }
 
     click(config, manager) {

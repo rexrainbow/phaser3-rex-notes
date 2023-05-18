@@ -1,5 +1,6 @@
-import SoundManager from '../audio/soundmanager/SoundManager';
 import GOManager from '../gameobject/gomanager/GOManager';
+import SoundManager from '../audio/soundmanager/SoundManager';
+import WaitEventManager from './WaitEventManager';
 
 export default Managers;
 
@@ -54,7 +55,11 @@ declare class Managers extends Phaser.Events.EventEmitter {
         config?: Managers.IConfig,
     );
 
+    gameObjectManagers: { [name: string]: GOManager };
+
     soundManager: SoundManager;
+
+    waitEventManager: WaitEventManager;
 
     destroy(fromScene?: boolean): this;
 
