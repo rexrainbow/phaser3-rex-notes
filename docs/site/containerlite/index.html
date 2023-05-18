@@ -2635,13 +2635,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#timeline-local-state" class="md-nav__link">
-    Timeline local state
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -9628,13 +9621,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#timeline-local-state" class="md-nav__link">
-    Timeline local state
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -10174,26 +10160,6 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li>Input of <code>targets</code> is/are game object(s), will be replaced by local state of game object(S)</li>
 <li>Wrap <code>onUpdate</code> callback, to update properties of child according to local state.</li>
 </ul>
-<h4 id="timeline-local-state">Timeline local state<a class="headerlink" href="#timeline-local-state" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timelineObj</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">timelineChild</span><span class="p">({</span>
-    <span class="nx">targets</span><span class="o">:</span> <span class="nx">child</span><span class="p">,</span>    <span class="c1">// Can assign child here</span>
-    <span class="nx">loop</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
-    <span class="nx">tweens</span><span class="o">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="c1">// targets: child,    // Or assign child here</span>
-            <span class="nx">angle</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-            <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="c1">// targets: child,    // Or assign child here</span>
-            <span class="nx">angle</span><span class="o">:</span> <span class="o">-</span><span class="mf">10</span><span class="p">,</span>
-            <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">]</span>
-<span class="p">})</span>
-</code></pre></div>
-<p><a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween-timeline/#create-timeline-included-tween-tasks">Paramters of configuration</a> is the same as creating timeline.</p>
 <h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get depth of container

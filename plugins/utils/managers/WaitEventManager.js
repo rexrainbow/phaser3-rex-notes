@@ -8,9 +8,13 @@ class WaitEventManager {
         this.parent = parent;
 
         this.waitCompleteEventName = GetValue(config, 'completeEventName', 'complete');
-        this.clickEE = GetValue(config, 'clickTarget', parent.scene.input);
-        this.targetCamera = GetValue(config, 'camera', parent.scene.cameras.main);
+        this.clickEE = GetValue(config, 'clickTarget', this.scene.input);
+        this.targetCamera = GetValue(config, 'camera', this.scene.cameras.main);
 
+    }
+
+    get scene() {
+        return this.parent.managersScene;
     }
 
     waitEvent(eventEmitter, eventName, completeNextTick) {
@@ -65,7 +69,7 @@ class WaitEventManager {
     }
 
     waitKeyDown(key) {
-        var eventEmitter = this.parent.scene.input.keyboard;
+        var eventEmitter = this.scene.input.keyboard;
         if (typeof (key) === 'string') {
             return this.waitEvent(eventEmitter, `keydown-${key.toUpperCase()}`)
         } else {

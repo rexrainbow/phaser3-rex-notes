@@ -10,9 +10,6 @@ class Managers extends Extend(EventEmitter) {
         this.scene = scene;
 
         this.initManagers(scene, config);
-
-        // TODO: Merge WaitEventManager into Extend
-        this.waitEventManager = new WaitEventManager(this, config);
     }
 
     destroy(fromScene) {
@@ -21,12 +18,10 @@ class Managers extends Extend(EventEmitter) {
             return;
         }
 
-        this.waitEventManager.removeWaitEvents();
-
         this.destroyManagers(fromScene);
 
         this.scene = undefined;
-        
+
         super.destroy();
     }
 }

@@ -7423,19 +7423,6 @@
     Background
   </a>
   
-    <nav class="md-nav" aria-label="Background">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#depth" class="md-nav__link">
-    Depth
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -7523,8 +7510,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#depth_1" class="md-nav__link">
+  <a href="#depth" class="md-nav__link">
     Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-factor" class="md-nav__link">
+    Scroll factor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-origin" class="md-nav__link">
+    Change origin
   </a>
   
 </li>
@@ -9436,19 +9437,6 @@
     Background
   </a>
   
-    <nav class="md-nav" aria-label="Background">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#depth" class="md-nav__link">
-    Depth
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -9536,8 +9524,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#depth_1" class="md-nav__link">
+  <a href="#depth" class="md-nav__link">
     Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-factor" class="md-nav__link">
+    Scroll factor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-origin" class="md-nav__link">
+    Change origin
   </a>
   
 </li>
@@ -9856,9 +9858,6 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveDepthBelow</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div>
 <h3 id="minimum-size">Minimum size<a class="headerlink" href="#minimum-size" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -10458,7 +10457,7 @@
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildVisible</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildAlpha</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="depth_1">Depth<a class="headerlink" href="#depth_1" title="Permanent link">&para;</a></h3>
+<h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get depth of sizer
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">depth</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">depth</span><span class="p">;</span>
@@ -10486,6 +10485,16 @@
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveDepthAbove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set scroll factor to children
+   <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="change-origin">Change origin<a class="headerlink" href="#change-origin" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">changeOrigin</span><span class="p">(</span><span class="nx">originX</span><span class="p">,</span> <span class="nx">originY</span><span class="p">);</span>
+</code></pre></div>
+<p>This method also will reset all local state of children.</p>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
