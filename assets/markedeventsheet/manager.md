@@ -33,6 +33,10 @@ Line3...
 ```
 // Wait until typing complete
 
+wait
+  time=3000
+  click
+// Wait until 3s or any touch
 
 角色A.to
   vpx=-0.1

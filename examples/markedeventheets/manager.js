@@ -3,8 +3,8 @@ import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class TaskHandlers {
-    constructor(scene) {
-        this.sys = new RexPlugins.TaskHandlers(scene);
+    constructor(scene, config) {
+        this.sys = new RexPlugins.TaskHandlers(scene, config);
 
         this.sys
             .addGameObjectManager({
@@ -22,8 +22,15 @@ class TaskHandlers {
 
     }
 
-    complete() {
-        this.sys.emit('complete');
+    destroy(fromScene) {
+        this.sys.destroy(fromScene);
+    }
+
+    set(config, manager) {
+        for (var name in config) {
+            var value = manager.evalExpression(config[name]);
+            manager.setData(name, value);
+        }
     }
 
     text({ name, width, height, vpx = 0.5, vpy = 0.5 } = {}, manager) {
@@ -36,9 +43,8 @@ class TaskHandlers {
 
     textTyping({ name, text, speed } = {}, manager) {
         var textBox = this.sys.getGameObject('text', name);
-        textBox
-            .once('complete', this.complete, this)
-            .start(text, speed);
+        this.sys.waitEvent(textBox, 'complete');
+        textBox.start(text, speed);
 
         return this.sys;
         // Wait until typing complete
@@ -56,11 +62,8 @@ class TaskHandlers {
         var { name } = config;
         delete config.name;
         for (var prop in config) {
-            var toValue = config[prop];
-            if (typeof (toValue) === 'string') {
-                toValue = manager.evalExpression(toValue);
-            }
-            this.sys.setGameObjectProperty(undefined, name, prop, toValue);
+            var value = manager.evalExpression(config[prop]);
+            this.sys.setGameObjectProperty(undefined, name, prop, value);
         }
         // Execute next command
     }
@@ -76,20 +79,12 @@ class TaskHandlers {
 
         var waitProperty;
         for (var prop in config) {
-            var toValue = config[prop];
-            if (typeof (toValue) === 'string') {
-                toValue = manager.evalExpression(toValue);
-            }
-            this.sys.easeGameObjectProperty(undefined, name, prop, toValue, duration, ease, repeat, yoyo);
+            var value = manager.evalExpression(config[prop]);
+            this.sys.easeGameObjectProperty(undefined, name, prop, value, duration, ease, repeat, yoyo);
             waitProperty = prop;
         }
         if (wait && waitProperty) {
-            var tweenTask = this.sys.getGameObjectTweenTask(undefined, name, waitProperty);
-            if (tweenTask) {
-                tweenTask.once('complete', this.complete, this);
-                return this.sys;
-                // Wait until tween complete
-            }
+            return this.sys.waitGameObjectTweenComplete(undefined, name, waitProperty);
         }
 
         // Execute next command
@@ -97,6 +92,26 @@ class TaskHandlers {
 
     _runGOMethod(config, manager) {
         // TODO
+    }
+
+    wait({ time, click, key, } = {}, manager) {
+        if (time) {
+            this.sys.waitTime(time);
+        }
+        if (click) {
+            this.sys.waitClick();
+        }
+        if (key) {
+            this.sys.waitKeyDown(key);
+        }
+
+        if (time || click || key) {
+            return this.sys;
+        }
+    }
+
+    click(config, manager) {
+        return this.wait({ click: true }, manager);
     }
 
     getHandler(name, config, manager) {

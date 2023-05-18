@@ -1,4 +1,6 @@
 import Extend from './Extend';
+import GetValue from '../object/GetValue.js';
+import WaitMethods from './WaitMethods';
 
 const EventEmitter = Phaser.Events.EventEmitter;
 
@@ -9,6 +11,10 @@ class Managers extends Extend(EventEmitter) {
         this.scene = scene;
 
         this.initManagers(scene, config);
+
+        this.waitCompleteEventName = GetValue(config, 'completeEventName', 'complete');
+        this.clickEE = GetValue(config, 'clickTarget', scene.input);
+        this.targetCamera = GetValue(config, 'camera', scene.cameras.main);
     }
 
     destroy(fromScene) {
@@ -17,7 +23,7 @@ class Managers extends Extend(EventEmitter) {
             return;
         }
 
-        ClearEvents(this);
+        this.removeWaitEvents();
 
         super.destroy();
 
@@ -26,5 +32,10 @@ class Managers extends Extend(EventEmitter) {
         this.scene = undefined;
     }
 }
+
+Object.assign(
+    Managers.prototype,
+    WaitMethods,
+)
 
 export default Managers;

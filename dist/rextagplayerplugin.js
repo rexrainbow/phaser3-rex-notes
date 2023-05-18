@@ -1916,6 +1916,28 @@
         return timer;
       }
     }, {
+      key: "delayEvent",
+      value: function delayEvent(delay, eventName) {
+        this.removeDelayEvent(eventName);
+        // Clear existed event
+
+        var timer = this.delayCall(delay, function () {
+          this.removeDelayEvent(eventName); // Clear this timer
+          this.emit(eventName);
+        }, [], this);
+        this.once("_remove.".concat(eventName), function () {
+          timer.remove();
+          timer = undefined;
+        });
+        return this;
+      }
+    }, {
+      key: "removeDelayEvent",
+      value: function removeDelayEvent(eventName) {
+        this.emit("_remove.".concat(eventName));
+        return this;
+      }
+    }, {
       key: "getTimers",
       value: function getTimers(name) {
         var timers = [];

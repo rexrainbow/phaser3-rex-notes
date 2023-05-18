@@ -63,6 +63,27 @@ class Timeline extends Clock {
         return timer;
     }
 
+    delayEvent(delay, eventName) {       
+        this.removeDelayEvent(eventName);
+        // Clear existed event
+
+        var timer = this.delayCall(delay, function () {
+            this.removeDelayEvent(eventName);  // Clear this timer
+            this.emit(eventName);           
+        }, [], this);
+
+        this.once(`_remove.${eventName}`, function () {
+            timer.remove();
+            timer = undefined;
+        });
+        return this;
+    }
+
+    removeDelayEvent(eventName) {
+        this.emit(`_remove.${eventName}`);
+        return this;
+    }
+
     getTimers(name) {
         var timers = [];
 
