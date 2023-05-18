@@ -1,5 +1,5 @@
 import GetWrapCallback from './utils/wait/GetWrapCallback.js';
-import WaitMultiple from './utils/wait/WaitMultiple.js';
+import WaitAny from './utils/wait/WaitAny.js';
 
 var SetNextPageInput = function (input) {
     var textPlayer = this;
@@ -7,14 +7,14 @@ var SetNextPageInput = function (input) {
         this.nextPageInput = null;
 
     } else if (typeof (input) === 'function') {
-        this.nextPageInput = function (callback, args, scope) {
-            var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
+        this.nextPageInput = function (callback, scope) {
+            var wrapCallback = GetWrapCallback(textPlayer, callback, scope);
             input.call(textPlayer, wrapCallback);
         }
 
     } else {
-        this.nextPageInput = function (callback, args, scope) {
-            WaitMultiple(textPlayer, input, callback, args, scope);
+        this.nextPageInput = function (callback, scope) {
+            WaitAny(textPlayer, input, callback, scope);
         }
     }
 }

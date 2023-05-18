@@ -29,7 +29,7 @@ var _TypingNextPage = function () {
             if (this.ignoreNextPageInput) {
                 TypingNextPage.call(this);
             } else if (this.nextPageInput) {
-                this.nextPageInput(TypingNextPage, [], this);
+                this.nextPageInput(TypingNextPage, this);
             } else {
                 // Stop here, don't typing next page.
             }

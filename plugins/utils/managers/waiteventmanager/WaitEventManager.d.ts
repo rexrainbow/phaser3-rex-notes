@@ -33,8 +33,10 @@ declare class WaitEventManager {
         eventEmitter: Phaser.Events.EventEmitter,
         eventName: string,
         completeNextTick?: boolean
-    ): Managers
+    ): Managers;
 
+    addWaitCompleteCallback(callback: Function, scope?: Object): this;
+    clearWaitCompleteCallbacks(): this;
 
     waitTime(duration: number): Managers;
     waitClick(): Managers;
@@ -43,10 +45,10 @@ declare class WaitEventManager {
         goType: string | undefined, name: string,
         property: string
     ): Managers;
-    waitBackgroundMusicComplete(): Managers;
-    waitBackgroundMusic2Complete(): Managers;
     waitSoundEffectComplete(): Managers;
     waitSoundEffect2Complete(): Managers;
+    waitBackgroundMusicComplete(): Managers;
+    waitBackgroundMusic2Complete(): Managers;
     waitCameraEffectComplete(effectName: string): Managers;
     waitAny(config?: { [name: string]: any }): Managers;
 }

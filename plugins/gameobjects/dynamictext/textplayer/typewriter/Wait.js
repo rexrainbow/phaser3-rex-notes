@@ -1,4 +1,4 @@
-import WaitMultiple from '../methods/utils/wait/WaitMultiple.js';
+import WaitAny from '../methods/utils/wait/WaitAny.js';
 
 var Wait = function (name) {
     // Already in typingPaused state, or ignore any wait
@@ -7,7 +7,7 @@ var Wait = function (name) {
     }
 
     this.pauseTyping();
-    WaitMultiple(this.textPlayer, name, this.resumeTyping, [], this);
+    WaitAny(this.textPlayer, name, this.resumeTyping, this);
 
     return this;
 }

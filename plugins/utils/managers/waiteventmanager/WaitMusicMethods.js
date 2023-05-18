@@ -1,4 +1,26 @@
 export default {
+    waitSoundEffectComplete() {
+        if (!this.parent.soundManager) {
+            return this.waitTime(0);
+        }
+        var music = this.parent.soundManager.getLastSoundEffect();
+        if (!music) {
+            return this.waitTime(0);
+        }
+        return this.waitEvent(music, 'complete');
+    },
+
+    waitSoundEffect2Complete() {
+        if (!this.parent.soundManager) {
+            return this.waitTime(0);
+        }
+        var music = this.parent.soundManager.getLastSoundEffect2();
+        if (!music) {
+            return this.waitTime(0);
+        }
+        return this.waitEvent(music, 'complete');
+    },
+
     waitBackgroundMusicComplete() {
         if (!this.parent.soundManager) {
             return this.waitTime(0);
@@ -20,26 +42,4 @@ export default {
         }
         return this.waitEvent(music, 'complete');
     },
-
-    waitSoundEffectComplete() {
-        if (!this.parent.soundManager) {
-            return this.waitTime(0);
-        }
-        var music = this.parent.soundManager.getLastSoundEffect();
-        if (!music) {
-            return this.waitTime(0);
-        }
-        return this.waitEvent(music, 'complete');
-    },
-
-    waitSoundEffect2Complete() {
-        if (!this.parent.soundManager) {
-            return this.waitTime(0);
-        }
-        var music = this.parent.soundManager.getLastSoundEffect2();
-        if (!music) {
-            return this.waitTime(0);
-        }
-        return this.waitEvent(music, 'complete');
-    }
 }

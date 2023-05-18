@@ -58,6 +58,16 @@ class WaitEventManager {
         return this;
     }
 
+    addWaitCompleteCallback(callback, scope) {
+        this.parent.on(this.waitCompleteEventName, callback, scope);
+        return this;
+    }
+
+    clearWaitCompleteCallbacks() {
+        this.parent.off(this.waitCompleteEventName);
+        return this;
+    }
+
     waitTime(duration) {
         var timeline = this.parent.timeline
         timeline.delayEvent(duration, 'delay');

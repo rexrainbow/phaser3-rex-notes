@@ -28,6 +28,8 @@ class TextPlayer extends Extend(DynamicText) {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexTextPlayer';
 
+        this.initManagers(scene, config);
+
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
@@ -38,16 +40,13 @@ class TextPlayer extends Extend(DynamicText) {
             this.addImage(imageData);
         }
 
-        this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
-
-        this.initManagers(scene, config);
-
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
             AddSpriteManager.call(this, spriteManagerConfig);
         }
 
         this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
+        this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', null));
 
@@ -56,6 +55,24 @@ class TextPlayer extends Extend(DynamicText) {
         if (content) {
             this.play(content);
         }
+    }
+
+    get targetCamera() {
+        return this._targetCamera;
+    }
+
+    set targetCamera(value) {
+        this._targetCamera = value;
+        this.waitEventManager.targetCamera = value;
+    }
+
+    get clickEE() {
+        return this._clickEE;
+    }
+
+    set clickEE(value) {
+        this._clickEE = value;
+        this.waitEventManager.clickEE = value;
     }
 
     get imageManager() {
