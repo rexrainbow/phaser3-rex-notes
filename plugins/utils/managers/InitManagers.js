@@ -1,6 +1,6 @@
 import SoundManager from '../audio/soundmanager/SoundManager.js';
 import Timeline from '../../time/progresses/Timeline.js';
-import WaitEventManager from './WaitEventManager.js';
+import WaitEventManager from './waiteventmanager/WaitEventManager.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

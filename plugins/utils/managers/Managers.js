@@ -1,10 +1,14 @@
 import Extend from './Extend';
-import WaitEventManager from './WaitEventManager.js';
 
 const EventEmitter = Phaser.Events.EventEmitter;
 
 class Managers extends Extend(EventEmitter) {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.completeEventName = 'complete';
+
         super();
 
         this.scene = scene;
