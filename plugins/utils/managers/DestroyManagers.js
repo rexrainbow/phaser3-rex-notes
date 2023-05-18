@@ -1,5 +1,6 @@
 var DestroyManagers = function (fromScene) {
-    this.waitEventManager.removeWaitEvents();
+    this.waitEventManager.destroy();
+    this.waitEventManager = undefined;
 
     if (this.soundManager) {
         this.soundManager.destroy();
@@ -14,7 +15,7 @@ var DestroyManagers = function (fromScene) {
     if (this.timeline) {
         this.timeline.destroy();
     }
-    
+
     this.timeline = undefined;
 
     this.managersScene = undefined;

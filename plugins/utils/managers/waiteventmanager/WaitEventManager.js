@@ -14,7 +14,12 @@ class WaitEventManager {
         this.waitCompleteEventName = GetValue(config, 'completeEventName', WaitCompleteEvent);
         this.clickEE = GetValue(config, 'clickTarget', this.scene.input);
         this.targetCamera = GetValue(config, 'camera', this.scene.cameras.main);
+    }
 
+    destroy() {
+        this.removeWaitEvents();
+        this.clickEE = undefined;
+        this.targetCamer = undefined;
     }
 
     get scene() {
