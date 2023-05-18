@@ -1,3 +1,5 @@
+import { RemoveWaitEvents } from './const.js';
+
 export default {
     waitGameObjectTweenComplete(goType, name, property) {
         var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);

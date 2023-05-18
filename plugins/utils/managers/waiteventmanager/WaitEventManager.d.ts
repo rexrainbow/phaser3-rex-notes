@@ -1,4 +1,4 @@
-import Managers from './Managers';
+import Managers from '../Managers';
 
 export default WaitEventManager;
 

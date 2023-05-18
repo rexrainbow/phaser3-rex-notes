@@ -1,6 +1,6 @@
 import GOManager from '../gameobject/gomanager/GOManager';
 import SoundManager from '../audio/soundmanager/SoundManager';
-import WaitEventManager from './WaitEventManager';
+import WaitEventManager from './waiteventmanager/WaitEventManager';
 
 export default Managers;
 
