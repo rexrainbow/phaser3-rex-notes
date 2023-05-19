@@ -829,6 +829,7 @@
 
   Visible result of child = (parent visible) && (child visible) && (mask visible)
   */
+
   var Visible = {
     updateChildVisible: function updateChildVisible(child) {
       var localState = GetLocalState(child);
@@ -6301,7 +6302,7 @@
 
   var PostStepDelayCall = function PostStepDelayCall(gameObject, delay, callback, scope, args) {
     // Invoke callback under game's 'poststep' event
-    var scene = gameObject.scene;
+    var scene = GetSceneObject(gameObject);
     var timer = scene.time.delayedCall(delay, function () {
       scene.game.events.once('poststep', function () {
         callback.call(scope, args);
@@ -10683,6 +10684,7 @@
       FFF
       ```
   */
+
   var LayoutMode0$1 = function LayoutMode0(config) {
     var scene = this.scene;
 
@@ -10731,6 +10733,7 @@
       LFF
       ```
   */
+
   var LayoutMode1 = function LayoutMode1(config) {
     var scene = this.scene;
 
@@ -10793,6 +10796,7 @@
       FFR
       ```
   */
+
   var LayoutMode2 = function LayoutMode2(config) {
     var scene = this.scene;
 
@@ -10855,6 +10859,7 @@
       LFR
       ```
   */
+
   var LayoutMode0 = function LayoutMode0(config) {
     var scene = this.scene;
 

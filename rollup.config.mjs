@@ -4,17 +4,16 @@ import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
-import { uglify } from "rollup-plugin-uglify";
-// import { terser } from 'rollup-plugin-terser'; // Uglify for ES6
+import uglify from "@lopatnov/rollup-plugin-uglify";
+// import { terser } from '@rollup/plugin-terser'; // Uglify for ES6
 
-
-const pluginList = require('./plugin-list.js');
+import pluginList from './plugin-list.js';
+// const pluginList = {};
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 
 let outputs = [];
 
-// Export no-uglify files
 for (var key in pluginList) {
     let inputConfig = pluginList[key];
     let inputFile, useTypescript;
@@ -26,6 +25,7 @@ for (var key in pluginList) {
         useTypescript = inputConfig[1];
     }
 
+    // Export no-uglify files
     let outFile = `./dist/rex${key}.js`;
     let libName = `rex${key}`;
     // console.log(inputFile)
@@ -62,6 +62,7 @@ for (var key in pluginList) {
         ]
     })
 
+    // Export uglify files
     let inputFile2 = outFile;
     let outFile2 = `./dist/rex${key}.min.js`;
     outputs.push({

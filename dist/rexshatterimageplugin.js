@@ -147,7 +147,6 @@
 
   var delaunay = {exports: {}};
 
-  delaunay.exports;
   (function (module) {
     // https://github.com/darkskyapp/delaunay-fast/blob/master/delaunay.js
 

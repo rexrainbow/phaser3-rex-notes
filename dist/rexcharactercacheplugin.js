@@ -737,7 +737,6 @@
     adapter.loadDatabase('UserDatabase'); // will log the serialized db to console
     adapter.deleteDatabase('UserDatabase');
   */
-  lokiIndexedAdapter.exports;
 
   var hasRequiredLokiIndexedAdapter;
 
@@ -1361,7 +1360,7 @@
 
   		  }());
   		})); 
-  	} (lokiIndexedAdapter, lokiIndexedAdapter.exports));
+  	} (lokiIndexedAdapter));
   	return lokiIndexedAdapter.exports;
   }
 
@@ -1369,12 +1368,10 @@
 
   var empty$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    'default': empty
+    default: empty
   });
 
   var require$$1 = /*@__PURE__*/getAugmentedNamespace(empty$1);
-
-  lokijs.exports;
 
   (function (module, exports) {
   	(function (root, factory) {
@@ -8998,7 +8995,7 @@
   	  }());
 
   	})); 
-  } (lokijs, lokijs.exports));
+  } (lokijs));
 
   var lokijsExports = lokijs.exports;
   var loki = /*@__PURE__*/getDefaultExportFromCjs(lokijsExports);

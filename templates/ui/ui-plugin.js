@@ -74,7 +74,7 @@ import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
 import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import SidesFactory from './sides/Factory.js';
 import TweakerFactory from './tweaker/Factory.js';
-import MakerFactory from './maker/Factory.js';
+// import MakerFactory from './maker/Factory.js';
 
 import ClickFactory from './click/Factory.js';
 import ClickOutsideFactory from './clickoutside/Factory.js';

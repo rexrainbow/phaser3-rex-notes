@@ -202,8 +202,6 @@
 
   var eventemitter3 = {exports: {}};
 
-  eventemitter3.exports;
-
   (function (module) {
 
   	var has = Object.prototype.hasOwnProperty
@@ -1017,7 +1015,7 @@
 
   var empty$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    'default': empty
+    default: empty
   });
 
   var require$$0 = /*@__PURE__*/getAugmentedNamespace(empty$1);
@@ -1257,17 +1255,17 @@
 
   var path$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    resolve: resolve,
-    normalize: normalize,
-    isAbsolute: isAbsolute,
-    join: join,
-    relative: relative,
-    sep: sep,
+    basename: basename,
+    default: path,
     delimiter: delimiter,
     dirname: dirname,
-    basename: basename,
     extname: extname,
-    'default': path
+    isAbsolute: isAbsolute,
+    join: join,
+    normalize: normalize,
+    relative: relative,
+    resolve: resolve,
+    sep: sep
   });
 
   var require$$1 = /*@__PURE__*/getAugmentedNamespace(path$1);
@@ -3758,6 +3756,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * Removes the given item, or array of items, from the array.
    * 
@@ -5002,38 +5001,38 @@
 
   var Nodes = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    BaseNode: BaseNode,
-    Action: Action,
-    Composite: Composite,
-    Decorator: Decorator,
-    Service: Service,
-    Succeeder: Succeeder,
-    Failer: Failer,
-    Runner: Runner,
-    Error: Error$1,
-    Wait: Wait,
     Abort: Abort,
-    Selector: Selector,
-    Sequence: Sequence,
-    Parallel: Parallel,
-    IfSelector: IfSelector,
-    SwitchSelector: SwitchSelector,
-    WeightSelector: WeightSelector,
-    RandomSelector: RandomSelector,
-    ShuffleSelector: ShuffleSelector,
+    AbortIf: AbortIf,
+    Action: Action,
+    BaseNode: BaseNode,
     Bypass: Bypass,
-    ForceSuccess: ForceSuccess,
-    ForceFailure: ForceFailure,
-    Invert: Invert,
-    TimeLimit: TimeLimit,
+    Composite: Composite,
+    ContinueIf: ContinueIf,
     Cooldown: Cooldown,
+    Decorator: Decorator,
+    Error: Error$1,
+    Failer: Failer,
+    ForceFailure: ForceFailure,
+    ForceSuccess: ForceSuccess,
+    If: If,
+    IfSelector: IfSelector,
+    Invert: Invert,
+    Limiter: Limiter,
+    Parallel: Parallel,
+    RandomSelector: RandomSelector,
     Repeat: Repeat,
     RepeatUntilFailure: RepeatUntilFailure,
     RepeatUntilSuccess: RepeatUntilSuccess,
-    Limiter: Limiter,
-    If: If,
-    ContinueIf: ContinueIf,
-    AbortIf: AbortIf
+    Runner: Runner,
+    Selector: Selector,
+    Sequence: Sequence,
+    Service: Service,
+    ShuffleSelector: ShuffleSelector,
+    Succeeder: Succeeder,
+    SwitchSelector: SwitchSelector,
+    TimeLimit: TimeLimit,
+    Wait: Wait,
+    WeightSelector: WeightSelector
   });
 
   var Load = function Load(data, names) {
@@ -5349,11 +5348,11 @@
     }]);
     return BehaviorTree;
   }();
-  var Methods$2 = {
+  var Methods$3 = {
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$2);
+  Object.assign(BehaviorTree.prototype, Methods$3);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -6735,7 +6734,6 @@
 
   var marked_min = {exports: {}};
 
-  marked_min.exports;
   (function (module, exports) {
     !function (e, t) {
       t(exports) ;
@@ -9612,8 +9610,8 @@
     }
   };
 
-  var Methods$1 = {};
-  Object.assign(Methods$1, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$2 = {};
+  Object.assign(Methods$2, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -9708,7 +9706,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$1);
+  Object.assign(SoundManager.prototype, Methods$2);
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -10155,15 +10153,389 @@
     return Timeline;
   }(Clock);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var WaitCompleteEvent = '_wait.complete';
+  var RemoveWaitEvents = '_remove.wait';
+
+  var WaitInputMethods = {
+    waitClick: function waitClick() {
+      if (!this.clickEE) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(this.clickEE, 'pointerdown');
+    },
+    waitKeyDown: function waitKeyDown(key) {
+      var eventEmitter = this.scene.input.keyboard;
+      if (typeof key === 'string') {
+        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+      } else {
+        return this.waitEvent(eventEmitter, 'keydown');
+      }
+    }
+  };
+
+  var WaitGameObjectMethods = {
+    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
+      var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
+      if (tweenTask) {
+        return this.waitEvent(tweenTask, 'complete');
+      }
+      return this.waitTime(0);
+    },
+    waitGameObjectDataFlag: function waitGameObjectDataFlag(goType, name, dataKey, trueFlag) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      if (gameObject.getData(dataKey) === trueFlag) {
+        return this.waitTime(0);
+      }
+      var eventName = "changedata-".concat(dataKey);
+      var callback = function callback(gameObject, value, previousValue) {
+        value = !!value;
+        if (value === trueFlag) {
+          gameObject.emit('_dataFlagMatch');
+        }
+      };
+      gameObject.on(eventName, callback);
+      // Clear changedata event on gameobject manually
+      this.parent.once(RemoveWaitEvents, function () {
+        gameObject.off(eventName, callback);
+      });
+      return this.waitEvent(gameObject, '_dataFlagMatch');
+    },
+    waitGameObjectDestroy: function waitGameObjectDestroy(goType, name) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(gameObject, 'destroy');
+    },
+    waitGameObjectManagerEmpty: function waitGameObjectManagerEmpty(goType) {
+      if (goType) {
+        var gameObjectManager = this.parent.getGameObjectManager(goType);
+        if (!gameObjectManager) {
+          return this.waitTime(0);
+        }
+        return this.waitEvent(gameObjectManager, 'empty');
+      } else {
+        var gameObjectManagers = this.parent.gameObjectManagers;
+        var hasAnyWaitEvent = false;
+        for (var name in gameObjectManagers) {
+          hasAnyWaitEvent = true;
+          this.waitEvent(gameObjectManagers[name], 'empty');
+        }
+        if (!hasAnyWaitEvent) {
+          return this.waitTime(0);
+        }
+        return this.parent;
+      }
+    }
+  };
+
+  var WaitCameraMethods = {
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
+      var camera = this.targetCamera;
+      if (!camera) {
+        return this.waitTime(0);
+      }
+      var effect, completeEventName;
+      switch (effectName) {
+        case 'camera.fadein':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeincomplete';
+          break;
+        case 'camera.fadeout':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeoutcomplete';
+          break;
+        case 'camera.flash':
+          effect = camera.flashEffect;
+          completeEventName = 'cameraflashcomplete';
+          break;
+        case 'camera.shake':
+          effect = camera.shakeEffect;
+          completeEventName = 'camerashakecomplete';
+          break;
+        case 'camera.zoom':
+          effect = camera.zoomEffect;
+          completeEventName = 'camerazoomcomplete';
+          break;
+        case 'camera.rotate':
+          effect = camera.rotateToEffect;
+          completeEventName = 'camerarotatecomplete';
+          break;
+        case 'camera.scroll':
+          effect = camera.panEffect;
+          completeEventName = 'camerapancomplete';
+          break;
+      }
+      if (!effect.isRunning) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(camera, completeEventName);
+    }
+  };
+
+  var WaitMusicMethods = {
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffectComplete: function waitSoundEffectComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    }
+  };
+
+  var WaitAny = function WaitAny(config) {
+    if (!config) {
+      return this.waitTime(0);
+    }
+    var hasAnyWaitEvent = false;
+    for (var name in config) {
+      switch (name) {
+        case 'time':
+          hasAnyWaitEvent = true;
+          this.waitTime(config.time);
+          break;
+        case 'click':
+          hasAnyWaitEvent = true;
+          this.waitClick(config.key);
+          break;
+        case 'key':
+          hasAnyWaitEvent = true;
+          this.waitKeyDown(config.key);
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete(config.camera);
+          break;
+        case 'bgm':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusicComplete();
+          break;
+        case 'bgm2':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusic2Complete();
+          break;
+        case 'se':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffectComplete();
+          break;
+        case 'se2':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffect2Complete();
+          break;
+        default:
+          var names = name.split('.');
+          if (names.length === 2) {
+            var gameObjectName = names[0];
+            var propName = names[1];
+            var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
+            if (!gameObjectManager) {
+              continue;
+            }
+            var value = gameObjectManager.getProperty(gameObjectName, propName);
+            if (typeof value === 'number') {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
+              continue;
+            }
+            var dataKey = propName;
+            var matchFalseFlag = dataKey.startsWith('!');
+            if (matchFalseFlag) {
+              dataKey = dataKey.substring(1);
+            }
+            if (gameObjectManager.hasData(gameObjectName, propName)) {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+            }
+          }
+          break;
+      }
+    }
+    if (!hasAnyWaitEvent) {
+      this.waitTime(0);
+    }
+    return this.parent;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$3 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'preupdate' event
+    var scene = GetSceneObject(gameObject);
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('preupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
+  };
+
+  var WaitEventManager = /*#__PURE__*/function () {
+    function WaitEventManager(parent, config) {
+      _classCallCheck(this, WaitEventManager);
+      this.parent = parent;
+      this.waitCompleteEventName = GetValue$3(config, 'completeEventName', WaitCompleteEvent);
+      this.clickEE = GetValue$3(config, 'clickTarget', this.scene.input);
+      this.targetCamera = GetValue$3(config, 'camera', this.scene.cameras.main);
+    }
+    _createClass(WaitEventManager, [{
+      key: "destroy",
+      value: function destroy() {
+        this.removeWaitEvents();
+        this.clickEE = undefined;
+        this.targetCamer = undefined;
+      }
+    }, {
+      key: "scene",
+      get: function get() {
+        return this.parent.managersScene;
+      }
+    }, {
+      key: "waitEvent",
+      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var callback = completeNextTick ? this.completeNextTick : this.complete;
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(RemoveWaitEvents, function () {
+          eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+      }
+    }, {
+      key: "removeWaitEvents",
+      value: function removeWaitEvents() {
+        this.parent.emit(RemoveWaitEvents);
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.removeWaitEvents();
+        this.parent.emit(this.waitCompleteEventName);
+        return this;
+      }
+    }, {
+      key: "completeNextTick",
+      value: function completeNextTick() {
+        // Emit complete event at scene's preupdate event of next tick
+        PreUpdateDelayCall(this.parent, 0, this.complete, this);
+        return this;
+      }
+    }, {
+      key: "waitTime",
+      value: function waitTime(duration) {
+        var timeline = this.parent.timeline;
+        timeline.delayEvent(duration, 'delay');
+
+        // Clear delay event on timeline manually
+        this.parent.once(RemoveWaitEvents, function () {
+          timeline.removeDelayEvent('delay');
+        });
+        return this.waitEvent(timeline, 'delay');
+      }
+    }]);
+    return WaitEventManager;
+  }();
+  var Methods$1 = {
+    waitAny: WaitAny
+  };
+  Object.assign(WaitEventManager.prototype, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$1);
+
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
-    var soundManagerConfig = GetValue$3(config, 'sounds');
+    this.managersScene = scene;
+    var soundManagerConfig = GetValue$2(config, 'sounds');
     if (soundManagerConfig !== false) {
       this.soundManager = new SoundManager(scene, soundManagerConfig);
     }
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
-    this.managersScene = scene;
+    this.waitEventManager = new WaitEventManager(this, config);
     return this;
   };
 
@@ -10180,6 +10552,8 @@
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
+    this.waitEventManager.destroy();
+    this.waitEventManager = undefined;
     if (this.soundManager) {
       this.soundManager.destroy();
     }
@@ -11016,17 +11390,17 @@
     return output;
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$2(config, 'color');
-      lineWidth = GetValue$2(config, 'lineWidth');
-      fillColor = GetValue$2(config, 'fillColor');
-      fillAlpha = GetValue$2(config, 'fillAlpha', 1);
-      padding = GetValue$2(config, 'padding', 0);
+      strokeColor = GetValue$1(config, 'color');
+      lineWidth = GetValue$1(config, 'lineWidth');
+      fillColor = GetValue$1(config, 'fillColor');
+      fillAlpha = GetValue$1(config, 'fillAlpha', 1);
+      padding = GetValue$1(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -11129,30 +11503,30 @@
   };
   var globRect = new Rectangle();
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$1(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$1(config, 'createGameObject'), GetValue$1(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$1(config, 'fade', 500);
+      this.BobClass = GetValue(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue(config, 'createGameObject'), GetValue(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$1(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$1(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$1(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$1(config, 'enable', true));
-        this.setViewport(GetValue$1(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue(config, 'enable', true));
+        this.setViewport(GetValue(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      this.setSymbols(GetValue$1(config, 'symbols'));
+      this.setSymbols(GetValue(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -11377,191 +11751,6 @@
     return Managers;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue;
-
-      //  Use for loop here so we can break early
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-      return value;
-    } else {
-      return defaultValue;
-    }
-  };
-
-  // Only for Managers.js
-
-  var RemoveWaitEvents = '_remove.wait';
-  var WaitMethods = {
-    waitEvent: function waitEvent(eventEmitter, eventName) {
-      eventEmitter.once(eventName, this.complete, this);
-      this.once(RemoveWaitEvents, function () {
-        eventEmitter.off(eventName, this.complete, this);
-      });
-      return this;
-    },
-    removeWaitEvents: function removeWaitEvents() {
-      this.emit(RemoveWaitEvents);
-      return this;
-    },
-    complete: function complete() {
-      this.removeWaitEvents();
-      this.emit(this.waitCompleteEventName);
-      return this;
-    },
-    waitTime: function waitTime(duration) {
-      var timeline = this.timeline;
-      timeline.delayEvent(duration, 'delay');
-
-      // Clear delay event on timeline manually
-      this.once(RemoveWaitEvents, function () {
-        timeline.removeDelayEvent('delay');
-      });
-      return this.waitEvent(timeline, 'delay');
-    },
-    waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(this.clickEE, 'pointerdown');
-    },
-    waitKeyDown: function waitKeyDown(key) {
-      var eventEmitter = this.scene.input.keyboard;
-      if (key) {
-        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
-      } else {
-        return this.waitEvent(eventEmitter, 'keydown');
-      }
-    },
-    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
-      var tweenTask = this.getGameObjectTweenTask(goType, name, property);
-      if (tweenTask) {
-        return this.waitEvent(tweenTask, 'complete');
-      } else {
-        return this.waitTime(0);
-      }
-    },
-    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
-      if (!this.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.soundManager.getBackgroundMusic();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
-      if (!this.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.soundManager.getBackgroundMusic2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitSoundEffectComplete: function waitSoundEffectComplete() {
-      if (!this.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.soundManager.getLastSoundEffect();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
-      if (!this.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.soundManager.getLastSoundEffect2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitCameraEffectComplete: function waitCameraEffectComplete() {
-      var camera = this.targetCamera;
-      if (!camera) {
-        return this.waitTime(0);
-      }
-      var effect, completeEventName;
-      switch (effectName) {
-        case 'camera.fadein':
-          effect = camera.fadeEffect;
-          completeEventName = 'camerafadeincomplete';
-          break;
-        case 'camera.fadeout':
-          effect = camera.fadeEffect;
-          completeEventName = 'camerafadeoutcomplete';
-          break;
-        case 'camera.flash':
-          effect = camera.flashEffect;
-          completeEventName = 'cameraflashcomplete';
-          break;
-        case 'camera.shake':
-          effect = camera.shakeEffect;
-          completeEventName = 'camerashakecomplete';
-          break;
-        case 'camera.zoom':
-          effect = camera.zoomEffect;
-          completeEventName = 'camerazoomcomplete';
-          break;
-        case 'camera.rotate':
-          effect = camera.rotateToEffect;
-          completeEventName = 'camerarotatecomplete';
-          break;
-        case 'camera.scroll':
-          effect = camera.panEffect;
-          completeEventName = 'camerapancomplete';
-          break;
-      }
-      if (!effect.isRunning) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(camera, completeEventName);
-    }
-  };
-
   var EventEmitter = Phaser.Events.EventEmitter;
   var Managers = /*#__PURE__*/function (_Extend) {
     _inherits(Managers, _Extend);
@@ -11569,12 +11758,13 @@
     function Managers(scene, config) {
       var _this;
       _classCallCheck(this, Managers);
+      if (config === undefined) {
+        config = {};
+      }
+      config.completeEventName = 'complete';
       _this = _super.call(this);
       _this.scene = scene;
       _this.initManagers(scene, config);
-      _this.waitCompleteEventName = GetValue(config, 'completeEventName', 'complete');
-      _this.clickEE = GetValue(config, 'clickTarget', scene.input);
-      _this.targetCamera = GetValue(config, 'camera', scene.cameras.main);
       return _this;
     }
     _createClass(Managers, [{
@@ -11584,15 +11774,13 @@
         if (!this.scene) {
           return;
         }
-        this.removeWaitEvents();
-        _get(_getPrototypeOf(Managers.prototype), "destroy", this).call(this);
         this.destroyManagers(fromScene);
         this.scene = undefined;
+        _get(_getPrototypeOf(Managers.prototype), "destroy", this).call(this);
       }
     }]);
     return Managers;
   }(Extend(EventEmitter));
-  Object.assign(Managers.prototype, WaitMethods);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;

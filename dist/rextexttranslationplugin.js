@@ -2839,7 +2839,7 @@
           this.logger.warn('hasLoadedNamespace: i18n.languages were undefined or empty', this.languages);
           return false;
         }
-        var lng = this.resolvedLanguage || this.languages[0];
+        var lng = options.lng || this.resolvedLanguage || this.languages[0];
         var fallbackLng = this.options ? this.options.fallbackLng : false;
         var lastLng = this.languages[this.languages.length - 1];
         if (lng.toLowerCase() === 'cimode') return true;
@@ -3020,8 +3020,6 @@
   var getFetch$1 = {exports: {}};
 
   var browserPonyfill = {exports: {}};
-
-  browserPonyfill.exports;
 
   var hasRequiredBrowserPonyfill;
 
@@ -3587,8 +3585,6 @@
   	return browserPonyfill.exports;
   }
 
-  getFetch$1.exports;
-
   (function (module, exports) {
   	var fetchApi;
   	if (typeof fetch === 'function') {
@@ -3614,7 +3610,7 @@
 
   var fetchNode = /*#__PURE__*/_mergeNamespaces({
     __proto__: null,
-    'default': getFetch
+    default: getFetch
   }, [getFetchExports]);
 
   function _typeof$1(obj) { "@babel/helpers - typeof"; return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof$1(obj); }

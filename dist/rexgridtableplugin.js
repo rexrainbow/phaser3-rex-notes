@@ -829,6 +829,7 @@
 
   Visible result of child = (parent visible) && (child visible) && (mask visible)
   */
+
   var Visible = {
     updateChildVisible: function updateChildVisible(child) {
       var localState = GetLocalState(child);
