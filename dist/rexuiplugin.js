@@ -644,7 +644,7 @@
     //  NOOP
   };
 
-  var Methods$k = {
+  var Methods$l = {
     _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
@@ -777,7 +777,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$k);
+    Object.assign(NinePatch.prototype, Methods$l);
     return NinePatch;
   };
 
@@ -848,13 +848,13 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
-  var Methods$j = {
+  var Methods$k = {
     _beginDraw: RenderTexture$2.prototype.beginDraw,
     _endDraw: RenderTexture$2.prototype.endDraw,
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
-  Object.assign(NinePatch$1.prototype, Methods$j);
+  Object.assign(NinePatch$1.prototype, Methods$k);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -2016,7 +2016,7 @@
     }
   };
 
-  var Methods$i = {
+  var Methods$j = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2038,7 +2038,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$i);
+  Object.assign(NinePatch.prototype, Methods$j);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -7659,11 +7659,11 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var Methods$h = {
+  var Methods$i = {
     contains: Contains$1,
     getWorldPosition: GetWorldPosition
   };
-  Object.assign(Methods$h, RenderMethods);
+  Object.assign(Methods$i, RenderMethods);
 
   var DegToRad$c = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
@@ -8066,7 +8066,7 @@
     }]);
     return RenderBase;
   }(Base$2);
-  Object.assign(RenderBase.prototype, Methods$h);
+  Object.assign(RenderBase.prototype, Methods$i);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -10603,7 +10603,7 @@
     }
   };
 
-  var Methods$g = {
+  var Methods$h = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -10652,7 +10652,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$g, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$h, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -10768,7 +10768,7 @@
     }]);
     return DynamicText;
   }(Canvas$1);
-  Object.assign(DynamicText.prototype, Methods$g);
+  Object.assign(DynamicText.prototype, Methods$h);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -12025,8 +12025,8 @@
     }
   };
 
-  var Methods$f = {};
-  Object.assign(Methods$f, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$g = {};
+  Object.assign(Methods$g, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$2J = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -12121,7 +12121,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$f);
+  Object.assign(SoundManager.prototype, Methods$g);
 
   var GetValue$2I = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -12529,15 +12529,339 @@
     return Timeline;
   }(Clock);
 
+  var WaitCompleteEvent = '_wait.complete';
+  var RemoveWaitEvents$1 = '_remove.wait';
+
+  var WaitInputMethods = {
+    waitClick: function waitClick() {
+      if (!this.clickEE) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(this.clickEE, 'pointerdown');
+    },
+    waitKeyDown: function waitKeyDown(key) {
+      var eventEmitter = this.scene.input.keyboard;
+      if (typeof key === 'string') {
+        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+      } else {
+        return this.waitEvent(eventEmitter, 'keydown');
+      }
+    }
+  };
+
+  var WaitGameObjectMethods = {
+    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
+      var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
+      if (tweenTask) {
+        return this.waitEvent(tweenTask, 'complete');
+      }
+      return this.waitTime(0);
+    },
+    waitGameObjectDataFlag: function waitGameObjectDataFlag(goType, name, dataKey, trueFlag) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      if (gameObject.getData(dataKey) === trueFlag) {
+        return this.waitTime(0);
+      }
+      var eventName = "changedata-".concat(dataKey);
+      var callback = function callback(gameObject, value, previousValue) {
+        value = !!value;
+        if (value === trueFlag) {
+          gameObject.emit('_dataFlagMatch');
+        }
+      };
+      gameObject.on(eventName, callback);
+      // Clear changedata event on gameobject manually
+      this.parent.once(RemoveWaitEvents$1, function () {
+        gameObject.off(eventName, callback);
+      });
+      return this.waitEvent(gameObject, '_dataFlagMatch');
+    },
+    waitGameObjectDestroy: function waitGameObjectDestroy(goType, name) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(gameObject, 'destroy');
+    },
+    waitGameObjectManagerEmpty: function waitGameObjectManagerEmpty(goType) {
+      if (goType) {
+        var gameObjectManager = this.parent.getGameObjectManager(goType);
+        if (!gameObjectManager) {
+          return this.waitTime(0);
+        }
+        return this.waitEvent(gameObjectManager, 'empty');
+      } else {
+        var gameObjectManagers = this.parent.gameObjectManagers;
+        var hasAnyWaitEvent = false;
+        for (var name in gameObjectManagers) {
+          hasAnyWaitEvent = true;
+          this.waitEvent(gameObjectManagers[name], 'empty');
+        }
+        if (!hasAnyWaitEvent) {
+          return this.waitTime(0);
+        }
+        return this.parent;
+      }
+    }
+  };
+
+  var WaitCameraMethods = {
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
+      var camera = this.targetCamera;
+      if (!camera) {
+        return this.waitTime(0);
+      }
+      var effect, completeEventName;
+      switch (effectName) {
+        case 'camera.fadein':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeincomplete';
+          break;
+        case 'camera.fadeout':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeoutcomplete';
+          break;
+        case 'camera.flash':
+          effect = camera.flashEffect;
+          completeEventName = 'cameraflashcomplete';
+          break;
+        case 'camera.shake':
+          effect = camera.shakeEffect;
+          completeEventName = 'camerashakecomplete';
+          break;
+        case 'camera.zoom':
+          effect = camera.zoomEffect;
+          completeEventName = 'camerazoomcomplete';
+          break;
+        case 'camera.rotate':
+          effect = camera.rotateToEffect;
+          completeEventName = 'camerarotatecomplete';
+          break;
+        case 'camera.scroll':
+          effect = camera.panEffect;
+          completeEventName = 'camerapancomplete';
+          break;
+      }
+      if (!effect.isRunning) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(camera, completeEventName);
+    }
+  };
+
+  var WaitMusicMethods = {
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffectComplete: function waitSoundEffectComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    }
+  };
+
+  var WaitAny = function WaitAny(config) {
+    if (!config) {
+      return this.waitTime(0);
+    }
+    var hasAnyWaitEvent = false;
+    for (var name in config) {
+      switch (name) {
+        case 'time':
+          hasAnyWaitEvent = true;
+          this.waitTime(config.time);
+          break;
+        case 'click':
+          hasAnyWaitEvent = true;
+          this.waitClick(config.key);
+          break;
+        case 'key':
+          hasAnyWaitEvent = true;
+          this.waitKeyDown(config.key);
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete(config.camera);
+          break;
+        case 'bgm':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusicComplete();
+          break;
+        case 'bgm2':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusic2Complete();
+          break;
+        case 'se':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffectComplete();
+          break;
+        case 'se2':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffect2Complete();
+          break;
+        default:
+          var names = name.split('.');
+          if (names.length === 2) {
+            var gameObjectName = names[0];
+            var propName = names[1];
+            var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
+            if (!gameObjectManager) {
+              continue;
+            }
+            var value = gameObjectManager.getProperty(gameObjectName, propName);
+            if (typeof value === 'number') {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
+              continue;
+            }
+            var dataKey = propName;
+            var matchFalseFlag = dataKey.startsWith('!');
+            if (matchFalseFlag) {
+              dataKey = dataKey.substring(1);
+            }
+            if (gameObjectManager.hasData(gameObjectName, propName)) {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+            }
+          }
+          break;
+      }
+    }
+    if (!hasAnyWaitEvent) {
+      this.waitTime(0);
+    }
+    return this.parent;
+  };
+
+  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'preupdate' event
+    var scene = GetSceneObject(gameObject);
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('preupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
+  };
+
+  var WaitEventManager = /*#__PURE__*/function () {
+    function WaitEventManager(parent, config) {
+      _classCallCheck(this, WaitEventManager);
+      this.parent = parent;
+      this.waitCompleteEventName = GetValue$38(config, 'completeEventName', WaitCompleteEvent);
+      this.clickEE = GetValue$38(config, 'clickTarget', this.scene.input);
+      this.targetCamera = GetValue$38(config, 'camera', this.scene.cameras.main);
+    }
+    _createClass(WaitEventManager, [{
+      key: "destroy",
+      value: function destroy() {
+        this.removeWaitEvents();
+        this.clickEE = undefined;
+        this.targetCamer = undefined;
+      }
+    }, {
+      key: "scene",
+      get: function get() {
+        return this.parent.managersScene;
+      }
+    }, {
+      key: "waitEvent",
+      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var callback = completeNextTick ? this.completeNextTick : this.complete;
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(RemoveWaitEvents$1, function () {
+          eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+      }
+    }, {
+      key: "removeWaitEvents",
+      value: function removeWaitEvents() {
+        this.parent.emit(RemoveWaitEvents$1);
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.removeWaitEvents();
+        this.parent.emit(this.waitCompleteEventName);
+        return this;
+      }
+    }, {
+      key: "completeNextTick",
+      value: function completeNextTick() {
+        // Emit complete event at scene's preupdate event of next tick
+        PreUpdateDelayCall(this.parent, 0, this.complete, this);
+        return this;
+      }
+    }, {
+      key: "waitTime",
+      value: function waitTime(duration) {
+        var timeline = this.parent.timeline;
+        timeline.delayEvent(duration, 'delay');
+
+        // Clear delay event on timeline manually
+        this.parent.once(RemoveWaitEvents$1, function () {
+          timeline.removeDelayEvent('delay');
+        });
+        return this.waitEvent(timeline, 'delay');
+      }
+    }]);
+    return WaitEventManager;
+  }();
+  var Methods$f = {
+    waitAny: WaitAny
+  };
+  Object.assign(WaitEventManager.prototype, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$f);
+
   var GetValue$2G = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
+    this.managersScene = scene;
     var soundManagerConfig = GetValue$2G(config, 'sounds');
     if (soundManagerConfig !== false) {
       this.soundManager = new SoundManager(scene, soundManagerConfig);
     }
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
-    this.managersScene = scene;
+    this.waitEventManager = new WaitEventManager(this, config);
     return this;
   };
 
@@ -12554,6 +12878,8 @@
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
+    this.waitEventManager.destroy();
+    this.waitEventManager = undefined;
     if (this.soundManager) {
       this.soundManager.destroy();
     }
@@ -24137,6 +24463,7 @@
 
   Visible result of child = (parent visible) && (child visible) && (mask visible)
   */
+
   var Visible$1 = {
     updateChildVisible: function updateChildVisible(child) {
       var localState = GetLocalState(child);
@@ -28399,7 +28726,7 @@
 
   var PostStepDelayCall = function PostStepDelayCall(gameObject, delay, callback, scope, args) {
     // Invoke callback under game's 'poststep' event
-    var scene = gameObject.scene;
+    var scene = GetSceneObject(gameObject);
     var timer = scene.time.delayedCall(delay, function () {
       scene.game.events.once('poststep', function () {
         callback.call(scope, args);
@@ -34023,6 +34350,7 @@
   };
 
   // Note: Not working in iOS9+
+
   var GetValue$1y = Phaser.Utils.Objects.GetValue;
   var Open$1 = function Open(game, config) {
     // game: game, scene, or game object
@@ -42703,6 +43031,7 @@
       FFF
       ```
   */
+
   var LayoutMode0$1 = function LayoutMode0(config) {
     var scene = this.scene;
 
@@ -42751,6 +43080,7 @@
       LFF
       ```
   */
+
   var LayoutMode1 = function LayoutMode1(config) {
     var scene = this.scene;
 
@@ -42813,6 +43143,7 @@
       FFR
       ```
   */
+
   var LayoutMode2 = function LayoutMode2(config) {
     var scene = this.scene;
 
@@ -42875,6 +43206,7 @@
       LFR
       ```
   */
+
   var LayoutMode0 = function LayoutMode0(config) {
     var scene = this.scene;
 
@@ -45279,7 +45611,7 @@
 
   var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
     // Invoke callback under scene's 'postupdate' event
-    var scene = gameObject.scene;
+    var scene = GetSceneObject(gameObject);
     var timer = scene.time.delayedCall(delay, function () {
       scene.sys.events.once('postupdate', function () {
         callback.call(scope, args);

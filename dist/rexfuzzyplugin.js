@@ -1047,7 +1047,7 @@
 
   var empty$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    'default': empty
+    default: empty
   });
 
   var require$$0 = /*@__PURE__*/getAugmentedNamespace(empty$1);
@@ -1287,17 +1287,17 @@
 
   var path$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    resolve: resolve,
-    normalize: normalize,
-    isAbsolute: isAbsolute,
-    join: join,
-    relative: relative,
-    sep: sep,
+    basename: basename,
+    default: path,
     delimiter: delimiter,
     dirname: dirname,
-    basename: basename,
     extname: extname,
-    'default': path
+    isAbsolute: isAbsolute,
+    join: join,
+    normalize: normalize,
+    relative: relative,
+    resolve: resolve,
+    sep: sep
   });
 
   var require$$1 = /*@__PURE__*/getAugmentedNamespace(path$1);

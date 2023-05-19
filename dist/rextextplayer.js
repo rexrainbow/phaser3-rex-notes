@@ -1531,8 +1531,8 @@
     }
   };
 
-  var Methods$6 = {};
-  Object.assign(Methods$6, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$7 = {};
+  Object.assign(Methods$7, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$k = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -1627,7 +1627,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$6);
+  Object.assign(SoundManager.prototype, Methods$7);
 
   var GetValue$j = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -2074,15 +2074,389 @@
     return Timeline;
   }(Clock);
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
+  var WaitCompleteEvent = '_wait.complete';
+  var RemoveWaitEvents$1 = '_remove.wait';
+
+  var WaitInputMethods = {
+    waitClick: function waitClick() {
+      if (!this.clickEE) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(this.clickEE, 'pointerdown');
+    },
+    waitKeyDown: function waitKeyDown(key) {
+      var eventEmitter = this.scene.input.keyboard;
+      if (typeof key === 'string') {
+        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+      } else {
+        return this.waitEvent(eventEmitter, 'keydown');
+      }
+    }
+  };
+
+  var WaitGameObjectMethods = {
+    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
+      var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
+      if (tweenTask) {
+        return this.waitEvent(tweenTask, 'complete');
+      }
+      return this.waitTime(0);
+    },
+    waitGameObjectDataFlag: function waitGameObjectDataFlag(goType, name, dataKey, trueFlag) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      if (gameObject.getData(dataKey) === trueFlag) {
+        return this.waitTime(0);
+      }
+      var eventName = "changedata-".concat(dataKey);
+      var callback = function callback(gameObject, value, previousValue) {
+        value = !!value;
+        if (value === trueFlag) {
+          gameObject.emit('_dataFlagMatch');
+        }
+      };
+      gameObject.on(eventName, callback);
+      // Clear changedata event on gameobject manually
+      this.parent.once(RemoveWaitEvents$1, function () {
+        gameObject.off(eventName, callback);
+      });
+      return this.waitEvent(gameObject, '_dataFlagMatch');
+    },
+    waitGameObjectDestroy: function waitGameObjectDestroy(goType, name) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(gameObject, 'destroy');
+    },
+    waitGameObjectManagerEmpty: function waitGameObjectManagerEmpty(goType) {
+      if (goType) {
+        var gameObjectManager = this.parent.getGameObjectManager(goType);
+        if (!gameObjectManager) {
+          return this.waitTime(0);
+        }
+        return this.waitEvent(gameObjectManager, 'empty');
+      } else {
+        var gameObjectManagers = this.parent.gameObjectManagers;
+        var hasAnyWaitEvent = false;
+        for (var name in gameObjectManagers) {
+          hasAnyWaitEvent = true;
+          this.waitEvent(gameObjectManagers[name], 'empty');
+        }
+        if (!hasAnyWaitEvent) {
+          return this.waitTime(0);
+        }
+        return this.parent;
+      }
+    }
+  };
+
+  var WaitCameraMethods = {
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
+      var camera = this.targetCamera;
+      if (!camera) {
+        return this.waitTime(0);
+      }
+      var effect, completeEventName;
+      switch (effectName) {
+        case 'camera.fadein':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeincomplete';
+          break;
+        case 'camera.fadeout':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeoutcomplete';
+          break;
+        case 'camera.flash':
+          effect = camera.flashEffect;
+          completeEventName = 'cameraflashcomplete';
+          break;
+        case 'camera.shake':
+          effect = camera.shakeEffect;
+          completeEventName = 'camerashakecomplete';
+          break;
+        case 'camera.zoom':
+          effect = camera.zoomEffect;
+          completeEventName = 'camerazoomcomplete';
+          break;
+        case 'camera.rotate':
+          effect = camera.rotateToEffect;
+          completeEventName = 'camerarotatecomplete';
+          break;
+        case 'camera.scroll':
+          effect = camera.panEffect;
+          completeEventName = 'camerapancomplete';
+          break;
+      }
+      if (!effect.isRunning) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(camera, completeEventName);
+    }
+  };
+
+  var WaitMusicMethods = {
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffectComplete: function waitSoundEffectComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    }
+  };
+
+  var WaitAny = function WaitAny(config) {
+    if (!config) {
+      return this.waitTime(0);
+    }
+    var hasAnyWaitEvent = false;
+    for (var name in config) {
+      switch (name) {
+        case 'time':
+          hasAnyWaitEvent = true;
+          this.waitTime(config.time);
+          break;
+        case 'click':
+          hasAnyWaitEvent = true;
+          this.waitClick(config.key);
+          break;
+        case 'key':
+          hasAnyWaitEvent = true;
+          this.waitKeyDown(config.key);
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete(config.camera);
+          break;
+        case 'bgm':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusicComplete();
+          break;
+        case 'bgm2':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusic2Complete();
+          break;
+        case 'se':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffectComplete();
+          break;
+        case 'se2':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffect2Complete();
+          break;
+        default:
+          var names = name.split('.');
+          if (names.length === 2) {
+            var gameObjectName = names[0];
+            var propName = names[1];
+            var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
+            if (!gameObjectManager) {
+              continue;
+            }
+            var value = gameObjectManager.getProperty(gameObjectName, propName);
+            if (typeof value === 'number') {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
+              continue;
+            }
+            var dataKey = propName;
+            var matchFalseFlag = dataKey.startsWith('!');
+            if (matchFalseFlag) {
+              dataKey = dataKey.substring(1);
+            }
+            if (gameObjectManager.hasData(gameObjectName, propName)) {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+            }
+          }
+          break;
+      }
+    }
+    if (!hasAnyWaitEvent) {
+      this.waitTime(0);
+    }
+    return this.parent;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$h = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'preupdate' event
+    var scene = GetSceneObject(gameObject);
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('preupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
+  };
+
+  var WaitEventManager = /*#__PURE__*/function () {
+    function WaitEventManager(parent, config) {
+      _classCallCheck(this, WaitEventManager);
+      this.parent = parent;
+      this.waitCompleteEventName = GetValue$h(config, 'completeEventName', WaitCompleteEvent);
+      this.clickEE = GetValue$h(config, 'clickTarget', this.scene.input);
+      this.targetCamera = GetValue$h(config, 'camera', this.scene.cameras.main);
+    }
+    _createClass(WaitEventManager, [{
+      key: "destroy",
+      value: function destroy() {
+        this.removeWaitEvents();
+        this.clickEE = undefined;
+        this.targetCamer = undefined;
+      }
+    }, {
+      key: "scene",
+      get: function get() {
+        return this.parent.managersScene;
+      }
+    }, {
+      key: "waitEvent",
+      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var callback = completeNextTick ? this.completeNextTick : this.complete;
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(RemoveWaitEvents$1, function () {
+          eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+      }
+    }, {
+      key: "removeWaitEvents",
+      value: function removeWaitEvents() {
+        this.parent.emit(RemoveWaitEvents$1);
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.removeWaitEvents();
+        this.parent.emit(this.waitCompleteEventName);
+        return this;
+      }
+    }, {
+      key: "completeNextTick",
+      value: function completeNextTick() {
+        // Emit complete event at scene's preupdate event of next tick
+        PreUpdateDelayCall(this.parent, 0, this.complete, this);
+        return this;
+      }
+    }, {
+      key: "waitTime",
+      value: function waitTime(duration) {
+        var timeline = this.parent.timeline;
+        timeline.delayEvent(duration, 'delay');
+
+        // Clear delay event on timeline manually
+        this.parent.once(RemoveWaitEvents$1, function () {
+          timeline.removeDelayEvent('delay');
+        });
+        return this.waitEvent(timeline, 'delay');
+      }
+    }]);
+    return WaitEventManager;
+  }();
+  var Methods$6 = {
+    waitAny: WaitAny
+  };
+  Object.assign(WaitEventManager.prototype, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$6);
+
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
-    var soundManagerConfig = GetValue$h(config, 'sounds');
+    this.managersScene = scene;
+    var soundManagerConfig = GetValue$g(config, 'sounds');
     if (soundManagerConfig !== false) {
       this.soundManager = new SoundManager(scene, soundManagerConfig);
     }
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
-    this.managersScene = scene;
+    this.waitEventManager = new WaitEventManager(this, config);
     return this;
   };
 
@@ -2099,6 +2473,8 @@
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
+    this.waitEventManager.destroy();
+    this.waitEventManager = undefined;
     if (this.soundManager) {
       this.soundManager.destroy();
     }
@@ -2935,17 +3311,17 @@
     return output;
   };
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$g(config, 'color');
-      lineWidth = GetValue$g(config, 'lineWidth');
-      fillColor = GetValue$g(config, 'fillColor');
-      fillAlpha = GetValue$g(config, 'fillAlpha', 1);
-      padding = GetValue$g(config, 'padding', 0);
+      strokeColor = GetValue$f(config, 'color');
+      lineWidth = GetValue$f(config, 'lineWidth');
+      fillColor = GetValue$f(config, 'fillColor');
+      fillAlpha = GetValue$f(config, 'fillAlpha', 1);
+      padding = GetValue$f(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -3048,30 +3424,30 @@
   };
   var globRect = new Rectangle$1();
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$f(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$f(config, 'createGameObject'), GetValue$f(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$f(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$f(config, 'fade', 500);
+      this.BobClass = GetValue$e(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$e(config, 'createGameObject'), GetValue$e(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$e(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue$e(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$f(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$f(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$e(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$e(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$f(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue$e(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$f(config, 'enable', true));
-        this.setViewport(GetValue$f(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue$e(config, 'enable', true));
+        this.setViewport(GetValue$e(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      this.setSymbols(GetValue$f(config, 'symbols'));
+      this.setSymbols(GetValue$e(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -3675,7 +4051,7 @@
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.PostPipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var GetPadding$1 = function GetPadding(padding, key) {
     if (key === undefined) {
       return padding;
@@ -3698,62 +4074,12 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$e(key, 'left', 0);
-      padding.right = GetValue$e(key, 'right', 0);
-      padding.top = GetValue$e(key, 'top', 0);
-      padding.bottom = GetValue$e(key, 'bottom', 0);
+      padding.left = GetValue$d(key, 'left', 0);
+      padding.right = GetValue$d(key, 'right', 0);
+      padding.top = GetValue$d(key, 'top', 0);
+      padding.bottom = GetValue$d(key, 'bottom', 0);
     }
     return padding;
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue$d = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue;
-
-      //  Use for loop here so we can break early
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-      return value;
-    } else {
-      return defaultValue;
-    }
   };
 
   var Clear = function Clear(obj) {
@@ -3791,7 +4117,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$d(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$h(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -7640,20 +7966,20 @@
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
-      this.setEventEmitter(GetValue$d(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$h(config, 'eventEmitter', undefined));
 
       // Value convert
-      this.setValueConverter(GetValue$d(config, 'valueConvert', true));
+      this.setValueConverter(GetValue$h(config, 'valueConvert', true));
       // Loop
-      this.setLoopEnable(GetValue$d(config, 'loop', false));
+      this.setLoopEnable(GetValue$h(config, 'loop', false));
 
       // Brackets and generate regex
-      this.setMultipleLinesTagEnable(GetValue$d(config, 'multipleLinesTag', false));
-      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      this.setMultipleLinesTagEnable(GetValue$h(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$h(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
 
       // Translate tagName callback
-      this.setTranslateTagNameCallback(GetValue$d(config, 'translateTagNameCallback'));
+      this.setTranslateTagNameCallback(GetValue$h(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -7918,10 +8244,10 @@
       _this = _super.call(this, config);
 
       // Parameters for regex
-      _this.setTagExpression(GetValue$d(config, 'regex.tag', undefined));
-      _this.setValueExpression(GetValue$d(config, 'regex.value', undefined));
+      _this.setTagExpression(GetValue$h(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$h(config, 'regex.value', undefined));
       // Brackets and generate regex
-      var delimiters = GetValue$d(config, 'delimiters', '<>');
+      var delimiters = GetValue$h(config, 'delimiters', '<>');
       _this.setDelimiters(delimiters[0], delimiters[1]);
       return _this;
     }

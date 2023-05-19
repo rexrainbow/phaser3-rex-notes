@@ -124,8 +124,6 @@
 
   var eventemitter3 = {exports: {}};
 
-  eventemitter3.exports;
-
   (function (module) {
 
   	var has = Object.prototype.hasOwnProperty
@@ -569,6 +567,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
 
   /**
    * Removes the given item, or array of items, from the array.

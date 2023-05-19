@@ -1511,6 +1511,7 @@
   /* 
   1. Fade-out-destroy chess
   */
+
   var EliminateChess = function EliminateChess(chessArray, board, bejeweled) {
     var duration = 500; //ms
     for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
@@ -2146,6 +2147,7 @@
   2. Pick a random chess in this match3 line
   3. Change symbol to a different value of all neighbors
   */
+
   var GetRandom = Phaser.Utils.Array.GetRandom;
   var BreakMatch3 = function BreakMatch3() {
     var tileZ = this.chessTileZ,
@@ -2178,6 +2180,7 @@
   /*
   1. Test if there has any matched line after chess swapping
   */
+
   var PreTest = function PreTest() {
     var match = this.match;
     var directions = this.board.grid.halfDirections;

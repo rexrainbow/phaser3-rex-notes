@@ -248,8 +248,6 @@
 
   var eventemitter3 = {exports: {}};
 
-  eventemitter3.exports;
-
   (function (module) {
 
   	var has = Object.prototype.hasOwnProperty
@@ -1805,6 +1803,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * @classdesc
    * Defines a Point in 2D space, with an x and y component.
@@ -1876,6 +1875,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.
    *
@@ -1929,6 +1929,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   //  Return an array of points from the perimeter of the rectangle
   //  each spaced out based on the quantity or step required
 
@@ -1968,6 +1969,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
 
   /**
    * Get a point on a line that's a given percentage along its length.
@@ -2018,6 +2020,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * Get a number of points along a line's length.
    *
@@ -2065,6 +2068,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
 
   /**
    * Returns a random point on a given Line.
@@ -2626,6 +2630,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * @classdesc
    * Defines a Line segment, a part of a line between two endpoints.
@@ -2898,6 +2903,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * Returns a random point within a Rectangle.
    *
@@ -2925,6 +2931,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
 
   /**
    * @classdesc
@@ -3337,6 +3344,7 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
 
+
   /**
    * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
    *
@@ -3483,6 +3491,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
 
   /**
    * Calculates the bounding AABB rectangle of a polygon.
@@ -5202,6 +5211,8 @@
   };
 
   // Not included in Base Gird object.
+  // Delta tileXY to direction
+
   var ReverseDirMap$1 = function ReverseDirMap(dirMap) {
     var out = {},
       entry,
@@ -6016,6 +6027,8 @@
   };
 
   // Not included in Base Gird object.
+  // Delta tileXY to direction
+
   var ReverseDirMap = function ReverseDirMap(dirMap) {
     var out = {},
       entry,
@@ -10394,6 +10407,7 @@
   http://eloquentjavascript.net/appendix2.html
 
   */
+
   var PATH_MODE$1 = CONST$2.PATH_MODE;
   var ASTAR$1 = CONST$2['A*'];
   var ASTAR_LINE$1 = CONST$2['A*-line'];
@@ -12310,6 +12324,7 @@
 
   Visible result of child = (parent visible) && (child visible) && (mask visible)
   */
+
   var Visible = {
     updateChildVisible: function updateChildVisible(child) {
       var localState = GetLocalState(child);

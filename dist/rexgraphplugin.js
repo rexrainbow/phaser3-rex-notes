@@ -161,8 +161,6 @@
 
   var eventemitter3 = {exports: {}};
 
-  eventemitter3.exports;
-
   (function (module) {
 
   	var has = Object.prototype.hasOwnProperty

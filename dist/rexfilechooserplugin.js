@@ -193,6 +193,7 @@
   };
 
   // Note: Not working in iOS9+
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Open = function Open(game, config) {
     // game: game, scene, or game object
