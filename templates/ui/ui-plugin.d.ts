@@ -47,7 +47,7 @@ import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory';
 import LineProgressFactory from './lineprogress/Factory';
-import MakerFactory from './maker/Factory';
+// import MakerFactory from './maker/Factory';
 import MenuFactory from './menu/Factory';
 import NameValueLabelFactory from './namevaluelabel/Factory';
 import NinePatchFactory from './ninepatch/Factory';
@@ -106,7 +106,7 @@ import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidt
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import { OpenFileChooser } from './filechooser/FileChooser';
 
-export default UIPlugins;
+export default UIPlugin;
 
 declare class Factories {
     alphaMaskImage: typeof AlphaMaskImageFactory;
@@ -156,7 +156,7 @@ declare class Factories {
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
     lineProgressCanvas: typeof LineProgressCanvasFactory;
-    maker: typeof MakerFactory;
+    // maker: typeof MakerFactory;
     menu: typeof MenuFactory;
     nameValueLabel: typeof NameValueLabelFactory;
     ninePatch: typeof NinePatchFactory;
@@ -201,7 +201,7 @@ declare class Factories {
     twoRowsLabel: typeof TitleLabelFactory;
 }
 
-declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
+declare class UIPlugin extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
 
@@ -328,7 +328,7 @@ import TouchEventStopClass from './toucheventstop/TouchEventStop';
 import TriangleClass from './triangle/Triangle';
 import TweakerClass from './tweaker/Tweaker';
 
-declare namespace UIPlugins {
+declare namespace UIPlugin {
     type AlphaMaskImage = AlphaMaskImageClass;
     type BadgeLabel = BadgeLabelClass;
     type BBCodeText = BBCodeTextClass;
