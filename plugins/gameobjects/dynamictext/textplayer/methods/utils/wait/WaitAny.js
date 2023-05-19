@@ -57,7 +57,7 @@ var WaitAny = function (textPlayer, names, callback, scope) {
             textPlayer.emit('wait.keydown', name);
 
         } else if (IsWaitCameraEffect(name)) {
-            waitEventManager.waitCameraEffectComplete();
+            waitEventManager.waitCameraEffectComplete(name);
             textPlayer.emit('wait.camera', name);
 
         } else if (IsWaitGameObject(textPlayer, name)) {

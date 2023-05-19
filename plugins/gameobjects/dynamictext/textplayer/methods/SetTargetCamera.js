@@ -1,5 +1,5 @@
 var SetTargetCamera = function (camera) {
-    this.targetCamera = camera;
+    this.waitEventManager.setTargetCamera(camera);
     return this;
 }
 

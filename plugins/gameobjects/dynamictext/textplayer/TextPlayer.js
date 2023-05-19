@@ -46,8 +46,6 @@ class TextPlayer extends Extend(DynamicText) {
         }
 
         this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
-        this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
-        this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', null));
 
         this.isPlaying = false;
@@ -58,21 +56,11 @@ class TextPlayer extends Extend(DynamicText) {
     }
 
     get targetCamera() {
-        return this._targetCamera;
+        return this.waitEventManager.targetCamera;
     }
 
-    set targetCamera(value) {
-        this._targetCamera = value;
-        this.waitEventManager.targetCamera = value;
-    }
-
-    get clickEE() {
-        return this._clickEE;
-    }
-
-    set clickEE(value) {
-        this._clickEE = value;
-        this.waitEventManager.clickEE = value;
+    get clickTarget() {
+        return this.waitEventManager.clickTarget;
     }
 
     get imageManager() {
@@ -104,10 +92,6 @@ class TextPlayer extends Extend(DynamicText) {
             this._imageManager.destroy(fromScene);
         }
         this._imageManager = undefined;
-
-        this.targetCamera = undefined;
-
-        this.clickEE = undefined;
 
         this.destroyManagers(fromScene);
 

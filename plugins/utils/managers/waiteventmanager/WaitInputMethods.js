@@ -1,4 +1,18 @@
+import IsSceneObject from '../../system/IsSceneObject.js';
+
 export default {
+    setClickTarget(target) {
+        this.clickTarget = target;
+
+        if (!target) {
+            this.clickEE = null;
+        } else if (IsSceneObject(target)) {
+            this.clickEE = target.input;
+        } else {  // Assume that target is a gameObject
+            this.clickEE = target.setInteractive();
+        }
+    },
+
     waitClick() {
         if (!this.clickEE) {
             return this.waitTime(0);
