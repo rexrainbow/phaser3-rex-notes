@@ -1,5 +1,5 @@
 import EscapeRegex from '../../../utils/string/EscapeRegex.js';
-import ParseValue from './ParseValue.js';
+import ParseValue from '../../../utils/string/TypeConvert2.js';
 
 var CreateQuotesExpression = function (leftQuote, rightQuote) {
     if (rightQuote === undefined) {

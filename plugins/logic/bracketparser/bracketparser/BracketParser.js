@@ -1,6 +1,6 @@
 import BracketParserBase from '../bracketparserbase/BracketParser.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import ParseValue from './ParseValue.js';
+import ParseValue from '../../../utils/string/StringToValues.js';
 import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 
 class BracketParser extends BracketParserBase {

@@ -1,6 +1,11 @@
-var ParseValue = function (text, valueConverter) {
+import DefaultValueConverter from './TypeConvert.js';
+
+var StringToJSON = function (text, valueConverter) {
     if (text == null) {
         return null;
+    }
+    if (valueConverter === undefined) {
+        valueConverter = DefaultValueConverter;
     }
 
     var lastTextIndex = text.length - 1;
@@ -26,4 +31,4 @@ var ParseValue = function (text, valueConverter) {
     return valueConverter(text);
 }
 
-export default ParseValue;
+export default StringToJSON;
