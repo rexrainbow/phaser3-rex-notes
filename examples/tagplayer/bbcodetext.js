@@ -3,13 +3,13 @@ import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 var content = `
-[[text.a]]
-[[text.a.x=300]]
-[[text.a.y=100]]
-[[text.a.typing=100]]
+[text.a]
+[text.a.x=300]
+[text.a.y=100]
+[text.a.typing=100]
 
-[b][color=yellow]H[/color][/b]ello\\n
-[u=red]Phaser[/u]\\n
+<b><color=yellow>H</color></b>ello\\n
+<u=red>Phaser</u>\\n
 World
 `
 
@@ -26,9 +26,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
-            parser: {
-                delimiters: ['[[', ']]'],
-            },
             texts: {
                 createGameObject: CreateTextBox
             }
@@ -45,7 +42,11 @@ var CreateTextBox = function (scene) {
             color: '#000',
             thickness: 2,
             offset: 1
-        }
+        },
+
+        // delimiters of tagPlayer is `[]`, 
+        // change delimiters of bbcodetext to '<>'
+        delimiters: '<>'  
     });
 }
 

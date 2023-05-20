@@ -3,11 +3,14 @@ var PropToTagText = function (text, prop, prevProp) {
         prevProp = EMPTYPROP;
     }
 
+    var delimiterLeft = this.delimiters[0];
+    var delimiterRight = this.delimiters[1];
+
     var headers = [];
 
     for (var k in prevProp) {
         if (!prop.hasOwnProperty(k)) {
-            headers.push(`[/${k}]`);
+            headers.push(`${delimiterLeft}/${k}${delimiterRight}`);
         }
     }
 
@@ -20,7 +23,7 @@ var PropToTagText = function (text, prop, prevProp) {
 
         switch (k) {
             case 'size':
-                headers.push(`[size=${value.replace('px', '')}]`);
+                headers.push(`${delimiterLeft}size=${value.replace('px', '')}${delimiterRight}`);
                 break;
 
             case 'color':
@@ -31,19 +34,19 @@ var PropToTagText = function (text, prop, prevProp) {
             case 'area':
             case 'url':
             case 'align':
-                headers.push(`[${k}=${value}]`);
+                headers.push(`${delimiterLeft}${k}=${value}${delimiterRight}`);
                 break;
 
             case 'u':
                 if (value === true) {
-                    headers.push('[u]');
+                    headers.push(`${delimiterLeft}u${delimiterRight}`);
                 } else {
-                    headers.push(`[u=${value}]`)
+                    headers.push(`${delimiterLeft}u=${value}${delimiterRight}`)
                 }
                 break;
 
             default:
-                headers.push(`[${k}]`);
+                headers.push(`${delimiterLeft}${k}${delimiterRight}`);
                 break;
         }
     }

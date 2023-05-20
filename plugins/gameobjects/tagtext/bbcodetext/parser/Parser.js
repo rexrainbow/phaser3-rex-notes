@@ -10,6 +10,7 @@ class Parser {
     constructor(style) {
         var delimiters = GetValue(style, 'delimiters', '[]');
         this.tagRegex = GetTagRegex(delimiters);
+        this.delimiters = delimiters;
     }
 
     getStrokeThinkness(defaultStyle, prop) {

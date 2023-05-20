@@ -17,11 +17,9 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.scene = scene;
 
-        this.parser = new Parser(this, GetValue(config, 'parser', undefined));
-
-        this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
-
         this.initManagers(scene, config);
+
+        this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
@@ -32,12 +30,18 @@ class TagPlayer extends Extend(EventEmitter) {
         if ((textManagerConfig !== false) && (textManagerConfig !== null)) {
             AddTextManager.call(this, textManagerConfig);
         }
-
-        this.setClickTarget(GetValue(config, 'clickTarget', scene));  // this.clickEE
     }
 
     get isPlaying() {
         return this.parser.isRunning;
+    }
+
+    get targetCamera() {
+        return this.waitEventManager.targetCamera;
+    }
+
+    get clickTarget() {
+        return this.waitEventManager.clickTarget;
     }
 
     get spriteManager() {
@@ -63,8 +67,6 @@ class TagPlayer extends Extend(EventEmitter) {
         }
 
         ClearEvents(this);
-
-        this.targetCamera = undefined;
 
         super.destroy();
 
