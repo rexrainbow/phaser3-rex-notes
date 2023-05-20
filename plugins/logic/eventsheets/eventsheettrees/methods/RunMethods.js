@@ -12,7 +12,7 @@ export default {
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
         var blackboard = this.blackboard;
-        var taskHandlers = this.taskHandlers;
+        var commandExecutor = this.commandExecutor;
 
         pendingTrees.length = 0;
 
@@ -22,7 +22,7 @@ export default {
 
             tree.resetState(blackboard);
             if (tree.isParallel) {
-                var status = tree.tick(blackboard, taskHandlers);
+                var status = tree.tick(blackboard, commandExecutor);
                 if (status === PENDING) {
                     pendingTrees.push(tree);
                 }
@@ -44,7 +44,7 @@ export default {
         var trees = this.pendingTrees;
         var closedTrees = this.closedTrees;
         var blackboard = this.blackboard;
-        var taskHandlers = this.taskHandlers;
+        var commandExecutor = this.commandExecutor;
 
         closedTrees.length = 0;
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
@@ -53,7 +53,7 @@ export default {
 
             if (status === IDLE) {
                 // Will goto PENDING, or FAILURE/ERROR state
-                status = tree.tick(blackboard, taskHandlers);
+                status = tree.tick(blackboard, commandExecutor);
             }
 
             var eventConditionPassed = tree.eventConditionPassed;
@@ -71,7 +71,7 @@ export default {
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            status = tree.tick(blackboard, taskHandlers);
+            status = tree.tick(blackboard, commandExecutor);
 
             if (status === RUNNING) {
                 break;
@@ -105,9 +105,9 @@ export default {
         this.isRunning = false;
 
         var blackboard = this.blackboard;
-        var taskHandlers = this.taskHandlers;
+        var commandExecutor = this.commandExecutor;
         this.pendingTrees.forEach(function (tree) {
-            tree.abort(blackboard, taskHandlers);
+            tree.abort(blackboard, commandExecutor);
         })
         this.pendingTrees.length = 0;
 

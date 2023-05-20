@@ -4,7 +4,7 @@ export default EventSheetTrees;
 
 declare namespace EventSheetTrees {
     interface IConfig {
-        taskHandlers?: Object,
+        commandExecutor?: Object,
         parallel?: boolean,
     }
 }
@@ -14,7 +14,7 @@ declare class EventSheetTrees extends EventEmitter {
 
     readonly memory: { [key: string]: any };
 
-    setTaskHandlers(taskHandlers?: Object): this;
+    setTaskHandlers(commandExecutor?: Object): this;
 
     addEventSheet(content?: string, config?: any): this;
 

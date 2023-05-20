@@ -31,10 +31,10 @@ class TaskHandlers extends EventEmitter {
         return this;
     }
 }
-var taskHandlers = new TaskHandlers();
+var commandExecutor = new TaskHandlers();
 
 var manager = new MarkedEventSheets({
-    taskHandlers: taskHandlers
+    commandExecutor: commandExecutor
 });
 manager.addEventSheet(content);
 console.log(manager.dumpTrees())

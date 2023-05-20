@@ -10,13 +10,13 @@ BehaviorTree.setStartIDValue(0);
 
 class EventSheetTrees extends EventEmitter {
     constructor({
-        taskHandlers,
+        commandExecutor,
         parallel = false,
     } = {}) {
 
         super();
 
-        this.setTaskHandlers(taskHandlers);
+        this.setCommandExecutor(commandExecutor);
         this.parallel = parallel;
 
         this.blackboard = new Blackboard();
@@ -34,8 +34,8 @@ class EventSheetTrees extends EventEmitter {
         return this.blackboard.getGlobalMemory();
     }
 
-    setTaskHandlers(taskHandlers) {
-        this.taskHandlers = taskHandlers;
+    setCommandExecutor(commandExecutor) {
+        this.commandExecutor = commandExecutor;
         return this;
     }
 

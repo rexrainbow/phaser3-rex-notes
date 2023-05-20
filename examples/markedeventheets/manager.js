@@ -3,9 +3,9 @@ import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import StringToValues from '../../plugins/utils/string/StringToValues.js';
 
-class TaskHandlers {
+class CommandExecutor {
     constructor(scene, config) {
-        this.sys = new RexPlugins.TaskHandlers(scene, config);
+        this.sys = new RexPlugins.CommandExecutor(scene, config);
 
         this.sys
             .addGameObjectManager({
@@ -230,10 +230,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var taskHandlers = new TaskHandlers(this);
+        var commandExecutor = new CommandExecutor(this);
 
         var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
-            taskHandlers: taskHandlers
+            commandExecutor: commandExecutor
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
             .start()

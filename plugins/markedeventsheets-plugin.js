@@ -1,5 +1,5 @@
 import MarkedEventSheets from './logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
-import TaskHandlers from './logic/runcommands/managers/Managers.js';
+import CommandExecutor from './logic/runcommands/managers/Managers.js';
 import SetValue from './utils/object/SetValue.js';
 
 class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
@@ -17,6 +17,6 @@ class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-SetValue(window, 'RexPlugins.TaskHandlers', TaskHandlers);
+SetValue(window, 'RexPlugins.CommandExecutor', CommandExecutor);
 
 export default MarkedEventSheetsPlugin;
