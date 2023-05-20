@@ -1,6 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import StringToValues from '../../plugins/utils/string/StringToValues.js';
 
 class TaskHandlers {
     constructor(scene, config) {
@@ -90,6 +91,11 @@ class TaskHandlers {
         // Execute next command
     }
 
+    _runGOMethod(config, manager) {
+        this.sys.callGameObjectMethod(undefined, config.name, config.methodName, ...config.parameters);
+        // Execute next command
+    }
+
     wait(config, manager) {
         var { time } = config;
         if (time !== undefined) {
@@ -102,7 +108,7 @@ class TaskHandlers {
         return this.wait({ click: true }, manager);
     }
 
-    getHandler(name, config, manager) {
+    defaultHandler(name, config, manager) {
         var tokens = name.split('.');
 
         config.name = tokens[0];
@@ -110,25 +116,29 @@ class TaskHandlers {
             case 1:
                 var gameObjectType = this.sys.getGameObjectManagerName(config.name);
                 if ((gameObjectType === 'text') && (config.text)) {
-                    return this.textTyping;
+                    return this.textTyping(config, manager);
                 } else {
-                    return this._setGOProperty;
+                    return this._setGOProperty(config, manager);
                 }
 
             case 2:
                 switch (tokens[1]) {
                     case 'to':
-                        return this._easeGOProperty;
+                        return this._easeGOProperty(config, manager);
 
                     case 'yoyo':
                         config.yoyo = true;
-                        return this._easeGOProperty;
+                        return this._easeGOProperty(config, manager);
 
                     default:
-                        debugger;
-                        // TODO:
+                        var parameters;
+                        for (var key in config) {
+                            parameters = config[key];
+                            break;
+                        }
                         config.methodName = tokens[1];
-                        return this._runGOMethod;
+                        config.parameters = (parameters) ? StringToValues(parameters) : [];
+                        return this._runGOMethod(config, manager);
                 }
         }
     }
