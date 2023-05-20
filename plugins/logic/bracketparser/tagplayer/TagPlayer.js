@@ -3,7 +3,6 @@ import Parser from './parser/Parser.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import AddTextManager from './methods/textmanager/AddTextManager.js';
 import Methods from './methods/Methods.js';
-import ClearEvents from './methods/utils/ClearEvents.js';
 
 const EventEmitter = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -65,8 +64,6 @@ class TagPlayer extends Extend(EventEmitter) {
         if (!this.scene) {
             return;
         }
-
-        ClearEvents(this);
 
         super.destroy();
 

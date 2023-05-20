@@ -1984,7 +1984,7 @@
   }(Clock);
 
   var WaitCompleteEvent = '_wait.complete';
-  var RemoveWaitEvents$1 = '_remove.wait';
+  var RemoveWaitEvents = '_remove.wait';
 
   var WaitTimeMethods = {
     waitTime: function waitTime(duration) {
@@ -1992,7 +1992,7 @@
       timeline.delayEvent(duration, 'delay');
 
       // Clear delay event on timeline manually
-      this.parent.once(RemoveWaitEvents$1, function () {
+      this.parent.once(RemoveWaitEvents, function () {
         timeline.removeDelayEvent('delay');
       });
       return this.waitEvent(timeline, 'delay');
@@ -2052,7 +2052,7 @@
       };
       gameObject.on(eventName, callback);
       // Clear changedata event on gameobject manually
-      this.parent.once(RemoveWaitEvents$1, function () {
+      this.parent.once(RemoveWaitEvents, function () {
         gameObject.off(eventName, callback);
       });
       return this.waitEvent(gameObject, '_dataFlagMatch');
@@ -2338,7 +2338,7 @@
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
-        this.parent.once(RemoveWaitEvents$1, function () {
+        this.parent.once(RemoveWaitEvents, function () {
           eventEmitter.off(eventName, callback, this);
         });
         return this.parent;
@@ -2371,7 +2371,7 @@
     }, {
       key: "removeWaitEvents",
       value: function removeWaitEvents() {
-        this.parent.emit(RemoveWaitEvents$1);
+        this.parent.emit(RemoveWaitEvents);
         return this;
       }
     }, {
@@ -5726,18 +5726,6 @@
   };
   Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods, DataManagerMethods);
 
-  // Internal events
-
-  var RemoveWaitEvents = '_remove.wait';
-  var StopPlayEvent = '_remove.play';
-  var ClearEvents$1 = [RemoveWaitEvents, StopPlayEvent];
-
-  var ClearEvents = function ClearEvents(tagPlayer) {
-    for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
-      tagPlayer.emit(ClearEvents$1[i]);
-    }
-  };
-
   var EventEmitter = Phaser.Events.EventEmitter;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TagPlayer = /*#__PURE__*/function (_Extend) {
@@ -5804,7 +5792,6 @@
         if (!this.scene) {
           return;
         }
-        ClearEvents(this);
         _get(_getPrototypeOf(TagPlayer.prototype), "destroy", this).call(this);
         this.destroyManagers(fromScene);
         this.scene = undefined;
