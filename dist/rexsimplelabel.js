@@ -16003,10 +16003,12 @@
     if (prevProp == null) {
       prevProp = EMPTYPROP;
     }
+    var delimiterLeft = this.delimiters[0];
+    var delimiterRight = this.delimiters[1];
     var headers = [];
     for (var k in prevProp) {
       if (!prop.hasOwnProperty(k)) {
-        headers.push("[/".concat(k, "]"));
+        headers.push("".concat(delimiterLeft, "/").concat(k).concat(delimiterRight));
       }
     }
     for (var k in prop) {
@@ -16016,7 +16018,7 @@
       }
       switch (k) {
         case 'size':
-          headers.push("[size=".concat(value.replace('px', ''), "]"));
+          headers.push("".concat(delimiterLeft, "size=").concat(value.replace('px', '')).concat(delimiterRight));
           break;
         case 'color':
         case 'weight':
@@ -16026,17 +16028,17 @@
         case 'area':
         case 'url':
         case 'align':
-          headers.push("[".concat(k, "=").concat(value, "]"));
+          headers.push("".concat(delimiterLeft).concat(k, "=").concat(value).concat(delimiterRight));
           break;
         case 'u':
           if (value === true) {
-            headers.push('[u]');
+            headers.push("".concat(delimiterLeft, "u").concat(delimiterRight));
           } else {
-            headers.push("[u=".concat(value, "]"));
+            headers.push("".concat(delimiterLeft, "u=").concat(value).concat(delimiterRight));
           }
           break;
         default:
-          headers.push("[".concat(k, "]"));
+          headers.push("".concat(delimiterLeft).concat(k).concat(delimiterRight));
           break;
       }
     }
@@ -16177,6 +16179,7 @@
       _classCallCheck(this, Parser);
       var delimiters = GetValue$a(style, 'delimiters', '[]');
       this.tagRegex = GetTagRegex(delimiters);
+      this.delimiters = delimiters;
     }
     _createClass(Parser, [{
       key: "getStrokeThinkness",
@@ -19062,6 +19065,7 @@
       lastLineWidth = 0,
       maxLineWidth = 0;
     var wordResult;
+    var isPageBreakChar = false;
     while (childIndex < lastChildIndex) {
       wordResult = GetWord(children, childIndex, charWrap, wordResult);
       var word = wordResult.word;
@@ -19070,7 +19074,7 @@
       childIndex += charCnt;
       // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-      var isPageBreakChar = IsPageBreakChar(word[0]);
+      isPageBreakChar = IsPageBreakChar(word[0]);
       var isControlChar = isNewLineChar || isPageBreakChar;
       if (remainderWidth < wordWidth || isControlChar) {
         // Add to result
@@ -19121,7 +19125,7 @@
       maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
     }
     result.start += resultChildren.length;
-    result.isLastPage = result.start === lastChildIndex;
+    result.isLastPage = !isPageBreakChar && result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
     result.linesHeight = resultLines.length * lineHeight;
 

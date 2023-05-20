@@ -1273,10 +1273,12 @@
   (function (exports) {
     /*
       Returns a Parser object of the following structure:
-    	  Parser: {
+    
+      Parser: {
         yy: {}
       }
-    	  Parser.prototype: {
+    
+      Parser.prototype: {
         yy: {},
         trace: function(),
         symbols_: {associative list: name ==> number},
@@ -1287,7 +1289,8 @@
         defaultActions: {...},
         parseError: function(str, hash),
         parse: function(input),
-    	    lexer: {
+    
+        lexer: {
             EOF: 1,
             parseError: function(str, hash),
             setInput: function(input),
@@ -1306,16 +1309,19 @@
             _currentRules: function(),
             topState: function(),
             pushState: function(condition),
-    	        options: {
+    
+            options: {
                 ranges: boolean           (optional: true ==> token location info will include a .range[] member)
                 flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
                 backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
             },
-    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    
+            performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
             rules: [...],
             conditions: {associative list: name ==> set},
         }
       }
+    
     
       token location info (@$, _$, etc.): {
         first_line: n,
@@ -1324,6 +1330,7 @@
         last_column: n,
         range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
       }
+    
     
       the parseError function receives a 'hash' object with these members for lexer and parser errors: {
         text:        (matched text)
@@ -10156,7 +10163,31 @@
   var WaitCompleteEvent = '_wait.complete';
   var RemoveWaitEvents = '_remove.wait';
 
+  var WaitTimeMethods = {
+    waitTime: function waitTime(duration) {
+      var timeline = this.parent.timeline;
+      timeline.delayEvent(duration, 'delay');
+
+      // Clear delay event on timeline manually
+      this.parent.once(RemoveWaitEvents, function () {
+        timeline.removeDelayEvent('delay');
+      });
+      return this.waitEvent(timeline, 'delay');
+    }
+  };
+
   var WaitInputMethods = {
+    setClickTarget: function setClickTarget(target) {
+      this.clickTarget = target;
+      if (!target) {
+        this.clickEE = null;
+      } else if (IsSceneObject(target)) {
+        this.clickEE = target.input;
+      } else {
+        // Assume that target is a gameObject
+        this.clickEE = target.setInteractive();
+      }
+    },
     waitClick: function waitClick() {
       if (!this.clickEE) {
         return this.waitTime(0);
@@ -10233,6 +10264,10 @@
   };
 
   var WaitCameraMethods = {
+    setTargetCamera: function setTargetCamera(camera) {
+      this.targetCamera = camera;
+      return this;
+    },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
       var camera = this.targetCamera;
       if (!camera) {
@@ -10277,26 +10312,6 @@
   };
 
   var WaitMusicMethods = {
-    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
     waitSoundEffectComplete: function waitSoundEffectComplete() {
       if (!this.parent.soundManager) {
         return this.waitTime(0);
@@ -10312,6 +10327,26 @@
         return this.waitTime(0);
       }
       var music = this.parent.soundManager.getLastSoundEffect2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
       if (!music) {
         return this.waitTime(0);
       }
@@ -10458,15 +10493,17 @@
       _classCallCheck(this, WaitEventManager);
       this.parent = parent;
       this.waitCompleteEventName = GetValue$3(config, 'completeEventName', WaitCompleteEvent);
-      this.clickEE = GetValue$3(config, 'clickTarget', this.scene.input);
-      this.targetCamera = GetValue$3(config, 'camera', this.scene.cameras.main);
+      this.setClickTarget(GetValue$3(config, 'clickTarget', this.scene));
+      this.setTargetCamera(GetValue$3(config, 'camera', this.scene.cameras.main));
+      this.waitId = 0;
     }
     _createClass(WaitEventManager, [{
       key: "destroy",
       value: function destroy() {
         this.removeWaitEvents();
-        this.clickEE = undefined;
-        this.targetCamer = undefined;
+        this.clearWaitCompleteCallbacks();
+        this.setClickTarget();
+        this.setTargetCamera();
       }
     }, {
       key: "scene",
@@ -10476,15 +10513,37 @@
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
-        if (completeNextTick === undefined) {
-          completeNextTick = true;
-        }
-        var callback = completeNextTick ? this.completeNextTick : this.complete;
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
         this.parent.once(RemoveWaitEvents, function () {
           eventEmitter.off(eventName, callback, this);
         });
         return this.parent;
+      }
+    }, {
+      key: "getWaitCompleteTriggerCallback",
+      value: function getWaitCompleteTriggerCallback(completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var waitId = this.waitId;
+        var self = this;
+        var completeCallback = function completeCallback() {
+          if (waitId < self.waitId) {
+            return;
+          }
+          self.waitId++;
+          self.removeWaitEvents();
+          self.parent.emit(self.waitCompleteEventName);
+        };
+        if (completeNextTick) {
+          var completeCallbackNextTick = function completeCallbackNextTick() {
+            PreUpdateDelayCall(self.parent, 0, completeCallback);
+          };
+          return completeCallbackNextTick;
+        } else {
+          return completeCallback;
+        }
       }
     }, {
       key: "removeWaitEvents",
@@ -10493,30 +10552,16 @@
         return this;
       }
     }, {
-      key: "complete",
-      value: function complete() {
-        this.removeWaitEvents();
-        this.parent.emit(this.waitCompleteEventName);
+      key: "addWaitCompleteCallback",
+      value: function addWaitCompleteCallback(callback, scope) {
+        this.parent.on(this.waitCompleteEventName, callback, scope);
         return this;
       }
     }, {
-      key: "completeNextTick",
-      value: function completeNextTick() {
-        // Emit complete event at scene's preupdate event of next tick
-        PreUpdateDelayCall(this.parent, 0, this.complete, this);
+      key: "clearWaitCompleteCallbacks",
+      value: function clearWaitCompleteCallbacks() {
+        this.parent.off(this.waitCompleteEventName);
         return this;
-      }
-    }, {
-      key: "waitTime",
-      value: function waitTime(duration) {
-        var timeline = this.parent.timeline;
-        timeline.delayEvent(duration, 'delay');
-
-        // Clear delay event on timeline manually
-        this.parent.once(RemoveWaitEvents, function () {
-          timeline.removeDelayEvent('delay');
-        });
-        return this.waitEvent(timeline, 'delay');
       }
     }]);
     return WaitEventManager;
@@ -10524,7 +10569,7 @@
   var Methods$1 = {
     waitAny: WaitAny
   };
-  Object.assign(WaitEventManager.prototype, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$1);
+  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$1);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {

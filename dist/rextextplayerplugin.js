@@ -2075,9 +2075,33 @@
   }(Clock);
 
   var WaitCompleteEvent = '_wait.complete';
-  var RemoveWaitEvents$1 = '_remove.wait';
+  var RemoveWaitEvents = '_remove.wait';
+
+  var WaitTimeMethods = {
+    waitTime: function waitTime(duration) {
+      var timeline = this.parent.timeline;
+      timeline.delayEvent(duration, 'delay');
+
+      // Clear delay event on timeline manually
+      this.parent.once(RemoveWaitEvents, function () {
+        timeline.removeDelayEvent('delay');
+      });
+      return this.waitEvent(timeline, 'delay');
+    }
+  };
 
   var WaitInputMethods = {
+    setClickTarget: function setClickTarget(target) {
+      this.clickTarget = target;
+      if (!target) {
+        this.clickEE = null;
+      } else if (IsSceneObject(target)) {
+        this.clickEE = target.input;
+      } else {
+        // Assume that target is a gameObject
+        this.clickEE = target.setInteractive();
+      }
+    },
     waitClick: function waitClick() {
       if (!this.clickEE) {
         return this.waitTime(0);
@@ -2119,7 +2143,7 @@
       };
       gameObject.on(eventName, callback);
       // Clear changedata event on gameobject manually
-      this.parent.once(RemoveWaitEvents$1, function () {
+      this.parent.once(RemoveWaitEvents, function () {
         gameObject.off(eventName, callback);
       });
       return this.waitEvent(gameObject, '_dataFlagMatch');
@@ -2154,6 +2178,10 @@
   };
 
   var WaitCameraMethods = {
+    setTargetCamera: function setTargetCamera(camera) {
+      this.targetCamera = camera;
+      return this;
+    },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
       var camera = this.targetCamera;
       if (!camera) {
@@ -2198,26 +2226,6 @@
   };
 
   var WaitMusicMethods = {
-    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
     waitSoundEffectComplete: function waitSoundEffectComplete() {
       if (!this.parent.soundManager) {
         return this.waitTime(0);
@@ -2237,10 +2245,30 @@
         return this.waitTime(0);
       }
       return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
     }
   };
 
-  var WaitAny = function WaitAny(config) {
+  var WaitAny$1 = function WaitAny(config) {
     if (!config) {
       return this.waitTime(0);
     }
@@ -2379,15 +2407,17 @@
       _classCallCheck(this, WaitEventManager);
       this.parent = parent;
       this.waitCompleteEventName = GetValue$h(config, 'completeEventName', WaitCompleteEvent);
-      this.clickEE = GetValue$h(config, 'clickTarget', this.scene.input);
-      this.targetCamera = GetValue$h(config, 'camera', this.scene.cameras.main);
+      this.setClickTarget(GetValue$h(config, 'clickTarget', this.scene));
+      this.setTargetCamera(GetValue$h(config, 'camera', this.scene.cameras.main));
+      this.waitId = 0;
     }
     _createClass(WaitEventManager, [{
       key: "destroy",
       value: function destroy() {
         this.removeWaitEvents();
-        this.clickEE = undefined;
-        this.targetCamer = undefined;
+        this.clearWaitCompleteCallbacks();
+        this.setClickTarget();
+        this.setTargetCamera();
       }
     }, {
       key: "scene",
@@ -2397,55 +2427,63 @@
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
-        if (completeNextTick === undefined) {
-          completeNextTick = true;
-        }
-        var callback = completeNextTick ? this.completeNextTick : this.complete;
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
-        this.parent.once(RemoveWaitEvents$1, function () {
+        this.parent.once(RemoveWaitEvents, function () {
           eventEmitter.off(eventName, callback, this);
         });
         return this.parent;
       }
     }, {
+      key: "getWaitCompleteTriggerCallback",
+      value: function getWaitCompleteTriggerCallback(completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var waitId = this.waitId;
+        var self = this;
+        var completeCallback = function completeCallback() {
+          if (waitId < self.waitId) {
+            return;
+          }
+          self.waitId++;
+          self.removeWaitEvents();
+          self.parent.emit(self.waitCompleteEventName);
+        };
+        if (completeNextTick) {
+          var completeCallbackNextTick = function completeCallbackNextTick() {
+            PreUpdateDelayCall(self.parent, 0, completeCallback);
+          };
+          return completeCallbackNextTick;
+        } else {
+          return completeCallback;
+        }
+      }
+    }, {
       key: "removeWaitEvents",
       value: function removeWaitEvents() {
-        this.parent.emit(RemoveWaitEvents$1);
+        this.parent.emit(RemoveWaitEvents);
         return this;
       }
     }, {
-      key: "complete",
-      value: function complete() {
-        this.removeWaitEvents();
-        this.parent.emit(this.waitCompleteEventName);
+      key: "addWaitCompleteCallback",
+      value: function addWaitCompleteCallback(callback, scope) {
+        this.parent.on(this.waitCompleteEventName, callback, scope);
         return this;
       }
     }, {
-      key: "completeNextTick",
-      value: function completeNextTick() {
-        // Emit complete event at scene's preupdate event of next tick
-        PreUpdateDelayCall(this.parent, 0, this.complete, this);
+      key: "clearWaitCompleteCallbacks",
+      value: function clearWaitCompleteCallbacks() {
+        this.parent.off(this.waitCompleteEventName);
         return this;
-      }
-    }, {
-      key: "waitTime",
-      value: function waitTime(duration) {
-        var timeline = this.parent.timeline;
-        timeline.delayEvent(duration, 'delay');
-
-        // Clear delay event on timeline manually
-        this.parent.once(RemoveWaitEvents$1, function () {
-          timeline.removeDelayEvent('delay');
-        });
-        return this.waitEvent(timeline, 'delay');
       }
     }]);
     return WaitEventManager;
   }();
   var Methods$6 = {
-    waitAny: WaitAny
+    waitAny: WaitAny$1
   };
-  Object.assign(WaitEventManager.prototype, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$6);
+  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$6);
 
   var GetValue$g = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
@@ -7006,6 +7044,7 @@
       lastLineWidth = 0,
       maxLineWidth = 0;
     var wordResult;
+    var isPageBreakChar = false;
     while (childIndex < lastChildIndex) {
       wordResult = GetWord(children, childIndex, charWrap, wordResult);
       var word = wordResult.word;
@@ -7014,7 +7053,7 @@
       childIndex += charCnt;
       // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-      var isPageBreakChar = IsPageBreakChar(word[0]);
+      isPageBreakChar = IsPageBreakChar(word[0]);
       var isControlChar = isNewLineChar || isPageBreakChar;
       if (remainderWidth < wordWidth || isControlChar) {
         // Add to result
@@ -7065,7 +7104,7 @@
       maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
     }
     result.start += resultChildren.length;
-    result.isLastPage = result.start === lastChildIndex;
+    result.isLastPage = !isPageBreakChar && result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
     result.linesHeight = resultLines.length * lineHeight;
 
@@ -9446,7 +9485,12 @@
     }
   };
 
+  // Internal events
+
   var PageFadeOutCompleteEvent = 'page.fadeout';
+  var StopPlayEvent = '_remove.play';
+  var ClearEvents$1 = [PageFadeOutCompleteEvent, StopPlayEvent];
+
   var FadeOutPage = function FadeOutPage() {
     if (!this.fadeOutPageCallback || !this.children) {
       this.emit(PageFadeOutCompleteEvent);
@@ -9632,70 +9676,6 @@
     return this;
   };
 
-  // Internal events
-
-  var RemoveWaitEvents = '_remove.wait';
-  var StopPlayEvent = '_remove.play';
-  var ClearEvents$1 = [RemoveWaitEvents, StopPlayEvent];
-
-  var GetWrapCallback = function GetWrapCallback(textPlayer, callback, args, scope, removeFrom) {
-    return function () {
-      textPlayer.emit(RemoveWaitEvents, removeFrom); // Remove all wait events
-      callback.apply(scope, args);
-    };
-  };
-
-  var WaitCallback = function WaitCallback(textPlayer, postfixName, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'custom');
-    var eventName = postfixName ? "wait.".concat(postfixName) : 'wait';
-    textPlayer.emit(eventName, wrapCallback);
-  };
-
-  var WaitTime = function WaitTime(textPlayer, time, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'time');
-    var timer;
-
-    // Remove all wait events
-    textPlayer.once(RemoveWaitEvents, function () {
-      if (timer) {
-        timer.remove();
-        timer = undefined;
-      }
-    });
-    timer = textPlayer.timeline.delayCall(time, wrapCallback);
-    textPlayer.emit('wait.time', time);
-  };
-
-  var WaitClick = function WaitClick(textPlayer, callback, args, scope) {
-    var clickEE = textPlayer.clickEE;
-    if (!clickEE) {
-      return;
-    }
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'click');
-
-    // Remove all wait events
-    textPlayer.once(RemoveWaitEvents, function () {
-      clickEE.off('pointerdown', wrapCallback, textPlayer);
-    });
-    clickEE.once('pointerdown', wrapCallback, textPlayer);
-    textPlayer.emit('wait.click');
-  };
-
-  var WaitMusic = function WaitMusic(textPlayer, music, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'music');
-    if (music) {
-      // Remove all wait events
-      textPlayer.once(RemoveWaitEvents, function () {
-        music.off('complete', wrapCallback, textPlayer);
-      });
-      music.once('complete', wrapCallback, textPlayer);
-    }
-    textPlayer.emit('wait.music', music);
-    if (!music) {
-      wrapCallback();
-    }
-  };
-
   var IsWaitCameraEffect = function IsWaitCameraEffect(name) {
     switch (name) {
       case 'camera.fadein':
@@ -9710,72 +9690,13 @@
         return false;
     }
   };
-  var WaitCameraEffect = function WaitCameraEffect(textPlayer, effectName, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, "camera.".concat(effectName));
-    var camera = textPlayer.targetCamera;
-    var effect, completeEventName;
-    switch (effectName) {
-      case 'camera.fadein':
-        effect = camera.fadeEffect;
-        completeEventName = 'camerafadeincomplete';
-        break;
-      case 'camera.fadeout':
-        effect = camera.fadeEffect;
-        completeEventName = 'camerafadeoutcomplete';
-        break;
-      case 'camera.flash':
-        effect = camera.flashEffect;
-        completeEventName = 'cameraflashcomplete';
-        break;
-      case 'camera.shake':
-        effect = camera.shakeEffect;
-        completeEventName = 'camerashakecomplete';
-        break;
-      case 'camera.zoom':
-        effect = camera.zoomEffect;
-        completeEventName = 'camerazoomcomplete';
-        break;
-      case 'camera.rotate':
-        effect = camera.rotateToEffect;
-        completeEventName = 'camerarotatecomplete';
-        break;
-      case 'camera.scroll':
-        effect = camera.panEffect;
-        completeEventName = 'camerapancomplete';
-        break;
-    }
-    if (!effect.isRunning) {
-      textPlayer.emit('wait.camera', effectName);
-      wrapCallback();
-    } else {
-      // Remove all wait events
-      textPlayer.once(RemoveWaitEvents, function (removeFrom) {
-        camera.off(completeEventName, wrapCallback, textPlayer);
-      });
-      camera.once(completeEventName, wrapCallback, textPlayer);
-      textPlayer.emit('wait.camera', effectName);
-    }
-  };
-
-  var WaitKeyDown = function WaitKeyDown(textPlayer, keyName, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'keydown');
-    var eventName = "keydown-".concat(keyName.toUpperCase());
-    var keyboard = textPlayer.scene.input.keyboard;
-
-    // Remove all wait events
-    textPlayer.once(RemoveWaitEvents, function () {
-      keyboard.off(eventName, wrapCallback, textPlayer);
-    });
-    keyboard.once(eventName, wrapCallback, textPlayer);
-    textPlayer.emit('wait.keydown', keyName);
-  };
 
   var IsWaitGameObject = function IsWaitGameObject(textPlayer, name) {
     var names = name.split('.');
     return textPlayer.gameObjectManagers.hasOwnProperty(names[0]);
   };
-  var WaitGameObject = function WaitGameObject(textPlayer, tag, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
+  var WaitGameObject = function WaitGameObject(textPlayer, tag, callback, scope) {
+    var waitEventManager = textPlayer.waitEventManager;
     var tags = tag.split('.');
     var goType = tags[0];
     var gameObjectManager = textPlayer.getGameObjectManager(goType);
@@ -9783,34 +9704,14 @@
     switch (tags.length) {
       case 1:
         // 'goType' : wait all sprites has beeen destroyed
-        if (gameObjectManager.isEmpty) {
-          textPlayer.emit(waitEventName);
-          wrapCallback();
-        } else {
-          // Remove all wait events
-          textPlayer.once(RemoveWaitEvents, function (removeFrom) {
-            gameObjectManager.off('empty', wrapCallback, textPlayer);
-          });
-          gameObjectManager.once('empty', wrapCallback, textPlayer);
-          textPlayer.emit(waitEventName);
-        }
+        waitEventManager.waitGameObjectManagerEmpty(goType);
+        textPlayer.emit(waitEventName);
         return;
       case 2:
         // 'goType.name' : wait goType.name has been destroyed
         var name = tags[1];
-        if (!gameObjectManager.has(name)) {
-          textPlayer.emit(waitEventName, name);
-          wrapCallback();
-        } else {
-          var spriteData = gameObjectManager.get(name);
-          var gameObject = spriteData.gameObject;
-          // Remove all wait events
-          textPlayer.once(RemoveWaitEvents, function () {
-            gameObject.off('destroy', wrapCallback, textPlayer);
-          });
-          gameObject.once('destroy', wrapCallback, textPlayer);
-          textPlayer.emit(waitEventName, name);
-        }
+        waitEventManager.waitGameObjectDestroy(goType, name);
+        textPlayer.emit(waitEventName, name);
         return;
       case 3:
         // 'goType.name.prop' : wait ease goType.name.prop has been completed
@@ -9819,18 +9720,8 @@
         var value = gameObjectManager.getProperty(name, prop);
         // Can start tween task for a number property
         if (typeof value === 'number') {
-          var task = gameObjectManager.getTweenTask(name, prop);
-          if (!task) {
-            textPlayer.emit(waitEventName, name, prop);
-            wrapCallback();
-          } else {
-            // Remove all wait events
-            textPlayer.once(RemoveWaitEvents, function () {
-              task.off('complete', wrapCallback, textPlayer);
-            });
-            task.once('complete', wrapCallback, textPlayer);
-            textPlayer.emit(waitEventName, name, prop);
-          }
+          waitEventManager.waitGameObjectTweenComplete(goType, name, prop);
+          textPlayer.emit(waitEventName, name, prop);
           return;
         }
         var dataKey = prop;
@@ -9840,34 +9731,20 @@
         }
         // Wait until flag is true/false
         if (gameObjectManager.hasData(name, dataKey)) {
-          var gameObject = gameObjectManager.getGO(name);
-          var flag = gameObject.getData(dataKey);
-          var matchTrueFlag = !matchFalseFlag;
-          if (flag === matchTrueFlag) {
-            textPlayer.emit(waitEventName, name, prop);
-            wrapCallback();
-          } else {
-            // Remove all wait events
-            var eventName = "changedata-".concat(dataKey);
-            var callback = function callback(gameObject, value, previousValue) {
-              value = !!value;
-              if (value === matchTrueFlag) {
-                wrapCallback.call(textPlayer);
-              }
-            };
-            textPlayer.once(RemoveWaitEvents, function () {
-              gameObject.off(eventName, callback);
-            });
-            gameObject.on(eventName, callback);
-            textPlayer.emit(waitEventName, name, prop);
-          }
+          waitEventManager.waitGameObjectDataFlag(goType, name, dataKey, !matchFalseFlag);
+          textPlayer.emit(waitEventName, name, dataKey);
+          return;
+        } else {
+          waitEventManager.waitTime(0);
           return;
         }
     }
   };
 
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
-  var WaitMultiple = function WaitMultiple(textPlayer, names, callback, args, scope) {
+  var WaitAny = function WaitAny(textPlayer, names, callback, scope) {
+    var waitEventManager = textPlayer.waitEventManager;
+    waitEventManager.clearWaitCompleteCallbacks().addWaitCompleteCallback(callback, scope);
     if (typeof names === 'string' && names.length > 1 && names.indexOf('|') !== -1) {
       names = names.split('|');
     } else {
@@ -9877,33 +9754,44 @@
       var name = names[i];
       if (name == null || name === 'wait') {
         // Wait event
-        WaitCallback(textPlayer, undefined, callback, args, scope);
+        var waitCompleteTriggerCallback = textPlayer.waitEventManager.getWaitCompleteTriggerCallback();
+        textPlayer.emit('wait', waitCompleteTriggerCallback);
       } else if (typeof name === 'number' || !isNaN(name)) {
         // A number, or a number string
-        WaitTime(textPlayer, parseFloat(name), callback, args, scope);
+        var time = parseFloat(name);
+        waitEventManager.waitTime(time);
+        textPlayer.emit('wait.time', time);
       } else if (name === 'click') {
         // 'click'
-        WaitClick(textPlayer, callback, args, scope);
+        waitEventManager.waitClick();
+        textPlayer.emit('wait.click');
       } else if (name === 'se') {
+        waitEventManager.waitSoundEffectComplete();
         var music = textPlayer.soundManager.getLastSoundEffect();
-        WaitMusic(textPlayer, music, callback, args, scope);
+        textPlayer.emit('wait.music', music);
       } else if (name === 'se2') {
+        waitEventManager.waitSoundEffect2Complete();
         var music = textPlayer.soundManager.getLastSoundEffect2();
-        WaitMusic(textPlayer, music, callback, args, scope);
+        textPlayer.emit('wait.music', music);
       } else if (name === 'bgm') {
+        waitEventManager.waitBackgroundMusicComplete();
         var music = textPlayer.soundManager.getBackgroundMusic();
-        WaitMusic(textPlayer, music, callback, args, scope);
+        textPlayer.emit('wait.music', music);
       } else if (name === 'bgm2') {
+        waitEventManager.waitBackgroundMusic2Complete();
         var music = textPlayer.soundManager.getBackgroundMusic2();
-        WaitMusic(textPlayer, music, callback, args, scope);
+        textPlayer.emit('wait.music', music);
       } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
-        WaitKeyDown(textPlayer, name, callback, args, scope);
+        waitEventManager.waitKeyDown(name);
+        textPlayer.emit('wait.keydown', name);
       } else if (IsWaitCameraEffect(name)) {
-        WaitCameraEffect(textPlayer, name, callback, args, scope);
+        waitEventManager.waitCameraEffectComplete(name);
+        textPlayer.emit('wait.camera', name);
       } else if (IsWaitGameObject(textPlayer, name)) {
-        WaitGameObject(textPlayer, name, callback, args, scope);
+        WaitGameObject(textPlayer, name);
       } else {
-        WaitCallback(textPlayer, name, callback, args, scope);
+        var waitCompleteTriggerCallback = textPlayer.waitEventManager.getWaitCompleteTriggerCallback();
+        textPlayer.emit("wait.".concat(name), waitCompleteTriggerCallback);
       }
     }
   };
@@ -9914,7 +9802,7 @@
       return this;
     }
     this.pauseTyping();
-    WaitMultiple(this.textPlayer, name, this.resumeTyping, [], this);
+    WaitAny(this.textPlayer, name, this.resumeTyping, this);
     return this;
   };
 
@@ -10847,20 +10735,12 @@
   };
 
   var SetClickTarget = function SetClickTarget(target) {
-    this.clickTarget = target;
-    if (!target) {
-      this.clickEE = null;
-    } else if (IsSceneObject(target)) {
-      this.clickEE = target.input;
-    } else {
-      // Assume that target is a gameObject
-      this.clickEE = target.setInteractive();
-    }
+    this.waitEventManager.setClickTarget(target);
     return this;
   };
 
   var SetTargetCamera = function SetTargetCamera(camera) {
-    this.targetCamera = camera;
+    this.waitEventManager.setTargetCamera(camera);
     return this;
   };
 
@@ -10869,13 +10749,15 @@
     if (!input) {
       this.nextPageInput = null;
     } else if (typeof input === 'function') {
-      this.nextPageInput = function (callback, args, scope) {
-        var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
-        input.call(textPlayer, wrapCallback);
+      this.nextPageInput = function (callback, scope) {
+        var waitEventManager = textPlayer.waitEventManager;
+        waitEventManager.clearWaitCompleteCallbacks().addWaitCompleteCallback(callback, scope);
+        var waitCompleteTriggerCallback = waitEventManager.getWaitCompleteTriggerCallback();
+        input.call(textPlayer, waitCompleteTriggerCallback);
       };
     } else {
-      this.nextPageInput = function (callback, args, scope) {
-        WaitMultiple(textPlayer, input, callback, args, scope);
+      this.nextPageInput = function (callback, scope) {
+        WaitAny(textPlayer, input, callback, scope);
       };
     }
   };
@@ -10908,12 +10790,11 @@
     }
   };
 
-  Phaser.Utils.Objects.GetValue;
   var TypingNextPage = function TypingNextPage() {
     if (!this.isPlaying || this.isPageTyping) {
       return this;
     }
-    this.typeWriter.once('page.fadeout', _TypingNextPage, this).fadeOutPage();
+    this.typeWriter.once(PageFadeOutCompleteEvent, _TypingNextPage, this).fadeOutPage();
     return this;
   };
   var _TypingNextPage = function _TypingNextPage() {
@@ -10929,7 +10810,7 @@
         if (this.ignoreNextPageInput) {
           TypingNextPage.call(this);
         } else if (this.nextPageInput) {
-          this.nextPageInput(TypingNextPage, [], this);
+          this.nextPageInput(TypingNextPage, this);
         } else ;
       }
     };
@@ -10937,7 +10818,7 @@
     // Remove event when typing pages has been canceled
     this.once(StopPlayEvent, function () {
       this.typeWriter.off('complete', OnTypingPageComplete, this);
-    });
+    }, this);
     this.typeWriter.once('complete', OnTypingPageComplete, this).start(result.children);
   };
 
@@ -11077,6 +10958,7 @@
       delete config.text;
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexTextPlayer';
+      _this.initManagers(scene, config);
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue(config, 'parser', undefined));
       _this.typeWriter = new TypeWriter(_assertThisInitialized(_this), GetValue(config, 'typing', undefined));
       _this._imageManager = undefined;
@@ -11084,14 +10966,11 @@
       if (imageData) {
         _this.addImage(imageData);
       }
-      _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
-      _this.initManagers(scene, config);
       var spriteManagerConfig = GetValue(config, 'sprites');
       if (spriteManagerConfig !== false && spriteManagerConfig !== null) {
         AddSpriteManager.call(_assertThisInitialized(_this), spriteManagerConfig);
       }
       _this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
-      _this.setClickTarget(GetValue(config, 'clickTarget', _assertThisInitialized(_this))); // this.clickEE
       _this.setNextPageInput(GetValue(config, 'nextPageInput', null));
       _this.isPlaying = false;
       if (content) {
@@ -11100,6 +10979,16 @@
       return _this;
     }
     _createClass(TextPlayer, [{
+      key: "targetCamera",
+      get: function get() {
+        return this.waitEventManager.targetCamera;
+      }
+    }, {
+      key: "clickTarget",
+      get: function get() {
+        return this.waitEventManager.clickTarget;
+      }
+    }, {
       key: "imageManager",
       get: function get() {
         if (this._imageManager === undefined) {
@@ -11128,8 +11017,6 @@
           this._imageManager.destroy(fromScene);
         }
         this._imageManager = undefined;
-        this.targetCamera = undefined;
-        this.clickEE = undefined;
         this.destroyManagers(fromScene);
         _get(_getPrototypeOf(TextPlayer.prototype), "destroy", this).call(this, fromScene);
       }
