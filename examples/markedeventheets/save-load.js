@@ -4,7 +4,7 @@ import eventSheet0 from 'raw-loader!/assets/markedeventsheet/save-load/eventshee
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet1.md';
 import eventSheet2 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet2.md';
 
-class TaskHandlers extends EventEmitter {
+class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
         text = manager.renderString(text);
         console.log(text);
@@ -32,7 +32,7 @@ class TaskHandlers extends EventEmitter {
         return this;
     }
 }
-var commandExecutor = new TaskHandlers();
+var commandExecutor = new CommandExecutor();
 
 var manager = new MarkedEventSheets({
     commandExecutor: commandExecutor

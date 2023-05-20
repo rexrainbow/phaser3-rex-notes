@@ -2,7 +2,7 @@ import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
-class TaskHandlers extends EventEmitter {
+class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
         text = manager.renderString(text);
         console.log(text);
@@ -31,7 +31,7 @@ class TaskHandlers extends EventEmitter {
         return this;
     }
 }
-var commandExecutor = new TaskHandlers();
+var commandExecutor = new CommandExecutor();
 
 var manager = new MarkedEventSheets({
     commandExecutor: commandExecutor

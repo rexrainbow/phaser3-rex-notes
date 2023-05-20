@@ -3,7 +3,7 @@ import EventEmitter from 'eventemitter3';
 import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel/parallel1.md';
 
-class TaskHandlers extends EventEmitter {
+class CommandExecutor extends EventEmitter {
     constructor({
         waitDuration = 1000
     } = {}) {
@@ -42,7 +42,7 @@ class TaskHandlers extends EventEmitter {
 }
 
 var manager = new MarkedEventSheets({
-    commandExecutor: new TaskHandlers(),    
+    commandExecutor: new CommandExecutor(),    
 });
 
 manager

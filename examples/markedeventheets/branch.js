@@ -6,7 +6,7 @@ import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/2.if-b.md'
 import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/3.else.md';
 import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/4.after.md';
 
-class TaskHandlers extends EventEmitter {
+class CommandExecutor extends EventEmitter {
     constructor({
         waitDuration = 1000
     } = {}) {
@@ -46,7 +46,7 @@ class TaskHandlers extends EventEmitter {
 }
 
 var manager = new MarkedEventSheets({
-    commandExecutor: new TaskHandlers(),
+    commandExecutor: new CommandExecutor(),
     // parallel: true
 });
 
