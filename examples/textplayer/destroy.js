@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
             .play(content)
 
 
-        this.time.delayedCall(10, function () {
+        this.time.delayedCall(400, function () {
             text.destroy();
         });
 

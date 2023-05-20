@@ -117,6 +117,7 @@ var RunWordWrap = function (config) {
     var resultLines = result.lines,
         lastLine = [], lastLineWidth = 0, maxLineWidth = 0;
     var wordResult;
+    var isPageBreakChar = false;
     while (childIndex < lastChildIndex) {
         wordResult = GetWord(children, childIndex, charWrap, wordResult);
         var word = wordResult.word;
@@ -126,7 +127,7 @@ var RunWordWrap = function (config) {
         childIndex += charCnt;
         // Next line
         var isNewLineChar = IsNewLineChar(word[0]);
-        var isPageBreakChar = IsPageBreakChar(word[0]);
+        isPageBreakChar = IsPageBreakChar(word[0]);
         var isControlChar = isNewLineChar || isPageBreakChar;
         if ((remainderWidth < wordWidth) || isControlChar) {
             // Add to result
@@ -177,7 +178,7 @@ var RunWordWrap = function (config) {
     }
 
     result.start += resultChildren.length;
-    result.isLastPage = (result.start === lastChildIndex);
+    result.isLastPage = (!isPageBreakChar) && (result.start === lastChildIndex);
     result.maxLineWidth = maxLineWidth;
     result.linesHeight = (resultLines.length * lineHeight);
 

@@ -1,4 +1,5 @@
 import { WaitCompleteEvent, RemoveWaitEvents } from './const.js';
+import WaitTimeMethods from './WaitTimeMethods.js';
 import WaitInputMethods from './WaitInputMethods.js';
 import WaitGameObjectMethods from './WaitGameObjectMethods.js';
 import WaitCameraMethods from './WaitCameraMethods.js';
@@ -14,12 +15,14 @@ class WaitEventManager {
         this.waitCompleteEventName = GetValue(config, 'completeEventName', WaitCompleteEvent);
         this.setClickTarget(GetValue(config, 'clickTarget', this.scene));
         this.setTargetCamera(GetValue(config, 'camera', this.scene.cameras.main));
+        this.waitId = 0;
     }
 
     destroy() {
         this.removeWaitEvents();
+        this.clearWaitCompleteCallbacks();
         this.setClickTarget();
-        this.setTargetCamera();        
+        this.setTargetCamera();
     }
 
     get scene() {
@@ -27,34 +30,42 @@ class WaitEventManager {
     }
 
     waitEvent(eventEmitter, eventName, completeNextTick) {
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(RemoveWaitEvents, function () {
+            eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+    }
+
+    getWaitCompleteTriggerCallback(completeNextTick) {
         if (completeNextTick === undefined) {
             completeNextTick = true;
         }
 
-        var callback = (completeNextTick) ? this.completeNextTick : this.complete;
+        var waitId = this.waitId;
+        var self = this;
+        var completeCallback = function () {
+            if (waitId < self.waitId) {
+                return;
+            }
+            self.waitId++;
+            self.removeWaitEvents();
+            self.parent.emit(self.waitCompleteEventName);
+        }
 
-        eventEmitter.once(eventName, callback, this);
-        this.parent.once(RemoveWaitEvents, function () {
-            eventEmitter.off(eventName, callback, this);
-        })
-
-        return this.parent;
+        if (completeNextTick) {
+            var completeCallbackNextTick = function () {
+                PreUpdateDelayCall(self.parent, 0, completeCallback);
+            }
+            return completeCallbackNextTick;
+        } else {
+            return completeCallback;
+        }
     }
 
     removeWaitEvents() {
         this.parent.emit(RemoveWaitEvents);
-        return this;
-    }
-
-    complete() {
-        this.removeWaitEvents();
-        this.parent.emit(this.waitCompleteEventName);
-        return this;
-    }
-
-    completeNextTick() {
-        // Emit complete event at scene's preupdate event of next tick
-        PreUpdateDelayCall(this.parent, 0, this.complete, this);
         return this;
     }
 
@@ -68,16 +79,6 @@ class WaitEventManager {
         return this;
     }
 
-    waitTime(duration) {
-        var timeline = this.parent.timeline
-        timeline.delayEvent(duration, 'delay');
-
-        // Clear delay event on timeline manually
-        this.parent.once(RemoveWaitEvents, function () {
-            timeline.removeDelayEvent('delay');
-        });
-        return this.waitEvent(timeline, 'delay');
-    }
 }
 
 var Methods = {
@@ -86,6 +87,7 @@ var Methods = {
 
 Object.assign(
     WaitEventManager.prototype,
+    WaitTimeMethods,
     WaitInputMethods,
     WaitGameObjectMethods,
     WaitCameraMethods,

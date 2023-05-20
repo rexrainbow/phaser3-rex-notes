@@ -90,10 +90,6 @@ class TaskHandlers {
         // Execute next command
     }
 
-    _runGOMethod(config, manager) {
-        // TODO
-    }
-
     wait(config, manager) {
         var { time } = config;
         if (time !== undefined) {
@@ -129,6 +125,8 @@ class TaskHandlers {
                         return this._easeGOProperty;
 
                     default:
+                        debugger;
+                        // TODO:
                         config.methodName = tokens[1];
                         return this._runGOMethod;
                 }

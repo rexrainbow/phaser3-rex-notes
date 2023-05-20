@@ -1,5 +1,3 @@
-import { RemoveWaitEvents } from '../Events.js';
-
 var IsWaitGameObject = function (textPlayer, name) {
     var names = name.split('.');
     return textPlayer.gameObjectManagers.hasOwnProperty(names[0]);

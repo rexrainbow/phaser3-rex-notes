@@ -1,4 +1,4 @@
-const PageFadeOutCompleteEvent = 'page.fadeout';
+import { PageFadeOutCompleteEvent } from '../methods/utils/Events.js';
 
 var FadeOutPage = function () {
     if (!this.fadeOutPageCallback || !this.children) {

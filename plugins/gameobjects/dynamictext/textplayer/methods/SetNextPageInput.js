@@ -1,4 +1,3 @@
-import GetWrapCallback from './utils/wait/GetWrapCallback.js';
 import WaitAny from './utils/wait/WaitAny.js';
 
 var SetNextPageInput = function (input) {
@@ -8,8 +7,13 @@ var SetNextPageInput = function (input) {
 
     } else if (typeof (input) === 'function') {
         this.nextPageInput = function (callback, scope) {
-            var wrapCallback = GetWrapCallback(textPlayer, callback, scope);
-            input.call(textPlayer, wrapCallback);
+            var waitEventManager = textPlayer.waitEventManager;
+            waitEventManager
+                .clearWaitCompleteCallbacks()
+                .addWaitCompleteCallback(callback, scope)
+
+            var waitCompleteTriggerCallback = waitEventManager.getWaitCompleteTriggerCallback();
+            input.call(textPlayer, waitCompleteTriggerCallback);
         }
 
     } else {

@@ -1,4 +1,3 @@
-import WaitCallback from './WaitCallback.js';
 import { IsWaitCameraEffect } from './WaitCameraEffect.js';
 import { IsWaitGameObject, WaitGameObject } from './WaitGameObject.js'
 
@@ -20,8 +19,8 @@ var WaitAny = function (textPlayer, names, callback, scope) {
         var name = names[i];
 
         if ((name == null) || (name === 'wait')) {  // Wait event
-            debugger;
-            // WaitCallback(textPlayer, undefined, callback, scope);
+            var waitCompleteTriggerCallback = textPlayer.waitEventManager.getWaitCompleteTriggerCallback();
+            textPlayer.emit('wait', waitCompleteTriggerCallback);
 
         } else if ((typeof (name) === 'number') || !isNaN(name)) { // A number, or a number string
             var time = parseFloat(name);
@@ -64,8 +63,8 @@ var WaitAny = function (textPlayer, names, callback, scope) {
             WaitGameObject(textPlayer, name, callback, scope);
 
         } else {
-            debugger;
-            // WaitCallback(textPlayer, undefined, callback, scope);
+            var waitCompleteTriggerCallback = textPlayer.waitEventManager.getWaitCompleteTriggerCallback();
+            textPlayer.emit(`wait.${name}`, waitCompleteTriggerCallback);
 
         }
     }

@@ -1,15 +1,15 @@
 // Internal events
 
-const RemoveWaitEvents = '_remove.wait';
+const PageFadeOutCompleteEvent = 'page.fadeout';
 const StopPlayEvent = '_remove.play';
 
 const ClearEvents = [
-    RemoveWaitEvents,
+    PageFadeOutCompleteEvent,
     StopPlayEvent
 ]
 
 export {
-    RemoveWaitEvents,
+    PageFadeOutCompleteEvent,
     StopPlayEvent,
     ClearEvents
 }

@@ -1,6 +1,4 @@
-import { StopPlayEvent } from './utils/Events.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { PageFadeOutCompleteEvent, StopPlayEvent } from './utils/Events.js';
 
 var TypingNextPage = function () {
     if (!this.isPlaying || this.isPageTyping) {
@@ -8,7 +6,7 @@ var TypingNextPage = function () {
     }
 
     this.typeWriter
-        .once('page.fadeout', _TypingNextPage, this)
+        .once(PageFadeOutCompleteEvent, _TypingNextPage, this)
         .fadeOutPage();
     return this;
 }
@@ -40,7 +38,7 @@ var _TypingNextPage = function () {
     // Remove event when typing pages has been canceled
     this.once(StopPlayEvent, function () {
         this.typeWriter.off('complete', OnTypingPageComplete, this);
-    })
+    }, this)
 
     this.typeWriter
         .once('complete', OnTypingPageComplete, this)
