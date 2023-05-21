@@ -8,15 +8,19 @@ text
   name=對話框
   width=500
   height=120
-  vpy=0.8
 
 sprite
   name=角色A
   key=mushroom
-  vpx=0
 
 
 // Manipulate gameobjects
+
+對話框
+  vpy=0.8
+
+角色A
+  vpx=0
 
 角色A.to
   vpx=0.7
@@ -25,7 +29,7 @@ sprite
 // Wait until tween complete
 
 
-```對話框,speed=100
+```對話框.typing, speed=100
 Line0...
 Line1...
 Line2...

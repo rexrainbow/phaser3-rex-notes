@@ -47,4 +47,8 @@ export default {
             }
         }
     },
+
+    hasGameObjectMananger(managerName) {
+        return managerName in this.gameObjectManagers;
+    }
 }

@@ -74,6 +74,8 @@ declare class Managers extends Phaser.Events.EventEmitter {
 
     getGameObjectManagerName(gameObjectName: string): string;
 
+    hasGameObjectMananger(managerName: string): boolean;
+
     createGameObject(
         goType: string, name: string,
         ...params: any[]

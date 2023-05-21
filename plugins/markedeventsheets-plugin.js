@@ -1,6 +1,5 @@
 import MarkedEventSheets from './logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
-import CommandExecutor from './logic/runcommands/managers/Managers.js';
-import SetValue from './utils/object/SetValue.js';
+import CommandExecutor from './logic/eventsheets/commandexecutor/CommandExecutor.js';
 
 class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -15,8 +14,10 @@ class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
     add(config) {
         return new MarkedEventSheets(config);
     }
-}
 
-SetValue(window, 'RexPlugins.CommandExecutor', CommandExecutor);
+    addCommandExecutor(scene, config) {
+        return new CommandExecutor(scene, config);
+    }
+}
 
 export default MarkedEventSheetsPlugin;
