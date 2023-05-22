@@ -119,6 +119,17 @@ export default {
     setBackgroundMusic2Volume(volume) {
         this.backgroundMusic2Volume = volume;
         return this;
-    }
+    },
+    
+    setBackgroundMusic2Mute(mute) {
+        if (mute === undefined) {
+            mute = true;
+        }
+
+        if (this.backgroundMusic2) {
+            this.backgroundMusic2.setMute(mute);
+        }
+        return this;
+    },
 
 }

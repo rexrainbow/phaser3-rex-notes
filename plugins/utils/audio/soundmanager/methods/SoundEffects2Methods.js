@@ -87,4 +87,27 @@ export default {
         return this;
     },
 
+    setSoundEffect2Mute(mute, lastSoundEffect) {
+        if (mute=== undefined){
+            mute = true;
+        }
+        if (lastSoundEffect === undefined) {
+            lastSoundEffect = false;
+        }
+
+        if (lastSoundEffect) {
+            // Set volume of last sound effect
+            var soundEffect = this.getLastSoundEffect2();
+            if (soundEffect) {
+                soundEffect.setMute(mute);
+            }
+
+        } else {
+            // Set volume of all sound effects
+            this.soundEffects2Mute = mute;
+        }
+
+        return this;
+    },
+
 }

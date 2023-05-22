@@ -7,8 +7,10 @@ var Methods = {};
 
 Object.assign(
     Methods,
-    BackgroundMusicMethods, BackgroundMusic2Methods,
-    SoundEffectsMethods, SoundEffects2Methods,
+    BackgroundMusicMethods,
+    BackgroundMusic2Methods,
+    SoundEffectsMethods,
+    SoundEffects2Methods,
 )
 
 export default Methods;

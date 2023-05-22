@@ -20,7 +20,10 @@ sprite
   vpy=0.8
 
 角色A
-  vpx=0
+  vpx=-0.1
+
+bgm.play
+  key=theme0
 
 角色A.to
   vpx=0.7
@@ -42,6 +45,11 @@ wait
   click
 // Wait until 3s or any touch
 
+bgm.cross
+  key=theme1
+
 角色A.to
   vpx=-0.1
+
+bgm.stop
 

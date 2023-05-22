@@ -14,6 +14,15 @@ class Demo extends Phaser.Scene {
         this.load.text('eventSheet0', 'assets/markedeventsheet/command-executor.md');
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
         this.load.image('mushroom', 'assets/images/mushroom.png');
+
+        this.load.audio('theme0', [
+            'assets/audio/oedipus_wizball_highscore.ogg',
+            'assets/audio/oedipus_wizball_highscore.mp3'
+        ]);
+        this.load.audio('theme1', [
+            'assets/audio/jungle.ogg',
+            'assets/audio/jungle.mp3'
+        ]);
     }
 
     create() {
@@ -21,7 +30,10 @@ class Demo extends Phaser.Scene {
             commandExecutor: CreateCommandExecutor(this)
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
-            .start()
+
+        this.input.once('pointerdown', function () {
+            eventSheetManager.start()
+        })
 
     }
 

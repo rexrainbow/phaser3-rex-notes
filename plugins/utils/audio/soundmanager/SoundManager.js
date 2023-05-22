@@ -103,6 +103,41 @@ class SoundManager {
         }
     }
 
+    get soundEffectsMute() {
+        return this._soundEffectsMute;
+    }
+
+    set soundEffectsMute(value) {
+        this._soundEffectsMute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setMute(value);
+        }
+    }
+
+    get soundEffects2Volume() {
+        return this._soundEffects2Volume;
+    }
+
+    set soundEffects2Volume(value) {
+        this._soundEffects2Volume = value;
+        var soundEffects = this.soundEffects2;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setVolume(value);
+        }
+    }
+
+    get soundEffects2Mute() {
+        return this._soundEffects2Mute;
+    }
+
+    set soundEffects2Mute(value) {
+        this._soundEffects2Mute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
+            soundEffects[i].setMute(value);
+        }
+    }
 }
 
 Object.assign(

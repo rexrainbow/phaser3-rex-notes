@@ -1,4 +1,4 @@
-import StringToValues from '../../../utils/string/StringToValues.js';
+import StringToValues from '../../../../utils/string/StringToValues.js';
 
 var DefaultHandler = function (name, config, manager) {
     var tokens = name.split('.');

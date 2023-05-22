@@ -47,6 +47,8 @@ declare class SoundManager {
     setBackgroundMusicVolume(volume: number): this;
     backgroundMusicVolume: number;
 
+    setBackgroundMusicMute(mute?: boolean): this;
+
     // Background music2
     setBackgroundMusic2LoopValue(value: boolean): this;
 
@@ -70,6 +72,8 @@ declare class SoundManager {
 
     setBackgroundMusicVolume2(volume: number): this;
     backgroundMusicVolume2: number;
+
+    setBackgroundMusic2Mute(mute?: boolean): this;
 
 
     // Sound effect
