@@ -1273,12 +1273,10 @@
   (function (exports) {
     /*
       Returns a Parser object of the following structure:
-    
-      Parser: {
+    	  Parser: {
         yy: {}
       }
-    
-      Parser.prototype: {
+    	  Parser.prototype: {
         yy: {},
         trace: function(),
         symbols_: {associative list: name ==> number},
@@ -1289,8 +1287,7 @@
         defaultActions: {...},
         parseError: function(str, hash),
         parse: function(input),
-    
-        lexer: {
+    	    lexer: {
             EOF: 1,
             parseError: function(str, hash),
             setInput: function(input),
@@ -1309,19 +1306,16 @@
             _currentRules: function(),
             topState: function(),
             pushState: function(condition),
-    
-            options: {
+    	        options: {
                 ranges: boolean           (optional: true ==> token location info will include a .range[] member)
                 flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
                 backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
             },
-    
-            performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
             rules: [...],
             conditions: {associative list: name ==> set},
         }
       }
-    
     
       token location info (@$, _$, etc.): {
         first_line: n,
@@ -1330,7 +1324,6 @@
         last_column: n,
         range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
       }
-    
     
       the parseError function receives a 'hash' object with these members for lexer and parser errors: {
         text:        (matched text)
@@ -5355,11 +5348,11 @@
     }]);
     return BehaviorTree;
   }();
-  var Methods$3 = {
+  var Methods$4 = {
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$3);
+  Object.assign(BehaviorTree.prototype, Methods$4);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -5607,17 +5600,17 @@
         }
         var treeManager = tick.blackboard.treeManager;
         var taskParameters = DeepClone(taskData.parameters);
-        var taskHandlers = tick.target;
-        var handler = taskHandlers[taskName];
-        if (!handler) {
-          if (taskHandlers.getHandler) {
-            handler = taskHandlers.getHandler(taskName, taskParameters, treeManager);
-          }
-          if (!handler) {
-            return;
+        var commandExecutor = tick.target;
+        var eventEmitter;
+        var handler = commandExecutor[taskName];
+        if (handler) {
+          eventEmitter = handler.call(commandExecutor, taskParameters, treeManager);
+        } else {
+          handler = commandExecutor.defaultHandler;
+          if (handler) {
+            eventEmitter = handler.call(commandExecutor, taskName, taskParameters, treeManager);
           }
         }
-        var eventEmitter = handler.call(taskHandlers, taskParameters, treeManager);
         if (IsEventEmitter(eventEmitter)) {
           this.isRunning = true;
           eventEmitter.once('complete', this.onTaskComplete, this);
@@ -6567,7 +6560,7 @@
       var trees = this.trees;
       var pendingTrees = this.pendingTrees;
       var blackboard = this.blackboard;
-      var taskHandlers = this.taskHandlers;
+      var commandExecutor = this.commandExecutor;
       pendingTrees.length = 0;
 
       // Run parallel tree, will return pending, or failure
@@ -6575,7 +6568,7 @@
         var tree = trees[i];
         tree.resetState(blackboard);
         if (tree.isParallel) {
-          var status = tree.tick(blackboard, taskHandlers);
+          var status = tree.tick(blackboard, commandExecutor);
           if (status === PENDING) {
             pendingTrees.push(tree);
           }
@@ -6593,14 +6586,14 @@
       var trees = this.pendingTrees;
       var closedTrees = this.closedTrees;
       var blackboard = this.blackboard;
-      var taskHandlers = this.taskHandlers;
+      var commandExecutor = this.commandExecutor;
       closedTrees.length = 0;
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
         var tree = trees[i];
         var status = blackboard.getTreeState(tree.id);
         if (status === IDLE$1) {
           // Will goto PENDING, or FAILURE/ERROR state
-          status = tree.tick(blackboard, taskHandlers);
+          status = tree.tick(blackboard, commandExecutor);
         }
         var eventConditionPassed = tree.eventConditionPassed;
         if (status === PENDING) {
@@ -6616,7 +6609,7 @@
         }
 
         // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-        status = tree.tick(blackboard, taskHandlers);
+        status = tree.tick(blackboard, commandExecutor);
         if (status === RUNNING$1) {
           break;
         } else {
@@ -6642,9 +6635,9 @@
     stop: function stop() {
       this.isRunning = false;
       var blackboard = this.blackboard;
-      var taskHandlers = this.taskHandlers;
+      var commandExecutor = this.commandExecutor;
       this.pendingTrees.forEach(function (tree) {
-        tree.abort(blackboard, taskHandlers);
+        tree.abort(blackboard, commandExecutor);
       });
       this.pendingTrees.length = 0;
       return this;
@@ -6664,12 +6657,12 @@
     function EventSheetTrees() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        taskHandlers = _ref.taskHandlers,
+        commandExecutor = _ref.commandExecutor,
         _ref$parallel = _ref.parallel,
         parallel = _ref$parallel === void 0 ? false : _ref$parallel;
       _classCallCheck(this, EventSheetTrees);
       _this = _super.call(this);
-      _this.setTaskHandlers(taskHandlers);
+      _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
       _this.blackboard = new Blackboard();
       _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
@@ -6688,9 +6681,9 @@
         return this.blackboard.getGlobalMemory();
       }
     }, {
-      key: "setTaskHandlers",
-      value: function setTaskHandlers(taskHandlers) {
-        this.taskHandlers = taskHandlers;
+      key: "setCommandExecutor",
+      value: function setCommandExecutor(commandExecutor) {
+        this.commandExecutor = commandExecutor;
         return this;
       }
     }]);
@@ -9617,8 +9610,8 @@
     }
   };
 
-  var Methods$2 = {};
-  Object.assign(Methods$2, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  var Methods$3 = {};
+  Object.assign(Methods$3, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -9713,7 +9706,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$2);
+  Object.assign(SoundManager.prototype, Methods$3);
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -10566,10 +10559,10 @@
     }]);
     return WaitEventManager;
   }();
-  var Methods$1 = {
+  var Methods$2 = {
     waitAny: WaitAny
   };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$1);
+  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$2);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
@@ -11519,10 +11512,10 @@
     return this;
   };
 
-  var Methods = {
+  var Methods$1 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$1, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -11644,7 +11637,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$1);
 
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
@@ -11687,10 +11680,13 @@
           return managerName;
         }
       }
+    },
+    hasGameObjectMananger: function hasGameObjectMananger(managerName) {
+      return managerName in this.gameObjectManagers;
     }
   };
 
-  var GameObjectMethods = {
+  var GameObjectMethods$1 = {
     createGameObject: function createGameObject(goType, name) {
       var _this$getGameObjectMa;
       for (var _len = arguments.length, params = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
@@ -11792,7 +11788,7 @@
       getTimeScale: GetTimeScale,
       destroyManagers: DestroyManagers
     };
-    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods, GameObjectMethods);
+    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods, GameObjectMethods$1);
     return Managers;
   };
 
@@ -11827,66 +11823,174 @@
     return Managers;
   }(Extend(EventEmitter));
 
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
+  var TreeManagerMethods = {
+    set: function set(config, manager) {
+      for (var name in config) {
+        // TODO: string variable does not have to eval
+        var value = manager.evalExpression(config[name]);
+        manager.setData(name, value);
       }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
+    }
+  };
+
+  var GameObjectMethods = {
+    addGameObjectManager: function addGameObjectManager(config) {
+      // Register GameObjectManager
+      var sys = this.sys;
+      sys.addGameObjectManager(config);
+
+      // Add createGameObject command
+      var name = config.name;
+      this[name] = function (config, manager) {
+        sys.createGameObject(name, config.name, config);
+        // Execute next command
+      };
+
+      // Add custom commands
+      var _config$commands = config.commands,
+        commands = _config$commands === void 0 ? {} : _config$commands;
+      sys.getGameObjectManager(name).commands = commands;
+      return this;
+    },
+    _setGOProperty: function _setGOProperty(config, manager) {
+      var name = config.name;
+      delete config.name;
+      for (var prop in config) {
+        var value = manager.evalExpression(config[prop]);
+        this.sys.setGameObjectProperty(undefined, name, prop, value);
+      }
+      // Execute next command
+    },
+    _easeGOProperty: function _easeGOProperty(config, manager) {
+      var name = config.name,
+        duration = config.duration,
+        ease = config.ease,
+        repeat = config.repeat,
+        yoyo = config.yoyo,
+        _config$wait = config.wait,
+        wait = _config$wait === void 0 ? true : _config$wait;
+      delete config.name;
+      delete config.duration;
+      delete config.ease;
+      delete config.repeat;
+      delete config.yoyo;
+      delete config.wait;
+      var waitProperty;
+      for (var prop in config) {
+        var value = manager.evalExpression(config[prop]);
+        this.sys.easeGameObjectProperty(undefined, name, prop, value, duration, ease, repeat, yoyo);
+        waitProperty = prop;
+      }
+      if (wait && waitProperty) {
+        return this.sys.waitEventManager.waitGameObjectTweenComplete(undefined, name, waitProperty);
+      }
+
+      // Execute next command
+    },
+    _runGOMethod: function _runGOMethod(config, manager) {
+      var _this$sys;
+      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [undefined, config.name, config.methodName].concat(_toConsumableArray(config.parameters)));
+      // Execute next command
+    }
+  };
+
+  var WaitMethods = {
+    clearWaitEventFlag: function clearWaitEventFlag() {
+      this.hasAnyWaitEvent = false;
+      return this;
+    },
+    setWaitEventFlag: function setWaitEventFlag() {
+      this.hasAnyWaitEvent = true;
+      return this;
+    },
+    waitEvent: function waitEvent(eventEmitter, eventName) {
+      this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
+      this.setWaitEventFlag();
+      return this;
+    },
+    wait: function wait(config, manager) {
+      var time = config.time;
+      if (time !== undefined) {
+        config.time = manager.evalExpression(time);
+      }
+      return this.sys.waitEventManager.waitAny(config);
+    },
+    click: function click(config, manager) {
+      return this.wait({
+        click: true
+      }, manager);
+    }
+  };
+
+  var StringToValues = function StringToValues(text, valueConverter) {
+    if (text == null) {
+      return [];
+    }
+    if (valueConverter === undefined) {
+      valueConverter = TypeConvert;
+    }
+    var values = text.split(',');
+    for (var i = 0, cnt = values.length; i < cnt; i++) {
+      values[i] = valueConverter(values[i]);
+    }
+    return values;
+  };
+
+  var DefaultHandler = function DefaultHandler(name, config, manager) {
+    var tokens = name.split('.');
+    config.name = tokens[0];
+    switch (tokens.length) {
+      case 1:
+        return this._setGOProperty(config, manager);
+      case 2:
+        switch (tokens[1]) {
+          case 'to':
+            return this._easeGOProperty(config, manager);
+          case 'yoyo':
+            config.yoyo = true;
+            return this._easeGOProperty(config, manager);
+          default:
+            var gameObjectManager = this.sys.getGameObjectManager(undefined, tokens[0]);
+            if (gameObjectManager) {
+              var command = gameObjectManager.commands[tokens[1]];
+              if (command) {
+                var gameObject = gameObjectManager.getGO(tokens[0]);
+                this.clearWaitEventFlag();
+                command(gameObject, config, this);
+                return this.hasAnyWaitEvent ? this.sys : undefined;
+              }
             }
-          } else {
-            newEntry = {};
-          }
-          entry[key] = newEntry;
+            var parameters;
+            for (var key in config) {
+              parameters = config[key];
+              break;
+            }
+            config.methodName = tokens[1];
+            config.parameters = parameters ? StringToValues(parameters) : [];
+            return this._runGOMethod(config, manager);
         }
-        entry = entry[key];
-      }
     }
-    return entry;
   };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
 
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
+  var Methods = {
+    defaultHandler: DefaultHandler
   };
+  Object.assign(Methods, TreeManagerMethods, GameObjectMethods, WaitMethods);
+
+  var CommandExecutor = /*#__PURE__*/function () {
+    function CommandExecutor(scene, config) {
+      _classCallCheck(this, CommandExecutor);
+      this.sys = new Managers(scene, config);
+    }
+    _createClass(CommandExecutor, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.sys.destroy(fromScene);
+      }
+    }]);
+    return CommandExecutor;
+  }();
+  Object.assign(CommandExecutor.prototype, Methods);
 
   var MarkedEventSheetsPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(MarkedEventSheetsPlugin, _Phaser$Plugins$BaseP);
@@ -11906,10 +12010,14 @@
       value: function add(config) {
         return new MarkedEventSheets(config);
       }
+    }, {
+      key: "addCommandExecutor",
+      value: function addCommandExecutor(scene, config) {
+        return new CommandExecutor(scene, config);
+      }
     }]);
     return MarkedEventSheetsPlugin;
   }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.TaskHandlers', Managers);
 
   return MarkedEventSheetsPlugin;
 

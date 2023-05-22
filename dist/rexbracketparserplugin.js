@@ -574,9 +574,12 @@
   };
   Object.assign(BracketParser$1.prototype, EventEmitterMethods);
 
-  var ParseValue = function ParseValue(text, valueConverter) {
+  var StringToValues = function StringToValues(text, valueConverter) {
     if (text == null) {
       return [];
+    }
+    if (valueConverter === undefined) {
+      valueConverter = TypeConvert;
     }
     var values = text.split(',');
     for (var i = 0, cnt = values.length; i < cnt; i++) {
@@ -655,7 +658,7 @@
         }
         this.skipEventFlag = false;
         if (!isEndTag) {
-          var values = ParseValue(regexResult[3], this.valueConverter);
+          var values = StringToValues(regexResult[3], this.valueConverter);
           this.emit.apply(this, ["+".concat(tagName)].concat(_toConsumableArray(values)));
           if (!this.skipEventFlag) {
             this.emit.apply(this, ['+', tagName].concat(_toConsumableArray(values)));
