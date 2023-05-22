@@ -19,12 +19,13 @@ var DefaultHandler = function (name, config, manager) {
 
                 default:
                     var gameObjectManager = this.sys.getGameObjectManager(undefined, tokens[0]);
-                    if (gameObjectManager && gameObjectManager.commands[tokens[1]]) {
+                    if (gameObjectManager) {
                         var command = gameObjectManager.commands[tokens[1]];
                         if (command) {
                             var gameObject = gameObjectManager.getGO(tokens[0]);
-                            var isWaiting = command.call(this, gameObject, config, this.sys);
-                            return (isWaiting) ? this.sys : undefined;
+                            this.clearWaitEventFlag();
+                            command(gameObject, config, this);
+                            return (this.hasAnyWaitEvent) ? this.sys : undefined;
                         }
                     }
 

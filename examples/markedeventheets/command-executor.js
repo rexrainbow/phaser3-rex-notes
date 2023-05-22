@@ -36,12 +36,10 @@ var CreateCommandExecutor = function (scene) {
             viewportCoordinate: true,
 
             commands: {
-                typing(gameObject, { text, speed } = {}, sys) {
-                    sys.waitEventManager.waitEvent(gameObject, 'complete');
-                    gameObject.start(text, speed);
-
-                    return true;
+                typing(gameObject, { text, speed } = {}, commandExecutor) {
                     // Wait until typing complete
+                    commandExecutor.waitEvent(gameObject, 'complete');
+                    gameObject.start(text, speed);
                 }
             }
         })
