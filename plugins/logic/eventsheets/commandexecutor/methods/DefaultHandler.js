@@ -3,12 +3,25 @@ import StringToValues from '../../../../utils/string/StringToValues.js';
 var DefaultHandler = function (name, config, manager) {
     var tokens = name.split('.');
 
-    config.name = tokens[0];
+    var gameObjectName = tokens[0];
+    config.name = gameObjectName;
     switch (tokens.length) {
         case 1:
+            if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+                // TODO
+                debugger
+                return;
+            }
             return this._setGOProperty(config, manager);
 
         case 2:
+            if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+                // TODO
+                debugger
+                return;
+            }
+
+            var commandName = tokens[1]
             switch (tokens[1]) {
                 case 'to':
                     return this._easeGOProperty(config, manager);
@@ -18,11 +31,11 @@ var DefaultHandler = function (name, config, manager) {
                     return this._easeGOProperty(config, manager);
 
                 default:
-                    var gameObjectManager = this.sys.getGameObjectManager(undefined, tokens[0]);
+                    var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
                     if (gameObjectManager) {
-                        var command = gameObjectManager.commands[tokens[1]];
+                        var command = gameObjectManager.commands[commandName];
                         if (command) {
-                            var gameObject = gameObjectManager.getGO(tokens[0]);
+                            var gameObject = gameObjectManager.getGO(gameObjectName);
                             this.clearWaitEventFlag();
                             command(gameObject, config, this);
                             return (this.hasAnyWaitEvent) ? this.sys : undefined;
@@ -34,7 +47,7 @@ var DefaultHandler = function (name, config, manager) {
                         parameters = config[key];
                         break;
                     }
-                    config.methodName = tokens[1];
+                    config.methodName = commandName;
                     config.parameters = (parameters) ? StringToValues(parameters) : [];
                     return this._runGOMethod(config, manager);
 

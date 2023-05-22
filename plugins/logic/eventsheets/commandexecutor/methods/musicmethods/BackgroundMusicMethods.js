@@ -26,7 +26,7 @@ export default {
         }
     },
 
-    'bgm.cross'({ key, time = 500, wait = false }, manager) {
+    'bgm.cross'({ key, duration = 500, wait = false }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -35,7 +35,7 @@ export default {
             return;
         }
 
-        soundManager.crossFadeBackgroundMusic(key, time);
+        soundManager.crossFadeBackgroundMusic(key, duration);
 
         if (wait) {
             return this.wait({ bgm: true });
@@ -50,24 +50,24 @@ export default {
         soundManager.stopBackgroundMusic();
     },
 
-    'bgm.fadeOut'({ time = 500, stop = true, wait = false }, manager) {
+    'bgm.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
-        soundManager.fadeOutBackgroundMusic2(time, stop);
+        soundManager.fadeOutBackgroundMusic2(duration, stop);
 
         if (wait) {
             return this.wait({ bgm: true });
         }
     },
 
-    'bgm.fadeIn'({ time = 500 }, manager) {
+    'bgm.fadeIn'({ duration = 500 }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
-        soundManager.fadeInBackgroundMusic(time);
+        soundManager.fadeInBackgroundMusic(duration);
     },
 
     'bgm.pause'(config, manager) {

@@ -23,6 +23,9 @@ class Demo extends Phaser.Scene {
             'assets/audio/jungle.ogg',
             'assets/audio/jungle.mp3'
         ]);
+        this.load.audio('explosion', [
+            'assets/audio/soundeffect/explosion.mp3'
+        ]);
     }
 
     create() {
@@ -35,6 +38,7 @@ class Demo extends Phaser.Scene {
             eventSheetManager.start()
         })
 
+        this.add.text(0, 580, 'Any click to start')
     }
 
     update() { }

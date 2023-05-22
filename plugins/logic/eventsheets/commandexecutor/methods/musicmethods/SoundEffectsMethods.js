@@ -22,12 +22,12 @@ export default {
         }
     },
 
-    'se.fadeOut'({ time = 500, stop = true, wait = false }, manager) {
+    'se.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
-        soundManager.fadeOutSoundEffect(time, stop);
+        soundManager.fadeOutSoundEffect(duration, stop);
 
         if (wait) {
             return this.wait({ bgm: true });

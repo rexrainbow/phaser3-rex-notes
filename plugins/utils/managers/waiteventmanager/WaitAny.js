@@ -22,11 +22,6 @@ var WaitAny = function (config) {
                 this.waitKeyDown(config.key);
                 break;
 
-            case 'camera':
-                hasAnyWaitEvent = true;
-                this.waitCameraEffectComplete(config.camera);
-                break;
-
             case 'bgm':
                 hasAnyWaitEvent = true;
                 this.waitBackgroundMusicComplete();
@@ -48,6 +43,12 @@ var WaitAny = function (config) {
                 break;
 
             default:
+                if (name.startsWith('camera.')) {
+                    hasAnyWaitEvent = true;
+                    this.waitCameraEffectComplete(name);
+                    continue;
+                }
+
                 var names = name.split('.');
                 if (names.length === 2) {
                     var gameObjectName = names[0];

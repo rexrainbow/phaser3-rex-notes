@@ -14,6 +14,10 @@ export default {
         return this;
     },
 
+    hasGameObject(goType, name) {
+        return !!this.getGameObjectManager(goType, name);
+    },
+
     callGameObjectMethod(goType, name, methodName, ...params) {
         this.getGameObjectManager(goType, name).call(name, methodName, ...params);
         return this;

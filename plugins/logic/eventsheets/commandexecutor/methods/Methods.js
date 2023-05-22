@@ -5,6 +5,7 @@ import BackgroundMusicMethods from './musicmethods/BackgroundMusicMethods.js';
 import BackgroundMusic2Methods from './musicmethods/BackgroundMusic2Methods.js';
 import SoundEffectsMethods from './musicmethods/SoundEffectsMethods.js';
 import SoundEffects2Methods from './musicmethods/SoundEffects2Methods.js';
+import CameraMethods from './CameraMethods.js';
 import DefaultHandler from './DefaultHandler.js';
 
 var Methods = {
@@ -20,6 +21,7 @@ Object.assign(
     BackgroundMusic2Methods,
     SoundEffectsMethods,
     SoundEffects2Methods,
+    CameraMethods,
 )
 
 

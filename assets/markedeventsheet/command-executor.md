@@ -25,6 +25,39 @@ sprite
 bgm.play
   key=theme0
 
+camera
+  x=0
+  y=200
+  rotate=-90
+  zoom=2
+
+camera.rotateTo
+  rotate=0
+  duration=2000
+  ease=Cubic
+
+camera.zoomTo
+  zoom=1
+  duration=2000
+  ease=Cubic
+  wait
+
+wait
+  time=300
+
+camera.scrollTo
+  x=0
+  y=0
+  duration=2000
+  ease=Cubic
+  wait
+
+camera.shake
+  duration=500
+
+camera.flash
+
+
 角色A.to
   vpx=0.7
   ease=Back
@@ -40,6 +73,11 @@ Line3...
 ```
 // Wait until typing complete
 
+se.play
+  key=explosion
+  wait
+// Wait until playing se complete
+
 wait
   time=3000
   click
@@ -50,6 +88,9 @@ bgm.cross
 
 角色A.to
   vpx=-0.1
+
+wait
+  time=2000
 
 bgm.stop
 

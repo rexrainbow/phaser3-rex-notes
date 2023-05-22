@@ -83,6 +83,8 @@ declare class Managers extends Phaser.Events.EventEmitter {
 
     destroyGameObject(goType: string | undefined, name: string): this;
 
+    hasGameObject(goType: string | undefined, name: string): boolean;
+
     callGameObjectMethod(
         goType: string | undefined, name: string,
         methodName: string, ...params: any[]
