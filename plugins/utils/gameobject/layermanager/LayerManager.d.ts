@@ -1,4 +1,4 @@
-import GOManager from '../../../utils/gameobject/gomanager/GOManager';
+import GOManager from '../gomanager/GOManager';
 
 export default LayerManager;
 

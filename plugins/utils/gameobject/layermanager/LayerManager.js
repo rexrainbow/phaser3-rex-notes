@@ -1,5 +1,5 @@
-import GOManager from '../../../utils/gameobject/gomanager/GOManager.js';
-import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
+import GOManager from '../gomanager/GOManager.js';
+import SortGameObjectsByDepth from '../../system/SortGameObjectsByDepth.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

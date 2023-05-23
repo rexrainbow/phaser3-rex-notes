@@ -1,2 +1,2 @@
-import LayerManager from './gameobjects/layer/layermanager/LayerManager';
+import LayerManager from './utils/gameobject/layermanager/LayerManager';
 export default LayerManager;
