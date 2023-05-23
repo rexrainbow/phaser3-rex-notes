@@ -1,11 +1,11 @@
 export default {
-    setTargetCamera(camera) {
-        this.targetCamera = camera;
+    setCameraTarget(camera) {
+        this.cameraTarget = camera;
         return this;
     },
 
     waitCameraEffectComplete(effectName) {
-        var camera = this.targetCamera;
+        var camera = this.cameraTarget;
         if (!camera) {
             return this.waitTime(0);
         }

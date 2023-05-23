@@ -1,6 +1,6 @@
 export default {
     camera({ x, y, rotate, zoom } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -18,7 +18,7 @@ export default {
     },
 
     'camera.fadeIn'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -30,7 +30,7 @@ export default {
     },
 
     'camera.fadeOut'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
-        var camera = this.sys.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -42,7 +42,7 @@ export default {
     },
 
     'camera.flash'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -54,7 +54,7 @@ export default {
     },
 
     'camera.shake'({ duration = 1000, intensity, wait = false } = {}, manager) {
-        var camera = this.sys.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -66,7 +66,7 @@ export default {
     },
 
     'camera.zoomTo'({ zoom, duration = 1000, wait = false } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -78,7 +78,7 @@ export default {
     },
 
     'camera.rotateTo'({ rotate, duration, ease, wait = false } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }
@@ -90,7 +90,7 @@ export default {
     },
 
     'camera.scrollTo'({ x, y, duration = 1000, ease, wait = false } = {}, manager) {
-        var camera = this.sys.waitEventManager.targetCamera;
+        var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
         }

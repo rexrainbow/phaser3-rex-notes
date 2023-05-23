@@ -25,12 +25,12 @@ var OnParseZoomCameraTag = function (textPlayer, parser, config) {
 
 var Zoom = function (value) {
     // this: textPlayer
-    this.targetCamera.setZoom(value);
+    this.cameraTarget.setZoom(value);
 }
 
 var ZoomTo = function (params) {
     // this: textPlayer
-    this.targetCamera.zoomTo(...params);
+    this.cameraTarget.zoomTo(...params);
 }
 
 export default OnParseZoomCameraTag;

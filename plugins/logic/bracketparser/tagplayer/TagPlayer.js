@@ -35,14 +35,6 @@ class TagPlayer extends Extend(EventEmitter) {
         return this.parser.isRunning;
     }
 
-    get targetCamera() {
-        return this.waitEventManager.targetCamera;
-    }
-
-    get clickTarget() {
-        return this.waitEventManager.clickTarget;
-    }
-
     get spriteManager() {
         return this.getGameObjectManager('sprite');
     }

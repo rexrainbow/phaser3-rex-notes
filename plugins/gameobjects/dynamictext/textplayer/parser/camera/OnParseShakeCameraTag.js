@@ -16,7 +16,7 @@ var OnParseShakeCameraTag = function (textPlayer, parser, config) {
 
 var PlayShakeEffect = function (params) {
     // this: textPlayer
-    this.targetCamera.shake(...params);
+    this.cameraTarget.shake(...params);
 }
 
 export default OnParseShakeCameraTag;

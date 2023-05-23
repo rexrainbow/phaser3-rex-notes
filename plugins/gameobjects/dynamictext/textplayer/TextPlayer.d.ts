@@ -143,8 +143,8 @@ declare class TextPlayer extends DynamicText {
     setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TextPlayer.ClickTrgetTypes;
 
-    setTargetCamera(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
-    readonly targetCamera: Phaser.Cameras.Scene2D.BaseCamera;
+    setCameraTarget(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
+    readonly cameraTarget: Phaser.Cameras.Scene2D.BaseCamera;
 
     getGameObject(
         goType: string,

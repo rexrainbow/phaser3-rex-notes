@@ -16,7 +16,7 @@ var OnParseFadeOutCameraTag = function (textPlayer, parser, config) {
 
 var PlayFadeOutEffect = function (params) {
     // this: textPlayer
-    this.targetCamera.fadeOut(...params);
+    this.cameraTarget.fadeOut(...params);
 }
 
 export default OnParseFadeOutCameraTag;

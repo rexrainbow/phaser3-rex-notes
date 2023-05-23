@@ -29,7 +29,7 @@ var OnParseRotateCameraTag = function (textPlayer, parser, config) {
 
 var Rotate = function (value) {
     // this: textPlayer
-    this.targetCamera.setRotation(value);
+    this.cameraTarget.setRotation(value);
 }
 
 var RotateTo = function (params) {
@@ -38,7 +38,7 @@ var RotateTo = function (params) {
     var ease = params[2];
 
     // this: textPlayer
-    this.targetCamera.rotateTo(value, false, duration, ease);
+    this.cameraTarget.rotateTo(value, false, duration, ease);
 }
 
 export default OnParseRotateCameraTag;

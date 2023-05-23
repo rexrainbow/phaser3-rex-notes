@@ -1,6 +1,6 @@
 import GameObjectManagerMethods from './gameobjectmanager/GameObjectManagerMethods.js';
 import SetClickTarget from './SetClickTarget.js';
-import SetTargetCamera from './SetTargetCamera.js';
+import SetCameraTarget from './SetCameraTarget.js';
 import SetNextPageInput from './SetNextPageInput.js';
 import AddImage from './AddImage.js';
 import PlayMethods from './PlayMethods.js';
@@ -17,7 +17,7 @@ import ContentMethods from './ContentMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
-    setTargetCamera: SetTargetCamera,
+    setCameraTarget: SetCameraTarget,
     setNextPageInput: SetNextPageInput,
     addImage: AddImage,
     typingNextPage: TypingNextPage,

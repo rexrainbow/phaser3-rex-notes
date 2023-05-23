@@ -1,6 +1,6 @@
 import GameObjectManagerMethods from './gameobjectmanager/GameObjectManagerMethods.js';
 import SetClickTarget from './SetClickTarget.js';
-import SetTargetCamera from './SetTargetCamera.js';
+import SetCameraTarget from './SetCameraTarget.js';
 import SetSkipSoundEffect from './SetSkipSoundEffect.js';
 import PlayMethods from './PlayMethods.js';
 import PauseMethods from './PauseMethods.js';
@@ -13,7 +13,7 @@ import DataManagerMethods from '../../../../utils/data/DataManagerMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
-    setTargetCamera: SetTargetCamera,
+    setCameraTarget: SetCameraTarget,
     setSkipSoundEffect: SetSkipSoundEffect,
     wait: Wait,
 }

@@ -55,14 +55,6 @@ class TextPlayer extends Extend(DynamicText) {
         }
     }
 
-    get targetCamera() {
-        return this.waitEventManager.targetCamera;
-    }
-
-    get clickTarget() {
-        return this.waitEventManager.clickTarget;
-    }
-
     get imageManager() {
         if (this._imageManager === undefined) {
             this._imageManager = new ImageManager(this.scene);

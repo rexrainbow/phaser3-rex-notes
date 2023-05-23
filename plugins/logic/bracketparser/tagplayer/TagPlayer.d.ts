@@ -98,8 +98,8 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
     setClickTarget(clickTarget: TagPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TagPlayer.ClickTrgetTypes;
 
-    setTargetCamera(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
-    readonly targetCamera: Phaser.Cameras.Scene2D.BaseCamera;
+    setCameraTarget(camera: Phaser.Cameras.Scene2D.BaseCamera): this;
+    readonly cameraTarget: Phaser.Cameras.Scene2D.BaseCamera;
 
     getGameObject(
         goType: string,

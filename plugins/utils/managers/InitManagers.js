@@ -5,6 +5,9 @@ import WaitEventManager from './waiteventmanager/WaitEventManager.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var InitManagers = function (scene, config) {
+    this.clickTarget = undefined;
+    this.cameraTarget = undefined;
+
     this.managersScene = scene;
 
     var soundManagerConfig = GetValue(config, 'sounds');
