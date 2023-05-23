@@ -24,7 +24,7 @@ declare namespace Managers {
         ...args: any[]
     ) => Phaser.GameObjects.GameObject
 
-    interface IGameObjectConfig {
+    interface IAddGameObjectManagerConfig {
         name: string,
 
         createGameObject: CreateGameObjectCallbackType,
@@ -62,15 +62,15 @@ declare class Managers extends Phaser.Events.EventEmitter {
 
     gameObjectManagers: { [name: string]: GOManager };
 
-    layerManager: LayerManager;
-
     soundManager: SoundManager;
 
     waitEventManager: WaitEventManager;
 
     destroy(fromScene?: boolean): this;
 
-    addGameObjectManager(config: Managers.IGameObjectConfig): this;
+    addGameObjectManager(
+        config: Managers.IAddGameObjectManagerConfig
+    ): this;
 
     getGameObjectManager(
         managerName: string | null | undefined,
