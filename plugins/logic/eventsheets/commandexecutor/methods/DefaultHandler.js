@@ -30,6 +30,9 @@ var DefaultHandler = function (name, config, manager) {
                     config.yoyo = true;
                     return this._easeGOProperty(config, manager);
 
+                case 'destroy':
+                    return this._destroyGO(config, manager);
+
                 default:
                     var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
                     if (gameObjectManager) {

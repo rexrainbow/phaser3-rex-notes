@@ -32,9 +32,15 @@ export default {
     _setGOProperty(config, manager) {
         var { name } = config;
         delete config.name;
+
+        var goType = this.sys.getGameObjectManagerName(name);
+        if (!goType) {
+            return;
+        }
+
         for (var prop in config) {
             var value = manager.evalExpression(config[prop]);
-            this.sys.setGameObjectProperty(undefined, name, prop, value);
+            this.sys.setGameObjectProperty(goType, name, prop, value);
         }
         // Execute next command
     },
@@ -48,21 +54,43 @@ export default {
         delete config.yoyo;
         delete config.wait;
 
+        var goType = this.sys.getGameObjectManagerName(name);
+        if (!goType) {
+            return;
+        }
+
         var waitProperty;
         for (var prop in config) {
             var value = manager.evalExpression(config[prop]);
-            this.sys.easeGameObjectProperty(undefined, name, prop, value, duration, ease, repeat, yoyo);
+            this.sys.easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, yoyo);
             waitProperty = prop;
         }
         if (wait && waitProperty) {
-            return this.sys.waitEventManager.waitGameObjectTweenComplete(undefined, name, waitProperty);
+            return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, name, waitProperty);
         }
 
         // Execute next command
     },
 
+    _destroyGO({ name, wait = false } = {}, manager) {
+        var goType = this.sys.getGameObjectManagerName(name);
+        if (!goType) {
+            return;
+        }
+
+        this.sys.destroyGameObject(goType, name);
+        if (wait) {
+            return this.sys.waitEventManager.waitGameObjectDestroy(goType, name);
+        }
+    },
+
     _runGOMethod(config, manager) {
-        this.sys.callGameObjectMethod(undefined, config.name, config.methodName, ...config.parameters);
+        var goType = this.sys.getGameObjectManagerName(name);
+        if (!goType) {
+            return;
+        }
+
+        this.sys.callGameObjectMethod(goType, config.name, config.methodName, ...config.parameters);
         // Execute next command
     },
 }

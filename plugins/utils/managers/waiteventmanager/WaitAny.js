@@ -57,6 +57,10 @@ var WaitAny = function (config) {
                         continue;
                     }
 
+                    if (propName === 'destroy') {
+                        return this.waitGameObjectDestroy(undefined, gameObjectName);
+                    }
+
                     var value = gameObjectManager.getProperty(gameObjectName, propName);
                     if (typeof (value) === 'number') {
                         hasAnyWaitEvent = true;
