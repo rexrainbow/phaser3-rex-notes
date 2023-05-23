@@ -16,11 +16,14 @@ import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js'
 import ParseFadeInSoundEffectTag from './soundeffect/OnParseFadeInSoundEffectTag.js';
 import ParseFadeOutSoundEffectTag from './soundeffect/OnParseFadeOutSoundEffectTag.js';
 import ParseSetSoundEffectVolumeTag from './soundeffect/OnParseSetSoundEffectVolumeTag.js';
+import ParseSetSoundEffectMuteTag from './soundeffect/OnParseSetSoundEffectMuteTag.js';
 import ParsePlayBackgroundMusicTag from './backgroundmusic/OnParsePlayBackgroundMusicTag.js';
 import ParseFadeInBackgroundMusicTag from './backgroundmusic/OnParseFadeInBackgroundMusicTag.js';
 import ParseFadeOutBackgroundMusicTag from './backgroundmusic/OnParseFadeOutBackgroundMusicTag.js';
 import ParseCrossFadeBackgroundMusicTag from './backgroundmusic/OnParseCrossFadeBackgroundMusicTag.js';
 import ParsePauseBackgroundMusicTag from './backgroundmusic/OnParsePauseBackgroundMusicTag.js';
+import ParseSetBackgroundMusicVolumeTag from './backgroundmusic/OnParseSetBackgroundMusicVolumeTag.js';
+import ParseSetBackgroundMusicMuteTag from './backgroundmusic/OnParseSetBackgroundMusicMuteTag.js';
 import ParseFadeInCameraTag from './camera/OnParseFadeInCameraTag.js';
 import ParseFadeOutCameraTag from './camera/OnParseFadeOutCameraTag.js';
 import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
@@ -46,8 +49,10 @@ const ParseCallbacks = [
 
     ParseTypingSpeedTag,
 
-    ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
+    ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag,
+    ParseSetSoundEffectVolumeTag, ParseSetSoundEffectMuteTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
+    ParseSetBackgroundMusicVolumeTag, ParseSetBackgroundMusicMuteTag,
 
     ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag, ParseScrollCameraTag,
 

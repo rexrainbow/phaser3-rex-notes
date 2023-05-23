@@ -847,6 +847,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Fade out volume then stop : `[bgm.fadeout=1000,stop]`, `[bgm2.fadeout=1000,stop]`
 - Cross fade to another background music : `[bgm.cross=key,10000]`, `[bgm2.cross=key,10000]`
 - Set volume : `[bgm.volume=1]`, `[bgm2.volume=1]`
+- Mute : `[bgm.mute]`, `[bgm2.mute]`, `[bgm.unmute]`, `[bgm2.unmute]`
 
 #### Camera
 
