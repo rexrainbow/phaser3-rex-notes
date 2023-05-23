@@ -7,7 +7,12 @@ class Managers extends Extend(EventEmitter) {
         if (config === undefined) {
             config = {};
         }
+
         config.completeEventName = 'complete';
+
+        if (!config.hasOwnProperty('layers')) {
+            config.layers = undefined;
+        }
 
         super();
 

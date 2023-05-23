@@ -9,7 +9,7 @@ var DefaultHandler = function (name, config, manager) {
         case 1:
             if (!this.sys.hasGameObject(undefined, gameObjectName)) {
                 // TODO
-                debugger
+                console.warn(`CommandExecutor: '${gameObjectName}' does not exist`);
                 return;
             }
             return this._setGOProperty(config, manager);
@@ -17,7 +17,7 @@ var DefaultHandler = function (name, config, manager) {
         case 2:
             if (!this.sys.hasGameObject(undefined, gameObjectName)) {
                 // TODO
-                debugger
+                console.warn(`CommandExecutor: '${gameObjectName}' does not exist`);
                 return;
             }
 

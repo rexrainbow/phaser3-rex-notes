@@ -3759,9 +3759,9 @@
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
-    var layerManagerConfig = GetValue$e(config, 'layers');
+    var layerManagerConfig = GetValue$e(config, 'layers', false);
     if (layerManagerConfig !== false) {
-      this.layerManager = new LayerManager(scene, layerManagerConfig);
+      this.gameObjectManagers.layer = new LayerManager(scene, layerManagerConfig);
     }
     var soundManagerConfig = GetValue$e(config, 'sounds');
     if (soundManagerConfig !== false) {
@@ -3790,10 +3790,6 @@
     for (var name in this.gameObjectManagers) {
       this.gameObjectManagers[name].destroy(fromScene);
       delete this.gameObjectManagers[name];
-    }
-    if (this.layerManager) {
-      this.layerManager.destroy(fromScene);
-      this.layerManager = undefined;
     }
     if (this.soundManager) {
       this.soundManager.destroy();

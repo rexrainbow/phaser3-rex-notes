@@ -13,9 +13,10 @@ var InitManagers = function (scene, config) {
 
     this.gameObjectManagers = {};
 
-    var layerManagerConfig = GetValue(config, 'layers');
+    var layerManagerConfig = GetValue(config, 'layers', false);
     if (layerManagerConfig !== false) {
-        this.layerManager = new LayerManager(scene, layerManagerConfig);
+        this.gameObjectManagers.layer = new LayerManager(scene, layerManagerConfig);
+
     }
 
     var soundManagerConfig = GetValue(config, 'sounds');

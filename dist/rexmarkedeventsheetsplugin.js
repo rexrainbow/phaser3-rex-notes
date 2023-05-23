@@ -11838,9 +11838,9 @@
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
-    var layerManagerConfig = GetValue(config, 'layers');
+    var layerManagerConfig = GetValue(config, 'layers', false);
     if (layerManagerConfig !== false) {
-      this.layerManager = new LayerManager(scene, layerManagerConfig);
+      this.gameObjectManagers.layer = new LayerManager(scene, layerManagerConfig);
     }
     var soundManagerConfig = GetValue(config, 'sounds');
     if (soundManagerConfig !== false) {
@@ -11869,10 +11869,6 @@
     for (var name in this.gameObjectManagers) {
       this.gameObjectManagers[name].destroy(fromScene);
       delete this.gameObjectManagers[name];
-    }
-    if (this.layerManager) {
-      this.layerManager.destroy(fromScene);
-      this.layerManager = undefined;
     }
     if (this.soundManager) {
       this.soundManager.destroy();
@@ -12054,6 +12050,9 @@
         config = {};
       }
       config.completeEventName = 'complete';
+      if (!config.hasOwnProperty('layers')) {
+        config.layers = undefined;
+      }
       _this = _super.call(this);
       _this.scene = scene;
       _this.initManagers(scene, config);
@@ -12073,6 +12072,17 @@
     }]);
     return Managers;
   }(Extend(EventEmitter));
+
+  var AddCommand = function AddCommand(name, callback, scope) {
+    if (scope === undefined) {
+      scope = this;
+    }
+    if (scope) {
+      callback = callback.bind(scope);
+    }
+    this[name] = callback;
+    return this;
+  };
 
   var TreeManagerMethods = {
     set: function set(config, manager) {
@@ -12122,23 +12132,27 @@
         _config$commands = config.commands,
         commands = _config$commands === void 0 ? {} : _config$commands;
 
+      // Add custom commands
+      sys.getGameObjectManager(name).commands = commands;
+
       // Add createGameObject command        
       var goType = name;
-      this[goType] = function (config, manager) {
+      var createGameObjectCallback = function createGameObjectCallback(config, manager) {
         var name = config.name,
           _config$layer = config.layer,
           layer = _config$layer === void 0 ? defaultLayer : _config$layer;
         sys.createGameObject(goType, name, config);
         // Execute next command
 
-        if (layer && sys.layerManager) {
-          var gameObject = sys.getGameObject(goType, name);
-          sys.layerManager.addToLayer(layer, gameObject);
+        if (layer) {
+          var layerManager = sys.getGameObjectManager('layer');
+          if (layerManager) {
+            var gameObject = sys.getGameObject(goType, name);
+            layerManager.addToLayer(layer, gameObject);
+          }
         }
       };
-
-      // Add custom commands
-      sys.getGameObjectManager(name).commands = commands;
+      this.addCommand(goType, createGameObjectCallback, null);
       return this;
     },
     _setGOProperty: function _setGOProperty(config, manager) {
@@ -12780,14 +12794,14 @@
       case 1:
         if (!this.sys.hasGameObject(undefined, gameObjectName)) {
           // TODO
-          debugger;
+          console.warn("CommandExecutor: '".concat(gameObjectName, "' does not exist"));
           return;
         }
         return this._setGOProperty(config, manager);
       case 2:
         if (!this.sys.hasGameObject(undefined, gameObjectName)) {
           // TODO
-          debugger;
+          console.warn("CommandExecutor: '".concat(gameObjectName, "' does not exist"));
           return;
         }
         var commandName = tokens[1];
@@ -12821,6 +12835,7 @@
   };
 
   var Methods = {
+    addCommand: AddCommand,
     defaultHandler: DefaultHandler
   };
   Object.assign(Methods, TreeManagerMethods, WaitMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods);

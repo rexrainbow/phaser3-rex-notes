@@ -1,3 +1,4 @@
+import AddCommand from './AddCommand.js';
 import TreeManagerMethods from './TreeManagerMethods.js';
 import WaitMethods from './WaitMethods.js';
 import GameObjectMethods from './GameObjectMethods.js';
@@ -9,6 +10,7 @@ import CameraMethods from './CameraMethods.js';
 import DefaultHandler from './DefaultHandler.js';
 
 var Methods = {
+    addCommand: AddCommand,
     defaultHandler: DefaultHandler,
 }
 

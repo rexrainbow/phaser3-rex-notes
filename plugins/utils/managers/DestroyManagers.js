@@ -7,11 +7,6 @@ var DestroyManagers = function (fromScene) {
         delete this.gameObjectManagers[name];
     }
 
-    if (this.layerManager) {
-        this.layerManager.destroy(fromScene);
-        this.layerManager = undefined;
-    }
-
     if (this.soundManager) {
         this.soundManager.destroy();
         this.soundManager = undefined;

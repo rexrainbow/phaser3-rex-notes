@@ -88,9 +88,11 @@ bgm.cross
 
 角色A.to
   vpx=-0.1
+// Wait until tween complete
 
-wait
-  time=2000
+ui.to
+  alpha=0
+// Wait until ui layer fade-out
 
 bgm.stop
 
