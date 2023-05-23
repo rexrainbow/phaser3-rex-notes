@@ -73,15 +73,15 @@ Line3...
 ```
 // Wait until typing complete
 
-se.play
-  key=explosion
-  wait
-// Wait until playing se complete
-
 wait
   time=3000
   click
 // Wait until 3s or any touch
+
+se.play
+  key=explosion
+  wait
+// Wait until playing se complete
 
 bgm.cross
   key=theme1

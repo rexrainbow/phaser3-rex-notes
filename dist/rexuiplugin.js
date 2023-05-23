@@ -592,11 +592,11 @@
   };
 
   var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3c = Phaser.Utils.Objects.GetValue;
+  var GetValue$3d = Phaser.Utils.Objects.GetValue;
   var SetStretchMode = function SetStretchMode(mode) {
     if (IsPlainObject$S(mode)) {
-      this.stretchMode.edge = parseMode(GetValue$3c(mode, 'edge', 0));
-      this.stretchMode.internal = parseMode(GetValue$3c(mode, 'internal', 0));
+      this.stretchMode.edge = parseMode(GetValue$3d(mode, 'edge', 0));
+      this.stretchMode.internal = parseMode(GetValue$3d(mode, 'internal', 0));
     } else {
       mode = parseMode(mode);
       this.stretchMode.edge = mode;
@@ -659,7 +659,7 @@
   };
 
   var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3b = Phaser.Utils.Objects.GetValue;
+  var GetValue$3c = Phaser.Utils.Objects.GetValue;
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
       _inherits(NinePatch, _GOClass);
@@ -669,53 +669,53 @@
         _classCallCheck(this, NinePatch);
         if (IsPlainObject$R(x)) {
           config = x;
-          x = GetValue$3b(config, 'x', 0);
-          y = GetValue$3b(config, 'y', 0);
-          width = GetValue$3b(config, 'width', 1);
-          height = GetValue$3b(config, 'height', 1);
-          key = GetValue$3b(config, 'key', undefined);
-          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
-          columns = GetValue$3b(config, 'columns', undefined);
-          rows = GetValue$3b(config, 'rows', undefined);
+          x = GetValue$3c(config, 'x', 0);
+          y = GetValue$3c(config, 'y', 0);
+          width = GetValue$3c(config, 'width', 1);
+          height = GetValue$3c(config, 'height', 1);
+          key = GetValue$3c(config, 'key', undefined);
+          baseFrame = GetValue$3c(config, 'baseFrame', undefined);
+          columns = GetValue$3c(config, 'columns', undefined);
+          rows = GetValue$3c(config, 'rows', undefined);
         } else if (IsPlainObject$R(width)) {
           config = width;
-          width = GetValue$3b(config, 'width', 1);
-          height = GetValue$3b(config, 'height', 1);
-          key = GetValue$3b(config, 'key', undefined);
-          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
-          columns = GetValue$3b(config, 'columns', undefined);
-          rows = GetValue$3b(config, 'rows', undefined);
+          width = GetValue$3c(config, 'width', 1);
+          height = GetValue$3c(config, 'height', 1);
+          key = GetValue$3c(config, 'key', undefined);
+          baseFrame = GetValue$3c(config, 'baseFrame', undefined);
+          columns = GetValue$3c(config, 'columns', undefined);
+          rows = GetValue$3c(config, 'rows', undefined);
         } else if (IsPlainObject$R(key)) {
           config = key;
-          key = GetValue$3b(config, 'key', undefined);
-          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
-          columns = GetValue$3b(config, 'columns', undefined);
-          rows = GetValue$3b(config, 'rows', undefined);
+          key = GetValue$3c(config, 'key', undefined);
+          baseFrame = GetValue$3c(config, 'baseFrame', undefined);
+          columns = GetValue$3c(config, 'columns', undefined);
+          rows = GetValue$3c(config, 'rows', undefined);
         } else if (IsPlainObject$R(baseFrame)) {
           config = baseFrame;
-          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
-          columns = GetValue$3b(config, 'columns', undefined);
-          rows = GetValue$3b(config, 'rows', undefined);
+          baseFrame = GetValue$3c(config, 'baseFrame', undefined);
+          columns = GetValue$3c(config, 'columns', undefined);
+          rows = GetValue$3c(config, 'rows', undefined);
         } else if (Array.isArray(baseFrame)) {
           config = rows;
           rows = columns;
           columns = baseFrame;
-          baseFrame = GetValue$3b(config, 'baseFrame', undefined);
+          baseFrame = GetValue$3c(config, 'baseFrame', undefined);
         } else if (IsPlainObject$R(columns)) {
           config = columns;
-          columns = GetValue$3b(config, 'columns', undefined);
-          rows = GetValue$3b(config, 'rows', undefined);
+          columns = GetValue$3c(config, 'columns', undefined);
+          rows = GetValue$3c(config, 'rows', undefined);
         }
         if (columns === undefined) {
-          var leftWidth = GetValue$3b(config, 'leftWidth', undefined);
-          var rightWidth = GetValue$3b(config, 'rightWidth', undefined);
+          var leftWidth = GetValue$3c(config, 'leftWidth', undefined);
+          var rightWidth = GetValue$3c(config, 'rightWidth', undefined);
           if (leftWidth !== undefined && rightWidth !== undefined) {
             columns = [leftWidth, undefined, rightWidth];
           }
         }
         if (rows === undefined) {
-          var topHeight = GetValue$3b(config, 'topHeight', undefined);
-          var bottomHeight = GetValue$3b(config, 'bottomHeight', undefined);
+          var topHeight = GetValue$3c(config, 'topHeight', undefined);
+          var bottomHeight = GetValue$3c(config, 'bottomHeight', undefined);
           if (topHeight !== undefined && bottomHeight !== undefined) {
             rows = [topHeight, undefined, bottomHeight];
           }
@@ -729,12 +729,12 @@
         _this._tileSprite = undefined; // Reserved for drawing image
         _this._image = undefined; // Reserved for drawing image
 
-        _this.setGetFrameNameCallback(GetValue$3b(config, 'getFrameNameCallback', undefined));
-        _this.setStretchMode(GetValue$3b(config, 'stretchMode', 0));
-        _this.setPreserveRatio(GetValue$3b(config, 'preserveRatio', true));
-        var maxFixedPartScale = GetValue$3b(config, 'maxFixedPartScale', 1);
-        var maxFixedPartScaleX = GetValue$3b(config, 'maxFixedPartScaleX', maxFixedPartScale);
-        var maxFixedPartScaleY = GetValue$3b(config, 'maxFixedPartScaleY', undefined);
+        _this.setGetFrameNameCallback(GetValue$3c(config, 'getFrameNameCallback', undefined));
+        _this.setStretchMode(GetValue$3c(config, 'stretchMode', 0));
+        _this.setPreserveRatio(GetValue$3c(config, 'preserveRatio', true));
+        var maxFixedPartScale = GetValue$3c(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$3c(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$3c(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
         _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
@@ -1112,12 +1112,12 @@
     return Stack;
   }();
 
-  var GetValue$3a = Phaser.Utils.Objects.GetValue;
+  var GetValue$3b = Phaser.Utils.Objects.GetValue;
   var Pools$1 = {};
   var PoolManager$1 = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
-      this.pools = GetValue$3a(config, 'pools', Pools$1);
+      this.pools = GetValue$3b(config, 'pools', Pools$1);
     }
     _createClass(PoolManager, [{
       key: "destroy",
@@ -1163,7 +1163,7 @@
 
   var GameObject$4 = Phaser.GameObjects.GameObject;
   var IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$39 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3a = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
   var Blitter = /*#__PURE__*/function (_GameObject) {
@@ -1174,10 +1174,10 @@
       _classCallCheck(this, Blitter);
       if (IsPlainObject$Q(x)) {
         config = x;
-        x = GetValue$39(config, 'x', 0);
-        y = GetValue$39(config, 'y', 0);
-        texture = GetValue$39(config, 'texture');
-        frame = GetValue$39(config, 'frame');
+        x = GetValue$3a(config, 'x', 0);
+        y = GetValue$3a(config, 'y', 0);
+        texture = GetValue$3a(config, 'texture');
+        frame = GetValue$3a(config, 'frame');
       }
       if (x === undefined) {
         x = 0;
@@ -1190,7 +1190,7 @@
       _this.renderList = [];
       _this.displayListDirty = false;
       _this.lastAppendedChildren = [];
-      var reuseBob = GetValue$39(config, 'reuseBob', true);
+      var reuseBob = GetValue$3a(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager$1(config) : undefined;
       _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
       return _this;
@@ -1264,7 +1264,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$38 = function GetValue(source, key, defaultValue) {
+  var GetValue$39 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -1327,7 +1327,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$38(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$39(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1435,7 +1435,7 @@
 
   var DegToRad$f = Phaser.Math.DegToRad;
   var RadToDeg$9 = Phaser.Math.RadToDeg;
-  var GetValue$37 = Phaser.Utils.Objects.GetValue;
+  var GetValue$38 = Phaser.Utils.Objects.GetValue;
   var RenderBase$1 = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
     var _super = _createSuper(RenderBase);
@@ -1680,11 +1680,11 @@
         }
 
         // ScaleX, ScaleY
-        var width = GetValue$37(o, 'width', undefined);
-        var height = GetValue$37(o, 'height', undefined);
-        var scale = GetValue$37(o, 'scale', undefined);
-        var scaleX = GetValue$37(o, 'scaleX', scale);
-        var scaleY = GetValue$37(o, 'scaleY', scale);
+        var width = GetValue$38(o, 'width', undefined);
+        var height = GetValue$38(o, 'height', undefined);
+        var scale = GetValue$38(o, 'scale', undefined);
+        var scaleX = GetValue$38(o, 'scaleX', scale);
+        var scaleY = GetValue$38(o, 'scaleY', scale);
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -1707,7 +1707,7 @@
         } else if (o.hasOwnProperty('displayHeight')) {
           this.setDisplayHeight(o.displayHeight);
         }
-        var origin = GetValue$37(o, 'origin', undefined);
+        var origin = GetValue$38(o, 'origin', undefined);
         if (origin !== undefined) {
           this.setOrigin(origin);
         } else {
@@ -2047,7 +2047,7 @@
   });
   SetValue(window, 'RexPlugins.UI.NinePatch2', NinePatch);
 
-  var GetValue$36 = Phaser.Utils.Objects.GetValue;
+  var GetValue$37 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$3 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -2148,14 +2148,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$36(value, 'x', 0);
-          defaultRadiusY = GetValue$36(value, 'y', 0);
+          defaultRadiusX = GetValue$37(value, 'x', 0);
+          defaultRadiusY = GetValue$37(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$36(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$36(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$36(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$36(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$37(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$37(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$37(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$37(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -2216,8 +2216,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$36(value, 'x', 0);
-      radius.y = GetValue$36(value, 'y', 0);
+      radius.x = GetValue$37(value, 'x', 0);
+      radius.y = GetValue$37(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -2418,7 +2418,7 @@
 
   var Shape$1 = Phaser.GameObjects.Shape;
   var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$35 = Phaser.Utils.Objects.GetValue;
+  var GetValue$36 = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle$2 = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
@@ -2463,7 +2463,7 @@
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue$35(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$36(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -2472,7 +2472,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue$35(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$36(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -3588,7 +3588,7 @@
     DrawRoundRectangleBackground(this, this.fillStyle, this.strokeStyle, this.lineWidth, this.radius, this.fillColor2, this.isHorizontalGradient, this.iteration);
   };
 
-  var GetValue$34 = Phaser.Utils.Objects.GetValue;
+  var GetValue$35 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(RoundRectangle, _Canvas);
     var _super = _createSuper(RoundRectangle);
@@ -3612,8 +3612,8 @@
       }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexRoundRectangleCanvas';
-      var radius = GetValue$34(radiusConfig, 'radius', radiusConfig);
-      var iteration = GetValue$34(radiusConfig, 'iteration', undefined);
+      var radius = GetValue$35(radiusConfig, 'radius', radiusConfig);
+      var iteration = GetValue$35(radiusConfig, 'iteration', undefined);
       _this.setRadius(radius);
       _this.setIteration(iteration);
       _this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
@@ -4211,7 +4211,7 @@
   };
 
   var GetAdvancedValue$6 = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue$33 = Phaser.Utils.Objects.GetValue;
+  var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var TextStyle$1 = /*#__PURE__*/function () {
     function TextStyle(text, style, propertyMap) {
       _classCallCheck(this, TextStyle);
@@ -4311,7 +4311,7 @@
           var postCallback = prop[2];
           if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
             // Callback & scope should be set without processing the values
-            this[key] = GetValue$33(style, objKey, defaultValue);
+            this[key] = GetValue$34(style, objKey, defaultValue);
           } else {
             var value = GetAdvancedValue$6(style, objKey, defaultValue);
             if (postCallback) {
@@ -4322,7 +4322,7 @@
         }
 
         //  Allow for 'font' override
-        var font = GetValue$33(style, 'font', null);
+        var font = GetValue$34(style, 'font', null);
         if (font === null) {
           this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
         } else {
@@ -4330,19 +4330,19 @@
         }
 
         //  Allow for 'fill' to be used in place of 'color'
-        var fill = GetValue$33(style, 'fill', null);
+        var fill = GetValue$34(style, 'fill', null);
         if (fill !== null) {
           this.color = GetStyle(fill);
         }
-        var metrics = GetValue$33(style, 'metrics', false);
+        var metrics = GetValue$34(style, 'metrics', false);
 
         //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
         //  Doing this is reset if you then change the font of this TextStyle after creation
         if (metrics) {
           this.metrics = {
-            ascent: GetValue$33(metrics, 'ascent', 0),
-            descent: GetValue$33(metrics, 'descent', 0),
-            fontSize: GetValue$33(metrics, 'fontSize', 0)
+            ascent: GetValue$34(metrics, 'ascent', 0),
+            descent: GetValue$34(metrics, 'descent', 0),
+            fontSize: GetValue$34(metrics, 'fontSize', 0)
           };
         } else if (updateText || !this.metrics) {
           this.metrics = MeasureText(this);
@@ -4411,9 +4411,9 @@
           this.fontSize = '';
           this.fontStyle = '';
         } else {
-          this.fontFamily = GetValue$33(font, 'fontFamily', 'Courier');
-          this.fontSize = GetValue$33(font, 'fontSize', '16px');
-          this.fontStyle = GetValue$33(font, 'fontStyle', '');
+          this.fontFamily = GetValue$34(font, 'fontFamily', 'Courier');
+          this.fontSize = GetValue$34(font, 'fontSize', '16px');
+          this.fontStyle = GetValue$34(font, 'fontStyle', '');
         }
         return this.update(true);
       }
@@ -4720,9 +4720,9 @@
             this.fontSize = '';
             this.fontStyle = '';
           } else {
-            this.fontFamily = GetValue$33(font, 'fontFamily', this.fontFamily);
-            this.fontSize = GetValue$33(font, 'fontSize', this.fontSize);
-            this.fontStyle = GetValue$33(font, 'fontStyle', this.fontStyle);
+            this.fontFamily = GetValue$34(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue$34(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue$34(font, 'fontStyle', this.fontStyle);
           }
         }
         return this.parent.updateText(true);
@@ -4936,7 +4936,7 @@
     }
   };
 
-  var GetValue$32 = Phaser.Utils.Objects.GetValue;
+  var GetValue$33 = Phaser.Utils.Objects.GetValue;
   var NO_NEWLINE$3 = CONST.NO_NEWLINE;
   var RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
   var Pen = /*#__PURE__*/function () {
@@ -4949,17 +4949,17 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         // (txt, x, y, width, prop, newLineMode, startIndex)
-        this.text = GetValue$32(o, 'text', '');
-        this.x = GetValue$32(o, 'x', 0);
-        this.y = GetValue$32(o, 'y', 0);
-        this.width = GetValue$32(o, 'width', 0);
-        var prop = GetValue$32(o, 'prop', null);
+        this.text = GetValue$33(o, 'text', '');
+        this.x = GetValue$33(o, 'x', 0);
+        this.y = GetValue$33(o, 'y', 0);
+        this.width = GetValue$33(o, 'width', 0);
+        var prop = GetValue$33(o, 'prop', null);
         if (prop === null) {
           prop = {};
         }
         this.prop = prop;
-        this.newLineMode = GetValue$32(o, 'newLineMode', 0);
-        this.startIndex = GetValue$32(o, 'startIndex', 0);
+        this.newLineMode = GetValue$33(o, 'newLineMode', 0);
+        this.startIndex = GetValue$33(o, 'startIndex', 0);
       }
     }, {
       key: "plainText",
@@ -5575,7 +5575,7 @@
     return retLines;
   };
 
-  var GetValue$31 = Phaser.Utils.Objects.GetValue;
+  var GetValue$32 = Phaser.Utils.Objects.GetValue;
   var NO_WRAP = CONST.NO_WRAP;
   var NO_NEWLINE = CONST.NO_NEWLINE;
   var CanvasText = /*#__PURE__*/function () {
@@ -5583,10 +5583,10 @@
       _classCallCheck(this, CanvasText);
       this.parent = config.parent;
       this.scene = this.parent.scene;
-      this.context = GetValue$31(config, 'context', null);
+      this.context = GetValue$32(config, 'context', null);
       this.canvas = this.context.canvas;
-      this.parser = GetValue$31(config, 'parser', null);
-      this.defaultStyle = GetValue$31(config, 'style', null);
+      this.parser = GetValue$32(config, 'parser', null);
+      this.defaultStyle = GetValue$32(config, 'style', null);
       this.autoRound = true;
       this.pensPool = config.pensPool; // Required
       this.linesPool = config.linesPool; // Required
@@ -5923,7 +5923,7 @@
   }(Stack);
 
   var IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$30 = Phaser.Utils.Objects.GetValue;
+  var GetValue$31 = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
     if (IsPlainObject$N(key)) {
       config = key;
@@ -5958,11 +5958,11 @@
       frame: frameKey,
       width: width,
       height: height,
-      y: GetValue$30(config, 'y', 0),
-      left: GetValue$30(config, 'left', 0),
-      right: GetValue$30(config, 'right', 0),
-      originX: GetValue$30(config, 'originX', 0),
-      originY: GetValue$30(config, 'originY', 0)
+      y: GetValue$31(config, 'y', 0),
+      left: GetValue$31(config, 'left', 0),
+      right: GetValue$31(config, 'right', 0),
+      originX: GetValue$31(config, 'originX', 0),
+      originY: GetValue$31(config, 'originY', 0)
     };
   };
 
@@ -6084,7 +6084,7 @@
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
-  var GetValue$2$ = Phaser.Utils.Objects.GetValue;
+  var GetValue$30 = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
 
@@ -6100,10 +6100,10 @@
       _classCallCheck(this, Text);
       if (IsPlainObject$M(x)) {
         var config = x;
-        x = GetValue$2$(config, 'x', 0);
-        y = GetValue$2$(config, 'y', 0);
-        text = GetValue$2$(config, 'text', '');
-        style = GetValue$2$(config, 'style');
+        x = GetValue$30(config, 'x', 0);
+        y = GetValue$30(config, 'y', 0);
+        text = GetValue$30(config, 'text', '');
+        style = GetValue$30(config, 'style');
       }
       if (x === undefined) {
         x = 0;
@@ -6134,7 +6134,7 @@
         }
       }
       _this.style = new TextStyle$1(_assertThisInitialized(_this), style);
-      var imageData = GetValue$2$(style, 'images', undefined);
+      var imageData = GetValue$30(style, 'images', undefined);
       if (imageData) {
         _this.addImage(imageData);
       }
@@ -6169,7 +6169,7 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
         _this.frame.source.glTexture = null;
       }
-      var sharedPoolMode = GetValue$2$(style, 'sharedPool', true);
+      var sharedPoolMode = GetValue$30(style, 'sharedPool', true);
       var pensPool, linesPool, wrapTextLinesPool;
       if (sharedPoolMode) {
         // Use pools first time
@@ -6211,8 +6211,8 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      _this.setUrlTagCursorStyle(GetValue$2$(style, 'urlTagCursorStyle', 'pointer'));
-      if (GetValue$2$(style, 'interactive', false)) {
+      _this.setUrlTagCursorStyle(GetValue$30(style, 'urlTagCursorStyle', 'pointer'));
+      if (GetValue$30(style, 'interactive', false)) {
         _this.setInteractive();
       }
       return _this;
@@ -6288,21 +6288,21 @@
           var config = left;
 
           //  If they specify x and/or y this applies to all
-          var x = GetValue$2$(config, 'x', null);
+          var x = GetValue$30(config, 'x', null);
           if (x !== null) {
             left = x;
             right = x;
           } else {
-            left = GetValue$2$(config, 'left', 0);
-            right = GetValue$2$(config, 'right', left);
+            left = GetValue$30(config, 'left', 0);
+            right = GetValue$30(config, 'right', left);
           }
-          var y = GetValue$2$(config, 'y', null);
+          var y = GetValue$30(config, 'y', null);
           if (y !== null) {
             top = y;
             bottom = y;
           } else {
-            top = GetValue$2$(config, 'top', 0);
-            bottom = GetValue$2$(config, 'bottom', top);
+            top = GetValue$30(config, 'top', 0);
+            bottom = GetValue$30(config, 'bottom', top);
           }
         } else {
           if (left === undefined) {
@@ -6993,11 +6993,11 @@
     return Object.assign({}, TagRegexSave);
   };
 
-  var GetValue$2_ = Phaser.Utils.Objects.GetValue;
+  var GetValue$2$ = Phaser.Utils.Objects.GetValue;
   var Parser$2 = /*#__PURE__*/function () {
     function Parser(style) {
       _classCallCheck(this, Parser);
-      var delimiters = GetValue$2_(style, 'delimiters', '[]');
+      var delimiters = GetValue$2$(style, 'delimiters', '[]');
       this.tagRegex = GetTagRegex(delimiters);
       this.delimiters = delimiters;
     }
@@ -7350,13 +7350,13 @@
   var RE_STYLE = /<\s*style=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/style\s*\>/;
   var RE_SPACE = /^\s+|\s+$/;
 
-  var GetValue$2Z = Phaser.Utils.Objects.GetValue;
+  var GetValue$2_ = Phaser.Utils.Objects.GetValue;
   var TagText = /*#__PURE__*/function (_Text) {
     _inherits(TagText, _Text);
     var _super = _createSuper(TagText);
     function TagText(scene, x, y, text, style) {
       _classCallCheck(this, TagText);
-      var tags = GetValue$2Z(style, 'tags', undefined);
+      var tags = GetValue$2_(style, 'tags', undefined);
       var parser = new Parser$1(tags);
       return _super.call(this, scene, x, y, text, style, 'rexTagText', parser);
     }
@@ -7397,7 +7397,7 @@
   });
   SetValue(window, 'RexPlugins.UI.TagText', TagText);
 
-  var GetValue$2Y = Phaser.Utils.Objects.GetValue;
+  var GetValue$2Z = Phaser.Utils.Objects.GetValue;
   var GetPadding$1 = function GetPadding(padding, key) {
     if (key === undefined) {
       return padding;
@@ -7420,10 +7420,10 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$2Y(key, 'left', 0);
-      padding.right = GetValue$2Y(key, 'right', 0);
-      padding.top = GetValue$2Y(key, 'top', 0);
-      padding.bottom = GetValue$2Y(key, 'bottom', 0);
+      padding.left = GetValue$2Z(key, 'left', 0);
+      padding.right = GetValue$2Z(key, 'right', 0);
+      padding.top = GetValue$2Z(key, 'top', 0);
+      padding.bottom = GetValue$2Z(key, 'bottom', 0);
     }
     return padding;
   };
@@ -7670,7 +7670,7 @@
 
   var DegToRad$c = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
-  var GetValue$2X = Phaser.Utils.Objects.GetValue;
+  var GetValue$2Y = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
     var _super = _createSuper(RenderBase);
@@ -7946,10 +7946,10 @@
         }
 
         // ScaleX, ScaleY
-        var width = GetValue$2X(o, 'width', undefined);
-        var height = GetValue$2X(o, 'height', undefined);
-        var scaleX = GetValue$2X(o, 'scaleX', undefined);
-        var scaleY = GetValue$2X(o, 'scaleY', undefined);
+        var width = GetValue$2Y(o, 'width', undefined);
+        var height = GetValue$2Y(o, 'height', undefined);
+        var scaleX = GetValue$2Y(o, 'scaleX', undefined);
+        var scaleY = GetValue$2Y(o, 'scaleY', undefined);
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -8079,7 +8079,7 @@
     }
   };
 
-  var GetValue$2W = Phaser.Utils.Objects.GetValue;
+  var GetValue$2X = Phaser.Utils.Objects.GetValue;
   var Background = /*#__PURE__*/function (_RenderBase) {
     _inherits(Background, _RenderBase);
     var _super = _createSuper(Background);
@@ -8087,9 +8087,9 @@
       var _this;
       _classCallCheck(this, Background);
       _this = _super.call(this, parent, 'background');
-      _this.setColor(GetValue$2W(config, 'color', null), GetValue$2W(config, 'color2', null), GetValue$2W(config, 'horizontalGradient', true));
-      _this.setStroke(GetValue$2W(config, 'stroke', null), GetValue$2W(config, 'strokeThickness', 2));
-      _this.setCornerRadius(GetValue$2W(config, 'cornerRadius', 0), GetValue$2W(config, 'cornerIteration', null));
+      _this.setColor(GetValue$2X(config, 'color', null), GetValue$2X(config, 'color2', null), GetValue$2X(config, 'horizontalGradient', true));
+      _this.setStroke(GetValue$2X(config, 'stroke', null), GetValue$2X(config, 'strokeThickness', 2));
+      _this.setCornerRadius(GetValue$2X(config, 'cornerRadius', 0), GetValue$2X(config, 'cornerIteration', null));
       return _this;
     }
     _createClass(Background, [{
@@ -8218,7 +8218,7 @@
     return Background;
   }(RenderBase);
 
-  var GetValue$2V = Phaser.Utils.Objects.GetValue;
+  var GetValue$2W = Phaser.Utils.Objects.GetValue;
   var InnerBounds = /*#__PURE__*/function (_RenderBase) {
     _inherits(InnerBounds, _RenderBase);
     var _super = _createSuper(InnerBounds);
@@ -8226,8 +8226,8 @@
       var _this;
       _classCallCheck(this, InnerBounds);
       _this = _super.call(this, parent, 'innerbounds');
-      _this.setColor(GetValue$2V(config, 'color', null), GetValue$2V(config, 'color2', null), GetValue$2V(config, 'horizontalGradient', true));
-      _this.setStroke(GetValue$2V(config, 'stroke', null), GetValue$2V(config, 'strokeThickness', 2));
+      _this.setColor(GetValue$2W(config, 'color', null), GetValue$2W(config, 'color2', null), GetValue$2W(config, 'horizontalGradient', true));
+      _this.setStroke(GetValue$2W(config, 'stroke', null), GetValue$2W(config, 'strokeThickness', 2));
       return _this;
     }
     _createClass(InnerBounds, [{
@@ -8306,10 +8306,10 @@
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(InnerBounds.prototype), "modifyPorperties", this).call(this, o);
         if (o.hasOwnProperty('color')) {
-          this.setColor(o.color, GetValue$2V(o, 'color2', null), GetValue$2V(o, 'horizontalGradient', true));
+          this.setColor(o.color, GetValue$2W(o, 'color2', null), GetValue$2W(o, 'horizontalGradient', true));
         }
         if (o.hasOwnProperty('stroke')) {
-          this.setStroke(o.stroke, GetValue$2V(o, 'strokeThickness', 2));
+          this.setStroke(o.stroke, GetValue$2W(o, 'strokeThickness', 2));
         }
       }
     }, {
@@ -8349,7 +8349,7 @@
     return InnerBounds;
   }(RenderBase);
 
-  var GetValue$2U = Phaser.Utils.Objects.GetValue;
+  var GetValue$2V = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(parent, config) {
       _classCallCheck(this, TextStyle);
@@ -8383,19 +8383,19 @@
     }, {
       key: "set",
       value: function set(o) {
-        this.setBold(GetValue$2U(o, 'bold', false));
-        this.setItalic(GetValue$2U(o, 'italic', false));
-        this.setFontSize(GetValue$2U(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$2U(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$2U(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue$2U(o, 'stroke', null), GetValue$2U(o, 'strokeThickness', 0));
-        this.setShadow(GetValue$2U(o, 'shadowColor', null), GetValue$2U(o, 'shadowOffsetX', 0), GetValue$2U(o, 'shadowOffsetY', 0), GetValue$2U(o, 'shadowBlur', 0));
-        this.setOffset(GetValue$2U(o, 'offsetX', 0), GetValue$2U(o, 'offsetY', 0));
-        this.setSpace(GetValue$2U(o, 'leftSpace', 0), GetValue$2U(o, 'rightSpace', 0));
-        this.setAlign(GetValue$2U(o, 'align', undefined));
-        this.setBackgroundColor(GetValue$2U(o, 'backgroundColor', null));
-        this.setBackgroundHeight(GetValue$2U(o, 'backgroundHeight', undefined));
-        this.setBackgroundBottomY(GetValue$2U(o, 'backgroundBottomY', undefined));
+        this.setBold(GetValue$2V(o, 'bold', false));
+        this.setItalic(GetValue$2V(o, 'italic', false));
+        this.setFontSize(GetValue$2V(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$2V(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$2V(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$2V(o, 'stroke', null), GetValue$2V(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$2V(o, 'shadowColor', null), GetValue$2V(o, 'shadowOffsetX', 0), GetValue$2V(o, 'shadowOffsetY', 0), GetValue$2V(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$2V(o, 'offsetX', 0), GetValue$2V(o, 'offsetY', 0));
+        this.setSpace(GetValue$2V(o, 'leftSpace', 0), GetValue$2V(o, 'rightSpace', 0));
+        this.setAlign(GetValue$2V(o, 'align', undefined));
+        this.setBackgroundColor(GetValue$2V(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue$2V(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue$2V(o, 'backgroundBottomY', undefined));
         return this;
       }
     }, {
@@ -9735,22 +9735,22 @@
   };
   var Result = {};
 
-  var GetValue$2T = Phaser.Utils.Objects.GetValue;
+  var GetValue$2U = Phaser.Utils.Objects.GetValue;
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$2T(config, 'start', 0);
-    SetPadding$1(this.wrapPadding, GetValue$2T(config, 'padding', 0));
+    var startIndex = GetValue$2U(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$2U(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
     // Get lineHeight, maxLines
-    var lineHeight = GetValue$2T(config, 'lineHeight');
-    var ascent = GetValue$2T(config, 'ascent', lineHeight);
+    var lineHeight = GetValue$2U(config, 'lineHeight');
+    var ascent = GetValue$2U(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
       // Calculate lineHeight
-      var useDefaultTextHeight = GetValue$2T(config, 'useDefaultTextHeight', false);
-      maxLines = GetValue$2T(config, 'maxLines', 0);
+      var useDefaultTextHeight = GetValue$2U(config, 'useDefaultTextHeight', false);
+      maxLines = GetValue$2U(config, 'maxLines', 0);
       if (this.fixedHeight > 0 && !useDefaultTextHeight) {
         var innerHeight = this.fixedHeight - paddingVertical;
         if (maxLines > 0) {
@@ -9772,13 +9772,13 @@
       // Calculate maxLines
       if (this.fixedHeight > 0) {
         // Calculate maxLines via lineHeight, in fixedHeight mode
-        maxLines = GetValue$2T(config, 'maxLines');
+        maxLines = GetValue$2U(config, 'maxLines');
         if (maxLines === undefined) {
           var innerHeight = this.fixedHeight - paddingVertical;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
-        maxLines = GetValue$2T(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$2U(config, 'maxLines', 0); // Default is show all lines
       }
     }
 
@@ -9789,7 +9789,7 @@
     var showAllLines = maxLines === 0;
 
     // Get wrapWidth
-    var wrapWidth = GetValue$2T(config, 'wrapWidth', undefined);
+    var wrapWidth = GetValue$2U(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
       if (this.fixedWidth > 0) {
         wrapWidth = this.fixedWidth - paddingHorizontal;
@@ -9798,10 +9798,10 @@
       }
     }
 
-    var letterSpacing = GetValue$2T(config, 'letterSpacing', 0);
-    var hAlign = GetValue$2T(config, 'hAlign', 0);
-    var vAlign = GetValue$2T(config, 'vAlign', 0);
-    var charWrap = GetValue$2T(config, 'charWrap', false);
+    var letterSpacing = GetValue$2U(config, 'letterSpacing', 0);
+    var hAlign = GetValue$2U(config, 'hAlign', 0);
+    var vAlign = GetValue$2U(config, 'vAlign', 0);
+    var charWrap = GetValue$2U(config, 'charWrap', false);
     var result = {
       callback: 'runWordWrap',
       start: startIndex,
@@ -9995,18 +9995,18 @@
     }
   };
 
-  var GetValue$2S = Phaser.Utils.Objects.GetValue;
+  var GetValue$2T = Phaser.Utils.Objects.GetValue;
   var RunVerticalWrap$1 = function RunVerticalWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$2S(config, 'start', 0);
-    SetPadding$1(this.wrapPadding, GetValue$2S(config, 'padding', 0));
+    var startIndex = GetValue$2T(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$2T(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
-    var lineWidth = GetValue$2S(config, 'lineWidth', undefined);
+    var lineWidth = GetValue$2T(config, 'lineWidth', undefined);
     var maxLines;
     if (lineWidth === undefined) {
       // Calculate lineWidth via maxLines, in fixedWidth mode
-      maxLines = GetValue$2S(config, 'maxLines', 0);
+      maxLines = GetValue$2T(config, 'maxLines', 0);
       if (this.fixedWidth > 0) {
         var innerWidth = this.fixedWidth - paddingHorizontal;
         lineWidth = innerWidth / maxLines;
@@ -10016,22 +10016,22 @@
     } else {
       if (this.fixedWidth > 0) {
         // Calculate maxLines via lineWidth, in fixedWidth mode
-        maxLines = GetValue$2S(config, 'maxLines', undefined);
+        maxLines = GetValue$2T(config, 'maxLines', undefined);
         if (maxLines === undefined) {
           var innerWidth = this.fixedWidth - paddingHorizontal;
           maxLines = Math.floor(innerWidth / lineWidth) + 1;
         }
       } else {
-        maxLines = GetValue$2S(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$2T(config, 'maxLines', 0); // Default is show all lines
       }
     }
 
     var showAllLines = maxLines === 0;
 
     // Get fixedChildHeight
-    var fixedChildHeight = GetValue$2S(config, 'fixedChildHeight', undefined);
+    var fixedChildHeight = GetValue$2T(config, 'fixedChildHeight', undefined);
     if (fixedChildHeight === undefined) {
-      var charPerLine = GetValue$2S(config, 'charPerLine', undefined);
+      var charPerLine = GetValue$2T(config, 'charPerLine', undefined);
       if (charPerLine !== undefined) {
         var innerHeight = this.fixedHeight - paddingVertical;
         fixedChildHeight = Math.floor(innerHeight / charPerLine);
@@ -10039,7 +10039,7 @@
     }
 
     // Get wrapHeight
-    var wrapHeight = GetValue$2S(config, 'wrapHeight', undefined);
+    var wrapHeight = GetValue$2T(config, 'wrapHeight', undefined);
     if (wrapHeight === undefined) {
       if (this.fixedHeight > 0) {
         wrapHeight = this.fixedHeight - paddingVertical;
@@ -10048,10 +10048,10 @@
       }
     }
 
-    var letterSpacing = GetValue$2S(config, 'letterSpacing', 0);
-    var rtl = GetValue$2S(config, 'rtl', true);
-    var hAlign = GetValue$2S(config, 'hAlign', rtl ? 2 : 0);
-    var vAlign = GetValue$2S(config, 'vAlign', 0);
+    var letterSpacing = GetValue$2T(config, 'letterSpacing', 0);
+    var rtl = GetValue$2T(config, 'rtl', true);
+    var hAlign = GetValue$2T(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue$2T(config, 'vAlign', 0);
     var result = {
       callback: 'runVerticalWrap',
       start: startIndex,
@@ -10189,11 +10189,11 @@
     return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
-  var GetValue$2R = Phaser.Utils.Objects.GetValue;
+  var GetValue$2S = Phaser.Utils.Objects.GetValue;
   var RunWrap = function RunWrap(config) {
-    var wrapCallback = GetValue$2R(this.wrapConfig, 'callback');
+    var wrapCallback = GetValue$2S(this.wrapConfig, 'callback');
     if (!wrapCallback) {
-      wrapCallback = GetValue$2R(config, 'callback', this.runWordWrap);
+      wrapCallback = GetValue$2S(config, 'callback', this.runWordWrap);
     }
     if (typeof wrapCallback === 'string') {
       wrapCallback = this[wrapCallback];
@@ -10703,7 +10703,7 @@
   }();
 
   var IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2Q = Phaser.Utils.Objects.GetValue;
+  var GetValue$2R = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
     var _super = _createSuper(DynamicText);
@@ -10712,14 +10712,14 @@
       _classCallCheck(this, DynamicText);
       if (IsPlainObject$L(x)) {
         config = x;
-        x = GetValue$2Q(config, 'x', 0);
-        y = GetValue$2Q(config, 'y', 0);
-        fixedWidth = GetValue$2Q(config, 'width', 0);
-        fixedHeight = GetValue$2Q(config, 'height', 0);
+        x = GetValue$2R(config, 'x', 0);
+        y = GetValue$2R(config, 'y', 0);
+        fixedWidth = GetValue$2R(config, 'width', 0);
+        fixedHeight = GetValue$2R(config, 'height', 0);
       } else if (IsPlainObject$L(fixedWidth)) {
         config = fixedWidth;
-        fixedWidth = GetValue$2Q(config, 'width', 0);
-        fixedHeight = GetValue$2Q(config, 'height', 0);
+        fixedWidth = GetValue$2R(config, 'width', 0);
+        fixedHeight = GetValue$2R(config, 'height', 0);
       }
       var width = fixedWidth === 0 ? 1 : fixedWidth;
       var height = fixedHeight === 0 ? 1 : fixedHeight;
@@ -10728,21 +10728,21 @@
       _this.autoRound = true;
       _this.padding = SetPadding$1();
       _this.wrapPadding = SetPadding$1();
-      var textStyleConfig = GetValue$2Q(config, 'style', undefined);
+      var textStyleConfig = GetValue$2R(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
-      _this.setTestString(GetValue$2Q(config, 'testString', '|MÉqgy'));
-      _this.background = new Background(_assertThisInitialized(_this), GetValue$2Q(config, 'background', undefined));
-      _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$2Q(config, 'innerBounds', undefined));
+      _this.setTestString(GetValue$2R(config, 'testString', '|MÉqgy'));
+      _this.background = new Background(_assertThisInitialized(_this), GetValue$2R(config, 'background', undefined));
+      _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$2R(config, 'innerBounds', undefined));
       _this.children = [];
       _this.lastAppendedChildren = [];
       _this.lastOverChild = null;
       _this.poolManager = new PoolManager(config);
       _this.setFixedSize(fixedWidth, fixedHeight);
-      _this.setPadding(GetValue$2Q(config, 'padding', 0));
-      _this.setWrapConfig(GetValue$2Q(config, 'wrap', undefined));
-      _this.setChildrenInteractiveEnable(GetValue$2Q(config, 'childrenInteractive', false));
-      var text = GetValue$2Q(config, 'text', undefined);
+      _this.setPadding(GetValue$2R(config, 'padding', 0));
+      _this.setWrapConfig(GetValue$2R(config, 'wrap', undefined));
+      _this.setChildrenInteractiveEnable(GetValue$2R(config, 'childrenInteractive', false));
+      var text = GetValue$2R(config, 'text', undefined);
       if (text) {
         _this.setText(text);
       }
@@ -10780,13 +10780,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.DynamicText', DynamicText);
-
-  var GetSoundManager = function GetSoundManager(game) {
-    if (IsSceneObject(game)) {
-      return game.sys.sound;
-    }
-    return game.sound;
-  };
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -10867,2182 +10860,6 @@
       }
       return [];
     }
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
-
-  var GetValue$2P = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
-
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$2P(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
-        }
-
-        // bob object does not have event emitter
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
-        }
-
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
-        return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
-
-  var GetValue$2O = Phaser.Utils.Objects.GetValue;
-  var TickTask = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
-    function TickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
-      _this._isRunning = false;
-      _this.isPaused = false;
-      _this.tickingState = false;
-      _this.setTickingMode(GetValue$2O(config, 'tickingMode', 1));
-      // boot() later
-      return _this;
-    }
-
-    // override
-    _createClass(TickTask, [{
-      key: "boot",
-      value: function boot() {
-        if (this.tickingMode === 2 && !this.tickingState) {
-          this.startTicking();
-        }
-      }
-
-      // override
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        this.stop();
-        if (this.tickingState) {
-          this.stopTicking();
-        }
-        _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "setTickingMode",
-      value: function setTickingMode(mode) {
-        if (typeof mode === 'string') {
-          mode = TICKINGMODE[mode];
-        }
-        this.tickingMode = mode;
-      }
-
-      // override
-    }, {
-      key: "startTicking",
-      value: function startTicking() {
-        this.tickingState = true;
-      }
-
-      // override
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        this.tickingState = false;
-      }
-    }, {
-      key: "isRunning",
-      get: function get() {
-        return this._isRunning;
-      },
-      set: function set(value) {
-        if (this._isRunning === value) {
-          return;
-        }
-        this._isRunning = value;
-        if (this.tickingMode === 1 && value != this.tickingState) {
-          if (value) {
-            this.startTicking();
-          } else {
-            this.stopTicking();
-          }
-        }
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.isPaused = false;
-        this.isRunning = true;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        // Only can ba paused in running state
-        if (this.isRunning) {
-          this.isPaused = true;
-          this.isRunning = false;
-        }
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        // Only can ba resumed in paused state (paused from running state)
-        if (this.isPaused) {
-          this.isRunning = true;
-        }
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.isPaused = false;
-        this.isRunning = false;
-        return this;
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        this.isPaused = false;
-        this.isRunning = false;
-        this.emit('complete', this.parent, this);
-      }
-    }]);
-    return TickTask;
-  }(ComponentBase);
-  var TICKINGMODE = {
-    'no': 0,
-    'lazy': 1,
-    'always': 2
-  };
-
-  var GetValue$2N = Phaser.Utils.Objects.GetValue;
-  var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
-    _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
-    function SceneUpdateTickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
-
-      // scene update : update, preupdate, postupdate, prerender, render
-      // game update : step, poststep, 
-
-      // If this.scene is not available, use game's 'step' event
-      var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$2N(config, 'tickEventName', defaultEventName);
-      _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
-      return _this;
-    }
-    _createClass(SceneUpdateTickTask, [{
-      key: "startTicking",
-      value: function startTicking() {
-        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-        if (this.isSceneTicker) {
-          this.scene.sys.events.on(this.tickEventName, this.update, this);
-        } else {
-          this.game.events.on(this.tickEventName, this.update, this);
-        }
-      }
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-        if (this.isSceneTicker && this.scene) {
-          // Scene might be destoryed
-          this.scene.sys.events.off(this.tickEventName, this.update, this);
-        } else if (this.game) {
-          this.game.events.off(this.tickEventName, this.update, this);
-        }
-      }
-
-      // update(time, delta) {
-      //     
-      // }
-    }]);
-    return SceneUpdateTickTask;
-  }(TickTask);
-  var IsGameUpdateEvent = function IsGameUpdateEvent(eventName) {
-    return eventName === 'step' || eventName === 'poststep';
-  };
-
-  var GetValue$2M = Phaser.Utils.Objects.GetValue;
-  var Clamp$e = Phaser.Math.Clamp;
-  var Timer$1 = /*#__PURE__*/function () {
-    function Timer(config) {
-      _classCallCheck(this, Timer);
-      this.resetFromJSON(config);
-    }
-    _createClass(Timer, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.state = GetValue$2M(o, 'state', IDLE$8);
-        this.timeScale = GetValue$2M(o, 'timeScale', 1);
-        this.delay = GetValue$2M(o, 'delay', 0);
-        this.repeat = GetValue$2M(o, 'repeat', 0);
-        this.repeatCounter = GetValue$2M(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$2M(o, 'repeatDelay', 0);
-        this.duration = GetValue$2M(o, 'duration', 0);
-        this.nowTime = GetValue$2M(o, 'nowTime', 0);
-        this.justRestart = GetValue$2M(o, 'justRestart', false);
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          state: this.state,
-          timeScale: this.timeScale,
-          delay: this.delay,
-          repeat: this.repeat,
-          repeatCounter: this.repeatCounter,
-          repeatDelay: this.repeatDelay,
-          duration: this.duration,
-          nowTime: this.nowTime,
-          justRestart: this.justRestart
-        };
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {}
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(timeScale) {
-        this.timeScale = timeScale;
-        return this;
-      }
-    }, {
-      key: "setDelay",
-      value: function setDelay(delay) {
-        if (delay === undefined) {
-          delay = 0;
-        }
-        this.delay = delay;
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(duration) {
-        this.duration = duration;
-        return this;
-      }
-    }, {
-      key: "setRepeat",
-      value: function setRepeat(repeat) {
-        this.repeat = repeat;
-        return this;
-      }
-    }, {
-      key: "setRepeatInfinity",
-      value: function setRepeatInfinity() {
-        this.repeat = -1;
-        return this;
-      }
-    }, {
-      key: "setRepeatDelay",
-      value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.nowTime = this.delay > 0 ? -this.delay : 0;
-        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
-        this.repeatCounter = 0;
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.state = IDLE$8;
-        return this;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (this.state === IDLE$8 || this.state === DONE || delta === 0 || this.timeScale === 0) {
-          return;
-        }
-        this.nowTime += delta * this.timeScale;
-        this.justRestart = false;
-        if (this.nowTime >= this.duration) {
-          if (this.repeat === -1 || this.repeatCounter < this.repeat) {
-            this.repeatCounter++;
-            this.justRestart = true;
-            this.nowTime -= this.duration;
-            if (this.repeatDelay > 0) {
-              this.nowTime -= this.repeatDelay;
-              this.state = REPEATDELAY;
-            }
-          } else {
-            this.nowTime = this.duration;
-            this.state = DONE;
-          }
-        } else if (this.nowTime >= 0) {
-          this.state = COUNTDOWN;
-        }
-      }
-    }, {
-      key: "t",
-      get: function get() {
-        var t;
-        switch (this.state) {
-          case IDLE$8:
-          case DELAY:
-          case REPEATDELAY:
-            t = 0;
-            break;
-          case COUNTDOWN:
-            t = this.nowTime / this.duration;
-            break;
-          case DONE:
-            t = 1;
-            break;
-        }
-        return Clamp$e(t, 0, 1);
-      },
-      set: function set(value) {
-        value = Clamp$e(value, -1, 1);
-        if (value < 0) {
-          this.state = DELAY;
-          this.nowTime = -this.delay * value;
-        } else {
-          this.state = COUNTDOWN;
-          this.nowTime = this.duration * value;
-          if (value === 1 && this.repeat !== 0) {
-            this.repeatCounter++;
-          }
-        }
-      }
-    }, {
-      key: "setT",
-      value: function setT(t) {
-        this.t = t;
-        return this;
-      }
-    }, {
-      key: "isIdle",
-      get: function get() {
-        return this.state === IDLE$8;
-      }
-    }, {
-      key: "isDelay",
-      get: function get() {
-        return this.state === DELAY;
-      }
-    }, {
-      key: "isCountDown",
-      get: function get() {
-        return this.state === COUNTDOWN;
-      }
-    }, {
-      key: "isRunning",
-      get: function get() {
-        return this.state === DELAY || this.state === COUNTDOWN;
-      }
-    }, {
-      key: "isDone",
-      get: function get() {
-        return this.state === DONE;
-      }
-    }, {
-      key: "isOddIteration",
-      get: function get() {
-        return (this.repeatCounter & 1) === 1;
-      }
-    }, {
-      key: "isEvenIteration",
-      get: function get() {
-        return (this.repeatCounter & 1) === 0;
-      }
-    }]);
-    return Timer;
-  }();
-  var IDLE$8 = 0;
-  var DELAY = 1;
-  var COUNTDOWN = 2;
-  var REPEATDELAY = 3;
-  var DONE = -1;
-
-  var TimerTickTask = /*#__PURE__*/function (_TickTask) {
-    _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
-    function TimerTickTask(parent, config) {
-      var _this;
-      _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
-      _this.timer = new Timer$1();
-      // boot() later 
-      return _this;
-    }
-
-    // override
-    _createClass(TimerTickTask, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
-        this.timer.destroy();
-        this.timer = undefined;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.timer.start();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.timer.stop();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
-        return this;
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        this.timer.stop();
-        _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
-        return this;
-      }
-    }]);
-    return TimerTickTask;
-  }(SceneUpdateTickTask);
-
-  var GetValue$2L = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue$5 = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
-    _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
-    function EaseValueTaskBase() {
-      _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
-    }
-    _createClass(EaseValueTaskBase, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$2L(o, 'timer'));
-        this.setEnable(GetValue$2L(o, 'enable', true));
-        this.setTarget(GetValue$2L(o, 'target', this.parent));
-        this.setDelay(GetAdvancedValue$5(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue$5(o, 'duration', 1000));
-        this.setEase(GetValue$2L(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$2L(o, 'repeat', 0));
-        return this;
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e == undefined) {
-          e = true;
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "setTarget",
-      value: function setTarget(target) {
-        if (target === undefined) {
-          target = this.parent;
-        }
-        this.target = target;
-        return this;
-      }
-    }, {
-      key: "setDelay",
-      value: function setDelay(time) {
-        this.delay = time;
-        // Assign `this.timer.setRepeat(repeat)` manually
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(time) {
-        this.duration = time;
-        return this;
-      }
-    }, {
-      key: "setRepeat",
-      value: function setRepeat(repeat) {
-        this.repeat = repeat;
-        // Assign `this.timer.setRepeat(repeat)` manually
-        return this;
-      }
-    }, {
-      key: "setRepeatDelay",
-      value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay;
-        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
-        return this;
-      }
-    }, {
-      key: "setEase",
-      value: function setEase(ease) {
-        if (ease === undefined) {
-          ease = 'Linear';
-        }
-        this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "start",
-      value: function start() {
-        // Ignore start if timer is running, i.e. in DELAY, o RUN state
-        if (this.timer.isRunning) {
-          return this;
-        }
-        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "restart",
-      value: function restart() {
-        this.timer.stop();
-        this.start.apply(this, arguments);
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop(toEnd) {
-        if (toEnd === undefined) {
-          toEnd = false;
-        }
-        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
-        if (toEnd) {
-          this.timer.setT(1);
-          this.updateGameObject(this.target, this.timer);
-          this.complete();
-        }
-        return this;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (!this.isRunning || !this.enable || !this.parent.active) {
-          return this;
-        }
-        var target = this.target,
-          timer = this.timer;
-        timer.update(time, delta);
-
-        // isDelay, isCountDown, isDone
-        if (!timer.isDelay) {
-          this.updateGameObject(target, timer);
-        }
-        this.emit('update', target, this);
-        if (timer.isDone) {
-          this.complete();
-        }
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {}
-    }]);
-    return EaseValueTaskBase;
-  }(TimerTickTask);
-
-  var SoundObjectClass = Phaser.Sound.BaseSound;
-  var IsSoundObject = function IsSoundObject(object) {
-    return object instanceof SoundObjectClass;
-  };
-
-  var GetValue$2K = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue$4 = Phaser.Utils.Objects.GetAdvancedValue;
-  var Linear$d = Phaser.Math.Linear;
-  var Fade$2 = /*#__PURE__*/function (_EaseValueTaskBase) {
-    _inherits(Fade, _EaseValueTaskBase);
-    var _super = _createSuper(Fade);
-    function Fade(scene, sound, config) {
-      var _this;
-      _classCallCheck(this, Fade);
-      if (IsSoundObject(scene)) {
-        config = sound;
-        sound = scene;
-        scene = undefined;
-      }
-      sound.active = true;
-      sound.scene = scene;
-      sound.game = sound.manager.game;
-      _this = _super.call(this, sound, config);
-      // this.parent = parent
-      // this.timer
-
-      _this.volume = {};
-      _this.resetFromJSON(config);
-      return _this;
-    }
-    _createClass(Fade, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
-        this.setMode(GetValue$2K(o, 'mode', 0));
-        this.setEnable(GetValue$2K(o, 'enable', true));
-        this.setVolumeRange(GetAdvancedValue$4(o, 'volume.start', this.parent.volume), GetAdvancedValue$4(o, 'volume.end', 0));
-        return this;
-      }
-    }, {
-      key: "setMode",
-      value: function setMode(m) {
-        if (typeof m === 'string') {
-          m = MODE$4[m];
-        }
-        this.mode = m;
-        return this;
-      }
-    }, {
-      key: "setVolumeRange",
-      value: function setVolumeRange(start, end) {
-        this.volume.start = start;
-        this.volume.end = end;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        if (this.timer.isRunning) {
-          return this;
-        }
-        this.parent.setVolume(this.volume.start);
-        this.timer.setDelay(this.delay).setDuration(this.duration);
-        _get(_getPrototypeOf(Fade.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "updateGameObject",
-      value: function updateGameObject(parent, timer) {
-        parent.volume = Linear$d(this.volume.start, this.volume.end, timer.t);
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        _get(_getPrototypeOf(Fade.prototype), "complete", this).call(this);
-        switch (this.mode) {
-          case 1:
-            this.parent.stop();
-            break;
-          case 2:
-            this.parent.destroy();
-            break;
-        }
-        return this;
-      }
-    }]);
-    return Fade;
-  }(EaseValueTaskBase);
-  var MODE$4 = {
-    stop: 1,
-    destroy: 2
-  };
-
-  var FadeIn$1 = function FadeIn(scene, sound, duration, endVolume, startVolume) {
-    if (IsSoundObject(scene)) {
-      startVolume = endVolume;
-      endVolume = duration;
-      duration = sound;
-      sound = scene;
-      scene = undefined;
-    }
-    if (endVolume === undefined) {
-      endVolume = 1;
-    }
-    if (startVolume === undefined) {
-      startVolume = 0;
-    }
-    var config = {
-      mode: 0,
-      volume: {
-        start: startVolume,
-        end: endVolume
-      },
-      duration: duration
-    };
-
-    // create sound instance by key
-    if (typeof sound === 'string') {
-      sound = scene.sys.sound.add(sound);
-    }
-    var fade;
-    if (sound.hasOwnProperty('_fade')) {
-      fade = sound._fade;
-      fade.stop().resetFromJSON(config);
-    } else {
-      fade = new Fade$2(scene, sound, config);
-      sound._fade = fade;
-    }
-    fade.start();
-    if (!sound.isPlaying) {
-      sound.setVolume(startVolume).play();
-    }
-    return sound;
-  };
-
-  var FadeOut = function FadeOut(scene, sound, duration, destroy) {
-    if (IsSoundObject(scene)) {
-      destroy = duration;
-      duration = sound;
-      sound = scene;
-      scene = undefined;
-    }
-    if (destroy === undefined) {
-      destroy = true;
-    }
-    var config = {
-      mode: destroy ? 2 : 1,
-      // 1: stop, 2: destroy
-      volume: {
-        start: sound.volume,
-        end: 0
-      },
-      duration: duration
-    };
-    var fade;
-    if (sound.hasOwnProperty('_fade')) {
-      fade = sound._fade;
-      fade.stop().resetFromJSON(config);
-    } else {
-      fade = new Fade$2(scene, sound, config);
-      sound._fade = fade;
-    }
-    fade.start();
-    if (!sound.isPlaying) {
-      sound.play();
-    }
-    return sound;
-  };
-
-  var BackgroundMusicMethods = {
-    setBackgroundMusicLoopValue: function setBackgroundMusicLoopValue(value) {
-      this.backgroundMusicLoopValue = value;
-      return this;
-    },
-    setBackgroundMusicFadeTime: function setBackgroundMusicFadeTime(time) {
-      this.backgroundMusicFadeTime = time;
-      return this;
-    },
-    getBackgroundMusic: function getBackgroundMusic() {
-      return this.backgroundMusic;
-    },
-    // Internal method
-    setCurrentBackgroundMusic: function setCurrentBackgroundMusic(music) {
-      this.backgroundMusic = music;
-      if (music) {
-        music.setLoop(this.backgroundMusicLoopValue);
-        music.once('complete', function () {
-          if (this.backgroundMusic === music) {
-            this.backgroundMusic.destroy();
-            this.backgroundMusic = undefined;
-          }
-        }, this).once('destroy', function () {
-          if (this.backgroundMusic === music) {
-            this.backgroundMusic = undefined;
-          }
-        }, this);
-        if (!music.isPlaying) {
-          music.play();
-        }
-      }
-      return this;
-    },
-    playBackgroundMusic: function playBackgroundMusic(key) {
-      // Don't re-play the same background music
-      if (this.backgroundMusic && this.backgroundMusic.key === key) {
-        return this;
-      }
-      this.stopBackgroundMusic(); // Stop previous background music
-
-      this.setCurrentBackgroundMusic(this.sound.add(key));
-      if (this.backgroundMusicFadeTime > 0) {
-        this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
-      }
-      return this;
-    },
-    pauseBackgroundMusic: function pauseBackgroundMusic() {
-      if (this.backgroundMusic) {
-        this.backgroundMusic.pause();
-      }
-      return this;
-    },
-    resumeBackgroundMusic: function resumeBackgroundMusic() {
-      if (this.backgroundMusic) {
-        this.backgroundMusic.resume();
-      }
-      return this;
-    },
-    stopBackgroundMusic: function stopBackgroundMusic() {
-      if (this.backgroundMusic) {
-        if (this.backgroundMusicFadeTime > 0) {
-          this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
-        } else {
-          this.backgroundMusic.stop();
-          this.backgroundMusic.destroy();
-          this.backgroundMusic = undefined;
-        }
-      }
-      return this;
-    },
-    fadeInBackgroundMusic: function fadeInBackgroundMusic(time) {
-      if (this.backgroundMusic) {
-        FadeIn$1(this.backgroundMusic, time, this.backgroundMusicVolume, 0);
-      }
-      return this;
-    },
-    fadeOutBackgroundMusic: function fadeOutBackgroundMusic(time, isStopped) {
-      if (this.backgroundMusic) {
-        FadeOut(this.backgroundMusic, time, isStopped);
-      }
-      return this;
-    },
-    crossFadeBackgroundMusic: function crossFadeBackgroundMusic(key, time) {
-      var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
-      this.backgroundMusicFadeTime = 0;
-      this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
-      this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
-      return this;
-    },
-    setBackgroundMusicVolume: function setBackgroundMusicVolume(volume) {
-      this.backgroundMusicVolume = volume;
-      return this;
-    },
-    setBackgroundMusicMute: function setBackgroundMusicMute(mute) {
-      if (mute === undefined) {
-        mute = true;
-      }
-      if (this.backgroundMusic) {
-        this.backgroundMusic.setMute(mute);
-      }
-      return this;
-    }
-  };
-
-  var BackgroundMusic2Methods = {
-    setBackgroundMusic2LoopValue: function setBackgroundMusic2LoopValue(value) {
-      this.backgroundMusic2LoopValue = value;
-      return this;
-    },
-    setBackgroundMusic2FadeTime: function setBackgroundMusic2FadeTime(time) {
-      this.backgroundMusic2FadeTime = time;
-      return this;
-    },
-    getBackgroundMusic2: function getBackgroundMusic2() {
-      return this.backgroundMusic2;
-    },
-    // Internal method
-    setCurrentBackgroundMusic2: function setCurrentBackgroundMusic2(music) {
-      this.backgroundMusic2 = music;
-      if (music) {
-        music.setLoop(this.backgroundMusic2LoopValue);
-        music.once('complete', function () {
-          if (this.backgroundMusic2 === music) {
-            this.backgroundMusic2.destroy();
-            this.backgroundMusic2 = undefined;
-          }
-        }, this).once('destroy', function () {
-          if (this.backgroundMusic2 === music) {
-            this.backgroundMusic2 = undefined;
-          }
-        }, this);
-        if (!music.isPlaying) {
-          music.play();
-        }
-      }
-      return this;
-    },
-    playBackgroundMusic2: function playBackgroundMusic2(key) {
-      // Don't re-play the same background music
-      if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
-        return this;
-      }
-      this.stopBackgroundMusic2(); // Stop previous background music
-
-      this.setCurrentBackgroundMusic2(this.sound.add(key));
-      if (this.backgroundMusic2FadeTime > 0) {
-        this.fadeInBackgroundMusic2(this.backgroundMusic2FadeTime);
-      }
-      return this;
-    },
-    pauseBackgroundMusic2: function pauseBackgroundMusic2() {
-      if (this.backgroundMusic2) {
-        this.backgroundMusic2.pause();
-      }
-      return this;
-    },
-    resumeBackgroundMusic2: function resumeBackgroundMusic2() {
-      if (this.backgroundMusic2) {
-        this.backgroundMusic2.resume();
-      }
-      return this;
-    },
-    stopBackgroundMusic2: function stopBackgroundMusic2() {
-      if (this.backgroundMusic2) {
-        if (this.backgroundMusic2FadeTime > 0) {
-          this.fadeOutBackgroundMusic2(this.backgroundMusic2FadeTime, true);
-        } else {
-          this.backgroundMusic2.stop();
-          this.backgroundMusic2.destroy();
-          this.backgroundMusic2 = undefined;
-        }
-      }
-      return this;
-    },
-    fadeInBackgroundMusic2: function fadeInBackgroundMusic2(time) {
-      if (this.backgroundMusic2) {
-        FadeIn$1(this.backgroundMusic2, time, this.backgroundMusic2Volume, 0);
-      }
-      return this;
-    },
-    fadeOutBackgroundMusic2: function fadeOutBackgroundMusic2(time, isStopped) {
-      if (this.backgroundMusic2) {
-        FadeOut(this.backgroundMusic2, time, isStopped);
-      }
-      return this;
-    },
-    crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
-      var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
-      this.backgroundMusic2FadeTime = 0;
-      this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
-      this.backgroundMusic2FadeTime = backgroundMusic2FadeTimeSave;
-      return this;
-    },
-    setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
-      this.backgroundMusic2Volume = volume;
-      return this;
-    },
-    setBackgroundMusic2Mute: function setBackgroundMusic2Mute(mute) {
-      if (mute === undefined) {
-        mute = true;
-      }
-      if (this.backgroundMusic2) {
-        this.backgroundMusic2.setMute(mute);
-      }
-      return this;
-    }
-  };
-
-  var RemoveItem$a = Phaser.Utils.Array.Remove;
-  var SoundEffectsMethods = {
-    getSoundEffects: function getSoundEffects() {
-      return this.soundEffects;
-    },
-    getLastSoundEffect: function getLastSoundEffect() {
-      return this.soundEffects[this.soundEffects.length - 1];
-    },
-    playSoundEffect: function playSoundEffect(key) {
-      var soundEffect = this.sound.add(key);
-      soundEffect.setVolume(this.soundEffectsVolume);
-      this.soundEffects.push(soundEffect);
-      soundEffect.once('complete', function () {
-        soundEffect.destroy();
-
-        // SoundManager has been destroyed
-        if (!this.sound) {
-          return;
-        }
-        RemoveItem$a(this.soundEffects, soundEffect);
-      }, this).once('destroy', function () {
-        // SoundManager has been destroyed
-        if (!this.sound) {
-          return;
-        }
-        RemoveItem$a(this.soundEffects, soundEffect);
-      }, this).play();
-      return this;
-    },
-    fadeInSoundEffect: function fadeInSoundEffect(time) {
-      var soundEffect = this.getLastSoundEffect();
-      if (soundEffect) {
-        FadeIn$1(soundEffect, time, this.soundEffectsVolume, 0);
-      }
-      return this;
-    },
-    fadeOutSoundEffect: function fadeOutSoundEffect(time, isStopped) {
-      var soundEffect = this.getLastSoundEffect();
-      if (soundEffect) {
-        FadeOut(soundEffect, time, isStopped);
-      }
-      return this;
-    },
-    fadeOutAllSoundEffects: function fadeOutAllSoundEffects(time, isStopped) {
-      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
-        FadeOut(this.soundEffects[i], time, isStopped);
-      }
-      return this;
-    },
-    setSoundEffectVolume: function setSoundEffectVolume(volume, lastSoundEffect) {
-      if (lastSoundEffect === undefined) {
-        lastSoundEffect = false;
-      }
-      if (lastSoundEffect) {
-        // Set volume of last sound effect
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-          soundEffect.setVolume(volume);
-        }
-      } else {
-        // Set volume of all sound effects
-        this.soundEffectsVolume = volume;
-      }
-      return this;
-    },
-    setSoundEffectMute: function setSoundEffectMute(mute, lastSoundEffect) {
-      if (mute === undefined) {
-        mute = true;
-      }
-      if (lastSoundEffect === undefined) {
-        lastSoundEffect = false;
-      }
-      if (lastSoundEffect) {
-        // Set volume of last sound effect
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-          soundEffect.setMute(mute);
-        }
-      } else {
-        // Set volume of all sound effects
-        this.soundEffectsMute = mute;
-      }
-      return this;
-    }
-  };
-
-  var RemoveItem$9 = Phaser.Utils.Array.Remove;
-  var SoundEffects2Methods = {
-    getSoundEffects2: function getSoundEffects2() {
-      return this.soundEffects2;
-    },
-    getLastSoundEffect2: function getLastSoundEffect2() {
-      return this.soundEffects2[this.soundEffects2.length - 1];
-    },
-    playSoundEffect2: function playSoundEffect2(key) {
-      var soundEffect = this.sound.add(key);
-      soundEffect.setVolume(this.soundEffects2Volume);
-      this.soundEffects2.push(soundEffect);
-      soundEffect.once('complete', function () {
-        soundEffect.destroy();
-
-        // SoundManager has been destroyed
-        if (!this.sound) {
-          return;
-        }
-        RemoveItem$9(this.soundEffects2, soundEffect);
-      }, this).once('destroy', function () {
-        // SoundManager has been destroyed
-        if (!this.sound) {
-          return;
-        }
-        RemoveItem$9(this.soundEffects2, soundEffect);
-      }, this).play();
-      return this;
-    },
-    fadeInSoundEffect2: function fadeInSoundEffect2(time) {
-      var soundEffect = this.getLastSoundEffect2();
-      if (soundEffect) {
-        FadeIn$1(soundEffect, time, this.soundEffects2Volume, 0);
-      }
-      return this;
-    },
-    fadeOutSoundEffect2: function fadeOutSoundEffect2(time, isStopped) {
-      var soundEffect = this.getLastSoundEffect2();
-      if (soundEffect) {
-        FadeOut(soundEffect, time, isStopped);
-      }
-      return this;
-    },
-    fadeOutAllSoundEffects2: function fadeOutAllSoundEffects2(time, isStopped) {
-      for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
-        FadeOut(this.soundEffects2[i], time, isStopped);
-      }
-      return this;
-    },
-    setSoundEffect2Volume: function setSoundEffect2Volume(volume, lastSoundEffect) {
-      if (lastSoundEffect === undefined) {
-        lastSoundEffect = false;
-      }
-      if (lastSoundEffect) {
-        // Set volume of last sound effect
-        var soundEffect = this.getLastSoundEffect2();
-        if (soundEffect) {
-          soundEffect.setVolume(volume);
-        }
-      } else {
-        // Set volume of all sound effects
-        this.soundEffects2Volume = volume;
-      }
-      return this;
-    },
-    setSoundEffect2Mute: function setSoundEffect2Mute(mute, lastSoundEffect) {
-      if (mute === undefined) {
-        mute = true;
-      }
-      if (lastSoundEffect === undefined) {
-        lastSoundEffect = false;
-      }
-      if (lastSoundEffect) {
-        // Set volume of last sound effect
-        var soundEffect = this.getLastSoundEffect2();
-        if (soundEffect) {
-          soundEffect.setMute(mute);
-        }
-      } else {
-        // Set volume of all sound effects
-        this.soundEffects2Mute = mute;
-      }
-      return this;
-    }
-  };
-
-  var Methods$g = {};
-  Object.assign(Methods$g, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
-
-  var GetValue$2J = Phaser.Utils.Objects.GetValue;
-  var SoundManager = /*#__PURE__*/function () {
-    function SoundManager(game, config) {
-      _classCallCheck(this, SoundManager);
-      this.sound = GetSoundManager(game);
-
-      // Background music will be (fade out)destroyed when play next one.
-      this.backgroundMusic = undefined;
-      this._backgroundMusicVolume = GetValue$2J(config, 'bgm.volume', 1);
-      this.setBackgroundMusicLoopValue(GetValue$2J(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$2J(config, 'bgm.fade', 500));
-      this.backgroundMusic2 = undefined;
-      this._backgroundMusic2Volume = GetValue$2J(config, 'bgm2.volume', 1);
-      this.setBackgroundMusic2LoopValue(GetValue$2J(config, 'bgm2.loop', true));
-      this.setBackgroundMusic2FadeTime(GetValue$2J(config, 'bgm2.fade', 500));
-
-      // Sound effect will be destroyed when completed
-      this.soundEffects = [];
-      this._soundEffectsVolume = GetValue$2J(config, 'soundEffect.volume', 1);
-      this.soundEffects2 = [];
-      this._soundEffects2Volume = GetValue$2J(config, 'soundEffect2.volume', 1);
-      var initialBackgroundMusic = GetValue$2J(config, 'bgm.initial', undefined);
-      if (initialBackgroundMusic) {
-        this.setCurrentBackgroundMusic(initialBackgroundMusic);
-      }
-      var initialBackgroundMusic2 = GetValue$2J(config, 'bgm2.initial', undefined);
-      if (initialBackgroundMusic2) {
-        this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
-      }
-    }
-    _createClass(SoundManager, [{
-      key: "destroy",
-      value: function destroy() {
-        if (this.backgroundMusic) {
-          this.backgroundMusic.destroy();
-        }
-        this.backgroundMusic = undefined;
-        if (this.backgroundMusic2) {
-          this.backgroundMusic2.destroy();
-        }
-        this.backgroundMusic2 = undefined;
-        if (this.soundEffects.length) {
-          for (var i = this.soundEffects.length - 1; i >= 0; i--) {
-            this.soundEffects[i].destroy();
-          }
-        }
-        this.soundEffects.length = 0;
-        if (this.soundEffects2.length) {
-          for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
-            this.soundEffects2[i].destroy();
-          }
-        }
-        this.soundEffects2.length = 0;
-        this.sound = undefined;
-        return this;
-      }
-    }, {
-      key: "backgroundMusicVolume",
-      get: function get() {
-        return this._backgroundMusicVolume;
-      },
-      set: function set(value) {
-        this._backgroundMusicVolume = value;
-        if (this.backgroundMusic) {
-          this.backgroundMusic.setVolume(value);
-        }
-      }
-    }, {
-      key: "backgroundMusic2Volume",
-      get: function get() {
-        return this._backgroundMusic2Volume;
-      },
-      set: function set(value) {
-        this._backgroundMusic2Volume = value;
-        if (this.backgroundMusic2) {
-          this.backgroundMusic2.setVolume(value);
-        }
-      }
-    }, {
-      key: "soundEffectsVolume",
-      get: function get() {
-        return this._soundEffectsVolume;
-      },
-      set: function set(value) {
-        this._soundEffectsVolume = value;
-        var soundEffects = this.soundEffects;
-        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
-          soundEffects[i].setVolume(value);
-        }
-      }
-    }, {
-      key: "soundEffectsMute",
-      get: function get() {
-        return this._soundEffectsMute;
-      },
-      set: function set(value) {
-        this._soundEffectsMute = value;
-        var soundEffects = this.soundEffects;
-        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
-          soundEffects[i].setMute(value);
-        }
-      }
-    }, {
-      key: "soundEffects2Volume",
-      get: function get() {
-        return this._soundEffects2Volume;
-      },
-      set: function set(value) {
-        this._soundEffects2Volume = value;
-        var soundEffects = this.soundEffects2;
-        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
-          soundEffects[i].setVolume(value);
-        }
-      }
-    }, {
-      key: "soundEffects2Mute",
-      get: function get() {
-        return this._soundEffects2Mute;
-      },
-      set: function set(value) {
-        this._soundEffects2Mute = value;
-        var soundEffects = this.soundEffects;
-        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
-          soundEffects[i].setMute(value);
-        }
-      }
-    }]);
-    return SoundManager;
-  }();
-  Object.assign(SoundManager.prototype, Methods$g);
-
-  var GetValue$2I = Phaser.Utils.Objects.GetValue;
-  var BaseClock = /*#__PURE__*/function (_TickTask) {
-    _inherits(BaseClock, _TickTask);
-    var _super = _createSuper(BaseClock);
-    function BaseClock(parent, config) {
-      var _this;
-      _classCallCheck(this, BaseClock);
-      _this = _super.call(this, parent, config);
-      _this.resetFromJSON(config);
-      _this.boot();
-      return _this;
-    }
-    _createClass(BaseClock, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.isRunning = GetValue$2I(o, 'isRunning', false);
-        this.timeScale = GetValue$2I(o, 'timeScale', 1);
-        this.now = GetValue$2I(o, 'now', 0);
-        return this;
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          isRunning: this.isRunning,
-          timeScale: this.timeScale,
-          now: this.now,
-          tickingMode: this.tickingMode
-        };
-      }
-
-      // Override
-      // startTicking() { }
-
-      // Override
-      // stopTicking() {}
-    }, {
-      key: "start",
-      value: function start(startAt) {
-        if (startAt === undefined) {
-          startAt = 0;
-        }
-        this.delta = 0;
-        this.now = startAt;
-        _get(_getPrototypeOf(BaseClock.prototype), "start", this).call(this);
-        return this;
-      }
-    }, {
-      key: "seek",
-      value: function seek(time) {
-        this.now = time;
-        return this;
-      }
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(value) {
-        this.timeScale = value;
-        return this;
-      }
-    }, {
-      key: "tick",
-      value: function tick(delta) {
-        delta *= this.timeScale;
-        this.now += delta;
-        this.delta = delta;
-        this.emit('update', this.now, this.delta);
-        return this;
-      }
-    }]);
-    return BaseClock;
-  }(TickTask);
-
-  var Clock = /*#__PURE__*/function (_BaseClock) {
-    _inherits(Clock, _BaseClock);
-    var _super = _createSuper(Clock);
-    function Clock() {
-      _classCallCheck(this, Clock);
-      return _super.apply(this, arguments);
-    }
-    _createClass(Clock, [{
-      key: "startTicking",
-      value: function startTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
-        this.scene.sys.events.on('update', this.update, this);
-      }
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "stopTicking", this).call(this);
-        if (this.scene) {
-          // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
-        }
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (!this.isRunning || this.timeScale === 0) {
-          return this;
-        }
-        this.tick(delta);
-        return this;
-      }
-    }]);
-    return Clock;
-  }(BaseClock);
-
-  var Yoyo$1 = function Yoyo(t, threshold) {
-    if (threshold === undefined) {
-      threshold = 0.5;
-    }
-    if (t <= threshold) {
-      t = t / threshold;
-    } else {
-      t = 1 - (t - threshold) / (1 - threshold);
-    }
-    return t;
-  };
-
-  var Clamp$d = Phaser.Math.Clamp;
-  var Timer = /*#__PURE__*/function () {
-    function Timer(timeline, config) {
-      _classCallCheck(this, Timer);
-      this.setTimeline(timeline).reset(config);
-    }
-    _createClass(Timer, [{
-      key: "setTimeline",
-      value: function setTimeline(timeline) {
-        this.timeline = timeline;
-        return this;
-      }
-    }, {
-      key: "setName",
-      value: function setName(name) {
-        this.name = name;
-        return this;
-      }
-    }, {
-      key: "setCallbacks",
-      value: function setCallbacks(target, onStart, onProgress, onComplete) {
-        this.target = target;
-        this.onStart = onStart;
-        this.onProgress = onProgress;
-        this.onComplete = onComplete;
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(duration, yoyo) {
-        if (yoyo === undefined) {
-          yoyo = false;
-        }
-        this.duration = duration;
-        this.remainder = duration;
-        this.t = 0;
-        this.yoyo = yoyo;
-        return this;
-      }
-    }, {
-      key: "setPaused",
-      value: function setPaused(state) {
-        this.isPaused = state;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        this.isPaused = true;
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        this.isPaused = false;
-        return this;
-      }
-    }, {
-      key: "setRemoved",
-      value: function setRemoved(state) {
-        this.removed = state;
-        return this;
-      }
-    }, {
-      key: "remove",
-      value: function remove() {
-        this.removed = true;
-        return this;
-      }
-    }, {
-      key: "seek",
-      value: function seek(t) {
-        this.remainder = this.duration * (1 - t);
-        return this;
-      }
-    }, {
-      key: "reset",
-      value: function reset(o) {
-        this.setName(o.name).setDuration(o.duration, o.yoyo).setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete).setPaused(false).setRemoved(false);
-        return this;
-      }
-    }, {
-      key: "onFree",
-      value: function onFree() {
-        this.setTimeline().setCallbacks();
-      }
-    }, {
-      key: "getProgress",
-      value: function getProgress() {
-        var value = 1 - this.remainder / this.duration;
-        value = Clamp$d(value, 0, 1);
-        if (this.yoyo) {
-          value = Yoyo$1(value);
-        }
-        return value;
-      }
-    }, {
-      key: "setProgress",
-      value: function setProgress(value) {
-        value = Clamp$d(value, 0, 1);
-        this.remainder = this.duration * (1 - value);
-      }
-    }, {
-      key: "runCallback",
-      value: function runCallback(callback) {
-        if (!callback) {
-          return;
-        }
-        callback(this.target, this.t, this);
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (this.removed) {
-          return true;
-        } else if (this.isPaused) {
-          return false;
-        }
-        this.remainder -= delta;
-        this.t = this.getProgress();
-        this.runCallback(this.onProgress);
-        var isCompleted = this.remainder <= 0;
-        if (isCompleted) {
-          this.runCallback(this.onComplete);
-        }
-        return isCompleted;
-      }
-    }]);
-    return Timer;
-  }();
-
-  var TimerPool$1 = /*#__PURE__*/function (_Pool) {
-    _inherits(TimerPool, _Pool);
-    var _super = _createSuper(TimerPool);
-    function TimerPool() {
-      _classCallCheck(this, TimerPool);
-      return _super.apply(this, arguments);
-    }
-    _createClass(TimerPool, [{
-      key: "allocate",
-      value: function allocate() {
-        return this.pop();
-      }
-    }, {
-      key: "free",
-      value: function free(timer) {
-        timer.onFree();
-        this.push(timer);
-      }
-    }, {
-      key: "freeMultiple",
-      value: function freeMultiple(arr) {
-        for (var i = 0, cnt = arr.length; i < cnt; i++) {
-          this.free(arr[i]);
-        }
-        return this;
-      }
-    }]);
-    return TimerPool;
-  }(Stack);
-
-  var GetValue$2H = Phaser.Utils.Objects.GetValue;
-  var TimerPool = new TimerPool$1();
-  var Timeline = /*#__PURE__*/function (_Clock) {
-    _inherits(Timeline, _Clock);
-    var _super = _createSuper(Timeline);
-    function Timeline(parent, config) {
-      var _this;
-      _classCallCheck(this, Timeline);
-      _this = _super.call(this, parent, config);
-      _this.addedTimers = [];
-      _this.timers = [];
-      _this.timerPool = GetValue$2H(config, 'pool', TimerPool);
-      return _this;
-    }
-    _createClass(Timeline, [{
-      key: "shutdown",
-      value: function shutdown() {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        this.timerPool.freeMultiple(this.addedTimers).freeMultiple(this.timers);
-        this.timerPool = undefined;
-        this.addedTimers = undefined;
-        this.timers = undefined;
-        _get(_getPrototypeOf(Timeline.prototype), "shutdown", this).call(this);
-      }
-    }, {
-      key: "addTimer",
-      value: function addTimer(config) {
-        var timer = this.timerPool.allocate();
-        if (!timer) {
-          timer = new Timer(this, config);
-        } else {
-          timer.setTimeline(this).reset(config);
-        }
-        this.addedTimers.push(timer);
-        timer.runCallback(timer.onStart);
-        if (!this.isRunning) {
-          this.start();
-        }
-        return timer;
-      }
-    }, {
-      key: "delayCall",
-      value: function delayCall(delay, callback, args, scope) {
-        var timer = this.addTimer({
-          duration: delay,
-          onComplete: function onComplete(target, t, timer) {
-            if (args === undefined) {
-              args = [];
-            }
-            args.push(timer);
-            callback.apply(scope, args);
-          }
-        });
-        return timer;
-      }
-    }, {
-      key: "delayEvent",
-      value: function delayEvent(delay, eventName) {
-        this.removeDelayEvent(eventName);
-        // Clear existed event
-
-        var timer = this.delayCall(delay, function () {
-          this.removeDelayEvent(eventName); // Clear this timer
-          this.emit(eventName);
-        }, [], this);
-        this.once("_remove.".concat(eventName), function () {
-          timer.remove();
-          timer = undefined;
-        });
-        return this;
-      }
-    }, {
-      key: "removeDelayEvent",
-      value: function removeDelayEvent(eventName) {
-        this.emit("_remove.".concat(eventName));
-        return this;
-      }
-    }, {
-      key: "getTimers",
-      value: function getTimers(name) {
-        var timers = [];
-        var timerQueues = [this.addedTimers, this.timers];
-        for (var ti = 0, tcnt = timerQueues.length; ti < tcnt; ti++) {
-          var timerQueue = timerQueues[ti];
-          for (var i = 0, cnt = timerQueue.length; i < cnt; i++) {
-            var timer = timerQueue[i];
-            if (timer.name === name) {
-              timers.push(timer);
-            }
-          }
-        }
-        return timers;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        var _this$timers;
-        _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
-        if (!this.isRunning) {
-          return;
-        }
-        (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
-        this.addedTimers.length = 0;
-        var pendingTimers = [];
-        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
-          var timer = this.timers[i];
-          var isStopped = timer.update(this.now, this.delta);
-          if (isStopped) {
-            this.timerPool.free(timer); // Free timer
-          } else {
-            pendingTimers.push(timer); // Add to timer queue
-          }
-        }
-
-        this.timers = pendingTimers;
-        if (this.timers.length === 0 && this.addedTimers.length === 0) {
-          this.complete(); // Emit 'complete' event
-        }
-      }
-    }]);
-    return Timeline;
-  }(Clock);
-
-  var WaitCompleteEvent = '_wait.complete';
-  var RemoveWaitEvents = '_remove.wait';
-
-  var WaitTimeMethods = {
-    waitTime: function waitTime(duration) {
-      var timeline = this.parent.timeline;
-      timeline.delayEvent(duration, 'delay');
-
-      // Clear delay event on timeline manually
-      this.parent.once(RemoveWaitEvents, function () {
-        timeline.removeDelayEvent('delay');
-      });
-      return this.waitEvent(timeline, 'delay');
-    }
-  };
-
-  var Split = function Split(s, delimiter) {
-    var regexString = "(?<!\\\\)\\".concat(delimiter);
-    var escapeString = "\\".concat(delimiter);
-    return s.split(new RegExp(regexString, 'g')).map(function (s) {
-      return s.replace(escapeString, delimiter);
-    });
-  };
-
-  var WaitInputMethods = {
-    setClickTarget: function setClickTarget(target) {
-      this.clickTarget = target;
-      if (!target) {
-        this.clickEE = null;
-      } else if (IsSceneObject(target)) {
-        this.clickEE = target.input;
-      } else {
-        // Assume that target is a gameObject
-        this.clickEE = target.setInteractive();
-      }
-    },
-    waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(this.clickEE, 'pointerdown');
-    },
-    waitKeyDown: function waitKeyDown(key) {
-      var eventEmitter = this.scene.input.keyboard;
-      if (typeof key === 'string') {
-        if (key.indexOf('|') === -1) {
-          return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
-        } else {
-          var keys = Split(key, '|');
-          for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
-          }
-          return this.parent;
-        }
-      } else {
-        return this.waitEvent(eventEmitter, 'keydown');
-      }
-    }
-  };
-
-  var WaitGameObjectMethods = {
-    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
-      var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
-      if (tweenTask) {
-        return this.waitEvent(tweenTask, 'complete');
-      }
-      return this.waitTime(0);
-    },
-    waitGameObjectDataFlag: function waitGameObjectDataFlag(goType, name, dataKey, trueFlag) {
-      var gameObject = this.parent.getGameObject(goType, name);
-      if (!gameObject) {
-        return this.waitTime(0);
-      }
-      if (gameObject.getData(dataKey) === trueFlag) {
-        return this.waitTime(0);
-      }
-      var eventName = "changedata-".concat(dataKey);
-      var callback = function callback(gameObject, value, previousValue) {
-        value = !!value;
-        if (value === trueFlag) {
-          gameObject.emit('_dataFlagMatch');
-        }
-      };
-      gameObject.on(eventName, callback);
-      // Clear changedata event on gameobject manually
-      this.parent.once(RemoveWaitEvents, function () {
-        gameObject.off(eventName, callback);
-      });
-      return this.waitEvent(gameObject, '_dataFlagMatch');
-    },
-    waitGameObjectDestroy: function waitGameObjectDestroy(goType, name) {
-      var gameObject = this.parent.getGameObject(goType, name);
-      if (!gameObject) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(gameObject, 'destroy');
-    },
-    waitGameObjectManagerEmpty: function waitGameObjectManagerEmpty(goType) {
-      if (goType) {
-        var gameObjectManager = this.parent.getGameObjectManager(goType);
-        if (!gameObjectManager) {
-          return this.waitTime(0);
-        }
-        return this.waitEvent(gameObjectManager, 'empty');
-      } else {
-        var gameObjectManagers = this.parent.gameObjectManagers;
-        var hasAnyWaitEvent = false;
-        for (var name in gameObjectManagers) {
-          hasAnyWaitEvent = true;
-          this.waitEvent(gameObjectManagers[name], 'empty');
-        }
-        if (!hasAnyWaitEvent) {
-          return this.waitTime(0);
-        }
-        return this.parent;
-      }
-    }
-  };
-
-  var WaitCameraMethods = {
-    setTargetCamera: function setTargetCamera(camera) {
-      this.targetCamera = camera;
-      return this;
-    },
-    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
-      var camera = this.targetCamera;
-      if (!camera) {
-        return this.waitTime(0);
-      }
-      var effect, completeEventName;
-      switch (effectName) {
-        case 'camera.fadein':
-          effect = camera.fadeEffect;
-          completeEventName = 'camerafadeincomplete';
-          break;
-        case 'camera.fadeout':
-          effect = camera.fadeEffect;
-          completeEventName = 'camerafadeoutcomplete';
-          break;
-        case 'camera.flash':
-          effect = camera.flashEffect;
-          completeEventName = 'cameraflashcomplete';
-          break;
-        case 'camera.shake':
-          effect = camera.shakeEffect;
-          completeEventName = 'camerashakecomplete';
-          break;
-        case 'camera.zoom':
-          effect = camera.zoomEffect;
-          completeEventName = 'camerazoomcomplete';
-          break;
-        case 'camera.rotate':
-          effect = camera.rotateToEffect;
-          completeEventName = 'camerarotatecomplete';
-          break;
-        case 'camera.scroll':
-          effect = camera.panEffect;
-          completeEventName = 'camerapancomplete';
-          break;
-      }
-      if (!effect.isRunning) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(camera, completeEventName);
-    }
-  };
-
-  var WaitMusicMethods = {
-    waitSoundEffectComplete: function waitSoundEffectComplete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getLastSoundEffect();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getLastSoundEffect2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    },
-    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
-      if (!this.parent.soundManager) {
-        return this.waitTime(0);
-      }
-      var music = this.parent.soundManager.getBackgroundMusic2();
-      if (!music) {
-        return this.waitTime(0);
-      }
-      return this.waitEvent(music, 'complete');
-    }
-  };
-
-  var WaitAny$1 = function WaitAny(config) {
-    if (!config) {
-      return this.waitTime(0);
-    }
-    var hasAnyWaitEvent = false;
-    for (var name in config) {
-      switch (name) {
-        case 'time':
-          hasAnyWaitEvent = true;
-          this.waitTime(config.time);
-          break;
-        case 'click':
-          hasAnyWaitEvent = true;
-          this.waitClick(config.key);
-          break;
-        case 'key':
-          hasAnyWaitEvent = true;
-          this.waitKeyDown(config.key);
-          break;
-        case 'bgm':
-          hasAnyWaitEvent = true;
-          this.waitBackgroundMusicComplete();
-          break;
-        case 'bgm2':
-          hasAnyWaitEvent = true;
-          this.waitBackgroundMusic2Complete();
-          break;
-        case 'se':
-          hasAnyWaitEvent = true;
-          this.waitSoundEffectComplete();
-          break;
-        case 'se2':
-          hasAnyWaitEvent = true;
-          this.waitSoundEffect2Complete();
-          break;
-        case 'camera':
-          hasAnyWaitEvent = true;
-          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
-          break;
-        default:
-          var names = name.split('.');
-          if (names.length === 2) {
-            var gameObjectName = names[0];
-            var propName = names[1];
-            var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
-            if (!gameObjectManager) {
-              continue;
-            }
-            var value = gameObjectManager.getProperty(gameObjectName, propName);
-            if (typeof value === 'number') {
-              hasAnyWaitEvent = true;
-              this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
-              continue;
-            }
-            var dataKey = propName;
-            var matchFalseFlag = dataKey.startsWith('!');
-            if (matchFalseFlag) {
-              dataKey = dataKey.substring(1);
-            }
-            if (gameObjectManager.hasData(gameObjectName, propName)) {
-              hasAnyWaitEvent = true;
-              this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
-            }
-          }
-          break;
-      }
-    }
-    if (!hasAnyWaitEvent) {
-      this.waitTime(0);
-    }
-    return this.parent;
-  };
-
-  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'preupdate' event
-    var scene = GetSceneObject(gameObject);
-    var timer = scene.time.delayedCall(delay, function () {
-      scene.sys.events.once('preupdate', function () {
-        callback.call(scope, args);
-      });
-    });
-    return timer;
-  };
-
-  var WaitEventManager = /*#__PURE__*/function () {
-    function WaitEventManager(parent, config) {
-      _classCallCheck(this, WaitEventManager);
-      this.parent = parent;
-      this.waitCompleteEventName = GetValue$38(config, 'completeEventName', WaitCompleteEvent);
-      this.setClickTarget(GetValue$38(config, 'clickTarget', this.scene));
-      this.setTargetCamera(GetValue$38(config, 'camera', this.scene.cameras.main));
-      this.waitId = 0;
-    }
-    _createClass(WaitEventManager, [{
-      key: "destroy",
-      value: function destroy() {
-        this.removeWaitEvents();
-        this.clearWaitCompleteCallbacks();
-        this.setClickTarget();
-        this.setTargetCamera();
-      }
-    }, {
-      key: "scene",
-      get: function get() {
-        return this.parent.managersScene;
-      }
-    }, {
-      key: "waitEvent",
-      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
-        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
-        eventEmitter.once(eventName, callback, this);
-        this.parent.once(RemoveWaitEvents, function () {
-          eventEmitter.off(eventName, callback, this);
-        });
-        return this.parent;
-      }
-    }, {
-      key: "getWaitCompleteTriggerCallback",
-      value: function getWaitCompleteTriggerCallback(completeNextTick) {
-        if (completeNextTick === undefined) {
-          completeNextTick = true;
-        }
-        var waitId = this.waitId;
-        var self = this;
-        var completeCallback = function completeCallback() {
-          if (waitId < self.waitId) {
-            return;
-          }
-          self.waitId++;
-          self.removeWaitEvents();
-          self.parent.emit(self.waitCompleteEventName);
-        };
-        if (completeNextTick) {
-          var completeCallbackNextTick = function completeCallbackNextTick() {
-            PreUpdateDelayCall(self.parent, 0, completeCallback);
-          };
-          return completeCallbackNextTick;
-        } else {
-          return completeCallback;
-        }
-      }
-    }, {
-      key: "removeWaitEvents",
-      value: function removeWaitEvents() {
-        this.parent.emit(RemoveWaitEvents);
-        return this;
-      }
-    }, {
-      key: "addWaitCompleteCallback",
-      value: function addWaitCompleteCallback(callback, scope) {
-        this.parent.on(this.waitCompleteEventName, callback, scope);
-        return this;
-      }
-    }, {
-      key: "clearWaitCompleteCallbacks",
-      value: function clearWaitCompleteCallbacks() {
-        this.parent.off(this.waitCompleteEventName);
-        return this;
-      }
-    }]);
-    return WaitEventManager;
-  }();
-  var Methods$f = {
-    waitAny: WaitAny$1
-  };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$f);
-
-  var GetValue$2G = Phaser.Utils.Objects.GetValue;
-  var InitManagers = function InitManagers(scene, config) {
-    this.managersScene = scene;
-    var soundManagerConfig = GetValue$2G(config, 'sounds');
-    if (soundManagerConfig !== false) {
-      this.soundManager = new SoundManager(scene, soundManagerConfig);
-    }
-    this.gameObjectManagers = {};
-    this.timeline = new Timeline(this);
-    this.waitEventManager = new WaitEventManager(this, config);
-    return this;
-  };
-
-  var SetTimeScale = function SetTimeScale(value) {
-    this.timeline.timeScale = value;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].setTimeScale(value);
-    }
-    return this;
-  };
-
-  var GetTimeScale = function GetTimeScale() {
-    return this.timeline.timeScale;
-  };
-
-  var DestroyManagers = function DestroyManagers(fromScene) {
-    this.waitEventManager.destroy();
-    this.waitEventManager = undefined;
-    if (this.soundManager) {
-      this.soundManager.destroy();
-    }
-    this.soundManager = undefined;
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].destroy(fromScene);
-      delete this.gameObjectManagers[name];
-    }
-    if (this.timeline) {
-      this.timeline.destroy();
-    }
-    this.timeline = undefined;
-    this.managersScene = undefined;
   };
 
   var PropertyMethods$1 = {
@@ -13544,7 +11361,7 @@
     Transform();
   };
 
-  var RemoveItem$8 = Phaser.Utils.Array.Remove;
+  var RemoveItem$a = Phaser.Utils.Array.Remove;
   var AddMethods$1 = {
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
@@ -13568,7 +11385,7 @@
         AddViewportCoordinateProperties(gameObject, this.viewport);
       }
       gameObject.once('destroy', function () {
-        RemoveItem$8(this.removedGOs, gameObject);
+        RemoveItem$a(this.removedGOs, gameObject);
         if (this.isEmpty) {
           this.emit('empty');
         }
@@ -13924,17 +11741,17 @@
     return output;
   };
 
-  var GetValue$2F = Phaser.Utils.Objects.GetValue;
+  var GetValue$2Q = Phaser.Utils.Objects.GetValue;
   var DrawBounds$2 = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$2F(config, 'color');
-      lineWidth = GetValue$2F(config, 'lineWidth');
-      fillColor = GetValue$2F(config, 'fillColor');
-      fillAlpha = GetValue$2F(config, 'fillAlpha', 1);
-      padding = GetValue$2F(config, 'padding', 0);
+      strokeColor = GetValue$2Q(config, 'color');
+      lineWidth = GetValue$2Q(config, 'lineWidth');
+      fillColor = GetValue$2Q(config, 'fillColor');
+      fillAlpha = GetValue$2Q(config, 'fillAlpha', 1);
+      padding = GetValue$2Q(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -14008,10 +11825,10 @@
     return this;
   };
 
-  var Methods$e = {
+  var Methods$g = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$e, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$g, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -14037,30 +11854,30 @@
   };
   var globRect = new Rectangle$3();
 
-  var GetValue$2E = Phaser.Utils.Objects.GetValue;
+  var GetValue$2P = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$2E(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$2E(config, 'createGameObject'), GetValue$2E(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$2E(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$2E(config, 'fade', 500);
+      this.BobClass = GetValue$2P(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$2P(config, 'createGameObject'), GetValue$2P(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$2P(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue$2P(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$2E(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$2E(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$2P(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$2P(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$2E(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue$2P(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$2E(config, 'enable', true));
-        this.setViewport(GetValue$2E(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue$2P(config, 'enable', true));
+        this.setViewport(GetValue$2P(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      this.setSymbols(GetValue$2E(config, 'symbols'));
+      this.setSymbols(GetValue$2P(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -14133,7 +11950,2330 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$e);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$g);
+
+  var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
+    if (gameObjects.length <= 1) {
+      return gameObjects;
+    }
+    if (descending === undefined) {
+      descending = false;
+    }
+    var scene = gameObjects[0].scene;
+    var displayList = scene.sys.displayList;
+    displayList.depthSort();
+    if (descending) {
+      gameObjects.sort(function (childA, childB) {
+        return displayList.getIndex(childB) - displayList.getIndex(childA);
+      });
+    } else {
+      gameObjects.sort(function (childA, childB) {
+        return displayList.getIndex(childA) - displayList.getIndex(childB);
+      });
+    }
+    return gameObjects;
+  };
+
+  var GetValue$2O = Phaser.Utils.Objects.GetValue;
+  var LayerManager = /*#__PURE__*/function (_GOManager) {
+    _inherits(LayerManager, _GOManager);
+    var _super = _createSuper(LayerManager);
+    function LayerManager(scene, config) {
+      var _this;
+      _classCallCheck(this, LayerManager);
+      if (config === undefined) {
+        config = {};
+      } else if (Array.isArray(config)) {
+        config = {
+          layers: config
+        };
+      }
+      if (!config.hasOwnProperty('fade')) {
+        config.fade = 0;
+      }
+      config.viewportCoordinate = false;
+      _this = _super.call(this, scene, config);
+      var initLayers = GetValue$2O(config, 'layers');
+      if (initLayers) {
+        for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
+          _this.add(initLayers[i]);
+        }
+      }
+      return _this;
+    }
+    _createClass(LayerManager, [{
+      key: "setCreateGameObjectCallback",
+      value: function setCreateGameObjectCallback(callback, scope) {
+        if (!callback) {
+          callback = CreateLayer;
+        }
+        _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
+        return this;
+      }
+
+      // Override
+    }, {
+      key: "addGO",
+      value: function addGO(name, gameObject) {
+        _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
+        gameObject.name = name;
+        return this;
+      }
+
+      // New methods
+    }, {
+      key: "getLayer",
+      value: function getLayer(name) {
+        return this.getGO(name);
+      }
+    }, {
+      key: "getLayers",
+      value: function getLayers(out) {
+        if (out === undefined) {
+          out = [];
+        }
+        this.forEachGO(function (gameObject) {
+          out.push(gameObject);
+        });
+        SortGameObjectsByDepth(out, false);
+        return out;
+      }
+    }, {
+      key: "addToLayer",
+      value: function addToLayer(name, gameObject) {
+        var layer = this.getGO(name);
+        if (!layer) {
+          console.warn("Can't get layer \"".concat(name, "\""));
+          return;
+        }
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(layer);
+        } else {
+          layer.add(gameObject);
+        }
+        return this;
+      }
+    }]);
+    return LayerManager;
+  }(GOManager);
+  var CreateLayer = function CreateLayer(scene, depth) {
+    var layer = scene.add.layer();
+    if (depth !== undefined) {
+      layer.setDepth(depth);
+    }
+    return layer;
+  };
+
+  var GetSoundManager = function GetSoundManager(game) {
+    if (IsSceneObject(game)) {
+      return game.sys.sound;
+    }
+    return game.sound;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GetValue$2N = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$2N(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var GetValue$2M = Phaser.Utils.Objects.GetValue;
+  var TickTask = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(TickTask, _ComponentBase);
+    var _super = _createSuper(TickTask);
+    function TickTask(parent, config) {
+      var _this;
+      _classCallCheck(this, TickTask);
+      _this = _super.call(this, parent, config);
+      _this._isRunning = false;
+      _this.isPaused = false;
+      _this.tickingState = false;
+      _this.setTickingMode(GetValue$2M(config, 'tickingMode', 1));
+      // boot() later
+      return _this;
+    }
+
+    // override
+    _createClass(TickTask, [{
+      key: "boot",
+      value: function boot() {
+        if (this.tickingMode === 2 && !this.tickingState) {
+          this.startTicking();
+        }
+      }
+
+      // override
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.stop();
+        if (this.tickingState) {
+          this.stopTicking();
+        }
+        _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setTickingMode",
+      value: function setTickingMode(mode) {
+        if (typeof mode === 'string') {
+          mode = TICKINGMODE[mode];
+        }
+        this.tickingMode = mode;
+      }
+
+      // override
+    }, {
+      key: "startTicking",
+      value: function startTicking() {
+        this.tickingState = true;
+      }
+
+      // override
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        this.tickingState = false;
+      }
+    }, {
+      key: "isRunning",
+      get: function get() {
+        return this._isRunning;
+      },
+      set: function set(value) {
+        if (this._isRunning === value) {
+          return;
+        }
+        this._isRunning = value;
+        if (this.tickingMode === 1 && value != this.tickingState) {
+          if (value) {
+            this.startTicking();
+          } else {
+            this.stopTicking();
+          }
+        }
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.isPaused = false;
+        this.isRunning = true;
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        // Only can ba paused in running state
+        if (this.isRunning) {
+          this.isPaused = true;
+          this.isRunning = false;
+        }
+        return this;
+      }
+    }, {
+      key: "resume",
+      value: function resume() {
+        // Only can ba resumed in paused state (paused from running state)
+        if (this.isPaused) {
+          this.isRunning = true;
+        }
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.isPaused = false;
+        this.isRunning = false;
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.isPaused = false;
+        this.isRunning = false;
+        this.emit('complete', this.parent, this);
+      }
+    }]);
+    return TickTask;
+  }(ComponentBase);
+  var TICKINGMODE = {
+    'no': 0,
+    'lazy': 1,
+    'always': 2
+  };
+
+  var GetValue$2L = Phaser.Utils.Objects.GetValue;
+  var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
+    _inherits(SceneUpdateTickTask, _TickTask);
+    var _super = _createSuper(SceneUpdateTickTask);
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+      _classCallCheck(this, SceneUpdateTickTask);
+      _this = _super.call(this, parent, config);
+
+      // scene update : update, preupdate, postupdate, prerender, render
+      // game update : step, poststep, 
+
+      // If this.scene is not available, use game's 'step' event
+      var defaultEventName = _this.scene ? 'update' : 'step';
+      _this.tickEventName = GetValue$2L(config, 'tickEventName', defaultEventName);
+      _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
+      return _this;
+    }
+    _createClass(SceneUpdateTickTask, [{
+      key: "startTicking",
+      value: function startTicking() {
+        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
+        if (this.isSceneTicker) {
+          this.scene.sys.events.on(this.tickEventName, this.update, this);
+        } else {
+          this.game.events.on(this.tickEventName, this.update, this);
+        }
+      }
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
+        if (this.isSceneTicker && this.scene) {
+          // Scene might be destoryed
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
+        } else if (this.game) {
+          this.game.events.off(this.tickEventName, this.update, this);
+        }
+      }
+
+      // update(time, delta) {
+      //     
+      // }
+    }]);
+    return SceneUpdateTickTask;
+  }(TickTask);
+  var IsGameUpdateEvent = function IsGameUpdateEvent(eventName) {
+    return eventName === 'step' || eventName === 'poststep';
+  };
+
+  var GetValue$2K = Phaser.Utils.Objects.GetValue;
+  var Clamp$e = Phaser.Math.Clamp;
+  var Timer$1 = /*#__PURE__*/function () {
+    function Timer(config) {
+      _classCallCheck(this, Timer);
+      this.resetFromJSON(config);
+    }
+    _createClass(Timer, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.state = GetValue$2K(o, 'state', IDLE$8);
+        this.timeScale = GetValue$2K(o, 'timeScale', 1);
+        this.delay = GetValue$2K(o, 'delay', 0);
+        this.repeat = GetValue$2K(o, 'repeat', 0);
+        this.repeatCounter = GetValue$2K(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$2K(o, 'repeatDelay', 0);
+        this.duration = GetValue$2K(o, 'duration', 0);
+        this.nowTime = GetValue$2K(o, 'nowTime', 0);
+        this.justRestart = GetValue$2K(o, 'justRestart', false);
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          state: this.state,
+          timeScale: this.timeScale,
+          delay: this.delay,
+          repeat: this.repeat,
+          repeatCounter: this.repeatCounter,
+          repeatDelay: this.repeatDelay,
+          duration: this.duration,
+          nowTime: this.nowTime,
+          justRestart: this.justRestart
+        };
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {}
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+      }
+    }, {
+      key: "setDelay",
+      value: function setDelay(delay) {
+        if (delay === undefined) {
+          delay = 0;
+        }
+        this.delay = delay;
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(duration) {
+        this.duration = duration;
+        return this;
+      }
+    }, {
+      key: "setRepeat",
+      value: function setRepeat(repeat) {
+        this.repeat = repeat;
+        return this;
+      }
+    }, {
+      key: "setRepeatInfinity",
+      value: function setRepeatInfinity() {
+        this.repeat = -1;
+        return this;
+      }
+    }, {
+      key: "setRepeatDelay",
+      value: function setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.nowTime = this.delay > 0 ? -this.delay : 0;
+        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
+        this.repeatCounter = 0;
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.state = IDLE$8;
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (this.state === IDLE$8 || this.state === DONE || delta === 0 || this.timeScale === 0) {
+          return;
+        }
+        this.nowTime += delta * this.timeScale;
+        this.justRestart = false;
+        if (this.nowTime >= this.duration) {
+          if (this.repeat === -1 || this.repeatCounter < this.repeat) {
+            this.repeatCounter++;
+            this.justRestart = true;
+            this.nowTime -= this.duration;
+            if (this.repeatDelay > 0) {
+              this.nowTime -= this.repeatDelay;
+              this.state = REPEATDELAY;
+            }
+          } else {
+            this.nowTime = this.duration;
+            this.state = DONE;
+          }
+        } else if (this.nowTime >= 0) {
+          this.state = COUNTDOWN;
+        }
+      }
+    }, {
+      key: "t",
+      get: function get() {
+        var t;
+        switch (this.state) {
+          case IDLE$8:
+          case DELAY:
+          case REPEATDELAY:
+            t = 0;
+            break;
+          case COUNTDOWN:
+            t = this.nowTime / this.duration;
+            break;
+          case DONE:
+            t = 1;
+            break;
+        }
+        return Clamp$e(t, 0, 1);
+      },
+      set: function set(value) {
+        value = Clamp$e(value, -1, 1);
+        if (value < 0) {
+          this.state = DELAY;
+          this.nowTime = -this.delay * value;
+        } else {
+          this.state = COUNTDOWN;
+          this.nowTime = this.duration * value;
+          if (value === 1 && this.repeat !== 0) {
+            this.repeatCounter++;
+          }
+        }
+      }
+    }, {
+      key: "setT",
+      value: function setT(t) {
+        this.t = t;
+        return this;
+      }
+    }, {
+      key: "isIdle",
+      get: function get() {
+        return this.state === IDLE$8;
+      }
+    }, {
+      key: "isDelay",
+      get: function get() {
+        return this.state === DELAY;
+      }
+    }, {
+      key: "isCountDown",
+      get: function get() {
+        return this.state === COUNTDOWN;
+      }
+    }, {
+      key: "isRunning",
+      get: function get() {
+        return this.state === DELAY || this.state === COUNTDOWN;
+      }
+    }, {
+      key: "isDone",
+      get: function get() {
+        return this.state === DONE;
+      }
+    }, {
+      key: "isOddIteration",
+      get: function get() {
+        return (this.repeatCounter & 1) === 1;
+      }
+    }, {
+      key: "isEvenIteration",
+      get: function get() {
+        return (this.repeatCounter & 1) === 0;
+      }
+    }]);
+    return Timer;
+  }();
+  var IDLE$8 = 0;
+  var DELAY = 1;
+  var COUNTDOWN = 2;
+  var REPEATDELAY = 3;
+  var DONE = -1;
+
+  var TimerTickTask = /*#__PURE__*/function (_TickTask) {
+    _inherits(TimerTickTask, _TickTask);
+    var _super = _createSuper(TimerTickTask);
+    function TimerTickTask(parent, config) {
+      var _this;
+      _classCallCheck(this, TimerTickTask);
+      _this = _super.call(this, parent, config);
+      _this.timer = new Timer$1();
+      // boot() later 
+      return _this;
+    }
+
+    // override
+    _createClass(TimerTickTask, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
+        this.timer.destroy();
+        this.timer = undefined;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.timer.start();
+        _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.timer.stop();
+        _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.timer.stop();
+        _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
+        return this;
+      }
+    }]);
+    return TimerTickTask;
+  }(SceneUpdateTickTask);
+
+  var GetValue$2J = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue$5 = Phaser.Utils.Objects.GetAdvancedValue;
+  var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+  var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
+    _inherits(EaseValueTaskBase, _TimerTask);
+    var _super = _createSuper(EaseValueTaskBase);
+    function EaseValueTaskBase() {
+      _classCallCheck(this, EaseValueTaskBase);
+      return _super.apply(this, arguments);
+    }
+    _createClass(EaseValueTaskBase, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.timer.resetFromJSON(GetValue$2J(o, 'timer'));
+        this.setEnable(GetValue$2J(o, 'enable', true));
+        this.setTarget(GetValue$2J(o, 'target', this.parent));
+        this.setDelay(GetAdvancedValue$5(o, 'delay', 0));
+        this.setDuration(GetAdvancedValue$5(o, 'duration', 1000));
+        this.setEase(GetValue$2J(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$2J(o, 'repeat', 0));
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e == undefined) {
+          e = true;
+        }
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setTarget",
+      value: function setTarget(target) {
+        if (target === undefined) {
+          target = this.parent;
+        }
+        this.target = target;
+        return this;
+      }
+    }, {
+      key: "setDelay",
+      value: function setDelay(time) {
+        this.delay = time;
+        // Assign `this.timer.setRepeat(repeat)` manually
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(time) {
+        this.duration = time;
+        return this;
+      }
+    }, {
+      key: "setRepeat",
+      value: function setRepeat(repeat) {
+        this.repeat = repeat;
+        // Assign `this.timer.setRepeat(repeat)` manually
+        return this;
+      }
+    }, {
+      key: "setRepeatDelay",
+      value: function setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
+        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
+        return this;
+      }
+    }, {
+      key: "setEase",
+      value: function setEase(ease) {
+        if (ease === undefined) {
+          ease = 'Linear';
+        }
+        this.ease = ease;
+        this.easeFn = GetEaseFunction(ease);
+        return this;
+      }
+
+      // Override
+    }, {
+      key: "start",
+      value: function start() {
+        // Ignore start if timer is running, i.e. in DELAY, o RUN state
+        if (this.timer.isRunning) {
+          return this;
+        }
+        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
+        return this;
+      }
+    }, {
+      key: "restart",
+      value: function restart() {
+        this.timer.stop();
+        this.start.apply(this, arguments);
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop(toEnd) {
+        if (toEnd === undefined) {
+          toEnd = false;
+        }
+        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
+        if (toEnd) {
+          this.timer.setT(1);
+          this.updateGameObject(this.target, this.timer);
+          this.complete();
+        }
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (!this.isRunning || !this.enable || !this.parent.active) {
+          return this;
+        }
+        var target = this.target,
+          timer = this.timer;
+        timer.update(time, delta);
+
+        // isDelay, isCountDown, isDone
+        if (!timer.isDelay) {
+          this.updateGameObject(target, timer);
+        }
+        this.emit('update', target, this);
+        if (timer.isDone) {
+          this.complete();
+        }
+        return this;
+      }
+
+      // Override
+    }, {
+      key: "updateGameObject",
+      value: function updateGameObject(target, timer) {}
+    }]);
+    return EaseValueTaskBase;
+  }(TimerTickTask);
+
+  var SoundObjectClass = Phaser.Sound.BaseSound;
+  var IsSoundObject = function IsSoundObject(object) {
+    return object instanceof SoundObjectClass;
+  };
+
+  var GetValue$2I = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue$4 = Phaser.Utils.Objects.GetAdvancedValue;
+  var Linear$d = Phaser.Math.Linear;
+  var Fade$2 = /*#__PURE__*/function (_EaseValueTaskBase) {
+    _inherits(Fade, _EaseValueTaskBase);
+    var _super = _createSuper(Fade);
+    function Fade(scene, sound, config) {
+      var _this;
+      _classCallCheck(this, Fade);
+      if (IsSoundObject(scene)) {
+        config = sound;
+        sound = scene;
+        scene = undefined;
+      }
+      sound.active = true;
+      sound.scene = scene;
+      sound.game = sound.manager.game;
+      _this = _super.call(this, sound, config);
+      // this.parent = parent
+      // this.timer
+
+      _this.volume = {};
+      _this.resetFromJSON(config);
+      return _this;
+    }
+    _createClass(Fade, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
+        this.setMode(GetValue$2I(o, 'mode', 0));
+        this.setEnable(GetValue$2I(o, 'enable', true));
+        this.setVolumeRange(GetAdvancedValue$4(o, 'volume.start', this.parent.volume), GetAdvancedValue$4(o, 'volume.end', 0));
+        return this;
+      }
+    }, {
+      key: "setMode",
+      value: function setMode(m) {
+        if (typeof m === 'string') {
+          m = MODE$4[m];
+        }
+        this.mode = m;
+        return this;
+      }
+    }, {
+      key: "setVolumeRange",
+      value: function setVolumeRange(start, end) {
+        this.volume.start = start;
+        this.volume.end = end;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        if (this.timer.isRunning) {
+          return this;
+        }
+        this.parent.setVolume(this.volume.start);
+        this.timer.setDelay(this.delay).setDuration(this.duration);
+        _get(_getPrototypeOf(Fade.prototype), "start", this).call(this);
+        return this;
+      }
+    }, {
+      key: "updateGameObject",
+      value: function updateGameObject(parent, timer) {
+        parent.volume = Linear$d(this.volume.start, this.volume.end, timer.t);
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        _get(_getPrototypeOf(Fade.prototype), "complete", this).call(this);
+        switch (this.mode) {
+          case 1:
+            this.parent.stop();
+            break;
+          case 2:
+            this.parent.destroy();
+            break;
+        }
+        return this;
+      }
+    }]);
+    return Fade;
+  }(EaseValueTaskBase);
+  var MODE$4 = {
+    stop: 1,
+    destroy: 2
+  };
+
+  var FadeIn$1 = function FadeIn(scene, sound, duration, endVolume, startVolume) {
+    if (IsSoundObject(scene)) {
+      startVolume = endVolume;
+      endVolume = duration;
+      duration = sound;
+      sound = scene;
+      scene = undefined;
+    }
+    if (endVolume === undefined) {
+      endVolume = 1;
+    }
+    if (startVolume === undefined) {
+      startVolume = 0;
+    }
+    var config = {
+      mode: 0,
+      volume: {
+        start: startVolume,
+        end: endVolume
+      },
+      duration: duration
+    };
+
+    // create sound instance by key
+    if (typeof sound === 'string') {
+      sound = scene.sys.sound.add(sound);
+    }
+    var fade;
+    if (sound.hasOwnProperty('_fade')) {
+      fade = sound._fade;
+      fade.stop().resetFromJSON(config);
+    } else {
+      fade = new Fade$2(scene, sound, config);
+      sound._fade = fade;
+    }
+    fade.start();
+    if (!sound.isPlaying) {
+      sound.setVolume(startVolume).play();
+    }
+    return sound;
+  };
+
+  var FadeOut = function FadeOut(scene, sound, duration, destroy) {
+    if (IsSoundObject(scene)) {
+      destroy = duration;
+      duration = sound;
+      sound = scene;
+      scene = undefined;
+    }
+    if (destroy === undefined) {
+      destroy = true;
+    }
+    var config = {
+      mode: destroy ? 2 : 1,
+      // 1: stop, 2: destroy
+      volume: {
+        start: sound.volume,
+        end: 0
+      },
+      duration: duration
+    };
+    var fade;
+    if (sound.hasOwnProperty('_fade')) {
+      fade = sound._fade;
+      fade.stop().resetFromJSON(config);
+    } else {
+      fade = new Fade$2(scene, sound, config);
+      sound._fade = fade;
+    }
+    fade.start();
+    if (!sound.isPlaying) {
+      sound.play();
+    }
+    return sound;
+  };
+
+  var BackgroundMusicMethods = {
+    setBackgroundMusicLoopValue: function setBackgroundMusicLoopValue(value) {
+      this.backgroundMusicLoopValue = value;
+      return this;
+    },
+    setBackgroundMusicFadeTime: function setBackgroundMusicFadeTime(time) {
+      this.backgroundMusicFadeTime = time;
+      return this;
+    },
+    getBackgroundMusic: function getBackgroundMusic() {
+      return this.backgroundMusic;
+    },
+    // Internal method
+    setCurrentBackgroundMusic: function setCurrentBackgroundMusic(music) {
+      this.backgroundMusic = music;
+      if (music) {
+        music.setLoop(this.backgroundMusicLoopValue);
+        music.once('complete', function () {
+          if (this.backgroundMusic === music) {
+            this.backgroundMusic.destroy();
+            this.backgroundMusic = undefined;
+          }
+        }, this).once('destroy', function () {
+          if (this.backgroundMusic === music) {
+            this.backgroundMusic = undefined;
+          }
+        }, this);
+        if (!music.isPlaying) {
+          music.play();
+        }
+      }
+      return this;
+    },
+    playBackgroundMusic: function playBackgroundMusic(key) {
+      // Don't re-play the same background music
+      if (this.backgroundMusic && this.backgroundMusic.key === key) {
+        return this;
+      }
+      this.stopBackgroundMusic(); // Stop previous background music
+
+      this.setCurrentBackgroundMusic(this.sound.add(key));
+      if (this.backgroundMusicFadeTime > 0) {
+        this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
+      }
+      return this;
+    },
+    pauseBackgroundMusic: function pauseBackgroundMusic() {
+      if (this.backgroundMusic) {
+        this.backgroundMusic.pause();
+      }
+      return this;
+    },
+    resumeBackgroundMusic: function resumeBackgroundMusic() {
+      if (this.backgroundMusic) {
+        this.backgroundMusic.resume();
+      }
+      return this;
+    },
+    stopBackgroundMusic: function stopBackgroundMusic() {
+      if (this.backgroundMusic) {
+        if (this.backgroundMusicFadeTime > 0) {
+          this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
+        } else {
+          this.backgroundMusic.stop();
+          this.backgroundMusic.destroy();
+          this.backgroundMusic = undefined;
+        }
+      }
+      return this;
+    },
+    fadeInBackgroundMusic: function fadeInBackgroundMusic(time) {
+      if (this.backgroundMusic) {
+        FadeIn$1(this.backgroundMusic, time, this.backgroundMusicVolume, 0);
+      }
+      return this;
+    },
+    fadeOutBackgroundMusic: function fadeOutBackgroundMusic(time, isStopped) {
+      if (this.backgroundMusic) {
+        FadeOut(this.backgroundMusic, time, isStopped);
+      }
+      return this;
+    },
+    crossFadeBackgroundMusic: function crossFadeBackgroundMusic(key, time) {
+      var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
+      this.backgroundMusicFadeTime = 0;
+      this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
+      this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
+      return this;
+    },
+    setBackgroundMusicVolume: function setBackgroundMusicVolume(volume) {
+      this.backgroundMusicVolume = volume;
+      return this;
+    },
+    setBackgroundMusicMute: function setBackgroundMusicMute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic) {
+        this.backgroundMusic.setMute(mute);
+      }
+      return this;
+    }
+  };
+
+  var BackgroundMusic2Methods = {
+    setBackgroundMusic2LoopValue: function setBackgroundMusic2LoopValue(value) {
+      this.backgroundMusic2LoopValue = value;
+      return this;
+    },
+    setBackgroundMusic2FadeTime: function setBackgroundMusic2FadeTime(time) {
+      this.backgroundMusic2FadeTime = time;
+      return this;
+    },
+    getBackgroundMusic2: function getBackgroundMusic2() {
+      return this.backgroundMusic2;
+    },
+    // Internal method
+    setCurrentBackgroundMusic2: function setCurrentBackgroundMusic2(music) {
+      this.backgroundMusic2 = music;
+      if (music) {
+        music.setLoop(this.backgroundMusic2LoopValue);
+        music.once('complete', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2.destroy();
+            this.backgroundMusic2 = undefined;
+          }
+        }, this).once('destroy', function () {
+          if (this.backgroundMusic2 === music) {
+            this.backgroundMusic2 = undefined;
+          }
+        }, this);
+        if (!music.isPlaying) {
+          music.play();
+        }
+      }
+      return this;
+    },
+    playBackgroundMusic2: function playBackgroundMusic2(key) {
+      // Don't re-play the same background music
+      if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
+        return this;
+      }
+      this.stopBackgroundMusic2(); // Stop previous background music
+
+      this.setCurrentBackgroundMusic2(this.sound.add(key));
+      if (this.backgroundMusic2FadeTime > 0) {
+        this.fadeInBackgroundMusic2(this.backgroundMusic2FadeTime);
+      }
+      return this;
+    },
+    pauseBackgroundMusic2: function pauseBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.pause();
+      }
+      return this;
+    },
+    resumeBackgroundMusic2: function resumeBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.resume();
+      }
+      return this;
+    },
+    stopBackgroundMusic2: function stopBackgroundMusic2() {
+      if (this.backgroundMusic2) {
+        if (this.backgroundMusic2FadeTime > 0) {
+          this.fadeOutBackgroundMusic2(this.backgroundMusic2FadeTime, true);
+        } else {
+          this.backgroundMusic2.stop();
+          this.backgroundMusic2.destroy();
+          this.backgroundMusic2 = undefined;
+        }
+      }
+      return this;
+    },
+    fadeInBackgroundMusic2: function fadeInBackgroundMusic2(time) {
+      if (this.backgroundMusic2) {
+        FadeIn$1(this.backgroundMusic2, time, this.backgroundMusic2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutBackgroundMusic2: function fadeOutBackgroundMusic2(time, isStopped) {
+      if (this.backgroundMusic2) {
+        FadeOut(this.backgroundMusic2, time, isStopped);
+      }
+      return this;
+    },
+    crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
+      var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
+      this.backgroundMusic2FadeTime = 0;
+      this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
+      this.backgroundMusic2FadeTime = backgroundMusic2FadeTimeSave;
+      return this;
+    },
+    setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
+      this.backgroundMusic2Volume = volume;
+      return this;
+    },
+    setBackgroundMusic2Mute: function setBackgroundMusic2Mute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.setMute(mute);
+      }
+      return this;
+    }
+  };
+
+  var RemoveItem$9 = Phaser.Utils.Array.Remove;
+  var SoundEffectsMethods = {
+    getSoundEffects: function getSoundEffects() {
+      return this.soundEffects;
+    },
+    getLastSoundEffect: function getLastSoundEffect() {
+      return this.soundEffects[this.soundEffects.length - 1];
+    },
+    playSoundEffect: function playSoundEffect(key) {
+      var soundEffect = this.sound.add(key);
+      soundEffect.setVolume(this.soundEffectsVolume);
+      this.soundEffects.push(soundEffect);
+      soundEffect.once('complete', function () {
+        soundEffect.destroy();
+
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$9(this.soundEffects, soundEffect);
+      }, this).once('destroy', function () {
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$9(this.soundEffects, soundEffect);
+      }, this).play();
+      return this;
+    },
+    fadeInSoundEffect: function fadeInSoundEffect(time) {
+      var soundEffect = this.getLastSoundEffect();
+      if (soundEffect) {
+        FadeIn$1(soundEffect, time, this.soundEffectsVolume, 0);
+      }
+      return this;
+    },
+    fadeOutSoundEffect: function fadeOutSoundEffect(time, isStopped) {
+      var soundEffect = this.getLastSoundEffect();
+      if (soundEffect) {
+        FadeOut(soundEffect, time, isStopped);
+      }
+      return this;
+    },
+    fadeOutAllSoundEffects: function fadeOutAllSoundEffects(time, isStopped) {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        FadeOut(this.soundEffects[i], time, isStopped);
+      }
+      return this;
+    },
+    setSoundEffectVolume: function setSoundEffectVolume(volume, lastSoundEffect) {
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+          soundEffect.setVolume(volume);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffectsVolume = volume;
+      }
+      return this;
+    },
+    setSoundEffectMute: function setSoundEffectMute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffectsMute = mute;
+      }
+      return this;
+    }
+  };
+
+  var RemoveItem$8 = Phaser.Utils.Array.Remove;
+  var SoundEffects2Methods = {
+    getSoundEffects2: function getSoundEffects2() {
+      return this.soundEffects2;
+    },
+    getLastSoundEffect2: function getLastSoundEffect2() {
+      return this.soundEffects2[this.soundEffects2.length - 1];
+    },
+    playSoundEffect2: function playSoundEffect2(key) {
+      var soundEffect = this.sound.add(key);
+      soundEffect.setVolume(this.soundEffects2Volume);
+      this.soundEffects2.push(soundEffect);
+      soundEffect.once('complete', function () {
+        soundEffect.destroy();
+
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$8(this.soundEffects2, soundEffect);
+      }, this).once('destroy', function () {
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$8(this.soundEffects2, soundEffect);
+      }, this).play();
+      return this;
+    },
+    fadeInSoundEffect2: function fadeInSoundEffect2(time) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeIn$1(soundEffect, time, this.soundEffects2Volume, 0);
+      }
+      return this;
+    },
+    fadeOutSoundEffect2: function fadeOutSoundEffect2(time, isStopped) {
+      var soundEffect = this.getLastSoundEffect2();
+      if (soundEffect) {
+        FadeOut(soundEffect, time, isStopped);
+      }
+      return this;
+    },
+    fadeOutAllSoundEffects2: function fadeOutAllSoundEffects2(time, isStopped) {
+      for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+        FadeOut(this.soundEffects2[i], time, isStopped);
+      }
+      return this;
+    },
+    setSoundEffect2Volume: function setSoundEffect2Volume(volume, lastSoundEffect) {
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setVolume(volume);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Volume = volume;
+      }
+      return this;
+    },
+    setSoundEffect2Mute: function setSoundEffect2Mute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Mute = mute;
+      }
+      return this;
+    }
+  };
+
+  var Methods$f = {};
+  Object.assign(Methods$f, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+
+  var GetValue$2H = Phaser.Utils.Objects.GetValue;
+  var SoundManager = /*#__PURE__*/function () {
+    function SoundManager(game, config) {
+      _classCallCheck(this, SoundManager);
+      this.sound = GetSoundManager(game);
+
+      // Background music will be (fade out)destroyed when play next one.
+      this.backgroundMusic = undefined;
+      this._backgroundMusicVolume = GetValue$2H(config, 'bgm.volume', 1);
+      this.setBackgroundMusicLoopValue(GetValue$2H(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$2H(config, 'bgm.fade', 500));
+      this.backgroundMusic2 = undefined;
+      this._backgroundMusic2Volume = GetValue$2H(config, 'bgm2.volume', 1);
+      this.setBackgroundMusic2LoopValue(GetValue$2H(config, 'bgm2.loop', true));
+      this.setBackgroundMusic2FadeTime(GetValue$2H(config, 'bgm2.fade', 500));
+
+      // Sound effect will be destroyed when completed
+      this.soundEffects = [];
+      this._soundEffectsVolume = GetValue$2H(config, 'soundEffect.volume', 1);
+      this.soundEffects2 = [];
+      this._soundEffects2Volume = GetValue$2H(config, 'soundEffect2.volume', 1);
+      var initialBackgroundMusic = GetValue$2H(config, 'bgm.initial', undefined);
+      if (initialBackgroundMusic) {
+        this.setCurrentBackgroundMusic(initialBackgroundMusic);
+      }
+      var initialBackgroundMusic2 = GetValue$2H(config, 'bgm2.initial', undefined);
+      if (initialBackgroundMusic2) {
+        this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
+      }
+    }
+    _createClass(SoundManager, [{
+      key: "destroy",
+      value: function destroy() {
+        if (this.backgroundMusic) {
+          this.backgroundMusic.destroy();
+        }
+        this.backgroundMusic = undefined;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.destroy();
+        }
+        this.backgroundMusic2 = undefined;
+        if (this.soundEffects.length) {
+          for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+            this.soundEffects[i].destroy();
+          }
+        }
+        this.soundEffects.length = 0;
+        if (this.soundEffects2.length) {
+          for (var i = this.soundEffects2.length - 1; i >= 0; i--) {
+            this.soundEffects2[i].destroy();
+          }
+        }
+        this.soundEffects2.length = 0;
+        this.sound = undefined;
+        return this;
+      }
+    }, {
+      key: "backgroundMusicVolume",
+      get: function get() {
+        return this._backgroundMusicVolume;
+      },
+      set: function set(value) {
+        this._backgroundMusicVolume = value;
+        if (this.backgroundMusic) {
+          this.backgroundMusic.setVolume(value);
+        }
+      }
+    }, {
+      key: "backgroundMusic2Volume",
+      get: function get() {
+        return this._backgroundMusic2Volume;
+      },
+      set: function set(value) {
+        this._backgroundMusic2Volume = value;
+        if (this.backgroundMusic2) {
+          this.backgroundMusic2.setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffectsVolume",
+      get: function get() {
+        return this._soundEffectsVolume;
+      },
+      set: function set(value) {
+        this._soundEffectsVolume = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffectsMute",
+      get: function get() {
+        return this._soundEffectsMute;
+      },
+      set: function set(value) {
+        this._soundEffectsMute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Volume",
+      get: function get() {
+        return this._soundEffects2Volume;
+      },
+      set: function set(value) {
+        this._soundEffects2Volume = value;
+        var soundEffects = this.soundEffects2;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Mute",
+      get: function get() {
+        return this._soundEffects2Mute;
+      },
+      set: function set(value) {
+        this._soundEffects2Mute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
+        }
+      }
+    }]);
+    return SoundManager;
+  }();
+  Object.assign(SoundManager.prototype, Methods$f);
+
+  var GetValue$2G = Phaser.Utils.Objects.GetValue;
+  var BaseClock = /*#__PURE__*/function (_TickTask) {
+    _inherits(BaseClock, _TickTask);
+    var _super = _createSuper(BaseClock);
+    function BaseClock(parent, config) {
+      var _this;
+      _classCallCheck(this, BaseClock);
+      _this = _super.call(this, parent, config);
+      _this.resetFromJSON(config);
+      _this.boot();
+      return _this;
+    }
+    _createClass(BaseClock, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.isRunning = GetValue$2G(o, 'isRunning', false);
+        this.timeScale = GetValue$2G(o, 'timeScale', 1);
+        this.now = GetValue$2G(o, 'now', 0);
+        return this;
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          isRunning: this.isRunning,
+          timeScale: this.timeScale,
+          now: this.now,
+          tickingMode: this.tickingMode
+        };
+      }
+
+      // Override
+      // startTicking() { }
+
+      // Override
+      // stopTicking() {}
+    }, {
+      key: "start",
+      value: function start(startAt) {
+        if (startAt === undefined) {
+          startAt = 0;
+        }
+        this.delta = 0;
+        this.now = startAt;
+        _get(_getPrototypeOf(BaseClock.prototype), "start", this).call(this);
+        return this;
+      }
+    }, {
+      key: "seek",
+      value: function seek(time) {
+        this.now = time;
+        return this;
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(value) {
+        this.timeScale = value;
+        return this;
+      }
+    }, {
+      key: "tick",
+      value: function tick(delta) {
+        delta *= this.timeScale;
+        this.now += delta;
+        this.delta = delta;
+        this.emit('update', this.now, this.delta);
+        return this;
+      }
+    }]);
+    return BaseClock;
+  }(TickTask);
+
+  var Clock = /*#__PURE__*/function (_BaseClock) {
+    _inherits(Clock, _BaseClock);
+    var _super = _createSuper(Clock);
+    function Clock() {
+      _classCallCheck(this, Clock);
+      return _super.apply(this, arguments);
+    }
+    _createClass(Clock, [{
+      key: "startTicking",
+      value: function startTicking() {
+        _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
+        this.scene.sys.events.on('update', this.update, this);
+      }
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        _get(_getPrototypeOf(Clock.prototype), "stopTicking", this).call(this);
+        if (this.scene) {
+          // Scene might be destoryed
+          this.scene.sys.events.off('update', this.update, this);
+        }
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (!this.isRunning || this.timeScale === 0) {
+          return this;
+        }
+        this.tick(delta);
+        return this;
+      }
+    }]);
+    return Clock;
+  }(BaseClock);
+
+  var Yoyo$1 = function Yoyo(t, threshold) {
+    if (threshold === undefined) {
+      threshold = 0.5;
+    }
+    if (t <= threshold) {
+      t = t / threshold;
+    } else {
+      t = 1 - (t - threshold) / (1 - threshold);
+    }
+    return t;
+  };
+
+  var Clamp$d = Phaser.Math.Clamp;
+  var Timer = /*#__PURE__*/function () {
+    function Timer(timeline, config) {
+      _classCallCheck(this, Timer);
+      this.setTimeline(timeline).reset(config);
+    }
+    _createClass(Timer, [{
+      key: "setTimeline",
+      value: function setTimeline(timeline) {
+        this.timeline = timeline;
+        return this;
+      }
+    }, {
+      key: "setName",
+      value: function setName(name) {
+        this.name = name;
+        return this;
+      }
+    }, {
+      key: "setCallbacks",
+      value: function setCallbacks(target, onStart, onProgress, onComplete) {
+        this.target = target;
+        this.onStart = onStart;
+        this.onProgress = onProgress;
+        this.onComplete = onComplete;
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(duration, yoyo) {
+        if (yoyo === undefined) {
+          yoyo = false;
+        }
+        this.duration = duration;
+        this.remainder = duration;
+        this.t = 0;
+        this.yoyo = yoyo;
+        return this;
+      }
+    }, {
+      key: "setPaused",
+      value: function setPaused(state) {
+        this.isPaused = state;
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        this.isPaused = true;
+        return this;
+      }
+    }, {
+      key: "resume",
+      value: function resume() {
+        this.isPaused = false;
+        return this;
+      }
+    }, {
+      key: "setRemoved",
+      value: function setRemoved(state) {
+        this.removed = state;
+        return this;
+      }
+    }, {
+      key: "remove",
+      value: function remove() {
+        this.removed = true;
+        return this;
+      }
+    }, {
+      key: "seek",
+      value: function seek(t) {
+        this.remainder = this.duration * (1 - t);
+        return this;
+      }
+    }, {
+      key: "reset",
+      value: function reset(o) {
+        this.setName(o.name).setDuration(o.duration, o.yoyo).setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete).setPaused(false).setRemoved(false);
+        return this;
+      }
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.setTimeline().setCallbacks();
+      }
+    }, {
+      key: "getProgress",
+      value: function getProgress() {
+        var value = 1 - this.remainder / this.duration;
+        value = Clamp$d(value, 0, 1);
+        if (this.yoyo) {
+          value = Yoyo$1(value);
+        }
+        return value;
+      }
+    }, {
+      key: "setProgress",
+      value: function setProgress(value) {
+        value = Clamp$d(value, 0, 1);
+        this.remainder = this.duration * (1 - value);
+      }
+    }, {
+      key: "runCallback",
+      value: function runCallback(callback) {
+        if (!callback) {
+          return;
+        }
+        callback(this.target, this.t, this);
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (this.removed) {
+          return true;
+        } else if (this.isPaused) {
+          return false;
+        }
+        this.remainder -= delta;
+        this.t = this.getProgress();
+        this.runCallback(this.onProgress);
+        var isCompleted = this.remainder <= 0;
+        if (isCompleted) {
+          this.runCallback(this.onComplete);
+        }
+        return isCompleted;
+      }
+    }]);
+    return Timer;
+  }();
+
+  var TimerPool$1 = /*#__PURE__*/function (_Pool) {
+    _inherits(TimerPool, _Pool);
+    var _super = _createSuper(TimerPool);
+    function TimerPool() {
+      _classCallCheck(this, TimerPool);
+      return _super.apply(this, arguments);
+    }
+    _createClass(TimerPool, [{
+      key: "allocate",
+      value: function allocate() {
+        return this.pop();
+      }
+    }, {
+      key: "free",
+      value: function free(timer) {
+        timer.onFree();
+        this.push(timer);
+      }
+    }, {
+      key: "freeMultiple",
+      value: function freeMultiple(arr) {
+        for (var i = 0, cnt = arr.length; i < cnt; i++) {
+          this.free(arr[i]);
+        }
+        return this;
+      }
+    }]);
+    return TimerPool;
+  }(Stack);
+
+  var GetValue$2F = Phaser.Utils.Objects.GetValue;
+  var TimerPool = new TimerPool$1();
+  var Timeline = /*#__PURE__*/function (_Clock) {
+    _inherits(Timeline, _Clock);
+    var _super = _createSuper(Timeline);
+    function Timeline(parent, config) {
+      var _this;
+      _classCallCheck(this, Timeline);
+      _this = _super.call(this, parent, config);
+      _this.addedTimers = [];
+      _this.timers = [];
+      _this.timerPool = GetValue$2F(config, 'pool', TimerPool);
+      return _this;
+    }
+    _createClass(Timeline, [{
+      key: "shutdown",
+      value: function shutdown() {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.timerPool.freeMultiple(this.addedTimers).freeMultiple(this.timers);
+        this.timerPool = undefined;
+        this.addedTimers = undefined;
+        this.timers = undefined;
+        _get(_getPrototypeOf(Timeline.prototype), "shutdown", this).call(this);
+      }
+    }, {
+      key: "addTimer",
+      value: function addTimer(config) {
+        var timer = this.timerPool.allocate();
+        if (!timer) {
+          timer = new Timer(this, config);
+        } else {
+          timer.setTimeline(this).reset(config);
+        }
+        this.addedTimers.push(timer);
+        timer.runCallback(timer.onStart);
+        if (!this.isRunning) {
+          this.start();
+        }
+        return timer;
+      }
+    }, {
+      key: "delayCall",
+      value: function delayCall(delay, callback, args, scope) {
+        var timer = this.addTimer({
+          duration: delay,
+          onComplete: function onComplete(target, t, timer) {
+            if (args === undefined) {
+              args = [];
+            }
+            args.push(timer);
+            callback.apply(scope, args);
+          }
+        });
+        return timer;
+      }
+    }, {
+      key: "delayEvent",
+      value: function delayEvent(delay, eventName) {
+        this.removeDelayEvent(eventName);
+        // Clear existed event
+
+        var timer = this.delayCall(delay, function () {
+          this.removeDelayEvent(eventName); // Clear this timer
+          this.emit(eventName);
+        }, [], this);
+        this.once("_remove.".concat(eventName), function () {
+          timer.remove();
+          timer = undefined;
+        });
+        return this;
+      }
+    }, {
+      key: "removeDelayEvent",
+      value: function removeDelayEvent(eventName) {
+        this.emit("_remove.".concat(eventName));
+        return this;
+      }
+    }, {
+      key: "getTimers",
+      value: function getTimers(name) {
+        var timers = [];
+        var timerQueues = [this.addedTimers, this.timers];
+        for (var ti = 0, tcnt = timerQueues.length; ti < tcnt; ti++) {
+          var timerQueue = timerQueues[ti];
+          for (var i = 0, cnt = timerQueue.length; i < cnt; i++) {
+            var timer = timerQueue[i];
+            if (timer.name === name) {
+              timers.push(timer);
+            }
+          }
+        }
+        return timers;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        var _this$timers;
+        _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
+        if (!this.isRunning) {
+          return;
+        }
+        (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
+        this.addedTimers.length = 0;
+        var pendingTimers = [];
+        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
+          var timer = this.timers[i];
+          var isStopped = timer.update(this.now, this.delta);
+          if (isStopped) {
+            this.timerPool.free(timer); // Free timer
+          } else {
+            pendingTimers.push(timer); // Add to timer queue
+          }
+        }
+
+        this.timers = pendingTimers;
+        if (this.timers.length === 0 && this.addedTimers.length === 0) {
+          this.complete(); // Emit 'complete' event
+        }
+      }
+    }]);
+    return Timeline;
+  }(Clock);
+
+  var WaitCompleteEvent = '_wait.complete';
+  var RemoveWaitEvents = '_remove.wait';
+
+  var WaitTimeMethods = {
+    waitTime: function waitTime(duration) {
+      var timeline = this.parent.timeline;
+      timeline.delayEvent(duration, 'delay');
+
+      // Clear delay event on timeline manually
+      this.parent.once(RemoveWaitEvents, function () {
+        timeline.removeDelayEvent('delay');
+      });
+      return this.waitEvent(timeline, 'delay');
+    }
+  };
+
+  var Split = function Split(s, delimiter) {
+    var regexString = "(?<!\\\\)\\".concat(delimiter);
+    var escapeString = "\\".concat(delimiter);
+    return s.split(new RegExp(regexString, 'g')).map(function (s) {
+      return s.replace(escapeString, delimiter);
+    });
+  };
+
+  var WaitInputMethods = {
+    setClickTarget: function setClickTarget(target) {
+      this.clickTarget = target;
+      if (!target) {
+        this.clickEE = null;
+      } else if (IsSceneObject(target)) {
+        this.clickEE = target.input;
+      } else {
+        // Assume that target is a gameObject
+        this.clickEE = target.setInteractive();
+      }
+    },
+    waitClick: function waitClick() {
+      if (!this.clickEE) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(this.clickEE, 'pointerdown');
+    },
+    waitKeyDown: function waitKeyDown(key) {
+      var eventEmitter = this.scene.input.keyboard;
+      if (typeof key === 'string') {
+        if (key.indexOf('|') === -1) {
+          return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+        } else {
+          var keys = Split(key, '|');
+          for (var i = 0, cnt = keys.length; i < cnt; i++) {
+            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+          }
+          return this.parent;
+        }
+      } else {
+        return this.waitEvent(eventEmitter, 'keydown');
+      }
+    }
+  };
+
+  var WaitGameObjectMethods = {
+    waitGameObjectTweenComplete: function waitGameObjectTweenComplete(goType, name, property) {
+      var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
+      if (tweenTask) {
+        return this.waitEvent(tweenTask, 'complete');
+      }
+      return this.waitTime(0);
+    },
+    waitGameObjectDataFlag: function waitGameObjectDataFlag(goType, name, dataKey, trueFlag) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      if (gameObject.getData(dataKey) === trueFlag) {
+        return this.waitTime(0);
+      }
+      var eventName = "changedata-".concat(dataKey);
+      var callback = function callback(gameObject, value, previousValue) {
+        value = !!value;
+        if (value === trueFlag) {
+          gameObject.emit('_dataFlagMatch');
+        }
+      };
+      gameObject.on(eventName, callback);
+      // Clear changedata event on gameobject manually
+      this.parent.once(RemoveWaitEvents, function () {
+        gameObject.off(eventName, callback);
+      });
+      return this.waitEvent(gameObject, '_dataFlagMatch');
+    },
+    waitGameObjectDestroy: function waitGameObjectDestroy(goType, name) {
+      var gameObject = this.parent.getGameObject(goType, name);
+      if (!gameObject) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(gameObject, 'destroy');
+    },
+    waitGameObjectManagerEmpty: function waitGameObjectManagerEmpty(goType) {
+      if (goType) {
+        var gameObjectManager = this.parent.getGameObjectManager(goType);
+        if (!gameObjectManager) {
+          return this.waitTime(0);
+        }
+        return this.waitEvent(gameObjectManager, 'empty');
+      } else {
+        var gameObjectManagers = this.parent.gameObjectManagers;
+        var hasAnyWaitEvent = false;
+        for (var name in gameObjectManagers) {
+          hasAnyWaitEvent = true;
+          this.waitEvent(gameObjectManagers[name], 'empty');
+        }
+        if (!hasAnyWaitEvent) {
+          return this.waitTime(0);
+        }
+        return this.parent;
+      }
+    }
+  };
+
+  var WaitCameraMethods = {
+    setCameraTarget: function setCameraTarget(camera) {
+      this.cameraTarget = camera;
+      return this;
+    },
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
+      var camera = this.cameraTarget;
+      if (!camera) {
+        return this.waitTime(0);
+      }
+      var effect, completeEventName;
+      switch (effectName) {
+        case 'camera.fadein':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeincomplete';
+          break;
+        case 'camera.fadeout':
+          effect = camera.fadeEffect;
+          completeEventName = 'camerafadeoutcomplete';
+          break;
+        case 'camera.flash':
+          effect = camera.flashEffect;
+          completeEventName = 'cameraflashcomplete';
+          break;
+        case 'camera.shake':
+          effect = camera.shakeEffect;
+          completeEventName = 'camerashakecomplete';
+          break;
+        case 'camera.zoom':
+          effect = camera.zoomEffect;
+          completeEventName = 'camerazoomcomplete';
+          break;
+        case 'camera.rotate':
+          effect = camera.rotateToEffect;
+          completeEventName = 'camerarotatecomplete';
+          break;
+        case 'camera.scroll':
+          effect = camera.panEffect;
+          completeEventName = 'camerapancomplete';
+          break;
+      }
+      if (!effect.isRunning) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(camera, completeEventName);
+    }
+  };
+
+  var WaitMusicMethods = {
+    waitSoundEffectComplete: function waitSoundEffectComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitSoundEffect2Complete: function waitSoundEffect2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getLastSoundEffect2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusicComplete: function waitBackgroundMusicComplete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    },
+    waitBackgroundMusic2Complete: function waitBackgroundMusic2Complete() {
+      if (!this.parent.soundManager) {
+        return this.waitTime(0);
+      }
+      var music = this.parent.soundManager.getBackgroundMusic2();
+      if (!music) {
+        return this.waitTime(0);
+      }
+      return this.waitEvent(music, 'complete');
+    }
+  };
+
+  var WaitAny$1 = function WaitAny(config) {
+    if (!config) {
+      return this.waitTime(0);
+    }
+    var hasAnyWaitEvent = false;
+    for (var name in config) {
+      switch (name) {
+        case 'time':
+          hasAnyWaitEvent = true;
+          this.waitTime(config.time);
+          break;
+        case 'click':
+          hasAnyWaitEvent = true;
+          this.waitClick(config.key);
+          break;
+        case 'key':
+          hasAnyWaitEvent = true;
+          this.waitKeyDown(config.key);
+          break;
+        case 'bgm':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusicComplete();
+          break;
+        case 'bgm2':
+          hasAnyWaitEvent = true;
+          this.waitBackgroundMusic2Complete();
+          break;
+        case 'se':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffectComplete();
+          break;
+        case 'se2':
+          hasAnyWaitEvent = true;
+          this.waitSoundEffect2Complete();
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
+          break;
+        default:
+          var names = name.split('.');
+          if (names.length === 2) {
+            var gameObjectName = names[0];
+            var propName = names[1];
+            var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
+            if (!gameObjectManager) {
+              continue;
+            }
+            var value = gameObjectManager.getProperty(gameObjectName, propName);
+            if (typeof value === 'number') {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
+              continue;
+            }
+            var dataKey = propName;
+            var matchFalseFlag = dataKey.startsWith('!');
+            if (matchFalseFlag) {
+              dataKey = dataKey.substring(1);
+            }
+            if (gameObjectManager.hasData(gameObjectName, propName)) {
+              hasAnyWaitEvent = true;
+              this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+            }
+          }
+          break;
+      }
+    }
+    if (!hasAnyWaitEvent) {
+      this.waitTime(0);
+    }
+    return this.parent;
+  };
+
+  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'preupdate' event
+    var scene = GetSceneObject(gameObject);
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('preupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
+  };
+
+  var WaitEventManager = /*#__PURE__*/function () {
+    function WaitEventManager(parent, config) {
+      _classCallCheck(this, WaitEventManager);
+      this.parent = parent;
+      this.waitCompleteEventName = GetValue$39(config, 'completeEventName', WaitCompleteEvent);
+      this.setClickTarget(GetValue$39(config, 'clickTarget', this.scene));
+      this.setCameraTarget(GetValue$39(config, 'camera', this.scene.cameras.main));
+      this.waitId = 0;
+    }
+    _createClass(WaitEventManager, [{
+      key: "clickTarget",
+      get: function get() {
+        return this.parent.clickTarget;
+      },
+      set: function set(value) {
+        this.parent.clickTarget = value;
+      }
+    }, {
+      key: "cameraTarget",
+      get: function get() {
+        return this.parent.cameraTarget;
+      },
+      set: function set(value) {
+        this.parent.cameraTarget = value;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.removeWaitEvents();
+        this.clearWaitCompleteCallbacks();
+        this.setClickTarget();
+        this.setCameraTarget();
+      }
+    }, {
+      key: "scene",
+      get: function get() {
+        return this.parent.managersScene;
+      }
+    }, {
+      key: "waitEvent",
+      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(RemoveWaitEvents, function () {
+          eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+      }
+    }, {
+      key: "getWaitCompleteTriggerCallback",
+      value: function getWaitCompleteTriggerCallback(completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var waitId = this.waitId;
+        var self = this;
+        var completeCallback = function completeCallback() {
+          if (waitId < self.waitId) {
+            return;
+          }
+          self.waitId++;
+          self.removeWaitEvents();
+          self.parent.emit(self.waitCompleteEventName);
+        };
+        if (completeNextTick) {
+          var completeCallbackNextTick = function completeCallbackNextTick() {
+            PreUpdateDelayCall(self.parent, 0, completeCallback);
+          };
+          return completeCallbackNextTick;
+        } else {
+          return completeCallback;
+        }
+      }
+    }, {
+      key: "removeWaitEvents",
+      value: function removeWaitEvents() {
+        this.parent.emit(RemoveWaitEvents);
+        return this;
+      }
+    }, {
+      key: "addWaitCompleteCallback",
+      value: function addWaitCompleteCallback(callback, scope) {
+        this.parent.on(this.waitCompleteEventName, callback, scope);
+        return this;
+      }
+    }, {
+      key: "clearWaitCompleteCallbacks",
+      value: function clearWaitCompleteCallbacks() {
+        this.parent.off(this.waitCompleteEventName);
+        return this;
+      }
+    }]);
+    return WaitEventManager;
+  }();
+  var Methods$e = {
+    waitAny: WaitAny$1
+  };
+  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$e);
+
+  var GetValue$2E = Phaser.Utils.Objects.GetValue;
+  var InitManagers = function InitManagers(scene, config) {
+    this.clickTarget = undefined;
+    this.cameraTarget = undefined;
+    this.managersScene = scene;
+    this.gameObjectManagers = {};
+    var layerManagerConfig = GetValue$2E(config, 'layers');
+    if (layerManagerConfig !== false) {
+      this.layerManager = new LayerManager(scene, layerManagerConfig);
+    }
+    var soundManagerConfig = GetValue$2E(config, 'sounds');
+    if (soundManagerConfig !== false) {
+      this.soundManager = new SoundManager(scene, soundManagerConfig);
+    }
+    this.timeline = new Timeline(this);
+    this.waitEventManager = new WaitEventManager(this, config);
+    return this;
+  };
+
+  var SetTimeScale = function SetTimeScale(value) {
+    this.timeline.timeScale = value;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].setTimeScale(value);
+    }
+    return this;
+  };
+
+  var GetTimeScale = function GetTimeScale() {
+    return this.timeline.timeScale;
+  };
+
+  var DestroyManagers = function DestroyManagers(fromScene) {
+    this.waitEventManager.destroy();
+    this.waitEventManager = undefined;
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].destroy(fromScene);
+      delete this.gameObjectManagers[name];
+    }
+    if (this.layerManager) {
+      this.layerManager.destroy(fromScene);
+      this.layerManager = undefined;
+    }
+    if (this.soundManager) {
+      this.soundManager.destroy();
+      this.soundManager = undefined;
+    }
+    if (this.timeline) {
+      this.timeline.destroy();
+      this.timeline = undefined;
+    }
+    this.clickTarget = undefined;
+    this.cameraTarget = undefined;
+    this.managersScene = undefined;
+  };
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
@@ -14317,20 +14457,20 @@
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
-      this.setEventEmitter(GetValue$38(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$39(config, 'eventEmitter', undefined));
 
       // Value convert
-      this.setValueConverter(GetValue$38(config, 'valueConvert', true));
+      this.setValueConverter(GetValue$39(config, 'valueConvert', true));
       // Loop
-      this.setLoopEnable(GetValue$38(config, 'loop', false));
+      this.setLoopEnable(GetValue$39(config, 'loop', false));
 
       // Brackets and generate regex
-      this.setMultipleLinesTagEnable(GetValue$38(config, 'multipleLinesTag', false));
-      var delimiters = GetValue$38(config, 'delimiters', '<>');
+      this.setMultipleLinesTagEnable(GetValue$39(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$39(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
 
       // Translate tagName callback
-      this.setTranslateTagNameCallback(GetValue$38(config, 'translateTagNameCallback'));
+      this.setTranslateTagNameCallback(GetValue$39(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -14598,10 +14738,10 @@
       _this = _super.call(this, config);
 
       // Parameters for regex
-      _this.setTagExpression(GetValue$38(config, 'regex.tag', undefined));
-      _this.setValueExpression(GetValue$38(config, 'regex.value', undefined));
+      _this.setTagExpression(GetValue$39(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$39(config, 'regex.value', undefined));
       // Brackets and generate regex
-      var delimiters = GetValue$38(config, 'delimiters', '<>');
+      var delimiters = GetValue$39(config, 'delimiters', '<>');
       _this.setDelimiters(delimiters[0], delimiters[1]);
       return _this;
     }
@@ -15096,6 +15236,85 @@
     this.soundManager.setSoundEffectVolume2(volume, true);
   };
 
+  var OnParseSetSoundEffectMuteTag = function OnParseSetSoundEffectMuteTag(textPlayer, parser, config) {
+    var tagName = 'se.mute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetSoundEffectMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.mute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetSoundEffect2Mute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se.unmute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetSoundEffectUnMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'se2.unmute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetSoundEffect2UnMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+  var SetSoundEffectMute = function SetSoundEffectMute() {
+    // this: textPlayer
+    this.soundManager.setSoundEffectMute(true);
+  };
+  var SetSoundEffect2Mute = function SetSoundEffect2Mute() {
+    // this: textPlayer
+    this.soundManager.setSoundEffect2Mute(true);
+  };
+  var SetSoundEffectUnMute = function SetSoundEffectUnMute() {
+    // this: textPlayer
+    this.soundManager.setSoundEffectMute(false);
+  };
+  var SetSoundEffect2UnMute = function SetSoundEffect2UnMute() {
+    // this: textPlayer
+    this.soundManager.setSoundEffect2Mute(false);
+  };
+
   var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = 'bgm';
     parser.on("+".concat(tagName), function (name, fadeInTime) {
@@ -15371,6 +15590,126 @@
     this.soundManager.resumeBackgroundMusic2();
   };
 
+  var OnParseSetBackgroundMusicVolumeTag = function OnParseSetBackgroundMusicVolumeTag(textPlayer, parser, config) {
+    var tagName = 'bgm.volume';
+    parser.on("+".concat(tagName), function (volume) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusicVolume,
+      // callback
+      volume,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.volume';
+    parser.on("+".concat(tagName), function (volume) {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusicVolume2,
+      // callback
+      volume,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+  var SetBackgroundMusicVolume = function SetBackgroundMusicVolume(volume) {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusicVolume(volume);
+  };
+  var SetBackgroundMusicVolume2 = function SetBackgroundMusicVolume2(volume) {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusicVolume2(volume);
+  };
+
+  var OnParseSetBackgroundMusicMuteTag = function OnParseSetBackgroundMusicMuteTag(textPlayer, parser, config) {
+    var tagName = 'bgm.mute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusicMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.mute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusic2Mute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm.unmute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusicUnMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+    var tagName = 'bgm2.unmute';
+    parser.on("+".concat(tagName), function () {
+      AppendCommand$3.call(textPlayer, tagName,
+      // name
+      SetBackgroundMusic2UnMute,
+      // callback
+      undefined,
+      // params
+      textPlayer // scope
+      );
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+  var SetBackgroundMusicMute = function SetBackgroundMusicMute() {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusicMute(true);
+  };
+  var SetBackgroundMusic2Mute = function SetBackgroundMusic2Mute() {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusic2Mute(true);
+  };
+  var SetBackgroundMusicUnMute = function SetBackgroundMusicUnMute() {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusicMute(false);
+  };
+  var SetBackgroundMusic2UnMute = function SetBackgroundMusic2UnMute() {
+    // this: textPlayer
+    this.soundManager.setBackgroundMusic2Mute(false);
+  };
+
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.fadein';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
@@ -15387,9 +15726,9 @@
     });
   };
   var PlayFadeInEffect = function PlayFadeInEffect(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).fadeIn.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).fadeIn.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(textPlayer, parser, config) {
@@ -15408,9 +15747,9 @@
     });
   };
   var PlayFadeOutEffect = function PlayFadeOutEffect(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).fadeOut.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).fadeOut.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(textPlayer, parser, config) {
@@ -15429,9 +15768,9 @@
     });
   };
   var PlayShakeEffect = function PlayShakeEffect(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).shake.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).shake.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(textPlayer, parser, config) {
@@ -15450,9 +15789,9 @@
     });
   };
   var PlayFlashEffect = function PlayFlashEffect(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).flash.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).flash.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(textPlayer, parser, config) {
@@ -15483,12 +15822,12 @@
   };
   var Zoom = function Zoom(value) {
     // this: textPlayer
-    this.targetCamera.setZoom(value);
+    this.cameraTarget.setZoom(value);
   };
   var ZoomTo = function ZoomTo(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).zoomTo.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).zoomTo.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
   var DegToRad$b = Phaser.Math.DegToRad;
@@ -15522,7 +15861,7 @@
   };
   var Rotate$1 = function Rotate(value) {
     // this: textPlayer
-    this.targetCamera.setRotation(value);
+    this.cameraTarget.setRotation(value);
   };
   var RotateTo = function RotateTo(params) {
     var value = params[0];
@@ -15530,7 +15869,7 @@
     var ease = params[2];
 
     // this: textPlayer
-    this.targetCamera.rotateTo(value, false, duration, ease);
+    this.cameraTarget.rotateTo(value, false, duration, ease);
   };
 
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(textPlayer, parser, config) {
@@ -15560,9 +15899,9 @@
     });
   };
   var Scroll = function Scroll(params) {
-    var _this$targetCamera;
+    var _this$cameraTarget;
     // this: textPlayer
-    (_this$targetCamera = this.targetCamera).setScroll.apply(_this$targetCamera, _toConsumableArray(params));
+    (_this$cameraTarget = this.cameraTarget).setScroll.apply(_this$cameraTarget, _toConsumableArray(params));
   };
   var ScrollTo = function ScrollTo(params) {
     var x = params[0];
@@ -15571,7 +15910,7 @@
     var ease = params[3];
 
     // this: textPlayer
-    var camera = this.targetCamera;
+    var camera = this.cameraTarget;
     var xSave = camera.scrollX;
     var ySave = camera.scrollY;
     camera.setScroll(x, y);
@@ -15712,7 +16051,7 @@
     );
   };
 
-  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParsePageBreakTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParseSetSoundEffectMuteTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseSetBackgroundMusicVolumeTag, OnParseSetBackgroundMusicMuteTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParsePageBreakTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks$2.length; i < cnt; i++) {
       ParseCallbacks$2[i](textPlayer, parser, config);
@@ -16918,8 +17257,8 @@
     return this;
   };
 
-  var SetTargetCamera = function SetTargetCamera(camera) {
-    this.waitEventManager.setTargetCamera(camera);
+  var SetCameraTarget = function SetCameraTarget(camera) {
+    this.waitEventManager.setCameraTarget(camera);
     return this;
   };
 
@@ -17098,7 +17437,7 @@
 
   var Methods$b = {
     setClickTarget: SetClickTarget,
-    setTargetCamera: SetTargetCamera,
+    setCameraTarget: SetCameraTarget,
     setNextPageInput: SetNextPageInput,
     addImage: AddImage,
     typingNextPage: TypingNextPage,
@@ -17158,16 +17497,6 @@
       return _this;
     }
     _createClass(TextPlayer, [{
-      key: "targetCamera",
-      get: function get() {
-        return this.waitEventManager.targetCamera;
-      }
-    }, {
-      key: "clickTarget",
-      get: function get() {
-        return this.waitEventManager.clickTarget;
-      }
-    }, {
       key: "imageManager",
       get: function get() {
         if (this._imageManager === undefined) {
@@ -24667,28 +24996,6 @@
     }
   };
 
-  var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
-    if (gameObjects.length <= 1) {
-      return gameObjects;
-    }
-    if (descending === undefined) {
-      descending = false;
-    }
-    var scene = gameObjects[0].scene;
-    var displayList = scene.sys.displayList;
-    displayList.depthSort();
-    if (descending) {
-      gameObjects.sort(function (childA, childB) {
-        return displayList.getIndex(childB) - displayList.getIndex(childA);
-      });
-    } else {
-      gameObjects.sort(function (childA, childB) {
-        return displayList.getIndex(childA) - displayList.getIndex(childB);
-      });
-    }
-    return gameObjects;
-  };
-
   var Depth = {
     setDepth: function setDepth(value, containerOnly) {
       this.depth = value;
@@ -28226,13 +28533,13 @@
     function FSM(config) {
       _classCallCheck(this, FSM);
       // Attach get-next-state function
-      var states = GetValue$38(config, 'states', undefined);
+      var states = GetValue$39(config, 'states', undefined);
       if (states) {
         this.addStates(states);
       }
 
       // Attach extend members
-      var extend = GetValue$38(config, 'extend', undefined);
+      var extend = GetValue$39(config, 'extend', undefined);
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -28242,8 +28549,8 @@
       }
 
       // Event emitter
-      var eventEmitter = GetValue$38(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$38(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$39(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$39(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -28261,9 +28568,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$38(o, 'enable', true));
-        this.start(GetValue$38(o, 'start', undefined));
-        var init = GetValue$38(o, 'init', undefined);
+        this.setEnable(GetValue$39(o, 'enable', true));
+        this.start(GetValue$39(o, 'start', undefined));
+        var init = GetValue$39(o, 'init', undefined);
         if (init) {
           init.call(this);
         }
@@ -28500,7 +28807,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-        this._scene = GetValue$38(o, 'scene', undefined);
+        this._scene = GetValue$39(o, 'scene', undefined);
         return this;
       }
     }, {
@@ -46199,11 +46506,11 @@
 
   var GetValueFromAliasKeys = function GetValueFromAliasKeys(source, key0, key1, key2, defaultValue) {
     if (HasValue(source, key0)) {
-      return GetValue$38(source, key0);
+      return GetValue$39(source, key0);
     } else if (key1 && HasValue(source, key1)) {
-      return GetValue$38(source, key1);
+      return GetValue$39(source, key1);
     } else if (key2 && HasValue(source, key2)) {
-      return GetValue$38(source, key2);
+      return GetValue$39(source, key2);
     } else {
       return defaultValue;
     }
@@ -49900,7 +50207,7 @@
   };
 
   var RunCommands = function RunCommands(queue, scope, config) {
-    var reverse = GetValue$38(config, 'reverse', false);
+    var reverse = GetValue$39(config, 'reverse', false);
     var retVal;
     if (IsArray(queue[0])) {
       if (!reverse) {
@@ -49918,8 +50225,8 @@
     return retVal;
   };
   var RunCommand = function RunCommand(cmd, scope, config) {
-    var argsConvert = GetValue$38(config, 'argsConvert', undefined);
-    var argsConvertScope = GetValue$38(config, 'argsConvertScope', undefined);
+    var argsConvert = GetValue$39(config, 'argsConvert', undefined);
+    var argsConvertScope = GetValue$39(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
     if (argsConvert) {
@@ -49940,7 +50247,7 @@
     if (typeof fnName === 'string') {
       fn = scope[fnName];
       if (fn == null) {
-        fn = GetValue$38(scope, fnName, null);
+        fn = GetValue$39(scope, fnName, null);
       }
     } else {
       fn = fnName;

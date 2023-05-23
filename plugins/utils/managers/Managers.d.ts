@@ -1,4 +1,5 @@
 import GOManager from '../gameobject/gomanager/GOManager';
+import LayerManager from '../gameobject/layermanager/LayerManager';
 import SoundManager from '../audio/soundmanager/SoundManager';
 import WaitEventManager from './waiteventmanager/WaitEventManager';
 
@@ -44,8 +45,9 @@ declare namespace Managers {
         lineWidth?: number
     }
 
-    interface IConfig {
-        sounds?: IConfigSounds
+    interface IConfig extends WaitEventManager.IConfig {
+        layers?: LayerManager.IConfig,
+        sounds?: IConfigSounds,
     }
 }
 
@@ -59,6 +61,8 @@ declare class Managers extends Phaser.Events.EventEmitter {
     readonly cameraTarget: Phaser.Cameras.Scene2D.Camera;
 
     gameObjectManagers: { [name: string]: GOManager };
+
+    layerManager: LayerManager;
 
     soundManager: SoundManager;
 

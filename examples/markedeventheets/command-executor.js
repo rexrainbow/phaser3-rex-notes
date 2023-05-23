@@ -45,11 +45,14 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCommandExecutor = function (scene) {
-    var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene)
+    var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
+        layers: ['ui', 'game']
+    })
         .addGameObjectManager({
             name: 'text',
             createGameObject: CreateTextBox,
             viewportCoordinate: true,
+            defaultLayer: 'ui',
 
             commands: {
                 typing(gameObject, { text, speed } = {}, commandExecutor) {
@@ -65,6 +68,7 @@ var CreateCommandExecutor = function (scene) {
                 return scene.add.sprite(0, 0, key, frame);
             },
             viewportCoordinate: true,
+            defaultLayer: 'game'
         })
 
     return commandExecutor;

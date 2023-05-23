@@ -4,15 +4,22 @@ export default {
         var sys = this.sys;
         sys.addGameObjectManager(config);
 
-        // Add createGameObject command
-        var { name } = config;
-        this[name] = function (config, manager) {
-            sys.createGameObject(name, config.name, config);
+        var { name, defaultLayer, commands = {} } = config;
+
+        // Add createGameObject command        
+        var goType = name;
+        this[goType] = function (config, manager) {
+            var { name, layer = defaultLayer } = config;
+            sys.createGameObject(goType, name, config);
             // Execute next command
+
+            if (layer && sys.layerManager) {
+                var gameObject = sys.getGameObject(goType, name);
+                sys.layerManager.addToLayer(layer, gameObject);
+            }
         }
 
         // Add custom commands
-        var { commands = {} } = config;
         sys.getGameObjectManager(name).commands = commands;
 
         return this;
