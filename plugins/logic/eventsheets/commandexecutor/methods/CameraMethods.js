@@ -25,7 +25,7 @@ export default {
 
         camera.fadeIn(duration, red, green, blue);
         if (wait) {
-            return this.wait({ 'camera.fadein': true });
+            return this.wait({ camera: 'fadeIn' });
         }
     },
 
@@ -37,7 +37,7 @@ export default {
 
         camera.fadeOut(duration, red, green, blue);
         if (wait) {
-            return this.wait({ 'camera.fadeout': true });
+            return this.wait({ camera: 'fadeOut' });
         }
     },
 
@@ -49,7 +49,7 @@ export default {
 
         camera.flash(duration, red, green, blue);
         if (wait) {
-            return this.wait({ 'camera.flash': true });
+            return this.wait({ camera: 'flash' });
         }
     },
 
@@ -61,7 +61,7 @@ export default {
 
         camera.shake(duration, intensity);
         if (wait) {
-            return this.wait({ 'camera.shake': true });
+            return this.wait({ camera: 'shake' });
         }
     },
 
@@ -73,7 +73,7 @@ export default {
 
         camera.zoomTo(zoom, duration);
         if (wait) {
-            return this.wait({ 'camera.zoom': true });
+            return this.wait({ camera: 'zoom' });
         }
     },
 
@@ -85,7 +85,7 @@ export default {
 
         camera.rotateTo(rotate, false, duration, ease);
         if (wait) {
-            return this.wait({ 'camera.rotate': true });
+            return this.wait({ camera: 'rotate' });
         }
     },
 
@@ -106,7 +106,7 @@ export default {
         camera.pan(x, y, duration, ease);
 
         if (wait) {
-            return this.wait({ 'camera.scroll': true });
+            return this.wait({ camera: 'scroll' });
         }
     },
 

@@ -1,4 +1,12 @@
 export default {
+    bgm({ volume = 1 } = {}, manager) {
+        var soundManager = this.sys.soundManager;
+        if (!soundManager) {
+            return;
+        }
+        soundManager.setBackgroundMusicVolume(volume);
+    },
+
     'bgm.play'({ key, loop, volume, fadeIn = 0, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -84,14 +92,6 @@ export default {
             return;
         }
         soundManager.resumeBackgroundMusic();
-    },
-
-    'bgm.volume'({ value = 1 } = {}, manager) {
-        var soundManager = this.sys.soundManager;
-        if (!soundManager) {
-            return;
-        }
-        soundManager.setBackgroundMusicVolume(value);
     },
 
     'bgm.mute'(config, manager) {

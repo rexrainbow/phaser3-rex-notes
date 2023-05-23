@@ -1,4 +1,5 @@
 import IsSceneObject from '../../system/IsSceneObject.js';
+import Split from '../../string/Split.js';
 
 export default {
     setClickTarget(target) {
@@ -24,7 +25,15 @@ export default {
     waitKeyDown(key) {
         var eventEmitter = this.scene.input.keyboard;
         if (typeof (key) === 'string') {
-            return this.waitEvent(eventEmitter, `keydown-${key.toUpperCase()}`)
+            if (key.indexOf('|') === -1) {
+                return this.waitEvent(eventEmitter, `keydown-${key.toUpperCase()}`)
+            } else {
+                var keys = Split(key, '|');
+                for (var i = 0, cnt = keys.length; i < cnt; i++) {
+                    this.waitEvent(eventEmitter, `keydown-${key.toUpperCase()}`)
+                }
+                return this.parent;
+            }
         } else {
             return this.waitEvent(eventEmitter, 'keydown');
         }

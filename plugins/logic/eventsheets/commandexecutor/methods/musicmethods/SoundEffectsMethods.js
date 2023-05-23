@@ -1,4 +1,12 @@
 export default {
+    se({ volume = 1 } = {}, manager) {
+        var soundManager = this.sys.soundManager;
+        if (!soundManager) {
+            return;
+        }
+        soundManager.setSoundEffectVolume(volume);
+    },
+
     'se.play'({ key, volume, fadeIn = 0, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {

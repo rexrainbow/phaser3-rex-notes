@@ -1,4 +1,12 @@
 export default {
+    se2({ volume = 1 } = {}, manager) {
+        var soundManager = this.sys.soundManager;
+        if (!soundManager) {
+            return;
+        }
+        soundManager.setSoundEffect2Volume(volume);
+    },
+
     'se2.play'({ key, volume, fadeIn = 0, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -32,14 +40,6 @@ export default {
         if (wait) {
             return this.wait({ bgm: true });
         }
-    },
-
-    'se2.volume'({ value = 1 } = {}, manager) {
-        var soundManager = this.sys.soundManager;
-        if (!soundManager) {
-            return;
-        }
-        soundManager.setSoundEffect2Volume(value);
     },
 
     'se2.mute'(config, manager) {

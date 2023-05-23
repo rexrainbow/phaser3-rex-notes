@@ -9286,7 +9286,7 @@
     return sound;
   };
 
-  var BackgroundMusicMethods = {
+  var BackgroundMusicMethods$1 = {
     setBackgroundMusicLoopValue: function setBackgroundMusicLoopValue(value) {
       this.backgroundMusicLoopValue = value;
       return this;
@@ -9378,10 +9378,19 @@
     setBackgroundMusicVolume: function setBackgroundMusicVolume(volume) {
       this.backgroundMusicVolume = volume;
       return this;
+    },
+    setBackgroundMusicMute: function setBackgroundMusicMute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic) {
+        this.backgroundMusic.setMute(mute);
+      }
+      return this;
     }
   };
 
-  var BackgroundMusic2Methods = {
+  var BackgroundMusic2Methods$1 = {
     setBackgroundMusic2LoopValue: function setBackgroundMusic2LoopValue(value) {
       this.backgroundMusic2LoopValue = value;
       return this;
@@ -9473,11 +9482,20 @@
     setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
       this.backgroundMusic2Volume = volume;
       return this;
+    },
+    setBackgroundMusic2Mute: function setBackgroundMusic2Mute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.setMute(mute);
+      }
+      return this;
     }
   };
 
   var RemoveItem$2 = Phaser.Utils.Array.Remove;
-  var SoundEffectsMethods = {
+  var SoundEffectsMethods$1 = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
     },
@@ -9540,11 +9558,30 @@
         this.soundEffectsVolume = volume;
       }
       return this;
+    },
+    setSoundEffectMute: function setSoundEffectMute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffectsMute = mute;
+      }
+      return this;
     }
   };
 
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var SoundEffects2Methods = {
+  var SoundEffects2Methods$1 = {
     getSoundEffects2: function getSoundEffects2() {
       return this.soundEffects2;
     },
@@ -9607,11 +9644,30 @@
         this.soundEffects2Volume = volume;
       }
       return this;
+    },
+    setSoundEffect2Mute: function setSoundEffect2Mute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Mute = mute;
+      }
+      return this;
     }
   };
 
   var Methods$3 = {};
-  Object.assign(Methods$3, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  Object.assign(Methods$3, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -9701,6 +9757,42 @@
         var soundEffects = this.soundEffects;
         for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
           soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffectsMute",
+      get: function get() {
+        return this._soundEffectsMute;
+      },
+      set: function set(value) {
+        this._soundEffectsMute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Volume",
+      get: function get() {
+        return this._soundEffects2Volume;
+      },
+      set: function set(value) {
+        this._soundEffects2Volume = value;
+        var soundEffects = this.soundEffects2;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Mute",
+      get: function get() {
+        return this._soundEffects2Mute;
+      },
+      set: function set(value) {
+        this._soundEffects2Mute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
         }
       }
     }]);
@@ -10169,6 +10261,14 @@
     }
   };
 
+  var Split = function Split(s, delimiter) {
+    var regexString = "(?<!\\\\)\\".concat(delimiter);
+    var escapeString = "\\".concat(delimiter);
+    return s.split(new RegExp(regexString, 'g')).map(function (s) {
+      return s.replace(escapeString, delimiter);
+    });
+  };
+
   var WaitInputMethods = {
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
@@ -10190,7 +10290,15 @@
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
       if (typeof key === 'string') {
-        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+        if (key.indexOf('|') === -1) {
+          return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+        } else {
+          var keys = Split(key, '|');
+          for (var i = 0, cnt = keys.length; i < cnt; i++) {
+            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+          }
+          return this.parent;
+        }
       } else {
         return this.waitEvent(eventEmitter, 'keydown');
       }
@@ -10366,10 +10474,6 @@
           hasAnyWaitEvent = true;
           this.waitKeyDown(config.key);
           break;
-        case 'camera':
-          hasAnyWaitEvent = true;
-          this.waitCameraEffectComplete(config.camera);
-          break;
         case 'bgm':
           hasAnyWaitEvent = true;
           this.waitBackgroundMusicComplete();
@@ -10385,6 +10489,10 @@
         case 'se2':
           hasAnyWaitEvent = true;
           this.waitSoundEffect2Complete();
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
           break;
         default:
           var names = name.split('.');
@@ -11704,6 +11812,9 @@
       }
       return this;
     },
+    hasGameObject: function hasGameObject(goType, name) {
+      return !!this.getGameObjectManager(goType, name);
+    },
     callGameObjectMethod: function callGameObjectMethod(goType, name, methodName) {
       var _this$getGameObjectMa2;
       for (var _len2 = arguments.length, params = new Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
@@ -11833,6 +11944,34 @@
     }
   };
 
+  var WaitMethods = {
+    clearWaitEventFlag: function clearWaitEventFlag() {
+      this.hasAnyWaitEvent = false;
+      return this;
+    },
+    setWaitEventFlag: function setWaitEventFlag() {
+      this.hasAnyWaitEvent = true;
+      return this;
+    },
+    waitEvent: function waitEvent(eventEmitter, eventName) {
+      this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
+      this.setWaitEventFlag();
+      return this;
+    },
+    wait: function wait(config, manager) {
+      var time = config.time;
+      if (time !== undefined) {
+        config.time = manager.evalExpression(time);
+      }
+      return this.sys.waitEventManager.waitAny(config);
+    },
+    click: function click(config, manager) {
+      return this.wait({
+        click: true
+      }, manager);
+    }
+  };
+
   var GameObjectMethods = {
     addGameObjectManager: function addGameObjectManager(config) {
       // Register GameObjectManager
@@ -11894,31 +12033,578 @@
     }
   };
 
-  var WaitMethods = {
-    clearWaitEventFlag: function clearWaitEventFlag() {
-      this.hasAnyWaitEvent = false;
-      return this;
-    },
-    setWaitEventFlag: function setWaitEventFlag() {
-      this.hasAnyWaitEvent = true;
-      return this;
-    },
-    waitEvent: function waitEvent(eventEmitter, eventName) {
-      this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
-      this.setWaitEventFlag();
-      return this;
-    },
-    wait: function wait(config, manager) {
-      var time = config.time;
-      if (time !== undefined) {
-        config.time = manager.evalExpression(time);
+  var BackgroundMusicMethods = {
+    bgm: function bgm() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$volume = _ref.volume,
+        volume = _ref$volume === void 0 ? 1 : _ref$volume;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
       }
-      return this.sys.waitEventManager.waitAny(config);
+      soundManager.setBackgroundMusicVolume(volume);
     },
-    click: function click(config, manager) {
-      return this.wait({
-        click: true
-      }, manager);
+    'bgm.play': function bgmPlay() {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        key = _ref2.key,
+        loop = _ref2.loop,
+        volume = _ref2.volume,
+        _ref2$fadeIn = _ref2.fadeIn,
+        fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        _ref2$wait = _ref2.wait,
+        wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      if (loop !== undefined) {
+        soundManager.setBackgroundMusicLoopValue(loop);
+      }
+      soundManager.playBackgroundMusic(key);
+      if (volume !== undefined) {
+        soundManager.setBackgroundMusicVolume(volume);
+      }
+      if (fadeIn > 0) {
+        soundManager.fadeInBackgroundMusic(fadeIn);
+      }
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm.cross': function bgmCross(_ref3, manager) {
+      var key = _ref3.key,
+        _ref3$duration = _ref3.duration,
+        duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
+        _ref3$wait = _ref3.wait,
+        wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      soundManager.crossFadeBackgroundMusic(key, duration);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm.stop': function bgmStop(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.stopBackgroundMusic();
+    },
+    'bgm.fadeOut': function bgmFadeOut(_ref4, manager) {
+      var _ref4$duration = _ref4.duration,
+        duration = _ref4$duration === void 0 ? 500 : _ref4$duration,
+        _ref4$stop = _ref4.stop,
+        stop = _ref4$stop === void 0 ? true : _ref4$stop,
+        _ref4$wait = _ref4.wait,
+        wait = _ref4$wait === void 0 ? false : _ref4$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeOutBackgroundMusic2(duration, stop);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm.fadeIn': function bgmFadeIn(_ref5, manager) {
+      var _ref5$duration = _ref5.duration,
+        duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeInBackgroundMusic(duration);
+    },
+    'bgm.pause': function bgmPause(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.pauseBackgroundMusic();
+    },
+    'bgm.resume': function bgmResume(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.resumeBackgroundMusic();
+    },
+    'bgm.mute': function bgmMute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setBackgroundMusicMute(true);
+    },
+    'bgm.unmute': function bgmUnmute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setBackgroundMusicMute(false);
+    }
+  };
+
+  var BackgroundMusic2Methods = {
+    bgm2: function bgm2() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$volume = _ref.volume,
+        volume = _ref$volume === void 0 ? 1 : _ref$volume;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setBackgroundMusic2Volume(volume);
+    },
+    'bgm2.play': function bgm2Play() {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        key = _ref2.key,
+        loop = _ref2.loop,
+        volume = _ref2.volume,
+        _ref2$fadeIn = _ref2.fadeIn,
+        fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        _ref2$wait = _ref2.wait,
+        wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      if (loop !== undefined) {
+        soundManager.setBackgroundMusic2LoopValue(loop);
+      }
+      soundManager.playBackgroundMusic2(key);
+      if (volume !== undefined) {
+        soundManager.setBackgroundMusic2Volume(volume);
+      }
+      if (fadeIn > 0) {
+        soundManager.fadeInBackgroundMusic2(fadeIn);
+      }
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm2.cross': function bgm2Cross(_ref3, manager) {
+      var key = _ref3.key,
+        _ref3$duration = _ref3.duration,
+        duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
+        _ref3$wait = _ref3.wait,
+        wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      soundManager.crossFadeBackgroundMusic2(key, duration);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm2.stop': function bgm2Stop(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.stopBackgroundMusic2();
+    },
+    'bgm2.fadeOut': function bgm2FadeOut(_ref4, manager) {
+      var _ref4$duration = _ref4.duration,
+        duration = _ref4$duration === void 0 ? 500 : _ref4$duration,
+        _ref4$stop = _ref4.stop,
+        stop = _ref4$stop === void 0 ? true : _ref4$stop,
+        _ref4$wait = _ref4.wait,
+        wait = _ref4$wait === void 0 ? false : _ref4$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeOutBackgroundMusic2(duration, stop);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'bgm2.fadeIn': function bgm2FadeIn(_ref5, manager) {
+      var _ref5$duration = _ref5.duration,
+        duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeInBackgroundMusic2(duration);
+    },
+    'bgm2.pause': function bgm2Pause(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.pauseBackgroundMusic2();
+    },
+    'bgm2.resume': function bgm2Resume(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.resumeBackgroundMusic2();
+    },
+    'bgm2.mute': function bgm2Mute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setBackgroundMusic2Mute(true);
+    },
+    'bgm2.unmute': function bgm2Unmute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setBackgroundMusic2Mute(false);
+    }
+  };
+
+  var SoundEffectsMethods = {
+    se: function se() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$volume = _ref.volume,
+        volume = _ref$volume === void 0 ? 1 : _ref$volume;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffectVolume(volume);
+    },
+    'se.play': function sePlay() {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        key = _ref2.key,
+        volume = _ref2.volume,
+        _ref2$fadeIn = _ref2.fadeIn,
+        fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        _ref2$wait = _ref2.wait,
+        wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      soundManager.playSoundEffect(key);
+      if (volume !== undefined) {
+        soundManager.setSoundEffectVolume(volume);
+      }
+      if (fadeIn > 0) {
+        soundManager.fadeInSoundEffect(fadeIn);
+      }
+      if (wait) {
+        return this.wait({
+          se: true
+        });
+      }
+    },
+    'se.fadeOut': function seFadeOut(_ref3, manager) {
+      var _ref3$duration = _ref3.duration,
+        duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
+        _ref3$stop = _ref3.stop,
+        stop = _ref3$stop === void 0 ? true : _ref3$stop,
+        _ref3$wait = _ref3.wait,
+        wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeOutSoundEffect(duration, stop);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'se.volume': function seVolume() {
+      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref4$value = _ref4.value,
+        value = _ref4$value === void 0 ? 1 : _ref4$value;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffectVolume(value);
+    },
+    'se.mute': function seMute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffectMute(true);
+    },
+    'se.unmute': function seUnmute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffectMute(false);
+    }
+  };
+
+  var SoundEffects2Methods = {
+    se2: function se2() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$volume = _ref.volume,
+        volume = _ref$volume === void 0 ? 1 : _ref$volume;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffect2Volume(volume);
+    },
+    'se2.play': function se2Play() {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        key = _ref2.key,
+        volume = _ref2.volume,
+        _ref2$fadeIn = _ref2.fadeIn,
+        fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        _ref2$wait = _ref2.wait,
+        wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      if (!key) {
+        return;
+      }
+      soundManager.playSoundEffect2(key);
+      if (volume !== undefined) {
+        soundManager.setSoundEffect2Volume(volume);
+      }
+      if (fadeIn > 0) {
+        soundManager.fadeInSoundEffect2(fadeIn);
+      }
+      if (wait) {
+        return this.wait({
+          se: true
+        });
+      }
+    },
+    'se2.fadeOut': function se2FadeOut(_ref3, manager) {
+      var _ref3$duration = _ref3.duration,
+        duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
+        _ref3$stop = _ref3.stop,
+        stop = _ref3$stop === void 0 ? true : _ref3$stop,
+        _ref3$wait = _ref3.wait,
+        wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.fadeOutSoundEffect2(duration, stop);
+      if (wait) {
+        return this.wait({
+          bgm: true
+        });
+      }
+    },
+    'se2.mute': function se2Mute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffect2Mute(true);
+    },
+    'se2.unmute': function se2Unmute(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.setSoundEffect2Mute(false);
+    }
+  };
+
+  var CameraMethods = {
+    camera: function camera() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        x = _ref.x,
+        y = _ref.y,
+        rotate = _ref.rotate,
+        zoom = _ref.zoom;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      if (x !== undefined || y !== undefined) {
+        camera.setScroll(x, y);
+      }
+      if (rotate !== undefined) {
+        camera.setRotation(rotate);
+      }
+      if (zoom !== undefined) {
+        camera.setZoom(zoom);
+      }
+    },
+    'camera.fadeIn': function cameraFadeIn() {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref2$duration = _ref2.duration,
+        duration = _ref2$duration === void 0 ? 1000 : _ref2$duration,
+        red = _ref2.red,
+        green = _ref2.green,
+        blue = _ref2.blue,
+        _ref2$wait = _ref2.wait,
+        wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.fadeIn(duration, red, green, blue);
+      if (wait) {
+        return this.wait({
+          camera: 'fadeIn'
+        });
+      }
+    },
+    'camera.fadeOut': function cameraFadeOut() {
+      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref3$duration = _ref3.duration,
+        duration = _ref3$duration === void 0 ? 1000 : _ref3$duration,
+        red = _ref3.red,
+        green = _ref3.green,
+        blue = _ref3.blue,
+        _ref3$wait = _ref3.wait,
+        wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var camera = this.sys.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.fadeOut(duration, red, green, blue);
+      if (wait) {
+        return this.wait({
+          camera: 'fadeOut'
+        });
+      }
+    },
+    'camera.flash': function cameraFlash() {
+      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref4$duration = _ref4.duration,
+        duration = _ref4$duration === void 0 ? 1000 : _ref4$duration,
+        red = _ref4.red,
+        green = _ref4.green,
+        blue = _ref4.blue,
+        _ref4$wait = _ref4.wait,
+        wait = _ref4$wait === void 0 ? false : _ref4$wait;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.flash(duration, red, green, blue);
+      if (wait) {
+        return this.wait({
+          camera: 'flash'
+        });
+      }
+    },
+    'camera.shake': function cameraShake() {
+      var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref5$duration = _ref5.duration,
+        duration = _ref5$duration === void 0 ? 1000 : _ref5$duration,
+        intensity = _ref5.intensity,
+        _ref5$wait = _ref5.wait,
+        wait = _ref5$wait === void 0 ? false : _ref5$wait;
+      var camera = this.sys.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.shake(duration, intensity);
+      if (wait) {
+        return this.wait({
+          camera: 'shake'
+        });
+      }
+    },
+    'camera.zoomTo': function cameraZoomTo() {
+      var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        zoom = _ref6.zoom,
+        _ref6$duration = _ref6.duration,
+        duration = _ref6$duration === void 0 ? 1000 : _ref6$duration,
+        _ref6$wait = _ref6.wait,
+        wait = _ref6$wait === void 0 ? false : _ref6$wait;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.zoomTo(zoom, duration);
+      if (wait) {
+        return this.wait({
+          camera: 'zoom'
+        });
+      }
+    },
+    'camera.rotateTo': function cameraRotateTo() {
+      var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        rotate = _ref7.rotate,
+        duration = _ref7.duration,
+        ease = _ref7.ease,
+        _ref7$wait = _ref7.wait,
+        wait = _ref7$wait === void 0 ? false : _ref7$wait;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      camera.rotateTo(rotate, false, duration, ease);
+      if (wait) {
+        return this.wait({
+          camera: 'rotate'
+        });
+      }
+    },
+    'camera.scrollTo': function cameraScrollTo() {
+      var _ref8 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        x = _ref8.x,
+        y = _ref8.y,
+        _ref8$duration = _ref8.duration,
+        duration = _ref8$duration === void 0 ? 1000 : _ref8$duration,
+        ease = _ref8.ease,
+        _ref8$wait = _ref8.wait,
+        wait = _ref8$wait === void 0 ? false : _ref8$wait;
+      var camera = this.sys.waitEventManager.targetCamera;
+      if (!camera) {
+        return;
+      }
+      var xSave = camera.scrollX;
+      var ySave = camera.scrollY;
+      camera.setScroll(x, y);
+      x += camera.centerX;
+      y += camera.centerY;
+      camera.setScroll(xSave, ySave);
+
+      // x,y in pan() is the centerX, centerY
+      camera.pan(x, y, duration, ease);
+      if (wait) {
+        return this.wait({
+          camera: 'scroll'
+        });
+      }
     }
   };
 
@@ -11938,11 +12624,23 @@
 
   var DefaultHandler = function DefaultHandler(name, config, manager) {
     var tokens = name.split('.');
-    config.name = tokens[0];
+    var gameObjectName = tokens[0];
+    config.name = gameObjectName;
     switch (tokens.length) {
       case 1:
+        if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+          // TODO
+          debugger;
+          return;
+        }
         return this._setGOProperty(config, manager);
       case 2:
+        if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+          // TODO
+          debugger;
+          return;
+        }
+        var commandName = tokens[1];
         switch (tokens[1]) {
           case 'to':
             return this._easeGOProperty(config, manager);
@@ -11950,11 +12648,11 @@
             config.yoyo = true;
             return this._easeGOProperty(config, manager);
           default:
-            var gameObjectManager = this.sys.getGameObjectManager(undefined, tokens[0]);
+            var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
             if (gameObjectManager) {
-              var command = gameObjectManager.commands[tokens[1]];
+              var command = gameObjectManager.commands[commandName];
               if (command) {
-                var gameObject = gameObjectManager.getGO(tokens[0]);
+                var gameObject = gameObjectManager.getGO(gameObjectName);
                 this.clearWaitEventFlag();
                 command(gameObject, config, this);
                 return this.hasAnyWaitEvent ? this.sys : undefined;
@@ -11965,7 +12663,7 @@
               parameters = config[key];
               break;
             }
-            config.methodName = tokens[1];
+            config.methodName = commandName;
             config.parameters = parameters ? StringToValues(parameters) : [];
             return this._runGOMethod(config, manager);
         }
@@ -11975,7 +12673,7 @@
   var Methods = {
     defaultHandler: DefaultHandler
   };
-  Object.assign(Methods, TreeManagerMethods, GameObjectMethods, WaitMethods);
+  Object.assign(Methods, TreeManagerMethods, WaitMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods);
 
   var CommandExecutor = /*#__PURE__*/function () {
     function CommandExecutor(scene, config) {

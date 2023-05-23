@@ -1208,6 +1208,15 @@
     setBackgroundMusicVolume: function setBackgroundMusicVolume(volume) {
       this.backgroundMusicVolume = volume;
       return this;
+    },
+    setBackgroundMusicMute: function setBackgroundMusicMute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic) {
+        this.backgroundMusic.setMute(mute);
+      }
+      return this;
     }
   };
 
@@ -1303,6 +1312,15 @@
     setBackgroundMusic2Volume: function setBackgroundMusic2Volume(volume) {
       this.backgroundMusic2Volume = volume;
       return this;
+    },
+    setBackgroundMusic2Mute: function setBackgroundMusic2Mute(mute) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (this.backgroundMusic2) {
+        this.backgroundMusic2.setMute(mute);
+      }
+      return this;
     }
   };
 
@@ -1370,6 +1388,25 @@
         this.soundEffectsVolume = volume;
       }
       return this;
+    },
+    setSoundEffectMute: function setSoundEffectMute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffectsMute = mute;
+      }
+      return this;
     }
   };
 
@@ -1435,6 +1472,25 @@
       } else {
         // Set volume of all sound effects
         this.soundEffects2Volume = volume;
+      }
+      return this;
+    },
+    setSoundEffect2Mute: function setSoundEffect2Mute(mute, lastSoundEffect) {
+      if (mute === undefined) {
+        mute = true;
+      }
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect2();
+        if (soundEffect) {
+          soundEffect.setMute(mute);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffects2Mute = mute;
       }
       return this;
     }
@@ -1531,6 +1587,42 @@
         var soundEffects = this.soundEffects;
         for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
           soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffectsMute",
+      get: function get() {
+        return this._soundEffectsMute;
+      },
+      set: function set(value) {
+        this._soundEffectsMute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Volume",
+      get: function get() {
+        return this._soundEffects2Volume;
+      },
+      set: function set(value) {
+        this._soundEffects2Volume = value;
+        var soundEffects = this.soundEffects2;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setVolume(value);
+        }
+      }
+    }, {
+      key: "soundEffects2Mute",
+      get: function get() {
+        return this._soundEffects2Mute;
+      },
+      set: function set(value) {
+        this._soundEffects2Mute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
+          soundEffects[i].setMute(value);
         }
       }
     }]);
@@ -1999,6 +2091,14 @@
     }
   };
 
+  var Split = function Split(s, delimiter) {
+    var regexString = "(?<!\\\\)\\".concat(delimiter);
+    var escapeString = "\\".concat(delimiter);
+    return s.split(new RegExp(regexString, 'g')).map(function (s) {
+      return s.replace(escapeString, delimiter);
+    });
+  };
+
   var WaitInputMethods = {
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
@@ -2020,7 +2120,15 @@
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
       if (typeof key === 'string') {
-        return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+        if (key.indexOf('|') === -1) {
+          return this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+        } else {
+          var keys = Split(key, '|');
+          for (var i = 0, cnt = keys.length; i < cnt; i++) {
+            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+          }
+          return this.parent;
+        }
       } else {
         return this.waitEvent(eventEmitter, 'keydown');
       }
@@ -2196,10 +2304,6 @@
           hasAnyWaitEvent = true;
           this.waitKeyDown(config.key);
           break;
-        case 'camera':
-          hasAnyWaitEvent = true;
-          this.waitCameraEffectComplete(config.camera);
-          break;
         case 'bgm':
           hasAnyWaitEvent = true;
           this.waitBackgroundMusicComplete();
@@ -2215,6 +2319,10 @@
         case 'se2':
           hasAnyWaitEvent = true;
           this.waitSoundEffect2Complete();
+          break;
+        case 'camera':
+          hasAnyWaitEvent = true;
+          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
           break;
         default:
           var names = name.split('.');
@@ -3533,6 +3641,9 @@
         gameObjectManager.remove(name);
       }
       return this;
+    },
+    hasGameObject: function hasGameObject(goType, name) {
+      return !!this.getGameObjectManager(goType, name);
     },
     callGameObjectMethod: function callGameObjectMethod(goType, name, methodName) {
       var _this$getGameObjectMa2;

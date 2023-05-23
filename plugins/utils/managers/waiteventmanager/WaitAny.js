@@ -42,13 +42,12 @@ var WaitAny = function (config) {
                 this.waitSoundEffect2Complete();
                 break;
 
-            default:
-                if (name.startsWith('camera.')) {
-                    hasAnyWaitEvent = true;
-                    this.waitCameraEffectComplete(name);
-                    continue;
-                }
+            case 'camera':
+                hasAnyWaitEvent = true;
+                this.waitCameraEffectComplete(`camera.${config.camera.toLowerCase()}`);
+                break;
 
+            default:
                 var names = name.split('.');
                 if (names.length === 2) {
                     var gameObjectName = names[0];
