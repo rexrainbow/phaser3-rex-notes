@@ -11104,7 +11104,16 @@
       },
       set: function set(value) {
         this._strokeColor = value;
-        this.isStroked = value != null && this._lineWidth > 0;
+        this.isStroked = value != null && this._strokeAlpha > 0 && this._lineWidth > 0;
+      }
+    }, {
+      key: "strokeAlpha",
+      get: function get() {
+        return this._strokeAlpha;
+      },
+      set: function set(value) {
+        this._strokeAlpha = value;
+        this.isStroked = value > 0 && this._strokeColor != null && this._lineWidth > 0;
       }
     }, {
       key: "lineWidth",

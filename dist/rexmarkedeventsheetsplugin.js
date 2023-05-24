@@ -11647,6 +11647,9 @@
             if (!gameObjectManager) {
               continue;
             }
+            if (propName === 'destroy') {
+              return this.waitGameObjectDestroy(undefined, gameObjectName);
+            }
             var value = gameObjectManager.getProperty(gameObjectName, propName);
             if (typeof value === 'number') {
               hasAnyWaitEvent = true;
@@ -12085,6 +12088,7 @@
   };
 
   var TreeManagerMethods = {
+    // TODO: More commands
     set: function set(config, manager) {
       for (var name in config) {
         // TODO: string variable does not have to eval
@@ -12141,6 +12145,8 @@
         var name = config.name,
           _config$layer = config.layer,
           layer = _config$layer === void 0 ? defaultLayer : _config$layer;
+        delete config.name;
+        delete config.layer;
         sys.createGameObject(goType, name, config);
         // Execute next command
 
@@ -12158,9 +12164,13 @@
     _setGOProperty: function _setGOProperty(config, manager) {
       var name = config.name;
       delete config.name;
+      var goType = this.sys.getGameObjectManagerName(name);
+      if (!goType) {
+        return;
+      }
       for (var prop in config) {
         var value = manager.evalExpression(config[prop]);
-        this.sys.setGameObjectProperty(undefined, name, prop, value);
+        this.sys.setGameObjectProperty(goType, name, prop, value);
       }
       // Execute next command
     },
@@ -12178,21 +12188,43 @@
       delete config.repeat;
       delete config.yoyo;
       delete config.wait;
+      var goType = this.sys.getGameObjectManagerName(name);
+      if (!goType) {
+        return;
+      }
       var waitProperty;
       for (var prop in config) {
         var value = manager.evalExpression(config[prop]);
-        this.sys.easeGameObjectProperty(undefined, name, prop, value, duration, ease, repeat, yoyo);
+        this.sys.easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, yoyo);
         waitProperty = prop;
       }
       if (wait && waitProperty) {
-        return this.sys.waitEventManager.waitGameObjectTweenComplete(undefined, name, waitProperty);
+        return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, name, waitProperty);
       }
 
       // Execute next command
     },
+    _destroyGO: function _destroyGO() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        name = _ref.name,
+        _ref$wait = _ref.wait,
+        wait = _ref$wait === void 0 ? false : _ref$wait;
+      var goType = this.sys.getGameObjectManagerName(name);
+      if (!goType) {
+        return;
+      }
+      this.sys.destroyGameObject(goType, name);
+      if (wait) {
+        return this.sys.waitEventManager.waitGameObjectDestroy(goType, name);
+      }
+    },
     _runGOMethod: function _runGOMethod(config, manager) {
       var _this$sys;
-      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [undefined, config.name, config.methodName].concat(_toConsumableArray(config.parameters)));
+      var goType = this.sys.getGameObjectManagerName(name);
+      if (!goType) {
+        return;
+      }
+      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.name, config.methodName].concat(_toConsumableArray(config.parameters)));
       // Execute next command
     }
   };
@@ -12811,6 +12843,8 @@
           case 'yoyo':
             config.yoyo = true;
             return this._easeGOProperty(config, manager);
+          case 'destroy':
+            return this._destroyGO(config, manager);
           default:
             var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
             if (gameObjectManager) {

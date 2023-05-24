@@ -12,8 +12,13 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.text('eventSheet0', 'assets/markedeventsheet/command-executor.md');
+
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+        this.load.image('road', 'assets/images/backgrounds/road.png');
+
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+
+        this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
 
         this.load.audio('theme0', [
             'assets/audio/oedipus_wizball_highscore.ogg',
@@ -46,13 +51,33 @@ class Demo extends Phaser.Scene {
 
 var CreateCommandExecutor = function (scene) {
     var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
-        layers: ['ui', 'game']
+        layers: ['bgLayer', 'gameLayer', 'uiLayer']
     })
         .addGameObjectManager({
-            name: 'text',
-            createGameObject: CreateTextBox,
+            name: 'BG',
+            createGameObject(scene, config) {
+                return scene.rexUI.add.transitionImage(config);
+            },
+            fade: 0,  // No fade-in when creating/destroying gameobject
             viewportCoordinate: true,
-            defaultLayer: 'ui',
+            defaultLayer: 'bgLayer',
+
+            commands: {
+                cross(gameObject, { key, frame, wait = true } = {}, commandExecutor) {
+                    // Wait until transition complete
+                    if (wait) {
+                        commandExecutor.waitEvent(gameObject, 'complete');
+                    }
+                    gameObject.transit(key, frame);
+                }
+            }
+        })
+        .addGameObjectManager({
+            name: 'TEXT',
+            createGameObject: CreateTextBox,
+            fade: 0,  // No fade-in when creating/destroying gameobject
+            viewportCoordinate: true,
+            defaultLayer: 'uiLayer',
 
             commands: {
                 typing(gameObject, { text, speed } = {}, commandExecutor) {
@@ -63,12 +88,19 @@ var CreateCommandExecutor = function (scene) {
             }
         })
         .addGameObjectManager({
-            name: 'sprite',
+            name: 'SPRITE',
             createGameObject(scene, { key, frame } = {}) {
-                return scene.add.sprite(0, 0, key, frame);
+                return scene.add.image(0, 0, key, frame);
             },
+            fade: 0,  // No fade-in when creating/destroying gameobject
             viewportCoordinate: true,
-            defaultLayer: 'game'
+            defaultLayer: 'gameLayer',
+
+            commands: {
+                cross(gameObject, { key, frame } = {}, commandExecutor) {
+                    gameObject.setTexture(key, frame);
+                }
+            }
         })
 
     return commandExecutor;

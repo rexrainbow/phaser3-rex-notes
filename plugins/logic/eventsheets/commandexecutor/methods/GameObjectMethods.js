@@ -13,6 +13,9 @@ export default {
         var goType = name;
         var createGameObjectCallback = function (config, manager) {
             var { name, layer = defaultLayer } = config;
+            delete config.name;
+            delete config.layer;
+
             sys.createGameObject(goType, name, config);
             // Execute next command
 

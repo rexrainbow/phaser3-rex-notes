@@ -98,6 +98,26 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     // mask: undefined,
 });
 ```
+or
+
+```javascript
+var image = scene.add.rexTransitionImage(x, y, texture, frame, {
+    // x: 0,
+    // y: 0,
+    // key: 
+    // frame: 
+    // dir: 0,
+    // onStart: function(parent, currentImage, nextImage, t) { },
+    // onStartScope: undefined,
+    // onProgress: function(parent, currentImage, nextImage, t) { },
+    // onProgressScope: undefined,
+    // onComplete: function(parent, currentImage, nextImage, t) { },
+    // onCompleteScope: undefined,    
+    // duration: 1000,
+    // ease: 'Linear',
+    // mask: undefined,
+});
+```
 
 - `dir` : Transition direction.
     - `0`, or `'out'` : Transit current texture/[image](image.md) out.

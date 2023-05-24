@@ -4,23 +4,29 @@
 
 // Create gameobjects
 
-text
+BG
+  name=背景
+  key=classroom
+
+TEXT
   name=對話框
   width=500
   height=120
 
-sprite
+SPRITE
   name=角色A
-  key=mushroom
+  key=characters
+  frame=A-smile
 
 
 // Manipulate gameobjects
 
 對話框
   vpy=0.8
+  alpha=0.8
 
 角色A
-  vpx=-0.1
+  vpx=-0.2
 
 bgm.play
   key=theme0
@@ -83,14 +89,21 @@ se.play
   wait
 // Wait until playing se complete
 
+角色A.cross
+  key=characters
+  frame=A-dizzy
+
 bgm.cross
   key=theme1
 
+背景.cross
+  key=road
+
 角色A.to
-  vpx=-0.1
+  vpx=-0.2
 // Wait until tween complete
 
-ui.to
+uiLayer.to
   alpha=0
 // Wait until ui layer fade-out
 

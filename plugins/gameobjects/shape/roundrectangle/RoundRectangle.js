@@ -100,7 +100,16 @@ class RoundRectangle extends Shape {
 
     set strokeColor(value) {
         this._strokeColor = value;
-        this.isStroked = (value != null) && (this._lineWidth > 0);
+        this.isStroked = (value != null) && (this._strokeAlpha > 0) && (this._lineWidth > 0);
+    }
+
+    get strokeAlpha() {
+        return this._strokeAlpha;
+    }
+
+    set strokeAlpha(value) {
+        this._strokeAlpha = value;
+        this.isStroked = (value > 0) && (this._strokeColor != null) && (this._lineWidth > 0);
     }
 
     get lineWidth() {
