@@ -16,11 +16,25 @@ export default {
     },
 
     wait(config, manager) {
-        var { time } = config;
-        if (time !== undefined) {
-            config.time = manager.evalExpression(time);
+        var { click, key } = config;
+        if (click | key) {
+            if (click) {
+                manager.emit('wait.click');
+            }
+
+            if (key) {
+                manager.emit('wait.key', config.key);
+            }
+
+            manager.emit('wait.input');
+
+            this.sys.once('complete', function () {
+                manager.emit('resume.input');
+            })
         }
-        return this.sys.waitEventManager.waitAny(config);
+
+        this.sys.waitEventManager.waitAny(config);
+        return this.sys;
     },
 
     click(config, manager) {

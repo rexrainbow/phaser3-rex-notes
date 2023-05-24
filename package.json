@@ -61,7 +61,7 @@
         "rollup": "^3.23.0",
         "rollup-plugin-node-builtins": "^2.1.2",
         "rollup-plugin-node-globals": "^1.4.0",
-        "terser": "^5.17.4",
+        "terser": "^5.17.6",
         "tslib": "^2.5.2",
         "typescript": "^5.0.4",
         "webpack": "^5.82.1",

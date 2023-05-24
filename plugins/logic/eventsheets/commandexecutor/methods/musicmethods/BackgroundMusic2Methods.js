@@ -30,7 +30,7 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ bgm: true });
+            return this.wait({ bgm: true }, manager);
         }
     },
 
@@ -46,7 +46,7 @@ export default {
         soundManager.crossFadeBackgroundMusic2(key, duration);
 
         if (wait) {
-            return this.wait({ bgm: true });
+            return this.wait({ bgm: true }, manager);
         }
     },
 
@@ -66,7 +66,7 @@ export default {
         soundManager.fadeOutBackgroundMusic2(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true });
+            return this.wait({ bgm: true }, manager);
         }
     },
 

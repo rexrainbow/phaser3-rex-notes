@@ -26,7 +26,7 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ se: true });
+            return this.wait({ se: true }, manager);
         }
     },
 
@@ -38,7 +38,7 @@ export default {
         soundManager.fadeOutSoundEffect(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true });
+            return this.wait({ bgm: true }, manager);
         }
     },
 

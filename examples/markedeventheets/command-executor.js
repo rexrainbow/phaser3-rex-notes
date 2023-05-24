@@ -34,16 +34,30 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var print = this.add.text(0, 570, '', { fontSize: 20, backgroundColor: 'grey' }).setDepth(100);
+        print.text = 'Any click to start';
+
         var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
             commandExecutor: CreateCommandExecutor(this)
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
 
+        eventSheetManager
+            .on('wait.input', function () {
+                print.text = 'Wait any click to continue';
+            })
+            .on('resume.input', function () {
+                print.text = '';
+            })
+            .on('complete', function () {
+                print.text = 'Complete';
+            })
+
         this.input.once('pointerdown', function () {
-            eventSheetManager.start()
+            print.text = '';
+            eventSheetManager.start();
         })
 
-        this.add.text(0, 580, 'Any click to start')
     }
 
     update() { }
