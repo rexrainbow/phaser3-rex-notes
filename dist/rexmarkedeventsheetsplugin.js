@@ -19592,11 +19592,22 @@
       return this;
     },
     wait: function wait(config, manager) {
-      var time = config.time;
-      if (time !== undefined) {
-        config.time = manager.evalExpression(time);
+      var click = config.click,
+        key = config.key;
+      if (click | key) {
+        if (click) {
+          manager.emit('wait.click');
+        }
+        if (key) {
+          manager.emit('wait.key', config.key);
+        }
+        manager.emit('wait.input');
+        this.sys.once('complete', function () {
+          manager.emit('resume.input');
+        });
       }
-      return this.sys.waitEventManager.waitAny(config);
+      this.sys.waitEventManager.waitAny(config);
+      return this.sys;
     },
     click: function click(config, manager) {
       return this.wait({
@@ -19728,6 +19739,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -19748,7 +19760,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm.cross': function bgmCross(_ref3, manager) {
@@ -19768,7 +19780,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm.stop': function bgmStop(config, manager) {
@@ -19793,7 +19805,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm.fadeIn': function bgmFadeIn(_ref5, manager) {
@@ -19855,6 +19867,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -19875,7 +19888,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm2.cross': function bgm2Cross(_ref3, manager) {
@@ -19895,7 +19908,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm2.stop': function bgm2Stop(config, manager) {
@@ -19920,7 +19933,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'bgm2.fadeIn': function bgm2FadeIn(_ref5, manager) {
@@ -19981,6 +19994,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -19998,7 +20012,7 @@
       if (wait) {
         return this.wait({
           se: true
-        });
+        }, manager);
       }
     },
     'se.fadeOut': function seFadeOut(_ref3, manager) {
@@ -20016,7 +20030,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'se.volume': function seVolume() {
@@ -20064,6 +20078,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -20081,7 +20096,7 @@
       if (wait) {
         return this.wait({
           se: true
-        });
+        }, manager);
       }
     },
     'se2.fadeOut': function se2FadeOut(_ref3, manager) {
@@ -20099,7 +20114,7 @@
       if (wait) {
         return this.wait({
           bgm: true
-        });
+        }, manager);
       }
     },
     'se2.mute': function se2Mute(config, manager) {
@@ -20148,6 +20163,7 @@
         blue = _ref2.blue,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20156,7 +20172,7 @@
       if (wait) {
         return this.wait({
           camera: 'fadeIn'
-        });
+        }, manager);
       }
     },
     'camera.fadeOut': function cameraFadeOut() {
@@ -20168,6 +20184,7 @@
         blue = _ref3.blue,
         _ref3$wait = _ref3.wait,
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20176,7 +20193,7 @@
       if (wait) {
         return this.wait({
           camera: 'fadeOut'
-        });
+        }, manager);
       }
     },
     'camera.flash': function cameraFlash() {
@@ -20188,6 +20205,7 @@
         blue = _ref4.blue,
         _ref4$wait = _ref4.wait,
         wait = _ref4$wait === void 0 ? false : _ref4$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20196,7 +20214,7 @@
       if (wait) {
         return this.wait({
           camera: 'flash'
-        });
+        }, manager);
       }
     },
     'camera.shake': function cameraShake() {
@@ -20206,6 +20224,7 @@
         intensity = _ref5.intensity,
         _ref5$wait = _ref5.wait,
         wait = _ref5$wait === void 0 ? false : _ref5$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20214,7 +20233,7 @@
       if (wait) {
         return this.wait({
           camera: 'shake'
-        });
+        }, manager);
       }
     },
     'camera.zoomTo': function cameraZoomTo() {
@@ -20224,6 +20243,7 @@
         duration = _ref6$duration === void 0 ? 1000 : _ref6$duration,
         _ref6$wait = _ref6.wait,
         wait = _ref6$wait === void 0 ? false : _ref6$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20232,7 +20252,7 @@
       if (wait) {
         return this.wait({
           camera: 'zoom'
-        });
+        }, manager);
       }
     },
     'camera.rotateTo': function cameraRotateTo() {
@@ -20242,6 +20262,7 @@
         ease = _ref7.ease,
         _ref7$wait = _ref7.wait,
         wait = _ref7$wait === void 0 ? false : _ref7$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20250,7 +20271,7 @@
       if (wait) {
         return this.wait({
           camera: 'rotate'
-        });
+        }, manager);
       }
     },
     'camera.scrollTo': function cameraScrollTo() {
@@ -20262,6 +20283,7 @@
         ease = _ref8.ease,
         _ref8$wait = _ref8.wait,
         wait = _ref8$wait === void 0 ? false : _ref8$wait;
+      var manager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -20278,7 +20300,7 @@
       if (wait) {
         return this.wait({
           camera: 'scroll'
-        });
+        }, manager);
       }
     }
   };
