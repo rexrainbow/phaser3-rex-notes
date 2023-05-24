@@ -1,6 +1,7 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
-import DeepClone from '../../../utils/object/DeepClone.js';
+import Compile from '../../../math/expressionparser/utils/Complile.js';
+import handlebars from 'handlebars';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -12,6 +13,27 @@ class TaskAction extends Action {
         });
 
         this.isRunning = false;
+
+        // Compile `num()`, `str(...)` string to callback
+        var sourceParameters = config.parameters;
+        var taskParameters = {};
+        for (var name in sourceParameters) {
+            var value = sourceParameters[name];
+
+            if (typeof (value) === 'string') {
+
+                if (value.startsWith('num(') && value.endsWith(')')) {
+                    // Compile `num(...)` string to expression callback
+                    value = Compile(value.substring(4, value.length - 1));
+
+                } else if (value.startsWith('str(') && value.endsWith(')')) {
+                    // Compile `str(...)` string to string template callback
+                    value = handlebars.compile(value.substring(4, value.length - 1));
+                }
+            }
+            taskParameters[name] = value;
+        }
+        this.taskParameters = taskParameters;
     }
 
     open(tick) {
@@ -25,17 +47,28 @@ class TaskAction extends Action {
         }
 
         var treeManager = tick.blackboard.treeManager;
-        var taskParameters = DeepClone(taskData.parameters);
+        var memory = treeManager.memory;
+
+        var taskParameters = this.taskParameters;
+        var parametersCopy = {};
+        for (var name in taskParameters) {
+            var value = taskParameters[name];
+            if (typeof (value) === 'function') {
+                value = value(memory);
+            }
+            parametersCopy[name] = value;
+        }
+
         var commandExecutor = tick.target;
 
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, taskParameters, treeManager);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, taskParameters, treeManager);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager);
             }
         }
 

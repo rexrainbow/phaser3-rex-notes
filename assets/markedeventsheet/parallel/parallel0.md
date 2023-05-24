@@ -32,4 +32,4 @@ print
 ## [Catch]
 
 print
-  template=coin = {{coin}}
+  text=str(coin = {{coin}})

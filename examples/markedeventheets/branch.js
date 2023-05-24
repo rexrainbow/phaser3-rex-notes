@@ -16,10 +16,8 @@ class CommandExecutor extends EventEmitter {
     }
 
     print({
-        text = '',
-        template
+        text = ''
     } = {}, manager) {
-        text = manager.renderString(text);
         console.log(text);
     }
 

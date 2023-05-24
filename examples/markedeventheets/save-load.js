@@ -6,7 +6,6 @@ import eventSheet2 from 'raw-loader!/assets/markedeventsheet/save-load/eventshee
 
 class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
-        text = manager.renderString(text);
         console.log(text);
         // return this;
         // Task will be running until 'complete' event fired
@@ -14,8 +13,7 @@ class CommandExecutor extends EventEmitter {
 
     set(config, manager) {
         for (var name in config) {
-            var value = manager.evalExpression(config[name]);
-            manager.setData(name, value);
+            manager.setData(name, config[name]);
         }
     }
 

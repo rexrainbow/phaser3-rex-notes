@@ -4,7 +4,6 @@ import content from 'raw-loader!/assets/markedeventsheet/sample.md';
 
 class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
-        text = manager.renderString(text);
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
@@ -13,8 +12,7 @@ class CommandExecutor extends EventEmitter {
 
     set(config, manager) {
         for (var name in config) {
-            var value = manager.evalExpression(config[name]);
-            manager.setData(name, value);
+            manager.setData(name, config[name]);
         }
     }
 

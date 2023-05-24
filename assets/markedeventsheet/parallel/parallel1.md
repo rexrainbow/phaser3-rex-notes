@@ -29,4 +29,4 @@ print
 ## [Catch]
 
 print
-  text=coin = {{coin}}
+  text=str(coin = {{coin}})

@@ -25,13 +25,13 @@ Line3
 ```
 
 print\
- text=I have {{金幣}} 金幣
+ text=str(I have {{金幣}} 金幣)
 
 set\
-  金幣=金幣 + 10
+  金幣=num(金幣 + 10)
 
 print\
- text=Now I have {{金幣}} 金幣
+ text=str(Now I have {{金幣}} 金幣)
 
 ## Before if 
 
@@ -83,10 +83,10 @@ loopCount > 0
 ### do-while
 
 print\
-  text=do-while {{loopCount}}
+  text=str(do-while {{loopCount}})
 
 set\
-  loopCount=loopCount-1
+  loopCount=num(loopCount-1)
 
 ## After while
 

@@ -1,16 +1,19 @@
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
-import mustache from 'mustache';
+import handlebars from 'handlebars';
 
 export default {
-    evalExpression(expression) {
-        if (typeof (expression) === 'number') {
-            return expression;
+    evalExpression(s) {
+        if (typeof (s) !== 'string') {
+            return s;
         }
 
-        return Compile(expression)(this.memory);
+        return Compile(s)(this.memory);
     },
 
-    renderString(template) {
-        return mustache.render(template, this.memory);
-    }
+    renderString(s) {
+        if (typeof (s) !== 'string') {
+            return '';
+        }
+        return handlebars.render(s, this.memory);
+    },
 }
