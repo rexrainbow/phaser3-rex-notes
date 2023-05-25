@@ -1,5 +1,4 @@
-import MarkedEventSheets from './markedeventsheets.js';
-import CommandExecutor from './commandexecutor.js';
+import { MarkedEventSheets, CommandExecutor } from './markedeventsheets.js';
 
 export default class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
     add(

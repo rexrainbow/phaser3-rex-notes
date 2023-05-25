@@ -1,2 +1,3 @@
 import MarkedEventSheets from './logic/eventsheets/markedeventsheets/MarkedEventSheets.js';
-export default MarkedEventSheets;
+import CommandExecutor from './logic/eventsheets/commandexecutor/CommandExecutor.js';
+export { MarkedEventSheets, CommandExecutor };
