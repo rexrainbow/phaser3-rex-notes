@@ -1273,10 +1273,12 @@
   (function (exports) {
     /*
       Returns a Parser object of the following structure:
-    	  Parser: {
+    
+      Parser: {
         yy: {}
       }
-    	  Parser.prototype: {
+    
+      Parser.prototype: {
         yy: {},
         trace: function(),
         symbols_: {associative list: name ==> number},
@@ -1287,7 +1289,8 @@
         defaultActions: {...},
         parseError: function(str, hash),
         parse: function(input),
-    	    lexer: {
+    
+        lexer: {
             EOF: 1,
             parseError: function(str, hash),
             setInput: function(input),
@@ -1306,16 +1309,19 @@
             _currentRules: function(),
             topState: function(),
             pushState: function(condition),
-    	        options: {
+    
+            options: {
                 ranges: boolean           (optional: true ==> token location info will include a .range[] member)
                 flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
                 backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
             },
-    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    
+            performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
             rules: [...],
             conditions: {associative list: name ==> set},
         }
       }
+    
     
       token location info (@$, _$, etc.): {
         first_line: n,
@@ -1324,6 +1330,7 @@
         last_column: n,
         range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
       }
+    
     
       the parseError function receives a 'hash' object with these members for lexer and parser errors: {
         text:        (matched text)
@@ -13806,9 +13813,12 @@
       for (var name in sourceParameters) {
         var value = sourceParameters[name];
         if (typeof value === 'string') {
-          var callback = CreateEvalCallback(value);
-          if (callback) {
-            value = callback;
+          if (value.startsWith('#(') && value.endsWith(')')) {
+            // Eval string to get number/boolean
+            value = Compile$1(value.substring(2, value.length - 1));
+          } else if (value.indexOf('{{') > -1 && value.indexOf('}}') > -1) {
+            // Might be a string template
+            value = handlebars$1.compile(value);
           }
         }
         taskParameters[name] = value;
@@ -13879,21 +13889,7 @@
       }
     }]);
     return TaskAction;
-  }(Action); // Compile `#(...)`, `_(...)`, `num()`, `str(...)` string to callback
-  var CreateEvalCallback = function CreateEvalCallback(s) {
-    if (s.startsWith('#(') && s.endsWith(')')) {
-      return Compile$1(s.substring(2, s.length - 1));
-    }
-    if (s.startsWith('_(') && s.endsWith(')')) {
-      return handlebars$1.compile(s.substring(2, s.length - 1));
-    }
-    if (s.startsWith('num(') && s.endsWith(')')) {
-      return Compile$1(s.substring(4, s.length - 1));
-    }
-    if (s.startsWith('str(') && s.endsWith(')')) {
-      return handlebars$1.compile(s.substring(4, s.length - 1));
-    }
-  };
+  }(Action);
 
   var CustomNodeMapping = {
     TaskAction: TaskAction
@@ -15699,7 +15695,7 @@
     var commandData;
     if (paragraph.hasOwnProperty('block')) {
       commandData = ParseCommandString(paragraph.block, ',', config);
-      commandData.parameters.text = "_(".concat(paragraph.text, ")"); // String template
+      commandData.parameters.text = paragraph.text;
     } else {
       commandData = ParseCommandString(paragraph.text, '\n', config);
     }

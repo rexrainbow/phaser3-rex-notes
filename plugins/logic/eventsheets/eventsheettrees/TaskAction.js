@@ -1,6 +1,7 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
-import { CreateEvalCallback } from './methods/ExpressionMethods.js';
+import Compile from '../../../math/expressionparser/utils/Complile.js';
+import handlebars from 'handlebars';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -13,15 +14,17 @@ class TaskAction extends Action {
 
         this.isRunning = false;
 
-
         var sourceParameters = config.parameters;
         var taskParameters = {};
         for (var name in sourceParameters) {
             var value = sourceParameters[name];
             if (typeof (value) === 'string') {
-                var callback = CreateEvalCallback(value);
-                if (callback) {
-                    value = callback;
+                if (value.startsWith('#(') && value.endsWith(')')) {
+                    // Eval string to get number/boolean
+                    value = Compile(value.substring(2, value.length - 1));
+                } else if ((value.indexOf('{{') > -1) && (value.indexOf('}}') > -1)) {
+                    // Might be a string template
+                    value = handlebars.compile(value);
                 }
             }
             taskParameters[name] = value;
