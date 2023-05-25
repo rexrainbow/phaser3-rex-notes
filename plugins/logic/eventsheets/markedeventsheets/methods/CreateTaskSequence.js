@@ -4,6 +4,7 @@ import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
 import TaskSequence from '../../eventsheettrees/TaskSequence';
 import TaskAction from '../../eventsheettrees/TaskAction.js';
+import { WrapToStringTemplate } from '../../eventsheettrees/methods/ExpressionMethods';
 
 var TypeNames = ['if', 'else', 'while'];
 
@@ -127,7 +128,7 @@ var GetCommandData = function (paragraph, config) {
     var commandData;
     if (paragraph.hasOwnProperty('block')) {
         commandData = ParseCommandString(paragraph.block, ',', config);
-        commandData.parameters.text = `_(${paragraph.text})`;  // String template
+        commandData.parameters.text = WrapToStringTemplate(paragraph.text);
     } else {
         commandData = ParseCommandString(paragraph.text, '\n', config);
     }

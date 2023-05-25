@@ -1,7 +1,6 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
-import Compile from '../../../math/expressionparser/utils/Complile.js';
-import handlebars from 'handlebars';
+import { CreateEvalCallback } from './methods/ExpressionMethods.js';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -95,23 +94,6 @@ class TaskAction extends Action {
             this.continueEE.off('complete', this.onTaskComplete, this);
             this.continueEE = undefined;
         }
-    }
-}
-
-// Compile `#(...)`, `_(...)`, `num()`, `str(...)` string to callback
-var CreateEvalCallback = function (s) {
-    if (s.startsWith('#(') && s.endsWith(')')) {
-        return Compile(s.substring(2, s.length - 1));
-    }
-    if (s.startsWith('_(') && s.endsWith(')')) {
-        return handlebars.compile(s.substring(2, s.length - 1));
-    }
-
-    if (s.startsWith('num(') && s.endsWith(')')) {
-        return Compile(s.substring(4, s.length - 1));
-    }
-    if (s.startsWith('str(') && s.endsWith(')')) {
-        return handlebars.compile(s.substring(4, s.length - 1));
     }
 }
 
