@@ -19594,14 +19594,14 @@
     wait: function wait(config, manager) {
       var click = config.click,
         key = config.key;
+      if (click) {
+        manager.emit('pause.click');
+      }
+      if (key) {
+        manager.emit('pause.key', config.key);
+      }
       if (click | key) {
-        if (click) {
-          manager.emit('wait.click');
-        }
-        if (key) {
-          manager.emit('wait.key', config.key);
-        }
-        manager.emit('wait.input');
+        manager.emit('pause.input');
         this.sys.once('complete', function () {
           manager.emit('resume.input');
         });

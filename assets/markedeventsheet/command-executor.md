@@ -5,27 +5,27 @@
 // Create gameobjects
 
 BG
-  name=背景
+  name=Background
   key=classroom
 
 TEXT
-  name=對話框
+  name=Dialog
   width=500
   height=120
 
 SPRITE
-  name=角色A
+  name=CharacterA
   key=characters
   frame=A-smile
 
 
 // Manipulate gameobjects
 
-對話框
+Dialog
   vpy=0.8
   alpha=0.8
 
-角色A
+CharacterA
   vpx=-0.2
 
 bgm.play
@@ -64,14 +64,14 @@ camera.shake
 camera.flash
 
 
-角色A.to
+CharacterA.to
   vpx=0.7
   ease=Back
   duration=2000
 // Wait until tween complete
 
 
-```對話框.typing, speed=100
+```Dialog.typing, speed=100
 Line0...
 Line1...
 Line2...
@@ -89,17 +89,17 @@ se.play
   wait
 // Wait until playing se complete
 
-角色A.cross
+CharacterA.cross
   key=characters
   frame=A-dizzy
 
 bgm.cross
   key=theme1
 
-背景.cross
+Background.cross
   key=road
 
-角色A.to
+CharacterA.to
   vpx=-0.2
 // Wait until tween complete
 

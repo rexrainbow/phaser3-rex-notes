@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
             .addEventSheet(this.cache.text.get('eventSheet0'))
 
         eventSheetManager
-            .on('wait.input', function () {
+            .on('pause.input', function () {
                 print.text = 'Wait any click to continue';
             })
             .on('resume.input', function () {
