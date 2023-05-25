@@ -127,7 +127,7 @@ var GetCommandData = function (paragraph, config) {
     var commandData;
     if (paragraph.hasOwnProperty('block')) {
         commandData = ParseCommandString(paragraph.block, ',', config);
-        commandData.parameters.text = paragraph.text;
+        commandData.parameters.text = `_(${paragraph.text})`;  // String template
     } else {
         commandData = ParseCommandString(paragraph.text, '\n', config);
     }

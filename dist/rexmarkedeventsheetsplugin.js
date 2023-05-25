@@ -13801,19 +13801,14 @@
         properties: config
       });
       _this.isRunning = false;
-
-      // Compile `num()`, `str(...)` string to callback
       var sourceParameters = config.parameters;
       var taskParameters = {};
       for (var name in sourceParameters) {
         var value = sourceParameters[name];
         if (typeof value === 'string') {
-          if (value.startsWith('num(') && value.endsWith(')')) {
-            // Compile `num(...)` string to expression callback
-            value = Compile$1(value.substring(4, value.length - 1));
-          } else if (value.startsWith('str(') && value.endsWith(')')) {
-            // Compile `str(...)` string to string template callback
-            value = handlebars$1.compile(value.substring(4, value.length - 1));
+          var callback = CreateEvalCallback(value);
+          if (callback) {
+            value = callback;
           }
         }
         taskParameters[name] = value;
@@ -13884,7 +13879,21 @@
       }
     }]);
     return TaskAction;
-  }(Action);
+  }(Action); // Compile `#(...)`, `_(...)`, `num()`, `str(...)` string to callback
+  var CreateEvalCallback = function CreateEvalCallback(s) {
+    if (s.startsWith('#(') && s.endsWith(')')) {
+      return Compile$1(s.substring(2, s.length - 1));
+    }
+    if (s.startsWith('_(') && s.endsWith(')')) {
+      return handlebars$1.compile(s.substring(2, s.length - 1));
+    }
+    if (s.startsWith('num(') && s.endsWith(')')) {
+      return Compile$1(s.substring(4, s.length - 1));
+    }
+    if (s.startsWith('str(') && s.endsWith(')')) {
+      return handlebars$1.compile(s.substring(4, s.length - 1));
+    }
+  };
 
   var CustomNodeMapping = {
     TaskAction: TaskAction
@@ -15690,7 +15699,7 @@
     var commandData;
     if (paragraph.hasOwnProperty('block')) {
       commandData = ParseCommandString(paragraph.block, ',', config);
-      commandData.parameters.text = paragraph.text;
+      commandData.parameters.text = "_(".concat(paragraph.text, ")"); // String template
     } else {
       commandData = ParseCommandString(paragraph.text, '\n', config);
     }

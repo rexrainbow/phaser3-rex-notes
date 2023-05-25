@@ -18,20 +18,20 @@ print\
  text=Hello
 
 ```print
-Line0
-
-
+Hello, {{name}}
+Line1
+Line2
 Line3
 ```
 
 print\
- text=str(I have {{金幣}} 金幣)
+ text=_(I have {{金幣}} 金幣)
 
 set\
-  金幣=num(金幣 + 10)
+  金幣=#(金幣 + 10)
 
 print\
- text=str(Now I have {{金幣}} 金幣)
+ text=_(Now I have {{金幣}} 金幣)
 
 ## Before if 
 
@@ -83,10 +83,10 @@ loopCount > 0
 ### do-while
 
 print\
-  text=str(do-while {{loopCount}})
+  text=_(do-while {{loopCount}})
 
 set\
-  loopCount=num(loopCount-1)
+  loopCount=#(loopCount-1)
 
 ## After while
 
