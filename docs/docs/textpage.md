@@ -83,7 +83,9 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
 - `text` : content in string or array, optional
 - `maxLines` : Max lines of a page.
-    - `undefined` : Use style property `maxLines`, for [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md). Default value.
+    - `undefined` : Default value. For [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
+        - Use style property `maxLines`.
+        - Count number of lines if it has `fixedHeight` setting.
     - A number : Max lines of a page, for [bitmap text object](bitmaptext.md)
 - `pageBreak` : Symbol of page-break. Default value is `'\f\n'`. String after this page-break symbol will be placed to a new page. 
 

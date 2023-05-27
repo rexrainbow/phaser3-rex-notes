@@ -134,7 +134,7 @@ class TextPage extends ComponentBase {
                     }
                     break;
                 case BitmapTextType:
-                    count = Math.floor(TextHeightToLinesCount(this.parent));
+                    count = this.totalLinesCount;
                     break;
             }
             return count;

@@ -42532,7 +42532,7 @@
     return this;
   };
 
-  var TextHeightToLinesCount = function TextHeightToLinesCount(height) {
+  var TextHeightToLinesCount$1 = function TextHeightToLinesCount(height) {
     // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
     return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
   };
@@ -42629,7 +42629,7 @@
   };
 
   var UpdateTextObject = function UpdateTextObject() {
-    var startLineIndex = Math.max(Math.floor(TextHeightToLinesCount.call(this, -this.textOY)), 0);
+    var startLineIndex = Math.max(Math.floor(TextHeightToLinesCount$1.call(this, -this.textOY)), 0);
     var textOffset = LinesCountToTextHeight.call(this, startLineIndex) + this.textOY;
 
     // Grab visible lines
@@ -42875,7 +42875,7 @@
       key: "visibleLinesCount",
       get: function get() {
         if (this._visibleLinesCount === undefined) {
-          this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+          this._visibleLinesCount = Math.floor(TextHeightToLinesCount$1.call(this, this._textObjectRealHeight));
         }
         return this._visibleLinesCount;
       }
@@ -46938,6 +46938,28 @@
   });
   SetValue(window, 'RexPlugins.UI.SimpleDropDownList', SimpleDropDownList);
 
+  var TextHeightToLinesCount = function TextHeightToLinesCount(textObject) {
+    var textObjectType = GetTextObjectType(textObject);
+    var height, lineSpacing, lineHeight;
+    switch (textObjectType) {
+      case TextType:
+      case TagTextType:
+        height = textObject.height - textObject.padding.top - textObject.padding.bottom;
+        lineSpacing = textObject.lineSpacing;
+        lineHeight = textObject.style.metrics.fontSize + textObject.style.strokeThickness;
+        break;
+      case BitmapTextType:
+        height = textObject.height;
+        lineSpacing = 0;
+        var scale = textObject.fontSize / textObject.fontData.size;
+        lineHeight = textObject.fontData.lineHeight * scale;
+        break;
+    }
+
+    // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
+    return (height - lineSpacing) / (lineHeight + lineSpacing);
+  };
+
   var GetLines = function GetLines(startLineIndex, endLineIdx) {
     if (startLineIndex === undefined) {
       startLineIndex = this.startLineIndex;
@@ -47206,7 +47228,7 @@
               if (maxLines > 0) {
                 count = maxLines;
               } else {
-                count = this.totalLinesCount;
+                count = Math.floor(TextHeightToLinesCount(this.parent));
               }
               break;
             case BitmapTextType:
