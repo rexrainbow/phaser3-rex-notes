@@ -36,7 +36,6 @@ class Demo extends Phaser.Scene {
                     mode: 'word',
                     width: 500
                 },
-                maxLines: 3
             }),
 
             action: this.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
@@ -102,7 +101,7 @@ class Demo extends Phaser.Scene {
         });
 
         var ui = this.rexUI.add.sizer({
-            x: 400, y: 500,
+            x: 400, y: 300,
             orientation: 'y'
         })
             .add(nameText, {
