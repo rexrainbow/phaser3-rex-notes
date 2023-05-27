@@ -106,12 +106,13 @@ var createTextBox = function (scene, x, y, config) {
 var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
     return scene.add.text(0, 0, '', {
         fontSize: '20px',
+        fixedWidth: fixedWidth,
+        fixedHeight: fixedHeight,
         wordWrap: {
             width: wrapWidth
         },
         maxLines: 3
     })
-        .setFixedSize(fixedWidth, fixedHeight);
 }
 
 var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
