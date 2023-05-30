@@ -12,10 +12,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.text(
-            400, 250,
+            300, 250,
             'יא פרו...',
             {
-                fixedWidth: 200, fixedHeight: 80,
+                fixedWidth: 150, fixedHeight: 80,
                 padding: {
                     left: 15, right: 15, top: 15, bottom: 15
                 },
@@ -25,10 +25,38 @@ class Demo extends Phaser.Scene {
         );
 
         this.add.rexBBCodeText(
-            400, 350,
+            300, 350,
             'יא פרו.[color=red].[color=blue].',
             {
-                fixedWidth: 200, fixedHeight: 80,
+                fixedWidth: 150, fixedHeight: 80,
+                padding: {
+                    left: 15, right: 15, top: 15, bottom: 15
+                },
+                backgroundColor: '#333333',
+                backgroundCornerRadius: 10,
+                // align: 'center',
+                rtl: true
+            }
+        );
+
+        this.add.text(
+            500, 250,
+            'ABCDE',
+            {
+                fixedWidth: 150, fixedHeight: 80,
+                padding: {
+                    left: 15, right: 15, top: 15, bottom: 15
+                },
+                backgroundColor: '#333333',
+                rtl: true
+            }
+        );
+
+        this.add.rexBBCodeText(
+            500, 350,
+            '[color=red]AB[color=blue]CD[/color]E',
+            {
+                fixedWidth: 150, fixedHeight: 80,
                 padding: {
                     left: 15, right: 15, top: 15, bottom: 15
                 },

@@ -9335,7 +9335,11 @@
 <li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>, or <a href="../bitmaptext/">bitmap text object</a></li>
 <li><code>text</code> : content in string or array, optional</li>
 <li><code>maxLines</code> : Max lines of a page.<ul>
-<li><code>undefined</code> : Use style property <code>maxLines</code>, for <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>. Default value.</li>
+<li><code>undefined</code> : Default value. For <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a><ul>
+<li>Use style property <code>maxLines</code>.</li>
+<li>Count number of lines if it has <code>fixedHeight</code> setting.</li>
+</ul>
+</li>
 <li>A number : Max lines of a page, for <a href="../bitmaptext/">bitmap text object</a></li>
 </ul>
 </li>
