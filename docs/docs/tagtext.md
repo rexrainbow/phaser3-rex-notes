@@ -639,3 +639,12 @@ txt.setTestString(text);
 txt.generateTexture(key);
 // txt.generateTexture(key, x, y, width, height);
 ```
+
+### RTL
+
+- Set `rtl` in style config when creating this text game object
+- Change `rtl` during runtime
+    ```javascript
+    txt.setRTL(rtl).setText(newContent);
+    ```
+    - Invoke `setRTL` method before setting new content.
