@@ -6229,9 +6229,9 @@
     _createClass(Text, [{
       key: "preDestroy",
       value: function preDestroy() {
-        if (this.style.rtl) {
-          RemoveFromDOM(this.canvas);
-        }
+        RemoveFromDOM(this.canvas);
+        // Do nothing if canvas did not add to parent node before
+
         this.canvasText.destroy();
         this.canvasText = undefined;
         if (this._imageManager) {
@@ -6272,6 +6272,39 @@
 
         //  And finally we set the x origin
         this.originX = 1;
+      }
+    }, {
+      key: "setRTL",
+      value: function setRTL(rtl) {
+        if (rtl === undefined) {
+          rtl = true;
+        }
+        if (this.style.rtl === rtl) {
+          return this;
+        }
+        this.style.rtl = rtl;
+        if (rtl) {
+          this.canvas.dir = 'rtl';
+          this.context.direction = 'rtl';
+          this.canvas.style.display = 'none';
+          AddToDOM(this.canvas, this.scene.sys.canvas);
+          if (this.style.halign === 'left') {
+            this.style.halign = 'right';
+          }
+        } else {
+          this.canvas.dir = 'ltr';
+          this.context.direction = 'ltr';
+          if (this.style.halign === 'right') {
+            this.style.halign = 'left';
+          }
+        }
+        if (this._imageManager) {
+          var images = this._imageManager.images;
+          for (var key in images) {
+            images[key].originX = 1 - images[key].originX;
+          }
+        }
+        return this;
       }
     }, {
       key: "setText",

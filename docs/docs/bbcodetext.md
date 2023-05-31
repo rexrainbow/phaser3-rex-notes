@@ -714,3 +714,12 @@ or
 ```javascript
 txt.setDelimiters(delimiterLeft, delimiterRight); // '<', '>'
 ```
+
+### RTL
+
+- Set `rtl` in style config when creating this text game object
+- Change `rtl` during runtime
+    ```javascript
+    txt.setRTL(rtl).setText(newContent);
+    ```
+    - Invoke `setRTL` method before setting new content.

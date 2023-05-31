@@ -8,7 +8,9 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('dude', 'assets/images/phaser-dude.png');
+    }
 
     create() {
         this.add.text(
@@ -66,6 +68,38 @@ class Demo extends Phaser.Scene {
                 rtl: true
             }
         );
+
+        var ltrContent = 'A[color=red]B[/color]CD...[img=dude]';
+        var rtlContent = 'יא פ[color=red]ר[/color]ו...[img=dude]';
+        var txt = this.add.rexBBCodeText(
+            550, 350,
+            ltrContent,
+            {
+                fixedWidth: 150, fixedHeight: 80,
+                padding: {
+                    left: 15, right: 15, top: 15, bottom: 15
+                },
+                backgroundColor: '#333333',
+                backgroundCornerRadius: 10,
+                // align: 'center',
+
+                images: {
+                    'dude': {
+                        height: 16,
+                    }
+                }
+            }
+        );
+
+        this.input.on('pointerdown', function () {
+            var rtl = !txt.style.rtl;
+            txt.setRTL(rtl).setText((rtl) ? rtlContent : ltrContent);
+            txt.destroy()
+        })
+
+        this.add.text(550, 580, 'Any click to toggle rtl')
+
+        
     }
 
     update() { }
