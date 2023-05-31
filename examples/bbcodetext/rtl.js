@@ -94,12 +94,10 @@ class Demo extends Phaser.Scene {
         this.input.on('pointerdown', function () {
             var rtl = !txt.style.rtl;
             txt.setRTL(rtl).setText((rtl) ? rtlContent : ltrContent);
-            txt.destroy()
         })
 
         this.add.text(550, 580, 'Any click to toggle rtl')
 
-        
     }
 
     update() { }
