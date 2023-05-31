@@ -7287,24 +7287,24 @@
         if (rtl === undefined) {
           rtl = true;
         }
-        if (this.style.rtl === rtl) {
+        var style = this.style;
+        if (style.rtl === rtl) {
           return this;
         }
-        this.style.rtl = rtl;
+        style.rtl = rtl;
         if (rtl) {
           this.canvas.dir = 'rtl';
           this.context.direction = 'rtl';
           this.canvas.style.display = 'none';
           AddToDOM(this.canvas, this.scene.sys.canvas);
-          if (this.style.halign === 'left') {
-            this.style.halign = 'right';
-          }
         } else {
           this.canvas.dir = 'ltr';
           this.context.direction = 'ltr';
-          if (this.style.halign === 'right') {
-            this.style.halign = 'left';
-          }
+        }
+        if (style.halign === 'left') {
+          style.halign = 'right';
+        } else if (style.halign === 'right') {
+          style.halign = 'left';
         }
         if (this._imageManager) {
           var images = this._imageManager.images;
