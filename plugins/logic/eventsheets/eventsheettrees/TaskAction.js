@@ -1,7 +1,7 @@
 import { Action, } from '../../behaviortree';
 import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
 import Compile from '../../../math/expressionparser/utils/Complile.js';
-import handlebars from 'handlebars';
+import mustache from 'mustache';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -24,7 +24,10 @@ class TaskAction extends Action {
                     value = Compile(value.substring(2, value.length - 1));
                 } else if ((value.indexOf('{{') > -1) && (value.indexOf('}}') > -1)) {
                     // Might be a string template
-                    value = handlebars.compile(value);
+                    var template = value;
+                    value = function(data) {
+                        return mustache.render(template, data);
+                    }
                 }
             }
             taskParameters[name] = value;
