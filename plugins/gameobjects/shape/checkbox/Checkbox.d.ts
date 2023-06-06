@@ -13,8 +13,8 @@ declare namespace Checkbox {
 declare class Checkbox extends CheckboxShape {
     constructor(
         scene: Phaser.Scene,
-        x: number, y: number,
-        width: number, height: number,
+        x?: number, y?: number,
+        width?: number, height?: number,
         color?: number,
         config?: Checkbox.IConfig
     );
@@ -23,6 +23,12 @@ declare class Checkbox extends CheckboxShape {
         scene: Phaser.Scene,
         x?: number, y?: number,
         width?: number, height?: number,
+        config?: Checkbox.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
         config?: Checkbox.IConfig
     );
 

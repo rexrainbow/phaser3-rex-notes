@@ -18,7 +18,7 @@ declare namespace InputText {
         tooltip?: string,
         readOnly?: boolean,
         spellCheck?: boolean,
-        autoComplete?: 'on' | 'off',
+        autoComplete?: string,
 
         // Style properties
         align?: string,

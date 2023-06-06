@@ -1,3 +1,5 @@
+import OpenCloseTransition from '../openclosetransition/OpenCloseTransition';
+
 export default Modal;
 
 declare namespace Modal {
@@ -36,7 +38,7 @@ declare namespace Modal {
     }
 }
 
-declare class Modal extends Phaser.Events.EventEmitter {
+declare class Modal extends OpenCloseTransition {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Modal.IConfig
