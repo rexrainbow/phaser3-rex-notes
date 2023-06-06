@@ -107,4 +107,6 @@ declare class Scrollable extends Sizer {
     setMouseWheelScrollerEnable(enable?: boolean): this;
 
     readonly scrollMode: number;
+
+    readonly isOverflow: boolean;
 }
