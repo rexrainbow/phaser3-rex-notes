@@ -9,13 +9,11 @@ var parser = new jison.Parser(fs.readFileSync("grammar.jison", "utf8"));
 var parserSource = parser.generate();
 // console.log('Source: ', parserSource)
 
-var replaceSource = `if (typeof module !== 'undefined' && require.main === module) {`
-var replacedBy = `if (0) {  // Ignore 'require.main'`
-parserSource = parserSource.replace(replaceSource, replacedBy);
+var index = parserSource.indexOf('exports.main = function commonjsMain (args) {');
+parserSource = parserSource.substring(0, index) + '}';
 
-var replaceSource = `exports.main(process.argv.slice(1));`
-var replacedBy = `//exports.main(process.argv.slice(1));`
-parserSource = parserSource.replace(replaceSource, replacedBy);
+// End with line: 
+// exports.parse = function () { return parser.parse.apply(parser, arguments); };
 
 try {
 	fs.writeFileSync("./parser.js", parserSource)
