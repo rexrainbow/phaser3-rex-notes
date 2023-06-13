@@ -19911,6 +19911,10 @@
     underlineColor: ['underline.color', '#000', GetStyle],
     underlineThickness: ['underline.thickness', 0, null],
     underlineOffset: ['underline.offset', 0, null],
+    // strikethrough
+    strikethroughColor: ['strikethrough.color', '#000', GetStyle],
+    strikethroughThickness: ['strikethrough.thickness', 0, null],
+    strikethroughOffset: ['strikethrough.offset', 0, null],
     // align
     halign: ['halign', 'left', null],
     valign: ['valign', 'top', null],
@@ -20089,6 +20093,9 @@
       this.underlineColor;
       this.underlineThickness;
       this.underlineOffset;
+      this.strikethroughColor;
+      this.strikethroughThickness;
+      this.strikethroughOffset;
       this.halign;
       this.valign;
       this.maxLines;
@@ -20488,6 +20495,50 @@
         return this.update(false);
       }
     }, {
+      key: "setStrikethrough",
+      value: function setStrikethrough(color, thickness, offset) {
+        if (color === undefined) {
+          color = '#000';
+        }
+        if (thickness === undefined) {
+          thickness = 0;
+        }
+        if (offset === undefined) {
+          offset = 0;
+        }
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        this.strikethroughThickness = thickness;
+        this.strikethroughOffset = offset;
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughColor",
+      value: function setStrikethroughColor(color) {
+        if (color === undefined) {
+          color = '#000';
+        }
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughThickness",
+      value: function setStrikethroughThickness(thickness) {
+        if (thickness === undefined) {
+          thickness = 0;
+        }
+        this.strikethroughThickness = thickness;
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughOffset",
+      value: function setStrikethroughOffset(offset) {
+        if (offset === undefined) {
+          offset = 0;
+        }
+        this.strikethroughOffset = offset;
+        return this.update(false);
+      }
+    }, {
       key: "setWrapMode",
       value: function setWrapMode(mode) {
         if (typeof mode === 'string') {
@@ -20700,7 +20751,8 @@
 
       // Underline
       if (curStyle.underlineThickness > 0 && pen.width > 0) {
-        this.drawUnderline(offsetX, offsetY, pen.width, curStyle);
+        var lineOffsetY = offsetY + curStyle.underlineOffset - curStyle.underlineThickness / 2;
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.underlineThickness, curStyle.underlineColor);
       }
 
       // Text
@@ -20711,6 +20763,12 @@
       // Image
       if (pen.isImagePen) {
         this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
+      }
+
+      // Strikethrough
+      if (curStyle.strikethroughThickness > 0 && pen.width > 0) {
+        var lineOffsetY = offsetY + curStyle.strikethroughOffset - curStyle.strikethroughThickness / 2;
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.strikethroughThickness, curStyle.strikethroughColor);
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
@@ -20742,8 +20800,7 @@
       var canvas = this.canvas;
       this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
-    drawUnderline: function drawUnderline(x, y, width, style) {
-      y += style.underlineOffset - style.underlineThickness / 2;
+    drawLine: function drawLine(x, y, width, height, color) {
       if (this.autoRound) {
         x = Math.round(x);
         y = Math.round(y);
@@ -20751,8 +20808,8 @@
       var context = this.context;
       var savedLineCap = context.lineCap;
       context.lineCap = 'butt';
-      context.strokeStyle = style.underlineColor;
-      context.lineWidth = style.underlineThickness;
+      context.strokeStyle = color;
+      context.lineWidth = height;
       context.beginPath();
       context.moveTo(x, y);
       context.lineTo(x + width, y);
@@ -22483,6 +22540,13 @@
         UpdateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
       } else if (TagRegex.RE_UNDERLINE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'u');
+      } else if (TagRegex.RE_STRIKETHROUGH_OPEN.test(text)) {
+        UpdateProp(prevProp, PROP_ADD, 's', true);
+      } else if (TagRegex.RE_STRIKETHROUGH_OPENC.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_STRIKETHROUGH_OPENC);
+        UpdateProp(prevProp, PROP_ADD, 's', innerMatch[1]);
+      } else if (TagRegex.RE_STRIKETHROUGH_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 's');
       } else if (TagRegex.RE_SHADOW_OPEN.test(text)) {
         UpdateProp(prevProp, PROP_ADD, 'shadow', true);
       } else if (TagRegex.RE_SHADOW_CLOSE.test(text)) {
@@ -22619,6 +22683,21 @@
       result.underlineThickness = 0;
       result.underlineOffset = 0;
     }
+    if (prop.hasOwnProperty('s')) {
+      if (prop.s === true) {
+        result.strikethroughColor = defaultStyle.strikethroughColor;
+        result.strikethroughThickness = defaultStyle.strikethroughThickness;
+        result.strikethroughOffset = defaultStyle.strikethroughOffset;
+      } else {
+        result.strikethroughColor = prop.s;
+        result.strikethroughThickness = defaultStyle.strikethroughThickness;
+        result.strikethroughOffset = defaultStyle.strikethroughOffset;
+      }
+    } else {
+      result.strikethroughColor = '#000';
+      result.strikethroughThickness = 0;
+      result.strikethroughOffset = 0;
+    }
     return result;
   };
   var GetFontStyle = function GetFontStyle(prop) {
@@ -22680,10 +22759,11 @@
           headers.push("".concat(delimiterLeft).concat(k, "=").concat(value).concat(delimiterRight));
           break;
         case 'u':
+        case 's':
           if (value === true) {
-            headers.push("".concat(delimiterLeft, "u").concat(delimiterRight));
+            headers.push("".concat(delimiterLeft).concat(k).concat(delimiterRight));
           } else {
-            headers.push("".concat(delimiterLeft, "u=").concat(value).concat(delimiterRight));
+            headers.push("".concat(delimiterLeft).concat(k, "=").concat(value).concat(delimiterRight));
           }
           break;
         default:
@@ -22758,6 +22838,10 @@
     var UNDERLINE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
     var UNDERLINE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE, COLOR_PARAM);
     var UNDERLINE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
+    var STRIKETHROUGH = 's';
+    var STRIKETHROUGH_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH);
+    var STRIKETHROUGH_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH, COLOR_PARAM);
+    var STRIKETHROUGH_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH);
     var SHADOW = 'shadow';
     var SHADOW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW);
     var SHADOW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SHADOW);
@@ -22797,6 +22881,9 @@
     TagRegexSave.RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
     TagRegexSave.RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
     TagRegexSave.RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
+    TagRegexSave.RE_STRIKETHROUGH_OPEN = new RegExp(STRIKETHROUGH_OPEN, 'i');
+    TagRegexSave.RE_STRIKETHROUGH_OPENC = new RegExp(STRIKETHROUGH_OPENC, 'i');
+    TagRegexSave.RE_STRIKETHROUGH_CLOSE = new RegExp(STRIKETHROUGH_CLOSE, 'i');
     TagRegexSave.RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
     TagRegexSave.RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
     TagRegexSave.RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
@@ -22812,7 +22899,7 @@
     TagRegexSave.RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
     TagRegexSave.RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
     TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
     return true;
   };
   var GetTagRegex = function GetTagRegex(delimiterLeft, delimiterRight) {

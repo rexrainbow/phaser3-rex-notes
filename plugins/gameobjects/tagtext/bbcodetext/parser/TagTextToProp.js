@@ -81,6 +81,14 @@ var TagTextToProp = function (text, prevProp) {
         } else if (TagRegex.RE_UNDERLINE_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'u');
 
+        } else if (TagRegex.RE_STRIKETHROUGH_OPEN.test(text)) {
+            UpdateProp(prevProp, PROP_ADD, 's', true);
+        } else if (TagRegex.RE_STRIKETHROUGH_OPENC.test(text)) {
+            var innerMatch = text.match(TagRegex.RE_STRIKETHROUGH_OPENC);
+            UpdateProp(prevProp, PROP_ADD, 's', innerMatch[1]);
+        } else if (TagRegex.RE_STRIKETHROUGH_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 's');
+
         } else if (TagRegex.RE_SHADOW_OPEN.test(text)) {
             UpdateProp(prevProp, PROP_ADD, 'shadow', true);
         } else if (TagRegex.RE_SHADOW_CLOSE.test(text)) {

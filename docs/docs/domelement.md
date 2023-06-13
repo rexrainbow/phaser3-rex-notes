@@ -227,9 +227,9 @@ domElement.rotate3d.w = a;
 1. DOM game object always put above game canvas, i.e. DOM game object will render above any other kind of game object.
 1. DOM game object will receive touch event even if it is not the first touched game object.
 1. P3's `'pointerdown'`, `'pointerup'` events will be fired above/under DOM game object.
-2. P3's `'pointermove'` event won't be fired above/under DOM game object, except 
-   - Setting DOM game object to be invisilbe.
-   - Assign input.mouse.target parameter of game config.
+1. P3's `'pointermove'` event won't be fired above/under DOM game object, except 
+    - Setting DOM game object to be invisilbe.
+    - Assign input.mouse.target parameter of game config.
 
 ### Other properties
 

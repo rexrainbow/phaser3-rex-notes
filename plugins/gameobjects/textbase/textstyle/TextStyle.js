@@ -42,6 +42,10 @@ class TextStyle {
         this.underlineThickness;
         this.underlineOffset;
 
+        this.strikethroughColor;
+        this.strikethroughThickness;
+        this.strikethroughOffset;
+
         this.halign;
         this.valign;
 
@@ -458,6 +462,51 @@ class TextStyle {
         }
 
         this.underlineOffset = offset;
+        return this.update(false);
+    }
+
+    setStrikethrough(color, thickness, offset) {
+        if (color === undefined) {
+            color = '#000';
+        }
+        if (thickness === undefined) {
+            thickness = 0;
+        }
+        if (offset === undefined) {
+            offset = 0;
+        }
+
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        this.strikethroughThickness = thickness;
+        this.strikethroughOffset = offset;
+
+        return this.update(false);
+    }
+
+    setStrikethroughColor(color) {
+        if (color === undefined) {
+            color = '#000';
+        }
+
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        return this.update(false);
+    }
+
+    setStrikethroughThickness(thickness) {
+        if (thickness === undefined) {
+            thickness = 0;
+        }
+
+        this.strikethroughThickness = thickness;
+        return this.update(false);
+    }
+
+    setStrikethroughOffset(offset) {
+        if (offset === undefined) {
+            offset = 0;
+        }
+
+        this.strikethroughOffset = offset;
         return this.update(false);
     }
 

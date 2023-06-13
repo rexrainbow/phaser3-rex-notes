@@ -69,6 +69,11 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     var UNDERLINE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, UNDERLINE, COLOR_PARAM);
     var UNDERLINE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, UNDERLINE);
 
+    var STRIKETHROUGH = 's';
+    var STRIKETHROUGH_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH);
+    var STRIKETHROUGH_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH, COLOR_PARAM);
+    var STRIKETHROUGH_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STRIKETHROUGH);
+
     var SHADOW = 'shadow';
     var SHADOW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW);
     var SHADOW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SHADOW);
@@ -123,6 +128,10 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     TagRegexSave.RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
     TagRegexSave.RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
 
+    TagRegexSave.RE_STRIKETHROUGH_OPEN = new RegExp(STRIKETHROUGH_OPEN, 'i');
+    TagRegexSave.RE_STRIKETHROUGH_OPENC = new RegExp(STRIKETHROUGH_OPENC, 'i');
+    TagRegexSave.RE_STRIKETHROUGH_CLOSE = new RegExp(STRIKETHROUGH_CLOSE, 'i');
+
     TagRegexSave.RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
     TagRegexSave.RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
 
@@ -156,6 +165,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
         SIZE_OPEN, SIZE_CLOSE,
         COLOR_OPEN, COLOR_CLOSE,
         UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE,
+        STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE,
         SHADOW_OPEN, SHADOW_CLOSE,
         STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE,
         OFFSETY_OPEN, OFFSETY_CLOSE,

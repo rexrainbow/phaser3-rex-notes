@@ -182,6 +182,17 @@ class Parser {
             result.underlineOffset = defaultStyle.underlineOffset;
         }
 
+        if (prop.hasOwnProperty('s') || prop.hasOwnProperty('strikethrough')) {
+            var s = (prop.hasOwnProperty('s')) ? prop.s : prop.strikethrough; // {color, thickness, offset}
+            result.strikethroughColor = (s.hasOwnProperty('color')) ? s.color : defaultStyle.strikethroughColor;
+            result.strikethroughThickness = (s.hasOwnProperty('thickness')) ? s.thickness : defaultStyle.strikethroughThickness;
+            result.strikethroughOffset = (s.hasOwnProperty('offset')) ? s.offset : defaultStyle.strikethroughOffset;
+        } else {
+            result.strikethroughColor = defaultStyle.strikethroughColor;
+            result.strikethroughThickness = defaultStyle.strikethroughThickness;
+            result.strikethroughOffset = defaultStyle.strikethroughOffset;
+        }
+
         return result;
     }
 
@@ -239,48 +250,56 @@ var StyleToProp = function (s) {
 
         switch (k) {
             case 'stroke':
-                var stroke = v.split(' '); // stroke:blue 1px
-                var len = stroke.length;
+                var params = v.split(' '); // stroke:blue 1px
+                var len = params.length;
                 v = {};
                 if (len >= 1) {
-                    v.color = stroke[0];
+                    v.color = params[0];
                 }
                 if (len >= 2) {
-                    v.thickness = parseInt(stroke[1].replace('px', ''));
+                    v.thickness = parseInt(params[1].replace('px', ''));
                 }
                 break;
 
             case 'shadow':
-                var shadow = v.split(' '); // shadow:blue 2px 2px 2px
-                var len = shadow.length;
+                var params = v.split(' '); // shadow:blue 2px 2px 2px
+                var len = params.length;
                 v = {};
                 if (len >= 1) {
-                    v.color = shadow[0];
+                    v.color = params[0];
                 }
                 if (len >= 2) {
-                    v.offsetX = parseInt(shadow[1].replace('px', ''));
+                    v.offsetX = parseInt(params[1].replace('px', ''));
                 }
                 if (len >= 3) {
-                    v.offsetY = parseInt(shadow[2].replace('px', ''));
+                    v.offsetY = parseInt(params[2].replace('px', ''));
                 }
                 if (len >= 4) {
-                    v.blur = parseInt(shadow[3].replace('px', ''));
+                    v.blur = parseInt(params[3].replace('px', ''));
                 }
                 break;
 
             case 'u':
-            case 'underline': // underline:blue 3px -1px
-                var u = v.split(' ');
-                var len = u.length;
+            case 'underline':
+            case 's':
+            case 'strikethrough':  // underline:blue 3px -1px
+                var params = v.split(' ');
+                var len = params.length;
                 v = {};
                 if (len >= 1) {
-                    v.color = u[0];
+                    v.color = params[0];
                 }
                 if (len >= 2) {
-                    v.thickness = parseInt(u[1].replace('px', ''));
+                    v.thickness = parseInt(params[1].replace('px', ''));
                 }
                 if (len >= 3) {
-                    v.offset = parseInt(u[2].replace('px', ''));
+                    v.offset = parseInt(params[2].replace('px', ''));
+                }
+
+                if (k === 'underline') {
+                    k = 'u';
+                } else if (k === 'strikethrough') {
+                    k = 's'
                 }
                 break;
 

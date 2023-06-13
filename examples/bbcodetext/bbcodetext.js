@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
 [size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][color=green][stroke=black]GGG[/stroke][/color]
 [color=white][size=36]This is a [img=key]
-Last line`;
+[s]Last line[/s]`;
         var text = this.add.rexBBCodeText(100, 30, s1, {
             backgroundColor: '#555',
             fontSize: '60px',
@@ -41,6 +41,12 @@ Last line`;
                 color: '#000',
                 thickness: 2,
                 offset: 1
+            },
+
+            strikethrough: {
+                color: 'red',
+                thickness: 2,
+                offset: -8
             }
         });
         console.log(text.getWrappedText());

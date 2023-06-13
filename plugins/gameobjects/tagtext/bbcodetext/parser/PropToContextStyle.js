@@ -85,6 +85,22 @@ var PropToContextStyle = function (defaultStyle, prop) {
         result.underlineOffset = 0;
     }
 
+    if (prop.hasOwnProperty('s')) {
+        if (prop.s === true) {
+            result.strikethroughColor = defaultStyle.strikethroughColor;
+            result.strikethroughThickness = defaultStyle.strikethroughThickness;
+            result.strikethroughOffset = defaultStyle.strikethroughOffset;
+        } else {
+            result.strikethroughColor = prop.s;
+            result.strikethroughThickness = defaultStyle.strikethroughThickness;
+            result.strikethroughOffset = defaultStyle.strikethroughOffset;
+        }
+    } else {
+        result.strikethroughColor = '#000';
+        result.strikethroughThickness = 0;
+        result.strikethroughOffset = 0;
+    }
+
     return result;
 }
 

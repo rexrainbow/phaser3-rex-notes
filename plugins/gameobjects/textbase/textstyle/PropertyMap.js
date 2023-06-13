@@ -31,6 +31,11 @@ var PropertyMap = {
     underlineThickness: ['underline.thickness', 0, null],
     underlineOffset: ['underline.offset', 0, null],
 
+    // strikethrough
+    strikethroughColor: ['strikethrough.color', '#000', GetStyle],
+    strikethroughThickness: ['strikethrough.thickness', 0, null],
+    strikethroughOffset: ['strikethrough.offset', 0, null],
+
     // align
     halign: ['halign', 'left', null],
     valign: ['valign', 'top', null],

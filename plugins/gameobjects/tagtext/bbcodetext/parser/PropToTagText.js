@@ -38,10 +38,11 @@ var PropToTagText = function (text, prop, prevProp) {
                 break;
 
             case 'u':
+            case 's':
                 if (value === true) {
-                    headers.push(`${delimiterLeft}u${delimiterRight}`);
+                    headers.push(`${delimiterLeft}${k}${delimiterRight}`);
                 } else {
-                    headers.push(`${delimiterLeft}u=${value}${delimiterRight}`)
+                    headers.push(`${delimiterLeft}${k}=${value}${delimiterRight}`)
                 }
                 break;
 

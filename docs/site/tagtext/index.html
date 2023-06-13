@@ -9649,6 +9649,11 @@
         <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
+    <span class="nx">strikethrough</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+        <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="p">},</span>    
     <span class="c1">// align: &#39;left&#39;,  // Equal to halign</span>
     <span class="nx">halign</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;</span>
     <span class="nx">valign</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>  <span class="c1">// &#39;top&#39;|&#39;center&#39;|&#39;bottom&#39;</span>
@@ -9764,6 +9769,11 @@
         <span class="nx">thickness</span><span class="o">:</span> <span class="mf">3</span><span class="p">,</span>
         <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span>
     <span class="p">},</span>
+    <span class="nx">strikethrough</span><span class="o">:</span> <span class="p">{</span>        <span class="c1">// or &#39;s&#39;</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+        <span class="nx">thickness</span><span class="o">:</span> <span class="mf">3</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span>
+    <span class="p">},</span>    
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">img</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
     <span class="nx">area</span><span class="o">:</span> <span class="nx">areaKey</span><span class="p">,</span>
@@ -9918,6 +9928,20 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineThinkness</span><span class="p">(</span><span class="nx">thickness</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineOffset</span><span class="p">(</span><span class="nx">ofset</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Strikethrough color, thickness<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">thickness</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughThickness</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughOffset</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethrough</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">,</span> <span class="nx">ofset</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughThinkness</span><span class="p">(</span><span class="nx">thickness</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughOffset</span><span class="p">(</span><span class="nx">ofset</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -10121,6 +10145,7 @@
 <li><code>&lt;style='stroke:blue 1px'&gt;Some text&lt;/style&gt;</code> (color thickness)</li>
 <li><code>&lt;style='shadow:blue 2px 2px 2px'&gt;Some text&lt;/style&gt;</code> (color offsetX offsetY blur)</li>
 <li><code>&lt;style='underline:blue 3px -1px'&gt;Some text&lt;/style&gt;</code> (color thickness offset)</li>
+<li><code>&lt;style='strikethrough:blue 3px -1px'&gt;Some text&lt;/style&gt;</code> (color thickness offset)</li>
 </ul>
 <p>Or mix them</p>
 <ul>

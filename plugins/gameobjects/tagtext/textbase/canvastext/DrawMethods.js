@@ -113,7 +113,8 @@ export default {
 
         // Underline
         if ((curStyle.underlineThickness > 0) && (pen.width > 0)) {
-            this.drawUnderline(offsetX, offsetY, pen.width, curStyle);
+            var lineOffsetY = offsetY + curStyle.underlineOffset - (curStyle.underlineThickness / 2);
+            this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.underlineThickness, curStyle.underlineColor);
         }
 
         // Text
@@ -124,6 +125,12 @@ export default {
         // Image
         if (pen.isImagePen) {
             this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
+        }
+
+        // Strikethrough
+        if ((curStyle.strikethroughThickness > 0) && (pen.width > 0)) {
+            var lineOffsetY = offsetY + curStyle.strikethroughOffset - (curStyle.strikethroughThickness / 2);
+            this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.strikethroughThickness, curStyle.strikethroughColor);
         }
 
         context.restore();
@@ -158,8 +165,7 @@ export default {
         this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
 
-    drawUnderline(x, y, width, style) {
-        y += style.underlineOffset - (style.underlineThickness / 2);
+    drawLine(x, y, width, height, color) {
         if (this.autoRound) {
             x = Math.round(x);
             y = Math.round(y);
@@ -168,8 +174,8 @@ export default {
         var context = this.context;
         var savedLineCap = context.lineCap;
         context.lineCap = 'butt';
-        context.strokeStyle = style.underlineColor;
-        context.lineWidth = style.underlineThickness;
+        context.strokeStyle = color;
+        context.lineWidth = height;
         context.beginPath();
         context.moveTo(x, y);
         context.lineTo((x + width), y);

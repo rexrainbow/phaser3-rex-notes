@@ -124,6 +124,11 @@ Default style
         thickness: 0,
         offset: 0
     },
+    strikethrough: {
+        color: '#000',
+        thickness: 0,
+        offset: 0
+    },    
     // align: 'left',  // Equal to halign
     halign: 'left', // 'left'|'center'|'right'
     valign: 'top',  // 'top'|'center'|'bottom'
@@ -241,6 +246,11 @@ var txt = scene.make.rexTagText({
         thickness: 3,
         offset: -1
     },
+    strikethrough: {        // or 's'
+        color: 'red',
+        thickness: 3,
+        offset: -1
+    },    
     y: 0,
     img: textureKey,
     area: areaKey,
@@ -405,6 +415,20 @@ txt.setFontStyle(style);
         txt.setUnderlineColor(color);
         txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
+        ```
+- Strikethrough color, thickness
+    - Get
+        ```javascript
+        var color = txt.style.strikethroughColor;
+        var thickness = txt.style.strikethroughThickness;
+        var offset = txt.style.strikethroughOffset;
+        ```
+    - Set
+        ```javascript
+        txt.setStrikethrough(color, thickness, ofset);
+        txt.setStrikethroughColor(color);
+        txt.setStrikethroughThinkness(thickness);
+        txt.setStrikethroughOffset(ofset);
         ```
 - Background
     - Color, or gradient color
@@ -620,6 +644,7 @@ Define style inline text.
 - `<style='stroke:blue 1px'>Some text</style>` (color thickness)
 - `<style='shadow:blue 2px 2px 2px'>Some text</style>` (color offsetX offsetY blur)
 - `<style='underline:blue 3px -1px'>Some text</style>` (color thickness offset)
+- `<style='strikethrough:blue 3px -1px'>Some text</style>` (color thickness offset)
 
 Or mix them
 

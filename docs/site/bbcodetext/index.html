@@ -9617,6 +9617,10 @@
 <li>Underline with color setting : <code>[u=red]text[/u]</code></li>
 </ul>
 </li>
+<li>Strikethrough : <code>[s]text[/s]</code><ul>
+<li>Strikethrough with color setting : <code>[s=red]text[/s]</code></li>
+</ul>
+</li>
 <li>Superscript, subscript : <code>[y=-12]text[y]</code></li>
 <li>Image : <code>[img=imgKey]</code></li>
 <li>Hit area of words : <code>[area=key]text[/area]</code></li>
@@ -9676,6 +9680,11 @@
         <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
     <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>  <span class="c1">// css string, or number</span>
+        <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="p">},</span>
+    <span class="nx">strikethrough</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>  <span class="c1">// css string, or number</span>
         <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span>
@@ -9942,6 +9951,23 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineThinkness</span><span class="p">(</span><span class="nx">thickness</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineOffset</span><span class="p">(</span><span class="nx">ofset</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Strikethrough color, thickness<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">thickness</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughThickness</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strikethroughOffset</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethrough</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">,</span> <span class="nx">ofset</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughThinkness</span><span class="p">(</span><span class="nx">thickness</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setStrikethroughOffset</span><span class="p">(</span><span class="nx">ofset</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>color</code> : <code>null</code>, css string, or number.</li>
 </ul>

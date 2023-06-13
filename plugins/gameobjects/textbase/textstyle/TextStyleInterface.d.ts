@@ -32,6 +32,12 @@ interface TextStyle {
         offset?: number,
     },
 
+    strikethrough?: {
+        color?: number | string,
+        thickness?: number,
+        offset?: number,
+    },
+
     align?: 'left' | 'center' | 'right',
     halign?: 'left' | 'center' | 'right',
     valign?: 'top' | 'center' | 'bottom',

@@ -123,6 +123,17 @@ declare class Text extends CanvasGameObjectBase {
     setUnderlineThinkness(thickness: number): this;
     setUnderlineOffset(ofset: number): this;
 
+    setStrikethrough(
+        color?: null | string | number,
+        thickness?: number,
+        ofset?: number
+    ): this;
+    setStrikethroughColor(
+        color?: null | string | number
+    ): this;
+    setStrikethroughThinkness(thickness: number): this;
+    setStrikethroughOffset(ofset: number): this;
+
     setBackgroundColor(
         color?: null | string | number,
         color2?: null | string | number,
@@ -222,6 +233,10 @@ declare class Text extends CanvasGameObjectBase {
         underlineColor: string | null,
         underlineThickness: number,
         underlineOffset: number,
+
+        strikethroughColor: string | null,
+        strikethroughThickness: number,
+        strikethroughOffset: number,
 
         backgroundColor: string | null,
         backgroundColor2: string | null,

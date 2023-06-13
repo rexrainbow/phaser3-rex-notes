@@ -536,6 +536,10 @@
     underlineColor: ['underline.color', '#000', GetStyle],
     underlineThickness: ['underline.thickness', 0, null],
     underlineOffset: ['underline.offset', 0, null],
+    // strikethrough
+    strikethroughColor: ['strikethrough.color', '#000', GetStyle],
+    strikethroughThickness: ['strikethrough.thickness', 0, null],
+    strikethroughOffset: ['strikethrough.offset', 0, null],
     // align
     halign: ['halign', 'left', null],
     valign: ['valign', 'top', null],
@@ -714,6 +718,9 @@
       this.underlineColor;
       this.underlineThickness;
       this.underlineOffset;
+      this.strikethroughColor;
+      this.strikethroughThickness;
+      this.strikethroughOffset;
       this.halign;
       this.valign;
       this.maxLines;
@@ -1110,6 +1117,50 @@
           offset = 0;
         }
         this.underlineOffset = offset;
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethrough",
+      value: function setStrikethrough(color, thickness, offset) {
+        if (color === undefined) {
+          color = '#000';
+        }
+        if (thickness === undefined) {
+          thickness = 0;
+        }
+        if (offset === undefined) {
+          offset = 0;
+        }
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        this.strikethroughThickness = thickness;
+        this.strikethroughOffset = offset;
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughColor",
+      value: function setStrikethroughColor(color) {
+        if (color === undefined) {
+          color = '#000';
+        }
+        this.strikethroughColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughThickness",
+      value: function setStrikethroughThickness(thickness) {
+        if (thickness === undefined) {
+          thickness = 0;
+        }
+        this.strikethroughThickness = thickness;
+        return this.update(false);
+      }
+    }, {
+      key: "setStrikethroughOffset",
+      value: function setStrikethroughOffset(offset) {
+        if (offset === undefined) {
+          offset = 0;
+        }
+        this.strikethroughOffset = offset;
         return this.update(false);
       }
     }, {
@@ -1664,7 +1715,8 @@
 
       // Underline
       if (curStyle.underlineThickness > 0 && pen.width > 0) {
-        this.drawUnderline(offsetX, offsetY, pen.width, curStyle);
+        var lineOffsetY = offsetY + curStyle.underlineOffset - curStyle.underlineThickness / 2;
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.underlineThickness, curStyle.underlineColor);
       }
 
       // Text
@@ -1675,6 +1727,12 @@
       // Image
       if (pen.isImagePen) {
         this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
+      }
+
+      // Strikethrough
+      if (curStyle.strikethroughThickness > 0 && pen.width > 0) {
+        var lineOffsetY = offsetY + curStyle.strikethroughOffset - curStyle.strikethroughThickness / 2;
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.strikethroughThickness, curStyle.strikethroughColor);
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
@@ -1706,8 +1764,7 @@
       var canvas = this.canvas;
       this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
-    drawUnderline: function drawUnderline(x, y, width, style) {
-      y += style.underlineOffset - style.underlineThickness / 2;
+    drawLine: function drawLine(x, y, width, height, color) {
       if (this.autoRound) {
         x = Math.round(x);
         y = Math.round(y);
@@ -1715,8 +1772,8 @@
       var context = this.context;
       var savedLineCap = context.lineCap;
       context.lineCap = 'butt';
-      context.strokeStyle = style.underlineColor;
-      context.lineWidth = style.underlineThickness;
+      context.strokeStyle = color;
+      context.lineWidth = height;
       context.beginPath();
       context.moveTo(x, y);
       context.lineTo(x + width, y);
@@ -3636,6 +3693,16 @@
           result.underlineThickness = defaultStyle.underlineThickness;
           result.underlineOffset = defaultStyle.underlineOffset;
         }
+        if (prop.hasOwnProperty('s') || prop.hasOwnProperty('strikethrough')) {
+          var s = prop.hasOwnProperty('s') ? prop.s : prop.strikethrough; // {color, thickness, offset}
+          result.strikethroughColor = s.hasOwnProperty('color') ? s.color : defaultStyle.strikethroughColor;
+          result.strikethroughThickness = s.hasOwnProperty('thickness') ? s.thickness : defaultStyle.strikethroughThickness;
+          result.strikethroughOffset = s.hasOwnProperty('offset') ? s.offset : defaultStyle.strikethroughOffset;
+        } else {
+          result.strikethroughColor = defaultStyle.strikethroughColor;
+          result.strikethroughThickness = defaultStyle.strikethroughThickness;
+          result.strikethroughOffset = defaultStyle.strikethroughOffset;
+        }
         return result;
       }
     }, {
@@ -3701,47 +3768,54 @@
       }
       switch (k) {
         case 'stroke':
-          var stroke = v.split(' '); // stroke:blue 1px
-          var len = stroke.length;
+          var params = v.split(' '); // stroke:blue 1px
+          var len = params.length;
           v = {};
           if (len >= 1) {
-            v.color = stroke[0];
+            v.color = params[0];
           }
           if (len >= 2) {
-            v.thickness = parseInt(stroke[1].replace('px', ''));
+            v.thickness = parseInt(params[1].replace('px', ''));
           }
           break;
         case 'shadow':
-          var shadow = v.split(' '); // shadow:blue 2px 2px 2px
-          var len = shadow.length;
+          var params = v.split(' '); // shadow:blue 2px 2px 2px
+          var len = params.length;
           v = {};
           if (len >= 1) {
-            v.color = shadow[0];
+            v.color = params[0];
           }
           if (len >= 2) {
-            v.offsetX = parseInt(shadow[1].replace('px', ''));
+            v.offsetX = parseInt(params[1].replace('px', ''));
           }
           if (len >= 3) {
-            v.offsetY = parseInt(shadow[2].replace('px', ''));
+            v.offsetY = parseInt(params[2].replace('px', ''));
           }
           if (len >= 4) {
-            v.blur = parseInt(shadow[3].replace('px', ''));
+            v.blur = parseInt(params[3].replace('px', ''));
           }
           break;
         case 'u':
         case 'underline':
+        case 's':
+        case 'strikethrough':
           // underline:blue 3px -1px
-          var u = v.split(' ');
-          var len = u.length;
+          var params = v.split(' ');
+          var len = params.length;
           v = {};
           if (len >= 1) {
-            v.color = u[0];
+            v.color = params[0];
           }
           if (len >= 2) {
-            v.thickness = parseInt(u[1].replace('px', ''));
+            v.thickness = parseInt(params[1].replace('px', ''));
           }
           if (len >= 3) {
-            v.offset = parseInt(u[2].replace('px', ''));
+            v.offset = parseInt(params[2].replace('px', ''));
+          }
+          if (k === 'underline') {
+            k = 'u';
+          } else if (k === 'strikethrough') {
+            k = 's';
           }
           break;
         case 'y':

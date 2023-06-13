@@ -93,6 +93,8 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Shadow : `[shadow]text[/shadow]`
 - Underline : `[u]text[/u]`
     - Underline with color setting : `[u=red]text[/u]`
+- Strikethrough : `[s]text[/s]`
+    - Strikethrough with color setting : `[s=red]text[/s]`
 - Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
@@ -151,6 +153,11 @@ Default style
         fill: false
     },
     underline: {
+        color: '#000',  // css string, or number
+        thickness: 0,
+        offset: 0
+    },
+    strikethrough: {
         color: '#000',  // css string, or number
         thickness: 0,
         offset: 0
@@ -408,6 +415,21 @@ txt.setFontStyle(style);
         txt.setUnderlineColor(color);
         txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
+        ```
+        - `color` : `null`, css string, or number.
+- Strikethrough color, thickness
+    - Get
+        ```javascript
+        var color = txt.style.strikethroughColor;
+        var thickness = txt.style.strikethroughThickness;
+        var offset = txt.style.strikethroughOffset;
+        ```
+    - Set
+        ```javascript
+        txt.setStrikethrough(color, thickness, ofset);
+        txt.setStrikethroughColor(color);
+        txt.setStrikethroughThinkness(thickness);
+        txt.setStrikethroughOffset(ofset);
         ```
         - `color` : `null`, css string, or number.
 - Background
