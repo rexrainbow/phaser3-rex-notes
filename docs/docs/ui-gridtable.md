@@ -19,6 +19,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Drag item](https://codepen.io/rexrainbow/pen/WNaQrgp)
 - [Fade-out-destroy cell](https://codepen.io/rexrainbow/pen/YzXYemw)
+- [Custom mask](https://codepen.io/rexrainbow/pen/LYXpMxY)
 
 ## Usage
 
@@ -109,7 +110,7 @@ var table = scene.rexUI.add.gridTable({
             padding: 0,
             // updateMode: 0,
         },
-        // enableLayer : false,
+        // enableLayer: false,
         interactive: true,
         reuseCellContainer: false,
 
