@@ -73,6 +73,10 @@ class WeightSelector extends Composite {
     }
 
     evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
         var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
         for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
             value -= this.weights[i];
