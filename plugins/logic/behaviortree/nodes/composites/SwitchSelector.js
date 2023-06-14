@@ -6,6 +6,7 @@ class SwitchSelector extends Composite {
         {
             expression = null,
             keys = undefined, // Or [key, ...]
+            returnPending = false,
             children = {},    // Or [child, ...]
             services,
             title,
@@ -27,20 +28,40 @@ class SwitchSelector extends Composite {
                 name,
                 properties: {
                     expression,
-                    keys
+                    keys,
+                    returnPending,
                 },
             },
             nodePool
         );
 
         this.expression = this.addExpression(expression);
-
         this.keys = keys;  // Index of children
+        this.returnPending = returnPending;
+        this.forceSelectChildIndex = undefined;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            if (typeof (this.forceSelectChildIndex) === 'number') {
+                return this.forceSelectChildIndex;
+            } else {
+                return this.keys.indexOf(this.forceSelectChildIndex);
+            }
+        }
+
+        var key = tick.evalExpression(this.expression);
+        return this.keys.indexOf(key);
     }
 
     tick(tick) {
@@ -51,13 +72,16 @@ class SwitchSelector extends Composite {
         var nodeMemory = this.getNodeMemory(tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-            var key = tick.evalExpression(this.expression);
-            childIndex = this.keys.indexOf(key);
+            childIndex = this.evalCondition(tick);
             if (childIndex === -1) {
                 childIndex = this.keys.indexOf('default');
             }
             if (childIndex === -1) {
                 return ERROR;
+            }
+            if (this.returnPending) {
+                nodeMemory.$runningChild = childIndex;
+                return PENDING;
             }
         }
 

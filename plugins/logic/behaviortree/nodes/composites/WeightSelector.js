@@ -7,6 +7,7 @@ class WeightSelector extends Composite {
         {
             expression = null,
             weights = undefined,    // Or [weight, ...]
+            returnPending = false,
             children = [],          // [node, ...], or [{weight, node}, ...]
             services,
             title,
@@ -44,20 +45,41 @@ class WeightSelector extends Composite {
                 name,
                 properties: {
                     expression,
-                    weights
+                    weights,
+                    returnPending,
                 },
             },
             nodePool
         );
 
         this.expression = (expression) ? this.addExpression(expression) : null;
-
         this.weights = weights;
+        this.returnPending = returnPending;
+        this.forceSelectChildIndex = undefined;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
+        for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
+            value -= this.weights[i];
+            if (value < 0) {
+                return i;
+            }
+        }
     }
 
     tick(tick) {
@@ -68,14 +90,13 @@ class WeightSelector extends Composite {
         var nodeMemory = this.getNodeMemory(tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-            var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
-            // console.log(value);
-            for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
-                value -= this.weights[i];
-                if (value < 0) {
-                    childIndex = i;
-                    break;
-                }
+            childIndex = this.evalCondition(tick);
+            if (childIndex === undefined) {
+                childIndex = this.children.length - 1;
+            }
+            if (this.returnPending) {
+                nodeMemory.$runningChild = childIndex;
+                return PENDING;
             }
         }
 

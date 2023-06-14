@@ -30,11 +30,25 @@ class IfSelector extends Composite {
 
         this.expression = this.addBooleanExpression(expression);
         this.returnPending = returnPending;
+        this.forceSelectChildIndex = undefined;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1;  // No running child
+    }
+
+    setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+    }
+
+    evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+            return this.forceSelectChildIndex;
+        }
+
+        return tick.evalExpression(this.expression) ? 0 : 1;
     }
 
     tick(tick) {
@@ -45,7 +59,7 @@ class IfSelector extends Composite {
         var nodeMemory = this.getNodeMemory(tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-            childIndex = tick.evalExpression(this.expression) ? 0 : 1;
+            childIndex = this.evalCondition(tick);
             if (this.returnPending) {
                 nodeMemory.$runningChild = childIndex;
                 return PENDING;
