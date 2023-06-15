@@ -3,8 +3,11 @@ import StateMethods from './StateMethods.js';
 import RunMethods from './RunMethods.js';
 
 class EventBehaviorTreeGroup {
-    constructor(parent) {
+    constructor(parent, {
+        name = ''
+    } = {}) {
         this.parent = parent;
+        this.name = name;
 
         this.trees = [];
         this.pendingTrees = [];

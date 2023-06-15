@@ -12,7 +12,7 @@ export default {
 
     getTreeGroup(name) {
         if (!this.hasTreeGroup(name)) {
-            this.treeGroups[name] = new TreeGroup(this)
+            this.treeGroups[name] = new TreeGroup(this, { name });
         }
         return this.treeGroups[name];
     },

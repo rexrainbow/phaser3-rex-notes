@@ -48,7 +48,7 @@ export default {
         var blackboard = treeManager.blackboard;
         var commandExecutor = treeManager.commandExecutor;
 
-        treeManager._continueCallback = this.continue.bind(this);
+        blackboard.treeGroup = this;  // For TaskAction
         closedTrees.length = 0;
 
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
@@ -63,9 +63,9 @@ export default {
             var eventConditionPassed = tree.eventConditionPassed;
             if ((status === PENDING)) {
                 if (eventConditionPassed) {
-                    treeManager.emit('eventsheet.enter', tree.title, this);
+                    treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
                 } else {
-                    treeManager.emit('eventsheet.catch', tree.title, this);
+                    treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
                 }
             }
 
@@ -82,7 +82,7 @@ export default {
             } else {
                 closedTrees.push(tree);
                 if (eventConditionPassed) {
-                    treeManager.emit('eventsheet.exit', tree.title, this);
+                    treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
                 }
             }
 
@@ -93,7 +93,7 @@ export default {
 
         }
 
-        treeManager._continueCallback = null;
+        blackboard.treeGroup = undefined;
 
         if (closedTrees.length > 0) {
             RemoveItem(trees, closedTrees);
@@ -101,7 +101,7 @@ export default {
 
         if (trees.length === 0) {
             this.isRunning = false;
-            treeManager.emit('complete', this);
+            treeManager.emit('complete', this.name, treeManager);
         }
 
         return this;

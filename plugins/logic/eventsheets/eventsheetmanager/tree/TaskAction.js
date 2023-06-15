@@ -25,7 +25,7 @@ class TaskAction extends Action {
                 } else if ((value.indexOf('{{') > -1) && (value.indexOf('}}') > -1)) {
                     // Might be a string template
                     var template = value;
-                    value = function(data) {
+                    value = function (data) {
                         return mustache.render(template, data);
                     }
                 }
@@ -45,7 +45,9 @@ class TaskAction extends Action {
             return;
         }
 
-        var treeManager = tick.blackboard.treeManager;
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
         var memory = treeManager.memory;
 
         var taskParameters = this.taskParameters;
@@ -76,7 +78,7 @@ class TaskAction extends Action {
 
             eventEmitter.once('complete', this.onTaskComplete, this);
 
-            this.continueCallback = treeManager._continueCallback;
+            this.continueCallback = treeGroup.continue.bind(treeGroup);
             this.continueEE = eventEmitter;
         }
     }
