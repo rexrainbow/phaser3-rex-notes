@@ -1,4 +1,4 @@
-import { BehaviorTree, IfSelector } from '../../behaviortree';
+import { BehaviorTree, IfSelector } from '../../../behaviortree';
 
 class EventBehaviorTree extends BehaviorTree {
     constructor(config) {

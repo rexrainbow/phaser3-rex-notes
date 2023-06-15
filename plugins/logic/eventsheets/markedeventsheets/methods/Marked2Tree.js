@@ -1,5 +1,5 @@
 import { ForceFailure, Succeeder } from '../../../behaviortree/index.js';
-import EventBehaviorTree from '../../eventsheettrees/EventBehaviorTree.js';
+import EventBehaviorTree from '../../eventsheetmanager/tree/EventBehaviorTree.js';
 import GetHeadingTree from './GetHeadingTree.js';
 import GetTreeConfig from './GetTreeConfig.js';
 

@@ -1,5 +1,5 @@
 import Managers from '../../runcommands/managers/Managers';
-import EventSheetManager from '../eventsheettrees/EventSheetTrees';
+import EventSheetManager from '../eventsheetmanager/EventSheetManager';
 
 export default CommandExecutor;
 

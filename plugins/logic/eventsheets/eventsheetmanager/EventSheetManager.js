@@ -8,7 +8,7 @@ import RunMethods from './methods/RunMethods.js';
 
 BehaviorTree.setStartIDValue(0);
 
-class EventSheetTrees extends EventEmitter {
+class EventSheetManager extends EventEmitter {
     constructor({
         commandExecutor,
         parallel = false,
@@ -22,12 +22,7 @@ class EventSheetTrees extends EventEmitter {
         this.blackboard = new Blackboard();
         this.blackboard.treeManager = this; // For TaskAction
 
-        this.trees = [];
-        this.pendingTrees = [];
-        this.closedTrees = [];  // Temporary tree array
-
-        this.isRunning = false;
-        this._threadKey = null;
+        this.treeGroups = {};
     }
 
     get memory() {
@@ -42,7 +37,7 @@ class EventSheetTrees extends EventEmitter {
 }
 
 Object.assign(
-    EventSheetTrees.prototype,
+    EventSheetManager.prototype,
     TreeMethods,
     DataMethods,
     StateMethods,
@@ -50,4 +45,4 @@ Object.assign(
     RunMethods,
 )
 
-export default EventSheetTrees;
+export default EventSheetManager;

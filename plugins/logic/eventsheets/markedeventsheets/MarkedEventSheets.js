@@ -1,12 +1,14 @@
-import EventSheetTrees from '../eventsheettrees/EventSheetTrees.js';
+import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
 import Marked2Tree from './methods/Marked2Tree.js';
 
-class MarkedEventSheets extends EventSheetTrees {
+class MarkedEventSheets extends EventSheetManager {
     addEventSheet(markedString, {
         lineReturn = '\\',
         commentLineStart = '\/\/',
         parallel = this.parallel,
-    } = {}) {
+    } = {},
+        groupName = 'default'
+    ) {
 
         var tree = Marked2Tree(markedString, {
             lineReturn,
@@ -14,7 +16,7 @@ class MarkedEventSheets extends EventSheetTrees {
             parallel
         });
 
-        this.addTree(tree);
+        this.addTree(tree, groupName);
         return this;
     }
 }

@@ -2,8 +2,8 @@ import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer } 
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
-import TaskSequence from '../../eventsheettrees/TaskSequence';
-import TaskAction from '../../eventsheettrees/TaskAction.js';
+import TaskSequence from '../../eventsheetmanager/tree/TaskSequence.js';
+import TaskAction from '../../eventsheetmanager/tree/TaskAction.js';
 
 var TypeNames = ['if', 'else', 'while'];
 

@@ -1,6 +1,6 @@
-import { Action, } from '../../behaviortree';
-import IsEventEmitter from '../../../utils/system/IsEventEmitter.js';
-import Compile from '../../../math/expressionparser/utils/Complile.js';
+import { Action, } from '../../../behaviortree';
+import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
+import Compile from '../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';
 
 class TaskAction extends Action {
@@ -76,7 +76,7 @@ class TaskAction extends Action {
 
             eventEmitter.once('complete', this.onTaskComplete, this);
 
-            this.continueCallback = treeManager.continue.bind(treeManager);
+            this.continueCallback = treeManager._continueCallback;
             this.continueEE = eventEmitter;
         }
     }

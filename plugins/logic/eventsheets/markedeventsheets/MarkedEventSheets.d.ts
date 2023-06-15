@@ -1,9 +1,9 @@
-import EventSheetTrees from '../eventsheettrees/EventSheetTrees';
+import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
 
 export default MarkedEventSheets;
 
 declare namespace MarkedEventSheets {
-    interface IConfig extends EventSheetTrees.IConfig {
+    interface IConfig extends EventSheetManager.IConfig {
 
     }
 
@@ -14,10 +14,11 @@ declare namespace MarkedEventSheets {
     }
 }
 
-declare class MarkedEventSheets extends EventSheetTrees {
+declare class MarkedEventSheets extends EventSheetManager {
     addEventSheet(
         content: string,
-        config?: MarkedEventSheets.IAddEventSheet
+        config?: MarkedEventSheets.IAddEventSheet,
+        groupName?: string
     ): this;
 
 }

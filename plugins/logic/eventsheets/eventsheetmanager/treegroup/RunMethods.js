@@ -9,10 +9,11 @@ export default {
 
         this.isRunning = true;
 
+        var treeManager = this.parent;
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
-        var blackboard = this.blackboard;
-        var commandExecutor = this.commandExecutor;
+        var blackboard = treeManager.blackboard;
+        var commandExecutor = treeManager.commandExecutor;
 
         pendingTrees.length = 0;
 
@@ -41,12 +42,15 @@ export default {
             return this;
         }
 
+        var treeManager = this.parent;
         var trees = this.pendingTrees;
         var closedTrees = this.closedTrees;
-        var blackboard = this.blackboard;
-        var commandExecutor = this.commandExecutor;
+        var blackboard = treeManager.blackboard;
+        var commandExecutor = treeManager.commandExecutor;
 
+        treeManager._continueCallback = this.continue.bind(this);
         closedTrees.length = 0;
+
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
             var status = blackboard.getTreeState(tree.id);
@@ -59,9 +63,9 @@ export default {
             var eventConditionPassed = tree.eventConditionPassed;
             if ((status === PENDING)) {
                 if (eventConditionPassed) {
-                    this.emit('eventsheet.enter', tree.title, this);
+                    treeManager.emit('eventsheet.enter', tree.title, this);
                 } else {
-                    this.emit('eventsheet.catch', tree.title, this);
+                    treeManager.emit('eventsheet.catch', tree.title, this);
                 }
             }
 
@@ -78,7 +82,7 @@ export default {
             } else {
                 closedTrees.push(tree);
                 if (eventConditionPassed) {
-                    this.emit('eventsheet.exit', tree.title, this);
+                    treeManager.emit('eventsheet.exit', tree.title, this);
                 }
             }
 
@@ -89,13 +93,15 @@ export default {
 
         }
 
+        treeManager._continueCallback = null;
+
         if (closedTrees.length > 0) {
             RemoveItem(trees, closedTrees);
         }
 
         if (trees.length === 0) {
             this.isRunning = false;
-            this.emit('complete', this);
+            treeManager.emit('complete', this);
         }
 
         return this;
@@ -113,11 +119,4 @@ export default {
 
         return this;
     },
-
-    getContinueCallback() {
-        var self = this;
-        return function () {
-            self.continue();
-        }
-    }
 }

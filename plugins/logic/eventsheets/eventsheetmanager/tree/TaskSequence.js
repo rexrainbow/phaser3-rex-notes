@@ -1,4 +1,4 @@
-import { Sequence, SUCCESS, FAILURE } from '../../behaviortree';
+import { Sequence, SUCCESS, FAILURE } from '../../../behaviortree';
 
 class TaskSequence extends Sequence {
     open(tick) {

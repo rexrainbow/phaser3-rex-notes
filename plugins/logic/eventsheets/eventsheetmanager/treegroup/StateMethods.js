@@ -1,9 +1,5 @@
 export default {
-    dumpState(includeTree) {
-        if (includeTree === undefined) {
-            includeTree = false;
-        }
-
+    dumpState(includeTree = false) {
         var state = {
             blackboard: this.blackboard.dump(),
             isRunning: this.isRunning,

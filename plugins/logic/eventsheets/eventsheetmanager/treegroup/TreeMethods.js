@@ -1,14 +1,9 @@
-import CustomNodeMapping from './CustomNodeMapping.js';
+import CustomNodeMapping from '../tree/CustomNodeMapping.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 import { BehaviorTree, PENDING, RUNNING } from '../../../behaviortree';
 import DeepClone from '../../../../utils/object/DeepClone.js';
 
 export default {
-    // Override it
-    addEventSheet(s, config) {
-
-    },
-
     addTree(tree) {
         this.trees.push(tree);
         return this;
