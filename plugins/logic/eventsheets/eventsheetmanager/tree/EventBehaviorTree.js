@@ -27,6 +27,12 @@ class EventBehaviorTree extends BehaviorTree {
         var nodeMemory = this.root.getNodeMemory(this.ticker);
         return (nodeMemory.$runningChild === 0);
     }
+
+    setConditionEnable(enable = true) {
+        var selectChildIndex = (enable) ? undefined : 0;
+        this.root.setSelectChildIndex(selectChildIndex);
+        return this;
+    }
 }
 
 export default EventBehaviorTree;

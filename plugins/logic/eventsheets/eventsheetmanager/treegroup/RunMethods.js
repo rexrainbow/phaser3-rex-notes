@@ -119,4 +119,40 @@ export default {
 
         return this;
     },
+
+    startTree(title, ignoreCondition = true) {
+        if (this.isRunning) {
+            return this;
+        }
+
+        var tree = this.getTree(title);
+        if (!tree) {
+            return this;
+        }
+
+        this.isRunning = true;
+
+        var treeManager = this.parent;
+        var pendingTrees = this.pendingTrees;
+        var blackboard = treeManager.blackboard;
+        var commandExecutor = treeManager.commandExecutor;
+
+        pendingTrees.length = 0;
+
+        tree.resetState(blackboard);
+
+        tree.setConditionEnable(!ignoreCondition);
+
+        var status = tree.tick(blackboard, commandExecutor);
+
+        tree.setConditionEnable(true);
+
+        if (status === PENDING) {
+            pendingTrees.push(tree);
+        }
+
+        this.continue();
+
+        return this;
+    }
 }

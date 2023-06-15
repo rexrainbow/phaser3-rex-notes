@@ -7,7 +7,7 @@ class MarkedEventSheets extends EventSheetManager {
         commentLineStart = '\/\/',
         parallel = this.parallel,
     } = {},
-        groupName = 'default'
+        groupName = this.defaultTreeGroupName
     ) {
 
         var tree = Marked2Tree(markedString, {

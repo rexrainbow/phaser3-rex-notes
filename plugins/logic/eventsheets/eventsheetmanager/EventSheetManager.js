@@ -16,6 +16,8 @@ class EventSheetManager extends EventEmitter {
 
         super();
 
+        this.defaultTreeGroupName = '$default';
+
         this.setCommandExecutor(commandExecutor);
         this.parallel = parallel;
 

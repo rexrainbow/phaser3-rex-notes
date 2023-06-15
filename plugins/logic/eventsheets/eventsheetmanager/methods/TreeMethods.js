@@ -2,7 +2,7 @@ import TreeGroup from '../treegroup/EventBehaviorTreeGroup.js';
 
 export default {
     // Override it
-    addEventSheet(s, config, groupName = 'default') {
+    addEventSheet(s, config, groupName = this.defaultTreeGroupName) {
 
     },
 
@@ -17,21 +17,21 @@ export default {
         return this.treeGroups[name];
     },
 
-    addTree(tree, groupName = 'default') {
+    addTree(tree, groupName = this.defaultTreeGroupName) {
         this.getTreeGroup(groupName).addTree(tree);
         return this;
     },
 
-    getTreeState(tree, groupName = 'default') {
+    getTreeState(tree, groupName = this.defaultTreeGroupName) {
         return this.getTreeGroup(groupName).getTreeState(tree);
     },
 
-    clearAllEventSheets(groupName = 'default') {
+    clearAllEventSheets(groupName = this.defaultTreeGroupName) {
         this.getTreeGroup(groupName).clearAllEventSheets();
         return this;
     },
 
-    getEventSheetTitleList(out, groupName = 'default') {
+    getEventSheetTitleList(out, groupName = this.defaultTreeGroupName) {
         if (out === undefined) {
             out = [];
         }
@@ -39,16 +39,16 @@ export default {
         return out;
     },
 
-    removeEventSheet(title, groupName = 'default') {
+    removeEventSheet(title, groupName = this.defaultTreeGroupName) {
         this.getTreeGroup(groupName).removeEventSheet(title);
         return this;
     },
 
-    dumpTrees(groupName = 'default') {
+    dumpTrees(groupName = this.defaultTreeGroupName) {
         return this.getTreeGroup(groupName).dumpTrees();
     },
 
-    loadTrees(data, groupName = 'default') {
+    loadTrees(data, groupName = this.defaultTreeGroupName) {
         this.getTreeGroup(groupName).loadTrees(data);
         return this;
     },
