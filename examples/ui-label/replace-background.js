@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var ui = createLabel(this, 'Hello world').setPosition(400, 300);
+        var ui = CreateLabel(this, 'Hello world').setPosition(400, 300);
 
         var newBackground = this.rexUI.add.roundRectangle({
             radius: -20,
@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text) {
+var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle({
             radius: 20,

@@ -56,7 +56,7 @@ sizer.addBackground(gameObject);
     var child = sizer.getElement(key);
     ```
 
-#### Remove background child
+#### Remove background
 
 - Remove background child
     ```javascript
@@ -75,7 +75,7 @@ sizer.addBackground(gameObject);
     sizer.removeAllBackgrounds(true);
     ```
 
-#### Depth of background child
+#### Depth of background
 
 Send this background child to bottom of sizer.
 
