@@ -559,6 +559,14 @@ scene.tweens.add(tweenConfig);
     ```javascript
     container.moveDepthAbove(gameObject);
     ```
+- Bring a child of container to top of this container
+    ```javascript
+    container.bringChildToTop(gameObject);
+    ```
+- Send a child of container to bottom of this container
+    ```javascript
+    container.sendChildToBack(gameObject);
+    ```
 
 ### Layer
 

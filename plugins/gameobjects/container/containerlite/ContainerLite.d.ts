@@ -282,6 +282,14 @@ declare class ContainerLite extends Base {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    bringChildToTop(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
+
+    sendChildToBack(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
+
     getParent(
         name?: string
     ): ContainerLite;

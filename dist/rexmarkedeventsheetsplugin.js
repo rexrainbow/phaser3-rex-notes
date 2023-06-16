@@ -547,7 +547,7 @@
   var SUCCESS$1 = 1;
   var FAILURE = 2;
   var RUNNING$1 = 3;
-  var PENDING = 4;
+  var PENDING$1 = 4;
   var ABORT = 5;
   var ERROR$1 = 9;
   var TREE = 'tree';
@@ -2647,7 +2647,7 @@
     }, {
       key: "PENDING",
       get: function get() {
-        return PENDING;
+        return PENDING$1;
       }
     }, {
       key: "ERROR",
@@ -3391,7 +3391,7 @@
             case RUNNING$1:
               hasAnyRunningStatus = true;
               break;
-            case PENDING:
+            case PENDING$1:
               hasAnyPendingStatus = true;
               break;
             case ABORT:
@@ -3420,7 +3420,7 @@
           } else if (hasAnyAbortStatus) {
             return ABORT;
           } else if (hasAnyPendingStatus) {
-            return PENDING;
+            return PENDING$1;
           } else if (hasAnyRunningStatus) {
             return RUNNING$1;
           } else if (this.returnSuccess) {
@@ -3475,6 +3475,7 @@
       }, nodePool);
       _this.expression = _this.addBooleanExpression(expression);
       _this.returnPending = returnPending;
+      _this.forceSelectChildIndex = undefined;
       return _this;
     }
     _createClass(IfSelector, [{
@@ -3482,6 +3483,20 @@
       value: function open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1; // No running child
+      }
+    }, {
+      key: "setSelectChildIndex",
+      value: function setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+      }
+    }, {
+      key: "evalCondition",
+      value: function evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+          return this.forceSelectChildIndex;
+        }
+        return tick.evalExpression(this.expression) ? 0 : 1;
       }
     }, {
       key: "tick",
@@ -3492,10 +3507,10 @@
         var nodeMemory = this.getNodeMemory(_tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-          childIndex = _tick.evalExpression(this.expression) ? 0 : 1;
+          childIndex = this.evalCondition(_tick);
           if (this.returnPending) {
             nodeMemory.$runningChild = childIndex;
-            return PENDING;
+            return PENDING$1;
           }
         }
         var child = this.children[childIndex];
@@ -3527,6 +3542,8 @@
         expression = _ref$expression === void 0 ? null : _ref$expression,
         _ref$keys = _ref.keys,
         keys = _ref$keys === void 0 ? undefined : _ref$keys,
+        _ref$returnPending = _ref.returnPending,
+        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
         _ref$children = _ref.children,
         children = _ref$children === void 0 ? {} : _ref$children,
         services = _ref.services,
@@ -3546,11 +3563,14 @@
         name: name,
         properties: {
           expression: expression,
-          keys: keys
+          keys: keys,
+          returnPending: returnPending
         }
       }, nodePool);
       _this.expression = _this.addExpression(expression);
       _this.keys = keys; // Index of children
+      _this.returnPending = returnPending;
+      _this.forceSelectChildIndex = undefined;
       return _this;
     }
     _createClass(SwitchSelector, [{
@@ -3558,6 +3578,25 @@
       value: function open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1; // No running child
+      }
+    }, {
+      key: "setSelectChildIndex",
+      value: function setSelectChildIndex(index) {
+        this.forceSelectChildIndex = index;
+        return this;
+      }
+    }, {
+      key: "evalCondition",
+      value: function evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+          if (typeof this.forceSelectChildIndex === 'number') {
+            return this.forceSelectChildIndex;
+          } else {
+            return this.keys.indexOf(this.forceSelectChildIndex);
+          }
+        }
+        var key = tick.evalExpression(this.expression);
+        return this.keys.indexOf(key);
       }
     }, {
       key: "tick",
@@ -3568,13 +3607,16 @@
         var nodeMemory = this.getNodeMemory(_tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-          var key = _tick.evalExpression(this.expression);
-          childIndex = this.keys.indexOf(key);
+          childIndex = this.evalCondition(_tick);
           if (childIndex === -1) {
             childIndex = this.keys.indexOf('default');
           }
           if (childIndex === -1) {
             return ERROR$1;
+          }
+          if (this.returnPending) {
+            nodeMemory.$runningChild = childIndex;
+            return PENDING;
           }
         }
         var child = this.children[childIndex];
@@ -3606,6 +3648,8 @@
         expression = _ref$expression === void 0 ? null : _ref$expression,
         _ref$weights = _ref.weights,
         weights = _ref$weights === void 0 ? undefined : _ref$weights,
+        _ref$returnPending = _ref.returnPending,
+        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
         _ref$children = _ref.children,
         children = _ref$children === void 0 ? [] : _ref$children,
         services = _ref.services,
@@ -3640,11 +3684,14 @@
         name: name,
         properties: {
           expression: expression,
-          weights: weights
+          weights: weights,
+          returnPending: returnPending
         }
       }, nodePool);
       _this.expression = expression ? _this.addExpression(expression) : null;
       _this.weights = weights;
+      _this.returnPending = returnPending;
+      _this.forceSelectChildIndex = undefined;
       return _this;
     }
     _createClass(WeightSelector, [{
@@ -3652,6 +3699,29 @@
       value: function open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1; // No running child
+      }
+    }, {
+      key: "setSelectChildIndex",
+      value: function setSelectChildIndex(index) {
+        if (this.forceSelectChildIndex !== undefined) {
+          return this.forceSelectChildIndex;
+        }
+        this.forceSelectChildIndex = index;
+        return this;
+      }
+    }, {
+      key: "evalCondition",
+      value: function evalCondition(tick) {
+        if (this.forceSelectChildIndex !== undefined) {
+          return this.forceSelectChildIndex;
+        }
+        var value = this.expression ? tick.evalExpression(this.expression) : Math.random();
+        for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
+          value -= this.weights[i];
+          if (value < 0) {
+            return i;
+          }
+        }
       }
     }, {
       key: "tick",
@@ -3662,14 +3732,13 @@
         var nodeMemory = this.getNodeMemory(_tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-          var value = this.expression ? _tick.evalExpression(this.expression) : Math.random();
-          // console.log(value);
-          for (var i = 0, cnt = this.weights.length; i < cnt; i++) {
-            value -= this.weights[i];
-            if (value < 0) {
-              childIndex = i;
-              break;
-            }
+          childIndex = this.evalCondition(_tick);
+          if (childIndex === undefined) {
+            childIndex = this.children.length - 1;
+          }
+          if (this.returnPending) {
+            nodeMemory.$runningChild = childIndex;
+            return PENDING;
           }
         }
         var child = this.children[childIndex];
@@ -4395,7 +4464,7 @@
             return FAILURE;
           } else if (this.returnPending) {
             this.openChild(); // Open child but not run it now
-            return PENDING;
+            return PENDING$1;
           }
         }
         var status = this.child._execute(_tick);
@@ -5888,7 +5957,9 @@
         if (!taskName) {
           return;
         }
-        var treeManager = tick.blackboard.treeManager;
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
         var memory = treeManager.memory;
         var taskParameters = this.taskParameters;
         var parametersCopy = {};
@@ -5913,7 +5984,7 @@
         if (IsEventEmitter(eventEmitter)) {
           this.isRunning = true;
           eventEmitter.once('complete', this.onTaskComplete, this);
-          this.continueCallback = treeManager["continue"].bind(treeManager);
+          this.continueCallback = treeGroup["continue"].bind(treeGroup);
           this.continueEE = eventEmitter;
         }
       }
@@ -5948,12 +6019,19 @@
     TaskAction: TaskAction
   };
 
-  var TreeMethods = {
-    // Override it
-    addEventSheet: function addEventSheet(s, config) {},
+  var TreeMethods$1 = {
     addTree: function addTree(tree) {
       this.trees.push(tree);
       return this;
+    },
+    getTree: function getTree(title) {
+      var trees = this.trees;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        if (tree.title === title) {
+          return tree;
+        }
+      }
     },
     getTreeState: function getTreeState(tree) {
       var treeID = typeof tree === 'string' ? tree : tree.id;
@@ -6015,32 +6093,9 @@
     }
   };
 
-  var DataMethods$2 = {
-    setData: function setData(key, value) {
-      this.blackboard.setData(key, value);
-      return this;
-    },
-    hasData: function hasData(key) {
-      return this.blackboard.hasData(key);
-    },
-    incData: function incData(key, inc) {
-      this.blackboard.incData(key, inc);
-      return this;
-    },
-    toggleData: function toggleData(key) {
-      this.blackboard.toggleData(key);
-      return this;
-    },
-    getData: function getData(key) {
-      return this.blackboard.getData(key);
-    }
-  };
-
-  var StateMethods = {
-    dumpState: function dumpState(includeTree) {
-      if (includeTree === undefined) {
-        includeTree = false;
-      }
+  var StateMethods$1 = {
+    dumpState: function dumpState() {
+      var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var state = {
         blackboard: this.blackboard.dump(),
         isRunning: this.isRunning,
@@ -6071,6 +6126,232 @@
       if (this.isRunning) {
         this["continue"]();
       }
+      return this;
+    }
+  };
+
+  var RunMethods$1 = {
+    start: function start() {
+      if (this.isRunning) {
+        return this;
+      }
+      this.isRunning = true;
+      var treeManager = this.parent;
+      var trees = this.trees;
+      var pendingTrees = this.pendingTrees;
+      var blackboard = treeManager.blackboard;
+      var commandExecutor = treeManager.commandExecutor;
+      pendingTrees.length = 0;
+
+      // Run parallel tree, will return pending, or failure
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        tree.resetState(blackboard);
+        if (tree.isParallel) {
+          var status = tree.tick(blackboard, commandExecutor);
+          if (status === PENDING$1) {
+            pendingTrees.push(tree);
+          }
+        } else {
+          pendingTrees.push(tree);
+        }
+      }
+      this["continue"]();
+      return this;
+    },
+    "continue": function _continue() {
+      if (!this.isRunning) {
+        return this;
+      }
+      var treeManager = this.parent;
+      var trees = this.pendingTrees;
+      var closedTrees = this.closedTrees;
+      var blackboard = treeManager.blackboard;
+      var commandExecutor = treeManager.commandExecutor;
+      blackboard.treeGroup = this; // For TaskAction
+      closedTrees.length = 0;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        var status = blackboard.getTreeState(tree.id);
+        if (status === IDLE$1) {
+          // Will goto PENDING, or FAILURE/ERROR state
+          status = tree.tick(blackboard, commandExecutor);
+        }
+        var eventConditionPassed = tree.eventConditionPassed;
+        if (status === PENDING$1) {
+          if (eventConditionPassed) {
+            treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
+          } else {
+            treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
+          }
+        }
+        if (!this.isRunning) {
+          // Can break here
+          break;
+        }
+
+        // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
+        status = tree.tick(blackboard, commandExecutor);
+        if (status === RUNNING$1) {
+          break;
+        } else {
+          closedTrees.push(tree);
+          if (eventConditionPassed) {
+            treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
+          }
+        }
+        if (!this.isRunning) {
+          // Can break here
+          break;
+        }
+      }
+      blackboard.treeGroup = undefined;
+      if (closedTrees.length > 0) {
+        Remove(trees, closedTrees);
+      }
+      if (trees.length === 0) {
+        this.isRunning = false;
+        treeManager.emit('complete', this.name, treeManager);
+      }
+      return this;
+    },
+    stop: function stop() {
+      this.isRunning = false;
+      var blackboard = this.blackboard;
+      var commandExecutor = this.commandExecutor;
+      this.pendingTrees.forEach(function (tree) {
+        tree.abort(blackboard, commandExecutor);
+      });
+      this.pendingTrees.length = 0;
+      return this;
+    },
+    startTree: function startTree(title) {
+      var ignoreCondition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      if (this.isRunning) {
+        return this;
+      }
+      var tree = this.getTree(title);
+      if (!tree) {
+        return this;
+      }
+      this.isRunning = true;
+      var treeManager = this.parent;
+      var pendingTrees = this.pendingTrees;
+      var blackboard = treeManager.blackboard;
+      var commandExecutor = treeManager.commandExecutor;
+      pendingTrees.length = 0;
+      tree.resetState(blackboard);
+      tree.setConditionEnable(!ignoreCondition);
+      var status = tree.tick(blackboard, commandExecutor);
+      tree.setConditionEnable(true);
+      if (status === PENDING$1) {
+        pendingTrees.push(tree);
+      }
+      this["continue"]();
+      return this;
+    }
+  };
+
+  var EventBehaviorTreeGroup = /*#__PURE__*/_createClass(function EventBehaviorTreeGroup(parent) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$name = _ref.name,
+      name = _ref$name === void 0 ? '' : _ref$name;
+    _classCallCheck(this, EventBehaviorTreeGroup);
+    this.parent = parent;
+    this.name = name;
+    this.trees = [];
+    this.pendingTrees = [];
+    this.closedTrees = []; // Temporary tree array
+
+    this.isRunning = false;
+    this._threadKey = null;
+  });
+  Object.assign(EventBehaviorTreeGroup.prototype, TreeMethods$1, StateMethods$1, RunMethods$1);
+
+  var TreeMethods = {
+    // Override it
+    addEventSheet: function addEventSheet(s, config) {
+      arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.defaultTreeGroupName;
+    },
+    hasTreeGroup: function hasTreeGroup(name) {
+      return this.treeGroups.hasOwnProperty(name);
+    },
+    getTreeGroup: function getTreeGroup(name) {
+      if (!this.hasTreeGroup(name)) {
+        this.treeGroups[name] = new EventBehaviorTreeGroup(this, {
+          name: name
+        });
+      }
+      return this.treeGroups[name];
+    },
+    addTree: function addTree(tree) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).addTree(tree);
+      return this;
+    },
+    getTreeState: function getTreeState(tree) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      return this.getTreeGroup(groupName).getTreeState(tree);
+    },
+    clearAllEventSheets: function clearAllEventSheets() {
+      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).clearAllEventSheets();
+      return this;
+    },
+    getEventSheetTitleList: function getEventSheetTitleList(out) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      if (out === undefined) {
+        out = [];
+      }
+      this.getTreeGroup(groupName).getEventSheetTitleList(out);
+      return out;
+    },
+    removeEventSheet: function removeEventSheet(title) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).removeEventSheet(title);
+      return this;
+    },
+    dumpTrees: function dumpTrees() {
+      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+      return this.getTreeGroup(groupName).dumpTrees();
+    },
+    loadTrees: function loadTrees(data) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).loadTrees(data);
+      return this;
+    }
+  };
+
+  var DataMethods$2 = {
+    setData: function setData(key, value) {
+      this.blackboard.setData(key, value);
+      return this;
+    },
+    hasData: function hasData(key) {
+      return this.blackboard.hasData(key);
+    },
+    incData: function incData(key, inc) {
+      this.blackboard.incData(key, inc);
+      return this;
+    },
+    toggleData: function toggleData(key) {
+      this.blackboard.toggleData(key);
+      return this;
+    },
+    getData: function getData(key) {
+      return this.blackboard.getData(key);
+    }
+  };
+
+  var StateMethods = {
+    dumpState: function dumpState() {
+      var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      return this.getTreeGroup(groupName).dumpState(includeTree);
+    },
+    loadState: function loadState(state) {
+      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).loadState(state);
       return this;
     }
   };
@@ -14315,129 +14596,74 @@
 
   var RunMethods = {
     start: function start() {
-      if (this.isRunning) {
-        return this;
-      }
-      this.isRunning = true;
-      var trees = this.trees;
-      var pendingTrees = this.pendingTrees;
-      var blackboard = this.blackboard;
-      var commandExecutor = this.commandExecutor;
-      pendingTrees.length = 0;
-
-      // Run parallel tree, will return pending, or failure
-      for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        tree.resetState(blackboard);
-        if (tree.isParallel) {
-          var status = tree.tick(blackboard, commandExecutor);
-          if (status === PENDING) {
-            pendingTrees.push(tree);
+      var argumentsCount = arguments.length;
+      switch (argumentsCount) {
+        case 0:
+          this.getTreeGroup(this.defaultTreeGroupName).start();
+          break;
+        case 1:
+          var name = arguments[0];
+          if (this.hasTreeGroup(name)) {
+            this.getTreeGroup(name).start();
+          } else {
+            this.getTreeGroup(this.defaultTreeGroupName).startTree(name);
           }
-        } else {
-          pendingTrees.push(tree);
-        }
+          break;
+        case 2:
+          var title = arguments[0];
+          var ignoreCondition, groupName;
+          if (typeof arguments[1] === 'string') {
+            ignoreCondition = true;
+            groupName = arguments[1];
+          } else {
+            ignoreCondition = arguments[1];
+            groupName = this.defaultTreeGroupName;
+          }
+          this.getTreeGroup(groupName).startTree(title, ignoreCondition);
+          break;
+        default:
+          var title = arguments[0];
+          var groupName = arguments[1];
+          var ignoreCondition = arguments[2];
+          this.getTreeGroup(groupName).startTree(title, ignoreCondition);
+          break;
       }
-      this["continue"]();
       return this;
     },
     "continue": function _continue() {
-      if (!this.isRunning) {
-        return this;
-      }
-      var trees = this.pendingTrees;
-      var closedTrees = this.closedTrees;
-      var blackboard = this.blackboard;
-      var commandExecutor = this.commandExecutor;
-      closedTrees.length = 0;
-      for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        var status = blackboard.getTreeState(tree.id);
-        if (status === IDLE$1) {
-          // Will goto PENDING, or FAILURE/ERROR state
-          status = tree.tick(blackboard, commandExecutor);
-        }
-        var eventConditionPassed = tree.eventConditionPassed;
-        if (status === PENDING) {
-          if (eventConditionPassed) {
-            this.emit('eventsheet.enter', tree.title, this);
-          } else {
-            this.emit('eventsheet.catch', tree.title, this);
-          }
-        }
-        if (!this.isRunning) {
-          // Can break here
-          break;
-        }
-
-        // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-        status = tree.tick(blackboard, commandExecutor);
-        if (status === RUNNING$1) {
-          break;
-        } else {
-          closedTrees.push(tree);
-          if (eventConditionPassed) {
-            this.emit('eventsheet.exit', tree.title, this);
-          }
-        }
-        if (!this.isRunning) {
-          // Can break here
-          break;
-        }
-      }
-      if (closedTrees.length > 0) {
-        Remove(trees, closedTrees);
-      }
-      if (trees.length === 0) {
-        this.isRunning = false;
-        this.emit('complete', this);
-      }
+      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName)["continue"]();
       return this;
     },
     stop: function stop() {
-      this.isRunning = false;
-      var blackboard = this.blackboard;
-      var commandExecutor = this.commandExecutor;
-      this.pendingTrees.forEach(function (tree) {
-        tree.abort(blackboard, commandExecutor);
-      });
-      this.pendingTrees.length = 0;
+      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+      this.getTreeGroup(groupName).stop();
       return this;
-    },
-    getContinueCallback: function getContinueCallback() {
-      var self = this;
-      return function () {
-        self["continue"]();
-      };
     }
   };
 
   BehaviorTree.setStartIDValue(0);
-  var EventSheetTrees = /*#__PURE__*/function (_EventEmitter) {
-    _inherits(EventSheetTrees, _EventEmitter);
-    var _super = _createSuper(EventSheetTrees);
-    function EventSheetTrees() {
+  var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
+    _inherits(EventSheetManager, _EventEmitter);
+    var _super = _createSuper(EventSheetManager);
+    function EventSheetManager() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         commandExecutor = _ref.commandExecutor,
         _ref$parallel = _ref.parallel,
         parallel = _ref$parallel === void 0 ? false : _ref$parallel;
-      _classCallCheck(this, EventSheetTrees);
+      _classCallCheck(this, EventSheetManager);
       _this = _super.call(this);
+      _this.defaultTreeGroupName = '$default';
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
       _this.blackboard = new Blackboard();
       _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
 
-      _this.trees = [];
-      _this.pendingTrees = [];
-      _this.closedTrees = []; // Temporary tree array
-
-      _this.isRunning = false;
-      _this._threadKey = null;
+      _this.treeGroups = {};
       return _this;
     }
-    _createClass(EventSheetTrees, [{
+    _createClass(EventSheetManager, [{
       key: "memory",
       get: function get() {
         return this.blackboard.getGlobalMemory();
@@ -14449,9 +14675,9 @@
         return this;
       }
     }]);
-    return EventSheetTrees;
+    return EventSheetManager;
   }(EventEmitter$2);
-  Object.assign(EventSheetTrees.prototype, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
+  Object.assign(EventSheetManager.prototype, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
 
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventBehaviorTree, _BehaviorTree);
@@ -14489,6 +14715,14 @@
       get: function get() {
         var nodeMemory = this.root.getNodeMemory(this.ticker);
         return nodeMemory.$runningChild === 0;
+      }
+    }, {
+      key: "setConditionEnable",
+      value: function setConditionEnable() {
+        var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+        var selectChildIndex = enable ? undefined : 0;
+        this.root.setSelectChildIndex(selectChildIndex);
+        return this;
       }
     }]);
     return EventBehaviorTree;
@@ -15838,8 +16072,10 @@
       key: "open",
       value: function open(tick) {
         _get(_getPrototypeOf(TaskSequence.prototype), "open", this).call(this, tick);
-        var treeManager = tick.blackboard.treeManager;
-        treeManager.emit('label.enter', this.title, treeManager);
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
+        treeManager.emit('label.enter', this.title, treeGroup.name, treeManager);
       }
     }, {
       key: "tick",
@@ -15855,8 +16091,10 @@
       key: "close",
       value: function close(tick) {
         _get(_getPrototypeOf(TaskSequence.prototype), "close", this).call(this, tick);
-        var treeManager = tick.blackboard.treeManager;
-        treeManager.emit('label.exit', this.title, treeManager);
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
+        treeManager.emit('label.exit', this.title, treeGroup.name, treeManager);
       }
     }]);
     return TaskSequence;
@@ -16069,8 +16307,8 @@
     }(parallel);
   };
 
-  var MarkedEventSheets = /*#__PURE__*/function (_EventSheetTrees) {
-    _inherits(MarkedEventSheets, _EventSheetTrees);
+  var MarkedEventSheets = /*#__PURE__*/function (_EventSheetManager) {
+    _inherits(MarkedEventSheets, _EventSheetManager);
     var _super = _createSuper(MarkedEventSheets);
     function MarkedEventSheets() {
       _classCallCheck(this, MarkedEventSheets);
@@ -16086,17 +16324,18 @@
           commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart,
           _ref$parallel = _ref.parallel,
           parallel = _ref$parallel === void 0 ? this.parallel : _ref$parallel;
+        var groupName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.defaultTreeGroupName;
         var tree = Marked2Tree(markedString, {
           lineReturn: lineReturn,
           commentLineStart: commentLineStart,
           parallel: parallel
         });
-        this.addTree(tree);
+        this.addTree(tree, groupName);
         return this;
       }
     }]);
     return MarkedEventSheets;
-  }(EventSheetTrees);
+  }(EventSheetManager);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {

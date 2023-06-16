@@ -10187,6 +10187,12 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li>Move game object above this container and all children
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDepthAbove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Bring a child of container to top of this container
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringChildToTop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Send a child of container to bottom of this container
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sendChildToBack</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="layer">Layer<a class="headerlink" href="#layer" title="Permanent link">&para;</a></h3>
 <p>A containerLite can have a <a href="../layer/">layer</a>. 

@@ -148,7 +148,8 @@ scene.children.bringToTop(child);
 scene.children.sendToBack(child);
 scene.children.moveUp(child);
 scene.children.moveDown(child);
-scene.children.moveUp(child);
+scene.children.moveAbove(child1, child2);  // Move child1 above child2
+scene.children.moveBelow(child1, child2);  // Move child1 below child2
 scene.children.moveTo(child, index);
 scene.children.swap(child1, child2);
 ```
