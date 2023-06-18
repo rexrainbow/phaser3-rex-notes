@@ -136,7 +136,7 @@ var GetCommandData = function (paragraph, config) {
 }
 
 var ParseCommandString = function (commandString, delimiter, {
-    lineReturn = '\\',
+    lineBreak = '\\',
     commentLineStart = '\/\/',
 } = {}) {
     var lines = commandString.split(delimiter);
@@ -163,19 +163,19 @@ var ParseCommandString = function (commandString, delimiter, {
 
     var commandData = {
         type: 'task',
-        name: TrimString(lines[0], lineReturn),
+        name: TrimString(lines[0], lineBreak),
         parameters: {}
     };
 
     var parameters = commandData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-        ParseProperty(TrimString(lines[i], lineReturn), parameters);
+        ParseProperty(TrimString(lines[i], lineBreak), parameters);
     }
     return commandData;
 }
 
-var TrimString = function (s, lineReturn) {
-    if (lineReturn && (s.at(-1) === lineReturn)) {
+var TrimString = function (s, lineBreak) {
+    if (lineBreak && (s.at(-1) === lineBreak)) {
         s = s.substring(0, s.length - 1);
     }
     return s.trimLeft();

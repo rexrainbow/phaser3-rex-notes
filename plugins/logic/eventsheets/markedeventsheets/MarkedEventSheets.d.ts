@@ -8,7 +8,7 @@ declare namespace MarkedEventSheets {
     }
 
     interface IAddEventSheet {
-        lineReturn?: string,
+        lineBreak?: string,
         commentLineStart?: string,
         parallel?: boolean,
     }
@@ -16,9 +16,13 @@ declare namespace MarkedEventSheets {
 
 declare class MarkedEventSheets extends EventSheetManager {
     addEventSheet(
-        content: string,
+        markedString: string,
+        groupName?: string,
         config?: MarkedEventSheets.IAddEventSheet,
-        groupName?: string
     ): this;
 
+    addEventSheet(
+        markedString: string,
+        config?: MarkedEventSheets.IAddEventSheet,
+    ): this;
 }

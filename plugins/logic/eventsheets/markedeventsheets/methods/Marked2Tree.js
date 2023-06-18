@@ -8,7 +8,7 @@ import GetConditionExpression from './GetConditionExpression.js';
 import CreateTaskSequence from './CreateTaskSequence.js';
 
 var Marked2Tree = function (markedString, {
-    lineReturn = '\\',
+    lineBreak = '\\',
     commentLineStart = '\/\/',
     parallel = false,
 } = {}) {
@@ -18,7 +18,7 @@ var Marked2Tree = function (markedString, {
     var { conditionNodes, mainTaskNodes, catchNodes } = ParseNodes(headingTree.children);
 
     var { parallel = parallel } = treeConfig;
-    var taskSequenceConfig = { lineReturn, commentLineStart };
+    var taskSequenceConfig = { lineBreak, commentLineStart };
 
     var tree = new EventBehaviorTree({
         title: headingTree.title,

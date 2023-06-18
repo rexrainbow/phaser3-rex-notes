@@ -182,13 +182,15 @@ end
 
 subgraph Create
 SceneEventStart>"scene.events: start"]
+SceneEventReady>"scene.events: ready"]
 SceneInit["scene.init()"]
 ScenePreLoad["Load assets<br>scene.preload()"]
 SceneCreate["Create game objects<br>scene.create()"]
 end
 
 Start((Start)) --> SceneEventStart
-SceneEventStart --> SceneInit
+SceneEventStart --> SceneEventReady
+SceneEventReady --> SceneInit
 SceneInit --> ScenePreLoad
 ScenePreLoad --> SceneCreate
 SceneCreate --> SceneUpdate
@@ -282,6 +284,10 @@ Preserve word in a scene.
 - Start (Before `scene.init()`)
   ```javascript
   scene.events.on("start", function () {});
+  ```
+- Ready (After `start`)
+  ```javascript
+  scene.events.on("ready", function () {});
   ```
 - Every tick
     - Preupdate

@@ -24,7 +24,7 @@ export default {
         return this.blackboard.getTreeState(treeID);
     },
 
-    clearAllEventSheets() {
+    removeAllEventSheets() {
         this.trees.forEach(function (tree) {
             this.blackboard.removeTreeData(tree.id);
         }, this)

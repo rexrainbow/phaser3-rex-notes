@@ -17,16 +17,16 @@ declare class EventSheetManager extends EventEmitter {
     setTaskHandlers(commandExecutor?: Object): this;
 
     addEventSheet(
-        content?: string,
+        content: string,
+        groupName?: string,
         config?: any,
-        groupName?: string
     ): this;
 
-    clearAllEventSheets(groupName?: string): this;
-
-    getEventSheetTitleList(groupName?: string): string[];
+    removeAllEventSheets(groupName?: string): this;
 
     removeEventSheet(title: string, groupName?: string): this;
+
+    getEventSheetTitleList(groupName?: string): string[];
 
     dumpTrees(groupName?: string): Object[];
 

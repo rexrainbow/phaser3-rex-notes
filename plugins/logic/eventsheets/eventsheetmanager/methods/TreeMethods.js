@@ -2,7 +2,7 @@ import TreeGroup from '../treegroup/EventBehaviorTreeGroup.js';
 
 export default {
     // Override it
-    addEventSheet(s, config, groupName = this.defaultTreeGroupName) {
+    addEventSheet(s, groupName, config) {
 
     },
 
@@ -26,8 +26,8 @@ export default {
         return this.getTreeGroup(groupName).getTreeState(tree);
     },
 
-    clearAllEventSheets(groupName = this.defaultTreeGroupName) {
-        this.getTreeGroup(groupName).clearAllEventSheets();
+    removeAllEventSheets(groupName = this.defaultTreeGroupName) {
+        this.getTreeGroup(groupName).removeAllEventSheets();
         return this;
     },
 
