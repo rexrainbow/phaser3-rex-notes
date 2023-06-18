@@ -2006,11 +2006,11 @@
     return this;
   };
 
-  var methods$6 = {
+  var methods$7 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$6, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
+  Object.assign(methods$7, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2279,7 +2279,7 @@
     }]);
     return ContainerLite;
   }(Base$1);
-  Object.assign(ContainerLite.prototype, methods$6);
+  Object.assign(ContainerLite.prototype, methods$7);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -2869,6 +2869,25 @@
         gameObject = this;
       }
       return GetTopmostParent(gameObject);
+    },
+    hasParentSizer: function hasParentSizer(parentGameObject, gameObject) {
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      var parent = GetParent(gameObject);
+      while (parent) {
+        if (parent === parentGameObject) {
+          return true;
+        }
+        parent = GetParent(parent);
+      }
+      return false;
+    },
+    hasChild: function hasChild(child, gameObject) {
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      return this.hasParentSizer(gameObject, child);
     }
   };
 
@@ -6431,8 +6450,8 @@
     }
   };
 
-  var methods$5 = {};
-  Object.assign(methods$5, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
+  var methods$6 = {};
+  Object.assign(methods$6, DelayCallMethods, ConfigurationMethods, OpenMethods, CloseMethods);
 
   var GetValue$E = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
@@ -6481,7 +6500,7 @@
     }]);
     return OpenCloseTransition;
   }(ComponentBase);
-  Object.assign(OpenCloseTransition.prototype, methods$5);
+  Object.assign(OpenCloseTransition.prototype, methods$6);
 
   var Rectangle = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
@@ -9511,10 +9530,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$4 = {
+  var methods$5 = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$4);
+  Object.assign(Rotate.prototype, methods$5);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -9605,7 +9624,7 @@
     return this;
   };
 
-  var methods$3 = {
+  var methods$4 = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -9640,7 +9659,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$3, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
+  Object.assign(methods$4, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
 
   var GetValue$j = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
@@ -9890,7 +9909,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base.prototype, methods$3);
+  Object.assign(Base.prototype, methods$4);
 
   var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -10513,7 +10532,7 @@
     }
   };
 
-  var methods$2 = {
+  var methods$3 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -10525,7 +10544,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$2, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$3, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -10636,7 +10655,7 @@
     }]);
     return Sizer;
   }(Base);
-  Object.assign(Sizer.prototype, methods$2);
+  Object.assign(Sizer.prototype, methods$3);
 
   var SCROLLMODE = {
     v: 0,
@@ -12681,13 +12700,13 @@
     click: 1,
     none: -1
   };
-  var methods$1 = {
+  var methods$2 = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndoint,
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider$1.prototype, methods$1);
+  Object.assign(Slider$1.prototype, methods$2);
 
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var ScrollBar = /*#__PURE__*/function (_Sizer) {
@@ -14888,14 +14907,14 @@
     }
   };
 
-  var methods = {
+  var methods$1 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     resetChildPosition: ResetChildPosition,
     layoutChildren: LayoutChildren
   };
-  Object.assign(methods, ChildrenMaskMethods);
+  Object.assign(methods$1, ChildrenMaskMethods);
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -15098,7 +15117,19 @@
     }]);
     return ScrollableBlock;
   }(Base);
-  Object.assign(ScrollableBlock.prototype, methods);
+  Object.assign(ScrollableBlock.prototype, methods$1);
+
+  var ScrollToChild = function ScrollToChild(child) {
+    if (!this.hasChild(child)) {
+      return this;
+    }
+    if (this.scrollMode === 0) {
+      this.childOY += this.top - child.getTopLeft().y;
+    } else {
+      this.childOY += this.left - child.getTopLeft().x;
+    }
+    return this;
+  };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ScrollablePanel = /*#__PURE__*/function (_Scrollable) {
@@ -15167,6 +15198,10 @@
     }]);
     return ScrollablePanel;
   }(Scrollable);
+  var methods = {
+    scrollToChild: ScrollToChild
+  };
+  Object.assign(ScrollablePanel.prototype, methods);
 
   return ScrollablePanel;
 

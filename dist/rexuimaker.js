@@ -13593,6 +13593,25 @@
         gameObject = this;
       }
       return GetTopmostParent(gameObject);
+    },
+    hasParentSizer: function hasParentSizer(parentGameObject, gameObject) {
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      var parent = GetParent(gameObject);
+      while (parent) {
+        if (parent === parentGameObject) {
+          return true;
+        }
+        parent = GetParent(parent);
+      }
+      return false;
+    },
+    hasChild: function hasChild(child, gameObject) {
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+      return this.hasParentSizer(gameObject, child);
     }
   };
 

@@ -9401,13 +9401,15 @@ end
 
 subgraph Create
 SceneEventStart&gt;"scene.events: start"]
+SceneEventReady&gt;"scene.events: ready"]
 SceneInit["scene.init()"]
 ScenePreLoad["Load assets&lt;br&gt;scene.preload()"]
 SceneCreate["Create game objects&lt;br&gt;scene.create()"]
 end
 
 Start((Start)) --&gt; SceneEventStart
-SceneEventStart --&gt; SceneInit
+SceneEventStart --&gt; SceneEventReady
+SceneEventReady --&gt; SceneInit
 SceneInit --&gt; ScenePreLoad
 ScenePreLoad --&gt; SceneCreate
 SceneCreate --&gt; SceneUpdate
@@ -9494,6 +9496,9 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <ul>
 <li>Start (Before <code>scene.init()</code>)
   <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
+</code></pre></div></li>
+<li>Ready (After <code>start</code>)
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;ready&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Every tick<ul>
 <li>Preupdate

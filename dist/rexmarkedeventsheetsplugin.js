@@ -6037,7 +6037,7 @@
       var treeID = typeof tree === 'string' ? tree : tree.id;
       return this.blackboard.getTreeState(treeID);
     },
-    clearAllEventSheets: function clearAllEventSheets() {
+    removeAllEventSheets: function removeAllEventSheets() {
       this.trees.forEach(function (tree) {
         this.blackboard.removeTreeData(tree.id);
       }, this);
@@ -6270,9 +6270,7 @@
 
   var TreeMethods = {
     // Override it
-    addEventSheet: function addEventSheet(s, config) {
-      arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.defaultTreeGroupName;
-    },
+    addEventSheet: function addEventSheet(s, groupName, config) {},
     hasTreeGroup: function hasTreeGroup(name) {
       return this.treeGroups.hasOwnProperty(name);
     },
@@ -6293,9 +6291,9 @@
       var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
       return this.getTreeGroup(groupName).getTreeState(tree);
     },
-    clearAllEventSheets: function clearAllEventSheets() {
+    removeAllEventSheets: function removeAllEventSheets() {
       var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
-      this.getTreeGroup(groupName).clearAllEventSheets();
+      this.getTreeGroup(groupName).removeAllEventSheets();
       return this;
     },
     getEventSheetTitleList: function getEventSheetTitleList(out) {
@@ -14654,7 +14652,7 @@
         parallel = _ref$parallel === void 0 ? false : _ref$parallel;
       _classCallCheck(this, EventSheetManager);
       _this = _super.call(this);
-      _this.defaultTreeGroupName = '$default';
+      _this.defaultTreeGroupName = '_';
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
       _this.blackboard = new Blackboard();
@@ -16075,7 +16073,7 @@
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
         var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.enter', this.title, treeGroup.name, treeManager);
+        treeManager.emit('label.enter', this.title, tick.tree.title, treeGroup.name, treeManager);
       }
     }, {
       key: "tick",
@@ -16094,7 +16092,7 @@
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
         var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.exit', this.title, treeGroup.name, treeManager);
+        treeManager.emit('label.exit', this.title, tick.tree.title, treeGroup.name, treeManager);
       }
     }]);
     return TaskSequence;
@@ -16217,8 +16215,8 @@
   };
   var ParseCommandString = function ParseCommandString(commandString, delimiter) {
     var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-      _ref$lineReturn = _ref.lineReturn,
-      lineReturn = _ref$lineReturn === void 0 ? '\\' : _ref$lineReturn,
+      _ref$lineBreak = _ref.lineBreak,
+      lineBreak = _ref$lineBreak === void 0 ? '\\' : _ref$lineBreak,
       _ref$commentLineStart = _ref.commentLineStart,
       commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart;
     var lines = commandString.split(delimiter);
@@ -16246,17 +16244,17 @@
     }
     var commandData = {
       type: 'task',
-      name: TrimString(lines[0], lineReturn),
+      name: TrimString(lines[0], lineBreak),
       parameters: {}
     };
     var parameters = commandData.parameters;
     for (var i = 1, cnt = lines.length; i < cnt; i++) {
-      ParseProperty(TrimString(lines[i], lineReturn), parameters);
+      ParseProperty(TrimString(lines[i], lineBreak), parameters);
     }
     return commandData;
   };
-  var TrimString = function TrimString(s, lineReturn) {
-    if (lineReturn && s.at(-1) === lineReturn) {
+  var TrimString = function TrimString(s, lineBreak) {
+    if (lineBreak && s.at(-1) === lineBreak) {
       s = s.substring(0, s.length - 1);
     }
     return s.trimLeft();
@@ -16270,8 +16268,8 @@
 
   var Marked2Tree = function Marked2Tree(markedString) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$lineReturn = _ref.lineReturn,
-      lineReturn = _ref$lineReturn === void 0 ? '\\' : _ref$lineReturn,
+      _ref$lineBreak = _ref.lineBreak,
+      lineBreak = _ref$lineBreak === void 0 ? '\\' : _ref$lineBreak,
       _ref$commentLineStart = _ref.commentLineStart,
       commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart,
       _ref$parallel = _ref.parallel,
@@ -16286,7 +16284,7 @@
       var _treeConfig$parallel = treeConfig.parallel,
         parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel;
       var taskSequenceConfig = {
-        lineReturn: lineReturn,
+        lineBreak: lineBreak,
         commentLineStart: commentLineStart
       };
       var tree = new EventBehaviorTree({
@@ -16316,17 +16314,26 @@
     }
     _createClass(MarkedEventSheets, [{
       key: "addEventSheet",
-      value: function addEventSheet(markedString) {
-        var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-          _ref$lineReturn = _ref.lineReturn,
-          lineReturn = _ref$lineReturn === void 0 ? '\\' : _ref$lineReturn,
-          _ref$commentLineStart = _ref.commentLineStart,
-          commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart,
-          _ref$parallel = _ref.parallel,
-          parallel = _ref$parallel === void 0 ? this.parallel : _ref$parallel;
-        var groupName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.defaultTreeGroupName;
+      value: function addEventSheet(markedString, groupName, config) {
+        if (typeof groupName !== 'string') {
+          config = groupName;
+          groupName = undefined;
+        }
+        if (groupName === undefined) {
+          groupName = this.defaultTreeGroupName;
+        }
+        if (config === undefined) {
+          config = {};
+        }
+        var _config = config,
+          _config$lineBreak = _config.lineBreak,
+          lineBreak = _config$lineBreak === void 0 ? '\\' : _config$lineBreak,
+          _config$commentLineSt = _config.commentLineStart,
+          commentLineStart = _config$commentLineSt === void 0 ? '\/\/' : _config$commentLineSt,
+          _config$parallel = _config.parallel,
+          parallel = _config$parallel === void 0 ? this.parallel : _config$parallel;
         var tree = Marked2Tree(markedString, {
-          lineReturn: lineReturn,
+          lineBreak: lineBreak,
           commentLineStart: commentLineStart,
           parallel: parallel
         });
