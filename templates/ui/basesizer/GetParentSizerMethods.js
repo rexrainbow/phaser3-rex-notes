@@ -52,5 +52,29 @@ export default {
             gameObject = this;
         }
         return GetTopmostParent(gameObject);
+    },
+
+    hasParentSizer(parentGameObject, gameObject) {
+        if (gameObject === undefined) {
+            gameObject = this;
+        }
+
+        var parent = GetParent(gameObject);
+        while (parent) {
+            if (parent === parentGameObject) {
+                return true;
+            }
+            parent = GetParent(parent);
+        }
+
+        return false;
+    },
+
+    hasChild(child, gameObject) {
+        if (gameObject === undefined) {
+            gameObject = this;
+        }
+
+        return this.hasParentSizer(gameObject, child);
     }
 }

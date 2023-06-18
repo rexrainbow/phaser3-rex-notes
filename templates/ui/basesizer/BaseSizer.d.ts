@@ -184,6 +184,16 @@ declare class BaseSizer extends ContainerLite {
         gameObject?: Phaser.GameObjects.GameObject
     ): BaseSizer | null;
 
+    hasParentSizer(
+        parentGameObject: Phaser.GameObjects.GameObject,
+        gameObject?: Phaser.GameObjects.GameObject
+    ): boolean;
+
+    hasChild(
+        childGameObject: Phaser.GameObjects.GameObject,
+        gameObject?: Phaser.GameObjects.GameObject
+    ): boolean;
+
     getSizerConfig(
         gameObject?: Phaser.GameObjects.GameObject
     ): { [name: string]: any };

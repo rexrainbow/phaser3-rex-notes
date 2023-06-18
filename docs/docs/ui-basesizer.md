@@ -1380,6 +1380,17 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
     var topmostSizer = sizer.getTopmostSizer();
     ```
 
+### Has parent/child
+
+- Has parent
+    ```javascript
+    var hasParent = sizer.hasParentSizer(parentGameObject);
+    ```
+- Has child
+    ```javascript
+    var hasChild = sizer.hasParentSizer(childGameObject);
+    ```
+
 ### Is in touching
 
 - Is this sizer in touching?

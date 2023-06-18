@@ -452,6 +452,12 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - Equal to `panel.t = 1;`
 
+#### Scroll to child
+
+```javascript
+panel.scrollToChild(child);
+```
+
 #### Enable/disable scrolling
 
 - Slider

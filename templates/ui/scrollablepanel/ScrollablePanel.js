@@ -2,6 +2,7 @@ import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
+import ScrollToChild from './ScrollToChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -67,5 +68,14 @@ class ScrollablePanel extends Scrollable {
         return this;
     }
 }
+
+var methods = {
+    scrollToChild: ScrollToChild
+}
+
+Object.assign(
+    ScrollablePanel.prototype,
+    methods,
+)
 
 export default ScrollablePanel;
