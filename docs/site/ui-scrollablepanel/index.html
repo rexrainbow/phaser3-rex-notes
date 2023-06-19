@@ -9491,6 +9491,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/eYOdKBR">Scroll-able panel + fix-width sizer</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/zYzVgZd">Dropdown, scrollable list</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/PopLRVm">Add child</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/ZEmWwaN">Scroll to child</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLRYqWe">Drag item</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/rNvKdqg">Destory</a></li>
 </ul>
@@ -9960,8 +9961,16 @@ User can inject it by</p>
 </li>
 </ul>
 <h4 id="scroll-to-child">Scroll to child<a class="headerlink" href="#scroll-to-child" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">scrollToChild</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">scrollToChild</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>align</code> : <ul>
+<li><code>undefined</code> : Align child to top(left), or bottom(right) of panel. Default value.</li>
+<li><code>'top'</code>, <code>'center'</code>, <code>'bottom'</code> : Align child to top/center/bottom of panel.</li>
+<li><code>'left'</code>, <code>'center'</code>, <code>'right'</code> : Align child to left/center/right of panel.</li>
+</ul>
+</li>
+</ul>
 <h4 id="enabledisable-scrolling">Enable/disable scrolling<a class="headerlink" href="#enabledisable-scrolling" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Slider<ul>

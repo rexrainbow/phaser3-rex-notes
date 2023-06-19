@@ -456,8 +456,13 @@ See also - [dirty](ui-basesizer.md#dirty)
 #### Scroll to child
 
 ```javascript
-panel.scrollToChild(child);
+panel.scrollToChild(child, align);
 ```
+
+- `align` : 
+    - `undefined` : Align child to top(left), or bottom(right) of panel. Default value.
+    - `'top'`, `'center'`, `'bottom'` : Align child to top/center/bottom of panel.
+    - `'left'`, `'center'`, `'right'` : Align child to left/center/right of panel.
 
 #### Enable/disable scrolling
 

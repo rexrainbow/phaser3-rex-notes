@@ -16,15 +16,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var orientation = 'y';
+
         var panel = this.rexUI.add.scrollablePanel({
             x: 400, y: 300,
-            height: 400,
+            width: (orientation === 'y') ? undefined : 600,
+            height: (orientation === 'y') ? 400 : undefined,
 
-            scrollMode: 0,
+            scrollMode: (orientation === 'y') ? 0 : 1,
 
             background: this.rexUI.add.roundRectangle({ strokeColor: 0xff0000, strokeWidth: 2 }),
             panel: {
-                child: CreatePanel(this),
+                child: CreatePanel(this, orientation),
             },
 
             slider: {
@@ -42,10 +45,10 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreatePanel = function (scene) {
+var CreatePanel = function (scene, orientation) {
     var panel = scene.rexUI.add.sizer({
         width: 100,
-        orientation: 'y',
+        orientation: orientation,
         space: { item: 4 }
     })
 
