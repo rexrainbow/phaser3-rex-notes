@@ -201,21 +201,13 @@ Local memory is shared for all event sheets.
 
 ### States
 
-- Dump state of event sheets in default group
+- Dump state of event sheets of all groups
     ```javascript
     var states = eventSheetManager.dumpState();
     ```
-- Dump state of event sheets in a specific group
-    ```javascript
-    var states = eventSheetManager.dumpState(groupName);
-    ```
-- Load state of event sheet in default group
+- Load state of event sheet of all groups
     ```javascript
     eventSheetManager.loadState(states);
-    ```
-- Load state of event sheet in a specific group
-    ```javascript
-    eventSheetManager.loadState(states, groupName);
     ```
 
 ### Events

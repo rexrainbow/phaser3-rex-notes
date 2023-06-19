@@ -1,7 +1,6 @@
 export default {
     dumpState(includeTree = false) {
         var state = {
-            blackboard: this.blackboard.dump(),
             isRunning: this.isRunning,
             pendingTrees: this.pendingTrees.map(function (tree) {
                 return tree.id;
@@ -11,6 +10,7 @@ export default {
         if (includeTree) {
             state.trees = this.dumpTrees();
         }
+
         return state;
     },
 
@@ -22,7 +22,6 @@ export default {
             this.loadTrees(state.trees);
         }
 
-        this.blackboard.load(state.blackboard);
         this.isRunning = state.isRunning;
 
         var pendingTrees = this.pendingTrees;
@@ -32,10 +31,6 @@ export default {
                 pendingTrees.push(tree);
             }
         })
-
-        if (this.isRunning) {
-            this.continue();
-        }
 
         return this;
     },

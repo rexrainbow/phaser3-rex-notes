@@ -6097,7 +6097,6 @@
     dumpState: function dumpState() {
       var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var state = {
-        blackboard: this.blackboard.dump(),
         isRunning: this.isRunning,
         pendingTrees: this.pendingTrees.map(function (tree) {
           return tree.id;
@@ -6114,7 +6113,6 @@
         this.trees.length = 0;
         this.loadTrees(state.trees);
       }
-      this.blackboard.load(state.blackboard);
       this.isRunning = state.isRunning;
       var pendingTrees = this.pendingTrees;
       pendingTrees.length = 0;
@@ -6123,9 +6121,6 @@
           pendingTrees.push(tree);
         }
       });
-      if (this.isRunning) {
-        this["continue"]();
-      }
       return this;
     }
   };
@@ -6217,8 +6212,11 @@
     },
     stop: function stop() {
       this.isRunning = false;
-      var blackboard = this.blackboard;
-      var commandExecutor = this.commandExecutor;
+      var treeManager = this.parent;
+      var blackboard = treeManager.blackboard;
+      var commandExecutor = treeManager.commandExecutor;
+      blackboard.treeGroup = this; // For TaskAction
+
       this.pendingTrees.forEach(function (tree) {
         tree.abort(blackboard, commandExecutor);
       });
@@ -6342,22 +6340,30 @@
   };
 
   var StateMethods = {
-    dumpState: function dumpState(includeTree, groupName) {
-      if (typeof includeTree === 'string') {
-        groupName = includeTree;
-        includeTree = undefined;
+    dumpState: function dumpState() {
+      var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var state = {
+        blackboard: this.blackboard.dump(),
+        treeGroups: {}
+      };
+      var treeGroups = state.treeGroups;
+      for (var name in this.treeGroups) {
+        treeGroups[name] = this.treeGroups[name].dumpState(includeTree);
       }
-      if (includeTree === undefined) {
-        includeTree = false;
-      }
-      if (groupName === undefined) {
-        groupName = this.defaultTreeGroupName;
-      }
-      return this.getTreeGroup(groupName).dumpState(includeTree);
+      return state;
     },
     loadState: function loadState(state) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
-      this.getTreeGroup(groupName).loadState(state);
+      if (!state) {
+        return this;
+      }
+      this.blackboard.load(state.blackboard);
+      var treeGroups = state.treeGroups;
+      for (var name in treeGroups) {
+        this.getTreeGroup(name).loadState(treeGroups[name]);
+      }
+      for (var name in treeGroups) {
+        this.getTreeGroup(name)["continue"]();
+      }
       return this;
     }
   };

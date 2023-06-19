@@ -40,7 +40,7 @@ manager
     .addEventSheet(eventSheet1)
     .addEventSheet(eventSheet2)
 
-var OnEnterEventSheet = function (title, manager) {
+var OnEnterEventSheet = function (title, groupName, manager) {
     console.log(`eventsheet.enter: '${title}'`);
 
     if (title !== 'Event sheet 1') {
@@ -56,7 +56,7 @@ var OnEnterEventSheet = function (title, manager) {
     setTimeout(function () {
         console.log('===load state===')
         manager.loadState(stateData);
-    }, 1500)
+    }, 2500)
 }
 
 manager.once('eventsheet.enter', OnEnterEventSheet)

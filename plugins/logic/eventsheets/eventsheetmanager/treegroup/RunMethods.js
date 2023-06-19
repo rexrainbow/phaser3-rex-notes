@@ -110,8 +110,12 @@ export default {
     stop() {
         this.isRunning = false;
 
-        var blackboard = this.blackboard;
-        var commandExecutor = this.commandExecutor;
+        var treeManager = this.parent;
+        var blackboard = treeManager.blackboard;
+        var commandExecutor = treeManager.commandExecutor;
+
+        blackboard.treeGroup = this;  // For TaskAction
+
         this.pendingTrees.forEach(function (tree) {
             tree.abort(blackboard, commandExecutor);
         })
