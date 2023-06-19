@@ -2,7 +2,7 @@
 
 ## [Condition]
 
-金幣 > 5
+coin > 5
 
 ## [Condition]
 
@@ -25,13 +25,13 @@ Line3
 ```
 
 print\
- text=I have {{金幣}} 金幣
+ text=I have {{coin}} coin
 
 set\
-  金幣=#( 金幣 + 10 )
+  coin=#( coin + 10 )
 
 print\
- text=Now I have {{金幣}} 金幣
+ text=Now I have {{coin}} coin
 
 ## Before if 
 
@@ -40,28 +40,28 @@ print\
 
 ## [If]
 
-金幣 < 5
+coin < 5
 
 ### Label A
 
 print\
-  text=If (金幣 < 5)
+  text=If (coin < 5)
 
 ## [Else]
 
 ### Label Else
 
 print\
-  text=Else (金幣 < 5)
+  text=Else (coin < 5)
 
 ## [If]
 
-金幣 > 10
+coin > 10
 
 ### Label B
 
 print\
-  text=If (金幣 > 10)
+  text=If (coin > 10)
 
 ## After If 
 
@@ -76,7 +76,7 @@ print\
 set\
   loopCount=3
 
-## [while]
+## [While]
 
 loopCount > 0
 

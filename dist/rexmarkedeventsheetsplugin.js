@@ -6342,9 +6342,17 @@
   };
 
   var StateMethods = {
-    dumpState: function dumpState() {
-      var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    dumpState: function dumpState(includeTree, groupName) {
+      if (typeof includeTree === 'string') {
+        groupName = includeTree;
+        includeTree = undefined;
+      }
+      if (includeTree === undefined) {
+        includeTree = false;
+      }
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       return this.getTreeGroup(groupName).dumpState(includeTree);
     },
     loadState: function loadState(state) {

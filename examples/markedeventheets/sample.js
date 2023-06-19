@@ -47,7 +47,7 @@ manager.
 
 manager
     .setData('name', 'rex')
-    .setData('金幣', 1)
+    .setData('coin', 1)
     .setData('hp', 4)
     .start()
 

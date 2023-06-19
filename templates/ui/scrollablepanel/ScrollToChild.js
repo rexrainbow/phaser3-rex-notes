@@ -50,15 +50,15 @@ var ScrollToChild = function (child, align) {
                 dy = this.centerX - child.getCenter().x;
                 break;
 
-                default:
-                    var dLeft = this.left - child.getTopLeft().x;
-                    var dRight = this.right - child.getTopRight().x;
-                    if ((dLeft <= 0) && (dRight >= 0)) {
-                        dy = 0;
-                    } else {
-                        dy = (Math.abs(dLeft) <= Math.abs(dRight)) ? dLeft : dRight;
-                    }
-                    break;
+            default:
+                var dLeft = this.left - child.getTopLeft().x;
+                var dRight = this.right - child.getTopRight().x;
+                if ((dLeft <= 0) && (dRight >= 0)) {
+                    dy = 0;
+                } else {
+                    dy = (Math.abs(dLeft) <= Math.abs(dRight)) ? dLeft : dRight;
+                }
+                break;
         }
     }
 

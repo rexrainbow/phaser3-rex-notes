@@ -1,5 +1,18 @@
 export default {
-    dumpState(includeTree = false, groupName = this.defaultTreeGroupName) {
+    dumpState(includeTree, groupName) {
+        if (typeof (includeTree) === 'string') {
+            groupName = includeTree;
+            includeTree = undefined;
+        }
+
+        if (includeTree === undefined) {
+            includeTree = false;
+        }
+
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName;
+        }
+
         return this.getTreeGroup(groupName).dumpState(includeTree);
     },
 
