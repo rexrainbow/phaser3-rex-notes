@@ -11,7 +11,8 @@ Event sheets contains main condition(s) and actions, in simple markdown format.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/markedeventheets)
+- [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/markedeventheets)
+- [Event sheets](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet)
 
 ### Install plugin
 
