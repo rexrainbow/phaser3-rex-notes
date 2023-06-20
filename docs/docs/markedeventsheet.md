@@ -383,13 +383,13 @@ commandName
 
 For multiple lines parameter :
 
-<pre><code>
+~~~
 ```commandName,param0=value,param1=value
 line0
 line1
 line2
 ```
-</code></pre>
+~~~
 
 - Lines in code block will be assigned to `text` parameter.
 
