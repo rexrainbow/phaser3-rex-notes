@@ -12,7 +12,7 @@ var ResetDisplayContent = function (config) {
 
     var iconGameObjct = this.childrenMap.icon;
     if (iconGameObjct) {
-        if (config.icon === undefined) {
+        if (!config.icon) {
             this.hide(iconGameObjct);
         } else {
             this.show(iconGameObjct);
@@ -30,7 +30,7 @@ var ResetDisplayContent = function (config) {
 
     var actionGameObjct = this.childrenMap.action;
     if (actionGameObjct) {
-        if (config.action === undefined) {
+        if (!config.action) {
             this.hide(actionGameObjct);
         } else {
             this.show(actionGameObjct);

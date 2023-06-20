@@ -1,9 +1,10 @@
+import LabelBase from '../label/Base.js';
 import Sizer from '../sizer/Sizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TitleLabel extends Sizer {
+class TitleLabel extends LabelBase {
     constructor(scene, config) {
         // Create sizer
         super(scene, config);
@@ -145,7 +146,7 @@ class TitleLabel extends Sizer {
     // Access title game object
     get title() {
         var textObject = this.childrenMap.title;
-        if (textObject === undefined) {
+        if (!textObject) {
             return '';
         }
         return textObject.title;
@@ -153,7 +154,7 @@ class TitleLabel extends Sizer {
 
     set title(value) {
         var textObject = this.childrenMap.title;
-        if (textObject === undefined) {
+        if (!textObject) {
             return;
         }
         textObject.setText(value);
@@ -161,100 +162,6 @@ class TitleLabel extends Sizer {
 
     setTitle(value) {
         this.title = value;
-        return this;
-    }
-
-    appendTitle(value) {
-        this.title += value;
-        return this;
-    }
-
-    // Access text game object
-    get text() {
-        var textObject = this.childrenMap.text;
-        if (textObject === undefined) {
-            return '';
-        }
-        return textObject.text;
-    }
-
-    set text(value) {
-        var textObject = this.childrenMap.text;
-        if (textObject === undefined) {
-            return;
-        }
-        textObject.setText(value);
-    }
-
-    setText(value) {
-        this.text = value;
-        return this;
-    }
-
-    appendText(value) {
-        this.text += value;
-        return this;
-    }
-
-    // Access icon game object
-    setTexture(key, frame) {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-            return;
-        }
-        imageObject.setTexture(key, frame);
-        return this;
-    }
-
-    get texture() {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-            return undefined;
-        }
-        return imageObject.texture;
-    }
-
-    get frame() {
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-            return undefined;
-        }
-        return imageObject.frame;
-    }
-
-    runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        super.runLayout(parent, newWidth, newHeight);
-        // Pin icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-            iconMask.setPosition();
-            this.resetChildPositionState(iconMask);
-        }
-        // Pin action-mask to action game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-            actionMask.setPosition();
-            this.resetChildPositionState(actionMask);
-        }
-        return this;
-    }
-
-    resize(width, height) {
-        super.resize(width, height);
-        // Resize icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-            iconMask.resize();
-        }
-        // Resize action-mask to icon game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-            actionMask.resize();
-        }
         return this;
     }
 }

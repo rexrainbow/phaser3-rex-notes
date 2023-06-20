@@ -1,4 +1,5 @@
 // import * as Phaser from 'phaser';
+import LabelBase from '../label/Base';
 import Sizer from '../sizer/Sizer';
 
 export default TitleLabel;
@@ -40,7 +41,7 @@ declare namespace TitleLabel {
     }
 }
 
-declare class TitleLabel extends Sizer {
+declare class TitleLabel extends LabelBase {
     constructor(
         scene: Phaser.Scene,
         config?: TitleLabel.IConfig
@@ -49,15 +50,4 @@ declare class TitleLabel extends Sizer {
     title: string;
     setTitle(text: string): this;
     appendTitle(text: string): this;
-
-    text: string;
-    setText(text: string): this;
-    appendText(text: string): this;
-
-    setTexture(
-        key: string | Phaser.Textures.Texture,
-        frame?: string | number
-    ): this;
-    readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
-    readonly frame: Phaser.Textures.Frame;
 }
