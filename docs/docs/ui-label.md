@@ -305,12 +305,12 @@ See also - [dirty](ui-basesizer.md#dirty)
     label.setTexture(texture);
     // label.setTexture(texture, frame);
     ```
-- Get texture, frame.
+- Get texture, frame
     ```javascript
     var texture = label.texture;
     var frame = label.frame;
     ```
-- Get texture key, frame name.
+- Get texture key, frame name
     ```javascript
     var textureKey = label.texture.key;
     var frameName = label.frame.name;

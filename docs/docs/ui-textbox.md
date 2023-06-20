@@ -244,6 +244,19 @@ var textBox = scene.rexUI.add.textBox({
     var pageIndex = textBox.pageCount;
     ```
 
+### Icon texture
+
+- Set texture
+    ```javascript
+    textBox.setTexture(key);
+    // label.setTexture(key, frame);
+    ```
+- Get texture key, frame name
+    ```javascript
+    var textureKey = textBox.texture.key;
+    var frameName = textBox.frame.name;
+    ```
+
 ### Get element
 
 - Get element
@@ -300,4 +313,4 @@ var textBox = scene.rexUI.add.textBox({
 
 ### Other properties
 
-See [textBox object](ui-textbox.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+See [label](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
