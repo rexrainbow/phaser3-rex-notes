@@ -18689,6 +18689,14 @@
       }, this).play();
       return this;
     },
+    stopAllSoundEffects: function stopAllSoundEffects() {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        var soundEffect = this.soundEffects[i];
+        soundEffect.stop();
+        soundEffect.destroy();
+      }
+      return this;
+    },
     fadeInSoundEffect: function fadeInSoundEffect(time) {
       var soundEffect = this.getLastSoundEffect();
       if (soundEffect) {
@@ -18773,6 +18781,14 @@
         }
         RemoveItem(this.soundEffects2, soundEffect);
       }, this).play();
+      return this;
+    },
+    stopAllSoundEffects2: function stopAllSoundEffects2() {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        var soundEffect = this.soundEffects[i];
+        soundEffect.stop();
+        soundEffect.destroy();
+      }
       return this;
     },
     fadeInSoundEffect2: function fadeInSoundEffect2(time) {
@@ -20105,6 +20121,9 @@
     if (scope) {
       callback = callback.bind(scope);
     }
+    if (this[name]) {
+      console.warn("CommandExecutor: method '".concat(name, " is existed."));
+    }
     this[name] = callback;
     return this;
   };
@@ -20274,10 +20293,10 @@
     'bgm.play': function bgmPlay() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         key = _ref2.key,
-        loop = _ref2.loop,
         volume = _ref2.volume,
         _ref2$fadeIn = _ref2.fadeIn,
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        loop = _ref2.loop,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
       var manager = arguments.length > 1 ? arguments[1] : undefined;
@@ -20402,10 +20421,10 @@
     'bgm2.play': function bgm2Play() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         key = _ref2.key,
-        loop = _ref2.loop,
         volume = _ref2.volume,
         _ref2$fadeIn = _ref2.fadeIn,
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
+        loop = _ref2.loop,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
       var manager = arguments.length > 1 ? arguments[1] : undefined;
@@ -20556,6 +20575,13 @@
         }, manager);
       }
     },
+    'se.stop': function seStop(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.stopAllSoundEffects();
+    },
     'se.fadeOut': function seFadeOut(_ref3, manager) {
       var _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
@@ -20573,16 +20599,6 @@
           bgm: true
         }, manager);
       }
-    },
-    'se.volume': function seVolume() {
-      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref4$value = _ref4.value,
-        value = _ref4$value === void 0 ? 1 : _ref4$value;
-      var soundManager = this.sys.soundManager;
-      if (!soundManager) {
-        return;
-      }
-      soundManager.setSoundEffectVolume(value);
     },
     'se.mute': function seMute(config, manager) {
       var soundManager = this.sys.soundManager;
@@ -20639,6 +20655,13 @@
           se: true
         }, manager);
       }
+    },
+    'se2.stop': function se2Stop(config, manager) {
+      var soundManager = this.sys.soundManager;
+      if (!soundManager) {
+        return;
+      }
+      soundManager.stopAllSoundEffects2();
     },
     'se2.fadeOut': function se2FadeOut(_ref3, manager) {
       var _ref3$duration = _ref3.duration,
@@ -20779,9 +20802,9 @@
     },
     'camera.zoomTo': function cameraZoomTo() {
       var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        zoom = _ref6.zoom,
         _ref6$duration = _ref6.duration,
         duration = _ref6$duration === void 0 ? 1000 : _ref6$duration,
+        zoom = _ref6.zoom,
         _ref6$wait = _ref6.wait,
         wait = _ref6$wait === void 0 ? false : _ref6$wait;
       var manager = arguments.length > 1 ? arguments[1] : undefined;
@@ -20798,8 +20821,9 @@
     },
     'camera.rotateTo': function cameraRotateTo() {
       var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref7$duration = _ref7.duration,
+        duration = _ref7$duration === void 0 ? 1000 : _ref7$duration,
         rotate = _ref7.rotate,
-        duration = _ref7.duration,
         ease = _ref7.ease,
         _ref7$wait = _ref7.wait,
         wait = _ref7$wait === void 0 ? false : _ref7$wait;
@@ -20817,10 +20841,10 @@
     },
     'camera.scrollTo': function cameraScrollTo() {
       var _ref8 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        x = _ref8.x,
-        y = _ref8.y,
         _ref8$duration = _ref8.duration,
         duration = _ref8$duration === void 0 ? 1000 : _ref8$duration,
+        x = _ref8.x,
+        y = _ref8.y,
         ease = _ref8.ease,
         _ref8$wait = _ref8.wait,
         wait = _ref8$wait === void 0 ? false : _ref8$wait;

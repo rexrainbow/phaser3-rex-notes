@@ -41,6 +41,16 @@ export default {
         return this;
     },
 
+    stopAllSoundEffects() {
+        for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+            var soundEffect = this.soundEffects[i];
+            soundEffect.stop();
+            soundEffect.destroy();
+        }
+
+        return this;
+    },
+
     fadeInSoundEffect(time) {
         var soundEffect = this.getLastSoundEffect();
         if (soundEffect) {
@@ -88,7 +98,7 @@ export default {
     },
 
     setSoundEffectMute(mute, lastSoundEffect) {
-        if (mute=== undefined){
+        if (mute === undefined) {
             mute = true;
         }
         if (lastSoundEffect === undefined) {

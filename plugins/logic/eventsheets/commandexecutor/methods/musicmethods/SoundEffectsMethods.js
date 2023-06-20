@@ -30,6 +30,14 @@ export default {
         }
     },
 
+    'se.stop'(config, manager) {
+        var soundManager = this.sys.soundManager;
+        if (!soundManager) {
+            return;
+        }
+        soundManager.stopAllSoundEffects();
+    },
+
     'se.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -40,14 +48,6 @@ export default {
         if (wait) {
             return this.wait({ bgm: true }, manager);
         }
-    },
-
-    'se.volume'({ value = 1 } = {}, manager) {
-        var soundManager = this.sys.soundManager;
-        if (!soundManager) {
-            return;
-        }
-        soundManager.setSoundEffectVolume(value);
     },
 
     'se.mute'(config, manager) {

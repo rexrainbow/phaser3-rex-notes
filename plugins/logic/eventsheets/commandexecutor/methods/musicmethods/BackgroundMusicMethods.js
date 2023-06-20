@@ -7,7 +7,7 @@ export default {
         soundManager.setBackgroundMusicVolume(volume);
     },
 
-    'bgm.play'({ key, loop, volume, fadeIn = 0, wait = false } = {}, manager) {
+    'bgm.play'({ key, volume, fadeIn = 0, loop, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;

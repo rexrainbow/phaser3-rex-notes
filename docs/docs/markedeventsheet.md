@@ -80,6 +80,7 @@ var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
 ```
 
 - `commandExecutor` : Command executor of [actions](markedeventsheet.md#custom-command).
+    - This plugin provides a built-in [command executor](markedeventsheet.md#command-executor).
 - `parallel` :
     - `false` : Test condition then execute event sheet one by one. Default behavior.
     - `true` : Test all condition of event sheets then execute event sheets one by one.
@@ -255,7 +256,7 @@ Local memory is shared for all event sheets.
 
 #### Main headings
 
-```md
+```
 # Title
 
 ## [Condition]
@@ -273,7 +274,7 @@ coin > 5
     - Each line under `[Condition]` is a boolean equation, composed of `AND` logic.
     - Can have many `[Condition]` heading, each `[Condition]` heading will be composed of `OR` logic.
     - Read data from [local memory](markedeventsheet.md#local-memory)
-- H2 headings between `[Condition]` and `[Catch]` : Actions when main condition is `true`.
+- H2/H3/... headings between `[Condition]` and `[Catch]` : Actions when main condition is `true`.
     - [Flow control instructions of headings](markedeventsheet.md#flow-control-instructions)
     - Actions : [Custom command](markedeventsheet.md#custom-command)
 - H2 heading with `[Catch]` : Actions when main condition is `false`.
@@ -282,7 +283,7 @@ coin > 5
 
 ##### Simple branch
 
-```md
+```
 ## [If]
 
 coin > 5
@@ -303,7 +304,7 @@ User can build complex branch by mutiple event sheets with main condition (`[Con
 
 ##### While loop
 
-```md
+```
 ## [While]
 
 loopCount > 0
@@ -319,23 +320,27 @@ loopCount > 0
 
 ##### Break
 
-```md
+```
+
 [break]
+
 ```
 
 - Action line with `[break]` : Ignore remainder actions in current label (heading).
 
 ##### Exit
 
-```md
+```
+
 [exit]
+
 ```
 
 - Action line with `[exit]` : Skip remainder label (heading) and actions.
 
 #### Custom command
 
-```md
+```
 
 commandName
   param0=value
@@ -347,15 +352,15 @@ commandName
 - First line is the command name.
     1. Invoke `commandExecutor.commandName` method if this `commandName` method is existed.
         ```javascript
-        commandName(config, manager) {
+        commandName(config, eventSheetManager) {
             // return eventEmitter;
         }
         ``` 
         - `config` : Parameter and value in a dictionary.
-        - `manager` : This event mangager.
+        - `eventSheetManager` : This event mangager.
         - Return value :
             - `undefined`, `null` : Run next command immediately.
-            - `eventEmitter` : Run next command until `eventEmitter` emits `'complete'` event.
+            - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.
     1. Otherwise, invoke `commandExecutor.defaultHandler`.
         ```javascript
         defaultHandler(commandName, config, manager) {
@@ -375,3 +380,524 @@ commandName
         - String value wrapped by `#(` `)` will be treated as expression, return a number value.
 - Any line start with `//` will be ignored as comment line.
 
+
+For multiple lines parameter :
+
+<pre><code>
+```commandName,param0=value,param1=value
+line0
+line1
+line2
+```
+</code></pre>
+
+- Lines in code block will be assigned to `text` parameter.
+
+So it will be equal to
+
+```
+
+commandName
+  text=...
+  param0=value
+  param1=value
+
+```
+
+### Command executor
+
+A command executor for phaser3 engine.
+
+#### Create command executor instance
+
+```javascript
+var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
+    layers: []
+});
+
+// Add to event sheet manager
+// var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
+//     commandExecutor: commandExecutor
+// });
+```
+
+- `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
+
+#### Game object
+
+##### Register custom game object
+
+```javascript
+commandExecutor.addGameObjectManager({
+    name: GOTYPE,
+
+    viewportCoordinate: false,
+    // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },
+    
+    fade: 500,
+    // fade: {mode: 'tint', time: 500},
+    
+    defaultLayer: layerName,
+    
+    commands: {
+        commandName(config, eventSheetManager) {
+            // commandExecutor.waitEvent(eventEmitter, eventName);
+        }
+    }
+})
+```
+
+- `name` : A string name of game object's type. Will [register command](markedeventsheet.md#add-custom-command) `GOTYPE` to this command executor.
+- `createGameObject` : A callback for creating game object
+    ```javascript
+    function(scene, config) {
+        return gameObject;
+    }
+    ```
+    - `config` : Parameters passed from [event sheet](markedeventsheet.md#create-custom-game-object).
+        - `name` : Parameter `name` is reserved.
+- `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
+    - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+        - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+        - `vp` : Viewport in [rectangle](geom-rectangle.md)
+    - `false` : Do nothing, default behavior.
+- `fade` :
+    - `0` : No fade-in or fade-out when adding or removing a sprite.
+    - A number : Duration of fading. Default value is `500`.
+    - A plain object contains `mode`, `time`
+        - `fade.mode` : Fade mode
+            - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+            - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property. 
+        - `fade.time` : Duration of fading. Default value is `500`.
+- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheet.md#create-command-executor-instance)
+- `commands` : Custom commands, each command is a callback indexed by command name
+    ```javascript
+    commandName: function(gameObject, config, commandExecutor) {
+        // commandExecutor.waitEvent(eventEmitter, eventName);
+    }
+    ```
+    - `commandName` : Command name. These command names are reserved : [`to`](markedeventsheet.md#ease-properties-of-custom-game-object), [`yoyo`](markedeventsheet.md#ease-properties-of-custom-game-object), [`destroy`](markedeventsheet.md#destroy-custom-game-object)
+    - `gameObject` : Game object instance.
+    - `config` : Parameters passed from [event sheet](markedeventsheet.md#invoke-custom-command).
+    - `commandExecutor` : This command executor instance.
+        - `commandExecutor.waitEvent(eventEmitter, eventName)` : Invoke this method to 
+          Run next command after `eventEmitter` emitting event `eventName`.
+
+##### Create custom game object
+
+```
+
+GOTYPE
+  name=NAME
+  param0=value
+  param1=value
+
+```
+
+- Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `name`
+
+##### Set properties of custom game object
+
+```
+
+NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+
+```
+
+- `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
+
+##### Ease properties of custom game object
+
+```
+
+NAME.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+```
+
+NAME.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+- These properties are reserved : `name`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Invoke custom command 
+
+```
+
+NAME.commandName
+  param0=value
+  param1=value
+
+```
+
+- Invoke custom command `commandName` method with these parameters
+    - `gameObject` : Indexed by `NAME`
+    - `config` : `{param0, param1}`
+
+Do nothing if gameObject or commandName is not found.
+
+##### Destroy custom game object
+
+```
+
+NAME.destroy
+
+```
+
+#### Wait
+
+##### Wait click
+
+```
+
+click
+
+```
+
+- Run next command after clicking.
+
+##### Wait any
+
+```
+
+wait
+  click
+  key=keyName
+  time=
+
+```
+
+- `click` : Run next command after clicking.
+- `key` : Run next command after key down
+- `time` : Run next command after time-out.
+
+Emit these events from eventSheetManager
+
+- Wait click or key down
+    ```javascript
+    eventSheetManager.on('pause.input', function(){ 
+
+    });
+    ```
+    - Resume (run next command)
+         ```javascript
+            eventSheetManager.on('resume.input', function(){ 
+        
+            });
+            ```
+- Wait click only
+    ```javascript
+    eventSheetManager.on('pause.click', function(){ 
+
+    });
+    ```
+- Wait key down only
+    ```javascript
+    eventSheetManager.on('pause.key', function(keyName){ 
+
+    });
+    ```
+
+#### Sound
+
+This command executor provides 
+
+- 2 background music tracks : `bgm`, `bgm2`
+- 2 sound effects : `se`, `se2`.
+
+##### Sound properties
+
+```
+
+bgm
+  volume=1
+
+```
+
+- `volume`
+
+##### Play sound
+
+```
+bgm.play
+  key=
+  volume
+  fadeIn=0
+  loop
+  wait=false
+```
+
+- Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Cross fade in sound
+
+```
+
+bgm.cross
+  key=
+  duration=500
+  wait=false
+
+```
+
+- Command name : `bgm.cross`, `bgm2.cross`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Stop sound
+
+```
+bgm.stop
+```
+
+- Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
+
+##### Fade out sound
+
+```
+
+bgm.fadeOut
+  duration=500
+  stop=true
+  wait=false
+
+```
+
+- Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Fade in sound
+
+```
+
+bgm.fadeIn
+  duration=500
+
+```
+
+- Command name : `bgm.fadeIn`, `bgm2.fadeIn`
+
+##### Pause sound
+
+```
+
+bgm.pause
+
+```
+
+- Command name : `bgm.pause`, `bgm2.pause`
+
+##### Resume sound
+
+```
+
+bgm.resume
+
+```
+
+- Command name : `bgm.resume`, `bgm2.resume`
+
+##### Mute sound
+
+```
+
+bgm.mute
+
+```
+
+- Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
+
+##### Unmute sound
+
+```
+
+bgm.unmute
+
+```
+
+- Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
+
+#### Camera
+
+##### Camera properties
+
+```
+
+camera
+  x=
+  y=
+  rotate=
+  zoom=
+
+```
+
+- `x`, `y` : Scroll
+- `rotate` : Rotate in degree
+- `zoom` : Zoom
+
+Run next command immediately.
+
+##### Fade in
+
+```
+
+camera.fadeIn
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+
+```
+
+- `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Fade out
+
+```
+
+camera.fadeOut
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+
+```
+
+- `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Flash
+
+```
+
+camera.flash
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+
+```
+
+- `duration`, `red`, `green`, `blue` : See [flash effect](camera-effects.md/#flash)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Shake
+
+```
+
+camera.shake
+  duration=1000
+  intensity
+  wait=false
+
+```
+
+- `duration`, `intensity` : See [shake effect](camera-effects.md/#shake)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Zoom
+
+```
+camera.zoomTo
+  duration=1000
+  zoom
+  wait=false
+```
+
+- `duration`, `zoom` : See [zoom effect](camera-effects.md/#zoom)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Rotate to
+
+```
+
+camera.rotateTo
+  duration=1000
+  rotate
+  ease
+  wait=false
+
+```
+
+- `duration`, `rotate`, `ease` : See [rotateTo effect](camera-effects.md/#rotate-to)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Scroll to
+
+```
+
+camera.scrollTo
+  duration=1000
+  x
+  y
+  ease
+  wait=false
+
+```
+
+- `duration`, `x`, `y`, `ease` : Scroll to position.
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+#### Add custom command
+
+```javascript
+commandExecutor.addCommand(commandName, function(config, eventSheetManager){
+    // return eventEmitter;
+}, scope);
+```
+
+- `config` : Parameters passed from [event sheet](markedeventsheet.md#custom-command).
+- `eventSheetManager` : This event mangager.
+- Return value :
+    - `undefined`, `null` : Run next command immediately.
+    - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.

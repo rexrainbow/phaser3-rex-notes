@@ -65,7 +65,7 @@ export default {
         }
     },
 
-    'camera.zoomTo'({ zoom, duration = 1000, wait = false } = {}, manager) {
+    'camera.zoomTo'({ duration = 1000, zoom, wait = false } = {}, manager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -77,7 +77,7 @@ export default {
         }
     },
 
-    'camera.rotateTo'({ rotate, duration, ease, wait = false } = {}, manager) {
+    'camera.rotateTo'({ duration = 1000, rotate, ease, wait = false } = {}, manager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -89,7 +89,7 @@ export default {
         }
     },
 
-    'camera.scrollTo'({ x, y, duration = 1000, ease, wait = false } = {}, manager) {
+    'camera.scrollTo'({ duration = 1000, x, y, ease, wait = false } = {}, manager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;

@@ -5,6 +5,11 @@ var AddCommand = function (name, callback, scope) {
     if (scope) {
         callback = callback.bind(scope);
     }
+
+    if (this[name]) {
+        console.warn(`CommandExecutor: method '${name} is existed.`);
+    }
+
     this[name] = callback;
     return this;
 }

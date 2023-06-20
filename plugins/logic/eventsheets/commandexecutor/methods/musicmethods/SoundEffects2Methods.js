@@ -30,6 +30,14 @@ export default {
         }
     },
 
+    'se2.stop'(config, manager) {
+        var soundManager = this.sys.soundManager;
+        if (!soundManager) {
+            return;
+        }
+        soundManager.stopAllSoundEffects2();
+    },
+
     'se2.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {

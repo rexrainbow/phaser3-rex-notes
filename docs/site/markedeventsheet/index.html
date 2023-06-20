@@ -9570,7 +9570,10 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>commandExecutor</code> : Command executor of <a href="./#custom-command">actions</a>.</li>
+<li><code>commandExecutor</code> : Command executor of <a href="./#custom-command">actions</a>.<ul>
+<li>This plugin provides a built-in <a href="./#command-executor">command executor</a>.</li>
+</ul>
+</li>
 <li><code>parallel</code> :<ul>
 <li><code>false</code> : Test condition then execute event sheet one by one. Default behavior.</li>
 <li><code>true</code> : Test all condition of event sheets then execute event sheets one by one.</li>
@@ -9716,15 +9719,15 @@
 <h3 id="structure-of-event-sheet">Structure of event sheet<a class="headerlink" href="#structure-of-event-sheet" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/assets/markedeventsheet/sample.md?plain=1">Sample</a></p>
 <h4 id="main-headings">Main headings<a class="headerlink" href="#main-headings" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="gh"># Title</span>
+<div class="highlight"><pre><span></span><code># Title
 
-<span class="gu">## [Condition]</span>
+## [Condition]
 
 coin &gt; 5
 
-<span class="gu">## Script</span>
+## Script
 
-<span class="gu">## [Catch]</span>
+## [Catch]
 </code></pre></div>
 <ul>
 <li>H1 heading: Title of this event sheet</li>
@@ -9734,7 +9737,7 @@ coin &gt; 5
 <li>Read data from <a href="./#local-memory">local memory</a></li>
 </ul>
 </li>
-<li>H2 headings between <code>[Condition]</code> and <code>[Catch]</code> : Actions when main condition is <code>true</code>.<ul>
+<li>H2/H3/... headings between <code>[Condition]</code> and <code>[Catch]</code> : Actions when main condition is <code>true</code>.<ul>
 <li><a href="./#flow-control-instructions">Flow control instructions of headings</a></li>
 <li>Actions : <a href="./#custom-command">Custom command</a></li>
 </ul>
@@ -9743,11 +9746,11 @@ coin &gt; 5
 </ul>
 <h4 id="flow-control-instructions">Flow control instructions<a class="headerlink" href="#flow-control-instructions" title="Permanent link">&para;</a></h4>
 <h5 id="simple-branch">Simple branch<a class="headerlink" href="#simple-branch" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="gu">## [If]</span>
+<div class="highlight"><pre><span></span><code>## [If]
 
 coin &gt; 5
 
-<span class="gu">### Label</span>
+### Label
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[If]</code> : Internal branch<ul>
@@ -9761,11 +9764,11 @@ coin &gt; 5
 <p>Does not support complex branch (if... else if ... else) inside an event sheet.<br />
 User can build complex branch by mutiple event sheets with main condition (<code>[Condition]</code> H2 heading).</p>
 <h5 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="gu">## [While]</span>
+<div class="highlight"><pre><span></span><code>## [While]
 
 loopCount &gt; 0
 
-<span class="gu">### Label</span>
+### Label
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[While]</code> : While loop<ul>
@@ -9796,15 +9799,15 @@ loopCount &gt; 0
 <li>Each command is divided by space line. i.e. add space lines above and below command.</li>
 <li>First line is the command name.<ol>
 <li>Invoke <code>commandExecutor.commandName</code> method if this <code>commandName</code> method is existed.
-    <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">manager</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">eventSheetManager</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return eventEmitter;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>config</code> : Parameter and value in a dictionary.</li>
-<li><code>manager</code> : This event mangager.</li>
+<li><code>eventSheetManager</code> : This event mangager.</li>
 <li>Return value :<ul>
 <li><code>undefined</code>, <code>null</code> : Run next command immediately.</li>
-<li><code>eventEmitter</code> : Run next command until <code>eventEmitter</code> emits <code>'complete'</code> event.</li>
+<li><code>eventEmitter</code> : Run next command after <code>eventEmitter</code> emitting <code>'complete'</code> event.</li>
 </ul>
 </li>
 </ul>
@@ -9837,6 +9840,444 @@ loopCount &gt; 0
 </li>
 <li>Any line start with <code>//</code> will be ignored as comment line.</li>
 </ul>
+<p>For multiple lines parameter :</p>
+<pre><code>
+```commandName,param0=value,param1=value
+line0
+line1
+line2
+<div class="highlight"><pre><span></span><code>&lt;/code&gt;&lt;/pre&gt;
+
+- Lines in code block will be assigned to `text` parameter.
+
+So it will be equal to
+</code></pre></div>
+
+commandName
+  text=...
+  param0=value
+  param1=value
+
+<div class="highlight"><pre><span></span><code>### Command executor
+
+A command executor for phaser3 engine.
+
+#### Create command executor instance
+
+```javascript
+var commandExecutor = scene.plugins.get(&#39;rexMarkedEventSheets&#39;).addCommandExecutor(scene, {
+    layers: []
+});
+
+// Add to event sheet manager
+// var eventSheetManager = scene.plugins.get(&#39;rexMarkedEventSheets&#39;).add({
+//     commandExecutor: commandExecutor
+// });
+</code></pre></div>
+
+- `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
+
+#### Game object
+
+##### Register custom game object
+
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addGameObjectManager</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">GOTYPE</span><span class="p">,</span>
+
+    <span class="nx">viewportCoordinate</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },</span>
+
+    <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>
+    <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
+
+    <span class="nx">defaultLayer</span><span class="o">:</span> <span class="nx">layerName</span><span class="p">,</span>
+
+    <span class="nx">commands</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">commandName</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">eventSheetManager</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+- `name` : A string name of game object's type. Will [register command](markedeventsheet.md#add-custom-command) `GOTYPE` to this command executor.
+- `createGameObject` : A callback for creating game object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+    - `config` : Parameters passed from [event sheet](markedeventsheet.md#create-custom-game-object).
+        - `name` : Parameter `name` is reserved.
+- `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
+    - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+        - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+        - `vp` : Viewport in [rectangle](geom-rectangle.md)
+    - `false` : Do nothing, default behavior.
+- `fade` :
+    - `0` : No fade-in or fade-out when adding or removing a sprite.
+    - A number : Duration of fading. Default value is `500`.
+    - A plain object contains `mode`, `time`
+        - `fade.mode` : Fade mode
+            - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+            - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property. 
+        - `fade.time` : Duration of fading. Default value is `500`.
+- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheet.md#create-command-executor-instance)
+- `commands` : Custom commands, each command is a callback indexed by command name
+    <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">commandExecutor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
+<span class="p">}</span>
+</code></pre></div>
+    - `commandName` : Command name. These command names are reserved : [`to`](markedeventsheet.md#ease-properties-of-custom-game-object), [`yoyo`](markedeventsheet.md#ease-properties-of-custom-game-object), [`destroy`](markedeventsheet.md#destroy-custom-game-object)
+    - `gameObject` : Game object instance.
+    - `config` : Parameters passed from [event sheet](markedeventsheet.md#invoke-custom-command).
+    - `commandExecutor` : This command executor instance.
+        - `commandExecutor.waitEvent(eventEmitter, eventName)` : Invoke this method to 
+          Run next command after `eventEmitter` emitting event `eventName`.
+
+##### Create custom game object
+
+<div class="highlight"><pre><span></span><code>GOTYPE
+  name=NAME
+  param0=value
+  param1=value
+</code></pre></div>
+
+- Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `name`
+
+##### Set properties of custom game object
+
+<div class="highlight"><pre><span></span><code>NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+</code></pre></div>
+
+- `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
+
+##### Ease properties of custom game object
+
+<div class="highlight"><pre><span></span><code>NAME.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>NAME.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div>
+
+- These properties are reserved : `name`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Invoke custom command 
+
+<div class="highlight"><pre><span></span><code>NAME.commandName
+  param0=value
+  param1=value
+</code></pre></div>
+
+- Invoke custom command `commandName` method with these parameters
+    - `gameObject` : Indexed by `NAME`
+    - `config` : `{param0, param1}`
+
+Do nothing if gameObject or commandName is not found.
+
+##### Destroy custom game object
+
+<div class="highlight"><pre><span></span><code>NAME.destroy
+</code></pre></div>
+
+#### Wait
+
+##### Wait click
+
+<div class="highlight"><pre><span></span><code>click
+</code></pre></div>
+
+- Run next command after clicking.
+
+##### Wait any
+
+<div class="highlight"><pre><span></span><code>wait
+  click
+  key=keyName
+  time=
+</code></pre></div>
+
+- `click` : Run next command after clicking.
+- `key` : Run next command after key down
+- `time` : Run next command after time-out.
+
+Emit these events from eventSheetManager
+
+- Wait click or key down
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.input&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> 
+
+<span class="p">});</span>
+</code></pre></div>
+    - Resume (run next command)
+         ```javascript
+            eventSheetManager.on('resume.input', function(){ 
+
+            });
+            ```
+- Wait click only
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> 
+
+<span class="p">});</span>
+</code></pre></div>
+- Wait key down only
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause.key&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">keyName</span><span class="p">){</span> 
+
+<span class="p">});</span>
+</code></pre></div>
+
+#### Sound
+
+This command executor provides 
+
+- 2 background music tracks : `bgm`, `bgm2`
+- 2 sound effects : `se`, `se2`.
+
+##### Sound properties
+
+<div class="highlight"><pre><span></span><code>bgm
+  volume=1
+</code></pre></div>
+
+- `volume`
+
+##### Play sound
+
+<div class="highlight"><pre><span></span><code>bgm.play
+  key=
+  volume
+  fadeIn=0
+  loop
+  wait=false
+</code></pre></div>
+
+- Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Cross fade in sound
+
+<div class="highlight"><pre><span></span><code>bgm.cross
+  key=
+  duration=500
+  wait=false
+</code></pre></div>
+
+- Command name : `bgm.cross`, `bgm2.cross`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Stop sound
+
+<div class="highlight"><pre><span></span><code>bgm.stop
+</code></pre></div>
+
+- Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
+
+##### Fade out sound
+
+<div class="highlight"><pre><span></span><code>bgm.fadeOut
+  duration=500
+  stop=true
+  wait=false
+</code></pre></div>
+
+- Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after playing sound complete.
+
+##### Fade in sound
+
+<div class="highlight"><pre><span></span><code>bgm.fadeIn
+  duration=500
+</code></pre></div>
+
+- Command name : `bgm.fadeIn`, `bgm2.fadeIn`
+
+##### Pause sound
+
+<div class="highlight"><pre><span></span><code>bgm.pause
+</code></pre></div>
+
+- Command name : `bgm.pause`, `bgm2.pause`
+
+##### Resume sound
+
+<div class="highlight"><pre><span></span><code>bgm.resume
+</code></pre></div>
+
+- Command name : `bgm.resume`, `bgm2.resume`
+
+##### Mute sound
+
+<div class="highlight"><pre><span></span><code>bgm.mute
+</code></pre></div>
+
+- Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
+
+##### Unmute sound
+
+<div class="highlight"><pre><span></span><code>bgm.unmute
+</code></pre></div>
+
+- Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
+
+#### Camera
+
+##### Camera properties
+
+<div class="highlight"><pre><span></span><code>camera
+  x=
+  y=
+  rotate=
+  zoom=
+</code></pre></div>
+
+- `x`, `y` : Scroll
+- `rotate` : Rotate in degree
+- `zoom` : Zoom
+
+Run next command immediately.
+
+##### Fade in
+
+<div class="highlight"><pre><span></span><code>camera.fadeIn
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+</code></pre></div>
+
+- `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Fade out
+
+<div class="highlight"><pre><span></span><code>camera.fadeOut
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+</code></pre></div>
+
+- `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Flash
+
+<div class="highlight"><pre><span></span><code>camera.flash
+  duration=1000
+  red
+  green
+  blue
+  wait=false
+</code></pre></div>
+
+- `duration`, `red`, `green`, `blue` : See [flash effect](camera-effects.md/#flash)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Shake
+
+<div class="highlight"><pre><span></span><code>camera.shake
+  duration=1000
+  intensity
+  wait=false
+</code></pre></div>
+
+- `duration`, `intensity` : See [shake effect](camera-effects.md/#shake)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Zoom
+
+<div class="highlight"><pre><span></span><code>camera.zoomTo
+  duration=1000
+  zoom
+  wait=false
+</code></pre></div>
+
+- `duration`, `zoom` : See [zoom effect](camera-effects.md/#zoom)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Rotate to
+
+<div class="highlight"><pre><span></span><code>camera.rotateTo
+  duration=1000
+  rotate
+  ease
+  wait=false
+</code></pre></div>
+
+- `duration`, `rotate`, `ease` : See [rotateTo effect](camera-effects.md/#rotate-to)
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+##### Scroll to
+
+<div class="highlight"><pre><span></span><code>camera.scrollTo
+  duration=1000
+  x
+  y
+  ease
+  wait=false
+</code></pre></div>
+
+- `duration`, `x`, `y`, `ease` : Scroll to position.
+- `wait` :
+    - `false` : Run next command immediately. Default behavior.
+    - `true` : Run next command after effect complete.
+
+#### Add custom command
+
+<div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">eventSheetManager</span><span class="p">){</span>
+    <span class="c1">// return eventEmitter;</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+
+- `config` : Parameters passed from [event sheet](markedeventsheet.md#custom-command).
+- `eventSheetManager` : This event mangager.
+- Return value :
+    - `undefined`, `null` : Run next command immediately.
+    - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.
 
               
             </article>

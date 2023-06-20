@@ -41,6 +41,16 @@ export default {
         return this;
     },
 
+    stopAllSoundEffects2() {
+        for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+            var soundEffect = this.soundEffects[i];
+            soundEffect.stop();
+            soundEffect.destroy();
+        }
+
+        return this;
+    },
+
     fadeInSoundEffect2(time) {
         var soundEffect = this.getLastSoundEffect2();
         if (soundEffect) {

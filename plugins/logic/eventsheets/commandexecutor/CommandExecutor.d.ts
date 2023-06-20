@@ -21,7 +21,11 @@ declare namespace CommandExecutor {
     interface IAddGameObjectManagerConfig extends Managers.IAddGameObjectManagerConfig {
         defaultLayer?: string,
         commands?: {
-            [name: string]: CommandCallbackType
+            [name: string]: (
+                gameObject: Phaser.GameObjects.GameObject,
+                config: GeneralConfigType,
+                commandExecutor: CommandExecutor,
+            ) => void;
         }
     }
 
@@ -50,6 +54,11 @@ declare class CommandExecutor {
         config: CommandExecutor.GeneralConfigType,
         manager: EventSheetManager
     ): void | Phaser.Events.EventEmitter;
+
+    waitEvent(
+        eventEmitter: Phaser.Events.EventEmitter,
+        eventName: string
+    ): this;
 
     set: CommandExecutor.ImmediatelyCommandCallbackType;
 
@@ -80,15 +89,15 @@ declare class CommandExecutor {
 
     se: CommandExecutor.ImmediatelyCommandCallbackType;
     'se.play': CommandExecutor.CommandCallbackType;
+    'se.stop': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.fadeOut': CommandExecutor.CommandCallbackType;
-    'se.volume': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 
     se2: CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.play': CommandExecutor.CommandCallbackType;
+    'se2.stop': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.fadeOut': CommandExecutor.CommandCallbackType;
-    'se2.volume': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 

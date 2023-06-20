@@ -83,6 +83,8 @@ declare class SoundManager {
 
     playSoundEffect(key: string): this;
 
+    stopAllSoundEffects(): this;
+
     fadeInSoundEffect(time: number): this;
 
     fadeOutSoundEffect(time: number, isStopped?: boolean): this;
@@ -99,6 +101,8 @@ declare class SoundManager {
     getLastSoundEffect2(): Phaser.Sound.BaseSound;
 
     playSoundEffect2(key: string): this;
+
+    stopAllSoundEffects2(): this;
 
     fadeInSoundEffect2(time: number): this;
 

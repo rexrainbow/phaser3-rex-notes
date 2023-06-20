@@ -2497,6 +2497,14 @@
       }, this).play();
       return this;
     },
+    stopAllSoundEffects: function stopAllSoundEffects() {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        var soundEffect = this.soundEffects[i];
+        soundEffect.stop();
+        soundEffect.destroy();
+      }
+      return this;
+    },
     fadeInSoundEffect: function fadeInSoundEffect(time) {
       var soundEffect = this.getLastSoundEffect();
       if (soundEffect) {
@@ -2581,6 +2589,14 @@
         }
         RemoveItem(this.soundEffects2, soundEffect);
       }, this).play();
+      return this;
+    },
+    stopAllSoundEffects2: function stopAllSoundEffects2() {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        var soundEffect = this.soundEffects[i];
+        soundEffect.stop();
+        soundEffect.destroy();
+      }
       return this;
     },
     fadeInSoundEffect2: function fadeInSoundEffect2(time) {
