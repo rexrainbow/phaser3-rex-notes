@@ -164,6 +164,32 @@ class TitleLabel extends LabelBase {
         this.title = value;
         return this;
     }
+
+    resetDisplayContent(config) {
+        if (config === undefined) {
+            config = {};
+        } else if (typeof (config) === 'string') {
+            config = {
+                text: config,
+            }
+        }
+
+        super.resetDisplayContent(config);
+
+        var textObject = this.childrenMap.title;
+        if (textObject) {
+            if (config.title === undefined) {
+                // Do nothing
+            } else if (config.title) {
+                this.show(textObject);
+                this.setTitle(config.title);
+            } else { // false, null
+                this.hide(textObject);
+            }
+        }
+
+        return this;
+    }
 }
 
 export default TitleLabel;
