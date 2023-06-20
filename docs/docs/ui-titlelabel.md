@@ -154,7 +154,7 @@ var label = scene.rexUI.add.titleLabel({
     - `space.icon` : Space between icon game object and text game object.
     - `space.iconTop`, `space.iconBottom` : Space around icon game object.
     - `space.text` : Space between text game object and action icon game object.
-    - `space.iconTop`, `space.iconBottom` : Space around icon game object.
+    - `space.actionTop`, `space.actionBottom` : Space around action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.

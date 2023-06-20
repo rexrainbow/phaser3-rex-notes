@@ -113,8 +113,11 @@ var label = scene.rexUI.add.label({
         top: 0,
         bottom: 0,
 
-        icon: 0,
+        icon: 0, 
+        iconTop: 0, iconBottom: 0, iconLeft: 0, iconRight: 0,
+
         text: 0,
+        actionTop: 0, actionBottom: 0, actionLeft: 0, actionRight: 0,
     },
 
     // name: '',
@@ -180,7 +183,9 @@ var label = scene.rexUI.add.label({
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
+    - `space.iconTop`, `space.iconBottom`, `space.iconLeft`, `space.iconRight` : Space around icon game object.
     - `space.text` : Space between text game object and action icon game object.
+    - `space.actionTop`, `space.actionBottom`, `space.actionLeft`, `space.actionRight` : Space around action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.

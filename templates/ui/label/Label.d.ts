@@ -13,7 +13,11 @@ declare namespace Label {
             left?: number, right?: number, top?: number, bottom?: number,
 
             icon?: number,
+            iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
+
             text?: number,
+
+            actionTop?: number, actionBottom?: number, actionLeft?: number, actionRight?: number,
         },
 
         background?: Phaser.GameObjects.GameObject,

@@ -151,13 +151,15 @@ declare class BaseSizer extends ContainerLite {
         }
     ): this;
 
-    childrenMap: {
-        [key: string]:
-        Phaser.GameObjects.GameObject
-    };
+    childrenMap: { [key: string]: Phaser.GameObjects.GameObject };
+
     addChildrenMap(
         key: string,
         gameObject: Phaser.GameObjects.GameObject
+    ): this;
+
+    addChildrenMap(
+        config: { [key: string]: Phaser.GameObjects.GameObject }
     ): this;
 
     removeChildrenMap(key: string): this;

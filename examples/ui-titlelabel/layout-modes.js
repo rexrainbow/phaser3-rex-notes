@@ -17,9 +17,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var label0 = this.rexUI.add.titleLabel({
-            x: 400, y: 200,
+            x: 200, y: 100,
             width: 200, height: 40,
 
+            layoutMode: 0,
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
 
             title: this.add.text(0, 0, 'Title'),
@@ -42,14 +43,16 @@ class Demo extends Phaser.Scene {
         })
             .layout();
 
-
         var label1 = this.rexUI.add.titleLabel({
-            x: 400, y: 400,
-            width: 200, height: 40,
+            x: 600, y: 100,
+            width: 240,
 
-            title: this.add.text(0, 0, 'TitleTitle').setOrigin(1, 1),
-            separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_LIGHT).setOrigin(0, 0.5),
-            text: this.add.text(0, 0, 'TextText').setOrigin(1, 0),
+            layoutMode: 1,
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+
+            title: this.add.text(0, 0, 'Title'),
+            separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
+            text: this.add.text(0, 0, 'Text\nText\nText\nText'),
 
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
@@ -59,38 +62,15 @@ class Demo extends Phaser.Scene {
             },
 
             space: {
-                separator: 2,
+                left: 20, right: 20, top: 20, bottom: 20,
+                icon: 20,
+                separator: 3,
+
+                titleLeft: 20,
             }
 
         })
             .layout();
-
-        this.tweens.chain({
-            tweens: [
-                {
-                    targets: label1.getElement('separator'),
-                    scaleX: { start: 0, to: 1 },
-                    duration: 500
-                },
-                {
-                    targets: [label1.getElement('title'), label1.getElement('text')],
-                    scaleY: { start: 0, to: 1 },
-                    duration: 500,
-                }
-            ]
-        })
-
-        // this.tweens.add({
-        //     targets: label1.getElement('separator'),
-        //     scaleX: { start: 0, to: 1 },
-        //     duration: 500
-        // })
-        // this.tweens.add({
-        //     targets: [label1.getElement('title'), label1.getElement('text')],
-        //     scaleY: { start: 0, to: 1 },
-        //     duration: 500,
-        //     delay: 500,
-        // })
     }
 
     update() {
