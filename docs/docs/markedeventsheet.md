@@ -525,6 +525,7 @@ NAME.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
@@ -539,6 +540,7 @@ NAME.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 - These properties are reserved : `name`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
