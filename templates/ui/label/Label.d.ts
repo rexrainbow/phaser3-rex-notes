@@ -32,8 +32,8 @@ declare namespace Label {
         expandTextHeight?: boolean,
 
         action?: Phaser.GameObjects.GameObject,
-        squareFitAction?: boolean,
         actionMask?: boolean,
+        squareFitAction?: boolean,
         actionSize?: number, actionWidth?: number, actionHeight?: number,
 
         align?: AlignTypes,

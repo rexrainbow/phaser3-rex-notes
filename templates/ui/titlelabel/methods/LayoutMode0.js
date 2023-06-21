@@ -1,9 +1,10 @@
 /*
 Elements:
 
-      Title
+Icon  Title      ActionIcon
 Icon  Separator  ActionIcon
-      Text
+Icon  Text       ActionIcon
+
 */
 
 import Sizer from '../../sizer/Sizer.js';
@@ -20,32 +21,28 @@ var LayoutMode0 = function (config) {
     // Add elements
     var icon = GetValue(config, 'icon', undefined);
     var iconMask = GetValue(config, 'iconMask', undefined);
+    var innerBackground = GetValue(config, 'innerBackground', undefined);
     var title = GetValue(config, 'title', undefined);
     var separator = GetValue(config, 'separator', undefined);
     var text = GetValue(config, 'text', undefined);
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
 
-    var hasTextSizer = text || title || separator;
 
     if (icon) {
-        var padding = undefined;
+        var padding;
         if (this.orientation === 0) {
-            if (hasTextSizer || action) {
-                padding = {
-                    right: GetValue(config, 'space.icon', 0),
-                    top: GetValue(config, 'space.iconTop', 0),
-                    bottom: GetValue(config, 'space.iconBottom', 0),
-                };
-            }
+            padding = {
+                right: GetValue(config, 'space.icon', 0),
+                top: GetValue(config, 'space.iconTop', 0),
+                bottom: GetValue(config, 'space.iconBottom', 0),
+            };
         } else {
-            if (hasTextSizer || action) {
-                padding = {
-                    bottom: GetValue(config, 'space.icon', 0),
-                    left: GetValue(config, 'space.iconLeft', 0),
-                    right: GetValue(config, 'space.iconRight', 0),
-                };
-            }
+            padding = {
+                bottom: GetValue(config, 'space.icon', 0),
+                left: GetValue(config, 'space.iconLeft', 0),
+                right: GetValue(config, 'space.iconRight', 0),
+            };
         }
         var fitRatio = GetValue(config, 'squareFitIcon', false) ? 1 : 0;
 
@@ -67,58 +64,66 @@ var LayoutMode0 = function (config) {
         }
     }
 
-    if (hasTextSizer) {
-        var textSizer = new Sizer(scene, {
-            orientation: 1,
-        })
+    // InnerSizer : title, separator, text
+    var innerSizer = new Sizer(scene, {
+        orientation: 1,
+    })
 
-        var separatorSpace = GetValue(config, 'space.separator', 0);
+    if (innerBackground) {
+        innerSizer.addBackground(innerBackground);
+    }
 
-        if (title) {
-            var titleAlign = GetValue(config, 'align.title', 'right');
-            var padding = {
-                bottom: (!separator && text) ? separatorSpace : 0
-            }
-            textSizer.add(
-                title,
-                { align: titleAlign }
-            );
+    var separatorSpace = GetValue(config, 'space.separator', 0);
+
+    if (title) {
+        var align = GetValue(config, 'align.title', 'left');
+        var padding = {
+            bottom: (!separator && text) ? separatorSpace : 0,
+            left: GetValue(config, 'space.titleLeft', 0),
+            right: GetValue(config, 'space.titleRight', 0),
         }
-
-        if (separator) {
-            var padding = {
-                top: (title) ? separatorSpace : 0,
-                bottom: (text) ? separatorSpace : 0,
-                left: GetValue(config, 'space.separatorLeft', 0),
-                right: GetValue(config, 'space.separatorRight', 0),
-            };
-            textSizer.add(
-                separator,
-                { expand: true, padding: padding }
-            );
-        }
-
-
-        if (text) {
-            var textAlign = GetValue(config, 'align.text', 'right');
-            textSizer.add(
-                text,
-                { align: textAlign }
-            );
-        }
-
-
-        var padding = undefined;
-        if (action) {
-            padding = {
-                right: GetValue(config, 'space.text', 0)
-            };
-        }
-        this.add(
-            textSizer,
-            { proportion: 1, padding: padding }
+        innerSizer.add(
+            title,
+            { proportion: 0, align: align, padding: padding }
         );
     }
+
+    if (separator) {
+        var padding = {
+            top: (title) ? separatorSpace : 0,
+            bottom: (text) ? separatorSpace : 0,
+            left: GetValue(config, 'space.separatorLeft', 0),
+            right: GetValue(config, 'space.separatorRight', 0),
+        };
+        innerSizer.add(
+            separator,
+            { expand: true, padding: padding }
+        );
+    }
+
+    if (text) {
+        var align = GetValue(config, 'align.text', 'left');
+        var padding = {            
+            left: GetValue(config, 'space.textLeft', 0),
+            right: GetValue(config, 'space.textRight', 0),
+        }
+        innerSizer.add(
+            text,
+            { proportion: 0, align: align, padding: padding }
+        );
+    }
+
+    var padding = undefined;
+    if (action) {
+        padding = {
+            right: GetValue(config, 'space.text', 0)
+        };
+    }
+    this.add(
+        innerSizer,
+        { proportion: 1, padding: padding }
+    );
+    // InnerSizer : title, separator, text
 
     if (action) {
         var padding;
@@ -155,6 +160,7 @@ var LayoutMode0 = function (config) {
 
     this.addChildrenMap('icon', icon);
     this.addChildrenMap('iconMask', iconMask);
+    this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);
     this.addChildrenMap('text', text);

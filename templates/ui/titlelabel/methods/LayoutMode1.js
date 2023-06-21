@@ -1,9 +1,10 @@
 /*
 Elements:
 
-           Title
+Title      Title       Title
 Separator  Separator   Separator
-Icon       Text        ActionIcon        
+Icon       Text        ActionIcon 
+
 */
 
 import Sizer from '../../sizer/Sizer.js';
@@ -19,16 +20,16 @@ var LayoutMode1 = function (config) {
     // Add elements
     var title = GetValue(config, 'title', undefined);
     var separator = GetValue(config, 'separator', undefined);
-
+    var innerBackground = GetValue(config, 'innerBackground', undefined);
     var icon = GetValue(config, 'icon', undefined);
     var iconMask = GetValue(config, 'iconMask', undefined);
-
     var text = GetValue(config, 'text', undefined);
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
 
+
     if (title) {
-        var titleAlign = GetValue(config, 'align.title', 'left');
+        var align = GetValue(config, 'align.title', 'left');
         var padding = {
             bottom: GetValue(config, 'space.title', 0),
             left: GetValue(config, 'space.titleLeft', 0),
@@ -36,7 +37,7 @@ var LayoutMode1 = function (config) {
         }
         this.add(
             title,
-            { proportion: 0, align: titleAlign, padding: padding }
+            { proportion: 0, align: align, padding: padding }
         );
     }
 
@@ -55,37 +56,42 @@ var LayoutMode1 = function (config) {
     }
 
     var orientation = GetValue(config, 'orientation', 0);
-    var labelSizer = new Sizer(scene, {
+    var innerSizer = new Sizer(scene, {
         orientation: orientation,
+        space: {
+            left: GetValue(config, 'space.innerLeft', 0),
+            right: GetValue(config, 'space.innerRight', 0),
+            top: GetValue(config, 'space.innerTop', 0),
+            bottom: GetValue(config, 'space.innerBottom', 0),
+        }
     })
+    if (innerBackground) {
+        innerSizer.addBackground(innerBackground);
+    }
 
     this.add(
-        labelSizer,
+        innerSizer,
         { proportion: 1, expand: true }
     );
 
     if (icon) {
         var padding = undefined;
-        if (labelSizer.orientation === 0) {
-            if (text || action) {
-                padding = {
-                    right: GetValue(config, 'space.icon', 0),
-                    top: GetValue(config, 'space.iconTop', 0),
-                    bottom: GetValue(config, 'space.iconBottom', 0),
-                };
-            }
+        if (innerSizer.orientation === 0) {
+            padding = {
+                right: GetValue(config, 'space.icon', 0),
+                top: GetValue(config, 'space.iconTop', 0),
+                bottom: GetValue(config, 'space.iconBottom', 0),
+            };
         } else {
-            if (text || action) {
-                padding = {
-                    bottom: GetValue(config, 'space.icon', 0),
-                    left: GetValue(config, 'space.iconLeft', 0),
-                    right: GetValue(config, 'space.iconRight', 0),
-                };
-            }
+            padding = {
+                bottom: GetValue(config, 'space.icon', 0),
+                left: GetValue(config, 'space.iconLeft', 0),
+                right: GetValue(config, 'space.iconRight', 0),
+            };
         }
         var fitRatio = GetValue(config, 'squareFitIcon', false) ? 1 : 0;
 
-        labelSizer.add(
+        innerSizer.add(
             icon,
             { proportion: 0, padding: padding, fitRatio: fitRatio }
         );
@@ -104,11 +110,12 @@ var LayoutMode1 = function (config) {
     }
 
     if (text) {
+        var align = GetValue(config, 'align.text', 'left');
         var textSpace = GetValue(config, 'space.text', 0);
         var expandTextWidth = GetValue(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue(config, 'expandTextHeight', false);
         var proportion, padding, expand;
-        if (labelSizer.orientation === 0) {
+        if (innerSizer.orientation === 0) {
             proportion = (expandTextWidth) ? 1 : 0;
             if (action) {
                 padding = { right: textSpace };
@@ -117,20 +124,22 @@ var LayoutMode1 = function (config) {
         } else {
             proportion = (expandTextHeight) ? 1 : 0;
             if (action) {
-                padding = { bottom: textSpace };
+                padding = {
+                    bottom: textSpace
+                };
             }
             expand = expandTextWidth;
         }
 
-        labelSizer.add(
-            text,
-            { proportion: proportion, expand: expand, padding: padding, }
+        innerSizer.add(
+            text,            
+            { proportion: proportion, expand: expand, align: align, padding: padding }
         );
     }
 
     if (action) {
         var padding;
-        if (labelSizer.orientation === 0) {
+        if (innerSizer.orientation === 0) {
             padding = {
                 top: GetValue(config, 'space.actionTop', 0),
                 bottom: GetValue(config, 'space.actionBottom', 0),
@@ -143,7 +152,7 @@ var LayoutMode1 = function (config) {
         }
         var fitRatio = GetValue(config, 'squareFitAction', false) ? 1 : 0;
 
-        labelSizer.add(
+        innerSizer.add(
             action,
             { proportion: 0, padding: padding, fitRatio: fitRatio }
         );
@@ -163,6 +172,7 @@ var LayoutMode1 = function (config) {
 
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);
+    this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('icon', icon);
     this.addChildrenMap('iconMask', iconMask);
     this.addChildrenMap('text', text);

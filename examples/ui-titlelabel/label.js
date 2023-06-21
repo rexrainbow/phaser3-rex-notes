@@ -79,18 +79,6 @@ class Demo extends Phaser.Scene {
                 }
             ]
         })
-
-        // this.tweens.add({
-        //     targets: label1.getElement('separator'),
-        //     scaleX: { start: 0, to: 1 },
-        //     duration: 500
-        // })
-        // this.tweens.add({
-        //     targets: [label1.getElement('title'), label1.getElement('text')],
-        //     scaleY: { start: 0, to: 1 },
-        //     duration: 500,
-        //     delay: 500,
-        // })
     }
 
     update() {

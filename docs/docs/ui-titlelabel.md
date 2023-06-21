@@ -96,8 +96,8 @@ var label = scene.rexUI.add.titleLabel({
     actionMask: false,
 
     align: {
-        title: 'right',
-        text: 'right',
+        title: 'left',
+        text: 'left',
     },
 
     space: {
@@ -147,8 +147,8 @@ var label = scene.rexUI.add.titleLabel({
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `align` : Alignment of title, text game objects.
-    - `align.title` : `'left'`, or `'right'`. Default vale is `'right'`.
-    - `align.text` : `'left'`, or `'right'`. Default vale is `'right'`.
+    - `align.title` : `'left'`, or `'right'`. Default vale is `'left'`.
+    - `align.text` : `'left'`, or `'right'`. Default vale is `'left'`.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.

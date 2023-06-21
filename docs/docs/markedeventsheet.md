@@ -301,7 +301,9 @@ coin > 5
 ##### Complex branch
 
 Does not support complex branch (if... else if ... else) inside an event sheet.  
-User can build complex branch by mutiple event sheets with main condition (`[Condition]` H2 heading).
+User can build complex branch by mutiple event sheets with main condition (`[Condition]` H2 heading).  
+[Example](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet/branch)
+
 
 ##### While loop
 

@@ -7,26 +7,42 @@ export default TitleLabel;
 declare namespace TitleLabel {
 
     interface IConfig extends Sizer.IConfig {
+        layoutMode?: 0 | 1,
+
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
 
-            icon?: number, iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
-            text?: number,
+            innerLeft?: number, innerRight?: number, innerTop?: number, innerBottom?: number,
+
+            title?: number, titleLeft?: number, titleRight?: number,
             separator?: number, separatorLeft?: number, separatorRight?: number,
+            text?: number, textLeft?: number, textRight?: number,
+
+            icon?: number, iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
+            actionTop?: number, actionBottom?: number, actionLeft?: number, actionRight?: number,
         },
 
         background?: Phaser.GameObjects.GameObject,
 
+        innerBackground?: Phaser.GameObjects.GameObject,
+
+        title?: Phaser.GameObjects.GameObject,
+
+        separator?: Phaser.GameObjects.GameObject,
+
+        text?: Phaser.GameObjects.GameObject,
+        expandTextWidth?: boolean,
+        expandTextHeight?: boolean,
+
         icon?: Phaser.GameObjects.GameObject,
         iconMask?: boolean,
-
-        textOrientation?: Sizer.OrientationTypes;
-        title?: Phaser.GameObjects.GameObject,
-        separator?: Phaser.GameObjects.GameObject,
-        text?: Phaser.GameObjects.GameObject,
+        squareFitIcon?: boolean,
+        iconSize?: number, iconWidth?: number, iconHeight?: number,
 
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,
+        squareFitAction?: boolean,
+        actionSize?: number, actionWidth?: number, actionHeight?: number,
 
         align?: {
             text?: 'left' | 'right' | 'center' | number,
