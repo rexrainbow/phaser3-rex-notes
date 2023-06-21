@@ -7647,6 +7647,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-modes" class="md-nav__link">
+    Layout modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Layout modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-0" class="md-nav__link">
+    Mode 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-1" class="md-nav__link">
+    Mode 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9253,6 +9280,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-modes" class="md-nav__link">
+    Layout modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Layout modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-0" class="md-nav__link">
+    Mode 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-1" class="md-nav__link">
+    Mode 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9327,6 +9381,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/abGYYpO">Title-label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/dyQpPjr">Layout modes</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-titlelabel">Sample code</a></p>
@@ -9387,10 +9442,12 @@
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
 
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="c1">// rtl: false,</span>
+    <span class="nx">layoutMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">innerBackground</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
     <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
     <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
@@ -9402,18 +9459,17 @@
     <span class="nx">actionMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span>
-        <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">innerLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">innerRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">innerTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">innerBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
+        <span class="nx">title</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">titleLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">titleRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">iconTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">iconBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">textLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">textRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">actionTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">actionBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
@@ -9444,24 +9500,20 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>orientation</code> :<ul>
-<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
-<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
-</ul>
-</li>
-<li><code>rtl</code> : <ul>
-<li><code>true</code> : Layout children from right to left.</li>
-<li><code>false</code> : Layout children from left to right. Default behavior.</li>
+<li><code>layoutMode</code> : <ul>
+<li><code>0</code> : <a href="./#mode-0"><code>title</code>, <code>separator</code>, and <code>text</code> will be layout vertically, then layout with <code>icon</code>, <code>action</code> horizontally</a>.</li>
+<li><code>1</code> : <a href="./#mode-1"><code>icon</code>, <code>text</code>, and <code>action</code> will be layout horizontally, then layout with <code>title</code>, <code>separator</code> vertically</a>.</li>
 </ul>
 </li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of label.</li>
+<li><code>innerBackground</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the inner sizer. Could be used when <code>layoutMode</code> is <code>1</code>.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.<ul>
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.   </li>
 </ul>
 </li>
 <li><code>title</code> : Game object of title.</li>
-<li><code>separator</code> : Game object of title, optional.</li>
+<li><code>separator</code> : Game object of separator, optional.</li>
 <li><code>text</code> : Game object of text.</li>
 <li><code>action</code> : Game object of action icon, optional.</li>
 <li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
@@ -9469,16 +9521,20 @@
 </ul>
 </li>
 <li><code>align</code> : Alignment of title, text game objects.<ul>
-<li><code>align.title</code> : <code>'left'</code>, or <code>'right'</code>. Default vale is <code>'right'</code>.</li>
-<li><code>align.text</code> : <code>'left'</code>, or <code>'right'</code>. Default vale is <code>'right'</code>.</li>
+<li><code>align.title</code> : <code>'left'</code>, or <code>'right'</code>. Default vale is <code>'left'</code>.</li>
+<li><code>align.text</code> : <code>'left'</code>, or <code>'right'</code>. Default vale is <code>'left'</code>.</li>
 </ul>
 </li>
 <li><code>space</code> : Pads spaces.<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.innerLeft</code>, <code>space.innerRight</code>, <code>space.innerTop</code>, <code>space.innerBottom</code> : Space parameter of inner sizer.</li>
+<li><code>space.title</code> : Space between title game object and separator game object.</li>
+<li><code>space.titleLeft</code>, <code>space.titleRight</code> : Space at left or right side of title game object.</li>
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
 <li><code>space.iconTop</code>, <code>space.iconBottom</code> : Space around icon game object.</li>
 <li><code>space.text</code> : Space between text game object and action icon game object.</li>
-<li><code>space.iconTop</code>, <code>space.iconBottom</code> : Space around icon game object.</li>
+<li><code>space.textLeft</code>, <code>space.textRight</code> : Space at left or right side of text game object.</li>
+<li><code>space.actionTop</code>, <code>space.actionBottom</code> : Space around action icon game object.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this game object.</li>
@@ -9506,6 +9562,39 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyTitleLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="layout-modes">Layout modes<a class="headerlink" href="#layout-modes" title="Permanent link">&para;</a></h3>
+<h4 id="mode-0">Mode 0<a class="headerlink" href="#mode-0" title="Permanent link">&para;</a></h4>
+<p><code>title</code>, <code>separator</code>, and <code>text</code> will be layout vertically, then layout with <code>icon</code>, <code>action</code> horizontally.</p>
+<table border="1px solid black">
+ <tr>
+  <td rowspan="3" align="center" valign="center">Icon</td>
+  <td>Title</td>
+  <td rowspan="3" align="center" valign="center">Action</td>
+ </tr>
+ <tr>
+  <td>Separator</td>
+ </tr>
+ <tr>
+  <td>Text</td>
+ </tr>
+</table>
+
+<h4 id="mode-1">Mode 1<a class="headerlink" href="#mode-1" title="Permanent link">&para;</a></h4>
+<p><code>icon</code>, <code>text</code>, and <code>action</code> will be layout horizontally, then layout with <code>title</code>, <code>separator</code> vertically.</p>
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Title</td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" valign="center">Separator</td>
+ </tr>
+ <tr>
+  <td>Icon</td>
+  <td>Text</td>
+  <td>Action</td>
+ </tr>
+</table>
+
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all elements.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

@@ -8,6 +8,7 @@ A container with title, text in two rows, and an icon, background.
 ## Live demos
 
 - [Title-label](https://codepen.io/rexrainbow/pen/abGYYpO)
+- [Layout modes](https://codepen.io/rexrainbow/pen/dyQpPjr)
 
 ## Usage
 
@@ -81,10 +82,12 @@ var label = scene.rexUI.add.titleLabel({
     // width: undefined,
     // height: undefined,
 
-    orientation: 0,
-    // rtl: false,
+    layoutMode: 0,
 
     background: backgroundGameObject,
+
+    innerBackground: backgroundGameObject,
+
     icon: iconGameObject,
     iconMask: false,
 
@@ -101,13 +104,12 @@ var label = scene.rexUI.add.titleLabel({
     },
 
     space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
+        left: 0, right: 0, top: 0, bottom: 0,
+        innerLeft: 0, innerRight: 0, innerTop: 0, innerBottom: 0,
 
+        title: 0, titleLeft: 0, titleRight: 0,
         icon: 0, iconTop: 0, iconBottom: 0,
-        text: 0,
+        text: 0, textLeft: 0, textRight: 0,
         actionTop: 0, actionBottom: 0,
     },
 
@@ -130,18 +132,16 @@ var label = scene.rexUI.add.titleLabel({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-- `orientation` :
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
-- `rtl` : 
-    - `true` : Layout children from right to left.
-    - `false` : Layout children from left to right. Default behavior.
+- `layoutMode` : 
+    - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
+    - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
+- `innerBackground` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the inner sizer. Could be used when `layoutMode` is `1`.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
 - `title` : Game object of title.
-- `separator` : Game object of title, optional.
+- `separator` : Game object of separator, optional.
 - `text` : Game object of text.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
@@ -151,9 +151,13 @@ var label = scene.rexUI.add.titleLabel({
     - `align.text` : `'left'`, or `'right'`. Default vale is `'left'`.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+    - `space.innerLeft`, `space.innerRight`, `space.innerTop`, `space.innerBottom` : Space parameter of inner sizer.
+    - `space.title` : Space between title game object and separator game object.
+    - `space.titleLeft`, `space.titleRight` : Space at left or right side of title game object.
     - `space.icon` : Space between icon game object and text game object.
     - `space.iconTop`, `space.iconBottom` : Space around icon game object.
     - `space.text` : Space between text game object and action icon game object.
+    - `space.textLeft`, `space.textRight` : Space at left or right side of text game object.
     - `space.actionTop`, `space.actionBottom` : Space around action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
@@ -179,6 +183,44 @@ var label = scene.rexUI.add.titleLabel({
     ```javascript
     var label = new MyTitleLabel(scene, config);
     ```
+
+### Layout modes
+
+#### Mode 0
+
+`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally.
+
+<table border="1px solid black">
+ <tr>
+  <td rowspan="3" align="center" valign="center">Icon</td>
+  <td>Title</td>
+  <td rowspan="3" align="center" valign="center">Action</td>
+ </tr>
+ <tr>
+  <td>Separator</td>
+ </tr>
+ <tr>
+  <td>Text</td>
+ </tr>
+</table>
+
+#### Mode 1
+
+`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically.
+
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Title</td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" valign="center">Separator</td>
+ </tr>
+ <tr>
+  <td>Icon</td>
+  <td>Text</td>
+  <td>Action</td>
+ </tr>
+</table>
 
 ### Layout children
 

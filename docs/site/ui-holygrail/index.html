@@ -8214,6 +8214,47 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-modes" class="md-nav__link">
+    Layout modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Layout modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-0" class="md-nav__link">
+    Mode 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-1" class="md-nav__link">
+    Mode 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-2" class="md-nav__link">
+    Mode 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-3" class="md-nav__link">
+    Mode 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9237,6 +9278,47 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-modes" class="md-nav__link">
+    Layout modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Layout modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-0" class="md-nav__link">
+    Mode 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-1" class="md-nav__link">
+    Mode 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-2" class="md-nav__link">
+    Mode 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-3" class="md-nav__link">
+    Mode 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9359,6 +9441,8 @@
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
 
+    <span class="nx">layoutMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
     <span class="c1">// Elements</span>
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
@@ -9371,8 +9455,6 @@
     <span class="nx">rightSide</span><span class="o">:</span> <span class="nx">rightSideGameObject</span><span class="p">,</span>
 
     <span class="nx">footer</span><span class="o">:</span> <span class="nx">footerGameObject</span><span class="p">,</span>
-
-    <span class="nx">layoutMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="c1">// Space</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
@@ -9438,6 +9520,13 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>layoutMode</code> : Expand left side, right side to bottom row.<ul>
+<li><code>0</code>, or <code>'FFF'</code> : <a href="./#mode-0">Bottom row is footer</a>. Default behavior</li>
+<li><code>1</code>, or <code>'LFF'</code> : <a href="./#mode-1">Left side will expand down to bottom row</a>.</li>
+<li><code>2</code>, or <code>'FFR'</code> : <a href="./#mode-2">Right side will expand down to bottom row</a>.</li>
+<li><code>3</code>, or <code>'LFR'</code> : <a href="./#mode-3">Left side and right side will expand down to bottom row</a>.</li>
+</ul>
+</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of holyGrail.</li>
 <li><code>header</code> : Game object of header, optional.<ul>
 <li>Will fixed height (<code>proportion=0</code>) and expand width (<code>expand=true</code>) width default setting.</li>
@@ -9457,13 +9546,6 @@
 </li>
 <li><code>footer</code> : Game object of footer, optional.<ul>
 <li>Will fixed height (<code>proportion=0</code>) and expand width (<code>expand=true</code>) width default setting.</li>
-</ul>
-</li>
-<li><code>layoutMode</code> : Expand left side, right side to bottom row.<ul>
-<li><code>0</code>, or <code>'FFF'</code> : Bottom row is footer. Default behavior.</li>
-<li><code>1</code>, or <code>'LFF'</code> : Left side will expand down to bottom row.</li>
-<li><code>2</code>, or <code>'FFR'</code> : Right side will expand down to bottom row.</li>
-<li><code>3</code>, or <code>'LFR'</code> : Left side and right side will expand down to bottom row.</li>
 </ul>
 </li>
 <li><code>space</code> : Pads spaces<ul>
@@ -9559,6 +9641,71 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">holyGrail</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyHolyGrail</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="layout-modes">Layout modes<a class="headerlink" href="#layout-modes" title="Permanent link">&para;</a></h3>
+<h4 id="mode-0">Mode 0<a class="headerlink" href="#mode-0" title="Permanent link">&para;</a></h4>
+<p>Bottom row is footer. Default behavior.</p>
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td>Left side</td>
+  <td>Content</td>
+  <td>Right side</td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+<h4 id="mode-1">Mode 1<a class="headerlink" href="#mode-1" title="Permanent link">&para;</a></h4>
+<p>Left side will expand down to bottom row.</p>
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td rowspan="2" align="center" valign="center">Left side</td>
+  <td>Content</td>
+  <td>Right side</td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+<h4 id="mode-2">Mode 2<a class="headerlink" href="#mode-2" title="Permanent link">&para;</a></h4>
+<p>Right side will expand down to bottom row.</p>
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td>Left side</td>
+  <td>Content</td>
+  <td rowspan="2" align="center" valign="center">Right side</td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+<h4 id="mode-3">Mode 3<a class="headerlink" href="#mode-3" title="Permanent link">&para;</a></h4>
+<p>Left side and right side will expand down to bottom row.</p>
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td rowspan="2" align="center" valign="center">Left side</td>
+  <td>Content</td>
+  <td rowspan="2" align="center" valign="center">Right side</td>
+ </tr>
+ <tr>
+  <td>Footer</td>
+ </tr>
+</table>
+
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all elements.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">holyGrail</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

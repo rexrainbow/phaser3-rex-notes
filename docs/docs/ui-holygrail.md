@@ -83,6 +83,8 @@ var holyGrail = scene.rexUI.add.holyGrail({
     // width: undefined,
     // height: undefined,
 
+    layoutMode: 0,
+
     // Elements
     background: backgroundGameObject,
 
@@ -95,8 +97,6 @@ var holyGrail = scene.rexUI.add.holyGrail({
     rightSide: rightSideGameObject,
 
     footer: footerGameObject,
-
-    layoutMode: 0,
 
     // Space
     space: {
@@ -154,6 +154,11 @@ var holyGrail = scene.rexUI.add.holyGrail({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `layoutMode` : Expand left side, right side to bottom row.
+    - `0`, or `'FFF'` : [Bottom row is footer](ui-holygrail.md#mode-0). Default behavior
+    - `1`, or `'LFF'` : [Left side will expand down to bottom row](ui-holygrail.md#mode-1).
+    - `2`, or `'FFR'` : [Right side will expand down to bottom row](ui-holygrail.md#mode-2).
+    - `3`, or `'LFR'` : [Left side and right side will expand down to bottom row](ui-holygrail.md#mode-3).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of holyGrail.
 - `header` : Game object of header, optional.
     - Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
@@ -165,11 +170,6 @@ var holyGrail = scene.rexUI.add.holyGrail({
     - Will fixed width (`proportion=0`) and expand height (`expand=true`) width default setting.
 - `footer` : Game object of footer, optional.
     - Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
-- `layoutMode` : Expand left side, right side to bottom row.
-    - `0`, or `'FFF'` : Bottom row is footer. Default behavior.
-    - `1`, or `'LFF'` : Left side will expand down to bottom row.
-    - `2`, or `'FFR'` : Right side will expand down to bottom row.
-    - `3`, or `'LFR'` : Left side and right side will expand down to bottom row.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.header` : 
@@ -236,6 +236,81 @@ var holyGrail = scene.rexUI.add.holyGrail({
     ```javascript
     var holyGrail = new MyHolyGrail(scene, config);
     ```
+
+### Layout modes
+
+#### Mode 0
+
+Bottom row is footer. Default behavior.
+
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td>Left side</td>
+  <td>Content</td>
+  <td>Right side</td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+#### Mode 1
+
+Left side will expand down to bottom row.
+
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td rowspan="2" align="center" valign="center">Left side</td>
+  <td>Content</td>
+  <td>Right side</td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+#### Mode 2
+
+Right side will expand down to bottom row.
+
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td>Left side</td>
+  <td>Content</td>
+  <td rowspan="2" align="center" valign="center">Right side</td>
+ </tr>
+ <tr>
+  <td colspan="2" align="center" valign="center">Footer</td>
+ </tr>
+</table>
+
+#### Mode 3
+
+Left side and right side will expand down to bottom row.
+
+<table border="1px solid black">
+ <tr>
+  <td colspan="3" align="center" valign="center">Header</td>
+ </tr>
+ <tr>
+  <td rowspan="2" align="center" valign="center">Left side</td>
+  <td>Content</td>
+  <td rowspan="2" align="center" valign="center">Right side</td>
+ </tr>
+ <tr>
+  <td>Footer</td>
+ </tr>
+</table>
+
 
 ### Layout children
 

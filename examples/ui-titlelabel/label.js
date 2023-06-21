@@ -29,8 +29,8 @@ class Demo extends Phaser.Scene {
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
             align: {
-                // title: 'left',
-                // text: 'left'
+                title: 'right',
+                text: 'right'
             },
 
             space: {
@@ -54,8 +54,8 @@ class Demo extends Phaser.Scene {
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
             align: {
-                // title: 'left',
-                // text: 'left'
+                title: 'right',
+                text: 'right'
             },
 
             space: {
