@@ -16,6 +16,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var boundsGraphics = this.add.graphics().setDepth(100);
+
         this.rexUI.add.titleLabel({
             x: 150, y: 100,
             width: 200, height: 40,
@@ -40,7 +42,8 @@ class Demo extends Phaser.Scene {
             }
 
         })
-            .layout();
+            .layout()
+            .drawBounds(boundsGraphics, 0xff0000)
 
         this.rexUI.add.titleLabel({
             x: 150, y: 300,
@@ -68,10 +71,45 @@ class Demo extends Phaser.Scene {
             }
 
         })
-            .layout();
+            .layout()
+            .drawBounds(boundsGraphics, 0xff0000)
 
         this.rexUI.add.titleLabel({
             x: 400, y: 300,
+            width: 240,
+
+            layoutMode: 1,
+
+            background: this.rexUI.add.roundRectangle({ radius: { tr: 20, bl: 20, br: 20 }, color: COLOR_PRIMARY }),
+            text: this.add.text(0, 0, 'Text\nText\nText\nText'),
+            icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
+
+            title: this.rexUI.add.label({
+                width: 100, height: 36,
+                background: this.rexUI.add.roundRectangle({ radius: { tl: 10, tr: 10 }, color: COLOR_PRIMARY }),
+                text: this.add.text(0, 0, 'Title'),
+                align: 'center',
+                space: { left: 10, right: 10, top: 10, bottom: 10 }
+            }),
+
+            align: {
+                // title: 'left',
+                // text: 'left'
+            },
+
+            space: {
+                left: 20, right: 20, top: -36, bottom: 20,
+
+                title: 20, titleLeft: -20,
+                icon: 20,
+            }
+
+        })
+            .layout()
+            .drawBounds(boundsGraphics, 0xff0000)
+
+        this.rexUI.add.titleLabel({
+            x: 650, y: 300,
             width: 240,
 
             layoutMode: 1,
@@ -98,7 +136,12 @@ class Demo extends Phaser.Scene {
             }
 
         })
-            .layout();
+            .layout()
+            .drawBounds(boundsGraphics, 0xff0000)
+
+        this.input.on('pointerdown', function () {
+            boundsGraphics.visible = !boundsGraphics.visible;
+        })
     }
 
     update() {

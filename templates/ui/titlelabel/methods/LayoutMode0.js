@@ -160,6 +160,7 @@ var LayoutMode0 = function (config) {
 
     this.addChildrenMap('icon', icon);
     this.addChildrenMap('iconMask', iconMask);
+    this.addChildrenMap('innerSizer', innerSizer);
     this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);

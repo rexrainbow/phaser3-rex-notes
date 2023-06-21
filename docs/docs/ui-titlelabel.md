@@ -136,7 +136,9 @@ var label = scene.rexUI.add.titleLabel({
     - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
     - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
-- `innerBackground` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the inner sizer. Could be used when `layoutMode` is `1`.
+- `innerBackground` : [Game object of background](ui-basesizer.md#background) inside innerSizer, optional.
+    - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
+    - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
@@ -188,7 +190,7 @@ var label = scene.rexUI.add.titleLabel({
 
 #### Mode 0
 
-`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally.
+`title`, `separator`, and `text` will be layout vertically inside innerSizer, then layout with `icon`, `action` horizontally.
 
 <table border="1px solid black">
  <tr>
@@ -206,7 +208,7 @@ var label = scene.rexUI.add.titleLabel({
 
 #### Mode 1
 
-`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically.
+`icon`, `text`, and `action` will be layout horizontally inside innerSizer, then layout with `title`, `separator` vertically.
 
 <table border="1px solid black">
  <tr>
@@ -238,6 +240,16 @@ See also - [dirty](ui-basesizer.md#dirty)
     - Background game object
         ```javascript
         var background = label.getElement('background');
+        ```
+    - InnerSizer
+        ```javascript
+        var innerSizer = label.getElement('innerSizer');
+        ```
+        - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
+        - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
+    - Background game object inside innerSizer
+        ```javascript
+        var innerBackground = label.getElement('innerBackground');
         ```
     - Icon game object
         ```javascript
