@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
             wrapWidth: 500,
             fixedWidth: 500,
             fixedHeight: 65,
+            title: 'Title'
         })
             .start(content, 50);
     }
@@ -41,24 +42,33 @@ var createTextBox = function (scene, x, y, config) {
     var wrapWidth = GetValue(config, 'wrapWidth', 0);
     var fixedWidth = GetValue(config, 'fixedWidth', 0);
     var fixedHeight = GetValue(config, 'fixedHeight', 0);
+    var titleText = GetValue(config, 'title', undefined);
+
+
     var textBox = scene.rexUI.add.textBox({
         x: x,
         y: y,
 
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY)
-            .setStrokeStyle(2, COLOR_LIGHT),
+        background: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_PRIMARY, strokeColor: COLOR_LIGHT, strokeWidth: 2 }),
 
-        icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
+        icon: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_DARK }),
 
         // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
         text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
 
         action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 
+        title: (titleText) ? scene.add.text(0, 0, titleText, { fontSize: '24px', }) : undefined,
+
         space: {
             left: 20, right: 20, top: 20, bottom: 20,
-            icon: 10,
-            text: 10,
+
+            icon: 10, text: 10,
+            title: 20
+        },
+
+        align: {
+            title: 'center'
         }
     })
         .setOrigin(0)
