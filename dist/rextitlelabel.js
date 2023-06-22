@@ -11237,6 +11237,7 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var LayoutMode1 = function LayoutMode1(config) {
     this.setOrientation(1);
+    this.setRTL(false);
     var scene = this.scene;
 
     // Add elements
@@ -11278,6 +11279,7 @@
     var orientation = GetValue$1(config, 'orientation', 0);
     var innerSizer = new Sizer(scene, {
       orientation: orientation,
+      rtl: GetValue$1(config, 'rtl', false),
       space: {
         left: GetValue$1(config, 'space.innerLeft', 0),
         right: GetValue$1(config, 'space.innerRight', 0),
