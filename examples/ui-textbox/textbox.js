@@ -60,11 +60,14 @@ var createTextBox = function (scene, x, y, config) {
 
         title: (titleText) ? scene.add.text(0, 0, titleText, { fontSize: '24px', }) : undefined,
 
+        separator: (titleText) ? scene.rexUI.add.roundRectangle({ height: 3, color: COLOR_DARK }) : undefined,
+
         space: {
             left: 20, right: 20, top: 20, bottom: 20,
 
             icon: 10, text: 10,
-            title: 20
+
+            separator: 6,
         },
 
         align: {

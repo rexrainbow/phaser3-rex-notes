@@ -149,7 +149,7 @@ var textBox = scene.rexUI.add.textBox({
 - `width`, `height` : Minimum width, minimum height.
 - `layoutMode` : 
     - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
-    - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).
+    - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1). Default behavior.
 - `rtl` : 
     - `false` : Layout children (`icon`, `text`, `action`) from left to right. Default behavior.
     - `true` : Layout children (`icon`, `text`, `action`) from right to left.
