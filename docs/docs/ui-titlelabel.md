@@ -84,15 +84,19 @@ var label = scene.rexUI.add.titleLabel({
 
     layoutMode: 0,
 
+    rtl: false,
+
     background: backgroundGameObject,
 
     innerBackground: backgroundGameObject,
 
+    title: titleGameObject,
+    
+    separator: separatorGameObject,
+
     icon: iconGameObject,
     iconMask: false,
 
-    title: titleGameObject,
-    separator: separatorGameObject,
     text: textGameObject,
 
     action: actionGameObject,
@@ -135,15 +139,18 @@ var label = scene.rexUI.add.titleLabel({
 - `layoutMode` : 
     - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
     - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).
+- `rtl` : 
+    - `false` : Layout children (`icon`, `text`, `action`) from left to right. Default behavior.
+    - `true` : Layout children (`icon`, `text`, `action`) from right to left.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `innerBackground` : [Game object of background](ui-basesizer.md#background) inside innerSizer, optional.
     - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
     - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
+- `title` : Game object of title, optional.
+- `separator` : Game object of separator, optional.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
-- `title` : Game object of title.
-- `separator` : Game object of separator, optional.
 - `text` : Game object of text.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.

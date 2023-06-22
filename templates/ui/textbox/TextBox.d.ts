@@ -1,14 +1,12 @@
 // import * as Phaser from 'phaser';
-import Label from '../label/Label';
+import TitleLabel from '../titlelabel/TitleLabel';
 
 
 export default TextBox;
 
 declare namespace TextBox {
 
-    interface IConfig extends Label.IConfig {
-        text: Phaser.GameObjects.GameObject,
-
+    interface IConfig extends TitleLabel.IConfig {
         page?: {
             maxLines?: number,
             pageBreak?: string,
@@ -23,7 +21,7 @@ declare namespace TextBox {
     }
 }
 
-declare class TextBox extends Label {
+declare class TextBox extends TitleLabel {
     constructor(
         scene: Phaser.Scene,
         config?: TextBox.IConfig

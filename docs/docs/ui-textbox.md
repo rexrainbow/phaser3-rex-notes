@@ -84,23 +84,39 @@ var textBox = scene.rexUI.add.textBox({
     // width: undefined,
     // height: undefined,
 
-    orientation: 0,
+    layoutMode: 0,
+
+    rtl: false,
 
     background: backgroundGameObject,
+
+    innerBackground: backgroundGameObject,
+
+    title: titleGameObject,
+    
+    separator: separatorGameObject,
+
     icon: iconGameObject,
     iconMask: false,
+
     text: textGameObject,
+
     action: actionGameObject,
     actionMask: false,
 
-    space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
+    align: {
+        title: 'left',
+        text: 'left',
+    },
 
-        icon: 0,
-        text: 0,
+    space: {
+        left: 0, right: 0, top: 0, bottom: 0,
+        innerLeft: 0, innerRight: 0, innerTop: 0, innerBottom: 0,
+
+        title: 0, titleLeft: 0, titleRight: 0,
+        icon: 0, iconTop: 0, iconBottom: 0,
+        text: 0, textLeft: 0, textRight: 0,
+        actionTop: 0, actionBottom: 0,
     },
 
     // page: { 
@@ -131,10 +147,18 @@ var textBox = scene.rexUI.add.textBox({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-- `orientation` :
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
-- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of textBox.
+- `layoutMode` : 
+    - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
+    - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).
+- `rtl` : 
+    - `false` : Layout children (`icon`, `text`, `action`) from left to right. Default behavior.
+    - `true` : Layout children (`icon`, `text`, `action`) from right to left.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
+- `innerBackground` : [Game object of background](ui-basesizer.md#background) inside innerSizer, optional.
+    - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
+    - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
+- `title` : Game object of title, optional.
+- `separator` : Game object of separator, optional.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
 - `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
@@ -149,10 +173,19 @@ var textBox = scene.rexUI.add.textBox({
         - [Tag text object](tagtext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
-- `space` : Pads spaces
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+- `align` : Alignment of title, text game objects.
+    - `align.title` : `'left'`, or `'right'`. Default vale is `'left'`.
+    - `align.text` : `'left'`, or `'right'`. Default vale is `'left'`.
+- `space` : Pads spaces.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+    - `space.innerLeft`, `space.innerRight`, `space.innerTop`, `space.innerBottom` : Space parameter of inner sizer.
+    - `space.title` : Space between title game object and separator game object.
+    - `space.titleLeft`, `space.titleRight` : Space at left or right side of title game object.
     - `space.icon` : Space between icon game object and text game object.
+    - `space.iconTop`, `space.iconBottom` : Space around icon game object.
     - `space.text` : Space between text game object and action icon game object.
+    - `space.textLeft`, `space.textRight` : Space at left or right side of text game object.
+    - `space.actionTop`, `space.actionBottom` : Space around action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -313,4 +346,4 @@ var textBox = scene.rexUI.add.textBox({
 
 ### Other properties
 
-See [label](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+See [title label](ui-titlelabel.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
