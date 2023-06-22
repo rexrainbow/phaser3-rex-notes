@@ -39,6 +39,8 @@ class Demo extends Phaser.Scene {
                 },
             }),
 
+            action: this.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
+
             title: this.rexUI.add.label({
                 width: 200,
                 background: this.rexUI.add.roundRectangle({
@@ -54,8 +56,6 @@ class Demo extends Phaser.Scene {
                     text: 10,
                 },
             }),
-
-            action: this.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 
             space: {
                 // For innerSizer

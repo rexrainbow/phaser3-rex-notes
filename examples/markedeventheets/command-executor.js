@@ -94,11 +94,20 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'uiLayer',
 
             commands: {
-                typing(gameObject, { text, speed } = {}, commandExecutor) {
+                typing(gameObject, { who, text, speed } = {}, commandExecutor) {
+                    if (who) {
+                        gameObject.getElement('title')
+                            .show()
+                            .setText(who)
+                    } else {
+                        gameObject.getElement('title').hide()
+                    }
+                    gameObject.layout();
+
                     // Wait until typing complete
                     commandExecutor.waitEvent(gameObject, 'complete');
                     gameObject.start(text, speed);
-                }
+                },
             }
         })
         .addGameObjectManager({
@@ -126,7 +135,8 @@ const COLOR_DARK = 0x260e04;
 var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
     var wrapWidth = Math.max(0, width - 20);
     var textBox = scene.rexUI.add.textBox({
-        background: scene.rexUI.add.roundRectangle({
+
+        innerBackground: scene.rexUI.add.roundRectangle({
             color: COLOR_PRIMARY, strokeColor: COLOR_LIGHT, strokeWidth: 2, radius: 20,
         }),
 
@@ -143,12 +153,30 @@ var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
 
         action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 
+        title: scene.rexUI.add.label({
+            width: 200,
+            background: scene.rexUI.add.roundRectangle({
+                radius: { tl: 10, tr: 10 },
+                color: COLOR_DARK,
+                strokeColor: COLOR_LIGHT, strokeWidth: 2
+            }),
+            text: scene.add.text(0, 0, '', { fontSize: 36 }),
+            align: 'center',
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                icon: 10,
+                text: 10,
+            },
+        }).hide(),
+
         space: {
-            left: 20, right: 20, top: 20, bottom: 20,
-            icon: 10,
-            text: 10,
+            innerLeft: 20, innerRight: 20, innerTop: 20, innerBottom: 20,
+
+            titleLeft: 40,
+            icon: 10, text: 10,
         }
     })
+        .setOrigin(0.5, 1)
         .layout();
 
     textBox

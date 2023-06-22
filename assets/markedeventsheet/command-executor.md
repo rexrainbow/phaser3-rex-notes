@@ -22,7 +22,7 @@ SPRITE
 // Manipulate gameobjects
 
 Dialog
-  vpy=0.8
+  vpy=0.99
   alpha=0.8
 
 CharacterA
@@ -71,7 +71,7 @@ CharacterA.to
 // Wait until tween complete
 
 
-```Dialog.typing, speed=100
+```Dialog.typing, who=Me Me Me, speed=100
 Line0...
 Line1...
 Line2...

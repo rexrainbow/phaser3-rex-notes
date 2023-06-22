@@ -258,10 +258,6 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var innerBackground = label.getElement('innerBackground');
         ```
-    - Icon game object
-        ```javascript
-        var icon = label.getElement('icon');
-        ```
     - Title game object
         ```javascript
         var textObject = label.getElement('title');
@@ -269,6 +265,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     - Separator game object
         ```javascript
         var textObject = label.getElement('separator');
+        ```
+    - Icon game object
+        ```javascript
+        var icon = label.getElement('icon');
         ```
     - Text game object
         ```javascript

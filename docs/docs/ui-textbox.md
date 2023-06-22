@@ -298,6 +298,24 @@ var textBox = scene.rexUI.add.textBox({
         ```javascript
         var background = textBox.getElement('background');
         ```
+    - InnerSizer
+        ```javascript
+        var innerSizer = textBox.getElement('innerSizer');
+        ```
+        - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
+        - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
+    - Background game object inside innerSizer
+        ```javascript
+        var innerBackground = textBox.getElement('innerBackground');
+        ```
+    - Title game object
+        ```javascript
+        var textObject = textBox.getElement('title');
+        ```
+    - Separator game object
+        ```javascript
+        var textObject = textBox.getElement('separator');
+        ```
     - Icon game object
         ```javascript
         var icon = textBox.getElement('icon');
