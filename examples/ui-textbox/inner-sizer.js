@@ -19,9 +19,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-
         var textBox = this.rexUI.add.textBox({
-            background: this.rexUI.add.roundRectangle({
+            x: 400, y: 500,
+
+            innerBackground: this.rexUI.add.roundRectangle({
                 radius: 20,
                 color: COLOR_DARK,
                 strokeColor: COLOR_LIGHT, strokeWidth: 2
@@ -38,14 +39,33 @@ class Demo extends Phaser.Scene {
                 },
             }),
 
+            title: this.rexUI.add.label({
+                width: 200,
+                background: this.rexUI.add.roundRectangle({
+                    radius: 10,
+                    color: COLOR_PRIMARY,
+                    strokeColor: COLOR_LIGHT, strokeWidth: 2
+                }),
+                text: this.add.text(0, 0, 'RexRexRex', { fontSize: 24 }),
+                align: 'center',
+                space: {
+                    left: 10, right: 10, top: 10, bottom: 10,
+                    icon: 10,
+                    text: 10,
+                },
+            }),
+
             action: this.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 
             space: {
-                left: 20, right: 20, top: 30, bottom: 20,
-                icon: 10,
-                text: 10,
+                // For innerSizer
+                innerLeft: 20, innerRight: 20, innerTop: 30, innerBottom: 20,
+
+                title: -20, titleLeft: 30,
+                icon: 10, text: 10,
             }
         })
+            .layout()
 
         var scene = this;
         textBox
@@ -84,37 +104,7 @@ class Demo extends Phaser.Scene {
         //.on('type', function () {
         //})
 
-        var nameText = this.rexUI.add.label({
-            width: 200,
-            background: this.rexUI.add.roundRectangle({
-                radius: 10,
-                color: COLOR_PRIMARY,
-                strokeColor: COLOR_LIGHT, strokeWidth: 2
-            }),
-            text: this.add.text(0, 0, 'RexRexRex', { fontSize: 24 }),
-            align: 'center',
-            space: {
-                left: 10, right: 10, top: 10, bottom: 10,
-                icon: 10,
-                text: 10,
-            },
-        });
-
-        var ui = this.rexUI.add.sizer({
-            x: 400, y: 300,
-            orientation: 'y'
-        })
-            .add(nameText, {
-                align: 'left',
-                padding: { left: 30, bottom: -20 },
-                key: 'name'
-            })
-            .add(textBox, {
-                key: 'textBox'
-            })
-            .layout();
-
-        ui.getElement('textBox').start(content, 10);
+        textBox.start(content, 10);
     }
 
     update() { }

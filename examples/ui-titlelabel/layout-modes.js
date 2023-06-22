@@ -86,7 +86,7 @@ class Demo extends Phaser.Scene {
 
             title: this.rexUI.add.label({
                 width: 100, height: 36,
-                background: this.rexUI.add.roundRectangle({ radius: { tl: 10, tr: 10 }, color: COLOR_PRIMARY }),
+                background: this.rexUI.add.roundRectangle({ radius: { tl: 10, tr: 10 }, color: COLOR_PRIMARY, strokeColor: COLOR_LIGHT }),
                 text: this.add.text(0, 0, 'Title'),
                 align: 'center',
                 space: { left: 10, right: 10, top: 10, bottom: 10 }
@@ -117,7 +117,7 @@ class Demo extends Phaser.Scene {
             innerBackground: this.rexUI.add.roundRectangle({ radius: { tr: 20, bl: 20, br: 20 }, color: COLOR_PRIMARY }),
             title: this.rexUI.add.label({
                 width: 100,
-                background: this.rexUI.add.roundRectangle({ radius: { tl: 10, tr: 10 }, color: COLOR_PRIMARY }),
+                background: this.rexUI.add.roundRectangle({ radius: { tl: 10, tr: 10 }, color: COLOR_PRIMARY, strokeColor: COLOR_LIGHT }),
                 text: this.add.text(0, 0, 'Title'),
                 align: 'center',
                 space: { left: 10, right: 10, top: 10, bottom: 10 }

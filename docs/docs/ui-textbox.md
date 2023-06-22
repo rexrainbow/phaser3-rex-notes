@@ -8,6 +8,7 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 ## Live demos
 
 - [Text box](https://codepen.io/rexrainbow/pen/MzGoJv)
+- [Inner sizer](https://codepen.io/rexrainbow/pen/GRYLrje)
 - [Speech bubble background](https://codepen.io/rexrainbow/pen/ExZLoWL)
 - [Bitmap text](https://codepen.io/rexrainbow/pen/oNBaKOo)
 - [Page break](https://codepen.io/rexrainbow/pen/JjNZZXv)
