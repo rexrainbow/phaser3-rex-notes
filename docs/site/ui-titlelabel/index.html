@@ -9444,15 +9444,19 @@
 
     <span class="nx">layoutMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
+    <span class="nx">rtl</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
     <span class="nx">innerBackground</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
+    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
+
+    <span class="nx">separator</span><span class="o">:</span> <span class="nx">separatorGameObject</span><span class="p">,</span>
+
     <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
     <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
-    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
-    <span class="nx">separator</span><span class="o">:</span> <span class="nx">separatorGameObject</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
 
     <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
@@ -9505,15 +9509,24 @@
 <li><code>1</code> : <a href="./#mode-1"><code>icon</code>, <code>text</code>, and <code>action</code> will be layout horizontally, then layout with <code>title</code>, <code>separator</code> vertically</a>.</li>
 </ul>
 </li>
+<li><code>rtl</code> : <ul>
+<li><code>false</code> : Layout children (<code>icon</code>, <code>text</code>, <code>action</code>) from left to right. Default behavior.</li>
+<li><code>true</code> : Layout children (<code>icon</code>, <code>text</code>, <code>action</code>) from right to left.</li>
+</ul>
+</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of label.</li>
-<li><code>innerBackground</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the inner sizer. Could be used when <code>layoutMode</code> is <code>1</code>.</li>
+<li><code>innerBackground</code> : <a href="../ui-basesizer/#background">Game object of background</a> inside innerSizer, optional.<ul>
+<li>In <a href="./#mode-0">mode 0</a>, innerSizer contains <code>title</code>, <code>separator</code>, and <code>text</code>.</li>
+<li>In <a href="./#mode-1">mode 1</a>, innerSizer contains <code>icon</code>, <code>text</code>, and <code>action</code>.</li>
+</ul>
+</li>
+<li><code>title</code> : Game object of title, optional.</li>
+<li><code>separator</code> : Game object of separator, optional.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.<ul>
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.   </li>
 </ul>
 </li>
-<li><code>title</code> : Game object of title.</li>
-<li><code>separator</code> : Game object of separator, optional.</li>
 <li><code>text</code> : Game object of text.</li>
 <li><code>action</code> : Game object of action icon, optional.</li>
 <li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
@@ -9564,7 +9577,7 @@
 </ul>
 <h3 id="layout-modes">Layout modes<a class="headerlink" href="#layout-modes" title="Permanent link">&para;</a></h3>
 <h4 id="mode-0">Mode 0<a class="headerlink" href="#mode-0" title="Permanent link">&para;</a></h4>
-<p><code>title</code>, <code>separator</code>, and <code>text</code> will be layout vertically, then layout with <code>icon</code>, <code>action</code> horizontally.</p>
+<p><code>title</code>, <code>separator</code>, and <code>text</code> will be layout vertically inside innerSizer, then layout with <code>icon</code>, <code>action</code> horizontally.</p>
 <table border="1px solid black">
  <tr>
   <td rowspan="3" align="center" valign="center">Icon</td>
@@ -9580,7 +9593,7 @@
 </table>
 
 <h4 id="mode-1">Mode 1<a class="headerlink" href="#mode-1" title="Permanent link">&para;</a></h4>
-<p><code>icon</code>, <code>text</code>, and <code>action</code> will be layout horizontally, then layout with <code>title</code>, <code>separator</code> vertically.</p>
+<p><code>icon</code>, <code>text</code>, and <code>action</code> will be layout horizontally inside innerSizer, then layout with <code>title</code>, <code>separator</code> vertically.</p>
 <table border="1px solid black">
  <tr>
   <td colspan="3" align="center" valign="center">Title</td>
@@ -9605,6 +9618,16 @@
 <li>Get element<ul>
 <li>Background game object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>InnerSizer
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerSizer</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;innerSizer&#39;</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>In <a href="./#mode-0">mode 0</a>, innerSizer contains <code>title</code>, <code>separator</code>, and <code>text</code>.</li>
+<li>In <a href="./#mode-1">mode 1</a>, innerSizer contains <code>icon</code>, <code>text</code>, and <code>action</code>.</li>
+</ul>
+</li>
+<li>Background game object inside innerSizer
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerBackground</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;innerBackground&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Icon game object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
