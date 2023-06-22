@@ -8,6 +8,7 @@ var FontSizeExpandText = function (textObject, minWidth) {
     textObject._minWidth = minWidth;
 
     textObject.runWidthWrap = function (width, maxHeight) {
+        textObject.setFixedSize(0, 0);
         SetFontSizeToFitWidth(textObject, width, maxHeight);
         return textObject;
     }
