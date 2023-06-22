@@ -38202,6 +38202,7 @@
     }
     this.addChildrenMap('icon', icon);
     this.addChildrenMap('iconMask', iconMask);
+    this.addChildrenMap('innerSizer', innerSizer);
     this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);
@@ -38367,6 +38368,7 @@
     }
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);
+    this.addChildrenMap('innerSizer', innerSizer);
     this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('icon', icon);
     this.addChildrenMap('iconMask', iconMask);
@@ -47962,133 +47964,144 @@
   };
 
   var GetValue$K = Phaser.Utils.Objects.GetValue;
-  var TextBox = /*#__PURE__*/function (_Label) {
-    _inherits(TextBox, _Label);
+  var TextBoxBase = function TextBoxBase(GOClass, type) {
+    if (type === undefined) {
+      type = 'rexTextBox';
+    }
+    var TextBox = /*#__PURE__*/function (_GOClass) {
+      _inherits(TextBox, _GOClass);
+      var _super = _createSuper(TextBox);
+      function TextBox(scene, config) {
+        var _this;
+        _classCallCheck(this, TextBox);
+        _this = _super.call(this, scene, config);
+        _this.type = type;
+
+        // childrenMap must have 'text' element
+        var text = _this.childrenMap.text;
+        _this.page = new TextPage(text, GetValue$K(config, 'page', undefined));
+        _this.typing = new TextTyping(text, GetValue$K(config, 'typing', config.type));
+        _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this));
+        _this.textWidth = text.width;
+        _this.textHeight = text.height;
+        return _this;
+      }
+      _createClass(TextBox, [{
+        key: "start",
+        value: function start(text, speed) {
+          this.page.setText(text);
+          if (speed !== undefined) {
+            this.setTypingSpeed(speed);
+          }
+          this.typeNextPage();
+          return this;
+        }
+      }, {
+        key: "typeNextPage",
+        value: function typeNextPage() {
+          if (!this.isLastPage) {
+            var txt = this.page.getNextPage();
+            this.typing.start(txt);
+          } else {
+            this.emit('complete');
+          }
+          return this;
+        }
+      }, {
+        key: "pause",
+        value: function pause() {
+          this.typing.pause();
+          return this;
+        }
+      }, {
+        key: "resume",
+        value: function resume() {
+          this.typing.resume();
+          return this;
+        }
+      }, {
+        key: "stop",
+        value: function stop(showAllText) {
+          this.typing.stop(showAllText);
+          return this;
+        }
+      }, {
+        key: "setTypeSpeed",
+        value: function setTypeSpeed(speed) {
+          this.typing.setTypingSpeed(speed);
+          return this;
+        }
+      }, {
+        key: "setTypingSpeed",
+        value: function setTypingSpeed(speed) {
+          this.typing.setTypingSpeed(speed);
+          return this;
+        }
+      }, {
+        key: "isTyping",
+        get: function get() {
+          return this.typing.isTyping;
+        }
+      }, {
+        key: "isLastPage",
+        get: function get() {
+          return this.page.isLastPage;
+        }
+      }, {
+        key: "isFirstPage",
+        get: function get() {
+          return this.page.isFirstPage;
+        }
+      }, {
+        key: "pageCount",
+        get: function get() {
+          return this.page.pageCount;
+        }
+      }, {
+        key: "pageIndex",
+        get: function get() {
+          return this.page.pageIndex;
+        }
+      }, {
+        key: "onType",
+        value: function onType() {
+          var text = this.childrenMap.text;
+          if (this.textWidth !== text.width || this.textHeight !== text.height) {
+            this.textWidth = text.width;
+            this.textHeight = text.height;
+            this.getTopmostSizer().layout();
+          }
+          this.emit('type');
+        }
+      }, {
+        key: "onPageEnd",
+        value: function onPageEnd() {
+          this.emit('pageend');
+          if (this.isLastPage) {
+            this.emit('complete');
+          }
+        }
+      }]);
+      return TextBox;
+    }(GOClass);
+    return TextBox;
+  };
+
+  var TextBox = /*#__PURE__*/function (_TextBoxBase) {
+    _inherits(TextBox, _TextBoxBase);
     var _super = _createSuper(TextBox);
     function TextBox(scene, config) {
-      var _this;
       _classCallCheck(this, TextBox);
       if (config === undefined) {
-        config = {
-          text: createDefaultTextObject$1(scene)
-        };
+        config = {};
       }
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexTextBox';
-      var text = _this.childrenMap.text;
-      _this.page = new TextPage(text, GetValue$K(config, 'page', undefined));
-      _this.typing = new TextTyping(text, GetValue$K(config, 'typing', config.type));
-      _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this));
-      _this.textWidth = text.width;
-      _this.textHeight = text.height;
-      return _this;
+      if (!config.hasOwnProperty('layoutMode')) {
+        config.layoutMode = 1;
+      }
+      return _super.call(this, scene, config);
     }
-    _createClass(TextBox, [{
-      key: "start",
-      value: function start(text, speed) {
-        this.page.setText(text);
-        if (speed !== undefined) {
-          this.setTypingSpeed(speed);
-        }
-        this.typeNextPage();
-        return this;
-      }
-    }, {
-      key: "typeNextPage",
-      value: function typeNextPage() {
-        if (!this.isLastPage) {
-          var txt = this.page.getNextPage();
-          this.typing.start(txt);
-        } else {
-          this.emit('complete');
-        }
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        this.typing.pause();
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        this.typing.resume();
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop(showAllText) {
-        this.typing.stop(showAllText);
-        return this;
-      }
-    }, {
-      key: "setTypeSpeed",
-      value: function setTypeSpeed(speed) {
-        this.typing.setTypingSpeed(speed);
-        return this;
-      }
-    }, {
-      key: "setTypingSpeed",
-      value: function setTypingSpeed(speed) {
-        this.typing.setTypingSpeed(speed);
-        return this;
-      }
-    }, {
-      key: "isTyping",
-      get: function get() {
-        return this.typing.isTyping;
-      }
-    }, {
-      key: "isLastPage",
-      get: function get() {
-        return this.page.isLastPage;
-      }
-    }, {
-      key: "isFirstPage",
-      get: function get() {
-        return this.page.isFirstPage;
-      }
-    }, {
-      key: "pageCount",
-      get: function get() {
-        return this.page.pageCount;
-      }
-    }, {
-      key: "pageIndex",
-      get: function get() {
-        return this.page.pageIndex;
-      }
-    }, {
-      key: "onType",
-      value: function onType() {
-        var text = this.childrenMap.text;
-        if (this.textWidth !== text.width || this.textHeight !== text.height) {
-          this.textWidth = text.width;
-          this.textHeight = text.height;
-          this.getTopmostSizer().layout();
-        }
-        this.emit('type');
-      }
-    }, {
-      key: "onPageEnd",
-      value: function onPageEnd() {
-        this.emit('pageend');
-        if (this.isLastPage) {
-          this.emit('complete');
-        }
-      }
-    }]);
-    return TextBox;
-  }(Label);
-  var createDefaultTextObject$1 = function createDefaultTextObject(scene) {
-    return scene.add.text(0, 0, '', {
-      wordWrap: {
-        width: 200
-      },
-      maxLines: 5
-    });
-  };
+    return _createClass(TextBox);
+  }(TextBoxBase(TitleLabel));
 
   ObjectFactory.register('textBox', function (config) {
     var gameObject = new TextBox(this.scene, config);
