@@ -1,6 +1,6 @@
 const MaxTestCount = 65535;
 
-var SetFontSizeToFitWidth = function (textObject, width, height) {
+var FontSizeFit = function (textObject, width, height) {
     if (width == null) {
         // Do nothing if invalid width input
         return textObject;
@@ -17,6 +17,11 @@ var SetFontSizeToFitWidth = function (textObject, width, height) {
     }
 
     var fontSize = Math.floor(width * 1.5 / textLength);
+    if (height !== undefined) {
+        if (fontSize > height) {
+            fontSize = Math.floor(height);
+        }
+    }
 
     var sizeData = {};
     var testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
@@ -35,7 +40,7 @@ var SetFontSizeToFitWidth = function (textObject, width, height) {
     }
 
     if (i === MaxTestCount) {
-        console.warn(`SetFontSizeToFitWidth: Test count exceeds ${MaxTestCount}`);
+        console.warn(`FontSizeFit: Test count exceeds ${MaxTestCount}`);
     }
 
     textObject.setFontSize(fontSize);
@@ -60,25 +65,37 @@ var TestFontSize = function (textObject, fontSize, width, height, sizeData) {
     var textSize = GetTextSize(textObject, fontSize, sizeData);
     var textSize1 = GetTextSize(textObject, fontSize + 1, sizeData);
 
+    var deltaHeight;
     if (height !== undefined) {
         // Clamp by height
         if ((textSize.height <= height) && (textSize1.height > height)) {
-            return 0;
+            deltaHeight = 0;
 
-        } else if (textSize.height > height) { // Reduce text size
+        } else if (textSize.height > height) { // Reduce font size
             return -1;
+
+        } else {
+            // Increase font size
+            deltaHeight = Math.floor(height - textSize.height);
         }
     }
 
     // Clamp by width
+    var deltaWidth;
     if ((textSize.width <= width) && (textSize1.width > width)) {
         return 0;
 
-    } else if (textSize.width > width) {  // Reduce text size
+    } else if (textSize.width > width) {  // Reduce font size
         return -1;
 
-    } else {  // Increase text size
-        return Math.floor(width - textSize.width);
+    } else {
+        // Increase font size
+        var deltaWidth = Math.floor(width - textSize.width);
+        if (deltaHeight === undefined) {
+            return deltaWidth;
+        } else {
+            return Math.min(deltaWidth, deltaHeight);
+        }
     }
 }
 
@@ -96,4 +113,4 @@ var SetTextWidth = function (textObject, width, height) {
     style.update(false);
 }
 
-export default SetFontSizeToFitWidth;
+export default FontSizeFit;

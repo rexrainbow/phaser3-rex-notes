@@ -21,8 +21,9 @@ class Demo extends Phaser.Scene {
 
             text: this.rexUI.fontSizeExpandText(this.add.text(0, 0, 'Gallery', {
                 backgroundColor: 'grey'
-            })),
+            }), { fitHeight: true }),
             expandTextWidth: true,
+            expandTextHeight: true,
 
             space: { left: 20, right: 20, top: 20, bottom: 20 },
         })

@@ -3059,8 +3059,19 @@
   };
 
   var ResolveWidth = function ResolveWidth(width) {
+    var childrenWidth = this.childrenWidth;
     if (width === undefined) {
-      width = Math.max(this.childrenWidth, this.minWidth);
+      if (childrenWidth > this.minWidth) {
+        width = childrenWidth;
+        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") < childrenWidth (").concat(childrenWidth, ")"));
+      } else {
+        width = this.minWidth;
+      }
+    } else {
+      var minWidth = Math.max(childrenWidth, this.minWidth);
+      if (minWidth > width) {
+        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width));
+      }
     }
     return width;
   };
@@ -3079,9 +3090,19 @@
   };
 
   var ResolveHeight = function ResolveHeight(height) {
-    var minHeight = Math.max(this.childrenHeight, this.minHeight);
+    var childrenHeight = this.childrenHeight;
     if (height === undefined) {
-      height = minHeight;
+      if (childrenHeight > this.minHeight) {
+        height = childrenHeight;
+        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(this.minHeight, ") < childrenHeight (").concat(childrenHeight, ")"));
+      } else {
+        height = this.minHeight;
+      }
+    } else {
+      var minHeight = Math.max(childrenHeight, this.minHeight);
+      if (minHeight > height) {
+        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(this.minHeight, ") or childrenHeight (").concat(childrenHeight, ") > targetHeight (").concat(height, ")"));
+      }
     }
     return height;
   };

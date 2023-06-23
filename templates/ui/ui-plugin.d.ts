@@ -102,7 +102,7 @@ import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
-import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
+import SetFontSizeToFitWidth from '../../plugins/utils/text/fontsizefit/FontSizeFit';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import { OpenFileChooser } from './filechooser/FileChooser';
 

@@ -527,14 +527,20 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
             ```
 1. Font-size-expand text
     ```javascript
-    var textObject = scene.rexUI.fontSizeExpandText(textObject);
-    // var textObject = scene.rexUI.fontSizeExpandText(textObject, minWidth, maxHeight);
+    var textObject = scene.rexUI.fontSizeExpandText(textObject);    
+    ```
+    or
+    ```javascript
+    var textObject = scene.rexUI.fontSizeExpandText(textObject, {
+        fitHeight: true
+    });
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
-    - `maxHeight` : Max height of text. 
-        - `undefined` :　Ignore this constraint. Default value. 
-1. Set font-size to fit width
+    - `fitHeight` : 
+        - `false` : Set font size to fit width only. Default behavior.
+        - `true` : Set font size to fit width and height.
+1. Set font-size to fit width 
     ```javascript
     var textObject = scene.rexUI.setFontSizeFitToWidth(textObject, width);
     ```
@@ -544,7 +550,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```javascript
     var textTyping = scene.rexUI.textTyping(textObject, config);
     ```
-2. [Text page](textpage.md)
+1. [Text page](textpage.md)
     ```javascript
     var textPage = scene.rexUI.textPage(textObject, config);
     ```
