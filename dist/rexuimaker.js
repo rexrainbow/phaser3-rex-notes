@@ -26676,7 +26676,7 @@
         gameObject = new PhaserImage(scene, 0, 0, config.key, config.frame);
         break;
       case 'nineSlice':
-        if (PhaserNineSlice) {
+        if (PhaserNineSlice && !config.hasOwnProperty('stretchMode')) {
           gameObject = new PhaserNineSlice(scene, 0, 0, config.key, config.frame, 0, 0, config.leftWidth, config.rightWidth, config.topHeight, config.bottomHeight);
         } else {
           gameObject = new NinePatch$1(scene, config);

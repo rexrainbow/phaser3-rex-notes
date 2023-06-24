@@ -8,7 +8,9 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
+    }
 
     create() {
         var label = this.rexUI.add.label({
@@ -19,9 +21,9 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle({ radius: 40, strokeColor: 0xffffff }),
 
-            text: this.rexUI.fontSizeExpandText(this.add.text(0, 0, 'Gallery', {
-                backgroundColor: 'grey'
-            }), { fitHeight: true }),
+            text: this.rexUI.fontSizeExpandText(CreateTextGameObject(this, 'Gallery'), { fitHeight: true }),
+            // text: this.rexUI.fontSizeExpandText(CreateBitmapText(this, 'Gallery'), { fitHeight: true }),
+
             expandTextWidth: true,
             expandTextHeight: true,
 
@@ -31,6 +33,16 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
+}
+
+var CreateTextGameObject = function (scene, text) {
+    return scene.add.text(0, 0, text, {
+        backgroundColor: 'grey'
+    })
+}
+
+var CreateBitmapText = function (scene, text) {
+    return scene.add.bitmapText(0, 0, 'gothic', text);
 }
 
 var config = {

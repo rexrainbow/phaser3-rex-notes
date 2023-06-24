@@ -19,7 +19,9 @@ var FontSizeExpandText = function (textObject, config) {
     if (!fitHeight) {
         // Set font size to fit width only
         textObject.runWidthWrap = function (width) {
-            textObject.setFixedSize(0, 0);
+            if (textObject.setFixedSize) {
+                textObject.setFixedSize(0, 0);
+            }
             FontSizeFit(textObject, width, undefined);
             return textObject;
         }
@@ -37,7 +39,10 @@ var FontSizeExpandText = function (textObject, config) {
         // Set font size to fit width and height
         textObject.runWidthWrap = function (width) {
             // Minimun text size
-            textObject.setFixedSize(0, 0);
+            if (textObject.setFixedSize) {
+                textObject.setFixedSize(0, 0);
+            }
+
             textObject.setFontSize(1);
             return textObject;
         }

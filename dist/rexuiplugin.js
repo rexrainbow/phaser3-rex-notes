@@ -37864,7 +37864,7 @@
         gameObject = new PhaserImage$1(scene, 0, 0, config.key, config.frame);
         break;
       case 'nineSlice':
-        if (PhaserNineSlice) {
+        if (PhaserNineSlice && !config.hasOwnProperty('stretchMode')) {
           gameObject = new PhaserNineSlice(scene, 0, 0, config.key, config.frame, 0, 0, config.leftWidth, config.rightWidth, config.topHeight, config.bottomHeight);
         } else {
           gameObject = new NinePatch$1(scene, config);
@@ -55965,6 +55965,10 @@
   };
   var SetTextWidth = function SetTextWidth(textObject, width, height) {
     var style = textObject.style;
+    if (!style) {
+      // BitmapText game object does not have style property
+      return;
+    }
     style.fixedWidth = width;
     style.parent.width = width;
     if (height !== undefined) {
@@ -55989,7 +55993,9 @@
     if (!fitHeight) {
       // Set font size to fit width only
       textObject.runWidthWrap = function (width) {
-        textObject.setFixedSize(0, 0);
+        if (textObject.setFixedSize) {
+          textObject.setFixedSize(0, 0);
+        }
         FontSizeFit(textObject, width, undefined);
         return textObject;
       };
@@ -56006,7 +56012,9 @@
       // Set font size to fit width and height
       textObject.runWidthWrap = function (width) {
         // Minimun text size
-        textObject.setFixedSize(0, 0);
+        if (textObject.setFixedSize) {
+          textObject.setFixedSize(0, 0);
+        }
         textObject.setFontSize(1);
         return textObject;
       };

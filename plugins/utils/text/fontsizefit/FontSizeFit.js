@@ -102,6 +102,11 @@ var TestFontSize = function (textObject, fontSize, width, height, sizeData) {
 var SetTextWidth = function (textObject, width, height) {
     var style = textObject.style;
 
+    if (!style) {
+        // BitmapText game object does not have style property
+        return;
+    }
+
     style.fixedWidth = width;
     style.parent.width = width;
 

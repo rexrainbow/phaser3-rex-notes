@@ -536,7 +536,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     });
     ```
     - `textObject` :
-        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
+        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), [bitmap text game object](bitmaptext.md)
     - `fitHeight` : 
         - `false` : Set font size to fit width only. Default behavior.
         - `true` : Set font size to fit width and height.
@@ -545,7 +545,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     var textObject = scene.rexUI.setFontSizeFitToWidth(textObject, width);
     ```
     - `textObject` :
-        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
+        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), [bitmap text game object](bitmaptext.md)
 1. [Text typing](texttyping.md)
     ```javascript
     var textTyping = scene.rexUI.textTyping(textObject, config);
