@@ -1,16 +1,15 @@
 var ResolveHeight = function (height) {
     var childrenHeight = this.childrenHeight;
+    var minHeight = (this.minHeight !== undefined) ? this.minHeight : 0;
     if (height === undefined) {
-        if (childrenHeight > this.minHeight) {
-            height = childrenHeight;
-            console.warn(`Layout height warn: ${this.constructor.name}'s minHeight (${this.minHeight}) < childrenHeight (${childrenHeight})`);
-        } else {
-            height = this.minHeight;
+        height = Math.max(minHeight, childrenHeight);
+
+        if ((minHeight > 0) && (childrenHeight > minHeight)) {
+            console.warn(`Layout height warn: ${this.constructor.name}'s minHeight (${minHeight}) < childrenHeight (${childrenHeight})`);
         }
     } else {
-        var minHeight = Math.max(childrenHeight, this.minHeight);
-        if (minHeight > height) {
-            console.warn(`Layout height warn: ${this.constructor.name}'s minHeight (${this.minHeight}) or childrenHeight (${childrenHeight}) > targetHeight (${height})`);
+        if ((minHeight > height) || (childrenHeight > height)) {
+            console.warn(`Layout height warn: ${this.constructor.name}'s minHeight (${minHeight}) or childrenHeight (${childrenHeight}) > targetHeight (${height})`);
         }
     }
 

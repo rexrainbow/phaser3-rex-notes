@@ -94,13 +94,13 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'uiLayer',
 
             commands: {
-                typing(gameObject, { who, text, speed } = {}, commandExecutor) {
-                    if (who) {
-                        gameObject.getElement('title')
-                            .show()
-                            .setText(who)
+                typing(gameObject, { name, text, speed } = {}, commandExecutor) {
+                    if (name) {
+                        var title = gameObject.getElement('title').setText(name);
+                        gameObject.setChildVisible(title, true);
                     } else {
-                        gameObject.getElement('title').hide()
+                        var title = gameObject.getElement('title').setText('');
+                        gameObject.setChildVisible(title, false);
                     }
                     gameObject.layout();
 
@@ -167,7 +167,7 @@ var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
                 icon: 10,
                 text: 10,
             },
-        }).hide(),
+        }).setVisible(false),
 
         space: {
             innerLeft: 20, innerRight: 20, innerTop: 20, innerBottom: 20,

@@ -4123,16 +4123,14 @@
 
   var ResolveWidth$1 = function ResolveWidth(width) {
     var childrenWidth = this.childrenWidth;
+    var minWidth = this.minWidth !== undefined ? this.minWidth : 0;
     if (width === undefined) {
-      if (childrenWidth > this.minWidth) {
-        width = childrenWidth;
+      width = Math.max(minWidth, childrenWidth);
+      if (minWidth > 0 && childrenWidth > minWidth) {
         console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") < childrenWidth (").concat(childrenWidth, ")"));
-      } else {
-        width = this.minWidth;
       }
     } else {
-      var minWidth = Math.max(childrenWidth, this.minWidth);
-      if (minWidth > width) {
+      if (minWidth > width || childrenWidth > width) {
         console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width));
       }
     }
@@ -4154,17 +4152,15 @@
 
   var ResolveHeight$1 = function ResolveHeight(height) {
     var childrenHeight = this.childrenHeight;
+    var minHeight = this.minHeight !== undefined ? this.minHeight : 0;
     if (height === undefined) {
-      if (childrenHeight > this.minHeight) {
-        height = childrenHeight;
-        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(this.minHeight, ") < childrenHeight (").concat(childrenHeight, ")"));
-      } else {
-        height = this.minHeight;
+      height = Math.max(minHeight, childrenHeight);
+      if (minHeight > 0 && childrenHeight > minHeight) {
+        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") < childrenHeight (").concat(childrenHeight, ")"));
       }
     } else {
-      var minHeight = Math.max(childrenHeight, this.minHeight);
-      if (minHeight > height) {
-        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(this.minHeight, ") or childrenHeight (").concat(childrenHeight, ") > targetHeight (").concat(height, ")"));
+      if (minHeight > height || childrenHeight > height) {
+        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") or childrenHeight (").concat(childrenHeight, ") > targetHeight (").concat(height, ")"));
       }
     }
     return height;

@@ -8884,7 +8884,7 @@
 
   helpers.__esModule = true;
   helpers.SourceLocation = SourceLocation;
-  helpers.id = id;
+  helpers.id = id$1;
   helpers.stripFlags = stripFlags;
   helpers.stripComment = stripComment;
   helpers.preparePath = preparePath;
@@ -8923,7 +8923,7 @@
     };
   }
 
-  function id(token) {
+  function id$1(token) {
     if (/^\[.*\]$/.test(token)) {
       return token.substring(1, token.length - 1);
     } else {
@@ -20196,92 +20196,91 @@
       // Add custom commands
       sys.getGameObjectManager(name).commands = commands;
 
-      // Add createGameObject command        
-      var goType = name;
+      // Add createGameObject command
       var createGameObjectCallback = function createGameObjectCallback(config, manager) {
-        var name = config.name,
+        var id = config.id,
           _config$layer = config.layer,
           layer = _config$layer === void 0 ? defaultLayer : _config$layer;
-        delete config.name;
+        delete config.id;
         delete config.layer;
-        sys.createGameObject(goType, name, config);
+        sys.createGameObject(name, id, config);
         // Execute next command
 
         if (layer) {
           var layerManager = sys.getGameObjectManager('layer');
           if (layerManager) {
-            var gameObject = sys.getGameObject(goType, name);
+            var gameObject = sys.getGameObject(name, id);
             layerManager.addToLayer(layer, gameObject);
           }
         }
       };
-      this.addCommand(goType, createGameObjectCallback, null);
+      this.addCommand(name, createGameObjectCallback, null);
       return this;
     },
     _setGOProperty: function _setGOProperty(config, manager) {
-      var name = config.name;
-      delete config.name;
-      var goType = this.sys.getGameObjectManagerName(name);
+      var id = config.id;
+      delete config.id;
+      var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
         return;
       }
       for (var prop in config) {
         var value = manager.evalExpression(config[prop]);
-        this.sys.setGameObjectProperty(goType, name, prop, value);
+        this.sys.setGameObjectProperty(goType, id, prop, value);
       }
       // Execute next command
     },
     _easeGOProperty: function _easeGOProperty(config, manager) {
-      var name = config.name,
+      var id = config.id,
         duration = config.duration,
         ease = config.ease,
         repeat = config.repeat,
         yoyo = config.yoyo,
         _config$wait = config.wait,
         wait = _config$wait === void 0 ? true : _config$wait;
-      delete config.name;
+      delete config.id;
       delete config.duration;
       delete config.ease;
       delete config.repeat;
       delete config.yoyo;
       delete config.wait;
-      var goType = this.sys.getGameObjectManagerName(name);
+      var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
         return;
       }
       var waitProperty;
       for (var prop in config) {
         var value = manager.evalExpression(config[prop]);
-        this.sys.easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, yoyo);
+        this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
         waitProperty = prop;
       }
       if (wait && waitProperty) {
-        return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, name, waitProperty);
+        return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
       }
 
       // Execute next command
     },
     _destroyGO: function _destroyGO() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        name = _ref.name,
+        id = _ref.id,
         _ref$wait = _ref.wait,
         wait = _ref$wait === void 0 ? false : _ref$wait;
-      var goType = this.sys.getGameObjectManagerName(name);
+      var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
         return;
       }
-      this.sys.destroyGameObject(goType, name);
+      this.sys.destroyGameObject(goType, id);
       if (wait) {
-        return this.sys.waitEventManager.waitGameObjectDestroy(goType, name);
+        return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
       }
     },
     _runGOMethod: function _runGOMethod(config, manager) {
       var _this$sys;
-      var goType = this.sys.getGameObjectManagerName(name);
+      var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
         return;
       }
-      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.name, config.methodName].concat(_toConsumableArray(config.parameters)));
+      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, config.methodName].concat(_toConsumableArray(config.parameters)));
       // Execute next command
     }
   };
@@ -20893,20 +20892,20 @@
 
   var DefaultHandler = function DefaultHandler(name, config, manager) {
     var tokens = name.split('.');
-    var gameObjectName = tokens[0];
-    config.name = gameObjectName;
+    var gameObjectID = tokens[0];
+    config.id = gameObjectID;
     switch (tokens.length) {
       case 1:
-        if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+        if (!this.sys.hasGameObject(undefined, gameObjectID)) {
           // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectName, "' does not exist"));
+          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
           return;
         }
         return this._setGOProperty(config, manager);
       case 2:
-        if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+        if (!this.sys.hasGameObject(undefined, gameObjectID)) {
           // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectName, "' does not exist"));
+          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
           return;
         }
         var commandName = tokens[1];
@@ -20919,11 +20918,11 @@
           case 'destroy':
             return this._destroyGO(config, manager);
           default:
-            var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
+            var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectID);
             if (gameObjectManager) {
               var command = gameObjectManager.commands[commandName];
               if (command) {
-                var gameObject = gameObjectManager.getGO(gameObjectName);
+                var gameObject = gameObjectManager.getGO(gameObjectID);
                 this.clearWaitEventFlag();
                 command(gameObject, config, this);
                 return this.hasAnyWaitEvent ? this.sys : undefined;

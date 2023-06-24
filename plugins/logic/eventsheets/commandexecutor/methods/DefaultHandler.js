@@ -3,21 +3,21 @@ import StringToValues from '../../../../utils/string/StringToValues.js';
 var DefaultHandler = function (name, config, manager) {
     var tokens = name.split('.');
 
-    var gameObjectName = tokens[0];
-    config.name = gameObjectName;
+    var gameObjectID = tokens[0];
+    config.id = gameObjectID;
     switch (tokens.length) {
         case 1:
-            if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+            if (!this.sys.hasGameObject(undefined, gameObjectID)) {
                 // TODO
-                console.warn(`CommandExecutor: '${gameObjectName}' does not exist`);
+                console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
                 return;
             }
             return this._setGOProperty(config, manager);
 
         case 2:
-            if (!this.sys.hasGameObject(undefined, gameObjectName)) {
+            if (!this.sys.hasGameObject(undefined, gameObjectID)) {
                 // TODO
-                console.warn(`CommandExecutor: '${gameObjectName}' does not exist`);
+                console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
                 return;
             }
 
@@ -34,11 +34,11 @@ var DefaultHandler = function (name, config, manager) {
                     return this._destroyGO(config, manager);
 
                 default:
-                    var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectName);
+                    var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectID);
                     if (gameObjectManager) {
                         var command = gameObjectManager.commands[commandName];
                         if (command) {
-                            var gameObject = gameObjectManager.getGO(gameObjectName);
+                            var gameObject = gameObjectManager.getGO(gameObjectID);
                             this.clearWaitEventFlag();
                             command(gameObject, config, this);
                             return (this.hasAnyWaitEvent) ? this.sys : undefined;

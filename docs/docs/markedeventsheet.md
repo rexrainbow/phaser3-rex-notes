@@ -458,7 +458,7 @@ commandExecutor.addGameObjectManager({
     }
     ```
     - `config` : Parameters passed from [event sheet](markedeventsheet.md#create-custom-game-object).
-        - `name` : Parameter `name` is reserved.
+        - `id` : Parameter `id` is reserved.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
     - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
         - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
@@ -491,13 +491,13 @@ commandExecutor.addGameObjectManager({
 ```
 
 GOTYPE
-  name=NAME
+  id=NAME
   param0=value
   param1=value
 
 ```
 
-- Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `name`
+- Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `id`
 
 ##### Set properties of custom game object
 
@@ -546,7 +546,7 @@ NAME.yoyo
 
 ```
 
-- These properties are reserved : `name`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
+- These properties are reserved : `id`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after playing sound complete.

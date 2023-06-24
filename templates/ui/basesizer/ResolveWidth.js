@@ -1,15 +1,14 @@
 var ResolveWidth = function (width) {
     var childrenWidth = this.childrenWidth;
+    var minWidth = (this.minWidth !== undefined) ? this.minWidth : 0;
     if (width === undefined) {
-        if (childrenWidth > this.minWidth) {
-            width = childrenWidth;
+        width = Math.max(minWidth, childrenWidth);
+
+        if ((minWidth > 0) && (childrenWidth > minWidth)) {
             console.warn(`Layout width warn: ${this.constructor.name}'s minWidth (${minWidth}) < childrenWidth (${childrenWidth})`);
-        } else {
-            width = this.minWidth;
         }
     } else {
-        var minWidth = Math.max(childrenWidth, this.minWidth);
-        if (minWidth > width) {
+        if ((minWidth > width) || (childrenWidth > width)) {
             console.warn(`Layout width warn: ${this.constructor.name}'s minWidth (${minWidth}) or childrenWidth (${childrenWidth} > targetWidth ${width}`);
         }
     }

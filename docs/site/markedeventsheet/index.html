@@ -10506,7 +10506,7 @@ line2
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>config</code> : Parameters passed from <a href="./#create-custom-game-object">event sheet</a>.<ul>
-<li><code>name</code> : Parameter <code>name</code> is reserved.</li>
+<li><code>id</code> : Parameter <code>id</code> is reserved.</li>
 </ul>
 </li>
 </ul>
@@ -10553,12 +10553,12 @@ line2
 </ul>
 <h5 id="create-custom-game-object">Create custom game object<a class="headerlink" href="#create-custom-game-object" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>GOTYPE
-  name=NAME
+  id=NAME
   param0=value
   param1=value
 </code></pre></div>
 <ul>
-<li>Create custom game object <code>GOTYPE</code> with config <code>{param0, param1}</code>, indexed by <code>name</code></li>
+<li>Create custom game object <code>GOTYPE</code> with config <code>{param0, param1}</code>, indexed by <code>id</code></li>
 </ul>
 <h5 id="set-properties-of-custom-game-object">Set properties of custom game object<a class="headerlink" href="#set-properties-of-custom-game-object" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>NAME
@@ -10595,7 +10595,7 @@ line2
   wait=
 </code></pre></div>
 <ul>
-<li>These properties are reserved : <code>name</code>, <code>duration</code>, <code>ease</code>, <code>repeat</code>, <code>yoyo</code>, <code>wait</code></li>
+<li>These properties are reserved : <code>id</code>, <code>duration</code>, <code>ease</code>, <code>repeat</code>, <code>yoyo</code>, <code>wait</code></li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after playing sound complete.</li>

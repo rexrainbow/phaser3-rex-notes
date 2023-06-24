@@ -9,55 +9,54 @@ export default {
         // Add custom commands
         sys.getGameObjectManager(name).commands = commands;
 
-        // Add createGameObject command        
-        var goType = name;
+        // Add createGameObject command
         var createGameObjectCallback = function (config, manager) {
-            var { name, layer = defaultLayer } = config;
-            delete config.name;
+            var { id, layer = defaultLayer } = config;
+            delete config.id;
             delete config.layer;
 
-            sys.createGameObject(goType, name, config);
+            sys.createGameObject(name, id, config);
             // Execute next command
 
             if (layer) {
                 var layerManager = sys.getGameObjectManager('layer');
                 if (layerManager) {
-                    var gameObject = sys.getGameObject(goType, name);
+                    var gameObject = sys.getGameObject(name, id);
                     layerManager.addToLayer(layer, gameObject);
                 }
             }
         }
-        this.addCommand(goType, createGameObjectCallback, null);
+        this.addCommand(name, createGameObjectCallback, null);
 
         return this;
     },
 
     _setGOProperty(config, manager) {
-        var { name } = config;
-        delete config.name;
+        var { id } = config;
+        delete config.id;
 
-        var goType = this.sys.getGameObjectManagerName(name);
+        var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;
         }
 
         for (var prop in config) {
             var value = manager.evalExpression(config[prop]);
-            this.sys.setGameObjectProperty(goType, name, prop, value);
+            this.sys.setGameObjectProperty(goType, id, prop, value);
         }
         // Execute next command
     },
 
     _easeGOProperty(config, manager) {
-        var { name, duration, ease, repeat, yoyo, wait = true } = config;
-        delete config.name;
+        var { id, duration, ease, repeat, yoyo, wait = true } = config;
+        delete config.id;
         delete config.duration;
         delete config.ease;
         delete config.repeat;
         delete config.yoyo;
         delete config.wait;
 
-        var goType = this.sys.getGameObjectManagerName(name);
+        var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;
         }
@@ -65,35 +64,35 @@ export default {
         var waitProperty;
         for (var prop in config) {
             var value = manager.evalExpression(config[prop]);
-            this.sys.easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, yoyo);
+            this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
             waitProperty = prop;
         }
         if (wait && waitProperty) {
-            return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, name, waitProperty);
+            return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
         }
 
         // Execute next command
     },
 
-    _destroyGO({ name, wait = false } = {}, manager) {
-        var goType = this.sys.getGameObjectManagerName(name);
+    _destroyGO({ id, wait = false } = {}, manager) {
+        var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;
         }
 
-        this.sys.destroyGameObject(goType, name);
+        this.sys.destroyGameObject(goType, id);
         if (wait) {
-            return this.sys.waitEventManager.waitGameObjectDestroy(goType, name);
+            return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
         }
     },
 
     _runGOMethod(config, manager) {
-        var goType = this.sys.getGameObjectManagerName(name);
+        var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;
         }
 
-        this.sys.callGameObjectMethod(goType, config.name, config.methodName, ...config.parameters);
+        this.sys.callGameObjectMethod(goType, config.id, config.methodName, ...config.parameters);
         // Execute next command
     },
 }

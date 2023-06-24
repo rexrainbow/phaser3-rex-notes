@@ -5,16 +5,16 @@
 // Create gameobjects
 
 BG
-  name=Background
+  id=Background
   key=classroom
 
 TEXT
-  name=Dialog
+  id=Dialog
   width=500
   height=120
 
 SPRITE
-  name=CharacterA
+  id=CharacterA
   key=characters
   frame=A-smile
 
@@ -71,7 +71,7 @@ CharacterA.to
 // Wait until tween complete
 
 
-```Dialog.typing, who=Me Me Me, speed=100
+```Dialog.typing, name=Me Me Me, speed=100
 Line0...
 Line1...
 Line2...
