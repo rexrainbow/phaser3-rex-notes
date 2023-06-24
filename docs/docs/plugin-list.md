@@ -100,7 +100,7 @@
 1. [LocalForage/Files](localforage-files.md): Save JSON data, using localforage.
 1. [LocalStorage/Data](localstorage-data.md): Sync data from data manager to local-storage.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
-1. [Markdown event sheets](markedeventsheet.md): Event sheets contains main condition(s) and actions, in simple markdown format.
+1. [Markdown event sheets](markedeventsheet.md): Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
 1. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Mouse-wheel scroller](mousewheelscroller.md): Emit scroll event when mouse-wheeling.

@@ -1,6 +1,6 @@
 ## Introduction
 
-Event sheets contains main condition(s) and actions, in simple markdown format.
+Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
 
 - Author: Rex
 - Member of scene
