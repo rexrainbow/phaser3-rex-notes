@@ -13,7 +13,7 @@ var TextBoxBase = function (GOClass, type) {
             this.type = type;
 
             // childrenMap must have 'text' element
-            var text = this.childrenMap.text;  
+            var text = this.childrenMap.text;
             this.page = new TextPage(text, GetValue(config, 'page', undefined));
             this.typing = new TextTyping(text, GetValue(config, 'typing', config.type));
             this.typing
@@ -29,6 +29,7 @@ var TextBoxBase = function (GOClass, type) {
             if (speed !== undefined) {
                 this.setTypingSpeed(speed);
             }
+            this.emit('start');
             this.typeNextPage();
             return this;
         }

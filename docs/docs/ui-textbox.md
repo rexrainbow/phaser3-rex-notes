@@ -342,6 +342,12 @@ var textBox = scene.rexUI.add.textBox({
 
 ### Events
 
+- On typing start.
+    ```javascript
+    textBox.on('start', function() {
+        // ...
+    }, scope);
+    ```
 - On typing a character
     ```javascript
     textBox.on('type', function() {
