@@ -12,14 +12,14 @@ class SoundManager {
         this._backgroundMusicVolume = GetValue(config, 'bgm.volume', 1);
         this._backgroundMusicMute = GetValue(config, 'bgm.mute', false);
 
-        this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
+        this.setBackgroundMusicLoop(GetValue(config, 'bgm.loop', true));
         this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 500));
 
         this.backgroundMusic2 = undefined;
         this._backgroundMusic2Volume = GetValue(config, 'bgm2.volume', 1);
         this._backgroundMusic2Mute = GetValue(config, 'bgm2.mute', false);
 
-        this.setBackgroundMusic2LoopValue(GetValue(config, 'bgm2.loop', true));
+        this.setBackgroundMusic2Loop(GetValue(config, 'bgm2.loop', true));
         this.setBackgroundMusic2FadeTime(GetValue(config, 'bgm2.fade', 500));
 
         // Sound effect will be destroyed when completed

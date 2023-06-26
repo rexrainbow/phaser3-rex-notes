@@ -13,6 +13,14 @@ declare namespace SoundManager {
             volume?: number,
         }
     }
+
+    interface IPlaySoundConfig {
+        loop?: boolean,
+        volume?: number,
+        mute?: boolean,
+        detune?: number,
+        rate?: number,
+    }
 }
 
 declare class SoundManager {
@@ -24,13 +32,13 @@ declare class SoundManager {
     destroy(): this;
 
     // Background music
-    setBackgroundMusicLoopValue(value: boolean): this;
+    setBackgroundMusicLoop(value?: boolean): this;
 
     setBackgroundMusicFadeTime(time: number): this;
 
     getBackgroundMusic(): Phaser.Sound.BaseSound;
 
-    playBackgroundMusic(key: string): this;
+    playBackgroundMusic(key: string, config?: SoundManager.IPlaySoundConfig): this;
 
     pauseBackgroundMusic(): this;
 
@@ -55,13 +63,13 @@ declare class SoundManager {
     setBackgroundMusicDetune(detune: number): this;
 
     // Background music2
-    setBackgroundMusic2LoopValue(value: boolean): this;
+    setBackgroundMusic2Loop(value?: boolean): this;
 
     setBackgroundMusic2FadeTime(time: number): this;
 
     getBackgroundMusic2(): Phaser.Sound.BaseSound;
 
-    playBackgroundMusic2(key: string): this;
+    playBackgroundMusic2(key: string, config?: SoundManager.IPlaySoundConfig): this;
 
     pauseBackgroundMusic2(): this;
 
@@ -90,7 +98,7 @@ declare class SoundManager {
 
     getLastSoundEffect(): Phaser.Sound.BaseSound;
 
-    playSoundEffect(key: string): this;
+    playSoundEffect(key: string, config?: SoundManager.IPlaySoundConfig): this;
 
     stopAllSoundEffects(): this;
 
@@ -115,7 +123,7 @@ declare class SoundManager {
 
     getLastSoundEffect2(): Phaser.Sound.BaseSound;
 
-    playSoundEffect2(key: string): this;
+    playSoundEffect2(key: string, config?: SoundManager.IPlaySoundConfig): this;
 
     stopAllSoundEffects2(): this;
 

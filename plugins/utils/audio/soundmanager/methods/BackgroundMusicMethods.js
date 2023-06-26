@@ -1,9 +1,15 @@
 import FadeIn from '../../../../audio/fade/FadeIn.js';
 import FadeOut from '../../../../audio/fade/FadeOut.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 export default {
-    setBackgroundMusicLoopValue(value) {
-        this.backgroundMusicLoopValue = value;
+    setBackgroundMusicLoop(value) {
+        if (value === undefined) {
+            value = true;
+        }
+
+        this.backgroundMusicLoop = value;
         return this;
     },
 
@@ -21,7 +27,6 @@ export default {
         this.backgroundMusic = music;
 
         if (music) {
-            music.setLoop(this.backgroundMusicLoopValue);
             music
                 .once('complete', function () {
                     if (this.backgroundMusic === music) {
@@ -42,7 +47,7 @@ export default {
         return this;
     },
 
-    playBackgroundMusic(key) {
+    playBackgroundMusic(key, config) {
         // Don't re-play the same background music
         if (this.backgroundMusic && (this.backgroundMusic.key === key)) {
             return this;
@@ -51,8 +56,11 @@ export default {
         this.stopBackgroundMusic(); // Stop previous background music
 
         var music = this.sound.add(key, {
-            mute: this.backgroundMusicMute,
-            volume: this.backgroundMusicVolume
+            loop: GetValue(config, 'loop', this.backgroundMusicLoop),
+            mute: GetValue(config, 'mute', this.backgroundMusicMute),
+            volume: GetValue(config, 'volume', this.backgroundMusicVolume),
+            detune: GetValue(config, 'detune', 0),
+            rate: GetValue(config, 'rate', 1),
         });
 
         this.setCurrentBackgroundMusic(music);

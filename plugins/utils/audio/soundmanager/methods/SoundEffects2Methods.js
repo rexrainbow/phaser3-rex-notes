@@ -2,6 +2,7 @@ import FadeIn from '../../../../audio/fade/FadeIn.js';
 import FadeOut from '../../../../audio/fade/FadeOut.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 export default {
 
@@ -13,10 +14,12 @@ export default {
         return this.soundEffects2[this.soundEffects2.length - 1];
     },
 
-    playSoundEffect2(key) {
+    playSoundEffect2(key, config) {
         var music = this.sound.add(key, {
-            mute: this.soundEffects2Mute,
-            volume: this.soundEffects2Volume
+            mute: GetValue(config, 'mute', this.soundEffects2Mute),
+            volume: GetValue(config, 'volume', this.soundEffects2Volume),
+            detune: GetValue(config, 'detune', 0),
+            rate: GetValue(config, 'rate', 1),
         });
 
         this.soundEffects2.push(music);
