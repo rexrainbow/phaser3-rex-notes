@@ -50,8 +50,14 @@ export default {
 
         this.stopBackgroundMusic(); // Stop previous background music
 
-        this.setCurrentBackgroundMusic(this.sound.add(key));
+        var music = this.sound.add(key, {
+            mute: this.backgroundMusicMute,
+            volume: this.backgroundMusicVolume
+        });
 
+        this.setCurrentBackgroundMusic(music);
+
+        // Fade volume
         if (this.backgroundMusicFadeTime > 0) {
             this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
         }
@@ -116,22 +122,26 @@ export default {
         return this;
     },
 
-    setBackgroundMusicVolume(volume) {
-        this.backgroundMusicVolume = volume;
-        return this;
-    },
-
     setBackgroundMusicMute(mute) {
         if (mute === undefined) {
             mute = true;
         }
 
-        if (this.backgroundMusic) {
-            this.backgroundMusic.setMute(mute);
-        }
+        this.backgroundMusicMute = mute;
         return this;
     },
 
 
+    setBackgroundMusicVolume(volume) {
+        this.backgroundMusicVolume = volume;
+        return this;
+    },
+
+    setBackgroundMusicDetune(detune) {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.setDetune(detune);
+        }
+        return this;
+    },
 
 }

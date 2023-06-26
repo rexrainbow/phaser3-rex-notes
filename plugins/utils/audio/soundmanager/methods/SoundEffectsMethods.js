@@ -14,27 +14,29 @@ export default {
     },
 
     playSoundEffect(key) {
-        var soundEffect = this.sound.add(key);
-        soundEffect.setVolume(this.soundEffectsVolume);
+        var music = this.sound.add(key, {
+            mute: this.soundEffectsMute,
+            volume: this.soundEffectsVolume
+        });
 
-        this.soundEffects.push(soundEffect);
+        this.soundEffects.push(music);
 
-        soundEffect
+        music
             .once('complete', function () {
-                soundEffect.destroy();
+                music.destroy();
 
                 // SoundManager has been destroyed
                 if (!this.sound) {
                     return;
                 }
-                RemoveItem(this.soundEffects, soundEffect);
+                RemoveItem(this.soundEffects, music);
             }, this)
             .once('destroy', function () {
                 // SoundManager has been destroyed
                 if (!this.sound) {
                     return;
                 }
-                RemoveItem(this.soundEffects, soundEffect);
+                RemoveItem(this.soundEffects, music);
             }, this)
             .play();
 
@@ -77,26 +79,6 @@ export default {
         return this;
     },
 
-    setSoundEffectVolume(volume, lastSoundEffect) {
-        if (lastSoundEffect === undefined) {
-            lastSoundEffect = false;
-        }
-
-        if (lastSoundEffect) {
-            // Set volume of last sound effect
-            var soundEffect = this.getLastSoundEffect();
-            if (soundEffect) {
-                soundEffect.setVolume(volume);
-            }
-
-        } else {
-            // Set volume of all sound effects
-            this.soundEffectsVolume = volume;
-        }
-
-        return this;
-    },
-
     setSoundEffectMute(mute, lastSoundEffect) {
         if (mute === undefined) {
             mute = true;
@@ -119,4 +101,25 @@ export default {
 
         return this;
     },
+
+    setSoundEffectVolume(volume, lastSoundEffect) {
+        if (lastSoundEffect === undefined) {
+            lastSoundEffect = false;
+        }
+
+        if (lastSoundEffect) {
+            // Set volume of last sound effect
+            var soundEffect = this.getLastSoundEffect();
+            if (soundEffect) {
+                soundEffect.setVolume(volume);
+            }
+
+        } else {
+            // Set volume of all sound effects
+            this.soundEffectsVolume = volume;
+        }
+
+        return this;
+    },
+
 }

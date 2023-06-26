@@ -44,10 +44,13 @@ declare class SoundManager {
 
     crossFadeBackgroundMusic(key: string, time: number): this;
 
+    setBackgroundMusicMute(mute?: boolean): this;
+    backgroundMusicMute: boolean;
+
     setBackgroundMusicVolume(volume: number): this;
     backgroundMusicVolume: number;
 
-    setBackgroundMusicMute(mute?: boolean): this;
+    setBackgroundMusicDetune(detune: number): this;
 
     // Background music2
     setBackgroundMusic2LoopValue(value: boolean): this;
@@ -70,11 +73,13 @@ declare class SoundManager {
 
     crossFadeBackgroundMusic2(key: string, time: number): this;
 
+    setBackgroundMusic2Mute(mute?: boolean): this;
+    backgroundMusic2Mute: boolean;
+
     setBackgroundMusicVolume2(volume: number): this;
     backgroundMusicVolume2: number;
 
-    setBackgroundMusic2Mute(mute?: boolean): this;
-
+    setBackgroundMusic2Detune(detune: number): this;
 
     // Sound effect
     getSoundEffects(): Phaser.Sound.BaseSound[];
@@ -90,6 +95,9 @@ declare class SoundManager {
     fadeOutSoundEffect(time: number, isStopped?: boolean): this;
 
     fadeOutAllSoundEffects(time: number, isStopped?: boolean): this;
+
+    setSoundEffectMute(mute?: boolean, lastSoundEffect?: boolean): this;
+    soundEffectsMute: boolean;
 
     setSoundEffectVolume(volume: number, lastSoundEffect?: boolean): this;
     soundEffectsVolume: number;
@@ -109,6 +117,9 @@ declare class SoundManager {
     fadeOutSoundEffect2(time: number, isStopped?: boolean): this;
 
     fadeOutAllSoundEffects2(time: number, isStopped?: boolean): this;
+
+    setSoundEffect2Mute(mute?: boolean, lastSoundEffect?: boolean): this;
+    soundEffects2Mute: boolean;
 
     setSoundEffect2Volume(volume: number, lastSoundEffect?: boolean): this;
     soundEffects2Volume: number;

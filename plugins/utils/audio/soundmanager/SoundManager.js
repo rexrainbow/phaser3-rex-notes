@@ -10,12 +10,14 @@ class SoundManager {
         // Background music will be (fade out)destroyed when play next one.
         this.backgroundMusic = undefined;
         this._backgroundMusicVolume = GetValue(config, 'bgm.volume', 1);
+        this._backgroundMusicMute = GetValue(config, 'bgm.mute', false);
 
         this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
         this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 500));
 
         this.backgroundMusic2 = undefined;
         this._backgroundMusic2Volume = GetValue(config, 'bgm2.volume', 1);
+        this._backgroundMusic2Mute = GetValue(config, 'bgm2.mute', false);
 
         this.setBackgroundMusic2LoopValue(GetValue(config, 'bgm2.loop', true));
         this.setBackgroundMusic2FadeTime(GetValue(config, 'bgm2.fade', 500));
@@ -69,6 +71,20 @@ class SoundManager {
         return this;
     }
 
+    // backgroundMusic
+    // mute
+    get backgroundMusicMute() {
+        return this._backgroundMusicMute;
+    }
+
+    set backgroundMusicMute(value) {
+        this._backgroundMusicMute = value;
+        if (this.backgroundMusic) {
+            this.backgroundMusic.setMute(mute);
+        }
+    }
+
+    // volume
     get backgroundMusicVolume() {
         return this._backgroundMusicVolume;
     }
@@ -80,6 +96,20 @@ class SoundManager {
         }
     }
 
+    // backgroundMusic2
+    // mute
+    get backgroundMusic2Mute() {
+        return this._backgroundMusic2Mute;
+    }
+
+    set backgroundMusic2Mute(value) {
+        this._backgroundMusic2Mute = value;
+        if (this.backgroundMusic2) {
+            this.backgroundMusic2.setMute(mute);
+        }
+    }
+
+    // volume
     get backgroundMusic2Volume() {
         return this._backgroundMusic2Volume;
     }
@@ -91,18 +121,8 @@ class SoundManager {
         }
     }
 
-    get soundEffectsVolume() {
-        return this._soundEffectsVolume;
-    }
-
-    set soundEffectsVolume(value) {
-        this._soundEffectsVolume = value;
-        var soundEffects = this.soundEffects;
-        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
-            soundEffects[i].setVolume(value);
-        }
-    }
-
+    // soundEffects
+    // mute
     get soundEffectsMute() {
         return this._soundEffectsMute;
     }
@@ -115,6 +135,34 @@ class SoundManager {
         }
     }
 
+    // volume
+    get soundEffectsVolume() {
+        return this._soundEffectsVolume;
+    }
+
+    set soundEffectsVolume(value) {
+        this._soundEffectsVolume = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setVolume(value);
+        }
+    }
+
+    // soundEffects2
+    // mute
+    get soundEffects2Mute() {
+        return this._soundEffects2Mute;
+    }
+
+    set soundEffects2Mute(value) {
+        this._soundEffects2Mute = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
+            soundEffects[i].setMute(value);
+        }
+    }
+
+    // volume
     get soundEffects2Volume() {
         return this._soundEffects2Volume;
     }
@@ -127,17 +175,6 @@ class SoundManager {
         }
     }
 
-    get soundEffects2Mute() {
-        return this._soundEffects2Mute;
-    }
-
-    set soundEffects2Mute(value) {
-        this._soundEffects2Mute = value;
-        var soundEffects = this.soundEffects;
-        for (var i = 0, cnt = soundEffects2.length; i < cnt; i++) {
-            soundEffects[i].setMute(value);
-        }
-    }
 }
 
 Object.assign(
