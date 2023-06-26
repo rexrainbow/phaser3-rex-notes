@@ -28,6 +28,9 @@ export default {
                         this.backgroundMusic.destroy();
                         this.backgroundMusic = undefined;
                     }
+                    if (this.backgroundMusicQueue.length > 0) {
+                        this.setCurrentBackgroundMusic(this.backgroundMusicQueue.shift());
+                    }
                 }, this)
                 .once('destroy', function () {
                     if (this.backgroundMusic === music) {
@@ -55,6 +58,16 @@ export default {
         if (this.backgroundMusicFadeTime > 0) {
             this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
         }
+        return this;
+    },
+
+    queueBackgroundMusic(key) {
+        if (!this.backgroundMusic) {
+            this.playBackgroundMusic(key);
+            return this;
+        }
+
+        this.backgroundMusicQueue.push(key);
         return this;
     },
 
