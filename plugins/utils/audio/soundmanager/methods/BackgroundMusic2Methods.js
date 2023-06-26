@@ -136,6 +136,13 @@ export default {
         return this;
     },
 
+    setBackgroundMusic2Rate(rate) {
+        if (this.backgroundMusic2) {
+            this.backgroundMusic2.setRate(rate);
+        }
+        return this;
+    },
+
     setBackgroundMusic2Detune(detune) {
         if (this.backgroundMusic2) {
             this.backgroundMusic2.setDetune(detune);

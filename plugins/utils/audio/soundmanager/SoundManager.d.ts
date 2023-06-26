@@ -50,6 +50,8 @@ declare class SoundManager {
     setBackgroundMusicVolume(volume: number): this;
     backgroundMusicVolume: number;
 
+    setBackgroundMusicRate(rate: number): this;
+
     setBackgroundMusicDetune(detune: number): this;
 
     // Background music2
@@ -78,6 +80,8 @@ declare class SoundManager {
 
     setBackgroundMusicVolume2(volume: number): this;
     backgroundMusicVolume2: number;
+
+    setBackgroundMusic2Rate(rate: number): this;
 
     setBackgroundMusic2Detune(detune: number): this;
 
