@@ -28,9 +28,6 @@ export default {
                         this.backgroundMusic2.destroy();
                         this.backgroundMusic2 = undefined;
                     }
-                    if (this.backgroundMusic2Queue.length > 0) {
-                        this.setCurrentBackgroundMusic2(this.backgroundMusic2Queue.shift());
-                    }
                 }, this)
                 .once('destroy', function () {
                     if (this.backgroundMusic2 === music) {
@@ -58,16 +55,6 @@ export default {
         if (this.backgroundMusic2FadeTime > 0) {
             this.fadeInBackgroundMusic2(this.backgroundMusic2FadeTime);
         }
-        return this;
-    },
-
-    queueBackgroundMusic2(key) {
-        if (!this.backgroundMusic) {
-            this.playBackgroundMusic2(key);
-            return this;
-        }
-
-        this.backgroundMusic2Queue.push(key);
         return this;
     },
 
@@ -133,7 +120,7 @@ export default {
         this.backgroundMusic2Volume = volume;
         return this;
     },
-
+    
     setBackgroundMusic2Mute(mute) {
         if (mute === undefined) {
             mute = true;

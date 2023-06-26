@@ -32,8 +32,6 @@ declare class SoundManager {
 
     playBackgroundMusic(key: string): this;
 
-    queueBackgroundMusic(key: string): this;
-
     pauseBackgroundMusic(): this;
 
     resumeBackgroundMusic(): this;
@@ -59,8 +57,6 @@ declare class SoundManager {
     getBackgroundMusic2(): Phaser.Sound.BaseSound;
 
     playBackgroundMusic2(key: string): this;
-
-    queueBackgroundMusic2(key: string): this;
 
     pauseBackgroundMusic2(): this;
 

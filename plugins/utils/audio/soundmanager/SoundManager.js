@@ -9,14 +9,12 @@ class SoundManager {
 
         // Background music will be (fade out)destroyed when play next one.
         this.backgroundMusic = undefined;
-        this.backgroundMusicQueue = [];
         this._backgroundMusicVolume = GetValue(config, 'bgm.volume', 1);
 
         this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
         this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 500));
 
         this.backgroundMusic2 = undefined;
-        this.backgroundMusic2Queue = [];
         this._backgroundMusic2Volume = GetValue(config, 'bgm2.volume', 1);
 
         this.setBackgroundMusic2LoopValue(GetValue(config, 'bgm2.loop', true));
@@ -46,13 +44,11 @@ class SoundManager {
             this.backgroundMusic.destroy();
         }
         this.backgroundMusic = undefined;
-        this.backgroundMusicQueue = undefined;
 
         if (this.backgroundMusic2) {
             this.backgroundMusic2.destroy();
         }
         this.backgroundMusic2 = undefined;
-        this.backgroundMusic2Queue = undefined;
 
         if (this.soundEffects.length) {
             for (var i = this.soundEffects.length - 1; i >= 0; i--) {
