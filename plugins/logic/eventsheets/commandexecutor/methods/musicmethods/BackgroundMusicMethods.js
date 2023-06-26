@@ -1,11 +1,18 @@
 export default {
-    bgm({ volume } = {}, manager) {
+    bgm({ volume, mute, unmute } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
+
         if (volume !== undefined) {
             soundManager.setBackgroundMusicVolume(volume);
+        }
+
+        if (mute !== undefined) {
+            soundManager.setBackgroundMusicMute(mute);
+        } else if (unmute !== undefined) {
+            soundManager.setBackgroundMusicMute(!unmute);
         }
     },
 
@@ -31,11 +38,11 @@ export default {
         if (detune !== undefined) {
             soundManager.setBackgroundMusicDetune(detune);
         }
-        
+
         if (rate !== undefined) {
             soundManager.setBackgroundMusicRate(rate);
         }
-        
+
         if (fadeIn > 0) {
             soundManager.fadeInBackgroundMusic(fadeIn);
         }

@@ -641,11 +641,12 @@ This command executor provides
 ```
 
 bgm
-  volume=1
-
+  volume
+  mute
+  unmute
 ```
 
-- `volume`
+- Command name : `bgm`, `bgm2`, `se`, `se2`
 
 ##### Play sound
 

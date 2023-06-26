@@ -1,10 +1,19 @@
 export default {
-    se2({ volume = 1 } = {}, manager) {
+    se2({ volume, mute, unmute } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
-        soundManager.setSoundEffect2Volume(volume);
+
+        if (volume !== undefined) {
+            soundManager.setSoundEffect2Volume(volume);
+        }
+
+        if (mute !== undefined) {
+            soundManager.setSoundEffect2Mute(mute);
+        } else if (unmute !== undefined) {
+            soundManager.setSoundEffect2Mute(!unmute);
+        }
     },
 
     'se2.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, manager) {

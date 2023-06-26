@@ -1,5 +1,5 @@
 export default {
-    bgm2({ volume } = {}, manager) {
+    bgm2({ volume, mute, unmute } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -7,6 +7,12 @@ export default {
 
         if (volume !== undefined) {
             soundManager.setBackgroundMusic2Volume(volume);
+        }
+
+        if (mute !== undefined) {
+            soundManager.setBackgroundMusic2Mute(mute);
+        } else if (unmute !== undefined) {
+            soundManager.setBackgroundMusic2Mute(!unmute);
         }
     },
 
