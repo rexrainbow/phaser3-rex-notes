@@ -18,6 +18,8 @@ declare namespace TransitionImage {
 
         dir?: TransitionDirectionType,
 
+        mode?: string,
+
         onStart?: TransitionCallbackType,
         onStartScope?: unknown,
 
@@ -84,9 +86,18 @@ declare class TransitionImage extends ContainerLite {
 
     setMaskEnable(enable?: boolean): this;
 
-    transit(texture: string, frame?: string): this;
+    transit(texture: string, frame?: string, mode?: string): this;
 
     transit(
+        config: TransitionImage.ITransitConfig
+    ): this;
+
+    addTransitionMode(
+        name: string,
+        config: TransitionImage.ITransitConfig
+    ): this;
+
+    addTransitionMode(
         config: TransitionImage.ITransitConfig
     ): this;
 

@@ -8,6 +8,16 @@ var DirMode = {
     in: 1
 }
 
+var GetValueFromConfigs = function (key, defaultValue, ...configs) {
+    for (var i = 0, cnt = configs.length; i < cnt; i++) {
+        var config = configs[i];
+        if (config && config.hasOwnProperty(key)) {
+            return config[key];
+        }
+    }
+    return defaultValue;
+}
+
 export default {
     setTransitionDirection(dir) {
         if (typeof (dir) === 'string') {
@@ -32,11 +42,19 @@ export default {
         return this;
     },
 
-    transit(texture, frame) {        
+    transit(texture, frame, mode) {
         if (this.isRunning) {
             this.ignoreCompleteEvent = true;
             this.stop();
             this.ignoreCompleteEvent = false;
+        }
+
+        if (mode !== undefined) {
+            texture = {
+                key: texture,
+                frame: frame,
+                mode: mode
+            }
         }
 
         if (IsPlainObject(texture)) {
@@ -44,33 +62,39 @@ export default {
             texture = GetValue(config, 'key', undefined);
             frame = GetValue(config, 'frame', undefined);
 
-            this
-                .setDuration(GetValue(config, 'duration', this.duration))
-                .setEaseFunction(GetValue(config, 'ease', this.easeFunction))
-                .setTransitionDirection(GetValue(config, 'dir', this.dir))
+            mode = GetValue(config, 'mode');
+            var modeConfig;
+            if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
+                modeConfig = this.transitionModes[mode];
+            }
 
-            var maskGameObject = GetValue(config, 'mask', undefined);
+            this
+                .setDuration(GetValueFromConfigs('duration', this.duration, config, modeConfig))
+                .setEaseFunction(GetValueFromConfigs('ease', this.easeFunction, config, modeConfig))
+                .setTransitionDirection(GetValueFromConfigs('dir', this.dir, config, modeConfig))
+
+            var maskGameObject = GetValueFromConfigs('mask', undefined, config, modeConfig);
             if (maskGameObject) {
                 this.setMaskGameObject(maskGameObject);
             }
             this.setMaskEnable(maskGameObject === true);
 
-            var onStart = GetValue(config, 'onStart', undefined);
-            var onProgress = GetValue(config, 'onProgress', undefined);
-            var onComplete = GetValue(config, 'onComplete', undefined);
+            var onStart = GetValueFromConfigs('onStart', undefined, config, modeConfig);
+            var onProgress = GetValueFromConfigs('onProgress', undefined, config, modeConfig);
+            var onComplete = GetValueFromConfigs('onComplete', undefined, config, modeConfig);
             if ((onStart !== undefined) || (onProgress !== undefined) || (onComplete !== undefined)) {
                 this
                     .setTransitionStartCallback(
                         onStart,
-                        GetValue(config, 'onStartScope', undefined)
+                        GetValueFromConfigs('onStartScope', undefined, config, modeConfig)
                     )
                     .setTransitionProgressCallback(
                         onProgress,
-                        GetValue(config, 'onProgressScope', undefined)
+                        GetValueFromConfigs('onProgressScope', undefined, config, modeConfig)
                     )
                     .setTransitionCompleteCallback(
                         onComplete,
-                        GetValue(config, 'onCompleteScope', undefined)
+                        GetValueFromConfigs('onCompleteScope', undefined, config, modeConfig)
                     )
             }
         }
@@ -78,6 +102,21 @@ export default {
         this.setNextTexture(texture, frame);
 
         this.start();
+        return this;
+    },
+
+    addTransitionMode(name, config) {
+        if (this.transitionModes === undefined) {
+            this.transitionModes = {};
+        }
+
+        if (IsPlainObject(name)) {
+            config = name;
+            name = config.name;
+            delete config.name;
+        }
+
+        this.transitionModes[name] = config;
         return this;
     },
 

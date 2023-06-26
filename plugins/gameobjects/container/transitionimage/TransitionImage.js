@@ -45,6 +45,7 @@ class TransitionImage extends Container {
         this.maskGameObject = undefined;
         this.cellImages = [];
         this.imagesPool = [];
+        this.transitionModes = undefined;
 
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);
@@ -99,6 +100,7 @@ class TransitionImage extends Container {
         this.maskGameObject = undefined;
         this.cellImages.length = 0;
         this.imagesPool.length = 0;
+        this.transitionModes = undefined;
 
         super.destroy(fromScene);
 
