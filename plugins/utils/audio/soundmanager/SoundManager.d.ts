@@ -106,6 +106,9 @@ declare class SoundManager {
     setSoundEffectVolume(volume: number, lastSoundEffect?: boolean): this;
     soundEffectsVolume: number;
 
+    setSoundEffectDetune(detune?: number, lastSoundEffect?: boolean): this;
+
+    setSoundEffectRate(rate?: number, lastSoundEffect?: boolean): this;
 
     // Sound effect2
     getSoundEffects2(): Phaser.Sound.BaseSound[];
@@ -127,5 +130,9 @@ declare class SoundManager {
 
     setSoundEffect2Volume(volume: number, lastSoundEffect?: boolean): this;
     soundEffects2Volume: number;
+
+    setSoundEffect2Detune(detune?: number, lastSoundEffect?: boolean): this;
+
+    setSoundEffect2Rate(rate?: number, lastSoundEffect?: boolean): this;
 
 }

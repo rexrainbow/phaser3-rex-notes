@@ -652,9 +652,11 @@ bgm
 ```
 bgm.play
   key=
-  volume
+  // volume
+  // detune
+  // rate
   fadeIn=0
-  loop
+  // loop
   wait=false
 ```
 

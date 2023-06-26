@@ -7,7 +7,7 @@ export default {
         soundManager.setSoundEffect2Volume(volume);
     },
 
-    'se2.play'({ key, volume, fadeIn = 0, wait = false } = {}, manager) {
+    'se2.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -19,8 +19,17 @@ export default {
         soundManager.playSoundEffect2(key);
 
         if (volume !== undefined) {
-            soundManager.setSoundEffect2Volume(volume);
+            soundManager.setSoundEffect2Volume(volume, true);
         }
+
+        if (detune !== undefined) {
+            soundManager.setSoundEffect2Detune(detune, true);
+        }
+
+        if (rate !== undefined) {
+            soundManager.setSoundEffect2Rate(rate, true);
+        }
+
         if (fadeIn > 0) {
             soundManager.fadeInSoundEffect2(fadeIn);
         }

@@ -122,4 +122,41 @@ export default {
         return this;
     },
 
+    setSoundEffectDetune(detune, lastSoundEffect) {
+        if (lastSoundEffect === undefined) {
+            lastSoundEffect = false;
+        }
+
+        var soundEffects;
+        if (lastSoundEffect) {
+            soundEffects = [this.getLastSoundEffect()];
+        } else {
+            soundEffects = this.soundEffects;
+        }
+
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setDetune(detune);
+        }
+
+        return this;
+    },
+
+    setSoundEffectRate(rate, lastSoundEffect) {
+        if (lastSoundEffect === undefined) {
+            lastSoundEffect = false;
+        }
+
+        var soundEffects;
+        if (lastSoundEffect) {
+            soundEffects = [this.getLastSoundEffect()];
+        } else {
+            soundEffects = this.soundEffects;
+        }
+
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setRate(rate);
+        }
+
+        return this;
+    },
 }

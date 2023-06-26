@@ -1,13 +1,15 @@
 export default {
-    bgm({ volume = 1 } = {}, manager) {
+    bgm({ volume } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
         }
-        soundManager.setBackgroundMusicVolume(volume);
+        if (volume !== undefined) {
+            soundManager.setBackgroundMusicVolume(volume);
+        }
     },
 
-    'bgm.play'({ key, volume, fadeIn = 0, loop, wait = false } = {}, manager) {
+    'bgm.play'({ key, volume, detune, rate, fadeIn = 0, loop, wait = false } = {}, manager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -25,6 +27,15 @@ export default {
         if (volume !== undefined) {
             soundManager.setBackgroundMusicVolume(volume);
         }
+
+        if (detune !== undefined) {
+            soundManager.setBackgroundMusicDetune(detune);
+        }
+        
+        if (rate !== undefined) {
+            soundManager.setBackgroundMusicRate(rate);
+        }
+        
         if (fadeIn > 0) {
             soundManager.fadeInBackgroundMusic(fadeIn);
         }
