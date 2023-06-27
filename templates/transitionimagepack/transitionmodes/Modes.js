@@ -11,3 +11,11 @@ export const PushLeft = 'pushLeft';
 export const PushRight = 'pushRight';
 export const PushUp = 'pushUp';
 export const PushDown = 'pushDown';
+
+// Zoom modes
+export const ZoomOut = 'zoomOut';
+export const ZoomIn = 'zoomIn';
+export const ZoomInOut = 'zoomInOut';
+
+// Shader effect modes
+export const Pixellate = 'pixellate';
