@@ -34530,6 +34530,14 @@
   var PushUp = 'pushUp';
   var PushDown = 'pushDown';
 
+  // Zoom modes
+  var ZoomOut = 'zoomOut';
+  var ZoomIn = 'zoomIn';
+  var ZoomInOut = 'zoomInOut';
+
+  // Shader effect modes
+  var Pixellate = 'pixellate';
+
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
       ease: 'Linear',
@@ -34710,7 +34718,97 @@
     });
   };
 
-  var AddModeCallbacks = [AddSlideAwayModes, AddSlideModes, AddSliderModes];
+  var AddZoomModes = function AddZoomModes(image) {
+    image.addTransitionMode(ZoomOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var scale = 1 - t;
+        parent.setChildScale(currentImage, scale, scale);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildScale(currentImage, 1, 1);
+      }
+    }).addTransitionMode(ZoomIn, {
+      ease: 'Linear',
+      dir: 'in',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var scale = t;
+        parent.setChildScale(nextImage, scale, scale);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildScale(nextImage, 1, 1);
+      }
+    }).addTransitionMode(ZoomInOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var scale;
+        if (t < 0.5) {
+          scale = 1 - t * 2;
+          parent.setChildScale(currentImage, scale, scale);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          scale = (t - 0.5) * 2;
+          parent.setChildScale(nextImage, scale, scale);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildScale(currentImage, 1, 1);
+        parent.setChildVisible(currentImage, true);
+        parent.setChildScale(nextImage, 1, 1);
+        parent.setChildVisible(nextImage, true);
+      }
+    });
+  };
+
+  var AddPixellateMode = function AddPixellateMode(image) {
+    image.addTransitionMode(Pixellate, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        currentImage.effect = currentImage.preFX.addPixelate(0);
+        nextImage.effect = nextImage.preFX.addPixelate(0);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = t * 2;
+          var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
+          currentImage.effect.amount = Math.ceil(maxAmount * t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          t = (t - 0.5) * 2;
+          var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
+          nextImage.effect.amount = Math.ceil(maxAmount * (1 - t));
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        currentImage.preFX.remove(currentImage.effect);
+        delete currentImage.effect;
+        parent.setChildVisible(currentImage, true);
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    });
+  };
+
+  var AddModeCallbacks = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode];
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);
     var _super = _createSuper(TransitionImagePack);
