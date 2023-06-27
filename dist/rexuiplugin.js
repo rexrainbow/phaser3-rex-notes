@@ -34532,7 +34532,6 @@
 
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34545,7 +34544,6 @@
         parent.setChildLocalPosition(currentImage, 0, 0);
       }
     }).addTransitionMode(SlideAwayLeft, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34558,7 +34556,6 @@
         parent.setChildLocalPosition(currentImage, 0, 0);
       }
     }).addTransitionMode(SlideAwayDown, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34571,7 +34568,6 @@
         parent.setChildLocalPosition(currentImage, 0, 0);
       }
     }).addTransitionMode(SlideAwayUp, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34588,7 +34584,6 @@
 
   var AddSlideModes = function AddSlideModes(image) {
     image.addTransitionMode(SlideLeft, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34601,7 +34596,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(SlideRight, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34614,7 +34608,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(SlideUp, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34627,7 +34620,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(SlideDown, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34644,7 +34636,6 @@
 
   var AddSliderModes = function AddSliderModes(image) {
     image.addTransitionMode(PushRight, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34663,7 +34654,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(PushLeft, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34682,7 +34672,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(PushDown, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,
@@ -34701,7 +34690,6 @@
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
     }).addTransitionMode(PushUp, {
-      duration: 1000,
       ease: 'Linear',
       dir: 'out',
       mask: true,

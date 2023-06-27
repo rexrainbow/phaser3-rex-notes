@@ -5,7 +5,7 @@ import {
 var AddSlideAwayModes = function (image) {
     image
         .addTransitionMode(SlideAwayRight, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -18,7 +18,7 @@ var AddSlideAwayModes = function (image) {
             },
         })
         .addTransitionMode(SlideAwayLeft, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -31,7 +31,7 @@ var AddSlideAwayModes = function (image) {
             },
         })
         .addTransitionMode(SlideAwayDown, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -44,7 +44,7 @@ var AddSlideAwayModes = function (image) {
             },
         })
         .addTransitionMode(SlideAwayUp, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },

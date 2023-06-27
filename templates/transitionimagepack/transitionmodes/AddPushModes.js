@@ -5,7 +5,7 @@ import {
 var AddSliderModes = function (image) {
     image
         .addTransitionMode(PushRight, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -24,7 +24,7 @@ var AddSliderModes = function (image) {
             },
         })
         .addTransitionMode(PushLeft, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -43,7 +43,7 @@ var AddSliderModes = function (image) {
             },
         })
         .addTransitionMode(PushDown, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -62,7 +62,7 @@ var AddSliderModes = function (image) {
             },
         })
         .addTransitionMode(PushUp, {
-            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
