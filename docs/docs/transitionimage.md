@@ -19,6 +19,7 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
     - [3 columns](https://codepen.io/rexrainbow/pen/bGRwqdL)
 - Morph custom mask game object
     - [Pie mask](https://codepen.io/rexrainbow/pen/OJgXMmw)
+- [Transition modes](https://codepen.io/rexrainbow/pen/abQpjZr)
 
 ## Usage
 
