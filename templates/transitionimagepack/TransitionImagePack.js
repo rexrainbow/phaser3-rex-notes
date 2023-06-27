@@ -1,7 +1,11 @@
 import Base from "../../plugins/transitionimage.js";
-import AddSliderModes from "./transitionmodes/AddSlideModes.js";
+import AddSlideAwayModes from "./transitionmodes/AddSlideAwayModes.js";
+import AddSlideModes from "./transitionmodes/AddSlideModes.js";
+import AddPushModes from './transitionmodes/AddPushModes.js';
 
-var AddModeCallbacks = [AddSliderModes];
+var AddModeCallbacks = [
+    AddSlideAwayModes, AddSlideModes, AddPushModes
+];
 
 class TransitionImagePack extends Base {
     constructor(scene, x, y, texture, frame, config) {

@@ -1,61 +1,86 @@
 import {
-    SlideLeft, SlideRight, SlideUp, SlideDown,
+    PushLeft, PushRight, PushUp, PushDown,
 } from './Modes.js';
 
-var AddSlideModes = function (image) {
+var AddSliderModes = function (image) {
     image
-        .addTransitionMode(SlideLeft, {
-            duration: 1000, ease: 'Linear', dir: 'in', mask: true,
+        .addTransitionMode(PushRight, {
+            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
+                // SlideAwayRight
+                var x = currentImage.width * (t);
+                parent.setChildLocalPosition(currentImage, x, 0);
+
+                // SlideLeft
                 var x = nextImage.width * (t - 1);
                 parent.setChildLocalPosition(nextImage, x, 0);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalPosition(currentImage, 0, 0);
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideRight, {
-            duration: 1000, ease: 'Linear', dir: 'in', mask: true,
+        .addTransitionMode(PushLeft, {
+            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
+                // SlideAwayLeft
+                var x = currentImage.width * (-t);
+                parent.setChildLocalPosition(currentImage, x, 0);
+
+                // SlideRight
                 var x = nextImage.width * (1 - t);
                 parent.setChildLocalPosition(nextImage, x, 0);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalPosition(currentImage, 0, 0);
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideUp, {
-            duration: 1000, ease: 'Linear', dir: 'in', mask: true,
+        .addTransitionMode(PushDown, {
+            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
+                // SlideAwayDown
+                var y = currentImage.height * (t);
+                parent.setChildLocalPosition(currentImage, 0, y);
+
+                // SlideUp
                 var y = nextImage.height * (t - 1);
                 parent.setChildLocalPosition(nextImage, 0, y);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalPosition(currentImage, 0, 0);
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideDown, {
-            duration: 1000, ease: 'Linear', dir: 'in', mask: true,
+        .addTransitionMode(PushUp, {
+            duration: 1000, ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
+                // SlideAwayUp
+                var y = currentImage.height * (-t);
+                parent.setChildLocalPosition(currentImage, 0, y);
+
+                // SlideDown
                 var y = nextImage.height * (1 - t);
                 parent.setChildLocalPosition(nextImage, 0, y);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalPosition(currentImage, 0, 0);
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
+
 }
 
-export default AddSlideModes;
+export default AddSliderModes;

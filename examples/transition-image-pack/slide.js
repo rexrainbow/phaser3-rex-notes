@@ -21,7 +21,8 @@ class Demo extends Phaser.Scene {
 
         var transitionModes = [
             'slideAwayRight', 'slideAwayLeft', 'slideAwayUp', 'slideAwayDown',
-            'slideRight', 'slideLeft', 'slideUp', 'slideDown'
+            'slideRight', 'slideLeft', 'slideUp', 'slideDown',
+            'pushRight', 'pushLeft', 'pushUp', 'pushDown',
         ];
         var idx = 0;
         this.input.on('pointerdown', function () {
