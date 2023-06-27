@@ -21,6 +21,7 @@ import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import TransitionImage from './transitionimage/TransitionImage';
+import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
@@ -148,6 +149,7 @@ export {
     CustomShapes,
     CustomProgress,
     TransitionImage,
+    TransitionImagePack,
     ImageBox,
     NinePatch,
     NinePatch2,

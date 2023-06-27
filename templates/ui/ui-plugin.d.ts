@@ -47,7 +47,6 @@ import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory';
 import LineProgressFactory from './lineprogress/Factory';
-// import MakerFactory from './maker/Factory';
 import MenuFactory from './menu/Factory';
 import NameValueLabelFactory from './namevaluelabel/Factory';
 import NinePatchFactory from './ninepatch/Factory';
@@ -89,6 +88,8 @@ import ToastFactory from './toast/Factory';
 import ToggleSwitchFactory from './toggleswitch/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
 import TriangleFactory from './triangle/Factory';
+import TransitionImageFactory from './transitionimage/Factory';
+import TransitionImagePackFactory from './transitionimagepack/Factory';
 import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -156,7 +157,6 @@ declare class Factories {
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
     lineProgressCanvas: typeof LineProgressCanvasFactory;
-    // maker: typeof MakerFactory;
     menu: typeof MenuFactory;
     nameValueLabel: typeof NameValueLabelFactory;
     ninePatch: typeof NinePatchFactory;
@@ -197,6 +197,8 @@ declare class Factories {
     toggleSwitch: typeof ToggleSwitchFactory;
     touchEventStop: typeof TouchEventStopFactory;
     triangle: typeof TriangleFactory;
+    transitionImage: typeof TransitionImageFactory;
+    transitionImagePack: typeof TransitionImagePackFactory;
     tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
 }
@@ -326,6 +328,8 @@ import ToastClass from './toast/Toast';
 import ToggleSwitchClass from './toggleswitch/ToggleSwitch';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
 import TriangleClass from './triangle/Triangle';
+import TransitionImageClass from './transitionimage/TransitionImage';
+import TransitionImagePackClass from './transitionimagepack/TransitionImagePack';
 import TweakerClass from './tweaker/Tweaker';
 
 declare namespace UIPlugin {
@@ -416,5 +420,7 @@ declare namespace UIPlugin {
     type ToggleSwitch = ToggleSwitchClass;
     type TouchEventStop = TouchEventStopClass;
     type Triangle = TriangleClass;
+    type TransitionImage = TransitionImageClass;
+    type TransitionImagePack = TransitionImagePackClass;
     type Tweaker = TweakerClass;
 }

@@ -24,6 +24,7 @@ import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
+import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
@@ -150,6 +151,7 @@ export {
     CustomShapes,
     CustomProgress,
     TransitionImage,
+    TransitionImagePack,
     ImageBox,
 
     Container,
