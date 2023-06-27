@@ -32,6 +32,7 @@ module.exports = {
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
     'imageboxplugin': './plugins/imagebox-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
+    'transitionimagepackplugin': './templates/transitionimagepack/transitionimagepack-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',
     'live2dplugin': ['./plugins/live2d-plugin.js', true],

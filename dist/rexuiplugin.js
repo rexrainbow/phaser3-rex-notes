@@ -34516,6 +34516,235 @@
   });
   SetValue(window, 'RexPlugins.UI.TransitionImage', TransitionImage);
 
+  // Slide modes
+  var SlideLeft = 'slideLeft';
+  var SlideRight = 'slideRight';
+  var SlideUp = 'slideUp';
+  var SlideDown = 'slideDown';
+  var SlideAwayLeft = 'slideAwayLeft';
+  var SlideAwayRight = 'slideAwayRight';
+  var SlideAwayUp = 'slideAwayUp';
+  var SlideAwayDown = 'slideAwayDown';
+  var PushLeft = 'pushLeft';
+  var PushRight = 'pushRight';
+  var PushUp = 'pushUp';
+  var PushDown = 'pushDown';
+
+  var AddSlideAwayModes = function AddSlideAwayModes(image) {
+    image.addTransitionMode(SlideAwayRight, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var x = currentImage.width * t;
+        parent.setChildLocalPosition(currentImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+      }
+    }).addTransitionMode(SlideAwayLeft, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var x = currentImage.width * -t;
+        parent.setChildLocalPosition(currentImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+      }
+    }).addTransitionMode(SlideAwayDown, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var y = currentImage.height * t;
+        parent.setChildLocalPosition(currentImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+      }
+    }).addTransitionMode(SlideAwayUp, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var y = currentImage.height * -t;
+        parent.setChildLocalPosition(currentImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+      }
+    });
+  };
+
+  var AddSlideModes = function AddSlideModes(image) {
+    image.addTransitionMode(SlideLeft, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'in',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var x = nextImage.width * (t - 1);
+        parent.setChildLocalPosition(nextImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(SlideRight, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'in',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var x = nextImage.width * (1 - t);
+        parent.setChildLocalPosition(nextImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(SlideUp, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'in',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var y = nextImage.height * (t - 1);
+        parent.setChildLocalPosition(nextImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(SlideDown, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'in',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var y = nextImage.height * (1 - t);
+        parent.setChildLocalPosition(nextImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    });
+  };
+
+  var AddSliderModes = function AddSliderModes(image) {
+    image.addTransitionMode(PushRight, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        // SlideAwayRight
+        var x = currentImage.width * t;
+        parent.setChildLocalPosition(currentImage, x, 0);
+
+        // SlideLeft
+        var x = nextImage.width * (t - 1);
+        parent.setChildLocalPosition(nextImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(PushLeft, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        // SlideAwayLeft
+        var x = currentImage.width * -t;
+        parent.setChildLocalPosition(currentImage, x, 0);
+
+        // SlideRight
+        var x = nextImage.width * (1 - t);
+        parent.setChildLocalPosition(nextImage, x, 0);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(PushDown, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        // SlideAwayDown
+        var y = currentImage.height * t;
+        parent.setChildLocalPosition(currentImage, 0, y);
+
+        // SlideUp
+        var y = nextImage.height * (t - 1);
+        parent.setChildLocalPosition(nextImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    }).addTransitionMode(PushUp, {
+      duration: 1000,
+      ease: 'Linear',
+      dir: 'out',
+      mask: true,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        // SlideAwayUp
+        var y = currentImage.height * -t;
+        parent.setChildLocalPosition(currentImage, 0, y);
+
+        // SlideDown
+        var y = nextImage.height * (1 - t);
+        parent.setChildLocalPosition(nextImage, 0, y);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalPosition(currentImage, 0, 0);
+        parent.setChildLocalPosition(nextImage, 0, 0);
+      }
+    });
+  };
+
+  var AddModeCallbacks = [AddSlideAwayModes, AddSlideModes, AddSliderModes];
+  var TransitionImagePack = /*#__PURE__*/function (_Base) {
+    _inherits(TransitionImagePack, _Base);
+    var _super = _createSuper(TransitionImagePack);
+    function TransitionImagePack(scene, x, y, texture, frame, config) {
+      var _this;
+      _classCallCheck(this, TransitionImagePack);
+      _this = _super.call(this, scene, x, y, texture, frame, config);
+      for (var i = 0, cnt = AddModeCallbacks.length; i < cnt; i++) {
+        AddModeCallbacks[i](_assertThisInitialized(_this));
+      }
+      return _this;
+    }
+    return _createClass(TransitionImagePack);
+  }(TransitionImage);
+
+  ObjectFactory.register('transitionImagePack', function (x, y, texture, frame, config) {
+    var gameObject = new TransitionImagePack(this.scene, x, y, texture, frame, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.TransitionImagePack', TransitionImagePack);
+
   var FitTo = function FitTo(child, parent, out) {
     if (out === undefined) {
       out = {};
