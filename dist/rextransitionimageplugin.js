@@ -3127,6 +3127,15 @@
     out: 0,
     "in": 1
   };
+  var GetValueFromConfigs = function GetValueFromConfigs(key, defaultValue) {
+    for (var i = 0, cnt = arguments.length <= 2 ? 0 : arguments.length - 2; i < cnt; i++) {
+      var config = i + 2 < 2 || arguments.length <= i + 2 ? undefined : arguments[i + 2];
+      if (config && config.hasOwnProperty(key)) {
+        return config[key];
+      }
+    }
+    return defaultValue;
+  };
   var TransitionMethods = {
     setTransitionDirection: function setTransitionDirection(dir) {
       if (typeof dir === 'string') {
@@ -3147,31 +3156,55 @@
       this.nextImage.setTexture(texture, frame);
       return this;
     },
-    transit: function transit(texture, frame) {
+    transit: function transit(texture, frame, mode) {
       if (this.isRunning) {
         this.ignoreCompleteEvent = true;
         this.stop();
         this.ignoreCompleteEvent = false;
       }
+      if (mode !== undefined) {
+        texture = {
+          key: texture,
+          frame: frame,
+          mode: mode
+        };
+      }
       if (IsPlainObject$2(texture)) {
         var config = texture;
         texture = GetValue$2(config, 'key', undefined);
         frame = GetValue$2(config, 'frame', undefined);
-        this.setDuration(GetValue$2(config, 'duration', this.duration)).setEaseFunction(GetValue$2(config, 'ease', this.easeFunction)).setTransitionDirection(GetValue$2(config, 'dir', this.dir));
-        var maskGameObject = GetValue$2(config, 'mask', undefined);
+        mode = GetValue$2(config, 'mode');
+        var modeConfig;
+        if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
+          modeConfig = this.transitionModes[mode];
+        }
+        this.setDuration(GetValueFromConfigs('duration', this.duration, config, modeConfig)).setEaseFunction(GetValueFromConfigs('ease', this.easeFunction, config, modeConfig)).setTransitionDirection(GetValueFromConfigs('dir', this.dir, config, modeConfig));
+        var maskGameObject = GetValueFromConfigs('mask', undefined, config, modeConfig);
         if (maskGameObject) {
           this.setMaskGameObject(maskGameObject);
         }
         this.setMaskEnable(maskGameObject === true);
-        var onStart = GetValue$2(config, 'onStart', undefined);
-        var onProgress = GetValue$2(config, 'onProgress', undefined);
-        var onComplete = GetValue$2(config, 'onComplete', undefined);
+        var onStart = GetValueFromConfigs('onStart', undefined, config, modeConfig);
+        var onProgress = GetValueFromConfigs('onProgress', undefined, config, modeConfig);
+        var onComplete = GetValueFromConfigs('onComplete', undefined, config, modeConfig);
         if (onStart !== undefined || onProgress !== undefined || onComplete !== undefined) {
-          this.setTransitionStartCallback(onStart, GetValue$2(config, 'onStartScope', undefined)).setTransitionProgressCallback(onProgress, GetValue$2(config, 'onProgressScope', undefined)).setTransitionCompleteCallback(onComplete, GetValue$2(config, 'onCompleteScope', undefined));
+          this.setTransitionStartCallback(onStart, GetValueFromConfigs('onStartScope', undefined, config, modeConfig)).setTransitionProgressCallback(onProgress, GetValueFromConfigs('onProgressScope', undefined, config, modeConfig)).setTransitionCompleteCallback(onComplete, GetValueFromConfigs('onCompleteScope', undefined, config, modeConfig));
         }
       }
       this.setNextTexture(texture, frame);
       this.start();
+      return this;
+    },
+    addTransitionMode: function addTransitionMode(name, config) {
+      if (this.transitionModes === undefined) {
+        this.transitionModes = {};
+      }
+      if (IsPlainObject$2(name)) {
+        config = name;
+        name = config.name;
+        delete config.name;
+      }
+      this.transitionModes[name] = config;
       return this;
     },
     start: function start() {
@@ -3646,6 +3679,7 @@
       _this.maskGameObject = undefined;
       _this.cellImages = [];
       _this.imagesPool = [];
+      _this.transitionModes = undefined;
 
       // Transition parameters
       var onStart = GetValue(config, 'onStart', undefined);
@@ -3683,6 +3717,7 @@
         this.maskGameObject = undefined;
         this.cellImages.length = 0;
         this.imagesPool.length = 0;
+        this.transitionModes = undefined;
         _get(_getPrototypeOf(TransitionImage.prototype), "destroy", this).call(this, fromScene);
         this.onStartCallback = undefined;
         this.onStartCallbackScope = undefined;

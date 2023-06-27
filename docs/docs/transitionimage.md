@@ -214,6 +214,10 @@ image.transit({
 })
 ```
 
+or
+
+
+
 - `mask` : Mask game object.
     - `true` : Default graphics game object. Also apply this mask to current and next textures/[images](image.md)
     - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
@@ -234,6 +238,49 @@ image.transit({
             ```
 
 Fire `'complete'` event when transition completed.
+
+#### Register transtion mode
+
+- Register transtion mode
+    ```javascript
+    image.addTransitionMode(modeName, {
+        // dir: 0,
+        // onStart: function(parent, currentImage, nextImage, t) { },
+        // onStartScope: undefined,
+        // onProgress: function(parent, currentImage, nextImage, t) { },
+        // onProgressScope: undefined,
+        // onComplete: function(parent, currentImage, nextImage, t) { },
+        // onCompleteScope: undefined,
+        // duration: 1000,
+        // ease: 'Linear',
+        // mask: undefined,
+    });
+    ```
+- Trnasit by transition mode
+    ```javascript
+    image.transit(texture, frame, modeName);
+    ```
+    or
+    ```javascript
+    image.transit({
+        key: undefined,
+        // frame: undefined,
+
+        mode: mode,
+        // dir: 0,
+        // onStart: function(parent, currentImage, nextImage, t) { },
+        // onStartScope: undefined,
+        // onProgress: function(parent, currentImage, nextImage, t) { },
+        // onProgressScope: undefined,
+        // onComplete: function(parent, currentImage, nextImage, t) { },
+        // onCompleteScope: undefined,
+        // duration: 1000,
+        // ease: 'Linear',
+        // mask: undefined,
+    })
+    ```
+    - Can override configuration of transition mode
+
 
 #### Current texture
 

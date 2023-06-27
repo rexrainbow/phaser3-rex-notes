@@ -25979,6 +25979,7 @@
           if (speed !== undefined) {
             this.setTypingSpeed(speed);
           }
+          this.emit('start');
           this.typeNextPage();
           return this;
         }
