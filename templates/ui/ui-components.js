@@ -109,7 +109,7 @@ import {
 import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
-import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth.js';
+import SetFontSizeToFitWidth from '../../plugins/utils/text/fontsizefit/FontSizeFit.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import DelayPromise from '../../plugins/utils/promise/Delay.js'
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
