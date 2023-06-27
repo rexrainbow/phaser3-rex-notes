@@ -1,6 +1,6 @@
 import {
     Pixellate
-} from './Modes.js';
+} from './Const.js';
 
 var AddPixellateMode = function (image) {
     image

@@ -2,13 +2,14 @@ import Base from "../../plugins/transitionimage.js";
 import AddSlideAwayModes from "./transitionmodes/AddSlideAwayModes.js";
 import AddSlideModes from "./transitionmodes/AddSlideModes.js";
 import AddPushModes from './transitionmodes/AddPushModes.js';
-import AddSliderModes from "./transitionmodes/AddZoomModes.js";
+import AddZoomModes from "./transitionmodes/AddZoomModes.js";
 import AddPixellateMode from './transitionmodes/AddPixellateMode.js';
+import AddFadeMode from "./transitionmodes/AddFadeMode.js";
 
 var AddModeCallbacks = [
     AddSlideAwayModes, AddSlideModes, AddPushModes,
-    AddSliderModes,
-    AddPixellateMode
+    AddZoomModes,
+    AddPixellateMode, AddFadeMode,
 ];
 
 class TransitionImagePack extends Base {

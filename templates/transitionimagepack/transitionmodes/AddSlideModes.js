@@ -1,6 +1,6 @@
 import {
     SlideLeft, SlideRight, SlideUp, SlideDown,
-} from './Modes.js';
+} from './Const.js';
 
 var AddSlideModes = function (image) {
     image

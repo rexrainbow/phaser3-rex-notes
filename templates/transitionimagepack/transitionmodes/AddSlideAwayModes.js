@@ -1,6 +1,6 @@
 import {
     SlideAwayLeft, SlideAwayRight, SlideAwayUp, SlideAwayDown
-} from './Modes.js';
+} from './Const.js';
 
 var AddSlideAwayModes = function (image) {
     image

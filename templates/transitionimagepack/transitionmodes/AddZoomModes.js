@@ -1,6 +1,6 @@
 import {
     ZoomOut, ZoomIn, ZoomInOut
-} from './Modes.js';
+} from './Const.js';
 
 var AddZoomModes = function (image) {
     image

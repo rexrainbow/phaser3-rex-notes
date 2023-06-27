@@ -1,6 +1,6 @@
 import {
     PushLeft, PushRight, PushUp, PushDown,
-} from './Modes.js';
+} from './Const.js';
 
 var AddSliderModes = function (image) {
     image
