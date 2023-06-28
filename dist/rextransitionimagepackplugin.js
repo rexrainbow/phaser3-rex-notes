@@ -3878,6 +3878,10 @@
   // Shader effect modes
   var Pixellate = 'pixellate';
 
+  // Fade effect mode
+  var Fade = 'fade';
+  var CrossFade = 'crossFade';
+
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
       ease: 'Linear',
@@ -4115,6 +4119,18 @@
     });
   };
 
+  var Yoyo = function Yoyo(t, threshold) {
+    if (threshold === undefined) {
+      threshold = 0.5;
+    }
+    if (t <= threshold) {
+      t = t / threshold;
+    } else {
+      t = 1 - (t - threshold) / (1 - threshold);
+    }
+    return t;
+  };
+
   var AddPixellateMode = function AddPixellateMode(image) {
     image.addTransitionMode(Pixellate, {
       ease: 'Linear',
@@ -4126,16 +4142,16 @@
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         if (t < 0.5) {
-          t = t * 2;
+          t = Yoyo(t);
           var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
           currentImage.effect.amount = Math.ceil(maxAmount * t);
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
           }
-          t = (t - 0.5) * 2;
+          t = Yoyo(t);
           var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
-          nextImage.effect.amount = Math.ceil(maxAmount * (1 - t));
+          nextImage.effect.amount = Math.ceil(maxAmount * t);
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
@@ -4148,7 +4164,55 @@
     });
   };
 
-  var AddModeCallbacks = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode];
+  var AddFadeModes = function AddFadeModes(image) {
+    image.addTransitionMode(Fade, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var tintGray;
+        if (t < 0.5) {
+          if (nextImage.visible) {
+            parent.setChildVisible(nextImage, false);
+          }
+          t = Yoyo(t);
+          tintGray = Math.floor(255 * (1 - t));
+          currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo(t);
+          tintGray = Math.floor(255 * (1 - t));
+          nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        currentImage.tint = 0xffffff;
+        parent.setChildVisible(currentImage, true);
+        nextImage.tint = 0xffffff;
+      }
+    }).addTransitionMode(CrossFade, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.setChildLocalAlpha(currentImage, 1 - t);
+        parent.setChildLocalAlpha(nextImage, t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalAlpha(currentImage, 1);
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode, AddFadeModes];
+
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);
     var _super = _createSuper(TransitionImagePack);
@@ -4156,8 +4220,8 @@
       var _this;
       _classCallCheck(this, TransitionImagePack);
       _this = _super.call(this, scene, x, y, texture, frame, config);
-      for (var i = 0, cnt = AddModeCallbacks.length; i < cnt; i++) {
-        AddModeCallbacks[i](_assertThisInitialized(_this));
+      for (var i = 0, cnt = Modes.length; i < cnt; i++) {
+        Modes[i](_assertThisInitialized(_this));
       }
       return _this;
     }

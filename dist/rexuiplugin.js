@@ -12892,7 +12892,7 @@
   var GetValue$2P = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$4 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$d = Phaser.Math.Linear;
-  var Fade$2 = /*#__PURE__*/function (_EaseValueTaskBase) {
+  var Fade$3 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
     var _super = _createSuper(Fade);
     function Fade(scene, sound, config) {
@@ -13009,7 +13009,7 @@
       fade = sound._fade;
       fade.stop().resetFromJSON(config);
     } else {
-      fade = new Fade$2(scene, sound, config);
+      fade = new Fade$3(scene, sound, config);
       sound._fade = fade;
     }
     fade.start();
@@ -13043,7 +13043,7 @@
       fade = sound._fade;
       fade.stop().resetFromJSON(config);
     } else {
-      fade = new Fade$2(scene, sound, config);
+      fade = new Fade$3(scene, sound, config);
       sound._fade = fade;
     }
     fade.start();
@@ -27915,7 +27915,7 @@
   var GetValue$2c = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$5 = Phaser.Math.Linear;
-  var Fade$1 = /*#__PURE__*/function (_EaseValueTaskBase) {
+  var Fade$2 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
     var _super = _createSuper(Fade);
     function Fade(gameObject, config) {
@@ -28017,7 +28017,7 @@
       duration: duration
     };
     if (fade === undefined) {
-      fade = new Fade$1(gameObject, config);
+      fade = new Fade$2(gameObject, config);
     } else {
       fade.resetFromJSON(config);
     }
@@ -28026,7 +28026,7 @@
   };
 
   var FadeOutDestroy = function FadeOutDestroy(gameObject, duration, destroyMode, fade) {
-    if (destroyMode instanceof Fade$1) {
+    if (destroyMode instanceof Fade$2) {
       fade = destroyMode;
       destroyMode = undefined;
     }
@@ -28039,7 +28039,7 @@
       duration: duration
     };
     if (fade === undefined) {
-      fade = new Fade$1(gameObject, config);
+      fade = new Fade$2(gameObject, config);
     } else {
       fade.resetFromJSON(config);
     }
@@ -34538,6 +34538,10 @@
   // Shader effect modes
   var Pixellate = 'pixellate';
 
+  // Fade effect mode
+  var Fade$1 = 'fade';
+  var CrossFade = 'crossFade';
+
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
       ease: 'Linear',
@@ -34786,16 +34790,16 @@
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         if (t < 0.5) {
-          t = t * 2;
+          t = Yoyo$1(t);
           var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
           currentImage.effect.amount = Math.ceil(maxAmount * t);
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
           }
-          t = (t - 0.5) * 2;
+          t = Yoyo$1(t);
           var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
-          nextImage.effect.amount = Math.ceil(maxAmount * (1 - t));
+          nextImage.effect.amount = Math.ceil(maxAmount * t);
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
@@ -34808,7 +34812,55 @@
     });
   };
 
-  var AddModeCallbacks = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode];
+  var AddFadeModes = function AddFadeModes(image) {
+    image.addTransitionMode(Fade$1, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var tintGray;
+        if (t < 0.5) {
+          if (nextImage.visible) {
+            parent.setChildVisible(nextImage, false);
+          }
+          t = Yoyo$1(t);
+          tintGray = Math.floor(255 * (1 - t));
+          currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo$1(t);
+          tintGray = Math.floor(255 * (1 - t));
+          nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        currentImage.tint = 0xffffff;
+        parent.setChildVisible(currentImage, true);
+        nextImage.tint = 0xffffff;
+      }
+    }).addTransitionMode(CrossFade, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.setChildLocalAlpha(currentImage, 1 - t);
+        parent.setChildLocalAlpha(nextImage, t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.setChildLocalAlpha(currentImage, 1);
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode, AddFadeModes];
+
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);
     var _super = _createSuper(TransitionImagePack);
@@ -34816,8 +34868,8 @@
       var _this;
       _classCallCheck(this, TransitionImagePack);
       _this = _super.call(this, scene, x, y, texture, frame, config);
-      for (var i = 0, cnt = AddModeCallbacks.length; i < cnt; i++) {
-        AddModeCallbacks[i](_assertThisInitialized(_this));
+      for (var i = 0, cnt = Modes.length; i < cnt; i++) {
+        Modes[i](_assertThisInitialized(_this));
       }
       return _this;
     }
