@@ -1,6 +1,7 @@
 import {
     Pixellate
 } from './Const.js';
+import Yoyo from './Yoyo.js';
 
 var AddPixellateMode = function (image) {
     image
@@ -13,7 +14,7 @@ var AddPixellateMode = function (image) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 if (t < 0.5) {
-                    t = t * 2;
+                    t = Yoyo(t);
                     var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
                     currentImage.effect.amount = Math.ceil(maxAmount * t);
                 } else {
@@ -21,9 +22,9 @@ var AddPixellateMode = function (image) {
                         parent.setChildVisible(currentImage, false);
                     }
 
-                    t = (t - 0.5) * 2;
+                    t = Yoyo(t);
                     var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
-                    nextImage.effect.amount = Math.ceil(maxAmount * (1 - t));
+                    nextImage.effect.amount = Math.ceil(maxAmount * t);
                 }
             },
             onComplete: function (parent, currentImage, nextImage, t) {

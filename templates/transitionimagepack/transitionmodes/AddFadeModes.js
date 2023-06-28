@@ -1,6 +1,7 @@
 import {
     Fade, CrossFade
 } from './Const.js';
+import Yoyo from './Yoyo.js';
 
 var AddFadeModes = function (image) {
     image
@@ -16,7 +17,7 @@ var AddFadeModes = function (image) {
                         parent.setChildVisible(nextImage, false);
                     }
 
-                    t = t * 2;
+                    t = Yoyo(t);
                     tintGray = Math.floor(255 * (1 - t));
                     currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
                 } else {
@@ -27,8 +28,8 @@ var AddFadeModes = function (image) {
                         parent.setChildVisible(nextImage, true);
                     }
 
-                    t = (t - 0.5) * 2;
-                    tintGray = Math.floor(255 * t);
+                    t = Yoyo(t);
+                    tintGray = Math.floor(255 * (1 - t));
                     nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
                 }
             },
