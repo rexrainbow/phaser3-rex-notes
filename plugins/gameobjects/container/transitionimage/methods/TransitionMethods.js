@@ -2,6 +2,7 @@ import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const GetRandomItem = Phaser.Utils.Array.GetRandom;
 
 var DirMode = {
     out: 0,
@@ -63,6 +64,10 @@ export default {
             frame = GetValue(config, 'frame', undefined);
 
             mode = GetValue(config, 'mode');
+            if (Array.isArray(mode)) {
+                mode = GetRandomItem(mode);
+            }
+
             var modeConfig;
             if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
                 modeConfig = this.transitionModes[mode];
