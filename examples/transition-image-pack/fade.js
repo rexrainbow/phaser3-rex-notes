@@ -19,9 +19,14 @@ class Demo extends Phaser.Scene {
                 console.log('complete')
             })
 
+        var transitionModes = [
+            'fade', 'crossFade',
+        ];
+        var idx = 0;
         this.input.on('pointerdown', function () {
             var nextKey = (image.texture.key === 'classroom') ? 'road' : 'classroom';
-            image.transit(nextKey, undefined, 'fade');
+            image.transit(nextKey, undefined, transitionModes[idx]);
+            idx = (idx + 1) % (transitionModes.length);
         })
 
     }

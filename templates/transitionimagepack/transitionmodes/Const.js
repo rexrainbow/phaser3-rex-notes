@@ -20,5 +20,6 @@ export const ZoomInOut = 'zoomInOut';
 // Shader effect modes
 export const Pixellate = 'pixellate';
 
-// Tint fade effect mode
+// Fade effect mode
 export const Fade = 'fade';
+export const CrossFade = 'crossFade';

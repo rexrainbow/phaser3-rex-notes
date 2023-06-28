@@ -1,8 +1,8 @@
 import {
-    Fade
+    Fade, CrossFade
 } from './Const.js';
 
-var AddFadeMode = function (image) {
+var AddFadeModes = function (image) {
     image
         .addTransitionMode(Fade, {
             ease: 'Linear', dir: 'out', mask: false,
@@ -39,7 +39,20 @@ var AddFadeMode = function (image) {
                 nextImage.tint = 0xffffff;
             },
         })
+        .addTransitionMode(CrossFade, {
+            ease: 'Linear', dir: 'out', mask: false,
+
+            onStart: function (parent, currentImage, nextImage, t) {
+            },
+            onProgress: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalAlpha(currentImage, 1 - t);
+                parent.setChildLocalAlpha(nextImage, t);
+            },
+            onComplete: function (parent, currentImage, nextImage, t) {
+                parent.setChildLocalAlpha(currentImage, 1)
+            },
+        })
 
 }
 
-export default AddFadeMode;
+export default AddFadeModes;
