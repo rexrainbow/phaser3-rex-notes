@@ -33776,6 +33776,7 @@
 
   var IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1I = Phaser.Utils.Objects.GetValue;
+  var GetRandomItem = Phaser.Utils.Array.GetRandom;
   var DirMode = {
     out: 0,
     "in": 1
@@ -33827,6 +33828,9 @@
         texture = GetValue$1I(config, 'key', undefined);
         frame = GetValue$1I(config, 'frame', undefined);
         mode = GetValue$1I(config, 'mode');
+        if (Array.isArray(mode)) {
+          mode = GetRandomItem(mode);
+        }
         var modeConfig;
         if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
           modeConfig = this.transitionModes[mode];
@@ -34036,11 +34040,14 @@
       this.childrenMask = this.maskGameObject.createGeometryMask();
       return this;
     },
-    removeMaskGameObject: function removeMaskGameObject() {
+    removeMaskGameObject: function removeMaskGameObject(destroyMaskGameObject) {
+      if (destroyMaskGameObject === undefined) {
+        destroyMaskGameObject = true;
+      }
       this.backImage.clearMask();
       this.frontImage.clearMask();
       this.childrenMask = undefined;
-      this.remove(this.maskGameObject, true);
+      this.remove(this.maskGameObject, destroyMaskGameObject);
       this.maskGameObject = undefined;
       return this;
     },
@@ -34048,12 +34055,14 @@
       if (enable === undefined) {
         enable = true;
       }
-
-      // Use DefaultMaskGraphics if not given
-      if (!this.childrenMask) {
-        this.setMaskGameObject(true);
+      if (invertAlpha === undefined) {
+        invertAlpha = false;
       }
       if (enable) {
+        // Use DefaultMaskGraphics if not given    
+        if (!this.childrenMask) {
+          this.setMaskGameObject(true);
+        }
         gameObject.setMask(this.childrenMask);
         if (invertAlpha) {
           this.childrenMask.setInvertAlpha();
@@ -34542,6 +34551,20 @@
   var Fade$1 = 'fade';
   var CrossFade = 'crossFade';
 
+  // Iris modes
+  var IrisOut = 'irisOut';
+  var IrisIn = 'irisIn';
+
+  // Wipe modes
+  var WipeLeft = 'wipeLeft';
+  var WipeRight = 'wipeRight';
+  var WipeUp = 'wipeUp';
+  var WipeDown = 'wipeDown';
+
+  // blinds, squares
+  var Blinds = 'blinds';
+  var Squares = 'squares';
+
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
       ease: 'Linear',
@@ -34595,7 +34618,7 @@
   };
 
   var AddSlideModes = function AddSlideModes(image) {
-    image.addTransitionMode(SlideLeft, {
+    image.addTransitionMode(SlideRight, {
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34607,7 +34630,7 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
-    }).addTransitionMode(SlideRight, {
+    }).addTransitionMode(SlideLeft, {
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34619,7 +34642,7 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
-    }).addTransitionMode(SlideUp, {
+    }).addTransitionMode(SlideDown, {
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34631,7 +34654,7 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.setChildLocalPosition(nextImage, 0, 0);
       }
-    }).addTransitionMode(SlideDown, {
+    }).addTransitionMode(SlideUp, {
       ease: 'Linear',
       dir: 'in',
       mask: true,
@@ -34859,7 +34882,219 @@
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode, AddFadeModes];
+  var CreateMask$3 = function CreateMask(scene) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: [{
+        name: 'rect',
+        type: 'rectangle'
+      }],
+      update: function update() {
+        this.getShape('rect').fillStyle(0xffffff).setSize(this.width * this.value, this.height * this.value).setCenterPosition(this.centerX, this.centerY);
+      }
+    });
+    return maskGameObject;
+  };
+  var AddIrisModes = function AddIrisModes(image) {
+    var maskGameObject = CreateMask$3(image.scene);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(IrisOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(IrisIn, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(1 - t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask$2 = function CreateMask(scene) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: [{
+        name: 'rect',
+        type: 'rectangle'
+      }],
+      update: function update() {
+        var rect = this.getShape('rect').fillStyle(0xffffff);
+        var t = 1 - this.value;
+        switch (this.wipeMode) {
+          case 'right':
+            rect.setSize(this.width * t, this.height).setTopLeftPosition(this.width - rect.width, 0);
+            break;
+          case 'left':
+            rect.setSize(this.width * t, this.height).setTopLeftPosition(0, 0);
+            break;
+          case 'down':
+            rect.setSize(this.width, this.height * t).setTopLeftPosition(0, this.height - rect.height);
+            break;
+          case 'up':
+            rect.setSize(this.width, this.height * t).setTopLeftPosition(0, 0);
+            break;
+        }
+      }
+    });
+    return maskGameObject;
+  };
+  var AddWipeModes = function AddWipeModes(image) {
+    var maskGameObject = CreateMask$2(image.scene);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(WipeRight, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+        parent.maskGameObject.wipeMode = 'right';
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(WipeLeft, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+        parent.maskGameObject.wipeMode = 'left';
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(WipeDown, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+        parent.maskGameObject.wipeMode = 'down';
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(WipeUp, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+        parent.maskGameObject.wipeMode = 'up';
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask$1 = function CreateMask(scene, columns) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: {
+        rectangle: columns
+      },
+      update: function update() {
+        var shapes = this.getShapes();
+        var shapeWidth = this.width / columns;
+        for (var i = 0; i < columns; i++) {
+          shapes[i].fillStyle(0xffffff).setSize(shapeWidth * this.value, this.height).setTopLeftPosition(shapeWidth * i, 0);
+        }
+      }
+    });
+    return maskGameObject;
+  };
+  var AddBlindsModes$1 = function AddBlindsModes(image) {
+    var maskGameObject = CreateMask$1(image.scene, 10);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(Blinds, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask = function CreateMask(scene, columns, rows) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: {
+        rectangle: columns * rows
+      },
+      update: function update() {
+        var shapes = this.getShapes();
+        var shapeWidth = this.width / columns,
+          shapeHeight = this.height / rows;
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < columns; c++) {
+            shapes[c * rows + r].fillStyle(0xffffff).setSize(shapeWidth * this.value, shapeHeight * this.value).setCenterPosition(shapeWidth * (c + 0.5), shapeHeight * (r + 0.5));
+          }
+        }
+      }
+    });
+    return maskGameObject;
+  };
+  var AddBlindsModes = function AddBlindsModes(image) {
+    var maskGameObject = CreateMask(image.scene, Math.ceil(image.width / 40), Math.ceil(image.height / 40));
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(Squares, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode, AddFadeModes, AddIrisModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);

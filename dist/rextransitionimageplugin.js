@@ -3123,6 +3123,7 @@
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetRandomItem = Phaser.Utils.Array.GetRandom;
   var DirMode = {
     out: 0,
     "in": 1
@@ -3174,6 +3175,9 @@
         texture = GetValue$2(config, 'key', undefined);
         frame = GetValue$2(config, 'frame', undefined);
         mode = GetValue$2(config, 'mode');
+        if (Array.isArray(mode)) {
+          mode = GetRandomItem(mode);
+        }
         var modeConfig;
         if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
           modeConfig = this.transitionModes[mode];
@@ -3383,11 +3387,14 @@
       this.childrenMask = this.maskGameObject.createGeometryMask();
       return this;
     },
-    removeMaskGameObject: function removeMaskGameObject() {
+    removeMaskGameObject: function removeMaskGameObject(destroyMaskGameObject) {
+      if (destroyMaskGameObject === undefined) {
+        destroyMaskGameObject = true;
+      }
       this.backImage.clearMask();
       this.frontImage.clearMask();
       this.childrenMask = undefined;
-      this.remove(this.maskGameObject, true);
+      this.remove(this.maskGameObject, destroyMaskGameObject);
       this.maskGameObject = undefined;
       return this;
     },
@@ -3395,12 +3402,14 @@
       if (enable === undefined) {
         enable = true;
       }
-
-      // Use DefaultMaskGraphics if not given
-      if (!this.childrenMask) {
-        this.setMaskGameObject(true);
+      if (invertAlpha === undefined) {
+        invertAlpha = false;
       }
       if (enable) {
+        // Use DefaultMaskGraphics if not given    
+        if (!this.childrenMask) {
+          this.setMaskGameObject(true);
+        }
         gameObject.setMask(this.childrenMask);
         if (invertAlpha) {
           this.childrenMask.setInvertAlpha();
