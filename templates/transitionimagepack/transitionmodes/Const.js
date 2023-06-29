@@ -33,3 +33,7 @@ export const WipeLeft = 'wipeLeft';
 export const WipeRight = 'wipeRight';
 export const WipeUp = 'wipeUp';
 export const WipeDown = 'wipeDown';
+
+// blinds, squares
+export const Blinds = 'blinds';
+export const Squares = 'squares';
