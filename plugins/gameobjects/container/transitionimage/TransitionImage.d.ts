@@ -13,12 +13,10 @@ declare namespace TransitionImage {
         t: number
     ) => void;
 
-    interface ITransitConfig {
+    interface ITransitConfigBase {
         texture?: string, frame?: string,
 
         dir?: TransitionDirectionType,
-
-        mode?: string | string[],
 
         onStart?: TransitionCallbackType,
         onStartScope?: unknown,
@@ -31,10 +29,15 @@ declare namespace TransitionImage {
 
         duration?: number,
         ease?: string,
-        mask?: boolean,
+
+        mask?: boolean | Phaser.GameObjects.GameObject,
     }
 
-    interface IConfig extends ITransitConfig {
+    interface ITransitConfig {
+        mode?: string | string[],
+    }
+
+    interface IConfig extends ITransitConfigBase {
         x?: number, y?: number,
     }
 }

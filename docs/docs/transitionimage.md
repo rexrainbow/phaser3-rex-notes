@@ -132,6 +132,7 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     - `true` : Default graphics game object.
     - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
 
+
 If `onStart`, `onProgress` and `onComplete` are all `undefined`, it will use **cross-fade** as default transition callbacks.
 
 Add transitionimage from JSON
@@ -381,6 +382,7 @@ image.setEaseFunction(ease);
     ```javascript
     image.setMaskGameObject(maskGameObject);
     ```
+    - `maskGameObject` : A [graphics game object](graphics.md), or any shape game objects, [custom-progress shape game object](shape-custom-progress.md)
 
 ### Grid cut
 

@@ -17,6 +17,10 @@ export const ZoomOut = 'zoomOut';
 export const ZoomIn = 'zoomIn';
 export const ZoomInOut = 'zoomInOut';
 
+// Iris modes
+export const IrisOut = 'irisOut';
+export const IrisIn = 'irisIn';
+
 // Shader effect modes
 export const Pixellate = 'pixellate';
 

@@ -37,11 +37,15 @@ export default {
         return this;
     },
 
-    removeMaskGameObject() {
+    removeMaskGameObject(destroyMaskGameObject) {
+        if (destroyMaskGameObject === undefined) {
+            destroyMaskGameObject = true;
+        }
+
         this.backImage.clearMask();
         this.frontImage.clearMask();
         this.childrenMask = undefined;
-        this.remove(this.maskGameObject, true);
+        this.remove(this.maskGameObject, destroyMaskGameObject);
         this.maskGameObject = undefined;
         return this;
     },
@@ -50,13 +54,15 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-
-        // Use DefaultMaskGraphics if not given
-        if (!this.childrenMask) {
-            this.setMaskGameObject(true);
+        if (invertAlpha === undefined) {
+            invertAlpha = false;
         }
 
         if (enable) {
+            // Use DefaultMaskGraphics if not given    
+            if (!this.childrenMask) {
+                this.setMaskGameObject(true);
+            }
             gameObject.setMask(this.childrenMask);
             if (invertAlpha) {
                 this.childrenMask.setInvertAlpha();
