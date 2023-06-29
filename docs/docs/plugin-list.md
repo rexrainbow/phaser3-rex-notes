@@ -187,6 +187,7 @@
 1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
 1. [Touch state](touchstate.md): Store current touch input properties.
 1. [Transition image](transitionimage.md): Transit texture to another one.
+1. [Transition image pack](transitionimagepack.md): Transit texture to another one, with some pre-build effects.
 1. [UI/Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [UI/Buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI/Chart](ui-chart.md): Draw chart on canvas.

@@ -216,10 +216,6 @@ image.transit({
 })
 ```
 
-or
-
-
-
 - `mask` : Mask game object.
     - `true` : Default graphics game object. Also apply this mask to current and next textures/[images](image.md)
     - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.

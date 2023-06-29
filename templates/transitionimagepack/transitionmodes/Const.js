@@ -17,16 +17,9 @@ export const ZoomOut = 'zoomOut';
 export const ZoomIn = 'zoomIn';
 export const ZoomInOut = 'zoomInOut';
 
-// Shader effect modes
-export const Pixellate = 'pixellate';
-
 // Fade effect mode
 export const Fade = 'fade';
 export const CrossFade = 'crossFade';
-
-// Iris modes
-export const IrisOut = 'irisOut';
-export const IrisIn = 'irisIn';
 
 // Wipe modes
 export const WipeLeft = 'wipeLeft';
@@ -34,6 +27,13 @@ export const WipeRight = 'wipeRight';
 export const WipeUp = 'wipeUp';
 export const WipeDown = 'wipeDown';
 
+// Iris modes
+export const IrisOut = 'irisOut';
+export const IrisIn = 'irisIn';
+
 // blinds, squares
 export const Blinds = 'blinds';
 export const Squares = 'squares';
+
+// Shader effect modes
+export const Pixellate = 'pixellate';

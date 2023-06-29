@@ -590,6 +590,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Transition image pack](transitionimagepack.md): Transit texture to another one, with some pre-build effects, extended from [TransitionImage](transitionimage.md).
+    ```javascript
+    var image = scene.rexUI.add.transitionImagePack(x, y, texture, frame, config);
+    ```
+    or
+    ```javascript
+    class MyTransitionImagePack extends RexPlugins.UI.TransitionImagePack {
+        constructor(scene, x, y, texture, frame, config) {
+            super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Dom game objects
 
