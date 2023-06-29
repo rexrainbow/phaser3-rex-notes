@@ -4,7 +4,7 @@ import {
 
 var AddSlideModes = function (image) {
     image
-        .addTransitionMode(SlideLeft, {
+        .addTransitionMode(SlideRight, {
             ease: 'Linear', dir: 'in', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
@@ -17,7 +17,7 @@ var AddSlideModes = function (image) {
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideRight, {
+        .addTransitionMode(SlideLeft, {
             ease: 'Linear', dir: 'in', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
@@ -30,7 +30,7 @@ var AddSlideModes = function (image) {
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideUp, {
+        .addTransitionMode(SlideDown, {
             ease: 'Linear', dir: 'in', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
@@ -43,7 +43,7 @@ var AddSlideModes = function (image) {
                 parent.setChildLocalPosition(nextImage, 0, 0);
             },
         })
-        .addTransitionMode(SlideDown, {
+        .addTransitionMode(SlideUp, {
             ease: 'Linear', dir: 'in', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
