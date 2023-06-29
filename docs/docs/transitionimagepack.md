@@ -36,7 +36,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import TransitionImagePackPlugin from 'phaser3-rex-plugins/plugins/transitionimagpack-plugin.js';
+    import TransitionImagePackPlugin from 'phaser3-rex-plugins/templates/transitionimagepack/transitionimagepack-plugin.js';
     var config = {
         // ...
         plugins: {
@@ -65,7 +65,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
     ```
 - Import class
     ```javascript
-    import TransitionImagePack from 'phaser3-rex-plugins/plugins/transitionimagpack.js';
+    import TransitionImagePack from 'phaser3-rex-plugins/templates/transitionimagepack/TransitionImagePack.js';
     ```
 - Add image object
     ```javascript    
