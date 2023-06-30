@@ -77,12 +77,18 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'bgLayer',
 
             commands: {
-                cross(gameObject, { key, frame, mode = 'fade', wait = true } = {}, commandExecutor) {
+                cross(gameObject, { key, frame, duration, mode = 'fade', wait = true } = {}, commandExecutor) {
                     // Wait until transition complete
                     if (wait) {
                         commandExecutor.waitEvent(gameObject, 'complete');
                     }
+
+                    var durationSave = gameObject.duration;
+                    if (duration !== undefined) {
+                        gameObject.setDuration(duration);
+                    }
                     gameObject.transit(key, frame, mode);
+                    gameObject.setDuration(durationSave);
                 }
             }
         })
