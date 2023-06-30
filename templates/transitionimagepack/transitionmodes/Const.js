@@ -31,9 +31,14 @@ export const WipeDown = 'wipeDown';
 export const IrisOut = 'irisOut';
 export const IrisIn = 'irisIn';
 
-// blinds, squares
+// Iris modes
+export const PieOut = 'pieOut';
+export const PieIn = 'pieIn';
+
+// blinds, squares, curtain
 export const Blinds = 'blinds';
 export const Squares = 'squares';
+export const Curtain = 'curtain';
 
 // Shader effect modes
 export const Pixellate = 'pixellate';

@@ -34561,9 +34561,14 @@
   var IrisOut = 'irisOut';
   var IrisIn = 'irisIn';
 
-  // blinds, squares
+  // Iris modes
+  var PieOut = 'pieOut';
+  var PieIn = 'pieIn';
+
+  // blinds, squares, curtain
   var Blinds = 'blinds';
   var Squares = 'squares';
+  var Curtain = 'curtain';
 
   // Shader effect modes
   var Pixellate = 'pixellate';
@@ -34852,7 +34857,7 @@
     });
   };
 
-  var CreateMask$3 = function CreateMask(scene) {
+  var CreateMask$5 = function CreateMask(scene) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: [{
@@ -34881,7 +34886,7 @@
     return maskGameObject;
   };
   var AddWipeModes = function AddWipeModes(image) {
-    var maskGameObject = CreateMask$3(image.scene);
+    var maskGameObject = CreateMask$5(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(WipeRight, {
@@ -34943,7 +34948,7 @@
     });
   };
 
-  var CreateMask$2 = function CreateMask(scene) {
+  var CreateMask$4 = function CreateMask(scene) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: [{
@@ -34957,7 +34962,7 @@
     return maskGameObject;
   };
   var AddIrisModes = function AddIrisModes(image) {
-    var maskGameObject = CreateMask$2(image.scene);
+    var maskGameObject = CreateMask$4(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(IrisOut, {
@@ -34989,7 +34994,55 @@
     });
   };
 
-  var CreateMask$1 = function CreateMask(scene, columns) {
+  var CreateMask$3 = function CreateMask(scene) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: [{
+        name: 'pie',
+        type: 'arc'
+      }],
+      update: function update() {
+        var radius = Math.max(this.width, this.height) * 2;
+        var deltaAngle = 90 * this.value;
+        this.getShape('pie').fillStyle(0xffffff).setCenterPosition(this.centerX, 0).setRadius(radius).setAngle(90 - deltaAngle, 90 + deltaAngle).setPie();
+      }
+    });
+    return maskGameObject;
+  };
+  var AddPieModes = function AddPieModes(image) {
+    var maskGameObject = CreateMask$3(image.scene);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(PieOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(PieIn, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(1 - t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask$2 = function CreateMask(scene, columns) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: {
@@ -35006,7 +35059,7 @@
     return maskGameObject;
   };
   var AddBlindsModes$1 = function AddBlindsModes(image) {
-    var maskGameObject = CreateMask$1(image.scene, 10);
+    var maskGameObject = CreateMask$2(image.scene, 10);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(Blinds, {
@@ -35025,7 +35078,7 @@
     });
   };
 
-  var CreateMask = function CreateMask(scene, columns, rows) {
+  var CreateMask$1 = function CreateMask(scene, columns, rows) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: {
@@ -35045,7 +35098,7 @@
     return maskGameObject;
   };
   var AddBlindsModes = function AddBlindsModes(image) {
-    var maskGameObject = CreateMask(image.scene, Math.ceil(image.width / 40), Math.ceil(image.height / 40));
+    var maskGameObject = CreateMask$1(image.scene, Math.ceil(image.width / 40), Math.ceil(image.height / 40));
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(Squares, {
@@ -35060,6 +35113,63 @@
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask = function CreateMask(scene, columns) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: {
+        lines: columns
+      },
+      update: function update() {
+        var shapes = this.getShapes();
+        var shapeWidth = this.width / columns;
+        var radius = shapeWidth / 2;
+        for (var i = 0; i < columns; i++) {
+          var leftX = shapeWidth * i;
+          var bottomY = this.height * this.value;
+          var centerX = leftX + radius;
+          shapes[i].fillStyle(0xffffff).start(leftX, 0).horizontalLineTo(bottomY).arc(centerX, bottomY, radius, 180, 0, true).horizontalLineTo(-bottomY).lineTo(leftX, 0).close();
+        }
+      }
+    });
+    return maskGameObject;
+  };
+  var AddCurtainMode = function AddCurtainMode(image) {
+    var maskGameObject = CreateMask(image.scene, 10);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(Curtain, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+        parent.setNextImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          if (nextImage.visible) {
+            parent.setChildVisible(nextImage, false);
+          }
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+        parent.setChildVisible(currentImage, true);
       }
     });
   };
@@ -35097,7 +35207,7 @@
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddPixellateMode];
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddCurtainMode, AddPixellateMode];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);

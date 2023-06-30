@@ -21,7 +21,8 @@ class Demo extends Phaser.Scene {
             })
 
         var transitionModes = [
-            'irisOut', 'irisIn'
+            'irisOut', 'irisIn', 
+            'pieOut', 'pieIn'
         ];
         var idx = 0;
         this.input.on('pointerdown', function () {

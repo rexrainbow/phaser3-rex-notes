@@ -163,7 +163,8 @@ image.transit({
     - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
     - Fade effects : `'fade'` (tint-fade), `'crossFade'` (alpha-blending)
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
-      `'irisOut'`, `'irisIn'`, `'blinds'`, `'squares'`.
+      `'irisOut'`, `'irisIn'`, `'pieOut'`, `'pieIn'`, 
+      `'blinds'`, `'squares'`, `'curtain'`.
     - Shader effects : `'pixellate'`
     
 
