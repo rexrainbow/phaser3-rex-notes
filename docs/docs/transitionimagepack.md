@@ -175,19 +175,28 @@ var textureKey = image.texture.key;
 var frameName = image.frame.name;
 ```
 
-### Set transition duration
+### Transition duration
 
-```javascript
-image.setDuration(duration);
-```
+- Set
+    ```javascript
+    image.setDuration(duration);
+    ```
+- Get
+    ```javascript
+    var duration = image.duration;
+    ```
 
-### Set ease function
+### Ease function
 
-```javascript
-image.setEaseFunction(ease);
-```
-
-- `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+- Set
+    ```javascript
+    image.setEaseFunction(ease);
+    ```
+    - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+- Get
+    ```javascript
+    var ease = image.easeFunction;
+    ```
 
 ### Pause/Resume
 
