@@ -305,6 +305,8 @@ var tween = scene.tweens.add({
 - `Back.easeInOut`
 - `Bounce.easeInOut`
 
+[Demo](https://labs.phaser.io/view.html?src=src/tweens/eases/ease%20mixer.js)
+
 ### Pause / Resume task
 
 ```javascript
