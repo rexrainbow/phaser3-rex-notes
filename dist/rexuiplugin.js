@@ -33823,6 +33823,7 @@
           mode: mode
         };
       }
+      this.currentTransitionMode = undefined;
       if (IsPlainObject$q(texture)) {
         var config = texture;
         texture = GetValue$1I(config, 'key', undefined);
@@ -33834,6 +33835,7 @@
         var modeConfig;
         if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
           modeConfig = this.transitionModes[mode];
+          this.currentTransitionMode = mode;
         }
         this.setDuration(GetValueFromConfigs('duration', this.duration, config, modeConfig)).setEaseFunction(GetValueFromConfigs('ease', this.easeFunction, config, modeConfig)).setTransitionDirection(GetValueFromConfigs('dir', this.dir, config, modeConfig));
         var maskGameObject = GetValueFromConfigs('mask', undefined, config, modeConfig);
@@ -34342,6 +34344,7 @@
       _this.cellImages = [];
       _this.imagesPool = [];
       _this.transitionModes = undefined;
+      _this.currentTransitionMode = undefined;
 
       // Transition parameters
       var onStart = GetValue$1G(config, 'onStart', undefined);
@@ -34544,16 +34547,9 @@
   var ZoomIn = 'zoomIn';
   var ZoomInOut = 'zoomInOut';
 
-  // Shader effect modes
-  var Pixellate = 'pixellate';
-
   // Fade effect mode
   var Fade$1 = 'fade';
   var CrossFade = 'crossFade';
-
-  // Iris modes
-  var IrisOut = 'irisOut';
-  var IrisIn = 'irisIn';
 
   // Wipe modes
   var WipeLeft = 'wipeLeft';
@@ -34561,9 +34557,16 @@
   var WipeUp = 'wipeUp';
   var WipeDown = 'wipeDown';
 
+  // Iris modes
+  var IrisOut = 'irisOut';
+  var IrisIn = 'irisIn';
+
   // blinds, squares
   var Blinds = 'blinds';
   var Squares = 'squares';
+
+  // Shader effect modes
+  var Pixellate = 'pixellate';
 
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
@@ -34802,39 +34805,6 @@
     });
   };
 
-  var AddPixellateMode = function AddPixellateMode(image) {
-    image.addTransitionMode(Pixellate, {
-      ease: 'Linear',
-      dir: 'out',
-      mask: false,
-      onStart: function onStart(parent, currentImage, nextImage, t) {
-        currentImage.effect = currentImage.preFX.addPixelate(0);
-        nextImage.effect = nextImage.preFX.addPixelate(0);
-      },
-      onProgress: function onProgress(parent, currentImage, nextImage, t) {
-        if (t < 0.5) {
-          t = Yoyo$1(t);
-          var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
-          currentImage.effect.amount = Math.ceil(maxAmount * t);
-        } else {
-          if (currentImage.visible) {
-            parent.setChildVisible(currentImage, false);
-          }
-          t = Yoyo$1(t);
-          var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
-          nextImage.effect.amount = Math.ceil(maxAmount * t);
-        }
-      },
-      onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        currentImage.preFX.remove(currentImage.effect);
-        delete currentImage.effect;
-        parent.setChildVisible(currentImage, true);
-        nextImage.preFX.remove(nextImage.effect);
-        delete nextImage.effect;
-      }
-    });
-  };
-
   var AddFadeModes = function AddFadeModes(image) {
     image.addTransitionMode(Fade$1, {
       ease: 'Linear',
@@ -34890,52 +34860,6 @@
         type: 'rectangle'
       }],
       update: function update() {
-        this.getShape('rect').fillStyle(0xffffff).setSize(this.width * this.value, this.height * this.value).setCenterPosition(this.centerX, this.centerY);
-      }
-    });
-    return maskGameObject;
-  };
-  var AddIrisModes = function AddIrisModes(image) {
-    var maskGameObject = CreateMask$3(image.scene);
-    image.once('destroy', function () {
-      maskGameObject.destroy();
-    }).addTransitionMode(IrisOut, {
-      ease: 'Linear',
-      dir: 'out',
-      mask: maskGameObject,
-      onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setCurrentImageMaskEnable(true, true);
-      },
-      onProgress: function onProgress(parent, currentImage, nextImage, t) {
-        parent.maskGameObject.setValue(t);
-      },
-      onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        parent.removeMaskGameObject(false);
-      }
-    }).addTransitionMode(IrisIn, {
-      ease: 'Linear',
-      dir: 'out',
-      mask: maskGameObject,
-      onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setCurrentImageMaskEnable(true);
-      },
-      onProgress: function onProgress(parent, currentImage, nextImage, t) {
-        parent.maskGameObject.setValue(1 - t);
-      },
-      onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        parent.removeMaskGameObject(false);
-      }
-    });
-  };
-
-  var CreateMask$2 = function CreateMask(scene) {
-    var maskGameObject = new CustomProgress(scene, {
-      type: 'Graphics',
-      create: [{
-        name: 'rect',
-        type: 'rectangle'
-      }],
-      update: function update() {
         var rect = this.getShape('rect').fillStyle(0xffffff);
         var t = 1 - this.value;
         switch (this.wipeMode) {
@@ -34957,7 +34881,7 @@
     return maskGameObject;
   };
   var AddWipeModes = function AddWipeModes(image) {
-    var maskGameObject = CreateMask$2(image.scene);
+    var maskGameObject = CreateMask$3(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(WipeRight, {
@@ -35012,6 +34936,52 @@
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask$2 = function CreateMask(scene) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: [{
+        name: 'rect',
+        type: 'rectangle'
+      }],
+      update: function update() {
+        this.getShape('rect').fillStyle(0xffffff).setSize(this.width * this.value, this.height * this.value).setCenterPosition(this.centerX, this.centerY);
+      }
+    });
+    return maskGameObject;
+  };
+  var AddIrisModes = function AddIrisModes(image) {
+    var maskGameObject = CreateMask$2(image.scene);
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(IrisOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(IrisIn, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(1 - t);
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
@@ -35094,7 +35064,40 @@
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddPixellateMode, AddFadeModes, AddIrisModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes];
+  var AddPixellateMode = function AddPixellateMode(image) {
+    image.addTransitionMode(Pixellate, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        currentImage.effect = currentImage.preFX.addPixelate(0);
+        nextImage.effect = nextImage.preFX.addPixelate(0);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = Yoyo$1(t);
+          var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
+          currentImage.effect.amount = Math.ceil(maxAmount * t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          t = Yoyo$1(t);
+          var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
+          nextImage.effect.amount = Math.ceil(maxAmount * t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        currentImage.preFX.remove(currentImage.effect);
+        delete currentImage.effect;
+        parent.setChildVisible(currentImage, true);
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddPixellateMode];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);

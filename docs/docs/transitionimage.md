@@ -257,6 +257,7 @@ Fire `'complete'` event when transition completed.
 - Trnasit by transition mode
     ```javascript
     image.transit(texture, frame, modeName);
+    // image.transit(texture, frame, modeNames);
     ```
     or
     ```javascript
@@ -264,7 +265,7 @@ Fire `'complete'` event when transition completed.
         key: undefined,
         // frame: undefined,
 
-        mode: mode,
+        mode: modeName, // or modeName
         // dir: 0,
         // onStart: function(parent, currentImage, nextImage, t) { },
         // onStartScope: undefined,
@@ -278,7 +279,11 @@ Fire `'complete'` event when transition completed.
     })
     ```
     - Can override configuration of transition mode
-
+    - `modeName` : A string, or an array of string to pick a random mode.
+- Current transition mode
+    ```javascript
+    var modeName = image.currentTransitionMode;
+    ```
 
 #### Current texture
 

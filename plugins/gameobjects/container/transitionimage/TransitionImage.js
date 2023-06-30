@@ -46,6 +46,7 @@ class TransitionImage extends Container {
         this.cellImages = [];
         this.imagesPool = [];
         this.transitionModes = undefined;
+        this.currentTransitionMode = undefined;
 
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);

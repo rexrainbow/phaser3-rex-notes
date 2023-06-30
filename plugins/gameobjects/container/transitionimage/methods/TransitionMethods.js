@@ -58,6 +58,8 @@ export default {
             }
         }
 
+        this.currentTransitionMode = undefined;
+
         if (IsPlainObject(texture)) {
             var config = texture;
             texture = GetValue(config, 'key', undefined);
@@ -71,6 +73,7 @@ export default {
             var modeConfig;
             if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
                 modeConfig = this.transitionModes[mode];
+                this.currentTransitionMode = mode;
             }
 
             this

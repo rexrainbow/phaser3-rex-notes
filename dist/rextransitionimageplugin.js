@@ -3170,6 +3170,7 @@
           mode: mode
         };
       }
+      this.currentTransitionMode = undefined;
       if (IsPlainObject$2(texture)) {
         var config = texture;
         texture = GetValue$2(config, 'key', undefined);
@@ -3181,6 +3182,7 @@
         var modeConfig;
         if (this.transitionModes && this.transitionModes.hasOwnProperty(mode)) {
           modeConfig = this.transitionModes[mode];
+          this.currentTransitionMode = mode;
         }
         this.setDuration(GetValueFromConfigs('duration', this.duration, config, modeConfig)).setEaseFunction(GetValueFromConfigs('ease', this.easeFunction, config, modeConfig)).setTransitionDirection(GetValueFromConfigs('dir', this.dir, config, modeConfig));
         var maskGameObject = GetValueFromConfigs('mask', undefined, config, modeConfig);
@@ -3689,6 +3691,7 @@
       _this.cellImages = [];
       _this.imagesPool = [];
       _this.transitionModes = undefined;
+      _this.currentTransitionMode = undefined;
 
       // Transition parameters
       var onStart = GetValue(config, 'onStart', undefined);

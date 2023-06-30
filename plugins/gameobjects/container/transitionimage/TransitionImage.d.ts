@@ -98,6 +98,8 @@ declare class TransitionImage extends ContainerLite {
         config: TransitionImage.ITransitConfig
     ): this;
 
+    readonly currentTransitionMode: string;
+
     addTransitionMode(
         name: string,
         config: TransitionImage.ITransitConfig

@@ -9841,13 +9841,14 @@ or</p>
 </code></pre></div></li>
 <li>Trnasit by transition mode
     <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">transit</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">modeName</span><span class="p">);</span>
+<span class="c1">// image.transit(texture, frame, modeNames);</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">transit</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// frame: undefined,</span>
 
-<span class="w">    </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">mode</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="nx">modeName</span><span class="p">,</span><span class="w"> </span><span class="c1">// or modeName</span>
 <span class="w">    </span><span class="c1">// dir: 0,</span>
 <span class="w">    </span><span class="c1">// onStart: function(parent, currentImage, nextImage, t) { },</span>
 <span class="w">    </span><span class="c1">// onStartScope: undefined,</span>
@@ -9861,8 +9862,12 @@ or</p>
 <span class="p">})</span>
 </code></pre></div><ul>
 <li>Can override configuration of transition mode</li>
+<li><code>modeName</code> : A string, or an array of string to pick a random mode.</li>
 </ul>
 </li>
+<li>Current transition mode
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">modeName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">currentTransitionMode</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h4 id="current-texture">Current texture<a class="headerlink" href="#current-texture" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textureKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
