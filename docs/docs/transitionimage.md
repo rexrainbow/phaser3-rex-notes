@@ -292,7 +292,7 @@ var textureKey = image.texture.key;
 var frameName = image.frame.name;
 ```
 
-### Set transition callbacks
+### Transition callbacks
 
 - Set transition direction
     ```javascript
@@ -344,19 +344,28 @@ var frameName = image.frame.name;
         - `nextImage` : [Image game object](image.md) to display next texture.
         - `t` : Progress percentage. It is `1` in this case.
 
-### Set transition duration
+### Transition duration
 
-```javascript
-image.setDuration(duration);
-```
+- Set
+    ```javascript
+    image.setDuration(duration);
+    ```
+- Get
+    ```javascript
+    var duration = image.duration;
+    ```
 
-### Set ease function
+### Ease function
 
-```javascript
-image.setEaseFunction(ease);
-```
-
-- `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+- Set
+    ```javascript
+    image.setEaseFunction(ease);
+    ```
+    - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+- Get
+    ```javascript
+    var ease = image.easeFunction;
+    ```
 
 ### Mask
 

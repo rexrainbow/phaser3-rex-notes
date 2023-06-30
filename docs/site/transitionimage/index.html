@@ -1008,22 +1008,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-transition-callbacks" class="md-nav__link">
-    Set transition callbacks
+  <a href="#transition-callbacks" class="md-nav__link">
+    Transition callbacks
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-transition-duration" class="md-nav__link">
-    Set transition duration
+  <a href="#transition-duration" class="md-nav__link">
+    Transition duration
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-ease-function" class="md-nav__link">
-    Set ease function
+  <a href="#ease-function" class="md-nav__link">
+    Ease function
   </a>
   
 </li>
@@ -9502,22 +9502,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-transition-callbacks" class="md-nav__link">
-    Set transition callbacks
+  <a href="#transition-callbacks" class="md-nav__link">
+    Transition callbacks
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-transition-duration" class="md-nav__link">
-    Set transition duration
+  <a href="#transition-duration" class="md-nav__link">
+    Transition duration
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-ease-function" class="md-nav__link">
-    Set ease function
+  <a href="#ease-function" class="md-nav__link">
+    Ease function
   </a>
   
 </li>
@@ -9873,7 +9873,7 @@ or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textureKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">frameName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="set-transition-callbacks">Set transition callbacks<a class="headerlink" href="#set-transition-callbacks" title="Permanent link">&para;</a></h3>
+<h3 id="transition-callbacks">Transition callbacks<a class="headerlink" href="#transition-callbacks" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set transition direction
     <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTransitionDirection</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
@@ -9934,14 +9934,26 @@ or</p>
 </ul>
 </li>
 </ul>
-<h3 id="set-transition-duration">Set transition duration<a class="headerlink" href="#set-transition-duration" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="set-ease-function">Set ease function<a class="headerlink" href="#set-ease-function" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setEaseFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
-</code></pre></div>
+<h3 id="transition-duration">Transition duration<a class="headerlink" href="#transition-duration" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">duration</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="ease-function">Ease function<a class="headerlink" href="#ease-function" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setEaseFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
+</ul>
+</li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">easeFunction</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
 <ul>
