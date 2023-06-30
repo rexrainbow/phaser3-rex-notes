@@ -70,19 +70,19 @@ var CreateCommandExecutor = function (scene) {
         .addGameObjectManager({
             name: 'BG',
             createGameObject(scene, config) {
-                return scene.rexUI.add.transitionImage(config);
+                return scene.rexUI.add.transitionImagePack(config);
             },
             fade: 0,  // No fade-in when creating/destroying gameobject
             viewportCoordinate: true,
             defaultLayer: 'bgLayer',
 
             commands: {
-                cross(gameObject, { key, frame, wait = true } = {}, commandExecutor) {
+                cross(gameObject, { key, frame, mode = 'fade', wait = true } = {}, commandExecutor) {
                     // Wait until transition complete
                     if (wait) {
                         commandExecutor.waitEvent(gameObject, 'complete');
                     }
-                    gameObject.transit(key, frame);
+                    gameObject.transit(key, frame, mode);
                 }
             }
         })

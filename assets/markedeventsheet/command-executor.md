@@ -96,8 +96,15 @@ CharacterA.cross
 bgm.cross
   key=theme1
 
+wait
+  time=200
+
 Background.cross
   key=road
+  mode=irisOut
+
+wait
+  time=200
 
 CharacterA.to
   vpx=-0.2
