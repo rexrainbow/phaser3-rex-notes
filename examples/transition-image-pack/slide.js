@@ -14,8 +14,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 580, '').setDepth(1);
+        var print = this.add.text(0, 0, '').setOrigin(0).setDepth(1);
         var image = this.add.rexTransitionImagePack(400, 300, 'classroom')
+            .setScale(0.85)
             .on('complete', function () {
                 console.log('complete')
             })
@@ -35,6 +36,7 @@ class Demo extends Phaser.Scene {
             print.text = mode;
         })
 
+        this.add.text(0, 580, 'Any click to transit image')
     }
 
     update() { }

@@ -11,10 +11,10 @@ var AddZoomModes = function (image) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 var scale = 1 - t;
-                parent.setChildScale(currentImage, scale, scale);
+                parent.setChildLocalScale(currentImage, scale, scale);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                parent.setChildScale(currentImage, 1, 1);
+                parent.setChildLocalScale(currentImage, 1, 1);
             },
         })
         .addTransitionMode(ZoomIn, {
@@ -24,10 +24,10 @@ var AddZoomModes = function (image) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 var scale = t;
-                parent.setChildScale(nextImage, scale, scale);
+                parent.setChildLocalScale(nextImage, scale, scale);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                parent.setChildScale(nextImage, 1, 1);
+                parent.setChildLocalScale(nextImage, 1, 1);
             },
         })
         .addTransitionMode(ZoomInOut, {
@@ -40,7 +40,7 @@ var AddZoomModes = function (image) {
                 var scale;
                 if (t < 0.5) {
                     scale = 1 - (t * 2);
-                    parent.setChildScale(currentImage, scale, scale);
+                    parent.setChildLocalScale(currentImage, scale, scale);
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
@@ -50,14 +50,14 @@ var AddZoomModes = function (image) {
                     }
 
                     scale = (t - 0.5) * 2;
-                    parent.setChildScale(nextImage, scale, scale);
+                    parent.setChildLocalScale(nextImage, scale, scale);
                 }
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                parent.setChildScale(currentImage, 1, 1);
+                parent.setChildLocalScale(currentImage, 1, 1);
                 parent.setChildVisible(currentImage, true);
 
-                parent.setChildScale(nextImage, 1, 1);
+                parent.setChildLocalScale(nextImage, 1, 1);
                 parent.setChildVisible(nextImage, true);
             },
         })
