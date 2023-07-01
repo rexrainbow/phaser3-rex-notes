@@ -730,7 +730,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
 1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
     ```javascript
-    var touchEventStop = scene.rexUI.add.toucheventstop(gameObject, config);
+    var touchEventStop = scene.rexUI.add.touchEventStop(gameObject, config);
     ```
     or
     ```javascript

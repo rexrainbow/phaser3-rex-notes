@@ -7,6 +7,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 
 ## Live demos
 
+- [Effect list](https://codepen.io/rexrainbow/full/QWJvzeP)
 - [Slide modes](https://codepen.io/rexrainbow/pen/gOQgdMz)
 - [Fade modes](https://codepen.io/rexrainbow/pen/xxQqEgO)
 - [Mask modes](https://codepen.io/rexrainbow/pen/KKrWbYP)
