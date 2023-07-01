@@ -6,7 +6,7 @@ import Yoyo from './Yoyo.js';
 var AddPixellateMode = function (image) {
     image
         .addTransitionMode(Pixellate, {
-            ease: 'Linear', dir: 'out', mask: false,
+            ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
                 currentImage.effect = currentImage.preFX.addPixelate(0);
@@ -14,12 +14,19 @@ var AddPixellateMode = function (image) {
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 if (t < 0.5) {
+                    if (nextImage.visible) {
+                        parent.setChildVisible(nextImage, false);
+                    }
+
                     t = Yoyo(t);
                     var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
                     currentImage.effect.amount = Math.ceil(maxAmount * t);
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
+                    }
+                    if (!nextImage.visible) {
+                        parent.setChildVisible(nextImage, true);
                     }
 
                     t = Yoyo(t);
