@@ -9663,15 +9663,19 @@ or</p>
 <li><code>duration</code> : Override default <code>duration</code> setting.</li>
 <li><code>ease</code> : Override default <code>ease</code> setting.</li>
 <li><code>mode</code> : Pre-build effects<ul>
+<li>Fade effects : <ul>
+<li><code>'fade'</code> : Tint old image to black, then tint new image from black to origin color.</li>
+<li><code>'crossFade'</code> : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.</li>
+</ul>
+</li>
 <li>Slide effects : <code>'slideLeft'</code>, <code>'slideRight'</code>, <code>'slideUp'</code>, <code>'slideDown'</code>, 
   <code>'slideAwayLeft'</code>, <code>'slideAwayRight'</code>, <code>'slideAwayUp'</code>, <code>'slideAwayDown'</code>, 
   <code>'pushLeft'</code>, <code>'pushRight'</code>, <code>'pushUp'</code>, <code>'pushDown'</code>.</li>
 <li>Zoom(scale) effects : <code>'zoomOut'</code>, <code>'zoomIn'</code>, <code>'zoomInOut'</code>.</li>
-<li>Fade effects : <code>'fade'</code> (tint-fade), <code>'crossFade'</code> (alpha-blending)</li>
 <li>Mask effects : <code>'wipeLeft'</code>, <code>'wipeRight'</code>, <code>'wipeUp'</code>, <code>'wipeDown'</code>,
   <code>'irisOut'</code>, <code>'irisIn'</code>, <code>'pieOut'</code>, <code>'pieIn'</code>, 
   <code>'blinds'</code>, <code>'squares'</code>, <code>'curtain'</code>.</li>
-<li>Shader effects : <code>'pixellate'</code></li>
+<li>Shader effects : <code>'pixellate'</code>, <code>'dissolve'</code></li>
 </ul>
 </li>
 </ul>

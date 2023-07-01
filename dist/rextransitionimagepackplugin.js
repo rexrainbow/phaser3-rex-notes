@@ -437,7 +437,7 @@
     }
   };
 
-  var GetValue$i = Phaser.Utils.Objects.GetValue;
+  var GetValue$j = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
@@ -492,11 +492,11 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
     } else {
-      state.syncPosition = GetValue$i(config, 'syncPosition', true);
-      state.syncRotation = GetValue$i(config, 'syncRotation', true);
-      state.syncScale = GetValue$i(config, 'syncScale', true);
-      state.syncAlpha = GetValue$i(config, 'syncAlpha', true);
-      state.syncScrollFactor = GetValue$i(config, 'syncScrollFactor', true);
+      state.syncPosition = GetValue$j(config, 'syncPosition', true);
+      state.syncRotation = GetValue$j(config, 'syncRotation', true);
+      state.syncScale = GetValue$j(config, 'syncScale', true);
+      state.syncAlpha = GetValue$j(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$j(config, 'syncScrollFactor', true);
     }
   };
   var AddChild = {
@@ -1763,7 +1763,7 @@
     return object instanceof GameObjectClass;
   };
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
+  var GetValue$i = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var UUID = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
@@ -1772,13 +1772,13 @@
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-    var x = GetValue$h(config, 'x', undefined);
-    var y = GetValue$h(config, 'y', undefined);
-    var width = GetValue$h(config, 'width', undefined);
-    var height = GetValue$h(config, 'height', undefined);
-    var originX = GetValue$h(config, 'originX', 0);
-    var originY = GetValue$h(config, 'originY', 0);
-    var padding = GetValue$h(config, 'padding', 0);
+    var x = GetValue$i(config, 'x', undefined);
+    var y = GetValue$i(config, 'y', undefined);
+    var width = GetValue$i(config, 'width', undefined);
+    var height = GetValue$i(config, 'height', undefined);
+    var originX = GetValue$i(config, 'originX', 0);
+    var originY = GetValue$i(config, 'originY', 0);
+    var padding = GetValue$i(config, 'padding', 0);
     var scrollX, scrollY;
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
@@ -1889,17 +1889,17 @@
     }
   };
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
+  var GetValue$h = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$g(config, 'color');
-      lineWidth = GetValue$g(config, 'lineWidth');
-      fillColor = GetValue$g(config, 'fillColor');
-      fillAlpha = GetValue$g(config, 'fillAlpha', 1);
-      padding = GetValue$g(config, 'padding', 0);
+      strokeColor = GetValue$h(config, 'color');
+      lineWidth = GetValue$h(config, 'lineWidth');
+      fillColor = GetValue$h(config, 'fillColor');
+      fillAlpha = GetValue$h(config, 'fillAlpha', 1);
+      padding = GetValue$h(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -1962,10 +1962,10 @@
     y: 0
   }];
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
-    var drawContainer = GetValue$f(config, 'drawContainer', true);
-    var gameObjects = GetValue$f(config, 'children');
+    var drawContainer = GetValue$g(config, 'drawContainer', true);
+    var gameObjects = GetValue$g(config, 'children');
     if (gameObjects === undefined) {
       gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -2423,7 +2423,7 @@
     }
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -2432,7 +2432,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$e(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$f(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -2509,7 +2509,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     var _super = _createSuper(TickTask);
@@ -2520,7 +2520,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$d(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$e(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -2637,7 +2637,7 @@
     'always': 2
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     var _super = _createSuper(SceneUpdateTickTask);
@@ -2651,7 +2651,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$c(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$d(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -2687,8 +2687,8 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
-  var Clamp$2 = Phaser.Math.Clamp;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var Clamp$3 = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
@@ -2697,15 +2697,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$b(o, 'state', IDLE);
-        this.timeScale = GetValue$b(o, 'timeScale', 1);
-        this.delay = GetValue$b(o, 'delay', 0);
-        this.repeat = GetValue$b(o, 'repeat', 0);
-        this.repeatCounter = GetValue$b(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$b(o, 'repeatDelay', 0);
-        this.duration = GetValue$b(o, 'duration', 0);
-        this.nowTime = GetValue$b(o, 'nowTime', 0);
-        this.justRestart = GetValue$b(o, 'justRestart', false);
+        this.state = GetValue$c(o, 'state', IDLE);
+        this.timeScale = GetValue$c(o, 'timeScale', 1);
+        this.delay = GetValue$c(o, 'delay', 0);
+        this.repeat = GetValue$c(o, 'repeat', 0);
+        this.repeatCounter = GetValue$c(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$c(o, 'repeatDelay', 0);
+        this.duration = GetValue$c(o, 'duration', 0);
+        this.nowTime = GetValue$c(o, 'nowTime', 0);
+        this.justRestart = GetValue$c(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -2820,10 +2820,10 @@
             t = 1;
             break;
         }
-        return Clamp$2(t, 0, 1);
+        return Clamp$3(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$2(value, -1, 1);
+        value = Clamp$3(value, -1, 1);
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
@@ -2934,7 +2934,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
@@ -2947,13 +2947,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$a(o, 'timer'));
-        this.setEnable(GetValue$a(o, 'enable', true));
-        this.setTarget(GetValue$a(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$b(o, 'timer'));
+        this.setEnable(GetValue$b(o, 'enable', true));
+        this.setTarget(GetValue$b(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$a(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$a(o, 'repeat', 0));
+        this.setEase(GetValue$b(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$b(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -3073,7 +3073,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var Linear$2 = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -3096,15 +3096,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$9(config, 'key', 'value');
+        this.propertyKey = GetValue$a(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$9(config, 'from', currentValue);
-        this.toValue = GetValue$9(config, 'to', currentValue);
-        this.setEase(GetValue$9(config, 'ease', this.ease));
-        this.setDuration(GetValue$9(config, 'duration', this.duration));
-        this.setRepeat(GetValue$9(config, 'repeat', 0));
-        this.setDelay(GetValue$9(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$9(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$a(config, 'from', currentValue);
+        this.toValue = GetValue$a(config, 'to', currentValue);
+        this.setEase(GetValue$a(config, 'ease', this.ease));
+        this.setDuration(GetValue$a(config, 'duration', this.duration));
+        this.setRepeat(GetValue$a(config, 'repeat', 0));
+        this.setDelay(GetValue$a(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$a(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -3122,7 +3122,7 @@
   }(EaseValueTaskBase);
 
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var GetRandomItem = Phaser.Utils.Array.GetRandom;
   var DirMode = {
     out: 0,
@@ -3173,9 +3173,9 @@
       this.currentTransitionMode = undefined;
       if (IsPlainObject$5(texture)) {
         var config = texture;
-        texture = GetValue$8(config, 'key', undefined);
-        frame = GetValue$8(config, 'frame', undefined);
-        mode = GetValue$8(config, 'mode');
+        texture = GetValue$9(config, 'key', undefined);
+        frame = GetValue$9(config, 'frame', undefined);
+        mode = GetValue$9(config, 'mode');
         if (Array.isArray(mode)) {
           mode = GetRandomItem(mode);
         }
@@ -3497,28 +3497,28 @@
     };
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var DefaultImageClass = Phaser.GameObjects.Image;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var RotateAround$1 = Phaser.Math.RotateAround;
   var GridCutImage = function GridCutImage(gameObject, columns, rows, config) {
     if (IsPlainObject$4(columns)) {
       config = columns;
-      columns = GetValue$7(config, 'columns', 1);
-      rows = GetValue$7(config, 'rows', 1);
+      columns = GetValue$8(config, 'columns', 1);
+      rows = GetValue$8(config, 'rows', 1);
     }
-    var createImageCallback = GetValue$7(config, 'onCreateImage');
+    var createImageCallback = GetValue$8(config, 'onCreateImage');
     if (!createImageCallback) {
-      var ImageClass = GetValue$7(config, 'ImageClass', DefaultImageClass);
+      var ImageClass = GetValue$8(config, 'ImageClass', DefaultImageClass);
       createImageCallback = function createImageCallback(scene, key, frame) {
         return new ImageClass(scene, 0, 0, key, frame);
       };
     }
-    var originX = GetValue$7(config, 'originX', 0.5);
-    var originY = GetValue$7(config, 'originY', 0.5);
-    var addToScene = GetValue$7(config, 'add', true);
-    var align = GetValue$7(config, 'align', addToScene);
-    var imageObjectPool = GetValue$7(config, 'objectPool', undefined);
+    var originX = GetValue$8(config, 'originX', 0.5);
+    var originY = GetValue$8(config, 'originY', 0.5);
+    var addToScene = GetValue$8(config, 'add', true);
+    var align = GetValue$8(config, 'align', addToScene);
+    var imageObjectPool = GetValue$8(config, 'objectPool', undefined);
     var scene = gameObject.scene;
     var texture = gameObject.texture;
     var frame = gameObject.frame;
@@ -3653,8 +3653,8 @@
   };
 
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var Clamp$1 = Phaser.Math.Clamp;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var Clamp$2 = Phaser.Math.Clamp;
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
     var _super = _createSuper(TransitionImage);
@@ -3663,24 +3663,24 @@
       _classCallCheck(this, TransitionImage);
       if (IsPlainObject$3(x)) {
         config = x;
-        x = GetValue$6(config, 'x', 0);
-        y = GetValue$6(config, 'y', 0);
-        texture = GetValue$6(config, 'key', undefined);
-        frame = GetValue$6(config, 'frame', undefined);
+        x = GetValue$7(config, 'x', 0);
+        y = GetValue$7(config, 'y', 0);
+        texture = GetValue$7(config, 'key', undefined);
+        frame = GetValue$7(config, 'frame', undefined);
       } else if (IsPlainObject$3(frame)) {
         config = frame;
         frame = undefined;
       }
-      var backImage = GetValue$6(config, 'back', undefined);
-      var frontImage = GetValue$6(config, 'front', undefined);
+      var backImage = GetValue$7(config, 'back', undefined);
+      var frontImage = GetValue$7(config, 'front', undefined);
       if (!backImage) {
         backImage = scene.add.image(x, y, texture, frame);
       }
       if (!frontImage) {
         frontImage = scene.add.image(x, y, texture, frame);
       }
-      var width = GetValue$6(config, 'width', frontImage.width);
-      var height = GetValue$6(config, 'height', frontImage.height);
+      var width = GetValue$7(config, 'width', frontImage.width);
+      var height = GetValue$7(config, 'height', frontImage.height);
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexTransitionImage';
       backImage.setVisible(false);
@@ -3694,18 +3694,18 @@
       _this.currentTransitionMode = undefined;
 
       // Transition parameters
-      var onStart = GetValue$6(config, 'onStart', undefined);
-      var onProgress = GetValue$6(config, 'onProgress', undefined);
-      var onComplete = GetValue$6(config, 'onComplete', undefined);
-      var dir = GetValue$6(config, 'dir', 0);
+      var onStart = GetValue$7(config, 'onStart', undefined);
+      var onProgress = GetValue$7(config, 'onProgress', undefined);
+      var onComplete = GetValue$7(config, 'onComplete', undefined);
+      var dir = GetValue$7(config, 'dir', 0);
       if (onStart === undefined && onProgress === undefined && onComplete === undefined) {
         onStart = OnStart;
         onProgress = OnProgress;
         onComplete = OnComplete;
         dir = 0;
       }
-      _this.setTransitionStartCallback(onStart, GetValue$6(config, 'onStartScope', undefined)).setTransitionProgressCallback(onProgress, GetValue$6(config, 'onProgressScope', undefined)).setTransitionCompleteCallback(onComplete, GetValue$6(config, 'onCompleteScope', undefined)).setTransitionDirection(dir).setDuration(GetValue$6(config, 'duration', 1000)).setEaseFunction(GetValue$6(config, 'ease', 'Linear'));
-      var maskGameObject = GetValue$6(config, 'mask', undefined);
+      _this.setTransitionStartCallback(onStart, GetValue$7(config, 'onStartScope', undefined)).setTransitionProgressCallback(onProgress, GetValue$7(config, 'onProgressScope', undefined)).setTransitionCompleteCallback(onComplete, GetValue$7(config, 'onCompleteScope', undefined)).setTransitionDirection(dir).setDuration(GetValue$7(config, 'duration', 1000)).setEaseFunction(GetValue$7(config, 'ease', 'Linear'));
+      var maskGameObject = GetValue$7(config, 'mask', undefined);
       if (maskGameObject) {
         _this.setMaskGameObject(maskGameObject);
       }
@@ -3791,7 +3791,7 @@
         return this._t;
       },
       set: function set(value) {
-        value = Clamp$1(value, 0, 1);
+        value = Clamp$2(value, 0, 1);
         if (this._t === value) {
           return;
         }
@@ -3912,6 +3912,7 @@
 
   // Shader effect modes
   var Pixellate = 'pixellate';
+  var Dissolve = 'dissolve';
 
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
@@ -4508,7 +4509,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$5 = function GetValue(source, key, defaultValue) {
+  var GetValue$6 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -4557,7 +4558,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$5(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$6(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -5960,7 +5961,7 @@
     return Rectangle;
   }(BaseGeom);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     var _super = _createSuper(RoundRectangle);
@@ -6122,10 +6123,10 @@
           this.radiusBL = value;
           this.radiusBR = value;
         } else {
-          this.radiusTL = GetValue$4(value, 'tl', 0);
-          this.radiusTR = GetValue$4(value, 'tr', 0);
-          this.radiusBL = GetValue$4(value, 'bl', 0);
-          this.radiusBR = GetValue$4(value, 'br', 0);
+          this.radiusTL = GetValue$5(value, 'tl', 0);
+          this.radiusTR = GetValue$5(value, 'tr', 0);
+          this.radiusBL = GetValue$5(value, 'bl', 0);
+          this.radiusBR = GetValue$5(value, 'br', 0);
         }
       }
     }, {
@@ -6415,7 +6416,7 @@
     roundRectangle: RoundRectangle,
     triangle: Triangle
   };
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var ClearAll = function ClearAll() {
     var shapes = this.getShapes();
@@ -6433,7 +6434,7 @@
       return shape;
     },
     buildShapes: function buildShapes(config) {
-      var createCallback = GetValue$3(config, 'create', undefined);
+      var createCallback = GetValue$4(config, 'create', undefined);
       if (IsPlainObject$2(createCallback)) {
         var shapes = createCallback;
         for (var shapeType in shapes) {
@@ -6465,7 +6466,7 @@
       } else if (typeof createCallback === 'function') {
         createCallback.call(this);
       }
-      this.setUpdateShapesCallback(GetValue$3(config, 'update'));
+      this.setUpdateShapesCallback(GetValue$4(config, 'update'));
     },
     setUpdateShapesCallback: function setUpdateShapesCallback(callback) {
       if (callback === undefined) {
@@ -6512,7 +6513,7 @@
   var tempMatrix, parentMatrix;
   var globOut = {};
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var CustomShapes = /*#__PURE__*/function (_BaseShapes) {
     _inherits(CustomShapes, _BaseShapes);
@@ -6522,13 +6523,13 @@
       _classCallCheck(this, CustomShapes);
       if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue$2(config, 'x', 0);
-        y = GetValue$2(config, 'y', 0);
-        width = GetValue$2(config, 'width', 2);
-        height = GetValue$2(config, 'height', 2);
+        x = GetValue$3(config, 'x', 0);
+        y = GetValue$3(config, 'y', 0);
+        width = GetValue$3(config, 'width', 2);
+        height = GetValue$3(config, 'height', 2);
       }
       _this = _super.call(this, scene, x, y, width, height);
-      _this.type = GetValue$2(config, 'type', 'rexCustomShapes');
+      _this.type = GetValue$3(config, 'type', 'rexCustomShapes');
       _this.buildShapes(config);
       return _this;
     }
@@ -6656,8 +6657,8 @@
     easeValueRepeat: EaseValueRepeat
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Clamp = Phaser.Math.Clamp;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var Clamp$1 = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
@@ -6669,13 +6670,13 @@
       _createClass(ProgressBase, [{
         key: "bootProgressBase",
         value: function bootProgressBase(config) {
-          this.eventEmitter = GetValue$1(config, 'eventEmitter', this);
-          var callback = GetValue$1(config, 'valuechangeCallback', null);
+          this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+          var callback = GetValue$2(config, 'valuechangeCallback', null);
           if (callback !== null) {
-            var scope = GetValue$1(config, 'valuechangeCallbackScope', undefined);
+            var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
             this.eventEmitter.on('valuechange', callback, scope);
           }
-          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1(config, 'easeValue.ease', 'Linear'));
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
           return this;
         }
       }, {
@@ -6684,7 +6685,7 @@
           return this._value;
         },
         set: function set(value) {
-          value = Clamp(value, 0, 1);
+          value = Clamp$1(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -6700,7 +6701,7 @@
     return ProgressBase;
   }
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var CustomProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CustomProgress, _ProgressBase);
@@ -6710,10 +6711,10 @@
       _classCallCheck(this, CustomProgress);
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        width = GetValue(config, 'width', 2);
-        height = GetValue(config, 'height', 2);
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        width = GetValue$1(config, 'width', 2);
+        height = GetValue$1(config, 'height', 2);
       }
       if (config === undefined) {
         config = {};
@@ -6723,7 +6724,7 @@
       }
       _this = _super.call(this, scene, x, y, width, height, config);
       _this.bootProgressBase(config);
-      _this.setValue(GetValue(config, 'value', 0));
+      _this.setValue(GetValue$1(config, 'value', 0));
       return _this;
     }
     _createClass(CustomProgress, [{
@@ -7095,7 +7096,232 @@
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddCurtainMode, AddPixellateMode];
+  // Reference: https://medium.com/neosavvy-labs/webgl-with-perlin-noise-part-1-a87b56bbc9fb
+  var frag$1 = "vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }\nvec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }\nvec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }\nvec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }\nvec3 fade(vec3 t) { return t*t*t*(t*(t*6.0-15.0)+10.0); }\nfloat Perlin(vec3 P) {\n    vec3 i0 = mod289(floor(P)), i1 = mod289(i0 + vec3(1.0));\n    vec3 f0 = fract(P), f1 = f0 - vec3(1.0), f = fade(f0);\n    vec4 ix = vec4(i0.x, i1.x, i0.x, i1.x), iy = vec4(i0.yy, i1.yy);\n    vec4 iz0 = i0.zzzz, iz1 = i1.zzzz;\n    vec4 ixy = permute(permute(ix) + iy), ixy0 = permute(ixy + iz0), ixy1 = permute(ixy + iz1);\n    vec4 gx0 = ixy0 * (1.0 / 7.0), gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;\n    vec4 gx1 = ixy1 * (1.0 / 7.0), gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;\n    gx0 = fract(gx0); gx1 = fract(gx1);\n    vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0), sz0 = step(gz0, vec4(0.0));\n    vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1), sz1 = step(gz1, vec4(0.0));\n    gx0 -= sz0 * (step(0.0, gx0) - 0.5); gy0 -= sz0 * (step(0.0, gy0) - 0.5);\n    gx1 -= sz1 * (step(0.0, gx1) - 0.5); gy1 -= sz1 * (step(0.0, gy1) - 0.5);\n    vec3 g0 = vec3(gx0.x,gy0.x,gz0.x), g1 = vec3(gx0.y,gy0.y,gz0.y),\n        g2 = vec3(gx0.z,gy0.z,gz0.z), g3 = vec3(gx0.w,gy0.w,gz0.w),\n        g4 = vec3(gx1.x,gy1.x,gz1.x), g5 = vec3(gx1.y,gy1.y,gz1.y),\n        g6 = vec3(gx1.z,gy1.z,gz1.z), g7 = vec3(gx1.w,gy1.w,gz1.w);\n    vec4 norm0 = taylorInvSqrt(vec4(dot(g0,g0), dot(g2,g2), dot(g1,g1), dot(g3,g3)));\n    vec4 norm1 = taylorInvSqrt(vec4(dot(g4,g4), dot(g6,g6), dot(g5,g5), dot(g7,g7)));\n    g0 *= norm0.x; g2 *= norm0.y; g1 *= norm0.z; g3 *= norm0.w;\n    g4 *= norm1.x; g6 *= norm1.y; g5 *= norm1.z; g7 *= norm1.w;\n    vec4 nz = mix(vec4(dot(g0, vec3(f0.x, f0.y, f0.z)), dot(g1, vec3(f1.x, f0.y, f0.z)),\n        dot(g2, vec3(f0.x, f1.y, f0.z)), dot(g3, vec3(f1.x, f1.y, f0.z))),\n        vec4(dot(g4, vec3(f0.x, f0.y, f1.z)), dot(g5, vec3(f1.x, f0.y, f1.z)),\n            dot(g6, vec3(f0.x, f1.y, f1.z)), dot(g7, vec3(f1.x, f1.y, f1.z))), f.z);\n    return 2.2 * mix(mix(nz.x,nz.z,f.y), mix(nz.y,nz.w,f.y), f.x);\n}\nfloat Perlin(vec2 P) { return Perlin(vec3(P, 0.0)); }\n";
+
+  // https://github.com/ykob/glsl-dissolve/blob/master/src/glsl/dissolve.fs
+
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n// Scene buffer\nuniform sampler2D uMainSampler;\nuniform sampler2D uMainSampler2;\n\nuniform int resizeMode;\nuniform float progress;\nuniform float fromRatio;\nuniform float toRatio;\nvarying vec2 outFragCoord;\n// Effect parameters\nuniform float noiseX;\nuniform float noiseY;\nuniform float noiseZ;\nuniform float fromEdgeStart;\nuniform float fromEdgeWidth;\nuniform float toEdgeStart;\nuniform float toEdgeWidth;\n\n".concat(frag$1, "\n\nvec4 getFromColor (vec2 uv) {\n  return texture2D(uMainSampler, uv);\n}\n\nvec4 getToColor (vec2 uv) {\n  if (resizeMode == 2) {\n    //  cover\n    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, 1.0 - uv.y) - 0.5) * vec2(min(fromRatio / toRatio, 1.0), min((toRatio / fromRatio), 1.0)));\n  } else if (resizeMode == 1) {\n    //  contain\n    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, 1.0 - uv.y) - 0.5) * vec2(max(fromRatio / toRatio, 1.0), max((toRatio / fromRatio), 1.0)));\n  } else {\n    //  stretch\n    return texture2D(uMainSampler2, vec2(uv.x, 1.0 - uv.y));\n  }\n}\n\nvec4 transition (vec2 uv) {    \n  vec4 colorFront = getFromColor(uv);\n  vec4 colorTo = getToColor(uv);\n\n  float noise = (Perlin(vec3(uv.x * noiseX, uv.y * noiseY, noiseZ)) + 1.0) / 2.0\n    * (1.0 - (fromEdgeStart + fromEdgeWidth + toEdgeStart + toEdgeWidth))\n    + (fromEdgeStart + fromEdgeWidth + toEdgeStart + toEdgeWidth) * 0.5;\n  vec4 colorResult = colorFront * smoothstep(progress - (fromEdgeStart + fromEdgeWidth), progress - fromEdgeStart, noise)\n    + colorTo * smoothstep((1.0 - progress) - (toEdgeStart + toEdgeWidth), (1.0 - progress) - toEdgeStart, (1.0 - noise));\n  return colorResult;\n}\n\nvoid main () {\n  vec2 uv = outFragCoord;\n  gl_FragColor = transition(uv);\n}\n");
+
+  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var Clamp = Phaser.Math.Clamp;
+  var DissolvePostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
+    _inherits(DissolvePostFxPipeline, _PostFXPipeline);
+    var _super = _createSuper(DissolvePostFxPipeline);
+    function DissolvePostFxPipeline(game) {
+      var _this;
+      _classCallCheck(this, DissolvePostFxPipeline);
+      _this = _super.call(this, {
+        name: 'rexDissolvePostFx',
+        game: game,
+        renderTarget: true,
+        fragShader: frag
+      });
+      _this._progress = 0;
+      _this.toFrame = null;
+      _this.targetTexture = null;
+      _this.resizeMode = 1;
+      _this.toRatio = 1;
+      _this.noiseX = 0;
+      _this.noiseY = 0;
+      _this.noiseZ = 0;
+      _this.fromEdgeStart = 0.01;
+      _this.fromEdgeWidth = 0.05;
+      _this.toEdgeStart = 0.01;
+      _this.toEdgeWidth = 0.05;
+      return _this;
+    }
+    _createClass(DissolvePostFxPipeline, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setProgress(GetValue(o, 'progress', 0));
+        this.setTransitionTargetTexture(GetValue(o, 'toTexture', '__DEFAULT'), GetValue(o, 'toFrame', undefined), GetValue(o, 'resizeMode', 1));
+        this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
+        this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));
+        this.setToEdge(GetValue(o, 'toEdgeStart', 0.01), GetValue(o, 'toEdgeWidth', 0.05));
+        return this;
+      }
+    }, {
+      key: "onBoot",
+      value: function onBoot() {
+        this.setTransitionTargetTexture();
+      }
+    }, {
+      key: "onPreRender",
+      value: function onPreRender() {
+        this.set1f('progress', this.progress);
+        this.set1i('resizeMode', this.resizeMode);
+        this.set1f('noiseX', this.noiseX);
+        this.set1f('noiseY', this.noiseY);
+        this.set1f('noiseZ', this.noiseZ);
+        this.set1f('fromEdgeStart', this.fromEdgeStart);
+        this.set1f('fromEdgeWidth', this.fromEdgeWidth);
+        this.set1f('toEdgeStart', this.toEdgeStart);
+        this.set1f('toEdgeWidth', this.toEdgeWidth);
+      }
+    }, {
+      key: "onDraw",
+      value: function onDraw(renderTarget) {
+        this.set1f('fromRatio', renderTarget.width / renderTarget.height);
+        this.bindTexture(this.targetTexture, 1);
+        this.bindAndDraw(renderTarget);
+      }
+    }, {
+      key: "progress",
+      get: function get() {
+        return this._progress;
+      },
+      set: function set(value) {
+        this._progress = Clamp(value, 0, 1);
+      }
+    }, {
+      key: "setProgress",
+      value: function setProgress(value) {
+        this.progress = value;
+        return this;
+      }
+    }, {
+      key: "setTransitionTargetTexture",
+      value: function setTransitionTargetTexture(key, frame, resizeMode) {
+        if (key === undefined) {
+          key = '__DEFAULT';
+        }
+        var phaserTexture = this.game.textures.getFrame(key, frame);
+        if (!phaserTexture) {
+          phaserTexture = this.game.textures.getFrame('__DEFAULT');
+        }
+        this.toRatio = phaserTexture.width / phaserTexture.height;
+        this.toFrame = phaserTexture;
+        this.targetTexture = phaserTexture.glTexture;
+        if (resizeMode !== undefined) {
+          this.resizeMode = resizeMode;
+        }
+        this.set1i('uMainSampler2', 1);
+        this.set1f('toRatio', this.toRatio);
+        return this;
+      }
+    }, {
+      key: "setResizeMode",
+      value: function setResizeMode(mode) {
+        if (typeof mode === 'string') {
+          mode = ResizeMode[mode];
+        }
+        this.resizeMode = mode;
+        return this;
+      }
+    }, {
+      key: "setNoise",
+      value: function setNoise(x, y, z) {
+        if (x === undefined) {
+          x = 4 + Math.random() * 6;
+        }
+        if (y === undefined) {
+          y = 4 + Math.random() * 6;
+        }
+        if (z === undefined) {
+          z = Math.random() * 10;
+        }
+        this.noiseX = x;
+        this.noiseY = y;
+        this.noiseZ = z;
+        return this;
+      }
+    }, {
+      key: "setFromEdge",
+      value: function setFromEdge(edgeStart, edgeWidth) {
+        this.fromEdgeStart = edgeStart;
+        this.fromEdgeWidth = edgeWidth;
+        return this;
+      }
+    }, {
+      key: "setToEdge",
+      value: function setToEdge(edgeStart, edgeWidth) {
+        this.toEdgeStart = edgeStart;
+        this.toEdgeWidth = edgeWidth;
+        return this;
+      }
+    }]);
+    return DissolvePostFxPipeline;
+  }(PostFXPipeline);
+  /**
+   * Set the resize mode of the target texture.
+   * 
+   * Can be either:
+   * 
+   * 0 - Stretch. The target texture is stretched to the size of the source texture.
+   * 1 - Contain. The target texture is resized to fit the source texture. This is the default.
+   * 2 - Cover. The target texture is resized to cover the source texture.
+   * 
+   * If the source and target textures are the same size, then use a resize mode of zero
+   * for speed.
+   *
+   */
+  var ResizeMode = {
+    stretch: 0,
+    contain: 1,
+    cover: 2
+  };
+
+  var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
+    GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
+  };
+
+  var AddPostFxPipelineInstance = function AddPostFxPipelineInstance(gameObject, PostFxPipelineClass, config) {
+    if (config === undefined) {
+      config = {};
+    }
+    gameObject.setPostPipeline(PostFxPipelineClass);
+    var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
+    pipeline.resetFromJSON(config);
+    if (config.name) {
+      pipeline.name = config.name;
+    }
+    return pipeline;
+  };
+
+  var SpliceOne = Phaser.Utils.Array.SpliceOne;
+  var RemovePostFxPipelineInstance = function RemovePostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
+    if (name === undefined) {
+      var pipelines = gameObject.postPipelines;
+      for (var i = pipelines.length - 1; i >= 0; i--) {
+        var instance = pipelines[i];
+        if (instance instanceof PostFxPipelineClass) {
+          instance.destroy();
+          SpliceOne(pipelines, i);
+        }
+      }
+    } else {
+      var pipelines = gameObject.postPipelines;
+      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+        var instance = pipelines[i];
+        if (instance instanceof PostFxPipelineClass && instance.name === name) {
+          instance.destroy();
+          SpliceOne(pipelines, i);
+        }
+      }
+    }
+  };
+
+  var AddDissolveMode = function AddDissolveMode(image) {
+    RegisterPostPipeline(image.scene.game, 'rexDissolvePostFx', DissolvePostFxPipeline);
+    image.addTransitionMode(Dissolve, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        currentImage.effect = AddPostFxPipelineInstance(currentImage, DissolvePostFxPipeline);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        currentImage.effect.setProgress(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        RemovePostFxPipelineInstance(currentImage, DissolvePostFxPipeline);
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddCurtainMode, AddPixellateMode, AddDissolveMode];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);

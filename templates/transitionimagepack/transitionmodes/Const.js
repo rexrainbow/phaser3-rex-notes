@@ -42,3 +42,4 @@ export const Curtain = 'curtain';
 
 // Shader effect modes
 export const Pixellate = 'pixellate';
+export const Dissolve = 'dissolve';

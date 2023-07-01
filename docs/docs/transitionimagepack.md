@@ -157,16 +157,17 @@ image.transit({
 - `duration` : Override default `duration` setting.
 - `ease` : Override default `ease` setting.
 - `mode` : Pre-build effects
+    - Fade effects : 
+        - `'fade'` : Tint old image to black, then tint new image from black to origin color.
+        - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
     - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
       `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
       `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
     - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
-    - Fade effects : `'fade'` (tint-fade), `'crossFade'` (alpha-blending)
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
       `'irisOut'`, `'irisIn'`, `'pieOut'`, `'pieIn'`, 
       `'blinds'`, `'squares'`, `'curtain'`.
-    - Shader effects : `'pixellate'`
-    
+    - Shader effects : `'pixellate'`, `'dissolve'`
 
 #### Current texture
 

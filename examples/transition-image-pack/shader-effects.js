@@ -14,14 +14,23 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var print = this.add.text(0, 580, '').setDepth(1);
         var image = this.add.rexTransitionImagePack(400, 300, 'classroom')
             .on('complete', function () {
                 console.log('complete')
             })
 
+        var transitionModes = [
+            'pixellate', 'dissolve',
+        ];
+        var idx = 0;
         this.input.on('pointerdown', function () {
             var nextKey = (image.texture.key === 'classroom') ? 'road' : 'classroom';
-            image.transit(nextKey, undefined, 'pixellate');
+            var mode = transitionModes[idx];
+            idx = (idx + 1) % (transitionModes.length);
+
+            image.transit(nextKey, undefined, mode);
+            print.text = mode;
         })
 
     }

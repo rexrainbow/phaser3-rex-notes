@@ -10,6 +10,7 @@ import AddBlindsModes from './AddBlindsModes.js';
 import AddSquaresModes from './AddSquaresModes.js';
 import AddCurtainMode from './AddCurtainMode.js';
 import AddPixellateMode from './AddPixellateMode.js';
+import AddDissolveMode from './AddDissolveMode.js';
 
 const Modes = [
     AddSlideAwayModes, AddSlideModes, AddPushModes,
@@ -17,7 +18,7 @@ const Modes = [
     AddFadeModes,
     AddIrisModes, AddPieModes, AddWipeModes,
     AddBlindsModes, AddSquaresModes, AddCurtainMode,
-    AddPixellateMode
+    AddPixellateMode, AddDissolveMode
 ];
 
 export default Modes;
