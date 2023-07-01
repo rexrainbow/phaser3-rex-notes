@@ -34763,10 +34763,10 @@
       onStart: function onStart(parent, currentImage, nextImage, t) {},
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale = 1 - t;
-        parent.setChildScale(currentImage, scale, scale);
+        parent.setChildLocalScale(currentImage, scale, scale);
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        parent.setChildScale(currentImage, 1, 1);
+        parent.setChildLocalScale(currentImage, 1, 1);
       }
     }).addTransitionMode(ZoomIn, {
       ease: 'Linear',
@@ -34775,10 +34775,10 @@
       onStart: function onStart(parent, currentImage, nextImage, t) {},
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale = t;
-        parent.setChildScale(nextImage, scale, scale);
+        parent.setChildLocalScale(nextImage, scale, scale);
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        parent.setChildScale(nextImage, 1, 1);
+        parent.setChildLocalScale(nextImage, 1, 1);
       }
     }).addTransitionMode(ZoomInOut, {
       ease: 'Linear',
@@ -34791,7 +34791,7 @@
         var scale;
         if (t < 0.5) {
           scale = 1 - t * 2;
-          parent.setChildScale(currentImage, scale, scale);
+          parent.setChildLocalScale(currentImage, scale, scale);
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
@@ -34800,13 +34800,13 @@
             parent.setChildVisible(nextImage, true);
           }
           scale = (t - 0.5) * 2;
-          parent.setChildScale(nextImage, scale, scale);
+          parent.setChildLocalScale(nextImage, scale, scale);
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        parent.setChildScale(currentImage, 1, 1);
+        parent.setChildLocalScale(currentImage, 1, 1);
         parent.setChildVisible(currentImage, true);
-        parent.setChildScale(nextImage, 1, 1);
+        parent.setChildLocalScale(nextImage, 1, 1);
         parent.setChildVisible(nextImage, true);
       }
     });
@@ -35224,19 +35224,25 @@
     image.addTransitionMode(Pixellate, {
       ease: 'Linear',
       dir: 'out',
-      mask: false,
+      mask: true,
       onStart: function onStart(parent, currentImage, nextImage, t) {
         currentImage.effect = currentImage.preFX.addPixelate(0);
         nextImage.effect = nextImage.preFX.addPixelate(0);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         if (t < 0.5) {
+          if (nextImage.visible) {
+            parent.setChildVisible(nextImage, false);
+          }
           t = Yoyo$1(t);
           var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
           currentImage.effect.amount = Math.ceil(maxAmount * t);
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
           }
           t = Yoyo$1(t);
           var maxAmount = Math.min(nextImage.width, nextImage.height) / 5;
