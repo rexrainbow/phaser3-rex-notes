@@ -3905,9 +3905,10 @@
   var PieOut = 'pieOut';
   var PieIn = 'pieIn';
 
-  // blinds, squares, curtain
+  // blinds, squares, diamonds, curtain
   var Blinds = 'blinds';
   var Squares = 'squares';
+  var Diamonds = 'diamonds';
   var Curtain = 'curtain';
 
   // Shader effect modes
@@ -6746,7 +6747,7 @@
     return CustomProgress;
   }(ProgressBase(CustomShapes));
 
-  var CreateMask$5 = function CreateMask(scene) {
+  var CreateMask$6 = function CreateMask(scene) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: [{
@@ -6775,7 +6776,7 @@
     return maskGameObject;
   };
   var AddWipeModes = function AddWipeModes(image) {
-    var maskGameObject = CreateMask$5(image.scene);
+    var maskGameObject = CreateMask$6(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(WipeRight, {
@@ -6837,7 +6838,7 @@
     });
   };
 
-  var CreateMask$4 = function CreateMask(scene) {
+  var CreateMask$5 = function CreateMask(scene) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: [{
@@ -6851,7 +6852,7 @@
     return maskGameObject;
   };
   var AddIrisModes = function AddIrisModes(image) {
-    var maskGameObject = CreateMask$4(image.scene);
+    var maskGameObject = CreateMask$5(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(IrisOut, {
@@ -6883,7 +6884,7 @@
     });
   };
 
-  var CreateMask$3 = function CreateMask(scene) {
+  var CreateMask$4 = function CreateMask(scene) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: [{
@@ -6899,7 +6900,7 @@
     return maskGameObject;
   };
   var AddPieModes = function AddPieModes(image) {
-    var maskGameObject = CreateMask$3(image.scene);
+    var maskGameObject = CreateMask$4(image.scene);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(PieOut, {
@@ -6931,7 +6932,7 @@
     });
   };
 
-  var CreateMask$2 = function CreateMask(scene, columns) {
+  var CreateMask$3 = function CreateMask(scene, columns) {
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: {
@@ -6947,11 +6948,50 @@
     });
     return maskGameObject;
   };
-  var AddBlindsModes$1 = function AddBlindsModes(image) {
-    var maskGameObject = CreateMask$2(image.scene, 10);
+  var AddBlindsModes = function AddBlindsModes(image) {
+    var maskGameObject = CreateMask$3(image.scene, 10);
     image.once('destroy', function () {
       maskGameObject.destroy();
     }).addTransitionMode(Blinds, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setCurrentImageMaskEnable(true, true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        parent.maskGameObject.setValue(t);
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+      }
+    });
+  };
+
+  var CreateMask$2 = function CreateMask(scene, columns, rows) {
+    var maskGameObject = new CustomProgress(scene, {
+      type: 'Graphics',
+      create: {
+        rectangle: columns * rows
+      },
+      update: function update() {
+        var shapes = this.getShapes();
+        var shapeWidth = this.width / columns,
+          shapeHeight = this.height / rows;
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < columns; c++) {
+            shapes[c * rows + r].fillStyle(0xffffff).setSize(shapeWidth * this.value, shapeHeight * this.value).setCenterPosition(shapeWidth * (c + 0.5), shapeHeight * (r + 0.5));
+          }
+        }
+      }
+    });
+    return maskGameObject;
+  };
+  var AddSquaresModes = function AddSquaresModes(image) {
+    var maskGameObject = CreateMask$2(image.scene, Math.ceil(image.width / 40), Math.ceil(image.height / 40));
+    image.once('destroy', function () {
+      maskGameObject.destroy();
+    }).addTransitionMode(Squares, {
       ease: 'Linear',
       dir: 'out',
       mask: maskGameObject,
@@ -6971,26 +7011,31 @@
     var maskGameObject = new CustomProgress(scene, {
       type: 'Graphics',
       create: {
-        rectangle: columns * rows
+        lines: columns * rows
       },
       update: function update() {
         var shapes = this.getShapes();
-        var shapeWidth = this.width / columns,
-          shapeHeight = this.height / rows;
+        var shapeHalfWidth = this.width / (columns - 1),
+          shapeHelfHeight = this.height / rows;
+        var shapeHeight = shapeHelfHeight * 2;
+        var halfWidth = shapeHalfWidth * this.value,
+          halfHeight = shapeHelfHeight * this.value;
         for (var r = 0; r < rows; r++) {
           for (var c = 0; c < columns; c++) {
-            shapes[c * rows + r].fillStyle(0xffffff).setSize(shapeWidth * this.value, shapeHeight * this.value).setCenterPosition(shapeWidth * (c + 0.5), shapeHeight * (r + 0.5));
+            var centerX = c * shapeHalfWidth;
+            var centerY = r * shapeHeight + c % 2 * shapeHelfHeight;
+            shapes[c * rows + r].fillStyle(0xffffff).start(centerX + halfWidth, centerY).lineTo(centerX, centerY + halfHeight).lineTo(centerX - halfWidth, centerY).lineTo(centerX, centerY - halfHeight).lineTo(centerX + halfWidth, centerY).close();
           }
         }
       }
     });
     return maskGameObject;
   };
-  var AddBlindsModes = function AddBlindsModes(image) {
-    var maskGameObject = CreateMask$1(image.scene, Math.ceil(image.width / 40), Math.ceil(image.height / 40));
+  var AddDiamondsModes = function AddDiamondsModes(image) {
+    var maskGameObject = CreateMask$1(image.scene, Math.ceil(image.width / 60), Math.ceil(image.height / 60));
     image.once('destroy', function () {
       maskGameObject.destroy();
-    }).addTransitionMode(Squares, {
+    }).addTransitionMode(Diamonds, {
       ease: 'Linear',
       dir: 'out',
       mask: maskGameObject,
@@ -7317,11 +7362,12 @@
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         RemovePostFxPipelineInstance(currentImage, DissolvePostFxPipeline);
+        delete currentImage.effect;
       }
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes$1, AddBlindsModes, AddCurtainMode, AddPixellateMode, AddDissolveMode];
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes, AddSquaresModes, AddDiamondsModes, AddCurtainMode, AddPixellateMode, AddDissolveMode];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);
