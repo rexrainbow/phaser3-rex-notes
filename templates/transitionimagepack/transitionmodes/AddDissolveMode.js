@@ -21,6 +21,7 @@ var AddDissolveMode = function (image) {
             },
             onComplete: function (parent, currentImage, nextImage, t) {
                 RemovePostFxPipelineInstance(currentImage, DissolvePostFxPipeline)
+                delete currentImage.effect;
             },
         })
 }
