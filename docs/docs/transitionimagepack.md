@@ -10,6 +10,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 - [Slide modes](https://codepen.io/rexrainbow/pen/gOQgdMz)
 - [Fade modes](https://codepen.io/rexrainbow/pen/xxQqEgO)
 - [Mask modes](https://codepen.io/rexrainbow/pen/KKrWbYP)
+- [Shader effect modes](https://codepen.io/rexrainbow/pen/NWEjBJa)
 
 ## Usage
 
@@ -166,7 +167,7 @@ image.transit({
     - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
       `'irisOut'`, `'irisIn'`, `'pieOut'`, `'pieIn'`, 
-      `'blinds'`, `'squares'`, `'curtain'`.
+      `'blinds'`, `'squares'`, `'diamonds'`, `'curtain'`.
     - Shader effects : `'pixellate'`, `'dissolve'`
 
 #### Current texture

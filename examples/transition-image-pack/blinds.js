@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
             })
 
         var transitionModes = [
-            'blinds', 'squares',
+            'blinds', 'squares', 'diamonds',
             'curtain'
         ];
         var idx = 0;

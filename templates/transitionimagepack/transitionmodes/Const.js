@@ -35,9 +35,10 @@ export const IrisIn = 'irisIn';
 export const PieOut = 'pieOut';
 export const PieIn = 'pieIn';
 
-// blinds, squares, curtain
+// blinds, squares, diamonds, curtain
 export const Blinds = 'blinds';
 export const Squares = 'squares';
+export const Diamonds = 'diamonds';
 export const Curtain = 'curtain';
 
 // Shader effect modes
