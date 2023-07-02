@@ -36,6 +36,7 @@ class Demo extends Phaser.Scene {
         })
 
         this.add.text(0, 580, 'Any click to transit image')
+
     }
 
     update() { }
