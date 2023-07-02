@@ -3383,10 +3383,17 @@
       if (gameObject === true) {
         gameObject = new DefaultMaskGraphics(this);
       }
+      gameObject.resize(this.width, this.height).setOrigin(this.originX, this.originY).setPosition(0, 0).setScale(1).setVisible(false);
+      this.addLocal(gameObject);
       this.maskGameObject = gameObject;
-      this.maskGameObject.resize(this.width, this.height).setOrigin(this.originX, this.originY).setPosition(0, 0).setScale(1).setVisible(false);
-      this.addLocal(this.maskGameObject);
-      this.childrenMask = this.maskGameObject.createGeometryMask();
+      if (!gameObject._maskObject) {
+        gameObject._maskObject = gameObject.createGeometryMask();
+        gameObject.once('destroy', function () {
+          gameObject._maskObject.destroy();
+          gameObject._maskObject = undefined;
+        });
+      }
+      this.childrenMask = gameObject._maskObject;
       return this;
     },
     removeMaskGameObject: function removeMaskGameObject(destroyMaskGameObject) {
