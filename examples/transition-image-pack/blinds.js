@@ -22,8 +22,9 @@ class Demo extends Phaser.Scene {
             })
 
         var transitionModes = [
-            'blinds', 'squares', 'diamonds',
-            'curtain'
+            // 'blinds', 'squares', 'diamonds',
+            'circles',
+            // 'curtain'
         ];
         var idx = 0;
         this.input.on('pointerdown', function () {

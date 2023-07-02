@@ -35,7 +35,7 @@ var CreateMask = function (scene, columns, rows) {
     return maskGameObject;
 }
 
-var AddDiamondsModes = function (image) {
+var AddDiamondsMode = function (image) {
     var maskGameObject = CreateMask(image.scene, Math.ceil(image.width / 60), Math.ceil(image.height / 60));
 
     image
@@ -57,4 +57,4 @@ var AddDiamondsModes = function (image) {
         })
 }
 
-export default AddDiamondsModes;
+export default AddDiamondsMode;

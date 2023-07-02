@@ -168,7 +168,7 @@ image.transit({
     - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
       `'irisOut'`, `'irisIn'`, `'pieOut'`, `'pieIn'`, 
-      `'blinds'`, `'squares'`, `'diamonds'`, `'curtain'`.
+      `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
     - Shader effects : `'pixellate'`, `'dissolve'`
 
 #### Current texture

@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
             'slideRight', 'slideLeft', 'slideUp', 'slideDown',
             'pushRight', 'pushLeft', 'pushUp', 'pushDown',
             'zoomOut', 'zoomIn', 'zoomInOut',
-            'blinds', 'squares', 'diamonds', 'curtain',
+            'blinds', 'squares', 'diamonds', 'circles', 'curtain',
             'irisOut', 'irisIn', 'pieOut', 'pieIn',
             'wipeLeft', 'wipeRight', 'wipeUp', 'wipeDown',
             'pixellate', 'dissolve',

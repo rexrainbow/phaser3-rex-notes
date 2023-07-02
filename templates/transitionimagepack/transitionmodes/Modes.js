@@ -8,7 +8,8 @@ import AddIrisModes from './AddIrisModes.js';
 import AddPieModes from './AddPieModes.js';
 import AddBlindsModes from './AddBlindsModes.js';
 import AddSquaresModes from './AddSquaresModes.js';
-import AddDiamondsModes from './AddDiamondsModes.js';
+import AddDiamondsMode from './AddDiamondsMode.js';
+import AddCirclesMode from './AddCirclesMode.js';
 import AddCurtainMode from './AddCurtainMode.js';
 import AddPixellateMode from './AddPixellateMode.js';
 import AddDissolveMode from './AddDissolveMode.js';
@@ -18,7 +19,7 @@ const Modes = [
     AddZoomModes,
     AddFadeModes,
     AddIrisModes, AddPieModes, AddWipeModes,
-    AddBlindsModes, AddSquaresModes, AddDiamondsModes, AddCurtainMode,
+    AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode,
     AddPixellateMode, AddDissolveMode
 ];
 
