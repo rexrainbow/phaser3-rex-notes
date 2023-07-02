@@ -40,10 +40,10 @@ var AddIrisModes = function (image) {
             },
         })
         .addTransitionMode(IrisIn, {
-            ease: 'Linear', dir: 'out', mask: maskGameObject,
+            ease: 'Linear', dir: 'in', mask: maskGameObject,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                parent.setCurrentImageMaskEnable(true);
+                parent.setNextImageMaskEnable(true);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 parent.maskGameObject.setValue(1 - t);
