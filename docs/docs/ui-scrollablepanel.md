@@ -589,22 +589,11 @@ panel.setChildrenInteractive({
 })
 ```
 
-- `targetSizers` : Array of target children-sizer.
-- `click` : [Configuration](button.md#create-instance) of Button behavior.
-    - `false` : Don't install Button behavior.
-- `over` :
-    - `false` : Don't fire over/out events
-- `press` : [Configuration](gesture-press.md#create-instance) of Press behavior.
-    - `false` : Don't install Press behavior.
-- `tap` : [Configuration](gesture-tap.md#create-instance) of Tap behavior.
-    - `false` : Don't install Tap behavior.
-- `swipe` : [Configuration](gesture-swipe.md#create-instance) of Swipe behavior.
-    - `false` : Don't install Swipe behavior.
-- `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
+See [Base-sizer/Set children interactive](ui-basesizer.md#set-children-interactive)
 
 ##### Events
 
-See [Base-sizer](ui-basesizer.md#set-children-interactive)
+See [Base-sizer/Set children interactive/Events](ui-basesizer.md#events)
 
 #### Individual input events
 

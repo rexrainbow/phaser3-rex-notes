@@ -63,8 +63,6 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
         text: CreateTextObject(scene, '')
             .setFixedSize(maxTextSize.width, maxTextSize.height),
 
-        // action:
-
         space: {
             left: 10,
             right: 10,
@@ -109,30 +107,16 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
 var CreatePopupList = function (scene, x, y, height, options, onClick) {
     var items = options.map(function (option) { return { label: option } });
 
-    // Note: Buttons and scrolling are at different touch targets
-    scene.input.topOnly = false;
-
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK);
-    // Touch event won't pass through background    
-    scene.rexUI.add.touchEventStop(background);
-
-    var buttonSizer = scene.rexUI.add.buttons({
-        orientation: 'y',
-
-        buttons: items.map(function (item) {
-            return CreateButton(scene, item);
-        })
-    })
-        .on('button.over', function (button) {
-            button.getElement('background').setStrokeStyle(1, 0xffffff);
-        })
-        .on('button.out', function (button) {
-            button.getElement('background').setStrokeStyle();
-        })
-        .on('button.click', function (button) {
-            onClick(button);
-        })
-        .layout()
+    var buttonSizer = scene.rexUI.add.sizer({
+        orientation: 'y'
+    });
+    for (var i = 0, cnt = items.length; i < cnt; i++) {
+        buttonSizer.add(
+            CreateButton(scene, items[i]),
+            { expand: true }
+        )
+    }
+    buttonSizer.layout();
 
     var menu = scene.rexUI.add.scrollablePanel({
         x: x,
@@ -140,8 +124,6 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
         width: buttonSizer.width,
         height: Math.min(height, buttonSizer.height),
         scrollMode: 0,
-
-        background: background,
 
         panel: {
             child: buttonSizer
@@ -157,6 +139,20 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
         .setOrigin(0)
         .layout()
         .popUp(100, 'y')
+
+    menu
+        .setChildrenInteractive({
+            targets: [buttonSizer]
+        })
+        .on('child.click', function (child) {
+            onClick(child);
+        })
+        .on('child.over', function (child) {
+            child.getElement('background').setStrokeStyle(1, 0xffffff);
+        })
+        .on('child.out', function (child) {
+            child.getElement('background').setStrokeStyle();
+        })
 
     return menu;
 }
