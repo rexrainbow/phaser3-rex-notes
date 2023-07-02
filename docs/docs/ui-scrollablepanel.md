@@ -589,6 +589,8 @@ panel.setChildrenInteractive({
 })
 ```
 
+- `targetSizers` : Array of target children-sizer.
+
 See [Base-sizer/Set children interactive](ui-basesizer.md#set-children-interactive)
 
 ##### Events
