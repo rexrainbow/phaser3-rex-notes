@@ -3420,9 +3420,7 @@
           this.setMaskGameObject(true);
         }
         gameObject.setMask(this.childrenMask);
-        if (invertAlpha) {
-          this.childrenMask.setInvertAlpha();
-        }
+        this.childrenMask.setInvertAlpha(invertAlpha);
       } else {
         gameObject.clearMask();
       }
@@ -4121,7 +4119,7 @@
     image.addTransitionMode(ZoomOut, {
       ease: 'Linear',
       dir: 'out',
-      mask: true,
+      mask: false,
       onStart: function onStart(parent, currentImage, nextImage, t) {},
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale = 1 - t;
@@ -4133,7 +4131,7 @@
     }).addTransitionMode(ZoomIn, {
       ease: 'Linear',
       dir: 'in',
-      mask: true,
+      mask: false,
       onStart: function onStart(parent, currentImage, nextImage, t) {},
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale = t;
@@ -4145,7 +4143,7 @@
     }).addTransitionMode(ZoomInOut, {
       ease: 'Linear',
       dir: 'out',
-      mask: true,
+      mask: false,
       onStart: function onStart(parent, currentImage, nextImage, t) {
         parent.setChildVisible(nextImage, false);
       },
@@ -6883,7 +6881,7 @@
       dir: 'in',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setNextImageMaskEnable(true);
+        parent.setNextImageMaskEnable(true, true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         parent.maskGameObject.setValue(1 - t);
@@ -6897,13 +6895,16 @@
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
         parent.setChildVisible(nextImage, false);
-        parent.setCurrentImageMaskEnable(true, true);
+        parent.setCurrentImageMaskEnable(true);
         parent.setNextImageMaskEnable(true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var tintGray;
         if (t < 0.5) {
           t = Yoyo(t);
-          parent.maskGameObject.setValue(t);
+          tintGray = Math.floor(255 * (1 - t));
+          parent.maskGameObject.setValue(1 - t);
+          currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
@@ -6912,13 +6913,17 @@
             parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
-          parent.maskGameObject.setValue(t);
+          tintGray = Math.floor(255 * (1 - t));
+          parent.maskGameObject.setValue(1 - t);
+          nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
         parent.setChildVisible(currentImage, true);
+        currentImage.tint = 0xffffff;
         parent.setChildVisible(nextImage, true);
+        nextImage.tint = 0xffffff;
       }
     });
   };
@@ -6960,7 +6965,7 @@
       dir: 'in',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setNextImageMaskEnable(true);
+        parent.setNextImageMaskEnable(true, true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         parent.maskGameObject.setValue(1 - t);
@@ -6974,13 +6979,16 @@
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
         parent.setChildVisible(nextImage, false);
-        parent.setCurrentImageMaskEnable(true, true);
+        parent.setCurrentImageMaskEnable(true);
         parent.setNextImageMaskEnable(true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var tintGray;
         if (t < 0.5) {
           t = Yoyo(t);
-          parent.maskGameObject.setValue(t);
+          tintGray = Math.floor(255 * (1 - t));
+          parent.maskGameObject.setValue(1 - t);
+          currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
@@ -6989,13 +6997,17 @@
             parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
-          parent.maskGameObject.setValue(t);
+          tintGray = Math.floor(255 * (1 - t));
+          parent.maskGameObject.setValue(1 - t);
+          nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
         parent.setChildVisible(currentImage, true);
+        currentImage.tint = 0xffffff;
         parent.setChildVisible(nextImage, true);
+        nextImage.tint = 0xffffff;
       }
     });
   };

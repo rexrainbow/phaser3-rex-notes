@@ -23,7 +23,7 @@ export default {
         if (gameObject === true) {
             gameObject = new DefaultMaskGraphics(this);
         }
-        
+
         gameObject
             .resize(this.width, this.height)
             .setOrigin(this.originX, this.originY)
@@ -72,9 +72,7 @@ export default {
                 this.setMaskGameObject(true);
             }
             gameObject.setMask(this.childrenMask);
-            if (invertAlpha) {
-                this.childrenMask.setInvertAlpha();
-            }
+            this.childrenMask.setInvertAlpha(invertAlpha);
         } else {
             gameObject.clearMask();
         }

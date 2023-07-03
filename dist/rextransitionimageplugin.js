@@ -3420,9 +3420,7 @@
           this.setMaskGameObject(true);
         }
         gameObject.setMask(this.childrenMask);
-        if (invertAlpha) {
-          this.childrenMask.setInvertAlpha();
-        }
+        this.childrenMask.setInvertAlpha(invertAlpha);
       } else {
         gameObject.clearMask();
       }

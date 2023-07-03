@@ -32,7 +32,7 @@ export const IrisOut = 'irisOut';
 export const IrisIn = 'irisIn';
 export const IrisInOut = 'irisInOut';
 
-// Iris modes
+// Pie modes
 export const PieOut = 'pieOut';
 export const PieIn = 'pieIn';
 export const PieInOut = 'pieInOut';

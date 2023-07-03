@@ -50,7 +50,7 @@ var AddPieModes = function (image) {
             ease: 'Linear', dir: 'in', mask: maskGameObject,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                parent.setNextImageMaskEnable(true);
+                parent.setNextImageMaskEnable(true, true);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 parent.maskGameObject.setValue(1 - t);
@@ -62,16 +62,18 @@ var AddPieModes = function (image) {
         .addTransitionMode(PieInOut, {
             ease: 'Linear', dir: 'out', mask: maskGameObject,
 
-            onStart: function (parent, currentImage, nextImage, t) {
+            onStart: function (parent, currentImage, nextImage, t) {                
                 parent.setChildVisible(nextImage, false);
-                parent.setCurrentImageMaskEnable(true, true);
+                parent.setCurrentImageMaskEnable(true);
                 parent.setNextImageMaskEnable(true);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
+                var tintGray;
                 if (t < 0.5) {
                     t = Yoyo(t);
-                    parent.maskGameObject.setValue(t);
-
+                    tintGray = Math.floor(255 * (1 - t));
+                    parent.maskGameObject.setValue(1 - t);
+                    currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
@@ -81,14 +83,19 @@ var AddPieModes = function (image) {
                     }
 
                     t = Yoyo(t);
-                    parent.maskGameObject.setValue(t);
+                    tintGray = Math.floor(255 * (1 - t));
+                    parent.maskGameObject.setValue(1 - t);
+                    nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
                 }
             },
             onComplete: function (parent, currentImage, nextImage, t) {
                 parent.removeMaskGameObject(false);
 
                 parent.setChildVisible(currentImage, true);
+                currentImage.tint = 0xffffff;
+
                 parent.setChildVisible(nextImage, true);
+                nextImage.tint = 0xffffff;
             },
         })
 

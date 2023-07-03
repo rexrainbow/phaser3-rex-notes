@@ -6,7 +6,7 @@ import Yoyo from './Yoyo.js';
 var AddZoomModes = function (image) {
     image
         .addTransitionMode(ZoomOut, {
-            ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -19,7 +19,7 @@ var AddZoomModes = function (image) {
             },
         })
         .addTransitionMode(ZoomIn, {
-            ease: 'Linear', dir: 'in', mask: true,
+            ease: 'Linear', dir: 'in', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
             },
@@ -32,7 +32,7 @@ var AddZoomModes = function (image) {
             },
         })
         .addTransitionMode(ZoomInOut, {
-            ease: 'Linear', dir: 'out', mask: true,
+            ease: 'Linear', dir: 'out', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
                 parent.setChildVisible(nextImage, false);
