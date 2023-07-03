@@ -3907,7 +3907,7 @@
   var IrisIn = 'irisIn';
   var IrisInOut = 'irisInOut';
 
-  // Iris modes
+  // Pie modes
   var PieOut = 'pieOut';
   var PieIn = 'pieIn';
   var PieInOut = 'pieInOut';
@@ -7203,16 +7203,17 @@
       dir: 'out',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
         parent.setCurrentImageMaskEnable(true, true);
         parent.setNextImageMaskEnable(true, true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        var tintGray;
         if (t < 0.5) {
-          if (nextImage.visible) {
-            parent.setChildVisible(nextImage, false);
-          }
           t = Yoyo(t);
+          tintGray = Math.floor(255 * (1 - t));
           parent.maskGameObject.setValue(t);
+          currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
@@ -7221,12 +7222,17 @@
             parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
+          tintGray = Math.floor(255 * (1 - t));
           parent.maskGameObject.setValue(t);
+          nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
         parent.setChildVisible(currentImage, true);
+        currentImage.tint = 0xffffff;
+        parent.setChildVisible(nextImage, true);
+        nextImage.tint = 0xffffff;
       }
     });
   };
