@@ -1,11 +1,13 @@
 import PropertyMethods from './PropertyMethods.js';
 import CallMethods from './CallMethods.js';
 import DataMethods from './DataMethods.js';
+import EffectMethods from './EffectMethods.js';
 
 class BobBase {
     constructor(GOManager, gameObject, name) {
         this.GOManager = GOManager;
         this.tweens = {};
+        this.effects = {};
         this.setGO(gameObject, name);
     }
 
@@ -22,21 +24,9 @@ class BobBase {
         this.GOManager = undefined;
     }
 
-    freeTweens() {
-        var tweenTasks = this.tweens,
-            tweenTask;
-        for (var propName in tweenTasks) {
-            tweenTask = tweenTasks[propName];
-            if (tweenTask) {
-                tweenTask.remove();
-            }
-            tweenTasks[propName] = null;
-        }
-        return this;
-    }
-
     freeGO() {
         this.freeTweens();
+        this.freeEffects();
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -68,6 +58,7 @@ Object.assign(
     BobBase.prototype,
     PropertyMethods,
     CallMethods,
-    DataMethods
+    DataMethods,
+    EffectMethods
 )
 export default BobBase;

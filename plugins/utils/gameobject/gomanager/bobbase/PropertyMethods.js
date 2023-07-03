@@ -18,16 +18,19 @@ export default {
         return this;
     },
 
-    easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete) {
+    easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete, target) {
+        if (target === undefined) {
+            target = this.gameObject;
+        }
+
         var tweenTasks = this.tweens;
         var tweenTask = tweenTasks[property];
         if (tweenTask) {
             tweenTask.remove();
         }
 
-        var gameObject = this.gameObject;
         var config = {
-            targets: gameObject,
+            targets: target,
             duration: duration,
             ease: ease,
             repeat: repeat,
@@ -36,7 +39,7 @@ export default {
                 tweenTasks[property].remove();
                 tweenTasks[property] = null;
                 if (onComplete) {
-                    onComplete(gameObject, property);
+                    onComplete(target, property);
                 }
             },
             onCompleteScope: this
@@ -46,6 +49,19 @@ export default {
         tweenTask = this.scene.tweens.add(config);
         tweenTask.timeScale = this.timeScale;
         tweenTasks[property] = tweenTask;
+        return this;
+    },
+
+    freeTweens() {
+        var tweenTasks = this.tweens,
+            tweenTask;
+        for (var propName in tweenTasks) {
+            tweenTask = tweenTasks[propName];
+            if (tweenTask) {
+                tweenTask.remove();
+            }
+            tweenTasks[propName] = null;
+        }
         return this;
     }
 

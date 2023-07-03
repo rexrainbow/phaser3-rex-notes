@@ -109,7 +109,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 sprites: {
-                    fade: 500
+                    fade: { mode: 'revealUp', time: 500 }
                 }
 
             }

@@ -230,15 +230,17 @@
       this.gameObject[property] = value;
       return this;
     },
-    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
+    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete, target) {
+      if (target === undefined) {
+        target = this.gameObject;
+      }
       var tweenTasks = this.tweens;
       var tweenTask = tweenTasks[property];
       if (tweenTask) {
         tweenTask.remove();
       }
-      var gameObject = this.gameObject;
       var config = {
-        targets: gameObject,
+        targets: target,
         duration: duration,
         ease: ease,
         repeat: repeat,
@@ -247,7 +249,7 @@
           tweenTasks[property].remove();
           tweenTasks[property] = null;
           if (_onComplete) {
-            _onComplete(gameObject, property);
+            _onComplete(target, property);
           }
         },
         onCompleteScope: this
@@ -256,6 +258,18 @@
       tweenTask = this.scene.tweens.add(config);
       tweenTask.timeScale = this.timeScale;
       tweenTasks[property] = tweenTask;
+      return this;
+    },
+    freeTweens: function freeTweens() {
+      var tweenTasks = this.tweens,
+        tweenTask;
+      for (var propName in tweenTasks) {
+        tweenTask = tweenTasks[propName];
+        if (tweenTask) {
+          tweenTask.remove();
+        }
+        tweenTasks[propName] = null;
+      }
       return this;
     }
   };
@@ -291,11 +305,57 @@
     }
   };
 
+  var UppercaseFirst = Phaser.Utils.String.UppercaseFirst;
+  var EffectMethods = {
+    hasEffect: function hasEffect(name) {
+      return this.effects.hasOwnProperty(name);
+    },
+    getEffect: function getEffect(name) {
+      return this.effects[name];
+    },
+    setEffect: function setEffect(name, effectName) {
+      var _preFX;
+      var preFX = this.gameObject.preFX;
+      if (!preFX) {
+        return this;
+      }
+      if (this.hasEffect(name)) {
+        return this;
+      }
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        args[_key - 2] = arguments[_key];
+      }
+      this.effects[name] = (_preFX = preFX["add".concat(UppercaseFirst(effectName))]).call.apply(_preFX, [preFX].concat(args));
+      return this;
+    },
+    removeEffect: function removeEffect(name) {
+      var effect = this.getEffect(name);
+      if (!effect) {
+        return this;
+      }
+      var preFX = this.gameObject.preFX;
+      preFX.remove(effect);
+      this.effects[name] = null;
+      return this;
+    },
+    freeEffects: function freeEffects() {
+      var preFX = this.gameObject.preFX;
+      var effects = this.effects;
+      for (var name in effects) {
+        var effect = effects[name];
+        preFX.remove(effect);
+        effects[name] = null;
+      }
+      return this;
+    }
+  };
+
   var BobBase = /*#__PURE__*/function () {
     function BobBase(GOManager, gameObject, name) {
       _classCallCheck(this, BobBase);
       this.GOManager = GOManager;
       this.tweens = {};
+      this.effects = {};
       this.setGO(gameObject, name);
     }
     _createClass(BobBase, [{
@@ -315,23 +375,10 @@
         this.GOManager = undefined;
       }
     }, {
-      key: "freeTweens",
-      value: function freeTweens() {
-        var tweenTasks = this.tweens,
-          tweenTask;
-        for (var propName in tweenTasks) {
-          tweenTask = tweenTasks[propName];
-          if (tweenTask) {
-            tweenTask.remove();
-          }
-          tweenTasks[propName] = null;
-        }
-        return this;
-      }
-    }, {
       key: "freeGO",
       value: function freeGO() {
         this.freeTweens();
+        this.freeEffects();
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -360,7 +407,7 @@
     }]);
     return BobBase;
   }();
-  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$1);
+  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$1, EffectMethods);
 
   var IsEmpty = function IsEmpty(source) {
     for (var k in source) {
@@ -369,9 +416,19 @@
     return true;
   };
 
+  var FadeTint = 0;
+  var FadeAlpha = 1;
+  var FadeRevealUp = 2;
+  var FadeRevealDown = 3;
+  var FadeRevealLeft = 4;
+  var FadeRevealRight = 5;
   var FadeMode = {
-    tint: 0,
-    alpha: 1
+    tint: FadeTint,
+    alpha: FadeAlpha,
+    revealUp: FadeRevealUp,
+    revealDown: FadeRevealDown,
+    revealLeft: FadeRevealLeft,
+    revealRight: FadeRevealRight
   };
   var FadeMethods = {
     setGOFadeMode: function setGOFadeMode(fadeMode) {
@@ -386,10 +443,13 @@
       return this;
     },
     useTintFadeEffect: function useTintFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === 0) && this.fadeTime > 0 && gameObject.setTint !== undefined;
+      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
     },
     useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === 1) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+    },
+    useRevealEffect: function useRevealEffect(gameObject) {
+      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && gameObject.preFX !== undefined;
     },
     fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
       var gameObject = bob.gameObject;
@@ -428,6 +488,31 @@
         false,
         // yoyo
         onComplete // onComplete
+        );
+      } else if (this.useRevealEffect(gameObject)) {
+        bob.removeEffect('reveal');
+        var dir = this.fadeMode === FadeRevealUp || this.fadeMode === FadeRevealLeft ? 1 : 0;
+        var axis = this.fadeMode === FadeRevealUp || this.fadeMode === FadeRevealDown ? 1 : 0;
+        bob.setEffect('fade_reveal', 'reveal', 0.1, dir, axis);
+        var effect = bob.getEffect('fade_reveal');
+        if (fromValue !== undefined) {
+          effect.progress = fromValue;
+        }
+        bob.easeProperty('progress',
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete,
+        // onComplete
+        effect // target
         );
       } else {
         if (onComplete) {

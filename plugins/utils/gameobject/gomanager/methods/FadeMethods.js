@@ -1,6 +1,17 @@
+const FadeTint = 0;
+const FadeAlpha = 1;
+const FadeRevealUp = 2;
+const FadeRevealDown = 3;
+const FadeRevealLeft = 4;
+const FadeRevealRight = 5;
+
 const FadeMode = {
-    tint: 0,
-    alpha: 1
+    tint: FadeTint,
+    alpha: FadeAlpha,
+    revealUp: FadeRevealUp,
+    revealDown: FadeRevealDown,
+    revealLeft: FadeRevealLeft,
+    revealRight: FadeRevealRight,
 }
 
 export default {
@@ -19,13 +30,18 @@ export default {
     },
 
     useTintFadeEffect(gameObject) {
-        return ((this.fadeMode === undefined) || (this.fadeMode === 0)) &&
+        return ((this.fadeMode === undefined) || (this.fadeMode === FadeTint)) &&
             (this.fadeTime > 0) && (gameObject.setTint !== undefined);
     },
 
     useAlphaFadeEffect(gameObject) {
-        return ((this.fadeMode === undefined) || (this.fadeMode === 1)) &&
+        return ((this.fadeMode === undefined) || (this.fadeMode === FadeAlpha)) &&
             (this.fadeTime > 0) && (gameObject.setAlpha !== undefined);
+    },
+
+    useRevealEffect(gameObject) {
+        return ((this.fadeMode >= FadeRevealUp) && (this.fadeMode <= FadeRevealRight)) &&
+            (this.fadeTime > 0) && (gameObject.preFX !== undefined);
     },
 
     fadeBob(bob, fromValue, toValue, onComplete) {
@@ -36,7 +52,7 @@ export default {
             }
             bob.easeProperty(
                 'tintGray',                 // property
-                Math.floor(255 * toValue), // to value
+                Math.floor(255 * toValue),  // to value
                 this.fadeTime,              // duration
                 'Linear',                   // ease
                 0,                          // repeat
@@ -57,10 +73,33 @@ export default {
                 false,                      // yoyo
                 onComplete                  // onComplete
             )
+
+        } else if (this.useRevealEffect(gameObject)) {
+            bob.removeEffect('reveal');
+            var dir = ((this.fadeMode === FadeRevealUp) || (this.fadeMode === FadeRevealLeft)) ? 1 : 0;
+            var axis = ((this.fadeMode === FadeRevealUp) || (this.fadeMode === FadeRevealDown)) ? 1 : 0;
+            bob.setEffect('fade_reveal', 'reveal', 0.1, dir, axis);
+
+            var effect = bob.getEffect('fade_reveal');
+            if (fromValue !== undefined) {
+                effect.progress = fromValue;
+            }
+            bob.easeProperty(
+                'progress',                 // property
+                toValue,                    // to value
+                this.fadeTime,              // duration
+                'Linear',                   // ease
+                0,                          // repeat
+                false,                      // yoyo
+                onComplete,                 // onComplete
+                effect                      // target
+            )
+
         } else {
             if (onComplete) {
                 onComplete(gameObject);
             }
+
         }
 
         return this;
