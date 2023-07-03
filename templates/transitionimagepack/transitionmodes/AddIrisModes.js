@@ -1,6 +1,7 @@
 import {
-    IrisOut, IrisIn
+    IrisOut, IrisIn, IrisInOut
 } from './Const.js';
+import Yoyo from './Yoyo.js';
 import CustomProgress from '../../../plugins/customprogress.js';
 
 var CreateMask = function (scene) {
@@ -52,7 +53,38 @@ var AddIrisModes = function (image) {
                 parent.removeMaskGameObject(false);
             },
         })
+        .addTransitionMode(IrisInOut, {
+            ease: 'Linear', dir: 'out', mask: maskGameObject,
 
+            onStart: function (parent, currentImage, nextImage, t) {
+                parent.setChildVisible(nextImage, false);
+                parent.setCurrentImageMaskEnable(true, true);
+                parent.setNextImageMaskEnable(true);
+            },
+            onProgress: function (parent, currentImage, nextImage, t) {
+                if (t < 0.5) {
+                    t = Yoyo(t);
+                    parent.maskGameObject.setValue(t);
+
+                } else {
+                    if (currentImage.visible) {
+                        parent.setChildVisible(currentImage, false);
+                    }
+                    if (!nextImage.visible) {
+                        parent.setChildVisible(nextImage, true);
+                    }
+
+                    t = Yoyo(t);
+                    parent.maskGameObject.setValue(t);
+                }
+            },
+            onComplete: function (parent, currentImage, nextImage, t) {
+                parent.removeMaskGameObject(false);
+
+                parent.setChildVisible(currentImage, true);
+                parent.setChildVisible(nextImage, true);
+            },
+        })
 }
 
 export default AddIrisModes;

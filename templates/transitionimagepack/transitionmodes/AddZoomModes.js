@@ -1,6 +1,7 @@
 import {
     ZoomOut, ZoomIn, ZoomInOut
 } from './Const.js';
+import Yoyo from './Yoyo.js';
 
 var AddZoomModes = function (image) {
     image
@@ -39,7 +40,7 @@ var AddZoomModes = function (image) {
             onProgress: function (parent, currentImage, nextImage, t) {
                 var scale;
                 if (t < 0.5) {
-                    scale = 1 - (t * 2);
+                    scale = 1 - Yoyo(t);
                     parent.setChildLocalScale(currentImage, scale, scale);
                 } else {
                     if (currentImage.visible) {
@@ -49,7 +50,7 @@ var AddZoomModes = function (image) {
                         parent.setChildVisible(nextImage, true);
                     }
 
-                    scale = (t - 0.5) * 2;
+                    scale = 1 - Yoyo(t);
                     parent.setChildLocalScale(nextImage, scale, scale);
                 }
             },

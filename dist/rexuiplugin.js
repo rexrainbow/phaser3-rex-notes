@@ -34567,10 +34567,12 @@
   // Iris modes
   var IrisOut = 'irisOut';
   var IrisIn = 'irisIn';
+  var IrisInOut = 'irisInOut';
 
   // Iris modes
   var PieOut = 'pieOut';
   var PieIn = 'pieIn';
+  var PieInOut = 'pieInOut';
 
   // blinds, squares, diamonds, circles, curtain
   var Blinds = 'blinds';
@@ -34798,7 +34800,7 @@
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale;
         if (t < 0.5) {
-          scale = 1 - t * 2;
+          scale = 1 - Yoyo$1(t);
           parent.setChildLocalScale(currentImage, scale, scale);
         } else {
           if (currentImage.visible) {
@@ -34807,7 +34809,7 @@
           if (!nextImage.visible) {
             parent.setChildVisible(nextImage, true);
           }
-          scale = (t - 0.5) * 2;
+          scale = 1 - Yoyo$1(t);
           parent.setChildLocalScale(nextImage, scale, scale);
         }
       },
@@ -35001,6 +35003,35 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
       }
+    }).addTransitionMode(IrisInOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
+        parent.setCurrentImageMaskEnable(true, true);
+        parent.setNextImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+        parent.setChildVisible(currentImage, true);
+        parent.setChildVisible(nextImage, true);
+      }
     });
   };
 
@@ -35048,6 +35079,35 @@
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(PieInOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
+        parent.setCurrentImageMaskEnable(true, true);
+        parent.setNextImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo$1(t);
+          parent.maskGameObject.setValue(t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+        parent.setChildVisible(currentImage, true);
+        parent.setChildVisible(nextImage, true);
       }
     });
   };

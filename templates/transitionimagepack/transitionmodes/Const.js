@@ -30,10 +30,12 @@ export const WipeDown = 'wipeDown';
 // Iris modes
 export const IrisOut = 'irisOut';
 export const IrisIn = 'irisIn';
+export const IrisInOut = 'irisInOut';
 
 // Iris modes
 export const PieOut = 'pieOut';
 export const PieIn = 'pieIn';
+export const PieInOut = 'pieInOut';
 
 // blinds, squares, diamonds, circles, curtain
 export const Blinds = 'blinds';

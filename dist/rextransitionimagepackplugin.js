@@ -3907,10 +3907,12 @@
   // Iris modes
   var IrisOut = 'irisOut';
   var IrisIn = 'irisIn';
+  var IrisInOut = 'irisInOut';
 
   // Iris modes
   var PieOut = 'pieOut';
   var PieIn = 'pieIn';
+  var PieInOut = 'pieInOut';
 
   // blinds, squares, diamonds, circles, curtain
   var Blinds = 'blinds';
@@ -4103,6 +4105,18 @@
     });
   };
 
+  var Yoyo = function Yoyo(t, threshold) {
+    if (threshold === undefined) {
+      threshold = 0.5;
+    }
+    if (t <= threshold) {
+      t = t / threshold;
+    } else {
+      t = 1 - (t - threshold) / (1 - threshold);
+    }
+    return t;
+  };
+
   var AddZoomModes = function AddZoomModes(image) {
     image.addTransitionMode(ZoomOut, {
       ease: 'Linear',
@@ -4138,7 +4152,7 @@
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale;
         if (t < 0.5) {
-          scale = 1 - t * 2;
+          scale = 1 - Yoyo(t);
           parent.setChildLocalScale(currentImage, scale, scale);
         } else {
           if (currentImage.visible) {
@@ -4147,7 +4161,7 @@
           if (!nextImage.visible) {
             parent.setChildVisible(nextImage, true);
           }
-          scale = (t - 0.5) * 2;
+          scale = 1 - Yoyo(t);
           parent.setChildLocalScale(nextImage, scale, scale);
         }
       },
@@ -4158,18 +4172,6 @@
         parent.setChildVisible(nextImage, true);
       }
     });
-  };
-
-  var Yoyo = function Yoyo(t, threshold) {
-    if (threshold === undefined) {
-      threshold = 0.5;
-    }
-    if (t <= threshold) {
-      t = t / threshold;
-    } else {
-      t = 1 - (t - threshold) / (1 - threshold);
-    }
-    return t;
   };
 
   var AddFadeModes = function AddFadeModes(image) {
@@ -6889,6 +6891,35 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
       }
+    }).addTransitionMode(IrisInOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
+        parent.setCurrentImageMaskEnable(true, true);
+        parent.setNextImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = Yoyo(t);
+          parent.maskGameObject.setValue(t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo(t);
+          parent.maskGameObject.setValue(t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+        parent.setChildVisible(currentImage, true);
+        parent.setChildVisible(nextImage, true);
+      }
     });
   };
 
@@ -6936,6 +6967,35 @@
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.removeMaskGameObject(false);
+      }
+    }).addTransitionMode(PieInOut, {
+      ease: 'Linear',
+      dir: 'out',
+      mask: maskGameObject,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
+        parent.setCurrentImageMaskEnable(true, true);
+        parent.setNextImageMaskEnable(true);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        if (t < 0.5) {
+          t = Yoyo(t);
+          parent.maskGameObject.setValue(t);
+        } else {
+          if (currentImage.visible) {
+            parent.setChildVisible(currentImage, false);
+          }
+          if (!nextImage.visible) {
+            parent.setChildVisible(nextImage, true);
+          }
+          t = Yoyo(t);
+          parent.maskGameObject.setValue(t);
+        }
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        parent.removeMaskGameObject(false);
+        parent.setChildVisible(currentImage, true);
+        parent.setChildVisible(nextImage, true);
       }
     });
   };

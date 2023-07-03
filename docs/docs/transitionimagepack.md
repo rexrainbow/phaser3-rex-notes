@@ -167,7 +167,7 @@ image.transit({
       `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
     - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
-      `'irisOut'`, `'irisIn'`, `'pieOut'`, `'pieIn'`, 
+      `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
       `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
     - Shader effects : `'pixellate'`, `'dissolve'`
 
