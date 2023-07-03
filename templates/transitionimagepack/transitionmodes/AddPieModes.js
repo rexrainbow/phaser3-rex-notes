@@ -62,8 +62,8 @@ var AddPieModes = function (image) {
         .addTransitionMode(PieInOut, {
             ease: 'Linear', dir: 'out', mask: maskGameObject,
 
-            onStart: function (parent, currentImage, nextImage, t) {                
-                parent.setChildVisible(nextImage, false);
+            onStart: function (parent, currentImage, nextImage, t) {
+                nextImage.tint = 0;  // Turn nextImage to black
                 parent.setCurrentImageMaskEnable(true);
                 parent.setNextImageMaskEnable(true);
             },
@@ -77,9 +77,6 @@ var AddPieModes = function (image) {
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
-                    }
-                    if (!nextImage.visible) {
-                        parent.setChildVisible(nextImage, true);
                     }
 
                     t = Yoyo(t);

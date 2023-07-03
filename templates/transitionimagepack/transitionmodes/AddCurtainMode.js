@@ -43,7 +43,7 @@ var AddCurtainMode = function (image) {
             ease: 'Linear', dir: 'out', mask: maskGameObject,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                parent.setChildVisible(nextImage, false);
+                nextImage.tint = 0;  // Turn nextImage to black
                 parent.setCurrentImageMaskEnable(true, true);
                 parent.setNextImageMaskEnable(true, true);
             },
@@ -58,9 +58,6 @@ var AddCurtainMode = function (image) {
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
-                    }
-                    if (!nextImage.visible) {
-                        parent.setChildVisible(nextImage, true);
                     }
 
                     t = Yoyo(t);

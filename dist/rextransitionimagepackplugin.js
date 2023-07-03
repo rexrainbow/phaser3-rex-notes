@@ -4149,8 +4149,9 @@
       dir: 'out',
       mask: false,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setChildVisible(nextImage, false);
+        nextImage.tint = 0; // Turn nextImage to black
       },
+
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var scale;
         if (t < 0.5) {
@@ -4160,9 +4161,6 @@
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
           }
-          if (!nextImage.visible) {
-            parent.setChildVisible(nextImage, true);
-          }
           scale = 1 - Yoyo(t);
           parent.setChildLocalScale(nextImage, scale, scale);
         }
@@ -4170,8 +4168,10 @@
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
         parent.setChildLocalScale(currentImage, 1, 1);
         parent.setChildVisible(currentImage, true);
+        currentImage.tint = 0xffffff;
         parent.setChildLocalScale(nextImage, 1, 1);
         parent.setChildVisible(nextImage, true);
+        nextImage.tint = 0xffffff;
       }
     });
   };
@@ -4181,13 +4181,13 @@
       ease: 'Linear',
       dir: 'out',
       mask: false,
-      onStart: function onStart(parent, currentImage, nextImage, t) {},
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        nextImage.tint = 0; // Turn nextImage to black
+      },
+
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         var tintGray;
         if (t < 0.5) {
-          if (nextImage.visible) {
-            parent.setChildVisible(nextImage, false);
-          }
           t = Yoyo(t);
           tintGray = Math.floor(255 * (1 - t));
           currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
@@ -4195,17 +4195,15 @@
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
           }
-          if (!nextImage.visible) {
-            parent.setChildVisible(nextImage, true);
-          }
           t = Yoyo(t);
           tintGray = Math.floor(255 * (1 - t));
           nextImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
         }
       },
       onComplete: function onComplete(parent, currentImage, nextImage, t) {
-        currentImage.tint = 0xffffff;
         parent.setChildVisible(currentImage, true);
+        currentImage.tint = 0xffffff;
+        parent.setChildVisible(nextImage, true);
         nextImage.tint = 0xffffff;
       }
     }).addTransitionMode(CrossFade, {
@@ -6898,7 +6896,7 @@
       dir: 'out',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setChildVisible(nextImage, false);
+        nextImage.tint = 0; // Turn nextImage to black
         parent.setCurrentImageMaskEnable(true);
         parent.setNextImageMaskEnable(true);
       },
@@ -6912,9 +6910,6 @@
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
-          }
-          if (!nextImage.visible) {
-            parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
           tintGray = Math.floor(255 * (1 - t));
@@ -6982,7 +6977,7 @@
       dir: 'out',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setChildVisible(nextImage, false);
+        nextImage.tint = 0; // Turn nextImage to black
         parent.setCurrentImageMaskEnable(true);
         parent.setNextImageMaskEnable(true);
       },
@@ -6996,9 +6991,6 @@
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
-          }
-          if (!nextImage.visible) {
-            parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
           tintGray = Math.floor(255 * (1 - t));
@@ -7207,7 +7199,7 @@
       dir: 'out',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setChildVisible(nextImage, false);
+        nextImage.tint = 0; // Turn nextImage to black
         parent.setCurrentImageMaskEnable(true, true);
         parent.setNextImageMaskEnable(true, true);
       },
@@ -7221,9 +7213,6 @@
         } else {
           if (currentImage.visible) {
             parent.setChildVisible(currentImage, false);
-          }
-          if (!nextImage.visible) {
-            parent.setChildVisible(nextImage, true);
           }
           t = Yoyo(t);
           tintGray = Math.floor(255 * (1 - t));
@@ -7247,14 +7236,12 @@
       dir: 'out',
       mask: true,
       onStart: function onStart(parent, currentImage, nextImage, t) {
+        parent.setChildVisible(nextImage, false);
         currentImage.effect = currentImage.preFX.addPixelate(0);
         nextImage.effect = nextImage.preFX.addPixelate(0);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         if (t < 0.5) {
-          if (nextImage.visible) {
-            parent.setChildVisible(nextImage, false);
-          }
           t = Yoyo(t);
           var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
           currentImage.effect.amount = Math.ceil(maxAmount * t);

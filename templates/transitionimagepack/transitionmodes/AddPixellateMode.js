@@ -9,15 +9,12 @@ var AddPixellateMode = function (image) {
             ease: 'Linear', dir: 'out', mask: true,
 
             onStart: function (parent, currentImage, nextImage, t) {
+                parent.setChildVisible(nextImage, false);
                 currentImage.effect = currentImage.preFX.addPixelate(0);
                 nextImage.effect = nextImage.preFX.addPixelate(0);
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 if (t < 0.5) {
-                    if (nextImage.visible) {
-                        parent.setChildVisible(nextImage, false);
-                    }
-
                     t = Yoyo(t);
                     var maxAmount = Math.min(currentImage.width, currentImage.height) / 5;
                     currentImage.effect.amount = Math.ceil(maxAmount * t);

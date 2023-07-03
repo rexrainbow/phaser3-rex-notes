@@ -9,23 +9,17 @@ var AddFadeModes = function (image) {
             ease: 'Linear', dir: 'out', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
+                nextImage.tint = 0;  // Turn nextImage to black
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 var tintGray;
                 if (t < 0.5) {
-                    if (nextImage.visible) {
-                        parent.setChildVisible(nextImage, false);
-                    }
-
                     t = Yoyo(t);
                     tintGray = Math.floor(255 * (1 - t));
                     currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
-                    }
-                    if (!nextImage.visible) {
-                        parent.setChildVisible(nextImage, true);
                     }
 
                     t = Yoyo(t);
@@ -34,9 +28,10 @@ var AddFadeModes = function (image) {
                 }
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                currentImage.tint = 0xffffff;
                 parent.setChildVisible(currentImage, true);
+                currentImage.tint = 0xffffff;
 
+                parent.setChildVisible(nextImage, true);
                 nextImage.tint = 0xffffff;
             },
         })

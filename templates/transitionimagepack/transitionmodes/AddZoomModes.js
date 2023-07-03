@@ -35,7 +35,7 @@ var AddZoomModes = function (image) {
             ease: 'Linear', dir: 'out', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                parent.setChildVisible(nextImage, false);
+                nextImage.tint = 0;  // Turn nextImage to black
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 var scale;
@@ -46,9 +46,6 @@ var AddZoomModes = function (image) {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
                     }
-                    if (!nextImage.visible) {
-                        parent.setChildVisible(nextImage, true);
-                    }
 
                     scale = 1 - Yoyo(t);
                     parent.setChildLocalScale(nextImage, scale, scale);
@@ -57,9 +54,11 @@ var AddZoomModes = function (image) {
             onComplete: function (parent, currentImage, nextImage, t) {
                 parent.setChildLocalScale(currentImage, 1, 1);
                 parent.setChildVisible(currentImage, true);
+                currentImage.tint = 0xffffff;
 
                 parent.setChildLocalScale(nextImage, 1, 1);
                 parent.setChildVisible(nextImage, true);
+                nextImage.tint = 0xffffff;
             },
         })
 

@@ -57,7 +57,7 @@ var AddIrisModes = function (image) {
             ease: 'Linear', dir: 'out', mask: maskGameObject,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                parent.setChildVisible(nextImage, false);
+                nextImage.tint = 0;  // Turn nextImage to black
                 parent.setCurrentImageMaskEnable(true);
                 parent.setNextImageMaskEnable(true);
             },
@@ -72,9 +72,6 @@ var AddIrisModes = function (image) {
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
-                    }
-                    if (!nextImage.visible) {
-                        parent.setChildVisible(nextImage, true);
                     }
 
                     t = Yoyo(t);
