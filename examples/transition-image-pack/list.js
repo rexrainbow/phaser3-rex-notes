@@ -59,7 +59,7 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
     var label = scene.rexUI.add.label({
         x: x, y: y,
 
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+        background: scene.rexUI.add.roundRectangle({ color: COLOR_PRIMARY }),
 
         text: CreateTextObject(scene, '')
             .setFixedSize(maxTextSize.width, maxTextSize.height),
@@ -81,25 +81,28 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
         label.setData('value', options[0])
     }
 
-    var menu;
+    var list;
     label.onClick(function () {
-        if (menu) {
+        if (list) {
             return;
         }
 
         var menuX = label.getElement('text').getTopLeft().x,
             menuY = label.bottom;
-        menu = CreatePopupList(scene, menuX, menuY, menuHeight, options, function (button) {
+        list = CreatePopupList(scene, menuX, menuY, menuHeight, options, function (button) {
             label.setData('value', button.text);
-            menu.scaleDownDestroy(100, 'y');
-            menu = undefined;
-        });
+            list.scaleDownDestroy(100, 'y');
+            list = undefined;
+        })
+            // Close list when clicking outside of list
+            .onClickOutside(function () {
+                list.scaleDownDestroy(100, 'y');
+                list = undefined;
+            });
 
-        // Close menu when clicking outside of menu
-        menu.onClickOutside(function () {
-            menu.scaleDownDestroy(100, 'y');
-            menu = undefined;
-        });
+        SelectItem(list, label.text);
+
+        list.popUp(100, 'y')
     })
 
     return label;
@@ -119,7 +122,7 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
     }
     buttonSizer.layout();
 
-    var menu = scene.rexUI.add.scrollablePanel({
+    var list = scene.rexUI.add.scrollablePanel({
         x: x,
         y: y,
         width: buttonSizer.width,
@@ -139,9 +142,8 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
     })
         .setOrigin(0)
         .layout()
-        .popUp(100, 'y')
 
-    menu
+    list
         .setChildrenInteractive({
             targets: [buttonSizer]
         })
@@ -155,12 +157,12 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
             child.getElement('background').setStrokeStyle();
         })
 
-    return menu;
+    return list;
 }
 
 var CreateButton = function (scene, item) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK),
+        background: scene.rexUI.add.roundRectangle({ color: COLOR_DARK }),
 
         text: CreateTextObject(scene, item.label),
 
@@ -192,6 +194,19 @@ var CreateTextObject = function (scene, text) {
         fontSize: '20px'
     })
     return textObject;
+}
+
+var SelectItem = function (list, name) {
+    var buttons = list.getElement('panel.items');
+    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (button.text === name) {
+            button.getElement('background').setFillStyle(COLOR_LIGHT);
+            button.getElement('text').setColor('black');
+            list.scrollToChild(button, 'top');
+            return;
+        }
+    }
 }
 
 var config = {
