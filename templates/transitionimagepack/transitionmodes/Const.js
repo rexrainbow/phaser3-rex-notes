@@ -47,3 +47,8 @@ export const Curtain = 'curtain';
 // Shader effect modes
 export const Pixellate = 'pixellate';
 export const Dissolve = 'dissolve';
+
+export const RevealLeft = 'revealLeft';
+export const RevealRight = 'revealRight';
+export const RevealUp = 'revealUp';
+export const RevealDown = 'revealDown';

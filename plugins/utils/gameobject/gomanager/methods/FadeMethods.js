@@ -18,19 +18,19 @@ export default {
         return this;
     },
 
-    hasTintFadeEffect(gameObject) {
+    useTintFadeEffect(gameObject) {
         return ((this.fadeMode === undefined) || (this.fadeMode === 0)) &&
             (this.fadeTime > 0) && (gameObject.setTint !== undefined);
     },
 
-    hasAlphaFadeEffect(gameObject) {
+    useAlphaFadeEffect(gameObject) {
         return ((this.fadeMode === undefined) || (this.fadeMode === 1)) &&
             (this.fadeTime > 0) && (gameObject.setAlpha !== undefined);
     },
 
     fadeBob(bob, fromValue, toValue, onComplete) {
         var gameObject = bob.gameObject;
-        if (this.hasTintFadeEffect(gameObject)) {
+        if (this.useTintFadeEffect(gameObject)) {
             if (fromValue !== undefined) {
                 bob.setProperty('tintGray', 255 * fromValue)
             }
@@ -44,7 +44,7 @@ export default {
                 onComplete                  // onComplete
             )
 
-        } else if (this.hasAlphaFadeEffect(gameObject)) {
+        } else if (this.useAlphaFadeEffect(gameObject)) {
             if (fromValue !== undefined) {
                 bob.setProperty('alpha', fromValue);
             }

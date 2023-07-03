@@ -169,7 +169,8 @@ image.transit({
     - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
       `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
       `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
-    - Shader effects : `'pixellate'`, `'dissolve'`
+    - Shader effects : `'pixellate'`, `'dissolve'`, 
+      `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
 
 #### Current texture
 

@@ -23,6 +23,7 @@ class Demo extends Phaser.Scene {
 
         var transitionModes = [
             'pixellate', 'dissolve',
+            'revealLeft', 'revealRight', 'revealUp', 'revealDown',
         ];
         var idx = 0;
         this.input.on('pointerdown', function () {

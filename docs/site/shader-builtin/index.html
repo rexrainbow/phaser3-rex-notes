@@ -10271,8 +10271,8 @@
 </code></pre></div><ul>
 <li><code>wipeWidth</code> : The width of the wipe effect. Value is between <code>0</code> and <code>1</code>. Default value is <code>0.1</code>.</li>
 <li><code>direction</code> : The direction of the wipe effect.<ul>
-<li><code>0</code> : Left to right, or bottom to top</li>
-<li><code>1</code> : Right to left, or top to bottom</li>
+<li><code>0</code> : Left to right, or top to bottom</li>
+<li><code>1</code> : Right to left, or bottom to top</li>
 </ul>
 </li>
 <li><code>axis</code> : The axis of the wipe effect.<ul>
@@ -10297,9 +10297,10 @@
     <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">effect</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Properties
-    <div class="highlight"><pre><span></span><code><span class="nx">effect</span><span class="p">.</span><span class="nx">wipeWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wipeWidth</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">effect</span><span class="p">.</span><span class="nx">progress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">t</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0~1</span>
+<span class="nx">effect</span><span class="p">.</span><span class="nx">wipeWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wipeWidth</span><span class="p">;</span>
 <span class="nx">effect</span><span class="p">.</span><span class="nx">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">direction</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0, 1</span>
-<span class="nx">effect</span><span class="p">.</span><span class="nx">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axis</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0, 1</span>
+<span class="nx">effect</span><span class="p">.</span><span class="nx">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axis</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0, 1    </span>
 </code></pre></div></li>
 </ul>
 <h3 id="reveal">Reveal<a class="headerlink" href="#reveal" title="Permanent link">&para;</a></h3>
@@ -10309,8 +10310,8 @@
 </code></pre></div><ul>
 <li><code>wipeWidth</code> : The width of the wipe effect. Value is between <code>0</code> and <code>1</code>. Default value is <code>0.1</code>.</li>
 <li><code>direction</code> : The direction of the wipe effect.<ul>
-<li><code>0</code> : Left to right, or bottom to top</li>
-<li><code>1</code> : Right to left, or top to bottom</li>
+<li><code>0</code> : Left to right, or top to bottom</li>
+<li><code>1</code> : Right to left, or bottom to top</li>
 </ul>
 </li>
 <li><code>axis</code> : The axis of the wipe effect.<ul>
@@ -10335,7 +10336,8 @@
     <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">postFX</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">effect</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Properties
-    <div class="highlight"><pre><span></span><code><span class="nx">effect</span><span class="p">.</span><span class="nx">wipeWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wipeWidth</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">effect</span><span class="p">.</span><span class="nx">progress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">t</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0~1</span>
+<span class="nx">effect</span><span class="p">.</span><span class="nx">wipeWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">wipeWidth</span><span class="p">;</span>
 <span class="nx">effect</span><span class="p">.</span><span class="nx">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">direction</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0, 1</span>
 <span class="nx">effect</span><span class="p">.</span><span class="nx">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axis</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0, 1</span>
 </code></pre></div></li>

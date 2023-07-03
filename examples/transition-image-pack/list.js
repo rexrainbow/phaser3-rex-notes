@@ -30,6 +30,7 @@ class Demo extends Phaser.Scene {
             'irisOut', 'irisIn', 'irisInOut', 'pieOut', 'pieIn', 'pieInOut',
             'wipeLeft', 'wipeRight', 'wipeUp', 'wipeDown',
             'pixellate', 'dissolve',
+            'revealLeft', 'revealRight', 'revealUp', 'revealDown',
         ];
 
         var dropDownList = CreateDropDownList(this, 50, 0, 500, transitionModes)

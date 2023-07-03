@@ -24,7 +24,7 @@ export default {
     addGO(name, gameObject) {
         this.remove(name, true);
 
-        if (this.hasTintFadeEffect(gameObject)) {
+        if (this.useTintFadeEffect(gameObject)) {
             AddTintRGBProperties(gameObject);
         }
 

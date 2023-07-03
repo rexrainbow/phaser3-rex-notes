@@ -712,8 +712,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```   
     - `wipeWidth` : The width of the wipe effect. Value is between `0` and `1`. Default value is `0.1`.
     - `direction` : The direction of the wipe effect.
-        - `0` : Left to right, or bottom to top
-        - `1` : Right to left, or top to bottom
+        - `0` : Left to right, or top to bottom
+        - `1` : Right to left, or bottom to top
     - `axis` : The axis of the wipe effect.
         - `0` : Left to right, or right to left
         - `1` : Bottom to top, or top to bottom
@@ -738,9 +738,10 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Properties
     ```javascript
+    effect.progress = t; // 0~1
     effect.wipeWidth = wipeWidth;
     effect.direction = direction;  // 0, 1
-    effect.axis = axis;  // 0, 1
+    effect.axis = axis;  // 0, 1    
     ```
 
 ### Reveal
@@ -751,8 +752,8 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```   
     - `wipeWidth` : The width of the wipe effect. Value is between `0` and `1`. Default value is `0.1`.
     - `direction` : The direction of the wipe effect.
-        - `0` : Left to right, or bottom to top
-        - `1` : Right to left, or top to bottom
+        - `0` : Left to right, or top to bottom
+        - `1` : Right to left, or bottom to top
     - `axis` : The axis of the wipe effect.
         - `0` : Left to right, or right to left
         - `1` : Bottom to top, or top to bottom
@@ -777,6 +778,7 @@ All Game Objects and camera support Post FX. These are effects applied after the
     ```
 - Properties
     ```javascript
+    effect.progress = t; // 0~1
     effect.wipeWidth = wipeWidth;
     effect.direction = direction;  // 0, 1
     effect.axis = axis;  // 0, 1

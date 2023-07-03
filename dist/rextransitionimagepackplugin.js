@@ -3922,6 +3922,10 @@
   // Shader effect modes
   var Pixellate = 'pixellate';
   var Dissolve = 'dissolve';
+  var RevealLeft = 'revealLeft';
+  var RevealRight = 'revealRight';
+  var RevealUp = 'revealUp';
+  var RevealDown = 'revealDown';
 
   var AddSlideAwayModes = function AddSlideAwayModes(image) {
     image.addTransitionMode(SlideAwayRight, {
@@ -7502,7 +7506,74 @@
     });
   };
 
-  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode, AddPixellateMode, AddDissolveMode];
+  var WipeWidth = 0.1;
+  var DirLeftToRight = 0;
+  var DirTopToBottom = 0;
+  var DirRightToLeft = 1;
+  var DirBottomToTop = 1;
+  var AxisX = 0;
+  var AxisY = 1;
+  var AddRevealModes = function AddRevealModes(image) {
+    image.addTransitionMode(RevealRight, {
+      ease: 'Linear',
+      dir: 'in',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        nextImage.effect = nextImage.preFX.addReveal(WipeWidth, DirLeftToRight, AxisX);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        nextImage.effect.progress = t;
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    }).addTransitionMode(RevealLeft, {
+      ease: 'Linear',
+      dir: 'in',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        nextImage.effect = nextImage.preFX.addReveal(WipeWidth, DirRightToLeft, AxisX);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        nextImage.effect.progress = t;
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    }).addTransitionMode(RevealDown, {
+      ease: 'Linear',
+      dir: 'in',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        nextImage.effect = nextImage.preFX.addReveal(WipeWidth, DirTopToBottom, AxisY);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        nextImage.effect.progress = t;
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    }).addTransitionMode(RevealUp, {
+      ease: 'Linear',
+      dir: 'in',
+      mask: false,
+      onStart: function onStart(parent, currentImage, nextImage, t) {
+        nextImage.effect = nextImage.preFX.addReveal(WipeWidth, DirBottomToTop, AxisY);
+      },
+      onProgress: function onProgress(parent, currentImage, nextImage, t) {
+        nextImage.effect.progress = t;
+      },
+      onComplete: function onComplete(parent, currentImage, nextImage, t) {
+        nextImage.preFX.remove(nextImage.effect);
+        delete nextImage.effect;
+      }
+    });
+  };
+
+  var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode, AddPixellateMode, AddDissolveMode, AddRevealModes];
 
   var TransitionImagePack = /*#__PURE__*/function (_Base) {
     _inherits(TransitionImagePack, _Base);

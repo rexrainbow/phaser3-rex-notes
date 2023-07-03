@@ -385,15 +385,15 @@
       this.fadeTime = time;
       return this;
     },
-    hasTintFadeEffect: function hasTintFadeEffect(gameObject) {
+    useTintFadeEffect: function useTintFadeEffect(gameObject) {
       return (this.fadeMode === undefined || this.fadeMode === 0) && this.fadeTime > 0 && gameObject.setTint !== undefined;
     },
-    hasAlphaFadeEffect: function hasAlphaFadeEffect(gameObject) {
+    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
       return (this.fadeMode === undefined || this.fadeMode === 1) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
     },
     fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
       var gameObject = bob.gameObject;
-      if (this.hasTintFadeEffect(gameObject)) {
+      if (this.useTintFadeEffect(gameObject)) {
         if (fromValue !== undefined) {
           bob.setProperty('tintGray', 255 * fromValue);
         }
@@ -411,7 +411,7 @@
         // yoyo
         onComplete // onComplete
         );
-      } else if (this.hasAlphaFadeEffect(gameObject)) {
+      } else if (this.useAlphaFadeEffect(gameObject)) {
         if (fromValue !== undefined) {
           bob.setProperty('alpha', fromValue);
         }
@@ -729,7 +729,7 @@
     },
     addGO: function addGO(name, gameObject) {
       this.remove(name, true);
-      if (this.hasTintFadeEffect(gameObject)) {
+      if (this.useTintFadeEffect(gameObject)) {
         AddTintRGBProperties(gameObject);
       }
       if (this.viewportCoordinateEnable) {
