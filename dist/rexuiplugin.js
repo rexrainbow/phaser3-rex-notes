@@ -34990,10 +34990,10 @@
       }
     }).addTransitionMode(IrisIn, {
       ease: 'Linear',
-      dir: 'out',
+      dir: 'in',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setCurrentImageMaskEnable(true);
+        parent.setNextImageMaskEnable(true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         parent.maskGameObject.setValue(1 - t);
@@ -35038,10 +35038,10 @@
       }
     }).addTransitionMode(PieIn, {
       ease: 'Linear',
-      dir: 'out',
+      dir: 'in',
       mask: maskGameObject,
       onStart: function onStart(parent, currentImage, nextImage, t) {
-        parent.setCurrentImageMaskEnable(true);
+        parent.setNextImageMaskEnable(true);
       },
       onProgress: function onProgress(parent, currentImage, nextImage, t) {
         parent.maskGameObject.setValue(1 - t);
