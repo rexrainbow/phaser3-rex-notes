@@ -87,9 +87,9 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
             return;
         }
 
-        var menuX = label.getElement('text').getTopLeft().x,
-            menuY = label.bottom;
-        list = CreatePopupList(scene, menuX, menuY, menuHeight, options, function (button) {
+        var listX = label.getElement('text').getTopLeft().x,
+            listY = label.bottom;
+        list = CreatePopupList(scene, listX, listY, menuHeight, options, function (button) {
             label.setData('value', button.text);
             list.scaleDownDestroy(100, 'y');
             list = undefined;
