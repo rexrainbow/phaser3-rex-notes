@@ -7757,7 +7757,7 @@
           return;
         }
         if (this.mode === 1) {
-          if (pointer.getDistance() >= this.dragThreshold) {
+          if (pointer.getDistance() >= this.dragThreshold || this.isPointerInside(pointer)) {
             this.cancel();
           }
         }
