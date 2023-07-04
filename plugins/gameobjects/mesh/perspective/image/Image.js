@@ -28,7 +28,7 @@ class Image extends Mesh {
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
 
-        var gridWidth = GetValue(config, 'gridWidth', 32);
+        var gridWidth = GetValue(config, 'gridWidth', 0);
         var gridHeight = GetValue(config, 'gridHeight', gridWidth);
         this.resetVerts(gridWidth, gridHeight);
     }
@@ -63,7 +63,15 @@ class Image extends Mesh {
 
         // Generate faces and vertices
         var frameWidth = this.frame.cutWidth,
-            frameHeight = this.frame.cutHeight;
+            frameHeight = this.frame.cutHeight;        
+
+        if (this.gridWidth === 0) {
+            this.gridWidth = frameWidth / 8;
+        }
+        if (this.gridHeight === 0) {
+            this.gridHeight = frameHeight / 8;
+        }
+
         GenerateGridVerts({
             mesh: this,
 
