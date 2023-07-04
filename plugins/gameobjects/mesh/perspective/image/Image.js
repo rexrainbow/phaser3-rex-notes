@@ -66,7 +66,6 @@ class Image extends Mesh {
             frameHeight = this.frame.cutHeight;
         GenerateGridVerts({
             mesh: this,
-            texture: this.texture.key, frame: this.frame.name,
 
             width: frameWidth / this.height,
             height: frameHeight / this.height,
