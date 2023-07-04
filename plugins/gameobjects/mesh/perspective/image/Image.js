@@ -63,13 +63,18 @@ class Image extends Mesh {
 
         // Generate faces and vertices
         var frameWidth = this.frame.cutWidth,
-            frameHeight = this.frame.cutHeight;        
+            frameHeight = this.frame.cutHeight;
 
+        var gridWidth, gridHeight;
         if (this.gridWidth === 0) {
-            this.gridWidth = frameWidth / 8;
+            gridWidth = Math.max(frameWidth / 8, 32);
+        } else {
+            gridHeight = this.gridWidth;
         }
         if (this.gridHeight === 0) {
-            this.gridHeight = frameHeight / 8;
+            gridHeight = Math.max(frameHeight / 8, 32);
+        } else {
+            gridHeight = this.gridHeight;
         }
 
         GenerateGridVerts({
@@ -78,8 +83,8 @@ class Image extends Mesh {
             width: frameWidth / this.height,
             height: frameHeight / this.height,
 
-            widthSegments: Math.ceil(frameWidth / this.gridWidth),
-            heightSegments: Math.ceil(frameHeight / this.gridHeight),
+            widthSegments: Math.ceil(frameWidth / gridWidth),
+            heightSegments: Math.ceil(frameHeight / gridHeight),
         });
 
         // Recover vertices transform

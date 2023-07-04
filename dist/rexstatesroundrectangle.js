@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexstatesroundrectangle = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -109,7 +118,7 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -210,14 +219,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$1(value, 'x', 0);
-          defaultRadiusY = GetValue$1(value, 'y', 0);
+          defaultRadiusX = GetValue$3(value, 'x', 0);
+          defaultRadiusY = GetValue$3(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$1(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$1(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$1(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$1(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$3(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$3(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$3(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$3(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -278,8 +287,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$1(value, 'x', 0);
-      radius.y = GetValue$1(value, 'y', 0);
+      radius.x = GetValue$3(value, 'x', 0);
+      radius.y = GetValue$3(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -480,7 +489,7 @@
 
   var Shape = Phaser.GameObjects.Shape;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
@@ -525,7 +534,7 @@
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$2(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -534,7 +543,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$2(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -896,6 +905,216 @@
   };
   Object.assign(RoundRectangle.prototype, Render);
 
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
+
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    }
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
   var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
     if (delimiter === undefined) {
       delimiter = '.';
@@ -967,68 +1186,111 @@
     return true;
   };
 
-  var ApplyStyle = function ApplyStyle(gameObject, newStyle) {
-    if (!newStyle) {
-      return undefined;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var StyleManager = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(StyleManager, _ComponentBase);
+    var _super = _createSuper(StyleManager);
+    function StyleManager(gameObject, config) {
+      var _this;
+      _classCallCheck(this, StyleManager);
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+
+      _this.style = GetValue(config, 'style', _assertThisInitialized(_this));
+      var propertiesMap = GetValue(config, 'propertiesMap');
+      _this.activeStyle = ExtractStyle(config, 'active', propertiesMap);
+      _this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
+      _this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);
+      _this.onModifyStyleCallback = GetValue(config, 'onModifyStyle');
+      return _this;
     }
-    var currentStyle = GetPartialData(gameObject, newStyle);
-    if (!IsKeyValueEqual(currentStyle, newStyle)) {
-      gameObject.modifyStyle(newStyle);
-      return currentStyle;
-    } else {
-      return undefined;
-    }
-  };
-  var SetStateMethods = {
-    setActiveState: function setActiveState(enable) {
-      if (enable === undefined) {
-        enable = true;
+    _createClass(StyleManager, [{
+      key: "getStyle",
+      value: function getStyle(keys) {
+        return GetPartialData(this.style, keys);
       }
-      if (this.activeState === enable) {
+    }, {
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        for (var key in style) {
+          this.style[key] = style[key];
+        }
+        if (this.onModifyStyleCallback) {
+          this.onModifyStyleCallback.call(this.parent, style);
+        }
         return this;
       }
-      this.activeState = enable;
-      if (enable) {
-        this.activeStyleSave = ApplyStyle(this, this.activeStyle);
-      } else {
-        ApplyStyle(this, this.activeStyleSave);
-        this.activeStyleSave = undefined;
+    }, {
+      key: "applyStyle",
+      value: function applyStyle(newStyle) {
+        if (!newStyle) {
+          return undefined;
+        }
+        var currentStyle = this.getStyle(newStyle);
+        if (!IsKeyValueEqual(currentStyle, newStyle)) {
+          this.modifyStyle(newStyle);
+          return currentStyle;
+        } else {
+          return undefined;
+        }
       }
-      return this;
-    },
-    setHoverState: function setHoverState(enable) {
-      if (enable === undefined) {
-        enable = true;
-      }
-      if (this.hoverState === enable) {
+    }, {
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        if (this.activeState === enable) {
+          return this;
+        }
+        this.activeState = enable;
+        if (enable) {
+          this.activeStyleSave = this.applyStyle(this.activeStyle);
+        } else {
+          this.applyStyle(this.activeStyleSave);
+          this.activeStyleSave = undefined;
+        }
         return this;
       }
-      this.hoverState = enable;
-      if (enable) {
-        this.hoverStyleSave = ApplyStyle(this, this.hoverStyle);
-      } else {
-        ApplyStyle(this, this.hoverStyleSave);
-        this.hoverStyleSave = undefined;
-      }
-      return this;
-    },
-    setDisableState: function setDisableState(enable) {
-      if (enable === undefined) {
-        enable = true;
-      }
-      if (this.disableState === enable) {
+    }, {
+      key: "setHoverState",
+      value: function setHoverState(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        if (this.hoverState === enable) {
+          return this;
+        }
+        this.hoverState = enable;
+        if (enable) {
+          this.hoverStyleSave = this.applyStyle(this.hoverStyle);
+        } else {
+          this.applyStyle(this.hoverStyleSave);
+          this.hoverStyleSave = undefined;
+        }
         return this;
       }
-      this.disableState = enable;
-      if (enable) {
-        this.disableStyleSave = ApplyStyle(this, this.disableStyle);
-      } else {
-        ApplyStyle(this, this.disableStyleSave);
-        this.disableStyleSave = undefined;
+    }, {
+      key: "setDisableState",
+      value: function setDisableState(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        if (this.disableState === enable) {
+          return this;
+        }
+        this.disableState = enable;
+        if (enable) {
+          this.disableStyleSave = this.applyStyle(this.disableStyle);
+        } else {
+          this.applyStyle(this.disableStyleSave);
+          this.disableStyleSave = undefined;
+        }
+        return this;
       }
-      return this;
-    }
-  };
+    }]);
+    return StyleManager;
+  }(ComponentBase);
 
   var StatesRoundRectangle = /*#__PURE__*/function (_RoundRectangle) {
     _inherits(StatesRoundRectangle, _RoundRectangle);
@@ -1040,17 +1302,29 @@
         config = {};
       }
       _this = _super.call(this, scene, config);
-      _this.activeStyle = ExtractStyle(config, 'active', PropertiesMap);
-      _this.hoverStyle = ExtractStyle(config, 'hover', PropertiesMap);
-      _this.disableStyle = ExtractStyle(config, 'disable', PropertiesMap);
+      config.style = _assertThisInitialized(_this);
+      config.propertiesMap = PropertiesMap;
+      _this.styleManager = new StyleManager(_assertThisInitialized(_this), config);
+      delete config.style;
+      delete config.propertiesMap;
       return _this;
     }
     _createClass(StatesRoundRectangle, [{
-      key: "modifyStyle",
-      value: function modifyStyle(style) {
-        for (var key in style) {
-          this[key] = style[key];
-        }
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        this.styleManager.setActiveState(enable);
+        return this;
+      }
+    }, {
+      key: "setHoverState",
+      value: function setHoverState(enable) {
+        this.styleManager.setHoverState(enable);
+        return this;
+      }
+    }, {
+      key: "setDisableState",
+      value: function setDisableState(enable) {
+        this.styleManager.setDisableState(enable);
         return this;
       }
     }]);
@@ -1063,7 +1337,6 @@
     // strokeAlpha: 'strokeAlpha',
     strokeWidth: 'lineWidth'
   };
-  Object.assign(StatesRoundRectangle.prototype, SetStateMethods);
 
   return StatesRoundRectangle;
 

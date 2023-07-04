@@ -277,7 +277,7 @@
       _this.resetPerspective();
       _this.panZ(PanZ);
       _this.hideCCW = GetValue$h(config, 'hideCCW', true);
-      var gridWidth = GetValue$h(config, 'gridWidth', 32);
+      var gridWidth = GetValue$h(config, 'gridWidth', 0);
       var gridHeight = GetValue$h(config, 'gridHeight', gridWidth);
       _this.resetVerts(gridWidth, gridHeight);
       return _this;
@@ -318,14 +318,23 @@
         // Generate faces and vertices
         var frameWidth = this.frame.cutWidth,
           frameHeight = this.frame.cutHeight;
+        var gridWidth, gridHeight;
+        if (this.gridWidth === 0) {
+          gridWidth = Math.max(frameWidth / 8, 32);
+        } else {
+          gridHeight = this.gridWidth;
+        }
+        if (this.gridHeight === 0) {
+          gridHeight = Math.max(frameHeight / 8, 32);
+        } else {
+          gridHeight = this.gridHeight;
+        }
         GenerateGridVerts({
           mesh: this,
-          texture: this.texture.key,
-          frame: this.frame.name,
           width: frameWidth / this.height,
           height: frameHeight / this.height,
-          widthSegments: Math.ceil(frameWidth / this.gridWidth),
-          heightSegments: Math.ceil(frameHeight / this.gridHeight)
+          widthSegments: Math.ceil(frameWidth / gridWidth),
+          heightSegments: Math.ceil(frameHeight / gridHeight)
         });
 
         // Recover vertices transform

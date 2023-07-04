@@ -624,8 +624,6 @@
         this.dirtyCache[9] = -1;
         GenerateGridVerts({
           mesh: this,
-          texture: this.texture.key,
-          frame: this.frame.name,
           width: this.frame.cutWidth / this.height,
           height: this.frame.cutHeight / this.height
         });
