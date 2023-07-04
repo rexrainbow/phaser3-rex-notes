@@ -98,7 +98,7 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
             .onClickOutside(function () {
                 list.scaleDownDestroy(100, 'y');
                 list = undefined;
-            });
+            }, undefined, { threshold: 10 });
 
         SelectItem(list, label.text);
 

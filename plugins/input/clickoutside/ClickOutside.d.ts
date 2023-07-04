@@ -7,6 +7,7 @@ declare namespace ClickOutside {
     interface IConfig {
         mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
         clickInterval?: number,
+        threshold?: number,
         enable?: boolean,
 
         eventEmitter?: boolean | Phaser.Events.EventEmitter
@@ -49,4 +50,6 @@ declare class ClickOutside extends ComponentBase {
     ): this;
 
     setClickInterval(interval: number): this;
+
+    setDragThreshold(distance: number): this;
 }

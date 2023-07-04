@@ -4339,6 +4339,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-dragging-threshold" class="md-nav__link">
+    Set dragging threshold
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9401,6 +9408,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-dragging-threshold" class="md-nav__link">
+    Set dragging threshold
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9485,8 +9499,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexButton&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// enable: true,</span>
-<span class="w">    </span><span class="c1">// mode: 1,            // 0|&#39;press&#39;|1|&#39;release&#39;</span>
-<span class="w">    </span><span class="c1">// clickInterval: 100  // ms</span>
+<span class="w">    </span><span class="c1">// mode: 1,              // 0|&#39;press&#39;|1|&#39;release&#39;</span>
+<span class="w">    </span><span class="c1">// clickInterval: 100    // ms</span>
 <span class="w">    </span><span class="c1">// threshold: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -9559,6 +9573,9 @@
 </ul>
 <h3 id="set-click-interval">Set click interval<a class="headerlink" href="#set-click-interval" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setClickInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span><span class="w">  </span><span class="c1">// interval in ms</span>
+</code></pre></div>
+<h3 id="set-dragging-threshold">Set dragging threshold<a class="headerlink" href="#set-dragging-threshold" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">distance</span><span class="p">);</span><span class="w">  </span><span class="c1">// distance in pixels</span>
 </code></pre></div>
 
 

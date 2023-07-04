@@ -7461,8 +7461,10 @@
         if (this.dragThreshold === undefined) {
           return;
         }
-        if (pointer.getDistance() >= this.dragThreshold) {
-          this.cancel();
+        if (this.mode === 1) {
+          if (pointer.getDistance() >= this.dragThreshold) {
+            this.cancel();
+          }
         }
       }
     }, {
@@ -7641,9 +7643,12 @@
     _createClass(ClickOutside, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
+        this.pointer = undefined;
+        this.lastClickTime = undefined;
         this.setEnable(GetValue$1l(o, "enable", true));
         this.setMode(GetValue$1l(o, "mode", 1));
         this.setClickInterval(GetValue$1l(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$1l(o, 'threshold', undefined));
         return this;
       }
     }, {
@@ -7652,6 +7657,7 @@
         var scene = this.parent.scene;
         scene.input.on('pointerdown', this.onPress, this);
         scene.input.on('pointerup', this.onRelease, this);
+        scene.input.on('pointermove', this.onMove, this);
       }
     }, {
       key: "shutdown",
@@ -7663,6 +7669,8 @@
         var scene = this.parent.scene;
         scene.input.off('pointerdown', this.onPress, this);
         scene.input.off('pointerup', this.onRelease, this);
+        scene.input.off('pointermove', this.onMove, this);
+        this.pointer = null;
         _get(_getPrototypeOf(ClickOutside.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -7673,6 +7681,9 @@
       set: function set(e) {
         if (this._enable === e) {
           return;
+        }
+        if (!e) {
+          this.cancel();
         }
         this._enable = e;
         var eventName = e ? 'enable' : 'disable';
@@ -7709,6 +7720,12 @@
         return this;
       }
     }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }, {
       key: "isPointerInside",
       value: function isPointerInside(pointer) {
         var gameObject = this.parent;
@@ -7720,11 +7737,15 @@
     }, {
       key: "onPress",
       value: function onPress(pointer) {
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+          return;
+        }
+        if (this.pointer !== undefined) {
+          return;
+        }
+        this.pointer = pointer;
         if (this.mode === 0) {
-          // Do nothing if game object is not visible
-          if (!this.parent.willRender(pointer.camera)) {
-            return;
-          }
           if (!this.isPointerInside(pointer)) {
             this.click(pointer.downTime, pointer);
           }
@@ -7733,13 +7754,32 @@
     }, {
       key: "onRelease",
       value: function onRelease(pointer) {
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+          return;
+        }
+        if (this.pointer !== pointer) {
+          return;
+        }
         if (this.mode === 1) {
-          // Do nothing if game object is not visible
-          if (!this.parent.willRender(pointer.camera)) {
-            return;
-          }
           if (!this.isPointerInside(pointer)) {
             this.click(pointer.upTime, pointer);
+          }
+        }
+        this.pointer = undefined;
+      }
+    }, {
+      key: "onMove",
+      value: function onMove(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        if (this.dragThreshold === undefined) {
+          return;
+        }
+        if (this.mode === 1) {
+          if (pointer.getDistance() >= this.dragThreshold) {
+            this.cancel();
           }
         }
       }
@@ -7754,12 +7794,19 @@
           this.emit('clickoutside', this, this.parent, pointer);
           return this;
         }
+        this.pointer = undefined;
         var lastClickTime = this.lastClickTime;
         if (lastClickTime !== undefined && nowTime - lastClickTime <= this.clickInterval) {
           return this;
         }
         this.lastClickTime = nowTime;
         this.emit('clickoutside', this, this.parent, pointer);
+        return this;
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        this.pointer = undefined;
         return this;
       }
     }]);

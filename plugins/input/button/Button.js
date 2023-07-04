@@ -105,19 +105,24 @@ class Button extends ComponentBase {
         if (this.pointer !== undefined) {
             return;
         }
+
         this.pointer = pointer;
+
         if (this.mode === 0) {
             this.click(pointer.downTime, pointer, event);
         }
+
     }
 
     onRelease(pointer, localX, localY, event) {
         if (this.pointer !== pointer) {
             return;
         }
+
         if (this.mode === 1) {
             this.click(pointer.upTime, pointer, event);
         }
+
         this.pointer = undefined;
     }
 
@@ -125,6 +130,7 @@ class Button extends ComponentBase {
         if (this.pointer !== pointer) {
             return;
         }
+
         this.cancel();
     }
 
@@ -137,8 +143,10 @@ class Button extends ComponentBase {
             return;
         }
 
-        if (pointer.getDistance() >= this.dragThreshold) {
-            this.cancel();
+        if (this.mode === 1) {
+            if (pointer.getDistance() >= this.dragThreshold) {
+                this.cancel();
+            }
         }
     }
 

@@ -75,8 +75,9 @@ Fires 'clickoutside' event when pointer-down or pointer-up outside of game objec
 ```javascript
 var clickOutside = scene.plugins.get('rexClickOutside').add(gameObject, {
     // enable: true,
-    // mode: 1,            // 0|'press'|1|'release'
-    // clickInterval: 100  // ms
+    // mode: 1,              // 0|'press'|1|'release'
+    // clickInterval: 100,   // ms
+    // threshold: undefined
 });
 ```
 
@@ -85,6 +86,8 @@ var clickOutside = scene.plugins.get('rexClickOutside').add(gameObject, {
     - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
     - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
 - `clickInterval` : Interval between 2 'click' events, in ms.
+- `threshold` : Cancel clicking detecting when dragging distance is larger then this threshold.
+    - `undefined` : Ignore this feature. Default behavior.
 
 ### Events
 
@@ -137,4 +140,10 @@ clickOutside.setMode(mode);
 
 ```javascript
 clickOutside.setClickInterval(interval);  // interval in ms
+```
+
+### Set dragging threshold
+
+```javascript
+clickOutside.setDragThreshold(distance);  // distance in pixels
 ```

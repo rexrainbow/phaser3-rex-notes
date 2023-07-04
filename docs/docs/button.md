@@ -71,8 +71,8 @@ Fires 'click' event when touch releasd after pressed.
 ```javascript
 var button = scene.plugins.get('rexButton').add(gameObject, {
     // enable: true,
-    // mode: 1,            // 0|'press'|1|'release'
-    // clickInterval: 100  // ms
+    // mode: 1,              // 0|'press'|1|'release'
+    // clickInterval: 100    // ms
     // threshold: undefined
 });
 ```
@@ -149,4 +149,10 @@ button.setMode(mode);
 
 ```javascript
 button.setClickInterval(interval);  // interval in ms
+```
+
+### Set dragging threshold
+
+```javascript
+button.setDragThreshold(distance);  // distance in pixels
 ```

@@ -2772,8 +2772,10 @@
         if (this.dragThreshold === undefined) {
           return;
         }
-        if (pointer.getDistance() >= this.dragThreshold) {
-          this.cancel();
+        if (this.mode === 1) {
+          if (pointer.getDistance() >= this.dragThreshold) {
+            this.cancel();
+          }
         }
       }
     }, {

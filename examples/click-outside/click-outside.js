@@ -29,7 +29,8 @@ class Demo extends Phaser.Scene {
             })
 
         var clickOtuside = this.plugins.get('rexClickOutside').add(btn0, {
-            mode: 'pointerdown'
+            mode: 'pointerup',
+            // threshold: 10,
         })
             .on('clickoutside', function () {
                 print.text += 'Click outside of btn0\n'

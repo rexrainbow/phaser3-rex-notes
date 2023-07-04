@@ -21,9 +21,12 @@ class ClickOutside extends ComponentBase {
     }
 
     resetFromJSON(o) {
+        this.pointer = undefined;
+        this.lastClickTime = undefined;
         this.setEnable(GetValue(o, "enable", true));
         this.setMode(GetValue(o, "mode", 1));
         this.setClickInterval(GetValue(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue(o, 'threshold', undefined));
         return this;
     }
 
@@ -31,6 +34,7 @@ class ClickOutside extends ComponentBase {
         var scene = this.parent.scene;
         scene.input.on('pointerdown', this.onPress, this);
         scene.input.on('pointerup', this.onRelease, this);
+        scene.input.on('pointermove', this.onMove, this);
     }
 
     shutdown(fromScene) {
@@ -42,6 +46,8 @@ class ClickOutside extends ComponentBase {
         var scene = this.parent.scene;
         scene.input.off('pointerdown', this.onPress, this);
         scene.input.off('pointerup', this.onRelease, this);
+        scene.input.off('pointermove', this.onMove, this);
+        this.pointer = null;
 
         super.shutdown(fromScene);
     }
@@ -55,7 +61,11 @@ class ClickOutside extends ComponentBase {
             return;
         }
 
+        if (!e) {
+            this.cancel();
+        }
         this._enable = e;
+
         var eventName = (e) ? 'enable' : 'disable';
         this.emit(eventName, this, this.parent);
     }
@@ -87,6 +97,11 @@ class ClickOutside extends ComponentBase {
         return this;
     }
 
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+    }
+
     isPointerInside(pointer) {
         var gameObject = this.parent;
         var isInsideCallback = (gameObject.input) ? IsPointerInHitArea : IsPointerInBounds;
@@ -95,12 +110,18 @@ class ClickOutside extends ComponentBase {
 
     // internal
     onPress(pointer) {
-        if (this.mode === 0) {
-            // Do nothing if game object is not visible
-            if (!this.parent.willRender(pointer.camera)) {
-                return;
-            }
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+            return;
+        }
 
+        if (this.pointer !== undefined) {
+            return;
+        }
+
+        this.pointer = pointer;
+
+        if (this.mode === 0) {
             if (!this.isPointerInside(pointer)) {
                 this.click(pointer.downTime, pointer);
             }
@@ -108,14 +129,36 @@ class ClickOutside extends ComponentBase {
     }
 
     onRelease(pointer) {
-        if (this.mode === 1) {
-            // Do nothing if game object is not visible
-            if (!this.parent.willRender(pointer.camera)) {
-                return;
-            }
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+            return;
+        }
 
+        if (this.pointer !== pointer) {
+            return;
+        }
+
+        if (this.mode === 1) {
             if (!this.isPointerInside(pointer)) {
                 this.click(pointer.upTime, pointer);
+            }
+        }
+
+        this.pointer = undefined;
+    }
+
+    onMove(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+            return;
+        }
+
+        if (this.dragThreshold === undefined) {
+            return;
+        }
+
+        if (this.mode === 1) {
+            if (pointer.getDistance() >= this.dragThreshold) {
+                this.cancel();
             }
         }
     }
@@ -131,6 +174,7 @@ class ClickOutside extends ComponentBase {
             return this;
         }
 
+        this.pointer = undefined;
         var lastClickTime = this.lastClickTime;
         if ((lastClickTime !== undefined) &&
             ((nowTime - lastClickTime) <= this.clickInterval)) {
@@ -139,6 +183,11 @@ class ClickOutside extends ComponentBase {
         this.lastClickTime = nowTime;
         this.emit('clickoutside', this, this.parent, pointer);
 
+        return this;
+    }
+
+    cancel() {
+        this.pointer = undefined;
         return this;
     }
 }

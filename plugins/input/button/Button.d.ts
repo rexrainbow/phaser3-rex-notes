@@ -50,4 +50,6 @@ declare class Button extends ComponentBase {
     ): this;
 
     setClickInterval(interval: number): this;
+
+    setDragThreshold(distance: number): this;
 }
