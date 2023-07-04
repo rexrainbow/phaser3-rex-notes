@@ -1,6 +1,5 @@
 import RoundRectangle from '../roundrectangle/RoundRectangle.js';
-import ExtractStyle from './methods/ExtractStyle.js';
-import SetStateMethods from './methods/SetStateMethods.js';
+import StyleManager from '../../../plugins/utils/gameobject/stylemanager/StyleManager.js';
 
 class StatesRoundRectangle extends RoundRectangle {
     constructor(scene, config) {
@@ -9,15 +8,27 @@ class StatesRoundRectangle extends RoundRectangle {
         }
         super(scene, config);
 
-        this.activeStyle = ExtractStyle(config, 'active', PropertiesMap);
-        this.hoverStyle = ExtractStyle(config, 'hover', PropertiesMap);
-        this.disableStyle = ExtractStyle(config, 'disable', PropertiesMap);
+        config.style = this;
+        config.propertiesMap = PropertiesMap;
+
+        this.styleManager = new StyleManager(this, config);
+
+        delete config.style;
+        delete config.propertiesMap;
     }
 
-    modifyStyle(style) {
-        for (var key in style) {
-            this[key] = style[key];
-        }
+    setActiveState(enable) {
+        this.styleManager.setActiveState(enable);
+        return this;
+    }
+
+    setHoverState(enable) {
+        this.styleManager.setHoverState(enable);
+        return this;
+    }
+
+    setDisableState(enable) {
+        this.styleManager.setDisableState(enable);
         return this;
     }
 }
@@ -29,10 +40,5 @@ const PropertiesMap = {
     // strokeAlpha: 'strokeAlpha',
     strokeWidth: 'lineWidth',
 }
-
-Object.assign(
-    StatesRoundRectangle.prototype,
-    SetStateMethods
-)
 
 export default StatesRoundRectangle;

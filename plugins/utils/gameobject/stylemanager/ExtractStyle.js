@@ -1,4 +1,4 @@
-import ExtractByPrefix from '../../../../plugins/utils/object/ExtractByPrefix.js';
+import ExtractByPrefix from '../../object/ExtractByPrefix.js';
 
 var ExtractStyle = function (config, prefix, propertiesMap) {
     var result = ExtractByPrefix(config, prefix);
