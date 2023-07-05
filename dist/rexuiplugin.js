@@ -22025,6 +22025,7 @@
           return;
         }
         this.pointer = pointer;
+        this.emit('down', this, this.parent, pointer, event);
         if (this.mode === 0) {
           this.click(pointer.downTime, pointer, event);
         }
@@ -22035,6 +22036,7 @@
         if (this.pointer !== pointer) {
           return;
         }
+        this.emit('up', this, this.parent, pointer, event);
         if (this.mode === 1) {
           this.click(pointer.upTime, pointer, event);
         }
@@ -40612,6 +40614,10 @@
           this.fireEvent('button.over', gameObject, pointer, event);
         }, this).on('pointerout', function (pointer, event) {
           this.fireEvent('button.out', gameObject, pointer, event);
+        }, this).on('pointerdown', function (pointer, localX, localY, event) {
+          this.fireEvent('button.down', gameObject, pointer, event);
+        }, this).on('pointerout', function (pointer, event) {
+          this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
       }
       if (this.buttonsType) {

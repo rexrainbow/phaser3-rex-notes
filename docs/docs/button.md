@@ -118,6 +118,18 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
         // ...
     }, scope);
     ```
+- Pointer down
+    ```javascript
+    button.on('down', function (button, gameObject, event) {
+        // ...
+    }, scope);
+    ```
+- Pointer up
+    ```javascript
+    button.on('up', function (button, gameObject, event) {
+        // ...
+    }, scope);
+    ```
 
 ### Enable
 

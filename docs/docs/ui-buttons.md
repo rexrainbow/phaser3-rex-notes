@@ -253,6 +253,30 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+- Pointer-down button
+    ```javascript
+    buttons.on('button.down', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    buttons.on('button.down', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+- Pointer-up button
+    ```javascript
+    buttons.on('button.up', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    buttons.on('button.up', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
 - Enable button's input
     ```javascript
     buttons.on('button.enable', function(button, index) {
