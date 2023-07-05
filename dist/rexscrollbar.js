@@ -11704,6 +11704,7 @@
         config = {};
       }
       _this = _super.call(this, scene, config);
+      _this.type = 'rexStatesRoundRectangleShape';
       config.style = _assertThisInitialized(_this);
       config.propertiesMap = PropertiesMap;
       _this.addStyleManager(config);

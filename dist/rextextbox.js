@@ -11663,7 +11663,9 @@
           this.setIconSize(iconSize);
         }
       }
-      this.setIconTexture(config.icon, config.iconFrame);
+      if (config.icon !== true) {
+        this.setIconTexture(config.icon, config.iconFrame);
+      }
     }
     var actionGameObjct = this.childrenMap.action;
     if (actionGameObjct) {
@@ -11679,7 +11681,9 @@
           this.setActionSize(actionSize);
         }
       }
-      this.setActionTexture(config.action, config.actionFrame);
+      if (config.action !== true) {
+        this.setActionTexture(config.action, config.actionFrame);
+      }
     }
     return this;
   };
