@@ -29,6 +29,14 @@ class Style extends ComponentBase {
         this.parent.setFrame(value);
     }
 
+    get scale() {
+        return this.parent.scaleX;
+    }
+
+    set scale(value) {
+        this.parent.setScale(value);
+    }
+
     get tint() {
         return this.parent.tint;
     }
