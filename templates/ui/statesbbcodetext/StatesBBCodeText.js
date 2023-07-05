@@ -10,6 +10,7 @@ class StatesText extends BBCodeText {
         var y = GetValue(config, 'y', 0);
         var text = GetValue(config, 'text', '');
         super(scene, x, y, text, config);
+        this.type = 'rexStatesBBCodeText';
 
         config.style = this.style;
         config.onModifyStyle = function (gameObject, style) {

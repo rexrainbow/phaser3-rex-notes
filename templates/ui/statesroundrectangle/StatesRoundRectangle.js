@@ -7,6 +7,7 @@ class StatesRoundRectangle extends RoundRectangle {
             config = {};
         }
         super(scene, config);
+        this.type = 'rexStatesRoundRectangleShape';
 
         config.style = this;
         config.propertiesMap = PropertiesMap;
