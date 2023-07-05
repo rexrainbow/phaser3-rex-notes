@@ -5,6 +5,8 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -41,7 +43,10 @@ class Demo extends Phaser.Scene {
                 'active.fontStyle': 'bold',
                 'active.color': 'yellow',
             },
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                icon: 10,
+            },
         }
 
         var buttons = this.rexUI.add.buttons({
@@ -80,7 +85,11 @@ class Demo extends Phaser.Scene {
 
 var createButton = function (scene, style, text) {
     return scene.rexUI.add.simpleLabel(style)
-        .resetDisplayContent(text)
+        .resetDisplayContent({
+            text: text,
+            icon: GetValue(style, 'icon.key'),
+            iconFrame: GetValue(style, 'icon.frame'),
+        })
         .setName(text);
 }
 
