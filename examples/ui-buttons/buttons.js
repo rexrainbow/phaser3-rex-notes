@@ -54,6 +54,12 @@ class Demo extends Phaser.Scene {
             .on('button.over', function () {
                 print.text += 'Pointer-over\n';
             })
+            .on('button.down', function () {
+                print.text += 'Pointer-down\n';
+            })
+            .on('button.up', function () {
+                print.text += 'Pointer-up\n';
+            })
 
     }
 

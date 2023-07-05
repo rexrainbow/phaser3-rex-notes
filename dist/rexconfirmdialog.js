@@ -11225,7 +11225,7 @@
           this.fireEvent('button.out', gameObject, pointer, event);
         }, this).on('pointerdown', function (pointer, localX, localY, event) {
           this.fireEvent('button.down', gameObject, pointer, event);
-        }, this).on('pointerout', function (pointer, event) {
+        }, this).on('pointerup', function (pointer, event) {
           this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
       }

@@ -30,7 +30,7 @@ export default {
                 .on('pointerdown', function (pointer, localX, localY, event) {
                     this.fireEvent('button.down', gameObject, pointer, event);
                 }, this)
-                .on('pointerout', function (pointer, event) {
+                .on('pointerup', function (pointer, event) {
                     this.fireEvent('button.up', gameObject, pointer, event);
                 }, this)
         }
