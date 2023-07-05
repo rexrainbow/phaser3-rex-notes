@@ -7,15 +7,19 @@ declare namespace StatesImage {
 
         key?: string,
         frame?: string,
+        scale?: number,
 
         'active.key'?: string,
         'active.frame'?: string,
+        'active.scale'?: number,
 
         'hover.key'?: string,
         'hover.frame'?: string,
+        'hover.scale'?: number,
 
         'disable.key'?: string,
         'disable.frame'?: string,
+        'disable.scale'?: number,
 
     }
 }

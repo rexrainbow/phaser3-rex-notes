@@ -1,16 +1,9 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
 
 class Style extends ComponentBase {
-    constructor(gameObject, config) {
-        super(gameObject, config);
+    constructor(gameObject, style) {
+        super(gameObject);
         // this.parent = gameObject;
-    }
-
-    setStyle(style) {
-        for (var name in style) {
-            this[name] = style[name];
-        }
-        return this;
     }
 
     get key() {
@@ -44,39 +37,6 @@ class Style extends ComponentBase {
     set tint(value) {
         this.parent.tint = value;
     }
-
-    get tintR() {
-        return this.parent.tintR;
-    }
-
-    set tintR(value) {
-        this.parent.tintR = value;
-    }
-
-    get tintG() {
-        return this.parent.tintG;
-    }
-
-    set tintG(value) {
-        this.parent.tintG = value;
-    }
-
-    get tintB() {
-        return this.parent.tintB;
-    }
-
-    set tintB(value) {
-        this.parent.tintB = value;
-    }
-
-    get tintGray() {
-        return this.parent.tintGray;
-    }
-
-    set tintGray(value) {
-        this.parent.tintGray = value;
-    }
-
 }
 
 export default Style;

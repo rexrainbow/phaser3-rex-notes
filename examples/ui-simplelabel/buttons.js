@@ -13,7 +13,10 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() { }
+    preload() {
+        this.load.image('pause', 'assets/images/pause.png');
+        this.load.image('play', 'assets/images/play.png');
+    }
 
     create() {
         var style = {
@@ -26,6 +29,10 @@ class Demo extends Phaser.Scene {
                 strokeWidth: 0,
                 'hover.strokeColor': 0xffffff,
                 'hover.strokeWidth': 2
+            },
+            icon: {
+                key: 'pause',
+                'active.key': 'play',
             },
             text: {
                 $type: 'text',

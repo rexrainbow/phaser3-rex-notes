@@ -1,7 +1,9 @@
+import StatesImage from '../../statesimage/StatesImage';
+
 export default CreateImage;
 
 declare namespace CreateImage {
-    interface IConfig {
+    interface IConfig extends StatesImage.IConfig {
 
     }
 }
@@ -9,4 +11,4 @@ declare namespace CreateImage {
 declare function CreateImage(
     scene: Phaser.Scene,
     config?: CreateImage.IConfig,
-): Phaser.GameObjects.Image
+): StatesImage;

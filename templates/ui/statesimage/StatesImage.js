@@ -1,5 +1,4 @@
 import Style from './Style.js';
-import AddTintRGBProperties from '../../../plugins/tintrgb.js';
 import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
@@ -18,18 +17,12 @@ class StatesImage extends PhaserImage {
         super(scene, x, y, key, frame);
         this.type = 'rexStatesImage';
 
-        AddTintRGBProperties(this);
         this.style = new Style(this, config);
 
         config.style = this.style;
         this.addStyleManager(config);
 
         delete config.style;
-    }
-
-    setStyle(style) {
-        this.style.setStyle(style);
-        return this;
     }
 }
 

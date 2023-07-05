@@ -1,7 +1,7 @@
-const PhaserImage = Phaser.GameObjects.Image;
+import StatesImage from '../../statesimage/StatesImage.js';
 
 var CreateImage = function (scene, config) {
-    var gameObject = new PhaserImage(scene, 0, 0, '');
+    var gameObject = new StatesImage(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
 }
