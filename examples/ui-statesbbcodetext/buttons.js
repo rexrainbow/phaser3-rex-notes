@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import StatesBBCodeText from '../../templates/ui/statesbbcodetext/StatesBBCodeText.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -16,25 +17,19 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var style = {
-            background: {
-                radius: 10,
+        var textStyle = {
+            fontSize: 24,
+            padding: { left: 10, right: 10, top: 10, bottom: 10 },
 
-                color: COLOR_DARK,
-                'active.color': COLOR_PRIMARY,
+            backgroundColor: '#260e04',
+            'active.backgroundColor': '#7b5e57',
 
-                strokeWidth: 0,
-                'hover.strokeColor': 0xffffff,
-                'hover.strokeWidth': 2
-            },
-            text: {
-                $type: 'text',
-                fontSize: 18,
+            color: '#FFFFFF',
+            'active.color': '#000000',
 
-                'active.fontStyle': 'bold',
-                'active.color': 'yellow',
-            },
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
+            backgroundStrokeLineWidth: 0,
+            'hover.backgroundStrokeColor': '#ffffff',
+            'hover.backgroundStrokeLineWidth': 2,
         }
 
         var buttons = this.rexUI.add.buttons({
@@ -43,10 +38,10 @@ class Demo extends Phaser.Scene {
             orientation: 'y',
 
             buttons: [
-                createButton(this, style, 'AAA'),
-                createButton(this, style, 'BBB'),
-                createButton(this, style, 'CCC'),
-                createButton(this, style, 'DDD'),
+                createButton(this, 'AAA', textStyle),
+                createButton(this, 'BBB', textStyle),
+                createButton(this, 'CCC', textStyle),
+                createButton(this, 'DDD', textStyle),
             ],
 
             space: { item: 8 },
@@ -56,13 +51,13 @@ class Demo extends Phaser.Scene {
         })
             .layout()
             .on('button.statechange', function (button, index, value, previousValue) {
-                button.setActiveState(value);
+                button.getElement('text').setActiveState(value);
             })
             .on('button.over', function (button, index, pointer, event) {
-                button.setHoverState(true);
+                button.getElement('text').setHoverState(true);
             })
             .on('button.out', function (button, index, pointer, event) {
-                button.setHoverState(false);
+                button.getElement('text').setHoverState(false);
             })
 
 
@@ -71,10 +66,16 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, style, text) {
-    return scene.rexUI.add.simpleLabel(style)
-        .resetDisplayContent(text)
-        .setName(text);
+var createButton = function (scene, text, textStyle) {
+    var textObject = new StatesBBCodeText(scene, textStyle);
+    scene.add.existing(textObject);
+
+    return scene.rexUI.add.label({
+        text: textObject.setText(text),
+        expandTextWidth: true,
+        space: { left: 10, right: 10, top: 10, bottom: 10 },
+        name: text
+    });
 }
 
 var config = {

@@ -1,5 +1,4 @@
 import RoundRectangle from './roundrectangle/RoundRectangle';
-import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
@@ -28,6 +27,8 @@ import Cover from './cover/Cover';
 import InputText from './inputtext/InputText';
 import { FileChooser } from './filechooser/FileChooser';
 import FileDropZone from './filedropzone/FileDropZone';
+import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle';
+import StatesText from './statestext/StatesText';
 import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 import NinePatch2 from './ninepatch2/NinePatch';
@@ -120,7 +121,6 @@ type FontSizeResize = typeof SetFontSizeToFitWidth;
 
 export {
     RoundRectangle,
-    StatesRoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
@@ -139,6 +139,8 @@ export {
     InputText,
     FileChooser,
     FileDropZone,
+    StatesRoundRectangle,
+    StatesText,
     Chart,
     CircularProgress,
     CircularProgressCanvas,

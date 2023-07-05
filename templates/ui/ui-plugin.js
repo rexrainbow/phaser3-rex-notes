@@ -3,7 +3,6 @@ import ObjectFactory from './ObjectFactory.js';
 import NinePatchFactory from './ninepatch/Factory.js';
 import NinePatch2Factory from './ninepatch2/Factory.js';
 import RoundRectangleFactory from './roundrectangle/Factory.js';
-import StatesRoundRectangleFactory from './statesroundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
@@ -32,6 +31,8 @@ import CoverFactory from './cover/Factory.js';
 import InputTextFactory from './inputtext/Factory';
 import FileChooserFactory from './filechooser/Factory.js';
 import FileDropZoneFactory from './filedropzone/Factory.js';
+import StatesRoundRectangleFactory from './statesroundrectangle/Factory.js';
+import StatesTextFactory from './statestext/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import ContainerFactory from './container/Factory.js';

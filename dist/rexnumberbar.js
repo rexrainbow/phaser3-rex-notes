@@ -11728,7 +11728,7 @@
       _this.activeStyle = ExtractStyle(config, 'active', propertiesMap);
       _this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
       _this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);
-      _this.onModifyStyleCallback = GetValue$5(config, 'onModifyStyle');
+      _this.onModifyStyle = GetValue$5(config, 'onModifyStyle');
       return _this;
     }
     _createClass(StyleManager, [{
@@ -11742,8 +11742,8 @@
         for (var key in style) {
           this.style[key] = style[key];
         }
-        if (this.onModifyStyleCallback) {
-          this.onModifyStyleCallback.call(this.parent, style);
+        if (this.onModifyStyle) {
+          this.onModifyStyle(this.parent, style);
         }
         return this;
       }
@@ -11819,6 +11819,25 @@
     return StyleManager;
   }(ComponentBase);
 
+  var HelperMethods = {
+    addStyleManager: function addStyleManager(config) {
+      this.styleManager = new StyleManager(this, config);
+      return this;
+    },
+    setActiveState: function setActiveState(enable) {
+      this.styleManager.setActiveState(enable);
+      return this;
+    },
+    setHoverState: function setHoverState(enable) {
+      this.styleManager.setHoverState(enable);
+      return this;
+    },
+    setDisableState: function setDisableState(enable) {
+      this.styleManager.setDisableState(enable);
+      return this;
+    }
+  };
+
   var StatesRoundRectangle = /*#__PURE__*/function (_RoundRectangle) {
     _inherits(StatesRoundRectangle, _RoundRectangle);
     var _super = _createSuper(StatesRoundRectangle);
@@ -11831,31 +11850,12 @@
       _this = _super.call(this, scene, config);
       config.style = _assertThisInitialized(_this);
       config.propertiesMap = PropertiesMap;
-      _this.styleManager = new StyleManager(_assertThisInitialized(_this), config);
+      _this.addStyleManager(config);
       delete config.style;
       delete config.propertiesMap;
       return _this;
     }
-    _createClass(StatesRoundRectangle, [{
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        this.styleManager.setActiveState(enable);
-        return this;
-      }
-    }, {
-      key: "setHoverState",
-      value: function setHoverState(enable) {
-        this.styleManager.setHoverState(enable);
-        return this;
-      }
-    }, {
-      key: "setDisableState",
-      value: function setDisableState(enable) {
-        this.styleManager.setDisableState(enable);
-        return this;
-      }
-    }]);
-    return StatesRoundRectangle;
+    return _createClass(StatesRoundRectangle);
   }(RoundRectangle);
   var PropertiesMap = {
     color: 'fillColor',
@@ -11864,6 +11864,7 @@
     // strokeAlpha: 'strokeAlpha',
     strokeWidth: 'lineWidth'
   };
+  Object.assign(StatesRoundRectangle.prototype, HelperMethods);
 
   var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
     if (callback === undefined) {

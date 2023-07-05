@@ -1,7 +1,7 @@
+import StatesText from '../../statestext/StatesText.js';
 import BBCodeText from '../../bbcodetext/BBCodeText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const PhaserText = Phaser.GameObjects.Text;
 const PhaserBitmapText = Phaser.GameObjects.BitmapText;
 
 var CreateText = function (scene, config) {
@@ -30,7 +30,7 @@ var CreateText = function (scene, config) {
             break;
 
         case 'text':
-            gameObject = new PhaserText(scene, 0, 0, '', config);
+            gameObject = new StatesText(scene, config);
             break;
 
         default:
