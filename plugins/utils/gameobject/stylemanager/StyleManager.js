@@ -17,7 +17,7 @@ class StyleManager extends ComponentBase {
         this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
         this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);    
 
-        this.onModifyStyleCallback = GetValue(config, 'onModifyStyle');
+        this.onModifyStyle = GetValue(config, 'onModifyStyle');
     }
 
     getStyle(keys) {
@@ -29,8 +29,8 @@ class StyleManager extends ComponentBase {
             this.style[key] = style[key];
         }
 
-        if (this.onModifyStyleCallback) {
-            this.onModifyStyleCallback.call(this.parent, style);
+        if (this.onModifyStyle) {
+            this.onModifyStyle(this.parent, style);
         }
 
         return this;

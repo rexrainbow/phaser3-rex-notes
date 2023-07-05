@@ -1,5 +1,6 @@
 import Label from '../label/Label.js';
 import BuildLabelConfig from '../utils/build/BuildLabelConfig.js';
+import IsGameObject from '../../../plugins/utils/system/IsGameObject.js';
 
 class SimpleLabel extends Label {
     constructor(scene, config, creators) {
@@ -9,29 +10,31 @@ class SimpleLabel extends Label {
     }
 
     setActiveState(enable) {
-        var background = this.childrenMap.background;
-        if (background && background.setActiveState) {
-            background.setActiveState(enable);
-        }
+        RunMethod(this.childrenMap, 'setActiveState', enable);
         return this;
     }
 
     setHoverState(enable) {
-        var background = this.childrenMap.background;
-        if (background && background.setHoverState) {
-            background.setHoverState(enable);
-        }
+        RunMethod(this.childrenMap, 'setHoverState', enable);
         return this;
     }
 
     setDisableState(enable) {
-        var background = this.childrenMap.background;
-        if (background && background.setDisableState) {
-            background.setDisableState(enable);
-        }
+        RunMethod(this.childrenMap, 'setDisableState', enable);
         return this;
     }
 
+}
+
+var RunMethod = function (childrenMap, methodName, ...args) {
+    for (var key in childrenMap) {
+        var gameObject = childrenMap[key];
+        if (!IsGameObject(gameObject) || !gameObject[methodName]) {
+            continue;
+        }
+
+        gameObject[methodName](...args);
+    }
 }
 
 export default SimpleLabel;
