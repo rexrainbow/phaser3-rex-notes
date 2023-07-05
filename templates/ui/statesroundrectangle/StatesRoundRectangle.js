@@ -1,5 +1,5 @@
 import RoundRectangle from '../roundrectangle/RoundRectangle.js';
-import StyleManager from '../../../plugins/utils/gameobject/stylemanager/StyleManager.js';
+import HelperMethods from '../../../plugins/utils/gameobject/stylemanager/HelperMethods.js';
 
 class StatesRoundRectangle extends RoundRectangle {
     constructor(scene, config) {
@@ -11,25 +11,10 @@ class StatesRoundRectangle extends RoundRectangle {
         config.style = this;
         config.propertiesMap = PropertiesMap;
 
-        this.styleManager = new StyleManager(this, config);
+        this.addStyleManager(config);
 
         delete config.style;
         delete config.propertiesMap;
-    }
-
-    setActiveState(enable) {
-        this.styleManager.setActiveState(enable);
-        return this;
-    }
-
-    setHoverState(enable) {
-        this.styleManager.setHoverState(enable);
-        return this;
-    }
-
-    setDisableState(enable) {
-        this.styleManager.setDisableState(enable);
-        return this;
     }
 }
 
@@ -40,5 +25,10 @@ const PropertiesMap = {
     // strokeAlpha: 'strokeAlpha',
     strokeWidth: 'lineWidth',
 }
+
+Object.assign(
+    StatesRoundRectangle.prototype,
+    HelperMethods
+)
 
 export default StatesRoundRectangle;
