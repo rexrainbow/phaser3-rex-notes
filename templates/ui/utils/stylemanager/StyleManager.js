@@ -1,5 +1,5 @@
 import ComponentBase from '../../../../plugins/utils/componentbase/ComponentBase.js';
-import ExtractStyle from './ExtractStyle.js';
+import ExtractByPrefix from '../../../../plugins/utils/object/ExtractByPrefix.js';
 import GetPartialData from '../../../../plugins/utils/object/GetPartialData.js';
 import IsKeyValueEqual from '../../../../plugins/utils/object/IsKeyValueEqual.js';
 
@@ -15,7 +15,7 @@ class StyleManager extends ComponentBase {
         var propertiesMap = GetValue(config, 'propertiesMap');
         this.activeStyle = ExtractStyle(config, 'active', propertiesMap);
         this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
-        this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);    
+        this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);
 
         this.onModifyStyle = GetValue(config, 'onModifyStyle');
     }
@@ -51,66 +51,56 @@ class StyleManager extends ComponentBase {
     }
 
     setActiveState(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        if (this.activeState === enable) {
-            return this;
-        }
-
-        this.activeState = enable;
-
-        if (enable) {
-            this.activeStyleSave = this.applyStyle(this.activeStyle);
-        } else {
-            this.applyStyle(this.activeStyleSave);
-            this.activeStyleSave = undefined;
-        }
-
+        SetStateEnableMethod.call(this, 'active', enable);
         return this;
     }
 
     setHoverState(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        if (this.hoverState === enable) {
-            return this;
-        }
-
-        this.hoverState = enable;
-
-        if (enable) {
-            this.hoverStyleSave = this.applyStyle(this.hoverStyle);
-        } else {
-            this.applyStyle(this.hoverStyleSave);
-            this.hoverStyleSave = undefined;
-        }
-
+        SetStateEnableMethod.call(this, 'hover', enable);
         return this;
     }
 
     setDisableState(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        if (this.disableState === enable) {
-            return this;
-        }
-
-        this.disableState = enable;
-
-        if (enable) {
-            this.disableStyleSave = this.applyStyle(this.disableStyle);
-        } else {
-            this.applyStyle(this.disableStyleSave);
-            this.disableStyleSave = undefined;
-        }
-
+        SetStateEnableMethod.call(this, 'disable', enable);
         return this;
+    }
+}
+
+var ExtractStyle = function (config, prefix, propertiesMap) {
+    var result = ExtractByPrefix(config, prefix);
+
+    if (propertiesMap) {
+        for (var name in result) {
+            if (propertiesMap.hasOwnProperty(name)) {
+                result[propertiesMap[name]] = result[name];
+                delete result[name];
+            }
+        }
+    }
+
+    return result;
+}
+
+var SetStateEnableMethod = function (stateName, enable) {
+    if (enable === undefined) {
+        enable = true;
+    }
+
+    var stateVarName = `${stateName}State`;
+    var styleVarName = `${stateName}Style`;
+    var styleSaveVarName = `${stateName}StyleSave`;
+
+    if (this[stateVarName] === enable) {
+        return;
+    }
+
+    this[stateVarName] = enable;
+
+    if (enable) {
+        this[styleSaveVarName] = this.applyStyle(this[styleVarName]);
+    } else {
+        this.applyStyle(this[styleSaveVarName]);
+        this[styleSaveVarName] = undefined;
     }
 }
 

@@ -19127,19 +19127,6 @@
     return _createClass(Label);
   }(LabelBase);
 
-  var ExtractStyle = function ExtractStyle(config, prefix, propertiesMap) {
-    var result = ExtractByPrefix(config, prefix);
-    if (propertiesMap) {
-      for (var name in result) {
-        if (propertiesMap.hasOwnProperty(name)) {
-          result[propertiesMap[name]] = result[name];
-          delete result[name];
-        }
-      }
-    }
-    return result;
-  };
-
   var GetValue$g = Phaser.Utils.Objects.GetValue;
   var StyleManager = /*#__PURE__*/function (_ComponentBase) {
     _inherits(StyleManager, _ComponentBase);
@@ -19191,60 +19178,54 @@
     }, {
       key: "setActiveState",
       value: function setActiveState(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        if (this.activeState === enable) {
-          return this;
-        }
-        this.activeState = enable;
-        if (enable) {
-          this.activeStyleSave = this.applyStyle(this.activeStyle);
-        } else {
-          this.applyStyle(this.activeStyleSave);
-          this.activeStyleSave = undefined;
-        }
+        SetStateEnableMethod.call(this, 'active', enable);
         return this;
       }
     }, {
       key: "setHoverState",
       value: function setHoverState(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        if (this.hoverState === enable) {
-          return this;
-        }
-        this.hoverState = enable;
-        if (enable) {
-          this.hoverStyleSave = this.applyStyle(this.hoverStyle);
-        } else {
-          this.applyStyle(this.hoverStyleSave);
-          this.hoverStyleSave = undefined;
-        }
+        SetStateEnableMethod.call(this, 'hover', enable);
         return this;
       }
     }, {
       key: "setDisableState",
       value: function setDisableState(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        if (this.disableState === enable) {
-          return this;
-        }
-        this.disableState = enable;
-        if (enable) {
-          this.disableStyleSave = this.applyStyle(this.disableStyle);
-        } else {
-          this.applyStyle(this.disableStyleSave);
-          this.disableStyleSave = undefined;
-        }
+        SetStateEnableMethod.call(this, 'disable', enable);
         return this;
       }
     }]);
     return StyleManager;
   }(ComponentBase);
+  var ExtractStyle = function ExtractStyle(config, prefix, propertiesMap) {
+    var result = ExtractByPrefix(config, prefix);
+    if (propertiesMap) {
+      for (var name in result) {
+        if (propertiesMap.hasOwnProperty(name)) {
+          result[propertiesMap[name]] = result[name];
+          delete result[name];
+        }
+      }
+    }
+    return result;
+  };
+  var SetStateEnableMethod = function SetStateEnableMethod(stateName, enable) {
+    if (enable === undefined) {
+      enable = true;
+    }
+    var stateVarName = "".concat(stateName, "State");
+    var styleVarName = "".concat(stateName, "Style");
+    var styleSaveVarName = "".concat(stateName, "StyleSave");
+    if (this[stateVarName] === enable) {
+      return;
+    }
+    this[stateVarName] = enable;
+    if (enable) {
+      this[styleSaveVarName] = this.applyStyle(this[styleVarName]);
+    } else {
+      this.applyStyle(this[styleSaveVarName]);
+      this[styleSaveVarName] = undefined;
+    }
+  };
 
   var HelperMethods = {
     addStyleManager: function addStyleManager(config) {
