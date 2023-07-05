@@ -25,7 +25,9 @@ var ResetDisplayContent = function (config) {
                 this.setIconSize(iconSize);
             }
         }
-        this.setIconTexture(config.icon, config.iconFrame);
+        if (config.icon !== true) {
+            this.setIconTexture(config.icon, config.iconFrame);
+        }
     }
 
     var actionGameObjct = this.childrenMap.action;
@@ -44,7 +46,9 @@ var ResetDisplayContent = function (config) {
             }
 
         }
-        this.setActionTexture(config.action, config.actionFrame);
+        if (config.action !== true) {
+            this.setActionTexture(config.action, config.actionFrame);
+        }
     }
 
     return this;

@@ -87,8 +87,7 @@ var createButton = function (scene, style, text) {
     return scene.rexUI.add.simpleLabel(style)
         .resetDisplayContent({
             text: text,
-            icon: GetValue(style, 'icon.key'),
-            iconFrame: GetValue(style, 'icon.frame'),
+            icon: true,
         })
         .setName(text);
 }
