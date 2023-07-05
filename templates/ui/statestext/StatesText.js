@@ -1,4 +1,4 @@
-import HelperMethods from '../../../plugins/utils/gameobject/stylemanager/HelperMethods.js';
+import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
 const PhaserText = Phaser.GameObjects.Text;
 const GetValue = Phaser.Utils.Objects.GetValue;

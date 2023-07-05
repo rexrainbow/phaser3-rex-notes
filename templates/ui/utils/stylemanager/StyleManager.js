@@ -1,7 +1,7 @@
-import ComponentBase from '../../componentbase/ComponentBase.js';
+import ComponentBase from '../../../../plugins/utils/componentbase/ComponentBase.js';
 import ExtractStyle from './ExtractStyle.js';
-import GetPartialData from '../../object/GetPartialData.js';
-import IsKeyValueEqual from '../../object/IsKeyValueEqual.js';
+import GetPartialData from '../../../../plugins/utils/object/GetPartialData.js';
+import IsKeyValueEqual from '../../../../plugins/utils/object/IsKeyValueEqual.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

@@ -1,5 +1,5 @@
 import RoundRectangle from '../roundrectangle/RoundRectangle.js';
-import HelperMethods from '../../../plugins/utils/gameobject/stylemanager/HelperMethods.js';
+import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
 class StatesRoundRectangle extends RoundRectangle {
     constructor(scene, config) {

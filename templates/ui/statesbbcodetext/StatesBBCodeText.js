@@ -1,5 +1,5 @@
 import BBCodeText from '../bbcodetext/BBCodeText.js';
-import HelperMethods from '../../../plugins/utils/gameobject/stylemanager/HelperMethods.js';
+import HelperMethods from '../utils/stylemanager/HelperMethods.js';
 
 class StatesText extends BBCodeText {
     constructor(scene, config) {
