@@ -1,6 +1,5 @@
 import Label from '../label/Label.js';
 import BuildLabelConfig from '../utils/build/BuildLabelConfig.js';
-import IsGameObject from '../../../plugins/utils/system/IsGameObject.js';
 
 class SimpleLabel extends Label {
     constructor(scene, config, creators) {
