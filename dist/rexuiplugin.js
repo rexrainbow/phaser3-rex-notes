@@ -39714,35 +39714,30 @@
     _createClass(SimpleLabel, [{
       key: "setActiveState",
       value: function setActiveState(enable) {
-        RunMethod(this.childrenMap, 'setActiveState', enable);
+        RunMethod(this.getChildren(), 'setActiveState', enable);
         return this;
       }
     }, {
       key: "setHoverState",
       value: function setHoverState(enable) {
-        RunMethod(this.childrenMap, 'setHoverState', enable);
+        RunMethod(this.getChildren(), 'setHoverState', enable);
         return this;
       }
     }, {
       key: "setDisableState",
       value: function setDisableState(enable) {
-        RunMethod(this.childrenMap, 'setDisableState', enable);
+        RunMethod(this.getChildren(), 'setDisableState', enable);
         return this;
       }
     }]);
     return SimpleLabel;
   }(Label);
-  var RunMethod = function RunMethod(childrenMap, methodName) {
-    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      args[_key - 2] = arguments[_key];
-    }
-    for (var key in childrenMap) {
-      var _gameObject;
-      var gameObject = childrenMap[key];
-      if (!IsGameObject(gameObject) || !gameObject[methodName]) {
-        continue;
+  var RunMethod = function RunMethod(children, methodName, enable) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var gameObject = children[i];
+      if (gameObject && gameObject[methodName]) {
+        gameObject[methodName](enable);
       }
-      (_gameObject = gameObject)[methodName].apply(_gameObject, args);
     }
   };
 

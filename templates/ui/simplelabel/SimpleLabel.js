@@ -10,30 +10,28 @@ class SimpleLabel extends Label {
     }
 
     setActiveState(enable) {
-        RunMethod(this.childrenMap, 'setActiveState', enable);
+        RunMethod(this.getChildren(), 'setActiveState', enable);
         return this;
     }
 
     setHoverState(enable) {
-        RunMethod(this.childrenMap, 'setHoverState', enable);
+        RunMethod(this.getChildren(), 'setHoverState', enable);
         return this;
     }
 
     setDisableState(enable) {
-        RunMethod(this.childrenMap, 'setDisableState', enable);
+        RunMethod(this.getChildren(), 'setDisableState', enable);
         return this;
     }
 
 }
 
-var RunMethod = function (childrenMap, methodName, ...args) {
-    for (var key in childrenMap) {
-        var gameObject = childrenMap[key];
-        if (!IsGameObject(gameObject) || !gameObject[methodName]) {
-            continue;
+var RunMethod = function (children, methodName, enable) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var gameObject = children[i];
+        if (gameObject && gameObject[methodName]) {
+            gameObject[methodName](enable);
         }
-
-        gameObject[methodName](...args);
     }
 }
 
