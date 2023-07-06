@@ -21,6 +21,8 @@ class Demo extends Phaser.Scene {
 
             scale: 1,
             'hover.scale': 1.5,
+
+            'hover.tint': 0xff0000,
         }
 
         var buttons = this.rexUI.add.buttons({

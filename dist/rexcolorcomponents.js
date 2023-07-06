@@ -20427,18 +20427,22 @@
     _createClass(Style, [{
       key: "get",
       value: function get(target, prop) {
-        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+        if (HasProperty(target, prop)) {
           return target[prop];
         }
-        return target.parent[prop];
+        var gameObject = target.parent;
+        if (HasProperty(gameObject, prop)) {
+          return gameObject[prop];
+        }
       }
     }, {
       key: "set",
       value: function set(target, prop, value) {
-        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+        if (HasProperty(target, prop)) {
           target[prop] = value;
+        } else if (HasProperty(target.parent, prop)) {
+          target.parent[prop] = value;
         }
-        target.parent[prop] = value;
         return true;
       }
     }, {
@@ -20468,6 +20472,18 @@
     }]);
     return Style;
   }(ComponentBase);
+  var HasProperty = function HasProperty(target, prop) {
+    return target.hasOwnProperty(prop) || HasPropertyDescriptor(target, prop);
+  };
+  var HasPropertyDescriptor = function HasPropertyDescriptor(target, prop) {
+    while (target) {
+      if (Object.getOwnPropertyDescriptor(target, prop)) {
+        return true;
+      }
+      target = target.__proto__;
+    }
+    return false;
+  };
 
   var PhaserImage = Phaser.GameObjects.Image;
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
