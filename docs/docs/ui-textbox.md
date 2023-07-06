@@ -380,6 +380,12 @@ var textBox = scene.rexUI.add.textBox({
         // ...
     }, scope);
     ```
+- On typing stop by `textBox.stop()`.
+    ```javascript
+    textBox.on('stop', function() {
+        // ...
+    }, scope);
+    ```
 
 ### Other properties
 

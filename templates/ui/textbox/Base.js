@@ -62,6 +62,7 @@ var TextBoxBase = function (GOClass, type) {
 
         stop(showAllText) {
             this.typing.stop(showAllText);
+            this.emit('stop');
             return this;
         }
 
