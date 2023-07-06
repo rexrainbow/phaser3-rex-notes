@@ -92,43 +92,8 @@ var label = scene.rexUI.add.simpleLabel({
     orientation: 0,
     // rtl: false,
 
-    // Round-rectangle background
-    background: {
-        // color: 0xffffff,
-        // alpha: 1,
-        // strokeColor: 0xffffff,
-        // strokeAlpha: 1,
-        // strokeWidth: 2,
-        // radius: 0,
-        // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-        
-        // Style override in active state
-        // 'active.color': undefined,
-        // 'active.alpha': undefined,
-        // 'active.strokeColor': undefined,
-        // 'active.strokeAlpha': undefined,
-        // 'active.strokeWidth': undefined,
-        // 'active.radius': undefined,
-        // 'active.xxx': ...
-        
-        // Style override in hover state
-        // 'hover.color': undefined,
-        // 'hover.alpha': undefined,
-        // 'hover.strokeColor': undefined,
-        // 'hover.strokeAlpha': undefined,
-        // 'hover.strokeWidth': undefined,
-        // 'hover.radius': undefined,
-        // 'hover.xxx': ...
-        
-        // Style override in disable state
-        // 'disable.color': undefined,
-        // 'disable.alpha': undefined,
-        // 'disable.strokeColor': undefined,
-        // 'disable.strokeAlpha': undefined,
-        // 'disable.strokeWidth': undefined,
-        // 'disable.radius': undefined,
-        // 'disable.xxx': ...
-    },
+    // States-Round-rectangle background
+    background: {...},
 
     // Nine-slice background
     background: {
@@ -139,37 +104,22 @@ var label = scene.rexUI.add.simpleLabel({
         topHeight: , 
         bottomHeight: 
     }
+
+    // States-Image
+    icon: {...},
     
     // iconMask: false,
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
-    // Create bbcodetext
+    // States-Text
     text: {
-        // $type: 'bbcodetext',   // 'bbcodetext', 'text'
-        fontFamily: 'Courier',
-        fontSize: '16px',
-        fontStyle: '',
-        backgroundColor: null,
-        color: '#fff',
-        stroke: '#fff',
-        strokeThickness: 0,
-        shadow: {
-            offsetX: 0,
-            offsetY: 0,
-            color: '#000',
-            blur: 0,
-            stroke: false,
-            fill: false
-        },                  
-        padding: {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-        },
-        // more text styles
-    },
+        $type: 'text',
+        ...
+    }
+
+    // Create bbcodetext
+    text: {...},
 
     // Create bitmaptext
     // text: {
@@ -182,6 +132,9 @@ var label = scene.rexUI.add.simpleLabel({
 
     // expandTextWidth: false,
     // expandTextHeight: false,
+
+    // States-Image
+    action: {...},
 
     // squareFitAction: false,
     // actionMask: false,
@@ -202,18 +155,7 @@ var label = scene.rexUI.add.simpleLabel({
 ```
 
 - `background` : 
-    - [Round-rectangle](shape-roundrectangle.md)
-        ```javascript
-        {
-            // color: 0xffffff,
-            // alpha: 1,
-            // strokeColor: 0xffffff,
-            // strokeAlpha: 1,
-            // strokeWidth: 2,
-            // radius: 0,
-            // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-        }
-        ```
+    - [States-round-rectangle](ui-statesroundrectangle.md)
     - [Nine-slice](nineslice.md)
         ```javascript
         {
@@ -225,20 +167,33 @@ var label = scene.rexUI.add.simpleLabel({
             bottomHeight: 
         }
         ```
+- `icon` : 
+    - [States-Image](ui-statesimage.md#create-image-object)
 - `text` : 
-    - [Style of bbcodetext](bbcodetext.md#add-text-object)
+    - [Style of bbcodetext](bbcodetext.md#add-text-object), default type of game object.
     - Style of bitmaptext
         ```javascript
-        {            
+        {
+            // $type: 'bitmaptext',
             key: '',
             size: undefined,
             color: undefined,
         }
-        ``` 
+        ```
+    - [States-Text](ui-statestext.md#create-text-object)
+       ```javascript
+       {
+           $type: 'text',
+           // more style setting...
+       }
+       ``` 
+       - `$type: text` : Create [States-Text game object](ui-statestext.md)
 - `wrapText` : Enable WrapExpandText feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
+- `action` : 
+    - [States-Image](ui-statesimage.md#create-image-object)
 - `creators` : A series of callback to create background, text, icon, action icon game object.
     - `creators.background` : Callback to create background. Default behavior is creating a [states round rectangle](ui-statesroundrectangle.md).
         ```javascript
@@ -285,28 +240,7 @@ var label = scene.rexUI.add.simpleLabel({
 
 ### Reset display content
 
-```javascript
-label.resetDisplayContent({
-    text: '',
-
-    icon: undefined, iconFrame: undefined,
-    iconSize: undefined,
-
-    action: undefined, actionFrame: undefined,
-    actionSize: undefined,
-
-});
-```
-
-- `text` : Set text string.
-- `icon`, `iconFrame` : Set texture of icon game object.
-    - `undefined`, or `null` : Hide icon game object.
-- `iconSize` : Set display size of icon game object.
-- `action`, `actionFrame` : Set texture of action game object.
-    - `undefined`, or `null` : Hide action game object.
-- `actionSize` : Set display size of action game object.
-
-Run `label.layout()` after this method, to layout children again.
+See [label](ui-label.md#reset-display-content)
 
 ### Layout children
 

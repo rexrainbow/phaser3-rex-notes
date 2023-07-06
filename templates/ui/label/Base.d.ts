@@ -7,11 +7,11 @@ declare namespace LabelBase {
     interface IResetDisplayContentConfig {
         text?: string,
 
-        icon?: string | Phaser.Textures.Texture,
+        icon?: string | Phaser.Textures.Texture | boolean,
         iconFrame?: string | number,
         iconSize?: number,
 
-        action?: string | Phaser.Textures.Texture,
+        action?: string | Phaser.Textures.Texture | boolean,
         actionFrame?: string | number,
         actionSize?: number,
     }

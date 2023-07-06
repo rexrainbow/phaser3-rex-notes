@@ -45,12 +45,18 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         pause() {
-            this.typing.pause();
+            if (this.isTyping) {
+                this.typing.pause();
+                this.emit('pause');
+            }
             return this;
         }
 
         resume() {
-            this.typing.resume();
+            if (!this.isTyping) {
+                this.emit('resume');
+                this.typing.resume();
+            }
             return this;
         }
 

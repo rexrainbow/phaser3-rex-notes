@@ -7659,6 +7659,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#states-game-objects" class="md-nav__link">
+    States game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dom-game-objects" class="md-nav__link">
     Dom game objects
   </a>
@@ -8609,14 +8616,14 @@
       
       
         <label class="md-nav__link" for="__nav_15_19" id="__nav_15_19_label" tabindex="0">
-          Background
+          States
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_19_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_15_19">
           <span class="md-nav__icon md-icon"></span>
-          Background
+          States
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -8626,8 +8633,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-statesimage/" class="md-nav__link">
+        States image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-statestext/" class="md-nav__link">
+        States text
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-statesroundrectangle/" class="md-nav__link">
-        State round rectangle
+        States round rectangle
       </a>
     </li>
   
@@ -9535,6 +9570,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#states-game-objects" class="md-nav__link">
+    States game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dom-game-objects" class="md-nav__link">
     Dom game objects
   </a>
@@ -9783,19 +9825,6 @@
 </ol>
 <h3 id="background-objects">Background objects<a class="headerlink" href="#background-objects" title="Permanent link">&para;</a></h3>
 <ol>
-<li><a href="../ui-statesroundrectangle/">States round-rectangle</a>: Using plain object to create <a href="../shape-roundrectangle/">round rectangle</a>, with active, hover, disable styles.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesRoundRectangle</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyRoundRectangle</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesRoundRectangle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
 <li><a href="../shape-roundrectangle/">Round-rectangle</a>: Round rectangle shape.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div>
@@ -10191,6 +10220,48 @@
     <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTransitionImagePack</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TransitionImagePack</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h3 id="states-game-objects">States game objects<a class="headerlink" href="#states-game-objects" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="../ui-statesimage/">States image</a>: Using plain object to create <a href="../image/">Image game object</a>, with active, hover, disable styles.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesImage</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesImage</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../ui-statestext/">States text</a>: Using plain object to create <a href="../text/">Text game object</a>, with active, hover, disable styles.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesText</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../ui-statesroundrectangle/">States round-rectangle</a>: Using plain object to create <a href="../shape-roundrectangle/">round rectangle game object</a>, with active, hover, disable styles.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesRoundRectangle</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesRoundRectangle</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesRoundRectangle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>

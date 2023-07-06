@@ -368,6 +368,18 @@ var textBox = scene.rexUI.add.textBox({
         // ...
     }, scope);
     ```
+- On typing paused by `textBox.pause()`.
+    ```javascript
+    textBox.on('pause', function() {
+        // ...
+    }, scope);
+    ```
+- On typing resume by `textBox.resume()`.
+    ```javascript
+    textBox.on('resume', function() {
+        // ...
+    }, scope);
+    ```
 
 ### Other properties
 

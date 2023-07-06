@@ -219,7 +219,9 @@
 1. [UI/Simple label](ui-simplelabel.md): Using json style to create label.
 1. [UI/Sizer](ui-sizer.md): Layout children game objects.
 1. [UI/Slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [UI/States round-rectangle](ui-statesroundrectangle.md): Using plain object to create round rectangle, with active, hover, disable styles.
+1. [UI/States image](ui-statesimage.md): Using plain object to create image game object, with active, hover, disable styles.
+1. [UI/States round-rectangle](ui-statesroundrectangle.md): Using plain object to create round rectangle game object, with active, hover, disable styles.
+1. [UI/States text](ui-statestext.md): Using plain object to create text game object, with active, hover, disable styles.
 1. [UI/Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [UI/Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [UI/Text area](ui-textarea.md): A container with a text, slider, and scroller.

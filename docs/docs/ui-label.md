@@ -327,21 +327,27 @@ See also - [dirty](ui-basesizer.md#dirty)
 label.resetDisplayContent({
     text: '',
 
-    icon: undefined, iconFrame: undefined,
+    icon: undefined, 
+    iconFrame: undefined,
     iconSize: undefined,
 
-    action: undefined, actionFrame: undefined,
+    action: undefined, 
+    actionFrame: undefined,
     actionSize: undefined,
 
 })
 ```
 
 - `text` : Set text string.
-- `icon`, `iconFrame` : Set texture of icon game object.
+- `icon`, `iconFrame`
+    - A string : Set texture of icon game object.
     - `undefined`, or `null` : Hide icon game object.
+    - `true` : Show icon game object without change its texture.
 - `iconSize` : Set display size of icon game object.
-- `action`, `actionFrame` : Set texture of action game object.
+- `action`, `actionFrame`
+    - A string : Set texture of icon game object.
     - `undefined`, or `null` : Hide action game object.
+    - `true` : Show action game object without change its texture.
 - `actionSize` : Set display size of action game object.
 
 Run `label.layout()` after this method, to layout children again.

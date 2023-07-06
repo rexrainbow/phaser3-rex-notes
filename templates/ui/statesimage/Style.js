@@ -4,6 +4,24 @@ class Style extends ComponentBase {
     constructor(gameObject, style) {
         super(gameObject);
         // this.parent = gameObject;
+
+        return new Proxy(this, this);
+    }
+
+    get(target, prop) {
+        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+            return target[prop];
+        }
+        return target.parent[prop];
+    }
+
+    set(target, prop, value) {
+        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+            target[prop] = value;
+        }
+
+        target.parent[prop] = value;
+        return true;
     }
 
     get key() {
@@ -28,14 +46,6 @@ class Style extends ComponentBase {
 
     set scale(value) {
         this.parent.setScale(value);
-    }
-
-    get tint() {
-        return this.parent.tint;
-    }
-
-    set tint(value) {
-        this.parent.tint = value;
     }
 }
 

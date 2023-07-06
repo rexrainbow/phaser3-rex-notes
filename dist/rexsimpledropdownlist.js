@@ -22300,10 +22300,31 @@
     _inherits(Style, _ComponentBase);
     var _super = _createSuper(Style);
     function Style(gameObject, style) {
+      var _this;
       _classCallCheck(this, Style);
-      return _super.call(this, gameObject); // this.parent = gameObject;
+      _this = _super.call(this, gameObject);
+      // this.parent = gameObject;
+
+      return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
     }
     _createClass(Style, [{
+      key: "get",
+      value: function get(target, prop) {
+        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+          return target[prop];
+        }
+        return target.parent[prop];
+      }
+    }, {
+      key: "set",
+      value: function set(target, prop, value) {
+        if (Object.getOwnPropertyDescriptor(target.__proto__, prop)) {
+          target[prop] = value;
+        }
+        target.parent[prop] = value;
+        return true;
+      }
+    }, {
       key: "key",
       get: function get() {
         return this.parent.texture.key;
@@ -22326,14 +22347,6 @@
       },
       set: function set(value) {
         this.parent.setScale(value);
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        return this.parent.tint;
-      },
-      set: function set(value) {
-        this.parent.tint = value;
       }
     }]);
     return Style;

@@ -1,13 +1,9 @@
 ## Introduction
 
-Using plain object to create [round rectangle](shape-roundrectangle.md), with active, hover, disable styles.
+Using plain object to create [round rectangle game object](shape-roundrectangle.md), with active, hover, disable styles.
 
 - Author: Rex
 - Game object
-
-## Live demos
-
-- [Round rectangle](https://codepen.io/rexrainbow/pen/LYJjJPV)
 
 ## Usage
 

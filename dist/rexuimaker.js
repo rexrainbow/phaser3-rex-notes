@@ -26054,13 +26054,19 @@
       }, {
         key: "pause",
         value: function pause() {
-          this.typing.pause();
+          if (this.isTyping) {
+            this.typing.pause();
+            this.emit('pause');
+          }
           return this;
         }
       }, {
         key: "resume",
         value: function resume() {
-          this.typing.resume();
+          if (!this.isTyping) {
+            this.emit('resume');
+            this.typing.resume();
+          }
           return this;
         }
       }, {

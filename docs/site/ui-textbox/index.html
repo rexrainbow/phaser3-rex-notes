@@ -8528,14 +8528,14 @@
       
       
         <label class="md-nav__link" for="__nav_15_19" id="__nav_15_19_label" tabindex="0">
-          Background
+          States
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_19_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_15_19">
           <span class="md-nav__icon md-icon"></span>
-          Background
+          States
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -8545,8 +8545,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-statesimage/" class="md-nav__link">
+        States image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-statestext/" class="md-nav__link">
+        States text
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-statesroundrectangle/" class="md-nav__link">
-        State round rectangle
+        States round rectangle
       </a>
     </li>
   
@@ -9847,6 +9875,16 @@
 </code></pre></div></li>
 <li>On typing all pages complete, equal to <code>'pageend'</code> event with <code>textBox.isLastPage</code>.
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On typing paused by <code>textBox.pause()</code>.
+    <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On typing resume by <code>textBox.resume()</code>.
+    <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
