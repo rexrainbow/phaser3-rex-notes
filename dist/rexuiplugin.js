@@ -49743,6 +49743,7 @@
         key: "stop",
         value: function stop(showAllText) {
           this.typing.stop(showAllText);
+          this.emit('stop');
           return this;
         }
       }, {
