@@ -113,16 +113,21 @@ var label = scene.rexUI.add.simpleLabel({
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
     // States-Text
-    text: {
-        $type: 'text',
-        ...
-    }
+    text: {...},
+    // text: {
+    //     $type: 'text',
+    //     ...
+    // }
 
     // Create bbcodetext
-    text: {...},
+    // text: {
+    //     $type: 'bbcodetext',
+    //     ...
+    // },
 
     // Create bitmaptext
     // text: {
+    //     $type: 'bitmaptext',
     //     key: '',
     //     size: undefined,
     //     color: undefined,
@@ -170,24 +175,29 @@ var label = scene.rexUI.add.simpleLabel({
 - `icon` : 
     - [States-Image](ui-statesimage.md#create-image-object)
 - `text` : 
-    - [Style of bbcodetext](bbcodetext.md#add-text-object), default type of game object.
+    - [States-Text](ui-statestext.md#create-text-object), default type of game object.
+       ```javascript
+       {
+           // $type: 'text',
+           // more style setting...
+       }
+       ```
+    - [Style of bbcodetext](bbcodetext.md#add-text-object)
+       ```javascript
+       {
+           // $type: 'bbcodetext',  // or 'bbcode'
+           // more style setting...
+       }
+       ```
     - Style of bitmaptext
         ```javascript
         {
-            // $type: 'bitmaptext',
+            // $type: 'bitmaptext',  // or 'bitmap'
             key: '',
             size: undefined,
             color: undefined,
         }
         ```
-    - [States-Text](ui-statestext.md#create-text-object)
-       ```javascript
-       {
-           $type: 'text',
-           // more style setting...
-       }
-       ``` 
-       - `$type: text` : Create [States-Text game object](ui-statestext.md)
 - `wrapText` : Enable WrapExpandText feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.

@@ -9637,16 +9637,21 @@
 <span class="w">    </span><span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
 <span class="w">    </span><span class="c1">// States-Text</span>
-<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="p">...</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{...},</span>
+<span class="w">    </span><span class="c1">// text: {</span>
+<span class="w">    </span><span class="c1">//     $type: &#39;text&#39;,</span>
+<span class="w">    </span><span class="c1">//     ...</span>
+<span class="w">    </span><span class="c1">// }</span>
 
 <span class="w">    </span><span class="c1">// Create bbcodetext</span>
-<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{...},</span>
+<span class="w">    </span><span class="c1">// text: {</span>
+<span class="w">    </span><span class="c1">//     $type: &#39;bbcodetext&#39;,</span>
+<span class="w">    </span><span class="c1">//     ...</span>
+<span class="w">    </span><span class="c1">// },</span>
 
 <span class="w">    </span><span class="c1">// Create bitmaptext</span>
 <span class="w">    </span><span class="c1">// text: {</span>
+<span class="w">    </span><span class="c1">//     $type: &#39;bitmaptext&#39;,</span>
 <span class="w">    </span><span class="c1">//     key: &#39;&#39;,</span>
 <span class="w">    </span><span class="c1">//     size: undefined,</span>
 <span class="w">    </span><span class="c1">//     color: undefined,</span>
@@ -9697,21 +9702,26 @@
 </ul>
 </li>
 <li><code>text</code> : <ul>
-<li><a href="../bbcodetext/#add-text-object">Style of bbcodetext</a>, default type of game object.</li>
+<li><a href="../ui-statestext/#create-text-object">States-Text</a>, default type of game object.
+   <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// $type: &#39;text&#39;,</span>
+<span class="w">    </span><span class="c1">// more style setting...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../bbcodetext/#add-text-object">Style of bbcodetext</a>
+   <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// $type: &#39;bbcodetext&#39;,  // or &#39;bbcode&#39;</span>
+<span class="w">    </span><span class="c1">// more style setting...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>Style of bitmaptext
-    <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w">            </span>
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// $type: &#39;bitmaptext&#39;,  // or &#39;bitmap&#39;</span>
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">size</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><a href="../ui-statestext/#create-text-object">States-Text</a>
-   <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// more style setting...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>$type: text</code> : Create <a href="../ui-statestext/">States-Text game object</a></li>
 </ul>
 </li>
 <li><code>wrapText</code> : Enable WrapExpandText feature.<ul>

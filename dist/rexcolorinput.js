@@ -23200,6 +23200,7 @@
     var gameObject;
     switch (type) {
       case 'bitmaptext':
+      case 'bitmap':
         var key = GetValue$7(config, 'key');
         var size = GetValue$7(config, 'size');
         if (size === undefined) {
@@ -23211,11 +23212,13 @@
           gameObject.setTint(color);
         }
         break;
-      case 'text':
-        gameObject = new StatesText(scene, config);
-        break;
-      default:
+      case 'bbcodetext':
+      case 'bbcode':
         gameObject = new BBCodeText(scene, 0, 0, '', config);
+        break;
+      case 'text':
+      default:
+        gameObject = new StatesText(scene, config);
         break;
     }
     scene.add.existing(gameObject);

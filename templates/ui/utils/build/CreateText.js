@@ -15,6 +15,7 @@ var CreateText = function (scene, config) {
     var gameObject;
     switch (type) {
         case 'bitmaptext':
+        case 'bitmap':
             var key = GetValue(config, 'key');
             var size = GetValue(config, 'size');
             if (size === undefined) {
@@ -29,12 +30,14 @@ var CreateText = function (scene, config) {
             }
             break;
 
-        case 'text':
-            gameObject = new StatesText(scene, config);
+        case 'bbcodetext':
+        case 'bbcode':
+            gameObject = new BBCodeText(scene, 0, 0, '', config);
             break;
 
+        case 'text':
         default:
-            gameObject = new BBCodeText(scene, 0, 0, '', config);
+            gameObject = new StatesText(scene, config);
             break;
     }
 
