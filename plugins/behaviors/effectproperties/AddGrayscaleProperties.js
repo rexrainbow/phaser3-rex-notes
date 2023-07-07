@@ -36,6 +36,8 @@ var AddGrayscaleProperties = function (gameObject) {
     })
 
     gameObject.grayscale = null;
+
+    return gameObject;
 }
 
 export default AddGrayscaleProperties;

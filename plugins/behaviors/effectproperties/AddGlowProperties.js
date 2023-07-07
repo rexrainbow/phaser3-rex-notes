@@ -75,6 +75,8 @@ var AddGlowProperties = function (gameObject) {
     })
 
     gameObject.glowColor = null;
+
+    return gameObject;
 }
 
 export default AddGlowProperties;

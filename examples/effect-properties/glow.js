@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import AddGlowProperties from '../../plugins/behaviors/effects/AddGlowProperties.js';
+import EffectPropertiesPlugin from '../../plugins/effectproperties-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var image = this.add.image(400, 300, 'logo');
-        AddGlowProperties(image)
+        this.plugins.get('rexEffectProperties').add(image);
 
         image.glowColor = 0xff0000;        
     }
@@ -32,6 +32,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexEffectProperties',
+            plugin: EffectPropertiesPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
