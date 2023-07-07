@@ -1,4 +1,5 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
+import HasProperty from '../../../plugins/utils/object/HasProperty.js';
 
 class Style extends ComponentBase {
     constructor(gameObject, style) {
@@ -53,20 +54,6 @@ class Style extends ComponentBase {
     set scale(value) {
         this.parent.setScale(value);
     }
-}
-
-var HasProperty = function (target, prop) {
-    return target.hasOwnProperty(prop) || HasPropertyDescriptor(target, prop);
-}
-
-var HasPropertyDescriptor = function (target, prop) {
-    while (target) {
-        if (Object.getOwnPropertyDescriptor(target, prop)) {
-            return true;
-        }
-        target = target.__proto__;
-    }
-    return false;
 }
 
 export default Style;
