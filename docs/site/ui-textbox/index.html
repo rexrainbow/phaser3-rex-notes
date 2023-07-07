@@ -8318,6 +8318,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#page" class="md-nav__link">
     Page
   </a>
@@ -9449,6 +9456,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#page" class="md-nav__link">
     Page
   </a>
@@ -9760,25 +9774,49 @@
 </li>
 <li>Stop
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Will fire <code>'stop'</code> event.</li>
+</ul>
+</li>
 <li>Stop and show all text
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Will fire <code>'stop'</code>, <code>'type'</code>, <code>'pageend'</code> event.</li>
+</ul>
+</li>
+<li>Stop and show all text at last page
+    <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">showLastPage</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Will fire <code>'type'</code>, <code>'pageend'</code>, <code>'complete'</code> events.</li>
+</ul>
+</li>
 <li>Pause
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Will fire <code>'pause'</code> event.</li>
+</ul>
+</li>
 <li>Resume
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Will fire <code>'resume'</code> event.</li>
+</ul>
+</li>
 <li>Is typing
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isTyping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">textBox</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<h3 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h3>
+<ul>
 <li>Change typing speed
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">setTypingSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>speed</code> : Typing speed in ms.</li>
 </ul>
 </li>
+<li>Get typing speed
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">textBox</span><span class="p">.</span><span class="nx">typingSpeed</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="page">Page<a class="headerlink" href="#page" title="Permanent link">&para;</a></h3>
 <ul>
@@ -9861,8 +9899,13 @@
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
-<li>On typing a character
+<li>On changing content of text game object, will also re-layout textbox :
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On typing a character :
+    <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;typechar&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="kr">char</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

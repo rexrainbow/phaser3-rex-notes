@@ -29,6 +29,7 @@ declare class TextBox extends TitleLabel {
 
     start(content: string, typingSpeed?: number): this;
     stop(showAllText?: boolean): this;
+    showLastPage(): this;
     pause(): this;
     resume(): this;
     isTyping: boolean;

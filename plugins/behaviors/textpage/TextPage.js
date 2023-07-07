@@ -91,6 +91,10 @@ class TextPage extends ComponentBase {
         return this.pageStartIndexes.length;
     }
 
+    get lastPageIndex() {
+        return this.pageCount - 1;
+    }
+
     get isFirstPage() {
         return (this.pageIndex <= 0);
     }

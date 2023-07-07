@@ -157,9 +157,17 @@ typing.setTypeMode(mode);
 
 ### Events
 
-- On typing :
+- On changing content of text game object :
     ```javascript
-    typing.on('type', function(){});
+    typing.on('type', function(){
+
+    });
+    ```
+- On typing a character
+    ```javascript
+    typing.on('typechar', function(char){
+
+    });
     ```
 - On typing completed :
     ```javascript

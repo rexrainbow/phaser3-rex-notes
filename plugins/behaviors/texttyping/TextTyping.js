@@ -23,7 +23,8 @@ class TextTyping extends ComponentBase {
 
         this.setTypingContent(GetFastValue(o, 'text', ''));
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = GetFastValue(o, 'insertIdx', null);
+        this.insertIdx = null;
+        this.insertChar = null;
 
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
@@ -130,9 +131,15 @@ class TextTyping extends ComponentBase {
             this.freeTimer();
         }
         if (showAllText) {
-            this.typingIdx = this.textLen;
-            this.setText(this.text);
+            // Fire 'type' event for remainder characters until lastChar
+            while (!this.isLastChar) {
+                this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+                this.emit('typechar', this.insertChar);
+                this.typingIdx++;
+            }
             this.emit('type');
+            // Display all characters on text game object
+            this.setText(this.text);
             this.emit('complete', this, this.parent);
         }
 
@@ -166,6 +173,7 @@ class TextTyping extends ComponentBase {
 
         this.setText(newText);
 
+        this.emit('typechar', this.insertChar);
         this.emit('type');
 
         if (this.isLastChar) {
@@ -222,6 +230,8 @@ class TextTyping extends ComponentBase {
             }
             result = upperResult + lowerResult;
         }
+
+        this.insertChar = result.charAt(this.insertIdx - 1);
 
         return result;
     }

@@ -125,6 +125,14 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```javascript
     page.showPreviousPage();
     ```
+- Display first page
+    ```javascript
+    page.showFirstPage();
+    ```
+- Display last page
+    ```javascript
+    page.showLastPage();
+    ```
 - Display page by index
     ```javascript
     page.showPage(index);
@@ -146,6 +154,14 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - Get lines of previous page
     ```javascript
     var lines = page.getPreviousPage();
+    ```
+- Get lines of first page
+    ```javascript
+    var lines = page.getFirstPage();
+    ```
+- Get lines of last page
+    ```javascript
+    var lines = page.getLastPage();
     ```
 - Get lines of page by index
     ```javascript

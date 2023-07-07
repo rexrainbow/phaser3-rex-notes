@@ -583,12 +583,18 @@
     getPreviousPage: function getPreviousPage() {
       return this.getPage(this.pageIndex - 1);
     },
+    getFirstPage: function getFirstPage() {
+      return this.getPage(0);
+    },
+    getLastPage: function getLastPage() {
+      return this.getPage(this.lastPageIndex);
+    },
     resetPageIdx: function resetPageIdx() {
       this.pageIndex = -1;
       return this;
     },
     setPageIndex: function setPageIndex(idx) {
-      idx = Clamp$2(idx, 0, this.pageCount - 1);
+      idx = Clamp$2(idx, 0, this.lastPageIndex);
       this.pageIndex = idx;
       this.startLineIndex = this.pageStartIndexes[idx];
       this.endLineIndex = this.pageStartIndexes[idx + 1];
@@ -648,6 +654,14 @@
     },
     showPreviousPage: function showPreviousPage() {
       this.displayText(this.getPreviousPage());
+      return this;
+    },
+    showFirstPage: function showFirstPage() {
+      this.displayText(this.getFirstPage());
+      return this;
+    },
+    showLastPage: function showLastPage() {
+      this.displayText(this.getLastPage());
       return this;
     },
     show: function show() {
@@ -761,6 +775,11 @@
         return this.pageStartIndexes.length;
       }
     }, {
+      key: "lastPageIndex",
+      get: function get() {
+        return this.pageCount - 1;
+      }
+    }, {
       key: "isFirstPage",
       get: function get() {
         return this.pageIndex <= 0;
@@ -866,7 +885,8 @@
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = GetFastValue(o, 'insertIdx', null);
+        this.insertIdx = null;
+        this.insertChar = null;
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
           this.start(undefined, undefined, this.typingIdx, elapsed);
@@ -975,9 +995,15 @@
           this.freeTimer();
         }
         if (showAllText) {
-          this.typingIdx = this.textLen;
-          this.setText(this.text);
+          // Fire 'type' event for remainder characters until lastChar
+          while (!this.isLastChar) {
+            this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+            this.emit('typechar', this.insertChar);
+            this.typingIdx++;
+          }
           this.emit('type');
+          // Display all characters on text game object
+          this.setText(this.text);
           this.emit('complete', this, this.parent);
         }
         return this;
@@ -1012,6 +1038,7 @@
       value: function onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
+        this.emit('typechar', this.insertChar);
         this.emit('type');
         if (this.isLastChar) {
           this.freeTimer();
@@ -1068,6 +1095,7 @@
           }
           result = upperResult + lowerResult;
         }
+        this.insertChar = result.charAt(this.insertIdx - 1);
         return result;
       }
     }, {
@@ -1184,7 +1212,7 @@
         var text = _this.childrenMap.text;
         _this.page = new TextPage(text, GetValue$I(config, 'page', undefined));
         _this.typing = new TextTyping(text, GetValue$I(config, 'typing', config.type));
-        _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this));
+        _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
         _this.textWidth = text.width;
         _this.textHeight = text.height;
         return _this;
@@ -1233,7 +1261,15 @@
         key: "stop",
         value: function stop(showAllText) {
           this.typing.stop(showAllText);
-          this.emit('stop');
+          return this;
+        }
+      }, {
+        key: "showLastPage",
+        value: function showLastPage() {
+          this.typing.stop();
+          this.page.showLastPage();
+          this.emit('type');
+          this.onPageEnd();
           return this;
         }
       }, {
@@ -1274,6 +1310,11 @@
           return this.page.pageIndex;
         }
       }, {
+        key: "typingSpeed",
+        get: function get() {
+          return this.typing.speed;
+        }
+      }, {
         key: "onType",
         value: function onType() {
           var text = this.childrenMap.text;
@@ -1285,10 +1326,20 @@
           this.emit('type');
         }
       }, {
+        key: "onTypeChar",
+        value: function onTypeChar(_char) {
+          this.emit('typechar', _char);
+        }
+      }, {
         key: "onPageEnd",
         value: function onPageEnd() {
+          var isLastPage = this.isLastPage;
           this.emit('pageend');
-          if (this.isLastPage) {
+          /*
+          Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
+          */
+
+          if (isLastPage) {
             this.emit('complete');
           }
         }

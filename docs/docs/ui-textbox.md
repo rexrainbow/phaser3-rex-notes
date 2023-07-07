@@ -233,27 +233,43 @@ var textBox = scene.rexUI.add.textBox({
     ```javascript
     textBox.stop();
     ```
+    - Will fire `'stop'` event.
 - Stop and show all text
     ```javascript
     textBox.stop(true);
     ```
+    - Will fire `'stop'`, `'type'`, `'pageend'` event.
+- Stop and show all text at last page
+    ```javascript
+    textBox.showLastPage();
+    ```
+    - Will fire `'type'`, `'pageend'`, `'complete'` events.
 - Pause
     ```javascript
     textBox.pause();
     ```
+    - Will fire `'pause'` event.
 - Resume
     ```javascript
     textBox.resume();
     ```
+    - Will fire `'resume'` event.
 - Is typing
     ```javascript
     var isTyping = textBox.isTyping;
     ```
+
+### Typing speed
+
 - Change typing speed
     ```javascript
     textBox.setTypingSpeed(speed);
     ```
     - `speed` : Typing speed in ms.
+- Get typing speed
+    ```javascript
+    var speed = textBox.typingSpeed;
+    ```
 
 ### Page
 
@@ -348,9 +364,15 @@ var textBox = scene.rexUI.add.textBox({
         // ...
     }, scope);
     ```
-- On typing a character
+- On changing content of text game object, will also re-layout textbox :
     ```javascript
     textBox.on('type', function() {
+        // ...
+    }, scope);
+    ```
+- On typing a character :
+    ```javascript
+    textBox.on('typechar', function(char) {
         // ...
     }, scope);
     ```

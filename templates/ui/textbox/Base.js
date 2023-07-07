@@ -18,7 +18,8 @@ var TextBoxBase = function (GOClass, type) {
             this.typing = new TextTyping(text, GetValue(config, 'typing', config.type));
             this.typing
                 .on('complete', this.onPageEnd, this)
-                .on('type', this.onType, this);
+                .on('type', this.onType, this)
+                .on('typechar', this.onTypeChar, this)
 
             this.textWidth = text.width;
             this.textHeight = text.height;
@@ -62,7 +63,14 @@ var TextBoxBase = function (GOClass, type) {
 
         stop(showAllText) {
             this.typing.stop(showAllText);
-            this.emit('stop');
+            return this;
+        }
+
+        showLastPage() {
+            this.typing.stop();
+            this.page.showLastPage();
+            this.emit('type');
+            this.onPageEnd();
             return this;
         }
 
@@ -96,6 +104,10 @@ var TextBoxBase = function (GOClass, type) {
             return this.page.pageIndex;
         }
 
+        get typingSpeed() {
+            return this.typing.speed;
+        }
+
         onType() {
             var text = this.childrenMap.text;
             if ((this.textWidth !== text.width) || (this.textHeight !== text.height)) {
@@ -106,10 +118,19 @@ var TextBoxBase = function (GOClass, type) {
             this.emit('type');
         }
 
-        onPageEnd() {
-            this.emit('pageend');
+        onTypeChar(char) {
+            this.emit('typechar', char);
+        }
 
-            if (this.isLastPage) {
+        onPageEnd() {
+            var isLastPage = this.isLastPage;
+
+            this.emit('pageend');
+            /*
+            Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
+            */
+
+            if (isLastPage) {
                 this.emit('complete');
             }
         }

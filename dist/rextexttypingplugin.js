@@ -459,7 +459,8 @@
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = GetFastValue(o, 'insertIdx', null);
+        this.insertIdx = null;
+        this.insertChar = null;
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
           this.start(undefined, undefined, this.typingIdx, elapsed);
@@ -568,9 +569,15 @@
           this.freeTimer();
         }
         if (showAllText) {
-          this.typingIdx = this.textLen;
-          this.setText(this.text);
+          // Fire 'type' event for remainder characters until lastChar
+          while (!this.isLastChar) {
+            this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+            this.emit('typechar', this.insertChar);
+            this.typingIdx++;
+          }
           this.emit('type');
+          // Display all characters on text game object
+          this.setText(this.text);
           this.emit('complete', this, this.parent);
         }
         return this;
@@ -605,6 +612,7 @@
       value: function onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
+        this.emit('typechar', this.insertChar);
         this.emit('type');
         if (this.isLastChar) {
           this.freeTimer();
@@ -661,6 +669,7 @@
           }
           result = upperResult + lowerResult;
         }
+        this.insertChar = result.charAt(this.insertIdx - 1);
         return result;
       }
     }, {

@@ -506,12 +506,18 @@
     getPreviousPage: function getPreviousPage() {
       return this.getPage(this.pageIndex - 1);
     },
+    getFirstPage: function getFirstPage() {
+      return this.getPage(0);
+    },
+    getLastPage: function getLastPage() {
+      return this.getPage(this.lastPageIndex);
+    },
     resetPageIdx: function resetPageIdx() {
       this.pageIndex = -1;
       return this;
     },
     setPageIndex: function setPageIndex(idx) {
-      idx = Clamp$1(idx, 0, this.pageCount - 1);
+      idx = Clamp$1(idx, 0, this.lastPageIndex);
       this.pageIndex = idx;
       this.startLineIndex = this.pageStartIndexes[idx];
       this.endLineIndex = this.pageStartIndexes[idx + 1];
@@ -571,6 +577,14 @@
     },
     showPreviousPage: function showPreviousPage() {
       this.displayText(this.getPreviousPage());
+      return this;
+    },
+    showFirstPage: function showFirstPage() {
+      this.displayText(this.getFirstPage());
+      return this;
+    },
+    showLastPage: function showLastPage() {
+      this.displayText(this.getLastPage());
       return this;
     },
     show: function show() {
@@ -682,6 +696,11 @@
       key: "pageCount",
       get: function get() {
         return this.pageStartIndexes.length;
+      }
+    }, {
+      key: "lastPageIndex",
+      get: function get() {
+        return this.pageCount - 1;
       }
     }, {
       key: "isFirstPage",

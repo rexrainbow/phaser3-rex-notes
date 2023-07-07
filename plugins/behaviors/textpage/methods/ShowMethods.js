@@ -22,6 +22,20 @@ export default {
         return this;
     },
 
+    showFirstPage() {
+        this.displayText(
+            this.getFirstPage()
+        );
+        return this;
+    },
+
+    showLastPage() {
+        this.displayText(
+            this.getLastPage()
+        );
+        return this;
+    },
+
     show() {
         this.displayText(
             this.getLines()
