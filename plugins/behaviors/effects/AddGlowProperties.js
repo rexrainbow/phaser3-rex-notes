@@ -22,7 +22,7 @@ var AddGlowProperties = function (gameObject) {
 
             glowColor = value;
 
-            if (glowColor === null) {
+            if ((glowColor === null) || (glowColor === false)) {
                 if (gameObject._glow) {
                     gameObject.preFX.remove(gameObject._glow);
                     gameObject._glow = undefined;

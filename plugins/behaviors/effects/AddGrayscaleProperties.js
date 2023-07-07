@@ -20,7 +20,7 @@ var AddGrayscaleProperties = function (gameObject) {
 
             grayscale = value;
 
-            if (grayscale === null) {
+            if ((grayscale === null) || (grayscale === false)) {
                 if (gameObject._grayscaleEffect) {
                     gameObject.preFX.remove(gameObject._grayscaleEffect);
                     gameObject._grayscaleEffect = undefined;
