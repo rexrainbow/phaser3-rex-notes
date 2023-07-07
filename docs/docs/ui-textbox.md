@@ -12,6 +12,7 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 - [Speech bubble background](https://codepen.io/rexrainbow/pen/ExZLoWL)
 - [Bitmap text](https://codepen.io/rexrainbow/pen/oNBaKOo)
 - [Page break](https://codepen.io/rexrainbow/pen/JjNZZXv)
+- [Show last page](https://codepen.io/rexrainbow/pen/GRwMrrP)
 
 ## Usage
 
