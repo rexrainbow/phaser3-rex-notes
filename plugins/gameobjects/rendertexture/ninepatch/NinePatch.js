@@ -8,8 +8,6 @@ class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
 }
 
 var Methods = {
-    _beginDraw: RenderTexture.prototype.beginDraw,
-    _endDraw: RenderTexture.prototype.endDraw,
     _drawImage: DrawImage,
     _drawTileSprite: DrawTileSprite,
 }

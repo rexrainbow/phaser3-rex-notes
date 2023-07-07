@@ -19712,12 +19712,12 @@
 
   var DrawImage$1 = function DrawImage(key, frame, x, y, width, height) {
     var gameObject = GetStampGameObject(this, 'Image').setTexture(key, frame).setDisplaySize(width, height);
-    this.batchDraw(gameObject, x, y);
+    this.draw(gameObject, x, y);
   };
 
   var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
     var gameObject = GetStampGameObject(this, 'TileSprite').setTexture(key, frame).setSize(width, height);
-    this.batchDraw(gameObject, x, y);
+    this.draw(gameObject, x, y);
   };
 
   var RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -19731,8 +19731,6 @@
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture, 'rexNinePatch'));
   var Methods = {
-    _beginDraw: RenderTexture.prototype.beginDraw,
-    _endDraw: RenderTexture.prototype.endDraw,
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };

@@ -190,12 +190,12 @@
 
   var DrawImage = function DrawImage(key, frame, x, y, width, height) {
     var gameObject = GetStampGameObject(this, 'Image').setTexture(key, frame).setDisplaySize(width, height);
-    this.batchDraw(gameObject, x, y);
+    this.draw(gameObject, x, y);
   };
 
   var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
     var gameObject = GetStampGameObject(this, 'TileSprite').setTexture(key, frame).setSize(width, height);
-    this.batchDraw(gameObject, x, y);
+    this.draw(gameObject, x, y);
   };
 
   var DistanceBetween = Phaser.Math.Distance.Between;
@@ -245,7 +245,6 @@
 
     var offsetX, offsetY;
     var remainderWidth = this.width;
-    this.beginDraw();
 
     // Draw line start
     if (lineStartFrame) {
@@ -272,7 +271,6 @@
         DrawTileSprite.call(this, this.lineBodyTexture, this.lineBodyFrameName, offsetX, offsetY, remainderWidth, lineBodyHeight);
       }
     }
-    this.endDraw();
     var originX = 1 - (width - lineStartOffset) / width;
     this.setOrigin(originX, 0.5);
   };

@@ -59,8 +59,6 @@ var UpdateTexture = function () {
     var offsetX, offsetY;
     var remainderWidth = this.width;
 
-    this.beginDraw();
-
     // Draw line start
     if (lineStartFrame) {
         offsetX = 0;
@@ -95,8 +93,6 @@ var UpdateTexture = function () {
             );
         }
     }
-
-    this.endDraw();
 
     var originX = 1 - ((width - lineStartOffset) / width);
     this.setOrigin(originX, 0.5);

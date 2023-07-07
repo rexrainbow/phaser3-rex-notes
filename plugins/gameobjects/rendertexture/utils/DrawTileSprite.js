@@ -5,7 +5,7 @@ var DrawTileSprite = function (key, frame, x, y, width, height) {
         .setTexture(key, frame)
         .setSize(width, height);
 
-    this.batchDraw(gameObject, x, y);
+    this.draw(gameObject, x, y);
 }
 
 export default DrawTileSprite;
