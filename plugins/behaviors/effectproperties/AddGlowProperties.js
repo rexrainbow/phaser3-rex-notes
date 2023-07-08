@@ -1,7 +1,5 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 
-const Clamp = Phaser.Math.Clamp;
-
 var AddGlowProperties = function (gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'glowColor') || !gameObject.preFX) {
