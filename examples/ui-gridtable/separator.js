@@ -65,12 +65,12 @@ class Demo extends Phaser.Scene {
                     cellContainer = scene.rexUI.add.sizer({ orientation: 'y' });
 
                     cellContainer.add(
-                        CreateCellObject(scene, width, 60),
+                        CreateCellObject(scene, 0, 60),
                         { key: 'main', expand: true }
                     );
 
                     cellContainer.add(
-                        CreateSeparator(scene, width, 8),
+                        CreateSeparator(scene, 0, 8),
                         { key: 'separator', expand: true, padding: { top: 4, bottom: 4 } }
                     )
 
