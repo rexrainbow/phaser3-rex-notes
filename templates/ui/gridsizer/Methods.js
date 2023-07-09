@@ -11,6 +11,7 @@ import ResolveChildrenWidth from './ResolveChildrenWidth.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
+import SetSpaceMethods from './SetSpaceMethods.js';
 import ResetGrid from './ResetGrid.js';
 import { InseryEmptyRow, AddEmptyRow } from './InsertEmptyRow.js';
 import { InsertEmptyColumn, AddEmptyColumn } from './InsertEmptyColumn.js';
@@ -39,7 +40,8 @@ var methods = {
 Object.assign(
     methods,
     AddChildMethods,
-    RemoveChildMethods
+    RemoveChildMethods,
+    SetSpaceMethods
 );
 
 export default methods;

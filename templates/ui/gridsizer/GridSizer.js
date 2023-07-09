@@ -40,11 +40,9 @@ class GridSizer extends BaseSizer {
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexGridSizer';
-        this.resetGrid(
-            columnCount, rowCount,
-            columnProportions, rowProportions,
-            GetValue(config, 'space', undefined)
-        );
+        this.sizerChildren = [];
+        this.addChildrenMap('items', this.sizerChildren);
+        this.setCreateCellContainerCallback(GetValue(config, 'createCellContainerCallback'));
 
         this.setIndentLeft(
             GetValue(config, 'space.indentLeftOdd', 0),
@@ -55,20 +53,12 @@ class GridSizer extends BaseSizer {
             GetValue(config, 'space.indentTopEven', 0)
         );
 
-        this.addChildrenMap('items', this.sizerChildren);
+        this.resetGrid(
+            columnCount, rowCount,
+            columnProportions, rowProportions,
+            GetValue(config, 'space', undefined)
+        );
 
-        var createCellContainerCallback = GetValue(config, 'createCellContainerCallback');
-        if (createCellContainerCallback) {
-            for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
-                for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
-                    var addConfig = { column: x, row: y };
-                    var child = createCellContainerCallback(scene, x, y, addConfig);
-                    if (child) {
-                        this.add(child, addConfig);
-                    }
-                }
-            }
-        }
     }
 
     destroy(fromScene) {
@@ -84,18 +74,7 @@ class GridSizer extends BaseSizer {
         this.rowProportions = undefined;
         this.columnWidth = undefined;
         this.rowHeight = undefined;
-    }
-
-    setIndentLeft(odd, even) {
-        this.space.indentLeftOdd = odd;
-        this.space.indentLeftEven = even;
-        return this;
-    }
-
-    setIndentTop(odd, even) {
-        this.space.indentTopOdd = odd;
-        this.space.indentTopEven = even;
-        return this;
+        this.createCellContainerCallback = undefined;
     }
 
     setColumnProportion(columnIndex, proportion) {
@@ -160,6 +139,11 @@ class GridSizer extends BaseSizer {
         var rowProportion = this.rowProportions[rowIndex];
         var rowHeight = (rowProportion === 0) ? this.rowHeight[rowIndex] : (rowProportion * this.proportionHeightLength);
         return rowHeight;
+    }
+
+    setCreateCellContainerCallback(callback) {
+        this.createCellContainerCallback = callback;
+        return this;
     }
 }
 

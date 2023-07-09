@@ -2,7 +2,12 @@ import ArrayFill from '../../../plugins/utils/array/Fill.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var ResetGrid = function (columnCount, rowCount, columnProportions, rowProportions, space) {
+var ResetGrid = function (
+    columnCount, rowCount,
+    columnProportions, rowProportions,
+    space
+) {
+
     if (columnProportions === undefined) {
         columnProportions = 0;
     }
@@ -15,11 +20,7 @@ var ResetGrid = function (columnCount, rowCount, columnProportions, rowProportio
     this.gridCount = columnCount * rowCount;
 
     // children
-    if (this.sizerChildren === undefined) {
-        this.sizerChildren = [];
-    } else {
-        this.removeAll();
-    }
+    this.removeAll(true);
     this.sizerChildren.length = columnCount * rowCount;
     ArrayFill(this.sizerChildren, null);
 
@@ -50,24 +51,20 @@ var ResetGrid = function (columnCount, rowCount, columnProportions, rowProportio
     this.rowHeight.length = rowCount;
 
     // space
-    this.space.column = [];
-    this.space.column.length = columnCount - 1;
-    var columnSpace = GetValue(space, 'column', 0);
-    if (typeof (columnSpace) === 'number') {
-        ArrayFill(this.space.column, columnSpace);
-    } else {
-        for (var i = 0, cnt = this.space.column.length; i < cnt; i++) {
-            this.space.column[i] = columnSpace[i] || 0;
-        }
-    }
-    this.space.row = [];
-    this.space.row.length = rowCount - 1;
-    var rowSpace = GetValue(space, 'row', 0);
-    if (typeof (rowSpace) === 'number') {
-        ArrayFill(this.space.row, rowSpace);
-    } else {
-        for (var i = 0, cnt = this.space.row.length; i < cnt; i++) {
-            this.space.row[i] = rowSpace[i] || 0;
+    this.setColumnSpace(GetValue(space, 'column', 0));
+    this.setRowSpace(GetValue(space, 'row', 0));
+
+    var scene = this.scene;
+    var createCellContainerCallback = this.createCellContainerCallback;
+    if (createCellContainerCallback) {
+        for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
+            for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
+                var addConfig = { column: x, row: y };
+                var child = createCellContainerCallback(scene, x, y, addConfig);
+                if (child) {
+                    this.add(child, addConfig);
+                }
+            }
         }
     }
 
