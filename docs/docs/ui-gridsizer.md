@@ -488,6 +488,9 @@ sizer.resetGrid(column, row, columnProportions, rowProportions, space);
 !!! note
     Children game objects will be removed without destroyed.
 
+!!! note
+    Will invoke `createCellContainerCallback` to create cellContainer of each cell.
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

@@ -27,7 +27,10 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        sizer.resetGrid(5, 5, 0, 0, { column: 10, row: 10 }).layout()
+        sizer
+            .removeAll(true)
+            .resetGrid(5, 5, 0, 0, { column: 10, row: 10 })
+            .layout()
 
     }
 

@@ -20,7 +20,7 @@ var ResetGrid = function (
     this.gridCount = columnCount * rowCount;
 
     // children
-    this.removeAll(true);
+    this.removeAll();
     this.sizerChildren.length = columnCount * rowCount;
     ArrayFill(this.sizerChildren, null);
 
