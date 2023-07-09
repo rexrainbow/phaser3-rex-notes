@@ -186,10 +186,19 @@
     } else if (HEX.test(s)) {
       s = parseInt(s, 16);
     } else {
-      if (s === 'false') {
-        s = false;
-      } else if (s === 'true') {
-        s = true;
+      switch (s) {
+        case 'false':
+          s = false;
+          break;
+        case 'true':
+          s = true;
+          break;
+        case 'null':
+          s = null;
+          break;
+        case 'undefined':
+          s = undefined;
+          break;
       }
     }
     return s;

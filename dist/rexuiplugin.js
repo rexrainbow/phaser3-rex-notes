@@ -14670,10 +14670,19 @@
     } else if (HEX.test(s)) {
       s = parseInt(s, 16);
     } else {
-      if (s === 'false') {
-        s = false;
-      } else if (s === 'true') {
-        s = true;
+      switch (s) {
+        case 'false':
+          s = false;
+          break;
+        case 'true':
+          s = true;
+          break;
+        case 'null':
+          s = null;
+          break;
+        case 'undefined':
+          s = undefined;
+          break;
       }
     }
     return s;
@@ -36635,6 +36644,22 @@
   });
   SetValue(window, 'RexPlugins.UI.FileDropZone', FileDropZone);
 
+  var HasProperty = function HasProperty(obj, prop) {
+    if (!obj) {
+      return false;
+    }
+    if (obj.hasOwnProperty(prop)) {
+      return true;
+    }
+    while (obj) {
+      if (Object.getOwnPropertyDescriptor(obj, prop)) {
+        return true;
+      }
+      obj = obj.__proto__;
+    }
+    return false;
+  };
+
   var Style = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     var _super = _createSuper(Style);
@@ -36694,18 +36719,6 @@
     }]);
     return Style;
   }(ComponentBase);
-  var HasProperty = function HasProperty(target, prop) {
-    return target.hasOwnProperty(prop) || HasPropertyDescriptor(target, prop);
-  };
-  var HasPropertyDescriptor = function HasPropertyDescriptor(target, prop) {
-    while (target) {
-      if (Object.getOwnPropertyDescriptor(target, prop)) {
-        return true;
-      }
-      target = target.__proto__;
-    }
-    return false;
-  };
 
   var GetValue$1B = Phaser.Utils.Objects.GetValue;
   var StyleManager = /*#__PURE__*/function (_ComponentBase) {
@@ -38238,6 +38251,47 @@
     }
   };
 
+  var SetSpaceMethods = {
+    setColumnSpace: function setColumnSpace(columnSpace) {
+      if (!this.space.column) {
+        this.space.column = [];
+      }
+      this.space.column.length = this.columnCount - 1;
+      if (typeof columnSpace === 'number') {
+        Fill(this.space.column, columnSpace);
+      } else {
+        for (var i = 0, cnt = this.columnCount - 1; i < cnt; i++) {
+          this.space.column[i] = columnSpace[i] || 0;
+        }
+      }
+      return this;
+    },
+    setRowSpace: function setRowSpace(rowSpace) {
+      if (!this.space.row) {
+        this.space.row = [];
+      }
+      this.space.row.length = this.rowCount - 1;
+      if (typeof rowSpace === 'number') {
+        Fill(this.space.row, rowSpace);
+      } else {
+        for (var i = 0, cnt = this.rowCount - 1; i < cnt; i++) {
+          this.space.row[i] = rowSpace[i] || 0;
+        }
+      }
+      return this;
+    },
+    setIndentLeft: function setIndentLeft(odd, even) {
+      this.space.indentLeftOdd = odd;
+      this.space.indentLeftEven = even;
+      return this;
+    },
+    setIndentTop: function setIndentTop(odd, even) {
+      this.space.indentTopOdd = odd;
+      this.space.indentTopEven = even;
+      return this;
+    }
+  };
+
   var GetValue$1v = Phaser.Utils.Objects.GetValue;
   var ResetGrid = function ResetGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
     if (columnProportions === undefined) {
@@ -38251,11 +38305,7 @@
     this.gridCount = columnCount * rowCount;
 
     // children
-    if (this.sizerChildren === undefined) {
-      this.sizerChildren = [];
-    } else {
-      this.removeAll();
-    }
+    this.removeAll();
     this.sizerChildren.length = columnCount * rowCount;
     Fill(this.sizerChildren, null);
 
@@ -38286,24 +38336,22 @@
     this.rowHeight.length = rowCount;
 
     // space
-    this.space.column = [];
-    this.space.column.length = columnCount - 1;
-    var columnSpace = GetValue$1v(space, 'column', 0);
-    if (typeof columnSpace === 'number') {
-      Fill(this.space.column, columnSpace);
-    } else {
-      for (var i = 0, cnt = this.space.column.length; i < cnt; i++) {
-        this.space.column[i] = columnSpace[i] || 0;
-      }
-    }
-    this.space.row = [];
-    this.space.row.length = rowCount - 1;
-    var rowSpace = GetValue$1v(space, 'row', 0);
-    if (typeof rowSpace === 'number') {
-      Fill(this.space.row, rowSpace);
-    } else {
-      for (var i = 0, cnt = this.space.row.length; i < cnt; i++) {
-        this.space.row[i] = rowSpace[i] || 0;
+    this.setColumnSpace(GetValue$1v(space, 'column', 0));
+    this.setRowSpace(GetValue$1v(space, 'row', 0));
+    var scene = this.scene;
+    var createCellContainerCallback = this.createCellContainerCallback;
+    if (createCellContainerCallback) {
+      for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
+        for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
+          var addConfig = {
+            column: x,
+            row: y
+          };
+          var child = createCellContainerCallback(scene, x, y, addConfig);
+          if (child) {
+            this.add(child, addConfig);
+          }
+        }
       }
     }
     return this;
@@ -38376,7 +38424,7 @@
     insertEmptyColumn: InsertEmptyColumn,
     addEmptyColumn: AddEmptyColumn
   };
-  Object.assign(methods$h, AddChildMethods$5, RemoveChildMethods$4);
+  Object.assign(methods$h, AddChildMethods$5, RemoveChildMethods$4, SetSpaceMethods);
 
   var GetTotalColumnProportions = function GetTotalColumnProportions() {
     var result = 0,
@@ -38441,25 +38489,12 @@
       }
       _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
       _this.type = 'rexGridSizer';
-      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$1u(config, 'space', undefined));
+      _this.sizerChildren = [];
+      _this.addChildrenMap('items', _this.sizerChildren);
+      _this.setCreateCellContainerCallback(GetValue$1u(config, 'createCellContainerCallback'));
       _this.setIndentLeft(GetValue$1u(config, 'space.indentLeftOdd', 0), GetValue$1u(config, 'space.indentLeftEven', 0));
       _this.setIndentTop(GetValue$1u(config, 'space.indentTopOdd', 0), GetValue$1u(config, 'space.indentTopEven', 0));
-      _this.addChildrenMap('items', _this.sizerChildren);
-      var createCellContainerCallback = GetValue$1u(config, 'createCellContainerCallback');
-      if (createCellContainerCallback) {
-        for (var y = 0, ycnt = _this.rowCount; y < ycnt; y++) {
-          for (var x = 0, xcnt = _this.columnCount; x < xcnt; x++) {
-            var addConfig = {
-              column: x,
-              row: y
-            };
-            var child = createCellContainerCallback(scene, x, y, addConfig);
-            if (child) {
-              _this.add(child, addConfig);
-            }
-          }
-        }
-      }
+      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$1u(config, 'space', undefined));
       return _this;
     }
     _createClass(GridSizer, [{
@@ -38476,20 +38511,7 @@
         this.rowProportions = undefined;
         this.columnWidth = undefined;
         this.rowHeight = undefined;
-      }
-    }, {
-      key: "setIndentLeft",
-      value: function setIndentLeft(odd, even) {
-        this.space.indentLeftOdd = odd;
-        this.space.indentLeftEven = even;
-        return this;
-      }
-    }, {
-      key: "setIndentTop",
-      value: function setIndentTop(odd, even) {
-        this.space.indentTopOdd = odd;
-        this.space.indentTopEven = even;
-        return this;
+        this.createCellContainerCallback = undefined;
       }
     }, {
       key: "setColumnProportion",
@@ -38560,6 +38582,12 @@
         var rowProportion = this.rowProportions[rowIndex];
         var rowHeight = rowProportion === 0 ? this.rowHeight[rowIndex] : rowProportion * this.proportionHeightLength;
         return rowHeight;
+      }
+    }, {
+      key: "setCreateCellContainerCallback",
+      value: function setCreateCellContainerCallback(callback) {
+        this.createCellContainerCallback = callback;
+        return this;
       }
     }]);
     return GridSizer;
@@ -49769,7 +49797,6 @@
         key: "stop",
         value: function stop(showAllText) {
           this.typing.stop(showAllText);
-          this.emit('stop');
           return this;
         }
       }, {

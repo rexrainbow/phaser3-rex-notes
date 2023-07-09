@@ -20432,6 +20432,22 @@
     return textObject;
   };
 
+  var HasProperty = function HasProperty(obj, prop) {
+    if (!obj) {
+      return false;
+    }
+    if (obj.hasOwnProperty(prop)) {
+      return true;
+    }
+    while (obj) {
+      if (Object.getOwnPropertyDescriptor(obj, prop)) {
+        return true;
+      }
+      obj = obj.__proto__;
+    }
+    return false;
+  };
+
   var Style = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     var _super = _createSuper(Style);
@@ -20491,18 +20507,6 @@
     }]);
     return Style;
   }(ComponentBase);
-  var HasProperty = function HasProperty(target, prop) {
-    return target.hasOwnProperty(prop) || HasPropertyDescriptor(target, prop);
-  };
-  var HasPropertyDescriptor = function HasPropertyDescriptor(target, prop) {
-    while (target) {
-      if (Object.getOwnPropertyDescriptor(target, prop)) {
-        return true;
-      }
-      target = target.__proto__;
-    }
-    return false;
-  };
 
   var PhaserImage = Phaser.GameObjects.Image;
   var GetValue$L = Phaser.Utils.Objects.GetValue;
