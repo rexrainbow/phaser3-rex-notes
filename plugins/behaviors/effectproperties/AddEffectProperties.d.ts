@@ -1,5 +1,6 @@
 import AddBarrelProperties from './AddBarrelProperties';
 import AddBloomProperties from './AddBloomProperties';
+import AddBlurProperties from './AddBlurProperties';
 import AddGlowProperties from './AddGlowProperties';
 import AddGrayscaleProperties from './AddGrayscaleProperties';
 import AddShineProperties from './AddShineProperties';
@@ -10,6 +11,7 @@ declare namespace AddEffectProperties {
     interface IConfig {
         barrel?: boolean,
         bloom?: boolean,
+        blur?: boolean,
         glow?: boolean,
         grayscale?: boolean,
         shine?: boolean,
@@ -17,6 +19,7 @@ declare namespace AddEffectProperties {
     interface EffectPropertiesGameObject extends
         AddBarrelProperties.BarrelGameObject,
         AddBloomProperties.BloomGameObject,
+        AddBlurProperties.BlurGameObject,
         AddGlowProperties.GlowGameObject,
         AddGrayscaleProperties.GrayscaleGameObject,
         AddShineProperties.ShineGameObject { }
