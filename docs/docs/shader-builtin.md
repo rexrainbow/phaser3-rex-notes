@@ -107,7 +107,7 @@ All Game Objects and camera support Post FX. These are effects applied after the
     effect.offsetY = offsetY;
     effect.blurStrength = blurStrength;
     effect.strength = strength;
-    effect.step = step; // integer
+    effect.steps = steps; // integer
     ```
 
 ### Blur

@@ -1,4 +1,5 @@
 import AddBarrelProperties from './AddBarrelProperties.js';
+import AddBloomProperties from './AddBloomProperties.js';
 import AddGlowProperties from './AddGlowProperties.js';
 import AddGrayscaleProperties from './AddGrayscaleProperties.js';
 import AddShineProperties from './AddShineProperties.js';
@@ -12,6 +13,10 @@ var AddEffectProperties = function (gameObject, config) {
 
     if ((config === true) || GetValue(config, 'barrel', false)) {
         AddBarrelProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'bloom', false)) {
+        AddBloomProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'glow', false)) {
