@@ -4,8 +4,8 @@ declare namespace AddBlurProperties {
     interface BlurGameObject extends Phaser.GameObjects.GameObject {
         blurColor: number | null | false;
         blurQuality: number;
-        blurOffsetX: number;
-        blurOffsetY: number;
+        blurX: number;
+        blurY: number;
         blurStrength: number;
         blurSteps: number;
     }

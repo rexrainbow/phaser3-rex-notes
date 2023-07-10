@@ -3,7 +3,9 @@ import AddBloomProperties from './AddBloomProperties';
 import AddBlurProperties from './AddBlurProperties';
 import AddGlowProperties from './AddGlowProperties';
 import AddGrayscaleProperties from './AddGrayscaleProperties';
+import AddRevealProperties from './AddRevealProperties';
 import AddShineProperties from './AddShineProperties';
+import AddWipeProperties from './AddWipeProperties';
 
 export default AddEffectProperties;
 
@@ -14,7 +16,9 @@ declare namespace AddEffectProperties {
         blur?: boolean,
         glow?: boolean,
         grayscale?: boolean,
+        reveal?: boolean,
         shine?: boolean,
+        wipe?: boolean,
     }
     interface EffectPropertiesGameObject extends
         AddBarrelProperties.BarrelGameObject,
@@ -22,7 +26,9 @@ declare namespace AddEffectProperties {
         AddBlurProperties.BlurGameObject,
         AddGlowProperties.GlowGameObject,
         AddGrayscaleProperties.GrayscaleGameObject,
-        AddShineProperties.ShineGameObject { }
+        AddRevealProperties.RevealGameObject,
+        AddShineProperties.ShineGameObject,
+        AddWipeProperties.WipeGameObject { }
 
 }
 

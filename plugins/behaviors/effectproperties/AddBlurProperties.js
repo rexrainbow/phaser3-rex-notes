@@ -8,8 +8,8 @@ var AddBlurProperties = function (gameObject) {
 
     var blurColor,
         blurQuality = 0,
-        blurOffsetX = 1,
-        blurOffsetY = 1,
+        blurX = 1,
+        blurY = 1,
         blurStrength = 1,
         blurSteps = 4;
     Object.defineProperty(gameObject, 'blurColor', {
@@ -30,9 +30,9 @@ var AddBlurProperties = function (gameObject) {
                 }
             } else {
                 if (!gameObject._blur) {
-                    var offset = Math.max(blurOffsetX, blurOffsetY);
+                    var offset = Math.max(blurX, blurY);
                     gameObject.preFX.setPadding(offset + 1);
-                    gameObject._blur = gameObject.preFX.addBlur(blurQuality, blurOffsetX, blurOffsetY, blurStrength, blurColor, blurSteps);
+                    gameObject._blur = gameObject.preFX.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
                 } else {
                     gameObject._blur.color = blurColor;
                 }
@@ -59,40 +59,40 @@ var AddBlurProperties = function (gameObject) {
         },
     })
 
-    Object.defineProperty(gameObject, 'blurOffsetX', {
+    Object.defineProperty(gameObject, 'blurX', {
         get: function () {
-            return blurOffsetX;
+            return blurX;
         },
         set: function (value) {
-            if (blurOffsetX === value) {
+            if (blurX === value) {
                 return;
             }
 
-            blurOffsetX = value;
+            blurX = value;
 
             if (gameObject._blur) {
-                var offset = Math.max(blurOffsetX, blurOffsetY);
+                var offset = Math.max(blurX, blurY);
                 gameObject.preFX.setPadding(offset + 1);
-                gameObject._blur.x = blurOffsetX;
+                gameObject._blur.x = blurX;
             }
         },
     })
 
-    Object.defineProperty(gameObject, 'blurOffsetY', {
+    Object.defineProperty(gameObject, 'blurY', {
         get: function () {
-            return blurOffsetY;
+            return blurY;
         },
         set: function (value) {
-            if (blurOffsetY === value) {
+            if (blurY === value) {
                 return;
             }
 
-            blurOffsetY = value;
+            blurY = value;
 
             if (gameObject._blur) {
-                var offset = Math.max(blurOffsetX, blurOffsetY);
+                var offset = Math.max(blurX, blurY);
                 gameObject.preFX.setPadding(offset + 1);
-                gameObject._blur.y = blurOffsetY;
+                gameObject._blur.y = blurY;
             }
         },
     })

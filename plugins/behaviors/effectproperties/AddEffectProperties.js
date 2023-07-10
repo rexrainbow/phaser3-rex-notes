@@ -3,7 +3,9 @@ import AddBloomProperties from './AddBloomProperties.js';
 import AddBlurProperties from './AddBlurProperties.js';
 import AddGlowProperties from './AddGlowProperties.js';
 import AddGrayscaleProperties from './AddGrayscaleProperties.js';
+import AddRevealProperties from './AddRevealProperties.js';
 import AddShineProperties from './AddShineProperties.js';
+import AddWipeProperties from './AddWipeProperties.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -32,8 +34,16 @@ var AddEffectProperties = function (gameObject, config) {
         AddGrayscaleProperties(gameObject);
     }
 
+    if ((config === true) || GetValue(config, 'reveal', false)) {
+        AddRevealProperties(gameObject);
+    }
+
     if ((config === true) || GetValue(config, 'shine', false)) {
         AddShineProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'wipe', false)) {
+        AddWipeProperties(gameObject);
     }
 
     return gameObject;
