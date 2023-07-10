@@ -1,4 +1,4 @@
-import HasProperty from '../../utils/object/HasProperty.js';
+import HasProperty from '../../../utils/object/HasProperty.js';
 
 var AddGrayscaleProperties = function (gameObject) {
     // Don't attach properties again

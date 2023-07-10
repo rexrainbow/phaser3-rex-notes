@@ -2,7 +2,7 @@ import AddBarrelProperties from './AddBarrelProperties';
 import AddBloomProperties from './AddBloomProperties';
 import AddBlurProperties from './AddBlurProperties';
 import AddGlowProperties from './AddGlowProperties';
-import AddGrayscaleProperties from './AddGrayscaleProperties';
+import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties';
 import AddRevealProperties from './AddRevealProperties';
 import AddShineProperties from './AddShineProperties';
 import AddVignetteProperties from './AddVignetteProperties';

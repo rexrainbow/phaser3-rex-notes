@@ -2,7 +2,7 @@ import AddBarrelProperties from './AddBarrelProperties.js';
 import AddBloomProperties from './AddBloomProperties.js';
 import AddBlurProperties from './AddBlurProperties.js';
 import AddGlowProperties from './AddGlowProperties.js';
-import AddGrayscaleProperties from './AddGrayscaleProperties.js';
+import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties.js';
 import AddRevealProperties from './AddRevealProperties.js';
 import AddShineProperties from './AddShineProperties.js';
 import AddVignetteProperties from './AddVignetteProperties.js';
