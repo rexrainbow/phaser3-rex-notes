@@ -5,6 +5,7 @@ import AddGlowProperties from './AddGlowProperties.js';
 import AddGrayscaleProperties from './AddGrayscaleProperties.js';
 import AddRevealProperties from './AddRevealProperties.js';
 import AddShineProperties from './AddShineProperties.js';
+import AddVignetteProperties from './AddVignetteProperties.js';
 import AddWipeProperties from './AddWipeProperties.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -40,6 +41,10 @@ var AddEffectProperties = function (gameObject, config) {
 
     if ((config === true) || GetValue(config, 'shine', false)) {
         AddShineProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'vignette', false)) {
+        AddVignetteProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'wipe', false)) {
