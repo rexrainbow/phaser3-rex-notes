@@ -45,6 +45,7 @@ var AddRevealProperties = function (gameObject) {
                 if (!gameObject._revealEffect) {
                     gameObject._revealEffect = gameObject.preFX.addReveal(revealWidth, 0, 0);
                 }
+
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 0;
                 gameObject._revealEffect.progress = revealLeft;

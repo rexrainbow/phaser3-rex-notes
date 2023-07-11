@@ -45,6 +45,7 @@ var AddWipeProperties = function (gameObject) {
                 if (!gameObject._wipeEffect) {
                     gameObject._wipeEffect = gameObject.preFX.addWipe(wipeWidth, 0, 0);
                 }
+
                 gameObject._wipeEffect.direction = 1;
                 gameObject._wipeEffect.axis = 0;
                 gameObject._wipeEffect.progress = wipeLeft;

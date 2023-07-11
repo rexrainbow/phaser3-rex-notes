@@ -24,14 +24,15 @@ var AddGlowProperties = function (gameObject) {
                 if (gameObject._glow) {
                     gameObject.preFX.remove(gameObject._glow);
                     gameObject._glow = undefined;
+                    gameObject.preFX.setPadding(0);
                 }
             } else {
                 if (!gameObject._glow) {
-                    gameObject.preFX.setPadding(glowOuterStrength + 1);
                     gameObject._glow = gameObject.preFX.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
-                } else {
-                    gameObject._glow.color = glowColor;
+                    gameObject.preFX.setPadding(glowOuterStrength + 1);
                 }
+
+                gameObject._glow.color = glowColor;
             }
 
         },

@@ -27,15 +27,15 @@ var AddBlurProperties = function (gameObject) {
                 if (gameObject._blur) {
                     gameObject.preFX.remove(gameObject._blur);
                     gameObject._blur = undefined;
+                    gameObject.preFX.setPadding(0);
                 }
             } else {
                 if (!gameObject._blur) {
-                    var offset = Math.max(blurX, blurY);
-                    gameObject.preFX.setPadding(offset + 1);
                     gameObject._blur = gameObject.preFX.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
-                } else {
-                    gameObject._blur.color = blurColor;
+                    gameObject.preFX.setPadding(Math.max(blurX, blurY) + 1);
                 }
+
+                gameObject._blur.color = blurColor;
             }
 
         },

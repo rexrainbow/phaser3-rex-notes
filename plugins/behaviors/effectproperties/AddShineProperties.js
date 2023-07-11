@@ -8,7 +8,7 @@ var AddShineProperties = function (gameObject) {
 
     var shineSpeed,
         shineLineWidth = 0.5,
-        shineGradient  = 3;
+        shineGradient = 3;
     Object.defineProperty(gameObject, 'shineSpeed', {
         get: function () {
             return shineSpeed;
@@ -28,9 +28,9 @@ var AddShineProperties = function (gameObject) {
             } else {
                 if (!gameObject._shine) {
                     gameObject._shine = gameObject.preFX.addShine(shineSpeed, shineLineWidth, shineGradient);
-                } else {
-                    gameObject._shine.speed = shineSpeed;
                 }
+
+                gameObject._shine.speed = shineSpeed;
             }
 
         },

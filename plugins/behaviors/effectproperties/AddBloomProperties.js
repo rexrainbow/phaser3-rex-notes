@@ -27,15 +27,15 @@ var AddBloomProperties = function (gameObject) {
                 if (gameObject._bloom) {
                     gameObject.preFX.remove(gameObject._bloom);
                     gameObject._bloom = undefined;
+                    gameObject.preFX.setPadding(0);
                 }
             } else {
                 if (!gameObject._bloom) {
-                    var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                    gameObject.preFX.setPadding(offset + 1);
                     gameObject._bloom = gameObject.preFX.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
-                } else {
-                    gameObject._bloom.color = bloomColor;
-                }
+                    gameObject.preFX.setPadding(Math.max(bloomOffsetX, bloomOffsetY) + 1);
+                } 
+                
+                gameObject._bloom.color = bloomColor;
             }
 
         },

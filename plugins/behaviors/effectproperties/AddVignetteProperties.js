@@ -29,9 +29,9 @@ var AddVignetteProperties = function (gameObject) {
             } else {
                 if (!gameObject._vignette) {
                     gameObject._vignette = gameObject.preFX.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
-                } else {
-                    gameObject._vignette.radius = vignetteRadius;
                 }
+
+                gameObject._vignette.radius = vignetteRadius;
             }
 
         },
