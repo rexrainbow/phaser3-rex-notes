@@ -73,7 +73,6 @@
         "i18next": "^22.4.15",
         "i18next-http-backend": "^2.2.1",
         "js-yaml": "^4.1.0",
-        "marked": "^5.0.2",
         "mustache": "^4.2.0",
         "handlebars": "^4.7.7",
         "papaparse": "^5.4.1",
