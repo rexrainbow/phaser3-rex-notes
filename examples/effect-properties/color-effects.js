@@ -5,7 +5,7 @@ import FSMPlugin from '../../plugins/fsm-plugin.js';
 var states = [
     'blackWhite', 'grayscale', 'desaturateLuminance', 'negative',
     'sepia', 'brown', 'vintagePinhole', 'kodachrome', 'technicolor', 'polaroid', 'lsd',
-    'No-effect'
+    'hue', 'shiftToBGR',
 ];
 var stateConfig = {
     states: {
@@ -97,6 +97,22 @@ var stateConfig = {
                 this.gameObject.lsd = null;
             }
         },
+        hue: {
+            enter: function () {
+                this.gameObject.hue = 270;
+            },
+            exit: function () {
+                this.gameObject.hue = null;
+            }
+        },
+        shiftToBGR: {
+            enter: function () {
+                this.gameObject.shiftToBGR = 1;
+            },
+            exit: function () {
+                this.gameObject.shiftToBGR = null;
+            }
+        },
     },
     extend: {
         gameObject: null
@@ -115,7 +131,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.image(400, 300, 'logo').setScale(0.75);
+        this.add.image(200, 200, 'logo').setScale(0.75);
+
+        var image = this.add.image(500, 400, 'logo').setScale(0.75);
         this.plugins.get('rexEffectProperties').add(image);
 
         var state = this.plugins.get('rexFSM').add(stateConfig)

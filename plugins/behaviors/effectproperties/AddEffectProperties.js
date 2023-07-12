@@ -2,16 +2,22 @@ import AddBarrelProperties from './AddBarrelProperties.js';
 import AddBlackWhiteProperties from './colormatrix/AddBlackWhiteProperties.js';
 import AddBloomProperties from './AddBloomProperties.js';
 import AddBlurProperties from './AddBlurProperties.js';
+import AddBrightnessProperties from './colormatrix/AddBrightnessProperties.js';
 import AddBrownProperties from './colormatrix/AddBrownProperties.js';
+import AddContrastProperties from './colormatrix/AddContrastProperties.js';
+import AddDesaturateProperties from './colormatrix/AddDesaturateProperties.js';
 import AddDesaturateLuminanceProperties from './colormatrix/AdddesaturateLuminanceProperties.js';
 import AddGlowProperties from './AddGlowProperties.js';
 import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties.js';
+import AddHueProperties from './colormatrix/AddHueProperties.js';
 import AddKodachromeProperties from './colormatrix/AddKodachromeProperties.js';
 import AddLSDProperties from './colormatrix/AddLSDProperties.js';
 import AddNegativeProperties from './colormatrix/AddNegativeProperties.js';
 import AddPolaroidProperties from './colormatrix/AddPolaroidProperties.js';
 import AddRevealProperties from './AddRevealProperties.js';
+import AddSaturateProperties from './colormatrix/AddSaturateProperties.js';
 import AddSepiaProperties from './colormatrix/AddSepiaProperties.js';
+import AddShiftToBGRProperties from './colormatrix/AddShiftToBGRProperties.js';
 import AddShineProperties from './AddShineProperties.js';
 import AddTechnicolorProperties from './colormatrix/AddTechnicolorProperties.js';
 import AddVignetteProperties from './AddVignetteProperties.js';
@@ -41,8 +47,20 @@ var AddEffectProperties = function (gameObject, config) {
         AddBlurProperties(gameObject);
     }
 
+    if ((config === true) || GetValue(config, 'brightness', false)) {
+        AddBrightnessProperties(gameObject);
+    }
+
     if ((config === true) || GetValue(config, 'brown', false)) {
         AddBrownProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'contrast', false)) {
+        AddContrastProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'desaturate', false)) {
+        AddDesaturateProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'desaturateLuminance', false)) {
@@ -55,6 +73,10 @@ var AddEffectProperties = function (gameObject, config) {
 
     if ((config === true) || GetValue(config, 'grayscale', false)) {
         AddGrayscaleProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'hue', false)) {
+        AddHueProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'kodachrome', false)) {
@@ -77,8 +99,16 @@ var AddEffectProperties = function (gameObject, config) {
         AddRevealProperties(gameObject);
     }
 
+    if ((config === true) || GetValue(config, 'saturate', false)) {
+        AddSaturateProperties(gameObject);
+    }
+
     if ((config === true) || GetValue(config, 'sepia', false)) {
         AddSepiaProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'shiftToBGR', false)) {
+        AddShiftToBGRProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'shine', false)) {
