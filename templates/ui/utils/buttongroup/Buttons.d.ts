@@ -1,10 +1,7 @@
-interface IConfigClick {
-    mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-    clickInterval?: number
-}
+import Button from '../../../../plugins/input/button/Button';
 
 export interface IConfig {
-    click?: IConfigClick,
+    click?: Button.IConfig,
 
     groupName?: string,
 
@@ -75,7 +72,7 @@ export interface IButtons {
         name: string,
         state?: boolean
     ): this;
-    
+
     clearAllButtonsState(): this;
 
     getButtonState(
