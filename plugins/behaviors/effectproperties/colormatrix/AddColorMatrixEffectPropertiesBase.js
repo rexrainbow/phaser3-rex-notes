@@ -1,6 +1,6 @@
 import HasProperty from '../../../utils/object/HasProperty.js';
 
-var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName) {
+var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, inputMode) {
     // Don't attach properties again
     if (HasProperty(gameObject, effectName) || !gameObject.preFX) {
         return gameObject;
@@ -30,7 +30,7 @@ var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName) {
                     gameObject[EffectInstancePropertyName] = gameObject.preFX.addColorMatrix();
                 }
                 var effectInstance = gameObject[EffectInstancePropertyName];
-                effectInstance[effectName](value);
+                effectInstance[effectName]((inputMode === 1) ? value : undefined);
             }
 
         },

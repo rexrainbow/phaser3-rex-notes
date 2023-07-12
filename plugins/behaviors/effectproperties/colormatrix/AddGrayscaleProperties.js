@@ -1,7 +1,7 @@
 import AddColorMatrixEffectPropertiesBase from './AddColorMatrixEffectPropertiesBase.js';
 
 var AddGrayscaleProperties = function (gameObject) {
-    AddColorMatrixEffectPropertiesBase(gameObject, 'grayscale');
+    AddColorMatrixEffectPropertiesBase(gameObject, 'grayscale', 1);
     return gameObject;
 }
 
