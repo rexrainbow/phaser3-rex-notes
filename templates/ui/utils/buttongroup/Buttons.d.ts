@@ -1,7 +1,7 @@
-import Button from '../../../../plugins/input/button/Button';
+import ButtonBehavior from '../../../../plugins/input/button/Button';
 
 export interface IConfig {
-    click?: Button.IConfig,
+    click?: ButtonBehavior.IConfig,
 
     groupName?: string,
 
