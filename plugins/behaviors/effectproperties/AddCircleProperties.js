@@ -1,0 +1,114 @@
+import HasProperty from '../../utils/object/HasProperty.js';
+
+var AddCircleProperties = function (gameObject) {
+    // Don't attach properties again
+    if (HasProperty(gameObject, 'circleColor') || !gameObject.preFX) {
+        return gameObject;
+    }
+
+    var circleColor,
+        circleThickness = 8,
+        circleBackgroundColor = 0x000000,
+        circleScale = 1,
+        circleFeather = 0.005;
+    Object.defineProperty(gameObject, 'circleColor', {
+        get: function () {
+            return circleColor;
+        },
+        set: function (value) {
+            if (circleColor === value) {
+                return;
+            }
+
+            circleColor = value;
+
+            if ((circleColor === null) || (circleColor === false)) {
+                if (gameObject._circle) {
+                    gameObject.preFX.remove(gameObject._circle);
+                    gameObject._circle = undefined;
+                }
+            } else {
+                if (!gameObject._circle) {
+                    gameObject._circle = gameObject.preFX.addCircle(circleThickness, circleColor, circleBackgroundColor, circleScale, circleFeather);
+                }
+
+                gameObject._circle.color = circleColor;
+            }
+
+        },
+    })
+
+    Object.defineProperty(gameObject, 'circleThickness', {
+        get: function () {
+            return circleThickness;
+        },
+        set: function (value) {
+            if (circleThickness === value) {
+                return;
+            }
+
+            circleThickness = value;
+
+            if (gameObject._circle) {
+                gameObject._circle.thickness = circleThickness;
+            }
+        },
+    })
+
+    Object.defineProperty(gameObject, 'circleBackgroundColor', {
+        get: function () {
+            return circleBackgroundColor;
+        },
+        set: function (value) {
+            if (circleBackgroundColor === value) {
+                return;
+            }
+
+            circleBackgroundColor = value;
+
+            if (gameObject._circle) {
+                gameObject._circle.backgroundColor = circleBackgroundColor;
+            }
+        },
+    })
+
+    Object.defineProperty(gameObject, 'circleScale', {
+        get: function () {
+            return circleScale;
+        },
+        set: function (value) {
+            if (circleScale === value) {
+                return;
+            }
+
+            circleScale = value;
+
+            if (gameObject._circle) {
+                gameObject._circle.scale = circleScale;
+            }
+        },
+    })
+
+    Object.defineProperty(gameObject, 'circleFeather', {
+        get: function () {
+            return circleFeather;
+        },
+        set: function (value) {
+            if (circleFeather === value) {
+                return;
+            }
+
+            circleFeather = value;
+
+            if (gameObject._circle) {
+                gameObject._circle.feather = circleFeather;
+            }
+        },
+    })
+
+    gameObject.circleColor = null;
+
+    return gameObject;
+}
+
+export default AddCircleProperties;

@@ -4,6 +4,7 @@ import AddBloomProperties from './AddBloomProperties.js';
 import AddBlurProperties from './AddBlurProperties.js';
 import AddBrightnessProperties from './colormatrix/AddBrightnessProperties.js';
 import AddBrownProperties from './colormatrix/AddBrownProperties.js';
+import AddCircleProperties from './AddCircleProperties.js';
 import AddContrastProperties from './colormatrix/AddContrastProperties.js';
 import AddDesaturateProperties from './colormatrix/AddDesaturateProperties.js';
 import AddDesaturateLuminanceProperties from './colormatrix/AdddesaturateLuminanceProperties.js';
@@ -17,6 +18,7 @@ import AddPolaroidProperties from './colormatrix/AddPolaroidProperties.js';
 import AddRevealProperties from './AddRevealProperties.js';
 import AddSaturateProperties from './colormatrix/AddSaturateProperties.js';
 import AddSepiaProperties from './colormatrix/AddSepiaProperties.js';
+import AddShadowProperties from './AddShadowProperties.js';
 import AddShiftToBGRProperties from './colormatrix/AddShiftToBGRProperties.js';
 import AddShineProperties from './AddShineProperties.js';
 import AddTechnicolorProperties from './colormatrix/AddTechnicolorProperties.js';
@@ -53,6 +55,10 @@ var AddEffectProperties = function (gameObject, config) {
 
     if ((config === true) || GetValue(config, 'brown', false)) {
         AddBrownProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'circle', false)) {
+        AddCircleProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'contrast', false)) {
@@ -105,6 +111,10 @@ var AddEffectProperties = function (gameObject, config) {
 
     if ((config === true) || GetValue(config, 'sepia', false)) {
         AddSepiaProperties(gameObject);
+    }
+
+    if ((config === true) || GetValue(config, 'shadow', false)) {
+        AddShadowProperties(gameObject);
     }
 
     if ((config === true) || GetValue(config, 'shiftToBGR', false)) {

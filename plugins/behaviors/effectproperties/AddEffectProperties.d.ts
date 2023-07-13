@@ -4,9 +4,10 @@ import AddBloomProperties from './AddBloomProperties';
 import AddBlurProperties from './AddBlurProperties';
 import AddBrightnessProperties from './colormatrix/AddBrightnessProperties';
 import AddBrownProperties from './colormatrix/AddBrownProperties';
+import AddCircleProperties from './AddCircleProperties';
 import AddContrastProperties from './colormatrix/AddContrastProperties';
 import AddDesaturateProperties from './colormatrix/AddDesaturateProperties';
-import AddDesaturateLuminanceProperties from './colormatrix/AdddesaturateLuminanceProperties';
+import AddDesaturateLuminanceProperties from './colormatrix/AddDesaturateLuminanceProperties';
 import AddGlowProperties from './AddGlowProperties';
 import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties';
 import AddHueProperties from './colormatrix/AddHueProperties';
@@ -17,6 +18,7 @@ import AddPolaroidProperties from './colormatrix/AddPolaroidProperties';
 import AddRevealProperties from './AddRevealProperties';
 import AddSaturateProperties from './colormatrix/AddSaturateProperties';
 import AddSepiaProperties from './colormatrix/AddSepiaProperties';
+import AddShadowProperties from './AddShadowProperties';
 import AddShiftToBGRProperties from './colormatrix/AddShiftToBGRProperties';
 import AddShineProperties from './AddShineProperties';
 import AddTechnicolorProperties from './colormatrix/AddTechnicolorProperties';
@@ -34,6 +36,7 @@ declare namespace AddEffectProperties {
         blur?: boolean,
         brightness?: boolean,
         brown?: boolean,
+        circle?: boolean,
         contrast?: boolean,
         desaturate?: boolean,
         desaturateLuminance?: boolean,
@@ -47,6 +50,7 @@ declare namespace AddEffectProperties {
         reveal?: boolean,
         saturate?: boolean,
         sepia?: boolean,
+        shadow?: boolean,
         shiftToBGR?: boolean,
         shine?: boolean,
         technicolor?: boolean,
@@ -61,6 +65,7 @@ declare namespace AddEffectProperties {
         AddBlurProperties.BlurGameObject,
         AddBrightnessProperties.BrightnessGameObject,
         AddBrownProperties.BrownGameObject,
+        AddCircleProperties.CircleGameObject,
         AddContrastProperties.ContrastGameObject,
         AddDesaturateProperties.DesaturateGameObject,
         AddDesaturateLuminanceProperties.DesaturateLuminanceGameObject,
@@ -74,6 +79,7 @@ declare namespace AddEffectProperties {
         AddRevealProperties.RevealGameObject,
         AddSaturateProperties.SaturateGameObject,
         AddSepiaProperties.SepiaGameObject,
+        AddShadowProperties.ShadowGameObject,
         AddShiftToBGRProperties.ShiftToBGRGameObject,
         AddShineProperties.ShineGameObject,
         AddTechnicolorProperties.TechnicolorGameObject,
