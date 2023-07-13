@@ -34,6 +34,7 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    backgroundColor: 0x333333,
     plugins: {
         global: [{
             key: 'rexEffectProperties',
