@@ -91,5 +91,5 @@ declare namespace AddEffectProperties {
 
 declare function AddEffectProperties(
     gameObject: Phaser.GameObjects.GameObject,
-    config?: true | AddEffectProperties.IConfig
+    config?: true | AddEffectProperties.IConfig | string | string[]
 ): AddEffectProperties.EffectPropertiesGameObject;
