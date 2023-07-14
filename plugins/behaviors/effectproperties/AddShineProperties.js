@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddShineProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'shineSpeed') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'shineSpeed')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -22,12 +28,12 @@ var AddShineProperties = function (gameObject) {
 
             if ((shineSpeed === null) || (shineSpeed === false)) {
                 if (gameObject._shine) {
-                    gameObject.preFX.remove(gameObject._shine);
+                    fxFactory.remove(gameObject._shine);
                     gameObject._shine = undefined;
                 }
             } else {
                 if (!gameObject._shine) {
-                    gameObject._shine = gameObject.preFX.addShine(shineSpeed, shineLineWidth, shineGradient);
+                    gameObject._shine = fxFactory.addShine(shineSpeed, shineLineWidth, shineGradient);
                 }
 
                 gameObject._shine.speed = shineSpeed;

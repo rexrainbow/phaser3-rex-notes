@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddShadowProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'shadowColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'shadowColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -26,12 +32,12 @@ var AddShadowProperties = function (gameObject) {
 
             if ((shadowColor === null) || (shadowColor === false)) {
                 if (gameObject._shadow) {
-                    gameObject.preFX.remove(gameObject._shadow);
-                    gameObject._shadow = undefined;                    
+                    fxFactory.remove(gameObject._shadow);
+                    gameObject._shadow = undefined;
                 }
             } else {
                 if (!gameObject._shadow) {
-                    gameObject._shadow = gameObject.preFX.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);                    
+                    gameObject._shadow = fxFactory.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);
                 }
 
                 gameObject._shadow.color = shadowColor;

@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddGlowProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'glowColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'glowColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -22,14 +28,14 @@ var AddGlowProperties = function (gameObject) {
 
             if ((glowColor === null) || (glowColor === false)) {
                 if (gameObject._glow) {
-                    gameObject.preFX.remove(gameObject._glow);
+                    fxFactory.remove(gameObject._glow);
                     gameObject._glow = undefined;
-                    gameObject.preFX.setPadding(0);
+                    fxFactory.setPadding(0);
                 }
             } else {
                 if (!gameObject._glow) {
-                    gameObject._glow = gameObject.preFX.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
-                    gameObject.preFX.setPadding(glowOuterStrength + 1);
+                    gameObject._glow = fxFactory.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
+                    fxFactory.setPadding(glowOuterStrength + 1);
                 }
 
                 gameObject._glow.color = glowColor;
@@ -50,7 +56,7 @@ var AddGlowProperties = function (gameObject) {
             glowOuterStrength = value;
 
             if (gameObject._glow) {
-                gameObject.preFX.setPadding(glowOuterStrength + 1);
+                fxFactory.setPadding(glowOuterStrength + 1);
                 gameObject._glow.outerStrength = glowOuterStrength;
             }
         },

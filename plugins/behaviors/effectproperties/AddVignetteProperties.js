@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'vignetteColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'vignetteColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -23,12 +29,12 @@ var AddVignetteProperties = function (gameObject) {
 
             if ((vignetteRadius === null) || (vignetteRadius === false)) {
                 if (gameObject._vignette) {
-                    gameObject.preFX.remove(gameObject._vignette);
+                    fxFactory.remove(gameObject._vignette);
                     gameObject._vignette = undefined;
                 }
             } else {
                 if (!gameObject._vignette) {
-                    gameObject._vignette = gameObject.preFX.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
+                    gameObject._vignette = fxFactory.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
                 }
 
                 gameObject._vignette.radius = vignetteRadius;

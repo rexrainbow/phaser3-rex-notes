@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddBlurProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'blurColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'blurColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -25,14 +31,14 @@ var AddBlurProperties = function (gameObject) {
 
             if ((blurColor === null) || (blurColor === false)) {
                 if (gameObject._blur) {
-                    gameObject.preFX.remove(gameObject._blur);
+                    fxFactory.remove(gameObject._blur);
                     gameObject._blur = undefined;
-                    gameObject.preFX.setPadding(0);
+                    fxFactory.setPadding(0);
                 }
             } else {
                 if (!gameObject._blur) {
-                    gameObject._blur = gameObject.preFX.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
-                    gameObject.preFX.setPadding(Math.max(blurX, blurY) + 1);
+                    gameObject._blur = fxFactory.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
+                    fxFactory.setPadding(Math.max(blurX, blurY) + 1);
                 }
 
                 gameObject._blur.color = blurColor;
@@ -72,7 +78,7 @@ var AddBlurProperties = function (gameObject) {
 
             if (gameObject._blur) {
                 var offset = Math.max(blurX, blurY);
-                gameObject.preFX.setPadding(offset + 1);
+                fxFactory.setPadding(offset + 1);
                 gameObject._blur.x = blurX;
             }
         },
@@ -91,7 +97,7 @@ var AddBlurProperties = function (gameObject) {
 
             if (gameObject._blur) {
                 var offset = Math.max(blurX, blurY);
-                gameObject.preFX.setPadding(offset + 1);
+                fxFactory.setPadding(offset + 1);
                 gameObject._blur.y = blurY;
             }
         },

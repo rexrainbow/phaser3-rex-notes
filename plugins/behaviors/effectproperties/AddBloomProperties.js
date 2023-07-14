@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddBloomProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'bloomColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'bloomColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -25,16 +31,16 @@ var AddBloomProperties = function (gameObject) {
 
             if ((bloomColor === null) || (bloomColor === false)) {
                 if (gameObject._bloom) {
-                    gameObject.preFX.remove(gameObject._bloom);
+                    fxFactory.remove(gameObject._bloom);
                     gameObject._bloom = undefined;
-                    gameObject.preFX.setPadding(0);
+                    fxFactory.setPadding(0);
                 }
             } else {
                 if (!gameObject._bloom) {
-                    gameObject._bloom = gameObject.preFX.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
-                    gameObject.preFX.setPadding(Math.max(bloomOffsetX, bloomOffsetY) + 1);
-                } 
-                
+                    gameObject._bloom = fxFactory.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
+                    fxFactory.setPadding(Math.max(bloomOffsetX, bloomOffsetY) + 1);
+                }
+
                 gameObject._bloom.color = bloomColor;
             }
 
@@ -54,7 +60,7 @@ var AddBloomProperties = function (gameObject) {
 
             if (gameObject._bloom) {
                 var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                gameObject.preFX.setPadding(offset + 1);
+                fxFactory.setPadding(offset + 1);
                 gameObject._bloom.offsetX = bloomOffsetX;
             }
         },
@@ -73,7 +79,7 @@ var AddBloomProperties = function (gameObject) {
 
             if (gameObject._bloom) {
                 var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                gameObject.preFX.setPadding(offset + 1);
+                fxFactory.setPadding(offset + 1);
                 gameObject._bloom.offsetY = bloomOffsetY;
             }
         },

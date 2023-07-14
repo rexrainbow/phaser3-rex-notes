@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddCircleProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'circleColor') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'circleColor')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -25,12 +31,12 @@ var AddCircleProperties = function (gameObject) {
 
             if ((circleColor === null) || (circleColor === false)) {
                 if (gameObject._circle) {
-                    gameObject.preFX.remove(gameObject._circle);
+                    fxFactory.remove(gameObject._circle);
                     gameObject._circle = undefined;
                 }
             } else {
                 if (!gameObject._circle) {
-                    gameObject._circle = gameObject.preFX.addCircle(circleThickness, circleColor, circleBackgroundColor, circleScale, circleFeather);
+                    gameObject._circle = fxFactory.addCircle(circleThickness, circleColor, circleBackgroundColor, circleScale, circleFeather);
                     gameObject.circleBackgroundAlpha = circleBackgroundAlpha;
                 }
 

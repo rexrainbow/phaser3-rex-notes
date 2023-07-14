@@ -1,8 +1,14 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFXFactory from './GetFXFactory.js';
 
 var AddBarrelProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'barrel') || !gameObject.preFX) {
+    if (HasProperty(gameObject, 'barrel')) {
+        return gameObject;
+    }
+
+    var fxFactory = GetFXFactory(gameObject);
+    if (!fxFactory) {
         return gameObject;
     }
 
@@ -20,12 +26,12 @@ var AddBarrelProperties = function (gameObject) {
 
             if ((barrel === null) || (barrel === false)) {
                 if (gameObject._barrelEffect) {
-                    gameObject.preFX.remove(gameObject._barrelEffect);
+                    fxFactory.remove(gameObject._barrelEffect);
                     gameObject._barrelEffect = undefined;
                 }
             } else {
                 if (!gameObject._barrelEffect) {
-                    gameObject._barrelEffect = gameObject.preFX.addBarrel();
+                    gameObject._barrelEffect = fxFactory.addBarrel();
                 }
                 gameObject._barrelEffect.amount = barrel;
             }
