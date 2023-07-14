@@ -9,6 +9,7 @@ var AddCircleProperties = function (gameObject) {
     var circleColor,
         circleThickness = 8,
         circleBackgroundColor = 0x000000,
+        circleBackgroundAlpha = 0.4,
         circleScale = 1,
         circleFeather = 0.005;
     Object.defineProperty(gameObject, 'circleColor', {
@@ -30,6 +31,7 @@ var AddCircleProperties = function (gameObject) {
             } else {
                 if (!gameObject._circle) {
                     gameObject._circle = gameObject.preFX.addCircle(circleThickness, circleColor, circleBackgroundColor, circleScale, circleFeather);
+                    gameObject.circleBackgroundAlpha = circleBackgroundAlpha;
                 }
 
                 gameObject._circle.color = circleColor;
@@ -71,6 +73,24 @@ var AddCircleProperties = function (gameObject) {
             }
         },
     })
+
+    Object.defineProperty(gameObject, 'circleBackgroundAlpha', {
+        get: function () {
+            return circleBackgroundAlpha;
+        },
+        set: function (value) {
+            if (circleBackgroundAlpha === value) {
+                return;
+            }
+
+            circleBackgroundAlpha = value;
+
+            if (gameObject._circle) {
+                gameObject._circle.glcolor2[3] = circleBackgroundAlpha;
+            }
+        },
+    })
+
 
     Object.defineProperty(gameObject, 'circleScale', {
         get: function () {

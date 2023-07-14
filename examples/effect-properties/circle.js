@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
         this.plugins.get('rexEffectProperties').add(image);
 
         image.circleColor = 0xFF6347;
+        image.circleBackgroundAlpha = 0;
         //image.circleScale = 0.5;
 
     }
@@ -34,7 +35,7 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    backgroundColor: 0x333333,
+    backgroundColor: 0x888888,
     plugins: {
         global: [{
             key: 'rexEffectProperties',
