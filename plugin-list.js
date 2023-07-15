@@ -90,6 +90,7 @@ module.exports = {
     'tintrgbplugin': './plugins/tintrgb-plugin.js',
     'polarcoordinateplugin': './plugins/polarcoordinate-plugin.js',
     'viewportcoordinateplugin': './plugins/viewportcoordinate-plugin.js',
+    'effectpropertiesplugin': './plugins/effectproperties-plugin.js',
     'shakepositionplugin': './plugins/shakeposition-plugin.js',
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',
