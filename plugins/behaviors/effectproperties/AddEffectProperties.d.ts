@@ -9,7 +9,9 @@ import AddCircleProperties from './AddCircleProperties';
 import AddContrastProperties from './colormatrix/AddContrastProperties';
 import AddDesaturateProperties from './colormatrix/AddDesaturateProperties';
 import AddDesaturateLuminanceProperties from './colormatrix/AddDesaturateLuminanceProperties';
+import AddDisplacementProperties from './AddDisplacementProperties';
 import AddGlowProperties from './AddGlowProperties';
+import AddGradientProperties from './AddGradientProperties';
 import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties';
 import AddHueProperties from './colormatrix/AddHueProperties';
 import AddKodachromeProperties from './colormatrix/AddKodachromeProperties';
@@ -44,7 +46,9 @@ declare namespace AddEffectProperties {
         contrast?: boolean,
         desaturate?: boolean,
         desaturateLuminance?: boolean,
+        displacement?: boolean,
         glow?: boolean,
+        gradient?: boolean,
         grayscale?: boolean,
         hue?: boolean,
         kodachrome?: boolean,
@@ -76,7 +80,9 @@ declare namespace AddEffectProperties {
         AddContrastProperties.ContrastGameObject,
         AddDesaturateProperties.DesaturateGameObject,
         AddDesaturateLuminanceProperties.DesaturateLuminanceGameObject,
+        AddDisplacementProperties.DisplacementGameObject,
         AddGlowProperties.GlowGameObject,
+        AddGradientProperties.GradientGameObject,
         AddGrayscaleProperties.GrayscaleGameObject,
         AddHueProperties.HueGameObject,
         AddKodachromeProperties.KodachromeGameObject,

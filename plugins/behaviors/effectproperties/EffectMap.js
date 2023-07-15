@@ -9,7 +9,9 @@ import AddCircleProperties from './AddCircleProperties.js';
 import AddContrastProperties from './colormatrix/AddContrastProperties.js';
 import AddDesaturateProperties from './colormatrix/AddDesaturateProperties.js';
 import AddDesaturateLuminanceProperties from './colormatrix/AdddesaturateLuminanceProperties.js';
+import AddDisplacementProperties from './AddDisplacementProperties.js';
 import AddGlowProperties from './AddGlowProperties.js';
+import AddGradientProperties from './AddGradientProperties.js';
 import AddGrayscaleProperties from './colormatrix/AddGrayscaleProperties.js';
 import AddHueProperties from './colormatrix/AddHueProperties.js';
 import AddKodachromeProperties from './colormatrix/AddKodachromeProperties.js';
@@ -41,7 +43,9 @@ const EffectMap = {
     contrast: AddContrastProperties,
     desaturate: AddDesaturateProperties,
     desaturateLuminance: AddDesaturateLuminanceProperties,
+    displacement: AddDisplacementProperties,
     glow: AddGlowProperties,
+    gradient: AddGradientProperties,
     grayscale: AddGrayscaleProperties,
     hue: AddHueProperties,
     kodachrome: AddKodachromeProperties,
