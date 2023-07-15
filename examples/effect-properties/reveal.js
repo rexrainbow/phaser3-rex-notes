@@ -16,17 +16,51 @@ class Demo extends Phaser.Scene {
         var image = this.add.image(400, 300, 'logo');
         this.plugins.get('rexEffectProperties').add(image);
 
+        var tweenTask;
         var direction = 0;
         this.input.on('pointerdown', function () {
+            if (tweenTask) {
+                tweenTask.stop();
+                tweenTask = undefined;
+            }
+
             switch (direction) {
-                case 1: image.revealDown = 0.3; break;
-                case 2: image.revealRight = 0.3; break;
-                case 3: image.revealUp = 0.3; break;
-                default: image.revealLeft = 0.3; break;
+                case 1:
+                    image.revealDown = 0;
+                    tweenTask = this.tweens.add({
+                        targets: image,
+                        revealDown: 1
+                    })
+                    break;
+
+                case 2:
+                    image.revealRight = 0;
+                    tweenTask = this.tweens.add({
+                        targets: image,
+                        revealRight: 1
+                    })
+                    break;
+
+                case 3:
+                    image.revealUp = 0;
+                    tweenTask = this.tweens.add({
+                        targets: image,
+                        revealUp: 1
+                    })
+                    break;
+
+                default:
+                    image.revealLeft = 0;
+                    tweenTask = this.tweens.add({
+                        targets: image,
+                        revealLeft: 1
+                    })
+                    break;
+
             }
 
             direction = (direction + 1) % 4;
-        })
+        }, this)
 
 
     }
