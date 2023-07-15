@@ -2,6 +2,7 @@ import AddBarrelProperties from './AddBarrelProperties.js';
 import AddBlackWhiteProperties from './colormatrix/AddBlackWhiteProperties.js';
 import AddBloomProperties from './AddBloomProperties.js';
 import AddBlurProperties from './AddBlurProperties.js';
+import AddBokehProperties from './AddBokehProperties.js';
 import AddBrightnessProperties from './colormatrix/AddBrightnessProperties.js';
 import AddBrownProperties from './colormatrix/AddBrownProperties.js';
 import AddCircleProperties from './AddCircleProperties.js';
@@ -14,6 +15,7 @@ import AddHueProperties from './colormatrix/AddHueProperties.js';
 import AddKodachromeProperties from './colormatrix/AddKodachromeProperties.js';
 import AddLSDProperties from './colormatrix/AddLSDProperties.js';
 import AddNegativeProperties from './colormatrix/AddNegativeProperties.js';
+import AddPixelateProperties from './AddPixelateProperties.js';
 import AddPolaroidProperties from './colormatrix/AddPolaroidProperties.js';
 import AddRevealProperties from './AddRevealProperties.js';
 import AddSaturateProperties from './colormatrix/AddSaturateProperties.js';
@@ -22,6 +24,7 @@ import AddShadowProperties from './AddShadowProperties.js';
 import AddShiftToBGRProperties from './colormatrix/AddShiftToBGRProperties.js';
 import AddShineProperties from './AddShineProperties.js';
 import AddTechnicolorProperties from './colormatrix/AddTechnicolorProperties.js';
+import AddTiltShiftProperties from './AddTiltShiftProperties.js';
 import AddVignetteProperties from './AddVignetteProperties.js';
 import AddVintagePinholeProperties from './colormatrix/AddVintagePinholeProperties.js';
 import AddWipeProperties from './AddWipeProperties.js';
@@ -31,6 +34,7 @@ const EffectMap = {
     blackWhite: AddBlackWhiteProperties,
     bloom: AddBloomProperties,
     blur: AddBlurProperties,
+    bokeh: AddBokehProperties,
     brightness: AddBrightnessProperties,
     brown: AddBrownProperties,
     circle: AddCircleProperties,
@@ -43,6 +47,7 @@ const EffectMap = {
     kodachrome: AddKodachromeProperties,
     lsd: AddLSDProperties,
     negative: AddNegativeProperties,
+    pixelate: AddPixelateProperties,
     polaroid: AddPolaroidProperties,
     reveal: AddRevealProperties,
     saturate: AddSaturateProperties,
@@ -51,6 +56,7 @@ const EffectMap = {
     shiftToBGR: AddShiftToBGRProperties,
     shine: AddShineProperties,
     technicolor: AddTechnicolorProperties,
+    tiltShift: AddTiltShiftProperties,
     vignette: AddVignetteProperties,
     vintagePinhole: AddVintagePinholeProperties,
     wipe: AddWipeProperties

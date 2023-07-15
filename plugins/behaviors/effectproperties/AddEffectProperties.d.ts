@@ -2,6 +2,7 @@ import AddBarrelProperties from './AddBarrelProperties';
 import AddBlackWhiteProperties from './colormatrix/AddBlackWhiteProperties';
 import AddBloomProperties from './AddBloomProperties';
 import AddBlurProperties from './AddBlurProperties';
+import AddBokehProperties from './AddBokehProperties';
 import AddBrightnessProperties from './colormatrix/AddBrightnessProperties';
 import AddBrownProperties from './colormatrix/AddBrownProperties';
 import AddCircleProperties from './AddCircleProperties';
@@ -14,6 +15,7 @@ import AddHueProperties from './colormatrix/AddHueProperties';
 import AddKodachromeProperties from './colormatrix/AddKodachromeProperties';
 import AddLSDProperties from './colormatrix/AddLSDProperties';
 import AddNegativeProperties from './colormatrix/AddNegativeProperties';
+import AddPixelateProperties from './AddPixelateProperties';
 import AddPolaroidProperties from './colormatrix/AddPolaroidProperties';
 import AddRevealProperties from './AddRevealProperties';
 import AddSaturateProperties from './colormatrix/AddSaturateProperties';
@@ -22,6 +24,7 @@ import AddShadowProperties from './AddShadowProperties';
 import AddShiftToBGRProperties from './colormatrix/AddShiftToBGRProperties';
 import AddShineProperties from './AddShineProperties';
 import AddTechnicolorProperties from './colormatrix/AddTechnicolorProperties';
+import AddTiltShiftProperties from './AddTiltShiftProperties';
 import AddVignetteProperties from './AddVignetteProperties';
 import AddVintagePinholeProperties from './colormatrix/AddVintagePinholeProperties';
 import AddWipeProperties from './AddWipeProperties';
@@ -34,6 +37,7 @@ declare namespace AddEffectProperties {
         blackWhite?: boolean,
         bloom?: boolean,
         blur?: boolean,
+        bokeh?: boolean,
         brightness?: boolean,
         brown?: boolean,
         circle?: boolean,
@@ -45,7 +49,8 @@ declare namespace AddEffectProperties {
         hue?: boolean,
         kodachrome?: boolean,
         lsd?: boolean,
-        negative?: bigint,
+        negative?: boolean,
+        pixelate?: boolean,
         polaroid?: boolean,
         reveal?: boolean,
         saturate?: boolean,
@@ -54,6 +59,7 @@ declare namespace AddEffectProperties {
         shiftToBGR?: boolean,
         shine?: boolean,
         technicolor?: boolean,
+        tiltShift?: boolean,
         vignette?: boolean,
         vintagePinhole?: boolean,
         wipe?: boolean,
@@ -63,6 +69,7 @@ declare namespace AddEffectProperties {
         AddBlackWhiteProperties.BlackWhiteGameObject,
         AddBloomProperties.BloomGameObject,
         AddBlurProperties.BlurGameObject,
+        AddBokehProperties.BokehGameObject,
         AddBrightnessProperties.BrightnessGameObject,
         AddBrownProperties.BrownGameObject,
         AddCircleProperties.CircleGameObject,
@@ -75,6 +82,7 @@ declare namespace AddEffectProperties {
         AddKodachromeProperties.KodachromeGameObject,
         AddLSDProperties.LSDGameObject,
         AddNegativeProperties.NegativeGameObject,
+        AddPixelateProperties.PixelateGameObject,
         AddPolaroidProperties.PolaroidGameObject,
         AddRevealProperties.RevealGameObject,
         AddSaturateProperties.SaturateGameObject,
@@ -83,6 +91,7 @@ declare namespace AddEffectProperties {
         AddShiftToBGRProperties.ShiftToBGRGameObject,
         AddShineProperties.ShineGameObject,
         AddTechnicolorProperties.TechnicolorGameObject,
+        AddTiltShiftProperties.TiltShiftGameObject,
         AddVignetteProperties.VignetteGameObject,
         AddVintagePinholeProperties.VintagePinholeGameObject,
         AddWipeProperties.WipeGameObject { }

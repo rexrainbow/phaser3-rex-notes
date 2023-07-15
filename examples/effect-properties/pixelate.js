@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         var image = this.add.image(400, 300, 'logo');
         this.plugins.get('rexEffectProperties').add(image);
 
-        image.shineSpeed = 1;
+        image.pixelate = 5;
     }
 
     update() { }
