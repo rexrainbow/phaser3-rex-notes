@@ -10,20 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/easemove/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/effect-properties/">
       
       
-        <link rel="prev" href="../moveto/">
+        <link rel="prev" href="../flash/">
       
       
-        <link rel="next" href="../shake-position/">
+        <link rel="next" href="../tintrgb/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Ease-move - Notes of Phaser 3</title>
+        <title>Effect properties - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ease-move
+              Effect properties
             
           </span>
         </div>
@@ -2931,16 +2931,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_2" >
       
       
       
@@ -2949,7 +2947,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_14_2">
           <span class="md-nav__icon md-icon"></span>
           Position
@@ -2974,116 +2972,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ease-move
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../easemove/" class="md-nav__link">
         Ease-move
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-method" class="md-nav__link">
-    Import method
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-to" class="md-nav__link">
-    Move to
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-from" class="md-nav__link">
-    Move from
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3170,14 +3063,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_6" checked>
       
       
       
@@ -3186,7 +3081,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_6_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_6_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_14_6">
           <span class="md-nav__icon md-icon"></span>
           Color
@@ -3197,11 +3092,346 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../effect-properties/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Effect properties
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Effect properties
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-method" class="md-nav__link">
+    Import method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attach-properties" class="md-nav__link">
+    Attach properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#effect-properties" class="md-nav__link">
+    Effect properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Effect properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#barrel" class="md-nav__link">
+    Barrel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blackwhite" class="md-nav__link">
+    BlackWhite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloom" class="md-nav__link">
+    Bloom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blur" class="md-nav__link">
+    Blur
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bokeh" class="md-nav__link">
+    Bokeh
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brightness" class="md-nav__link">
+    Brightness
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brown" class="md-nav__link">
+    Brown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrast" class="md-nav__link">
+    Contrast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desaturate" class="md-nav__link">
+    Desaturate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desaturateluminance" class="md-nav__link">
+    DesaturateLuminance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displacement" class="md-nav__link">
+    Displacement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glow" class="md-nav__link">
+    Glow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient" class="md-nav__link">
+    Gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grayscale" class="md-nav__link">
+    Grayscale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hue" class="md-nav__link">
+    Hue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kodachrome" class="md-nav__link">
+    Kodachrome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsd" class="md-nav__link">
+    Lsd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negative" class="md-nav__link">
+    Negative
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pixelate" class="md-nav__link">
+    Pixelate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polaroid" class="md-nav__link">
+    Polaroid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reveal" class="md-nav__link">
+    Reveal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saturate" class="md-nav__link">
+    Saturate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sepia" class="md-nav__link">
+    Sepia
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shadow" class="md-nav__link">
+    Shadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shifttobgr" class="md-nav__link">
+    ShiftToBGR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shine" class="md-nav__link">
+    Shine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technicolor" class="md-nav__link">
+    Technicolor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tiltshift" class="md-nav__link">
+    TiltShift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vignette" class="md-nav__link">
+    Vignette
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vintagepinhole" class="md-nav__link">
+    VintagePinhole
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wipe" class="md-nav__link">
+    Wipe
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -9355,6 +9585,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9397,22 +9634,245 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-to" class="md-nav__link">
-    Move to
+  <a href="#attach-properties" class="md-nav__link">
+    Attach properties
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-from" class="md-nav__link">
-    Move from
+  <a href="#effect-properties" class="md-nav__link">
+    Effect properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Effect properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#barrel" class="md-nav__link">
+    Barrel
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
+  <a href="#blackwhite" class="md-nav__link">
+    BlackWhite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloom" class="md-nav__link">
+    Bloom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blur" class="md-nav__link">
+    Blur
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bokeh" class="md-nav__link">
+    Bokeh
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brightness" class="md-nav__link">
+    Brightness
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brown" class="md-nav__link">
+    Brown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrast" class="md-nav__link">
+    Contrast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desaturate" class="md-nav__link">
+    Desaturate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desaturateluminance" class="md-nav__link">
+    DesaturateLuminance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displacement" class="md-nav__link">
+    Displacement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glow" class="md-nav__link">
+    Glow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient" class="md-nav__link">
+    Gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grayscale" class="md-nav__link">
+    Grayscale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hue" class="md-nav__link">
+    Hue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kodachrome" class="md-nav__link">
+    Kodachrome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsd" class="md-nav__link">
+    Lsd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negative" class="md-nav__link">
+    Negative
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pixelate" class="md-nav__link">
+    Pixelate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polaroid" class="md-nav__link">
+    Polaroid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reveal" class="md-nav__link">
+    Reveal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saturate" class="md-nav__link">
+    Saturate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sepia" class="md-nav__link">
+    Sepia
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shadow" class="md-nav__link">
+    Shadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shifttobgr" class="md-nav__link">
+    ShiftToBGR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shine" class="md-nav__link">
+    Shine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technicolor" class="md-nav__link">
+    Technicolor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tiltshift" class="md-nav__link">
+    TiltShift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vignette" class="md-nav__link">
+    Vignette
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vintagepinhole" class="md-nav__link">
+    VintagePinhole
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wipe" class="md-nav__link">
+    Wipe
   </a>
   
 </li>
@@ -9440,25 +9900,34 @@
   
 
 
-  <h1>Ease-move</h1>
+  <h1>Effect properties</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Ease-move game object.</p>
+<p>Attach properties to a game object, to enable/disable/control <a href="../shader-builtin/">builtin preFX or postFX effects</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Method only</li>
+<li>Pre-fx, and Post-fx shader effects</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">WebGL only</p>
+<p>Only work in WebGL render mode.</p>
+</div>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/JjeLYQb">Color effects</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/MWzVKEK">Reveal</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/easemove/">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/effect-properties">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexeasemoveplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeasemoveplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexeffectpropertiesplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeffectpropertiesplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Ease-move to/from
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexeasemoveplugin&#39;</span><span class="p">).</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexeasemoveplugin&#39;</span><span class="p">).</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
+<li>Attach properties.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexeffectpropertiesplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9467,13 +9936,13 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">EaseMovePlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/easemove-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">EffectPropertiesPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/effectproperties-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexEaseMove&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">EaseMovePlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">EffectPropertiesPlugin</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
@@ -9483,9 +9952,8 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Ease-move to/from
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseMove&#39;</span><span class="p">).</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseMove&#39;</span><span class="p">).</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
+<li>Attach properties.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-method">Import method<a class="headerlink" href="#import-method" title="Permanent link">&para;</a></h4>
@@ -9494,51 +9962,394 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import method
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">EaseMoveTo</span><span class="p">,</span><span class="w"> </span><span class="nx">EaseMoveFrom</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/easemove.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">AddEffectPropertiesProperties</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/effectproperties.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>EaseMove-out-destroy
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">EaseMoveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">EaseMoveFrom</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
+<li>Attach properties.
+    <div class="highlight"><pre><span></span><code><span class="nx">AddEffectPropertiesProperties</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="move-to">Move to<a class="headerlink" href="#move-to" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseMove&#39;</span><span class="p">).</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// var easemove = scene.plugins.get(&#39;rexEaseMove&#39;).moveTo(gameObject, duration, x, y, ease);</span>
-<span class="c1">// easemove = scene.plugins.get(&#39;rexEaseMove&#39;).moveTo(gameObject, duration, x, y, ease, easemove);</span>
-</code></pre></div>
+<h3 id="attach-properties">Attach properties<a class="headerlink" href="#attach-properties" title="Permanent link">&para;</a></h3>
+<p>Supported effects are <code>barrel</code>, <code>blackWhite</code>, <code>bloom</code>, <code>blur</code>, <code>bokeh</code>, <code>brightness</code>, <code>brown</code>,
+<code>circle</code>, <code>contrast</code>,  <code>desaturate</code>, <code>desaturateLuminance</code>, <code>displacement</code>, 
+<code>glow</code>, <code>gradient</code>, <code>grayscale</code>, <code>hue</code>, <code>kodachrome</code>, <code>lsd</code>, <code>negative</code>, <code>pixelate</code>, <code>polaroid</code>, 
+<code>reveal</code>, <code>saturate</code>, <code>sepia</code>, <code>shadow</code>, <code>shiftToBGR</code>, <code>shine</code>, <code>technicolor</code>, <code>tiltShift</code>, 
+<code>vignette</code>, <code>vintagePinhole</code>, <code>wipe</code>.</p>
 <ul>
-<li><code>x</code>, <code>y</code> : End position.<ul>
-<li>Number : End position x/y.</li>
-<li>String(<code>+=300</code>) : Related position of current position x/y.</li>
-<li><code>undefined</code> : Don't move along x/y axis.</li>
+<li>Attatch properties of all effects.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Attatch properties of some preFX/postFX effects.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">barrel</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">blackWhite</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bloom</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bokeh</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brightness</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brown</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">circle</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">contrast</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">desaturate</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">desaturateLuminance</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">displacement</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">glow</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">gradient</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">grayscale</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">hue</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">kodachrome</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">lsd</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">negative</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">pixelate</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">polaroid</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">reveal</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">saturate</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">sepia</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shiftToBGR</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shine</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">technicolor</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tiltShift</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">vignette</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">vintagePinhole</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">wipe</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s1">&#39;barrel&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blackWhite&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bloom&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bokeh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brightness&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brown&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;circle&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;contrast&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;desaturate&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;desaturateLuminance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;displacement&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;glow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gradient&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;grayscale&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hue&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;kodachrome&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;lsd&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;negative&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;pixelate&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;polaroid&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;reveal&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;saturate&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sepia&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;shadow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;shiftToBGR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;shine&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;technicolor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tiltShift&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;vignette&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;vintagePinhole&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;wipe&#39;</span>
+<span class="p">]);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">effectName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>A plain object with effect names.</li>
+<li>A list of effect name string.</li>
+<li>A effect name string.</li>
 </ul>
 </li>
-<li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
-<li><code>easemove</code> : Ease-move behavior.</li>
 </ul>
-<h3 id="move-from">Move from<a class="headerlink" href="#move-from" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">easemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseMove&#39;</span><span class="p">).</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// var easemove = scene.plugins.get(&#39;rexEaseMove&#39;).moveFrom(gameObject, duration, x, y, ease);</span>
-<span class="c1">// easemove = scene.plugins.get(&#39;rexEaseMove&#39;).moveFrom(gameObject, duration, x, y, ease, easemove);</span>
-</code></pre></div>
+<h3 id="effect-properties">Effect properties<a class="headerlink" href="#effect-properties" title="Permanent link">&para;</a></h3>
+<p>Will try to create preFX effect if gameObject has preFX, otherwise, try to create postFX effect.</p>
+<h4 id="barrel"><a href="../shader-builtin/#barrel">Barrel</a><a class="headerlink" href="#barrel" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>x</code>, <code>y</code> : Start position.<ul>
-<li>Number : Start position x/y.</li>
-<li>String(<code>-=300</code>) : Related position of current position x/y.</li>
-<li><code>undefined</code> : Don't move along x/y axis.</li>
+<li><code>barrel</code> : <ul>
+<li>A number : Enable this effect and set intensity of barrel (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
 </ul>
 </li>
-<li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
-<li><code>easemove</code> : Ease-move behavior.</li>
 </ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<p>See <a href="../tween/#events">Events of tween task</a></p>
+<h4 id="blackwhite"><a href="../shader-builtin/#colormatrix">BlackWhite</a><a class="headerlink" href="#blackwhite" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Move completes or is stopped.
-    <div class="highlight"><pre><span></span><code><span class="nx">easemove</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">easemove</span><span class="p">){</span>
-
-<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+<li><code>blackWhite</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h4 id="bloom"><a href="../shader-builtin/#bloom">Bloom</a><a class="headerlink" href="#bloom" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>bloomColor</code> : <ul>
+<li>A number : Enable this effect and set color of bloom (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>bloomOffsetX</code>, <code>bloomOffsetY</code>, <code>bloomBlurStrength</code>, <code>bloomStrength</code>, <code>bloomSteps</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h4 id="blur"><a href="../shader-builtin/#blur">Blur</a><a class="headerlink" href="#blur" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>blurColor</code> : <ul>
+<li>A number : Enable this effect and set color of blur (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>blurQuality</code>, <code>blurX</code>, <code>blurY</code>, <code>blurStrength</code>, <code>blurSteps</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h4 id="bokeh"><a href="../shader-builtin/#bokeh">Bokeh</a><a class="headerlink" href="#bokeh" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>bokehRadius</code> : <ul>
+<li>A number : Enable this effect and set radius of bokeh (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>bokehAmount</code>, <code>bokehContrast</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="brightness"><a href="../shader-builtin/#colormatrix">Brightness</a><a class="headerlink" href="#brightness" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>brightness</code> : <ul>
+<li>A number : Enable this effect and set brightness (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="brown"><a href="../shader-builtin/#colormatrix">Brown</a><a class="headerlink" href="#brown" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>brown</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="circle"><a href="../shader-builtin/#circle-outline">Circle</a><a class="headerlink" href="#circle" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>circleColor</code> : <ul>
+<li>A number : Enable this effect and set color of circle (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>circleThickness</code>, <code>circleBackgroundColor</code>, <code>circleBackgroundAlpha</code>, <code>circleScale</code>, <code>circleFeather</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="contrast"><a href="../shader-builtin/#colormatrix">Contrast</a><a class="headerlink" href="#contrast" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>contrast</code> : <ul>
+<li>A number : Enable this effect and set contrast (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="desaturate"><a href="../shader-builtin/#colormatrix">Desaturate</a><a class="headerlink" href="#desaturate" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>desaturate</code> : <ul>
+<li>A number : Enable this effect and set desaturate (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="desaturateluminance"><a href="../shader-builtin/#colormatrix">DesaturateLuminance</a><a class="headerlink" href="#desaturateluminance" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>desaturateLuminance</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="displacement"><a href="../shader-builtin/#displacement">Displacement</a><a class="headerlink" href="#displacement" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>displacementKey</code> : <ul>
+<li>A string : Enable this effect and set displacement reference texture.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>displacementX</code>, <code>displacementY</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="glow"><a href="../shader-builtin/#glow">Glow</a><a class="headerlink" href="#glow" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>glowColor</code> : <ul>
+<li>A number : Enable this effect and set color of glow (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>glowOuterStrength</code>, <code>glowInnerStrength</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="gradient"><a href="../shader-builtin/#gradient">Gradient</a><a class="headerlink" href="#gradient" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>gradientColor</code> : <ul>
+<li><code>[number, number]</code> : Enable this effect and set gradient color1 and gradient color2 (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>gradientAlpha</code>, <code>gradientFromX</code>, <code>gradientFromY</code>, <code>gradientToX</code>, <code>gradientToY</code>, <code>gradientSize</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="grayscale"><a href="../shader-builtin/#colormatrix">Grayscale</a><a class="headerlink" href="#grayscale" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>grayscale</code> : <ul>
+<li>A number : Enable this effect and set intensity of grayscale (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="hue"><a href="../shader-builtin/#colormatrix">Hue</a><a class="headerlink" href="#hue" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>hue</code> : <ul>
+<li>A number : Enable this effect and set hue rotation, in degrees.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="kodachrome"><a href="../shader-builtin/#colormatrix">Kodachrome</a><a class="headerlink" href="#kodachrome" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>kodachrome</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsd"><a href="../shader-builtin/#colormatrix">Lsd</a><a class="headerlink" href="#lsd" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>lsd</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="negative"><a href="../shader-builtin/#colormatrix">Negative</a><a class="headerlink" href="#negative" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>negative</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="pixelate"><a href="../shader-builtin/#pixelate">Pixelate</a><a class="headerlink" href="#pixelate" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>pixelate</code> : <ul>
+<li>A number : Enable this effect and set size of pixelate, in pixels.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="polaroid"><a href="../shader-builtin/#colormatrix">Polaroid</a><a class="headerlink" href="#polaroid" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>polaroid</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="reveal"><a href="../shader-builtin/#reveal">Reveal</a><a class="headerlink" href="#reveal" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>revealLeft</code>, <code>revealRight</code>, <code>revealUp</code>, or <code>revealDown</code> :<ul>
+<li>A number : Enable this effect with specific reveal direction and set progress (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>revealWidth</code> :<ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="saturate"><a href="../shader-builtin/#colormatrix">Saturate</a><a class="headerlink" href="#saturate" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>saturate</code> : <ul>
+<li>A number : Enable this effect and set saturate (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="sepia"><a href="../shader-builtin/#colormatrix">Sepia</a><a class="headerlink" href="#sepia" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>sepia</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="shadow"><a href="../shader-builtin/#shadow">Shadow</a><a class="headerlink" href="#shadow" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>shadowColor</code> : <ul>
+<li>A number : Enable this effect and set color of shadow (0xffffff).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>shadowX</code>, <code>shadowY</code>, <code>shadowDecay</code>, <code>shadowPower</code>, <code>shadowSamples</code>, <code>shadowIntensity</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="shifttobgr"><a href="../shader-builtin/#colormatrix">ShiftToBGR</a><a class="headerlink" href="#shifttobgr" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>shiftToBGR</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="shine"><a href="../shader-builtin/#shine">Shine</a><a class="headerlink" href="#shine" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>shineSpeed</code> : <ul>
+<li>A number : Enable this effect and set speed of shine, in seconds.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>shineLineWidth</code>, <code>shineGradient</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="technicolor"><a href="../shader-builtin/#colormatrix">Technicolor</a><a class="headerlink" href="#technicolor" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>technicolor</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="tiltshift"><a href="../shader-builtin/#tilt-shift">TiltShift</a><a class="headerlink" href="#tiltshift" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>tiltShiftRadius</code> : <ul>
+<li>A number : Enable this effect and set radius of tiltShift (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>tiltShiftAmount</code>, <code>tiltShiftContrast</code>, <code>tiltShiftBlurX</code>, <code>tiltShiftBlurY</code>, <code>tiltShiftStrength</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="vignette"><a href="../shader-builtin/#vignette">Vignette</a><a class="headerlink" href="#vignette" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>vignetteRadius</code> : <ul>
+<li>A number : Enable this effect and set radius of vignette (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>vignetteX</code>, <code>vignetteY</code>, <code>vignetteStrength</code> : <ul>
+<li>A number</li>
+</ul>
+</li>
+</ul>
+<h3 id="vintagepinhole"><a href="../shader-builtin/#colormatrix">VintagePinhole</a><a class="headerlink" href="#vintagepinhole" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>vintagePinhole</code> : <ul>
+<li><code>true</code>, or <code>1</code> : Enable this effect.</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h3 id="wipe"><a href="../shader-builtin/#wipe">Wipe</a><a class="headerlink" href="#wipe" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>wipeLeft</code>, <code>wipeRight</code>, <code>wipeUp</code>, or <code>wipeDown</code> :<ul>
+<li>A number : Enable this effect with specific wipe direction and set progress (0~1).</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>wipeWidth</code> :<ul>
+<li>A number</li>
+</ul>
+</li>
 </ul>
 
 
