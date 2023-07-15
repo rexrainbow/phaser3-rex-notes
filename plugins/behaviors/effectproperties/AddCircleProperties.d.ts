@@ -5,6 +5,7 @@ declare namespace AddCircleProperties {
         circleColor: number | null | false;
         circleThickness: number;
         circleBackgroundColor: number;
+        circleBackgroundAlpha: number;
         circleScale: number;
         circleFeather: number;
 

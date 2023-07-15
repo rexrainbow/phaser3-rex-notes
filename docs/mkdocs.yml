@@ -157,6 +157,7 @@ nav:
         - Rotate: rotate.md
         - Flash: flash.md
         - Color:
+            - Effect properties: effect-properties.md
             - TintRGB: tintrgb.md
         - Coordinate:
             - Polar-coordinate: polar-coordinate.md
