@@ -38,43 +38,55 @@ declare namespace AddEffectProperties {
         wipe?: boolean,
     }
 
-    interface EffectPropertiesGameObject extends
-        EffectProperties.AddBarrelProperties.BarrelGameObject,
-        EffectProperties.AddBlackWhiteProperties.BlackWhiteGameObject,
-        EffectProperties.AddBloomProperties.BloomGameObject,
-        EffectProperties.AddBlurProperties.BlurGameObject,
-        EffectProperties.AddBokehProperties.BokehGameObject,
-        EffectProperties.AddBrightnessProperties.BrightnessGameObject,
-        EffectProperties.AddBrownProperties.BrownGameObject,
-        EffectProperties.AddCircleProperties.CircleGameObject,
-        EffectProperties.AddContrastProperties.ContrastGameObject,
-        EffectProperties.AddDesaturateProperties.DesaturateGameObject,
-        EffectProperties.AddDesaturateLuminanceProperties.DesaturateLuminanceGameObject,
-        EffectProperties.AddDisplacementProperties.DisplacementGameObject,
-        EffectProperties.AddGlowProperties.GlowGameObject,
-        EffectProperties.AddGradientProperties.GradientGameObject,
-        EffectProperties.AddGrayscaleProperties.GrayscaleGameObject,
-        EffectProperties.AddHueProperties.HueGameObject,
-        EffectProperties.AddKodachromeProperties.KodachromeGameObject,
-        EffectProperties.AddLSDProperties.LSDGameObject,
-        EffectProperties.AddNegativeProperties.NegativeGameObject,
-        EffectProperties.AddPixelateProperties.PixelateGameObject,
-        EffectProperties.AddPolaroidProperties.PolaroidGameObject,
-        EffectProperties.AddRevealProperties.RevealGameObject,
-        EffectProperties.AddSaturateProperties.SaturateGameObject,
-        EffectProperties.AddSepiaProperties.SepiaGameObject,
-        EffectProperties.AddShadowProperties.ShadowGameObject,
-        EffectProperties.AddShiftToBGRProperties.ShiftToBGRGameObject,
-        EffectProperties.AddShineProperties.ShineGameObject,
-        EffectProperties.AddTechnicolorProperties.TechnicolorGameObject,
-        EffectProperties.AddTiltShiftProperties.TiltShiftGameObject,
-        EffectProperties.AddVignetteProperties.VignetteGameObject,
-        EffectProperties.AddVintagePinholeProperties.VintagePinholeGameObject,
-        EffectProperties.AddWipeProperties.WipeGameObject { }
+    interface EffectProperties extends
+        EffectProperties.AddBarrelProperties.Barrel,
+        EffectProperties.AddBlackWhiteProperties.BlackWhite,
+        EffectProperties.AddBloomProperties.Bloom,
+        EffectProperties.AddBlurProperties.Blur,
+        EffectProperties.AddBokehProperties.Bokeh,
+        EffectProperties.AddBrightnessProperties.Brightness,
+        EffectProperties.AddBrownProperties.Brown,
+        EffectProperties.AddCircleProperties.Circle,
+        EffectProperties.AddContrastProperties.Contrast,
+        EffectProperties.AddDesaturateProperties.Desaturate,
+        EffectProperties.AddDesaturateLuminanceProperties.DesaturateLuminance,
+        EffectProperties.AddDisplacementProperties.Displacement,
+        EffectProperties.AddGlowProperties.Glow,
+        EffectProperties.AddGradientProperties.Gradient,
+        EffectProperties.AddGrayscaleProperties.Grayscale,
+        EffectProperties.AddHueProperties.Hue,
+        EffectProperties.AddKodachromeProperties.Kodachrome,
+        EffectProperties.AddLSDProperties.LSD,
+        EffectProperties.AddNegativeProperties.Negative,
+        EffectProperties.AddPixelateProperties.Pixelate,
+        EffectProperties.AddPolaroidProperties.Polaroid,
+        EffectProperties.AddRevealProperties.Reveal,
+        EffectProperties.AddSaturateProperties.Saturate,
+        EffectProperties.AddSepiaProperties.Sepia,
+        EffectProperties.AddShadowProperties.Shadow,
+        EffectProperties.AddShiftToBGRProperties.ShiftToBGR,
+        EffectProperties.AddShineProperties.Shine,
+        EffectProperties.AddTechnicolorProperties.Technicolor,
+        EffectProperties.AddTiltShiftProperties.TiltShift,
+        EffectProperties.AddVignetteProperties.Vignette,
+        EffectProperties.AddVintagePinholeProperties.VintagePinhole,
+        EffectProperties.AddWipeProperties.Wipe { }
 
+    interface EffectPropertiesGameObject extends EffectProperties, Phaser.GameObjects.GameObject {
+    }
+
+    interface EffectPropertiesCamera extends EffectProperties, Phaser.Cameras.Scene2D.BaseCamera {
+    }
+
+    type ConfigType = true | IConfig | string | string[]
 }
 
 declare function AddEffectProperties(
     gameObject: Phaser.GameObjects.GameObject,
-    config?: true | AddEffectProperties.IConfig | string | string[]
+    config?: AddEffectProperties.ConfigType,
 ): AddEffectProperties.EffectPropertiesGameObject;
+
+declare function AddEffectProperties(
+    camera: Phaser.Cameras.Scene2D.BaseCamera,
+    config?: AddEffectProperties.ConfigType,
+): AddEffectProperties.EffectPropertiesCamera;

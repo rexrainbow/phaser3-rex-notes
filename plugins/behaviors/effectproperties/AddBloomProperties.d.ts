@@ -1,7 +1,7 @@
 export default AddBloomProperties;
 
 declare namespace AddBloomProperties {
-    interface BloomGameObject extends Phaser.GameObjects.GameObject {
+    interface Bloom {
         bloomColor: number | null | false;
         bloomOffsetX: number;
         bloomOffsetY: number;
@@ -9,8 +9,18 @@ declare namespace AddBloomProperties {
         bloomStrength: number;
         bloomSteps: number;
     }
+
+    interface BloomGameObject extends Bloom, Phaser.GameObjects.GameObject {
+    }
+
+    interface BloomCamera extends Bloom, Phaser.Cameras.Scene2D.BaseCamera {
+    }
 }
 
 declare function AddBloomProperties(
     gameObject: Phaser.GameObjects.GameObject
 ): AddBloomProperties.BloomGameObject;
+
+declare function AddBloomProperties(
+    camera: Phaser.Cameras.Scene2D.BaseCamera
+): AddBloomProperties.BloomCamera;

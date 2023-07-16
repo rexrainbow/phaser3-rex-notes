@@ -14,6 +14,7 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
 - [Color effects](https://codepen.io/rexrainbow/pen/JjeLYQb)
 - [Reveal](https://codepen.io/rexrainbow/pen/MWzVKEK)
 - [Interactive](https://codepen.io/rexrainbow/pen/LYXdxYP)
+- [Camera](https://codepen.io/rexrainbow/pen/zYMWENW)
 
 ## Usage
 
@@ -27,9 +28,12 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     ```javascript
     scene.load.plugin('rexeffectpropertiesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeffectpropertiesplugin.min.js', true);
     ```
-- Attach properties to a game object.
+- Attach properties to a game object/camera.
     ```javascript
     scene.plugins.get('rexeffectpropertiesplugin').add(gameObject);
+    ```
+    ```javascript
+    scene.plugins.get('rexeffectpropertiesplugin').add(camera);
     ```
 
 #### Import plugin
@@ -56,9 +60,12 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     };
     var game = new Phaser.Game(config);
     ```
-- Attach properties to a game object.
+- Attach properties to a game object/camera.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject);
+    ```
+    ```javascript
+    scene.plugins.get('rexEffectProperties').add(camera);
     ```
 
 #### Import method
@@ -71,9 +78,12 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     ```javascript
     import AddEffectPropertiesProperties from 'phaser3-rex-plugins/plugins/effectproperties.js';
     ```
-- Attach properties to a game object.
+- Attach properties to a game object/camera.
     ```javascript
     AddEffectPropertiesProperties(gameObject);
+    ```
+    ```javascript
+    AddEffectPropertiesProperties(camera);
     ```
 
 ### Attach properties
@@ -84,11 +94,14 @@ Supported effects are `barrel`, `blackWhite`, `bloom`, `blur`, `bokeh`, `brightn
 `reveal`, `saturate`, `sepia`, `shadow`, `shiftToBGR`, `shine`, `technicolor`, `tiltShift`, 
 `vignette`, `vintagePinhole`, `wipe`.
 
-- Attatch properties of all effects to a game object.
+- Attatch properties of all effects to a game object/camera.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject);
     ```
-- Attatch properties of some preFX/postFX effects to a game object.
+    ```javascript
+    scene.plugins.get('rexEffectProperties').add(camera);
+    ```
+- Attatch properties of some preFX/postFX effects to a game object/camera.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject, {
         barrel: true,

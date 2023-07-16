@@ -31,7 +31,7 @@ declare namespace GOManager {
             viewport?: Phaser.Geom.Rectangle
         }
 
-        effectProperties?: true | AddEffectProperties.IConfig | string | string[]
+        effectProperties?: AddEffectProperties.ConfigType
     }
 }
 
