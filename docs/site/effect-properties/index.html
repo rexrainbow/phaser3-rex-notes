@@ -9926,7 +9926,7 @@
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexeffectpropertiesplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeffectpropertiesplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Attach properties.
+<li>Attach properties to a game object.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexeffectpropertiesplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -9952,7 +9952,7 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Attach properties.
+<li>Attach properties to a game object.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -9964,7 +9964,7 @@
 <li>Import method
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">AddEffectPropertiesProperties</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/effectproperties.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Attach properties.
+<li>Attach properties to a game object.
     <div class="highlight"><pre><span></span><code><span class="nx">AddEffectPropertiesProperties</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -9975,10 +9975,10 @@
 <code>reveal</code>, <code>saturate</code>, <code>sepia</code>, <code>shadow</code>, <code>shiftToBGR</code>, <code>shine</code>, <code>technicolor</code>, <code>tiltShift</code>, 
 <code>vignette</code>, <code>vintagePinhole</code>, <code>wipe</code>.</p>
 <ul>
-<li>Attatch properties of all effects.
+<li>Attatch properties of all effects to a game object.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Attatch properties of some preFX/postFX effects.
+<li>Attatch properties of some preFX/postFX effects to a game object.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">barrel</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">blackWhite</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -10046,7 +10046,7 @@
 <h4 id="barrel"><a href="../shader-builtin/#barrel">Barrel</a><a class="headerlink" href="#barrel" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>barrel</code> : <ul>
-<li>A number : Enable this effect and set intensity of barrel (0~1).</li>
+<li>A number : Enable this effect and set intensity of barrel (1: origin).</li>
 <li><code>null</code> : Remove this effect</li>
 </ul>
 </li>

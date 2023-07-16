@@ -26,7 +26,7 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     ```javascript
     scene.load.plugin('rexeffectpropertiesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeffectpropertiesplugin.min.js', true);
     ```
-- Attach properties.
+- Attach properties to a game object.
     ```javascript
     scene.plugins.get('rexeffectpropertiesplugin').add(gameObject);
     ```
@@ -55,7 +55,7 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     };
     var game = new Phaser.Game(config);
     ```
-- Attach properties.
+- Attach properties to a game object.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject);
     ```
@@ -70,7 +70,7 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
     ```javascript
     import AddEffectPropertiesProperties from 'phaser3-rex-plugins/plugins/effectproperties.js';
     ```
-- Attach properties.
+- Attach properties to a game object.
     ```javascript
     AddEffectPropertiesProperties(gameObject);
     ```
@@ -83,11 +83,11 @@ Supported effects are `barrel`, `blackWhite`, `bloom`, `blur`, `bokeh`, `brightn
 `reveal`, `saturate`, `sepia`, `shadow`, `shiftToBGR`, `shine`, `technicolor`, `tiltShift`, 
 `vignette`, `vintagePinhole`, `wipe`.
 
-- Attatch properties of all effects.
+- Attatch properties of all effects to a game object.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject);
     ```
-- Attatch properties of some preFX/postFX effects.
+- Attatch properties of some preFX/postFX effects to a game object.
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject, {
         barrel: true,
@@ -158,7 +158,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 #### [Barrel](shader-builtin.md#barrel)
 
 - `barrel` : 
-    - A number : Enable this effect and set intensity of barrel (0~1).
+    - A number : Enable this effect and set intensity of barrel (1: origin).
     - `null` : Remove this effect
 
 #### [BlackWhite](shader-builtin.md#colormatrix)
