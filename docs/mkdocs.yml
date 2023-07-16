@@ -249,7 +249,9 @@ nav:
     - Tween task: tween.md
     - Timeline: tween-timeline.md
 - Shader effects:
-    - Built-in shader effects : shader-builtin.md
+    - Built-in shader effects:
+        - Effects : shader-builtin.md
+        - Effect properties: effect-properties.md
     - Post fx pipeline: postfx-pipeline.md    
     - Color:
         - Glow: shader-glowfilter.md

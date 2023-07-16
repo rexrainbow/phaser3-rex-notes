@@ -13,6 +13,7 @@ Attach properties to a game object, to enable/disable/control [builtin preFX or 
 
 - [Color effects](https://codepen.io/rexrainbow/pen/JjeLYQb)
 - [Reveal](https://codepen.io/rexrainbow/pen/MWzVKEK)
+- [Interactive](https://codepen.io/rexrainbow/pen/LYXdxYP)
 
 ## Usage
 
