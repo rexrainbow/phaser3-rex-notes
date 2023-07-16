@@ -1,5 +1,6 @@
 import AddTintRGBProperties from '../../../../behaviors/tintrgb/AddTintRGBProperties.js';
 import AddViewportCoordinateProperties from '../../../../behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import AddEffectProperties from '../../../../behaviors/effectproperties/AddEffectProperties.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 
@@ -30,6 +31,10 @@ export default {
 
         if (this.viewportCoordinateEnable) {
             AddViewportCoordinateProperties(gameObject, this.viewport);
+        }
+
+        if (this.effectPropertiesConfig) {
+            AddEffectProperties(gameObject, this.effectPropertiesConfig);
         }
 
         gameObject.once('destroy', function () {

@@ -62,6 +62,7 @@ class Demo extends Phaser.Scene {
 // Content
 [color=yellow]phaser3[/color]
 
+[sprite.dude.blackWhite=1]
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
 
@@ -109,7 +110,9 @@ class Demo extends Phaser.Scene {
                 },
 
                 sprites: {
-                    fade: { mode: 'revealUp', time: 500 }
+                    fade: { mode: 'revealUp', time: 500 },
+
+                    effectProperties: true,
                 }
 
             }

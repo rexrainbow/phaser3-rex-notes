@@ -1,4 +1,5 @@
 import BobBase from './bobbase/BobBase';
+import AddEffectProperties from '../../../effectproperties';
 
 export default GOManager;
 
@@ -29,6 +30,8 @@ declare namespace GOManager {
             enable?: boolean,
             viewport?: Phaser.Geom.Rectangle
         }
+
+        effectProperties?: true | AddEffectProperties.IConfig | string | string[]
     }
 }
 

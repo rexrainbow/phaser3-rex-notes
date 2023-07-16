@@ -34,6 +34,9 @@ class GOManager {
             this.setViewportCoordinateEnable(false);
         }
 
+        var effectPropertiesConfig = GetValue(config, 'effectProperties', false);
+        this.setEffectPropertiesConfig(effectPropertiesConfig);
+
         this.setSymbols(GetValue(config, 'symbols'));
 
         this.bobs = {};
@@ -82,6 +85,15 @@ class GOManager {
         }
 
         this.viewportCoordinateEnable = enable;
+        return this;
+    }
+
+    setEffectPropertiesConfig(config) {
+        if (config === undefined) {
+            config = true;
+        }
+
+        this.effectPropertiesConfig = config;
         return this;
     }
 
