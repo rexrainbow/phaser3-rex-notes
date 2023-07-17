@@ -55,7 +55,7 @@
 1. [Dynamic text](dynamictext.md): Control position, angle of each character drawn on a canvas.
 1. [Ease-data](easedata.md): Easing data value of game object's data-manager.
 1. [Ease-move](easemove.md): Ease-move game object.
-1. [Effect properties](effect-properties.md): Attach properties to a game object or camera, to enable/disable/control builtin preFX or postFX effects.
+1. [Effect properties](effect-properties.md): Attach properties to a game object or camera, to add/remove/control builtin preFX or postFX effects.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
 1. [Event promise](eventpromise.md): Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) of an event.
 1. [Expression parser](expression-parser.md): Parse expression string into function.

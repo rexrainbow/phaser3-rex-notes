@@ -1,6 +1,6 @@
 ## Introduction
 
-Attach properties to a game object or camera, to enable/disable/control [builtin preFX or postFX effects](shader-builtin.md).
+Attach properties to a game object or camera, to add/remove/control [builtin preFX or postFX effects](shader-builtin.md).
 
 - Author: Rex
 - Method only
