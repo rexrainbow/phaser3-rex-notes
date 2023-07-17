@@ -387,7 +387,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `wipeWidth` :
     - A number
 
-#### Clear all effects
+### Clear all effects
 
 ```javascript
 gameObject.clearAllEffects();

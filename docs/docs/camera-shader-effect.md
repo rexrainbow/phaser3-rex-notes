@@ -73,3 +73,7 @@ var pipelineInstance = camera.getPostPipeline(PostFxClass);
 - `pipelineInstance` : 
     - A pipeline instance
     - An array of pipeline instances
+
+### Add effect properties
+
+See [Add effect properties behavior](effect-properties.md)
