@@ -73,9 +73,11 @@ declare namespace AddEffectProperties {
         EffectProperties.AddWipeProperties.Wipe { }
 
     interface EffectPropertiesGameObject extends EffectProperties, Phaser.GameObjects.GameObject {
+        clearAllEffects: () => Phaser.GameObjects.GameObject;
     }
 
     interface EffectPropertiesCamera extends EffectProperties, Phaser.Cameras.Scene2D.BaseCamera {
+        clearAllEffects: () => Phaser.Cameras.Scene2D.BaseCamera;
     }
 
     type ConfigType = true | IConfig | string | string[]
