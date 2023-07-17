@@ -30,6 +30,8 @@ class Demo extends Phaser.Scene {
                     tweenTask = this.tweens.add({
                         targets: image,
                         revealDown: 1
+                    }).once('complete', function () {
+                        image.revealDown = null;
                     })
                     break;
 
@@ -38,6 +40,8 @@ class Demo extends Phaser.Scene {
                     tweenTask = this.tweens.add({
                         targets: image,
                         revealRight: 1
+                    }).once('complete', function () {
+                        image.revealRight = null;
                     })
                     break;
 
@@ -46,6 +50,8 @@ class Demo extends Phaser.Scene {
                     tweenTask = this.tweens.add({
                         targets: image,
                         revealUp: 1
+                    }).once('complete', function () {
+                        image.revealUp = null;
                     })
                     break;
 
@@ -54,6 +60,8 @@ class Demo extends Phaser.Scene {
                     tweenTask = this.tweens.add({
                         targets: image,
                         revealLeft: 1
+                    }).once('complete', function () {
+                        image.revealLeft = null;
                     })
                     break;
 
