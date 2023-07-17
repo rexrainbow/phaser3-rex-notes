@@ -156,6 +156,9 @@ Set new state without triggering any [state-changing](fsm.md#state-changing) cal
 states.start(newState);
 ```
 
+!!! note
+    Won't fire any [state-changing](fsm.md#state-changing) callbacks or events.
+
 ### Next state
 
 ```mermaid

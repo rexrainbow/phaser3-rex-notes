@@ -9,6 +9,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 
 - [Text edit](https://codepen.io/rexrainbow/pen/dyezeQN)
 - [Edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
+- [Text area](https://codepen.io/rexrainbow/pen/eYQMwYj)
 - [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
 - [With rexui-Label](https://codepen.io/rexrainbow/pen/YbvwBw)
 
