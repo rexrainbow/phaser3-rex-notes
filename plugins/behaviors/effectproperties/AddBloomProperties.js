@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBloomProperties = function (gameObject) {
     // Don't attach properties again
@@ -137,6 +138,8 @@ var AddBloomProperties = function (gameObject) {
     })
 
     gameObject.bloomColor = null;
+
+    AddClearEffectCallback(gameObject, 'bloomColor');
 
     return gameObject;
 }

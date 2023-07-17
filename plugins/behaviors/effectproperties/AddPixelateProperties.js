@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddPixelateProperties = function (gameObject) {
     // Don't attach properties again
@@ -40,6 +41,8 @@ var AddPixelateProperties = function (gameObject) {
     })
 
     gameObject.pixelate = null;
+
+    AddClearEffectCallback(gameObject, 'pixelate');
 
     return gameObject;
 }

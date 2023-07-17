@@ -1,6 +1,6 @@
 ## Introduction
 
-Attach properties to a game object, to enable/disable/control [builtin preFX or postFX effects](shader-builtin.md).
+Attach properties to a game object or camera, to enable/disable/control [builtin preFX or postFX effects](shader-builtin.md).
 
 - Author: Rex
 - Method only
@@ -386,3 +386,9 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `null` : Remove this effect
 - `wipeWidth` :
     - A number
+
+#### Clear all effects
+
+```javascript
+gameObject.clearAllEffects();
+```

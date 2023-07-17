@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddDisplacementProperties = function (gameObject) {
     // Don't attach properties again
@@ -77,6 +78,8 @@ var AddDisplacementProperties = function (gameObject) {
     })
 
     gameObject.displacementKey = null;
+
+    AddClearEffectCallback(gameObject, 'displacementKey');
 
     return gameObject;
 }

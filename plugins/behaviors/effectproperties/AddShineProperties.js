@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddShineProperties = function (gameObject) {
     // Don't attach properties again
@@ -77,6 +78,8 @@ var AddShineProperties = function (gameObject) {
     })
 
     gameObject.shineSpeed = null;
+
+    AddClearEffectCallback(gameObject, 'shineSpeed');
 
     return gameObject;
 }

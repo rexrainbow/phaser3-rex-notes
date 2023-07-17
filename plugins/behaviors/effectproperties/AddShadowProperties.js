@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddShadowProperties = function (gameObject) {
     // Don't attach properties again
@@ -149,6 +150,8 @@ var AddShadowProperties = function (gameObject) {
     })
 
     gameObject.shadowColor = null;
+
+    AddClearEffectCallback(gameObject, 'shadowColor');
 
     return gameObject;
 }

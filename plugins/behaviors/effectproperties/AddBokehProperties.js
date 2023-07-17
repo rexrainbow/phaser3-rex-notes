@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBokehProperties = function (gameObject) {
     // Don't attach properties again
@@ -77,6 +78,8 @@ var AddBokehProperties = function (gameObject) {
     })
 
     gameObject.bokehRadius = null;
+
+    AddClearEffectCallback(gameObject, 'bokehRadius');
 
     return gameObject;
 }

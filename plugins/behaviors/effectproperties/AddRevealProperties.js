@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddRevealProperties = function (gameObject) {
     // Don't attach properties again
@@ -159,6 +160,11 @@ var AddRevealProperties = function (gameObject) {
     })
 
     gameObject.revealLeft = null;
+
+    AddClearEffectCallback(gameObject, 'revealLeft');
+    AddClearEffectCallback(gameObject, 'revealRight');
+    AddClearEffectCallback(gameObject, 'revealUp');
+    AddClearEffectCallback(gameObject, 'revealDown');
 
     return gameObject;
 }

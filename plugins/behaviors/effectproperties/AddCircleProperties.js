@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddCircleProperties = function (gameObject) {
     // Don't attach properties again
@@ -133,6 +134,8 @@ var AddCircleProperties = function (gameObject) {
     })
 
     gameObject.circleColor = null;
+
+    AddClearEffectCallback(gameObject, 'circleColor');
 
     return gameObject;
 }

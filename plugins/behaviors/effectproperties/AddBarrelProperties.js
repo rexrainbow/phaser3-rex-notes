@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBarrelProperties = function (gameObject) {
     // Don't attach properties again
@@ -40,6 +41,8 @@ var AddBarrelProperties = function (gameObject) {
     })
 
     gameObject.barrel = null;
+
+    AddClearEffectCallback(gameObject, 'barrel');
 
     return gameObject;
 }

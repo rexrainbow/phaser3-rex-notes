@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddWipeProperties = function (gameObject) {
     // Don't attach properties again
@@ -159,6 +160,11 @@ var AddWipeProperties = function (gameObject) {
     })
 
     gameObject.wipeLeft = null;
+
+    AddClearEffectCallback(gameObject, 'wipeLeft');
+    AddClearEffectCallback(gameObject, 'wipeRight');
+    AddClearEffectCallback(gameObject, 'wipeUp');
+    AddClearEffectCallback(gameObject, 'wipeDown');
 
     return gameObject;
 }

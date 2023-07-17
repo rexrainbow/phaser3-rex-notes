@@ -135,6 +135,21 @@
     return null;
   };
 
+  var AddClearEffectCallback = function AddClearEffectCallback(gameObject, effectSwitchName) {
+    if (!gameObject._effectSwitchNames) {
+      gameObject._effectSwitchNames = [];
+      gameObject.clearAllEffects = function () {
+        var effectSwitchNames = gameObject._effectSwitchNames;
+        for (var i = 0, cnt = effectSwitchNames.length; i < cnt; i++) {
+          gameObject[effectSwitchNames[i]] = null;
+        }
+        return gameObject;
+      };
+      gameObject.on('destroy', gameObject.clearAllEffects, gameObject);
+    }
+    gameObject._effectSwitchNames.push(effectSwitchName);
+  };
+
   var AddBarrelProperties = function AddBarrelProperties(gameObject) {
     // Don't attach properties again
     if (HasProperty(gameObject, 'barrel')) {
@@ -168,6 +183,7 @@
       }
     });
     gameObject.barrel = null;
+    AddClearEffectCallback(gameObject, 'barrel');
     return gameObject;
   };
 
@@ -206,6 +222,7 @@
       }
     });
     gameObject[effectName] = null;
+    AddClearEffectCallback(gameObject, effectName);
     return gameObject;
   };
 
@@ -328,6 +345,7 @@
       }
     });
     gameObject.bloomColor = null;
+    AddClearEffectCallback(gameObject, 'bloomColor');
     return gameObject;
   };
 
@@ -445,6 +463,7 @@
       }
     });
     gameObject.blurColor = null;
+    AddClearEffectCallback(gameObject, 'blurColor');
     return gameObject;
   };
 
@@ -511,6 +530,7 @@
       }
     });
     gameObject.bokehRadius = null;
+    AddClearEffectCallback(gameObject, 'bokehRadius');
     return gameObject;
   };
 
@@ -633,6 +653,7 @@
       }
     });
     gameObject.circleColor = null;
+    AddClearEffectCallback(gameObject, 'circleColor');
     return gameObject;
   };
 
@@ -714,6 +735,7 @@
       }
     });
     gameObject.displacementKey = null;
+    AddClearEffectCallback(gameObject, 'displacementKey');
     return gameObject;
   };
 
@@ -783,6 +805,7 @@
       }
     });
     gameObject.glowColor = null;
+    AddClearEffectCallback(gameObject, 'glowColor');
     return gameObject;
   };
 
@@ -956,6 +979,7 @@
       }
     });
     gameObject.gradientColor = null;
+    AddClearEffectCallback(gameObject, 'gradientColor');
     return gameObject;
   };
 
@@ -1017,6 +1041,7 @@
       }
     });
     gameObject.pixelate = null;
+    AddClearEffectCallback(gameObject, 'pixelate');
     return gameObject;
   };
 
@@ -1154,6 +1179,10 @@
       }
     });
     gameObject.revealLeft = null;
+    AddClearEffectCallback(gameObject, 'revealLeft');
+    AddClearEffectCallback(gameObject, 'revealRight');
+    AddClearEffectCallback(gameObject, 'revealUp');
+    AddClearEffectCallback(gameObject, 'revealDown');
     return gameObject;
   };
 
@@ -1290,6 +1319,7 @@
       }
     });
     gameObject.shadowColor = null;
+    AddClearEffectCallback(gameObject, 'shadowColor');
     return gameObject;
   };
 
@@ -1361,6 +1391,7 @@
       }
     });
     gameObject.shineSpeed = null;
+    AddClearEffectCallback(gameObject, 'shineSpeed');
     return gameObject;
   };
 
@@ -1477,6 +1508,7 @@
       }
     });
     gameObject.tiltShiftRadius = null;
+    AddClearEffectCallback(gameObject, 'tiltShiftRadius');
     return gameObject;
   };
 
@@ -1558,6 +1590,7 @@
       }
     });
     gameObject.vignetteRadius = null;
+    AddClearEffectCallback(gameObject, 'vignetteRadius');
     return gameObject;
   };
 
@@ -1695,6 +1728,10 @@
       }
     });
     gameObject.wipeLeft = null;
+    AddClearEffectCallback(gameObject, 'wipeLeft');
+    AddClearEffectCallback(gameObject, 'wipeRight');
+    AddClearEffectCallback(gameObject, 'wipeUp');
+    AddClearEffectCallback(gameObject, 'wipeDown');
     return gameObject;
   };
 

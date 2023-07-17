@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddTiltShiftProperties = function (gameObject) {
     // Don't attach properties again
@@ -131,6 +132,8 @@ var AddTiltShiftProperties = function (gameObject) {
     })
 
     gameObject.tiltShiftRadius = null;
+
+    AddClearEffectCallback(gameObject, 'tiltShiftRadius');
 
     return gameObject;
 }

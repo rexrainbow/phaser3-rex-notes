@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
@@ -95,6 +96,8 @@ var AddVignetteProperties = function (gameObject) {
     })
 
     gameObject.vignetteRadius = null;
+
+    AddClearEffectCallback(gameObject, 'vignetteRadius');
 
     return gameObject;
 }

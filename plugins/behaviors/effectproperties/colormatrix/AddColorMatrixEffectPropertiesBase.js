@@ -1,5 +1,6 @@
 import HasProperty from '../../../utils/object/HasProperty.js';
 import GetFXFactory from '../GetFXFactory.js';
+import AddClearEffectCallback from '../AddClearEffectCallback.js';
 
 var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, inputMode) {
     // Don't attach properties again
@@ -43,6 +44,8 @@ var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, input
     })
 
     gameObject[effectName] = null;
+
+    AddClearEffectCallback(gameObject, effectName);
 
     return gameObject;
 }

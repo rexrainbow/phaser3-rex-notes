@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddGlowProperties = function (gameObject) {
     // Don't attach properties again
@@ -80,6 +81,8 @@ var AddGlowProperties = function (gameObject) {
     })
 
     gameObject.glowColor = null;
+
+    AddClearEffectCallback(gameObject, 'glowColor');
 
     return gameObject;
 }

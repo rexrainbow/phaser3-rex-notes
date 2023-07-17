@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBlurProperties = function (gameObject) {
     // Don't attach properties again
@@ -138,6 +139,8 @@ var AddBlurProperties = function (gameObject) {
     })
 
     gameObject.blurColor = null;
+
+    AddClearEffectCallback(gameObject, 'blurColor');
 
     return gameObject;
 }

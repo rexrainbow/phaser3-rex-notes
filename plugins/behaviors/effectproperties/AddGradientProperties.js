@@ -1,5 +1,6 @@
 import HasProperty from '../../utils/object/HasProperty.js';
 import GetFXFactory from './GetFXFactory.js';
+import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddGradientProperties = function (gameObject) {
     // Don't attach properties again
@@ -207,6 +208,8 @@ var AddGradientProperties = function (gameObject) {
     })
 
     gameObject.gradientColor = null;
+
+    AddClearEffectCallback(gameObject, 'gradientColor');
 
     return gameObject;
 }
