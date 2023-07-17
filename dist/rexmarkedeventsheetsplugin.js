@@ -18388,7 +18388,10 @@
             propertyName = 'revealRight';
             break;
         }
-        gameObject[propertyName] = 0;
+        if (fromValue === undefined) {
+          fromValue = 0;
+        }
+        gameObject[propertyName] = fromValue;
         bob.easeProperty(propertyName,
         // property
         toValue,
