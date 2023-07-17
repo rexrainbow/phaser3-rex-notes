@@ -1,3 +1,5 @@
+import AddEffectProperties from '../../../../behaviors/effectproperties/AddEffectProperties.js';
+
 const FadeTint = 0;
 const FadeAlpha = 1;
 const FadeRevealUp = 2;
@@ -41,7 +43,7 @@ export default {
 
     useRevealEffect(gameObject) {
         return ((this.fadeMode >= FadeRevealUp) && (this.fadeMode <= FadeRevealRight)) &&
-            (this.fadeTime > 0) && (gameObject.preFX !== undefined);
+            (this.fadeTime > 0) && (gameObject.preFX || gameObject.postFX);
     },
 
     fadeBob(bob, fromValue, toValue, onComplete) {
@@ -75,25 +77,29 @@ export default {
             )
 
         } else if (this.useRevealEffect(gameObject)) {
-            bob.removeEffect('reveal');
-            var dir = ((this.fadeMode === FadeRevealUp) || (this.fadeMode === FadeRevealLeft)) ? 1 : 0;
-            var axis = ((this.fadeMode === FadeRevealUp) || (this.fadeMode === FadeRevealDown)) ? 1 : 0;
-            bob.setEffect('fade_reveal', 'reveal', 0.1, dir, axis);
-
-            var effect = bob.getEffect('fade_reveal');
-            if (fromValue !== undefined) {
-                effect.progress = fromValue;
+            AddEffectProperties(gameObject, 'reveal');
+            var propertyName;
+            switch (this.fadeMode) {
+                case FadeRevealUp: propertyName = 'revealUp'; break;
+                case FadeRevealDown: propertyName = 'revealDown'; break;
+                case FadeRevealLeft: propertyName = 'revealLeft'; break;
+                case FadeRevealRight: propertyName = 'revealRight'; break;
             }
+
+            gameObject[propertyName] = 0;
             bob.easeProperty(
-                'progress',                 // property
-                toValue,                    // to value
-                this.fadeTime,              // duration
-                'Linear',                   // ease
-                0,                          // repeat
-                false,                      // yoyo
-                onComplete,                 // onComplete
-                effect                      // target
+                propertyName,         // property
+                toValue,              // to value
+                this.fadeTime,        // duration
+                'Linear',             // ease
+                0,                    // repeat
+                false,                // yoyo
+                onComplete,           // onComplete
             )
+
+            bob.getTweenTask(propertyName).once('complete', function () {
+                gameObject[propertyName] = null;
+            })
 
         } else {
             if (onComplete) {

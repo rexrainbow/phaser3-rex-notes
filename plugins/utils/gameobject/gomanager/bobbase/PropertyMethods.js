@@ -52,6 +52,10 @@ export default {
         return this;
     },
 
+    getTweenTask(property) {
+        return this.tweens[property];
+    },
+
     freeTweens() {
         var tweenTasks = this.tweens,
             tweenTask;

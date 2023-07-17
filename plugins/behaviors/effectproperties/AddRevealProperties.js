@@ -78,7 +78,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(wipeWidth, 0, 0);
+                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 0;
@@ -105,7 +105,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(wipeWidth, 0, 0);
+                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 1;
@@ -132,7 +132,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(wipeWidth, 0, 0);
+                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 1;

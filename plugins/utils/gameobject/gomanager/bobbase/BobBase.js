@@ -1,7 +1,6 @@
 import PropertyMethods from './PropertyMethods.js';
 import CallMethods from './CallMethods.js';
 import DataMethods from './DataMethods.js';
-import EffectMethods from './EffectMethods.js';
 
 class BobBase {
     constructor(GOManager, gameObject, name) {
@@ -26,7 +25,6 @@ class BobBase {
 
     freeGO() {
         this.freeTweens();
-        this.freeEffects();
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -59,6 +57,5 @@ Object.assign(
     PropertyMethods,
     CallMethods,
     DataMethods,
-    EffectMethods
 )
 export default BobBase;
