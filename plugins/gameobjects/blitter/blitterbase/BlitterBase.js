@@ -35,12 +35,12 @@ class Blitter extends GameObject {
         var reuseBob = GetValue(config, 'reuseBob', true);
         this.poolManager = (reuseBob) ? (new PoolManager(config)) : undefined;
 
-        this
-            .setTexture(texture, frame)
-            .setPosition(x, y)
-            .setOrigin(0, 0)
-            .clearTint()
-            .initPipeline()
+        this.setTexture(texture, frame);
+        this.setPosition(x, y);
+        this.setOrigin(0, 0);
+        this.clearTint();
+        this.initPipeline();
+        this.initPostPipeline();
 
     }
 
@@ -101,6 +101,7 @@ Phaser.Class.mixin(Blitter,
         Components.Mask,
         Components.Origin,
         Components.Pipeline,
+        Components.PostPipeline,
         Components.ScrollFactor,
         Components.Transform,
         Components.Visible,

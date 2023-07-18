@@ -9527,7 +9527,12 @@
       _this.lastAppendedChildren = [];
       var reuseBob = GetValue$1n(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager(config) : undefined;
-      _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
+      _this.setTexture(texture, frame);
+      _this.setPosition(x, y);
+      _this.setOrigin(0, 0);
+      _this.clearTint();
+      _this.initPipeline();
+      _this.initPostPipeline();
       return _this;
     }
     _createClass(Blitter, [{
@@ -9573,7 +9578,7 @@
     return childA._depth - childB._depth;
   };
   var Components$3 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$3.Alpha, Components$3.BlendMode, Components$3.ComputedSize, Components$3.Depth, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Transform, Components$3.Visible, Render$2, methods$e]);
+  Phaser.Class.mixin(Blitter, [Components$3.Alpha, Components$3.BlendMode, Components$3.ComputedSize, Components$3.Depth, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.PostPipeline, Components$3.ScrollFactor, Components$3.Transform, Components$3.Visible, Render$2, methods$e]);
 
   var ImageTypeName = 'image';
 

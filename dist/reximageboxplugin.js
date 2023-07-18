@@ -2334,10 +2334,6 @@
     }
   };
 
-  Phaser.Game;
-
-  Phaser.Scene;
-
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ImageBox = /*#__PURE__*/function (_Container) {

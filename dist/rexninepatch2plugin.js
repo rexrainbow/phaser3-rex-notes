@@ -434,7 +434,12 @@
       _this.lastAppendedChildren = [];
       var reuseBob = GetValue$4(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager(config) : undefined;
-      _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
+      _this.setTexture(texture, frame);
+      _this.setPosition(x, y);
+      _this.setOrigin(0, 0);
+      _this.clearTint();
+      _this.initPipeline();
+      _this.initPostPipeline();
       return _this;
     }
     _createClass(Blitter, [{
@@ -480,7 +485,7 @@
     return childA._depth - childB._depth;
   };
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Transform, Components.Visible, Render, methods$1]);
+  Phaser.Class.mixin(Blitter, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.PostPipeline, Components.ScrollFactor, Components.Transform, Components.Visible, Render, methods$1]);
 
   var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
     if (callback === undefined) {

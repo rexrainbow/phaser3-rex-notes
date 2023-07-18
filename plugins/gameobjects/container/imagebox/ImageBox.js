@@ -1,7 +1,6 @@
 import Container from '../containerlite/ContainerLite.js';
 import FitToSize from '../../../utils/size/FitTo.js';
 import FlipMethods from '../utils/FlipMethods.js';
-import HasTexture from '../../../utils/texture/HasTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
