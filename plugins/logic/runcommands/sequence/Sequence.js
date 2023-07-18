@@ -3,6 +3,10 @@ import GetValue from '../../../utils/object/GetValue.js';
 import RunCommands from '../../../runcommands.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 
+const STATE_IDLE = 0;
+const STATE_RUN = 1;
+const STATE_RUNLAST = 2;
+const STATE_COMPLETE = 3;
 
 class Sequence {
     constructor(config) {
@@ -17,7 +21,7 @@ class Sequence {
         this.setYoyo(GetValue(config, 'yoyo', false));
         this.setRepeat(GetValue(config, 'repeat', 0));
         this.setLoop(GetValue(config, 'loop', false));
-        this.state = 0; // 0: idle, 1: run, 2: run-last, 3: completed
+        this.state = STATE_IDLE;
         this.task = undefined;
     }
 
@@ -51,7 +55,7 @@ class Sequence {
         this.resetRepeatCount();
         this.index = 0;
         this.indexStep = 1;
-        this.state = 1;
+        this.state = STATE_RUN;
         if (this.commands.length > 0) {
             this.runNextCommands();
         } else {
@@ -65,7 +69,7 @@ class Sequence {
             this.task.off('complete', this.runNextCommands, this);
             this.task = undefined;
         }
-        this.state = 0;
+        this.state = STATE_IDLE;
         return this;
     }
 
@@ -98,7 +102,7 @@ class Sequence {
     }
 
     get completed() {
-        return (this.state === 3);
+        return (this.state === STATE_COMPLETE);
     }
 
     get currentCommandIndex() {
@@ -108,7 +112,7 @@ class Sequence {
     runNextCommands() {
         var task, isFirstCommand, isLastCommand;
         while (1) {
-            if (this.state === 2) {
+            if (this.state === STATE_RUNLAST) {
                 this.complete();
                 return;
             }
@@ -129,7 +133,7 @@ class Sequence {
                     if (this.repeatCount > 0) {
                         this.repeatCount--;
                     } else {
-                        this.state = 2; // goto completed at next running
+                        this.state = STATE_RUNLAST; // goto completed at next running
                     }
                 } else {
                     this.index += this.indexStep;
@@ -142,7 +146,7 @@ class Sequence {
                     if (this.repeatCount > 0) {
                         this.repeatCount--;
                     } else {
-                        this.state = 2; // goto completed at next running
+                        this.state = STATE_RUNLAST; // goto completed at next running
                     }
                 } else {
                     this.index += this.indexStep;
@@ -156,7 +160,7 @@ class Sequence {
     }
 
     complete() {
-        this.state = 3;
+        this.state = STATE_COMPLETE;
         this.emit('complete', this.scope, this);
     }
 }
