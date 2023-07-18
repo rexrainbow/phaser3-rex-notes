@@ -44,6 +44,7 @@ class Text extends TextBase {
         this.setPosition(x, y);
         this.setOrigin(0, 0);
         this.initPipeline();
+        this.initPostPipeline(true);
 
         this.canvas = CanvasPool.create(this);
 

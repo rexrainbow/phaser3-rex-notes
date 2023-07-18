@@ -36,6 +36,7 @@ class Canvas extends GameObject {
         this.setPosition(x, y);
         this.setOrigin(0.5, 0.5);
         this.initPipeline();
+        this.initPostPipeline(true);
 
         this._crop = this.resetCropObject();
 

@@ -473,6 +473,7 @@
       _this.setPosition(x, y);
       _this.setOrigin(0.5, 0.5);
       _this.initPipeline();
+      _this.initPostPipeline(true);
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
