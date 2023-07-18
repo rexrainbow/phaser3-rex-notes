@@ -1,3 +1,4 @@
+import WaitEvent from '../../waitevent/WaitEvent';
 import Managers from '../Managers';
 
 export default WaitEventManager;
@@ -23,7 +24,7 @@ declare namespace WaitEventManager {
     }
 }
 
-declare class WaitEventManager {
+declare class WaitEventManager extends WaitEvent {
     constructor(
         parent: Managers,
         config?: WaitEventManager.IConfig,

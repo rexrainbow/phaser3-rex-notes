@@ -1,5 +1,3 @@
-import { RemoveWaitEvents } from './const.js';
-
 export default {
     waitGameObjectTweenComplete(goType, name, property) {
         var tweenTask = this.parent.getGameObjectTweenTask(goType, name, property);
@@ -28,7 +26,7 @@ export default {
         }
         gameObject.on(eventName, callback);
         // Clear changedata event on gameobject manually
-        this.parent.once(RemoveWaitEvents, function () {
+        this.parent.once(this.removeWaitEventsEventName, function () {
             gameObject.off(eventName, callback);
         });
 

@@ -340,6 +340,10 @@
   };
   var ARGS = []; // reuse this array
 
+  var STATE_IDLE = 0;
+  var STATE_RUN = 1;
+  var STATE_RUNLAST = 2;
+  var STATE_COMPLETE = 3;
   var Sequence = /*#__PURE__*/function () {
     function Sequence(config) {
       _classCallCheck(this, Sequence);
@@ -353,7 +357,7 @@
       this.setYoyo(GetValue(config, 'yoyo', false));
       this.setRepeat(GetValue(config, 'repeat', 0));
       this.setLoop(GetValue(config, 'loop', false));
-      this.state = 0; // 0: idle, 1: run, 2: run-last, 3: completed
+      this.state = STATE_IDLE;
       this.task = undefined;
     }
     _createClass(Sequence, [{
@@ -389,7 +393,7 @@
         this.resetRepeatCount();
         this.index = 0;
         this.indexStep = 1;
-        this.state = 1;
+        this.state = STATE_RUN;
         if (this.commands.length > 0) {
           this.runNextCommands();
         } else {
@@ -404,7 +408,7 @@
           this.task.off('complete', this.runNextCommands, this);
           this.task = undefined;
         }
-        this.state = 0;
+        this.state = STATE_IDLE;
         return this;
       }
     }, {
@@ -442,7 +446,7 @@
     }, {
       key: "completed",
       get: function get() {
-        return this.state === 3;
+        return this.state === STATE_COMPLETE;
       }
     }, {
       key: "currentCommandIndex",
@@ -454,7 +458,7 @@
       value: function runNextCommands() {
         var task, isFirstCommand, isLastCommand;
         while (1) {
-          if (this.state === 2) {
+          if (this.state === STATE_RUNLAST) {
             this.complete();
             return;
           }
@@ -473,7 +477,7 @@
               if (this.repeatCount > 0) {
                 this.repeatCount--;
               } else {
-                this.state = 2; // goto completed at next running
+                this.state = STATE_RUNLAST; // goto completed at next running
               }
             } else {
               this.index += this.indexStep;
@@ -485,7 +489,7 @@
               if (this.repeatCount > 0) {
                 this.repeatCount--;
               } else {
-                this.state = 2; // goto completed at next running
+                this.state = STATE_RUNLAST; // goto completed at next running
               }
             } else {
               this.index += this.indexStep;
@@ -499,7 +503,7 @@
     }, {
       key: "complete",
       value: function complete() {
-        this.state = 3;
+        this.state = STATE_COMPLETE;
         this.emit('complete', this.scope, this);
       }
     }]);

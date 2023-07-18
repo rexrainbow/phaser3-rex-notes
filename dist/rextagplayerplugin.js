@@ -5156,13 +5156,103 @@
   var WaitCompleteEvent = '_wait.complete';
   var RemoveWaitEvents = '_remove.wait';
 
+  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'preupdate' event
+    var scene = GetSceneObject(gameObject);
+    var timer = scene.time.delayedCall(delay, function () {
+      scene.sys.events.once('preupdate', function () {
+        callback.call(scope, args);
+      });
+    });
+    return timer;
+  };
+
+  var WaitEvent$1 = /*#__PURE__*/function () {
+    function WaitEvent(parent) {
+      _classCallCheck(this, WaitEvent);
+      if (!parent) {
+        this.setEventEmitter(true);
+        parent = this;
+      }
+      this.parent = parent;
+      this.waitId = 0;
+
+      // Override it
+      this.waitCompleteEventName = WaitCompleteEvent;
+      this.removeWaitEventsEventName = RemoveWaitEvents;
+    }
+    _createClass(WaitEvent, [{
+      key: "destroy",
+      value: function destroy() {
+        this.removeWaitEvents();
+        this.clearWaitCompleteCallbacks();
+        this.parent = null;
+      }
+    }, {
+      key: "waitEvent",
+      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
+        eventEmitter.once(eventName, callback, this);
+        this.parent.once(this.removeWaitEventsEventName, function () {
+          eventEmitter.off(eventName, callback, this);
+        });
+        return this.parent;
+      }
+    }, {
+      key: "getWaitCompleteTriggerCallback",
+      value: function getWaitCompleteTriggerCallback(completeNextTick) {
+        if (completeNextTick === undefined) {
+          completeNextTick = true;
+        }
+        var waitId = this.waitId;
+        var self = this;
+        var completeCallback = function completeCallback() {
+          if (waitId < self.waitId) {
+            return;
+          }
+          self.waitId++;
+          self.removeWaitEvents();
+          self.parent.emit(self.waitCompleteEventName);
+        };
+        if (completeNextTick) {
+          var completeCallbackNextTick = function completeCallbackNextTick() {
+            PreUpdateDelayCall(self.parent, 0, completeCallback);
+          };
+          return completeCallbackNextTick;
+        } else {
+          return completeCallback;
+        }
+      }
+    }, {
+      key: "removeWaitEvents",
+      value: function removeWaitEvents() {
+        this.parent.emit(this.removeWaitEventsEventName);
+        return this;
+      }
+    }, {
+      key: "addWaitCompleteCallback",
+      value: function addWaitCompleteCallback(callback, scope) {
+        this.parent.on(this.waitCompleteEventName, callback, scope);
+        return this;
+      }
+    }, {
+      key: "clearWaitCompleteCallbacks",
+      value: function clearWaitCompleteCallbacks() {
+        this.parent.off(this.waitCompleteEventName);
+        return this;
+      }
+    }]);
+    return WaitEvent;
+  }();
+  Object.assign(WaitEvent$1.prototype, EventEmitterMethods);
+
   var WaitTimeMethods = {
     waitTime: function waitTime(duration) {
       var timeline = this.parent.timeline;
       timeline.delayEvent(duration, 'delay');
 
       // Clear delay event on timeline manually
-      this.parent.once(RemoveWaitEvents, function () {
+      this.parent.once(this.removeWaitEventsEventName, function () {
         timeline.removeDelayEvent('delay');
       });
       return this.waitEvent(timeline, 'delay');
@@ -5238,7 +5328,7 @@
       };
       gameObject.on(eventName, callback);
       // Clear changedata event on gameobject manually
-      this.parent.once(RemoveWaitEvents, function () {
+      this.parent.once(this.removeWaitEventsEventName, function () {
         gameObject.off(eventName, callback);
       });
       return this.waitEvent(gameObject, '_dataFlagMatch');
@@ -5489,25 +5579,17 @@
     }
   };
 
-  var PreUpdateDelayCall = function PreUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'preupdate' event
-    var scene = GetSceneObject(gameObject);
-    var timer = scene.time.delayedCall(delay, function () {
-      scene.sys.events.once('preupdate', function () {
-        callback.call(scope, args);
-      });
-    });
-    return timer;
-  };
-
-  var WaitEventManager = /*#__PURE__*/function () {
+  var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
+    _inherits(WaitEventManager, _WaitEvent);
+    var _super = _createSuper(WaitEventManager);
     function WaitEventManager(parent, config) {
+      var _this;
       _classCallCheck(this, WaitEventManager);
-      this.parent = parent;
-      this.waitCompleteEventName = GetValue$4(config, 'completeEventName', WaitCompleteEvent);
-      this.setClickTarget(GetValue$4(config, 'clickTarget', this.scene));
-      this.setCameraTarget(GetValue$4(config, 'camera', this.scene.cameras.main));
-      this.waitId = 0;
+      _this = _super.call(this, parent);
+      _this.waitCompleteEventName = GetValue$4(config, 'completeEventName', _this.waitCompleteEventName);
+      _this.setClickTarget(GetValue$4(config, 'clickTarget', _this.scene));
+      _this.setCameraTarget(GetValue$4(config, 'camera', _this.scene.cameras.main));
+      return _this;
     }
     _createClass(WaitEventManager, [{
       key: "clickTarget",
@@ -5528,8 +5610,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.removeWaitEvents();
-        this.clearWaitCompleteCallbacks();
+        _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
         this.setClickTarget();
         this.setCameraTarget();
       }
@@ -5538,62 +5619,9 @@
       get: function get() {
         return this.parent.managersScene;
       }
-    }, {
-      key: "waitEvent",
-      value: function waitEvent(eventEmitter, eventName, completeNextTick) {
-        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
-        eventEmitter.once(eventName, callback, this);
-        this.parent.once(RemoveWaitEvents, function () {
-          eventEmitter.off(eventName, callback, this);
-        });
-        return this.parent;
-      }
-    }, {
-      key: "getWaitCompleteTriggerCallback",
-      value: function getWaitCompleteTriggerCallback(completeNextTick) {
-        if (completeNextTick === undefined) {
-          completeNextTick = true;
-        }
-        var waitId = this.waitId;
-        var self = this;
-        var completeCallback = function completeCallback() {
-          if (waitId < self.waitId) {
-            return;
-          }
-          self.waitId++;
-          self.removeWaitEvents();
-          self.parent.emit(self.waitCompleteEventName);
-        };
-        if (completeNextTick) {
-          var completeCallbackNextTick = function completeCallbackNextTick() {
-            PreUpdateDelayCall(self.parent, 0, completeCallback);
-          };
-          return completeCallbackNextTick;
-        } else {
-          return completeCallback;
-        }
-      }
-    }, {
-      key: "removeWaitEvents",
-      value: function removeWaitEvents() {
-        this.parent.emit(RemoveWaitEvents);
-        return this;
-      }
-    }, {
-      key: "addWaitCompleteCallback",
-      value: function addWaitCompleteCallback(callback, scope) {
-        this.parent.on(this.waitCompleteEventName, callback, scope);
-        return this;
-      }
-    }, {
-      key: "clearWaitCompleteCallbacks",
-      value: function clearWaitCompleteCallbacks() {
-        this.parent.off(this.waitCompleteEventName);
-        return this;
-      }
     }]);
     return WaitEventManager;
-  }();
+  }(WaitEvent$1);
   var Methods$3 = {
     waitAny: WaitAny$1
   };
