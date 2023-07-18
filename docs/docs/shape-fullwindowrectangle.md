@@ -138,3 +138,19 @@ var rect = scene.add.rexFullWindowRectangle(fillColor, fillAlpha);
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = rect.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+

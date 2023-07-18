@@ -369,3 +369,19 @@ var texture = video.saveTexture(key);
 
     }, scope);
     ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = video.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

@@ -230,7 +230,14 @@ See [game object](gameobject.md)
 ### Create mask
 
 ```javascript
-var mask = image.createBitmapMask();
+var mask = layer.createBitmapMask();
 ```
 
 See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

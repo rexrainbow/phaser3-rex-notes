@@ -435,6 +435,13 @@ layer.setRenderOrder(renderOrder);
     layer.shuffle(tileX, tileY, width, height);
     ```
 
+### Shader effects
+
+`layer`` support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
 ### Tile
 
 #### Get tile

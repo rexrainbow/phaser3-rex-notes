@@ -264,7 +264,26 @@ var scaleX = matrix.scaleX;
 var scaleY = matrix.scaleY;
 ```
 
-## Compare with [group object](group.md)
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = container.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
+### Compare with [group object](group.md)
 
 - Container and group objects are all have a children list.
 - Container has position, angle, alpha, visible, ...etc, but group does not have.

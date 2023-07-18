@@ -186,4 +186,19 @@ image.rt.fill(rgb, alpha);
 
 ### Other properties
 
-See [Skew image](skew-image.md) game object.
+See [Skew image game object](skew-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

@@ -986,7 +986,6 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
     ```
     - `params` : Parameters passed from `params` in `'parser.-custom'` event.
 
-
 ### Size
 
 - Resize canvas size
@@ -1005,3 +1004,19 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
     ```javascript
     txt.setToMinSize();
     ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

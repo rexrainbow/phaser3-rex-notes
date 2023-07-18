@@ -276,6 +276,10 @@ fileDropZone.loadFilePromise(file, loaderType, key, cahceType)
     URL.revokeObjectURL(objectURL);
     ```
 
+### Other properties
+
+See [dom game object](domelement.md), [game object](gameobject.md)
+
 ### Interactive with other game objects
 
 See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)

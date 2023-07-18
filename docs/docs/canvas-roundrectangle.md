@@ -342,6 +342,18 @@ Number of interpolation points in each round corner. Default value is `4`.
 
 See [game object](gameobject.md)
 
+### Create mask
+
+```javascript
+var mask = rect.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
 ### Compare with [Shape-Roundrectangle](shape-roundrectangle.md)
 
 - Gradient

@@ -1,6 +1,7 @@
 ## Introduction
 
-Keep aspect ratio of image game object when scale-down resizing.
+Keep aspect ratio of image game object when scale-down resizing. 
+A [containerLite game object ](containerlite.md) with 1 [image game object](image.md).
 
 - Author: Rex
 - Game object
@@ -173,3 +174,21 @@ image.scaleImage();
 ```javascript
 var internalImageGO = image.image;
 ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+Create mask from internal image game object (`image.image`).
+
+```javascript
+var mask = image.image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Internal image game object (`image.image`) support [preFX and postFX effects](shader-builtin.md)

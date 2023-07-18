@@ -423,6 +423,22 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     }, scope);
     ```
 
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = circularProgress.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
 ### Compare with Circular-progress shape
 
 - Circular-progress canvas creates a canvas then draw on that canvas, [circular progress shape](shape-circularprogress.md) draw on GRAPHICS pipeline like Shape or Graphics game object.

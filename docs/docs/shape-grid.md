@@ -126,3 +126,19 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = grid.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+

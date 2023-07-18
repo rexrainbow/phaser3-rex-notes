@@ -126,3 +126,19 @@ var circle = scene.add.circle(x, y, radius, fillColor);
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = circle.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+

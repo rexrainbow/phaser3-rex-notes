@@ -239,3 +239,22 @@ replacing any current texture it may have.
     ```javascript
     plane.removeCheckerboard();
     ```
+
+### Other properties
+
+See [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = plane.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

@@ -209,3 +209,19 @@ image.setTexture(key, frame, {
     - A number : Scale mask texture size.
 - `backgroundColor` : Background color filled with masked area.
     - `undefiined` : No background color.
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

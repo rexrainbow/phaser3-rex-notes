@@ -337,3 +337,22 @@ See [Shape class](shape-custom-shapes.md#shape-class)
     customProgress.setAlpha(alpha);
     // customProgress.alpha = alpha;
     ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = customProgress.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

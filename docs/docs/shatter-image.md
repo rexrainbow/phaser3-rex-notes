@@ -339,3 +339,22 @@ image.resetImage();
     ```javascript
     image.setTint(color);
     ```
+
+### Other properties
+
+See [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

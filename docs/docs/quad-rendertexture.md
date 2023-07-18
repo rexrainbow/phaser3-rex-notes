@@ -207,4 +207,19 @@ image.rt.fill(rgb, alpha);
 
 ### Other properties
 
-See [Quad image](quad-image.md) game object.
+See [Quad image game object](quad-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

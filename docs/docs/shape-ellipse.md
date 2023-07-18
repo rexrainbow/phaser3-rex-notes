@@ -126,3 +126,18 @@ ellipse.smoothness = smoothness;
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = ellipse.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

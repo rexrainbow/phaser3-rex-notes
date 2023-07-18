@@ -927,6 +927,22 @@ txt.setWrapConfig(config);
     ```
     - `child` : Any [Character](dynamictext.md#character) or [Image](dynamictext.md#image) child
 
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
 ### Compare with other kinds of text game object
 
 - [Built-in text](text.md): 

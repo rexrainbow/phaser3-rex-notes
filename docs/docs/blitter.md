@@ -204,3 +204,22 @@ bob.destroy();
 ```javascript
 var data = bob.data;  // {}
 ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = bob.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

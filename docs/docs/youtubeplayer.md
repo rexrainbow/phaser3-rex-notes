@@ -349,6 +349,9 @@ player.resize(width, height);
 !!! warning "No `Playback time changed` event"
     Get playback time every tick might cause playing video lagging.
 
+### Other properties
+
+See [dom game object](domelement.md), [game object](gameobject.md)
 
 ### Interactive with other game objects
 

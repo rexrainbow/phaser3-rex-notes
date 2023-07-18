@@ -219,4 +219,19 @@ rt.drawFrame(key, frame);
 
 ### Other properties
 
-See [Mesh](mesh.md) game object.
+See [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

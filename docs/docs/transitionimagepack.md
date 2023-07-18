@@ -241,3 +241,7 @@ Also will fire `'complete'` event.
     image.toggleFlipX();
     image.toggleFlipY();
     ```
+
+### Other properties
+
+See [transition image object](transitionimage.md), [game object](gameobject.md)

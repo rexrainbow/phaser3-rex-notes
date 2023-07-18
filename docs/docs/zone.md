@@ -47,10 +47,6 @@ var zone = scene.make.zone({
     var zone = new MyZone(x, y, width, height);
     ```
 
-### Other properties
-
-See [game object](gameobject.md)
-
 ### Input hit zone
 
 ```javascript
@@ -85,3 +81,7 @@ See [touch events](touchevents.md#register-interactive)
         ```
     
 See [drop zone](touchevents.md#drop-zone)
+
+### Other properties
+
+See [game object](gameobject.md)

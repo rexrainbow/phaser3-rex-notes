@@ -464,6 +464,9 @@ var keyObj = scene.input.keyboard.addKey('W', enableCapture, emitOnRepeat);
 
 Set `enableCapture` to `false` to bypass key input to this input-text game objecct.
 
+### Other properties
+
+See [dom game object](domelement.md), [game object](gameobject.md)
 
 ### Interactive with other game objects
 

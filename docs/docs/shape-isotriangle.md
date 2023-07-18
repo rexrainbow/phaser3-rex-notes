@@ -113,3 +113,18 @@ var isoTriangle = scene.add.isotriangle(x, y, width, height, reversed, fillTop, 
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = isoTriangle.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

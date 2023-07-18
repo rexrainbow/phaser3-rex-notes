@@ -1,6 +1,6 @@
 ## Introduction
 
-Transit texture to another one. A [containerLite game object](containerlite.md) with 2 [image](image.md) game objects.
+Transit texture to another one. A [containerLite game object](containerlite.md) with 2 [image game objects](image.md).
 
 - Author: Rex
 - Game object
@@ -473,3 +473,25 @@ Also will fire `'complete'` event.
     - [Three-columns](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/three-columns.js), apply mask to cell images.
 - Morph custom mask game object
     - [Pie-mask](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/pie-mask.js), mask current/next image by a [custom-progress game object](shape-custom-progress.md).
+
+
+### Internal image game object
+
+- Current, next image game object
+    ```javascript
+    var curentImageGO = image.currentImage;
+    var nextImageGO = image.nextImage;
+    ```
+- Front, back image game object
+    ```javascript
+    var frontImageGO = image.frontImage;
+    var backImageGO = image.backImage;
+    ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Shader effects
+
+Internal image game objects (`image.currentImage`, `image.nextImage`) support [preFX and postFX effects](shader-builtin.md)

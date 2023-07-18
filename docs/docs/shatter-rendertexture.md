@@ -198,4 +198,19 @@ image.rt.fill(rgb, alpha);
 
 ### Other properties
 
-See [Shatter image](shatter-image.md) game object.
+See [Shatter image game object](shatter-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = image.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

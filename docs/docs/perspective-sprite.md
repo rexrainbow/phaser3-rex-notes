@@ -235,4 +235,19 @@ sprite.anims.restart();
 
 ### Other properties
 
-See [Perspective image](perspective-image.md) game object.
+See [Perspective image game object](perspective-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = sprite.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

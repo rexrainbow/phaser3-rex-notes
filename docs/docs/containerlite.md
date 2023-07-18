@@ -691,7 +691,12 @@ This method also will reset all local state of children.
 !!! note
     `container.add(containerLite)`, or `layer.add(containerLite)` won't add children of containerLite.
 
-## Compare with Official Container
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Compare with Official Container
 
 - Position/anlge/scale of a child object :
     - [Container](container.md) : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale.

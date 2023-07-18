@@ -279,4 +279,19 @@ carousel.roll.setEase(ease);
 
 ### Other properties
 
-See [container](containerlite.md).
+See [container](containerlite.md), [Mesh game object](mesh.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = carousel.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

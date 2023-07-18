@@ -327,3 +327,23 @@ var customSpinner = this.rexSpinner.add.custom({
 #### Shape class
 
 See [Shape class](shape-custom-shapes.md#shape-class)
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = customSpinner.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+

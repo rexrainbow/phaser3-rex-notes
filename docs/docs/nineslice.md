@@ -105,6 +105,13 @@ var mask = nineSlice.createBitmapMask();
 
 See [mask](mask.md)
 
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
 ### Compare with [nine-patch](ninepatch.md)
 
 - Nine-slice is a built-in game object.

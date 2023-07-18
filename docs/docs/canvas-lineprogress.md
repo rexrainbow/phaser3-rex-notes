@@ -364,6 +364,22 @@ var lineProgress = scene.make.rexLineProgressCanvas({
     // lineProgress.alpha = alpha;
     ```
 
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = lineProgress.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
 ### Compare with Line-progress shape
 
 - Line-progress canvas creates a canvas then draw on that canvas, [line progress shape](shape-lineprogress.md) draw on GRAPHICS pipeline like Shape or Graphics game object.

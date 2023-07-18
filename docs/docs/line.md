@@ -1,6 +1,6 @@
 ## Introduction
 
-Draw a line with start/end/body textures.
+Draw a line with start/end/body textures, extended from [RenderTexture game object](rendertexture.md).
 
 - Author: Rex
 - Game object
@@ -206,3 +206,19 @@ var line = scene.add.rexLine({
         ```javascript
         line.setLineBodyWidth(width);
         ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = line.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

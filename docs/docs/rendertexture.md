@@ -189,3 +189,7 @@ var mask = rt.createBitmapMask();
 ```
 
 See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

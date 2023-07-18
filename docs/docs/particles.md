@@ -869,3 +869,22 @@ class MyParticle extends Phaser.GameObjects.Particles.Particle {
     }
 }
 ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = emitter.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

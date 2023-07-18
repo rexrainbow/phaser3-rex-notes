@@ -533,4 +533,16 @@ Set `enableCapture` to `false` to bypass key input to this input-text game objec
 
 ### Other properties
 
-See [DynamicText](dynamictext.md).
+See [Dynamic text game object](dynamictext.md) [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

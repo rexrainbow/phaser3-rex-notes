@@ -565,3 +565,7 @@ var cell = table.getCell(cellIndex);
 ```javascript
 var cellIndex = cell.index;
 ```
+
+### Other properties
+
+See [game object](gameobject.md)

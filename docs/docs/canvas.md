@@ -267,7 +267,23 @@ or
 canvas.resize(width, height);
 ```
 
-## Compare with [Graphics object](graphics.md)
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = canvas.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
+### Compare with [Graphics object](graphics.md)
 
  - Drawing method
     - This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  

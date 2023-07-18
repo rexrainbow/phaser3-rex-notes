@@ -316,3 +316,22 @@ mesh.setInteractive();
     debugGraphics.clear();
     debugGraphics.lineStyle(1, 0x00ff00);
     ```
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = mesh.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

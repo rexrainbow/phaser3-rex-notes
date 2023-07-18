@@ -237,6 +237,10 @@ graphics.rotateCanvas(radians);
 graphics.generateTexture(key, width, height);  // key: texture key
 ```
 
+### Other properties
+
+See [game object](gameobject.md)
+
 ### Create mask
 
 ```javascript
@@ -244,3 +248,10 @@ var mask = graphics.createGeometryMask();
 ```
 
 See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

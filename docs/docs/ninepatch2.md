@@ -335,6 +335,25 @@ ninePatch.setGetFrameNameCallback(callback);
 ninePatch.updateTexture();
 ```
 
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = ninePatch.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
 ### Compare with [nine-patch](ninepatch.md)
 
 - Nine-patch2 has better performance.

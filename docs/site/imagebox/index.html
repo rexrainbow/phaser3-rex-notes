@@ -985,6 +985,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" class="md-nav__link">
+    Create mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shader-effects" class="md-nav__link">
+    Shader effects
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9575,6 +9596,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" class="md-nav__link">
+    Create mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shader-effects" class="md-nav__link">
+    Shader effects
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9601,7 +9643,8 @@
   <h1>Image box</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Keep aspect ratio of image game object when scale-down resizing.</p>
+<p>Keep aspect ratio of image game object when scale-down resizing. 
+A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../image/">image game object</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -9748,6 +9791,15 @@
 <h3 id="internal-image-game-object">Internal image game object<a class="headerlink" href="#internal-image-game-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">internalImageGO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">image</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../gameobject/">game object</a></p>
+<h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>
+<p>Create mask from internal image game object (<code>image.image</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">createBitmapMask</span><span class="p">();</span>
+</code></pre></div>
+<p>See <a href="../mask/">mask</a></p>
+<h3 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h3>
+<p>Internal image game object (<code>image.image</code>) support <a href="../shader-builtin/">preFX and postFX effects</a></p>
 
 
   

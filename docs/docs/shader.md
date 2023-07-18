@@ -235,6 +235,14 @@ end
 
 See [game object](gameobject.md)
 
+### Create mask
+
+```javascript
+var mask = shader.createBitmapMask();
+```
+
+See [mask](mask.md)
+
 ### BaseShader
 
 ```javascript

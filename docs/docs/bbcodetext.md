@@ -745,3 +745,19 @@ txt.setDelimiters(delimiterLeft, delimiterRight); // '<', '>'
     txt.setRTL(rtl).setText(newContent);
     ```
     - Invoke `setRTL` method before setting new content.
+
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)

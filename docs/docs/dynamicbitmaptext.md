@@ -116,4 +116,19 @@ txt.text = '...';
 
 ### Other properties
 
-This dynamic bitmap text class is extended from [bitmap text](bitmaptext.md)
+See  [bitmap text](bitmaptext.md), [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

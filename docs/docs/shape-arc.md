@@ -165,3 +165,18 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = arc.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support

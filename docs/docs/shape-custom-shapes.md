@@ -797,6 +797,25 @@ The same as Circle.
     // shape.alpha = alpha;
     ```
 
+### Other properties
+
+See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = shape.createGeometryMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
 ### Compare with similar plugins
 
 - [Custom Shapes](shape-custom-shapes.md) : Draw shapes.

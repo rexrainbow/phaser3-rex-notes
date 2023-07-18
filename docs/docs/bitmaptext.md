@@ -360,9 +360,26 @@ var data = txt.getCharacterAt(x, y);
     - `r` : The right-most point of this character, including xAdvance.
     - `line` : The line number the character appears on.
 
+
 ### Other properties
 
 See [game object](gameobject.md)
+
+### Create mask
+
+```javascript
+var mask = txt.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [postFX effects](shader-builtin.md)
+
+!!! note
+    No preFX effect support
+
 
 ## Appendix
 

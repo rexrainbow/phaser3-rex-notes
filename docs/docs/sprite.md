@@ -113,6 +113,18 @@ See [game object - texture](gameobject.md#texture)
 
 See [game object](gameobject.md)
 
+### Create mask
+
+```javascript
+var mask = sprite.createBitmapMask();
+```
+
+See [mask](mask.md)
+
+### Shader effects
+
+Support [preFX and postFX effects](shader-builtin.md)
+
 ### Animation
 
 #### Create animation
