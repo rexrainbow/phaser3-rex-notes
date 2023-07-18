@@ -131,10 +131,11 @@ seq.stop();
 ### Events
 
 - On sequence completed :
-
-```javascript
-seq.on('complete', function(actionScope, seq){ });
-```
+    ```javascript
+    seq.on('complete', function(actionScope, seq){ 
+        
+    });
+    ```
 
 ### Action of commands
 
