@@ -9648,11 +9648,16 @@
 </ul>
 <h3 id="create-sequence-instance">Create sequence instance<a class="headerlink" href="#create-sequence-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSequence&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
-<span class="w">    </span><span class="c1">// yoyo: false  // reverse sequence when it reaches the end</span>
-<span class="w">    </span><span class="c1">// repeat: 0,   // repeat count</span>
-<span class="w">    </span><span class="c1">// loop: false  // repeat forever</span>
+<span class="w">    </span><span class="c1">// yoyo: false,</span>
+<span class="w">    </span><span class="c1">// repeat: 0, </span>
+<span class="w">    </span><span class="c1">// loop: false</span>
 <span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>yoyo</code> : Reverse sequence when it reaches the end</li>
+<li><code>repeat</code> : Repeat count</li>
+<li><code>loop</code> : Repeat forever</li>
+</ul>
 <h3 id="load-commands">Load commands<a class="headerlink" href="#load-commands" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">seq</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span><span class="w"> </span><span class="nx">actionScope</span><span class="p">);</span>
 </code></pre></div>

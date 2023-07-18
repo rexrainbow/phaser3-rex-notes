@@ -74,11 +74,15 @@ Run sequence commands in array.
 
 ```javascript
 var seq = this.plugins.get('rexSequence').add({
-    // yoyo: false  // reverse sequence when it reaches the end
-    // repeat: 0,   // repeat count
-    // loop: false  // repeat forever
+    // yoyo: false,
+    // repeat: 0, 
+    // loop: false
 });
 ```
+
+- `yoyo` : Reverse sequence when it reaches the end
+- `repeat` : Repeat count
+- `loop` : Repeat forever
 
 ### Load commands
 
