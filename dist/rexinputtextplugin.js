@@ -253,7 +253,10 @@
         config = {};
       }
       var element;
-      var textType = GetValue(config, 'type', 'text');
+      var textType = GetValue(config, 'inputType', undefined);
+      if (textType === undefined) {
+        textType = GetValue(config, 'type', 'text');
+      }
       if (textType === 'textarea') {
         element = document.createElement('textarea');
         element.style.resize = 'none';
@@ -295,6 +298,15 @@
       return _this;
     }
     _createClass(InputText, [{
+      key: "inputType",
+      get: function get() {
+        if (this.node.tagName.toLowerCase() === 'textarea') {
+          return 'textarea';
+        } else {
+          return this.node.type;
+        }
+      }
+    }, {
       key: "text",
       get: function get() {
         return this.node.value;

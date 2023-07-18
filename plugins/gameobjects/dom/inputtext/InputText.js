@@ -31,7 +31,11 @@ class InputText extends DOMElement {
         }
 
         var element;
-        var textType = GetValue(config, 'type', 'text');
+        var textType = GetValue(config, 'inputType', undefined);
+        if (textType === undefined) {
+            textType = GetValue(config, 'type', 'text');
+        }
+
         if (textType === 'textarea') {
             element = document.createElement('textarea');
             element.style.resize = 'none';
@@ -77,6 +81,14 @@ class InputText extends DOMElement {
                 this._isFocused = false;
             }, this)
 
+    }
+
+    get inputType() {
+        if (this.node.tagName.toLowerCase() === 'textarea') {
+            return 'textarea';
+        } else {
+            return this.node.type;
+        }
     }
 
     get text() {
@@ -272,6 +284,7 @@ class InputText extends DOMElement {
     get isFocused() {
         return this._isFocused;
     }
+
 }
 
 var methods = {

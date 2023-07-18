@@ -8,6 +8,7 @@ declare namespace InputText {
         height?: number,
 
         type?: string,
+        inputType?: string,
 
         // Element properties
         id?: string,
@@ -68,6 +69,8 @@ declare class InputText extends Phaser.GameObjects.DOMElement {
     constructor(scene: Phaser.Scene,
         config?: InputText.IConfig
     );
+
+    readonly inputType: string;
 
     setText(text: string): this;
     text: string;

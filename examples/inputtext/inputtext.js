@@ -61,6 +61,12 @@ class Demo extends Phaser.Scene {
             inputText.setBlur();
             console.log('pointerdown outside');
         })
+
+        inputText.on('keydown', function (inputText, e) {
+            if ((inputText.inputType !== 'textarea') && (e.key === 'Enter')) {
+                inputText.setBlur();
+            }
+        })
     }
 
     update() { }

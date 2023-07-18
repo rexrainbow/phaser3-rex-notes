@@ -24,6 +24,7 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function () {
                 var config = {
+                    inputType: 'textarea',  // 'text'
                     onOpen: function (textObject) {
                         console.log('Open text editor');
                     },
@@ -35,7 +36,6 @@ class Demo extends Phaser.Scene {
                         console.log('Close text editor');
                     },
                     selectAll: true,
-                    // enterClose: false
                 }
                 this.plugins.get('rexTextEdit').edit(printText, config);
             }, this);

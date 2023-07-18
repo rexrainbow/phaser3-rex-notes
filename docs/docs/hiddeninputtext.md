@@ -82,6 +82,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 ```javascript
 var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, {
     // inputType: 'text',    // 'text'|'password'|'textarea'|...
+    // type: 'text',    // 'text'|'password'|'textarea'|...
 
     cursor: '|',
     cursorFlashDuration: 1000,
@@ -99,7 +100,7 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 ```
 
 - `textGameObject` : 
-- `inputType` : Type of element
+- `inputType`, or `type` : Type of element
     - `'text'`, `'password'`, `'textarea'`, ...
 - `cursor` : Cursor character used in default update text callback.
     - `null`, or `''` : Don't insert cursor character.

@@ -150,14 +150,12 @@ var states = scene.plugins.get('rexFSM').add({
 
 ### Start at state
 
-Set new state without triggering any [state-changing](fsm.md#state-changing) callbacks or events.
-
 ```javascript
 states.start(newState);
 ```
 
 !!! note
-    Won't fire any [state-changing](fsm.md#state-changing) callbacks or events.
+    Set new state without triggering any [state-changing](fsm.md#state-changing) callbacks or events.
 
 ### Next state
 

@@ -18,6 +18,12 @@ var Open = function (config, onCloseCallback) {
         onCloseCallback = config;
         config = undefined;
     }
+
+    var textType = GetValue(config, 'inputType', undefined);
+    if (textType === undefined) {
+        textType = GetValue(config, 'type', 'text');
+    }
+
     if (onCloseCallback === undefined) {
         onCloseCallback = GetValue(config, 'onClose', undefined);
     }
@@ -39,7 +45,7 @@ var Open = function (config, onCloseCallback) {
 
     // Attach close event
     this.onClose = onCloseCallback;
-    if (GetValue(config, 'enterClose', true)) {
+    if (GetValue(config, 'enterClose', (textType !== 'textarea'))) {
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
     }
     // Attach pointerdown (outside of input-text) event, at next tick

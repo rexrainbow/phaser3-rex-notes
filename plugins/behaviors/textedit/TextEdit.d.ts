@@ -6,6 +6,7 @@ export default TextEdit;
 declare namespace TextEdit {
     interface IConfigOpen {
         type?: string,
+        inputType?: string,
         enterClose?: boolean,
         selectAll?: boolean,
 

@@ -31,6 +31,7 @@ declare namespace HiddenTextEditBase {
 
         // Copy from InputText
         type?: string,
+        inputType?: string,
 
         // Element properties
         id?: string,

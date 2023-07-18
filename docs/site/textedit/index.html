@@ -1960,6 +1960,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../list-inputtext/" class="md-nav__link">
+        Input text
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9595,7 +9609,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/dyezeQN">Text edit</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/GaxqLZ">Edit</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/eYQMwYj">Text area</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/OJLQyKz">Number edit</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YbvwBw">With rexui-Label</a></li>
 </ul>
@@ -9729,7 +9743,9 @@
 <h3 id="open-text-editor">Open text editor<a class="headerlink" href="#open-text-editor" title="Permanent link">&para;</a></h3>
 <p>Open editor directly.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// type: &#39;text&#39;,   //&#39;text&#39;,&#39;password&#39;,&#39;number&#39;</span>
+<span class="w">    </span><span class="c1">// inputType: &#39;text&#39;,   // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
+<span class="w">    </span><span class="c1">// type: &#39;text&#39;,    // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
+
 <span class="w">    </span><span class="c1">// enterClose: true,</span>
 <span class="w">    </span><span class="c1">// selectAll: false,</span>
 
@@ -9744,7 +9760,7 @@
 <ul>
 <li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text object</a>.</li>
 <li><code>config</code> : <ul>
-<li><code>config.type</code> : <ul>
+<li><code>config.inputType</code>, or <code>config.type</code> : <ul>
 <li><code>'text'</code> (default), or </li>
 <li><code>'password'</code></li>
 <li><code>'number'</code></li>
@@ -9763,7 +9779,11 @@
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">textObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
+<li><code>enterClose</code> : <ul>
+<li><code>true</code> : Close input text when enter-key was pressed. Default value is <code>true</code> if <code>inputType</code> is not <code>'textarea'</code>.</li>
+<li><code>false</code> : If <code>inputType</code> is set to <code>'textarea'</code>, default value will be <code>false</code>.</li>
+</ul>
+</li>
 <li><code>config.selectAll</code> : Set <code>true</code> to select all text.</li>
 <li><code>config.text</code> : Initial string content. Default is the string content of textObject.</li>
 <li><a href="../inputtext/#add-input-text-object">More configuration parameters</a>...</li>

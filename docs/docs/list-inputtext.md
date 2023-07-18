@@ -1,0 +1,21 @@
+Solutions of single or multiple line(s) input text.
+
+- [Input text game object](inputtext.md) (Display: dom / Edit: dom) :    
+    - [Demo](https://codepen.io/rexrainbow/pen/WBxveQ)
+        - `type` or `inputType` :
+            - `'text'` : Single line input.
+            - `'textarea'` : Multiple line input.
+- [Text game object](text.md) with [Text edit behavior](textedit.md) (Display: text / Edit: dom) : 
+    - [Demo](https://codepen.io/rexrainbow/pen/dyezeQN)
+        - `type` :
+            - `'text'` : Single line input.
+            - `'textarea'` : Multiple line input.
+- [Text game object](text.md) with [Hidden text edit behavior](hiddeninputtext.md) (Display: text / Edit: text, invisible dom) : 
+    - [Demo](https://codepen.io/rexrainbow/pen/WNXxEMV)
+        - `type` or `inputType` : 
+            - `'text'` : Single line input.
+            - `'textarea'` : Multiple line input.
+- [Canvas input game object](canvasinput.md) (Display: canvas-input / Edit: canvas-input) : 
+    - [Single line input](https://codepen.io/rexrainbow/pen/vYjwjyW)
+    - [Multiple line input](https://codepen.io/rexrainbow/pen/PoBPmzR)
+        - `textArea` : Set `true` for multiple line input.

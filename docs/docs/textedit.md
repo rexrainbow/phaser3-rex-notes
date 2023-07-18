@@ -8,7 +8,6 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 ## Live demos
 
 - [Text edit](https://codepen.io/rexrainbow/pen/dyezeQN)
-- [Edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
 - [Text area](https://codepen.io/rexrainbow/pen/eYQMwYj)
 - [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
 - [With rexui-Label](https://codepen.io/rexrainbow/pen/YbvwBw)
@@ -152,7 +151,9 @@ Open editor directly.
 
 ```javascript
 var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
-    // type: 'text',   //'text','password','number'
+    // inputType: 'text',   // 'text'|'password'|'textarea'|...
+    // type: 'text',    // 'text'|'password'|'textarea'|...
+
     // enterClose: true,
     // selectAll: false,
 
@@ -167,7 +168,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
 
 - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md).
 - `config` : 
-    - `config.type` : 
+    - `config.inputType`, or `config.type` : 
         - `'text'` (default), or 
         - `'password'`
         - `'number'`
@@ -187,7 +188,9 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
         function (textObject) {
         }
         ```
-    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
+    - `enterClose` : 
+        - `true` : Close input text when enter-key was pressed. Default value is `true` if `inputType` is not `'textarea'`.
+        - `false` : If `inputType` is set to `'textarea'`, default value will be `false`.
     - `config.selectAll` : Set `true` to select all text.
     - `config.text` : Initial string content. Default is the string content of textObject.
     - [More configuration parameters](inputtext.md#add-input-text-object)...

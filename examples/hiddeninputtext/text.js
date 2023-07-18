@@ -19,8 +19,7 @@ class Demo extends Phaser.Scene {
         })
 
         this.plugins.get('rexHiddenInputText').add(textObject, {
-            inputType: 'textarea',
-            enterClose: false,
+            inputType: 'textarea',  // 'text'
 
             onOpen(textObject) {
                 textObject.setBackgroundColor('#555555')

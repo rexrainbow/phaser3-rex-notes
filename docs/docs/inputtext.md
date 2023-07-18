@@ -415,7 +415,7 @@ inputText.resize(width, height);
     ```javascript
     inputText.on('dblclick', function(inputText, e){ }, scope);
     ```
-    Touch/mouse events on input text object won't be propagated to game canvas.
+    - Touch/mouse events on input text object won't be propagated to game canvas.
 - On keydown, keyup
     ```javascript
     inputText.on('keydown', function(inputText, e){ }, scope);
@@ -423,7 +423,7 @@ inputText.resize(width, height);
     ```javascript
     inputText.on('keyup', function(inputText, e){ }, scope);
     ```
-    Keyboard events on input text object won't be propagated to game canvas.
+    - Keyboard events on input text object won't be propagated to game canvas.
 - On pointerdown, pointermove, pointerup
     ```javascript
     inputText.on('pointerdown', function(inputText, e){ }, scope);
@@ -434,7 +434,7 @@ inputText.resize(width, height);
     ```javascript
     inputText.on('pointerup', function(inputText, e){ }, scope);
     ```
-    Mouse/touch events on input text object won't be propagated to game canvas.
+    - Mouse/touch events on input text object won't be propagated to game canvas.
 - On select
     ```javascript
     inputText.on('select', function(inputText, e){ 
@@ -468,3 +468,21 @@ Set `enableCapture` to `false` to bypass key input to this input-text game objec
 ### Interactive with other game objects
 
 See [dom-element's Interactive with other game objects](domelement.md#interactive-with-other-game-objects)
+
+### Close editing
+
+- Close editing (set blur) when pointerdown outside
+    ```javascript
+    scene.input.on('pointerdown', function () {
+        inputText.setBlur();
+    })
+    ```
+- Close editing (set blur) when ENTER key press
+    ```javascript
+    inputText.on('keydown', function (inputText, e) {
+        if ((inputText.inputType !== 'textarea') && (e.key === 'Enter')) {
+            inputText.setBlur();
+        }
+    })
+    ```
+    - `inputType` : `'text'`, `'textarea'`, ...

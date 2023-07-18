@@ -1803,6 +1803,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../list-inputtext/" class="md-nav__link">
+        Input text
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2953,6 +2967,13 @@
           <li class="md-nav__item">
   <a href="#interactive-with-other-game-objects" class="md-nav__link">
     Interactive with other game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#close-editing" class="md-nav__link">
+    Close editing
   </a>
   
 </li>
@@ -9673,6 +9694,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#close-editing" class="md-nav__link">
+    Close editing
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10073,22 +10101,28 @@
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dblclick&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    Touch/mouse events on input text object won't be propagated to game canvas.</li>
+</code></pre></div><ul>
+<li>Touch/mouse events on input text object won't be propagated to game canvas.</li>
+</ul>
+</li>
 <li>On keydown, keyup
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    Keyboard events on input text object won't be propagated to game canvas.</li>
+</code></pre></div><ul>
+<li>Keyboard events on input text object won't be propagated to game canvas.</li>
+</ul>
+</li>
 <li>On pointerdown, pointermove, pointerup
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    Mouse/touch events on input text object won't be propagated to game canvas.</li>
+</code></pre></div><ul>
+<li>Mouse/touch events on input text object won't be propagated to game canvas.</li>
+</ul>
+</li>
 <li>On select
     <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">){</span><span class="w"> </span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">selectedString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inputText</span><span class="p">.</span><span class="nx">selectedText</span><span class="p">;</span>
@@ -10111,6 +10145,24 @@
 <p>Set <code>enableCapture</code> to <code>false</code> to bypass key input to this input-text game objecct.</p>
 <h3 id="interactive-with-other-game-objects">Interactive with other game objects<a class="headerlink" href="#interactive-with-other-game-objects" title="Permanent link">&para;</a></h3>
 <p>See <a href="../domelement/#interactive-with-other-game-objects">dom-element's Interactive with other game objects</a></p>
+<h3 id="close-editing">Close editing<a class="headerlink" href="#close-editing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Close editing (set blur) when pointerdown outside
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">inputText</span><span class="p">.</span><span class="nx">setBlur</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Close editing (set blur) when ENTER key press
+    <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">inputText</span><span class="p">.</span><span class="nx">inputType</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s1">&#39;textarea&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;Enter&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">inputText</span><span class="p">.</span><span class="nx">setBlur</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>inputType</code> : <code>'text'</code>, <code>'textarea'</code>, ...</li>
+</ul>
+</li>
+</ul>
 
 
   

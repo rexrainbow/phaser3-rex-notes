@@ -37652,7 +37652,10 @@
         config = {};
       }
       var element;
-      var textType = GetValue$1G(config, 'type', 'text');
+      var textType = GetValue$1G(config, 'inputType', undefined);
+      if (textType === undefined) {
+        textType = GetValue$1G(config, 'type', 'text');
+      }
       if (textType === 'textarea') {
         element = document.createElement('textarea');
         element.style.resize = 'none';
@@ -37694,6 +37697,15 @@
       return _this;
     }
     _createClass(InputText, [{
+      key: "inputType",
+      get: function get() {
+        if (this.node.tagName.toLowerCase() === 'textarea') {
+          return 'textarea';
+        } else {
+          return this.node.type;
+        }
+      }
+    }, {
       key: "text",
       get: function get() {
         return this.node.value;
@@ -59188,6 +59200,10 @@
       onCloseCallback = config;
       config = undefined;
     }
+    var textType = GetValue$2(config, 'inputType', undefined);
+    if (textType === undefined) {
+      textType = GetValue$2(config, 'type', 'text');
+    }
     if (onCloseCallback === undefined) {
       onCloseCallback = GetValue$2(config, 'onClose', undefined);
     }
@@ -59207,7 +59223,7 @@
 
     // Attach close event
     this.onClose = onCloseCallback;
-    if (GetValue$2(config, 'enterClose', true)) {
+    if (GetValue$2(config, 'enterClose', textType !== 'textarea')) {
       this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
     }
     // Attach pointerdown (outside of input-text) event, at next tick
