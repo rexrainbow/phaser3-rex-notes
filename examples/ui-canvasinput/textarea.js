@@ -82,7 +82,7 @@ var CreateCanvasInput = function (scene) {
             color: '#260e04',
 
             stroke: null,
-            'focus.stroke': '0x7b5e57',
+            'focus.stroke': '#7b5e57',
         },
 
         style: {
