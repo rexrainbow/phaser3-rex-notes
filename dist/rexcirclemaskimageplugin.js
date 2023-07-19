@@ -687,6 +687,7 @@
       scaleRY = height >= minHeight ? 1 : height / minHeight;
     var cornerRadius = geom.cornerRadius;
     var radius, radiusX, radiusY, centerX, centerY;
+    var startX, startY;
     context.save();
     context.beginPath();
     context.translate(x, y);
@@ -705,8 +706,12 @@
         centerY = 0;
         ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
       }
+      startX = 0;
+      startY = radiusY;
     } else {
       context.lineTo(0, 0);
+      startX = 0;
+      startY = 0;
     }
 
     // Top-right
@@ -762,6 +767,7 @@
     } else {
       context.lineTo(0, height);
     }
+    context.lineTo(startX, startY);
     context.closePath();
     context.restore();
   };
