@@ -15,7 +15,7 @@ Solutions of single or multiple line(s) input text.
         - `type` or `inputType` : 
             - `'text'` : Single line input.
             - `'textarea'` : Multiple line input.
-- [Canvas input game object](canvasinput.md) (Display: canvas-input / Edit: canvas-input) : 
+- [Canvas input game object](canvasinput.md) (Display: canvas-input / Edit: canvas-input, invisible dom) : 
     - [Single line input](https://codepen.io/rexrainbow/pen/vYjwjyW)
     - [Multiple line input](https://codepen.io/rexrainbow/pen/PoBPmzR)
         - `textArea` : Set `true` for multiple line input.

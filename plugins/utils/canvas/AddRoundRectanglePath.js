@@ -11,6 +11,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
 
     var cornerRadius = geom.cornerRadius;
     var radius, radiusX, radiusY, centerX, centerY;
+    var startX, startY;
 
     context.save();
     context.beginPath();
@@ -31,8 +32,14 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
             centerY = 0;
             ArcTo(context, centerX, centerY, radiusX, radiusY, 90, 0, true, iteration);
         }
+
+        startX = 0;
+        startY = radiusY;
     } else {
         context.lineTo(0, 0);
+
+        startX = 0;
+        startY = 0;
     }
 
     // Top-right
@@ -89,6 +96,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
         context.lineTo(0, height);
     }
 
+    context.lineTo(startX, startY);
     context.closePath();
     context.restore();
 }
