@@ -6275,6 +6275,9 @@
     if (newText === text) {
       return;
     }
+    if (!text) {
+      text = '';
+    }
 
     // textObject.setText(newText);
 
