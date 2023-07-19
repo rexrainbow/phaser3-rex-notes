@@ -25,6 +25,9 @@ class Demo extends Phaser.Scene {
             .on('send', function (content) {
                 print.text = `Send: '${content}'`;
             })
+            .on('close', function () {
+                dialog.scaleDownDestroy(500);
+            })
 
     }
 
@@ -66,7 +69,7 @@ var CreateFeedbackDialog = function (scene, config) {
                 dialog.emit('send', content);
             }
 
-            dialog.scaleDownDestroy(500);
+            dialog.emit('close');
         });
 
     return dialog;
@@ -79,7 +82,7 @@ var CreateCanvasInput = function (scene) {
             color: '#260e04',
 
             stroke: null,
-            'focus.stroke': '#7b5e57',
+            'focus.stroke': '0x7b5e57',
         },
 
         style: {
