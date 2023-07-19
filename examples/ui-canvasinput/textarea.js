@@ -72,6 +72,8 @@ var CreateFeedbackDialog = function (scene, config) {
             dialog.emit('close');
         });
 
+    dialog.getElement('content').open();
+
     return dialog;
 }
 
