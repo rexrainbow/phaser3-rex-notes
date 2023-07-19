@@ -8,6 +8,10 @@ var SetText = function (textObject, newText) {
         return;
     }
 
+    if (!text) {
+        text = '';
+    }
+
     // textObject.setText(newText);
 
     // Remove lastInsertCursor directly 
