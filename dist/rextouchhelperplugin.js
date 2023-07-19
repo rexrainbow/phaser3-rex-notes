@@ -192,7 +192,7 @@
       cameras = inputPlugin.cameras.getCamerasBelowPointer(pointer);
       for (var cameraIdx = 0, camerasTotal = cameras.length; cameraIdx < camerasTotal; cameraIdx++) {
         var _out;
-        (_out = out).push.apply(_out, _toConsumableArray(inputManager.hitTest(pointer, gameObjects, cameras[cameraIdx])));
+        (_out = out).push.apply(_out, _toConsumableArray(inputManager.hitTest(pointer, gameObjects, cameras[cameraIdx], HitTestResult$1)));
       }
     }
     inputPlugin.sortGameObjects(out);
@@ -201,8 +201,10 @@
         out.splice(1);
       }
     }
+    HitTestResult$1.length = 0;
     return out;
   };
+  var HitTestResult$1 = [];
 
   var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
     if (pointer) {
@@ -242,15 +244,17 @@
     var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
     var inputManager = scene.input.manager;
     var gameObjects = [gameObject];
-    var output;
     for (var i = 0, len = cameras.length; i < len; i++) {
-      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-      if (output.length > 0) {
+      inputManager.hitTest(pointer, gameObjects, cameras[i], HitTestResult);
+      if (HitTestResult.length > 0) {
+        HitTestResult.length = 0;
         return true;
       }
     }
+    HitTestResult.length = 0;
     return false;
   };
+  var HitTestResult = [];
 
   var GetDisplayWidth = function GetDisplayWidth(gameObject) {
     if (gameObject.displayWidth !== undefined) {

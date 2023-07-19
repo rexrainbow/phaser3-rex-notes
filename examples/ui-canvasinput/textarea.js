@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -13,8 +13,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('user', './assets/images/person.png');
-        this.load.image('password', './assets/images/key.png');
     }
 
     create() {
@@ -64,7 +62,7 @@ var CreateFeedbackDialog = function (scene, config) {
     dialog
         .on('action.click', function (button, index, pointer, event) {
             if (index === 0) { // Send button                
-                var content = dialog.getElement('content').text;                
+                var content = dialog.getElement('content').text;
                 dialog.emit('send', content);
             }
 
@@ -93,25 +91,22 @@ var CreateCanvasInput = function (scene) {
             'cursor.backgroundColor': 'white',
         },
 
+        selectAll: true,
         textArea: true,
+        maxLength: 500,
     })
 }
 
 var CreateTitle = function (scene) {
-    return scene.add.text(0, 0, '', { fontSize: 30 });
+    return scene.rexUI.add.label({
+        // space: { left: 10, right: 10, top: 10, bottom: 10, },
 
-    // Or using Label
-    // return scene.rexUI.add.label({
-    //     space: { left: 10, right: 10, top: 10, bottom: 10, },
-    // 
-    //     background: scene.rexUI.add.roundRectangle({
-    //         radius: 10, color: COLOR_LIGHT
-    //     }),
-    // 
-    //     text: scene.add.text(0, 0, '', { fontSize: 30 }),
-    // })
+        // background: scene.rexUI.add.roundRectangle({
+        //     radius: 10, color: COLOR_LIGHT
+        // }),
 
-
+        text: scene.add.text(0, 0, '', { fontSize: 30 }),
+    })
 }
 
 var CreateButton = function (scene) {

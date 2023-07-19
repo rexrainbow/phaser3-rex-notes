@@ -26,18 +26,21 @@ var HitTest = function (scene, topOnly, gameObjects, pointers, out) {
         pointer = pointers[pointerIdx];
         cameras = inputPlugin.cameras.getCamerasBelowPointer(pointer);
         for (var cameraIdx = 0, camerasTotal = cameras.length; cameraIdx < camerasTotal; cameraIdx++) {
-            out.push(...inputManager.hitTest(pointer, gameObjects, cameras[cameraIdx]));
+            out.push(...inputManager.hitTest(pointer, gameObjects, cameras[cameraIdx], HitTestResult));
         }
     }
 
     inputPlugin.sortGameObjects(out);
-    if (topOnly){
+    if (topOnly) {
         if (out.length) {
             out.splice(1);
         }
     }
 
+    HitTestResult.length = 0;
     return out;
 }
+
+var HitTestResult = [];
 
 export default HitTest;

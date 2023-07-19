@@ -430,15 +430,17 @@
     var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
     var inputManager = scene.input.manager;
     var gameObjects = [gameObject];
-    var output;
     for (var i = 0, len = cameras.length; i < len; i++) {
-      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-      if (output.length > 0) {
+      inputManager.hitTest(pointer, gameObjects, cameras[i], HitTestResult);
+      if (HitTestResult.length > 0) {
+        HitTestResult.length = 0;
         return true;
       }
     }
+    HitTestResult.length = 0;
     return false;
   };
+  var HitTestResult = [];
 
   var LastOpenedEditor = undefined;
   var SetLastOpenedEditor = function SetLastOpenedEditor(editor) {
