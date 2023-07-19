@@ -4,7 +4,7 @@ import InjectDefaultConfig from './methods/InjectDefaultConfig.js';
 import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
-import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
+import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
@@ -36,7 +36,7 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
-        this._text = '';
+        this._text;
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
@@ -70,13 +70,12 @@ class CanvasInput extends DynamicText {
 
         this.setParseTextCallback(config.parseTextCallback);
 
-        this.lastInsertCursor = AddLastInsertCursor(this);
-        if (text) {
-            this.setText(text);
-        } else {
-            // Still need run word wrap for lastInsertCursor child
-            this.runWordWrap();
+        this.lastInsertCursor = CreateInsertCursorChild(this);
+
+        if (!text) {
+            text = '';
         }
+        this.setText(text);
     }
 
     addChild(child, index) {

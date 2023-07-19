@@ -14,7 +14,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
 - [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
 - [With rexui-Label](https://codepen.io/rexrainbow/pen/jOKOJoV)
-- [Text area](https://codepen.io/rexrainbow/pen/PoBPmzR)
+- [Text area](https://codepen.io/rexrainbow/pen/wvQjxxr)
 
 ## Usage
 

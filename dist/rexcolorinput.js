@@ -13683,10 +13683,7 @@
         var text = this.text;
         // Is new-line, page-break, or empty character
         if (text === '\n' || text === '\f' || text === '') {
-          this.textWidth = 0;
-          this.textHeight = 0;
-          this.ascent = 0;
-          this.descent = 0;
+          this.clearTextSize();
         } else {
           var metrics = this.style.getTextMetrics(this.context, this.text);
           this.textWidth = metrics.width;
@@ -13703,6 +13700,24 @@
           this.descent = descent;
         }
         this.updateTextFlag = false;
+        return this;
+      }
+    }, {
+      key: "clearTextSize",
+      value: function clearTextSize() {
+        this.textWidth = 0;
+        this.textHeight = 0;
+        this.ascent = 0;
+        this.descent = 0;
+        return this;
+      }
+    }, {
+      key: "copyTextSize",
+      value: function copyTextSize(child) {
+        this.textWidth = child.textWidth;
+        this.textHeight = child.textHeight;
+        this.ascent = child.ascent;
+        this.descent = child.descent;
         return this;
       }
     }, {
@@ -13732,8 +13747,7 @@
     }, {
       key: "willRender",
       get: function get() {
-        var text = this.text;
-        if (text === '\n' || text === '\f') {
+        if (this.textWidth === 0) {
           return false;
         }
         return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
@@ -16231,12 +16245,20 @@
     if (hiddenTextEdit.prevCursorPosition !== null) {
       var child = textObject.getCharChild(hiddenTextEdit.prevCursorPosition);
       if (child) {
+        // Rollback size of new line child
+        if (child.text === '\n') {
+          child.clearTextSize();
+        }
         textObject.emit('cursorout', child, hiddenTextEdit.prevCursorPosition, textObject);
       }
     }
     if (cursorPosition != null) {
       var child = textObject.getCharChild(cursorPosition);
       if (child) {
+        // Display new line child
+        if (child.text === '\n') {
+          child.copyTextSize(textObject.lastInsertCursor);
+        }
         textObject.emit('cursorin', child, cursorPosition, textObject);
       }
     }
@@ -16611,12 +16633,10 @@
     }, this);
   };
 
-  var AddLastInsertCursor = function AddLastInsertCursor(textObject) {
+  var CreateInsertCursorChild = function CreateInsertCursorChild(textObject) {
     var child = textObject.createCharChild('|'); // Use '|' to update render size
     child.text = ''; // Render empty string ''
 
-    // Invoke DynamicText's addChild method directly
-    AddChild.call(textObject, child);
     return child;
   };
 
@@ -17081,7 +17101,7 @@
       var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
-      _this._text = '';
+      _this._text;
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
       if (config.focusStyle) {
         Object.assign(focusStyle, config.focusStyle);
@@ -17108,13 +17128,11 @@
         _this.on('movecursor', moveCursorCallback);
       }
       _this.setParseTextCallback(config.parseTextCallback);
-      _this.lastInsertCursor = AddLastInsertCursor(_assertThisInitialized(_this));
-      if (text) {
-        _this.setText(text);
-      } else {
-        // Still need run word wrap for lastInsertCursor child
-        _this.runWordWrap();
+      _this.lastInsertCursor = CreateInsertCursorChild(_assertThisInitialized(_this));
+      if (!text) {
+        text = '';
       }
+      _this.setText(text);
       return _this;
     }
     _createClass(CanvasInput, [{

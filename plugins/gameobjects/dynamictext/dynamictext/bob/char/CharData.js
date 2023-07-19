@@ -103,10 +103,7 @@ class CharData extends RenderBase {
         var text = this.text;
         // Is new-line, page-break, or empty character
         if ((text === '\n') || (text === '\f') || (text === '')) {
-            this.textWidth = 0;
-            this.textHeight = 0;
-            this.ascent = 0;
-            this.descent = 0;
+            this.clearTextSize();
 
         } else {
             var metrics = this.style.getTextMetrics(this.context, this.text);
@@ -127,6 +124,22 @@ class CharData extends RenderBase {
         }
 
         this.updateTextFlag = false;
+        return this;
+    }
+
+    clearTextSize() {
+        this.textWidth = 0;
+        this.textHeight = 0;
+        this.ascent = 0;
+        this.descent = 0;
+        return this;
+    }
+
+    copyTextSize(child) {
+        this.textWidth = child.textWidth;
+        this.textHeight = child.textHeight;
+        this.ascent = child.ascent;
+        this.descent = child.descent;
         return this;
     }
 
@@ -155,8 +168,7 @@ class CharData extends RenderBase {
     }
 
     get willRender() {
-        var text = this.text;
-        if ((text === '\n') || (text === '\f')) {
+        if (this.textWidth === 0) {
             return false;
         }
 
