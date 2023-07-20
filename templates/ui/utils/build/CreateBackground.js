@@ -1,8 +1,7 @@
 import StatesRoundRectangle from '../../statesroundrectangle/StatesRoundRectangle.js';
+import StatesNineSlice from '../../statesnineslice/StatesNineSlice.js';
+import StatesImage from '../../statesimage/StatesImage.js';
 import NinePatch from '../../ninepatch/NinePatch.js';
-
-const PhaserImage = Phaser.GameObjects.Image;
-const PhaserNineSlice = Phaser.GameObjects.NineSlice;
 
 var CreateBackground = function (scene, config) {
     var gameObjectType;
@@ -21,15 +20,12 @@ var CreateBackground = function (scene, config) {
     var gameObject;
     switch (gameObjectType) {
         case 'image':
-            gameObject = new PhaserImage(scene, 0, 0, config.key, config.frame);
+            gameObject = new StatesImage(scene, config);
             break;
 
         case 'nineSlice':
-            if (PhaserNineSlice && !config.hasOwnProperty('stretchMode')) {
-                gameObject = new PhaserNineSlice(
-                    scene, 0, 0, config.key, config.frame, 0, 0,
-                    config.leftWidth, config.rightWidth, config.topHeight, config.bottomHeight
-                );
+            if (!config.hasOwnProperty('stretchMode')) {
+                gameObject = new StatesNineSlice(scene, config);
             } else {
                 gameObject = new NinePatch(scene, config);
             }

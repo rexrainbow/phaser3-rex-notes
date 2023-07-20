@@ -28,6 +28,7 @@ import InputText from './inputtext/InputText';
 import { FileChooser } from './filechooser/FileChooser';
 import FileDropZone from './filedropzone/FileDropZone';
 import StatesImage from './statesimage/StatesImage';
+import StatesNineSlice from './statesnineslice/StatesNineSlice';
 import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle';
 import StatesText from './statestext/StatesText';
 import Chart from './chart/Chart';
@@ -141,6 +142,7 @@ export {
     FileChooser,
     FileDropZone,
     StatesImage,
+    StatesNineSlice,
     StatesRoundRectangle,
     StatesText,
     Chart,

@@ -31,6 +31,7 @@ import InputText from './inputtext/InputText.js';
 import { FileChooser } from './filechooser/FileChooser.js';
 import FileDropZone from './filedropzone/FileDropZone.js';
 import StatesImage from './statesimage/StatesImage.js';
+import StatesNineSlice from './statesnineslice/StatesNineSlice.js';
 import StatesRoundRectangle from './statesroundrectangle/StatesRoundRectangle.js';
 import StatesText from './statestext/StatesText.js';
 import Chart from './chart/Chart.js';
@@ -143,6 +144,7 @@ export {
     FileChooser,
     FileDropZone,
     StatesImage,
+    StatesNineSlice,
     StatesRoundRectangle,
     StatesText,
     Chart,
