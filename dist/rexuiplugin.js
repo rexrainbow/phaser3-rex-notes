@@ -38591,6 +38591,10 @@
       var frame = GetValue$1A(config, 'frame', undefined);
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexStatesImage';
+      var effectConfig = GetValue$1A(config, 'effects', true);
+      if (effectConfig) {
+        AddEffectProperties(_assertThisInitialized(_this), effectConfig);
+      }
       _this.style = new Style(_assertThisInitialized(_this), config);
       config.style = _this.style;
       _this.addStyleManager(config);
