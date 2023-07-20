@@ -17,12 +17,13 @@ class Demo extends Phaser.Scene {
     create() {
         var iconStyle = {
             key: 'pause',
+
             'active.key': 'play',
 
             scale: 1,
             'hover.scale': 1.5,
 
-            'hover.tint': 0xff0000,
+            'hover.glowColor': 0xff0000,
         }
 
         var buttons = this.rexUI.add.buttons({
