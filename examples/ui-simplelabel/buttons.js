@@ -35,6 +35,8 @@ class Demo extends Phaser.Scene {
             icon: {
                 key: 'pause',
                 'active.key': 'play',
+
+                'hover.glowColor': 0xff0000,
             },
             text: {
                 $type: 'text',
