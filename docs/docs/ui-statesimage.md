@@ -78,6 +78,8 @@ var image = scene.rexUI.add.statesImage({
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+
+    // effects: true,
         
     // Style override in active state
     // 'active.key': undefined,
@@ -85,6 +87,8 @@ var image = scene.rexUI.add.statesImage({
     // 'active.tint': undefined,
     // 'active.alpha': undefined,
     // 'active.scale': undefined,
+    // 'active.glowColor': null,
+    // ...
 
     // Style override in hover state
     // 'hover.key': undefined,
@@ -92,6 +96,8 @@ var image = scene.rexUI.add.statesImage({
     // 'hover.tint': undefined,
     // 'hover.alpha': undefined,
     // 'hover.scale': undefined,
+    // 'hover.glowColor': null,
+    // ...
 
     // Style override in disable state
     // 'disable.key': undefined,
@@ -99,6 +105,8 @@ var image = scene.rexUI.add.statesImage({
     // 'disable.tint': undefined,
     // 'disable.alpha': undefined,
     // 'disable.scale': undefined,
+    // 'disable.glowColor': null,
+    // ...
 
 });
 ```
@@ -106,9 +114,16 @@ var image = scene.rexUI.add.statesImage({
 - `width`, `height` : Size of rectangle.
     - `undefined` : Set ot `undefined` to draw a circle.
 - `key`, `frame` : Texture.
+- `effects` : [Add effect properties](effect-properties.md)
+    - `true` : Add all effect properties.
+    - `false` : Don't add any effect property.
+    - [A plain object](effect-properties.md#attach-properties) : Add specific effect properties.
 - `'active.key'`, `'active.frame'`, `'active.tint'`, `'active.alpha'`, `'active.scale'`, ... ect : Override these properties in [active state](ui-statesimage.md#active-state)
+- `'active.glowColor`, .... etc : Override these [effect properties](effect-properties.md#effect-properties) in [active state](ui-statesimage.md#active-state)
 - `'hover.key'`, `'hover.frame'`, `'hover.tint'`, `'hover.alpha'`, `'hover.scale'`, ... ect : Override these properties in [hover state](ui-statesimage.md#hover-state)
+- `'hover.glowColor`, .... etc : Override these [effect properties](effect-properties.md#effect-properties) in [hover state](ui-statesimage.md#hover-state)
 - `'disable.key'`, `'disable.frame'`, `'disable.tint'`, `'disable.alpha'`, `'disable.scale'`, ... ect : Override these properties in [disable state](ui-statesimage.md#disable-state)
+- `'disable.glowColor`, .... etc : Override these [effect properties](effect-properties.md#effect-properties) in [disable state](ui-statesimage.md#disable-state)
 
 ### Custom class
 
