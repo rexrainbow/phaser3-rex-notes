@@ -9637,12 +9637,16 @@
 <span class="w">    </span><span class="c1">// alpha: 1,</span>
 <span class="w">    </span><span class="c1">// scale: 1,</span>
 
+<span class="w">    </span><span class="c1">// effects: true,</span>
+
 <span class="w">    </span><span class="c1">// Style override in active state</span>
 <span class="w">    </span><span class="c1">// &#39;active.key&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;active.frame&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;active.tint&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;active.scale&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.glowColor&#39;: null,</span>
+<span class="w">    </span><span class="c1">// ...</span>
 
 <span class="w">    </span><span class="c1">// Style override in hover state</span>
 <span class="w">    </span><span class="c1">// &#39;hover.key&#39;: undefined,</span>
@@ -9650,6 +9654,8 @@
 <span class="w">    </span><span class="c1">// &#39;hover.tint&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;hover.scale&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.glowColor&#39;: null,</span>
+<span class="w">    </span><span class="c1">// ...</span>
 
 <span class="w">    </span><span class="c1">// Style override in disable state</span>
 <span class="w">    </span><span class="c1">// &#39;disable.key&#39;: undefined,</span>
@@ -9657,6 +9663,8 @@
 <span class="w">    </span><span class="c1">// &#39;disable.tint&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.scale&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
+<span class="w">    </span><span class="c1">// ...</span>
 
 <span class="p">});</span>
 </code></pre></div>
@@ -9666,9 +9674,18 @@
 </ul>
 </li>
 <li><code>key</code>, <code>frame</code> : Texture.</li>
+<li><code>effects</code> : <a href="../effect-properties/">Add effect properties</a><ul>
+<li><code>true</code> : Add all effect properties.</li>
+<li><code>false</code> : Don't add any effect property.</li>
+<li><a href="../effect-properties/#attach-properties">A plain object</a> : Add specific effect properties.</li>
+</ul>
+</li>
 <li><code>'active.key'</code>, <code>'active.frame'</code>, <code>'active.tint'</code>, <code>'active.alpha'</code>, <code>'active.scale'</code>, ... ect : Override these properties in <a href="./#active-state">active state</a></li>
+<li><code>'active.glowColor</code>, .... etc : Override these <a href="../effect-properties/#effect-properties">effect properties</a> in <a href="./#active-state">active state</a></li>
 <li><code>'hover.key'</code>, <code>'hover.frame'</code>, <code>'hover.tint'</code>, <code>'hover.alpha'</code>, <code>'hover.scale'</code>, ... ect : Override these properties in <a href="./#hover-state">hover state</a></li>
+<li><code>'hover.glowColor</code>, .... etc : Override these <a href="../effect-properties/#effect-properties">effect properties</a> in <a href="./#hover-state">hover state</a></li>
 <li><code>'disable.key'</code>, <code>'disable.frame'</code>, <code>'disable.tint'</code>, <code>'disable.alpha'</code>, <code>'disable.scale'</code>, ... ect : Override these properties in <a href="./#disable-state">disable state</a></li>
+<li><code>'disable.glowColor</code>, .... etc : Override these <a href="../effect-properties/#effect-properties">effect properties</a> in <a href="./#disable-state">disable state</a></li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
