@@ -286,7 +286,7 @@ gridSizer.add(child,
         row: 0,
         align: 'center',
         padding: {left: 0, right: 0, top: 0, bottom: 0},
-        expand: false,
+        expand: false,        // expand: {width, height}
         key: undefined
     }
 );
@@ -327,7 +327,14 @@ gridSizer.add(child, column, row, align, padding, expand, key);
             bottom: 0
         }
         ```
-- `expand` : Set `true` to height and width.
+- `expand` :
+    - Boolean value
+        - `true` : Expand width and height of child. Default value.
+        - `false` : Don't expand width or height of child.
+    - A plain object
+        - `{width: true}` : Only expand width of child.
+        - `{height: true}` : only expand height of child.
+        - `{width: true, height: true}` : Expand width and height of child.
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 

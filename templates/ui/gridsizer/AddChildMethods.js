@@ -74,7 +74,7 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
 
         if ((rowIndex === true) || (typeof (rowIndex) === 'number')) {
             this.addEmptyColumn();
-        } else {            
+        } else {
             this.addEmptyRow();
         }
 
@@ -98,7 +98,15 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
     var config = this.getSizerConfig(gameObject);
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
-    config.expand = expand;
+
+    if (IsPlainObject(expand)) {
+        config.expandWidth = GetValue(expand, 'width', false);
+        config.expandHeight = GetValue(expand, 'height', false);
+    } else {
+        config.expandWidth = expand;
+        config.expandHeight = expand;
+    }
+
     this.sizerChildren[itemIndex] = gameObject;
 
     if (childKey !== undefined) {

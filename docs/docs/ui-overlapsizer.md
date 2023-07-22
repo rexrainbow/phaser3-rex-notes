@@ -194,7 +194,7 @@ sizer.add(child,
         offsetX: 0,
         offsetY: 0,
         padding: {left: 0, right: 0, top: 0, bottom: 0},
-        expand: true,        
+        expand: true,        // expand: {width, height}
         minWidth: undefined,
         minHeight: undefined
     }
