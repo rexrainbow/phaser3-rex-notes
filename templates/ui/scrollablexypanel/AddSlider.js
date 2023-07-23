@@ -1,4 +1,4 @@
-import Slider from '../scrollbar/ScrollBarWrap.js';
+import CreateScrollbar from '../utils/scrollable/CreateScrollbar.js';
 import Scroller from '../../../plugins/scroller.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -15,7 +15,7 @@ var AddSlider = function (parent, axis, config) {
         }
 
         sliderConfig.orientation = (isAxisX) ? 0 : 1;
-        slider = new Slider(parent.scene, sliderConfig);
+        slider = CreateScrollbar(parent.scene, sliderConfig);
 
         var column, row, padding;
         var sliderPosition = GetValue(sliderConfig, 'position', 0);

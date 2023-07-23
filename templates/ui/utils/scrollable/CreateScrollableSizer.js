@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
-import Slider from '../../scrollbar/ScrollBarWrap.js';
+import CreateScrollbar from './CreateScrollbar.js';
 import Scroller from '../../../../plugins/scroller.js';
 import MouseWheelScroller from '../../../../plugins/input/mousewheelscroller/MouseWheelScroller.js';
 
@@ -69,7 +69,7 @@ var CreateScrollableSizer = function (parent, config) {
             // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
             // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
-            slider = new Slider(scene, sliderConfig);
+            slider = CreateScrollbar(scene, sliderConfig);
             sliderPadding = GetValue(config, 'space.slider', 0);
             parent.hideUnscrollableSlider = GetValue(sliderConfig, 'hideUnscrollableSlider', false);
             parent.adaptThumbSizeMode = GetValue(sliderConfig, 'adaptThumbSize', false);
