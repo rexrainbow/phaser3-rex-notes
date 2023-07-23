@@ -6,4 +6,7 @@ export default {
     h: 1,
     horizontal: 1,
     x: 1,
+
+    xy: 2,
+    vh: 2,
 };

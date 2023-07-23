@@ -2,6 +2,7 @@ import GridSizer from '../gridsizer/GridSizer.js';
 import AddPanel from './AddPanel.js';
 import AddSlider from './AddSlider.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ScrollableXYPanel extends GridSizer {
@@ -20,8 +21,8 @@ class ScrollableXYPanel extends GridSizer {
             expandPanelWidth = GetValue(expandPanel, 'width', false);
             expandPanelHeight = GetValue(expandPanel, 'height', false);
         } else {
-            expandPanelWidth = expand;
-            expandPanelHeight = expand;
+            expandPanelWidth = expandPanel;
+            expandPanelHeight = expandPanel;
         }
 
         config.columnProportions = [0, ((expandPanelWidth) ? 1 : 0), 0];
@@ -41,6 +42,23 @@ class ScrollableXYPanel extends GridSizer {
         AddSlider(this, 'x', config);
         AddSlider(this, 'y', config);
     }
+
+    //runLayout(parent, newWidth, newHeight) {
+    //    // Skip hidden or !dirty sizer
+    //    if (this.ignoreLayout) {
+    //        return this;
+    //    }
+    //    super.runLayout(parent, newWidth, newHeight);
+    //    this.resizeController();
+    //
+    //    // Set `t` to 0 at first runLayout()
+    //    if (!this.runLayoutFlag) {
+    //        this.runLayoutFlag = true;
+    //        this.setT(0);
+    //    }
+    //
+    //    return this;
+    //}
 
     set s(value) {
     }
