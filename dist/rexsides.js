@@ -983,7 +983,8 @@
       var state = GetLocalState(child);
       var parent = state.parent;
       if (state.syncScrollFactor) {
-        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+        child.scrollFactorX = parent.scrollFactorX;
+        child.scrollFactorY = parent.scrollFactorY;
       }
       return this;
     },

@@ -11753,7 +11753,8 @@
       var state = GetLocalState(child);
       var parent = state.parent;
       if (state.syncScrollFactor) {
-        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+        child.scrollFactorX = parent.scrollFactorX;
+        child.scrollFactorY = parent.scrollFactorY;
       }
       return this;
     },
@@ -21983,7 +21984,7 @@
   var GetExpandedChildWidth$1 = function GetExpandedChildWidth(child, colWidth) {
     var childWidth;
     var childConfig = child.rexSizer;
-    if (childConfig.expand) {
+    if (childConfig.expandWidth) {
       var padding = childConfig.padding;
       childWidth = colWidth - padding.left - padding.right;
     }
@@ -21993,7 +21994,7 @@
   var GetExpandedChildHeight$1 = function GetExpandedChildHeight(child, rowHeight) {
     var childHeight;
     var childConfig = child.rexSizer;
-    if (childConfig.expand) {
+    if (childConfig.expandHeight) {
       var padding = childConfig.padding;
       childHeight = rowHeight - padding.top - padding.bottom;
     }
@@ -22234,7 +22235,13 @@
     var config = this.getSizerConfig(gameObject);
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
-    config.expand = expand;
+    if (IsPlainObject$7(expand)) {
+      config.expandWidth = GetValue$G(expand, 'width', false);
+      config.expandHeight = GetValue$G(expand, 'height', false);
+    } else {
+      config.expandWidth = expand;
+      config.expandHeight = expand;
+    }
     this.sizerChildren[itemIndex] = gameObject;
     if (childKey !== undefined) {
       this.addChildrenMap(childKey, gameObject);
@@ -29132,7 +29139,7 @@
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$3 = Phaser.Math.Clamp;
   var SnapTo$1 = Phaser.Math.Snap.To;
-  var Slider$1 = /*#__PURE__*/function (_ProgressBase) {
+  var Slider = /*#__PURE__*/function (_ProgressBase) {
     _inherits(Slider, _ProgressBase);
     var _super = _createSuper(Slider);
     function Slider(scene, config) {
@@ -29291,7 +29298,7 @@
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider$1.prototype, methods$2);
+  Object.assign(Slider.prototype, methods$2);
 
   var CreateSlider = function CreateSlider(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -29301,7 +29308,7 @@
     CreateChild(scene, data, 'track', view, styles, customBuilders);
     CreateChild(scene, data, 'indicator', view, styles, customBuilders);
     CreateChild(scene, data, 'thumb', view, styles, customBuilders);
-    var gameObject = new Slider$1(scene, data);
+    var gameObject = new Slider(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -29363,7 +29370,7 @@
         if (!sliderConfig.hasOwnProperty('input')) {
           sliderConfig.input = -1;
         }
-        slider = new Slider$1(scene, sliderConfig);
+        slider = new Slider(scene, sliderConfig);
         scene.add.existing(slider);
         var padding;
         if (_this.orientation === 0) {
@@ -29608,7 +29615,7 @@
           var sliderHeight = GetValue$i(sliderConfig, 'height', undefined);
           proportion = sliderHeight === undefined ? 1 : 0;
         }
-        slider = new Slider$1(scene, sliderConfig);
+        slider = new Slider(scene, sliderConfig);
         scene.add.existing(slider);
         _this.add(slider, {
           proportion: proportion
@@ -29780,40 +29787,34 @@
     return scrollMode;
   };
 
-  var Slider = /*#__PURE__*/function (_Base) {
-    _inherits(Slider, _Base);
-    var _super = _createSuper(Slider);
-    function Slider(scene, config) {
-      var _this;
-      _classCallCheck(this, Slider);
-      if (config === undefined) {
-        config = {};
-      }
-      var sliderConfig = Clone(config);
-      config = {
-        slider: sliderConfig
-      };
-
-      // Move orientation parameter from sliderConfig to config
-      config.orientation = sliderConfig.orientation;
-      delete sliderConfig.orientation;
-
-      // Move background parameter from sliderConfig to config
-      config.background = sliderConfig.background;
-      delete sliderConfig.background;
-
-      // Move buttons parameter from sliderConfig to config
-      config.buttons = sliderConfig.buttons;
-      delete sliderConfig.buttons;
-      _this = _super.call(this, scene, config);
-      var slider = _this.childrenMap.slider;
-      _this.addChildrenMap('track', slider.childrenMap.track);
-      _this.addChildrenMap('indicator', slider.childrenMap.indicator);
-      _this.addChildrenMap('thumb', slider.childrenMap.thumb);
-      return _this;
+  var CreateScrollbar = function CreateScrollbar(scene, config) {
+    if (config === undefined) {
+      config = {};
     }
-    return _createClass(Slider);
-  }(ScrollBar);
+    var sliderConfig = Clone(config);
+    config = {
+      slider: sliderConfig
+    };
+
+    // Move orientation parameter from sliderConfig to config
+    config.orientation = sliderConfig.orientation;
+    delete sliderConfig.orientation;
+
+    // Move background parameter from sliderConfig to config
+    config.background = sliderConfig.background;
+    delete sliderConfig.background;
+
+    // Move buttons parameter from sliderConfig to config
+    config.buttons = sliderConfig.buttons;
+    delete sliderConfig.buttons;
+    var scrollBar = new ScrollBar(scene, config);
+    scene.add.existing(scrollBar);
+    var slider = scrollBar.childrenMap.slider;
+    scrollBar.addChildrenMap('track', slider.childrenMap.track);
+    scrollBar.addChildrenMap('indicator', slider.childrenMap.indicator);
+    scrollBar.addChildrenMap('thumb', slider.childrenMap.thumb);
+    return scrollBar;
+  };
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
@@ -30897,7 +30898,7 @@
         // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
         // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
-        slider = new Slider(scene, sliderConfig);
+        slider = CreateScrollbar(scene, sliderConfig);
         sliderPadding = GetValue$c(config, 'space.slider', 0);
         parent.hideUnscrollableSlider = GetValue$c(sliderConfig, 'hideUnscrollableSlider', false);
         parent.adaptThumbSizeMode = GetValue$c(sliderConfig, 'adaptThumbSize', false);
@@ -31174,17 +31175,17 @@
         }
         return t;
       },
-      set: function set(t) {
+      set: function set(value) {
         // Get inner childT
         var childMargin = this.childMargin;
         if (childMargin.top !== 0 || childMargin.bottom !== 0) {
           var child = this.childrenMap.child;
           var innerHeight = child.topChildOY - child.bottomChildOY;
           var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
-          var innerChildOY = outerHeight * t - childMargin.top;
-          t = innerChildOY / innerHeight;
+          var innerChildOY = outerHeight * value - childMargin.top;
+          value = innerChildOY / innerHeight;
         }
-        this.childrenMap.child.t = t;
+        this.childrenMap.child.t = value;
         this.updateController();
       }
     }, {

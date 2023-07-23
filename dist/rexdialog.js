@@ -974,7 +974,8 @@
       var state = GetLocalState(child);
       var parent = state.parent;
       if (state.syncScrollFactor) {
-        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
+        child.scrollFactorX = parent.scrollFactorX;
+        child.scrollFactorY = parent.scrollFactorY;
       }
       return this;
     },
@@ -12459,7 +12460,7 @@
   var GetExpandedChildWidth = function GetExpandedChildWidth(child, colWidth) {
     var childWidth;
     var childConfig = child.rexSizer;
-    if (childConfig.expand) {
+    if (childConfig.expandWidth) {
       var padding = childConfig.padding;
       childWidth = colWidth - padding.left - padding.right;
     }
@@ -12469,7 +12470,7 @@
   var GetExpandedChildHeight = function GetExpandedChildHeight(child, rowHeight) {
     var childHeight;
     var childConfig = child.rexSizer;
-    if (childConfig.expand) {
+    if (childConfig.expandHeight) {
       var padding = childConfig.padding;
       childHeight = rowHeight - padding.top - padding.bottom;
     }
@@ -12710,7 +12711,13 @@
     var config = this.getSizerConfig(gameObject);
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
-    config.expand = expand;
+    if (IsPlainObject$1(expand)) {
+      config.expandWidth = GetValue$4(expand, 'width', false);
+      config.expandHeight = GetValue$4(expand, 'height', false);
+    } else {
+      config.expandWidth = expand;
+      config.expandHeight = expand;
+    }
     this.sizerChildren[itemIndex] = gameObject;
     if (childKey !== undefined) {
       this.addChildrenMap(childKey, gameObject);
