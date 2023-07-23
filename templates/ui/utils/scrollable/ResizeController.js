@@ -1,5 +1,4 @@
 import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
-import Sizer from '../../sizer/Sizer.js';
 
 var ResizeController = function () {
     var topChildOY = this.topChildOY;

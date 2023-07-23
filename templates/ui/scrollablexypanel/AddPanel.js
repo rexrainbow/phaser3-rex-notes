@@ -2,20 +2,19 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddPanel = function (parent, config) {
     var panelConfig = GetValue(config, 'panel', undefined);
-    var panel = GetValue(panelConfig, 'child');
+    var panel = GetValue(panelConfig, 'gameObject');
     if (!panel) {
         return;
     }
 
-    var expandX = GetValue(config, 'panel.expandX', true);
-    var expandY = GetValue(config, 'panel.expandY', true);
+    var expandPanel = GetValue(config, 'expand.panel', true);
 
     parent.add(panel,
         {
             column: 1,
             row: 1,
             align: 'center',
-            expand: true,
+            expand: expandPanel,
             key: 'panel'
         }
     );

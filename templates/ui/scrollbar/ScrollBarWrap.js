@@ -1,7 +1,11 @@
-import Base from '../../scrollbar/ScrollBar.js';
-import Clone from '../../../../plugins/utils/object/Clone.js'
+/*
+Scrollbar class for ScrollablePanel and ScrollableXYPanel
+*/
 
-class Slider extends Base {
+import Base from './ScrollBar.js';
+import Clone from '../../../plugins/utils/object/Clone.js';
+
+class ScrollBarWrap extends Base {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -26,11 +30,11 @@ class Slider extends Base {
 
         super(scene, config);
 
-        var slider = this.childrenMap.slider;
-        this.addChildrenMap('track', slider.childrenMap.track);
-        this.addChildrenMap('indicator', slider.childrenMap.indicator);
-        this.addChildrenMap('thumb', slider.childrenMap.thumb);
+        var sliderChildrenMap = this.childrenMap.slider.childrenMap;
+        this.addChildrenMap('track', sliderChildrenMap.track);
+        this.addChildrenMap('indicator', sliderChildrenMap.indicator);
+        this.addChildrenMap('thumb', sliderChildrenMap.thumb);
     }
 }
 
-export default Slider;
+export default ScrollBarWrap;

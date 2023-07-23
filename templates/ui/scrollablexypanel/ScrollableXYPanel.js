@@ -14,11 +14,18 @@ class ScrollableXYPanel extends GridSizer {
         config.column = 3;
         config.row = 3;
 
-        var panelColumnProportions = (GetValue(config, 'panel.expandX', true)) ? 1 : 0;
-        config.columnProportions = [0, panelColumnProportions, 0];
+        var expandPanel = GetValue(config, 'expand.panel', true);
+        var expandPanelWidth, expandPanelHeight;
+        if (IsPlainObject(expandPanel)) {
+            expandPanelWidth = GetValue(expandPanel, 'width', false);
+            expandPanelHeight = GetValue(expandPanel, 'height', false);
+        } else {
+            expandPanelWidth = expand;
+            expandPanelHeight = expand;
+        }
 
-        var panelRowProportions = (GetValue(config, 'panel.expandY', true)) ? 1 : 0;
-        config.rowProportions = [0, panelRowProportions, 0];
+        config.columnProportions = [0, ((expandPanelWidth) ? 1 : 0), 0];
+        config.rowProportions = [0, ((expandPanelHeight) ? 1 : 0), 0];
 
         super(scene, config);
         this.type = 'rexScrollableXYPanel';

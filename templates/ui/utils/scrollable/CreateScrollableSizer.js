@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
-import Slider from './Slider.js';
+import Slider from '../../scrollbar/ScrollBarWrap.js';
 import Scroller from '../../../../plugins/scroller.js';
 import MouseWheelScroller from '../../../../plugins/input/mousewheelscroller/MouseWheelScroller.js';
 

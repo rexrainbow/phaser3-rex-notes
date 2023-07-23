@@ -1,4 +1,4 @@
-import Slider from '../utils/scrollable/Slider.js';
+import Slider from '../scrollbar/ScrollBarWrap.js';
 import Scroller from '../../../plugins/scroller.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -68,13 +68,14 @@ var AddSlider = function (parent, axis, config) {
 
     var scrollerConfig = GetValue(config, `scroller${axis}`, true),
         scroller;
-    //if (scrollerConfig) {
-    //    if (scrollerConfig === true) {
-    //        scrollerConfig = {};
-    //    }
-    //    scrollerConfig.orientation = (isAxisX) ? 0 : 1;
-    //    scroller = new Scroller(child, scrollerConfig);
-    //}
+    var panel = parent.childrenMap.panel;
+    if (scrollerConfig && panel) {
+        if (scrollerConfig === true) {
+            scrollerConfig = {};
+        }
+        scrollerConfig.orientation = (isAxisX) ? 0 : 1;
+        scroller = new Scroller(panel, scrollerConfig);
+    }
 
 
     // Control
