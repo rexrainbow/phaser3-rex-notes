@@ -115,18 +115,18 @@ class Scrollable extends Sizer {
         return this;
     }
 
-    set t(t) {
+    set t(value) {
         // Get inner childT
         var childMargin = this.childMargin;
         if ((childMargin.top !== 0) || (childMargin.bottom !== 0)) {
             var child = this.childrenMap.child;
             var innerHeight = (child.topChildOY - child.bottomChildOY);
             var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
-            var innerChildOY = (outerHeight * t) - childMargin.top;
-            t = innerChildOY / innerHeight;
+            var innerChildOY = (outerHeight * value) - childMargin.top;
+            value = innerChildOY / innerHeight;
         }
 
-        this.childrenMap.child.t = t;
+        this.childrenMap.child.t = value;
         this.updateController();
     }
 

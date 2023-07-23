@@ -71,6 +71,7 @@ import TabPagesFactory from './tabpages/Factory.js';
 import FolderFactory from './folder/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
+// import ScrollableXYPanelFactory from './scrollablexypanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
 import ColorInputFactory from './colorinput/colorinput/Factory.js';
 import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
@@ -78,7 +79,6 @@ import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
 import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import SidesFactory from './sides/Factory.js';
 import TweakerFactory from './tweaker/Factory.js';
-// import MakerFactory from './maker/Factory.js';
 
 import ClickFactory from './click/Factory.js';
 import ClickOutsideFactory from './clickoutside/Factory.js';
@@ -140,17 +140,6 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
     get viewport() {
         return GetViewport(this.scene, this.scene.cameras.main, true);
     }
-
-    // make(data, view, styles, customBuilders) {
-    //     return Make(this.scene, data, view, styles, customBuilders);
-    // }
-
-    //get maker() {
-    //    if (!this._maker) {
-    //        this._maker = new Maker(this.scene);
-    //    }
-    //    return this._maker;
-    //}
 
 }
 

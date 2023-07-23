@@ -96,7 +96,11 @@ declare class GridSizer extends BaseSizer {
             row?: number | undefined | true,
             align?: GridSizer.AlignTypes,
             padding?: GridSizer.PaddingTypes,
-            expand?: boolean,
+            expand?: boolean |
+            {
+                width?: boolean,
+                height?: boolean,
+            },
             key?: string
         }
     ): this;
@@ -107,7 +111,11 @@ declare class GridSizer extends BaseSizer {
         rowIndex?: number | undefined | true,
         align?: GridSizer.AlignTypes,
         padding?: GridSizer.PaddingTypes,
-        expand?: boolean,
+        expand?: boolean |
+        {
+            width?: boolean,
+            height?: boolean,
+        },
         key?: string
     ): this;
 
