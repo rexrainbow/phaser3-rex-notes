@@ -1,4 +1,4 @@
-import GridSizer from '../gridsizer/GridSizer.js';
+import GridSizer from '../../gridsizer/GridSizer.js';
 import AddMainChild from './AddMainChild.js';
 import AddSlider from './AddSlider.js';
 
@@ -24,8 +24,8 @@ var CreateScrollableSizer = function (parent, config) {
             break;
 
         default: // xy
-            AddSlider(parent, scrollableSizer, 'x', config);
             AddSlider(parent, scrollableSizer, 'y', config);
+            AddSlider(parent, scrollableSizer, 'x', config);
             break;
     }
 

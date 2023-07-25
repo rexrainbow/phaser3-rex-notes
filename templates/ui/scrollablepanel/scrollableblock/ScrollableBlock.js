@@ -30,7 +30,7 @@ class ScrollableBlock extends BaseSizer {
         this.execeedTopState = false;
         this.execeedBottomState = false;
 
-        this.setScrollMode(GetValue(config, 'scrollMode', true))
+        this.setScrollMode(GetValue(config, 'scrollMode', 0))
         this.setClampMode(GetValue(config, 'clamplChildOY', true));
 
         // Add elements

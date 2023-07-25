@@ -15,16 +15,16 @@ var ResizeController = function () {
             break;
 
         default: // 2
-            SetControllerBounds.call(this, 'x');
             SetControllerBounds.call(this, 'y');
+            SetControllerBounds.call(this, 'x');
 
             this.updateController();
 
-            HideUnscrollableSlider.call(this, 'x');
             HideUnscrollableSlider.call(this, 'y');
+            HideUnscrollableSlider.call(this, 'x');
 
-            AdaptThumbSize.call(this, 'x');
             AdaptThumbSize.call(this, 'y');
+            AdaptThumbSize.call(this, 'x');
             break;
     }
 

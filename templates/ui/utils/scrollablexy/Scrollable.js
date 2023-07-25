@@ -14,6 +14,9 @@ class Scrollable extends Sizer {
             config = {};
         }
 
+        if (!!config.sliderY && !!config.sliderX) {
+            config.scrollMode = 2;
+        }
         var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
         // Create sizer
         config.orientation = ((scrollMode === 0) || (scrollMode === 2)) ? 1 : 0;
@@ -219,7 +222,7 @@ class Scrollable extends Sizer {
     }
 
     get rightChildOX() {
-        return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+        return this.childrenMap.child.rightChildOX - this.childMargin.right;
     }
 
     get childVisibleHeight() {

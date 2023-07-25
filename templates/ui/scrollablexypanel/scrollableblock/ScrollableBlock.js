@@ -1,6 +1,6 @@
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import SCROLLMODE from '../ScrollModeConst.js';
+import SCROLLMODE from '../../utils/ScrollModeConst.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 import MaskToGameObject from '../../../../plugins/utils/mask/MaskToGameObject.js';
 
@@ -29,8 +29,10 @@ class ScrollableBlock extends BaseSizer {
         this._childOY = 0;
         this.execeedTopState = false;
         this.execeedBottomState = false;
+        this.execeedLeftState = false;
+        this.execeedRightState = false;
 
-        this.setScrollMode(GetValue(config, 'scrollMode', true));
+        this.setScrollMode(GetValue(config, 'scrollMode', 0));
 
         var clampChildOY = GetValue(config, 'clamplChildOY', true);
         var clampChildOX = GetValue(config, 'clamplChildOX', clampChildOY);
@@ -233,7 +235,7 @@ class ScrollableBlock extends BaseSizer {
         var leftChildOX = this.leftChildOX;
         var rightChildOX = this.rightChildOX;
         var childOXExceedLeft = this.childOXExceedLeft(ox);
-        var childOXExeceedRight = this.childOYExeceedRight(ox);
+        var childOXExeceedRight = this.childOXExeceedRight(ox);
 
         if (this.clampChildOX) {
             if (this.childVisibleWidth > this.childWidth) {

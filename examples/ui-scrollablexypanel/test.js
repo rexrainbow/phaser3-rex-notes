@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
 
 var CreatePanel = function (scene) {
     return scene.rexUI.add.gridSizer({
-        column: 10, row: 10,
+        column: 10, row: 20,
         columnProportions: 0, rowProportions: 0,
         createCellContainerCallback: function (scene, x, y, config) {
             config.expand = true;

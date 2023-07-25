@@ -1,3 +1,5 @@
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 var AddMainChild = function (topPatent, childParent, config) {
     var child = GetValue(config, 'child.gameObject', undefined),
         childPadding;
@@ -50,10 +52,14 @@ var AddMainChild = function (topPatent, childParent, config) {
 
         childParent.add(child,
             {
-                proportion: GetValue(config, 'child.proportion', 1),  // Private
+                column: 1,
+                row: 1,
                 align: 'center',
                 padding: childPadding,
-                expand: GetValue(config, 'child.expand', true),  // Private
+                expand: {
+                    width: GetValue(config, 'child.expandWidth', true),  // Private
+                    height: GetValue(config, 'child.expandHeight', true) // Private
+                }
             }
         );
     }
