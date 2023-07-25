@@ -27,6 +27,7 @@ class ScrollableBlock extends BaseSizer {
         this.child = undefined;
         this.childrenMask = undefined;
         this._childOY = 0;
+        this._childOX = 0;
         this.execeedTopState = false;
         this.execeedBottomState = false;
         this.execeedLeftState = false;

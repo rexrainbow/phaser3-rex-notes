@@ -36,18 +36,17 @@ class Scrollable extends Sizer {
             var align = GetValue(config, 'align.header', 'center');
             var headerSpace = GetValue(config, 'space.header', 0);
             var padding;
-            if (scrollMode === 0) {
+            if ((scrollMode === 0) || (scrollMode === 2)) {
                 padding = { bottom: headerSpace };
             } else {
                 padding = { right: headerSpace };
             }
-            var expand = GetValue(config, 'expand.header', true);
             this.add(header,
                 {
                     proportion: 0,
                     align: align,
                     padding: padding,
-                    expand: expand
+                    expand: GetValue(config, 'expand.header', true)
                 }
             );
         }
@@ -69,18 +68,17 @@ class Scrollable extends Sizer {
             var align = GetValue(config, 'align.footer', 'center');
             var footerSpace = GetValue(config, 'space.footer', 0);
             var padding;
-            if (scrollMode === 0) {
+            if ((scrollMode === 0) || (scrollMode === 2)) {
                 padding = { top: footerSpace };
             } else {
                 padding = { left: footerSpace };
             }
-            var expand = GetValue(config, 'expand.footer', true);
             this.add(footer,
                 {
                     proportion: 0,
                     align: align,
                     padding: padding,
-                    expand: expand
+                    expand: GetValue(config, 'expand.footer', true)
                 }
             );
         }

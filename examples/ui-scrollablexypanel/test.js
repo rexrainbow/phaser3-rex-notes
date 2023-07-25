@@ -21,8 +21,29 @@ class Demo extends Phaser.Scene {
             width: 400, height: 400,
 
             panel: {
-                child: CreatePanel(this)
+                child: CreatePanel(this),
+                mask: {
+                    mask: true,
+                    padding: 1,
+                }
             },
+
+            header: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Header'),
+            }),
+
+            footer: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Footer'),
+            }),
+
 
             sliderX: {
                 track: { width: 20, radius: 10, color: COLOR_DARK },
@@ -33,13 +54,24 @@ class Demo extends Phaser.Scene {
                 track: { width: 20, radius: 10, color: COLOR_DARK },
                 thumb: { radius: 13, color: COLOR_LIGHT }
             },
+
+            space: {
+                //left: 10,
+                //right: 10,
+                //top: 10,
+                //bottom: 10,
+
+                panel: 10,
+                header: 10,
+                footer: 10,
+            }
         })
 
         this.add.existing(panel)
 
         panel
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000);
+        //.drawBounds(this.add.graphics(), 0xff0000);
 
     }
 

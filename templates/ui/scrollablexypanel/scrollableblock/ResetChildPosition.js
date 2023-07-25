@@ -12,7 +12,7 @@ var ResetChildPosition = function () {
 
         default:  // xy
             y += this.childOY;
-            x += this.childOY;
+            x += this.childOX;
             break;
     }
 

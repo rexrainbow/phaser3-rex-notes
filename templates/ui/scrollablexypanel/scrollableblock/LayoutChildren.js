@@ -15,8 +15,6 @@ var LayoutChildren = function () {
                 break;
 
             default:
-                childWidth = this.width;
-                childHeight = this.height;
                 break;
         }
 
