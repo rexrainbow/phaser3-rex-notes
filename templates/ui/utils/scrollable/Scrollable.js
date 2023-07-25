@@ -291,7 +291,7 @@ class Scrollable extends Sizer {
     }
 
     set mouseWheelScrollerEnable(value) {
-        var mouseWheelScroller = this.childrenMap.mouseWheelScrollerEnable;
+        var mouseWheelScroller = this.childrenMap.mouseWheelScroller;
         if (!mouseWheelScroller) {
             return;
         }

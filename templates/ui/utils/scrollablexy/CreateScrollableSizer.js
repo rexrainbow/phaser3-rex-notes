@@ -1,4 +1,5 @@
 import GridSizer from '../gridsizer/GridSizer.js';
+import AddMainChild from './AddMainChild.js';
 import AddSlider from './AddSlider.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -11,6 +12,8 @@ var CreateScrollableSizer = function (parent, config) {
         columnProportions: [0, 1, 0],
         rowProportions: [0, 1, 0]
     });
+
+    AddMainChild(parent, scrollableSizer, config);
 
     switch (parent.scrollMode) {
         case 0:  // y
@@ -25,8 +28,6 @@ var CreateScrollableSizer = function (parent, config) {
             AddSlider(parent, scrollableSizer, 'y', config);
             break;
     }
-
-    parent.addChildrenMap('child', child);
 
     return scrollableSizer;
 }

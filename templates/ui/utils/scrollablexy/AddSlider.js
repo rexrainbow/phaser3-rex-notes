@@ -6,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddSlider = function (topPatent, sliderParent, axis, config) {
     axis = axis.toUpperCase();
-    var isAxisX = (axis === 'X');
+    var isAxisY = (axis === 'Y');
     var isScrollXYMode = (topPatent.scrollMode === 2);
     var child = topPatent.childrenMap.child;
 
@@ -17,7 +17,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             sliderConfig = {};
         }
 
-        sliderConfig.orientation = (isAxisX) ? 0 : 1;
+        sliderConfig.orientation = (isAxisY) ? 1 : 0;
         slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
         var column, row, padding;
@@ -26,18 +26,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
         }
         var sliderPadding = GetValue(config, 'space.slider', 0);
-        if (isAxisX) {
-            if (sliderPosition === 0) { // bottom
-                column = 1;
-                row = 2;
-                padding = { top: sliderPadding };
-            } else { // top
-                column = 1;
-                row = 0;
-                padding = { bottom: sliderPadding };
-            }
-
-        } else {
+        if (isAxisY) {
             if (sliderPosition === 0) { // right
                 column = 2;
                 row = 1;
@@ -46,6 +35,17 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
                 column = 0;
                 row = 1;
                 padding = { right: sliderPadding };
+            }
+
+        } else {
+            if (sliderPosition === 0) { // bottom
+                column = 1;
+                row = 2;
+                padding = { top: sliderPadding };
+            } else { // top
+                column = 1;
+                row = 0;
+                padding = { bottom: sliderPadding };
             }
         }
 
@@ -76,7 +76,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         if (scrollerConfig === true) {
             scrollerConfig = {};
         }
-        scrollerConfig.orientation = (isAxisX) ? 0 : 1;
+        scrollerConfig.orientation = (isAxisY) ? 1 : 0;
         scroller = new Scroller(child, scrollerConfig);
     }
 
@@ -90,7 +90,11 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     topPatent.addChildrenMap(`scroller${axis}`, scroller);
     topPatent.addChildrenMap(`mouseWheelScroller${axis}`, mouseWheelScroller);
 
-    if (!isScrollXYMode) {
+    if ((!isScrollXYMode) || (isAxisY)) {
+        topPatent['hideUnscrollableSlider'] = topPatent[`hideUnscrollableSlider${axis}`];
+        topPatent['adaptThumbSizeMode'] = topPatent[`adaptThumb${axis}SizeMode`];
+        topPatent['minThumbSize'] = topPatent[`minThumb${axis}Size`];
+
         topPatent.addChildrenMap('slider', slider);
         topPatent.addChildrenMap('scroller', scroller);
         topPatent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
@@ -99,7 +103,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
     // Control
     if (slider) {
-        var keyST = (isAxisX) ? 's' : 't';
+        var keyST = (isAxisY) ? 't' : 's';
         var eventName = `scroll${axis}`;
         slider
             .on('valuechange', function (newValue) {

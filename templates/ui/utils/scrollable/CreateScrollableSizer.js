@@ -104,14 +104,12 @@ var CreateScrollableSizer = function (parent, config) {
         }
 
         // Add child to parent sizer
-        var proportion = GetValue(config, 'child.proportion', 1);
-        var expand = GetValue(config, 'child.expand', true);
         scrollableSizer.add(child,
             {
-                proportion: proportion,
+                proportion: GetValue(config, 'child.proportion', 1),
                 align: 'center',
                 padding: childPadding,
-                expand: expand,
+                expand: GetValue(config, 'child.expand', true),
             }
         );
 
