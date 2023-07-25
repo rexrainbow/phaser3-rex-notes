@@ -9,7 +9,7 @@ var ResolveWidth = function (width) {
         }
     } else {
         if ((minWidth > width) || (childrenWidth > width)) {
-            console.warn(`Layout width warn: ${this.constructor.name}'s minWidth (${minWidth}) or childrenWidth (${childrenWidth} > targetWidth ${width}`);
+            console.warn(`Layout width warn: ${this.constructor.name}'s minWidth (${minWidth}) or childrenWidth (${childrenWidth} > targetWidth ${width})`);
         }
     }
 
