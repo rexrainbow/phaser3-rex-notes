@@ -49,18 +49,19 @@ var UpdateShapes = function () {
 }
 
 var BuildRectangle = function (lines, x0, y0, x1, y1, skewX) {
+    var startX = (x0 + x1) / 2;  // Start x from middle
     if (skewX >= 0) {
         lines
-            .startAt(x0 + skewX, y0).lineTo(x1 + skewX, y0)
+            .startAt(startX + skewX, y0).lineTo(x1 + skewX, y0)
             .lineTo(x1, y1)
             .lineTo(x0, y1)
-            .lineTo(x0 + skewX, y0)
+            .lineTo(x0 + skewX, y0).lineTo(startX + skewX, y0)
     } else {
         lines
-            .startAt(x0, y0).lineTo(x1, y0)
+            .startAt(startX, y0).lineTo(x1, y0)
             .lineTo(x1 - skewX, y1)
             .lineTo(x0 - skewX, y1)
-            .lineTo(x0, y0)
+            .lineTo(x0, y0).lineTo(startX, y0)
     }
 
     return lines;

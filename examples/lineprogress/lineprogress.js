@@ -16,10 +16,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var bar = this.add.rexLineProgress(400, 300, 200, 60, {
+        var bar = this.add.rexLineProgress(400, 300, 300, 80, {
             barColor: COLOR_PRIMARY,
             trackColor: COLOR_DARK,
             trackStrokeColor: COLOR_LIGHT,
+            trackStrokeThickness: 20,
 
             skewX: 30,
             // rtl: true,
