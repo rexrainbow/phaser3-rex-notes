@@ -16,7 +16,7 @@ declare namespace LineProgress {
         width?: number, height?: number,
 
         trackColor?: string | number,
-        trackThickness?: number,
+        trackStrokeThickness?: number,
         trackStrokeColor?: string | number,
         barColor?: string | number,
 
