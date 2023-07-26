@@ -27024,7 +27024,9 @@
       this._mask = null;
       // Clear children mask
       this.children.forEach(function (child) {
-        child.clearMask(false);
+        if (child.clearMask) {
+          child.clearMask(false);
+        }
       });
       if (destroyMask && this.mask) {
         this.mask.destroy();
@@ -28717,7 +28719,7 @@
       }
     } else {
       if (minWidth > width || childrenWidth > width) {
-        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width));
+        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width, ")"));
       }
     }
     return width;
@@ -44300,12 +44302,21 @@
     y: 0,
     h: 1,
     horizontal: 1,
-    x: 1
+    x: 1,
+    xy: 2,
+    vh: 2
   };
 
   var GetValue$1e = Phaser.Utils.Objects.GetValue;
-  var GetScrollMode = function GetScrollMode(config, key) {
-    var scrollMode = GetValue$1e(config, 'scrollMode', 0); // Vertical
+  var GetScrollMode = function GetScrollMode(config, key, defaultValue) {
+    if (key === undefined) {
+      key = 'scrollMode';
+    }
+    if (defaultValue === undefined) {
+      defaultValue = 0; // Vertical
+    }
+
+    var scrollMode = GetValue$1e(config, key, defaultValue);
     if (typeof scrollMode === 'string') {
       scrollMode = SCROLLMODE$1[scrollMode];
     }
@@ -46008,13 +46019,11 @@
       }
 
       // Add child to parent sizer
-      var proportion = GetValue$17(config, 'child.proportion', 1);
-      var expand = GetValue$17(config, 'child.expand', true);
       scrollableSizer.add(child, {
-        proportion: proportion,
+        proportion: GetValue$17(config, 'child.proportion', 1),
         align: 'center',
         padding: childPadding,
-        expand: expand
+        expand: GetValue$17(config, 'child.expand', true)
       });
 
       // Add slider to parent sizer at right/bottom side
@@ -46424,7 +46433,7 @@
         return mouseWheelScroller.enable;
       },
       set: function set(value) {
-        var mouseWheelScroller = this.childrenMap.mouseWheelScrollerEnable;
+        var mouseWheelScroller = this.childrenMap.mouseWheelScroller;
         if (!mouseWheelScroller) {
           return;
         }
@@ -54031,7 +54040,7 @@
       _this._childOY = 0;
       _this.execeedTopState = false;
       _this.execeedBottomState = false;
-      _this.setScrollMode(GetValue$x(config, 'scrollMode', true));
+      _this.setScrollMode(GetValue$x(config, 'scrollMode', 0));
       _this.setClampMode(GetValue$x(config, 'clamplChildOY', true));
 
       // Add elements

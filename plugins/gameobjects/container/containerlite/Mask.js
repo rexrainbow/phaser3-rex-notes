@@ -33,7 +33,9 @@ export default {
         this._mask = null;
         // Clear children mask
         this.children.forEach(function (child) {
-            child.clearMask(false);
+            if (child.clearMask) {
+                child.clearMask(false);
+            }
         });
 
         if (destroyMask && this.mask) {

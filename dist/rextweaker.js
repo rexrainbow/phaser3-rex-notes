@@ -1039,7 +1039,9 @@
       this._mask = null;
       // Clear children mask
       this.children.forEach(function (child) {
-        child.clearMask(false);
+        if (child.clearMask) {
+          child.clearMask(false);
+        }
       });
       if (destroyMask && this.mask) {
         this.mask.destroy();
@@ -3081,7 +3083,7 @@
       }
     } else {
       if (minWidth > width || childrenWidth > width) {
-        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width));
+        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width, ")"));
       }
     }
     return width;
