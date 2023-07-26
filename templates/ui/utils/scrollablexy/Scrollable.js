@@ -183,7 +183,7 @@ class Scrollable extends Sizer {
             var child = this.childrenMap.child;
             var innerWidth = (child.leftChildOX - child.rightChildOX);
             var outerWidth = innerWidth + childMargin.left + childMargin.right;
-            var outerChildOX = (outerWidth * s) + childMargin.left;
+            var outerChildOX = (innerWidth * s) + childMargin.left;
             s = outerChildOX / outerWidth;
         }
         return s;

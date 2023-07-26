@@ -44,10 +44,10 @@ var AddMainChild = function (topPatent, childParent, config) {
 
         } else {
             childPadding = 0;
-            childMargin.top = 0;
-            childMargin.bottom = 0;
-            childMargin.left = 0;
-            childMargin.right = 0;
+            childMargin.top = childSpace;
+            childMargin.bottom = childSpace;
+            childMargin.left = childSpace;
+            childMargin.right = childSpace;
         }
 
         childParent.add(child,

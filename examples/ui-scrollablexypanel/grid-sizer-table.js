@@ -20,6 +20,8 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 400, height: 400,
 
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
+
             panel: {
                 child: CreatePanel(this),
                 mask: {
@@ -56,12 +58,14 @@ class Demo extends Phaser.Scene {
             },
 
             space: {
-                //left: 10,
-                //right: 10,
-                //top: 10,
-                //bottom: 10,
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
 
                 panel: 10,
+                sliderX: 10,
+                sliderY: 10,
                 header: 10,
                 footer: 10,
             }
@@ -80,15 +84,16 @@ class Demo extends Phaser.Scene {
 
 var CreatePanel = function (scene) {
     return scene.rexUI.add.gridSizer({
-        column: 10, row: 20,
+        column: 10, row: 10,
         columnProportions: 0, rowProportions: 0,
         createCellContainerCallback: function (scene, x, y, config) {
             config.expand = true;
             var cellContainer = scene.rexUI.add.label({
-                height: 40,
+                width: 80, height: 60,
                 space: { left: 10, right: 10, top: 10, bottom: 10 },
-                background: scene.rexUI.add.roundRectangle({ color: COLOR_PRIMARY, strokeColor: 0xffffff }),
-                text: scene.add.text(0, 0, `(${x},${y})`)
+                background: scene.rexUI.add.roundRectangle({ strokeColor: COLOR_LIGHT }),
+                text: scene.add.text(0, 0, `[${x},${y}]`),
+                align: 'center',
             })
             return cellContainer;
         }

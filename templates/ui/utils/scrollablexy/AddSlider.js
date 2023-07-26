@@ -21,31 +21,38 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
         var column, row, padding;
+
         var sliderPosition = GetValue(sliderConfig, 'position', 0);
         if (typeof (sliderPosition) === 'string') {
             sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
         }
-        var sliderPadding = GetValue(config, 'space.slider', 0);
+
+        var sliderPadding = GetValue(config, `space.slider${axis}`, undefined);
+        if (sliderPadding === undefined) {
+            sliderPadding = GetValue(config, 'space.slider', 0);
+        }
+        var isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+
         if (isAxisY) {
             if (sliderPosition === 0) { // right
                 column = 2;
                 row = 1;
-                padding = { left: sliderPadding };
+                padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
             } else { // left
                 column = 0;
                 row = 1;
-                padding = { right: sliderPadding };
+                padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
             }
 
         } else {
             if (sliderPosition === 0) { // bottom
                 column = 1;
                 row = 2;
-                padding = { top: sliderPadding };
+                padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
             } else { // top
                 column = 1;
                 row = 0;
-                padding = { bottom: sliderPadding };
+                padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
             }
         }
 
