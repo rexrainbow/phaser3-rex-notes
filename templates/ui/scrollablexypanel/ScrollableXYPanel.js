@@ -2,7 +2,7 @@ import Scrollable from '../utils/scrollablexy/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
-// import ScrollToChild from './ScrollToChild.js';
+import ScrollToChild from './ScrollToChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -81,5 +81,14 @@ class ScrollableXYPanel extends Scrollable {
         return this;
     }
 }
+
+var methods = {
+    scrollToChild: ScrollToChild
+}
+
+Object.assign(
+    ScrollableXYPanel.prototype,
+    methods,
+)
 
 export default ScrollableXYPanel;

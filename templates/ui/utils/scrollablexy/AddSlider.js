@@ -83,7 +83,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         if (scrollerConfig === true) {
             scrollerConfig = {};
         }
-        scrollerConfig.orientation = (isAxisY) ? 1 : 0;
+        scrollerConfig.orientation = (isAxisY) ? 0 : 1;
         scroller = new Scroller(child, scrollerConfig);
     }
 

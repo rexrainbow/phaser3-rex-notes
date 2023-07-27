@@ -63,7 +63,7 @@ class Demo extends Phaser.Scene {
                 top: 10,
                 bottom: 10,
 
-                panel: 10,
+                panel: 0,
                 sliderX: 10,
                 sliderY: 10,
                 header: 10,
@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
 
         panel
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+            .scrollToChild(panel.getElement('panel').getChildAt(5, 8), {x:'left', y:'top'})
 
     }
 
