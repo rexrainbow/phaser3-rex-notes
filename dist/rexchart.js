@@ -352,6 +352,18 @@
     }
   };
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {

@@ -1,3 +1,6 @@
+import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+CheckP3Version();
+
 const Zone = Phaser.GameObjects.Zone;
 const AddItem = Phaser.Utils.Array.Add;
 const RemoveItem = Phaser.Utils.Array.Remove;

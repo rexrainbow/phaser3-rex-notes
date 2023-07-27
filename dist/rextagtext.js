@@ -286,6 +286,18 @@
     return out;
   };
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var TextBase = /*#__PURE__*/function (_GameObject) {
     _inherits(TextBase, _GameObject);

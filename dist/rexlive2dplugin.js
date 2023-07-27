@@ -193,6 +193,18 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var Live2dGameObjectBase = /*#__PURE__*/function (_Phaser$GameObjects$G) {
     _inherits(Live2dGameObjectBase, _Phaser$GameObjects$G);
     var _super = _createSuper(Live2dGameObjectBase);

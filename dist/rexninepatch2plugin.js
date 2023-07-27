@@ -403,6 +403,18 @@
     return PoolManager;
   }();
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var GameObject = Phaser.GameObjects.GameObject;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$4 = Phaser.Utils.Objects.GetValue;

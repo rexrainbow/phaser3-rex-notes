@@ -1,6 +1,9 @@
 import Render from './render/Render.js';
 import MeasureTextMargins from './textstyle/MeasureTextMargins.js';
 
+import CheckP3Version from '../../utils/system/CheckP3Version.js';
+CheckP3Version();
+
 const GameObject = Phaser.GameObjects.GameObject;
 
 class TextBase extends GameObject {

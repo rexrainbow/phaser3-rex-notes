@@ -218,6 +218,18 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem$7 = Phaser.Utils.Array.Remove;
@@ -16834,6 +16846,7 @@
     return out;
   };
 
+  CheckP3Version();
   var GameObject$3 = Phaser.GameObjects.GameObject;
   var TextBase = /*#__PURE__*/function (_GameObject) {
     _inherits(TextBase, _GameObject);
@@ -20600,6 +20613,7 @@
     }
   };
 
+  CheckP3Version();
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var Canvas = /*#__PURE__*/function (_GameObject) {

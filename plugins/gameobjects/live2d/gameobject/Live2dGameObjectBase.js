@@ -1,3 +1,6 @@
+import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+CheckP3Version();
+
 class Live2dGameObjectBase extends Phaser.GameObjects.GameObject { 
 
 }

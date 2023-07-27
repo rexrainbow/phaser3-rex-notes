@@ -2,6 +2,9 @@ import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
 import PoolManager from './poolmanager/PoolManager.js';
 
+import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+CheckP3Version();
+
 const GameObject = Phaser.GameObjects.GameObject;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

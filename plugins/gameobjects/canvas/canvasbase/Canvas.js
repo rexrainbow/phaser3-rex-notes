@@ -2,6 +2,9 @@ import Render from './render/Render.js';
 import CanvasMethods from './CanvasMethods.js';
 import TextureMethods from './TextureMethods.js';
 
+import CheckP3Version from '../../../utils/system/CheckP3Version.js';
+CheckP3Version();
+
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const GameObject = Phaser.GameObjects.GameObject;
 

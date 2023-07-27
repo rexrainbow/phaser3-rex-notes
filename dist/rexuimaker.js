@@ -4400,6 +4400,18 @@
     return out;
   };
 
+  var MinVersion = 60;
+  var CheckP3Version = function CheckP3Version(minVersion) {
+    if (minVersion === undefined) {
+      minVersion = MinVersion;
+    }
+    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    if (currentVersion < minVersion) {
+      console.error("Minimum supported version : ".concat(minVersion, ", current phaser3 version : ").concat(currentVersion));
+    }
+  };
+
+  CheckP3Version();
   var GameObject$3 = Phaser.GameObjects.GameObject;
   var TextBase = /*#__PURE__*/function (_GameObject) {
     _inherits(TextBase, _GameObject);
@@ -9502,6 +9514,7 @@
     return PoolManager;
   }();
 
+  CheckP3Version();
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1p = Phaser.Utils.Objects.GetValue;
@@ -10561,6 +10574,7 @@
     }
   };
 
+  CheckP3Version();
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {
@@ -10997,6 +11011,7 @@
     return gameObject;
   };
 
+  CheckP3Version();
   var Zone = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem$6 = Phaser.Utils.Array.Remove;
