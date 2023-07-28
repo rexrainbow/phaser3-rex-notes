@@ -11,6 +11,8 @@ declare namespace FSM {
     }
 
     interface IConfig extends FSMBase.IConfig {
+        states?: { [name: string]: IStateConfig },
+        
         scene?: Phaser.Scene;
     }
 }
