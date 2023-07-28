@@ -30,12 +30,32 @@ class Demo extends Phaser.Scene {
                 child: CreatePanel(this, orientation),
             },
 
+            header: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'H'),
+            }),
+
+            footer: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'F'),
+            }),
+
             slider: {
                 track: this.rexUI.add.roundRectangle({ width: 20, height: 20, radius: 10, color: COLOR_DARK }),
                 thumb: this.rexUI.add.roundRectangle({ radius: 13, color: COLOR_LIGHT }),
             },
 
-            space: { panel: 4 }
+            space: {
+                panel: { right: 4, top: 30, bottom: 30 },
+                header: 5,
+                footer: 5
+            }
         })
             .layout()
 

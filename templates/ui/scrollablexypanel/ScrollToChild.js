@@ -17,37 +17,54 @@ var ScrollToChild = function (child, align) {
             break;
 
         default:
-            AlignChild.call(this, child, 'y', GetValue(align, 'y'));
-            AlignChild.call(this, child, 'x', GetValue(align, 'x'));
+            AlignChild.call(this, child, 'y', align);
+            AlignChild.call(this, child, 'x', align);
             break;
     }
 
     return this;
 }
 
+const AlignYModes = ['top', 'bottom', 'centerY', 'center'];
+const AlignXModes = ['left', 'right', 'centerX', 'center'];
+
 var AlignChild = function (child, axis, align) {
-    var isAxisY = (axis === 'y');
+    axis = axis.toUpperCase();
+    var isAxisY = (axis === 'Y');
+
+    var scrollableBlock = this.childrenMap.child;
     var delta;
     if (isAxisY) {
+        if (typeof (align) === 'string') {
+            for (var i = 0, cnt = AlignYModes.length; i < cnt; i++) {
+                var modeName = AlignYModes[i];
+                if (align.indexOf(modeName) !== -1) {
+                    align = modeName;
+                    break;
+                }
+            }
+        }
+
         switch (align) {
             case AlignConst.top:
             case 'top':
-                delta = this.top - child.getTopLeft().y;
+                delta = scrollableBlock.top - child.getTopLeft().y;
                 break;
 
             case AlignConst.bottom:
             case 'bottom':
-                delta = this.bottom - child.getBottomLeft().y;
+                delta = scrollableBlock.bottom - child.getBottomLeft().y;
                 break;
 
             case AlignConst.center:
+            case 'centerY':
             case 'center':
-                delta = this.centerY - child.getCenter().y;
+                delta = scrollableBlock.centerY - child.getCenter().y;
                 break;
 
             default:
-                var dTop = this.top - child.getTopLeft().y;
-                var dBottom = this.bottom - child.getBottomLeft().y;
+                var dTop = scrollableBlock.top - child.getTopLeft().y;
+                var dBottom = scrollableBlock.bottom - child.getBottomLeft().y;
                 if ((dTop <= 0) && (dBottom >= 0)) {
                     delta = 0;
                 } else {
@@ -56,25 +73,36 @@ var AlignChild = function (child, axis, align) {
                 break;
         }
     } else {
+        if (typeof (align) === 'string') {
+            for (var i = 0, cnt = AlignXModes.length; i < cnt; i++) {
+                var modeName = AlignXModes[i];
+                if (align.indexOf(modeName) !== -1) {
+                    align = modeName;
+                    break;
+                }
+            }
+        }
+
         switch (align) {
             case AlignConst.left:
             case 'left':
-                delta = this.left - child.getTopLeft().x;
+                delta = scrollableBlock.left - child.getTopLeft().x;
                 break;
 
             case AlignConst.right:
             case 'right':
-                delta = this.right - child.getTopRight().x;
+                delta = scrollableBlock.right - child.getTopRight().x;
                 break;
 
             case AlignConst.center:
+            case 'centerX':
             case 'center':
-                delta = this.centerX - child.getCenter().x;
+                delta = scrollableBlock.centerX - child.getCenter().x;
                 break;
 
             default:
-                var dLeft = this.left - child.getTopLeft().x;
-                var dRight = this.right - child.getTopRight().x;
+                var dLeft = scrollableBlock.left - child.getTopLeft().x;
+                var dRight = scrollableBlock.right - child.getTopRight().x;
                 if ((dLeft <= 0) && (dRight >= 0)) {
                     delta = 0;
                 } else {
@@ -91,12 +119,7 @@ var AlignChild = function (child, axis, align) {
             break;
 
         default:
-            if (isAxisY) {
-                this.childOY += delta;
-            } else {
-                this.childOX += delta;
-            }
-
+            this[`childO${axis}`] += delta;
             break;
     }
 }

@@ -75,7 +75,10 @@ class Demo extends Phaser.Scene {
 
         panel
             .layout()
-            .scrollToChild(panel.getElement('panel').getChildAt(5, 8), {x:'left', y:'top'})
+
+        var child = panel.getElement('panel').getChildAt(5, 8)
+        // panel.scrollToChild(child);
+        panel.scrollToChild(child, 'top-left');
 
     }
 
@@ -84,7 +87,7 @@ class Demo extends Phaser.Scene {
 
 var CreatePanel = function (scene) {
     return scene.rexUI.add.gridSizer({
-        column: 10, row: 10,
+        column: 20, row: 20,
         columnProportions: 0, rowProportions: 0,
         createCellContainerCallback: function (scene, x, y, config) {
             config.expand = true;
