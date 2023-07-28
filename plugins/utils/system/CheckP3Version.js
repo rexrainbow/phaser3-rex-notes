@@ -1,9 +1,9 @@
 const MinVersion = 60;
 
-var HasTested = false;
+var IsChecked = false;
 
 var CheckP3Version = function (minVersion) {
-    if (HasTested) {
+    if (IsChecked) {
         return;
     }
 
@@ -15,7 +15,7 @@ var CheckP3Version = function (minVersion) {
         console.error(`Minimum supported version : 3.${minVersion}`)
     }
 
-    HasTested = true;
+    IsChecked = true;
 }
 
 export default CheckP3Version;
