@@ -7,8 +7,8 @@ declare namespace FSMBase {
     interface IStateConfig {
         name?: string,
         next?: string | (() => string),
-        enter?: Function,
-        exit?: Function,
+        enter?: () => void,
+        exit?: () => void,
     }
 
     interface IConfig {
