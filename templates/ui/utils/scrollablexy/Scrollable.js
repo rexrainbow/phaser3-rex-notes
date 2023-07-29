@@ -14,11 +14,18 @@ class Scrollable extends Sizer {
             config = {};
         }
 
-        var hasSliderXY = !!config.sliderY && !!config.sliderX;
-        var hasScrollerXY = !!config.scrollerX && !!config.scrollerY;
-        if (hasSliderXY || hasScrollerXY) {
-            config.scrollMode = 2;
+        var hasSliderY = (!!config.sliderY) || (!!config.scrollerY);
+        var hasSliderX = (!!config.sliderX) || (!!config.scrollerX);
+        if (!config.hasOwnProperty('scrollMode')) {
+            if (hasSliderY && hasSliderX) {
+                config.scrollMode = 2;
+            } else if (hasSliderY) {                
+                config.scrollMode = 0;
+            } else if (hasSliderX) {
+                config.scrollMode = 1;
+            }
         }
+
         var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
         // Create sizer
         config.orientation = ((scrollMode === 0) || (scrollMode === 2)) ? 1 : 0;

@@ -10,8 +10,18 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     var isScrollXYMode = (topPatent.scrollMode === 2);
     var child = topPatent.childrenMap.child;
 
-    var sliderConfig = GetValue(config, ((isScrollXYMode) ? `slider${axis}` : 'slider'), undefined),
-        slider;
+    var sliderConfig, slider;
+    var sliderConfigKey = `slider${axis}`;
+    if (isScrollXYMode) {
+        sliderConfig = GetValue(config, sliderConfigKey, undefined)
+    } else {
+        if (config.hasOwnProperty(sliderConfigKey)) {
+            sliderConfig = GetValue(config, sliderConfigKey, undefined)
+        } else {
+            sliderConfig = GetValue(config, 'slider', undefined);
+        }
+    }
+
     if (sliderConfig) {
         if (sliderConfig === true) {
             sliderConfig = {};
@@ -95,8 +105,17 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         topPatent[`minThumb${axis}Size`] = undefined;
     }
 
-    var scrollerConfig = GetValue(config, ((isScrollXYMode) ? `scroller${axis}` : 'scroller'), true),
-        scroller;
+    var scrollerConfig, scroller;
+    var scrollerConfigKey = `scroller${axis}`;
+    if (isScrollXYMode) {
+        scrollerConfig = GetValue(config, scrollerConfigKey, true);
+    } else {
+        if (config.hasOwnProperty(scrollerConfigKey)) {
+            scrollerConfig = GetValue(config, scrollerConfigKey, true);
+        } else {
+            scrollerConfig = GetValue(config, 'scroller', true);
+        }
+    }
 
     if (scrollerConfig && child) {
         if (scrollerConfig === true) {

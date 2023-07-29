@@ -366,9 +366,11 @@ var panel = scene.rexUI.add.scrollablePanel({
 
 #### Scroll mode
 
-- Scrollable panel can scroll on both x/y axis if configuration has `sliderX`, `sliderY`, or `scrollerX`, `scrollerY` parameters.
-- Otherwiser, scrollable panel can scroll on x or y axis if configuration has `slider`, or `slider` parameters.
-    - Set `scrollMode` to `0` for vertical scrolling, or `1` for horizontal scrolling.
+If `scrollMode` parameter is not given :
+
+- Set `scrollMode` to `2`, if configuration has `sliderX`, `sliderY`, or `scrollerX`, `scrollerY` parameters.
+- Set `scrollMode` to `0`, if configuration has `sliderY`, or `scrollerY` parameters.
+- Set `scrollMode` to `1`, if configuration has `sliderX`, or `scrollerX` parameters.
 
 #### Child bounds
 
