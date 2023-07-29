@@ -54424,7 +54424,9 @@
       if (config === undefined) {
         config = {};
       }
-      if (!!config.sliderY && !!config.sliderX) {
+      var hasSliderXY = !!config.sliderY && !!config.sliderX;
+      var hasScrollerXY = !!config.scrollerX && !!config.scrollerY;
+      if (hasSliderXY || hasScrollerXY) {
         config.scrollMode = 2;
       }
       var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
