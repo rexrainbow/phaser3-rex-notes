@@ -79,6 +79,17 @@ class Demo extends Phaser.Scene {
         // panel.scrollToChild(child);
         panel.scrollToChild(child, 'top-left');
 
+
+        var print = this.add.text(0, 0, '');
+        panel.setChildrenInteractive({
+            targets: [
+                panel.getElement('panel'),
+            ]
+        })
+            .on('child.click', function (child) {
+                print.text += `${child.text}\n`;
+            })
+
     }
 
     update() { }
