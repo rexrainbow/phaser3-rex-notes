@@ -63,7 +63,7 @@ class Demo extends Phaser.Scene {
                 top: 10,
                 bottom: 10,
 
-                panel: 0,
+                panel: 30,
                 sliderX: 10,
                 sliderY: 10,
                 header: 10,

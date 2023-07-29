@@ -27,9 +27,28 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
         }
 
+        /*
+        1. space.sliderX, space.sliderY
+        2. space.slider
+        3. space.panel
+        */
         var sliderPadding = GetValue(config, `space.slider${axis}`, undefined);
         if (sliderPadding === undefined) {
-            sliderPadding = GetValue(config, 'space.slider', 0);
+            sliderPadding = GetValue(config, 'space.slider', undefined);
+            if (sliderPadding === undefined) {
+                if (isScrollXYMode) {
+                    sliderPadding = 0;
+                } else {
+                    sliderPadding = GetValue(config, 'space.panel', 0);
+                    if (typeof (sliderPadding) === 'number') {
+                        if (isAxisY) {
+                            sliderPadding = (sliderPosition === 0) ? { left: sliderPadding } : { right: sliderPadding };
+                        } else {
+                            sliderPadding = (sliderPosition === 0) ? { top: sliderPadding } : { bottom: sliderPadding };
+                        }
+                    }
+                }
+            }
         }
         var isNumberSliderPadding = (typeof (sliderPadding) === 'number');
 
@@ -110,8 +129,14 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
     // Control
     if (slider) {
-        var keyST = (isAxisY) ? 't' : 's';
-        var eventName = `scroll${axis}`;
+        var keyST, eventName;
+        if (isScrollXYMode) {
+            keyST = (isAxisY) ? 't' : 's';
+            eventName = `scroll${axis}`;
+        } else {
+            keyST = 't';
+            eventName = 'scroll';
+        }
         slider
             .on('valuechange', function (newValue) {
                 topPatent[keyST] = newValue;
@@ -120,8 +145,14 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     }
 
     if (scroller) {
-        var keyChildOXY = `childO${axis}`;
-        var eventName = `scroll${axis}`;
+        var keyChildOXY, eventName;
+        if (isScrollXYMode) {
+            keyChildOXY = `childO${axis}`;
+            eventName = `scroll${axis}`;
+        } else {
+            keyChildOXY = 'childOY';
+            eventName = 'scroll';
+        }
         scroller
             .on('valuechange', function (newValue) {
                 topPatent[keyChildOXY] = newValue;
@@ -138,7 +169,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     }
 }
 
-var SLIDER_POSITION_MAP = {
+const SLIDER_POSITION_MAP = {
     right: 0,
     left: 1,
     bottom: 0,
