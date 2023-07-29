@@ -1,5 +1,4 @@
 import phaser from 'phaser/src/phaser.js';
-import ScrollableXYPanel from '../../templates/ui/scrollablexypanel/ScrollableXYPanel.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -16,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var panel = new ScrollableXYPanel(this, {
+        var panel = this.rexUI.add.scrollablePanel({
             x: 400, y: 300,
             width: 400, height: 400,
 

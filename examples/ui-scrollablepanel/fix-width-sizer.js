@@ -55,7 +55,7 @@ class Demo extends Phaser.Scene {
                 top: 10,
                 bottom: 10,
 
-                panel: 10,
+                panel: { top: 10, bottom: 10 },
             }
         })
             .layout()

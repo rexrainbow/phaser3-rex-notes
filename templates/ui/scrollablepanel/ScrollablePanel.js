@@ -1,4 +1,4 @@
-import Scrollable from '../utils/scrollable/Scrollable.js';
+import Scrollable from '../utils/scrollablexy/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
@@ -13,6 +13,9 @@ class ScrollablePanel extends Scrollable {
         }
 
         // Create scrollable-block
+        if (!!config.sliderY && !!config.sliderX) {
+            config.scrollMode = 2;
+        }
         var scrollMode = GetScrollMode(config);
         var panelConfig = GetValue(config, 'panel', undefined);
         if (panelConfig === undefined) {
@@ -20,17 +23,27 @@ class ScrollablePanel extends Scrollable {
         }
         panelConfig.scrollMode = scrollMode;
         panelConfig.clamplChildOY = GetValue(config, 'clamplChildOY', false);
+        panelConfig.clamplChildOX = GetValue(config, 'clamplChildOX', false);
         var scrollableBlock = new ScrollableBlock(scene, panelConfig);
         scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
         var panelWidth = GetValue(panelConfig, 'width', undefined);
         var panelHeight = GetValue(panelConfig, 'height', undefined);
         var proportion, expand;
-        if (scrollMode === 0) {
-            proportion = (panelWidth === undefined) ? 1 : 0;
-            expand = (panelHeight === undefined);
-        } else {
-            proportion = (panelHeight === undefined) ? 1 : 0;
-            expand = (panelWidth === undefined);
+        switch (scrollMode) {
+            case 0:
+                proportion = (panelWidth === undefined) ? 1 : 0;
+                expand = (panelHeight === undefined);
+                break;
+
+            case 1:
+                proportion = (panelHeight === undefined) ? 1 : 0;
+                expand = (panelWidth === undefined);
+                break;
+
+            default: // 2
+                proportion = (panelWidth === undefined) ? 1 : 0;
+                expand = (panelHeight === undefined);
+                break;
         }
 
         // Fill config of scrollable

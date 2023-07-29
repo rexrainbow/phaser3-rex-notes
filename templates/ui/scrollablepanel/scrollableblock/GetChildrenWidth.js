@@ -6,12 +6,24 @@ var GetChildrenWidth = function () {
     var result;
     var child = this.child,
         childConfig = child.rexSizer;
+
+
     if (childConfig.hidden) {
         result = 0;
-    } else if (this.scrollMode === 0) { // scroll y
-        result = this.getChildWidth(child);
-    } else { // scroll x
-        result = 0;
+    } else {
+        switch (this.scrollMode) {
+            case 0:
+                result = this.getChildWidth(child);
+                break;
+
+            case 1:
+                result = 0;
+                break;
+
+            default:
+                result = 0;
+                break;
+        }
     }
 
     return result;

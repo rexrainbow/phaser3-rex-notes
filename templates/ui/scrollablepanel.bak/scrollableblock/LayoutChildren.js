@@ -6,18 +6,11 @@ var LayoutChildren = function () {
     var childWidth, childHeight;
     if (!child.rexSizer.hidden) {
         // Set size
-        switch (this.scrollMode) {
-            case 0:
-                childWidth = this.width;
-                break;
-            case 1:
-                childHeight = this.height;
-                break;
-
-            default:
-                break;
+        if (this.scrollMode === 0) {
+            childWidth = this.width;
+        } else {
+            childHeight = this.height;
         }
-
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
         } else {

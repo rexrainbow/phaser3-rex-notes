@@ -1,4 +1,4 @@
-import Scrollable from '../utils/scrollablexy/Scrollable.js';
+import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
@@ -6,16 +6,13 @@ import ScrollToChild from './ScrollToChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class ScrollableXYPanel extends Scrollable {
+class ScrollablePanel extends Scrollable {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
         }
 
         // Create scrollable-block
-        if (!!config.sliderY && !!config.sliderX) {
-            config.scrollMode = 2;
-        }
         var scrollMode = GetScrollMode(config);
         var panelConfig = GetValue(config, 'panel', undefined);
         if (panelConfig === undefined) {
@@ -23,27 +20,17 @@ class ScrollableXYPanel extends Scrollable {
         }
         panelConfig.scrollMode = scrollMode;
         panelConfig.clamplChildOY = GetValue(config, 'clamplChildOY', false);
-        panelConfig.clamplChildOX = GetValue(config, 'clamplChildOX', false);
         var scrollableBlock = new ScrollableBlock(scene, panelConfig);
         scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
         var panelWidth = GetValue(panelConfig, 'width', undefined);
         var panelHeight = GetValue(panelConfig, 'height', undefined);
         var proportion, expand;
-        switch (scrollMode) {
-            case 0:
-                proportion = (panelWidth === undefined) ? 1 : 0;
-                expand = (panelHeight === undefined);
-                break;
-
-            case 1:
-                proportion = (panelHeight === undefined) ? 1 : 0;
-                expand = (panelWidth === undefined);
-                break;
-
-            default: // 2
-                proportion = (panelWidth === undefined) ? 1 : 0;
-                expand = (panelHeight === undefined);
-                break;
+        if (scrollMode === 0) {
+            proportion = (panelWidth === undefined) ? 1 : 0;
+            expand = (panelHeight === undefined);
+        } else {
+            proportion = (panelHeight === undefined) ? 1 : 0;
+            expand = (panelWidth === undefined);
         }
 
         // Fill config of scrollable
@@ -87,8 +74,8 @@ var methods = {
 }
 
 Object.assign(
-    ScrollableXYPanel.prototype,
+    ScrollablePanel.prototype,
     methods,
 )
 
-export default ScrollableXYPanel;
+export default ScrollablePanel;

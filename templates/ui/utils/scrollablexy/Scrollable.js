@@ -137,7 +137,7 @@ class Scrollable extends Sizer {
             var innerHeight = (child.topChildOY - child.bottomChildOY);
             var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
             var innerChildOY = (outerHeight * value) - childMargin.top;
-            value = innerChildOY / innerHeight;
+            value = (innerHeight !== 0) ? (innerChildOY / innerHeight) : 0;
         }
 
         this.childrenMap.child.t = value;
@@ -154,7 +154,7 @@ class Scrollable extends Sizer {
             var innerHeight = (child.topChildOY - child.bottomChildOY);
             var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
             var outerChildOY = (innerHeight * t) + childMargin.top;
-            t = outerChildOY / outerHeight;
+            t = (outerHeight !== 0) ? (outerChildOY / outerHeight) : 0;
         }
         return t;
     }
@@ -167,7 +167,7 @@ class Scrollable extends Sizer {
             var innerWidth = (child.leftChildOX - child.rightChildOX);
             var outerWidth = innerWidth + childMargin.left + childMargin.right;
             var innerChildOX = (outerWidth * value) - childMargin.left;
-            value = innerChildOX / innerWidth;
+            value = (innerWidth !== 0) ? (innerChildOX / innerWidth) : 0;
         }
 
         this.childrenMap.child.s = value;
@@ -184,7 +184,7 @@ class Scrollable extends Sizer {
             var innerWidth = (child.leftChildOX - child.rightChildOX);
             var outerWidth = innerWidth + childMargin.left + childMargin.right;
             var outerChildOX = (innerWidth * s) + childMargin.left;
-            s = outerChildOX / outerWidth;
+            s = (outerWidth !== 0) ? (outerChildOX / outerWidth) : 0;
         }
         return s;
     }

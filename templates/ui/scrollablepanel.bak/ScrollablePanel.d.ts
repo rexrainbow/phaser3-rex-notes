@@ -1,5 +1,5 @@
 // import * as Phaser from 'phaser';
-import Scrollable from '../utils/scrollablexy/Scrollable';
+import Scrollable from '../utils/scrollable/Scrollable';
 
 
 export default ScrollablePanel;
@@ -36,10 +36,5 @@ declare class ScrollablePanel extends Scrollable {
         scene: Phaser.Scene,
         config?: ScrollablePanel.IConfig
     );
-
-    scrollToChild(
-        child: Phaser.GameObjects.GameObject,
-        align?: 'top' | 'bottom' | 'centerY' | 'left' | 'right' | 'centerX' | 'center'
-    ): this;
 
 }

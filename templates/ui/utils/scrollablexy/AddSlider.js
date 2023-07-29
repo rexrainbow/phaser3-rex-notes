@@ -10,7 +10,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     var isScrollXYMode = (topPatent.scrollMode === 2);
     var child = topPatent.childrenMap.child;
 
-    var sliderConfig = GetValue(config, (isScrollXYMode) ? `slider${axis}` : 'slider', undefined),
+    var sliderConfig = GetValue(config, ((isScrollXYMode) ? `slider${axis}` : 'slider'), undefined),
         slider;
     if (sliderConfig) {
         if (sliderConfig === true) {
@@ -95,7 +95,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         topPatent[`minThumb${axis}Size`] = undefined;
     }
 
-    var scrollerConfig = GetValue(config, (isScrollXYMode) ? `scroller${axis}` : 'scroller', true),
+    var scrollerConfig = GetValue(config, ((isScrollXYMode) ? `scroller${axis}` : 'scroller'), true),
         scroller;
 
     if (scrollerConfig && child) {
@@ -106,7 +106,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         scroller = new Scroller(child, scrollerConfig);
     }
 
-    var mouseWheelScrollerConfig = GetValue(config, (isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller', false),
+    var mouseWheelScrollerConfig = GetValue(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
         mouseWheelScroller;
     if (mouseWheelScrollerConfig && child) {
         mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);

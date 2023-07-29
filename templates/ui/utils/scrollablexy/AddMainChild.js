@@ -7,28 +7,47 @@ var AddMainChild = function (topPatent, childParent, config) {
         topPatent.childMargin = {};
         var childMargin = topPatent.childMargin;
 
-        switch (topPatent.scrollMode) {
-            case 0:
-                childMargin.top = GetValue(childSpace, 'top', childSpace);
-                childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
-                childMargin.left = 0;
-                childMargin.right = 0;
-                break;
+        if (typeof (childSpace) === 'number') {
+            switch (topPatent.scrollMode) {
+                case 0:
+                case 1:
+                    childMargin.top = 0;
+                    childMargin.bottom = 0;
+                    childMargin.left = 0;
+                    childMargin.right = 0;
+                    break;
 
-            case 1:
-                childMargin.top = GetValue(childSpace, 'left', childSpace);
-                childMargin.bottom = GetValue(childSpace, 'right', childSpace);
-                childMargin.left = 0;
-                childMargin.right = 0;
-                break;
+                default:
+                    childMargin.top = childSpace;
+                    childMargin.bottom = childSpace;
+                    childMargin.left = childSpace;
+                    childMargin.right = childSpace;
+                    break;
+            }
+        } else {
+            switch (topPatent.scrollMode) {
+                case 0:
+                    childMargin.top = GetValue(childSpace, 'top', childSpace);
+                    childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
+                    childMargin.left = 0;
+                    childMargin.right = 0;
+                    break;
 
-            default: // 2
-                childMargin.top = GetValue(childSpace, 'top', childSpace);
-                childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
-                childMargin.left = GetValue(childSpace, 'left', childSpace);
-                childMargin.right = GetValue(childSpace, 'right', childSpace);
-                break;
+                case 1:
+                    childMargin.top = GetValue(childSpace, 'left', childSpace);
+                    childMargin.bottom = GetValue(childSpace, 'right', childSpace);
+                    childMargin.left = 0;
+                    childMargin.right = 0;
+                    break;
 
+                default: // 2
+                    childMargin.top = GetValue(childSpace, 'top', childSpace);
+                    childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
+                    childMargin.left = GetValue(childSpace, 'left', childSpace);
+                    childMargin.right = GetValue(childSpace, 'right', childSpace);
+                    break;
+
+            }
         }
 
         childParent.add(child,

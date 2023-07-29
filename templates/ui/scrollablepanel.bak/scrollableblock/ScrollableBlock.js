@@ -27,17 +27,11 @@ class ScrollableBlock extends BaseSizer {
         this.child = undefined;
         this.childrenMask = undefined;
         this._childOY = 0;
-        this._childOX = 0;
         this.execeedTopState = false;
         this.execeedBottomState = false;
-        this.execeedLeftState = false;
-        this.execeedRightState = false;
 
-        this.setScrollMode(GetValue(config, 'scrollMode', 0));
-
-        var clampChildOY = GetValue(config, 'clamplChildOY', true);
-        var clampChildOX = GetValue(config, 'clamplChildOX', clampChildOY);
-        this.setClampMode(clampChildOY, clampChildOX);
+        this.setScrollMode(GetValue(config, 'scrollMode', 0))
+        this.setClampMode(GetValue(config, 'clamplChildOY', true));
 
         // Add elements
         // No background object, and child does not have padding
@@ -82,42 +76,28 @@ class ScrollableBlock extends BaseSizer {
         return this;
     }
 
-    setClampMode(clampChildOY, clampChildOX) {
-        this.clampChildOY = clampChildOY;
-        this.clampChildOX = clampChildOX;
+    setClampMode(mode) {
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.clampChildOY = mode;
         return this;
     }
 
     get instHeight() {
-        if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return this.height;
-        } else { // scrollMode === 1
-            return this.width;
-        }
+        return (this.scrollMode === 0) ? this.height : this.width;
     }
 
     get instWidth() {
-        if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return this.width;
-        } else { // scrollMode === 1
-            return this.height;
-        }
+        return (this.scrollMode === 0) ? this.width : this.height;
     }
 
     get childHeight() {
-        if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return GetDisplayHeight(this.child);
-        } else { // scrollMode === 1
-            return GetDisplayWidth(this.child);
-        }
+        return (this.scrollMode === 0) ? GetDisplayHeight(this.child) : GetDisplayWidth(this.child);
     }
 
     get childWidth() {
-        if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return GetDisplayWidth(this.child);
-        } else { // scrollMode === 1
-            return GetDisplayHeight(this.child);
-        }
+        return (this.scrollMode === 0) ? GetDisplayWidth(this.child) : GetDisplayHeight(this.child);
     }
 
     get topChildOY() {
@@ -128,20 +108,8 @@ class ScrollableBlock extends BaseSizer {
         return -this.visibleHeight;
     }
 
-    get leftChildOX() {
-        return 0;
-    }
-
-    get rightChildOX() {
-        return -this.visibleWidth;
-    }
-
     get childVisibleHeight() {
         return this.instHeight;
-    }
-
-    get childVisibleWidth() {
-        return this.instWidth;
     }
 
     get visibleHeight() {
@@ -149,15 +117,8 @@ class ScrollableBlock extends BaseSizer {
         if (h < 0) {
             h = 0;
         }
-        return h;
-    }
 
-    get visibleWidth() {
-        var w = this.childWidth - this.childVisibleWidth;
-        if (w < 0) {
-            w = 0;
-        }
-        return w;
+        return h;
     }
 
     childOYExceedTop(oy) {
@@ -174,20 +135,6 @@ class ScrollableBlock extends BaseSizer {
         return (oy < this.bottomChildOY);
     }
 
-    childOXExceedLeft(ox) {
-        if (ox === undefined) {
-            ox = this.childOX;
-        }
-        return (ox > this.leftChildOX);
-    }
-
-    childOXExeceedRight(ox) {
-        if (ox === undefined) {
-            ox = this.childOX;
-        }
-        return (ox < this.rightChildOX);
-    }
-
     get childOY() {
         return this._childOY;
     }
@@ -202,7 +149,7 @@ class ScrollableBlock extends BaseSizer {
             if (this.childVisibleHeight > this.childHeight) {
                 oy = 0;
             } else if (childOYExceedTop) {
-                oy = topChildOY;
+                oy = topChildOY
             } else if (childOYExeceedBottom) {
                 oy = bottomChildOY;
             }
@@ -228,53 +175,8 @@ class ScrollableBlock extends BaseSizer {
         this.execeedBottomState = childOYExeceedBottom;
     }
 
-    get childOX() {
-        return this._childOX;
-    }
-
-    set childOX(ox) {
-        var leftChildOX = this.leftChildOX;
-        var rightChildOX = this.rightChildOX;
-        var childOXExceedLeft = this.childOXExceedLeft(ox);
-        var childOXExeceedRight = this.childOXExeceedRight(ox);
-
-        if (this.clampChildOX) {
-            if (this.childVisibleWidth > this.childWidth) {
-                ox = 0;
-            } else if (childOXExceedLeft) {
-                ox = leftChildOX;
-            } else if (childOXExeceedRight) {
-                ox = rightChildOX;
-            }
-        }
-
-        if (this._childOX !== ox) {
-            this._childOX = ox;
-            this.resetChildPosition();
-        }
-
-        if (childOXExceedLeft) {
-            if (!this.execeedLeftState) {
-                this.emit('execeedleft', this, ox, leftChildOX);
-            }
-        }
-        this.execeedLeftState = childOXExceedLeft;
-
-        if (childOXExeceedRight) {
-            if (!this.execeedRightState) {
-                this.emit('execeedright', this, ox, rightChildOX);
-            }
-        }
-        this.execeedRightState = childOXExeceedRight;
-    }
-
     setChildOY(oy) {
         this.childOY = oy;
-        return this;
-    }
-
-    setChildOX(ox) {
-        this.childOX = ox;
         return this;
     }
 
@@ -290,25 +192,8 @@ class ScrollableBlock extends BaseSizer {
         return (this.childOY / -visibleHeight);
     }
 
-    set s(value) {
-        this.childOX = -this.visibleWidth * value;
-    }
-
-    get s() {
-        var visibleWidth = this.visibleWidth;
-        if (visibleWidth === 0) {
-            return 0;
-        }
-        return (this.childOX / -visibleWidth);
-    }
-
     setChildOYByPercentage(percentage) {
         this.t = percentage;
-        return this;
-    }
-
-    setChildOXByPercentage(percentage) {
-        this.s = percentage;
         return this;
     }
 }
