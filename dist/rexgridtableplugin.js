@@ -4234,12 +4234,35 @@
         return this.tableOY / -tableVisibleHeight;
       }
     }, {
+      key: "setTableOXByPercentage",
+      value: function setTableOXByPercentage(percentage) {
+        this.setTableOX(-this.tableVisibleWidth * percentage);
+        return this;
+      }
+    }, {
+      key: "getTableOXPercentage",
+      value: function getTableOXPercentage() {
+        var tableVisibleWidth = this.tableVisibleWidth;
+        if (tableVisibleWidth === 0) {
+          return 0;
+        }
+        return this.tableOX / -tableVisibleWidth;
+      }
+    }, {
       key: "t",
       get: function get() {
         return this.getTableOYPercentage();
       },
       set: function set(value) {
         this.setTableOYByPercentage(value).updateTable();
+      }
+    }, {
+      key: "s",
+      get: function get() {
+        return this.getTableOXPercentage();
+      },
+      set: function set(value) {
+        this.setTableOXByPercentage(value).updateTable();
       }
     }, {
       key: "scrollToBottom",
@@ -4375,12 +4398,8 @@
     }, {
       key: "tableVisibleWidth",
       get: function get() {
-        var w;
-        var tableWidth = this.tableWidth;
-        var instWidth = this.instWidth;
-        if (tableWidth > instWidth) {
-          w = tableWidth - instWidth;
-        } else {
+        var w = this.tableWidth - this.instWidth;
+        if (w < 0) {
           w = 0;
         }
         return w;
