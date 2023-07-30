@@ -13,9 +13,6 @@ class ScrollablePanel extends Scrollable {
         }
 
         // Create scrollable-block
-        if (!!config.sliderY && !!config.sliderX) {
-            config.scrollMode = 2;
-        }
         var scrollMode = GetScrollMode(config);
         var panelConfig = GetValue(config, 'panel', undefined);
         if (panelConfig === undefined) {
