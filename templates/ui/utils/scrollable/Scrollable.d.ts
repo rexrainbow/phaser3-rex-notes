@@ -47,6 +47,8 @@ declare namespace Scrollable {
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
 
+            sliderX?: number,
+            sliderY?: number,
             header?: number,
             footer?: number,
         },

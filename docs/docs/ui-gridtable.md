@@ -16,6 +16,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Sizer cell: 
     - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
+- [Two sliders](https://codepen.io/rexrainbow/pen/KKrrYRm)
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Drag item](https://codepen.io/rexrainbow/pen/WNaQrgp)
@@ -94,7 +95,7 @@ var table = scene.rexUI.add.gridTable({
     // width: undefined,
     // height: undefined,
 
-    scrollMode: 0,
+    // scrollMode: 0,
 
     // Elements
     background: backgroundGameObject,
@@ -159,6 +160,9 @@ var table = scene.rexUI.add.gridTable({
         // }
     },
 
+    // sliderX: {...},
+    // sliderY: {...},
+
     // scroller: {
     //     threshold: 10,
     //     slidingDeceleration: 5000,
@@ -167,11 +171,17 @@ var table = scene.rexUI.add.gridTable({
     //     dragRate: 1,
     // },
 
+    // scrollerX: {...},
+    // scrollerY: {...},
+
     mouseWheelScroller: false,
     // mouseWheelScroller: {
     //     focus: false,
     //     speed: 0.1
     // }.
+
+    // mouseWheelScrollerX: {...},
+    // mouseWheelScrollerY: {...},
 
     clamplChildOY: false,
 
@@ -199,6 +209,8 @@ var table = scene.rexUI.add.gridTable({
         //     left: 0,
         //     right: 0,
         // },
+        // sliderX: 0,
+        // sliderY: 0,
 
         header: 0,
         footer: 0,
@@ -253,9 +265,10 @@ var table = scene.rexUI.add.gridTable({
 - `width`, `height` : Minimum width, minimum height.
     - Set `width` to `undefined`, and `table.width` is not `undefined`, will count width via table + slider.
     - Set `height` to `undefined`, and `table.height` is not `undefined`, will count height via table + slider.
-- `scrollMode` : Scroll grid table vertically, or horizontally.
+- `scrollMode` : Scroll panel vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'`, `'y'` : Scroll panel vertically. Default value.
     - `1`, `'horizontal'`, or `'h'`. `'x'` : Scroll panel horizontally.
+    - `2`, or `'xy'` : Two-sliders mode, scroll panel vertically and horizontally.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `table` : Configuration of grid table core.
     - `table.width` : Width of table, in pixels.
@@ -316,6 +329,7 @@ var table = scene.rexUI.add.gridTable({
         - `slider.buttons.left`, `slider.buttons.right` : Left and right buttons
         - `slider.buttons.step` : Scrolling step in each tick. Default value is `0.01`.
     - Set to `false` to skip creating slider.
+- `sliderX`, `sliderY` : Componments of sliderX and sliderY, for two-sliders mode.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
@@ -325,12 +339,14 @@ var table = scene.rexUI.add.gridTable({
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
     - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
+- `scrollerX`, `scrollerY` : Configuration of scrollerX, scrollerY behavior, for two-sliders mode.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
         - `true` : Only scrolling when cursor is over table.
         - `false` : Scrolling without checking cursor. Default behavior.
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
+- `mouseWheelScrollerX`, `mouseWheelScrollerY` : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `createCellContainerCallback` : Callback to return a container object, or `null` of each visible cell.
     - Properties of `cell` parameter
@@ -371,6 +387,8 @@ var table = scene.rexUI.add.gridTable({
     - `space.slider` :
         - `0` : No space around slider.
         - `space.slider.left`, `space.slider.right`, `space.slider.top`, `space.slider.bottom` : Space around slider.
+    - `space.sliderX`, `space.sliderX` : Space configuration of sliderX, sliderX, for two-sliders mode.
+        - `0` : No space around slider.
     - `space.header` : Space between header and table.
     - `space.footer` : Space between footer and table.
 - `expand` : Expand width or height of element
@@ -386,6 +404,14 @@ var table = scene.rexUI.add.gridTable({
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
+
+#### Scroll mode
+
+If `scrollMode` parameter is not given :
+
+- Set `scrollMode` to `2`, if configuration has `sliderX`, `sliderY`, or `scrollerX`, `scrollerY` parameters.
+- Set `scrollMode` to `0`, if configuration has `sliderY`, or `scrollerY` parameters.
+- Set `scrollMode` to `1`, if configuration has `sliderX`, or `scrollerX` parameters.
 
 ### Custom class
 

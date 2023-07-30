@@ -89,7 +89,7 @@ var panel = scene.rexUI.add.scrollablePanel({
     // width: undefined,
     // height: undefined,
 
-    scrollMode: 0,
+    // scrollMode: 0,
 
     // Elements
     background: backgroundGameObject,
