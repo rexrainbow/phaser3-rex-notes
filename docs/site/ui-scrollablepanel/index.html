@@ -9851,7 +9851,7 @@
 <span class="w">    </span><span class="c1">// width: undefined,</span>
 <span class="w">    </span><span class="c1">// height: undefined,</span>
 
-<span class="w">    </span><span class="nx">scrollMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// scrollMode: 0,</span>
 
 <span class="w">    </span><span class="c1">// Elements</span>
 <span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundGameObject</span><span class="p">,</span>
@@ -10193,12 +10193,11 @@
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
 </ul>
 <h4 id="scroll-mode">Scroll mode<a class="headerlink" href="#scroll-mode" title="Permanent link">&para;</a></h4>
+<p>If <code>scrollMode</code> parameter is not given :</p>
 <ul>
-<li>Scrollable panel can scroll on both x/y axis if configuration has <code>sliderX</code>, <code>sliderY</code>, or <code>scrollerX</code>, <code>scrollerY</code> parameters.</li>
-<li>Otherwiser, scrollable panel can scroll on x or y axis if configuration has <code>slider</code>, or <code>slider</code> parameters.<ul>
-<li>Set <code>scrollMode</code> to <code>0</code> for vertical scrolling, or <code>1</code> for horizontal scrolling.</li>
-</ul>
-</li>
+<li>Set <code>scrollMode</code> to <code>2</code>, if configuration has <code>sliderX</code>, <code>sliderY</code>, or <code>scrollerX</code>, <code>scrollerY</code> parameters.</li>
+<li>Set <code>scrollMode</code> to <code>0</code>, if configuration has <code>sliderY</code>, or <code>scrollerY</code> parameters.</li>
+<li>Set <code>scrollMode</code> to <code>1</code>, if configuration has <code>sliderX</code>, or <code>scrollerX</code> parameters.</li>
 </ul>
 <h4 id="child-bounds">Child bounds<a class="headerlink" href="#child-bounds" title="Permanent link">&para;</a></h4>
 <p>Scrollable panel will mask child if child's bounds (<code>child.getBounds()</code>)  is across mask area. </p>

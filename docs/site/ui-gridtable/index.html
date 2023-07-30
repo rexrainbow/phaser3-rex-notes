@@ -8040,6 +8040,19 @@
     Add table object
   </a>
   
+    <nav class="md-nav" aria-label="Add table object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-mode" class="md-nav__link">
+    Scroll mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9565,6 +9578,19 @@
     Add table object
   </a>
   
+    <nav class="md-nav" aria-label="Add table object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-mode" class="md-nav__link">
+    Scroll mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9717,6 +9743,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/abOgyPo">Demo 2</a></li>
 </ul>
 </li>
+<li><a href="https://codepen.io/rexrainbow/pen/KKrrYRm">Two sliders</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzRrOOP">Separator</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/zYarzzO">Modal</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/WNaQrgp">Drag item</a></li>
@@ -9782,7 +9809,7 @@
 <span class="w">    </span><span class="c1">// width: undefined,</span>
 <span class="w">    </span><span class="c1">// height: undefined,</span>
 
-<span class="w">    </span><span class="nx">scrollMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// scrollMode: 0,</span>
 
 <span class="w">    </span><span class="c1">// Elements</span>
 <span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundGameObject</span><span class="p">,</span>
@@ -9847,6 +9874,9 @@
 <span class="w">        </span><span class="c1">// }</span>
 <span class="w">    </span><span class="p">},</span>
 
+<span class="w">    </span><span class="c1">// sliderX: {...},</span>
+<span class="w">    </span><span class="c1">// sliderY: {...},</span>
+
 <span class="w">    </span><span class="c1">// scroller: {</span>
 <span class="w">    </span><span class="c1">//     threshold: 10,</span>
 <span class="w">    </span><span class="c1">//     slidingDeceleration: 5000,</span>
@@ -9855,11 +9885,17 @@
 <span class="w">    </span><span class="c1">//     dragRate: 1,</span>
 <span class="w">    </span><span class="c1">// },</span>
 
+<span class="w">    </span><span class="c1">// scrollerX: {...},</span>
+<span class="w">    </span><span class="c1">// scrollerY: {...},</span>
+
 <span class="w">    </span><span class="nx">mouseWheelScroller</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// mouseWheelScroller: {</span>
 <span class="w">    </span><span class="c1">//     focus: false,</span>
 <span class="w">    </span><span class="c1">//     speed: 0.1</span>
 <span class="w">    </span><span class="c1">// }.</span>
+
+<span class="w">    </span><span class="c1">// mouseWheelScrollerX: {...},</span>
+<span class="w">    </span><span class="c1">// mouseWheelScrollerY: {...},</span>
 
 <span class="w">    </span><span class="nx">clamplChildOY</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
@@ -9887,6 +9923,8 @@
 <span class="w">        </span><span class="c1">//     left: 0,</span>
 <span class="w">        </span><span class="c1">//     right: 0,</span>
 <span class="w">        </span><span class="c1">// },</span>
+<span class="w">        </span><span class="c1">// sliderX: 0,</span>
+<span class="w">        </span><span class="c1">// sliderY: 0,</span>
 
 <span class="w">        </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">footer</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
@@ -9951,9 +9989,10 @@
 <li>Set <code>height</code> to <code>undefined</code>, and <code>table.height</code> is not <code>undefined</code>, will count height via table + slider.</li>
 </ul>
 </li>
-<li><code>scrollMode</code> : Scroll grid table vertically, or horizontally.<ul>
+<li><code>scrollMode</code> : Scroll panel vertically, or horizontally.<ul>
 <li><code>0</code>, <code>'vertical'</code>, or <code>'v'</code>, <code>'y'</code> : Scroll panel vertically. Default value.</li>
 <li><code>1</code>, <code>'horizontal'</code>, or <code>'h'</code>. <code>'x'</code> : Scroll panel horizontally.</li>
+<li><code>2</code>, or <code>'xy'</code> : Two-sliders mode, scroll panel vertically and horizontally.</li>
 </ul>
 </li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of grid table.</li>
@@ -10056,6 +10095,7 @@
 <li>Set to <code>false</code> to skip creating slider.</li>
 </ul>
 </li>
+<li><code>sliderX</code>, <code>sliderY</code> : Componments of sliderX and sliderY, for two-sliders mode.</li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
 <li><code>scroller.threshold</code> : Minimal movement to scroll. Set <code>0</code> to scroll immediately.</li>
 <li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
@@ -10071,6 +10111,7 @@
 <li>Set to <code>false</code> to skip creating scroller.</li>
 </ul>
 </li>
+<li><code>scrollerX</code>, <code>scrollerY</code> : Configuration of scrollerX, scrollerY behavior, for two-sliders mode.</li>
 <li><code>mouseWheelScroller</code> : Configuration of mouse-wheel-scroller behavior.<ul>
 <li><code>mouseWheelScroller.focus</code> : <ul>
 <li><code>true</code> : Only scrolling when cursor is over table.</li>
@@ -10081,6 +10122,7 @@
 <li>Set to <code>false</code> to skip creating mouse-wheel-scroller. Default behavior.</li>
 </ul>
 </li>
+<li><code>mouseWheelScrollerX</code>, <code>mouseWheelScrollerY</code> : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.</li>
 <li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
 <li><code>createCellContainerCallback</code> : Callback to return a container object, or <code>null</code> of each visible cell.<ul>
 <li>Properties of <code>cell</code> parameter<ul>
@@ -10140,6 +10182,10 @@
 <li><code>space.slider.left</code>, <code>space.slider.right</code>, <code>space.slider.top</code>, <code>space.slider.bottom</code> : Space around slider.</li>
 </ul>
 </li>
+<li><code>space.sliderX</code>, <code>space.sliderX</code> : Space configuration of sliderX, sliderX, for two-sliders mode.<ul>
+<li><code>0</code> : No space around slider.</li>
+</ul>
+</li>
 <li><code>space.header</code> : Space between header and table.</li>
 <li><code>space.footer</code> : Space between footer and table.</li>
 </ul>
@@ -10163,6 +10209,13 @@
 <li><code>name</code> : Set name of this game object.</li>
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+</ul>
+<h4 id="scroll-mode">Scroll mode<a class="headerlink" href="#scroll-mode" title="Permanent link">&para;</a></h4>
+<p>If <code>scrollMode</code> parameter is not given :</p>
+<ul>
+<li>Set <code>scrollMode</code> to <code>2</code>, if configuration has <code>sliderX</code>, <code>sliderY</code>, or <code>scrollerX</code>, <code>scrollerY</code> parameters.</li>
+<li>Set <code>scrollMode</code> to <code>0</code>, if configuration has <code>sliderY</code>, or <code>scrollerY</code> parameters.</li>
+<li>Set <code>scrollMode</code> to <code>1</code>, if configuration has <code>sliderX</code>, or <code>scrollerX</code> parameters.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
