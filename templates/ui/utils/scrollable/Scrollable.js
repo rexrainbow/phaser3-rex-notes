@@ -16,7 +16,8 @@ class Scrollable extends Sizer {
 
         var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
         // Create sizer
-        config.orientation = ((scrollMode === 0) || (scrollMode === 2)) ? 1 : 0;
+        var isRevererXY = (scrollMode === 1);
+        config.orientation = (!isRevererXY) ? 1 : 0;
         super(scene, config);
         this.type = GetValue(config, 'type', 'rexScrollable');
         this.scrollMode = scrollMode;
@@ -33,7 +34,7 @@ class Scrollable extends Sizer {
             var align = GetValue(config, 'align.header', 'center');
             var headerSpace = GetValue(config, 'space.header', 0);
             var padding;
-            if ((scrollMode === 0) || (scrollMode === 2)) {
+            if (!isRevererXY) {
                 padding = { bottom: headerSpace };
             } else {
                 padding = { right: headerSpace };
@@ -65,7 +66,7 @@ class Scrollable extends Sizer {
             var align = GetValue(config, 'align.footer', 'center');
             var footerSpace = GetValue(config, 'space.footer', 0);
             var padding;
-            if ((scrollMode === 0) || (scrollMode === 2)) {
+            if (!isRevererXY) {
                 padding = { top: footerSpace };
             } else {
                 padding = { left: footerSpace };

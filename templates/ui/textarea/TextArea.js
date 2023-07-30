@@ -45,7 +45,7 @@ class TextArea extends Scrollable {
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {
-            spaceConfig.child = spaceConfig.text;
+            spaceConfig.child = GetValue(spaceConfig, 'text', 0);
         }
         super(scene, config);
 

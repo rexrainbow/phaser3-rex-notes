@@ -160,12 +160,33 @@ class GridTable extends ContainerLite {
         return (this.tableOY / -tableVisibleHeight);
     }
 
+    setTableOXByPercentage(percentage) {
+        this.setTableOX(-this.tableVisibleWidth * percentage);
+        return this;
+    }
+
+    getTableOXPercentage() {
+        var tableVisibleWidth = this.tableVisibleWidth;
+        if (tableVisibleWidth === 0) {
+            return 0;
+        }
+        return (this.tableOX / -tableVisibleWidth);
+    }
+
     set t(value) {
         this.setTableOYByPercentage(value).updateTable();
     }
 
     get t() {
         return this.getTableOYPercentage();
+    }
+
+    set s(value) {
+        this.setTableOXByPercentage(value).updateTable();
+    }
+
+    get s() {
+        return this.getTableOXPercentage();
     }
 
     scrollToBottom() {
@@ -284,16 +305,12 @@ class GridTable extends ContainerLite {
     }
 
     get tableVisibleWidth() {
-        var w;
-        var tableWidth = this.tableWidth;
-        var instWidth = this.instWidth;
-        if (tableWidth > instWidth) {
-            w = tableWidth - instWidth;
-        } else {
+        var w = this.tableWidth - this.instWidth;
+        if (w < 0) {
             w = 0;
         }
         return w;
-    };
+    }
 
     get bottomLeftY() {
         return -(this.displayHeight * this.originY) + this.displayHeight;

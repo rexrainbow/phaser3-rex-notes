@@ -52,7 +52,7 @@ class ScrollablePanel extends Scrollable {
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {
-            spaceConfig.child = spaceConfig.panel;
+            spaceConfig.child = GetValue(spaceConfig, 'panel', 0);
         }
         super(scene, config);
 

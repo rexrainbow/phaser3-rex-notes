@@ -22,18 +22,18 @@ class GridTable extends Scrollable {
         if (tableConfig === undefined) {
             tableConfig = {};
         }
-        tableConfig.scrollMode = scrollMode;
+        tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
         tableConfig.clamplTableOXY = GetValue(config, 'clamplChildOY', false);
         var tableWidth = GetValue(tableConfig, 'width', undefined);
         var tableHeight = GetValue(tableConfig, 'height', undefined);
         var table = new GridTableCore(scene, 0, 0, tableWidth, tableHeight, tableConfig);
         scene.add.existing(table); // Important: Add to display list for touch detecting
         var expandWidth, expandHeight;
-        if (scrollMode === 0) {
-            expandWidth = (tableWidth === undefined) ? 1 : 0;
+        if (tableConfig.scrollMode === 0) {
+            expandWidth = (tableWidth === undefined);
             expandHeight = (tableHeight === undefined);
         } else {
-            expandWidth = (tableHeight === undefined) ? 1 : 0;
+            expandWidth = (tableHeight === undefined);
             expandHeight = (tableWidth === undefined);
         }
         // Inject properties for scrollable interface
@@ -51,7 +51,7 @@ class GridTable extends Scrollable {
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {
-            spaceConfig.child = spaceConfig.table;
+            spaceConfig.child = GetValue(spaceConfig, 'table', 0);
         }
         super(scene, config);
 
