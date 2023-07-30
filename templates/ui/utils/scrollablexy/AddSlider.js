@@ -40,7 +40,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         /*
         1. space.sliderX, space.sliderY
         2. space.slider
-        3. space.panel
+        3. space.child
         */
         var sliderPadding = GetValue(config, `space.slider${axis}`, undefined);
         if (sliderPadding === undefined) {
@@ -49,7 +49,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
                 if (isScrollXYMode) {
                     sliderPadding = 0;
                 } else {
-                    sliderPadding = GetValue(config, 'space.panel', 0);
+                    sliderPadding = GetValue(config, 'space.child', 0);
                     if (typeof (sliderPadding) === 'number') {
                         if (isAxisY) {
                             sliderPadding = (sliderPosition === 0) ? { left: sliderPadding } : { right: sliderPadding };

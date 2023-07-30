@@ -1,4 +1,4 @@
-import Scrollable from '../utils/scrollable/Scrollable.js';
+import Scrollable from '../utils/scrollablexy/Scrollable.js';
 import TextBlock from './textblock/TextBlock.js';
 import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
@@ -11,6 +11,8 @@ class TextArea extends Scrollable {
         if (config === undefined) {
             config = {};
         }
+
+        config.scrollMode = 0;
 
         // Create text-block
         var textObject = GetValue(config, 'text', undefined);
