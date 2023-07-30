@@ -32,8 +32,6 @@ class TextArea extends Scrollable {
             alwaysScrollable: GetValue(config, 'alwaysScrollable', false),
         });
         scene.add.existing(textBlock); // Important: Add to display list for touch detecting
-        var proportion = (textWidth === undefined) ? 1 : 0;
-        var expand = (textHeight === undefined);
         // Inject properties for scrollable interface
         InjectProperties(textBlock);
 
@@ -42,8 +40,8 @@ class TextArea extends Scrollable {
         config.type = 'rexTextArea';
         config.child = {
             gameObject: textBlock,
-            proportion: proportion,
-            expand: expand,
+            expandWidth: (textWidth === undefined),
+            expandHeight: (textHeight === undefined),
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {

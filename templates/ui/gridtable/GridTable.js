@@ -28,13 +28,13 @@ class GridTable extends Scrollable {
         var tableHeight = GetValue(tableConfig, 'height', undefined);
         var table = new GridTableCore(scene, 0, 0, tableWidth, tableHeight, tableConfig);
         scene.add.existing(table); // Important: Add to display list for touch detecting
-        var proportion, expand;
+        var expandWidth, expandHeight;
         if (scrollMode === 0) {
-            proportion = (tableWidth === undefined) ? 1 : 0;
-            expand = (tableHeight === undefined);
+            expandWidth = (tableWidth === undefined) ? 1 : 0;
+            expandHeight = (tableHeight === undefined);
         } else {
-            proportion = (tableHeight === undefined) ? 1 : 0;
-            expand = (tableWidth === undefined);
+            expandWidth = (tableHeight === undefined) ? 1 : 0;
+            expandHeight = (tableWidth === undefined);
         }
         // Inject properties for scrollable interface
         InjectProperties(table);
@@ -46,8 +46,8 @@ class GridTable extends Scrollable {
         config.type = 'rexGridTable';
         config.child = {
             gameObject: table,
-            proportion: proportion,
-            expand: expand,
+            expandWidth: expandWidth,
+            expandHeight: expandHeight,
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {
