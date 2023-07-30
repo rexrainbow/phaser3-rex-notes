@@ -1,5 +1,5 @@
 // import * as Phaser from 'phaser';
-import Scrollable from '../utils/scrollablexy/Scrollable';
+import Scrollable from '../utils/scrollable/Scrollable';
 
 
 export default ScrollablePanel;

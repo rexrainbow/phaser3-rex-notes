@@ -14,43 +14,53 @@ class Scrollable extends Sizer {
             config = {};
         }
 
-        var scrollMode = GetScrollMode(config); // Left-to-right, or top-to-bottom
+        var hasSliderY = (!!config.sliderY) || (!!config.scrollerY);
+        var hasSliderX = (!!config.sliderX) || (!!config.scrollerX);
+        if (!config.hasOwnProperty('scrollMode')) {
+            if (hasSliderY && hasSliderX) {
+                config.scrollMode = 2;
+            } else if (hasSliderY) {                
+                config.scrollMode = 0;
+            } else if (hasSliderX) {
+                config.scrollMode = 1;
+            }
+        }
+
+        var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
         // Create sizer
-        config.orientation = (scrollMode === 0) ? 1 : 0;
+        config.orientation = ((scrollMode === 0) || (scrollMode === 2)) ? 1 : 0;
         super(scene, config);
         this.type = GetValue(config, 'type', 'rexScrollable');
+        this.scrollMode = scrollMode;
 
         // Add elements
-        var background = GetValue(config, 'background', undefined);
-        var scrollableSizer = CreateScrollableSizer(this, config);
-        var header = GetValue(config, 'header', undefined);
-        var footer = GetValue(config, 'footer', undefined);
-
         // Background
+        var background = GetValue(config, 'background', undefined);
         if (background) {
             this.addBackground(background);
         }
 
+        var header = GetValue(config, 'header', undefined);
         if (header) {
             var align = GetValue(config, 'align.header', 'center');
             var headerSpace = GetValue(config, 'space.header', 0);
             var padding;
-            if (scrollMode === 0) {
+            if ((scrollMode === 0) || (scrollMode === 2)) {
                 padding = { bottom: headerSpace };
             } else {
                 padding = { right: headerSpace };
             }
-            var expand = GetValue(config, 'expand.header', true);
             this.add(header,
                 {
                     proportion: 0,
                     align: align,
                     padding: padding,
-                    expand: expand
+                    expand: GetValue(config, 'expand.header', true)
                 }
             );
         }
 
+        var scrollableSizer = CreateScrollableSizer(this, config);
         if (scrollableSizer) {
             this.add(scrollableSizer,
                 {
@@ -62,22 +72,22 @@ class Scrollable extends Sizer {
             );
         }
 
+        var footer = GetValue(config, 'footer', undefined);
         if (footer) {
             var align = GetValue(config, 'align.footer', 'center');
             var footerSpace = GetValue(config, 'space.footer', 0);
             var padding;
-            if (scrollMode === 0) {
+            if ((scrollMode === 0) || (scrollMode === 2)) {
                 padding = { top: footerSpace };
             } else {
                 padding = { left: footerSpace };
             }
-            var expand = GetValue(config, 'expand.footer', true);
             this.add(footer,
                 {
                     proportion: 0,
                     align: align,
                     padding: padding,
-                    expand: expand
+                    expand: GetValue(config, 'expand.footer', true)
                 }
             );
         }
@@ -88,13 +98,22 @@ class Scrollable extends Sizer {
 
         this.runLayoutFlag = false;
 
-        /* Necessary properties of child object
+        /* 
+        Necessary properties of child object :
+
         - child.t (RW), 
-        - child.childOY (RW)
+        - child.childOY (RW)        
         - child.topChildOY (R)
         - child.bottomChildOY (R)
         - child.childVisibleHeight (R)
         - child.childHeight (R)
+
+        - child.s (RW), 
+        - child.childOX (RW)
+        - child.leftChildOX (R)
+        - child.rightChildOX (R)
+        - child.childVisibleWidth (R)
+        - child.childWidth (R)        
         */
     }
 
@@ -106,10 +125,14 @@ class Scrollable extends Sizer {
         super.runLayout(parent, newWidth, newHeight);
         this.resizeController();
 
-        // Set `t` to 0 at first runLayout()
+        // Set t, s to 0 at first runLayout()
         if (!this.runLayoutFlag) {
             this.runLayoutFlag = true;
             this.setT(0);
+
+            if (this.scrollMode === 2) {
+                this.setS(0);
+            }
         }
 
         return this;
@@ -123,7 +146,7 @@ class Scrollable extends Sizer {
             var innerHeight = (child.topChildOY - child.bottomChildOY);
             var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
             var innerChildOY = (outerHeight * value) - childMargin.top;
-            value = innerChildOY / innerHeight;
+            value = (innerHeight !== 0) ? (innerChildOY / innerHeight) : 0;
         }
 
         this.childrenMap.child.t = value;
@@ -140,9 +163,39 @@ class Scrollable extends Sizer {
             var innerHeight = (child.topChildOY - child.bottomChildOY);
             var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
             var outerChildOY = (innerHeight * t) + childMargin.top;
-            t = outerChildOY / outerHeight;
+            t = (outerHeight !== 0) ? (outerChildOY / outerHeight) : 0;
         }
         return t;
+    }
+
+    set s(value) {
+        // Get inner childS
+        var childMargin = this.childMargin;
+        if ((childMargin.left !== 0) || (childMargin.right !== 0)) {
+            var child = this.childrenMap.child;
+            var innerWidth = (child.leftChildOX - child.rightChildOX);
+            var outerWidth = innerWidth + childMargin.left + childMargin.right;
+            var innerChildOX = (outerWidth * value) - childMargin.left;
+            value = (innerWidth !== 0) ? (innerChildOX / innerWidth) : 0;
+        }
+
+        this.childrenMap.child.s = value;
+        this.updateController();
+    }
+
+    get s() {
+        var s = this.childrenMap.child.s;
+
+        // Get outer childT
+        var childMargin = this.childMargin;
+        if ((childMargin.left !== 0) || (childMargin.right !== 0)) {
+            var child = this.childrenMap.child;
+            var innerWidth = (child.leftChildOX - child.rightChildOX);
+            var outerWidth = innerWidth + childMargin.left + childMargin.right;
+            var outerChildOX = (innerWidth * s) + childMargin.left;
+            s = (outerWidth !== 0) ? (outerChildOX / outerWidth) : 0;
+        }
+        return s;
     }
 
     set childOY(value) {
@@ -154,12 +207,29 @@ class Scrollable extends Sizer {
         return this.childrenMap.child.childOY;
     }
 
+    set childOX(value) {
+        this.childrenMap.child.childOX = value;
+        this.updateController();
+    }
+
+    get childOX() {
+        return this.childrenMap.child.childOX;
+    }
+
     get topChildOY() {
         return this.childrenMap.child.topChildOY + this.childMargin.top;
     }
 
     get bottomChildOY() {
         return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+    }
+
+    get leftChildOX() {
+        return this.childrenMap.child.leftChildOX + this.childMargin.left;
+    }
+
+    get rightChildOX() {
+        return this.childrenMap.child.rightChildOX - this.childMargin.right;
     }
 
     get childVisibleHeight() {
@@ -170,13 +240,26 @@ class Scrollable extends Sizer {
         return this.childrenMap.child.childHeight;
     }
 
+    get childVisibleWidth() {
+        return this.childrenMap.child.childVisibleWidth;
+    }
+
+    get childWidth() {
+        return this.childrenMap.child.childWidth;
+    }
+
     get isOverflow() {
         var child = this.childrenMap.child;
         return child.topChildOY !== child.bottomChildOY;
     }
 
-    get scrollMode() {
-        return (this.orientation === 0) ? 1 : 0;
+    get isOverflowY() {
+        return this.isOverflow;
+    }
+
+    get isOverflowX() {
+        var child = this.childrenMap.child;
+        return child.leftChildOX !== child.rightChildOX;
     }
 
     setChildOY(value, clamp) {
@@ -231,6 +314,58 @@ class Scrollable extends Sizer {
         return this;
     }
 
+    setChildOX(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, this.leftChildOX, this.rightChildOX);
+        }
+        this.childOX = value;
+        return this;
+    }
+
+    addChildOX(inc, clamp) {
+        this.setChildOX(this.childOX + inc, clamp);
+        return this;
+    }
+
+    setS(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, 0, 1);
+        }
+        this.s = value;
+        return this;
+    }
+
+    addS(inc, clamp) {
+        this.setS(this.s + inc, clamp);
+        return this;
+    }
+
+    scrollToLeft() {
+        this.s = 0;
+        return this;
+    }
+
+    scrollToRight() {
+        this.s = 1;
+        // s will be 0 if panel/table does not exceed visible area
+        if (this.s === 0) {
+            return this;
+        }
+
+        // Panel/Table height might be expanded while cells are visible        
+        do {
+            this.s = 1;
+        } while (this.s !== 1)
+
+        return this;
+    }
+
     get sliderEnable() {
         var slider = this.childrenMap.slider;
         if (!slider) {
@@ -253,6 +388,44 @@ class Scrollable extends Sizer {
             enabled = true;
         }
         this.sliderEnable = enabled;
+        return this;
+    }
+
+    get sliderYEnable() {
+        return this.sliderEnable
+    }
+
+    set sliderYEnable(value) {
+        this.sliderEnable = value;
+    }
+
+    setSliderYEnable(enabled) {
+        this.setSliderEnable(enabled);
+        return this;
+    }
+
+    get sliderXEnable() {
+        var slider = this.childrenMap.sliderX;
+        if (!slider) {
+            return false;
+        }
+
+        return slider.enable;
+    }
+
+    set sliderXEnable(value) {
+        var slider = this.childrenMap.sliderX;
+        if (!slider) {
+            return;
+        }
+        slider.setEnable(value);
+    }
+
+    setSliderXEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.sliderXEnable = enabled;
         return this;
     }
 
@@ -281,6 +454,69 @@ class Scrollable extends Sizer {
         return this;
     }
 
+    get scrollerYEnable() {
+        return this.scrollerEnable;
+    }
+
+    set scrollerYEnable(value) {
+        this.scrollerEnable = value;
+    }
+
+    setScrollerYEnable(enabled) {
+        this.setScrollerEnable(enabled);
+        return this;
+    }
+
+    get scrollerXEnable() {
+        var scroller = this.childrenMap.scrollerX;
+        if (!scroller) {
+            return false;
+        }
+
+        return scroller.enable;
+    }
+
+    set scrollerXEnable(value) {
+        var scroller = this.childrenMap.scrollerX;
+        if (!scroller) {
+            return;
+        }
+        scroller.setEnable(value);
+    }
+
+    setScrollerXEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.scrollerXEnable = enabled;
+        return this;
+    }
+
+    get scrollerXEnable() {
+        var scroller = this.childrenMap.scrollerX;
+        if (!scroller) {
+            return false;
+        }
+
+        return scroller.enable;
+    }
+
+    set scrollerXEnable(value) {
+        var scroller = this.childrenMap.scrollerX;
+        if (!scroller) {
+            return;
+        }
+        scroller.setEnable(value);
+    }
+
+    setScrollerXEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.scrollerXEnable = enabled;
+        return this;
+    }
+
     get mouseWheelScrollerEnable() {
         var mouseWheelScroller = this.childrenMap.mouseWheelScroller;
         if (!mouseWheelScroller) {
@@ -303,6 +539,44 @@ class Scrollable extends Sizer {
             enabled = true;
         }
         this.mouseWheelScrollerEnable = enabled;
+        return this;
+    }
+
+    get mouseWheelScrollerYEnable() {
+        return this.mouseWheelScrollerEnable;
+    }
+
+    set mouseWheelScrollerYEnable(value) {
+        this.mouseWheelScrollerEnable = value;
+    }
+
+    setMouseWheelScrollerYEnable(enabled) {
+        this.setMouseWheelScrollerEnable(enabled);
+        return this;
+    }
+
+    get mouseWheelScrollerXEnable() {
+        var mouseWheelScroller = this.childrenMap.mouseWheelScrollerX;
+        if (!mouseWheelScroller) {
+            return false;
+        }
+
+        return mouseWheelScroller.enable;
+    }
+
+    set mouseWheelScrollerXEnable(value) {
+        var mouseWheelScroller = this.childrenMap.mouseWheelScrollerX;
+        if (!mouseWheelScroller) {
+            return;
+        }
+        mouseWheelScroller.setEnable(value);
+    }
+
+    setMouseWheelScrollerXEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.mouseWheelScrollerXEnable = enabled;
         return this;
     }
 

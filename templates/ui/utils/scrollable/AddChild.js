@@ -1,6 +1,6 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var AddMainChild = function (topPatent, childParent, config) {
+var AddChild = function (topPatent, childParent, config) {
     var child = GetValue(config, 'child.gameObject', undefined)
     if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
@@ -67,4 +67,4 @@ var AddMainChild = function (topPatent, childParent, config) {
 
 }
 
-export default AddMainChild;
+export default AddChild;

@@ -9,7 +9,39 @@ declare namespace Scrollable {
     type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal' | 'x' | 'y';
     type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
     type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
-    type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'
+    type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top';
+
+    interface ISliderConfig {
+        background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+        track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+        thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+        input?: SliderInputTypes,
+        position?: SliderPositionTypes,
+
+        hideUnscrollableSlider?: boolean,
+        adaptThumbSize?: boolean,
+        minThumbSize?: number,
+
+        buttons?: {
+            top?: Phaser.GameObjects.GameObject,
+            bottom?: Phaser.GameObjects.GameObject,
+            left?: Phaser.GameObjects.GameObject,
+            right?: Phaser.GameObjects.GameObject,
+            step?: number
+        }
+    }
+
+    interface IScrollerConfig {
+        threshold?: number,
+        slidingDeceleration?: number | false,
+        backDeceleration?: number | false,
+        dragRate?: number,
+    }
+
+    interface IMouseWheelScroller {
+        focus?: boolean,
+        speed?: number,
+    }
 
     interface IConfig extends Sizer.IConfig {
         space?: {
@@ -23,48 +55,20 @@ declare namespace Scrollable {
 
         background?: Phaser.GameObjects.GameObject,
 
-        slider?: (
-            {
-                background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
-                track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
-                thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
-                input?: SliderInputTypes,
-                position?: SliderPositionTypes,
+        slider?: ISliderConfig | boolean,
+        sliderX?: ISliderConfig | boolean,
+        sliderY?: ISliderConfig | boolean,
 
-                hideUnscrollableSlider?: boolean,
-                adaptThumbSize?: boolean,
-                minThumbSize?: number,
+        scroller?: IScrollerConfig | boolean,
+        scrollerX?: IScrollerConfig | boolean,
+        scrollerY?: IScrollerConfig | boolean,
 
-                buttons?: {
-                    top?: Phaser.GameObjects.GameObject,
-                    bottom?: Phaser.GameObjects.GameObject,
-                    left?: Phaser.GameObjects.GameObject,
-                    right?: Phaser.GameObjects.GameObject,
-                    step?: number
-                }
-            } |
-            boolean
-        ),
-
-        scroller?: (
-            {
-                threshold?: number,
-                slidingDeceleration?: number | false,
-                backDeceleration?: number | false,
-                dragRate?: number,
-            } |
-            boolean
-        ),
-
-        mouseWheelScroller?: (
-            {
-                focus?: boolean,
-                speed?: number,
-            } |
-            boolean
-        ),
+        mouseWheelScroller?: IMouseWheelScroller | boolean,
+        mouseWheelScrollerX?: IMouseWheelScroller | boolean,
+        mouseWheelScrollerY?: IMouseWheelScroller | boolean,
 
         clamplChildOY?: boolean,
+        clamplChildOX?: boolean,
 
         header?: Phaser.GameObjects.GameObject,
         footer?: Phaser.GameObjects.GameObject,

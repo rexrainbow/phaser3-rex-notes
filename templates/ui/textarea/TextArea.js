@@ -1,4 +1,4 @@
-import Scrollable from '../utils/scrollablexy/Scrollable.js';
+import Scrollable from '../utils/scrollable/Scrollable.js';
 import TextBlock from './textblock/TextBlock.js';
 import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
