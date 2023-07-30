@@ -16780,8 +16780,17 @@
     var isAxisY = axis === 'Y';
     var isScrollXYMode = topPatent.scrollMode === 2;
     var child = topPatent.childrenMap.child;
-    var sliderConfig = GetValue$4(config, isScrollXYMode ? "slider".concat(axis) : 'slider', undefined),
-      slider;
+    var sliderConfig, slider;
+    var sliderConfigKey = "slider".concat(axis);
+    if (isScrollXYMode) {
+      sliderConfig = GetValue$4(config, sliderConfigKey, undefined);
+    } else {
+      if (config.hasOwnProperty(sliderConfigKey)) {
+        sliderConfig = GetValue$4(config, sliderConfigKey, undefined);
+      } else {
+        sliderConfig = GetValue$4(config, 'slider', undefined);
+      }
+    }
     if (sliderConfig) {
       if (sliderConfig === true) {
         sliderConfig = {};
@@ -16797,7 +16806,7 @@
       /*
       1. space.sliderX, space.sliderY
       2. space.slider
-      3. space.panel
+      3. space.child
       */
       var sliderPadding = GetValue$4(config, "space.slider".concat(axis), undefined);
       if (sliderPadding === undefined) {
@@ -16806,7 +16815,7 @@
           if (isScrollXYMode) {
             sliderPadding = 0;
           } else {
-            sliderPadding = GetValue$4(config, 'space.panel', 0);
+            sliderPadding = GetValue$4(config, 'space.child', 0);
             if (typeof sliderPadding === 'number') {
               if (isAxisY) {
                 sliderPadding = sliderPosition === 0 ? {
@@ -16874,8 +16883,17 @@
       topPatent["adaptThumb".concat(axis, "SizeMode")] = false;
       topPatent["minThumb".concat(axis, "Size")] = undefined;
     }
-    var scrollerConfig = GetValue$4(config, isScrollXYMode ? "scroller".concat(axis) : 'scroller', true),
-      scroller;
+    var scrollerConfig, scroller;
+    var scrollerConfigKey = "scroller".concat(axis);
+    if (isScrollXYMode) {
+      scrollerConfig = GetValue$4(config, scrollerConfigKey, true);
+    } else {
+      if (config.hasOwnProperty(scrollerConfigKey)) {
+        scrollerConfig = GetValue$4(config, scrollerConfigKey, true);
+      } else {
+        scrollerConfig = GetValue$4(config, 'scroller', true);
+      }
+    }
     if (scrollerConfig && child) {
       if (scrollerConfig === true) {
         scrollerConfig = {};
@@ -17170,10 +17188,16 @@
       if (config === undefined) {
         config = {};
       }
-      var hasSliderXY = !!config.sliderY && !!config.sliderX;
-      var hasScrollerXY = !!config.scrollerX && !!config.scrollerY;
-      if (hasSliderXY || hasScrollerXY) {
-        config.scrollMode = 2;
+      var hasSliderY = !!config.sliderY || !!config.scrollerY;
+      var hasSliderX = !!config.sliderX || !!config.scrollerX;
+      if (!config.hasOwnProperty('scrollMode')) {
+        if (hasSliderY && hasSliderX) {
+          config.scrollMode = 2;
+        } else if (hasSliderY) {
+          config.scrollMode = 0;
+        } else if (hasSliderX) {
+          config.scrollMode = 1;
+        }
       }
       var scrollMode = GetScrollMode(config); // 0:y, 1:x, 2:xy
       // Create sizer
