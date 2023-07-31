@@ -13,6 +13,7 @@ A container with a text, slider, and scroller.
 - [Append text](https://codepen.io/rexrainbow/pen/rNZaEgO)
 - [Scroll to line](https://codepen.io/rexrainbow/pen/yLxxWaY)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
+- [Min height](https://codepen.io/rexrainbow/pen/oNQJxZN)
 
 ## Usage
 

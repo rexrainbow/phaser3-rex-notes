@@ -90,29 +90,60 @@ declare namespace Scrollable {
 
 declare class Scrollable extends Sizer {
     t: number;
+    s: number;
+
     setT(value: number, clamp?: boolean): this;
     addT(inc: number, clamp?: boolean): this;
     scrollToTop(): this;
     scrollToBottom(): this;
 
+    setS(value: number, clamp?: boolean): this;
+    addS(inc: number, clamp?: boolean): this;
+    scrollToLeft(): this;
+    scrollToRight(): this;
+
     childOY: number;
+    childOX: number;
+
     readonly topChildOY: number;
     readonly bottomChildOY: number;
+    readonly leftChildOX: number;
+    readonly rightChildOX: number;
+
     readonly childVisibleHeight: number;
     readonly childHeight: number;
+    readonly childVisibleWidth: number;
+    readonly childWidth: number;
+
     setChildOY(value: number, clamp?: boolean): this;
     addChildOY(inc: number, clamp?: boolean): this;
+    setChildOX(value: number, clamp?: boolean): this;
+    addChildOX(inc: number, clamp?: boolean): this;
 
     sliderEnable: boolean;
     setSliderEnable(enable?: boolean): this;
+    sliderYEnable: boolean;
+    setSliderYEnable(enable?: boolean): this;
+    sliderXEnable: boolean;
+    setSliderXEnable(enable?: boolean): this;
 
     scrollerEnable: boolean;
     setScrollerEnable(enable?: boolean): this;
+    scrollerYEnable: boolean;
+    setScrollerYEnable(enable?: boolean): this;
+    scrollerXEnable: boolean;
+    setScrollerXEnable(enable?: boolean): this;
 
     mouseWheelScrollerEnable: boolean;
     setMouseWheelScrollerEnable(enable?: boolean): this;
+    mouseWheelScrollerYEnable: boolean;
+    setMouseWheelScrollerYEnable(enable?: boolean): this;
+    mouseWheelScrollerXEnable: boolean;
+    setMouseWheelScrollerXEnable(enable?: boolean): this;
 
     readonly scrollMode: number;
 
     readonly isOverflow: boolean;
+    readonly isOverflowY: boolean;
+    readonly isOverflowX: boolean;
 }
