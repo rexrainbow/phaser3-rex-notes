@@ -117,7 +117,7 @@ declare class TextPlayer extends DynamicText {
         config?: TextPlayer.IConfig
     );
 
-    addGameObjectManager(config: Managers.IGameObjectConfig): this;
+    addGameObjectManager(config: Managers.IAddGameObjectManagerConfig): this;
 
     play(content: string): this;
     playPromise(content: string): Promise<any>;

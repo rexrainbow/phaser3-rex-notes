@@ -38,6 +38,10 @@ declare namespace Label {
 
         align?: AlignTypes,
     }
+
+    interface IResetDisplayContentConfig extends LabelBase.IResetDisplayContentConfig {
+
+    }
 }
 
 declare class Label extends LabelBase {
