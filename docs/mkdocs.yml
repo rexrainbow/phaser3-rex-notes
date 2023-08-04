@@ -85,6 +85,7 @@ nav:
             - Edit: textedit.md
             - Hidden edit: hiddeninputtext.md
             - Translation: texttranslation.md
+            - Character cache: charactercache.md
         - Input text: list-inputtext.md    
     - Graphics:
         - Graphics: graphics.md
