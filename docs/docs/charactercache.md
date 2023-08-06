@@ -24,7 +24,7 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
     ```
 - Add character-cache object
     ```javascript
-    var characterCache = scene.plugins.get('rexcharactercacheplugin').add(scene, config);
+    var characterCache = scene.plugins.get('rexcharactercacheplugin').add(config);
     ```
 
 #### Import plugin
@@ -53,7 +53,7 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
     ```
 - Add character-cache object
     ```javascript
-    var characterCache = scene.plugins.get('rexCharacterCache').add(scene, config);
+    var characterCache = scene.plugins.get('rexCharacterCache').add(config);
     ```
 
 #### Import class
@@ -68,13 +68,17 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
     ```
 - Add character-cache object
     ```javascript
+    var characterCache = new CharacterCache(game, config);
+    ```
+    or
+    ```javascript
     var characterCache = new CharacterCache(scene, config);
     ```
 
 ### Create instance
 
 ```javascript
-var characterCache = scene.plugins.get('rexCharacterCache').add(scene, {
+var characterCache = scene.plugins.get('rexCharacterCache').add({
     key: '',  
     cellWidth: 32,
     cellHeight: 32,

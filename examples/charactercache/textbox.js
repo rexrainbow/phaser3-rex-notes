@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var characterCache = this.plugins.get('rexCharacterCache').add(this, {
+        var characterCache = this.plugins.get('rexCharacterCache').add({
             key: 'font',
 
             cellWidth: 32, cellHeight: 32,

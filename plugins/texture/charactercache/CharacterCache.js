@@ -53,6 +53,8 @@ class CharacterCache {
         if (this.textObject) {
             this.textObject.destroy();
         }
+
+        this.game = null;
     }
 
     destroy() {
