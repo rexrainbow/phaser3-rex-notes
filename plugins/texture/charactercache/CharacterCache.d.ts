@@ -11,6 +11,7 @@ declare namespace CharacterCache {
         freqMode?: boolean,
 
         textObject?: Phaser.GameObjects.GameObject,
+        style?: Phaser.GameObjects.TextStyle,
 
         content?: string,
 
@@ -27,7 +28,7 @@ declare namespace CharacterCache {
 
 declare class CharacterCache extends EventEmitter {
     constructor(
-        scene: Phaser.Scene,
+        scene: Phaser.Scene | Phaser.Game,
         config: CharacterCache.IConfig
     );
 

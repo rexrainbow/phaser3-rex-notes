@@ -18,17 +18,14 @@ class Demo extends Phaser.Scene {
             cellWidth: 32, cellHeight: 32,
             maxCharacterCount: 4096,
 
-            textObject: this.make.text({
-                add: false,
-                style: {
-                    align: 'center',
-                    fontSize: 32,
-                    fixedWidth: 32,
-                    fixedHeight: 32,
-                    padding: { top: 2 },
-                    testString: '回'
-                }
-            }),
+            style: {
+                align: 'center',
+                fontSize: 32,
+                fixedWidth: 32,
+                fixedHeight: 32,
+                padding: { top: 2 },
+                testString: '回'
+            }
         })
             .on('add', function (character, textObject) {
                 console.log(`Add '${character}'`)

@@ -25,17 +25,14 @@ class Demo extends Phaser.Scene {
             maxCharacterCount: 4096,
             freqMode: false,
 
-            textObject: this.make.text({
-                add: false,
-                style: {
-                    align: 'center',
-                    fontSize: 32,
-                    fixedWidth: 32,
-                    fixedHeight: 32,
-                    padding: { top: 2 },
-                    testString: '回'
-                }
-            }),
+            style: {
+                align: 'center',
+                fontSize: 32,
+                fixedWidth: 32,
+                fixedHeight: 32,
+                padding: { top: 2 },
+                testString: '回'
+            }
         })
 
         // Now can setText

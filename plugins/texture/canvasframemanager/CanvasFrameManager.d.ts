@@ -22,7 +22,7 @@ declare namespace CanvasFrameManager {
 
 declare class CanvasFrameManager {
     constructor(
-        scene: Phaser.Scene,
+        scene: Phaser.Scene | Phaser.Game,
         key: string,
         width?: number,
         height?: number,
@@ -32,7 +32,7 @@ declare class CanvasFrameManager {
     );
 
     constructor(
-        scene: Phaser.Scene,
+        scene: Phaser.Scene | Phaser.Game,
         config: CanvasFrameManager.IConfig
     );
 

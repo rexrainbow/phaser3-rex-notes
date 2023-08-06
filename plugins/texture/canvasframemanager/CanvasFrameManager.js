@@ -1,4 +1,5 @@
 import Methods from './methods/Methods.js';
+import GetGame from '../../utils/system/GetGame.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -28,10 +29,11 @@ class CanvasFrameManager {
             cellHeight = 64;
         }
 
-        this.texture = scene.sys.textures.createCanvas(key, width, height);
+        var game = GetGame(scene);
+        this.texture = game.textures.createCanvas(key, width, height);
         this.canvas = this.texture.getCanvas();
         this.context = this.texture.getContext();
-        this.bitmapFontCache = scene.sys.cache.bitmapFont;
+        this.bitmapFontCache = game.cache.bitmapFont;
 
         if (fillColor !== undefined) {
             var context = this.context;

@@ -1,9 +1,11 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import GetGame from '../../utils/system/GetGame.js';
 import CreateFrameManager from './methods/CreateFrameManager.js';
 import CreateCharacterCollection from './methods/CreateCharacterCollection.js';
 import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const TextGameObjectClass = Phaser.GameObjects.Text;
 
 class CharacterCache {
     constructor(scene, config) {
@@ -12,9 +14,10 @@ class CharacterCache {
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
+        this.game = GetGame(scene);
         this.freqMode = GetValue(config, 'freqMode', true);
 
-        this.frameManager = CreateFrameManager(scene, config);
+        this.frameManager = CreateFrameManager(this.game, config);
         this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
 
         this.key = this.frameManager.key;
@@ -26,6 +29,12 @@ class CharacterCache {
 
         // Bind text object
         var textObject = GetValue(config, 'textObject');
+        if (!textObject) {
+            var style = GetValue(config, 'style');
+            if (style) {
+                textObject = new TextGameObjectClass(this.game.scene.systemScene, 0, 0, '', style);
+            }
+        }
         if (textObject) {
             this.bindTextObject(textObject);
         }

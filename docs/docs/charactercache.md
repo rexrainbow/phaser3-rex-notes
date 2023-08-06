@@ -81,7 +81,9 @@ var characterCache = scene.plugins.get('rexCharacterCache').add(scene, {
     maxCharacterCount: 4096,
     freqMode: true,
 
-    textObject: textGameOject,
+    style: textStyle,
+    // textObject: textGameOject,
+
 
     content: '',
 });
@@ -95,6 +97,8 @@ var characterCache = scene.plugins.get('rexCharacterCache').add(scene, {
 - `freqMode` : 
     - `true` : Swap out un-unsed and low-frequence character.
     - `false` : Swap out any un-unsed character.
+- `style` : [Style of Text game object](text.md#add-text-object). Create a text game object by this style setting
+  on systemScene if `textObject` parameter is not given.
 - `textObject` : [Text game object](text.md), or [bbcode text game object](bbcodetext.md) for drawing character.
 - `content` : Load these characters into cache.
 
