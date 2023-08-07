@@ -235,7 +235,7 @@ var dialog = scene.rexUI.add.dialog({
     - 2d Array of Game objects, for [GridButtons](ui-gridbuttons.md) choices..
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `choicesType` : Sizer type ([Buttons](ui-buttons.md)/[FixWidthButtons](ui-fixwidthbuttons.md)/[GridButtons](ui-gridbuttons.md)) and behavior (`''`/`'radio'`/`'checkboxes'`) of choice buttons.
-    - `undefined`, `''`, or `'y'` : [Buttons](ui-buttons.md) in vertical/horizontal without any extra behavior, default behavior.
+    - `undefined`, `'x'`, or `'y'` : [Buttons](ui-buttons.md) in vertical/horizontal without any extra behavior, default behavior.
     - `'radio'`, or `'x-radio'` : [Buttons](ui-buttons.md) in vertical/horizontal, with radio behavior.
         - Name of selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`.
     - `'checkboxes'`, or `'x-checkboxes'` : [Buttons](ui-buttons.md) in vertical/horizontal, with checkboxes behavior.
