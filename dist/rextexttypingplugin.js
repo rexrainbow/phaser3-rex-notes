@@ -575,9 +575,9 @@
             this.emit('typechar', this.insertChar);
             this.typingIdx++;
           }
-          this.emit('type');
           // Display all characters on text game object
           this.setText(this.text);
+          this.emit('type');
           this.emit('complete', this, this.parent);
         }
         return this;
