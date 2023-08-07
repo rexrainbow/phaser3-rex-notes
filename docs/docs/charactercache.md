@@ -109,7 +109,7 @@ var characterCache = scene.plugins.get('rexCharacterCache').add({
 
 ### Create BitmapText
 
-Create [BitmapText](bitmaptext.md)/Dynamci BitmapText](dynamicbitmaptext.md) game object using this character cache, 
+Create [BitmapText](bitmaptext.md)/[Dynamci BitmapText](dynamicbitmaptext.md) game object using this character cache, 
 add this game object into scene's display list
 
 - [BitmapText](bitmaptext.md)
