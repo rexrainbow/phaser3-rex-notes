@@ -143,15 +143,20 @@ var states = scene.plugins.get('rexFSM').add({
     
         next_A() { return 'B' }
     
-        enter_A() { /* ... */ }
+        enter_A() { }
     
-        exit_A() { /* ... */ }
+        exit_A() { }
+
+        update_A(time, delta) { }
+        preupdate_A(time, delta) { }
+        postupdate_A(time, delta) { }
     }
     ```
     Members:
-        - `next_` + stateName: Callback to get next state.
-        - `enter_` + stateName: Callback when enter state.
-        - `exit_` + stateName: Callback when exit state.
+        - `next_` + stateName : Callback to get next state.
+        - `enter_` + stateName : Callback when enter state.
+        - `exit_` + stateName : Callback when exit state.
+        - `update_` + stateName, `preupdate_` + stateName, `postupdate_` + stateName : Callback invoked by [scene's `'update'`, `'preupdate'`, `'postupdate'` events](scene.md#events).
 1. Create instance
     ```javascript
     var states = new State();

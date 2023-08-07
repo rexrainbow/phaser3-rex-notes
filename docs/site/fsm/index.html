@@ -9783,15 +9783,20 @@
 
 <span class="w">    </span><span class="nx">next_A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">enter_A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">enter_A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">exit_A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">exit_A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">update_A</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">preupdate_A</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">postupdate_A</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
     Members:
-        - <code>next_</code> + stateName: Callback to get next state.
-        - <code>enter_</code> + stateName: Callback when enter state.
-        - <code>exit_</code> + stateName: Callback when exit state.</li>
+        - <code>next_</code> + stateName : Callback to get next state.
+        - <code>enter_</code> + stateName : Callback when enter state.
+        - <code>exit_</code> + stateName : Callback when exit state.
+        - <code>update_</code> + stateName, <code>preupdate_</code> + stateName, <code>postupdate_</code> + stateName : Callback invoked by <a href="../scene/#events">scene's <code>'update'</code>, <code>'preupdate'</code>, <code>'postupdate'</code> events</a>.</li>
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">State</span><span class="p">();</span>
 </code></pre></div></li>
