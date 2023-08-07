@@ -3,6 +3,8 @@ import GetGame from '../../utils/system/GetGame.js';
 import CreateFrameManager from './methods/CreateFrameManager.js';
 import CreateCharacterCollection from './methods/CreateCharacterCollection.js';
 import Methods from './methods/Methods.js';
+import { CacheName } from './Const.js';
+import GetCharacterCache from './methods/GetCharacterCache.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const TextGameObjectClass = Phaser.GameObjects.Text;
@@ -23,9 +25,13 @@ class CharacterCache {
         this.key = this.frameManager.key;
         this.cellWidth = this.frameManager.cellWidth;
         this.cellHeight = this.frameManager.cellHeight;
+        this.inCacheCount = 0;
 
         // Create ChacacterCollection
         this.characterCollection = CreateCharacterCollection();
+
+        // Add this character cache into customCache
+        this.game.cache.addCustom(CacheName).add(this.key, this);
 
         // Bind text object
         var textObject = GetValue(config, 'textObject');
@@ -38,8 +44,6 @@ class CharacterCache {
         if (textObject) {
             this.bindTextObject(textObject);
         }
-
-        this.inCacheCount = 0;
 
         // Load content
         this.load(GetValue(config, 'content', ''));
@@ -64,6 +68,10 @@ class CharacterCache {
     bindTextObject(textObject) {
         this.textObject = textObject;
         return this;
+    }
+
+    static getCache(scene, key) {
+        return GetCharacterCache(scene, key);
     }
 }
 

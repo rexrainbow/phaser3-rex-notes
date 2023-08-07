@@ -3,6 +3,10 @@ import {
 } from './CharacterQueryMethods.js';
 
 var Load = function (content, lock) {
+    if (!content) {
+        return this;
+    }
+
     if (Array.isArray(content)) {
         content = content.join('');
     }

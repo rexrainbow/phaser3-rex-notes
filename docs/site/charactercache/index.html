@@ -1893,6 +1893,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-bitmaptext" class="md-nav__link">
+    Create BitmapText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load-characters" class="md-nav__link">
     Load characters
   </a>
@@ -4095,6 +4102,13 @@
           <li class="md-nav__item">
   <a href="#create-instance" class="md-nav__link">
     Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-bitmaptext" class="md-nav__link">
+    Create BitmapText
   </a>
   
 </li>
@@ -9674,6 +9688,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-bitmaptext" class="md-nav__link">
+    Create BitmapText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load-characters" class="md-nav__link">
     Load characters
   </a>
@@ -9843,6 +9864,19 @@
   on systemScene if <code>textObject</code> parameter is not given.</li>
 <li><code>textObject</code> : <a href="../text/">Text game object</a>, or <a href="../bbcodetext/">bbcode text game object</a> for drawing character.</li>
 <li><code>content</code> : Load these characters into cache.</li>
+</ul>
+<h3 id="create-bitmaptext">Create BitmapText<a class="headerlink" href="#create-bitmaptext" title="Permanent link">&para;</a></h3>
+<p>Create <a href="../bitmaptext/">BitmapText</a>/Dynamci BitmapText](dynamicbitmaptext.md) game object using this character cache, 
+add this game object into scene's display list</p>
+<ul>
+<li><a href="../bitmaptext/">BitmapText</a>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">characterCache</span><span class="p">.</span><span class="nx">addBitmapText</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span><span class="w">    </span>
+<span class="c1">// var txt = characterCache.addBitmapText(scene, x, y, text, size, align);</span>
+</code></pre></div></li>
+<li><a href="../dynamicbitmaptext/">Dynamci BitmapText</a>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">characterCache</span><span class="p">.</span><span class="nx">addDynamicBitmapText</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span><span class="w">    </span>
+<span class="c1">// var txt = characterCache.addDynamicBitmapText(scene, x, y, text, size, align);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="load-characters">Load characters<a class="headerlink" href="#load-characters" title="Permanent link">&para;</a></h3>
 <p>Load characters into bitmap font, replace unused characters if no free character space.</p>

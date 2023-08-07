@@ -20,6 +20,10 @@ class CharacterCachePlugin extends Phaser.Plugins.BasePlugin {
         }
         return new CharacterCache(scene, config);
     }
+
+    getCache(key) {
+        return CharacterCache.getCache(this.game, key);
+    }
 }
 
 export default CharacterCachePlugin;

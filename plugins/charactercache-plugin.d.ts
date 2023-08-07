@@ -10,4 +10,5 @@ export default class CharacterCachePlugin extends Phaser.Plugins.BasePlugin {
         config: CharacterCache.IConfig
     ): CharacterCache;
 
+    getCache(key: string): CharacterCache;
 }

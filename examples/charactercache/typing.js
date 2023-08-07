@@ -37,9 +37,7 @@ class Demo extends Phaser.Scene {
             })
 
         // Create bitmaptext
-        var txt = this.add.bitmapText(10, 10, characterCache.key);
-        // Override `setText` method
-        characterCache.overrideBitmapText(txt);
+        var txt = characterCache.addBitmapText(this, 10, 10);
 
         txt.typing = this.plugins.get('rexTextTyping').add(txt, {
             speed: 200,

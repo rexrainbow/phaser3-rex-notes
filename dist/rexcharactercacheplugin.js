@@ -103,6 +103,29 @@
       return _possibleConstructorReturn(this, result);
     };
   }
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+    return object;
+  }
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+        return desc.value;
+      };
+    }
+    return _get.apply(this, arguments);
+  }
   function _toPrimitive(input, hint) {
     if (typeof input !== "object" || input === null) return input;
     var prim = input[Symbol.toPrimitive];
@@ -9110,6 +9133,9 @@
   };
 
   var Load = function Load(content, lock) {
+    if (!content) {
+      return this;
+    }
     if (Array.isArray(content)) {
       content = content.join('');
     }
@@ -9200,6 +9226,56 @@
     return this;
   };
 
+  var CacheName = 'charactercache';
+
+  var GetCharacterCache = function GetCharacterCache(scene, key) {
+    var cache = GetGame(scene).cache.custom[CacheName];
+    if (!cache) {
+      return null;
+    }
+    return cache.get(key);
+  };
+
+  var CreateBitmapTextClass = function CreateBitmapTextClass(BaseClass) {
+    var BitmapTextClass = /*#__PURE__*/function (_BaseClass) {
+      _inherits(BitmapTextClass, _BaseClass);
+      var _super = _createSuper(BitmapTextClass);
+      function BitmapTextClass(scene, x, y, key, text, size, align) {
+        var _this;
+        _classCallCheck(this, BitmapTextClass);
+        var characterCache;
+        if (typeof key === 'string') {
+          characterCache = GetCharacterCache(scene, key);
+        } else {
+          characterCache = key;
+          key = characterCache.key;
+        }
+        if (!characterCache) {
+          console.error("Character cache : '".concat(key, "' is not available"));
+        }
+        _this = _super.call(this, scene, x, y, key, '', size, align);
+        _this.characterCache = characterCache;
+        _this.setText(text);
+        return _this;
+      }
+      _createClass(BitmapTextClass, [{
+        key: "setText",
+        value: function setText(text, lock) {
+          if (!this.characterCache) {
+            return this;
+          }
+          this.characterCache.load(text, lock);
+          _get(_getPrototypeOf(BitmapTextClass.prototype), "setText", this).call(this, text);
+          return this;
+        }
+      }]);
+      return BitmapTextClass;
+    }(BaseClass);
+    return BitmapTextClass;
+  };
+
+  var BitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.BitmapText);
+  var DynamicBitmapTextClass = CreateBitmapTextClass(Phaser.GameObjects.DynamicBitmapText);
   var BitmapTextMethods = {
     overrideBitmapText: function overrideBitmapText(bitmapText) {
       var self = this;
@@ -9210,6 +9286,16 @@
         return bitmapText;
       };
       return bitmapText;
+    },
+    addBitmapText: function addBitmapText(scene, x, y, text, size, align) {
+      var gameObject = new BitmapTextClass(scene, x, y, this, text, size, align);
+      scene.add.existing(gameObject);
+      return gameObject;
+    },
+    addDynamicBitmapText: function addDynamicBitmapText(scene, x, y, text, size, align) {
+      var gameObject = new DynamicBitmapTextClass(scene, x, y, this, text, size, align);
+      scene.add.existing(gameObject);
+      return gameObject;
     }
   };
 
@@ -9238,9 +9324,13 @@
       this.key = this.frameManager.key;
       this.cellWidth = this.frameManager.cellWidth;
       this.cellHeight = this.frameManager.cellHeight;
+      this.inCacheCount = 0;
 
       // Create ChacacterCollection
       this.characterCollection = CreateCharacterDB();
+
+      // Add this character cache into customCache
+      this.game.cache.addCustom(CacheName).add(this.key, this);
 
       // Bind text object
       var textObject = GetValue(config, 'textObject');
@@ -9253,7 +9343,6 @@
       if (textObject) {
         this.bindTextObject(textObject);
       }
-      this.inCacheCount = 0;
 
       // Load content
       this.load(GetValue(config, 'content', ''));
@@ -9279,6 +9368,11 @@
       value: function bindTextObject(textObject) {
         this.textObject = textObject;
         return this;
+      }
+    }], [{
+      key: "getCache",
+      value: function getCache(scene, key) {
+        return GetCharacterCache(scene, key);
       }
     }]);
     return CharacterCache;
@@ -9307,6 +9401,11 @@
           scene = this.game;
         }
         return new CharacterCache(scene, config);
+      }
+    }, {
+      key: "getCache",
+      value: function getCache(key) {
+        return CharacterCache.getCache(this.game, key);
       }
     }]);
     return CharacterCachePlugin;

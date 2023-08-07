@@ -47,6 +47,24 @@ declare class CharacterCache extends EventEmitter {
         bitmapText: Phaser.GameObjects.GameObject
     ): Phaser.GameObjects.GameObject;
 
+    addBitmapText(
+        scene: Phaser.Scene,
+        x?: number,
+        y?: number,
+        text?: string,
+        size?: number,
+        align?: number
+    ): Phaser.GameObjects.BitmapText;
+
+    addDynamicBitmapText(
+        scene: Phaser.Scene,
+        x?: number,
+        y?: number,
+        text?: string,
+        size?: number,
+        align?: number
+    ): Phaser.GameObjects.DynamicBitmapText;
+
     load(
         content: string,
         lock?: boolean

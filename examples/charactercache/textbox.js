@@ -78,7 +78,7 @@ var createTextBox = function (scene, x, y, config) {
 
         icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
 
-        text: characterCache.overrideBitmapText(scene.add.bitmapText(0, 0, characterCache.key)),
+        text: characterCache.addBitmapText(scene),
 
         action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 

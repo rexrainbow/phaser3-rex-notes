@@ -106,6 +106,23 @@ var characterCache = scene.plugins.get('rexCharacterCache').add({
 - `textObject` : [Text game object](text.md), or [bbcode text game object](bbcodetext.md) for drawing character.
 - `content` : Load these characters into cache.
 
+
+### Create BitmapText
+
+Create [BitmapText](bitmaptext.md)/Dynamci BitmapText](dynamicbitmaptext.md) game object using this character cache, 
+add this game object into scene's display list
+
+- [BitmapText](bitmaptext.md)
+    ```javascript
+    var txt = characterCache.addBitmapText(scene);    
+    // var txt = characterCache.addBitmapText(scene, x, y, text, size, align);
+    ```
+- [Dynamci BitmapText](dynamicbitmaptext.md)
+    ```javascript
+    var txt = characterCache.addDynamicBitmapText(scene);    
+    // var txt = characterCache.addDynamicBitmapText(scene, x, y, text, size, align);
+    ```
+
 ### Load characters
 
 Load characters into bitmap font, replace unused characters if no free character space.
