@@ -1794,6 +1794,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../charactercache/" class="md-nav__link">
+        Character cache
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9701,17 +9715,17 @@
 <span class="w">    </span><span class="nx">states</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">A</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">next</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// function() { return &#39;B&#39;; }</span>
-<span class="w">            </span><span class="nx">enter</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">exit</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">update</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">preupdate</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">postupdate</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">enter</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w">                 </span><span class="c1">// this: this fsm instance</span>
+<span class="w">            </span><span class="nx">exit</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w">                  </span><span class="c1">// this: this fsm instance</span>
+<span class="w">            </span><span class="nx">update</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span><span class="w">     </span><span class="c1">// this: this fsm instance</span>
+<span class="w">            </span><span class="nx">preupdate</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span><span class="w">  </span><span class="c1">// this: this fsm instance</span>
+<span class="w">            </span><span class="nx">postupdate</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="c1">// this: this fsm instance</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">init</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="nx">init</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w">   </span><span class="c1">// this: this fsm instance</span>
 <span class="w">    </span><span class="nx">extend</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">i</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">i</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">        </span><span class="c1">// Add member `i` into this fsm instance</span>
 <span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;abc&#39;</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">},</span>
@@ -9725,15 +9739,31 @@
 <li><code>states</code>: Define states.<ul>
 <li>stateName<ul>
 <li><code>next</code>: String of next state, or a callback to get next state.</li>
-<li><code>enter</code>: Callback when enter state.</li>
-<li><code>exit</code>: Callback when exit state.</li>
-<li><code>update</code>, <code>preupdate</code>, <code>postupdate</code> : Callback invoked by <a href="../scene/#events">scene's <code>'update'</code>, <code>'preupdate'</code>, <code>'postupdate'</code> events</a>.</li>
+<li><code>enter</code>: Callback when enter state.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// this : this fsm instance</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>exit</code>: Callback when exit state.
+     <code>javascript
+    function() {
+        // this : this fsm instance
+    }</code> </li>
+<li><code>update</code>, <code>preupdate</code>, <code>postupdate</code> : Callback invoked by <a href="../scene/#events">scene's <code>'update'</code>, <code>'preupdate'</code>, <code>'postupdate'</code> events</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// this : this fsm instance</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>init</code>: Initial callback when creating instance.</li>
-<li><code>extend</code>: Inject key-value pairs into instance.</li>
+<li><code>init</code>: Initial callback when creating instance.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// this : this fsm instance</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>extend</code>: Inject key-value pairs into this fsm instance.</li>
 <li><code>enable</code>: Set <code>false</code> to block any state changing.</li>
 <li><code>scene</code> : <a href="../scene/">Scene object</a> for <a href="./#update"><em>startUpdate</em>, <em>startPreUpdate</em>, <em>startPostUpdate</em> method</a>. Optional.</li>
 <li><code>eventEmitter</code><ul>

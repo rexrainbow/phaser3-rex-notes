@@ -76,17 +76,17 @@ var states = scene.plugins.get('rexFSM').add({
     states: {
         A: {
             next: 'B',  // function() { return 'B'; }
-            enter: function() {},
-            exit: function() {},
-            update: function(time, delta) {},
-            preupdate: function(time, delta) {},
-            postupdate: function(time, delta) {},
+            enter: function() {},                 // this: this fsm instance
+            exit: function() {},                  // this: this fsm instance
+            update: function(time, delta) {},     // this: this fsm instance
+            preupdate: function(time, delta) {},  // this: this fsm instance
+            postupdate: function(time, delta) {}, // this: this fsm instance
         },
         // ...
     },
-    init: function() {},
+    init: function() {},   // this: this fsm instance
     extend: {
-        i: 0,
+        i: 0,        // Add member `i` into this fsm instance
         name: 'abc'
         // ...
     },
@@ -101,10 +101,30 @@ var states = scene.plugins.get('rexFSM').add({
     - stateName
         - `next`: String of next state, or a callback to get next state.
         - `enter`: Callback when enter state.
+            ```javascript
+            function() {
+                // this : this fsm instance
+            }
+            ``` 
         - `exit`: Callback when exit state.
+             ```javascript
+            function() {
+                // this : this fsm instance
+            }
+            ``` 
         - `update`, `preupdate`, `postupdate` : Callback invoked by [scene's `'update'`, `'preupdate'`, `'postupdate'` events](scene.md#events).
+            ```javascript
+            function(time, delta) {
+                // this : this fsm instance
+            }
+            ``` 
 - `init`: Initial callback when creating instance.
-- `extend`: Inject key-value pairs into instance.
+    ```javascript
+    function() {
+        // this : this fsm instance
+    }
+    ``` 
+- `extend`: Inject key-value pairs into this fsm instance.
 - `enable`: Set `false` to block any state changing.
 - `scene` : [Scene object](scene.md) for [*startUpdate*, *startPreUpdate*, *startPostUpdate* method](fsm.md#update). Optional.
 - `eventEmitter`

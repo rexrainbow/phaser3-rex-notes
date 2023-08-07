@@ -1796,6 +1796,165 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Character cache
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Character cache
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-characters" class="md-nav__link">
+    Load characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#override-bitmaptext" class="md-nav__link">
+    Override bitmaptext
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlock-all-characters" class="md-nav__link">
+    Unlock all characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-all-cache-data" class="md-nav__link">
+    Get all cache data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-instance" class="md-nav__link">
+    Destroy instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9608,7 +9767,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcharactercacheplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcharactercacheplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add character-cache object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcharactercacheplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcharactercacheplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9634,7 +9793,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add character-cache object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCharacterCache&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCharacterCache&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9646,18 +9805,23 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CharacterCache</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/charactercache.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add character-cache object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CharacterCache</span><span class="p">(</span><span class="nx">game</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CharacterCache</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCharacterCache&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">characterCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCharacterCache&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w">  </span>
 <span class="w">    </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">32</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">32</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">maxCharacterCount</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">freqMode</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
-<span class="w">    </span><span class="nx">textObject</span><span class="o">:</span><span class="w"> </span><span class="nx">textGameOject</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="nx">textStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// textObject: textGameOject,</span>
+
 
 <span class="w">    </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
@@ -9675,6 +9839,8 @@
 <li><code>false</code> : Swap out any un-unsed character.</li>
 </ul>
 </li>
+<li><code>style</code> : <a href="../text/#add-text-object">Style of Text game object</a>. Create a text game object by this style setting
+  on systemScene if <code>textObject</code> parameter is not given.</li>
 <li><code>textObject</code> : <a href="../text/">Text game object</a>, or <a href="../bbcodetext/">bbcode text game object</a> for drawing character.</li>
 <li><code>content</code> : Load these characters into cache.</li>
 </ul>

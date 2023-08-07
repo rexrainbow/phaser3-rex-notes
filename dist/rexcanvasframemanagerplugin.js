@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasframemanagerplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -238,6 +247,32 @@
     addToBitmapFont: AddToBitmapFont
   };
 
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var CanvasFrameManager = /*#__PURE__*/function () {
@@ -264,10 +299,11 @@
       if (cellHeight === undefined) {
         cellHeight = 64;
       }
-      this.texture = scene.sys.textures.createCanvas(key, width, height);
+      var game = GetGame(scene);
+      this.texture = game.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
-      this.bitmapFontCache = scene.sys.cache.bitmapFont;
+      this.bitmapFontCache = game.cache.bitmapFont;
       if (fillColor !== undefined) {
         var context = this.context;
         context.fillStyle = fillColor;

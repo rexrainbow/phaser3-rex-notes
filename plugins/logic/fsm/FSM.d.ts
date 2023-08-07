@@ -5,14 +5,17 @@ export default FSM;
 declare namespace FSM {
 
     interface IStateConfig extends FSMBase.IStateConfig {
-        update?: (time: number, delta: number) => void;
-        preupdate?: (time: number, delta: number) => void;
-        postupdate?: (time: number, delta: number) => void;
+        next?: string | ((this: FSM) => string),
+        enter?: (this: FSM) => void,
+        exit?: (this: FSM) => void,
+        update?: (this: FSM, time: number, delta: number) => void;
+        preupdate?: (this: FSM, time: number, delta: number) => void;
+        postupdate?: (this: FSM, time: number, delta: number) => void;
     }
 
     interface IConfig extends FSMBase.IConfig {
         states?: { [name: string]: IStateConfig },
-        
+
         scene?: Phaser.Scene;
     }
 }

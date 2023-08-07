@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcharactercacheplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -190,6 +199,32 @@
     }
   };
 
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
   var Draw = function Draw(frameName, callback, scope) {
     var index = this.getFrameIndex(frameName);
     if (index === -1) {
@@ -319,12 +354,12 @@
     addToBitmapFont: AddToBitmapFont
   };
 
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var CanvasFrameManager = /*#__PURE__*/function () {
     function CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor) {
       _classCallCheck(this, CanvasFrameManager);
-      if (IsPlainObject(key)) {
+      if (IsPlainObject$1(key)) {
         var config = key;
         key = GetValue$3(config, 'key');
         width = GetValue$3(config, 'width');
@@ -345,10 +380,11 @@
       if (cellHeight === undefined) {
         cellHeight = 64;
       }
-      this.texture = scene.sys.textures.createCanvas(key, width, height);
+      var game = GetGame(scene);
+      this.texture = game.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
-      this.bitmapFontCache = scene.sys.cache.bitmapFont;
+      this.bitmapFontCache = game.cache.bitmapFont;
       if (fillColor !== undefined) {
         var context = this.context;
         context.fillStyle = fillColor;
@@ -9186,6 +9222,7 @@
   Object.assign(Methods, BitmapTextMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var TextGameObjectClass = Phaser.GameObjects.Text;
   var CharacterCache = /*#__PURE__*/function () {
     function CharacterCache(scene, config) {
       _classCallCheck(this, CharacterCache);
@@ -9193,8 +9230,9 @@
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this.game = GetGame(scene);
       this.freqMode = GetValue(config, 'freqMode', true);
-      this.frameManager = CreateFrameManager(scene, config);
+      this.frameManager = CreateFrameManager(this.game, config);
       this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
 
       this.key = this.frameManager.key;
@@ -9206,6 +9244,12 @@
 
       // Bind text object
       var textObject = GetValue(config, 'textObject');
+      if (!textObject) {
+        var style = GetValue(config, 'style');
+        if (style) {
+          textObject = new TextGameObjectClass(this.game.scene.systemScene, 0, 0, '', style);
+        }
+      }
       if (textObject) {
         this.bindTextObject(textObject);
       }
@@ -9223,6 +9267,7 @@
         if (this.textObject) {
           this.textObject.destroy();
         }
+        this.game = null;
       }
     }, {
       key: "destroy",
@@ -9240,6 +9285,7 @@
   }();
   Object.assign(CharacterCache.prototype, EventEmitterMethods, Methods);
 
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var CharacterCachePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CharacterCachePlugin, _Phaser$Plugins$BaseP);
     var _super = _createSuper(CharacterCachePlugin);
@@ -9256,6 +9302,10 @@
     }, {
       key: "add",
       value: function add(scene, config) {
+        if (IsPlainObject(scene)) {
+          config = scene;
+          scene = this.game;
+        }
         return new CharacterCache(scene, config);
       }
     }]);
