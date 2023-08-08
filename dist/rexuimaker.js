@@ -17844,7 +17844,7 @@
     if (!gameObject || newWidth === undefined && newHeight === undefined) {
       return;
     }
-    if (gameObject.resize || gameObject.setSize) {
+    if (HasResizeMethod(gameObject)) {
       // Has `resize`, or `setSize` method
       if (newWidth === undefined) {
         newWidth = gameObject.width;
@@ -17866,6 +17866,25 @@
         gameObject.displayHeight = newHeight;
       }
     }
+  };
+  var ExcludeClassList = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
+  var HasResizeMethod = function HasResizeMethod(gameObject) {
+    // 1st pass : Has `resize` method?
+    if (gameObject.resize) {
+      return true;
+    }
+
+    // 2nd pass : Has `setSize` method?
+    if (!gameObject.setSize) {
+      return false;
+    }
+    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+      var excludeClass = ExcludeClassList[i];
+      if (excludeClass && gameObject instanceof excludeClass) {
+        return false;
+      }
+    }
+    return true;
   };
 
   var CopyState = function CopyState(gamObject, out) {
