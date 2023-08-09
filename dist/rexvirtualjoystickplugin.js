@@ -1018,21 +1018,29 @@
       value: function update() {
         var touchCursor = this.touchCursor;
         // Start from (0,0)
-        var x = this.base.x;
-        var y = this.base.y;
+        var dx, dy;
+        var dirMode = touchCursor.dirMode;
         if (touchCursor.anyKeyDown) {
           if (touchCursor.force > this.radius) {
             // Exceed radius
             var rad = touchCursor.rotation;
-            x += Math.cos(rad) * this.radius;
-            y += Math.sin(rad) * this.radius;
+
+            // NOT 'up&down'
+            dx = dirMode !== 0 ? Math.cos(rad) * this.radius : 0;
+            // NOT 'left&right'
+            dy = dirMode !== 1 ? Math.sin(rad) * this.radius : 0;
           } else {
-            x += touchCursor.forceX;
-            y += touchCursor.forceY;
+            // NOT 'up&down'
+            dx = dirMode !== 0 ? touchCursor.forceX : 0;
+            // NOT 'left&right'
+            dy = dirMode !== 1 ? touchCursor.forceY : 0;
           }
+        } else {
+          dx = 0;
+          dy = 0;
         }
-        this.thumb.x = x;
-        this.thumb.y = y;
+        this.thumb.x = this.base.x + dx;
+        this.thumb.y = this.base.y + dy;
         return this;
       }
     }, {
