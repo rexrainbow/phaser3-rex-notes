@@ -49,7 +49,23 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
                 if (isScrollXYMode) {
                     sliderPadding = 0;
                 } else {
+                    // Legacy
                     sliderPadding = GetValue(config, 'space.child', 0);
+                    if (typeof (sliderPadding) !== 'number') {
+                        if (isAxisY) {
+                            if (sliderPosition === 0) { // right
+                                sliderPadding = GetValue(sliderPadding, 'right', 0);
+                            } else { // left
+                                sliderPadding = GetValue(sliderPadding, 'left', 0);
+                            }
+                        } else {
+                            if (sliderPosition === 0) { // bottom
+                                sliderPadding = GetValue(sliderPadding, 'bottom', 0);
+                            } else { // top
+                                sliderPadding = GetValue(sliderPadding, 'top', 0);
+                            }
+                        }
+                    }
                 }
             }
         }

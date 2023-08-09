@@ -11591,23 +11591,23 @@
       } else {
         switch (topPatent.scrollMode) {
           case 0:
-            childMargin.top = GetValue$j(childSpace, 'top', childSpace);
-            childMargin.bottom = GetValue$j(childSpace, 'bottom', childSpace);
+            childMargin.top = GetValue$j(childSpace, 'top', 0);
+            childMargin.bottom = GetValue$j(childSpace, 'bottom', 0);
             childMargin.left = 0;
             childMargin.right = 0;
             break;
           case 1:
-            childMargin.top = GetValue$j(childSpace, 'left', childSpace);
-            childMargin.bottom = GetValue$j(childSpace, 'right', childSpace);
+            childMargin.top = GetValue$j(childSpace, 'left', 0);
+            childMargin.bottom = GetValue$j(childSpace, 'right', 0);
             childMargin.left = 0;
             childMargin.right = 0;
             break;
           default:
             // 2
-            childMargin.top = GetValue$j(childSpace, 'top', childSpace);
-            childMargin.bottom = GetValue$j(childSpace, 'bottom', childSpace);
-            childMargin.left = GetValue$j(childSpace, 'left', childSpace);
-            childMargin.right = GetValue$j(childSpace, 'right', childSpace);
+            childMargin.top = GetValue$j(childSpace, 'top', 0);
+            childMargin.bottom = GetValue$j(childSpace, 'bottom', 0);
+            childMargin.left = GetValue$j(childSpace, 'left', 0);
+            childMargin.right = GetValue$j(childSpace, 'right', 0);
             break;
         }
       }
@@ -16856,7 +16856,27 @@
           if (isScrollXYMode) {
             sliderPadding = 0;
           } else {
+            // Legacy
             sliderPadding = GetValue$4(config, 'space.child', 0);
+            if (typeof sliderPadding !== 'number') {
+              if (isAxisY) {
+                if (sliderPosition === 0) {
+                  // right
+                  sliderPadding = GetValue$4(sliderPadding, 'right', 0);
+                } else {
+                  // left
+                  sliderPadding = GetValue$4(sliderPadding, 'left', 0);
+                }
+              } else {
+                if (sliderPosition === 0) {
+                  // bottom
+                  sliderPadding = GetValue$4(sliderPadding, 'bottom', 0);
+                } else {
+                  // top
+                  sliderPadding = GetValue$4(sliderPadding, 'top', 0);
+                }
+              }
+            }
           }
         }
       }

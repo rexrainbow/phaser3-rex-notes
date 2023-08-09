@@ -28,24 +28,24 @@ var AddChild = function (topPatent, childParent, config) {
         } else {
             switch (topPatent.scrollMode) {
                 case 0:
-                    childMargin.top = GetValue(childSpace, 'top', childSpace);
-                    childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
+                    childMargin.top = GetValue(childSpace, 'top', 0);
+                    childMargin.bottom = GetValue(childSpace, 'bottom', 0);
                     childMargin.left = 0;
                     childMargin.right = 0;
                     break;
 
                 case 1:
-                    childMargin.top = GetValue(childSpace, 'left', childSpace);
-                    childMargin.bottom = GetValue(childSpace, 'right', childSpace);
+                    childMargin.top = GetValue(childSpace, 'left', 0);
+                    childMargin.bottom = GetValue(childSpace, 'right', 0);
                     childMargin.left = 0;
                     childMargin.right = 0;
                     break;
 
                 default: // 2
-                    childMargin.top = GetValue(childSpace, 'top', childSpace);
-                    childMargin.bottom = GetValue(childSpace, 'bottom', childSpace);
-                    childMargin.left = GetValue(childSpace, 'left', childSpace);
-                    childMargin.right = GetValue(childSpace, 'right', childSpace);
+                    childMargin.top = GetValue(childSpace, 'top', 0);
+                    childMargin.bottom = GetValue(childSpace, 'bottom', 0);
+                    childMargin.left = GetValue(childSpace, 'left', 0);
+                    childMargin.right = GetValue(childSpace, 'right', 0);
                     break;
 
             }
