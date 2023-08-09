@@ -2366,14 +2366,22 @@
     top: ALIGN.TOP_CENTER,
     bottom: ALIGN.BOTTOM_CENTER,
     'left-top': ALIGN.TOP_LEFT,
+    'top-left': ALIGN.TOP_LEFT,
     'left-center': ALIGN.LEFT_CENTER,
+    'center-left': ALIGN.LEFT_CENTER,
     'left-bottom': ALIGN.BOTTOM_LEFT,
+    'bottom-left': ALIGN.BOTTOM_LEFT,
     'center-top': ALIGN.TOP_CENTER,
+    'top-center': ALIGN.TOP_CENTER,
     'center-center': ALIGN.CENTER,
     'center-bottom': ALIGN.BOTTOM_CENTER,
+    'bottom-center': ALIGN.BOTTOM_CENTER,
     'right-top': ALIGN.TOP_RIGHT,
+    'top-right': ALIGN.TOP_RIGHT,
     'right-center': ALIGN.RIGHT_CENTER,
-    'right-bottom': ALIGN.BOTTOM_RIGHT
+    'center-right': ALIGN.RIGHT_CENTER,
+    'right-bottom': ALIGN.BOTTOM_RIGHT,
+    'bottom-right': ALIGN.BOTTOM_RIGHT
   };
 
   var NOOP = function NOOP() {
@@ -11558,7 +11566,8 @@
 
   var GetValue$j = Phaser.Utils.Objects.GetValue;
   var AddChild = function AddChild(topPatent, childParent, config) {
-    var child = GetValue$j(config, 'child.gameObject', undefined);
+    var childConfig = GetValue$j(config, 'child');
+    var child = GetValue$j(childConfig, 'gameObject', undefined);
     if (child) {
       var childSpace = GetValue$j(config, 'space.child', 0);
       topPatent.childMargin = {};
@@ -11605,11 +11614,11 @@
       childParent.add(child, {
         column: 1,
         row: 1,
-        align: 'center',
+        align: GetValue$j(childConfig, 'align', 'center'),
         expand: {
-          width: GetValue$j(config, 'child.expandWidth', true),
+          width: GetValue$j(childConfig, 'expandWidth', true),
           // Private
-          height: GetValue$j(config, 'child.expandHeight', true) // Private
+          height: GetValue$j(childConfig, 'expandHeight', true) // Private
         }
       });
     }
@@ -16848,21 +16857,6 @@
             sliderPadding = 0;
           } else {
             sliderPadding = GetValue$4(config, 'space.child', 0);
-            if (typeof sliderPadding === 'number') {
-              if (isAxisY) {
-                sliderPadding = sliderPosition === 0 ? {
-                  left: sliderPadding
-                } : {
-                  right: sliderPadding
-                };
-              } else {
-                sliderPadding = sliderPosition === 0 ? {
-                  top: sliderPadding
-                } : {
-                  bottom: sliderPadding
-                };
-              }
-            }
           }
         }
       }
@@ -16996,16 +16990,21 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var CreateScrollableSizer = function CreateScrollableSizer(parent, config) {
     var scene = parent.scene;
-    var isScrollXY = parent.scrollMode === 2;
-    var childExpandWidth = GetValue$3(config, 'child.expandWidth', true);
-    var childExpandHeight = GetValue$3(config, 'child.expandHeight', true);
-    var childColProportion = isScrollXY || childExpandWidth ? 1 : 0;
-    var childRowProportion = isScrollXY || childExpandHeight ? 1 : 0;
+    var columnProportions = [0, 1, 0],
+      rowProportions = [0, 1, 0];
+    var parentMinWidth = GetValue$3(config, 'width');
+    var parentMinHeight = GetValue$3(config, 'height');
+    if (!parentMinWidth) {
+      columnProportions[1] = 0;
+    }
+    if (!parentMinHeight) {
+      rowProportions[1] = 0;
+    }
     var scrollableSizer = new GridSizer(scene, {
       column: 3,
       row: 3,
-      columnProportions: [0, childColProportion, 0],
-      rowProportions: [0, childRowProportion, 0]
+      columnProportions: columnProportions,
+      rowProportions: rowProportions
     });
     AddChild(parent, scrollableSizer, config);
     switch (parent.scrollMode) {

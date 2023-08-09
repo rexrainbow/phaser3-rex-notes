@@ -23,32 +23,32 @@ class ScrollablePanel extends Scrollable {
         panelConfig.clamplChildOX = GetValue(config, 'clamplChildOX', false);
         var scrollableBlock = new ScrollableBlock(scene, panelConfig);
         scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
-        var panelWidth = GetValue(panelConfig, 'width', undefined);
-        var panelHeight = GetValue(panelConfig, 'height', undefined);
-        var proportion, expand;
+
+        var expandPanelWidth,
+            expandPanelHeight;
         switch (scrollMode) {
             case 0:
-                proportion = (panelWidth === undefined) ? 1 : 0;
-                expand = (panelHeight === undefined);
+                expandPanelWidth = GetValue(config, 'expand.panel', true);
+                expandPanelHeight = true;
                 break;
 
             case 1:
-                proportion = (panelHeight === undefined) ? 1 : 0;
-                expand = (panelWidth === undefined);
+                expandPanelWidth = true;
+                expandPanelHeight = GetValue(config, 'expand.panel', true);
                 break;
 
             default: // 2
-                proportion = (panelWidth === undefined) ? 1 : 0;
-                expand = (panelHeight === undefined);
-                break;
+                expandPanelWidth = true;
+                expandPanelHeight = true;
         }
 
         // Fill config of scrollable
         config.type = 'rexScrollablePanel';
         config.child = {
             gameObject: scrollableBlock,
-            proportion: proportion,
-            expand: expand,
+            expandWidth: expandPanelWidth,
+            expandHeight: expandPanelHeight,
+            align: GetValue(config, 'align.panel', 'center')
         };
         var spaceConfig = GetValue(config, 'space', undefined);
         if (spaceConfig) {

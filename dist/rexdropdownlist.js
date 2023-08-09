@@ -2366,14 +2366,22 @@
     top: ALIGN$1.TOP_CENTER,
     bottom: ALIGN$1.BOTTOM_CENTER,
     'left-top': ALIGN$1.TOP_LEFT,
+    'top-left': ALIGN$1.TOP_LEFT,
     'left-center': ALIGN$1.LEFT_CENTER,
+    'center-left': ALIGN$1.LEFT_CENTER,
     'left-bottom': ALIGN$1.BOTTOM_LEFT,
+    'bottom-left': ALIGN$1.BOTTOM_LEFT,
     'center-top': ALIGN$1.TOP_CENTER,
+    'top-center': ALIGN$1.TOP_CENTER,
     'center-center': ALIGN$1.CENTER,
     'center-bottom': ALIGN$1.BOTTOM_CENTER,
+    'bottom-center': ALIGN$1.BOTTOM_CENTER,
     'right-top': ALIGN$1.TOP_RIGHT,
+    'top-right': ALIGN$1.TOP_RIGHT,
     'right-center': ALIGN$1.RIGHT_CENTER,
-    'right-bottom': ALIGN$1.BOTTOM_RIGHT
+    'center-right': ALIGN$1.RIGHT_CENTER,
+    'right-bottom': ALIGN$1.BOTTOM_RIGHT,
+    'bottom-right': ALIGN$1.BOTTOM_RIGHT
   };
 
   var NOOP = function NOOP() {

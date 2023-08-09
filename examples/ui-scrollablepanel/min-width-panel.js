@@ -30,10 +30,6 @@ class Demo extends Phaser.Scene {
                 child: createPanel(this),
 
                 mask: { padding: 1, },
-
-                expand: {
-                    width: false
-                }
             },
 
             slider: {
@@ -41,7 +37,18 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle({ radius: 13, color: COLOR_LIGHT })
             },
 
-            space: { left: 20, right: 20, top: 20, bottom: 20, panel: 3, header: 5, footer: 5 }
+            space: {
+                left: 20, right: 20, top: 20, bottom: 20,
+                panel: 10
+            },
+
+            expand: {
+                panel: false
+            },
+
+            align: {
+                panel: 'right'
+            }
         })
             .layout()
 
@@ -52,7 +59,6 @@ class Demo extends Phaser.Scene {
 
 var createPanel = function (scene) {
     var sizer = scene.rexUI.add.sizer({
-        width: 120,
         orientation: 'y',
         space: { item: 3 }
     })

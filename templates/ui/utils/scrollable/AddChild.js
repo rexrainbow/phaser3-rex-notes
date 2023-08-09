@@ -1,7 +1,8 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddChild = function (topPatent, childParent, config) {
-    var child = GetValue(config, 'child.gameObject', undefined)
+    var childConfig = GetValue(config, 'child');
+    var child = GetValue(childConfig, 'gameObject', undefined)
     if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
         topPatent.childMargin = {};
@@ -54,10 +55,10 @@ var AddChild = function (topPatent, childParent, config) {
             {
                 column: 1,
                 row: 1,
-                align: 'center',
+                align: GetValue(childConfig, 'align', 'center'),
                 expand: {
-                    width: GetValue(config, 'child.expandWidth', true),  // Private
-                    height: GetValue(config, 'child.expandHeight', true) // Private
+                    width: GetValue(childConfig, 'expandWidth', true),  // Private
+                    height: GetValue(childConfig, 'expandHeight', true) // Private
                 }
             }
         );

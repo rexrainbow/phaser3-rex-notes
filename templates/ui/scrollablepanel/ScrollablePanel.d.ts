@@ -30,6 +30,18 @@ declare namespace ScrollablePanel {
                 boolean
             ),
         },
+
+        align?: {
+            header?: Scrollable.AlignTypes,
+            footer?: Scrollable.AlignTypes,
+            panel?: Scrollable.AlignTypes,
+        },
+
+        expand?: {
+            header?: boolean,
+            footer?: boolean,
+            panel?: boolean,
+        },
     }
 }
 

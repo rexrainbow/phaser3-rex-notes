@@ -7,15 +7,21 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateScrollableSizer = function (parent, config) {
     var scene = parent.scene;
 
-    var isScrollXY = (parent.scrollMode === 2);
-    var childExpandWidth = GetValue(config, 'child.expandWidth', true);
-    var childExpandHeight = GetValue(config, 'child.expandHeight', true);
-    var childColProportion = (isScrollXY || childExpandWidth) ? 1 : 0;
-    var childRowProportion = (isScrollXY || childExpandHeight) ? 1 : 0;
+    var columnProportions = [0, 1, 0],
+        rowProportions = [0, 1, 0];
+    var parentMinWidth = GetValue(config, 'width');
+    var parentMinHeight = GetValue(config, 'height');
+    if (!parentMinWidth) {
+        columnProportions[1] = 0;
+    }
+    if (!parentMinHeight) {
+        rowProportions[1] = 0;
+    }
+
     var scrollableSizer = new GridSizer(scene, {
         column: 3, row: 3,
-        columnProportions: [0, childColProportion, 0],
-        rowProportions: [0, childRowProportion, 0]
+        columnProportions: columnProportions,
+        rowProportions: rowProportions
     });
 
     AddChild(parent, scrollableSizer, config);

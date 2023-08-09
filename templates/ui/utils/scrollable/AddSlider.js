@@ -50,18 +50,11 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
                     sliderPadding = 0;
                 } else {
                     sliderPadding = GetValue(config, 'space.child', 0);
-                    if (typeof (sliderPadding) === 'number') {
-                        if (isAxisY) {
-                            sliderPadding = (sliderPosition === 0) ? { left: sliderPadding } : { right: sliderPadding };
-                        } else {
-                            sliderPadding = (sliderPosition === 0) ? { top: sliderPadding } : { bottom: sliderPadding };
-                        }
-                    }
                 }
             }
         }
-        var isNumberSliderPadding = (typeof (sliderPadding) === 'number');
 
+        var isNumberSliderPadding = (typeof (sliderPadding) === 'number');
         if (isAxisY) {
             if (sliderPosition === 0) { // right
                 column = 2;

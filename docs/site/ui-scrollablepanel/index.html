@@ -9978,11 +9978,13 @@
 <span class="w">    </span><span class="nx">expand</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">footer</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">panel</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="p">},</span>
 
 <span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">footer</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">panel</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="p">},</span>
 
 <span class="w">    </span><span class="c1">// name: &#39;&#39;,</span>
@@ -10188,8 +10190,9 @@
 </ul>
 </li>
 <li><code>expand</code> : Expand width or height of element<ul>
-<li><code>expand.header</code> : Set <code>true</code> to expand width or height of header game object.</li>
-<li><code>expand.footer</code> : Set <code>true</code> to expand width or height of footer game object.</li>
+<li><code>expand.header</code> : Set <code>true</code> to expand width or height of header game object. Default value is <code>true</code>.</li>
+<li><code>expand.footer</code> : Set <code>true</code> to expand width or height of footer game object. Default value is <code>true</code>.</li>
+<li><code>expand.panel</code> : Set <code>true</code> to expand width or height of panel game object. Default value is <code>true</code>.</li>
 </ul>
 </li>
 <li><code>align</code> : Align element<ul>
@@ -10197,9 +10200,26 @@
 <li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
 <li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
 <li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.ALIGN.TOP_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.ALIGN.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
 </ul>
 </li>
-<li><code>align.footer</code></li>
+<li><code>align.footer</code><ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.ALIGN.TOP_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.ALIGN.BOTTOM_CENTER</code> : Align game object at bottom-center.    </li>
+</ul>
+</li>
+<li><code>align.panel</code><ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.ALIGN.TOP_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.ALIGN.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this game object.</li>

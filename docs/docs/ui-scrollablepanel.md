@@ -202,11 +202,13 @@ var panel = scene.rexUI.add.scrollablePanel({
     expand: {
         header: true,
         footer: true,
+        panel: true,
     },
 
     align: {
         header: 'center',
         footer: 'center',
+        panel: 'center',
     },
 
     // name: '',
@@ -352,14 +354,28 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `space.header` : Space between header and panel.
     - `space.footer` : Space between footer and panel.
 - `expand` : Expand width or height of element
-    - `expand.header` : Set `true` to expand width or height of header game object.
-    - `expand.footer` : Set `true` to expand width or height of footer game object.
+    - `expand.header` : Set `true` to expand width or height of header game object. Default value is `true`.
+    - `expand.footer` : Set `true` to expand width or height of footer game object. Default value is `true`.
+    - `expand.panel` : Set `true` to expand width or height of panel game object. Default value is `true`.
 - `align` : Align element
     - `align.header`
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+        - `'top'`, or `Phaser.Display.Align.ALIGN.TOP_CENTER` : Align game object at top-center.
+        - `'bottom'`, or `Phaser.Display.Align.ALIGN.BOTTOM_CENTER` : Align game object at bottom-center.
     - `align.footer`
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+        - `'top'`, or `Phaser.Display.Align.ALIGN.TOP_CENTER` : Align game object at top-center.
+        - `'bottom'`, or `Phaser.Display.Align.ALIGN.BOTTOM_CENTER` : Align game object at bottom-center.    
+    - `align.panel`
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+        - `'top'`, or `Phaser.Display.Align.ALIGN.TOP_CENTER` : Align game object at top-center.
+        - `'bottom'`, or `Phaser.Display.Align.ALIGN.BOTTOM_CENTER` : Align game object at bottom-center.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
