@@ -1,8 +1,8 @@
+import MeshBase from '../../utils/MeshBase.js';
 import ShatterRectangleToTriangles from '../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
 import Face from './Face.js';
 import { WorldXYToLocalXY } from '../../utils/LocalXY.js';
 
-const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
@@ -10,7 +10,7 @@ const Vertex = Phaser.Geom.Mesh.Vertex;
 const DistanceSquared = Phaser.Math.Distance.Squared;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
-class ShatterImage extends Mesh {
+class ShatterImage extends MeshBase {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -182,13 +182,6 @@ class ShatterImage extends Mesh {
         return this;
     }
 
-    get tint() {
-        if (this.vertices.length === 0) {
-            return 0xffffff;
-        } else {
-            return this.vertices[0].color;
-        }
-    }
 }
 
 export default ShatterImage;

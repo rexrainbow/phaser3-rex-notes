@@ -27,12 +27,7 @@ class Sprite extends PerspectiveImage {
     }
 
     preUpdate(time, delta) {
-        var prevFrame = this.anims.currentFrame;
         this.anims.update(time, delta);
-        if (this.anims.currentFrame !== prevFrame) {
-            this.syncSize();
-        }
-
         super.preUpdate(time, delta);
     }
 

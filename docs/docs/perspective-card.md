@@ -205,6 +205,19 @@ var card = scene.make.rexPerspectiveCard({
     // var backFace = card.faces.back;
     ```
 
+#### Face texture
+
+- Set texture of front face, assume that front face is a [perspective image](perspective-image)
+    ```javascript
+    card.frontFace.setTexture(key);
+    // card.frontFace.setTexture(key, frame);
+    ```
+- Set texture of back face, assume that back face is a [perspective image](perspective-image)
+    ```javascript
+    card.backFace.setTexture(key);
+    // card.backFace.setTexture(key, frame);
+    ```
+
 ### Flip behavior
 
 #### Start flipping

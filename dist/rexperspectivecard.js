@@ -10382,6 +10382,52 @@
   }(Base);
   Object.assign(OverlapSizer.prototype, methods);
 
+  var Mesh = Phaser.GameObjects.Mesh;
+  var MeshBase = /*#__PURE__*/function (_Mesh) {
+    _inherits(MeshBase, _Mesh);
+    var _super = _createSuper(MeshBase);
+    function MeshBase() {
+      _classCallCheck(this, MeshBase);
+      return _super.apply(this, arguments);
+    }
+    _createClass(MeshBase, [{
+      key: "tint",
+      get: function get() {
+        if (this.vertices.length === 0) {
+          return 0xffffff;
+        } else {
+          return this.vertices[0].color;
+        }
+      }
+    }, {
+      key: "setInteractive",
+      value: function setInteractive() {
+        var self = this;
+        var hitAreaCallback = function hitAreaCallback(area, x, y) {
+          var faces = self.faces;
+          for (var i = 0; i < faces.length; i++) {
+            var face = faces[i];
+
+            //  Don't pass a calcMatrix, as the x/y are already transformed
+            if (face.contains(x, y)) {
+              return true;
+            }
+          }
+          return false;
+        };
+        this.scene.sys.input.enable(this, hitAreaCallback);
+        return this;
+      }
+    }, {
+      key: "forceUpdate",
+      value: function forceUpdate() {
+        this.dirtyCache[10] = 1;
+        return this;
+      }
+    }]);
+    return MeshBase;
+  }(Mesh);
+
   var Vector3 = Phaser.Math.Vector3;
   var Matrix4 = Phaser.Math.Matrix4;
   var tempPosition = new Vector3();
@@ -10414,7 +10460,6 @@
     }
   };
 
-  var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
@@ -10422,8 +10467,8 @@
   var DegToRad$2 = Phaser.Math.DegToRad;
   var FOV = 45;
   var PanZ = 1 + 1 / Math.sin(DegToRad$2(FOV));
-  var Image = /*#__PURE__*/function (_Mesh) {
-    _inherits(Image, _Mesh);
+  var Image = /*#__PURE__*/function (_MeshBase) {
+    _inherits(Image, _MeshBase);
     var _super = _createSuper(Image);
     function Image(scene, x, y, key, frame, config) {
       var _this;
@@ -10444,9 +10489,20 @@
       var gridWidth = GetValue$5(config, 'gridWidth', 0);
       var gridHeight = GetValue$5(config, 'gridHeight', gridWidth);
       _this.resetVerts(gridWidth, gridHeight);
+      _this.prevFrame = _this.frame;
       return _this;
     }
     _createClass(Image, [{
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {
+        // Reset size and vertex if frame is changed
+        if (this.prevFrame !== this.frame) {
+          this.prevFrame = this.frame;
+          this.syncSize();
+        }
+        _get(_getPrototypeOf(Image.prototype), "preUpdate", this).call(this, time, delta);
+      }
+    }, {
       key: "originX",
       get: function get() {
         return 0.5;
@@ -10596,24 +10652,9 @@
         TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
         return this;
       }
-    }, {
-      key: "forceUpdate",
-      value: function forceUpdate() {
-        this.dirtyCache[10] = 1;
-        return this;
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        if (this.vertices.length === 0) {
-          return 0xffffff;
-        } else {
-          return this.vertices[0].color;
-        }
-      }
     }]);
     return Image;
-  }(Mesh);
+  }(MeshBase);
 
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {

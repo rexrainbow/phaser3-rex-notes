@@ -52850,6 +52850,52 @@
   });
   SetValue(window, 'RexPlugins.UI.Pages', Pages);
 
+  var Mesh = Phaser.GameObjects.Mesh;
+  var MeshBase = /*#__PURE__*/function (_Mesh) {
+    _inherits(MeshBase, _Mesh);
+    var _super = _createSuper(MeshBase);
+    function MeshBase() {
+      _classCallCheck(this, MeshBase);
+      return _super.apply(this, arguments);
+    }
+    _createClass(MeshBase, [{
+      key: "tint",
+      get: function get() {
+        if (this.vertices.length === 0) {
+          return 0xffffff;
+        } else {
+          return this.vertices[0].color;
+        }
+      }
+    }, {
+      key: "setInteractive",
+      value: function setInteractive() {
+        var self = this;
+        var hitAreaCallback = function hitAreaCallback(area, x, y) {
+          var faces = self.faces;
+          for (var i = 0; i < faces.length; i++) {
+            var face = faces[i];
+
+            //  Don't pass a calcMatrix, as the x/y are already transformed
+            if (face.contains(x, y)) {
+              return true;
+            }
+          }
+          return false;
+        };
+        this.scene.sys.input.enable(this, hitAreaCallback);
+        return this;
+      }
+    }, {
+      key: "forceUpdate",
+      value: function forceUpdate() {
+        this.dirtyCache[10] = 1;
+        return this;
+      }
+    }]);
+    return MeshBase;
+  }(Mesh);
+
   var Vector3 = Phaser.Math.Vector3;
   var Matrix4 = Phaser.Math.Matrix4;
   var tempPosition = new Vector3();
@@ -52882,7 +52928,6 @@
     }
   };
 
-  var Mesh$1 = Phaser.GameObjects.Mesh;
   var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$H = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
@@ -52890,8 +52935,8 @@
   var DegToRad$3 = Phaser.Math.DegToRad;
   var FOV = 45;
   var PanZ = 1 + 1 / Math.sin(DegToRad$3(FOV));
-  var Image$2 = /*#__PURE__*/function (_Mesh) {
-    _inherits(Image, _Mesh);
+  var Image$2 = /*#__PURE__*/function (_MeshBase) {
+    _inherits(Image, _MeshBase);
     var _super = _createSuper(Image);
     function Image(scene, x, y, key, frame, config) {
       var _this;
@@ -52912,9 +52957,20 @@
       var gridWidth = GetValue$H(config, 'gridWidth', 0);
       var gridHeight = GetValue$H(config, 'gridHeight', gridWidth);
       _this.resetVerts(gridWidth, gridHeight);
+      _this.prevFrame = _this.frame;
       return _this;
     }
     _createClass(Image, [{
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {
+        // Reset size and vertex if frame is changed
+        if (this.prevFrame !== this.frame) {
+          this.prevFrame = this.frame;
+          this.syncSize();
+        }
+        _get(_getPrototypeOf(Image.prototype), "preUpdate", this).call(this, time, delta);
+      }
+    }, {
       key: "originX",
       get: function get() {
         return 0.5;
@@ -53064,24 +53120,9 @@
         TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
         return this;
       }
-    }, {
-      key: "forceUpdate",
-      value: function forceUpdate() {
-        this.dirtyCache[10] = 1;
-        return this;
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        if (this.vertices.length === 0) {
-          return 0xffffff;
-        } else {
-          return this.vertices[0].color;
-        }
-      }
     }]);
     return Image;
-  }(Mesh$1);
+  }(MeshBase);
 
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {
@@ -59812,11 +59853,10 @@
     return points;
   };
 
-  var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var Image$1 = /*#__PURE__*/function (_Mesh) {
-    _inherits(Image, _Mesh);
+  var Image$1 = /*#__PURE__*/function (_MeshBase) {
+    _inherits(Image, _MeshBase);
     var _super = _createSuper(Image);
     function Image(scene, x, y, key, frame, config) {
       var _this;
@@ -59893,24 +59933,9 @@
         this.resetVerts(); // Reset verts
         return this;
       }
-    }, {
-      key: "forceUpdate",
-      value: function forceUpdate() {
-        this.dirtyCache[10] = 1;
-        return this;
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        if (this.vertices.length === 0) {
-          return 0xffffff;
-        } else {
-          return this.vertices[0].color;
-        }
-      }
     }]);
     return Image;
-  }(Mesh);
+  }(MeshBase);
 
   Phaser.Utils.Objects.IsPlainObject;
   Phaser.Utils.Objects.GetValue;

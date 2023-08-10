@@ -1,6 +1,6 @@
+import MeshBase from '../../utils/MeshBase';
 import TransformVerts from '../utils/TransformVerts';
 
-const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
@@ -10,7 +10,7 @@ const DegToRad = Phaser.Math.DegToRad;
 const FOV = 45;
 const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
-class Image extends Mesh {
+class Image extends MeshBase {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -31,6 +31,18 @@ class Image extends Mesh {
         var gridWidth = GetValue(config, 'gridWidth', 0);
         var gridHeight = GetValue(config, 'gridHeight', gridWidth);
         this.resetVerts(gridWidth, gridHeight);
+
+        this.prevFrame = this.frame;
+    }
+
+    preUpdate(time, delta) {
+        // Reset size and vertex if frame is changed
+        if (this.prevFrame !== this.frame) {
+            this.prevFrame = this.frame;
+            this.syncSize();
+        }
+
+        super.preUpdate(time, delta);
     }
 
     get originX() {
@@ -174,19 +186,6 @@ class Image extends Mesh {
 
         TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
         return this;
-    }
-
-    forceUpdate() {
-        this.dirtyCache[10] = 1;
-        return this;
-    }
-
-    get tint() {
-        if (this.vertices.length === 0) {
-            return 0xffffff;
-        } else {
-            return this.vertices[0].color;
-        }
     }
 
 }

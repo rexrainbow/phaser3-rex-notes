@@ -16,9 +16,14 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(100, 300, 'poker', 'diamonds-1');
-        var image = this.add.rexPerspectiveImage(100, 300, 'poker', 'diamonds-1', { hideCCW: false }).setAlpha(0.8);
-        console.log(image.width, image.height);
+        var frameIdx = 0;
+        this.add.image(100, 300, 'poker', 'diamonds-1').setScale(1.5);
+        var image = this.add.rexPerspectiveImage(100, 300, 'poker', 'diamonds-1', { hideCCW: false }).setScale(1.5).setAlpha(0.8)
+            .setInteractive()
+            .on('pointerdown', function () {
+                frameIdx = (frameIdx + 1) % 13;
+                image.setTexture('poker', `diamonds-${frameIdx + 1}`)
+            })
 
         this.add.image(300, 300, 'card').setScale(0.5);
         var image2 = this.add.rexPerspectiveImage(300, 300, 'card', null, { hideCCW: false }).setAlpha(0.8).setScale(0.5);

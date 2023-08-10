@@ -1,11 +1,11 @@
+import MeshBase from '../../utils/MeshBase.js';
 import InitFaces from './methods/InitFaces.js';
 import GetPointPosition from './methods/GetPointPosition.js';
 
-const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Image extends Mesh {
+class Image extends MeshBase {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -87,18 +87,6 @@ class Image extends Mesh {
         return this;
     }
 
-    forceUpdate() {
-        this.dirtyCache[10] = 1;
-        return this;
-    }
-
-    get tint() {
-        if (this.vertices.length === 0) {
-            return 0xffffff;
-        } else {
-            return this.vertices[0].color;
-        }
-    }
 }
 
 export default Image;

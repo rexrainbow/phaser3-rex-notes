@@ -209,12 +209,11 @@ scene.tweens.add({
     image.setTint(color);
     ```
 
-### Change frame
-
-Frame is bound with vertices. Use [perspective renderTexture](perspective-rendertexture.md) to change frame without recreate vertices again (assume that size of frame won't changed).
+### Texture
 
 ```javascript
-rt.drawFrame(key, frame);
+image.setTexture(key);
+// image.setTexture(key, frame);
 ```
 
 ### Other properties

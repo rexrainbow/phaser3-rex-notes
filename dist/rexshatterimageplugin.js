@@ -141,6 +141,52 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
+  var Mesh = Phaser.GameObjects.Mesh;
+  var MeshBase = /*#__PURE__*/function (_Mesh) {
+    _inherits(MeshBase, _Mesh);
+    var _super = _createSuper(MeshBase);
+    function MeshBase() {
+      _classCallCheck(this, MeshBase);
+      return _super.apply(this, arguments);
+    }
+    _createClass(MeshBase, [{
+      key: "tint",
+      get: function get() {
+        if (this.vertices.length === 0) {
+          return 0xffffff;
+        } else {
+          return this.vertices[0].color;
+        }
+      }
+    }, {
+      key: "setInteractive",
+      value: function setInteractive() {
+        var self = this;
+        var hitAreaCallback = function hitAreaCallback(area, x, y) {
+          var faces = self.faces;
+          for (var i = 0; i < faces.length; i++) {
+            var face = faces[i];
+
+            //  Don't pass a calcMatrix, as the x/y are already transformed
+            if (face.contains(x, y)) {
+              return true;
+            }
+          }
+          return false;
+        };
+        this.scene.sys.input.enable(this, hitAreaCallback);
+        return this;
+      }
+    }, {
+      key: "forceUpdate",
+      value: function forceUpdate() {
+        this.dirtyCache[10] = 1;
+        return this;
+      }
+    }]);
+    return MeshBase;
+  }(Mesh);
+
   function getDefaultExportFromCjs (x) {
   	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
@@ -565,15 +611,14 @@
     y: 0
   };
 
-  var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var DistanceSquared = Phaser.Math.Distance.Squared;
   var DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
-  var ShatterImage = /*#__PURE__*/function (_Mesh) {
-    _inherits(ShatterImage, _Mesh);
+  var ShatterImage = /*#__PURE__*/function (_MeshBase) {
+    _inherits(ShatterImage, _MeshBase);
     var _super = _createSuper(ShatterImage);
     function ShatterImage(scene, x, y, key, frame, config) {
       var _this;
@@ -743,18 +788,9 @@
         this.ignoreDirtyCache = false;
         return this;
       }
-    }, {
-      key: "tint",
-      get: function get() {
-        if (this.vertices.length === 0) {
-          return 0xffffff;
-        } else {
-          return this.vertices[0].color;
-        }
-      }
     }]);
     return ShatterImage;
-  }(Mesh);
+  }(MeshBase);
 
   function ShatterImageFactory (x, y, texture, frame, config) {
     var gameObject = new ShatterImage(this.scene, x, y, texture, frame, config);
