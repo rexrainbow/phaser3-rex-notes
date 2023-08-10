@@ -10,9 +10,8 @@ class MeshBase extends Mesh {
     }
 
     setInteractive() {
-        var self = this;
         var hitAreaCallback = function (area, x, y) {
-            var faces = self.faces;
+            var faces = this.faces;
 
             for (var i = 0; i < faces.length; i++) {
                 var face = faces[i];
@@ -24,7 +23,7 @@ class MeshBase extends Mesh {
             }
 
             return false;
-        };
+        }.bind(this);
 
         this.scene.sys.input.enable(this, hitAreaCallback);
 
