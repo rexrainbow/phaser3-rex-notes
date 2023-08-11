@@ -19,8 +19,10 @@ declare class LevelTable {
 
     setExp(exp: number, level?: number): this;
 
-    getExp(level?: number): number;
+    getExp(): number;
+    getExp(level: number): number;
 
+    getLevel(): number;
     getLevel(exp: number, level?: number): number;
 
     getRequiredExpToNextLevel(level: number, exp: number): number;

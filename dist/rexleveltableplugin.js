@@ -231,6 +231,9 @@
     }, {
       key: "getLevel",
       value: function getLevel(exp, level) {
+        if (exp === undefined) {
+          return this.level;
+        }
         if (level === undefined) {
           level = 0;
         }
