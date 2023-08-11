@@ -587,7 +587,7 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var DefaultEventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
@@ -608,7 +608,7 @@
       }
     }]);
     return EventEmitter;
-  }(DefaultEventEmitter);
+  }(EE);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -768,18 +768,19 @@
     remove: false // remove uid manually
   });
 
-  var EventEmitterMethods = {
+  var EventEmitterMethods$1 = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
-        EventEmitterClass = DefaultEventEmitter;
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
+
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
     },
     destroyEventEmitter: function destroyEventEmitter() {
       if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.removeAllListeners();
+        this._eventEmitter.shutdown();
       }
       return this;
     },
@@ -975,7 +976,7 @@
     }]);
     return ComponentBase;
   }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+  Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
   var GetTileDirection = function GetTileDirection(tileX, tileY) {
     var board = this.board;
@@ -7171,6 +7172,86 @@
   var TOUCH0 = 0;
   var TOUCH1 = 1;
   var IDLE$3 = 'IDLE';
+
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = EventEmitter;
+      }
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    }
+  };
 
   var StateProperties$1 = ['next', 'exit', 'enter'];
   var FSM$1 = /*#__PURE__*/function () {

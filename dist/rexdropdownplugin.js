@@ -141,6 +141,216 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
+  var EventEmitterMethods$1 = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
+
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    }
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$9(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
+
   function getDefaultExportFromCjs (x) {
   	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
@@ -486,12 +696,33 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var DefaultEventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+
+  var EventEmitter = /*#__PURE__*/function (_EE) {
+    _inherits(EventEmitter, _EE);
+    var _super = _createSuper(EventEmitter);
+    function EventEmitter() {
+      _classCallCheck(this, EventEmitter);
+      return _super.apply(this, arguments);
+    }
+    _createClass(EventEmitter, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.removeAllListeners();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.removeAllListeners();
+      }
+    }]);
+    return EventEmitter;
+  }(EE);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
-        EventEmitterClass = DefaultEventEmitter;
+        EventEmitterClass = EventEmitter;
       }
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
@@ -499,7 +730,7 @@
     },
     destroyEventEmitter: function destroyEventEmitter() {
       if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.removeAllListeners();
+        this._eventEmitter.shutdown();
       }
       return this;
     },
@@ -567,135 +798,6 @@
       return [];
     }
   };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
-
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$9(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
-        }
-
-        // bob object does not have event emitter
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
-        }
-
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
-        return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>

@@ -463,7 +463,28 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var EventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+
+  var EventEmitter = /*#__PURE__*/function (_EE) {
+    _inherits(EventEmitter, _EE);
+    var _super = _createSuper(EventEmitter);
+    function EventEmitter() {
+      _classCallCheck(this, EventEmitter);
+      return _super.apply(this, arguments);
+    }
+    _createClass(EventEmitter, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.removeAllListeners();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.removeAllListeners();
+      }
+    }]);
+    return EventEmitter;
+  }(EE);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>

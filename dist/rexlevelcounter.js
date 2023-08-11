@@ -26,6 +26,74 @@
     });
     return Constructor;
   }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+    return _setPrototypeOf(o, p);
+  }
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+    return _assertThisInitialized(self);
+  }
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+        result;
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+      return _possibleConstructorReturn(this, result);
+    };
+  }
   function _toPrimitive(input, hint) {
     if (typeof input !== "object" || input === null) return input;
     var prim = input[Symbol.toPrimitive];
@@ -386,87 +454,28 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var DefaultEventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
 
-  var EventEmitterMethods = {
-    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
-      if (EventEmitterClass === undefined) {
-        EventEmitterClass = DefaultEventEmitter;
-      }
-      this._privateEE = eventEmitter === true || eventEmitter === undefined;
-      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
-      return this;
-    },
-    destroyEventEmitter: function destroyEventEmitter() {
-      if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.removeAllListeners();
-      }
-      return this;
-    },
-    getEventEmitter: function getEventEmitter() {
-      return this._eventEmitter;
-    },
-    on: function on() {
-      if (this._eventEmitter) {
-        this._eventEmitter.on.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    once: function once() {
-      if (this._eventEmitter) {
-        this._eventEmitter.once.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    off: function off() {
-      if (this._eventEmitter) {
-        this._eventEmitter.off.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    emit: function emit(event) {
-      if (this._eventEmitter && event) {
-        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    addListener: function addListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeListener: function removeListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeAllListeners: function removeAllListeners() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    listenerCount: function listenerCount() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-      }
-      return 0;
-    },
-    listeners: function listeners() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    },
-    eventNames: function eventNames() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-      }
-      return [];
+  var EventEmitter = /*#__PURE__*/function (_EE) {
+    _inherits(EventEmitter, _EE);
+    var _super = _createSuper(EventEmitter);
+    function EventEmitter() {
+      _classCallCheck(this, EventEmitter);
+      return _super.apply(this, arguments);
     }
-  };
+    _createClass(EventEmitter, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.removeAllListeners();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.removeAllListeners();
+      }
+    }]);
+    return EventEmitter;
+  }(EE);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -522,28 +531,19 @@
     return obj && typeof obj === 'function';
   };
 
-  var LevelCounter = /*#__PURE__*/function () {
+  var LevelCounter = /*#__PURE__*/function (_EventEmitter) {
+    _inherits(LevelCounter, _EventEmitter);
+    var _super = _createSuper(LevelCounter);
     function LevelCounter(config) {
+      var _this;
       _classCallCheck(this, LevelCounter);
-      // Event emitter
-      var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-      this.setEventEmitter(eventEmitter, EventEmitterClass);
-      this.setTable(GetValue(config, 'table'));
-      this.setExp(GetValue(config, 'exp', 0));
-      this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
+      _this = _super.call(this);
+      _this.setTable(GetValue(config, 'table'));
+      _this.setExp(GetValue(config, 'exp', 0));
+      _this.requiredExp = _this.getRequiredExpToNextLevel(_this.level, _this.exp);
+      return _this;
     }
     _createClass(LevelCounter, [{
-      key: "shutdown",
-      value: function shutdown() {
-        this.destroyEventEmitter();
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
-      }
-    }, {
       key: "setTable",
       value: function setTable(table) {
         this.levelTable = table;
@@ -624,8 +624,7 @@
       }
     }]);
     return LevelCounter;
-  }();
-  Object.assign(LevelCounter.prototype, EventEmitterMethods);
+  }(EventEmitter);
 
   return LevelCounter;
 

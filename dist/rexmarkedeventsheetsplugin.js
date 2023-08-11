@@ -541,7 +541,28 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var DefaultEventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+
+  var EventEmitter$2 = /*#__PURE__*/function (_EE) {
+    _inherits(EventEmitter, _EE);
+    var _super = _createSuper(EventEmitter);
+    function EventEmitter() {
+      _classCallCheck(this, EventEmitter);
+      return _super.apply(this, arguments);
+    }
+    _createClass(EventEmitter, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.removeAllListeners();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.removeAllListeners();
+      }
+    }]);
+    return EventEmitter;
+  }(EE);
 
   var IDLE$1 = 0;
   var SUCCESS$1 = 1;
@@ -14695,7 +14716,7 @@
       }
     }]);
     return EventSheetManager;
-  }(DefaultEventEmitter);
+  }(EventEmitter$2);
   Object.assign(EventSheetManager.prototype, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
 
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
@@ -16377,15 +16398,16 @@
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
-        EventEmitterClass = DefaultEventEmitter;
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
+
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
     },
     destroyEventEmitter: function destroyEventEmitter() {
       if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.removeAllListeners();
+        this._eventEmitter.shutdown();
       }
       return this;
     },

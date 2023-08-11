@@ -1,25 +1,14 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import EventEmitter from '../../utils/eventemitter/EventEmitter.js';
 import GetValue from '../../utils/object/GetValue.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
-class LevelCounter {
+class LevelCounter extends EventEmitter {
     constructor(config) {
-        // Event emitter
-        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
+        super();
 
         this.setTable(GetValue(config, 'table'));
         this.setExp(GetValue(config, 'exp', 0));
         this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
-    }
-
-    shutdown() {
-        this.destroyEventEmitter();
-    }
-
-    destroy() {
-        this.shutdown();
     }
 
     setTable(table) {
@@ -107,10 +96,5 @@ class LevelCounter {
     }
 
 }
-
-Object.assign(
-    LevelCounter.prototype,
-    EventEmitterMethods
-);
 
 export default LevelCounter;

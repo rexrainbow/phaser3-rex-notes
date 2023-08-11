@@ -1,4 +1,4 @@
-import EventEmitter from 'eventemitter3';
+import EventEmitter from '../../utils/eventemitter/EventEmitter.js';
 import GetValue from '../../utils/object/GetValue.js';
 import GetPeriodMS from '../../utils/time/GetPeriodMS.js';
 import RemoveItems from '../../utils/array/Remove.js';

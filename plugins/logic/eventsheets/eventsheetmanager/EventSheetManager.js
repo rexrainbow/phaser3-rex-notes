@@ -1,4 +1,4 @@
-import EventEmitter from 'eventemitter3';
+import EventEmitter from '../../../utils/eventemitter/EventEmitter';
 import { BehaviorTree, Blackboard } from '../../behaviortree';
 import TreeMethods from './methods/TreeMethods.js';
 import DataMethods from './methods/DataMethods.js';

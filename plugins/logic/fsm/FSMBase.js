@@ -1,4 +1,4 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import EventEmitterMethods from '../../utils/eventemitter/StandAloneEventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 const StateProperties = ['next', 'exit', 'enter'];
