@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import LevelTable from '../../plugins/data/leveltable/LevelTable.js';
+import LevelTablePlugin from '../../plugins/leveltable-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,12 +11,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var table = new LevelTable({
+        var table = this.plugins.get('rexLevelTable').add({
             table: function (level) {
                 return level * 100;
             },
 
-            level: 3,
             exp: 330,
         })
 
@@ -47,6 +46,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexLevelTable',
+            plugin: LevelTablePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

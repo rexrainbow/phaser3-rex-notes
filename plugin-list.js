@@ -141,6 +141,8 @@ module.exports = {
     'ymlachievementsplugin': './plugins/ymlachievements-plugin.js',
     'conditionstableplugin': './plugins/conditionstable-plugin.js',
     'ymlconditionstableplugin': './plugins/ymlconditionstable-plugin.js',
+    'leveltableplugin': './plugins/leveltable-plugin.js',
+    'leveltable': './plugins/leveltable.js',
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
     'bracketparserplugin': './plugins/bracketparser-plugin.js',

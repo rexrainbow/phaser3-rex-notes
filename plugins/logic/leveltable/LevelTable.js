@@ -11,13 +11,7 @@ class LevelTable {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.setTable(GetValue(config, 'table'));
-        this.level = GetValue(config, 'level', 0);
-        this.exp = GetValue(config, 'exp', 0);
-
-        if (!this.checkLevel(this.level, this.exp)) {
-            console.error(`Level ${this.level} and Exp ${this.exp} are mismatch`);
-        }
-
+        this.setExp(GetValue(config, 'exp', 0));
         this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
     }
 
@@ -27,7 +21,18 @@ class LevelTable {
         return this;
     }
 
+    setExp(exp) {
+        this.exp = exp;
+        this.level = this.getLevel(exp);
+
+        return this;
+    }
+
     getExp(level) {
+        if (level === undefined) {
+            return this.exp;
+        }
+
         return (this.isLevelMapFunction) ? this.levelTable(level) : this.levelTable[level];
     }
 
