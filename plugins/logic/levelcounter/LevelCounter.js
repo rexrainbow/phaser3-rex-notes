@@ -1,9 +1,8 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../utils/object/GetValue.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-class LevelTable {
+class LevelCounter {
     constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
@@ -13,6 +12,14 @@ class LevelTable {
         this.setTable(GetValue(config, 'table'));
         this.setExp(GetValue(config, 'exp', 0));
         this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
+    }
+
+    shutdown() {
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
     }
 
     setTable(table) {
@@ -102,8 +109,8 @@ class LevelTable {
 }
 
 Object.assign(
-    LevelTable.prototype,
+    LevelCounter.prototype,
     EventEmitterMethods
 );
 
-export default LevelTable;
+export default LevelCounter;

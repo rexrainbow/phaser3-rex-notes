@@ -1,6 +1,8 @@
-export default LevelTable;
+import EventEmitter from '../../utils/eventemitter/EventEmitter';
 
-declare namespace LevelTable {
+export default LevelCounter;
+
+declare namespace LevelCounter {
     type TableType = ((level: number) => number) |
         number[] |
     { [level: number]: number }
@@ -12,10 +14,10 @@ declare namespace LevelTable {
     }
 }
 
-declare class LevelTable {
-    constructor(config: LevelTable.IConfig);
+declare class LevelCounter extends EventEmitter {
+    constructor(config: LevelCounter.IConfig);
 
-    setTable(table: LevelTable.TableType): this;
+    setTable(table: LevelCounter.TableType): this;
 
     setExp(exp: number, level?: number): this;
 

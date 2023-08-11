@@ -1,7 +1,9 @@
+import DefaultEventEmitter from 'eventemitter3';
+
 export default {
     setEventEmitter(eventEmitter, EventEmitterClass) {
         if (EventEmitterClass === undefined) {
-            EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+            EventEmitterClass = DefaultEventEmitter;
         }
         this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
         this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
@@ -10,7 +12,7 @@ export default {
 
     destroyEventEmitter() {
         if (this._eventEmitter && this._privateEE) {
-            this._eventEmitter.shutdown();
+            this._eventEmitter.removeAllListeners();
         }
         return this;
     },
@@ -82,7 +84,7 @@ export default {
         return [];
     },
 
-    eventNames: function() {
+    eventNames: function () {
         if (this._eventEmitter) {
             return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
         }

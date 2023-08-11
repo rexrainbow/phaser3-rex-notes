@@ -1,6 +1,6 @@
-import LevelTable from './leveltable.js'
+import LevelCounter from './levelcounter.js'
 
-class LevelTablePlugin extends Phaser.Plugins.BasePlugin {
+class LevelCounterPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }
@@ -11,8 +11,8 @@ class LevelTablePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new LevelTable(config);
+        return new LevelCounter(config);
     }
 }
 
-export default LevelTablePlugin;
+export default LevelCounterPlugin;

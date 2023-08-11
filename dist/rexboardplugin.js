@@ -587,7 +587,7 @@
   } (eventemitter3));
 
   var eventemitter3Exports = eventemitter3.exports;
-  var EE = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
+  var DefaultEventEmitter = /*@__PURE__*/getDefaultExportFromCjs(eventemitter3Exports);
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
@@ -608,7 +608,7 @@
       }
     }]);
     return EventEmitter;
-  }(EE);
+  }(DefaultEventEmitter);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -771,16 +771,15 @@
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
-        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+        EventEmitterClass = DefaultEventEmitter;
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
     },
     destroyEventEmitter: function destroyEventEmitter() {
       if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.shutdown();
+        this._eventEmitter.removeAllListeners();
       }
       return this;
     },
