@@ -13,6 +13,11 @@ class LevelTable {
         this.setTable(GetValue(config, 'table'));
         this.level = GetValue(config, 'level', 0);
         this.exp = GetValue(config, 'exp', 0);
+
+        if (!this.checkLevel(this.level, this.exp)) {
+            console.error(`Level ${this.level} and Exp ${this.exp} are mismatch`);
+        }
+
         this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
     }
 
@@ -45,6 +50,10 @@ class LevelTable {
 
     getRequiredExpToNextLevel(level, exp) {
         return this.getExp(level + 1) - exp;
+    }
+
+    checkLevel(level, exp) {
+        return (exp >= this.getExp(level)) && (exp < this.getExp(level + 1));
     }
 
     gainExp(incExp) {
