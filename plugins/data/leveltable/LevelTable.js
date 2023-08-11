@@ -31,7 +31,12 @@ class LevelTable {
             level = 0;
         }
 
-        while (this.getExp(level) <= exp) {
+        while (1) {
+            var nextLevelExp = this.getExp(level + 1);
+            if (nextLevelExp >= exp) {
+                break;
+            }
+
             level++;
         }
 
@@ -57,12 +62,12 @@ class LevelTable {
         var fromExp = prevExp;
         while (1) {
             var levelExp0 = this.getExp(prevLevel);
-            var levelExp1 = this.getExp(prevLevel + 1);            
+            var levelExp1 = this.getExp(prevLevel + 1);
             var toExp = Math.min(levelExp1, exp)
             this.emit('levelup', prevLevel, fromExp, toExp, levelExp0, levelExp1);
 
             prevLevel++;
-            if (prevLevel === level) {
+            if (toExp === exp) {
                 break;
             }
 

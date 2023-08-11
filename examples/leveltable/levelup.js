@@ -26,7 +26,12 @@ class Demo extends Phaser.Scene {
                 // var t1 = Phaser.Math.Percent(toExp, levelExp0, levelExp1);
                 console.log(`LevelUp : ${level} ${fromExp} -> ${toExp}`);
             })
-            .gainExp(200)
+
+        table.gainExp(200)
+        console.log('---')
+        table.gainExp(30)
+        console.log('---')
+        table.gainExp(80)
     }
 
     update() { }
