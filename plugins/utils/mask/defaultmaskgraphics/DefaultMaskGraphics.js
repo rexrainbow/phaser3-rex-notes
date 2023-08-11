@@ -1,23 +1,23 @@
 import DrawShape from './DrawShape.js';
+import GetBoundsConfig from '../../bounds/GetBoundsConfig.js';
+import IsKeyValueEqual from '../../object/IsKeyValueEqual.js';
+import Clone from '../../object/Clone.js';
 
 const Graphics = Phaser.GameObjects.Graphics;
 
 class DefaultMaskGraphics extends Graphics {
-    constructor(parent, shape, padding) {
-        if (shape === undefined) {
-            shape = 0;
+    constructor(parent, shapeType, padding) {
+        if (shapeType === undefined) {
+            shapeType = 0;
         }
-        if (typeof (shape) === 'string') {
-            shape = SHAPEMODE[shape];
-        }
-        if (padding === undefined) {
-            padding = 0;
+        if (typeof (shapeType) === 'string') {
+            shapeType = SHAPEMODE[shapeType];
         }
 
         super(parent.scene);
         this.parent = parent;
-        this.shape = shape;
-        this.padding = padding;
+        this.shapeType = shapeType;
+        this.padding = GetBoundsConfig(padding);
         this.setPosition().resize().setVisible(false);
         // Don't add it to display list
     }
@@ -48,18 +48,29 @@ class DefaultMaskGraphics extends Graphics {
         if (height === undefined) {
             height = parent.height;
         }
+
         if (padding === undefined) {
             padding = this.padding;
+        } else if (typeof (padding) === 'number') {
+            padding = GetBoundsConfig(padding);
         }
-        if ((this.width === width) && (this.height === height) && (this.paddingSave === padding)) {
+
+        var isSizeChanged = (this.width !== width) || (this.height !== height);
+        var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
+        if (!isSizeChanged && !isPaddingChanged) {
             return this;
         }
 
         this.width = width;
         this.height = height;
+
+        if (isPaddingChanged) {
+            Clone(padding, this.padding);
+        }
+
+        // Graphics does not have originX, originY properties
         this.originX = parent.originX;
         this.originY = parent.originY;
-        this.paddingSave = padding;
 
         DrawShape.call(this,
             width, height, padding,
@@ -89,7 +100,7 @@ class DefaultMaskGraphics extends Graphics {
         this.originY = originY;
 
         DrawShape.call(this,
-            this.width, this.height, this.paddingSave,
+            this.width, this.height, this.padding,
             originX, originY,
         );
         return this;

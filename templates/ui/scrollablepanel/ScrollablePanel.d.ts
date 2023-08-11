@@ -24,7 +24,9 @@ declare namespace ScrollablePanel {
             child: Phaser.GameObjects.GameObject,
             mask?: (
                 {
-                    padding?: number,
+                    padding?: number | {
+                        left?: number, right?: number, top?: number, bottom?: number,
+                    },
                     updateMode?: 0 | 1 | 'update' | 'everyTick'
                 } |
                 boolean

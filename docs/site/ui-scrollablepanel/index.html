@@ -9874,7 +9874,7 @@
 <span class="w">    </span><span class="nx">panel</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">child</span><span class="o">:</span><span class="w"> </span><span class="nx">panelGameObject</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">mask</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// or {left, right, top, bottom}</span>
 <span class="w">            </span><span class="c1">// updateMode: 0,</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}.</span>
@@ -10024,7 +10024,11 @@
 <li><code>panel</code> : Configuration of panel game object.<ul>
 <li><code>panel.child</code> : Panel game object.</li>
 <li><code>panel.mask</code> : Configuration of panel's mask.<ul>
-<li><code>panel.mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
+<li><code>panel.mask.padding</code> : <ul>
+<li>A number : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
+<li>A plain object <code>{left, right, top, bottom}</code></li>
+</ul>
+</li>
 <li><code>panel.mask.updateMode</code> : When to update mask<ul>
 <li><code>0</code>, or <code>'update'</code> : Apply mask only when scrolling. Default behavior.</li>
 <li><code>1</code>, or <code>'everyTick'</code> : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.</li>

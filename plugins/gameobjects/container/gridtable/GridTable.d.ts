@@ -38,7 +38,9 @@ declare namespace GridTable {
 
     type MaskUpdateModeType = 0 | 1 | 'update' | 'everyTick';
     type MaskConfig = {
-        padding?: number,
+        padding?: number | {
+            left?: number, right?: number, top?: number, bottom?: number,
+        },
         updateMode?: MaskUpdateModeType
     } |
         boolean;

@@ -28470,6 +28470,9 @@
 
   var GetValue$2k = Phaser.Utils.Objects.GetValue;
   var GetBoundsConfig = function GetBoundsConfig(config, out) {
+    if (config === undefined) {
+      config = 0;
+    }
     if (out === undefined) {
       out = {};
     }
@@ -35717,15 +35720,31 @@
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
-    switch (this.shape) {
+    switch (this.shapeType) {
       case 1:
         // circle
+        // Assume that all padding are the same value in this circle shape
+        padding = padding.left;
         var radius = Math.min(width, height) / 2;
-        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
+        this.fillCircle(-width * (originX - 0.5),
+        // centerX
+        -height * (originY - 0.5),
+        // centerY
+        radius + padding // radius
+        );
+
         break;
       default:
         // 0|'rectangle'
-        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
+        this.fillRect(-(width * originX) - padding.left,
+        // x
+        -(height * originY) - padding.top,
+        // y
+        width + padding.left + padding.right,
+        // width
+        height + padding.top + padding.bottom // height
+        );
+
         break;
     }
   };
@@ -35734,22 +35753,19 @@
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
     var _super = _createSuper(DefaultMaskGraphics);
-    function DefaultMaskGraphics(parent, shape, padding) {
+    function DefaultMaskGraphics(parent, shapeType, padding) {
       var _this;
       _classCallCheck(this, DefaultMaskGraphics);
-      if (shape === undefined) {
-        shape = 0;
+      if (shapeType === undefined) {
+        shapeType = 0;
       }
-      if (typeof shape === 'string') {
-        shape = SHAPEMODE[shape];
-      }
-      if (padding === undefined) {
-        padding = 0;
+      if (typeof shapeType === 'string') {
+        shapeType = SHAPEMODE[shapeType];
       }
       _this = _super.call(this, parent.scene);
       _this.parent = parent;
-      _this.shape = shape;
-      _this.padding = padding;
+      _this.shapeType = shapeType;
+      _this.padding = GetBoundsConfig(padding);
       _this.setPosition().resize().setVisible(false);
       // Don't add it to display list
       return _this;
@@ -35786,15 +35802,23 @@
         }
         if (padding === undefined) {
           padding = this.padding;
+        } else if (typeof padding === 'number') {
+          padding = GetBoundsConfig(padding);
         }
-        if (this.width === width && this.height === height && this.paddingSave === padding) {
+        var isSizeChanged = this.width !== width || this.height !== height;
+        var isPaddingChanged = this.padding !== padding && !IsKeyValueEqual(this.padding, padding);
+        if (!isSizeChanged && !isPaddingChanged) {
           return this;
         }
         this.width = width;
         this.height = height;
+        if (isPaddingChanged) {
+          Clone$1(padding, this.padding);
+        }
+
+        // Graphics does not have originX, originY properties
         this.originX = parent.originX;
         this.originY = parent.originY;
-        this.paddingSave = padding;
         DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
         return this;
       }
@@ -35816,7 +35840,7 @@
         }
         this.originX = originX;
         this.originY = originY;
-        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
+        DrawShape.call(this, this.width, this.height, this.padding, originX, originY);
         return this;
       }
     }]);
@@ -52870,9 +52894,8 @@
     }, {
       key: "setInteractive",
       value: function setInteractive() {
-        var self = this;
-        var hitAreaCallback = function hitAreaCallback(area, x, y) {
-          var faces = self.faces;
+        var hitAreaCallback = function (area, x, y) {
+          var faces = this.faces;
           for (var i = 0; i < faces.length; i++) {
             var face = faces[i];
 
@@ -52882,7 +52905,7 @@
             }
           }
           return false;
-        };
+        }.bind(this);
         this.scene.sys.input.enable(this, hitAreaCallback);
         return this;
       }

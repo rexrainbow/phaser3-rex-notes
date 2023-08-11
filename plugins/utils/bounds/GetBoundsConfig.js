@@ -1,9 +1,13 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var GetBoundsConfig = function (config, out) {
+    if (config === undefined) {
+        config = 0;
+    }
     if (out === undefined) {
         out = {};
     }
+
     if (typeof (config) === 'number') {
         out.left = config;
         out.right = config;

@@ -98,7 +98,7 @@ var table = scene.add.rexGridTable(x, y, width, height, {
     clamplTableOXY: true,
     
     mask: {
-        padding: 0,
+        padding: 0, // or {left, right, top, bottom}
         // updateMode: 0,
         // layer: undefined,
     },
@@ -137,7 +137,9 @@ var table = scene.add.rexGridTable(x, y, width, height, {
 - `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
     - Set `false` when dragging by [scroller](scroller.md)
 - `mask` : A rectangle mask of cells
-    - `mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+    - `mask.padding` : 
+        - A number : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+        - A plain object `{left, right, top, bottom}`    
     - `mask.updateMode` : When to update cells mask
         - `0`, or `update` : Apply mask to cell container only when `table.updateTable()` is invoked. Default behavior.
         - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.

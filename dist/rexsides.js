@@ -2787,6 +2787,9 @@
 
   var GetValue$B = Phaser.Utils.Objects.GetValue;
   var GetBoundsConfig = function GetBoundsConfig(config, out) {
+    if (config === undefined) {
+      config = 0;
+    }
     if (out === undefined) {
       out = {};
     }

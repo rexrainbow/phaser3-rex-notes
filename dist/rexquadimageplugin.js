@@ -161,9 +161,8 @@
     }, {
       key: "setInteractive",
       value: function setInteractive() {
-        var self = this;
-        var hitAreaCallback = function hitAreaCallback(area, x, y) {
-          var faces = self.faces;
+        var hitAreaCallback = function (area, x, y) {
+          var faces = this.faces;
           for (var i = 0; i < faces.length; i++) {
             var face = faces[i];
 
@@ -173,7 +172,7 @@
             }
           }
           return false;
-        };
+        }.bind(this);
         this.scene.sys.input.enable(this, hitAreaCallback);
         return this;
       }

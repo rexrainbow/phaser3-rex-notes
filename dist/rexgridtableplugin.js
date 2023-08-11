@@ -454,7 +454,7 @@
     }
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
@@ -509,11 +509,11 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
     } else {
-      state.syncPosition = GetValue$8(config, 'syncPosition', true);
-      state.syncRotation = GetValue$8(config, 'syncRotation', true);
-      state.syncScale = GetValue$8(config, 'syncScale', true);
-      state.syncAlpha = GetValue$8(config, 'syncAlpha', true);
-      state.syncScrollFactor = GetValue$8(config, 'syncScrollFactor', true);
+      state.syncPosition = GetValue$9(config, 'syncPosition', true);
+      state.syncRotation = GetValue$9(config, 'syncRotation', true);
+      state.syncScale = GetValue$9(config, 'syncScale', true);
+      state.syncAlpha = GetValue$9(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$9(config, 'syncScrollFactor', true);
     }
   };
   var AddChild = {
@@ -1783,7 +1783,7 @@
     return object instanceof GameObjectClass;
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var UUID = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
@@ -1792,13 +1792,13 @@
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-    var x = GetValue$7(config, 'x', undefined);
-    var y = GetValue$7(config, 'y', undefined);
-    var width = GetValue$7(config, 'width', undefined);
-    var height = GetValue$7(config, 'height', undefined);
-    var originX = GetValue$7(config, 'originX', 0);
-    var originY = GetValue$7(config, 'originY', 0);
-    var padding = GetValue$7(config, 'padding', 0);
+    var x = GetValue$8(config, 'x', undefined);
+    var y = GetValue$8(config, 'y', undefined);
+    var width = GetValue$8(config, 'width', undefined);
+    var height = GetValue$8(config, 'height', undefined);
+    var originX = GetValue$8(config, 'originX', 0);
+    var originY = GetValue$8(config, 'originY', 0);
+    var padding = GetValue$8(config, 'padding', 0);
     var scrollX, scrollY;
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
@@ -1909,17 +1909,17 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$6(config, 'color');
-      lineWidth = GetValue$6(config, 'lineWidth');
-      fillColor = GetValue$6(config, 'fillColor');
-      fillAlpha = GetValue$6(config, 'fillAlpha', 1);
-      padding = GetValue$6(config, 'padding', 0);
+      strokeColor = GetValue$7(config, 'color');
+      lineWidth = GetValue$7(config, 'lineWidth');
+      fillColor = GetValue$7(config, 'fillColor');
+      fillAlpha = GetValue$7(config, 'fillAlpha', 1);
+      padding = GetValue$7(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -1982,10 +1982,10 @@
     y: 0
   }];
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
-    var drawContainer = GetValue$5(config, 'drawContainer', true);
-    var gameObjects = GetValue$5(config, 'children');
+    var drawContainer = GetValue$6(config, 'drawContainer', true);
+    var gameObjects = GetValue$6(config, 'children');
     if (gameObjects === undefined) {
       gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -2323,7 +2323,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$4 = function GetValue(source, key, defaultValue) {
+  var GetValue$5 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -2372,7 +2372,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$4(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$5(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -2671,7 +2671,7 @@
     return Stack;
   }();
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
   var Table = /*#__PURE__*/function () {
     function Table(parent, config) {
@@ -2700,8 +2700,8 @@
         }
         this.setDefaultCellHeight(cellHeight);
         this.setDefaultCellWidth(cellWidth);
-        this.initCells(GetValue$3(o, 'cellsCount', 0));
-        this.setColumnCount(GetValue$3(o, 'columns', 1));
+        this.initCells(GetValue$4(o, 'cellsCount', 0));
+        this.setColumnCount(GetValue$4(o, 'columns', 1));
         return this;
       }
     }, {
@@ -3236,39 +3236,91 @@
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
-    switch (this.shape) {
+    switch (this.shapeType) {
       case 1:
         // circle
+        // Assume that all padding are the same value in this circle shape
+        padding = padding.left;
         var radius = Math.min(width, height) / 2;
-        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
+        this.fillCircle(-width * (originX - 0.5),
+        // centerX
+        -height * (originY - 0.5),
+        // centerY
+        radius + padding // radius
+        );
+
         break;
       default:
         // 0|'rectangle'
-        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
+        this.fillRect(-(width * originX) - padding.left,
+        // x
+        -(height * originY) - padding.top,
+        // y
+        width + padding.left + padding.right,
+        // width
+        height + padding.top + padding.bottom // height
+        );
+
         break;
     }
+  };
+
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetBoundsConfig = function GetBoundsConfig(config, out) {
+    if (config === undefined) {
+      config = 0;
+    }
+    if (out === undefined) {
+      out = {};
+    }
+    if (typeof config === 'number') {
+      out.left = config;
+      out.right = config;
+      out.top = config;
+      out.bottom = config;
+    } else {
+      out.left = GetValue$3(config, 'left', 0);
+      out.right = GetValue$3(config, 'right', 0);
+      out.top = GetValue$3(config, 'top', 0);
+      out.bottom = GetValue$3(config, 'bottom', 0);
+    }
+    return out;
+  };
+
+  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
+    for (var key in objA) {
+      if (!(key in objB)) {
+        return false;
+      }
+      if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+    for (var key in objB) {
+      if (!(key in objA)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   var Graphics = Phaser.GameObjects.Graphics;
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
     var _super = _createSuper(DefaultMaskGraphics);
-    function DefaultMaskGraphics(parent, shape, padding) {
+    function DefaultMaskGraphics(parent, shapeType, padding) {
       var _this;
       _classCallCheck(this, DefaultMaskGraphics);
-      if (shape === undefined) {
-        shape = 0;
+      if (shapeType === undefined) {
+        shapeType = 0;
       }
-      if (typeof shape === 'string') {
-        shape = SHAPEMODE[shape];
-      }
-      if (padding === undefined) {
-        padding = 0;
+      if (typeof shapeType === 'string') {
+        shapeType = SHAPEMODE[shapeType];
       }
       _this = _super.call(this, parent.scene);
       _this.parent = parent;
-      _this.shape = shape;
-      _this.padding = padding;
+      _this.shapeType = shapeType;
+      _this.padding = GetBoundsConfig(padding);
       _this.setPosition().resize().setVisible(false);
       // Don't add it to display list
       return _this;
@@ -3305,15 +3357,23 @@
         }
         if (padding === undefined) {
           padding = this.padding;
+        } else if (typeof padding === 'number') {
+          padding = GetBoundsConfig(padding);
         }
-        if (this.width === width && this.height === height && this.paddingSave === padding) {
+        var isSizeChanged = this.width !== width || this.height !== height;
+        var isPaddingChanged = this.padding !== padding && !IsKeyValueEqual(this.padding, padding);
+        if (!isSizeChanged && !isPaddingChanged) {
           return this;
         }
         this.width = width;
         this.height = height;
+        if (isPaddingChanged) {
+          Clone(padding, this.padding);
+        }
+
+        // Graphics does not have originX, originY properties
         this.originX = parent.originX;
         this.originY = parent.originY;
-        this.paddingSave = padding;
         DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
         return this;
       }
@@ -3335,7 +3395,7 @@
         }
         this.originX = originX;
         this.originY = originY;
-        DrawShape.call(this, this.width, this.height, this.paddingSave, originX, originY);
+        DrawShape.call(this, this.width, this.height, this.padding, originX, originY);
         return this;
       }
     }]);
