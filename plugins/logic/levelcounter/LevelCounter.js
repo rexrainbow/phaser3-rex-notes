@@ -7,26 +7,62 @@ class LevelCounter extends EventEmitter {
         super();
 
         this.setTable(GetValue(config, 'table'));
-        this.setExp(GetValue(config, 'exp', 0));
-        this.requiredExp = this.getRequiredExpToNextLevel(this.level, this.exp);
+
+        var exp = GetValue(config, 'exp', 0);
+        var level = GetValue(config, 'level', undefined);
+        if ((level !== undefined) && !this.checkLevel(level, exp)) {
+            console.error(`Level ${level} and Exp ${exp} are mismatch`);
+            level = undefined;
+        }
+        this.resetExp(exp, level);
     }
 
+    get exp() {
+        return this._exp;
+    }
+
+    set exp(value) {
+        if (value >= this._exp) {
+            this.gainExp(value - this._exp);
+        } else {
+            this.resetExp(value);
+        }
+    }
+
+    get level() {
+        return this._level;
+    }
+
+    set level(value) {
+        this.exp = this.getExp(value);
+    }
+
+    get requiredExp() {
+        return this._requiredExp;
+    }
+
+    // Configuration
     setTable(table) {
         this.levelTable = table;
         this.isLevelMapFunction = IsFunction(table);
         return this;
     }
 
-    setExp(exp) {
-        this.exp = exp;
-        this.level = this.getLevel(exp);
-
+    resetExp(exp, level) {
+        if (level === undefined) {
+            level = this.getLevel(exp);
+        }
+        this._exp = exp;
+        this._level = level;
+        this._requiredExp = this.getRequiredExpToNextLevel(level, exp);
+        // Won't fire `levelup` event
         return this;
     }
 
+    // Expression
     getExp(level) {
         if (level === undefined) {
-            return this.exp;
+            return this._exp;
         }
 
         return (this.isLevelMapFunction) ? this.levelTable(level) : this.levelTable[level];
@@ -34,7 +70,7 @@ class LevelCounter extends EventEmitter {
 
     getLevel(exp, level) {
         if (exp === undefined) {
-            return this.level;
+            return this._level;
         }
 
         if (level === undefined) {
@@ -43,7 +79,7 @@ class LevelCounter extends EventEmitter {
 
         while (1) {
             var nextLevelExp = this.getExp(level + 1);
-            if (nextLevelExp >= exp) {
+            if (nextLevelExp > exp) {
                 break;
             }
 
@@ -61,40 +97,51 @@ class LevelCounter extends EventEmitter {
         return (exp >= this.getExp(level)) && (exp < this.getExp(level + 1));
     }
 
+    // Action
     gainExp(incExp) {
         if (incExp === 0) {
             return this;
         }
 
-        var prevExp = this.exp;
-        var prevLevel = this.level;
+        var prevExp = this._exp;
+        var prevLevel = this._level;
 
         var exp = prevExp + incExp;
         var level = this.getLevel(exp, prevLevel);
 
         // Emit levelup event
-        var fromExp = prevExp;
+        var fromExp = prevExp,
+            toExp,
+            levelStartExp,
+            levelEndExp;
         while (1) {
-            var levelExp0 = this.getExp(prevLevel);
-            var levelExp1 = this.getExp(prevLevel + 1);
-            var toExp = Math.min(levelExp1, exp)
-            this.emit('levelup', prevLevel, fromExp, toExp, levelExp0, levelExp1);
+            levelStartExp = this.getExp(prevLevel);
+            levelEndExp = this.getExp(prevLevel + 1);
+            toExp = Math.min(levelEndExp, exp);
+            this.emit('levelup', prevLevel, fromExp, toExp, levelStartExp, levelEndExp);
 
-            prevLevel++;
-            if (toExp === exp) {
+            if ((prevLevel === level) && (toExp === exp)) {
                 break;
             }
 
-            fromExp = levelExp1;
+            prevLevel++;
+            fromExp = levelEndExp;
         }
 
-        this.exp = exp;
-        this.level = level;
-        this.requiredExp = this.getRequiredExpToNextLevel(exp, level);
+        this.resetExp(exp, level);
 
         return this;
     }
 
+    setExp(exp) {
+        this.exp = exp;
+        return this;
+    }
+
+    setLevel(level) {
+        this.level = level;
+        return this;
+    }
 }
 
 export default LevelCounter;

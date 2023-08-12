@@ -17,9 +17,13 @@ declare namespace LevelCounter {
 declare class LevelCounter extends EventEmitter {
     constructor(config: LevelCounter.IConfig);
 
+    exp: number;
+    level: number;
+    readonly requiredExp: number;
+
     setTable(table: LevelCounter.TableType): this;
 
-    setExp(exp: number, level?: number): this;
+    resetExp(exp: number): this;
 
     getExp(): number;
     getExp(level: number): number;
@@ -32,4 +36,8 @@ declare class LevelCounter extends EventEmitter {
     checkLevel(level: number, exp: number): boolean;
 
     gainExp(incExp: number): this;
+
+    setExp(exp: number): this;
+
+    setLevel(level: number): this;
 }
