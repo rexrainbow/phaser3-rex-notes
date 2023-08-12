@@ -1,7 +1,7 @@
 import LevelCounter from '../../plugins/levelcounter.js';
 
 var levelCounter = new LevelCounter({
-    table: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900],
+    table: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
 
     exp: 330,
 })
@@ -15,4 +15,9 @@ levelCounter
 
 console.log('Exp += 200')
 levelCounter.gainExp(200)
+console.log(levelCounter.level)
+
+console.log(`Level = 11 (maxLevel = ${levelCounter.maxLevel})`)
+levelCounter.setLevel(11);
+console.log(levelCounter.exp)
 console.log(levelCounter.level)

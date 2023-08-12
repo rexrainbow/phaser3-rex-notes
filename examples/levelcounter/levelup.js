@@ -4,6 +4,7 @@ var levelCounter = new LevelCounter({
     table: function (level) {
         return level * 100;
     },
+    maxLevel: 10,
 
     exp: 330,
 })
@@ -51,5 +52,10 @@ console.log(levelCounter.level)
 
 console.log('Level = 6')
 levelCounter.setLevel(6);
+console.log(levelCounter.exp)
+console.log(levelCounter.level)
+
+console.log(`Level = 11 (maxLevel = ${levelCounter.maxLevel})`)
+levelCounter.setLevel(11);
 console.log(levelCounter.exp)
 console.log(levelCounter.level)

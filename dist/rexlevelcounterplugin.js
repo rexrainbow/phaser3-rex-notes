@@ -539,6 +539,7 @@
       _classCallCheck(this, LevelCounter);
       _this = _super.call(this);
       _this.setTable(GetValue(config, 'table'));
+      _this.setMaxLevel(GetValue(config, 'maxLevel'));
       var exp = GetValue(config, 'exp', 0);
       var level = GetValue(config, 'level', undefined);
       if (level !== undefined && !_this.checkLevel(level, exp)) {
@@ -548,34 +549,9 @@
       _this.resetExp(exp, level);
       return _this;
     }
-    _createClass(LevelCounter, [{
-      key: "exp",
-      get: function get() {
-        return this._exp;
-      },
-      set: function set(value) {
-        if (value >= this._exp) {
-          this.gainExp(value - this._exp);
-        } else {
-          this.resetExp(value);
-        }
-      }
-    }, {
-      key: "level",
-      get: function get() {
-        return this._level;
-      },
-      set: function set(value) {
-        this.exp = this.getExp(value);
-      }
-    }, {
-      key: "requiredExp",
-      get: function get() {
-        return this._requiredExp;
-      }
 
-      // Configuration
-    }, {
+    // Configuration
+    _createClass(LevelCounter, [{
       key: "setTable",
       value: function setTable(table) {
         this.levelTable = table;
@@ -583,8 +559,31 @@
         return this;
       }
     }, {
+      key: "setMaxLevel",
+      value: function setMaxLevel(maxLevel) {
+        if (maxLevel === undefined) {
+          if (Array.isArray(this.levelTable)) {
+            maxLevel = this.levelTable.length - 1;
+          } else {
+            maxLevel = -1;
+          }
+        }
+        var maxExp;
+        if (maxLevel !== -1) {
+          maxExp = this.getExp(maxLevel);
+        } else {
+          maxExp = -1;
+        }
+        this.maxLevel = maxLevel;
+        this.maxExp = maxExp;
+        return this;
+      }
+    }, {
       key: "resetExp",
       value: function resetExp(exp, level) {
+        if (exp > this.maxExp) {
+          exp = this.maxExp;
+        }
         if (level === undefined) {
           level = this.getLevel(exp);
         }
@@ -594,15 +593,73 @@
         // Won't fire `levelup` event
         return this;
       }
+    }, {
+      key: "exp",
+      get: function get() {
+        return this._exp;
+      },
+      set: function set(exp) {
+        if (exp > this.maxExp) {
+          exp = this.maxExp;
+        }
+        if (exp < this._exp) {
+          this.resetExp(exp);
+          return;
+        }
+        if (exp === this._exp) {
+          return;
+        }
+        var level = this.getLevel(exp, this._level);
 
-      // Expression
+        // Emit levelup event
+        var prevLevel = this._level;
+        var fromExp = this._exp,
+          toExp;
+        while (1) {
+          var levelStartExp = this.getExp(prevLevel);
+          var levelEndExp = this.getExp(prevLevel + 1);
+          toExp = Math.min(levelEndExp, exp);
+          this.emit('levelup', prevLevel, fromExp, toExp, levelStartExp, levelEndExp);
+          if (prevLevel === level && toExp === exp) {
+            break;
+          }
+          prevLevel++;
+          fromExp = levelEndExp;
+        }
+        this.resetExp(exp, level);
+      }
+    }, {
+      key: "level",
+      get: function get() {
+        return this._level;
+      },
+      set: function set(value) {
+        debugger;
+        if (value > this.maxLevel) {
+          this.exp = this.maxExp;
+        } else {
+          this.exp = this.getExp(value);
+        }
+      }
+    }, {
+      key: "requiredExp",
+      get: function get() {
+        return this._requiredExp;
+      }
     }, {
       key: "getExp",
       value: function getExp(level) {
         if (level === undefined) {
           return this._exp;
         }
-        return this.isLevelMapFunction ? this.levelTable(level) : this.levelTable[level];
+        if (this.isLevelMapFunction) {
+          return this.levelTable(level);
+        } else {
+          if (level > this.maxLevel) {
+            level = this.maxLevel;
+          }
+          return this.levelTable[level];
+        }
       }
     }, {
       key: "getLevel",
@@ -619,6 +676,9 @@
             break;
           }
           level++;
+          if (nextLevelExp === this.maxExp) {
+            break;
+          }
         }
         return level;
       }
@@ -632,36 +692,10 @@
       value: function checkLevel(level, exp) {
         return exp >= this.getExp(level) && exp < this.getExp(level + 1);
       }
-
-      // Action
     }, {
       key: "gainExp",
       value: function gainExp(incExp) {
-        if (incExp === 0) {
-          return this;
-        }
-        var prevExp = this._exp;
-        var prevLevel = this._level;
-        var exp = prevExp + incExp;
-        var level = this.getLevel(exp, prevLevel);
-
-        // Emit levelup event
-        var fromExp = prevExp,
-          toExp,
-          levelStartExp,
-          levelEndExp;
-        while (1) {
-          levelStartExp = this.getExp(prevLevel);
-          levelEndExp = this.getExp(prevLevel + 1);
-          toExp = Math.min(levelEndExp, exp);
-          this.emit('levelup', prevLevel, fromExp, toExp, levelStartExp, levelEndExp);
-          if (prevLevel === level && toExp === exp) {
-            break;
-          }
-          prevLevel++;
-          fromExp = levelEndExp;
-        }
-        this.resetExp(exp, level);
+        this.exp += incExp;
         return this;
       }
     }, {

@@ -9,6 +9,7 @@ declare namespace LevelCounter {
 
     interface IConfig {
         table: TableType,
+        maxLevel?: number,
 
         exp?: number,
     }
@@ -22,6 +23,10 @@ declare class LevelCounter extends EventEmitter {
     readonly requiredExp: number;
 
     setTable(table: LevelCounter.TableType): this;
+
+    setMaxLevel(maxLevel?: number): this;
+    maxLevel: number;
+    maxExp: number;
 
     resetExp(exp: number): this;
 
