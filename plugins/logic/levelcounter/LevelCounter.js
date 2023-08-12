@@ -41,13 +41,14 @@ class LevelCounter extends EventEmitter {
             maxExp = -1;
         }
 
+        this.hasMaxLevel = (maxLevel !== -1);
         this.maxLevel = maxLevel;
         this.maxExp = maxExp;
         return this;
     }
 
     resetExp(exp, level) {
-        if (exp > this.maxExp) {
+        if (this.hasMaxLevel && (exp > this.maxExp)) {
             exp = this.maxExp;
         }
         if (level === undefined) {
@@ -65,7 +66,7 @@ class LevelCounter extends EventEmitter {
     }
 
     set exp(exp) {
-        if (exp > this.maxExp) {
+        if (this.hasMaxLevel && (exp > this.maxExp)) {
             exp = this.maxExp;
         }
 
@@ -105,8 +106,7 @@ class LevelCounter extends EventEmitter {
     }
 
     set level(value) {
-        debugger
-        if (value > this.maxLevel) {
+        if (this.hasMaxLevel && (value > this.maxLevel)) {
             this.exp = this.maxExp;
         } else {
             this.exp = this.getExp(value);
@@ -125,7 +125,7 @@ class LevelCounter extends EventEmitter {
         if (this.isLevelMapFunction) {
             return this.levelTable(level);
         } else {
-            if (level > this.maxLevel) {
+            if (this.hasMaxLevel && (level > this.maxLevel)) {
                 level = this.maxLevel;
             }
             return this.levelTable[level];
@@ -149,7 +149,7 @@ class LevelCounter extends EventEmitter {
 
             level++;
 
-            if (nextLevelExp === this.maxExp) {
+            if (this.hasMaxLevel && (nextLevelExp === this.maxExp)) {
                 break;
             }
         }

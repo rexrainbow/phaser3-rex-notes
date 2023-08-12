@@ -574,6 +574,7 @@
         } else {
           maxExp = -1;
         }
+        this.hasMaxLevel = maxLevel !== -1;
         this.maxLevel = maxLevel;
         this.maxExp = maxExp;
         return this;
@@ -581,7 +582,7 @@
     }, {
       key: "resetExp",
       value: function resetExp(exp, level) {
-        if (exp > this.maxExp) {
+        if (this.hasMaxLevel && exp > this.maxExp) {
           exp = this.maxExp;
         }
         if (level === undefined) {
@@ -599,7 +600,7 @@
         return this._exp;
       },
       set: function set(exp) {
-        if (exp > this.maxExp) {
+        if (this.hasMaxLevel && exp > this.maxExp) {
           exp = this.maxExp;
         }
         if (exp < this._exp) {
@@ -634,8 +635,7 @@
         return this._level;
       },
       set: function set(value) {
-        debugger;
-        if (value > this.maxLevel) {
+        if (this.hasMaxLevel && value > this.maxLevel) {
           this.exp = this.maxExp;
         } else {
           this.exp = this.getExp(value);
@@ -655,7 +655,7 @@
         if (this.isLevelMapFunction) {
           return this.levelTable(level);
         } else {
-          if (level > this.maxLevel) {
+          if (this.hasMaxLevel && level > this.maxLevel) {
             level = this.maxLevel;
           }
           return this.levelTable[level];
@@ -676,7 +676,7 @@
             break;
           }
           level++;
-          if (nextLevelExp === this.maxExp) {
+          if (this.hasMaxLevel && nextLevelExp === this.maxExp) {
             break;
           }
         }
