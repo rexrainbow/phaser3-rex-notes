@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
             scrollMode: 'y',
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle({ radius: 10, color: COLOR_PRIMARY }),
 
             table: {
                 cellHeight: 80,
@@ -41,8 +41,8 @@ class Demo extends Phaser.Scene {
             },
 
             slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+                track: this.rexUI.add.roundRectangle({ width: 20, radius: 10, color: COLOR_DARK }),
+                thumb: this.rexUI.add.roundRectangle({ radius: 13, color: COLOR_LIGHT }),
             },
 
             space: {
