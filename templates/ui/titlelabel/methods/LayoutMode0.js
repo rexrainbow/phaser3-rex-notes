@@ -36,12 +36,14 @@ var LayoutMode0 = function (config) {
                 right: GetValue(config, 'space.icon', 0),
                 top: GetValue(config, 'space.iconTop', 0),
                 bottom: GetValue(config, 'space.iconBottom', 0),
+                left: GetValue(config, 'space.iconLeft', 0),
             };
         } else {
             padding = {
                 bottom: GetValue(config, 'space.icon', 0),
                 left: GetValue(config, 'space.iconLeft', 0),
                 right: GetValue(config, 'space.iconRight', 0),
+                top: GetValue(config, 'space.iconTop', 0),
             };
         }
         var fitRatio = GetValue(config, 'squareFitIcon', false) ? 1 : 0;
@@ -131,11 +133,13 @@ var LayoutMode0 = function (config) {
             padding = {
                 top: GetValue(config, 'space.actionTop', 0),
                 bottom: GetValue(config, 'space.actionBottom', 0),
+                right: GetValue(config, 'space.actionRight', 0),
             };
         } else {
             padding = {
                 left: GetValue(config, 'space.actionLeft', 0),
                 right: GetValue(config, 'space.actionRight', 0),
+                bottom: GetValue(config, 'space.actionBottom', 0),
             };
         }
         var fitRatio = GetValue(config, 'squareFitAction', false) ? 1 : 0;
