@@ -37,6 +37,7 @@ declare namespace GridTable {
             mask?: GridTableCore.MaskConfig,
             interactive?: boolean,
             reuseCellContainer?: boolean,
+            enableLayer?: boolean,
         },
 
         createCellContainerCallback: CreateCellContainerCallbackType,
