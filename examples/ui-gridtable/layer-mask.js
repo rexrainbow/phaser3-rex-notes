@@ -93,13 +93,6 @@ class Demo extends Phaser.Scene {
                 cellContainer.layout().setDepth(0);
             })
             .layout()
-
-
-        this.add.text(0, 580, 'Update table')
-            .setInteractive()
-            .on('pointerdown', function () {
-                gridTable.refresh()
-            })
     }
 
     update() { }
