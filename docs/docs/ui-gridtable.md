@@ -20,6 +20,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Drag item](https://codepen.io/rexrainbow/pen/WNaQrgp)
+- [Layer + mask padding](https://codepen.io/rexrainbow/pen/BaGXNwG)
 - [Fade-out-destroy cell](https://codepen.io/rexrainbow/pen/YzXYemw)
 - [Custom mask](https://codepen.io/rexrainbow/pen/LYXpMxY)
 
