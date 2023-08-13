@@ -10,20 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/quest/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/levelcounter/">
       
       
-        <link rel="prev" href="../levelcounter/">
+        <link rel="prev" href="../ymlachievements/">
       
       
-        <link rel="next" href="../dialog-quest/">
+        <link rel="next" href="../quest/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Quest - Notes of Phaser 3</title>
+        <title>Level counter - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quest
+              Level counter
             
           </span>
         </div>
@@ -5962,49 +5962,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../levelcounter/" class="md-nav__link">
-        Level counter
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_7" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_10_7" id="__nav_10_7_label" tabindex="0">
-          Quest
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_7_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_10_7">
-          <span class="md-nav__icon md-icon"></span>
-          Quest
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
     
   
   
@@ -6015,12 +5972,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Quest
+          Level counter
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Quest
+        Level counter
       </a>
       
         
@@ -6039,13 +5996,6 @@
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
   </a>
   
 </li>
@@ -6093,193 +6043,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-manager" class="md-nav__link">
-    Question manager
-  </a>
-  
-    <nav class="md-nav" aria-label="Question manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-question-manager-instance" class="md-nav__link">
-    Create question manager instance
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-questions" class="md-nav__link">
-    Add questions
+  <a href="#accumulate-experience" class="md-nav__link">
+    Accumulate experience
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-question" class="md-nav__link">
-    Remove question
+  <a href="#level-and-experience" class="md-nav__link">
+    Level and experience
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-question" class="md-nav__link">
-    Get question
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#question-is-existed" class="md-nav__link">
-    Question is existed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#array-of-questions" class="md-nav__link">
-    Array of questions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-option" class="md-nav__link">
-    Get option
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-quest-task" class="md-nav__link">
-    Private quest task
-  </a>
-  
-    <nav class="md-nav" aria-label="Private quest task">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-private-quest-task" class="md-nav__link">
-    Create private quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-next-question-object" class="md-nav__link">
-    Get next question object
-  </a>
-  
-    <nav class="md-nav" aria-label="Get next question object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event" class="md-nav__link">
-    Event
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-last-question" class="md-nav__link">
-    Is last question
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-quest-task" class="md-nav__link">
-    Restart quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data" class="md-nav__link">
-    Private data
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quest-task" class="md-nav__link">
-    Quest task
-  </a>
-  
-    <nav class="md-nav" aria-label="Quest task">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-quest-task" class="md-nav__link">
-    Create quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-next-question-object_1" class="md-nav__link">
-    Get next question object
-  </a>
-  
-    <nav class="md-nav" aria-label="Get next question object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event_1" class="md-nav__link">
-    Event
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-last-question_1" class="md-nav__link">
-    Is last question
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-quest-task_1" class="md-nav__link">
-    Restart quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data_1" class="md-nav__link">
-    Private data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-option_1" class="md-nav__link">
-    Get option
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -6292,6 +6079,47 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_7" id="__nav_10_7_label" tabindex="0">
+          Quest
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10_7">
+          <span class="md-nav__icon md-icon"></span>
+          Quest
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quest/" class="md-nav__link">
+        Quest
+      </a>
     </li>
   
 
@@ -9620,13 +9448,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9669,193 +9490,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-manager" class="md-nav__link">
-    Question manager
-  </a>
-  
-    <nav class="md-nav" aria-label="Question manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-question-manager-instance" class="md-nav__link">
-    Create question manager instance
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-questions" class="md-nav__link">
-    Add questions
+  <a href="#accumulate-experience" class="md-nav__link">
+    Accumulate experience
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-question" class="md-nav__link">
-    Remove question
+  <a href="#level-and-experience" class="md-nav__link">
+    Level and experience
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-question" class="md-nav__link">
-    Get question
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#question-is-existed" class="md-nav__link">
-    Question is existed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#array-of-questions" class="md-nav__link">
-    Array of questions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-option" class="md-nav__link">
-    Get option
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-quest-task" class="md-nav__link">
-    Private quest task
-  </a>
-  
-    <nav class="md-nav" aria-label="Private quest task">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-private-quest-task" class="md-nav__link">
-    Create private quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-next-question-object" class="md-nav__link">
-    Get next question object
-  </a>
-  
-    <nav class="md-nav" aria-label="Get next question object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event" class="md-nav__link">
-    Event
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-last-question" class="md-nav__link">
-    Is last question
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-quest-task" class="md-nav__link">
-    Restart quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data" class="md-nav__link">
-    Private data
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quest-task" class="md-nav__link">
-    Quest task
-  </a>
-  
-    <nav class="md-nav" aria-label="Quest task">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-quest-task" class="md-nav__link">
-    Create quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-next-question-object_1" class="md-nav__link">
-    Get next question object
-  </a>
-  
-    <nav class="md-nav" aria-label="Get next question object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event_1" class="md-nav__link">
-    Event
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-last-question_1" class="md-nav__link">
-    Is last question
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-quest-task_1" class="md-nav__link">
-    Restart quest task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data_1" class="md-nav__link">
-    Private data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-option_1" class="md-nav__link">
-    Get option
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -9882,30 +9540,24 @@
   
 
 
-  <h1>Quest</h1>
+  <h1>Level counter</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Question manager.</p>
+<p>Map level value from experience value, by callback or a number array.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene, or game object</li>
-</ul>
-<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://codepen.io/rexrainbow/pen/wLoWyE">(CSV) Branch</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/OJzGRxa">(YAML) Branch</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/NZreRG">Shuffle</a></li>
+<li>Object</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/quest">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/levelcounter">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexquestplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexquestplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexlevelcounterplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlevelcounterplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add quest-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexquestplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add level-counter object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexlevelcounterplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9914,13 +9566,13 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">QuestPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/quest-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LevelCounterPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/levelcounter-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexQuest&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">QuestPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">LevelCounterPlugin</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
@@ -9930,8 +9582,8 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add quest-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexQuest&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add level-counter object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9940,380 +9592,100 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">Quest</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/quest.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LevelCounter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/levelcounter.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add quest-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Quest</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add level-counter object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">LevelCounter</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="question-manager">Question manager<a class="headerlink" href="#question-manager" title="Permanent link">&para;</a></h3>
-<h4 id="create-question-manager-instance">Create question manager instance<a class="headerlink" href="#create-question-manager-instance" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexQuest&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">questions</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// format: undefined,</span>
-<span class="w">    </span><span class="c1">// delimiter: &#39;,&#39;,</span>
-<span class="w">    </span><span class="c1">// types: {</span>
-<span class="w">    </span><span class="c1">//     question: &#39;q&#39;,</span>
-<span class="w">    </span><span class="c1">//     option: &#39;&#39;,</span>
-<span class="w">    </span><span class="c1">// },</span>
-<span class="w">    </span><span class="c1">// convert: true,</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">table</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// table: [0, 100, 200, 300,],</span>
 
-<span class="w">    </span><span class="nx">quest</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// quest: {</span>
-<span class="w">    </span><span class="c1">//     shuffleQuestions: false,</span>
-<span class="w">    </span><span class="c1">//     shuffleOptions: false,</span>
-<span class="w">    </span><span class="c1">// }</span>
+<span class="w">    </span><span class="c1">// maxLevel: -1,</span>
+
+<span class="w">    </span><span class="c1">// exp: 0,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>format</code> : Input data (parameter <code>question</code>) format.<ul>
-<li><code>'csv'</code> : Input data is a csv string</li>
-<li><code>'yaml'</code> : Input data is a yaml string represented multiple documents, or an array of yaml string for each document.</li>
-<li><code>'json'</code> : Input data is a json string.</li>
-<li><code>undefined</code> : Input data is a plain array of questions, don' parse it.</li>
-</ul>
-</li>
-<li><code>questions</code> : Input data of questions.<ul>
-<li>A plain array of questions. Parsing result of other input formats.
-    <div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">q0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param2</span><span class="o">:</span><span class="w"> </span><span class="nx">value2</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">o0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">                </span><span class="c1">// ...</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">o1</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">                </span><span class="c1">// ...</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">q1</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">param2</span><span class="o">:</span><span class="w"> </span><span class="nx">value2</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">o0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">                </span><span class="c1">// ...</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">o1</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param0</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span>
-<span class="w">                </span><span class="nx">param1</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span>
-<span class="w">                </span><span class="c1">// ...</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="p">]</span>
-</code></pre></div><ul>
-<li>Question object : <code>{key, options, param, ...}</code><ul>
-<li><code>key</code> : An unique key string. Create a key string <code>'_' + serialNumber</code> if not given.</li>
-<li><code>options</code> : An array of option objects.</li>
-<li>Other key-value parameters.</li>
-</ul>
-</li>
-<li>Option object : <code>{key, param, ...}</code><ul>
-<li><code>key</code> : An unique key string. Create a key string <code>'_' + serialNumber</code> if not given.</li>
-<li>Other key-value parameters.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>A yaml string represented multiple documents, will parse it to array of questions.
-    <div class="highlight"><pre><span></span><code><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">q0</span>
-<span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-<span class="nt">options</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o0</span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o1</span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-<span class="nn">---</span>
-<span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">q1</span>
-<span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-<span class="nt">options</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o0</span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o1</span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span>
-</code></pre></div></li>
-<li>An array of yaml strings for each document, will parse them to array of questions.   </li>
-<li>A csv string, will parse it to array of questions.
-    <div class="highlight"><pre><span></span><code>type,key,param0,param1,...
-q,q0,value0,value1,...
-,o0,value0,value1,...
-,o1,value0,value1,...
-q,q1,value0,value1,...
-,o0,value0,value1,...
-,o1,value0,value1,...
-</code></pre></div><ul>
-<li>Fields in first row<ul>
-<li><code>type</code> : Type of this row. These values can be redefined via <code>types</code> in configuration object.</li>
-<li><code>q</code> : A row of question object.</li>
-<li>Empty string : A row of option object belong a question object.</li>
-<li><code>key</code> : Unique key string. Create a key string <code>'_' + serialNumber</code> if this field does not exist.</li>
-<li>Other fields.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>A json string, will parse it to array of questions.</li>
-</ul>
-</li>
-<li><code>delimiter</code> : Delimiter of csv string. Default value is <code>','</code></li>
-<li><code>types</code> : Define value of row type.<ul>
-<li><code>types.question</code> : Define value of question row. Default value is <code>q</code>.</li>
-<li><code>types.option</code> : Define value of option row. Default value is <code>''</code> (empty string).</li>
-</ul>
-</li>
-<li><code>convert</code> : Convert string values to other types.<ul>
-<li>Default type converting : Convert string to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em><ul>
-<li><code>'0'</code>, <code>'1'</code>, ... (number string) -&gt; number</li>
-<li><code>'true'</code>, or <code>'false'</code> -&gt; <code>true</code> or <code>false</code></li>
-<li><code>''</code> (empty string) -&gt; <code>null</code></li>
-<li>Others : string.</li>
-</ul>
-</li>
-<li>Set <code>false</code> to ignore types converting, i.e. all values are string.</li>
-<li>A custom type converting function :
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">stringValue</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// return value;</span>
+<li><code>table</code> : Level table, return experience value from level value. Level value starts from <code>0</code>.<ul>
+<li>A callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">experience</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li>A number array : Experience value of each level.</li>
 </ul>
 </li>
-<li><code>quest</code> : Create a private quest task object.<ul>
-<li><code>undefined</code> : Don't create a private quest task object.</li>
-<li><code>true</code> : Create a private quest task object with default configuration.</li>
-<li>Configuration of quest task :<ul>
-<li><code>quest.shuffleQuestions</code> : Set <code>true</code> to shuffle questions.</li>
-<li><code>quest.shuffleOptions</code> : Set <code>true</code> to shuffle options.</li>
+<li><code>maxLevel</code> :<ul>
+<li><code>undefined</code> : Default value<ul>
+<li>No upper limit for callback level table.</li>
+<li><code>(table.length - 1)</code> for number array level table.</li>
 </ul>
 </li>
+<li>A number : Maximum level value</li>
 </ul>
 </li>
+<li><code>exp</code> : Initial experience value. Default value is <code>0</code>.</li>
 </ul>
-<h4 id="add-questions">Add questions<a class="headerlink" href="#add-questions" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">questions</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
+<h3 id="accumulate-experience">Accumulate experience<a class="headerlink" href="#accumulate-experience" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>questions</code> : An array of question objects, or a csv string. See <code>questions</code> section in <a href="./#create-question-manager-instance">Create question manager instance</a> section.</li>
-<li><code>config</code> :<ul>
-<li><code>delimiter</code> : Delimiter of csv string. Default value is <code>','</code></li>
-<li><code>types</code> : Define value of row type.<ul>
-<li><code>types.question</code> : Define value of question row. Default value is <code>q</code>.</li>
-<li><code>types.option</code> : Define value of option row. Default value is <code>''</code> (empty string).</li>
-</ul>
-</li>
-<li><code>convert</code> : Convert string values to other types.<ul>
-<li>Default type converting : Convert string to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em><ul>
-<li><code>'0'</code>, <code>'1'</code>, ... (number string) -&gt; number</li>
-<li><code>'true'</code>, or <code>'false'</code> -&gt; <code>true</code> or <code>false</code></li>
-<li><code>''</code> (empty string) -&gt; <code>null</code></li>
-<li>Others : string.</li>
-</ul>
-</li>
-<li>Set <code>false</code> to ignore types converting, i.e. all values are string.</li>
-<li>A custom type converting function :
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">stringValue</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// return value;</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="remove-question">Remove question<a class="headerlink" href="#remove-question" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Remove a question object
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<li>Accumulate experience
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">);</span>
+<span class="c1">// levelCounter.exp += incExp;</span>
 </code></pre></div><ul>
-<li><code>key</code> : An unique key string.</li>
+<li>Will fire <code>'levelup'</code> event many times.</li>
 </ul>
 </li>
-<li>Remove all question objects
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
-<h4 id="get-question">Get question<a class="headerlink" href="#get-question" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get a question object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get all keys of question objects
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questionKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getKeys</span><span class="p">();</span>
-<span class="c1">// var out = questionManager.getKeys(out);</span>
+<li>Reset experience value
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">resetExp</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>questionKeys</code> : Array of question key string.</li>
+<li>Won't fire <code>'levelup'</code> event.</li>
 </ul>
 </li>
-</ul>
-<h4 id="question-is-existed">Question is existed<a class="headerlink" href="#question-is-existed" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isExisted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-<h4 id="array-of-questions">Array of questions<a class="headerlink" href="#array-of-questions" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">questions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">questions</span><span class="p">;</span>
-</code></pre></div>
-<p>Rearrange items of this <code>questions</code> array to reorder questions in quest task.</p>
-<h4 id="get-option">Get option<a class="headerlink" href="#get-option" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getOption</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span><span class="w"> </span><span class="nx">optionKey</span><span class="p">);</span>
-</code></pre></div>
-<ul>
-<li><code>question</code> : A question object, or a question key string.</li>
-<li><code>optionKey</code> : A option key string.</li>
-</ul>
-<h4 id="private-quest-task">Private quest task<a class="headerlink" href="#private-quest-task" title="Permanent link">&para;</a></h4>
-<h5 id="create-private-quest-task">Create private quest task<a class="headerlink" href="#create-private-quest-task" title="Permanent link">&para;</a></h5>
-<p>Each question manager can hava a private quest task object, created when <a href="./#create-question-manager-instance">creating question manager</a>, or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">startQuest</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-<ul>
-<li><code>config</code> : <ul>
-<li><code>shuffleQuestions</code> : Set <code>true</code> to shuffle questions.</li>
-<li><code>shuffleOptions</code> : Set <code>true</code> to shuffle options.</li>
-</ul>
-</li>
-</ul>
-<h5 id="get-next-question-object">Get next question object<a class="headerlink" href="#get-next-question-object" title="Permanent link">&para;</a></h5>
-<ul>
-<li>Get next question object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getNextQuestion</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Get next question object via question key
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getNextQuestion</span><span class="p">(</span><span class="nx">questionKey</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h6 id="event">Event<a class="headerlink" href="#event" title="Permanent link">&para;</a></h6>
-<ul>
-<li>Fire <code>'quest'</code> when calling <code>questionManager.getNextQuestion()</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;quest&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">,</span><span class="w"> </span><span class="nx">quest</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// questionManager.getNextQuestion();</span>
-<span class="p">})</span>
+<li>Force level up
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>question</code> : Question object.<ul>
-<li><code>question.options</code> : Option objects of this question.</li>
-</ul>
-</li>
-<li><code>questionManager</code> : Question manager.</li>
-<li><code>quest</code> : Quest task.</li>
+<li>Will fire <code>'levelup'</code> event many times.</li>
 </ul>
 </li>
 </ul>
-<h5 id="is-last-question">Is last question<a class="headerlink" href="#is-last-question" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">isLastQuestion</span><span class="p">();</span>
-</code></pre></div>
-<h5 id="restart-quest-task">Restart quest task<a class="headerlink" href="#restart-quest-task" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">restartQuest</span><span class="p">();</span>
-</code></pre></div>
-<h5 id="private-data">Private data<a class="headerlink" href="#private-data" title="Permanent link">&para;</a></h5>
+<h3 id="level-and-experience">Level and experience<a class="headerlink" href="#level-and-experience" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
+<li>Get current experience
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getExp</span><span class="p">();</span>
+<span class="c1">// var exp = levelCounter.exp;</span>
 </code></pre></div></li>
-<li>Get all data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
+<li>Get current level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">();</span>
+<span class="c1">// var level = levelCounter.level;</span>
 </code></pre></div></li>
-<li>Set value
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<li>Get current required experience to next level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">requiredExp</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Increase value
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">incData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">inc</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
+<li>Get experience of level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getExp</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Multiple value
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">mulData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">mul</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
+<li>Get level from experience
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Clear all data
-    <div class="highlight"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">clearData</span><span class="p">();</span>
+<li>Get required experience to level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getRequiredExpToNextLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+<span class="c1">// var exp = levelCounter.getRequiredExpToNextLevel(level, exp);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="quest-task">Quest task<a class="headerlink" href="#quest-task" title="Permanent link">&para;</a></h3>
-<p>Create new quest task if user needs more then 1 quest task.</p>
-<h4 id="create-quest-task">Create quest task<a class="headerlink" href="#create-quest-task" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">quest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">.</span><span class="nx">newQuest</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>config</code> : <ul>
-<li><code>shuffleQuestions</code> : Set <code>true</code> to shuffle questions.</li>
-<li><code>shuffleOptions</code> : Set <code>true</code> to shuffle options.</li>
-</ul>
-</li>
-</ul>
-<h4 id="get-next-question-object_1">Get next question object<a class="headerlink" href="#get-next-question-object_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get next question object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">getNextQuestion</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Get next question object via question key
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">question</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">getNextQuestion</span><span class="p">(</span><span class="nx">questionKey</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h5 id="event_1">Event<a class="headerlink" href="#event_1" title="Permanent link">&para;</a></h5>
-<ul>
-<li>Fire <code>'quest'</code> when calling <code>questionManager.getNextQuestion()</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;quest&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span><span class="w"> </span><span class="nx">questionManager</span><span class="p">,</span><span class="w"> </span><span class="nx">quest</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// questionManager.getNextQuestion();</span>
-<span class="p">})</span>
+<li>Level-up when accumulating experience
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
+<span class="p">});</span>
 </code></pre></div><ul>
-<li><code>question</code> : Question object.<ul>
-<li><code>question.options</code> : Option objects of this question.</li>
+<li><code>level</code> : To next level</li>
+<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
+<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
 </ul>
 </li>
-<li><code>questionManager</code> : Question manager.</li>
-<li><code>quest</code> : Quest task.</li>
-</ul>
-</li>
-</ul>
-<h4 id="is-last-question_1">Is last question<a class="headerlink" href="#is-last-question_1" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">isLastQuestion</span><span class="p">();</span>
-</code></pre></div>
-<h4 id="restart-quest-task_1">Restart quest task<a class="headerlink" href="#restart-quest-task_1" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-</code></pre></div>
-<h4 id="private-data_1">Private data<a class="headerlink" href="#private-data_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get all data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Set value
-    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Increase value
-    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">incData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">inc</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Multiple value
-    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">mulData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">inc</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultValue</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Clear all data
-    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">clearData</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
-<h4 id="get-option_1">Get option<a class="headerlink" href="#get-option_1" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">getOption</span><span class="p">(</span><span class="nx">question</span><span class="p">,</span><span class="w"> </span><span class="nx">optionKey</span><span class="p">);</span>
-</code></pre></div>
-<ul>
-<li><code>question</code> : A question object, or a question key string, or <code>undefined</code> to get current question object.</li>
-<li><code>optionKey</code> : A option key string.</li>
 </ul>
 
 
