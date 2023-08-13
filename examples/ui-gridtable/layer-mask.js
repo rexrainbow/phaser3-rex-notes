@@ -68,11 +68,12 @@ class Demo extends Phaser.Scene {
                 cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
                 cellContainer.getElement('title').setFontSize(20).setText(item.title); // Set text of title object
                 cellContainer.getElement('text').setText(item.description); // Set text of text object               
-                cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
+                cellContainer.getElement('background').setRadius(0).setStrokeStyle(2, COLOR_DARK);
 
                 // Hide text and separator
                 cellContainer.hide(cellContainer.getElement('text'));
                 cellContainer.hide(cellContainer.getElement('separator'));
+                cellContainer.setDepth(0);
 
                 return cellContainer;
             },
