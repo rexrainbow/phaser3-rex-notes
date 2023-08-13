@@ -7716,6 +7716,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-warn" class="md-nav__link">
+    Layout warn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dirty" class="md-nav__link">
     Dirty
   </a>
@@ -9803,6 +9810,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#layout-warn" class="md-nav__link">
+    Layout warn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dirty" class="md-nav__link">
     Dirty
   </a>
@@ -10260,6 +10274,11 @@
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">).</span><span class="nx">layout</span><span class="p">()</span>
 </code></pre></div>
 </div>
+<h3 id="layout-warn">Layout warn<a class="headerlink" href="#layout-warn" title="Permanent link">&para;</a></h3>
+<p>It will print warn message if children size is larger then Minimum size by default.</p>
+<p>To disable this feature, invoke</p>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">enableLayoutWarn</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="dirty">Dirty<a class="headerlink" href="#dirty" title="Permanent link">&para;</a></h3>
 <p>Don't layout this sizer if <code>sizer.dirty</code> is <code>false</code>. i.e. Size of this sizer won't be changed, but won't layout children neither.</p>
 <p>Default value is <code>true</code>.</p>

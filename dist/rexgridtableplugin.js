@@ -2816,7 +2816,9 @@
         roundMode:
         - 0 : floor
         - 1 : ceil
-        - 2 : plus one if rowIdx is an integer, else floor
+        - 2 :             
+            - Default : floor
+            - Vary : plus one if rowIdx is an integer, else floor
         */
 
         if (height === 0) {
@@ -2827,19 +2829,12 @@
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
           switch (roundMode) {
-            case 0:
-              rowIdx = Math.floor(rowIdx);
-              break;
             case 1:
               rowIdx = Math.ceil(rowIdx);
               break;
             default:
-              // 2
-              if (Number.isInteger(rowIdx)) {
-                rowIdx += 1;
-              } else {
-                rowIdx = Math.floor(rowIdx);
-              }
+              // 0, 2
+              rowIdx = Math.floor(rowIdx);
               break;
           }
           return rowIdx;

@@ -13823,12 +13823,16 @@
     var minWidth = this.minWidth !== undefined ? this.minWidth : 0;
     if (width === undefined) {
       width = Math.max(minWidth, childrenWidth);
-      if (minWidth > 0 && childrenWidth > minWidth) {
-        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") < childrenWidth (").concat(childrenWidth, ")"));
+      if (this.layoutWarnEnable) {
+        if (minWidth > 0 && childrenWidth > minWidth) {
+          console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") < childrenWidth (").concat(childrenWidth, ")"));
+        }
       }
     } else {
-      if (minWidth > width || childrenWidth > width) {
-        console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width, ")"));
+      if (this.layoutWarnEnable) {
+        if (minWidth > width || childrenWidth > width) {
+          console.warn("Layout width warn: ".concat(this.constructor.name, "'s minWidth (").concat(minWidth, ") or childrenWidth (").concat(childrenWidth, " > targetWidth ").concat(width, ")"));
+        }
       }
     }
     return width;
@@ -13852,12 +13856,16 @@
     var minHeight = this.minHeight !== undefined ? this.minHeight : 0;
     if (height === undefined) {
       height = Math.max(minHeight, childrenHeight);
-      if (minHeight > 0 && childrenHeight > minHeight) {
-        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") < childrenHeight (").concat(childrenHeight, ")"));
+      if (this.layoutWarnEnable) {
+        if (minHeight > 0 && childrenHeight > minHeight) {
+          console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") < childrenHeight (").concat(childrenHeight, ")"));
+        }
       }
     } else {
-      if (minHeight > height || childrenHeight > height) {
-        console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") or childrenHeight (").concat(childrenHeight, ") > targetHeight (").concat(height, ")"));
+      if (this.layoutWarnEnable) {
+        if (minHeight > height || childrenHeight > height) {
+          console.warn("Layout height warn: ".concat(this.constructor.name, "'s minHeight (").concat(minHeight, ") or childrenHeight (").concat(childrenHeight, ") > targetHeight (").concat(height, ")"));
+        }
       }
     }
     return height;
@@ -20913,6 +20921,7 @@
       _this.sizerChildren = undefined; // [] or {}
       _this.childrenMap = {};
       _this.layoutedChildren = undefined;
+      _this.enableLayoutWarn();
       var anchorConfig = GetValue$M(config, 'anchor', undefined);
       if (anchorConfig) {
         _this.setAnchor(anchorConfig);
@@ -20991,6 +21000,15 @@
           enable = true;
         }
         this.sizerEventsEnable = enable;
+        return this;
+      }
+    }, {
+      key: "enableLayoutWarn",
+      value: function enableLayoutWarn(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.layoutWarnEnable = enable;
         return this;
       }
     }, {
