@@ -105,6 +105,16 @@ sizer.sendChildToBack(gameObject);
     sizer.setMinSize(width, height).layout()
     ```
 
+### Layout warn
+
+It will print warn message if children size is larger then Minimum size by default.
+
+To disable this feature, invoke
+
+```javascript
+sizer.enableLayoutWarn(false);
+```
+
 ### Dirty
 
 Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.

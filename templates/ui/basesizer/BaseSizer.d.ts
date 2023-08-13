@@ -132,6 +132,8 @@ declare class BaseSizer extends ContainerLite {
 
     layout(): this;
 
+    enableLayoutWarn(enable?: boolean): this;
+
     drawBounds(
         graphics: Phaser.GameObjects.Graphics,
         color?: number

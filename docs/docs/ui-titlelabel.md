@@ -114,6 +114,7 @@ var label = scene.rexUI.add.titleLabel({
         title: 0, titleLeft: 0, titleRight: 0,
         icon: 0, iconTop: 0, iconBottom: 0,
         text: 0, textLeft: 0, textRight: 0,
+        separator: 0, separatorLeft: 0, separatorRight: 0,
         actionTop: 0, actionBottom: 0,
     },
 

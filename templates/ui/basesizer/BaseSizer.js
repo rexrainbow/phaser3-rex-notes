@@ -19,6 +19,8 @@ class Base extends Container {
         this.childrenMap = {};
         this.layoutedChildren = undefined;
 
+        this.enableLayoutWarn();
+
         var anchorConfig = GetValue(config, 'anchor', undefined);
         if (anchorConfig) {
             this.setAnchor(anchorConfig);
@@ -98,6 +100,14 @@ class Base extends Container {
         }
 
         this.sizerEventsEnable = enable;
+        return this;
+    }
+
+    enableLayoutWarn(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.layoutWarnEnable = enable;
         return this;
     }
 
