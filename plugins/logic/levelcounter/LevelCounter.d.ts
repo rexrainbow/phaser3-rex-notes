@@ -25,6 +25,7 @@ declare class LevelCounter extends EventEmitter {
     setTable(table: LevelCounter.TableType): this;
 
     setMaxLevel(maxLevel?: number): this;
+    hasMaxLevel: boolean;
     maxLevel: number;
     maxExp: number;
 
@@ -36,7 +37,7 @@ declare class LevelCounter extends EventEmitter {
     getLevel(): number;
     getLevel(exp: number, level?: number): number;
 
-    getRequiredExpToNextLevel(level: number, exp: number): number;
+    getRequiredExpToNextLevel(level?: number, exp?: number): number;
 
     checkLevel(level: number, exp: number): boolean;
 

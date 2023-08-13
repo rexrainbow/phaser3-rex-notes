@@ -308,6 +308,7 @@ nav:
     - Achievements:       
         - CSV Achievements: achievements.md
         - YAML Achievements: ymlachievements.md
+    - Level counter: levelcounter.md
     - Quest: 
         - Quest: quest.md
         - Dialog-quest: dialog-quest.md

@@ -158,6 +158,12 @@ class LevelCounter extends EventEmitter {
     }
 
     getRequiredExpToNextLevel(level, exp) {
+        if (level === undefined) {
+            level = this.level;
+        }
+        if (exp === undefined) {
+            exp = this.exp;
+        }
         return this.getExp(level + 1) - exp;
     }
 
