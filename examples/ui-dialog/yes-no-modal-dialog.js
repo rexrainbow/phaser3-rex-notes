@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
         CreateDialog(this)
             .setPosition(400, 300)
             .layout()
-            .enableLayer()
+            // .enableLayer()
             .modalPromise({
                 // defaultBehavior: false,
                 manaulClose: true,

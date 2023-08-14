@@ -17,7 +17,7 @@ var CreateCover = function (gameObject, config) {
         if (gameObject.hasLayer()) {
             gameObject.addToRenderLayer(cover);
         }
-        gameObject.sendChildToBack(cover);
+        gameObject.moveDepthBelow(cover);
     } else {
         scene.children.moveBelow(cover, gameObject);
     }

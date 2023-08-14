@@ -585,6 +585,10 @@ Current children and new children will draw on this layer, instead of display li
     ```javascript
     var layer = container.privateRenderLayer;
     ```
+- Has layer game object
+    ```javascript
+    var hasLayer = container.hasLayer();
+    ```
 
 ### Mask
 
