@@ -1,8 +1,12 @@
 import GetLocalState from './utils/GetLocalState.js';
 
 export default {
+    hasLayer() {
+        return !!this.privateRenderLayer;
+    },
+
     enableLayer() {
-        if (this.privateRenderLayer) {
+        if (this.hasLayer()) {
             return this;
         }
 
@@ -19,7 +23,7 @@ export default {
     },
 
     getLayer() {
-        if (!this.privateRenderLayer) {
+        if (!this.hasLayer()) {
             this.enableLayer();
         }
 
@@ -28,7 +32,7 @@ export default {
 
     getRenderLayer() {
         // This containerLite has a layer
-        if (this.privateRenderLayer) {
+        if (this.hasLayer()) {
             return this.privateRenderLayer;
         }
 
