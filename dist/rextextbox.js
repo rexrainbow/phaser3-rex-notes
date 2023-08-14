@@ -8139,9 +8139,6 @@
         syncAlpha: false,
         syncScrollFactor: false
       });
-      if (gameObject.hasLayer()) {
-        gameObject.addToRenderLayer(cover);
-      }
       gameObject.moveDepthBelow(cover);
     } else {
       scene.children.moveBelow(cover, gameObject);
