@@ -12628,8 +12628,7 @@
     if (descending === undefined) {
       descending = false;
     }
-    var scene = gameObjects[0].scene;
-    var displayList = scene.sys.displayList;
+    var displayList = gameObjects[0].displayList;
     displayList.depthSort();
     if (descending) {
       gameObjects.sort(function (childA, childB) {
@@ -13055,8 +13054,11 @@
   };
 
   var Layer = {
+    hasLayer: function hasLayer() {
+      return !!this.privateRenderLayer;
+    },
     enableLayer: function enableLayer() {
-      if (this.privateRenderLayer) {
+      if (this.hasLayer()) {
         return this;
       }
       var layer = this.scene.add.layer();
@@ -13068,14 +13070,14 @@
       return this;
     },
     getLayer: function getLayer() {
-      if (!this.privateRenderLayer) {
+      if (!this.hasLayer()) {
         this.enableLayer();
       }
       return this.privateRenderLayer;
     },
     getRenderLayer: function getRenderLayer() {
       // This containerLite has a layer
-      if (this.privateRenderLayer) {
+      if (this.hasLayer()) {
         return this.privateRenderLayer;
       }
 

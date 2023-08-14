@@ -3012,8 +3012,7 @@
     if (descending === undefined) {
       descending = false;
     }
-    var scene = gameObjects[0].scene;
-    var displayList = scene.sys.displayList;
+    var displayList = gameObjects[0].displayList;
     displayList.depthSort();
     if (descending) {
       gameObjects.sort(function (childA, childB) {

@@ -1737,7 +1737,6 @@
 
     // Put cover behind game object
     if (gameObject.isRexContainerLite) {
-      gameObject.moveDepthBelow(cover);
       gameObject.pin(cover, {
         syncPosition: false,
         syncRotation: false,
@@ -1745,6 +1744,10 @@
         syncAlpha: false,
         syncScrollFactor: false
       });
+      if (gameObject.hasLayer()) {
+        gameObject.addToRenderLayer(cover);
+      }
+      gameObject.moveDepthBelow(cover);
     } else {
       scene.children.moveBelow(cover, gameObject);
     }
