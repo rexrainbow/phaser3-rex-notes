@@ -20,6 +20,7 @@ declare namespace Dialog {
             title?: number,
             titleLeft?: number,
             titleRight?: number,
+            titleTop?: number,
 
             content?: number,
             contentLeft?: number,
@@ -41,10 +42,10 @@ declare namespace Dialog {
             choicesBackgroundTop?: number,
             choicesBackgroundBottom?: number,
 
+            action?: number,
             actionsLeft?: number,
             actionsRight?: number,
-
-            action?: number,
+            actionsBottom?: number,
 
             toolbarItem?: number,
             leftToolbarItem?: number,

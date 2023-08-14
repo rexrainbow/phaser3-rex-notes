@@ -25035,7 +25035,8 @@
             padding = {
               right: GetValue$y(config, 'space.icon', 0),
               top: GetValue$y(config, 'space.iconTop', 0),
-              bottom: GetValue$y(config, 'space.iconBottom', 0)
+              bottom: GetValue$y(config, 'space.iconBottom', 0),
+              left: GetValue$y(config, 'space.iconLeft', 0)
             };
           }
         } else {
@@ -25043,7 +25044,8 @@
             padding = {
               bottom: GetValue$y(config, 'space.icon', 0),
               left: GetValue$y(config, 'space.iconLeft', 0),
-              right: GetValue$y(config, 'space.iconRight', 0)
+              right: GetValue$y(config, 'space.iconRight', 0),
+              top: GetValue$y(config, 'space.iconTop', 0)
             };
           }
         }
@@ -25095,12 +25097,14 @@
         if (_this.orientation === 0) {
           padding = {
             top: GetValue$y(config, 'space.actionTop', 0),
-            bottom: GetValue$y(config, 'space.actionBottom', 0)
+            bottom: GetValue$y(config, 'space.actionBottom', 0),
+            right: GetValue$y(config, 'space.actionRight', 0)
           };
         } else {
           padding = {
             left: GetValue$y(config, 'space.actionLeft', 0),
-            right: GetValue$y(config, 'space.actionRight', 0)
+            right: GetValue$y(config, 'space.actionRight', 0),
+            bottom: GetValue$y(config, 'space.actionBottom', 0)
           };
         }
         var fitRatio = GetValue$y(config, 'squareFitAction', false) ? 1 : 0;
@@ -25668,11 +25672,11 @@
         }
 
         // Add sizer to dialog
-        var titleSpace = GetValue$w(config, 'space.title', 0);
         var padding;
         if (content || description || choices || actions) {
           padding = {
-            bottom: titleSpace
+            bottom: GetValue$w(config, 'space.title', 0),
+            top: GetValue$w(config, 'space.titleTop', 0)
           };
         }
         var proportion = GetValue$w(config, 'proportion.title', 0);
@@ -25788,7 +25792,8 @@
         });
         var padding = {
           left: GetValue$w(config, 'space.actionsLeft', 0),
-          right: GetValue$w(config, 'space.actionsRight', 0)
+          right: GetValue$w(config, 'space.actionsRight', 0),
+          bottom: GetValue$w(config, 'space.actionsBottom', 0)
         };
         var proportion = GetValue$w(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
@@ -26810,13 +26815,15 @@
         padding = {
           right: GetValue$s(config, 'space.icon', 0),
           top: GetValue$s(config, 'space.iconTop', 0),
-          bottom: GetValue$s(config, 'space.iconBottom', 0)
+          bottom: GetValue$s(config, 'space.iconBottom', 0),
+          left: GetValue$s(config, 'space.iconLeft', 0)
         };
       } else {
         padding = {
           bottom: GetValue$s(config, 'space.icon', 0),
           left: GetValue$s(config, 'space.iconLeft', 0),
-          right: GetValue$s(config, 'space.iconRight', 0)
+          right: GetValue$s(config, 'space.iconRight', 0),
+          top: GetValue$s(config, 'space.iconTop', 0)
         };
       }
       var fitRatio = GetValue$s(config, 'squareFitIcon', false) ? 1 : 0;
@@ -26897,12 +26904,14 @@
       if (this.orientation === 0) {
         padding = {
           top: GetValue$s(config, 'space.actionTop', 0),
-          bottom: GetValue$s(config, 'space.actionBottom', 0)
+          bottom: GetValue$s(config, 'space.actionBottom', 0),
+          right: GetValue$s(config, 'space.actionRight', 0)
         };
       } else {
         padding = {
           left: GetValue$s(config, 'space.actionLeft', 0),
-          right: GetValue$s(config, 'space.actionRight', 0)
+          right: GetValue$s(config, 'space.actionRight', 0),
+          bottom: GetValue$s(config, 'space.actionBottom', 0)
         };
       }
       var fitRatio = GetValue$s(config, 'squareFitAction', false) ? 1 : 0;
@@ -27006,13 +27015,15 @@
         padding = {
           right: GetValue$r(config, 'space.icon', 0),
           top: GetValue$r(config, 'space.iconTop', 0),
-          bottom: GetValue$r(config, 'space.iconBottom', 0)
+          bottom: GetValue$r(config, 'space.iconBottom', 0),
+          left: GetValue$r(config, 'space.iconLeft', 0)
         };
       } else {
         padding = {
           bottom: GetValue$r(config, 'space.icon', 0),
           left: GetValue$r(config, 'space.iconLeft', 0),
-          right: GetValue$r(config, 'space.iconRight', 0)
+          right: GetValue$r(config, 'space.iconRight', 0),
+          top: GetValue$r(config, 'space.iconTop', 0)
         };
       }
       var fitRatio = GetValue$r(config, 'squareFitIcon', false) ? 1 : 0;
@@ -27065,12 +27076,14 @@
       if (innerSizer.orientation === 0) {
         padding = {
           top: GetValue$r(config, 'space.actionTop', 0),
-          bottom: GetValue$r(config, 'space.actionBottom', 0)
+          bottom: GetValue$r(config, 'space.actionBottom', 0),
+          right: GetValue$r(config, 'space.actionRight', 0)
         };
       } else {
         padding = {
           left: GetValue$r(config, 'space.actionLeft', 0),
-          right: GetValue$r(config, 'space.actionRight', 0)
+          right: GetValue$r(config, 'space.actionRight', 0),
+          bottom: GetValue$r(config, 'space.actionBottom', 0)
         };
       }
       var fitRatio = GetValue$r(config, 'squareFitAction', false) ? 1 : 0;

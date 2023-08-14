@@ -144,22 +144,23 @@ var dialog = scene.rexUI.add.dialog({
         title: 0,
         titleLeft: 0,
         titleRight: 0,
-        content: 0,
-        contentLeft: 0,
-        contentRight: 0,
-        description: 0,
-        descriptionLeft: 0,
-        descriptionRight: 0
-        choices: 0,
-        choicesLeft: 0,
-        choicesRight: 0,
-        actionsLeft: 0,
-        actionsRight: 0,
-
+        titleTop: 0,
+        
         toolbarItem: 0,
         leftToolbarItem: 0,
 
-        choice: 0,
+        content: 0,
+        contentLeft: 0,
+        contentRight: 0,
+
+        description: 0,
+        descriptionLeft: 0,
+        descriptionRight: 0
+
+        choices: 0,
+        choicesLeft: 0,
+        choicesRight: 0,
+
         // choiceLine: 0,   // Used when choicesType is `'wrap'`, `'wrap-radio'`, or `'wrap-checkboxes'`
         // choiceColumn: 0, // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
         // choiceRow: 0,    // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
@@ -169,6 +170,10 @@ var dialog = scene.rexUI.add.dialog({
         choicesBackgroundBottom: 0,
 
         action: 0,
+        actionsLeft: 0,
+        actionsRight: 0,
+        actionsBottom: 0,
+
     },
 
     proportion: {

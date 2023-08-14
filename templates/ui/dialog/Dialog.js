@@ -129,10 +129,12 @@ class Dialog extends Sizer {
             }
 
             // Add sizer to dialog
-            var titleSpace = GetValue(config, 'space.title', 0);
             var padding;
             if (content || description || choices || actions) {
-                padding = { bottom: titleSpace };
+                padding = {
+                    bottom: GetValue(config, 'space.title', 0),
+                    top: GetValue(config, 'space.titleTop', 0)
+                };
             }
             var proportion = GetValue(config, 'proportion.title', 0);
             this.add(
@@ -248,7 +250,8 @@ class Dialog extends Sizer {
             })
             var padding = {
                 left: GetValue(config, 'space.actionsLeft', 0),
-                right: GetValue(config, 'space.actionsRight', 0)
+                right: GetValue(config, 'space.actionsRight', 0),
+                bottom: GetValue(config, 'space.actionsBottom', 0),
             }
             var proportion = GetValue(config, 'proportion.action', 0);
             this.add(

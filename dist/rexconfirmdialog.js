@@ -14255,11 +14255,11 @@
         }
 
         // Add sizer to dialog
-        var titleSpace = GetValue$F(config, 'space.title', 0);
         var padding;
         if (content || description || choices || actions) {
           padding = {
-            bottom: titleSpace
+            bottom: GetValue$F(config, 'space.title', 0),
+            top: GetValue$F(config, 'space.titleTop', 0)
           };
         }
         var proportion = GetValue$F(config, 'proportion.title', 0);
@@ -14375,7 +14375,8 @@
         });
         var padding = {
           left: GetValue$F(config, 'space.actionsLeft', 0),
-          right: GetValue$F(config, 'space.actionsRight', 0)
+          right: GetValue$F(config, 'space.actionsRight', 0),
+          bottom: GetValue$F(config, 'space.actionsBottom', 0)
         };
         var proportion = GetValue$F(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
@@ -14913,7 +14914,8 @@
             padding = {
               right: GetValue$E(config, 'space.icon', 0),
               top: GetValue$E(config, 'space.iconTop', 0),
-              bottom: GetValue$E(config, 'space.iconBottom', 0)
+              bottom: GetValue$E(config, 'space.iconBottom', 0),
+              left: GetValue$E(config, 'space.iconLeft', 0)
             };
           }
         } else {
@@ -14921,7 +14923,8 @@
             padding = {
               bottom: GetValue$E(config, 'space.icon', 0),
               left: GetValue$E(config, 'space.iconLeft', 0),
-              right: GetValue$E(config, 'space.iconRight', 0)
+              right: GetValue$E(config, 'space.iconRight', 0),
+              top: GetValue$E(config, 'space.iconTop', 0)
             };
           }
         }
@@ -14973,12 +14976,14 @@
         if (_this.orientation === 0) {
           padding = {
             top: GetValue$E(config, 'space.actionTop', 0),
-            bottom: GetValue$E(config, 'space.actionBottom', 0)
+            bottom: GetValue$E(config, 'space.actionBottom', 0),
+            right: GetValue$E(config, 'space.actionRight', 0)
           };
         } else {
           padding = {
             left: GetValue$E(config, 'space.actionLeft', 0),
-            right: GetValue$E(config, 'space.actionRight', 0)
+            right: GetValue$E(config, 'space.actionRight', 0),
+            bottom: GetValue$E(config, 'space.actionBottom', 0)
           };
         }
         var fitRatio = GetValue$E(config, 'squareFitAction', false) ? 1 : 0;

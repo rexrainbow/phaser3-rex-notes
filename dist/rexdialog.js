@@ -14255,11 +14255,11 @@
         }
 
         // Add sizer to dialog
-        var titleSpace = GetValue(config, 'space.title', 0);
         var padding;
         if (content || description || choices || actions) {
           padding = {
-            bottom: titleSpace
+            bottom: GetValue(config, 'space.title', 0),
+            top: GetValue(config, 'space.titleTop', 0)
           };
         }
         var proportion = GetValue(config, 'proportion.title', 0);
@@ -14375,7 +14375,8 @@
         });
         var padding = {
           left: GetValue(config, 'space.actionsLeft', 0),
-          right: GetValue(config, 'space.actionsRight', 0)
+          right: GetValue(config, 'space.actionsRight', 0),
+          bottom: GetValue(config, 'space.actionsBottom', 0)
         };
         var proportion = GetValue(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
