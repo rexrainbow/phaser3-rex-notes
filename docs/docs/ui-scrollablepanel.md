@@ -10,6 +10,7 @@ A container with a panel, slider, and scroller.
 - [Scroll-able panel + grid sizer](https://codepen.io/rexrainbow/pen/YMyBom)
 - [Scroll-able panel + table by fix-width sizer](https://codepen.io/rexrainbow/pen/NWwymOO)
 - [Scroll-able panel + fix-width sizer](https://codepen.io/rexrainbow/pen/eYOdKBR)
+- [Scroll-able panel + built-in container](https://codepen.io/rexrainbow/pen/MWzNoyb)
 - [Dropdown, scrollable list](https://codepen.io/rexrainbow/pen/zYzVgZd)
 - [Add child](https://codepen.io/rexrainbow/pen/PopLRVm)
 - [Scroll to child](https://codepen.io/rexrainbow/pen/ZEmWwaN)
