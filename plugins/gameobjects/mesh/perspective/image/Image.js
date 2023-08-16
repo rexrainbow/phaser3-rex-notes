@@ -7,9 +7,6 @@ const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
-const FOV = 45;
-const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
-
 class Image extends MeshBase {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
@@ -25,7 +22,6 @@ class Image extends MeshBase {
         this.setSizeToFrame();
 
         this.resetPerspective();
-        this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
 
         var gridWidth = GetValue(config, 'gridWidth', 0);
@@ -54,7 +50,12 @@ class Image extends MeshBase {
     }
 
     resetPerspective() {
-        this.setPerspective(this.width, this.height, FOV);
+        this.setPerspective(this.width, this.height);
+
+        var vFOV = this.fov * (Math.PI / 180);
+        this.viewPosition.z = (this.height / this.frame.height) / (Math.tan(vFOV / 2));
+        this.dirtyCache[10] = 1;
+
         return this;
     }
 
