@@ -251,3 +251,15 @@ Support [postFX effects](shader-builtin.md)
 
 !!! note
     No preFX effect support
+
+### Compare with Plane game object
+
+- Size
+    - Size of [Plane](plane.md) is equal to current render size.
+    - Size of PerspectiveImage is equak to texture size, like normal [Image](image.md) game object.
+- Animation
+    - [Plane](plane.md) hae [animation](plane.md#animation) feature.  
+    - Useing [PerspectiveSprite](perspective-sprite.md) for animation feature, PerspectiveImage does not have this feature.
+- Checkerboard
+    - [Plane](plane.md) hae [checkerboard](plane.md#checkerboard) feature.
+    - PerspectiveImage does not have this feature.

@@ -14,39 +14,25 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.anims.create({
-            key: 'guardStart',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_start/frame', start: 0, end: 3, zeroPad: 4 }),
-            frameRate: 8
-        });
-
-        this.anims.create({
-            key: 'guard',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard/frame', start: 0, end: 5, zeroPad: 4 }),
-            frameRate: 8,
-            repeat: 2
-        });
-
-        this.anims.create({
-            key: 'guardEnd',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_end/frame', start: 0, end: 3, zeroPad: 4 }),
-            frameRate: 8
-        });
-
-        this.anims.create({
             key: 'idle',
             frames: this.anims.generateFrameNames('knight', { prefix: 'idle/frame', start: 0, end: 5, zeroPad: 4 }),
             frameRate: 8,
             repeat: -1
         });
 
-        var sprite = this.add.rexPerspectiveSprite(300, 300, 'knight', null, { hideCCW: false })
-            .setScale(2);
+        var sprite0 = this.add.sprite(200, 300, 'knight')
+        
+        var plane = this.add.plane(300, 300, 'knight')
+
+        var sprite = this.add.rexPerspectiveSprite(400, 300, 'knight', null, { hideCCW: false })
+
         this.input.once('pointerdown', function () {
+            sprite0.play('idle');
             sprite.play('idle');
+            plane.play('idle');
         })
 
         var image = this.add.rexPerspectiveImage(500, 300, 'knight', null, { hideCCW: false })
-            .setScale(2);
 
         this.input.on('pointermove', function (pointer) {
 
