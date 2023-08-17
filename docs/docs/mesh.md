@@ -173,11 +173,18 @@ Render a group of textured vertices and manipulate the view of those vertices, s
         - `y-` : Down
 - Rotation
     ```javascript
-    mesh.modelRotation.x = rotationX;
-    mesh.modelRotation.y = rotationY;
-    mesh.modelRotation.z = rotationZ;
+    mesh.modelRotation.x = radiansX;
+    mesh.modelRotation.y = radiansY;
+    mesh.modelRotation.z = radiansZ;
     ```
-    - `rotationX`, `rotationY`, `rotationZ` : Rotation angle in radians.
+    or
+    ```javascript
+    mesh.rotateX = degreesX;
+    mesh.rotateY = degreesY;
+    mesh.rotateZ = degreesZ;
+    ```
+    - `radiansX`, `radiansY`, `radiansZ` : Rotation angle in radians.
+    - `degreesX`, `degreesY`, `degreesZ` : Rotation angle in degrees.
 - Scale
     ```javascript
     mesh.modelScale.x = scaleX;

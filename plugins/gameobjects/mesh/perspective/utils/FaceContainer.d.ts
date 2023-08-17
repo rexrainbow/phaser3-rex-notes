@@ -12,12 +12,17 @@ export default class FaceContainer extends Container {
         faces: FacesTypes
     )
 
-    rotationX: number;
-    rotationY: number;
-    rotationZ: number;
+    rotationX: number;    
     angleX: number;
+    rotateX: number;  // Equal to angleX
+
+    rotationY: number;    
     angleY: number;
+    rotateY: number;  // Equal to angleY
+
+    rotationZ: number;    
     angleZ: number;
+    rotateZ: number;  // Equal to angleZ
 
     panX(value: number): this;
     panY(value: number): this;
