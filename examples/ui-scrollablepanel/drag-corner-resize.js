@@ -94,8 +94,8 @@ var CreatePanel = function (scene) {
 var AddDragCornerController = function (sizer) {
     var scene = sizer.scene;
 
-    var bottomRighterController = scene.add.rectangle(sizer.right, sizer.bottom, 30, 30);
-    var topLeftController = scene.add.rectangle(sizer.left, sizer.top, 30, 30);
+    var bottomRighterController = scene.add.rectangle(sizer.right, sizer.bottom, 30, 30, 0x333333);
+    var topLeftController = scene.add.rectangle(sizer.left, sizer.top, 30, 30, 0x333333);
 
     sizer.pin(bottomRighterController)
     sizer.pin(topLeftController)
