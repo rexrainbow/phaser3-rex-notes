@@ -18,6 +18,7 @@ A container with a panel, slider, and scroller.
 - [Destory](https://codepen.io/rexrainbow/pen/rNvKdqg)
 - [XY sliders](https://codepen.io/rexrainbow/pen/VwVVyYV)
 - [Min-width panel](https://codepen.io/rexrainbow/pen/JjeqGLb)
+- [Drag,resize panel](https://codepen.io/rexrainbow/pen/wvRvrzr)
 
 ## Usage
 
