@@ -23837,11 +23837,13 @@
           return '';
         }
         var lastPenEnd = lastPen.endIndex;
-        if (start === undefined) {
-          start = 0;
+        if (start === undefined || start === 0) {
+          // Image pen before first character
+          start = -1;
         }
-        if (end === undefined) {
-          end = lastPenEnd;
+        if (end === undefined || end === lastPenEnd) {
+          // Image pen after last character
+          end = lastPenEnd + 1;
         }
         if (wrap === undefined) {
           wrap = false;
@@ -23856,7 +23858,7 @@
         for (var i = 0, len = this.pens.length; i < len; i++) {
           pen = this.pens[i];
           penEndIdx = pen.endIndex;
-          if (penEndIdx <= start && start > 0) {
+          if (penEndIdx <= start) {
             continue;
           }
           pen = this.pens[i];
@@ -23873,7 +23875,7 @@
             txt += this.tagToText(penTxt, currentProp, previousProp);
           }
           previousProp = currentProp;
-          if (penEndIdx >= end && end < lastPenEnd) {
+          if (penEndIdx >= end) {
             break;
           }
         }
