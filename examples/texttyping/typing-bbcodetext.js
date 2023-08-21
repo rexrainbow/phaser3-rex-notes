@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         });
 
         this.input.on('pointerdown', function () {
-            txt.typing.start('Find the [img=key], open the door.');
+            txt.typing.start('[img=key] Find the [img=key], open the door. [img=key]');
         }, this);
 
         txt.typing.on('type', function () {

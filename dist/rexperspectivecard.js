@@ -11268,6 +11268,14 @@
       set: function set(value) {
         this.rotationX = DegToRad$1(value);
       }
+    }, {
+      key: "rotateX",
+      get: function get() {
+        return RadToDeg(this.rotationX);
+      },
+      set: function set(value) {
+        this.rotationX = DegToRad$1(value);
+      }
 
       // Override
     }, {
@@ -11289,6 +11297,14 @@
       set: function set(value) {
         this.rotationY = DegToRad$1(value);
       }
+    }, {
+      key: "rotateY",
+      get: function get() {
+        return RadToDeg(this.rotationY);
+      },
+      set: function set(value) {
+        this.rotationY = DegToRad$1(value);
+      }
 
       // Override
     }, {
@@ -11304,6 +11320,14 @@
       }
     }, {
       key: "angleZ",
+      get: function get() {
+        return RadToDeg(this.rotationZ);
+      },
+      set: function set(value) {
+        this.rotationZ = DegToRad$1(value);
+      }
+    }, {
+      key: "rotateZ",
       get: function get() {
         return RadToDeg(this.rotationZ);
       },

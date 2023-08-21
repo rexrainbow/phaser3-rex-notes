@@ -5,7 +5,7 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-var content = 'Find the [img=key], open the door.'
+var content = '[img=key] Find the [img=key], open the door. [img=key]'
 
 class Demo extends Phaser.Scene {
     constructor() {

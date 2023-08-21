@@ -215,16 +215,18 @@ class PenManager {
     }
 
     getSliceTagText(start, end, wrap) {
+        var lastPen = this.lastPen;
+        if (lastPen == null) {
+            return '';
+        }
+        var lastPenEnd = lastPen.endIndex;
+
         if (start === undefined) {
             start = 0;
         }
-        if (end === undefined) {
-            var lastPen = this.lastPen;
-            if (lastPen == null) {
-                return "";
-            }
 
-            end = lastPen.endIndex;
+        if (end === undefined) {
+            end = lastPenEnd;
         }
         if (wrap === undefined) {
             wrap = false;
@@ -237,7 +239,7 @@ class PenManager {
         for (var i = 0, len = this.pens.length; i < len; i++) {
             pen = this.pens[i];
             penEndIdx = pen.endIndex;
-            if (penEndIdx <= start) {
+            if ((penEndIdx <= start) && (start > 0)) {
                 continue;
             }
             pen = this.pens[i];
@@ -257,7 +259,7 @@ class PenManager {
             }
 
             previousProp = currentProp;
-            if (penEndIdx >= end) {
+            if ((penEndIdx >= end) && (end < lastPenEnd)) {
                 break;
             }
         }
