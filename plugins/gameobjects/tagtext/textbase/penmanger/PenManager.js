@@ -240,6 +240,7 @@ class PenManager {
             pen = this.pens[i];
             penEndIdx = pen.endIndex;
             if ((penEndIdx <= start) && (start > 0)) {
+                // Image pen before first character
                 continue;
             }
             pen = this.pens[i];
@@ -260,6 +261,7 @@ class PenManager {
 
             previousProp = currentProp;
             if ((penEndIdx >= end) && (end < lastPenEnd)) {
+                // Image pen after last character
                 break;
             }
         }
