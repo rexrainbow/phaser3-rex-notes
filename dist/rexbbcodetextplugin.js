@@ -3445,17 +3445,33 @@
     }, {
       key: "getWrappedText",
       value: function getWrappedText(text, start, end) {
+        if (typeof text === 'number') {
+          end = start;
+          start = text;
+          text = undefined;
+        }
         text = this.canvasText.getText(text, start, end, true);
         return text.split(SPLITREGEXP);
       }
     }, {
       key: "getPlainText",
       value: function getPlainText(text, start, end) {
+        if (typeof text === 'number') {
+          end = start;
+          start = text;
+          text = undefined;
+        }
         return this.canvasText.getPlainText(text, start, end);
       }
     }, {
       key: "getText",
       value: function getText(text, start, end, wrap) {
+        if (typeof text === 'number') {
+          wrap = end;
+          end = start;
+          start = text;
+          text = undefined;
+        }
         if (wrap === undefined) {
           wrap = false;
         }
@@ -3464,6 +3480,11 @@
     }, {
       key: "getSubString",
       value: function getSubString(text, start, end) {
+        if (typeof text === 'number') {
+          end = start;
+          start = text;
+          text = undefined;
+        }
         return this.getText(text, start, end);
       }
     }, {

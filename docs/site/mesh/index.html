@@ -9901,11 +9901,17 @@
 </ul>
 </li>
 <li>Rotation
-    <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rotationX</span><span class="p">;</span>
-<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rotationY</span><span class="p">;</span>
-<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rotationZ</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">radiansX</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">radiansY</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">radiansZ</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">rotateX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">degreesX</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">rotateY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">degreesY</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">rotateZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">degreesZ</span><span class="p">;</span>
 </code></pre></div><ul>
-<li><code>rotationX</code>, <code>rotationY</code>, <code>rotationZ</code> : Rotation angle in radians.</li>
+<li><code>radiansX</code>, <code>radiansY</code>, <code>radiansZ</code> : Rotation angle in radians.</li>
+<li><code>degreesX</code>, <code>degreesY</code>, <code>degreesZ</code> : Rotation angle in degrees.</li>
 </ul>
 </li>
 <li>Scale
