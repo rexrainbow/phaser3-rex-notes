@@ -347,6 +347,10 @@ var txt = scene.make.rexTagText({
     ```javascript
     var plainText = txt.getPlainText();
     ```
+- Get sub-string
+    ```javascript
+    var text = txt.getText(start, end);
+    ```
 - Set
     ```javascript
     txt.setText('<class="name1">wor</class>ld');

@@ -68,16 +68,32 @@ declare class Text extends CanvasGameObjectBase {
         text: string | number | string[],
         addCR?: boolean
     ): this;
+
+    getPlainText(
+        start?: number, end?: number
+    ): string;
     getPlainText(
         text?: string | undefined,
+        start?: number, end?: number
+    ): string;
+
+    getWrappedText(
         start?: number, end?: number
     ): string;
     getWrappedText(
         text?: string | undefined,
         start?: number, end?: number
     ): string;
+
+    getText(
+        start?: number, end?: number
+    ): string;
     getText(
         text?: string | undefined,
+        start?: number, end?: number
+    ): string;
+
+    getSubString(
         start?: number, end?: number
     ): string;
     getSubString(

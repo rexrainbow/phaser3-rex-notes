@@ -465,15 +465,31 @@ class Text extends TextBase {
     }
 
     getWrappedText(text, start, end) {
+        if (typeof (text) === 'number') {
+            end = start;
+            start = text;
+            text = undefined;
+        }
         text = this.canvasText.getText(text, start, end, true);
         return text.split(SPLITREGEXP);
     }
 
     getPlainText(text, start, end) {
+        if (typeof (text) === 'number') {
+            end = start;
+            start = text;
+            text = undefined;
+        }
         return this.canvasText.getPlainText(text, start, end);
     }
 
     getText(text, start, end, wrap) {
+        if (typeof (text) === 'number') {
+            wrap = end;
+            end = start;
+            start = text;
+            text = undefined;
+        }
         if (wrap === undefined) {
             wrap = false;
         }
@@ -481,6 +497,11 @@ class Text extends TextBase {
     }
 
     getSubString(text, start, end) {
+        if (typeof (text) === 'number') {
+            end = start;
+            start = text;
+            text = undefined;
+        }
         return this.getText(text, start, end);
     }
 

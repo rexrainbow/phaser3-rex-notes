@@ -345,6 +345,10 @@ var txt = scene.make.rexBBCodeText({
     ```javascript
     var plainText = txt.getPlainText();
     ```
+- Get sub-string
+    ```javascript
+    var text = txt.getText(start, end);
+    ```
 - Set
     ```javascript
     txt.setText('[b]h[/b]ello');

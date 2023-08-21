@@ -51,7 +51,7 @@ B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]
         });
         console.log(text.getWrappedText());
         console.log(text.getPlainText());
-        console.log(text.getText(undefined, 1, 4));
+        console.log(text.getText(1, 4));
 
         this.input.once('pointerdown', function () {
             // Change size of image
