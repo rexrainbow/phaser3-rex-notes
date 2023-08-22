@@ -102,7 +102,8 @@ var panel = scene.rexUI.add.scrollablePanel({
         mask: {
             padding: 0, // or {left, right, top, bottom}
             // updateMode: 0,
-        }
+        },
+        // enableLayer: false,
     }.
 
     slider: {

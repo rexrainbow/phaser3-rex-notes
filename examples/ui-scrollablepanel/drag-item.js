@@ -79,6 +79,7 @@ class Demo extends Phaser.Scene {
                     // Create a new game object for dragging
                     var dragObject = this.add.image(icon.x, icon.y, '');
                     dragObject.setTexture(item.textureKey).setTint(item.color);
+                    // Force dragging
                     dragObject.drag = this.plugins.get('rexDrag').add(dragObject).drag()
 
                     // icon has be removed, set it to invisible
