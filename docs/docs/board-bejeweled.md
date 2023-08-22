@@ -387,7 +387,7 @@ bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
 
 ##### Custom Eliminating Action
 
-Default fliminating action:
+Default eliminating action:
 
 ```javascript
 function (chessArray, board, bejeweled) {

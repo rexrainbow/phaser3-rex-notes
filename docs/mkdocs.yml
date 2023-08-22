@@ -501,10 +501,6 @@ site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/
 repo_name: 'phaser3-rex-notes'
 repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes/'
 
-extra_javascript:
-- js/mermaid/mermaid.min.js
-- js/umlconvert.js
-
 extra:
     analytics:
         provider: google
@@ -556,9 +552,10 @@ markdown_extensions:
 - pymdownx.mark
 - pymdownx.smartsymbols
 - pymdownx.superfences:
-    custom_fences: [
-       {name: mermaid, class: mermaid}
-    ]
+    custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 - pymdownx.tasklist
 - pymdownx.tilde
 
