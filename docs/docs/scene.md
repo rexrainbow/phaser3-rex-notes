@@ -170,7 +170,7 @@ graph TB
 
 subgraph Stop
 SceneEventDestroy>"scene.events: destroy"]
-Stop["Shutdown<br>Free game objects"]
+Shutdown["Shutdown<br>Free game objects"]
 end
 
 subgraph Update
@@ -202,9 +202,9 @@ SceneEventResumeWake --> SceneUpdate
 
 SceneUpdate --> |"scene.scene.stop()<br>scene.scene.restart()"|Stop
 Pause --> |"scene.scene.stop()<br>scene.scene.restart()"|SceneEventDestroy
-SceneEventDestroy --> Stop
+SceneEventDestroy --> Shutdown
 
-Stop --> |"scene.scene.start()<br>scene.scene.launch()<br>scene.scene.restart()"|SceneEventStart
+Shutdown --> |"scene.scene.start()<br>scene.scene.launch()<br>scene.scene.restart()"|SceneEventStart
 ```
 
 - `Run` : Update and render
