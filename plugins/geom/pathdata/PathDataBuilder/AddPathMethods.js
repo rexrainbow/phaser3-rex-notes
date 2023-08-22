@@ -121,6 +121,13 @@ export default {
     },
 
     close() {
+        // Line to first point        
+        var startX = this.pathData[0],
+            startY = this.pathData[1];
+        if ((startX !== this.lastPointX) || (startY !== this.lastPointY)) {
+            this.lineTo(startX, startY);
+        }
+
         this.closePath = true;
         return this;
     },

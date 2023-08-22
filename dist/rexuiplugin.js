@@ -1453,7 +1453,7 @@
   }();
   Object.assign(Base$3.prototype, DataMethods$2);
 
-  var DegToRad$f = Phaser.Math.DegToRad;
+  var DegToRad$g = Phaser.Math.DegToRad;
   var RadToDeg$9 = Phaser.Math.RadToDeg;
   var GetValue$3l = Phaser.Utils.Objects.GetValue;
   var RenderBase$1 = /*#__PURE__*/function (_Base) {
@@ -1527,7 +1527,7 @@
         return RadToDeg$9(this.rotation);
       },
       set: function set(value) {
-        this.rotation = DegToRad$f(value);
+        this.rotation = DegToRad$g(value);
       }
     }, {
       key: "setAngle",
@@ -2260,7 +2260,7 @@
     return pathData;
   };
 
-  var DegToRad$e = Phaser.Math.DegToRad;
+  var DegToRad$f = Phaser.Math.DegToRad;
   var ArcTo$1 = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -2269,8 +2269,8 @@
       endAngle += 360;
     }
     var deltaAngle = endAngle - startAngle;
-    var step = DegToRad$e(deltaAngle) / iteration;
-    startAngle = DegToRad$e(startAngle);
+    var step = DegToRad$f(deltaAngle) / iteration;
+    startAngle = DegToRad$f(startAngle);
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
@@ -3280,7 +3280,7 @@
     }
   };
 
-  var DegToRad$d = Phaser.Math.DegToRad;
+  var DegToRad$e = Phaser.Math.DegToRad;
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle$3(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -3388,8 +3388,8 @@
     } else if (!antiClockWise && endAngle < startAngle) {
       endAngle += 360;
     }
-    startAngle = DegToRad$d(startAngle);
-    endAngle = DegToRad$d(endAngle);
+    startAngle = DegToRad$e(startAngle);
+    endAngle = DegToRad$e(endAngle);
     if (iteration == null) {
       // undefined, or null
       context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle, antiClockWise);
@@ -7692,7 +7692,7 @@
   };
   Object.assign(Methods$i, RenderMethods);
 
-  var DegToRad$c = Phaser.Math.DegToRad;
+  var DegToRad$d = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
   var GetValue$39 = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
@@ -7807,7 +7807,7 @@
         return RadToDeg$8(this._rotation);
       },
       set: function set(value) {
-        this.rotation = DegToRad$c(value);
+        this.rotation = DegToRad$d(value);
       }
     }, {
       key: "setAngle",
@@ -17837,11 +17837,11 @@
     (_this$cameraTarget = this.cameraTarget).zoomTo.apply(_this$cameraTarget, _toConsumableArray(params));
   };
 
-  var DegToRad$b = Phaser.Math.DegToRad;
+  var DegToRad$c = Phaser.Math.DegToRad;
   var OnParseRotateCameraTag = function OnParseRotateCameraTag(textPlayer, parser, config) {
     var tagName = 'camera.rotate';
     parser.on("+".concat(tagName), function (value) {
-      value = DegToRad$b(value);
+      value = DegToRad$c(value);
       AppendCommand$3.call(textPlayer, tagName,
       // name
       Rotate$1,
@@ -17853,7 +17853,7 @@
 
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
-      value = DegToRad$b(value);
+      value = DegToRad$c(value);
       AppendCommand$3.call(textPlayer, 'camera.rotate.to',
       // name
       RotateTo,
@@ -21853,7 +21853,7 @@
     return PathBase;
   }(BaseGeom);
 
-  var DegToRad$a = Phaser.Math.DegToRad;
+  var DegToRad$b = Phaser.Math.DegToRad;
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
     var _super = _createSuper(Arc);
@@ -22031,6 +22031,7 @@
         if (this.pie) {
           this.pathData.push(this.x, this.y);
         }
+        // Close
         this.pathData.push(this.pathData[0], this.pathData[1]);
         _get(_getPrototypeOf(Arc.prototype), "updateData", this).call(this);
         return this;
@@ -22041,8 +22042,8 @@
         ctx.beginPath();
         var x = this.x - dx,
           y = this.y - dy,
-          startAngle = DegToRad$a(this.startAngle),
-          endAngle = DegToRad$a(this.endAngle);
+          startAngle = DegToRad$b(this.startAngle),
+          endAngle = DegToRad$b(this.endAngle);
         if (this.pie) {
           ctx.moveTo(x, y);
           ctx.lineTo(x + Math.cos(startAngle) * this.radiusX, y + Math.sin(startAngle) * this.radiusY);
@@ -22358,6 +22359,12 @@
       return this;
     },
     close: function close() {
+      // Line to first point        
+      var startX = this.pathData[0],
+        startY = this.pathData[1];
+      if (startX !== this.lastPointX || startY !== this.lastPointY) {
+        this.lineTo(startX, startY);
+      }
       this.closePath = true;
       return this;
     },
@@ -22405,14 +22412,14 @@
     return pathData;
   };
 
-  var DegToRad$9 = Phaser.Math.DegToRad;
+  var DegToRad$a = Phaser.Math.DegToRad;
   var PointRotateAround = Phaser.Math.RotateAround;
   var TransformPointsMethods = {
     rotateAround: function rotateAround(centerX, centerY, angle) {
       if (this.pathData.length === 0) {
         return this;
       }
-      angle = DegToRad$9(angle);
+      angle = DegToRad$a(angle);
       RotateAround$6(centerX, centerY, angle, this.pathData);
       var pathDataCnt = this.pathData.length;
       this.lastPointX = this.pathData[pathDataCnt - 2];
@@ -24706,47 +24713,69 @@
   }
 
   var RadToDeg$7 = Phaser.Math.RadToDeg;
+  var DegToRad$9 = Phaser.Math.DegToRad;
+  var FillArc = function FillArc(shape, x, y, outerRadius, innerRadius, startAngle, endAngle, anticlockwise) {
+    var isCircle = Math.abs(endAngle - startAngle) === 360;
+    var radStartAngle = DegToRad$9(startAngle),
+      radEndAngle = DegToRad$9(endAngle);
+    var cosStartAngle = Math.cos(radStartAngle),
+      sinStartAngle = Math.sin(radStartAngle),
+      cosEndAngle = Math.cos(radEndAngle),
+      sinEndAngle = Math.sin(radEndAngle);
+    shape.startAt(x + cosStartAngle * outerRadius, y + sinStartAngle * outerRadius);
+    shape.arc(x, y, outerRadius, startAngle, endAngle, anticlockwise);
+    if (isCircle && innerRadius === 0) ; else {
+      shape.lineTo(x + cosEndAngle * innerRadius, y + sinEndAngle * innerRadius);
+      if (innerRadius > 0) {
+        shape.arc(x, y, innerRadius, endAngle, startAngle, !anticlockwise);
+      }
+    }
+    shape.close();
+    return shape;
+  };
   var ShapesUpdateMethods$2 = {
     buildShapes: function buildShapes() {
-      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+      this.addShape(new Lines().setName('track')).addShape(new Lines().setName('bar')).addShape(new Circle().setName('center'));
     },
     updateShapes: function updateShapes() {
       var x = this.radius;
-      var lineWidth = this.thickness * this.radius;
-      var barRadius = this.radius - lineWidth / 2;
-      var centerRadius = this.radius - lineWidth;
+      var barWidth = this.thickness * this.radius;
+      var barOuterRadius = this.radius;
+      var barInnerRadius = barOuterRadius - barWidth;
 
       // Track shape
       var trackShape = this.getShape('track');
-      if (this.trackColor != null && lineWidth > 0) {
-        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
+      if (this.trackColor != null && this.thickness > 0) {
+        trackShape.fillStyle(this.trackColor);
+        FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
       } else {
         trackShape.reset();
       }
 
       // Bar shape
       var barShape = this.getShape('bar');
-      if (this.barColor != null && barRadius > 0) {
+      if (this.barColor != null && this.thickness > 0) {
         var anticlockwise, startAngle, endAngle;
         if (this.value === 1) {
           anticlockwise = false;
           startAngle = 0;
-          endAngle = 361; // overshoot 1
+          endAngle = 360;
         } else {
           anticlockwise = this.anticlockwise;
           startAngle = RadToDeg$7(this.startAngle);
           var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
           endAngle = deltaAngle + startAngle;
         }
-        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+        barShape.fillStyle(this.barColor);
+        FillArc(barShape, x, x, barOuterRadius, barInnerRadius, startAngle, endAngle, false);
       } else {
         barShape.reset();
       }
 
       // Center shape
       var centerShape = this.getShape('center');
-      if (this.centerColor && centerRadius > 0) {
-        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      if (this.centerColor && barInnerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(barInnerRadius).fillStyle(this.centerColor);
       } else {
         centerShape.reset();
       }

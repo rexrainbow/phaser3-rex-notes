@@ -1726,7 +1726,7 @@
     return pathData;
   };
 
-  var DegToRad$2 = Phaser.Math.DegToRad;
+  var DegToRad$3 = Phaser.Math.DegToRad;
   var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -1735,8 +1735,8 @@
       endAngle += 360;
     }
     var deltaAngle = endAngle - startAngle;
-    var step = DegToRad$2(deltaAngle) / iteration;
-    startAngle = DegToRad$2(startAngle);
+    var step = DegToRad$3(deltaAngle) / iteration;
+    startAngle = DegToRad$3(startAngle);
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
@@ -1746,7 +1746,7 @@
     return pathData;
   };
 
-  var DegToRad$1 = Phaser.Math.DegToRad;
+  var DegToRad$2 = Phaser.Math.DegToRad;
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
     var _super = _createSuper(Arc);
@@ -1924,6 +1924,7 @@
         if (this.pie) {
           this.pathData.push(this.x, this.y);
         }
+        // Close
         this.pathData.push(this.pathData[0], this.pathData[1]);
         _get(_getPrototypeOf(Arc.prototype), "updateData", this).call(this);
         return this;
@@ -1934,8 +1935,8 @@
         ctx.beginPath();
         var x = this.x - dx,
           y = this.y - dy,
-          startAngle = DegToRad$1(this.startAngle),
-          endAngle = DegToRad$1(this.endAngle);
+          startAngle = DegToRad$2(this.startAngle),
+          endAngle = DegToRad$2(this.endAngle);
         if (this.pie) {
           ctx.moveTo(x, y);
           ctx.lineTo(x + Math.cos(startAngle) * this.radiusX, y + Math.sin(startAngle) * this.radiusY);
@@ -2097,6 +2098,12 @@
       return this;
     },
     close: function close() {
+      // Line to first point        
+      var startX = this.pathData[0],
+        startY = this.pathData[1];
+      if (startX !== this.lastPointX || startY !== this.lastPointY) {
+        this.lineTo(startX, startY);
+      }
       this.closePath = true;
       return this;
     },
@@ -2144,14 +2151,14 @@
     return pathData;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
+  var DegToRad$1 = Phaser.Math.DegToRad;
   var PointRotateAround = Phaser.Math.RotateAround;
   var TransformPointsMethods = {
     rotateAround: function rotateAround(centerX, centerY, angle) {
       if (this.pathData.length === 0) {
         return this;
       }
-      angle = DegToRad(angle);
+      angle = DegToRad$1(angle);
       RotateAround(centerX, centerY, angle, this.pathData);
       var pathDataCnt = this.pathData.length;
       this.lastPointX = this.pathData[pathDataCnt - 2];
@@ -2419,6 +2426,181 @@
   }();
   Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
+  var Lines = /*#__PURE__*/function (_PathBase) {
+    _inherits(Lines, _PathBase);
+    var _super = _createSuper(Lines);
+    function Lines() {
+      var _this;
+      _classCallCheck(this, Lines);
+      _this = _super.call(this);
+      _this.builder = new PathDataBuilder(_this.pathData);
+      return _this;
+    }
+    _createClass(Lines, [{
+      key: "iterations",
+      get: function get() {
+        return this.builder.iterations;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this.builder.iterations !== value;
+        this.builder.setIterations(value);
+      }
+    }, {
+      key: "setIterations",
+      value: function setIterations(iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "lastPointX",
+      get: function get() {
+        return this.builder.lastPointX;
+      }
+    }, {
+      key: "lastPointY",
+      get: function get() {
+        return this.builder.lastPointY;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.builder.start();
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "startAt",
+      value: function startAt(x, y) {
+        this.builder.startAt(x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "lineTo",
+      value: function lineTo(x, y, relative) {
+        this.builder.lineTo(x, y, relative);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "verticalLineTo",
+      value: function verticalLineTo(x, relative) {
+        this.builder.verticalLineTo(x, relative);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "horizontalLineTo",
+      value: function horizontalLineTo(y, relative) {
+        this.builder.horizontalLineTo(y, relative);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "ellipticalArc",
+      value: function ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+        this.builder.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "arc",
+      value: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+        this.builder.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "quadraticBezierTo",
+      value: function quadraticBezierTo(cx, cy, x, y) {
+        this.builder.quadraticBezierTo(cx, cy, x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "smoothQuadraticBezierTo",
+      value: function smoothQuadraticBezierTo(x, y) {
+        this.builder.smoothQuadraticBezierTo(x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "cubicBezierCurveTo",
+      value: function cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
+        this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "smoothCubicBezierCurveTo",
+      value: function smoothCubicBezierCurveTo(cx1, cy1, x, y) {
+        this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.builder.close();
+        this.closePath = this.builder.closePath;
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "end",
+      value: function end() {
+        this.builder.end();
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "rotateAround",
+      value: function rotateAround(centerX, centerY, angle) {
+        this.builder.rotateAround(centerX, centerY, angle);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "scale",
+      value: function scale(centerX, centerY, scaleX, scaleY) {
+        this.builder.scale(centerX, centerY, scaleX, scaleY);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "offset",
+      value: function offset(x, y) {
+        this.builder.offset(x, y);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "toPolygon",
+      value: function toPolygon(polygon) {
+        return this.builder.toPolygon(polygon);
+      }
+    }, {
+      key: "appendPathFrom",
+      value: function appendPathFrom(src, startT, endT) {
+        this.builder.appendFromPathSegment(src.builder, startT, endT);
+        return this;
+      }
+    }, {
+      key: "copyPathFrom",
+      value: function copyPathFrom(src, startT, endT) {
+        this.builder.clear().appendFromPathSegment(src.builder, startT, endT);
+        return this;
+      }
+    }, {
+      key: "setDisplayPathSegment",
+      value: function setDisplayPathSegment(startT, endT) {
+        this.builder.setDisplayPathSegment(startT, endT);
+        return this;
+      }
+    }]);
+    return Lines;
+  }(PathBase);
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   Phaser.Utils.Objects.GetValue;
@@ -2426,47 +2608,69 @@
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var RadToDeg = Phaser.Math.RadToDeg;
+  var DegToRad = Phaser.Math.DegToRad;
+  var FillArc = function FillArc(shape, x, y, outerRadius, innerRadius, startAngle, endAngle, anticlockwise) {
+    var isCircle = Math.abs(endAngle - startAngle) === 360;
+    var radStartAngle = DegToRad(startAngle),
+      radEndAngle = DegToRad(endAngle);
+    var cosStartAngle = Math.cos(radStartAngle),
+      sinStartAngle = Math.sin(radStartAngle),
+      cosEndAngle = Math.cos(radEndAngle),
+      sinEndAngle = Math.sin(radEndAngle);
+    shape.startAt(x + cosStartAngle * outerRadius, y + sinStartAngle * outerRadius);
+    shape.arc(x, y, outerRadius, startAngle, endAngle, anticlockwise);
+    if (isCircle && innerRadius === 0) ; else {
+      shape.lineTo(x + cosEndAngle * innerRadius, y + sinEndAngle * innerRadius);
+      if (innerRadius > 0) {
+        shape.arc(x, y, innerRadius, endAngle, startAngle, !anticlockwise);
+      }
+    }
+    shape.close();
+    return shape;
+  };
   var ShapesUpdateMethods = {
     buildShapes: function buildShapes() {
-      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+      this.addShape(new Lines().setName('track')).addShape(new Lines().setName('bar')).addShape(new Circle().setName('center'));
     },
     updateShapes: function updateShapes() {
       var x = this.radius;
-      var lineWidth = this.thickness * this.radius;
-      var barRadius = this.radius - lineWidth / 2;
-      var centerRadius = this.radius - lineWidth;
+      var barWidth = this.thickness * this.radius;
+      var barOuterRadius = this.radius;
+      var barInnerRadius = barOuterRadius - barWidth;
 
       // Track shape
       var trackShape = this.getShape('track');
-      if (this.trackColor != null && lineWidth > 0) {
-        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
+      if (this.trackColor != null && this.thickness > 0) {
+        trackShape.fillStyle(this.trackColor);
+        FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
       } else {
         trackShape.reset();
       }
 
       // Bar shape
       var barShape = this.getShape('bar');
-      if (this.barColor != null && barRadius > 0) {
+      if (this.barColor != null && this.thickness > 0) {
         var anticlockwise, startAngle, endAngle;
         if (this.value === 1) {
           anticlockwise = false;
           startAngle = 0;
-          endAngle = 361; // overshoot 1
+          endAngle = 360;
         } else {
           anticlockwise = this.anticlockwise;
           startAngle = RadToDeg(this.startAngle);
           var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
           endAngle = deltaAngle + startAngle;
         }
-        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+        barShape.fillStyle(this.barColor);
+        FillArc(barShape, x, x, barOuterRadius, barInnerRadius, startAngle, endAngle, false);
       } else {
         barShape.reset();
       }
 
       // Center shape
       var centerShape = this.getShape('center');
-      if (this.centerColor && centerRadius > 0) {
-        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      if (this.centerColor && barInnerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(barInnerRadius).fillStyle(this.centerColor);
       } else {
         centerShape.reset();
       }

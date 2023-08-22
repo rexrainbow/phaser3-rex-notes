@@ -18,21 +18,15 @@ class Demo extends Phaser.Scene {
         var progressBar = this.add.rexCircularProgress({
             x: 400,
             y: 300,
-            radius: 60,
+            radius: 100,
 
-            barColor: 0x00ff00,
-            trackColor: 0x0000ff,
-            centerColor: undefined,
+            trackColor: COLOR_DARK,
+            barColor: COLOR_LIGHT,
+            centerColor: COLOR_PRIMARY,
             thickness: 1,
-            startAngle: Phaser.Math.DegToRad(270), // straight line if reduced by 4
             anticlockwise: false,
 
             value: 0.75,
-            easeValue: {
-                duration: 500,
-                ease: "Linear"
-            },
-            valuechangeCallback: function (newValue, oldValue, circularProgress) { },
         })
             .setAlpha(0.5)
 

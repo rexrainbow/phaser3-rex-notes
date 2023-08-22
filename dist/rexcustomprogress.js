@@ -958,6 +958,7 @@
         if (this.pie) {
           this.pathData.push(this.x, this.y);
         }
+        // Close
         this.pathData.push(this.pathData[0], this.pathData[1]);
         _get(_getPrototypeOf(Arc.prototype), "updateData", this).call(this);
         return this;
@@ -1285,6 +1286,12 @@
       return this;
     },
     close: function close() {
+      // Line to first point        
+      var startX = this.pathData[0],
+        startY = this.pathData[1];
+      if (startX !== this.lastPointX || startY !== this.lastPointY) {
+        this.lineTo(startX, startY);
+      }
       this.closePath = true;
       return this;
     },

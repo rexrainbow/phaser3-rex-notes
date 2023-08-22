@@ -8,6 +8,7 @@ Circular progress bar shape.
 ## Live demos
 
 - [Circular-progress](https://codepen.io/rexrainbow/pen/ZELGmrE)
+- [Pie bar](https://codepen.io/rexrainbow/pen/mdayvRV)
 
 ## Usage
 
