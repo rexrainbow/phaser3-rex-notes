@@ -316,7 +316,7 @@ declare class ContainerLite extends Base {
     ): this;
 
     addToScene(
-        scene: Phaser.Scene
+        scene?: Phaser.Scene
     ): this;
 
     removeFromContainer(): this;
