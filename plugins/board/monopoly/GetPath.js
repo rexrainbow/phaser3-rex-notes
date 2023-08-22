@@ -19,11 +19,10 @@ var GetPath = function (movingPoints, out) {
         if (nextTileData === null) {
             break;
         }
-        cost = this.getCost(nextTileData, curTileData);
+        cost = nextTileData.cost;
         if (cost === STOP) {
             cost = movingPoints;
         }
-        nextTileData.cost = cost;
         if (movingPoints >= cost) {
             out.push(nextTileData);
         }

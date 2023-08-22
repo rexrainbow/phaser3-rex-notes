@@ -111,8 +111,8 @@ var callback = function(curTileXY, preTileXY, monopoly) {
 - `monopoly` : Path finder object.
     - `monopoly.board` : [Board object](board.md)
     - `monopoly.gameObject` : Chess game object.
-    - `monopoly.STOP` : Cost of stop. Return this value means chess will stop at `curTileXY`.
-    - `monopoly.BLOCKER` : Cost of blocker. Return this value means that chess can not move to `curTileXY`.
+    - `monopoly.STOP`, or `-1` : Cost of stop. Return this value means chess will stop at `curTileXY`.
+    - `monopoly.BLOCKER`, or `null` : Cost of blocker. Return this value means that chess can not move to `curTileXY`.
 
 #### Set cost function
 

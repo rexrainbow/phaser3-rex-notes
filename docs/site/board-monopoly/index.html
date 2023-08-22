@@ -9682,8 +9682,8 @@
 <li><code>monopoly</code> : Path finder object.<ul>
 <li><code>monopoly.board</code> : <a href="../board/">Board object</a></li>
 <li><code>monopoly.gameObject</code> : Chess game object.</li>
-<li><code>monopoly.STOP</code> : Cost of stop. Return this value means chess will stop at <code>curTileXY</code>.</li>
-<li><code>monopoly.BLOCKER</code> : Cost of blocker. Return this value means that chess can not move to <code>curTileXY</code>.</li>
+<li><code>monopoly.STOP</code>, or <code>-1</code> : Cost of stop. Return this value means chess will stop at <code>curTileXY</code>.</li>
+<li><code>monopoly.BLOCKER</code>, or <code>null</code> : Cost of blocker. Return this value means that chess can not move to <code>curTileXY</code>.</li>
 </ul>
 </li>
 </ul>

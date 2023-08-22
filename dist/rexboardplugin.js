@@ -11589,11 +11589,10 @@
       if (nextTileData === null) {
         break;
       }
-      cost = this.getCost(nextTileData, curTileData);
+      cost = nextTileData.cost;
       if (cost === STOP$1) {
         cost = movingPoints;
       }
-      nextTileData.cost = cost;
       if (movingPoints >= cost) {
         out.push(nextTileData);
       }
@@ -11620,7 +11619,8 @@
       backwardTileData = null;
     var neighborTileXArray = []; // forward and other neighbors, exclude backward
     var neighborTileXY,
-      neighborTileData = null;
+      neighborTileData = null,
+      cost;
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
       neighborTileXY = board.getNeighborTileXY(curTileData, directions[i], true);
       if (neighborTileXY === null) {
@@ -11630,6 +11630,12 @@
         continue;
       }
       neighborTileData = CreateTileData(neighborTileXY.x, neighborTileXY.y, directions[i]);
+      cost = this.getCost(neighborTileData, curTileData);
+      if (typeof cost !== 'number') {
+        // Invalid cost, remove this tileData
+        continue;
+      }
+      neighborTileData.cost = cost;
       if (directions[i] === curTileData.direction) {
         forwardTileData = neighborTileData;
       }
