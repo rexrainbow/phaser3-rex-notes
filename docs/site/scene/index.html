@@ -9699,7 +9699,7 @@
 
 subgraph Stop
 SceneEventDestroy&gt;"scene.events: destroy"]
-Stop["Shutdown&lt;br&gt;Free game objects"]
+Shutdown["Shutdown&lt;br&gt;Free game objects"]
 end
 
 subgraph Update
@@ -9731,9 +9731,9 @@ SceneEventResumeWake --&gt; SceneUpdate
 
 SceneUpdate --&gt; |"scene.scene.stop()&lt;br&gt;scene.scene.restart()"|Stop
 Pause --&gt; |"scene.scene.stop()&lt;br&gt;scene.scene.restart()"|SceneEventDestroy
-SceneEventDestroy --&gt; Stop
+SceneEventDestroy --&gt; Shutdown
 
-Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.scene.restart()"|SceneEventStart</code></pre>
+Shutdown --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.scene.restart()"|SceneEventStart</code></pre>
 <ul>
 <li><code>Run</code> : Update and render</li>
 <li><code>Pause</code> : Render but no update</li>
