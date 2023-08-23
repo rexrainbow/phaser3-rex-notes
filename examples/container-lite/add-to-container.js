@@ -76,7 +76,12 @@ class Demo extends Phaser.Scene {
         console.log("Container's displayList size", container.list.length);
 
         // Remove containerLite(rexUI) from container
+        // Solution A:
+        // dialog.removeFromContainer();
+
+        // Solution B:
         container.remove(dialog);
+
         dialog.setPosition(400, 300);
 
         console.log('Remove from container, add to scene');

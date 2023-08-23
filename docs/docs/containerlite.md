@@ -568,7 +568,7 @@ scene.tweens.add(tweenConfig);
     container.sendChildToBack(gameObject);
     ```
 
-### Layer
+### Render layer
 
 A containerLite can have a [layer](layer.md). 
 Current children and new children will draw on this layer, instead of display list of scene.
@@ -607,7 +607,7 @@ Current children and new children will draw on this layer, instead of display li
 
 ### Shader effects
 
-Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
+Apply post-fx pipeline on [layer of containerLite](containerlite.md#render-layer).
 
 ### Snapshot
 
@@ -692,6 +692,22 @@ This method also will reset all local state of children.
     ```
     - `layer` : [Layer](layer.md) game object.
 
+#### Remove from container
+
+- Remove from [built-in container](container.md)
+    ```javascript
+    containerLite.removeFromContainer(p3Container);
+    ```
+    or
+    ```javascript
+    p3Container.remove(containerLite);
+    ```    
+    - `p3Container` : [Container](container.md) game object.
+- Remove from [Layer](layer.md)
+    ```javascript
+    container.removeFromLayer(layer);
+    ```
+    - `layer` : [Layer](layer.md) game object.
 
 ### Other properties
 

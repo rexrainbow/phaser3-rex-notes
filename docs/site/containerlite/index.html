@@ -2758,8 +2758,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer" class="md-nav__link">
-    Layer
+  <a href="#render-layer" class="md-nav__link">
+    Render layer
   </a>
   
 </li>
@@ -2810,6 +2810,19 @@
   <a href="#add-to-container" class="md-nav__link">
     Add to container
   </a>
+  
+    <nav class="md-nav" aria-label="Add to container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-from-container" class="md-nav__link">
+    Remove from container
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -9950,8 +9963,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer" class="md-nav__link">
-    Layer
+  <a href="#render-layer" class="md-nav__link">
+    Render layer
   </a>
   
 </li>
@@ -10002,6 +10015,19 @@
   <a href="#add-to-container" class="md-nav__link">
     Add to container
   </a>
+  
+    <nav class="md-nav" aria-label="Add to container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-from-container" class="md-nav__link">
+    Remove from container
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -10518,7 +10544,7 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sendChildToBack</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="layer">Layer<a class="headerlink" href="#layer" title="Permanent link">&para;</a></h3>
+<h3 id="render-layer">Render layer<a class="headerlink" href="#render-layer" title="Permanent link">&para;</a></h3>
 <p>A containerLite can have a <a href="../layer/">layer</a>. 
 Current children and new children will draw on this layer, instead of display list of scene.</p>
 <ul>
@@ -10548,7 +10574,7 @@ Current children and new children will draw on this layer, instead of display li
 </code></pre></div></li>
 </ul>
 <h3 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h3>
-<p>Apply post-fx pipeline on <a href="./#layer">layer of containerLite</a>.</p>
+<p>Apply post-fx pipeline on <a href="./#render-layer">layer of containerLite</a>.</p>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Draw all visible children on a <a href="../rendertexture/">render-texture</a>.
@@ -10633,6 +10659,24 @@ Current children and new children will draw on this layer, instead of display li
 </li>
 <li>Add to <a href="../layer/">Layer</a>
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addToLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>layer</code> : <a href="../layer/">Layer</a> game object.</li>
+</ul>
+</li>
+</ul>
+<h4 id="remove-from-container">Remove from container<a class="headerlink" href="#remove-from-container" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Remove from <a href="../container/">built-in container</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">containerLite</span><span class="p">.</span><span class="nx">removeFromContainer</span><span class="p">(</span><span class="nx">p3Container</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">p3Container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">containerLite</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>p3Container</code> : <a href="../container/">Container</a> game object.</li>
+</ul>
+</li>
+<li>Remove from <a href="../layer/">Layer</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">removeFromLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>layer</code> : <a href="../layer/">Layer</a> game object.</li>
 </ul>
