@@ -15,24 +15,24 @@ class Demo extends Phaser.Scene {
         var dialog = this.rexUI.add.dialog({
             x: 400, y: 300,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
+            //background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-            title: this.rexUI.add.label({
-                background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
-                text: this.add.text(0, 0, 'Title', {
-                    fontSize: '24px'
-                }),
-                space: {
-                    left: 15,
-                    right: 15,
-                    top: 10,
-                    bottom: 10
-                }
-            }),
+            //title: this.rexUI.add.label({
+            //    background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
+            //    text: this.add.text(0, 0, 'Title', {
+            //        fontSize: '24px'
+            //    }),
+            //    space: {
+            //        left: 15,
+            //        right: 15,
+            //        top: 10,
+            //        bottom: 10
+            //    }
+            //}),
 
-            content: this.add.text(0, 0, 'Do you want to build a snow man?', {
-                fontSize: '24px'
-            }),
+            //content: this.add.text(0, 0, 'Do you want to build a snow man?', {
+            //    fontSize: '24px'
+            //}),
 
             actions: [
                 CreateLabel(this, 'Yes'),

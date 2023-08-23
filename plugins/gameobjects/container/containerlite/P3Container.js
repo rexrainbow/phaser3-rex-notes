@@ -4,15 +4,10 @@ export default {
     addToContainer(p3Container) {
         this._setParentContainerFlag = true;
 
-        var gameObjects = this.getAllChildren([this]), gameObject;
+        var gameObjects = this.getAllChildren([this]);
         SortGameObjectsByDepth(gameObjects);
-        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            gameObject = gameObjects[i];
-            if (!gameObject.displayList) {
-                continue;
-            }
-            p3Container.add(gameObject);
-        }
+        p3Container.add(gameObjects);
+        // TODO: gameObject not in displayList?
 
         this._setParentContainerFlag = false;
         return this;
@@ -26,14 +21,10 @@ export default {
     addToScene(scene) {
         this._setParentContainerFlag = true;
 
-        var gameObjects = this.getAllChildren([this]), gameObject;
+        var gameObjects = this.getAllChildren([this]);
         SortGameObjectsByDepth(gameObjects);
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            gameObject = gameObjects[i];
-            if (!gameObject.displayList) {
-                continue;
-            }
-            scene.add.existing(gameObject);
+            scene.add.existing(gameObjects[i]);
         }
 
         this._setParentContainerFlag = false;
