@@ -132,7 +132,10 @@ var SetDragable = function (scrollablePanel) {
                 child
                     .on('dragstart', function (pointer, dragX, dragY) {
                         // Save start position
-                        child.setData({ startX: child.x, startY: child.y });
+                        child.setData({
+                            startX: child.x, startY: child.y,
+                            index: child.getParentSizer().getChildIndex(child)
+                        });
                     })
                     .on('dragend', function (pointer, dragX, dragY, dropped) {
                         if (dropped) { // Process 'drop' event

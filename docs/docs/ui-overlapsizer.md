@@ -325,6 +325,12 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - `recursive` : Set `true` to search all children recursively.
 
+### Get child index
+
+```javascript
+var index = sizer.getChildIndex(child);
+```
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

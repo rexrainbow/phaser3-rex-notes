@@ -175,6 +175,10 @@ declare class BaseSizer extends ContainerLite {
         { [name: string]: Phaser.GameObjects.GameObject } |
         null;
 
+    getChildIndex(
+        child: Phaser.GameObjects.GameObject
+    ): number | string | null;
+
     getParentSizer(
         name?: string
     ): BaseSizer | null;

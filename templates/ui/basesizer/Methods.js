@@ -7,6 +7,7 @@ import RemoveChildMethods from './RemoveChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import RemoveChildrenMap from './RemoveChildrenMap.js';
 import GetElement from './GetElement.js';
+import GetChildIndex from './GetChildIndex.js';
 import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
@@ -67,6 +68,7 @@ var methods = {
     addElement: AddChildrenMap,
     removeChildrenMap: RemoveChildrenMap,
     getElement: GetElement,
+    getChildIndex: GetChildIndex,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,

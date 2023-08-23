@@ -474,6 +474,12 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - `recursive` : Set `true` to search all children recursively.
 
+### Get child index
+
+```javascript
+var index = sizer.getChildIndex(child);
+```
+
 ### Reset grid
 
 ```javascript
