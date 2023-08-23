@@ -1432,39 +1432,14 @@
   var P3Container = {
     addToContainer: function addToContainer(p3Container) {
       this._setParentContainerFlag = true;
-      var gameObjects = this.getAllChildren([this]),
-        gameObject;
+      var gameObjects = this.getAllChildren([this]);
       SortGameObjectsByDepth(gameObjects);
-      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (!gameObject.displayList) {
-          continue;
-        }
-        p3Container.add(gameObject);
-      }
+      p3Container.add(gameObjects);
       this._setParentContainerFlag = false;
       return this;
     },
     addToLayer: function addToLayer(layer) {
       this.addToContainer(layer);
-      return this;
-    },
-    addToScene: function addToScene(scene) {
-      if (scene === undefined) {
-        scene = this.scene;
-      }
-      this._setParentContainerFlag = true;
-      var gameObjects = this.getAllChildren([this]),
-        gameObject;
-      SortGameObjectsByDepth(gameObjects);
-      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (!gameObject.displayList) {
-          continue;
-        }
-        scene.add.existing(gameObject);
-      }
-      this._setParentContainerFlag = false;
       return this;
     },
     removeFromContainer: function removeFromContainer() {
@@ -1524,7 +1499,7 @@
     }
   };
 
-  var RenderLayer = {
+  var Layer = {
     hasLayer: function hasLayer() {
       return !!this.privateRenderLayer;
     },
@@ -2078,7 +2053,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$l, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
+  Object.assign(methods$l, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, Layer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);

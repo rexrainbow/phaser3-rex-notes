@@ -24,10 +24,6 @@ export default {
     },
 
     addToScene(scene) {
-        if (scene === undefined) {
-            scene = this.scene;
-        }
-
         this._setParentContainerFlag = true;
 
         var gameObjects = this.getAllChildren([this]), gameObject;
