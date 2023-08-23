@@ -7,7 +7,16 @@ var SortGameObjectsByDepth = function (gameObjects, descending) {
         descending = false;
     }
 
-    var displayList = gameObjects[0].displayList;
+    var displayList;
+    var gameObject = gameObjects[0];
+    if (gameObject.displayList) {
+        displayList = gameObject.displayList;
+    } else if (gameObject.parentContainer) {
+        displayList = gameObject.parentContainer.displayList;
+    } else {
+        displayList = gameObject.scene.sys.displayList;
+        // TODO : Might be an error state
+    }
     displayList.depthSort();
 
     if (descending) {
