@@ -15,15 +15,15 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var panel0 = CreatePanel(this, 12).setPosition(250, 300).layout();
-        var panel1 = CreatePanel(this, 8).setPosition(400, 300).layout();
-        var panel2 = CreatePanel(this, 0).setPosition(550, 300).layout();
+        var sizer0 = CreatePanel(this, 12).setPosition(250, 300).layout();
+        var sizer1 = CreatePanel(this, 8).setPosition(400, 300).layout();
+        var sizer2 = CreatePanel(this, 0).setPosition(550, 300).layout();
 
 
-        var panels = [panel0, panel1, panel2];
-        panels.forEach(function (panel) {
-            panel.setInteractive({ dropZone: true });
-            SetDragable(panel.getElement('items'));
+        var sizers = [sizer0, sizer1, sizer2];
+        sizers.forEach(function (sizer) {
+            sizer.setInteractive({ dropZone: true });
+            SetDragable(sizer.getElement('items'));
         })
     }
 
@@ -73,61 +73,57 @@ var CreateLabel = function (scene, text) {
     return label;
 }
 
-var SetDragable = function (children) {
-    children.forEach(function (child) {
-        child
+var SetDragable = function (items) {
+    items.forEach(function (item) {
+        item
             .setInteractive({ draggable: true })
             .on('dragstart', function (pointer, dragX, dragY) {
-                // Save start position
-                child.setData({ startX: child.x, startY: child.y });
+                item.setData({ startX: item.x, startY: item.y });
             })
             .on('drag', function (pointer, dragX, dragY) {
-                // On dragging
-                child.setPosition(dragX, dragY);
+                item.setPosition(dragX, dragY);
             })
             .on('dragend', function (pointer, dragX, dragY, dropped) {
                 if (dropped) { // Process 'drop' event
                     return;
                 }
 
-                // Back to start position if not dropping on another panel
-                child.moveTo({
-                    x: child.getData('startX'), y: child.getData('startY'),
+                item.moveTo({
+                    x: item.getData('startX'), y: item.getData('startY'),
                     speed: 300
                 });
             })
-            .on('drop', function (pointer, panel) {
-                // Drop at another panel
-                var parent = child.getParentSizer();
-                parent.remove(child);
+            .on('drop', function (pointer, target) {
+                var parent = item.getParentSizer();
+                parent.remove(item);
                 ArrangeItems(parent);
 
                 // Item is placed to new position in sizer
-                panel.insertAtPosition(
+                target.insertAtPosition(
                     pointer.x, pointer.y,
-                    child,
+                    item,
                     {
                         expand: true
                     }
                 );
-                // Move child from start position to new position
-                ArrangeItems(panel);
+                // Move item from start position to new position
+                ArrangeItems(target);
             })
     });
 }
 
 var ArrangeItems = function (panel) {
-    var children = panel.getElement('items');
+    var items = panel.getElement('items');
     // Save current position
-    children.forEach(function (child) {
-        child.setData({ startX: child.x, startY: child.y });
+    items.forEach(function (item) {
+        item.setData({ startX: item.x, startY: item.y });
     })
     // Item is placed to new position in sizer
     panel.layout();
-    // Move child from start position to new position
-    children.forEach(function (child) {
-        child.moveFrom({
-            x: child.getData('startX'), y: child.getData('startY'),
+    // Move item from start position to new position
+    items.forEach(function (item) {
+        item.moveFrom({
+            x: item.getData('startX'), y: item.getData('startY'),
             speed: 300
         })
     })

@@ -7,7 +7,6 @@ export default {
         var gameObjects = this.getAllChildren([this]);
         SortGameObjectsByDepth(gameObjects);
         p3Container.add(gameObjects);
-        // TODO: gameObject not in displayList?
 
         this._setParentContainerFlag = false;
         return this;
@@ -15,19 +14,6 @@ export default {
 
     addToLayer(layer) {
         this.addToContainer(layer);
-        return this;
-    },
-
-    addToScene(scene) {
-        this._setParentContainerFlag = true;
-
-        var gameObjects = this.getAllChildren([this]);
-        SortGameObjectsByDepth(gameObjects);
-        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            scene.add.existing(gameObjects[i]);
-        }
-
-        this._setParentContainerFlag = false;
         return this;
     },
 
