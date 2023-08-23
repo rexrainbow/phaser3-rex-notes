@@ -1,19 +1,61 @@
+import IsContainerObject from '../../../utils/system/IsContainerObject.js';
+import IsLayerGameObject from '../../../utils/system/IsLayerGameObject.js';
 import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
+
+var GetValidChildren = function (parent) {
+    var children = parent.getAllChildren([parent]);
+    children = children.filter(function (gameObject) {
+        return !!gameObject.displayList ||   // At scene's displayList or at a layer
+            !!gameObject.parentContainer;  // At a container
+    })
+    return children;
+}
+
+var AddToContainer = function (p3Container) {
+    var gameObjects = GetValidChildren(this);
+
+    SortGameObjectsByDepth(gameObjects);
+
+    p3Container.add(gameObjects);
+
+    return this;
+}
+
+var RemoveFromContainer = function (p3Container, descending, addToScene) {
+    var gameObjects = GetValidChildren(this);
+
+    SortGameObjectsByDepth(gameObjects, descending);
+
+    p3Container.remove(gameObjects);
+
+    if (addToScene) {
+        gameObjects.forEach(function (gameObject) {
+            gameObject.addToDisplayList();
+        });
+    }
+
+    return this;
+}
 
 export default {
     addToContainer(p3Container) {
+        if (!IsContainerObject(p3Container)) {
+            return this;
+        }
+
         this._setParentContainerFlag = true;
-
-        var gameObjects = this.getAllChildren([this]);
-        SortGameObjectsByDepth(gameObjects);
-        p3Container.add(gameObjects);
-
+        AddToContainer.call(this, p3Container);
         this._setParentContainerFlag = false;
         return this;
     },
 
     addToLayer(layer) {
-        this.addToContainer(layer);
+        if (!IsLayerGameObject(layer)) {
+            return this;
+        }
+
+        AddToContainer.call(this, layer);
+
         return this;
     },
 
@@ -22,26 +64,23 @@ export default {
             return this;
         }
 
-        // Will add gameObjects to scene
-        var gameObjects = this.getAllChildren([this])
-            .filter(function (gameObject) {
-                return !!gameObject.scene;
-            });
+        this._setParentContainerFlag = true;
+        RemoveFromContainer.call(this, this.parentContainer, true, false);
+        this._setParentContainerFlag = false;
+        return this;
+    },
 
-        if (gameObjects.length === 0) {
+    removeFromLayer(addToScene) {
+        if (addToScene === undefined) {
+            addToScene = true;
+        }
+
+        if (!IsLayerGameObject(this.displayList)) {
             return this;
         }
 
-        this._setParentContainerFlag = true;
+        RemoveFromContainer.call(this, this.displayList, false, addToScene);
 
-        if (gameObjects.length > 1) {
-            SortGameObjectsByDepth(gameObjects);
-            gameObjects.reverse();
-        }
-
-        this.parentContainer.remove(gameObjects);
-
-        this._setParentContainerFlag = false;
         return this;
     },
 
@@ -64,10 +103,11 @@ export default {
     },
 
     addToParentContainer(gameObject) {
-        // Don't add to layer if gameObject is not in any displayList
+        // Do nothing if gameObject is not in any displayList
         if (!gameObject.displayList) {
             return this;
         }
+
         var p3Container = this.getParentContainer();
         if (!p3Container) {
             return this;

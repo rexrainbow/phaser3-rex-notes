@@ -13,6 +13,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var dialog = this.rexUI.add.dialog({
+            x: 400, y: 300,
+
             background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
             title: this.rexUI.add.label({
@@ -58,30 +60,29 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        var container = this.add.container(300, 300);
-
+        var layer = this.add.layer();
         console.log('At scene');
         console.log("Scene's displayList size", this.children.length);
-        console.log("Container's displayList size", container.list.length);
+        console.log("Layer's displayList size", layer.list.length);
 
-        // Add containerLite(rexUI) to container
+        // Add containerLite(rexUI) to layer
         // Solution A:
-        // dialog.addToContainer(container);
+        dialog.addToLayer(layer);
 
         // Solution B:
-        container.add(dialog);
+        // layer.add(dialog);
 
-        console.log('Add to container');
+
+        console.log('Add to layer');
         console.log("Scene's displayList size", this.children.length);
-        console.log("Container's displayList size", container.list.length);
+        console.log("Layer's displayList size", layer.list.length);
 
-        // Remove containerLite(rexUI) from container
-        container.remove(dialog);
-        dialog.setPosition(400, 300);
+        dialog.removeFromLayer();
 
-        console.log('Remove from container, add to scene');
+        console.log('Remove from layer, add to scene');
         console.log("Scene's displayList size", this.children.length);
-        console.log("Container's displayList size", container.list.length);
+        console.log("Layer's displayList size", layer.list.length);
+
     }
 
     update() {

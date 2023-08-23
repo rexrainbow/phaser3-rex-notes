@@ -679,21 +679,18 @@ This method also will reset all local state of children.
 
 - Add to [built-in container](container.md)
     ```javascript
-    p3Container.add(containerLite);
+    containerLite.addToContainer(p3Container);
     ```
     or
     ```javascript
-    containerLite.addToContainer(p3Container);
-    ```
-    - `container` : [Container](container.md) game object.
+    p3Container.add(containerLite);
+    ```    
+    - `p3Container` : [Container](container.md) game object.
 - Add to [Layer](layer.md)
     ```javascript
     container.addToLayer(layer);
     ```
     - `layer` : [Layer](layer.md) game object.
-
-!!! note
-    `container.add(containerLite)`, or `layer.add(containerLite)` won't add children of containerLite.
 
 
 ### Other properties

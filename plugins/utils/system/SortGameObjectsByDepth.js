@@ -10,12 +10,14 @@ var SortGameObjectsByDepth = function (gameObjects, descending) {
     var itemList;
     var gameObject = gameObjects[0];
     if (gameObject.displayList) {
+        // Inside a scene or a layer
         itemList = gameObject.displayList; // displayList
     } else if (gameObject.parentContainer) {
+        // Inside a container
         itemList = gameObject.parentContainer.list; // array
     } else {
         itemList = gameObject.scene.sys.displayList;  // displayList
-        // TODO : Might be an error state
+        // ??       
     }
 
     if (itemList.depthSort) {
