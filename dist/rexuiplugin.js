@@ -28824,6 +28824,22 @@
   };
   var RE_OBJ = /(\S+)\[(\d+)\]/i;
 
+  var GetChildIndex = function GetChildIndex(child) {
+    if (Array.isArray(this.sizerChildren)) {
+      return this.sizerChildren.indexOf(child);
+    } else {
+      if (this.getParentSizer(child) !== this) {
+        return null;
+      }
+      for (var key in this.sizerChildren) {
+        if (this.sizerChildre[key] === child) {
+          return key;
+        }
+      }
+      return null;
+    }
+  };
+
   var PaddingMethods = {
     getInnerPadding: function getInnerPadding(key) {
       return GetPadding$1(this.space, key);
@@ -35055,6 +35071,7 @@
     addElement: AddChildrenMap,
     removeChildrenMap: RemoveChildrenMap,
     getElement: GetElement,
+    getChildIndex: GetChildIndex,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers$5,
     preLayout: PreLayout$4,
