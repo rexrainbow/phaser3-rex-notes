@@ -7,26 +7,35 @@ var SortGameObjectsByDepth = function (gameObjects, descending) {
         descending = false;
     }
 
-    var displayList;
+    var itemList;
     var gameObject = gameObjects[0];
     if (gameObject.displayList) {
-        displayList = gameObject.displayList;
+        itemList = gameObject.displayList; // displayList
     } else if (gameObject.parentContainer) {
-        displayList = gameObject.parentContainer.displayList;
+        itemList = gameObject.parentContainer.list; // array
     } else {
-        displayList = gameObject.scene.sys.displayList;
+        itemList = gameObject.scene.sys.displayList;  // displayList
         // TODO : Might be an error state
     }
-    displayList.depthSort();
 
+    if (itemList.depthSort) {
+        // Is a displayList object
+        itemList.depthSort();
+        itemList = itemList.list;
+        // itemList is an array now
+    }
+
+    // itemList is an array
     if (descending) {
         gameObjects.sort(function (childA, childB) {
-            return displayList.getIndex(childB) - displayList.getIndex(childA);
+            return itemList.indexOf(childB) - itemList.indexOf(childA);
         })
+
     } else {
         gameObjects.sort(function (childA, childB) {
-            return displayList.getIndex(childA) - displayList.getIndex(childB);
+            return itemList.indexOf(childA) - itemList.indexOf(childB);
         })
+
     }
 
     return gameObjects;
