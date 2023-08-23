@@ -171,6 +171,8 @@ container.removeAll();
 // container.removeAll(true);  // remove all children objects and destroy them
 ```
 
+Removing child from container without destroying will put back into scene's display list.
+
 #### Order of child
 
 ```javascript

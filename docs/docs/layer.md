@@ -87,10 +87,10 @@ var layer = scene.add.layer();
 Removed game object won't be added to display list of scene, use
 
 ```javascript
-scene.add.existing(gameObject);
+gameObject.addToDisplayList();
 ```
 
-to add it back.
+to add it back to scene's display list.
 
 ### Get child
 

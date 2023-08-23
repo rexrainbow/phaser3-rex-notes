@@ -58,15 +58,14 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
+        var container = this.add.container(300, 300);
+
         // Add containerLite(rexUI) to container
         // Solution A:
-        var container = this.add.container(300, 300, [dialog]);
+        container.add(dialog);
 
         // Solution B:
-        /*
-        var container = this.add.container(300, 300);
-        dialog.addToContainer(container)
-        */
+        // dialog.addToContainer(container);
 
         // Remove containerLite(rexUI) from container
         container.remove(dialog);
