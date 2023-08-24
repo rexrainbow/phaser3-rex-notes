@@ -81,7 +81,6 @@ var CreatePanel = function (scene, itemCount) {
         orientation: 'y',
         space: { left: 6, right: 6, top: 6, bottom: 6, item: 6 },
     })
-        .enableLayer()
 
     for (var i = 0; i < itemCount; i++) {
         sizer.add(
@@ -130,14 +129,16 @@ var SetDragable = function (scrollablePanel) {
                 child.drag = dragBehavior.add(child);
                 child
                     .on('dragstart', function (pointer, dragX, dragY) {
-                        var sizer = child.getParentSizer();
+                        var currentSizer = child.getParentSizer();
                         // Save start sizer and index
                         child.setData({
-                            sizer: sizer,
-                            index: sizer.getChildIndex(child)
+                            sizer: currentSizer,
+                            index: currentSizer.getChildIndex(child)
                         });
-                        sizer.remove(child);
-                        // Don layout sizer in this moment
+                        currentSizer.remove(child);
+                        // Don't layout currentSizer in this moment,
+                        // just clear mask manually
+                        child.clearMask();
 
                         OnChildDragStart(child);
                     })
@@ -176,7 +177,9 @@ var SetDragable = function (scrollablePanel) {
                     })
             }
 
-            child.drag.setEnable(true).drag();
+            // Enable interactive before try-dragging
+            child.setInteractive();
+            child.drag.drag();
         })
 
 }
@@ -189,7 +192,9 @@ var OnChildDragStart = function (child) {
 var OnChildDragEnd = function (child) {
     child.setDepth(0);
     child.getElement('background').setStrokeStyle();
-    child.drag.setEnable(false);
+
+    // Disable interactive, so that scrollablePanel could be scrolling
+    child.disableInteractive();
 }
 
 var ArrangeItems = function (sizer) {
