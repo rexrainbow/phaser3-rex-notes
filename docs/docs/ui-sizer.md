@@ -411,6 +411,9 @@ See also - [dirty](ui-basesizer.md#dirty)
 var index = sizer.getChildIndex(child);
 ```
 
+- `index` : A number, or `null`.
+
+
 ### RTL
 
 - Set rtl in [config of constructor](ui-sizer.md#add-sizer-object)

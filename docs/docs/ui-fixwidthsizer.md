@@ -359,6 +359,9 @@ See also - [dirty](ui-basesizer.md#dirty)
 var index = sizer.getChildIndex(child);
 ```
 
+- `index` : A number, or `null`.
+
+
 ### Other properties
 
 See [base-sizer object](ui-basesizer.md).

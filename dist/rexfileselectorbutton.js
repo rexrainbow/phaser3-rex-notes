@@ -3081,7 +3081,11 @@
 
   var GetChildIndex = function GetChildIndex(child) {
     if (Array.isArray(this.sizerChildren)) {
-      return this.sizerChildren.indexOf(child);
+      var index = this.sizerChildren.indexOf(child);
+      if (index === -1) {
+        index = null;
+      }
+      return index;
     } else {
       if (this.getParentSizer(child) !== this) {
         return null;
