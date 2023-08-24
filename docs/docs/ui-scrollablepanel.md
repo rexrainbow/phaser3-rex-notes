@@ -19,7 +19,10 @@ A container with a panel, slider, and scroller.
 - [XY sliders](https://codepen.io/rexrainbow/pen/VwVVyYV)
 - [Min-width panel](https://codepen.io/rexrainbow/pen/JjeqGLb)
 - [Drag,resize panel](https://codepen.io/rexrainbow/pen/wvRvrzr)
-- [Drag&drop items between panels](https://codepen.io/rexrainbow/pen/jOXPXOg)
+- Drag&drop items between panels : 
+    - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
+    - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
+
 
 ## Usage
 
