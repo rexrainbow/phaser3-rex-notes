@@ -13187,7 +13187,13 @@
       if (!layer) {
         return this;
       }
-      layer.remove(gameObject);
+      if (gameObject.isRexContainerLite) {
+        // Remove containerLite and its children
+        gameObject.removeFromLayer(true);
+      } else {
+        // Remove gameObject directly
+        layer.remove(gameObject);
+      }
       state.layer = null;
       return this;
     }

@@ -27647,7 +27647,13 @@
       if (!layer) {
         return this;
       }
-      layer.remove(gameObject);
+      if (gameObject.isRexContainerLite) {
+        // Remove containerLite and its children
+        gameObject.removeFromLayer(true);
+      } else {
+        // Remove gameObject directly
+        layer.remove(gameObject);
+      }
       state.layer = null;
       return this;
     }
@@ -35027,6 +35033,9 @@
   var GetValue$1W = Phaser.Utils.Objects.GetValue;
   var SetChildrenInteractive = function SetChildrenInteractive(gameObject, config) {
     gameObject.setInteractive();
+    if (GetValue$1W(config, 'dropZone', false)) {
+      gameObject.input.dropZone = true;
+    }
     gameObject._childrenInteractive = {
       targetSizers: GetValue$1W(config, 'targets', [gameObject]),
       eventEmitter: GetValue$1W(config, 'eventEmitter', gameObject),

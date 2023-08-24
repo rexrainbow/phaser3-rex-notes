@@ -10,6 +10,8 @@ declare namespace SetChildrenInteractive {
     interface IConfig {
         targets?: Phaser.GameObjects.GameObject[],
 
+        dropZone?: boolean,
+
         click?: Button.IConfig | boolean,
         over?: {} | boolean,
         tap?: Tap.IConfig | boolean,

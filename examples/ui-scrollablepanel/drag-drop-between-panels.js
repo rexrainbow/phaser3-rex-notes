@@ -6,8 +6,6 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-const Random = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -49,7 +47,6 @@ var CreateScrollablePanel = function (scene, itemCount) {
             mask: {
                 padding: 2,
             },
-            enableLayer: true,
         },
 
         slider: {
@@ -84,13 +81,12 @@ var CreatePanel = function (scene, itemCount) {
         orientation: 'y',
         space: { left: 6, right: 6, top: 6, bottom: 6, item: 6 },
     })
+        .enableLayer()
 
     for (var i = 0; i < itemCount; i++) {
         sizer.add(
             CreateLabel(scene, i.toString()),
-            {
-                expand: true
-            }
+            { expand: true }
         );
     }
     return sizer;
@@ -124,36 +120,90 @@ var SetDragable = function (scrollablePanel) {
         .setChildrenInteractive({
             targets: [
                 scrollablePanel.getElement('panel'),
-            ]
+            ],
+
+            dropZone: true,
+
         })
         .on('child.pressstart', function (child) {
             if (!child.drag) {
                 child.drag = dragBehavior.add(child);
                 child
                     .on('dragstart', function (pointer, dragX, dragY) {
-                        // Save start position
+                        var sizer = child.getParentSizer();
+                        // Save start sizer and index
                         child.setData({
-                            startX: child.x, startY: child.y,
-                            index: child.getParentSizer().getChildIndex(child)
+                            sizer: sizer,
+                            index: sizer.getChildIndex(child)
                         });
+                        sizer.remove(child);
+                        // Don layout sizer in this moment
+
+                        OnChildDragStart(child);
                     })
                     .on('dragend', function (pointer, dragX, dragY, dropped) {
                         if (dropped) { // Process 'drop' event
                             return;
                         }
 
-                        // Back to start position if not dropping on another panel
-                        child.moveTo({
-                            x: child.getData('startX'), y: child.getData('startY'),
-                            speed: 300
-                        });
+                        OnChildDragEnd(child);
+
+                        // Insert back to previous sizer if not dropping on another panel
+                        var sizer = child.getData('sizer'),
+                            index = child.getData('index');
+                        sizer.insert(index, child, { expand: true });
+                        ArrangeItems(sizer);
+                    })
+                    .on('drop', function (pointer, dropZone) {
+                        // Drop at another sizer
+
+                        OnChildDragEnd(child);
+
+                        // Layout previous sizer
+                        ArrangeItems(child.getData('sizer'));
+
+                        // Item is placed to new position in sizer
+                        var sizer = dropZone.getTopmostSizer().getElement('panel');
+                        sizer.insertAtPosition(
+                            pointer.x, pointer.y,
+                            child,
+                            { expand: true }
+                        );
+                        ArrangeItems(sizer);
                     })
             }
 
-            child.setDepth(1);
             child.drag.setEnable(true).drag();
         })
 
+}
+
+var OnChildDragStart = function (child) {
+    child.setDepth(1);
+    child.getElement('background').setStrokeStyle(3, 0xff0000);
+}
+
+var OnChildDragEnd = function (child) {
+    child.setDepth(0);
+    child.getElement('background').setStrokeStyle();
+}
+
+var ArrangeItems = function (sizer) {
+    var children = sizer.getElement('items');
+    // Save current position
+    children.forEach(function (child) {
+        child.setData({ startX: child.x, startY: child.y });
+    })
+    // Item is placed to new position in sizer
+    sizer.getTopmostSizer().layout();
+    // Move child from start position to new position
+    children.forEach(function (child) {
+        var fromX = child.getData('startX'),
+            fromY = child.getData('startY');
+        if ((child.x !== fromX) || (child.y !== fromY)) {
+            child.moveFrom({ x: fromX, y: fromY, speed: 300 })
+        }
+    })
 }
 
 var config = {

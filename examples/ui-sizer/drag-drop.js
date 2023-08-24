@@ -15,15 +15,15 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var panel0 = CreatePanel(this, 12).setPosition(250, 300).layout();
-        var panel1 = CreatePanel(this, 8).setPosition(400, 300).layout();
-        var panel2 = CreatePanel(this, 0).setPosition(550, 300).layout();
+        var sizer0 = CreatePanel(this, 12).setPosition(250, 300).layout();
+        var sizer1 = CreatePanel(this, 8).setPosition(400, 300).layout();
+        var sizer2 = CreatePanel(this, 0).setPosition(550, 300).layout();
 
 
-        var panels = [panel0, panel1, panel2];
-        panels.forEach(function (panel) {
-            panel.setInteractive({ dropZone: true });
-            SetDragable(panel.getElement('items'));
+        var sizers = [sizer0, sizer1, sizer2];
+        sizers.forEach(function (sizer) {
+            sizer.setInteractive({ dropZone: true });
+            SetDragable(sizer.getElement('items'));
         })
     }
 
@@ -56,6 +56,7 @@ var CreatePanel = function (scene, itemCount) {
 
 var CreateLabel = function (scene, text) {
     var label = scene.rexUI.add.label({
+        height: 60,
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
@@ -90,20 +91,20 @@ var SetDragable = function (children) {
                     return;
                 }
 
-                // Back to start position if not dropping on another panel
+                // Back to start position if not dropping on another sizer
                 child.moveTo({
                     x: child.getData('startX'), y: child.getData('startY'),
                     speed: 300
                 });
             })
-            .on('drop', function (pointer, panel) {
-                // Drop at another panel
+            .on('drop', function (pointer, sizer) {
+                // Drop at another sizer
                 var parent = child.getParentSizer();
                 parent.remove(child);
                 ArrangeItems(parent);
 
                 // Item is placed to new position in sizer
-                panel.insertAtPosition(
+                sizer.insertAtPosition(
                     pointer.x, pointer.y,
                     child,
                     {
@@ -111,25 +112,26 @@ var SetDragable = function (children) {
                     }
                 );
                 // Move child from start position to new position
-                ArrangeItems(panel);
+                ArrangeItems(sizer);
             })
     });
 }
 
-var ArrangeItems = function (panel) {
-    var children = panel.getElement('items');
+var ArrangeItems = function (sizer) {
+    var children = sizer.getElement('items');
     // Save current position
     children.forEach(function (child) {
         child.setData({ startX: child.x, startY: child.y });
     })
     // Item is placed to new position in sizer
-    panel.layout();
+    sizer.layout();
     // Move child from start position to new position
     children.forEach(function (child) {
-        child.moveFrom({
-            x: child.getData('startX'), y: child.getData('startY'),
-            speed: 300
-        })
+        var fromX = child.getData('startX'),
+            fromY = child.getData('startY');
+        if ((child.x !== fromX) || (child.y !== fromY)) {
+            child.moveFrom({ x: fromX, y: fromY, speed: 300 })
+        }
     })
 }
 

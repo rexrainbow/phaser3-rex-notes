@@ -1032,6 +1032,8 @@ Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [s
 
 ```javascript
 sizer.setChildrenInteractive({
+    // dropZone: false,
+
     // down: undefined,
     // up: undefined,
     // over: undefined,
@@ -1049,6 +1051,9 @@ sizer.setChildrenInteractive({
 })
 ```
 
+- `dropZone` :
+    - `true` : Enable [drop Zone](touchevents.md#drop-zone) on this sizer.
+    - `false` : Do nothing.
 - `down` :
     - `false` : Don't fire (pointer-) down events
 - `up` :

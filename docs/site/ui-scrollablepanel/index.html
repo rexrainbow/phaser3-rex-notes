@@ -10450,6 +10450,8 @@ User can inject it by</p>
 <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">targets</span><span class="o">:</span><span class="w"> </span><span class="nx">targetSizers</span><span class="p">,</span>
 
+<span class="w">    </span><span class="c1">// dropZone: false,</span>
+
 <span class="w">    </span><span class="c1">// click: {mode: &#39;release&#39;, clickInterval: 100},</span>
 
 <span class="w">    </span><span class="c1">// over: undefined,</span>
@@ -10466,6 +10468,11 @@ User can inject it by</p>
 </code></pre></div>
 <ul>
 <li><code>targetSizers</code> : Array of target children-sizer.</li>
+<li><code>dropZone</code> :<ul>
+<li><code>true</code> : Enable <a href="../touchevents/#drop-zone">drop Zone</a> on scrollable area.</li>
+<li><code>false</code> : Do nothing.</li>
+</ul>
+</li>
 </ul>
 <p>See <a href="../ui-basesizer/#set-children-interactive">Base-sizer/Set children interactive</a></p>
 <h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>

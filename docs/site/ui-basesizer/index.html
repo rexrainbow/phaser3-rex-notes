@@ -11098,6 +11098,8 @@
 <h3 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h3>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this sizer, to detect input events of children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// dropZone: false,</span>
+
 <span class="w">    </span><span class="c1">// down: undefined,</span>
 <span class="w">    </span><span class="c1">// up: undefined,</span>
 <span class="w">    </span><span class="c1">// over: undefined,</span>
@@ -11115,6 +11117,11 @@
 <span class="p">})</span>
 </code></pre></div>
 <ul>
+<li><code>dropZone</code> :<ul>
+<li><code>true</code> : Enable <a href="../touchevents/#drop-zone">drop Zone</a> on this sizer.</li>
+<li><code>false</code> : Do nothing.</li>
+</ul>
+</li>
 <li><code>down</code> :<ul>
 <li><code>false</code> : Don't fire (pointer-) down events</li>
 </ul>

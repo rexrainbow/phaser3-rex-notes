@@ -625,6 +625,8 @@ Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [s
 panel.setChildrenInteractive({
     targets: targetSizers,
 
+    // dropZone: false,
+
     // click: {mode: 'release', clickInterval: 100},
 
     // over: undefined,
@@ -641,6 +643,10 @@ panel.setChildrenInteractive({
 ```
 
 - `targetSizers` : Array of target children-sizer.
+- `dropZone` :
+    - `true` : Enable [drop Zone](touchevents.md#drop-zone) on scrollable area.
+    - `false` : Do nothing.
+
 
 See [Base-sizer/Set children interactive](ui-basesizer.md#set-children-interactive)
 

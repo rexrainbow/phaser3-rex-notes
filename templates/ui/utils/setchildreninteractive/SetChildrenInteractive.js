@@ -11,6 +11,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var SetChildrenInteractive = function (gameObject, config) {
     gameObject.setInteractive();
 
+    if (GetValue(config, 'dropZone', false)) {
+        gameObject.input.dropZone = true;
+    }
+
     gameObject._childrenInteractive = {
         targetSizers: GetValue(config, 'targets', [gameObject]),
         eventEmitter: GetValue(config, 'eventEmitter', gameObject),
