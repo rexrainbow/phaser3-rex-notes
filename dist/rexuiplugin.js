@@ -55832,6 +55832,7 @@
       _this.addChildrenMap('panel', scrollableBlock.child);
       _this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
       _this.addChildrenMap('mask', scrollableBlock.maskGameObject);
+      _this.addChildrenMap('scrollableBlock', scrollableBlock);
       return _this;
     }
     _createClass(ScrollablePanel, [{

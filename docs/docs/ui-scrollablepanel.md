@@ -19,6 +19,7 @@ A container with a panel, slider, and scroller.
 - [XY sliders](https://codepen.io/rexrainbow/pen/VwVVyYV)
 - [Min-width panel](https://codepen.io/rexrainbow/pen/JjeqGLb)
 - [Drag,resize panel](https://codepen.io/rexrainbow/pen/wvRvrzr)
+- [Drag&drop items between panels](https://codepen.io/rexrainbow/pen/jOXPXOg)
 
 ## Usage
 
@@ -600,6 +601,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     - Scroller
         ```javascript
         var scroller = panel.getElement('scroller');
+        ```
+    - Scrollable-block, registering scroller and children-interactive on it.
+        ```javascript
+        var scrollableBlock = panel.getElement('scrollableBlock');
         ```
 - Get by name
     ```javascript
