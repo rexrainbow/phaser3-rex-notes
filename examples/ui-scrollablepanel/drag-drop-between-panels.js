@@ -146,30 +146,33 @@ var SetDragable = function (scrollablePanel) {
                             return;
                         }
 
+                        var previousSizer = child.getData('sizer');
+
                         OnChildDragEnd(child);
 
                         // Insert back to previous sizer if not dropping on another panel
-                        var sizer = child.getData('sizer'),
-                            index = child.getData('index');
-                        sizer.insert(index, child, { expand: true });
-                        ArrangeItems(sizer);
+                        previousSizer.insert(child.getData('index'), child, { expand: true });
+                        ArrangeItems(previousSizer);
                     })
                     .on('drop', function (pointer, dropZone) {
                         // Drop at another sizer
-
                         OnChildDragEnd(child);
 
-                        // Layout previous sizer
-                        ArrangeItems(child.getData('sizer'));
+                        var currentSizer = dropZone.getTopmostSizer().getElement('panel'),
+                            previousSizer = child.getData('sizer');
 
-                        // Item is placed to new position in sizer
-                        var sizer = dropZone.getTopmostSizer().getElement('panel');
-                        sizer.insertAtPosition(
+                        // Layout previous sizer
+                        if (previousSizer !== currentSizer) {
+                            ArrangeItems(previousSizer);
+                        }
+
+                        // Item is placed to new position in current sizer
+                        currentSizer.insertAtPosition(
                             pointer.x, pointer.y,
                             child,
                             { expand: true }
                         );
-                        ArrangeItems(sizer);
+                        ArrangeItems(currentSizer);
                     })
             }
 
@@ -186,6 +189,7 @@ var OnChildDragStart = function (child) {
 var OnChildDragEnd = function (child) {
     child.setDepth(0);
     child.getElement('background').setStrokeStyle();
+    child.drag.setEnable(false);
 }
 
 var ArrangeItems = function (sizer) {
