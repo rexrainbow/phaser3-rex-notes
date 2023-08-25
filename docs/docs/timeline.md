@@ -28,7 +28,9 @@ var timeline = scene.add.timeline([
             yoyo: false
         },
 
-        run(target){ },
+        run(){ 
+            // this: target parameter
+        },
 
         sound: '',
 
@@ -53,8 +55,8 @@ var timeline = scene.add.timeline([
     - `tween` : [tween config](tween.md#create-tween-task)
     - `run` : A function which will be called when the Event fires.
         ```javascript
-        function(target) {
-        
+        function() {
+            // this: target parameter
         }
         ```
     - `sound` : 

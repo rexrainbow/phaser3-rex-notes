@@ -9556,7 +9556,9 @@
 <span class="w">            </span><span class="nx">yoyo</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">        </span><span class="p">},</span>
 
-<span class="w">        </span><span class="nx">run</span><span class="p">(</span><span class="nx">target</span><span class="p">){</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">run</span><span class="p">(){</span><span class="w"> </span>
+<span class="w">            </span><span class="c1">// this: target parameter</span>
+<span class="w">        </span><span class="p">},</span>
 
 <span class="w">        </span><span class="nx">sound</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 
@@ -9582,8 +9584,8 @@
 <li><code>set</code> : A key-value object of properties to set on the <code>target</code>.</li>
 <li><code>tween</code> : <a href="../tween/#create-tween-task">tween config</a></li>
 <li><code>run</code> : A function which will be called when the Event fires.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// this: target parameter</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>sound</code> : <ul>
