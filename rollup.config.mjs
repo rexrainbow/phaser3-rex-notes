@@ -12,6 +12,7 @@ import pluginList from './plugin-list.js';
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 
+let prefix = 'rex';
 let outputs = [];
 
 for (var key in pluginList) {
@@ -26,8 +27,8 @@ for (var key in pluginList) {
     }
 
     // Export no-uglify files
-    let outFile = `./dist/rex${key}.js`;
-    let libName = `rex${key}`;
+    let libName = `${prefix}${key}`;
+    let outFile = `./dist/${libName}.js`;    
     // console.log(inputFile)
     // console.log(outFile)
     // console.log(libName)
@@ -65,7 +66,7 @@ for (var key in pluginList) {
 
     // Export uglify files
     let inputFile2 = outFile;
-    let outFile2 = `./dist/rex${key}.min.js`;
+    let outFile2 = `./dist/${libName}.min.js`;
     outputs.push({
         input: inputFile2,
         output: {
