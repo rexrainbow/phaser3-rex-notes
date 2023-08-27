@@ -184,6 +184,12 @@ declare class DynamicText extends Canvas {
     modifyDefaultTextStyle(style: DynamicText.IConfigTextStyle): this;
     text: string;
 
+    setTextOX(ox: number): this;
+    setTextOY(oy: number): this;
+    setTextOXY(ox: number, oy: number): this;
+    addTextOX(incX: number): this;
+    addTextOY(incY: number): this;
+    addTextOXY(incX: number, incY: number): this;
     textOX: number;
     textOY: number;
 

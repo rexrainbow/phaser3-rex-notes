@@ -28,5 +28,21 @@ export default {
         this._textOY = oy;
         this.updateTexture();
         return this;
+    },
+
+    addTextOX(incX) {
+        this.setTextOX(this._textOX + incX);
+        return this;
+    },
+
+    addTextOY(incY) {
+        this.setTextOY(this._textOY + incY);
+        return this;
+    },
+
+    addTextOXY(incX, incY) {
+        this.setTextOXY(this._textOX + incX, this._textOY + incY);
+        return this;
     }
+
 }

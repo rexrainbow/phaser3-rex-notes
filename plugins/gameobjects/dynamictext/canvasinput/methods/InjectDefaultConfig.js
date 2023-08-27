@@ -18,6 +18,10 @@ var InjectDefaultConfig = function (config) {
         SetValue(config, 'wrap.maxLines', defaultValue);
     }
 
+    if (isSingleLineMode) {
+        SetValue(config, 'wrap.wrapWidth', Infinity);
+    }
+
     if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
         SetValue(config, 'wrap.useDefaultTextHeight', true);
     }

@@ -30,6 +30,9 @@ var MoveCursor = function (hiddenTextEdit) {
             if (child.text === '\n') {
                 child.copyTextSize(textObject.lastInsertCursor);
             }
+
+            child.scrollTo();
+
             textObject.emit('cursorin', child, cursorPosition, textObject);
         }
     }
