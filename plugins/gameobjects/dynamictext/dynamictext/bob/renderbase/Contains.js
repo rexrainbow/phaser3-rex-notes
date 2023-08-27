@@ -1,5 +1,7 @@
 import CanvasPositionToBobPosition from '../../methods/utils/transform/CanvasPositionToBobPosition.js';
 
+const Rectangle = Phaser.Geom.Rectangle;
+
 var Contains = function (canvasX, canvasY) {
     if ((this.width === 0) || (this.height === 0)) {
         return false;
@@ -9,23 +11,18 @@ var Contains = function (canvasX, canvasY) {
     return GetBobBounds(this).contains(bobPosition.x, bobPosition.y);
 }
 
-const Rectangle = Phaser.Geom.Rectangle;
-
-var GetBobBounds = function (bob, out) {
-    if (out === undefined) {
-        if (globBounds === undefined) {
-            globBounds = new Rectangle();
-        }
-        out = globBounds;
+var GetBobBounds = function (bob) {
+    if (bobBounds === undefined) {
+        bobBounds = new Rectangle();
     }
 
     var x = bob.drawTLX,
         y = bob.drawTLY;
-    out.setTo(x, y, (bob.drawTRX - x), (bob.drawBLY - y));
+    bobBounds.setTo(x, y, (bob.drawTRX - x), (bob.drawBLY - y));
 
-    return out;
+    return bobBounds;
 }
 
-var globBounds;
+var bobBounds;
 
 export default Contains;
