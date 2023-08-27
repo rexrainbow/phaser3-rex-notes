@@ -15,8 +15,7 @@ export default {
         context.globalAlpha = this.alpha;
 
         if (this.toLocalPosition) {
-            var x = this.drawX + this.parent._textOX;
-            var y = this.drawY + this.parent._textOY;
+            var x = this.drawX, y = this.drawY;
             if (this.autoRound) {
                 x = Math.round(x);
                 y = Math.round(y);

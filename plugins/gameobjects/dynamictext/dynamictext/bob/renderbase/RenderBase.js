@@ -305,10 +305,10 @@ class RenderBase extends Base {
     }
 
     get drawX() {
-        return this.x + this.leftSpace + this.offsetX - (this.originX * this.width);
+        return this.parent._textOX + this.x + this.leftSpace + this.offsetX - (this.originX * this.width);
     }
     get drawY() {
-        return this.y + this.offsetY;
+        return this.parent._textOY + this.y + this.offsetY;
     }
 
     // Override
