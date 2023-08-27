@@ -1,4 +1,5 @@
 import MaskToGameObject from '../../../../utils/mask/MaskToGameObject.js';
+import ContainsPoints from '../../../../utils/geom/rectangle/ContainPoints.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
@@ -75,19 +76,6 @@ var IsVisible = function (gameObject) {
         }
     }
 }
-
-var ContainsPoints = function (rectA, rectB) {
-    var result = 0;
-    var top = rectB.top,
-        bottom = rectB.bottom,
-        left = rectB.left,
-        right = rectB.right;
-    result += rectA.contains(left, top) ? 1 : 0;
-    result += rectA.contains(left, bottom) ? 1 : 0;
-    result += rectA.contains(right, top) ? 1 : 0;
-    result += rectA.contains(right, bottom) ? 1 : 0;
-    return result;
-};
 
 var ShowAll = function (parent, child, mask) {
     parent.setChildMaskVisible(child, true);

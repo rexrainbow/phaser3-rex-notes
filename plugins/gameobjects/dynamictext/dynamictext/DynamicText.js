@@ -36,6 +36,8 @@ class DynamicText extends Canvas {
         this.textStyle = this.defaultTextStyle.clone();
         this.setTestString(GetValue(config, 'testString', '|MÉqgy'));
 
+        this._textOX = 0;
+        this._textOY = 0;
         this.background = new Background(this, GetValue(config, 'background', undefined));
         this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));
         this.children = [];
@@ -71,6 +73,32 @@ class DynamicText extends Canvas {
     setSize(width, height) {
         this.setFixedSize(width, height);
         return this;
+    }
+
+    get textOX() {
+        return this._textOX;
+    }
+
+    set textOX(value) {
+        if (value === this._textOX) {
+            return;
+        }
+
+        this._textOX = value;
+        this.updateTexture();
+    }
+
+    get textOY() {
+        return this._textOY;
+    }
+
+    set textOY(value) {
+        if (value === this._textOY) {
+            return;
+        }
+
+        this._textOY = value;
+        this.updateTexture();
     }
 }
 

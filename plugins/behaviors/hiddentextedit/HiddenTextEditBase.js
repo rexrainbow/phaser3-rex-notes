@@ -70,7 +70,7 @@ class HiddenTextEditBase extends ComponentBase {
     initText() {
     }
 
-    // Override
+    // Override, invoking under 'postupdate' event of scene
     updateText() {
     }
 

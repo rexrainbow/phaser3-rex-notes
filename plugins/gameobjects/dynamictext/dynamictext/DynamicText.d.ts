@@ -184,6 +184,9 @@ declare class DynamicText extends Canvas {
     modifyDefaultTextStyle(style: DynamicText.IConfigTextStyle): this;
     text: string;
 
+    textOX: number;
+    textOY: number;
+
     setTestString(testString: string): this;
     testString: string;
 
