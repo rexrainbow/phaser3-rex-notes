@@ -3265,11 +3265,11 @@
     }
   };
   var ContainsPoints = function ContainsPoints(rectA, rectB) {
-    var result = 0;
     var top = rectB.top,
       bottom = rectB.bottom,
       left = rectB.left,
       right = rectB.right;
+    var result = 0;
     result += rectA.contains(left, top) ? 1 : 0;
     result += rectA.contains(left, bottom) ? 1 : 0;
     result += rectA.contains(right, top) ? 1 : 0;

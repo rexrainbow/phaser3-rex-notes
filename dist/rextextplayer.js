@@ -6587,18 +6587,18 @@
       return false;
     }
     var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
-    return GetBounds(this).contains(bobPosition.x, bobPosition.y);
+    return GetBobBounds(this).contains(bobPosition.x, bobPosition.y);
   };
-  var GetBounds = function GetBounds(bob) {
-    if (globBounds === undefined) {
-      globBounds = new Rectangle();
+  var GetBobBounds = function GetBobBounds(bob) {
+    if (bobBounds === undefined) {
+      bobBounds = new Rectangle();
     }
     var x = bob.drawTLX,
       y = bob.drawTLY;
-    globBounds.setTo(x, y, bob.drawTRX - x, bob.drawBLY - y);
-    return globBounds;
+    bobBounds.setTo(x, y, bob.drawTRX - x, bob.drawBLY - y);
+    return bobBounds;
   };
-  var globBounds;
+  var bobBounds;
 
   var RotateAround = Phaser.Math.RotateAround;
   var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
@@ -6666,9 +6666,36 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
+  var ScrollTo$1 = function ScrollTo() {
+    var textObject = this.parent;
+    var dx, dy;
+    var childLeftX = this.drawX + this.drawTLX;
+    var childRightX = childLeftX + this.width;
+    if (childLeftX < 0) {
+      dx = 0 - childLeftX;
+    } else if (childRightX > textObject.width) {
+      dx = textObject.width - childRightX;
+    } else {
+      dx = 0;
+    }
+    var childTopY = this.drawY + this.drawTLY;
+    var childBottomY = childTopY + this.height;
+    if (childTopY < 0) {
+      dy = 0 - childTopY;
+    } else if (childBottomY > textObject.height) {
+      dy = textObject.height - childBottomY;
+    } else {
+      dy = 0;
+    }
+    textObject._textOX += dx;
+    textObject._textOY += dy;
+    return this;
+  };
+
   var Methods$4 = {
     contains: Contains,
-    getWorldPosition: GetWorldPosition
+    getWorldPosition: GetWorldPosition,
+    scrollTo: ScrollTo$1
   };
   Object.assign(Methods$4, RenderMethods);
 
@@ -6683,6 +6710,8 @@
       _classCallCheck(this, RenderBase);
       _this = _super.call(this, parent, type);
       _this.renderable = true;
+      _this.scrollFactorX = 1;
+      _this.scrollFactorY = 1;
       _this.toLocalPosition = true;
       _this.originX = 0;
       _this.offsetX = 0; // Override
@@ -6764,6 +6793,28 @@
       value: function setInitialPosition(x, y) {
         this.x0 = x;
         this.y0 = y;
+        return this;
+      }
+    }, {
+      key: "setScrollFactorX",
+      value: function setScrollFactorX(x) {
+        this.scrollFactorX = x;
+        return this;
+      }
+    }, {
+      key: "setScrollFactorY",
+      value: function setScrollFactorY(y) {
+        this.scrollFactorY = y;
+        return this;
+      }
+    }, {
+      key: "setScrollFactor",
+      value: function setScrollFactor(x, y) {
+        if (y === undefined) {
+          y = x;
+        }
+        this.scrollFactorX = x;
+        this.scrollFactorY = y;
         return this;
       }
     }, {
@@ -7011,12 +7062,14 @@
     }, {
       key: "drawX",
       get: function get() {
-        return this.x + this.leftSpace + this.offsetX - this.originX * this.width;
+        var x = this.x + this.leftSpace + this.offsetX - this.originX * this.width;
+        return this.parent._textOX * this.scrollFactorX + x;
       }
     }, {
       key: "drawY",
       get: function get() {
-        return this.y + this.offsetY;
+        var y = this.y + this.offsetY;
+        return this.parent._textOY * this.scrollFactorY + y;
       }
 
       // Override
@@ -7474,6 +7527,7 @@
       var _this;
       _classCallCheck(this, Background);
       _this = _super.call(this, parent, 'background');
+      _this.setScrollFactor(0);
       _this.setColor(GetValue$a(config, 'color', null), GetValue$a(config, 'color2', null), GetValue$a(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$a(config, 'stroke', null), GetValue$a(config, 'strokeThickness', 2));
       _this.setCornerRadius(GetValue$a(config, 'cornerRadius', 0), GetValue$a(config, 'cornerIteration', null));
@@ -7613,6 +7667,7 @@
       var _this;
       _classCallCheck(this, InnerBounds);
       _this = _super.call(this, parent, 'innerbounds');
+      _this.setScrollFactor(0);
       _this.setColor(GetValue$9(config, 'color', null), GetValue$9(config, 'color2', null), GetValue$9(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$9(config, 'stroke', null), GetValue$9(config, 'strokeThickness', 2));
       return _this;
@@ -9680,6 +9735,46 @@
     }
   };
 
+  var SetTextOXYMethods = {
+    setTextOX: function setTextOX(ox) {
+      if (ox === this._textOX) {
+        return this;
+      }
+      this._textOX = ox;
+      this.updateTexture();
+      return this;
+    },
+    setTextOY: function setTextOY(oy) {
+      if (oy === this._textOY) {
+        return this;
+      }
+      this._textOY = oy;
+      this.updateTexture();
+      return this;
+    },
+    setTextOXY: function setTextOXY(ox, oy) {
+      if (ox === this._textOX && oy === this._textOY) {
+        return;
+      }
+      this._textOX = ox;
+      this._textOY = oy;
+      this.updateTexture();
+      return this;
+    },
+    addTextOX: function addTextOX(incX) {
+      this.setTextOX(this._textOX + incX);
+      return this;
+    },
+    addTextOY: function addTextOY(incY) {
+      this.setTextOY(this._textOY + incY);
+      return this;
+    },
+    addTextOXY: function addTextOXY(incX, incY) {
+      this.setTextOXY(this._textOX + incX, this._textOY + incY);
+      return this;
+    }
+  };
+
   var RenderContent = function RenderContent() {
     this.clear();
     this.setCanvasSize(this.width, this.height);
@@ -10124,7 +10219,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -10200,6 +10295,8 @@
       _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
       _this.setTestString(GetValue$4(config, 'testString', '|MÉqgy'));
+      _this._textOX = 0;
+      _this._textOY = 0;
       _this.background = new Background(_assertThisInitialized(_this), GetValue$4(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$4(config, 'innerBounds', undefined));
       _this.children = [];
@@ -10236,6 +10333,22 @@
       value: function setSize(width, height) {
         this.setFixedSize(width, height);
         return this;
+      }
+    }, {
+      key: "textOX",
+      get: function get() {
+        return this._textOX;
+      },
+      set: function set(value) {
+        this.setTextOX(value);
+      }
+    }, {
+      key: "textOY",
+      get: function get() {
+        return this._textOY;
+      },
+      set: function set(value) {
+        this.setTextOY(value);
       }
     }]);
     return DynamicText;

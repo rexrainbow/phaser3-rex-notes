@@ -661,7 +661,7 @@
       key: "initText",
       value: function initText() {}
 
-      // Override
+      // Override, invoking under 'postupdate' event of scene
     }, {
       key: "updateText",
       value: function updateText() {}
