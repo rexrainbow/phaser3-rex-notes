@@ -75,31 +75,6 @@ class DynamicText extends Canvas {
         return this;
     }
 
-    get textOX() {
-        return this._textOX;
-    }
-
-    set textOX(value) {
-        if (value === this._textOX) {
-            return;
-        }
-
-        this._textOX = value;
-        this.updateTexture();
-    }
-
-    get textOY() {
-        return this._textOY;
-    }
-
-    set textOY(value) {
-        if (value === this._textOY) {
-            return;
-        }
-
-        this._textOY = value;
-        this.updateTexture();
-    }
 }
 
 Object.assign(
