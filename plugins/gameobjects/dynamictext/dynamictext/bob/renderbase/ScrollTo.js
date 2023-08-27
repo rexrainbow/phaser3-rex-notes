@@ -1,23 +1,31 @@
 var ScrollTo = function () {
     var textObject = this.parent;
-    var dx, dy;
+    var textObjectLeftX = 0,
+        textObjectRightX = textObject.width,
+        textObjectTopY = 0,
+        textObjectBottomY = textObject.height;
 
-    var childLeftX = this.drawX + this.drawTLX;
-    var childRightX = childLeftX + this.width;
-    if (childLeftX < 0) {
-        dx = 0 - childLeftX;
-    } else if (childRightX > textObject.width) {
-        dx = textObject.width - childRightX;
+    var childX = this.drawX,
+        childY = this.drawY;
+    var childLeftX = childX + this.drawTLX,
+        childRightX = childX + this.drawTRX,
+        childTopY = childY + this.drawTLY,
+        childBottomY = childY + this.drawTRY;
+
+    var dx;
+    if (childLeftX < textObjectLeftX) {
+        dx = textObjectLeftX - childLeftX;
+    } else if (childRightX > textObjectRightX) {
+        dx = textObjectRightX - childRightX;
     } else {
         dx = 0;
     }
 
-    var childTopY = this.drawY + this.drawTLY;
-    var childBottomY = childTopY + this.height;
-    if (childTopY < 0) {
-        dy = 0 - childTopY;
-    } else if (childBottomY > textObject.height) {
-        dy = textObject.height - childBottomY;
+    var dy;
+    if (childTopY < textObjectTopY) {
+        dy = textObjectTopY - childTopY;
+    } else if (childBottomY > textObjectBottomY) {
+        dy = textObjectBottomY - childBottomY;
     } else {
         dy = 0;
     }
