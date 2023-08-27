@@ -9,6 +9,8 @@ class Background extends RenderBase {
     constructor(parent, config) {
         super(parent, 'background');
 
+        this.setScrollFactor(0);
+
         this.setColor(
             GetValue(config, 'color', null),
             GetValue(config, 'color2', null),

@@ -80,12 +80,7 @@ class DynamicText extends Canvas {
     }
 
     set textOX(value) {
-        if (value === this._textOX) {
-            return;
-        }
-
-        this._textOX = value;
-        this.updateTexture();
+        this.setTextOX(value);
     }
 
     get textOY() {
@@ -93,12 +88,7 @@ class DynamicText extends Canvas {
     }
 
     set textOY(value) {
-        if (value === this._textOY) {
-            return;
-        }
-
-        this._textOY = value;
-        this.updateTexture();
+        this.setTextOY(value);
     }
 }
 

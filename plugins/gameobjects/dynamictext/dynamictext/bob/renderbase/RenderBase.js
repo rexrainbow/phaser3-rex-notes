@@ -10,6 +10,8 @@ class RenderBase extends Base {
         super(parent, type);
 
         this.renderable = true;
+        this.scrollFactorX = 1;
+        this.scrollFactorY = 1;
         this.toLocalPosition = true;
         this.originX = 0;
         this.offsetX = 0;  // Override
@@ -79,6 +81,25 @@ class RenderBase extends Base {
     setInitialPosition(x, y) {
         this.x0 = x;
         this.y0 = y;
+        return this;
+    }
+
+    setScrollFactorX(x) {
+        this.scrollFactorX = x;
+        return this;
+    }
+
+    setScrollFactorY(y) {
+        this.scrollFactorY = y;
+        return this;
+    }
+
+    setScrollFactor(x, y) {
+        if (y === undefined) {
+            y = x;
+        }
+        this.scrollFactorX = x;
+        this.scrollFactorY = y;
         return this;
     }
 
@@ -305,10 +326,12 @@ class RenderBase extends Base {
     }
 
     get drawX() {
-        return this.parent._textOX + this.x + this.leftSpace + this.offsetX - (this.originX * this.width);
+        var x = this.x + this.leftSpace + this.offsetX - (this.originX * this.width);
+        return (this.parent._textOX * this.scrollFactorX) + x;
     }
     get drawY() {
-        return this.parent._textOY + this.y + this.offsetY;
+        var y = this.y + this.offsetY;
+        return (this.parent._textOY * this.scrollFactorY) + y;
     }
 
     // Override

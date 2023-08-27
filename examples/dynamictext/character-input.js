@@ -90,6 +90,8 @@ class Demo extends Phaser.Scene {
                 var child = text.getNearestChild(localX, localY);
                 console.log(child.text)
             })
+
+        // text.setTextOY(-40);
     }
 
     update() { }

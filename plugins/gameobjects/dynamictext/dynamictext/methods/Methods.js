@@ -31,6 +31,7 @@ import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
 import RunWrap from './RunWrap.js';
 import SetAlignMethods from './SetAlignMethods.js';
+import SetTextOXYMethods from './SetTextOXYMethods.js';
 import RenderContent from './RenderContent.js';
 
 import ForEachChild from './ForEachChild.js';
@@ -118,6 +119,7 @@ Object.assign(
     BackgroundMethods,
     InnerBoundsMethods,
     SetAlignMethods,
+    SetTextOXYMethods,
 
 )
 
