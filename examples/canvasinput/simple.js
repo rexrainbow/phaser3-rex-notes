@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         var txt0 = CreateCanvasInput(this, 'Apple012345678901234567890123456789').setPosition(400, 100)
         var txt1 = CreateCanvasInput(this, 'A').setPosition(400, 200).appendText('pple')
         var txt2 = CreateCanvasInput(this, 'Apple').setPosition(400, 300).setReadOnly()
-        var txt3 = CreateCanvasInput(this, 'Apple', 100).setPosition(100, 400).setOrigin(0)
+        var txt3 = CreateCanvasInput(this, 'Apple', 200).setPosition(100, 400).setOrigin(0)
 
         this.add.text(0, 0, 'Full screen')
             .setInteractive()
