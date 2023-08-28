@@ -26,6 +26,12 @@ declare class RenderBase extends Base {
     x: number;
     y: number;
 
+    setScrollFactorX(x: number): this;
+    setScrollFactorY(y: number): this;
+    setScrollFactor(x: number, y?: number): this;
+    scrollFactorX: number;
+    scrollFactorY: number;
+
     setAngle(degrees: number): this;
     setRotation(radians: number): this;
     angle: number;

@@ -2,6 +2,8 @@ import RenderBase from '../renderbase/RenderBase';
 
 export default class Background extends RenderBase {
     readonly type: 'background';
+    scrollFactorX: 0;
+    scrollFactorY: 0;
 
     setColor(
         color?: string | number | null,
