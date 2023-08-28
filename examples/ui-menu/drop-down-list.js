@@ -59,7 +59,7 @@ var CreateDropDownList = function (scene, x, y, options) {
     var menu;
     scene.rexUI.add.click(label)
         .on('click', function () {
-            if (!menu) {
+            if (!menu || !menu.scene) {
                 var menuX = label.getElement('text').getTopLeft().x,
                     menuY = label.bottom;
                 menu = CreatePopupList(scene, menuX, menuY, options, function (button) {
