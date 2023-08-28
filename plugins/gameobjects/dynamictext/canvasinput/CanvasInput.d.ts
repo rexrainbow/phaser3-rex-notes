@@ -113,6 +113,10 @@ declare class CanvasInput extends DynamicText {
     inputText: string;
     setInputText(value: string): this;
 
+    readonly contentWidth: number;
+    readonly contentHeight: number;
+    readonly linesCount: number;
+
     setParseTextCallback(callback?: CanvasInput.ParseTextCallbackType): this;
     getValue(): unknown;
     setValue(value: unknown): this;
