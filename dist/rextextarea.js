@@ -19103,7 +19103,6 @@
       if (config === undefined) {
         config = {};
       }
-      config.scrollMode = 0;
 
       // Create text-block
       var textObject = GetValue(config, 'text', undefined);

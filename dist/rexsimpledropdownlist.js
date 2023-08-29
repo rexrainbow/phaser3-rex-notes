@@ -21695,36 +21695,9 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var ScrollTo = function ScrollTo() {
-    var textObject = this.parent;
-    var dx, dy;
-    var childLeftX = this.drawX + this.drawTLX;
-    var childRightX = childLeftX + this.width;
-    if (childLeftX < 0) {
-      dx = 0 - childLeftX;
-    } else if (childRightX > textObject.width) {
-      dx = textObject.width - childRightX;
-    } else {
-      dx = 0;
-    }
-    var childTopY = this.drawY + this.drawTLY;
-    var childBottomY = childTopY + this.height;
-    if (childTopY < 0) {
-      dy = 0 - childTopY;
-    } else if (childBottomY > textObject.height) {
-      dy = textObject.height - childBottomY;
-    } else {
-      dy = 0;
-    }
-    textObject._textOX += dx;
-    textObject._textOY += dy;
-    return this;
-  };
-
   var Methods$1 = {
     contains: Contains,
-    getWorldPosition: GetWorldPosition,
-    scrollTo: ScrollTo
+    getWorldPosition: GetWorldPosition
   };
   Object.assign(Methods$1, RenderMethods);
 
@@ -24314,7 +24287,6 @@
         return this;
       }
       this._textOX = ox;
-      this.updateTexture();
       return this;
     },
     setTextOY: function setTextOY(oy) {
@@ -24322,7 +24294,6 @@
         return this;
       }
       this._textOY = oy;
-      this.updateTexture();
       return this;
     },
     setTextOXY: function setTextOXY(ox, oy) {
@@ -24331,7 +24302,6 @@
       }
       this._textOX = ox;
       this._textOY = oy;
-      this.updateTexture();
       return this;
     },
     addTextOX: function addTextOX(incX) {

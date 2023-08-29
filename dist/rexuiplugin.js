@@ -7686,36 +7686,9 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var ScrollTo$1 = function ScrollTo() {
-    var textObject = this.parent;
-    var dx, dy;
-    var childLeftX = this.drawX + this.drawTLX;
-    var childRightX = childLeftX + this.width;
-    if (childLeftX < 0) {
-      dx = 0 - childLeftX;
-    } else if (childRightX > textObject.width) {
-      dx = textObject.width - childRightX;
-    } else {
-      dx = 0;
-    }
-    var childTopY = this.drawY + this.drawTLY;
-    var childBottomY = childTopY + this.height;
-    if (childTopY < 0) {
-      dy = 0 - childTopY;
-    } else if (childBottomY > textObject.height) {
-      dy = textObject.height - childBottomY;
-    } else {
-      dy = 0;
-    }
-    textObject._textOX += dx;
-    textObject._textOY += dy;
-    return this;
-  };
-
   var Methods$i = {
     contains: Contains$1,
-    getWorldPosition: GetWorldPosition,
-    scrollTo: ScrollTo$1
+    getWorldPosition: GetWorldPosition
   };
   Object.assign(Methods$i, RenderMethods);
 
@@ -10305,13 +10278,12 @@
     }
   };
 
-  var SetTextOXYMethods = {
+  var SetTextOXYMethods$1 = {
     setTextOX: function setTextOX(ox) {
       if (ox === this._textOX) {
         return this;
       }
       this._textOX = ox;
-      this.updateTexture();
       return this;
     },
     setTextOY: function setTextOY(oy) {
@@ -10319,7 +10291,6 @@
         return this;
       }
       this._textOY = oy;
-      this.updateTexture();
       return this;
     },
     setTextOXY: function setTextOXY(ox, oy) {
@@ -10328,7 +10299,6 @@
       }
       this._textOX = ox;
       this._textOY = oy;
-      this.updateTexture();
       return this;
     },
     addTextOX: function addTextOX(incX) {
@@ -10789,7 +10759,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$h, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods);
+  Object.assign(Methods$h, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods$1);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -20374,6 +20344,38 @@
     hiddenTextEdit.prevSelectionEnd = selectionEnd;
   };
 
+  var ScrollToBob = function ScrollToBob(bob) {
+    var textObject = bob.parent;
+    var textObjectLeftX = 0,
+      textObjectRightX = textObject.width,
+      textObjectTopY = 0,
+      textObjectBottomY = textObject.height;
+    var childX = bob.drawX,
+      childY = bob.drawY;
+    var childLeftX = childX + bob.drawTLX,
+      childRightX = childX + bob.drawTRX,
+      childTopY = childY + bob.drawTLY,
+      childBottomY = childY + bob.drawBLY;
+    var dx;
+    if (childLeftX < textObjectLeftX) {
+      dx = textObjectLeftX - childLeftX;
+    } else if (childRightX > textObjectRightX) {
+      dx = textObjectRightX - childRightX;
+    } else {
+      dx = 0;
+    }
+    var dy;
+    if (childTopY < textObjectTopY) {
+      dy = textObjectTopY - childTopY;
+    } else if (childBottomY > textObjectBottomY) {
+      dy = textObjectBottomY - childBottomY;
+    } else {
+      dy = 0;
+    }
+    textObject._textOX += dx;
+    textObject._textOY += dy;
+  };
+
   var MoveCursor = function MoveCursor(hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     var text = textObject.text;
@@ -20403,7 +20405,7 @@
         if (child.text === '\n') {
           child.copyTextSize(textObject.lastInsertCursor);
         }
-        child.scrollTo();
+        ScrollToBob(child);
         textObject.emit('cursorin', child, cursorPosition, textObject);
       }
     }
@@ -21155,7 +21157,35 @@
 
     // Push back lastInsertCursor directly
     textObject.children.push(textObject.lastInsertCursor);
-    textObject.runWordWrap();
+    var result = textObject.runWordWrap();
+    textObject.contentWidth = result.maxLineWidth;
+    textObject.contentHeight = result.linesHeight;
+    textObject.linesCount = result.lines.length;
+  };
+
+  var SetTextOXYMethods = {
+    setTextOYByPercentage: function setTextOYByPercentage(percentage) {
+      this.setTextOY(-this.textVisibleHeight * percentage);
+      return this;
+    },
+    getTextOYPercentage: function getTextOYPercentage() {
+      var textVisibleHeight = this.textVisibleHeight;
+      if (textVisibleHeight === 0) {
+        return 0;
+      }
+      return this._textOY / -textVisibleHeight;
+    },
+    setTextOXByPercentage: function setTextOXByPercentage(percentage) {
+      this.setTextOX(-this.textVisibleWidth * percentage);
+      return this;
+    },
+    getTextOXPercentage: function getTextOXPercentage() {
+      var textVisibleWidth = this.textVisibleWidth;
+      if (textVisibleWidth === 0) {
+        return 0;
+      }
+      return this._textOX / -textVisibleWidth;
+    }
   };
 
   var IsPlainObject$J = Phaser.Utils.Objects.IsPlainObject;
@@ -21184,6 +21214,11 @@
       var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
+
+      // readonly
+      _this.contentWidth = undefined;
+      _this.contentHeight = undefined;
+      _this.linesCount = undefined;
       _this._text;
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
       if (config.focusStyle) {
@@ -21415,12 +21450,67 @@
         this.minLength = value;
         return this;
       }
+    }, {
+      key: "topTextOY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "bottomTextOY",
+      get: function get() {
+        return -this.tableVisibleHeight;
+      }
+    }, {
+      key: "leftTextOX",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "rightTextOX",
+      get: function get() {
+        return -this.textVisibleWidth;
+      }
+    }, {
+      key: "textVisibleHeight",
+      get: function get() {
+        var h = this.contentHeight - this.height;
+        if (h < 0) {
+          h = 0;
+        }
+        return h;
+      }
+    }, {
+      key: "textVisibleWidth",
+      get: function get() {
+        var w = this.contentWidth - this.width;
+        if (w < 0) {
+          w = 0;
+        }
+        return w;
+      }
+    }, {
+      key: "t",
+      get: function get() {
+        return this.getTextOYPercentage();
+      },
+      set: function set(value) {
+        this.setTextOYByPercentage(value).updateTexture();
+      }
+    }, {
+      key: "s",
+      get: function get() {
+        return this.getTextOXPercentage();
+      },
+      set: function set(value) {
+        this.setTextOXByPercentage(value).updateTexture();
+      }
     }]);
     return CanvasInput;
   }(DynamicText);
   var DefaultParseTextCallback = function DefaultParseTextCallback(text) {
     return text;
   };
+  Object.assign(CanvasInput.prototype, SetTextOXYMethods);
 
   ObjectFactory.register('canvasInput', function (x, y, fixedWidth, fixedHeight, config) {
     var gameObject = new CanvasInput(this.scene, x, y, fixedWidth, fixedHeight, config);
@@ -48371,7 +48461,6 @@
       if (config === undefined) {
         config = {};
       }
-      config.scrollMode = 0;
 
       // Create text-block
       var textObject = GetValue$14(config, 'text', undefined);
