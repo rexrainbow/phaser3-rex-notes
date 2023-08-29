@@ -12,8 +12,6 @@ class TextArea extends Scrollable {
             config = {};
         }
 
-        config.scrollMode = 0;
-
         // Create text-block
         var textObject = GetValue(config, 'text', undefined);
         var textWidth = GetValue(config, 'textWidth', undefined);
