@@ -68,6 +68,7 @@ import PerspectiveCard from './perspectivecard/PerspectiveCard';
 import TabPages from './tabpages/TabPages';
 import Folder from './folder/Folder';
 import TextArea from './textarea/TextArea';
+import TextAreaInput from './textareainput/TextAreaInput';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents';
@@ -192,6 +193,7 @@ export {
     TabPages,
     Folder,
     TextArea,
+    TextAreaInput,
     ScrollablePanel,
     Toast,
     ColorComponents,

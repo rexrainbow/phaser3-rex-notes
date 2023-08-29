@@ -14094,13 +14094,13 @@
     if (height === undefined) {
       height = 0;
     }
-    var dirty = this.fixedWidth !== width || this.fixedHeight !== height;
-    if (!dirty) {
+    if (this.fixedWidth === width && this.fixedHeight === height) {
       return this;
     }
     this.fixedWidth = width;
     this.fixedHeight = height;
-    this.dirty = true;
+    this.dirty = true; // -> this.updateTexture();
+
     this.setCanvasSize(width > 0 ? width : this.width, height > 0 ? height : this.height);
     return this;
   };
@@ -17096,7 +17096,6 @@
         }
         if (textObject.text !== text) {
           textObject.setText(text);
-          textObject.emit('textchange', text, textObject, this);
         }
         if (this.isOpened) {
           if (this.selectionStart !== this.selectionEnd) {
@@ -17778,7 +17777,7 @@
     if (newText === text) {
       return;
     }
-    if (!text) {
+    if (text == null) {
       text = '';
     }
 
@@ -17807,10 +17806,8 @@
 
     // Push back lastInsertCursor directly
     textObject.children.push(textObject.lastInsertCursor);
-    var result = textObject.runWordWrap();
-    textObject.contentWidth = result.maxLineWidth;
-    textObject.contentHeight = result.linesHeight;
-    textObject.linesCount = result.lines.length;
+    textObject.runWrap();
+    textObject.emit('textchange', newText, textObject);
   };
 
   var SetTextOXYMethods = {
@@ -17950,6 +17947,16 @@
       value: function appendText(text) {
         this.setText(this.text + text);
         return this;
+      }
+    }, {
+      key: "runWrap",
+      value: function runWrap(config) {
+        var result = _get(_getPrototypeOf(CanvasInput.prototype), "runWrap", this).call(this, config);
+        // Save content size
+        this.contentWidth = result.maxLineWidth;
+        this.contentHeight = result.linesHeight;
+        this.linesCount = result.lines.length;
+        return result;
       }
     }, {
       key: "setSize",

@@ -133,6 +133,15 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    runWrap(config) {
+        var result = super.runWrap(config);
+        // Save content size
+        this.contentWidth = result.maxLineWidth;
+        this.contentHeight = result.linesHeight;
+        this.linesCount = result.lines.length;
+        return result;
+    }
+
     setSize(width, height) {
         if ((this.width === width) && (this.height === height)) {
             return this;

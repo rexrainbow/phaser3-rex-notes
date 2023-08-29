@@ -68,6 +68,7 @@ import PerspectiveCard from './perspectivecard/PerspectiveCard.js';
 import TabPages from './tabpages/TabPages.js';
 import Folder from './folder/Folder.js';
 import TextArea from './textarea/TextArea.js';
+import TextAreaInput from './textareainput/TextAreaInput.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import ScrollBar from './scrollbar/ScrollBar.js';
 import Toast from './toast/Toast.js';
@@ -192,6 +193,7 @@ export {
     TabPages,
     Folder,
     TextArea,
+    TextAreaInput,
     ScrollablePanel,
     ScrollBar,
     Toast,

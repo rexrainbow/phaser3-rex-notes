@@ -8,7 +8,7 @@ var SetText = function (textObject, newText) {
         return;
     }
 
-    if (!text) {
+    if (text == null) {
         text = '';
     }
 
@@ -39,10 +39,10 @@ var SetText = function (textObject, newText) {
     // Push back lastInsertCursor directly
     textObject.children.push(textObject.lastInsertCursor);
 
-    var result = textObject.runWordWrap();
-    textObject.contentWidth = result.maxLineWidth;
-    textObject.contentHeight = result.linesHeight;
-    textObject.linesCount = result.lines.length;
+    textObject.runWrap();
+
+    textObject.emit('textchange', newText, textObject);
+
 }
 
 export default SetText;

@@ -81,8 +81,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
         }
 
         if (textObject.text !== text) {
-            textObject.setText(text);
-            textObject.emit('textchange', text, textObject, this);
+            textObject.setText(text);            
         }
 
         if (this.isOpened) {
