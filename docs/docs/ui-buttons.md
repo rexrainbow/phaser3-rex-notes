@@ -104,6 +104,7 @@ var buttons = scene.rexUI.add.buttons({
         clickInterval: 100
     },
 
+    // space: 0,   // deprecated 
     // space: { left: 0, right:0, top:0, bottom:0, item:0 },
 
     // name: '',
@@ -156,6 +157,7 @@ var buttons = scene.rexUI.add.buttons({
     - An object: Padding of button game objects.
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
         - `space.item` : Space between 2 button game objects.
+    - A number: Deprecated, space between 2 button game objects. 
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
