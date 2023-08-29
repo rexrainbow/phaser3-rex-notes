@@ -10,6 +10,13 @@ declare namespace BBCodeText {
 }
 
 declare class BBCodeText extends Text {
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        content?: string,
+        style?: BBCodeText.TextStyle
+    );
+
     setDelimiters(
         delimiterLeft: string | string[],
         delimiterRight?: string
