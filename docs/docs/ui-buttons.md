@@ -104,7 +104,6 @@ var buttons = scene.rexUI.add.buttons({
         clickInterval: 100
     },
 
-    // space: 0,
     // space: { left: 0, right:0, top:0, bottom:0, item:0 },
 
     // name: '',
@@ -154,7 +153,6 @@ var buttons = scene.rexUI.add.buttons({
         - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `space` :
-    - A number: Space between 2 button game objects.
     - An object: Padding of button game objects.
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
         - `space.item` : Space between 2 button game objects.
