@@ -6,14 +6,13 @@ var SetFixedSize = function (width, height) {
         height = 0;
     }
 
-    var dirty = (this.fixedWidth !== width) || (this.fixedHeight !== height);
-    if (!dirty) {
+    if ((this.fixedWidth === width) && (this.fixedHeight === height)) {
         return this;
     }
 
     this.fixedWidth = width;
     this.fixedHeight = height;
-    this.dirty = true;
+    this.dirty = true;  // -> this.updateTexture();
 
     this.setCanvasSize(
         (width > 0) ? width : this.width,
