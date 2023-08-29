@@ -10711,14 +10711,19 @@ or</p>
 <p>Scroll content by setting <code>textOX</code>, <code>textOY</code> members</p>
 <ul>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTextOXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span><span class="w">    </span>
-<span class="c1">// txt.setTextOX(x);</span>
-<span class="c1">// txt.setTextOY(x);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTextOXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">).</span><span class="nx">updateTexture</span><span class="p">();</span><span class="w">    </span>
+<span class="c1">// txt.setTextOX(x).updateTexture();</span>
+<span class="c1">// txt.setTextOY(x).updateTexture(); </span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addTextOXY</span><span class="p">(</span><span class="nx">incX</span><span class="p">,</span><span class="w"> </span><span class="nx">incY</span><span class="p">);</span>
-<span class="c1">// txt.addTextOX(incX);</span>
-<span class="c1">// txt.addTextOY(incY);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addTextOXY</span><span class="p">(</span><span class="nx">incX</span><span class="p">,</span><span class="w"> </span><span class="nx">incY</span><span class="p">).</span><span class="nx">updateTexture</span><span class="p">();</span><span class="w"> </span>
+<span class="c1">// txt.addTextOX(incX).updateTexture(); </span>
+<span class="c1">// txt.addTextOY(incY).updateTexture(); </span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">textOX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">textOY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">textOX</span><span class="p">;</span>

@@ -1,16 +1,16 @@
-var ScrollTo = function () {
-    var textObject = this.parent;
+var ScrollToBob = function (bob) {
+    var textObject = bob.parent;
     var textObjectLeftX = 0,
         textObjectRightX = textObject.width,
         textObjectTopY = 0,
         textObjectBottomY = textObject.height;
 
-    var childX = this.drawX,
-        childY = this.drawY;
-    var childLeftX = childX + this.drawTLX,
-        childRightX = childX + this.drawTRX,
-        childTopY = childY + this.drawTLY,
-        childBottomY = childY + this.drawTRY;
+    var childX = bob.drawX,
+        childY = bob.drawY;
+    var childLeftX = childX + bob.drawTLX,
+        childRightX = childX + bob.drawTRX,
+        childTopY = childY + bob.drawTLY,
+        childBottomY = childY + bob.drawBLY;
 
     var dx;
     if (childLeftX < textObjectLeftX) {
@@ -33,7 +33,6 @@ var ScrollTo = function () {
     textObject._textOX += dx;
     textObject._textOY += dy;
 
-    return this;
 }
 
-export default ScrollTo;
+export default ScrollToBob;

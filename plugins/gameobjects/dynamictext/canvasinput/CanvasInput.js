@@ -7,6 +7,7 @@ import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
+import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -35,6 +36,11 @@ class CanvasInput extends DynamicText {
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
+
+        // readonly
+        this.contentWidth = undefined;
+        this.contentHeight = undefined;
+        this.linesCount = undefined;
 
         this._text;
 
@@ -263,10 +269,63 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    get topTextOY() {
+        return 0;
+    }
+
+    get bottomTextOY() {
+        return -this.tableVisibleHeight;
+    }
+
+    get leftTextOX() {
+        return 0;
+    }
+
+    get rightTextOX() {
+        return -this.textVisibleWidth;
+    }
+
+    get textVisibleHeight() {
+        var h = this.contentHeight - this.height;
+        if (h < 0) {
+            h = 0;
+        }
+        return h;
+    }
+
+    get textVisibleWidth() {
+        var w = this.contentWidth - this.width;
+        if (w < 0) {
+            w = 0;
+        }
+        return w;
+    }
+
+    set t(value) {
+        this.setTextOYByPercentage(value).updateTexture();
+    }
+
+    get t() {
+        return this.getTextOYPercentage();
+    }
+
+    set s(value) {
+        this.setTextOXByPercentage(value).updateTexture();
+    }
+
+    get s() {
+        return this.getTextOXPercentage();
+    }
+
 }
 
 var DefaultParseTextCallback = function (text) {
     return text;
 }
+
+Object.assign(
+    CanvasInput.prototype,
+    SetTextOXYMethods,
+)
 
 export default CanvasInput;

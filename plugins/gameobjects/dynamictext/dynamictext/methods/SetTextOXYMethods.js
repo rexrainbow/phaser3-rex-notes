@@ -5,7 +5,6 @@ export default {
         }
 
         this._textOX = ox;
-        this.updateTexture();
         return this;
     },
 
@@ -15,7 +14,6 @@ export default {
         }
 
         this._textOY = oy;
-        this.updateTexture();
         return this;
     },
 
@@ -26,7 +24,6 @@ export default {
 
         this._textOX = ox;
         this._textOY = oy;
-        this.updateTexture();
         return this;
     },
 

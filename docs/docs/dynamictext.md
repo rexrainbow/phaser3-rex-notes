@@ -601,15 +601,21 @@ Scroll content by setting `textOX`, `textOY` members
 
 - Set
     ```javascript
-    txt.setTextOXY(x, y);    
-    // txt.setTextOX(x);
-    // txt.setTextOY(x);
+    txt.setTextOXY(x, y).updateTexture();    
+    // txt.setTextOX(x).updateTexture();
+    // txt.setTextOY(x).updateTexture(); 
     ```
     or
     ```javascript
-    txt.addTextOXY(incX, incY);
-    // txt.addTextOX(incX);
-    // txt.addTextOY(incY);
+    txt.addTextOXY(incX, incY).updateTexture(); 
+    // txt.addTextOX(incX).updateTexture(); 
+    // txt.addTextOY(incY).updateTexture(); 
+    ```
+    or
+    ```javascript
+    txt.textOX = x;
+    txt.textOY = y;
+    txt.updateTexture();
     ```
 - Get
     ```javascript

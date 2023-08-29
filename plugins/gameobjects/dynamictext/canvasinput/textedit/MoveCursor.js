@@ -1,3 +1,5 @@
+import ScrollToBob from '../../dynamictext/bob/utils/ScrollToBob';
+
 var MoveCursor = function (hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     var text = textObject.text;
@@ -31,7 +33,7 @@ var MoveCursor = function (hiddenTextEdit) {
                 child.copyTextSize(textObject.lastInsertCursor);
             }
 
-            child.scrollTo();
+            ScrollToBob(child);
 
             textObject.emit('cursorin', child, cursorPosition, textObject);
         }

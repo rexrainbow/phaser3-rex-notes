@@ -91,7 +91,7 @@ class Demo extends Phaser.Scene {
                 console.log(child.text)
             })
 
-        // text.setTextOY(-40);
+        // text.setTextOY(-40).updateTexture();
     }
 
     update() { }

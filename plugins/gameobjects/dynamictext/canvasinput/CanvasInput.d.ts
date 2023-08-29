@@ -113,10 +113,6 @@ declare class CanvasInput extends DynamicText {
     inputText: string;
     setInputText(value: string): this;
 
-    readonly contentWidth: number;
-    readonly contentHeight: number;
-    readonly linesCount: number;
-
     setParseTextCallback(callback?: CanvasInput.ParseTextCallbackType): this;
     getValue(): unknown;
     setValue(value: unknown): this;
@@ -144,4 +140,22 @@ declare class CanvasInput extends DynamicText {
 
     setMinLength(value: number): this;
     minLength: number;
+    
+    readonly contentWidth: number;
+    readonly contentHeight: number;
+    readonly linesCount: number;
+
+    readonly topTextOY: number;
+    readonly bottomTextOY: number;
+    readonly leftTextOX: number;
+    readonly rightTextOX: number;
+
+    setTextOYByPercentage(t: number): this;
+    getTextOYPercentage(): number;
+    t: number;
+
+    setTextOXByPercentage(s: number): this;
+    getTextOXPercentage(): number;
+    s: number;
+
 }
