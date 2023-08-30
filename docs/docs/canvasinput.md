@@ -365,30 +365,6 @@ txt.close();
 var isOpened = txt.isOpened;
 ```
 
-### Read only
-
-- Enable read only
-    ```javascript
-    txt.setReadOnly();
-    // txt.setReadOnly(true);
-    ```
-    or
-    ```javascript
-    txt.readOnly = true;
-    ```
-- Disable read only
-    ```javascript
-    txt.setReadOnly(false);
-    ```
-    or
-    ```javascript
-    txt.readOnly = false;
-    ```
-- Get read only
-    ```javascript
-    var readOnlyEanble = txt.readOnly;
-    ```
-
 ### Text
 
 - Display text on [dynamic text game object](dynamictext.md)
@@ -441,6 +417,30 @@ var isOpened = txt.isOpened;
     ```javascript
     txt.setValue(value);
     // txt.value = value;
+    ```
+
+### Read only
+
+- Enable read only
+    ```javascript
+    txt.setReadOnly();
+    // txt.setReadOnly(true);
+    ```
+    or
+    ```javascript
+    txt.readOnly = true;
+    ```
+- Disable read only
+    ```javascript
+    txt.setReadOnly(false);
+    ```
+    or
+    ```javascript
+    txt.readOnly = false;
+    ```
+- Get read only
+    ```javascript
+    var readOnlyEanble = txt.readOnly;
     ```
 
 ### Size

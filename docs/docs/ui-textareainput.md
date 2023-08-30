@@ -536,6 +536,30 @@ See also - [dirty](ui-basesizer.md#dirty)
         var enable = textAreaInput.scrollerEnable;
         ```
 
+### Read only
+
+- Enable read only
+    ```javascript
+    textAreaInput.setReadOnly();
+    // textAreaInput.setReadOnly(true);
+    ```
+    or
+    ```javascript
+    textAreaInput.readOnly = true;
+    ```
+- Disable read only
+    ```javascript
+    textAreaInput.setReadOnly(false);
+    ```
+    or
+    ```javascript
+    textAreaInput.readOnly = false;
+    ```
+- Get read only
+    ```javascript
+    var readOnlyEanble = txt.readOnly;
+    ```
+
 ### Event
 
 - Text changed

@@ -114,6 +114,23 @@ class TextAreaInput extends Scrollable {
         var inputText = this.childrenMap.child;
         return inputText.contentHeight;
     }
+
+    get readOnly() {
+        var inputText = this.childrenMap.child;
+        return inputText.readOnly;
+    }
+
+    set readOnly(value) {
+        var inputText = this.childrenMap.child;
+        inputText.readOnly = value;
+    }
+
+    setReadOnly(value) {
+        var inputText = this.childrenMap.child;
+        inputText.setReadOnly(value);
+        return this;
+    }
+
 }
 
 Object.assign(
