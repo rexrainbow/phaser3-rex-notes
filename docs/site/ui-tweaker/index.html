@@ -10060,6 +10060,10 @@
 
 <span class="w">            </span><span class="p">},</span>
 
+<span class="w">            </span><span class="nx">inputTextArea</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">height</span><span class="o">:</span>
+<span class="w">            </span><span class="p">},</span>
+
 <span class="w">            </span><span class="nx">list</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 
@@ -10201,7 +10205,7 @@
 <h4 id="text-input-row">Text input row<a class="headerlink" href="#text-input-row" title="Permanent link">&para;</a></h4>
 <p><code>object[key]</code> is a text value.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
-<span class="w">    </span><span class="c1">// view: &#39;string&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;string&#39;,     // or &#39;textarea&#39; for multiple lines string</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
@@ -10222,7 +10226,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">bindingTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">object</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">bindingKey</span><span class="o">:</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// view: &#39;string&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;string&#39;,     // or &#39;textarea&#39; for multiple lines string</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
@@ -10245,7 +10249,7 @@
 </ul>
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
-<li><code>view</code> : Set to <code>'string'</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>view</code> : Set to <code>'string'</code> or <code>'textarea'</code>, if <code>bindingTarget</code> is not given.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>

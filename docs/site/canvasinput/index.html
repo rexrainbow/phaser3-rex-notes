@@ -1766,13 +1766,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#read-only" class="md-nav__link">
-    Read only
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -1782,6 +1775,13 @@
           <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
   </a>
   
 </li>
@@ -9672,13 +9672,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#read-only" class="md-nav__link">
-    Read only
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -9688,6 +9681,13 @@
           <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
   </a>
   
 </li>
@@ -10126,25 +10126,6 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <h4 id="is-opened">Is opened<a class="headerlink" href="#is-opened" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isOpened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">isOpened</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Enable read only
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">();</span>
-<span class="c1">// txt.setReadOnly(true);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Disable read only
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Get read only
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">readOnlyEanble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
 <h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Display text on <a href="../dynamictext/">dynamic text game object</a><ul>
@@ -10197,6 +10178,25 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li>Set. Conver any type of <code>value</code> to string.
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// txt.value = value;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">();</span>
+<span class="c1">// txt.setReadOnly(true);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Disable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get read only
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">readOnlyEanble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>

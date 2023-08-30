@@ -100,6 +100,10 @@ var tweaker = scene.rexUI.add.tweaker({
 
             },
 
+            inputTextArea: {
+                height:
+            },
+
             list: {
                 label: {
 
@@ -232,7 +236,7 @@ An input row can fine-tuning properties of target object.
 
 ```javascript
 tweaker.addInput(object, key, {    
-    // view: 'string',
+    // view: 'string',     // or 'textarea' for multiple lines string
 
     // icon: undefined,
     // iconFrame: undefined,
@@ -256,7 +260,7 @@ or
 tweaker.addInput({
     bindingTarget: object,
     bindingKey: key,
-    // view: 'string',
+    // view: 'string',     // or 'textarea' for multiple lines string
 
     // icon: undefined,
     // iconFrame: undefined,
@@ -277,7 +281,7 @@ tweaker.addInput({
 - `bindingTarget` : Binding target object.
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
-- `view` : Set to `'string'`, if `bindingTarget` is not given.
+- `view` : Set to `'string'` or `'textarea'`, if `bindingTarget` is not given.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.

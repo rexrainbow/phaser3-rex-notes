@@ -137,7 +137,7 @@ class Demo extends Phaser.Scene {
 
         pages[2]
             .addInput(
-                gameObject, 'Description',
+                gameObject, 'description',
                 {
                     icon: 'settings',           // Title icon
                     view: 'textarea',
