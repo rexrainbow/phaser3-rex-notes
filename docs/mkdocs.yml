@@ -421,6 +421,7 @@ nav:
         - Scroll-able panel: ui-scrollablepanel.md
         - Grid table: ui-gridtable.md
         - Text area: ui-textarea.md
+        - Text area input: ui-textareainput.md
     - Slider:
         - Slider: ui-slider.md
         - Scroll bar: ui-scrollbar.md

@@ -41,8 +41,8 @@ declare class TextArea extends Scrollable {
 
     scrollToLine(lineIndex: number): this;
     scrollToNextLine(lineCount?: number): this;
-    readonly lineIndex: number;
 
+    readonly lineIndex: number;
     readonly lineHeight: number;
     readonly linesCount: number;
 }

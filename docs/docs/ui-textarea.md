@@ -270,12 +270,8 @@ var textArea = scene.rexUI.add.textArea({
     - `space.text` :
         - A number: Space between text object and slider object.
         - An object: Padding of text object.
-            - If `scrollMode` is `0` (vertical) :
-                - `space.text.top`, `space.text.bottom` : Top, bottom padding space of text object.
-                - `space.text.right` : Space between text object and slider object.
-            - If `scrollMode` is `1` (horizontal) :
-                - `space.text.left`, `space.text.right` : Left, right padding space of text object.
-                - `space.text.bottom` : Space between text object and slider object.
+            - `space.text.top`, `space.text.bottom` : Top, bottom padding space of text object.
+            - `space.text.right` : Space between text object and slider object.                
     - `space.slider` :
         - `0` : No space around slider.
         - `space.slider.left`, `space.slider.right`, `space.slider.top`, `space.slider.bottom` : Space around slider.

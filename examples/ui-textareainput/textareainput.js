@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
 
-            inputText: {
+            text: {
                 background: {
                     stroke: 'white',
 

@@ -19077,7 +19077,6 @@
     }
   };
 
-  Phaser.Math.Clamp;
   var ScrollMethods = {
     scrollToLine: function scrollToLine(lineIndex) {
       this.setChildOY(-this.lineHeight * lineIndex);
@@ -19160,12 +19159,14 @@
     }, {
       key: "linesCount",
       get: function get() {
-        return this.childrenMap.child.linesCount;
+        var textBlock = this.childrenMap.child;
+        return textBlock.linesCount;
       }
     }, {
       key: "contentHeight",
       get: function get() {
-        return this.childrenMap.child.textHeight;
+        var textBlock = this.childrenMap.child;
+        return textBlock.textHeight;
       }
     }]);
     return TextArea;

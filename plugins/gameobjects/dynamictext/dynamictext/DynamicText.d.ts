@@ -101,13 +101,29 @@ declare namespace DynamicText {
     type RenderChildTypes = CharBob | ImageBob | DrawBob;
 
     interface IWrapResult {
+        // Common properties
         children: BobBase[],
         lines: ({
             children: BobBase[],
             width: number,
             height: number
         })[],
-        isLastPage: boolean
+        isLastPage: boolean,
+        maxLines: number,
+        padding: { top: number, left: number, right: number, bottom: number },
+        letterSpacing: number,
+        hAlign: number,
+        vAlign: number,
+
+        // WordWrap
+        maxLineWidth: number,
+        linesHeight: number,
+        lineHeight: number,
+
+        // VerticalWrap
+        maxLineHeight: number,
+        linesWidth: number,
+        lineWidth: number,
     }
 
     interface IConfig {

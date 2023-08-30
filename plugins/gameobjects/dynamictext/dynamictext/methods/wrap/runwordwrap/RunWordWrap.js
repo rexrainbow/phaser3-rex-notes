@@ -1,3 +1,4 @@
+import CreateWrapResultData from '../CreateWrapResultData.js';
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
@@ -79,24 +80,22 @@ var RunWordWrap = function (config) {
 
     var charWrap = GetValue(config, 'charWrap', false);
 
-    var result = {
+    var result = CreateWrapResultData({
+        // Override properties
         callback: 'runWordWrap',
         start: startIndex,  // Next start index
-        isLastPage: false,  // Is last page
         padding: this.wrapPadding,
-        ascent: ascent,
-        lineHeight: lineHeight,
-        maxLines: maxLines,
-        wrapWidth: wrapWidth,
         letterSpacing: letterSpacing,
+        maxLines: maxLines,
         hAlign: hAlign,
         vAlign: vAlign,
+
+        // Specific properties
+        ascent: ascent,
+        lineHeight: lineHeight,
+        wrapWidth: wrapWidth,
         charWrap: charWrap,
-        children: [],       // Word-wrap result
-        lines: [],          // Word-wrap result in lines
-        maxLineWidth: 0,
-        linesHeight: 0
-    }
+    });
 
     // Set all children to inactive
     var children = this.children;

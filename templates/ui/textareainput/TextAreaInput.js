@@ -1,8 +1,9 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
+import IsGameObject from '../../../plugins/utils/system/IsGameObject.js';
 import CanvasInput from '../canvasinput/CanvasInput.js';
 import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
-
+import ScrollMethods from './ScrollMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,13 +14,19 @@ class TextAreaInput extends Scrollable {
         }
 
         // Create inputText
-        var inputTextConfig = GetValue(config, 'inputText');
-        if (inputTextConfig === undefined) {
-            inputTextConfig = {};
+        var inputTextConfig = GetValue(config, 'text');
+        var inputText;
+        if (IsGameObject(inputTextConfig)) {
+            inputText = inputTextConfig;
+        } else {
+            if (inputTextConfig === undefined) {
+                inputTextConfig = {};
+            }
+            inputTextConfig.textArea = true;
+            inputText = new CanvasInput(scene, inputTextConfig);
+            scene.add.existing(inputText); // Important: Add to display list for touch detecting
         }
-        inputTextConfig.textArea = true;
-        var inputText = new CanvasInput(scene, inputTextConfig);
-        scene.add.existing(inputText); // Important: Add to display list for touch detecting
+
         // Inject properties for scrollable interface
         InjectProperties(inputText);
 
@@ -89,11 +96,30 @@ class TextAreaInput extends Scrollable {
         return this.childrenMap.child.text;
     }
 
+    get lineHeight() {
+        var inputText = this.childrenMap.child;
+        return inputText.lineHeight;
+    }
+
+    get lineIndex() {
+        return Math.floor(-this.childOY / this.lineHeight);
+    }
+
+    get linesCount() {
+        var inputText = this.childrenMap.child;
+        return inputText.linesCount;
+    }
+
+    get contentHeight() {
+        var inputText = this.childrenMap.child;
+        return inputText.contentHeight;
+    }
 }
 
 Object.assign(
     TextAreaInput.prototype,
     SetTextMethods,
+    ScrollMethods,
 )
 
 export default TextAreaInput;

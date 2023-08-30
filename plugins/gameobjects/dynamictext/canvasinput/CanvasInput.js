@@ -40,6 +40,7 @@ class CanvasInput extends DynamicText {
         // readonly
         this.contentWidth = undefined;
         this.contentHeight = undefined;
+        this.lineHeight = undefined;
         this.linesCount = undefined;
 
         this._text;
@@ -138,6 +139,7 @@ class CanvasInput extends DynamicText {
         // Save content size
         this.contentWidth = result.maxLineWidth;
         this.contentHeight = result.linesHeight;
+        this.lineHeight = result.lineHeight;
         this.linesCount = result.lines.length;
         return result;
     }

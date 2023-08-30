@@ -227,6 +227,7 @@
 1. [UI/Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [UI/Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [UI/Text area](ui-textarea.md): A container with a text, slider, and scroller.
+1. [UI/Text area input](ui-textareainput.md): A container with a canvasInput, and slider.
 1. [UI/Text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
 1. [UI/Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
 1. [UI/Toast](ui-toast.md): Show text message for a short while.

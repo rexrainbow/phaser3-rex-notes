@@ -1,3 +1,4 @@
+import CreateWrapResultData from '../CreateWrapResultData.js';
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import AlignLines from './AlignLines.js';
 import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
@@ -38,15 +39,15 @@ var RunVerticalWrap = function (config) {
     }
     var showAllLines = (maxLines === 0);
 
-    // Get fixedChildHeight
-    var fixedChildHeight = GetValue(config, 'fixedChildHeight', undefined);
-    if (fixedChildHeight === undefined) {
+    // Get fixedCharacterHeight
+    var fixedCharacterHeight = GetValue(config, 'fixedCharacterHeight', undefined);
+    if (fixedCharacterHeight === undefined) {
         var charPerLine = GetValue(config, 'charPerLine', undefined);
         if (charPerLine !== undefined) {
             var innerHeight = this.fixedHeight - paddingVertical;
-            fixedChildHeight = Math.floor(innerHeight / charPerLine);
+            fixedCharacterHeight = Math.floor(innerHeight / charPerLine);
         } else {
-            // Use child.heigh as fixedChildHeight
+            // Use child.heigh as fixedCharacterHeight
         }
     }
 
@@ -66,24 +67,22 @@ var RunVerticalWrap = function (config) {
     var hAlign = GetValue(config, 'hAlign', rtl ? 2 : 0);
     var vAlign = GetValue(config, 'vAlign', 0);
 
-    var result = {
+    var result = CreateWrapResultData({
+        // Override properties
         callback: 'runVerticalWrap',
         start: startIndex,  // Next start index
-        isLastPage: false,  // Is last page
         padding: this.wrapPadding,
-        lineWidth: lineWidth,
-        maxLines: maxLines,
-        fixedChildHeight: fixedChildHeight,
-        wrapHeight: wrapHeight,
         letterSpacing: letterSpacing,
+        maxLines: maxLines,
         hAlign: hAlign,
         vAlign: vAlign,
+
+        // Specific properties
+        lineWidth: lineWidth,
+        fixedCharacterHeight: fixedCharacterHeight,
+        wrapHeight: wrapHeight,        
         rtl: rtl,
-        children: [],       // Word-wrap result
-        lines: [],          // Word-wrap result in lines
-        maxLineHeight: 0,
-        linesWidth: 0
-    }
+    });
 
     // Set all children to active
     var children = this.children;
@@ -114,7 +113,7 @@ var RunVerticalWrap = function (config) {
             continue;
         }
 
-        var childHeight = ((fixedChildHeight !== undefined) ? fixedChildHeight : child.height) + letterSpacing;
+        var childHeight = ((fixedCharacterHeight !== undefined) ? fixedCharacterHeight : child.height) + letterSpacing;
         // Next line
         var isNewLineChar = IsNewLineChar(child);
         var isPageBreakChar = IsPageBreakChar(child);

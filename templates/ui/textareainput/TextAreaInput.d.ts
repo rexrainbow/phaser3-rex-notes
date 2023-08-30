@@ -21,7 +21,7 @@ declare namespace TextAreaInput {
 
         scroller?: false,
 
-        inputText?: CanvasInput.IConfig,
+        text?: CanvasInput.IConfig | Phaser.GameObjects.GameObject,
         alwaysScrollable?: boolean,
 
         content?: string
@@ -38,4 +38,11 @@ declare class TextAreaInput extends Scrollable {
     text: string;
     setText(text: string): this;
     appendText(text: string): this;
+
+    scrollToLine(lineIndex: number): this;
+    scrollToNextLine(lineCount?: number): this;
+
+    readonly lineIndex: number;
+    readonly lineHeight: number;
+    readonly linesCount: number;
 }

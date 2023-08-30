@@ -114,6 +114,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
+1. [TextAreaInput](ui-textareainput.md): A container with a canvasInput, and slider.
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 1. [Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
 1. [Toast](ui-toast.md): Show text message for a short while.

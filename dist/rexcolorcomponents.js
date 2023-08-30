@@ -21789,6 +21789,35 @@
     return this;
   };
 
+  var CreateWrapResultData = function CreateWrapResultData(config) {
+    var data = {
+      callback: undefined,
+      start: 0,
+      // Next start index
+      isLastPage: false,
+      // Is last page
+      maxLines: undefined,
+      padding: undefined,
+      letterSpacing: undefined,
+      hAlign: undefined,
+      vAlign: undefined,
+      children: [],
+      // Wrap result
+      lines: [],
+      // Wrap result in lines
+
+      // WordWrap
+      maxLineWidth: 0,
+      linesHeight: 0,
+      lineHeight: undefined,
+      // VerticalWrap
+      maxLineHeight: 0,
+      linesWidth: 0,
+      lineWidth: undefined
+    };
+    return Object.assign(data, config);
+  };
+
   var GetWord = function GetWord(children, startIndex, charMode, result) {
     if (result === undefined) {
       result = {
@@ -21985,28 +22014,22 @@
     var hAlign = GetValue$a(config, 'hAlign', 0);
     var vAlign = GetValue$a(config, 'vAlign', 0);
     var charWrap = GetValue$a(config, 'charWrap', false);
-    var result = {
+    var result = CreateWrapResultData({
+      // Override properties
       callback: 'runWordWrap',
       start: startIndex,
       // Next start index
-      isLastPage: false,
-      // Is last page
       padding: this.wrapPadding,
-      ascent: ascent,
-      lineHeight: lineHeight,
-      maxLines: maxLines,
-      wrapWidth: wrapWidth,
       letterSpacing: letterSpacing,
+      maxLines: maxLines,
       hAlign: hAlign,
       vAlign: vAlign,
-      charWrap: charWrap,
-      children: [],
-      // Word-wrap result
-      lines: [],
-      // Word-wrap result in lines
-      maxLineWidth: 0,
-      linesHeight: 0
-    };
+      // Specific properties
+      ascent: ascent,
+      lineHeight: lineHeight,
+      wrapWidth: wrapWidth,
+      charWrap: charWrap
+    });
 
     // Set all children to inactive
     var children = this.children;
@@ -22211,13 +22234,13 @@
 
     var showAllLines = maxLines === 0;
 
-    // Get fixedChildHeight
-    var fixedChildHeight = GetValue$9(config, 'fixedChildHeight', undefined);
-    if (fixedChildHeight === undefined) {
+    // Get fixedCharacterHeight
+    var fixedCharacterHeight = GetValue$9(config, 'fixedCharacterHeight', undefined);
+    if (fixedCharacterHeight === undefined) {
       var charPerLine = GetValue$9(config, 'charPerLine', undefined);
       if (charPerLine !== undefined) {
         var innerHeight = this.fixedHeight - paddingVertical;
-        fixedChildHeight = Math.floor(innerHeight / charPerLine);
+        fixedCharacterHeight = Math.floor(innerHeight / charPerLine);
       }
     }
 
@@ -22235,28 +22258,22 @@
     var rtl = GetValue$9(config, 'rtl', true);
     var hAlign = GetValue$9(config, 'hAlign', rtl ? 2 : 0);
     var vAlign = GetValue$9(config, 'vAlign', 0);
-    var result = {
+    var result = CreateWrapResultData({
+      // Override properties
       callback: 'runVerticalWrap',
       start: startIndex,
       // Next start index
-      isLastPage: false,
-      // Is last page
       padding: this.wrapPadding,
-      lineWidth: lineWidth,
-      maxLines: maxLines,
-      fixedChildHeight: fixedChildHeight,
-      wrapHeight: wrapHeight,
       letterSpacing: letterSpacing,
+      maxLines: maxLines,
       hAlign: hAlign,
       vAlign: vAlign,
-      rtl: rtl,
-      children: [],
-      // Word-wrap result
-      lines: [],
-      // Word-wrap result in lines
-      maxLineHeight: 0,
-      linesWidth: 0
-    };
+      // Specific properties
+      lineWidth: lineWidth,
+      fixedCharacterHeight: fixedCharacterHeight,
+      wrapHeight: wrapHeight,
+      rtl: rtl
+    });
 
     // Set all children to active
     var children = this.children;
@@ -22289,7 +22306,7 @@
         lastLine.push(child);
         continue;
       }
-      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : child.height) + letterSpacing;
+      var childHeight = (fixedCharacterHeight !== undefined ? fixedCharacterHeight : child.height) + letterSpacing;
       // Next line
       var isNewLineChar = IsNewLineChar(child);
       var isPageBreakChar = IsPageBreakChar(child);
@@ -24609,6 +24626,7 @@
       // readonly
       _this.contentWidth = undefined;
       _this.contentHeight = undefined;
+      _this.lineHeight = undefined;
       _this.linesCount = undefined;
       _this._text;
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
@@ -24699,6 +24717,7 @@
         // Save content size
         this.contentWidth = result.maxLineWidth;
         this.contentHeight = result.linesHeight;
+        this.lineHeight = result.lineHeight;
         this.linesCount = result.lines.length;
         return result;
       }

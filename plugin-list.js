@@ -294,6 +294,7 @@ module.exports = {
     'tagtext': './templates/ui/tagtext/TagText.js',
     'tap': './templates/ui/tap/Tap.js',
     'textarea': './templates/ui/textarea/TextArea.js',
+    'textareainput': './templates/ui/textareainput/TextAreaInput.js',
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
     'tweaker': './templates/ui/tweaker/Tweaker.js',
