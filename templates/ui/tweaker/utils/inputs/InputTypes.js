@@ -1,4 +1,5 @@
 const StringType = 'string';
+const TextAreaType = 'textarea';
 const NumberType = 'number';
 const RangeType = 'range';
 const ListType = 'list';
@@ -8,7 +9,7 @@ const ToggleSwitchType = 'toggleSwitch';
 const ColorType = 'color';
 
 export {
-    StringType, NumberType, RangeType,
+    StringType, TextAreaType, NumberType, RangeType,
     ListType, ButtonsType,
     BooleanType, ToggleSwitchType,
     ColorType,

@@ -12,10 +12,16 @@ var CreateScrollableSizer = function (parent, config) {
     var parentMinWidth = GetValue(config, 'width');
     var parentMinHeight = GetValue(config, 'height');
     if (!parentMinWidth) {
-        columnProportions[1] = 0;
+        var expandChildWidth = GetValue(config, 'child.expandWidth', true);
+        if (!expandChildWidth) {
+            columnProportions[1] = 0;  // Calculate parent's width by child's width
+        }
     }
     if (!parentMinHeight) {
-        rowProportions[1] = 0;
+        var expandChildHeight = GetValue(config, 'child.expandHeight', true);
+        if (!expandChildHeight) {
+            rowProportions[1] = 0;    // Calculate parent's height by child's height
+        }
     }
 
     var scrollableSizer = new GridSizer(scene, {

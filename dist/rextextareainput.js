@@ -17558,11 +17558,19 @@
     var parentMinWidth = GetValue$f(config, 'width');
     var parentMinHeight = GetValue$f(config, 'height');
     if (!parentMinWidth) {
-      columnProportions[1] = 0;
+      var expandChildWidth = GetValue$f(config, 'child.expandWidth', true);
+      if (!expandChildWidth) {
+        columnProportions[1] = 0; // Calculate parent's width by child's width
+      }
     }
+
     if (!parentMinHeight) {
-      rowProportions[1] = 0;
+      var expandChildHeight = GetValue$f(config, 'child.expandHeight', true);
+      if (!expandChildHeight) {
+        rowProportions[1] = 0; // Calculate parent's height by child's height
+      }
     }
+
     var scrollableSizer = new GridSizer(scene, {
       column: 3,
       row: 3,
@@ -24451,6 +24459,23 @@
       get: function get() {
         var inputText = this.childrenMap.child;
         return inputText.contentHeight;
+      }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        var inputText = this.childrenMap.child;
+        return inputText.readOnly;
+      },
+      set: function set(value) {
+        var inputText = this.childrenMap.child;
+        inputText.readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(value) {
+        var inputText = this.childrenMap.child;
+        inputText.setReadOnly(value);
+        return this;
       }
     }]);
     return TextAreaInput;

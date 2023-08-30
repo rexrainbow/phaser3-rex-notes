@@ -17558,11 +17558,19 @@
     var parentMinWidth = GetValue$3(config, 'width');
     var parentMinHeight = GetValue$3(config, 'height');
     if (!parentMinWidth) {
-      columnProportions[1] = 0;
+      var expandChildWidth = GetValue$3(config, 'child.expandWidth', true);
+      if (!expandChildWidth) {
+        columnProportions[1] = 0; // Calculate parent's width by child's width
+      }
     }
+
     if (!parentMinHeight) {
-      rowProportions[1] = 0;
+      var expandChildHeight = GetValue$3(config, 'child.expandHeight', true);
+      if (!expandChildHeight) {
+        rowProportions[1] = 0; // Calculate parent's height by child's height
+      }
     }
+
     var scrollableSizer = new GridSizer(scene, {
       column: 3,
       row: 3,

@@ -1,10 +1,11 @@
 import {
-    StringType, NumberType, RangeType,
+    StringType, TextAreaType, NumberType, RangeType,
     ListType, ButtonsType,
     BooleanType, ToggleSwitchType,
     ColorType,
 } from '../utils/inputs/InputTypes.js';
 import CreateTextInput from './CreateTextInput.js';
+import CreateTextAreaInput from './CreateTextAreaInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
 import CreateRangeInput from './CreateRangeInput.js';
 import CreateListInput from './CreateListInput.js';
@@ -14,48 +15,26 @@ import CreateToggleSwitchInput from './CreateToggleSwitchInput.js';
 import CreateColorInput from './CreateColorInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
+var CallbacksMap = {};
+CallbacksMap[StringType] = CreateTextInput;
+CallbacksMap[TextAreaType] = CreateTextAreaInput;
+CallbacksMap[NumberType] = CreateNumberInput;
+CallbacksMap[RangeType] = CreateRangeInput;
+CallbacksMap[ListType] = CreateListInput;
+CallbacksMap[ButtonsType] = CreateButtonsInput;
+CallbacksMap[BooleanType] = CreateCheckboxInput;
+CallbacksMap[ToggleSwitchType] = CreateToggleSwitchInput;
+CallbacksMap[ColorType] = CreateColorInput;
+
 var CreateInputField = function (scene, config, style) {
     var viewType = config.view;
     var callback;
-    switch (viewType) {
-        case StringType:
-            callback = CreateTextInput;
-            break;
-
-        case NumberType:
-            callback = CreateNumberInput;
-            break;
-
-        case RangeType:
-            callback = CreateRangeInput;
-            break;
-
-        case ListType:
-            callback = CreateListInput;
-            break;
-
-        case ButtonsType:
-            callback = CreateButtonsInput;
-            break;
-
-        case BooleanType:
-            callback = CreateCheckboxInput;
-            break;
-
-        case ToggleSwitchType:
-            callback = CreateToggleSwitchInput;
-            break;
-
-        case ColorType:
-            callback = CreateColorInput;
-            break;
-
-        default:
-            callback = IsFunction(viewType) ? viewType : CreateTextInput;
-            break;
+    if (IsFunction(viewType)) {
+        callback = viewType;
+    } else {
+        callback = (CallbacksMap.hasOwnProperty(viewType)) ? CallbacksMap[viewType] : CreateTextInput;
     }
-
-    var gameObject = callback(scene, config, style, gameObject);
+    var gameObject = callback(scene, config, style);
 
     // Extra settings
     gameObject.setTextFormatCallback(config.format);

@@ -47100,11 +47100,19 @@
     var parentMinWidth = GetValue$18(config, 'width');
     var parentMinHeight = GetValue$18(config, 'height');
     if (!parentMinWidth) {
-      columnProportions[1] = 0;
+      var expandChildWidth = GetValue$18(config, 'child.expandWidth', true);
+      if (!expandChildWidth) {
+        columnProportions[1] = 0; // Calculate parent's width by child's width
+      }
     }
+
     if (!parentMinHeight) {
-      rowProportions[1] = 0;
+      var expandChildHeight = GetValue$18(config, 'child.expandHeight', true);
+      if (!expandChildHeight) {
+        rowProportions[1] = 0; // Calculate parent's height by child's height
+      }
     }
+
     var scrollableSizer = new GridSizer(scene, {
       column: 3,
       row: 3,
@@ -55510,7 +55518,7 @@
   };
 
   var GetValue$y = Phaser.Utils.Objects.GetValue;
-  var TextAreaInput = /*#__PURE__*/function (_Scrollable) {
+  var TextAreaInput$1 = /*#__PURE__*/function (_Scrollable) {
     _inherits(TextAreaInput, _Scrollable);
     var _super = _createSuper(TextAreaInput);
     function TextAreaInput(scene, config) {
@@ -55620,17 +55628,34 @@
         var inputText = this.childrenMap.child;
         return inputText.contentHeight;
       }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        var inputText = this.childrenMap.child;
+        return inputText.readOnly;
+      },
+      set: function set(value) {
+        var inputText = this.childrenMap.child;
+        inputText.readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(value) {
+        var inputText = this.childrenMap.child;
+        inputText.setReadOnly(value);
+        return this;
+      }
     }]);
     return TextAreaInput;
   }(Scrollable);
-  Object.assign(TextAreaInput.prototype, SetTextMethods, ScrollMethods);
+  Object.assign(TextAreaInput$1.prototype, SetTextMethods, ScrollMethods);
 
   ObjectFactory.register('textAreaInput', function (config) {
-    var gameObject = new TextAreaInput(this.scene, config);
+    var gameObject = new TextAreaInput$1(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TextAreaInput', TextAreaInput);
+  SetValue(window, 'RexPlugins.UI.TextAreaInput', TextAreaInput$1);
 
   var GetChildrenWidth = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -58904,6 +58929,7 @@
   };
 
   var StringType = 'string';
+  var TextAreaType = 'textarea';
   var NumberType = 'number';
   var RangeType = 'range';
   var ListType = 'list';
@@ -59289,6 +59315,89 @@
 
   var CreateTextInput = function CreateTextInput(scene, config, style) {
     var gameObject = new TextInput(scene, style);
+    scene.add.existing(gameObject);
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
+    return gameObject;
+  };
+
+  var CreateInputTextArea = function CreateInputTextArea(scene, config, deepCloneConfig) {
+    if (deepCloneConfig === undefined) {
+      deepCloneConfig = true;
+    }
+    if (deepCloneConfig) {
+      config = config ? DeepClone(config) : {};
+    } else if (!config) {
+      config = {};
+    }
+    var inputText = new TextAreaInput$1(scene, config);
+    scene.add.existing(inputText);
+    return inputText;
+  };
+
+  var TextAreaInput = /*#__PURE__*/function (_InputFiledBase) {
+    _inherits(TextAreaInput, _InputFiledBase);
+    var _super = _createSuper(TextAreaInput);
+    function TextAreaInput(scene, config) {
+      var _this;
+      _classCallCheck(this, TextAreaInput);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene);
+      _this.type = 'rexTweaker.TextAreaInput';
+      var inputTextAreaConfig = config.inputTextArea;
+      if (inputTextAreaConfig === undefined) {
+        inputTextAreaConfig = {};
+      }
+      if (!inputTextAreaConfig.hasOwnProperty('text')) {
+        inputTextAreaConfig.text = config.inputText;
+      }
+      if (!inputTextAreaConfig.hasOwnProperty('slider')) {
+        inputTextAreaConfig.slider = config.slider;
+      }
+      var inputText = CreateInputTextArea(scene, inputTextAreaConfig);
+      _this.add(inputText, {
+        proportion: 1,
+        expand: true
+      });
+      _this.addChildrenMap('inputText', inputText);
+      inputText.on('close', function () {
+        this.setValue(inputText.value);
+      }, _assertThisInitialized(_this));
+      return _this;
+    }
+    _createClass(TextAreaInput, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        if (!this.validate(value)) {
+          value = this._value; // Back to previous value
+        }
+
+        var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText(text);
+        _set(_getPrototypeOf(TextAreaInput.prototype), "value", value, this, true); // Fire 'valuechange' event
+      }
+    }, {
+      key: "setInputTextReadOnly",
+      value: function setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+      }
+    }]);
+    return TextAreaInput;
+  }(InputFiledBase);
+
+  var CreateTextAreaInput = function CreateTextAreaInput(scene, config, style) {
+    var gameObject = new TextAreaInput(scene, style);
     scene.add.existing(gameObject);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
@@ -59829,39 +59938,25 @@
     return gameObject;
   };
 
+  var CallbacksMap = {};
+  CallbacksMap[StringType] = CreateTextInput;
+  CallbacksMap[TextAreaType] = CreateTextAreaInput;
+  CallbacksMap[NumberType] = CreateNumberInput;
+  CallbacksMap[RangeType] = CreateRangeInput;
+  CallbacksMap[ListType] = CreateListInput;
+  CallbacksMap[ButtonsType] = CreateButtonsInput;
+  CallbacksMap[BooleanType] = CreateCheckboxInput;
+  CallbacksMap[ToggleSwitchType] = CreateToggleSwitchInput;
+  CallbacksMap[ColorType] = CreateColorInput;
   var CreateInputField = function CreateInputField(scene, config, style) {
     var viewType = config.view;
     var callback;
-    switch (viewType) {
-      case StringType:
-        callback = CreateTextInput;
-        break;
-      case NumberType:
-        callback = CreateNumberInput;
-        break;
-      case RangeType:
-        callback = CreateRangeInput;
-        break;
-      case ListType:
-        callback = CreateListInput;
-        break;
-      case ButtonsType:
-        callback = CreateButtonsInput;
-        break;
-      case BooleanType:
-        callback = CreateCheckboxInput;
-        break;
-      case ToggleSwitchType:
-        callback = CreateToggleSwitchInput;
-        break;
-      case ColorType:
-        callback = CreateColorInput;
-        break;
-      default:
-        callback = IsFunction(viewType) ? viewType : CreateTextInput;
-        break;
+    if (IsFunction(viewType)) {
+      callback = viewType;
+    } else {
+      callback = CallbacksMap.hasOwnProperty(viewType) ? CallbacksMap[viewType] : CreateTextInput;
     }
-    var gameObject = callback(scene, config, style, gameObject);
+    var gameObject = callback(scene, config, style);
 
     // Extra settings
     gameObject.setTextFormatCallback(config.format);

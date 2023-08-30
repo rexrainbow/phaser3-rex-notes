@@ -6,6 +6,7 @@ import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
 import InputText from '../canvasinput/CanvasInput';
+import InputTextArea from '../textareainput/TextAreaInput';
 import Checkbox from '../checkbox/Checkbox';
 import ToggleSwitch from '../toggleswitch/ToggleSwitch';
 import ColorInput from '../colorinput/colorinput/ColorInput';
@@ -57,6 +58,8 @@ declare namespace Tweaker {
                 title?: SimpleLabel.IConfig,
 
                 inputText?: InputText.IConfig,
+
+                inputTextArea?: InputTextArea.IConfig,
 
                 slider?: {
                     track: RoundRectangle.IConfig,
@@ -121,7 +124,8 @@ declare namespace Tweaker {
         bindingKey?: string,
         autoUpdate?: boolean,
 
-        view?: 'string' | 'number' | 'range' | 'list' | 'buttons' | 'boolean' | 'color',
+        view?: 'string' | 'textarea' | 'number' | 'range' | 'list' | 'buttons' | 'boolean' | 'color' |
+        ((scene: Phaser.Scene, config: Object, style: Object) => Phaser.GameObjects.GameObject),
 
         icon?: string,
         iconFrame?: string,
