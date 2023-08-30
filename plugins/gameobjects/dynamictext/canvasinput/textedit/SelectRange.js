@@ -1,4 +1,4 @@
-var OnSelectRange = function (hiddenTextEdit) {
+var SelectRange = function (hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     // var text = textObject.text;
     var selectionStart = (hiddenTextEdit.isOpened) ? hiddenTextEdit.selectionStart : null;
@@ -14,16 +14,28 @@ var OnSelectRange = function (hiddenTextEdit) {
     if (prevSelectionStart === null) {
         min = selectionStart;
         max = selectionEnd;
+    } else if (selectionStart === null) {
+        min = prevSelectionStart;
+        max = prevSelectionEnd;
     } else {
         min = Math.min(prevSelectionStart, selectionStart);
         max = Math.max(prevSelectionEnd, selectionEnd);
     }
 
     for (var i = min; i < max; i++) {
-        var inPrevSelectionRange = (prevSelectionStart === null) ? false :
-            (i >= prevSelectionStart) && (i < prevSelectionEnd);
-        var inSelectionRange = (i >= selectionStart) && (i < selectionEnd);
+        var inPrevSelectionRange;
+        if (prevSelectionStart === null) {
+            inPrevSelectionRange = false;
+        } else {
+            inPrevSelectionRange = (i >= prevSelectionStart) && (i < prevSelectionEnd);
+        }
 
+        var inSelectionRange;
+        if (selectionStart === null) {
+            inSelectionRange = false;
+        } else {
+            inSelectionRange = (i >= selectionStart) && (i < selectionEnd);
+        }
 
         if (inPrevSelectionRange && inSelectionRange) {
             continue;
@@ -31,11 +43,8 @@ var OnSelectRange = function (hiddenTextEdit) {
 
         var child = textObject.getCharChild(i);
         if (child) {
-            if (inPrevSelectionRange) {
-                textObject.emit('cursorout', child, i, textObject);
-            } else {
-                textObject.emit('cursorin', child, i, textObject);
-            }
+            var eventName = (inPrevSelectionRange) ? 'cursorout' : 'cursorin';
+            textObject.emit(eventName, child, i, textObject);
         }
     }
 
@@ -43,4 +52,4 @@ var OnSelectRange = function (hiddenTextEdit) {
     hiddenTextEdit.prevSelectionEnd = selectionEnd;
 }
 
-export default OnSelectRange;
+export default SelectRange;

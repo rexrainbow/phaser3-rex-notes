@@ -1064,7 +1064,6 @@ Style of text-area input is defined in
 
 - `styles.inputRow.title`
 - `styles.inputRow.inputText` 
-- `styles.inputRow.slider` 
 - `styles.inputRow.background`
 
 ```javascript
@@ -1206,6 +1205,7 @@ Style of text-area input is defined in
 - `styles.inputRow.title`
 - `styles.inputRow.inputTextArea` 
 - `styles.inputRow.inputText` 
+- `styles.inputRow.slider` 
 - `styles.inputRow.background`
 
 ```javascript
