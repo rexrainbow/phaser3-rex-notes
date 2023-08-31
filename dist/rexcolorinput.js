@@ -16940,7 +16940,7 @@
       } else {
         inSelectionRange = i >= selectionStart && i < selectionEnd;
       }
-      if (inPrevSelectionRange && inSelectionRange) {
+      if (inPrevSelectionRange === inSelectionRange) {
         continue;
       }
       var child = textObject.getCharChild(i);
