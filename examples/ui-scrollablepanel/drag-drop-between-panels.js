@@ -18,11 +18,29 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var panel0 = CreateScrollablePanel(this, 30).setPosition(200, 300).layout();
-        var panel1 = CreateScrollablePanel(this, 10).setPosition(400, 300).layout();
-        var panel2 = CreateScrollablePanel(this, 1).setPosition(600, 300).layout();
+        var topSizer = this.rexUI.add.sizer({
+            x: 400, y: 300,
+            width: 500, height: 420,
 
-        var panels = [panel0, panel1, panel2];
+            orientation: 'x',
+            space: { item: 20 }
+        })
+            .add(
+                CreateScrollablePanel(this, 30),
+                { proportion: 1, expand: true }
+            )
+            .add(
+                CreateScrollablePanel(this, 10),
+                { proportion: 1, expand: true }
+            )
+            .add(
+                CreateScrollablePanel(this, 1),
+                { proportion: 1, expand: true }
+            )
+            .layout()
+
+
+        var panels = topSizer.getElement('items');
         panels.forEach(function (panel) {
             SetDragable(panel);
         })
@@ -33,8 +51,6 @@ class Demo extends Phaser.Scene {
 
 var CreateScrollablePanel = function (scene, itemCount) {
     return scene.rexUI.add.scrollablePanel({
-        width: 150, height: 420,
-
         scrollMode: 'y',
 
         background: scene.rexUI.add.roundRectangle({
@@ -159,6 +175,7 @@ var SetDragable = function (scrollablePanel) {
                         // Drop at another sizer
                         OnChildDragEnd(child);
 
+                        // TODO: Top-parent has changed
                         var currentSizer = dropZone.getTopmostSizer().getElement('panel'),
                             previousSizer = child.getData('sizer');
 
