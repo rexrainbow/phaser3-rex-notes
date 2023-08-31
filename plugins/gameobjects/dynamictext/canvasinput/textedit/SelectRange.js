@@ -37,7 +37,7 @@ var SelectRange = function (hiddenTextEdit) {
             inSelectionRange = (i >= selectionStart) && (i < selectionEnd);
         }
 
-        if (inPrevSelectionRange && inSelectionRange) {
+        if (inPrevSelectionRange === inSelectionRange) {
             continue;
         }
 
