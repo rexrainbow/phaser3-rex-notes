@@ -244,6 +244,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -267,6 +269,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     // monitor: false,
 
@@ -328,6 +332,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -351,6 +357,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     // monitor: false,
 
@@ -412,6 +420,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     options: [
         {text: text0, value: value0},
         {text: text1, value: value1},
@@ -437,6 +447,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     options: [
         {text: text0, value: value0},
@@ -483,6 +495,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     options: [
         {text: text0, value: value0},
         {text: text1, value: value1},
@@ -508,6 +522,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     options: [
         {text: text0, value: value0},
@@ -554,6 +570,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -574,6 +592,8 @@ tweaker.addInput({
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -612,6 +632,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     min: minValue, 
     max: maxValue,
 
@@ -637,6 +659,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     min: minValue, 
     max: maxValue,
@@ -691,6 +715,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     options: [
         {text: text0, value: value0},
         {text: text1, value: value1},
@@ -716,6 +742,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     options: [
         {text: text0, value: value0},
@@ -763,6 +791,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
 
+    // orientation: 'x',
+
     options: [
         {text: text0, value: value0},
         {text: text1, value: value1},
@@ -788,6 +818,8 @@ tweaker.addInput({
     // iconSize: undefined,
 
     // title: undefined,
+
+    // orientation: 'x',
 
     options: [
         {text: text0, value: value0},
@@ -835,6 +867,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -855,6 +889,8 @@ tweaker.addInput({
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -891,6 +927,8 @@ tweaker.addInput(object, key, {
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,
@@ -912,6 +950,8 @@ tweaker.addInput({
 
     // title: undefined,
     
+    // orientation: 'x',
+
     // monitor: false,
 
     // key: undefined,

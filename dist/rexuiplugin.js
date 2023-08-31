@@ -59062,7 +59062,8 @@
   var MinTitleWidthMethods = {
     getMinTitleWidth: function getMinTitleWidth() {
       var title = this.childrenMap.title;
-      if (!title) {
+      if (!title || title.orientation !== 0) {
+        // Don't count vertical input row
         return 0;
       }
       var padding = title.rexSizer.padding;
@@ -59071,7 +59072,8 @@
     },
     setMinTitleWidth: function setMinTitleWidth(width) {
       var title = this.childrenMap.title;
-      if (!title) {
+      if (!title || title.orientation !== 0) {
+        // Don't set vertical input row
         return this;
       }
       var padding = title.rexSizer.padding;

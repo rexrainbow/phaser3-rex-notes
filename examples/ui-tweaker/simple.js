@@ -141,6 +141,7 @@ class Demo extends Phaser.Scene {
                 {
                     icon: 'settings',           // Title icon
                     view: 'textarea',
+                    orientation: 'y',
                 }
             )
 

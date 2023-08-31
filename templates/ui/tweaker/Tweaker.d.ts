@@ -133,6 +133,8 @@ declare namespace Tweaker {
 
         title?: string,
 
+        orientation?: Sizer.OrientationTypes,
+
         min?: number, max?: number,
 
         options?: {
