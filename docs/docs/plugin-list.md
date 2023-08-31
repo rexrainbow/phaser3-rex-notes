@@ -85,7 +85,7 @@
 1. [Gesture/Swipe](gesture-swipe.md): Get swipe events of a game object.
 1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
-1. [Grid cut image](gridcutimage.md): Create image game objects in grids, to assemble target texture.
+1. [Grid cut image](gridcutimage.md): Grid cut image texture to frames, then create image game objects from these frames.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hidden input text](hiddeninputtext.md): An invisible Input DOM element to receive character input and display on text game object.
 1. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.

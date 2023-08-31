@@ -1,6 +1,6 @@
 ## Introduction
 
-Create image game objects in grids, to assemble target texture.
+Grid cut image texture to frames, then create image game objects from these frames.
 
 - Author: Rex
 - Methods
