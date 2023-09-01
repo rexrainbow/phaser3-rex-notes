@@ -84,7 +84,10 @@ var CreateScrollablePanel = function (scene, itemCount) {
             bottom: 10,
 
             panel: 10,
-        }
+        },
+
+        name: 'panelTop' 
+        // To get this scrollable panel back later
     })
 }
 
@@ -175,8 +178,7 @@ var SetDragable = function (scrollablePanel) {
                         // Drop at another sizer
                         OnChildDragEnd(child);
 
-                        // TODO: Top-parent has changed
-                        var currentSizer = dropZone.getTopmostSizer().getElement('panel'),
+                        var currentSizer = dropZone.getParentSizer('panelTop').getElement('panel'),
                             previousSizer = child.getData('sizer');
 
                         // Layout previous sizer
