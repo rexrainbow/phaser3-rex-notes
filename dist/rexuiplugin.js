@@ -19871,6 +19871,12 @@
     return element;
   };
 
+  var EnterClose = function EnterClose() {
+    this.close();
+    this.emit('keydown-ENTER', this.parent, this);
+    return this;
+  };
+
   var Open$2 = function Open() {
     // Already opened
     if (this.isOpened) {
@@ -19889,7 +19895,7 @@
     this.setFocus();
     this.initText();
     if (this.enterCloseEnable) {
-      this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+      this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
     }
 
     // There is no cursor-position-change event, 
@@ -20516,8 +20522,12 @@
         this.firstClickAfterOpen = true;
         gameObject.emit('open');
       }, _assertThisInitialized(_this)).on('close', function () {
+        // Route 'close' event
         gameObject.emit('close');
-      }, _assertThisInitialized(_this));
+      }).on('keydown-ENTER', function () {
+        // Route 'keydown-ENTER' event
+        gameObject.emit('keydown-ENTER');
+      });
       return _this;
     }
     _createClass(HiddenTextEdit, [{
