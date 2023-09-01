@@ -22,18 +22,28 @@ class Demo extends Phaser.Scene {
             width: 500, height: 420,
 
             orientation: 'x',
-            space: { item: 20 }
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                item: 20
+            }
         })
+            .addBackground(
+                this.rexUI.add.roundRectangle({
+                    strokeColor: COLOR_PRIMARY,
+                    strokeWidth: 5,
+                }),
+                'background'
+            )
             .add(
-                CreateScrollablePanel(this, 30),
+                CreateScrollablePanel(this, 'Panel 0', 30),
                 { proportion: 1, expand: true }
             )
             .add(
-                CreateScrollablePanel(this, 10),
+                CreateScrollablePanel(this, 'Panel 1', 10),
                 { proportion: 1, expand: true }
             )
             .add(
-                CreateScrollablePanel(this, 1),
+                CreateScrollablePanel(this, 'Panel 2', 1),
                 { proportion: 1, expand: true }
             )
             .layout()
@@ -41,14 +51,17 @@ class Demo extends Phaser.Scene {
 
         var panels = topSizer.getElement('items');
         panels.forEach(function (panel) {
-            SetDragable(panel);
+            SetupDraggableItems(panel);
+
         })
+
+        SetupDraggablePanels(topSizer);
     }
 
     update() { }
 }
 
-var CreateScrollablePanel = function (scene, itemCount) {
+var CreateScrollablePanel = function (scene, header, itemCount) {
     return scene.rexUI.add.scrollablePanel({
         width: 150, height: 420,
 
@@ -66,6 +79,8 @@ var CreateScrollablePanel = function (scene, itemCount) {
             },
         },
 
+        header: CreateHeader(scene, header),
+
         slider: {
             track: scene.rexUI.add.roundRectangle({
                 width: 20,
@@ -81,12 +96,10 @@ var CreateScrollablePanel = function (scene, itemCount) {
         scroller: false,
 
         space: {
-            left: 10,
-            right: 10,
-            top: 10,
-            bottom: 10,
+            left: 10, right: 10, top: 10, bottom: 10,
 
             panel: 10,
+            header: 10,
         },
 
         name: 'panelTop'
@@ -117,7 +130,7 @@ var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle({
             radius: 10,
-            color: COLOR_LIGHT
+            color: COLOR_PRIMARY
         }),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
@@ -134,7 +147,7 @@ var CreateLabel = function (scene, text) {
     })
 }
 
-var SetDragable = function (scrollablePanel) {
+var SetupDraggableItems = function (scrollablePanel) {
     var rexUI = scrollablePanel.scene.rexUI;
 
     // Set background as dropZone
@@ -213,12 +226,15 @@ var OnChildDragEnd = function (child) {
 
 var ArrangeItems = function (sizer) {
     var children = sizer.getElement('items');
+
     // Save current position
     children.forEach(function (child) {
         child.setData({ startX: child.x, startY: child.y });
     })
+
     // Item is placed to new position in sizer
-    sizer.getTopmostSizer().layout();
+    sizer.getParentSizer('panelTop').layout();
+
     // Move child from start position to new position
     children.forEach(function (child) {
         var fromX = child.getData('startX'),
@@ -226,6 +242,110 @@ var ArrangeItems = function (sizer) {
         if ((child.x !== fromX) || (child.y !== fromY)) {
             child.moveFrom({ x: fromX, y: fromY, speed: 300 })
         }
+    })
+}
+
+var CreateHeader = function (scene, text) {
+    return scene.rexUI.add.label({
+        background: scene.rexUI.add.roundRectangle({
+            color: COLOR_LIGHT
+        }),
+
+        text: scene.add.text(0, 0, text, {
+            fontSize: 18
+        }),
+
+        align: 'left',
+        space: {
+            left: 5, right: 5, top: 5, bottom: 5,
+        },
+
+    })
+}
+
+var SetupDraggablePanels = function (topSizer) {
+    // Set background as dropZone
+    var background = topSizer.getElement('background');
+    background.setInteractive({ dropZone: true });
+
+    var panels = topSizer.getElement('items');
+    for (var i = 0, cnt = panels.length; i < cnt; i++) {
+        let panel = panels[i];
+        let header = panel.getElement('header');
+        header
+            .setInteractive({ draggable: true })
+            .on('dragstart', function (pointer, dragX, dragY) {
+                panel.setData({
+                    index: topSizer.getChildIndex(panel)
+                })
+                topSizer.remove(panel);
+
+                OnPanelDragStart(panel);
+            })
+            .on('drag', function (pointer, dragX, dragY) {
+                // On dragging
+                panel.x += (dragX - header.x);
+                panel.y += (dragY - header.y);
+            })
+            .on('dragend', function (pointer, dragX, dragY, dropped) {
+                if (dropped) { // Process 'drop' event
+                    return;
+                }
+
+                OnPanelDragEnd(panel);
+
+                // Insert back to previous sizer if not dropping on another panel
+                topSizer.insert(panel.getData('index'), panel, { expand: true });
+                ArrangePanels(topSizer);
+            })
+            .on('drop', function (pointer, dropZone) {
+                OnPanelDragEnd(panel);
+
+                // Item is placed to new position in current sizer
+                topSizer.insertAtPosition(
+                    pointer.x, pointer.y,
+                    panel,
+                    { expand: true }
+                );
+                ArrangePanels(topSizer);
+            })
+    }
+}
+
+var OnPanelDragStart = function (panel) {
+    panel.setDepth(1);
+    panel.getElement('background').setStrokeStyle(3, 0xff0000);
+}
+
+var OnPanelDragEnd = function (panel) {
+    panel.setDepth(0);
+    panel.getElement('background').setStrokeStyle();
+}
+
+var ArrangePanels = function (sizer) {
+    var panels = sizer.getElement('items');
+
+    // Save current position, 
+    // Set dirty to false, to ignore layout children of panel
+    panels.forEach(function (panel) {
+        panel.setData({ startX: panel.x, startY: panel.y });
+
+        panel.setDirty(false);
+    })
+
+    // Item is placed to new position in sizer
+    sizer.layout();
+
+    // Move panel from start position to new position
+    // Set dirty to true
+    panels.forEach(function (panel) {
+        var fromX = panel.getData('startX'),
+            fromY = panel.getData('startY');
+        if ((panel.x !== fromX) || (panel.y !== fromY)) {
+            panel.moveFrom({ x: fromX, y: fromY, speed: 300 })
+        }
+
+        panel.setDirty(true);
     })
 }
 
