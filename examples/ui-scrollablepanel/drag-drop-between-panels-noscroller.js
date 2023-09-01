@@ -271,10 +271,6 @@ var CreateHeader = function (scene, text) {
 }
 
 var SetupDraggablePanels = function (topSizer) {
-    // Set background as dropZone
-    var background = topSizer.getElement('background');
-    background.setInteractive({ dropZone: true })
-
     var panels = topSizer.getElement('items');
     for (var i = 0, cnt = panels.length; i < cnt; i++) {
         let panel = panels[i];
