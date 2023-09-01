@@ -147,12 +147,15 @@ var CreateLabel = function (scene, text) {
     })
 }
 
+var ItemsDropZoneName = 'items-dropZone';
 var SetupDraggableItems = function (scrollablePanel) {
     var rexUI = scrollablePanel.scene.rexUI;
 
     // Set background as dropZone
     var background = scrollablePanel.getElement('background');
-    background.setInteractive({ dropZone: true });
+    background
+        .setName(ItemsDropZoneName)
+        .setInteractive({ dropZone: true })
 
     var items = scrollablePanel.getElement('panel.items');
     for (var i = 0, cnt = items.length; i < cnt; i++) {
@@ -191,6 +194,10 @@ var SetupDraggableItems = function (scrollablePanel) {
                 ArrangeItems(previousSizer);
             })
             .on('drop', function (pointer, dropZone) {
+                if (dropZone.name !== ItemsDropZoneName) {
+                    return;
+                }
+
                 // Drop at another sizer
                 OnChildDragEnd(child);
 
@@ -263,10 +270,13 @@ var CreateHeader = function (scene, text) {
     })
 }
 
+var PanelsDropZoneName = 'panels-dropZone';
 var SetupDraggablePanels = function (topSizer) {
     // Set background as dropZone
     var background = topSizer.getElement('background');
-    background.setInteractive({ dropZone: true });
+    background
+        .setName(PanelsDropZoneName)
+        .setInteractive({ dropZone: true })
 
     var panels = topSizer.getElement('items');
     for (var i = 0, cnt = panels.length; i < cnt; i++) {
@@ -299,6 +309,10 @@ var SetupDraggablePanels = function (topSizer) {
                 ArrangePanels(topSizer);
             })
             .on('drop', function (pointer, dropZone) {
+                if (dropZone.name !== PanelsDropZoneName) {
+                    return;
+                }
+
                 OnPanelDragEnd(panel);
 
                 // Item is placed to new position in current sizer
