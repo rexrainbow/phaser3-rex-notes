@@ -63,7 +63,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
             })
             .on('keydown-ENTER', function () {
                 // Route 'keydown-ENTER' event
-                gameObject.emit('keydown-ENTER', gameObject.text);
+                gameObject.emit('keydown-ENTER');
             })
 
     }
