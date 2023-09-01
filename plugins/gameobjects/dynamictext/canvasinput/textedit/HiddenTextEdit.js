@@ -58,8 +58,14 @@ class HiddenTextEdit extends HiddenTextEditBase {
                 gameObject.emit('open');
             }, this)
             .on('close', function () {
+                // Route 'close' event
                 gameObject.emit('close');
-            }, this)
+            })
+            .on('keydown-ENTER', function () {
+                // Route 'keydown-ENTER' event
+                gameObject.emit('keydown-ENTER', gameObject.text);
+            })
+
     }
 
     initText() {
@@ -81,7 +87,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
         }
 
         if (textObject.text !== text) {
-            textObject.setText(text);            
+            textObject.setText(text);
         }
 
         if (this.isOpened) {

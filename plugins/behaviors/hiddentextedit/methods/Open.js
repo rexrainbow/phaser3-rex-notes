@@ -1,5 +1,6 @@
 import { SetLastOpenedEditor } from './LastOpenedEditor.js';
 import CreateElement from './CreateElement.js';
+import EnterClose from './EnterClose.js';
 
 var Open = function () {
     // Already opened
@@ -25,7 +26,7 @@ var Open = function () {
     this.initText();
 
     if (this.enterCloseEnable) {
-        this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+        this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
     }
 
     // There is no cursor-position-change event, 

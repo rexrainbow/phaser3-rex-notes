@@ -71,6 +71,9 @@ var CreateCanvasInput = function (scene, text, width) {
             selectAll: true
         }
     )
+        .on('keydown-ENTER', function (text) {
+            console.log(text)
+        })
 }
 
 var config = {

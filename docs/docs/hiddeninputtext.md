@@ -210,3 +210,8 @@ Set `enableCapture` to `false` to bypass key input to this input-text game objec
 
     })
     ```
+- Close editor by ENTER key down
+    ```javascript
+    hiddenInputText.on('keydown-ENTER', function(){
+    })
+    ```

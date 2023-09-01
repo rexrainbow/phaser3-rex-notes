@@ -502,6 +502,11 @@ var isOpened = txt.isOpened;
         
     })
     ```
+- Close editor by ENTER key down
+    ```javascript
+    txt.on('keydown-ENTER', function(text){
+    })
+    ```
 - Not a number input
     ```javascript
     txt.on('nan', function(text){
