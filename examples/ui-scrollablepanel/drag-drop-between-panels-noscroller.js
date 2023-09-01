@@ -48,7 +48,6 @@ class Demo extends Phaser.Scene {
             )
             .layout()
 
-
         var panels = topSizer.getElement('items');
         panels.forEach(function (panel) {
             SetupDraggableItems(panel);
@@ -194,6 +193,7 @@ var SetupDraggableItems = function (scrollablePanel) {
                 ArrangeItems(previousSizer);
             })
             .on('drop', function (pointer, dropZone) {
+                console.log(dropZone.name);
                 if (dropZone.name !== ItemsDropZoneName) {
                     return;
                 }
@@ -270,13 +270,10 @@ var CreateHeader = function (scene, text) {
     })
 }
 
-var PanelsDropZoneName = 'panels-dropZone';
 var SetupDraggablePanels = function (topSizer) {
     // Set background as dropZone
     var background = topSizer.getElement('background');
-    background
-        .setName(PanelsDropZoneName)
-        .setInteractive({ dropZone: true })
+    background.setInteractive({ dropZone: true })
 
     var panels = topSizer.getElement('items');
     for (var i = 0, cnt = panels.length; i < cnt; i++) {
@@ -298,21 +295,6 @@ var SetupDraggablePanels = function (topSizer) {
                 panel.y += (dragY - header.y);
             })
             .on('dragend', function (pointer, dragX, dragY, dropped) {
-                if (dropped) { // Process 'drop' event
-                    return;
-                }
-
-                OnPanelDragEnd(panel);
-
-                // Insert back to previous sizer if not dropping on another panel
-                topSizer.insert(panel.getData('index'), panel, { expand: true });
-                ArrangePanels(topSizer);
-            })
-            .on('drop', function (pointer, dropZone) {
-                if (dropZone.name !== PanelsDropZoneName) {
-                    return;
-                }
-
                 OnPanelDragEnd(panel);
 
                 // Item is placed to new position in current sizer
@@ -333,7 +315,7 @@ var OnPanelDragStart = function (panel) {
 
 var OnPanelDragEnd = function (panel) {
     panel.setDepth(0);
-    panel.getElement('background').setStrokeStyle();
+    panel.getElement('background').setStrokeStyle(2, COLOR_DARK);
 }
 
 var ArrangePanels = function (sizer) {
