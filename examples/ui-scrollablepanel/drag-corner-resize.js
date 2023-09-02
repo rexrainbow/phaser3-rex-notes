@@ -121,11 +121,8 @@ var AddDragCornerController = function (sizer) {
     topLeftController
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
-            sizer.setChildPosition(this, dragX, dragY);
-
-            sizer.left = dragX;
-            sizer.top = dragY;
-
+            sizer.x += dragX - topLeftController.x;
+            sizer.y += dragY - topLeftController.y;
         })
 
 }
