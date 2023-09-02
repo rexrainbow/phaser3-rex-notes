@@ -166,6 +166,86 @@ var GetBottomRight = function (gameObject, output, includeParent) {
     return PrepareBoundsOutput(gameObject, output, includeParent);
 };
 
+var GetTopMiddle = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    var topLeft = GetTopLeft(gameObject, true, includeParent);
+    var topLeftX = topLeft.x, topLeftY = topLeft.y;
+    var topRight = GetTopRight(gameObject, true, includeParent);
+
+    output.x = (topLeftX + topRight.x) / 2;
+    output.y = (topLeftY + topRight.y) / 2;
+
+    return output;
+};
+
+var GetBottomMiddle = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    var bottomLeft = GetBottomLeft(gameObject, true, includeParent);
+    var bottomLeftX = bottomLeft.x, bottomLeftY = bottomLeft.y;
+    var bottomRight = GetBottomRight(gameObject, true, includeParent);
+
+    output.x = (bottomLeftX + bottomRight.x) / 2;
+    output.y = (bottomLeftY + bottomRight.y) / 2;
+
+    return output;
+};
+
+var GetMiddleLeft = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    var topLeft = GetTopLeft(gameObject, true, includeParent);
+    var topLeftX = topLeft.x, topLeftY = topLeft.y;
+    var bottomLeft = GetBottomLeft(gameObject, true, includeParent);
+
+    output.x = (topLeftX + bottomLeft.x) / 2;
+    output.y = (topLeftY + bottomLeft.y) / 2;
+
+    return output;
+};
+
+var GetMiddleRight = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    var topRight = GetTopRight(gameObject, true, includeParent);
+    var topRightX = topRight.x, topRightY = topRight.y;
+    var bottomRight = GetBottomRight(gameObject, true, includeParent);
+
+    output.x = (topRightX + bottomRight.x) / 2;
+    output.y = (topRightY + bottomRight.y) / 2;
+
+    return output;
+};
+
 var GlobVector = undefined;
 
 var PrepareBoundsOutput = function (gameObject, output, includeParent) {
@@ -190,4 +270,8 @@ export {
     GetTopRight,
     GetBottomLeft,
     GetBottomRight,
+    GetTopMiddle,
+    GetBottomMiddle,
+    GetMiddleLeft,
+    GetMiddleRight,
 }

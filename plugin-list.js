@@ -228,6 +228,7 @@ module.exports = {
     'uiplugin': './templates/ui/ui-plugin.js',
     'dialogquest': './templates/dialog-quest/DialogQuest.js',
     'spinnerplugin': './templates/spinner/spinner-plugin.js',
+    'gameobjectshellplugin': './templates/gameobjectshell/gameobjectshell-plugin.js',
 
     // Plain class
     // rex ui
