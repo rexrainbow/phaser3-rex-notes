@@ -21,6 +21,10 @@ var AddProperties = function () {
             view: 'number', monitor: true, format: formatCallback,
         })
         .addInput({
+            bindingKey: 'angle', title: 'angle',
+            view: 'number', monitor: true, format: formatCallback,
+        })
+        .addInput({
             bindingKey: 'originX', title: 'originX',
             view: 'number', monitor: true, format: formatCallback,
             onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
@@ -33,10 +37,6 @@ var AddProperties = function () {
             onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
                 bindingTarget.setOrigin(bindingTarget.originX, newValue);
             }
-        })
-        .addInput({
-            bindingKey: 'angle', title: 'angle',
-            view: 'number', monitor: true, format: formatCallback,
         })
         .addInput({
             bindingKey: 'alpha', title: 'alpha',
