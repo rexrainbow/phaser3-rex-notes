@@ -70,7 +70,6 @@ export default {
         }
 
         if (dirty) {
-            debugger
             this.layout();
         }
     },
