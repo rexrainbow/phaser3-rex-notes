@@ -44,17 +44,13 @@ var AddControlPoints = function (parent, config) {
         var controlPointName = ControlPointNames[i];
 
         var callback;
-        if (i === 8) {
-            callback = originPointCallback;
-        } else if (i === 9) {
-            callback = rotationPointCallback;
-        } else {
-            callback = resizePointCallback;
-
+        switch (controlPointName) {
+            case Origin: callback = originPointCallback; break;
+            case Rotation: callback = rotationPointCallback; break;
+            default: callback = resizePointCallback; break;
         }
 
         var controlPoint = callback(scene);
-
         controlPoint.pointName = controlPointName;
         parent.pin(controlPoint);
         parent.addChildrenMap(controlPointName, controlPoint);
