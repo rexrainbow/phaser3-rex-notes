@@ -1,9 +1,11 @@
 
-var Bind = function (target) {
+var SetBindingTarget = function (target) {
     var childrenMap = this.childrenMap;
     if (childrenMap.target) {
         this.unpin(childrenMap.target);
         childrenMap.target = undefined;
+
+        this.stopMonitorTarget();
     }
 
     childrenMap.target = target;
@@ -18,14 +20,16 @@ var Bind = function (target) {
 
         this.pin(target);
 
-        this.updateChildren();
+        this
+            .layout()
+            .startMonitorTarget();
 
     } else {
         this.setVisible(false);
 
     }
 
-    return this;
+    return SetBindingTarget;
 }
 
-export default Bind;
+export default SetBindingTarget;

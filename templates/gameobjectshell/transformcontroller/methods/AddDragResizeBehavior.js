@@ -22,7 +22,7 @@ var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
                 parent.height = Math.abs(GlobalDragVector.y);
             }
 
-            parent.updateChildren();
+            parent.layout();
 
             parent.x += fixedX - fixedPoint.x;
             parent.y += fixedY - fixedPoint.y;

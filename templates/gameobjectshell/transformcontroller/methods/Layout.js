@@ -8,7 +8,7 @@ import { RotationPointAngle } from './Const.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 
-var UpdateChildren = function () {
+var Layout = function () {
     var points = GetCornerPoints(this);
     UpdateBoundRectangle(this, points);
     UpdateControlPoints(this, points);
@@ -54,4 +54,4 @@ var GetCornerPoints = function (parent) {
 
 var GlobalPoints;
 
-export default UpdateChildren;
+export default Layout;

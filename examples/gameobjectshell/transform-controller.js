@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
             gameObject
                 .setInteractive()
                 .on('pointerdown', function () {
-                    controller.bind(gameObject);
+                    controller.setBindingTarget(gameObject);
                 })
         }
 
