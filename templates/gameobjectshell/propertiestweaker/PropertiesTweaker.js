@@ -1,10 +1,11 @@
 import { Tweaker } from '../../ui/ui-components';
 import DefaultConfig from './DefaultConfig';
+import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 
 class PropertiesTweaker extends Tweaker {
     constructor(scene, config) {
         if (config === undefined) {
-            config = DefaultConfig;
+            config = DeepClone(DefaultConfig);
         }
         super(scene, config);
 

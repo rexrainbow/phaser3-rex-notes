@@ -1,5 +1,7 @@
 import ContainerLite from '../../../plugins/containerlite.js';
 import Methods from './methods/Methods.js';
+import DefaultConfig from './DefaultConfig.js';
+import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import { AddBoundsRectangle } from './methods/BoundsRectangleMethods.js'
 import { AddControlPoints } from './methods/ControlPointMethods.js';
 
@@ -7,6 +9,10 @@ import { AddControlPoints } from './methods/ControlPointMethods.js';
 
 class TransformController extends ContainerLite {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = DeepClone(DefaultConfig);
+        }
+
         super(scene, 0, 0, 1, 1);
 
         this.childrenMap = {};
