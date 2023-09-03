@@ -2460,10 +2460,18 @@
   Object.assign(ContainerLite.prototype, methods);
 
   var Bind = function Bind(target) {
+    if (this.target) {
+      this.unpin(this.target);
+      this.target = undefined;
+    }
     this.target = target;
-    this.setOrigin(target.originX, target.originY).setPosition(target.x, target.y).setAngle(target.angle).setSize(target.displayWidth, target.displayHeight);
-    this.pin(target);
-    this.updateChildren();
+    if (target) {
+      this.setVisible(true).setOrigin(target.originX, target.originY).setPosition(target.x, target.y).setAngle(target.angle).setSize(target.displayWidth, target.displayHeight);
+      this.pin(target);
+      this.updateChildren();
+    } else {
+      this.setVisible(false);
+    }
     return this;
   };
 
@@ -2507,27 +2515,27 @@
   var MiddleLeft = 'middleLeft';
   var Origin = 'origin';
 
-  var AddDragMoveBehavior = function AddDragMoveBehavior(parent, dragger) {
-    dragger.setInteractive({
+  var AddDragMoveBehavior = function AddDragMoveBehavior(parent, dragPoint) {
+    dragPoint.setInteractive({
       draggable: true
     }).on('drag', function (pointer, dragX, dragY) {
-      parent.x += dragX - dragger.x;
-      parent.y += dragY - dragger.y;
+      parent.x += dragX - dragPoint.x;
+      parent.y += dragY - dragPoint.y;
     });
   };
 
-  var AddDragResizeBehavior = function AddDragResizeBehavior(parent, dragger, basePosition, dragAxis) {
+  var AddDragResizeBehavior = function AddDragResizeBehavior(parent, dragPoint, fixedPoint, dragAxis) {
     var canDragWidth = dragAxis.indexOf('x') !== -1;
     var canDragHeight = dragAxis.indexOf('y') !== -1;
-    dragger.setInteractive({
+    dragPoint.setInteractive({
       draggable: true
     }).on('drag', function (pointer, dragX, dragY) {
-      var baseX = basePosition.x,
-        baseY = basePosition.y;
+      var fixedX = fixedPoint.x,
+        fixedY = fixedPoint.y;
       if (GlobalDragVector === undefined) {
         GlobalDragVector = new Phaser.Math.Vector2();
       }
-      GlobalDragVector.setTo(dragX - baseX, dragY - baseY).rotate(-parent.rotation);
+      GlobalDragVector.setTo(dragX - fixedX, dragY - fixedY).rotate(-parent.rotation);
       if (canDragWidth) {
         parent.width = Math.abs(GlobalDragVector.x);
       }
@@ -2535,8 +2543,8 @@
         parent.height = Math.abs(GlobalDragVector.y);
       }
       parent.updateChildren();
-      parent.x += baseX - basePosition.x;
-      parent.y += baseY - basePosition.y;
+      parent.x += fixedX - fixedPoint.x;
+      parent.y += fixedY - fixedPoint.y;
       parent.setChildDisplaySize(parent.target, parent.width, parent.height);
     });
   };
@@ -2639,6 +2647,7 @@
       _this = _super.call(this, scene, 0, 0, 1, 1);
       AddBoundsRectangle(_assertThisInitialized(_this), GetValue(config, 'boundsRectangle'));
       AddControlPoints(_assertThisInitialized(_this), GetValue(config, 'controlPoint'));
+      _this.setVisible(false);
       return _this;
     }
     return _createClass(TransformController);
