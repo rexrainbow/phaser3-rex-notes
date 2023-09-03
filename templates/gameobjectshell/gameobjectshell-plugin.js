@@ -1,6 +1,7 @@
 import ObjectFactory from './ObjectFactory.js';
 
-import TransfromControllerFactory from './transformcontroller/Factory.js'
+import TransfromControllerFactory from './transformcontroller/Factory.js';
+import PropertiesTweakerFactory from './propertiestweaker/Factory.js';
 
 class GameObjectShellPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
