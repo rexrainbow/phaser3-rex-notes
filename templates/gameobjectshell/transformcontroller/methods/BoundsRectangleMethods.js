@@ -19,11 +19,11 @@ var AddBoundsRectangle = function (parent, callback) {
     var boundRectangle = callback(scene);
     parent.pin(boundRectangle);
 
-    parent.boundRectangle = boundRectangle;
+    parent.addChildrenMap('bounds', boundRectangle);
 }
 
 var UpdateBoundRectangle = function (parent, points) {
-    var boundRectangle = parent.boundRectangle;
+    var boundRectangle = parent.childrenMap.bounds;
     boundRectangle
         .setOrigin(parent.originX, parent.originY)
         .setPosition(parent.x, parent.y)

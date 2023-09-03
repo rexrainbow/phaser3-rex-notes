@@ -34,18 +34,19 @@ var AddControlPoints = function (parent, callback) {
         var controlPoint = callback(scene);
         controlPoint.pointName = controlPointName;
         parent.pin(controlPoint);
-        parent[`${controlPointName}ControlPoint`] = controlPoint;
+        parent.addChildrenMap(controlPointName, controlPoint);
     }
 
-    AddDragMoveBehavior(parent, parent.originControlPoint);
-    AddDragResizeBehavior(parent, parent.topLeftControlPoint, parent.bottomRightControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.bottomRightControlPoint, parent.topLeftControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.topRightControlPoint, parent.bottomLeftControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.bottomLeftControlPoint, parent.topRightControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.topMiddleControlPoint, parent.bottomMiddleControlPoint, 'y');
-    AddDragResizeBehavior(parent, parent.bottomMiddleControlPoint, parent.topMiddleControlPoint, 'y');
-    AddDragResizeBehavior(parent, parent.middleLeftControlPoint, parent.middleRightControlPoint, 'x');
-    AddDragResizeBehavior(parent, parent.middleRightControlPoint, parent.middleLeftControlPoint, 'x');
+    var childrenMap = parent.childrenMap;
+    AddDragMoveBehavior(parent, childrenMap.origin);
+    AddDragResizeBehavior(parent, childrenMap.topLeft, childrenMap.bottomRight, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.bottomRight, childrenMap.topLeft, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.topRight, childrenMap.bottomLeft, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.bottomLeft, childrenMap.topRight, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.topMiddle, childrenMap.bottomMiddle, 'y');
+    AddDragResizeBehavior(parent, childrenMap.bottomMiddle, childrenMap.topMiddle, 'y');
+    AddDragResizeBehavior(parent, childrenMap.middleLeft, childrenMap.middleRight, 'x');
+    AddDragResizeBehavior(parent, childrenMap.middleRight, childrenMap.middleLeft, 'x');
 }
 
 var UpdateControlPoint = function (parent, controlPoint, points) {
@@ -59,9 +60,10 @@ var UpdateControlPoint = function (parent, controlPoint, points) {
 }
 
 var UpdateControlPoints = function (parent, points) {
+    var childrenMap = parent.childrenMap;
     for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
         var controlPointName = ControlPointNames[i];
-        var controlPoint = parent[`${controlPointName}ControlPoint`];
+        var controlPoint = childrenMap[controlPointName];
         UpdateControlPoint(parent, controlPoint, points);
     }
 }

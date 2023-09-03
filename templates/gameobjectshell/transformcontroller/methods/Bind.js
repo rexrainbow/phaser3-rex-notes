@@ -1,11 +1,12 @@
 
 var Bind = function (target) {
-    if (this.target) {
-        this.unpin(this.target);
-        this.target = undefined;
+    var childrenMap = this.childrenMap;
+    if (childrenMap.target) {
+        this.unpin(childrenMap.target);
+        childrenMap.target = undefined;
     }
 
-    this.target = target;
+    childrenMap.target = target;
 
     if (target) {
         this

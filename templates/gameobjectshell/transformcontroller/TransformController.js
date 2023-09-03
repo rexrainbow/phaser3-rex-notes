@@ -9,6 +9,8 @@ class TransformController extends ContainerLite {
     constructor(scene, config) {
         super(scene, 0, 0, 1, 1);
 
+        this.childrenMap = {};
+
         AddBoundsRectangle(this, GetValue(config, 'boundsRectangle'));
         AddControlPoints(this, GetValue(config, 'controlPoint'));
 

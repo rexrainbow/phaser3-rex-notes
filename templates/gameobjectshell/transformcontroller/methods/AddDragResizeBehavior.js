@@ -27,7 +27,7 @@ var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
             parent.x += fixedX - fixedPoint.x;
             parent.y += fixedY - fixedPoint.y;
 
-            parent.setChildDisplaySize(parent.target, parent.width, parent.height);
+            parent.setChildDisplaySize(parent.childrenMap.target, parent.width, parent.height);
         })
 }
 
