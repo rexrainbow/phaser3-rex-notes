@@ -56505,9 +56505,18 @@
         view: 'number',
         monitor: true
       });
+      _this.setVisible(false);
       return _this;
     }
-    return _createClass(PropertiesTweaker);
+    _createClass(PropertiesTweaker, [{
+      key: "setBindingTarget",
+      value: function setBindingTarget(target) {
+        this.setVisible(!!target);
+        _get(_getPrototypeOf(PropertiesTweaker.prototype), "setBindingTarget", this).call(this, target);
+        return this;
+      }
+    }]);
+    return PropertiesTweaker;
   }(Tweaker);
 
   ObjectFactory.register('propertiesTweaker', function (config) {
@@ -56549,6 +56558,13 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.GameObjectShell.Shell', Shell);
+
+  ObjectFactory.register('fullWindowRectangle', function (fillColor, fillAlpha) {
+    var gameObject = new FullWindowRectangle(this.scene, fillColor, fillAlpha);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.GameObjectShell.FullWindowRectangle', FullWindowRectangle);
 
   var GameObjectShellPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(GameObjectShellPlugin, _Phaser$Plugins$Scene);
