@@ -2583,6 +2583,8 @@
           y: undefined,
           displayWidth: undefined,
           displayHeight: undefined,
+          originX: undefined,
+          originY: undefined,
           angle: undefined
         };
       }
@@ -2612,7 +2614,7 @@
         return;
       }
       var dirty = false;
-      var previousValue, currentValue;
+      var previousValue, currentValue, parentValue;
       var monitorProperties = this.monitorProperties;
       for (var key in monitorProperties) {
         previousValue = monitorProperties[key];
@@ -2621,6 +2623,11 @@
           continue;
         }
         monitorProperties[key] = currentValue;
+        parentValue = this[key];
+        if (parentValue === currentValue) {
+          continue;
+        }
+        this[key] = currentValue;
         dirty = true;
       }
       if (dirty) {
@@ -2935,12 +2942,12 @@
   };
 
   // const GetValue = Phaser.Utils.Objects.GetValue;
-  var TransformController = /*#__PURE__*/function (_ContainerLite) {
-    _inherits(TransformController, _ContainerLite);
-    var _super = _createSuper(TransformController);
-    function TransformController(scene, config) {
+  var ControlPoints = /*#__PURE__*/function (_ContainerLite) {
+    _inherits(ControlPoints, _ContainerLite);
+    var _super = _createSuper(ControlPoints);
+    function ControlPoints(scene, config) {
       var _this;
-      _classCallCheck(this, TransformController);
+      _classCallCheck(this, ControlPoints);
       if (config === undefined) {
         config = DeepClone(DefaultConfig$1);
       }
@@ -2951,9 +2958,9 @@
       _this.setVisible(false);
       return _this;
     }
-    return _createClass(TransformController);
+    return _createClass(ControlPoints);
   }(ContainerLite);
-  Object.assign(TransformController.prototype, Methods$m);
+  Object.assign(ControlPoints.prototype, Methods$m);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -3016,12 +3023,12 @@
     return target;
   };
 
-  ObjectFactory.register('transformController', function (config) {
-    var gameObject = new TransformController(this.scene, config);
+  ObjectFactory.register('controlPoints', function (config) {
+    var gameObject = new ControlPoints(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.GameObjectShell.TransformController', TransformController);
+  SetValue(window, 'RexPlugins.GameObjectShell.ControlPoints', ControlPoints);
 
   var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
     if (callback === undefined) {
@@ -56424,6 +56431,7 @@
   Phaser.Utils.Objects.GetValue;
 
   var COLOR_PRIMARY = 0x424242;
+  var COLOR_LIGHT = 0x6d6d6d;
   var COLOR_DARK = 0x1b1b1b;
   var DefaultConfig = {
     styles: {
@@ -56433,17 +56441,12 @@
         strokeColor: 0xffffff
       },
       inputRow: {
+        height: 20,
         background: {
           strokeColor: COLOR_PRIMARY
         },
-        title: {
-          iconSize: 30,
-          space: {
-            icon: 2
-          }
-        },
         inputText: {
-          width: 200,
+          width: 100,
           background: {
             color: COLOR_DARK
           },
@@ -56460,6 +56463,23 @@
           }
         }
       },
+      slider: {
+        track: {
+          color: COLOR_DARK,
+          width: 8,
+          height: 8
+        },
+        indicator: {
+          color: COLOR_PRIMARY,
+          width: 8,
+          height: 8
+        },
+        thumb: {
+          color: COLOR_LIGHT,
+          width: 16,
+          height: 16
+        }
+      },
       space: {
         left: 10,
         right: 10,
@@ -56469,88 +56489,147 @@
     }
   };
 
-  var PropertiesTweaker = /*#__PURE__*/function (_Tweaker) {
-    _inherits(PropertiesTweaker, _Tweaker);
-    var _super = _createSuper(PropertiesTweaker);
-    function PropertiesTweaker(scene, config) {
+  var AddProperties = function AddProperties() {
+    var formatCallback = function formatCallback(value) {
+      return Number.isInteger(value) ? value : value.toFixed(3);
+    };
+    this.addInput({
+      bindingKey: 'x',
+      title: 'x',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    }).addInput({
+      bindingKey: 'y',
+      title: 'y',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    }).addInput({
+      bindingKey: 'displayWidth',
+      title: 'width',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    }).addInput({
+      bindingKey: 'displayHeight',
+      title: 'height',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    }).addInput({
+      bindingKey: 'angle',
+      title: 'angle',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    }).addInput({
+      bindingKey: 'originX',
+      title: 'originX',
+      view: 'number',
+      monitor: true,
+      format: formatCallback,
+      onValueChange: function onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
+        bindingTarget.setOrigin(newValue, bindingTarget.originY);
+      }
+    }).addInput({
+      bindingKey: 'originY',
+      title: 'originY',
+      view: 'number',
+      monitor: true,
+      format: formatCallback,
+      onValueChange: function onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
+        bindingTarget.setOrigin(bindingTarget.originX, newValue);
+      }
+    }).addInput({
+      bindingKey: 'alpha',
+      title: 'alpha',
+      view: 'number',
+      monitor: true,
+      format: formatCallback
+    });
+  };
+
+  var PropertiesPanel = /*#__PURE__*/function (_Tweaker) {
+    _inherits(PropertiesPanel, _Tweaker);
+    var _super = _createSuper(PropertiesPanel);
+    function PropertiesPanel(scene, config) {
       var _this;
-      _classCallCheck(this, PropertiesTweaker);
+      _classCallCheck(this, PropertiesPanel);
       if (config === undefined) {
         config = DeepClone(DefaultConfig);
       }
       _this = _super.call(this, scene, config);
-      _this.addInput({
-        bindingKey: 'x',
-        title: 'x',
-        view: 'number',
-        monitor: true
-      }).addInput({
-        bindingKey: 'y',
-        title: 'y',
-        view: 'number',
-        monitor: true
-      }).addInput({
-        bindingKey: 'displayWidth',
-        title: 'width',
-        view: 'number',
-        monitor: true
-      }).addInput({
-        bindingKey: 'displayHeight',
-        title: 'height',
-        view: 'number',
-        monitor: true
-      }).addInput({
-        bindingKey: 'angle',
-        title: 'angle',
-        view: 'number',
-        monitor: true
-      });
+      AddProperties.call(_assertThisInitialized(_this));
       _this.setVisible(false);
       return _this;
     }
-    _createClass(PropertiesTweaker, [{
+    _createClass(PropertiesPanel, [{
       key: "setBindingTarget",
       value: function setBindingTarget(target) {
         this.setVisible(!!target);
-        _get(_getPrototypeOf(PropertiesTweaker.prototype), "setBindingTarget", this).call(this, target);
+        _get(_getPrototypeOf(PropertiesPanel.prototype), "setBindingTarget", this).call(this, target);
         return this;
       }
     }]);
-    return PropertiesTweaker;
+    return PropertiesPanel;
   }(Tweaker);
 
-  ObjectFactory.register('propertiesTweaker', function (config) {
-    var gameObject = new PropertiesTweaker(this.scene, config);
+  ObjectFactory.register('propertiesPanel', function (config) {
+    var gameObject = new PropertiesPanel(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.GameObjectShell.PropertiesTweaker', PropertiesTweaker);
+  SetValue(window, 'RexPlugins.GameObjectShell.PropertiesPanel', PropertiesPanel);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Shell = /*#__PURE__*/function () {
+  var Shell = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Shell, _ComponentBase);
+    var _super = _createSuper(Shell);
     function Shell(scene, config) {
+      var _this;
       _classCallCheck(this, Shell);
-      var tweaker = new PropertiesTweaker(scene, GetValue(config, 'tweaker'));
-      if (tweaker.x === 0 && tweaker.y === 0) {
-        tweaker.setOrigin(0);
+      _this = _super.call(this, scene, config);
+      // this.scene
+
+      var panel = new PropertiesPanel(scene, GetValue(config, 'panel'));
+      if (panel.x === 0 && panel.y === 0) {
+        panel.setOrigin(0);
       }
-      scene.add.existing(tweaker);
-      tweaker.layout();
-      var controller = new TransformController(scene, GetValue(config, 'controller'));
-      scene.add.existing(controller);
-      this.tweaker = tweaker;
-      this.controller = controller;
+      scene.add.existing(panel);
+      panel.layout();
+      var controlPoints = new ControlPoints(scene, GetValue(config, 'controlPoints'));
+      scene.add.existing(controlPoints);
+      _this.panel = panel;
+      _this.controlPoints = controlPoints;
+      return _this;
     }
     _createClass(Shell, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        _get(_getPrototypeOf(Shell.prototype), "shutdown", this).call(this, fromScene);
+        this.panel.destroy();
+        this.controlPoints.destroy();
+        this.panel = undefined;
+        this.controlPoints = undefined;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.emit('destroy');
+        _get(_getPrototypeOf(Shell.prototype), "destroy", this).call(this, fromScene);
+        return this;
+      }
+    }, {
       key: "setBindingTarget",
       value: function setBindingTarget(target) {
-        this.tweaker.setBindingTarget(target);
-        this.controller.setBindingTarget(target);
+        this.panel.setBindingTarget(target);
+        this.controlPoints.setBindingTarget(target);
         return this;
       }
     }]);
     return Shell;
-  }();
+  }(ComponentBase);
 
   ObjectFactory.register('shell', function (config) {
     var gameObject = new Shell(this.scene, config);
