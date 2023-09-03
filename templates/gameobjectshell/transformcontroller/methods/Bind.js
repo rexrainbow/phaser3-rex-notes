@@ -1,16 +1,28 @@
 
 var Bind = function (target) {
+    if (this.target) {
+        this.unpin(this.target);
+        this.target = undefined;
+    }
+
     this.target = target;
 
-    this
-        .setOrigin(target.originX, target.originY)
-        .setPosition(target.x, target.y)
-        .setAngle(target.angle)
-        .setSize(target.displayWidth, target.displayHeight)
+    if (target) {
+        this
+            .setVisible(true)
+            .setOrigin(target.originX, target.originY)
+            .setPosition(target.x, target.y)
+            .setAngle(target.angle)
+            .setSize(target.displayWidth, target.displayHeight)
 
-    this.pin(target);
+        this.pin(target);
 
-    this.updateChildren();
+        this.updateChildren();
+
+    } else {
+        this.setVisible(false);
+
+    }
 
     return this;
 }

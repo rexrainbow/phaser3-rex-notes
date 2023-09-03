@@ -1,18 +1,18 @@
-var AddDragResizeBehavior = function (parent, dragger, basePosition, dragAxis) {
+var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
     var canDragWidth = (dragAxis.indexOf('x') !== -1);
     var canDragHeight = (dragAxis.indexOf('y') !== -1);
 
-    dragger
+    dragPoint
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
-            var baseX = basePosition.x,
-                baseY = basePosition.y;
+            var fixedX = fixedPoint.x,
+                fixedY = fixedPoint.y;
 
             if (GlobalDragVector === undefined) {
                 GlobalDragVector = new Phaser.Math.Vector2()
             }
             GlobalDragVector
-                .setTo(dragX - baseX, dragY - baseY)
+                .setTo(dragX - fixedX, dragY - fixedY)
                 .rotate(-parent.rotation)
 
             if (canDragWidth) {
@@ -24,8 +24,8 @@ var AddDragResizeBehavior = function (parent, dragger, basePosition, dragAxis) {
 
             parent.updateChildren();
 
-            parent.x += baseX - basePosition.x;
-            parent.y += baseY - basePosition.y;
+            parent.x += fixedX - fixedPoint.x;
+            parent.y += fixedY - fixedPoint.y;
 
             parent.setChildDisplaySize(parent.target, parent.width, parent.height);
         })

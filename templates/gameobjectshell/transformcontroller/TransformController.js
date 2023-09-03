@@ -11,6 +11,8 @@ class TransformController extends ContainerLite {
 
         AddBoundsRectangle(this, GetValue(config, 'boundsRectangle'));
         AddControlPoints(this, GetValue(config, 'controlPoint'));
+
+        this.setVisible(false);
     }
 }
 

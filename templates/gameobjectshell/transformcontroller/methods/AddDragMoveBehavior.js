@@ -1,9 +1,9 @@
-var AddDragMoveBehavior = function (parent, dragger) {
-    dragger
+var AddDragMoveBehavior = function (parent, dragPoint) {
+    dragPoint
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
-            parent.x += dragX - dragger.x;
-            parent.y += dragY - dragger.y;
+            parent.x += dragX - dragPoint.x;
+            parent.y += dragY - dragPoint.y;
         })
 }
 

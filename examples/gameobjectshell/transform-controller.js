@@ -10,13 +10,33 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('logo', 'assets/images/logo.png');
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        var gameObject = this.add.image(400, 300, 'logo').setAngle(45);
+        var controller;
 
-        var controller = this.rexGameObjectShell.add.transformController({
+        for (var i = 0; i < 10; i++) {
+            let gameObject = this.make.image({
+                key: 'mushroom',
+
+                x: { randFloat: [0, 800] },
+                y: { randFloat: [0, 600] },
+                scale: {
+                    x: { randFloat: [0.5, 2] },
+                    y: { randFloat: [0.5, 2] },
+                },
+                angle: { randFloat: [0, 360] },
+            })
+
+            gameObject
+                .setInteractive()
+                .on('pointerdown', function () {
+                    controller.bind(gameObject);
+                })
+        }
+
+        controller = this.rexGameObjectShell.add.transformController({
             boundsRectangle: {
                 color: 0x555555,
             },
@@ -24,8 +44,8 @@ class Demo extends Phaser.Scene {
             controlPoint: {
                 color: 0x00ff00
             }
-        })
-            .bind(gameObject);
+        });
+
     }
 
     update() {
