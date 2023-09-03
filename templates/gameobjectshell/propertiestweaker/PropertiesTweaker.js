@@ -31,6 +31,13 @@ class PropertiesTweaker extends Tweaker {
                 view: 'number', monitor: true,
             })
 
+        this.setVisible(false);
+    }
+
+    setBindingTarget(target) {
+        this.setVisible(!!target);
+        super.setBindingTarget(target);
+        return this;
     }
 }
 
