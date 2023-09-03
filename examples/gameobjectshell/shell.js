@@ -15,6 +15,8 @@ class Demo extends Phaser.Scene {
     create() {
         var shell;
 
+        var background = this.rexGameObjectShell.add.fullWindowRectangle();
+
         for (var i = 0; i < 10; i++) {
             let gameObject = this.make.image({
                 key: 'mushroom',
@@ -37,6 +39,12 @@ class Demo extends Phaser.Scene {
 
         shell = this.rexGameObjectShell.add.shell();
 
+
+        background
+            .setInteractive()
+            .on('pointerdown', function () {
+                shell.setBindingTarget();
+            })
     }
 
     update() {
