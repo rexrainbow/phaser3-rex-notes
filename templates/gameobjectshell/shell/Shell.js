@@ -1,27 +1,47 @@
+import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
 import PropertiesTweaker from '../propertiestweaker/PropertiesTweaker.js';
 import TransformController from '../transformcontroller/TransformController.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Shell {
+class Shell extends ComponentBase {
     constructor(scene, config) {
-        var tweaker = new PropertiesTweaker(scene, GetValue(config, 'tweaker'));
-        if ((tweaker.x === 0) && (tweaker.y === 0)) {
-            tweaker.setOrigin(0)
-        }        
-        scene.add.existing(tweaker);
-        tweaker.layout();
+        super(scene, config);
+        // this.scene
 
-        var controller = new TransformController(scene, GetValue(config, 'controller'));
-        scene.add.existing(controller);
+        var panel = new PropertiesTweaker(scene, GetValue(config, 'panel'));
+        if ((panel.x === 0) && (panel.y === 0)) {
+            panel.setOrigin(0)
+        }
+        scene.add.existing(panel);
+        panel.layout();
 
-        this.tweaker = tweaker;
-        this.controller = controller;
+        var controlPoints = new TransformController(scene, GetValue(config, 'controlPoints'));
+        scene.add.existing(controlPoints);
+
+        this.panel = panel;
+        this.controlPoints = controlPoints;
+    }
+
+    shutdown(fromScene) {
+        super.shutdown(fromScene);
+
+        this.panel.destroy();
+        this.controlPoints.destroy();
+
+        this.panel = undefined;
+        this.controlPoints = undefined;
+    }
+
+    destroy(fromScene) {
+        this.emit('destroy');
+        super.destroy(fromScene);
+        return this;
     }
 
     setBindingTarget(target) {
-        this.tweaker.setBindingTarget(target);
-        this.controller.setBindingTarget(target);
+        this.panel.setBindingTarget(target);
+        this.controlPoints.setBindingTarget(target);
         return this;
     }
 }
