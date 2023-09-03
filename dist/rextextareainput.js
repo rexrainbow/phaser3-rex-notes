@@ -24216,7 +24216,7 @@
     }, {
       key: "setNumberInput",
       value: function setNumberInput() {
-        this.textEdit.setNumberInput();
+        this.textEdit.setNumberInput().setSelectAllWhenFocusEnable();
         this.parseTextCallback = Number;
         return this;
       }
