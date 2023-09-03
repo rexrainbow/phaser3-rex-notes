@@ -2,7 +2,7 @@ import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var GtDefaultCallback = function (config) {
+var GetDefaultCallback = function (config) {
     var color = GetValue(config, 'color');
     var alpha = GetValue(config, 'alpha', 0.5);
     var strokeColor = GetValue(config, 'strokeColor');
@@ -11,10 +11,13 @@ var GtDefaultCallback = function (config) {
         return scene.add.rectangle(0, 0, 0, 0, color, alpha).setStrokeStyle(strokeColor, strokeWidth);
     }
 }
-var AddBoundsRectangle = function (parent, callback) {
+var AddBoundsRectangle = function (parent, config) {
+    var callback = GetValue(config, 'boundsRectangle');
+
     if (!IsFunction(callback)) {
-        callback = GtDefaultCallback(callback);
+        callback = GetDefaultCallback(callback);
     }
+
     var scene = parent.scene;
     var boundRectangle = callback(scene);
     parent.pin(boundRectangle);

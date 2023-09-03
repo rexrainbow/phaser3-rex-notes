@@ -9,7 +9,7 @@ var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
                 fixedY = fixedPoint.y;
 
             if (GlobalDragVector === undefined) {
-                GlobalDragVector = new Phaser.Math.Vector2()
+                GlobalDragVector = new Phaser.Math.Vector2();
             }
             GlobalDragVector
                 .setTo(dragX - fixedX, dragY - fixedY)

@@ -4,6 +4,9 @@ import {
 } from '../../../../plugins/utils/bounds/GetBounds.js';
 import { UpdateBoundRectangle } from './BoundsRectangleMethods.js';
 import { UpdateControlPoints } from './ControlPointMethods.js';
+import { RotationPointAngle } from './Const.js';
+
+const DegToRad = Phaser.Math.DegToRad;
 
 var UpdateChildren = function () {
     var points = GetCornerPoints(this);
@@ -25,6 +28,7 @@ var GetCornerPoints = function (parent) {
             middleLeft: {},
             middleRight: {},
             origin: {},
+            rotation: {},
         }
     }
 
@@ -40,6 +44,10 @@ var GetCornerPoints = function (parent) {
 
     GlobalPoints.origin.x = parent.x;
     GlobalPoints.origin.y = parent.y;
+
+    var rotation = DegToRad(parent.angle + RotationPointAngle);
+    GlobalPoints.rotation.x = parent.x + (30) * Math.cos(rotation);
+    GlobalPoints.rotation.y = parent.y + (30) * Math.sin(rotation);
 
     return GlobalPoints;
 }

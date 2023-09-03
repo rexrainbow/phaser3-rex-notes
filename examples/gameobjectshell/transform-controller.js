@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import GameObjectShellPlugin from '../../templates/gameobjectshell/gameobjectshell-plugin.js';
-import TransformController from '../../templates/gameobjectshell/transformcontroller/TransformController';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -41,9 +40,17 @@ class Demo extends Phaser.Scene {
                 color: 0x555555,
             },
 
-            controlPoint: {
+            originPoint: {
+                color: 0xff0000
+            },
+
+            resizePoint: {
                 color: 0x00ff00
-            }
+            },
+
+            rotationPoint: {
+                color: 0x0000ff
+            },
         });
 
     }
