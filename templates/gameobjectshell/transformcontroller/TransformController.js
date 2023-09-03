@@ -3,7 +3,7 @@ import Methods from './methods/Methods.js';
 import { AddBoundsRectangle } from './methods/BoundsRectangleMethods.js'
 import { AddControlPoints } from './methods/ControlPointMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+// const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TransformController extends ContainerLite {
     constructor(scene, config) {

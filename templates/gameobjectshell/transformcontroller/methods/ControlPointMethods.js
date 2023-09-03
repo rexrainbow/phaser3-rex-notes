@@ -39,24 +39,21 @@ var AddControlPoints = function (parent, config) {
     var resizePointCallback = GetPointCallback(config, 'resizePoint');
     var rotationPointCallback = GetPointCallback(config, 'rotationPoint');
 
-    var pointsData = [
-        { name: TopLeft, callback: resizePointCallback },
-        { name: TopRight, callback: resizePointCallback },
-        { name: BottomRight, callback: resizePointCallback },
-        { name: BottomLeft, callback: resizePointCallback },
-        { name: TopMiddle, callback: resizePointCallback },
-        { name: BottomMiddle, callback: resizePointCallback },
-        { name: MiddleLeft, callback: resizePointCallback },
-        { name: MiddleRight, callback: resizePointCallback },
-        { name: Origin, callback: originPointCallback },
-        { name: Rotation, callback: rotationPointCallback },
-    ]
-
     var scene = parent.scene;
-    for (var i = 0, cnt = pointsData.length; i < cnt; i++) {
-        var pointData = pointsData[i];
-        var controlPointName = pointData.name;
-        var controlPoint = pointData.callback(scene);
+    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
+        var controlPointName = ControlPointNames[i];
+
+        var callback;
+        if (i === 8) {
+            callback = originPointCallback;
+        } else if (i === 9) {
+            callback = rotationPointCallback;
+        } else {
+            callback = resizePointCallback;
+
+        }
+
+        var controlPoint = callback(scene);
 
         controlPoint.pointName = controlPointName;
         parent.pin(controlPoint);
