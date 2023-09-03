@@ -393,7 +393,7 @@
     return gameObject;
   };
 
-  var DegToRad$1 = Phaser.Math.DegToRad;
+  var DegToRad$2 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -419,7 +419,7 @@
           return RadToDeg(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad$1(value);
+          this.rotation = DegToRad$2(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -478,7 +478,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
@@ -533,11 +533,11 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
     } else {
-      state.syncPosition = GetValue$6(config, 'syncPosition', true);
-      state.syncRotation = GetValue$6(config, 'syncRotation', true);
-      state.syncScale = GetValue$6(config, 'syncScale', true);
-      state.syncAlpha = GetValue$6(config, 'syncAlpha', true);
-      state.syncScrollFactor = GetValue$6(config, 'syncScrollFactor', true);
+      state.syncPosition = GetValue$5(config, 'syncPosition', true);
+      state.syncRotation = GetValue$5(config, 'syncRotation', true);
+      state.syncScale = GetValue$5(config, 'syncScale', true);
+      state.syncAlpha = GetValue$5(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$5(config, 'syncScrollFactor', true);
     }
   };
   var AddChild = {
@@ -749,8 +749,8 @@
     }
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
-  var Rotation = {
+  var DegToRad$1 = Phaser.Math.DegToRad;
+  var Rotation$1 = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
@@ -789,7 +789,7 @@
     },
     setChildLocalAngle: function setChildLocalAngle(child, angle) {
       var state = GetLocalState(child);
-      state.rotation = DegToRad(angle);
+      state.rotation = DegToRad$1(angle);
       this.updateChildRotation(child);
       return this;
     },
@@ -1941,7 +1941,7 @@
     return object instanceof GameObjectClass;
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var UUID = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
@@ -1950,13 +1950,13 @@
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-    var x = GetValue$5(config, 'x', undefined);
-    var y = GetValue$5(config, 'y', undefined);
-    var width = GetValue$5(config, 'width', undefined);
-    var height = GetValue$5(config, 'height', undefined);
-    var originX = GetValue$5(config, 'originX', 0);
-    var originY = GetValue$5(config, 'originY', 0);
-    var padding = GetValue$5(config, 'padding', 0);
+    var x = GetValue$4(config, 'x', undefined);
+    var y = GetValue$4(config, 'y', undefined);
+    var width = GetValue$4(config, 'width', undefined);
+    var height = GetValue$4(config, 'height', undefined);
+    var originX = GetValue$4(config, 'originX', 0);
+    var originY = GetValue$4(config, 'originY', 0);
+    var padding = GetValue$4(config, 'padding', 0);
     var scrollX, scrollY;
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
@@ -2067,17 +2067,17 @@
     }
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$4(config, 'color');
-      lineWidth = GetValue$4(config, 'lineWidth');
-      fillColor = GetValue$4(config, 'fillColor');
-      fillAlpha = GetValue$4(config, 'fillAlpha', 1);
-      padding = GetValue$4(config, 'padding', 0);
+      strokeColor = GetValue$3(config, 'color');
+      lineWidth = GetValue$3(config, 'lineWidth');
+      fillColor = GetValue$3(config, 'fillColor');
+      fillAlpha = GetValue$3(config, 'fillAlpha', 1);
+      padding = GetValue$3(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -2140,10 +2140,10 @@
     y: 0
   }];
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(graphics, config) {
-    var drawContainer = GetValue$3(config, 'drawContainer', true);
-    var gameObjects = GetValue$3(config, 'children');
+    var drawContainer = GetValue$2(config, 'drawContainer', true);
+    var gameObjects = GetValue$2(config, 'children');
     if (gameObjects === undefined) {
       gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -2188,7 +2188,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture);
+  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation$1, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2459,12 +2459,65 @@
   }(Base);
   Object.assign(ContainerLite.prototype, methods);
 
-  var Bind = function Bind(target) {
-    if (this.target) {
-      this.unpin(this.target);
-      this.target = undefined;
+  var AddChildrenMap = function AddChildrenMap(key, gameObject) {
+    if (typeof key === 'string') {
+      this.childrenMap[key] = gameObject;
+    } else {
+      var config = key;
+      for (key in config) {
+        this.childrenMap[key] = config[key];
+      }
     }
-    this.target = target;
+    return this;
+  };
+
+  var GetElement = function GetElement(mapNameList, recursive) {
+    if (typeof mapNameList === 'string') {
+      mapNameList = mapNameList.split('.');
+    }
+    if (mapNameList.length === 0) {
+      return undefined;
+    }
+    var name = mapNameList.shift(),
+      element = null;
+    if (name.charAt(0) === '#') {
+      // Get element by name
+      name = name.substring(1);
+      element = this.getByName(name, recursive);
+    } else if (name.indexOf('[') === -1) {
+      // Get element by key
+      if (this.childrenMap) {
+        element = this.childrenMap[name];
+      }
+    } else {
+      // Get element by key[]
+      var innerMatch = name.match(RE_OBJ);
+      if (innerMatch != null) {
+        if (this.childrenMap) {
+          var elements = this.childrenMap[innerMatch[1]];
+          if (elements) {
+            element = elements[innerMatch[2]];
+          }
+        }
+      }
+    }
+    if (mapNameList.length === 0) {
+      return element;
+    } else if (element && element.childrenMap) {
+      return element.getElement(mapNameList);
+    } else {
+      return null;
+    }
+  };
+  var RE_OBJ = /(\S+)\[(\d+)\]/i;
+
+  var Bind = function Bind(target) {
+    var childrenMap = this.childrenMap;
+    if (childrenMap.target) {
+      this.unpin(childrenMap.target);
+      childrenMap.target = undefined;
+    }
+    childrenMap.target = target;
     if (target) {
       this.setVisible(true).setOrigin(target.originX, target.originY).setPosition(target.x, target.y).setAngle(target.angle).setSize(target.displayWidth, target.displayHeight);
       this.pin(target);
@@ -2479,27 +2532,28 @@
     return obj && typeof obj === 'function';
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var GtDefaultCallback$1 = function GtDefaultCallback(config) {
-    var color = GetValue$2(config, 'color');
-    var alpha = GetValue$2(config, 'alpha', 0.5);
-    var strokeColor = GetValue$2(config, 'strokeColor');
-    var strokeWidth = GetValue$2(config, 'strokeWidth', 2);
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetDefaultCallback = function GetDefaultCallback(config) {
+    var color = GetValue$1(config, 'color');
+    var alpha = GetValue$1(config, 'alpha', 0.5);
+    var strokeColor = GetValue$1(config, 'strokeColor');
+    var strokeWidth = GetValue$1(config, 'strokeWidth', 2);
     return function (scene) {
       return scene.add.rectangle(0, 0, 0, 0, color, alpha).setStrokeStyle(strokeColor, strokeWidth);
     };
   };
-  var AddBoundsRectangle = function AddBoundsRectangle(parent, callback) {
+  var AddBoundsRectangle = function AddBoundsRectangle(parent, config) {
+    var callback = GetValue$1(config, 'boundsRectangle');
     if (!IsFunction(callback)) {
-      callback = GtDefaultCallback$1(callback);
+      callback = GetDefaultCallback(callback);
     }
     var scene = parent.scene;
     var boundRectangle = callback(scene);
     parent.pin(boundRectangle);
-    parent.boundRectangle = boundRectangle;
+    parent.addChildrenMap('bounds', boundRectangle);
   };
   var UpdateBoundRectangle = function UpdateBoundRectangle(parent, points) {
-    var boundRectangle = parent.boundRectangle;
+    var boundRectangle = parent.childrenMap.bounds;
     boundRectangle.setOrigin(parent.originX, parent.originY).setPosition(parent.x, parent.y).setAngle(parent.angle).setSize(parent.width, parent.height);
     parent.resetChildPositionState(boundRectangle).resetChildRotationState(boundRectangle).resetChildScaleState(boundRectangle);
   };
@@ -2514,6 +2568,10 @@
   var MiddleRight = 'middleRight';
   var MiddleLeft = 'middleLeft';
   var Origin = 'origin';
+  var Rotation = 'rotation';
+
+  // Angle of rotation control point
+  var RotationPointAngle = -90;
 
   var AddDragMoveBehavior = function AddDragMoveBehavior(parent, dragPoint) {
     dragPoint.setInteractive({
@@ -2545,44 +2603,93 @@
       parent.updateChildren();
       parent.x += fixedX - fixedPoint.x;
       parent.y += fixedY - fixedPoint.y;
-      parent.setChildDisplaySize(parent.target, parent.width, parent.height);
+      parent.setChildDisplaySize(parent.childrenMap.target, parent.width, parent.height);
     });
   };
   var GlobalDragVector;
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var GtDefaultCallback = function GtDefaultCallback(config) {
-    var color = GetValue$1(config, 'color');
-    var alpha = GetValue$1(config, 'alpha', 1);
-    var strokeColor = GetValue$1(config, 'strokeColor');
-    var strokeWidth = GetValue$1(config, 'strokeWidth', 2);
-    var radius = GetValue$1(config, 'radius', 10);
-    return function (scene) {
-      return scene.add.circle(0, 0, radius, color, alpha).setStrokeStyle(strokeColor, strokeWidth);
-    };
+  var AngleBetween = Phaser.Math.Angle.Between;
+  var RotationPointRotation = Phaser.Math.DegToRad(RotationPointAngle);
+  var AddDragRotationBehavior = function AddDragRotationBehavior(parent, dragPoint, originPoint) {
+    dragPoint.setInteractive({
+      draggable: true
+    }).on('drag', function (pointer, dragX, dragY) {
+      parent.rotation = AngleBetween(originPoint.x, originPoint.y, dragX, dragY) - RotationPointRotation;
+    });
   };
-  var ControlPointNames = [TopLeft, TopRight, BottomRight, BottomLeft, TopMiddle, BottomMiddle, MiddleLeft, MiddleRight, Origin];
-  var AddControlPoints = function AddControlPoints(parent, callback) {
+
+  var ControlPointNames = [TopLeft, TopRight, BottomRight, BottomLeft, TopMiddle, BottomMiddle, MiddleLeft, MiddleRight, Origin, Rotation];
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetPointCallback = function GetPointCallback(config, key) {
+    var callback = GetValue(config, key);
     if (!IsFunction(callback)) {
-      callback = GtDefaultCallback(callback);
+      config = callback;
+      var color = GetValue(config, 'color');
+      var alpha = GetValue(config, 'alpha', 1);
+      var strokeColor = GetValue(config, 'strokeColor');
+      var strokeWidth = GetValue(config, 'strokeWidth', 2);
+      var radius = GetValue(config, 'radius', 10);
+      callback = function callback(scene) {
+        return scene.add.circle(0, 0, radius, color, alpha).setStrokeStyle(strokeColor, strokeWidth);
+      };
     }
+    return callback;
+  };
+  var AddControlPoints = function AddControlPoints(parent, config) {
+    var originPointCallback = GetPointCallback(config, 'originPoint');
+    var resizePointCallback = GetPointCallback(config, 'resizePoint');
+    var rotationPointCallback = GetPointCallback(config, 'rotationPoint');
+    var pointsData = [{
+      name: TopLeft,
+      callback: resizePointCallback
+    }, {
+      name: TopRight,
+      callback: resizePointCallback
+    }, {
+      name: BottomRight,
+      callback: resizePointCallback
+    }, {
+      name: BottomLeft,
+      callback: resizePointCallback
+    }, {
+      name: TopMiddle,
+      callback: resizePointCallback
+    }, {
+      name: BottomMiddle,
+      callback: resizePointCallback
+    }, {
+      name: MiddleLeft,
+      callback: resizePointCallback
+    }, {
+      name: MiddleRight,
+      callback: resizePointCallback
+    }, {
+      name: Origin,
+      callback: originPointCallback
+    }, {
+      name: Rotation,
+      callback: rotationPointCallback
+    }];
     var scene = parent.scene;
-    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
-      var controlPointName = ControlPointNames[i];
-      var controlPoint = callback(scene);
+    for (var i = 0, cnt = pointsData.length; i < cnt; i++) {
+      var pointData = pointsData[i];
+      var controlPointName = pointData.name;
+      var controlPoint = pointData.callback(scene);
       controlPoint.pointName = controlPointName;
       parent.pin(controlPoint);
-      parent["".concat(controlPointName, "ControlPoint")] = controlPoint;
+      parent.addChildrenMap(controlPointName, controlPoint);
     }
-    AddDragMoveBehavior(parent, parent.originControlPoint);
-    AddDragResizeBehavior(parent, parent.topLeftControlPoint, parent.bottomRightControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.bottomRightControlPoint, parent.topLeftControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.topRightControlPoint, parent.bottomLeftControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.bottomLeftControlPoint, parent.topRightControlPoint, 'xy');
-    AddDragResizeBehavior(parent, parent.topMiddleControlPoint, parent.bottomMiddleControlPoint, 'y');
-    AddDragResizeBehavior(parent, parent.bottomMiddleControlPoint, parent.topMiddleControlPoint, 'y');
-    AddDragResizeBehavior(parent, parent.middleLeftControlPoint, parent.middleRightControlPoint, 'x');
-    AddDragResizeBehavior(parent, parent.middleRightControlPoint, parent.middleLeftControlPoint, 'x');
+    var childrenMap = parent.childrenMap;
+    AddDragMoveBehavior(parent, childrenMap.origin);
+    AddDragResizeBehavior(parent, childrenMap.topLeft, childrenMap.bottomRight, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.bottomRight, childrenMap.topLeft, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.topRight, childrenMap.bottomLeft, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.bottomLeft, childrenMap.topRight, 'xy');
+    AddDragResizeBehavior(parent, childrenMap.topMiddle, childrenMap.bottomMiddle, 'y');
+    AddDragResizeBehavior(parent, childrenMap.bottomMiddle, childrenMap.topMiddle, 'y');
+    AddDragResizeBehavior(parent, childrenMap.middleLeft, childrenMap.middleRight, 'x');
+    AddDragResizeBehavior(parent, childrenMap.middleRight, childrenMap.middleLeft, 'x');
+    AddDragRotationBehavior(parent, childrenMap.rotation, childrenMap.origin);
   };
   var UpdateControlPoint = function UpdateControlPoint(parent, controlPoint, points) {
     var position = points[controlPoint.pointName];
@@ -2591,13 +2698,15 @@
     parent.resetChildPositionState(controlPoint).resetChildRotationState(controlPoint);
   };
   var UpdateControlPoints = function UpdateControlPoints(parent, points) {
+    var childrenMap = parent.childrenMap;
     for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
       var controlPointName = ControlPointNames[i];
-      var controlPoint = parent["".concat(controlPointName, "ControlPoint")];
+      var controlPoint = childrenMap[controlPointName];
       UpdateControlPoint(parent, controlPoint, points);
     }
   };
 
+  var DegToRad = Phaser.Math.DegToRad;
   var UpdateChildren = function UpdateChildren() {
     var points = GetCornerPoints(this);
     UpdateBoundRectangle(this);
@@ -2615,7 +2724,8 @@
         bottomMiddle: {},
         middleLeft: {},
         middleRight: {},
-        origin: {}
+        origin: {},
+        rotation: {}
       };
     }
     GetTopLeft(parent, GlobalPoints.topLeft);
@@ -2628,16 +2738,21 @@
     GetMiddleRight(parent, GlobalPoints.middleRight);
     GlobalPoints.origin.x = parent.x;
     GlobalPoints.origin.y = parent.y;
+    var rotation = DegToRad(parent.angle + RotationPointAngle);
+    GlobalPoints.rotation.x = parent.x + 30 * Math.cos(rotation);
+    GlobalPoints.rotation.y = parent.y + 30 * Math.sin(rotation);
     return GlobalPoints;
   };
   var GlobalPoints;
 
   var Methods = {
+    addChildrenMap: AddChildrenMap,
+    getElement: GetElement,
     bind: Bind,
     updateChildren: UpdateChildren
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  Phaser.Utils.Objects.GetValue;
   var TransformController = /*#__PURE__*/function (_ContainerLite) {
     _inherits(TransformController, _ContainerLite);
     var _super = _createSuper(TransformController);
@@ -2645,8 +2760,9 @@
       var _this;
       _classCallCheck(this, TransformController);
       _this = _super.call(this, scene, 0, 0, 1, 1);
-      AddBoundsRectangle(_assertThisInitialized(_this), GetValue(config, 'boundsRectangle'));
-      AddControlPoints(_assertThisInitialized(_this), GetValue(config, 'controlPoint'));
+      _this.childrenMap = {};
+      AddBoundsRectangle(_assertThisInitialized(_this), config);
+      AddControlPoints(_assertThisInitialized(_this), config);
       _this.setVisible(false);
       return _this;
     }
