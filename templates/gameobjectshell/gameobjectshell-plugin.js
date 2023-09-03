@@ -1,7 +1,7 @@
 import ObjectFactory from './ObjectFactory.js';
 
-import TransfromControllerFactory from './transformcontroller/Factory.js';
-import PropertiesTweakerFactory from './propertiestweaker/Factory.js';
+import ControlPointsFactory from './controlpoints/Factory.js';
+import PropertiesPanelFactory from './propertiespanel/Factory.js';
 import ShellFactory from './shell/Factory.js';
 import FullWindowRectangle from './fullwindowrectangle/Factory.js';
 

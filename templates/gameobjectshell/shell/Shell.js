@@ -1,6 +1,6 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
-import PropertiesTweaker from '../propertiestweaker/PropertiesTweaker.js';
-import TransformController from '../transformcontroller/TransformController.js';
+import PropertiesPanel from '../propertiespanel/PropertiesPanel.js';
+import ControlPoints from '../controlpoints/ControlPoints.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,14 +9,14 @@ class Shell extends ComponentBase {
         super(scene, config);
         // this.scene
 
-        var panel = new PropertiesTweaker(scene, GetValue(config, 'panel'));
+        var panel = new PropertiesPanel(scene, GetValue(config, 'panel'));
         if ((panel.x === 0) && (panel.y === 0)) {
             panel.setOrigin(0)
         }
         scene.add.existing(panel);
         panel.layout();
 
-        var controlPoints = new TransformController(scene, GetValue(config, 'controlPoints'));
+        var controlPoints = new ControlPoints(scene, GetValue(config, 'controlPoints'));
         scene.add.existing(controlPoints);
 
         this.panel = panel;

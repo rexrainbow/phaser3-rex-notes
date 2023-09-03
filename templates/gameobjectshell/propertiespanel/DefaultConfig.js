@@ -11,17 +11,14 @@ export default {
         },
 
         inputRow: {
+            height: 20,
+
             background: {
                 strokeColor: COLOR_PRIMARY
             },
 
-            title: {
-                iconSize: 30,
-                space: { icon: 2 }
-            },
-
             inputText: {
-                width: 200,
+                width: 100,
                 background: {
                     color: COLOR_DARK
                 },
@@ -36,6 +33,21 @@ export default {
                     color: 'black',
                     backgroundColor: 'white',
                 }
+            },
+        },
+
+        slider: {
+            track: {
+                color: COLOR_DARK,
+                width: 8, height: 8,
+            },
+            indicator: {
+                color: COLOR_PRIMARY,
+                width: 8, height: 8,
+            },
+            thumb: {
+                color: COLOR_LIGHT,
+                width: 16, height: 16,
             },
         },
 

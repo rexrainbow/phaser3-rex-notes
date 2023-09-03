@@ -11,7 +11,9 @@ export default {
                 y: undefined,
                 displayWidth: undefined,
                 displayHeight: undefined,
-                angle: undefined
+                originX: undefined,
+                originY: undefined,
+                angle: undefined,
             }
         }
 
@@ -47,7 +49,7 @@ export default {
         }
 
         var dirty = false;
-        var previousValue, currentValue;
+        var previousValue, currentValue, parentValue;
         var monitorProperties = this.monitorProperties;
         for (var key in monitorProperties) {
             previousValue = monitorProperties[key];
@@ -57,10 +59,18 @@ export default {
             }
 
             monitorProperties[key] = currentValue;
+
+            parentValue = this[key];
+            if (parentValue === currentValue) {
+                continue;
+            }
+
+            this[key] = currentValue;
             dirty = true;
         }
 
         if (dirty) {
+            debugger
             this.layout();
         }
     },

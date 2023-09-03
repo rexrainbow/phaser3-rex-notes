@@ -7,7 +7,7 @@ import { AddControlPoints } from './methods/ControlPointMethods.js';
 
 // const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TransformController extends ContainerLite {
+class ControlPoints extends ContainerLite {
     constructor(scene, config) {
         if (config === undefined) {
             config = DeepClone(DefaultConfig);
@@ -25,7 +25,7 @@ class TransformController extends ContainerLite {
 }
 
 Object.assign(
-    TransformController.prototype,
+    ControlPoints.prototype,
     Methods
 )
-export default TransformController;
+export default ControlPoints;
