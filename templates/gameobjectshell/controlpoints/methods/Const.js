@@ -1,3 +1,6 @@
+// Name of bounds rectangle
+export const Bounds = 'bounds';
+
 // Name of control points
 export const TopLeft = 'topLeft';
 export const TopRight = 'topRight';

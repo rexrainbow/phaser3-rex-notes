@@ -1,4 +1,5 @@
 import IsFunction from '../../../../../plugins/utils/object/IsFunction.js';
+import { Bounds } from '../Const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -22,24 +23,7 @@ var AddBoundsRectangle = function (parent, config) {
     var boundRectangle = callback(scene);
     parent.pin(boundRectangle);
 
-    parent.addChildrenMap('bounds', boundRectangle);
+    parent.addChildrenMap(Bounds, boundRectangle);
 }
 
-var UpdateBoundRectangle = function (parent, points) {
-    var boundRectangle = parent.childrenMap.bounds;
-    boundRectangle
-        .setOrigin(parent.originX, parent.originY)
-        .setPosition(parent.x, parent.y)
-        .setAngle(parent.angle)
-        .setSize(parent.width, parent.height)
-
-    parent
-        .resetChildPositionState(boundRectangle)
-        .resetChildRotationState(boundRectangle)
-        .resetChildScaleState(boundRectangle)
-}
-
-export {
-    AddBoundsRectangle,
-    UpdateBoundRectangle
-};
+export default AddBoundsRectangle;

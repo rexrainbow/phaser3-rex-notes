@@ -2,8 +2,8 @@ import {
     GetTopLeft, GetTopRight, GetBottomLeft, GetBottomRight,
     GetTopMiddle, GetBottomMiddle, GetMiddleLeft, GetMiddleRight,
 } from '../../../../plugins/utils/bounds/GetBounds.js';
-import { UpdateBoundRectangle } from './boundsrectangle/BoundsRectangleMethods.js';
-import { UpdateControlPoints } from './controlpoints/ControlPointMethods.js';
+import UpdateBoundRectangle from './boundsrectangle/UpdateBoundRectangle.js';
+import UpdateControlPoints from './controlpoints/UpdateControlPoints.js';
 import { RotationPointAngle } from './Const.js';
 
 const DegToRad = Phaser.Math.DegToRad;

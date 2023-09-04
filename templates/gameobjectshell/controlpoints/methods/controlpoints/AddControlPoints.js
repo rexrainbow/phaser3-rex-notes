@@ -8,11 +8,6 @@ import AddDragMoveBehavior from './AddDragMoveBehavior.js';
 import AddDragResizeBehavior from './AddDragResizeBehavior.js';
 import AddDragRotationBehavior from './AddDragRotationBehavior.js';
 
-const ControlPointNames = [
-    TopLeft, TopRight, BottomRight, BottomLeft,
-    TopMiddle, BottomMiddle, MiddleLeft, MiddleRight,
-    Origin, Rotation
-];
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -90,26 +85,4 @@ var AddControlPoints = function (parent, config) {
     AddDragRotationBehavior(parent, childrenMap.rotation, childrenMap.origin);
 }
 
-var UpdateControlPoint = function (parent, controlPoint, points) {
-    var position = points[controlPoint.pointName];
-    controlPoint.setPosition(position.x, position.y);
-    controlPoint.setAngle(parent.angle);
-
-    parent
-        .resetChildPositionState(controlPoint)
-        .resetChildRotationState(controlPoint);
-}
-
-var UpdateControlPoints = function (parent, points) {
-    var childrenMap = parent.childrenMap;
-    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
-        var controlPointName = ControlPointNames[i];
-        var controlPoint = childrenMap[controlPointName];
-        UpdateControlPoint(parent, controlPoint, points);
-    }
-}
-
-export {
-    AddControlPoints,
-    UpdateControlPoints
-}
+export default AddControlPoints;

@@ -2,8 +2,8 @@ import ContainerLite from '../../../plugins/containerlite.js';
 import Methods from './methods/Methods.js';
 import DefaultConfig from './DefaultConfig.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
-import { AddBoundsRectangle } from './methods/boundsrectangle/BoundsRectangleMethods.js'
-import { AddControlPoints } from './methods/controlpoints/ControlPointMethods.js';
+import AddBoundsRectangle from './methods/boundsrectangle/AddBoundsRectangle.js'
+import AddControlPoints from './methods/controlpoints/AddControlPoints.js';
 
 // const GetValue = Phaser.Utils.Objects.GetValue;
 
