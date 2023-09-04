@@ -12,6 +12,3 @@ export const MiddleRight = 'middleRight';
 export const MiddleLeft = 'middleLeft';
 export const Origin = 'origin';
 export const Rotation = 'rotation';
-
-// Angle of rotation control point
-export const RotationPointAngle = -90;

@@ -4,29 +4,36 @@ import {
     Origin, Rotation,
 } from '../Const.js';
 
-const ControlPointNames = [
-    TopLeft, TopRight, BottomRight, BottomLeft,
-    TopMiddle, BottomMiddle, MiddleLeft, MiddleRight,
-    Origin, Rotation
-];
+const CornerPointsData = [
+    { name: TopLeft, originX: 0, originY: 0 },
+    { name: TopRight, originX: 1, originY: 0 },
+    { name: BottomRight, originX: 1, originY: 1 },
+    { name: BottomLeft, originX: 0, originY: 1 },
 
-var UpdateControlPoint = function (parent, controlPoint, points) {
-    var position = points[controlPoint.pointName];
-    controlPoint.setPosition(position.x, position.y);
-    controlPoint.setAngle(parent.angle);
+    { name: TopMiddle, originX: 0.5, originY: 0 },
+    { name: BottomMiddle, originX: 0.5, originY: 1 },
+    { name: MiddleLeft, originX: 0, originY: 0.5 },
+    { name: MiddleRight, originX: 1, originY: 0.5 },
+]
 
-    parent
-        .resetChildPositionState(controlPoint)
-        .resetChildRotationState(controlPoint);
-}
-
-var UpdateControlPoints = function (parent, points) {
+var UpdateControlPoints = function (parent) {
     var childrenMap = parent.childrenMap;
-    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
-        var controlPointName = ControlPointNames[i];
-        var controlPoint = childrenMap[controlPointName];
-        UpdateControlPoint(parent, controlPoint, points);
+
+    var width = parent.width,
+        height = parent.height,
+        originX = parent.originX,
+        originY = parent.originY;
+    var localX, localY;
+    for (var i = 0, cnt = CornerPointsData.length; i < cnt; i++) {
+        var pointData = CornerPointsData[i];
+        localX = (pointData.originX - originX) * width;
+        localY = (pointData.originY - originY) * height;
+        parent.setChildLocalPosition(childrenMap[pointData.name], localX, localY);
     }
+
+    parent.setChildLocalPosition(childrenMap[Origin], 0, 0);
+
+    parent.setChildLocalPosition(childrenMap[Rotation], ((1 - originX) * width) + 40, 0);
 }
 
 export default UpdateControlPoints
