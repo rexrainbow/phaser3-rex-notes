@@ -453,7 +453,7 @@
     return gameObject;
   };
 
-  var DegToRad$g = Phaser.Math.DegToRad;
+  var DegToRad$f = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -479,7 +479,7 @@
           return RadToDeg$8(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad$g(value);
+          this.rotation = DegToRad$f(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -809,7 +809,7 @@
     }
   };
 
-  var DegToRad$f = Phaser.Math.DegToRad;
+  var DegToRad$e = Phaser.Math.DegToRad;
   var Rotation$1 = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
@@ -849,7 +849,7 @@
     },
     setChildLocalAngle: function setChildLocalAngle(child, angle) {
       var state = GetLocalState(child);
-      state.rotation = DegToRad$f(angle);
+      state.rotation = DegToRad$e(angle);
       this.updateChildRotation(child);
       return this;
     },
@@ -1842,74 +1842,6 @@
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-  var GetTopMiddle = function GetTopMiddle(gameObject, output, includeParent) {
-    if (output === undefined) {
-      output = new Vector2();
-    } else if (output === true) {
-      if (GlobVector === undefined) {
-        GlobVector = new Vector2();
-      }
-      output = GlobVector;
-    }
-    var topLeft = GetTopLeft(gameObject, true, includeParent);
-    var topLeftX = topLeft.x,
-      topLeftY = topLeft.y;
-    var topRight = GetTopRight(gameObject, true, includeParent);
-    output.x = (topLeftX + topRight.x) / 2;
-    output.y = (topLeftY + topRight.y) / 2;
-    return output;
-  };
-  var GetBottomMiddle = function GetBottomMiddle(gameObject, output, includeParent) {
-    if (output === undefined) {
-      output = new Vector2();
-    } else if (output === true) {
-      if (GlobVector === undefined) {
-        GlobVector = new Vector2();
-      }
-      output = GlobVector;
-    }
-    var bottomLeft = GetBottomLeft(gameObject, true, includeParent);
-    var bottomLeftX = bottomLeft.x,
-      bottomLeftY = bottomLeft.y;
-    var bottomRight = GetBottomRight(gameObject, true, includeParent);
-    output.x = (bottomLeftX + bottomRight.x) / 2;
-    output.y = (bottomLeftY + bottomRight.y) / 2;
-    return output;
-  };
-  var GetMiddleLeft = function GetMiddleLeft(gameObject, output, includeParent) {
-    if (output === undefined) {
-      output = new Vector2();
-    } else if (output === true) {
-      if (GlobVector === undefined) {
-        GlobVector = new Vector2();
-      }
-      output = GlobVector;
-    }
-    var topLeft = GetTopLeft(gameObject, true, includeParent);
-    var topLeftX = topLeft.x,
-      topLeftY = topLeft.y;
-    var bottomLeft = GetBottomLeft(gameObject, true, includeParent);
-    output.x = (topLeftX + bottomLeft.x) / 2;
-    output.y = (topLeftY + bottomLeft.y) / 2;
-    return output;
-  };
-  var GetMiddleRight = function GetMiddleRight(gameObject, output, includeParent) {
-    if (output === undefined) {
-      output = new Vector2();
-    } else if (output === true) {
-      if (GlobVector === undefined) {
-        GlobVector = new Vector2();
-      }
-      output = GlobVector;
-    }
-    var topRight = GetTopRight(gameObject, true, includeParent);
-    var topRightX = topRight.x,
-      topRightY = topRight.y;
-    var bottomRight = GetBottomRight(gameObject, true, includeParent);
-    output.x = (topRightX + bottomRight.x) / 2;
-    output.y = (topRightY + bottomRight.y) / 2;
-    return output;
-  };
   var GlobVector = undefined;
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
@@ -2654,6 +2586,176 @@
     return SetBindingTarget;
   };
 
+  // Name of bounds rectangle
+  var Bounds = 'bounds';
+
+  // Name of control points
+  var TopLeft$1 = 'topLeft';
+  var TopRight$1 = 'topRight';
+  var BottomLeft$1 = 'bottomLeft';
+  var BottomRight$1 = 'bottomRight';
+  var TopMiddle = 'topMiddle';
+  var BottomMiddle = 'bottomMiddle';
+  var MiddleRight = 'middleRight';
+  var MiddleLeft = 'middleLeft';
+  var Origin = 'origin';
+  var Rotation = 'rotation';
+
+  var UpdateBoundRectangle = function UpdateBoundRectangle(parent) {
+    var boundRectangle = parent.childrenMap[Bounds];
+    boundRectangle.setOrigin(parent.originX, parent.originY).setPosition(parent.x, parent.y).setAngle(parent.angle).setSize(parent.width, parent.height);
+    parent.resetChildPositionState(boundRectangle).resetChildRotationState(boundRectangle).resetChildScaleState(boundRectangle);
+  };
+
+  var CornerPointsData = [{
+    name: TopLeft$1,
+    originX: 0,
+    originY: 0
+  }, {
+    name: TopRight$1,
+    originX: 1,
+    originY: 0
+  }, {
+    name: BottomRight$1,
+    originX: 1,
+    originY: 1
+  }, {
+    name: BottomLeft$1,
+    originX: 0,
+    originY: 1
+  }, {
+    name: TopMiddle,
+    originX: 0.5,
+    originY: 0
+  }, {
+    name: BottomMiddle,
+    originX: 0.5,
+    originY: 1
+  }, {
+    name: MiddleLeft,
+    originX: 0,
+    originY: 0.5
+  }, {
+    name: MiddleRight,
+    originX: 1,
+    originY: 0.5
+  }];
+  var UpdateControlPoints = function UpdateControlPoints(parent) {
+    var childrenMap = parent.childrenMap;
+    var width = parent.width,
+      height = parent.height,
+      originX = parent.originX,
+      originY = parent.originY;
+    var localX, localY;
+    for (var i = 0, cnt = CornerPointsData.length; i < cnt; i++) {
+      var pointData = CornerPointsData[i];
+      localX = (pointData.originX - originX) * width;
+      localY = (pointData.originY - originY) * height;
+      parent.setChildLocalPosition(childrenMap[pointData.name], localX, localY);
+    }
+    parent.setChildLocalPosition(childrenMap[Origin], 0, 0);
+    parent.setChildLocalPosition(childrenMap[Rotation], (1 - originX) * width + 40, 0);
+  };
+
+  var Layout$1 = function Layout() {
+    UpdateBoundRectangle(this);
+    UpdateControlPoints(this);
+    return this;
+  };
+
+  var Methods$m = {
+    addChildrenMap: AddChildrenMap,
+    getElement: GetElement,
+    setBindingTarget: SetBindingTarget$1,
+    layout: Layout$1
+  };
+  Object.assign(Methods$m, MonitorTargetMethods$1);
+
+  var DefaultConfig$1 = {
+    boundsRectangle: {
+      color: 0x555555
+    },
+    originPoint: {
+      color: 0xff0000,
+      shape: 'circle'
+    },
+    resizePoint: {
+      color: 0x00ff00,
+      shape: 'rectangle'
+    },
+    rotationPoint: {
+      color: 0x0000ff,
+      shape: 'circle'
+    }
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * This is a slightly modified version of jQuery.isPlainObject.
+   * A plain object is an object whose internal class property is [object Object].
+   *
+   * @function Phaser.Utils.Objects.IsPlainObject
+   * @since 3.0.0
+   *
+   * @param {object} obj - The object to inspect.
+   *
+   * @return {boolean} `true` if the object is plain, otherwise `false`.
+   */
+  var IsPlainObject$P = function IsPlainObject(obj) {
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
+      return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try {
+      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+  };
+
+  var DeepClone = function DeepClone(inObject) {
+    var outObject;
+    var value;
+    var key;
+    if (inObject == null || _typeof(inObject) !== 'object') {
+      //  inObject is not an object
+      return inObject;
+    }
+
+    //  Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+    if (IsPlainObject$P(inObject)) {
+      for (key in inObject) {
+        value = inObject[key];
+
+        //  Recursively (deep) copy for nested objects, including arrays
+        outObject[key] = DeepClone(value);
+      }
+    } else {
+      outObject = inObject;
+    }
+    return outObject;
+  };
+
   var IsFunction = function IsFunction(obj) {
     return obj && typeof obj === 'function';
   };
@@ -2676,28 +2778,8 @@
     var scene = parent.scene;
     var boundRectangle = callback(scene);
     parent.pin(boundRectangle);
-    parent.addChildrenMap('bounds', boundRectangle);
+    parent.addChildrenMap(Bounds, boundRectangle);
   };
-  var UpdateBoundRectangle = function UpdateBoundRectangle(parent, points) {
-    var boundRectangle = parent.childrenMap.bounds;
-    boundRectangle.setOrigin(parent.originX, parent.originY).setPosition(parent.x, parent.y).setAngle(parent.angle).setSize(parent.width, parent.height);
-    parent.resetChildPositionState(boundRectangle).resetChildRotationState(boundRectangle).resetChildScaleState(boundRectangle);
-  };
-
-  // Name of control points
-  var TopLeft$1 = 'topLeft';
-  var TopRight$1 = 'topRight';
-  var BottomLeft$1 = 'bottomLeft';
-  var BottomRight$1 = 'bottomRight';
-  var TopMiddle = 'topMiddle';
-  var BottomMiddle = 'bottomMiddle';
-  var MiddleRight = 'middleRight';
-  var MiddleLeft = 'middleLeft';
-  var Origin = 'origin';
-  var Rotation = 'rotation';
-
-  // Angle of rotation control point
-  var RotationPointAngle = -90;
 
   var AddDragMoveBehavior = function AddDragMoveBehavior(parent, dragPoint) {
     dragPoint.setInteractive({
@@ -2735,16 +2817,14 @@
   var GlobalDragVector;
 
   var AngleBetween$2 = Phaser.Math.Angle.Between;
-  var RotationPointRotation = Phaser.Math.DegToRad(RotationPointAngle);
   var AddDragRotationBehavior = function AddDragRotationBehavior(parent, dragPoint, originPoint) {
     dragPoint.setInteractive({
       draggable: true
     }).on('drag', function (pointer, dragX, dragY) {
-      parent.rotation = AngleBetween$2(originPoint.x, originPoint.y, dragX, dragY) - RotationPointRotation;
+      parent.rotation = AngleBetween$2(originPoint.x, originPoint.y, dragX, dragY);
     });
   };
 
-  var ControlPointNames = [TopLeft$1, TopRight$1, BottomRight$1, BottomLeft$1, TopMiddle, BottomMiddle, MiddleLeft, MiddleRight, Origin, Rotation];
   var GetValue$2_ = Phaser.Utils.Objects.GetValue;
   var GetPointCallback = function GetPointCallback(config, key) {
     var callback = GetValue$2_(config, key);
@@ -2844,152 +2924,6 @@
     AddDragResizeBehavior(parent, childrenMap.middleLeft, childrenMap.middleRight, 'x');
     AddDragResizeBehavior(parent, childrenMap.middleRight, childrenMap.middleLeft, 'x');
     AddDragRotationBehavior(parent, childrenMap.rotation, childrenMap.origin);
-  };
-  var UpdateControlPoint = function UpdateControlPoint(parent, controlPoint, points) {
-    var position = points[controlPoint.pointName];
-    controlPoint.setPosition(position.x, position.y);
-    controlPoint.setAngle(parent.angle);
-    parent.resetChildPositionState(controlPoint).resetChildRotationState(controlPoint);
-  };
-  var UpdateControlPoints = function UpdateControlPoints(parent, points) {
-    var childrenMap = parent.childrenMap;
-    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
-      var controlPointName = ControlPointNames[i];
-      var controlPoint = childrenMap[controlPointName];
-      UpdateControlPoint(parent, controlPoint, points);
-    }
-  };
-
-  var DegToRad$e = Phaser.Math.DegToRad;
-  var Layout$1 = function Layout() {
-    var points = GetCornerPoints(this);
-    UpdateBoundRectangle(this);
-    UpdateControlPoints(this, points);
-    return this;
-  };
-  var GetCornerPoints = function GetCornerPoints(parent) {
-    if (GlobalPoints === undefined) {
-      GlobalPoints = {
-        topLeft: {},
-        topRight: {},
-        bottomLeft: {},
-        bottomRight: {},
-        topMiddle: {},
-        bottomMiddle: {},
-        middleLeft: {},
-        middleRight: {},
-        origin: {},
-        rotation: {}
-      };
-    }
-    GetTopLeft(parent, GlobalPoints.topLeft);
-    GetTopRight(parent, GlobalPoints.topRight);
-    GetBottomLeft(parent, GlobalPoints.bottomLeft);
-    GetBottomRight(parent, GlobalPoints.bottomRight);
-    GetTopMiddle(parent, GlobalPoints.topMiddle);
-    GetBottomMiddle(parent, GlobalPoints.bottomMiddle);
-    GetMiddleLeft(parent, GlobalPoints.middleLeft);
-    GetMiddleRight(parent, GlobalPoints.middleRight);
-    GlobalPoints.origin.x = parent.x;
-    GlobalPoints.origin.y = parent.y;
-    var rotation = DegToRad$e(parent.angle + RotationPointAngle);
-    GlobalPoints.rotation.x = parent.x + 30 * Math.cos(rotation);
-    GlobalPoints.rotation.y = parent.y + 30 * Math.sin(rotation);
-    return GlobalPoints;
-  };
-  var GlobalPoints;
-
-  var Methods$m = {
-    addChildrenMap: AddChildrenMap,
-    getElement: GetElement,
-    setBindingTarget: SetBindingTarget$1,
-    layout: Layout$1
-  };
-  Object.assign(Methods$m, MonitorTargetMethods$1);
-
-  var DefaultConfig$1 = {
-    boundsRectangle: {
-      color: 0x555555
-    },
-    originPoint: {
-      color: 0xff0000,
-      shape: 'circle'
-    },
-    resizePoint: {
-      color: 0x00ff00,
-      shape: 'rectangle'
-    },
-    rotationPoint: {
-      color: 0x0000ff,
-      shape: 'circle'
-    }
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$P = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
-    }
-
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$P(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
   };
 
   // const GetValue = Phaser.Utils.Objects.GetValue;
