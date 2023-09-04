@@ -2,8 +2,8 @@ import {
     TopLeft, TopRight, BottomLeft, BottomRight,
     TopMiddle, BottomMiddle, MiddleLeft, MiddleRight,
     Origin, Rotation,
-} from './Const.js';
-import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
+} from '../Const.js';
+import IsFunction from '../../../../../plugins/utils/object/IsFunction.js';
 import AddDragMoveBehavior from './AddDragMoveBehavior.js';
 import AddDragResizeBehavior from './AddDragResizeBehavior.js';
 import AddDragRotationBehavior from './AddDragRotationBehavior.js';
@@ -25,10 +25,20 @@ var GetPointCallback = function (config, key) {
         var alpha = GetValue(config, 'alpha', 1);
         var strokeColor = GetValue(config, 'strokeColor');
         var strokeWidth = GetValue(config, 'strokeWidth', 2);
-        var radius = GetValue(config, 'radius', 10);
-        callback = function (scene) {
-            return scene.add.circle(0, 0, radius, color, alpha).setStrokeStyle(strokeColor, strokeWidth);
+        var size = GetValue(config, 'size', 20);
+        var shape = GetValue(config, 'shape', 'rectangle');
+        if (shape === 'rectangle') { // Rectangle            
+            callback = function (scene) {
+                return scene.add.rectangle(0, 0, size, size, color, alpha)
+                    .setStrokeStyle(strokeColor, strokeWidth);
+            }
+        } else { // Circle
+            callback = function (scene) {
+                return scene.add.circle(0, 0, (size / 2), color, alpha)
+                    .setStrokeStyle(strokeColor, strokeWidth);
+            }
         }
+
     }
 
     return callback;
@@ -39,21 +49,29 @@ var AddControlPoints = function (parent, config) {
     var resizePointCallback = GetPointCallback(config, 'resizePoint');
     var rotationPointCallback = GetPointCallback(config, 'rotationPoint');
 
+    var pointsData = [
+        { name: TopLeft, callback: resizePointCallback, originX: 1, originY: 1 },
+        { name: TopRight, callback: resizePointCallback, originX: 0, originY: 1 },
+        { name: BottomLeft, callback: resizePointCallback, originX: 1, originY: 0 },
+        { name: BottomRight, callback: resizePointCallback, originX: 0, originY: 0 },
+
+        { name: TopMiddle, callback: resizePointCallback, originX: 0.5, originY: 1 },
+        { name: BottomMiddle, callback: resizePointCallback, originX: 0.5, originY: 0 },
+        { name: MiddleLeft, callback: resizePointCallback, originX: 1, originY: 0.5 },
+        { name: MiddleRight, callback: resizePointCallback, originX: 0, originY: 0.5 },
+
+        { name: Origin, callback: originPointCallback, originX: 0.5, originY: 0.5 },
+        { name: Rotation, callback: rotationPointCallback, originX: 0.5, originY: 0.5 },
+    ]
+
     var scene = parent.scene;
-    for (var i = 0, cnt = ControlPointNames.length; i < cnt; i++) {
-        var controlPointName = ControlPointNames[i];
+    for (var i = 0, cnt = pointsData.length; i < cnt; i++) {
+        var pointData = pointsData[i];
 
-        var callback;
-        switch (controlPointName) {
-            case Origin: callback = originPointCallback; break;
-            case Rotation: callback = rotationPointCallback; break;
-            default: callback = resizePointCallback; break;
-        }
-
-        var controlPoint = callback(scene);
-        controlPoint.pointName = controlPointName;
+        var controlPoint = pointData.callback(scene).setOrigin(pointData.originX, pointData.originY);
+        controlPoint.pointName = pointData.name;
         parent.pin(controlPoint);
-        parent.addChildrenMap(controlPointName, controlPoint);
+        parent.addChildrenMap(pointData.name, controlPoint);
     }
 
     var childrenMap = parent.childrenMap;

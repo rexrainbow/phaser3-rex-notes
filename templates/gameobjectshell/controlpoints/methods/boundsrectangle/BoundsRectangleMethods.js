@@ -1,4 +1,4 @@
-import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
+import IsFunction from '../../../../../plugins/utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

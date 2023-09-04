@@ -1,4 +1,4 @@
-import { RotationPointAngle } from './Const.js';
+import { RotationPointAngle } from '../Const.js';
 
 const AngleBetween = Phaser.Math.Angle.Between;
 const RotationPointRotation = Phaser.Math.DegToRad(RotationPointAngle);
