@@ -1232,6 +1232,10 @@ Style of text-area input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+
+            proportion: {
+                title: 0, inputField: 0,
             }
         }
     }
@@ -1427,6 +1431,10 @@ Style of text-area input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
         }
     }
@@ -1613,6 +1621,10 @@ Style of text/number list input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
         }
     }
@@ -1741,6 +1753,10 @@ Style of buttons input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
 
         }
@@ -1925,6 +1941,14 @@ Style of range input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
+                range: {
+                    slider: 0,
+                    inputText: 0,
+                }
             }
 
         }
@@ -1932,6 +1956,7 @@ Style of range input is defined in
 }
 ```
 
+- Set `proportion.range.slider` and `proportion.range.inputText` to layout slider and inputText.
 
 #### Styles of color input
 
@@ -2157,7 +2182,12 @@ Style of color input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
+
         }
     }
 }
@@ -2291,7 +2321,12 @@ Style of boolean input is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
+
         }
     }
 }
@@ -2415,7 +2450,12 @@ Style of button is defined in
             space: {
                 left: 0, right: 0, top: 0, bottom: 0,
                 title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
             }
+
         }
     }
 }

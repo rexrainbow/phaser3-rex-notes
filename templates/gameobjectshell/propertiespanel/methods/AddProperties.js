@@ -40,7 +40,7 @@ var AddProperties = function () {
         })
         .addInput({
             bindingKey: 'alpha', title: 'alpha',
-            view: 'number', monitor: true, format: formatCallback,
+            view: 'range', min: 0, max: 1, monitor: true, format: formatCallback,
         })
 }
 

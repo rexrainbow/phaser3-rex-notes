@@ -3,6 +3,8 @@ const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
 
 export default {
+    width: 200,
+
     styles: {
         background: {
             radius: 10,
@@ -11,14 +13,17 @@ export default {
         },
 
         inputRow: {
-            height: 20,
-
             background: {
                 strokeColor: COLOR_PRIMARY
             },
 
+            title: {
+                space: {
+                    left: 5, right: 5
+                }
+            },
+
             inputText: {
-                width: 100,
                 background: {
                     color: COLOR_DARK
                 },
@@ -34,21 +39,30 @@ export default {
                     backgroundColor: 'white',
                 }
             },
-        },
 
-        slider: {
-            track: {
-                color: COLOR_DARK,
-                width: 8, height: 8,
+            slider: {
+                track: {
+                    color: COLOR_DARK,
+                    width: 8, height: 8,
+                },
+                indicator: {
+                    color: COLOR_PRIMARY,
+                    width: 8, height: 8,
+                },
+                thumb: {
+                    color: COLOR_LIGHT,
+                    width: 16, height: 16,
+                },
             },
-            indicator: {
-                color: COLOR_PRIMARY,
-                width: 8, height: 8,
+
+            space: {
+                top: 5, bottom: 5,
             },
-            thumb: {
-                color: COLOR_LIGHT,
-                width: 16, height: 16,
-            },
+
+            proportion: {
+                title: 0, inputField: 1,
+                range: { slider: 2, inputText: 1, }
+            }
         },
 
         space: {
