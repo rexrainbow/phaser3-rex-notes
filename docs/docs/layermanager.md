@@ -70,7 +70,7 @@ A dictionary to store [Layer game objects](layer.md).
 
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, {
-    // layerManager: ['layer0', 'layer1', ...]
+    // layers: ['layer0', 'layer1', ...]
 });
 ```
 

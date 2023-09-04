@@ -2,8 +2,11 @@ import ObjectFactory from './ObjectFactory.js';
 
 import ControlPointsFactory from './controlpoints/Factory.js';
 import PropertiesPanelFactory from './propertiespanel/Factory.js';
+import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
+import LayerManagerFactory from './layermanager/Factory.js';
+
 import ShellFactory from './shell/Factory.js';
-import FullWindowRectangle from './fullwindowrectangle/Factory.js';
+
 
 class GameObjectShellPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
