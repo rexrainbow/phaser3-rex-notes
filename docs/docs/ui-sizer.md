@@ -10,9 +10,11 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 ## Live demos
 
 - [Nested sizer](https://codepen.io/rexrainbow/pen/NOzorp)
+    - [Demo 1](https://codepen.io/rexrainbow/pen/XWoNNRW)
+    - [Demo 2](https://codepen.io/rexrainbow/pen/NOzorp)
+    - [Demo 3](https://codepen.io/rexrainbow/pen/jOwWmMm)
 - [Proportion](https://codepen.io/rexrainbow/pen/GRJNKPo)
 - [DOM child](https://codepen.io/rexrainbow/pen/xxELGJb)
-- [More nested sizer](https://codepen.io/rexrainbow/pen/jOwWmMm)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/vYWdBZQ)
 - [Drag drop child](https://codepen.io/rexrainbow/pen/YzEaRwd)
 
