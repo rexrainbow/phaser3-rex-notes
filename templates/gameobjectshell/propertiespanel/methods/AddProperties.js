@@ -1,6 +1,6 @@
 var AddProperties = function () {
     var formatCallback = function (value) {
-        return (Number.isInteger(value)) ? value : value.toFixed(3);
+        return (Number.isInteger(value)) ? value : value.toFixed(2);
     };
 
     this

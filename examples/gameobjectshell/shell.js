@@ -15,14 +15,6 @@ class Demo extends Phaser.Scene {
     create() {
         var shell = this.rexGameObjectShell.add.shell();
 
-        var background = this.rexGameObjectShell.add.fullWindowRectangle()
-        shell.addToBackgroundLayer(background);
-        background
-            .setInteractive()
-            .on('pointerdown', function () {
-                shell.setBindingTarget();
-            })
-
         for (var i = 0; i < 10; i++) {
             let gameObject = this.make.image({
                 key: 'mushroom',

@@ -61,7 +61,7 @@ export default {
 
             proportion: {
                 title: 0, inputField: 1,
-                range: { slider: 2, inputText: 1, }
+                range: { slider: 3, inputText: 2, }
             }
         },
 
