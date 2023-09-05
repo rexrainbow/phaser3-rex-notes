@@ -55,9 +55,26 @@ export default {
         return this;
     },
 
+    clearMonitorLayer() {
+        this.layerManager.clearLayer(this.monitorLayerName);
+        return this;
+    },
+
     addToUILayer(gameObject) {
         this.layerManager.addToLayer(this.uiLayerName, gameObject);
         return this;
+    },
+
+    getBackgroundLayer() {
+        return this.layerManager.getLayer(this.backgroundLayerName);
+    },
+
+    getMonitorLayer() {
+        return this.layerManager.getLayer(this.monitorLayerName);
+    },
+
+    getUILayer() {
+        return this.layerManager.getLayer(this.uiLayerName);
     },
 
     getMonitorGameObjects() {
@@ -68,8 +85,4 @@ export default {
         return this.layerManager.getLayer(this.monitorLayerName).exists(gameObject);
     },
 
-    clearMonitorLayer() {
-        this.layerManager.clearLayer(this.monitorLayerName);
-        return this;
-    },
 }

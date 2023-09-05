@@ -15,9 +15,7 @@ class Shell extends ComponentBase {
 
         this.addLayerManager(config);
 
-        if (GetValue(config, 'clickOutsideDetection', true)) {
-            this.addBackground(config);
-        }
+        this.addBackground(config);
 
         this.addPropertiesPanel(config)
 
