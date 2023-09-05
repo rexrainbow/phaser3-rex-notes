@@ -28,20 +28,14 @@ class Shell extends ComponentBase {
     shutdown(fromScene) {
         super.shutdown(fromScene);
 
-        if (this.background) {
-            this.background.destroy(fromScene);
-        }
-
-        if (this.panel) {
-            this.panel.destroy();
-        }
-
-        if (this.controlPoints) {
-            this.controlPoints.destroy();
-        }
-
+        // background, panel, controlPoints are placed inside layers
         if (this.isPrivateLayerManager) {
-            this.layerManager.destroy();
+            this.layerManager.destroy(fromScene);
+        } else {
+            var layNames = [this.backgroundLayerName, this.monitorLayerName, this.uiLayerName];
+            for (var i = 0, cnt = layNames.length; i < cnt; i++) {
+                this.layerManager.clearLayer(layNames[i], !fromScene);
+            }
         }
 
         this.background = undefined;

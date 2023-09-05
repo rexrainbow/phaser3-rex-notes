@@ -2715,6 +2715,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-layer" class="md-nav__link">
+    Clear layer
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9561,6 +9568,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-layer" class="md-nav__link">
+    Clear layer
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9644,7 +9658,7 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layerManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLayerManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// layerManager: [&#39;layer0&#39;, &#39;layer1&#39;, ...]</span>
+<span class="w">    </span><span class="c1">// layers: [&#39;layer0&#39;, &#39;layer1&#39;, ...]</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or</p>
@@ -9688,6 +9702,15 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">hasLayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">layerManager</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <span class="c1">// var hasLayer = layerManager.exists(name);</span>
 </code></pre></div>
+<h3 id="clear-layer">Clear layer<a class="headerlink" href="#clear-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Destroy all children at layer
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">clearLayer</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move all children from layer to scene's display list
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">clearLayer</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 
 
   

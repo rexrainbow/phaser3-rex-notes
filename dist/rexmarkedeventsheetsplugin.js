@@ -19380,6 +19380,27 @@
         }
         return this;
       }
+    }, {
+      key: "clearLayer",
+      value: function clearLayer(name, destroyChildren) {
+        if (destroyChildren === undefined) {
+          destroyChildren = true;
+        }
+        var layer = this.getGO(name);
+        if (!layer) {
+          console.warn("Can't get layer \"".concat(name, "\""));
+          return;
+        }
+        if (destroyChildren) {
+          var children = layer.getAll();
+          for (var i = 0, cnt = children.length; i < cnt; i++) {
+            children.destroy();
+          }
+        } else {
+          layer.removeAll();
+        }
+        return this;
+      }
     }]);
     return LayerManager;
   }(GOManager);

@@ -8,7 +8,7 @@ export default {
         }
 
         this.backgroundLayerName = layers[0] || 'background';
-        this.mainLayerName = layers[1] || 'main';
+        this.monitorLayerName = layers[1] || 'monitor';
         this.uiLayerName = layers[2] || 'ui';
 
         var layerManager = config.layerManager;
@@ -17,7 +17,7 @@ export default {
             layerManager = new LayerManager(this.scene, {
                 layers: [
                     this.backgroundLayerName,
-                    this.mainLayerName,
+                    this.monitorLayerName,
                     this.uiLayerName
                 ]
             })
@@ -32,8 +32,26 @@ export default {
         return this;
     },
 
-    addToMainLayer(gameObject) {
-        this.layerManager.addToLayer(this.mainLayerName, gameObject);
+    addToMonitorLayer(gameObjects) {
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
+
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            let gameObject = gameObjects[i];
+            let isMonitored = this.isMonitored(gameObject);
+
+            this.layerManager.addToLayer(this.monitorLayerName, gameObject);
+
+            if (!isMonitored) {
+                gameObject
+                    .setInteractive()
+                    .on('pointerdown', function () {
+                        this.setBindingTarget(gameObject);
+                    }, this)
+            }
+        }
+
         return this;
     },
 
@@ -42,5 +60,16 @@ export default {
         return this;
     },
 
+    getMonitorGameObjects() {
+        return this.layerManager.getLayer(this.monitorLayerName).getAll();
+    },
 
+    isMonitored(gameObject) {
+        return this.layerManager.getLayer(this.monitorLayerName).exists(gameObject);
+    },
+
+    clearMonitorLayer() {
+        this.layerManager.clearLayer(this.monitorLayerName);
+        return this;
+    },
 }

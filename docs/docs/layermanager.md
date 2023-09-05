@@ -129,3 +129,14 @@ layerManager.addToLayer(name, gameObject);
 var hasLayer = layerManager.has(name);
 // var hasLayer = layerManager.exists(name);
 ```
+
+### Clear layer
+
+- Destroy all children at layer
+    ```javascript
+    layerManager.clearLayer(name);
+    ```
+- Move all children from layer to scene's display list
+    ```javascript
+    layerManager.clearLayer(name, false);
+    ```

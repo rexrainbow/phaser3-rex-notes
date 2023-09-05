@@ -15,8 +15,9 @@ class Demo extends Phaser.Scene {
     create() {
         var shell = this.rexGameObjectShell.add.shell();
 
+        var gameObjects = [];
         for (var i = 0; i < 10; i++) {
-            let gameObject = this.make.image({
+            var gameObject = this.make.image({
                 key: 'mushroom',
 
                 x: { randFloat: [0, 800] },
@@ -27,16 +28,10 @@ class Demo extends Phaser.Scene {
                 },
                 angle: { randFloat: [0, 360] },
             })
-
-            shell.addToMainLayer(gameObject);
-
-            gameObject
-                .setInteractive()
-                .on('pointerdown', function () {
-                    shell.setBindingTarget(gameObject);
-                })
+            gameObjects.push(gameObject);
         }
 
+        shell.addToMonitorLayer(gameObjects);
     }
 
     update() {
