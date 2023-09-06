@@ -1,6 +1,5 @@
 import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
-import CreateItem from './CreateItem.js';
-import AddDragDropItemBehavior from './AddDragDropItemBehavior.js';
+import CreateItemsBox from './CreateItemsBox.js';
 
 var CreateColumnPanel = function (scene, title, itemCount) {
     var panel = scene.rexUI.add.dialog({
@@ -16,9 +15,8 @@ var CreateColumnPanel = function (scene, title, itemCount) {
         content: CreateItemsBox(scene, itemCount),
     })
 
-    // Advance : Define ColumnPanel by extending Dialog class
-    panel.onDragStart = OnPanelDragStart.bind(panel);
-    panel.onDragEnd = OnPanelDragEnd.bind(panel);
+    panel.on('dragstart', OnPanelDragStart, panel);
+    panel.on('dragend', OnPanelDragEnd, panel);
 
     return panel;
 }
@@ -39,29 +37,6 @@ var CreateTitle = function (scene, text) {
         },
 
     })
-}
-
-var CreateItemsBox = function (scene, itemCount) {
-    var itemsBox = scene.rexUI.add.sizer({
-        orientation: 'y',
-        space: {
-            left: 5, right: 5, top: 5, bottom: 5,
-            item: 5
-        },
-
-        name: 'ItemsBox'
-    })
-
-    for (var i = 0; i < itemCount; i++) {
-        itemsBox.add(
-            CreateItem(scene, i.toString()),
-            { proportion: 0, expand: true }
-        )
-    }
-
-    AddDragDropItemBehavior(itemsBox);
-
-    return itemsBox;
 }
 
 var OnPanelDragStart = function () {

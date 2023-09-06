@@ -9,10 +9,10 @@ var AddDragDropColumnPanelBehavior = function (panelsBox) {
         let header = panel.getElement('title');
         header
             .setInteractive({ draggable: true })
-            .on('dragstart', function (pointer, dragX, dragY) {               
+            .on('dragstart', function (pointer, dragX, dragY) {
                 panelsBox.remove(panel);
 
-                panel.onDragStart(); // See CreateColumnPanel.js
+                panel.emit('dragstart', pointer, dragX, dragY); // See CreateColumnPanel.js
             })
             .on('drag', function (pointer, dragX, dragY) {
                 // On dragging
@@ -20,7 +20,7 @@ var AddDragDropColumnPanelBehavior = function (panelsBox) {
                 panel.y += (dragY - header.y);
             })
             .on('dragend', function (pointer, dragX, dragY, dropped) {
-                panel.onDragEnd();  // See CreateColumnPanel.js
+                panel.emit('dragend', pointer, dragX, dragY, dropped);  // See CreateColumnPanel.js
 
                 // Item is placed to new position in panelsBox
                 panelsBox.insertAtPosition(

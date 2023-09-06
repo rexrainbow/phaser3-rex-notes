@@ -20,9 +20,8 @@ var CreateItem = function (scene, text) {
 
     })
 
-    // Advance : Define Item by extending Label class
-    item.onDragStart = OnItemDragStart.bind(item);
-    item.onDragEnd = OnItemDragEnd.bind(item);
+    item.on('dragstart', OnItemDragStart, item);
+    item.on('dragend', OnItemDragEnd, item);
 
     return item;
 }
