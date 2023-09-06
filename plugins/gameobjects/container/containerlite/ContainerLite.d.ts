@@ -238,7 +238,7 @@ declare class ContainerLite extends Base {
         value?: unknown,
         startIndex?: number,
         endIndex?: number
-    ): Phaser.GameObjects.GameObject;
+    ): Phaser.GameObjects.GameObject[];
 
     count(
         property: string,
