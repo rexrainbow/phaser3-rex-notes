@@ -1,6 +1,29 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
+/*
+
+- OuterScrollablePanel is horizontal scrolling , 
+  InnerScrollablePanel is vertical scrolling
+
+- Set OuterScrollablePanel and InnerScrollablePanel's `scroller` to `false,
+  to disable scroller
+
+- Set OuterScrollablePanel's `panel.mask.updateMode` to `'everyTick'`, 
+  to update masked game object every tick.
+
+- Set InnerScrollablePanel's `panel.mask` to `false`, 
+  to disable mask feature in InnerScrollablePanel
+
+- Don't assign InnerScrollablePanel's `header` and `footer` elements.
+
+- Set InnerScrollablePanel's `space.top` and `space.bottom` to `0`
+
+- Set Sizer of InnerScrollablePanels `space.top` and `space.bottom` to `0`.
+
+*/
+
+
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
@@ -46,8 +69,6 @@ var CreateOuterScrollablePanel = function (scene, itemCountArray) {
             },
         },
 
-        // header: CreateHeader(scene, header),
-
         slider: {
             track: scene.rexUI.add.roundRectangle({
                 width: 20,
@@ -66,7 +87,6 @@ var CreateOuterScrollablePanel = function (scene, itemCountArray) {
             left: 10, right: 10, top: 10, bottom: 10,
 
             panel: 10,
-            header: 10,
         },
     })
 }
@@ -77,7 +97,9 @@ var CreateInnerScrollablePanelGroup = function (scene, itemCountArray) {
 
         orientation: 'x',
         space: {
-            left: 10, right: 10, top: 10, bottom: 10,
+            left: 10, right: 10,
+            top: 0, bottom: 0,
+            // IMPORTANT: No top and bottom space
             item: 20
         }
     })
@@ -110,14 +132,11 @@ var CreateInnerScrollablePanel = function (scene, header, itemCount) {
 
         panel: {
             child: CreateInnerPanel(scene, itemCount),
-            mask: {
-                padding: 2,
-                updateMode: 'everyTick'
-            },
-            // IMPORT : MASK can not be stackable
+            mask: false,
+            // IMPORTANT: Disable mask
         },
 
-        header: CreateHeader(scene, header),
+        // IMPORTANT: No header element
 
         slider: {
             track: scene.rexUI.add.roundRectangle({
@@ -134,7 +153,9 @@ var CreateInnerScrollablePanel = function (scene, header, itemCount) {
         scroller: false,
 
         space: {
-            left: 10, right: 10, top: 10, bottom: 10,
+            left: 10, right: 10,
+            top: 0, bottom: 0,
+            // IMPORTANT: No top and bottom space
 
             panel: 10,
             header: 10,

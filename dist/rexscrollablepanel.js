@@ -18885,7 +18885,9 @@
 
       // Create mask of child object
       _this.setupChildrenMask(GetValue$1(config, 'mask', undefined));
-      _this.maskGameObject = MaskToGameObject(_this.childrenMask);
+      if (_this.childrenMask) {
+        _this.maskGameObject = MaskToGameObject(_this.childrenMask);
+      }
       return _this;
     }
     _createClass(ScrollableBlock, [{
