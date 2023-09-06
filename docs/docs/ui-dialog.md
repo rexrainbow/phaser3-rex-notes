@@ -21,6 +21,7 @@ A container with a title, content, buttons and background.
 - [Add button](https://codepen.io/rexrainbow/pen/gOpddxa)
 - [Wrap label](https://codepen.io/rexrainbow/pen/NWYWMOE)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/VwzbqEP)
+- [Content sizer](https://codepen.io/rexrainbow/pen/dywOZEa)
 
 ## Usage
 
