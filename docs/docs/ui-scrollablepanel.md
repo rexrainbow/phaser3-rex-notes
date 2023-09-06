@@ -22,6 +22,7 @@ A container with a panel, slider, and scroller.
 - Drag&drop items between panels : 
     - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
     - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
+- [Nested scroll-able panel](https://codepen.io/rexrainbow/pen/RwEoLzy)
 
 
 ## Usage
