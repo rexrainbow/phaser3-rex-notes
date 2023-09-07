@@ -43,6 +43,10 @@ var SetDraggable = function (senser, draggable, dragTarget) {
                 var currentDragTarget = (dragTarget === undefined) ? this.getTopmostSizer() : dragTarget;
                 currentDragTarget.emit('sizer.dragend', pointer, dragX, dragY, dropped);
             }, this)
+            .on('drop', function (pointer, dropZone) {
+                var currentDragTarget = (dragTarget === undefined) ? this.getTopmostSizer() : dragTarget;
+                currentDragTarget.emit('sizer.drop', pointer, dropZone);
+            });
         senser.input._rexUIDragSizer = true;
     } else {
         // Not draggable and draggable is not registered yet, do nothing

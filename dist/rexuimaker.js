@@ -18569,7 +18569,10 @@
       }, this).on('dragend', function (pointer, dragX, dragY, dropped) {
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
         currentDragTarget.emit('sizer.dragend', pointer, dragX, dragY, dropped);
-      }, this);
+      }, this).on('drop', function (pointer, dropZone) {
+        var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
+        currentDragTarget.emit('sizer.drop', pointer, dropZone);
+      });
       senser.input._rexUIDragSizer = true;
     } else ;
     return this;

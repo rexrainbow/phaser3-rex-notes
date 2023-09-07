@@ -872,6 +872,12 @@ sizer.destroy();
 
     })
     ```
+- Fire `'sizer.drop'` on target sizer when dropped
+    ```javascript
+    targetSizer.on('sizer.drop', function(pointer, dropZone) {
+
+    })
+    ```
 
 ### Click
 

@@ -180,14 +180,13 @@ var SetupDraggableItems = function (scrollablePanel) {
                 child.setPosition(dragX, dragY);
             })
             .on('dragend', function (pointer, dragX, dragY, dropped) {
+                OnChildDragEnd(child);
+
                 if (dropped) { // Process 'drop' event
                     return;
                 }
 
                 var previousSizer = child.getData('sizer');
-
-                OnChildDragEnd(child);
-
                 // Insert back to previous sizer if not dropping on another panel
                 previousSizer.insert(child.getData('index'), child, { expand: true });
                 ArrangeItems(previousSizer);
@@ -197,9 +196,6 @@ var SetupDraggableItems = function (scrollablePanel) {
                 if (dropZone.name !== ItemsDropZoneName) {
                     return;
                 }
-
-                // Drop at another sizer
-                OnChildDragEnd(child);
 
                 // dropZone : Background = RoundRectangleShape
                 var currentSizer = rexUI.getParentSizer(dropZone, 'panelTop').getElement('panel'),
