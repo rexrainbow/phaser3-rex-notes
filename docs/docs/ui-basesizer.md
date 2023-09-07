@@ -801,18 +801,18 @@ This method also will reset all local state of children.
 sizer.destroy();
 ```
 
-### Drag top-most sizer
+### Drag sizer
 
-- Draggable child
+- Drag top-most sizer by child
     - Enable
         ```javascript
         sizer.setDraggable(child);
-        // sizer.setDraggable(child, true)
+        // sizer.setDraggable(child, true);
         ```
         or
         ```javascript
         sizer.setDraggable(elementName);
-        // sizer.setDraggable(elementName, true)
+        // sizer.setDraggable(elementName, true);
         ```
     - Disable
         ```javascript
@@ -822,7 +822,7 @@ sizer.destroy();
         ```javascript
         sizer.setDraggable(elementName, false);
         ```
-- Draggable sizer object
+- Drag top-most sizer by this sizer
     - Enable
         ```javascript
         sizer.setDraggable();
@@ -832,6 +832,46 @@ sizer.destroy();
         ```javascript
         sizer.setDraggable(false);
         ```
+- Drag target sizer by child
+    - Enable
+        ```javascript
+        sizer.setDraggable(child, targetSizer);
+        // sizer.setDraggable(child, true, targetSizer);
+        ```
+        or
+        ```javascript
+        sizer.setDraggable(elementName);
+        // sizer.setDraggable(elementName, true, targetSizer);
+        ```
+    - Disable
+        ```javascript
+        sizer.setDraggable(child, false);
+        ```
+        or
+        ```javascript
+        sizer.setDraggable(elementName, false);
+        ```
+
+#### Events
+
+- Fire `'sizer.drag'` on target sizer when dragging
+    ```javascript
+    targetSizer.on('sizer.drag', function(pointer, dragX, dragY) {
+
+    })
+    ```
+- Fire `'sizer.dragstart'` on target sizer when dragging
+    ```javascript
+    targetSizer.on('sizer.dragstart', function(pointer, dragX, dragY) {
+
+    })
+    ```
+- Fire `'sizer.dragend'` on target sizer when dragging
+    ```javascript
+    targetSizer.on('sizer.dragend', function(pointer, dragX, dragY, dropped) {
+
+    })
+    ```
 
 ### Click
 
@@ -1490,29 +1530,6 @@ Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#layer).
     });
     ```
     - `saveTexture` : [Save render result to texture manager](rendertexture.md#save-texture).
-
-### Events
-
-#### Dragging
-
-- Fire `'sizer.drag'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer)
-    ```javascript
-    topmostSizer.on('sizer.drag', function(pointer, dragX, dragY) {
-
-    })
-    ```
-- Fire `'sizer.dragstart'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer) start.
-    ```javascript
-    topmostSizer.on('sizer.dragstart', function(pointer, dragX, dragY) {
-
-    })
-    ```
-- Fire `'sizer.dragend'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer) dragend.
-    ```javascript
-    topmostSizer.on('sizer.dragend', function(pointer, dragX, dragY, dropped) {
-
-    })
-    ```
 
 #### Layout children
 

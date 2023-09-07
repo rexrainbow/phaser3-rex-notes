@@ -7828,9 +7828,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-top-most-sizer" class="md-nav__link">
-    Drag top-most sizer
+  <a href="#drag-sizer" class="md-nav__link">
+    Drag sizer
   </a>
+  
+    <nav class="md-nav" aria-label="Drag sizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -7892,7 +7905,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
+  <a href="#events_1" class="md-nav__link">
     Events
   </a>
   
@@ -8006,22 +8019,8 @@
     Snapshot
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events_1" class="md-nav__link">
-    Events
-  </a>
-  
-    <nav class="md-nav" aria-label="Events">
+    <nav class="md-nav" aria-label="Snapshot">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dragging" class="md-nav__link">
-    Dragging
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
@@ -9936,9 +9935,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-top-most-sizer" class="md-nav__link">
-    Drag top-most sizer
+  <a href="#drag-sizer" class="md-nav__link">
+    Drag sizer
   </a>
+  
+    <nav class="md-nav" aria-label="Drag sizer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -10000,7 +10012,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
+  <a href="#events_1" class="md-nav__link">
     Events
   </a>
   
@@ -10114,22 +10126,8 @@
     Snapshot
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events_1" class="md-nav__link">
-    Events
-  </a>
-  
-    <nav class="md-nav" aria-label="Events">
+    <nav class="md-nav" aria-label="Snapshot">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dragging" class="md-nav__link">
-    Dragging
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
@@ -10914,16 +10912,16 @@
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-<h3 id="drag-top-most-sizer">Drag top-most sizer<a class="headerlink" href="#drag-top-most-sizer" title="Permanent link">&para;</a></h3>
+<h3 id="drag-sizer">Drag sizer<a class="headerlink" href="#drag-sizer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Draggable child<ul>
+<li>Drag top-most sizer by child<ul>
 <li>Enable
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
-<span class="c1">// sizer.setDraggable(child, true)</span>
+<span class="c1">// sizer.setDraggable(child, true);</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
-<span class="c1">// sizer.setDraggable(elementName, true)</span>
+<span class="c1">// sizer.setDraggable(elementName, true);</span>
 </code></pre></div></li>
 <li>Disable
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
@@ -10933,7 +10931,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Draggable sizer object<ul>
+<li>Drag top-most sizer by this sizer<ul>
 <li>Enable
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">();</span>
 <span class="c1">// sizer.setDraggable(true);</span>
@@ -10943,6 +10941,41 @@
 </code></pre></div></li>
 </ul>
 </li>
+<li>Drag target sizer by child<ul>
+<li>Enable
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">targetSizer</span><span class="p">);</span>
+<span class="c1">// sizer.setDraggable(child, true, targetSizer);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
+<span class="c1">// sizer.setDraggable(elementName, true, targetSizer);</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Fire <code>'sizer.drag'</code> on target sizer when dragging
+    <div class="highlight"><pre><span></span><code><span class="nx">targetSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.drag&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Fire <code>'sizer.dragstart'</code> on target sizer when dragging
+    <div class="highlight"><pre><span></span><code><span class="nx">targetSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Fire <code>'sizer.dragend'</code> on target sizer when dragging
+    <div class="highlight"><pre><span></span><code><span class="nx">targetSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">,</span><span class="w"> </span><span class="nx">dropped</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
 </ul>
 <h3 id="click">Click<a class="headerlink" href="#click" title="Permanent link">&para;</a></h3>
 <ul>
@@ -11171,7 +11204,7 @@
 <p>Input behaviors are installed to this Sizer game object, not each child. And it assumes that all children are not overlapped.
 Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input behaviors of each child individually.</p>
 </div>
-<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
+<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pointer-down
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.down&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -11594,25 +11627,6 @@ Current children and new children will draw on this layer, instead of display li
 <li><code>saveTexture</code> : <a href="../rendertexture/#save-texture">Save render result to texture manager</a>.</li>
 </ul>
 </li>
-</ul>
-<h3 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h3>
-<h4 id="dragging">Dragging<a class="headerlink" href="#dragging" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Fire <code>'sizer.drag'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a>
-    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.drag&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="p">})</span>
-</code></pre></div></li>
-<li>Fire <code>'sizer.dragstart'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a> start.
-    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="p">})</span>
-</code></pre></div></li>
-<li>Fire <code>'sizer.dragend'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a> dragend.
-    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">,</span><span class="w"> </span><span class="nx">dropped</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="p">})</span>
-</code></pre></div></li>
 </ul>
 <h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <div class="admonition note">

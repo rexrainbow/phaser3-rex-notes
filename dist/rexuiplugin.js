@@ -32958,7 +32958,7 @@
     }
   };
 
-  var SetDraggable = function SetDraggable(senser, draggable) {
+  var SetDraggable = function SetDraggable(senser, draggable, dragTarget) {
     var senserType = _typeof(senser);
     if (senserType === 'string') {
       var senserName = senser;
@@ -32971,10 +32971,14 @@
       draggable = senser;
       senser = this;
     }
+    if (typeof draggable !== 'boolean') {
+      dragTarget = draggable;
+      draggable = undefined;
+    }
     if (draggable === undefined) {
       draggable = true;
     }
-    if (senser.input && senser.input._dragTopmostSizer) {
+    if (senser.input && senser.input._rexUIDragSizer) {
       // Draggable is already registered
       senser.input.draggable = draggable;
     } else if (draggable) {
@@ -32982,18 +32986,18 @@
       senser.setInteractive();
       senser.scene.input.setDraggable(senser);
       senser.on('drag', function (pointer, dragX, dragY) {
-        var topmostParent = this.getTopmostSizer();
-        topmostParent.x += dragX - senser.x;
-        topmostParent.y += dragY - senser.y;
-        topmostParent.emit('sizer.drag', pointer, dragX, dragY);
+        var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
+        currentDragTarget.x += dragX - senser.x;
+        currentDragTarget.y += dragY - senser.y;
+        currentDragTarget.emit('sizer.drag', pointer, dragX, dragY);
       }, this).on('dragstart', function (pointer, dragX, dragY) {
-        var topmostParent = this.getTopmostSizer();
-        topmostParent.emit('sizer.dragstart', pointer, dragX, dragY);
+        var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
+        currentDragTarget.emit('sizer.dragstart', pointer, dragX, dragY);
       }, this).on('dragend', function (pointer, dragX, dragY, dropped) {
-        var topmostParent = this.getTopmostSizer();
-        topmostParent.emit('sizer.dragend', pointer, dragX, dragY, dropped);
+        var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
+        currentDragTarget.emit('sizer.dragend', pointer, dragX, dragY, dropped);
       }, this);
-      senser.input._dragTopmostSizer = true;
+      senser.input._rexUIDragSizer = true;
     } else ;
     return this;
   };
