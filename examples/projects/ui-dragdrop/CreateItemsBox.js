@@ -9,8 +9,6 @@ var CreateItemsBox = function (scene, itemCount) {
             left: 5, right: 5, top: 5, bottom: 5,
             item: 5
         },
-
-        name: 'ItemsBox'
     })
 
     itemsBox.addBackground(

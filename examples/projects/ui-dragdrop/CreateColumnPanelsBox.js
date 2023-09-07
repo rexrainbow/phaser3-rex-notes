@@ -8,8 +8,6 @@ var CreateColumnPanelsBox = function (scene, itemCountArray) {
         space: {
             left: 10, right: 10, top: 10, bottom: 10
         },
-
-        name: 'ColumnPanelsBox',
     })
     // .addBackground(
     //     scene.rexUI.add.roundRectangle({
