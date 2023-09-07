@@ -36,28 +36,27 @@ var AddDragDropColumnPanelBehavior = function (panelsBox) {
 var ArrangePanels = function (panelsBox) {
     var panels = panelsBox.getElement('items');
 
-    // Save current position, 
-    // Set dirty to false, to ignore layout children of panel
-    panels.forEach(function (panel) {
-        panel.setData({ startX: panel.x, startY: panel.y });
+    // Save current position    
+    for (var i = 0, cnt = panels.length; i < cnt; i++) {
+        var panel = panels[i];
+        panel.setData({
+            startX: panel.x,
+            startY: panel.y
+        });
+    }
 
-        panel.setDirty(false);
-    })
-
-    // Item is placed to new position in panelsBox
-    panelsBox.layout();
+    // Layout from topmost ui
+    panelsBox.getTopmostSizer().layout();
 
     // Move panel from start position to new position
-    // Set dirty to true
-    panels.forEach(function (panel) {
+    for (var i = 0, cnt = panels.length; i < cnt; i++) {
+        var panel = panels[i];
         var fromX = panel.getData('startX'),
             fromY = panel.getData('startY');
         if ((panel.x !== fromX) || (panel.y !== fromY)) {
             panel.moveFrom({ x: fromX, y: fromY, speed: 300 })
         }
-
-        panel.setDirty(true);
-    })
+    }
 }
 
 
