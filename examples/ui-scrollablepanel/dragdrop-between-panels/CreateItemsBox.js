@@ -13,6 +13,11 @@ var CreateItemsBox = function (scene, itemCount) {
         name: 'ItemsBox'
     })
 
+    itemsBox.addBackground(
+        scene.rexUI.add.roundRectangle({}),
+        'background'
+    )
+
     for (var i = 0; i < itemCount; i++) {
         itemsBox.add(
             CreateItem(scene, i.toString()),

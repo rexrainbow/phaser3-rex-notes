@@ -146,15 +146,12 @@ var CreateLabel = function (scene, text) {
     })
 }
 
-var ItemsDropZoneName = 'items-dropZone';
 var SetupDraggableItems = function (scrollablePanel) {
     var rexUI = scrollablePanel.scene.rexUI;
 
     // Set background as dropZone
     var background = scrollablePanel.getElement('background');
-    background
-        .setName(ItemsDropZoneName)
-        .setInteractive({ dropZone: true })
+    background.setInteractive({ dropZone: true })
 
     var items = scrollablePanel.getElement('panel.items');
     for (var i = 0, cnt = items.length; i < cnt; i++) {
@@ -192,11 +189,6 @@ var SetupDraggableItems = function (scrollablePanel) {
                 ArrangeItems(previousSizer);
             })
             .on('drop', function (pointer, dropZone) {
-                console.log(dropZone.name);
-                if (dropZone.name !== ItemsDropZoneName) {
-                    return;
-                }
-
                 // dropZone : Background = RoundRectangleShape
                 var currentSizer = rexUI.getParentSizer(dropZone, 'panelTop').getElement('panel'),
                     previousSizer = child.getData('sizer');

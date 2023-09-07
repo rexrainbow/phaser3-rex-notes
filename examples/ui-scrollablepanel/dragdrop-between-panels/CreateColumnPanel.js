@@ -15,8 +15,7 @@ var CreateColumnPanel = function (scene, title, itemCount) {
         content: CreateItemsBox(scene, itemCount),
     })
 
-    panel.on('dragstart', OnPanelDragStart, panel);
-    panel.on('dragend', OnPanelDragEnd, panel);
+    SetDraggable(panel);
 
     return panel;
 }
@@ -37,6 +36,16 @@ var CreateTitle = function (scene, text) {
         },
 
     })
+}
+
+var SetDraggable = function (panel) {
+    // Drag panel by title element
+    panel
+        .setDraggable('title', panel)
+
+        // Change appearance of panel
+        .on('sizer.dragstart', OnPanelDragStart, panel)
+        .on('sizer.dragend', OnPanelDragEnd, panel)
 }
 
 var OnPanelDragStart = function () {

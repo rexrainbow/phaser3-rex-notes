@@ -12,18 +12,24 @@ var CreateItem = function (scene, text) {
 
         align: 'center',
         space: {
-            left: 10,
-            right: 10,
-            top: 10,
-            bottom: 10,
+            left: 5, right: 5, top: 5, bottom: 5,
         },
 
     })
 
-    item.on('dragstart', OnItemDragStart, item);
-    item.on('dragend', OnItemDragEnd, item);
+    SetDraggable(item);
 
     return item;
+}
+
+var SetDraggable = function (item) {
+    // Drag item by itself
+    item
+        .setDraggable(item, item)
+
+        // Change appearance of item
+        .on('sizer.dragstart', OnItemDragStart, item)
+        .on('sizer.dragend', OnItemDragEnd, item)
 }
 
 var OnItemDragStart = function () {
