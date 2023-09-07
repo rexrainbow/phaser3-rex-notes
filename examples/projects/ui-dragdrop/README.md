@@ -7,6 +7,7 @@
 - Drag & drop item to another column panel
 - Drag & drop column panel to swap panels
 
+
 ## Sizer structure
 
 - ScrollablePanel : top ui
@@ -17,6 +18,7 @@
                 - Item : Label, child of Sizer
     - SliderX
     - SliderY
+
 
 ## Drag & drop
 
@@ -46,3 +48,8 @@ Setup drop-zone for a ItemsBox, store ItemsBox as currentItemsBox into drop-zone
     1. For each item, save current position
     1. Layout top most ui
     1. Move Item from current postion to new position
+
+### Scrollable Panel
+
+- Set config's parameter `panel.mask.updateMode` to `'everyTick'`, to get masked
+  game object every tick, since ColumnPanel or Item can move without scrolling.
