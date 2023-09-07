@@ -1,1 +1,1 @@
-[Application link](https://rexrainbow.github.io/phaser3-rex-notes/apps/scrollablepanel-dragdrop-between-panels/index.html)
+- [Demo](https://rexrainbow.github.io/phaser3-rex-notes/examples/ui-scrollablepanel/dragdrop-between-panels/app/index.html)
