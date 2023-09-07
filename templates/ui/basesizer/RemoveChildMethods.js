@@ -2,10 +2,11 @@ import RemoveChild from './utils/RemoveChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
+const GetParentSizer = GetParentSizerMethods.getParentSizer;
 
 export default {
     removeFromParentSizer() {
-        var parent = GetParentSizerMethods.getParentSizer(gameObject);
+        var parent = GetParentSizer(gameObject);
         if (parent) {
             parent.remove(this);
         }

@@ -43,8 +43,10 @@ export default {
                 child.clearMask(false);
             }
 
-            self.setChildMaskVisible(child);
-            // Set child's maskVisible to `true`
+            if (!child.hasOwnProperty('isRexContainerLite')) {
+                self.setChildMaskVisible(child);
+                // Set child's maskVisible to `true`
+            }
         });
 
         if (destroyMask && this.mask) {

@@ -3,6 +3,7 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import ResetChildPosition from './ResetChildPosition.js';
 import LayoutChildren from './LayoutChildren.js';
+import RemoveChildCallback from './RemoveChildCallback.js';
 import ChildrenMaskMethods from '../../../../plugins/gameobjects/container/containerlite/mask/ChildrenMaskMethods.js';
 
 var methods = {
@@ -10,7 +11,8 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     resetChildPosition: ResetChildPosition,
-    layoutChildren: LayoutChildren
+    layoutChildren: LayoutChildren,
+    removeChildCallback: RemoveChildCallback,
 };
 
 Object.assign(

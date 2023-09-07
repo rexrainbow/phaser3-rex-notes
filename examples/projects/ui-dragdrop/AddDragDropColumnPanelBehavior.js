@@ -9,7 +9,7 @@ var AddDragDropColumnPanelBehavior = function (panelsBox) {
             // Remove from panelsBox
             .on('sizer.dragstart', function (pointer, dragX, dragY) {
                 panelsBox.remove(panel);
-                panel.layout();
+                panel.layout();     // Layout to min size
             })
             // Insert to panelsBox
             .on('sizer.dragend', function (pointer, dragX, dragY, dropped) {

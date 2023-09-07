@@ -164,6 +164,20 @@ declare class BaseSizer extends ContainerLite {
         config: { [key: string]: Phaser.GameObjects.GameObject }
     ): this;
 
+    removeFromParentSizer(): this;
+
+    removeBackground(
+        gameObject: Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
+
+    removeAllBackgrounds(destroyChild?: boolean): this;
+
+    removeChildCallback(
+        gameObject: Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
+
     removeChildrenMap(key: string): this;
     removeChildrenMap(gameObject: Phaser.GameObjects.GameObject): this;
 
