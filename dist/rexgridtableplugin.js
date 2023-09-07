@@ -1030,15 +1030,24 @@
       if (destroyMask === undefined) {
         destroyMask = false;
       }
+      var self = this;
 
       // Clear current mask
       this._mask = null;
-      // Clear children mask
+      this.setChildMaskVisible(this);
+      // Also set maskVisible to `true`
+
       this.children.forEach(function (child) {
+        // Clear child's mask
         if (child.clearMask) {
           child.clearMask(false);
         }
+        if (!child.hasOwnProperty('isRexContainerLite')) {
+          self.setChildMaskVisible(child);
+          // Set child's maskVisible to `true`
+        }
       });
+
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -3201,6 +3210,8 @@
     var child, childBounds, visiblePointsNumber;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
+
+      // Ignore ContainerLite child
       if (child.hasOwnProperty('isRexContainerLite')) {
         continue;
       }
@@ -3277,22 +3288,22 @@
     return result;
   };
   var ShowAll = function ShowAll(parent, child, mask) {
-    parent.setChildMaskVisible(child, true);
     if (child.clearMask) {
       child.clearMask();
     }
+    parent.setChildMaskVisible(child, true);
   };
   var ShowSome = function ShowSome(parent, child, mask) {
-    parent.setChildMaskVisible(child, true);
     if (child.setMask) {
       child.setMask(mask);
     }
+    parent.setChildMaskVisible(child, true);
   };
   var ShowNone = function ShowNone(parent, child, mask) {
-    parent.setChildMaskVisible(child, false);
     if (child.clearMask) {
       child.clearMask();
     }
+    parent.setChildMaskVisible(child, false);
   };
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {

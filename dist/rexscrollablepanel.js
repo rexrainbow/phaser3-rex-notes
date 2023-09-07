@@ -1030,15 +1030,24 @@
       if (destroyMask === undefined) {
         destroyMask = false;
       }
+      var self = this;
 
       // Clear current mask
       this._mask = null;
-      // Clear children mask
+      this.setChildMaskVisible(this);
+      // Also set maskVisible to `true`
+
       this.children.forEach(function (child) {
+        // Clear child's mask
         if (child.clearMask) {
           child.clearMask(false);
         }
+        if (!child.hasOwnProperty('isRexContainerLite')) {
+          self.setChildMaskVisible(child);
+          // Set child's maskVisible to `true`
+        }
       });
+
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -2903,20 +2912,6 @@
     }
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
-  var ContainerRemove = ContainerLite.prototype.remove;
-  var RemoveChild = function RemoveChild(gameObject, destroyChild) {
-    if (this.isBackground(gameObject)) {
-      RemoveItem$2(this.backgroundChildren, gameObject);
-    }
-    ContainerRemove.call(this, gameObject, destroyChild);
-    if (!destroyChild && this.sizerEventsEnable) {
-      gameObject.emit('sizer.remove', gameObject, this);
-      this.emit('remove', gameObject, this);
-    }
-    return this;
-  };
-
   var GetParent = function GetParent(gameObject, name) {
     var parent = null;
     if (name === undefined) {
@@ -2988,10 +2983,34 @@
     }
   };
 
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var ContainerRemove = ContainerLite.prototype.remove;
+  var GetParentSizer$1 = GetParentSizerMethods.getParentSizer;
+  var RemoveChild = function RemoveChild(gameObject, destroyChild) {
+    // Invoke parent's removeChildCallback method
+    var parent = GetParentSizer$1(gameObject);
+    while (parent) {
+      if (parent.removeChildCallback) {
+        parent.removeChildCallback(gameObject, destroyChild);
+      }
+      parent = GetParentSizer$1(parent);
+    }
+    if (this.isBackground(gameObject)) {
+      RemoveItem$2(this.backgroundChildren, gameObject);
+    }
+    ContainerRemove.call(this, gameObject, destroyChild);
+    if (!destroyChild && this.sizerEventsEnable) {
+      gameObject.emit('sizer.remove', gameObject, this);
+      this.emit('remove', gameObject, this);
+    }
+    return this;
+  };
+
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var GetParentSizer = GetParentSizerMethods.getParentSizer;
   var RemoveChildMethods$2 = {
     removeFromParentSizer: function removeFromParentSizer() {
-      var parent = GetParentSizerMethods.getParentSizer(gameObject);
+      var parent = GetParentSizer(gameObject);
       if (parent) {
         parent.remove(this);
       }
@@ -18488,6 +18507,15 @@
     }
   };
 
+  var RemoveChildCallback = function RemoveChildCallback(gameObject, destroyChild) {
+    if (destroyChild) {
+      return;
+    }
+    if (gameObject.clearMask) {
+      gameObject.clearMask(false);
+    }
+  };
+
   var MaskToGameObject = function MaskToGameObject(mask) {
     return mask.hasOwnProperty('geometryMask') ? mask.geometryMask : mask.bitmapMask;
   };
@@ -18506,6 +18534,8 @@
     var child, childBounds, visiblePointsNumber;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
+
+      // Ignore ContainerLite child
       if (child.hasOwnProperty('isRexContainerLite')) {
         continue;
       }
@@ -18582,22 +18612,22 @@
     return result;
   };
   var ShowAll = function ShowAll(parent, child, mask) {
-    parent.setChildMaskVisible(child, true);
     if (child.clearMask) {
       child.clearMask();
     }
+    parent.setChildMaskVisible(child, true);
   };
   var ShowSome = function ShowSome(parent, child, mask) {
-    parent.setChildMaskVisible(child, true);
     if (child.setMask) {
       child.setMask(mask);
     }
+    parent.setChildMaskVisible(child, true);
   };
   var ShowNone = function ShowNone(parent, child, mask) {
-    parent.setChildMaskVisible(child, false);
     if (child.clearMask) {
       child.clearMask();
     }
+    parent.setChildMaskVisible(child, false);
   };
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
@@ -18845,7 +18875,8 @@
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     resetChildPosition: ResetChildPosition,
-    layoutChildren: LayoutChildren
+    layoutChildren: LayoutChildren,
+    removeChildCallback: RemoveChildCallback
   };
   Object.assign(methods$1, ChildrenMaskMethods);
 
