@@ -11,13 +11,13 @@ var CreateColumnPanelsBox = function (scene, itemCountArray) {
 
         name: 'ColumnPanelsBox',
     })
-        .addBackground(
-            scene.rexUI.add.roundRectangle({
-                strokeColor: COLOR_PRIMARY,
-                strokeWidth: 3,
-            }),
-            'background'
-        )
+    // .addBackground(
+    //     scene.rexUI.add.roundRectangle({
+    //         strokeColor: COLOR_PRIMARY,
+    //         strokeWidth: 3,
+    //     }),
+    //     'background'
+    // )
 
     for (var i = 0, cnt = itemCountArray.length; i < cnt; i++) {
         var columnPanel = CreateColumnPanel(scene, `Header ${i}`, itemCountArray[i]);

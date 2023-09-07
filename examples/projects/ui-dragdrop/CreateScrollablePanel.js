@@ -1,44 +1,41 @@
-var CreateScrollablePanel = function (scene, childCallback) {
-    return scene.rexUI.add.scrollablePanel({
-        width: 150, height: 420,
+import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import CreateColumnPanelsBox from './CreateColumnPanelsBox.js';
 
-        scrollMode: 'y',
+var CreateScrollablePanel = function (scene, itemCountArray) {
+    return scene.rexUI.add.scrollablePanel({
+        width: 400, height: 400,
 
         background: scene.rexUI.add.roundRectangle({
-            radius: 20,
+            radius: 10,
             strokeColor: COLOR_DARK
         }),
 
         panel: {
-            child: childCallback(),
+            child: CreateColumnPanelsBox(scene, itemCountArray),
             mask: {
                 padding: 2,
+                updateMode: 'everyTick'
             },
         },
 
-        slider: {
-            track: scene.rexUI.add.roundRectangle({
-                width: 20,
-                radius: 10,
-                color: COLOR_DARK
-            }),
-            thumb: scene.rexUI.add.roundRectangle({
-                radius: 13,
-                color: COLOR_LIGHT
-            }),
+        sliderX: {
+            track: { width: 20, radius: 10, color: COLOR_DARK },
+            thumb: { radius: 13, color: COLOR_LIGHT }
         },
 
-        scroller: false,
+        sliderY: {
+            track: { width: 20, radius: 10, color: COLOR_DARK },
+            thumb: { radius: 13, color: COLOR_LIGHT }
+        },
+
+        scrollerX: false,
+        scrollerY: false,
 
         space: {
             left: 10, right: 10, top: 10, bottom: 10,
 
-            panel: 10,
-            header: 10,
+            sliderX: 10, sliderY: 10
         },
-
-        name: 'panelTop'
-        // To get this scrollable panel back later
     })
 }
 

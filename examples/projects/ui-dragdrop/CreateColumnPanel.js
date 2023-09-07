@@ -58,6 +58,7 @@ var SetDraggable = function (panel) {
 var OnPanelDragStart = function () {
     this.setDepth(1);
     this.getElement('background').setStrokeStyle(3, 0xff0000);
+    this.clearMask();
 }
 
 var OnPanelDragEnd = function () {

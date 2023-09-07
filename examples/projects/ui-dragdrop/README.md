@@ -9,10 +9,14 @@
 
 ## Sizer structure
 
-- ColumnPanelsBox : Sizer
-    - ColumnPanel : Dialog, child of Sizer
-        - ItemsBox : Sizer, content element of Dialog
-            - Item : Label, child of Sizer
+- ScrollablePanel : top ui
+    - ColumnPanelsBox : Sizer, panel of ScrollablePanel
+        - ColumnPanel : Dialog, child of Sizer
+            - ItemsBox : Sizer, content element of Dialog
+                - background : round-rectangle shape, for drop zone
+                - Item : Label, child of Sizer
+    - SliderX
+    - SliderY
 
 ## Drag & drop
 

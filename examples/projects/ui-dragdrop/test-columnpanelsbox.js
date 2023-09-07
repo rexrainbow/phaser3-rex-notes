@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../../templates/ui/ui-plugin.js';
-import CreateScrollablePanel from './CreateScrollablePanel.js';
+import CreateColumnPanelsBox from './CreateColumnPanelsBox.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var itemCountArray = [10, 5, 20, 0, 10];
-        var topPanel = CreateScrollablePanel(this, itemCountArray)
+        var itemCountArray = [10, 5, 0, 10];
+        var topPanel = CreateColumnPanelsBox(this, itemCountArray)
             .setPosition(400, 300)
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
