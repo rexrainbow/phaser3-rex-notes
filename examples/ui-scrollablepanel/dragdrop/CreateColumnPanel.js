@@ -13,6 +13,10 @@ var CreateColumnPanel = function (scene, title, itemCount) {
 
         title: CreateTitle(scene, title),
         content: CreateItemsBox(scene, itemCount),
+
+        proportion: {
+            content: 1
+        }
     })
 
     SetDraggable(panel);
