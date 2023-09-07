@@ -9,6 +9,7 @@ var AddDragDropColumnPanelBehavior = function (panelsBox) {
             // Remove from panelsBox
             .on('sizer.dragstart', function (pointer, dragX, dragY) {
                 panelsBox.remove(panel);
+                panel.layout();
             })
             // Insert to panelsBox
             .on('sizer.dragend', function (pointer, dragX, dragY, dropped) {

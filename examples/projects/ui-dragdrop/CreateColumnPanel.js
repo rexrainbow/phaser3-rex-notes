@@ -18,6 +18,7 @@ var CreateColumnPanel = function (scene, title, itemCount) {
             content: 1
         }
     })
+        .setOrigin(0, 0)
 
     SetDraggable(panel);
 

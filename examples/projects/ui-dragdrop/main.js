@@ -14,11 +14,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var itemCountArray = [10, 5, 20, 0, 10];
+        var itemCountArray = [20, 5, 10, 0, 10];
         var topPanel = CreateScrollablePanel(this, itemCountArray)
             .setPosition(400, 300)
             .layout()
-            // .drawBounds(this.add.graphics(), 0xff0000)
+        // .drawBounds(this.add.graphics(), 0xff0000)
     }
 
     update() { }
