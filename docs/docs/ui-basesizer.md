@@ -851,6 +851,19 @@ sizer.destroy();
         ```javascript
         sizer.setDraggable(elementName, false);
         ```
+- Drag target config
+    ```javascript
+    sizer.setDraggable({
+        sensor: child, // or elementName
+        target: undefined, // or a parentSizer
+        draggable: true
+    })
+    ```
+    - `sensor` : A game object or a string
+    - `target`
+        - `undefined` : Top-most sizer
+        - A game object : A parent sizer
+        
 
 #### Events
 

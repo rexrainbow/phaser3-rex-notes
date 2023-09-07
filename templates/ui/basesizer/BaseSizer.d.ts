@@ -499,8 +499,17 @@ declare class BaseSizer extends ContainerLite {
     }): this;
 
     setDraggable(
-        senser: boolean | string | Phaser.GameObjects.GameObject,
-        draggable?: boolean
+        sensor?: boolean | string | Phaser.GameObjects.GameObject,
+        draggable?: boolean,
+        target?: Phaser.GameObjects.GameObject
+    ): this;
+
+    setDraggable(
+        config: {
+            sensor?: boolean | string | Phaser.GameObjects.GameObject,
+            target?: Phaser.GameObjects.GameObject,
+            draggable?: boolean,
+        }
     ): this;
 
     onClick(

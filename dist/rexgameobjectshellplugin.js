@@ -2706,7 +2706,7 @@
    *
    * @return {boolean} `true` if the object is plain, otherwise `false`.
    */
-  var IsPlainObject$P = function IsPlainObject(obj) {
+  var IsPlainObject$Q = function IsPlainObject(obj) {
     // Not plain objects:
     // - Any object or value whose internal [[Class]] property is not "[object Object]"
     // - DOM nodes
@@ -2743,7 +2743,7 @@
 
     //  Create an array or object to hold the values
     outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$P(inObject)) {
+    if (IsPlainObject$Q(inObject)) {
       for (key in inObject) {
         value = inObject[key];
 
@@ -3237,10 +3237,10 @@
     this._endDraw();
   };
 
-  var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2_ = Phaser.Utils.Objects.GetValue;
   var SetStretchMode = function SetStretchMode(mode) {
-    if (IsPlainObject$O(mode)) {
+    if (IsPlainObject$P(mode)) {
       this.stretchMode.edge = parseMode(GetValue$2_(mode, 'edge', 0));
       this.stretchMode.internal = parseMode(GetValue$2_(mode, 'internal', 0));
     } else {
@@ -3304,7 +3304,7 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2Z = Phaser.Utils.Objects.GetValue;
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
@@ -3313,7 +3313,7 @@
       function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         var _this;
         _classCallCheck(this, NinePatch);
-        if (IsPlainObject$N(x)) {
+        if (IsPlainObject$O(x)) {
           config = x;
           x = GetValue$2Z(config, 'x', 0);
           y = GetValue$2Z(config, 'y', 0);
@@ -3323,7 +3323,7 @@
           baseFrame = GetValue$2Z(config, 'baseFrame', undefined);
           columns = GetValue$2Z(config, 'columns', undefined);
           rows = GetValue$2Z(config, 'rows', undefined);
-        } else if (IsPlainObject$N(width)) {
+        } else if (IsPlainObject$O(width)) {
           config = width;
           width = GetValue$2Z(config, 'width', 1);
           height = GetValue$2Z(config, 'height', 1);
@@ -3331,13 +3331,13 @@
           baseFrame = GetValue$2Z(config, 'baseFrame', undefined);
           columns = GetValue$2Z(config, 'columns', undefined);
           rows = GetValue$2Z(config, 'rows', undefined);
-        } else if (IsPlainObject$N(key)) {
+        } else if (IsPlainObject$O(key)) {
           config = key;
           key = GetValue$2Z(config, 'key', undefined);
           baseFrame = GetValue$2Z(config, 'baseFrame', undefined);
           columns = GetValue$2Z(config, 'columns', undefined);
           rows = GetValue$2Z(config, 'rows', undefined);
-        } else if (IsPlainObject$N(baseFrame)) {
+        } else if (IsPlainObject$O(baseFrame)) {
           config = baseFrame;
           baseFrame = GetValue$2Z(config, 'baseFrame', undefined);
           columns = GetValue$2Z(config, 'columns', undefined);
@@ -3347,7 +3347,7 @@
           rows = columns;
           columns = baseFrame;
           baseFrame = GetValue$2Z(config, 'baseFrame', undefined);
-        } else if (IsPlainObject$N(columns)) {
+        } else if (IsPlainObject$O(columns)) {
           config = columns;
           columns = GetValue$2Z(config, 'columns', undefined);
           rows = GetValue$2Z(config, 'rows', undefined);
@@ -3739,7 +3739,7 @@
 
   CheckP3Version();
   var GameObject$4 = Phaser.GameObjects.GameObject;
-  var IsPlainObject$M = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2X = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
@@ -3749,7 +3749,7 @@
     function Blitter(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, Blitter);
-      if (IsPlainObject$M(x)) {
+      if (IsPlainObject$N(x)) {
         config = x;
         x = GetValue$2X(config, 'x', 0);
         y = GetValue$2X(config, 'y', 0);
@@ -4376,7 +4376,7 @@
     ctx.restore();
   };
 
-  var IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$M = Phaser.Utils.Objects.IsPlainObject;
   var ImageData$1 = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
     var _super = _createSuper(ImageData);
@@ -4402,7 +4402,7 @@
     }, {
       key: "setFrame",
       value: function setFrame(frame) {
-        if (arguments.length > 0 && !IsPlainObject$L(frame)) {
+        if (arguments.length > 0 && !IsPlainObject$M(frame)) {
           frame = this.parent.texture.get(frame);
         }
         this.frame = frame;
@@ -4978,7 +4978,7 @@
   };
 
   var Shape$1 = Phaser.GameObjects.Shape;
-  var IsPlainObject$K = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2T = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle$1 = /*#__PURE__*/function (_Shape) {
@@ -4988,7 +4988,7 @@
       var _this;
       _classCallCheck(this, RoundRectangle);
       var strokeColor, strokeAlpha, strokeWidth, shapeType;
-      if (IsPlainObject$K(x)) {
+      if (IsPlainObject$L(x)) {
         var config = x;
         x = config.x;
         y = config.y;
@@ -8203,10 +8203,10 @@
     return WrapTextLinesPool;
   }(Stack);
 
-  var IsPlainObject$J = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$K = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2P = Phaser.Utils.Objects.GetValue;
   var AddImage$1 = function AddImage(key, config) {
-    if (IsPlainObject$J(key)) {
+    if (IsPlainObject$K(key)) {
       config = key;
       key = config.key;
     } else if (config === undefined) {
@@ -8361,7 +8361,7 @@
     return this;
   };
 
-  var IsPlainObject$I = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$J = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
@@ -8379,7 +8379,7 @@
     function Text(scene, x, y, text, style, type, parser) {
       var _this;
       _classCallCheck(this, Text);
-      if (IsPlainObject$I(x)) {
+      if (IsPlainObject$J(x)) {
         var config = x;
         x = GetValue$2O(config, 'x', 0);
         y = GetValue$2O(config, 'y', 0);
@@ -12820,7 +12820,7 @@
     return PoolManager;
   }();
 
-  var IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$I = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2E = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
@@ -12828,13 +12828,13 @@
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
-      if (IsPlainObject$H(x)) {
+      if (IsPlainObject$I(x)) {
         config = x;
         x = GetValue$2E(config, 'x', 0);
         y = GetValue$2E(config, 'y', 0);
         fixedWidth = GetValue$2E(config, 'width', 0);
         fixedHeight = GetValue$2E(config, 'height', 0);
-      } else if (IsPlainObject$H(fixedWidth)) {
+      } else if (IsPlainObject$I(fixedWidth)) {
         config = fixedWidth;
         fixedWidth = GetValue$2E(config, 'width', 0);
         fixedHeight = GetValue$2E(config, 'height', 0);
@@ -21324,7 +21324,7 @@
     }
   };
 
-  var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2l = Phaser.Utils.Objects.GetValue;
   var TextPlayer = /*#__PURE__*/function (_Extend) {
     _inherits(TextPlayer, _Extend);
@@ -21332,9 +21332,9 @@
     function TextPlayer(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, TextPlayer);
-      if (IsPlainObject$G(x)) {
+      if (IsPlainObject$H(x)) {
         config = x;
-      } else if (IsPlainObject$G(fixedWidth)) {
+      } else if (IsPlainObject$H(fixedWidth)) {
         config = fixedWidth;
       }
       if (config === undefined) {
@@ -22959,16 +22959,16 @@
     }
   };
 
-  var IsPlainObject$F = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
     _inherits(CanvasInput, _DynamicText);
     var _super = _createSuper(CanvasInput);
     function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, CanvasInput);
-      if (IsPlainObject$F(x)) {
+      if (IsPlainObject$G(x)) {
         config = x;
-      } else if (IsPlainObject$F(fixedWidth)) {
+      } else if (IsPlainObject$G(fixedWidth)) {
         config = fixedWidth;
       }
       if (config === undefined) {
@@ -25498,7 +25498,7 @@
   Object.assign(methods$r, StyleMethods$2, SizeMethods$1, ShapesUpdateMethods$4, CheckerAnimationMethods);
 
   var GetValue$2d = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$E = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$F = Phaser.Utils.Objects.IsPlainObject;
   var DefaultBoxFillColor = 0x005cb2;
   var DefaultCheckerColor = 0xffffff;
   var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
@@ -25507,14 +25507,14 @@
     function CheckboxShape(scene, x, y, width, height, color, config) {
       var _this;
       _classCallCheck(this, CheckboxShape);
-      if (IsPlainObject$E(x)) {
+      if (IsPlainObject$F(x)) {
         config = x;
         x = GetValue$2d(config, 'x', 0);
         y = GetValue$2d(config, 'y', 0);
         width = GetValue$2d(config, 'width', 2);
         height = GetValue$2d(config, 'height', 2);
         color = GetValue$2d(config, 'color', DefaultBoxFillColor);
-      } else if (IsPlainObject$E(color)) {
+      } else if (IsPlainObject$F(color)) {
         config = color;
         color = GetValue$2d(config, 'color', DefaultBoxFillColor);
       }
@@ -26043,7 +26043,7 @@
   };
 
   var GetValue$2a = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$D = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$E = Phaser.Utils.Objects.IsPlainObject;
   var DefaultTrackFillColor = 0x005cb2;
   var DefaultThumbFillColor = 0xffffff;
   var ToggleSwitchShape = /*#__PURE__*/function (_BaseShapes) {
@@ -26052,14 +26052,14 @@
     function ToggleSwitchShape(scene, x, y, width, height, color, config) {
       var _this;
       _classCallCheck(this, ToggleSwitchShape);
-      if (IsPlainObject$D(x)) {
+      if (IsPlainObject$E(x)) {
         config = x;
         x = GetValue$2a(config, 'x', 0);
         y = GetValue$2a(config, 'y', 0);
         width = GetValue$2a(config, 'width', 2);
         height = GetValue$2a(config, 'height', 2);
         color = GetValue$2a(config, 'color', DefaultTrackFillColor);
-      } else if (IsPlainObject$D(color)) {
+      } else if (IsPlainObject$E(color)) {
         config = color;
         color = GetValue$2a(config, 'color', DefaultTrackFillColor);
       }
@@ -26449,7 +26449,7 @@
   };
 
   var GetValue$27 = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$D = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$b = Phaser.Math.Clamp;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
@@ -26458,7 +26458,7 @@
     function CircularProgress(scene, x, y, radius, barColor, value, config) {
       var _this;
       _classCallCheck(this, CircularProgress);
-      if (IsPlainObject$C(x)) {
+      if (IsPlainObject$D(x)) {
         config = x;
         x = GetValue$27(config, 'x', 0);
         y = GetValue$27(config, 'y', 0);
@@ -26721,7 +26721,7 @@
   };
 
   var GetValue$26 = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$a = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   /*#__PURE__*/(function (_ProgressBase) {
@@ -26730,7 +26730,7 @@
     function CircularProgress(scene, x, y, radius, barColor, value, config) {
       var _this;
       _classCallCheck(this, CircularProgress);
-      if (IsPlainObject$B(x)) {
+      if (IsPlainObject$C(x)) {
         config = x;
         x = GetValue$26(config, 'x', 0);
         y = GetValue$26(config, 'y', 0);
@@ -27056,14 +27056,14 @@
   };
 
   var GetValue$25 = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
   var LineProgress$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(LineProgress, _ProgressBase);
     var _super = _createSuper(LineProgress);
     function LineProgress(scene, x, y, width, height, barColor, value, config) {
       var _this;
       _classCallCheck(this, LineProgress);
-      if (IsPlainObject$A(x)) {
+      if (IsPlainObject$B(x)) {
         config = x;
         x = GetValue$25(config, 'x', 0);
         y = GetValue$25(config, 'y', 0);
@@ -27071,13 +27071,13 @@
         height = GetValue$25(config, 'height', 2);
         barColor = GetValue$25(config, 'barColor', undefined);
         value = GetValue$25(config, 'value', 0);
-      } else if (IsPlainObject$A(width)) {
+      } else if (IsPlainObject$B(width)) {
         config = width;
         width = GetValue$25(config, 'width', 2);
         height = GetValue$25(config, 'height', 2);
         barColor = GetValue$25(config, 'barColor', undefined);
         value = GetValue$25(config, 'value', 0);
-      } else if (IsPlainObject$A(barColor)) {
+      } else if (IsPlainObject$B(barColor)) {
         config = barColor;
         barColor = GetValue$25(config, 'barColor', undefined);
         value = GetValue$25(config, 'value', 0);
@@ -27331,14 +27331,14 @@
   };
 
   var GetValue$24 = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$z = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
   var LineProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(LineProgress, _ProgressBase);
     var _super = _createSuper(LineProgress);
     function LineProgress(scene, x, y, width, height, barColor, value, config) {
       var _this;
       _classCallCheck(this, LineProgress);
-      if (IsPlainObject$z(x)) {
+      if (IsPlainObject$A(x)) {
         config = x;
         x = GetValue$24(config, 'x', 0);
         y = GetValue$24(config, 'y', 0);
@@ -27346,13 +27346,13 @@
         height = GetValue$24(config, 'height', 2);
         barColor = GetValue$24(config, 'barColor', undefined);
         value = GetValue$24(config, 'value', 0);
-      } else if (IsPlainObject$z(width)) {
+      } else if (IsPlainObject$A(width)) {
         config = width;
         width = GetValue$24(config, 'width', 2);
         height = GetValue$24(config, 'height', 2);
         barColor = GetValue$24(config, 'barColor', undefined);
         value = GetValue$24(config, 'value', 0);
-      } else if (IsPlainObject$z(barColor)) {
+      } else if (IsPlainObject$A(barColor)) {
         config = barColor;
         barColor = GetValue$24(config, 'barColor', undefined);
         value = GetValue$24(config, 'value', 0);
@@ -27672,7 +27672,7 @@
   };
 
   var GetValue$23 = Phaser.Utils.Objects.GetValue;
-  var IsPlainObject$y = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$z = Phaser.Utils.Objects.IsPlainObject;
   var DegToRad$4 = Phaser.Math.DegToRad;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var Triangle = /*#__PURE__*/function (_BaseShapes) {
@@ -27684,7 +27684,7 @@
       var strokeColor, strokeAlpha, strokeWidth, arrowOnly;
       var direction, easeDuration, padding;
       var radius;
-      if (IsPlainObject$y(x)) {
+      if (IsPlainObject$z(x)) {
         var config = x;
         x = config.x;
         y = config.y;
@@ -29456,7 +29456,7 @@
     return scale;
   };
 
-  var IsPlainObject$x = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$y = Phaser.Utils.Objects.IsPlainObject;
   var OnInitScale = function OnInitScale(gameObject, scale) {
     // Route 'complete' of scale to gameObject
     scale.completeEventName = undefined;
@@ -29477,7 +29477,7 @@
   };
   var ScaleMethods = {
     popUp: function popUp(duration, orientation, ease) {
-      if (IsPlainObject$x(duration)) {
+      if (IsPlainObject$y(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -29496,7 +29496,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
-      if (IsPlainObject$x(duration)) {
+      if (IsPlainObject$y(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -29524,7 +29524,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
-      if (IsPlainObject$x(duration)) {
+      if (IsPlainObject$y(duration)) {
         var config = duration;
         duration = config.duration;
         peakValue = config.peakValue;
@@ -29629,10 +29629,10 @@
     yoyo: 2
   };
 
-  var IsPlainObject$w = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$x = Phaser.Utils.Objects.IsPlainObject;
   var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;
-    if (IsPlainObject$w(alpha)) {
+    if (IsPlainObject$x(alpha)) {
       startAlpha = alpha.start;
       endAlpha = alpha.end;
     } else {
@@ -29681,7 +29681,7 @@
     return fade;
   };
 
-  var IsPlainObject$v = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$w = Phaser.Utils.Objects.IsPlainObject;
   var OnInitFade = function OnInitFade(gameObject, fade) {
     // Route 'complete' of fade to gameObject
     fade.completeEventName = undefined;
@@ -29702,7 +29702,7 @@
   };
   var FadeMethods = {
     fadeIn: function fadeIn(duration, alpha) {
-      if (IsPlainObject$v(duration)) {
+      if (IsPlainObject$w(duration)) {
         var config = duration;
         duration = config.duration;
         alpha = config.alpha;
@@ -29720,7 +29720,7 @@
       return WaitComplete(this._fade);
     },
     fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
-      if (IsPlainObject$v(duration)) {
+      if (IsPlainObject$w(duration)) {
         var config = duration;
         duration = config.duration;
         destroyMode = config.destroy;
@@ -29939,7 +29939,7 @@
     return easeMove;
   };
 
-  var IsPlainObject$u = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$v = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween$5 = Phaser.Math.Distance.Between;
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -29961,7 +29961,7 @@
   };
   var EaseMoveMethods = {
     moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$u(duration)) {
+      if (IsPlainObject$v(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -29993,7 +29993,7 @@
       return WaitComplete(this._easeMove);
     },
     moveTo: function moveTo(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$u(duration)) {
+      if (IsPlainObject$v(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -30284,7 +30284,7 @@
     decay: 1
   };
 
-  var IsPlainObject$t = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$u = Phaser.Utils.Objects.IsPlainObject;
   var OnInitShake = function OnInitShake(gameObject, shake) {
     // Route 'complete' of shake to gameObject
     shake.on('complete', function () {
@@ -30296,7 +30296,7 @@
 
   var ShakeMethods = {
     shake: function shake(duration, magnitude, magnitudeMode) {
-      if (IsPlainObject$t(duration)) {
+      if (IsPlainObject$u(duration)) {
         var config = duration;
         duration = config.duration;
         magnitude = config.magnitude;
@@ -30327,7 +30327,7 @@
     }
   };
 
-  var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$t = Phaser.Utils.Objects.IsPlainObject;
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
     var _super = _createSuper(EaseData);
@@ -30361,7 +30361,7 @@
     }, {
       key: "easeTo",
       value: function easeTo(key, value, duration, ease) {
-        if (IsPlainObject$s(key)) {
+        if (IsPlainObject$t(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -30390,7 +30390,7 @@
     }, {
       key: "easeFrom",
       value: function easeFrom(key, value, duration, ease) {
-        if (IsPlainObject$s(key)) {
+        if (IsPlainObject$t(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -32407,37 +32407,45 @@
     }
   };
 
-  var SetDraggable = function SetDraggable(senser, draggable, dragTarget) {
-    var senserType = _typeof(senser);
-    if (senserType === 'string') {
-      var senserName = senser;
-      senser = this.getElement(senserName);
-      if (!senser) {
-        console.error("Can get element '".concat(senserName, "'"));
+  var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
+  var SetDraggable = function SetDraggable(sensor, draggable, dragTarget) {
+    if (IsPlainObject$s(sensor)) {
+      var config = sensor;
+      sensor = config.sensor;
+      dragTarget = config.target;
+      draggable = config.draggable;
+    } else {
+      if (typeof draggable !== 'boolean') {
+        dragTarget = draggable;
+        draggable = undefined;
+      }
+    }
+    var sensorType = _typeof(sensor);
+    if (sensorType === 'string') {
+      var sensorName = sensor;
+      sensor = this.getElement(sensorName);
+      if (!sensor) {
+        console.error("Can get element '".concat(sensorName, "'"));
         return this;
       }
-    } else if (senser === undefined || senserType != 'object') {
-      draggable = senser;
-      senser = this;
-    }
-    if (typeof draggable !== 'boolean') {
-      dragTarget = draggable;
-      draggable = undefined;
+    } else if (sensor === undefined || sensorType != 'object') {
+      draggable = sensor;
+      sensor = this;
     }
     if (draggable === undefined) {
       draggable = true;
     }
-    if (senser.input && senser.input._rexUIDragSizer) {
+    if (sensor.input && sensor.input._rexUIDragSizer) {
       // Draggable is already registered
-      senser.input.draggable = draggable;
+      sensor.input.draggable = draggable;
     } else if (draggable) {
       // Register draggable
-      senser.setInteractive();
-      senser.scene.input.setDraggable(senser);
-      senser.on('drag', function (pointer, dragX, dragY) {
+      sensor.setInteractive();
+      sensor.scene.input.setDraggable(sensor);
+      sensor.on('drag', function (pointer, dragX, dragY) {
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
-        currentDragTarget.x += dragX - senser.x;
-        currentDragTarget.y += dragY - senser.y;
+        currentDragTarget.x += dragX - sensor.x;
+        currentDragTarget.y += dragY - sensor.y;
         currentDragTarget.emit('sizer.drag', pointer, dragX, dragY);
       }, this).on('dragstart', function (pointer, dragX, dragY) {
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
@@ -32449,7 +32457,7 @@
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
         currentDragTarget.emit('sizer.drop', pointer, dropZone);
       });
-      senser.input._rexUIDragSizer = true;
+      sensor.input._rexUIDragSizer = true;
     } else ;
     return this;
   };

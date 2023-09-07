@@ -1,38 +1,46 @@
-var SetDraggable = function (senser, draggable, dragTarget) {
-    var senserType = typeof (senser);
-    if (senserType === 'string') {
-        var senserName = senser;
-        senser = this.getElement(senserName);
-        if (!senser) {
-            console.error(`Can get element '${senserName}'`);
-            return this;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+var SetDraggable = function (sensor, draggable, dragTarget) {
+    if (IsPlainObject(sensor)) {
+        var config = sensor;
+        sensor = config.sensor;
+        dragTarget = config.target;
+        draggable = config.draggable;
+    } else {
+        if (typeof (draggable) !== 'boolean') {
+            dragTarget = draggable;
+            draggable = undefined;
         }
-    } else if ((senser === undefined) || (senserType != 'object')) {
-        draggable = senser;
-        senser = this;
     }
 
-    if (typeof (draggable) !== 'boolean') {
-        dragTarget = draggable;
-        draggable = undefined;
+    var sensorType = typeof (sensor);
+    if (sensorType === 'string') {
+        var sensorName = sensor;
+        sensor = this.getElement(sensorName);
+        if (!sensor) {
+            console.error(`Can get element '${sensorName}'`);
+            return this;
+        }
+    } else if ((sensor === undefined) || (sensorType != 'object')) {
+        draggable = sensor;
+        sensor = this;
     }
 
     if (draggable === undefined) {
         draggable = true;
     }
 
-    if (senser.input && senser.input._rexUIDragSizer) {
+    if (sensor.input && sensor.input._rexUIDragSizer) {
         // Draggable is already registered
-        senser.input.draggable = draggable;
+        sensor.input.draggable = draggable;
     } else if (draggable) {
         // Register draggable
-        senser.setInteractive();
-        senser.scene.input.setDraggable(senser);
-        senser
+        sensor.setInteractive();
+        sensor.scene.input.setDraggable(sensor);
+        sensor
             .on('drag', function (pointer, dragX, dragY) {
                 var currentDragTarget = (dragTarget === undefined) ? this.getTopmostSizer() : dragTarget;
-                currentDragTarget.x += (dragX - senser.x);
-                currentDragTarget.y += (dragY - senser.y);
+                currentDragTarget.x += (dragX - sensor.x);
+                currentDragTarget.y += (dragY - sensor.y);
                 currentDragTarget.emit('sizer.drag', pointer, dragX, dragY);
             }, this)
             .on('dragstart', function (pointer, dragX, dragY) {
@@ -47,7 +55,7 @@ var SetDraggable = function (senser, draggable, dragTarget) {
                 var currentDragTarget = (dragTarget === undefined) ? this.getTopmostSizer() : dragTarget;
                 currentDragTarget.emit('sizer.drop', pointer, dropZone);
             });
-        senser.input._rexUIDragSizer = true;
+        sensor.input._rexUIDragSizer = true;
     } else {
         // Not draggable and draggable is not registered yet, do nothing
     }

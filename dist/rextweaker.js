@@ -4813,7 +4813,7 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var IsPlainObject$r = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
   var OnInitScale = function OnInitScale(gameObject, scale) {
     // Route 'complete' of scale to gameObject
     scale.completeEventName = undefined;
@@ -4834,7 +4834,7 @@
   };
   var ScaleMethods = {
     popUp: function popUp(duration, orientation, ease) {
-      if (IsPlainObject$r(duration)) {
+      if (IsPlainObject$s(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -4853,7 +4853,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
-      if (IsPlainObject$r(duration)) {
+      if (IsPlainObject$s(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -4881,7 +4881,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
-      if (IsPlainObject$r(duration)) {
+      if (IsPlainObject$s(duration)) {
         var config = duration;
         duration = config.duration;
         peakValue = config.peakValue;
@@ -4986,10 +4986,10 @@
     yoyo: 2
   };
 
-  var IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$r = Phaser.Utils.Objects.IsPlainObject;
   var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;
-    if (IsPlainObject$q(alpha)) {
+    if (IsPlainObject$r(alpha)) {
       startAlpha = alpha.start;
       endAlpha = alpha.end;
     } else {
@@ -5038,7 +5038,7 @@
     return fade;
   };
 
-  var IsPlainObject$p = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
   var OnInitFade = function OnInitFade(gameObject, fade) {
     // Route 'complete' of fade to gameObject
     fade.completeEventName = undefined;
@@ -5059,7 +5059,7 @@
   };
   var FadeMethods = {
     fadeIn: function fadeIn(duration, alpha) {
-      if (IsPlainObject$p(duration)) {
+      if (IsPlainObject$q(duration)) {
         var config = duration;
         duration = config.duration;
         alpha = config.alpha;
@@ -5077,7 +5077,7 @@
       return WaitComplete(this._fade);
     },
     fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
-      if (IsPlainObject$p(duration)) {
+      if (IsPlainObject$q(duration)) {
         var config = duration;
         duration = config.duration;
         destroyMode = config.destroy;
@@ -5296,7 +5296,7 @@
     return easeMove;
   };
 
-  var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$p = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween$6 = Phaser.Math.Distance.Between;
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -5318,7 +5318,7 @@
   };
   var EaseMoveMethods = {
     moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$o(duration)) {
+      if (IsPlainObject$p(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -5350,7 +5350,7 @@
       return WaitComplete(this._easeMove);
     },
     moveTo: function moveTo(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$o(duration)) {
+      if (IsPlainObject$p(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -5641,7 +5641,7 @@
     decay: 1
   };
 
-  var IsPlainObject$n = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
   var OnInitShake = function OnInitShake(gameObject, shake) {
     // Route 'complete' of shake to gameObject
     shake.on('complete', function () {
@@ -5653,7 +5653,7 @@
 
   var ShakeMethods = {
     shake: function shake(duration, magnitude, magnitudeMode) {
-      if (IsPlainObject$n(duration)) {
+      if (IsPlainObject$o(duration)) {
         var config = duration;
         duration = config.duration;
         magnitude = config.magnitude;
@@ -5732,7 +5732,7 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var IsPlainObject$m = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$n = Phaser.Utils.Objects.IsPlainObject;
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
     var _super = _createSuper(EaseData);
@@ -5766,7 +5766,7 @@
     }, {
       key: "easeTo",
       value: function easeTo(key, value, duration, ease) {
-        if (IsPlainObject$m(key)) {
+        if (IsPlainObject$n(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -5795,7 +5795,7 @@
     }, {
       key: "easeFrom",
       value: function easeFrom(key, value, duration, ease) {
-        if (IsPlainObject$m(key)) {
+        if (IsPlainObject$n(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -7866,37 +7866,45 @@
     }
   };
 
-  var SetDraggable = function SetDraggable(senser, draggable, dragTarget) {
-    var senserType = _typeof(senser);
-    if (senserType === 'string') {
-      var senserName = senser;
-      senser = this.getElement(senserName);
-      if (!senser) {
-        console.error("Can get element '".concat(senserName, "'"));
+  var IsPlainObject$m = Phaser.Utils.Objects.IsPlainObject;
+  var SetDraggable = function SetDraggable(sensor, draggable, dragTarget) {
+    if (IsPlainObject$m(sensor)) {
+      var config = sensor;
+      sensor = config.sensor;
+      dragTarget = config.target;
+      draggable = config.draggable;
+    } else {
+      if (typeof draggable !== 'boolean') {
+        dragTarget = draggable;
+        draggable = undefined;
+      }
+    }
+    var sensorType = _typeof(sensor);
+    if (sensorType === 'string') {
+      var sensorName = sensor;
+      sensor = this.getElement(sensorName);
+      if (!sensor) {
+        console.error("Can get element '".concat(sensorName, "'"));
         return this;
       }
-    } else if (senser === undefined || senserType != 'object') {
-      draggable = senser;
-      senser = this;
-    }
-    if (typeof draggable !== 'boolean') {
-      dragTarget = draggable;
-      draggable = undefined;
+    } else if (sensor === undefined || sensorType != 'object') {
+      draggable = sensor;
+      sensor = this;
     }
     if (draggable === undefined) {
       draggable = true;
     }
-    if (senser.input && senser.input._rexUIDragSizer) {
+    if (sensor.input && sensor.input._rexUIDragSizer) {
       // Draggable is already registered
-      senser.input.draggable = draggable;
+      sensor.input.draggable = draggable;
     } else if (draggable) {
       // Register draggable
-      senser.setInteractive();
-      senser.scene.input.setDraggable(senser);
-      senser.on('drag', function (pointer, dragX, dragY) {
+      sensor.setInteractive();
+      sensor.scene.input.setDraggable(sensor);
+      sensor.on('drag', function (pointer, dragX, dragY) {
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
-        currentDragTarget.x += dragX - senser.x;
-        currentDragTarget.y += dragY - senser.y;
+        currentDragTarget.x += dragX - sensor.x;
+        currentDragTarget.y += dragY - sensor.y;
         currentDragTarget.emit('sizer.drag', pointer, dragX, dragY);
       }, this).on('dragstart', function (pointer, dragX, dragY) {
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
@@ -7908,7 +7916,7 @@
         var currentDragTarget = dragTarget === undefined ? this.getTopmostSizer() : dragTarget;
         currentDragTarget.emit('sizer.drop', pointer, dropZone);
       });
-      senser.input._rexUIDragSizer = true;
+      sensor.input._rexUIDragSizer = true;
     } else ;
     return this;
   };

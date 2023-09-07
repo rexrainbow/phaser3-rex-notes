@@ -25,7 +25,10 @@ var CreateItem = function (scene, text) {
 var SetDraggable = function (item) {
     // Drag item by itself
     item
-        .setDraggable(item, item)
+        .setDraggable({
+            sensor: item,
+            target: item
+        })
 
         // Change appearance of item
         .on('sizer.dragstart', OnItemDragStart, item)

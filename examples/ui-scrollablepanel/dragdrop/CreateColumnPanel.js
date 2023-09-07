@@ -45,7 +45,10 @@ var CreateTitle = function (scene, text) {
 var SetDraggable = function (panel) {
     // Drag panel by title element
     panel
-        .setDraggable('title', panel)
+        .setDraggable({
+            sensor: 'title',
+            target: panel
+        })
 
         // Change appearance of panel
         .on('sizer.dragstart', OnPanelDragStart, panel)
