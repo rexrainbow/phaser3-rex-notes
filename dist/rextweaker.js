@@ -25525,6 +25525,10 @@
   };
 
   var FireEvent = function FireEvent(eventName, button) {
+    if (!this.buttons) {
+      // ButtonGroup has been destroyed
+      return;
+    }
     var index;
     if (typeof button === 'number') {
       index = button;
