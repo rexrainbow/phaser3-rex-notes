@@ -29,6 +29,12 @@ declare class LayerManager extends GOManager {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    removeFromLayer(
+        name: string,
+        gameObject: Phaser.GameObjects.GameObject,
+        addToScene?: boolean
+    ): this;
+
     clearLayer(
         name: string,
         destroyChildren?: boolean

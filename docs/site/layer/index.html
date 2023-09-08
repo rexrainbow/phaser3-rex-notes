@@ -2695,6 +2695,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9569,6 +9576,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9801,6 +9815,20 @@
 <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">setAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// layer.setAll(property, value, startIndex, endIndex);</span>
 </code></pre></div>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On add game object
+    <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addedtoscene&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">scene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On remove game object
+    <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedfromscene&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">scene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+<p><code>layer.events</code> references to <code>scene.events</code>.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
 <h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>

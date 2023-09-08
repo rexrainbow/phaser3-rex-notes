@@ -37,21 +37,34 @@ export default {
             gameObjects = [gameObjects];
         }
 
+        var self = this;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
             let gameObject = gameObjects[i];
-            let isMonitored = this.isMonitored(gameObject);
 
             this.layerManager.addToLayer(this.monitorLayerName, gameObject);
 
-            if (!isMonitored) {
-                gameObject
-                    .setInteractive()
-                    .on('pointerdown', function () {
-                        this.setBindingTarget(gameObject);
-                    }, this)
+            gameObject.setInteractive();
+
+            if (!gameObject.removeFromMonitorLayerCallback) {
+                var OnOpenEditor = function () {
+                    self.setBindingTarget(gameObject);
+                }
+                gameObject.on('pointerdown', OnOpenEditor);
+                gameObject.removeFromMonitorLayerCallback = function () {
+                    gameObject.removeFromMonitorLayerCallback = undefined;
+                    gameObject.off('pointerdown', OnOpenEditor);
+                }
             }
         }
 
+        return this;
+    },
+
+    removeFromMonitorLayer(gameObject, addToScene) {
+        this.layerManager.removeFromLayer(this.monitorLayerName, gameObject, addToScene);
+        if (gameObject.removeFromMonitorLayerCallback) {
+            gameObject.removeFromMonitorLayerCallback();
+        }
         return this;
     },
 
@@ -79,10 +92,6 @@ export default {
 
     getMonitorGameObjects() {
         return this.layerManager.getLayer(this.monitorLayerName).getAll();
-    },
-
-    isMonitored(gameObject) {
-        return this.layerManager.getLayer(this.monitorLayerName).exists(gameObject);
     },
 
 }

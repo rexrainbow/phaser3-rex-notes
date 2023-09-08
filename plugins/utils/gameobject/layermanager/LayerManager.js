@@ -77,6 +77,29 @@ class LayerManager extends GOManager {
         return this;
     }
 
+    removeFromLayer(name, gameObject, addToScene) {
+        var layer = this.getGO(name);
+        if (!layer) {
+            console.warn(`Can't get layer "${name}"`);
+            return;
+        }
+
+        if (addToScene === undefined) {
+            addToScene = true;
+        }
+
+        if (gameObject.isRexContainerLite) {
+            gameObject.removeFromLayer(layer, addToScene);
+        } else {
+            layer.remove(gameObject);
+            if (addToScene) {
+                gameObject.addToDisplayList();
+            }
+        }
+
+        return this;
+    }
+
     clearLayer(name, destroyChildren) {
         if (destroyChildren === undefined) {
             destroyChildren = true;

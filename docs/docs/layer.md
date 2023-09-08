@@ -223,6 +223,23 @@ layer.setAll(property, value);
 // layer.setAll(property, value, startIndex, endIndex);
 ```
 
+### Events
+
+- On add game object
+    ```javascript
+    layer.events.on('addedtoscene', function(gameObject, scene) {
+
+    })
+    ```
+- On remove game object
+    ```javascript
+    layer.events.on('removedfromscene', function(gameObject, scene) {
+
+    })
+    ```
+
+`layer.events` references to `scene.events`.
+
 ### Other properties
 
 See [game object](gameobject.md)

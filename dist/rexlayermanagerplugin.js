@@ -3125,6 +3125,27 @@
         return this;
       }
     }, {
+      key: "removeFromLayer",
+      value: function removeFromLayer(name, gameObject, addToScene) {
+        var layer = this.getGO(name);
+        if (!layer) {
+          console.warn("Can't get layer \"".concat(name, "\""));
+          return;
+        }
+        if (addToScene === undefined) {
+          addToScene = true;
+        }
+        if (gameObject.isRexContainerLite) {
+          gameObject.removeFromLayer(layer, addToScene);
+        } else {
+          layer.remove(gameObject);
+          if (addToScene) {
+            gameObject.addToDisplayList();
+          }
+        }
+        return this;
+      }
+    }, {
       key: "clearLayer",
       value: function clearLayer(name, destroyChildren) {
         if (destroyChildren === undefined) {

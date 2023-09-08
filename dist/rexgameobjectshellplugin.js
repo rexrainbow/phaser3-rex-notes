@@ -15702,6 +15702,27 @@
         return this;
       }
     }, {
+      key: "removeFromLayer",
+      value: function removeFromLayer(name, gameObject, addToScene) {
+        var layer = this.getGO(name);
+        if (!layer) {
+          console.warn("Can't get layer \"".concat(name, "\""));
+          return;
+        }
+        if (addToScene === undefined) {
+          addToScene = true;
+        }
+        if (gameObject.isRexContainerLite) {
+          gameObject.removeFromLayer(layer, addToScene);
+        } else {
+          layer.remove(gameObject);
+          if (addToScene) {
+            gameObject.addToDisplayList();
+          }
+        }
+        return this;
+      }
+    }, {
       key: "clearLayer",
       value: function clearLayer(name, destroyChildren) {
         if (destroyChildren === undefined) {
@@ -56714,18 +56735,32 @@
       if (!Array.isArray(gameObjects)) {
         gameObjects = [gameObjects];
       }
+      var self = this;
       var _loop = function _loop() {
         var gameObject = gameObjects[i];
-        var isMonitored = _this.isMonitored(gameObject);
         _this.layerManager.addToLayer(_this.monitorLayerName, gameObject);
-        if (!isMonitored) {
-          gameObject.setInteractive().on('pointerdown', function () {
-            this.setBindingTarget(gameObject);
-          }, _this);
+        gameObject.setInteractive();
+        if (!gameObject.removeFromMonitorLayerCallback) {
+          OnOpenEditor = function OnOpenEditor() {
+            self.setBindingTarget(gameObject);
+          };
+          gameObject.on('pointerdown', OnOpenEditor);
+          gameObject.removeFromMonitorLayerCallback = function () {
+            gameObject.removeFromMonitorLayerCallback = undefined;
+            gameObject.off('pointerdown', OnOpenEditor);
+          };
         }
       };
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var OnOpenEditor;
         _loop();
+      }
+      return this;
+    },
+    removeFromMonitorLayer: function removeFromMonitorLayer(gameObject, addToScene) {
+      this.layerManager.removeFromLayer(this.monitorLayerName, gameObject, addToScene);
+      if (gameObject.removeFromMonitorLayerCallback) {
+        gameObject.removeFromMonitorLayerCallback();
       }
       return this;
     },
@@ -56748,9 +56783,6 @@
     },
     getMonitorGameObjects: function getMonitorGameObjects() {
       return this.layerManager.getLayer(this.monitorLayerName).getAll();
-    },
-    isMonitored: function isMonitored(gameObject) {
-      return this.layerManager.getLayer(this.monitorLayerName).exists(gameObject);
     }
   };
 
