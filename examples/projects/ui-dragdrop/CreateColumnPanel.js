@@ -1,4 +1,5 @@
 import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import { DefaultDepth, DragObjectDepth } from './Const.js';
 import CreateItemsBox from './CreateItemsBox.js';
 
 var CreateColumnPanel = function (scene, title, itemCount) {
@@ -57,12 +58,12 @@ var SetDraggable = function (panel) {
 }
 
 var OnPanelDragStart = function () {
-    this.setDepth(1);
-    this.getElement('background').setStrokeStyle(3, 0xff0000);    
+    this.setDepth(DragObjectDepth);
+    this.getElement('background').setStrokeStyle(3, 0xff0000);
 }
 
 var OnPanelDragEnd = function () {
-    this.setDepth(0);
+    this.setDepth(DefaultDepth);
     this.getElement('background').setStrokeStyle(2, COLOR_DARK);
 }
 

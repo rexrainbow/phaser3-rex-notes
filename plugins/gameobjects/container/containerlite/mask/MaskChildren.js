@@ -20,9 +20,6 @@ var MaskChildren = function (parent, mask, children) {
         child = children[i];
 
         // Ignore ContainerLite child
-        if (child.hasOwnProperty('isRexContainerLite')) {
-            continue;
-        }
         if (child === maskGameObject) {
             continue;
         }
@@ -93,24 +90,55 @@ var ContainsPoints = function (rectA, rectB) {
 };
 
 var ShowAll = function (parent, child, mask) {
-    if (child.clearMask) {
-        child.clearMask();
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+        if (child.clearMask) {
+            child.clearMask();
+        }
+
+        parent.setChildMaskVisible(child, true);
+
+    } else {
+        child.syncChildrenEnable = false;
+        parent.setChildMaskVisible(child, true);
+        child.syncChildrenEnable = true;
+
     }
-    parent.setChildMaskVisible(child, true);
+
 }
 
 var ShowSome = function (parent, child, mask) {
-    if (child.setMask) {
-        child.setMask(mask);
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+        if (child.setMask) {
+            child.setMask(mask);
+        }
+
+        parent.setChildMaskVisible(child, true);
+
+    } else {
+        child.syncChildrenEnable = false;
+        parent.setChildMaskVisible(child, true);
+        child.syncChildrenEnable = true;
+
     }
-    parent.setChildMaskVisible(child, true);
+
 }
 
 var ShowNone = function (parent, child, mask) {
-    if (child.clearMask) {
-        child.clearMask();
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+        if (child.clearMask) {
+            child.clearMask();
+        }
+
+        parent.setChildMaskVisible(child, false);
+
+    } else {
+        child.syncChildrenEnable = false;
+        parent.setChildMaskVisible(child, false);
+        child.syncChildrenEnable = true;
+
     }
-    parent.setChildMaskVisible(child, false);
+
+
 }
 
 export default MaskChildren;

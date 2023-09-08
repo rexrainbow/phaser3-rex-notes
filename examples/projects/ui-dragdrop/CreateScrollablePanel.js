@@ -2,7 +2,7 @@ import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
 import CreateColumnPanelsBox from './CreateColumnPanelsBox.js';
 
 var CreateScrollablePanel = function (scene, itemCountArray) {
-    return scene.rexUI.add.scrollablePanel({
+    var scrollablePanel = scene.rexUI.add.scrollablePanel({
         width: 400, height: 400,
 
         background: scene.rexUI.add.roundRectangle({
@@ -37,6 +37,8 @@ var CreateScrollablePanel = function (scene, itemCountArray) {
             sliderX: 10, sliderY: 10
         },
     })
+
+    return scrollablePanel;
 }
 
 export default CreateScrollablePanel;

@@ -1,4 +1,5 @@
 import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import { DefaultDepth, DragObjectDepth } from './Const.js';
 
 var CreateItem = function (scene, text) {
     var item = scene.rexUI.add.label({
@@ -36,12 +37,12 @@ var SetDraggable = function (item) {
 }
 
 var OnItemDragStart = function () {
-    this.setDepth(1);
+    this.setDepth(DragObjectDepth);
     this.getElement('background').setStrokeStyle(3, 0xff0000);
 }
 
 var OnItemDragEnd = function () {
-    this.setDepth(0);
+    this.setDepth(DefaultDepth);
     this.getElement('background').setStrokeStyle();
 }
 

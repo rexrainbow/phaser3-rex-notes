@@ -3212,9 +3212,6 @@
       child = children[i];
 
       // Ignore ContainerLite child
-      if (child.hasOwnProperty('isRexContainerLite')) {
-        continue;
-      }
       if (child === maskGameObject) {
         continue;
       }
@@ -3288,22 +3285,40 @@
     return result;
   };
   var ShowAll = function ShowAll(parent, child, mask) {
-    if (child.clearMask) {
-      child.clearMask();
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+      if (child.clearMask) {
+        child.clearMask();
+      }
+      parent.setChildMaskVisible(child, true);
+    } else {
+      child.syncChildrenEnable = false;
+      parent.setChildMaskVisible(child, true);
+      child.syncChildrenEnable = true;
     }
-    parent.setChildMaskVisible(child, true);
   };
   var ShowSome = function ShowSome(parent, child, mask) {
-    if (child.setMask) {
-      child.setMask(mask);
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+      if (child.setMask) {
+        child.setMask(mask);
+      }
+      parent.setChildMaskVisible(child, true);
+    } else {
+      child.syncChildrenEnable = false;
+      parent.setChildMaskVisible(child, true);
+      child.syncChildrenEnable = true;
     }
-    parent.setChildMaskVisible(child, true);
   };
   var ShowNone = function ShowNone(parent, child, mask) {
-    if (child.clearMask) {
-      child.clearMask();
+    if (!child.hasOwnProperty('isRexContainerLite')) {
+      if (child.clearMask) {
+        child.clearMask();
+      }
+      parent.setChildMaskVisible(child, false);
+    } else {
+      child.syncChildrenEnable = false;
+      parent.setChildMaskVisible(child, false);
+      child.syncChildrenEnable = true;
     }
-    parent.setChildMaskVisible(child, false);
   };
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
