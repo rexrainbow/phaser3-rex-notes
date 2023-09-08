@@ -18534,8 +18534,6 @@
     var child, childBounds, visiblePointsNumber;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
-
-      // Ignore ContainerLite child
       if (child === maskGameObject) {
         continue;
       }
