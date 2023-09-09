@@ -10,16 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/pretfx-pipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/prefx-pipeline/">
       
       
+        <link rel="prev" href="../effect-properties/">
+      
+      
+        <link rel="next" href="../postfx-pipeline/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Pretfx pipeline - Notes of Phaser 3</title>
+        <title>Pre fx pipeline - Notes of Phaser 3</title>
       
     
     
@@ -113,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pretfx pipeline
+              Pre fx pipeline
             
           </span>
         </div>
@@ -4830,14 +4834,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
       
       
       
@@ -4846,7 +4852,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
           Shader effects
@@ -4919,11 +4925,123 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../prefx-pipeline.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Pre fx pipeline
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Pre fx pipeline
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-fx-pipeline-class" class="md-nav__link">
+    Post fx pipeline class
+  </a>
+  
+    <nav class="md-nav" aria-label="Post fx pipeline class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-uniform-values" class="md-nav__link">
+    Set uniform values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ondraw" class="md-nav__link">
+    onDraw
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-pre-fx-pipeline-instance" class="md-nav__link">
+    Add pre-fx pipeline instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-pre-fx-pipeline" class="md-nav__link">
+    Get pre-fx pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-to-default-effect" class="md-nav__link">
+    Reset to default effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unregister-pre-fx-pipeline" class="md-nav__link">
+    Unregister pre-fx pipeline
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -9450,7 +9568,7 @@
   
 
 
-  <h1>Pretfx pipeline</h1>
+  <h1>Pre fx pipeline</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Pre fx pipelines for texture-base game objects. 
@@ -9545,7 +9663,7 @@ A texture-base game object has a pre-fx effect.</p>
 </ul>
 <h4 id="ondraw">onDraw<a class="headerlink" href="#ondraw" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="prefx-pipeline.md#set-uniform-values">Set uniform values</a> in <code>onDraw</code> method.</li>
+<li><a href="./#set-uniform-values">Set uniform values</a> in <code>onDraw</code> method.</li>
 </ul>
 <h3 id="add-pre-fx-pipeline-instance">Add pre-fx pipeline instance<a class="headerlink" href="#add-pre-fx-pipeline-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">;</span>
