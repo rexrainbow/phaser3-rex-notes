@@ -254,6 +254,7 @@ nav:
     - Built-in shader effects:
         - Effects : shader-builtin.md
         - Effect properties: effect-properties.md
+    - Pre fx pipeline: prefx-pipeline.md
     - Post fx pipeline: postfx-pipeline.md    
     - Color:
         - Glow: shader-glowfilter.md

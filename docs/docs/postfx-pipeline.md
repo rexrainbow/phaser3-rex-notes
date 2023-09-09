@@ -1,6 +1,7 @@
 ## Introduction
 
-Post fx pipelines for game objects or camera.
+Post fx pipelines for game objects or camera. 
+A game object or a camera can stack many post-fx effect.
 
 - Author: Richard Davey
 
@@ -145,30 +146,31 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
 
 ### Apply effect
 
-- Apply effect to game object
-    ```javascript
-    gameObject.setPostPipeline(MyPostFxClass);
-    ```
-- Apply effect to camera
-    ```javascript
-    camera.setPostPipeline(MyPostFxClass);
-    ```
+```javascript
+gameObject.setPostPipeline(MyPostFxClass);
+```
+```javascript
+camera.setPostPipeline(MyPostFxClass);
+```
+
+Will create an effect instance then push it into postPipelines list.
 
 ### Get post-fx pipeline
 
-- Get post-fx pipeline from game ovject
-    ```javascript
-    var pipelineInstance = gameObject.getPostPipeline(MyPostFxClass);
-    ```
-- Get post-fx pipeline from camera
-    ```javascript
-    var pipelineInstance = camera.getPostPipeline(MyPostFxClass);
-    ```
+```javascript
+var pipelineInstance = gameObject.getPostPipeline(MyPostFxClass);
+```
+```javascript
+var pipelineInstance = camera.getPostPipeline(MyPostFxClass);
+```
 
 ### Remove post-fx pipeline
 
 ```javascript
 gameObject.removePostPipeline(MyPostFxClass);
+```
+```javascript
+camera.removePostPipeline(MyPostFxClass);
 ```
 
 ### Unregister post-fx pipeline

@@ -33,11 +33,11 @@ class RedFX extends Phaser.Renderer.WebGL.Pipelines.PreFXPipeline {
         });
     }
 
-    onDraw(target1) {
+    onDraw(renderTarget) {
         var sprite = this.tempSprite;
         this.set1f('uOffset', sprite.redFxOffset);
 
-        super.onDraw(target1);
+        super.onDraw(renderTarget);
     }
 
 }
@@ -52,12 +52,12 @@ export default class Example extends Phaser.Scene {
     }
 
     create() {
-        const pipeline = this.renderer.pipelines.add('RedFX', new RedFX(this.game));
+        var pipelineInstance = this.renderer.pipelines.add('RedFX', new RedFX(this.game));
 
-        var img0 = this.add.image(200, 300, 'mushroom').setPipeline(pipeline)
+        var img0 = this.add.image(200, 300, 'mushroom').setPipeline(pipelineInstance)
         img0.redFxOffset = 0;
 
-        var img1 = this.add.image(600, 300, 'mushroom').setPipeline(pipeline)
+        var img1 = this.add.image(600, 300, 'mushroom').setPipeline(pipelineInstance)
         img1.redFxOffset = 0;
 
         this.tweens.add({
@@ -81,13 +81,18 @@ export default class Example extends Phaser.Scene {
     }
 }
 
-const config = {
-    type: Phaser.WEBGL,
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
     width: 800,
     height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     backgroundColor: '#0a0067',
-    parent: 'phaser-example',
     scene: Example
 };
+
 
 let game = new Phaser.Game(config);
