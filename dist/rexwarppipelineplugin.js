@@ -152,9 +152,9 @@
     return GetGame(game).loop.delta;
   };
 
-  var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var Vector2 = Phaser.Math.Vector2;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var WarpPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(WarpPostFxPipeline, _PostFXPipeline);
     var _super = _createSuper(WarpPostFxPipeline);
@@ -179,13 +179,13 @@
     _createClass(WarpPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var frequency = GetValue$1(o, 'frequency', 10);
-        this.setFrequency(GetValue$1(o, 'frequencyX', frequency), GetValue$1(o, 'frequencyY', frequency));
-        var amplitude = GetValue$1(o, 'amplitude', 10);
-        this.setAmplitude(GetValue$1(o, 'amplitudeX', amplitude), GetValue$1(o, 'amplitudeY', amplitude));
-        var speed = GetValue$1(o, 'speed', 0);
-        this.setSpeed(GetValue$1(o, 'speedX', speed), GetValue$1(o, 'speedY', speed));
-        this.setSpeedEnable(GetValue$1(o, 'speedEnable', this.speedX !== 0 || this.speedY !== 0));
+        var frequency = GetValue(o, 'frequency', 10);
+        this.setFrequency(GetValue(o, 'frequencyX', frequency), GetValue(o, 'frequencyY', frequency));
+        var amplitude = GetValue(o, 'amplitude', 10);
+        this.setAmplitude(GetValue(o, 'amplitudeX', amplitude), GetValue(o, 'amplitudeY', amplitude));
+        var speed = GetValue(o, 'speed', 0);
+        this.setSpeed(GetValue(o, 'speedX', speed), GetValue(o, 'speedY', speed));
+        this.setSpeedEnable(GetValue(o, 'speedEnable', this.speedX !== 0 || this.speedY !== 0));
         return this;
       }
     }, {
@@ -323,95 +323,7 @@
       }
     }]);
     return WarpPostFxPipeline;
-  }(PostFXPipeline$1);
-
-  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var RemoveIte = Phaser.Utils.Array.Remove;
-  var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
-    function PostFxPipelineBehaviorBase(gameObject, config) {
-      _classCallCheck(this, PostFxPipelineBehaviorBase);
-      this.gameObject = gameObject;
-      this.scene = gameObject.scene;
-
-      // Can inject PipelineClass at runtime
-      var PipelineClass;
-      if (IsPostFxPipelineClass(config)) {
-        PipelineClass = config;
-        config = undefined;
-      } else {
-        PipelineClass = GetValue(config, 'PipelineClass');
-      }
-      if (PipelineClass) {
-        this.createPipeline = function (game) {
-          return new PipelineClass(game);
-        };
-      }
-      var enable = GetValue(config, 'enable', !!config);
-      if (enable) {
-        this.getPipeline(config);
-      }
-
-      // Will destroy pipeline when gameObject destroying
-    }
-    _createClass(PostFxPipelineBehaviorBase, [{
-      key: "getPipeline",
-      value: function getPipeline(config) {
-        if (!this.pipeline) {
-          var pipeline = this.createPipeline(this.scene.game);
-          var gameObject = this.gameObject;
-          var postPipelines = gameObject.postPipelines;
-          pipeline.gameObject = gameObject;
-          postPipelines.push(pipeline);
-          gameObject.hasPostPipeline = postPipelines.length > 0;
-          this.pipeline = pipeline;
-        }
-        if (config && this.pipeline.resetFromJSON) {
-          this.pipeline.resetFromJSON(config);
-        }
-        return this.pipeline;
-      }
-    }, {
-      key: "freePipeline",
-      value: function freePipeline() {
-        if (!this.pipeline) {
-          return this;
-        }
-        var gameObject = this.gameObject;
-        var postPipelines = gameObject.postPipelines;
-        RemoveIte(postPipelines, this.pipeline);
-        gameObject.hasPostPipeline = postPipelines.length > 0;
-        this.pipeline.destroy();
-        this.pipeline = undefined;
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "createPipeline",
-      value: function createPipeline(game) {}
-    }]);
-    return PostFxPipelineBehaviorBase;
-  }();
-  var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
-    return object && object.prototype && object.prototype instanceof PostFXPipeline;
-  };
-
-  var WarpPostFxPipelineBehavior = /*#__PURE__*/function (_BasePostFxPipelineBe) {
-    _inherits(WarpPostFxPipelineBehavior, _BasePostFxPipelineBe);
-    var _super = _createSuper(WarpPostFxPipelineBehavior);
-    function WarpPostFxPipelineBehavior() {
-      _classCallCheck(this, WarpPostFxPipelineBehavior);
-      return _super.apply(this, arguments);
-    }
-    _createClass(WarpPostFxPipelineBehavior, [{
-      key: "createPipeline",
-      value: function createPipeline(game) {
-        return new WarpPostFxPipeline(game);
-      }
-    }]);
-    return WarpPostFxPipelineBehavior;
-  }(PostFxPipelineBehaviorBase);
+  }(PostFXPipeline);
 
   var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
     GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
@@ -587,13 +499,7 @@
       _this.setPostPipelineClass(WarpPostFxPipeline, 'rexWarpPostFx');
       return _this;
     }
-    _createClass(WarpPipelinePlugin, [{
-      key: "addBehavior",
-      value: function addBehavior(gameObject, config) {
-        return new WarpPostFxPipelineBehavior(gameObject, config);
-      }
-    }]);
-    return WarpPipelinePlugin;
+    return _createClass(WarpPipelinePlugin);
   }(BasePostFxPipelinePlugin);
   SetValue(window, 'RexPlugins.Pipelines.WarpPostFx', WarpPostFxPipeline);
 

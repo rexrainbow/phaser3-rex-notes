@@ -295,8 +295,8 @@
     return GetGame(game).loop.delta;
   };
 
-  var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var HorrifiPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(HorrifiPostFxPipeline, _PostFXPipeline);
     var _super = _createSuper(HorrifiPostFxPipeline);
@@ -350,40 +350,40 @@
     _createClass(HorrifiPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var enable = GetValue$1(o, 'enable', false);
+        var enable = GetValue(o, 'enable', false);
 
         // Bloom
-        this.setBloomEnable(GetValue$1(o, 'bloomEnable', enable));
-        this.setBloomRadius(GetValue$1(o, 'bloomRadius', 0));
-        this.setBloomIntensity(GetValue$1(o, 'bloomIntensity', 0));
-        this.setBloomThreshold(GetValue$1(o, 'bloomThreshold', 0));
-        this.setBloomTexelSize(GetValue$1(o, 'bloomTexelWidth', 0), GetValue$1(o, 'bloomTexelHeight'));
+        this.setBloomEnable(GetValue(o, 'bloomEnable', enable));
+        this.setBloomRadius(GetValue(o, 'bloomRadius', 0));
+        this.setBloomIntensity(GetValue(o, 'bloomIntensity', 0));
+        this.setBloomThreshold(GetValue(o, 'bloomThreshold', 0));
+        this.setBloomTexelSize(GetValue(o, 'bloomTexelWidth', 0), GetValue(o, 'bloomTexelHeight'));
 
         // Chromatic abberation
-        this.setChromaticEnable(GetValue$1(o, 'chromaticEnable', enable));
-        this.setChabIntensity(GetValue$1(o, 'chabIntensity', 0));
+        this.setChromaticEnable(GetValue(o, 'chromaticEnable', enable));
+        this.setChabIntensity(GetValue(o, 'chabIntensity', 0));
 
         // Vignette
-        this.setVignetteEnable(GetValue$1(o, 'vignetteEnable', enable));
-        this.setVignetteStrength(GetValue$1(o, 'vignetteStrength', 0));
-        this.setVignetteIntensity(GetValue$1(o, 'vignetteIntensity', 0));
+        this.setVignetteEnable(GetValue(o, 'vignetteEnable', enable));
+        this.setVignetteStrength(GetValue(o, 'vignetteStrength', 0));
+        this.setVignetteIntensity(GetValue(o, 'vignetteIntensity', 0));
 
         // Noise
-        this.setNoiseEnable(GetValue$1(o, 'noiseEnable', enable));
-        this.setNoiseStrength(GetValue$1(o, 'noiseStrength', 0));
-        this.setNoiseSeed(GetValue$1(0, 'noiseSeed', Math.random()));
+        this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
+        this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
+        this.setNoiseSeed(GetValue(0, 'noiseSeed', Math.random()));
 
         // VHS
-        this.setVHSEnable(GetValue$1(o, 'vhsEnable', enable));
-        this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0));
+        this.setVHSEnable(GetValue(o, 'vhsEnable', enable));
+        this.setVhsStrength(GetValue(o, 'vhsStrength', 0));
 
         // Scanlines
-        this.setScanlinesEnable(GetValue$1(o, 'scanlinesEnable', enable));
-        this.setScanStrength(GetValue$1(o, 'scanStrength', 0));
+        this.setScanlinesEnable(GetValue(o, 'scanlinesEnable', enable));
+        this.setScanStrength(GetValue(o, 'scanStrength', 0));
 
         // CRT
-        this.setCRTEnable(GetValue$1(o, 'crtEnable', enable));
-        this.setCrtSize(GetValue$1(o, 'crtWidth', 0), GetValue$1(o, 'crtHeight', undefined));
+        this.setCRTEnable(GetValue(o, 'crtEnable', enable));
+        this.setCrtSize(GetValue(o, 'crtWidth', 0), GetValue(o, 'crtHeight', undefined));
         return this;
       }
     }, {
@@ -428,96 +428,8 @@
       }
     }]);
     return HorrifiPostFxPipeline;
-  }(PostFXPipeline$1);
+  }(PostFXPipeline);
   Object.assign(HorrifiPostFxPipeline.prototype, Methods);
-
-  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var RemoveIte = Phaser.Utils.Array.Remove;
-  var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
-    function PostFxPipelineBehaviorBase(gameObject, config) {
-      _classCallCheck(this, PostFxPipelineBehaviorBase);
-      this.gameObject = gameObject;
-      this.scene = gameObject.scene;
-
-      // Can inject PipelineClass at runtime
-      var PipelineClass;
-      if (IsPostFxPipelineClass(config)) {
-        PipelineClass = config;
-        config = undefined;
-      } else {
-        PipelineClass = GetValue(config, 'PipelineClass');
-      }
-      if (PipelineClass) {
-        this.createPipeline = function (game) {
-          return new PipelineClass(game);
-        };
-      }
-      var enable = GetValue(config, 'enable', !!config);
-      if (enable) {
-        this.getPipeline(config);
-      }
-
-      // Will destroy pipeline when gameObject destroying
-    }
-    _createClass(PostFxPipelineBehaviorBase, [{
-      key: "getPipeline",
-      value: function getPipeline(config) {
-        if (!this.pipeline) {
-          var pipeline = this.createPipeline(this.scene.game);
-          var gameObject = this.gameObject;
-          var postPipelines = gameObject.postPipelines;
-          pipeline.gameObject = gameObject;
-          postPipelines.push(pipeline);
-          gameObject.hasPostPipeline = postPipelines.length > 0;
-          this.pipeline = pipeline;
-        }
-        if (config && this.pipeline.resetFromJSON) {
-          this.pipeline.resetFromJSON(config);
-        }
-        return this.pipeline;
-      }
-    }, {
-      key: "freePipeline",
-      value: function freePipeline() {
-        if (!this.pipeline) {
-          return this;
-        }
-        var gameObject = this.gameObject;
-        var postPipelines = gameObject.postPipelines;
-        RemoveIte(postPipelines, this.pipeline);
-        gameObject.hasPostPipeline = postPipelines.length > 0;
-        this.pipeline.destroy();
-        this.pipeline = undefined;
-        return this;
-      }
-
-      // Override
-    }, {
-      key: "createPipeline",
-      value: function createPipeline(game) {}
-    }]);
-    return PostFxPipelineBehaviorBase;
-  }();
-  var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
-    return object && object.prototype && object.prototype instanceof PostFXPipeline;
-  };
-
-  var HorrifiPostFxPipelineBehavior = /*#__PURE__*/function (_BasePostFxPipelineBe) {
-    _inherits(HorrifiPostFxPipelineBehavior, _BasePostFxPipelineBe);
-    var _super = _createSuper(HorrifiPostFxPipelineBehavior);
-    function HorrifiPostFxPipelineBehavior() {
-      _classCallCheck(this, HorrifiPostFxPipelineBehavior);
-      return _super.apply(this, arguments);
-    }
-    _createClass(HorrifiPostFxPipelineBehavior, [{
-      key: "createPipeline",
-      value: function createPipeline(game) {
-        return new HorrifiPostFxPipeline(game);
-      }
-    }]);
-    return HorrifiPostFxPipelineBehavior;
-  }(PostFxPipelineBehaviorBase);
 
   var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
     GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
@@ -693,13 +605,7 @@
       _this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
       return _this;
     }
-    _createClass(HorrifiPipelinePlugin, [{
-      key: "addBehavior",
-      value: function addBehavior(gameObject, config) {
-        return new HorrifiPostFxPipelineBehavior(gameObject, config);
-      }
-    }]);
-    return HorrifiPipelinePlugin;
+    return _createClass(HorrifiPipelinePlugin);
   }(BasePostFxPipelinePlugin);
   SetValue(window, 'RexPlugins.Pipelines.HorrifiPostFx', HorrifiPostFxPipeline);
 
