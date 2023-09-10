@@ -21,6 +21,7 @@ slider:
 text:
 # ----
 
+iconMask:
 space:
     left:
     right:

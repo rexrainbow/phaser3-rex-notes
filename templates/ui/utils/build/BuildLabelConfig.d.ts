@@ -17,6 +17,7 @@ declare namespace BuildLabelConfig {
 
         background?: CreateBackground.IConfig,
 
+        iconMask?: boolean,
         squareFitIcon?: boolean,
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
@@ -26,6 +27,7 @@ declare namespace BuildLabelConfig {
         expandTextHeight?: boolean,
 
         squareFitAction?: boolean,
+        actionMask?: boolean,
         actionSize?: number, actionWidth?: number, actionHeight?: number,
 
         space?: {

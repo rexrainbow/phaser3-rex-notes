@@ -12,8 +12,10 @@ text:
 action:
 # ----
 
+iconMask:
 expandTextWidth:
 expandTextHeight:
+actionMask:
 align:
 space:
     left:

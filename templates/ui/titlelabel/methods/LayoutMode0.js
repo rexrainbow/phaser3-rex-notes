@@ -20,11 +20,13 @@ var LayoutMode0 = function (config) {
 
     // Add elements
     var icon = GetValue(config, 'icon', undefined);
+    var iconMask = GetValue(config, 'iconMask', undefined);
     var innerBackground = GetValue(config, 'innerBackground', undefined);
     var title = GetValue(config, 'title', undefined);
     var separator = GetValue(config, 'separator', undefined);
     var text = GetValue(config, 'text', undefined);
     var action = GetValue(config, 'action', undefined);
+    var actionMask = GetValue(config, 'actionMask', undefined);
 
 
     if (icon) {
@@ -50,6 +52,10 @@ var LayoutMode0 = function (config) {
             icon,
             { proportion: 0, padding: padding, fitRatio: fitRatio }
         );
+
+        if (iconMask) {
+            iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
+        }
 
         if (!fitRatio) {
             var iconSize = GetValue(config, 'iconSize', undefined);
@@ -143,6 +149,10 @@ var LayoutMode0 = function (config) {
             { proportion: 0, padding: padding, fitRatio: fitRatio }
         );
 
+        if (actionMask) {
+            actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
+        }
+
         if (!fitRatio) {
             var actionSize = GetValue(config, 'actionSize');
             this.setActionSize(
@@ -153,12 +163,14 @@ var LayoutMode0 = function (config) {
     }
 
     this.addChildrenMap('icon', icon);
+    this.addChildrenMap('iconMask', iconMask);
     this.addChildrenMap('innerSizer', innerSizer);
     this.addChildrenMap('innerBackground', innerBackground);
     this.addChildrenMap('title', title);
     this.addChildrenMap('separator', separator);
     this.addChildrenMap('text', text);
     this.addChildrenMap('action', action);
+    this.addChildrenMap('actionMask', actionMask);
 }
 
 export default LayoutMode0;
