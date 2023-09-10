@@ -1,6 +1,6 @@
-import GetFrameNameCallback from "./GetFrameNameCallback";
+import GetFrameNameCallback from './GetFrameNameCallback';
 
-var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) {
+var GridCut = function (scene, key, frame, columns, rows, padding, getFrameNameCallback) {
     if (frame == null) {
         frame = '__BASE';
     }
@@ -19,6 +19,12 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
     var cellWidth = baseWidth / columns,
         cellHeight = baseHeight / rows;
 
+    var paddingLeft = padding.left,
+        paddingRight = padding.right,
+        paddingTop = padding.top,
+        paddingBottom = padding.bottom,
+        totalWidth = cellWidth + paddingLeft + paddingRight,
+        totalHeight = cellHeight + paddingTop + paddingBottom;
     var offsetX = 0,
         offsetY = 0;
     for (var y = 0; y < rows; y++) {
@@ -31,8 +37,10 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
 
             texture.add(
                 cellName, 0,
-                cellX, cellY,
-                cellWidth, cellHeight
+                cellX - paddingLeft,
+                cellY - paddingTop,
+                totalWidth,
+                totalHeight
             );
 
             offsetX += cellWidth;
@@ -44,6 +52,7 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
         getFrameNameCallback: getFrameNameCallback,
         cellWidth: cellWidth,
         cellHeight: cellHeight,
+        padding: padding,
         columns: columns,
         rows: rows
     }
