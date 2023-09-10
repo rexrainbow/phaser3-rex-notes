@@ -12,13 +12,10 @@ class Label extends LabelBase {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var icon = GetValue(config, 'icon', undefined);
-        var iconMask = GetValue(config, 'iconMask', undefined);
         var text = GetValue(config, 'text', undefined);
         var action = GetValue(config, 'action', undefined);
-        var actionMask = GetValue(config, 'actionMask', undefined);
         // Align
         var align = GetValue(config, 'align', undefined); // undefined/left/top: no space
-
 
         if (background) {
             this.addBackground(background);
@@ -60,10 +57,6 @@ class Label extends LabelBase {
                 icon,
                 { proportion: 0, padding: padding, fitRatio: fitRatio }
             );
-
-            if (iconMask) {
-                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
-            }
 
             if (!fitRatio) {
                 var iconSize = GetValue(config, 'iconSize', undefined);
@@ -121,10 +114,6 @@ class Label extends LabelBase {
                 { proportion: 0, padding: padding, fitRatio: fitRatio }
             );
 
-            if (actionMask) {
-                actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
-            }
-
             if (!fitRatio) {
                 var actionSize = GetValue(config, 'actionSize');
                 this.setActionSize(
@@ -141,10 +130,8 @@ class Label extends LabelBase {
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('icon', icon);
-        this.addChildrenMap('iconMask', iconMask);
         this.addChildrenMap('text', text);
         this.addChildrenMap('action', action);
-        this.addChildrenMap('actionMask', actionMask);
     }
 }
 

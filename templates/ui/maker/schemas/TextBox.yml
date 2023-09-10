@@ -12,8 +12,6 @@ text:
 action:
 # ----
 
-iconMask:
-actionMask:
 align:
 space:
     left:

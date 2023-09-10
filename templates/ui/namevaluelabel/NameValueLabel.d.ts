@@ -24,14 +24,12 @@ declare namespace NameValueLabel {
         background?: Phaser.GameObjects.GameObject,
 
         icon?: Phaser.GameObjects.GameObject,
-        iconMask?: boolean,
 
         nameText?: Phaser.GameObjects.GameObject,
         valueText?: Phaser.GameObjects.GameObject,
         bar?: Phaser.GameObjects.GameObject | LineProgressCanvas.IConfig,
 
         action?: Phaser.GameObjects.GameObject,
-        actionMask?: boolean,
 
         valueTextFormatCallback?: (
             value: number,

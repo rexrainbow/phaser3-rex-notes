@@ -23,7 +23,6 @@ declare namespace Label {
         background?: Phaser.GameObjects.GameObject,
 
         icon?: Phaser.GameObjects.GameObject,
-        iconMask?: boolean,
         squareFitIcon?: boolean,
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
@@ -32,7 +31,6 @@ declare namespace Label {
         expandTextHeight?: boolean,
 
         action?: Phaser.GameObjects.GameObject,
-        actionMask?: boolean,
         squareFitAction?: boolean,
         actionSize?: number, actionWidth?: number, actionHeight?: number,
 

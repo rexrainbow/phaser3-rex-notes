@@ -9,12 +9,10 @@ var Build = function (scene, config) {
     // Add elements
     var background = GetValue(config, 'background', undefined);
     var icon = GetValue(config, 'icon', undefined);
-    var iconMask = GetValue(config, 'iconMask', undefined);
     var nameText = GetValue(config, 'nameText', undefined);
     var valueText = GetValue(config, 'valueText', undefined);
     var bar = GetValue(config, 'bar', undefined);
     var action = GetValue(config, 'action', undefined);
-    var actionMask = GetValue(config, 'actionMask', undefined);
 
     if (IsPlainObject(bar)) {
         bar = new LineProgressCanvas(scene, bar);
@@ -58,10 +56,6 @@ var Build = function (scene, config) {
             icon,
             { proportion: 0, padding: padding, }
         );
-
-        if (iconMask) {
-            iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
-        }
     }
 
     if (hasTextSizer) {
@@ -164,19 +158,14 @@ var Build = function (scene, config) {
             { proportion: 0, padding: padding, }
         );
 
-        if (actionMask) {
-            actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
-        }
     }
 
     this.addChildrenMap('background', background);
     this.addChildrenMap('icon', icon);
-    this.addChildrenMap('iconMask', iconMask);
     this.addChildrenMap('name', nameText);
     this.addChildrenMap('value', valueText);
     this.addChildrenMap('bar', bar);
     this.addChildrenMap('action', action);
-    this.addChildrenMap('actionMask', actionMask);
 }
 
 var DefaultValueTextFormatCallback = function (value, min, max) {

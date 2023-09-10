@@ -23,8 +23,6 @@ declare namespace NumberBar {
 
         icon?: Phaser.GameObjects.GameObject,
 
-        iconMask?: boolean,
-
         slider?: {
             background?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
             track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,

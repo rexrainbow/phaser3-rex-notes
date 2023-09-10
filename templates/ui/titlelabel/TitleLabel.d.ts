@@ -35,12 +35,10 @@ declare namespace TitleLabel {
         expandTextHeight?: boolean,
 
         icon?: Phaser.GameObjects.GameObject,
-        iconMask?: boolean,
         squareFitIcon?: boolean,
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
         action?: Phaser.GameObjects.GameObject,
-        actionMask?: boolean,
         squareFitAction?: boolean,
         actionSize?: number, actionWidth?: number, actionHeight?: number,
 

@@ -7,9 +7,9 @@ class LabelBase extends Sizer {
     Elements in childrenMap: 
     
     - background
-    - icon, iconMask
+    - icon
     - text, 
-    - action, actionMask
+    - action
     */
 
     // Access text game object
@@ -136,42 +136,6 @@ class LabelBase extends Sizer {
         }
 
         super.preLayout();
-    }
-
-    runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        super.runLayout(parent, newWidth, newHeight);
-        // Pin icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-            iconMask.setPosition();
-            this.resetChildPositionState(iconMask);
-        }
-        // Pin action-mask to action game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-            actionMask.setPosition();
-            this.resetChildPositionState(actionMask);
-        }
-        return this;
-    }
-
-    resize(width, height) {
-        super.resize(width, height);
-        // Resize icon-mask to icon game object
-        var iconMask = this.childrenMap.iconMask;
-        if (iconMask) {
-            iconMask.resize();
-        }
-        // Resize action-mask to icon game object
-        var actionMask = this.childrenMap.actionMask;
-        if (actionMask) {
-            actionMask.resize();
-        }
-        return this;
     }
 }
 

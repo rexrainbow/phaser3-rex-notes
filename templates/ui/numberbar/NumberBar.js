@@ -13,7 +13,6 @@ class NumberBar extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var icon = GetValue(config, 'icon', undefined);
-        var iconMask = GetValue(config, 'iconMask', undefined);
         var sliderConfig = GetValue(config, 'slider', undefined);
         var text = GetValue(config, 'text', undefined);
 
@@ -44,10 +43,6 @@ class NumberBar extends Sizer {
                     padding: padding
                 }
             )
-
-            if (iconMask) {
-                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
-            }
         }
 
         var slider;
@@ -97,7 +92,6 @@ class NumberBar extends Sizer {
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('icon', icon);
-        this.addChildrenMap('iconMask', iconMask);
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('text', text);
 
