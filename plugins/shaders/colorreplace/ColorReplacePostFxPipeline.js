@@ -1,4 +1,4 @@
-import FragSrc from './colorreplace-postfxfrag.js';
+import FragSrc from './colorreplace-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

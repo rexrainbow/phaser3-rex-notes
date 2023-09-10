@@ -1,7 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 
 const fragShader = `
-#define SHADER_NAME EXAMPLE_PRE_FX_FS
 precision mediump float;
 uniform sampler2D uMainSampler;
 uniform sampler2D uMaskSampler;

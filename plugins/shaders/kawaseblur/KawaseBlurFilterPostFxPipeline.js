@@ -1,4 +1,4 @@
-import FragSrc from './kawaseblurFilter-postfxfrag.js';
+import FragSrc from './kawaseblurFilter-frag.js';
 import GenerateKernels from './GenerateKernels.js';
 import KawaseBlurDrawer from './KawaseBlurDrawer.js';
 

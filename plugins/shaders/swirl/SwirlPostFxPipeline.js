@@ -1,4 +1,4 @@
-import FragSrc from './swirl-postfxfrag.js';
+import FragSrc from './swirl-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,4 +1,4 @@
-import FragSrc from './glowfilter-postfxfrag';
+import FragSrc from './glowfilter-frag';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

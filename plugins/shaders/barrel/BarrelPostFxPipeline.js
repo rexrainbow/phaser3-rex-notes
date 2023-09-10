@@ -1,4 +1,4 @@
-import FragSrc from './barrel-postfxfrag.js';
+import FragSrc from './barrel-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

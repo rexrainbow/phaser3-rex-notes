@@ -1,4 +1,4 @@
-import FragSrc from './warp-postfxfrag.js';
+import FragSrc from './warp-frag.js';
 import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;

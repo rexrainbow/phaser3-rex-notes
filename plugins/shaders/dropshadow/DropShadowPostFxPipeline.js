@@ -1,5 +1,5 @@
-import FragSrc from './dropshadow-postfxfrag.js';
-import KawaseBlurFragSrc from '../kawaseblur/kawaseblurFilter-postfxfrag.js';
+import FragSrc from './dropshadow-frag.js';
+import KawaseBlurFragSrc from '../kawaseblur/kawaseblurFilter-frag.js';
 import GenerateKernels from '../kawaseblur/GenerateKernels.js';
 import ShadowDrawer from './ShadowDrawer.js'
 import KawaseBlurDrawer from '../kawaseblur/KawaseBlurDrawer.js';

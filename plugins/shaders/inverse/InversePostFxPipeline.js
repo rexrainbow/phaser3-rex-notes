@@ -1,4 +1,4 @@
-import FragSrc from './inverse-postfxfrag.js';
+import FragSrc from './inverse-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

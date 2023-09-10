@@ -1,4 +1,4 @@
-import FragSrc from './shockwave-postfxfrag.js';
+import FragSrc from './shockwave-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,4 +1,4 @@
-import FragSrc from './fisheye-postfxfrag.js';
+import FragSrc from './fisheye-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

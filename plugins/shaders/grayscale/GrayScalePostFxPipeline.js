@@ -1,4 +1,4 @@
-import FragSrc from './grayscale-postfxfrag.js';
+import FragSrc from './grayscale-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

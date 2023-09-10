@@ -1,4 +1,4 @@
-import FragSrc from './horrifi-postfxfrag.js';
+import FragSrc from './horrifi-frag.js';
 import Methods from './methods/Methods.js';
 import GetTickDelta from '../../utils/system/GetTickDelta.js';
 

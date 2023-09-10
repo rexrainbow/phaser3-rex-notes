@@ -1,4 +1,4 @@
-import FragSrc from './dissolve-postfxfrag.js';
+import FragSrc from './dissolve-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

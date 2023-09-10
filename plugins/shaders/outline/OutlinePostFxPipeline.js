@@ -1,4 +1,4 @@
-import GetFrag from './outline-postfxfrag.js';
+import GetFrag from './outline-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

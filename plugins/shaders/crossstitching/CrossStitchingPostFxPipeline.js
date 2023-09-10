@@ -1,4 +1,4 @@
-import FragSrc from './crossstitching-postfxfrag.js';
+import FragSrc from './crossstitching-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;

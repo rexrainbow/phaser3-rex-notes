@@ -1,4 +1,4 @@
-import FragSrc from './hslAdjust-postfxfrag.js';
+import FragSrc from './hslAdjust-frag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
