@@ -209,8 +209,6 @@ module.exports = {
     'warppipelineplugin': './plugins/warppipeline-plugin.js',
     'horrifipipelineplugin': './plugins/horrifipipeline-plugin.js',
 
-    'postfxpipelinebehavior': './plugins/postfxpipelinebehavior.js',
-
     // board
     'boardplugin': './plugins/board-plugin.js',
 
