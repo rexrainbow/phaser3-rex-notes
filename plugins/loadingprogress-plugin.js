@@ -1,4 +1,3 @@
-
 import LoadingProgress from './loadingprogress.js';
 
 class LoadingProgressPlugin extends Phaser.Plugins.BasePlugin {

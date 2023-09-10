@@ -209,6 +209,8 @@ module.exports = {
     'warppipelineplugin': './plugins/warppipeline-plugin.js',
     'horrifipipelineplugin': './plugins/horrifipipeline-plugin.js',
 
+    'localmaskplugin': './plugins/localmask-plugin.js',
+
     // board
     'boardplugin': './plugins/board-plugin.js',
 
