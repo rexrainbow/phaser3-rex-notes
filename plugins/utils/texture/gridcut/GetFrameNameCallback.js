@@ -1,4 +1,8 @@
 var GetFrameNameCallback = function (baseFrameName, delimiter) {
+    if (typeof (baseFrameName) === 'object') {
+        baseFrameName = baseFrameName.name;
+    }
+
     if (delimiter === undefined) {
         delimiter = ',';
     }
