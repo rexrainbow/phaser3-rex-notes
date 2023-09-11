@@ -36111,6 +36111,9 @@
   };
 
   var GetFrameNameCallback = function GetFrameNameCallback(baseFrameName, delimiter) {
+    if (_typeof(baseFrameName) === 'object') {
+      baseFrameName = baseFrameName.name;
+    }
     if (delimiter === undefined) {
       delimiter = ',';
     }
