@@ -129,7 +129,7 @@ texture.stamp(key, frame, x, y, {
     // texture.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);
     ```
 
-### Draw frame
+### Add frame
 
 ```javascript
 texture.add(name, sourceIndex, x, y, width, height);

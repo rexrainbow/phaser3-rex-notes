@@ -1,39 +1,19 @@
 import GetGame from '../system/GetGame.js';
-import IsGameObject from '../system/IsGameObject.js';
-import IsTextureObject from '../system/IsTextureObject.js';
-import IsFrameObject from '../system/IsFrameObject.js';
 
-var CreatePaddingTexture = function (game, textureKey, paddingX, paddingY, targetTextureKey) {
-    var frameName;
-    if (typeof (textureKey) === 'string') {
-        frameName = undefined;
-    } else if (IsGameObject(textureKey)) {
-        var gameObject = textureKey;
-        textureKey = gameObject.texture.key;
-        frameName = gameObject.frame.name;
-    } else if (IsTextureObject(textureKey)) {
-        var texture = textureKey;
-        textureKey = texture.key;
-        frameName = undefined;
-    } else if (IsFrameObject(textureKey)) {
-        var frame = texture;
-        textureKey = frame.texture.key;
-        frameName = frame.name;
-    }
-
+var CreatePaddingTexture = function (game, destinationKey, sourceKey, paddingX, paddingY) {
     var textureManager = GetGame(game).textures;
 
-    var frame = textureManager.getFrame(textureKey, frameName);
-    var targetTextureWidth = frame.cutWidth + paddingX * 2;
-    var targetTextureHeight = frame.cutHeight + paddingY * 2;
-
-    if (textureManager.exists(targetTextureKey)) {
-        textureManager.remove(targetTextureKey);
+    if (textureManager.exists(destinationKey)) {
+        textureManager.remove(destinationKey);
     }
-    var targetTexture = textureManager.createCanvas(targetTextureKey, targetTextureWidth, targetTextureHeight);
-    targetTexture.drawFrame(textureKey, frameName, paddingX, paddingY);
 
-    return targetTexture;
+    var frame = textureManager.getFrame(sourceKey);
+    var width = frame.cutWidth + paddingX * 2;
+    var height = frame.cutHeight + paddingY * 2;
+    var destinationTexture = textureManager.addDynamicTexture(destinationKey, width, height);
+    destinationTexture.drawFrame(sourceKey, undefined, paddingX, paddingY);
+
+    return destinationTexture;
 }
 
 export default CreatePaddingTexture;
