@@ -21,10 +21,6 @@ var CreatePaddingTexture = function (game, textureKey, paddingX, paddingY, targe
         frameName = frame.name;
     }
 
-    if (targetTextureKey === undefined) {
-        targetTextureKey = `${textureKey}_padding`;
-    }
-
     var textureManager = GetGame(game).textures;
 
     var frame = textureManager.getFrame(textureKey, frameName);
