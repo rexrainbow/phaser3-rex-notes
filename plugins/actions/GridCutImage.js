@@ -1,5 +1,4 @@
 import GridCut from '../utils/texture/gridcut/GridCut.js';
-import GetBoundsConfig from '../utils/bounds/GetBoundsConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DefaultImageClass = Phaser.GameObjects.Image;
@@ -23,7 +22,6 @@ var GridCutImage = function (gameObject, columns, rows, config) {
 
     var originX = GetValue(config, 'originX', 0.5);
     var originY = GetValue(config, 'originY', 0.5);
-    var padding = GetBoundsConfig(GetValue(config, 'padding', 0));
     var addToScene = GetValue(config, 'add', true);
     var align = GetValue(config, 'align', addToScene);
     var imageObjectPool = GetValue(config, 'objectPool', undefined);
@@ -32,14 +30,8 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var texture = gameObject.texture;
     var frame = gameObject.frame;
 
-    var result = GridCut(scene, texture, frame, columns, rows, padding);
+    var result = GridCut(scene, texture, frame, columns, rows);
     var getFrameNameCallback = result.getFrameNameCallback;
-
-    var displayOriginX = (result.cellWidth * originX) + padding.left;
-    originX = displayOriginX / (result.cellWidth + padding.left + padding.right);
-    var displayOriginY = (result.cellHeight * originY) + padding.top;
-    originY = displayOriginY / (result.cellHeight + padding.top + padding.bottom);
-
     var scaleX = gameObject.scaleX,
         scaleY = gameObject.scaleY;
     var rotation = gameObject.rotation;

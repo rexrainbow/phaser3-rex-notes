@@ -80,7 +80,6 @@ scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
 
     // originX: 0.5,
     // originY: 0.5,
-    // padding: 0,
     // add: true,
     // align: true,
     // objectPool: undefined
@@ -99,17 +98,6 @@ scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
     - `frame` : Frame name.
 - `ImageClass` : Create image game object from this class. Default value is built-in [Image](image.md) class. Used when `onCreateImage` is `undefined`.
 - `originX`, `originY` : Origin of created image game objects
-- `padding` : Extra padded space of cutting frame. Default is 0.
-    - A number for left/right/top/bottom bounds,
-    - Or a plain object.
-        ```javascript
-        {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0
-        }
-        ```
 - `add` : 
     - `true` : Add these created image game objects to scene. Default value.
     - `false` : Don't add created image game objects to scene.
