@@ -252,11 +252,16 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     - `> 0` : Stretch game object via proportion value.
     - `null` : Don't arrange this child.
 - `align` :
-    - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
-    - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
-    - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
-    - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
-    - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
+    - For horizontal orientation sizer : 
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at vertical-center. Default value.
+        - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
+        - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.        
+        - Use [`addSpace()`](ui-sizer.md#add-space) to align child at horizontal-center.
+    - For vertical orientation sizer : 
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at horizontal-center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.   
+        - Use [`addSpace()`](ui-sizer.md#add-space) to align child at vertical-center.
 - `padding` : Extra padded space. Default is 0.
     - A number for left/right/top/bottom bounds,
     - Or a plain object.
@@ -346,6 +351,24 @@ sizer.insertAtPosition(x, y, index, child, proportion, align, padding, expand, k
     sizer.insertSpace(index);
     // sizer.insertSpace(index, proportion);
     ```
+
+Usage :
+
+- Align child at center
+    ```javascript
+    sizer
+        .addSpace()
+        .add(child)
+        .addSpace()
+    ```
+- Align 2 children at left and right side
+    ```javascript
+    sizer
+        .add(childLeft)
+        .addSpace()
+        .add(childRight)
+    ```
+
 
 ### Layout children
 
