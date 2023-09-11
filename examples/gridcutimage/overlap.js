@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import GridCutImagePlugin from '../../plugins/gridcutimage-plugin';
+import CreatePaddingTexture from '../../plugins/utils/texture/CreatePaddingTexture';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 
 class Demo extends Phaser.Scene {
@@ -16,9 +17,9 @@ class Demo extends Phaser.Scene {
     create() {
         var overlap = 30;
 
-        CreatePaddingTexture(this, 'classroom', overlap); // 'classroom-pad'
+        var texture = CreatePaddingTexture(this, 'classroom', overlap, overlap);
 
-        var image = this.add.image(400, 300, 'classroom-pad')
+        var image = this.add.image(400, 300, texture)
             .setScale(0.5).setAngle(-30).setVisible(false)
 
         var cellImages = this.plugins.get('rexGridCutImage').gridCut(image, 4, 3, {
@@ -43,14 +44,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
-}
-
-var CreatePaddingTexture = function (scene, key, overlap) {
-    var frame = scene.textures.getFrame(key);
-    var newTextureWidth = frame.cutWidth + overlap * 2;
-    var newTextureHeight = frame.cutHeight + overlap * 2;
-    var texture = scene.textures.createCanvas(`${key}-pad`, newTextureWidth, newTextureHeight);
-    texture.drawFrame(key, undefined, overlap, overlap);
 }
 
 var config = {
