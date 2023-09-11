@@ -14,6 +14,11 @@ declare namespace GridCutImage {
 
         originX?: number,
         originY?: number,
+
+        overlap?: number,
+        overlapX?: number,
+        overlapY?: number,
+
         add?: boolean,
         align?: boolean,
 

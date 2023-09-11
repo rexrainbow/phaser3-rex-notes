@@ -1,6 +1,6 @@
 import GetFrameNameCallback from "./GetFrameNameCallback";
 
-var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) {
+var GridCut = function (scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
     if (frame == null) {
         frame = '__BASE';
     }
@@ -16,9 +16,11 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
         baseHeight = baseFrame.height;
 
     var cellX, cellY, cellName;
-    var cellWidth = baseWidth / columns,
-        cellHeight = baseHeight / rows;
+    var cellWidth = (baseWidth + ((columns - 1) * overlapX)) / columns,
+        cellHeight = (baseHeight + ((rows - 1) * overlapY)) / rows;
 
+    var frameCutX = baseFrame.cutX,
+    frameCutY = baseFrame.cutY;
     var offsetX = 0,
         offsetY = 0;
     for (var y = 0; y < rows; y++) {
@@ -26,8 +28,8 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
         for (var x = 0; x < columns; x++) {
             cellName = getFrameNameCallback(x, y);
 
-            cellX = offsetX + baseFrame.cutX;
-            cellY = offsetY + baseFrame.cutY;
+            cellX = offsetX + frameCutX;
+            cellY = offsetY + frameCutY;
 
             texture.add(
                 cellName, 0,
@@ -35,9 +37,9 @@ var GridCut = function (scene, key, frame, columns, rows, getFrameNameCallback) 
                 cellWidth, cellHeight
             );
 
-            offsetX += cellWidth;
+            offsetX += cellWidth - overlapX;
         }
-        offsetY += cellHeight;
+        offsetY += cellHeight - overlapY;
     }
 
     return {
