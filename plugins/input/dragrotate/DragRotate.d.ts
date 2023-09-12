@@ -2,6 +2,7 @@ export default DragRotate;
 
 declare namespace DragRotate {
     interface IConfig {
+        origin?: Phaser.GameObjects.GameObject,
         x?: number,
         y?: number,
         maxRadius?: number,
@@ -26,10 +27,9 @@ declare class DragRotate extends Phaser.Events.EventEmitter {
     toggleEnable(): this;
     enable: boolean;
 
+    setOrigin(gameObject?: Phaser.GameObjects.GameObject): this;
     setOrigin(x: number, y: number): this;
     setOrigin(pointer: { x: number, y: number }): this;
-    x: number;
-    y: number;
 
     setRadius(maxRadius: number, minRadius?: number): this;
     maxRadius: number;

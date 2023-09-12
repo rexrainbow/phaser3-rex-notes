@@ -1,6 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import IsGameObject from '../../utils/system/IsGameObject.js';
+import ScreenXYToWorldXY from '../../utils/position/ScreenXYToWorldXY.js';
+
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const GetAngle = Phaser.Math.Angle.Between;
 const WrapAngle = Phaser.Math.Angle.Wrap;
@@ -15,17 +19,22 @@ class DragRotate extends ComponentBase {
         // No event emitter
         // this.scene = scene
 
+        this.mainCamera = this.scene.sys.cameras.main;
         this._enable = undefined;
-        this._deltaRotation = undefined;
+
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
         this.pointer = undefined;
+        this.originGameObject = undefined;
+
         this.setEnable(GetValue(o, "enable", true));
-        this.setOrigin(o);
-        this.setRadius(GetValue(o, 'maxRadius', 100), GetValue(o, 'minRadius', 0));
+
+        var originConfig = GetValue(o, 'origin', o)
+        this.setOrigin(originConfig);
+        this.setRadius(GetValue(o, 'maxRadius'), GetValue(o, 'minRadius', 0));
         this.state = STATE_TOUCH0;
     }
 
@@ -45,7 +54,9 @@ class DragRotate extends ComponentBase {
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
 
+        this.mainCamera = undefined;
         this.pointer = undefined;
+        this.originGameObject = undefined;
 
         super.shutdown(fromScene);
     }
@@ -80,13 +91,23 @@ class DragRotate extends ComponentBase {
     }
 
     setOrigin(x, y) {
-        if (y === undefined) {
-            var point = x;
-            x = GetValue(point, 'x', 0);
-            y = GetValue(point, 'y', 0);
+        if (x === undefined) {
+            this._x = undefined;  // World position
+            this._y = undefined;  // World position
+            this.originGameObject = undefined;
+        } else if (IsGameObject(x)) {
+            this._x = undefined;
+            this._y = undefined;
+            this.originGameObject = x;
+        } else if (IsPlainObject(x)) {
+            this._x = GetValue(x, 'x', 0);  // World position
+            this._y = GetValue(x, 'y', 0);  // World position
+            this.originGameObject = undefined;
+        } else {
+            this._x = x;  // World position
+            this._y = y;  // World position
+            this.originGameObject = undefined;
         }
-        this.x = x;  // World position
-        this.y = y;  // World position
         return this;
     }
 
@@ -99,18 +120,71 @@ class DragRotate extends ComponentBase {
         return this;
     }
 
-    contains(x, y) {
-        var r = DistanceBetween(this.x, this.y, x, y);
-        return (r >= this.minRadius) && (r <= this.maxRadius);
+    getOriginX(camera) {
+        // OriginX in world position
+        if (!this.originGameObject) {
+            return this._x;
+        }
+
+        var gameObject = this.originGameObject;
+        var x = gameObject.x;
+        if (gameObject.scrollFactorX === 0) {
+            if (camera === undefined) {
+                camera = this.pointer.camera;
+            }
+            x += camera.scrollX;
+        }
+        return x;
+    }
+
+    getOriginY(camera) {
+        // OriginY in world position
+        if (!this.originGameObject) {
+            return this._y;
+        }
+
+        var gameObject = this.originGameObject;
+        var y = gameObject.y;
+        if (gameObject.scrollFactorY === 0) {
+            if (camera === undefined) {
+                camera = this.pointer.camera;
+            }
+            y += camera.scrollY;
+        }
+        return y;
+    }
+
+    getPointerWorldXY(pointer) {
+        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
+        // if this camera is not main-camera
+        if (pointer.camera !== this.mainCamera) {
+            WorldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, WorldXY);
+        } else {
+            WorldXY.x = pointer.worldX;
+            WorldXY.y = pointer.worldY;
+        }
+        return WorldXY;
+    }
+
+    containsPointer(pointer) {
+        if ((this.minRadius === 0) && (this.maxRadius === undefined)) {
+            return true;
+        }
+
+        var originX = this.getOriginX(pointer.camera);
+        var originY = this.getOriginY(pointer.camera);
+        var worldXY = this.getPointerWorldXY(pointer);
+        var r = DistanceBetween(originX, originY, worldXY.x, worldXY.y);
+        return (r >= this.minRadius) &&
+            ((this.maxRadius === undefined) || (r <= this.maxRadius));
     }
 
     onPointerDown(pointer) {
-        if ((!this.enable) ||
-            this.pointer) {
+        if ((!this.enable) || this.pointer) {
             return;
         }
 
-        if (!this.contains(pointer.worldX, pointer.worldY)) {
+        if (!this.containsPointer(pointer)) {
             return;
         }
 
@@ -118,8 +192,7 @@ class DragRotate extends ComponentBase {
     }
 
     onPointerUp(pointer) {
-        if ((!this.enable) ||
-            (this.pointer !== pointer)) {
+        if ((!this.enable) || (this.pointer !== pointer)) {
             return;
         }
 
@@ -127,23 +200,22 @@ class DragRotate extends ComponentBase {
     }
 
     onPointerMove(pointer) {
-        if ((!this.enable) ||
-            (!pointer.isDown)) {
+        if ((!this.enable) || (!pointer.isDown)) {
             return;
         }
 
         switch (this.state) {
             case STATE_TOUCH0:
-                if (this.contains(pointer.worldX, pointer.worldY)) {
+                if (this.containsPointer(pointer)) {
                     this.onDragStart(pointer);
                 }
                 break;
 
             case STATE_TOUCH1:
-                if (this.contains(pointer.worldX, pointer.worldY)) {
-                    this.onDrag();
+                if (this.containsPointer(pointer)) {
+                    this.onDrag(pointer);
                 } else {
-                    this.onDragEnd();
+                    this.onDragEnd(pointer);
                 }
                 break;
         }
@@ -160,38 +232,35 @@ class DragRotate extends ComponentBase {
 
     onDragStart(pointer) {
         this.pointer = pointer;
+        var worldXY = this.getPointerWorldXY(pointer);
+        this.prevPointerX = worldXY.x;
+        this.prevPointerY = worldXY.y;
         this.state = STATE_TOUCH1;
-        this._deltaRotation = undefined;
         this.emit('dragstart', this);
     }
 
     onDragEnd() {
         this.pointer = undefined;
+        this.prevPointerX = undefined;
+        this.prevPointerY = undefined;
         this.state = STATE_TOUCH0;
         this._deltaRotation = undefined;
         this.emit('dragend', this);
     }
 
-    onDrag() {
-        this._deltaRotation = undefined;
+    onDrag(pointer) {
+        var x = this.getOriginX(),
+            y = this.getOriginY();
+        var worldXY = this.getPointerWorldXY(pointer);
+        var curPointerX = worldXY.x;
+        var curPointerY = worldXY.y;
+        var a0 = GetAngle(x, y, this.prevPointerX, this.prevPointerY),
+            a1 = GetAngle(x, y, curPointerX, curPointerY);
+        this.deltaRotation = WrapAngle(a1 - a0);
+
+        this.prevPointerX = curPointerX;
+        this.prevPointerY = curPointerY;
         this.emit('drag', this);
-    }
-
-    get deltaRotation() {
-        if (this.state === STATE_TOUCH0) {
-            return 0;
-        }
-
-        if (this._deltaRotation === undefined) {
-            var p0 = this.pointer.prevPosition,
-                p1 = this.pointer.position;
-            var a0 = GetAngle(this.x, this.y, p0.x, p0.y),
-                a1 = GetAngle(this.x, this.y, p1.x, p1.y);
-            this._deltaRotation = WrapAngle(a1 - a0);
-        }
-
-        return this._deltaRotation;
-
     }
 
     get deltaAngle() {
@@ -211,5 +280,6 @@ class DragRotate extends ComponentBase {
     }
 }
 
+var WorldXY = {}
 
 export default DragRotate;
