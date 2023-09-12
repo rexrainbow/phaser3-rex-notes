@@ -1,11 +1,12 @@
 import Methods from './methods/Methods.js';
 import GetGame from '../../utils/system/GetGame.js';
+import CreateTexture from '../../utils/texture/CreateTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class CanvasFrameManager {
-    constructor(scene, key, width, height, cellWidth, cellHeight, fillColor) {
+class FrameManager {
+    constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
         if (IsPlainObject(key)) {
             var config = key;
             key = GetValue(config, 'key');
@@ -14,6 +15,12 @@ class CanvasFrameManager {
             cellWidth = GetValue(config, 'cellWidth');
             cellHeight = GetValue(config, 'cellHeight');
             fillColor = GetValue(config, 'fillColor');
+            useDynamicTexture = GetValue(config, 'useDynamicTexture');
+        } else {
+            if (typeof (fillColor) === 'boolean') {
+                useDynamicTexture = fillColor;
+                fillColor = undefined;
+            }
         }
 
         if (width === undefined) {
@@ -28,17 +35,27 @@ class CanvasFrameManager {
         if (cellHeight === undefined) {
             cellHeight = 64;
         }
+        if (useDynamicTexture === undefined) {
+            useDynamicTexture = false;
+        }
 
         var game = GetGame(scene);
-        this.texture = game.textures.createCanvas(key, width, height);
-        this.canvas = this.texture.getCanvas();
-        this.context = this.texture.getContext();
+
+        this.useDynamicTexture = useDynamicTexture;
+        this.texture = CreateTexture(game, key, width, height, useDynamicTexture);
+        this.canvas = (useDynamicTexture) ? undefined : this.texture.getCanvas();
+        this.context = (useDynamicTexture) ? undefined : this.texture.getContext();
         this.bitmapFontCache = game.cache.bitmapFont;
 
         if (fillColor !== undefined) {
-            var context = this.context;
-            context.fillStyle = fillColor;
-            context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            if (useDynamicTexture) {
+                this.texture.fill(fillColor);
+
+            } else {
+                var context = this.context;
+                context.fillStyle = fillColor;
+                context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
         }
 
         this.key = key;
@@ -68,7 +85,7 @@ class CanvasFrameManager {
         return this.frameNames.indexOf(frameName);
     }
 
-    hasFrameName(frameName) {
+    contains(frameName) {
         return this.getFrameIndex(frameName) !== -1;
     }
 
@@ -94,40 +111,19 @@ class CanvasFrameManager {
     }
 
     updateTexture() {
-        this.texture.refresh();
-        return this;
-    }
+        if (this.useDynamicTexture) {
 
-    remove(frameName) {
-        var index = this.getFrameIndex(frameName);
-        if (index === -1) {
-            return this;
+        } else {
+            this.texture.refresh();
         }
-
-        this.addFrameName(index, undefined);
-        this.texture.remove(frameName);
-
-        // Don't clear canvas
-
         return this;
     }
 
-    clear() {
-        for (var i, cnt = this.frameNames.length; i < cnt; i++) {
-            var frameName = this.frameNames[i];
-            if (frameName !== undefined) {
-                this.addFrameName(index, undefined);
-                this.texture.remove(frameName);
-            }
-        }
-
-        return this;
-    }
 }
 
 Object.assign(
-    CanvasFrameManager.prototype,
+    FrameManager.prototype,
     Methods
 );
 
-export default CanvasFrameManager;
+export default FrameManager;

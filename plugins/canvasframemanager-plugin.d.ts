@@ -1,4 +1,4 @@
-import CanvasFrameManager from './canvasframemanager';
+import FrameManager from './canvasframemanager';
 
 export default class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
     add(
@@ -9,11 +9,11 @@ export default class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin 
         cellWidth?: number,
         cellHeight?: number,
         fillColor?: string
-    ): CanvasFrameManager;
+    ): FrameManager;
 
     add(
         scene: Phaser.Scene,
-        config: CanvasFrameManager.IConfig
-    ): CanvasFrameManager;
+        config: FrameManager.IConfig
+    ): FrameManager;
 
 }

@@ -1,6 +1,7 @@
 import Draw from './Draw.js';
 import Paste from './Paste.js';
 import AddEmptyFrame from './AddEmptyFrame.js';
+import RemoveMethods from './RemoveMethods.js';
 import AddToBitmapFont from './AddToBitmapFont.js';
 
 var methods = {
@@ -10,5 +11,10 @@ var methods = {
 
     addToBitmapFont: AddToBitmapFont,
 }
+
+Object.assign(
+    methods,
+    RemoveMethods
+);
 
 export default methods

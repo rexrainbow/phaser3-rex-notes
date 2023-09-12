@@ -1,18 +1,27 @@
-export default CanvasFrameManager;
+export default FrameManager;
 
-declare namespace CanvasFrameManager {
+declare namespace FrameManager {
     interface IConfig {
         key: string,
         width?: number,
         height?: number,
         cellWidth?: number,
         cellHeight?: number,
-        fillColor?: string
+        fillColor?: string | number,
+        useDynamicTexture?: boolean
     }
 
-    type DrawFrameCallback = (
+    type DrawCanvasFrameCallback = (
         canvasElem: HTMLCanvasElement,
         context: CanvasRenderingContext2D,
+        frameSize: {
+            width: number,
+            height: number
+        }
+    ) => void;
+
+    type DrawDynamicTextureFrameCallback = (
+        texture: Phaser.Textures.DynamicTexture,
         frameSize: {
             width: number,
             height: number
@@ -20,7 +29,7 @@ declare namespace CanvasFrameManager {
     ) => void
 }
 
-declare class CanvasFrameManager {
+declare class FrameManager {
     constructor(
         scene: Phaser.Scene | Phaser.Game,
         key: string,
@@ -28,17 +37,30 @@ declare class CanvasFrameManager {
         height?: number,
         cellWidth?: number,
         cellHeight?: number,
-        fillColor?: string
+        fillColor?: string | number,
+        useDynamicTexture?: boolean
     );
 
     constructor(
         scene: Phaser.Scene | Phaser.Game,
-        config: CanvasFrameManager.IConfig
+        key: string,
+        width?: number,
+        height?: number,
+        cellWidth?: number,
+        cellHeight?: number,
+        useDynamicTexture?: boolean
     );
 
+    constructor(
+        scene: Phaser.Scene | Phaser.Game,
+        config: FrameManager.IConfig
+    );
+
+    readonly useDynamicTexture: boolean;
     readonly key: string;
-    readonly canvas: HTMLCanvasElement;
-    readonly context: CanvasRenderingContext2D;
+    readonly texture: Phaser.Textures.CanvasTexture | Phaser.Textures.DynamicTexture;
+    readonly canvas: HTMLCanvasElement | undefined;
+    readonly context: CanvasRenderingContext2D | undefined;
     readonly width: number;
     readonly height: number;
     readonly cellWidth: number;
@@ -55,7 +77,7 @@ declare class CanvasFrameManager {
 
     draw(
         frameName: string | number,
-        callback: CanvasFrameManager.DrawFrameCallback,
+        callback: FrameManager.DrawCanvasFrameCallback | FrameManager.DrawDynamicTextureFrameCallback,
         scope?: object
     ): this;
 
@@ -78,7 +100,7 @@ declare class CanvasFrameManager {
 
     clear(): this;
 
-    hasFrameName(
+    contains(
         frameName: string | number
     ): boolean;
 }

@@ -1,4 +1,4 @@
-import CanvasFrameManager from '../../canvasframemanager/CanvasFrameManager.js';
+import FrameManager from '../../framemanager/FrameManager.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,7 +13,7 @@ var CreateFrameManager = function (scene, config) {
     var width = cellWidth * colCount;
     var height = cellHeight * rowCount;
 
-    var frameManager = new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight);
+    var frameManager = new FrameManager(scene, key, width, height, cellWidth, cellHeight);
     return frameManager;
 }
 

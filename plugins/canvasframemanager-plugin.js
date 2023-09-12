@@ -1,4 +1,4 @@
-import CanvasFrameManager from './canvasframemanager.js';
+import FrameManager from './canvasframemanager.js';
 
 class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -12,7 +12,7 @@ class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, key, width, height, cellWidth, cellHeight, fillColor) {
-        return new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor);
+        return new FrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor);
     }
 }
 
