@@ -166,11 +166,15 @@ canvasFrames.updateTexture();
 
 ### Remove frame
 
-```javascript
-canvasFrames.remove(frameName);
-```
-
-- `frameName` : Frame name.
+- Remove a frame
+    ```javascript
+    canvasFrames.remove(frameName);
+    ```
+    - `frameName` : Frame name.
+- Remove all frames
+    ```javascript
+    canvasFrames.clear();
+    ```
 
 ### Export to bitmapfont
 

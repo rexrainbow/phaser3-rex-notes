@@ -10002,11 +10002,20 @@
 </ul>
 </li>
 <li><code>align</code> :<ul>
-<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
-<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
-<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li>For horizontal orientation sizer : <ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at vertical-center. Default value.</li>
 <li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at top-center.</li>
-<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.        </li>
+<li>Use <a href="./#add-space"><code>addSpace()</code></a> to align child at horizontal-center.</li>
+</ul>
+</li>
+<li>For vertical orientation sizer : <ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at horizontal-center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.   </li>
+<li>Use <a href="./#add-space"><code>addSpace()</code></a> to align child at vertical-center.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>padding</code> : Extra padded space. Default is 0.<ul>
@@ -10096,6 +10105,21 @@
 <li>Insert a stretchable space.
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertSpace</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="c1">// sizer.insertSpace(index, proportion);</span>
+</code></pre></div></li>
+</ul>
+<p>Usage :</p>
+<ul>
+<li>Align child at center
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addSpace</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addSpace</span><span class="p">()</span>
+</code></pre></div></li>
+<li>Align 2 children at left and right side
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">childLeft</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addSpace</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">childRight</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
