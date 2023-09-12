@@ -27,9 +27,12 @@ declare class DragRotate extends Phaser.Events.EventEmitter {
     toggleEnable(): this;
     enable: boolean;
 
-    setOrigin(gameObject?: Phaser.GameObjects.GameObject): this;
     setOrigin(x: number, y: number): this;
     setOrigin(pointer: { x: number, y: number }): this;
+    setOrigin(gameObject?: Phaser.GameObjects.GameObject): this;
+    x: number;
+    y: number;
+    originGameObject: Phaser.GameObjects.GameObject;
 
     setRadius(maxRadius: number, minRadius?: number): this;
     maxRadius: number;
