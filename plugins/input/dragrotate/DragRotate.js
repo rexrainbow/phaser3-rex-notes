@@ -1,4 +1,4 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -6,11 +6,14 @@ const GetAngle = Phaser.Math.Angle.Between;
 const WrapAngle = Phaser.Math.Angle.Wrap;
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class DragRotate {
+const STATE_TOUCH0 = 0;
+const STATE_TOUCH1 = 1;
+
+class DragRotate extends ComponentBase {
     constructor(scene, config) {
-        this.scene = scene;
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(scene);
+        // No event emitter
+        // this.scene = scene
 
         this._enable = undefined;
         this._deltaRotation = undefined;
@@ -23,31 +26,28 @@ class DragRotate {
         this.setEnable(GetValue(o, "enable", true));
         this.setOrigin(o);
         this.setRadius(GetValue(o, 'maxRadius', 100), GetValue(o, 'minRadius', 0));
-        this.state = TOUCH0;
+        this.state = STATE_TOUCH0;
     }
 
     boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.once('shutdown', this.destroy, this);
     }
 
-    shutdown() {
-        if (!this.scene) {
-            return
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
 
-        this.destroyEventEmitter();
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.off('shutdown', this.destroy, this);
-        this.scene = undefined;
-    }
 
-    destroy() {
-        this.shutdown();
+        this.pointer = undefined;
+
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -85,8 +85,8 @@ class DragRotate {
             x = GetValue(point, 'x', 0);
             y = GetValue(point, 'y', 0);
         }
-        this.x = x;
-        this.y = y;
+        this.x = x;  // World position
+        this.y = y;  // World position
         return this;
     }
 
@@ -133,13 +133,13 @@ class DragRotate {
         }
 
         switch (this.state) {
-            case TOUCH0:
+            case STATE_TOUCH0:
                 if (this.contains(pointer.worldX, pointer.worldY)) {
                     this.onDragStart(pointer);
                 }
                 break;
 
-            case TOUCH1:
+            case STATE_TOUCH1:
                 if (this.contains(pointer.worldX, pointer.worldY)) {
                     this.onDrag();
                 } else {
@@ -150,24 +150,24 @@ class DragRotate {
     }
 
     dragCancel() {
-        if (this.state === TOUCH1) {
+        if (this.state === STATE_TOUCH1) {
             this.onDragEnd();
         }
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.state = STATE_TOUCH0;
         return this;
     }
 
     onDragStart(pointer) {
         this.pointer = pointer;
-        this.state = TOUCH1;
+        this.state = STATE_TOUCH1;
         this._deltaRotation = undefined;
         this.emit('dragstart', this);
     }
 
     onDragEnd() {
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.state = STATE_TOUCH0;
         this._deltaRotation = undefined;
         this.emit('dragend', this);
     }
@@ -178,7 +178,7 @@ class DragRotate {
     }
 
     get deltaRotation() {
-        if (this.state === TOUCH0) {
+        if (this.state === STATE_TOUCH0) {
             return 0;
         }
 
@@ -195,7 +195,7 @@ class DragRotate {
     }
 
     get deltaAngle() {
-        if (this.state === TOUCH0) {
+        if (this.state === STATE_TOUCH0) {
             return 0;
         }
 
@@ -211,12 +211,5 @@ class DragRotate {
     }
 }
 
-Object.assign(
-    DragRotate.prototype,
-    EventEmitterMethods
-);
-
-const TOUCH0 = 0;
-const TOUCH1 = 1;
 
 export default DragRotate;
