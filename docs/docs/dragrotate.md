@@ -8,6 +8,7 @@ Get dragging angle around a specific point.
 ## Live demos
 
 - [Spin-button](https://codepen.io/rexrainbow/pen/NJKywR)
+- [Origin game object](https://codepen.io/rexrainbow/pen/zYywmVX)
 
 ## Usage
 
@@ -74,15 +75,20 @@ Get dragging angle around a specific point.
 
 ```javascript
 var dragRotate = scene.plugins.get('rexDragRotate').add(scene, {
+    origin: undefined,
     x: 0,
     y: 0,
-    maxRadius: 100
+    
+    maxRadius: undefined
     minRadius: 0,
+
     // enable: true,
 });
 ```
 
-- `x`, `y` : Orgin point, in world position.
+- `origin` : Use game object's position as origin point.
+    - `undefined` : Use fixed origin position.
+- `x`, `y` : Fixed orgin point, in world position.
 - `maxRadius`, `minRadius` : Dragging is valid when distance between touch pointer and origin position is larger then `minRadius` and less then `maxRadius`.
 - `enable` : Set `false` to disable input events.
 
@@ -104,19 +110,24 @@ var dragRotate = scene.plugins.get('rexDragRotate').add(scene, {
 
 ### Origin point
 
-- Get
+- Use game object's position as origin point.
     ```javascript
-    var x = dragRotate.x;
-    var y = dragRotate.y;
+    dragRotate.setOrigin(gameObject);
     ```
-- Set
-    ```javascript
-    dragRotate.setOrigin(x, y);
-    ```
-    or
-    ```javascript
-    dragRotate.setOrigin(pointer); // pointer: {x, y}
-    ```
+- Fixed orgin point
+    - Get
+        ```javascript
+        var x = dragRotate.x;
+        var y = dragRotate.y;
+        ```
+    - Set
+        ```javascript
+        dragRotate.setOrigin(x, y);
+        ```
+        or
+        ```javascript
+        dragRotate.setOrigin(pointer); // pointer: {x, y}
+        ```
 
 !!! note
     Parameter `(x,y)` is world position, not camera position.
