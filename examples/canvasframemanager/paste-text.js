@@ -9,15 +9,19 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        // TODO : remove this line
+        this.load.image('classroom', 'assets/images/phaser-dude.png');
     }
 
     create() {
+        var useDynamicTexture = true;
         var canvasFrames = this.plugins.get('rexCanvasFrameManager').add(this,
             {
                 key: 'test',
                 width: 512, height: 512,
                 cellWidth: 64, cellHeight: 64,
-                fillColor: '#666666'
+                fillColor: (useDynamicTexture) ? 0x666666 : '#666666',
+                useDynamicTexture: useDynamicTexture,
             });
 
         // Show canvas texture

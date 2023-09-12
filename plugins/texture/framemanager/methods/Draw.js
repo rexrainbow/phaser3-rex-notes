@@ -49,8 +49,14 @@ var DrawCanvasTexture = function (x, y, frameSize, callback, scope) {
 var DrawDynamicTexture = function (x, y, frameSize, callback, scope) {
     var texture = this.texture;
 
-    // Clear cell : ??
-    texture.fill(0x0, 1, x, y, frameSize.width, frameSize.height);
+    // Clear cell
+    texture.stamp('__WHITE', undefined, x, y, {
+        scaleX: frameSize.width / this.whiteFrameWidth,
+        scaleY: frameSize.height / this.whiteFrameHeight,
+        originX: 0,
+        originY: 0,
+        erase: true,
+    })
 
     // Draw cell
     texture.camera.setScroll(-x, -y);

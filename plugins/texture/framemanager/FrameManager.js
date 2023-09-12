@@ -1,6 +1,7 @@
 import Methods from './methods/Methods.js';
 import GetGame from '../../utils/system/GetGame.js';
 import CreateTexture from '../../utils/texture/CreateTexture.js';
+import GetWhiteFrame from '../../utils/texture/GetWhiteFrame.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -70,6 +71,13 @@ class FrameManager {
         this.frameNames = Array(this.totalCount);
         for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
             this.frameNames[i] = undefined;
+        }
+       
+        if (useDynamicTexture) {
+             // For clear rectangle
+            var whiteFrame = GetWhiteFrame(game);
+            this.whiteFrameWidth = whiteFrame.cutWidth;
+            this.whiteFrameHeight = whiteFrame.cutHeight;
         }
     }
 
