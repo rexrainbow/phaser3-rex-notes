@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     create() {
         var overlap = 30;
 
-        var texture = CreatePaddingTexture(this, 'classroom-padding', 'classroom', overlap, overlap);
+        var texture = CreatePaddingTexture(this, 'classroom-padding', 'classroom', overlap);
 
         var image = this.add.image(400, 300, texture)
             .setScale(0.5).setAngle(-30).setVisible(false)

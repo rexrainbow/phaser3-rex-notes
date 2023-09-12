@@ -1,6 +1,9 @@
 import GetGame from '../system/GetGame.js';
+import GetBoundsConfig from '../bounds/GetBoundsConfig.js';
 
-var CreatePaddingTexture = function (game, destinationKey, sourceKey, paddingX, paddingY) {
+var CreatePaddingTexture = function (game, destinationKey, sourceKey, padding) {
+    padding = GetBoundsConfig(padding);
+
     var textureManager = GetGame(game).textures;
 
     if (textureManager.exists(destinationKey)) {
@@ -8,10 +11,11 @@ var CreatePaddingTexture = function (game, destinationKey, sourceKey, paddingX, 
     }
 
     var frame = textureManager.getFrame(sourceKey);
-    var width = frame.cutWidth + paddingX * 2;
-    var height = frame.cutHeight + paddingY * 2;
+    var width = frame.cutWidth + padding.left + padding.right;
+    var height = frame.cutHeight + padding.top + padding.bottom;
+
     var destinationTexture = textureManager.addDynamicTexture(destinationKey, width, height);
-    destinationTexture.drawFrame(sourceKey, undefined, paddingX, paddingY);
+    destinationTexture.drawFrame(sourceKey, undefined, padding.left, padding.top);
 
     return destinationTexture;
 }
