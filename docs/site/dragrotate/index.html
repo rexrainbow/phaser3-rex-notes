@@ -9705,6 +9705,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/NJKywR">Spin-button</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/zYywmVX">Origin game object</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dragrotate">Sample code</a></p>
@@ -9758,15 +9759,22 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dragRotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDragRotate&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">maxRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span>
+
+<span class="w">    </span><span class="nx">maxRadius</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
 <span class="w">    </span><span class="nx">minRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
 <span class="w">    </span><span class="c1">// enable: true,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>x</code>, <code>y</code> : Orgin point, in world position.</li>
+<li><code>origin</code> : Use game object's position as origin point.<ul>
+<li><code>undefined</code> : Use fixed origin position.</li>
+</ul>
+</li>
+<li><code>x</code>, <code>y</code> : Fixed orgin point, in world position.</li>
 <li><code>maxRadius</code>, <code>minRadius</code> : Dragging is valid when distance between touch pointer and origin position is larger then <code>minRadius</code> and less then <code>maxRadius</code>.</li>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
 </ul>
@@ -9785,6 +9793,10 @@
 </ul>
 <h3 id="origin-point">Origin point<a class="headerlink" href="#origin-point" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Use game object's position as origin point.
+    <div class="highlight"><pre><span></span><code><span class="nx">dragRotate</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Fixed orgin point<ul>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dragRotate</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dragRotate</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
@@ -9795,6 +9807,8 @@
     or
     <div class="highlight"><pre><span></span><code><span class="nx">dragRotate</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">pointer</span><span class="p">);</span><span class="w"> </span><span class="c1">// pointer: {x, y}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
