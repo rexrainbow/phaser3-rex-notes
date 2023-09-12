@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdragrotateplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -93,6 +102,29 @@
       }
       return _possibleConstructorReturn(this, result);
     };
+  }
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+    return object;
+  }
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+        return desc.value;
+      };
+    }
+    return _get.apply(this, arguments);
   }
   function _toPrimitive(input, hint) {
     if (typeof input !== "object" || input === null) return input;
@@ -190,30 +222,185 @@
     }
   };
 
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
+  var ScreenXYToWorldXY = function ScreenXYToWorldXY(screenX, screenY, camera, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalOut;
+    }
+    camera.getWorldPoint(screenX, screenY, out);
+    return out;
+  };
+  var globalOut = {};
+
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween = Phaser.Math.Distance.Between;
   var GetAngle = Phaser.Math.Angle.Between;
   var WrapAngle = Phaser.Math.Angle.Wrap;
   var RadToDeg = Phaser.Math.RadToDeg;
-  var DragRotate = /*#__PURE__*/function () {
+  var STATE_TOUCH0 = 0;
+  var STATE_TOUCH1 = 1;
+  var DragRotate = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(DragRotate, _ComponentBase);
+    var _super = _createSuper(DragRotate);
     function DragRotate(scene, config) {
+      var _this;
       _classCallCheck(this, DragRotate);
-      this.scene = scene;
-      // Event emitter
-      this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-      this._enable = undefined;
-      this._deltaRotation = undefined;
-      this.resetFromJSON(config);
-      this.boot();
+      _this = _super.call(this, scene);
+      // No event emitter
+      // this.scene = scene
+
+      _this.mainCamera = _this.scene.sys.cameras.main;
+      _this._enable = undefined;
+      _this.resetFromJSON(config);
+      _this.boot();
+      return _this;
     }
     _createClass(DragRotate, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.pointer = undefined;
+        this.originGameObject = undefined;
         this.setEnable(GetValue(o, "enable", true));
-        this.setOrigin(o);
-        this.setRadius(GetValue(o, 'maxRadius', 100), GetValue(o, 'minRadius', 0));
-        this.state = TOUCH0;
+        var originConfig = GetValue(o, 'origin', o);
+        this.setOrigin(originConfig);
+        this.setRadius(GetValue(o, 'maxRadius'), GetValue(o, 'minRadius', 0));
+        this.state = STATE_TOUCH0;
       }
     }, {
       key: "boot",
@@ -221,25 +408,21 @@
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
-      value: function shutdown() {
-        if (!this.scene) {
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
           return;
         }
-        this.destroyEventEmitter();
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.off('shutdown', this.destroy, this);
-        this.scene = undefined;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
+        this.mainCamera = undefined;
+        this.pointer = undefined;
+        this.originGameObject = undefined;
+        _get(_getPrototypeOf(DragRotate.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "enable",
@@ -273,13 +456,23 @@
     }, {
       key: "setOrigin",
       value: function setOrigin(x, y) {
-        if (y === undefined) {
-          var point = x;
-          x = GetValue(point, 'x', 0);
-          y = GetValue(point, 'y', 0);
+        if (x === undefined) {
+          this._x = undefined; // World position
+          this._y = undefined; // World position
+          this.originGameObject = undefined;
+        } else if (IsGameObject(x)) {
+          this._x = undefined;
+          this._y = undefined;
+          this.originGameObject = x;
+        } else if (IsPlainObject(x)) {
+          this._x = GetValue(x, 'x', 0); // World position
+          this._y = GetValue(x, 'y', 0); // World position
+          this.originGameObject = undefined;
+        } else {
+          this._x = x; // World position
+          this._y = y; // World position
+          this.originGameObject = undefined;
         }
-        this.x = x;
-        this.y = y;
         return this;
       }
     }, {
@@ -293,10 +486,63 @@
         return this;
       }
     }, {
-      key: "contains",
-      value: function contains(x, y) {
-        var r = DistanceBetween(this.x, this.y, x, y);
-        return r >= this.minRadius && r <= this.maxRadius;
+      key: "getOriginX",
+      value: function getOriginX(camera) {
+        // OriginX in world position
+        if (!this.originGameObject) {
+          return this._x;
+        }
+        var gameObject = this.originGameObject;
+        var x = gameObject.x;
+        if (gameObject.scrollFactorX === 0) {
+          if (camera === undefined) {
+            camera = this.pointer.camera;
+          }
+          x += camera.scrollX;
+        }
+        return x;
+      }
+    }, {
+      key: "getOriginY",
+      value: function getOriginY(camera) {
+        // OriginY in world position
+        if (!this.originGameObject) {
+          return this._y;
+        }
+        var gameObject = this.originGameObject;
+        var y = gameObject.y;
+        if (gameObject.scrollFactorY === 0) {
+          if (camera === undefined) {
+            camera = this.pointer.camera;
+          }
+          y += camera.scrollY;
+        }
+        return y;
+      }
+    }, {
+      key: "getPointerWorldXY",
+      value: function getPointerWorldXY(pointer) {
+        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
+        // if this camera is not main-camera
+        if (pointer.camera !== this.mainCamera) {
+          WorldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, WorldXY);
+        } else {
+          WorldXY.x = pointer.worldX;
+          WorldXY.y = pointer.worldY;
+        }
+        return WorldXY;
+      }
+    }, {
+      key: "containsPointer",
+      value: function containsPointer(pointer) {
+        if (this.minRadius === 0 && this.maxRadius === undefined) {
+          return true;
+        }
+        var originX = this.getOriginX(pointer.camera);
+        var originY = this.getOriginY(pointer.camera);
+        var worldXY = this.getPointerWorldXY(pointer);
+        var r = DistanceBetween(originX, originY, worldXY.x, worldXY.y);
+        return r >= this.minRadius && (this.maxRadius === undefined || r <= this.maxRadius);
       }
     }, {
       key: "onPointerDown",
@@ -304,7 +550,7 @@
         if (!this.enable || this.pointer) {
           return;
         }
-        if (!this.contains(pointer.worldX, pointer.worldY)) {
+        if (!this.containsPointer(pointer)) {
           return;
         }
         this.onDragStart(pointer);
@@ -324,16 +570,16 @@
           return;
         }
         switch (this.state) {
-          case TOUCH0:
-            if (this.contains(pointer.worldX, pointer.worldY)) {
+          case STATE_TOUCH0:
+            if (this.containsPointer(pointer)) {
               this.onDragStart(pointer);
             }
             break;
-          case TOUCH1:
-            if (this.contains(pointer.worldX, pointer.worldY)) {
-              this.onDrag();
+          case STATE_TOUCH1:
+            if (this.containsPointer(pointer)) {
+              this.onDrag(pointer);
             } else {
-              this.onDragEnd();
+              this.onDragEnd(pointer);
             }
             break;
         }
@@ -341,54 +587,52 @@
     }, {
       key: "dragCancel",
       value: function dragCancel() {
-        if (this.state === TOUCH1) {
+        if (this.state === STATE_TOUCH1) {
           this.onDragEnd();
         }
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.state = STATE_TOUCH0;
         return this;
       }
     }, {
       key: "onDragStart",
       value: function onDragStart(pointer) {
         this.pointer = pointer;
-        this.state = TOUCH1;
-        this._deltaRotation = undefined;
+        var worldXY = this.getPointerWorldXY(pointer);
+        this.prevPointerX = worldXY.x;
+        this.prevPointerY = worldXY.y;
+        this.state = STATE_TOUCH1;
         this.emit('dragstart', this);
       }
     }, {
       key: "onDragEnd",
       value: function onDragEnd() {
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.prevPointerX = undefined;
+        this.prevPointerY = undefined;
+        this.state = STATE_TOUCH0;
         this._deltaRotation = undefined;
         this.emit('dragend', this);
       }
     }, {
       key: "onDrag",
-      value: function onDrag() {
-        this._deltaRotation = undefined;
+      value: function onDrag(pointer) {
+        var x = this.getOriginX(),
+          y = this.getOriginY();
+        var worldXY = this.getPointerWorldXY(pointer);
+        var curPointerX = worldXY.x;
+        var curPointerY = worldXY.y;
+        var a0 = GetAngle(x, y, this.prevPointerX, this.prevPointerY),
+          a1 = GetAngle(x, y, curPointerX, curPointerY);
+        this.deltaRotation = WrapAngle(a1 - a0);
+        this.prevPointerX = curPointerX;
+        this.prevPointerY = curPointerY;
         this.emit('drag', this);
-      }
-    }, {
-      key: "deltaRotation",
-      get: function get() {
-        if (this.state === TOUCH0) {
-          return 0;
-        }
-        if (this._deltaRotation === undefined) {
-          var p0 = this.pointer.prevPosition,
-            p1 = this.pointer.position;
-          var a0 = GetAngle(this.x, this.y, p0.x, p0.y),
-            a1 = GetAngle(this.x, this.y, p1.x, p1.y);
-          this._deltaRotation = WrapAngle(a1 - a0);
-        }
-        return this._deltaRotation;
       }
     }, {
       key: "deltaAngle",
       get: function get() {
-        if (this.state === TOUCH0) {
+        if (this.state === STATE_TOUCH0) {
           return 0;
         }
         return RadToDeg(this.deltaRotation);
@@ -405,10 +649,8 @@
       }
     }]);
     return DragRotate;
-  }();
-  Object.assign(DragRotate.prototype, EventEmitterMethods);
-  var TOUCH0 = 0;
-  var TOUCH1 = 1;
+  }(ComponentBase);
+  var WorldXY = {};
 
   var DragRotatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DragRotatePlugin, _Phaser$Plugins$BaseP);
