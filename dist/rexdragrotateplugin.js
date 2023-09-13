@@ -457,20 +457,20 @@
       key: "setOrigin",
       value: function setOrigin(x, y) {
         if (x === undefined) {
-          this._x = undefined; // World position
-          this._y = undefined; // World position
+          this.x = undefined; // World position
+          this.y = undefined; // World position
           this.originGameObject = undefined;
         } else if (IsGameObject(x)) {
-          this._x = undefined;
-          this._y = undefined;
+          this.x = undefined;
+          this.y = undefined;
           this.originGameObject = x;
         } else if (IsPlainObject(x)) {
-          this._x = GetValue(x, 'x', 0); // World position
-          this._y = GetValue(x, 'y', 0); // World position
+          this.x = GetValue(x, 'x', 0); // World position
+          this.y = GetValue(x, 'y', 0); // World position
           this.originGameObject = undefined;
         } else {
-          this._x = x; // World position
-          this._y = y; // World position
+          this.x = x; // World position
+          this.y = y; // World position
           this.originGameObject = undefined;
         }
         return this;

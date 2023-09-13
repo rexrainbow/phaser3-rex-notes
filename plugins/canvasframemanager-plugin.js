@@ -1,19 +1,2 @@
-import FrameManager from './canvasframemanager.js';
-
-class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
-
-    constructor(pluginManager) {
-        super(pluginManager);
-    }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-
-    add(scene, key, width, height, cellWidth, cellHeight, fillColor) {
-        return new FrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor);
-    }
-}
-
+import CanvasFrameManagerPlugin from './framemanager-plugin.js';
 export default CanvasFrameManagerPlugin;
