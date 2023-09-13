@@ -15,14 +15,20 @@ var Paste = function (frameName, gameObject) {
         }
 
         drawCallback = function (texture, frameSize) {
+            var originXSave = gameObject.originX,
+                originYSave = gameObject.originY;
             var scaleXSave = gameObject.scaleX,
                 scaleYSave = gameObject.scaleY;
 
-            gameObject.setScale(scale, scale);
+            gameObject
+                .setOrigin(0, 0)
+                .setScale(scale, scale);
 
             texture.draw(gameObject);
 
-            gameObject.setScale(scaleXSave, scaleYSave);
+            gameObject
+                .setOrigin(originXSave, originYSave)
+                .setScale(scaleXSave, scaleYSave);
 
             frameSize.width = srcWidth / scale;
             frameSize.height = srcHeight / scale;

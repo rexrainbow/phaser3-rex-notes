@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var useDynamicTexture = true;
-        var canvasFrames = this.plugins.get('rexCanvasFrameManager').add(this,
+        var frameManager = this.plugins.get('rexCanvasFrameManager').add(this,
             {
                 key: 'test',
                 width: 512, height: 512,
@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
                 useDynamicTexture: useDynamicTexture,
             });
 
-        // Show canvas texture
+        // Show texture
         this.add.image(800, 600, 'test').setOrigin(1).setScale(0.5);
 
         // A text object for drawing character
@@ -45,9 +45,9 @@ class Demo extends Phaser.Scene {
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
             txt.setText(c)
-            canvasFrames.paste(c, txt);
+            frameManager.paste(c, txt);
         }
-        canvasFrames.updateTexture();
+        frameManager.updateTexture();
 
         // Show frame by Image
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
@@ -56,7 +56,7 @@ class Demo extends Phaser.Scene {
         }
 
         // Add frames to bitmapfont, for bitmaptext
-        canvasFrames.addToBitmapFont();
+        frameManager.addToBitmapFont();
         this.add.bitmapText(50, 100, 'test', '兒樂童園')
             .setScale(0.5)
             .setCharacterTint(0, 1, false, 0xff0000)

@@ -253,11 +253,13 @@
         scale = Math.max(srcWidth / this.cellWidth, srcHeight / this.cellHeight);
       }
       drawCallback = function drawCallback(texture, frameSize) {
+        var originXSave = gameObject.originX,
+          originYSave = gameObject.originY;
         var scaleXSave = gameObject.scaleX,
           scaleYSave = gameObject.scaleY;
-        gameObject.setScale(scale, scale);
+        gameObject.setOrigin(0, 0).setScale(scale, scale);
         texture.draw(gameObject);
-        gameObject.setScale(scaleXSave, scaleYSave);
+        gameObject.setOrigin(originXSave, originYSave).setScale(scaleXSave, scaleYSave);
         frameSize.width = srcWidth / scale;
         frameSize.height = srcHeight / scale;
       };
