@@ -38,14 +38,22 @@ class Demo extends Phaser.Scene {
         var rt = this.add.renderTexture(0, 0, cellSize, cellSize);
         // Can't paste graphics to FrameManager directly, because that graphics does not have size
 
-        DrawPiece(graphics, cellSize, cellSize, indent, 2, 2, 2, 2);
-
         var topEdgeMode, leftEdgeMode, bottomEdgeMode, rightEdgeMode;
         for (topEdgeMode = 0; topEdgeMode < 3; topEdgeMode++) {
             for (leftEdgeMode = 0; leftEdgeMode < 3; leftEdgeMode++) {
                 for (bottomEdgeMode = 0; bottomEdgeMode < 3; bottomEdgeMode++) {
                     for (rightEdgeMode = 0; rightEdgeMode < 3; rightEdgeMode++) {
-                        DrawPiece(graphics, cellSize, cellSize, indent, rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode);
+                        DrawPieceMask(graphics, {
+                            width: cellSize,
+                            height: cellSize,
+                            indent: indent,
+                            edgeModes: {
+                                right: rightEdgeMode,
+                                left: leftEdgeMode,
+                                top: topEdgeMode,
+                                bottom: bottomEdgeMode
+                            }
+                        });
                         rt.clear().draw(graphics);
                         var frameName = `${rightEdgeMode}${bottomEdgeMode}${leftEdgeMode}${topEdgeMode}`;
                         frameManager.paste(frameName, rt);
@@ -65,12 +73,20 @@ class Demo extends Phaser.Scene {
 }
 
 const DegToRad = Phaser.Math.DegToRad;
-var DrawPiece = function (graphics, width, height, indent, rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode) {
+var DrawPieceMask = function (graphics, config) {
+    var width = config.width;
+    var height = config.height;
+    var indent = config.indent;
+    var edgeModes = config.edgeModes;
+    var rightEdgeMode = edgeModes.right;
+    var bottomEdgeMode = edgeModes.bottom;
+    var leftEdgeMode = edgeModes.left;
+    var topEdgeMode = edgeModes.top;
+
     var centerX = width / 2, centerY = height / 2;
 
     graphics.clear();
     graphics.beginPath();
-
 
     graphics.moveTo(indent, indent);
 

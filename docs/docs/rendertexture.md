@@ -80,6 +80,26 @@ var rt = scene.make.renderTexture({
     rt.draw(scene.children, x, y);
     // rt.draw(scene.children, x, y, alpha, tint);
     ```
+- Stamp texture
+    ```javascript
+    rt.stamp(key, frame, x, y, {
+        originX: 0.5,
+        originY: 0.5,
+
+        scale: 1,
+        scaleX: 1, 
+        scaleY: 1,
+        
+        rotation: 0,
+        angle: 0,
+        
+        alpha: 1,
+        tint: 0xffffff,
+        blendMode: 0,
+
+        erase: false,
+    })
+    ```
 - Paste texture
     ```javascript
     rt.draw(key, x, y);
@@ -91,6 +111,7 @@ var rt = scene.make.renderTexture({
     // rt.drawFrame(key, frame, x, y, alpha, tint);
     ```
     - `key` : The key of the texture to be used, as stored in the Texture Manager.
+
 
 #### Global alpha
 
