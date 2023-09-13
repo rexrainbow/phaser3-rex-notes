@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import JigsawPiece from './JigsawPiece.js';
+import JigsawPiece from './lib/JigsawPiece.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

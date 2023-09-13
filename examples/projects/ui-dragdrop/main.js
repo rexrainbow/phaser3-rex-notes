@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../../templates/ui/ui-plugin.js';
-import CreateScrollablePanel from './CreateScrollablePanel.js';
+import CreateScrollablePanel from './lib/CreateScrollablePanel.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
