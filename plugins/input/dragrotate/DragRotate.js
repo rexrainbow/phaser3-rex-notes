@@ -123,7 +123,7 @@ class DragRotate extends ComponentBase {
     getOriginX(camera) {
         // OriginX in world position
         if (!this.originGameObject) {
-            return this._x;
+            return this.x;
         }
 
         var gameObject = this.originGameObject;
@@ -140,7 +140,7 @@ class DragRotate extends ComponentBase {
     getOriginY(camera) {
         // OriginY in world position
         if (!this.originGameObject) {
-            return this._y;
+            return this.y;
         }
 
         var gameObject = this.originGameObject;
