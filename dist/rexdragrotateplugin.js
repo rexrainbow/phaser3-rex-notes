@@ -490,7 +490,7 @@
       value: function getOriginX(camera) {
         // OriginX in world position
         if (!this.originGameObject) {
-          return this._x;
+          return this.x;
         }
         var gameObject = this.originGameObject;
         var x = gameObject.x;
@@ -507,7 +507,7 @@
       value: function getOriginY(camera) {
         // OriginY in world position
         if (!this.originGameObject) {
-          return this._y;
+          return this.y;
         }
         var gameObject = this.originGameObject;
         var y = gameObject.y;
