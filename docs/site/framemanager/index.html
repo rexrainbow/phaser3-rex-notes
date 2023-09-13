@@ -9783,7 +9783,13 @@
 </ul>
 </li>
 <li><a href="../dynamic-texture/">Dynamic-texture</a> mode :<ul>
-<li>Any render-able game object.</li>
+<li>Any render-able game object except :<ul>
+<li><a href="../graphics/">Graphics</a> can't paste directly, because that Graphics game object does not have size. <ul>
+<li>Draw Graphics to <a href="../rendertexture/">RenderTexture</a>, then paste this <a href="../rendertexture/">RenderTexture</a> to frameMamager.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

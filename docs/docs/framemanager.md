@@ -130,7 +130,9 @@ frameManager.paste(frameName, gameObject);
     - [Canvas-texture](canvas-texture.md) mode :
         - Game objects which has canvas, for example, [text](text.md), [bbcode text](bbcodetext.md), or [canvas](canvas.md).
     - [Dynamic-texture](dynamic-texture.md) mode :
-        -  Any render-able game object.
+        -  Any render-able game object except :
+            -  [Graphics](graphics.md) can't paste directly, because that Graphics game object does not have size. 
+                - Draw Graphics to [RenderTexture](rendertexture.md), then paste this [RenderTexture](rendertexture.md) to frameMamager.
 
 
 #### Custom drawing
