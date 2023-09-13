@@ -1,3 +1,5 @@
+import ComponentBase from '../../utils/componentbase/ComponentBase';
+
 export default DragRotate;
 
 declare namespace DragRotate {
@@ -17,7 +19,7 @@ declare namespace DragRotate {
     }
 }
 
-declare class DragRotate extends Phaser.Events.EventEmitter {
+declare class DragRotate extends ComponentBase {
     constructor(
         scene: Phaser.Scene,
         config?: DragRotate.IConfig
