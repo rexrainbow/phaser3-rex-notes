@@ -10,10 +10,10 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/canvasframemanager/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/framemanager/">
       
       
-        <link rel="prev" href="../canvas-texture/">
+        <link rel="prev" href="../dynamic-texture/">
       
       
         <link rel="next" href="../charactercache/">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Canvas frame manager - Notes of Phaser 3</title>
+        <title>Frame manager - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Canvas frame manager
+              Frame manager
             
           </span>
         </div>
@@ -3803,35 +3803,6 @@
               
   
   
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15_2" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_15_2" id="__nav_4_15_2_label" tabindex="0">
-          Canvas texture
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_15_2_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_4_15_2">
-          <span class="md-nav__icon md-icon"></span>
-          Canvas texture
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
   
     <li class="md-nav__item">
       <a href="../canvas-texture/" class="md-nav__link">
@@ -3841,6 +3812,49 @@
   
 
             
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-texture/" class="md-nav__link">
+        Dynamic texture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_15_4" id="__nav_4_15_4_label" tabindex="0">
+          Frame manager
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_15_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4_15_4">
+          <span class="md-nav__icon md-icon"></span>
+          Frame manager
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
             
               
@@ -3856,12 +3870,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Canvas frame manager
+          Frame manager
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Canvas frame manager
+        Frame manager
       </a>
       
         
@@ -4032,20 +4046,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../dynamic-texture/" class="md-nav__link">
-        Dynamic texture
-      </a>
     </li>
   
 
@@ -9668,10 +9668,10 @@
   
 
 
-  <h1>Canvas frame manager</h1>
+  <h1>Frame manager</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Generate bitmapfont from <a href="../text/">text game object</a>, or <a href="../bbcodetext/">bbcode text game object</a>.</p>
+<p>Draw frames on <a href="../canvas-texture/">canvas texture</a>, or <a href="../dynamic-texture/">dynamic texture</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
@@ -9681,15 +9681,15 @@
 <li><a href="https://codepen.io/rexrainbow/pen/PoOXdwE">Paste text</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasframemanager">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/framemanager">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcanvasframemanagerplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcanvasframemanagerplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexframemanagerplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexframemanagerplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add canvas-frame-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvasFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcanvasframemanagerplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexframemanagerplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9698,13 +9698,13 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CanvasFrameManagerPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/canvasframemanager-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">FrameManagerPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/framemanager-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">CanvasFrameManagerPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">FrameManagerPlugin</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
@@ -9714,8 +9714,8 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add canvas-frame-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvasFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9724,62 +9724,78 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">CanvasFrameManager</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/canvasframemanager.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">FrameManager</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/framemanager.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add canvas-frame-manager object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvasFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CanvasFrameManager</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FrameManager</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvasFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">    </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>key</code> : Texture key in <a href="../textures/">texture manager</a></li>
 <li><code>width</code>, <code>height</code> : Size of canvas.</li>
 <li><code>cellWidth</code>, <code>cellHeight</code> : Maximum frame size.</li>
-<li><code>fillColor</code> : Fill an initial color, in css color string.<ul>
+<li><code>fillColor</code> : Fill an initial color, in css color string (for <a href="../canvas-texture/">canvas-texture</a>), or number (for <a href="../dynamic-texture/">dynamic-texture</a>)<ul>
 <li><code>undefined</code> : Don't fill color.</li>
+</ul>
+</li>
+<li><code>useDynamicTexture</code><ul>
+<li><code>false</code> : Use <a href="../canvas-texture/">canvas-texture</a>. Default behavior.</li>
+<li><code>true</code> : Use <a href="../dynamic-texture/">dynamic-texture</a>.</li>
 </ul>
 </li>
 </ul>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvasFrames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">cellWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">cellHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">cellWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">cellHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">useDynamicTexture</span><span class="p">);</span>
 </code></pre></div>
 <p>Steps of generating bitmapfont :</p>
 <ol>
 <li>Add frames : 
-   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+   <div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Update texture
-   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+   <div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Export frame data to bitmapfont
-   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
+   <div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
 </code></pre></div></li>
 </ol>
 <h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
 <h4 id="from-game-object">From game object<a class="headerlink" href="#from-game-object" title="Permanent link">&para;</a></h4>
 <p>After rendering content on <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, <a href="../canvas/">canvas</a></p>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>frameName</code> : Frame name.</li>
-<li><code>gameObject</code> : <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, or <a href="../canvas/">canvas</a>.</li>
+<li><code>gameObject</code> : <ul>
+<li><a href="../canvas-texture/">Canvas-texture</a> mode :<ul>
+<li>Game objects which has canvas, for example, <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, or <a href="../canvas/">canvas</a>.</li>
+</ul>
+</li>
+<li><a href="../dynamic-texture/">Dynamic-texture</a> mode :<ul>
+<li>Any render-able game object.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="custom-drawing">Custom drawing<a class="headerlink" href="#custom-drawing" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">)</span>
 </code></pre></div>
-<ul>
-<li><code>frameName</code> : Frame name.</li>
-<li><code>callback</code> : 
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+- <code>frameName</code> : Frame name.
+- <code>callback</code> : 
+    - <a href="../canvas-texture/">Canvas-texture</a> mode : 
+        <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// The maximum frame size</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
@@ -9790,11 +9806,23 @@
 <span class="w">    </span><span class="c1">// frameSize.width = ...</span>
 <span class="w">    </span><span class="c1">// frameSize.height = ...</span>
 <span class="p">}</span>
-</code></pre></div></li>
-</ul>
+</code></pre></div>
+    - <a href="../dynamic-texture/">Dynamic-texture</a> mode :
+        <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The maximum frame size</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Draw content in area of (0, 0) - (cellWidth, cellHeight)</span>
+
+<span class="w">    </span><span class="c1">// Update frame size</span>
+<span class="w">    </span><span class="c1">// frameSize.width = ...</span>
+<span class="w">    </span><span class="c1">// frameSize.height = ...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="empty-frame">Empty frame<a class="headerlink" href="#empty-frame" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addEmptyFrame</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
-<span class="c1">// canvasFrames.addEmptyFrame(frameName, width, height);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">addEmptyFrame</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+<span class="c1">// frameManager.addEmptyFrame(frameName, width, height);</span>
 </code></pre></div>
 <ul>
 <li><code>frameName</code> : Frame name.</li>
@@ -9802,26 +9830,28 @@
 <li><code>height</code> : Frame height, default value is <code>cellHeight</code></li>
 </ul>
 <h3 id="update-texture">Update texture<a class="headerlink" href="#update-texture" title="Permanent link">&para;</a></h3>
-<p>Update texture after adding frames.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+<p>Update texture after adding frames, for <a href="../canvas-texture/">Canvas-texture</a> mode.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </code></pre></div>
+<p>Do nothing in <a href="../dynamic-texture/">Dynamic-texture</a> mode.</p>
 <h3 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Remove a frame
-    <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>frameName</code> : Frame name.</li>
 </ul>
 </li>
 <li>Remove all frames
-    <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
+<p>Remove frame data but won't clear texture image.</p>
 <h3 id="export-to-bitmapfont">Export to bitmapfont<a class="headerlink" href="#export-to-bitmapfont" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
 </code></pre></div>
 <h3 id="destroy-instance">Destroy instance<a class="headerlink" href="#destroy-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManager</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
 
 

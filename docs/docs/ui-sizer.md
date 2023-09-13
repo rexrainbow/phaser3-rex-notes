@@ -352,7 +352,7 @@ sizer.insertAtPosition(x, y, index, child, proportion, align, padding, expand, k
     // sizer.insertSpace(index, proportion);
     ```
 
-Usage :
+Use cases :
 
 - Align child at center
     ```javascript
