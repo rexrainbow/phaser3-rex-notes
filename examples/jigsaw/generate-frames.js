@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
             baseKey: 'classroom',
             targetKey: 'pieces',
             columns: 8, rows: 6,
+            edgeWidth: 15, edgeHeight: 15
         })
         this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0);
 

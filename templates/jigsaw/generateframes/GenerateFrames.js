@@ -11,7 +11,7 @@ var GenerateFrames = function (scene, {
     baseKey,
     targetKey,
     columns, rows,
-    overlap,
+    edgeWidth, edgeHeight,
     edges,
     drawMaskCallback,
     getFrameNameCallback = DefaultGetFrameNameCallback
@@ -22,16 +22,19 @@ var GenerateFrames = function (scene, {
     var baseFrameWidth = baseFrame.cutWidth,
         baseFrameHeight = baseFrame.height;
 
-    if (overlap === undefined) {
-        overlap = Math.min(baseFrameWidth / columns, baseFrameHeight / rows) / 7;
+    if (edgeWidth === undefined) {
+        edgeWidth = (baseFrameWidth / columns) / 7;
+    }
+    if (edgeHeight === undefined) {
+        edgeHeight = (baseFrameHeight / rows) / 7;
     }
 
     if (edges === undefined) {
         edges = RandomPieceEdges(columns, rows);
     }
 
-    var frameWidth = (baseFrameWidth + (columns - 1) * overlap) / columns;
-    var frameHeight = (baseFrameHeight + (rows - 1) * overlap) / rows;
+    var frameWidth = (baseFrameWidth + (columns - 1) * edgeWidth) / columns;
+    var frameHeight = (baseFrameHeight + (rows - 1) * edgeHeight) / rows;
 
     var frameManager = new FrameManager(scene, {
         key: targetKey,
@@ -45,12 +48,12 @@ var GenerateFrames = function (scene, {
 
     var sample = new JigsawPiece(scene, {
         width: frameWidth, height: frameHeight,
-        indent: overlap,
+        indentX: edgeWidth, indentY: edgeHeight,
         key: baseKey
     });
 
-    var startX = -overlap,
-        startY = -overlap;
+    var startX = -edgeWidth,
+        startY = -edgeHeight;
     var scrollX = startX,
         scrollY = startY;
     for (var r = 0; r < rows; r++) {
@@ -64,11 +67,11 @@ var GenerateFrames = function (scene, {
 
             frameManager.paste(getFrameNameCallback(c, r), sample);
 
-            scrollX += frameWidth - overlap;
+            scrollX += frameWidth - edgeWidth;
         }
 
         scrollX = startX;
-        scrollY += frameHeight - overlap;
+        scrollY += frameHeight - edgeHeight;
     }
 
     sample.destroy();
@@ -81,7 +84,8 @@ var GenerateFrames = function (scene, {
 
         frameWidth,
         frameHeight,
-        overlap,
+        edgeWidth,
+        edgeHeight,
         getFrameNameCallback,
     }
 }

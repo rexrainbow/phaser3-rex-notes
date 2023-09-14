@@ -7,17 +7,21 @@ import DrawPieceMask from './DrawPieceMask.js';
 class JigsawPiece extends Phaser.GameObjects.RenderTexture {
     constructor(scene, {
         width, height,
-        indent,
+        edgeWidth, edgeHeight,
         key,
     }) {
         super(scene, 0, 0, width, height);
 
         this.setBaseKey(key);
 
-        if (indent === undefined) {
-            indent = Math.min(width, height) / 7;
+        if (edgeWidth === undefined) {
+            edgeWidth = width / 7;
         }
-        this.indent = indent;
+        this.edgeWidth = edgeWidth;
+        if (edgeHeight === undefined) {
+            edgeHeight = height / 7;
+        }
+        this.edgeHeight = edgeHeight;
 
         var maskGraphics = scene.make.graphics({ add: false });
         this.setMask(maskGraphics.createGeometryMask());
@@ -68,7 +72,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(0, 0);
 
-        drawMaskCallback(this.maskGraphics, this.width, this.height, this.indent, edgeMode);
+        drawMaskCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
 
         return this;
     }
