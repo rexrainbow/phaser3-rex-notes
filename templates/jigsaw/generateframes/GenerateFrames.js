@@ -33,8 +33,8 @@ var GenerateFrames = function (scene, {
         edges = RandomPieceEdges(columns, rows);
     }
 
-    var frameWidth = (baseFrameWidth + (columns - 1) * edgeWidth) / columns;
-    var frameHeight = (baseFrameHeight + (rows - 1) * edgeHeight) / rows;
+    var frameWidth = ((baseFrameWidth - (edgeWidth * (columns - 1))) / columns) + (2 * edgeWidth);
+    var frameHeight = ((baseFrameHeight - (edgeHeight * (rows - 1))) / rows) + (2 * edgeHeight);
 
     var frameManager = new FrameManager(scene, {
         key: targetKey,

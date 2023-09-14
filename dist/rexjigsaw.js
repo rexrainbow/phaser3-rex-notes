@@ -607,50 +607,50 @@
   var RAD180 = DegToRad(180);
   var RAD270 = DegToRad(270);
   var RAD360 = DegToRad(360);
-  var DrawPieceMask = function DrawPieceMask(graphics, width, height, indent, edgeMode) {
+  var DrawPieceMask = function DrawPieceMask(graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
     var centerX = width / 2,
       centerY = height / 2;
     graphics.clear();
     graphics.beginPath();
-    graphics.moveTo(indent, indent);
+    graphics.moveTo(edgeWidth, edgeHeight);
     switch (edgeMode.top) {
       case 1:
-        graphics.lineTo(centerX - indent, indent);
-        graphics.arc(centerX, indent, indent, RAD180, RAD360, false);
+        graphics.lineTo(centerX - edgeHeight, edgeHeight);
+        graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, false);
         break;
       case 2:
-        graphics.lineTo(centerX - indent, indent);
-        graphics.arc(centerX, indent, indent, RAD180, RAD360, true);
+        graphics.lineTo(centerX - edgeHeight, edgeHeight);
+        graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, true);
         break;
     }
-    graphics.lineTo(width - indent, indent);
+    graphics.lineTo(width - edgeWidth, edgeHeight);
     switch (edgeMode.right) {
       case 1:
-        graphics.arc(width - indent, centerY, indent, RAD270, RAD90, false);
+        graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, false);
         break;
       case 2:
-        graphics.arc(width - indent, centerY, indent, RAD270, RAD90, true);
+        graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, true);
         break;
     }
-    graphics.lineTo(width - indent, height - indent);
+    graphics.lineTo(width - edgeWidth, height - edgeHeight);
     switch (edgeMode.bottom) {
       case 1:
-        graphics.arc(centerX, height - indent, indent, RAD0, RAD180, false);
+        graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, false);
         break;
       case 2:
-        graphics.arc(centerX, height - indent, indent, RAD0, RAD180, true);
+        graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, true);
         break;
     }
-    graphics.lineTo(indent, height - indent);
+    graphics.lineTo(edgeWidth, height - edgeHeight);
     switch (edgeMode.left) {
       case 1:
-        graphics.arc(indent, centerY, indent, RAD90, RAD270, false);
+        graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, false);
         break;
       case 2:
-        graphics.arc(indent, centerY, indent, RAD90, RAD270, true);
+        graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, true);
         break;
     }
-    graphics.lineTo(indent, indent);
+    graphics.lineTo(edgeWidth, edgeHeight);
     graphics.closePath();
     graphics.fillPath();
   };
@@ -662,15 +662,20 @@
       var _this;
       var width = _ref.width,
         height = _ref.height,
-        indent = _ref.indent,
+        edgeWidth = _ref.edgeWidth,
+        edgeHeight = _ref.edgeHeight,
         key = _ref.key;
       _classCallCheck(this, JigsawPiece);
       _this = _super.call(this, scene, 0, 0, width, height);
       _this.setBaseKey(key);
-      if (indent === undefined) {
-        indent = Math.min(width, height) / 7;
+      if (edgeWidth === undefined) {
+        edgeWidth = width / 7;
       }
-      _this.indent = indent;
+      _this.edgeWidth = edgeWidth;
+      if (edgeHeight === undefined) {
+        edgeHeight = height / 7;
+      }
+      _this.edgeHeight = edgeHeight;
       var maskGraphics = scene.make.graphics({
         add: false
       });
@@ -722,7 +727,7 @@
           originY: 0
         });
         this.camera.setScroll(0, 0);
-        drawMaskCallback(this.maskGraphics, this.width, this.height, this.indent, edgeMode);
+        drawMaskCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
         return this;
       }
     }]);
@@ -737,7 +742,8 @@
       targetKey = _ref.targetKey,
       columns = _ref.columns,
       rows = _ref.rows,
-      overlap = _ref.overlap,
+      edgeWidth = _ref.edgeWidth,
+      edgeHeight = _ref.edgeHeight,
       edges = _ref.edges,
       drawMaskCallback = _ref.drawMaskCallback,
       _ref$getFrameNameCall = _ref.getFrameNameCallback,
@@ -746,14 +752,17 @@
     var baseFrame = textureManager.getFrame(baseKey, '__BASE');
     var baseFrameWidth = baseFrame.cutWidth,
       baseFrameHeight = baseFrame.height;
-    if (overlap === undefined) {
-      overlap = Math.min(baseFrameWidth / columns, baseFrameHeight / rows) / 7;
+    if (edgeWidth === undefined) {
+      edgeWidth = baseFrameWidth / columns / 7;
+    }
+    if (edgeHeight === undefined) {
+      edgeHeight = baseFrameHeight / rows / 7;
     }
     if (edges === undefined) {
       edges = RandomPieceEdges(columns, rows);
     }
-    var frameWidth = (baseFrameWidth + (columns - 1) * overlap) / columns;
-    var frameHeight = (baseFrameHeight + (rows - 1) * overlap) / rows;
+    var frameWidth = (baseFrameWidth - edgeWidth * (columns - 1)) / columns + 2 * edgeWidth;
+    var frameHeight = (baseFrameHeight - edgeHeight * (rows - 1)) / rows + 2 * edgeHeight;
     var frameManager = new FrameManager(scene, {
       key: targetKey,
       width: frameWidth * columns,
@@ -766,11 +775,12 @@
     var sample = new JigsawPiece(scene, {
       width: frameWidth,
       height: frameHeight,
-      indent: overlap,
+      indentX: edgeWidth,
+      indentY: edgeHeight,
       key: baseKey
     });
-    var startX = -overlap,
-      startY = -overlap;
+    var startX = -edgeWidth,
+      startY = -edgeHeight;
     var scrollX = startX,
       scrollY = startY;
     for (var r = 0; r < rows; r++) {
@@ -782,10 +792,10 @@
           drawMaskCallback: drawMaskCallback
         });
         frameManager.paste(getFrameNameCallback(c, r), sample);
-        scrollX += frameWidth - overlap;
+        scrollX += frameWidth - edgeWidth;
       }
       scrollX = startX;
-      scrollY += frameHeight - overlap;
+      scrollY += frameHeight - edgeHeight;
     }
     sample.destroy();
     frameManager.destroy();
@@ -796,7 +806,8 @@
       rows: rows,
       frameWidth: frameWidth,
       frameHeight: frameHeight,
-      overlap: overlap,
+      edgeWidth: edgeWidth,
+      edgeHeight: edgeHeight,
       getFrameNameCallback: getFrameNameCallback
     };
   };

@@ -18,6 +18,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
             edgeWidth = width / 7;
         }
         this.edgeWidth = edgeWidth;
+
         if (edgeHeight === undefined) {
             edgeHeight = height / 7;
         }
