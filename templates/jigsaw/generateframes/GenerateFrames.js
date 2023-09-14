@@ -38,10 +38,10 @@ var GenerateFrames = function (scene, {
 
     var frameManager = new FrameManager(scene, {
         key: targetKey,
-        width: (frameWidth * columns),
-        height: (frameHeight * rows),
         cellWidth: frameWidth,
         cellHeight: frameHeight,
+        columns: columns,
+        rows: rows,
         useDynamicTexture: true,
         fillColor: 0x888888,
     })

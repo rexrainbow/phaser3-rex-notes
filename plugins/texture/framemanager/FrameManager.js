@@ -7,6 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class FrameManager {
     constructor(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
+        var columns, rows;
         if (IsPlainObject(key)) {
             var config = key;
             key = GetValue(config, 'key');
@@ -14,6 +15,8 @@ class FrameManager {
             height = GetValue(config, 'height');
             cellWidth = GetValue(config, 'cellWidth');
             cellHeight = GetValue(config, 'cellHeight');
+            columns = GetValue(config, 'columns');
+            rows = GetValue(config, 'rows');
             fillColor = GetValue(config, 'fillColor');
             useDynamicTexture = GetValue(config, 'useDynamicTexture');
         } else {
@@ -23,18 +26,31 @@ class FrameManager {
             }
         }
 
-        if (width === undefined) {
-            width = 4096;
+        if (columns) {
+            width = cellWidth * columns;
+        } else {
+            if (width === undefined) {
+                width = 4096;
+            }
+            columns = Math.floor(width / cellWidth);
         }
-        if (height === undefined) {
-            height = 4096;
-        }
+
         if (cellWidth === undefined) {
             cellWidth = 64;
         }
         if (cellHeight === undefined) {
             cellHeight = 64;
         }
+
+        if (rows) {
+            height = cellHeight * rows;
+        } else {
+            if (height === undefined) {
+                height = 4096;
+            }
+            rows = Math.floor(height / cellHeight);
+        }
+
         if (useDynamicTexture === undefined) {
             useDynamicTexture = false;
         }
@@ -63,9 +79,9 @@ class FrameManager {
         this.height = height;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
-        this.columnCount = Math.floor(width / cellWidth);
-        this.rowCount = Math.floor(height / cellHeight);
-        this.totalCount = this.columnCount * this.rowCount;
+        this.columns = columns;
+        this.rows = rows;
+        this.totalCount = this.columns * this.rows;
 
         this.frameNames = Array(this.totalCount);
         for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
@@ -103,8 +119,8 @@ class FrameManager {
             out = {};
         }
 
-        var columnIndex = frameIndex % this.columnCount;
-        var rowIndex = Math.floor(frameIndex / this.columnCount);
+        var columnIndex = frameIndex % this.columns;
+        var rowIndex = Math.floor(frameIndex / this.columns);
         out.x = columnIndex * this.cellWidth;
         out.y = rowIndex * this.cellHeight;
         return out;
