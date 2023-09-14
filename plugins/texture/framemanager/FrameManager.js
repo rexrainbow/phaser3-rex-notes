@@ -104,7 +104,7 @@ class FrameManager {
         }
 
         var columnIndex = frameIndex % this.columnCount;
-        var rowIndex = Math.floor(frameIndex / this.rowCount);
+        var rowIndex = Math.floor(frameIndex / this.columnCount);
         out.x = columnIndex * this.cellWidth;
         out.y = rowIndex * this.cellHeight;
         return out;
