@@ -1,12 +1,18 @@
+/* 
+Sample JigsawPiece, draw to FrameManager
+*/
+
 import DrawPieceMask from './DrawPieceMask.js';
 
 class JigsawPiece extends Phaser.GameObjects.RenderTexture {
     constructor(scene, {
-        width,
-        height,
+        width, height,
         indent,
+        key,
     }) {
         super(scene, 0, 0, width, height);
+
+        this.setBaseKey(key);
 
         if (indent === undefined) {
             indent = Math.min(width, height) / 7;
@@ -31,10 +37,13 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
     }
 
+    setBaseKey(key) {
+        this.baseKey = key;
+        return this;
+    }
+
     drawPiece({
-        key,
-        scrollX,
-        scrollY,
+        scrollX, scrollY,
         edgeMode,
         drawMaskCallback = DrawPieceMask
     }) {
@@ -53,7 +62,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(scrollX, scrollY);
 
-        this.stamp(key, undefined, 0, 0, {
+        this.stamp(this.baseKey, undefined, 0, 0, {
             originX: 0, originY: 0,
         });
 

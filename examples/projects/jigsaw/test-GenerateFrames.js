@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import JigsawPiece from './lib/jigsawpiece/JigsawPiece.js';
+import GenerateFrames from './lib/generateframes/GenerateFrames.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,22 +13,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var piece = new JigsawPiece(this, {
-            width: 115, height: 115,
-            key: 'classroom',
+        GenerateFrames(this, {
+            baseKey: 'classroom',
+            targetKey: 'pieces',
+            columns: 8, rows: 6,
         })
-        this.add.existing(piece);
-
-        piece.setOrigin(0);
-
-        piece.drawPiece({
-            scrollX: -15, scrollY: -15,
-            edgeMode: '1100'
-        })
-
-        this.add.graphics()
-            .lineStyle(3, 0xff0000)
-            .strokeRectShape(piece.getBounds())
+        this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0).setScale(0.8);
     }
 
     update() { }
