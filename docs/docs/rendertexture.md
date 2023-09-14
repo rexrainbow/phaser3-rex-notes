@@ -39,6 +39,7 @@ var rt = scene.make.renderTexture({
 !!! note "Origin position"
     Origin position of this render texture is `(0,0)` (top-left)
 
+
 ### Custom class
 
 - Define class
@@ -62,78 +63,25 @@ var rt = scene.make.renderTexture({
     var rt = new MyRenderTexture(scene, x, y, width, height);
     ```
 
-### Paste texture
 
-- Paste game object
-    ```javascript
-    rt.draw(gameObject, x, y);
-    // rt.draw(gameObject, x, y, alpha, tint);
-    ```
-   - `gameObject` : a game object, or an array of game objects
-- Paste game objects in a [group](group.md)
-    ```javascript
-    rt.draw(group, x, y);
-    // rt.draw(group, x, y, alpha, tint);
-    ```
-- Paste game objects in a scene's display list
-    ```javascript
-    rt.draw(scene.children, x, y);
-    // rt.draw(scene.children, x, y, alpha, tint);
-    ```
-- Stamp texture
-    ```javascript
-    rt.stamp(key, frame, x, y, {
-        originX: 0.5,
-        originY: 0.5,
-
-        scale: 1,
-        scaleX: 1, 
-        scaleY: 1,
-        
-        rotation: 0,
-        angle: 0,
-        
-        alpha: 1,
-        tint: 0xffffff,
-        blendMode: 0,
-
-        erase: false,
-    })
-    ```
-- Paste texture
-    ```javascript
-    rt.draw(key, x, y);
-    // rt.draw(key, x, y, alpha, tint);
-    ```
-    or
-    ```javascript
-    rt.drawFrame(key, frame, x, y);
-    // rt.drawFrame(key, frame, x, y, alpha, tint);
-    ```
-    - `key` : The key of the texture to be used, as stored in the Texture Manager.
-
-
-#### Global alpha
+### Set size
 
 ```javascript
-rt.setGlobalAlpha(alpha);
-// rt.globalAlpha = alpha;
+rt.setSize(width, height);
 ```
 
-#### Global tint
+
+### Fill color
 
 ```javascript
-rt.setGlobalTint(tint);
-// rt.globalTint = tint;
+rt.fill(rgb);
+// rt.fill(rgb, alpha, x, y, width, height);
 ```
 
-### Erase
+- `rgb` : The number color to fill this Dynamic Texture with.
+- `alpha` : The alpha value used by the fill. Default value is `1`.
+- `x`, `y`, `width`, `height` : The area of the fill rectangle. Default behavior is filling whole size.
 
-```javascript
-rt.erase(gameObject, x, y);
-```
-
-- `gameObject` : a game object, or an array of game objects
 
 ### Clear
 
@@ -141,29 +89,138 @@ rt.erase(gameObject, x, y);
 rt.clear();
 ```
 
-### Fill
-
 ```javascript
-rt.fill(rgb, alpha);
-// rt.fill(rgb, alpha, x, y, width, height);
+rt.clear(x, y, width, height);
 ```
 
-### Set size
+
+### Draw game object
 
 ```javascript
-rt.setSize(width, height);
-// rt.resize(width, height);
+rt.draw(entries);
+// rt.draw(entries,x, y);
+// rt.draw(entries, x, y, alpha, tint);
 ```
 
-### Save texture
+- `entries` : 
+    - Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
+    - Tilemap Layers.
+    - A Group. The contents of which will be iterated and drawn in turn.
+    - A Container. The contents of which will be iterated fully, and drawn in turn.
+    - A Scene Display List. Pass in `Scene.children` to draw the whole list.
+    - Another Dynamic Texture, or a Render Texture.
+    - A Texture Frame instance.
+    - A string. This is used to look-up the texture from the Texture Manager.
+- `x`, `y` : The x/y position to draw the Frame at, or the offset applied to the object.
+    - If the object is a Group, Container or Display List, the coordinates are *added* to the positions of the children.
+    - For all other types of object, the coordinates are exact.
+- `alpha`, `tint` : Only used by Texture Frames.
+    - Game Objects use their own alpha and tint values when being drawn.
 
-Stores a copy of this Render Texture in the Texture Manager using the given key.
+
+### Erase
 
 ```javascript
-rt.saveTexture(key);
+rt.erase(entries);
+// rt.erase(entries, x, y);
 ```
 
-Calling `saveTexture` again will not save another copy of the same texture, it will just rename the key of the existing copy.
+- `entries` : 
+    - Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
+    - Tilemap Layers.
+    - A Group. The contents of which will be iterated and drawn in turn.
+    - A Container. The contents of which will be iterated fully, and drawn in turn.
+    - A Scene Display List. Pass in `Scene.children` to draw the whole list.
+    - Another Dynamic Texture, or a Render Texture.
+    - A Texture Frame instance.
+    - A string. This is used to look-up the texture from the Texture Manager.
+- `x`, `y` : The x/y position to draw the Frame at, or the offset applied to the object.
+    - If the object is a Group, Container or Display List, the coordinates are *added* to the positions of the children.
+    - For all other types of object, the coordinates are exact.
+
+
+### Draw frame
+
+```javascript
+rt.stamp(key, frame, x, y, {
+    alpha: 1,
+    tint: 0xffffff,
+    angle: 0,
+    rotation: 0,
+    scale: 1,
+    scaleX: 1,
+    scaleY: 1,
+    originX: 0.5,
+    originY: 0.5,
+    blendMode: 0,
+    erase: false,
+    skipBatch: false
+})
+```
+
+or
+
+```javascript
+rt.drawFrame(key, frame, x, y);
+// rt.drawFrame(key, frame, x, y, alpha, tint);
+```
+
+- `x`, `y` : Top-left position
+
+
+### Draw repeat frames
+
+- Repeat frames full of size
+    ```javascript
+    rt.repeat(key, frame);
+    ```
+- Repeat in an area
+    ```javascript
+    rt.repeat(key, frame, x, y, width, height);
+    // rt.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);
+    ```
+
+
+### Batch draw
+
+1. Begin
+    ```javascript
+    rt.beginDraw();
+    ```
+2. Draw
+    - Draw game object
+        ```javascript
+        rt.batchDraw(entries, x, y, alpha, tint);
+        ```
+        - `entries` : 
+            - Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
+            - Tilemap Layers.
+            - A Group. The contents of which will be iterated and drawn in turn.
+            - A Container. The contents of which will be iterated fully, and drawn in turn.
+            - A Scene Display List. Pass in `Scene.children` to draw the whole list.
+            - Another Dynamic Texture, or a Render Texture.
+            - A Texture Frame instance.
+            - A string. This is used to look-up the texture from the Texture Manager.
+    - Draw frame
+        ```javascript
+        rt.batchDrawFrame(key, frame, x, y, alpha, tint);
+        ```
+    - Draw image
+        ```javascript
+        rt.stamp(key, frame, x, y, {
+            // ...
+            skipBatch: true
+        })
+        ```
+    - Draw repeat images
+        ```javascript
+        rt.repeat(key, frame, x, y, width, height, alpha, tint, true);
+        ```
+3. End
+    ```javascript
+    rt.endDraw();
+    ```
+
 
 ### Internal camera
 
@@ -182,26 +239,79 @@ Internal camera `rt.camera`
     rt.camera.setAngle(angle);  // angle in degrees
     ```
 
+
 ### Snapshot
 
-- Takes a snapshot of the whole of this Render Texture.
+#### Snapshot area
+
+```javascript
+texture.snapshot(callback);
+// texture.snapshot(callback, type, encoderOptions);
+```
+
+or
+
+```javascript
+texture.snapshotArea(x, y, width, height, callback, type, encoderOptions);
+```
+
+- `callback` : The Function to invoke after the snapshot image is created.
     ```javascript
-    rt.snapshot(callback);
-    // rt.snapshot(callback, type, encoderOptions);
+    function(imageElement) {
+    }
     ```
-- Takes a snapshot of the given area of this Render Texture.
+    - `imageElement` : HTMLImageElement.
+- `type` : The format of the image to create, usually `'image/png'` or `'image/jpeg'`. Default value is `'image/png'`.
+- `encoderOptions` : The image quality, between `0` and `1`. Used for image formats with lossy compression, such as `'image/jpeg'`. Default value is `0.92`.
+- `x`, `y`, `width`, `height` : Snapshot area.
+
+
+#### Get color of a pixel
+
+```javascript
+texture.snapshotPixel(x, y, callback);
+```
+
+- `x`, `y` : The x/y coordinate of the pixel to get.
+- `callback` : The Function to invoke after the snapshot image is created.
     ```javascript
-    rt.snapshotArea(x, y, width, height, callback);
-    // rt.snapshotArea(x, y, width, height, callback, type, encoderOptions);
+    function(color) {        
+    }
     ```
-- Takes a snapshot of the given pixel from this Render Texture.
-    ```javascript
-    rt.snapshotPixel(x, y, callback);
-    ```
+    - `color` : [Color](color.md) object.
+
+
+### Global alpha
+
+```javascript
+rt.setGlobalAlpha(alpha);
+// rt.globalAlpha = alpha;
+```
+
+
+### Global tint
+
+```javascript
+rt.setGlobalTint(tint);
+// rt.globalTint = tint;
+```
+
+
+### Save texture
+
+Stores a copy of this Render Texture in the Texture Manager using the given key.
+
+```javascript
+rt.saveTexture(key);
+```
+
+Calling `saveTexture` again will not save another copy of the same texture, it will just rename the key of the existing copy.
+
 
 ### Other properties
 
 See [game object](gameobject.md)
+
 
 ### Create mask
 
@@ -210,6 +320,7 @@ var mask = rt.createBitmapMask();
 ```
 
 See [mask](mask.md)
+
 
 ### Shader effects
 

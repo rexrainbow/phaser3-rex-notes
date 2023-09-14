@@ -24,19 +24,32 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
             return;
         }
 
+        super.destroy();
+
         this.maskGraphics.destroy();
         this.maskGraphics = undefined;
 
-        super.destroy();
     }
 
     drawPiece({
         key,
         scrollX,
         scrollY,
-        edgeModes
+        edgeMode,
+        drawMaskCallback = DrawPieceMask
     }) {
-        this.clear().fill(0x333333)
+        // Convert string to plain object
+        if (typeof (edgeMode) === 'string') {
+            edgeMode = edgeMode.split('').map(function (x) { return parseInt(x) });
+            edgeMode = {
+                right: edgeMode[0],
+                bottom: edgeMode[1],
+                left: edgeMode[2],
+                top: edgeMode[3]
+            }
+        }
+
+        this.clear().fill(0x333333);
 
         this.camera.setScroll(scrollX, scrollY);
 
@@ -46,12 +59,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(0, 0);
 
-        DrawPieceMask(this.maskGraphics, {
-            width: this.width,
-            height: this.height,
-            indent: this.indent,
-            edgeModes: edgeModes
-        })
+        drawMaskCallback(this.maskGraphics, this.width, this.height, this.indent, edgeMode);
 
         return this;
     }

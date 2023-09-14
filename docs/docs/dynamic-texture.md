@@ -69,7 +69,7 @@ texture.draw(entries);
 - `alpha`, `tint` : Only used by Texture Frames.
     - Game Objects use their own alpha and tint values when being drawn.
 
-### Erase game object
+### Erase
 
 ```javascript
 texture.erase(entries);
@@ -92,15 +92,6 @@ texture.erase(entries);
 ### Draw frame
 
 ```javascript
-texture.drawFrame(key, frame, x, y);
-// texture.drawFrame(key, frame, x, y, alpha, tint);
-```
-
-- `x`, `y` : Top-left position
-
-or
-
-```javascript
 texture.stamp(key, frame, x, y, {
     alpha: 1,
     tint: 0xffffff,
@@ -116,6 +107,16 @@ texture.stamp(key, frame, x, y, {
     skipBatch: false
 })
 ```
+
+or
+
+```javascript
+texture.drawFrame(key, frame, x, y);
+// texture.drawFrame(key, frame, x, y, alpha, tint);
+```
+
+- `x`, `y` : Top-left position
+
 
 ### Draw repeat frames
 
@@ -181,6 +182,23 @@ texture.add(name, sourceIndex, x, y, width, height);
 3. End
     ```javascript
     texture.endDraw();
+    ```
+
+### Internal camera
+
+Internal camera `texture.camera`
+
+- Scroll (offset)
+    ```javascript
+    texture.camera.setScroll(x, y);
+    ```
+- Zoom (scale)
+    ```javascript
+    texture.camera.setZoom(zoom);
+    ```
+- Rotate
+    ```javascript
+    texture.camera.setAngle(angle);  // angle in degrees
     ```
 
 ### Snapshot

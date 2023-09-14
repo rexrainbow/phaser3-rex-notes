@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
             key: 'classroom',
             scrollX: -15,
             scrollY: -15,
-            edgeModes: '2200'
+            edgeMode: '1100'
         })
 
         this.add.graphics()

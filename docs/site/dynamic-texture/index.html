@@ -3899,8 +3899,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#erase-game-object" class="md-nav__link">
-    Erase game object
+  <a href="#erase" class="md-nav__link">
+    Erase
   </a>
   
 </li>
@@ -3929,6 +3929,13 @@
           <li class="md-nav__item">
   <a href="#batch-draw" class="md-nav__link">
     Batch draw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-camera" class="md-nav__link">
+    Internal camera
   </a>
   
 </li>
@@ -9556,8 +9563,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#erase-game-object" class="md-nav__link">
-    Erase game object
+  <a href="#erase" class="md-nav__link">
+    Erase
   </a>
   
 </li>
@@ -9586,6 +9593,13 @@
           <li class="md-nav__item">
   <a href="#batch-draw" class="md-nav__link">
     Batch draw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-camera" class="md-nav__link">
+    Internal camera
   </a>
   
 </li>
@@ -9699,7 +9713,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="erase-game-object">Erase game object<a class="headerlink" href="#erase-game-object" title="Permanent link">&para;</a></h3>
+<h3 id="erase">Erase<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">entries</span><span class="p">);</span>
 <span class="c1">// texture.erase(entries, x, y);</span>
 </code></pre></div>
@@ -9722,13 +9736,6 @@
 </li>
 </ul>
 <h3 id="draw-frame">Draw frame<a class="headerlink" href="#draw-frame" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// texture.drawFrame(key, frame, x, y, alpha, tint);</span>
-</code></pre></div>
-<ul>
-<li><code>x</code>, <code>y</code> : Top-left position</li>
-</ul>
-<p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">tint</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
@@ -9744,6 +9751,13 @@
 <span class="w">    </span><span class="nx">skipBatch</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">})</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
+<span class="c1">// texture.drawFrame(key, frame, x, y, alpha, tint);</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> : Top-left position</li>
+</ul>
 <h3 id="draw-repeat-frames">Draw repeat frames<a class="headerlink" href="#draw-repeat-frames" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Repeat frames full of size
@@ -9805,6 +9819,19 @@
     <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">endDraw</span><span class="p">();</span>
 </code></pre></div></li>
 </ol>
+<h3 id="internal-camera">Internal camera<a class="headerlink" href="#internal-camera" title="Permanent link">&para;</a></h3>
+<p>Internal camera <code>texture.camera</code></p>
+<ul>
+<li>Scroll (offset)
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">setScroll</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Zoom (scale)
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">setZoom</span><span class="p">(</span><span class="nx">zoom</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Rotate
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span><span class="w">  </span><span class="c1">// angle in degrees</span>
+</code></pre></div></li>
+</ul>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
 <h4 id="snapshot-area">Snapshot area<a class="headerlink" href="#snapshot-area" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>

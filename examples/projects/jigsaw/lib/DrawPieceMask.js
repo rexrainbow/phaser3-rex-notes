@@ -1,21 +1,5 @@
 const DegToRad = Phaser.Math.DegToRad;
-var DrawPieceMask = function (graphics, config) {
-    var width = config.width;
-    var height = config.height;
-    var indent = config.indent;
-
-    var edgeModes = config.edgeModes;
-    var rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode;
-    if (typeof (edgeModes) === 'string') {
-        [rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode] =
-            edgeModes.split('').map(function (x) { return parseInt(x) });
-    } else {
-        rightEdgeMode = edgeModes.right;
-        bottomEdgeMode = edgeModes.bottom;
-        leftEdgeMode = edgeModes.left;
-        topEdgeMode = edgeModes.top;
-    }
-
+var DrawPieceMask = function (graphics, width, height, indent, edgeMode) {
     var centerX = width / 2, centerY = height / 2;
 
     graphics.clear();
@@ -23,7 +7,7 @@ var DrawPieceMask = function (graphics, config) {
 
     graphics.moveTo(indent, indent);
 
-    switch (topEdgeMode) {
+    switch (edgeMode.top) {
         case 1:
             graphics.lineTo(centerX - indent, indent);
             graphics.arc(centerX, indent, indent, DegToRad(180), DegToRad(360), false);
@@ -35,7 +19,7 @@ var DrawPieceMask = function (graphics, config) {
     }
     graphics.lineTo(width - indent, indent);
 
-    switch (rightEdgeMode) {
+    switch (edgeMode.right) {
         case 1:
             graphics.arc(width - indent, centerY, indent, DegToRad(270), DegToRad(90), false);
             break;
@@ -45,7 +29,7 @@ var DrawPieceMask = function (graphics, config) {
     }
     graphics.lineTo(width - indent, height - indent);
 
-    switch (bottomEdgeMode) {
+    switch (edgeMode.bottom) {
         case 1:
             graphics.arc(centerX, height - indent, indent, DegToRad(0), DegToRad(180), false);
             break;
@@ -55,7 +39,7 @@ var DrawPieceMask = function (graphics, config) {
     }
     graphics.lineTo(indent, height - indent);
 
-    switch (leftEdgeMode) {
+    switch (edgeMode.left) {
         case 1:
             graphics.arc(indent, centerY, indent, DegToRad(90), DegToRad(270), false);
             break;

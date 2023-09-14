@@ -43,19 +43,11 @@ class Demo extends Phaser.Scene {
             for (leftEdgeMode = 0; leftEdgeMode < 3; leftEdgeMode++) {
                 for (bottomEdgeMode = 0; bottomEdgeMode < 3; bottomEdgeMode++) {
                     for (rightEdgeMode = 0; rightEdgeMode < 3; rightEdgeMode++) {
-                        DrawPieceMask(graphics, {
-                            width: cellSize,
-                            height: cellSize,
-                            indent: indent,
-                            edgeModes: {
-                                right: rightEdgeMode,
-                                left: leftEdgeMode,
-                                top: topEdgeMode,
-                                bottom: bottomEdgeMode
-                            }
-                        });
-                        rt.clear().draw(graphics);
                         var frameName = `${rightEdgeMode}${bottomEdgeMode}${leftEdgeMode}${topEdgeMode}`;
+
+                        DrawPieceMask(graphics, cellSize, cellSize, indent, frameName);
+                        rt.clear().draw(graphics);
+
                         frameManager.paste(frameName, rt);
                     }
                 }
@@ -73,15 +65,10 @@ class Demo extends Phaser.Scene {
 }
 
 const DegToRad = Phaser.Math.DegToRad;
-var DrawPieceMask = function (graphics, config) {
-    var width = config.width;
-    var height = config.height;
-    var indent = config.indent;
-    var edgeModes = config.edgeModes;
-    var rightEdgeMode = edgeModes.right;
-    var bottomEdgeMode = edgeModes.bottom;
-    var leftEdgeMode = edgeModes.left;
-    var topEdgeMode = edgeModes.top;
+var DrawPieceMask = function (graphics, width, height, indent, edgeMode) {
+    var rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode;
+    [rightEdgeMode, bottomEdgeMode, leftEdgeMode, topEdgeMode] =
+        edgeMode.split('').map(function (x) { return parseInt(x) });
 
     var centerX = width / 2, centerY = height / 2;
 
