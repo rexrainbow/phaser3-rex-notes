@@ -1,4 +1,10 @@
 const DegToRad = Phaser.Math.DegToRad;
+const RAD0 = DegToRad(0);
+const RAD90 = DegToRad(90);
+const RAD180 = DegToRad(180);
+const RAD270 = DegToRad(270);
+const RAD360 = DegToRad(360);
+
 var DrawPieceMask = function (graphics, width, height, indent, edgeMode) {
     var centerX = width / 2, centerY = height / 2;
 
@@ -10,41 +16,41 @@ var DrawPieceMask = function (graphics, width, height, indent, edgeMode) {
     switch (edgeMode.top) {
         case 1:
             graphics.lineTo(centerX - indent, indent);
-            graphics.arc(centerX, indent, indent, DegToRad(180), DegToRad(360), false);
+            graphics.arc(centerX, indent, indent, RAD180, RAD360, false);
             break;
         case 2:
             graphics.lineTo(centerX - indent, indent);
-            graphics.arc(centerX, indent, indent, DegToRad(180), DegToRad(360), true);
+            graphics.arc(centerX, indent, indent, RAD180, RAD360, true);
             break;
     }
     graphics.lineTo(width - indent, indent);
 
     switch (edgeMode.right) {
         case 1:
-            graphics.arc(width - indent, centerY, indent, DegToRad(270), DegToRad(90), false);
+            graphics.arc(width - indent, centerY, indent, RAD270, RAD90, false);
             break;
         case 2:
-            graphics.arc(width - indent, centerY, indent, DegToRad(270), DegToRad(90), true);
+            graphics.arc(width - indent, centerY, indent, RAD270, RAD90, true);
             break;
     }
     graphics.lineTo(width - indent, height - indent);
 
     switch (edgeMode.bottom) {
         case 1:
-            graphics.arc(centerX, height - indent, indent, DegToRad(0), DegToRad(180), false);
+            graphics.arc(centerX, height - indent, indent, RAD0, RAD180, false);
             break;
         case 2:
-            graphics.arc(centerX, height - indent, indent, DegToRad(0), DegToRad(180), true);
+            graphics.arc(centerX, height - indent, indent, RAD0, RAD180, true);
             break;
     }
     graphics.lineTo(indent, height - indent);
 
     switch (edgeMode.left) {
         case 1:
-            graphics.arc(indent, centerY, indent, DegToRad(90), DegToRad(270), false);
+            graphics.arc(indent, centerY, indent, RAD90, RAD270, false);
             break;
         case 2:
-            graphics.arc(indent, centerY, indent, DegToRad(90), DegToRad(270), true);
+            graphics.arc(indent, centerY, indent, RAD90, RAD270, true);
             break;
     }
     graphics.lineTo(indent, indent);

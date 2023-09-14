@@ -30,7 +30,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
             return;
         }
 
-        super.destroy();
+        super.destroy(fromScene);
 
         this.maskGraphics.destroy();
         this.maskGraphics = undefined;

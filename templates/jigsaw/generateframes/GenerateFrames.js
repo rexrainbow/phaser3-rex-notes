@@ -1,6 +1,11 @@
-import FrameManager from '../../../../../plugins/texture/framemanager/FrameManager.js';
+import FrameManager from '../../../plugins/texture/framemanager/FrameManager.js';
 import RandomPieceEdges from './RandomPieceEdges.js';
 import JigsawPiece from '../jigsawpiece/JigsawPiece.js';
+
+
+var DefaultGetFrameNameCallback = function (c, r) {
+    return `${c},${r}`;
+}
 
 var GenerateFrames = function (scene, {
     baseKey,
@@ -8,8 +13,10 @@ var GenerateFrames = function (scene, {
     columns, rows,
     overlap,
     edges,
-    drawMaskCallback
+    drawMaskCallback,
+    getFrameNameCallback = DefaultGetFrameNameCallback
 }) {
+
     var textureManager = scene.sys.textures;
     var baseFrame = textureManager.getFrame(baseKey, '__BASE');
     var baseFrameWidth = baseFrame.cutWidth,
@@ -55,7 +62,7 @@ var GenerateFrames = function (scene, {
                 drawMaskCallback
             });
 
-            frameManager.paste(`${c},${r}`, sample);
+            frameManager.paste(getFrameNameCallback(c, r), sample);
 
             scrollX += frameWidth - overlap;
         }
@@ -66,6 +73,17 @@ var GenerateFrames = function (scene, {
 
     sample.destroy();
     frameManager.destroy();
+
+    return {
+        baseKey,
+        targetKey,
+        columns, rows,
+
+        frameWidth,
+        frameHeight,
+        overlap,
+        getFrameNameCallback,
+    }
 }
 
 export default GenerateFrames;

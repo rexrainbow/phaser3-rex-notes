@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import GenerateFrames from './lib/generateframes/GenerateFrames.js';
+import Jigsaw from '../../templates/jigsaw/index';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,12 +13,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        GenerateFrames(this, {
+        var result = Jigsaw.GenerateFrames(this, {
             baseKey: 'classroom',
             targetKey: 'pieces',
             columns: 8, rows: 6,
         })
-        this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0).setScale(0.8);
+        this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0);
+
+        console.log(result)
+
+        // Frame name = `${c},${r}`
+        var piece = this.add.image(950, 700, 'pieces', result.getFrameNameCallback(7, 5));
     }
 
     update() { }
@@ -27,8 +32,8 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
