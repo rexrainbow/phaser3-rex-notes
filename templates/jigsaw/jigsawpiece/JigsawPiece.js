@@ -15,12 +15,12 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
         this.setBaseKey(key);
 
         if (edgeWidth === undefined) {
-            edgeWidth = width / 7;
+            edgeWidth = Math.floor(width / 7);
         }
         this.edgeWidth = edgeWidth;
 
         if (edgeHeight === undefined) {
-            edgeHeight = height / 7;
+            edgeHeight = Math.floor(height / 7);
         }
         this.edgeHeight = edgeHeight;
 

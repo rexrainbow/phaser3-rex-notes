@@ -79,6 +79,7 @@ var frameManager = scene.plugins.get('rexFrameManager').add(scene, {
     height: 4096,
     cellWidth: 64,
     cellHeight: 64,
+    cellPadding: 0,
     columns: undefined,
     rows: undefined,
     fillColor: undefined,
@@ -92,6 +93,9 @@ var frameManager = scene.plugins.get('rexFrameManager').add(scene, {
 - `columns`, `rows` : 
     - `undefined` : Calculate `columns`/`rows` by `width`/`height` and `cellWidth`/`cellHeight`.
 - `cellWidth`, `cellHeight` : Maximum frame size.
+- `cellPadding` : Extra space around frame. Default value is `0`.
+    - Total cell width will be `cellWidth + (cellPadding * 2)`
+    - Total cell height will be `cellHeight + (cellPadding * 2)`
 - `fillColor` : Fill an initial color, in css color string (for [canvas-texture](canvas-texture.md)), or number (for [dynamic-texture](dynamic-texture.md))
     - `undefined` : Don't fill color.
 - `useDynamicTexture`

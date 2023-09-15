@@ -9737,14 +9737,29 @@
 <span class="w">    </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cellPadding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>key</code> : Texture key in <a href="../textures/">texture manager</a></li>
-<li><code>width</code>, <code>height</code> : Size of canvas.</li>
+<li><code>width</code>, <code>height</code> : Size of canvas.<ul>
+<li>Calculate <code>width</code>/<code>height</code> by <code>columns</code>/<code>rows</code> and <code>cellWidth</code>/<code>cellHeight</code>, if <code>columns</code>, <code>rows</code> parameters are given.</li>
+</ul>
+</li>
+<li><code>columns</code>, <code>rows</code> : <ul>
+<li><code>undefined</code> : Calculate <code>columns</code>/<code>rows</code> by <code>width</code>/<code>height</code> and <code>cellWidth</code>/<code>cellHeight</code>.</li>
+</ul>
+</li>
 <li><code>cellWidth</code>, <code>cellHeight</code> : Maximum frame size.</li>
+<li><code>cellPadding</code> : Extra space around frame. Default value is <code>0</code>.<ul>
+<li>Total cell width will be <code>cellWidth + (cellPadding * 2)</code></li>
+<li>Total cell height will be <code>cellHeight + (cellPadding * 2)</code></li>
+</ul>
+</li>
 <li><code>fillColor</code> : Fill an initial color, in css color string (for <a href="../canvas-texture/">canvas-texture</a>), or number (for <a href="../dynamic-texture/">dynamic-texture</a>)<ul>
 <li><code>undefined</code> : Don't fill color.</li>
 </ul>

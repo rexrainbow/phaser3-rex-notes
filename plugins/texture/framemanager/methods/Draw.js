@@ -11,8 +11,13 @@ var Draw = function (frameName, callback, scope) {
     }
 
     var tl = this.getTopLeftPosition(index),
-        x = tl.x,
-        y = tl.y;
+        outerX = tl.x,
+        outerY = tl.y,
+        cellPadding = this.cellPadding,
+        innerX = outerX + cellPadding,
+        innerY = outerY + cellPadding;
+
+    ClearFrame.call(this, outerX, outerY, this.outerCellWidth, this.outerCellHeight);
 
     var frameSize = {
         width: this.cellWidth,
@@ -20,22 +25,28 @@ var Draw = function (frameName, callback, scope) {
     }
 
     var drawCallback = (this.useDynamicTexture) ? DrawDynamicTexture : DrawCanvasTexture;
-    drawCallback.call(this, x, y, frameSize, callback, scope);
+    drawCallback.call(this, innerX, innerY, frameSize, callback, scope);
     // frameSize might be changed
 
-    this.texture.add(frameName, 0, x, y, frameSize.width, frameSize.height);
+    this.texture.add(frameName, 0, innerX, innerY, frameSize.width, frameSize.height);
     this.addFrameName(index, frameName);
 
     return this;
 }
 
+var ClearFrame = function (x, y, width, height) {
+    if (this.useDynamicTexture) {
+        DynamicTextureClearRectangle(this.texture, x, y, width, height);
+    } else {
+        this.context.clearRect(x, y, width, height);
+    }
+}
+
 var DrawCanvasTexture = function (x, y, frameSize, callback, scope) {
     var context = this.context;
+
     context.save();
     context.translate(x, y);
-
-    // Clear cell
-    context.clearRect(0, 0, frameSize.width, frameSize.height);
 
     // Draw cell
     if (scope) {
@@ -50,9 +61,6 @@ var DrawCanvasTexture = function (x, y, frameSize, callback, scope) {
 
 var DrawDynamicTexture = function (x, y, frameSize, callback, scope) {
     var texture = this.texture;
-
-    // Clear cell
-    DynamicTextureClearRectangle(texture, x, y, frameSize.width, frameSize.height);
 
     // Draw cell
     texture.camera.setScroll(-x, -y);

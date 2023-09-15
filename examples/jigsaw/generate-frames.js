@@ -19,9 +19,10 @@ class Demo extends Phaser.Scene {
             columns: 8, rows: 6,
             edgeWidth: 15, edgeHeight: 15
         })
-        this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0);
+        var baseImage = this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0);
 
         console.log(result)
+        console.log(baseImage.width, baseImage.height);
 
         // Frame name = `${c},${r}`
         var piece = this.add.image(950, 700, 'pieces', result.getFrameNameCallback(7, 5));

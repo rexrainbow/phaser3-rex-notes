@@ -199,27 +199,35 @@
       return this;
     }
     var tl = this.getTopLeftPosition(index),
-      x = tl.x,
-      y = tl.y;
+      outerX = tl.x,
+      outerY = tl.y,
+      cellPadding = this.cellPadding,
+      innerX = outerX + cellPadding,
+      innerY = outerY + cellPadding;
+    ClearFrame.call(this, outerX, outerY, this.outerCellWidth, this.outerCellHeight);
     var frameSize = {
       width: this.cellWidth,
       height: this.cellHeight
     };
     var drawCallback = this.useDynamicTexture ? DrawDynamicTexture : DrawCanvasTexture;
-    drawCallback.call(this, x, y, frameSize, callback, scope);
+    drawCallback.call(this, innerX, innerY, frameSize, callback, scope);
     // frameSize might be changed
 
-    this.texture.add(frameName, 0, x, y, frameSize.width, frameSize.height);
+    this.texture.add(frameName, 0, innerX, innerY, frameSize.width, frameSize.height);
     this.addFrameName(index, frameName);
     return this;
+  };
+  var ClearFrame = function ClearFrame(x, y, width, height) {
+    if (this.useDynamicTexture) {
+      DynamicTextureClearRectangle(this.texture, x, y, width, height);
+    } else {
+      this.context.clearRect(x, y, width, height);
+    }
   };
   var DrawCanvasTexture = function DrawCanvasTexture(x, y, frameSize, callback, scope) {
     var context = this.context;
     context.save();
     context.translate(x, y);
-
-    // Clear cell
-    context.clearRect(0, 0, frameSize.width, frameSize.height);
 
     // Draw cell
     if (scope) {
@@ -233,9 +241,6 @@
   };
   var DrawDynamicTexture = function DrawDynamicTexture(x, y, frameSize, callback, scope) {
     var texture = this.texture;
-
-    // Clear cell
-    DynamicTextureClearRectangle(texture, x, y, frameSize.width, frameSize.height);
 
     // Draw cell
     texture.camera.setScroll(-x, -y);
@@ -440,6 +445,7 @@
   var FrameManager = /*#__PURE__*/function () {
     function FrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
       _classCallCheck(this, FrameManager);
+      var columns, rows, cellPadding;
       if (IsPlainObject(key)) {
         var config = key;
         key = GetValue(config, 'key');
@@ -447,6 +453,9 @@
         height = GetValue(config, 'height');
         cellWidth = GetValue(config, 'cellWidth');
         cellHeight = GetValue(config, 'cellHeight');
+        cellPadding = GetValue(config, 'cellPadding', 0);
+        columns = GetValue(config, 'columns');
+        rows = GetValue(config, 'rows');
         fillColor = GetValue(config, 'fillColor');
         useDynamicTexture = GetValue(config, 'useDynamicTexture');
       } else {
@@ -455,17 +464,33 @@
           fillColor = undefined;
         }
       }
-      if (width === undefined) {
-        width = 4096;
-      }
-      if (height === undefined) {
-        height = 4096;
-      }
       if (cellWidth === undefined) {
         cellWidth = 64;
       }
       if (cellHeight === undefined) {
         cellHeight = 64;
+      }
+      if (cellPadding === undefined) {
+        cellPadding = 0;
+      }
+      this.cellWidth = cellWidth;
+      this.cellHeight = cellHeight;
+      this.cellPadding = cellPadding;
+      if (columns) {
+        width = this.outerCellWidth * columns;
+      } else {
+        if (width === undefined) {
+          width = 4096;
+        }
+        columns = Math.floor(width / this.outerCellWidth);
+      }
+      if (rows) {
+        height = this.outerCellWidth * rows;
+      } else {
+        if (height === undefined) {
+          height = 4096;
+        }
+        rows = Math.floor(height / this.outerCellWidth);
       }
       if (useDynamicTexture === undefined) {
         useDynamicTexture = false;
@@ -488,17 +513,25 @@
       this.key = key;
       this.width = width;
       this.height = height;
-      this.cellWidth = cellWidth;
-      this.cellHeight = cellHeight;
-      this.columnCount = Math.floor(width / cellWidth);
-      this.rowCount = Math.floor(height / cellHeight);
-      this.totalCount = this.columnCount * this.rowCount;
+      this.columns = columns;
+      this.rows = rows;
+      this.totalCount = this.columns * this.rows;
       this.frameNames = Array(this.totalCount);
       for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
         this.frameNames[i] = undefined;
       }
     }
     _createClass(FrameManager, [{
+      key: "outerCellWidth",
+      get: function get() {
+        return this.cellWidth + this.cellPadding * 2;
+      }
+    }, {
+      key: "outerCellHeight",
+      get: function get() {
+        return this.cellHeight + this.cellPadding * 2;
+      }
+    }, {
       key: "destroy",
       value: function destroy() {
         this.texture = undefined;
@@ -534,10 +567,10 @@
         if (out === undefined) {
           out = {};
         }
-        var columnIndex = frameIndex % this.columnCount;
-        var rowIndex = Math.floor(frameIndex / this.columnCount);
-        out.x = columnIndex * this.cellWidth;
-        out.y = rowIndex * this.cellHeight;
+        var columnIndex = frameIndex % this.columns;
+        var rowIndex = Math.floor(frameIndex / this.columns);
+        out.x = columnIndex * (this.cellWidth + this.cellPadding * 2);
+        out.y = rowIndex * (this.cellHeight + this.cellPadding * 2);
         return out;
       }
     }, {
@@ -669,11 +702,11 @@
       _this = _super.call(this, scene, 0, 0, width, height);
       _this.setBaseKey(key);
       if (edgeWidth === undefined) {
-        edgeWidth = width / 7;
+        edgeWidth = Math.floor(width / 7);
       }
       _this.edgeWidth = edgeWidth;
       if (edgeHeight === undefined) {
-        edgeHeight = height / 7;
+        edgeHeight = Math.floor(height / 7);
       }
       _this.edgeHeight = edgeHeight;
       var maskGraphics = scene.make.graphics({
@@ -742,6 +775,8 @@
       targetKey = _ref.targetKey,
       columns = _ref.columns,
       rows = _ref.rows,
+      _ref$framePadding = _ref.framePadding,
+      framePadding = _ref$framePadding === void 0 ? 1 : _ref$framePadding,
       edgeWidth = _ref.edgeWidth,
       edgeHeight = _ref.edgeHeight,
       edges = _ref.edges,
@@ -753,10 +788,10 @@
     var baseFrameWidth = baseFrame.cutWidth,
       baseFrameHeight = baseFrame.height;
     if (edgeWidth === undefined) {
-      edgeWidth = baseFrameWidth / columns / 7;
+      edgeWidth = Math.floor(baseFrameWidth / columns / 7);
     }
     if (edgeHeight === undefined) {
-      edgeHeight = baseFrameHeight / rows / 7;
+      edgeHeight = Math.floor(baseFrameHeight / rows / 7);
     }
     if (edges === undefined) {
       edges = RandomPieceEdges(columns, rows);
@@ -765,10 +800,11 @@
     var frameHeight = (baseFrameHeight - edgeHeight * (rows - 1)) / rows + 2 * edgeHeight;
     var frameManager = new FrameManager(scene, {
       key: targetKey,
-      width: frameWidth * columns,
-      height: frameHeight * rows,
       cellWidth: frameWidth,
       cellHeight: frameHeight,
+      cellPadding: framePadding,
+      columns: columns,
+      rows: rows,
       useDynamicTexture: true,
       fillColor: 0x888888
     });

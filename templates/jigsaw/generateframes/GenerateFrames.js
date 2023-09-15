@@ -11,6 +11,7 @@ var GenerateFrames = function (scene, {
     baseKey,
     targetKey,
     columns, rows,
+    framePadding = 1,
     edgeWidth, edgeHeight,
     edges,
     drawMaskCallback,
@@ -23,10 +24,10 @@ var GenerateFrames = function (scene, {
         baseFrameHeight = baseFrame.height;
 
     if (edgeWidth === undefined) {
-        edgeWidth = (baseFrameWidth / columns) / 7;
+        edgeWidth = Math.floor((baseFrameWidth / columns) / 7);
     }
     if (edgeHeight === undefined) {
-        edgeHeight = (baseFrameHeight / rows) / 7;
+        edgeHeight = Math.floor((baseFrameHeight / rows) / 7);
     }
 
     if (edges === undefined) {
@@ -40,6 +41,7 @@ var GenerateFrames = function (scene, {
         key: targetKey,
         cellWidth: frameWidth,
         cellHeight: frameHeight,
+        cellPadding: framePadding,
         columns: columns,
         rows: rows,
         useDynamicTexture: true,

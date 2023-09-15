@@ -7,8 +7,9 @@ declare namespace FrameManager {
         height?: number,
         cellWidth?: number,
         cellHeight?: number,
+        cellPadding?: number,
         columns?: number,
-        rows?: number,
+        rows?: number,        
         fillColor?: string | number,
         useDynamicTexture?: boolean
     }
