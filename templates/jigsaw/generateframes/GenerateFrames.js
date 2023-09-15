@@ -51,7 +51,8 @@ var GenerateFrames = function (scene, {
     var sample = new JigsawPiece(scene, {
         width: frameWidth, height: frameHeight,
         indentX: edgeWidth, indentY: edgeHeight,
-        key: baseKey
+        key: baseKey,
+        drawShapeCallback
     });
 
     var startX = -edgeWidth,
@@ -61,10 +62,8 @@ var GenerateFrames = function (scene, {
     for (var r = 0; r < rows; r++) {
         for (var c = 0; c < columns; c++) {
             sample.drawPiece({
-                scrollX,
-                scrollY,
-                edgeMode: edges[c][r],
-                drawShapeCallback
+                scrollX, scrollY,
+                edgeMode: edges[c][r]
             });
 
             frameManager.paste(getFrameNameCallback(c, r), sample);

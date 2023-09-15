@@ -9,10 +9,14 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
         width, height,
         edgeWidth, edgeHeight,
         key,
+        drawShapeCallback = DefaultDrawShapeCallback
     }) {
+
         super(scene, 0, 0, width, height);
 
         this.setBaseKey(key);
+
+        this.setDrawShapeCallback(drawShapeCallback);
 
         if (edgeWidth === undefined) {
             edgeWidth = Math.floor(width / 7);
@@ -37,6 +41,8 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         super.destroy(fromScene);
 
+        this.drawShapeCallback = undefined;
+
         this.maskGraphics.destroy();
         this.maskGraphics = undefined;
 
@@ -47,10 +53,14 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
         return this;
     }
 
+    setDrawShapeCallback(callback) {
+        this.drawShapeCallback = callback;
+        return this;
+    }
+
     drawPiece({
         scrollX, scrollY,
         edgeMode,
-        drawShapeCallback = DefaultDrawShapeCallback
     }) {
         // Convert string to plain object
         if (typeof (edgeMode) === 'string') {
@@ -73,7 +83,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(0, 0);
 
-        drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
+        this.drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
 
         return this;
     }
