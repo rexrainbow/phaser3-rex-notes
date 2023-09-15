@@ -2,7 +2,7 @@
 Sample JigsawPiece, draw to FrameManager
 */
 
-import DrawPieceMask from './DrawPieceMask.js';
+import DefaultDrawShapeCallback from './DefaultDrawShapeCallback.js';
 
 class JigsawPiece extends Phaser.GameObjects.RenderTexture {
     constructor(scene, {
@@ -50,7 +50,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
     drawPiece({
         scrollX, scrollY,
         edgeMode,
-        drawMaskCallback = DrawPieceMask
+        drawShapeCallback = DefaultDrawShapeCallback
     }) {
         // Convert string to plain object
         if (typeof (edgeMode) === 'string') {
@@ -73,7 +73,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(0, 0);
 
-        drawMaskCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
+        drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
 
         return this;
     }

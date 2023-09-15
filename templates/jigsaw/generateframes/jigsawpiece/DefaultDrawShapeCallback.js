@@ -5,7 +5,7 @@ const RAD180 = DegToRad(180);
 const RAD270 = DegToRad(270);
 const RAD360 = DegToRad(360);
 
-var DrawPieceMask = function (graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
+var DefaultDrawShapeCallback = function (graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
     var centerX = width / 2, centerY = height / 2;
 
     graphics.clear();
@@ -59,4 +59,4 @@ var DrawPieceMask = function (graphics, width, height, edgeWidth, edgeHeight, ed
     graphics.fillPath();
 }
 
-export default DrawPieceMask
+export default DefaultDrawShapeCallback;

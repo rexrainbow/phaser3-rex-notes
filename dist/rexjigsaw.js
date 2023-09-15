@@ -640,7 +640,7 @@
   var RAD180 = DegToRad(180);
   var RAD270 = DegToRad(270);
   var RAD360 = DegToRad(360);
-  var DrawPieceMask = function DrawPieceMask(graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
+  var DefaultDrawShapeCallback = function DefaultDrawShapeCallback(graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
     var centerX = width / 2,
       centerY = height / 2;
     graphics.clear();
@@ -739,8 +739,8 @@
         var scrollX = _ref2.scrollX,
           scrollY = _ref2.scrollY,
           edgeMode = _ref2.edgeMode,
-          _ref2$drawMaskCallbac = _ref2.drawMaskCallback,
-          drawMaskCallback = _ref2$drawMaskCallbac === void 0 ? DrawPieceMask : _ref2$drawMaskCallbac;
+          _ref2$drawShapeCallba = _ref2.drawShapeCallback,
+          drawShapeCallback = _ref2$drawShapeCallba === void 0 ? DefaultDrawShapeCallback : _ref2$drawShapeCallba;
         // Convert string to plain object
         if (typeof edgeMode === 'string') {
           edgeMode = edgeMode.split('').map(function (x) {
@@ -760,7 +760,7 @@
           originY: 0
         });
         this.camera.setScroll(0, 0);
-        drawMaskCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
+        drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
         return this;
       }
     }]);
@@ -780,7 +780,7 @@
       edgeWidth = _ref.edgeWidth,
       edgeHeight = _ref.edgeHeight,
       edges = _ref.edges,
-      drawMaskCallback = _ref.drawMaskCallback,
+      drawShapeCallback = _ref.drawShapeCallback,
       _ref$getFrameNameCall = _ref.getFrameNameCallback,
       getFrameNameCallback = _ref$getFrameNameCall === void 0 ? DefaultGetFrameNameCallback : _ref$getFrameNameCall;
     var textureManager = scene.sys.textures;
@@ -825,7 +825,7 @@
           scrollX: scrollX,
           scrollY: scrollY,
           edgeMode: edges[c][r],
-          drawMaskCallback: drawMaskCallback
+          drawShapeCallback: drawShapeCallback
         });
         frameManager.paste(getFrameNameCallback(c, r), sample);
         scrollX += frameWidth - edgeWidth;

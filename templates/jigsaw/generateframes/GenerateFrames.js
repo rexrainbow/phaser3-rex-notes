@@ -1,6 +1,6 @@
 import FrameManager from '../../../plugins/texture/framemanager/FrameManager.js';
 import RandomPieceEdges from './RandomPieceEdges.js';
-import JigsawPiece from '../jigsawpiece/JigsawPiece.js';
+import JigsawPiece from './jigsawpiece/JigsawPiece.js';
 
 
 var DefaultGetFrameNameCallback = function (c, r) {
@@ -14,7 +14,7 @@ var GenerateFrames = function (scene, {
     framePadding = 1,
     edgeWidth, edgeHeight,
     edges,
-    drawMaskCallback,
+    drawShapeCallback,
     getFrameNameCallback = DefaultGetFrameNameCallback
 }) {
 
@@ -64,7 +64,7 @@ var GenerateFrames = function (scene, {
                 scrollX,
                 scrollY,
                 edgeMode: edges[c][r],
-                drawMaskCallback
+                drawShapeCallback
             });
 
             frameManager.paste(getFrameNameCallback(c, r), sample);
