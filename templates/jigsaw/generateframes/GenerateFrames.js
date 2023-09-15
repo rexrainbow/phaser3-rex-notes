@@ -8,8 +8,8 @@ var DefaultGetFrameNameCallback = function (c, r) {
 }
 
 var GenerateFrames = function (scene, {
-    baseKey,
-    targetKey,
+    sourceKey,
+    destinationKey,
     columns, rows,
     framePadding = 1,
     edgeWidth, edgeHeight,
@@ -19,26 +19,26 @@ var GenerateFrames = function (scene, {
 }) {
 
     var textureManager = scene.sys.textures;
-    var baseFrame = textureManager.getFrame(baseKey, '__BASE');
-    var baseFrameWidth = baseFrame.cutWidth,
-        baseFrameHeight = baseFrame.height;
+    var sourceFrame = textureManager.getFrame(sourceKey, '__BASE');
+    var sourceFrameWidth = sourceFrame.cutWidth,
+        sourceFrameHeight = sourceFrame.height;
 
     if (edgeWidth === undefined) {
-        edgeWidth = Math.floor((baseFrameWidth / columns) / 7);
+        edgeWidth = Math.floor((sourceFrameWidth / columns) / 7);
     }
     if (edgeHeight === undefined) {
-        edgeHeight = Math.floor((baseFrameHeight / rows) / 7);
+        edgeHeight = Math.floor((sourceFrameHeight / rows) / 7);
     }
 
     if (edges === undefined) {
         edges = RandomPieceEdges(columns, rows);
     }
 
-    var frameWidth = ((baseFrameWidth - (edgeWidth * (columns - 1))) / columns) + (2 * edgeWidth);
-    var frameHeight = ((baseFrameHeight - (edgeHeight * (rows - 1))) / rows) + (2 * edgeHeight);
+    var frameWidth = ((sourceFrameWidth - (edgeWidth * (columns - 1))) / columns) + (2 * edgeWidth);
+    var frameHeight = ((sourceFrameHeight - (edgeHeight * (rows - 1))) / rows) + (2 * edgeHeight);
 
     var frameManager = new FrameManager(scene, {
-        key: targetKey,
+        key: destinationKey,
         cellWidth: frameWidth,
         cellHeight: frameHeight,
         cellPadding: framePadding,
@@ -51,7 +51,7 @@ var GenerateFrames = function (scene, {
     var sample = new JigsawPiece(scene, {
         width: frameWidth, height: frameHeight,
         indentX: edgeWidth, indentY: edgeHeight,
-        key: baseKey,
+        key: sourceKey,
         drawShapeCallback
     });
 
@@ -79,14 +79,13 @@ var GenerateFrames = function (scene, {
     frameManager.destroy();
 
     return {
-        baseKey,
-        targetKey,
+        sourceKey,
+        destinationKey,
         columns, rows,
 
-        frameWidth,
-        frameHeight,
-        edgeWidth,
-        edgeHeight,
+        sourceFrameWidth, sourceFrameHeight,
+        frameWidth, frameHeight,
+        edgeWidth, edgeHeight,
         getFrameNameCallback,
     }
 }

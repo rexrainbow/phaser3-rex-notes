@@ -49,7 +49,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
     }
 
     setBaseKey(key) {
-        this.baseKey = key;
+        this.sourceKey = key;
         return this;
     }
 
@@ -77,7 +77,7 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(scrollX, scrollY);
 
-        this.stamp(this.baseKey, undefined, 0, 0, {
+        this.stamp(this.sourceKey, undefined, 0, 0, {
             originX: 0, originY: 0,
         });
 

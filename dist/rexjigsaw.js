@@ -697,10 +697,13 @@
         height = _ref.height,
         edgeWidth = _ref.edgeWidth,
         edgeHeight = _ref.edgeHeight,
-        key = _ref.key;
+        key = _ref.key,
+        _ref$drawShapeCallbac = _ref.drawShapeCallback,
+        drawShapeCallback = _ref$drawShapeCallbac === void 0 ? DefaultDrawShapeCallback : _ref$drawShapeCallbac;
       _classCallCheck(this, JigsawPiece);
       _this = _super.call(this, scene, 0, 0, width, height);
       _this.setBaseKey(key);
+      _this.setDrawShapeCallback(drawShapeCallback);
       if (edgeWidth === undefined) {
         edgeWidth = Math.floor(width / 7);
       }
@@ -724,13 +727,20 @@
           return;
         }
         _get(_getPrototypeOf(JigsawPiece.prototype), "destroy", this).call(this, fromScene);
+        this.drawShapeCallback = undefined;
         this.maskGraphics.destroy();
         this.maskGraphics = undefined;
       }
     }, {
       key: "setBaseKey",
       value: function setBaseKey(key) {
-        this.baseKey = key;
+        this.sourceKey = key;
+        return this;
+      }
+    }, {
+      key: "setDrawShapeCallback",
+      value: function setDrawShapeCallback(callback) {
+        this.drawShapeCallback = callback;
         return this;
       }
     }, {
@@ -738,9 +748,7 @@
       value: function drawPiece(_ref2) {
         var scrollX = _ref2.scrollX,
           scrollY = _ref2.scrollY,
-          edgeMode = _ref2.edgeMode,
-          _ref2$drawShapeCallba = _ref2.drawShapeCallback,
-          drawShapeCallback = _ref2$drawShapeCallba === void 0 ? DefaultDrawShapeCallback : _ref2$drawShapeCallba;
+          edgeMode = _ref2.edgeMode;
         // Convert string to plain object
         if (typeof edgeMode === 'string') {
           edgeMode = edgeMode.split('').map(function (x) {
@@ -755,12 +763,12 @@
         }
         this.clear().fill(0x333333);
         this.camera.setScroll(scrollX, scrollY);
-        this.stamp(this.baseKey, undefined, 0, 0, {
+        this.stamp(this.sourceKey, undefined, 0, 0, {
           originX: 0,
           originY: 0
         });
         this.camera.setScroll(0, 0);
-        drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
+        this.drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
         return this;
       }
     }]);
@@ -771,8 +779,8 @@
     return "".concat(c, ",").concat(r);
   };
   var GenerateFrames = function GenerateFrames(scene, _ref) {
-    var baseKey = _ref.baseKey,
-      targetKey = _ref.targetKey,
+    var sourceKey = _ref.sourceKey,
+      destinationKey = _ref.destinationKey,
       columns = _ref.columns,
       rows = _ref.rows,
       _ref$framePadding = _ref.framePadding,
@@ -784,22 +792,22 @@
       _ref$getFrameNameCall = _ref.getFrameNameCallback,
       getFrameNameCallback = _ref$getFrameNameCall === void 0 ? DefaultGetFrameNameCallback : _ref$getFrameNameCall;
     var textureManager = scene.sys.textures;
-    var baseFrame = textureManager.getFrame(baseKey, '__BASE');
-    var baseFrameWidth = baseFrame.cutWidth,
-      baseFrameHeight = baseFrame.height;
+    var sourceFrame = textureManager.getFrame(sourceKey, '__BASE');
+    var sourceFrameWidth = sourceFrame.cutWidth,
+      sourceFrameHeight = sourceFrame.height;
     if (edgeWidth === undefined) {
-      edgeWidth = Math.floor(baseFrameWidth / columns / 7);
+      edgeWidth = Math.floor(sourceFrameWidth / columns / 7);
     }
     if (edgeHeight === undefined) {
-      edgeHeight = Math.floor(baseFrameHeight / rows / 7);
+      edgeHeight = Math.floor(sourceFrameHeight / rows / 7);
     }
     if (edges === undefined) {
       edges = RandomPieceEdges(columns, rows);
     }
-    var frameWidth = (baseFrameWidth - edgeWidth * (columns - 1)) / columns + 2 * edgeWidth;
-    var frameHeight = (baseFrameHeight - edgeHeight * (rows - 1)) / rows + 2 * edgeHeight;
+    var frameWidth = (sourceFrameWidth - edgeWidth * (columns - 1)) / columns + 2 * edgeWidth;
+    var frameHeight = (sourceFrameHeight - edgeHeight * (rows - 1)) / rows + 2 * edgeHeight;
     var frameManager = new FrameManager(scene, {
-      key: targetKey,
+      key: destinationKey,
       cellWidth: frameWidth,
       cellHeight: frameHeight,
       cellPadding: framePadding,
@@ -813,7 +821,8 @@
       height: frameHeight,
       indentX: edgeWidth,
       indentY: edgeHeight,
-      key: baseKey
+      key: sourceKey,
+      drawShapeCallback: drawShapeCallback
     });
     var startX = -edgeWidth,
       startY = -edgeHeight;
@@ -824,8 +833,7 @@
         sample.drawPiece({
           scrollX: scrollX,
           scrollY: scrollY,
-          edgeMode: edges[c][r],
-          drawShapeCallback: drawShapeCallback
+          edgeMode: edges[c][r]
         });
         frameManager.paste(getFrameNameCallback(c, r), sample);
         scrollX += frameWidth - edgeWidth;
@@ -836,10 +844,12 @@
     sample.destroy();
     frameManager.destroy();
     return {
-      baseKey: baseKey,
-      targetKey: targetKey,
+      sourceKey: sourceKey,
+      destinationKey: destinationKey,
       columns: columns,
       rows: rows,
+      sourceFrameWidth: sourceFrameWidth,
+      sourceFrameHeight: sourceFrameHeight,
       frameWidth: frameWidth,
       frameHeight: frameHeight,
       edgeWidth: edgeWidth,

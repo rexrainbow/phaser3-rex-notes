@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var result = Jigsaw.GenerateFrames(this, {
-            baseKey: 'classroom',
-            targetKey: 'pieces',
+            sourceKey: 'classroom',
+            destinationKey: 'pieces',
             columns: 8, rows: 6,
             edgeWidth: 20, edgeHeight: 20,
             drawShapeCallback: DrawShapeCallback
@@ -24,9 +24,6 @@ class Demo extends Phaser.Scene {
 
         console.log(result)
         console.log(baseImage.width, baseImage.height);
-
-        // Frame name = `${c},${r}`
-        var piece = this.add.image(950, 700, 'pieces', result.getFrameNameCallback(7, 5));
     }
 
     update() { }

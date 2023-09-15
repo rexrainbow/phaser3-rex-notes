@@ -7,8 +7,10 @@ import typescript from '@rollup/plugin-typescript';
 import uglify from "@lopatnov/rollup-plugin-uglify";
 // import { terser } from '@rollup/plugin-terser'; // Uglify for ES6
 
-import pluginList from './plugin-list.js';
-// const pluginList = {};
+// import pluginList from './plugin-list.js';
+const pluginList = {
+    'jigsaw': './templates/jigsaw/index.js',
+};
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 
