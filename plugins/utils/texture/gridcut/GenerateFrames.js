@@ -1,6 +1,6 @@
 import GetFrameNameCallback from "./GetFrameNameCallback";
 
-var GridCut = function (scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
+var GenerateFrames = function (scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
     if (frame == null) {
         frame = '__BASE';
     }
@@ -51,4 +51,4 @@ var GridCut = function (scene, key, frame, columns, rows, overlapX, overlapY, ge
     }
 }
 
-export default GridCut;
+export default GenerateFrames;

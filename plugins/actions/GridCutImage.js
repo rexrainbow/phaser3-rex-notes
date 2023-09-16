@@ -1,4 +1,4 @@
-import GridCut from '../utils/texture/gridcut/GridCut.js';
+import GenerateFrames from '../utils/texture/gridcut/GenerateFrames.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DefaultImageClass = Phaser.GameObjects.Image;
@@ -37,7 +37,7 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var texture = gameObject.texture;
     var frame = gameObject.frame;
 
-    var result = GridCut(scene, texture, frame, columns, rows, overlapX, overlapY);
+    var result = GenerateFrames(scene, texture, frame, columns, rows, overlapX, overlapY);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
         scaleY = gameObject.scaleY;
