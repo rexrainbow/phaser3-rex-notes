@@ -41,6 +41,12 @@ var CreatePieces = function (gameObject, {
 
     piecesKey = result.destinationKey;
     var getFrameNameCallback = result.getFrameNameCallback;
+    var frameWidth = result.frameWidth,
+        frameHeight = result.frameHeight;
+    var pieceWidth = (frameWidth - (edgeWidth * 2)) * scaleX,
+        pieceHeight = (frameHeight - (edgeHeight * 2)) * scaleY;
+    var pieceDisplayOriginX = originX * frameWidth * scaleX,
+        pieceDisplayOriginY = originY * frameHeight * scaleY;
 
     if (!createImageCallback) {
         createImageCallback = function (scene, key, frame) {
@@ -70,8 +76,8 @@ var CreatePieces = function (gameObject, {
             }
 
             if (align) {
-                var pieceX = pieceTopLeftX + ((originX * pieceGameObject.width) * scaleX);
-                var pieceY = pieceTopLeftY + ((originY * pieceGameObject.height) * scaleY);
+                var pieceX = pieceTopLeftX + pieceDisplayOriginX;
+                var pieceY = pieceTopLeftY + pieceDisplayOriginY;
                 pieceGameObject
                     .setOrigin(originX, originY)
                     .setPosition(pieceX, pieceY)
@@ -80,13 +86,13 @@ var CreatePieces = function (gameObject, {
                 RotateAround(pieceGameObject, topLeftX, topLeftY, rotation);
             }
 
-            pieceTopLeftX += (pieceGameObject.width - (edgeWidth * 2)) * scaleX;
+            pieceTopLeftX += pieceWidth;
 
             pieceGameObjects.push(pieceGameObject);
         }
 
         pieceTopLeftX = topLeftX;
-        pieceTopLeftY += (pieceGameObject.height - (edgeHeight * 2)) * scaleY;
+        pieceTopLeftY += pieceHeight;
 
     }
 
