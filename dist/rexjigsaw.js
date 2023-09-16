@@ -35,6 +35,20 @@
     });
     return Constructor;
   }
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -643,47 +657,51 @@
   var DefaultDrawShapeCallback = function DefaultDrawShapeCallback(graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
     var centerX = width / 2,
       centerY = height / 2;
+    var leftX = edgeWidth,
+      rightX = width - edgeWidth,
+      topY = edgeHeight,
+      bottomY = height - edgeHeight;
     graphics.clear();
     graphics.beginPath();
-    graphics.moveTo(edgeWidth, edgeHeight);
+    graphics.moveTo(leftX, topY);
     switch (edgeMode.top) {
       case 1:
-        graphics.lineTo(centerX - edgeHeight, edgeHeight);
-        graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, false);
+        graphics.lineTo(centerX - edgeHeight, topY);
+        graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, false);
         break;
       case 2:
-        graphics.lineTo(centerX - edgeHeight, edgeHeight);
-        graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, true);
+        graphics.lineTo(centerX - edgeHeight, topY);
+        graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, true);
         break;
     }
-    graphics.lineTo(width - edgeWidth, edgeHeight);
+    graphics.lineTo(rightX, topY);
     switch (edgeMode.right) {
       case 1:
-        graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, false);
+        graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, false);
         break;
       case 2:
-        graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, true);
+        graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, true);
         break;
     }
-    graphics.lineTo(width - edgeWidth, height - edgeHeight);
+    graphics.lineTo(rightX, bottomY);
     switch (edgeMode.bottom) {
       case 1:
-        graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, false);
+        graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, false);
         break;
       case 2:
-        graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, true);
+        graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, true);
         break;
     }
-    graphics.lineTo(edgeWidth, height - edgeHeight);
+    graphics.lineTo(leftX, bottomY);
     switch (edgeMode.left) {
       case 1:
-        graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, false);
+        graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, false);
         break;
       case 2:
-        graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, true);
+        graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, true);
         break;
     }
-    graphics.lineTo(edgeWidth, edgeHeight);
+    graphics.lineTo(leftX, topY);
     graphics.closePath();
     graphics.fillPath();
   };
@@ -779,6 +797,7 @@
     return "".concat(c, ",").concat(r);
   };
   var GenerateFrames = function GenerateFrames(scene, _ref) {
+    var _JigsawPiece;
     var sourceKey = _ref.sourceKey,
       destinationKey = _ref.destinationKey,
       columns = _ref.columns,
@@ -804,8 +823,14 @@
     if (edges === undefined) {
       edges = RandomPieceEdges(columns, rows);
     }
-    var frameWidth = (sourceFrameWidth - edgeWidth * (columns - 1)) / columns + 2 * edgeWidth;
-    var frameHeight = (sourceFrameHeight - edgeHeight * (rows - 1)) / rows + 2 * edgeHeight;
+    if (destinationKey === undefined) {
+      destinationKey = "".concat(sourceKey, "_pieces");
+    }
+    var frameWidth = sourceFrameWidth / columns + 2 * edgeWidth;
+    var frameHeight = sourceFrameHeight / rows + 2 * edgeHeight;
+    if (textureManager.exists(destinationKey)) {
+      textureManager.remove(destinationKey);
+    }
     var frameManager = new FrameManager(scene, {
       key: destinationKey,
       cellWidth: frameWidth,
@@ -816,14 +841,11 @@
       useDynamicTexture: true,
       fillColor: 0x888888
     });
-    var sample = new JigsawPiece(scene, {
+    var sample = new JigsawPiece(scene, (_JigsawPiece = {
       width: frameWidth,
       height: frameHeight,
-      indentX: edgeWidth,
-      indentY: edgeHeight,
-      key: sourceKey,
-      drawShapeCallback: drawShapeCallback
-    });
+      edgeWidth: edgeWidth
+    }, _defineProperty(_JigsawPiece, "edgeWidth", edgeHeight), _defineProperty(_JigsawPiece, "key", sourceKey), _defineProperty(_JigsawPiece, "drawShapeCallback", drawShapeCallback), _JigsawPiece));
     var startX = -edgeWidth,
       startY = -edgeHeight;
     var scrollX = startX,
@@ -836,10 +858,10 @@
           edgeMode: edges[c][r]
         });
         frameManager.paste(getFrameNameCallback(c, r), sample);
-        scrollX += frameWidth - edgeWidth;
+        scrollX += frameWidth - edgeWidth * 2;
       }
       scrollX = startX;
-      scrollY += frameHeight - edgeHeight;
+      scrollY += frameHeight - edgeHeight * 2;
     }
     sample.destroy();
     frameManager.destroy();
@@ -858,8 +880,88 @@
     };
   };
 
+  var DefaultImageClass = Phaser.GameObjects.Image;
+  var RotateAround = Phaser.Math.RotateAround;
+  var CreatePieces = function CreatePieces(gameObject, _ref) {
+    var piecesKey = _ref.piecesKey,
+      columns = _ref.columns,
+      rows = _ref.rows,
+      edgeWidth = _ref.edgeWidth,
+      edgeHeight = _ref.edgeHeight,
+      edges = _ref.edges,
+      drawShapeCallback = _ref.drawShapeCallback,
+      createImageCallback = _ref.createImageCallback,
+      _ref$ImageClass = _ref.ImageClass,
+      ImageClass = _ref$ImageClass === void 0 ? DefaultImageClass : _ref$ImageClass,
+      objectPool = _ref.objectPool,
+      _ref$add = _ref.add,
+      add = _ref$add === void 0 ? true : _ref$add,
+      _ref$align = _ref.align,
+      align = _ref$align === void 0 ? add : _ref$align,
+      _ref$originX = _ref.originX,
+      originX = _ref$originX === void 0 ? 0.5 : _ref$originX,
+      _ref$originY = _ref.originY,
+      originY = _ref$originY === void 0 ? 0.5 : _ref$originY;
+    var scene = gameObject.scene;
+    var sourceKey = gameObject.texture.key;
+    var topLeft = gameObject.getTopLeft();
+    var topLeftX = topLeft.x;
+    var topLeftY = topLeft.y;
+    var scaleX = gameObject.scaleX;
+    var scaleY = gameObject.scaleY;
+    var rotation = gameObject.rotation;
+    var result = GenerateFrames(scene, {
+      sourceKey: sourceKey,
+      destinationKey: piecesKey,
+      columns: columns,
+      rows: rows,
+      edgeWidth: edgeWidth,
+      edgeHeight: edgeHeight,
+      edges: edges,
+      drawShapeCallback: drawShapeCallback
+    });
+    piecesKey = result.destinationKey;
+    var getFrameNameCallback = result.getFrameNameCallback;
+    if (!createImageCallback) {
+      createImageCallback = function createImageCallback(scene, key, frame) {
+        return new ImageClass(scene, 0, 0, key, frame);
+      };
+    }
+    var pieceGameObjects = [];
+    topLeftX -= edgeWidth;
+    topLeftY -= edgeHeight;
+    var pieceTopLeftX = topLeftX,
+      pieceTopLeftY = topLeftY;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < columns; c++) {
+        var pieceGameObject;
+        var frameName = getFrameNameCallback(c, r);
+        if (objectPool && objectPool.length > 0) {
+          pieceGameObject = objectPool.pop().setTexture(piecesKey, frameName);
+        } else {
+          pieceGameObject = createImageCallback(scene, piecesKey, frameName);
+        }
+        if (add) {
+          scene.add.existing(pieceGameObject);
+        }
+        if (align) {
+          var pieceX = pieceTopLeftX + originX * pieceGameObject.width * scaleX;
+          var pieceY = pieceTopLeftY + originY * pieceGameObject.height * scaleY;
+          pieceGameObject.setOrigin(originX, originY).setPosition(pieceX, pieceY).setScale(scaleX, scaleY).setRotation(rotation);
+          RotateAround(pieceGameObject, topLeftX, topLeftY, rotation);
+        }
+        pieceTopLeftX += (pieceGameObject.width - edgeWidth * 2) * scaleX;
+        pieceGameObjects.push(pieceGameObject);
+      }
+      pieceTopLeftX = topLeftX;
+      pieceTopLeftY += (pieceGameObject.height - edgeHeight * 2) * scaleY;
+    }
+    return pieceGameObjects;
+  };
+
   var index$1 = {
-    GenerateFrames: GenerateFrames
+    GenerateFrames: GenerateFrames,
+    CreatePieces: CreatePieces
   };
 
   return index$1;

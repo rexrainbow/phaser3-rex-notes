@@ -36897,7 +36897,7 @@
     return callback;
   };
 
-  var GridCut = function GridCut(scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
+  var GenerateFrames = function GenerateFrames(scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
     if (frame == null) {
       frame = '__BASE';
     }
@@ -36945,7 +36945,7 @@
       columns = GetValue$1O(config, 'columns', 1);
       rows = GetValue$1O(config, 'rows', 1);
     }
-    var createImageCallback = GetValue$1O(config, 'onCreateImage');
+    var createImageCallback = GetValue$1O(config, 'createImageCallback');
     if (!createImageCallback) {
       var ImageClass = GetValue$1O(config, 'ImageClass', DefaultImageClass);
       createImageCallback = function createImageCallback(scene, key, frame) {
@@ -36963,7 +36963,7 @@
     var scene = gameObject.scene;
     var texture = gameObject.texture;
     var frame = gameObject.frame;
-    var result = GridCut(scene, texture, frame, columns, rows, overlapX, overlapY);
+    var result = GenerateFrames(scene, texture, frame, columns, rows, overlapX, overlapY);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
       scaleY = gameObject.scaleY;
@@ -36988,11 +36988,11 @@
         if (addToScene) {
           scene.add.existing(cellGameObject);
         }
-        var cellTLX = startX + scaleCellWidth * x - scaleOverlapX * (x - 1);
-        var cellTLY = startY + scaleCellHeight * y - scaleOverlapY * (y - 1);
-        var cellX = cellTLX + originX * scaleCellWidth;
-        var cellY = cellTLY + originY * scaleCellHeight;
         if (align) {
+          var cellTLX = startX + scaleCellWidth * x - scaleOverlapX * (x - 1);
+          var cellTLY = startY + scaleCellHeight * y - scaleOverlapY * (y - 1);
+          var cellX = cellTLX + originX * scaleCellWidth;
+          var cellY = cellTLY + originY * scaleCellHeight;
           cellGameObject.setOrigin(originX, originY).setPosition(cellX, cellY).setScale(scaleX, scaleY).setRotation(rotation);
           RotateAround$2(cellGameObject, startX, startY, rotation);
         }
@@ -46969,7 +46969,7 @@
       // this.parent = gameObject;
 
       if (_this.parent !== _this.scene) {
-        _this.focusMode = GetValue$1a(config, 'focus', false);
+        _this.focusMode = GetValue$1a(config, 'focus', true);
       } else {
         _this.focusMode = false;
       }

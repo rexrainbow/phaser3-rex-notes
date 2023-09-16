@@ -339,7 +339,7 @@
       // this.parent = gameObject;
 
       if (_this.parent !== _this.scene) {
-        _this.focusMode = GetValue(config, 'focus', false);
+        _this.focusMode = GetValue(config, 'focus', true);
       } else {
         _this.focusMode = false;
       }
