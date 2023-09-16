@@ -241,7 +241,7 @@ var textAreaInput = scene.rexUI.add.textAreaInput({
 
     mouseWheelScroller: false,
     // mouseWheelScroller: {
-    //     focus: false,
+    //     focus: true,
     //     speed: 0.1
     // },
 
@@ -337,8 +337,8 @@ var textAreaInput = scene.rexUI.add.textAreaInput({
 - `scroller` : **No scroller supported** (`false`).
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
-        - `true` : Only scrolling when cursor is over textAreaInput.
-        - `false` : Scrolling without checking cursor. Default behavior.
+        - `true` : Only scrolling when cursor is over textAreaInput. Default behavior.
+        - `false` : Scrolling without checking cursor.
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.

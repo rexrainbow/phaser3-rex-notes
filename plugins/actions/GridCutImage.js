@@ -12,7 +12,7 @@ var GridCutImage = function (gameObject, columns, rows, config) {
         rows = GetValue(config, 'rows', 1);
     }
 
-    var createImageCallback = GetValue(config, 'onCreateImage');
+    var createImageCallback = GetValue(config, 'createImageCallback');
     if (!createImageCallback) {
         var ImageClass = GetValue(config, 'ImageClass', DefaultImageClass);
         createImageCallback = function (scene, key, frame) {
@@ -66,12 +66,12 @@ var GridCutImage = function (gameObject, columns, rows, config) {
                 scene.add.existing(cellGameObject);
             }
 
-            var cellTLX = startX + (scaleCellWidth * x) - (scaleOverlapX * (x - 1));
-            var cellTLY = startY + (scaleCellHeight * y) - (scaleOverlapY * (y - 1));
-            var cellX = cellTLX + (originX * scaleCellWidth);
-            var cellY = cellTLY + (originY * scaleCellHeight);
-
             if (align) {
+                var cellTLX = startX + (scaleCellWidth * x) - (scaleOverlapX * (x - 1));
+                var cellTLY = startY + (scaleCellHeight * y) - (scaleOverlapY * (y - 1));
+                var cellX = cellTLX + (originX * scaleCellWidth);
+                var cellY = cellTLY + (originY * scaleCellHeight);
+
                 cellGameObject
                     .setOrigin(originX, originY)
                     .setPosition(cellX, cellY)

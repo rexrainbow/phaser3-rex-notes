@@ -83,7 +83,12 @@ class JigsawPiece extends Phaser.GameObjects.RenderTexture {
 
         this.camera.setScroll(0, 0);
 
-        this.drawShapeCallback(this.maskGraphics, this.width, this.height, this.edgeWidth, this.edgeHeight, edgeMode);
+        this.drawShapeCallback(
+            this.maskGraphics,
+            this.width, this.height,
+            this.edgeWidth, this.edgeHeight,
+            edgeMode
+        );
 
         return this;
     }

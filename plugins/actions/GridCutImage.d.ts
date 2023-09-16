@@ -5,7 +5,7 @@ declare namespace GridCutImage {
         columns?: number,
         rows?: number,
 
-        onCreateImage?: (
+        createImageCallback?: (
             scene: Phaser.Scene,
             key: Phaser.Textures.Texture,
             frame: string

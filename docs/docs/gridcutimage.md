@@ -75,7 +75,7 @@ Grid cut image texture to frames, then create image game objects from these fram
 
 ```javascript
 scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
-    // onCreateImage: undefined,
+    // createImageCallback: undefined,
     // ImageClass: Phaser.GameObjects.Image,
 
     // originX: 0.5,
@@ -88,7 +88,7 @@ scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
 
 - `gameObjects` : Target game object which has a texture, ex [Image](image.md), [RenderTexture](rendertexture.md).
 - `columns`, `rows` : Cut texture in `columns` x `rows` grids
-- `onCreateImage` : Custom callback to return an image game object, optional.
+- `createImageCallback` : Custom callback to return an image game object, optional.
     ```javascript
     function(scene, texture, frame) {
         return gameObject;
@@ -96,7 +96,7 @@ scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
     ``` 
     - `texture` : A texture object.
     - `frame` : Frame name.
-- `ImageClass` : Create image game object from this class. Default value is built-in [Image](image.md) class. Used when `onCreateImage` is `undefined`.
+- `ImageClass` : Create image game object from this class. Default value is built-in [Image](image.md) class. Used when `createImageCallback` is `undefined`.
 - `originX`, `originY` : Origin of created image game objects
 - `add` : 
     - `true` : Add these created image game objects to scene. Default value.

@@ -5,55 +5,65 @@ const RAD180 = DegToRad(180);
 const RAD270 = DegToRad(270);
 const RAD360 = DegToRad(360);
 
-var DefaultDrawShapeCallback = function (graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
+var DefaultDrawShapeCallback = function (
+    graphics,
+    width, height,
+    edgeWidth, edgeHeight,
+    edgeMode
+) {
+
     var centerX = width / 2, centerY = height / 2;
+    var leftX = edgeWidth,
+        rightX = width - edgeWidth,
+        topY = edgeHeight,
+        bottomY = height - edgeHeight;
 
     graphics.clear();
     graphics.beginPath();
 
-    graphics.moveTo(edgeWidth, edgeHeight);
+    graphics.moveTo(leftX, topY);
 
     switch (edgeMode.top) {
         case 1:
-            graphics.lineTo(centerX - edgeHeight, edgeHeight);
-            graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, false);
+            graphics.lineTo(centerX - edgeHeight, topY);
+            graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, false);
             break;
         case 2:
-            graphics.lineTo(centerX - edgeHeight, edgeHeight);
-            graphics.arc(centerX, edgeHeight, edgeHeight, RAD180, RAD360, true);
+            graphics.lineTo(centerX - edgeHeight, topY);
+            graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, true);
             break;
     }
-    graphics.lineTo(width - edgeWidth, edgeHeight);
+    graphics.lineTo(rightX, topY);
 
     switch (edgeMode.right) {
         case 1:
-            graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, false);
+            graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, false);
             break;
         case 2:
-            graphics.arc(width - edgeWidth, centerY, edgeWidth, RAD270, RAD90, true);
+            graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, true);
             break;
     }
-    graphics.lineTo(width - edgeWidth, height - edgeHeight);
+    graphics.lineTo(rightX, bottomY);
 
     switch (edgeMode.bottom) {
         case 1:
-            graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, false);
+            graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, false);
             break;
         case 2:
-            graphics.arc(centerX, height - edgeHeight, edgeHeight, RAD0, RAD180, true);
+            graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, true);
             break;
     }
-    graphics.lineTo(edgeWidth, height - edgeHeight);
+    graphics.lineTo(leftX, bottomY);
 
     switch (edgeMode.left) {
         case 1:
-            graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, false);
+            graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, false);
             break;
         case 2:
-            graphics.arc(edgeWidth, centerY, edgeWidth, RAD90, RAD270, true);
+            graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, true);
             break;
     }
-    graphics.lineTo(edgeWidth, edgeHeight);
+    graphics.lineTo(leftX, topY);
 
     graphics.closePath();
     graphics.fillPath();

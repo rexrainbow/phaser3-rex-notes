@@ -34,8 +34,16 @@ var GenerateFrames = function (scene, {
         edges = RandomPieceEdges(columns, rows);
     }
 
-    var frameWidth = ((sourceFrameWidth - (edgeWidth * (columns - 1))) / columns) + (2 * edgeWidth);
-    var frameHeight = ((sourceFrameHeight - (edgeHeight * (rows - 1))) / rows) + (2 * edgeHeight);
+    if (destinationKey === undefined) {
+        destinationKey = `${sourceKey}_pieces`;
+    }
+
+    var frameWidth = (sourceFrameWidth / columns) + (2 * edgeWidth);
+    var frameHeight = (sourceFrameHeight / rows) + (2 * edgeHeight);
+
+    if (textureManager.exists(destinationKey)) {
+        textureManager.remove(destinationKey);
+    }
 
     var frameManager = new FrameManager(scene, {
         key: destinationKey,
@@ -50,7 +58,7 @@ var GenerateFrames = function (scene, {
 
     var sample = new JigsawPiece(scene, {
         width: frameWidth, height: frameHeight,
-        indentX: edgeWidth, indentY: edgeHeight,
+        edgeWidth: edgeWidth, edgeWidth: edgeHeight,
         key: sourceKey,
         drawShapeCallback
     });
@@ -68,11 +76,11 @@ var GenerateFrames = function (scene, {
 
             frameManager.paste(getFrameNameCallback(c, r), sample);
 
-            scrollX += frameWidth - edgeWidth;
+            scrollX += frameWidth - (edgeWidth * 2);
         }
 
         scrollX = startX;
-        scrollY += frameHeight - edgeHeight;
+        scrollY += frameHeight - (edgeHeight * 2);
     }
 
     sample.destroy();

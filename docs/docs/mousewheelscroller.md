@@ -74,15 +74,15 @@ Emit scroll event when mouse-wheeling.
 
 ```javascript
 var scroller = scene.plugins.get('rexMouseWheelScroller').add(gameObject, {
-    // focus: false,
+    // focus: true,
     // speed: 0.1,
     // enable: true,
 });
 ```
 
-- `focus` : Fire 'scroll' event when mouse-wheeling --
-    - `true` : Cursor is over game object.
-    - `false` : Without checking if cursor is over game object or not. Default behavior.
+- `focus` : Fire `'scroll'` event when mouse-wheeling --
+    - `true` : Cursor is over game object. Default behavior.
+    - `false` : Without checking if cursor is over game object or not.
 - `speed` : Scrolling speed. Default value is `0.1`.
 - `enable` : Set `true` to enable 'scroll' event.
 

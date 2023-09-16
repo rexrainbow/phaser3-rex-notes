@@ -8,7 +8,7 @@ class MouseWheelScroller extends ComponentBase {
         // this.parent = gameObject;
 
         if (this.parent !== this.scene) {
-            this.focusMode = GetValue(config, 'focus', false);
+            this.focusMode = GetValue(config, 'focus', true);
         } else {
             this.focusMode = false;
         }

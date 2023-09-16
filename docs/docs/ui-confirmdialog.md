@@ -245,7 +245,7 @@ var dialog = scene.rexUI.add.confirmDialog({
 
         mouseWheelScroller: false,
         // mouseWheelScroller: {
-        //     focus: false,
+        //     focus: true,
         //     speed: 0.1
         // },
 
