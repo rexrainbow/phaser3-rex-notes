@@ -9609,7 +9609,7 @@
 </ul>
 <h3 id="grid-cut">Grid cut<a class="headerlink" href="#grid-cut" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGridCutImage&#39;</span><span class="p">).</span><span class="nx">gridCut</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// onCreateImage: undefined,</span>
+<span class="w">    </span><span class="c1">// createImageCallback: undefined,</span>
 <span class="w">    </span><span class="c1">// ImageClass: Phaser.GameObjects.Image,</span>
 
 <span class="w">    </span><span class="c1">// originX: 0.5,</span>
@@ -9622,7 +9622,7 @@
 <ul>
 <li><code>gameObjects</code> : Target game object which has a texture, ex <a href="../image/">Image</a>, <a href="../rendertexture/">RenderTexture</a>.</li>
 <li><code>columns</code>, <code>rows</code> : Cut texture in <code>columns</code> x <code>rows</code> grids</li>
-<li><code>onCreateImage</code> : Custom callback to return an image game object, optional.
+<li><code>createImageCallback</code> : Custom callback to return an image game object, optional.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
@@ -9631,7 +9631,7 @@
 <li><code>frame</code> : Frame name.</li>
 </ul>
 </li>
-<li><code>ImageClass</code> : Create image game object from this class. Default value is built-in <a href="../image/">Image</a> class. Used when <code>onCreateImage</code> is <code>undefined</code>.</li>
+<li><code>ImageClass</code> : Create image game object from this class. Default value is built-in <a href="../image/">Image</a> class. Used when <code>createImageCallback</code> is <code>undefined</code>.</li>
 <li><code>originX</code>, <code>originY</code> : Origin of created image game objects</li>
 <li><code>add</code> : <ul>
 <li><code>true</code> : Add these created image game objects to scene. Default value.</li>

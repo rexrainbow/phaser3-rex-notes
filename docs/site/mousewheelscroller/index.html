@@ -9648,15 +9648,15 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">scroller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMouseWheelScroller&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// focus: false,</span>
+<span class="w">    </span><span class="c1">// focus: true,</span>
 <span class="w">    </span><span class="c1">// speed: 0.1,</span>
 <span class="w">    </span><span class="c1">// enable: true,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>focus</code> : Fire 'scroll' event when mouse-wheeling --<ul>
-<li><code>true</code> : Cursor is over game object.</li>
-<li><code>false</code> : Without checking if cursor is over game object or not. Default behavior.</li>
+<li><code>focus</code> : Fire <code>'scroll'</code> event when mouse-wheeling --<ul>
+<li><code>true</code> : Cursor is over game object. Default behavior.</li>
+<li><code>false</code> : Without checking if cursor is over game object or not.</li>
 </ul>
 </li>
 <li><code>speed</code> : Scrolling speed. Default value is <code>0.1</code>.</li>
