@@ -11,14 +11,13 @@ declare namespace GridCutImage {
             frame: string
         ) => T,
         ImageClass?: T,
+        objectPool?: T[],
 
         originX?: number,
         originY?: number,
 
         add?: boolean,
         align?: boolean,
-
-        objectPool?: T[],
     }
 }
 
@@ -27,9 +26,9 @@ declare function GridCutImage<T = Phaser.GameObjects.Image>(
     columns: number,
     rows: number,
     config?: GridCutImage.IConfig
-): void;
+): T[];
 
 declare function GridCutImage<T = Phaser.GameObjects.Image>(
     gameObject: Phaser.GameObjects.GameObject,
     config?: GridCutImage.IConfig
-): void;
+): T[];
