@@ -35,20 +35,6 @@
     });
     return Constructor;
   }
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -797,7 +783,6 @@
     return "".concat(c, ",").concat(r);
   };
   var GenerateFrames = function GenerateFrames(scene, _ref) {
-    var _JigsawPiece;
     var sourceKey = _ref.sourceKey,
       destinationKey = _ref.destinationKey,
       columns = _ref.columns,
@@ -841,11 +826,14 @@
       useDynamicTexture: true,
       fillColor: 0x888888
     });
-    var sample = new JigsawPiece(scene, (_JigsawPiece = {
+    var sample = new JigsawPiece(scene, {
       width: frameWidth,
       height: frameHeight,
-      edgeWidth: edgeWidth
-    }, _defineProperty(_JigsawPiece, "edgeWidth", edgeHeight), _defineProperty(_JigsawPiece, "key", sourceKey), _defineProperty(_JigsawPiece, "drawShapeCallback", drawShapeCallback), _JigsawPiece));
+      edgeWidth: edgeWidth,
+      edgeHeight: edgeHeight,
+      key: sourceKey,
+      drawShapeCallback: drawShapeCallback
+    });
     var startX = -edgeWidth,
       startY = -edgeHeight;
     var scrollX = startX,
@@ -922,6 +910,12 @@
     });
     piecesKey = result.destinationKey;
     var getFrameNameCallback = result.getFrameNameCallback;
+    var frameWidth = result.frameWidth,
+      frameHeight = result.frameHeight;
+    var pieceWidth = (frameWidth - edgeWidth * 2) * scaleX,
+      pieceHeight = (frameHeight - edgeHeight * 2) * scaleY;
+    var pieceDisplayOriginX = originX * frameWidth * scaleX,
+      pieceDisplayOriginY = originY * frameHeight * scaleY;
     if (!createImageCallback) {
       createImageCallback = function createImageCallback(scene, key, frame) {
         return new ImageClass(scene, 0, 0, key, frame);
@@ -945,16 +939,16 @@
           scene.add.existing(pieceGameObject);
         }
         if (align) {
-          var pieceX = pieceTopLeftX + originX * pieceGameObject.width * scaleX;
-          var pieceY = pieceTopLeftY + originY * pieceGameObject.height * scaleY;
+          var pieceX = pieceTopLeftX + pieceDisplayOriginX;
+          var pieceY = pieceTopLeftY + pieceDisplayOriginY;
           pieceGameObject.setOrigin(originX, originY).setPosition(pieceX, pieceY).setScale(scaleX, scaleY).setRotation(rotation);
           RotateAround(pieceGameObject, topLeftX, topLeftY, rotation);
         }
-        pieceTopLeftX += (pieceGameObject.width - edgeWidth * 2) * scaleX;
+        pieceTopLeftX += pieceWidth;
         pieceGameObjects.push(pieceGameObject);
       }
       pieceTopLeftX = topLeftX;
-      pieceTopLeftY += (pieceGameObject.height - edgeHeight * 2) * scaleY;
+      pieceTopLeftY += pieceHeight;
     }
     return pieceGameObjects;
   };

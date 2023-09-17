@@ -138,7 +138,7 @@
     return callback;
   };
 
-  var GenerateFrames = function GenerateFrames(scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
+  var GenerateFrames = function GenerateFrames(scene, key, frame, columns, rows, getFrameNameCallback) {
     if (frame == null) {
       frame = '__BASE';
     }
@@ -150,8 +150,8 @@
     var baseWidth = baseFrame.width,
       baseHeight = baseFrame.height;
     var cellX, cellY, cellName;
-    var cellWidth = (baseWidth + (columns - 1) * overlapX) / columns,
-      cellHeight = (baseHeight + (rows - 1) * overlapY) / rows;
+    var cellWidth = baseWidth / columns,
+      cellHeight = baseHeight / rows;
     var frameCutX = baseFrame.cutX,
       frameCutY = baseFrame.cutY;
     var offsetX = 0,
@@ -163,9 +163,9 @@
         cellX = offsetX + frameCutX;
         cellY = offsetY + frameCutY;
         texture.add(cellName, 0, cellX, cellY, cellWidth, cellHeight);
-        offsetX += cellWidth - overlapX;
+        offsetX += cellWidth;
       }
-      offsetY += cellHeight - overlapY;
+      offsetY += cellHeight;
     }
     return {
       getFrameNameCallback: getFrameNameCallback,
@@ -195,16 +195,13 @@
     }
     var originX = GetValue(config, 'originX', 0.5);
     var originY = GetValue(config, 'originY', 0.5);
-    var overlap = GetValue(config, 'overlap', 0);
-    var overlapX = GetValue(config, 'overlapX', overlap);
-    var overlapY = GetValue(config, 'overlapY', overlap);
     var addToScene = GetValue(config, 'add', true);
     var align = GetValue(config, 'align', addToScene);
     var imageObjectPool = GetValue(config, 'objectPool', undefined);
     var scene = gameObject.scene;
     var texture = gameObject.texture;
     var frame = gameObject.frame;
-    var result = GenerateFrames(scene, texture, frame, columns, rows, overlapX, overlapY);
+    var result = GenerateFrames(scene, texture, frame, columns, rows);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
       scaleY = gameObject.scaleY;
@@ -215,8 +212,6 @@
     var cellGameObjects = [];
     var scaleCellWidth = result.cellWidth * scaleX,
       scaleCellHeight = result.cellHeight * scaleY;
-    var scaleOverlapX = overlapX * scaleX,
-      scaleOverlapY = overlapY * scaleY;
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < columns; x++) {
         var cellGameObject;
@@ -230,8 +225,8 @@
           scene.add.existing(cellGameObject);
         }
         if (align) {
-          var cellTLX = startX + scaleCellWidth * x - scaleOverlapX * (x - 1);
-          var cellTLY = startY + scaleCellHeight * y - scaleOverlapY * (y - 1);
+          var cellTLX = startX + scaleCellWidth * x;
+          var cellTLY = startY + scaleCellHeight * y;
           var cellX = cellTLX + originX * scaleCellWidth;
           var cellY = cellTLY + originY * scaleCellHeight;
           cellGameObject.setOrigin(originX, originY).setPosition(cellX, cellY).setScale(scaleX, scaleY).setRotation(rotation);
