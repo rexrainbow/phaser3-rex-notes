@@ -23,10 +23,6 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var originX = GetValue(config, 'originX', 0.5);
     var originY = GetValue(config, 'originY', 0.5);
 
-    var overlap = GetValue(config, 'overlap', 0);
-    var overlapX = GetValue(config, 'overlapX', overlap);
-    var overlapY = GetValue(config, 'overlapY', overlap);
-
     var addToScene = GetValue(config, 'add', true);
 
     var align = GetValue(config, 'align', addToScene);
@@ -37,7 +33,7 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var texture = gameObject.texture;
     var frame = gameObject.frame;
 
-    var result = GenerateFrames(scene, texture, frame, columns, rows, overlapX, overlapY);
+    var result = GenerateFrames(scene, texture, frame, columns, rows);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
         scaleY = gameObject.scaleY;
@@ -49,8 +45,6 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var cellGameObjects = [];
     var scaleCellWidth = result.cellWidth * scaleX,
         scaleCellHeight = result.cellHeight * scaleY;
-    var scaleOverlapX = overlapX * scaleX,
-        scaleOverlapY = overlapY * scaleY;
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
             var cellGameObject;
@@ -67,8 +61,8 @@ var GridCutImage = function (gameObject, columns, rows, config) {
             }
 
             if (align) {
-                var cellTLX = startX + (scaleCellWidth * x) - (scaleOverlapX * (x - 1));
-                var cellTLY = startY + (scaleCellHeight * y) - (scaleOverlapY * (y - 1));
+                var cellTLX = startX + (scaleCellWidth * x);
+                var cellTLY = startY + (scaleCellHeight * y);
                 var cellX = cellTLX + (originX * scaleCellWidth);
                 var cellY = cellTLY + (originY * scaleCellHeight);
 

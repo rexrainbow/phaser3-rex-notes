@@ -1,6 +1,6 @@
 import GetFrameNameCallback from "./GetFrameNameCallback";
 
-var GenerateFrames = function (scene, key, frame, columns, rows, overlapX, overlapY, getFrameNameCallback) {
+var GenerateFrames = function (scene, key, frame, columns, rows, getFrameNameCallback) {
     if (frame == null) {
         frame = '__BASE';
     }
@@ -16,11 +16,11 @@ var GenerateFrames = function (scene, key, frame, columns, rows, overlapX, overl
         baseHeight = baseFrame.height;
 
     var cellX, cellY, cellName;
-    var cellWidth = (baseWidth + ((columns - 1) * overlapX)) / columns,
-        cellHeight = (baseHeight + ((rows - 1) * overlapY)) / rows;
+    var cellWidth = baseWidth / columns,
+        cellHeight = baseHeight / rows;
 
     var frameCutX = baseFrame.cutX,
-    frameCutY = baseFrame.cutY;
+        frameCutY = baseFrame.cutY;
     var offsetX = 0,
         offsetY = 0;
     for (var y = 0; y < rows; y++) {
@@ -37,9 +37,9 @@ var GenerateFrames = function (scene, key, frame, columns, rows, overlapX, overl
                 cellWidth, cellHeight
             );
 
-            offsetX += cellWidth - overlapX;
+            offsetX += cellWidth;
         }
-        offsetY += cellHeight - overlapY;
+        offsetY += cellHeight;
     }
 
     return {
