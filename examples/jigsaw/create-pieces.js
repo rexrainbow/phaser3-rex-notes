@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Jigsaw from '../../templates/jigsaw/index';
+import Jigsaw from '../../templates/jigsaw/index.js';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 
 class Demo extends Phaser.Scene {

@@ -1,33 +1,33 @@
 ## Introduction
 
-Grid cut image texture to frames, then create image game objects from these frames.
+Cut image into pieces for jigsaw application.
 
 - Author: Rex
-- Methods
+- Method only
 
 ## Live demos
 
-- [Cut image](https://codepen.io/rexrainbow/pen/YzapXLM)
-- [Cut rendertexture](https://codepen.io/rexrainbow/pen/xxWEeNX)
+- [Create pieces](https://codepen.io/rexrainbow/pen/NWegLLK)
+- [Custom piece shape](https://codepen.io/rexrainbow/pen/yLGoVxz)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridcutimage)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/jigsaw/)
 
 ### Install plugin
 
 #### Load minify file
 
-- Load plugin (minify file) in preload stage
+- Load script (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexgridcutimageplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridcutimageplugin.min.js', true);
+    scene.load.script('rexjigsaw', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexjigsaw.min.js');
     ```
-- Create images
+- Cut image into pieces
     ```javascript
-    var images = scene.plugins.get('rexgridcutimageplugin').gridCut(gameObjects, columns, rows, config);
+    var pieces = rexjigsaw.CreatePieces(gameObject, config);
     ```
 
-#### Import plugin
+#### Import method
 
 - Install rex plugins from npm
     ```
@@ -35,46 +35,23 @@ Grid cut image texture to frames, then create image game objects from these fram
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import GridCutImagePlugin from 'phaser3-rex-plugins/plugins/gridcutimage-plugin.js';
-    var config = {
-        // ...
-        plugins: {
-            global: [{
-                key: 'rexGridCutImage',
-                plugin: GridCutImagePlugin,
-                start: true
-            },
-            // ...
-            ]
-        }
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import Jigsaw from 'phaser3-rex-plugins/templates/jigsaw/index.js';
     ```
-- Create images
+- Add ease-data behavior
     ```javascript
-    var images = scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, config);
+    var pieces = Jigsaw.CreatePieces(gameObject, config);
     ```
 
-#### Import class
-
-- Install rex plugins from npm
-    ```
-    npm i phaser3-rex-plugins
-    ```
-- Import class
-    ```javascript
-    import GridCutImage from 'phaser3-rex-plugins/plugins/gridcutimage.js';
-    ```
-- Create images
-    ```javascript
-    var images = GridCutImage(gameObjects, columns, rows, config);
-    ```
-
-### Grid cut
+### Create pieces
 
 ```javascript
-var cellImages = scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, {
+var pieces = Jigsaw.CreatePieces(gameObject, {
+    piecesKey: ,
+    columns: , 
+    rows: ,
+    edgeWidth: , 
+    edgeHeight: ,
+
     // createImageCallback: undefined,
     // ImageClass: Phaser.GameObjects.Image,
 
@@ -83,11 +60,14 @@ var cellImages = scene.plugins.get('rexGridCutImage').gridCut(gameObjects, colum
     // add: true,
     // align: true,
     // objectPool: undefined
-})
+});
 ```
 
 - `gameObjects` : Target game object which has a texture, ex [Image](image.md), [RenderTexture](rendertexture.md).
+- `piecesKey` : Store frame of each piece in this dynamic texture.
+    - `undefined` : Use `'gameObjects.texture.key' + '_pieces'` as texture key.
 - `columns`, `rows` : Cut texture in `columns` x `rows` grids
+- `edgeWidth`, `edgeHeight` : Padding around piece.
 - `createImageCallback` : Custom callback to return an image game object, optional.
     ```javascript
     function(scene, texture, frame) {
@@ -105,4 +85,4 @@ var cellImages = scene.plugins.get('rexGridCutImage').gridCut(gameObjects, colum
     - `true` : Align position of created image game objects to target game object (`gameObjects`). Default value when `add` is set to `true`.
     - `false` : Don't set position of created image game objects. Default value when `add` is set to `false`.
 - `objectPool` : An array of image game objects, will reuse image game objects from this pool. Optional.
-- `cellImages` : Return image game objects.
+- `pieces` : Return piece game objects.
