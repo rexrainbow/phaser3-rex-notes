@@ -13,17 +13,26 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var result = Jigsaw.GenerateFrames(this, {
-            sourceKey: 'classroom',
-            destinationKey: 'pieces',
+        var sourceImage = this.add.image(500, 400, 'classroom').setVisible(false)
+        var pieces = Jigsaw.CreatePieces(sourceImage, {
+            piecesKey: 'pieces',
             columns: 8, rows: 6,
             edgeWidth: 20, edgeHeight: 20,
             drawShapeCallback: DrawShapeCallback
-        })
-        var baseImage = this.add.image(0, 0, 'pieces', '__BASE').setOrigin(0);
+        });
 
-        console.log(result)
-        console.log(baseImage.width, baseImage.height);
+        for (var i = 0, cnt = pieces.length; i < cnt; i++) {
+            let piece = pieces[i];
+            piece
+                .setAlpha(0.5)
+                .setInteractive()
+                .on('pointerover', function () {
+                    piece.setAlpha(1)
+                })
+                .on('pointerout', function () {
+                    piece.setAlpha(0.5);
+                })
+        }
     }
 
     update() { }
