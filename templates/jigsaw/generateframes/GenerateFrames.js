@@ -58,7 +58,7 @@ var GenerateFrames = function (scene, {
 
     var sample = new JigsawPiece(scene, {
         width: frameWidth, height: frameHeight,
-        edgeWidth: edgeWidth, edgeWidth: edgeHeight,
+        edgeWidth: edgeWidth, edgeHeight: edgeHeight,
         key: sourceKey,
         drawShapeCallback
     });
