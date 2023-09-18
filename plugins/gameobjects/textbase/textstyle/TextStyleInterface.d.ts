@@ -22,8 +22,8 @@ interface TextStyle {
         offsetY?: number,
         color?: number | string,
         blur?: number,
-        stroke?: false,
-        fill?: false
+        stroke?: boolean,
+        fill?: boolean
     },
 
     underline?: {
