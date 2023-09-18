@@ -4,7 +4,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 export default {
     addPropertiesPanel(config) {
-        var panel = new PropertiesPanel(this.scene, GetValue(config, 'panel'));
+        var panelConfig = GetValue(config, 'panel');
+        var extraProperties = GetValue(config, 'extraProperties');
+        var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
         if ((panel.x === 0) && (panel.y === 0)) {
             panel.setOrigin(0)
         }

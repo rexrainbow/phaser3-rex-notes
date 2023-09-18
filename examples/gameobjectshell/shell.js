@@ -13,7 +13,14 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var shell = this.rexGameObjectShell.add.shell();
+        var shell = this.rexGameObjectShell.add.shell({
+            // extraProperties: [
+            //     {
+            //         bindingKey: 'alpha',
+            //         view: 'range', min: 0, max: 1
+            //     }
+            // ]
+        });
 
         var gameObjects = [];
         for (var i = 0; i < 10; i++) {

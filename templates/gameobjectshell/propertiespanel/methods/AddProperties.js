@@ -1,4 +1,4 @@
-var AddProperties = function () {
+var AddProperties = function (extraProperties) {
     var formatCallback = function (value) {
         return (Number.isInteger(value)) ? value : value.toFixed(2);
     };
@@ -38,10 +38,22 @@ var AddProperties = function () {
                 bindingTarget.setOrigin(bindingTarget.originX, newValue);
             }
         })
-        .addInput({
-            bindingKey: 'alpha', title: 'alpha',
-            view: 'range', min: 0, max: 1, monitor: true, format: formatCallback,
-        })
+
+    if (extraProperties) {
+        for (var i = 0, cnt = extraProperties.length; i < cnt; i++) {
+            var propertyConfig = extraProperties[i];
+
+            if (propertyConfig.format === undefined) {
+                var view = propertyConfig.view;
+                if ((view === undefined) || (view === 'number') || (view === 'range')) {
+                    propertyConfig.format = formatCallback;
+                }
+            }
+
+            this.addInput(propertyConfig)
+        }
+    }
+
 }
 
 export default AddProperties;
