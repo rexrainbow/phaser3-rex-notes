@@ -55,7 +55,7 @@ module.exports = {
     'gridalignplugin': './plugins/gridalign-plugin.js',
     'randomplaceplugin': './plugins/randomplace-plugin.js',
     'gridcutimageplugin': './plugins/gridcutimage-plugin.js',
-    'cutjigsawimage': './plugins/cutjigsawimage-plugin.js',
+    'cutjigsawimageplugin': './plugins/cutjigsawimage-plugin.js',
 
     // input
     'dragplugin': './plugins/drag-plugin.js',
