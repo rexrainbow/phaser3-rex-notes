@@ -7,8 +7,8 @@ var CreatePieces = function (gameObject, {
     piecesKey,
     columns, rows,
     edgeWidth, edgeHeight,
-    edges,
     drawShapeCallback,
+    edges,
 
     createImageCallback,
     ImageClass = DefaultImageClass,

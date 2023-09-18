@@ -143,3 +143,7 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
     - `false` : Don't set position of created image game objects. Default value when `add` is set to `false`.
 - `objectPool` : An array of image game objects, will reuse image game objects from this pool. Optional.
 - `pieces` : Return piece game objects.
+    - Size of any piece game object (frame size) :
+        - width : `(gameObjects.width / columns) + (2 * edgeWidth)`
+        - height : `(gameObjects.height / rows) + (2 * edgeHeigh)`
+    - Frame name of a piece game object : `columnIndex + ',' + rowIndex` 

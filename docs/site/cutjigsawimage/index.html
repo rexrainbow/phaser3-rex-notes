@@ -9705,7 +9705,15 @@
 </ul>
 </li>
 <li><code>objectPool</code> : An array of image game objects, will reuse image game objects from this pool. Optional.</li>
-<li><code>pieces</code> : Return piece game objects.</li>
+<li><code>pieces</code> : Return piece game objects.<ul>
+<li>Size of any piece game object (frame size) :<ul>
+<li>width : <code>(gameObjects.width / columns) + (2 * edgeWidth)</code></li>
+<li>height : <code>(gameObjects.height / rows) + (2 * edgeHeigh)</code></li>
+</ul>
+</li>
+<li>Frame name of a piece game object : <code>columnIndex + ',' + rowIndex</code> </li>
+</ul>
+</li>
 </ul>
 
 
