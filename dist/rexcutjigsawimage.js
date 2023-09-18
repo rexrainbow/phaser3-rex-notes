@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexjigsaw = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcutjigsawimage = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -953,11 +953,28 @@
     return pieceGameObjects;
   };
 
-  var index$1 = {
-    GenerateFrames: GenerateFrames,
-    CreatePieces: CreatePieces
-  };
+  var CutJigsawImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(CutJigsawImagePlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(CutJigsawImagePlugin);
+    function CutJigsawImagePlugin(pluginManager) {
+      _classCallCheck(this, CutJigsawImagePlugin);
+      return _super.call(this, pluginManager);
+    }
+    _createClass(CutJigsawImagePlugin, [{
+      key: "start",
+      value: function start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "gridCut",
+      value: function gridCut(gameObject, config) {
+        return CreatePieces(gameObject, config);
+      }
+    }]);
+    return CutJigsawImagePlugin;
+  }(Phaser.Plugins.BasePlugin);
 
-  return index$1;
+  return CutJigsawImagePlugin;
 
 }));
