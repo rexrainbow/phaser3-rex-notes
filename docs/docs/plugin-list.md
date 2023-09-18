@@ -48,6 +48,7 @@
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
 1. [Curve/Spiral](curve-spiral.md): Spiral curve.
+1. [Cut Jigsaw Image](cutjigsawimage.md): Cut image into pieces for jigsaw application.
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 1. [Drop down](dropdown.md): Drop down game object below another target game object.
@@ -93,7 +94,6 @@
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
-1. [Jigsaw](jigsaw.md): Cut image into pieces for jigsaw application.
 1. [Layer manager](layermanager.md): A container of Layer game objects.
 1. [Level counter](levelcounter.md): Map level value from experience value, by callback or a number array.
 1. [Life time](lifetime.md): Destroy game object when time-out.

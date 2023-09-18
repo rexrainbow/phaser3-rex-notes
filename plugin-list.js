@@ -55,6 +55,7 @@ module.exports = {
     'gridalignplugin': './plugins/gridalign-plugin.js',
     'randomplaceplugin': './plugins/randomplace-plugin.js',
     'gridcutimageplugin': './plugins/gridcutimage-plugin.js',
+    'cutjigsawimage': './plugins/cutjigsawimage-plugin.js',
 
     // input
     'dragplugin': './plugins/drag-plugin.js',
@@ -230,7 +231,6 @@ module.exports = {
     'dialogquest': './templates/dialog-quest/DialogQuest.js',
     'spinnerplugin': './templates/spinner/spinner-plugin.js',
     'gameobjectshellplugin': './templates/gameobjectshell/gameobjectshell-plugin.js',
-    'jigsaw': './templates/jigsaw/index.js',
 
     // Plain class
     // rex ui

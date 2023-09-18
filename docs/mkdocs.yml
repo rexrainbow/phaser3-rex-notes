@@ -150,6 +150,7 @@ nav:
             - Quad/Hexagon grid align: gridalign.md
             - Random place: randomplace.md
             - Grid cut image: gridcutimage.md            
+            - Cut Jigsaw Image: cutjigsawimage.md
         - Position:
             - Move to: moveto.md
             - Ease-move: easemove.md
@@ -473,8 +474,6 @@ nav:
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
-- Application templates:
-    - Jigsaw: jigsaw.md
 - Firebase:
     - Authentication: firebase-auth.md
     - Firestore: firebase-firestore.md

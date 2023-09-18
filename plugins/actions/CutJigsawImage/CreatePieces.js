@@ -1,4 +1,4 @@
-import GenerateFrames from '../generateframes/GenerateFrames.js';
+import GenerateFrames from './generateframes/GenerateFrames.js';
 
 const DefaultImageClass = Phaser.GameObjects.Image;
 const RotateAround = Phaser.Math.RotateAround;

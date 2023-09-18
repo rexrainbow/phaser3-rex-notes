@@ -1,4 +1,4 @@
-import FrameManager from '../../../plugins/texture/framemanager/FrameManager.js';
+import FrameManager from '../../../texture/framemanager/FrameManager.js';
 import RandomPieceEdges from './RandomPieceEdges.js';
 import JigsawPiece from './jigsawpiece/JigsawPiece.js';
 

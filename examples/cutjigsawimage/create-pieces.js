@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Jigsaw from '../../templates/jigsaw/index.js';
+import CutJigsawImagePlugin from '../../plugins/cutjigsawimage-plugin.js';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 
 class Demo extends Phaser.Scene {
@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var sourceImage = this.add.image(500, 400, 'classroom').setVisible(false)
-        var pieces = Jigsaw.CreatePieces(sourceImage, {
+        var pieces = this.plugins.get('rexCutJigsawImage').gridCut(sourceImage, {
             piecesKey: 'pieces',
             columns: 8, rows: 6,
             edgeWidth: 15, edgeHeight: 15
@@ -51,6 +51,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexCutJigsawImage',
+            plugin: CutJigsawImagePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

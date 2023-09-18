@@ -56,13 +56,13 @@ Grid cut image texture to frames, then create image game objects from these fram
     var images = scene.plugins.get('rexGridCutImage').gridCut(gameObjects, columns, rows, config);
     ```
 
-#### Import class
+#### Import method
 
 - Install rex plugins from npm
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Import method
     ```javascript
     import GridCutImage from 'phaser3-rex-plugins/plugins/gridcutimage.js';
     ```

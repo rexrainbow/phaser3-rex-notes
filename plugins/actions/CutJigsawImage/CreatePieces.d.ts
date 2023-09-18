@@ -1,14 +1,17 @@
-import GenerateFrames from '../generateframes/GenerateFrames';
+import GenerateFrames from './generateframes/GenerateFrames';
 
 export default CreatePieces;
 
 declare namespace CreatePieces {
+    type DrawShapeCallbackType = GenerateFrames.DrawShapeCallbackType;
+
     interface IConfig<T = Phaser.GameObjects.Image> {
         piecesKey?: string,
         columns: number, rows: number,
         edgeWidth?: number, edgeHeight?: number,
+
+        drawShapeCallback?: DrawShapeCallbackType,
         edges?: GenerateFrames.EdgesType,
-        drawShapeCallback?: GenerateFrames.DrawShapeCallbackType,
 
         createImageCallback?: (
             scene: Phaser.Scene,
