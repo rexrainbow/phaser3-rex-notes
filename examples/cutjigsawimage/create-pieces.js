@@ -23,15 +23,8 @@ class Demo extends Phaser.Scene {
 
         for (var i = 0, cnt = pieces.length; i < cnt; i++) {
             let piece = pieces[i];
-            piece
-                .setAlpha(0.5)
-                .setInteractive()
-                .on('pointerover', function () {
-                    piece.setAlpha(1)
-                })
-                .on('pointerout', function () {
-                    piece.setAlpha(0.5);
-                })
+            piece.preFX.setPadding(2);
+            piece.preFX.addGlow(0xff0000, 2, 0);
         }
 
         // DrawBounds(pieces, this.add.graphics(), 0xff0000)
