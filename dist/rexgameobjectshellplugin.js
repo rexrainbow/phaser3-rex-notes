@@ -34903,43 +34903,43 @@
     }, {
       key: "innerLeft",
       get: function get() {
-        return this.left + this.space.left;
+        return this.left + this.space.left * this.scaleX;
       }
     }, {
       key: "innerRight",
       get: function get() {
-        return this.right - this.space.right;
+        return this.right - this.space.right * this.scaleX;
       }
     }, {
       key: "innerTop",
       get: function get() {
-        return this.top + this.space.top;
+        return this.top + this.space.top * this.scaleY;
       }
     }, {
       key: "innerBottom",
       get: function get() {
-        return this.bottom - this.space.bottom;
+        return this.bottom - this.space.bottom * this.scaleY;
       }
     }, {
       key: "innerWidth",
       get: function get() {
-        return this.width - this.space.left - this.space.right;
+        return (this.width - this.space.left - this.space.right) * this.scaleX;
       }
     }, {
       key: "innerHeight",
       get: function get() {
-        return this.height - this.space.top - this.space.bottom;
+        return (this.height - this.space.top - this.space.bottom) * this.scaleY;
       }
     }, {
       key: "minInnerWidth",
       get: function get() {
-        var result = this.minWidth - this.space.left - this.space.right;
+        var result = (this.minWidth - this.space.left - this.space.right) * this.scaleX;
         return Math.max(result, 0);
       }
     }, {
       key: "minInnerHeight",
       get: function get() {
-        var result = this.minHeight - this.space.top - this.space.bottom;
+        var result = (this.minHeight - this.space.top - this.space.bottom) * this.scaleY;
         return Math.max(result, 0);
       }
     }]);

@@ -1,2 +1,2 @@
-import LayerManager from '../../../plugins/plugins/layermanager.js';
+import LayerManager from '../../../plugins/layermanager.js';
 export default LayerManager;
