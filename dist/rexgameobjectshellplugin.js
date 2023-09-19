@@ -7164,7 +7164,7 @@
       // Underline
       if (curStyle.underlineThickness > 0 && pen.width > 0) {
         var lineOffsetY = offsetY + curStyle.underlineOffset - curStyle.underlineThickness / 2;
-        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.underlineThickness, curStyle.underlineColor);
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.underlineThickness, curStyle.underlineColor, curStyle);
       }
 
       // Text
@@ -7180,7 +7180,7 @@
       // Strikethrough
       if (curStyle.strikethroughThickness > 0 && pen.width > 0) {
         var lineOffsetY = offsetY + curStyle.strikethroughOffset - curStyle.strikethroughThickness / 2;
-        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.strikethroughThickness, curStyle.strikethroughColor);
+        this.drawLine(offsetX, lineOffsetY, pen.width, curStyle.strikethroughThickness, curStyle.strikethroughColor, curStyle);
       }
       context.restore();
       if (pen.hasAreaMarker && pen.width > 0) {
@@ -7212,12 +7212,13 @@
       var canvas = this.canvas;
       this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
-    drawLine: function drawLine(x, y, width, height, color) {
+    drawLine: function drawLine(x, y, width, height, color, style) {
       if (this.autoRound) {
         x = Math.round(x);
         y = Math.round(y);
       }
       var context = this.context;
+      style.syncShadow(context, style.shadowStroke);
       var savedLineCap = context.lineCap;
       context.lineCap = 'butt';
       context.strokeStyle = color;
@@ -56603,7 +56604,7 @@
     }
   };
 
-  var AddProperties = function AddProperties() {
+  var AddProperties = function AddProperties(extraProperties) {
     var formatCallback = function formatCallback(value) {
       return Number.isInteger(value) ? value : value.toFixed(2);
     };
@@ -56655,28 +56656,32 @@
       onValueChange: function onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
         bindingTarget.setOrigin(bindingTarget.originX, newValue);
       }
-    }).addInput({
-      bindingKey: 'alpha',
-      title: 'alpha',
-      view: 'range',
-      min: 0,
-      max: 1,
-      monitor: true,
-      format: formatCallback
     });
+    if (extraProperties) {
+      for (var i = 0, cnt = extraProperties.length; i < cnt; i++) {
+        var propertyConfig = extraProperties[i];
+        if (propertyConfig.format === undefined) {
+          var view = propertyConfig.view;
+          if (view === undefined || view === 'number' || view === 'range') {
+            propertyConfig.format = formatCallback;
+          }
+        }
+        this.addInput(propertyConfig);
+      }
+    }
   };
 
   var PropertiesPanel = /*#__PURE__*/function (_Tweaker) {
     _inherits(PropertiesPanel, _Tweaker);
     var _super = _createSuper(PropertiesPanel);
-    function PropertiesPanel(scene, config) {
+    function PropertiesPanel(scene, config, extraProperties) {
       var _this;
       _classCallCheck(this, PropertiesPanel);
       if (config === undefined) {
         config = DeepClone(DefaultConfig);
       }
       _this = _super.call(this, scene, config);
-      AddProperties.call(_assertThisInitialized(_this));
+      AddProperties.call(_assertThisInitialized(_this), extraProperties);
       _this.setVisible(false);
       return _this;
     }
@@ -56805,7 +56810,9 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var PropertiesPanelMethods = {
     addPropertiesPanel: function addPropertiesPanel(config) {
-      var panel = new PropertiesPanel(this.scene, GetValue$1(config, 'panel'));
+      var panelConfig = GetValue$1(config, 'panel');
+      var extraProperties = GetValue$1(config, 'extraProperties');
+      var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
       if (panel.x === 0 && panel.y === 0) {
         panel.setOrigin(0);
       }
