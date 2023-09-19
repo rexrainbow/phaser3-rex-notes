@@ -209,36 +209,36 @@ class Base extends Container {
     }
 
     get innerLeft() {
-        return this.left + this.space.left;
+        return this.left + (this.space.left * this.scaleX);
     }
 
     get innerRight() {
-        return this.right - this.space.right;
+        return this.right - (this.space.right * this.scaleX);
     }
 
     get innerTop() {
-        return this.top + this.space.top;
+        return this.top + (this.space.top * this.scaleY);
     }
 
     get innerBottom() {
-        return this.bottom - this.space.bottom;
+        return this.bottom - (this.space.bottom * this.scaleY);
     }
 
     get innerWidth() {
-        return this.width - this.space.left - this.space.right;
+        return (this.width - this.space.left - this.space.right) * this.scaleX;
     }
 
     get innerHeight() {
-        return this.height - this.space.top - this.space.bottom;
+        return (this.height - this.space.top - this.space.bottom) * this.scaleY;
     }
 
     get minInnerWidth() {
-        var result = this.minWidth - this.space.left - this.space.right;
+        var result = (this.minWidth - this.space.left - this.space.right) * this.scaleX;
         return Math.max(result, 0);
     }
 
     get minInnerHeight() {
-        var result = this.minHeight - this.space.top - this.space.bottom;
+        var result = (this.minHeight - this.space.top - this.space.bottom) * this.scaleY;
         return Math.max(result, 0);
     }
 }
