@@ -29,7 +29,7 @@ var SetBindingTarget = function (target) {
 
     }
 
-    return SetBindingTarget;
+    return this;
 }
 
 export default SetBindingTarget;

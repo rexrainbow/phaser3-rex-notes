@@ -2592,7 +2592,7 @@
     } else {
       this.setVisible(false);
     }
-    return SetBindingTarget;
+    return this;
   };
 
   // Name of bounds rectangle
