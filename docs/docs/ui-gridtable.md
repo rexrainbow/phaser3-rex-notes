@@ -608,6 +608,19 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var enable = table.scrollerEnable;
         ```
+- Mouse-Wheel-Scroller
+    - Set enable state
+        ```javascript
+        table.setMouseWheelScrollerEnable(enabled);
+        ```
+        or
+        ```javascript
+        table.mouseWheelScrollerEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = table.mouseWheelScrollerEnable;
+        ```
 
 ### Refresh table cells
 

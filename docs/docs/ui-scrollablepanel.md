@@ -548,6 +548,20 @@ panel.scrollToChild(child, align);
         ```javascript
         var enable = panel.scrollerEnable;
         ```
+- Mouse-Wheel-Scroller
+    - Set enable state
+        ```javascript
+        panel.setMouseWheelScrollerEnable(enabled);
+        ```
+        or
+        ```javascript
+        panel.mouseWheelScrollerEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = panel.mouseWheelScrollerEnable;
+        ```
+
 
 ### Event
 

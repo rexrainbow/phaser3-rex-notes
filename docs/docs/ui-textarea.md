@@ -453,6 +453,19 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var enable = textArea.scrollerEnable;
         ```
+- Mouse-Wheel-Scroller
+    - Set enable state
+        ```javascript
+        textArea.setMouseWheelScrollerEnable(enabled);
+        ```
+        or
+        ```javascript
+        textArea.mouseWheelScrollerEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = textArea.mouseWheelScrollerEnable;
+        ```
 
 ### Event
 
