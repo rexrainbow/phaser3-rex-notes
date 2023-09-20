@@ -1,4 +1,4 @@
-import IsContainerObject from '../../../utils/system/IsContainerObject.js';
+import IsContainerGameObject from '../../../utils/system/IsContainerGameObject.js';
 import IsLayerGameObject from '../../../utils/system/IsLayerGameObject.js';
 import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
 
@@ -39,7 +39,7 @@ var RemoveFromContainer = function (p3Container, descending, addToScene) {
 
 export default {
     addToContainer(p3Container) {
-        if (!IsContainerObject(p3Container)) {
+        if (!IsContainerGameObject(p3Container)) {
             return this;
         }
 

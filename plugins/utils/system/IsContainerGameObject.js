@@ -1,7 +1,7 @@
 const ContainerKlass = Phaser.GameObjects.Container;
 
-var IsContainerObject = function (gameObject) {
+var IsContainerGameObject = function (gameObject) {
     return (gameObject instanceof ContainerKlass);
 }
 
-export default IsContainerObject;
+export default IsContainerGameObject;
