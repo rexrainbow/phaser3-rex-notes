@@ -2568,7 +2568,7 @@
   };
 
   var ContainerKlass = Phaser.GameObjects.Container;
-  var IsContainerObject = function IsContainerObject(gameObject) {
+  var IsContainerGameObject = function IsContainerGameObject(gameObject) {
     return gameObject instanceof ContainerKlass;
   };
 
@@ -2606,7 +2606,7 @@
   };
   var P3Container = {
     addToContainer: function addToContainer(p3Container) {
-      if (!IsContainerObject(p3Container)) {
+      if (!IsContainerGameObject(p3Container)) {
         return this;
       }
       this._setParentContainerFlag = true;

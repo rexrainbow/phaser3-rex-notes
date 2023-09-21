@@ -4,6 +4,8 @@ import {
 } from './InputTextProperties.js';
 import SetPrpoerties from '../../../gameobjects/dom/utils/SetProperties.js';
 import StopPropagationTouchEvents from '../../../gameobjects/dom/utils/StopPropagationTouchEvents.js';
+import OnOpen from './OnOpen.js';
+import OnClose from './OnClose.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -42,6 +44,16 @@ var CreateElement = function (parent, config) {
     var scaleManager = parent.scene.sys.scale;
     var parentElement = (scaleManager.isFullscreen) ? scaleManager.fullscreenTarget : document.body;
     parentElement.appendChild(element);
+
+    // open() -> 'focus' -> OnOpen
+    element.addEventListener('focus', function (e) {
+        OnOpen.call(parent);
+    });
+
+    // close() -> 'blur' -> OnClose
+    element.addEventListener('blur', function (e) {
+        OnClose.call(parent);
+    });
 
     return element;
 }

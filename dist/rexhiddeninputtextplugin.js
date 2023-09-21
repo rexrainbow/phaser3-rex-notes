@@ -490,6 +490,54 @@
     e.stopPropagation();
   };
 
+  var EnterClose = function EnterClose() {
+    this.close();
+    this.emit('keydown-ENTER', this.parent, this);
+    return this;
+  };
+
+  var OnOpen = function OnOpen() {
+    this.isOpened = true;
+    this.initText();
+    if (this.enterCloseEnable) {
+      this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
+    }
+
+    // There is no cursor-position-change event, 
+    // so updating cursor position every tick
+    this.scene.sys.events.on('postupdate', this.updateText, this);
+    this.scene.input.on('pointerdown', this.onClickOutside, this);
+    if (this.onOpenCallback) {
+      this.onOpenCallback(this.parent, this);
+    }
+    this.emit('open', this);
+  };
+
+  var RemoveElement = function RemoveElement(element) {
+    if (!element) {
+      return;
+    }
+    var parentElement = element.parentElement;
+    if (parentElement) {
+      parentElement.removeChild(element);
+    }
+  };
+
+  var OnClose = function OnClose() {
+    this.isOpened = false;
+    this.updateText();
+    this.scene.sys.events.off('postupdate', this.updateText, this);
+    this.scene.input.off('pointerdown', this.onClickOutside, this);
+    if (this.onCloseCallback) {
+      this.onCloseCallback(this.parent, this);
+    }
+
+    // Remove input text element when closing editor
+    RemoveElement(this.node);
+    this.node = undefined;
+    this.emit('close', this);
+  };
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var CreateElement = function CreateElement(parent, config) {
     var element;
@@ -524,13 +572,17 @@
     var scaleManager = parent.scene.sys.scale;
     var parentElement = scaleManager.isFullscreen ? scaleManager.fullscreenTarget : document.body;
     parentElement.appendChild(element);
-    return element;
-  };
 
-  var EnterClose = function EnterClose() {
-    this.close();
-    this.emit('keydown-ENTER', this.parent, this);
-    return this;
+    // open() -> 'focus' -> OnOpen
+    element.addEventListener('focus', function (e) {
+      OnOpen.call(parent);
+    });
+
+    // close() -> 'blur' -> OnClose
+    element.addEventListener('blur', function (e) {
+      OnClose.call(parent);
+    });
+    return element;
   };
 
   var Open = function Open() {
@@ -543,36 +595,17 @@
       return this;
     }
     SetLastOpenedEditor(this);
-    this.isOpened = true;
     if (!this.node) {
       // Create input text element when opening editor
       this.node = CreateElement(this, this.nodeConfig);
+      // Register 'focus', 'blur' events
     }
+
     this.setFocus();
-    this.initText();
-    if (this.enterCloseEnable) {
-      this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
-    }
 
-    // There is no cursor-position-change event, 
-    // so updating cursor position every tick
-    this.scene.sys.events.on('postupdate', this.updateText, this);
-    this.scene.input.on('pointerdown', this.onClickOutside, this);
-    if (this.onOpenCallback) {
-      this.onOpenCallback(this.parent, this);
-    }
-    this.emit('open', this);
+    // 'focus' event -> OnOpen
+
     return this;
-  };
-
-  var RemoveElement = function RemoveElement(element) {
-    if (!element) {
-      return;
-    }
-    var parentElement = element.parentElement;
-    if (parentElement) {
-      parentElement.removeChild(element);
-    }
   };
 
   var Close = function Close() {
@@ -582,18 +615,9 @@
     }
     CloseLastOpenEditor(this);
     this.setBlur();
-    this.isOpened = false;
-    this.updateText();
-    this.scene.sys.events.off('postupdate', this.updateText, this);
-    this.scene.input.off('pointerdown', this.onClickOutside, this);
-    if (this.onCloseCallback) {
-      this.onCloseCallback(this.parent, this);
-    }
 
-    // Remove input text element when closing editor
-    RemoveElement(this.node);
-    this.node = undefined;
-    this.emit('close', this);
+    // 'blur' event -> OnOpen
+
     return this;
   };
 
