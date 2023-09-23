@@ -36,8 +36,8 @@ var CreateInputField = function (scene, config, style) {
     }
     var gameObject = callback(scene, config, style);
 
-    // Extra settings
-    gameObject.setTextFormatCallback(config.format);
+    // Setup by config
+    gameObject.setup(config);
 
     return gameObject;
 }

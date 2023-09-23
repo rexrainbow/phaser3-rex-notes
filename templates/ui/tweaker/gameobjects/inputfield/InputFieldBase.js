@@ -56,31 +56,10 @@ class InputFiledBase extends Sizer {
         return this;
     }
 
-    // Override
-    get readOnly() {
-        return this._readOnly;
-    }
+    setup(config) {
+        this.textFormatCallback = config.format;
+        this.validateCallback = config.onValidate;
 
-    // Override
-    set readOnly(value) {
-        this._readOnly = value;
-    }
-
-    setReadOnly(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-        this.readOnly = enable;
-        return true;
-    }
-
-    setTextFormatCallback(callback) {
-        this.textFormatCallback = callback;
-        return this;
-    }
-
-    setValidateCallback(callback) {
-        this.validateCallback = callback;
         return this;
     }
 

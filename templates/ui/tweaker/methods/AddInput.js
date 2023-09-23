@@ -44,10 +44,6 @@ var AddInput = function (object, key, config) {
         inputField.on('valuechange', config.onValueChange);
     }
 
-    if (config.onValidate) {
-        inputField.setValidateCallback(config.onValidate);
-    }
-
     // Bind target
     inputSizer.setAutoUpdateEnable(config.autoUpdate);
     inputSizer.setBindingTarget(object, key);
