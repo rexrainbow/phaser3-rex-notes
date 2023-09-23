@@ -23,22 +23,10 @@ class ColorInput extends InputFiledBase {
         colorInput.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
-    }
 
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        if (this._value === value) {
-            return;
+        this.setValueCallback = function(gameObject, value) {
+            colorInput.setValue(value);
         }
-        if (!this.validate(value)) {
-            value = this._value;  // Back to previous value
-        }
-
-        this.childrenMap.colorInput.setValue(value);
-        super.value = value;  // Fire 'valuechange' event
     }
 }
 

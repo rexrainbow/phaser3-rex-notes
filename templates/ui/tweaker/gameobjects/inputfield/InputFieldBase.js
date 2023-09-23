@@ -20,8 +20,27 @@ class InputFiledBase extends Sizer {
         return this.validateCallback(newValue, this._value, this.bindingTarget, this.bindingKey);
     }
 
-    // Override
+    getFotmatText(value) {
+        if (this.textFormatCallback) {
+            value = this.textFormatCallback(value);
+        } else {
+            value = value.toString();
+        }
+        return value;
+    }
+
     set value(value) {
+        if (this._value === value) {
+            return;
+        }
+        if (!this.validate(value)) {
+            value = this._value;  // Back to previous value
+        }
+
+        if (this.setValueCallback) {
+            this.setValueCallback(this, value)
+        }
+
         if (this._value === value) {
             return;
         }
@@ -57,12 +76,25 @@ class InputFiledBase extends Sizer {
     }
 
     setup(config) {
-        this.textFormatCallback = config.format;
-        this.validateCallback = config.onValidate;
+        this.setTextFormatCallback(config.format);
+        this.setValidateCallback(config.onValidate);
+
+        if (this.setupCallback) {
+            this.setupCallback(this, config)
+        }
 
         return this;
     }
 
+    setTextFormatCallback(callback) {
+        this.textFormatCallback = callback;
+        return this;
+    }
+
+    setValidateCallback(callback) {
+        this.validateCallback = callback;
+        return this;
+    }
 }
 
 export default InputFiledBase;

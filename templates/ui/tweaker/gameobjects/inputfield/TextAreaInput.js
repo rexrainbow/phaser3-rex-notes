@@ -33,23 +33,14 @@ class TextAreaInput extends InputFiledBase {
         inputText.on('close', function () {
             this.setValue(inputText.value);
         }, this);
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        if (this._value === value) {
-            return;
-        }
-        if (!this.validate(value)) {
-            value = this._value;  // Back to previous value
+    
+        this.setValueCallback = function (gameObject, value) {
+            inputText.setText(gameObject.getFotmatText(value));
         }
 
-        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
-        this.childrenMap.inputText.setText(text);
-        super.value = value;  // Fire 'valuechange' event
+        this.setupCallback = function(gameObject, config) {
+            gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
+        }
     }
 
     setInputTextReadOnly(enable) {

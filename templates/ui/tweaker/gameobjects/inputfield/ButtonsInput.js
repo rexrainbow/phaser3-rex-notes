@@ -44,28 +44,18 @@ class ButtonsInput extends InputFiledBase {
             this.setValue(option.value);
             this._selectedIndex = undefined;
         }, this);
-
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        if (this._value === value) {
-            return;
-        }
-        if (!this.validate(value)) {
-            value = this._value;  // Back to previous value
+        
+        this.setValueCallback = function(gameObject, value) {
+            var index = this._selectedIndex;  // See list's 'button.click' event
+            if (index === undefined) {
+                index = GetOptionIndex(list.options, value);
+            }
+            SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
         }
 
-        var list = this.childrenMap.list;
-        var index = this._selectedIndex;  // See list's 'button.click' event
-        if (index === undefined) {
-            index = GetOptionIndex(list.options, value);
+        this.setupCallback = function(gameObject, config) {
+            gameObject.setOptions(config.options);
         }
-        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
-        super.value = value;  // Fire 'valuechange' event
     }
 
     setOptions(options) {

@@ -54,25 +54,17 @@ class RangeInput extends InputFiledBase {
             this.setValue(value);
         }, this);
 
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        if (this._value === value) {
-            return;
-        }
-        if (!this.validate(value)) {
-            value = this._value;  // Back to previous value
+        this.setValueCallback = function (gameObject, value) {
+            inputText.setText('').setText(gameObject.getFotmatText(value));
+    
+            slider.setValue(value, gameObject.minValue, gameObject.maxValue);
         }
 
-        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
-        this.childrenMap.inputText.setText('').setText(text);
+        this.setupCallback = function(gameObject, config) {
+            gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
 
-        this.childrenMap.slider.setValue(value, this.minValue, this.maxValue);
-        super.value = value;  // Fire 'valuechange' event
+            gameObject.setRange(config.min, config.max, config.step);
+        }
     }
 
     setRange(min, max, step) {
