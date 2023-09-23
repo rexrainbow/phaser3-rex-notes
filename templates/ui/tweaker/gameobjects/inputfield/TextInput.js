@@ -15,22 +15,20 @@ class TextInput extends InputFiledBase {
 
         this.add(
             inputText,
-            { proportion: 1, expand: true }
+            { proportion: 1, expand: true, key: 'inputText' }
         )
-
-        this.addChildrenMap('inputText', inputText);
 
         inputText.on('close', function () {
             this.setValue(inputText.value);
         }, this);
 
-        this.setValueCallback = function (gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             inputText.setText(gameObject.getFotmatText(value));
-        }
+        });
 
-        this.setupCallback = function (gameObject, config) {
+        this.setSetupCallback(function (gameObject, config) {
             gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
-        }
+        })
 
     }
 

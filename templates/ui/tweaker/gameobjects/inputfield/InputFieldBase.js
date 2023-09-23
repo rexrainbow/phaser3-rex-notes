@@ -37,8 +37,8 @@ class InputFiledBase extends Sizer {
             value = this._value;  // Back to previous value
         }
 
-        if (this.setValueCallback) {
-            this.setValueCallback(this, value)
+        if (this.displayValueCallback) {
+            this.displayValueCallback(this, value)
         }
 
         if (this._value === value) {
@@ -83,6 +83,16 @@ class InputFiledBase extends Sizer {
             this.setupCallback(this, config)
         }
 
+        return this;
+    }
+
+    setSetupCallback(callback) {
+        this.setupCallback = callback;
+        return this;
+    }
+
+    setDisplayValueCallback(callback) {
+        this.displayValueCallback = callback;
         return this;
     }
 

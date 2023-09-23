@@ -25,7 +25,7 @@ class RangeInput extends InputFiledBase {
         var expand = (trackSize === undefined);
         this.add(
             slider,
-            { proportion: proportion, expand: expand }
+            { proportion: proportion, expand: expand, key: 'slider' }
         );
 
         var inputTextConfig = config.inputNumber || config.inputText;
@@ -36,11 +36,8 @@ class RangeInput extends InputFiledBase {
         var proportion = GetValue(config, 'proportion.range.inputText', defaultProportion);
         this.add(
             inputText,
-            { proportion: proportion, expand: true }
+            { proportion: proportion, expand: true, key: 'inputText' }
         );
-
-        this.addChildrenMap('slider', slider);
-        this.addChildrenMap('inputText', inputText);
 
         inputText.on('close', function () {
             this.setValue(inputText.value);
@@ -54,17 +51,16 @@ class RangeInput extends InputFiledBase {
             this.setValue(value);
         }, this);
 
-        this.setValueCallback = function (gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             inputText.setText('').setText(gameObject.getFotmatText(value));
-    
             slider.setValue(value, gameObject.minValue, gameObject.maxValue);
-        }
+        })
 
-        this.setupCallback = function(gameObject, config) {
+        this.setSetupCallback(function (gameObject, config) {
             gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
-
             gameObject.setRange(config.min, config.max, config.step);
-        }
+        });
+
     }
 
     setRange(min, max, step) {

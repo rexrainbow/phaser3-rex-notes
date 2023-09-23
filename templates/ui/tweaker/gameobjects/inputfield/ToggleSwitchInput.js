@@ -26,18 +26,16 @@ class ToggleSwitchInput extends InputFiledBase {
             .addSpace()
             .add(
                 toggleSwitch,
-                { proportion: 0, expand: false, fitRatio: fitRatio }
+                { proportion: 0, expand: false, fitRatio: fitRatio, key: 'toggleSwitch' }
             )
-
-        this.addChildrenMap('toggleSwitch', toggleSwitch);
 
         toggleSwitch.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
 
-        this.setValueCallback = function (gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             toggleSwitch.setValue(value);
-        }
+        });
     }
 }
 

@@ -23,18 +23,16 @@ class CheckboxInput extends InputFiledBase {
         var fitRatio = (size !== undefined) ? 0 : 1;
         this.add(
             checkbox,
-            { proportion: 0, expand: false, fitRatio: fitRatio }
+            { proportion: 0, expand: false, fitRatio: fitRatio, key: 'checkbox' }
         )
-
-        this.addChildrenMap('checkbox', checkbox);
 
         checkbox.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
 
-        this.setValueCallback = function(gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             checkbox.setValue(value);
-        }
+        })
     }
 }
 

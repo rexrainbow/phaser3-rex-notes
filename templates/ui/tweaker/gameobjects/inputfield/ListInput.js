@@ -16,23 +16,22 @@ class ListInput extends InputFiledBase {
 
         this.add(
             list,
-            { proportion: 1, expand: true }
+            { proportion: 1, expand: true, key: 'list' }
         );
-
-        this.addChildrenMap('list', list);
 
         list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
             this.setValue(button.value);
         }, this);
 
-        this.setValueCallback = function (gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             var text = GetOptionText(list.options, value);
             list.resetDisplayContent({ text: text });
-        }
+        });
 
-        this.setupCallback = function(gameObject, config) {
+        this.setSetupCallback(function (gameObject, config) {
             gameObject.setOptions(config.options);
-        }
+        });
+
     }
 
     setOptions(options) {

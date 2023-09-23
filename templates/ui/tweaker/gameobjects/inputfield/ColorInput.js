@@ -15,18 +15,16 @@ class ColorInput extends InputFiledBase {
 
         this.add(
             colorInput,
-            { proportion: 1, expand: true }
+            { proportion: 1, expand: true, key: 'colorInput' }
         )
-
-        this.addChildrenMap('colorInput', colorInput);
 
         colorInput.on('valuechange', function (value) {
             this.setValue(value);
         }, this);
 
-        this.setValueCallback = function(gameObject, value) {
+        this.setDisplayValueCallback(function (gameObject, value) {
             colorInput.setValue(value);
-        }
+        })
     }
 }
 

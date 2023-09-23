@@ -30,10 +30,8 @@ class ButtonsInput extends InputFiledBase {
 
         this.add(
             list,
-            { proportion: 1, expand: true }
+            { proportion: 1, expand: true, key: 'list' }
         );
-
-        this.addChildrenMap('list', list);
 
         list.on('button.click', function (button, index, pointer, event) {
             var option = list.options[index];
@@ -44,18 +42,19 @@ class ButtonsInput extends InputFiledBase {
             this.setValue(option.value);
             this._selectedIndex = undefined;
         }, this);
-        
-        this.setValueCallback = function(gameObject, value) {
+
+        this.setDisplayValueCallback(function (gameObject, value) {
             var index = this._selectedIndex;  // See list's 'button.click' event
             if (index === undefined) {
                 index = GetOptionIndex(list.options, value);
             }
             SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
-        }
+        })
 
-        this.setupCallback = function(gameObject, config) {
+        this.setSetupCallback(function (gameObject, config) {
             gameObject.setOptions(config.options);
-        }
+        });
+
     }
 
     setOptions(options) {
