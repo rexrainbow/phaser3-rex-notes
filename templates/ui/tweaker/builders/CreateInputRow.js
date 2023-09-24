@@ -11,7 +11,7 @@ var CreateInputRow = function (scene, config, style) {
     var inputTitle = CreateTitleLabel(scene, config, titleStyle);
 
     // InputField
-    var inputField = CreateInputField(scene, config, style);
+    var inputField = CreateInputField.call(this, scene, config, style);
 
     // Background
     var backgroundStyle = GetValue(style, 'background') || {};

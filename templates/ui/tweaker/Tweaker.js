@@ -1,4 +1,5 @@
 import TweakerShell from './TweakerShell.js';
+import RegisterDefaultInputHandlers from './methods/RegisterDefaultInputHandlers.js';
 
 class Tweaker extends TweakerShell {
     constructor(scene, config) {
@@ -17,6 +18,9 @@ class Tweaker extends TweakerShell {
         super(scene, config);
         this.type = 'rexTweaker';
 
+        this.inputHandlers = [];
+
+        RegisterDefaultInputHandlers.call(this);
     }
 }
 

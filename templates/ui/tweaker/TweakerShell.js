@@ -39,8 +39,11 @@ class TweakerShell extends Sizer {
 
             }
             this.alignInputRowTitle = alignTitle;
+
         } else {
             this.alignInputRowTitle = false;
+            this.inputHandlers = this.root.inputHandlers;
+
         }
 
 

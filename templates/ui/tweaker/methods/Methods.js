@@ -1,3 +1,4 @@
+import RegisterInputHandler from './RegisterInputHandler.js';
 import AddFolder from './AddFolder.js';
 import AddTab from './AddTab.js';
 import AddInput from './AddInput.js';
@@ -8,6 +9,7 @@ import GetMaxInputRowTitleWidth from './GetMaxInputRowTitleWidth.js';
 import SetInputRowTitleWidth from './SetInputRowTitleWidth.js';
 
 var methods = {
+    registerInputHandler: RegisterInputHandler,
     addFolder: AddFolder,
     addTab: AddTab,
     addInput: AddInput,
