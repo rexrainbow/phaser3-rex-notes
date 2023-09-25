@@ -22,6 +22,17 @@ class Tweaker extends TweakerShell {
 
         RegisterDefaultInputHandlers.call(this);
     }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
+        super.destroy(fromScene);
+
+        this.inputHandlers = undefined;
+    }
 }
 
 export default Tweaker

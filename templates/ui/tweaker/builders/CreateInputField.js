@@ -1,4 +1,4 @@
-import InputFiledBase from '../gameobjects/inputfield/InputFieldBase.js';
+import GenerateInputFieldClass from '../gameobjects/inputfield/GenerateInputFieldClass.js';
 
 var CreateInputField = function (scene, config, style) {
     var value = undefined;
@@ -11,15 +11,9 @@ var CreateInputField = function (scene, config, style) {
     var inputHandlers = this.inputHandlers;
     for (var i = 0, cnt = inputHandlers.length; i < cnt; i++) {
         var handler = inputHandlers[i];
-        if (!handler.hasOwnProperty('accept')) {
-            continue;
-        }
-        if (!handler.hasOwnProperty('build')) {
-            continue;
-        }
-
         if (handler.accept(config, value)) {
-            inputField = new InputFiledBase(scene);
+            var InputFieldClass = GenerateInputFieldClass(handler.baseClass);
+            inputField = new InputFieldClass(scene);
             scene.add.existing(inputField);
 
             inputField
@@ -34,7 +28,7 @@ var CreateInputField = function (scene, config, style) {
     }
 
     // Setup by config
-    inputField.setup(config);
+    inputField.setup(config, true);
 
     return inputField;
 }

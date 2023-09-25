@@ -81,9 +81,14 @@ export default {
     },
 
     // Callback inside `setup()`
-    setup(gameObject, config) {
-        SetRange(gameObject, config.min, config.max, config.step);
-        SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+    setup(gameObject, config, setDefaults) {
+        if (setDefaults || config.hasOwnProperty('max')) {
+            SetRange(gameObject, config.min, config.max, config.step);
+        }
+
+        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
+            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+        }
     },
 
     // Callback inside `setValue()`

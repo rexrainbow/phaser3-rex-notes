@@ -50,8 +50,10 @@ export default {
     },
 
     // Callback inside `setup()`
-    setup(gameObject, config) {
-        SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+    setup(gameObject, config, setDefaults) {
+        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
+            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+        }
     },
 
     // Callback inside `setValue()`

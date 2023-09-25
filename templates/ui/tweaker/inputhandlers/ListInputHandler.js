@@ -36,8 +36,10 @@ export default {
     },
 
     // Callback inside `setup()`
-    setup(gameObject, config) {
-        SetOptions(gameObject, config.options);
+    setup(gameObject, config, setDefaults) {
+        if (setDefaults || config.hasOwnProperty('options')) {
+            SetOptions(gameObject, config.options);
+        }
     },
 
     // Callback inside `setValue()`
