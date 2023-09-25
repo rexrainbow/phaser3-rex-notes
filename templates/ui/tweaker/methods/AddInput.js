@@ -27,6 +27,16 @@ var AddInput = function (object, key, config) {
     var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
+    if (!inputSizer) {
+        // Can't create inputField
+        console.error(`[Tweaker] Can't add Input
+    title: ${config.title}
+    view: ${config.view}
+`);
+
+        return this;
+    }
+
     var inputField = inputSizer.childrenMap.inputField;
 
     var proportion;

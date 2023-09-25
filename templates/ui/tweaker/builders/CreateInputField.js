@@ -21,8 +21,12 @@ var CreateInputField = function (scene, config, style) {
 
     }
 
-    // Setup by config
-    inputField.setup(config, true);
+    if (inputField) {
+        // Setup by config
+        inputField.setup(config, true);
+    } else {
+        // Can't create inputField
+    }
 
     return inputField;
 }

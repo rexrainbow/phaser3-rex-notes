@@ -6,12 +6,16 @@ import CreateInputField from './CreateInputField.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateInputRow = function (scene, config, style) {
+    // InputField
+    var inputField = CreateInputField.call(this, scene, config, style);
+    if (!inputField) {
+        // Can't create inputField
+        return null;
+    }
+
     // Title
     var titleStyle = GetValue(style, 'title') || {};
     var inputTitle = CreateTitleLabel(scene, config, titleStyle);
-
-    // InputField
-    var inputField = CreateInputField.call(this, scene, config, style);
 
     // Background
     var backgroundStyle = GetValue(style, 'background') || {};
