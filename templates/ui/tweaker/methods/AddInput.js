@@ -17,6 +17,12 @@ var AddInput = function (object, key, config) {
         config.title = key;
     }
 
+    if (config.bindingTarget && config.bindingKey) {
+        config.value = config.bindingTarget[config.bindingKey];
+    } else {
+        config.value = undefined;
+    }
+
     // Create InputRow
     var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;

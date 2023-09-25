@@ -121,34 +121,6 @@ declare namespace Tweaker {
         }
     }
 
-    interface IInputHandlerConfig {
-        name?: string,
-
-        baseClass?: BaseSizer,
-
-        accept: (
-            config: IAddInputConfig,
-            value: unknown
-        ) => boolean,
-
-        build: (
-            gameObject: BaseSizer,
-            style: IInputRowStyle
-        ) => void,
-
-        setup?: (
-            gameObject: BaseSizer,
-            config: IAddInputConfig,
-            setDefaults: boolean,
-        ) => void,
-
-        displayValue?: (
-            gameObject: BaseSizer,
-            value: unknown
-        ) => void,
-
-    }
-
     interface IAddInputConfig {
         bindingTarget?: Object,
         bindingKey?: string,
@@ -223,6 +195,38 @@ declare namespace Tweaker {
 
         key?: string,
     }
+
+    interface IAcceptConfig extends IAddInputConfig {
+        value: unknown
+    }
+
+    interface IInputHandlerConfig {
+        name?: string,
+
+        baseClass?: BaseSizer,
+
+        accept: (
+            config: IAcceptConfig,
+        ) => boolean,
+
+        build: (
+            gameObject: BaseSizer,
+            style: IInputRowStyle
+        ) => void,
+
+        setup?: (
+            gameObject: BaseSizer,
+            config: IAddInputConfig,
+            setDefaults: boolean,
+        ) => void,
+
+        displayValue?: (
+            gameObject: BaseSizer,
+            value: unknown
+        ) => void,
+
+    }
+
 }
 
 declare class Tweaker extends Sizer {

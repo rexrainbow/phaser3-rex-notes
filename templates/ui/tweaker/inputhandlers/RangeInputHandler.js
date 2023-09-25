@@ -26,18 +26,18 @@ var SetInputTextReadOnly = function (gameObject, enable) {
 export default {
     name: 'RangeInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'range')
         }
 
-        return (typeof (value) === 'number') &&
+        return (typeof (config.value) === 'number') &&
             config.hasOwnProperty('min') &&
             config.hasOwnProperty('max');
 
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

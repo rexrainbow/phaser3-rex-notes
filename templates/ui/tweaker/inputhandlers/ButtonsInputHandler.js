@@ -26,7 +26,7 @@ var SetOptions = function (gameObject, options) {
 export default {
     name: 'ButtonsInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'buttons')
         }
@@ -34,7 +34,7 @@ export default {
         return false;
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

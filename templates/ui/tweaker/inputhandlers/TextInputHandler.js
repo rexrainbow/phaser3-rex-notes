@@ -12,15 +12,15 @@ var SetInputTextReadOnly = function (gameObject, enable) {
 export default {
     name: 'TextInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'string')
         }
 
-        return typeof (value) === 'string';
+        return typeof (config.value) === 'string';
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

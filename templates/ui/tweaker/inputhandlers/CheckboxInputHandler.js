@@ -3,15 +3,15 @@ import CreateCheckbox from './utils/CreateCheckbox.js';
 export default {
     name: 'CheckboxInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'boolean')
         }
 
-        return typeof (value) === 'boolean';
+        return typeof (config.value) === 'boolean';
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

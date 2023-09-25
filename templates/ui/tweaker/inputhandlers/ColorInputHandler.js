@@ -3,14 +3,14 @@ import CreateColorInput from './utils/CreateColorInput.js';
 export default {
     name: 'ColorInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'color')
         }
         return false;
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

@@ -3,7 +3,7 @@ import CreateToggleSwitch from './utils/CreateToggleSwitch.js';
 export default {
     name: 'ToggleSwitchInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'toggleSwitch')
         }
@@ -11,7 +11,7 @@ export default {
         return false;
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

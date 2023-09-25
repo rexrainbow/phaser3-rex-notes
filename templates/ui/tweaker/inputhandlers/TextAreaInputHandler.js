@@ -12,7 +12,7 @@ var SetInputTextReadOnly = function (gameObject, enable) {
 export default {
     name: 'TextAreaInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'textarea')
         }
@@ -20,7 +20,7 @@ export default {
         return false;
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 

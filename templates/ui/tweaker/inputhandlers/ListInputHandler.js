@@ -9,7 +9,7 @@ var SetOptions = function (gameObject, options) {
 export default {
     name: 'ListInput',
 
-    accept(config, value) {
+    accept(config) {
         if (config.hasOwnProperty('view')) {
             return (config.view === 'list')
         }
@@ -17,7 +17,7 @@ export default {
         return (config.hasOwnProperty('options'));
     },
 
-    // Callback inside `constructor()`
+    // Callback after `constructor()`
     build(gameObject, style) {
         var scene = gameObject.scene;
 
