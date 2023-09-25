@@ -1,7 +1,7 @@
 import CreateButtons from './utils/CreateButtons.js';
 import CreateLabel from './utils/CreateLabel.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
-import { GetOptionIndex } from '../utils/OptionsMethods.js';
+import { GetOptionIndex } from './utils/OptionsMethods.js';
 import SetButtonsActiveStateByIndex from './utils/SetButtonsActiveState.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

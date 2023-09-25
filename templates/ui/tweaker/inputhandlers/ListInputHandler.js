@@ -1,5 +1,5 @@
 import CreateDropDownList from './utils/CreateDropDownList.js';
-import { GetOptionText } from '../utils/OptionsMethods.js';
+import { GetOptionText } from './utils/OptionsMethods.js';
 
 var SetOptions = function (gameObject, options) {
     var list = gameObject.getElement('list');
