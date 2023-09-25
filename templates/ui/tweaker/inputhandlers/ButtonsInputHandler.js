@@ -84,6 +84,6 @@ export default {
         if (index === undefined) {
             index = GetOptionIndex(list.options, value);
         }
-        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
+        SetButtonsActiveStateByIndex(list.getElement('buttons'), index);
     },
 }
