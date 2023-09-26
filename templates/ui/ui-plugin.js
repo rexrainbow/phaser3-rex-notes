@@ -31,6 +31,7 @@ import CoverFactory from './cover/Factory.js';
 import InputTextFactory from './inputtext/Factory';
 import FileChooserFactory from './filechooser/Factory.js';
 import FileDropZoneFactory from './filedropzone/Factory.js';
+import ImageInputLabelFactory from './imageinputlabel/Factory.js';
 import StatesImageFactory from './statesimage/Factory.js';
 import StatesRoundRectangleFactory from './statesroundrectangle/Factory.js';
 import StatesNineSliceFactory from './statesnineslice/Factory.js';

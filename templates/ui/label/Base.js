@@ -42,7 +42,7 @@ class LabelBase extends Sizer {
         }
         imageObject.setTexture(key, frame);
 
-        if (this.iconWidth !== undefined) {
+        if ((this.iconWidth !== undefined) && (this.iconHeight !== undefined)) {
             SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
             this.resetChildScaleState(imageObject);
         }
@@ -89,7 +89,7 @@ class LabelBase extends Sizer {
         }
         imageObject.setTexture(key, frame);
 
-        if (this.actionWidth !== undefined) {
+        if ((this.actionWidth !== undefined) && (this.actionHeight !== undefined)) {
             SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
             this.resetChildScaleState(imageObject);
         }
@@ -126,12 +126,12 @@ class LabelBase extends Sizer {
 
     preLayout() {
         var icon = this.childrenMap.icon;
-        if (icon && (this.iconWidth !== undefined)) {
+        if (icon && (this.iconWidth !== undefined) && (this.iconHeight !== undefined)) {
             SetDisplaySize(icon, this.iconWidth, this.iconHeight);
         }
 
         var action = this.childrenMap.action;
-        if (action && (this.actionWidth !== undefined)) {
+        if (action && (this.actionWidth !== undefined) && (this.actionHeight !== undefined)) {
             SetDisplaySize(action, this.actionWidth, this.actionHeight);
         }
 

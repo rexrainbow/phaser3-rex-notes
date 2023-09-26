@@ -25,6 +25,7 @@ import CustomProgress from './customprogress/CustomProgress.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
 import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
+import ImageInputLabel from './imageinputlabel/ImageInputLabel.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
 import InputText from './inputtext/InputText.js';
@@ -160,6 +161,7 @@ export {
     TransitionImage,
     TransitionImagePack,
     ImageBox,
+    ImageInputLabel,
 
     Container,
     Sizer,
