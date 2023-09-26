@@ -1,7 +1,6 @@
 import Resize from '../utils/Resize.js';
 import SyncTo from '../utils/SyncTo.js';
 import LoadFileMethods from '../utils/LoadFileMethods.js';
-import Click from './Click.js';
 import ClickPromose from './ClickPromise.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
@@ -96,7 +95,7 @@ class FileChooser extends DOMElement {
     }
 
     open() { // Only work under any touch event
-        Click(this.fileInput);
+        this.fileInput.click();
         return this;
     }
 
