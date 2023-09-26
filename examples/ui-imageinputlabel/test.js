@@ -38,13 +38,12 @@ class Demo extends Phaser.Scene {
                 fill: 'grey'
             }
         })
+            .on('select', function (file) {
+                console.log(file);
+                label.setText(file.name)
+            })
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000);
 
-        label.on('select', function (file) {
-            console.log(file);
-            label.setText(file.name)
-        })
     }
 
     update() { }

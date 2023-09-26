@@ -1,7 +1,7 @@
 import Label from '../label/Label.js';
 import CreateImageBox from './CreateImageBox.js';
 import Click from '../click/Click.js';
-import OpenFileChooser from '../../../plugins/behaviors/filechooser/Open.js';
+import { OpenFileChooser } from '../filechooser/FileChooser.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
