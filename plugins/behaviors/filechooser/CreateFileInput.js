@@ -14,18 +14,6 @@ var CreateFileInput = function (game, config) {
         fileInput.removeAttribute('multiple');
     }
 
-    var style = fileInput.style;
-    style.cursor = 'pointer';
-    style.zIndex = '0';
-    style.display = 'inline';
-    style.position = 'absolute';
-    style.opacity = '0';
-
-    var parent = game.domContainer;
-    if (parent) {
-        parent.appendChild(fileInput);
-    }
-
     return fileInput;
 }
 
