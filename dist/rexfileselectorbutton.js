@@ -12009,6 +12009,7 @@
   // Note: Not working in iOS9+
 
   Phaser.Utils.Objects.GetValue;
+  Phaser.DOM.RemoveFromDOM;
 
   var Resize = function Resize(width, height) {
     if (this.scene.sys.scale.autoRound) {

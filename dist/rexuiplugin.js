@@ -6008,7 +6008,7 @@
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var GetValue$3c = Phaser.Utils.Objects.GetValue;
-  var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
+  var RemoveFromDOM$1 = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
 
   // Reuse objects can increase performance
@@ -6144,7 +6144,7 @@
     _createClass(Text, [{
       key: "preDestroy",
       value: function preDestroy() {
-        RemoveFromDOM(this.canvas);
+        RemoveFromDOM$1(this.canvas);
         // Do nothing if canvas did not add to parent node before
 
         this.canvasText.destroy();
@@ -39044,7 +39044,7 @@
   SetValue(window, 'RexPlugins.UI.InputText', InputText);
 
   var GetValue$1G = Phaser.Utils.Objects.GetValue;
-  var CreateFileInput = function CreateFileInput(config) {
+  var CreateFileInput = function CreateFileInput(game, config) {
     var fileInput = document.createElement('input');
     fileInput.type = 'file';
     var accept = GetValue$1G(config, 'accept', '');
@@ -39054,6 +39054,16 @@
       fileInput.setAttribute('multiple', '');
     } else {
       fileInput.removeAttribute('multiple');
+    }
+    var style = fileInput.style;
+    style.cursor = 'pointer';
+    style.zIndex = '0';
+    style.display = 'inline';
+    style.position = 'absolute';
+    style.opacity = '0';
+    var parent = game.domContainer;
+    if (parent) {
+      parent.appendChild(fileInput);
     }
     return fileInput;
   };
@@ -39102,16 +39112,18 @@
   // Note: Not working in iOS9+
 
   var GetValue$1F = Phaser.Utils.Objects.GetValue;
+  var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var Open$1 = function Open(game, config) {
     // game: game, scene, or game object
     var closeDelay = GetValue$1F(config, 'closeDelay', 200);
-    var fileInput = CreateFileInput(config);
+    var fileInput = CreateFileInput(game, config);
     Click(fileInput);
     return ClickPromise({
       game: game,
       fileInput: fileInput,
       closeDelay: closeDelay
     }).then(function (result) {
+      RemoveFromDOM(fileInput);
       fileInput.remove();
       return Promise.resolve(result);
     });

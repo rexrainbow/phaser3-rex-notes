@@ -1,6 +1,6 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateFileInput = function (config) {
+var CreateFileInput = function (game, config) {
     var fileInput = document.createElement('input');
     fileInput.type = 'file';
 
@@ -12,6 +12,18 @@ var CreateFileInput = function (config) {
         fileInput.setAttribute('multiple', '');
     } else {
         fileInput.removeAttribute('multiple');
+    }
+
+    var style = fileInput.style;
+    style.cursor = 'pointer';
+    style.zIndex = '0';
+    style.display = 'inline';
+    style.position = 'absolute';
+    style.opacity = '0';
+
+    var parent = game.domContainer;
+    if (parent) {
+        parent.appendChild(fileInput);
     }
 
     return fileInput;

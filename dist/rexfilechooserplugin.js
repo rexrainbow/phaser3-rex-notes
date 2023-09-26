@@ -119,7 +119,7 @@
   }
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var CreateFileInput = function CreateFileInput(config) {
+  var CreateFileInput = function CreateFileInput(game, config) {
     var fileInput = document.createElement('input');
     fileInput.type = 'file';
     var accept = GetValue$2(config, 'accept', '');
@@ -129,6 +129,16 @@
       fileInput.setAttribute('multiple', '');
     } else {
       fileInput.removeAttribute('multiple');
+    }
+    var style = fileInput.style;
+    style.cursor = 'pointer';
+    style.zIndex = '0';
+    style.display = 'inline';
+    style.position = 'absolute';
+    style.opacity = '0';
+    var parent = game.domContainer;
+    if (parent) {
+      parent.appendChild(fileInput);
     }
     return fileInput;
   };
@@ -211,16 +221,18 @@
   // Note: Not working in iOS9+
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var Open = function Open(game, config) {
     // game: game, scene, or game object
     var closeDelay = GetValue$1(config, 'closeDelay', 200);
-    var fileInput = CreateFileInput(config);
+    var fileInput = CreateFileInput(game, config);
     Click(fileInput);
     return ClickPromise({
       game: game,
       fileInput: fileInput,
       closeDelay: closeDelay
     }).then(function (result) {
+      RemoveFromDOM(fileInput);
       fileInput.remove();
       return Promise.resolve(result);
     });

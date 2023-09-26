@@ -37130,6 +37130,7 @@
   // Note: Not working in iOS9+
 
   Phaser.Utils.Objects.GetValue;
+  Phaser.DOM.RemoveFromDOM;
 
   var SyncTo = function SyncTo(gameObject) {
     this.setOrigin(gameObject.originX, gameObject.originY);
