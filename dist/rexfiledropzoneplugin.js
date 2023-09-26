@@ -490,13 +490,6 @@
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
-
-      // Note: Not working in iOS9+
-    }, {
-      key: "open",
-      value: function open(config) {
-        return OpenFileChooser(this.game, config);
-      }
     }]);
     return FileDropZonePlugin;
   }(Phaser.Plugins.BasePlugin);

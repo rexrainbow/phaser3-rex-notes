@@ -16,11 +16,6 @@ class FileDropZonePlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
-
-    // Note: Not working in iOS9+
-    open(config) {
-        return OpenFileChooser(this.game, config);
-    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.FileDropZone', FileDropZone);

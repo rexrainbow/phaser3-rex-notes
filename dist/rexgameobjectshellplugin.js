@@ -37086,6 +37086,22 @@
 
   Phaser.Utils.Objects.GetValue;
 
+  var Click = function Click(fileInput) {
+    if (fileInput.click) {
+      fileInput.click();
+    } else {
+      try {
+        var event = new Event('Event', {
+          bubbles: true,
+          cancelable: true
+        });
+        fileInput.dispatchEvent(event);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   var Delay = function Delay(time, result) {
     if (time === undefined) {
       time = 0;
@@ -37302,7 +37318,7 @@
       key: "open",
       value: function open() {
         // Only work under any touch event
-        this.fileInput.click();
+        Click(this.fileInput);
         return this;
       }
     }, {
@@ -54820,20 +54836,25 @@
         break;
       }
     }
-
-    // Setup by config
-    inputField.setup(config, true);
+    if (inputField) {
+      // Setup by config
+      inputField.setup(config, true);
+    }
     return inputField;
   };
 
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var CreateInputRow = function CreateInputRow(scene, config, style) {
+    // InputField
+    var inputField = CreateInputField.call(this, scene, config, style);
+    if (!inputField) {
+      // Can't create inputField
+      return null;
+    }
+
     // Title
     var titleStyle = GetValue$c(style, 'title') || {};
     var inputTitle = CreateTitleLabel(scene, config, titleStyle);
-
-    // InputField
-    var inputField = CreateInputField.call(this, scene, config, style);
 
     // Background
     var backgroundStyle = GetValue$c(style, 'background') || {};
@@ -54873,6 +54894,11 @@
     var inputRowStyle = this.styles.inputRow || {};
     inputRowStyle.parentOrientation = this.styles.orientation;
     var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
+    if (!inputSizer) {
+      // Can't create inputField
+      console.error("[Tweaker] Can't add Input\n    title: ".concat(config.title, "\n    view: ").concat(config.view, "\n"));
+      return this;
+    }
     var inputField = inputSizer.childrenMap.inputField;
     var proportion;
     if (this.orientation === 1) {
@@ -55645,12 +55671,21 @@
       if (index === undefined) {
         index = GetOptionIndex(list.options, value);
       }
-      SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
+      SetButtonsActiveStateByIndex(list.getElement('buttons'), index);
     }
   };
 
+  // string
   var RegisterDefaultInputHandlers = function RegisterDefaultInputHandlers() {
-    this.registerInputHandler(TextInputHandler).registerInputHandler(TextAreaInputHandler).registerInputHandler(NumberInputHandler).registerInputHandler(RangeInputHandler).registerInputHandler(ColorInputHandler).registerInputHandler(CheckboxInputHandler).registerInputHandler(ToggleSwitchInputHandler).registerInputHandler(ListInputHandler).registerInputHandler(ButtonsInputHandler);
+    this
+    // string
+    .registerInputHandler(TextInputHandler).registerInputHandler(TextAreaInputHandler)
+    // number
+    .registerInputHandler(NumberInputHandler).registerInputHandler(RangeInputHandler).registerInputHandler(ColorInputHandler)
+    // boolean
+    .registerInputHandler(CheckboxInputHandler).registerInputHandler(ToggleSwitchInputHandler)
+    // options
+    .registerInputHandler(ListInputHandler).registerInputHandler(ButtonsInputHandler);
   };
 
   var Tweaker = /*#__PURE__*/function (_TweakerShell) {

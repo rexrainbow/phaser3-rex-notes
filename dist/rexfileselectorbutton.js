@@ -11965,6 +11965,22 @@
 
   Phaser.Utils.Objects.GetValue;
 
+  var Click = function Click(fileInput) {
+    if (fileInput.click) {
+      fileInput.click();
+    } else {
+      try {
+        var event = new Event('Event', {
+          bubbles: true,
+          cancelable: true
+        });
+        fileInput.dispatchEvent(event);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   var Delay = function Delay(time, result) {
     if (time === undefined) {
       time = 0;
@@ -12196,7 +12212,7 @@
       key: "open",
       value: function open() {
         // Only work under any touch event
-        this.fileInput.click();
+        Click(this.fileInput);
         return this;
       }
     }, {

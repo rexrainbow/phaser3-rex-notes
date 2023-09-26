@@ -133,6 +133,22 @@
     return fileInput;
   };
 
+  var Click = function Click(fileInput) {
+    if (fileInput.click) {
+      fileInput.click();
+    } else {
+      try {
+        var event = new Event('Event', {
+          bubbles: true,
+          cancelable: true
+        });
+        fileInput.dispatchEvent(event);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   var GameClass = Phaser.Game;
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
@@ -199,7 +215,7 @@
     // game: game, scene, or game object
     var closeDelay = GetValue$1(config, 'closeDelay', 200);
     var fileInput = CreateFileInput(config);
-    fileInput.click();
+    Click(fileInput);
     return ClickPromise({
       game: game,
       fileInput: fileInput,
@@ -416,7 +432,7 @@
       key: "open",
       value: function open() {
         // Only work under any touch event
-        this.fileInput.click();
+        Click(this.fileInput);
         return this;
       }
     }, {
