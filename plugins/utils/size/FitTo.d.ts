@@ -5,7 +5,8 @@ declare namespace FitTo {
 }
 
 declare function FitTo(
-    child: FitTo.SizeType,
-    parent: FitTo.SizeType,
+    source: FitTo.SizeType,
+    target: FitTo.SizeType,
+    scaleUp?: boolean,
     out?: FitTo.SizeType | true
 ): FitTo.SizeType;

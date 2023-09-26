@@ -34,7 +34,6 @@ class Demo extends Phaser.Scene {
             expandTextWidth: true,
 
             canvas: {
-                width: 200, height: 200,
                 fill: 'grey'
             }
         })

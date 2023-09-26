@@ -34,6 +34,8 @@ class ImageBox extends Container {
         this.add(image);
         this.image = image;
 
+        this.scaleUp = GetValue(config, 'scaleUp', true);
+
         var width = GetValue(config, 'width', image.width);
         var height = GetValue(config, 'height', image.height);
         this.resize(width, height);
@@ -76,7 +78,7 @@ class ImageBox extends Container {
     scaleImage() {
         var image = this.image;
 
-        var result = FitToSize(image, { width: this.width, height: this.height }, true);
+        var result = FitToSize(image, { width: this.width, height: this.height }, this.scaleUp, true);
         image.setDisplaySize(result.width, result.height);
         this.resetChildScaleState(image);
         return this;

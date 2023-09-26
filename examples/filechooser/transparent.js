@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         // Create canvas
         var canvas = this.add.rexCanvas(400, 300, 300, 300).fill('black');
         canvas.fitTo = (function (parent) {
-            var newSize = FitTo(this, parent, true);
+            var newSize = FitTo(this, parent, false, true);
             this.setDisplaySize(newSize.width, newSize.height);
         }).bind(canvas)
 
