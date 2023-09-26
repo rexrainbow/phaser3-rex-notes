@@ -1,7 +1,8 @@
 import Label from '../label/Label.js';
-import CreateImageBox from './CreateImageBox.js';
+import CreateImageBox from './methods/CreateImageBox.js';
 import Click from '../click/Click.js';
-import { OpenFileChooser } from '../filechooser/FileChooser.js';
+import methods from './methods/Methods.js';
+
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -44,36 +45,11 @@ class ImageInputLabel extends Label {
         this.clickBehavior = clickBehavior;
 
     }
-
-    async openPromise() {
-        var self = this;
-        var imageBox = this.childrenMap.icon;
-        var canvas = imageBox.image;
-
-        return OpenFileChooser(this.scene.game, {
-            accept: 'image/*',
-            multiple: false,
-        })
-            .then(function (result) {
-                var files = result.files;
-                if (files.length === 0) {
-                    return;
-                }
-
-                var selectedFile = files[0];
-                return canvas.loadFromFilePromise(selectedFile)
-                    .then(function () {
-                        imageBox.scaleImage();
-
-                        self.emit('select', selectedFile, self);
-                    })
-            })
-    }
-
-    open() {
-        this.openPromise();
-        return this;
-    }
 }
+
+Object.assign(
+    ImageInputLabel.prototype,
+    methods,
+)
 
 export default ImageInputLabel;

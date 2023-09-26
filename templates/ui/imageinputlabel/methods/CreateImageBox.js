@@ -1,5 +1,5 @@
-import ImageBox from '../imagebox/ImageBox.js';
-import Canvas from '../canvas/Canvas.js';
+import ImageBox from '../../imagebox/ImageBox.js';
+import Canvas from '../../canvas/Canvas.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
