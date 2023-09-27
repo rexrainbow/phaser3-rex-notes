@@ -30,6 +30,8 @@ class Demo extends Phaser.Scene {
                 strokeWidth: 3
             }),
 
+            iconBackground: this.add.rectangle(0, 0, 1, 1, COLOR_DARK),
+
             text: this.add.text(0, 0, 'AABB'),
             expandTextWidth: true,
 

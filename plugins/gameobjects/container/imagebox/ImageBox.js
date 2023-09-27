@@ -1,6 +1,6 @@
 import Container from '../containerlite/ContainerLite.js';
-import FitToSize from '../../../utils/size/FitTo.js';
-import FlipMethods from '../utils/FlipMethods.js';
+import methods from './methods/Methods.js';
+import ResizeBackground from './methods/ResizeBackground.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -30,6 +30,12 @@ class ImageBox extends Container {
 
         super(scene, x, y, 1, 1);
         this.type = 'rexImageBox';
+
+        var background = GetValue(config, 'background', true);
+        if (background) {
+            this.add(background);
+        }
+        this.background = background;
 
         this.add(image);
         this.image = image;
@@ -75,18 +81,10 @@ class ImageBox extends Container {
         this.image.setFlipY(value);
     }
 
-    scaleImage() {
-        var image = this.image;
-
-        var result = FitToSize(image, { width: this.width, height: this.height }, this.scaleUp, true);
-        image.setDisplaySize(result.width, result.height);
-        this.resetChildScaleState(image);
-        return this;
-    }
-
     resize(width, height) {
         super.resize(width, height);
 
+        ResizeBackground.call(this);
         this.scaleImage();
         return this;
     }
@@ -109,7 +107,7 @@ class ImageBox extends Container {
 
 Object.assign(
     ImageBox.prototype,
-    FlipMethods,
+    methods,
 )
 
 export default ImageBox;

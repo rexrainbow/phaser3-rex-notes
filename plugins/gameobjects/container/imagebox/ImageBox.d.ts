@@ -10,6 +10,7 @@ declare namespace ImageBox {
 
         width?: number, height?: number,
 
+        background?: Phaser.GameObjects.GameObject,
         image?: Phaser.GameObjects.GameObject,
     }
 }

@@ -79,12 +79,14 @@ var image = scene.add.rexImageBox(x, y, texture, frame, {
     // width: undefined,
     // height: undefined,
 
+    // background: undefined,
     // image: undefined
 });
 ```
 
 - `width`, `height` : Resize this game object.
     - `undefined` : Use original size. Default behavior.
+- `background` : Game object of background, optional. This background game object will be resized to fit the size of imageBox.
 - `image` : Custom image game object instance.
     - `undefined` : Use built-in image game object. Default behavior.
 
@@ -100,6 +102,7 @@ var image = scene.make.rexImageBox({
     // width: undefined,
     // height: undefined,
 
+    // background: undefined,
     // image: undefined
 
     // origin: {x: 0.5, y: 0.5},

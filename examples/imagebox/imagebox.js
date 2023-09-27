@@ -16,11 +16,15 @@ class Demo extends Phaser.Scene {
     create() {
         var graphics = this.add.graphics();
 
-        this.add.rexImageBox(200, 300, 'classroom')
+        this.add.rexImageBox(200, 300, 'classroom', undefined, {
+            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+        })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
-        this.add.rexImageBox(600, 300, 'card')
+        this.add.rexImageBox(600, 300, 'card', undefined, {
+            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+        })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
