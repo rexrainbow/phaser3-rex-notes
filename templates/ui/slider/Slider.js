@@ -159,13 +159,7 @@ class Slider extends ProgressBase(Sizer) {
         }
     }
 
-    runLayout(parent, newWidth, newHeight) {
-        // Skip hidden or !dirty sizer
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        super.runLayout(parent, newWidth, newHeight);
+    postLayout(parent, newWidth, newHeight) {
         this.updateThumb();
         this.updateIndicator();
         return this;

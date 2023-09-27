@@ -106,12 +106,7 @@ class Scrollable extends Sizer {
         */
     }
 
-    runLayout(parent, newWidth, newHeight) {
-        // Skip hidden or !dirty sizer
-        if (this.ignoreLayout) {
-            return this;
-        }
-        super.runLayout(parent, newWidth, newHeight);
+    postLayout(parent, newWidth, newHeight) {
         this.resizeController();
 
         // Set t, s to 0 at first runLayout()

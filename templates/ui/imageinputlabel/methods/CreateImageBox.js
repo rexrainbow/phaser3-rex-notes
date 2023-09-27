@@ -28,6 +28,7 @@ var CreateCanvas = function (scene, config) {
 
 var CreateImageBox = function (scene, config) {
     var icon = new ImageBox(scene, {
+        scaleUp: GetValue(config, 'scaleUpIcon', true),
         image: CreateCanvas(scene, config)
     })
     scene.add.existing(icon);

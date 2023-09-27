@@ -1,6 +1,8 @@
 import Label from '../label/Label.js';
 import CreateImageBox from './methods/CreateImageBox.js';
-import Click from '../click/Click.js';
+import GetClickTarget from './methods/GetClickTarget.js';
+import CreateClickBehavior from './methods/CreateClickBehavior.js';
+import CreateFileChooser from './methods/CreateFileChooser.js';
 import methods from './methods/Methods.js';
 
 
@@ -27,24 +29,27 @@ class ImageInputLabel extends Label {
             icon.resize(iconWidth, iconHeight);
         }
 
-        // Click behavior
-        var clickBehavior;
-        var clickConfig = GetValue(config, 'click', true);
-        if (clickConfig) {
-            var clickTarget = GetValue(clickConfig, 'target', this);
-            if (typeof (clickTarget) === 'string') {
-                clickTarget = this.getElement(clickTarget);
-            }
-
-            if (clickTarget) {
-                clickBehavior = new Click(clickTarget, clickConfig);
-
-                clickBehavior.on('click', this.open, this);
+        this.clickTarget = GetClickTarget(this, config);
+        if (this.clickTarget) {
+            if (!GetValue(config, 'domButton', false)) {
+                this.clickBehavior = CreateClickBehavior(this, config);
+            } else {
+                this.fileChooser = CreateFileChooser(this, config);
             }
         }
-        this.clickBehavior = clickBehavior;
+
+        this.addChildrenMap('canvas', icon.image);
+        this.addChildrenMap('fileChooser', this.fileChooser);
 
     }
+
+    postLayout() {
+        if (this.fileChooser) {
+            this.fileChooser.syncTo(this.clickTarget);
+            this.resetChildState(this.fileChooser);
+        }
+    }
+
 }
 
 Object.assign(

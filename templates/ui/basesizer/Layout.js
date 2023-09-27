@@ -10,6 +10,11 @@ var Layout = function () {
     // Run layout with scale = 1
     this.runLayout();
 
+    // Custom postLayout callback
+    this.postLayout();
+
+    this._postLayout();
+
     // Restore scale
     if (!scale1) {
         this.setScale(scaleXSave, scaleYSave);

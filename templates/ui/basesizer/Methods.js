@@ -26,6 +26,7 @@ import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
 import RunLayout from './RunLayout.js';
 import LayoutChildren from './LayoutChildren.js';
+import _PostLayout from './_PostLayout.js';
 import PostLayout from './PostLayout.js';
 import RunWidthWrap from './RunWidthWrap.js';
 
@@ -78,6 +79,7 @@ var methods = {
     runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
+    _postLayout: _PostLayout,
 
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,

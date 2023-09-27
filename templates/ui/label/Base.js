@@ -138,12 +138,7 @@ class LabelBase extends Sizer {
         super.preLayout();
     }
 
-    runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        super.runLayout(parent, newWidth, newHeight);
+    postLayout(parent, newWidth, newHeight) {
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
         if (iconMask) {

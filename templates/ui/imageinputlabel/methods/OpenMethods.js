@@ -1,30 +1,16 @@
 // Note: Not working in iOS9+
 
 import { OpenFileChooser } from '../../filechooser/FileChooser.js';
+import FileChooserConfig from './FileChooserConfig.js';
+import OnSelectFile from './OnSelectFile.js';
 
 export default {
     async openPromise() {
         var self = this;
-        var imageBox = this.childrenMap.icon;
-        var canvas = imageBox.image;
 
-        return OpenFileChooser(this.scene.game, {
-            accept: 'image/*',
-            multiple: false,
-        })
+        return OpenFileChooser(this.scene.game, FileChooserConfig)
             .then(function (result) {
-                var files = result.files;
-                if (files.length === 0) {
-                    return;
-                }
-
-                var selectedFile = files[0];
-                return canvas.loadFromFilePromise(selectedFile)
-                    .then(function () {
-                        imageBox.scaleImage();
-
-                        self.emit('select', selectedFile, self);
-                    })
+                return OnSelectFile(self, result.files);
             })
     },
 
