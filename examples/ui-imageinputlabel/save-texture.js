@@ -19,8 +19,8 @@ class Demo extends Phaser.Scene {
         var label = this.rexUI.add.imageInputLabel({
             orientation: 'y',
             x: 400, y: 300,
-            width: 260,
-            space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10 },
+            width: 240,
+            space: { left: 20, right: 20, top: 20, bottom: 20, icon: 20, text: 20 },
 
             iconWidth: 200, iconHeight: 200,
 
@@ -30,29 +30,67 @@ class Demo extends Phaser.Scene {
                 strokeWidth: 3
             }),
 
-            text: this.add.text(0, 0, 'AABB'),
+            // Editable text input
+            text: CreateCanvasInput(this),
             expandTextWidth: true,
+
+            // 'Save' button 
+            action: this.add.text(0, 0, 'Save'),
 
             canvas: {
                 fill: 'grey'
             },
 
-            clickTarget: 'icon',
+            clickTarget: 'icon', 
 
-            domButton: false, // true
+            domButton: true, // true
         })
             .layout()
+
+        var gameObject;
 
         label
             .on('select', function (file, label) {
                 console.log(file);
                 label.setText(label.getFileName(file));
             })
+            .onClick(label.getElement('action'), function () {
+                var key = label.text;
+                label.saveTexture(key);
+                console.log(`Save texture ${key}`)
+
+                // Display new texture
+                if (!gameObject) {
+                    gameObject = this.add.image(0, 0, '').setOrigin(0);
+                }
+                gameObject.setTexture(key);
+            }, this)
 
 
     }
 
     update() { }
+}
+
+var CreateCanvasInput = function (scene) {
+    return scene.rexUI.add.canvasInput({
+        background: {
+            'focus.stroke': 'red',
+        },
+
+        style: {
+            fontSize: 20,
+            backgroundBottomY: 5,
+            backgroundHeight: 24,
+
+            'cursor.color': 'black',
+            'cursor.backgroundColor': 'white',
+        },
+
+        text: 'Click icon',
+
+        selectAll: true
+    })
 }
 
 var config = {

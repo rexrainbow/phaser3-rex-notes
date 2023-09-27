@@ -31,7 +31,7 @@ class ImageInputLabel extends Label {
 
         this.clickTarget = GetClickTarget(this, config);
         if (this.clickTarget) {
-            if (!GetValue(config, 'domButton', false)) {
+            if (!GetValue(config, 'domButton', true)) {
                 this.clickBehavior = CreateClickBehavior(this, config);
             } else {
                 this.fileChooser = CreateFileChooser(this, config);

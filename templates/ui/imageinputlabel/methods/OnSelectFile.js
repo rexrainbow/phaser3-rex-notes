@@ -10,7 +10,7 @@ var OnSelectFile = function (parent, files) {
         .then(function () {
             imageBox.scaleImage();
 
-            parent.emit('select', selectedFile, self);
+            parent.emit('select', selectedFile, parent);
         })
 }
 

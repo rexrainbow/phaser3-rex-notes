@@ -40996,7 +40996,7 @@
     var selectedFile = files[0];
     return canvas.loadFromFilePromise(selectedFile).then(function () {
       imageBox.scaleImage();
-      parent.emit('select', selectedFile, self);
+      parent.emit('select', selectedFile, parent);
     });
   };
 
@@ -41036,6 +41036,14 @@
     }
   };
 
+  var GetFileName = function GetFileName(file) {
+    if (!file) {
+      return null;
+    }
+    var name = file.name;
+    return name.substr(0, name.lastIndexOf('.'));
+  };
+
   var SaveTexture = function SaveTexture(key) {
     var canvas = this.childrenMap.canvas;
     canvas.generateTexture(key);
@@ -41043,6 +41051,7 @@
   };
 
   var methods$i = {
+    getFileName: GetFileName,
     saveTexture: SaveTexture
   };
   Object.assign(methods$i, OpenMethods);
@@ -41073,7 +41082,7 @@
       }
       _this.clickTarget = GetClickTarget(_assertThisInitialized(_this), config);
       if (_this.clickTarget) {
-        if (!GetValue$1A(config, 'domButton', false)) {
+        if (!GetValue$1A(config, 'domButton', true)) {
           _this.clickBehavior = CreateClickBehavior(_assertThisInitialized(_this), config);
         } else {
           _this.fileChooser = CreateFileChooser(_assertThisInitialized(_this));
