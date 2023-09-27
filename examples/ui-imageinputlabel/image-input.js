@@ -38,6 +38,8 @@ class Demo extends Phaser.Scene {
             },
 
             clickTarget: 'icon',
+            
+            domButton: false, // true
         })
             .on('select', function (file) {
                 console.log(file);
