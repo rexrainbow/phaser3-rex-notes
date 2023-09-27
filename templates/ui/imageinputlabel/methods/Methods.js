@@ -1,6 +1,8 @@
 import OpenMethods from './OpenMethods.js';
+import SaveTexture from './SaveTexture.js';
 
 var methods = {
+    saveTexture: SaveTexture,
 };
 
 Object.assign(

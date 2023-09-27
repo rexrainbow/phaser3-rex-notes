@@ -130,33 +130,7 @@
     } else {
       fileInput.removeAttribute('multiple');
     }
-    var style = fileInput.style;
-    style.cursor = 'pointer';
-    style.zIndex = '0';
-    style.display = 'inline';
-    style.position = 'absolute';
-    style.opacity = '0';
-    var parent = game.domContainer;
-    if (parent) {
-      parent.appendChild(fileInput);
-    }
     return fileInput;
-  };
-
-  var Click = function Click(fileInput) {
-    if (fileInput.click) {
-      fileInput.click();
-    } else {
-      try {
-        var event = new Event('Event', {
-          bubbles: true,
-          cancelable: true
-        });
-        fileInput.dispatchEvent(event);
-      } catch (e) {
-        console.log(e);
-      }
-    }
   };
 
   var GameClass = Phaser.Game;
@@ -226,7 +200,7 @@
     // game: game, scene, or game object
     var closeDelay = GetValue$1(config, 'closeDelay', 200);
     var fileInput = CreateFileInput(game, config);
-    Click(fileInput);
+    fileInput.click();
     return ClickPromise({
       game: game,
       fileInput: fileInput,
@@ -444,7 +418,7 @@
       key: "open",
       value: function open() {
         // Only work under any touch event
-        Click(this.fileInput);
+        this.fileInput.click();
         return this;
       }
     }, {

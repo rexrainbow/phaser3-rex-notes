@@ -35,7 +35,9 @@ class Demo extends Phaser.Scene {
 
             canvas: {
                 fill: 'grey'
-            }
+            },
+
+            clickTarget: 'icon',
         })
             .on('select', function (file) {
                 console.log(file);

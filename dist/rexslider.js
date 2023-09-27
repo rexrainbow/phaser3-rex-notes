@@ -3379,6 +3379,10 @@
     // Run layout with scale = 1
     this.runLayout();
 
+    // Custom postLayout callback
+    this.postLayout();
+    this._postLayout();
+
     // Restore scale
     if (!scale1) {
       this.setScale(scaleXSave, scaleYSave);
@@ -3426,16 +3430,21 @@
       this.emit('postlayout', this.layoutedChildren, this);
       this.layoutedChildren.length = 0;
     }
-    return this.postLayout();
+    return this;
   };
 
   // Override
   var LayoutChildren$1 = function LayoutChildren() {};
 
-  var PostLayout = function PostLayout(parent, newWidth, newHeight) {
+  var _PostLayout = function _PostLayout(parent, newWidth, newHeight) {
     if (this._anchor) {
       this._anchor.updatePosition();
     }
+    return this;
+  };
+
+  // Override
+  var PostLayout = function PostLayout(parent, newWidth, newHeight) {
     return this;
   };
 
@@ -10357,6 +10366,7 @@
     runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
+    _postLayout: _PostLayout,
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
     pointToChild: PointToChild$1,
@@ -15316,13 +15326,8 @@
         }
       }
     }, {
-      key: "runLayout",
-      value: function runLayout(parent, newWidth, newHeight) {
-        // Skip hidden or !dirty sizer
-        if (this.ignoreLayout) {
-          return this;
-        }
-        _get(_getPrototypeOf(Slider.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
+      key: "postLayout",
+      value: function postLayout(parent, newWidth, newHeight) {
         this.updateThumb();
         this.updateIndicator();
         return this;

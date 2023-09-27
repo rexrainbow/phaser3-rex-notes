@@ -37,6 +37,8 @@ class Demo extends Phaser.Scene {
                 fill: 'grey'
             },
 
+            clickTarget: 'icon',
+
             domButton: true,
         })
             .on('select', function (file) {

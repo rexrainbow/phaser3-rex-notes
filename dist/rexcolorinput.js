@@ -3379,6 +3379,10 @@
     // Run layout with scale = 1
     this.runLayout();
 
+    // Custom postLayout callback
+    this.postLayout();
+    this._postLayout();
+
     // Restore scale
     if (!scale1) {
       this.setScale(scaleXSave, scaleYSave);
@@ -3426,16 +3430,21 @@
       this.emit('postlayout', this.layoutedChildren, this);
       this.layoutedChildren.length = 0;
     }
-    return this.postLayout();
+    return this;
   };
 
   // Override
   var LayoutChildren$2 = function LayoutChildren() {};
 
-  var PostLayout = function PostLayout(parent, newWidth, newHeight) {
+  var _PostLayout = function _PostLayout(parent, newWidth, newHeight) {
     if (this._anchor) {
       this._anchor.updatePosition();
     }
+    return this;
+  };
+
+  // Override
+  var PostLayout = function PostLayout(parent, newWidth, newHeight) {
     return this;
   };
 
@@ -10357,6 +10366,7 @@
     runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
+    _postLayout: _PostLayout,
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
     pointToChild: PointToChild$1,
@@ -19512,12 +19522,8 @@
         return this;
       }
     }, {
-      key: "runLayout",
-      value: function runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-          return this;
-        }
-        _get(_getPrototypeOf(ColorPicker.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
+      key: "postLayout",
+      value: function postLayout(parent, newWidth, newHeight) {
         this.childrenMap.hPalette.setMarkerPosition(this.value);
         this.childrenMap.svPalette.setMarkerPosition(this.value);
         return this;
@@ -19682,7 +19688,7 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        if (this.iconWidth !== undefined) {
+        if (this.iconWidth !== undefined && this.iconHeight !== undefined) {
           SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
           this.resetChildScaleState(imageObject);
         }
@@ -19730,7 +19736,7 @@
           return this;
         }
         imageObject.setTexture(key, frame);
-        if (this.actionWidth !== undefined) {
+        if (this.actionWidth !== undefined && this.actionHeight !== undefined) {
           SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
           this.resetChildScaleState(imageObject);
         }
@@ -19768,22 +19774,18 @@
       key: "preLayout",
       value: function preLayout() {
         var icon = this.childrenMap.icon;
-        if (icon && this.iconWidth !== undefined) {
+        if (icon && this.iconWidth !== undefined && this.iconHeight !== undefined) {
           SetDisplaySize(icon, this.iconWidth, this.iconHeight);
         }
         var action = this.childrenMap.action;
-        if (action && this.actionWidth !== undefined) {
+        if (action && this.actionWidth !== undefined && this.actionHeight !== undefined) {
           SetDisplaySize(action, this.actionWidth, this.actionHeight);
         }
         _get(_getPrototypeOf(LabelBase.prototype), "preLayout", this).call(this);
       }
     }, {
-      key: "runLayout",
-      value: function runLayout(parent, newWidth, newHeight) {
-        if (this.ignoreLayout) {
-          return this;
-        }
-        _get(_getPrototypeOf(LabelBase.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
+      key: "postLayout",
+      value: function postLayout(parent, newWidth, newHeight) {
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
         if (iconMask) {
