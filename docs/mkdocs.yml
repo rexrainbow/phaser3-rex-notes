@@ -414,6 +414,7 @@ nav:
         - Title label: ui-titlelabel.md
         - Name value label: ui-namevaluelabel.md
         - Badge label: ui-badgelabel.md
+        - Image input label: ui-imageinputlabel.md
     - Buttons:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md

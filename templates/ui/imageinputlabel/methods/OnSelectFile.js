@@ -11,6 +11,7 @@ var OnSelectFile = function (parent, files) {
             imageBox.scaleImage();
 
             parent.emit('select', selectedFile, parent);
+            return Promise.resolve(selectedFile);
         })
 }
 

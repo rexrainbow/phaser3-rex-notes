@@ -212,7 +212,7 @@ class MyText extends Phaser.GameObjects.Text {
 }
 ```
 
-Or uses [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md)
+Or uses [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [canvasInput object](canvasinput.md).
 
 ### Custom class
 

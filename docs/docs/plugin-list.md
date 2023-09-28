@@ -208,6 +208,7 @@
 1. [UI/Grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [UI/Gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
 1. [UI/Holy grail](ui-holygrail.md): Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_design)) style.
+1. [UI/Image input label](ui-imageinputlabel.md): A container with a canvas icon, text, and background. Click icon to popup a (image) file chooser dialog, display selected image on canvas.
 1. [UI/Knob](ui-knob.md): A knob button based on circular progress.
 1. [UI/Label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI/Menu](ui-menu.md): A container with buttons and sub-menu.

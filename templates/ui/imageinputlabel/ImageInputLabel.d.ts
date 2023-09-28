@@ -1,24 +1,21 @@
 import Label from '../label/Label';
-import Open from '../../../plugins/behaviors/filechooser/Open';
 
 export default ImageInputLabel;
 
 declare namespace ImageInputLabel {
     interface IConfig extends Label.IConfig {
-        domButton?: boolean,
-
         iconBackground?: Phaser.GameObjects.GameObject,
+
+        canvas?: {
+            width?: number, height?: number, fill?: string,
+            key?: string, frame?: string,
+        },
 
         scaleUpIcon?: boolean,
 
-        canvas?: {
-            width?: number, height?: number,
-            key?: number, frame?: number,
-            fill?: string,
-        },
-
         clickTarget?: string | Phaser.GameObjects.GameObject | null,
 
+        domButton?: boolean,
     }
 
 }
@@ -31,7 +28,7 @@ declare class ImageInputLabel extends Label {
 
     open(): this;
 
-    openPromise(): Promise<void>;
+    openPromise(): Promise<File>;
 
     saveTexture(key: string): this;
 

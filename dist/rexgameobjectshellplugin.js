@@ -38247,7 +38247,7 @@
 
   var GetValue$1t = Phaser.Utils.Objects.GetValue;
   var GetClickTarget = function GetClickTarget(parent, config) {
-    var clickTarget = GetValue$1t(config, 'clickTarget', 'icon');
+    var clickTarget = GetValue$1t(config, 'clickTarget', this);
     if (typeof clickTarget === 'string') {
       clickTarget = parent.getElement(clickTarget);
     }
@@ -38569,6 +38569,7 @@
     return canvas.loadFromFilePromise(selectedFile).then(function () {
       imageBox.scaleImage();
       parent.emit('select', selectedFile, parent);
+      return Promise.resolve(selectedFile);
     });
   };
 
