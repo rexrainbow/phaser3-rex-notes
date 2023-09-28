@@ -327,15 +327,15 @@ imageInputLabel.saveTexture(key);
         ```
     - Canvas game object (a [canvas game object](canvas.md) created internally)
         ```javascript
-        var icon = imageInputLabel.getElement('icon');
-        ```
-    - Icon game object (an [imageBox game object](imagebox.md) created internally)
-        ```javascript
-        var icon = imageInputLabel.getElement('icon');
+        var canvas = imageInputLabel.getElement('canvas');
         ```
     - Icon background game object
         ```javascript
-        var icon = imageInputLabel.getElement('iconBackground');
+        var iconBackground = imageInputLabel.getElement('iconBackground');
+        ```
+    - Icon game object (an [imageBox game object](imagebox.md) created internally)
+        ```javascript
+        var imageBox = imageInputLabel.getElement('icon');
         ```
     - Text game object
         ```javascript
@@ -344,6 +344,10 @@ imageInputLabel.saveTexture(key);
     - Action icon game object
         ```javascript
         var action = imageInputLabel.getElement('action');
+        ```
+    - [File chooser game object](filechooser.md), if `domButton` is set to `true`
+        ```javascript
+        var fileChooser = imageInputLabel.getElement('fileChooser');
         ```
 - Get by name
     ```javascript
