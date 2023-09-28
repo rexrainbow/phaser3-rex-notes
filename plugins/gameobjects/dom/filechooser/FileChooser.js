@@ -102,6 +102,14 @@ class FileChooser extends DOMElement {
     get files() {
         return this.fileInput.files;
     }
+
+    setOpenEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.fileInput.disabled = !enable;
+        return this;
+    }
 }
 
 var methods = {

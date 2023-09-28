@@ -298,6 +298,18 @@ scene.plugins.get('rexFileChooser').open({
             ```
     - Length `files` is 0 : User cancels file chooser dialog.
 
+### Enable clicking-open
+
+- Enable
+    ```javascript
+    fileChooser.setOpenEnable();
+    // fileChooser.setOpenEnable(true);
+    ```
+- Disable
+    ```javascript
+    fileChooser.setOpenEnable(false)
+    ```
+
 ### Other properties
 
 See [dom game object](domelement.md), [game object](gameobject.md)

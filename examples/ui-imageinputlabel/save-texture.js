@@ -43,9 +43,9 @@ class Demo extends Phaser.Scene {
                 fill: 'grey'
             },
 
-            clickTarget: 'icon', 
+            clickTarget: 'icon',
 
-            domButton: true, // true
+            domButton: true, // false
         })
             .layout()
 
@@ -68,6 +68,7 @@ class Demo extends Phaser.Scene {
                 gameObject.setTexture(key);
             }, this)
 
+        // label.setClickOpenEnable(false);
 
     }
 
@@ -81,9 +82,9 @@ var CreateCanvasInput = function (scene) {
         },
 
         style: {
-            fontSize: 20,
-            backgroundBottomY: 5,
-            backgroundHeight: 24,
+            fontSize: 16,
+            backgroundBottomY: 3,
+            backgroundHeight: 20,
 
             'cursor.color': 'black',
             'cursor.backgroundColor': 'white',

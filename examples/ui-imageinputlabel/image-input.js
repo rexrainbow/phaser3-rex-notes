@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
 
             clickTarget: 'icon',
 
-            domButton: false, // true
+            domButton: true, // false
         })
             .layout()
 

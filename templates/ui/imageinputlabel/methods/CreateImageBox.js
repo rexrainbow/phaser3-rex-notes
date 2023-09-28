@@ -28,7 +28,7 @@ var CreateCanvas = function (scene, config) {
 
 var CreateImageBox = function (scene, config) {
     var icon = new ImageBox(scene, {
-        scaleUp: GetValue(config, 'scaleUpIcon', true),
+        scaleUp: GetValue(config, 'scaleUpIcon', false),
         background: GetValue(config, 'iconBackground'),
         image: CreateCanvas(scene, config)
     })

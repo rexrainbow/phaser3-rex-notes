@@ -426,6 +426,15 @@
       get: function get() {
         return this.fileInput.files;
       }
+    }, {
+      key: "setOpenEnable",
+      value: function setOpenEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.fileInput.disabled = !enable;
+        return this;
+      }
     }]);
     return FileChooser;
   }(DOMElement);

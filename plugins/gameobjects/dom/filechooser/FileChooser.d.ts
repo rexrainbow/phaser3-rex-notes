@@ -65,4 +65,9 @@ declare class FileChooser extends Phaser.GameObjects.DOMElement {
         key: string,
         cacheType?: string
     ): Promise<any>;
+
+    setOpenEnable(
+        enable?: boolean
+    ): this;
+
 }

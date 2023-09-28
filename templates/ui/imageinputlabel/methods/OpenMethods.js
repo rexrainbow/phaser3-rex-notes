@@ -17,5 +17,21 @@ export default {
     open() {
         this.openPromise();
         return this;
-    }
+    },
+
+    setClickOpenEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        if (this.clickBehavior) {
+            this.clickBehavior.setEnable(enable);
+        }
+
+        if (this.fileChooser) {
+            this.fileChooser.setOpenEnable(enable)
+        }
+
+        return this;
+    },
 }

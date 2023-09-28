@@ -40,7 +40,7 @@ class ImageBox extends Container {
         this.add(image);
         this.image = image;
 
-        this.scaleUp = GetValue(config, 'scaleUp', true);
+        this.scaleUp = GetValue(config, 'scaleUp', false);
 
         var width = GetValue(config, 'width', image.width);
         var height = GetValue(config, 'height', image.height);

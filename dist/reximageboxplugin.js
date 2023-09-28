@@ -2101,11 +2101,11 @@
     return this;
   };
 
-  var methods = {
+  var methods$1 = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2374,7 +2374,7 @@
     }]);
     return ContainerLite;
   }(Base);
-  Object.assign(ContainerLite.prototype, methods);
+  Object.assign(ContainerLite.prototype, methods$1);
 
   var FitTo = function FitTo(source, target, scaleUp, out) {
     if (scaleUp === undefined) {
@@ -2422,6 +2422,17 @@
   };
   var globalSize = {};
 
+  var ScaleImage = function ScaleImage() {
+    var image = this.image;
+    var result = FitTo(image, {
+      width: this.width,
+      height: this.height
+    }, this.scaleUp, true);
+    image.setDisplaySize(result.width, result.height);
+    this.resetChildScaleState(image);
+    return this;
+  };
+
   var FlipMethods = {
     setFlipX: function setFlipX(value) {
       this.flipX = value;
@@ -2449,6 +2460,70 @@
       this.flipY = false;
       return this;
     }
+  };
+
+  var methods = {
+    scaleImage: ScaleImage
+  };
+  Object.assign(methods, FlipMethods);
+
+  var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {
+    if (!gameObject || newWidth === undefined && newHeight === undefined) {
+      return;
+    }
+    if (HasResizeMethod(gameObject)) {
+      // Has `resize`, or `setSize` method
+      if (newWidth === undefined) {
+        newWidth = gameObject.width;
+      }
+      if (newHeight === undefined) {
+        newHeight = gameObject.height;
+      }
+      if (gameObject.resize) {
+        gameObject.resize(newWidth, newHeight);
+      } else {
+        gameObject.setSize(newWidth, newHeight);
+      }
+    } else {
+      // Set display width/height
+      if (newWidth !== undefined) {
+        gameObject.displayWidth = newWidth;
+      }
+      if (newHeight !== undefined) {
+        gameObject.displayHeight = newHeight;
+      }
+    }
+  };
+  var ExcludeClassList = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
+  var HasResizeMethod = function HasResizeMethod(gameObject) {
+    // 1st pass : Has `resize` method?
+    if (gameObject.resize) {
+      return true;
+    }
+
+    // 2nd pass : Has `setSize` method?
+    if (!gameObject.setSize) {
+      return false;
+    }
+    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+      var excludeClass = ExcludeClassList[i];
+      if (excludeClass && gameObject instanceof excludeClass) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  var ResizeBackground = function ResizeBackground() {
+    var background = this.background;
+    if (!background) {
+      return this;
+    }
+    background.setOrigin(this.originX, this.originY);
+    background.setPosition(this.x, this.y);
+    ResizeGameObject(background, this.displayWidth, this.displayHeight);
+    this.resetChildScaleState(background);
+    return this;
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -2480,9 +2555,14 @@
       }
       _this = _super.call(this, scene, x, y, 1, 1);
       _this.type = 'rexImageBox';
+      var background = GetValue(config, 'background', true);
+      if (background) {
+        _this.add(background);
+      }
+      _this.background = background;
       _this.add(image);
       _this.image = image;
-      _this.scaleUp = GetValue(config, 'scaleUp', true);
+      _this.scaleUp = GetValue(config, 'scaleUp', false);
       var width = GetValue(config, 'width', image.width);
       var height = GetValue(config, 'height', image.height);
       _this.resize(width, height);
@@ -2523,21 +2603,10 @@
         this.image.setFlipY(value);
       }
     }, {
-      key: "scaleImage",
-      value: function scaleImage() {
-        var image = this.image;
-        var result = FitTo(image, {
-          width: this.width,
-          height: this.height
-        }, this.scaleUp, true);
-        image.setDisplaySize(result.width, result.height);
-        this.resetChildScaleState(image);
-        return this;
-      }
-    }, {
       key: "resize",
       value: function resize(width, height) {
         _get(_getPrototypeOf(ImageBox.prototype), "resize", this).call(this, width, height);
+        ResizeBackground.call(this);
         this.scaleImage();
         return this;
       }
@@ -2557,7 +2626,7 @@
     }]);
     return ImageBox;
   }(ContainerLite);
-  Object.assign(ImageBox.prototype, FlipMethods);
+  Object.assign(ImageBox.prototype, methods);
 
   function Factory (x, y, texture, frame, config) {
     var gameObject = new ImageBox(this.scene, x, y, texture, frame, config);

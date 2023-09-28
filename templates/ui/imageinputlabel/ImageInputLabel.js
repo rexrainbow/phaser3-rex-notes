@@ -37,8 +37,9 @@ class ImageInputLabel extends Label {
                 this.fileChooser = CreateFileChooser(this, config);
             }
         }
-
+        
         this.addChildrenMap('canvas', icon.image);
+        this.addChildrenMap('iconBackground', icon.background);
         this.addChildrenMap('fileChooser', this.fileChooser);
 
     }
