@@ -10,42 +10,43 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        var self = this;
-        var key = 'photo';
-        this.load.rexAwait(function (successCallback, failureCallback) {
-            localforage.getItem(key).then(function (image) {
-                if (!image) {
-                    // failureCallback();
-
-                    // Load from server
-                    self.load.binary('photo', 'assets/images/mushroom.png', Uint8Array);
-
-                    self.load.once(`filecomplete-binary-${key}`, function () {                        
-                        var buffer = self.cache.binary.get(key);
-                        localforage.setItem('photo', buffer);
-
-                        console.log('Prepare local image file, see you next time');
-                        failureCallback();
-                    });
-                }
-
-                var blob = new Blob([image]);
-                var url = window.URL.createObjectURL(blob);
-                self.load.image(key, url);
-
-                console.log('Get local image file success');
-                successCallback();
-            })
-        });
+        LoadImageFromLocalForage(this, 'mushroom', 'assets/images/mushroom.png')
     }
 
     create() {
-        this.add.image(400, 300, 'photo');
+        this.add.image(400, 300, 'mushroom');
     }
 
     update() {
 
     }
+}
+
+var LoadImageFromLocalForage = function (scene, key, sourceURL) {
+    scene.load.rexAwait(function (successCallback, failureCallback) {
+        localforage.getItem(key).then(function (data) {
+            if (!data) {
+                // Load from server
+                scene.load.binary(key, sourceURL, Uint8Array);
+
+                scene.load.once(`filecomplete-binary-${key}`, function () {
+                    var buffer = scene.cache.binary.get(key);
+                    LoadImageFromUint8Array(scene, key, buffer);
+                    localforage.setItem(key, buffer).then(successCallback);
+                });
+
+            } else {
+                LoadImageFromUint8Array(scene, key, data);
+                successCallback();
+            }
+        })
+    });
+}
+
+var LoadImageFromUint8Array = function (scene, key, data) {
+    var blob = new Blob([data]);
+    var blobURL = window.URL.createObjectURL(blob);
+    scene.load.image(key, blobURL);
 }
 
 var config = {
