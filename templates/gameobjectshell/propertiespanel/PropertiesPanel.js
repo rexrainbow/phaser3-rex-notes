@@ -1,5 +1,5 @@
-import { Tweaker } from '../../ui/ui-components';
-import DefaultConfig from './DefaultConfig';
+import Tweaker from '../../ui/tweaker/Tweaker.js';
+import DefaultConfig from './DefaultConfig.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import AddProperties from './methods/AddProperties.js';
 

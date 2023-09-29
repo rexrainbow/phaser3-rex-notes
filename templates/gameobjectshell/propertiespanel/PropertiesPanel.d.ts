@@ -1,4 +1,4 @@
-import { Tweaker } from '../../ui/ui-components';
+import Tweaker from '../../ui/tweaker/Tweaker';
 
 export default PropertiesPanel;
 
