@@ -29,16 +29,20 @@ class AwaitFile extends Phaser.Loader.File {
                 var self = this;
                 var runOnce = false;
                 var successCallback = function () {
-                    if (!runOnce) {
-                        self.onLoad();
-                        runOnce = true;
+                    if (runOnce) {
+                        return;
                     }
+
+                    self.onLoad();
+                    runOnce = true;
                 }
                 var failureCallback = function () {
-                    if (!runOnce) {
-                        self.onError();
-                        runOnce = true;
+                    if (runOnce) {
+                        return;
                     }
+
+                    self.onError();
+                    runOnce = true;
                 }
 
                 if (scope) {
