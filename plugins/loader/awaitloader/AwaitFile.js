@@ -24,9 +24,23 @@ class AwaitFile extends Phaser.Loader.File {
             var config = this.config;
             var callback = config.callback;
             var scope = config.scope;
-            var successCallback = this.onLoad.bind(this);
-            var failureCallback = this.onError.bind(this);
             if (callback) {
+
+                var self = this;
+                var runOnce = false;
+                var successCallback = function () {
+                    if (!runOnce) {
+                        self.onLoad();
+                        runOnce = true;
+                    }
+                }
+                var failureCallback = function () {
+                    if (!runOnce) {
+                        self.onError();
+                        runOnce = true;
+                    }
+                }
+
                 if (scope) {
                     callback.call(scope, successCallback, failureCallback);
                 } else {
