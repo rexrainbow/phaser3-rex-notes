@@ -4480,6 +4480,17 @@
         if (setDefaults === undefined) {
           setDefaults = false;
         }
+
+        // Compatible with Text game object
+        if (style && style.hasOwnProperty('wordWrap')) {
+          var wordWrap = style.wordWrap;
+          if (wordWrap.hasOwnProperty('width')) {
+            style.wrap = {
+              mode: 'word',
+              width: wordWrap.width
+            };
+          }
+        }
         if (style && style.hasOwnProperty('wrap')) {
           var wrap = style.wrap;
           if (wrap.hasOwnProperty('mode')) {

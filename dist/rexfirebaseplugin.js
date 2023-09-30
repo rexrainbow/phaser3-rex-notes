@@ -368,9 +368,23 @@
           var config = this.config;
           var callback = config.callback;
           var scope = config.scope;
-          var successCallback = this.onLoad.bind(this);
-          var failureCallback = this.onError.bind(this);
           if (callback) {
+            var self = this;
+            var runOnce = false;
+            var successCallback = function successCallback() {
+              if (runOnce) {
+                return;
+              }
+              self.onLoad();
+              runOnce = true;
+            };
+            var failureCallback = function failureCallback() {
+              if (runOnce) {
+                return;
+              }
+              self.onError();
+              runOnce = true;
+            };
             if (scope) {
               callback.call(scope, successCallback, failureCallback);
             } else {
