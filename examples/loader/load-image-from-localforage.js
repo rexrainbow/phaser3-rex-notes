@@ -45,9 +45,12 @@ var LoadImageFromLocalForage = function (scene, key, sourceURL) {
     });
 }
 
+
 var LoadImageFromUint8Array = function (scene, key, data, onLoad) {
     var blob = new Blob([data]);
     var blobURL = window.URL.createObjectURL(blob);
+
+    // Solution 1
     scene.load.image(key, blobURL);
     scene.load.once(`filecomplete-image-${key}`, function () {
         window.URL.revokeObjectURL(blobURL);
@@ -56,6 +59,18 @@ var LoadImageFromUint8Array = function (scene, key, data, onLoad) {
         }
     });
 
+    // Solution 2
+    /*
+    var img = new Image();
+    img.onload = function () {
+        window.URL.revokeObjectURL(blobURL);
+        scene.sys.textures.addImage(key, img);
+        if (onLoad) {
+            onLoad();
+        }
+    }
+    img.src = blobURL;
+    */
 }
 
 var config = {
