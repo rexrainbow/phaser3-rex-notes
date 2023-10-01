@@ -10,11 +10,11 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        LoadImageFromLocalForage(this, 'mushroom', 'assets/images/mushroom.png')
+        LoadImageFromLocalForage(this, 'classroom', 'assets/images/backgrounds/classroom.png')
     }
 
     create() {
-        this.add.image(400, 300, 'mushroom');
+        this.add.image(400, 300, 'classroom');
     }
 
     update() {
@@ -30,23 +30,32 @@ var LoadImageFromLocalForage = function (scene, key, sourceURL) {
                 scene.load.binary(key, sourceURL, Uint8Array);
 
                 scene.load.once(`filecomplete-binary-${key}`, function () {
-                    var buffer = scene.cache.binary.get(key);
+                    var binaryCache = scene.cache.binary;
+                    var buffer = binaryCache.get(key);
+                    binaryCache.remove(key);
+
                     LoadImageFromUint8Array(scene, key, buffer);
                     localforage.setItem(key, buffer).then(successCallback);
                 });
 
             } else {
-                LoadImageFromUint8Array(scene, key, data);
-                successCallback();
+                LoadImageFromUint8Array(scene, key, data, successCallback);
             }
         })
     });
 }
 
-var LoadImageFromUint8Array = function (scene, key, data) {
+var LoadImageFromUint8Array = function (scene, key, data, onLoad) {
     var blob = new Blob([data]);
     var blobURL = window.URL.createObjectURL(blob);
     scene.load.image(key, blobURL);
+    scene.load.once(`filecomplete-image-${key}`, function () {
+        window.URL.revokeObjectURL(blobURL);
+        if (onLoad) {
+            onLoad();
+        }
+    });
+
 }
 
 var config = {
