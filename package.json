@@ -78,6 +78,7 @@
         "mustache": "^4.2.0",
         "handlebars": "^4.7.7",
         "papaparse": "^5.4.1",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "jszip": "^3.10.1"
     }
 }
