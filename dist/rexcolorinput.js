@@ -18367,7 +18367,7 @@
         swatchSize = GetValue$n(swatchConfig, 'size');
       }
       var swatch = CreateSwatch(scene, GetValue$n(config, 'swatch'));
-      var inputTextConfig = GetValue$n(config, 'inputText', true);
+      var inputTextConfig = GetValue$n(config, 'inputText', {});
       var inputText;
       if (inputTextConfig) {
         inputText = CreateInputText(scene, inputTextConfig);

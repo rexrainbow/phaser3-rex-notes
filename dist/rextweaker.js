@@ -34047,7 +34047,7 @@
         swatchSize = GetValue$c(swatchConfig, 'size');
       }
       var swatch = CreateSwatch(scene, GetValue$c(config, 'swatch'));
-      var inputTextConfig = GetValue$c(config, 'inputText', true);
+      var inputTextConfig = GetValue$c(config, 'inputText', {});
       var inputText;
       if (inputTextConfig) {
         inputText = CreateInputText(scene, inputTextConfig);
@@ -35544,6 +35544,12 @@
       var scene = gameObject.scene;
       gameObject.type = 'rexTweaker.ColorInput';
       var colorInputConfig = style.colorInput;
+      if (colorInputConfig === undefined) {
+        colorInputConfig = {};
+      }
+      if (!colorInputConfig.hasOwnProperty('inputText')) {
+        colorInputConfig.inputText = style.inputText;
+      }
       var colorInput = CreateColorInput(scene, colorInputConfig);
       gameObject.add(colorInput, {
         proportion: 1,

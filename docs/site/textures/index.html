@@ -3892,6 +3892,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#default-textures" class="md-nav__link">
+    Default textures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-key-list-of-all-textures" class="md-nav__link">
+    Get key list of all textures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#texture" class="md-nav__link">
     Texture
   </a>
@@ -3928,15 +3942,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-textures" class="md-nav__link">
-    Default textures
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-key-list-of-all-textures" class="md-nav__link">
-    Get key list of all textures
+  <a href="#get-name-of-frames" class="md-nav__link">
+    Get name of frames
   </a>
   
 </li>
@@ -9639,6 +9646,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#default-textures" class="md-nav__link">
+    Default textures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-key-list-of-all-textures" class="md-nav__link">
+    Get key list of all textures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#texture" class="md-nav__link">
     Texture
   </a>
@@ -9675,15 +9696,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-textures" class="md-nav__link">
-    Default textures
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-key-list-of-all-textures" class="md-nav__link">
-    Get key list of all textures
+  <a href="#get-name-of-frames" class="md-nav__link">
+    Get name of frames
   </a>
   
 </li>
@@ -9837,6 +9851,15 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getBase64</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w">  </span><span class="c1">// type= &#39;image/png&#39;, encoderOptions= 0.92</span>
 <span class="c1">// var s = scene.textures.getBase64(key, frame, type, encoderOptions);</span>
 </code></pre></div>
+<h3 id="default-textures">Default textures<a class="headerlink" href="#default-textures" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Default : <code>'__DEFAULT'</code></li>
+<li>Missing : <code>'__MISSING'</code></li>
+<li>4x4 white : <code>'__WHITE'</code></li>
+</ul>
+<h3 id="get-key-list-of-all-textures">Get key list of all textures<a class="headerlink" href="#get-key-list-of-all-textures" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getTextureKeys</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="texture">Texture<a class="headerlink" href="#texture" title="Permanent link">&para;</a></h3>
 <h4 id="get-texture">Get texture<a class="headerlink" href="#get-texture" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -9857,14 +9880,13 @@
 <h4 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">removed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="default-textures">Default textures<a class="headerlink" href="#default-textures" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Default : <code>'__DEFAULT'</code></li>
-<li>Missing : <code>'__MISSING'</code></li>
-<li>4x4 white : <code>'__WHITE'</code></li>
-</ul>
-<h4 id="get-key-list-of-all-textures">Get key list of all textures<a class="headerlink" href="#get-key-list-of-all-textures" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getTextureKeys</span><span class="p">();</span>
+<h4 id="get-name-of-frames">Get name of frames<a class="headerlink" href="#get-name-of-frames" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getFrameNames</span><span class="p">();</span>
+<span class="c1">// nameList does not include `__BASE`</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getFrameNames</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="c1">// nameList includes `__BASE`</span>
 </code></pre></div>
 <h3 id="frame-object">Frame object<a class="headerlink" href="#frame-object" title="Permanent link">&para;</a></h3>
 <h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
