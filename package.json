@@ -68,7 +68,8 @@
         "terser-webpack-plugin": "^5.3.9",
         "webpack": "^5.82.1",
         "webpack-cli": "^4.10.0",
-        "webpack-shell-plugin": "^0.5.0"
+        "webpack-shell-plugin": "^0.5.0",
+        "jszip": "^3.10.1"
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
@@ -78,7 +79,6 @@
         "mustache": "^4.2.0",
         "handlebars": "^4.7.7",
         "papaparse": "^5.4.1",
-        "webfontloader": "^1.6.28",
-        "jszip": "^3.10.1"
+        "webfontloader": "^1.6.28"
     }
 }
