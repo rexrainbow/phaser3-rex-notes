@@ -237,6 +237,9 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     gameObject.clearTint();     // equal to `gameObject.setTint(0xffffff)`
     ```
 
+!!! note 
+    `gameObject.tint` is a write-only property
+
 ### Blend mode
 
 - Get

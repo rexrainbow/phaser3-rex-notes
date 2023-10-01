@@ -1,14 +1,13 @@
 import Tweaker from '../../ui/tweaker/Tweaker.js';
-import DefaultConfig from './DefaultConfig.js';
-import DeepClone from '../../../plugins/utils/object/DeepClone.js';
+import MergeConfig from './methods/MergeConfig.js';
 import AddProperties from './methods/AddProperties.js';
 
 class PropertiesPanel extends Tweaker {
     constructor(scene, config, extraProperties) {
         if (config === undefined) {
-            config = DeepClone(DefaultConfig);
+            config = {};
         }
-        super(scene, config);
+        super(scene, MergeConfig(config));
 
         AddProperties.call(this, extraProperties);
 

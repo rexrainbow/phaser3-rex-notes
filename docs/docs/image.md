@@ -44,9 +44,9 @@ var image = scene.make.image({
 });
 ```
 
-- `key` : 
+- `key`, `frame` : 
     - A string
-    - An array of string to pick one element at random
+    - An array of string to pick one element at random        
 - `x`, `y`, `scale.x`, `scale.y` :
     - A number
     - A callback to get return value

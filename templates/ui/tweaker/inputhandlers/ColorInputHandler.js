@@ -17,6 +17,12 @@ export default {
         gameObject.type = 'rexTweaker.ColorInput';
 
         var colorInputConfig = style.colorInput;
+        if (colorInputConfig === undefined) {
+            colorInputConfig = {};
+        }
+        if (!colorInputConfig.hasOwnProperty('inputText')) {
+            colorInputConfig.inputText = style.inputText;
+        }
         var colorInput = CreateColorInput(scene, colorInputConfig);
 
         gameObject.add(

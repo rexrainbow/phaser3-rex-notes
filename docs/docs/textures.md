@@ -95,6 +95,18 @@ var s = scene.textures.getBase64(key);  // type= 'image/png', encoderOptions= 0.
 // var s = scene.textures.getBase64(key, frame, type, encoderOptions);
 ```
 
+### Default textures
+
+- Default : `'__DEFAULT'`
+- Missing : `'__MISSING'`
+- 4x4 white : `'__WHITE'`
+
+### Get key list of all textures
+
+```javascript
+var keys = scene.textures.getTextureKeys();
+```
+
 ### Texture
 
 #### Get texture
@@ -127,16 +139,18 @@ var frame = texture.add(frameName, sourceIndex, x, y, width, height);
 var removed = texture.remove(frameName);
 ```
 
-#### Default textures
-
-- Default : `'__DEFAULT'`
-- Missing : `'__MISSING'`
-- 4x4 white : `'__WHITE'`
-
-#### Get key list of all textures
+#### Get name of frames
 
 ```javascript
-var keys = scene.textures.getTextureKeys();
+var nameList = texture.getFrameNames();
+// nameList does not include `__BASE`
+```
+
+or
+
+```javascript
+var nameList = texture.getFrameNames(true);
+// nameList includes `__BASE`
 ```
 
 ### Frame object

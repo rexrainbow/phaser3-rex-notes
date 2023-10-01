@@ -29,7 +29,7 @@ class ColorInput extends Sizer {
         }
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
 
-        var inputTextConfig = GetValue(config, 'inputText', true);
+        var inputTextConfig = GetValue(config, 'inputText', {});
         var inputText;
         if (inputTextConfig) {
             inputText = CreateInputText(scene, inputTextConfig);

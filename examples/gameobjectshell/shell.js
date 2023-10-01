@@ -9,23 +9,25 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.atlas('icons', 'assets/images/icons.png', 'assets/images/icons.json');
     }
 
     create() {
         var shell = this.rexGameObjectShell.add.shell({
-            // extraProperties: [
-            //     {
-            //         bindingKey: 'alpha',
-            //         view: 'range', min: 0, max: 1
-            //     }
-            // ]
+            extraProperties: [
+                {
+                    bindingKey: 'tint',
+                    view: 'color'
+                }
+            ],
         });
 
+        var frameNames = this.sys.textures.get('icons').getFrameNames();
         var gameObjects = [];
         for (var i = 0; i < 10; i++) {
-            var gameObject = this.make.image({
-                key: 'mushroom',
+            let gameObject = this.make.image({
+                key: 'icons',
+                frame: frameNames,
 
                 x: { randFloat: [0, 800] },
                 y: { randFloat: [0, 600] },
@@ -35,6 +37,17 @@ class Demo extends Phaser.Scene {
                 },
                 angle: { randFloat: [0, 360] },
             })
+
+            Object.defineProperty(gameObject, 'tint', {
+                get: function () {
+                    return this.tintTopLeft;
+                },
+
+                set: function (value) {
+                    this.setTint(value, value, value, value);
+                }
+            });
+
             gameObjects.push(gameObject);
         }
 
