@@ -20,24 +20,10 @@ class Demo extends Phaser.Scene {
 
                 var zip = new JSZip();
                 zip.loadAsync(buffer).then(function (contents) {
-                    var loadCounter = 0;
-                    var onLoad = function () {
-                        loadCounter--;
-                        if (loadCounter === 0) {
-                            successCallback();
-                        }
-                    }
-
-                    Object.keys(contents.files).forEach(function (filename) {
-                        loadCounter++;
-                        zip.file(filename).async('arraybuffer').then(function (data) {
-                            LoadImageFromUint8Array(scene, key, data, onLoad);
-                        })
+                    // filename is equal to key
+                    zip.file(key).async('arraybuffer').then(function (data) {
+                        LoadImageFromUint8Array(scene, key, data, successCallback);
                     })
-
-                    if (loadCounter === 0) {
-                        successCallback();
-                    }
                 })
             });
         })
