@@ -29,10 +29,9 @@ var LoadImageFromLocalForage = function (scene, key, sourceURL) {
                 // Load from server
                 scene.load.binary(key, sourceURL, Uint8Array);
 
-                scene.load.once(`filecomplete-binary-${key}`, function () {
-                    var binaryCache = scene.cache.binary;
-                    var buffer = binaryCache.get(key);
-                    binaryCache.remove(key);
+                scene.load.once(`filecomplete-binary-${key}`, function () {                    
+                    var buffer = scene.cache.binary.get(key);
+                    scene.cache.binary.remove(key);
 
                     LoadImageFromUint8Array(scene, key, buffer);
                     localforage.setItem(key, buffer).then(successCallback);

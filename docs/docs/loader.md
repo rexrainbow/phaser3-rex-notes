@@ -188,6 +188,12 @@ var cache = scene.textures;
 var data = cache.get(key);
 ```
 
+On load complete
+
+```javascript
+scene.load.on('filecomplete-atlasjson-' + key, function(key, type, data) {}, scope);
+```
+
 #### Multi file texture atlas
 
 ```javascript

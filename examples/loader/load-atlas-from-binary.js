@@ -17,14 +17,21 @@ class Demo extends Phaser.Scene {
             if (!imageBuffer || !jsonBuffer) {
                 return;
             }
+            this.cache.binary.remove(imageKey);
+            this.cache.binary.remove(jsonKey);
 
-            var imageBlob = new Blob([imageBuffer], { type: `image/${imageType}` });
+            var imageBlob = new Blob([imageBuffer]);
             var imageURL = window.URL.createObjectURL(imageBlob);
 
-            var jsonBlob = new Blob([jsonBuffer], { type: 'application/json' });
+            var jsonBlob = new Blob([jsonBuffer]);
             var jsonURL = window.URL.createObjectURL(jsonBlob);
 
             this.load.atlas(atlasKey, imageURL, jsonURL);
+
+            this.load.once(`filecomplete-atlasjson-${atlasKey}`, function () {
+                window.URL.revokeObjectURL(imageURL);
+                window.URL.revokeObjectURL(jsonURL);
+            });
         };
 
         this.load.binary(imageKey, 'assets/animations/knight.png', Uint8Array);
