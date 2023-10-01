@@ -8,19 +8,22 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        var key = 'card';
-        this.load.binary(key, 'assets/images/card2.png', Uint8Array);
+        var key = 'classroom';
+        this.load.binary(key, 'assets/images/backgrounds/classroom.png', Uint8Array);
         this.load.once(`filecomplete-binary-${key}`, function () {
             var buffer = this.cache.binary.get(key);
 
             var blob = new Blob([buffer], { type: 'image/png' });
             var blobURL = window.URL.createObjectURL(blob);
             this.load.image(key, blobURL);
+            this.load.once(`filecomplete-image-${key}`, function () {
+                window.URL.revokeObjectURL(blobURL);
+            });
         }, this);
     }
 
     create() {
-        this.add.image(400, 300, 'card').setScale(0.3);
+        this.add.image(400, 300, 'classroom');
     }
 
     update() {
