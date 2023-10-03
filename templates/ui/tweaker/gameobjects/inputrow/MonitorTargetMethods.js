@@ -24,7 +24,7 @@ export default {
             return;
         }
 
-        var newValue = this.bindingTarget[this.bindTargetKey];
+        var newValue = this.getTargetValue();
         var inputField = this.childrenMap.inputField;
         if (inputField.value === newValue) {
             return;

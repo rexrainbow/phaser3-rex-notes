@@ -38,16 +38,30 @@ export default {
         return this;
     },
 
+    getTargetValue() {
+        if (!this.bindingTarget) {
+            return undefined;
+        }
+
+        if (this.bindTargetKey != null) {
+            return this.bindingTarget[this.bindTargetKey];
+        }
+
+        // TODO: no bindTargetKey case
+    },
+
     syncTargetValue() {
-        if (!this.bindingTarget || !this.bindTargetKey) {
+        if (!this.bindingTarget) {
             return this;
         }
 
         var inputField = this.childrenMap.inputField;
-        inputField.syncValue(this.bindingTarget[this.bindTargetKey]);
+        if (inputField.syncValue) {
+            inputField.syncValue(this.getTargetValue());
+        } else {
+            // Buttons does not have syncValue method
+        }
 
         return this;
     },
-
-
 }
