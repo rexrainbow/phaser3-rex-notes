@@ -78,6 +78,7 @@ class Demo extends Phaser.Scene {
                 if (this.mainBoard) {
                     this.setAlpha(1);
                 }
+                console.log(mainBoard.getAllChess())
             }, miniBoard);
 
 
