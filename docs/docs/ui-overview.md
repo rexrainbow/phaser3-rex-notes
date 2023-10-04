@@ -645,7 +645,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 1. [Input text](inputtext.md): [Input DOM element](https://www.w3schools.com/tags/tag_input.asp).
     ```javascript
-    var image = scene.rexUI.add.inputText(config);
+    var inputText = scene.rexUI.add.inputText(config);
     ```
     or
     ```javascript
@@ -660,7 +660,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
 1. [File chooser](filechooser.md): Create a transparent file chooser button (`<input type="file">`).
     ```javascript
-    var image = scene.rexUI.add.fileChooser(config);
+    var fileChooser = scene.rexUI.add.fileChooser(config);
     ```
     or
     ```javascript
@@ -675,7 +675,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
 1. [File drop zone](filedropzone.md): Create a div element for dropping file(s).
     ```javascript
-    var image = scene.rexUI.add.fileDropZone(config);
+    var fileDropZone = scene.rexUI.add.fileDropZone(config);
     ```
     or
     ```javascript
