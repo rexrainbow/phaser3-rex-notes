@@ -23,7 +23,9 @@ export default {
 
         gameObject.type = 'rexTweaker.ListInput';
 
-        var list = CreateDropDownList(scene, style.list);
+        var list = CreateDropDownList(scene, style.list)
+            .resetDisplayContent();
+        // Hide icon and actionIcon
 
         gameObject.add(
             list,

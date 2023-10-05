@@ -22,8 +22,8 @@ var CreateInputRow = function (scene, config, style) {
     var background = CreateBackground(scene, backgroundStyle);
 
     var inputRow = new InputRow(scene, {
-        ...config,
         ...style,
+        ...config,  // config can overwrite style
 
         inputTitle: inputTitle,
         inputField: inputField,
@@ -32,6 +32,8 @@ var CreateInputRow = function (scene, config, style) {
     scene.add.existing(inputRow);
 
     inputRow.setTitle(config);
+
+    inputRow.setValueCallbacks(config);
 
     return inputRow;
 }

@@ -1,14 +1,16 @@
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 export default {
     setupBinding() {
         var inputField = this.childrenMap.inputField;
         inputField
             // Set text value to object when closing editor
             .on('valuechange', function (value) {
-                if (!this.bindingTarget || !this.autoUpdateEnable) {
+                if (!this.autoUpdateEnable) {
                     return;
                 }
 
-                this.bindingTarget[this.bindTargetKey] = value;
+                this.setTargetValue(value);
             }, this);
 
         return this;
@@ -38,6 +40,12 @@ export default {
         return this;
     },
 
+    setValueCallbacks(config) {
+        this.onGetValue = GetValue(config, 'onGetValue');
+        this.onSetValue = GetValue(config, 'onSetValue');
+        return this;
+    },
+
     getTargetValue() {
         if (!this.bindingTarget) {
             return undefined;
@@ -47,7 +55,27 @@ export default {
             return this.bindingTarget[this.bindTargetKey];
         }
 
-        // TODO: no bindTargetKey case
+        if (this.onGetValue) {
+            return this.onGetValue(this.bindingTarget);
+        }
+
+        return undefined;
+    },
+
+    setTargetValue(value) {
+        if (!this.bindingTarget) {
+            return this;
+        }
+
+        if (this.bindTargetKey != null) {
+            this.bindingTarget[this.bindTargetKey] = value;
+            return this;
+        }
+
+        if (this.onSetValue) {
+            this.onSetValue(this.bindingTarget, value);
+        }
+        return this;
     },
 
     syncTargetValue() {

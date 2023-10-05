@@ -8694,6 +8694,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#value-callbacks-row" class="md-nav__link">
+    Value callbacks row
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9866,6 +9873,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#value-callbacks-row" class="md-nav__link">
+    Value callbacks row
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11018,6 +11032,67 @@
 </li>
 </ul>
 <p>See <a href="./#styles-of-boolean-input">Styles of boolean input</a></p>
+<h4 id="value-callbacks-row">Value callbacks row<a class="headerlink" href="#value-callbacks-row" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">bindingTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">object</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">onGetValue</span><span class="p">(</span><span class="nx">bindingTarget</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">onSetValue</span><span class="p">(</span><span class="nx">bindingTarget</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">view</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// Other properties..</span>
+
+<span class="w">    </span><span class="c1">// icon: undefined,</span>
+<span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
+<span class="w">    </span><span class="c1">// iconSize: undefined,</span>
+
+<span class="w">    </span><span class="c1">// title: undefined,</span>
+
+<span class="w">    </span><span class="c1">// orientation: &#39;x&#39;,</span>
+
+<span class="w">    </span><span class="c1">// monitor: false,</span>
+
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>bindingTarget</code> : Binding target object.<ul>
+<li>Can bind target later via <code>tweaker.setBindingTarget(object)</code>.</li>
+</ul>
+</li>
+<li><code>onGetValue</code> : Callback to get dispaly value
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">bindingTarget</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>onSetValue</code> : Callback to set value to bindingTarget
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">bindingTarget</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>view</code> : Any kind of view listed before.</li>
+<li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
+<li><code>iconSize</code> : Fixed icon size</li>
+<li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
+<li><code>monitor</code> : <ul>
+<li><code>false</code> : Don't update input text from current object. Default behavior.</li>
+<li><code>true</code> : Update input text from current object, in <code>postupdate</code> event of scene.</li>
+</ul>
+</li>
+<li><code>key</code> : Add this child into childMap, which could be read back by <code>tweaker.getElement(key)</code>.<ul>
+<li><code>undefined</code> : Don't add this child. Default value.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No <code>bindingKey</code> parameter in this case.</p>
+</div>
 <h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addButton</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// bindingTarget: object,</span>

@@ -8,7 +8,11 @@ declare namespace PropertiesPanel {
     }
 
     interface IPropertyConfig extends Tweaker.IAddInputConfig {
-
+        colors?: {
+            primary?: number,
+            light?: number,
+            dark?: number,
+        }
     }
 }
 

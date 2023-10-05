@@ -13,16 +13,32 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var frameNames = this.sys.textures.get('icons').getFrameNames();
+
         var shell = this.rexGameObjectShell.add.shell({
             extraProperties: [
                 {
                     bindingKey: 'tint',
                     view: 'color'
+                },
+                {
+                    title: 'frame',
+                    view: 'list',
+                    options: frameNames.map(function (value) {
+                        return { text: value, value: value }
+                    }),
+
+                    onGetValue(gameObject) {
+                        return gameObject.frame.name;
+                    },
+                    onSetValue(gameObject, value) {
+                        gameObject.setFrame(value);
+                    }
                 }
             ],
         });
 
-        var frameNames = this.sys.textures.get('icons').getFrameNames();
+
         var gameObjects = [];
         for (var i = 0; i < 10; i++) {
             let gameObject = this.make.image({

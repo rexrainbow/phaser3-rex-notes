@@ -976,6 +976,66 @@ tweaker.addInput({
 See [Styles of boolean input](ui-tweaker.md#styles-of-boolean-input)
 
 
+#### Value callbacks row
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+
+    onGetValue(bindingTarget) {
+
+    },
+
+    onSetValue(bindingTarget, value) {
+
+    },
+    
+    view: ,
+
+    // Other properties..
+    
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+    
+    // orientation: 'x',
+
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `onGetValue` : Callback to get dispaly value
+    ```javascript
+    function(bindingTarget) {
+        return value;
+    }
+    ```
+- `onSetValue` : Callback to set value to bindingTarget
+    ```javascript
+    function(bindingTarget, value) {        
+    }
+    ```
+- `view` : Any kind of view listed before.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` : 
+    - `false` : Don't update input text from current object. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+!!! note
+    No `bindingKey` parameter in this case.
+
+
 ### Add button
 
 ```javascript

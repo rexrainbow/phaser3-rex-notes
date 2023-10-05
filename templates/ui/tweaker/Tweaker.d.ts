@@ -126,6 +126,9 @@ declare namespace Tweaker {
         bindingKey?: string,
         autoUpdate?: boolean,
 
+        onGetValue?: (bindingTarget: Object) => unknown,
+        onSetValue?: (bindingTarget: Object, value: undefined) => void,
+
         view?: string,
 
         icon?: string,
