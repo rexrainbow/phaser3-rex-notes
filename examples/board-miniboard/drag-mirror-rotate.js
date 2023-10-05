@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        var grid = getQuadGrid(this);
+        var grid = getHexagonGrid(this);
 
         var mainBoard = this.rexBoard.add.board({
             grid: grid,
@@ -34,8 +34,9 @@ class Demo extends Phaser.Scene {
             }, this);
 
 
-        var miniBoard = this.rexBoard.add.miniBoard(100, 100, {
-            grid: grid
+        var miniBoard = this.rexBoard.add.miniBoard(300, 100, {
+            grid: grid,
+            draggable: true
         });
         var map = [
             '0  ',
@@ -51,7 +52,29 @@ class Demo extends Phaser.Scene {
                 }
             }
         }
-        miniBoard.putOnMainBoard(mainBoard, 4, 4, true);
+
+        miniBoard
+        .on('dragstart', function (pointer, dragX, dragY) {
+            this.pullOutFromMainBoard();
+            this.setAlpha(0.3);
+        }, miniBoard)
+        .on('drag', function (pointer, dragX, dragY) {
+            this.setPosition(dragX, dragY);
+            if (this.isOverlapping(mainBoard)) {
+                this.setAlpha(0.7);
+                this.alignToMainBoard(mainBoard);
+            } else {
+                this.setAlpha(0.3);
+            }
+        }, miniBoard)
+        .on('dragend', function (pointer, dragX, dragY) {
+            this.putOnMainBoard(mainBoard);
+            if (this.mainBoard) {
+                this.setAlpha(1);
+            }
+            console.log(mainBoard.getAllChess())
+        }, miniBoard);
+
 
         this.add.text(20, 20, 'Mirror X')
             .setInteractive()
