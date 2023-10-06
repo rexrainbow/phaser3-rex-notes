@@ -37130,12 +37130,12 @@
     }
     return undefined;
   };
-  var GetOptionText = function GetOptionText(options, value) {
+  var GetOption = function GetOption(options, value) {
     var index = GetOptionIndex(options, value);
     if (index == null) {
       return undefined;
     }
-    return options[index].text;
+    return options[index];
   };
 
   var SetOptions$1 = function SetOptions(gameObject, options) {
@@ -37154,9 +37154,7 @@
     build: function build(gameObject, style) {
       var scene = gameObject.scene;
       gameObject.type = 'rexTweaker.ListInput';
-      var list = CreateDropDownList(scene, style.list).resetDisplayContent();
-      // Hide icon and actionIcon
-
+      var list = CreateDropDownList(scene, style.list);
       gameObject.add(list, {
         proportion: 1,
         expand: true,
@@ -37175,10 +37173,8 @@
     // Callback inside `setValue()`
     displayValue: function displayValue(gameObject, value) {
       var list = gameObject.getElement('list');
-      var text = GetOptionText(list.options, value);
-      list.resetDisplayContent({
-        text: text
-      });
+      var option = GetOption(list.options, value);
+      list.resetDisplayContent(option).setMinSize(list.width, list.height).layout().setMinSize(0, 0);
     }
   };
 
@@ -37340,7 +37336,7 @@
           strokeColor: 0xffffff
         },
         inputRow: {
-          height: 30,
+          height: 36,
           space: {
             top: 5,
             bottom: 5,
@@ -37392,11 +37388,14 @@
             label: {
               space: {
                 left: 5,
-                right: 5
+                right: 5,
+                icon: 5
               },
               background: {
                 color: COLOR_DARK
-              }
+              },
+              iconSize: 24,
+              action: null
             },
             button: {
               space: {
