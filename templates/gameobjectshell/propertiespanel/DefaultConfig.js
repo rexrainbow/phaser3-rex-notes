@@ -20,7 +20,7 @@ export default function (colors) {
             },
 
             inputRow: {
-                height: 30,
+                height: 36,
                 space: {
                     top: 5, bottom: 5,
                     title: 20
@@ -70,10 +70,12 @@ export default function (colors) {
 
                 list: {
                     label: {
-                        space: { left: 5, right: 5 },
+                        space: { left: 5, right: 5, icon: 5 },
                         background: {
                             color: COLOR_DARK,
                         },
+                        iconSize: 24,
+                        action: null
                     },
                     button: {
                         space: { left: 5, right: 5, top: 8, bottom: 8 },

@@ -1,5 +1,5 @@
 import CreateDropDownList from './utils/CreateDropDownList.js';
-import { GetOptionText } from './utils/OptionsMethods.js';
+import { GetOption } from './utils/OptionsMethods.js';
 
 var SetOptions = function (gameObject, options) {
     var list = gameObject.getElement('list');
@@ -23,9 +23,7 @@ export default {
 
         gameObject.type = 'rexTweaker.ListInput';
 
-        var list = CreateDropDownList(scene, style.list)
-            .resetDisplayContent();
-        // Hide icon and actionIcon
+        var list = CreateDropDownList(scene, style.list);
 
         gameObject.add(
             list,
@@ -47,7 +45,12 @@ export default {
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
         var list = gameObject.getElement('list');
-        var text = GetOptionText(list.options, value);
-        list.resetDisplayContent({ text: text });
+        var option = GetOption(list.options, value);        
+        list
+            .resetDisplayContent(option)
+            .setMinSize(list.width, list.height)
+            .layout()
+            .setMinSize(0, 0);
+
     },
 }

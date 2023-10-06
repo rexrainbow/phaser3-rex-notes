@@ -16,6 +16,9 @@ class Demo extends Phaser.Scene {
         var frameNames = this.sys.textures.get('icons').getFrameNames();
 
         var shell = this.rexGameObjectShell.add.shell({
+            panel: {
+                width: 300,
+            },
             extraProperties: [
                 {
                     bindingKey: 'tint',
@@ -25,7 +28,12 @@ class Demo extends Phaser.Scene {
                     title: 'frame',
                     view: 'list',
                     options: frameNames.map(function (value) {
-                        return { text: value, value: value }
+                        return {
+                            text: value,
+                            icon: 'icons',
+                            iconFrame: value,
+                            value: value
+                        }
                     }),
 
                     onGetValue(gameObject) {

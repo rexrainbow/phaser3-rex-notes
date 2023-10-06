@@ -8,16 +8,16 @@ var GetOptionIndex = function (options, value) {
     return undefined;
 }
 
-var GetOptionText = function (options, value) {
+var GetOption = function (options, value) {
     var index = GetOptionIndex(options, value);
     if (index == null) {
         return undefined;
     }
 
-    return options[index].text;
+    return options[index];
 }
 
 export {
     GetOptionIndex,
-    GetOptionText,
+    GetOption,
 }
