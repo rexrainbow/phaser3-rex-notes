@@ -184,7 +184,7 @@ var SetupContent = function (panel) {
 
 var CreatePanel = function (scene) {
     return scene.rexUI.add.tweaker({
-        width: 300,
+        width: 340,
 
         styles: {
             background: {
