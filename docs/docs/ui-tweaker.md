@@ -423,8 +423,8 @@ tweaker.addInput(object, key, {
     // orientation: 'x',
 
     options: [
-        {text: text0, value: value0},
-        {text: text1, value: value1},
+        {text: text0, value: value0, /* icon: , iconFrame, .. */ },
+        {text: text1, value: value1, /* icon: , iconFrame, .. */ },
         // ...
     ],
     
@@ -451,8 +451,8 @@ tweaker.addInput({
     // orientation: 'x',
 
     options: [
-        {text: text0, value: value0},
-        {text: text1, value: value1},
+        {text: text0, value: value0, /* icon: , iconFrame, .. */ },
+        {text: text1, value: value1, /* icon: , iconFrame, .. */ },
         // ...
     ],
     
@@ -472,6 +472,7 @@ tweaker.addInput({
 - `options` : Option list, each item contains
     - `text` : Display text.
     - `value` : Set `key` to this value.
+    - `icon`, `iconFrame`, ... : See [Reset display content of Label](ui-label.md#reset-display-content)
 - `monitor` : 
     - `false` : Don't update input text from current object. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
@@ -1675,6 +1676,12 @@ Style of text/number list input is defined in
                         left: 0, right: 0, top: 0, bottom:0, 
                         icon: 0, text: 0
                     }
+                },
+
+                list: {
+                    alignParent: 'text',
+                    alignSide: 'left',
+                    expandDirection: 'down',
                 }
             },
 
