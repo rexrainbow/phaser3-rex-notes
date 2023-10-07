@@ -36745,9 +36745,7 @@
     var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
     listConfig.list = config.list || {};
     listConfig.list.createButtonCallback = function (scene, option) {
-      var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator).resetDisplayContent({
-        text: option.text
-      });
+      var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator).resetDisplayContent(option);
       if (option.hasOwnProperty('value')) {
         gameObject.value = option.value;
       }
@@ -37336,7 +37334,7 @@
           strokeColor: 0xffffff
         },
         inputRow: {
-          height: 36,
+          height: 30,
           space: {
             top: 5,
             bottom: 5,
@@ -37388,14 +37386,11 @@
             label: {
               space: {
                 left: 5,
-                right: 5,
-                icon: 5
+                right: 5
               },
               background: {
                 color: COLOR_DARK
-              },
-              iconSize: 24,
-              action: null
+              }
             },
             button: {
               space: {
@@ -37507,7 +37502,15 @@
       if (key === 'styles') {
         var sourceStyles = sourceConfig.styles;
         for (var styleKey in extraData) {
-          sourceStyles[styleKey] = extraData[styleKey];
+          var styleValue = extraData[styleKey];
+          if (styleKey === 'inputRow') {
+            var sourceInputRowStyle = sourceStyles.inputRow;
+            for (var inputRowStyleKey in styleValue) {
+              sourceInputRowStyle[inputRowStyleKey] = styleValue[inputRowStyleKey];
+            }
+          } else {
+            sourceStyles[styleKey] = styleValue;
+          }
         }
       } else {
         sourceConfig[key] = extraData;

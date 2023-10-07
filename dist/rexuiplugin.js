@@ -53075,9 +53075,7 @@
     var listConfig = BuildLabelConfig(scene, labelConfig, labelCreator);
     listConfig.list = config.list || {};
     listConfig.list.createButtonCallback = function (scene, option) {
-      var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator).resetDisplayContent({
-        text: option.text
-      });
+      var gameObject = CreateLabel(scene, listButtonConfig, listButtonCreator).resetDisplayContent(option);
       if (option.hasOwnProperty('value')) {
         gameObject.value = option.value;
       }
