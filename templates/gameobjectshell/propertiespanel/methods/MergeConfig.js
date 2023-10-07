@@ -7,7 +7,15 @@ var MergeConfig = function (extraConfig) {
         if (key === 'styles') {
             var sourceStyles = sourceConfig.styles;
             for (var styleKey in extraData) {
-                sourceStyles[styleKey] = extraData[styleKey];
+                var styleValue = extraData[styleKey];
+                if (styleKey === 'inputRow') {
+                    var sourceInputRowStyle = sourceStyles.inputRow;
+                    for (var inputRowStyleKey in styleValue) {
+                        sourceInputRowStyle[inputRowStyleKey] = styleValue[inputRowStyleKey];
+                    }
+                } else {
+                    sourceStyles[styleKey] = styleValue;
+                }
             }
         } else {
             sourceConfig[key] = extraData;

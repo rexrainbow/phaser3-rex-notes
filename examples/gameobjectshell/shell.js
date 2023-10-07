@@ -1,6 +1,11 @@
 import phaser from 'phaser/src/phaser.js';
 import GameObjectShellPlugin from '../../templates/gameobjectshell/gameobjectshell-plugin.js';
 
+const COLOR_PRIMARY = 0x424242;
+const COLOR_LIGHT = 0x6d6d6d;
+const COLOR_DARK = 0x1b1b1b;
+
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -18,6 +23,35 @@ class Demo extends Phaser.Scene {
         var shell = this.rexGameObjectShell.add.shell({
             panel: {
                 width: 300,
+                styles: {
+                    inputRow: {
+                        list: {
+                            label: {
+                                space: { left: 5, right: 5, icon: 5 },
+                                background: {
+                                    color: COLOR_DARK,
+                                },
+                                iconSize: 24,
+                                action: null
+                            },
+                            button: {
+                                space: { left: 5, right: 5, top: 8, bottom: 8 },
+                                background: {
+                                    color: COLOR_DARK,
+                                    strokeColor: COLOR_LIGHT,
+
+                                    'hover.color': COLOR_LIGHT,
+                                },
+                                iconSize: 24,
+                                action: null
+                            },
+
+                            list: {
+                                alignParent: 'icon'
+                            }
+                        },
+                    }
+                }
             },
             extraProperties: [
                 {
