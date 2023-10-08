@@ -21,6 +21,13 @@ class Shell extends ComponentBase {
 
         this.addControlPoints(config);
 
+        /*
+
+        - Click game object on 'monitor' layer to open properties editor
+        - Click background (outside of any game object) will set binding target to undefined, 
+          also set properties editor to invisible
+
+        */
     }
 
     shutdown(fromScene) {

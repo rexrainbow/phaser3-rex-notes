@@ -12,7 +12,6 @@ var SetBindingTarget = function (target) {
 
     if (target) {
         this
-            .setVisible(true)
             .setOrigin(target.originX, target.originY)
             .setPosition(target.x, target.y)
             .setAngle(target.angle)
@@ -23,9 +22,6 @@ var SetBindingTarget = function (target) {
         this
             .layout()
             .startMonitorTarget();
-
-    } else {
-        this.setVisible(false);
 
     }
 

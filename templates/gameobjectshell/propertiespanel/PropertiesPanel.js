@@ -13,12 +13,6 @@ class PropertiesPanel extends Tweaker {
 
         this.setVisible(false);
     }
-
-    setBindingTarget(target) {
-        this.setVisible(!!target);
-        super.setBindingTarget(target);
-        return this;
-    }
 }
 
 export default PropertiesPanel;
