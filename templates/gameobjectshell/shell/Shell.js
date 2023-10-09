@@ -1,5 +1,6 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
 import Methods from './methods/Methods.js';
+import { OnSelectGameObject, OnUnSelectGameObject } from './methods/SelectGameObjectMethods.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -12,6 +13,9 @@ class Shell extends ComponentBase {
 
         super(scene, config);
         // this.scene
+
+        this.onSelectGameObjectCallback = GetValue(config, 'onSelectGameObject', OnSelectGameObject);
+        this.onUnSelectGameObjectCallback = GetValue(config, 'onUnSelectGameObject', OnUnSelectGameObject);
 
         this.addLayerManager(config);
 

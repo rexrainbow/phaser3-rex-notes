@@ -46,13 +46,14 @@ export default {
             gameObject.setInteractive();
 
             if (!gameObject.removeFromMonitorLayerCallback) {
-                var OnOpenEditor = function () {
-                    self.setBindingTarget(gameObject);
+                var shell = this;
+                var onSelectGameObject = function () {
+                    shell.onSelectGameObjectCallback(shell, gameObject);
                 }
-                gameObject.on('pointerdown', OnOpenEditor);
+                gameObject.on('pointerdown', onSelectGameObject);
                 gameObject.removeFromMonitorLayerCallback = function () {
                     gameObject.removeFromMonitorLayerCallback = undefined;
-                    gameObject.off('pointerdown', OnOpenEditor);
+                    gameObject.off('pointerdown', onSelectGameObject);
                 }
             }
         }

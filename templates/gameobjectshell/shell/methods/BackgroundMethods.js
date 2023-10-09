@@ -6,9 +6,14 @@ export default {
         this.scene.add.existing(background);
         this.addToBackgroundLayer(background);
 
+        var shell = this;
+        var onUnSelectGameObject = function () {
+            shell.onUnSelectGameObjectCallback(shell);
+        }
+
         background
             .setInteractive()
-            .on('pointerdown', this.clearBindingTarget, this)
+            .on('pointerdown', onUnSelectGameObject)
 
         this.background = background;
 

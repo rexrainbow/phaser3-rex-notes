@@ -10,6 +10,7 @@ export default {
         var extraProperties = GetValue(config, 'extraProperties', {});
 
         var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
+        panel.setScrollFactor(0);
 
         this.scene.add.existing(panel);
         panel.layout();
