@@ -7,6 +7,16 @@ export default Shell;
 
 declare namespace Shell {
     interface IConfig {
+        onSelectGameObject?: (
+            shell: Shell,
+            gameObject: Phaser.GameObjects.GameObject
+        ) => void;
+
+        onUnSelectGameObject?: (
+            shell: Shell
+        ) => void;
+
+
         // LayerManager
         layers?: [string, string, string],
         layerManager?: LayerManager,
