@@ -995,6 +995,7 @@
             this.parent.stop();
             break;
           case 2:
+            this.parent.stop();
             this.parent.destroy();
             break;
         }
