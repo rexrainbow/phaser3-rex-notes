@@ -49,9 +49,11 @@ class Demo extends Phaser.Scene {
             })
             .on('areaover', function (key) {
                 print.text += `Over area:${key}\n`;
+                //scene.input.manager.canvas.style.cursor = 'pointer';
             })
             .on('areaout', function (key) {
                 print.text += `Out area:${key}\n`;
+                //scene.input.manager.canvas.style.cursor = '';
             })
 
     }
