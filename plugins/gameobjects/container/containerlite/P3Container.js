@@ -17,11 +17,14 @@ var AddToContainer = function (p3Container) {
     SortGameObjectsByDepth(gameObjects);
 
     p3Container.add(gameObjects);
-
-    return this;
 }
 
 var RemoveFromContainer = function (p3Container, descending, addToScene) {
+    if (!this.scene) {
+        // Destroyed
+        return;
+    }
+
     var gameObjects = GetValidChildren(this);
 
     SortGameObjectsByDepth(gameObjects, descending);
@@ -33,8 +36,6 @@ var RemoveFromContainer = function (p3Container, descending, addToScene) {
             gameObject.addToDisplayList();
         });
     }
-
-    return this;
 }
 
 export default {
