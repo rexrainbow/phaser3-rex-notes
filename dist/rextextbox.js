@@ -2591,9 +2591,12 @@
     var gameObjects = GetValidChildren(this);
     SortGameObjectsByDepth(gameObjects);
     p3Container.add(gameObjects);
-    return this;
   };
   var RemoveFromContainer = function RemoveFromContainer(p3Container, descending, addToScene) {
+    if (!this.scene) {
+      // Destroyed
+      return;
+    }
     var gameObjects = GetValidChildren(this);
     SortGameObjectsByDepth(gameObjects, descending);
     p3Container.remove(gameObjects);
@@ -2602,7 +2605,6 @@
         gameObject.addToDisplayList();
       });
     }
-    return this;
   };
   var P3Container = {
     addToContainer: function addToContainer(p3Container) {

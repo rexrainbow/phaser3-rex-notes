@@ -1505,9 +1505,12 @@
     var gameObjects = GetValidChildren(this);
     SortGameObjectsByDepth(gameObjects);
     p3Container.add(gameObjects);
-    return this;
   };
   var RemoveFromContainer = function RemoveFromContainer(p3Container, descending, addToScene) {
+    if (!this.scene) {
+      // Destroyed
+      return;
+    }
     var gameObjects = GetValidChildren(this);
     SortGameObjectsByDepth(gameObjects, descending);
     p3Container.remove(gameObjects);
@@ -1516,7 +1519,6 @@
         gameObject.addToDisplayList();
       });
     }
-    return this;
   };
   var P3Container = {
     addToContainer: function addToContainer(p3Container) {
@@ -38789,20 +38791,24 @@
   Object.assign(Methods, LayerManagerMethods, BackgroundMethods, PropertiesPanelMethods, ControlPointsMethods, BindingTargetMethods);
 
   var OnSelectGameObject = function OnSelectGameObject(shell, gameObject) {
-    var camera = shell.scene.cameras.main;
-    if (shell.lastCameraScrollX == undefined) {
-      shell.lastCameraScrollX = camera.scrollX;
-      shell.lastCameraScrollY = camera.scrollY;
+    if (shell.centerSelectedGameObject) {
+      var camera = shell.scene.cameras.main;
+      if (shell.lastCameraScrollX == undefined) {
+        shell.lastCameraScrollX = camera.scrollX;
+        shell.lastCameraScrollY = camera.scrollY;
+      }
     }
     camera.centerOn(gameObject.x, gameObject.y);
     shell.setBindingTarget(gameObject);
   };
   var OnUnSelectGameObject = function OnUnSelectGameObject(shell) {
-    if (shell.lastCameraScrollX !== undefined) {
-      var camera = shell.scene.cameras.main;
-      camera.setScroll(shell.lastCameraScrollX, shell.lastCameraScrollY);
-      shell.lastCameraScrollX = undefined;
-      shell.lastCameraScrollY = undefined;
+    if (shell.centerSelectedGameObject) {
+      if (shell.lastCameraScrollX !== undefined) {
+        var camera = shell.scene.cameras.main;
+        camera.setScroll(shell.lastCameraScrollX, shell.lastCameraScrollY);
+        shell.lastCameraScrollX = undefined;
+        shell.lastCameraScrollY = undefined;
+      }
     }
     shell.clearBindingTarget();
   };
@@ -38820,6 +38826,7 @@
       _this = _super.call(this, scene, config);
       // this.scene
 
+      _this.centerSelectedGameObject = GetValue(config, 'centerSelectedGameObject', true);
       _this.onSelectGameObjectCallback = GetValue(config, 'onSelectGameObject', OnSelectGameObject);
       _this.onUnSelectGameObjectCallback = GetValue(config, 'onUnSelectGameObject', OnUnSelectGameObject);
       _this.addLayerManager(config);
