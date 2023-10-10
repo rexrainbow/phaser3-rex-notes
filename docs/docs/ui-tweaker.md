@@ -1073,6 +1073,62 @@ tweaker.addButton({
 
 See [Styles of botton](ui-tweaker.md#styles-of-botton)
 
+### Add buttons
+
+```javascript
+tweaker.addButtons({
+    // bindingTarget: object,
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    title: undefined,
+
+    buttons:[
+        {
+            label: undefined,
+            callback: function(target) {},
+        },
+        {
+            label: undefined,
+            callback: function(target) {},
+        },
+        // ...
+    ],
+
+    wrap: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target will pass to callback. Optional.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label.
+- `buttons` : Array of button label and button callback
+    ```javascript
+    {
+        label: undefined,
+        callback: function(target) {},
+    }
+    ```
+    - `label` : Display text of button.
+    - `callback` : Callback when clicking button
+        ```javascript
+        function(target) { }
+        ```
+- `wrap` : Layout mode of buttons.
+    - `true` : [fixwidth-sizer](ui-fixwidthsizer.md) layout.
+    - `false` : [sizer](ui-sizer.md) layout. Default behavior.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Styles of botton](ui-tweaker.md#styles-of-botton)
+
 
 ### Add separator
 

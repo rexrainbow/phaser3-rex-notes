@@ -225,9 +225,9 @@ var dropDownList = scene.rexUI.add.dropDownList({
     
             }
             ```
-    - `list.wrap` : 
-        - `true` : [fixwidth-sizer](ui-fixwidthsizer.md) layout, a row within buttons.
-        - `false` : [sizer](ui-sizer.md) layout, a row within a button. Default behavior.
+    - `list.wrap` : Layout mode of buttons
+        - `true` : [fixwidth-sizer](ui-fixwidthsizer.md) layout.
+        - `false` : [sizer](ui-sizer.md) layout. Default behavior.
     - `list.width` : Minimum width.
         - `undefined` : Minimum width of panel will equal to width of parent label. Default value.
         - A number : Width of panel. Required fields when `list.wrap` is `true`.
