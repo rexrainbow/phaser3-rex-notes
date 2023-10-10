@@ -338,6 +338,12 @@ label.resetDisplayContent({
 })
 ```
 
+or
+
+```javascript
+label.resetDisplayContent(text);
+```
+
 - `text` : Set text string.
 - `icon`, `iconFrame`
     - A string : Set texture of icon game object.

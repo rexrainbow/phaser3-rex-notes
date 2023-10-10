@@ -1062,7 +1062,21 @@ tweaker.addButton({
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label.
-- `label` : Display text of button.
+- `label` : Display text of button, [a string or a plain object](ui-label.md#reset-display-content).
+    ```javascript
+    {
+        text: '',
+    
+        icon: undefined, 
+        iconFrame: undefined,
+        iconSize: undefined,
+    
+        action: undefined, 
+        actionFrame: undefined,
+        actionSize: undefined,
+    
+    }
+    ```
 - `callback` : Callback when clicking button
     ```javascript
     function(target) { }
@@ -1115,7 +1129,21 @@ tweaker.addButtons({
         callback: function(target) {},
     }
     ```
-    - `label` : Display text of button.
+    - `label` : Display text of button, [a string or a plain object](ui-label.md#reset-display-content).
+        ```javascript
+        {
+            text: '',
+        
+            icon: undefined, 
+            iconFrame: undefined,
+            iconSize: undefined,
+        
+            action: undefined, 
+            actionFrame: undefined,
+            actionSize: undefined,
+        
+        }
+    ```
     - `callback` : Callback when clicking button
         ```javascript
         function(target) { }
