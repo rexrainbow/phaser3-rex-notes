@@ -177,8 +177,26 @@ declare namespace Tweaker {
         title: string,
 
         label: string,
-
         callback: (bindingTarget: Object) => void,
+
+        key?: string,
+    }
+
+    interface IAddButtonsConfig {
+        bindingTarget?: Object,
+
+        icon?: string,
+        iconFrame?: string,
+        iconSize?: number,
+
+        title: string,
+
+        buttons: {
+            label: string,
+            callback: (bindingTarget: Object) => void,
+        }[],
+
+        wrap?: boolean,
 
         key?: string,
     }
@@ -258,6 +276,10 @@ declare class Tweaker extends Sizer {
 
     addButton(
         config: Tweaker.IAddButtonConfig
+    ): this;
+
+    addButtons(
+        config: Tweaker.IAddButtonsConfig
     ): this;
 
     addSeparator(): this;

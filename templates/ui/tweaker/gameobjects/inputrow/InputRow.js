@@ -31,7 +31,10 @@ class InputRow extends Sizer {
             { proportion: proportion, expand: true, padding: padding }
         );
 
-        var defaultProportion = (config.parentOrientation === 1) ? 1 : 0;
+        var defaultProportion = inputField.defaultProportion;
+        if (defaultProportion === undefined) {
+            defaultProportion = (config.parentOrientation === 1) ? 1 : 0;
+        }
         var proportion = GetValue(config, 'proportion.inputField', defaultProportion);
         this.add(
             inputField,

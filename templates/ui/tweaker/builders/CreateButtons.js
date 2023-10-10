@@ -25,10 +25,13 @@ var CreateButtons = function (scene, config, style) {
         })
         button.callback = buttonConfig.callback;
     }
+
     var buttonsSizer = CreateButtonsSizer(scene, {
         buttons: buttons,
-        expand: (buttons.length === 1),
-    })
+        expand: true,
+        wrap: GetValue(config, 'wrap', false)
+    });
+    buttonsSizer.defaultProportion = 1;
 
     // Background
     var backgroundStyle = GetValue(style, 'background') || {};

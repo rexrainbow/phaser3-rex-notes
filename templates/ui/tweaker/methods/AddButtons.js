@@ -9,15 +9,6 @@ var AddButtons = function (config) {
         config = {};
     }
 
-    if (config.hasOwnProperty('label')) {
-        config.buttons = [{
-            label: config.label,
-            callback: config.callback
-        }];
-        delete config.label;
-        delete config.callback;
-    }
-
     var target = config.bindingTarget;
     delete config.bindingTarget;
 
