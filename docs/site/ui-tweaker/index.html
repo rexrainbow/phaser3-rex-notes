@@ -8714,6 +8714,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-buttons" class="md-nav__link">
+    Add buttons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-separator" class="md-nav__link">
     Add separator
   </a>
@@ -9893,6 +9900,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-buttons" class="md-nav__link">
+    Add buttons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-separator" class="md-nav__link">
     Add separator
   </a>
@@ -10486,8 +10500,8 @@
 <span class="w">    </span><span class="c1">// orientation: &#39;x&#39;,</span>
 
 <span class="w">    </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text0</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text1</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text0</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* icon: , iconFrame, .. */</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text1</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="cm">/* icon: , iconFrame, .. */</span><span class="w"> </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">],</span>
 
@@ -10511,8 +10525,8 @@
 <span class="w">    </span><span class="c1">// orientation: &#39;x&#39;,</span>
 
 <span class="w">    </span><span class="nx">options</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text0</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text1</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text0</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* icon: , iconFrame, .. */</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text1</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="cm">/* icon: , iconFrame, .. */</span><span class="w"> </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">],</span>
 
@@ -10534,6 +10548,7 @@
 <li><code>options</code> : Option list, each item contains<ul>
 <li><code>text</code> : Display text.</li>
 <li><code>value</code> : Set <code>key</code> to this value.</li>
+<li><code>icon</code>, <code>iconFrame</code>, ... : See <a href="../ui-label/#reset-display-content">Reset display content of Label</a></li>
 </ul>
 </li>
 <li><code>monitor</code> : <ul>
@@ -11118,12 +11133,95 @@
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label.</li>
-<li><code>label</code> : Display text of button.</li>
+<li><code>label</code> : Display text of button, <a href="../ui-label/#reset-display-content">a string or a plain object</a>.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">iconFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">iconSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">actionFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">actionSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
 <li><code>callback</code> : Callback when clicking button
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div></li>
 <li><code>key</code> : Add this child into childMap, which could be read back by <code>tweaker.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Don't add this child. Default value.</li>
+</ul>
+</li>
+</ul>
+<p>See <a href="./#styles-of-botton">Styles of botton</a></p>
+<h3 id="add-buttons">Add buttons<a class="headerlink" href="#add-buttons" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addButtons</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// bindingTarget: object,</span>
+
+<span class="w">    </span><span class="c1">// icon: undefined,</span>
+<span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
+<span class="w">    </span><span class="c1">// iconSize: undefined,</span>
+
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">buttons</span><span class="o">:</span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">],</span>
+
+<span class="w">    </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>bindingTarget</code> : Binding target will pass to callback. Optional.<ul>
+<li>Can bind target later via <code>tweaker.setBindingTarget(object)</code>.</li>
+</ul>
+</li>
+<li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
+<li><code>iconSize</code> : Fixed icon size</li>
+<li><code>title</code> : Display text of title-label.</li>
+<li><code>buttons</code> : Array of button label and button callback
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>
+<p><code>label</code> : Display text of button, <a href="../ui-label/#reset-display-content">a string or a plain object</a>.
+    ```javascript
+    {
+        text: '',</p>
+<div class="codehilite"><pre><span></span><code>icon: undefined, 
+iconFrame: undefined,
+iconSize: undefined,
+
+action: undefined, 
+actionFrame: undefined,
+actionSize: undefined,
+</code></pre></div>
+
+<p>}
+    <code>``
+    -</code>callback<code>: Callback when clicking button
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+-</code>wrap<code>: Layout mode of buttons.
+    -</code>true<code>: [fixwidth-sizer](ui-fixwidthsizer.md) layout.
+    -</code>false<code>: [sizer](ui-sizer.md) layout. Default behavior.
+-</code>key<code>: Add this child into childMap, which could be read back by</code>tweaker.getElement(key)<code>.
+    -</code>undefined` : Don't add this child. Default value.</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -11700,6 +11798,12 @@
 <span class="w">                        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                        </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
 <span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">list</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">alignParent</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">alignSide</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">expandDirection</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;down&#39;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">},</span>
 
