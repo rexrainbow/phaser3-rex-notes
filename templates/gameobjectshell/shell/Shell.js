@@ -14,6 +14,7 @@ class Shell extends ComponentBase {
         super(scene, config);
         // this.scene
 
+        this.centerSelectedGameObject = GetValue(config, 'centerSelectedGameObject', true);
         this.onSelectGameObjectCallback = GetValue(config, 'onSelectGameObject', OnSelectGameObject);
         this.onUnSelectGameObjectCallback = GetValue(config, 'onUnSelectGameObject', OnUnSelectGameObject);
 
