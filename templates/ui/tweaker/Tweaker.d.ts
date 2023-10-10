@@ -85,6 +85,10 @@ declare namespace Tweaker {
         }
     }
 
+    interface IOptionConfig extends SimpleLabel.IResetDisplayContentConfig {
+        value: any
+    }
+
     interface IConfig extends Sizer.IConfig {
         styles: {
             itemWidth?: number,
@@ -143,10 +147,7 @@ declare namespace Tweaker {
         min?: number, max?: number,
 
         // list, buttons
-        options?: {
-            text: string,
-            value: any
-        }[],
+        options?: IOptionConfig[],
 
         format: (value?: any) => string,
 
@@ -176,7 +177,7 @@ declare namespace Tweaker {
 
         title: string,
 
-        label: string,
+        label: string | SimpleLabel.IResetDisplayContentConfig,
         callback: (bindingTarget: Object) => void,
 
         key?: string,
@@ -192,7 +193,7 @@ declare namespace Tweaker {
         title: string,
 
         buttons: {
-            label: string,
+            label: string | SimpleLabel.IResetDisplayContentConfig,
             callback: (bindingTarget: Object) => void,
         }[],
 

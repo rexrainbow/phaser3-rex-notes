@@ -9,6 +9,9 @@ declare namespace SimpleLabel {
 
     interface ICreatorsConfig extends BuildLabelConfig.ICreators {
     }
+
+    interface IResetDisplayContentConfig extends Label.IResetDisplayContentConfig {
+    }
 }
 
 declare class SimpleLabel extends Label {

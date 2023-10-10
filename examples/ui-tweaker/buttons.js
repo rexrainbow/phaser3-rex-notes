@@ -23,7 +23,12 @@ class Demo extends Phaser.Scene {
             .addButton({
                 title: 'Button A',
 
-                label: 'Button A',
+                // label: 'Button A',
+                label: {
+                    text: 'Button A',
+                    icon: 'settings',
+                    iconSize: 20
+                },
                 callback: function () {
                     print.text += 'Click Button A\n';
                 }

@@ -20,9 +20,7 @@ var CreateButtons = function (scene, config, style) {
         buttons.push(button);
 
         var buttonConfig = buttonsConfig[i];
-        button.resetDisplayContent({
-            text: buttonConfig.label
-        })
+        button.resetDisplayContent(buttonConfig.label);
         button.callback = buttonConfig.callback;
     }
 
