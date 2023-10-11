@@ -1,4 +1,7 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
+import CreateBackground from './methods/CreateBackground.js';
+import CreatePropertiesPanel from './methods/CreatePropertiesPanel.js';
+import CreateControlPoints from './methods/CreateControlPoints.js';
 import Methods from './methods/Methods.js';
 import { OnSelectGameObject, OnUnSelectGameObject } from './methods/SelectGameObjectMethods.js';
 
@@ -20,11 +23,11 @@ class Shell extends ComponentBase {
 
         this.addLayerManager(config);
 
-        this.addBackground(config);
+        CreateBackground.call(this, config);
 
-        this.addPropertiesPanel(config)
+        CreatePropertiesPanel.call(this, config);
 
-        this.addControlPoints(config);
+        CreateControlPoints.call(this, config);
 
         /*
 
