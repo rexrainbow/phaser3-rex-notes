@@ -2641,7 +2641,7 @@
   };
   Object.assign(Methods$9, MonitorTargetMethods$1);
 
-  var DefaultConfig$2 = {
+  var DefaultConfig$1 = {
     boundsRectangle: {
       color: 0x555555
     },
@@ -2904,7 +2904,7 @@
       var _this;
       _classCallCheck(this, ControlPoints);
       if (config === undefined) {
-        config = DeepClone(DefaultConfig$2);
+        config = DeepClone(DefaultConfig$1);
       }
       _this = _super.call(this, scene, 0, 0, 1, 1);
       _this.childrenMap = {};
@@ -38748,7 +38748,7 @@
   }(TweakerShell);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-  function DefaultConfig$1 (colors) {
+  function DefaultConfig (colors) {
     var COLOR_PRIMARY = GetValue$4(colors, 'primary', 0x424242);
     var COLOR_LIGHT = GetValue$4(colors, 'light', 0x6d6d6d);
     var COLOR_DARK = GetValue$4(colors, 'dark', 0x1b1b1b);
@@ -38929,7 +38929,7 @@
   }
 
   var MergeConfig = function MergeConfig(extraConfig) {
-    var sourceConfig = DefaultConfig$1(extraConfig);
+    var sourceConfig = DefaultConfig(extraConfig);
     for (var key in extraConfig) {
       var extraData = extraConfig[key];
       if (key === 'styles') {
@@ -39121,44 +39121,45 @@
     }, this);
   };
 
-  var CreatePanPinchCameraController = function CreatePanPinchCameraController(config) {
+  var PanScrollPinchZoom = function PanScrollPinchZoom(panScrollEnable, pinchZoomEnable) {
+    if (!panScrollEnable && !pinchZoomEnable) {
+      return;
+    }
     var scene = this.scene;
     var gameObject = this.background ? this.background : scene;
     var pinch = new Pinch(gameObject);
     var camera = scene.cameras.main;
-    pinch.on('drag1', function (pinch) {
-      var drag1Vector = pinch.drag1Vector;
-      camera.scrollX -= drag1Vector.x;
-      camera.scrollY -= drag1Vector.y;
-    }).on('pinch', function (pinch) {
-      var scaleFactor = pinch.scaleFactor;
-      camera.zoom *= scaleFactor;
-    }, this);
-    var onWheeling = function onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
-      camera.zoom += (dy < 0 ? 1 : -1) * 0.05;
-    };
-    scene.input.on('wheel', onWheeling, this);
+    if (panScrollEnable) {
+      pinch.on('drag1', function (pinch) {
+        var drag1Vector = pinch.drag1Vector;
+        var zoom = camera.zoom;
+        camera.scrollX -= drag1Vector.x / zoom;
+        camera.scrollY -= drag1Vector.y / zoom;
+      });
+    }
+    if (pinchZoomEnable) {
+      pinch.on('pinch', function (pinch) {
+        var scaleFactor = pinch.scaleFactor;
+        camera.zoom *= scaleFactor;
+      });
+    }
     this.once('destroy', function () {
       pinch.destroy();
       pinch = undefined;
-      scene.input.off('wheel', onWheeling, this);
     });
   };
 
-  var CreateCursorAtBoundsCameraController = function CreateCursorAtBoundsCameraController(config) {
+  var BoundsScroll = function BoundsScroll() {
     var scene = this.scene;
+    var camera = scene.cameras.main;
     var cursorAtBounds = new CursorAtBounds(scene);
     var cursorKeys = cursorAtBounds.createCursorKeys();
-    var mouseWheelToUpDown = new MouseWheelToUpDown(scene);
-    var zoomKeys = mouseWheelToUpDown.createCursorKeys();
     var cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
-      camera: scene.cameras.main,
+      camera: camera,
       left: cursorKeys.left,
       right: cursorKeys.right,
       up: cursorKeys.up,
       down: cursorKeys.down,
-      zoomIn: zoomKeys.down,
-      zoomOut: zoomKeys.up,
       acceleration: 0.06,
       drag: 0.003,
       maxSpeed: 0.3,
@@ -39174,28 +39175,39 @@
       scene.events.off('preupdate', UpdateCameraController);
       cursorAtBounds.destroy();
       cursorAtBounds = undefined;
-      mouseWheelToUpDown.destroy();
-      mouseWheelToUpDown = undefined;
       cameraController.destroy();
       cameraController = undefined;
       cursorKeys = undefined;
-      zoomKeys = undefined;
     }, this);
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var DefaultConfig = {
-    type: 'pan-pinch'
+  var MouseWheelZoom = function MouseWheelZoom() {
+    var scene = this.scene;
+    var camera = scene.cameras.main;
+    var onWheeling = function onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
+      camera.zoom += (dy < 0 ? 1 : -1) * 0.05;
+    };
+    scene.input.on('wheel', onWheeling, this);
+    this.once('destroy', function () {
+      scene.input.off('wheel', onWheeling, this);
+    });
   };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var CreateCameraController = function CreateCameraController(config) {
-    var cameraControllerConfig = GetValue$1(config, 'cameraController', DefaultConfig);
-    switch (cameraControllerConfig.type) {
-      case 'pan-pinch':
-        CreatePanPinchCameraController.call(this, cameraControllerConfig);
-        break;
-      case 'cursorAtBounds':
-        CreateCursorAtBoundsCameraController.call(this, cameraControllerConfig);
-        break;
+    var cameraControllerConfig = GetValue$1(config, 'camera');
+    var panScrollEnable = GetValue$1(cameraControllerConfig, 'pan-scroll', true);
+    var pinchZoomEnable = GetValue$1(cameraControllerConfig, 'pinch-zoom', true);
+    var boundsScrollEnable = GetValue$1(cameraControllerConfig, 'bounds-scroll', true);
+    var mouseWheelZoomEnable = GetValue$1(cameraControllerConfig, 'mouse-wheel-zoom', true);
+    if (panScrollEnable || pinchZoomEnable) {
+      PanScrollPinchZoom.call(this, panScrollEnable, pinchZoomEnable);
+    }
+    if (boundsScrollEnable) {
+      BoundsScroll.call(this);
+    }
+    if (mouseWheelZoomEnable) {
+      MouseWheelZoom.call(this);
     }
   };
 
