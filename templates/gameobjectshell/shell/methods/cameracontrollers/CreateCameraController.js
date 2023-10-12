@@ -1,22 +1,27 @@
-import CreatePanPinchCameraController from './CreatePanPinchCameraController.js';
-import CreateCursorAtBoundsCameraController from './CreateCursorAtBoundsCameraController.js';
+import PanScrollPinchZoom from './PanScrollPinchZoom.js';
+import BoundsScroll from './BoundsScroll.js';
+import MouseWheelZoom from './MouseWheelZoom.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DefaultConfig = { type: 'pan-pinch' };
 
 var CreateCameraController = function (config) {
-    var cameraControllerConfig = GetValue(config, 'cameraController', DefaultConfig);
+    var cameraControllerConfig = GetValue(config, 'camera');
+    var panScrollEnable = GetValue(cameraControllerConfig, 'pan-scroll', true);
+    var pinchZoomEnable = GetValue(cameraControllerConfig, 'pinch-zoom', true);
+    var boundsScrollEnable = GetValue(cameraControllerConfig, 'bounds-scroll', true);
+    var mouseWheelZoomEnable = GetValue(cameraControllerConfig, 'mouse-wheel-zoom', true);
 
-    switch (cameraControllerConfig.type) {
-        case 'pan-pinch':
-            CreatePanPinchCameraController.call(this, cameraControllerConfig);
-            break;
-
-        case 'cursorAtBounds':
-            CreateCursorAtBoundsCameraController.call(this, cameraControllerConfig);
-            break;
+    if (panScrollEnable || pinchZoomEnable) {
+        PanScrollPinchZoom.call(this, panScrollEnable, pinchZoomEnable)
     }
 
+    if (boundsScrollEnable) {
+        BoundsScroll.call(this);
+    }
+
+    if (mouseWheelZoomEnable) {
+        MouseWheelZoom.call(this);
+    }
 }
 
 export default CreateCameraController;

@@ -10,6 +10,7 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 - [Tweaker](https://codepen.io/rexrainbow/pen/YzvPOGM)
 - [Bind target](https://codepen.io/rexrainbow/pen/vYraBBY)
 - [Horizontal tweaker](https://codepen.io/rexrainbow/pen/MWBGqzN)
+- [Buttons](https://codepen.io/rexrainbow/pen/vYvbpXY)
 
 ## Usage
 

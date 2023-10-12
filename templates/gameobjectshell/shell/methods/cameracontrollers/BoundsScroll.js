@@ -1,24 +1,20 @@
 import CursorAtBounds from '../../../cursoratbounds/CursorAtBounds.js';
-import MouseWhellToUpDown from '../../../mousewheeltoupdown/MouseWheelToUpDown.js';
 
-var CreateCursorAtBoundsCameraController = function (config) {
+var BoundsScroll = function () {
     var scene = this.scene;
+
+    var camera = scene.cameras.main;
 
     var cursorAtBounds = new CursorAtBounds(scene);
     var cursorKeys = cursorAtBounds.createCursorKeys();
 
-    var mouseWheelToUpDown = new MouseWhellToUpDown(scene);
-    var zoomKeys = mouseWheelToUpDown.createCursorKeys();
-
     var cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
-        camera: scene.cameras.main,
+        camera: camera,
 
         left: cursorKeys.left,
         right: cursorKeys.right,
         up: cursorKeys.up,
         down: cursorKeys.down,
-        zoomIn: zoomKeys.down,
-        zoomOut: zoomKeys.up,
 
         acceleration: 0.06,
         drag: 0.003,
@@ -41,15 +37,11 @@ var CreateCursorAtBoundsCameraController = function (config) {
         cursorAtBounds.destroy();
         cursorAtBounds = undefined;
 
-        mouseWheelToUpDown.destroy();
-        mouseWheelToUpDown = undefined;
-
         cameraController.destroy();
         cameraController = undefined;
 
         cursorKeys = undefined;
-        zoomKeys = undefined;
     }, this);
 }
 
-export default CreateCursorAtBoundsCameraController;
+export default BoundsScroll;
