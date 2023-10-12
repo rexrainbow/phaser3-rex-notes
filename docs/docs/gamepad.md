@@ -22,7 +22,7 @@ Gamepad's state of buttons, or axis.
     scene.input.gamepad.once('down', function (gamepad, button, value) {
     }
     ```
-    - `gamepad` : A reference to the Gamepad on which the button was released. See [Properties of gamepad](gamepad.md#properties-of-gamepad)
+    - `gamepad` : A reference to the Gamepad on which the button was released. See [Properties of gamepad](gamepad.md#properties)
     - `button` : A reference to the Button which was released.
     - `value` : The value of the button at the time it was released. Between 0 and 1. Some Gamepads have pressure-sensitive buttons.
 

@@ -226,7 +226,7 @@ nav:
         - Slider: slider.md
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
-        - Cursor at bound: cursoratbound.md
+        - Cursor at bounds: cursoratbounds.md
         - Drag rotate: dragrotate.md
         - Touch event stop: toucheventstop.md
         - In touching: intouching.md
