@@ -21,6 +21,7 @@ class CursorAtBounds extends CursorKeys {
 
     boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
+        this.scene.input.on('gameout', this.clearAllKeysState, this);
         this.scene.sys.events.once('shutdown', this.destroy, this);
     }
 
@@ -30,6 +31,7 @@ class CursorAtBounds extends CursorKeys {
         }
 
         this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.input.off('gameout', this.clearAllKeysState, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
 
