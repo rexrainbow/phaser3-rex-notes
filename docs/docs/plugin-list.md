@@ -46,7 +46,7 @@
 1. [Containerlite-skew](containerlite-skew.md): Snapshot children of containerlite, to a skew render texture.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
-1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
+1. [Cursor at bound](cursoratbounds.md): Map position pf cursor to cursor key state.
 1. [Curve/Spiral](curve-spiral.md): Spiral curve.
 1. [Cut Jigsaw Image](cutjigsawimage.md): Cut image into pieces for jigsaw application.
 1. [Drag](drag.md): Drag game object.

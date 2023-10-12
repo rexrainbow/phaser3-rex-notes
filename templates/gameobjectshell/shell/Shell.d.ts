@@ -7,8 +7,6 @@ export default Shell;
 
 declare namespace Shell {
     interface IConfig {
-        centerSelectedGameObject?: boolean,
-
         onSelectGameObject?: (
             shell: Shell,
             gameObject: Phaser.GameObjects.GameObject

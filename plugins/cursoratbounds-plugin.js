@@ -1,6 +1,6 @@
-import CursorAtBound from './cursoratbound.js';
+import CursorAtBounds from './cursoratbounds.js';
 
-class CursorAtBoundPlugin extends Phaser.Plugins.BasePlugin {
+class CursorAtBoundsPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -12,9 +12,9 @@ class CursorAtBoundPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, config) {
-        return new CursorAtBound(scene, config);
+        return new CursorAtBounds(scene, config);
     }
 
 }
 
-export default CursorAtBoundPlugin;
+export default CursorAtBoundsPlugin;

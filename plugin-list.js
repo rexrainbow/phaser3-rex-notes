@@ -66,7 +66,7 @@ module.exports = {
     'clickoutsideplugin': './plugins/clickoutside-plugin.js',
     'touchcursorplugin': './plugins/touchcursor-plugin.js',
     'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
-    'cursoratboundplugin': './plugins/cursoratbound-plugin.js',
+    'cursoratboundsplugin': './plugins/cursoratbounds-plugin.js',
     'mousewheeltoupdownplugin': './plugins/mousewheeltoupdown-plugin.js',
     'mousewheelscrollerplugin': './plugins/mousewheelscroller-plugin.js',
     'pinchplugin': './plugins/pinch-plugin.js',

@@ -3,7 +3,7 @@ import GetViewport from '../../utils/system/GetViewport.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class CursorAtBound extends CursorKeys {
+class CursorAtBounds extends CursorKeys {
     constructor(scene, config) {
         super(scene);
 
@@ -81,4 +81,4 @@ class CursorAtBound extends CursorKeys {
     }
 }
 
-export default CursorAtBound;
+export default CursorAtBounds;

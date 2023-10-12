@@ -15885,7 +15885,7 @@
   };
   Object.assign(NinePatch.prototype, Methods$7);
 
-  var CreateBackground$1 = function CreateBackground(scene, config) {
+  var CreateBackground$2 = function CreateBackground(scene, config) {
     var gameObjectType;
     if (config) {
       if (config.hasOwnProperty('type')) {
@@ -23321,7 +23321,7 @@
     }
   };
 
-  var BackgroundMethods$1 = {
+  var BackgroundMethods = {
     setBackgroundColor: function setBackgroundColor(color, color2, isHorizontalGradient) {
       this.background.setColor(color, color2, isHorizontalGradient);
       return this;
@@ -23396,7 +23396,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$5, MoveChildMethods, BackgroundMethods$1, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods$1);
+  Object.assign(Methods$5, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods$1);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -23608,7 +23608,7 @@
   var GetValue$11 = Phaser.Utils.Objects.GetValue;
   var BuildLabelConfig = function BuildLabelConfig(scene, config, creators) {
     config = config ? DeepClone(config) : {};
-    var createBackground = GetValue$11(creators, 'background', CreateBackground$1);
+    var createBackground = GetValue$11(creators, 'background', CreateBackground$2);
     var createText = GetValue$11(creators, 'text', CreateText);
     var createIcon = GetValue$11(creators, 'icon', CreateImage);
     var createAction = GetValue$11(creators, 'action', CreateImage);
@@ -25440,9 +25440,9 @@
     return tweaker;
   };
 
-  var CreateBackground = function CreateBackground(scene, config, style) {
+  var CreateBackground$1 = function CreateBackground(scene, config, style) {
     // TODO: Might create nine-slice as background
-    return CreateBackground$1(scene, style);
+    return CreateBackground$2(scene, style);
   };
 
   var Transition = /*#__PURE__*/function (_OpenCloseTransition) {
@@ -25706,7 +25706,7 @@
     };
     var child = CreateTweaker(scene, tweakerConfig);
     var backgroundStyle = GetValue$Z(style, 'background');
-    var background = CreateBackground(scene, config, backgroundStyle);
+    var background = CreateBackground$1(scene, config, backgroundStyle);
     var folder = new Folder(scene, {
       orientation: 1,
       title: title,
@@ -28311,7 +28311,7 @@
 
     // Background
     var backgroundStyle = GetValue$J(style, 'background') || {};
-    var background = CreateBackground$1(scene, backgroundStyle);
+    var background = CreateBackground$2(scene, backgroundStyle);
     var inputRow = new InputRow(scene, _objectSpread2(_objectSpread2(_objectSpread2({}, style), config), {}, {
       // config can overwrite style
 
@@ -28492,7 +28492,7 @@
 
     // Create separator
     var separatorStyle = GetValue$F(this.styles, 'separator');
-    var separator = CreateBackground(scene, config, separatorStyle);
+    var separator = CreateBackground$1(scene, config, separatorStyle);
 
     // Add separator
     this.add(separator, {
@@ -28602,7 +28602,7 @@
         _this.alignInputRowTitle = false;
         _this.inputHandlers = _this.root.inputHandlers;
       }
-      var background = CreateBackground(scene, undefined, config.background);
+      var background = CreateBackground$1(scene, undefined, config.background);
       if (background) {
         _this.addBackground(background);
       }
@@ -31690,13 +31690,13 @@
       var thumb = GetValue$t(config, 'thumb', undefined);
       if (background) {
         if (IsPlainObject$3(background)) {
-          background = CreateBackground$1(scene, background);
+          background = CreateBackground$2(scene, background);
         }
         _this.addBackground(background);
       }
       if (track) {
         if (IsPlainObject$3(track)) {
-          track = CreateBackground$1(scene, track);
+          track = CreateBackground$2(scene, track);
         }
         _this.add(track, {
           proportion: 1,
@@ -31707,14 +31707,14 @@
       }
       if (indicator) {
         if (IsPlainObject$3(indicator)) {
-          indicator = CreateBackground$1(scene, indicator);
+          indicator = CreateBackground$2(scene, indicator);
         }
         _this.pin(indicator); // Put into container but not layout it
       }
 
       if (thumb) {
         if (IsPlainObject$3(thumb)) {
-          thumb = CreateBackground$1(scene, thumb);
+          thumb = CreateBackground$2(scene, thumb);
         }
         _this.pin(thumb); // Put into container but not layout it
       }
@@ -35916,7 +35916,7 @@
         var background = GetValue$c(colorPickerConfig, 'background');
         if (background) {
           createBackgroundCallback = function createBackgroundCallback(scene) {
-            return CreateBackground$1(scene, background);
+            return CreateBackground$2(scene, background);
           };
         } else {
           createBackgroundCallback = GetValue$c(colorPickerConfig, 'createBackgroundCallback');
@@ -38659,6 +38659,43 @@
   });
   SetValue(window, 'RexPlugins.GameObjectShell.LayerManager', LayerManager);
 
+  var CreateBackground = function CreateBackground(config) {
+    var background = new FullWindowRectangle(this.scene);
+    this.scene.add.existing(background);
+    this.addToBackgroundLayer(background);
+    var shell = this;
+    var onUnSelectGameObject = function onUnSelectGameObject() {
+      shell.onUnSelectGameObjectCallback(shell);
+    };
+    background.setInteractive().on('pointerdown', onUnSelectGameObject);
+    this.background = background;
+  };
+
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var CreatePropertiesPanel = function CreatePropertiesPanel(config) {
+    var panelConfig = GetValue$2(config, 'panel', {});
+    var unknowPositon = panelConfig.x === undefined && panelConfig.y === undefined;
+    var extraProperties = GetValue$2(config, 'extraProperties', {});
+    var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
+    panel.setScrollFactor(0);
+    this.scene.add.existing(panel);
+    panel.layout();
+    this.addToUILayer(panel);
+    if (unknowPositon) {
+      panel.left = 0;
+      panel.top = 0;
+    }
+    this.panel = panel;
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var CreateControlPoints = function CreateControlPoints(config) {
+    var controlPoints = new ControlPoints(this.scene, GetValue$1(config, 'controlPoints'));
+    this.scene.add.existing(controlPoints);
+    this.addToUILayer(controlPoints);
+    this.controlPoints = controlPoints;
+  };
+
   var LayerManagerMethods = {
     addLayerManager: function addLayerManager(config) {
       var layers = config.layers;
@@ -38738,52 +38775,6 @@
     }
   };
 
-  var BackgroundMethods = {
-    addBackground: function addBackground(config) {
-      var background = new FullWindowRectangle(this.scene);
-      this.scene.add.existing(background);
-      this.addToBackgroundLayer(background);
-      var shell = this;
-      var onUnSelectGameObject = function onUnSelectGameObject() {
-        shell.onUnSelectGameObjectCallback(shell);
-      };
-      background.setInteractive().on('pointerdown', onUnSelectGameObject);
-      this.background = background;
-      return this;
-    }
-  };
-
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var PropertiesPanelMethods = {
-    addPropertiesPanel: function addPropertiesPanel(config) {
-      var panelConfig = GetValue$2(config, 'panel', {});
-      var unknowPositon = panelConfig.x === undefined && panelConfig.y === undefined;
-      var extraProperties = GetValue$2(config, 'extraProperties', {});
-      var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
-      panel.setScrollFactor(0);
-      this.scene.add.existing(panel);
-      panel.layout();
-      this.addToUILayer(panel);
-      if (unknowPositon) {
-        panel.left = 0;
-        panel.top = 0;
-      }
-      this.panel = panel;
-      return this;
-    }
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var ControlPointsMethods = {
-    addControlPoints: function addControlPoints(config) {
-      var controlPoints = new ControlPoints(this.scene, GetValue$1(config, 'controlPoints'));
-      this.scene.add.existing(controlPoints);
-      this.addToUILayer(controlPoints);
-      this.controlPoints = controlPoints;
-      return this;
-    }
-  };
-
   var BindingTargetMethods = {
     setBindingTarget: function setBindingTarget(target) {
       this.panel.setBindingTarget(target);
@@ -38800,28 +38791,12 @@
   };
 
   var Methods = {};
-  Object.assign(Methods, LayerManagerMethods, BackgroundMethods, PropertiesPanelMethods, ControlPointsMethods, BindingTargetMethods);
+  Object.assign(Methods, LayerManagerMethods, BindingTargetMethods);
 
   var OnSelectGameObject = function OnSelectGameObject(shell, gameObject) {
-    if (shell.centerSelectedGameObject) {
-      var camera = shell.scene.cameras.main;
-      if (shell.lastCameraScrollX == undefined) {
-        shell.lastCameraScrollX = camera.scrollX;
-        shell.lastCameraScrollY = camera.scrollY;
-      }
-    }
-    camera.centerOn(gameObject.x, gameObject.y);
     shell.setBindingTarget(gameObject);
   };
   var OnUnSelectGameObject = function OnUnSelectGameObject(shell) {
-    if (shell.centerSelectedGameObject) {
-      if (shell.lastCameraScrollX !== undefined) {
-        var camera = shell.scene.cameras.main;
-        camera.setScroll(shell.lastCameraScrollX, shell.lastCameraScrollY);
-        shell.lastCameraScrollX = undefined;
-        shell.lastCameraScrollY = undefined;
-      }
-    }
     shell.clearBindingTarget();
   };
 
@@ -38838,13 +38813,12 @@
       _this = _super.call(this, scene, config);
       // this.scene
 
-      _this.centerSelectedGameObject = GetValue(config, 'centerSelectedGameObject', true);
       _this.onSelectGameObjectCallback = GetValue(config, 'onSelectGameObject', OnSelectGameObject);
       _this.onUnSelectGameObjectCallback = GetValue(config, 'onUnSelectGameObject', OnUnSelectGameObject);
       _this.addLayerManager(config);
-      _this.addBackground(config);
-      _this.addPropertiesPanel(config);
-      _this.addControlPoints(config);
+      CreateBackground.call(_assertThisInitialized(_this), config);
+      CreatePropertiesPanel.call(_assertThisInitialized(_this), config);
+      CreateControlPoints.call(_assertThisInitialized(_this), config);
 
       /*
         - Click game object on 'monitor' layer to open properties editor

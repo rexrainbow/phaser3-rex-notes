@@ -19,11 +19,11 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexcursoratboundplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcursoratboundplugin.min.js', true);
+    scene.load.plugin('rexcursoratboundsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcursoratboundsplugin.min.js', true);
     ```
 - Add cursor-at-bound object
     ```javascript
-    var cursorAtBound = scene.plugins.get('rexcursoratboundplugin').add(scene, config);
+    var cursorAtBound = scene.plugins.get('rexcursoratboundsplugin').add(scene, config);
     ```
 
 #### Import plugin
@@ -34,13 +34,13 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CursorAtBoundPlugin from 'phaser3-rex-plugins/plugins/cursoratbound-plugin.js';
+    import CursorAtBoundsPlugin from 'phaser3-rex-plugins/plugins/cursoratboundss-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexCursorAtBound',
-                plugin: CursorAtBoundPlugin,
+                key: 'rexCursorAtBounds',
+                plugin: CursorAtBoundsPlugin,
                 start: true
             },
             // ...
@@ -52,7 +52,7 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
     ```
 - Add cursor-at-bound object
     ```javascript
-    var cursorAtBound = scene.plugins.get('rexCursorAtBound').add(scene, config);
+    var cursorAtBound = scene.plugins.get('rexCursorAtBounds').add(scene, config);
     ```
 
 #### Import class
@@ -63,17 +63,17 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
     ```
 - Import class
     ```javascript
-    import CursorAtBound from 'phaser3-rex-plugins/plugins/cursoratbound.js';
+    import CursorAtBounds from 'phaser3-rex-plugins/plugins/cursoratboundss.js';
     ```
 - Add cursor-at-bound object
     ```javascript
-    var cursorAtBound = new CursorAtBound(scene, config);
+    var cursorAtBound = new CursorAtBounds(scene, config);
     ```
 
 ### Create instance
 
 ```javascript
-var cursorAtBound = scene.plugins.get('rexCursorAtBound').add(scene, {
+var cursorAtBound = scene.plugins.get('rexCursorAtBounds').add(scene, {
     // bounds: undefined,
     // sensitiveDistance: 20,
 });

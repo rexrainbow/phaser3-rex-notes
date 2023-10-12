@@ -1,16 +1,16 @@
-export default CursorAtBound;
+export default CursorAtBounds;
 
-declare namespace CursorAtBound {
+declare namespace CursorAtBounds {
     interface IConfig {
         bounds?: Phaser.Geom.Rectangle,
         sensitiveDistance?: number,
     }
 }
 
-declare class CursorAtBound {
+declare class CursorAtBounds {
     constructor(
         scene: Phaser.Scene,
-        config?: CursorAtBound.IConfig
+        config?: CursorAtBounds.IConfig
     )
 
     createCursorKeys(): {

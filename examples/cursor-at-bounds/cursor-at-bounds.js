@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
+import CursorAtBoundsPlugin from '../../plugins/cursoratbounds-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.cursorAtBounds = this.plugins.get('rexCursorAtBound').add(this, {
+        this.cursorAtBounds = this.plugins.get('rexCursorAtBounds').add(this, {
             sensitiveDistance: 20,
             // bounds: new Phaser.Geom.Rectangle(x, y, width, height)
         });
@@ -44,8 +44,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCursorAtBound',
-            plugin: CursorAtBoundPlugin,
+            key: 'rexCursorAtBounds',
+            plugin: CursorAtBoundsPlugin,
             start: true
         }]
     }

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcursoratboundplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcursoratboundsplugin = factory());
 })(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
@@ -262,12 +262,12 @@
   var globRect = new Rectangle();
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var CursorAtBound = /*#__PURE__*/function (_CursorKeys) {
-    _inherits(CursorAtBound, _CursorKeys);
-    var _super = _createSuper(CursorAtBound);
-    function CursorAtBound(scene, config) {
+  var CursorAtBounds = /*#__PURE__*/function (_CursorKeys) {
+    _inherits(CursorAtBounds, _CursorKeys);
+    var _super = _createSuper(CursorAtBounds);
+    function CursorAtBounds(scene, config) {
       var _this;
-      _classCallCheck(this, CursorAtBound);
+      _classCallCheck(this, CursorAtBounds);
       _this = _super.call(this, scene);
       _this.scene = scene;
       _this.sensitiveDistance = GetValue(config, 'sensitiveDistance', 20);
@@ -279,7 +279,7 @@
       _this.boot();
       return _this;
     }
-    _createClass(CursorAtBound, [{
+    _createClass(CursorAtBounds, [{
       key: "boot",
       value: function boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
@@ -294,7 +294,7 @@
         this.scene.input.off('pointermove', this.onPointerMove, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
-        _get(_getPrototypeOf(CursorAtBound.prototype), "shutdown", this).call(this);
+        _get(_getPrototypeOf(CursorAtBounds.prototype), "shutdown", this).call(this);
       }
     }, {
       key: "destroy",
@@ -347,17 +347,17 @@
         return this.noKeyDown;
       }
     }]);
-    return CursorAtBound;
+    return CursorAtBounds;
   }(CursorKeys);
 
-  var CursorAtBoundPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(CursorAtBoundPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(CursorAtBoundPlugin);
-    function CursorAtBoundPlugin(pluginManager) {
-      _classCallCheck(this, CursorAtBoundPlugin);
+  var CursorAtBoundsPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(CursorAtBoundsPlugin, _Phaser$Plugins$BaseP);
+    var _super = _createSuper(CursorAtBoundsPlugin);
+    function CursorAtBoundsPlugin(pluginManager) {
+      _classCallCheck(this, CursorAtBoundsPlugin);
       return _super.call(this, pluginManager);
     }
-    _createClass(CursorAtBoundPlugin, [{
+    _createClass(CursorAtBoundsPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -366,12 +366,12 @@
     }, {
       key: "add",
       value: function add(scene, config) {
-        return new CursorAtBound(scene, config);
+        return new CursorAtBounds(scene, config);
       }
     }]);
-    return CursorAtBoundPlugin;
+    return CursorAtBoundsPlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  return CursorAtBoundPlugin;
+  return CursorAtBoundsPlugin;
 
 }));
