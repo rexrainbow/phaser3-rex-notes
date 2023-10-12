@@ -283,6 +283,7 @@
       key: "boot",
       value: function boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
+        this.scene.input.on('gameout', this.clearAllKeysState, this);
         this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
@@ -292,6 +293,7 @@
           return;
         }
         this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.input.off('gameout', this.clearAllKeysState, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
         _get(_getPrototypeOf(CursorAtBounds.prototype), "shutdown", this).call(this);

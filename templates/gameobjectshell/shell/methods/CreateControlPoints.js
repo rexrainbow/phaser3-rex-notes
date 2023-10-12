@@ -8,6 +8,12 @@ var CreateControlPoints = function (config) {
     this.addToUILayer(controlPoints);
 
     this.controlPoints = controlPoints;
+
+    this.once('destroy', function () {
+        this.controlPoints.destroy();
+        this.controlPoints = undefined;
+    }, this);
+
 }
 
 export default CreateControlPoints;

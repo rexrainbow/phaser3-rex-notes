@@ -21,6 +21,12 @@ var CreatePropertiesPanel = function (config) {
     }
 
     this.panel = panel;
+
+    this.once('destroy', function () {
+        this.panel.destroy();
+        this.panel = undefined;
+    }, this);
+
 }
 
 export default CreatePropertiesPanel;

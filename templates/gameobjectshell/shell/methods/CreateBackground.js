@@ -15,6 +15,12 @@ var CreateBackground = function (config) {
         .on('pointerdown', onUnSelectGameObject)
 
     this.background = background;
+
+    this.once('destroy', function () {
+        this.background.destroy();
+        this.background = undefined;
+    }, this);
+
 }
 
 export default CreateBackground;
