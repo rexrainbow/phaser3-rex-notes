@@ -15,8 +15,10 @@ var PanScrollPinchZoom = function (panScrollEnable, pinchZoomEnable) {
     if (panScrollEnable) {
         pinch.on('drag1', function (pinch) {
             var drag1Vector = pinch.drag1Vector;
-            camera.scrollX -= drag1Vector.x;
-            camera.scrollY -= drag1Vector.y;
+
+            var zoom = camera.zoom;
+            camera.scrollX -= drag1Vector.x / zoom;
+            camera.scrollY -= drag1Vector.y / zoom;
         })
     }
 
