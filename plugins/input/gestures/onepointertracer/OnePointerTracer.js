@@ -13,7 +13,7 @@ class OnePointerTracer extends TickTask {
 
         this.gameObject = gameObject;
         if (gameObject) {
-            gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+            gameObject.setInteractive(GetValue(config, 'inputConfig', undefined));
         }
         this._enable = undefined;
         this.resetFromJSON(config);

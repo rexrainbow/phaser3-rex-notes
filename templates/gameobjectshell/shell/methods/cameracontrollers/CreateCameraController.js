@@ -1,17 +1,19 @@
-import CreateCursorAtBoundsCameraController from "./CreateCursorAtBoundsCameraController";
+import CreatePanPinchCameraController from './CreatePanPinchCameraController.js';
+import CreateCursorAtBoundsCameraController from './CreateCursorAtBoundsCameraController.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DefaultConfig = { type: 'cursorAtBounds' };
+const DefaultConfig = { type: 'pan-pinch' };
 
 var CreateCameraController = function (config) {
     var cameraControllerConfig = GetValue(config, 'cameraController', DefaultConfig);
 
     switch (cameraControllerConfig.type) {
-        case 'cursorAtBounds':
-            CreateCursorAtBoundsCameraController.call(this, cameraControllerConfig);
+        case 'pan-pinch':
+            CreatePanPinchCameraController.call(this, cameraControllerConfig);
             break;
 
-        case 'joystick':
+        case 'cursorAtBounds':
+            CreateCursorAtBoundsCameraController.call(this, cameraControllerConfig);
             break;
     }
 

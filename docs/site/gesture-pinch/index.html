@@ -9732,6 +9732,7 @@
 </code></pre></div></li>
 <li>Add pinch input
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var pinch = scene.rexGestures.add.pinch(gameObject, config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9758,6 +9759,7 @@
 </code></pre></div></li>
 <li>Add pinch input
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var pinch = scene.rexGestures.add.pinch(gameObject, config);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9770,20 +9772,35 @@
 </code></pre></div></li>
 <li>Add pinch input
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Pinch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var pinch = new Pinch(gameObject, config);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">({</span>
+<ul>
+<li>Pinch input
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// enable: true,</span>
 <span class="w">    </span><span class="c1">// bounds: undefined,</span>
 
 <span class="w">    </span><span class="c1">// threshold: 0,</span>
 <span class="p">});</span>
-</code></pre></div>
-<ul>
+</code></pre></div><ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
 <li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a> or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
 <li><code>threshold</code> : Fire pinch events after dragging distances of catched pointers are larger than this threshold.</li>
+</ul>
+</li>
+<li>Pinch behavior of game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// enable: true,</span>
+<span class="w">    </span><span class="c1">// bounds: undefined,</span>
+
+<span class="w">    </span><span class="c1">// threshold: 0,</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li>Start pinching when pointer-down on this game object.</li>
+</ul>
+</li>
 </ul>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
 <ul>

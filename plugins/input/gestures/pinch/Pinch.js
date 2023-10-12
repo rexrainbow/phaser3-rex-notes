@@ -4,8 +4,8 @@ import FSM from '../../../fsm.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Pinch extends TwoPointersTracer {
-    constructor(scene, config) {
-        super(scene, config);
+    constructor(gameObject, config) {
+        super(gameObject, config);
 
         var self = this;
         var stateConfig = {

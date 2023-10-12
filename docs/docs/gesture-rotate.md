@@ -24,6 +24,7 @@ Get spin angle from 2 dragging touch pointers.
 - Add rotate input
     ```javascript
     var rotate = scene.rexGestures.add.rotate(config);
+    // var rotate = scene.rexGestures.add.rotate(gameObject, config);
     ```
 
 #### Import plugin
@@ -53,6 +54,7 @@ Get spin angle from 2 dragging touch pointers.
 - Add rotate input
     ```javascript
     var rotate = scene.rexGestures.add.rotate(config);
+    // var rotate = scene.rexGestures.add.rotate(gameObject, config);
     ```
 
 #### Import class
@@ -68,22 +70,33 @@ Get spin angle from 2 dragging touch pointers.
 - Add rotate input
     ```javascript
     var rotate = new Rotate(scene, config);
+    // var rotate = new Rotate(gameObject, config);
     ```
 
 ### Create instance
 
-```javascript
-var rotate = scene.rexGestures.add.rotate({
-    // enable: true,
-    // bounds: undefined,
-
-    // threshold: 0,
-});
-```
-
-- `enable` : Set `false` to disable input events.
-- `bounds` : A [rectangle object](geom-rectangle.md) or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
-- `threshold` : Fire rotate events after dragging distances of catched pointers are larger than this threshold.
+- Rotate input
+    ```javascript
+    var rotate = scene.rexGestures.add.rotate({
+        // enable: true,
+        // bounds: undefined,
+    
+        // threshold: 0,
+    });
+    ```
+    - `enable` : Set `false` to disable input events.
+    - `bounds` : A [rectangle object](geom-rectangle.md) or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+    - `threshold` : Fire rotate events after dragging distances of catched pointers are larger than this threshold.
+- Rotate behavior of game object
+    ```javascript
+    var rotate = scene.rexGestures.add.rotate(gameObject, {
+        // enable: true,
+        // bounds: undefined,
+    
+        // threshold: 0,
+    });
+    ```
+    - Start rotation when pointer-down on this game object.
 
 ### Enable
 

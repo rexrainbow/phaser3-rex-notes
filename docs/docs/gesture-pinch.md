@@ -24,6 +24,7 @@ Get scale factor from 2 dragging touch pointers.
 - Add pinch input
     ```javascript
     var pinch = scene.rexGestures.add.pinch(config);
+    // var pinch = scene.rexGestures.add.pinch(gameObject, config);
     ```
 
 #### Import plugin
@@ -53,6 +54,7 @@ Get scale factor from 2 dragging touch pointers.
 - Add pinch input
     ```javascript
     var pinch = scene.rexGestures.add.pinch(config);
+    // var pinch = scene.rexGestures.add.pinch(gameObject, config);
     ```
 
 #### Import class
@@ -68,22 +70,33 @@ Get scale factor from 2 dragging touch pointers.
 - Add pinch input
     ```javascript
     var pinch = new Pinch(scene, config);
+    // var pinch = new Pinch(gameObject, config);
     ```
 
 ### Create instance
 
-```javascript
-var pinch = scene.rexGestures.add.pinch({
-    // enable: true,
-    // bounds: undefined,
-
-    // threshold: 0,
-});
-```
-
-- `enable` : Set `false` to disable input events.
-- `bounds` : A [rectangle object](geom-rectangle.md) or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
-- `threshold` : Fire pinch events after dragging distances of catched pointers are larger than this threshold.
+- Pinch input
+    ```javascript
+    var pinch = scene.rexGestures.add.pinch({
+        // enable: true,
+        // bounds: undefined,
+    
+        // threshold: 0,
+    });
+    ```
+    - `enable` : Set `false` to disable input events.
+    - `bounds` : A [rectangle object](geom-rectangle.md) or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+    - `threshold` : Fire pinch events after dragging distances of catched pointers are larger than this threshold.
+- Pinch behavior of game object
+    ```javascript
+    var pan = scene.rexGestures.add.pinch(gameObject, {
+        // enable: true,
+        // bounds: undefined,
+    
+        // threshold: 0,
+    });
+    ```
+    - Start pinching when pointer-down on this game object.
 
 ### Enable
 

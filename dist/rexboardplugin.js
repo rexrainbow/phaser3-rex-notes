@@ -6935,7 +6935,7 @@
       _this = _super.call(this, scene, config);
       _this.gameObject = gameObject;
       if (gameObject) {
-        gameObject.setInteractive(GetValue$9(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue$9(config, 'inputConfig', undefined));
       }
       _this._enable = undefined;
       _this.resetFromJSON(config);

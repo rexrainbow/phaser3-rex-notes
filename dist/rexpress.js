@@ -493,7 +493,7 @@
       _this = _super.call(this, scene, config);
       _this.gameObject = gameObject;
       if (gameObject) {
-        gameObject.setInteractive(GetValue$5(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue$5(config, 'inputConfig', undefined));
       }
       _this._enable = undefined;
       _this.resetFromJSON(config);
@@ -2050,13 +2050,22 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var AngleBetween = Phaser.Math.Angle.Between;
   var TwoPointersTracer = /*#__PURE__*/function () {
-    function TwoPointersTracer(scene, config) {
+    function TwoPointersTracer(gameObject, config) {
       _classCallCheck(this, TwoPointersTracer);
+      var scene = GetSceneObject(gameObject);
+      if (scene === gameObject) {
+        gameObject = undefined;
+      }
       var amount = scene.input.manager.pointersTotal - 1;
       if (amount < 2) {
         scene.input.addPointer(2 - amount);
       }
       this.scene = scene;
+      this.gameObject = gameObject;
+      if (gameObject) {
+        gameObject.setInteractive(GetValue$1(config, 'inputConfig', undefined));
+      }
+
       // Event emitter
       this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
       this._enable = undefined;
@@ -2078,7 +2087,11 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.input.on('pointerdown', this.onPointerDown, this);
+        if (this.gameObject) {
+          this.gameObject.on('pointerdown', this.onPointerDown, this);
+        } else {
+          this.scene.input.on('pointerdown', this.onPointerDown, this);
+        }
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('gameout', this.dragCancel, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
@@ -2093,12 +2106,15 @@
         this.destroyEventEmitter();
         this.pointers.length = 0;
         Clear(this.movedState);
-        this.scene.input.off('pointerdown', this.onPointerDown, this);
+        if (this.gameObject) ; else {
+          this.scene.input.off('pointerdown', this.onPointerDown, this);
+        }
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('gameout', this.dragCancel, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
+        this.gameObject = undefined;
       }
     }, {
       key: "destroy",
@@ -2439,10 +2455,10 @@
   var Rotate = /*#__PURE__*/function (_TwoPointersTracer) {
     _inherits(Rotate, _TwoPointersTracer);
     var _super = _createSuper(Rotate);
-    function Rotate(scene, config) {
+    function Rotate(gameObject, config) {
       var _this;
       _classCallCheck(this, Rotate);
-      _this = _super.call(this, scene, config);
+      _this = _super.call(this, gameObject, config);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {

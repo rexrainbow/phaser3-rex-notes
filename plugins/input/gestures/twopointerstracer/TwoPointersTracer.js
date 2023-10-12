@@ -1,4 +1,5 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import Clear from '../../../utils/object/Clear.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -7,13 +8,23 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 class TwoPointersTracer {
-    constructor(scene, config) {
+    constructor(gameObject, config) {
+        var scene = GetSceneObject(gameObject);
+        if (scene === gameObject) {
+            gameObject = undefined;
+        }
+
         var amount = scene.input.manager.pointersTotal - 1;
         if (amount < 2) {
             scene.input.addPointer(2 - amount);
         }
 
         this.scene = scene;
+        this.gameObject = gameObject;
+        if (gameObject) {
+            gameObject.setInteractive(GetValue(config, 'inputConfig', undefined));
+        }
+
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
@@ -35,7 +46,11 @@ class TwoPointersTracer {
     }
 
     boot() {
-        this.scene.input.on('pointerdown', this.onPointerDown, this);
+        if (this.gameObject) {
+            this.gameObject.on('pointerdown', this.onPointerDown, this);
+        } else {
+            this.scene.input.on('pointerdown', this.onPointerDown, this);
+        }
 
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('gameout', this.dragCancel, this);
@@ -52,7 +67,13 @@ class TwoPointersTracer {
         this.destroyEventEmitter();
         this.pointers.length = 0;
         Clear(this.movedState);
-        this.scene.input.off('pointerdown', this.onPointerDown, this);
+
+        if (this.gameObject) {
+            // GameObject events will be removed when this gameObject destroyed 
+            // this.gameObject.off('pointerdown', this.onPointerDown, this);
+        } else {
+            this.scene.input.off('pointerdown', this.onPointerDown, this);
+        }
 
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('gameout', this.dragCancel, this);
@@ -60,6 +81,7 @@ class TwoPointersTracer {
         this.scene.input.off('pointermove', this.onPointerMove, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
+        this.gameObject = undefined;
     }
 
     destroy() {

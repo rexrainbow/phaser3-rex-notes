@@ -9,8 +9,8 @@ const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
 class Rotate extends TwoPointersTracer {
-    constructor(scene, config) {
-        super(scene, config);
+    constructor(gameObject, config) {
+        super(gameObject, config);
 
         var self = this;
         var stateConfig = {
