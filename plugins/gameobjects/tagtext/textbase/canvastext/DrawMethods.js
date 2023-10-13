@@ -124,7 +124,7 @@ export default {
 
         // Image
         if (pen.isImagePen) {
-            this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
+            this.drawImage(offsetX, offsetY, pen.prop.img, pen.prop.color, curStyle);
         }
 
         // Strikethrough
@@ -203,9 +203,9 @@ export default {
         }
     },
 
-    drawImage(x, y, imgKey, style) {
+    drawImage(x, y, imgKey, color, style) {
         y -= this.startYOffset;
-        this.parent.imageManager.draw(imgKey, this.context, x, y, this.autoRound);
+        this.parent.imageManager.draw(imgKey, this.context, x, y, color, this.autoRound);
     }
 
 }

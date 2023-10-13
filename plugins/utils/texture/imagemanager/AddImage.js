@@ -42,6 +42,7 @@ var AddImage = function (key, config) {
         right: GetValue(config, 'right', 0),
         originX: GetValue(config, 'originX', 0),
         originY: GetValue(config, 'originY', 0),
+        tintFill: GetValue(config, 'tintFill', false),
     }
 }
 

@@ -547,6 +547,7 @@ txt.setFontStyle(style);
         right: 0,
         originX: 0,
         originY: 0,
+        tintFill: false,
     });
     ```
     - `imgKey` : Image key used in text content, i.e. `[img=imgKey]`.
@@ -559,6 +560,9 @@ txt.setFontStyle(style);
     - `Right` : Right padding space.
     - `originX` : Offset x via frame width * `originX`
     - `originY` : Offset y via frame height * `originY`
+    - `tintFill` : 
+        - `false` : Keep original color. Default behavior.
+        - `true` : Change fill-color by color tag. `[color=...][img=...]`.
 - Add some image render informations
     ```javascript
     txt.addImage(data);

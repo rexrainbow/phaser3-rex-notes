@@ -239,12 +239,12 @@
     renderCanvas: CanvasRenderer
   };
 
-  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
   var MeasureTextMargins = function MeasureTextMargins(textStyle, testString, out) {
     if (out === undefined) {
       out = {};
     }
-    var canvas = CanvasPool$2.create(this);
+    var canvas = CanvasPool$3.create(this);
     var context = canvas.getContext('2d', {
       willReadFrequently: true
     });
@@ -264,7 +264,7 @@
     context.fillText(textStyle.testString, 0, baseline);
     out.left = 0;
     if (width === 0 || height === 0 || !context.getImageData(0, 0, width, height)) {
-      CanvasPool$2.remove(canvas);
+      CanvasPool$3.remove(canvas);
       return out;
     }
     var imagedata = context.getImageData(0, 0, width, height).data;
@@ -282,7 +282,7 @@
         break;
       }
     }
-    CanvasPool$2.remove(canvas);
+    CanvasPool$3.remove(canvas);
     return out;
   };
 
@@ -584,7 +584,7 @@
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
 
-  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
 
   /**
    * Calculates the ascent, descent and fontSize of a given font style.
@@ -598,7 +598,7 @@
    */
   var MeasureText = function MeasureText(textStyle) {
     // @property {HTMLCanvasElement} canvas - The canvas element that the text is rendered.
-    var canvas = CanvasPool$1.create(this);
+    var canvas = CanvasPool$2.create(this);
 
     // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
     var context = canvas.getContext('2d', {
@@ -614,7 +614,7 @@
         descent: descent,
         fontSize: ascent + descent
       };
-      CanvasPool$1.remove(canvas);
+      CanvasPool$2.remove(canvas);
       return output;
     }
     var width = Math.ceil(metrics.width * textStyle.baselineX);
@@ -638,7 +638,7 @@
       output.ascent = baseline;
       output.descent = baseline + 6;
       output.fontSize = output.ascent + output.descent;
-      CanvasPool$1.remove(canvas);
+      CanvasPool$2.remove(canvas);
       return output;
     }
     var imagedata = context.getImageData(0, 0, width, height).data;
@@ -683,7 +683,7 @@
     }
     output.descent = i - baseline;
     output.fontSize = output.ascent + output.descent;
-    CanvasPool$1.remove(canvas);
+    CanvasPool$2.remove(canvas);
     return output;
   };
 
@@ -1760,7 +1760,7 @@
 
       // Image
       if (pen.isImagePen) {
-        this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
+        this.drawImage(offsetX, offsetY, pen.prop.img, pen.prop.color, curStyle);
       }
 
       // Strikethrough
@@ -1830,9 +1830,9 @@
         context.fillText(text, x, y);
       }
     },
-    drawImage: function drawImage(x, y, imgKey, style) {
+    drawImage: function drawImage(x, y, imgKey, color, style) {
       y -= this.startYOffset;
-      this.parent.imageManager.draw(imgKey, this.context, x, y, this.autoRound);
+      this.parent.imageManager.draw(imgKey, this.context, x, y, color, this.autoRound);
     }
   };
 
@@ -2922,11 +2922,13 @@
       left: GetValue$2(config, 'left', 0),
       right: GetValue$2(config, 'right', 0),
       originX: GetValue$2(config, 'originX', 0),
-      originY: GetValue$2(config, 'originY', 0)
+      originY: GetValue$2(config, 'originY', 0),
+      tintFill: GetValue$2(config, 'tintFill', false)
     };
   };
 
-  var DrawImage = function DrawImage(key, context, x, y, autoRound) {
+  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
+  var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
     var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     var width = imgData.width,
@@ -2937,7 +2939,29 @@
       x = Math.round(x);
       y = Math.round(y);
     }
-    context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
+    if (imgData.tintFill && color) {
+      // Draw image at tempCanvas
+
+      // Get tempCanvas
+      var tempCanvas = CanvasPool$1.create(null, width, height, Phaser.CANVAS, true);
+      var tempContext = tempCanvas.getContext('2d', {
+        willReadFrequently: true
+      });
+      tempContext.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, 0, 0, width, height);
+
+      // Tint-fill
+      tempContext.globalCompositeOperation = 'source-in';
+      tempContext.fillStyle = color;
+      tempContext.fillRect(0, 0, width, height);
+
+      // Draw tempCanvas at context
+      context.drawImage(tempCanvas, 0, 0, width, height, x, y, width, height);
+
+      // Release tempCanvas
+      CanvasPool$1.remove(tempCanvas);
+    } else {
+      context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
+    }
   };
 
   var ImageManager = /*#__PURE__*/function () {

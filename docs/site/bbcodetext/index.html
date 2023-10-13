@@ -10518,6 +10518,7 @@
 <span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">originX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">originY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tintFill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>imgKey</code> : Image key used in text content, i.e. <code>[img=imgKey]</code>.</li>
@@ -10530,6 +10531,11 @@
 <li><code>Right</code> : Right padding space.</li>
 <li><code>originX</code> : Offset x via frame width * <code>originX</code></li>
 <li><code>originY</code> : Offset y via frame height * <code>originY</code></li>
+<li><code>tintFill</code> : <ul>
+<li><code>false</code> : Keep original color. Default behavior.</li>
+<li><code>true</code> : Change fill-color by color tag. <code>[color=...][img=...]</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Add some image render informations

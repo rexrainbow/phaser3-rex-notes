@@ -6223,7 +6223,7 @@
   };
 
   CheckP3Version();
-  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var Canvas = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
@@ -6250,7 +6250,7 @@
       _this._height = height;
       width = Math.max(Math.ceil(width * _this.resolution), 1);
       height = Math.max(Math.ceil(height * _this.resolution), 1);
-      _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
+      _this.canvas = CanvasPool$1.create(_assertThisInitialized(_this), width, height);
       _this.context = _this.canvas.getContext('2d', {
         willReadFrequently: true
       });
@@ -6280,7 +6280,7 @@
     _createClass(Canvas, [{
       key: "preDestroy",
       value: function preDestroy() {
-        CanvasPool.remove(this.canvas);
+        CanvasPool$1.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
         this.context = null;
@@ -12647,11 +12647,13 @@
       left: GetValue$1(config, 'left', 0),
       right: GetValue$1(config, 'right', 0),
       originX: GetValue$1(config, 'originX', 0),
-      originY: GetValue$1(config, 'originY', 0)
+      originY: GetValue$1(config, 'originY', 0),
+      tintFill: GetValue$1(config, 'tintFill', false)
     };
   };
 
-  var DrawImage = function DrawImage(key, context, x, y, autoRound) {
+  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
+  var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
     var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     var width = imgData.width,
@@ -12662,7 +12664,29 @@
       x = Math.round(x);
       y = Math.round(y);
     }
-    context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
+    if (imgData.tintFill && color) {
+      // Draw image at tempCanvas
+
+      // Get tempCanvas
+      var tempCanvas = CanvasPool.create(null, width, height, Phaser.CANVAS, true);
+      var tempContext = tempCanvas.getContext('2d', {
+        willReadFrequently: true
+      });
+      tempContext.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, 0, 0, width, height);
+
+      // Tint-fill
+      tempContext.globalCompositeOperation = 'source-in';
+      tempContext.fillStyle = color;
+      tempContext.fillRect(0, 0, width, height);
+
+      // Draw tempCanvas at context
+      context.drawImage(tempCanvas, 0, 0, width, height, x, y, width, height);
+
+      // Release tempCanvas
+      CanvasPool.remove(tempCanvas);
+    } else {
+      context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
+    }
   };
 
   var ImageManager = /*#__PURE__*/function () {
