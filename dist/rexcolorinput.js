@@ -14625,6 +14625,56 @@
     return text;
   };
 
+  var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
+  var DrawFrameToCanvas = function DrawFrameToCanvas(frame, canvas, x, y, width, height, color, autoRound) {
+    if (x === undefined) {
+      x = 0;
+    }
+    if (y === undefined) {
+      y = 0;
+    }
+    if (width === undefined) {
+      width = frame.cutWidth;
+    }
+    if (height === undefined) {
+      height = frame.cutHeight;
+    }
+    if (autoRound === undefined) {
+      autoRound = false;
+    }
+    if (autoRound) {
+      x = Math.round(x);
+      y = Math.round(y);
+    }
+    var context = canvas.getContext('2d', {
+      willReadFrequently: true
+    });
+    if (color) {
+      // Draw image at tempCanvas
+
+      // Get tempCanvas
+      var tempCanvas = CanvasPool$3.create(null, width, height, Phaser.CANVAS, true);
+      var tempContext = tempCanvas.getContext('2d', {
+        willReadFrequently: true
+      });
+      tempContext.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, 0, 0, width, height);
+
+      // Tint-fill
+      tempContext.globalCompositeOperation = 'source-in';
+      tempContext.fillStyle = color;
+      tempContext.fillRect(0, 0, width, height);
+
+      // Draw tempCanvas at context
+      context.drawImage(tempCanvas, 0, 0, width, height, x, y, width, height);
+
+      // Release tempCanvas
+      CanvasPool$3.remove(tempCanvas);
+    } else {
+      context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
+    }
+  };
+
+  Phaser.Display.Canvas.CanvasPool;
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
     var _super = _createSuper(ImageData);
@@ -14633,6 +14683,7 @@
       _classCallCheck(this, ImageData);
       _this = _super.call(this, parent, ImageTypeName);
       _this.setTexture(key, frame);
+      _this.color = undefined;
       return _this;
     }
     _createClass(ImageData, [{
@@ -14708,15 +14759,24 @@
         return this;
       }
     }, {
+      key: "setColor",
+      value: function setColor(color) {
+        this.color = color;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color);
+        }
+        _get(_getPrototypeOf(ImageData.prototype), "modifyPorperties", this).call(this, o);
+        return this;
+      }
+    }, {
       key: "renderContent",
       value: function renderContent() {
-        var context = this.context;
-        var frame = this.frameObj;
-        var width = this.frameWidth,
-          height = this.frameHeight;
-        context.drawImage(frame.source.image,
-        // image
-        frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+        DrawFrameToCanvas(this.frameObj, this.canvas, 0, 0, this.frameWidth, this.frameHeight, this.color, false);
       }
     }, {
       key: "drawTLX",
@@ -22770,12 +22830,12 @@
     renderCanvas: CanvasRenderer
   };
 
-  var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
   var MeasureTextMargins = function MeasureTextMargins(textStyle, testString, out) {
     if (out === undefined) {
       out = {};
     }
-    var canvas = CanvasPool$3.create(this);
+    var canvas = CanvasPool$2.create(this);
     var context = canvas.getContext('2d', {
       willReadFrequently: true
     });
@@ -22795,7 +22855,7 @@
     context.fillText(textStyle.testString, 0, baseline);
     out.left = 0;
     if (width === 0 || height === 0 || !context.getImageData(0, 0, width, height)) {
-      CanvasPool$3.remove(canvas);
+      CanvasPool$2.remove(canvas);
       return out;
     }
     var imagedata = context.getImageData(0, 0, width, height).data;
@@ -22813,7 +22873,7 @@
         break;
       }
     }
-    CanvasPool$3.remove(canvas);
+    CanvasPool$2.remove(canvas);
     return out;
   };
 
@@ -23061,7 +23121,7 @@
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
 
-  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
 
   /**
    * Calculates the ascent, descent and fontSize of a given font style.
@@ -23075,7 +23135,7 @@
    */
   var MeasureText = function MeasureText(textStyle) {
     // @property {HTMLCanvasElement} canvas - The canvas element that the text is rendered.
-    var canvas = CanvasPool$2.create(this);
+    var canvas = CanvasPool$1.create(this);
 
     // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
     var context = canvas.getContext('2d', {
@@ -23091,7 +23151,7 @@
         descent: descent,
         fontSize: ascent + descent
       };
-      CanvasPool$2.remove(canvas);
+      CanvasPool$1.remove(canvas);
       return output;
     }
     var width = Math.ceil(metrics.width * textStyle.baselineX);
@@ -23115,7 +23175,7 @@
       output.ascent = baseline;
       output.descent = baseline + 6;
       output.fontSize = output.ascent + output.descent;
-      CanvasPool$2.remove(canvas);
+      CanvasPool$1.remove(canvas);
       return output;
     }
     var imagedata = context.getImageData(0, 0, width, height).data;
@@ -23160,7 +23220,7 @@
     }
     output.descent = i - baseline;
     output.fontSize = output.ascent + output.descent;
-    CanvasPool$2.remove(canvas);
+    CanvasPool$1.remove(canvas);
     return output;
   };
 
@@ -24976,7 +25036,6 @@
     };
   };
 
-  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
   var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
     var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
@@ -24984,33 +25043,10 @@
       height = imgData.height;
     x += imgData.left - imgData.originX * width;
     y += imgData.y - imgData.originY * height;
-    if (autoRound) {
-      x = Math.round(x);
-      y = Math.round(y);
+    if (!imgData.tintFill) {
+      color = undefined;
     }
-    if (imgData.tintFill && color) {
-      // Draw image at tempCanvas
-
-      // Get tempCanvas
-      var tempCanvas = CanvasPool$1.create(null, width, height, Phaser.CANVAS, true);
-      var tempContext = tempCanvas.getContext('2d', {
-        willReadFrequently: true
-      });
-      tempContext.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, 0, 0, width, height);
-
-      // Tint-fill
-      tempContext.globalCompositeOperation = 'source-in';
-      tempContext.fillStyle = color;
-      tempContext.fillRect(0, 0, width, height);
-
-      // Draw tempCanvas at context
-      context.drawImage(tempCanvas, 0, 0, width, height, x, y, width, height);
-
-      // Release tempCanvas
-      CanvasPool$1.remove(tempCanvas);
-    } else {
-      context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
-    }
+    DrawFrameToCanvas(frame, context.canvas, x, y, width, height, color, autoRound);
   };
 
   var ImageManager = /*#__PURE__*/function () {

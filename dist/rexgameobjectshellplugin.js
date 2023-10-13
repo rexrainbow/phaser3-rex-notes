@@ -19907,18 +19907,30 @@
   };
 
   var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
-  var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
-    var imgData = this.get(key);
-    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
-    var width = imgData.width,
-      height = imgData.height;
-    x += imgData.left - imgData.originX * width;
-    y += imgData.y - imgData.originY * height;
+  var DrawFrameToCanvas = function DrawFrameToCanvas(frame, canvas, x, y, width, height, color, autoRound) {
+    if (x === undefined) {
+      x = 0;
+    }
+    if (y === undefined) {
+      y = 0;
+    }
+    if (width === undefined) {
+      width = frame.cutWidth;
+    }
+    if (height === undefined) {
+      height = frame.cutHeight;
+    }
+    if (autoRound === undefined) {
+      autoRound = false;
+    }
     if (autoRound) {
       x = Math.round(x);
       y = Math.round(y);
     }
-    if (imgData.tintFill && color) {
+    var context = canvas.getContext('2d', {
+      willReadFrequently: true
+    });
+    if (color) {
       // Draw image at tempCanvas
 
       // Get tempCanvas
@@ -19941,6 +19953,19 @@
     } else {
       context.drawImage(frame.source.image, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, x, y, width, height);
     }
+  };
+
+  var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
+    var imgData = this.get(key);
+    var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
+    var width = imgData.width,
+      height = imgData.height;
+    x += imgData.left - imgData.originX * width;
+    y += imgData.y - imgData.originY * height;
+    if (!imgData.tintFill) {
+      color = undefined;
+    }
+    DrawFrameToCanvas(frame, context.canvas, x, y, width, height, color, autoRound);
   };
 
   var ImageManager = /*#__PURE__*/function () {
@@ -23336,6 +23361,7 @@
     return text;
   };
 
+  Phaser.Display.Canvas.CanvasPool;
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
     var _super = _createSuper(ImageData);
@@ -23344,6 +23370,7 @@
       _classCallCheck(this, ImageData);
       _this = _super.call(this, parent, ImageTypeName);
       _this.setTexture(key, frame);
+      _this.color = undefined;
       return _this;
     }
     _createClass(ImageData, [{
@@ -23419,15 +23446,24 @@
         return this;
       }
     }, {
+      key: "setColor",
+      value: function setColor(color) {
+        this.color = color;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color);
+        }
+        _get(_getPrototypeOf(ImageData.prototype), "modifyPorperties", this).call(this, o);
+        return this;
+      }
+    }, {
       key: "renderContent",
       value: function renderContent() {
-        var context = this.context;
-        var frame = this.frameObj;
-        var width = this.frameWidth,
-          height = this.frameHeight;
-        context.drawImage(frame.source.image,
-        // image
-        frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+        DrawFrameToCanvas(this.frameObj, this.canvas, 0, 0, this.frameWidth, this.frameHeight, this.color, false);
       }
     }, {
       key: "drawTLX",

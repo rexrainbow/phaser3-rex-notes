@@ -469,7 +469,7 @@
     return object instanceof GameObjectClass;
   };
 
-  var DrawFrame = function DrawFrame(frame, canvas) {
+  var CopyFrameToCanvas = function CopyFrameToCanvas(frame, canvas) {
     canvas.width = frame.cutWidth;
     canvas.height = frame.cutHeight;
     var context = canvas.getContext('2d', {
@@ -505,7 +505,7 @@
     var y = GetValue(config, 'y', undefined);
     var width = GetValue(config, 'width', undefined);
     var height = GetValue(config, 'height', undefined);
-    out = CanvasToData(DrawFrame(frame, canvas),
+    out = CanvasToData(CopyFrameToCanvas(frame, canvas),
     // canvas
     x, y, width, height,
     // x, y, width, height

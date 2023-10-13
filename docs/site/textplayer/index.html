@@ -10941,18 +10941,25 @@
 <p><code>[img=key]</code></p>
 <h5 id="render-size">Render size<a class="headerlink" href="#render-size" title="Permanent link">&para;</a></h5>
 <ul>
-<li>Set render size In config
+<li>Set render size in config
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">images</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// key: {width, height},</span>
-<span class="w">        </span><span class="c1">// key: {key, frame, width, height}</span>
+<span class="w">        </span><span class="c1">// key: {key, frame, width, height, tintFill: false}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>tintFill</code> : <ul>
+<li><code>false</code> : Keep original color. Default behavior.</li>
+<li><code>true</code> : Change fill-color by color tag. <code>[color=...][img=...]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Set render size by method
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// key: {width, height},</span>
-<span class="w">    </span><span class="c1">// key: {key, frame, width, height}</span>
+<span class="w">    </span><span class="c1">// key: {key, frame, width, height, tintFill: false}</span>
 <span class="p">})</span>
 </code></pre></div></li>
 <li>Use origin render size by default</li>

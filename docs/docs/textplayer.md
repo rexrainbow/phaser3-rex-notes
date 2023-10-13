@@ -760,20 +760,23 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 ##### Render size
 
-- Set render size In config
+- Set render size in config
     ```javascript
     {
         images: {
             // key: {width, height},
-            // key: {key, frame, width, height}
+            // key: {key, frame, width, height, tintFill: false}
         }
     }
     ```
+    - `tintFill` : 
+        - `false` : Keep original color. Default behavior.
+        - `true` : Change fill-color by color tag. `[color=...][img=...]`.
 - Set render size by method
     ```javascript
     txt.addImage({
         // key: {width, height},
-        // key: {key, frame, width, height}
+        // key: {key, frame, width, height, tintFill: false}
     })
     ```
 - Use origin render size by default

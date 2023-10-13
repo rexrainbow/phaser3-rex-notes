@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[custom=10,20][/custom][bgm2=theme0][color=#FFF8DC][b][space=30]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[custom=10,20][/custom][bgm2=theme0][color=#FFF8DC][b][space=30]Pha[shadow]ser[/b][/shadow] [img=dude][img=dude-tint] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [se=explosion][wait=se][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
 [bgm2.pause][click][/bgm2.pause][color=green]open[/color] source HTML5 game framework[r][bgm2=theme1]
 
@@ -89,9 +89,8 @@ class Demo extends Phaser.Scene {
                 },
 
                 images: {
-                    'dude': {
-                        height: 24
-                    }
+                    'dude': { height: 24 },
+                    'dude-tint': { key: 'dude', height: 24, tintFill: true },
                 },
 
                 sounds: {

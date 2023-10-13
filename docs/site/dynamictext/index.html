@@ -10538,15 +10538,17 @@ or</p>
 <h3 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
 <h4 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// width</span>
-<span class="w">    </span><span class="c1">// height</span>
-<span class="w">    </span><span class="c1">// scaleX</span>
-<span class="w">    </span><span class="c1">// scaleY</span>
+<span class="w">    </span><span class="c1">// width: ,</span>
+<span class="w">    </span><span class="c1">// height: ,</span>
+<span class="w">    </span><span class="c1">// scaleX: ,</span>
+<span class="w">    </span><span class="c1">// scaleY: ,</span>
+<span class="w">    </span><span class="c1">// color: ,</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>width</code> : Scaled-width. Aspect-ratio will be keep if no <code>height</code>, or <code>scaleY</code> is set.</li>
-<li><code>height</code> : Scaled-height. Aspect-ratio will be keep if no <code>width</code>, or <code>scaleX</code> is set.</li>
+<li><code>width</code> : Scaled-width. Aspect-ratio will be kept if no <code>height</code>, or <code>scaleY</code> is set.</li>
+<li><code>height</code> : Scaled-height. Aspect-ratio will be kept if no <code>width</code>, or <code>scaleX</code> is set.</li>
+<li><code>color</code> : Tint-fill color. Default is <code>undefined</code>.</li>
 </ul>
 <h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h3>
 <ul>
