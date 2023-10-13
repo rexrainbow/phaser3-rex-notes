@@ -387,15 +387,17 @@ txt.removeText(index);
 
 ```javascript
 txt.appendImage(key, frame, {
-    // width
-    // height
-    // scaleX
-    // scaleY
+    // width: ,
+    // height: ,
+    // scaleX: ,
+    // scaleY: ,
+    // color: ,
 })
 ```
 
-- `width` : Scaled-width. Aspect-ratio will be keep if no `height`, or `scaleY` is set.
-- `height` : Scaled-height. Aspect-ratio will be keep if no `width`, or `scaleX` is set.
+- `width` : Scaled-width. Aspect-ratio will be kept if no `height`, or `scaleY` is set.
+- `height` : Scaled-height. Aspect-ratio will be kept if no `width`, or `scaleX` is set.
+- `color` : Tint-fill color. Default is `undefined`.
 
 ### Background
 

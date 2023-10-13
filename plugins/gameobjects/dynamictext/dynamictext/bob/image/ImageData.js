@@ -1,5 +1,8 @@
 import RenderBase from '../renderbase/RenderBase.js';
 import { ImageTypeName } from '../Types.js';
+import DrawFrameToCanvas from '../../../../../utils/texture/DrawFrameToCanvas.js';
+
+const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 
 class ImageData extends RenderBase {
     constructor(
@@ -8,6 +11,7 @@ class ImageData extends RenderBase {
     ) {
         super(parent, ImageTypeName);
         this.setTexture(key, frame);
+        this.color = undefined;
     }
 
     get frameWidth() {
@@ -80,17 +84,27 @@ class ImageData extends RenderBase {
         return this;
     }
 
-    renderContent() {
-        var context = this.context;
-        var frame = this.frameObj;
+    setColor(color) {
+        this.color = color;
+        return this;
+    }
 
-        var width = this.frameWidth,
-            height = this.frameHeight;
-        context.drawImage(
-            frame.source.image,              // image
-            frame.cutX, frame.cutY, width, height,
-            0, 0, width, height,
+    modifyPorperties(o) {
+        if (o.hasOwnProperty('color')) {
+            this.setColor(o.color);
+        }
+
+        super.modifyPorperties(o);
+        return this;
+    }
+
+    renderContent() {
+        DrawFrameToCanvas(
+            this.frameObj, this.canvas,
+            0, 0, this.frameWidth, this.frameHeight,
+            this.color, false
         );
+
     }
 
     get drawTLX() { return -this.leftSpace; }

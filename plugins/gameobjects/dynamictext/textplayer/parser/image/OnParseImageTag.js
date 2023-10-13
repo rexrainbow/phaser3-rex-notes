@@ -11,7 +11,8 @@ var OnParseImageTag = function (textPlayer, parser, config) {
                     width: imgData.width,
                     hieght: imgData.height,
                     leftSpace: imgData.left,
-                    rightSpace: imgData.right
+                    rightSpace: imgData.right,
+                    color: (imgData.tintFill) ? textPlayer.textStyle.color : undefined,
                 }
             )
             parser.skipEvent();

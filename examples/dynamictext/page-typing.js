@@ -42,6 +42,7 @@ class Demo extends Phaser.Scene {
             .appendText('12\n34\f')
             .appendText('Dynamic text: Page-typing ')
             .appendImage('dude', undefined, { height: 20 })
+            .appendImage('dude', undefined, { height: 20, color: 'red' })
             .appendText(' ' + content[0], { color: '#FFF8DC' })
             .appendText(content[1], { color: '#008B8B' })
             .appendText(content[2], { color: '#FF7F50' })
