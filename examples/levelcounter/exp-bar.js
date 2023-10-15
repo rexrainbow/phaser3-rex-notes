@@ -47,7 +47,6 @@ class Demo extends Phaser.Scene {
                 })
                 .add({
                     from: time,
-                    run() { },
                     once: true
                 })
 
@@ -60,7 +59,7 @@ class Demo extends Phaser.Scene {
                 run() {
                     timeline.emit('complete');
                 },
-                once: false
+                once: true
             })
             .once('complete', function () {
                 console.log('task complete');
