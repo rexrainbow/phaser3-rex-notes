@@ -700,20 +700,38 @@
       }
     }, {
       key: "gainExp",
-      value: function gainExp(incExp) {
+      value: function gainExp(incExp, callback) {
+        if (callback) {
+          this.on('levelup', callback);
+        }
         this.exp += incExp;
+        if (callback) {
+          this.off('levelup', callback);
+        }
         return this;
       }
     }, {
       key: "setExp",
-      value: function setExp(exp) {
+      value: function setExp(exp, callback) {
+        if (callback) {
+          this.on('levelup', callback);
+        }
         this.exp = exp;
+        if (callback) {
+          this.off('levelup', callback);
+        }
         return this;
       }
     }, {
       key: "setLevel",
-      value: function setLevel(level) {
+      value: function setLevel(level, callback) {
+        if (callback) {
+          this.on('levelup', callback);
+        }
         this.level = level;
+        if (callback) {
+          this.off('levelup', callback);
+        }
         return this;
       }
     }]);

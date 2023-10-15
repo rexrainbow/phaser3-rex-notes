@@ -44001,6 +44001,29 @@
       this.updateValueText(value, min, max);
       this.setBarValue(value, min, max);
       return this;
+    },
+    setEaseValueDuration: function setEaseValueDuration(duration) {
+      this.easeValueDuration = duration;
+      return this;
+    },
+    easeValueTo: function easeValueTo(value, min, max) {
+      this.minValue = min;
+      this.maxValue = max;
+      if (this.easeValueTask === undefined) {
+        this.easeValueTask = new EaseValueTask(this);
+        this.easeValueTask.on('update', function () {
+          this.setValue(this.value, this.minValue, this.maxValue);
+        }, this);
+      }
+      if (this.easeValueDuration === undefined) {
+        this.easeValueDuration = 1000;
+      }
+      this.easeValueTask.restart({
+        key: 'value',
+        to: value,
+        duration: this.easeValueDuration
+      });
+      return this;
     }
   };
 
@@ -57264,6 +57287,27 @@
         return this;
       }
     }, {
+      key: "clear",
+      value: function clear() {
+        this.commands.length = 0;
+        return this;
+      }
+    }, {
+      key: "append",
+      value: function append(time, fn) {
+        var command;
+        if (Array.isArray(fn)) {
+          command = fn;
+        } else {
+          for (var _len = arguments.length, params = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+            params[_key - 2] = arguments[_key];
+          }
+          command = [fn].concat(params);
+        }
+        this.commands.push([time, command]);
+        return this;
+      }
+    }, {
       key: "start",
       value: function start(startAt) {
         if (startAt === undefined) {
@@ -57361,6 +57405,7 @@
           // Execute a command
 
           if (this.index === lastCommandIndex) {
+            this.nextTime = 0;
             this.complete();
             return this;
           } else {
