@@ -6029,6 +6029,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9504,6 +9511,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9604,6 +9618,10 @@
 <li>Author: Rex</li>
 <li>Object</li>
 </ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/jOXomJK">Exp-bar</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/levelcounter">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
@@ -9690,8 +9708,19 @@
 <li>Accumulate experience
     <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">);</span>
 <span class="c1">// levelCounter.exp += incExp;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
 </code></pre></div><ul>
-<li>Will fire <code>'levelup'</code> event many times.</li>
+<li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>level</code> : To next level</li>
+<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
+<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Reset experience value
@@ -9701,9 +9730,17 @@
 </ul>
 </li>
 <li>Force level up
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
 </code></pre></div><ul>
-<li>Will fire <code>'levelup'</code> event many times.</li>
+<li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>level</code> : To next level</li>
+<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
+<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
