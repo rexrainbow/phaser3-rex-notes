@@ -364,6 +364,19 @@ label.setValue(value, min, max);
 
 Will invoke `valueTextFormatCallback` callback.
 
+### Ease value
+
+Ease valueText game object and bar game object.
+
+```javascript
+label
+    .setEaseValueDuration(duration)
+    .easeValueTo(value, min, max);
+```
+
+Will invoke `valueTextFormatCallback` callback.
+
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

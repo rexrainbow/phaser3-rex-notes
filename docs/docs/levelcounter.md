@@ -5,6 +5,10 @@ Map level value from experience value, by callback or a number array.
 - Author: Rex
 - Object
 
+## Live demos
+
+- [Exp-bar](https://codepen.io/rexrainbow/pen/jOXomJK)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/levelcounter)
@@ -101,7 +105,18 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
     levelCounter.gainExp(incExp);
     // levelCounter.exp += incExp;
     ```
-    - Will fire `'levelup'` event many times.
+    or
+    ```javascript
+    levelCounter.gainExp(incExp, callback);
+    ```
+    - Will fire `'levelup'` event, or invoke `callback` many times.
+        ```javascript
+        function(level, fromExp, toExp, levelStartExp, levelEndExp){        
+        }
+        ```
+        - `level` : To next level
+        - `fromExp`, `toExp` : Experience increment from `fromExp` to `toExp`.
+        - `levelStartExp`, `levelEndExp` : Range of this level.
 - Reset experience value
     ```javascript
     levelCounter.resetExp(exp);
@@ -109,9 +124,16 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
     - Won't fire `'levelup'` event.
 - Force level up
     ```javascript
-    levelCounter.setLevel(level);
+    levelCounter.setLevel(level, callback);
     ```
-    - Will fire `'levelup'` event many times.
+    - Will fire `'levelup'` event, or invoke `callback` many times.
+        ```javascript
+        function(level, fromExp, toExp, levelStartExp, levelEndExp){        
+        }
+        ```
+        - `level` : To next level
+        - `fromExp`, `toExp` : Experience increment from `fromExp` to `toExp`.
+        - `levelStartExp`, `levelEndExp` : Range of this level.
 
 ### Level and experience
 
