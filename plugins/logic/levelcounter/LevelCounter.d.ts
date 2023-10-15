@@ -13,6 +13,13 @@ declare namespace LevelCounter {
 
         exp?: number,
     }
+
+    type LevelUpCallback = (
+        level: number,
+        fromExp: number, toExp: number,
+        levelStartExp: number, levelEndExp: number
+    ) => void;
+
 }
 
 declare class LevelCounter extends EventEmitter {
@@ -41,9 +48,19 @@ declare class LevelCounter extends EventEmitter {
 
     checkLevel(level: number, exp: number): boolean;
 
-    gainExp(incExp: number): this;
+    gainExp(
+        incExp: number,
+        callback?: LevelCounter.LevelUpCallback
+    ): this;
 
-    setExp(exp: number): this;
+    setExp(
+        exp: number,
+        callback?: LevelCounter.LevelUpCallback
+    ): this;
 
-    setLevel(level: number): this;
+    setLevel(
+        level: number,
+        callback?: LevelCounter.LevelUpCallback
+    ): this;
+
 }
