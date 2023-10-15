@@ -13,7 +13,7 @@ declare namespace NameValueLabel {
 
             icon?: number, iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
 
-            name?: number, 
+            name?: number,
             value?: number,
 
             bar?: number, barBottom?: number, barLeft?: number, barRight?: number,
@@ -59,10 +59,10 @@ declare class NameValueLabel extends Sizer {
     );
 
     nameText: string;
-    setNameText(value?:string):this;
+    setNameText(value?: string): this;
 
     valueText: string;
-    setValueText(value?:string):this;
+    setValueText(value?: string): this;
 
     barValue: number;
     setBarValue(
@@ -91,4 +91,13 @@ declare class NameValueLabel extends Sizer {
     value: number;
     minValue: number;
     maxValue: number;
+
+    setEaseValueDuration(duration: number): this;
+
+    easeValueTo(
+        value: number,
+        min: number,
+        max: number
+    ): this;
+
 }
