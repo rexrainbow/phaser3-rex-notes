@@ -41,6 +41,14 @@ declare class Player extends ComponentBase {
         config?: Player.ILoadConfig
     ): this;
 
+    clear(): this;
+
+    append(
+        time: number,
+        fn: string | Function,
+        ...params: any
+    ): this;
+
     start(startAt?: number): this;
 
     pause(): this;

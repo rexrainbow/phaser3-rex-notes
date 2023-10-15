@@ -94,6 +94,22 @@ class Player extends ComponentBase {
         return this;
     }
 
+    clear() {
+        this.commands.length = 0;
+        return this;
+    }
+
+    append(time, fn, ...params) {
+        var command;
+        if (Array.isArray(fn)) {
+            command = fn;
+        } else {
+            command = [fn, ...params];
+        }
+        this.commands.push([time, command]);
+        return this;
+    }
+
     start(startAt) {
         if (startAt === undefined) {
             startAt = 0;
@@ -182,6 +198,7 @@ class Player extends ComponentBase {
             // Execute a command
 
             if (this.index === lastCommandIndex) {
+                this.nextTime = 0;
                 this.complete();
                 return this;
             } else {

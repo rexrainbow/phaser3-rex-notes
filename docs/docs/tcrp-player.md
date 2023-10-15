@@ -124,6 +124,25 @@ player.load(commands, scope, {
     - `'abs'`, `'absolute'`, or `0` : timeout = *time*
     - `'inc'`, `'increment'`, `1` : timeout = *time* + previous-*time*
 
+
+### Clear all commands
+
+```javascript
+player.clear();
+```
+
+### Append command
+
+```javascript
+player.append(time, fn, param0, param1, ...);
+```
+
+- `time` : Delay time
+- `fn` : 
+    - A function (callback) object.
+    - A string , to get function (callback) object from `scope`.
+- `param0`, `param1` ... : Parameters of callback.
+
 ### Start playing
 
 ```javascript
@@ -178,7 +197,7 @@ player.seek(time);   // Elapsed time in ms
 player.seekToNext();
 ```
 
-Seek to time of next command.
+Seek to time of next command. i.e. run next command immediately.
 
 ### State of player
 

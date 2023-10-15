@@ -5,7 +5,6 @@ import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 class ActionKlass {
     constructor(scene) {
         this.scene = scene;
-        this.objs = new Map();
     }
 
     // callbacks
@@ -38,9 +37,10 @@ class Demo extends Phaser.Scene {
             .start()
             .on('complete', function () {
                 console.log(player.now * 0.001);
+                player.seekToNext(); // Do nothing
             });
         
-        player.skipWaiting();
+        player.seekToNext();
     }
 
     update() { }
