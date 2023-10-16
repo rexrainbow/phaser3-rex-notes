@@ -302,7 +302,6 @@ module.exports = {
     'toast': './templates/ui/toast/Toast.js',
     'tweaker': './templates/ui/tweaker/Tweaker.js',
     'sides': './templates/ui/sides/Sides.js',
-    'uimaker': './templates/ui/maker/Maker.js',
 
     // spinner
     'audiospinner': './templates/spinner/audio/Audio.js',
