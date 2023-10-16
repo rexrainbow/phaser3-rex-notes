@@ -16,58 +16,111 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var label0 = this.rexUI.add.nameValueLabel({
-            x: 400, y: 300,
-            width: 200, height: 40,
+        var label0 = CreateLineBar(this)
+            .setPosition(200, 300)
+            .layout()
 
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
-
-            icon: this.add.rectangle(0, 0, 20, 20, 0xa98274),
-
-            nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
-
-            valueText: this.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
-            valueTextFormatCallback: function (value, min, max) {
-                value = Math.floor(value);
-                if (value <= max * 0.3) {
-                    value = `[color=red][b]${value}[/b][/color]`;
-                } else {
-                    value = `[b]${value}[/b]`;
-                }
-                return `${value}/${max}`;
-            },
-
-            bar: {
-                height: 6,
-                barColor: COLOR_PRIMARY,
-                barColor2: COLOR_DARK,
-                // trackColor: COLOR_DARK,
-                // trackStrokeColor: COLOR_LIGHT
-            },
-
-            align: {
-            },
-
-            space: {
-                left: 20, right: 20, top: 20, bottom: 20,
-                icon: 10,
-                bar: -6
-            }
-
-        })
+        var label1 = CreateCircleBar(this)
+            .setPosition(600, 300)
             .layout()
 
         var min = 0, max = 100, value = min;
+
         label0.setValue(value, min, max);
+        label1.setValue(value, min, max);
+
         this.input.on('pointerdown', function () {
             value = Phaser.Math.Clamp(value + 5, min, max);
             label0.setValue(value, min, max);
+            label1.setValue(value, min, max);
         })
 
     }
 
     update() {
     }
+}
+
+var CreateLineBar = function (scene) {
+    return scene.rexUI.add.nameValueLabel({
+        width: 200, height: 40,
+
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
+
+        icon: scene.add.rectangle(0, 0, 20, 20, 0xa98274),
+
+        nameText: scene.add.text(0, 0, 'HP', { fontSize: 20 }),
+
+        valueText: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
+        valueTextFormatCallback: function (value, min, max) {
+            value = Math.floor(value);
+            if (value <= max * 0.3) {
+                value = `[color=red][b]${value}[/b][/color]`;
+            } else {
+                value = `[b]${value}[/b]`;
+            }
+            return `${value}/${max}`;
+        },
+
+        bar: {
+            height: 6,
+            barColor: COLOR_PRIMARY,
+            barColor2: COLOR_DARK,
+            // trackColor: COLOR_DARK,
+            // trackStrokeColor: COLOR_LIGHT
+        },
+
+        align: {
+        },
+
+        space: {
+            left: 20, right: 20, top: 20, bottom: 20,
+            icon: 10,
+            bar: -6
+        }
+
+    })
+}
+
+var CreateCircleBar = function (scene) {
+    return scene.rexUI.add.nameValueLabel({
+        width: 200, height: 200,
+
+        // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
+
+        nameText: scene.add.text(0, 0, 'HP', { fontSize: 20 }),
+
+        valueText: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
+        valueTextFormatCallback: function (value, min, max) {
+            value = Math.floor(value);
+            if (value <= max * 0.3) {
+                value = `[color=red][b]${value}[/b][/color]`;
+            } else {
+                value = `[b]${value}[/b]`;
+            }
+            return `${value}/${max}`;
+        },
+
+        bar: {
+            shape: 'circle',
+            barColor: COLOR_LIGHT,
+            barColor2: COLOR_DARK,
+            trackColor: COLOR_DARK,
+            thickness: 0.2,
+            startAngle: Phaser.Math.DegToRad(135),
+            endAngle: Phaser.Math.DegToRad(45),
+        },
+
+        align: {
+            text: 'center',
+        },
+
+        space: {
+            left: 30, right: 30, top: 30, bottom: 30,
+            barTop: 5, barBottom: 5, barLeft: 6, barRight: 5,
+        }
+
+    })
 }
 
 var config = {

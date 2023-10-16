@@ -25,7 +25,7 @@ class ExpBar extends NameValueLabel {
 
         this.player.on('complete', function () {
             this.player.clear();
-            this.emit('levelup.complete', this);
+            this.emit('levelup.complete', this.level, this);
         }, this);
 
         this.setValue(this.exp, this.getExp(this.level), this.getExp(this.level + 1));

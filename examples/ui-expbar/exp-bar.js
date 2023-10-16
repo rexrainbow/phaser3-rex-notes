@@ -17,8 +17,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var expBar = CreateExpBar(this)
-            .setPosition(400, 300)
+        var expBar0 = CreateLineBar(this)
+            .setPosition(200, 300)
             .layout()
             .on('levelup', function (level) {
                 console.log('levelup', level)
@@ -27,15 +27,22 @@ class Demo extends Phaser.Scene {
                 console.log('levelup.complete')
             })
 
-        expBar.gainExp(200)
+        expBar0.gainExp(200)
+        expBar0.exp += 100
 
-        expBar.exp += 100
+
+        var expBar1 = CreateCircleBar(this)
+            .setPosition(600, 300)
+            .layout()
+
+        expBar1.gainExp(200)
+        expBar1.exp += 100
     }
 
     update() { }
 }
 
-var CreateExpBar = function (scene) {
+var CreateLineBar = function (scene) {
     return scene.rexUI.add.expBar({
         width: 250,
 
@@ -63,6 +70,58 @@ var CreateExpBar = function (scene) {
             left: 20, right: 20, top: 20, bottom: 20,
             icon: 10,
             bar: -10
+        },
+
+        levelCounter: {
+            table: function (level) {
+                return level * 100;
+            },
+            maxLevel: 10,
+
+            exp: 330,
+        },
+
+        easeDuration: 2000
+
+    })
+}
+
+var CreateCircleBar = function (scene) {
+    return scene.rexUI.add.expBar({
+        width: 250, height: 250,
+
+        // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
+
+        nameText: scene.add.text(0, 0, 'EXP', { fontSize: 20 }),
+
+        valueText: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
+        valueTextFormatCallback: function (value, min, max) {
+            value = Math.floor(value);
+            if (value <= max * 0.3) {
+                value = `[color=red][b]${value}[/b][/color]`;
+            } else {
+                value = `[b]${value}[/b]`;
+            }
+            return `${value}/${max}`;
+        },
+
+        bar: {
+            shape: 'circle',
+            barColor: COLOR_LIGHT,
+            barColor2: COLOR_DARK,
+            trackColor: COLOR_DARK,
+            thickness: 0.15,
+            startAngle: Phaser.Math.DegToRad(135),
+            endAngle: Phaser.Math.DegToRad(45),
+        },
+
+        align: {
+            text: 'center',
+        },
+
+        space: {
+            left: 30, right: 30, top: 30, bottom: 30,
+            barTop: 5, barBottom: 5, barLeft: 6, barRight: 5,
         },
 
         levelCounter: {

@@ -1,17 +1,17 @@
 ## Introduction
 
-A container with name text, value text in a row, with a [horizontal line progress bar](canvas-lineprogress.md), and an icon, background.
+Disply experience bar on [NameValueLabel](ui-expbar.md).
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Name-value label](https://codepen.io/rexrainbow/pen/NWMMmeK)
+- [Exp bar](https://codepen.io/rexrainbow/pen/rNogZBL)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-namevaluelabel)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-expbar)
 
 ### Install plugin
 
@@ -21,9 +21,9 @@ A container with name text, value text in a row, with a [horizontal line progres
     ```javascript
     scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
     ```
-- Add label object
+- Add expBar object
     ```javascript
-    var label = scene.rexUI.add.nameValueLabel(config);
+    var expBar = scene.rexUI.add.expBar(config);
     ```
 
 #### Import plugin
@@ -50,9 +50,9 @@ A container with name text, value text in a row, with a [horizontal line progres
     };
     var game = new Phaser.Game(config);
     ```
-- Add label object
+- Add expBar object
     ```javascript
-    var label = scene.rexUI.add.nameValueLabel(config);
+    var expBar = scene.rexUI.add.expBar(config);
     ```
 
 #### Import class
@@ -63,18 +63,18 @@ A container with name text, value text in a row, with a [horizontal line progres
     ```
 - Import class
     ```javascript
-    import { NameValueLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { ExpBar } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
-- Add label object
+- Add expBar object
     ```javascript    
-    var label = new NameValueLabel(scene, config);
-    scene.add.existing(label);
+    var expBar = new ExpBar(scene, config);
+    scene.add.existing(expBar);
     ```
 
-### Add label object
+### Add expBar object
 
 ```javascript
-var label = scene.rexUI.add.nameValueLabel({
+var expBar = scene.rexUI.add.expBar({
     // x: 0,
     // y: 0,
     // anchor: undefined,
@@ -150,10 +150,20 @@ var label = scene.rexUI.add.nameValueLabel({
         actionTop: 0, actionBottom: 0,
     },
 
+    // easeDuration: 1000,
+
+    levelCounter: {
+        table: function(level) { return level * 100; },
+        // table: [0, 100, 200, 300,],        
+        // maxLevel: -1,        
+        // exp: 0,
+    },
+
     // name: '',
     // draggable: false,
     // sizerEvents: false,
     // enableLayer: false,
+
 });
 ```
 
@@ -175,7 +185,7 @@ var label = scene.rexUI.add.nameValueLabel({
 - `rtl` : 
     - `true` : Layout children from right to left.
     - `false` : Layout children from left to right. Default behavior.
-- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of expBar.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
@@ -185,7 +195,7 @@ var label = scene.rexUI.add.nameValueLabel({
 - `valueText` : Game object of valueText.
     - OriginX of nameText will be set to `1`.
     - Empty text will be set to a space character `' '`. To preserve height of this text game object.
-- `valueTextFormatCallback` : An optional callback to return a string set to `valueText` game object when invokeing [`label.setValue(value, min, max)` method](ui-namevaluelabel.md#set-value).
+- `valueTextFormatCallback` : An optional callback to return a string set to `valueText` game object when invokeing [`expBar.setValue(value, min, max)` method](ui-expbar.md#set-value).
     ```javascript
     function(value, min, max) {
         return `${value}/${max}`;
@@ -226,6 +236,22 @@ var label = scene.rexUI.add.nameValueLabel({
     - `space.bar`, `space.barLeft`, `space.barRight`, `space.barBottom` : Space around bar game object.
     - `space.text` : Space between text game object and action icon game object.
     - `space.actionTop`, `space.actionBottom` : Space around action game object.
+- `easeDuration` : Total duration of easing value from level-start to level-end. Default value is `1000` ms.
+- `levelCounter` : Config of [level-counter](levelcounter.md#create-instance)
+    - `levelCounter.table` : Level table, return experience value from level value. Level value starts from `0`.
+        - A callback
+            ```javascript
+            function(level) {
+                return experience;
+            }
+            ```
+        - A number array : Experience value of each level.
+    - `levelCounter.maxLevel` :
+        - `undefined` : Default value
+            - No upper limit for callback level table.
+            - `(table.length - 1)` for number array level table.
+        - A number : Maximum level value
+    - `levelCounter.exp` : Initial experience value. Default value is `0`.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -237,7 +263,7 @@ var label = scene.rexUI.add.nameValueLabel({
 
 - Define class
     ```javascript
-    class MyNameValueLabel extends RexPlugins.UI.NameValueLabel {
+    class MyExpBar extends RexPlugins.UI.ExpBar {
         constructor(scene, config) {
             super(scene, config);
             // ...
@@ -248,7 +274,7 @@ var label = scene.rexUI.add.nameValueLabel({
     ```
 - Create instance
     ```javascript
-    var label = new MyNameValueLabel(scene, config);
+    var expBar = new MyExpBar(scene, config);
     ```
 
 ### Layout children
@@ -256,7 +282,7 @@ var label = scene.rexUI.add.nameValueLabel({
 Arrange position of all elements.
 
 ```javascript
-label.layout();
+expBar.layout();
 ```
 
 See also - [dirty](ui-basesizer.md#dirty)
@@ -266,143 +292,105 @@ See also - [dirty](ui-basesizer.md#dirty)
 - Get element
     - Background game object
         ```javascript
-        var background = label.getElement('background');
+        var background = expBar.getElement('background');
         ```
     - Icon game object
         ```javascript
-        var icon = label.getElement('icon');
+        var icon = expBar.getElement('icon');
         ```
     - NameText game object
         ```javascript
-        var nameTextObject = label.getElement('name');
+        var nameTextObject = expBar.getElement('name');
         ```
     - ValueText game object
         ```javascript
-        var valueTextObject = label.getElement('value');
+        var valueTextObject = expBar.getElement('value');
         ```
     - Bar game object
         ```javascript
-        var textObject = label.getElement('bar');
+        var textObject = expBar.getElement('bar');
         ```
     - Action icon game object
         ```javascript
-        var action = label.getElement('action');
+        var action = expBar.getElement('action');
         ```
 - Get by name
     ```javascript
-    var gameObject = label.getElement('#' + name);
-    // var gameObject = label.getElement('#' + name, recursive);
+    var gameObject = expBar.getElement('#' + name);
+    // var gameObject = expBar.getElement('#' + name, recursive);
     ```
     or
     ```javascript
-    var gameObject = label.getByName(name);
-    // var gameObject = label.getByName(name, recursive);
+    var gameObject = expBar.getByName(name);
+    // var gameObject = expBar.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 
-### Name text
 
-- Get nameText string
-    ```javascript
-    var s = label.nameText;
-    ```
-- Set nameText string
-    ```javascript
-    label.setNameText(s);
-    ```
-    or
-    ```javascript
-    label.nameText = s;
-    ```
+### Accumulate experience
 
-### Value text
+- Accumulate experience
+    ```javascript
+    expBar.gainExp(incExp);
+    // expBar.exp += incExp;
+    ```
+    - Will fire `'levelup'` event
+- Reset experience value
+    ```javascript
+    expBar.resetExp(exp);
+    ```
+    - Won't fire `'levelup'` event.
+- Force level up
+    ```javascript
+    expBar.setLevel(level);
+    ```
+    - Will fire `'levelup'` event
 
-- Get valueText string
-    ```javascript
-    var s = label.valueText;
-    ```
-- Set valueText string
-    ```javascript
-    label.setValueText(s);
-    ```
-    or
-    ```javascript
-    label.valueText = s;
-    ```
+### Level and experience
 
-### Bar
-
-- Get bar value
+- Get current experience
     ```javascript
-    var s = label.barValue;
+    var exp = expBar.getExp();
+    // var exp = expBar.exp;
     ```
-- Set bar value
+- Get current level
     ```javascript
-    label.setBarValue(value);  // 0~1
+    var level = expBar.getLevel();
+    // var level = expBar.level;
     ```
-    or
+- Get current required experience to next level
     ```javascript
-    label.setBarValue(value, min, max);  // min~max
+    var exp = expBar.requiredExp;
     ```
-    or
+- Get experience of level
     ```javascript
-    label.barValue = t;  // 0~1
+    var exp = expBar.getExp(level);
     ```
-- Ease bar value
+- Get level from experience
     ```javascript
-    label.easeBarValueTo(value);  // 0~1
+    var level = expBar.getLevel(exp);
     ```
-    or
+- Get required experience to level
     ```javascript
-    label.easeBarValueTo(value, min, max);    // min~max
+    var exp = expBar.getRequiredExpToNextLevel(level);
+    // var exp = expBar.getRequiredExpToNextLevel(level, exp);
     ```
 
-### Icon texture
+### Events
 
-- Set texture
+- Easing of Level-up to level-end
     ```javascript
-    label.setTexture(key);
-    // label.setTexture(key, frame);
+    expBar.on('levelup', function(level){        
+    }, scope);
     ```
-- Set texture via texture object
+    - `level` : Current level
+- Total easing of Level-up complete
     ```javascript
-    label.setTexture(texture);
-    // label.setTexture(texture, frame);
+    expBar.on('levelup.complete', function(level){        
+    }, scope);
     ```
-- Get texture, frame.
-    ```javascript
-    var texture = label.texture;
-    var frame = label.frame;
-    ```
-- Get texture key, frame name.
-    ```javascript
-    var textureKey = label.texture.key;
-    var frameName = label.frame.name;
-    ```
-
-### Set value
-
-Set valueText game object and bar game object.
-
-```javascript
-label.setValue(value, min, max);
-```
-
-Will invoke `valueTextFormatCallback` callback.
-
-### Ease value
-
-Ease valueText game object and bar game object.
-
-```javascript
-label
-    .setEaseValueDuration(duration)
-    .easeValueTo(value, min, max);
-```
-
-Will invoke `valueTextFormatCallback` callback.
-
+    - `level` : Current level
 
 ### Other properties
 
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+See [NameValueLabel](ui-namevaluelabel.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

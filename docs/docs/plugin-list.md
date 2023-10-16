@@ -200,6 +200,7 @@
 1. [UI/Confrim dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [UI/Dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [UI/Drop down list](ui-dropdownlist.md): A label can open a drop-down list panel.
+1. [UI/Exp bar](ui-expbar.md): Disply experience bar on NameValueLabel.
 1. [UI/File selector button](ui-fileselectorbutton.md): A transparent file chooser button above a Label.
 1. [UI/Fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 1. [UI/Fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.

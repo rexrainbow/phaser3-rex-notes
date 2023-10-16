@@ -124,6 +124,10 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
     - Won't fire `'levelup'` event.
 - Force level up
     ```javascript
+    levelCounter.setLevel(level);
+    ```
+    or
+    ```javascript
     levelCounter.setLevel(level, callback, scope);
     ```
     - Will fire `'levelup'` event, or invoke `callback` many times.
