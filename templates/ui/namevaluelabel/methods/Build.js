@@ -1,5 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import LineProgressCanvas from '../../lineprogresscanvas/LineProgressCanvas.js';
+import CircularProgress from '../../circularprogresscanvas/CircularProgressCanvas.js';
 import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -16,8 +17,11 @@ var Build = function (scene, config) {
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
 
+    var isLineBar = true;
     if (IsPlainObject(bar)) {
-        bar = new LineProgressCanvas(scene, bar);
+        isLineBar = GetValue(bar, 'shape', 'line') === 'line';
+        var BarClass = (isLineBar) ? LineProgressCanvas : CircularProgress;
+        bar = new BarClass(scene, bar);
         scene.add.existing(bar);
         // Move bar game object below nameText and valueText
         if (nameText) {
@@ -120,16 +124,30 @@ var Build = function (scene, config) {
         }
 
         if (bar) {
-            var padding = {
-                top: (nameValueSizer) ? GetValue(config, 'space.bar', 0) : 0,
-                bottom: GetValue(config, 'space.barBottom', 0),
-                left: GetValue(config, 'space.barLeft', 0),
-                right: GetValue(config, 'space.barRight', 0),
-            };
-            textSizer.add(
-                bar,
-                { expand: true, padding: padding }
-            );
+            if (isLineBar) {
+                var paddingTop = (nameValueSizer) ? GetValue(config, 'space.bar') : 0;
+                if (paddingTop === undefined) {
+                    paddingTop = GetValue(config, 'space.barTop', 0)
+                }
+                var padding = {
+                    top: paddingTop,
+                    bottom: GetValue(config, 'space.barBottom', 0),
+                    left: GetValue(config, 'space.barLeft', 0),
+                    right: GetValue(config, 'space.barRight', 0),
+                };
+                textSizer.add(
+                    bar,
+                    { expand: true, padding: padding }
+                );
+            } else {
+                var padding = {
+                    top: GetValue(config, 'space.barTop', 0),
+                    bottom: GetValue(config, 'space.barBottom', 0),
+                    left: GetValue(config, 'space.barLeft', 0),
+                    right: GetValue(config, 'space.barRight', 0),
+                }
+                this.addBackground(bar, padding);
+            }
         }
 
         var padding = undefined;

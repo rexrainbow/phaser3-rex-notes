@@ -5,9 +5,11 @@ import DrawContent from './DrawContent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const NormalizeAngle = Phaser.Math.Angle.Normalize;
 const Clamp = Phaser.Math.Clamp;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
+const PI2 = Phaser.Math.PI2;
 
 class CircularProgress extends ProgressBase(Canvas) {
     constructor(scene, x, y, radius, barColor, value, config) {
@@ -28,10 +30,12 @@ class CircularProgress extends ProgressBase(Canvas) {
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
         this.setBarColor(barColor);
+        this.setBarColor2(GetValue(config, 'barColor2', undefined));
         this.setCenterColor(GetValue(config, 'centerColor', undefined));
 
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
+        this.setEndAngle(GetValue(config, 'endAngle', this.startAngle + PI2))
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
         this.setTextColor(GetValue(config, 'textColor', undefined));
@@ -115,17 +119,51 @@ class CircularProgress extends ProgressBase(Canvas) {
         return this;
     }
 
+    get barColor2() {
+        return this._barColor2;
+    }
+
+    set barColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._barColor2 != value);
+        this._barColor2 = value;
+    }
+
+    setBarColor2(color) {
+        this.barColor2 = color;
+        return this;
+    }
+
     get startAngle() {
         return this._startAngle;
     }
 
     set startAngle(value) {
+        value = NormalizeAngle(value);
         this.dirty = this.dirty || (this._startAngle != value);
         this._startAngle = value;
     }
 
     setStartAngle(angle) {
         this.startAngle = angle;
+        return this;
+    }
+
+    get endAngle() {
+        return this._endAngle;
+    }
+
+    set endAngle(value) {
+        if (value < this.startAngle) {
+            value += PI2;
+        }
+
+        this.dirty = this.dirty || (this._endAngle != value);
+        this._endAngle = value;
+    }
+
+    setEndAngle(angle) {
+        this.endAngle = angle;
         return this;
     }
 

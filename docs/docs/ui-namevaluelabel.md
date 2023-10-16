@@ -93,6 +93,8 @@ var label = scene.rexUI.add.nameValueLabel({
     // valueTextFormatCallback: function(value, min, max) {
     //     return `${value}/${max}`;
     // },
+
+    // line bar
     bar: {
         trackColor: undefined,
         trackThickness: 2,
@@ -109,6 +111,9 @@ var label = scene.rexUI.add.nameValueLabel({
             ease: 'linear'
         },
     }, 
+
+    // circle bar
+    
     // bar: undefined,
 
     action: actionGameObject,

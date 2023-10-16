@@ -1,4 +1,5 @@
 import LineProgressCanvas from '../lineprogresscanvas/LineProgressCanvas';
+import CircularProgressCanvas from '../circularprogresscanvas/CircularProgressCanvas';
 
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
@@ -6,6 +7,14 @@ import Sizer from '../sizer/Sizer';
 export default NameValueLabel;
 
 declare namespace NameValueLabel {
+
+    interface ILineProgressCanvasConfig extends LineProgressCanvas.IConfig {
+        shape?: 'line',
+    }
+
+    interface ICircularProgressCanvasConfig extends CircularProgressCanvas.IConfig {
+        shape: 'circle',
+    }
 
     interface IConfig extends Sizer.IConfig {
         space?: {
@@ -16,7 +25,7 @@ declare namespace NameValueLabel {
             name?: number,
             value?: number,
 
-            bar?: number, barBottom?: number, barLeft?: number, barRight?: number,
+            bar?: number, batTop?: number, barBottom?: number, barLeft?: number, barRight?: number,
 
             action?: number, actionTop?: number, actionBottom?: number, actionLeft?: number, actionRight?: number,
         },
@@ -28,7 +37,7 @@ declare namespace NameValueLabel {
 
         nameText?: Phaser.GameObjects.GameObject,
         valueText?: Phaser.GameObjects.GameObject,
-        bar?: Phaser.GameObjects.GameObject | LineProgressCanvas.IConfig,
+        bar?: Phaser.GameObjects.GameObject | ILineProgressCanvasConfig | ICircularProgressCanvasConfig,
 
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,

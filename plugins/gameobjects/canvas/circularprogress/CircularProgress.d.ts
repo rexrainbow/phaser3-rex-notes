@@ -20,6 +20,7 @@ declare namespace CircularProgressCanvas {
         centerColor?: string | number,
         thickness?: number,
         startAngle?: number,
+        endAngle?: number,
         anticlockwise?: boolean,
 
         textColor?: string | number,
@@ -85,10 +86,16 @@ declare class CircularProgressCanvas extends Canvas {
     setThickness(thickness: number): this;
 
     barColor: string;
-    setBarColor(barColor?: string | number): this;
+    setBarColor(color?: string | number): this;
+
+    barColor2: string;
+    setBarColor2(color?: string | number): this;
 
     startAngle: number;
     setStartAngle(startAngle: number): this;
+
+    endAngle: number;
+    setEndAngle(endAngle: number): this;
 
     anticlockwise: boolean;
     setAnticlockwise(anticlockwise: boolean): this;

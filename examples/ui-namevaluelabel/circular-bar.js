@@ -18,11 +18,9 @@ class Demo extends Phaser.Scene {
     create() {
         var label0 = this.rexUI.add.nameValueLabel({
             x: 400, y: 300,
-            width: 200, height: 40,
+            width: 200, height: 200,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
-
-            icon: this.add.rectangle(0, 0, 20, 20, 0xa98274),
+            // background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
 
@@ -38,20 +36,22 @@ class Demo extends Phaser.Scene {
             },
 
             bar: {
-                height: 6,
-                barColor: COLOR_PRIMARY,
+                shape: 'circle',
+                barColor: COLOR_LIGHT,
                 barColor2: COLOR_DARK,
-                // trackColor: COLOR_DARK,
-                // trackStrokeColor: COLOR_LIGHT
+                trackColor: COLOR_DARK,
+                thickness: 0.2,
+                startAngle: Phaser.Math.DegToRad(135),
+                endAngle: Phaser.Math.DegToRad(45),
             },
 
             align: {
+                text: 'center',
             },
 
             space: {
-                left: 20, right: 20, top: 20, bottom: 20,
-                icon: 10,
-                bar: -6
+                left: 30, right: 30, top: 30, bottom: 30,
+                barTop: 5, barBottom: 5, barLeft: 6, barRight: 5,
             }
 
         })

@@ -25744,6 +25744,7 @@
     }
   };
 
+  Phaser.Math.PI2;
   var DrawContent$1 = function DrawContent() {
     var x = this.radius;
     var lineWidth = this.thickness * this.radius;
@@ -25751,29 +25752,37 @@
     var centerRadius = this.radius - lineWidth;
     var canvas = this.canvas,
       context = this.context;
+    var anticlockwise = this.anticlockwise,
+      startAngle = this.startAngle,
+      endAngle = this.endAngle,
+      deltaAngle = endAngle - startAngle;
 
     // Draw track
     if (this.trackColor && lineWidth > 0) {
       context.save();
-      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.trackColor, lineWidth);
+      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.trackColor, lineWidth, startAngle, endAngle, anticlockwise);
       context.restore();
     }
 
     // Draw bar
     if (this.barColor && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 2 * Math.PI;
-      } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = this.startAngle;
-        var deltaAngle = 2 * Math.PI * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
-      }
+      var barDeltaAngle = deltaAngle * (anticlockwise ? 1 - this.value : this.value);
+      var barEndAngle = barDeltaAngle + startAngle;
       context.save();
-      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.barColor, lineWidth, startAngle, endAngle, anticlockwise);
+      var style;
+      if (this.barColor2) {
+        var x0 = x + barRadius * Math.cos(startAngle),
+          y0 = x + barRadius * Math.sin(startAngle),
+          x1 = x + barRadius * Math.cos(barEndAngle),
+          y1 = x + barRadius * Math.sin(barEndAngle);
+        var grd = context.createLinearGradient(x0, y0, x1, y1);
+        grd.addColorStop(0, this.barColor2);
+        grd.addColorStop(1, this.barColor);
+        style = grd;
+      } else {
+        style = this.barColor;
+      }
+      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, style, lineWidth, startAngle, barEndAngle, anticlockwise);
       context.restore();
     }
 
@@ -25806,8 +25815,10 @@
 
   var GetValue$2y = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
+  var NormalizeAngle$1 = Phaser.Math.Angle.Normalize;
   var Clamp$b = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
+  var PI2 = Phaser.Math.PI2;
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
     var _super = _createSuper(CircularProgress);
@@ -25829,9 +25840,11 @@
       _this.setRadius(radius);
       _this.setTrackColor(GetValue$2y(config, 'trackColor', undefined));
       _this.setBarColor(barColor);
+      _this.setBarColor2(GetValue$2y(config, 'barColor2', undefined));
       _this.setCenterColor(GetValue$2y(config, 'centerColor', undefined));
       _this.setThickness(GetValue$2y(config, 'thickness', 0.2));
       _this.setStartAngle(GetValue$2y(config, 'startAngle', DefaultStartAngle));
+      _this.setEndAngle(GetValue$2y(config, 'endAngle', _this.startAngle + PI2));
       _this.setAnticlockwise(GetValue$2y(config, 'anticlockwise', false));
       _this.setTextColor(GetValue$2y(config, 'textColor', undefined));
       _this.setTextStrokeColor(GetValue$2y(config, 'textStrokeColor', undefined), GetValue$2y(config, 'textStrokeThickness', undefined));
@@ -25906,11 +25919,28 @@
         return this;
       }
     }, {
+      key: "barColor2",
+      get: function get() {
+        return this._barColor2;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || this._barColor2 != value;
+        this._barColor2 = value;
+      }
+    }, {
+      key: "setBarColor2",
+      value: function setBarColor2(color) {
+        this.barColor2 = color;
+        return this;
+      }
+    }, {
       key: "startAngle",
       get: function get() {
         return this._startAngle;
       },
       set: function set(value) {
+        value = NormalizeAngle$1(value);
         this.dirty = this.dirty || this._startAngle != value;
         this._startAngle = value;
       }
@@ -25918,6 +25948,24 @@
       key: "setStartAngle",
       value: function setStartAngle(angle) {
         this.startAngle = angle;
+        return this;
+      }
+    }, {
+      key: "endAngle",
+      get: function get() {
+        return this._endAngle;
+      },
+      set: function set(value) {
+        if (value < this.startAngle) {
+          value += PI2;
+        }
+        this.dirty = this.dirty || this._endAngle != value;
+        this._endAngle = value;
+      }
+    }, {
+      key: "setEndAngle",
+      value: function setEndAngle(angle) {
+        this.endAngle = angle;
         return this;
       }
     }, {
@@ -43814,8 +43862,11 @@
     var bar = GetValue$1o(config, 'bar', undefined);
     var action = GetValue$1o(config, 'action', undefined);
     var actionMask = GetValue$1o(config, 'actionMask', undefined);
+    var isLineBar = true;
     if (IsPlainObject$d(bar)) {
-      bar = new LineProgress(scene, bar);
+      isLineBar = GetValue$1o(bar, 'shape', 'line') === 'line';
+      var BarClass = isLineBar ? LineProgress : CircularProgress;
+      bar = new BarClass(scene, bar);
       scene.add.existing(bar);
       // Move bar game object below nameText and valueText
       if (nameText) {
@@ -43899,16 +43950,30 @@
         });
       }
       if (bar) {
-        var padding = {
-          top: nameValueSizer ? GetValue$1o(config, 'space.bar', 0) : 0,
-          bottom: GetValue$1o(config, 'space.barBottom', 0),
-          left: GetValue$1o(config, 'space.barLeft', 0),
-          right: GetValue$1o(config, 'space.barRight', 0)
-        };
-        textSizer.add(bar, {
-          expand: true,
-          padding: padding
-        });
+        if (isLineBar) {
+          var paddingTop = nameValueSizer ? GetValue$1o(config, 'space.bar') : 0;
+          if (paddingTop === undefined) {
+            paddingTop = GetValue$1o(config, 'space.barTop', 0);
+          }
+          var padding = {
+            top: paddingTop,
+            bottom: GetValue$1o(config, 'space.barBottom', 0),
+            left: GetValue$1o(config, 'space.barLeft', 0),
+            right: GetValue$1o(config, 'space.barRight', 0)
+          };
+          textSizer.add(bar, {
+            expand: true,
+            padding: padding
+          });
+        } else {
+          var padding = {
+            top: GetValue$1o(config, 'space.barTop', 0),
+            bottom: GetValue$1o(config, 'space.barBottom', 0),
+            left: GetValue$1o(config, 'space.barLeft', 0),
+            right: GetValue$1o(config, 'space.barRight', 0)
+          };
+          this.addBackground(bar, padding);
+        }
       }
       var padding = undefined;
       if (action) {
@@ -44024,7 +44089,6 @@
     }
   };
 
-  Phaser.Utils.Objects.GetValue;
   var NameValueLabel = /*#__PURE__*/function (_Sizer) {
     _inherits(NameValueLabel, _Sizer);
     var _super = _createSuper(NameValueLabel);

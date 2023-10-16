@@ -96,10 +96,12 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, barColor, value, {
+    barColor2: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
+    endAngle: Phaser.Math.DegToRad(270+360),
     anticlockwise: false,
 
     textColor: undefined,
@@ -130,10 +132,12 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
     radius: 1,
 
     barColor: undefined,
+    barColor2: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
+    endAngle: Phaser.Math.DegToRad(270+360),
     anticlockwise: false,
 
     textColor: undefined,
@@ -158,11 +162,12 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
 
 - `x`, `y` : Position of this object.
 - `radius` : Radius of this circle. Size will be `(radius*2, radius*2)`.
-- `barColor` : Color of circular bar, in number or css string value.
+- `barColor`, `barColor2` : Fill color of circular bar, in number or css string value. Assign gradient start color by `barColor2`.
 - `trackColor` : Color of circular track, in number or css string value.
 - `centerColor` : Color of center circle, in number or css string value.
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
-- `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
+- `startAngle` : Start angle of circular bar, in radians. Default value is `270` degrees.
+- `endAngle` : End angle of circular bar, in radians. Default value is `270+360` degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
 - `textColor` : Color of display text. Default is `undefined`.
 - `textStrokeColor`, `textStrokeThickness` : Stroke color, stroke line width of display text. Default is `undefined`.
@@ -193,10 +198,12 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     radius: 1,
 
     barColor: undefined,
+    barColor2: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
+    endAngle: Phaser.Math.DegToRad(270+360),
     anticlockwise: false,
 
     textColor: undefined,
@@ -346,8 +353,18 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
         ```
     - Set
         ```javascript
-        circularProgress.setBarColor(barColor);
-        // circularProgress.barColor = barColor;
+        circularProgress.setBarColor(color);
+        // circularProgress.barColor = color;
+        ```
+- Color2
+    - Get
+        ```javascript
+        var barColor2 = circularProgress.barColor2;
+        ```
+    - Set
+        ```javascript
+        circularProgress.setBarColor2(color);
+        // circularProgress.barColor2 = color;
         ```
 - Thickness : `radius*thickness`
     ```javascript
@@ -365,6 +382,17 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
         circularProgress.startAngle = startAngle;
         ```
         - `startAngle` : Start angle of circular bar, in radians.
+- End angle
+    - Get
+        ```javascript
+        var endAngle = circularProgress.endAngle;
+        ```
+    - Set
+        ```javascript
+        circularProgress.setEndAngle(endAngle);
+        circularProgress.endAngle = endAngle;
+        ```
+        - `endAngle` : End angle of circular bar, in radians.
 - Anticlockwise
     - Get
         ```javascript

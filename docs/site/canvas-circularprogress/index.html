@@ -9850,10 +9850,12 @@
 </code></pre></div>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">circularProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">barColor2</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">centerColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">thickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">startAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">endAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="o">+</span><span class="mf">360</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">anticlockwise</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">textColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -9881,10 +9883,12 @@
 <span class="w">    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">barColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">barColor2</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">centerColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">thickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">startAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">endAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="o">+</span><span class="mf">360</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">anticlockwise</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">textColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -9909,11 +9913,12 @@
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>radius</code> : Radius of this circle. Size will be <code>(radius*2, radius*2)</code>.</li>
-<li><code>barColor</code> : Color of circular bar, in number or css string value.</li>
+<li><code>barColor</code>, <code>barColor2</code> : Fill color of circular bar, in number or css string value. Assign gradient start color by <code>barColor2</code>.</li>
 <li><code>trackColor</code> : Color of circular track, in number or css string value.</li>
 <li><code>centerColor</code> : Color of center circle, in number or css string value.</li>
 <li><code>thickness</code> : <code>0</code> ~ <code>1</code>, thickness of circular bar. Default value is <code>0.2</code> (<code>0.2*radius</code>)</li>
-<li><code>startAngle</code> : Start angle of circular bar, in radians. Default value is 270 degrees.</li>
+<li><code>startAngle</code> : Start angle of circular bar, in radians. Default value is <code>270</code> degrees.</li>
+<li><code>endAngle</code> : End angle of circular bar, in radians. Default value is <code>270+360</code> degrees.</li>
 <li><code>anticlockwise</code> : Set <code>true</code> to put anticlockwise circular bar. Default value is <code>false</code>.</li>
 <li><code>textColor</code> : Color of display text. Default is <code>undefined</code>.</li>
 <li><code>textStrokeColor</code>, <code>textStrokeThickness</code> : Stroke color, stroke line width of display text. Default is <code>undefined</code>.</li>
@@ -9942,10 +9947,12 @@
 <span class="w">    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">barColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">barColor2</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">centerColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">thickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">startAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">endAngle</span><span class="o">:</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mf">270</span><span class="o">+</span><span class="mf">360</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">anticlockwise</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">textColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -10083,8 +10090,18 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">barColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">barColor</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setBarColor</span><span class="p">(</span><span class="nx">barColor</span><span class="p">);</span>
-<span class="c1">// circularProgress.barColor = barColor;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setBarColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// circularProgress.barColor = color;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Color2<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">barColor2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">barColor2</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setBarColor2</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// circularProgress.barColor2 = color;</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -10103,6 +10120,19 @@
 <span class="nx">circularProgress</span><span class="p">.</span><span class="nx">startAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">startAngle</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>startAngle</code> : Start angle of circular bar, in radians.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>End angle<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">endAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">endAngle</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setEndAngle</span><span class="p">(</span><span class="nx">endAngle</span><span class="p">);</span>
+<span class="nx">circularProgress</span><span class="p">.</span><span class="nx">endAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">endAngle</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>endAngle</code> : End angle of circular bar, in radians.</li>
 </ul>
 </li>
 </ul>
