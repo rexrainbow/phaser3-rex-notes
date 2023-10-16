@@ -23,6 +23,10 @@ class Demo extends Phaser.Scene {
             barColor: COLOR_LIGHT,
             centerColor: COLOR_PRIMARY,
 
+            // startAngle: Phaser.Math.DegToRad(270-45),
+            // endAngle: Phaser.Math.DegToRad(270+45),
+            // anticlockwise: true,
+
             // textColor: 0xffffff,
             textStrokeColor: 'red',
             textStrokeThickness: 3,

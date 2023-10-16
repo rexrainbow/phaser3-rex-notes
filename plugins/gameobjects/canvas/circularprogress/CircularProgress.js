@@ -142,6 +142,7 @@ class CircularProgress extends ProgressBase(Canvas) {
         value = NormalizeAngle(value);
         this.dirty = this.dirty || (this._startAngle != value);
         this._startAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
     }
 
     setStartAngle(angle) {
@@ -154,12 +155,10 @@ class CircularProgress extends ProgressBase(Canvas) {
     }
 
     set endAngle(value) {
-        if (value < this.startAngle) {
-            value += PI2;
-        }
-
+        value = NormalizeAngle(value);
         this.dirty = this.dirty || (this._endAngle != value);
         this._endAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
     }
 
     setEndAngle(angle) {
@@ -174,6 +173,7 @@ class CircularProgress extends ProgressBase(Canvas) {
     set anticlockwise(value) {
         this.dirty = this.dirty || (this._anticlockwise != value);
         this._anticlockwise = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
     }
 
     setAnticlockwise(anticlockwise) {
@@ -313,6 +313,22 @@ class CircularProgress extends ProgressBase(Canvas) {
             text = this.textFormatCallback.call(this.textFormatCallbackScope, value);
         }
         return text;
+    }
+}
+
+var GetDeltaAngle = function (startAngle, endAngle, anticlockwise) {
+    if (anticlockwise) {
+        if (startAngle <= endAngle) {
+            return (PI2 + startAngle) - endAngle;
+        } else {
+            return startAngle - endAngle;
+        }
+    } else {
+        if (startAngle >= endAngle) {
+            return (PI2 + endAngle) - startAngle;
+        } else {
+            return endAngle - startAngle;
+        }
     }
 }
 

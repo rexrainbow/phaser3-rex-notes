@@ -14,7 +14,7 @@ var DrawContent = function () {
     var anticlockwise = this.anticlockwise,
         startAngle = this.startAngle,
         endAngle = this.endAngle,
-        deltaAngle = endAngle - startAngle;
+        deltaAngle = this._deltaAngle;
 
     // Draw track
     if (this.trackColor && (lineWidth > 0)) {
@@ -35,8 +35,12 @@ var DrawContent = function () {
 
     // Draw bar
     if ((this.barColor) && (barRadius > 0)) {
-        var barDeltaAngle = deltaAngle * ((anticlockwise) ? (1 - this.value) : this.value);
-        var barEndAngle = barDeltaAngle + startAngle;
+        var barEndAngle;
+        if (anticlockwise) {
+            barEndAngle = (startAngle - (deltaAngle * this.value) + PI2) % PI2;
+        } else {
+            barEndAngle = (startAngle + deltaAngle * this.value) % PI2;
+        }
 
         context.save();
 
