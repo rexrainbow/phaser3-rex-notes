@@ -46,6 +46,7 @@ import Label from './label/Label';
 import SimpleLabel from './simplelabel/SimpleLabel';
 import TitleLabel from './titlelabel/TitleLabel';
 import NameValueLabel from './namevaluelabel/NameValueLabel';
+import ExpBar from './expbar/ExpBar';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel';
 import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
@@ -172,6 +173,7 @@ export {
     SimpleLabel,
     TitleLabel,
     NameValueLabel,
+    ExpBar,
     ImageInputLabel,
     Buttons,
     GridButtons,

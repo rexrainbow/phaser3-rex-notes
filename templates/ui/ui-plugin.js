@@ -49,6 +49,7 @@ import LabelFactory from './label/Factory.js';
 import SimpleLabelFactory from './simplelabel/Factory.js';
 import TitleLabelFactory from './titlelabel/Factory.js';
 import NameValueLabelFactory from './namevaluelabel/Factory.js';
+import ExpBarFactory from './expbar/Factory.js';
 import ButtonsFactory from './buttons/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory.js';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory.js';

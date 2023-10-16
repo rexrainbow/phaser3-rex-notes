@@ -17,6 +17,8 @@ class Player extends ComponentBase {
         this.clock = clock;
         this.clock.on('update', this.update, this);
 
+        this.commands = [];
+
         this.resetFromJSON(config); // this function had been called in super(config)
     }
 
@@ -89,7 +91,7 @@ class Player extends ComponentBase {
             });
         }
 
-        this.commands = commands;
+        ArrayCopy(this.commands, commands);
         this.scope = scope;
         return this;
     }
@@ -185,10 +187,12 @@ class Player extends ComponentBase {
         if (this.nextTime > now) {
             return this;
         }
-        var lastCommandIndex = this.commands.length - 1;
+
+        var commands = this.commands;
+
         while (1) {
             // Execute a command
-            var item = this.commands[this.index];
+            var item = commands[this.index];
             var command = item[1];
             if (!IsArray(command)) { // [dt, fnName, param0, param1, ...]
                 command = ArrayCopy(CMD, item, 1);
@@ -197,7 +201,7 @@ class Player extends ComponentBase {
             this.emit('runcommand', command, this.scope);
             // Execute a command
 
-            if (this.index === lastCommandIndex) {
+            if (this.index >= (commands.length - 1)) {
                 this.nextTime = 0;
                 this.complete();
                 return this;

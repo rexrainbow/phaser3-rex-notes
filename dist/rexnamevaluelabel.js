@@ -12648,9 +12648,6 @@
           this.setValue(this.value, this.minValue, this.maxValue);
         }, this);
       }
-      if (this.easeValueDuration === undefined) {
-        this.easeValueDuration = 1000;
-      }
       this.easeValueTask.restart({
         key: 'value',
         to: value,
@@ -12660,6 +12657,7 @@
     }
   };
 
+  Phaser.Utils.Objects.GetValue;
   var NameValueLabel = /*#__PURE__*/function (_Sizer) {
     _inherits(NameValueLabel, _Sizer);
     var _super = _createSuper(NameValueLabel);
@@ -12670,6 +12668,7 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexNameValueLabel';
       Build.call(_assertThisInitialized(_this), scene, config);
+      _this.setEaseValueDuration(1000);
       return _this;
     }
 

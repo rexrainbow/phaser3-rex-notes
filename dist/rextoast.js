@@ -12219,6 +12219,7 @@
       }
       _this.clock = clock;
       _this.clock.on('update', _this.update, _assertThisInitialized(_this));
+      _this.commands = [];
       _this.resetFromJSON(config); // this function had been called in super(config)
       return _this;
     }
@@ -12289,7 +12290,7 @@
             return dtA > dtB ? 1 : dtA < dtB ? -1 : 0;
           });
         }
-        this.commands = commands;
+        Copy(this.commands, commands);
         this.scope = scope;
         return this;
       }
@@ -12398,10 +12399,10 @@
         if (this.nextTime > now) {
           return this;
         }
-        var lastCommandIndex = this.commands.length - 1;
+        var commands = this.commands;
         while (1) {
           // Execute a command
-          var item = this.commands[this.index];
+          var item = commands[this.index];
           var command = item[1];
           if (!IsArray(command)) {
             // [dt, fnName, param0, param1, ...]
@@ -12411,7 +12412,7 @@
           this.emit('runcommand', command, this.scope);
           // Execute a command
 
-          if (this.index === lastCommandIndex) {
+          if (this.index >= commands.length - 1) {
             this.nextTime = 0;
             this.complete();
             return this;

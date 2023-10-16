@@ -171,41 +171,41 @@ class LevelCounter extends EventEmitter {
         return (exp >= this.getExp(level)) && (exp < this.getExp(level + 1));
     }
 
-    gainExp(incExp, callback) {
+    gainExp(incExp, callback, scope) {
         if (callback) {
-            this.on('levelup', callback);
+            this.on('levelup', callback, scope);
         }
 
         this.exp += incExp;
 
         if (callback) {
-            this.off('levelup', callback);
+            this.off('levelup', callback, scope);
         }
         return this;
     }
 
-    setExp(exp, callback) {
+    setExp(exp, callback, scope) {
         if (callback) {
-            this.on('levelup', callback);
+            this.on('levelup', callback, scope);
         }
 
         this.exp = exp;
 
         if (callback) {
-            this.off('levelup', callback);
+            this.off('levelup', callback, scope);
         }
         return this;
     }
 
-    setLevel(level, callback) {
+    setLevel(level, callback, scope) {
         if (callback) {
-            this.on('levelup', callback);
+            this.on('levelup', callback, scope);
         }
 
         this.level = level;
 
         if (callback) {
-            this.off('levelup', callback);
+            this.off('levelup', callback, scope);
         }
         return this;
     }

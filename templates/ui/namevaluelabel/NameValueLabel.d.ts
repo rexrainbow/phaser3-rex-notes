@@ -48,7 +48,7 @@ declare namespace NameValueLabel {
             title?: number,
             separator?: number,
             text?: number,
-        }
+        },
     }
 }
 

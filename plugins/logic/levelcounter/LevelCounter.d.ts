@@ -32,9 +32,9 @@ declare class LevelCounter extends EventEmitter {
     setTable(table: LevelCounter.TableType): this;
 
     setMaxLevel(maxLevel?: number): this;
-    hasMaxLevel: boolean;
-    maxLevel: number;
-    maxExp: number;
+    readonly hasMaxLevel: boolean;
+    readonly maxLevel: number;
+    readonly maxExp: number;
 
     resetExp(exp: number): this;
 
@@ -50,17 +50,20 @@ declare class LevelCounter extends EventEmitter {
 
     gainExp(
         incExp: number,
-        callback?: LevelCounter.LevelUpCallback
+        callback?: LevelCounter.LevelUpCallback,
+        scope?: Object
     ): this;
 
     setExp(
         exp: number,
-        callback?: LevelCounter.LevelUpCallback
+        callback?: LevelCounter.LevelUpCallback,
+        scope?: Object
     ): this;
 
     setLevel(
         level: number,
-        callback?: LevelCounter.LevelUpCallback
+        callback?: LevelCounter.LevelUpCallback,
+        scope?: Object
     ): this;
 
 }

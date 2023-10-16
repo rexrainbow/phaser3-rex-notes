@@ -107,7 +107,7 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
     ```
     or
     ```javascript
-    levelCounter.gainExp(incExp, callback);
+    levelCounter.gainExp(incExp, callback, scope);
     ```
     - Will fire `'levelup'` event, or invoke `callback` many times.
         ```javascript
@@ -124,7 +124,7 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
     - Won't fire `'levelup'` event.
 - Force level up
     ```javascript
-    levelCounter.setLevel(level, callback);
+    levelCounter.setLevel(level, callback, scope);
     ```
     - Will fire `'levelup'` event, or invoke `callback` many times.
         ```javascript
@@ -170,7 +170,7 @@ var levelCounter = scene.plugins.get('rexLevelCounter').add({
 - Level-up when accumulating experience
     ```javascript
     levelCounter.on('levelup', function(level, fromExp, toExp, levelStartExp, levelEndExp){        
-    });
+    }, scope);
     ```
     - `level` : To next level
     - `fromExp`, `toExp` : Experience increment from `fromExp` to `toExp`.

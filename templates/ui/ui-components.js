@@ -48,6 +48,7 @@ import Label from './label/Label.js';
 import SimpleLabel from './simplelabel/SimpleLabel.js';
 import TitleLabel from './titlelabel/TitleLabel.js';
 import NameValueLabel from './namevaluelabel/NameValueLabel.js';
+import ExpBar from './expbar/ExpBar.js';
 import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
@@ -174,6 +175,7 @@ export {
     SimpleLabel,
     TitleLabel,
     NameValueLabel,
+    ExpBar,
     Buttons,
     GridButtons,
     FixWidthButtons,

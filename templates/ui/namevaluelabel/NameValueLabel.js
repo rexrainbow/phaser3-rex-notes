@@ -2,6 +2,8 @@ import Sizer from '../sizer/Sizer.js';
 import Build from './methods/Build.js';
 import SetValueMethods from './methods/SetValueMethods.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class NameValueLabel extends Sizer {
     constructor(scene, config) {
         // Create sizer
@@ -9,6 +11,9 @@ class NameValueLabel extends Sizer {
         this.type = 'rexNameValueLabel';
 
         Build.call(this, scene, config);
+
+        this.setEaseValueDuration(1000);
+
     }
 
     // Access nameText game object

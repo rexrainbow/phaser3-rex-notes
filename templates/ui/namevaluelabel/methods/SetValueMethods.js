@@ -66,10 +66,6 @@ export default {
             }, this)
         }
 
-        if (this.easeValueDuration === undefined) {
-            this.easeValueDuration = 1000;
-        }
-
         this.easeValueTask.restart({
             key: 'value',
             to: value,

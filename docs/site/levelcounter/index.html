@@ -9710,7 +9710,7 @@
 <span class="c1">// levelCounter.exp += incExp;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
@@ -9730,7 +9730,7 @@
 </ul>
 </li>
 <li>Force level up
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
@@ -9772,7 +9772,7 @@
 <ul>
 <li>Level-up when accumulating experience
     <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
-<span class="p">});</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>level</code> : To next level</li>
 <li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>

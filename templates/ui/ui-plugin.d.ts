@@ -27,6 +27,7 @@ import DialogFactory from './dialog/Factory';
 import DragFactory from './drag/Factory';
 import DropDownListFactory from './dropdownlist/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
+import ExpBarFactory from './expbar/Factory';
 import FlipFactory from './flip/Factory';
 import FileChooserFactory from './filechooser/Factory';
 import FileDropZoneFactory from './filedropzone/Factory';
@@ -142,7 +143,8 @@ declare class Factories {
     dialog: typeof DialogFactory;
     drag: typeof DragFactory;
     dropDownList: typeof DropDownListFactory;
-    dynamicTextFactory: typeof DynamicTextFactory;
+    dynamicText: typeof DynamicTextFactory;
+    expBar: typeof ExpBarFactory;
     flip: typeof FlipFactory;
     fileChooser: typeof FileChooserFactory;
     fileDropZone: typeof FileDropZoneFactory;
@@ -278,6 +280,7 @@ import DragClass from './drag/Drag';
 import DropDownListClass from './dropdownlist/DropDownList';
 import DynamicTextClass from './dynamictext/DynamicText';
 import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
+import ExpBarClass from './expbar/ExpBar';
 import { Fade as FadeClass } from './fade/Fade.js';
 import FlipClass from './flip/Flip';
 import { FileChooser as FileChooserClass } from './filechooser/FileChooser';
@@ -374,6 +377,7 @@ declare namespace UIPlugin {
     type DropDownList = DropDownListClass;
     type DynamicText = DynamicTextClass;
     type EaseMove = EaseMoveClass;
+    type ExpBar = ExpBarClass;
     type Fade = FadeClass;
     type Flip = FlipClass;
     type FileChooser = FileChooserClass;
