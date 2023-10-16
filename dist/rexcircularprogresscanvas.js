@@ -1591,7 +1591,7 @@
     }
   };
 
-  Phaser.Math.PI2;
+  var PI2$1 = Phaser.Math.PI2;
   var DrawContent = function DrawContent() {
     var x = this.radius;
     var lineWidth = this.thickness * this.radius;
@@ -1602,7 +1602,7 @@
     var anticlockwise = this.anticlockwise,
       startAngle = this.startAngle,
       endAngle = this.endAngle,
-      deltaAngle = endAngle - startAngle;
+      deltaAngle = this._deltaAngle;
 
     // Draw track
     if (this.trackColor && lineWidth > 0) {
@@ -1613,8 +1613,12 @@
 
     // Draw bar
     if (this.barColor && barRadius > 0) {
-      var barDeltaAngle = deltaAngle * (anticlockwise ? 1 - this.value : this.value);
-      var barEndAngle = barDeltaAngle + startAngle;
+      var barEndAngle;
+      if (anticlockwise) {
+        barEndAngle = (startAngle - deltaAngle * this.value + PI2$1) % PI2$1;
+      } else {
+        barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+      }
       context.save();
       var style;
       if (this.barColor2) {
@@ -1790,6 +1794,7 @@
         value = NormalizeAngle(value);
         this.dirty = this.dirty || this._startAngle != value;
         this._startAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
       }
     }, {
       key: "setStartAngle",
@@ -1803,11 +1808,10 @@
         return this._endAngle;
       },
       set: function set(value) {
-        if (value < this.startAngle) {
-          value += PI2;
-        }
+        value = NormalizeAngle(value);
         this.dirty = this.dirty || this._endAngle != value;
         this._endAngle = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
       }
     }, {
       key: "setEndAngle",
@@ -1823,6 +1827,7 @@
       set: function set(value) {
         this.dirty = this.dirty || this._anticlockwise != value;
         this._anticlockwise = value;
+        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
       }
     }, {
       key: "setAnticlockwise",
@@ -1974,6 +1979,21 @@
     }]);
     return CircularProgress;
   }(ProgressBase(Canvas));
+  var GetDeltaAngle = function GetDeltaAngle(startAngle, endAngle, anticlockwise) {
+    if (anticlockwise) {
+      if (startAngle <= endAngle) {
+        return PI2 + startAngle - endAngle;
+      } else {
+        return startAngle - endAngle;
+      }
+    } else {
+      if (startAngle >= endAngle) {
+        return PI2 + endAngle - startAngle;
+      } else {
+        return endAngle - startAngle;
+      }
+    }
+  };
 
   return CircularProgress;
 
