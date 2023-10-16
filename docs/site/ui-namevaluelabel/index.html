@@ -8044,6 +8044,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-expbar/" class="md-nav__link">
+        Exp bar
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9793,7 +9807,10 @@
 <span class="w">    </span><span class="c1">// valueTextFormatCallback: function(value, min, max) {</span>
 <span class="w">    </span><span class="c1">//     return `${value}/${max}`;</span>
 <span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// line bar</span>
 <span class="w">    </span><span class="nx">bar</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// shape: &#39;line&#39;,</span>
 <span class="w">        </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">trackThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">trackStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -9809,6 +9826,22 @@
 <span class="w">            </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;linear&#39;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">},</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// circle bar</span>
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    bar: {</span>
+<span class="cm">        shape: &#39;circle&#39;,</span>
+<span class="cm">        barColor: undefined,</span>
+<span class="cm">        barColor2: undefined,</span>
+<span class="cm">        trackColor: undefined,</span>
+<span class="cm">        centerColor: undefined,</span>
+<span class="cm">        thickness: 0.2,</span>
+<span class="cm">        startAngle: Phaser.Math.DegToRad(270),</span>
+<span class="cm">        endAngle: Phaser.Math.DegToRad(270+360),</span>
+<span class="cm">        anticlockwise: false,</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+
 <span class="w">    </span><span class="c1">// bar: undefined,</span>
 
 <span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionGameObject</span><span class="p">,</span>
@@ -9889,8 +9922,8 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">max</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or <code>undefined</code>.<ul>
-<li><code>undefined</code> : No bar game object.</li>
+<li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or config of <a href="../canvas-circularprogress/">circular progress bar</a> or <code>undefined</code>.<ul>
+<li>Config of <a href="../shape-lineprogress/">horizontal line progress bar</a><ul>
 <li><code>bar.trackColor</code> : Fill color of bar's track, in number or css string value.</li>
 <li><code>bar.trackStrokeColor</code> : Stroke color of bar's track, in number or css string value.</li>
 <li><code>bar.trackThickness</code> : Stroke line width of bar's track.</li>
@@ -9901,11 +9934,20 @@
 <li><code>true</code> : Bar starts from right side.</li>
 </ul>
 </li>
-<li><code>bar.easeValue</code> : Parameters of easing value.<ul>
-<li><code>bar.easeValue.duration</code> : Duration of value easing, default is <code>0</code> (no easing).</li>
-<li><code>bar.easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.    </li>
 </ul>
 </li>
+<li>Config of <a href="../canvas-circularprogress/">circular progress bar</a><ul>
+<li><code>bar.shape</code> : <code>'circle'</code></li>
+<li><code>bar.barColor</code>, <code>bar.barColor2</code> : Fill color of circular bar, in number or css string value. Assign gradient start color by <code>barColor2</code>.</li>
+<li><code>bar.trackColor</code> : Color of circular track, in number or css string value.</li>
+<li><code>bar.centerColor</code> : Color of center circle, in number or css string value.</li>
+<li><code>bar.thickness</code> : <code>0</code> ~ <code>1</code>, thickness of circular bar. Default value is <code>0.2</code> (<code>0.2*radius</code>)</li>
+<li><code>bar.startAngle</code> : Start angle of circular bar, in radians. Default value is <code>270</code> degrees.</li>
+<li><code>bar.endAngle</code> : End angle of circular bar, in radians. Default value is <code>270+360</code> degrees.</li>
+<li><code>bar.anticlockwise</code> : Set <code>true</code> to put anticlockwise circular bar. Default value is <code>false</code>.    </li>
+</ul>
+</li>
+<li><code>undefined</code> : No bar game object.</li>
 </ul>
 </li>
 <li><code>action</code> : Game object of action icon, optional.</li>

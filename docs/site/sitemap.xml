@@ -1706,6 +1706,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-expbar/</loc>
+         <lastmod>2023-10-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-fileselectorbutton/</loc>
          <lastmod>2023-10-16</lastmod>
          <changefreq>daily</changefreq>

@@ -10,20 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shader-kawaseblur/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-expbar/">
       
       
-        <link rel="prev" href="../shader-warp/">
+        <link rel="prev" href="../ui-imageinputlabel/">
       
       
-        <link rel="next" href="../shader-dropshadow/">
+        <link rel="next" href="../ui-buttons/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Kawase blur - Notes of Phaser 3</title>
+        <title>Exp bar - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Kawase blur
+              Exp bar
             
           </span>
         </div>
@@ -4848,16 +4848,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
       
       
       
@@ -4866,7 +4864,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
           Shader effects
@@ -5293,16 +5291,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_7" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_7" >
       
       
       
@@ -5311,7 +5307,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_7_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_7_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Blur
@@ -5322,144 +5318,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Kawase blur
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
         Kawase blur
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-effect" class="md-nav__link">
-    Remove effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-effect" class="md-nav__link">
-    Get effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#blur" class="md-nav__link">
-    Blur
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quality" class="md-nav__link">
-    Quality
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pixel-size" class="md-nav__link">
-    Pixel size
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -7757,14 +7620,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
       
       
       
@@ -7773,7 +7638,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_15">
           <span class="md-nav__icon md-icon"></span>
           UI
@@ -7902,14 +7767,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" checked>
       
       
       
@@ -7918,7 +7785,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_15_4">
           <span class="md-nav__icon md-icon"></span>
           Label
@@ -8013,11 +7880,158 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../ui-expbar/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Exp bar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Exp bar
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-expbar-object" class="md-nav__link">
+    Add expBar object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accumulate-experience" class="md-nav__link">
+    Accumulate experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-and-experience" class="md-nav__link">
+    Level and experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -9590,43 +9604,57 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
+  <a href="#add-expbar-object" class="md-nav__link">
+    Add expBar object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-effect" class="md-nav__link">
-    Remove effect
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-effect" class="md-nav__link">
-    Get effect
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#blur" class="md-nav__link">
-    Blur
+  <a href="#get-element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quality" class="md-nav__link">
-    Quality
+  <a href="#accumulate-experience" class="md-nav__link">
+    Accumulate experience
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pixel-size" class="md-nav__link">
-    Pixel size
+  <a href="#level-and-experience" class="md-nav__link">
+    Level and experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -9654,43 +9682,29 @@
   
 
 
-  <h1>Kawase blur</h1>
+  <h1>Exp bar</h1>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Phaser3.60 has a built-in <a href="../shader-builtin/#blur">blur effect</a>.</p>
-</div>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Kawase-blur post processing filter. <a href="https://github.com/pixijs/filters/blob/main/filters/kawase-blur/src/kawase-blur.frag">Reference</a></p>
+<p>Disply experience bar on <a href="./">NameValueLabel</a>.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A post-fx shader effect</li>
+<li>Game object</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">WebGL only</p>
-<p>Only work in WebGL render mode.</p>
-</div>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/zYzzYVw">Kawase-blur</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/rNogZBL">Exp bar</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-kawaseblur">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-expbar">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexkawaseblurpipelineplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexkawaseblurpipelineplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexkawaseblurpipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Add expBar object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">expBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexkawaseblurpipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
@@ -9698,14 +9712,14 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">KawaseBlurPipelinePlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/kawaseblurpipeline-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">KawaseBlurPipelinePlugin</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">mapping</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">        </span><span class="p">]</span>
@@ -9714,123 +9728,372 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Add expBar object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">expBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Add to game config
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">KawaseBlurPostFx</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/kawaseblurpipeline.js&#39;</span><span class="p">;</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="nx">pipeline</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">KawaseBlurPostFx</span><span class="p">]</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ExpBar</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">KawaseBlurPostFx</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">KawaseBlurPostFx</span><span class="p">);</span>
+<li>Add expBar object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExpBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">expBar</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Apply effect to game object. A game object only can add 1 kawaseblur effect.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// blur: 4,</span>
-<span class="w">    </span><span class="c1">// quality: 3,</span>
-<span class="w">    </span><span class="c1">// pixelWidth: 1,</span>
-<span class="w">    </span><span class="c1">// pixelHeight: 1,</span>
+<h3 id="add-expbar-object">Add expBar object<a class="headerlink" href="#add-expbar-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">expBar</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// x: 0,</span>
+<span class="w">    </span><span class="c1">// y: 0,</span>
+<span class="w">    </span><span class="c1">// anchor: undefined,</span>
+<span class="w">    </span><span class="c1">// width: undefined,</span>
+<span class="w">    </span><span class="c1">// height: undefined,</span>
 
-<span class="w">    </span><span class="c1">// name: &#39;rexKawaseBlurPostFx&#39;</span>
+<span class="w">    </span><span class="nx">orientation</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// rtl: false,</span>
+
+<span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="nx">iconGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">iconMask</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">nameText</span><span class="o">:</span><span class="w"> </span><span class="nx">nameTextGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">valueText</span><span class="o">:</span><span class="w"> </span><span class="nx">valueTextGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// valueTextFormatCallback: function(value, min, max) {</span>
+<span class="w">    </span><span class="c1">//     return `${value}/${max}`;</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// line bar</span>
+<span class="w">    </span><span class="nx">bar</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// shape: &#39;line&#39;,</span>
+<span class="w">        </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">trackThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">trackStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">barColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">barColor2</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">skewX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">easeValue</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;linear&#39;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// circle bar</span>
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    bar: {</span>
+<span class="cm">        shape: &#39;circle&#39;,</span>
+<span class="cm">        barColor: undefined,</span>
+<span class="cm">        barColor2: undefined,</span>
+<span class="cm">        trackColor: undefined,</span>
+<span class="cm">        centerColor: undefined,</span>
+<span class="cm">        thickness: 0.2,</span>
+<span class="cm">        startAngle: Phaser.Math.DegToRad(270),</span>
+<span class="cm">        endAngle: Phaser.Math.DegToRad(270+360),</span>
+<span class="cm">        anticlockwise: false,</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+
+<span class="w">    </span><span class="c1">// bar: undefined,</span>
+
+<span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">actionMask</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
+<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;top&#39;, &#39;center&#39;, &#39;bottom&#39;</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">iconTop</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">iconBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bar</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">barBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">barLeft</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">barRight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">actionTop</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">actionBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="c1">// easeDuration: 1000,</span>
+
+<span class="w">    </span><span class="nx">levelCounter</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">table</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// table: [0, 100, 200, 300,],        </span>
+<span class="w">        </span><span class="c1">// maxLevel: -1,        </span>
+<span class="w">        </span><span class="c1">// exp: 0,</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="c1">// name: &#39;&#39;,</span>
+<span class="w">    </span><span class="c1">// draggable: false,</span>
+<span class="w">    </span><span class="c1">// sizerEvents: false,</span>
+<span class="w">    </span><span class="c1">// enableLayer: false,</span>
+
 <span class="p">});</span>
-</code></pre></div><ul>
-<li><code>blur</code> : The blur of the filter. Should be greater than <code>0</code>. If value is an Array, setting kernels.</li>
-<li><code>quality</code> : The quality of the filter. Should be an integer greater than <code>1</code>.    </li>
-<li><code>pixelWidth</code>, <code>pixelHeight</code> : Sets the pixel size of the filter. Large size is blurrier. For advanced usage.</li>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
+<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
 </ul>
 </li>
-<li>Apply effect to camera. A camera only can add 1 kawaseblur effect.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>orientation</code> :<ul>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
+</ul>
+</li>
+<li><code>rtl</code> : <ul>
+<li><code>true</code> : Layout children from right to left.</li>
+<li><code>false</code> : Layout children from left to right. Default behavior.</li>
+</ul>
+</li>
+<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of expBar.</li>
+<li><code>icon</code> : Game object of icon, optional.</li>
+<li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.<ul>
+<li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.   </li>
+</ul>
+</li>
+<li><code>nameText</code> : Game object of nameText. <ul>
+<li>OriginX of nameText will be set to <code>0</code>.</li>
+<li>Empty text will be set to a space character <code>' '</code>. To preserve height of this text game object.</li>
+</ul>
+</li>
+<li><code>valueText</code> : Game object of valueText.<ul>
+<li>OriginX of nameText will be set to <code>1</code>.</li>
+<li>Empty text will be set to a space character <code>' '</code>. To preserve height of this text game object.</li>
+</ul>
+</li>
+<li><code>valueTextFormatCallback</code> : An optional callback to return a string set to <code>valueText</code> game object when invokeing <a href="./#set-value"><code>expBar.setValue(value, min, max)</code> method</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">max</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or config of <a href="../canvas-circularprogress/">circular progress bar</a> or <code>undefined</code>.<ul>
+<li>Config of <a href="../shape-lineprogress/">horizontal line progress bar</a><ul>
+<li><code>bar.trackColor</code> : Fill color of bar's track, in number or css string value.</li>
+<li><code>bar.trackStrokeColor</code> : Stroke color of bar's track, in number or css string value.</li>
+<li><code>bar.trackThickness</code> : Stroke line width of bar's track.</li>
+<li><code>bar.barColor</code>, <code>bar.barColor2</code> : Fill color of bar, in number or css string value. Assign gradient start color by <code>barColor2</code>.</li>
+<li><code>bar.skewX</code> : Horizontal skew of track and bar.</li>
+<li><code>bar.rtl</code> :<ul>
+<li><code>false</code> : Bar starts from left side. Default behavior.</li>
+<li><code>true</code> : Bar starts from right side.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Config of <a href="../canvas-circularprogress/">circular progress bar</a><ul>
+<li><code>bar.shape</code> : <code>'circle'</code></li>
+<li><code>bar.barColor</code>, <code>bar.barColor2</code> : Fill color of circular bar, in number or css string value. Assign gradient start color by <code>barColor2</code>.</li>
+<li><code>bar.trackColor</code> : Color of circular track, in number or css string value.</li>
+<li><code>bar.centerColor</code> : Color of center circle, in number or css string value.</li>
+<li><code>bar.thickness</code> : <code>0</code> ~ <code>1</code>, thickness of circular bar. Default value is <code>0.2</code> (<code>0.2*radius</code>)</li>
+<li><code>bar.startAngle</code> : Start angle of circular bar, in radians. Default value is <code>270</code> degrees.</li>
+<li><code>bar.endAngle</code> : End angle of circular bar, in radians. Default value is <code>270+360</code> degrees.</li>
+<li><code>bar.anticlockwise</code> : Set <code>true</code> to put anticlockwise circular bar. Default value is <code>false</code>.    </li>
+</ul>
+</li>
+<li><code>undefined</code> : No bar game object.</li>
+</ul>
+</li>
+<li><code>action</code> : Game object of action icon, optional.</li>
+<li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
+<li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
+</ul>
+</li>
+<li><code>align</code> : <ul>
+<li><code>align.text</code> : Alignment of nameText, valueText game objects.<ul>
+<li><code>'top'</code>, <code>'center'</code>, or <code>'bottom'</code>. Default value is <code>'bottom'</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces.<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.icon</code> : Space between icon game object and text game object.</li>
+<li><code>space.iconTop</code>, <code>space.iconBottom</code> : Space around icon game object.</li>
+<li><code>space.name</code> : Left space of nameText game object.</li>
+<li><code>space.value</code> : Right space of valueText game object.</li>
+<li><code>space.bar</code>, <code>space.barLeft</code>, <code>space.barRight</code>, <code>space.barBottom</code> : Space around bar game object.</li>
+<li><code>space.text</code> : Space between text game object and action icon game object.</li>
+<li><code>space.actionTop</code>, <code>space.actionBottom</code> : Space around action game object.</li>
+</ul>
+</li>
+<li><code>easeDuration</code> : Total duration of easing value from level-start to level-end. Default value is <code>1000</code> ms.</li>
+<li><code>levelCounter</code> : Config of <a href="../levelcounter/#create-instance">level-counter</a><ul>
+<li><code>levelCounter.table</code> : Level table, return experience value from level value. Level value starts from <code>0</code>.<ul>
+<li>A callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">experience</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>A number array : Experience value of each level.</li>
+</ul>
+</li>
+<li><code>levelCounter.maxLevel</code> :<ul>
+<li><code>undefined</code> : Default value<ul>
+<li>No upper limit for callback level table.</li>
+<li><code>(table.length - 1)</code> for number array level table.</li>
+</ul>
+</li>
+<li>A number : Maximum level value</li>
+</ul>
+</li>
+<li><code>levelCounter.exp</code> : Initial experience value. Default value is <code>0</code>.</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this game object.</li>
+<li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyExpBar</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ExpBar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Create instance
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MyExpBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</code></pre></div>
+<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Remove effect from game object
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<li>Get element<ul>
+<li>Background game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Remove effect from camera
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+<li>Icon game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>NameText game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>ValueText game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">valueTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bar game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Action icon game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get effect from game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
-<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexKawaseBlurPipeline&#39;).get(gameObject);</span>
-</code></pre></div></li>
-<li>Get effect from camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexKawaseBlurPipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
-<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexKawaseBlurPipeline&#39;).get(camera);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="blur">Blur<a class="headerlink" href="#blur" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">blur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">blur</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">blur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">blur</span><span class="p">;</span>
-<span class="c1">// pipelineInstance.blur += value;</span>
+</li>
+<li>Get by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = expBar.getElement(&#39;#&#39; + name, recursive);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setBlur</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div></li>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = expBar.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
-<h3 id="quality">Quality<a class="headerlink" href="#quality" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h3 id="accumulate-experience">Accumulate experience<a class="headerlink" href="#accumulate-experience" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">quality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quality</span><span class="p">;</span>
-<span class="c1">// pipelineInstance.quality += value;</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setQuality</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div></li>
+<li>Accumulate experience
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">);</span>
+<span class="c1">// expBar.exp += incExp;</span>
+</code></pre></div><ul>
+<li>Will fire <code>'levelup'</code> event</li>
 </ul>
-<h3 id="pixel-size">Pixel size<a class="headerlink" href="#pixel-size" title="Permanent link">&para;</a></h3>
+</li>
+<li>Reset experience value
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">resetExp</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Won't fire <code>'levelup'</code> event.</li>
+</ul>
+</li>
+<li>Force level up
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Will fire <code>'levelup'</code> event</li>
+</ul>
+</li>
+</ul>
+<h3 id="level-and-experience">Level and experience<a class="headerlink" href="#level-and-experience" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pixelWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">pixelWidth</span><span class="p">;</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">pixelHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">pixelHeight</span><span class="p">;</span>
+<li>Get current experience
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getExp</span><span class="p">();</span>
+<span class="c1">// var exp = expBar.exp;</span>
 </code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">pixelWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pixelWidth</span><span class="p">;</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">pixelHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pixelHeight</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setPixelWidth</span><span class="p">(</span><span class="nx">pixelWidth</span><span class="p">);</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setPixelHeight</span><span class="p">(</span><span class="nx">pixelHeight</span><span class="p">);</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setPixelSize</span><span class="p">(</span><span class="nx">pixelWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">pixelHeight</span><span class="p">);</span>
+<li>Get current level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">();</span>
+<span class="c1">// var level = expBar.level;</span>
+</code></pre></div></li>
+<li>Get current required experience to next level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">requiredExp</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get experience of level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getExp</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get level from experience
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get required experience to level
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">expBar</span><span class="p">.</span><span class="nx">getRequiredExpToNextLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+<span class="c1">// var exp = expBar.getRequiredExpToNextLevel(level, exp);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Easing of Level-up to level-end
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">){</span><span class="w">        </span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>level</code> : Current level</li>
+</ul>
+</li>
+<li>Total easing of Level-up complete
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup.complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">){</span><span class="w">        </span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>level</code> : Current level</li>
+</ul>
+</li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-namevaluelabel/">NameValueLabel</a>, <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
 
 
   

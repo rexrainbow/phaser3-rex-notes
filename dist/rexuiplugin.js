@@ -43862,9 +43862,8 @@
     var bar = GetValue$1o(config, 'bar', undefined);
     var action = GetValue$1o(config, 'action', undefined);
     var actionMask = GetValue$1o(config, 'actionMask', undefined);
-    var isLineBar = true;
+    var isLineBar = GetValue$1o(bar, 'shape', 'line') === 'line';
     if (IsPlainObject$d(bar)) {
-      isLineBar = GetValue$1o(bar, 'shape', 'line') === 'line';
       var BarClass = isLineBar ? LineProgress : CircularProgress;
       bar = new BarClass(scene, bar);
       scene.add.existing(bar);
@@ -44862,7 +44861,7 @@
       _this.levelCounter.on('levelup', OnLevelUp, _assertThisInitialized(_this));
       _this.player.on('complete', function () {
         this.player.clear();
-        this.emit('levelup.complete', this);
+        this.emit('levelup.complete', this.level, this);
       }, _assertThisInitialized(_this));
       _this.setValue(_this.exp, _this.getExp(_this.level), _this.getExp(_this.level + 1));
       return _this;
