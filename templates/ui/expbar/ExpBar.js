@@ -1,6 +1,7 @@
 import NameValueLabel from '../namevaluelabel/NameValueLabel.js';
 import LevelCounter from '../../../plugins/levelcounter.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
+import OnLevelUp from './methods/OnLevelUp.js';
 import ExpMethods from './methods/ExpMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -19,6 +20,8 @@ class ExpBar extends NameValueLabel {
             scope: this,
             dtMode: 1
         });
+
+        this.levelCounter.on('levelup', OnLevelUp, this)
 
         this.player.on('complete', function () {
             this.player.clear();

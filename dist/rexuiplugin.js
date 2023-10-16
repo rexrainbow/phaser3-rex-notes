@@ -44745,8 +44745,8 @@
     if (!this.player.isPlaying) {
       this.player.start();
     }
-    console.log("LevelUp : ".concat(level, " ").concat(fromExp, " -> ").concat(toExp));
   };
+
   var ExpMethods = {
     setExpTable: function setExpTable(table) {
       this.levelCounter.setTable(table);
@@ -44767,15 +44767,15 @@
       return this.levelCounter.getRequiredExpToNextLevel(level, exp);
     },
     gainExp: function gainExp(exp) {
-      this.levelCounter.gainExp(exp, OnLevelUp, this);
+      this.levelCounter.gainExp(exp);
       return this;
     },
     setExp: function setExp(exp) {
-      this.levelCounter.setExp(exp, OnLevelUp, this);
+      this.levelCounter.setExp(exp);
       return this;
     },
     setLevel: function setLevel(level) {
-      this.levelCounter.setLevel(level, OnLevelUp, this);
+      this.levelCounter.setLevel(level);
       return this;
     }
   };
@@ -44795,6 +44795,7 @@
         scope: _assertThisInitialized(_this),
         dtMode: 1
       });
+      _this.levelCounter.on('levelup', OnLevelUp, _assertThisInitialized(_this));
       _this.player.on('complete', function () {
         this.player.clear();
         this.emit('levelup.complete', this);

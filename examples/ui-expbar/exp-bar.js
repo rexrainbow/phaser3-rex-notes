@@ -27,9 +27,9 @@ class Demo extends Phaser.Scene {
                 console.log('levelup.complete')
             })
 
-        expBar
-            .gainExp(200)
-            .gainExp(100)
+        expBar.gainExp(200)
+
+        expBar.exp += 100
     }
 
     update() { }
