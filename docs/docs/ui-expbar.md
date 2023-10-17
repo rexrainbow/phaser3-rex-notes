@@ -379,9 +379,15 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Events
 
-- Easing of Level-up to level-end
+- Easing starting of Level-up
     ```javascript
-    expBar.on('levelup', function(level){        
+    expBar.on('levelup.start', function(level, fromExp, toExp){        
+    }, scope);
+    ```
+    - `level` : Current level
+- Easing end of Level-up
+    ```javascript
+    expBar.on('levelup.end', function(level, fromExp, toExp){        
     }, scope);
     ```
     - `level` : Current level

@@ -20,8 +20,11 @@ class Demo extends Phaser.Scene {
         var expBar0 = CreateLineBar(this)
             .setPosition(200, 300)
             .layout()
-            .on('levelup', function (level) {
-                console.log('levelup', level)
+            .on('levelup.start', function (level) {
+                console.log('levelup.start', level)
+            })
+            .on('levelup.end', function (level) {
+                console.log('levelup.end', level)
             })
             .on('levelup.complete', function () {
                 console.log('levelup.complete')

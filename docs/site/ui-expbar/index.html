@@ -10078,8 +10078,15 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Easing of Level-up to level-end
-    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">){</span><span class="w">        </span>
+<li>Easing starting of Level-up
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">){</span><span class="w">        </span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>level</code> : Current level</li>
+</ul>
+</li>
+<li>Easing end of Level-up
+    <div class="highlight"><pre><span></span><code><span class="nx">expBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup.end&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">){</span><span class="w">        </span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>level</code> : Current level</li>
