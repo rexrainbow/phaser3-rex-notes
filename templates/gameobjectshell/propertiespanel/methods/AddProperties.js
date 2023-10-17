@@ -54,6 +54,14 @@ var AddProperties = function (extraProperties) {
         }
     }
 
+    this.addButton({
+        title: 'Object',
+        label: 'Destroy',
+        callback: function (target) {
+            target.destroy();
+        },
+    })
+
 }
 
 export default AddProperties;
