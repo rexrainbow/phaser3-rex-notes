@@ -93,6 +93,7 @@ var label = scene.rexUI.add.nameValueLabel({
     // valueTextFormatCallback: function(value, min, max) {
     //     return `${value}/${max}`;
     // },
+    // valueTextFormatCallback: null,
 
     // barShape: 'line',   // 'line', or 'circle'
 
@@ -185,12 +186,14 @@ var label = scene.rexUI.add.nameValueLabel({
 - `valueText` : Game object of valueText.
     - OriginX of nameText will be set to `1`.
     - Empty text will be set to a space character `' '`. To preserve height of this text game object.
-- `valueTextFormatCallback` : An optional callback to return a string set to `valueText` game object when invokeing [`label.setValue(value, min, max)` method](ui-namevaluelabel.md#set-value).
-    ```javascript
-    function(value, min, max) {
-        return `${value}/${max}`;
-    }
-    ```
+- `valueTextFormatCallback` : Callback to return a string set to `valueText` game object when invokeing [`label.setValue(value, min, max)` method](ui-namevaluelabel.md#set-value).
+    - A callback 
+        ```javascript
+        function(value, min, max) {
+            return `${value}/${max}`;
+        }
+        ```
+    - `null`, or `false` : Don't set `valueText` game object.
 - `barShape` : `'line'` or `'circle'`.
 - `bar` : Game object of bar, or config of [horizontal line progress bar](shape-lineprogress.md), or config of [circular progress bar](canvas-circularprogress.md) or `undefined`.
     - Config of [horizontal line progress bar](shape-lineprogress.md)

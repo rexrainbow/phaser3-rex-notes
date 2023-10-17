@@ -49,7 +49,7 @@ declare namespace NameValueLabel {
             value: number,
             min: number,
             max: number
-        ) => string,
+        ) => string | null,
 
         align?: {
             text?: 'left' | 'right' | 'center' | number,
