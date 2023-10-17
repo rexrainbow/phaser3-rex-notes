@@ -271,6 +271,7 @@ module.exports = {
     'simplelabel': './templates/ui/simplelabel/SimpleLabel.js',
     'titlelabel': './templates/ui/titlelabel/TitleLabel.js',
     'namevaluelabel': './templates/ui/namevaluelabel/NameValueLabel.js',
+    'expbar': './templates/ui/expbar/ExpBar.js',
     'menu': './templates/ui/menu/Menu.js',
     'dropdownlist': './templates/ui/dropdownlist/DropDownList.js',
     'simpledropdownlist': './templates/ui/simpledropdownlist/SimpleDropDownList.js',
