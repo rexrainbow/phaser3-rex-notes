@@ -43882,7 +43882,7 @@
     var bar = GetValue$1o(config, 'bar', undefined);
     var action = GetValue$1o(config, 'action', undefined);
     var actionMask = GetValue$1o(config, 'actionMask', undefined);
-    var isLineBar = GetValue$1o(bar, 'shape', 'line') === 'line';
+    var isLineBar = GetValue$1o(config, 'barShape', 'line') === 'line';
     if (IsPlainObject$d(bar)) {
       var BarClass = isLineBar ? LineProgress : CircularProgress;
       bar = new BarClass(scene, bar);

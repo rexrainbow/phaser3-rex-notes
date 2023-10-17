@@ -17,7 +17,7 @@ var Build = function (scene, config) {
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
 
-    var isLineBar = (GetValue(bar, 'shape', 'line') === 'line');
+    var isLineBar = (GetValue(config, 'barShape', 'line') === 'line');
     if (IsPlainObject(bar)) {
         var BarClass = (isLineBar) ? LineProgressCanvas : CircularProgress;
         bar = new BarClass(scene, bar);

@@ -36,8 +36,11 @@ declare namespace NameValueLabel {
         iconMask?: boolean,
 
         nameText?: Phaser.GameObjects.GameObject,
+
         valueText?: Phaser.GameObjects.GameObject,
-        bar?: Phaser.GameObjects.GameObject | ILineProgressCanvasConfig | ICircularProgressCanvasConfig,
+
+        barShape?: 'line' | 'circle',
+        bar?: Phaser.GameObjects.GameObject | LineProgressCanvas.IConfig | CircularProgressCanvas.IConfig,
 
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,

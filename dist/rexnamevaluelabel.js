@@ -12900,7 +12900,7 @@
     var bar = GetValue(config, 'bar', undefined);
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
-    var isLineBar = GetValue(bar, 'shape', 'line') === 'line';
+    var isLineBar = GetValue(config, 'barShape', 'line') === 'line';
     if (IsPlainObject(bar)) {
       var BarClass = isLineBar ? LineProgress : CircularProgress;
       bar = new BarClass(scene, bar);

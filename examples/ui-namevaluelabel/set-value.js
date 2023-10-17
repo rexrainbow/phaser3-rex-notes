@@ -101,8 +101,8 @@ var CreateCircleBar = function (scene) {
             return `${value}/${max}`;
         },
 
+        barShape: 'circle',
         bar: {
-            shape: 'circle',
             barColor: COLOR_LIGHT,
             barColor2: COLOR_DARK,
             trackColor: COLOR_DARK,

@@ -94,9 +94,10 @@ var expBar = scene.rexUI.add.expBar({
     //     return `${value}/${max}`;
     // },
 
+    // barShape: 'line',   // 'line', or 'circle'
+
     // line bar
     bar: {
-        // shape: 'line',
         trackColor: undefined,
         trackThickness: 2,
         trackStrokeColor: undefined,
@@ -116,7 +117,6 @@ var expBar = scene.rexUI.add.expBar({
     // circle bar
     /*
     bar: {
-        shape: 'circle',
         barColor: undefined,
         barColor2: undefined,
         trackColor: undefined,
@@ -201,6 +201,7 @@ var expBar = scene.rexUI.add.expBar({
         return `${value}/${max}`;
     }
     ```
+- `barShape` : `'line'` or `'circle'`.
 - `bar` : Game object of bar, or config of [horizontal line progress bar](shape-lineprogress.md), or config of [circular progress bar](canvas-circularprogress.md) or `undefined`.
     - Config of [horizontal line progress bar](shape-lineprogress.md)
         - `bar.trackColor` : Fill color of bar's track, in number or css string value.

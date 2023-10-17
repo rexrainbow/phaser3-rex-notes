@@ -9808,9 +9808,10 @@
 <span class="w">    </span><span class="c1">//     return `${value}/${max}`;</span>
 <span class="w">    </span><span class="c1">// },</span>
 
+<span class="w">    </span><span class="c1">// barShape: &#39;line&#39;,   // &#39;line&#39;, or &#39;circle&#39;</span>
+
 <span class="w">    </span><span class="c1">// line bar</span>
-<span class="w">    </span><span class="nx">bar</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// shape: &#39;line&#39;,</span>
+<span class="w">    </span><span class="nx">bar</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
 <span class="w">        </span><span class="nx">trackColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">trackThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">trackStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -9830,7 +9831,6 @@
 <span class="w">    </span><span class="c1">// circle bar</span>
 <span class="w">    </span><span class="cm">/*</span>
 <span class="cm">    bar: {</span>
-<span class="cm">        shape: &#39;circle&#39;,</span>
 <span class="cm">        barColor: undefined,</span>
 <span class="cm">        barColor2: undefined,</span>
 <span class="cm">        trackColor: undefined,</span>
@@ -9922,6 +9922,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">max</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>barShape</code> : <code>'line'</code> or <code>'circle'</code>.</li>
 <li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or config of <a href="../canvas-circularprogress/">circular progress bar</a> or <code>undefined</code>.<ul>
 <li>Config of <a href="../shape-lineprogress/">horizontal line progress bar</a><ul>
 <li><code>bar.trackColor</code> : Fill color of bar's track, in number or css string value.</li>
@@ -9936,8 +9937,7 @@
 </li>
 </ul>
 </li>
-<li>Config of <a href="../canvas-circularprogress/">circular progress bar</a><ul>
-<li><code>bar.shape</code> : <code>'circle'</code></li>
+<li>Config of <a href="../canvas-circularprogress/">circular progress bar</a>        <ul>
 <li><code>bar.barColor</code>, <code>bar.barColor2</code> : Fill color of circular bar, in number or css string value. Assign gradient start color by <code>barColor2</code>.</li>
 <li><code>bar.trackColor</code> : Color of circular track, in number or css string value.</li>
 <li><code>bar.centerColor</code> : Color of center circle, in number or css string value.</li>

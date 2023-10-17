@@ -94,9 +94,10 @@ var label = scene.rexUI.add.nameValueLabel({
     //     return `${value}/${max}`;
     // },
 
+    // barShape: 'line',   // 'line', or 'circle'
+
     // line bar
-    bar: {
-        // shape: 'line',
+    bar: {        
         trackColor: undefined,
         trackThickness: 2,
         trackStrokeColor: undefined,
@@ -116,7 +117,6 @@ var label = scene.rexUI.add.nameValueLabel({
     // circle bar
     /*
     bar: {
-        shape: 'circle',
         barColor: undefined,
         barColor2: undefined,
         trackColor: undefined,
@@ -191,6 +191,7 @@ var label = scene.rexUI.add.nameValueLabel({
         return `${value}/${max}`;
     }
     ```
+- `barShape` : `'line'` or `'circle'`.
 - `bar` : Game object of bar, or config of [horizontal line progress bar](shape-lineprogress.md), or config of [circular progress bar](canvas-circularprogress.md) or `undefined`.
     - Config of [horizontal line progress bar](shape-lineprogress.md)
         - `bar.trackColor` : Fill color of bar's track, in number or css string value.
@@ -201,8 +202,7 @@ var label = scene.rexUI.add.nameValueLabel({
         - `bar.rtl` :
             - `false` : Bar starts from left side. Default behavior.
             - `true` : Bar starts from right side.
-    - Config of [circular progress bar](canvas-circularprogress.md)
-        - `bar.shape` : `'circle'`
+    - Config of [circular progress bar](canvas-circularprogress.md)        
         - `bar.barColor`, `bar.barColor2` : Fill color of circular bar, in number or css string value. Assign gradient start color by `barColor2`.
         - `bar.trackColor` : Color of circular track, in number or css string value.
         - `bar.centerColor` : Color of center circle, in number or css string value.
