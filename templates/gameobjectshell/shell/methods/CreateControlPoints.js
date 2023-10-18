@@ -14,6 +14,7 @@ var CreateControlPoints = function (config) {
         this.controlPoints = undefined;
     }, this);
 
+    return controlPoints;
 }
 
 export default CreateControlPoints;

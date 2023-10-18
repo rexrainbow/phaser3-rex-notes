@@ -14,7 +14,15 @@ export default {
         this.controlPoints.setBindingTarget(target);
 
         var isVisible = !!target;
-        this.panel.setVisible(isVisible);
+
+        var topmostPanel = this.panel.getTopmostParent();
+        if (isVisible) {
+            topmostPanel.show(this.panel);
+        } else {
+            topmostPanel.hide(this.panel);
+        }
+        topmostPanel.layout();
+
         this.controlPoints.setVisible(isVisible);
         return this;
     },

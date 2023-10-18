@@ -34,6 +34,8 @@ var CreateLayerManager = function (config) {
         }
         this.layerManager = undefined;
     }, this)
+
+    return layerManager;
 }
 
 export default CreateLayerManager;

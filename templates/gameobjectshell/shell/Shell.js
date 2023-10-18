@@ -1,7 +1,7 @@
 import ComponentBase from '../../../plugins/utils/componentbase/ComponentBase.js';
 import CreateLayerManager from './methods/CreateLayerManager.js';
 import CreateBackground from './methods/CreateBackground.js';
-import CreatePropertiesPanel from './methods/CreatePropertiesPanel.js';
+import CreateMainPanel from './methods/CreateMainPanel.js';
 import CreateControlPoints from './methods/CreateControlPoints.js';
 import CreateCameraController from './methods/cameracontrollers/CreateCameraController.js';
 import Methods from './methods/Methods.js';
@@ -26,7 +26,7 @@ class Shell extends ComponentBase {
 
         CreateBackground.call(this, config);
 
-        CreatePropertiesPanel.call(this, config);
+        CreateMainPanel.call(this, config);
 
         CreateControlPoints.call(this, config);
 

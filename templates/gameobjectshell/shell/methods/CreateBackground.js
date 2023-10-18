@@ -21,6 +21,7 @@ var CreateBackground = function (config) {
         this.background = undefined;
     }, this);
 
+    return background;
 }
 
 export default CreateBackground;
