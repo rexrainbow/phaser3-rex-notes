@@ -1,3 +1,5 @@
+import GetNeighborObjects from './GetNeighborObjects.js';
+
 var AddDragDropItemBehavior = function (itemsBox) {
     // itemsBox is a Sizer
 
@@ -9,6 +11,14 @@ var AddDragDropItemBehavior = function (itemsBox) {
         item
             // Remove from current itemsBox
             .on('sizer.dragstart', function () {
+                var neighbors = GetNeighborObjects(item);
+                if (neighbors[0]) {
+                    console.log('Above', neighbors[0].text);
+                }
+                if (neighbors[1]) {
+                    console.log('Below', neighbors[1].text);
+                }
+
                 let previousItemsBox = item.getParentSizer();
                 item.setData({
                     itemsBox: previousItemsBox,
