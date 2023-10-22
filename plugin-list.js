@@ -8,6 +8,7 @@ module.exports = {
     'circularprogresscanvasplugin': './plugins/circularprogresscanvas-plugin.js',
     'lineprogresscanvasplugin': './plugins/lineprogresscanvas-plugin.js',
     'roundrectanglecanvasplugin': './plugins/roundrectanglecanvas-plugin.js',
+    'customprogresscanvasplugin': './plugins/customprogresscanvas-plugin.js',
     'dynamictextplugin': './plugins/dynamictext-plugin.js',
     'textplayerplugin': './plugins/textplayer-plugin.js',
     'containerliteplugin': './plugins/containerlite-plugin.js',

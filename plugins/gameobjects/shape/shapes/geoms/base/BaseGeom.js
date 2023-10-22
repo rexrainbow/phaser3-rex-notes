@@ -5,6 +5,7 @@ class BaseGeom {
     constructor() {
         this.name = undefined;
         this.dirty = true;
+        this.visible = true;
         this.data = undefined;
 
         this.isFilled = false;
@@ -22,8 +23,17 @@ class BaseGeom {
         return this;
     }
 
+    setVisible(visible) {
+        if (visible === undefined) {
+            visible = true;
+        }
+        this.visible = visible;
+        return this;
+    }
+
     reset() {
         this
+            .setVisible()
             .fillStyle()
             .lineStyle();
 

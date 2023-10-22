@@ -320,6 +320,15 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         shape.fillStyle().lineStyle();
         ```
+- Visible
+    - Get
+        ```javascript
+        var visible = shape.visible;
+        ```
+    - Set
+         ```javascript
+        shape.setVisible(visible);
+        ```
 - Private data
     - Get
         ```javascript

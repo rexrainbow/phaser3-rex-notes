@@ -10,9 +10,13 @@ var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         var dx = src._displayOriginX;
         var dy = src._displayOriginY;
 
-        var shapes = src.geom;
+        var shapes = src.geom,
+            shape;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-            shapes[i].canvasRender(ctx, dx, dy);
+            shape = shapes[i];
+            if (shape.visible) {
+                shape.canvasRender(ctx, dx, dy);
+            }
         }
 
         //  Restore the context saved in SetTransform
