@@ -8,6 +8,7 @@ A container with name text, value text in a row, with a [horizontal line progres
 ## Live demos
 
 - [Name-value label](https://codepen.io/rexrainbow/pen/NWMMmeK)
+- [Custom bar](https://codepen.io/rexrainbow/pen/yLZLoRW)
 
 ## Usage
 

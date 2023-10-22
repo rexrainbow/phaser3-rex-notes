@@ -8,6 +8,7 @@ Disply experience bar on [NameValueLabel](ui-expbar.md).
 ## Live demos
 
 - [Exp bar](https://codepen.io/rexrainbow/pen/rNogZBL)
+- [Custom bar](https://codepen.io/rexrainbow/pen/gOqOxQv)
 
 ## Usage
 

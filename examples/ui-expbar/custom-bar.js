@@ -17,24 +17,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var expBar0 = this.rexUI.add.expBar({
+        var levelBar = this.rexUI.add.expBar({
             x: 400, y: 300,
             width: 250, height: 100,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
 
-            nameText: this.add.text(0, 0, 'EXP', { fontSize: 20 }),
+            nameText: this.add.text(0, 0, 'Level', { fontSize: 20 }),
 
             valueText: this.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
-            valueTextFormatCallback: function (value, min, max) {
-                value = Math.floor(value);
-                if (value <= max * 0.3) {
-                    value = `[color=red][b]${value}[/b][/color]`;
-                } else {
-                    value = `[b]${value}[/b]`;
-                }
-                return `${value}/${max}`;
-            },
+            valueTextFormatCallback: null,
 
             barShape: 'circle',
             bar: CreateCustomBar(this, 10).setFillStyle(COLOR_LIGHT).setStrokeStyle(),
@@ -62,8 +54,14 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        expBar0.gainExp(200)
-        expBar0.exp += 100
+        levelBar
+            .on('levelup.end', function (level) {
+                levelBar.setValueText(level);
+            })
+            .setValueText(levelBar.level);
+
+        levelBar.gainExp(200)
+        levelBar.exp += 100
 
     }
 
