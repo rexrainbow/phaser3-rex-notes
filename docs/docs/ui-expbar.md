@@ -129,6 +129,8 @@ var expBar = scene.rexUI.add.expBar({
         anticlockwise: false,
     }
     */
+
+    // bar: CustomProgressGameObject,
     
     // bar: undefined,
 
@@ -225,6 +227,7 @@ var expBar = scene.rexUI.add.expBar({
         - `bar.startAngle` : Start angle of circular bar, in radians. Default value is `270` degrees.
         - `bar.endAngle` : End angle of circular bar, in radians. Default value is `270+360` degrees.
         - `bar.anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.    
+    - ([CustomProgress](shape-custom-progress.md)) Game object.
     - `undefined` : No bar game object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.

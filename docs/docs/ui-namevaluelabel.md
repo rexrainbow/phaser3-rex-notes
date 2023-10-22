@@ -129,6 +129,8 @@ var label = scene.rexUI.add.nameValueLabel({
         anticlockwise: false,
     }
     */
+
+    // bar: CustomProgressGameObject,
     
     // bar: undefined,
 
