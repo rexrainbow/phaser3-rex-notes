@@ -201,9 +201,13 @@
     var dy = src._displayOriginY;
     var alpha = camera.alpha * src.alpha;
     renderer.pipelines.preBatch(src);
-    var shapes = src.geom;
+    var shapes = src.geom,
+      shape;
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-      shapes[i].webglRender(pipeline, calcMatrix, alpha, dx, dy);
+      shape = shapes[i];
+      if (shape.visible) {
+        shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
+      }
     }
     renderer.pipelines.postBatch(src);
   };
@@ -216,9 +220,13 @@
     if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
       var dx = src._displayOriginX;
       var dy = src._displayOriginY;
-      var shapes = src.geom;
+      var shapes = src.geom,
+        shape;
       for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-        shapes[i].canvasRender(ctx, dx, dy);
+        shape = shapes[i];
+        if (shape.visible) {
+          shape.canvasRender(ctx, dx, dy);
+        }
       }
 
       //  Restore the context saved in SetTransform
@@ -1582,6 +1590,7 @@
       _classCallCheck(this, BaseGeom);
       this.name = undefined;
       this.dirty = true;
+      this.visible = true;
       this.data = undefined;
       this.isFilled = false;
       this.fillColor = undefined;
@@ -1598,9 +1607,18 @@
         return this;
       }
     }, {
+      key: "setVisible",
+      value: function setVisible(visible) {
+        if (visible === undefined) {
+          visible = true;
+        }
+        this.visible = visible;
+        return this;
+      }
+    }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle().lineStyle();
+        this.setVisible().fillStyle().lineStyle();
         return this;
       }
     }, {

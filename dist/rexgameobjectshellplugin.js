@@ -25182,9 +25182,13 @@
     var dy = src._displayOriginY;
     var alpha = camera.alpha * src.alpha;
     renderer.pipelines.preBatch(src);
-    var shapes = src.geom;
+    var shapes = src.geom,
+      shape;
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-      shapes[i].webglRender(pipeline, calcMatrix, alpha, dx, dy);
+      shape = shapes[i];
+      if (shape.visible) {
+        shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
+      }
     }
     renderer.pipelines.postBatch(src);
   };
@@ -25197,9 +25201,13 @@
     if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
       var dx = src._displayOriginX;
       var dy = src._displayOriginY;
-      var shapes = src.geom;
+      var shapes = src.geom,
+        shape;
       for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-        shapes[i].canvasRender(ctx, dx, dy);
+        shape = shapes[i];
+        if (shape.visible) {
+          shape.canvasRender(ctx, dx, dy);
+        }
       }
 
       //  Restore the context saved in SetTransform
@@ -25453,6 +25461,7 @@
       _classCallCheck(this, BaseGeom);
       this.name = undefined;
       this.dirty = true;
+      this.visible = true;
       this.data = undefined;
       this.isFilled = false;
       this.fillColor = undefined;
@@ -25469,9 +25478,18 @@
         return this;
       }
     }, {
+      key: "setVisible",
+      value: function setVisible(visible) {
+        if (visible === undefined) {
+          visible = true;
+        }
+        this.visible = visible;
+        return this;
+      }
+    }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle().lineStyle();
+        this.setVisible().fillStyle().lineStyle();
         return this;
       }
     }, {
@@ -39077,6 +39095,13 @@
         this.addInput(propertyConfig);
       }
     }
+    this.addButton({
+      title: 'Object',
+      label: 'Destroy',
+      callback: function callback(target) {
+        target.destroy();
+      }
+    });
   };
 
   var PropertiesPanel = /*#__PURE__*/function (_Tweaker) {
@@ -39130,6 +39155,7 @@
       }
       this.layerManager = undefined;
     }, this);
+    return layerManager;
   };
 
   var CreateBackground = function CreateBackground(config) {
@@ -39146,27 +39172,41 @@
       this.background.destroy();
       this.background = undefined;
     }, this);
+    return background;
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var CreateMainPanel = function CreateMainPanel(config) {
+    var mainPanel = new Sizer(this.scene, {
+      orientation: 'y'
+    });
+    this.scene.add.existing(mainPanel);
+    var propertiesPanel = CreatePropertiesPanel.call(this, config);
+    mainPanel.add(propertiesPanel, {
+      expand: true
+    }).layout().setMinSize(mainPanel.width, mainPanel.height); // Keep current size
+
+    propertiesPanel.setDirty(false);
+    mainPanel.left = 0;
+    mainPanel.top = 0;
+    mainPanel.setScrollFactor(0);
+    this.addToUILayer(mainPanel);
+    this.once('destroy', function () {
+      mainPanel.destroy();
+    }, this);
+    return mainPanel;
+  };
   var CreatePropertiesPanel = function CreatePropertiesPanel(config) {
     var panelConfig = GetValue$3(config, 'panel', {});
-    var unknowPositon = panelConfig.x === undefined && panelConfig.y === undefined;
     var extraProperties = GetValue$3(config, 'extraProperties', {});
     var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
-    panel.setScrollFactor(0);
     this.scene.add.existing(panel);
-    panel.layout();
-    this.addToUILayer(panel);
-    if (unknowPositon) {
-      panel.left = 0;
-      panel.top = 0;
-    }
     this.panel = panel;
     this.once('destroy', function () {
       this.panel.destroy();
       this.panel = undefined;
     }, this);
+    return panel;
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
@@ -39179,6 +39219,7 @@
       this.controlPoints.destroy();
       this.controlPoints = undefined;
     }, this);
+    return controlPoints;
   };
 
   var PanScrollPinchZoom = function PanScrollPinchZoom(panScrollEnable, pinchZoomEnable) {
@@ -39334,10 +39375,23 @@
 
   var BindingTargetMethods = {
     setBindingTarget: function setBindingTarget(target) {
+      if (this.bindingTarget) {
+        this.bindingTarget.off('destroy', this.clearBindingTarget, this);
+      }
+      if (target) {
+        target.on('destroy', this.clearBindingTarget, this);
+      }
+      this.bindingTarget = target;
       this.panel.setBindingTarget(target);
       this.controlPoints.setBindingTarget(target);
       var isVisible = !!target;
-      this.panel.setVisible(isVisible);
+      var topmostPanel = this.panel.getTopmostParent();
+      if (isVisible) {
+        topmostPanel.show(this.panel);
+      } else {
+        topmostPanel.hide(this.panel);
+      }
+      topmostPanel.layout();
       this.controlPoints.setVisible(isVisible);
       return this;
     },
@@ -39374,7 +39428,7 @@
       _this.onUnSelectGameObjectCallback = GetValue(config, 'onUnSelectGameObject', OnUnSelectGameObject);
       CreateLayerManager.call(_assertThisInitialized(_this), config);
       CreateBackground.call(_assertThisInitialized(_this), config);
-      CreatePropertiesPanel.call(_assertThisInitialized(_this), config);
+      CreateMainPanel.call(_assertThisInitialized(_this), config);
       CreateControlPoints.call(_assertThisInitialized(_this), config);
       CreateCameraController.call(_assertThisInitialized(_this), config);
 
