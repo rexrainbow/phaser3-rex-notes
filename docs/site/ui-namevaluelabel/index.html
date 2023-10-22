@@ -9735,6 +9735,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/NWMMmeK">Name-value label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/yLZLoRW">Custom bar</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-namevaluelabel">Sample code</a></p>
@@ -9807,6 +9808,7 @@
 <span class="w">    </span><span class="c1">// valueTextFormatCallback: function(value, min, max) {</span>
 <span class="w">    </span><span class="c1">//     return `${value}/${max}`;</span>
 <span class="w">    </span><span class="c1">// },</span>
+<span class="w">    </span><span class="c1">// valueTextFormatCallback: null,</span>
 
 <span class="w">    </span><span class="c1">// barShape: &#39;line&#39;,   // &#39;line&#39;, or &#39;circle&#39;</span>
 
@@ -9917,11 +9919,15 @@
 <li>Empty text will be set to a space character <code>' '</code>. To preserve height of this text game object.</li>
 </ul>
 </li>
-<li><code>valueTextFormatCallback</code> : An optional callback to return a string set to <code>valueText</code> game object when invokeing <a href="./#set-value"><code>label.setValue(value, min, max)</code> method</a>.
+<li><code>valueTextFormatCallback</code> : Callback to return a string set to <code>valueText</code> game object when invokeing <a href="./#set-value"><code>label.setValue(value, min, max)</code> method</a>.<ul>
+<li>A callback 
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">max</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>null</code>, or <code>false</code> : Don't set <code>valueText</code> game object.</li>
+</ul>
+</li>
 <li><code>barShape</code> : <code>'line'</code> or <code>'circle'</code>.</li>
 <li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or config of <a href="../canvas-circularprogress/">circular progress bar</a> or <code>undefined</code>.<ul>
 <li>Config of <a href="../shape-lineprogress/">horizontal line progress bar</a><ul>
