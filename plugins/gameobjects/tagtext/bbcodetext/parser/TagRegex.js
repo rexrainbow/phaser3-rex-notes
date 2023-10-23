@@ -103,6 +103,10 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     var ALIGN_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ALIGN, STR_PARAM);
     var ALIGN_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ALIGN);
 
+    var ID = 'id';
+    var ID_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ID, STR_PARAM);
+    var ID_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ID);
+
     TagRegexSave.RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
     TagRegexSave.RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
 
@@ -154,6 +158,9 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     TagRegexSave.RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i')
     TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
 
+    TagRegexSave.RE_ID_OPEN = new RegExp(ID_OPEN, 'i')
+    TagRegexSave.RE_ID_CLOSE = new RegExp(ID_CLOSE, 'i');
+
     TagRegexSave.RE_SPLITTEXT = new RegExp([
         RAW_OPEN, RAW_CLOSE,
         ESC_OPEN, ESC_CLOSE,
@@ -172,7 +179,8 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
         IMAGE_OPEN, IMAGE_CLOSE,
         AREA_OPEN, AREA_CLOSE,
         URL_OPEN, URL_CLOSE,
-        ALIGN_OPEN, ALIGN_CLOSE
+        ALIGN_OPEN, ALIGN_CLOSE,
+        ID_OPEN, ID_CLOSE
     ].join('|'), 'ig');
 
     return true;

@@ -20775,6 +20775,11 @@
         UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
       } else if (TagRegex.RE_ALIGN_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'align');
+      } else if (TagRegex.RE_ID_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_ID_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'id', innerMatch[1]);
+      } else if (TagRegex.RE_ID_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'id');
       } else {
         plainText = text;
       }
@@ -20948,6 +20953,7 @@
         case 'area':
         case 'url':
         case 'align':
+        case 'id':
           headers.push("".concat(delimiterLeft).concat(k, "=").concat(value).concat(delimiterRight));
           break;
         case 'u':
@@ -21056,6 +21062,9 @@
     var ALIGN = 'align';
     var ALIGN_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ALIGN, STR_PARAM);
     var ALIGN_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ALIGN);
+    var ID = 'id';
+    var ID_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ID, STR_PARAM);
+    var ID_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ID);
     TagRegexSave.RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
     TagRegexSave.RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
     TagRegexSave.RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
@@ -21091,7 +21100,9 @@
     TagRegexSave.RE_URL_CLOSE = new RegExp(URL_CLOSE, 'i');
     TagRegexSave.RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
     TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+    TagRegexSave.RE_ID_OPEN = new RegExp(ID_OPEN, 'i');
+    TagRegexSave.RE_ID_CLOSE = new RegExp(ID_CLOSE, 'i');
+    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE, ID_OPEN, ID_CLOSE].join('|'), 'ig');
     return true;
   };
   var GetTagRegex = function GetTagRegex(delimiterLeft, delimiterRight) {

@@ -132,6 +132,12 @@ var TagTextToProp = function (text, prevProp) {
         } else if (TagRegex.RE_ALIGN_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'align');
 
+        } else if (TagRegex.RE_ID_OPEN.test(text)) {
+            var innerMatch = text.match(TagRegex.RE_ID_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'id', innerMatch[1]);
+        } else if (TagRegex.RE_ID_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'id');
+
         } else {
             plainText = text;
         }

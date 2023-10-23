@@ -110,6 +110,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[esc][raw]Text[/raw][/esc]`
     - `[raw][esc]Text[/esc][/raw]`
     - `[raw][b]Text[/b][/raw]`
+- Do nothing, just a marker :
+    - `[id=0][color=red]Text[/id]TextText[/color]`
+
 
 !!! note
     Can set delimiter `[]` to another custom value in style of constructor.

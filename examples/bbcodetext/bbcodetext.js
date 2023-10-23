@@ -17,8 +17,8 @@ class Demo extends Phaser.Scene {
 [i][color=red]B
 B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
 [size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][color=green][stroke=black]GGG[/stroke][/color]
-[color=white][size=36]This is a [img=key]
-[s][u]Last line[/u][/s]`;
+[id=0][color=white][size=36]This is a [img=key]
+[s][u]Last line[/u][/s][/id]`;
         var text = this.add.rexBBCodeText(100, 30, s1, {
             backgroundColor: '#555',
             fontSize: '60px',

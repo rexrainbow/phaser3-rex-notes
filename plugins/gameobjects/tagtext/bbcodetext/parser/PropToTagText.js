@@ -34,6 +34,7 @@ var PropToTagText = function (text, prop, prevProp) {
             case 'area':
             case 'url':
             case 'align':
+            case 'id':
                 headers.push(`${delimiterLeft}${k}=${value}${delimiterRight}`);
                 break;
 
