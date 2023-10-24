@@ -18,7 +18,7 @@ var game = new Phaser.Game(config);
 
 ### Configuration
 
-[Reference](https://newdocs.phaser.io/docs/3.60.0/Phaser.Types.Core.html#.GameConfig)
+[Reference](https://newdocs.phaser.io/docs/3.60.0/Phaser.Types.Core.GameConfig)
 
 ```javascript
 {
