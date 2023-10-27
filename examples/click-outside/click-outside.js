@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import ClickOutsidePlugin from '../../plugins/clickoutside-plugin';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
 
-        var btn0 = this.add.rectangle(400, 300, 200, 200, COLOR_PRIMARY)
+        var btn0 = this.add.rectangle(400, 300, 200, 200, COLOR_MAIN)
             .setInteractive()
             .on('pointerdown', function () {
                 print.text += 'Click btn0\n';

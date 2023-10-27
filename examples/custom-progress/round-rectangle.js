@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import CustomProgressPlugin from '../../plugins/customprogress-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -18,13 +18,13 @@ class Demo extends Phaser.Scene {
     create() {
         var bar0 = CreateRoundRectangleProgressBar(this)
             .setSize(200, 100)
-            .setFillStyle(COLOR_PRIMARY, 1)
+            .setFillStyle(COLOR_MAIN, 1)
             .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(250, 300)
 
         var bar1 = CreateRoundRectangleProgressBar(this)
             .setSize(100, 200)
-            .setFillStyle(COLOR_PRIMARY, 1)
+            .setFillStyle(COLOR_MAIN, 1)
             .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(550, 300)
 

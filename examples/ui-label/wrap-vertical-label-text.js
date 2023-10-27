@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         var label = this.rexUI.add.label({
             x: 400, y: 300,
             orientation: 'y',
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
             text: this.rexUI.wrapExpandText(this.add.text(0, 0, content)),
             expandTextWidth: true,
             icon: this.rexUI.add.roundRectangle(0, 0, 160, 160, 20, COLOR_DARK),

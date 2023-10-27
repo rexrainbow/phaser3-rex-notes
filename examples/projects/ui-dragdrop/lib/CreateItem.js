@@ -1,11 +1,11 @@
-import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import { COLOR_LIGHT, COLOR_MAIN, COLOR_DARK } from './Const.js';
 import { DefaultDepth, DragObjectDepth } from './Const.js';
 
 var CreateItem = function (scene, text) {
     var item = scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle({
             radius: 10,
-            color: COLOR_PRIMARY
+            color: COLOR_MAIN
         }),
         text: scene.add.text(0, 0, text, {
             fontSize: 18

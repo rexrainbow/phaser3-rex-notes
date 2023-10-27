@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import Maker from '../../templates/ui/maker/Maker.js';
 import Handlebars from 'handlebars';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -11,7 +11,7 @@ $type: TextBox
 
 background:
     $type: RoundRectangle
-    color: {{COLOR_PRIMARY}}
+    color: {{COLOR_MAIN}}
     radius: 20
     strokeColor: {{COLOR_LIGHT}}
     strokeWidth: 2
@@ -77,7 +77,7 @@ var CreateTextBox = function (scene, x, y, config) {
 
     var maker = new Maker(scene);
     var data = Handlebars.compile(UIContent)({
-        COLOR_PRIMARY: COLOR_PRIMARY,
+        COLOR_MAIN: COLOR_MAIN,
         COLOR_LIGHT: COLOR_LIGHT,
         COLOR_DARK: COLOR_DARK,
 

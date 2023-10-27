@@ -50,7 +50,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateDropDownList = function (scene, x, y, menuHeight, options) {
@@ -59,7 +59,7 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
     var label = scene.rexUI.add.label({
         x: x, y: y,
 
-        background: scene.rexUI.add.roundRectangle({ color: COLOR_PRIMARY }),
+        background: scene.rexUI.add.roundRectangle({ color: COLOR_MAIN }),
 
         text: CreateTextObject(scene, '')
             .setFixedSize(maxTextSize.width, maxTextSize.height),

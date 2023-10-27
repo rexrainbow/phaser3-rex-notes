@@ -3,7 +3,7 @@ import BoardPlugin from '../../plugins/board-plugin.js';
 import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 

@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
             var cellIdx = cell.index;
             cell.height = (cellIdx % 2) ? 40 : 80;  // Set height of visible cell
 
-            var color = (cellIdx % 2) ? COLOR_PRIMARY : COLOR_DARK;
+            var color = (cellIdx % 2) ? COLOR_MAIN : COLOR_DARK;
             var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color)
                 .setStrokeStyle(2, COLOR_LIGHT)
                 .setOrigin(0);

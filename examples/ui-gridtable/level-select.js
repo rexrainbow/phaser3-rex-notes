@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -53,7 +53,7 @@ class Demo extends Phaser.Scene {
                 // Represent score of level via stars
                 var stars = cellContainer.getElement('stars');
                 for (var i = 0, cnt = stars.length; i < cnt; i++) {
-                    var color = (item.stars[i]) ? COLOR_PRIMARY : undefined;
+                    var color = (item.stars[i]) ? COLOR_MAIN : undefined;
                     stars[i].setFillStyle(color);
                 }
                 cellContainer.setMinSize(width, height); // Size might changed in this demo

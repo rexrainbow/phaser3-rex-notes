@@ -153,7 +153,7 @@ var LOS = function (chessA, marker) {
     marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
 }
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 const COLOR_VISIBLE = 0xc49000;

@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -19,11 +19,11 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 800 - 20, height: 600 - 20,
 
-            header: this.add.rectangle(0, 0, 10, 60, COLOR_PRIMARY), // Fixed height
+            header: this.add.rectangle(0, 0, 10, 60, COLOR_MAIN), // Fixed height
             leftSide: this.add.rectangle(0, 0, 200, 10, COLOR_LIGHT), // Fixed width
             content: this.add.rectangle(0, 0, 300, 200, COLOR_DARK),
             rightSide: this.add.rectangle(0, 0, 100, 10, COLOR_LIGHT), // Fixed width
-            footer: this.add.rectangle(0, 0, 10, 30, COLOR_PRIMARY),// Fixed height
+            footer: this.add.rectangle(0, 0, 10, 30, COLOR_MAIN),// Fixed height
 
             space: {
                 header: 10,

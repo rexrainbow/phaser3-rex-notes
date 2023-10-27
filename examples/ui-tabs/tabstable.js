@@ -4,7 +4,7 @@ import loki from 'lokijs/src/lokijs.js';
 
 const Random = Phaser.Math.Between;
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
             y: 300,
 
             panel: this.rexUI.add.gridTable({
-                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_MAIN),
 
                 table: {
                     width: 250,
@@ -98,7 +98,7 @@ class Demo extends Phaser.Scene {
                         if (this._prevTypeButton) {
                             this._prevTypeButton.getElement('background').setFillStyle(COLOR_DARK)
                         }
-                        button.getElement('background').setFillStyle(COLOR_PRIMARY);
+                        button.getElement('background').setFillStyle(COLOR_MAIN);
                         this._prevTypeButton = button;
                         if (this._prevSortButton === undefined) {
                             return;
@@ -110,7 +110,7 @@ class Demo extends Phaser.Scene {
                         if (this._prevSortButton) {
                             this._prevSortButton.getElement('background').setFillStyle(COLOR_DARK)
                         }
-                        button.getElement('background').setFillStyle(COLOR_PRIMARY);
+                        button.getElement('background').setFillStyle(COLOR_MAIN);
                         this._prevSortButton = button;
                         if (this._prevTypeButton === undefined) {
                             return;

@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-const COLOR_PRIMARY = 0x1565c0;
+const COLOR_MAIN = 0x1565c0;
 const COLOR_LIGHT = 0x5e92f3;
 const COLOR_DARK = 0x003c8f;
 var CreateTexture = function (scene, key) {

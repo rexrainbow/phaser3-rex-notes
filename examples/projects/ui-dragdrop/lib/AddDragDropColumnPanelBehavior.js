@@ -1,4 +1,4 @@
-import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import { COLOR_LIGHT, COLOR_MAIN, COLOR_DARK } from './Const.js';
 
 var AddDragDropColumnPanelBehavior = function (panelsBox) {
     // panelsBox is a Sizer

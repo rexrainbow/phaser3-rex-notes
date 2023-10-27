@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import Maker from '../../templates/ui/maker/Maker.js';
 import Handlebars from 'handlebars';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 const CONTENT = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
@@ -17,7 +17,7 @@ const UIContent = `
     
     background:
         $type: RoundRectangle
-        color: {{COLOR_PRIMARY}}
+        color: {{COLOR_MAIN}}
     text:
         $type: Text
         text: ''       # Override this property
@@ -55,7 +55,7 @@ const UIContent = `
     slider:
         track:
             $type: RoundRectangle
-            color: {{COLOR_PRIMARY}}
+            color: {{COLOR_MAIN}}
             width: 20
             radius: 10
         thumb:
@@ -131,7 +131,7 @@ class Demo extends Phaser.Scene {
     create() {
         var maker = new Maker(this);
         var data = Handlebars.compile(UIContent)({
-            COLOR_PRIMARY: COLOR_PRIMARY,
+            COLOR_MAIN: COLOR_MAIN,
             COLOR_LIGHT: COLOR_LIGHT,
             COLOR_DARK: COLOR_DARK,
 

@@ -1,4 +1,4 @@
-import { COLOR_LIGHT, COLOR_PRIMARY, COLOR_DARK } from './Const.js';
+import { COLOR_LIGHT, COLOR_MAIN, COLOR_DARK } from './Const.js';
 import CreateColumnPanel from './CreateColumnPanel.js';
 import AddDragDropColumnPanelBehavior from './AddDragDropColumnPanelBehavior.js';
 
@@ -11,7 +11,7 @@ var CreateColumnPanelsBox = function (scene, itemCountArray) {
     })
     // .addBackground(
     //     scene.rexUI.add.roundRectangle({
-    //         strokeColor: COLOR_PRIMARY,
+    //         strokeColor: COLOR_MAIN,
     //         strokeWidth: 3,
     //     }),
     //     'background'

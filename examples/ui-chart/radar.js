@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
 
 class Card extends RexPlugins.UI.Sizer {
     constructor(scene, x, y, data) {
-        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
 
         var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
         var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);

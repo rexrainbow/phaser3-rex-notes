@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
         for (var i = 0; i < 30; i++) {
             sizer.add(this.rexUI.add.label({
                 width: 60, height: 60,
-                background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_PRIMARY),
+                background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_MAIN),
                 text: this.add.text(0, 0, `${i}`),
                 space: {
                     left: 10,

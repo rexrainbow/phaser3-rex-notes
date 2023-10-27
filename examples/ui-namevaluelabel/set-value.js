@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -64,7 +64,7 @@ var CreateLineBar = function (scene) {
 
         bar: {
             height: 6,
-            barColor: COLOR_PRIMARY,
+            barColor: COLOR_MAIN,
             barColor2: COLOR_DARK,
             // trackColor: COLOR_DARK,
             // trackStrokeColor: COLOR_LIGHT

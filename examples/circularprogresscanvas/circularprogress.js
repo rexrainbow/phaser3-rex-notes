@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import CircularProgressCanvasPlugin from '../../plugins/circularprogresscanvas-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
 
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
-            centerColor: COLOR_PRIMARY,
+            centerColor: COLOR_MAIN,
 
             // startAngle: Phaser.Math.DegToRad(270-45),
             // endAngle: Phaser.Math.DegToRad(270+45),

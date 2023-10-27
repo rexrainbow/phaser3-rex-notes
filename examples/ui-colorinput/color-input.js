@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x424242;
+const COLOR_MAIN = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
 
@@ -62,7 +62,7 @@ const InputTextConfig = {
         color: COLOR_DARK
     },
     focusStyle: {
-        color: COLOR_PRIMARY,
+        color: COLOR_MAIN,
     },
     style: {
         backgroundBottomY: 4,
@@ -77,10 +77,10 @@ const InputTextConfig = {
 const ColorPickerConfig = {
     width: 160, height: 170,
 
-    background: { color: COLOR_DARK, strokeColor: COLOR_PRIMARY },
+    background: { color: COLOR_DARK, strokeColor: COLOR_MAIN },
     // createBackgroundCallback(scene) {
     //     return scene.rexUI.add.roundRectangle({
-    //         color: COLOR_DARK, strokeColor: COLOR_PRIMARY
+    //         color: COLOR_DARK, strokeColor: COLOR_MAIN
     //     })
     // },
 

@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 
@@ -59,7 +59,7 @@ class Demo extends Phaser.Scene {
                 // Get neighbor chess around target chess
                 board.filledRingToChessArray(gameObject, 2, 0, lastChessArray);
                 for (var i = 0, cnt = lastChessArray.length; i < cnt; i++) {
-                    lastChessArray[i].setFillStyle(COLOR_PRIMARY, 1);
+                    lastChessArray[i].setFillStyle(COLOR_MAIN, 1);
                 }
                 // Target chess is included in lastChessArray already
                 gameObject.setFillStyle(COLOR_LIGHT);

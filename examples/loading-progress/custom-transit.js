@@ -65,7 +65,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateKnob = function (scene, x, y) {
@@ -75,11 +75,11 @@ var CreateKnob = function (scene, x, y) {
 
         space: { left: 20, right: 20, top: 20, bottom: 20 },
 
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(1, COLOR_LIGHT),
 
         trackColor: COLOR_DARK,
         barColor: COLOR_LIGHT,
-        // centerColor: COLOR_PRIMARY,
+        // centerColor: COLOR_MAIN,
         // anticlockwise: true,
 
         text: scene.rexUI.add.label({

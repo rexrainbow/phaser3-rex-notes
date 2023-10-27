@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-const COLOR_PRIMARY = 0x9575cd;
+const COLOR_MAIN = 0x9575cd;
 const COLOR_LIGHT = 0xc7a4ff;
 const COLOR_DARK = 0x65499c;
 var CreateTexture0 = function (scene, key) {
@@ -40,7 +40,7 @@ var CreateTexture0 = function (scene, key) {
     // height: 100-0-100
     var width = 40, height = 200;
     scene.add.graphics()
-        .fillStyle(COLOR_PRIMARY)
+        .fillStyle(COLOR_MAIN)
         .fillEllipse(width / 2, height / 2, width, height)
         .generateTexture(key, width, height)
         .destroy();

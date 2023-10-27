@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import CharacterCachePlugin from '../../plugins/charactercache-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -73,7 +73,7 @@ var createTextBox = function (scene, x, y, config) {
         x: x,
         y: y,
 
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY)
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN)
             .setStrokeStyle(2, COLOR_LIGHT),
 
         icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),

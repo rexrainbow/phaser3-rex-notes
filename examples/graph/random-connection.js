@@ -3,7 +3,7 @@ import GraphPlugin from '../../plugins/graph-plugin.js';
 import RandomPlacePlugin from '../../plugins/randomplace-plugin.js';
 import MoveToPlugin from '../../plugins/moveto-plugin.js';
 
-const COLOR_PRIMARY = 0x7986cb;
+const COLOR_MAIN = 0x7986cb;
 const COLOR_LIGHT = 0xaab6fe;
 const COLOR_DARK = 0x49599a;
 

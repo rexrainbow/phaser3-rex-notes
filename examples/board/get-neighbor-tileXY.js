@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 
@@ -45,7 +45,7 @@ class Demo extends Phaser.Scene {
                     return;
                 }
 
-                this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_PRIMARY).setScale(0.7);
+                this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_MAIN).setScale(0.7);
                 var neighborsTileXYArray = board.getNeighborTileXY(tileXY, '0,2,4');
                 var neighborTileXY;
                 for (var i = 0, cnt = neighborsTileXYArray.length; i < cnt; i++) {

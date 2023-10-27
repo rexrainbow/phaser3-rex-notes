@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     create() {
         var onCellVisible = function (cell) {
             var scene = cell.scene;
-            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
+            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_MAIN)
                 .setStrokeStyle(2, COLOR_LIGHT)
                 .setOrigin(0);
             var txt = scene.add.text(5, 5, cell.index);

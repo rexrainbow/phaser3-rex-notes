@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x7986cb;
+const COLOR_MAIN = 0x7986cb;
 const COLOR_LIGHT = 0xaab6fe;
 const COLOR_DARK = 0x49599a;
 

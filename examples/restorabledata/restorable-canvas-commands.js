@@ -124,7 +124,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -133,7 +133,7 @@ var CreatePanel = function (scene) {
     var panel = scene.rexUI.add.sizer({ orientation: 'x' });
 
     // Background of panel
-    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
     // Drawing canvas
     var canvas = scene.rexUI.add.canvas(0, 0, 500, 500).setOrigin(0)
     // Buttons

@@ -60,7 +60,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-const COLOR_PRIMARY = 0xbdbdbd;
+const COLOR_MAIN = 0xbdbdbd;
 const COLOR_LIGHT = 0xefefef;
 const COLOR_DARK = 0x8d8d8d;
 var CreateTexture0 = function (scene, key) {
@@ -68,7 +68,7 @@ var CreateTexture0 = function (scene, key) {
     // height: 20-10-20
     var width = 50, height = 50;
     scene.add.graphics()
-        .fillStyle(COLOR_PRIMARY)
+        .fillStyle(COLOR_MAIN)
         .fillTriangle(0, 0, 0, 20, 20, 0)
         .fillTriangle(width, height, width, height - 20, width - 20, height)
         .lineStyle(3, COLOR_DARK)
@@ -83,7 +83,7 @@ var CreateTexture1 = function (scene, key) {
     // height: 10-10-10
     var width = 30, height = 30;
     scene.add.graphics()
-        .fillStyle(COLOR_PRIMARY)
+        .fillStyle(COLOR_MAIN)
         .fillRect(0, 0, 10, 10)
         .fillRect(width - 10, 0, 10, 10)
         .fillRect(0, height - 10, 10, 10)

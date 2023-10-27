@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -64,7 +64,7 @@ var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
         width: 40, height: 40,
 
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_PRIMARY),
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_MAIN),
         text: scene.add.text(0, 0, text, { fontSize: 24 }),
 
         space: { left: 10, right: 10, top: 10, bottom: 10 }
@@ -91,7 +91,7 @@ var CreatePage = function (scene) {
     return scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
         slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 20, 0, 10, COLOR_PRIMARY),
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 0, 10, COLOR_MAIN),
             thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT)
         },
 

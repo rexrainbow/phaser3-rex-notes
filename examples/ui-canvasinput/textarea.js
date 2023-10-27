@@ -1,7 +1,7 @@
 import phaser from '../../../phaser/src/phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -45,7 +45,7 @@ var CreateFeedbackDialog = function (scene, config) {
         },
 
         background: scene.rexUI.add.roundRectangle({
-            radius: 20, color: COLOR_PRIMARY
+            radius: 20, color: COLOR_MAIN
         }),
 
         title: CreateTitle(scene).setText('Feedback'),

@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -52,11 +52,11 @@ var CreateHolyGrail = function (scene, layoutMode) {
     return scene.rexUI.add.holyGrail({
         layoutMode: layoutMode,
 
-        header: scene.add.rectangle(0, 0, 10, 30, COLOR_PRIMARY), // Fixed height
+        header: scene.add.rectangle(0, 0, 10, 30, COLOR_MAIN), // Fixed height
         leftSide: scene.add.rectangle(0, 0, 70, 10, COLOR_LIGHT), // Fixed width
         content: scene.add.rectangle(0, 0, 30, 20, COLOR_DARK),
         rightSide: scene.add.rectangle(0, 0, 50, 10, COLOR_LIGHT), // Fixed width
-        footer: scene.add.rectangle(0, 0, 10, 30, COLOR_PRIMARY),// Fixed height
+        footer: scene.add.rectangle(0, 0, 10, 30, COLOR_MAIN),// Fixed height
 
         space: {
             header: 10,

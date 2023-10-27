@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -51,7 +51,7 @@ var CreateControllerPanel = function (scene) {
     return scene.rexUI.add.numberBar({
         icon: scene.add.image(0, 0, 'play'),
         slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
             indicator: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
             input: 'click',
         },

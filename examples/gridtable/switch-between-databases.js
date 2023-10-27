@@ -3,7 +3,7 @@ import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -90,7 +90,7 @@ var newTable = function (scene, config) {
         var scene = cell.scene;
         var database = table.database;
         var data = database[cell.index];
-        var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
+        var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_MAIN)
             .setStrokeStyle(2, COLOR_LIGHT)
             .setOrigin(0);
         var txt = scene.add.text(5, 5, data.id);

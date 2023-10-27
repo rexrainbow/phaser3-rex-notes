@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x8d6e63;
+const COLOR_MAIN = 0x8d6e63;
 const COLOR_LIGHT = 0xbe9c91;
 const COLOR_DARK = 0x5f4339;
 

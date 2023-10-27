@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateLabel = function (scene) {
@@ -40,7 +40,7 @@ var CreateLabel = function (scene) {
     return scene.rexUI.add.label({
         width: 300, height: 400,
         orientation: 1,
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, content, {
             wordWrap: { width: 300 - 20 - 20 }
         }),

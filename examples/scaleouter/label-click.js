@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import ScaleOuterPlugin from '../../plugins/scaleouter-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -22,7 +22,7 @@ class Game extends Phaser.Scene {
             x: 0, y: 0,
             width: 200, height: 60,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 1, 1, 20, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 1, 1, 20, COLOR_MAIN),
             text: this.add.text(0, 0, ''),
 
             space: { left: 10 }

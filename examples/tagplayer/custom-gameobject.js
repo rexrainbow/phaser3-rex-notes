@@ -106,7 +106,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateTextBox = function (scene, wrapWidth, width, height) {
@@ -118,7 +118,7 @@ var CreateTextBox = function (scene, wrapWidth, width, height) {
     }
     var textBox = scene.rexUI.add.textBox({
         background: CreateSpeechBubbleShape(scene)
-            .setFillStyle(COLOR_PRIMARY, 1)
+            .setFillStyle(COLOR_MAIN, 1)
             .setStrokeStyle(2, COLOR_LIGHT, 1),
 
         icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),

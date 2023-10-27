@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import GesturesPlugin from '../../plugins/gestures-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -37,7 +37,7 @@ var createObject = function (scene, x, y) {
         .on('tap', function (tap) {
             var gameObject = tap.gameObject;
             var curColor = gameObject.fillColor;
-            var newColor = (curColor === COLOR_DARK) ? COLOR_PRIMARY : COLOR_DARK;
+            var newColor = (curColor === COLOR_DARK) ? COLOR_MAIN : COLOR_DARK;
             gameObject.setFillStyle(newColor);
         });
 

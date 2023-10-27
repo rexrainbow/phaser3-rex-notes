@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 300, height: 400,
             orientation: 1,
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
             text: this.add.text(0, 0, content, {
                 wordWrap: { width: 300 - 20 - 20 }
             }),
@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
                 for (var i = 0, cnt = children.length; i < cnt; i++) {
                     child = children[i];
                     if (child === background) {
-                        child.setFillStyle(COLOR_PRIMARY);
+                        child.setFillStyle(COLOR_MAIN);
                     } else {
                         gameObject.setChildVisible(child, true);
                     }

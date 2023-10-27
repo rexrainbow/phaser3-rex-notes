@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 
@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
                 }
                 var neighborTileXY = board.getNeighborTileXYAtAngle(chessA, pointer.getAngle());
                 if (neighborTileXY) {
-                    neighobrChess = this.rexBoard.add.shape(board, neighborTileXY.x, neighborTileXY.y, 0, COLOR_PRIMARY);
+                    neighobrChess = this.rexBoard.add.shape(board, neighborTileXY.x, neighborTileXY.y, 0, COLOR_MAIN);
                 }
             }, this)
     }

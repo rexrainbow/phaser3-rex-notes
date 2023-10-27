@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
             scrollMode: 'y',
 
-            background: this.rexUI.add.roundRectangle({ radius: 10, color: COLOR_PRIMARY }),
+            background: this.rexUI.add.roundRectangle({ radius: 10, color: COLOR_MAIN }),
 
             table: {
                 cellHeight: 80,
@@ -105,7 +105,7 @@ var CreateCellContainer = function (scene, width, height) {
         height: height,
 
         orientation: 'x',
-        background: scene.rexUI.add.roundRectangle({ color: COLOR_PRIMARY, strokeColor: COLOR_DARK, strokeWidth: 2 }),
+        background: scene.rexUI.add.roundRectangle({ color: COLOR_MAIN, strokeColor: COLOR_DARK, strokeWidth: 2 }),
         icon: scene.rexUI.add.roundRectangle({ radius: 20, color: 0x0 }),
         title: scene.add.text(0, 0, ''),
         text: scene.add.text(0, 0, ''),

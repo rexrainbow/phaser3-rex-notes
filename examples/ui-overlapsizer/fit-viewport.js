@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -51,7 +51,7 @@ var CreateSizer = function (scene) {
     })
         // .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, 0xffffff))
         .add(
-            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY), // child
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN), // child
             'main' // key
         )
         .add(

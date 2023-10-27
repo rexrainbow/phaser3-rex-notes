@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import { CustomShapes } from '../../templates/ui/ui-components.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -106,7 +106,7 @@ var createMenu = function (scene, x, y, items, onClick) {
             }
 
             return scene.rexUI.add.label({
-                background: CreateJigsawShape(scene, convexEdges, 10, COLOR_PRIMARY, COLOR_DARK),
+                background: CreateJigsawShape(scene, convexEdges, 10, COLOR_MAIN, COLOR_DARK),
                 text: scene.add.text(0, 0, item.name, {
                     fontSize: '20px'
                 }),

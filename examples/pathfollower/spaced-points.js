@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import PathFollowerPlugin from '../../plugins/pathfollower-plugin.js';
 
-const COLOR_PRIMARY = 0x43a047;
+const COLOR_MAIN = 0x43a047;
 const COLOR_LIGHT = 0x76d275;
 const COLOR_DARK = 0x00701a;
 
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         // Normal behavior
         var path0 = new Phaser.Curves.Ellipse(250, 300, 40, 250);
 
-        var gameObject0 = this.add.rectangle(0, 0, 30, 30, COLOR_PRIMARY);
+        var gameObject0 = this.add.rectangle(0, 0, 30, 30, COLOR_MAIN);
         gameObject0.pathFollower = this.plugins.get('rexPathFollower').add(gameObject0, {
             path: path0,
             t: 0,
@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
         // Spaced
         var path1 = new Phaser.Curves.Ellipse(550, 300, 40, 250);
 
-        var gameObject1 = this.add.rectangle(0, 0, 30, 30, COLOR_PRIMARY);
+        var gameObject1 = this.add.rectangle(0, 0, 30, 30, COLOR_MAIN);
         gameObject1.pathFollower = this.plugins.get('rexPathFollower').add(gameObject1, {
             path: path1,
             t: 0,

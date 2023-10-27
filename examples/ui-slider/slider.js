@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -47,8 +47,8 @@ class Demo extends Phaser.Scene {
             orientation: 'y',
 
             track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
-            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
-            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
+            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
 
             input: 'click', // 'drag'|'click'
             valuechangeCallback: function (value) {
@@ -68,8 +68,8 @@ class Demo extends Phaser.Scene {
             reverseAxis: true,
 
             track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
-            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
-            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
+            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
 
             input: 'click', // 'drag'|'click'
             valuechangeCallback: function (value) {
@@ -89,8 +89,8 @@ class Demo extends Phaser.Scene {
             orientation: 'x',
 
             track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
-            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
-            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
+            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
 
             input: 'click', // 'drag'|'click'
             easeValue: { duration: 250 },

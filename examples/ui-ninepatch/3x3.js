@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -56,7 +56,7 @@ var CreateTexture1 = function (scene, key) {
     // height: 10-10-10
     var width = 30, height = 30;
     scene.add.graphics()
-        .fillStyle(COLOR_PRIMARY)
+        .fillStyle(COLOR_MAIN)
         .fillRect(0, 0, 10, 10)
         .fillRect(width - 10, 0, 10, 10)
         .fillRect(0, height - 10, 10, 10)

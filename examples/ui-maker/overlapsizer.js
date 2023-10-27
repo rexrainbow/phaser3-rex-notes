@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import Maker from '../../templates/ui/maker/Maker.js';
 import Handlebars from 'handlebars';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -16,7 +16,7 @@ children:
     - $child:
           $type: RoundRectangle
           radius: 20
-          color: {{COLOR_PRIMARY}}
+          color: {{COLOR_MAIN}}
       key: main
 
     - $child:
@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
     create() {
         var maker = new Maker(this);
         var data = Handlebars.compile(content)({
-            COLOR_PRIMARY: COLOR_PRIMARY,
+            COLOR_MAIN: COLOR_MAIN,
             COLOR_LIGHT: COLOR_LIGHT,
             COLOR_DARK: COLOR_DARK
         });

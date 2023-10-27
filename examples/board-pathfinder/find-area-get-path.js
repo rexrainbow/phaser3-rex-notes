@@ -65,7 +65,7 @@ class Board extends RexPlugins.Board.Board {
         var graphics = scene.add.graphics({
             lineStyle: {
                 width: 1,
-                color: COLOR_PRIMARY,
+                color: COLOR_MAIN,
                 alpha: 1
             }
         });
@@ -173,7 +173,7 @@ class MoveableMarker extends RexPlugins.Board.Shape {
     }
 }
 
-const COLOR_PRIMARY = 0x43a047;
+const COLOR_MAIN = 0x43a047;
 const COLOR_LIGHT = 0x76d275;
 const COLOR_DARK = 0x00701a;
 

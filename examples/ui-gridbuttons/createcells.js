@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
 
         var keys = [
             ['7', '8', '9'],
@@ -65,7 +65,7 @@ class Demo extends Phaser.Scene {
 var CreateButton = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10).setStrokeStyle(2, COLOR_LIGHT),
-        // background: scene.rexUI.add.roundRectangleCanvas(0, 0, 0, 0, 10, COLOR_PRIMARY, null, 0, COLOR_LIGHT),
+        // background: scene.rexUI.add.roundRectangleCanvas(0, 0, 0, 0, 10, COLOR_MAIN, null, 0, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),

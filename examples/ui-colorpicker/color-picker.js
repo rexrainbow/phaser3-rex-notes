@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x424242;
+const COLOR_MAIN = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
 
@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         var colorPicker = this.rexUI.add.colorPicker({
             x: 400, y: 300,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
 
             svPalette: {
                 width: 128,

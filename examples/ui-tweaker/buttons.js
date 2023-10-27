@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x424242;
+const COLOR_MAIN = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
 
@@ -101,7 +101,7 @@ var CreatePanel = function (scene) {
                 space: { left: 10, title: 10 },
 
                 background: {
-                    strokeColor: COLOR_PRIMARY
+                    strokeColor: COLOR_MAIN
                 },
 
                 title: {

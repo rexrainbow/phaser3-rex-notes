@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x424242;
+const COLOR_MAIN = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
 
@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
             width: 200, height: 40,
 
             background: this.rexUI.add.roundRectangle({
-                strokeColor: COLOR_PRIMARY,
+                strokeColor: COLOR_MAIN,
                 radius: 10
             }),
 
@@ -47,7 +47,7 @@ class Demo extends Phaser.Scene {
                     color: COLOR_DARK,
                 },
                 focusStyle: {
-                    color: COLOR_PRIMARY,
+                    color: COLOR_MAIN,
                 },
                 style: {
                     backgroundBottomY: 4,

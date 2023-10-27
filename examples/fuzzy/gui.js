@@ -35,7 +35,7 @@ HP and AGG    => ATK
 HP- and AGG-  => ATK-
 `;
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -131,7 +131,7 @@ var CreateBar = function (scene, text, readOnly) {
         icon: scene.add.text(0, 0, text).setFixedSize(120, 0),
 
         slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_MAIN),
             indicator: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
             input: (readOnly) ? 'none' : 'click',
         },

@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_MAIN = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
 
@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
             }, this);
 
         var chess0 = this.rexBoard.add.shape(board, 5, 5, 0, COLOR_LIGHT).setScale(0.7);
-        var chess1 = this.rexBoard.add.shape(board, 6, 5, 0, COLOR_PRIMARY).setScale(0.7);
+        var chess1 = this.rexBoard.add.shape(board, 6, 5, 0, COLOR_MAIN).setScale(0.7);
         print.text = board.directionBetween(chess0, chess1, false);
 
         board

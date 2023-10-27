@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
             .add(
                 CreatePaper(this,
                     'GGGG',
-                    this.rexUI.add.roundRectangle(0, 0, 200, 400, 20, COLOR_PRIMARY))
+                    this.rexUI.add.roundRectangle(0, 0, 200, 400, 20, COLOR_MAIN))
             );
 
         // Layout scrollable panel again
@@ -63,7 +63,7 @@ var CreatePanel = function (scene) {
             .add(
                 CreatePaper(scene,
                     contentList[i],
-                    scene.rexUI.add.roundRectangle(0, 0, 200, 400, 20, COLOR_PRIMARY))
+                    scene.rexUI.add.roundRectangle(0, 0, 200, 400, 20, COLOR_MAIN))
             )
     }
 

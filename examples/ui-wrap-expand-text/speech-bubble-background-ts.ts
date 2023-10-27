@@ -2,7 +2,7 @@ import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin';
 import { CustomShapes } from '../../templates/ui/ui-components';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -70,7 +70,7 @@ class Demo extends Phaser.Scene {
             space: { left: 10, right: 10, top: 10, bottom: 25, item: 10 }
         })
             .addBackground(
-                new SpeechBubble(this, COLOR_PRIMARY, 0xffffff)
+                new SpeechBubble(this, COLOR_MAIN, 0xffffff)
             )
             .add(
                 this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),

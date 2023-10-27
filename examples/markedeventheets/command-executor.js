@@ -135,7 +135,7 @@ var CreateCommandExecutor = function (scene) {
     return commandExecutor;
 }
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
@@ -143,7 +143,7 @@ var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
     var textBox = scene.rexUI.add.textBox({
 
         innerBackground: scene.rexUI.add.roundRectangle({
-            color: COLOR_PRIMARY, strokeColor: COLOR_LIGHT, strokeWidth: 2, radius: 20,
+            color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2, radius: 20,
         }),
 
         icon: scene.rexUI.add.roundRectangle({ width: 120, height: 120, color: COLOR_DARK }),

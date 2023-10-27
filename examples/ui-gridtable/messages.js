@@ -2,7 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 
-const COLOR_PRIMARY = 0x4e342e;
+const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
 
             scrollMode: 0,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_MAIN),
 
             table: {
                 columns: 1,
@@ -110,7 +110,7 @@ var CreateCellContainer = function (scene) {
         space: { left: 25, right: 25, top: 10, bottom: 10, item: 10 }
     })
         .addBackground(
-            CreateSpeechBubbleShape(scene, COLOR_PRIMARY, 0xffffff),
+            CreateSpeechBubbleShape(scene, COLOR_MAIN, 0xffffff),
             'bubble'
         )
         .add(
