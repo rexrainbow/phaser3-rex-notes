@@ -9,6 +9,7 @@ Loading animations on shape.
 
 - [Spinners](https://codepen.io/rexrainbow/pen/vYgNRMp)
 - [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
+- [Loading animation](https://codepen.io/rexrainbow/pen/OJdMzbL)
 
 ## Usage
 
