@@ -5,6 +5,10 @@ Start loading animation scene, stop this scene when loading complete.
 - Author: Rex
 - Methods
 
+## Live demos
+
+[Loading animation scene](https://codepen.io/rexrainbow/pen/oNmxXpg)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/loading-animation-scene)
