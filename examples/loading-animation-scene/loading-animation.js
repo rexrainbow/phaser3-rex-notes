@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
-import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
+import LoadingAnimationScenePlugin from '../../plugins/loadinganimationscene-plugin.js';
 
 class Main extends Phaser.Scene {
     constructor() {
@@ -10,9 +10,6 @@ class Main extends Phaser.Scene {
     }
 
     preload() {
-        // Start loading animation
-        this.scene.launch('loading-animation');
-
         // Loading task
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
 
@@ -31,26 +28,7 @@ class Main extends Phaser.Scene {
             setTimeout(successCallback, 2000);
         });
 
-        // Wait until 
-        var scene = this;
-        this.load.rexAwait(function (successCallback, failureCallback) {
-            var loader = scene.load;
-
-            var onProgress = function () {
-                var total = loader.totalToLoad - 1;
-                var remainder = loader.list.size + loader.inflight.size - 1;
-                var progress = 1 - (remainder / total);
-                console.log(progress)
-                if (progress === 1) {
-                    scene.scene.stop('loading-animation');                    
-                    loader.off('progress', onProgress);
-                    successCallback();
-                }
-            }
-
-            loader.on('progress', onProgress);
-        });
-
+        this.plugins.get('rexLoadingAnimationScene').startScene(this, 'loading-animation');
     }
 
     create() {
@@ -92,8 +70,8 @@ var config = {
     plugins: {
         global: [
             {
-                key: 'rexAwaitLoader',
-                plugin: AwaitLoaderPlugin,
+                key: 'rexLoadingAnimationScene',
+                plugin: LoadingAnimationScenePlugin,
                 start: true
             }
         ],

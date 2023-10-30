@@ -23,6 +23,7 @@ nav:
     - Script tag loader: scripttagloader.md
     - Image URI loader: imageuriloader.md
     - Loading progress: loadingprogress.md
+    - Loading animation scene: loading-animation-scene.md
 - Game object:
     - Game object: gameobject.md
     - Sprite:

@@ -51,6 +51,7 @@ module.exports = {
     'awaitloaderplugin': './plugins/awaitloader-plugin.js',
     'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
     'imageuriloaderplugin': './plugins/imageuriloader-plugin.js',
+    'loadinganimationsceneplugin': './plugins/loadinganimationscene-plugin.js',
 
     // actions
     'gridalignplugin': './plugins/gridalign-plugin.js',
