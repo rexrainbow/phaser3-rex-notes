@@ -39133,7 +39133,7 @@
       }
       _this = _super.call(this, scene, x, y, 1, 1);
       _this.type = 'rexImageBox';
-      var background = GetValue$1Q(config, 'background', true);
+      var background = GetValue$1Q(config, 'background');
       if (background) {
         _this.add(background);
       }
