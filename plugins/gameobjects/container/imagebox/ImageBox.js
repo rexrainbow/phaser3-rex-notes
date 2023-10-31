@@ -31,7 +31,7 @@ class ImageBox extends Container {
         super(scene, x, y, 1, 1);
         this.type = 'rexImageBox';
 
-        var background = GetValue(config, 'background', true);
+        var background = GetValue(config, 'background');
         if (background) {
             this.add(background);
         }
