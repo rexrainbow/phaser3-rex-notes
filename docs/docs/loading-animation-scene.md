@@ -87,7 +87,7 @@ scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKe
 ```
 - `onLoadingComplete` : Custom task 
     ```javascript
-    function(finishLoading) {
+    function(finishLoading, animationScene) {
         // finishLoading();
     }
     ```

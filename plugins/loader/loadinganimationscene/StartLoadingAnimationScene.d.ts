@@ -2,7 +2,8 @@ export default StartLoadingAnimationScene;
 
 declare namespace StartLoadingAnimationScene {
     type OnLoadingCompleteCallback = (
-        finishLoading: Function
+        finishLoading: Function,
+        animationScene: Phaser.Scene
     ) => void
 }
 

@@ -15,11 +15,6 @@ class Main extends Phaser.Scene {
 
         // Loading task
         this.load.rexAwait(function (successCallback, failureCallback) {
-            setTimeout(successCallback, 1000);
-        });
-
-        // Loading task
-        this.load.rexAwait(function (successCallback, failureCallback) {
             setTimeout(successCallback, 1500);
         });
 
@@ -28,7 +23,16 @@ class Main extends Phaser.Scene {
             setTimeout(successCallback, 2000);
         });
 
-        this.plugins.get('rexLoadingAnimationScene').startScene(this, 'loading-animation');
+        // Loading task
+        this.load.rexAwait(function (successCallback, failureCallback) {
+            setTimeout(successCallback, 2500);
+        });
+
+        this.plugins.get('rexLoadingAnimationScene').startScene(this, 'loading-animation',
+            function (successCallback, animationScene) {
+                animationScene.onClose(successCallback);
+            }
+        );
     }
 
     create() {
@@ -48,10 +52,30 @@ class LoadingAnimation extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.rexSpinner.add.facebook({
+        var spinner = this.rexSpinner.add.facebook({
             x: 400, y: 300,
             width: 200, height: 200
         });
+
+        this.tweens.add({
+            targets: spinner,
+            scale: { start: 0, to: 1 },
+            duration: 500
+        })
+
+        spinner.on('destroy', function () {
+            console.log('spinner is destroyed')
+        })
+
+        var scene = this;
+        this.onClose = function (onComplete) {
+            scene.tweens.add({
+                targets: spinner,
+                scale: 0,
+                duration: 500,
+                onComplete: onComplete
+            })
+        }
     }
 
     update() { }
