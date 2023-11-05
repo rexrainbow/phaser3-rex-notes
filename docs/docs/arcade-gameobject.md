@@ -219,6 +219,22 @@ Arcade physics Image/Sprite/Group object.
     var pushable = gameObject.body.pushable;
     ```
 
+##### Slide factor
+
+The Slide Factor controls how much velocity is preserved when this Body is pushed by another Body.
+
+```javascript
+gameObject.setSlideFactor(x, y);
+```
+
+- `x`, `y` :
+    - `1` : Take on all velocity given in the push. Default value.
+    - `0` : Allow this Body to be pushed but then remain completely still after the push ends, 
+      such as you see in a game like *Sokoban*.
+    - Other value between `0` ~ `1` : Keep `x`/`y` of the original velocity when the push ends.
+        - Combine this with the `setDrag()` method to create deceleration.
+
+
 ##### Friction
 
 If this Body is `immovable` and in motion, this the proportion of this Body's movement received by the riding body on each axis.
@@ -237,6 +253,24 @@ If this Body is `immovable` and in motion, this the proportion of this Body's mo
     var fx = gameObject.body.friction.x;
     var fy = gameObject.body.friction.y;
     ```
+
+#### Direct control
+
+Enable `directControl` when game object is controlled by tween or dragging.  
+Default behavior is disable.
+
+- Enable
+    ```javascript
+    gameObject.setDirectControl();
+    // gameObject.setDirectControl(true);
+    ```
+- Disable
+    ```javascript
+    gameObject.setDirectControl(false);
+    ```
+
+!!! note "Use case"
+    Enable `setDirectControl` when game object is controlled by tween or dragging.
 
 ### Rotation
 
@@ -291,6 +325,54 @@ Whether this Body's rotation is affected by its angular acceleration and velocit
     ```
 
 ### Collision
+
+#### Collision category
+
+A body is only below to one collision category.  
+A body can collide with multiple collision categories.  
+The default is that all bodies collide with all others.
+
+- Collision category
+    - Get
+        ```javascript
+        var collisionCategory = gameObject.body.collisionCategory;
+        ```
+    - Set
+        ```javascript
+        gameObject.setCollisionCategory(category);
+        ```
+        - `category` : 
+            - `(1 << 0)` 
+            - `(1 << 1)` 
+            - `(1 << 2)` 
+            - ...
+            - `(1 << 31)`
+    - Reset collision category, to default behavior (all bodies collide with all others)
+        ```javascript
+        gameObject.resetCollisionCategory();
+        ```
+        - Set `collisionCategory` to `1`.
+        - Set `collisionMask` to `1`
+- Collision mask
+    - Get
+        ```javascript
+        var collisionMask = gameObject.body.collisionMask;
+        ```
+    - Set
+        ```javascript
+        gameObject.setCollidesWith(categories);
+        ```
+        - `categories` : A single category value, or an array of them.
+    - Add
+        ```javascript
+        gameObject.addCollidesWith(category):
+        ```
+        - `category` : A single category value.
+    - Remove
+        ```javascript
+        gameObject.removeCollidesWith(category);
+        ```
+        - `category` : A single category value.
 
 #### Collision bound
 

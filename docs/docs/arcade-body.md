@@ -51,6 +51,29 @@ Whether this Body is updated by the physics simulation.
     body.enable = false;
     ```
 
+### Direct control
+
+Enable `directControl` when game object is controlled by tween or dragging.  
+Default behavior is disable.
+
+- Enable
+    ```javascript
+    body.setDirectControl();
+    // body.setDirectControl(true);
+    ```
+    or
+    ```javascript
+    body.directControl = true;
+    ```
+- Disable
+    ```javascript
+    body.setDirectControl(false);
+    ```
+    or
+    ```javascript
+    body.directControl = false;
+    ```
+
 ### Immovable
 
 Whether this Body can be moved by collisions with another Body.
@@ -103,9 +126,6 @@ Whether the Body's position and rotation are affected by its velocity, accelerat
     ```javascript
     var moves = body.moves;
     ```
-
-!!! note "Use case"
-    Set `body.moves` to `false` when game object is controlled by tween or dragging.
 
 ### Destroy
 
@@ -232,6 +252,21 @@ Reduces speed per second.
     // body.useDamping = true;
     ```
 
+#### Slide factor
+
+The Slide Factor controls how much velocity is preserved when this Body is pushed by another Body.
+
+```javascript
+body.slideFactor.set(x, y);
+```
+
+- `x`, `y` :
+    - `1` : Take on all velocity given in the push. Default value.
+    - `0` : Allow this Body to be pushed but then remain completely still after the push ends, 
+      such as you see in a game like *Sokoban*.
+    - Other value between `0` ~ `1` : Keep `x`/`y` of the original velocity when the push ends.
+        - Combine this with the `setDrag()` method to create deceleration.
+
 #### Reset position
 
 ```javascript
@@ -328,6 +363,54 @@ Reduces angular speed per second.
     ```
 
 ### Collision
+
+#### Collision category
+
+A body is only below to one collision category.  
+A body can collide with multiple collision categories.  
+The default is that all bodies collide with all others.
+
+- Collision category
+    - Get
+        ```javascript
+        var collisionCategory = body.collisionCategory;
+        ```
+    - Set
+        ```javascript
+        body.setCollisionCategory(category);
+        ```
+        - `category` : 
+            - `(1 << 0)` 
+            - `(1 << 1)` 
+            - `(1 << 2)` 
+            - ...
+            - `(1 << 31)`
+    - Reset collision category, to default behavior (all bodies collide with all others)
+        ```javascript
+        body.resetCollisionCategory();
+        ```
+        - Set `collisionCategory` to `1`.
+        - Set `collisionMask` to `1`
+- Collision mask
+    - Get
+        ```javascript
+        var collisionMask = body.collisionMask;
+        ```
+    - Set
+        ```javascript
+        body.setCollidesWith(categories);
+        ```
+        - `categories` : A single category value, or an array of them.
+    - Add
+        ```javascript
+        body.addCollidesWith(category):
+        ```
+        - `category` : A single category value.
+    - Remove
+        ```javascript
+        body.removeCollidesWith(category);
+        ```
+        - `category` : A single category value.
 
 #### Collision bound
 
