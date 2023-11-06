@@ -53,7 +53,6 @@ class TextStyle {
         this.fixedWidth;
         this.fixedHeight;
         this.resolution;
-        this.lineSpacing;
         this.xOffset;
 
         this.rtl;
@@ -285,12 +284,6 @@ class TextStyle {
 
     setResolution(value) {
         this.resolution = value;
-
-        return this.update(false);
-    }
-
-    setLineSpacing(value) {
-        this.lineSpacing = value;
 
         return this.update(false);
     }
@@ -606,7 +599,7 @@ class TextStyle {
     }
 
     get lineHeight() {
-        return this.metrics.fontSize + this.strokeThickness + this.lineSpacing;
+        return this.metrics.fontSize + this.strokeThickness + this.parent.lineSpacing;
     }
 
     toJSON() {

@@ -108,15 +108,9 @@ class TextBase extends GameObject {
     }
 
     setLineSpacing(value) {
-        return this.style.setLineSpacing(value);
-    }
-
-    set lineSpacing(value) {
-        this.setLineSpacing(value);
-    }
-
-    get lineSpacing() {
-        return this.style.lineSpacing;
+        this.lineSpacing = value;
+        this.updateText(false);
+        return this;
     }
 
     setXOffset(value) {

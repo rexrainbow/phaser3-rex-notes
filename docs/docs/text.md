@@ -282,12 +282,29 @@ This value is *added* to the height of the font when calculating the overall lin
 
 - Get
    ```javascript
-   var lineSpacing = txt.style.lineSpacing;
+   var lineSpacing = txt.lineSpacing;
    ```
 - Set
    ```javascript
    txt.setLineSpacing(value);
    ```
+
+### Letter spacing
+
+- Get
+   ```javascript
+   var letterSpacing = txt.letterSpacing;
+   ```
+- Set
+   ```javascript
+   txt.setLetterSpacing(value);
+   ```
+   - `value` : Positive or negative value.
+
+!!! note
+    Enabling this feature will cause Phaser to render each character in this Text object 
+    one by one, rather than use a draw for the whole string. 
+    This makes it extremely expensive when used with either long strings, or lots of strings in total.
 
 ### Padding
 
@@ -334,6 +351,15 @@ Set the test string to use when measuring the font.
 ```javascript
 txt.style.setTestString(text);
 ```
+
+### RTL
+
+- Set `rtl` in style config when creating this text game object
+- Change `rtl` during runtime
+    ```javascript
+    txt.setRTL(rtl).setText(newContent);
+    ```
+    - Invoke `setRTL` method before setting new content.
 
 ### Other properties
 

@@ -86,6 +86,8 @@ class Text extends TextBase {
 
         this.height = 1;
 
+        this.lineSpacing = 0;
+
         this.dirty = false;
 
         //  If resolution wasn't set, force it to 1
@@ -155,6 +157,10 @@ class Text extends TextBase {
 
         if (style && style.padding) {
             this.setPadding(style.padding);
+        }
+
+        if (style && style.lineSpacing) {
+            this.setLineSpacing(style.lineSpacing);
         }
 
         this.setText(text);

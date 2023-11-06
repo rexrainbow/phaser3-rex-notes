@@ -7,14 +7,24 @@ var FullFill = function (textObject, width, height) {
 
     var style = textObject.style;
     // Set wrap width
-    style.wordWrapWidth = Math.max(width, 0);
+    if (width < 0) {
+        width = 0;
+    }
+    if (style.hasOwnProperty('wordWrapWidth')) {
+        style.wordWrapWidth = width;
+    } else {
+        style.wrapWidth = width;
+    }
 
     // Set max lines
     // height = (maxLines * (lineHeight + lineSpacing)) - lineSpacing
     var lineHeight = style.metrics.fontSize + style.strokeThickness;
     var lineSpacing = textObject.lineSpacing;
-    var maxLines = Math.floor((height - lineSpacing) / (lineHeight + lineSpacing));    
-    style.maxLines = Math.max(maxLines, 0);
+    var maxLines = Math.floor((height - lineSpacing) / (lineHeight + lineSpacing));
+    if (maxLines < 0) {
+        maxLines = 0;
+    }
+    style.maxLines = maxLines;
 
     // Redraw text
     textObject.updateText();
