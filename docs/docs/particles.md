@@ -352,8 +352,8 @@ emitter.setAnim(anims);
 // emitter.setAnim(anims, pickRandom, quantity);
 ```
 - `anims` : One or more animations, or a configuration object.
-    - String or number value
-    - Array of string or number value
+    - String
+    - Array of string
     - Configuration object :
         ```javascript
         {
@@ -362,6 +362,11 @@ emitter.setAnim(anims);
             quantity: 1
         }
         ```
+        - `anims` : One or more animations names, or Play Animation Config objects.
+            - String
+            - Array of string
+            - [Animation config](animation.md#add-animation)
+            - Array of [Animation config](animation.md#add-animation)
 - `pickRandom` : 
     - `true` : Whether frames should be assigned at random from `frames`. Default behavior.
 - `quantity` : The number of consecutive particles that will receive each frame. Default value is `1`.
@@ -692,6 +697,10 @@ emitter.removeEmitZone(zone)
 #### Clear emit zone
 
 ```javascript
+emitter.clearEmitZones();
+```
+or
+```javascript
 emitter.emitZones.length = 0;
 emitter.zoneIndex = 0;
 ```
@@ -725,6 +734,10 @@ emitter.removeDeathZone(zone)
 
 #### Clear death zone
 
+```javascript
+emitter.clearDeathZones();
+```
+or
 ```javascript
 emitter.deathZones.length = 0;
 ```

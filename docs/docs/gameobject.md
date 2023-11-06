@@ -452,6 +452,7 @@ See [data manager](datamanager.md)
     ```javascript
     gameObject.setTexture(key);
     // gameObject.setTexture(key, frame);
+    // gameObject.setTexture(key, frame, updateSize, updateOrigin);
     ```
 - Set texture via texture object
     ```javascript
@@ -462,7 +463,7 @@ See [data manager](datamanager.md)
 - Set frame
     ```javascript
     gameObject.setFrame(frame);
-    gameObject.setFrame(frame, updateSize, updateOrigin);
+    // gameObject.setFrame(frame, updateSize, updateOrigin);
     ```
     - `frame` :　The name or index of the frame within the Texture.
     - `updateSize` : Should this call adjust the size of the Game Object?
@@ -470,7 +471,7 @@ See [data manager](datamanager.md)
 - Set frame by frame object
     ```javascript
     gameObject.setFrame(frameObject);
-    gameObject.setFrame(frameObject, updateSize, updateOrigin);
+    // gameObject.setFrame(frameObject, updateSize, updateOrigin);
     ```
 - Applies a crop to a texture
     ```javascript

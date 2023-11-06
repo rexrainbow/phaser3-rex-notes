@@ -11,7 +11,7 @@ Animation and animations manager.
 #### Add animation
 
 ```javascript
-scene.anims.create({
+var animationConfig = {
     key: '',
 
     frames: [],
@@ -19,6 +19,7 @@ scene.anims.create({
     sortFrames: true,
     defaultTextureKey: null,
     skipMissedFrames: true,
+    randomFrame: false,
 
 
     // time
@@ -35,7 +36,9 @@ scene.anims.create({
     showBeforeDelay: false,
     showOnStart: false,
     hideOnComplete: false
-});
+};
+
+scene.anims.create(animationConfig);
 ```
 
 - `key` : Unique key of this animation data
@@ -83,6 +86,7 @@ scene.anims.create({
 - `sortFrames` : Frame names numerically sorted. Default value is `true`.
 - `defaultTextureKey` : The key of the texture all frames of the animation will use. Can be overridden on a per frame basis.
 - `skipMissedFrames` : Skip frames if the time lags, or always advanced anyway? Default value is `true`.
+- `randomFrame` : Start playback of this animation from a randomly selected frame? Default value is `false`.
 - `delay` : Delay before starting playback. Value given in milliseconds.
 - `duration` : How long the animation should play for in milliseconds. If not given its derived from `frameRate`.
 - `frameRate` : The frame rate of playback in frames per second. Default value is `24`.

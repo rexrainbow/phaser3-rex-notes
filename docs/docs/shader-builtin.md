@@ -265,6 +265,7 @@ All Game Objects and camera support Post FX. These are effects applied after the
     effect.thickness = thickness;
     effect.color = color;
     effect.backgroundColor = backgroundColor;
+    effect.backgroundAlpha = backgroundAlpha;
     effect.scale = scale;
     effect.feather = feather;
     ```

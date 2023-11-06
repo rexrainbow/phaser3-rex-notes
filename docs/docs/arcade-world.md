@@ -70,11 +70,14 @@ var game = new Phaser.Game(config);
 
 #### Step
 
-Advances the simulation by one step.
-
-```javascript
-scene.physics.world.step(delta);
-```
+- Advances the simulation by a single step.
+    ```javascript
+    scene.physics.world.singleStep();
+    ```
+- Advances the simulation by a time increment.
+    ```javascript
+    scene.physics.world.step(delta);
+    ```
 
 ##### Events
 
