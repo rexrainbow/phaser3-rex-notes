@@ -274,6 +274,20 @@ sprite.anims.restart();
 // sprite.anims.restart(includeDelay, resetRepeats);
 ```
 
+#### Time scale
+
+- Get
+    ```javascript
+    var timeScale = sprite.anims.globalTimeScale;
+    ```
+- Set
+    ```javascript
+    sprite.anims.globalTimeScale = timeScale;
+    ```
+
+
+See also [Global time scale](animation.md#global-time-scale)
+
 #### Properties
 
 - Has started

@@ -26,6 +26,7 @@ var animationConfig = {
     delay: 0,
     duration: null,
     frameRate: null,
+    timeScale: 1,
 
     // repeat
     repeat: 0,              // set to (-1) to repeat forever
@@ -90,6 +91,7 @@ scene.anims.create(animationConfig);
 - `delay` : Delay before starting playback. Value given in milliseconds.
 - `duration` : How long the animation should play for in milliseconds. If not given its derived from `frameRate`.
 - `frameRate` : The frame rate of playback in frames per second. Default value is `24`.
+- `timeScale` : The time scale to be applied to playback of this animation. Default value is `1`.
 - `repeat` : Number of times to repeat the animation. Default value is `0`.
     - `-1` : Infinity
 - `repeatDelay` : Delay before the animation repeats. Value given in milliseconds.
@@ -162,6 +164,17 @@ scene.anims.pauseAll();
 ```javascript
 scene.anims.resumeAll();
 ```
+
+#### Global time scale
+
+- Get
+    ```javascript
+    var timeScale = scene.anims.globalTimeScale;
+    ```
+- Set
+    ```javascript
+    scene.anims.globalTimeScale = timeScale;
+    ```
 
 #### Has animation
 
