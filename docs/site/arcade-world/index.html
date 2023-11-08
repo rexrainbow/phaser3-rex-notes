@@ -10149,9 +10149,14 @@
 </li>
 </ul>
 <h4 id="step">Step<a class="headerlink" href="#step" title="Permanent link">&para;</a></h4>
-<p>Advances the simulation by one step.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
-</code></pre></div>
+<ul>
+<li>Advances the simulation by a single step.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">singleStep</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Advances the simulation by a time increment.
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>
 <ul>
 <li>World step

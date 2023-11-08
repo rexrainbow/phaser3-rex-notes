@@ -3626,6 +3626,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#direct-control" class="md-nav__link">
+    Direct control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#immovable" class="md-nav__link">
     Immovable
   </a>
@@ -3711,6 +3718,13 @@
           <li class="md-nav__item">
   <a href="#drag" class="md-nav__link">
     Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slide-factor" class="md-nav__link">
+    Slide factor
   </a>
   
 </li>
@@ -3802,6 +3816,13 @@
   
     <nav class="md-nav" aria-label="Collision">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collision-category" class="md-nav__link">
+    Collision category
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#collision-bound" class="md-nav__link">
@@ -9804,6 +9825,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#direct-control" class="md-nav__link">
+    Direct control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#immovable" class="md-nav__link">
     Immovable
   </a>
@@ -9889,6 +9917,13 @@
           <li class="md-nav__item">
   <a href="#drag" class="md-nav__link">
     Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slide-factor" class="md-nav__link">
+    Slide factor
   </a>
   
 </li>
@@ -9980,6 +10015,13 @@
   
     <nav class="md-nav" aria-label="Collision">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collision-category" class="md-nav__link">
+    Collision category
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#collision-bound" class="md-nav__link">
@@ -10173,6 +10215,24 @@
     <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="direct-control">Direct control<a class="headerlink" href="#direct-control" title="Permanent link">&para;</a></h3>
+<p>Enable <code>directControl</code> when game object is controlled by tween or dragging.<br />
+Default behavior is disable.</p>
+<ul>
+<li>Enable
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setDirectControl</span><span class="p">();</span>
+<span class="c1">// body.setDirectControl(true);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">directControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setDirectControl</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">directControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="immovable">Immovable<a class="headerlink" href="#immovable" title="Permanent link">&para;</a></h3>
 <p>Whether this Body can be moved by collisions with another Body.</p>
 <ul>
@@ -10214,10 +10274,6 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">moves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">body</span><span class="p">.</span><span class="nx">moves</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Use case</p>
-<p>Set <code>body.moves</code> to <code>false</code> when game object is controlled by tween or dragging.</p>
-</div>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <p>Physics body will be destroyed automatically when game object is destroyed.</p>
 <h3 id="movement">Movement<a class="headerlink" href="#movement" title="Permanent link">&para;</a></h3>
@@ -10317,6 +10373,22 @@
 <span class="c1">// body.useDamping = true;</span>
 </code></pre></div></li>
 </ul>
+<h4 id="slide-factor">Slide factor<a class="headerlink" href="#slide-factor" title="Permanent link">&para;</a></h4>
+<p>The Slide Factor controls how much velocity is preserved when this Body is pushed by another Body.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">slideFactor</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> :<ul>
+<li><code>1</code> : Take on all velocity given in the push. Default value.</li>
+<li><code>0</code> : Allow this Body to be pushed but then remain completely still after the push ends, 
+  such as you see in a game like <em>Sokoban</em>.</li>
+<li>Other value between <code>0</code> ~ <code>1</code> : Keep <code>x</code>/<code>y</code> of the original velocity when the push ends.<ul>
+<li>Combine this with the <code>setDrag()</code> method to create deceleration.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="reset-position">Reset position<a class="headerlink" href="#reset-position" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
@@ -10389,6 +10461,62 @@
 </code></pre></div></li>
 </ul>
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
+<h4 id="collision-category">Collision category<a class="headerlink" href="#collision-category" title="Permanent link">&para;</a></h4>
+<p>A body is only below to one collision category.<br />
+A body can collide with multiple collision categories.<br />
+The default is that all bodies collide with all others.</p>
+<ul>
+<li>Collision category<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">collisionCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">body</span><span class="p">.</span><span class="nx">collisionCategory</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setCollisionCategory</span><span class="p">(</span><span class="nx">category</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>category</code> : <ul>
+<li><code>(1 &lt;&lt; 0)</code> </li>
+<li><code>(1 &lt;&lt; 1)</code> </li>
+<li><code>(1 &lt;&lt; 2)</code> </li>
+<li>...</li>
+<li><code>(1 &lt;&lt; 31)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Reset collision category, to default behavior (all bodies collide with all others)
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">resetCollisionCategory</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Set <code>collisionCategory</code> to <code>1</code>.</li>
+<li>Set <code>collisionMask</code> to <code>1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Collision mask<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">collisionMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">body</span><span class="p">.</span><span class="nx">collisionMask</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setCollidesWith</span><span class="p">(</span><span class="nx">categories</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>categories</code> : A single category value, or an array of them.</li>
+</ul>
+</li>
+<li>Add
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">addCollidesWith</span><span class="p">(</span><span class="nx">category</span><span class="p">)</span><span class="o">:</span>
+</code></pre></div><ul>
+<li><code>category</code> : A single category value.</li>
+</ul>
+</li>
+<li>Remove
+    <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">removeCollidesWith</span><span class="p">(</span><span class="nx">category</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>category</code> : A single category value.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="collision-bound">Collision bound<a class="headerlink" href="#collision-bound" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Rectangle

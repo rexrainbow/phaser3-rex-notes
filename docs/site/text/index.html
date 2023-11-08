@@ -1671,6 +1671,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#letter-spacing" class="md-nav__link">
+    Letter spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#padding" class="md-nav__link">
     Padding
   </a>
@@ -1694,6 +1701,13 @@
           <li class="md-nav__item">
   <a href="#test-string" class="md-nav__link">
     Test string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtl" class="md-nav__link">
+    RTL
   </a>
   
 </li>
@@ -9643,6 +9657,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#letter-spacing" class="md-nav__link">
+    Letter spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#padding" class="md-nav__link">
     Padding
   </a>
@@ -9666,6 +9687,13 @@
           <li class="md-nav__item">
   <a href="#test-string" class="md-nav__link">
     Test string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtl" class="md-nav__link">
+    RTL
   </a>
   
 </li>
@@ -9976,12 +10004,28 @@
 <p>This value is <em>added</em> to the height of the font when calculating the overall line height.</p>
 <ul>
 <li>Get
-   <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">lineSpacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">lineSpacing</span><span class="p">;</span>
+   <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">lineSpacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">lineSpacing</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setLineSpacing</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="letter-spacing">Letter spacing<a class="headerlink" href="#letter-spacing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+   <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">letterSpacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">letterSpacing</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+   <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setLetterSpacing</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li><code>value</code> : Positive or negative value.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enabling this feature will cause Phaser to render each character in this Text object 
+one by one, rather than use a draw for the whole string. 
+This makes it extremely expensive when used with either long strings, or lots of strings in total.</p>
+</div>
 <h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -10018,6 +10062,16 @@
 <p>Set the test string to use when measuring the font.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setTestString</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
+<h3 id="rtl">RTL<a class="headerlink" href="#rtl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set <code>rtl</code> in style config when creating this text game object</li>
+<li>Change <code>rtl</code> during runtime
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setRTL</span><span class="p">(</span><span class="nx">rtl</span><span class="p">).</span><span class="nx">setText</span><span class="p">(</span><span class="nx">newContent</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Invoke <code>setRTL</code> method before setting new content.</li>
+</ul>
+</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
 <h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>

@@ -10301,8 +10301,8 @@
 <span class="c1">// emitter.setAnim(anims, pickRandom, quantity);</span>
 </code></pre></div>
 - <code>anims</code> : One or more animations, or a configuration object.
-    - String or number value
-    - Array of string or number value
+    - String
+    - Array of string
     - Configuration object :
         <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">anims</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
@@ -10310,6 +10310,11 @@
 <span class="w">    </span><span class="nx">quantity</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span>
 <span class="p">}</span>
 </code></pre></div>
+        - <code>anims</code> : One or more animations names, or Play Animation Config objects.
+            - String
+            - Array of string
+            - <a href="../animation/#add-animation">Animation config</a>
+            - Array of <a href="../animation/#add-animation">Animation config</a>
 - <code>pickRandom</code> : 
     - <code>true</code> : Whether frames should be assigned at random from <code>frames</code>. Default behavior.
 - <code>quantity</code> : The number of consecutive particles that will receive each frame. Default value is <code>1</code>.</p>
@@ -10616,9 +10621,12 @@
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">removeEmitZone</span><span class="p">(</span><span class="nx">zone</span><span class="p">)</span>
 </code></pre></div>
 <h4 id="clear-emit-zone">Clear emit zone<a class="headerlink" href="#clear-emit-zone" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">clearEmitZones</span><span class="p">();</span>
+</code></pre></div>
+or
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZones</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">zoneIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></p>
 <h3 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">zone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">emitter</span><span class="p">.</span><span class="nx">addDeathZone</span><span class="p">({</span>
 <span class="w">     </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
@@ -10643,8 +10651,11 @@
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">removeDeathZone</span><span class="p">(</span><span class="nx">zone</span><span class="p">)</span>
 </code></pre></div>
 <h4 id="clear-death-zone">Clear death zone<a class="headerlink" href="#clear-death-zone" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZones</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<p><div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">clearDeathZones</span><span class="p">();</span>
 </code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZones</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</code></pre></div></p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Starts emission of particles.
