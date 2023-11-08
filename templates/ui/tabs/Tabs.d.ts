@@ -119,7 +119,7 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): boolean;
 
-    getButtone(
+    getButton(
         groupName: 'left' | 'right' | 'top' | 'bottom',
         index: number
     ): Phaser.GameObjects.GameObject | null;

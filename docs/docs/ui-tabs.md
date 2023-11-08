@@ -347,60 +347,60 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - Buttons
         - Button game object in a group
             ```javascript
-            var bottons = tabs.getButton(groupName, index)
+            var buttons = tabs.getButton(groupName, index)
             ```
             - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
             - `index` : A number index.
         - Left button game object
             ```javascript
-            var bottons = tabs.getElement('leftButtons');
+            var buttons = tabs.getElement('leftButtons');
             ```
             or
             ```javascript
-            var botton = tabs.getLeftButton(index);
+            var button = tabs.getLeftButton(index);
             ```
             or
             ```javascript
-            var bottons = tabs.getElement('leftButtons[0]');
+            var buttons = tabs.getElement('leftButtons[0]');
             ```
             - First button of left buttons.
         - Right button game object
             ```javascript
-            var bottons = tabs.getElement('rightButtons');
+            var buttons = tabs.getElement('rightButtons');
             ```
             or
             ```javascript
-            var botton = tabs.getRightButton(index);
+            var button = tabs.getRightButton(index);
             ```
             or
             ```javascript
-            var bottons = tabs.getElement('rightButtons[0]');
+            var buttons = tabs.getElement('rightButtons[0]');
             ```
             - First button of right buttons.
         - Top button game object
             ```javascript
-            var bottons = tabs.getElement('topButtons');
+            var buttons = tabs.getElement('topButtons');
             ```
             or
             ```javascript
-            var botton = tabs.getTopButton(index);
+            var button = tabs.getTopButton(index);
             ```
             or
             ```javascript
-            var bottons = tabs.getElement('topButtons[0]');
+            var buttons = tabs.getElement('topButtons[0]');
             ```
             - First button of top buttons.
         - Bottom button game object
             ```javascript
-            var bottons = tabs.getElement('bottomButtons');
+            var buttons = tabs.getElement('bottomButtons');
             ```
             or
             ```javascript
-            var botton = tabs.getBottomButton(index);
+            var button = tabs.getBottomButton(index);
             ```
             or
             ```javascript
-            var bottons = tabs.getElement('bottomButtons[0]');
+            var buttons = tabs.getElement('bottomButtons[0]');
             ```
             - First button of bottom buttons.
 - Get by name
