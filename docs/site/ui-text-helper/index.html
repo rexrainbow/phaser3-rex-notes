@@ -10,20 +10,16 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-overview/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-text-helper/">
       
       
-        <link rel="prev" href="../realtimetimers/">
-      
-      
-        <link rel="next" href="../ui-basesizer/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Overview - Notes of Phaser 3</title>
+        <title>Ui text helper - Notes of Phaser 3</title>
       
     
     
@@ -83,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#install-ui-plugins" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Ui text helper
             
           </span>
         </div>
@@ -7634,16 +7630,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
       
       
       
@@ -7652,7 +7646,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_15">
           <span class="md-nav__icon md-icon"></span>
           UI
@@ -7663,246 +7657,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Overview
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../ui-overview/" class="md-nav__link">
         Overview
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#install-ui-plugins" class="md-nav__link">
-    Install ui plugins
-  </a>
-  
-    <nav class="md-nav" aria-label="Install ui plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-from-minify-file" class="md-nav__link">
-    Install from minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-from-npm-package" class="md-nav__link">
-    Install from npm package
-  </a>
-  
-    <nav class="md-nav" aria-label="Install from npm package">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-typescript-declaration-file" class="md-nav__link">
-    Using typescript declaration file
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#list-of-ui-plugins" class="md-nav__link">
-    List of ui plugins
-  </a>
-  
-    <nav class="md-nav" aria-label="List of ui plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ui-components" class="md-nav__link">
-    UI components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#basic-container" class="md-nav__link">
-    Basic container
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#background-objects" class="md-nav__link">
-    Background objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#canvasshape-objects" class="md-nav__link">
-    Canvas/Shape objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#colored-text-objects" class="md-nav__link">
-    Colored text objects
-  </a>
-  
-    <nav class="md-nav" aria-label="Colored text objects">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#behaviors-of-text" class="md-nav__link">
-    Behaviors of text
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scaled-image" class="md-nav__link">
-    Scaled image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transition-image" class="md-nav__link">
-    Transition image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#states-game-objects" class="md-nav__link">
-    States game objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dom-game-objects" class="md-nav__link">
-    Dom game objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#touch-input" class="md-nav__link">
-    Touch input
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#behaviors" class="md-nav__link">
-    Behaviors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#helper-methods" class="md-nav__link">
-    Helper methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Helper methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-parent" class="md-nav__link">
-    Get parent
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#showhide" class="md-nav__link">
-    Show/hide
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-pointer-in-bounds" class="md-nav__link">
-    Is pointer in bounds
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event-promise" class="md-nav__link">
-    Event promise
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#view-port" class="md-nav__link">
-    View port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    YAML
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#demos" class="md-nav__link">
-    Demos
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -9648,207 +9407,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-ui-plugins" class="md-nav__link">
-    Install ui plugins
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
-  
-    <nav class="md-nav" aria-label="Install ui plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-from-minify-file" class="md-nav__link">
-    Install from minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-from-npm-package" class="md-nav__link">
-    Install from npm package
-  </a>
-  
-    <nav class="md-nav" aria-label="Install from npm package">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-typescript-declaration-file" class="md-nav__link">
-    Using typescript declaration file
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#list-of-ui-plugins" class="md-nav__link">
-    List of ui plugins
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
-  
-    <nav class="md-nav" aria-label="List of ui plugins">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ui-components" class="md-nav__link">
-    UI components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#basic-container" class="md-nav__link">
-    Basic container
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#background-objects" class="md-nav__link">
-    Background objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#canvasshape-objects" class="md-nav__link">
-    Canvas/Shape objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#colored-text-objects" class="md-nav__link">
-    Colored text objects
-  </a>
-  
-    <nav class="md-nav" aria-label="Colored text objects">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#behaviors-of-text" class="md-nav__link">
-    Behaviors of text
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scaled-image" class="md-nav__link">
-    Scaled image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transition-image" class="md-nav__link">
-    Transition image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#states-game-objects" class="md-nav__link">
-    States game objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dom-game-objects" class="md-nav__link">
-    Dom game objects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#touch-input" class="md-nav__link">
-    Touch input
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#behaviors" class="md-nav__link">
-    Behaviors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#helper-methods" class="md-nav__link">
-    Helper methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Helper methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-parent" class="md-nav__link">
-    Get parent
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#showhide" class="md-nav__link">
-    Show/hide
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-pointer-in-bounds" class="md-nav__link">
-    Is pointer in bounds
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event-promise" class="md-nav__link">
-    Event promise
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#view-port" class="md-nav__link">
-    View port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    YAML
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#demos" class="md-nav__link">
-    Demos
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wrap-expand-text" class="md-nav__link">
+    Wrap expand text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fontsize-expand-text" class="md-nav__link">
+    Fontsize expand text
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -9870,880 +9465,51 @@
   
 
 
-  <h1>Overview</h1>
+  <h1>Ui text helper</h1>
 
-<h2 id="install-ui-plugins">Install ui plugins<a class="headerlink" href="#install-ui-plugins" title="Permanent link">&para;</a></h2>
-<h3 id="install-from-minify-file">Install from minify file<a class="headerlink" href="#install-from-minify-file" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Download minify file (<a href="https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js">link</a>).</li>
-<li>Install ui plugin in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="nx">filePath</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">sceneKey</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
-<span class="p">});</span>
-</code></pre></div><ul>
-<li><code>key</code> : Must be <code>'rexuiplugin'</code></li>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Some helper methods for <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>, <a href="../bitmaptext/">Bitmap text object</a> game objects</p>
+<ul>
+<li>Author: Rex</li>
+<li>Methods</li>
 </ul>
-</li>
-</ol>
-<h3 id="install-from-npm-package">Install from npm package<a class="headerlink" href="#install-from-npm-package" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Install rex plugins
-    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
-</code></pre></div></li>
-<li>Install ui plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">mapping</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
-<h4 id="using-typescript-declaration-file">Using typescript declaration file<a class="headerlink" href="#using-typescript-declaration-file" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">rexUI</span><span class="o">:</span><span class="w"> </span><span class="kt">RexUIPlugin</span><span class="p">;</span><span class="w">  </span><span class="c1">// Declare scene property &#39;rexUI&#39; as RexUIPlugin type</span>
-
-<span class="w">    </span><span class="nx">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">sizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
-<span class="w">            </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="p">})</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="kt">Game</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="kt">RexUIPlugin</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">mapping</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">});</span>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/xxMdVOZ">Wrap-expand-text</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/QWYvNEJ">Wrap-expand-bitmaptext</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/WNMmEEj">Fontsize-expand-text</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/BaGLbKr">Resize Fontsize-expand-text</a></li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-wrap-expand-text">Wrap-expand-text</a></li>
+<li><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-fontsize-expand-text">Fontsize-expand-text</a></li>
+</ul>
+<h3 id="wrap-expand-text">Wrap expand text<a class="headerlink" href="#wrap-expand-text" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">wrapExpandText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">)),</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// proportion: 1,</span>
+<span class="w">            </span><span class="c1">// expand: true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">)</span>
 </code></pre></div>
 <ul>
-<li><code>'phaser3-rex-plugins/templates/ui/ui-plugin'</code> : Factories of rexUI components.</li>
-<li><code>'phaser3-rex-plugins/templates/ui/ui-components'</code> : Class of rexUI components.
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Sizer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
-</code></pre></div></li>
+<li><code>proportion: 1</code> or/and <code>expand: true</code> : Expand width of text</li>
 </ul>
-<p>See this <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts">example</a></p>
-<h2 id="list-of-ui-plugins">List of ui plugins<a class="headerlink" href="#list-of-ui-plugins" title="Permanent link">&para;</a></h2>
-<h3 id="ui-components">UI components<a class="headerlink" href="#ui-components" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../ui-badgelabel/">Badge label</a>: A container with badges above a main item.</li>
-<li><a href="../ui-buttons/">Buttons</a>: A container with a group of buttons.</li>
-<li><a href="../ui-colorcomponents/">Color componets</a>: Edit color value by RGB, or HSV input fields.</li>
-<li><a href="../ui-colorinput/">Color input</a>: Color number or color string input field.</li>
-<li><a href="../ui-colorpicker/">Color picker</a>: Pick color value from H and SV palettes.</li>
-<li><a href="../ui-confirmdialog/">Confirm dialog</a>: Using json style to create confirm dialog.</li>
-<li><a href="../ui-dialog/">Dialog</a>: A container with a title, content, buttons and background.</li>
-<li><a href="../ui-dropdownlist/">Drop down list</a>: A <a href="../ui-label/">label</a> can open a drop-down list panel.</li>
-<li><a href="../ui-expbar/">Exp bar</a>: Disply experience bar on NameValueLabel.</li>
-<li><a href="../ui-fileselectorbutton/">File selector button</a>: A transparent file chooser button above a Label.</li>
-<li><a href="../ui-fixwidthbuttons/">Fix-width-buttons</a>: A container with a group of fix-width buttons.</li>
-<li><a href="../ui-fixwidthsizer/">Fix-width-sizer</a>: Layout children game objects into lines.</li>
-<li><a href="../ui-folder/">Folder</a>: A container with a title, foldable child, and background.</li>
-<li><a href="../ui-gridbuttons/">Grid-buttons</a>: A container with a group of buttons in grids.</li>
-<li><a href="../ui-gridsizer/">Grid-sizer</a>: Layout children game objects in grids.</li>
-<li><a href="../ui-gridtable/">Grid-table</a>: A container with a <a href="../gridtable/">grid table</a>, slider, and scroller.</li>
-<li><a href="../ui-holygrail/">Holy grail</a>: Layout elements in <a href="https://en.wikipedia.org/wiki/Holy_grail_(web_design)">Holy grail</a> style.</li>
-<li><a href="../ui-knob/">Knob</a>: A knob button based on circular progress.</li>
-<li><a href="../ui-label/">Label</a>: A container with an icon, text, and background.</li>
-<li><a href="../ui-menu/">Menu</a>: A container with buttons and sub-menu.</li>
-<li><a href="../ui-namevaluelabel/">Name-value label</a>: A container with name text, value text in a row, with a <a href="../shape-lineprogress/">horizontal line progress bar</a>, and an icon, background.</li>
-<li><a href="../ui-imageinputlabel/">Image input label</a>: A container with a canvas icon, text, and background. Click icon to popup a (image) file chooser dialog, display selected image on canvas.</li>
-<li><a href="../ui-numberbar/">Number-bar</a>: A container with an icon, slider, text, and background.</li>
-<li><a href="../ui-overlapsizer/">Overlap sizer</a>: Layout children game objects overlapped.</li>
-<li><a href="../ui-pages/">Pages</a>: A container with pages, only current page is visible.</li>
-<li><a href="../ui-perspectivecard/">Perspective card</a>: A container with front and back faces.</li>
-<li><a href="../ui-scrollablepanel/">Scroll-able panel</a>: A container with a panel, slider, and scroller.</li>
-<li><a href="../ui-simpledropdownlist/">Simple drop down list</a>: Using plain object to create <a href="../ui-simpledropdownlist/">drop down list</a>.</li>
-<li><a href="../ui-simplelabel/">Simple label</a>: Using json style to create <a href="../ui-label/">label</a>.</li>
-<li><a href="../ui-sizer/">Sizer</a>: Layout children game objects.</li>
-<li><a href="../ui-slider/">Slider</a>: A container with a track, indicator, thumb and background.</li>
-<li><a href="../ui-tabpages/">Tab-pages</a>: A container with tabs and pages, only current page is visible.</li>
-<li><a href="../ui-tabs/">Tabs</a>: A container with 4 groups of buttons around a center panel.</li>
-<li><a href="../ui-textarea/">TextArea</a>: A container with a text, slider, and scroller.</li>
-<li><a href="../ui-textareainput/">TextAreaInput</a>: A container with a canvasInput, and slider.</li>
-<li><a href="../ui-textbox/">Textbox</a>: A container with an icon, (<a href="../texttyping/">typing</a> and <a href="../textpage/">paging</a>) text, and background.</li>
-<li><a href="../ui-titlelabel/">Title label</a>: A container with title, text in two rows, and an icon, background.</li>
-<li><a href="../ui-toast/">Toast</a>: Show text message for a short while.</li>
-<li><a href="../ui-tweaker/">Tweaker</a>: Fine-tuning properties of target object.</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Scroll-able table</p>
-<p>There are 3 kinds of scroll-able tables :</p>
+<h3 id="fontsize-expand-text">Fontsize expand text<a class="headerlink" href="#fontsize-expand-text" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">fontSizeExpandText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="p">)),</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// proportion: 1,</span>
+<span class="w">            </span><span class="c1">// expand: true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">)</span>
+</code></pre></div>
 <ul>
-<li><a href="../ui-gridtable/">Grid-table</a> only creates visible objects. It is suitable for large table.</li>
-<li><a href="../ui-gridsizer/">Grid-sizer</a> adds all objects. Put this grid-sizer into scroll-able panel to have a scroll-able table.</li>
-<li><a href="../ui-fixwidthsizer/">Fixwidth-sizer</a> adds all objects. Put this fixwidth-sizer into scroll-able panel to have a scroll-able table.</li>
-</ul>
-</div>
-<h3 id="basic-container">Basic container<a class="headerlink" href="#basic-container" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../containerlite/">ContainerLite</a>: Control the position and angle of children game objects.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyContainer</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Container</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="background-objects">Background objects<a class="headerlink" href="#background-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../shape-roundrectangle/">Round-rectangle</a>: Round rectangle shape.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyRoundRectangle</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../ninepatch/">Nine-patch</a>: Stretchable imaage.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ninePatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ninePatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch2</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyNinePatch</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyNinePatch</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">columns</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-custom-shapes/">Custom shapes</a>: Custom shapes on shape.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">customShapes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">customShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCustomShapes</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomShapes</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-custom-progress/">Custom progress</a>: Custom progress on shape.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">customProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">customProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCustomProgress</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomProgress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span><span class="w">    </span>
-</code></pre></div></li>
-<li><a href="../canvas-roundrectangle/">Canvas-round-rectangle</a>: Round rectangle on canvas.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangleCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radiusConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">fillStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor2</span><span class="p">,</span><span class="w"> </span><span class="nx">isHorizontalGradient</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyRoundRectangleCanvas</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangleCanvas</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radiusConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">fillStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor2</span><span class="p">,</span><span class="w"> </span><span class="nx">isHorizontalGradient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">radiusConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">fillStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeStyle</span><span class="p">,</span><span class="w"> </span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor2</span><span class="p">,</span><span class="w"> </span><span class="nx">isHorizontalGradient</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-cover/">Cover</a>: <a href="../shape-cover/">Rectangle shape covered full window</a>, and <a href="../toucheventstop/">block all touch events</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">cover</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCover</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Cover</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="canvasshape-objects">Canvas/Shape objects<a class="headerlink" href="#canvasshape-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../canvas/">Canvas</a>: Drawing on <a href="https://www.w3schools.com/html/html5_canvas.asp">canvas</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">canvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-<span class="c1">// var canvas = scene.rexUI.add.canvas(x, y, width, height);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCanvas</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Canvas</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../circlemaskimage/">Circle mask image</a>: Load a texture, then apply a circle mask.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circleMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleMaskImage</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../alphamaskimage/">Alpha mask image</a>: Load a texture, then apply an alpha mask from another texture.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">alphaMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">AlphaMaskImage</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-circularprogress/">Circular progress shape</a>: Circular progress bar shape.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">circularProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCircularProgress</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../canvas-circularprogress/">Circular progress canvas</a>: Circular progress bar on canvas
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">circularProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCircularProgress</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgressCanvas</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">radius</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-lineprogress/">Line progress shape</a>: Horizontal line progress bar shape.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">lineProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">lineProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyLineProgress</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">LinerProgress</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../canvas-lineprogress/">Line progress canvas</a>: Horizontal line progress bar filled with gradient color on canvas.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">lineProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">lineProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyLineProgress</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">LinerProgressCanvas</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">barColor</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-checkbox/">Checkbox</a>: Checkbox <a href="../button/">input</a> with drawing checker path animation.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">checkbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">checkbox</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyCheckbox</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Checkbox</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-toggleswitch/">Toggle switch</a>: Toggle-switch input.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">toggleSwitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">toggleSwitch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyToggleSwitch</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ToggleSwitch</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../shape-triangle2/">Triangle</a>: Trangle shape inside a rectangle bounds.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">triangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">triangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTriangle</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Triangle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../ui-chart/">Chart</a>: Draw <a href="https://www.chartjs.org/">chart</a> on <a href="../canvas/">canvas</a>.</li>
-</ol>
-<h3 id="colored-text-objects">Colored text objects<a class="headerlink" href="#colored-text-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../bbcodetext/">BBCode text</a>: Drawing text with <a href="https://en.wikipedia.org/wiki/BBCode">BBCode</a> protocol.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">BBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">BBCodeText</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../tagtext/">Tag text</a>: Displays text with multi-color, font face, or font size with tags.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TagText</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../dynamictext/">Dynamic text</a>: Control position, angle of each character drawn on a canvas.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dynamicText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">DynamicText</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../textplayer/">Text player</a>: Typing characters on <a href="../textplayer/">dynamic text</a>, waiting click or key enter, play sound effect or backgroun music.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">textPlayer</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TextPlayer</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../canvasinput/">Canvas input</a>: An invisible Input DOM element to  receive character input and display on <a href="../dynamictext/">DynamicText</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">canvasInput</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CanvasInput</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h4 id="behaviors-of-text">Behaviors of text<a class="headerlink" href="#behaviors-of-text" title="Permanent link">&para;</a></h4>
-<ol>
-<li><a href="../hiddeninputtext/">Hidden text edit</a>: Create an invisible <a href="https://www.w3schools.com/tags/tag_input.asp">Input DOM element</a> to edit string content.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">hiddenEdit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hiddenEdit</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>textObject</code> : <a href="../text/">text</a>, <a href="../bbcodetext/">bbocodetext</a>, <a href="../tagtext/">tagtext</a>, or <a href="../ui-label/">label</a>.</li>
-</ul>
-</li>
-<li><a href="../textedit/">Text edit</a>: Create an <a href="../inputtext/">input text object</a> above a text object to edit string content.
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">// scene.rexUI.edit(textObject, config, onClose);</span>
-</code></pre></div></li>
-<li><a href="../ui-text-helper/#wrap-expand-text">Wrap-expand text</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">wrapExpandText</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
-<span class="c1">// var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);</span>
-</code></pre></div><ul>
-<li><code>textObject</code> :<ul>
-<li><a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>,</li>
-<li><a href="../bitmaptext/">Bitmap text object</a></li>
-<li><a href="../dynamictext/">Dynamic text object</a>, With default wrap configuration, ex:
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nx">lineHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">24</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="../ui-text-helper/#fontsize-expand-text">Font-size-expand text</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">fontSizeExpandText</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span><span class="w">    </span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">fontSizeExpandText</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fitHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">});</span>
-</code></pre></div><ul>
-<li><code>textObject</code> :<ul>
-<li><a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>, <a href="../bitmaptext/">bitmap text game object</a></li>
-</ul>
-</li>
-<li><code>fitHeight</code> : <ul>
-<li><code>false</code> : Set font size to fit width only. Default behavior.</li>
-<li><code>true</code> : Set font size to fit width and height.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Set font-size to fit width 
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">setFontSizeFitToWidth</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>textObject</code> :<ul>
-<li><a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>, <a href="../bitmaptext/">bitmap text game object</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="../texttyping/">Text typing</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textTyping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">textTyping</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../textpage/">Text page</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">textPage</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
-<h3 id="scaled-image">Scaled image<a class="headerlink" href="#scaled-image" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../imagebox/">Image box</a>: Keep aspect ratio of image game object after scale-down resizing.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imageBox</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTransitionImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ImageBox</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="transition-image">Transition image<a class="headerlink" href="#transition-image" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../transitionimage/">Transition image</a>: Transit texture to another one.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">transitionImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTransitionImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TransitionImage</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../transitionimagepack/">Transition image pack</a>: Transit texture to another one, with some pre-build effects, extended from <a href="../transitionimage/">TransitionImage</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">transitionImagePack</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTransitionImagePack</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TransitionImagePack</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="states-game-objects">States game objects<a class="headerlink" href="#states-game-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../ui-statesimage/">States image</a>: Using plain object to create <a href="../image/">Image game object</a>, with active, hover, disable styles.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesImage</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesImage</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesImage</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../ui-statestext/">States text</a>: Using plain object to create <a href="../text/">Text game object</a>, with active, hover, disable styles.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesText</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../ui-statesroundrectangle/">States round-rectangle</a>: Using plain object to create <a href="../shape-roundrectangle/">round rectangle game object</a>, with active, hover, disable styles.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">statesRoundRectangle</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyStatesRoundRectangle</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">StatesRoundRectangle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="dom-game-objects">Dom game objects<a class="headerlink" href="#dom-game-objects" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../inputtext/">Input text</a>: <a href="https://www.w3schools.com/tags/tag_input.asp">Input DOM element</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">inputText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">inputText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyInputText</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">InputText</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../filechooser/">File chooser</a>: Create a transparent file chooser button (<code>&lt;input type="file"&gt;</code>).
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">fileChooser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fileChooser</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyFileChooser</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FileChooser</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../filedropzone/">File drop zone</a>: Create a div element for dropping file(s).
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">fileDropZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fileDropZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyFileDropZpne</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FileDropZpne</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ol>
-<h3 id="touch-input">Touch input<a class="headerlink" href="#touch-input" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../button/">Click</a>: Fires 'click' event when touch releasd after pressed.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">click</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">click</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Click</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../clickoutside/">Click-Outside</a>: Fires 'clickoutside' event when pointer-down or pointer-up outside of game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickOutside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">clickOutside</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickOutside</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ClickOutside</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../intouching/">In touching</a>: Fires 'intouch' event every tick when pressing on a game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">inTouching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">inTouching</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">inTouching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">inTouching</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-tap/">Tap</a>: Get tap/multi-taps events of a game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">tap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">tap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Tap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-press/">Press</a>: Get press events of a game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">press</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-swipe/">Swipe</a>: Get swipe events of a game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">swipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">swipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-pan/">Pan</a>: Get pan events of a game object.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pan</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-pinch/">Pinch</a>: Get scale factor from 2 dragging touch pointers.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pinch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../gesture-rotate/">Rotste</a>: Get spin angle from 2 dragging touch pointers.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../toucheventstop/">Touch event stop</a>: Stop touch events propagation.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">touchEventStop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">touchEventStop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">touchEventStop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TouchEventStop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
-<h3 id="behaviors">Behaviors<a class="headerlink" href="#behaviors" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../modal-promise/">Modal promise</a>: <a href="../modal/">Modal behavior</a> wrapped into promise.
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">modalPromise</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">closeEventData</span><span class="p">){</span><span class="w"> </span><span class="p">})</span>
-</code></pre></div><ul>
-<li>Close modal dialog:
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">modalClose</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="c1">// scene.rexUI.modalClose(gameObject, closeEventData);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">);</span>
-<span class="c1">// gameObject.emit(&#39;modal.requestClose&#39;, closeEventData);</span>
-</code></pre></div><ul>
-<li>Fire <code>'modal.requestClose'</code> event on game object, which will invoke <code>modal.requestClose()</code> method. After closing dialog, <code>resolve</code> part of promise will be triggered.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="../flip/">Flip</a>: Flip game object to another face by scaling width/height.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Fade in, <a href="../fadeoutdestroy/#fade-out-destroy">fade out destroy</a>
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// scene.rexUI.fadeIn(gameObject, duration, alpha);</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../easemove/">Ease-move to</a>, ease-move from
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">easeMoveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// scene.rexUI.easeMoveTo(gameObject, duration, x, y, ease);</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">easeMoveFrom</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// scene.rexUI.easeMoveFrom(gameObject, duration, x, y, ease);</span>
-</code></pre></div></li>
-<li><a href="../shake-position/">Shake</a>
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">shake</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../containerlite-perspective/">Perspective</a>: Snapshot children of <a href="../containerlite/">containerlite</a>, to a <a href="../perspective-rendertexture/">perspective render texture</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">perspective</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">perspective</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">perspective</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Perspective</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="../containerlite-skew/">Skew</a>: Snapshot children of <a href="../containerlite/">containerlite</a>, to a <a href="../skew-rendertexture/">skew render texture</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">skew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">skew</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">skew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Skew</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
-<h3 id="helper-methods">Helper methods<a class="headerlink" href="#helper-methods" title="Permanent link">&para;</a></h3>
-<h4 id="get-parent">Get parent<a class="headerlink" href="#get-parent" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get parent sizer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parentSizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>gameObject</code> : Any game object added to sizer.</li>
-</ul>
-</li>
-<li>Get ancestor sizer matched given name
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parentSizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>gameObject</code> : Any game object added to sizer.</li>
-<li><code>name</code> : Name string.</li>
-</ul>
-</li>
-<li>Get topmost sizer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">topmostSizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>gameObject</code> : Any game object added to sizer.</li>
-</ul>
-</li>
-</ul>
-<h4 id="showhide">Show/hide<a class="headerlink" href="#showhide" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Show
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Hide
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Is shown
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isShown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">isShown</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="is-pointer-in-bounds">Is pointer in bounds<a class="headerlink" href="#is-pointer-in-bounds" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isInBounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="c1">// var isInBounds = scene.rexUI.isInTouching(gameObject, pointer);</span>
-</code></pre></div>
-<h3 id="event-promise"><a href="../eventpromise/">Event promise</a><a class="headerlink" href="#event-promise" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="../eventpromise/#get-event-promise">Get event promise</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">promise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="p">})</span>
-</code></pre></div><ul>
-<li><code>eventEmitter</code> : Any kind of <a href="../eventemitter3/">event emitter</a>. for example, game object, or <a href="../tween/#events">tween task</a>, or <a href="../scene/#events">scene event</a>    </li>
-</ul>
-</li>
-<li><a href="../eventpromise/#get-complete-event-promise">Get complete event promise</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">promise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">waitComplete</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="p">})</span>
-</code></pre></div><ul>
-<li><code>eventEmitter</code> : <a href="../eventemitter3/">Event emitter</a> which will fire <code>'complete'</code> event, for example, <a href="../tween/#events">tween task</a>.</li>
-</ul>
-</li>
-<li>Delay time promise
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">promise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">delayPromise</span><span class="p">(</span><span class="nx">time</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="p">})</span>
-</code></pre></div></li>
-</ul>
-<h3 id="view-port">View port<a class="headerlink" href="#view-port" title="Permanent link">&para;</a></h3>
-<p>View port is a <a href="../geom-rectangle/">rectangle</a> of current visible area.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">viewport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
-</code></pre></div>
-<p>Which will be changed after <a href="../scalemanager/#events">resizing</a></p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">viewport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
-<span class="w">    </span><span class="cm">/*</span>
-<span class="cm">    sizer</span>
-<span class="cm">        .setPosition(viewport.centerX, viewport.centerY)</span>
-<span class="cm">        .setMinSize(viewport.width, viewport.height)</span>
-<span class="cm">        .layout();</span>
-<span class="cm">    */</span>
-<span class="p">});</span>
-</code></pre></div>
-<h3 id="yaml">YAML<a class="headerlink" href="#yaml" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/nodeca/js-yaml">js-yaml</a></p>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">yaml</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">yamlStrinig</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">yaml</span><span class="p">.</span><span class="nx">loadAll</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">});</span>
-</code></pre></div>
-<h2 id="demos">Demos<a class="headerlink" href="#demos" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a><ul>
-<li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes/No</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Choice</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up</a></li>
-</ul>
-</li>
-<li>Text input<ul>
-<li><a href="https://codepen.io/rexrainbow/pen/YbvwBw">Text edit</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/MWOjJzZ">Hidden text edit</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/jOKOJoV">Canvas input</a></li>
-</ul>
-</li>
-<li><a href="https://codepen.io/rexrainbow/pen/PxOEBr">Menu</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/MzGoJv">Text-box</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/JzBZzy">Text-area</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/qLZPXr">Number bar</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/XyJbWX">Grid table</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/qJeVza">Tabs</a><ul>
-<li><a href="https://codepen.io/rexrainbow/pen/BGKvXK">Tabs-tables</a></li>
-</ul>
-</li>
-<li><a href="https://codepen.io/rexrainbow/pen/YMyBom">Scroll-able panel</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/vPWzBa">Pages</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/WPJPdK">Fix-width sizer</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/qwVBNy">Chart</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/Gazmyz">Video player</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/jJqXxB">Anchor</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/ZqqJjG">Round-rectangle</a></li>
+<li><code>proportion: 1</code> or/and <code>expand: true</code> : Expand width of text</li>
 </ul>
 
 
