@@ -79,6 +79,7 @@ class Demo extends Phaser.Scene {
                     align: 'bottom'
                 }
             )
+
             .add(
                 this.rexUI.wrapExpandText(this.add.text(0, 0, content)),
                 {
@@ -87,6 +88,7 @@ class Demo extends Phaser.Scene {
                     expand: true
                 }
             )
+
             .add(
                 this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
                 {

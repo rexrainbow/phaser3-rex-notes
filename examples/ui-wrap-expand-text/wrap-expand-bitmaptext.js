@@ -29,9 +29,13 @@ class Demo extends Phaser.Scene {
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN))
             .add(this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT), 0, 'bottom')
-            .add(this.rexUI.wrapExpandText(
-                this.add.bitmapText(0, 0, 'gothic', content)).setFontSize(20),
-                1, 'centet', 0, true)
+            .add(
+                this.rexUI.wrapExpandText(this.add.bitmapText(0, 0, 'gothic', content)).setFontSize(20),
+                {
+                    proportion: 1,
+                    expand: true
+                }
+            )
             .add(this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT), 0, 'bottom')
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);

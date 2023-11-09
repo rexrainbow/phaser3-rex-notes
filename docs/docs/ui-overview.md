@@ -498,7 +498,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     scene.rexUI.edit(textObject, config);
     // scene.rexUI.edit(textObject, config, onClose);
     ```
-1. Wrap-expand text
+1. [Wrap-expand text](ui-text-helper.md#wrap-expand-text)
     ```javascript
     var textObject = scene.rexUI.wrapExpandText(textObject);
     // var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);
@@ -513,7 +513,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
                 padding: {bottom: 12}
             }
             ```
-1. Font-size-expand text
+1. [Font-size-expand text](ui-text-helper.md#fontsize-expand-text)
     ```javascript
     var textObject = scene.rexUI.fontSizeExpandText(textObject);    
     ```
