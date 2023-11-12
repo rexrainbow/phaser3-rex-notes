@@ -25,6 +25,16 @@ Reference: [load image](loader.md#image)
 var nineSlice = scene.add.nineslice(x, y, texture, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight);
 ```
 
+or
+
+```javascript
+var nineSlice = scene.add.nineslice(x, y, texture, frame, width, height);
+// var nineSlice = scene.add.nineslice(x, y, texture, frame);
+```
+
+- If that frame (indexed by `texture`, `frame`) is generatedd by Texture Packer.
+
+
 Add nine slice from JSON
 
 ```javascript

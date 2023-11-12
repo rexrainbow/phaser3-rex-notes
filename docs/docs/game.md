@@ -46,10 +46,22 @@ or
     parent: null,
     width: 800,
     height: 600,
+
     scale: {
         mode: Phaser.Scale.NONE,
-        autoCenter: Phaser.Scale.NO_CENTER
+        autoCenter: Phaser.Scale.NO_CENTER,
+        resizeInterval: 500,
+        // width:
+        // height:
+        // zoom:
+        // parent:
+        expandParent: true.
+        // min: {width: 0, height: 0},
+        // max: {width: 0, height: 0},
+        // autoRound: false,
+        fullscreenTarget: null,
     },
+
     autoRound: false,
     canvas: null,
     canvasStyle: null,
@@ -67,6 +79,7 @@ or
     url: 'https://phaser.io',
     version: '',
 
+    autoFocus: true,
     input: {
         keyboard: {
             target: window
@@ -93,7 +106,7 @@ or
         antialiasGL: true,
         desynchronized: false,
         pixelArt: false,
-        roundPixels: false,
+        roundPixels: true,
         transparent: false,
         clearBeforeRender: true,
         preserveDrawingBuffer: false,
@@ -108,15 +121,18 @@ or
         defaultPipeline: 'MultiPipeline',
         pipeline:[]
     },
+    disablePreFX: false,
+    disablePostFX: false,
 
     physics: {
-        default: false  // no physics system enabled
+        default: false,  // 'arcade', or 'matter'
+        arcade: {...},   // See arcade-world#Configuration
+        matter: {...},   // See matterjs-world#Configuration
     },
 
     loader:{
         baseURL: '',
         path: '',
-        enableParallel: true,
         maxParallelDownloads: 4,
         crossOrigin: undefined,
         responseType: '',
@@ -131,12 +147,20 @@ or
 
     images: {
         default: 'data:image/png;base64....',
-        missing: 'data:image/png;base64....'
+        missing: 'data:image/png;base64....',
+        white: 'data:image/png;base64....',
+    },
+
+    audio: {
+        disableWebAudio: false,
+        context:
+        noAudio: false,
     },
 
     dom: {
         createContainer: false,
         behindCanvas: false,
+        pointerEvents: 'none'
     },
 
     plugins: {
@@ -153,11 +177,13 @@ or
     fps: {
         min: 10,
         target: 60,
+        limit: 0,
         forceSetTimeOut: false,
-        deltaHistory: 10
+        deltaHistory: 10,
+        panicMax: 120,
+        smoothStep: true,
     },
 
-    disableContextMenu: false,
     banner: {
         hidePhaser: false,
         text: '#ffffff',
@@ -169,6 +195,7 @@ or
             '#000000'
         ]
     },
+    // banner: false,
 
     stableSort: -1
 }
