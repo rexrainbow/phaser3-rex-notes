@@ -9773,6 +9773,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/qJeVza">Tabs</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/BGKvXK">Tabs-table</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-tabs">Sample code</a></p>
@@ -9862,6 +9863,21 @@
 <span class="w">    </span><span class="nx">topButtonsBackground</span><span class="o">:</span><span class="w"> </span><span class="nx">topButtonsBackgroundGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">bottomButtonsBackground</span><span class="o">:</span><span class="w"> </span><span class="nx">bottomButtonsBackgroundGameObject</span><span class="p">,</span>
 
+<span class="w">    </span><span class="nx">expand</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">panel</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">leftButtons</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">rightButtons</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">topButtons</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bottomButtons</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">leftButtons</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">rightButtons</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">topButtons</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bottomButtons</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+
 <span class="w">    </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
@@ -9918,6 +9934,17 @@
 </ul>
 </li>
 <li><code>leftButtonsBackground</code>, <code>rightButtonsBackground</code>, <code>topButtonsBackground</code>, <code>bottomButtonsBackground</code> : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.</li>
+<li><code>expand</code> : Expand size of panel or buttons<ul>
+<li><code>expand.panel</code> : Expand size of panel. Default value is <code>false</code>.</li>
+<li><code>expand.leftButtons</code>, <code>expand.rightButtons</code> : Expand height of leftButtons, rightButtons. Default value is <code>false</code>.</li>
+<li><code>expand.topButtons</code>, <code>expand.bottomButtons</code> : Expand width of topButtons, bottomButtons. Default value is <code>false</code>.</li>
+</ul>
+</li>
+<li><code>align</code> : Alignment of buttons<ul>
+<li><code>align.leftButtons</code>, <code>align.rightButtons</code> : <code>'top'</code>, <code>'bottom'</code>, or <code>'center'</code>. Default value is <code>'top'</code>.</li>
+<li><code>align.topButtons</code>, <code>align.bottomButtons</code> : <code>'left'</code>, <code>'right'</code>, or <code>'center'</code>. Default value is <code>'left'</code>.</li>
+</ul>
+</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
 <li><code>space.leftButtonsOffset</code>, <code>space.rightButtonsOffset</code> : Top offset of buttons group.</li>

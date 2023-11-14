@@ -4,14 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextabs = factory());
 })(this, (function () { 'use strict';
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -13026,9 +13026,16 @@
       if (config === undefined) {
         config = {};
       }
-      // Create sizer
+      // Create sizer        
       config.column = 3;
       config.row = 3;
+      config.columnProportions = [0, 0, 0];
+      config.rowProportions = [0, 0, 0];
+      var expandPanel = GetValue(config, 'expand.panel', false);
+      if (expandPanel) {
+        config.columnProportions[1] = 1;
+        config.rowProportions[1] = 1;
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexTabs';
       _this.eventEmitter = GetValue(config, 'eventEmitter', _assertThisInitialized(_this));
@@ -13053,91 +13060,125 @@
         _this.addBackground(background);
       }
       if (panel) {
-        _this.add(panel, 1, 1, 'center', 0, true);
+        _this.add(panel, {
+          column: 1,
+          row: 1,
+          expand: true
+        });
       }
       if (leftButtons) {
         var leftButtonsOffset = GetValue(config, 'space.leftButtonsOffset', 0);
         var leftButtonSpace = GetValue(config, 'space.leftButton', 0);
+        var leftButtonExpand = GetValue(config, 'expand.leftButtons', false);
+        var leftButtonsAlign = GetValue(config, 'align.leftButtons', 'top');
         leftButtonsSizer = new Buttons(scene, {
           groupName: 'left',
           background: leftButtonsBackground,
           buttons: leftButtons,
-          orientation: 1,
+          orientation: 'y',
           // Top-Bottom
           space: {
             item: leftButtonSpace
           },
-          align: GetValue(config, 'align.leftButtons', undefined),
+          expand: leftButtonExpand,
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
-        var padding = {
-          top: leftButtonsOffset
-        };
-        _this.add(leftButtonsSizer, 0, 1, 'top', padding, false);
+        _this.add(leftButtonsSizer, {
+          column: 0,
+          row: 1,
+          align: leftButtonsAlign,
+          padding: {
+            top: leftButtonsOffset
+          },
+          expand: leftButtonExpand
+        });
       }
       if (rightButtons) {
         var rightButtonsOffset = GetValue(config, 'space.rightButtonsOffset', 0);
         var rightButtonSpace = GetValue(config, 'space.rightButton', 0);
+        var rightButtonExpand = GetValue(config, 'expand.rightButtons', false);
+        var rightButtonsAlign = GetValue(config, 'align.rightButtons', 'top');
         rightButtonsSizer = new Buttons(scene, {
           groupName: 'right',
           background: rightButtonsBackground,
           buttons: rightButtons,
-          orientation: 1,
+          orientation: 'y',
           // Top-Bottom
           space: {
             item: rightButtonSpace
           },
-          align: GetValue(config, 'align.rightButtons', undefined),
+          expand: rightButtonExpand,
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
-        var padding = {
-          top: rightButtonsOffset
-        };
-        _this.add(rightButtonsSizer, 2, 1, 'top', padding, false);
+        _this.add(rightButtonsSizer, {
+          column: 2,
+          row: 1,
+          align: rightButtonsAlign,
+          padding: {
+            top: rightButtonsOffset
+          },
+          expand: rightButtonExpand
+        });
       }
       if (topButtons) {
         var toptButtonsOffset = GetValue(config, 'space.topButtonsOffset', 0);
         var topButtonSpace = GetValue(config, 'space.topButton', 0);
+        var topButtonExpand = GetValue(config, 'expand.topButtons', false);
+        var topButtonsAlign = GetValue(config, 'align.topButtons', 'left');
         topButtonsSizer = new Buttons(scene, {
           groupName: 'top',
           background: topButtonsBackground,
           buttons: topButtons,
-          orientation: 0,
+          orientation: 'x',
           // Left-Right
           space: {
             item: topButtonSpace
           },
+          expand: topButtonExpand,
           align: GetValue(config, 'align.topButtons', undefined),
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
-        var padding = {
-          left: toptButtonsOffset
-        };
-        _this.add(topButtonsSizer, 1, 0, 'left', padding, false);
+        _this.add(topButtonsSizer, {
+          column: 1,
+          row: 0,
+          align: topButtonsAlign,
+          padding: {
+            left: toptButtonsOffset
+          },
+          expand: topButtonExpand
+        });
       }
       if (bottomButtons) {
         var bottomButtonsOffset = GetValue(config, 'space.bottomButtonsOffset', 0);
         var bottomButtonSpace = GetValue(config, 'space.bottomButton', 0);
+        var bottomButtonExpand = GetValue(config, 'expand.bottomButtons', false);
+        var bottomButtonsAlign = GetValue(config, 'align.bottomButtons', 'left');
         bottomButtonsSizer = new Buttons(scene, {
           groupName: 'bottom',
           background: bottomButtonsBackground,
           buttons: bottomButtons,
-          orientation: 0,
+          orientation: 'x',
           // Left-Right
           space: {
             item: bottomButtonSpace
           },
+          expand: bottomButtonExpand,
           align: GetValue(config, 'align.bottomButtons', undefined),
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
-        var padding = {
-          left: bottomButtonsOffset
-        };
-        _this.add(bottomButtonsSizer, 1, 2, 'left', padding, false);
+        _this.add(bottomButtonsSizer, {
+          column: 1,
+          row: 2,
+          align: bottomButtonsAlign,
+          padding: {
+            left: bottomButtonsOffset
+          },
+          expand: bottomButtonExpand
+        });
       }
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('panel', panel);

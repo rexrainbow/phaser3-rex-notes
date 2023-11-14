@@ -4,14 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexboardplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -4705,8 +4705,7 @@
     }
   };
 
-  var _getChessData$getChes;
-  var LogicMethods = (_getChessData$getChes = {
+  var LogicMethods = _defineProperty(_defineProperty({
     getChessData: GetChessData,
     getChessUID: GetChessUID,
     setBoardWidth: SetBoardWidth,
@@ -4784,7 +4783,7 @@
     filledRingToChessArray: FilledRingToChessArray,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker
-  }, _defineProperty(_getChessData$getChes, "getGridPoints", GetGridPoints$2), _defineProperty(_getChessData$getChes, "chessToBoard", GetBoard), _getChessData$getChes);
+  }, "getGridPoints", GetGridPoints$2), "chessToBoard", GetBoard);
 
   var Clear = function Clear(obj) {
     if (_typeof(obj) !== 'object' || obj === null) {

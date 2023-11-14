@@ -36,6 +36,21 @@ declare namespace Tabs {
         bottomButtons?: Phaser.GameObjects.GameObject[],
         bottomButtonsBackground?: Phaser.GameObjects.GameObject,
 
+        expand?: {
+            panel?: boolean,
+            leftButtons?: boolean,
+            rightButtons?: boolean,
+            topButtons?: boolean,
+            bottomButtons?: boolean
+        },
+
+        align?: {
+            leftButtons?: 'top' | 'bottom' | 'center',
+            rightButtons?: 'top' | 'bottom' | 'center',
+            topButtons?: 'left' | 'right' | 'center',
+            bottomButtons?: 'left' | 'right' | 'center',
+        },
+
         click?: {
             mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
             clickInterval?: number

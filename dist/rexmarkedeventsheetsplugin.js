@@ -4,14 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmarkedeventsheetsplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -170,34 +170,6 @@
 
   function getDefaultExportFromCjs (x) {
   	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-  }
-
-  function getAugmentedNamespace(n) {
-    if (n.__esModule) return n;
-    var f = n.default;
-  	if (typeof f == "function") {
-  		var a = function a () {
-  			if (this instanceof a) {
-  				var args = [null];
-  				args.push.apply(args, arguments);
-  				var Ctor = Function.bind.apply(f, args);
-  				return new Ctor();
-  			}
-  			return f.apply(this, arguments);
-  		};
-  		a.prototype = f.prototype;
-    } else a = {};
-    Object.defineProperty(a, '__esModule', {value: true});
-  	Object.keys(n).forEach(function (k) {
-  		var d = Object.getOwnPropertyDescriptor(n, k);
-  		Object.defineProperty(a, k, d.get ? d : {
-  			enumerable: true,
-  			get: function () {
-  				return n[k];
-  			}
-  		});
-  	});
-  	return a;
   }
 
   var eventemitter3 = {exports: {}};
@@ -6389,7 +6361,7 @@
     }
   };
 
-  var handlebars$2 = {exports: {}};
+  var handlebars$1 = {exports: {}};
 
   var handlebars_runtime = {exports: {}};
 
@@ -6701,9 +6673,9 @@
   	            execIteration(i, i, i === context.length - 1);
   	          }
   	        }
-  	      } else if (commonjsGlobal.Symbol && context[commonjsGlobal.Symbol.iterator]) {
+  	      } else if (typeof Symbol === 'function' && context[Symbol.iterator]) {
   	        var newContext = [];
-  	        var iterator = context[commonjsGlobal.Symbol.iterator]();
+  	        var iterator = context[Symbol.iterator]();
   	        for (var it = iterator.next(); !it.done; it = iterator.next()) {
   	          newContext.push(it.value);
   	        }
@@ -7037,7 +7009,7 @@
     _decoratorsInline2['default'](instance);
   }
 
-  var logger$1 = {exports: {}};
+  var logger = {exports: {}};
 
   (function (module, exports) {
 
@@ -7086,9 +7058,9 @@
   	exports['default'] = logger;
   	module.exports = exports['default'];
   	
-  } (logger$1, logger$1.exports));
+  } (logger, logger.exports));
 
-  var loggerExports = logger$1.exports;
+  var loggerExports = logger.exports;
 
   var protoAccess = {};
 
@@ -7120,13 +7092,13 @@
   protoAccess.resetLoggedProperties = resetLoggedProperties;
   // istanbul ignore next
 
-  function _interopRequireWildcard$2(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+  function _interopRequireDefault$5(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _createNewLookupObject = createNewLookupObject$1;
 
   var _logger$1 = loggerExports;
 
-  var logger = _interopRequireWildcard$2(_logger$1);
+  var _logger2$1 = _interopRequireDefault$5(_logger$1);
 
   var loggedProperties = Object.create(null);
 
@@ -7175,7 +7147,7 @@
   function logUnexpecedPropertyAccessOnce(propertyName) {
     if (loggedProperties[propertyName] !== true) {
       loggedProperties[propertyName] = true;
-      logger.log('error', 'Handlebars: Access has been denied to resolve the property "' + propertyName + '" because it is not an "own property" of its parent.\n' + 'You can add a runtime option to disable the check or this warning:\n' + 'See https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details');
+      _logger2$1['default'].log('error', 'Handlebars: Access has been denied to resolve the property "' + propertyName + '" because it is not an "own property" of its parent.\n' + 'You can add a runtime option to disable the check or this warning:\n' + 'See https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details');
     }
   }
 
@@ -7189,13 +7161,13 @@
   base$1.HandlebarsEnvironment = HandlebarsEnvironment;
   // istanbul ignore next
 
-  function _interopRequireDefault$5(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequireDefault$4(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _utils$3 = utils;
 
   var _exception$3 = exceptionExports;
 
-  var _exception2$3 = _interopRequireDefault$5(_exception$3);
+  var _exception2$3 = _interopRequireDefault$4(_exception$3);
 
   var _helpers$2 = helpers$1;
 
@@ -7203,11 +7175,11 @@
 
   var _logger = loggerExports;
 
-  var _logger2 = _interopRequireDefault$5(_logger);
+  var _logger2 = _interopRequireDefault$4(_logger);
 
   var _internalProtoAccess$1 = protoAccess;
 
-  var VERSION = '4.7.7';
+  var VERSION = '4.7.8';
   base$1.VERSION = VERSION;
   var COMPILER_REVISION = 8;
   base$1.COMPILER_REVISION = COMPILER_REVISION;
@@ -7349,7 +7321,7 @@
   runtime.noop = noop;
   // istanbul ignore next
 
-  function _interopRequireDefault$4(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   // istanbul ignore next
 
@@ -7361,7 +7333,7 @@
 
   var _exception$2 = exceptionExports;
 
-  var _exception2$2 = _interopRequireDefault$4(_exception$2);
+  var _exception2$2 = _interopRequireDefault$3(_exception$2);
 
   var _base = base$1;
 
@@ -7712,18 +7684,30 @@
 
   var noConflict = {exports: {}};
 
+  /* global globalThis */
+
   (function (module, exports) {
 
   	exports.__esModule = true;
 
   	exports['default'] = function (Handlebars) {
   	  /* istanbul ignore next */
-  	  var root = typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : window,
-  	      $Handlebars = root.Handlebars;
+  	  // https://mathiasbynens.be/notes/globalthis
+  	  (function () {
+  	    if (typeof globalThis === 'object') return;
+  	    Object.prototype.__defineGetter__('__magic__', function () {
+  	      return this;
+  	    });
+  	    __magic__.globalThis = __magic__; // eslint-disable-line no-undef
+  	    delete Object.prototype.__magic__;
+  	  })();
+
+  	  var $Handlebars = globalThis.Handlebars;
+
   	  /* istanbul ignore next */
   	  Handlebars.noConflict = function () {
-  	    if (root.Handlebars === Handlebars) {
-  	      root.Handlebars = $Handlebars;
+  	    if (globalThis.Handlebars === Handlebars) {
+  	      globalThis.Handlebars = $Handlebars;
   	    }
   	    return Handlebars;
   	  };
@@ -8505,7 +8489,7 @@
   	                    return 5;
   	            }
   	        };
-  	        lexer.rules = [/^(?:[^\x00]*?(?=(\{\{)))/, /^(?:[^\x00]+)/, /^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/, /^(?:\{\{\{\{(?=[^\/]))/, /^(?:\{\{\{\{\/[^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=[=}\s\/.])\}\}\}\})/, /^(?:[^\x00]+?(?=(\{\{\{\{)))/, /^(?:[\s\S]*?--(~)?\}\})/, /^(?:\()/, /^(?:\))/, /^(?:\{\{\{\{)/, /^(?:\}\}\}\})/, /^(?:\{\{(~)?>)/, /^(?:\{\{(~)?#>)/, /^(?:\{\{(~)?#\*?)/, /^(?:\{\{(~)?\/)/, /^(?:\{\{(~)?\^\s*(~)?\}\})/, /^(?:\{\{(~)?\s*else\s*(~)?\}\})/, /^(?:\{\{(~)?\^)/, /^(?:\{\{(~)?\s*else\b)/, /^(?:\{\{(~)?\{)/, /^(?:\{\{(~)?&)/, /^(?:\{\{(~)?!--)/, /^(?:\{\{(~)?![\s\S]*?\}\})/, /^(?:\{\{(~)?\*?)/, /^(?:=)/, /^(?:\.\.)/, /^(?:\.(?=([=~}\s\/.)|])))/, /^(?:[\/.])/, /^(?:\s+)/, /^(?:\}(~)?\}\})/, /^(?:(~)?\}\})/, /^(?:"(\\["]|[^"])*")/, /^(?:'(\\[']|[^'])*')/, /^(?:@)/, /^(?:true(?=([~}\s)])))/, /^(?:false(?=([~}\s)])))/, /^(?:undefined(?=([~}\s)])))/, /^(?:null(?=([~}\s)])))/, /^(?:-?[0-9]+(?:\.[0-9]+)?(?=([~}\s)])))/, /^(?:as\s+\|)/, /^(?:\|)/, /^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))/, /^(?:\[(\\\]|[^\]])*\])/, /^(?:.)/, /^(?:$)/];
+  	        lexer.rules = [/^(?:[^\x00]*?(?=(\{\{)))/, /^(?:[^\x00]+)/, /^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/, /^(?:\{\{\{\{(?=[^/]))/, /^(?:\{\{\{\{\/[^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=[=}\s\/.])\}\}\}\})/, /^(?:[^\x00]+?(?=(\{\{\{\{)))/, /^(?:[\s\S]*?--(~)?\}\})/, /^(?:\()/, /^(?:\))/, /^(?:\{\{\{\{)/, /^(?:\}\}\}\})/, /^(?:\{\{(~)?>)/, /^(?:\{\{(~)?#>)/, /^(?:\{\{(~)?#\*?)/, /^(?:\{\{(~)?\/)/, /^(?:\{\{(~)?\^\s*(~)?\}\})/, /^(?:\{\{(~)?\s*else\s*(~)?\}\})/, /^(?:\{\{(~)?\^)/, /^(?:\{\{(~)?\s*else\b)/, /^(?:\{\{(~)?\{)/, /^(?:\{\{(~)?&)/, /^(?:\{\{(~)?!--)/, /^(?:\{\{(~)?![\s\S]*?\}\})/, /^(?:\{\{(~)?\*?)/, /^(?:=)/, /^(?:\.\.)/, /^(?:\.(?=([=~}\s\/.)|])))/, /^(?:[\/.])/, /^(?:\s+)/, /^(?:\}(~)?\}\})/, /^(?:(~)?\}\})/, /^(?:"(\\["]|[^"])*")/, /^(?:'(\\[']|[^'])*')/, /^(?:@)/, /^(?:true(?=([~}\s)])))/, /^(?:false(?=([~}\s)])))/, /^(?:undefined(?=([~}\s)])))/, /^(?:null(?=([~}\s)])))/, /^(?:-?[0-9]+(?:\.[0-9]+)?(?=([~}\s)])))/, /^(?:as\s+\|)/, /^(?:\|)/, /^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))/, /^(?:\[(\\\]|[^\]])*\])/, /^(?:.)/, /^(?:$)/];
   	        lexer.conditions = { "mu": { "rules": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44], "inclusive": false }, "emu": { "rules": [2], "inclusive": false }, "com": { "rules": [6], "inclusive": false }, "raw": { "rules": [3, 4, 5], "inclusive": false }, "INITIAL": { "rules": [0, 1, 44], "inclusive": true } };
   	        return lexer;
   	    })();
@@ -8909,11 +8893,11 @@
   helpers.preparePartialBlock = preparePartialBlock;
   // istanbul ignore next
 
-  function _interopRequireDefault$3(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _exception$1 = exceptionExports;
 
-  var _exception2$1 = _interopRequireDefault$3(_exception$1);
+  var _exception2$1 = _interopRequireDefault$2(_exception$1);
 
   function validateClose(open, close) {
     close = close.path ? close.path.original : close;
@@ -9131,15 +9115,15 @@
 
   // istanbul ignore next
 
-  function _interopRequireDefault$2(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequireDefault$1(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _parser = parserExports;
 
-  var _parser2 = _interopRequireDefault$2(_parser);
+  var _parser2 = _interopRequireDefault$1(_parser);
 
   var _whitespaceControl = whitespaceControlExports;
 
-  var _whitespaceControl2 = _interopRequireDefault$2(_whitespaceControl);
+  var _whitespaceControl2 = _interopRequireDefault$1(_whitespaceControl);
 
   var _helpers = helpers;
 
@@ -9187,17 +9171,17 @@
   compiler.compile = compile;
   // istanbul ignore next
 
-  function _interopRequireDefault$1(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _exception = exceptionExports;
 
-  var _exception2 = _interopRequireDefault$1(_exception);
+  var _exception2 = _interopRequireDefault(_exception);
 
   var _utils = utils;
 
   var _ast = astExports;
 
-  var _ast2 = _interopRequireDefault$1(_ast);
+  var _ast2 = _interopRequireDefault(_ast);
 
   var slice = [].slice;
 
@@ -12983,7 +12967,7 @@
   	return sourceMap;
   }
 
-  /* global define */
+  /* global define, require */
 
   (function (module, exports) {
 
@@ -12996,7 +12980,7 @@
   	try {
   	  /* istanbul ignore next */
   	  if (typeof undefined !== 'function' || !undefined.amd) {
-  	    // We don't support this in AMD environments. For these environments, we asusme that
+  	    // We don't support this in AMD environments. For these environments, we assume that
   	    // they are running on the browser and thus have no need for the source-map library.
   	    var SourceMap = requireSourceMap();
   	    SourceNode = SourceMap.SourceNode;
@@ -13653,7 +13637,7 @@
   	    var _this2 = this;
 
   	    if (this.options.strict || this.options.assumeObjects) {
-  	      this.push(strictLookup(this.options.strict && strict, this, parts, type));
+  	      this.push(strictLookup(this.options.strict && strict, this, parts, i, type));
   	      return;
   	    }
 
@@ -14293,9 +14277,8 @@
   	  return !JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(name);
   	};
 
-  	function strictLookup(requireTerminal, compiler, parts, type) {
+  	function strictLookup(requireTerminal, compiler, parts, i, type) {
   	  var stack = compiler.popStack(),
-  	      i = 0,
   	      len = parts.length;
   	  if (requireTerminal) {
   	    len--;
@@ -14385,232 +14368,10 @@
   	exports['default'] = inst;
   	module.exports = exports['default'];
   	
-  } (handlebars$2, handlebars$2.exports));
+  } (handlebars$1, handlebars$1.exports));
 
-  var handlebarsExports = handlebars$2.exports;
-
-  var printer$1 = {};
-
-  /* eslint-disable new-cap */
-
-  printer$1.__esModule = true;
-  printer$1.print = print;
-  printer$1.PrintVisitor = PrintVisitor;
-  // istanbul ignore next
-
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-  var _visitor = visitorExports;
-
-  var _visitor2 = _interopRequireDefault(_visitor);
-
-  function print(ast) {
-    return new PrintVisitor().accept(ast);
-  }
-
-  function PrintVisitor() {
-    this.padding = 0;
-  }
-
-  PrintVisitor.prototype = new _visitor2['default']();
-
-  PrintVisitor.prototype.pad = function (string) {
-    var out = '';
-
-    for (var i = 0, l = this.padding; i < l; i++) {
-      out += '  ';
-    }
-
-    out += string + '\n';
-    return out;
-  };
-
-  PrintVisitor.prototype.Program = function (program) {
-    var out = '',
-        body = program.body,
-        i = undefined,
-        l = undefined;
-
-    if (program.blockParams) {
-      var blockParams = 'BLOCK PARAMS: [';
-      for (i = 0, l = program.blockParams.length; i < l; i++) {
-        blockParams += ' ' + program.blockParams[i];
-      }
-      blockParams += ' ]';
-      out += this.pad(blockParams);
-    }
-
-    for (i = 0, l = body.length; i < l; i++) {
-      out += this.accept(body[i]);
-    }
-
-    this.padding--;
-
-    return out;
-  };
-
-  PrintVisitor.prototype.MustacheStatement = function (mustache) {
-    return this.pad('{{ ' + this.SubExpression(mustache) + ' }}');
-  };
-  PrintVisitor.prototype.Decorator = function (mustache) {
-    return this.pad('{{ DIRECTIVE ' + this.SubExpression(mustache) + ' }}');
-  };
-
-  PrintVisitor.prototype.BlockStatement = PrintVisitor.prototype.DecoratorBlock = function (block) {
-    var out = '';
-
-    out += this.pad((block.type === 'DecoratorBlock' ? 'DIRECTIVE ' : '') + 'BLOCK:');
-    this.padding++;
-    out += this.pad(this.SubExpression(block));
-    if (block.program) {
-      out += this.pad('PROGRAM:');
-      this.padding++;
-      out += this.accept(block.program);
-      this.padding--;
-    }
-    if (block.inverse) {
-      if (block.program) {
-        this.padding++;
-      }
-      out += this.pad('{{^}}');
-      this.padding++;
-      out += this.accept(block.inverse);
-      this.padding--;
-      if (block.program) {
-        this.padding--;
-      }
-    }
-    this.padding--;
-
-    return out;
-  };
-
-  PrintVisitor.prototype.PartialStatement = function (partial) {
-    var content = 'PARTIAL:' + partial.name.original;
-    if (partial.params[0]) {
-      content += ' ' + this.accept(partial.params[0]);
-    }
-    if (partial.hash) {
-      content += ' ' + this.accept(partial.hash);
-    }
-    return this.pad('{{> ' + content + ' }}');
-  };
-  PrintVisitor.prototype.PartialBlockStatement = function (partial) {
-    var content = 'PARTIAL BLOCK:' + partial.name.original;
-    if (partial.params[0]) {
-      content += ' ' + this.accept(partial.params[0]);
-    }
-    if (partial.hash) {
-      content += ' ' + this.accept(partial.hash);
-    }
-
-    content += ' ' + this.pad('PROGRAM:');
-    this.padding++;
-    content += this.accept(partial.program);
-    this.padding--;
-
-    return this.pad('{{> ' + content + ' }}');
-  };
-
-  PrintVisitor.prototype.ContentStatement = function (content) {
-    return this.pad("CONTENT[ '" + content.value + "' ]");
-  };
-
-  PrintVisitor.prototype.CommentStatement = function (comment) {
-    return this.pad("{{! '" + comment.value + "' }}");
-  };
-
-  PrintVisitor.prototype.SubExpression = function (sexpr) {
-    var params = sexpr.params,
-        paramStrings = [],
-        hash = undefined;
-
-    for (var i = 0, l = params.length; i < l; i++) {
-      paramStrings.push(this.accept(params[i]));
-    }
-
-    params = '[' + paramStrings.join(', ') + ']';
-
-    hash = sexpr.hash ? ' ' + this.accept(sexpr.hash) : '';
-
-    return this.accept(sexpr.path) + ' ' + params + hash;
-  };
-
-  PrintVisitor.prototype.PathExpression = function (id) {
-    var path = id.parts.join('/');
-    return (id.data ? '@' : '') + 'PATH:' + path;
-  };
-
-  PrintVisitor.prototype.StringLiteral = function (string) {
-    return '"' + string.value + '"';
-  };
-
-  PrintVisitor.prototype.NumberLiteral = function (number) {
-    return 'NUMBER{' + number.value + '}';
-  };
-
-  PrintVisitor.prototype.BooleanLiteral = function (bool) {
-    return 'BOOLEAN{' + bool.value + '}';
-  };
-
-  PrintVisitor.prototype.UndefinedLiteral = function () {
-    return 'UNDEFINED';
-  };
-
-  PrintVisitor.prototype.NullLiteral = function () {
-    return 'NULL';
-  };
-
-  PrintVisitor.prototype.Hash = function (hash) {
-    var pairs = hash.pairs,
-        joinedPairs = [];
-
-    for (var i = 0, l = pairs.length; i < l; i++) {
-      joinedPairs.push(this.accept(pairs[i]));
-    }
-
-    return 'HASH{' + joinedPairs.join(', ') + '}';
-  };
-  PrintVisitor.prototype.HashPair = function (pair) {
-    return pair.key + '=' + this.accept(pair.value);
-  };
-
-  var empty = {};
-
-  var empty$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    default: empty
-  });
-
-  var require$$2 = /*@__PURE__*/getAugmentedNamespace(empty$1);
-
-  // USAGE:
-  // var handlebars = require('handlebars');
-  /* eslint-disable no-var */
-
-  // var local = handlebars.create();
-
-  var handlebars = handlebarsExports['default'];
-
-  var printer = printer$1;
-  handlebars.PrintVisitor = printer.PrintVisitor;
-  handlebars.print = printer.print;
-
-  var lib = handlebars;
-
-  // Publish a Node.js require() handler for .handlebars and .hbs files
-  function extension(module, filename) {
-    var fs = require$$2;
-    var templateString = fs.readFileSync(filename, 'utf8');
-    module.exports = handlebars.compile(templateString);
-  }
-  /* istanbul ignore else */
-  if (typeof commonjsRequire !== 'undefined' && commonjsRequire.extensions) {
-    commonjsRequire.extensions['.handlebars'] = extension;
-    commonjsRequire.extensions['.hbs'] = extension;
-  }
-
-  var handlebars$1 = /*@__PURE__*/getDefaultExportFromCjs(lib);
+  var handlebarsExports = handlebars$1.exports;
+  var handlebars = /*@__PURE__*/getDefaultExportFromCjs(handlebarsExports);
 
   var ValueConvertMethods = {
     evalExpression: function evalExpression(s) {
@@ -14623,7 +14384,7 @@
       if (typeof s !== 'string') {
         return '';
       }
-      return handlebars$1.render(s, this.memory);
+      return handlebars.render(s, this.memory);
     }
   };
 

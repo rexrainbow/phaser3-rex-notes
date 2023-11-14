@@ -8,6 +8,7 @@ A container with 4 groups of buttons around a center panel.
 ## Live demos
 
 - [Tabs](https://codepen.io/rexrainbow/pen/qJeVza)
+- [Tabs-table](https://codepen.io/rexrainbow/pen/BGKvXK)
 
 ## Usage
 
@@ -110,6 +111,21 @@ var tabs = scene.rexUI.add.tabs({
     topButtonsBackground: topButtonsBackgroundGameObject,
     bottomButtonsBackground: bottomButtonsBackgroundGameObject,
 
+    expand: {
+        panel: false,
+        leftButtons: false,
+        rightButtons: false,
+        topButtons: false,
+        bottomButtons: false,
+    },
+
+    align: {
+        leftButtons: 'top',
+        rightButtons: 'top',
+        topButtons: 'left',
+        bottomButtons: 'left',
+    },
+
     space: {
         left: 0,
         right: 0,
@@ -156,6 +172,13 @@ var tabs = scene.rexUI.add.tabs({
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.
     - `[]` : Assign an empty array if user will add button later.
 - `leftButtonsBackground`, `rightButtonsBackground`, `topButtonsBackground`, `bottomButtonsBackground` : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.
+- `expand` : Expand size of panel or buttons
+    - `expand.panel` : Expand size of panel. Default value is `false`.
+    - `expand.leftButtons`, `expand.rightButtons` : Expand height of leftButtons, rightButtons. Default value is `false`.
+    - `expand.topButtons`, `expand.bottomButtons` : Expand width of topButtons, bottomButtons. Default value is `false`.
+- `align` : Alignment of buttons
+    - `align.leftButtons`, `align.rightButtons` : `'top'`, `'bottom'`, or `'center'`. Default value is `'top'`.
+    - `align.topButtons`, `align.bottomButtons` : `'left'`, `'right'`, or `'center'`. Default value is `'left'`.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.leftButtonsOffset`, `space.rightButtonsOffset` : Top offset of buttons group.

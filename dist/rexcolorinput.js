@@ -4,14 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcolorinput = factory());
 })(this, (function () { 'use strict';
 
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -23016,15 +23016,9 @@
     }, {
       key: "setLineSpacing",
       value: function setLineSpacing(value) {
-        return this.style.setLineSpacing(value);
-      }
-    }, {
-      key: "lineSpacing",
-      get: function get() {
-        return this.style.lineSpacing;
-      },
-      set: function set(value) {
-        this.setLineSpacing(value);
+        this.lineSpacing = value;
+        this.updateText(false);
+        return this;
       }
     }, {
       key: "setXOffset",
@@ -23281,7 +23275,6 @@
       this.fixedWidth;
       this.fixedHeight;
       this.resolution;
-      this.lineSpacing;
       this.xOffset;
       this.rtl;
       this.testString;
@@ -23502,12 +23495,6 @@
       key: "setResolution",
       value: function setResolution(value) {
         this.resolution = value;
-        return this.update(false);
-      }
-    }, {
-      key: "setLineSpacing",
-      value: function setLineSpacing(value) {
-        this.lineSpacing = value;
         return this.update(false);
       }
     }, {
@@ -23815,7 +23802,7 @@
     }, {
       key: "lineHeight",
       get: function get() {
-        return this.metrics.fontSize + this.strokeThickness + this.lineSpacing;
+        return this.metrics.fontSize + this.strokeThickness + this.parent.lineSpacing;
       }
     }, {
       key: "toJSON",
@@ -25196,6 +25183,7 @@
       };
       _this.width = 1;
       _this.height = 1;
+      _this.lineSpacing = 0;
       _this.dirty = false;
 
       //  If resolution wasn't set, force it to 1
@@ -25257,6 +25245,9 @@
       _this.initRTL();
       if (style && style.padding) {
         _this.setPadding(style.padding);
+      }
+      if (style && style.lineSpacing) {
+        _this.setLineSpacing(style.lineSpacing);
       }
       _this.setText(text);
       _this.setUrlTagCursorStyle(GetValue$8(style, 'urlTagCursorStyle', 'pointer'));

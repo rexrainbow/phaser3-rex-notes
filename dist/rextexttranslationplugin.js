@@ -19,14 +19,14 @@
     return Object.freeze(n);
   }
 
-  function _typeof$4(obj) {
+  function _typeof$4(o) {
     "@babel/helpers - typeof";
 
-    return _typeof$4 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof$4(obj);
+    return _typeof$4 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof$4(o);
   }
   function _classCallCheck$2(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -341,14 +341,14 @@
 
   Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
 
-  function _typeof$3(obj) {
+  function _typeof$3(o) {
     "@babel/helpers - typeof";
 
-    return _typeof$3 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-      return typeof obj;
-    } : function (obj) {
-      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    }, _typeof$3(obj);
+    return _typeof$3 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof$3(o);
   }
 
   function _classCallCheck$1(instance, Constructor) {
@@ -858,8 +858,7 @@
         var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {
           silent: false
         };
-        var keySeparator = this.options.keySeparator;
-        if (keySeparator === undefined) keySeparator = '.';
+        var keySeparator = options.keySeparator !== undefined ? options.keySeparator : this.options.keySeparator;
         var path = [lng, ns];
         if (key) path = path.concat(keySeparator ? key.split(keySeparator) : key);
         if (lng.indexOf('.') > -1) {
@@ -2990,7 +2989,7 @@
   instance.loadNamespaces;
   instance.loadLanguages;
 
-  function _typeof$2(obj) { "@babel/helpers - typeof"; return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof$2(obj); }
+  function _typeof$2(o) { "@babel/helpers - typeof"; return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$2(o); }
   var arr = [];
   var each = arr.forEach;
   var slice = arr.slice;
@@ -3041,25 +3040,37 @@
   	if (hasRequiredBrowserPonyfill) return browserPonyfill.exports;
   	hasRequiredBrowserPonyfill = 1;
   	(function (module, exports) {
-  		var global = typeof self !== 'undefined' ? self : commonjsGlobal;
-  		var __self__ = (function () {
+  		// Save global object in a variable
+  		var __global__ =
+  		(typeof globalThis !== 'undefined' && globalThis) ||
+  		(typeof self !== 'undefined' && self) ||
+  		(typeof commonjsGlobal !== 'undefined' && commonjsGlobal);
+  		// Create an object that extends from __global__ without the fetch function
+  		var __globalThis__ = (function () {
   		function F() {
   		this.fetch = false;
-  		this.DOMException = global.DOMException;
+  		this.DOMException = __global__.DOMException;
   		}
-  		F.prototype = global;
+  		F.prototype = __global__; // Needed for feature detection on whatwg-fetch's code
   		return new F();
   		})();
-  		(function(self) {
+  		// Wraps whatwg-fetch with a function scope to hijack the global object
+  		// "globalThis" that's going to be patched
+  		(function(globalThis) {
 
   		((function (exports) {
 
+  		  var global =
+  		    (typeof globalThis !== 'undefined' && globalThis) ||
+  		    (typeof self !== 'undefined' && self) ||
+  		    (typeof global !== 'undefined' && global);
+
   		  var support = {
-  		    searchParams: 'URLSearchParams' in self,
-  		    iterable: 'Symbol' in self && 'iterator' in Symbol,
+  		    searchParams: 'URLSearchParams' in global,
+  		    iterable: 'Symbol' in global && 'iterator' in Symbol,
   		    blob:
-  		      'FileReader' in self &&
-  		      'Blob' in self &&
+  		      'FileReader' in global &&
+  		      'Blob' in global &&
   		      (function() {
   		        try {
   		          new Blob();
@@ -3068,8 +3079,8 @@
   		          return false
   		        }
   		      })(),
-  		    formData: 'FormData' in self,
-  		    arrayBuffer: 'ArrayBuffer' in self
+  		    formData: 'FormData' in global,
+  		    arrayBuffer: 'ArrayBuffer' in global
   		  };
 
   		  function isDataView(obj) {
@@ -3100,8 +3111,8 @@
   		    if (typeof name !== 'string') {
   		      name = String(name);
   		    }
-  		    if (/[^a-z0-9\-#$%&'*+.^_`|~]/i.test(name)) {
-  		      throw new TypeError('Invalid character in header field name')
+  		    if (/[^a-z0-9\-#$%&'*+.^_`|~!]/i.test(name) || name === '') {
+  		      throw new TypeError('Invalid character in header field name: "' + name + '"')
   		    }
   		    return name.toLowerCase()
   		  }
@@ -3265,6 +3276,17 @@
   		    this.bodyUsed = false;
 
   		    this._initBody = function(body) {
+  		      /*
+  		        fetch-mock wraps the Response object in an ES6 Proxy to
+  		        provide useful test harness features such as flush. However, on
+  		        ES5 browsers without fetch or Proxy support pollyfills must be used;
+  		        the proxy-pollyfill is unable to proxy an attribute unless it exists
+  		        on the object before the Proxy is created. This change ensures
+  		        Response.bodyUsed exists on the instance, while maintaining the
+  		        semantic of setting Request.bodyUsed in the constructor before
+  		        _initBody is called.
+  		      */
+  		      this.bodyUsed = this.bodyUsed;
   		      this._bodyInit = body;
   		      if (!body) {
   		        this._bodyText = '';
@@ -3317,7 +3339,20 @@
 
   		      this.arrayBuffer = function() {
   		        if (this._bodyArrayBuffer) {
-  		          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+  		          var isConsumed = consumed(this);
+  		          if (isConsumed) {
+  		            return isConsumed
+  		          }
+  		          if (ArrayBuffer.isView(this._bodyArrayBuffer)) {
+  		            return Promise.resolve(
+  		              this._bodyArrayBuffer.buffer.slice(
+  		                this._bodyArrayBuffer.byteOffset,
+  		                this._bodyArrayBuffer.byteOffset + this._bodyArrayBuffer.byteLength
+  		              )
+  		            )
+  		          } else {
+  		            return Promise.resolve(this._bodyArrayBuffer)
+  		          }
   		        } else {
   		          return this.blob().then(readBlobAsArrayBuffer)
   		        }
@@ -3363,6 +3398,10 @@
   		  }
 
   		  function Request(input, options) {
+  		    if (!(this instanceof Request)) {
+  		      throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.')
+  		    }
+
   		    options = options || {};
   		    var body = options.body;
 
@@ -3399,6 +3438,21 @@
   		      throw new TypeError('Body not allowed for GET or HEAD requests')
   		    }
   		    this._initBody(body);
+
+  		    if (this.method === 'GET' || this.method === 'HEAD') {
+  		      if (options.cache === 'no-store' || options.cache === 'no-cache') {
+  		        // Search for a '_' parameter in the query string
+  		        var reParamSearch = /([?&])_=[^&]*/;
+  		        if (reParamSearch.test(this.url)) {
+  		          // If it already exists then set the value with the current time
+  		          this.url = this.url.replace(reParamSearch, '$1_=' + new Date().getTime());
+  		        } else {
+  		          // Otherwise add a new '_' parameter to the end with the current time
+  		          var reQueryString = /\?/;
+  		          this.url += (reQueryString.test(this.url) ? '&' : '?') + '_=' + new Date().getTime();
+  		        }
+  		      }
+  		    }
   		  }
 
   		  Request.prototype.clone = function() {
@@ -3426,20 +3480,31 @@
   		    // Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
   		    // https://tools.ietf.org/html/rfc7230#section-3.2
   		    var preProcessedHeaders = rawHeaders.replace(/\r?\n[\t ]+/g, ' ');
-  		    preProcessedHeaders.split(/\r?\n/).forEach(function(line) {
-  		      var parts = line.split(':');
-  		      var key = parts.shift().trim();
-  		      if (key) {
-  		        var value = parts.join(':').trim();
-  		        headers.append(key, value);
-  		      }
-  		    });
+  		    // Avoiding split via regex to work around a common IE11 bug with the core-js 3.6.0 regex polyfill
+  		    // https://github.com/github/fetch/issues/748
+  		    // https://github.com/zloirock/core-js/issues/751
+  		    preProcessedHeaders
+  		      .split('\r')
+  		      .map(function(header) {
+  		        return header.indexOf('\n') === 0 ? header.substr(1, header.length) : header
+  		      })
+  		      .forEach(function(line) {
+  		        var parts = line.split(':');
+  		        var key = parts.shift().trim();
+  		        if (key) {
+  		          var value = parts.join(':').trim();
+  		          headers.append(key, value);
+  		        }
+  		      });
   		    return headers
   		  }
 
   		  Body.call(Request.prototype);
 
   		  function Response(bodyInit, options) {
+  		    if (!(this instanceof Response)) {
+  		      throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.')
+  		    }
   		    if (!options) {
   		      options = {};
   		    }
@@ -3447,7 +3512,7 @@
   		    this.type = 'default';
   		    this.status = options.status === undefined ? 200 : options.status;
   		    this.ok = this.status >= 200 && this.status < 300;
-  		    this.statusText = 'statusText' in options ? options.statusText : 'OK';
+  		    this.statusText = options.statusText === undefined ? '' : '' + options.statusText;
   		    this.headers = new Headers(options.headers);
   		    this.url = options.url || '';
   		    this._initBody(bodyInit);
@@ -3480,7 +3545,7 @@
   		    return new Response(null, {status: status, headers: {location: url}})
   		  };
 
-  		  exports.DOMException = self.DOMException;
+  		  exports.DOMException = global.DOMException;
   		  try {
   		    new exports.DOMException();
   		  } catch (err) {
@@ -3516,22 +3581,38 @@
   		        };
   		        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL');
   		        var body = 'response' in xhr ? xhr.response : xhr.responseText;
-  		        resolve(new Response(body, options));
+  		        setTimeout(function() {
+  		          resolve(new Response(body, options));
+  		        }, 0);
   		      };
 
   		      xhr.onerror = function() {
-  		        reject(new TypeError('Network request failed'));
+  		        setTimeout(function() {
+  		          reject(new TypeError('Network request failed'));
+  		        }, 0);
   		      };
 
   		      xhr.ontimeout = function() {
-  		        reject(new TypeError('Network request failed'));
+  		        setTimeout(function() {
+  		          reject(new TypeError('Network request failed'));
+  		        }, 0);
   		      };
 
   		      xhr.onabort = function() {
-  		        reject(new exports.DOMException('Aborted', 'AbortError'));
+  		        setTimeout(function() {
+  		          reject(new exports.DOMException('Aborted', 'AbortError'));
+  		        }, 0);
   		      };
 
-  		      xhr.open(request.method, request.url, true);
+  		      function fixUrl(url) {
+  		        try {
+  		          return url === '' && global.location.href ? global.location.href : url
+  		        } catch (e) {
+  		          return url
+  		        }
+  		      }
+
+  		      xhr.open(request.method, fixUrl(request.url), true);
 
   		      if (request.credentials === 'include') {
   		        xhr.withCredentials = true;
@@ -3539,13 +3620,27 @@
   		        xhr.withCredentials = false;
   		      }
 
-  		      if ('responseType' in xhr && support.blob) {
-  		        xhr.responseType = 'blob';
+  		      if ('responseType' in xhr) {
+  		        if (support.blob) {
+  		          xhr.responseType = 'blob';
+  		        } else if (
+  		          support.arrayBuffer &&
+  		          request.headers.get('Content-Type') &&
+  		          request.headers.get('Content-Type').indexOf('application/octet-stream') !== -1
+  		        ) {
+  		          xhr.responseType = 'arraybuffer';
+  		        }
   		      }
 
-  		      request.headers.forEach(function(value, name) {
-  		        xhr.setRequestHeader(name, value);
-  		      });
+  		      if (init && typeof init.headers === 'object' && !(init.headers instanceof Headers)) {
+  		        Object.getOwnPropertyNames(init.headers).forEach(function(name) {
+  		          xhr.setRequestHeader(name, normalizeValue(init.headers[name]));
+  		        });
+  		      } else {
+  		        request.headers.forEach(function(value, name) {
+  		          xhr.setRequestHeader(name, value);
+  		        });
+  		      }
 
   		      if (request.signal) {
   		        request.signal.addEventListener('abort', abortXhr);
@@ -3564,11 +3659,11 @@
 
   		  fetch.polyfill = true;
 
-  		  if (!self.fetch) {
-  		    self.fetch = fetch;
-  		    self.Headers = Headers;
-  		    self.Request = Request;
-  		    self.Response = Response;
+  		  if (!global.fetch) {
+  		    global.fetch = fetch;
+  		    global.Headers = Headers;
+  		    global.Request = Request;
+  		    global.Response = Response;
   		  }
 
   		  exports.Headers = Headers;
@@ -3576,18 +3671,15 @@
   		  exports.Response = Response;
   		  exports.fetch = fetch;
 
-  		  Object.defineProperty(exports, '__esModule', { value: true });
-
   		  return exports;
 
   		}))({});
-  		})(__self__);
-  		__self__.fetch.ponyfill = true;
-  		// Remove "polyfill" property added by whatwg-fetch
-  		delete __self__.fetch.polyfill;
-  		// Choose between native implementation (global) or custom implementation (__self__)
-  		// var ctx = global.fetch ? global : __self__;
-  		var ctx = __self__; // this line disable service worker support temporarily
+  		})(__globalThis__);
+  		// This is a ponyfill, so...
+  		__globalThis__.fetch.ponyfill = true;
+  		delete __globalThis__.fetch.polyfill;
+  		// Choose between native implementation (__global__) or custom implementation (__globalThis__)
+  		var ctx = __global__.fetch ? __global__ : __globalThis__;
   		exports = ctx.fetch; // To enable: import fetch from 'cross-fetch'
   		exports.default = ctx.fetch; // For TypeScript consumers without esModuleInterop.
   		exports.fetch = ctx.fetch; // To enable: import {fetch} from 'cross-fetch'
@@ -3627,7 +3719,7 @@
     default: getFetch
   }, [getFetchExports]);
 
-  function _typeof$1(obj) { "@babel/helpers - typeof"; return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof$1(obj); }
+  function _typeof$1(o) { "@babel/helpers - typeof"; return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$1(o); }
   var fetchApi;
   if (typeof fetch === 'function') {
     if (typeof global$1 !== 'undefined' && global$1.fetch) {
@@ -3668,7 +3760,7 @@
     return url;
   };
   var fetchIt = function fetchIt(url, fetchOptions, callback) {
-    fetchApi(url, fetchOptions).then(function (response) {
+    var resolver = function resolver(response) {
       if (!response.ok) return callback(response.statusText || 'Error', {
         status: response.status
       });
@@ -3678,7 +3770,12 @@
           data: data
         });
       }).catch(callback);
-    }).catch(callback);
+    };
+    if (typeof fetch === 'function') {
+      fetch(url, fetchOptions).then(resolver).catch(callback);
+    } else {
+      fetchApi(url, fetchOptions).then(resolver).catch(callback);
+    }
   };
   var omitFetchOptions = false;
   var requestWithFetch = function requestWithFetch(options, url, payload, callback) {
@@ -3686,6 +3783,9 @@
       url = addQueryString(url, options.queryStringParams);
     }
     var headers = defaults({}, typeof options.customHeaders === 'function' ? options.customHeaders() : options.customHeaders);
+    if (typeof window === 'undefined' && typeof global$1 !== 'undefined' && typeof global$1.process !== 'undefined' && global$1.process.versions && global$1.process.versions.node) {
+      headers['User-Agent'] = "i18next-http-backend (node/".concat(global$1.process.version, "; ").concat(global$1.process.platform, " ").concat(global$1.process.arch, ")");
+    }
     if (payload) headers['Content-Type'] = 'application/json';
     var reqOptions = typeof options.requestOptions === 'function' ? options.requestOptions(payload) : options.requestOptions;
     var fetchOptions = defaults({
@@ -3768,7 +3868,7 @@
     callback(new Error('No fetch and no xhr implementation found!'));
   };
 
-  function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+  function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -3779,7 +3879,6 @@
     return {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
       addPath: '/locales/add/{{lng}}/{{ns}}',
-      allowMultiLoading: false,
       parse: function parse(data) {
         return JSON.parse(data);
       },
