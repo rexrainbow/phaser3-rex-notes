@@ -51,7 +51,7 @@ class Tabs extends GridSizer {
                 {
                     column: 1,
                     row: 1,
-                    expand: true
+                    expand: expandPanel
                 }
             );
         }
