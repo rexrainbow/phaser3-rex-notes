@@ -10195,7 +10195,7 @@
     }, {
       key: "angleTo",
       value: function angleTo(endNode) {
-        return Between$1(this.worldX, this.wroldY, endNode.worldX, endNode.wroldY);
+        return Between$1(this.worldX, this.worldY, endNode.worldX, endNode.worldY);
       }
     }, {
       key: "pathFinder",
@@ -10211,15 +10211,15 @@
       key: "worldX",
       get: function get() {
         if (this._px === undefined) {
-          this._px = this.board.tileXYToWroldX(this.x, this.y);
+          this._px = this.board.tileXYToWorldX(this.x, this.y);
         }
         return this._px;
       }
     }, {
-      key: "wroldY",
+      key: "worldY",
       get: function get() {
         if (this._py === undefined) {
-          this._py = this.board.tileXYToWroldY(this.x, this.y);
+          this._py = this.board.tileXYToWorldY(this.x, this.y);
         }
         return this._py;
       }

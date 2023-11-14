@@ -79,7 +79,7 @@ class Node {
     }
 
     angleTo(endNode) {
-        return AngleBetween(this.worldX, this.wroldY, endNode.worldX, endNode.wroldY);
+        return AngleBetween(this.worldX, this.worldY, endNode.worldX, endNode.worldY);
     }
 
     get pathFinder() {
@@ -92,14 +92,14 @@ class Node {
 
     get worldX() {
         if (this._px === undefined) {
-            this._px = this.board.tileXYToWroldX(this.x, this.y);
+            this._px = this.board.tileXYToWorldX(this.x, this.y);
         }
         return this._px;
     }
 
-    get wroldY() {
+    get worldY() {
         if (this._py === undefined) {
-            this._py = this.board.tileXYToWroldY(this.x, this.y);
+            this._py = this.board.tileXYToWorldY(this.x, this.y);
         }
         return this._py;
     }
