@@ -8,6 +8,7 @@ A container with 4 groups of buttons around a center panel.
 ## Live demos
 
 - [Tabs](https://codepen.io/rexrainbow/pen/qJeVza)
+- [Expand buttons](https://codepen.io/rexrainbow/pen/poGrKyL)
 - [Tabs-table](https://codepen.io/rexrainbow/pen/BGKvXK)
 
 ## Usage

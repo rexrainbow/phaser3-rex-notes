@@ -1,5 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
+import DefaultResizeCallback from './DefaultResizeCallback.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
@@ -102,17 +105,13 @@ class Anchor extends ComponentBase {
         this.setSizePercentage(percentageWidth, percentageHeight);
         this.setSizePadding(paddingWidth, paddingHeight);
 
-        var onResizeCallback = o.onResizeCallback;
-        var onResizeCallbackScope = o.onResizeCallbackScope;
-        if (onResizeCallback !== undefined) {
-            this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
-        }
+        var onResizeCallback = GetValue(o, 'onResizeCallback', DefaultResizeCallback);
+        var onResizeCallbackScope = GetValue(o, 'onResizeCallbackScope');
+        this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
 
-        var onUpdateViewportCallback = o.onUpdateViewportCallback;
-        var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
-        if (onUpdateViewportCallback !== undefined) {
-            this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
-        }
+        var onUpdateViewportCallback = GetValue(o, 'onUpdateViewportCallback');
+        var onUpdateViewportCallbackScope = GetValue(o, 'onUpdateViewportCallbackScope');
+        this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
 
         this.autoAnchor(o.enable);
 

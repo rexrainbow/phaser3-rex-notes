@@ -23,12 +23,8 @@ class Demo extends Phaser.Scene {
             top: 'top+10',
 
             width: '30%',
-            // height: '30%',
-            onResizeCallback: function (width, height) {
-                this.setSize(width, height)
-                    .updateDisplayOrigin()  // Bug, fixed in p3.60
-            },
-            onResizeCallbackScope: leftTopPanel,
+            //height: '30%',
+          
         });
 
     }

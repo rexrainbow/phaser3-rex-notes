@@ -120,14 +120,16 @@ For example, anchor game object's left bound to viewport's left+10, centerY to v
     - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
     - Padding : `'+n'`, or `'-n'`.
 - `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
-    ```javascript
-    function(width, height, gameObject, anchor) {
-        // gameObject.setSize(width, height);
-        // gameObject.setDisplaySize(width, height);
-        // ...
-    }
-    ```
-
+    - `undefined` : Default resize method.
+    - Custom method
+        ```javascript
+        function(width, height, gameObject, anchor) {
+            // gameObject.setSize(width, height);
+            // gameObject.setDisplaySize(width, height);
+            // ...
+        }
+        ```
+    - `null` or `false` : No callback
 - `onUpdateViewportCallback`, `onUpdateViewportCallback` : Callback invoked when viewport changed (anchor)
     ```javascript
     fucntion(viewport, gameObject, anchor) {

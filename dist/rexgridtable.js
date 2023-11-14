@@ -454,7 +454,7 @@
     }
   };
 
-  var GetValue$16 = Phaser.Utils.Objects.GetValue;
+  var GetValue$17 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base$1.prototype.add;
   var Add$3 = function Add(gameObject, config) {
     this.setParent(gameObject);
@@ -509,11 +509,11 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
     } else {
-      state.syncPosition = GetValue$16(config, 'syncPosition', true);
-      state.syncRotation = GetValue$16(config, 'syncRotation', true);
-      state.syncScale = GetValue$16(config, 'syncScale', true);
-      state.syncAlpha = GetValue$16(config, 'syncAlpha', true);
-      state.syncScrollFactor = GetValue$16(config, 'syncScrollFactor', true);
+      state.syncPosition = GetValue$17(config, 'syncPosition', true);
+      state.syncRotation = GetValue$17(config, 'syncRotation', true);
+      state.syncScale = GetValue$17(config, 'syncScale', true);
+      state.syncAlpha = GetValue$17(config, 'syncAlpha', true);
+      state.syncScrollFactor = GetValue$17(config, 'syncScrollFactor', true);
     }
   };
   var AddChild$2 = {
@@ -1860,7 +1860,7 @@
     return object instanceof GameObjectClass;
   };
 
-  var GetValue$15 = Phaser.Utils.Objects.GetValue;
+  var GetValue$16 = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
   var UUID = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
@@ -1869,13 +1869,13 @@
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-    var x = GetValue$15(config, 'x', undefined);
-    var y = GetValue$15(config, 'y', undefined);
-    var width = GetValue$15(config, 'width', undefined);
-    var height = GetValue$15(config, 'height', undefined);
-    var originX = GetValue$15(config, 'originX', 0);
-    var originY = GetValue$15(config, 'originY', 0);
-    var padding = GetValue$15(config, 'padding', 0);
+    var x = GetValue$16(config, 'x', undefined);
+    var y = GetValue$16(config, 'y', undefined);
+    var width = GetValue$16(config, 'width', undefined);
+    var height = GetValue$16(config, 'height', undefined);
+    var originX = GetValue$16(config, 'originX', 0);
+    var originY = GetValue$16(config, 'originY', 0);
+    var padding = GetValue$16(config, 'padding', 0);
     var scrollX, scrollY;
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
@@ -1986,17 +1986,17 @@
     }
   };
 
-  var GetValue$14 = Phaser.Utils.Objects.GetValue;
+  var GetValue$15 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$2 = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$14(config, 'color');
-      lineWidth = GetValue$14(config, 'lineWidth');
-      fillColor = GetValue$14(config, 'fillColor');
-      fillAlpha = GetValue$14(config, 'fillAlpha', 1);
-      padding = GetValue$14(config, 'padding', 0);
+      strokeColor = GetValue$15(config, 'color');
+      lineWidth = GetValue$15(config, 'lineWidth');
+      fillColor = GetValue$15(config, 'fillColor');
+      fillAlpha = GetValue$15(config, 'fillAlpha', 1);
+      padding = GetValue$15(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -2059,10 +2059,10 @@
     y: 0
   }];
 
-  var GetValue$13 = Phaser.Utils.Objects.GetValue;
+  var GetValue$14 = Phaser.Utils.Objects.GetValue;
   var DrawBounds$1 = function DrawBounds(graphics, config) {
-    var drawContainer = GetValue$13(config, 'drawContainer', true);
-    var gameObjects = GetValue$13(config, 'children');
+    var drawContainer = GetValue$14(config, 'drawContainer', true);
+    var gameObjects = GetValue$14(config, 'children');
     if (gameObjects === undefined) {
       gameObjects = this.getAllVisibleChildren([this]);
     }
@@ -2781,7 +2781,7 @@
     QuickSet(child, globZone, align);
   };
 
-  var GetValue$12 = Phaser.Utils.Objects.GetValue;
+  var GetValue$13 = Phaser.Utils.Objects.GetValue;
   var Group$1 = Phaser.GameObjects.Group;
   var DrawBounds = function DrawBounds(graphics, config) {
     var scene = graphics.scene;
@@ -2790,13 +2790,13 @@
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$12(config, 'color');
-      lineWidth = GetValue$12(config, 'lineWidth');
-      var nameTextConfig = GetValue$12(config, 'name', false);
+      color = GetValue$13(config, 'color');
+      lineWidth = GetValue$13(config, 'lineWidth');
+      var nameTextConfig = GetValue$13(config, 'name', false);
       if (nameTextConfig) {
-        createTextCallback = GetValue$12(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
-        createTextCallbackScope = GetValue$12(nameTextConfig, 'createTextCallbackScope', undefined);
-        textAlign = GetValue$12(nameTextConfig, 'align', 'left-top');
+        createTextCallback = GetValue$13(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
+        createTextCallbackScope = GetValue$13(nameTextConfig, 'createTextCallbackScope', undefined);
+        textAlign = GetValue$13(nameTextConfig, 'align', 'left-top');
         if (typeof textAlign === 'string') {
           textAlign = AlignConst[textAlign];
         }
@@ -2853,7 +2853,7 @@
   };
   var GlobRect = undefined;
 
-  var GetValue$11 = Phaser.Utils.Objects.GetValue;
+  var GetValue$12 = Phaser.Utils.Objects.GetValue;
   var GetBoundsConfig = function GetBoundsConfig(config, out) {
     if (config === undefined) {
       config = 0;
@@ -2867,10 +2867,10 @@
       out.top = config;
       out.bottom = config;
     } else {
-      out.left = GetValue$11(config, 'left', 0);
-      out.right = GetValue$11(config, 'right', 0);
-      out.top = GetValue$11(config, 'top', 0);
-      out.bottom = GetValue$11(config, 'bottom', 0);
+      out.left = GetValue$12(config, 'left', 0);
+      out.right = GetValue$12(config, 'right', 0);
+      out.top = GetValue$12(config, 'top', 0);
+      out.bottom = GetValue$12(config, 'bottom', 0);
     }
     return out;
   };
@@ -3126,7 +3126,7 @@
     }
   };
 
-  var GetValue$10 = Phaser.Utils.Objects.GetValue;
+  var GetValue$11 = Phaser.Utils.Objects.GetValue;
   var GetPadding = function GetPadding(padding, key) {
     if (key === undefined) {
       return padding;
@@ -3149,10 +3149,10 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$10(key, 'left', 0);
-      padding.right = GetValue$10(key, 'right', 0);
-      padding.top = GetValue$10(key, 'top', 0);
-      padding.bottom = GetValue$10(key, 'bottom', 0);
+      padding.left = GetValue$11(key, 'left', 0);
+      padding.right = GetValue$11(key, 'right', 0);
+      padding.top = GetValue$11(key, 'top', 0);
+      padding.bottom = GetValue$11(key, 'bottom', 0);
     }
     return padding;
   };
@@ -3591,7 +3591,7 @@
     }
   };
 
-  var GetValue$$ = Phaser.Utils.Objects.GetValue;
+  var GetValue$10 = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -3600,7 +3600,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$$(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$10(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -3677,6 +3677,58 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
+  var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {
+    if (!gameObject || newWidth === undefined && newHeight === undefined) {
+      return;
+    }
+    if (HasResizeMethod(gameObject)) {
+      // Has `resize`, or `setSize` method
+      if (newWidth === undefined) {
+        newWidth = gameObject.width;
+      }
+      if (newHeight === undefined) {
+        newHeight = gameObject.height;
+      }
+      if (gameObject.resize) {
+        gameObject.resize(newWidth, newHeight);
+      } else {
+        gameObject.setSize(newWidth, newHeight);
+      }
+    } else {
+      // Set display width/height
+      if (newWidth !== undefined) {
+        gameObject.displayWidth = newWidth;
+      }
+      if (newHeight !== undefined) {
+        gameObject.displayHeight = newHeight;
+      }
+    }
+  };
+  var ExcludeClassList = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
+  var HasResizeMethod = function HasResizeMethod(gameObject) {
+    // 1st pass : Has `resize` method?
+    if (gameObject.resize) {
+      return true;
+    }
+
+    // 2nd pass : Has `setSize` method?
+    if (!gameObject.setSize) {
+      return false;
+    }
+    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+      var excludeClass = ExcludeClassList[i];
+      if (excludeClass && gameObject instanceof excludeClass) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  var DefaultResizeCallback = function DefaultResizeCallback(width, height, gameObject, anchor) {
+    ResizeGameObject(gameObject, width, height);
+  };
+
+  var GetValue$$ = Phaser.Utils.Objects.GetValue;
   var Anchor = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Anchor, _ComponentBase);
     var _super = _createSuper(Anchor);
@@ -3780,16 +3832,12 @@
         // Size
         this.setSizePercentage(percentageWidth, percentageHeight);
         this.setSizePadding(paddingWidth, paddingHeight);
-        var onResizeCallback = o.onResizeCallback;
-        var onResizeCallbackScope = o.onResizeCallbackScope;
-        if (onResizeCallback !== undefined) {
-          this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
-        }
-        var onUpdateViewportCallback = o.onUpdateViewportCallback;
-        var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
-        if (onUpdateViewportCallback !== undefined) {
-          this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
-        }
+        var onResizeCallback = GetValue$$(o, 'onResizeCallback', DefaultResizeCallback);
+        var onResizeCallbackScope = GetValue$$(o, 'onResizeCallbackScope');
+        this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
+        var onUpdateViewportCallback = GetValue$$(o, 'onUpdateViewportCallback');
+        var onUpdateViewportCallbackScope = GetValue$$(o, 'onUpdateViewportCallbackScope');
+        this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
         this.autoAnchor(o.enable);
         return this;
       }
@@ -7759,53 +7807,6 @@
       }
     }
     return null;
-  };
-
-  var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {
-    if (!gameObject || newWidth === undefined && newHeight === undefined) {
-      return;
-    }
-    if (HasResizeMethod(gameObject)) {
-      // Has `resize`, or `setSize` method
-      if (newWidth === undefined) {
-        newWidth = gameObject.width;
-      }
-      if (newHeight === undefined) {
-        newHeight = gameObject.height;
-      }
-      if (gameObject.resize) {
-        gameObject.resize(newWidth, newHeight);
-      } else {
-        gameObject.setSize(newWidth, newHeight);
-      }
-    } else {
-      // Set display width/height
-      if (newWidth !== undefined) {
-        gameObject.displayWidth = newWidth;
-      }
-      if (newHeight !== undefined) {
-        gameObject.displayHeight = newHeight;
-      }
-    }
-  };
-  var ExcludeClassList = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
-  var HasResizeMethod = function HasResizeMethod(gameObject) {
-    // 1st pass : Has `resize` method?
-    if (gameObject.resize) {
-      return true;
-    }
-
-    // 2nd pass : Has `setSize` method?
-    if (!gameObject.setSize) {
-      return false;
-    }
-    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
-      var excludeClass = ExcludeClassList[i];
-      if (excludeClass && gameObject instanceof excludeClass) {
-        return false;
-      }
-    }
-    return true;
   };
 
   var CopyState = function CopyState(gamObject, out) {

@@ -9768,14 +9768,17 @@
 <li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
 </ul>
 </li>
-<li>
-<p><code>onResizeCallback</code>, <code>onResizeCallbackScope</code> : Callback of resizing game object
+<li><code>onResizeCallback</code>, <code>onResizeCallbackScope</code> : Callback of resizing game object<ul>
+<li><code>undefined</code> : Default resize method.</li>
+<li>Custom method
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">anchor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// gameObject.setSize(width, height);</span>
 <span class="w">    </span><span class="c1">// gameObject.setDisplaySize(width, height);</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div></li>
+<li><code>null</code> or <code>false</code> : No callback</li>
+</ul>
 </li>
 <li>
 <p><code>onUpdateViewportCallback</code>, <code>onUpdateViewportCallback</code> : Callback invoked when viewport changed (anchor)
