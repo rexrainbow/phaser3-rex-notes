@@ -13064,7 +13064,7 @@
         _this.add(panel, {
           column: 1,
           row: 1,
-          expand: true
+          expand: expandPanel
         });
       }
       if (leftButtons) {
