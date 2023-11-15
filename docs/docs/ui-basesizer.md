@@ -219,7 +219,7 @@ sizer.pushIntoBounds(bounds);
 
 ### Scale
 
-- Scale up from `0` to *current scale* of game object.
+- Scale up from `0` to **current scale** of game object.
     - Pop-up width and height
         ```javascript
         sizer
