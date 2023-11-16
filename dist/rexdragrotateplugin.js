@@ -495,9 +495,6 @@
         var gameObject = this.originGameObject;
         var x = gameObject.x;
         if (gameObject.scrollFactorX === 0) {
-          if (camera === undefined) {
-            camera = this.pointer.camera;
-          }
           x += camera.scrollX;
         }
         return x;
@@ -617,8 +614,8 @@
     }, {
       key: "onDrag",
       value: function onDrag(pointer) {
-        var x = this.getOriginX(),
-          y = this.getOriginY();
+        var x = this.getOriginX(pointer.camera),
+          y = this.getOriginY(pointer.camera);
         var worldXY = this.getPointerWorldXY(pointer);
         var curPointerX = worldXY.x;
         var curPointerY = worldXY.y;
