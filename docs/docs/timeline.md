@@ -1,6 +1,6 @@
 ## Introduction
 
-Schedule events to happen at specific times in the future, built-in object of phaser.
+Schedule commands to happen at specific times in the future, built-in object of phaser.
 
 - Author: Richard Davey
 
@@ -8,12 +8,27 @@ Schedule events to happen at specific times in the future, built-in object of ph
 
 ### Create timeline
 
+Steps 
+
+1. Test time (`at`, `in`, `from`)
+1. Test enable (`if`)
+1. Run actions (`set`, `tween`, `run`, `sound`, `event`)
+1. Control (`once`, `stop`)
+
 ```javascript
 var timeline = scene.add.timeline([    
     {
+        // Time condition
         at: 0,
         in:
         from:
+
+        // Enable condition
+        if(event) {
+            // this: target parameter
+            return true;  // false
+        },
+
 
         set: {
             key: value,
@@ -46,10 +61,12 @@ var timeline = scene.add.timeline([
 ])
 ```
 
-- Time
+- Time :
     - `at` : Absolute delay time after starting in ms.
     - `in` : Absolute delay time after current time in ms.
     - `from` : Relative delay time after previous event in ms
+- Enable : 
+    - `if` : A function. Invoking every tick, run actions when it returns `true`.
 - Actions :
     - `set` : A key-value object of properties to set on the `target`.
     - `tween` : [tween config](tween.md#create-tween-task)
@@ -113,15 +130,7 @@ timeline.resume();
 // timeline.paused = false;
 ```
 
-### Is playing
-
-Timeline is currently playing, not paused or not complete.
-
-```javascript
-var isPlaying = timeline.isPlaying()
-```
-
-### Add event
+### Add command
 
 ```javascript
 timeline.add(config);
@@ -133,11 +142,35 @@ or
 timeline.add([config0, config1, ...]);
 ```
 
-### Clear all events
+### Clear all commands
 
 ```javascript
 timeline.clear();
 ```
+
+### Events
+
+- On all commands are completed
+    ```javascript
+    timeline.on('complete', function(){
+
+    });
+    ```
+
+### Other properties
+
+- Timeline is currently playing, not paused or not complete.
+    ```javascript
+    var isPlaying = timeline.isPlaying()
+    ```
+- Is paused
+    ```javascript
+    var isPaused = timeline.paused;
+    ```
+- All commands are complete
+    ```javascript
+    var isCompleted = timeline.complete;
+    ```
 
 ### Destroy
 

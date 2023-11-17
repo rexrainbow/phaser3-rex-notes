@@ -7633,22 +7633,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-playing" class="md-nav__link">
-    Is playing
+  <a href="#add-command" class="md-nav__link">
+    Add command
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-event" class="md-nav__link">
-    Add event
+  <a href="#clear-all-commands" class="md-nav__link">
+    Clear all commands
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#clear-all-events" class="md-nav__link">
-    Clear all events
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -9562,22 +9569,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-playing" class="md-nav__link">
-    Is playing
+  <a href="#add-command" class="md-nav__link">
+    Add command
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-event" class="md-nav__link">
-    Add event
+  <a href="#clear-all-commands" class="md-nav__link">
+    Clear all commands
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#clear-all-events" class="md-nav__link">
-    Clear all events
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -9615,17 +9629,32 @@
   <h1>Timeline</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Schedule events to happen at specific times in the future, built-in object of phaser.</p>
+<p>Schedule commands to happen at specific times in the future, built-in object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-timeline">Create timeline<a class="headerlink" href="#create-timeline" title="Permanent link">&para;</a></h3>
+<p>Steps </p>
+<ol>
+<li>Test time (<code>at</code>, <code>in</code>, <code>from</code>)</li>
+<li>Test enable (<code>if</code>)</li>
+<li>Run actions (<code>set</code>, <code>tween</code>, <code>run</code>, <code>sound</code>, <code>event</code>)</li>
+<li>Control (<code>once</code>, <code>stop</code>)</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">timeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">timeline</span><span class="p">([</span><span class="w">    </span>
 <span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Time condition</span>
 <span class="w">        </span><span class="nx">at</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">        </span><span class="ow">in</span><span class="o">:</span>
 <span class="w">        </span><span class="kr">from</span><span class="o">:</span>
+
+<span class="w">        </span><span class="c1">// Enable condition</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// this: target parameter</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">  </span><span class="c1">// false</span>
+<span class="w">        </span><span class="p">},</span>
+
 
 <span class="w">        </span><span class="nx">set</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span>
@@ -9658,10 +9687,14 @@
 <span class="p">])</span>
 </code></pre></div>
 <ul>
-<li>Time<ul>
+<li>Time :<ul>
 <li><code>at</code> : Absolute delay time after starting in ms.</li>
 <li><code>in</code> : Absolute delay time after current time in ms.</li>
 <li><code>from</code> : Relative delay time after previous event in ms</li>
+</ul>
+</li>
+<li>Enable : <ul>
+<li><code>if</code> : A function. Invoking every tick, run actions when it returns <code>true</code>.</li>
 </ul>
 </li>
 <li>Actions :<ul>
@@ -9715,19 +9748,35 @@
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 <span class="c1">// timeline.paused = false;</span>
 </code></pre></div>
-<h3 id="is-playing">Is playing<a class="headerlink" href="#is-playing" title="Permanent link">&para;</a></h3>
-<p>Timeline is currently playing, not paused or not complete.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isPlaying</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeline</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">()</span>
-</code></pre></div>
-<h3 id="add-event">Add event<a class="headerlink" href="#add-event" title="Permanent link">&para;</a></h3>
+<h3 id="add-command">Add command<a class="headerlink" href="#add-command" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">([</span><span class="nx">config0</span><span class="p">,</span><span class="w"> </span><span class="nx">config1</span><span class="p">,</span><span class="w"> </span><span class="p">...]);</span>
 </code></pre></div>
-<h3 id="clear-all-events">Clear all events<a class="headerlink" href="#clear-all-events" title="Permanent link">&para;</a></h3>
+<h3 id="clear-all-commands">Clear all commands<a class="headerlink" href="#clear-all-commands" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On all commands are completed
+    <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
+
+<span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Timeline is currently playing, not paused or not complete.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isPlaying</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeline</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">()</span>
+</code></pre></div></li>
+<li>Is paused
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isPaused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeline</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span>
+</code></pre></div></li>
+<li>All commands are complete
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isCompleted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeline</span><span class="p">.</span><span class="nx">complete</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <p>Also remove updating.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
