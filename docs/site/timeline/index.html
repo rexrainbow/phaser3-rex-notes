@@ -7612,6 +7612,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#steps-of-commands" class="md-nav__link">
+    Steps of commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#start" class="md-nav__link">
     Start
   </a>
@@ -9548,6 +9555,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#steps-of-commands" class="md-nav__link">
+    Steps of commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#start" class="md-nav__link">
     Start
   </a>
@@ -9635,13 +9649,6 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-timeline">Create timeline<a class="headerlink" href="#create-timeline" title="Permanent link">&para;</a></h3>
-<p>Steps </p>
-<ol>
-<li>Test time (<code>at</code>, <code>in</code>, <code>from</code>)</li>
-<li>Test enable (<code>if</code>)</li>
-<li>Run actions (<code>set</code>, <code>tween</code>, <code>run</code>, <code>sound</code>, <code>event</code>)</li>
-<li>Control (<code>once</code>, <code>stop</code>)</li>
-</ol>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">timeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">timeline</span><span class="p">([</span><span class="w">    </span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Time condition</span>
@@ -9732,6 +9739,14 @@
 </li>
 </ul>
 <p>The Timeline always starts paused.</p>
+<h3 id="steps-of-commands">Steps of commands<a class="headerlink" href="#steps-of-commands" title="Permanent link">&para;</a></h3>
+<p>For each tick, for each command :</p>
+<ol>
+<li>Test time (<code>at</code>, <code>in</code>, <code>from</code>)</li>
+<li>Test enable (<code>if</code>)</li>
+<li>Run actions (<code>set</code>, <code>tween</code>, <code>run</code>, <code>sound</code>, <code>event</code>)</li>
+<li>Control (<code>once</code>, <code>stop</code>)</li>
+</ol>
 <h3 id="start">Start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 </code></pre></div>

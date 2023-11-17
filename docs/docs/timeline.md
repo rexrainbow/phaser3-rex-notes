@@ -8,13 +8,6 @@ Schedule commands to happen at specific times in the future, built-in object of 
 
 ### Create timeline
 
-Steps 
-
-1. Test time (`at`, `in`, `from`)
-1. Test enable (`if`)
-1. Run actions (`set`, `tween`, `run`, `sound`, `event`)
-1. Control (`once`, `stop`)
-
 ```javascript
 var timeline = scene.add.timeline([    
     {
@@ -99,6 +92,14 @@ var timeline = scene.add.timeline([
 
 The Timeline always starts paused.
 
+### Steps of commands
+
+For each tick, for each command :
+
+1. Test time (`at`, `in`, `from`)
+1. Test enable (`if`)
+1. Run actions (`set`, `tween`, `run`, `sound`, `event`)
+1. Control (`once`, `stop`)
 
 ### Start
 
