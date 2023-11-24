@@ -56,6 +56,9 @@ sizer.addBackground(gameObject);
     var child = sizer.getElement(key);
     ```
 
+A sizer can have more than one background. 
+i.e. user can invoke `sizer.addBackground(gameObject)` many times.
+
 #### Remove background
 
 - Remove background child
