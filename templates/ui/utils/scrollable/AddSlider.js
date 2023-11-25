@@ -174,7 +174,12 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     }
 
     if (mouseWheelScroller) {
-        var methodAddChildOXY = `addChildO${axis}`;
+        var methodAddChildOXY;
+        if (isScrollXYMode) {
+            methodAddChildOXY = `addChildO${axis}`;
+        } else {
+            methodAddChildOXY = 'addChildOY';
+        }
         mouseWheelScroller
             .on('scroll', function (incValue) {
                 topPatent[methodAddChildOXY](-incValue, true);
