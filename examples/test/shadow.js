@@ -1,5 +1,4 @@
 import phaser from 'phaser/src/phaser.js';
-import DropShadowPipelinePlugin from '../../plugins/dropshadowpipeline-plugin.js';
 import MoveToPlugin from '../../plugins/moveto-plugin.js';
 
 
@@ -16,37 +15,24 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var postFxPlugin = this.plugins.get('rexDropShadowPipeline');
-
         this.add.image(400, 300, 'classroom')
 
         var gameObject = this.add.image(400, 300, 'mushroom')
+        gameObject.postFX.addShadow(10, -10, 0.006, 1, 0xff0000, 10);
+
         gameObject.moveTo = this.plugins.get('rexMoveTo').add(gameObject, {
-            speed: 400,
+            tspeed: 400,
             rotateToTarget: true
         })
-            .on('start', function (dot, moveTo) {
-                if (postFxPlugin.get(gameObject)[0]) {
-                    return;
-                }
-
-                postFxPlugin.add(gameObject, {
-                    distance: 5,
-                    angle: 45,
-
-                    shadowColor: 0xff0000,
-                    alpha: 1
-                });
-            })
-            .on('complete', function () {
-                postFxPlugin.remove(gameObject);
-            })
 
         this.input.on('pointerdown', function (pointer) {
             var touchX = pointer.x;
             var touchY = pointer.y;
             gameObject.moveTo.moveTo(touchX, touchY);
         });
+
+
+        this.cameras.main.startFollow(gameObject);
     }
 
     update() {
@@ -65,11 +51,6 @@ var config = {
     scene: Demo,
     plugins: {
         global: [
-            {
-                key: 'rexDropShadowPipeline',
-                plugin: DropShadowPipelinePlugin,
-                start: true
-            },
             {
                 key: 'rexMoveTo',
                 plugin: MoveToPlugin,
