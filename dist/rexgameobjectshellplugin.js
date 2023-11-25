@@ -33539,6 +33539,8 @@
     // Move buttons parameter from sliderConfig to config
     config.buttons = sliderConfig.buttons;
     delete sliderConfig.buttons;
+    config.value = null; // Don't assign initial value (0)
+
     var scrollBar = new ScrollBar(scene, config);
     scene.add.existing(scrollBar);
     var slider = scrollBar.childrenMap.slider;
@@ -34716,7 +34718,12 @@
       });
     }
     if (mouseWheelScroller) {
-      var methodAddChildOXY = "addChildO".concat(axis);
+      var methodAddChildOXY;
+      if (isScrollXYMode) {
+        methodAddChildOXY = "addChildO".concat(axis);
+      } else {
+        methodAddChildOXY = 'addChildOY';
+      }
       mouseWheelScroller.on('scroll', function (incValue) {
         topPatent[methodAddChildOXY](-incValue, true);
       });
