@@ -23,6 +23,8 @@ var CreateScrollbar = function (scene, config) {
     config.buttons = sliderConfig.buttons;
     delete sliderConfig.buttons;
 
+    config.value = null;  // Don't assign initial value (0)
+
     var scrollBar = new ScrollBar(scene, config);
     scene.add.existing(scrollBar);
 

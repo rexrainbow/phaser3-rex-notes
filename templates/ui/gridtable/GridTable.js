@@ -73,7 +73,8 @@ class GridTable extends Scrollable {
         if (GetValue(tableConfig, 'interactive', true)) {
             TableSetInteractive.call(this, table, tableConfig);
         }
-        this.setItems(GetValue(config, 'items', []));
+
+        this.setItems(GetValue(config, 'items', []), false);
 
         scene.game.events.on('poststep', this.onPostStep, this);
     }
