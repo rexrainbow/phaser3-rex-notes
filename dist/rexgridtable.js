@@ -16418,6 +16418,8 @@
     // Move buttons parameter from sliderConfig to config
     config.buttons = sliderConfig.buttons;
     delete sliderConfig.buttons;
+    config.value = null; // Don't assign initial value (0)
+
     var scrollBar = new ScrollBar(scene, config);
     scene.add.existing(scrollBar);
     var slider = scrollBar.childrenMap.slider;
@@ -17595,7 +17597,12 @@
       });
     }
     if (mouseWheelScroller) {
-      var methodAddChildOXY = "addChildO".concat(axis);
+      var methodAddChildOXY;
+      if (isScrollXYMode) {
+        methodAddChildOXY = "addChildO".concat(axis);
+      } else {
+        methodAddChildOXY = 'addChildOY';
+      }
       mouseWheelScroller.on('scroll', function (incValue) {
         topPatent[methodAddChildOXY](-incValue, true);
       });
@@ -20433,16 +20440,21 @@
     SwipeCell.call(this, table, tableConfig);
   };
 
-  var SetItems = function SetItems(items) {
+  var SetItems = function SetItems(items, updateTable) {
     if (items === undefined) {
       this.items = [];
     } else {
       this.items = items;
     }
+    if (updateTable === undefined) {
+      updateTable = true;
+    }
     var table = this.childrenMap.child;
     table.setCellsCount(this.items.length);
-    table.updateTable(true);
-    this.resizeController();
+    if (updateTable) {
+      table.updateTable(true);
+      this.resizeController();
+    }
     return this;
   };
 
@@ -20523,7 +20535,7 @@
       if (GetValue(tableConfig, 'interactive', true)) {
         TableSetInteractive.call(_assertThisInitialized(_this), table, tableConfig);
       }
-      _this.setItems(GetValue(config, 'items', []));
+      _this.setItems(GetValue(config, 'items', []), false);
       scene.game.events.on('poststep', _this.onPostStep, _assertThisInitialized(_this));
       return _this;
     }
