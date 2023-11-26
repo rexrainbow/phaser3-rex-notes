@@ -85,6 +85,7 @@ or
 scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, onLoadingComplete);
 // scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete);
 ```
+
 - `onLoadingComplete` : Custom task 
     ```javascript
     function(finishLoading, animationScene) {
