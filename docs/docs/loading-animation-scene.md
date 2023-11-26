@@ -79,6 +79,9 @@ scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKe
 // scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData);
 ```
 
+- Will stop animationScene when preloading complete.
+
+
 or
 
 ```javascript
