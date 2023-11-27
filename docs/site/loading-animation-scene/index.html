@@ -9662,16 +9662,23 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">);</span>
 <span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData);</span>
 </code></pre></div>
+<ul>
+<li>Will stop animationScene when preloading complete.</li>
+</ul>
 <p>or</p>
-<p><div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingComplete</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingComplete</span><span class="p">);</span>
 <span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete);</span>
 </code></pre></div>
-- <code>onLoadingComplete</code> : Custom task 
+<ul>
+<li><code>onLoadingComplete</code> : Custom task 
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">finishLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">animationScene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// finishLoading();</span>
 <span class="p">}</span>
-</code></pre></div>
-    - Invoke <code>finishLoading()</code> method (later) to finish current loading progress.</p>
+</code></pre></div><ul>
+<li>Invoke <code>finishLoading()</code> method (later) to finish current loading progress.</li>
+</ul>
+</li>
+</ul>
 
 
   
