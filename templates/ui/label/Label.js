@@ -24,15 +24,6 @@ class Label extends LabelBase {
             this.addBackground(background);
         }
 
-        // Add space
-        if (
-            (align === 'right') ||
-            (align === 'bottom') ||
-            (align === 'center')
-        ) {
-            this.addSpace();
-        }
-
         if (icon) {
             var padding;
             if (this.orientation === 0) {
@@ -134,10 +125,7 @@ class Label extends LabelBase {
             }
         }
 
-        // Add space
-        if (align === 'center') {
-            this.addSpace();
-        }
+        this.setChildrenAlignMode(align);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('icon', icon);

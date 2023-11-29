@@ -49,7 +49,4 @@ declare class Label extends LabelBase {
         scene: Phaser.Scene,
         config?: Label.IConfig
     );
-
-    setChildrenAlignMode(mode: Label.AlignTypes): this;
-
 }

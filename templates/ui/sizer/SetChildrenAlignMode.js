@@ -1,4 +1,8 @@
 var SetChildrenAlignMode = function (mode) {
+    if (mode === undefined) {
+        mode = 'left';
+    }
+
     var children = this.sizerChildren;
 
     var firstChild = children[0];

@@ -369,6 +369,21 @@ Use cases :
         .add(childRight)
     ```
 
+### Change children's align mode
+
+```javascript
+sizer
+    .setChildrenAlignMode(mode)
+    .layout();
+```
+
+- `mode` : Alignment of icon, text, action game objects.
+    - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
+        - Remove first and last space children.
+    - `'center'` : Align game objects at center.
+        - Add two spaces as first and last children.
+    - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
+        - Add space as first child.
 
 ### Layout children
 

@@ -59,6 +59,7 @@ var CreateLabel = function (scene, text, hasIcon) {
         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, text),
         icon: (hasIcon) ? scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT) : undefined,
+        align: 'center',
         space: {
             left: 10,
             right: 10,

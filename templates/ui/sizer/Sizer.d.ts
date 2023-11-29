@@ -200,4 +200,8 @@ declare class Sizer extends BaseSizer {
         gameObject: Phaser.GameObjects.GameObject,
         expand: boolean
     ): this;
+
+    setChildrenAlignMode(
+        mode: 'center' | 'left' | 'right' | 'top' | 'bottom'
+    ): this;
 }

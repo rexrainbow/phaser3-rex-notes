@@ -13,6 +13,7 @@ import RemoveChildMethods from './RemoveChildMethods.js';
 import AlignMethods from './AlignMethods.js';
 import ProportionMethods from './ProportionMethods.js';
 import ExpandMethods from './ExpandMethods.js';
+import SetChildrenAlignMode from './SetChildrenAlignMode.js';
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,
@@ -25,6 +26,8 @@ var methods = {
     layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight,
+
+    setChildrenAlignMode: SetChildrenAlignMode,
 };
 
 Object.assign(
