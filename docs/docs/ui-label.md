@@ -242,6 +242,19 @@ label.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+### Change children's align mode
+
+```javascript
+label
+    .setChildrenAlignMode(mode)
+    .layout();
+```
+
+- `mode` : Alignment of icon, text, action game objects.
+    - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
+    - `'center'` : Align game objects at center.
+    - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
+
 ### Get element
 
 - Get element
