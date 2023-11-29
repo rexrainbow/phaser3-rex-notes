@@ -12203,28 +12203,30 @@
     }
     var children = this.sizerChildren;
     var firstChild = children[0];
+    var isFirstChildASpace = firstChild.hasOwnProperty('isRexSpace') && firstChild.isRexSpace;
     if (
     // Has left space
     mode === 'right' || mode === 'bottom' || mode === 'center') {
-      if (!firstChild.isRexSpace) {
+      if (!isFirstChildASpace) {
         this.insertSpace(0);
       }
     } else {
       // Does not have left space
-      if (firstChild.isRexSpace) {
+      if (isFirstChildASpace) {
         this.remove(firstChild, true);
       }
     }
     var lastChildIndex = children.length - 1;
     var lastChild = children[lastChildIndex];
+    var isLastChildASpace = lastChild.hasOwnProperty('isRexSpace') && lastChild.isRexSpace;
     if (mode === 'center') {
       // Has right space
-      if (!lastChild.isRexSpace) {
+      if (!isLastChildASpace) {
         this.insertSpace(lastChildIndex + 1);
       }
     } else {
       // Does not have right space
-      if (lastChild.isRexSpace) {
+      if (isLastChildASpace) {
         this.remove(lastChild, true);
       }
     }
