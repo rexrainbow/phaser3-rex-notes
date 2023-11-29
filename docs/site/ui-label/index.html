@@ -10002,9 +10002,18 @@
 </code></pre></div>
 <ul>
 <li><code>mode</code> : Alignment of icon, text, action game objects.<ul>
-<li><code>undefined</code>, or <code>'left'</code>, or <code>'top'</code> : Align game objects at left, or top.</li>
-<li><code>'center'</code> : Align game objects at center.</li>
-<li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.</li>
+<li><code>undefined</code>, or <code>'left'</code>, or <code>'top'</code> : Align game objects at left, or top.<ul>
+<li>Remove first and last space children.</li>
+</ul>
+</li>
+<li><code>'center'</code> : Align game objects at center.<ul>
+<li>Add two spaces as first and last children.</li>
+</ul>
+</li>
+<li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.<ul>
+<li>Add space as first child.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

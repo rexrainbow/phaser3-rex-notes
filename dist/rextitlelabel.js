@@ -11276,6 +11276,40 @@
     }
   };
 
+  var SetChildrenAlignMode = function SetChildrenAlignMode(mode) {
+    if (mode === undefined) {
+      mode = 'left';
+    }
+    var children = this.sizerChildren;
+    var firstChild = children[0];
+    if (
+    // Has left space
+    mode === 'right' || mode === 'bottom' || mode === 'center') {
+      if (!firstChild.isRexSpace) {
+        this.insertSpace(0);
+      }
+    } else {
+      // Does not have left space
+      if (firstChild.isRexSpace) {
+        this.remove(firstChild, true);
+      }
+    }
+    var lastChildIndex = children.length - 1;
+    var lastChild = children[lastChildIndex];
+    if (mode === 'center') {
+      // Has right space
+      if (!lastChild.isRexSpace) {
+        this.insertSpace(lastChildIndex + 1);
+      }
+    } else {
+      // Does not have right space
+      if (lastChild.isRexSpace) {
+        this.remove(lastChild, true);
+      }
+    }
+    return this;
+  };
+
   var methods$1 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
@@ -11286,7 +11320,8 @@
     postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
-    resolveHeight: ResolveHeight
+    resolveHeight: ResolveHeight,
+    setChildrenAlignMode: SetChildrenAlignMode
   };
   Object.assign(methods$1, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
 
@@ -11496,41 +11531,9 @@
     return this;
   };
 
-  var SetChildrenAlignMode = function SetChildrenAlignMode(mode) {
-    var children = this.sizerChildren;
-    var firstChild = children[0];
-    if (
-    // Has left space
-    mode === 'right' || mode === 'bottom' || mode === 'center') {
-      if (!firstChild.isRexSpace) {
-        this.insertSpace(0);
-      }
-    } else {
-      // Does not have left space
-      if (firstChild.isRexSpace) {
-        this.remove(firstChild, true);
-      }
-    }
-    var lastChildIndex = children.length - 1;
-    var lastChild = children[lastChildIndex];
-    if (mode === 'center') {
-      // Has right space
-      if (!lastChild.isRexSpace) {
-        this.insertSpace(lastChildIndex + 1);
-      }
-    } else {
-      // Does not have right space
-      if (lastChild.isRexSpace) {
-        this.remove(lastChild, true);
-      }
-    }
-    return this;
-  };
-
   var methods = {
     appendText: AppendText,
-    resetDisplayContent: ResetDisplayContent,
-    setChildrenAlignMode: SetChildrenAlignMode
+    resetDisplayContent: ResetDisplayContent
   };
 
   var LabelBase = /*#__PURE__*/function (_Sizer) {

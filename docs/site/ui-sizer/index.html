@@ -7863,6 +7863,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-childrens-align-mode" class="md-nav__link">
+    Change children's align mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9735,6 +9742,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-childrens-align-mode" class="md-nav__link">
+    Change children's align mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -10177,6 +10191,28 @@
 <span class="w">    </span><span class="p">.</span><span class="nx">addSpace</span><span class="p">()</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">childRight</span><span class="p">)</span>
 </code></pre></div></li>
+</ul>
+<h3 id="change-childrens-align-mode">Change children's align mode<a class="headerlink" href="#change-childrens-align-mode" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setChildrenAlignMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</code></pre></div>
+<ul>
+<li><code>mode</code> : Alignment of icon, text, action game objects.<ul>
+<li><code>undefined</code>, or <code>'left'</code>, or <code>'top'</code> : Align game objects at left, or top.<ul>
+<li>Remove first and last space children.</li>
+</ul>
+</li>
+<li><code>'center'</code> : Align game objects at center.<ul>
+<li>Add two spaces as first and last children.</li>
+</ul>
+</li>
+<li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.<ul>
+<li>Add space as first child.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>

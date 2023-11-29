@@ -14939,6 +14939,40 @@
     }
   };
 
+  var SetChildrenAlignMode = function SetChildrenAlignMode(mode) {
+    if (mode === undefined) {
+      mode = 'left';
+    }
+    var children = this.sizerChildren;
+    var firstChild = children[0];
+    if (
+    // Has left space
+    mode === 'right' || mode === 'bottom' || mode === 'center') {
+      if (!firstChild.isRexSpace) {
+        this.insertSpace(0);
+      }
+    } else {
+      // Does not have left space
+      if (firstChild.isRexSpace) {
+        this.remove(firstChild, true);
+      }
+    }
+    var lastChildIndex = children.length - 1;
+    var lastChild = children[lastChildIndex];
+    if (mode === 'center') {
+      // Has right space
+      if (!lastChild.isRexSpace) {
+        this.insertSpace(lastChildIndex + 1);
+      }
+    } else {
+      // Does not have right space
+      if (lastChild.isRexSpace) {
+        this.remove(lastChild, true);
+      }
+    }
+    return this;
+  };
+
   var methods$i = {
     getChildrenWidth: GetChildrenWidth$3,
     getChildrenHeight: GetChildrenHeight$3,
@@ -14949,7 +14983,8 @@
     postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren$3,
     resolveWidth: ResolveWidth$1,
-    resolveHeight: ResolveHeight$1
+    resolveHeight: ResolveHeight$1,
+    setChildrenAlignMode: SetChildrenAlignMode
   };
   Object.assign(methods$i, AddChildMethods$6, RemoveChildMethods$5, AlignMethods, ProportionMethods, ExpandMethods$1);
 
@@ -15185,41 +15220,9 @@
     return this;
   };
 
-  var SetChildrenAlignMode = function SetChildrenAlignMode(mode) {
-    var children = this.sizerChildren;
-    var firstChild = children[0];
-    if (
-    // Has left space
-    mode === 'right' || mode === 'bottom' || mode === 'center') {
-      if (!firstChild.isRexSpace) {
-        this.insertSpace(0);
-      }
-    } else {
-      // Does not have left space
-      if (firstChild.isRexSpace) {
-        this.remove(firstChild, true);
-      }
-    }
-    var lastChildIndex = children.length - 1;
-    var lastChild = children[lastChildIndex];
-    if (mode === 'center') {
-      // Has right space
-      if (!lastChild.isRexSpace) {
-        this.insertSpace(lastChildIndex + 1);
-      }
-    } else {
-      // Does not have right space
-      if (lastChild.isRexSpace) {
-        this.remove(lastChild, true);
-      }
-    }
-    return this;
-  };
-
   var methods$h = {
     appendText: AppendText$1,
-    resetDisplayContent: ResetDisplayContent,
-    setChildrenAlignMode: SetChildrenAlignMode
+    resetDisplayContent: ResetDisplayContent
   };
 
   var LabelBase = /*#__PURE__*/function (_Sizer) {
@@ -15594,11 +15597,6 @@
       if (background) {
         _this.addBackground(background);
       }
-
-      // Add space
-      if (align === 'right' || align === 'bottom' || align === 'center') {
-        _this.addSpace();
-      }
       if (icon) {
         var padding;
         if (_this.orientation === 0) {
@@ -15693,11 +15691,7 @@
           _this.setActionSize(GetValue$1o(config, 'actionWidth', actionSize), GetValue$1o(config, 'actionHeight', actionSize));
         }
       }
-
-      // Add space
-      if (align === 'center') {
-        _this.addSpace();
-      }
+      _this.setChildrenAlignMode(align);
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('icon', icon);
       _this.addChildrenMap('iconMask', iconMask);
