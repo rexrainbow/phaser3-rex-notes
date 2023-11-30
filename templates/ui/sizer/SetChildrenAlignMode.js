@@ -6,7 +6,7 @@ var SetChildrenAlignMode = function (mode) {
     var children = this.sizerChildren;
 
     var firstChild = children[0];
-    var isFirstChildASpace = firstChild.hasOwnProperty('isRexSpace') && firstChild.isRexSpace;
+    var isFirstChildASpace = firstChild && firstChild.isRexSpace;
 
     if (    // Has left space
         (mode === 'right') ||
@@ -25,7 +25,7 @@ var SetChildrenAlignMode = function (mode) {
 
     var lastChildIndex = children.length - 1;
     var lastChild = children[lastChildIndex];
-    var isLastChildASpace = lastChild.hasOwnProperty('isRexSpace') && lastChild.isRexSpace;
+    var isLastChildASpace = lastChild && lastChild.isRexSpace;
     if (mode === 'center') {   // Has right space
         if (!isLastChildASpace) {
             this.insertSpace(lastChildIndex + 1);
