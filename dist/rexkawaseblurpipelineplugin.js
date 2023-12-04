@@ -160,7 +160,7 @@
     function Drawer(postFXPipeline) {
       _classCallCheck(this, Drawer);
       this.postFXPipeline = postFXPipeline;
-      // this.shader = shader;  // shader might not be available now
+      this.shader = undefined;
     }
     _createClass(Drawer, [{
       key: "setShader",

@@ -1,7 +1,7 @@
 class Drawer {
     constructor(postFXPipeline) {
         this.postFXPipeline = postFXPipeline;
-        // this.shader = shader;  // shader might not be available now
+        this.shader = undefined;
     }
 
     setShader(shader) {
