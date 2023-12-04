@@ -1,3 +1,6 @@
+!!! note
+    Built-in preFX/postFX also provide shadow effect, might try these first.
+
 ## Introduction
 
 Drop-shadow post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/drop-shadow/src/dropshadow.frag)

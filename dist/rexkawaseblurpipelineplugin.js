@@ -157,12 +157,18 @@
   };
 
   var Drawer = /*#__PURE__*/function () {
-    function Drawer(postFXPipeline, shader) {
+    function Drawer(postFXPipeline) {
       _classCallCheck(this, Drawer);
       this.postFXPipeline = postFXPipeline;
-      this.shader = shader;
+      // this.shader = shader;  // shader might not be available now
     }
     _createClass(Drawer, [{
+      key: "setShader",
+      value: function setShader(shader) {
+        this.shader = shader;
+        return this;
+      }
+    }, {
       key: "getAnotherFrame",
       value: function getAnotherFrame(frame) {
         var self = this.postFXPipeline;

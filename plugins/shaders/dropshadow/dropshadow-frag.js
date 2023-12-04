@@ -13,10 +13,10 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform float alpha;
 uniform vec3 color;
-uniform vec2 offset;
+uniform vec2 uOffset;
 
 void main (void) {
-  vec4 sample = texture2D(uMainSampler, outTexCoord - offset);
+  vec4 sample = texture2D(uMainSampler, outTexCoord - uOffset);
 
   // Premultiply alpha
   sample.rgb = color.rgb * sample.a;

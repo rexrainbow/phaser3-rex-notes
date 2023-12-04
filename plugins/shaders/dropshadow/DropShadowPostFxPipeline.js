@@ -22,8 +22,8 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
             ],
         });
 
-        this.shadowDrawer = new ShadowDrawer(this, this.shaders[0]);
-        this.kawaseBlurDrawer = new KawaseBlurDrawer(this, this.shaders[1]);
+        this.shadowDrawer = new ShadowDrawer(this);
+        this.kawaseBlurDrawer = new KawaseBlurDrawer(this);
 
         this.rotation = 0;
         this.distance = 0;
@@ -56,7 +56,7 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
 
         // KawaseBlur
         var blur = GetValue(o, 'blur', 4);
-        if (typeof(blur) === 'number') {
+        if (typeof (blur) === 'number') {
             this.setBlur(blur);
             this.setQuality(GetValue(o, 'quality', 3));
         } else {
@@ -73,12 +73,16 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
 
     onDraw(renderTarget) {
         var targetFrame;
-        
+
         // shadow
-        targetFrame = this.shadowDrawer.draw(this.shadowDrawer.init(renderTarget), true);
+        targetFrame = this.shadowDrawer
+            .setShader(this.shaders[0])
+            .draw(this.shadowDrawer.init(renderTarget), true);
 
         // kawase-blur
-        targetFrame = this.kawaseBlurDrawer.draw(targetFrame, true);
+        targetFrame = this.kawaseBlurDrawer
+            .setShader(this.shaders[1])
+            .draw(targetFrame, true);
 
         // Add renderTarget to result
         if (!this.shadowOnly) {

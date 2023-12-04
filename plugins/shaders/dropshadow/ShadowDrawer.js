@@ -10,9 +10,9 @@ class ShadowDrawer extends Drawer {
         var returnFrame;
 
         // Set uniforms
-        var offsetX = (self.distance / self.renderer.width) * Math.cos(self.rotation);
-        var offsetY = (self.distance / self.renderer.height) * Math.sin(self.rotation)
-        self.set2f('offset', offsetX, offsetY, shader);
+        var uOffsetX = (self.distance / self.renderer.width) * Math.cos(self.rotation);
+        var uOffsetY = (self.distance / self.renderer.height) * Math.sin(self.rotation)
+        self.set2f('uOffset', uOffsetX, uOffsetY, shader);
         self.set3f('color', self._shadowColor.redGL, self._shadowColor.greenGL, self._shadowColor.blueGL, shader);
         self.set1f('alpha', self.alpha, shader);
         // Bind and draw

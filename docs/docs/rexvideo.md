@@ -1,3 +1,6 @@
+!!! warning Abandoned
+    This plugin is abandoned, please using [built-in video](video.md).
+
 ## Introduction
 
 Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canvas.
@@ -6,8 +9,6 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 - [DOM Game object](domelement.md), or [Canvas Game object](canvas.md)
 
 ## Live demos
-
-- [DOM video, and canvas video](https://codepen.io/rexrainbow/pen/VOVxWr)
 
 ## Usage
 

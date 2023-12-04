@@ -143,7 +143,7 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
-  var frag$1 = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float alpha;\nuniform vec3 color;\nuniform vec2 offset;\n\nvoid main (void) {\n  vec4 sample = texture2D(uMainSampler, outTexCoord - offset);\n\n  // Premultiply alpha\n  sample.rgb = color.rgb * sample.a;\n\n  // alpha user alpha\n  sample *= alpha;\n\n  gl_FragColor = sample;\n}\n";
+  var frag$1 = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float alpha;\nuniform vec3 color;\nuniform vec2 uOffset;\n\nvoid main (void) {\n  vec4 sample = texture2D(uMainSampler, outTexCoord - uOffset);\n\n  // Premultiply alpha\n  sample.rgb = color.rgb * sample.a;\n\n  // alpha user alpha\n  sample *= alpha;\n\n  gl_FragColor = sample;\n}\n";
 
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 uOffset;\n\nvoid main (void) {\n  vec4 color = vec4(0.0);\n\n  // Sample top left pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y + uOffset.y));\n\n  // Sample top right pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y + uOffset.y));\n\n  // Sample bottom right pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y - uOffset.y));\n\n  // Sample bottom left pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y - uOffset.y));\n\n  // Average\n  color *= 0.25;\n\n  gl_FragColor = color;\n}\n";
 
@@ -159,12 +159,18 @@
   };
 
   var Drawer = /*#__PURE__*/function () {
-    function Drawer(postFXPipeline, shader) {
+    function Drawer(postFXPipeline) {
       _classCallCheck(this, Drawer);
       this.postFXPipeline = postFXPipeline;
-      this.shader = shader;
+      // this.shader = shader;  // shader might not be available now
     }
     _createClass(Drawer, [{
+      key: "setShader",
+      value: function setShader(shader) {
+        this.shader = shader;
+        return this;
+      }
+    }, {
       key: "getAnotherFrame",
       value: function getAnotherFrame(frame) {
         var self = this.postFXPipeline;
@@ -219,9 +225,9 @@
         var returnFrame;
 
         // Set uniforms
-        var offsetX = self.distance / self.renderer.width * Math.cos(self.rotation);
-        var offsetY = self.distance / self.renderer.height * Math.sin(self.rotation);
-        self.set2f('offset', offsetX, offsetY, shader);
+        var uOffsetX = self.distance / self.renderer.width * Math.cos(self.rotation);
+        var uOffsetY = self.distance / self.renderer.height * Math.sin(self.rotation);
+        self.set2f('uOffset', uOffsetX, uOffsetY, shader);
         self.set3f('color', self._shadowColor.redGL, self._shadowColor.greenGL, self._shadowColor.blueGL, shader);
         self.set1f('alpha', self.alpha, shader);
         // Bind and draw
@@ -303,8 +309,8 @@
           fragShader: frag
         }]
       });
-      _this.shadowDrawer = new ShadowDrawer(_assertThisInitialized(_this), _this.shaders[0]);
-      _this.kawaseBlurDrawer = new KawaseBlurDrawer(_assertThisInitialized(_this), _this.shaders[1]);
+      _this.shadowDrawer = new ShadowDrawer(_assertThisInitialized(_this));
+      _this.kawaseBlurDrawer = new KawaseBlurDrawer(_assertThisInitialized(_this));
       _this.rotation = 0;
       _this.distance = 0;
       _this._shadowColor = new Color();
@@ -353,10 +359,10 @@
         var targetFrame;
 
         // shadow
-        targetFrame = this.shadowDrawer.draw(this.shadowDrawer.init(renderTarget), true);
+        targetFrame = this.shadowDrawer.setShader(this.shaders[0]).draw(this.shadowDrawer.init(renderTarget), true);
 
         // kawase-blur
-        targetFrame = this.kawaseBlurDrawer.draw(targetFrame, true);
+        targetFrame = this.kawaseBlurDrawer.setShader(this.shaders[1]).draw(targetFrame, true);
 
         // Add renderTarget to result
         if (!this.shadowOnly) {
