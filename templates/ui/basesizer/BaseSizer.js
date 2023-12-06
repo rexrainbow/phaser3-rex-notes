@@ -19,7 +19,7 @@ class Base extends Container {
         this.childrenMap = {};
         this.layoutedChildren = undefined;
 
-        this.enableLayoutWarn();
+        this.enableLayoutWarn(false);
 
         var anchorConfig = GetValue(config, 'anchor', undefined);
         if (anchorConfig) {
