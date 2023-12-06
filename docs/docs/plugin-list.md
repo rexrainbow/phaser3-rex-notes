@@ -130,6 +130,7 @@
 1. [Raycaster](raycaster.md): Raycaster between obstacles.
 1. [Random place](randomplace.md): Place objects randomly inside an area without overlapping.
 1. [Real-time timers](realtimetimers.md): Start and counting timer by real-time timestamp.
+1. [Repeat Image](repeatimage.md): Stamp image repeatly on canvas.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Rotate](rotate.md): Rotate game object continually with a steady speed.

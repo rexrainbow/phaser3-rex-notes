@@ -34,6 +34,7 @@ nav:
             - Video: video.md
             - Circle mask image: circlemaskimage.md
             - Alpha mask image: alphamaskimage.md
+            - Repeat image: repeatimage.md
             - Image box: imagebox.md
             - Transition image:
                 - Transition image: transitionimage.md
