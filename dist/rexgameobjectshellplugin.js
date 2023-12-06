@@ -14075,7 +14075,7 @@
       _this.sizerChildren = undefined; // [] or {}
       _this.childrenMap = {};
       _this.layoutedChildren = undefined;
-      _this.enableLayoutWarn();
+      _this.enableLayoutWarn(false);
       var anchorConfig = GetValue$1r(config, 'anchor', undefined);
       if (anchorConfig) {
         _this.setAnchor(anchorConfig);
