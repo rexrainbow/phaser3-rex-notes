@@ -10782,13 +10782,15 @@
   };
 
   var CheckSize = function CheckSize(child, parent) {
-    if (child.width < child.childrenWidth) {
-      // Warning
-      console.warn("Layout width error: Parent=".concat(parent.constructor.name, ", Child=").concat(child.constructor.name));
-    }
-    if (child.height < child.childrenHeight) {
-      // Warning
-      console.warn("Layout height error: Parent=".concat(parent.constructor.name, ", Child=").concat(child.constructor.name));
+    if (child.layoutWarnEnable) {
+      if (child.width < child.childrenWidth) {
+        // Warning
+        console.warn("Layout width error: Parent=".concat(parent.constructor.name, ", Child=").concat(child.constructor.name));
+      }
+      if (child.height < child.childrenHeight) {
+        // Warning
+        console.warn("Layout height error: Parent=".concat(parent.constructor.name, ", Child=").concat(child.constructor.name));
+      }
     }
   };
 
