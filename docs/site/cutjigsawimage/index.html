@@ -9626,6 +9626,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/NWegLLK">Create pieces</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLGoVxz">Custom piece shape</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/dyaLoVd">Drag drop with pixelPerfect</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/cutjigsawimage/">Sample code</a></p>
@@ -9684,6 +9685,7 @@
 <span class="w">    </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
 <span class="w">    </span><span class="nx">edgeWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="nx">edgeHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// drawShapeCallback: undefined,</span>
 <span class="w">    </span><span class="c1">// edges: undefined,    </span>
@@ -9706,6 +9708,11 @@
 </li>
 <li><code>columns</code>, <code>rows</code> : Cut texture in <code>columns</code> x <code>rows</code> grids</li>
 <li><code>edgeWidth</code>, <code>edgeHeight</code> : Padding around piece.</li>
+<li><code>useDynamicTexture</code> : Generate frame of pieces on <a href="../dynamic-texture/">dynamic texture</a> or <a href="../canvas-texture/">canvas texture</a>.<ul>
+<li><code>true</code> : Generate frame of pieces on <a href="../dynamic-texture/">dynamic texture</a>. Default value.</li>
+<li><code>false</code> : Generate frame of pieces on <a href="../canvas-texture/">canvas texture</a>.</li>
+</ul>
+</li>
 <li><code>drawShapeCallback</code> : Callback of creating piece shape<ul>
 <li><code>undefined</code> : Use default piece shape.</li>
 <li>A function object

@@ -9,6 +9,7 @@ Cut image into pieces for jigsaw application.
 
 - [Create pieces](https://codepen.io/rexrainbow/pen/NWegLLK)
 - [Custom piece shape](https://codepen.io/rexrainbow/pen/yLGoVxz)
+- [Drag drop with pixelPerfect](https://codepen.io/rexrainbow/pen/dyaLoVd)
 
 ## Usage
 
@@ -80,6 +81,7 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
     rows: ,
     edgeWidth: , 
     edgeHeight: ,
+    useDynamicTexture: true,
 
     // drawShapeCallback: undefined,
     // edges: undefined,    
@@ -100,6 +102,9 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
     - `undefined` : Use `'gameObjects.texture.key' + '_pieces'` as texture key.
 - `columns`, `rows` : Cut texture in `columns` x `rows` grids
 - `edgeWidth`, `edgeHeight` : Padding around piece.
+- `useDynamicTexture` : Generate frame of pieces on [dynamic texture](dynamic-texture.md) or [canvas texture](canvas-texture.md).
+    - `true` : Generate frame of pieces on [dynamic texture](dynamic-texture.md). Default value.
+    - `false` : Generate frame of pieces on [canvas texture](canvas-texture.md).
 - `drawShapeCallback` : Callback of creating piece shape
     - `undefined` : Use default piece shape.
     - A function object
