@@ -14,6 +14,23 @@ class Demo extends Phaser.Scene {
 
     create() {
         var pieces = CreatePieces(this, 'classroom', 500, 400);
+
+        for (var i = 0, cnt = pieces.length; i < cnt; i++) {
+            let piece = pieces[i];
+            piece.preFX.setPadding(2);
+            piece.preFX.addGlow(0xff0000, 2, 0);
+
+            piece
+                .setInteractive({
+                    draggable: true,
+                    pixelPerfect: true
+                })
+                .on('drag', function (pointer, dragX, dragY) {
+                    piece.setPosition(dragX, dragY);
+                    piece.scene.children.bringToTop(piece);
+                })
+        }
+
     }
 
     update() { }
@@ -34,21 +51,6 @@ var CreatePieces = function (scene, key, x, y) {
         edgeWidth: 15, edgeHeight: 15,
         useDynamicTexture: false
     });
-
-    for (var i = 0, cnt = pieces.length; i < cnt; i++) {
-        let piece = pieces[i];
-        piece.preFX.setPadding(2);
-        piece.preFX.addGlow(0xff0000, 2, 0);
-
-        piece
-            .setInteractive({ pixelPerfect: true })
-            .on('pointerover', function () {
-                piece.setAlpha(0.5)
-            })
-            .on('pointerout', function () {
-                piece.setAlpha(1)
-            })
-    }
 
     sourceImage.destroy()
 

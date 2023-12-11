@@ -414,7 +414,8 @@
     if (textureManager.exists(key)) {
       textureManager.remove(key);
     }
-    return textureManager[useDynamicTexture ? 'addDynamicTexture' : 'createCanvas'](key, width, height);
+    var methodName = useDynamicTexture ? 'addDynamicTexture' : 'createCanvas';
+    return textureManager[methodName](key, width, height);
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
