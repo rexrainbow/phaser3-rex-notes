@@ -112,7 +112,9 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
         function(graphics, width, height, edgeWidth, edgeHeight, edgeMode) {
         }
         ```
-        - `graphics` : Draw piece shape on a [Graphics game object](graphics.md)
+        - `graphics` : [Graphics game object](graphics.md), or canvas.
+            - Draw piece shape on a [Graphics game object](graphics.md), if `useDynamicTexture` is set to `true`
+            - Draw piece shape on canvas, if `useDynamicTexture` is set to `false`
         - `width`, `height` : Frame size of this piece
         - `edgeWidth`, `edgeHeigh` : Padding around piece.
         - `edgeMode` :
