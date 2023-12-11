@@ -1,8 +1,9 @@
 import FrameManager from '../../../texture/framemanager/FrameManager.js';
 import RandomPieceEdges from './RandomPieceEdges.js';
+import DefaultDrawShapeCallback from './jigsawpiece/DefaultDrawShapeCallback.js';
 import JigsawPieceRenderTexurue from './jigsawpiece/JigsawPieceRenderTexurue.js';
-import JigsawPieceCanvas from './jigsawpiece/JigsawPieceCanvas.js';
-
+import DrawCanvasPieceCallback from './jigsawpiece/DrawCanvasPieceCallback.js';
+import NOOP from '../../../utils/object/NOOP.js';
 
 var DefaultGetFrameNameCallback = function (c, r) {
     return `${c},${r}`;
@@ -15,7 +16,7 @@ var GenerateFrames = function (scene, {
     framePadding = 1,
     edgeWidth, edgeHeight,
     edges,
-    drawShapeCallback,
+    drawShapeCallback = DefaultDrawShapeCallback,
     useDynamicTexture = true,
     getFrameNameCallback = DefaultGetFrameNameCallback
 }) {
@@ -56,29 +57,56 @@ var GenerateFrames = function (scene, {
         rows: rows,
         useDynamicTexture: useDynamicTexture,
         fillColor: 0x888888,
-    })
-
-    var JigsawPieceClass = (useDynamicTexture) ? JigsawPieceRenderTexurue : JigsawPieceCanvas;
-
-    var sample = new JigsawPieceClass(scene, {
-        width: frameWidth, height: frameHeight,
-        edgeWidth: edgeWidth, edgeHeight: edgeHeight,
-        key: sourceKey,
-        drawShapeCallback
     });
+
+    var sample, sourceImage;
+
+    if (useDynamicTexture) {
+        // Use dynamic-texture
+        sample = new JigsawPieceRenderTexurue(scene, {
+            width: frameWidth, height: frameHeight,
+            edgeWidth: edgeWidth, edgeHeight: edgeHeight,
+            key: sourceKey,
+            drawShapeCallback
+        });
+    } else {
+        // Use canvas-texture
+        sourceImage = sourceFrame.source.image;
+        // Align interface of canvas-context with graphics
+        frameManager.context.clear = NOOP;
+        frameManager.context.fillPath = NOOP;
+    }
 
     var startX = -edgeWidth,
         startY = -edgeHeight;
     var scrollX = startX,
         scrollY = startY;
+    var frameName, edgeMode;
     for (var r = 0; r < rows; r++) {
         for (var c = 0; c < columns; c++) {
-            sample.drawPiece({
-                scrollX, scrollY,
-                edgeMode: edges[c][r]
-            });
+            frameName = getFrameNameCallback(c, r);
+            edgeMode = edges[c][r];
 
-            frameManager.paste(getFrameNameCallback(c, r), sample);
+            if (useDynamicTexture) {
+                // Use dynamic-texture
+                sample.drawPiece({ scrollX, scrollY, edgeMode });
+                frameManager.paste(frameName, sample);
+
+            } else {
+                // Use canvas-texture
+                frameManager.draw(frameName, function (canvas, context, frameSize) {
+                    DrawCanvasPieceCallback(
+                        sourceImage,
+                        context,
+                        scrollX, scrollY,
+                        frameWidth, frameHeight,
+                        edgeWidth, edgeHeight,
+                        edgeMode,
+                        drawShapeCallback
+                    );
+                });
+
+            }
 
             scrollX += frameWidth - (edgeWidth * 2);
         }
@@ -89,7 +117,16 @@ var GenerateFrames = function (scene, {
 
     frameManager.updateTexture();
 
-    sample.destroy();
+    if (useDynamicTexture) {
+        // Use dynamic-texture
+        sample.destroy();
+    } else {
+        // Use canvas-texture
+        sourceImage = null;
+        delete frameManager.context.clear;
+        delete frameManager.context.fillPath;
+    }
+
     frameManager.destroy();
 
     return {
