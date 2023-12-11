@@ -635,58 +635,6 @@
     return edges;
   };
 
-  var JigsawPieceBase = function JigsawPieceBase(GOClass) {
-    var BassClass = /*#__PURE__*/function (_GOClass) {
-      _inherits(BassClass, _GOClass);
-      var _super = _createSuper(BassClass);
-      function BassClass() {
-        _classCallCheck(this, BassClass);
-        return _super.apply(this, arguments);
-      }
-      _createClass(BassClass, [{
-        key: "init",
-        value: function init(config) {
-          this.setBaseKey(config.key);
-          this.setDrawShapeCallback(config.drawShapeCallback);
-          var edgeWidth = config.edgeWidth;
-          if (edgeWidth === undefined) {
-            edgeWidth = Math.floor(config.width / 7);
-          }
-          this.edgeWidth = edgeWidth;
-          var edgeHeight = config.edgeHeight;
-          if (edgeHeight === undefined) {
-            edgeHeight = Math.floor(config.height / 7);
-          }
-          this.edgeHeight = edgeHeight;
-          return this;
-        }
-      }, {
-        key: "setBaseKey",
-        value: function setBaseKey(key) {
-          this.sourceKey = key;
-          return this;
-        }
-      }, {
-        key: "setDrawShapeCallback",
-        value: function setDrawShapeCallback(callback) {
-          this.drawShapeCallback = callback;
-          return this;
-        }
-
-        // Override
-      }, {
-        key: "drawPiece",
-        value: function drawPiece(_ref) {
-          _ref.scrollX;
-            _ref.scrollY;
-            _ref.edgeMode;
-        }
-      }]);
-      return BassClass;
-    }(GOClass);
-    return BassClass;
-  };
-
   var DegToRad = Phaser.Math.DegToRad;
   var RAD0 = DegToRad(0);
   var RAD90 = DegToRad(90);
@@ -748,6 +696,58 @@
     graphics.fillPath();
   };
 
+  var JigsawPieceBase = function JigsawPieceBase(GOClass) {
+    var BassClass = /*#__PURE__*/function (_GOClass) {
+      _inherits(BassClass, _GOClass);
+      var _super = _createSuper(BassClass);
+      function BassClass() {
+        _classCallCheck(this, BassClass);
+        return _super.apply(this, arguments);
+      }
+      _createClass(BassClass, [{
+        key: "init",
+        value: function init(config) {
+          this.setBaseKey(config.key);
+          this.setDrawShapeCallback(config.drawShapeCallback);
+          var edgeWidth = config.edgeWidth;
+          if (edgeWidth === undefined) {
+            edgeWidth = Math.floor(config.width / 7);
+          }
+          this.edgeWidth = edgeWidth;
+          var edgeHeight = config.edgeHeight;
+          if (edgeHeight === undefined) {
+            edgeHeight = Math.floor(config.height / 7);
+          }
+          this.edgeHeight = edgeHeight;
+          return this;
+        }
+      }, {
+        key: "setBaseKey",
+        value: function setBaseKey(key) {
+          this.sourceKey = key;
+          return this;
+        }
+      }, {
+        key: "setDrawShapeCallback",
+        value: function setDrawShapeCallback(callback) {
+          this.drawShapeCallback = callback;
+          return this;
+        }
+
+        // Override
+      }, {
+        key: "drawPiece",
+        value: function drawPiece(_ref) {
+          _ref.scrollX;
+            _ref.scrollY;
+            _ref.edgeMode;
+        }
+      }]);
+      return BassClass;
+    }(GOClass);
+    return BassClass;
+  };
+
   var ConvertEdgeMode = function ConvertEdgeMode(edgeMode) {
     if (typeof edgeMode === 'string') {
       edgeMode = edgeMode.split('').map(function (x) {
@@ -770,9 +770,6 @@
     function JigsawPieceRenderTexurue(scene, config) {
       var _this;
       _classCallCheck(this, JigsawPieceRenderTexurue);
-      if (!config.drawShapeCallback) {
-        config.drawShapeCallback = DefaultDrawShapeCallback;
-      }
       _this = _super.call(this, scene, 0, 0, config.width, config.height);
       _this.init(config);
       var maskGraphics = scene.make.graphics({
@@ -816,457 +813,26 @@
     return JigsawPieceRenderTexurue;
   }(JigsawPieceBase(RenderTexture));
 
-  // copy from Phaser.GameObjects.Text
+  var DrawCanvasPieceCallback = function DrawCanvasPieceCallback(image, context, sx, sy, width, height, edgeWidth, edgeHeight, edgeMode, drawShapeCallback) {
+    edgeMode = ConvertEdgeMode(edgeMode);
 
-  var Utils = Phaser.Renderer.WebGL.Utils;
-  var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
-    if (src.dirty) {
-      src.updateTexture();
-      src.dirty = false;
-    }
-    if (src.width === 0 || src.height === 0) {
-      return;
-    }
-    camera.addToRenderList(src);
-    var frame = src.frame;
-    var width = frame.width;
-    var height = frame.height;
-    var getTint = Utils.getTintAppendFloatAlpha;
-    var pipeline = renderer.pipelines.set(src.pipeline, src);
-    var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
-    renderer.pipelines.preBatch(src);
-    pipeline.batchTexture(src, frame.glTexture, width, height, src.x, src.y, width / src.resolution, height / src.resolution, src.scaleX, src.scaleY, src.rotation, src.flipX, src.flipY, src.scrollFactorX, src.scrollFactorY, src.displayOriginX, src.displayOriginY, 0, 0, width, height, getTint(src.tintTopLeft, camera.alpha * src._alphaTL), getTint(src.tintTopRight, camera.alpha * src._alphaTR), getTint(src.tintBottomLeft, camera.alpha * src._alphaBL), getTint(src.tintBottomRight, camera.alpha * src._alphaBR), src.tintFill, 0, 0, camera, parentMatrix, false, textureUnit);
-    renderer.pipelines.postBatch(src);
+    // Already translate to dx, dy
+
+    // context.save();
+
+    context.clearRect(0, 0, width, height);
+    drawShapeCallback(context, width, height, edgeWidth, edgeHeight, edgeMode);
+    context.clip();
+    context.drawImage(image,
+    // image
+    sx, sy, width, height, 0, 0, width, height);
+
+    // context.restore();
   };
-
-  // copy from Phaser.GameObjects.Text
-
-  var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
-    if (src.dirty) {
-      src.updateTexture();
-      src.dirty = false;
-    }
-    if (src.width === 0 || src.height === 0) {
-      return;
-    }
-    camera.addToRenderList(src);
-    renderer.batchSprite(src, src.frame, camera, parentMatrix);
-  };
-
-  var Render = {
-    renderWebGL: WebGLRenderer,
-    renderCanvas: CanvasRenderer
-  };
-
-  var Color = Phaser.Display.Color;
-  var CanvasMethods = {
-    clear: function clear() {
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.dirty = true;
-      return this;
-    },
-    fill: function fill(color) {
-      this.context.fillStyle = color;
-      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.dirty = true;
-      return this;
-    },
-    drawFrame: function drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
-      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
-      if (!textureFrame) {
-        return this;
-      }
-      var frameWidth = textureFrame.cutWidth,
-        frameHeight = textureFrame.cutHeight;
-      if (dx === undefined) {
-        dx = 0;
-      }
-      if (dy === undefined) {
-        dy = 0;
-      }
-      if (dWidth === undefined) {
-        dWidth = frameWidth;
-      }
-      if (dHeight === undefined) {
-        dHeight = frameHeight;
-      }
-      if (sxOffset === undefined) {
-        sxOffset = 0;
-      }
-      if (syOffset === undefined) {
-        syOffset = 0;
-      }
-      if (sWidth === undefined) {
-        sWidth = frameWidth;
-      }
-      if (sHeight === undefined) {
-        sHeight = frameHeight;
-      }
-      var sx = textureFrame.cutX + sxOffset;
-      var sy = textureFrame.cutY + syOffset;
-      this.context.drawImage(textureFrame.source.image,
-      // image
-      sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      this.dirty = true;
-      return this;
-    },
-    getDataURL: function getDataURL(type, encoderOptions) {
-      return this.canvas.toDataURL(type, encoderOptions);
-    },
-    getPixel: function getPixel(x, y, out) {
-      if (out === undefined) {
-        out = new Color();
-      }
-      var rgb = this.context.getImageData(x, y, 1, 1);
-      out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
-      return out;
-    },
-    setPixel: function setPixel(x, y, r, g, b, a) {
-      if (typeof r !== 'number') {
-        var color = r;
-        r = color.red;
-        g = color.green;
-        b = color.blue;
-        a = color.alpha;
-      }
-      if (a === undefined) {
-        a = r !== 0 || g !== 0 || b !== 0 ? 255 : 0;
-      }
-      var imgData = this.context.createImageData(1, 1);
-      imgData.data[0] = r;
-      imgData.data[1] = g;
-      imgData.data[2] = b;
-      imgData.data[3] = a;
-      this.context.putImageData(imgData, x, y);
-      this.dirty = true;
-      return this;
-    }
-  };
-
-  var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.sys.textures;
-    var renderer = scene.renderer;
-    if (x === undefined) {
-      x = 0;
-    }
-    if (y === undefined) {
-      y = 0;
-    }
-    if (width === undefined) {
-      width = srcCanvas.width;
-    }
-    if (height === undefined) {
-      height = srcCanvas.height;
-    }
-    var texture;
-    if (textures.exists(key)) {
-      texture = textures.get(key);
-    } else {
-      texture = textures.createCanvas(key, width, height);
-    }
-    var destCanvas = texture.getSourceImage();
-    if (destCanvas.width !== width) {
-      destCanvas.width = width;
-    }
-    if (destCanvas.height !== height) {
-      destCanvas.height = height;
-    }
-    var destCtx = destCanvas.getContext('2d', {
-      willReadFrequently: true
-    });
-    destCtx.clearRect(0, 0, width, height);
-    destCtx.drawImage(srcCanvas, x, y, width, height);
-    if (renderer.gl && texture) {
-      renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
-    }
-  };
-
-  var TextureMethods = {
-    updateTexture: function updateTexture(callback, scope) {
-      if (callback) {
-        if (scope) {
-          callback.call(scope, this.canvas, this.context);
-        } else {
-          callback(this.canvas, this.context);
-        }
-      }
-      if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
-        this.frame.setSize(this.canvas.width, this.canvas.height);
-      }
-      if (this.renderer && this.renderer.gl) {
-        this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
-        this.frame.glTexture = this.frame.source.glTexture;
-      }
-      this.dirty = false;
-      var input = this.input;
-      if (input && !input.customHitArea) {
-        input.hitArea.width = this.width;
-        input.hitArea.height = this.height;
-      }
-      return this;
-    },
-    generateTexture: function generateTexture(key, x, y, width, height) {
-      var srcCanvas = this.canvas;
-      if (width === undefined) {
-        width = srcCanvas.width;
-      } else {
-        width *= this.resolution;
-      }
-      if (height === undefined) {
-        height = srcCanvas.height;
-      } else {
-        height *= this.resolution;
-      }
-      CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
-      return this;
-    },
-    loadTexture: function loadTexture(key, frame) {
-      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
-      if (!textureFrame) {
-        return this;
-      }
-      if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
-        this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
-      } else {
-        this.clear();
-      }
-      this.drawFrame(key, frame);
-      this.dirty = true;
-      return this;
-    }
-  };
-
-  var MinVersion = 60;
-  var IsChecked = false;
-  var CheckP3Version = function CheckP3Version(minVersion) {
-    if (IsChecked) {
-      return;
-    }
-    if (minVersion === undefined) {
-      minVersion = MinVersion;
-    }
-    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
-    if (currentVersion < minVersion) {
-      console.error("Minimum supported version : 3.".concat(minVersion));
-    }
-    IsChecked = true;
-  };
-
-  CheckP3Version();
-  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
-  var GameObject = Phaser.GameObjects.GameObject;
-  var Canvas = /*#__PURE__*/function (_GameObject) {
-    _inherits(Canvas, _GameObject);
-    var _super = _createSuper(Canvas);
-    function Canvas(scene, x, y, width, height) {
-      var _this;
-      _classCallCheck(this, Canvas);
-      if (x === undefined) {
-        x = 0;
-      }
-      if (y === undefined) {
-        y = 0;
-      }
-      if (width === undefined) {
-        width = 1;
-      }
-      if (height === undefined) {
-        height = 1;
-      }
-      _this = _super.call(this, scene, 'rexCanvas');
-      _this.renderer = scene.sys.game.renderer;
-      _this.resolution = 1;
-      _this._width = width;
-      _this._height = height;
-      width = Math.max(Math.ceil(width * _this.resolution), 1);
-      height = Math.max(Math.ceil(height * _this.resolution), 1);
-      _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
-      _this.context = _this.canvas.getContext('2d', {
-        willReadFrequently: true
-      });
-      _this.dirty = false;
-      _this.setPosition(x, y);
-      _this.setOrigin(0.5, 0.5);
-      _this.initPipeline();
-      _this.initPostPipeline(true);
-      _this._crop = _this.resetCropObject();
-
-      //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
-
-      //  Get the frame
-      _this.frame = _this.texture.get();
-
-      //  Set the resolution
-      _this.frame.source.resolution = _this.resolution;
-      if (_this.renderer && _this.renderer.gl) {
-        //  Clear the default 1x1 glTexture, as we override it later
-        _this.renderer.deleteTexture(_this.frame.source.glTexture);
-        _this.frame.source.glTexture = null;
-      }
-      _this.dirty = true;
-      return _this;
-    }
-    _createClass(Canvas, [{
-      key: "preDestroy",
-      value: function preDestroy() {
-        CanvasPool.remove(this.canvas);
-        this.texture.destroy();
-        this.canvas = null;
-        this.context = null;
-      }
-    }, {
-      key: "width",
-      get: function get() {
-        return this._width;
-      },
-      set: function set(value) {
-        this.setSize(value, this._height);
-      }
-    }, {
-      key: "height",
-      get: function get() {
-        return this._height;
-      },
-      set: function set(value) {
-        this.setSize(this._width, value);
-      }
-    }, {
-      key: "setCanvasSize",
-      value: function setCanvasSize(width, height) {
-        if (this._width === width && this._height === height) {
-          return this;
-        }
-        this._width = width;
-        this._height = height;
-        this.updateDisplayOrigin();
-        width = Math.max(Math.ceil(width * this.resolution), 1);
-        height = Math.max(Math.ceil(height * this.resolution), 1);
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.frame.setSize(width, height);
-        this.dirty = true;
-        return this;
-      }
-
-      // setSize might be override
-    }, {
-      key: "setSize",
-      value: function setSize(width, height) {
-        this.setCanvasSize(width, height);
-        return this;
-      }
-    }, {
-      key: "displayWidth",
-      get: function get() {
-        return this.scaleX * this._width;
-      },
-      set: function set(value) {
-        this.scaleX = value / this._width;
-      }
-    }, {
-      key: "displayHeight",
-      get: function get() {
-        return this.scaleY * this._height;
-      },
-      set: function set(value) {
-        this.scaleY = value / this._height;
-      }
-    }, {
-      key: "setDisplaySize",
-      value: function setDisplaySize(width, height) {
-        this.displayWidth = width;
-        this.displayHeight = height;
-        return this;
-      }
-    }, {
-      key: "getCanvas",
-      value: function getCanvas(readOnly) {
-        if (!readOnly) {
-          this.dirty = true;
-        }
-        return this.canvas;
-      }
-    }, {
-      key: "getContext",
-      value: function getContext(readOnly) {
-        if (!readOnly) {
-          this.dirty = true;
-        }
-        return this.context;
-      }
-    }, {
-      key: "needRedraw",
-      value: function needRedraw() {
-        this.dirty = true;
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        this.setSize(width, height);
-        return this;
-      }
-    }]);
-    return Canvas;
-  }(GameObject);
-  var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.PostPipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
   var NOOP = function NOOP() {
     //  NOOP
   };
-
-  var JigsawPieceCanvas = /*#__PURE__*/function (_JigsawPieceBase) {
-    _inherits(JigsawPieceCanvas, _JigsawPieceBase);
-    var _super = _createSuper(JigsawPieceCanvas);
-    function JigsawPieceCanvas(scene, config) {
-      var _this;
-      _classCallCheck(this, JigsawPieceCanvas);
-      if (!config.drawShapeCallback) {
-        config.drawShapeCallback = DefaultDrawShapeCallback;
-      }
-      _this = _super.call(this, scene, 0, 0, config.width, config.height);
-      _this.init(config);
-
-      // context does not have clear, fillPath method
-      var context = _this.context;
-      context.clear = NOOP;
-      context.fillPath = NOOP;
-      return _this;
-    }
-    _createClass(JigsawPieceCanvas, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene || this.ignoreDestroy) {
-          return;
-        }
-        var context = this.context;
-        delete context.clear;
-        delete context.fillPath;
-        _get(_getPrototypeOf(JigsawPieceCanvas.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
-      key: "drawPiece",
-      value: function drawPiece(_ref) {
-        var scrollX = _ref.scrollX,
-          scrollY = _ref.scrollY,
-          edgeMode = _ref.edgeMode;
-        edgeMode = ConvertEdgeMode(edgeMode);
-        var canvasWidth = this.width,
-          canvasHeight = this.height;
-        this.clear();
-        this.context.save();
-        this.drawShapeCallback(this.context, canvasWidth, canvasHeight, this.edgeWidth, this.edgeHeight, edgeMode);
-        this.context.clip();
-        this.drawFrame(this.sourceKey, undefined, 0, 0, canvasWidth, canvasHeight, scrollX, scrollY, canvasWidth, canvasHeight);
-        this.context.restore();
-        return this;
-      }
-    }]);
-    return JigsawPieceCanvas;
-  }(JigsawPieceBase(Canvas));
 
   var DefaultGetFrameNameCallback = function DefaultGetFrameNameCallback(c, r) {
     return "".concat(c, ",").concat(r);
@@ -1281,7 +847,8 @@
       edgeWidth = _ref.edgeWidth,
       edgeHeight = _ref.edgeHeight,
       edges = _ref.edges,
-      drawShapeCallback = _ref.drawShapeCallback,
+      _ref$drawShapeCallbac = _ref.drawShapeCallback,
+      drawShapeCallback = _ref$drawShapeCallbac === void 0 ? DefaultDrawShapeCallback : _ref$drawShapeCallbac,
       _ref$useDynamicTextur = _ref.useDynamicTexture,
       useDynamicTexture = _ref$useDynamicTextur === void 0 ? true : _ref$useDynamicTextur,
       _ref$getFrameNameCall = _ref.getFrameNameCallback,
@@ -1317,34 +884,62 @@
       useDynamicTexture: useDynamicTexture,
       fillColor: 0x888888
     });
-    var JigsawPieceClass = useDynamicTexture ? JigsawPieceRenderTexurue : JigsawPieceCanvas;
-    var sample = new JigsawPieceClass(scene, {
-      width: frameWidth,
-      height: frameHeight,
-      edgeWidth: edgeWidth,
-      edgeHeight: edgeHeight,
-      key: sourceKey,
-      drawShapeCallback: drawShapeCallback
-    });
+    var sample, sourceImage;
+    if (useDynamicTexture) {
+      // Use dynamic-texture
+      sample = new JigsawPieceRenderTexurue(scene, {
+        width: frameWidth,
+        height: frameHeight,
+        edgeWidth: edgeWidth,
+        edgeHeight: edgeHeight,
+        key: sourceKey,
+        drawShapeCallback: drawShapeCallback
+      });
+    } else {
+      // Use canvas-texture
+      sourceImage = sourceFrame.source.image;
+      // Align interface of canvas-context with graphics
+      frameManager.context.clear = NOOP;
+      frameManager.context.fillPath = NOOP;
+    }
     var startX = -edgeWidth,
       startY = -edgeHeight;
     var scrollX = startX,
       scrollY = startY;
+    var frameName, edgeMode;
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < columns; c++) {
-        sample.drawPiece({
-          scrollX: scrollX,
-          scrollY: scrollY,
-          edgeMode: edges[c][r]
-        });
-        frameManager.paste(getFrameNameCallback(c, r), sample);
+        frameName = getFrameNameCallback(c, r);
+        edgeMode = edges[c][r];
+        if (useDynamicTexture) {
+          // Use dynamic-texture
+          sample.drawPiece({
+            scrollX: scrollX,
+            scrollY: scrollY,
+            edgeMode: edgeMode
+          });
+          frameManager.paste(frameName, sample);
+        } else {
+          // Use canvas-texture
+          frameManager.draw(frameName, function (canvas, context, frameSize) {
+            DrawCanvasPieceCallback(sourceImage, context, scrollX, scrollY, frameWidth, frameHeight, edgeWidth, edgeHeight, edgeMode, drawShapeCallback);
+          });
+        }
         scrollX += frameWidth - edgeWidth * 2;
       }
       scrollX = startX;
       scrollY += frameHeight - edgeHeight * 2;
     }
     frameManager.updateTexture();
-    sample.destroy();
+    if (useDynamicTexture) {
+      // Use dynamic-texture
+      sample.destroy();
+    } else {
+      // Use canvas-texture
+      sourceImage = null;
+      delete frameManager.context.clear;
+      delete frameManager.context.fillPath;
+    }
     frameManager.destroy();
     return {
       sourceKey: sourceKey,
