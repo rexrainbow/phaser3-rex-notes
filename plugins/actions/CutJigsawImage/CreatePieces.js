@@ -9,6 +9,7 @@ var CreatePieces = function (gameObject, {
     edgeWidth, edgeHeight,
     drawShapeCallback,
     edges,
+    useDynamicTexture = true,
 
     createImageCallback,
     ImageClass = DefaultImageClass,
@@ -37,6 +38,7 @@ var CreatePieces = function (gameObject, {
         edgeWidth, edgeHeight,
         edges,
         drawShapeCallback,
+        useDynamicTexture,
     })
 
     piecesKey = result.destinationKey;

@@ -6,7 +6,10 @@ const RAD270 = DegToRad(270);
 const RAD360 = DegToRad(360);
 
 var DefaultDrawShapeCallback = function (
+    // graphics for dynamic texture
+    // context for canvas texture
     graphics,
+
     width, height,
     edgeWidth, edgeHeight,
     edgeMode
@@ -19,6 +22,7 @@ var DefaultDrawShapeCallback = function (
         bottomY = height - edgeHeight;
 
     graphics.clear();
+
     graphics.beginPath();
 
     graphics.moveTo(leftX, topY);
@@ -66,6 +70,7 @@ var DefaultDrawShapeCallback = function (
     graphics.lineTo(leftX, topY);
 
     graphics.closePath();
+
     graphics.fillPath();
 }
 

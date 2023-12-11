@@ -1,6 +1,7 @@
 import FrameManager from '../../../texture/framemanager/FrameManager.js';
 import RandomPieceEdges from './RandomPieceEdges.js';
-import JigsawPiece from './jigsawpiece/JigsawPiece.js';
+import JigsawPieceRenderTexurue from './jigsawpiece/JigsawPieceRenderTexurue.js';
+import JigsawPieceCanvas from './jigsawpiece/JigsawPieceCanvas.js';
 
 
 var DefaultGetFrameNameCallback = function (c, r) {
@@ -15,6 +16,7 @@ var GenerateFrames = function (scene, {
     edgeWidth, edgeHeight,
     edges,
     drawShapeCallback,
+    useDynamicTexture = true,
     getFrameNameCallback = DefaultGetFrameNameCallback
 }) {
 
@@ -52,11 +54,13 @@ var GenerateFrames = function (scene, {
         cellPadding: framePadding,
         columns: columns,
         rows: rows,
-        useDynamicTexture: true,
+        useDynamicTexture: useDynamicTexture,
         fillColor: 0x888888,
     })
 
-    var sample = new JigsawPiece(scene, {
+    var JigsawPieceClass = (useDynamicTexture) ? JigsawPieceRenderTexurue : JigsawPieceCanvas;
+
+    var sample = new JigsawPieceClass(scene, {
         width: frameWidth, height: frameHeight,
         edgeWidth: edgeWidth, edgeHeight: edgeHeight,
         key: sourceKey,
@@ -82,6 +86,8 @@ var GenerateFrames = function (scene, {
         scrollX = startX;
         scrollY += frameHeight - (edgeHeight * 2);
     }
+
+    frameManager.updateTexture();
 
     sample.destroy();
     frameManager.destroy();

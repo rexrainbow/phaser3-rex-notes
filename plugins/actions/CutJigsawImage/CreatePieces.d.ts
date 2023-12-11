@@ -12,6 +12,7 @@ declare namespace CreatePieces {
 
         drawShapeCallback?: DrawShapeCallbackType,
         edges?: GenerateFrames.EdgesType,
+        useDynamicTexture?: boolean,
 
         createImageCallback?: (
             scene: Phaser.Scene,

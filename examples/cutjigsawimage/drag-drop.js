@@ -42,10 +42,15 @@ var CreatePieces = function (scene, key, x, y) {
 
         piece
             .setInteractive({ pixelPerfect: true })
-            .on('pointerdown', function () {
-                debugger;
+            .on('pointerover', function () {
+                piece.setAlpha(0.5)
+            })
+            .on('pointerout', function () {
+                piece.setAlpha(1)
             })
     }
+
+    sourceImage.destroy()
 
     return pieces;
 }

@@ -27,6 +27,7 @@ declare namespace GenerateFrames {
         edgeWidth?: number, edgeHeight?: number,
         edges?: EdgesType,
         drawShapeCallback?: DrawShapeCallbackType,
+        useDynamicTexture?: boolean,
     }
 
     interface IResult {

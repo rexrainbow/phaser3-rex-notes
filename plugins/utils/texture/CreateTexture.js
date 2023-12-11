@@ -13,7 +13,9 @@ var CreateTexture = function (game, key, width, height, useDynamicTexture) {
         textureManager.remove(key);
     }
 
-    return textureManager[(useDynamicTexture) ? 'addDynamicTexture' : 'createCanvas'](key, width, height);
+    var methodName = (useDynamicTexture) ? 'addDynamicTexture' : 'createCanvas';
+
+    return textureManager[methodName](key, width, height);
 }
 
 export default CreateTexture;
