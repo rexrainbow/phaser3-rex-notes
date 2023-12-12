@@ -3,7 +3,7 @@ Sample JigsawPiece, draw to FrameManager
 */
 
 import JigsawPieceBase from './JigsawPieceBase.js';
-import Canvas from '../../../../gameobjects/canvas/canvasbase/Canvas.js'
+import Canvas from '../../../../gameobjects/canvas/canvasbase/Canvas.js';
 import DefaultDrawShapeCallback from './DefaultDrawShapeCallback.js';
 import ConvertEdgeMode from './ConvertEdgeMode.js';
 import NOOP from '../../../../utils/object/NOOP.js';
