@@ -35,8 +35,13 @@ var CreateUI = function (scene, item) {
         .addBackground(background)
         .add(title, { padding: { bottom: 10 } })
         .add(item)
-        // All children are added to container(sizer), put background to bottom
-        .sendChildToBack(background)
+        
+        // Solution A:
+        // All children are added to container(sizer), send background to back
+        //.sendChildToBack(background)
+  
+        // Solution B:
+        .bringChildToTop(item)
 }
 
 var config = {
