@@ -782,6 +782,14 @@ sizer.setChildAlpha(child, alpha);
     ```javascript
     sizer.moveDepthAbove(gameObject);
     ```
+- Bring a child of this sizer to top
+    ```javascript
+    sizer.bringChildToTop(gameObject);
+    ```
+- Send a child of this sizer to bottom
+    ```javascript
+    sizer.sendChildToBack(gameObject);
+    ```
 
 ### Scroll factor
 

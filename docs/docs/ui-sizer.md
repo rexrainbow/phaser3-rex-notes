@@ -17,7 +17,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - [DOM child](https://codepen.io/rexrainbow/pen/xxELGJb)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/vYWdBZQ)
 - [Drag drop child](https://codepen.io/rexrainbow/pen/YzEaRwd)
-- [Send background to back](https://codepen.io/rexrainbow/pen/gOqNbRr)
+- [Bring child to top](https://codepen.io/rexrainbow/pen/gOqNbRr)
 
 ## Usage
 
