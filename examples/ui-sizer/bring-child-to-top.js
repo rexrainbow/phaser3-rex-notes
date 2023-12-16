@@ -16,8 +16,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var items = [
-            { name: 'ItemA', item: this.rexUI.add.roundRectangle({ width: 200, height: 200, color: COLOR_DARK }) },
-            { name: 'ItemB', item: this.rexUI.add.roundRectangle({ width: 200, height: 200, color: COLOR_DARK }) },
+            { name: 'ItemA', item: CreateSingleGO(this) },
+            { name: 'ItemB', item: CreateSizerGO(this) },
         ]
         var ui = CreateUI(this, items)
             .setPosition(400, 300)
@@ -25,6 +25,19 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
+}
+
+var CreateSingleGO = function (scene) {
+    return scene.rexUI.add.roundRectangle({ width: 200, height: 200, color: COLOR_DARK })
+}
+
+var CreateSizerGO = function (scene) {
+    return scene.rexUI.add.label({
+        width: 200, height: 200,
+        background: scene.rexUI.add.roundRectangle({ color: COLOR_DARK }),
+        text: scene.add.text(0, 0, 'Label'),
+        align: 'center'
+    })
 }
 
 var CreateUI = function (scene, items) {
