@@ -770,6 +770,9 @@
     function JigsawPieceRenderTexurue(scene, config) {
       var _this;
       _classCallCheck(this, JigsawPieceRenderTexurue);
+      if (!config.drawShapeCallback) {
+        config.drawShapeCallback = DefaultDrawShapeCallback;
+      }
       _this = _super.call(this, scene, 0, 0, config.width, config.height);
       _this.init(config);
       var maskGraphics = scene.make.graphics({

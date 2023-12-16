@@ -1214,30 +1214,46 @@
       }
       return this;
     },
-    bringChildToTop: function bringChildToTop(gameObject) {
+    bringChildToTop: function bringChildToTop(child) {
+      var gameObjects;
+      if (child.isRexContainerLite) {
+        gameObjects = child.getAllChildren([child]);
+        SortGameObjectsByDepth(gameObjects, false);
+      } else {
+        gameObjects = [child];
+      }
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, true);
       var topChild = children[0];
-      if (topChild === gameObject) {
-        return this;
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (topChild === gameObject || topChild.displayList !== gameObject.displayList) {
+          continue;
+        }
+        topChild.displayList.moveAbove(gameObject, topChild);
+        topChild = gameObject;
       }
-      if (topChild.displayList !== gameObject.displayList) {
-        return this;
-      }
-      topChild.displayList.moveAbove(gameObject, topChild);
       return this;
     },
-    sendChildToBack: function sendChildToBack(gameObject) {
+    sendChildToBack: function sendChildToBack(child) {
+      var gameObjects;
+      if (child.isRexContainerLite) {
+        gameObjects = child.getAllChildren([child]);
+        SortGameObjectsByDepth(gameObjects, false);
+      } else {
+        gameObjects = [child];
+      }
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
       var bottomChild = children[0];
-      if (bottomChild === gameObject) {
-        return this;
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (bottomChild === gameObject || bottomChild.displayList !== gameObject.displayList) {
+          continue;
+        }
+        bottomChild.displayList.moveBelow(gameObject, bottomChild);
+        bottomChild = gameObject;
       }
-      if (bottomChild.displayList !== gameObject.displayList) {
-        return this;
-      }
-      bottomChild.displayList.moveBelow(gameObject, bottomChild);
       return this;
     }
   };
