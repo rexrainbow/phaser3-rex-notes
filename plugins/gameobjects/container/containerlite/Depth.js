@@ -1,4 +1,5 @@
 import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
+import FilterDisplayGameObjects from '../../../utils/system/FilterDisplayGameObjects.js';
 
 export default {
     setDepth(value, containerOnly) {
@@ -86,15 +87,17 @@ export default {
         var gameObjects;
         if (child.isRexContainerLite) {
             gameObjects = child.getAllChildren([child]);
-            SortGameObjectsByDepth(gameObjects, false);
+            gameObjects = FilterDisplayGameObjects(gameObjects);
+            gameObjects = SortGameObjectsByDepth(gameObjects, false);
         } else {
             gameObjects = [child];
         }
 
         var children = this.getAllChildren([this]);
-        SortGameObjectsByDepth(children, true);
+        children = FilterDisplayGameObjects(children);
+        children = SortGameObjectsByDepth(children, false);
+        var topChild = children[children.length - 1];
 
-        var topChild = children[0];
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
             var gameObject = gameObjects[i];
             if ((topChild === gameObject) ||
@@ -112,17 +115,18 @@ export default {
         var gameObjects;
         if (child.isRexContainerLite) {
             gameObjects = child.getAllChildren([child]);
-            SortGameObjectsByDepth(gameObjects, false);
+            gameObjects = FilterDisplayGameObjects(gameObjects);
+            gameObjects = SortGameObjectsByDepth(gameObjects, false);
         } else {
             gameObjects = [child];
         }
 
         var children = this.getAllChildren([this]);
-        SortGameObjectsByDepth(children, false);
-
-
+        children = FilterDisplayGameObjects(children);
+        children = SortGameObjectsByDepth(children, false);
         var bottomChild = children[0];
-        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+
+        for (var i = gameObjects.length - 1; i >= 0; i--) {
             var gameObject = gameObjects[i];
             if ((bottomChild === gameObject) ||
                 (bottomChild.displayList !== gameObject.displayList)) {

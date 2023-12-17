@@ -58,6 +58,8 @@ var CreateUI = function (scene, items) {
         ui.bringChildToTop(items[i].item);
     }
 
+    // ui.sendChildToBack(background)
+
     return ui;
 }
 
