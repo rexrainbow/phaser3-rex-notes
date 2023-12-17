@@ -76,6 +76,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
 
     var SHADOW = 'shadow';
     var SHADOW_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW);
+    var SHADOW_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, SHADOW, COLOR_PARAM);
     var SHADOW_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SHADOW);
 
     var STROKE = 'stroke';
@@ -137,6 +138,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     TagRegexSave.RE_STRIKETHROUGH_CLOSE = new RegExp(STRIKETHROUGH_CLOSE, 'i');
 
     TagRegexSave.RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
+    TagRegexSave.RE_SHADOW_OPENC = new RegExp(SHADOW_OPENC, 'i');
     TagRegexSave.RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
 
     TagRegexSave.RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
@@ -173,7 +175,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
         COLOR_OPEN, COLOR_CLOSE,
         UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE,
         STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE,
-        SHADOW_OPEN, SHADOW_CLOSE,
+        SHADOW_OPEN, SHADOW_OPENC, SHADOW_CLOSE,
         STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE,
         OFFSETY_OPEN, OFFSETY_CLOSE,
         IMAGE_OPEN, IMAGE_CLOSE,
