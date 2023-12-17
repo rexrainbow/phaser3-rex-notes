@@ -19037,16 +19037,23 @@
       descending = false;
     }
     var itemList;
-    var gameObject = gameObjects[0];
-    if (gameObject.displayList) {
-      // Inside a scene or a layer
-      itemList = gameObject.displayList; // displayList
-    } else if (gameObject.parentContainer) {
-      // Inside a container
-      itemList = gameObject.parentContainer.list; // array
-    } else {
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      var gameObject = gameObjects[i];
+      if (gameObject.displayList) {
+        // Inside a scene or a layer
+        itemList = gameObject.displayList; // displayList
+      } else if (gameObject.parentContainer) {
+        // Inside a container
+        itemList = gameObject.parentContainer.list; // array
+      }
+
+      if (itemList) {
+        break;
+      }
+    }
+    if (!itemList) {
       itemList = gameObject.scene.sys.displayList; // displayList
-      // ??       
+      // ??
     }
 
     if (itemList.depthSort) {

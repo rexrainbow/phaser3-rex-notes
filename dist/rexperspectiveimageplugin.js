@@ -759,16 +759,23 @@
       descending = false;
     }
     var itemList;
-    var gameObject = gameObjects[0];
-    if (gameObject.displayList) {
-      // Inside a scene or a layer
-      itemList = gameObject.displayList; // displayList
-    } else if (gameObject.parentContainer) {
-      // Inside a container
-      itemList = gameObject.parentContainer.list; // array
-    } else {
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      var gameObject = gameObjects[i];
+      if (gameObject.displayList) {
+        // Inside a scene or a layer
+        itemList = gameObject.displayList; // displayList
+      } else if (gameObject.parentContainer) {
+        // Inside a container
+        itemList = gameObject.parentContainer.list; // array
+      }
+
+      if (itemList) {
+        break;
+      }
+    }
+    if (!itemList) {
       itemList = gameObject.scene.sys.displayList; // displayList
-      // ??       
+      // ??
     }
 
     if (itemList.depthSort) {
@@ -1907,6 +1914,18 @@
     }
   };
 
+  var FilterDisplayGameObjects = function FilterDisplayGameObjects(gameObjects) {
+    return gameObjects.filter(function (gameObject) {
+      if (gameObject.displayList) {
+        // Inside a scene or a layer
+        return true;
+      } else if (gameObject.parentContainer) {
+        // Inside a container
+        return true;
+      }
+    });
+  };
+
   var Depth = {
     setDepth: function setDepth(value, containerOnly) {
       this.depth = value;
@@ -1985,13 +2004,15 @@
       var gameObjects;
       if (child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
-        SortGameObjectsByDepth(gameObjects, false);
+        gameObjects = FilterDisplayGameObjects(gameObjects);
+        gameObjects = SortGameObjectsByDepth(gameObjects, false);
       } else {
         gameObjects = [child];
       }
       var children = this.getAllChildren([this]);
-      SortGameObjectsByDepth(children, true);
-      var topChild = children[0];
+      children = FilterDisplayGameObjects(children);
+      children = SortGameObjectsByDepth(children, false);
+      var topChild = children[children.length - 1];
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         var gameObject = gameObjects[i];
         if (topChild === gameObject || topChild.displayList !== gameObject.displayList) {
@@ -2006,14 +2027,16 @@
       var gameObjects;
       if (child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
-        SortGameObjectsByDepth(gameObjects, false);
+        gameObjects = FilterDisplayGameObjects(gameObjects);
+        gameObjects = SortGameObjectsByDepth(gameObjects, false);
       } else {
         gameObjects = [child];
       }
       var children = this.getAllChildren([this]);
-      SortGameObjectsByDepth(children, false);
+      children = FilterDisplayGameObjects(children);
+      children = SortGameObjectsByDepth(children, false);
       var bottomChild = children[0];
-      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      for (var i = gameObjects.length - 1; i >= 0; i--) {
         var gameObject = gameObjects[i];
         if (bottomChild === gameObject || bottomChild.displayList !== gameObject.displayList) {
           continue;
