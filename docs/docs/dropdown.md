@@ -45,11 +45,11 @@ Drop down game object below another target game object.
     ```
 - Import class
     ```javascript
-    import DropDownBehavoir from 'phaser3-rex-plugins/plugins/dropdown.js';
+    import DropDownBehavior from 'phaser3-rex-plugins/plugins/dropdown.js';
     ```
 - Add drop-down behavior
     ```javascript
-    var dropDown = new DropDownBehavoir(gameObject, config);
+    var dropDown = new DropDownBehavior(gameObject, config);
     ```
 
 ### Create instance
