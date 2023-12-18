@@ -9,6 +9,7 @@ export default SetChildrenInteractive;
 declare namespace SetChildrenInteractive {
     interface IConfig {
         targets?: Phaser.GameObjects.GameObject[],
+        targetMode?: 'parent' | 'direct',
 
         dropZone?: boolean,
 
