@@ -21,6 +21,7 @@ var OnDown = function (pointer, localX, localY, event) {
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}down`,
         childrenInteractive.targetSizers,
+        childrenInteractive.targetMode,
         pointer.worldX, pointer.worldY,
         pointer, event
     );

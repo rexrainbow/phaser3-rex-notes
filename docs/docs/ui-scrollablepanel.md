@@ -646,6 +646,7 @@ Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [s
 
 ```javascript
 panel.setChildrenInteractive({
+    // targetMode: 'parent',
     targets: targetSizers,
 
     // dropZone: false,
@@ -665,7 +666,10 @@ panel.setChildrenInteractive({
 })
 ```
 
-- `targetSizers` : Array of target children-sizer.
+- `targetMode` : 
+    - `'parent'` : `targetSizers` is an array of hit-targrts' parentSizers. Will run hit-test on parentSizers first, then run hit-test on children of parentSizer. Default behavior.
+    - `'direct'` : `targetSizers` is an array of hit-targrts. Will run hit-test directly on these hit-targrts.
+- `targetSizers` : Array of hit-targrts' parentSizers, or array of hit-targrts. See `targetMode` parameter.
 - `dropZone` :
     - `true` : Enable [drop Zone](touchevents.md#drop-zone) on scrollable area.
     - `false` : Do nothing.

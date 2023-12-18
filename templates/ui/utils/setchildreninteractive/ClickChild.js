@@ -25,6 +25,7 @@ var ClickChild = function (config) {
             childrenInteractive.eventEmitter,
             `${childrenInteractive.eventNamePrefix}click`,
             childrenInteractive.targetSizers,
+            childrenInteractive.targetMode,
             pointer.worldX, pointer.worldY,
             pointer, event
         );

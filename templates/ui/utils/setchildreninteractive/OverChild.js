@@ -31,6 +31,7 @@ var OnMove = function (pointer, localX, localY, event) {
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}out`,
         childrenInteractive.targetSizers,
+        childrenInteractive.targetMode,
         preChild, undefined,
         pointer, event
     );
@@ -38,6 +39,7 @@ var OnMove = function (pointer, localX, localY, event) {
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}over`,
         childrenInteractive.targetSizers,
+        childrenInteractive.targetMode,
         child, undefined,
         pointer, event
     );
@@ -51,6 +53,7 @@ var OnOut = function (pointer, event) {
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}out`,
         childrenInteractive.targetSizers,
+        childrenInteractive.targetMode,
         child, undefined,
         pointer, event
     );

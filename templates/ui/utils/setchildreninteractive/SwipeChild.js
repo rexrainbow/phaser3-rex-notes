@@ -31,6 +31,7 @@ var SwipeChild = function (config) {
                 childrenInteractive.eventEmitter,
                 `${childrenInteractive.eventNamePrefix}swipe${dirName}`,
                 childrenInteractive.targetSizers,
+                childrenInteractive.targetMode,
                 swipe.worldX, swipe.worldY,
                 lastPointer
             );

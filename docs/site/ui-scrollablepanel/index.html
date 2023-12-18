@@ -10567,6 +10567,7 @@ User can inject it by</p>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this scrollable panel, to detect input events of children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// targetMode: &#39;parent&#39;,</span>
 <span class="w">    </span><span class="nx">targets</span><span class="o">:</span><span class="w"> </span><span class="nx">targetSizers</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// dropZone: false,</span>
@@ -10586,7 +10587,12 @@ User can inject it by</p>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>targetSizers</code> : Array of target children-sizer.</li>
+<li><code>targetMode</code> : <ul>
+<li><code>'parent'</code> : <code>targetSizers</code> is an array of hit-targrts' parentSizers. Will run hit-test on parentSizers first, then run hit-test on children of parentSizer. Default behavior.</li>
+<li><code>'direct'</code> : <code>targetSizers</code> is an array of hit-targrts. Will run hit-test directly on these hit-targrts.</li>
+</ul>
+</li>
+<li><code>targetSizers</code> : Array of hit-targrts' parentSizers, or array of hit-targrts. See <code>targetMode</code> parameter.</li>
 <li><code>dropZone</code> :<ul>
 <li><code>true</code> : Enable <a href="../touchevents/#drop-zone">drop Zone</a> on scrollable area.</li>
 <li><code>false</code> : Do nothing.</li>

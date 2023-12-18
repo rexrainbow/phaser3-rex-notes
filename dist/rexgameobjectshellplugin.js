@@ -13876,12 +13876,22 @@
     return null;
   };
 
-  var EmitChildEvent = function EmitChildEvent(eventEmitter, eventName, parents, x, y, pointer, event) {
+  var EmitChildEvent = function EmitChildEvent(eventEmitter, eventName, targets, targetMode, x, y, pointer, event) {
     var child;
     if (y === undefined) {
       child = x;
     } else {
-      child = PointToChild(parents, x, y);
+      if (targetMode === 'parent') {
+        child = PointToChild(targets, x, y);
+      } else {
+        for (var i = 0, cnt = targets.length; i < cnt; i++) {
+          var target = targets[i];
+          if (ContainsPoint(target, x, y)) {
+            child = target;
+            break;
+          }
+        }
+      }
     }
     if (!child) {
       return;
@@ -13901,7 +13911,7 @@
   };
   var OnDown = function OnDown(pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
-    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "down"), childrenInteractive.targetSizers, pointer.worldX, pointer.worldY, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "down"), childrenInteractive.targetSizers, childrenInteractive.targetMode, pointer.worldX, pointer.worldY, pointer, event);
   };
 
   var GetValue$1y = Phaser.Utils.Objects.GetValue;
@@ -13916,7 +13926,7 @@
   };
   var OnUp = function OnUp(pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
-    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "up"), childrenInteractive.targetSizers, pointer.worldX, pointer.worldY, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "up"), childrenInteractive.targetSizers, childrenInteractive.targetMode, pointer.worldX, pointer.worldY, pointer, event);
   };
 
   var GetValue$1x = Phaser.Utils.Objects.GetValue;
@@ -13938,14 +13948,14 @@
       return;
     }
     childrenInteractive.lastOverChild = child;
-    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, preChild, undefined, pointer, event);
-    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "over"), childrenInteractive.targetSizers, child, undefined, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, childrenInteractive.targetMode, preChild, undefined, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "over"), childrenInteractive.targetSizers, childrenInteractive.targetMode, child, undefined, pointer, event);
   };
   var OnOut = function OnOut(pointer, event) {
     var childrenInteractive = this._childrenInteractive;
     var child = childrenInteractive.lastOverChild;
     childrenInteractive.lastOverChild = null;
-    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, child, undefined, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, childrenInteractive.targetMode, child, undefined, pointer, event);
   };
 
   var GetValue$1w = Phaser.Utils.Objects.GetValue;
@@ -13965,7 +13975,7 @@
     var childrenInteractive = this._childrenInteractive;
     this._click = new Button(this, clickConfig);
     this._click.on('click', function (button, gameObject, pointer, event) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "click"), childrenInteractive.targetSizers, pointer.worldX, pointer.worldY, pointer, event);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "click"), childrenInteractive.targetSizers, childrenInteractive.targetMode, pointer.worldX, pointer.worldY, pointer, event);
     }, this);
   };
 
@@ -13980,7 +13990,7 @@
     var childrenInteractive = this._childrenInteractive;
     this._tap = new Tap(this, tapConfig);
     this._tap.on('tap', function (tap, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix).concat(tap.tapsCount, "tap"), childrenInteractive.targetSizers, tap.worldX, tap.worldY, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix).concat(tap.tapsCount, "tap"), childrenInteractive.targetSizers, childrenInteractive.targetMode, tap.worldX, tap.worldY, lastPointer);
     }, this);
   };
 
@@ -13995,9 +14005,9 @@
     var childrenInteractive = this._childrenInteractive;
     this._press = new Press(this, pressConfig);
     this._press.on('pressstart', function (press, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressstart"), childrenInteractive.targetSizers, press.worldX, press.worldY, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressstart"), childrenInteractive.targetSizers, childrenInteractive.targetMode, press.worldX, press.worldY, lastPointer);
     }, this).on('pressend', function (press, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressend"), childrenInteractive.targetSizers, press.worldX, press.worldY, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressend"), childrenInteractive.targetSizers, childrenInteractive.targetMode, press.worldX, press.worldY, lastPointer);
     }, this);
   };
 
@@ -14019,7 +14029,7 @@
     this._swipe = new Swipe(this, swipeConfig);
     this._swipe.on('swipe', function (swipe, gameObject, lastPointer) {
       var dirName = swipe.left ? 'left' : swipe.right ? 'right' : swipe.up ? 'up' : 'down';
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "swipe").concat(dirName), childrenInteractive.targetSizers, swipe.worldX, swipe.worldY, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "swipe").concat(dirName), childrenInteractive.targetSizers, childrenInteractive.targetMode, swipe.worldX, swipe.worldY, lastPointer);
     }, this);
   };
 
@@ -14031,6 +14041,7 @@
     }
     gameObject._childrenInteractive = {
       targetSizers: GetValue$1s(config, 'targets', [gameObject]),
+      targetMode: GetValue$1s(config, 'targetMode', 'parent'),
       eventEmitter: GetValue$1s(config, 'eventEmitter', gameObject),
       eventNamePrefix: GetValue$1s(config, 'inputEventPrefix', 'child.')
     };

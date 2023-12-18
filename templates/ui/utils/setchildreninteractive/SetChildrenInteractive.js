@@ -17,6 +17,7 @@ var SetChildrenInteractive = function (gameObject, config) {
 
     gameObject._childrenInteractive = {
         targetSizers: GetValue(config, 'targets', [gameObject]),
+        targetMode: GetValue(config, 'targetMode', 'parent'),
         eventEmitter: GetValue(config, 'eventEmitter', gameObject),
         eventNamePrefix: GetValue(config, 'inputEventPrefix', 'child.')
     }

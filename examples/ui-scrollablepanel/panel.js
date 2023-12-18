@@ -96,19 +96,32 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
 
         // Add children-interactive
-        // Solution A:
+        // Solution A: targests is an array of parentSizer of hit-targets
+        // scrollablePanel.setChildrenInteractive({
+        //     targets: [
+        //         scrollablePanel.getByName('skills', true),
+        //         scrollablePanel.getByName('items', true)
+        //     ]
+        // })
+        //     .on('child.click', function (child) {
+        //         var category = child.getParentSizer().name;
+        //         print.text += `${category}:${child.text}\n`;
+        //     })
+
+        // Solution B: targets is an array of hit-targets
         scrollablePanel.setChildrenInteractive({
             targets: [
-                scrollablePanel.getByName('skills', true),
-                scrollablePanel.getByName('items', true)
-            ]
+                ...scrollablePanel.getByName('skills', true).getElement('items'),
+                ...scrollablePanel.getByName('items', true).getElement('items')
+            ],
+            targetMode: 'direct',
         })
             .on('child.click', function (child) {
                 var category = child.getParentSizer().name;
                 print.text += `${category}:${child.text}\n`;
             })
 
-        // Solution B:
+        // Solution C:
         /*
         this.input.topOnly = false;
         var labels = [];
@@ -229,6 +242,16 @@ var createTable = function (scene, data, key, rows) {
             0,
             true
         );
+
+        table.add(createIcon(scene, item, iconSize, iconSize),
+            {
+                column: undefined,
+                row: true,
+                align: 'top',
+                padding: 0,
+                expand: true,
+            }
+        );
     }
 
     return scene.rexUI.add.sizer({
@@ -238,18 +261,21 @@ var createTable = function (scene, data, key, rows) {
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined).setStrokeStyle(2, COLOR_LIGHT, 1)
         )
-        .add(
-            title, // child
-            0, // proportion
-            'left', // align
-            0, // paddingConfig
-            true // expand
+        .add(title, // child
+            {
+                proportion: 0,
+                align: 'left',
+                padding: 0,
+                expand: true
+            }
         )
         .add(table, // child
-            1, // proportion
-            'center', // align
-            0, // paddingConfig
-            true // expand
+            {
+                proportion: 1,
+                align: 'center',
+                padding: 0,
+                expand: true
+            }
         );
 }
 

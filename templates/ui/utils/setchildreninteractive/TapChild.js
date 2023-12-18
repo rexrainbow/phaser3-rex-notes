@@ -19,6 +19,7 @@ var TapChild = function (config) {
                 childrenInteractive.eventEmitter,
                 `${childrenInteractive.eventNamePrefix}${tap.tapsCount}tap`,
                 childrenInteractive.targetSizers,
+                childrenInteractive.targetMode,
                 tap.worldX, tap.worldY,
                 lastPointer
             );
