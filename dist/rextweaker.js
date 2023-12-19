@@ -36774,6 +36774,7 @@
     }, this).on('close', function () {
       this.listPanel = undefined;
       this.dropDownBehavior = undefined;
+      this.emit('list.close', this);
     }, this);
     this.listPanel = listPanel;
     this.dropDownBehavior = dropDownBehavior;
@@ -36851,6 +36852,11 @@
           this.listPanel = undefined;
         }
         _get(_getPrototypeOf(DropDownList.prototype), "destroy", this).call(this, fromScene);
+      }
+    }, {
+      key: "isOpened",
+      get: function get() {
+        return !!this.listPanel;
       }
     }, {
       key: "setOptions",
