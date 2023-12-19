@@ -40,7 +40,7 @@ declare namespace DropDownList {
         event: Phaser.Types.Input.EventData
     ) => void;
 
-    type AlignParentType = 'text' | 'icon';
+    type AlignParentType = 'text' | 'icon' | 'label';
 
     type ExpandDirectionType = 0 | 1 | 'down' | 'up';
 
@@ -95,6 +95,8 @@ declare class DropDownList extends Label {
         scene: Phaser.Scene,
         config?: DropDownList.IConfig
     );
+
+    readonly isOpened: boolean;
 
     setOptions(options: any[]): this;
 

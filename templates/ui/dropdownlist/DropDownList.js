@@ -54,6 +54,10 @@ class DropDownList extends Label {
         super.destroy(fromScene);
     }
 
+    get isOpened() {
+        return !!this.listPanel;
+    }
+
     setOptions(options) {
         if (options === undefined) {
             options = [];

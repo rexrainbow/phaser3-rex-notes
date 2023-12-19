@@ -407,7 +407,15 @@ dropDownList.on('button.click', function(dropDownList, listPanel, button, index,
 
 #### Toggle list panel
 
-- `dropDownList.toggleListPanel()`.
+```javascript
+dropDownList.toggleListPanel();
+```
+
+#### Is list opened
+
+```javascript
+var isOpened = dropDownList.isOpened;
+```
 
 ### Other properties
 

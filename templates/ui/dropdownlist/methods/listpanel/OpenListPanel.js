@@ -70,6 +70,8 @@ var OpenListPanel = function () {
         .on('close', function () {
             this.listPanel = undefined;
             this.dropDownBehavior = undefined;
+
+            this.emit('list.close', this);
         }, this)
 
     this.listPanel = listPanel;
