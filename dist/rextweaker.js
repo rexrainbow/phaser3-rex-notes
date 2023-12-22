@@ -3441,9 +3441,6 @@
     // Run layout with scale = 1
     this.runLayout();
 
-    // Common postLayout 
-    this._postLayout();
-
     // Restore scale
     if (!scale1) {
       this.setScale(scaleXSave, scaleYSave);
@@ -3458,7 +3455,7 @@
       return this;
     }
     var isTopmostParent = !parent;
-    // Preprocessor, top parent only
+    // Pre-processor, top parent only
     if (isTopmostParent) {
       this.preLayout();
     }
@@ -3494,6 +3491,11 @@
 
     // Custom postLayout callback
     this.postLayout();
+
+    // Post-processor, top parent only
+    if (isTopmostParent) {
+      this._postLayout();
+    }
     return this;
   };
 

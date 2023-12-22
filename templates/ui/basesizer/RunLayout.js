@@ -6,7 +6,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     var isTopmostParent = !parent;
-    // Preprocessor, top parent only
+    // Pre-processor, top parent only
     if (isTopmostParent) {
         this.preLayout();
     }
@@ -44,6 +44,11 @@ var RunLayout = function (parent, newWidth, newHeight) {
 
     // Custom postLayout callback
     this.postLayout();
+
+    // Post-processor, top parent only
+    if (isTopmostParent) {
+        this._postLayout();
+    }
 
     return this;
 }
