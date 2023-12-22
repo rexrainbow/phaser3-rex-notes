@@ -273,6 +273,14 @@ tabPages.addPage({
     ```javascript
     tabPages.removePage(index, true);
     ```
+- Remove all pages
+    ```javascript
+    tabPages.removeAllPages();
+    ```
+- Remove and destroy all pages
+    ```javascript
+    tabPages.removeAllPages(true);
+    ```
 
 ### Get element
 

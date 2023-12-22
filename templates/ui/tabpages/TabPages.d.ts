@@ -56,6 +56,7 @@ declare class TabPages extends Sizer {
         key: string,
         destroyChild?: boolean
     ): this;
+    removeAllPages(destroyChild?: boolean): this;
 
     swapPage(
         key: string,
