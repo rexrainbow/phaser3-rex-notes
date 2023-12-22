@@ -230,6 +230,7 @@ domElement.rotate3d.w = a;
 1. P3's `'pointermove'` event won't be fired above/under DOM game object, except 
     - Setting DOM game object to be invisilbe.
     - Assign input.mouse.target parameter of game config.
+1. DOM game object only can be displayed by main camera. i.e. dom game object can't add to other camera.
 
 ### Other properties
 
