@@ -3420,8 +3420,7 @@
     // Run layout with scale = 1
     this.runLayout();
 
-    // Custom postLayout callback
-    this.postLayout();
+    // Common postLayout 
     this._postLayout();
 
     // Restore scale
@@ -3471,6 +3470,9 @@
       this.emit('postlayout', this.layoutedChildren, this);
       this.layoutedChildren.length = 0;
     }
+
+    // Custom postLayout callback
+    this.postLayout();
     return this;
   };
 

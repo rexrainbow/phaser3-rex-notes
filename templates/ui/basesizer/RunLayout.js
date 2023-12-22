@@ -42,6 +42,9 @@ var RunLayout = function (parent, newWidth, newHeight) {
         this.layoutedChildren.length = 0;
     }
 
+    // Custom postLayout callback
+    this.postLayout();
+
     return this;
 }
 export default RunLayout;
