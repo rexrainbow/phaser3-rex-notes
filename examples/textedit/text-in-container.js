@@ -20,6 +20,7 @@ class Demo extends Phaser.Scene {
             backgroundColor: '#333333',
             valign: 'center'
         })
+            .setScale(2)
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function () {
@@ -41,7 +42,7 @@ class Demo extends Phaser.Scene {
             }, this);
 
 
-        this.add.container(400, 300, [printText]);
+        this.add.container(400, 300, [printText]).setScale(0.5);
     }
 
     update() { }

@@ -11,6 +11,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 - [Text area](https://codepen.io/rexrainbow/pen/eYQMwYj)
 - [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
 - [With rexui-Label](https://codepen.io/rexrainbow/pen/YbvwBw)
+- [Text game object inside container](https://codepen.io/rexrainbow/pen/JjzoxXL)
 
 ## Usage
 

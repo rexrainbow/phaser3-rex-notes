@@ -50,6 +50,8 @@ var CreateInputText = function (text, config) {
     );
 
     inputText
+        // Sync scale
+        .setScale(text.scaleX, text.scaleY)
         // Sync origin
         .setOrigin(text.originX, text.originY)
         // Sync scrollFactor

@@ -163,7 +163,7 @@ var textBox = scene.rexUI.add.textBox({
 - `separator` : Game object of separator, optional.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
-- `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
+- `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md), required.
     - Max lines and wrapped width
         - [Built-in text object](text.md) : `maxLines` and wrap width (`wordWrap.width`).
         - [BBcode text object](bbcodetext.md) : `maxLines` and wrap width (`wrap.width`).
@@ -195,7 +195,7 @@ var textBox = scene.rexUI.add.textBox({
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
-    - `page.maxLines` : Max lines of a page.
+    - `page.maxLines` : Max lines of a page. If not given in `text` game object.
     - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.
 - `typing` : Configuration of [type behavior](texttyping.md#create-instance)    
     - `typing.wrap` : 

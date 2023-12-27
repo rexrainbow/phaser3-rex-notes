@@ -831,6 +831,8 @@
 
     var inputText = new InputText(scene, text.x, text.y, GetValue$2(config, 'width', text.width), GetValue$2(config, 'height', text.height), config);
     inputText
+    // Sync scale
+    .setScale(text.scaleX, text.scaleY)
     // Sync origin
     .setOrigin(text.originX, text.originY)
     // Sync scrollFactor
