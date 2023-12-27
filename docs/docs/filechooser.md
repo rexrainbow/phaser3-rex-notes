@@ -283,9 +283,9 @@ scene.plugins.get('rexFileChooser').open({
     - `'video/*'` : The user can pick all video files.
     - `file_extension` : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from.
 - `multiple` : Set `true` to select multiple files.
-- `delay` : Add a small delay to detect dialog canceled after game focus.
+- `closeDelay` : Add a small delay to detect dialog canceled after game focus.
     - File chooser dialog dose not have `cancel` event.
-- `files` : Array of selected files.     
+- `files` : Array of selected files.
     - Each file object (`files[i]`) has properties
         - `file.name` : File name with file extension.
         - `file.type` : File type. (ex. `'image/jpeg'`)
