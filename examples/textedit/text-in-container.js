@@ -12,6 +12,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var ui;
+
         var printText = this.add.rexBBCodeText(0, 0, 'abc', {
             color: 'yellow',
             fontSize: '24px',
@@ -39,10 +41,11 @@ class Demo extends Phaser.Scene {
                     // enterClose: false
                 }
                 this.plugins.get('rexTextEdit').edit(printText, config);
+                // ui.setVisible(false)
             }, this);
 
 
-        this.add.container(400, 300, [printText]).setScale(0.5);
+        ui = this.add.container(400, 300, [printText]).setScale(0.5);
     }
 
     update() { }
