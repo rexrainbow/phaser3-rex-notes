@@ -63143,6 +63143,7 @@
   var methods = {
     getParentSizer: GetParent$1,
     getTopmostSizer: GetTopmostParent$1,
+    removeFromParent: RemoveFromParent,
     hide: Hide,
     show: Show,
     isShown: IsShown,
