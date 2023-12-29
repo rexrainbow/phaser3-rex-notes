@@ -23,18 +23,6 @@ declare namespace HolyGrail {
         rightSide?: Phaser.GameObjects.GameObject,
 
         footer?: Phaser.GameObjects.GameObject,
-    }
-
-    interface IConfig extends Sizer.IConfig, IBuildConfig {
-        space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
-
-            header?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            leftSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            content?: { left?: number, right?: number, top?: number, bottom?: number },
-            rightSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            footer?: number | { left?: number, right?: number, top?: number, bottom?: number },
-        };
 
         proportion?: {
             header?: number,
@@ -59,7 +47,18 @@ declare namespace HolyGrail {
             rightSide?: VAlignTypes,
             footer?: HAlignTypes,
         },
+    }
 
+    interface IConfig extends Sizer.IConfig, IBuildConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+
+            header?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            leftSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            content?: { left?: number, right?: number, top?: number, bottom?: number },
+            rightSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            footer?: number | { left?: number, right?: number, top?: number, bottom?: number },
+        };
     }
 
 }
