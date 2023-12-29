@@ -858,6 +858,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
     - `gameObject` : Any game object added to sizer.
 
+#### Remove from parent
+
+```javascript
+scene.rexUI.removeFromParent(gameObject);
+```
+
 #### Show/hide
 
 - Show

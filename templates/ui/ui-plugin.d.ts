@@ -103,6 +103,7 @@ import Edit from './textedit/Edit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
+import RemoveFromParent from './utils/RemoveFromParent';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
@@ -229,6 +230,7 @@ declare class UIPlugin extends Phaser.Plugins.ScenePlugin {
     modalClose: typeof ModalClose;
     getParentSizer: typeof GetParentSizer;
     getTopmostSizer: typeof GetTopmostSizer;
+    removeFromParent: typeof RemoveFromParent;
     hide: typeof Hide;
     show: typeof Show;
     isShown: typeof IsShown;

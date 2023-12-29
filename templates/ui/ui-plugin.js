@@ -103,6 +103,7 @@ import TextPageFactory from './textpage/Factory.js';
 import TextEditFactory from './textedit/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
+import RemoveFromParent from './utils/RemoveFromParent.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import { Show, Hide, IsShown, } from './utils/Hide.js';
 import Edit from './textedit/Edit.js';
@@ -148,6 +149,7 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
 var methods = {
     getParentSizer: GetParentSizer,
     getTopmostSizer: GetTopmostSizer,
+    removeFromParent: RemoveFromParent,
     hide: Hide,
     show: Show,
     isShown: IsShown,
