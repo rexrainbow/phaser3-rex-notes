@@ -11494,6 +11494,17 @@
   }(Base);
   Object.assign(Sizer.prototype, methods$1);
 
+  var RemoveFromParent = function RemoveFromParent(gameObject, destroyChild) {
+    if (!gameObject) {
+      return;
+    }
+    var parent = GetParent$1(gameObject);
+    if (!parent) {
+      return;
+    }
+    parent.remove(gameObject, destroyChild);
+  };
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GetAddChildConfig = function GetAddChildConfig(config, key, defaultValues) {
     var proportion = GetValue$1(config, "proportion.".concat(key), defaultValues.proportion);
@@ -11793,10 +11804,26 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var LayoutCallbacks = [LayoutMode0$1, LayoutMode1, LayoutMode2, LayoutMode0];
   var Build = function Build(config) {
+    if (config === undefined) {
+      config = {};
+    }
+    var background = config.background;
+    var header = config.header;
+    var leftSide = config.leftSide;
+    var content = config.content;
+    var rightSide = config.rightSide;
+    var footer = config.footer;
+
+    // Remove from parent
+    RemoveFromParent(background);
+    RemoveFromParent(header);
+    RemoveFromParent(leftSide);
+    RemoveFromParent(content);
+    RemoveFromParent(rightSide);
+    RemoveFromParent(footer);
     this.clear(true);
 
     // Add Background
-    var background = GetValue(config, 'background', undefined);
     if (background) {
       this.addBackground(background);
     }
@@ -11806,12 +11833,13 @@
     }
     var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
     layoutCallback.call(this, config);
-    this.addChildrenMap('background', config.background);
-    this.addChildrenMap('header', config.header);
-    this.addChildrenMap('leftSide', config.leftSide);
-    this.addChildrenMap('content', config.content);
-    this.addChildrenMap('rightSide', config.rightSide);
-    this.addChildrenMap('footer', config.footer);
+    this.addChildrenMap('background', background);
+    this.addChildrenMap('header', header);
+    this.addChildrenMap('leftSide', leftSide);
+    this.addChildrenMap('content', content);
+    this.addChildrenMap('rightSide', rightSide);
+    this.addChildrenMap('footer', footer);
+    return this;
   };
   var LayoutModesMap = {
     'FFF': 0,
