@@ -7,17 +7,10 @@ declare namespace HolyGrail {
 
     type HAlignTypes = number | 'left' | 'center' | 'right';
     type VAlignTypes = number | 'top' | 'center' | 'bottom';
+    type LayoutModeTypes = 0 | 1 | 2 | 3 | 'FFF' | 'LFF' | 'FFR' | 'LFR';
 
-    interface IConfig extends Sizer.IConfig {
-        space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
-
-            header?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            leftSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            content?: { left?: number, right?: number, top?: number, bottom?: number },
-            rightSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
-            footer?: number | { left?: number, right?: number, top?: number, bottom?: number },
-        };
+    interface IBuildConfig {
+        layoutMode?: LayoutModeTypes,
 
         background?: Phaser.GameObjects.GameObject,
 
@@ -30,8 +23,18 @@ declare namespace HolyGrail {
         rightSide?: Phaser.GameObjects.GameObject,
 
         footer?: Phaser.GameObjects.GameObject,
+    }
 
-        layoutMode?: 0 | 1 | 2 | 3 | 'FFF' | 'LFF' | 'FFR' | 'LFR',
+    interface IConfig extends Sizer.IConfig, IBuildConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+
+            header?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            leftSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            content?: { left?: number, right?: number, top?: number, bottom?: number },
+            rightSide?: number | { left?: number, right?: number, top?: number, bottom?: number },
+            footer?: number | { left?: number, right?: number, top?: number, bottom?: number },
+        };
 
         proportion?: {
             header?: number,
@@ -58,6 +61,7 @@ declare namespace HolyGrail {
         },
 
     }
+
 }
 
 declare class HolyGrail extends Sizer {
@@ -65,5 +69,7 @@ declare class HolyGrail extends Sizer {
         scene: Phaser.Scene,
         config?: HolyGrail.IConfig
     );
+
+    build(config?: HolyGrail.IBuildConfig): this
 
 }

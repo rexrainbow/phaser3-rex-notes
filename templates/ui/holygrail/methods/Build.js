@@ -1,3 +1,4 @@
+import RemoveFromParent from '../../utils/RemoveFromParent.js';
 import LayoutMode0 from './LayoutMode0.js';
 import LayoutMode1 from './LayoutMode1.js';
 import LayoutMode2 from './LayoutMode2.js';
@@ -7,10 +8,28 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1, LayoutMode2, LayoutMode3];
 
 var Build = function (config) {
+    if (config === undefined) {
+        config = {};
+    }
+
+    var background = config.background;
+    var header = config.header;
+    var leftSide = config.leftSide;
+    var content = config.content;
+    var rightSide = config.rightSide;
+    var footer = config.footer;
+
+    // Remove from parent
+    RemoveFromParent(background);
+    RemoveFromParent(header);
+    RemoveFromParent(leftSide);
+    RemoveFromParent(content);
+    RemoveFromParent(rightSide);
+    RemoveFromParent(footer);
+
     this.clear(true);
 
     // Add Background
-    var background = GetValue(config, 'background', undefined);
     if (background) {
         this.addBackground(background);
     }
@@ -22,12 +41,14 @@ var Build = function (config) {
     var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
     layoutCallback.call(this, config);
 
-    this.addChildrenMap('background', config.background);
-    this.addChildrenMap('header', config.header);
-    this.addChildrenMap('leftSide', config.leftSide);
-    this.addChildrenMap('content', config.content);
-    this.addChildrenMap('rightSide', config.rightSide);
-    this.addChildrenMap('footer', config.footer);
+    this.addChildrenMap('background', background);
+    this.addChildrenMap('header', header);
+    this.addChildrenMap('leftSide', leftSide);
+    this.addChildrenMap('content', content);
+    this.addChildrenMap('rightSide', rightSide);
+    this.addChildrenMap('footer', footer);
+
+    return this;
 }
 
 const LayoutModesMap = {
