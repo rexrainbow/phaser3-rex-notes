@@ -18,7 +18,9 @@ A container with a panel, slider, and scroller.
 - [Destory](https://codepen.io/rexrainbow/pen/rNvKdqg)
 - [XY sliders](https://codepen.io/rexrainbow/pen/VwVVyYV)
 - [Min-width panel](https://codepen.io/rexrainbow/pen/JjeqGLb)
-- [Drag,resize panel](https://codepen.io/rexrainbow/pen/wvRvrzr)
+- Drag, resize panel
+    - [Single scroller](https://codepen.io/rexrainbow/pen/wvRvrzr)
+    - [ScrollerX, scrollerY](https://codepen.io/rexrainbow/pen/VwRvjPo)
 - Drag&drop items between panels : 
     - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
     - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
