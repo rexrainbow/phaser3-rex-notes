@@ -120,11 +120,11 @@ var viewport = scene.scale.getViewPort();
 scene.scale.on('resize', function(gameSize, baseSize, displaySize, previousWidth, previousHeight) {});
 ```
 
-- `gameSize`
+- `gameSize` : The un-modified game size, as requested in the game config (the raw width / height)
     - `gameSize.width`, `gameSize.height`
-- `baseSize`
+- `baseSize` : The canvas width and height (actually size of canvas)
     - `baseSize.width`, `baseSize.height`
-- `displaySize`
+- `displaySize` : Size used for the canvas style (display size of canvas)
     - `displaySize.width`, `displaySize.height`
 
 ### Update bounds
