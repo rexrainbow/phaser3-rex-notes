@@ -86,7 +86,11 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Weight : `[weight=900]text[/weight]`
     - Valid when text does not have bold tag.
 - Italic : `[i]text[/i]`
-- Color : `[color=red]text[/color]`
+- Color : 
+    - `[color=red]text[/color]`
+    - `[color=#FF0000]text[/color]`
+    - `[color=rgb(255,0,0)]text[/color]`
+    - `[color=rgba(255,0,0,1)]text[/color]`
 - Size : `[size=18]text[/size]`
 - Stroke : `[stroke]text[/stroke]`
     - Stroke with color setting : `[stroke=red]text[/stroke]`

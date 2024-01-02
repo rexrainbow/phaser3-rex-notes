@@ -15,9 +15,9 @@ var GetCloseTagRegString = function (delimiterLeft, delimiterRight, tagName) {
     return `${delimiterLeft}\/${tagName}${delimiterRight}`;
 }
 
-var NUMBER_PARAM = '[-.0-9]+';
-var COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
 var STR_PARAM = '[^\\]]+';
+var NUMBER_PARAM = '[-.0-9]+';
+var COLOR_PARAM = STR_PARAM; // '[a-z]+|#[0-9abcdef]+'
 
 var SetDelimiters = function (delimiterLeft, delimiterRight) {
     if (delimiterRight === undefined) {
