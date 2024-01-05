@@ -9991,7 +9991,10 @@
 <li><a href="https://codepen.io/rexrainbow/pen/qGxrjZ">Align</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLPWgWX">Escape</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yjZveb">Page, typing</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/BaZEGOB">Wrap</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/BaZEGOB">Wrap</a><ul>
+<li><a href="https://codepen.io/rexrainbow/pen/abMdPBr">Mix wrap</a></li>
+</ul>
+</li>
 <li><a href="https://codepen.io/rexrainbow/pen/eYEOYzX">Measure margin of text</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYJQrrX">Generate texture</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLKNVaW">Image height</a></li>
@@ -10168,7 +10171,7 @@
 <span class="w">    </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="w">     </span><span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
+<span class="w">        </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="w">     </span><span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;|3|&#39;mix&#39;</span>
 <span class="w">        </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="c1">// wordWrap: { width: 0 },   // Compatible with Text game object</span>
@@ -10306,6 +10309,7 @@
 <li><code>0</code>, or <code>'none'</code> : No wrapping, default behavior.</li>
 <li><code>1</code>, or <code>'word'</code> : Word wrapping.</li>
 <li><code>2</code>, or <code>'char'</code>, or <code>'character'</code> : Character wrapping.</li>
+<li><code>3</code>, or <code>'mix'</code> : Word wrapping for ASCII word, Character wrapping for other (unicode) word.</li>
 </ul>
 </li>
 <li><code>wrap.width</code> : Maximun wrapping width of a line.<ul>
@@ -10324,6 +10328,7 @@
 <li><code>0</code>, or <code>'none'</code> : No wrapping.</li>
 <li><code>1</code>, or <code>'word'</code> : Word wrapping.</li>
 <li><code>2</code>, or <code>'char'</code>, or <code>'character'</code> : Character wrapping.</li>
+<li><code>3</code>, or <code>'mix'</code> : Word wrapping for ASCII word, Character wrapping for other (unicode) word.</li>
 </ul>
 </li>
 </ul>

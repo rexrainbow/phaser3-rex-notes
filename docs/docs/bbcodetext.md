@@ -13,6 +13,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Escape](https://codepen.io/rexrainbow/pen/yLPWgWX)
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
 - [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
+    - [Mix wrap](https://codepen.io/rexrainbow/pen/abMdPBr)
 - [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
 - [Generate texture](https://codepen.io/rexrainbow/pen/vYJQrrX)
 - [Image height](https://codepen.io/rexrainbow/pen/yLKNVaW)
