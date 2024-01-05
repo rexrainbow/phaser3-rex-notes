@@ -60,7 +60,7 @@ interface TextStyle {
     testString?: string,
 
     wrap?: {
-        mode?: 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character'
+        mode?: 0 | 1 | 2 | 3 | 'none' | 'word' | 'char' | 'character' | 'mix'
         width?: null | number,
     },
 

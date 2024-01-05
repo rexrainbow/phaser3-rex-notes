@@ -8,6 +8,7 @@ var CONST = {
     NO_WRAP: 0,
     WORD_WRAP: 1,
     CHAR_WRAP: 2,
+    MIX_WRAP: 3,
 
     // split lines
     SPLITREGEXP: /(?:\r\n|\r|\n)/

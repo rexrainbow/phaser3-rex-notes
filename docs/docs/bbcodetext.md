@@ -186,7 +186,7 @@ Default style
     testString: '|MÉqgy',
     
     wrap: {
-        mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
+        mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'|3|'mix'
         width: null
     },
     // wordWrap: { width: 0 },   // Compatible with Text game object
@@ -319,6 +319,7 @@ var txt = scene.make.rexBBCodeText({
         - `0`, or `'none'` : No wrapping, default behavior.
         - `1`, or `'word'` : Word wrapping.
         - `2`, or `'char'`, or `'character'` : Character wrapping.
+        - `3`, or `'mix'` : Word wrapping for ASCII word, Character wrapping for other (unicode) word.
     - `wrap.width` : Maximun wrapping width of a line.
         - Wrap-fit : Set wrapping width to `fixedWidth - padding.left - padding.right` if `fixedWidth > 0`
 - Wrap mode
@@ -333,6 +334,7 @@ var txt = scene.make.rexBBCodeText({
         - `0`, or `'none'` : No wrapping.
         - `1`, or `'word'` : Word wrapping.
         - `2`, or `'char'`, or `'character'` : Character wrapping.
+        - `3`, or `'mix'` : Word wrapping for ASCII word, Character wrapping for other (unicode) word.
 - Wrap width
     - Get
         ```javascript

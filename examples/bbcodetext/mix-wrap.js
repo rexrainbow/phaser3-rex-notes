@@ -8,23 +8,23 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+    }
 
     create() {
-        var s1 = 'See loooooonnnnngg a loooooonnnnngggeeeerrr words';
+        var s1 = '你好世界 你好世界 你好世界 Hello world Hello world Hello world';
 
-        this.add.text(100, 0, 'Text with useAdvancedWrap');
+        this.add.text(100, 0, 'Text with word wrap');
         this.add.text(100, 30, s1, {
             fixedWidth: 180,
             backgroundColor: '#555',
             fontSize: '20px',
             wordWrap: {
-                width: 180,
-                useAdvancedWrap: true
+                width: 180
             },
         })
 
-        // Word wrap
+        // Character wrap
         this.add.text(100, 150, 'BBCodeText with word wrap');
         this.add.rexBBCodeText(100, 180, s1, {
             fixedWidth: 180,
@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
             },
         });
 
-        // Character wrap
+        // Chatavter wrap
         this.add.text(500, 150, 'BBCodeText with character wrap');
         this.add.rexBBCodeText(500, 180, s1, {
             fixedWidth: 180,
@@ -48,18 +48,15 @@ class Demo extends Phaser.Scene {
             },
         });
 
-        // Custom wrap callback
-        this.add.text(100, 300, 'BBCodeText with custom wrap callback');
+        //Mix wrap
+        this.add.text(100, 300, 'BBCodeText with mix wrap');
         this.add.rexBBCodeText(100, 330, s1, {
             fixedWidth: 180,
             backgroundColor: '#555',
             fontSize: '20px',
             wrap: {
-                mode: 'word',
+                mode: 'mix',
                 width: 180,
-                callback: function (text, getTextWidth, wrapWidth, offset) {
-                    return text.split(' ');
-                }
             },
         });
     }

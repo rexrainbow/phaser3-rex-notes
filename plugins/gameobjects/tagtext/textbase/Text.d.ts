@@ -104,7 +104,7 @@ declare class Text extends CanvasGameObjectBase {
     updateText(runWrap?: boolean): this;
 
     setWrapMode(
-        mode: 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character'
+        mode: 0 | 1 | 2 | 3 | 'none' | 'word' | 'char' | 'character' | 'mix'
     ): this;
     setWrapWidth(width: number): this;
     setWordWrapWidth(width: number): this;

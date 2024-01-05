@@ -1,4 +1,5 @@
 import CONST from '../../../textbase/const.js';
+import IsASCIIString from '../../../../utils/string/IsASCIIString.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
@@ -6,6 +7,7 @@ const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 const NO_WRAP = CONST.NO_WRAP;
 const WORD_WRAP = CONST.WORD_WRAP;
 const CHAR_WRAP = CONST.CHAR_WRAP;
+const MIX_WRAP = CONST.MIX_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
@@ -19,7 +21,6 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
     }
 
     var isNoWrap = (wrapMode === NO_WRAP);
-    var isWordWrap = (wrapMode === WORD_WRAP);
 
     var lines = text.split(splitRegExp),
         line, remainWidth, newLineMode;
@@ -44,33 +45,18 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
             }
         }
 
-        var tokenArray, isSpaceCharacterEnd;
-        if (isWordWrap) {
-            // word mode
-            tokenArray = line.split(' ');
-            isSpaceCharacterEnd = (tokenArray[tokenArray.length - 1] === '');
-            if (isSpaceCharacterEnd) {
-                tokenArray.length -= 1;
-            }
-        } else {
-            tokenArray = line;
-        }
+        var tokenArray = ParseLine(line, wrapMode);
+
+
         var token, tokenWidth, isLastToken;
         var lineText = '', lineWidth = 0;
         var currLineWidth;
-        var whiteSpaceWidth = (isWordWrap) ? getTextWidth(' ') : undefined;
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
             tokenWidth = getTextWidth(token);
 
-            isLastToken = (j === (tokenLen - 1));
-            if (isWordWrap && (!isLastToken || isSpaceCharacterEnd)) {
-                token += ' ';
-                tokenWidth += whiteSpaceWidth;
-            }
-
             // Text width of single token is larger than a line width
-            if (isWordWrap && (tokenWidth > wrapWidth)) {
+            if ((tokenWidth > wrapWidth) && IsWord(token)) {
                 if (lineText !== '') {
                     // Has pending lineText, flush it out
                     retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
@@ -112,7 +98,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
                 lineWidth = currLineWidth;
             }
 
-            if (isLastToken) {
+            if (j === (tokenLen - 1)) {
                 // Flush remain text
                 retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, newLineMode));
             }
@@ -122,5 +108,64 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
 
     return retLines;
 };
+
+var ParseLine = function (s, mode) {
+    var tokens = [];
+
+    switch (mode) {
+        case WORD_WRAP:
+            s = s.split(' ');
+            for (var i = 0, icnt = s.length; i < icnt; i++) {
+                var token = s[i];
+                if (i < (icnt - 1)) {
+                    tokens.push(token + ' ');
+                } else { // The last token
+                    if (token !== '') {
+                        tokens.push(token);
+                    }
+                }
+            }
+            break;
+
+        case CHAR_WRAP:
+            tokens.push(...s.split(''));
+            break;
+
+        default: // MIX_WRAP
+            s = s.split(' ');
+            for (var i = 0, icnt = s.length; i < icnt; i++) {
+                var token = s[i];
+                if (i < (icnt - 1)) {
+                    if (IsASCIIString(token)) {
+                        tokens.push(token + ' ');
+                    } else {
+                        tokens.push(...token.split(''));
+                        // Add space as last token
+                        tokens.push(' ')
+                    }
+                } else { // The last token
+                    if (token !== '') {
+                        if (IsASCIIString(token)) {
+                            tokens.push(token);
+                        } else {
+                            tokens.push(...token.split(''));
+                        }
+                    }
+                }
+
+            }
+            break;
+    }
+
+    return tokens;
+}
+
+var IsWord = function (s) {
+    switch (s.length) {
+        case 1: return false;
+        case 2: return (s.charAt(1) !== ' ');
+        default: return true;
+    }
+}
 
 export default WrapText;

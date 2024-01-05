@@ -18003,6 +18003,7 @@
     NO_WRAP: 0,
     WORD_WRAP: 1,
     CHAR_WRAP: 2,
+    MIX_WRAP: 3,
     // split lines
     SPLITREGEXP: /(?:\r\n|\r|\n)/
   };
@@ -18603,7 +18604,8 @@
     none: CONST.NO_WRAP,
     word: CONST.WORD_WRAP,
     "char": CONST.CHAR_WRAP,
-    character: CONST.CHAR_WRAP
+    character: CONST.CHAR_WRAP,
+    mix: CONST.MIX_WRAP
   };
 
   var DegToRad$1 = Phaser.Math.DegToRad;
@@ -19499,6 +19501,10 @@
     this.parent.emit(eventName, key, pointer, localX, localY, event);
   };
 
+  var IsASCIIString = function IsASCIIString(s) {
+    return /^[\x00-\x7F]+$/.test(s);
+  };
+
   var NO_NEWLINE$1 = CONST.NO_NEWLINE;
   var RAW_NEWLINE = CONST.RAW_NEWLINE;
   var WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
@@ -19515,7 +19521,6 @@
       return retLines;
     }
     var isNoWrap = wrapMode === NO_WRAP$1;
-    var isWordWrap = wrapMode === WORD_WRAP;
     var lines = text.split(splitRegExp),
       line,
       remainWidth,
@@ -19538,33 +19543,17 @@
           continue;
         }
       }
-      var tokenArray, isSpaceCharacterEnd;
-      if (isWordWrap) {
-        // word mode
-        tokenArray = line.split(' ');
-        isSpaceCharacterEnd = tokenArray[tokenArray.length - 1] === '';
-        if (isSpaceCharacterEnd) {
-          tokenArray.length -= 1;
-        }
-      } else {
-        tokenArray = line;
-      }
-      var token, tokenWidth, isLastToken;
+      var tokenArray = ParseLine(line, wrapMode);
+      var token, tokenWidth;
       var lineText = '',
         lineWidth = 0;
       var currLineWidth;
-      var whiteSpaceWidth = isWordWrap ? getTextWidth(' ') : undefined;
       for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
         token = tokenArray[j];
         tokenWidth = getTextWidth(token);
-        isLastToken = j === tokenLen - 1;
-        if (isWordWrap && (!isLastToken || isSpaceCharacterEnd)) {
-          token += ' ';
-          tokenWidth += whiteSpaceWidth;
-        }
 
         // Text width of single token is larger than a line width
-        if (isWordWrap && tokenWidth > wrapWidth) {
+        if (tokenWidth > wrapWidth && IsWord(token)) {
           if (lineText !== '') {
             // Has pending lineText, flush it out
             retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
@@ -19601,7 +19590,7 @@
           lineText += token;
           lineWidth = currLineWidth;
         }
-        if (isLastToken) {
+        if (j === tokenLen - 1) {
           // Flush remain text
           retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, newLineMode));
         }
@@ -19609,6 +19598,64 @@
     } // for each line in lines
 
     return retLines;
+  };
+  var ParseLine = function ParseLine(s, mode) {
+    var tokens = [];
+    switch (mode) {
+      case WORD_WRAP:
+        s = s.split(' ');
+        for (var i = 0, icnt = s.length; i < icnt; i++) {
+          var token = s[i];
+          if (i < icnt - 1) {
+            tokens.push(token + ' ');
+          } else {
+            // The last token
+            if (token !== '') {
+              tokens.push(token);
+            }
+          }
+        }
+        break;
+      case CHAR_WRAP:
+        tokens.push.apply(tokens, _toConsumableArray(s.split('')));
+        break;
+      default:
+        // MIX_WRAP
+        s = s.split(' ');
+        for (var i = 0, icnt = s.length; i < icnt; i++) {
+          var token = s[i];
+          if (i < icnt - 1) {
+            if (IsASCIIString(token)) {
+              tokens.push(token + ' ');
+            } else {
+              tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+              // Add space as last token
+              tokens.push(' ');
+            }
+          } else {
+            // The last token
+            if (token !== '') {
+              if (IsASCIIString(token)) {
+                tokens.push(token);
+              } else {
+                tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+              }
+            }
+          }
+        }
+        break;
+    }
+    return tokens;
+  };
+  var IsWord = function IsWord(s) {
+    switch (s.length) {
+      case 1:
+        return false;
+      case 2:
+        return s.charAt(1) !== ' ';
+      default:
+        return true;
+    }
   };
 
   var GetValue$d = Phaser.Utils.Objects.GetValue;
