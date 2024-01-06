@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
 
         this.translation.initI18Next(this, {
             lng: 'en',
+            fallbackLng: 'en',
             ns: 'ui',
             debug: true,
             backend: {

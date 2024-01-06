@@ -32,6 +32,7 @@ class Demo extends Phaser.Scene {
                         },
                     },
                     lng: 'en',
+                    fallbackLng: 'en',
                     ns: 'ui'
                 }, successCallback);
         })

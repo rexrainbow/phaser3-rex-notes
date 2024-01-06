@@ -141,6 +141,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
             .use(Backend)
             .init({
                 lng: 'dev',
+                // fallbackLng: 'dev',
                 ns: 'translation',
                 
                 // resources: {
@@ -175,6 +176,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 ```javascript
 scene.plugins.get('rexTextTranslation').initI18Next(scene, {
     lng: 'dev',
+    // fallbackLng: 'dev',
     ns: 'translation',
 
     // resources: {
@@ -203,6 +205,7 @@ i18next
 ```
 
 - `lng` : Language to use. Will fallback to `'dev'`.
+- `fallbackLng` : Language to use if translations in user language are not available. Setting it explicitly to `false` will not trigger to load the fallbackLng at all.
 - `ns` : String or array of namespaces to load. Default value is `'translation'`.
 - `debug` : Logs info level to console output. Helps finding issues with loading not working. Default value is `false`.
 - `resources` : Resources to initialize with.
