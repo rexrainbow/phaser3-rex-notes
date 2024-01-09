@@ -3,6 +3,7 @@
 i18next is a very popular internationalization framework for browser or any other javascript environment.
 
 - Author: [i18next](https://github.com/i18next/i18next)
+- Application plugin : [Text translation](texttranslation.md)
 
 ## Usage
 
@@ -35,6 +36,7 @@ i18next
     .use(Backend)
     .init({
         lng: 'dev',
+        fallbackLng: 'dev',
         ns: 'translation',
     
         // resources: {

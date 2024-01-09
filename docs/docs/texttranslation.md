@@ -44,6 +44,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
     ```javascript
     scene.plugins.get('rextexttranslationplugin').initI18Next(scene, {
         lng: 'dev',
+        fallbackLng: 'dev',
         ns: 'translation',
 
         // resources: {
@@ -96,6 +97,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
     ```javascript
     scene.plugins.get('rexTextTranslation').initI18Next(scene, {
         lng: 'dev',
+        fallbackLng: 'dev',
         ns: 'translation',
 
         // resources: {
@@ -141,7 +143,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
             .use(Backend)
             .init({
                 lng: 'dev',
-                // fallbackLng: 'dev',
+                fallbackLng: 'dev',
                 ns: 'translation',
                 
                 // resources: {
@@ -176,7 +178,7 @@ Apply translated string ([i18next](https://www.i18next.com/)) to [text object](t
 ```javascript
 scene.plugins.get('rexTextTranslation').initI18Next(scene, {
     lng: 'dev',
-    // fallbackLng: 'dev',
+    fallbackLng: 'dev',
     ns: 'translation',
 
     // resources: {

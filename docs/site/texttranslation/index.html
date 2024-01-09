@@ -9768,6 +9768,7 @@
 <li>Initialize i18next during preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexttranslationplugin&#39;</span><span class="p">).</span><span class="nx">initI18Next</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fallbackLng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">ns</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;translation&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// resources: {</span>
@@ -9816,6 +9817,7 @@
 <li>Initialize i18next during preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTranslation&#39;</span><span class="p">).</span><span class="nx">initI18Next</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fallbackLng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">ns</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;translation&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// resources: {</span>
@@ -9857,6 +9859,7 @@ npm i i18next-http-backend
 <span class="w">        </span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Backend</span><span class="p">)</span>
 <span class="w">        </span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
 <span class="w">            </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">fallbackLng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">ns</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;translation&#39;</span><span class="p">,</span>
 
 <span class="w">            </span><span class="c1">// resources: {</span>
@@ -9892,6 +9895,7 @@ npm i i18next-http-backend
 <h3 id="initialize-i18next">Initialize i18next<a class="headerlink" href="#initialize-i18next" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTranslation&#39;</span><span class="p">).</span><span class="nx">initI18Next</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fallbackLng</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dev&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">ns</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;translation&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// resources: {</span>
@@ -9917,6 +9921,7 @@ npm i i18next-http-backend
 </code></pre></div>
 <ul>
 <li><code>lng</code> : Language to use. Will fallback to <code>'dev'</code>.</li>
+<li><code>fallbackLng</code> : Language to use if translations in user language are not available. Setting it explicitly to <code>false</code> will not trigger to load the fallbackLng at all.</li>
 <li><code>ns</code> : String or array of namespaces to load. Default value is <code>'translation'</code>.</li>
 <li><code>debug</code> : Logs info level to console output. Helps finding issues with loading not working. Default value is <code>false</code>.</li>
 <li><code>resources</code> : Resources to initialize with.</li>
