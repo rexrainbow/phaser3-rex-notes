@@ -5,16 +5,16 @@ export default {
         }
 
         var currentIndex = this.currentOverIndex;
-        var total = this.listPanel.getButtons().length;
 
         var nextIndex;
         if (currentIndex === undefined) {
             nextIndex = 0;
         } else {
+            var total = this.listPanel.getButtons().length;
             nextIndex = (currentIndex + 1) % total;
         }
 
-        this.emitButtonOver(index);
+        this.emitButtonOver(nextIndex);
 
         return this;
     },
@@ -25,16 +25,16 @@ export default {
         }
 
         var currentIndex = this.currentOverIndex;
-        var total = this.listPanel.getButtons().length;
 
         var nextIndex;
         if (currentIndex === undefined) {
             nextIndex = 0;
         } else {
+            var total = this.listPanel.getButtons().length;
             nextIndex = (currentIndex - 1 + total) % total;
         }
 
-        this.emitButtonOver(index);
+        this.emitButtonOver(nextIndex);
 
         return this;
     }

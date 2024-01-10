@@ -36922,18 +36922,30 @@
       if (!this.isOpened) {
         return this;
       }
-      this.currentOverIndex;
-      this.listPanel.getButtons().length;
-      this.emitButtonOver(index);
+      var currentIndex = this.currentOverIndex;
+      var nextIndex;
+      if (currentIndex === undefined) {
+        nextIndex = 0;
+      } else {
+        var total = this.listPanel.getButtons().length;
+        nextIndex = (currentIndex + 1) % total;
+      }
+      this.emitButtonOver(nextIndex);
       return this;
     },
     focusPrevButton: function focusPrevButton() {
       if (!this.isOpened) {
         return this;
       }
-      this.currentOverIndex;
-      this.listPanel.getButtons().length;
-      this.emitButtonOver(index);
+      var currentIndex = this.currentOverIndex;
+      var nextIndex;
+      if (currentIndex === undefined) {
+        nextIndex = 0;
+      } else {
+        var total = this.listPanel.getButtons().length;
+        nextIndex = (currentIndex - 1 + total) % total;
+      }
+      this.emitButtonOver(nextIndex);
       return this;
     }
   };
