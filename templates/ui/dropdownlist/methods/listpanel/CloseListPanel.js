@@ -4,6 +4,7 @@ var CloseListPanel = function () {
     }
 
     this.dropDownBehavior.requestClose();
+    this.currentOverIndex = undefined;
 
     return this;
 }

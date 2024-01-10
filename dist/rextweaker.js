@@ -8016,6 +8016,8 @@
       value: function resetFromJSON(o) {
         this.pointer = undefined;
         this.lastClickTime = undefined;
+        this.isDown = false;
+        this.isOver = false;
         this.setEnable(GetValue$1D(o, "enable", true));
         this.setMode(GetValue$1D(o, "mode", 1));
         this.setClickInterval(GetValue$1D(o, "clickInterval", 100));
@@ -8110,6 +8112,7 @@
           return;
         }
         this.pointer = pointer;
+        this.isDown = true;
         this.emit('down', this, this.parent, pointer, event);
         if (this.mode === 0) {
           this.click(pointer.downTime, pointer, event);
@@ -8121,6 +8124,7 @@
         if (this.pointer !== pointer) {
           return;
         }
+        this.isDown = false;
         this.emit('up', this, this.parent, pointer, event);
         if (this.mode === 1) {
           this.click(pointer.upTime, pointer, event);
@@ -8151,6 +8155,26 @@
         }
       }
     }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = true;
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = false;
+        this.emit('out', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
       key: "click",
       value: function click(nowTime, pointer, event) {
         if (!this.enable) {
@@ -8174,24 +8198,6 @@
       key: "cancel",
       value: function cancel() {
         this.pointer = undefined;
-        return this;
-      }
-    }, {
-      key: "onOver",
-      value: function onOver(pointer, localX, localY, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('over', this, this.parent, pointer, event);
-        return this;
-      }
-    }, {
-      key: "onOut",
-      value: function onOut(pointer, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('out', this, this.parent, pointer, event);
         return this;
       }
     }]);
@@ -25756,14 +25762,13 @@
           this.fireEvent('button.enable', gameObject);
         }, this).on('disable', function (buttonBehavior, gameObject) {
           this.fireEvent('button.disable', gameObject);
-        }, this);
-        gameObject.on('pointerover', function (pointer, localX, localY, event) {
+        }, this).on('over', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.over', gameObject, pointer, event);
-        }, this).on('pointerout', function (pointer, event) {
+        }, this).on('out', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.out', gameObject, pointer, event);
-        }, this).on('pointerdown', function (pointer, localX, localY, event) {
+        }, this).on('down', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.down', gameObject, pointer, event);
-        }, this).on('pointerup', function (pointer, event) {
+        }, this).on('up', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
       }
@@ -26040,6 +26045,9 @@
       }
       return button;
     },
+    getButtons: function getButtons() {
+      return this.buttons;
+    },
     setButtonEnable: function setButtonEnable(index, enabled) {
       // buttonGroup and button-sizer have *buttons* member both
       var buttons = this.buttons;
@@ -26076,6 +26084,29 @@
       // this: buttonGroup or button-sizer
       var buttonGroup = this.buttonGroup ? this.buttonGroup : this;
       buttonGroup.fireEvent('button.click', index);
+      return this;
+    },
+    emitButtonOver: function emitButtonOver(index) {
+      // this: buttonGroup or button-sizer
+      var buttonGroup = this.buttonGroup ? this.buttonGroup : this;
+      var buttons = this.buttons;
+
+      // Fire 'button.out' of overed button(s)
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (!button._click.isOver) {
+          continue;
+        }
+        button._click.isOver = false;
+        buttonGroup.fireEvent('button.out', button);
+      }
+
+      // Fire 'button.over'
+      var button = this.getButton(index);
+      if (button) {
+        button._click.isOver = true;
+        buttonGroup.fireEvent('button.over', button);
+      }
       return this;
     },
     showButton: function showButton(index) {
@@ -36741,6 +36772,9 @@
       var options = this.options;
       for (var i = 0, cnt = options.length; i < cnt; i++) {
         var button = createButtonCallback.call(this, scene, options[i], i, options);
+        if (!button) {
+          continue;
+        }
         scene.add.existing(button);
         buttons.push(button);
       }
@@ -36787,11 +36821,15 @@
 
     // Button over/out
     listPanel.on('button.over', function (button, index, pointer, event) {
+      this.currentOverIndex = index;
       if (this.listOnButtonOver) {
         this.listOnButtonOver.call(this, button, index, pointer, event);
       }
       this.emit('button.over', this, listPanel, button, index, pointer, event);
     }, this).on('button.out', function (button, index, pointer, event) {
+      if (this.currentOverIndex === index) {
+        this.currentOverIndex = undefined;
+      }
       if (this.listOnButtonOut) {
         this.listOnButtonOut.call(this, button, index, pointer, event);
       }
@@ -36845,6 +36883,7 @@
       return this;
     }
     this.dropDownBehavior.requestClose();
+    this.currentOverIndex = undefined;
     return this;
   };
 
@@ -36857,12 +36896,56 @@
     return this;
   };
 
+  var EmitListButtonClick = function EmitListButtonClick(index) {
+    var listPanel = this.listPanel;
+
+    // Use option if listPanel is not created.
+    var button = listPanel ? listPanel.getButton(index) : this.options[index];
+    if (this.listOnButtonClick) {
+      this.listOnButtonClick.call(this, button, index);
+    }
+    this.emit('button.click', this, listPanel, button, index);
+    return this;
+  };
+
+  var EmitButtonOver = function EmitButtonOver(index) {
+    var listPanel = this.listPanel;
+    if (!listPanel) {
+      return this;
+    }
+    listPanel.emitButtonOver(index);
+    return this;
+  };
+
+  var FocusButtonMethods = {
+    focusNextButton: function focusNextButton() {
+      if (!this.isOpened) {
+        return this;
+      }
+      this.currentOverIndex;
+      this.listPanel.getButtons().length;
+      this.emitButtonOver(index);
+      return this;
+    },
+    focusPrevButton: function focusPrevButton() {
+      if (!this.isOpened) {
+        return this;
+      }
+      this.currentOverIndex;
+      this.listPanel.getButtons().length;
+      this.emitButtonOver(index);
+      return this;
+    }
+  };
+
   var Methods = {
     openListPanel: OpenListPanel,
     closeListPanel: CloseListPanel,
-    toggleListPanel: ToggleListPanel
+    toggleListPanel: ToggleListPanel,
+    emitButtonClick: EmitListButtonClick,
+    emitButtonOver: EmitButtonOver
   };
-  Object.assign(Methods, methods);
+  Object.assign(Methods, methods, FocusButtonMethods);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var DropDownList = /*#__PURE__*/function (_Label) {
@@ -36874,6 +36957,8 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexDropDownList';
       _this.timer = undefined;
+      _this.listPanel = undefined;
+      _this.currentOverIndex = undefined;
       _this.setOptions(GetValue$1(config, 'options'));
       var listConfig = GetValue$1(config, 'list');
       _this.setWrapEnable(GetValue$1(listConfig, 'wrap', false));
@@ -36959,16 +37044,6 @@
           }
         }
         this.emit('valuechange', this, value, previousValue);
-      }
-    }, {
-      key: "emitButtonClick",
-      value: function emitButtonClick(index) {
-        var option = this.options[index];
-        if (!option) {
-          return this;
-        }
-        this.emit('button.click', this, undefined, option, index);
-        return this;
       }
     }]);
     return DropDownList;

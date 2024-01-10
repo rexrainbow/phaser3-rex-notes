@@ -355,7 +355,7 @@ var dropDownList = scene.rexUI.add.dropDownList({
 dropDownList.emitButtonClick(index);
 ```
 
-- `index` : Index of option.
+- `index` : Index of button/option.
 
 Will fire `'button.click'` event
 
@@ -365,10 +365,44 @@ dropDownList.on('button.click', function(dropDownList, listPanel, button, index,
 }, scope);
 ```
 
-- `listPanel` : `undefined`
-- `button` : Option
+- `listPanel` : listPanel, or `undefined` if list is not created.
+- `button` : Button game object, or option if list is not created.
 - `pointer` : `undefined`
 - `event` : `undefined`
+
+#### Emit button over event
+
+```javascript
+dropDownList.emitButtonOver(index);
+```
+
+- `index` : Index of button/option.
+
+or
+
+```javascript
+dropDownList.focusNextButton();
+dropDownList.focusPrevButton();
+```
+
+Will fire `'button.out'`, `'button.over'` event
+
+```javascript
+dropDownList.on('button.out', function(dropDownList, listPanel, button, index, pointer, event) {
+    // ...
+}, scope);
+```
+```javascript
+dropDownList.on('button.over', function(dropDownList, listPanel, button, index, pointer, event) {
+    // ...
+}, scope);
+```
+
+- `listPanel` : listPanel, or `undefined` if list is not created.
+- `button` : Button game object, or option if list is not created.
+- `pointer` : `undefined`
+- `event` : `undefined`
+
 
 ### Value
 

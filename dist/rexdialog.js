@@ -7995,6 +7995,8 @@
       value: function resetFromJSON(o) {
         this.pointer = undefined;
         this.lastClickTime = undefined;
+        this.isDown = false;
+        this.isOver = false;
         this.setEnable(GetValue$v(o, "enable", true));
         this.setMode(GetValue$v(o, "mode", 1));
         this.setClickInterval(GetValue$v(o, "clickInterval", 100));
@@ -8089,6 +8091,7 @@
           return;
         }
         this.pointer = pointer;
+        this.isDown = true;
         this.emit('down', this, this.parent, pointer, event);
         if (this.mode === 0) {
           this.click(pointer.downTime, pointer, event);
@@ -8100,6 +8103,7 @@
         if (this.pointer !== pointer) {
           return;
         }
+        this.isDown = false;
         this.emit('up', this, this.parent, pointer, event);
         if (this.mode === 1) {
           this.click(pointer.upTime, pointer, event);
@@ -8130,6 +8134,26 @@
         }
       }
     }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = true;
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = false;
+        this.emit('out', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
       key: "click",
       value: function click(nowTime, pointer, event) {
         if (!this.enable) {
@@ -8153,24 +8177,6 @@
       key: "cancel",
       value: function cancel() {
         this.pointer = undefined;
-        return this;
-      }
-    }, {
-      key: "onOver",
-      value: function onOver(pointer, localX, localY, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('over', this, this.parent, pointer, event);
-        return this;
-      }
-    }, {
-      key: "onOut",
-      value: function onOut(pointer, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('out', this, this.parent, pointer, event);
         return this;
       }
     }]);
@@ -11982,14 +11988,13 @@
           this.fireEvent('button.enable', gameObject);
         }, this).on('disable', function (buttonBehavior, gameObject) {
           this.fireEvent('button.disable', gameObject);
-        }, this);
-        gameObject.on('pointerover', function (pointer, localX, localY, event) {
+        }, this).on('over', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.over', gameObject, pointer, event);
-        }, this).on('pointerout', function (pointer, event) {
+        }, this).on('out', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.out', gameObject, pointer, event);
-        }, this).on('pointerdown', function (pointer, localX, localY, event) {
+        }, this).on('down', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.down', gameObject, pointer, event);
-        }, this).on('pointerup', function (pointer, event) {
+        }, this).on('up', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
       }
@@ -12266,6 +12271,9 @@
       }
       return button;
     },
+    getButtons: function getButtons() {
+      return this.buttons;
+    },
     setButtonEnable: function setButtonEnable(index, enabled) {
       // buttonGroup and button-sizer have *buttons* member both
       var buttons = this.buttons;
@@ -12302,6 +12310,29 @@
       // this: buttonGroup or button-sizer
       var buttonGroup = this.buttonGroup ? this.buttonGroup : this;
       buttonGroup.fireEvent('button.click', index);
+      return this;
+    },
+    emitButtonOver: function emitButtonOver(index) {
+      // this: buttonGroup or button-sizer
+      var buttonGroup = this.buttonGroup ? this.buttonGroup : this;
+      var buttons = this.buttons;
+
+      // Fire 'button.out' of overed button(s)
+      for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        var button = buttons[i];
+        if (!button._click.isOver) {
+          continue;
+        }
+        button._click.isOver = false;
+        buttonGroup.fireEvent('button.out', button);
+      }
+
+      // Fire 'button.over'
+      var button = this.getButton(index);
+      if (button) {
+        button._click.isOver = true;
+        buttonGroup.fireEvent('button.over', button);
+      }
       return this;
     },
     showButton: function showButton(index) {

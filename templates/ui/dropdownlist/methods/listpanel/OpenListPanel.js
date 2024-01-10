@@ -11,6 +11,8 @@ var OpenListPanel = function () {
     // Button over/out
     listPanel
         .on('button.over', function (button, index, pointer, event) {
+            this.currentOverIndex = index;
+
             if (this.listOnButtonOver) {
                 this.listOnButtonOver.call(this, button, index, pointer, event);
             }
@@ -18,6 +20,10 @@ var OpenListPanel = function () {
             this.emit('button.over', this, listPanel, button, index, pointer, event);
         }, this)
         .on('button.out', function (button, index, pointer, event) {
+            if (this.currentOverIndex === index) {
+                this.currentOverIndex = undefined;
+            }
+
             if (this.listOnButtonOut) {
                 this.listOnButtonOut.call(this, button, index, pointer, event);
             }

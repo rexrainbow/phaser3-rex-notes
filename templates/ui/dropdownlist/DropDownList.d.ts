@@ -1,4 +1,6 @@
 import Label from '../label/Label';
+import Buttons from '../buttons/Buttons';
+import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 
 export default DropDownList;
 
@@ -98,7 +100,10 @@ declare class DropDownList extends Label {
 
     readonly isOpened: boolean;
 
+    listPanel: undefined | Buttons | FixWidthButtons;
+
     setOptions(options: any[]): this;
+    options: any[];
 
     openListPanel(): this;
     closeListPanel(): this;
@@ -129,4 +134,13 @@ declare class DropDownList extends Label {
     setListSpace(space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType): this;
 
     setListDraggable(enable?: boolean): this;
+
+    emitButtonClick(index: number): this;
+
+    emitButtonOver(index: number): this;
+    currentOverIndex: number;
+
+    focusNextButton(): this;
+    focusPrevButton(): this;
+
 }

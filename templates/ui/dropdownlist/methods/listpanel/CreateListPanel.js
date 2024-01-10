@@ -17,6 +17,9 @@ var CreateListPanel = function () {
         var options = this.options;
         for (var i = 0, cnt = options.length; i < cnt; i++) {
             var button = createButtonCallback.call(this, scene, options[i], i, options);
+            if (!button) {
+                continue;
+            }
             scene.add.existing(button);
             buttons.push(button);
         }

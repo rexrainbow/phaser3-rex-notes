@@ -8501,6 +8501,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#emit-button-over-event" class="md-nav__link">
+    Emit button over event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9714,6 +9721,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#emit-button-over-event" class="md-nav__link">
+    Emit button over event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10179,7 +10193,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>index</code> : Index of option.</li>
+<li><code>index</code> : Index of button/option.</li>
 </ul>
 <p>Will fire <code>'button.click'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">dropDownList</span><span class="p">,</span><span class="w"> </span><span class="nx">listPanel</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -10187,8 +10201,33 @@
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>listPanel</code> : <code>undefined</code></li>
-<li><code>button</code> : Option</li>
+<li><code>listPanel</code> : listPanel, or <code>undefined</code> if list is not created.</li>
+<li><code>button</code> : Button game object, or option if list is not created.</li>
+<li><code>pointer</code> : <code>undefined</code></li>
+<li><code>event</code> : <code>undefined</code></li>
+</ul>
+<h4 id="emit-button-over-event">Emit button over event<a class="headerlink" href="#emit-button-over-event" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">emitButtonOver</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>index</code> : Index of button/option.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">focusNextButton</span><span class="p">();</span>
+<span class="nx">dropDownList</span><span class="p">.</span><span class="nx">focusPrevButton</span><span class="p">();</span>
+</code></pre></div>
+<p>Will fire <code>'button.out'</code>, <code>'button.over'</code> event</p>
+<p><div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">dropDownList</span><span class="p">,</span><span class="w"> </span><span class="nx">listPanel</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">dropDownList</span><span class="p">,</span><span class="w"> </span><span class="nx">listPanel</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></p>
+<ul>
+<li><code>listPanel</code> : listPanel, or <code>undefined</code> if list is not created.</li>
+<li><code>button</code> : Button game object, or option if list is not created.</li>
 <li><code>pointer</code> : <code>undefined</code></li>
 <li><code>event</code> : <code>undefined</code></li>
 </ul>

@@ -16,7 +16,18 @@ export interface IConfig {
 }
 
 export interface IButtons {
+
+    getButton(index: number): Phaser.GameObjects.GameObject;
+    getButton(name: string): Phaser.GameObjects.GameObject;
+    getButton(button: Phaser.GameObjects.GameObject): Phaser.GameObjects.GameObject;
+
+    getButtons(): Phaser.GameObjects.GameObject[];
+
     emitButtonClick(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
+
+    emitButtonOver(
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
@@ -78,4 +89,6 @@ export interface IButtons {
     getButtonState(
         name: string
     ): boolean;
+
+
 }

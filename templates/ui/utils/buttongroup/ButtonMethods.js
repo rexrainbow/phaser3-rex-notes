@@ -26,6 +26,10 @@ export default {
         return button;
     },
 
+    getButtons() {
+        return this.buttons;
+    },
+
     setButtonEnable(index, enabled) {
         // buttonGroup and button-sizer have *buttons* member both
         var buttons = this.buttons;
@@ -65,6 +69,32 @@ export default {
         // this: buttonGroup or button-sizer
         var buttonGroup = (this.buttonGroup) ? this.buttonGroup : this;
         buttonGroup.fireEvent('button.click', index);
+        return this;
+    },
+
+    emitButtonOver(index) {
+        // this: buttonGroup or button-sizer
+        var buttonGroup = (this.buttonGroup) ? this.buttonGroup : this;
+
+        var buttons = this.buttons;
+
+        // Fire 'button.out' of overed button(s)
+        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+            var button = buttons[i];
+            if (!button._click.isOver) {
+                continue;
+            }
+            button._click.isOver = false;
+            buttonGroup.fireEvent('button.out', button);
+        }
+
+        // Fire 'button.over'
+        var button = this.getButton(index);
+        if (button) {
+            button._click.isOver = true;
+            buttonGroup.fireEvent('button.over', button);
+        }
+
         return this;
     },
 

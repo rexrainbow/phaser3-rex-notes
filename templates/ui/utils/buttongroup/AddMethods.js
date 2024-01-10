@@ -20,17 +20,18 @@ export default {
                     this.fireEvent('button.disable', gameObject);
                 }, this)
 
-            gameObject
-                .on('pointerover', function (pointer, localX, localY, event) {
+
+                .on('over', function (buttonBehavior, gameObject, pointer, event) {
                     this.fireEvent('button.over', gameObject, pointer, event);
                 }, this)
-                .on('pointerout', function (pointer, event) {
+                .on('out', function (buttonBehavior, gameObject, pointer, event) {
                     this.fireEvent('button.out', gameObject, pointer, event);
                 }, this)
-                .on('pointerdown', function (pointer, localX, localY, event) {
+
+                .on('down', function (buttonBehavior, gameObject, pointer, event) {
                     this.fireEvent('button.down', gameObject, pointer, event);
                 }, this)
-                .on('pointerup', function (pointer, event) {
+                .on('up', function (buttonBehavior, gameObject, pointer, event) {
                     this.fireEvent('button.up', gameObject, pointer, event);
                 }, this)
         }

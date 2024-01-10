@@ -9,6 +9,8 @@ class DropDownList extends Label {
         super(scene, config);
         this.type = 'rexDropDownList';
         this.timer = undefined;
+        this.listPanel = undefined;
+        this.currentOverIndex = undefined;
 
         this.setOptions(GetValue(config, 'options'));
 
@@ -101,16 +103,6 @@ class DropDownList extends Label {
 
         this.emit('valuechange', this, value, previousValue);
 
-    }
-
-    emitButtonClick(index) {
-        var option = this.options[index];
-        if (!option) {
-            return this;
-        }
-
-        this.emit('button.click', this, undefined, option, index);
-        return this;
     }
 
 }

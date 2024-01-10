@@ -108,25 +108,25 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
     ```
 - Pointer over
     ```javascript
-    button.on('over', function (button, gameObject, event) {
+    button.on('over', function (button, gameObject, pointer, event) {
         // ...
     }, scope);
     ```
 - Pointer out
     ```javascript
-    button.on('out', function (button, gameObject, event) {
+    button.on('out', function (button, gameObject, pointer, event) {
         // ...
     }, scope);
     ```
 - Pointer down
     ```javascript
-    button.on('down', function (button, gameObject, event) {
+    button.on('down', function (button, gameObject, pointer, event) {
         // ...
     }, scope);
     ```
 - Pointer up
     ```javascript
-    button.on('up', function (button, gameObject, event) {
+    button.on('up', function (button, gameObject, pointer, event) {
         // ...
     }, scope);
     ```

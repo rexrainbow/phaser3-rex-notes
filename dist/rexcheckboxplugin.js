@@ -2831,6 +2831,8 @@
       value: function resetFromJSON(o) {
         this.pointer = undefined;
         this.lastClickTime = undefined;
+        this.isDown = false;
+        this.isOver = false;
         this.setEnable(GetValue$1(o, "enable", true));
         this.setMode(GetValue$1(o, "mode", 1));
         this.setClickInterval(GetValue$1(o, "clickInterval", 100));
@@ -2925,6 +2927,7 @@
           return;
         }
         this.pointer = pointer;
+        this.isDown = true;
         this.emit('down', this, this.parent, pointer, event);
         if (this.mode === 0) {
           this.click(pointer.downTime, pointer, event);
@@ -2936,6 +2939,7 @@
         if (this.pointer !== pointer) {
           return;
         }
+        this.isDown = false;
         this.emit('up', this, this.parent, pointer, event);
         if (this.mode === 1) {
           this.click(pointer.upTime, pointer, event);
@@ -2966,6 +2970,26 @@
         }
       }
     }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = true;
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.isOver = false;
+        this.emit('out', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
       key: "click",
       value: function click(nowTime, pointer, event) {
         if (!this.enable) {
@@ -2989,24 +3013,6 @@
       key: "cancel",
       value: function cancel() {
         this.pointer = undefined;
-        return this;
-      }
-    }, {
-      key: "onOver",
-      value: function onOver(pointer, localX, localY, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('over', this, this.parent, pointer, event);
-        return this;
-      }
-    }, {
-      key: "onOut",
-      value: function onOut(pointer, event) {
-        if (!this.enable) {
-          return this;
-        }
-        this.emit('out', this, this.parent, pointer, event);
         return this;
       }
     }]);
