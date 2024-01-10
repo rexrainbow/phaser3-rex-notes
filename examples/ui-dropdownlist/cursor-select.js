@@ -28,7 +28,13 @@ class Demo extends Phaser.Scene {
 
         this.input.keyboard
             .on('keydown-ENTER', function (event) {
-                dropDownList.toggleListPanel();
+                if (!dropDownList.isOpened) {
+                    dropDownList.openListPanel();
+                } else {
+                    dropDownList
+                        .emitButtonClick()
+                        .closeListPanel()
+                }
             })
             .on('keydown-UP', function (event) {
                 dropDownList.focusPrevButton();

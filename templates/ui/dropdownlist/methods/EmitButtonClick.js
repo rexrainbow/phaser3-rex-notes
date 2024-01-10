@@ -1,4 +1,12 @@
 var EmitListButtonClick = function (index) {
+    if (index === undefined) {
+        index = this.currentOverIndex;
+    }
+
+    if (index === undefined) {
+        return this;
+    }
+
     var listPanel = this.listPanel;
 
     // Use option if listPanel is not created.

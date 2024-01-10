@@ -11,6 +11,7 @@ A [label](ui-label.md) can open a drop-down list panel.
 - [Drop-down wrap-list](https://codepen.io/rexrainbow/pen/PoQWobV)
 - [Custom transit](https://codepen.io/rexrainbow/pen/OJvJwob)
 - [Align to right side](https://codepen.io/rexrainbow/pen/BaOMWKo)
+- [Cursor select](https://codepen.io/rexrainbow/pen/RwdRmdj)
 
 ## Usage
 
@@ -349,13 +350,15 @@ var dropDownList = scene.rexUI.add.dropDownList({
     dropDownList.onClick(callback, scope);
     ```
 
-#### Emit button click event
+### Emit button click event
 
 ```javascript
 dropDownList.emitButtonClick(index);
+// dropDownList.emitButtonClick();
 ```
 
 - `index` : Index of button/option.
+    - `undefined` : Click current focus (over) button.
 
 Will fire `'button.click'` event
 
@@ -370,7 +373,9 @@ dropDownList.on('button.click', function(dropDownList, listPanel, button, index,
 - `pointer` : `undefined`
 - `event` : `undefined`
 
-#### Emit button over event
+This method won't close list panel.
+
+### Emit button over event
 
 ```javascript
 dropDownList.emitButtonOver(index);

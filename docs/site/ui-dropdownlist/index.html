@@ -8491,8 +8491,7 @@
     Clicking
   </a>
   
-    <nav class="md-nav" aria-label="Clicking">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#emit-button-click-event" class="md-nav__link">
@@ -8505,11 +8504,6 @@
   <a href="#emit-button-over-event" class="md-nav__link">
     Emit button over event
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -9711,8 +9705,7 @@
     Clicking
   </a>
   
-    <nav class="md-nav" aria-label="Clicking">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#emit-button-click-event" class="md-nav__link">
@@ -9725,11 +9718,6 @@
   <a href="#emit-button-over-event" class="md-nav__link">
     Emit button over event
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -9832,6 +9820,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/PoQWobV">Drop-down wrap-list</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/OJvJwob">Custom transit</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/BaOMWKo">Align to right side</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/RwdRmdj">Cursor select</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-dropdownlist">Sample code</a></p>
@@ -10189,11 +10178,15 @@
     <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">onClick</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
+<h3 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// dropDownList.emitButtonClick();</span>
 </code></pre></div>
 <ul>
-<li><code>index</code> : Index of button/option.</li>
+<li><code>index</code> : Index of button/option.<ul>
+<li><code>undefined</code> : Click current focus (over) button.</li>
+</ul>
+</li>
 </ul>
 <p>Will fire <code>'button.click'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">dropDownList</span><span class="p">,</span><span class="w"> </span><span class="nx">listPanel</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -10206,7 +10199,8 @@
 <li><code>pointer</code> : <code>undefined</code></li>
 <li><code>event</code> : <code>undefined</code></li>
 </ul>
-<h4 id="emit-button-over-event">Emit button over event<a class="headerlink" href="#emit-button-over-event" title="Permanent link">&para;</a></h4>
+<p>This method won't close list panel.</p>
+<h3 id="emit-button-over-event">Emit button over event<a class="headerlink" href="#emit-button-over-event" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">emitButtonOver</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
 <ul>
