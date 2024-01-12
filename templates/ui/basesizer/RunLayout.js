@@ -11,19 +11,27 @@ var RunLayout = function (parent, newWidth, newHeight) {
         this.preLayout();
     }
 
-    // Calculate parent width
-    newWidth = this.resolveWidth(newWidth);
-    // Calculate all children width, run width wrap
-    if (isTopmostParent) {
-        this.resolveChildrenWidth(newWidth);
-        this.runWidthWrap(newWidth);
+    var size = { width: newWidth, height: newHeight };
+    var resolved = ResolveSize(this, size, isTopmostParent);
+    if (!resolved) {
+        // Try again
+        size.width = newWidth;
+        size.height = newHeight;
+        ResolveSize(this, size, isTopmostParent);
     }
-    // Calculate parent height
-    newHeight = this.resolveHeight(newHeight);
+
+    if (!resolved) {
+        debugger;
+    }
+
+    var width = size.width,
+        height = size.height;
+
     // The last chance of resolving size
-    this.postResolveSize(newWidth, newHeight);
+    this.postResolveSize(width, height);
+
     // Resize parent
-    this.resize(newWidth, newHeight);
+    this.resize(width, height);
 
     if (this.sizerEventsEnable) {
         if (this.layoutedChildren === undefined) {
@@ -52,4 +60,34 @@ var RunLayout = function (parent, newWidth, newHeight) {
 
     return this;
 }
+
+var ResolveSize = function (self, size, isTopmostParent) {
+
+    // Calculate parent width
+    var width = self.resolveWidth(size.width);
+
+    // Calculate all children width, run width wrap
+    if (width !== undefined) {
+        size.width = width;
+        if (isTopmostParent) {
+            self.resolveChildrenWidth(width);
+            self.runWidthWrap(width);
+        }
+    }
+
+    // Calculate parent height
+    var height = self.resolveHeight(size.height);
+
+    // Calculate all children width, run width wrap
+    if (height !== undefined) {
+        size.height = height;
+        if (isTopmostParent) {
+            self.resolveChildrenHeight(size.height);
+            self.runHeightWrap(size.height);
+        }
+    }
+
+    return (width !== undefined) && (height !== undefined);
+}
+
 export default RunLayout;

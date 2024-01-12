@@ -4,7 +4,9 @@ import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/G
 
 
 var LayoutChildren = function () {
-    var innerLineWidth = this.innerWidth;
+    var horizontalWrap = (this.orientation === 0);
+
+    var innerLineWidth = (horizontalWrap) ? this.innerWidth : this.innerHeight;
     var justifyPercentage = this.justifyPercentage;
     var itemSpace = this.space.item,
         lineSpace = this.space.line,
@@ -17,10 +19,10 @@ var LayoutChildren = function () {
     var startX = this.innerLeft,
         startY = this.innerTop;
     var x, y, width, height; // Align zone
-    var lines = this.widthWrapResult.lines;
+    var lines = this.wrapResult.lines;  // Get this.wrapResult from RunChildrenWrap()
     var line, lineChlidren, remainderLineWidth;
 
-    var itemX,
+    var itemX = startX,
         itemY = startY;
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
         // Layout this line
@@ -30,34 +32,61 @@ var LayoutChildren = function () {
             lineChlidren.reverse();
         }
 
-        indentLeft = (i % 2) ? indentLeftEven : indentLeftOdd;
-        itemX = startX + indentLeft;
+        if (horizontalWrap) {
+            indentLeft = (i % 2) ? indentLeftEven : indentLeftOdd;
+            itemX = startX + indentLeft;
+        } else {
+            indentTop = (i % 2) ? indentTopEven : indentTopOdd;
+            itemY = startY + indentTop;
+        }
 
-        remainderLineWidth = (innerLineWidth - line.width);
+        remainderLineWidth = innerLineWidth - ((horizontalWrap) ? line.width : line.height);
+
         switch (this.align) {
             case 0: // left
                 break;
+
             case 1: // right
-                itemX += remainderLineWidth;
+                if (horizontalWrap) {
+                    itemX += remainderLineWidth;
+                } else {
+                    itemY += remainderLineWidth;
+                }
                 break;
+
             case 2: // center
-                itemX += remainderLineWidth / 2;
+                if (horizontalWrap) {
+                    itemX += remainderLineWidth / 2;
+                } else {
+                    itemY += remainderLineWidth / 2;
+                }
                 break;
-            case 3: // justify-left
+
+            case 3: // justify-left            
                 justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 break;
+
             case 4: // justify-right
                 justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align right
-                    itemX += remainderLineWidth;
+                    if (horizontalWrap) {
+                        itemX += remainderLineWidth;
+                    } else {
+                        itemY += remainderLineWidth;
+                    }
                 }
                 break;
+
             case 5: // justify-center
                 justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align center
-                    itemX += remainderLineWidth / 2;
+                    if (horizontalWrap) {
+                        itemX += remainderLineWidth / 2;
+                    } else {
+                        itemY += remainderLineWidth / 2;
+                    }
                 }
                 break;
         }
@@ -74,24 +103,43 @@ var LayoutChildren = function () {
 
             PreLayoutChild.call(this, child);
 
-            x = (itemX + padding.left);
+            if (horizontalWrap) {
+                x = (itemX + padding.left);
+            } else {
+                y = (itemY + padding.top);
+            }
 
             if (isFirstChild) {
                 isFirstChild = false;
             } else {
-                x += itemSpace;
+                if (horizontalWrap) {
+                    x += itemSpace;
+                } else {
+                    y += itemSpace;
+                }
             }
 
-            indentTop = (j % 2) ? indentTopEven : indentTopOdd;
-            y = (itemY + indentTop + padding.top);
             width = GetDisplayWidth(child);
             height = GetDisplayHeight(child);
-            itemX = x + width + padding.right + justifySpace;
+
+            if (horizontalWrap) {
+                indentTop = (j % 2) ? indentTopEven : indentTopOdd;
+                y = (itemY + indentTop + padding.top);
+                itemX = x + width + padding.right + justifySpace;
+            } else {
+                indentLeft = (j % 2) ? indentLeftEven : indentLeftOdd;
+                x = (itemX + indentLeft + padding.left);
+                itemY = y + height + padding.top + justifySpace;
+            }
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);
         }
 
-        itemY += line.height + lineSpace;
+        if (horizontalWrap) {
+            itemY += line.height + lineSpace;
+        } else {
+            itemX += line.width + lineSpace;
+        }
     }
 }
 

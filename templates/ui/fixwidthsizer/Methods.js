@@ -4,6 +4,7 @@ import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
 import LayoutChildren from './LayoutChildren.js';
 import RunWidthWrap from './RunWidthWrap.js';
+import RunHeightWrap from './RunHeightWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 
@@ -14,6 +15,7 @@ var methods = {
     preLayout: PreLayout,
     layoutChildren: LayoutChildren,
     runWidthWrap: RunWidthWrap,
+    runHeightWrap: RunHeightWrap,
 };
 
 Object.assign(

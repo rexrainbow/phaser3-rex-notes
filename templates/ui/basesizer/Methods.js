@@ -11,7 +11,10 @@ import GetChildIndex from './GetChildIndex.js';
 import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
+import RunWidthWrap from './RunWidthWrap.js';
 import ResolveHeight from './ResolveHeight.js';
+import ResolveChildrenHeight from './ResolveChildrenHeight.js';
+import RunHeightWrap from './RunHeightWrap.js';
 import PostResolveSize from './PostResolveSize.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
@@ -28,7 +31,8 @@ import RunLayout from './RunLayout.js';
 import LayoutChildren from './LayoutChildren.js';
 import _PostLayout from './_PostLayout.js';
 import PostLayout from './PostLayout.js';
-import RunWidthWrap from './RunWidthWrap.js';
+
+
 
 import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
@@ -56,7 +60,10 @@ var methods = {
     drawBounds: DrawBounds,
     resolveWidth: ResolveWidth,
     resolveChildrenWidth: ResolveChildrenWidth,
+    runWidthWrap: RunWidthWrap,
     resolveHeight: ResolveHeight,
+    resolveChildrenHeight: ResolveChildrenHeight,
+    runHeightWrap: RunHeightWrap,
     postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
@@ -76,7 +83,7 @@ var methods = {
     layout: Layout,
     runLayout: RunLayout,
     layoutChildren: LayoutChildren,
-    runWidthWrap: RunWidthWrap,
+
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
     _postLayout: _PostLayout,

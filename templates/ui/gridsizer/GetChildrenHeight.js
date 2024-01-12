@@ -1,4 +1,3 @@
-import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 import Sum from '../../../plugins/utils/math/Sum.js';
 
 var GetChildrenHeight = function (minimumMode) {
@@ -14,6 +13,7 @@ var GetChildrenHeight = function (minimumMode) {
         rowHeight;
     var children = this.sizerChildren;
     var child, padding, childHeight, proportion;
+    var hasUnknownChildHeight = false;
 
     for (var i = 0; i < this.rowCount; i++) {
         proportion = this.rowProportions[i];
@@ -28,17 +28,35 @@ var GetChildrenHeight = function (minimumMode) {
                     continue;
                 }
 
-                childHeight = (child.isRexSizer) ?
-                    Math.max(child.minHeight, child.childrenHeight) :
-                    (child.hasOwnProperty('minHeight')) ? child.minHeight : GetDisplayHeight(child);
+                childHeight = this.getChildHeight(child);
+                if (childHeight === undefined) {
+                    hasUnknownChildHeight = true;
+                }
+
+                if (hasUnknownChildHeight) {
+                    continue;
+                }
+
                 padding = child.rexSizer.padding;
                 childHeight += (padding.top + padding.bottom);
                 rowHeight = Math.max(rowHeight, childHeight);
             }
-            result += rowHeight;
+
+            if (!hasUnknownChildHeight) {
+                result += rowHeight;
+            }
+            
         }
         // else,(proportion > 0) : rowHeight is 0
-        this.rowHeight[i] = rowHeight;
+
+        if (!hasUnknownChildHeight) {
+            this.rowHeight[i] = rowHeight;
+        }
+
+    }
+
+    if (hasUnknownChildHeight) {
+        return undefined;
     }
 
     var space = this.space;

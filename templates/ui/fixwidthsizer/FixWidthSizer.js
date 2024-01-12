@@ -40,6 +40,8 @@ class FixWidthSizer extends BaseSizer {
         this.setJustifyPercentage(GetValue(config, 'justifyPercentage', 0.25));
         this.setRTL(GetValue(config, 'rtl', false));
 
+        this.wrapResult = undefined;  // {lines, width, height}
+
         this.addChildrenMap('items', this.sizerChildren);
     }
 

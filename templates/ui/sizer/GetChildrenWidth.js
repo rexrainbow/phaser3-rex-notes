@@ -9,7 +9,9 @@ var GetChildrenWidth = function (minimumMode) {
 
     var result = 0;
     var children = this.sizerChildren;
-    var child, padding, childWidth;
+    var child, proportion, padding, childWidth;
+    var hasUnknownChildWidth = false;
+
     if (this.orientation === 0) { // x
         // Get summation of minimum width
         var itemSpace = this.space.item;
@@ -20,11 +22,24 @@ var GetChildrenWidth = function (minimumMode) {
                 continue;
             }
 
-            if ((child.rexSizer.proportion === 0) || minimumMode) {
+            proportion = child.rexSizer.proportion;
+            if ((proportion === 0) || minimumMode) {
                 childWidth = this.getChildWidth(child);
+                if (childWidth === undefined) {
+                    if (proportion !== 0) {
+                        childWidth = 0;
+                    } else {
+                        hasUnknownChildWidth = true;
+                    }
+                }
             } else {
                 childWidth = 0;
             }
+
+            if (hasUnknownChildWidth) {
+                continue;
+            }
+
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
 
@@ -47,11 +62,26 @@ var GetChildrenWidth = function (minimumMode) {
                 continue;
             }
 
+            childWidth = this.getChildWidth(child);
+            if (childWidth === undefined) {
+                hasUnknownChildWidth = true;
+            }
+
+            if (hasUnknownChildWidth) {
+                continue;
+            }
+
             padding = child.rexSizer.padding;
-            childWidth = this.getChildWidth(child) + padding.left + padding.right;
+            childWidth += (padding.left + padding.right);
+
             result = Math.max(childWidth, result);
         }
     }
+
+    if (hasUnknownChildWidth) {
+        return undefined;
+    }
+
     return result + this.space.left + this.space.right;
 }
 

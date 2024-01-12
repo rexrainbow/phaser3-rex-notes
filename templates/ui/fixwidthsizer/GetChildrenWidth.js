@@ -3,8 +3,18 @@ var GetChildrenWidth = function () {
         return 0;
     }
 
-    // Before RunChildrenWrap
-    return this.maxChildWidth + this.space.left + this.space.right;
+    var width;
+    if (this.orientation === 0) {
+        width = this.maxChildWidth;
+    } else {
+        width = (this.wrapResult) ? this.wrapResult.width : undefined;
+    }
+
+    if (width === undefined) {
+        return undefined;
+    }
+
+    return width + this.space.left + this.space.right;
 }
 
 export default GetChildrenWidth;

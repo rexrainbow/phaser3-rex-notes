@@ -3,29 +3,37 @@ var GetChildrenHeight = function () {
         return 0;
     }
 
-    var result;
+    var childHeight;
     var child = this.child,
         childConfig = child.rexSizer;
+    var hasUnknownChildHeight = false;
 
     if (childConfig.hidden) {
-        result = 0;
+        childHeight = 0;
     } else {
         switch (this.scrollMode) {
             case 0:
-                result = 0;
+                childHeight = 0;
                 break;
 
             case 1:
-                result = this.getChildHeight(child);
+                childHeight = this.getChildHeight(child);
+                if (childHeight === undefined) {
+                    hasUnknownChildHeight = true;
+                }
                 break;
 
             default:
-                result = 0;
+                childHeight = 0;
                 break;
         }
     }
 
-    return result;
+    if (hasUnknownChildHeight) {
+        return undefined;
+    }
+
+    return childHeight;
 }
 
 export default GetChildrenHeight;

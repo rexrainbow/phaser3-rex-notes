@@ -10,6 +10,8 @@ var GetChildrenHeight = function (minimumMode) {
     var result = 0;
     var children = this.sizerChildren;
     var child, padding, childHeight;
+    var hasUnknownChildHeight = false;
+
     if (this.orientation === 0) { // x
         // Get maximun height
         for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -18,8 +20,17 @@ var GetChildrenHeight = function (minimumMode) {
                 continue;
             }
 
+            childHeight = this.getChildHeight(child);
+            if (childHeight === undefined) {
+                hasUnknownChildHeight = true;
+            }
+
+            if (hasUnknownChildHeight) {
+                continue;
+            }
+
             padding = child.rexSizer.padding;
-            childHeight = this.getChildHeight(child) + padding.top + padding.bottom;
+            childHeight += padding.top + padding.bottom;
             result = Math.max(childHeight, result);
         }
     } else {
@@ -40,6 +51,15 @@ var GetChildrenHeight = function (minimumMode) {
             } else {
                 childHeight = 0;
             }
+
+            if (childHeight === undefined) {
+                hasUnknownChildHeight = true;
+            }
+
+            if (hasUnknownChildHeight) {
+                continue;
+            }
+
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);
 
@@ -52,6 +72,11 @@ var GetChildrenHeight = function (minimumMode) {
             result += childHeight;
         }
     }
+
+    if (hasUnknownChildHeight) {
+        return undefined;
+    }
+
     return result + this.space.top + this.space.bottom;
 }
 

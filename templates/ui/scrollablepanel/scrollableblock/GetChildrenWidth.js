@@ -3,30 +3,37 @@ var GetChildrenWidth = function () {
         return 0;
     }
 
-    var result;
+    var childWidth;
     var child = this.child,
         childConfig = child.rexSizer;
-
+    var hasUnknownChildWidth = false;
 
     if (childConfig.hidden) {
-        result = 0;
+        childWidth = 0;
     } else {
         switch (this.scrollMode) {
             case 0:
-                result = this.getChildWidth(child);
+                childWidth = this.getChildWidth(child);
+                if (childWidth === undefined) {
+                    hasUnknownChildWidth = true;
+                }
                 break;
 
             case 1:
-                result = 0;
+                childWidth = 0;
                 break;
 
             default:
-                result = 0;
+                childWidth = 0;
                 break;
         }
     }
 
-    return result;
+    if (hasUnknownChildWidth) {
+        return undefined;
+    }
+
+    return childWidth;
 }
 
 export default GetChildrenWidth;

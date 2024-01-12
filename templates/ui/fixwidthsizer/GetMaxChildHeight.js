@@ -6,17 +6,30 @@ var GetMaxChildHeight = function (children) {
     }
     var result = 0;
     var child, childHeight;
+    var hasUnknownChildHeight = false;
+
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child === '\n') {
             continue;
         }
 
-        childHeight = (child.isRexSizer) ?
-            Math.max(child.minHeight, child.childrenHeight) :
-            (child.hasOwnProperty('minHeight')) ? child.minHeight : GetDisplayHeight(child);
+        childHeight = this.getChildHeight(child);
+        if (childHeight === undefined) {
+            hasUnknownChildHeight = true;
+        }
+
+        if (hasUnknownChildHeight) {
+            continue;
+        }
+
         result = Math.max(childHeight, result);
     }
+
+    if (hasUnknownChildHeight) {
+        return undefined;
+    }
+
     return result;
 }
 export default GetMaxChildHeight;

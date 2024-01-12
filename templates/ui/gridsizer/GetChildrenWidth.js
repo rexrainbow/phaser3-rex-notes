@@ -13,6 +13,7 @@ var GetChildrenWidth = function (minimumMode) {
         columnWidth;
     var children = this.sizerChildren;
     var child, padding, childWidth, proportion;
+    var hasUnknownChildWidth = false;
 
     for (var i = 0; i < this.columnCount; i++) {
         proportion = this.columnProportions[i];
@@ -27,14 +28,38 @@ var GetChildrenWidth = function (minimumMode) {
                     continue;
                 }
 
+                childWidth = this.getChildWidth(child);
+                if (childWidth === undefined) {
+                    if (proportion !== 0) {
+                        childWidth = 0;
+                    } else {
+                        hasUnknownChildWidth = true;
+                    }
+                }
+
+                if (hasUnknownChildWidth) {
+                    continue;
+                }
+
                 padding = child.rexSizer.padding;
-                childWidth = this.getChildWidth(child) + padding.left + padding.right;
+                childWidth += (padding.left + padding.right);
                 columnWidth = Math.max(columnWidth, childWidth);
             }
-            result += columnWidth;
+
+            if (!hasUnknownChildWidth) {
+                result += columnWidth;
+            }
+
         }
+
         // else,(proportion > 0) : columnWidth is 0
-        this.columnWidth[i] = columnWidth;
+        if (!hasUnknownChildWidth) {
+            this.columnWidth[i] = columnWidth;
+        }
+    }
+
+    if (hasUnknownChildWidth) {
+        return undefined;
     }
 
     var space = this.space;

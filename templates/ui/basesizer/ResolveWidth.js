@@ -1,5 +1,9 @@
 var ResolveWidth = function (width) {
     var childrenWidth = this.childrenWidth;
+    if (childrenWidth === undefined) {  // Can't resolve child width
+        return undefined;
+    }
+
     var minWidth = (this.minWidth !== undefined) ? this.minWidth : 0;
     if (width === undefined) {
         width = Math.max(minWidth, childrenWidth);
