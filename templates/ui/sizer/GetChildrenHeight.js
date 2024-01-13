@@ -9,7 +9,7 @@ var GetChildrenHeight = function (minimumMode) {
 
     var result = 0;
     var children = this.sizerChildren;
-    var child, padding, childHeight;
+    var child, proportion, padding, childHeight;
     var hasUnknownChildHeight = false;
 
     if (this.orientation === 0) { // x
@@ -46,14 +46,18 @@ var GetChildrenHeight = function (minimumMode) {
                 continue;
             }
 
-            if ((child.rexSizer.proportion === 0) || minimumMode) {
+            proportion = child.rexSizer.proportion;
+            if ((proportion === 0) || minimumMode) {
                 childHeight = this.getChildHeight(child);
+                if (childHeight === undefined) {
+                    if (proportion !== 0) {
+                        childHeight = 0;
+                    } else {
+                        hasUnknownChildHeight = true;
+                    }
+                }
             } else {
                 childHeight = 0;
-            }
-
-            if (childHeight === undefined) {
-                hasUnknownChildHeight = true;
             }
 
             if (hasUnknownChildHeight) {
