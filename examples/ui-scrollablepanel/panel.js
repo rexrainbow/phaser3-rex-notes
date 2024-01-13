@@ -220,7 +220,7 @@ var createTable = function (scene, data, key, rows) {
     });
 
     var items = data[key];
-    var columns = Math.ceil(items.length / rows);
+    var columns = Math.ceil((items.length * 2) / rows);
     var table = scene.rexUI.add.gridSizer({
         column: columns,
         row: rows,
