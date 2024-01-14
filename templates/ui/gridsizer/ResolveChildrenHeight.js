@@ -5,7 +5,7 @@ var ResolveChildrenHeight = function (parentHeight) {
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
         if (child && child.isRexSizer && !child.ignoreLayout) {
-            rowHeight = this.getRowHeight(parseInt(i) % this.rowCount);
+            rowHeight = this.getRowHeight(Math.floor(parseInt(i) / this.rowCount));
             childHeight = this.getExpandedChildHeight(child, rowHeight);
             childHeight = child.resolveHeight(childHeight);
             child.resolveChildrenHeight(childHeight);

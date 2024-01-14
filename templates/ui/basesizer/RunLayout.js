@@ -75,8 +75,8 @@ var ResolveSize = function (self, size, isTopmostParent) {
     if (height !== undefined) {
         size.height = height;
         if (isTopmostParent) {
-            self.resolveChildrenHeight(size.height);
-            self.runHeightWrap(size.height);
+            self.resolveChildrenHeight(height);
+            self.runHeightWrap(height);
         }
     }
 
