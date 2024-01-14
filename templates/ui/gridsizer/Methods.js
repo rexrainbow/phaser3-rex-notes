@@ -8,6 +8,7 @@ import LayoutChildren from './LayoutChildren.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveHeight from './ResolveHeight.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
+import ResolveChildrenHeight from './ResolveChildrenHeight.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
@@ -28,6 +29,7 @@ var methods = {
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight,
     resolveChildrenWidth: ResolveChildrenWidth,
+    resolveChildrenHeight: ResolveChildrenHeight,
     runWidthWrap: RunWidthWrap,
 
     resetGrid: ResetGrid,

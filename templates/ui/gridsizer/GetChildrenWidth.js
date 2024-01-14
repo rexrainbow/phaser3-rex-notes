@@ -54,7 +54,9 @@ var GetChildrenWidth = function (minimumMode) {
 
         // else,(proportion > 0) : columnWidth is 0
         if (!hasUnknownChildWidth) {
-            this.columnWidth[i] = columnWidth;
+            if (minimumMode) {
+                this.columnWidth[i] = columnWidth;
+            }
         }
     }
 
