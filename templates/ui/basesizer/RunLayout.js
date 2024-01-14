@@ -12,7 +12,9 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     var size = { width: newWidth, height: newHeight };
-    var resolved = ResolveSize(this, size, isTopmostParent);
+    var runWidthWrap = isTopmostParent && this.hasWidthWrap();
+    var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+    var resolved = ResolveSize(this, size, runWidthWrap, runHeightWrap);
     if (!resolved) {
         debugger;
     }
@@ -54,7 +56,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     return this;
 }
 
-var ResolveSize = function (self, size, isTopmostParent) {
+var ResolveSize = function (self, size, runWidthWrap, runHeightWrap) {
 
     // Calculate parent width
     var width = self.resolveWidth(size.width);
@@ -62,7 +64,7 @@ var ResolveSize = function (self, size, isTopmostParent) {
     // Calculate all children width, run width wrap
     if (width !== undefined) {
         size.width = width;
-        if (isTopmostParent && self.hasWidthWrap()) {
+        if (runWidthWrap) {
             self.resolveChildrenWidth(width);
             self.runWidthWrap(width);
         }
@@ -74,7 +76,7 @@ var ResolveSize = function (self, size, isTopmostParent) {
     // Calculate all children width, run width wrap
     if (height !== undefined) {
         size.height = height;
-        if (isTopmostParent && self.hasHeightWrap()) {
+        if (runHeightWrap) {
             self.resolveChildrenHeight(height);
             self.runHeightWrap(height);
         }
