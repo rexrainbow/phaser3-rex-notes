@@ -62,7 +62,7 @@ var ResolveSize = function (self, size, isTopmostParent) {
     // Calculate all children width, run width wrap
     if (width !== undefined) {
         size.width = width;
-        if (isTopmostParent) {
+        if (isTopmostParent && self.hasWidthWrap()) {
             self.resolveChildrenWidth(width);
             self.runWidthWrap(width);
         }
@@ -74,7 +74,7 @@ var ResolveSize = function (self, size, isTopmostParent) {
     // Calculate all children width, run width wrap
     if (height !== undefined) {
         size.height = height;
-        if (isTopmostParent) {
+        if (isTopmostParent && self.hasHeightWrap()) {
             self.resolveChildrenHeight(height);
             self.runHeightWrap(height);
         }

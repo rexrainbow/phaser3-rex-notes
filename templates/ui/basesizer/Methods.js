@@ -10,9 +10,11 @@ import GetElement from './GetElement.js';
 import GetChildIndex from './GetChildIndex.js';
 import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
+import HasWidthWrap from './HasWidthWrap.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import ResolveHeight from './ResolveHeight.js';
+import HasHeightWrap from './HasHeightWrap.js';
 import ResolveChildrenHeight from './ResolveChildrenHeight.js';
 import RunHeightWrap from './RunHeightWrap.js';
 import PostResolveSize from './PostResolveSize.js';
@@ -59,9 +61,11 @@ var methods = {
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
     resolveWidth: ResolveWidth,
+    hasWidthWrap: HasWidthWrap,
     resolveChildrenWidth: ResolveChildrenWidth,
     runWidthWrap: RunWidthWrap,
     resolveHeight: ResolveHeight,
+    hasHeightWrap: HasHeightWrap,
     resolveChildrenHeight: ResolveChildrenHeight,
     runHeightWrap: RunHeightWrap,
     postResolveSize: PostResolveSize,
