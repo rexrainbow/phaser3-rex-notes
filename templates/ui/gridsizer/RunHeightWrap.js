@@ -1,4 +1,3 @@
-// Default method
 var RunHeightWrap = function (height) {
     var child, childHeight;
     var rowHeight;

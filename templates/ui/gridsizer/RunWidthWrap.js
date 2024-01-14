@@ -1,4 +1,3 @@
-// Default method
 var RunWidthWrap = function (width) {
     var child, childWidth;
     var colWidth;

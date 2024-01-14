@@ -10,6 +10,7 @@ import ResolveHeight from './ResolveHeight.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
 import ResolveChildrenHeight from './ResolveChildrenHeight.js';
 import RunWidthWrap from './RunWidthWrap.js';
+import RunHeightWrap from './RunHeightWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import SetSpaceMethods from './SetSpaceMethods.js';
@@ -31,6 +32,7 @@ var methods = {
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveChildrenHeight: ResolveChildrenHeight,
     runWidthWrap: RunWidthWrap,
+    runHeightWrap: RunHeightWrap,
 
     resetGrid: ResetGrid,
     inseryEmptyRow: InseryEmptyRow,
