@@ -1,20 +1,24 @@
-var GetChildrenWidth = function () {
+var GetChildrenWidth = function (minimumMode) {
     if (this.rexSizer.hidden) {
         return 0;
     }
 
-    var width;
-    if (this.orientation === 0) {
-        width = this.maxChildWidth;
-    } else {
-        width = (this.wrapResult) ? this.wrapResult.width : undefined;
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
-    if (width === undefined) {
+    var childrenWidth;
+    if ((this.orientation === 0) || minimumMode) {
+        childrenWidth = this.maxChildWidth;
+    } else {
+        childrenWidth = (this.wrapResult) ? this.wrapResult.width : undefined;
+    }
+
+    if (childrenWidth === undefined) {
         return undefined;
     }
 
-    return width + this.space.left + this.space.right;
+    return childrenWidth + this.space.left + this.space.right;
 }
 
 export default GetChildrenWidth;

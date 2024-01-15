@@ -1,20 +1,24 @@
-var GetChildrenHeight = function () {
+var GetChildrenHeight = function (minimumMode) {
     if (this.rexSizer.hidden) {
         return 0;
     }
 
-    var height;
-    if (this.orientation === 1) {
-        height = this.maxChildHeight;
-    } else {
-        height = (this.wrapResult) ? this.wrapResult.height : undefined;
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
-    if (height === undefined) {
+    var childrenHeight;
+    if ((this.orientation === 1) || minimumMode) {
+        childrenHeight = this.maxChildHeight;
+    } else {
+        childrenHeight = (this.wrapResult) ? this.wrapResult.height : undefined;
+    }
+
+    if (childrenHeight === undefined) {
         return undefined;
     }
 
-    return height + this.space.top + this.space.bottom;
+    return childrenHeight + this.space.top + this.space.bottom;
 }
 
 export default GetChildrenHeight;
