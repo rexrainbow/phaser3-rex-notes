@@ -34767,14 +34767,14 @@
       3. space.child
       */
       var sliderPadding = GetValue$m(config, "space.slider".concat(axis), undefined);
+      var childPadding; // Legacy
       if (sliderPadding === undefined) {
         sliderPadding = GetValue$m(config, 'space.slider', undefined);
         if (sliderPadding === undefined) {
           if (isScrollXYMode) {
             sliderPadding = 0;
           } else {
-            // Legacy
-            sliderPadding = GetValue$m(config, 'space.child', 0);
+            childPadding = GetValue$m(config, 'space.child', 0);
           }
         }
       }
@@ -34784,32 +34784,56 @@
           // right
           column = 2;
           row = 1;
-          padding = isNumberSliderPadding ? {
-            left: sliderPadding
-          } : sliderPadding;
+          if (!childPadding) {
+            padding = isNumberSliderPadding ? {
+              left: sliderPadding
+            } : sliderPadding;
+          } else {
+            padding = {
+              left: GetValue$m(childPadding, 'right', 0)
+            };
+          }
         } else {
           // left
           column = 0;
           row = 1;
-          padding = isNumberSliderPadding ? {
-            right: sliderPadding
-          } : sliderPadding;
+          if (!childPadding) {
+            padding = isNumberSliderPadding ? {
+              right: sliderPadding
+            } : sliderPadding;
+          } else {
+            padding = {
+              right: GetValue$m(childPadding, 'left', 0)
+            };
+          }
         }
       } else {
         if (sliderPosition === 0) {
           // bottom
           column = 1;
           row = 2;
-          padding = isNumberSliderPadding ? {
-            top: sliderPadding
-          } : sliderPadding;
+          if (!childPadding) {
+            padding = isNumberSliderPadding ? {
+              top: sliderPadding
+            } : sliderPadding;
+          } else {
+            padding = {
+              top: GetValue$m(childPadding, 'bottom', 0)
+            };
+          }
         } else {
           // top
           column = 1;
           row = 0;
-          padding = isNumberSliderPadding ? {
-            bottom: sliderPadding
-          } : sliderPadding;
+          if (!childPadding) {
+            padding = isNumberSliderPadding ? {
+              bottom: sliderPadding
+            } : sliderPadding;
+          } else {
+            padding = {
+              bottom: GetValue$m(childPadding, 'top', 0)
+            };
+          }
         }
       }
       sliderParent.add(slider, {

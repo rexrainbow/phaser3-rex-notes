@@ -43,14 +43,14 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         3. space.child
         */
         var sliderPadding = GetValue(config, `space.slider${axis}`, undefined);
+        var childPadding;  // Legacy
         if (sliderPadding === undefined) {
             sliderPadding = GetValue(config, 'space.slider', undefined);
             if (sliderPadding === undefined) {
                 if (isScrollXYMode) {
                     sliderPadding = 0;
                 } else {
-                    // Legacy
-                    sliderPadding = GetValue(config, 'space.child', 0);
+                    childPadding = GetValue(config, 'space.child', 0);
                 }
             }
         }
@@ -60,22 +60,44 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             if (sliderPosition === 0) { // right
                 column = 2;
                 row = 1;
-                padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
+
+                if (!childPadding) {
+                    padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
+                } else {
+                    padding = { left: GetValue(childPadding, 'right', 0) };
+                }
+
             } else { // left
                 column = 0;
                 row = 1;
-                padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
+
+                if (!childPadding) {
+                    padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
+                } else {
+                    padding = { right: GetValue(childPadding, 'left', 0) };
+                }
             }
 
         } else {
             if (sliderPosition === 0) { // bottom
                 column = 1;
                 row = 2;
-                padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
+
+                if (!childPadding) {
+                    padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
+                } else {
+                    padding = { top: GetValue(childPadding, 'bottom', 0) };
+                }
+
             } else { // top
                 column = 1;
                 row = 0;
-                padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
+
+                if (!childPadding) {
+                    padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
+                } else {
+                    padding = { bottom: GetValue(childPadding, 'top', 0) };
+                }
             }
         }
 
