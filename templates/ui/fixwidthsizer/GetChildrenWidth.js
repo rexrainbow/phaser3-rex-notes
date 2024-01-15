@@ -8,8 +8,12 @@ var GetChildrenWidth = function (minimumMode) {
     }
 
     var childrenWidth;
-    if ((this.orientation === 0) || minimumMode) {
-        childrenWidth = this.maxChildWidth;
+    if (this.orientation === 0) {
+        if (minimumMode) {
+            childrenWidth = this.maxChildWidth;
+        } else {
+            childrenWidth = (this.wrapResult) ? this.wrapResult.width : undefined;
+        }
     } else {
         childrenWidth = (this.wrapResult) ? this.wrapResult.width : undefined;
     }

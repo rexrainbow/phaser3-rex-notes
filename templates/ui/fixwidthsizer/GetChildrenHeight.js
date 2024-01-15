@@ -8,8 +8,12 @@ var GetChildrenHeight = function (minimumMode) {
     }
 
     var childrenHeight;
-    if ((this.orientation === 1) || minimumMode) {
-        childrenHeight = this.maxChildHeight;
+    if (this.orientation === 1) {
+        if (minimumMode) {
+            childrenHeight = this.maxChildHeight;
+        } else {
+            childrenHeight = (this.wrapResult) ? this.wrapResult.height : undefined;
+        }
     } else {
         childrenHeight = (this.wrapResult) ? this.wrapResult.height : undefined;
     }

@@ -51,7 +51,7 @@ var GetChildrenHeight = function (minimumMode) {
                 childHeight = this.getChildHeight(child);
                 if (childHeight === undefined) {
                     if (proportion !== 0) {
-                        childHeight = 0;
+                        childHeight = 0;  // TODO
                     } else {
                         hasUnknownChildHeight = true;
                     }
