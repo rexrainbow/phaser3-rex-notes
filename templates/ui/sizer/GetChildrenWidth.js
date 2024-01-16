@@ -26,6 +26,7 @@ var GetChildrenWidth = function (minimumMode) {
             if ((proportion === 0) || minimumMode) {
                 childWidth = this.getChildWidth(child);
                 if (childWidth === undefined) {
+                    //hasUnknownChildWidth = true;
                     if (proportion !== 0) {
                         childWidth = 0;  // TODO
                     } else {

@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
         })
             .add(
                 sizer0,
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
             )
             .add(
                 sizer1,

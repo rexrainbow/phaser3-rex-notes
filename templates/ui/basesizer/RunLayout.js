@@ -11,11 +11,10 @@ var RunLayout = function (parent, newWidth, newHeight) {
         this.preLayout();
     }
 
-    var size = { width: newWidth, height: newHeight };
     var runWidthWrap = isTopmostParent && this.hasWidthWrap();
     var runHeightWrap = isTopmostParent && this.hasHeightWrap();
-    var resolved = ResolveSize(this, size, runWidthWrap, runHeightWrap);
-    if (!resolved) {
+    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+    if (!size) {
         debugger;
     }
 
@@ -56,33 +55,53 @@ var RunLayout = function (parent, newWidth, newHeight) {
     return this;
 }
 
-var ResolveSize = function (self, size, runWidthWrap, runHeightWrap) {
+var ResolveSize = function (self, width, height, runWidthWrap, runHeightWrap) {
+    var newWidth = ResolveWidth(self, width, runWidthWrap);
 
+    var newHeight = ResolveHeight(self, height, runHeightWrap);
+
+    if (newWidth === undefined) {
+        newWidth = ResolveWidth(self, width, runWidthWrap);
+    }
+
+    if ((newWidth !== undefined) && (newHeight !== undefined)) {
+        return {
+            width: newWidth,
+            height: newHeight
+        }
+    }
+
+    return false;
+}
+
+var ResolveWidth = function (self, width, runWidthWrap) {
     // Calculate parent width
-    var width = self.resolveWidth(size.width);
+    var width = self.resolveWidth(width);
 
     // Calculate all children width, run width wrap
     if (width !== undefined) {
-        size.width = width;
         if (runWidthWrap) {
             self.resolveChildrenWidth(width);
             self.runWidthWrap(width);
         }
     }
 
+    return width;
+}
+
+var ResolveHeight = function (self, height, runHeightWrap) {
     // Calculate parent height
-    var height = self.resolveHeight(size.height);
+    var height = self.resolveHeight(height);
 
     // Calculate all children width, run width wrap
     if (height !== undefined) {
-        size.height = height;
         if (runHeightWrap) {
             self.resolveChildrenHeight(height);
             self.runHeightWrap(height);
         }
     }
 
-    return (width !== undefined) && (height !== undefined);
+    return height;
 }
 
 export default RunLayout;
