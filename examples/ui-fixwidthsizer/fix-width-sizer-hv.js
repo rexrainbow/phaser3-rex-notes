@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         })
             .add(
                 createItems(this, 'y'),
-                { proportion: 1, expand: true }
+                { proportion: 0, expand: true }
             )
             .add(
                 createItems(this, 'x'),
@@ -34,12 +34,12 @@ class Demo extends Phaser.Scene {
             x: 400,
             y: 300,
             width: 400,
-            height: 500,
+            height: 400,
             orientation: 'y'
         })
             .add(
                 sizer0,
-                { proportion: 0, expand: true }
+                { proportion: 1, expand: true }
             )
             .add(
                 sizer1,

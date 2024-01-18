@@ -15,7 +15,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     var runHeightWrap = isTopmostParent && this.hasHeightWrap();
     var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
-        debugger;
+        console.error('Can\'t resolve size of ', this);
     }
 
     var width = size.width,

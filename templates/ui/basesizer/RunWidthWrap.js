@@ -1,6 +1,6 @@
 // Default method
 var RunWidthWrap = function (parentWidth) {
-    var child, childWidth;
+    var child, expandedChildWidth, childWidth;
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
         if (
@@ -11,9 +11,12 @@ var RunWidthWrap = function (parentWidth) {
             continue;
         }
 
-        childWidth = this.getExpandedChildWidth(child, parentWidth);
+        expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
         if (child.isRexSizer) {
-            childWidth = child.resolveWidth(childWidth);
+            childWidth = child.resolveWidth(expandedChildWidth);
+            if (childWidth === undefined) {
+                childWidth = expandedChildWidth;
+            }
         }
         child.runWidthWrap(childWidth);
     }

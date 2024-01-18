@@ -10,6 +10,8 @@ var GetChildrenProportion = function () {
         proportion = child.rexSizer.proportion;
         if (proportion > 0) {
             result += proportion;
+        } else if (proportion === 0) {
+            this.hasAnyProportion0Child = true;
         }
     }
     return result;

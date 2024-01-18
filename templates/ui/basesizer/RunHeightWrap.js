@@ -1,6 +1,6 @@
 // Default method
 var RunHeightWrap = function (parentHeight) {
-    var child, childHeight;
+    var child, expandedChildHeight, childHeight;
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
         if (
@@ -11,9 +11,12 @@ var RunHeightWrap = function (parentHeight) {
             continue;
         }
 
-        childHeight = this.getExpandedChildHeight(child, parentHeight);
+        expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
         if (child.isRexSizer) {
-            childHeight = child.resolveHeight(childHeight);
+            childHeight = child.resolveHeight(expandedChildHeight);
+            if (childHeight === undefined) {
+                childHeight = expandedChildHeight;
+            }
         }
         child.runHeightWrap(childHeight);
     }

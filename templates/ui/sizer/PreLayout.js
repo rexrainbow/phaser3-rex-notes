@@ -19,6 +19,7 @@ var PreLayout = function () {
     }
 
     this._childrenProportion = undefined;
+    this.hasAnyProportion0Child = false;
     this.proportionLength = undefined;
     PreLayoutBase.call(this);
     return this;
