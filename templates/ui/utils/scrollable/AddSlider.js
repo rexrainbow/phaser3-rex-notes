@@ -55,26 +55,32 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             }
         }
 
-        var isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+        var isNumberSliderPadding;
+        if (childPadding === undefined) {
+            isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+        } else {
+            isNumberSliderPadding = (typeof (childPadding) === 'number');
+        }
+
         if (isAxisY) {
             if (sliderPosition === 0) { // right
                 column = 2;
                 row = 1;
 
-                if (!childPadding) {
+                if (childPadding === undefined) {
                     padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
                 } else {
-                    padding = { left: GetValue(childPadding, 'right', 0) };
+                    padding = { left: GetValue(childPadding, 'right', childPadding) };
                 }
 
             } else { // left
                 column = 0;
                 row = 1;
 
-                if (!childPadding) {
+                if (childPadding === undefined) {
                     padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
                 } else {
-                    padding = { right: GetValue(childPadding, 'left', 0) };
+                    padding = { right: GetValue(childPadding, 'left', childPadding) };
                 }
             }
 
@@ -83,20 +89,20 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
                 column = 1;
                 row = 2;
 
-                if (!childPadding) {
+                if (childPadding === undefined) {
                     padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
                 } else {
-                    padding = { top: GetValue(childPadding, 'bottom', 0) };
+                    padding = { top: GetValue(childPadding, 'bottom', childPadding) };
                 }
 
             } else { // top
                 column = 1;
                 row = 0;
 
-                if (!childPadding) {
+                if (childPadding === undefined) {
                     padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
                 } else {
-                    padding = { bottom: GetValue(childPadding, 'top', 0) };
+                    padding = { bottom: GetValue(childPadding, 'top', childPadding) };
                 }
             }
         }
