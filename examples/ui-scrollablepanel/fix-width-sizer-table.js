@@ -15,18 +15,19 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var scrollMode = 1;
         var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400,
             y: 300,
-            width: 320,
-            height: 460,
+            width: (scrollMode === 0) ? 320 : 460,
+            height: (scrollMode === 0) ? 460 : 320,
 
-            scrollMode: 0,
+            scrollMode: scrollMode,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_MAIN),
 
             panel: {
-                child: createGrid(this),
+                child: createGrid(this, scrollMode),
                 mask: {
                     mask: true,
                     padding: 1,
@@ -88,9 +89,10 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createGrid = function (scene) {
+var createGrid = function (scene, orientation) {
     // Create table body
     var sizer = scene.rexUI.add.fixWidthSizer({
+        orientation: orientation,
         space: {
             left: 3,
             right: 3,
