@@ -3226,8 +3226,12 @@
     }
   };
 
-  var ResolveWidth = function ResolveWidth(width) {
+  var ResolveWidth$1 = function ResolveWidth(width) {
     var childrenWidth = this.childrenWidth;
+    if (childrenWidth === undefined) {
+      // Can't resolve child width
+      return undefined;
+    }
     var minWidth = this.minWidth !== undefined ? this.minWidth : 0;
     if (width === undefined) {
       width = Math.max(minWidth, childrenWidth);
@@ -3246,21 +3250,62 @@
     return width;
   };
 
+  var HasWidthWrap = function HasWidthWrap() {
+    var child;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
+        continue;
+      }
+      if (!child.hasWidthWrap || child.hasWidthWrap()) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   var ResolveChildrenWidth = function ResolveChildrenWidth(parentWidth) {
     // Resolve width of sizer children
-    var child, childWidth;
+    var child, expandedChildWidth, childWidth;
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
       if (child && child.isRexSizer && !child.ignoreLayout) {
-        childWidth = this.getExpandedChildWidth(child, parentWidth);
-        childWidth = child.resolveWidth(childWidth);
+        expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+        childWidth = child.resolveWidth(expandedChildWidth);
+        if (childWidth === undefined) {
+          childWidth = expandedChildWidth;
+        }
         child.resolveChildrenWidth(childWidth);
       }
     }
   };
 
-  var ResolveHeight = function ResolveHeight(height) {
+  // Default method
+  var RunWidthWrap = function RunWidthWrap(parentWidth) {
+    var child, expandedChildWidth, childWidth;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
+        continue;
+      }
+      expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+      if (child.isRexSizer) {
+        childWidth = child.resolveWidth(expandedChildWidth);
+        if (childWidth === undefined) {
+          childWidth = expandedChildWidth;
+        }
+      }
+      child.runWidthWrap(childWidth);
+    }
+    return this;
+  };
+
+  var ResolveHeight$1 = function ResolveHeight(height) {
     var childrenHeight = this.childrenHeight;
+    if (childrenHeight === undefined) {
+      // Can't resolve child height
+      return undefined;
+    }
     var minHeight = this.minHeight !== undefined ? this.minHeight : 0;
     if (height === undefined) {
       height = Math.max(minHeight, childrenHeight);
@@ -3279,13 +3324,68 @@
     return height;
   };
 
+  var HasHeightWrap = function HasHeightWrap() {
+    var child;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runHeightWrap) {
+        continue;
+      }
+      if (!child.hasHeightWrap || child.hasHeightWrap() // all kind of sizers has hasHeightWrap method
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  var ResolveChildrenHeight = function ResolveChildrenHeight(parentHeight) {
+    // Resolve width of sizer children
+    var child, expandedChildHeight, childHeight;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (child && child.isRexSizer && !child.ignoreLayout) {
+        expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+        childHeight = child.resolveHeight(expandedChildHeight);
+        if (childHeight === undefined) {
+          childHeight = expandedChildHeight;
+        }
+        child.resolveChildrenHeight(childHeight);
+      }
+    }
+  };
+
+  // Default method
+  var RunHeightWrap = function RunHeightWrap(parentHeight) {
+    var child, expandedChildHeight, childHeight;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runHeightWrap) {
+        continue;
+      }
+      expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+      if (child.isRexSizer) {
+        childHeight = child.resolveHeight(expandedChildHeight);
+        if (childHeight === undefined) {
+          childHeight = expandedChildHeight;
+        }
+      }
+      child.runHeightWrap(childHeight);
+    }
+    return this;
+  };
+
   var PostResolveSize = function PostResolveSize(width, height) {};
 
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
       // Sizer game object
-      childWidth = Math.max(child.minWidth, child.childrenWidth);
+      var childrenWidth = child.childrenWidth;
+      if (childrenWidth == undefined) {
+        return undefined;
+      }
+      childWidth = Math.max(child.minWidth, childrenWidth);
     } else {
       // Normal game object
       if (child.minWidth !== undefined) {
@@ -3302,7 +3402,11 @@
     var childHeight;
     if (child.isRexSizer) {
       // Sizer game object
-      childHeight = Math.max(child.minHeight, child.childrenHeight);
+      var childrenHeight = child.childrenHeight;
+      if (childrenHeight === undefined) {
+        return undefined;
+      }
+      childHeight = Math.max(child.minHeight, childrenHeight);
     } else {
       // Normal game object
       if (child.minHeight !== undefined) {
@@ -3438,20 +3542,20 @@
     if (isTopmostParent) {
       this.preLayout();
     }
-
-    // Calculate parent width
-    newWidth = this.resolveWidth(newWidth);
-    // Calculate all children width, run width wrap
-    if (isTopmostParent) {
-      this.resolveChildrenWidth(newWidth);
-      this.runWidthWrap(newWidth);
+    var runWidthWrap = isTopmostParent && this.hasWidthWrap();
+    var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+    if (!size) {
+      console.error('Can\'t resolve size of ', this);
     }
-    // Calculate parent height
-    newHeight = this.resolveHeight(newHeight);
+    var width = size.width,
+      height = size.height;
+
     // The last chance of resolving size
-    this.postResolveSize(newWidth, newHeight);
+    this.postResolveSize(width, height);
+
     // Resize parent
-    this.resize(newWidth, newHeight);
+    this.resize(width, height);
     if (this.sizerEventsEnable) {
       if (this.layoutedChildren === undefined) {
         this.layoutedChildren = [];
@@ -3477,6 +3581,46 @@
     }
     return this;
   };
+  var ResolveSize = function ResolveSize(self, width, height, runWidthWrap, runHeightWrap) {
+    var newWidth = ResolveWidth(self, width, runWidthWrap);
+    var newHeight = ResolveHeight(self, height, runHeightWrap);
+    if (newWidth === undefined) {
+      newWidth = ResolveWidth(self, width, runWidthWrap);
+    }
+    if (newWidth !== undefined && newHeight !== undefined) {
+      return {
+        width: newWidth,
+        height: newHeight
+      };
+    }
+    return false;
+  };
+  var ResolveWidth = function ResolveWidth(self, width, runWidthWrap) {
+    // Calculate parent width
+    var width = self.resolveWidth(width);
+
+    // Calculate all children width, run width wrap
+    if (width !== undefined) {
+      if (runWidthWrap) {
+        self.resolveChildrenWidth(width);
+        self.runWidthWrap(width);
+      }
+    }
+    return width;
+  };
+  var ResolveHeight = function ResolveHeight(self, height, runHeightWrap) {
+    // Calculate parent height
+    var height = self.resolveHeight(height);
+
+    // Calculate all children width, run width wrap
+    if (height !== undefined) {
+      if (runHeightWrap) {
+        self.resolveChildrenHeight(height);
+        self.runHeightWrap(height);
+      }
+    }
+    return height;
+  };
 
   // Override
   var LayoutChildren$1 = function LayoutChildren() {};
@@ -3490,23 +3634,6 @@
 
   // Override
   var PostLayout = function PostLayout(parent, newWidth, newHeight) {
-    return this;
-  };
-
-  // Default method
-  var RunWidthWrap = function RunWidthWrap(parentWidth) {
-    var child, childWidth;
-    for (var i in this.sizerChildren) {
-      child = this.sizerChildren[i];
-      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
-        continue;
-      }
-      childWidth = this.getExpandedChildWidth(child, parentWidth);
-      if (child.isRexSizer) {
-        childWidth = child.resolveWidth(childWidth);
-      }
-      child.runWidthWrap(childWidth);
-    }
     return this;
   };
 
@@ -10421,9 +10548,14 @@
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
-    resolveWidth: ResolveWidth,
+    resolveWidth: ResolveWidth$1,
+    hasWidthWrap: HasWidthWrap,
     resolveChildrenWidth: ResolveChildrenWidth,
-    resolveHeight: ResolveHeight,
+    runWidthWrap: RunWidthWrap,
+    resolveHeight: ResolveHeight$1,
+    hasHeightWrap: HasHeightWrap,
+    resolveChildrenHeight: ResolveChildrenHeight,
+    runHeightWrap: RunHeightWrap,
     postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
@@ -10442,7 +10574,6 @@
     layout: Layout,
     runLayout: RunLayout,
     layoutChildren: LayoutChildren$1,
-    runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
     _postLayout: _PostLayout,
@@ -10722,11 +10853,22 @@
     var result = 0;
     var children = this.sizerChildren;
     var child, padding, childWidth;
+    var hasUnknownChildWidth = false;
     for (var key in children) {
       child = children[key];
+      childWidth = this.getChildWidth(child);
+      if (childWidth === undefined) {
+        hasUnknownChildWidth = true;
+      }
+      if (hasUnknownChildWidth) {
+        continue;
+      }
       padding = child.rexSizer.padding;
-      childWidth = this.getChildWidth(child) + padding.left + padding.right;
+      childWidth += padding.left + padding.right;
       result = Math.max(childWidth, result);
+    }
+    if (hasUnknownChildWidth) {
+      return undefined;
     }
     return result + this.space.left + this.space.right;
   };
@@ -10738,12 +10880,22 @@
     var result = 0;
     var children = this.sizerChildren;
     var child, padding, childHeight;
+    var hasUnknownChildHeight = false;
     for (var key in children) {
       child = children[key];
-      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.minHeight !== undefined ? child.minHeight : GetDisplayHeight(child);
+      childHeight = this.getChildHeight(child);
+      if (childHeight === undefined) {
+        hasUnknownChildHeight = true;
+      }
+      if (hasUnknownChildHeight) {
+        continue;
+      }
       padding = child.rexSizer.padding;
       childHeight += padding.top + padding.bottom;
       result = Math.max(childHeight, result);
+    }
+    if (hasUnknownChildHeight) {
+      return undefined;
     }
     return result + this.space.top + this.space.bottom;
   };
@@ -10755,7 +10907,8 @@
     var childWidth;
     var childConfig = child.rexSizer;
     if (childConfig.expandWidth) {
-      var innerWidth = parentWidth - this.space.left - this.space.right;
+      var space = this.space;
+      var innerWidth = parentWidth - space.left - space.right;
       var padding = childConfig.padding;
       childWidth = innerWidth - padding.left - padding.right;
     }
@@ -10769,7 +10922,8 @@
     var childHeight;
     var childConfig = child.rexSizer;
     if (childConfig.expandHeight) {
-      var innerHeight = parentHeight - this.space.top - this.space.bottom;
+      var space = this.space;
+      var innerHeight = parentHeight - space.top - space.bottom;
       var padding = childConfig.padding;
       childHeight = innerHeight - padding.top - padding.bottom;
     }

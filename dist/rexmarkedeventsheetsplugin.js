@@ -22745,14 +22745,17 @@
     }
   };
 
-  var StringToValues = function StringToValues(text, valueConverter) {
+  var StringToValues = function StringToValues(text, valueConverter, delimiter) {
     if (text == null) {
       return [];
     }
     if (valueConverter === undefined) {
       valueConverter = TypeConvert;
     }
-    var values = text.split(',');
+    if (delimiter === undefined) {
+      delimiter = ',';
+    }
+    var values = text.split(delimiter);
     for (var i = 0, cnt = values.length; i < cnt; i++) {
       values[i] = valueConverter(values[i]);
     }

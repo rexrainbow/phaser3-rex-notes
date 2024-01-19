@@ -163,7 +163,7 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-- `orientation` : Main orientation of the sizer.
+- `orientation` : Orientation of the sizer.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right. Default value is `0`.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `rtl` :     
