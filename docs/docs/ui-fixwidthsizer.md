@@ -12,6 +12,7 @@ Layout children game objects into lines.
 - [Indent](https://codepen.io/rexrainbow/pen/ZErqGPv)
 - [Drag-drop item](https://codepen.io/rexrainbow/pen/rNOKJrK)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/gOXvYgE)
+- [vertical & horizontal](https://codepen.io/rexrainbow/pen/xxBdLxw)
 
 ## Usage
 
