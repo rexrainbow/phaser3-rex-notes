@@ -11,7 +11,7 @@ var GetChildrenHeight = function (minimumMode) {
     var children = this.sizerChildren;
     var child, proportion, padding, childHeight;
     var hasUnknownChildHeight = false;
-    var totalProportion = this.childrenProportion; // To update this.hasAnyProportion0Child member
+    var totalProportion = this.childrenProportion; // To update this.hasProportion0Child member
 
     if (this.orientation === 0) { // x
         // Get maximun height
@@ -51,7 +51,7 @@ var GetChildrenHeight = function (minimumMode) {
             if ((proportion === 0) || minimumMode) {
                 childHeight = this.getChildHeight(child);
                 if (childHeight === undefined) {
-                    if ((proportion !== 0) && (!this.hasAnyProportion0Child)) {
+                    if ((proportion !== 0) && (!this.hasProportion0Child)) {
                         childHeight = 0;
                     } else {
                         hasUnknownChildHeight = true;

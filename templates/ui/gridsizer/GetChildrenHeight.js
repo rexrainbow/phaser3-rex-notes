@@ -14,6 +14,7 @@ var GetChildrenHeight = function (minimumMode) {
     var children = this.sizerChildren;
     var child, padding, childHeight, proportion;
     var hasUnknownChildHeight = false;
+    var totalRowProportions = this.totalRowProportions;  // To update this.hasColumnProportion0Child member
 
     for (var i = 0; i < this.rowCount; i++) {
         proportion = this.rowProportions[i];
@@ -30,8 +31,8 @@ var GetChildrenHeight = function (minimumMode) {
 
                 childHeight = this.getChildHeight(child);
                 if (childHeight === undefined) {
-                    if (proportion !== 0) {
-                        childWidth = 0;
+                    if ((proportion !== 0) && (!this.hasRowProportion0Child)) {
+                        childHeight = 0;
                     } else {
                         hasUnknownChildHeight = true;
                     }

@@ -11,7 +11,7 @@ var GetChildrenWidth = function (minimumMode) {
     var children = this.sizerChildren;
     var child, proportion, padding, childWidth;
     var hasUnknownChildWidth = false;
-    var totalProportion = this.childrenProportion; // To update this.hasAnyProportion0Child member
+    var totalProportion = this.childrenProportion; // To update this.hasProportion0Child member
 
     if (this.orientation === 0) { // x
         // Get summation of minimum width
@@ -27,7 +27,7 @@ var GetChildrenWidth = function (minimumMode) {
             if ((proportion === 0) || minimumMode) {
                 childWidth = this.getChildWidth(child);
                 if (childWidth === undefined) {
-                    if ((proportion !== 0) && (!this.hasAnyProportion0Child)) {
+                    if ((proportion !== 0) && (!this.hasProportion0Child)) {
                         childWidth = 0;
                     } else {
                         hasUnknownChildWidth = true;

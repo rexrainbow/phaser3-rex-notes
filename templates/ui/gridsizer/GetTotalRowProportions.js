@@ -5,6 +5,8 @@ var GetTotalRowProportions = function () {
         proportion = this.rowProportions[i];
         if (proportion > 0) {
             result += proportion;
+        } else if (proportion === 0) {
+            this.hasRowProportion0Child = true;
         }
     }
     return result;

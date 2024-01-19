@@ -5,6 +5,8 @@ var GetTotalColumnProportions = function () {
         proportion = this.columnProportions[i];
         if (proportion > 0) {
             result += proportion;
+        } else if (proportion === 0) {
+            this.hasColumnProportion0Child = true;
         }
     }
     return result;

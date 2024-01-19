@@ -11,7 +11,7 @@ var GetChildrenProportion = function () {
         if (proportion > 0) {
             result += proportion;
         } else if (proportion === 0) {
-            this.hasAnyProportion0Child = true;
+            this.hasProportion0Child = true;
         }
     }
     return result;

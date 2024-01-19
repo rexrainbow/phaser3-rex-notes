@@ -1,5 +1,5 @@
 var RunWidthWrap = function (width) {
-    var child, childWidth;
+    var child, expandedChildWidth, childWidth;
     var colWidth;
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
@@ -12,9 +12,12 @@ var RunWidthWrap = function (width) {
         }
 
         colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
-        childWidth = this.getExpandedChildWidth(child, colWidth);
+        expandedChildWidth = this.getExpandedChildWidth(child, colWidth);
         if (child.isRexSizer) {
-            childWidth = child.resolveWidth(childWidth);
+            childWidth = child.resolveWidth(expandedChildWidth);
+            if (childWidth === undefined) {
+                childWidth = expandedChildWidth;
+            }
         }
         child.runWidthWrap(childWidth);
     }
