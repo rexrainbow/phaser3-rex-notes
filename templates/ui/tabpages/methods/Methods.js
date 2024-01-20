@@ -5,6 +5,7 @@ import SwapPageMethods from './SwapPageMethods.js';
 import RemovePageMethods from './RemovePageMethods.js';
 import GetPage from './GetPage.js';
 import GetTab from './GetTab.js';
+import SetTabPosition from './SetTabPosition.js';
 
 var methods = {
     getPageKey: GetPageKey,
@@ -12,6 +13,7 @@ var methods = {
     addPage: AddPage,
     getPage: GetPage,
     getTab: GetTab,
+    setTabPosition: SetTabPosition,
 }
 
 Object.assign(

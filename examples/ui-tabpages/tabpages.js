@@ -28,7 +28,11 @@ class Demo extends Phaser.Scene {
             },
 
             align: {
-                tabs: 'left'
+                tabs: 'center'  // 'left', 'center', 'right'
+            },
+
+            expand: {
+                // tabs: true,
             },
 
             space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 }
@@ -62,6 +66,15 @@ class Demo extends Phaser.Scene {
 
         // Remove page testing
         // tabPages.removePage('page2', true).layout();
+
+        var btn = this.add.text(0, 580, 'top')
+            .setInteractive()
+            .on('pointerdown', function () {
+                btn.text = (btn.text === 'top') ? 'bottom' : 'top';
+                tabPages
+                    .setTabPosition(btn.text)
+                    .layout()
+            })
     }
 
     update() { }

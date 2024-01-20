@@ -1,21 +1,29 @@
-import Sizer from '../sizer/Sizer.js';
+import GridSizer from '../gridsizer/GridSizer.js';
 import Buttons from '../buttons/Buttons.js';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import Pages from '../pages/Pages.js';
 import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const SizerAdd = Sizer.prototype.add;
+const SizerAdd = GridSizer.prototype.add;
 
-class TabPages extends Sizer {
+class TabPages extends GridSizer {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
         }
+        // Create sizer
+        config.column = 3;
+        config.row = 3;
+        config.columnProportions = [0, 0, 0];
+        config.rowProportions = [0, 0, 0];
 
-        var tabsPosition = GetValue(config, 'tabPosition', 'top');
-        var sizerOrientation = ((tabsPosition === 'left') || (tabsPosition === 'right')) ? 'x' : 'y';
-        config.orientation = sizerOrientation;
+        var expandPages = GetValue(config, 'expand.pages', true);
+        if (expandPages) {
+            config.columnProportions[1] = 1;
+            config.rowProportions[1] = 1;
+        }
+
         super(scene, config);
         this.type = 'rexTabPages';
 
@@ -29,39 +37,74 @@ class TabPages extends Sizer {
         var pages = new Pages(scene, pagesConfig);
         scene.add.existing(pages);
 
-        var isHorizontalTabs = (sizerOrientation === 'y');
-        var wrapTabs = (isHorizontalTabs) ? GetValue(config, 'wrapTabs', false) : false;
+        var tabsPosition = GetValue(config, 'tabsPosition', undefined);
+        if (tabsPosition === undefined) {
+            tabsPosition = GetValue(config, 'tabPosition', 'top');
+        }
+
+        var wrapTabs = GetValue(config, 'wrapTabs', false);
+
+        var ButtonsClass = (wrapTabs) ? FixWidthButtons : Buttons;
 
         var tabsConfig = GetValue(config, 'tabs', undefined);
         if (tabsConfig === undefined) {
             tabsConfig = {};
         }
-        var ButtonsClass = (wrapTabs) ? FixWidthButtons : Buttons;
-        tabsConfig.orientation = (isHorizontalTabs) ? 'x' : 'y';
+        tabsConfig.orientation = ((tabsPosition === 'top') || (tabsPosition === 'bottom')) ? 'x' : 'y';
         tabsConfig.buttonsType = 'radio';
+        if (!wrapTabs && !tabsConfig.hasOwnProperty('expand')) {
+            tabsConfig.expand = GetValue(config, 'expand.tabs', false)
+        }
         var tabs = new ButtonsClass(scene, tabsConfig);
         scene.add.existing(tabs);
 
-        var tabsExpand = (wrapTabs) ? true : GetValue(config, 'expand.tabs', false);
-        var tabAlign = GetValue(config, 'align.tabs', 'left');
+
+        // Add to sizer
+        SizerAdd.call(this, pages, {
+            column: 1, row: 1,
+            expand: expandPages
+        });
+
+        var tabColumnIndex, tabRowIndex;
+        var tabPadding = GetValue(config, 'space.item', 0);  // Backward compatible
         switch (tabsPosition) {
             case 'top':
-            case 'left':
-                SizerAdd.call(this, tabs, { proportion: 0, expand: tabsExpand, align: tabAlign });
-                SizerAdd.call(this, pages, { proportion: 1, expand: true });
+                tabColumnIndex = 1;
+                tabRowIndex = 0;
+                tabPadding = { bottom: tabPadding };
                 break;
 
             case 'bottom':
-            case 'right':
-                SizerAdd.call(this, pages, { proportion: 1, expand: true });
-                SizerAdd.call(this, tabs, { proportion: 0, expand: tabsExpand, align: tabAlign });
+                tabColumnIndex = 1;
+                tabRowIndex = 2;
+                tabPadding = { top: tabPadding };
                 break;
 
+            case 'left':
+                tabColumnIndex = 0;
+                tabRowIndex = 1;
+                tabPadding = { right: tabPadding };
+                break;
+
+            case 'right':
+                tabColumnIndex = 2;
+                tabRowIndex = 1;
+                tabPadding = { left: tabPadding };
+                break;
         }
+
+        SizerAdd.call(this, tabs, {
+            column: tabColumnIndex, row: tabRowIndex,
+            padding: tabPadding,
+            expand: (wrapTabs) ? true : GetValue(config, 'expand.tabs', false),
+            align: GetValue(config, 'align.tabs', 'left')
+        });
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('tabs', tabs);
         this.addChildrenMap('pages', pages);
+
+        this.tabsPosition = tabsPosition;
 
         // Register events
         tabs.on('button.click', function (tab) {

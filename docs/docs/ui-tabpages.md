@@ -83,15 +83,17 @@ var tabPages = scene.rexUI.add.tabPages({
 
     // background: backgroundGameObject,
 
-    tabPosition: 'top',
+    tabsPosition: 'top',
+    // tabPosition: 'top',
+
     wrapTabs: false,
+
     tabs: {
         // width:
         // height:
         // rtl:
 
-        // background: backgroundGameObject,
-        expand:
+        // background: backgroundGameObject,        
         align:
         click: {
             mode: 'pointerup',
@@ -135,7 +137,7 @@ var tabPages = scene.rexUI.add.tabPages({
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
-- `tabPosition` : Put tabs at top, bottom, left, right of pages.
+- `tabsPosition` (or `tabPosition`) : Put tabs at top, bottom, left, right of pages.
     - `'top'`, `'bottom'`, `'left'`, `'right'` : Default value is `'top'`.
 - `wrapTabs` :
     - `false` : Uses [Buttons](ui-buttons.md) as Tabs, default behavior.
@@ -151,7 +153,6 @@ var tabPages = scene.rexUI.add.tabPages({
     - `tabs.space` : 
         - `tabs.space.top`, `tabs.space.bottom`, `tabs.space.left`, `tabs.space.right` : Padding around bottons.
         - `tabs.space.item` : Space between 2 button game objects.
-    - `tabs.expand` : Set `true` to expand width, or height of tabs game objects.  
     - `tabs.click`: Configuration of [button clicking](button.md).
         - `tabs.click.mode` :
             - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
@@ -281,6 +282,14 @@ tabPages.addPage({
     ```javascript
     tabPages.removeAllPages(true);
     ```
+
+### Change tabs position
+
+```javascript
+tabPages.setTabPosition(position);
+```
+
+- `position` : `'top'`, `'bottom'`, `'left'`, `'right'`
 
 ### Get element
 
