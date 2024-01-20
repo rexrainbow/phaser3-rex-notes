@@ -13434,7 +13434,7 @@
       if (config === undefined) {
         config = {};
       }
-      // Create sizer        
+      // Create sizer
       config.column = 3;
       config.row = 3;
       config.columnProportions = [0, 0, 0];

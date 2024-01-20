@@ -8363,6 +8363,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-tabs-position" class="md-nav__link">
+    Change tabs position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -9667,6 +9674,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-tabs-position" class="md-nav__link">
+    Change tabs position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -9783,15 +9797,17 @@
 
 <span class="w">    </span><span class="c1">// background: backgroundGameObject,</span>
 
-<span class="w">    </span><span class="nx">tabPosition</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tabsPosition</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// tabPosition: &#39;top&#39;,</span>
+
 <span class="w">    </span><span class="nx">wrapTabs</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
 <span class="w">    </span><span class="nx">tabs</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// width:</span>
 <span class="w">        </span><span class="c1">// height:</span>
 <span class="w">        </span><span class="c1">// rtl:</span>
 
-<span class="w">        </span><span class="c1">// background: backgroundGameObject,</span>
-<span class="w">        </span><span class="nx">expand</span><span class="o">:</span>
+<span class="w">        </span><span class="c1">// background: backgroundGameObject,        </span>
 <span class="w">        </span><span class="nx">align</span><span class="o">:</span>
 <span class="w">        </span><span class="nx">click</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
@@ -9843,7 +9859,7 @@
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of label.</li>
-<li><code>tabPosition</code> : Put tabs at top, bottom, left, right of pages.<ul>
+<li><code>tabsPosition</code> (or <code>tabPosition</code>) : Put tabs at top, bottom, left, right of pages.<ul>
 <li><code>'top'</code>, <code>'bottom'</code>, <code>'left'</code>, <code>'right'</code> : Default value is <code>'top'</code>.</li>
 </ul>
 </li>
@@ -9869,7 +9885,6 @@
 <li><code>tabs.space.item</code> : Space between 2 button game objects.</li>
 </ul>
 </li>
-<li><code>tabs.expand</code> : Set <code>true</code> to expand width, or height of tabs game objects.  </li>
 <li><code>tabs.click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>
 <li><code>tabs.click.mode</code> :<ul>
 <li><code>'pointerdown'</code>, <code>'press'</code>, or <code>0</code> : Fire 'click' event when touch pressed.</li>
@@ -10006,6 +10021,12 @@
 <li>Remove and destroy all pages
     <div class="highlight"><pre><span></span><code><span class="nx">tabPages</span><span class="p">.</span><span class="nx">removeAllPages</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="change-tabs-position">Change tabs position<a class="headerlink" href="#change-tabs-position" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">tabPages</span><span class="p">.</span><span class="nx">setTabPosition</span><span class="p">(</span><span class="nx">position</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>position</code> : <code>'top'</code>, <code>'bottom'</code>, <code>'left'</code>, <code>'right'</code></li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>

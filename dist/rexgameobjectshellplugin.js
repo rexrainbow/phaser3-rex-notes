@@ -27598,9 +27598,853 @@
     return childTweaker;
   };
 
+  var Sum = function Sum() {
+    return Array.prototype.reduce.call(arguments, Add$6, 0);
+  };
+  var Add$6 = function Add(a, b) {
+    return a + b;
+  };
+
+  var GetChildrenWidth$2 = function GetChildrenWidth(minimumMode) {
+    if (this.rexSizer.hidden) {
+      return 0;
+    }
+    if (minimumMode === undefined) {
+      minimumMode = true;
+    }
+    var result = 0,
+      columnWidth;
+    var children = this.sizerChildren;
+    var child, padding, childWidth, proportion;
+    var hasUnknownChildWidth = false;
+    this.totalColumnProportions; // To update this.hasColumnProportion0Child member
+
+    for (var i = 0; i < this.columnCount; i++) {
+      proportion = this.columnProportions[i];
+      columnWidth = 0;
+      if (proportion === 0 || minimumMode) {
+        for (var j = 0; j < this.rowCount; j++) {
+          child = children[j * this.columnCount + i];
+          if (!child) {
+            continue;
+          }
+          if (child.rexSizer.hidden) {
+            continue;
+          }
+          childWidth = this.getChildWidth(child);
+          if (childWidth === undefined) {
+            if (proportion !== 0 && !this.hasColumnProportion0Child) {
+              childWidth = 0;
+            } else {
+              hasUnknownChildWidth = true;
+            }
+          }
+          if (hasUnknownChildWidth) {
+            continue;
+          }
+          padding = child.rexSizer.padding;
+          childWidth += padding.left + padding.right;
+          columnWidth = Math.max(columnWidth, childWidth);
+        }
+        if (!hasUnknownChildWidth) {
+          result += columnWidth;
+        }
+      }
+
+      // else,(proportion > 0) : columnWidth is 0
+      if (!hasUnknownChildWidth) {
+        if (minimumMode) {
+          this.columnWidth[i] = columnWidth;
+        }
+      }
+    }
+    if (hasUnknownChildWidth) {
+      return undefined;
+    }
+    var space = this.space;
+    var indentLeft = Math.max(space.indentLeftOdd, space.indentLeftEven);
+    return result + Sum.apply(void 0, [space.left, indentLeft].concat(_toConsumableArray(space.column), [space.right]));
+  };
+
+  var GetChildrenHeight$2 = function GetChildrenHeight(minimumMode) {
+    if (this.rexSizer.hidden) {
+      return 0;
+    }
+    if (minimumMode === undefined) {
+      minimumMode = true;
+    }
+    var result = 0,
+      rowHeight;
+    var children = this.sizerChildren;
+    var child, padding, childHeight, proportion;
+    var hasUnknownChildHeight = false;
+    this.totalRowProportions; // To update this.hasColumnProportion0Child member
+
+    for (var i = 0; i < this.rowCount; i++) {
+      proportion = this.rowProportions[i];
+      rowHeight = 0;
+      if (proportion === 0 || minimumMode) {
+        for (var j = 0; j < this.columnCount; j++) {
+          child = children[i * this.columnCount + j];
+          if (!child) {
+            continue;
+          }
+          if (child.rexSizer.hidden) {
+            continue;
+          }
+          childHeight = this.getChildHeight(child);
+          if (childHeight === undefined) {
+            if (proportion !== 0 && !this.hasRowProportion0Child) {
+              childHeight = 0;
+            } else {
+              hasUnknownChildHeight = true;
+            }
+          }
+          if (hasUnknownChildHeight) {
+            continue;
+          }
+          padding = child.rexSizer.padding;
+          childHeight += padding.top + padding.bottom;
+          rowHeight = Math.max(rowHeight, childHeight);
+        }
+        if (!hasUnknownChildHeight) {
+          result += rowHeight;
+        }
+      }
+      // else,(proportion > 0) : rowHeight is 0
+
+      if (!hasUnknownChildHeight) {
+        if (minimumMode) {
+          this.rowHeight[i] = rowHeight;
+        }
+      }
+    }
+    if (hasUnknownChildHeight) {
+      return undefined;
+    }
+    var space = this.space;
+    var indentTop = Math.max(space.indentTopOdd, space.indentTopEven);
+    return result + Sum.apply(void 0, [space.top, indentTop].concat(_toConsumableArray(space.row), [space.bottom]));
+  };
+
+  var GetExpandedChildWidth$1 = function GetExpandedChildWidth(child, colWidth) {
+    var childWidth;
+    var childConfig = child.rexSizer;
+    if (childConfig.expandWidth) {
+      var padding = childConfig.padding;
+      childWidth = colWidth - padding.left - padding.right;
+    }
+    return childWidth;
+  };
+
+  var GetExpandedChildHeight$1 = function GetExpandedChildHeight(child, rowHeight) {
+    var childHeight;
+    var childConfig = child.rexSizer;
+    if (childConfig.expandHeight) {
+      var padding = childConfig.padding;
+      childHeight = rowHeight - padding.top - padding.bottom;
+    }
+    return childHeight;
+  };
+
+  var GetChildrenSizers$2 = function GetChildrenSizers(out) {
+    if (out === undefined) {
+      out = [];
+    }
+    var children = this.sizerChildren,
+      child;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      child = children[i];
+      if (child && child.isRexSizer) {
+        out.push(child);
+      }
+    }
+    return out;
+  };
+
+  var PreLayout$1 = function PreLayout() {
+    this._totalColumnProportions = undefined;
+    this._totalRowProportions = undefined;
+    this.hasColumnProportion0Child = false;
+    this.hasRowProportion0Child = false;
+    this.proportionWidthLength = undefined;
+    this.proportionHeightLength = undefined;
+    PreLayout$3.call(this);
+    return this;
+  };
+
+  var LayoutChildren$2 = function LayoutChildren() {
+    var child, childConfig, padding;
+    var startX = this.innerLeft,
+      startY = this.innerTop;
+    var itemX,
+      itemY = startY;
+    var x, y, width, height; // Align zone
+    var childWidth, childHeight;
+    // Layout grid children
+    var columnSpace = this.space.column,
+      rowSpace = this.space.row,
+      indentLeftOdd = this.space.indentLeftOdd,
+      indentLeftEven = this.space.indentLeftEven,
+      indentTopOdd = this.space.indentTopOdd,
+      indentTopEven = this.space.indentTopEven;
+    var colWidth, rowHeight;
+    var indentLeft, indentTop;
+    for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
+      rowHeight = this.getRowHeight(rowIndex);
+      indentLeft = rowIndex % 2 ? indentLeftEven : indentLeftOdd;
+      itemX = startX + indentLeft;
+      for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
+        colWidth = this.getColumnWidth(columnIndex);
+        child = this.getChildAt(columnIndex, rowIndex);
+        if (!child || child.rexSizer.hidden) {
+          itemX += colWidth + columnSpace[columnIndex];
+          continue;
+        }
+        PreLayoutChild.call(this, child);
+        childWidth = this.getExpandedChildWidth(child, colWidth);
+        childHeight = this.getExpandedChildHeight(child, rowHeight);
+        if (child.isRexSizer) {
+          child.runLayout(this, childWidth, childHeight);
+          CheckSize(child, this);
+        } else {
+          ResizeGameObject(child, childWidth, childHeight);
+        }
+        childConfig = child.rexSizer;
+        padding = childConfig.padding;
+        x = itemX + padding.left;
+        width = colWidth - padding.left - padding.right;
+        indentTop = columnIndex % 2 ? indentTopEven : indentTopOdd;
+        y = itemY + indentTop + padding.top;
+        height = rowHeight - padding.top - padding.bottom;
+        LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+        itemX += colWidth + columnSpace[columnIndex];
+      }
+      itemY += rowHeight + rowSpace[rowIndex];
+    }
+  };
+
+  var ResolveWidth = function ResolveWidth(width) {
+    var width = ResolveWidth$3.call(this, width);
+
+    // Calculate proportionLength
+    if (this.proportionWidthLength === undefined) {
+      var totalColumnProportions = this.totalColumnProportions;
+      if (totalColumnProportions > 0) {
+        var remainder = width - this.getChildrenWidth(false);
+        if (remainder >= 0) {
+          this.proportionWidthLength = remainder / totalColumnProportions;
+        }
+      } else {
+        this.proportionWidthLength = 0;
+      }
+    }
+    return width;
+  };
+
+  var ResolveHeight = function ResolveHeight(height) {
+    var height = ResolveHeight$3.call(this, height);
+
+    // Get proportionLength    
+    if (this.proportionHeightLength === undefined) {
+      var totalRowProportions = this.totalRowProportions;
+      if (totalRowProportions > 0) {
+        var remainder = height - this.getChildrenHeight(false);
+        if (remainder >= 0) {
+          this.proportionHeightLength = remainder / totalRowProportions;
+        }
+      } else {
+        this.proportionHeightLength = 0;
+      }
+    }
+    return height;
+  };
+
+  var ResolveChildrenWidth = function ResolveChildrenWidth(parentWidth) {
+    // Resolve width of sizer children
+    var child, expandedChildWidth, childWidth;
+    var colWidth;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (child && child.isRexSizer && !child.ignoreLayout) {
+        colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
+        expandedChildWidth = this.getExpandedChildWidth(child, colWidth);
+        childWidth = child.resolveWidth(expandedChildWidth);
+        if (childWidth === undefined) {
+          childWidth = expandedChildWidth;
+        }
+        child.resolveChildrenWidth(childWidth);
+      }
+    }
+  };
+
+  var ResolveChildrenHeight = function ResolveChildrenHeight(parentHeight) {
+    // Resolve width of sizer children
+    var child, expandedChildHeight, childHeight;
+    var rowHeight;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (child && child.isRexSizer && !child.ignoreLayout) {
+        rowHeight = this.getRowHeight(Math.floor(parseInt(i) / this.rowCount));
+        expandedChildHeight = this.getExpandedChildHeight(child, rowHeight);
+        childHeight = child.resolveHeight(expandedChildHeight);
+        if (childHeight === undefined) {
+          childHeight = expandedChildHeight;
+        }
+        child.resolveChildrenHeight(childHeight);
+      }
+    }
+  };
+
+  var RunWidthWrap$1 = function RunWidthWrap(width) {
+    var child, expandedChildWidth, childWidth;
+    var colWidth;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
+        continue;
+      }
+      colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
+      expandedChildWidth = this.getExpandedChildWidth(child, colWidth);
+      if (child.isRexSizer) {
+        childWidth = child.resolveWidth(expandedChildWidth);
+        if (childWidth === undefined) {
+          childWidth = expandedChildWidth;
+        }
+      }
+      child.runWidthWrap(childWidth);
+    }
+    return this;
+  };
+
+  var RunHeightWrap$1 = function RunHeightWrap(height) {
+    var child, expandedChildHeight, childHeight;
+    var rowHeight;
+    for (var i in this.sizerChildren) {
+      child = this.sizerChildren[i];
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runHeightWrap) {
+        continue;
+      }
+      rowHeight = this.getRowHeight(Math.floor(parseInt(i) / this.rowCount));
+      expandedChildHeight = this.getExpandedChildHeight(child, rowHeight);
+      if (child.isRexSizer) {
+        childHeight = child.resolveHeight(expandedChildHeight);
+        if (childHeight === undefined) {
+          childHeight = expandedChildHeight;
+        }
+      }
+      child.runHeightWrap(childHeight);
+    }
+    return this;
+  };
+
+  var IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$W = Phaser.Utils.Objects.GetValue;
+  var ALIGN_CENTER$2 = Phaser.Display.Align.CENTER;
+  var GetEmptyCellIndex = function GetEmptyCellIndex(columnIndex, rowIndex, cells, columnCount, rowCount) {
+    if (typeof columnIndex === 'number' || typeof rowIndex === 'number') {
+      if (columnIndex === undefined) {
+        var idx;
+        for (var i = 0; i < columnCount; i++) {
+          idx = rowIndex * columnCount + i;
+          if (!cells[idx]) {
+            return idx;
+          }
+        }
+      } else if (rowIndex === undefined) {
+        var idx;
+        for (var i = 0; i < rowCount; i++) {
+          idx = i * columnCount + columnIndex;
+          if (!cells[idx]) {
+            return idx;
+          }
+        }
+      } else {
+        var idx = rowIndex * columnCount + columnIndex;
+        if (!cells[idx]) {
+          return idx;
+        }
+      }
+    } else if (rowIndex === true) {
+      var idx;
+      for (var i = 0; i < columnCount; i++) {
+        for (var j = 0; j < rowCount; j++) {
+          idx = j * columnCount + i;
+          if (!cells[idx]) {
+            return idx;
+          }
+        }
+      }
+    } else {
+      for (var i = 0, cnt = cells.length; i < cnt; i++) {
+        if (!cells[i]) {
+          return i;
+        }
+      }
+    }
+    return null;
+  };
+  var Add$5 = function Add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
+    AddChild$2.call(this, gameObject);
+    if (IsPlainObject$b(columnIndex)) {
+      var config = columnIndex;
+      columnIndex = GetValue$W(config, 'column', undefined);
+      rowIndex = GetValue$W(config, 'row', undefined);
+      align = GetValue$W(config, 'align', ALIGN_CENTER$2);
+      paddingConfig = GetValue$W(config, 'padding', 0);
+      expand = GetValue$W(config, 'expand', false);
+      childKey = GetValue$W(config, 'key', undefined);
+    }
+
+    // Get insert index
+    var itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
+    if (itemIndex === null) {
+      // Specific index mode
+      if (typeof columnIndex === 'number' && typeof rowIndex === 'number') {
+        return this;
+      }
+      if (rowIndex === true || typeof rowIndex === 'number') {
+        this.addEmptyColumn();
+      } else {
+        this.addEmptyRow();
+      }
+
+      // Get insert index again
+      itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
+    }
+    if (typeof align === 'string') {
+      align = AlignConst[align];
+    }
+    if (align === undefined) {
+      align = ALIGN_CENTER$2;
+    }
+    if (paddingConfig === undefined) {
+      paddingConfig = 0;
+    }
+    if (expand === undefined) {
+      expand = true;
+    }
+    var config = this.getSizerConfig(gameObject);
+    config.align = align;
+    config.padding = GetBoundsConfig(paddingConfig);
+    if (IsPlainObject$b(expand)) {
+      config.expandWidth = GetValue$W(expand, 'width', false);
+      config.expandHeight = GetValue$W(expand, 'height', false);
+    } else {
+      config.expandWidth = expand;
+      config.expandHeight = expand;
+    }
+    this.sizerChildren[itemIndex] = gameObject;
+    if (childKey !== undefined) {
+      this.addChildrenMap(childKey, gameObject);
+    }
+    return this;
+  };
+  var AddChildMethods$5 = {
+    add: Add$5
+  };
+
+  var Fill = function Fill(arr, value, startIdx, endIdx) {
+    if (startIdx === undefined) {
+      startIdx = 0;
+    }
+    if (endIdx === undefined) {
+      endIdx = arr.length - 1;
+    }
+    for (var i = startIdx; i <= endIdx; i++) {
+      arr[i] = value;
+    }
+    return arr;
+  };
+
+  var RemoveChildMethods$4 = {
+    remove: function remove(gameObject, destroyChild) {
+      if (this.getParentSizer(gameObject) !== this) {
+        return this;
+      }
+      var idx = this.sizerChildren.indexOf(gameObject);
+      if (idx !== -1) {
+        this.sizerChildren[idx] = null;
+      }
+      RemoveChild$1.call(this, gameObject, destroyChild);
+      return this;
+    },
+    removeAt: function removeAt(columnIndex, rowIndex, destroyChild) {
+      var child = this.getChildAt(columnIndex, rowIndex);
+      if (child) {
+        this.remove(child, destroyChild);
+      }
+      return this;
+    },
+    removeAll: function removeAll(destroyChild) {
+      for (var i = this.sizerChildren.length - 1; i >= 0; i--) {
+        var child = this.sizerChildren[i];
+        if (!child) {
+          continue;
+        }
+        this.remove(child, destroyChild);
+      }
+      return this;
+    },
+    clear: function clear(destroyChild) {
+      Fill(this.sizerChildren, null);
+      ClearChildren.call(this, destroyChild);
+      return this;
+    }
+  };
+
+  var SetSpaceMethods = {
+    setColumnSpace: function setColumnSpace(columnSpace) {
+      if (!this.space.column) {
+        this.space.column = [];
+      }
+      this.space.column.length = this.columnCount - 1;
+      if (typeof columnSpace === 'number') {
+        Fill(this.space.column, columnSpace);
+      } else {
+        for (var i = 0, cnt = this.columnCount - 1; i < cnt; i++) {
+          this.space.column[i] = columnSpace[i] || 0;
+        }
+      }
+      return this;
+    },
+    setRowSpace: function setRowSpace(rowSpace) {
+      if (!this.space.row) {
+        this.space.row = [];
+      }
+      this.space.row.length = this.rowCount - 1;
+      if (typeof rowSpace === 'number') {
+        Fill(this.space.row, rowSpace);
+      } else {
+        for (var i = 0, cnt = this.rowCount - 1; i < cnt; i++) {
+          this.space.row[i] = rowSpace[i] || 0;
+        }
+      }
+      return this;
+    },
+    setIndentLeft: function setIndentLeft(odd, even) {
+      this.space.indentLeftOdd = odd;
+      this.space.indentLeftEven = even;
+      return this;
+    },
+    setIndentTop: function setIndentTop(odd, even) {
+      this.space.indentTopOdd = odd;
+      this.space.indentTopEven = even;
+      return this;
+    }
+  };
+
+  var GetValue$V = Phaser.Utils.Objects.GetValue;
+  var ResetGrid = function ResetGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
+    if (columnProportions === undefined) {
+      columnProportions = 0;
+    }
+    if (rowProportions === undefined) {
+      rowProportions = 0;
+    }
+    this.columnCount = columnCount;
+    this.rowCount = rowCount;
+    this.gridCount = columnCount * rowCount;
+
+    // children
+    this.removeAll();
+    this.sizerChildren.length = columnCount * rowCount;
+    Fill(this.sizerChildren, null);
+
+    // proportions
+    this.columnProportions = [];
+    this.columnProportions.length = columnCount;
+    if (typeof columnProportions === 'number') {
+      Fill(this.columnProportions, columnProportions);
+    } else {
+      for (var i = 0; i < columnCount; i++) {
+        this.columnProportions[i] = columnProportions[i] || 0;
+      }
+    }
+    this.rowProportions = [];
+    this.rowProportions.length = rowCount;
+    if (typeof rowProportions === 'number') {
+      Fill(this.rowProportions, rowProportions);
+    } else {
+      for (var i = 0; i < rowCount; i++) {
+        this.rowProportions[i] = rowProportions[i] || 0;
+      }
+    }
+
+    // width & height
+    this.columnWidth = [];
+    this.columnWidth.length = columnCount;
+    this.rowHeight = [];
+    this.rowHeight.length = rowCount;
+
+    // space
+    this.setColumnSpace(GetValue$V(space, 'column', 0));
+    this.setRowSpace(GetValue$V(space, 'row', 0));
+    var scene = this.scene;
+    var createCellContainerCallback = this.createCellContainerCallback;
+    if (createCellContainerCallback) {
+      for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
+        for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
+          var addConfig = {
+            column: x,
+            row: y
+          };
+          var child = createCellContainerCallback(scene, x, y, addConfig);
+          if (child) {
+            this.add(child, addConfig);
+          }
+        }
+      }
+    }
+    return this;
+  };
+
+  var InseryEmptyRow = function InseryEmptyRow(rowIndex, proportion, space) {
+    if (proportion === undefined) {
+      proportion = this.rowProportions[0] || 0;
+    }
+    if (space === undefined) {
+      space = this.space.row[0] || 0;
+    }
+    this.rowCount += 1;
+    this.gridCount += this.columnCount;
+    var args = [rowIndex * this.columnCount, 0];
+    for (var i = 0; i < this.columnCount; i++) {
+      args.push(null);
+    }
+    this.sizerChildren.splice.apply(this.sizerChildren, args);
+    this.rowProportions.push(proportion);
+    this.rowHeight.length += 1; // this.rowHeight will be recalculated when layout()    
+
+    this.space.row.splice(rowIndex, 0, space);
+    return this;
+  };
+  var AddEmptyRow = function AddEmptyRow(proportion, space) {
+    InseryEmptyRow.call(this, this.rowCount, proportion, space);
+    return this;
+  };
+
+  var InsertEmptyColumn = function InsertEmptyColumn(colIndex, proportion, space) {
+    if (proportion === undefined) {
+      proportion = this.columnProportions[0] || 0;
+    }
+    if (space === undefined) {
+      space = this.space.column[0] || 0;
+    }
+    this.columnCount += 1;
+    this.gridCount += this.rowCount;
+    for (var i = this.rowCount - 1; i >= 0; i--) {
+      var insertIndex = i * this.columnCount + colIndex;
+      this.sizerChildren.splice(insertIndex, 0, null);
+    }
+    this.columnProportions.push(proportion);
+    this.columnWidth.length += 1; // this.columnWidth will be recalculated when layout()    
+
+    this.space.column.splice(colIndex, 0, space);
+    return this;
+  };
+  var AddEmptyColumn = function AddEmptyColumn(proportion, space) {
+    InsertEmptyColumn.call(this, this.columnCount, proportion, space);
+    return this;
+  };
+
+  var methods$c = {
+    getChildrenWidth: GetChildrenWidth$2,
+    getChildrenHeight: GetChildrenHeight$2,
+    getExpandedChildWidth: GetExpandedChildWidth$1,
+    getExpandedChildHeight: GetExpandedChildHeight$1,
+    getChildrenSizers: GetChildrenSizers$2,
+    preLayout: PreLayout$1,
+    layoutChildren: LayoutChildren$2,
+    resolveWidth: ResolveWidth,
+    resolveHeight: ResolveHeight,
+    resolveChildrenWidth: ResolveChildrenWidth,
+    resolveChildrenHeight: ResolveChildrenHeight,
+    runWidthWrap: RunWidthWrap$1,
+    runHeightWrap: RunHeightWrap$1,
+    resetGrid: ResetGrid,
+    inseryEmptyRow: InseryEmptyRow,
+    addEmptyRow: AddEmptyRow,
+    insertEmptyColumn: InsertEmptyColumn,
+    addEmptyColumn: AddEmptyColumn
+  };
+  Object.assign(methods$c, AddChildMethods$5, RemoveChildMethods$4, SetSpaceMethods);
+
+  var GetTotalColumnProportions = function GetTotalColumnProportions() {
+    var result = 0,
+      proportion;
+    for (var i = 0; i < this.columnCount; i++) {
+      proportion = this.columnProportions[i];
+      if (proportion > 0) {
+        result += proportion;
+      } else if (proportion === 0) {
+        this.hasColumnProportion0Child = true;
+      }
+    }
+    return result;
+  };
+
+  var GetTotalRowProportions = function GetTotalRowProportions() {
+    var result = 0,
+      proportion;
+    for (var i = 0; i < this.rowCount; i++) {
+      proportion = this.rowProportions[i];
+      if (proportion > 0) {
+        result += proportion;
+      } else if (proportion === 0) {
+        this.hasRowProportion0Child = true;
+      }
+    }
+    return result;
+  };
+
+  var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$U = Phaser.Utils.Objects.GetValue;
+  var GridSizer = /*#__PURE__*/function (_BaseSizer) {
+    _inherits(GridSizer, _BaseSizer);
+    var _super = _createSuper(GridSizer);
+    function GridSizer(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
+      var _this;
+      _classCallCheck(this, GridSizer);
+      if (IsPlainObject$a(x)) {
+        config = x;
+        x = GetValue$U(config, 'x', 0);
+        y = GetValue$U(config, 'y', 0);
+        minWidth = GetValue$U(config, 'width', undefined);
+        minHeight = GetValue$U(config, 'height', undefined);
+        columnCount = GetValue$U(config, 'column', config.col || 0);
+        rowCount = GetValue$U(config, 'row', 0);
+        columnProportions = GetValue$U(config, 'columnProportions', 0);
+        rowProportions = GetValue$U(config, 'rowProportions', 0);
+      } else if (IsPlainObject$a(minWidth)) {
+        config = minWidth;
+        minWidth = GetValue$U(config, 'width', undefined);
+        minHeight = GetValue$U(config, 'height', undefined);
+        columnCount = GetValue$U(config, 'column', config.col || 0);
+        rowCount = GetValue$U(config, 'row', 0);
+        columnProportions = GetValue$U(config, 'columnProportions', 0);
+        rowProportions = GetValue$U(config, 'rowProportions', 0);
+      } else if (IsPlainObject$a(columnCount)) {
+        config = columnCount;
+        columnCount = GetValue$U(config, 'column', config.col || 0);
+        rowCount = GetValue$U(config, 'row', 0);
+        columnProportions = GetValue$U(config, 'columnProportions', 0);
+        rowProportions = GetValue$U(config, 'rowProportions', 0);
+      } else if (IsPlainObject$a(columnProportions)) {
+        config = columnProportions;
+        columnProportions = GetValue$U(config, 'columnProportions', 0);
+        rowProportions = GetValue$U(config, 'rowProportions', 0);
+      }
+      _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
+      _this.type = 'rexGridSizer';
+      _this.sizerChildren = [];
+      _this.addChildrenMap('items', _this.sizerChildren);
+      _this.setCreateCellContainerCallback(GetValue$U(config, 'createCellContainerCallback'));
+      _this.setIndentLeft(GetValue$U(config, 'space.indentLeftOdd', 0), GetValue$U(config, 'space.indentLeftEven', 0));
+      _this.setIndentTop(GetValue$U(config, 'space.indentTopOdd', 0), GetValue$U(config, 'space.indentTopEven', 0));
+      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$U(config, 'space', undefined));
+      return _this;
+    }
+    _createClass(GridSizer, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
+        }
+        _get(_getPrototypeOf(GridSizer.prototype), "destroy", this).call(this, fromScene);
+
+        // More free resources
+        this.columnProportions = undefined;
+        this.rowProportions = undefined;
+        this.columnWidth = undefined;
+        this.rowHeight = undefined;
+        this.createCellContainerCallback = undefined;
+      }
+    }, {
+      key: "setColumnProportion",
+      value: function setColumnProportion(columnIndex, proportion) {
+        if (columnIndex >= this.columnProportions.length) {
+          return this;
+        }
+        this.columnProportions[columnIndex] = proportion;
+        return this;
+      }
+    }, {
+      key: "setRowProportion",
+      value: function setRowProportion(rowIndex, proportion) {
+        if (rowIndex >= this.rowProportions.length) {
+          return this;
+        }
+        this.rowProportions[rowIndex] = proportion;
+        return this;
+      }
+    }, {
+      key: "totalColumnProportions",
+      get: function get() {
+        if (this._totalColumnProportions === undefined) {
+          this._totalColumnProportions = GetTotalColumnProportions.call(this);
+        }
+        return this._totalColumnProportions;
+      }
+    }, {
+      key: "totalRowProportions",
+      get: function get() {
+        if (this._totalRowProportions === undefined) {
+          this._totalRowProportions = GetTotalRowProportions.call(this);
+        }
+        return this._totalRowProportions;
+      }
+    }, {
+      key: "getChildAt",
+      value: function getChildAt(columnIndex, rowIndex) {
+        return this.sizerChildren[rowIndex * this.columnCount + columnIndex];
+      }
+    }, {
+      key: "childToGridIndex",
+      value: function childToGridIndex(child, out) {
+        if (!child) {
+          return null;
+        }
+        var index = this.sizerChildren.indexOf(child);
+        if (index === -1) {
+          return null;
+        }
+        if (out === undefined) {
+          out = {};
+        }
+        out.x = index % this.columnCount;
+        out.y = Math.floor(index / this.columnCount);
+        return out;
+      }
+    }, {
+      key: "getColumnWidth",
+      value: function getColumnWidth(columnIndex) {
+        var colProportion = this.columnProportions[columnIndex];
+        var colWidth = colProportion === 0 ? this.columnWidth[columnIndex] : colProportion * this.proportionWidthLength;
+        return colWidth;
+      }
+    }, {
+      key: "getRowHeight",
+      value: function getRowHeight(rowIndex) {
+        var rowProportion = this.rowProportions[rowIndex];
+        var rowHeight = rowProportion === 0 ? this.rowHeight[rowIndex] : rowProportion * this.proportionHeightLength;
+        return rowHeight;
+      }
+    }, {
+      key: "setCreateCellContainerCallback",
+      value: function setCreateCellContainerCallback(callback) {
+        this.createCellContainerCallback = callback;
+        return this;
+      }
+    }]);
+    return GridSizer;
+  }(Base$1);
+  Object.assign(GridSizer.prototype, methods$c);
+
   var SizerAdd$2 = Sizer.prototype.add;
   var SizerAddSpace = Sizer.prototype.addSpace;
-  var Add$6 = function Add(gameObject) {
+  var Add$4 = function Add(gameObject) {
     var isNormalGameObject = !gameObject.isRexSpace;
     var proportion = !isNormalGameObject || this.buttonsExpand ? 1 : 0;
     if (this.sizerChildren.length === 0) {
@@ -27653,21 +28497,21 @@
     }
     return this;
   };
-  var AddChildMethods$5 = {
+  var AddChildMethods$4 = {
     addButton: function addButton(gameObject) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$6.call(this, gameObjects[i]);
+          Add$4.call(this, gameObjects[i]);
         }
       } else {
-        Add$6.call(this, gameObject);
+        Add$4.call(this, gameObject);
       }
       return this;
     },
     addButtons: function addButtons(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add$6.call(this, gameObjects[i]);
+        Add$4.call(this, gameObjects[i]);
       }
       return this;
     }
@@ -27683,7 +28527,7 @@
     SizerRmove$1.call(this, gameObject, destroyChild);
     return this;
   };
-  var RemoveChildMethods$4 = {
+  var RemoveChildMethods$3 = {
     remove: function remove(gameObject, destroyChild) {
       // Remove gameObject no matter it is a button or not
       if (IsArray(gameObject)) {
@@ -27853,13 +28697,13 @@
     }
   };
 
-  var GetValue$W = Phaser.Utils.Objects.GetValue;
+  var GetValue$T = Phaser.Utils.Objects.GetValue;
   var ButtonsTypeMethods = {
     setButtonsType: function setButtonsType(config) {
       if (config === undefined) {
         config = {};
       }
-      var buttonsType = GetValue$W(config, 'buttonsType', config.type);
+      var buttonsType = GetValue$T(config, 'buttonsType', config.type);
       this.buttonsType = buttonsType;
       if (!this.buttonsType) {
         return this;
@@ -27867,11 +28711,11 @@
 
       // Assign this.setValueCallback, this.setValueCallbackScope
       var setValueCallback, setValueCallbackScope;
-      setValueCallback = GetValue$W(config, 'setValueCallback', undefined);
-      setValueCallbackScope = GetValue$W(config, 'setValueCallbackScope', undefined);
+      setValueCallback = GetValue$T(config, 'setValueCallback', undefined);
+      setValueCallbackScope = GetValue$T(config, 'setValueCallbackScope', undefined);
       if (setValueCallback === undefined) {
-        setValueCallback = GetValue$W(config, 'setButtonStateCallback', undefined);
-        setValueCallbackScope = GetValue$W(config, 'setButtonStateCallbackScope', undefined);
+        setValueCallback = GetValue$T(config, 'setButtonStateCallback', undefined);
+        setValueCallbackScope = GetValue$T(config, 'setButtonStateCallbackScope', undefined);
       }
       this.setValueCallback = setValueCallback;
       this.setValueCallbackScope = setValueCallbackScope;
@@ -28164,10 +29008,10 @@
     }]);
     return ButtonGroup;
   }();
-  var methods$c = {
+  var methods$b = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods, methods$c);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods, methods$b);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -28198,7 +29042,7 @@
     }
   };
 
-  var GetValue$V = Phaser.Utils.Objects.GetValue;
+  var GetValue$S = Phaser.Utils.Objects.GetValue;
   var Buttons$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(Buttons, _Sizer);
     var _super = _createSuper(Buttons);
@@ -28220,18 +29064,18 @@
       _this.type = 'rexButtons';
       _this.buttonGroup = new ButtonGroup({
         parent: _assertThisInitialized(_this),
-        eventEmitter: GetValue$V(config, 'eventEmitter', _assertThisInitialized(_this)),
-        groupName: GetValue$V(config, 'groupName', undefined),
-        clickConfig: GetValue$V(config, 'click', undefined)
+        eventEmitter: GetValue$S(config, 'eventEmitter', _assertThisInitialized(_this)),
+        groupName: GetValue$S(config, 'groupName', undefined),
+        clickConfig: GetValue$S(config, 'click', undefined)
       }).setButtonsType(config);
 
       // Add elements
-      var background = GetValue$V(config, 'background', undefined);
-      var buttons = GetValue$V(config, 'buttons', undefined);
+      var background = GetValue$S(config, 'background', undefined);
+      var buttons = GetValue$S(config, 'buttons', undefined);
 
       // Buttons properties
-      _this.buttonsExpand = GetValue$V(config, 'expand', false);
-      _this.buttonsAlign = GetValue$V(config, 'align', undefined); // undefined/left/top: no space                
+      _this.buttonsExpand = GetValue$S(config, 'expand', false);
+      _this.buttonsAlign = GetValue$S(config, 'align', undefined); // undefined/left/top: no space                
 
       if (background) {
         _this.addBackground(background);
@@ -28275,9 +29119,9 @@
     }]);
     return Buttons;
   }(Sizer);
-  Object.assign(Buttons$1.prototype, AddChildMethods$5, RemoveChildMethods$4, ButtonMethods, ButtonStateMethods);
+  Object.assign(Buttons$1.prototype, AddChildMethods$4, RemoveChildMethods$3, ButtonMethods, ButtonStateMethods);
 
-  var GetChildrenWidth$2 = function GetChildrenWidth(minimumMode) {
+  var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
       return 0;
     }
@@ -28300,7 +29144,7 @@
     return childrenWidth + this.space.left + this.space.right;
   };
 
-  var GetChildrenHeight$2 = function GetChildrenHeight(minimumMode) {
+  var GetChildrenHeight$1 = function GetChildrenHeight(minimumMode) {
     if (this.rexSizer.hidden) {
       return 0;
     }
@@ -28323,7 +29167,7 @@
     return childrenHeight + this.space.top + this.space.bottom;
   };
 
-  var GetChildrenSizers$2 = function GetChildrenSizers(out) {
+  var GetChildrenSizers$1 = function GetChildrenSizers(out) {
     if (out === undefined) {
       out = [];
     }
@@ -28341,7 +29185,7 @@
     return out;
   };
 
-  var PreLayout$1 = function PreLayout() {
+  var PreLayout = function PreLayout() {
     this._maxChildWidth = undefined;
     this._maxChildHeight = undefined;
     this.wrapResult = undefined;
@@ -28349,7 +29193,7 @@
     return this;
   };
 
-  var LayoutChildren$2 = function LayoutChildren() {
+  var LayoutChildren$1 = function LayoutChildren() {
     var horizontalWrap = this.orientation === 0;
     var innerLineWidth = horizontalWrap ? this.innerWidth : this.innerHeight;
     var justifyPercentage = this.justifyPercentage;
@@ -28621,7 +29465,7 @@
     return out;
   };
 
-  var RunWidthWrap$1 = function RunWidthWrap(width) {
+  var RunWidthWrap = function RunWidthWrap(width) {
     if (this.wrapResult) {
       // Already got wrapResult
       return;
@@ -28640,7 +29484,7 @@
     return HasHeightWrap$1.call(this);
   };
 
-  var RunHeightWrap$1 = function RunHeightWrap(height) {
+  var RunHeightWrap = function RunHeightWrap(height) {
     if (this.wrapResult) {
       // Already got wrapResult
       return;
@@ -28688,26 +29532,26 @@
     return nearestIndex;
   };
 
-  var IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$U = Phaser.Utils.Objects.GetValue;
-  var ALIGN_CENTER$2 = Phaser.Display.Align.CENTER;
-  var Add$5 = function Add(gameObject, paddingConfig, childKey, index) {
+  var IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$R = Phaser.Utils.Objects.GetValue;
+  var ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
+  var Add$3 = function Add(gameObject, paddingConfig, childKey, index) {
     if (gameObject === '\n') {
       this.addNewLine();
       return this;
     }
     AddChild$2.call(this, gameObject);
-    if (IsPlainObject$b(paddingConfig)) {
+    if (IsPlainObject$9(paddingConfig)) {
       var config = paddingConfig;
-      paddingConfig = GetValue$U(config, 'padding', 0);
-      childKey = GetValue$U(config, 'key', undefined);
-      index = GetValue$U(config, 'index', undefined);
+      paddingConfig = GetValue$R(config, 'padding', 0);
+      childKey = GetValue$R(config, 'key', undefined);
+      index = GetValue$R(config, 'index', undefined);
     }
     if (paddingConfig === undefined) {
       paddingConfig = 0;
     }
     var config = this.getSizerConfig(gameObject);
-    config.align = ALIGN_CENTER$2;
+    config.align = ALIGN_CENTER$1;
     config.padding = GetBoundsConfig(paddingConfig);
     if (index === undefined || index >= this.sizerChildren.length) {
       this.sizerChildren.push(gameObject);
@@ -28719,15 +29563,15 @@
     }
     return this;
   };
-  var AddChildMethods$4 = {
+  var AddChildMethods$3 = {
     add: function add(gameObject, paddingConfig, childKey) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$5.call(this, gameObjects[i], paddingConfig);
+          Add$3.call(this, gameObjects[i], paddingConfig);
         }
       } else {
-        Add$5.call(this, gameObject, paddingConfig, childKey);
+        Add$3.call(this, gameObject, paddingConfig, childKey);
       }
       return this;
     },
@@ -28736,7 +29580,7 @@
       return this;
     },
     insert: function insert(index, gameObject, paddingConfig, childKey) {
-      Add$5.call(this, gameObject, paddingConfig, childKey, index);
+      Add$3.call(this, gameObject, paddingConfig, childKey, index);
       return this;
     },
     insertAtPosition: function insertAtPosition(x, y, gameObject, paddingConfig, childKey) {
@@ -28750,7 +29594,7 @@
   };
 
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var RemoveChildMethods$3 = {
+  var RemoveChildMethods$2 = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
@@ -28772,18 +29616,18 @@
     }
   };
 
-  var methods$b = {
-    getChildrenWidth: GetChildrenWidth$2,
-    getChildrenHeight: GetChildrenHeight$2,
-    getChildrenSizers: GetChildrenSizers$2,
-    preLayout: PreLayout$1,
-    layoutChildren: LayoutChildren$2,
+  var methods$a = {
+    getChildrenWidth: GetChildrenWidth$1,
+    getChildrenHeight: GetChildrenHeight$1,
+    getChildrenSizers: GetChildrenSizers$1,
+    preLayout: PreLayout,
+    layoutChildren: LayoutChildren$1,
     hasWidthWrap: HasWidthWrap,
-    runWidthWrap: RunWidthWrap$1,
+    runWidthWrap: RunWidthWrap,
     hasHeightWrap: HasHeightWrap,
-    runHeightWrap: RunHeightWrap$1
+    runHeightWrap: RunHeightWrap
   };
-  Object.assign(methods$b, AddChildMethods$4, RemoveChildMethods$3);
+  Object.assign(methods$a, AddChildMethods$3, RemoveChildMethods$2);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {
@@ -28839,36 +29683,36 @@
     return result;
   };
 
-  var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$T = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$Q = Phaser.Utils.Objects.GetValue;
   var FixWidthSizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(FixWidthSizer, _BaseSizer);
     var _super = _createSuper(FixWidthSizer);
     function FixWidthSizer(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, FixWidthSizer);
-      if (IsPlainObject$a(x)) {
+      if (IsPlainObject$8(x)) {
         config = x;
-        x = GetValue$T(config, 'x', 0);
-        y = GetValue$T(config, 'y', 0);
-        minWidth = GetValue$T(config, 'width', undefined);
-        minHeight = GetValue$T(config, 'height', undefined);
-      } else if (IsPlainObject$a(minWidth)) {
+        x = GetValue$Q(config, 'x', 0);
+        y = GetValue$Q(config, 'y', 0);
+        minWidth = GetValue$Q(config, 'width', undefined);
+        minHeight = GetValue$Q(config, 'height', undefined);
+      } else if (IsPlainObject$8(minWidth)) {
         config = minWidth;
-        minWidth = GetValue$T(config, 'width', undefined);
-        minHeight = GetValue$T(config, 'height', undefined);
+        minWidth = GetValue$Q(config, 'width', undefined);
+        minHeight = GetValue$Q(config, 'height', undefined);
       }
       _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
       _this.type = 'rexFixWidthSizer';
       _this.sizerChildren = [];
-      _this.setOrientation(GetValue$T(config, 'orientation', 0));
-      _this.setItemSpacing(GetValue$T(config, 'space.item', 0));
-      _this.setLineSpacing(GetValue$T(config, 'space.line', 0));
-      _this.setIntentLeft(GetValue$T(config, 'space.indentLeftOdd', 0), GetValue$T(config, 'space.indentLeftEven', 0));
-      _this.setIntentTop(GetValue$T(config, 'space.indentTopOdd', 0), GetValue$T(config, 'space.indentTopEven', 0));
-      _this.setAlign(GetValue$T(config, 'align', 0));
-      _this.setJustifyPercentage(GetValue$T(config, 'justifyPercentage', 0.25));
-      _this.setRTL(GetValue$T(config, 'rtl', false));
+      _this.setOrientation(GetValue$Q(config, 'orientation', 0));
+      _this.setItemSpacing(GetValue$Q(config, 'space.item', 0));
+      _this.setLineSpacing(GetValue$Q(config, 'space.line', 0));
+      _this.setIntentLeft(GetValue$Q(config, 'space.indentLeftOdd', 0), GetValue$Q(config, 'space.indentLeftEven', 0));
+      _this.setIntentTop(GetValue$Q(config, 'space.indentTopOdd', 0), GetValue$Q(config, 'space.indentTopEven', 0));
+      _this.setAlign(GetValue$Q(config, 'align', 0));
+      _this.setJustifyPercentage(GetValue$Q(config, 'justifyPercentage', 0.25));
+      _this.setRTL(GetValue$Q(config, 'rtl', false));
       _this.wrapResult = undefined; // {lines, width, height}
 
       _this.addChildrenMap('items', _this.sizerChildren);
@@ -28962,23 +29806,23 @@
     'justify-bottom': 4,
     'justify-center': 5
   };
-  Object.assign(FixWidthSizer.prototype, methods$b);
+  Object.assign(FixWidthSizer.prototype, methods$a);
 
   var SizerAdd$1 = FixWidthSizer.prototype.add;
-  var Add$4 = function Add(gameObject) {
+  var Add$2 = function Add(gameObject) {
     SizerAdd$1.call(this, gameObject);
     this.buttonGroup.add(gameObject);
     return this;
   };
-  var AddChildMethods$3 = {
+  var AddChildMethods$2 = {
     addButton: function addButton(gameObject) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$4.call(this, gameObjects[i]);
+          Add$2.call(this, gameObjects[i]);
         }
       } else {
-        Add$4.call(this, gameObject);
+        Add$2.call(this, gameObject);
       }
       return this;
     },
@@ -28990,7 +29834,7 @@
         for (var lineIdx = 0, lastLineIdx = lines.length - 1; lineIdx <= lastLineIdx; lineIdx++) {
           line = lines[lineIdx];
           for (var i = 0, cnt = line.length; i < cnt; i++) {
-            Add$4.call(this, line[i]);
+            Add$2.call(this, line[i]);
           }
           if (lineIdx > lastLineIdx) {
             SizerAdd$1.addNewLine(this);
@@ -28999,7 +29843,7 @@
       } else {
         // 1d array
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$4.call(this, gameObjects[i]);
+          Add$2.call(this, gameObjects[i]);
         }
       }
       return this;
@@ -29017,7 +29861,7 @@
     SizerRmove.call(this, gameObject, destroyChild);
     return this;
   };
-  var RemoveChildMethods$2 = {
+  var RemoveChildMethods$1 = {
     remove: function remove(gameObject, destroyChild) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
@@ -29048,7 +29892,7 @@
     }
   };
 
-  var GetValue$S = Phaser.Utils.Objects.GetValue;
+  var GetValue$P = Phaser.Utils.Objects.GetValue;
   var Buttons = /*#__PURE__*/function (_FixWidthSizer) {
     _inherits(Buttons, _FixWidthSizer);
     var _super = _createSuper(Buttons);
@@ -29071,17 +29915,17 @@
       _this.type = 'rexFixWidthButtons';
       _this.buttonGroup = new ButtonGroup({
         parent: _assertThisInitialized(_this),
-        eventEmitter: GetValue$S(config, 'eventEmitter', _assertThisInitialized(_this)),
-        groupName: GetValue$S(config, 'groupName', undefined),
-        clickConfig: GetValue$S(config, 'click', undefined)
+        eventEmitter: GetValue$P(config, 'eventEmitter', _assertThisInitialized(_this)),
+        groupName: GetValue$P(config, 'groupName', undefined),
+        clickConfig: GetValue$P(config, 'click', undefined)
       }).setButtonsType(config);
 
       // Add elements
-      var background = GetValue$S(config, 'background', undefined);
-      var buttons = GetValue$S(config, 'buttons', undefined);
+      var background = GetValue$P(config, 'background', undefined);
+      var buttons = GetValue$P(config, 'buttons', undefined);
 
       // Buttons properties
-      _this.buttonsAlign = GetValue$S(config, 'align', undefined);
+      _this.buttonsAlign = GetValue$P(config, 'align', undefined);
       if (background) {
         _this.addBackground(background);
       }
@@ -29124,9 +29968,9 @@
     }]);
     return Buttons;
   }(FixWidthSizer);
-  Object.assign(Buttons.prototype, AddChildMethods$3, RemoveChildMethods$2, ButtonMethods, ButtonStateMethods);
+  Object.assign(Buttons.prototype, AddChildMethods$2, RemoveChildMethods$1, ButtonMethods, ButtonStateMethods);
 
-  var GetChildrenWidth$1 = function GetChildrenWidth() {
+  var GetChildrenWidth = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
       return 0;
     }
@@ -29153,7 +29997,7 @@
     return result + this.space.left + this.space.right;
   };
 
-  var GetChildrenHeight$1 = function GetChildrenHeight() {
+  var GetChildrenHeight = function GetChildrenHeight() {
     if (this.rexSizer.hidden) {
       return 0;
     }
@@ -29180,7 +30024,7 @@
     return result + this.space.top + this.space.bottom;
   };
 
-  var GetExpandedChildWidth$1 = function GetExpandedChildWidth(child, parentWidth) {
+  var GetExpandedChildWidth = function GetExpandedChildWidth(child, parentWidth) {
     if (parentWidth === undefined) {
       parentWidth = this.width;
     }
@@ -29195,7 +30039,7 @@
     return childWidth;
   };
 
-  var GetExpandedChildHeight$1 = function GetExpandedChildHeight(child, parentHeight) {
+  var GetExpandedChildHeight = function GetExpandedChildHeight(child, parentHeight) {
     if (parentHeight === undefined) {
       parentHeight = this.height;
     }
@@ -29210,7 +30054,7 @@
     return childHeight;
   };
 
-  var GetChildrenSizers$1 = function GetChildrenSizers(out) {
+  var GetChildrenSizers = function GetChildrenSizers(out) {
     if (out === undefined) {
       out = [];
     }
@@ -29225,7 +30069,7 @@
     return out;
   };
 
-  var LayoutChildren$1 = function LayoutChildren() {
+  var LayoutChildren = function LayoutChildren() {
     var child, childConfig, padding;
     var startX = this.innerLeft,
       startY = this.innerTop;
@@ -29271,24 +30115,24 @@
     }
   };
 
-  var IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$R = Phaser.Utils.Objects.GetValue;
-  var ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
+  var IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$O = Phaser.Utils.Objects.GetValue;
+  var ALIGN_CENTER = Phaser.Display.Align.CENTER;
   var UUID$1 = Phaser.Utils.String.UUID;
-  var Add$3 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+  var Add$1 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     AddChild$2.call(this, gameObject);
-    if (IsPlainObject$9(childKey)) {
+    if (IsPlainObject$7(childKey)) {
       var config = childKey;
-      childKey = GetValue$R(config, 'key', undefined);
-      align = GetValue$R(config, 'align', ALIGN_CENTER$1);
-      offsetX = GetValue$R(config, 'offsetX', 0);
-      offsetY = GetValue$R(config, 'offsetY', 0);
-      padding = GetValue$R(config, 'padding', 0);
-      expand = GetValue$R(config, 'expand', true);
+      childKey = GetValue$O(config, 'key', undefined);
+      align = GetValue$O(config, 'align', ALIGN_CENTER);
+      offsetX = GetValue$O(config, 'offsetX', 0);
+      offsetY = GetValue$O(config, 'offsetY', 0);
+      padding = GetValue$O(config, 'padding', 0);
+      expand = GetValue$O(config, 'expand', true);
       if (!gameObject.isRexSizer) {
         // Get minWidth,minHeight from config
-        minWidth = GetValue$R(config, 'minWidth', gameObject._minWidth);
-        minHeight = GetValue$R(config, 'minHeight', gameObject._minHeighted);
+        minWidth = GetValue$O(config, 'minWidth', gameObject._minWidth);
+        minHeight = GetValue$O(config, 'minHeight', gameObject._minHeighted);
       }
     }
     var hasValidKey = childKey !== undefined;
@@ -29299,7 +30143,7 @@
       align = AlignConst[align];
     }
     if (align === undefined) {
-      align = ALIGN_CENTER$1;
+      align = ALIGN_CENTER;
     }
     if (offsetX === undefined) {
       offsetX = 0;
@@ -29327,9 +30171,9 @@
     config.alignOffsetX = offsetX;
     config.alignOffsetY = offsetY;
     config.padding = GetBoundsConfig(padding);
-    if (IsPlainObject$9(expand)) {
-      config.expandWidth = GetValue$R(expand, 'width', false);
-      config.expandHeight = GetValue$R(expand, 'height', false);
+    if (IsPlainObject$7(expand)) {
+      config.expandWidth = GetValue$O(expand, 'width', false);
+      config.expandHeight = GetValue$O(expand, 'height', false);
     } else {
       config.expandWidth = expand;
       config.expandHeight = expand;
@@ -29354,11 +30198,11 @@
     }
     return this;
   };
-  var AddChildMethods$2 = {
-    add: Add$3
+  var AddChildMethods$1 = {
+    add: Add$1
   };
 
-  var RemoveChildMethods$1 = {
+  var RemoveChildMethods = {
     remove: function remove(gameObject, destroyChild) {
       var key;
       if (typeof gameObject === 'string') {
@@ -29399,15 +30243,15 @@
     }
   };
 
-  var methods$a = {
-    getChildrenWidth: GetChildrenWidth$1,
-    getChildrenHeight: GetChildrenHeight$1,
-    getExpandedChildWidth: GetExpandedChildWidth$1,
-    getExpandedChildHeight: GetExpandedChildHeight$1,
-    getChildrenSizers: GetChildrenSizers$1,
-    layoutChildren: LayoutChildren$1
+  var methods$9 = {
+    getChildrenWidth: GetChildrenWidth,
+    getChildrenHeight: GetChildrenHeight,
+    getExpandedChildWidth: GetExpandedChildWidth,
+    getExpandedChildHeight: GetExpandedChildHeight,
+    getChildrenSizers: GetChildrenSizers,
+    layoutChildren: LayoutChildren
   };
-  Object.assign(methods$a, AddChildMethods$2, RemoveChildMethods$1);
+  Object.assign(methods$9, AddChildMethods$1, RemoveChildMethods);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -29422,24 +30266,24 @@
     }
   };
 
-  var IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$Q = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$N = Phaser.Utils.Objects.GetValue;
   var OverlapSizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(OverlapSizer, _BaseSizer);
     var _super = _createSuper(OverlapSizer);
     function OverlapSizer(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, OverlapSizer);
-      if (IsPlainObject$8(x)) {
+      if (IsPlainObject$6(x)) {
         config = x;
-        x = GetValue$Q(config, 'x', 0);
-        y = GetValue$Q(config, 'y', 0);
-        minWidth = GetValue$Q(config, 'width', undefined);
-        minHeight = GetValue$Q(config, 'height', undefined);
-      } else if (IsPlainObject$8(minWidth)) {
+        x = GetValue$N(config, 'x', 0);
+        y = GetValue$N(config, 'y', 0);
+        minWidth = GetValue$N(config, 'width', undefined);
+        minHeight = GetValue$N(config, 'height', undefined);
+      } else if (IsPlainObject$6(minWidth)) {
         config = minWidth;
-        minWidth = GetValue$Q(config, 'width', undefined);
-        minHeight = GetValue$Q(config, 'height', undefined);
+        minWidth = GetValue$N(config, 'width', undefined);
+        minHeight = GetValue$N(config, 'height', undefined);
       }
       _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
       _this.type = 'rexOverlapSizer';
@@ -29463,17 +30307,17 @@
     }]);
     return OverlapSizer;
   }(Base$1);
-  Object.assign(OverlapSizer.prototype, methods$a);
+  Object.assign(OverlapSizer.prototype, methods$9);
 
   var OverlapSizerAdd = OverlapSizer.prototype.add;
-  var Add$2 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+  var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     gameObject.setVisible(false); // Default is invisible
     OverlapSizerAdd.call(this, gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY);
     return this;
   };
-  var AddChildMethods$1 = {
-    add: Add$2,
-    addPage: Add$2
+  var AddChildMethods = {
+    add: Add,
+    addPage: Add
   };
 
   var GetPage$1 = function GetPage(key) {
@@ -29522,14 +30366,14 @@
     return this.sizerChildren.hasOwnProperty(key);
   };
 
-  var methods$9 = {
+  var methods$8 = {
     getPage: GetPage$1,
     swapPage: SwapPage$1,
     hasPage: HasPage
   };
-  Object.assign(methods$9, AddChildMethods$1);
+  Object.assign(methods$8, AddChildMethods);
 
-  var GetValue$P = Phaser.Utils.Objects.GetValue;
+  var GetValue$M = Phaser.Utils.Objects.GetValue;
   var Pages = /*#__PURE__*/function (_OverlapSizer) {
     _inherits(Pages, _OverlapSizer);
     var _super = _createSuper(Pages);
@@ -29541,8 +30385,8 @@
       _this.childrenMap = _this.sizerChildren;
       _this._previousKey = undefined;
       _this._currentKey = undefined;
-      _this.setSwapMode(GetValue$P(config, 'swapMode', 0));
-      _this.setFadeInDuration(GetValue$P(config, 'fadeIn', 0));
+      _this.setSwapMode(GetValue$M(config, 'swapMode', 0));
+      _this.setFadeInDuration(GetValue$M(config, 'fadeIn', 0));
       return _this;
     }
     _createClass(Pages, [{
@@ -29591,7 +30435,7 @@
     }]);
     return Pages;
   }(OverlapSizer);
-  Object.assign(Pages.prototype, methods$9);
+  Object.assign(Pages.prototype, methods$8);
   var SWAPMODE = {
     invisible: 0,
     destroy: 1
@@ -29615,15 +30459,15 @@
     return undefined;
   };
 
-  var IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$O = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$L = Phaser.Utils.Objects.GetValue;
   var UUID = Phaser.Utils.String.UUID;
   var AddPage = function AddPage(key, tabGameObject, pageGameObject) {
-    if (IsPlainObject$7(key)) {
+    if (IsPlainObject$5(key)) {
       var config = key;
-      key = GetValue$O(config, 'key');
-      tabGameObject = GetValue$O(config, 'tab');
-      pageGameObject = GetValue$O(config, 'page');
+      key = GetValue$L(config, 'key');
+      tabGameObject = GetValue$L(config, 'tab');
+      pageGameObject = GetValue$L(config, 'page');
     }
     if (!key) {
       key = UUID();
@@ -29718,19 +30562,53 @@
     return this.getElement('tabs.buttons')[index];
   };
 
-  var methods$8 = {
+  var TabsPositionToIndex = {
+    top: 1,
+    left: 3,
+    right: 5,
+    bottom: 7
+  };
+  var TabsPositionToTabsPaddingKey = {
+    top: 'bottom',
+    left: 'right',
+    right: 'left',
+    bottom: 'top'
+  };
+  var SetTabPosition = function SetTabPosition(tabsPosition) {
+    var newIndex = TabsPositionToIndex[tabsPosition];
+    if (newIndex === undefined) {
+      return this;
+    }
+    var tabs = this.childrenMap.tabs;
+    var currentIndex = this.sizerChildren.indexOf(tabs);
+    if (currentIndex === newIndex) {
+      return this;
+    }
+    this.sizerChildren[currentIndex] = null;
+    this.sizerChildren[newIndex] = tabs;
+    var tabPadding = this.getSizerConfig(tabs).padding;
+    var currentPaddingKey = TabsPositionToTabsPaddingKey[this.tabsPosition];
+    var newPaddingKey = TabsPositionToTabsPaddingKey[tabsPosition];
+    tabPadding[newPaddingKey] = tabPadding[currentPaddingKey];
+    tabPadding[currentPaddingKey] = 0;
+    this.tabsPosition = tabsPosition;
+    return this;
+  };
+
+  var methods$7 = {
     getPageKey: GetPageKeyByIndex,
     getPageIndex: GetPageIndexByKey,
     addPage: AddPage,
     getPage: GetPage,
-    getTab: GetTab
+    getTab: GetTab,
+    setTabPosition: SetTabPosition
   };
-  Object.assign(methods$8, SwapPageMethods, RemovePageMethods);
+  Object.assign(methods$7, SwapPageMethods, RemovePageMethods);
 
-  var GetValue$N = Phaser.Utils.Objects.GetValue;
-  var SizerAdd = Sizer.prototype.add;
-  var TabPages$1 = /*#__PURE__*/function (_Sizer) {
-    _inherits(TabPages, _Sizer);
+  var GetValue$K = Phaser.Utils.Objects.GetValue;
+  var SizerAdd = GridSizer.prototype.add;
+  var TabPages$1 = /*#__PURE__*/function (_GridSizer) {
+    _inherits(TabPages, _GridSizer);
     var _super = _createSuper(TabPages);
     function TabPages(scene, config) {
       var _this;
@@ -29738,62 +30616,94 @@
       if (config === undefined) {
         config = {};
       }
-      var tabsPosition = GetValue$N(config, 'tabPosition', 'top');
-      var sizerOrientation = tabsPosition === 'left' || tabsPosition === 'right' ? 'x' : 'y';
-      config.orientation = sizerOrientation;
+      // Create sizer
+      config.column = 3;
+      config.row = 3;
+      config.columnProportions = [0, 0, 0];
+      config.rowProportions = [0, 0, 0];
+      var expandPages = GetValue$K(config, 'expand.pages', true);
+      if (expandPages) {
+        config.columnProportions[1] = 1;
+        config.rowProportions[1] = 1;
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexTabPages';
 
       // Add elements
-      var background = GetValue$N(config, 'background', undefined);
+      var background = GetValue$K(config, 'background', undefined);
       if (background) {
         _this.addBackground(background);
       }
-      var pagesConfig = GetValue$N(config, 'pages');
+      var pagesConfig = GetValue$K(config, 'pages');
       var pages = new Pages(scene, pagesConfig);
       scene.add.existing(pages);
-      var isHorizontalTabs = sizerOrientation === 'y';
-      var wrapTabs = isHorizontalTabs ? GetValue$N(config, 'wrapTabs', false) : false;
-      var tabsConfig = GetValue$N(config, 'tabs', undefined);
+      var tabsPosition = GetValue$K(config, 'tabsPosition', undefined);
+      if (tabsPosition === undefined) {
+        tabsPosition = GetValue$K(config, 'tabPosition', 'top');
+      }
+      var wrapTabs = GetValue$K(config, 'wrapTabs', false);
+      var ButtonsClass = wrapTabs ? Buttons : Buttons$1;
+      var tabsConfig = GetValue$K(config, 'tabs', undefined);
       if (tabsConfig === undefined) {
         tabsConfig = {};
       }
-      var ButtonsClass = wrapTabs ? Buttons : Buttons$1;
-      tabsConfig.orientation = isHorizontalTabs ? 'x' : 'y';
+      tabsConfig.orientation = tabsPosition === 'top' || tabsPosition === 'bottom' ? 'x' : 'y';
       tabsConfig.buttonsType = 'radio';
+      if (!wrapTabs && !tabsConfig.hasOwnProperty('expand')) {
+        tabsConfig.expand = GetValue$K(config, 'expand.tabs', false);
+      }
       var tabs = new ButtonsClass(scene, tabsConfig);
       scene.add.existing(tabs);
-      var tabsExpand = wrapTabs ? true : GetValue$N(config, 'expand.tabs', false);
-      var tabAlign = GetValue$N(config, 'align.tabs', 'left');
+
+      // Add to sizer
+      SizerAdd.call(_assertThisInitialized(_this), pages, {
+        column: 1,
+        row: 1,
+        expand: expandPages
+      });
+      var tabColumnIndex, tabRowIndex;
+      var tabPadding = GetValue$K(config, 'space.item', 0); // Backward compatible
       switch (tabsPosition) {
         case 'top':
-        case 'left':
-          SizerAdd.call(_assertThisInitialized(_this), tabs, {
-            proportion: 0,
-            expand: tabsExpand,
-            align: tabAlign
-          });
-          SizerAdd.call(_assertThisInitialized(_this), pages, {
-            proportion: 1,
-            expand: true
-          });
+          tabColumnIndex = 1;
+          tabRowIndex = 0;
+          tabPadding = {
+            bottom: tabPadding
+          };
           break;
         case 'bottom':
+          tabColumnIndex = 1;
+          tabRowIndex = 2;
+          tabPadding = {
+            top: tabPadding
+          };
+          break;
+        case 'left':
+          tabColumnIndex = 0;
+          tabRowIndex = 1;
+          tabPadding = {
+            right: tabPadding
+          };
+          break;
         case 'right':
-          SizerAdd.call(_assertThisInitialized(_this), pages, {
-            proportion: 1,
-            expand: true
-          });
-          SizerAdd.call(_assertThisInitialized(_this), tabs, {
-            proportion: 0,
-            expand: tabsExpand,
-            align: tabAlign
-          });
+          tabColumnIndex = 2;
+          tabRowIndex = 1;
+          tabPadding = {
+            left: tabPadding
+          };
           break;
       }
+      SizerAdd.call(_assertThisInitialized(_this), tabs, {
+        column: tabColumnIndex,
+        row: tabRowIndex,
+        padding: tabPadding,
+        expand: wrapTabs ? true : GetValue$K(config, 'expand.tabs', false),
+        align: GetValue$K(config, 'align.tabs', 'left')
+      });
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('tabs', tabs);
       _this.addChildrenMap('pages', pages);
+      _this.tabsPosition = tabsPosition;
 
       // Register events
       tabs.on('button.click', function (tab) {
@@ -29839,8 +30749,8 @@
       }
     }]);
     return TabPages;
-  }(Sizer);
-  Object.assign(TabPages$1.prototype, methods$8);
+  }(GridSizer);
+  Object.assign(TabPages$1.prototype, methods$7);
 
   var BindingTargetMethods$2 = {
     setBindingTarget: function setBindingTarget(target) {
@@ -29932,16 +30842,16 @@
     return gameObject;
   };
 
-  var GetValue$M = Phaser.Utils.Objects.GetValue;
+  var GetValue$J = Phaser.Utils.Objects.GetValue;
   var CreateTab = function CreateTab(scene, config, style) {
     var tabPages = new TabPages(scene, style);
     scene.add.existing(tabPages);
-    var tabConfig = GetValue$M(style, 'tab');
+    var tabConfig = GetValue$J(style, 'tab');
     var tweakerConfig = {
-      root: GetValue$M(style, 'root'),
-      styles: GetValue$M(style, 'tweaker')
+      root: GetValue$J(style, 'root'),
+      styles: GetValue$J(style, 'tweaker')
     };
-    var pages = GetValue$M(config, 'pages') || [];
+    var pages = GetValue$J(config, 'pages') || [];
     for (var i = 0, cnt = pages.length; i < cnt; i++) {
       var page = pages[i];
       tabPages.addPage({
@@ -29960,12 +30870,12 @@
     return tabPages;
   };
 
-  var GetValue$L = Phaser.Utils.Objects.GetValue;
+  var GetValue$I = Phaser.Utils.Objects.GetValue;
   var AddTab = function AddTab(config) {
     var scene = this.scene;
 
     // Create tab
-    var tabStyle = GetValue$L(this.styles, 'tab') || {};
+    var tabStyle = GetValue$I(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;
     tabStyle.root = this.root;
     var tab = CreateTab(scene, config, tabStyle);
@@ -29976,7 +30886,7 @@
     this.add(tab, {
       expand: true
     });
-    var pagesConfig = GetValue$L(config, 'pages') || [];
+    var pagesConfig = GetValue$I(config, 'pages') || [];
     var pages = [];
     var shownPageIndex = 0;
     for (var i = 0, cnt = pagesConfig.length; i < cnt; i++) {
@@ -29995,7 +30905,7 @@
     return pages;
   };
 
-  var GetValue$K = Phaser.Utils.Objects.GetValue;
+  var GetValue$H = Phaser.Utils.Objects.GetValue;
   var BindingTargetMethods$1 = {
     setupBinding: function setupBinding() {
       var inputField = this.childrenMap.inputField;
@@ -30029,8 +30939,8 @@
       return this;
     },
     setValueCallbacks: function setValueCallbacks(config) {
-      this.onGetValue = GetValue$K(config, 'onGetValue');
-      this.onSetValue = GetValue$K(config, 'onSetValue');
+      this.onGetValue = GetValue$H(config, 'onGetValue');
+      this.onSetValue = GetValue$H(config, 'onSetValue');
       return this;
     },
     getTargetValue: function getTargetValue() {
@@ -30125,7 +31035,7 @@
     }
   };
 
-  var GetValue$J = Phaser.Utils.Objects.GetValue;
+  var GetValue$G = Phaser.Utils.Objects.GetValue;
   var InputRow = /*#__PURE__*/function (_Sizer) {
     _inherits(InputRow, _Sizer);
     var _super = _createSuper(InputRow);
@@ -30140,8 +31050,8 @@
       var inputTitle = config.inputTitle;
       var inputField = config.inputField;
       var background = config.background;
-      var proportion = GetValue$J(config, 'proportion.title', 0);
-      var titleSpace = GetValue$J(config, 'space.title', 0);
+      var proportion = GetValue$G(config, 'proportion.title', 0);
+      var titleSpace = GetValue$G(config, 'space.title', 0);
       var padding;
       if (_this.orientation === 0) {
         padding = {
@@ -30161,7 +31071,7 @@
       if (defaultProportion === undefined) {
         defaultProportion = config.parentOrientation === 1 ? 1 : 0;
       }
-      var proportion = GetValue$J(config, 'proportion.inputField', defaultProportion);
+      var proportion = GetValue$G(config, 'proportion.inputField', defaultProportion);
       _this.add(inputField, {
         proportion: proportion,
         expand: true
@@ -30369,7 +31279,7 @@
     return inputField;
   };
 
-  var GetValue$I = Phaser.Utils.Objects.GetValue;
+  var GetValue$F = Phaser.Utils.Objects.GetValue;
   var CreateInputRow = function CreateInputRow(scene, config, style) {
     // InputField
     var inputField = CreateInputField.call(this, scene, config, style);
@@ -30379,11 +31289,11 @@
     }
 
     // Title
-    var titleStyle = GetValue$I(style, 'title') || {};
+    var titleStyle = GetValue$F(style, 'title') || {};
     var inputTitle = CreateTitleLabel(scene, config, titleStyle);
 
     // Background
-    var backgroundStyle = GetValue$I(style, 'background') || {};
+    var backgroundStyle = GetValue$F(style, 'background') || {};
     var background = CreateBackground$2(scene, backgroundStyle);
     var inputRow = new InputRow(scene, _objectSpread2(_objectSpread2(_objectSpread2({}, style), config), {}, {
       // config can overwrite style
@@ -30466,24 +31376,24 @@
     return gameObject;
   };
 
-  var GetValue$H = Phaser.Utils.Objects.GetValue;
+  var GetValue$E = Phaser.Utils.Objects.GetValue;
   var CreateButtons$2 = function CreateButtons(scene, config) {
-    var wrap = GetValue$H(config, 'wrap', false);
+    var wrap = GetValue$E(config, 'wrap', false);
     var ButtonClass = wrap ? Buttons : Buttons$1;
     var gameObject = new ButtonClass(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var GetValue$G = Phaser.Utils.Objects.GetValue;
+  var GetValue$D = Phaser.Utils.Objects.GetValue;
   var CreateButtons$1 = function CreateButtons(scene, config, style) {
     // Title
-    var titleStyle = GetValue$G(style, 'title') || {};
+    var titleStyle = GetValue$D(style, 'title') || {};
     var title = CreateTitleLabel(scene, config, titleStyle);
 
     // Buttons
     var buttonsConfig = config.buttons;
-    var buttonStyle = GetValue$G(style, 'button') || {};
+    var buttonStyle = GetValue$D(style, 'button') || {};
     var buttons = [];
     for (var i = 0, cnt = buttonsConfig.length; i < cnt; i++) {
       var button = CreateLabel(scene, buttonStyle);
@@ -30495,12 +31405,12 @@
     var buttonsSizer = CreateButtons$2(scene, {
       buttons: buttons,
       expand: true,
-      wrap: GetValue$G(config, 'wrap', false)
+      wrap: GetValue$D(config, 'wrap', false)
     });
     buttonsSizer.defaultProportion = 1;
 
     // Background
-    var backgroundStyle = GetValue$G(style, 'background') || {};
+    var backgroundStyle = GetValue$D(style, 'background') || {};
     var background = CreateRoundRectangle(scene, backgroundStyle);
 
     // InputRow
@@ -30517,7 +31427,7 @@
     return inputRow;
   };
 
-  var GetValue$F = Phaser.Utils.Objects.GetValue;
+  var GetValue$C = Phaser.Utils.Objects.GetValue;
   var AddButtons = function AddButtons(config) {
     var scene = this.scene;
     if (config === undefined) {
@@ -30527,7 +31437,7 @@
     delete config.bindingTarget;
 
     // Create buttons
-    var buttonsStyle = GetValue$F(this.styles, 'inputRow') || {};
+    var buttonsStyle = GetValue$C(this.styles, 'inputRow') || {};
     var buttons = CreateButtons$1(scene, config, buttonsStyle);
 
     // Add buttons
@@ -30559,12 +31469,12 @@
     return this;
   };
 
-  var GetValue$E = Phaser.Utils.Objects.GetValue;
+  var GetValue$B = Phaser.Utils.Objects.GetValue;
   var AddSeparator = function AddSeparator(config) {
     var scene = this.scene;
 
     // Create separator
-    var separatorStyle = GetValue$E(this.styles, 'separator');
+    var separatorStyle = GetValue$B(this.styles, 'separator');
     var separator = CreateBackground$1(scene, config, separatorStyle);
 
     // Add separator
@@ -30624,7 +31534,7 @@
     return this;
   };
 
-  var methods$7 = {
+  var methods$6 = {
     registerInputHandler: RegisterInputHandler,
     removeInputHandler: RemoveInputHandler,
     addFolder: AddFolder,
@@ -30638,7 +31548,7 @@
     setInputRowTitleWidth: SetInputRowTitleWidth
   };
 
-  var GetValue$D = Phaser.Utils.Objects.GetValue;
+  var GetValue$A = Phaser.Utils.Objects.GetValue;
   var TweakerShell = /*#__PURE__*/function (_Sizer) {
     _inherits(TweakerShell, _Sizer);
     var _super = _createSuper(TweakerShell);
@@ -30656,13 +31566,13 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweakerShell';
       _this.root = config.root || _assertThisInitialized(_this);
-      _this.styles = GetValue$D(config, 'styles') || {};
+      _this.styles = GetValue$A(config, 'styles') || {};
       _this.styles.orientation = _this.orientation;
-      _this.itemWidth = GetValue$D(_this.styles, 'itemWidth', 0);
+      _this.itemWidth = GetValue$A(_this.styles, 'itemWidth', 0);
       if (_this.root === _assertThisInitialized(_this) && _this.orientation === 1) {
-        var alignTitle = GetValue$D(config, 'inputRow.alignTitle');
+        var alignTitle = GetValue$A(config, 'inputRow.alignTitle');
         if (alignTitle === undefined) {
-          var titleProportion = GetValue$D(_this.styles, 'inputRow.proportion.title');
+          var titleProportion = GetValue$A(_this.styles, 'inputRow.proportion.title');
           alignTitle = !titleProportion;
         } else {
           if (alignTitle) {
@@ -30692,7 +31602,7 @@
     }]);
     return TweakerShell;
   }(Sizer);
-  Object.assign(TweakerShell.prototype, methods$7);
+  Object.assign(TweakerShell.prototype, methods$6);
 
   var ElementProperties = {
     maxLength: ['maxLength', undefined],
@@ -30754,7 +31664,7 @@
     LastOpenedEditor = undefined;
   };
 
-  var GetValue$C = Phaser.Utils.Objects.GetValue;
+  var GetValue$z = Phaser.Utils.Objects.GetValue;
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
       out = {};
@@ -30762,7 +31672,7 @@
     var property, value;
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
-      value = GetValue$C(config, key, property[1]);
+      value = GetValue$z(config, key, property[1]);
       if (value !== undefined) {
         out[property[0]] = value;
       }
@@ -30831,12 +31741,12 @@
     this.emit('close', this);
   };
 
-  var GetValue$B = Phaser.Utils.Objects.GetValue;
+  var GetValue$y = Phaser.Utils.Objects.GetValue;
   var CreateElement = function CreateElement(parent, config) {
     var element;
-    var textType = GetValue$B(config, 'inputType', undefined);
+    var textType = GetValue$y(config, 'inputType', undefined);
     if (textType === undefined) {
-      textType = GetValue$B(config, 'type', 'text');
+      textType = GetValue$y(config, 'type', 'text');
     }
     if (textType === 'textarea') {
       element = document.createElement('textarea');
@@ -30845,7 +31755,7 @@
       element = document.createElement('input');
       element.type = textType;
     }
-    var style = GetValue$B(config, 'style', undefined);
+    var style = GetValue$y(config, 'style', undefined);
     // Apply other style properties
     var elementStyle = element.style;
     SetProperties(StyleProperties, style, elementStyle);
@@ -30919,7 +31829,7 @@
     close: Close
   };
 
-  var GetValue$A = Phaser.Utils.Objects.GetValue;
+  var GetValue$x = Phaser.Utils.Objects.GetValue;
   var HiddenTextEditBase = /*#__PURE__*/function (_ComponentBase) {
     _inherits(HiddenTextEditBase, _ComponentBase);
     var _super = _createSuper(HiddenTextEditBase);
@@ -30929,22 +31839,22 @@
       _this = _super.call(this, gameObject);
       // this.parent = gameObject;
 
-      var textType = GetValue$A(config, 'inputType', undefined);
+      var textType = GetValue$x(config, 'inputType', undefined);
       if (textType === undefined) {
-        textType = GetValue$A(config, 'type', 'text');
+        textType = GetValue$x(config, 'type', 'text');
       }
-      _this.setEnterCloseEnable(GetValue$A(config, 'enterClose', textType !== 'textarea'));
-      var onOpen = GetValue$A(config, 'onOpen', undefined);
+      _this.setEnterCloseEnable(GetValue$x(config, 'enterClose', textType !== 'textarea'));
+      var onOpen = GetValue$x(config, 'onOpen', undefined);
       if (!onOpen) {
-        onOpen = GetValue$A(config, 'onFocus', undefined);
+        onOpen = GetValue$x(config, 'onFocus', undefined);
       }
       _this.onOpenCallback = onOpen;
-      var onClose = GetValue$A(config, 'onClose', undefined);
+      var onClose = GetValue$x(config, 'onClose', undefined);
       if (!onClose) {
-        onClose = GetValue$A(config, 'onBlur', undefined);
+        onClose = GetValue$x(config, 'onBlur', undefined);
       }
       _this.onCloseCallback = onClose;
-      _this.onUpdateCallback = GetValue$A(config, 'onUpdate', undefined);
+      _this.onUpdateCallback = GetValue$x(config, 'onUpdate', undefined);
       _this.isOpened = false;
       gameObject.on('pointerdown', function () {
         this.open();
@@ -31449,7 +32359,7 @@
     hiddenTextEdit.prevCursorPosition = null;
   };
 
-  var GetValue$z = Phaser.Utils.Objects.GetValue;
+  var GetValue$w = Phaser.Utils.Objects.GetValue;
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
     var _super = _createSuper(HiddenTextEdit);
@@ -31459,7 +32369,7 @@
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
 
-      _this.setSelectAllWhenFocusEnable(GetValue$z(config, 'selectAll', false));
+      _this.setSelectAllWhenFocusEnable(GetValue$w(config, 'selectAll', false));
       _this.cursorMoveStartIndex = null;
       _this.prevCursorPosition = null;
       _this.prevSelectionStart = null;
@@ -31558,10 +32468,10 @@
     return HiddenTextEdit;
   }(HiddenTextEditBase);
 
-  var GetValue$y = Phaser.Utils.Objects.GetValue;
+  var GetValue$v = Phaser.Utils.Objects.GetValue;
   var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
-    var config = GetValue$y(parentConfig, 'edit');
+    var config = GetValue$v(parentConfig, 'edit');
     if (config === undefined) {
       config = {};
     }
@@ -32137,16 +33047,16 @@
     }
   };
 
-  var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
     _inherits(CanvasInput, _DynamicText);
     var _super = _createSuper(CanvasInput);
     function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, CanvasInput);
-      if (IsPlainObject$6(x)) {
+      if (IsPlainObject$4(x)) {
         config = x;
-      } else if (IsPlainObject$6(fixedWidth)) {
+      } else if (IsPlainObject$4(fixedWidth)) {
         config = fixedWidth;
       }
       if (config === undefined) {
@@ -32569,850 +33479,6 @@
     }
     return scrollMode;
   };
-
-  var Sum = function Sum() {
-    return Array.prototype.reduce.call(arguments, Add$1, 0);
-  };
-  var Add$1 = function Add(a, b) {
-    return a + b;
-  };
-
-  var GetChildrenWidth = function GetChildrenWidth(minimumMode) {
-    if (this.rexSizer.hidden) {
-      return 0;
-    }
-    if (minimumMode === undefined) {
-      minimumMode = true;
-    }
-    var result = 0,
-      columnWidth;
-    var children = this.sizerChildren;
-    var child, padding, childWidth, proportion;
-    var hasUnknownChildWidth = false;
-    this.totalColumnProportions; // To update this.hasColumnProportion0Child member
-
-    for (var i = 0; i < this.columnCount; i++) {
-      proportion = this.columnProportions[i];
-      columnWidth = 0;
-      if (proportion === 0 || minimumMode) {
-        for (var j = 0; j < this.rowCount; j++) {
-          child = children[j * this.columnCount + i];
-          if (!child) {
-            continue;
-          }
-          if (child.rexSizer.hidden) {
-            continue;
-          }
-          childWidth = this.getChildWidth(child);
-          if (childWidth === undefined) {
-            if (proportion !== 0 && !this.hasColumnProportion0Child) {
-              childWidth = 0;
-            } else {
-              hasUnknownChildWidth = true;
-            }
-          }
-          if (hasUnknownChildWidth) {
-            continue;
-          }
-          padding = child.rexSizer.padding;
-          childWidth += padding.left + padding.right;
-          columnWidth = Math.max(columnWidth, childWidth);
-        }
-        if (!hasUnknownChildWidth) {
-          result += columnWidth;
-        }
-      }
-
-      // else,(proportion > 0) : columnWidth is 0
-      if (!hasUnknownChildWidth) {
-        if (minimumMode) {
-          this.columnWidth[i] = columnWidth;
-        }
-      }
-    }
-    if (hasUnknownChildWidth) {
-      return undefined;
-    }
-    var space = this.space;
-    var indentLeft = Math.max(space.indentLeftOdd, space.indentLeftEven);
-    return result + Sum.apply(void 0, [space.left, indentLeft].concat(_toConsumableArray(space.column), [space.right]));
-  };
-
-  var GetChildrenHeight = function GetChildrenHeight(minimumMode) {
-    if (this.rexSizer.hidden) {
-      return 0;
-    }
-    if (minimumMode === undefined) {
-      minimumMode = true;
-    }
-    var result = 0,
-      rowHeight;
-    var children = this.sizerChildren;
-    var child, padding, childHeight, proportion;
-    var hasUnknownChildHeight = false;
-    this.totalRowProportions; // To update this.hasColumnProportion0Child member
-
-    for (var i = 0; i < this.rowCount; i++) {
-      proportion = this.rowProportions[i];
-      rowHeight = 0;
-      if (proportion === 0 || minimumMode) {
-        for (var j = 0; j < this.columnCount; j++) {
-          child = children[i * this.columnCount + j];
-          if (!child) {
-            continue;
-          }
-          if (child.rexSizer.hidden) {
-            continue;
-          }
-          childHeight = this.getChildHeight(child);
-          if (childHeight === undefined) {
-            if (proportion !== 0 && !this.hasRowProportion0Child) {
-              childHeight = 0;
-            } else {
-              hasUnknownChildHeight = true;
-            }
-          }
-          if (hasUnknownChildHeight) {
-            continue;
-          }
-          padding = child.rexSizer.padding;
-          childHeight += padding.top + padding.bottom;
-          rowHeight = Math.max(rowHeight, childHeight);
-        }
-        if (!hasUnknownChildHeight) {
-          result += rowHeight;
-        }
-      }
-      // else,(proportion > 0) : rowHeight is 0
-
-      if (!hasUnknownChildHeight) {
-        if (minimumMode) {
-          this.rowHeight[i] = rowHeight;
-        }
-      }
-    }
-    if (hasUnknownChildHeight) {
-      return undefined;
-    }
-    var space = this.space;
-    var indentTop = Math.max(space.indentTopOdd, space.indentTopEven);
-    return result + Sum.apply(void 0, [space.top, indentTop].concat(_toConsumableArray(space.row), [space.bottom]));
-  };
-
-  var GetExpandedChildWidth = function GetExpandedChildWidth(child, colWidth) {
-    var childWidth;
-    var childConfig = child.rexSizer;
-    if (childConfig.expandWidth) {
-      var padding = childConfig.padding;
-      childWidth = colWidth - padding.left - padding.right;
-    }
-    return childWidth;
-  };
-
-  var GetExpandedChildHeight = function GetExpandedChildHeight(child, rowHeight) {
-    var childHeight;
-    var childConfig = child.rexSizer;
-    if (childConfig.expandHeight) {
-      var padding = childConfig.padding;
-      childHeight = rowHeight - padding.top - padding.bottom;
-    }
-    return childHeight;
-  };
-
-  var GetChildrenSizers = function GetChildrenSizers(out) {
-    if (out === undefined) {
-      out = [];
-    }
-    var children = this.sizerChildren,
-      child;
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = children[i];
-      if (child && child.isRexSizer) {
-        out.push(child);
-      }
-    }
-    return out;
-  };
-
-  var PreLayout = function PreLayout() {
-    this._totalColumnProportions = undefined;
-    this._totalRowProportions = undefined;
-    this.hasColumnProportion0Child = false;
-    this.hasRowProportion0Child = false;
-    this.proportionWidthLength = undefined;
-    this.proportionHeightLength = undefined;
-    PreLayout$3.call(this);
-    return this;
-  };
-
-  var LayoutChildren = function LayoutChildren() {
-    var child, childConfig, padding;
-    var startX = this.innerLeft,
-      startY = this.innerTop;
-    var itemX,
-      itemY = startY;
-    var x, y, width, height; // Align zone
-    var childWidth, childHeight;
-    // Layout grid children
-    var columnSpace = this.space.column,
-      rowSpace = this.space.row,
-      indentLeftOdd = this.space.indentLeftOdd,
-      indentLeftEven = this.space.indentLeftEven,
-      indentTopOdd = this.space.indentTopOdd,
-      indentTopEven = this.space.indentTopEven;
-    var colWidth, rowHeight;
-    var indentLeft, indentTop;
-    for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
-      rowHeight = this.getRowHeight(rowIndex);
-      indentLeft = rowIndex % 2 ? indentLeftEven : indentLeftOdd;
-      itemX = startX + indentLeft;
-      for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
-        colWidth = this.getColumnWidth(columnIndex);
-        child = this.getChildAt(columnIndex, rowIndex);
-        if (!child || child.rexSizer.hidden) {
-          itemX += colWidth + columnSpace[columnIndex];
-          continue;
-        }
-        PreLayoutChild.call(this, child);
-        childWidth = this.getExpandedChildWidth(child, colWidth);
-        childHeight = this.getExpandedChildHeight(child, rowHeight);
-        if (child.isRexSizer) {
-          child.runLayout(this, childWidth, childHeight);
-          CheckSize(child, this);
-        } else {
-          ResizeGameObject(child, childWidth, childHeight);
-        }
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
-        x = itemX + padding.left;
-        width = colWidth - padding.left - padding.right;
-        indentTop = columnIndex % 2 ? indentTopEven : indentTopOdd;
-        y = itemY + indentTop + padding.top;
-        height = rowHeight - padding.top - padding.bottom;
-        LayoutChild.call(this, child, x, y, width, height, childConfig.align);
-        itemX += colWidth + columnSpace[columnIndex];
-      }
-      itemY += rowHeight + rowSpace[rowIndex];
-    }
-  };
-
-  var ResolveWidth = function ResolveWidth(width) {
-    var width = ResolveWidth$3.call(this, width);
-
-    // Calculate proportionLength
-    if (this.proportionWidthLength === undefined) {
-      var totalColumnProportions = this.totalColumnProportions;
-      if (totalColumnProportions > 0) {
-        var remainder = width - this.getChildrenWidth(false);
-        if (remainder >= 0) {
-          this.proportionWidthLength = remainder / totalColumnProportions;
-        }
-      } else {
-        this.proportionWidthLength = 0;
-      }
-    }
-    return width;
-  };
-
-  var ResolveHeight = function ResolveHeight(height) {
-    var height = ResolveHeight$3.call(this, height);
-
-    // Get proportionLength    
-    if (this.proportionHeightLength === undefined) {
-      var totalRowProportions = this.totalRowProportions;
-      if (totalRowProportions > 0) {
-        var remainder = height - this.getChildrenHeight(false);
-        if (remainder >= 0) {
-          this.proportionHeightLength = remainder / totalRowProportions;
-        }
-      } else {
-        this.proportionHeightLength = 0;
-      }
-    }
-    return height;
-  };
-
-  var ResolveChildrenWidth = function ResolveChildrenWidth(parentWidth) {
-    // Resolve width of sizer children
-    var child, expandedChildWidth, childWidth;
-    var colWidth;
-    for (var i in this.sizerChildren) {
-      child = this.sizerChildren[i];
-      if (child && child.isRexSizer && !child.ignoreLayout) {
-        colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
-        expandedChildWidth = this.getExpandedChildWidth(child, colWidth);
-        childWidth = child.resolveWidth(expandedChildWidth);
-        if (childWidth === undefined) {
-          childWidth = expandedChildWidth;
-        }
-        child.resolveChildrenWidth(childWidth);
-      }
-    }
-  };
-
-  var ResolveChildrenHeight = function ResolveChildrenHeight(parentHeight) {
-    // Resolve width of sizer children
-    var child, expandedChildHeight, childHeight;
-    var rowHeight;
-    for (var i in this.sizerChildren) {
-      child = this.sizerChildren[i];
-      if (child && child.isRexSizer && !child.ignoreLayout) {
-        rowHeight = this.getRowHeight(Math.floor(parseInt(i) / this.rowCount));
-        expandedChildHeight = this.getExpandedChildHeight(child, rowHeight);
-        childHeight = child.resolveHeight(expandedChildHeight);
-        if (childHeight === undefined) {
-          childHeight = expandedChildHeight;
-        }
-        child.resolveChildrenHeight(childHeight);
-      }
-    }
-  };
-
-  var RunWidthWrap = function RunWidthWrap(width) {
-    var child, expandedChildWidth, childWidth;
-    var colWidth;
-    for (var i in this.sizerChildren) {
-      child = this.sizerChildren[i];
-      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
-        continue;
-      }
-      colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
-      expandedChildWidth = this.getExpandedChildWidth(child, colWidth);
-      if (child.isRexSizer) {
-        childWidth = child.resolveWidth(expandedChildWidth);
-        if (childWidth === undefined) {
-          childWidth = expandedChildWidth;
-        }
-      }
-      child.runWidthWrap(childWidth);
-    }
-    return this;
-  };
-
-  var RunHeightWrap = function RunHeightWrap(height) {
-    var child, expandedChildHeight, childHeight;
-    var rowHeight;
-    for (var i in this.sizerChildren) {
-      child = this.sizerChildren[i];
-      if (!child || child.isRexSizer && child.ignoreLayout || !child.runHeightWrap) {
-        continue;
-      }
-      rowHeight = this.getRowHeight(Math.floor(parseInt(i) / this.rowCount));
-      expandedChildHeight = this.getExpandedChildHeight(child, rowHeight);
-      if (child.isRexSizer) {
-        childHeight = child.resolveHeight(expandedChildHeight);
-        if (childHeight === undefined) {
-          childHeight = expandedChildHeight;
-        }
-      }
-      child.runHeightWrap(childHeight);
-    }
-    return this;
-  };
-
-  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$x = Phaser.Utils.Objects.GetValue;
-  var ALIGN_CENTER = Phaser.Display.Align.CENTER;
-  var GetEmptyCellIndex = function GetEmptyCellIndex(columnIndex, rowIndex, cells, columnCount, rowCount) {
-    if (typeof columnIndex === 'number' || typeof rowIndex === 'number') {
-      if (columnIndex === undefined) {
-        var idx;
-        for (var i = 0; i < columnCount; i++) {
-          idx = rowIndex * columnCount + i;
-          if (!cells[idx]) {
-            return idx;
-          }
-        }
-      } else if (rowIndex === undefined) {
-        var idx;
-        for (var i = 0; i < rowCount; i++) {
-          idx = i * columnCount + columnIndex;
-          if (!cells[idx]) {
-            return idx;
-          }
-        }
-      } else {
-        var idx = rowIndex * columnCount + columnIndex;
-        if (!cells[idx]) {
-          return idx;
-        }
-      }
-    } else if (rowIndex === true) {
-      var idx;
-      for (var i = 0; i < columnCount; i++) {
-        for (var j = 0; j < rowCount; j++) {
-          idx = j * columnCount + i;
-          if (!cells[idx]) {
-            return idx;
-          }
-        }
-      }
-    } else {
-      for (var i = 0, cnt = cells.length; i < cnt; i++) {
-        if (!cells[i]) {
-          return i;
-        }
-      }
-    }
-    return null;
-  };
-  var Add = function Add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
-    AddChild$2.call(this, gameObject);
-    if (IsPlainObject$5(columnIndex)) {
-      var config = columnIndex;
-      columnIndex = GetValue$x(config, 'column', undefined);
-      rowIndex = GetValue$x(config, 'row', undefined);
-      align = GetValue$x(config, 'align', ALIGN_CENTER);
-      paddingConfig = GetValue$x(config, 'padding', 0);
-      expand = GetValue$x(config, 'expand', false);
-      childKey = GetValue$x(config, 'key', undefined);
-    }
-
-    // Get insert index
-    var itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
-    if (itemIndex === null) {
-      // Specific index mode
-      if (typeof columnIndex === 'number' && typeof rowIndex === 'number') {
-        return this;
-      }
-      if (rowIndex === true || typeof rowIndex === 'number') {
-        this.addEmptyColumn();
-      } else {
-        this.addEmptyRow();
-      }
-
-      // Get insert index again
-      itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
-    }
-    if (typeof align === 'string') {
-      align = AlignConst[align];
-    }
-    if (align === undefined) {
-      align = ALIGN_CENTER;
-    }
-    if (paddingConfig === undefined) {
-      paddingConfig = 0;
-    }
-    if (expand === undefined) {
-      expand = true;
-    }
-    var config = this.getSizerConfig(gameObject);
-    config.align = align;
-    config.padding = GetBoundsConfig(paddingConfig);
-    if (IsPlainObject$5(expand)) {
-      config.expandWidth = GetValue$x(expand, 'width', false);
-      config.expandHeight = GetValue$x(expand, 'height', false);
-    } else {
-      config.expandWidth = expand;
-      config.expandHeight = expand;
-    }
-    this.sizerChildren[itemIndex] = gameObject;
-    if (childKey !== undefined) {
-      this.addChildrenMap(childKey, gameObject);
-    }
-    return this;
-  };
-  var AddChildMethods = {
-    add: Add
-  };
-
-  var Fill = function Fill(arr, value, startIdx, endIdx) {
-    if (startIdx === undefined) {
-      startIdx = 0;
-    }
-    if (endIdx === undefined) {
-      endIdx = arr.length - 1;
-    }
-    for (var i = startIdx; i <= endIdx; i++) {
-      arr[i] = value;
-    }
-    return arr;
-  };
-
-  var RemoveChildMethods = {
-    remove: function remove(gameObject, destroyChild) {
-      if (this.getParentSizer(gameObject) !== this) {
-        return this;
-      }
-      var idx = this.sizerChildren.indexOf(gameObject);
-      if (idx !== -1) {
-        this.sizerChildren[idx] = null;
-      }
-      RemoveChild$1.call(this, gameObject, destroyChild);
-      return this;
-    },
-    removeAt: function removeAt(columnIndex, rowIndex, destroyChild) {
-      var child = this.getChildAt(columnIndex, rowIndex);
-      if (child) {
-        this.remove(child, destroyChild);
-      }
-      return this;
-    },
-    removeAll: function removeAll(destroyChild) {
-      for (var i = this.sizerChildren.length - 1; i >= 0; i--) {
-        var child = this.sizerChildren[i];
-        if (!child) {
-          continue;
-        }
-        this.remove(child, destroyChild);
-      }
-      return this;
-    },
-    clear: function clear(destroyChild) {
-      Fill(this.sizerChildren, null);
-      ClearChildren.call(this, destroyChild);
-      return this;
-    }
-  };
-
-  var SetSpaceMethods = {
-    setColumnSpace: function setColumnSpace(columnSpace) {
-      if (!this.space.column) {
-        this.space.column = [];
-      }
-      this.space.column.length = this.columnCount - 1;
-      if (typeof columnSpace === 'number') {
-        Fill(this.space.column, columnSpace);
-      } else {
-        for (var i = 0, cnt = this.columnCount - 1; i < cnt; i++) {
-          this.space.column[i] = columnSpace[i] || 0;
-        }
-      }
-      return this;
-    },
-    setRowSpace: function setRowSpace(rowSpace) {
-      if (!this.space.row) {
-        this.space.row = [];
-      }
-      this.space.row.length = this.rowCount - 1;
-      if (typeof rowSpace === 'number') {
-        Fill(this.space.row, rowSpace);
-      } else {
-        for (var i = 0, cnt = this.rowCount - 1; i < cnt; i++) {
-          this.space.row[i] = rowSpace[i] || 0;
-        }
-      }
-      return this;
-    },
-    setIndentLeft: function setIndentLeft(odd, even) {
-      this.space.indentLeftOdd = odd;
-      this.space.indentLeftEven = even;
-      return this;
-    },
-    setIndentTop: function setIndentTop(odd, even) {
-      this.space.indentTopOdd = odd;
-      this.space.indentTopEven = even;
-      return this;
-    }
-  };
-
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
-  var ResetGrid = function ResetGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
-    if (columnProportions === undefined) {
-      columnProportions = 0;
-    }
-    if (rowProportions === undefined) {
-      rowProportions = 0;
-    }
-    this.columnCount = columnCount;
-    this.rowCount = rowCount;
-    this.gridCount = columnCount * rowCount;
-
-    // children
-    this.removeAll();
-    this.sizerChildren.length = columnCount * rowCount;
-    Fill(this.sizerChildren, null);
-
-    // proportions
-    this.columnProportions = [];
-    this.columnProportions.length = columnCount;
-    if (typeof columnProportions === 'number') {
-      Fill(this.columnProportions, columnProportions);
-    } else {
-      for (var i = 0; i < columnCount; i++) {
-        this.columnProportions[i] = columnProportions[i] || 0;
-      }
-    }
-    this.rowProportions = [];
-    this.rowProportions.length = rowCount;
-    if (typeof rowProportions === 'number') {
-      Fill(this.rowProportions, rowProportions);
-    } else {
-      for (var i = 0; i < rowCount; i++) {
-        this.rowProportions[i] = rowProportions[i] || 0;
-      }
-    }
-
-    // width & height
-    this.columnWidth = [];
-    this.columnWidth.length = columnCount;
-    this.rowHeight = [];
-    this.rowHeight.length = rowCount;
-
-    // space
-    this.setColumnSpace(GetValue$w(space, 'column', 0));
-    this.setRowSpace(GetValue$w(space, 'row', 0));
-    var scene = this.scene;
-    var createCellContainerCallback = this.createCellContainerCallback;
-    if (createCellContainerCallback) {
-      for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
-        for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
-          var addConfig = {
-            column: x,
-            row: y
-          };
-          var child = createCellContainerCallback(scene, x, y, addConfig);
-          if (child) {
-            this.add(child, addConfig);
-          }
-        }
-      }
-    }
-    return this;
-  };
-
-  var InseryEmptyRow = function InseryEmptyRow(rowIndex, proportion, space) {
-    if (proportion === undefined) {
-      proportion = this.rowProportions[0] || 0;
-    }
-    if (space === undefined) {
-      space = this.space.row[0] || 0;
-    }
-    this.rowCount += 1;
-    this.gridCount += this.columnCount;
-    var args = [rowIndex * this.columnCount, 0];
-    for (var i = 0; i < this.columnCount; i++) {
-      args.push(null);
-    }
-    this.sizerChildren.splice.apply(this.sizerChildren, args);
-    this.rowProportions.push(proportion);
-    this.rowHeight.length += 1; // this.rowHeight will be recalculated when layout()    
-
-    this.space.row.splice(rowIndex, 0, space);
-    return this;
-  };
-  var AddEmptyRow = function AddEmptyRow(proportion, space) {
-    InseryEmptyRow.call(this, this.rowCount, proportion, space);
-    return this;
-  };
-
-  var InsertEmptyColumn = function InsertEmptyColumn(colIndex, proportion, space) {
-    if (proportion === undefined) {
-      proportion = this.columnProportions[0] || 0;
-    }
-    if (space === undefined) {
-      space = this.space.column[0] || 0;
-    }
-    this.columnCount += 1;
-    this.gridCount += this.rowCount;
-    for (var i = this.rowCount - 1; i >= 0; i--) {
-      var insertIndex = i * this.columnCount + colIndex;
-      this.sizerChildren.splice(insertIndex, 0, null);
-    }
-    this.columnProportions.push(proportion);
-    this.columnWidth.length += 1; // this.columnWidth will be recalculated when layout()    
-
-    this.space.column.splice(colIndex, 0, space);
-    return this;
-  };
-  var AddEmptyColumn = function AddEmptyColumn(proportion, space) {
-    InsertEmptyColumn.call(this, this.columnCount, proportion, space);
-    return this;
-  };
-
-  var methods$6 = {
-    getChildrenWidth: GetChildrenWidth,
-    getChildrenHeight: GetChildrenHeight,
-    getExpandedChildWidth: GetExpandedChildWidth,
-    getExpandedChildHeight: GetExpandedChildHeight,
-    getChildrenSizers: GetChildrenSizers,
-    preLayout: PreLayout,
-    layoutChildren: LayoutChildren,
-    resolveWidth: ResolveWidth,
-    resolveHeight: ResolveHeight,
-    resolveChildrenWidth: ResolveChildrenWidth,
-    resolveChildrenHeight: ResolveChildrenHeight,
-    runWidthWrap: RunWidthWrap,
-    runHeightWrap: RunHeightWrap,
-    resetGrid: ResetGrid,
-    inseryEmptyRow: InseryEmptyRow,
-    addEmptyRow: AddEmptyRow,
-    insertEmptyColumn: InsertEmptyColumn,
-    addEmptyColumn: AddEmptyColumn
-  };
-  Object.assign(methods$6, AddChildMethods, RemoveChildMethods, SetSpaceMethods);
-
-  var GetTotalColumnProportions = function GetTotalColumnProportions() {
-    var result = 0,
-      proportion;
-    for (var i = 0; i < this.columnCount; i++) {
-      proportion = this.columnProportions[i];
-      if (proportion > 0) {
-        result += proportion;
-      } else if (proportion === 0) {
-        this.hasColumnProportion0Child = true;
-      }
-    }
-    return result;
-  };
-
-  var GetTotalRowProportions = function GetTotalRowProportions() {
-    var result = 0,
-      proportion;
-    for (var i = 0; i < this.rowCount; i++) {
-      proportion = this.rowProportions[i];
-      if (proportion > 0) {
-        result += proportion;
-      } else if (proportion === 0) {
-        this.hasRowProportion0Child = true;
-      }
-    }
-    return result;
-  };
-
-  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
-  var GridSizer = /*#__PURE__*/function (_BaseSizer) {
-    _inherits(GridSizer, _BaseSizer);
-    var _super = _createSuper(GridSizer);
-    function GridSizer(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
-      var _this;
-      _classCallCheck(this, GridSizer);
-      if (IsPlainObject$4(x)) {
-        config = x;
-        x = GetValue$v(config, 'x', 0);
-        y = GetValue$v(config, 'y', 0);
-        minWidth = GetValue$v(config, 'width', undefined);
-        minHeight = GetValue$v(config, 'height', undefined);
-        columnCount = GetValue$v(config, 'column', config.col || 0);
-        rowCount = GetValue$v(config, 'row', 0);
-        columnProportions = GetValue$v(config, 'columnProportions', 0);
-        rowProportions = GetValue$v(config, 'rowProportions', 0);
-      } else if (IsPlainObject$4(minWidth)) {
-        config = minWidth;
-        minWidth = GetValue$v(config, 'width', undefined);
-        minHeight = GetValue$v(config, 'height', undefined);
-        columnCount = GetValue$v(config, 'column', config.col || 0);
-        rowCount = GetValue$v(config, 'row', 0);
-        columnProportions = GetValue$v(config, 'columnProportions', 0);
-        rowProportions = GetValue$v(config, 'rowProportions', 0);
-      } else if (IsPlainObject$4(columnCount)) {
-        config = columnCount;
-        columnCount = GetValue$v(config, 'column', config.col || 0);
-        rowCount = GetValue$v(config, 'row', 0);
-        columnProportions = GetValue$v(config, 'columnProportions', 0);
-        rowProportions = GetValue$v(config, 'rowProportions', 0);
-      } else if (IsPlainObject$4(columnProportions)) {
-        config = columnProportions;
-        columnProportions = GetValue$v(config, 'columnProportions', 0);
-        rowProportions = GetValue$v(config, 'rowProportions', 0);
-      }
-      _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
-      _this.type = 'rexGridSizer';
-      _this.sizerChildren = [];
-      _this.addChildrenMap('items', _this.sizerChildren);
-      _this.setCreateCellContainerCallback(GetValue$v(config, 'createCellContainerCallback'));
-      _this.setIndentLeft(GetValue$v(config, 'space.indentLeftOdd', 0), GetValue$v(config, 'space.indentLeftEven', 0));
-      _this.setIndentTop(GetValue$v(config, 'space.indentTopOdd', 0), GetValue$v(config, 'space.indentTopEven', 0));
-      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$v(config, 'space', undefined));
-      return _this;
-    }
-    _createClass(GridSizer, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene || this.ignoreDestroy) {
-          return;
-        }
-        _get(_getPrototypeOf(GridSizer.prototype), "destroy", this).call(this, fromScene);
-
-        // More free resources
-        this.columnProportions = undefined;
-        this.rowProportions = undefined;
-        this.columnWidth = undefined;
-        this.rowHeight = undefined;
-        this.createCellContainerCallback = undefined;
-      }
-    }, {
-      key: "setColumnProportion",
-      value: function setColumnProportion(columnIndex, proportion) {
-        if (columnIndex >= this.columnProportions.length) {
-          return this;
-        }
-        this.columnProportions[columnIndex] = proportion;
-        return this;
-      }
-    }, {
-      key: "setRowProportion",
-      value: function setRowProportion(rowIndex, proportion) {
-        if (rowIndex >= this.rowProportions.length) {
-          return this;
-        }
-        this.rowProportions[rowIndex] = proportion;
-        return this;
-      }
-    }, {
-      key: "totalColumnProportions",
-      get: function get() {
-        if (this._totalColumnProportions === undefined) {
-          this._totalColumnProportions = GetTotalColumnProportions.call(this);
-        }
-        return this._totalColumnProportions;
-      }
-    }, {
-      key: "totalRowProportions",
-      get: function get() {
-        if (this._totalRowProportions === undefined) {
-          this._totalRowProportions = GetTotalRowProportions.call(this);
-        }
-        return this._totalRowProportions;
-      }
-    }, {
-      key: "getChildAt",
-      value: function getChildAt(columnIndex, rowIndex) {
-        return this.sizerChildren[rowIndex * this.columnCount + columnIndex];
-      }
-    }, {
-      key: "childToGridIndex",
-      value: function childToGridIndex(child, out) {
-        if (!child) {
-          return null;
-        }
-        var index = this.sizerChildren.indexOf(child);
-        if (index === -1) {
-          return null;
-        }
-        if (out === undefined) {
-          out = {};
-        }
-        out.x = index % this.columnCount;
-        out.y = Math.floor(index / this.columnCount);
-        return out;
-      }
-    }, {
-      key: "getColumnWidth",
-      value: function getColumnWidth(columnIndex) {
-        var colProportion = this.columnProportions[columnIndex];
-        var colWidth = colProportion === 0 ? this.columnWidth[columnIndex] : colProportion * this.proportionWidthLength;
-        return colWidth;
-      }
-    }, {
-      key: "getRowHeight",
-      value: function getRowHeight(rowIndex) {
-        var rowProportion = this.rowProportions[rowIndex];
-        var rowHeight = rowProportion === 0 ? this.rowHeight[rowIndex] : rowProportion * this.proportionHeightLength;
-        return rowHeight;
-      }
-    }, {
-      key: "setCreateCellContainerCallback",
-      value: function setCreateCellContainerCallback(callback) {
-        this.createCellContainerCallback = callback;
-        return this;
-      }
-    }]);
-    return GridSizer;
-  }(Base$1);
-  Object.assign(GridSizer.prototype, methods$6);
 
   var GetValue$u = Phaser.Utils.Objects.GetValue;
   var AddChild = function AddChild(topPatent, childParent, config) {

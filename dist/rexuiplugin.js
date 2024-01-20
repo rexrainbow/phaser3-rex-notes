@@ -51578,7 +51578,7 @@
       if (config === undefined) {
         config = {};
       }
-      // Create sizer        
+      // Create sizer
       config.column = 3;
       config.row = 3;
       config.columnProportions = [0, 0, 0];
@@ -57536,19 +57536,53 @@
     return this.getElement('tabs.buttons')[index];
   };
 
+  var TabsPositionToIndex = {
+    top: 1,
+    left: 3,
+    right: 5,
+    bottom: 7
+  };
+  var TabsPositionToTabsPaddingKey = {
+    top: 'bottom',
+    left: 'right',
+    right: 'left',
+    bottom: 'top'
+  };
+  var SetTabPosition = function SetTabPosition(tabsPosition) {
+    var newIndex = TabsPositionToIndex[tabsPosition];
+    if (newIndex === undefined) {
+      return this;
+    }
+    var tabs = this.childrenMap.tabs;
+    var currentIndex = this.sizerChildren.indexOf(tabs);
+    if (currentIndex === newIndex) {
+      return this;
+    }
+    this.sizerChildren[currentIndex] = null;
+    this.sizerChildren[newIndex] = tabs;
+    var tabPadding = this.getSizerConfig(tabs).padding;
+    var currentPaddingKey = TabsPositionToTabsPaddingKey[this.tabsPosition];
+    var newPaddingKey = TabsPositionToTabsPaddingKey[tabsPosition];
+    tabPadding[newPaddingKey] = tabPadding[currentPaddingKey];
+    tabPadding[currentPaddingKey] = 0;
+    this.tabsPosition = tabsPosition;
+    return this;
+  };
+
   var methods$7 = {
     getPageKey: GetPageKeyByIndex,
     getPageIndex: GetPageIndexByKey,
     addPage: AddPage,
     getPage: GetPage,
-    getTab: GetTab
+    getTab: GetTab,
+    setTabPosition: SetTabPosition
   };
   Object.assign(methods$7, SwapPageMethods, RemovePageMethods);
 
   var GetValue$z = Phaser.Utils.Objects.GetValue;
-  var SizerAdd = Sizer.prototype.add;
-  var TabPages$1 = /*#__PURE__*/function (_Sizer) {
-    _inherits(TabPages, _Sizer);
+  var SizerAdd = GridSizer.prototype.add;
+  var TabPages$1 = /*#__PURE__*/function (_GridSizer) {
+    _inherits(TabPages, _GridSizer);
     var _super = _createSuper(TabPages);
     function TabPages(scene, config) {
       var _this;
@@ -57556,9 +57590,16 @@
       if (config === undefined) {
         config = {};
       }
-      var tabsPosition = GetValue$z(config, 'tabPosition', 'top');
-      var sizerOrientation = tabsPosition === 'left' || tabsPosition === 'right' ? 'x' : 'y';
-      config.orientation = sizerOrientation;
+      // Create sizer
+      config.column = 3;
+      config.row = 3;
+      config.columnProportions = [0, 0, 0];
+      config.rowProportions = [0, 0, 0];
+      var expandPages = GetValue$z(config, 'expand.pages', true);
+      if (expandPages) {
+        config.columnProportions[1] = 1;
+        config.rowProportions[1] = 1;
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexTabPages';
 
@@ -57570,48 +57611,73 @@
       var pagesConfig = GetValue$z(config, 'pages');
       var pages = new Pages(scene, pagesConfig);
       scene.add.existing(pages);
-      var isHorizontalTabs = sizerOrientation === 'y';
-      var wrapTabs = isHorizontalTabs ? GetValue$z(config, 'wrapTabs', false) : false;
+      var tabsPosition = GetValue$z(config, 'tabsPosition', undefined);
+      if (tabsPosition === undefined) {
+        tabsPosition = GetValue$z(config, 'tabPosition', 'top');
+      }
+      var wrapTabs = GetValue$z(config, 'wrapTabs', false);
+      var ButtonsClass = wrapTabs ? Buttons : Buttons$1;
       var tabsConfig = GetValue$z(config, 'tabs', undefined);
       if (tabsConfig === undefined) {
         tabsConfig = {};
       }
-      var ButtonsClass = wrapTabs ? Buttons : Buttons$1;
-      tabsConfig.orientation = isHorizontalTabs ? 'x' : 'y';
+      tabsConfig.orientation = tabsPosition === 'top' || tabsPosition === 'bottom' ? 'x' : 'y';
       tabsConfig.buttonsType = 'radio';
+      if (!wrapTabs && !tabsConfig.hasOwnProperty('expand')) {
+        tabsConfig.expand = GetValue$z(config, 'expand.tabs', false);
+      }
       var tabs = new ButtonsClass(scene, tabsConfig);
       scene.add.existing(tabs);
-      var tabsExpand = wrapTabs ? true : GetValue$z(config, 'expand.tabs', false);
-      var tabAlign = GetValue$z(config, 'align.tabs', 'left');
+
+      // Add to sizer
+      SizerAdd.call(_assertThisInitialized(_this), pages, {
+        column: 1,
+        row: 1,
+        expand: expandPages
+      });
+      var tabColumnIndex, tabRowIndex;
+      var tabPadding = GetValue$z(config, 'space.item', 0); // Backward compatible
       switch (tabsPosition) {
         case 'top':
-        case 'left':
-          SizerAdd.call(_assertThisInitialized(_this), tabs, {
-            proportion: 0,
-            expand: tabsExpand,
-            align: tabAlign
-          });
-          SizerAdd.call(_assertThisInitialized(_this), pages, {
-            proportion: 1,
-            expand: true
-          });
+          tabColumnIndex = 1;
+          tabRowIndex = 0;
+          tabPadding = {
+            bottom: tabPadding
+          };
           break;
         case 'bottom':
+          tabColumnIndex = 1;
+          tabRowIndex = 2;
+          tabPadding = {
+            top: tabPadding
+          };
+          break;
+        case 'left':
+          tabColumnIndex = 0;
+          tabRowIndex = 1;
+          tabPadding = {
+            right: tabPadding
+          };
+          break;
         case 'right':
-          SizerAdd.call(_assertThisInitialized(_this), pages, {
-            proportion: 1,
-            expand: true
-          });
-          SizerAdd.call(_assertThisInitialized(_this), tabs, {
-            proportion: 0,
-            expand: tabsExpand,
-            align: tabAlign
-          });
+          tabColumnIndex = 2;
+          tabRowIndex = 1;
+          tabPadding = {
+            left: tabPadding
+          };
           break;
       }
+      SizerAdd.call(_assertThisInitialized(_this), tabs, {
+        column: tabColumnIndex,
+        row: tabRowIndex,
+        padding: tabPadding,
+        expand: wrapTabs ? true : GetValue$z(config, 'expand.tabs', false),
+        align: GetValue$z(config, 'align.tabs', 'left')
+      });
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('tabs', tabs);
       _this.addChildrenMap('pages', pages);
+      _this.tabsPosition = tabsPosition;
 
       // Register events
       tabs.on('button.click', function (tab) {
@@ -57657,7 +57723,7 @@
       }
     }]);
     return TabPages;
-  }(Sizer);
+  }(GridSizer);
   Object.assign(TabPages$1.prototype, methods$7);
 
   ObjectFactory.register('tabPages', function (config) {
