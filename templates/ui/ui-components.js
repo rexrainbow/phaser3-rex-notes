@@ -78,6 +78,7 @@ import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
 import ColorInput from './colorinput/colorinput/ColorInput.js';
 import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
 import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
+import SplitPanels from './splitpanels/SplitPanels.js';
 import Tweaker from './tweaker/Tweaker.js';
 import Sides from './sides/Sides.js';
 
@@ -204,6 +205,7 @@ export {
     ColorInput,
     ColorInputBase,
     ColorPicker,
+    SplitPanels,
     Tweaker,
     Sides,
 

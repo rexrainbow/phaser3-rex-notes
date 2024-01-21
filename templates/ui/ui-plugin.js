@@ -79,6 +79,7 @@ import ColorInputFactory from './colorinput/colorinput/Factory.js';
 import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
 import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
 import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
+import SplitPanelsFactory from './splitpanels/Factory.js';
 import SidesFactory from './sides/Factory.js';
 import TweakerFactory from './tweaker/Factory.js';
 
