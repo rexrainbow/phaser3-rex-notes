@@ -46,6 +46,7 @@ declare class SplitPanels extends Sizer {
     );
 
     setSplitterEnable(enable?: boolean): this;
+    splitterEnable: boolean;
 
     setMinLeftPanelWidth(value: number): this;
     minLeftPanelWidth: number;
