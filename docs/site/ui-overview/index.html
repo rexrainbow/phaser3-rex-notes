@@ -7901,13 +7901,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    YAML
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -8801,6 +8794,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-splitpanels/" class="md-nav__link">
+        Split panels
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-tweaker/" class="md-nav__link">
         Tweaker
       </a>
@@ -8820,17 +8827,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_19" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_20" >
       
       
       
-        <label class="md-nav__link" for="__nav_15_19" id="__nav_15_19_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_15_20" id="__nav_15_20_label" tabindex="0">
           States
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_19_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_15_19">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_20_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15_20">
           <span class="md-nav__icon md-icon"></span>
           States
         </label>
@@ -9861,13 +9868,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    YAML
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -10008,6 +10008,7 @@
 <li><a href="../ui-simplelabel/">Simple label</a>: Using json style to create <a href="../ui-label/">label</a>.</li>
 <li><a href="../ui-sizer/">Sizer</a>: Layout children game objects.</li>
 <li><a href="../ui-slider/">Slider</a>: A container with a track, indicator, thumb and background.</li>
+<li><a href="../ui-splitpanels/">Split panels</a>: A container with left(top) panel, right(bottom) panel, splitter, and background.</li>
 <li><a href="../ui-tabpages/">Tab-pages</a>: A container with tabs and pages, only current page is visible.</li>
 <li><a href="../ui-tabs/">Tabs</a>: A container with 4 groups of buttons around a center panel.</li>
 <li><a href="../ui-textarea/">TextArea</a>: A container with a text, slider, and scroller.</li>
@@ -10731,18 +10732,6 @@
 <span class="cm">        .setMinSize(viewport.width, viewport.height)</span>
 <span class="cm">        .layout();</span>
 <span class="cm">    */</span>
-<span class="p">});</span>
-</code></pre></div>
-<h3 id="yaml">YAML<a class="headerlink" href="#yaml" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/nodeca/js-yaml">js-yaml</a></p>
-<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">yaml</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">yamlStrinig</span><span class="p">);</span>
-<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">yaml</span><span class="p">.</span><span class="nx">loadAll</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// ...</span>
 <span class="p">});</span>
 </code></pre></div>
 <h2 id="demos">Demos<a class="headerlink" href="#demos" title="Permanent link">&para;</a></h2>

@@ -453,6 +453,7 @@ nav:
         - Color input: ui-colorinput.md
         - Color picker: ui-colorpicker.md
         - Color components: ui-colorcomponents.md
+    - Split panels: ui-splitpanels.md
     - Tweaker: ui-tweaker.md
     - States:
         - States image: ui-statesimage.md

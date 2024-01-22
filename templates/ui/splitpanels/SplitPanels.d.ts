@@ -21,16 +21,18 @@ declare namespace SplitPanels {
         background?: Phaser.GameObjects.GameObject,
 
         leftPanel?: Phaser.GameObjects.GameObject,
+        topPanel?: Phaser.GameObjects.GameObject,
+
         rightPanel?: Phaser.GameObjects.GameObject,
+        bottomPanel?: Phaser.GameObjects.GameObject,
+
+        splitter?: Phaser.GameObjects.GameObject,
+
         minLeftPanelWidth?: number,
         minRightPanelWidth?: number,
 
-        topPanel?: Phaser.GameObjects.GameObject,
-        bottomPanel?: Phaser.GameObjects.GameObject,
         minTopPanelHeight?: number,
         minBottomPanelHeight?: number,
-
-        splitter?: Phaser.GameObjects.GameObject,
 
         splitRatio?: number,
     }

@@ -108,10 +108,7 @@ var label = scene.rexUI.add.label({
     align: undefined,
 
     space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
+        left: 0, right: 0, top: 0, bottom: 0,
 
         icon: 0, 
         iconTop: 0, iconBottom: 0, iconLeft: 0, iconRight: 0,
