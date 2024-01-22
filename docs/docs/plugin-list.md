@@ -226,7 +226,7 @@
 1. [UI/Simple label](ui-simplelabel.md): Using json style to create label.
 1. [UI/Sizer](ui-sizer.md): Layout children game objects.
 1. [UI/Slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [UI/Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background.
+1. [UI/Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background. Drag splitter to resize with left(top) panel, right(bottom) panel. 
 1. [UI/States image](ui-statesimage.md): Using plain object to create image game object, with active, hover, disable styles.
 1. [UI/States round-rectangle](ui-statesroundrectangle.md): Using plain object to create round rectangle game object, with active, hover, disable styles.
 1. [UI/States text](ui-statestext.md): Using plain object to create text game object, with active, hover, disable styles.

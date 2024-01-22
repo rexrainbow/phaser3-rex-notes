@@ -113,7 +113,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md).
 1. [Sizer](ui-sizer.md): Layout children game objects.
 1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background.
+1. [Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background. Drag splitter to resize with left(top) panel, right(bottom) panel. 
 1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.

@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with left(top) panel, right(bottom) panel, splitter, and background.
+A container with left(top) panel, right(bottom) panel, splitter, and background. Drag splitter to resize with left(top) panel, right(bottom) panel. 
 
 - Author: Rex
 - Game object
