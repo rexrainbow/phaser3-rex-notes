@@ -24,9 +24,16 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 600, height: 300,
 
+            space: {
+                item: 10
+            },
+
             leftPanel: this.add.rectangle(0, 0, 1, 1, COLOR_LIGHT),
             rightPanel: CreateRightPanel(this),
             splitter: this.add.rectangle(0, 0, 15, 1).setStrokeStyle(3, 0xff0000),
+
+            minLeftPanelWidth: 100,
+            minRightPanelWidth: 200,
 
             splitRatio: 0.25
         })
@@ -35,13 +42,13 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, '');
         ui
-            .on('dragsplitterstart', function (splitter, splitRatio) {
+            .on('splitter.dragstart', function (splitter, splitRatio) {
                 splitter.setFillStyle(0xff0000)
             })
-            .on('dragsplitterend', function (splitter, splitRatio) {
+            .on('splitter.dragend', function (splitter, splitRatio) {
                 splitter.setFillStyle()
             })
-            .on('dragsplitter', function (splitter, splitRatio) {
+            .on('splitter.drag', function (splitter, splitRatio) {
                 print.text = splitRatio;
             })
 

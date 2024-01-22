@@ -304,6 +304,7 @@ module.exports = {
     'textareainput': './templates/ui/textareainput/TextAreaInput.js',
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
+    'splitpanels':'./templates/ui/splitpanels/SplitPanels.js',
     'tweaker': './templates/ui/tweaker/Tweaker.js',
     'sides': './templates/ui/sides/Sides.js',
 

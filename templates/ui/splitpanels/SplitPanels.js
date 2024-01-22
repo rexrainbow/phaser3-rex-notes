@@ -8,7 +8,10 @@ const Clamp = Phaser.Math.Clamp;
 
 class SplitPanels extends Sizer {
     constructor(scene, config) {
-        config.orientation = ('leftPanel' in config) ? 0 : 1;
+        if (!config.hasOwnProperty('orientation')) {
+            config.orientation = (config.hasOwnProperty('leftPanel')) ? 0 : 1;
+        }
+
         super(scene, config);
         this.type = 'rexSplit';
 
@@ -36,18 +39,32 @@ class SplitPanels extends Sizer {
             this.addBackground(background);
         }
 
+        var spaceConfig = GetValue(config, 'space', undefined);
+
         this.add(
             firstChild,
             {
                 proportion: 1,
                 expand: true,
+                padding: {
+                    left: GetValue(spaceConfig, `${firstChildKey}Left`, 0),
+                    right: GetValue(spaceConfig, `${firstChildKey}Right`, 0),
+                    top: GetValue(spaceConfig, `${firstChildKey}Top`, 0),
+                    bottom: GetValue(spaceConfig, `${firstChildKey}Bottom`, 0),
+                }
             }
         )
 
         this.add(splitter,
             {
                 proportion: 0,
-                expand: true
+                expand: true,
+                padding: {
+                    left: GetValue(spaceConfig, 'splitterLeft', 0),
+                    right: GetValue(spaceConfig, 'splitterRight', 0),
+                    top: GetValue(spaceConfig, 'splitterTop', 0),
+                    bottom: GetValue(spaceConfig, 'splitterBottom', 0),
+                }
             }
         );
 
@@ -55,7 +72,13 @@ class SplitPanels extends Sizer {
             secondChild,
             {
                 proportion: 1,
-                expand: true
+                expand: true,
+                padding: {
+                    left: GetValue(spaceConfig, `${secondChildKey}Left`, 0),
+                    right: GetValue(spaceConfig, `${secondChildKey}Right`, 0),
+                    top: GetValue(spaceConfig, `${secondChildKey}Top`, 0),
+                    bottom: GetValue(spaceConfig, `${secondChildKey}Bottom`, 0),
+                }
             }
         );
 
@@ -75,22 +98,16 @@ class SplitPanels extends Sizer {
 
         splitter
             .on('dragstart', function () {
-                this.emit('dragsplitterstart', splitter, this.splitRatio);
+                this.emit('splitter.dragstart', splitter, this.splitRatio);
             }, this)
             .on('dragend', function () {
-                this.emit('dragsplitterend', splitter, this.splitRatio);
+                this.emit('splitter.dragend', splitter, this.splitRatio);
             }, this)
-            .on('drag', OnDragSplitter, this);
+            .on('drag', function () {
+                OnDragSplitter.call(this);
+                this.emit('splitter.drag', splitter, this.splitRatio);
+            }, this);
 
-    }
-
-    get rotation() {
-        return super.rotation;
-    }
-
-    set rotation(value) {
-        super.rotation = value;
-        this.splitterDragBehavior.setAxisRotation(value);
     }
 
     setSplitterEnable(enable) {
@@ -173,9 +190,5 @@ class SplitPanels extends Sizer {
         return this;
     }
 }
-
-var tmpP0 = {};
-var tmpP1 = {};
-var tmpSplitter = {};
 
 export default SplitPanels;
