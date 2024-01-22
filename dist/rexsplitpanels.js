@@ -12048,12 +12048,20 @@
       return _this;
     }
     _createClass(SplitPanels, [{
+      key: "splitterEnable",
+      get: function get() {
+        return this.splitterDragBehavior.enable;
+      },
+      set: function set(value) {
+        this.splitterDragBehavior.setEnable(value);
+      }
+    }, {
       key: "setSplitterEnable",
       value: function setSplitterEnable(enable) {
         if (enable === undefined) {
           enable = true;
         }
-        this.splitterDragBehavior.setEnable(enable);
+        this.splitterEnable = enable;
         return this;
       }
     }, {

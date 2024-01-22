@@ -110,11 +110,19 @@ class SplitPanels extends Sizer {
 
     }
 
+    get splitterEnable() {
+        return this.splitterDragBehavior.enable;
+    }
+
+    set splitterEnable(value) {
+        this.splitterDragBehavior.setEnable(value);
+    }
+
     setSplitterEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
-        this.splitterDragBehavior.setEnable(enable);
+        this.splitterEnable = enable;
         return this;
     }
 

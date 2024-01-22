@@ -253,6 +253,42 @@ See also - [dirty](ui-basesizer.md#dirty)
     // splitPanels.minBottomPanelHeight = value;
     ```
 
+### Enable
+
+- Get
+    ```javascript
+    var enable = splitPanels.splitterEnable;
+    ```
+- Set
+    ```javascript
+    slider.setSplitterEnable(enable);
+    ```
+    or
+    ```javascript
+    slider.splitterEnable = enable;
+    ```
+
+### Events
+
+- On drag splitter start
+    ```javascript
+    splitPanels.on('splitter.dragstart', function(splitter, splitRatio){
+        //
+    }, scope);
+    ```
+- On drag splitter end
+    ```javascript
+    splitPanels.on('splitter.dragend', function(splitter, splitRatio){
+        //
+    }, scope);
+    ```
+- On dragging splitter
+    ```javascript
+    splitPanels.on('splitter.drag', function(splitter, splitRatio){
+        //
+    }, scope);
+    ```
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

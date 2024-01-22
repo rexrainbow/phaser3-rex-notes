@@ -8687,6 +8687,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9679,6 +9693,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9948,6 +9976,36 @@
 
 <span class="nx">splitPanels</span><span class="p">.</span><span class="nx">minRightPanelWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
 <span class="c1">// splitPanels.minBottomPanelHeight = value;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">splitPanels</span><span class="p">.</span><span class="nx">splitterEnable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setSplitterEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">splitterEnable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On drag splitter start
+    <div class="highlight"><pre><span></span><code><span class="nx">splitPanels</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;splitter.dragstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">splitter</span><span class="p">,</span><span class="w"> </span><span class="nx">splitRatio</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On drag splitter end
+    <div class="highlight"><pre><span></span><code><span class="nx">splitPanels</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;splitter.dragend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">splitter</span><span class="p">,</span><span class="w"> </span><span class="nx">splitRatio</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On dragging splitter
+    <div class="highlight"><pre><span></span><code><span class="nx">splitPanels</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;splitter.drag&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">splitter</span><span class="p">,</span><span class="w"> </span><span class="nx">splitRatio</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
