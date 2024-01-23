@@ -30069,6 +30069,52 @@
     return out;
   };
 
+  var FitTo = function FitTo(source, target, scaleUp, out) {
+    if (scaleUp === undefined) {
+      scaleUp = true;
+    }
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalSize;
+    }
+    var sourceWidth = source.width,
+      sourceHeight = source.height,
+      targetWidth = target.width,
+      targetHeight = target.height;
+    if (sourceWidth <= targetWidth && sourceHeight <= targetHeight) {
+      if (scaleUp) {
+        var sourceRatio = sourceWidth / sourceHeight;
+        var targetRatio = targetWidth / targetHeight;
+        if (targetRatio < sourceRatio) {
+          out.width = targetWidth;
+          out.height = targetWidth / sourceRatio;
+        } else if (targetRatio > sourceRatio) {
+          out.width = targetHeight * sourceRatio;
+          out.height = targetHeight;
+        } else {
+          out.width = targetWidth;
+          out.height = targetHeight;
+        }
+      } else {
+        out.width = sourceWidth;
+        out.height = sourceHeight;
+      }
+    } else {
+      var sourceRatio = sourceWidth / sourceHeight;
+      out.width = Math.min(sourceWidth, targetWidth);
+      out.height = Math.min(sourceHeight, targetHeight);
+      var ratio = out.width / out.height;
+      if (ratio < sourceRatio) {
+        out.height = out.width / sourceRatio;
+      } else if (ratio > sourceRatio) {
+        out.width = out.height * sourceRatio;
+      }
+    }
+    return out;
+  };
+  var globalSize = {};
+
   var LayoutChildren = function LayoutChildren() {
     var child, childConfig, padding;
     var startX = this.innerLeft,
@@ -30076,7 +30122,7 @@
     var innerWidth = this.innerWidth,
       innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
-    var childWidth, childHeight;
+    var childWidth, childHeight, childSize;
     // Layout current page
     var children = this.sizerChildren;
     for (var key in children) {
@@ -30087,22 +30133,23 @@
       childConfig = child.rexSizer;
       padding = childConfig.padding;
       PreLayoutChild.call(this, child);
+      childWidth = this.getExpandedChildWidth(child);
+      childHeight = this.getExpandedChildHeight(child);
+      if (childConfig.aspectRatio > 0) {
+        sourceSize.width = childConfig.aspectRatio;
+        sourceSize.height = 1;
+        targetSize.width = childWidth;
+        targetSize.height = childHeight;
+        childSize = FitTo(sourceSize, targetSize, true, true);
+        childWidth = childSize.width;
+        childHeight = childSize.height;
+      }
 
       // Set size
       if (child.isRexSizer) {
-        child.runLayout(this, this.getExpandedChildWidth(child), this.getExpandedChildHeight(child));
+        child.runLayout(this, childWidth, childHeight);
         CheckSize(child, this);
       } else {
-        childWidth = undefined;
-        childHeight = undefined;
-        if (childConfig.expandWidth) {
-          // Expand width
-          childWidth = innerWidth - padding.left - padding.right;
-        }
-        if (childConfig.expandHeight) {
-          // Expand height
-          childHeight = innerHeight - padding.top - padding.bottom;
-        }
         ResizeGameObject(child, childWidth, childHeight);
       }
 
@@ -30114,19 +30161,19 @@
       LayoutChild.call(this, child, x, y, width, height, childConfig.align, childConfig.alignOffsetX, childConfig.alignOffsetY);
     }
   };
+  var sourceSize = {};
+  var targetSize = {};
 
   var IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$O = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
   var UUID$1 = Phaser.Utils.String.UUID;
-  var Add$1 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+  var Add$1 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
     AddChild$2.call(this, gameObject);
     if (IsPlainObject$7(childKey)) {
       var config = childKey;
       childKey = GetValue$O(config, 'key', undefined);
       align = GetValue$O(config, 'align', ALIGN_CENTER);
-      offsetX = GetValue$O(config, 'offsetX', 0);
-      offsetY = GetValue$O(config, 'offsetY', 0);
       padding = GetValue$O(config, 'padding', 0);
       expand = GetValue$O(config, 'expand', true);
       if (!gameObject.isRexSizer) {
@@ -30134,6 +30181,9 @@
         minWidth = GetValue$O(config, 'minWidth', gameObject._minWidth);
         minHeight = GetValue$O(config, 'minHeight', gameObject._minHeighted);
       }
+      offsetX = GetValue$O(config, 'offsetX', 0);
+      offsetY = GetValue$O(config, 'offsetY', 0);
+      aspectRatio = GetValue$O(config, 'aspectRatio', 0);
     }
     var hasValidKey = childKey !== undefined;
     if (!hasValidKey) {
@@ -30144,12 +30194,6 @@
     }
     if (align === undefined) {
       align = ALIGN_CENTER;
-    }
-    if (offsetX === undefined) {
-      offsetX = 0;
-    }
-    if (offsetY === undefined) {
-      offsetY = 0;
     }
     if (padding === undefined) {
       padding = 0;
@@ -30166,10 +30210,28 @@
         minHeight = gameObject._minHeight;
       }
     }
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+    if (aspectRatio === undefined) {
+      aspectRatio = 0;
+    } else if (aspectRatio === true) {
+      aspectRatio = GetDisplayWidth(gameObject) / GetDisplayHeight(gameObject);
+    }
+    if (aspectRatio > 0) {
+      expand = true;
+      if (minWidth === undefined) {
+        minWidth = 0;
+      }
+      if (minHeight === undefined) {
+        minHeight = 0;
+      }
+    }
     var config = this.getSizerConfig(gameObject);
     config.align = align;
-    config.alignOffsetX = offsetX;
-    config.alignOffsetY = offsetY;
     config.padding = GetBoundsConfig(padding);
     if (IsPlainObject$7(expand)) {
       config.expandWidth = GetValue$O(expand, 'width', false);
@@ -30189,6 +30251,9 @@
         gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
       }
     }
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
+    config.aspectRatio = aspectRatio;
     if (this.sizerChildren.hasOwnProperty(childKey)) {
       this.sizerChildren[childKey].destroy();
     }

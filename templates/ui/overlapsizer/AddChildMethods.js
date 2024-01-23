@@ -8,15 +8,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
-var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
     AddChild.call(this, gameObject);
 
     if (IsPlainObject(childKey)) {
         var config = childKey;
         childKey = GetValue(config, 'key', undefined);
         align = GetValue(config, 'align', ALIGN_CENTER);
-        offsetX = GetValue(config, 'offsetX', 0);
-        offsetY = GetValue(config, 'offsetY', 0);
         padding = GetValue(config, 'padding', 0);
         expand = GetValue(config, 'expand', true);
 
@@ -25,6 +23,11 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
             minWidth = GetValue(config, 'minWidth', gameObject._minWidth);
             minHeight = GetValue(config, 'minHeight', gameObject._minHeighted);
         }
+
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
+
+        aspectRatio = GetValue(config, 'aspectRatio', 0);
     }
 
     var hasValidKey = (childKey !== undefined);
@@ -38,12 +41,6 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
 
     if (align === undefined) {
         align = ALIGN_CENTER;
-    }
-    if (offsetX === undefined) {
-        offsetX = 0;
-    }
-    if (offsetY === undefined) {
-        offsetY = 0;
     }
     if (padding === undefined) {
         padding = 0;
@@ -60,11 +57,33 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
             minHeight = gameObject._minHeight;
         }
     }
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
+
+    if (aspectRatio === undefined) {
+        aspectRatio = 0;
+    } else if (aspectRatio === true) {
+        aspectRatio = GetDisplayWidth(gameObject) / GetDisplayHeight(gameObject);
+    }
+    if (aspectRatio > 0) {
+        expand = true;
+
+        if (minWidth === undefined) {
+            minWidth = 0;
+        }
+        if (minHeight === undefined) {
+            minHeight = 0;
+        }
+    }
 
     var config = this.getSizerConfig(gameObject);
+
     config.align = align;
-    config.alignOffsetX = offsetX;
-    config.alignOffsetY = offsetY;
+
     config.padding = GetBoundsConfig(padding);
 
     if (IsPlainObject(expand)) {
@@ -85,6 +104,11 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
             gameObject.minHeight = (minHeight === undefined) ? GetDisplayHeight(gameObject) : minHeight;
         }
     }
+
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
+
+    config.aspectRatio = aspectRatio;
 
     if (this.sizerChildren.hasOwnProperty(childKey)) {
         this.sizerChildren[childKey].destroy();

@@ -1,5 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
+import FitToSize from '../../../plugins/utils/size/FitTo.js';
 import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import CheckSize from '../basesizer/utils/CheckSize.js';
 
@@ -10,7 +11,7 @@ var LayoutChildren = function () {
     var innerWidth = this.innerWidth,
         innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
-    var childWidth, childHeight;
+    var childWidth, childHeight, childSize;
     // Layout current page
     var children = this.sizerChildren;
     for (var key in children) {
@@ -24,23 +25,26 @@ var LayoutChildren = function () {
 
         PreLayoutChild.call(this, child);
 
+        childWidth = this.getExpandedChildWidth(child);
+        childHeight = this.getExpandedChildHeight(child);
+
+        if (childConfig.aspectRatio > 0) {
+            sourceSize.width = childConfig.aspectRatio;
+            sourceSize.height = 1;
+            targetSize.width = childWidth;
+            targetSize.height = childHeight;
+
+            childSize = FitToSize(sourceSize, targetSize, true, true);
+
+            childWidth = childSize.width;
+            childHeight = childSize.height;
+        }
+
         // Set size
         if (child.isRexSizer) {
-            child.runLayout(
-                this,
-                this.getExpandedChildWidth(child),
-                this.getExpandedChildHeight(child)
-            );
+            child.runLayout(this, childWidth, childHeight);
             CheckSize(child, this);
         } else {
-            childWidth = undefined;
-            childHeight = undefined;
-            if (childConfig.expandWidth) { // Expand width
-                childWidth = innerWidth - padding.left - padding.right;
-            }
-            if (childConfig.expandHeight) { // Expand height
-                childHeight = innerHeight - padding.top - padding.bottom;
-            }
             ResizeGameObject(child, childWidth, childHeight);
         }
 
@@ -56,5 +60,8 @@ var LayoutChildren = function () {
         );
     }
 }
+
+var sourceSize = {};
+var targetSize = {};
 
 export default LayoutChildren;

@@ -190,13 +190,14 @@ or
 sizer.add(child,
     {
         key: undefined,
-        align: 'center',
+        align: 'center',     
         offsetX: 0,
-        offsetY: 0,
+        offsetY: 0,   
         padding: {left: 0, right: 0, top: 0, bottom: 0},
         expand: true,        // expand: {width, height}
         minWidth: undefined,
-        minHeight: undefined
+        minHeight: undefined,
+        aspectRatio: 0,
     }
 );
 ```
@@ -248,6 +249,10 @@ sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offs
         - `{width: true, height: true}` : Expand width and height of child.
 - `minWidth` : Minimum width of normal (non-sizer) game object, used when expand width mode. Default value is current display width.
 - `minHeight` : Minimum height of normal (non-sizer) game object, used when expand height mode. Default value is current display height.
+- `aspectRatio` : Keep aspect ratio after layout.
+    - `0` : Don't keep aspect ratio. Default behavior.
+    - `true` : Keep aspect ratio via current size.
+    - A number : Keep aspect ratio via given value.
 
 ### Layout children
 

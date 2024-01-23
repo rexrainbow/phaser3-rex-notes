@@ -52,6 +52,7 @@ declare class OverlapSizer extends BaseSizer {
             key?: string,
 
             align?: OverlapSizer.AlignTypes,
+
             offsetX?: number,
             offsetY?: number,
 
@@ -64,8 +65,9 @@ declare class OverlapSizer extends BaseSizer {
             },
 
             minWidth?: number,
-
             minHeight?: number,
+
+            aspectRatio?: true | number
         }
     ): this;
 
@@ -83,6 +85,7 @@ declare class OverlapSizer extends BaseSizer {
         minHeight?: number,
         offsetX?: number,
         offsetY?: number,
+        aspectRatio?: true | number
     ): this;
 
     remove(
