@@ -9749,6 +9749,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/MWKWpyX">Overlap</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/MWxvbJw">Aspect ratio</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/WNpoMzx">Fit viewport</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -9913,13 +9914,14 @@
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span><span class="w">     </span>
 <span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">   </span>
 <span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">},</span>
 <span class="w">        </span><span class="nx">expand</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">        </span><span class="c1">// expand: {width, height}</span>
 <span class="w">        </span><span class="nx">minWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">        </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">aspectRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -9979,6 +9981,12 @@
 </li>
 <li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when expand width mode. Default value is current display width.</li>
 <li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when expand height mode. Default value is current display height.</li>
+<li><code>aspectRatio</code> : Keep aspect ratio after layout.<ul>
+<li><code>0</code> : Don't keep aspect ratio. Default behavior.</li>
+<li><code>true</code> : Keep aspect ratio via current size.</li>
+<li>A number : Keep aspect ratio via given value.</li>
+</ul>
+</li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
