@@ -12044,6 +12044,10 @@
       }, _assertThisInitialized(_this)).on('drag', function () {
         OnDragSplitter.call(this);
         this.emit('splitter.drag', splitter, this.splitRatio);
+      }, _assertThisInitialized(_this)).on('pointerover', function () {
+        this.emit('splitter.over', splitter, this.splitRatio);
+      }, _assertThisInitialized(_this)).on('pointerout', function () {
+        this.emit('splitter.out', splitter, this.splitRatio);
       }, _assertThisInitialized(_this));
       return _this;
     }

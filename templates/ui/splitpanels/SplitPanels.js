@@ -106,7 +106,13 @@ class SplitPanels extends Sizer {
             .on('drag', function () {
                 OnDragSplitter.call(this);
                 this.emit('splitter.drag', splitter, this.splitRatio);
-            }, this);
+            }, this)
+            .on('pointerover', function () {
+                this.emit('splitter.over', splitter, this.splitRatio);
+            }, this)
+            .on('pointerout', function () {
+                this.emit('splitter.out', splitter, this.splitRatio);
+            }, this)
 
     }
 

@@ -288,6 +288,18 @@ See also - [dirty](ui-basesizer.md#dirty)
         //
     }, scope);
     ```
+- On pointer-over splitter
+    ```javascript
+    splitPanels.on('splitter.over', function(splitter, splitRatio){
+        //
+    }, scope);
+    ```
+- On pointer-out splitter
+    ```javascript
+    splitPanels.on('splitter.out', function(splitter, splitRatio){
+        //
+    }, scope);
+    ```
 
 ### Other properties
 
