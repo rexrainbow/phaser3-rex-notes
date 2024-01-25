@@ -3,22 +3,31 @@ import ConfirmDialog from './ConfirmDialog.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ConfirmAction = function (scene, config) {
-    var dialogStyle = config.style;
-    dialogStyle.buttonMode = 2;
+    var dialog = config.dialog;
+    var newDialogMode = !dialog;
+    if (newDialogMode) {
+        var dialogStyle = config.style;
+        dialogStyle.buttonMode = 2;
 
-    var dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
-    scene.add.existing(dialog);
+        dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
+        scene.add.existing(dialog);
+    }
 
     dialog
         .resetDisplayContent(config.content)
         .layout()
 
-    if (config.onCreateDiaog) {
+    if (newDialogMode && config.onCreateDiaog) {
         config.onCreateDiaog(dialog);
     }
 
+    var modalConfig = config.modal;
+    if (modalConfig) {
+        modalConfig.destroy = newDialogMode;
+    }
+
     return dialog
-        .modalPromise(config.modal)
+        .modalPromise(modalConfig)
         .then(function (data) {
             var buttonIndex = data.index;
             var acceptButtonIndex = GetValue(config, 'acceptButtonIndex', 0);

@@ -199,6 +199,7 @@
 1. [UI/Color components](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [UI/Color input](ui-colorinput.md): Color value input field.
 1. [UI/Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
+1. [UI/Confirm action](ui-confirmaction.md): Create a [modal confirm dialog](ui-confirmdialog.md) to invoke action.
 1. [UI/Confrim dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [UI/Dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [UI/Drop down list](ui-dropdownlist.md): A label can open a drop-down list panel.

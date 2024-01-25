@@ -440,6 +440,7 @@ nav:
     - Dialog:
         - Dialog: ui-dialog.md
         - Confirm dialog: ui-confirmdialog.md
+        - Confirm action: ui-confirmaction.md
     - Menu: ui-menu.md
     - Drop down list:
         - Drop down list: ui-dropdownlist.md

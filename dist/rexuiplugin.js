@@ -63957,15 +63957,23 @@
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var ConfirmAction = function ConfirmAction(scene, config) {
-    var dialogStyle = config.style;
-    dialogStyle.buttonMode = 2;
-    var dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
-    scene.add.existing(dialog);
+    var dialog = config.dialog;
+    var newDialogMode = !dialog;
+    if (newDialogMode) {
+      var dialogStyle = config.style;
+      dialogStyle.buttonMode = 2;
+      dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
+      scene.add.existing(dialog);
+    }
     dialog.resetDisplayContent(config.content).layout();
-    if (config.onCreateDiaog) {
+    if (newDialogMode && config.onCreateDiaog) {
       config.onCreateDiaog(dialog);
     }
-    return dialog.modalPromise(config.modal).then(function (data) {
+    var modalConfig = config.modal;
+    if (modalConfig) {
+      modalConfig.destroy = newDialogMode;
+    }
+    return dialog.modalPromise(modalConfig).then(function (data) {
       var buttonIndex = data.index;
       var acceptButtonIndex = GetValue$1(config, 'acceptButtonIndex', 0);
       var rejectButtonIndex = GetValue$1(config, 'rejectButtonIndex', 1);

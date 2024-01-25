@@ -10,19 +10,20 @@ declare namespace ConfirmAction {
     }
 
     interface IConfig {
-        style: ConfirmDialog.IConfig,
-        content: ConfirmDialog.IResetChoiceDisplayContentConfig,
+        dialog?: ConfirmDialog,
+        style?: ConfirmDialog.IConfig,
+        content?: ConfirmDialog.IResetChoiceDisplayContentConfig,
         modal?: Dialog.IModalConfig,
 
-        onCreateDiaog?: (dialog: ConfirmDialog) => void
+        onCreateDiaog?: (dialog: ConfirmDialog) => void,
 
-        acceptButtonIndex?: number,
         accept?: Function,
         acceptScope?: Object,
+        acceptButtonIndex?: number,
 
-        rejectButtonIndex?: number,
         reject?: Function,
         rejectScope?: Object,
+        rejectButtonIndex?: number,
     }
 }
 

@@ -776,7 +776,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 ### Behaviors
 
-1. [Modal promise](modal-promise.md): [Modal behavior](modal.md) wrapped into promise.
+1. [Confirm action](ui-confirmaction.md) : Create a [modal confirm dialog](ui-confirmdialog.md) to invoke action.
+    ```javascript
+    scene.rexUI.confirmAction(scene, config)
+        .then(function(data){ })
+    ```
+1. [Modal promise](modal-promise.md) : [Modal behavior](modal.md) wrapped into promise.
     ```javascript
     scene.rexUI.modalPromise(gameObject, config)
         .then(function(closeEventData){ })
