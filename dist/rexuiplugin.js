@@ -51001,7 +51001,7 @@
       config.onCreateDialog(dialog);
     }
     var modalConfig = config.modal;
-    if (modalConfig) {
+    if (modalConfig && !modalConfig.hasOwnProperty('destroy')) {
       modalConfig.destroy = newDialogMode;
     }
     var acceptButtonIndex = GetValue$12(config, 'acceptButtonIndex', 0);
@@ -51010,7 +51010,7 @@
     var rejectCallback = config.reject;
     var acceptScope = config.acceptScope;
     var rejectScope = config.rejectScope;
-    return dialog.modalPromise(modalConfig).then(function (data) {
+    var onClose = function onClose(data) {
       var buttonIndex = data.index;
       if (buttonIndex === acceptButtonIndex) {
         if (acceptCallback) {
@@ -51025,7 +51025,9 @@
         index: data.index,
         text: data.text
       };
-    });
+    };
+    dialog.modal(modalConfig, onClose);
+    return dialog;
   };
 
   var ConfirmActionButton = /*#__PURE__*/function (_Label) {
@@ -51049,7 +51051,13 @@
       }
       _this.onClickCallback = function () {
         if (this.confirmDialogEnable) {
-          ConfirmAction(scene, this.confirmActionConfig);
+          if (this.confirmDialog) {
+            return;
+          }
+          this.confirmDialog = ConfirmAction(scene, this.confirmActionConfig);
+          this.confirmDialog.once('destroy', function () {
+            this.confirmDialog = undefined;
+          }, this);
         } else {
           this.runAcceptCallback();
         }
@@ -51064,9 +51072,13 @@
         if (!this.scene || this.ignoreDestroy) {
           return;
         }
+        if (this.confirmDialog) {
+          this.confirmDialog.destroy();
+        }
         _get(_getPrototypeOf(ConfirmActionButton.prototype), "destroy", this).call(this, fromScene);
         this.confirmActionConfig = undefined;
         this.onClickCallback = undefined;
+        this.confirmDialog = undefined;
       }
     }, {
       key: "setAcceptCallback",
