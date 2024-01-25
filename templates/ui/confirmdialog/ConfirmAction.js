@@ -1,4 +1,4 @@
-import ConfirmDialog from '../confirmdialog/ConfirmDialog.js';
+import ConfirmDialog from './ConfirmDialog.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -26,22 +26,24 @@ var ConfirmAction = function (scene, config) {
         modalConfig.destroy = newDialogMode;
     }
 
+    var acceptButtonIndex = GetValue(config, 'acceptButtonIndex', 0);
+    var rejectButtonIndex = GetValue(config, 'rejectButtonIndex', 1);
+    var acceptCallback = config.accept;
+    var rejectCallback = config.reject;
+    var acceptScope = config.acceptScope;
+    var rejectScope = config.rejectScope;
+
     return dialog
         .modalPromise(modalConfig)
         .then(function (data) {
             var buttonIndex = data.index;
-            var acceptButtonIndex = GetValue(config, 'acceptButtonIndex', 0);
-            var rejectButtonIndex = GetValue(config, 'rejectButtonIndex', 1);
-            var acceptCallback = config.accept;
-            var rejectCallback = config.reject;
-
             if (buttonIndex === acceptButtonIndex) {
                 if (acceptCallback) {
-                    acceptCallback.call(config.acceptScope);
+                    acceptCallback.call(acceptScope);
                 }
             } else if (buttonIndex === rejectButtonIndex) {
                 if (rejectCallback) {
-                    rejectCallback.call(config.rejectScope);
+                    rejectCallback.call(rejectScope);
                 }
             }
 

@@ -1,4 +1,4 @@
-import ConfirmDialog from '../confirmdialog/ConfirmDialog';
+import ConfirmDialog from './ConfirmDialog';
 import Dialog from '../dialog/Dialog';
 
 export default ConfirmAction;

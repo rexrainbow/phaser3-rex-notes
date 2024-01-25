@@ -100,7 +100,7 @@ import TransitionImagePackFactory from './transitionimagepack/Factory';
 import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
-import ConfirmAction from './confirmaction/ConfirmAction';
+import ConfirmAction from './confirmdialog/ConfirmAction';
 import Edit from './textedit/Edit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal';
