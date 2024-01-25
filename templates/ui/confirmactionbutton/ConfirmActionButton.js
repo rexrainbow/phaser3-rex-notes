@@ -23,7 +23,15 @@ class ConfirmActionButton extends Label {
 
         this.onClickCallback = function () {
             if (this.confirmDialogEnable) {
-                ConfirmAction(scene, this.confirmActionConfig);
+                if (this.confirmDialog) {
+                    return;
+                }
+
+                this.confirmDialog = ConfirmAction(scene, this.confirmActionConfig);
+                this.confirmDialog.once('destroy', function () {
+                    this.confirmDialog = undefined;
+                }, this);
+
             } else {
                 this.runAcceptCallback();
             }
@@ -37,10 +45,15 @@ class ConfirmActionButton extends Label {
             return;
         }
 
+        if (this.confirmDialog) {
+            this.confirmDialog.destroy();
+        }
+
         super.destroy(fromScene);
 
         this.confirmActionConfig = undefined;
         this.onClickCallback = undefined;
+        this.confirmDialog = undefined;
     }
 
     setAcceptCallback(callback, scope) {

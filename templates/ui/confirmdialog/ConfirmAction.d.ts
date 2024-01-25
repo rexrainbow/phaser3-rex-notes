@@ -14,7 +14,6 @@ declare namespace ConfirmAction {
         style?: ConfirmDialog.IConfig,
         content?: ConfirmDialog.IResetChoiceDisplayContentConfig,
         modal?: Dialog.IModalConfig,
-
         onCreateDialog?: (dialog: ConfirmDialog) => void,
 
         accept?: Function,
@@ -30,4 +29,4 @@ declare namespace ConfirmAction {
 declare function ConfirmAction(
     scene: Phaser.Scene,
     config: ConfirmAction.IConfig
-): Promise<ConfirmAction.ReturnDataType>;
+): ConfirmDialog;

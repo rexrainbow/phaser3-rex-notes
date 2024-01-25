@@ -23,9 +23,9 @@ Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback 
     ```
 - Run confirm action
     ```javascript
-    scene.rexUI.confirmAction(scene, config)
-        .then(function(data){ })
+    var dialog = scene.rexUI.confirmAction(scene, config);
     ```
+    - `dialog` : Confirm dialog will be destroy after clicking any button.
 
 #### Import plugin
 
@@ -53,9 +53,10 @@ Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback 
     ```
 - Run confirm action
     ```javascript
-    scene.rexUI.confirmAction(scene, config)
-        .then(function(data){ })
+    var dialog = scene.rexUI.confirmAction(scene, config)
     ```
+    - `dialog` : Confirm dialog will be destroy after clicking any button.
+
 #### Import class
 
 - Install rex plugins from npm
@@ -68,14 +69,14 @@ Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback 
     ```
 - Run confirm action
     ```javascript
-    ConfirmAction(scene, config)
-        .then(function(data){ })
+    var dialog = ConfirmAction(scene, config)
     ```
+    - `dialog` : Confirm dialog will be destroy after clicking any button.
 
 ### Run confirm action
 
 ```javascript
-scene.rexUI.confirmAction(scene, {    
+var dialog = scene.rexUI.confirmAction(scene, {    
     style: confirmDialogConfig
 
     content: confirmDialogResetChoiceDisplayContentConfig,
@@ -113,7 +114,4 @@ scene.rexUI.confirmAction(scene, {
     - `acceptButtonIndex` : Index of accept/OK button on Confirm dialog. Default value is `0`.
     - `reject`, `rejectScope` : Callback invoking when click reject/cancel button of Confirm dialog
     - `rejectButtonIndex` : Index of reject/cancel button on Confirm dialog. Default value is `1`.
-- Return promise, with parameter `{index, text}`.
-
-
-Destroy confirm dialog after clicking accept/OK, or reject/cancel button.
+- `dialog` : Confirm dialog will be destroy after clicking any button.

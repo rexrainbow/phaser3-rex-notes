@@ -22,7 +22,7 @@ var ConfirmAction = function (scene, config) {
     }
 
     var modalConfig = config.modal;
-    if (modalConfig) {
+    if (modalConfig && !modalConfig.hasOwnProperty('destroy')) {
         modalConfig.destroy = newDialogMode;
     }
 
@@ -33,26 +33,26 @@ var ConfirmAction = function (scene, config) {
     var acceptScope = config.acceptScope;
     var rejectScope = config.rejectScope;
 
-    return dialog
-        .modalPromise(modalConfig)
-        .then(function (data) {
-            var buttonIndex = data.index;
-            if (buttonIndex === acceptButtonIndex) {
-                if (acceptCallback) {
-                    acceptCallback.call(acceptScope);
-                }
-            } else if (buttonIndex === rejectButtonIndex) {
-                if (rejectCallback) {
-                    rejectCallback.call(rejectScope);
-                }
+    var onClose = function (data) {
+        var buttonIndex = data.index;
+        if (buttonIndex === acceptButtonIndex) {
+            if (acceptCallback) {
+                acceptCallback.call(acceptScope);
             }
-
-            return {
-                index: data.index,
-                text: data.text
+        } else if (buttonIndex === rejectButtonIndex) {
+            if (rejectCallback) {
+                rejectCallback.call(rejectScope);
             }
-        })
+        }
 
+        return {
+            index: data.index,
+            text: data.text
+        }
+    }
+    dialog.modal(modalConfig, onClose);
+
+    return dialog;
 }
 
 export default ConfirmAction;

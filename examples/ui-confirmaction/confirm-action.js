@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var print = this.add.text(0,0,'');
+        var print = this.add.text(0, 0, '');
 
         var dialogStyle = {
             anchor: {
@@ -72,16 +72,17 @@ class Demo extends Phaser.Scene {
         }
 
         this.rexUI.confirmAction(this, {
+            style: dialogStyle,
+            content: dialogContent,
+
             accept: function () {
                 print.text += 'Accept\n';
             },
 
-            style: dialogStyle,
-            content: dialogContent,
+            reject: function () {
+                print.text += 'Reject\n';
+            },
         })
-            .then(function (data) {
-                print.text += `Finally, ${JSON.stringify(data)}\n`;
-            })
     }
 
     update() { }
