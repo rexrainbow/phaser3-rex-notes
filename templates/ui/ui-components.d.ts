@@ -54,6 +54,7 @@ import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
 import FileSelectorButton from './fileselectorbutton/FileSelectorButton';
 import Dialog from './dialog/Dialog';
 import ConfirmDialog from './confirmdialog/ConfirmDialog';
+import ConfirmActionButton from './confirmactionbutton/ConfirmActionButton';
 import HolyGrail from './holygrail/HolyGrail';
 import Tabs from './tabs/Tabs';
 import Slider from './slider/Slider';
@@ -182,6 +183,7 @@ export {
     FileSelectorButton,
     Dialog,
     ConfirmDialog,
+    ConfirmActionButton,
     HolyGrail,
     Tabs,
     Slider,

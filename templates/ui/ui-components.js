@@ -55,6 +55,7 @@ import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
 import FileSelectorButton from './fileselectorbutton/FileSelectorButton.js';
 import Dialog from './dialog/Dialog.js';
 import ConfirmDialog from './confirmdialog/ConfirmDialog.js';
+import ConfirmActionButton from './confirmactionbutton/ConfirmActionButton.js';
 import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
 import Slider from './slider/Slider.js';
@@ -183,6 +184,7 @@ export {
     FileSelectorButton,
     Dialog,
     ConfirmDialog,
+    ConfirmActionButton,
     HolyGrail,
     Tabs,
     Slider,
