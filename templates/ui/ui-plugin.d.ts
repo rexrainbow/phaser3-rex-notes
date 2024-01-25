@@ -100,6 +100,7 @@ import TransitionImagePackFactory from './transitionimagepack/Factory';
 import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
+import ConfirmAction from './confirmdialog/ConfirmAction';
 import Edit from './textedit/Edit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal';
@@ -224,6 +225,7 @@ declare class UIPlugin extends Phaser.Plugins.ScenePlugin {
 
     easeMoveTo: typeof EaseMoveTo;
     easeMoveFrom: typeof EaseMoveFrom;
+    confirmAction: typeof ConfirmAction;
     edit: typeof Edit;
     fadeIn: typeof FadeIn;
     fadeOutDestroy: typeof FadeOutDestroy;

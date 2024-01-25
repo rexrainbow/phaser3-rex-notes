@@ -107,6 +107,7 @@ import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import RemoveFromParent from './utils/RemoveFromParent.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import { Show, Hide, IsShown, } from './utils/Hide.js';
+import ConfirmAction from './confirmdialog/ConfirmAction.js';
 import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
@@ -154,6 +155,7 @@ var methods = {
     hide: Hide,
     show: Show,
     isShown: IsShown,
+    confirmAction: ConfirmAction,
     edit: Edit,
     wrapExpandText: WrapExpandText,
     fontSizeExpandText: FontSizeExpandText,

@@ -111,6 +111,7 @@ import {
     Hide,
     IsShown,
 } from './utils/Hide';
+import ConfirmAction from './confirmdialog/ConfirmAction';
 import Edit from './textedit/Edit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
@@ -237,6 +238,7 @@ export {
     Show,
     Hide,
     IsShown,
+    ConfirmAction,
     Edit,
     WrapExpandText,
     FontSizeExpandText,
