@@ -418,6 +418,7 @@ nav:
         - Badge label: ui-badgelabel.md
         - Image input label: ui-imageinputlabel.md
         - Exp bar: ui-expbar.md
+        - Confirm action button: ui-confirmactionbutton.md
     - Buttons:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md

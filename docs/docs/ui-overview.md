@@ -87,6 +87,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [Color input](ui-colorinput.md): Color number or color string input field.
 1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
+1. [Confirm action button](ui-confirmactionbutton.md): Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback after clicking button.
 1. [Confirm dialog](ui-confirmdialog.md): Using json style to create confirm dialog.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Drop down list](ui-dropdownlist.md): A [label](ui-label.md) can open a drop-down list panel.
@@ -776,7 +777,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 ### Behaviors
 
-1. [Confirm action](ui-confirmaction.md) : Create a [modal confirm dialog](ui-confirmdialog.md) temporary, to invoke action callback.
+1. [Confirm action](ui-confirmaction.md) : Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback after clicking button.
     ```javascript
     scene.rexUI.confirmAction(scene, config)
         .then(function(data){ })

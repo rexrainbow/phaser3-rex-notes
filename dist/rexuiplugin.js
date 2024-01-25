@@ -51034,9 +51034,12 @@
     function ConfirmActionButton(scene, config) {
       var _this;
       _classCallCheck(this, ConfirmActionButton);
+      if (config === undefined) {
+        config = {};
+      }
       _this = _super.call(this, scene, config);
       _this.type = 'rexConfirmActionButton';
-      _this.confirmActionConfig = Clone$1(config.confirmAction || {});
+      _this.confirmActionConfig = Clone$1(config.confirmDialog || {});
       if (config.accept) {
         _this.setAcceptCallback(config.accept, config.acceptScope);
       }
@@ -51061,6 +51064,20 @@
         this.onClickCallback = undefined;
       }
     }, {
+      key: "setAcceptCallback",
+      value: function setAcceptCallback(callback, scope) {
+        this.confirmActionConfig.accept = callback;
+        this.confirmActionConfig.acceptScope = scope;
+        return this;
+      }
+    }, {
+      key: "setRejectCallback",
+      value: function setRejectCallback(callback, scope) {
+        this.confirmActionConfig.reject = callback;
+        this.confirmActionConfig.rejectScope = scope;
+        return this;
+      }
+    }, {
       key: "setConfirmDialogContent",
       value: function setConfirmDialogContent(content) {
         this.confirmActionConfig.content = content;
@@ -51076,20 +51093,6 @@
       key: "setConfitmDialogModalConfig",
       value: function setConfitmDialogModalConfig(config) {
         this.confirmActionConfig.modal = config;
-        return this;
-      }
-    }, {
-      key: "setAcceptCallback",
-      value: function setAcceptCallback(callback, scope) {
-        this.confirmActionConfig.accept = callback;
-        this.confirmActionConfig.acceptScope = scope;
-        return this;
-      }
-    }, {
-      key: "setRejectCallback",
-      value: function setRejectCallback(callback, scope) {
-        this.confirmActionConfig.reject = callback;
-        this.confirmActionConfig.rejectScope = scope;
         return this;
       }
     }]);

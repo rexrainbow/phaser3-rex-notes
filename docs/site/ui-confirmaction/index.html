@@ -7916,6 +7916,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-confirmactionbutton/" class="md-nav__link">
+        Confirm action button
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9643,7 +9657,7 @@
   <h1>Confirm action</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, to invoke action callback.</p>
+<p>Create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invoke callback after clicking button.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Method</li>
@@ -9711,7 +9725,7 @@
 
 <span class="w">    </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">confirmDialogResetChoiceDisplayContentConfig</span><span class="p">,</span>
 
-<span class="w">    </span><span class="c1">// modal: confirmDialogModalConfig</span>
+<span class="w">    </span><span class="c1">// modal: confirmDialogModalConfig,</span>
 
 <span class="w">    </span><span class="c1">// onCreateDialog: function(dialog) { },</span>
 
@@ -9719,8 +9733,8 @@
 <span class="w">    </span><span class="c1">// acceptScope: </span>
 <span class="w">    </span><span class="c1">// acceptButtonIndex: 0,</span>
 
-<span class="w">    </span><span class="nx">reject</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">    </span><span class="nx">rejectScope</span><span class="o">:</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// reject: function() {},</span>
+<span class="w">    </span><span class="c1">// rejectScope: </span>
 <span class="w">    </span><span class="c1">// rejectButtonIndex: 1,</span>
 <span class="p">})</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

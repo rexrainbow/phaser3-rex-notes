@@ -1,6 +1,6 @@
 ## Introduction
 
-Create a [modal confirm dialog](ui-confirmdialog.md) temporary, to invoke action callback.
+Create a [modal confirm dialog](ui-confirmdialog.md) temporary, invoke callback after clicking button.
 
 - Author: Rex
 - Method
@@ -80,7 +80,7 @@ scene.rexUI.confirmAction(scene, {
 
     content: confirmDialogResetChoiceDisplayContentConfig,
 
-    // modal: confirmDialogModalConfig
+    // modal: confirmDialogModalConfig,
 
     // onCreateDialog: function(dialog) { },
 
@@ -88,8 +88,8 @@ scene.rexUI.confirmAction(scene, {
     // acceptScope: 
     // acceptButtonIndex: 0,
 
-    reject: function() {},
-    rejectScope: 
+    // reject: function() {},
+    // rejectScope: 
     // rejectButtonIndex: 1,
 })
     .then(function(data) {

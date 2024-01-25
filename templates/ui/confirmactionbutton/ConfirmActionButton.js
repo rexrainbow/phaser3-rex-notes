@@ -4,10 +4,14 @@ import Clone from '../../../plugins/utils/object/Clone.js';
 
 class ConfirmActionButton extends Label {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         super(scene, config);
         this.type = 'rexConfirmActionButton';
 
-        this.confirmActionConfig = Clone(config.confirmAction || {});
+        this.confirmActionConfig = Clone(config.confirmDialog || {});
         if (config.accept) {
             this.setAcceptCallback(config.accept, config.acceptScope);
         }
@@ -33,6 +37,18 @@ class ConfirmActionButton extends Label {
         this.onClickCallback = undefined;
     }
 
+    setAcceptCallback(callback, scope) {
+        this.confirmActionConfig.accept = callback;
+        this.confirmActionConfig.acceptScope = scope;
+        return this;
+    }
+
+    setRejectCallback(callback, scope) {
+        this.confirmActionConfig.reject = callback;
+        this.confirmActionConfig.rejectScope = scope;
+        return this;
+    }
+
     setConfirmDialogContent(content) {
         this.confirmActionConfig.content = content;
         return this;
@@ -48,17 +64,6 @@ class ConfirmActionButton extends Label {
         return this;
     }
 
-    setAcceptCallback(callback, scope) {
-        this.confirmActionConfig.accept = callback;
-        this.confirmActionConfig.acceptScope = scope;
-        return this;
-    }
-
-    setRejectCallback(callback, scope) {
-        this.confirmActionConfig.reject = callback;
-        this.confirmActionConfig.rejectScope = scope;
-        return this;
-    }
 }
 
 export default ConfirmActionButton;

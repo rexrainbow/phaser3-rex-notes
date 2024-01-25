@@ -10,7 +10,7 @@ export default ConfirmActionButton;
 declare namespace ConfirmActionButton {
 
     interface IConfig extends Label.IConfig {
-        confirmAction: ConfirmAction.IConfig,
+        confirmDialog: ConfirmAction.IConfig,
 
         accept?: Function,
         acceptScope?: Object,

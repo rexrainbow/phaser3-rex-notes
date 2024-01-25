@@ -76,7 +76,7 @@ class Demo extends Phaser.Scene {
             background: this.add.rectangle(0, 0, 1, 1, COLOR_MAIN).setStrokeStyle(2, 0xffffff),
             text: this.add.text(0, 0, 'Phaser3'),
 
-            confirmAction: {
+            confirmDialog: {
                 style: dialogStyle,
                 content: dialogContent,
             },
