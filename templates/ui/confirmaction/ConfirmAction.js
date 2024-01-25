@@ -1,4 +1,4 @@
-import ConfirmDialog from './ConfirmDialog.js';
+import ConfirmDialog from '../confirmdialog/ConfirmDialog.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -17,8 +17,8 @@ var ConfirmAction = function (scene, config) {
         .resetDisplayContent(config.content)
         .layout()
 
-    if (newDialogMode && config.onCreateDiaog) {
-        config.onCreateDiaog(dialog);
+    if (newDialogMode && config.onCreateDialog) {
+        config.onCreateDialog(dialog);
     }
 
     var modalConfig = config.modal;

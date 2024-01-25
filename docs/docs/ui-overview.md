@@ -776,7 +776,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 ### Behaviors
 
-1. [Confirm action](ui-confirmaction.md) : Create a [modal confirm dialog](ui-confirmdialog.md) to invoke action.
+1. [Confirm action](ui-confirmaction.md) : Create a [modal confirm dialog](ui-confirmdialog.md) temporary, to invoke action callback.
     ```javascript
     scene.rexUI.confirmAction(scene, config)
         .then(function(data){ })

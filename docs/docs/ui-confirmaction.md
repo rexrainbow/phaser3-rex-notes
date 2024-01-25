@@ -1,6 +1,6 @@
 ## Introduction
 
-Create a [modal confirm dialog](ui-confirmdialog.md) to invoke action.
+Create a [modal confirm dialog](ui-confirmdialog.md) temporary, to invoke action callback.
 
 - Author: Rex
 - Method
@@ -82,6 +82,8 @@ scene.rexUI.confirmAction(scene, {
 
     // modal: confirmDialogModalConfig
 
+    // onCreateDialog: function(dialog) { },
+
     accept: function() {},
     // acceptScope: 
     // acceptButtonIndex: 0,
@@ -100,9 +102,18 @@ scene.rexUI.confirmAction(scene, {
     - `style` : [Config parameter of Confirm dialog](ui-confirmdialog.md#add-dialog-object)
     - `content` : [Content strings of title, content, button](ui-confirmdialog.md#reset-display-content).
     - `modal` : [Config parameter of modal method](ui-confirmdialog.md#modal)
+    - `onCreateDialog` : Callback invoking after creating dialog.
+        ```javascript
+        function(dialog) {
+
+        }
+        ```
 - Callbacks
     - `accept`, `acceptScope` : Callback invoking when click accept/OK button of Confirm dialog
     - `acceptButtonIndex` : Index of accept/OK button on Confirm dialog. Default value is `0`.
     - `reject`, `rejectScope` : Callback invoking when click reject/cancel button of Confirm dialog
     - `rejectButtonIndex` : Index of reject/cancel button on Confirm dialog. Default value is `1`.
 - Return promise, with parameter `{index, text}`.
+
+
+Destroy confirm dialog after clicking accept/OK, or reject/cancel button.

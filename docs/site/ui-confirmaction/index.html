@@ -9643,7 +9643,7 @@
   <h1>Confirm action</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Create a <a href="../ui-confirmdialog/">modal confirm dialog</a> to invoke action.</p>
+<p>Create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, to invoke action callback.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Method</li>
@@ -9713,6 +9713,8 @@
 
 <span class="w">    </span><span class="c1">// modal: confirmDialogModalConfig</span>
 
+<span class="w">    </span><span class="c1">// onCreateDialog: function(dialog) { },</span>
+
 <span class="w">    </span><span class="nx">accept</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
 <span class="w">    </span><span class="c1">// acceptScope: </span>
 <span class="w">    </span><span class="c1">// acceptButtonIndex: 0,</span>
@@ -9731,6 +9733,11 @@
 <li><code>style</code> : <a href="../ui-confirmdialog/#add-dialog-object">Config parameter of Confirm dialog</a></li>
 <li><code>content</code> : <a href="../ui-confirmdialog/#reset-display-content">Content strings of title, content, button</a>.</li>
 <li><code>modal</code> : <a href="../ui-confirmdialog/#modal">Config parameter of modal method</a></li>
+<li><code>onCreateDialog</code> : Callback invoking after creating dialog.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">dialog</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Callbacks<ul>
@@ -9742,6 +9749,7 @@
 </li>
 <li>Return promise, with parameter <code>{index, text}</code>.</li>
 </ul>
+<p>Destroy confirm dialog after clicking accept/OK, or reject/cancel button.</p>
 
 
   

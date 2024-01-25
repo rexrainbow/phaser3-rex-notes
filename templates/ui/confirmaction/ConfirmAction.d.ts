@@ -1,4 +1,4 @@
-import ConfirmDialog from './ConfirmDialog';
+import ConfirmDialog from '../confirmdialog/ConfirmDialog';
 import Dialog from '../dialog/Dialog';
 
 export default ConfirmAction;
@@ -15,7 +15,7 @@ declare namespace ConfirmAction {
         content?: ConfirmDialog.IResetChoiceDisplayContentConfig,
         modal?: Dialog.IModalConfig,
 
-        onCreateDiaog?: (dialog: ConfirmDialog) => void,
+        onCreateDialog?: (dialog: ConfirmDialog) => void,
 
         accept?: Function,
         acceptScope?: Object,

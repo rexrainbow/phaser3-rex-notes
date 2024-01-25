@@ -63966,8 +63966,8 @@
       scene.add.existing(dialog);
     }
     dialog.resetDisplayContent(config.content).layout();
-    if (newDialogMode && config.onCreateDiaog) {
-      config.onCreateDiaog(dialog);
+    if (newDialogMode && config.onCreateDialog) {
+      config.onCreateDialog(dialog);
     }
     var modalConfig = config.modal;
     if (modalConfig) {
