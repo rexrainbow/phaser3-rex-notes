@@ -319,6 +319,14 @@ button.setConfitmDialogModalConfig(config);
 
 - `config` : See [Config parameter of modal method](ui-confirmdialog.md#modal)
 
+### Disalbe confirm dialog
+
+Run accept callback directly without confirm dialog.
+
+```javascript
+button.setConfirmDialogEnable(false);
+```
+
 ### Other properties
 
 See [label](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

@@ -11,6 +11,8 @@ class ConfirmActionButton extends Label {
         super(scene, config);
         this.type = 'rexConfirmActionButton';
 
+        this.setConfirmDialogEnable();
+
         this.confirmActionConfig = Clone(config.confirmDialog || {});
         if (config.accept) {
             this.setAcceptCallback(config.accept, config.acceptScope);
@@ -20,7 +22,11 @@ class ConfirmActionButton extends Label {
         }
 
         this.onClickCallback = function () {
-            ConfirmAction(scene, this.confirmActionConfig);
+            if (this.confirmDialogEnable) {
+                ConfirmAction(scene, this.confirmActionConfig);
+            } else {
+                this.runAcceptCallback();
+            }
         }
         this.onClick(this.onClickCallback, this);
     }
@@ -64,6 +70,25 @@ class ConfirmActionButton extends Label {
         return this;
     }
 
+    setConfirmDialogEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.confirmDialogEnable = enable;
+        return this;
+    }
+
+    runAcceptCallback() {
+        var callback = this.confirmActionConfig.accept;
+        var scope = this.confirmActionConfig.acceptScope;
+
+        if (callback) {
+            callback.call(scope);
+        }
+
+        return this;
+    }
 }
 
 export default ConfirmActionButton;

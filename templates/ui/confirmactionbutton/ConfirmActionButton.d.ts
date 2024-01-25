@@ -48,4 +48,9 @@ declare class ConfirmActionButton extends Label {
         scope?: Object
     ): this;
 
+    setConfirmDialogEnable(enable?: boolean): this;
+    confirmDialogEnable: boolean;
+
+    runAcceptCallback(): this;
+
 }

@@ -51039,6 +51039,7 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexConfirmActionButton';
+      _this.setConfirmDialogEnable();
       _this.confirmActionConfig = Clone$1(config.confirmDialog || {});
       if (config.accept) {
         _this.setAcceptCallback(config.accept, config.acceptScope);
@@ -51047,7 +51048,11 @@
         _this.setRejectCallback(config.reject, config.rejectScope);
       }
       _this.onClickCallback = function () {
-        ConfirmAction(scene, this.confirmActionConfig);
+        if (this.confirmDialogEnable) {
+          ConfirmAction(scene, this.confirmActionConfig);
+        } else {
+          this.runAcceptCallback();
+        }
       };
       _this.onClick(_this.onClickCallback, _assertThisInitialized(_this));
       return _this;
@@ -51093,6 +51098,25 @@
       key: "setConfitmDialogModalConfig",
       value: function setConfitmDialogModalConfig(config) {
         this.confirmActionConfig.modal = config;
+        return this;
+      }
+    }, {
+      key: "setConfirmDialogEnable",
+      value: function setConfirmDialogEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.confirmDialogEnable = enable;
+        return this;
+      }
+    }, {
+      key: "runAcceptCallback",
+      value: function runAcceptCallback() {
+        var callback = this.confirmActionConfig.accept;
+        var scope = this.confirmActionConfig.acceptScope;
+        if (callback) {
+          callback.call(scope);
+        }
         return this;
       }
     }]);
