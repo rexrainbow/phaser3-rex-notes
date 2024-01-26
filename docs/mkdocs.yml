@@ -417,8 +417,7 @@ nav:
         - Name value label: ui-namevaluelabel.md
         - Badge label: ui-badgelabel.md
         - Image input label: ui-imageinputlabel.md
-        - Exp bar: ui-expbar.md
-        - Confirm action button: ui-confirmactionbutton.md
+        - Exp bar: ui-expbar.md        
     - Buttons:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md
@@ -440,8 +439,10 @@ nav:
         - Perspective card: ui-perspectivecard.md
     - Dialog:
         - Dialog: ui-dialog.md
-        - Confirm dialog: ui-confirmdialog.md
-        - Confirm action: ui-confirmaction.md
+        - Confirm dialog:
+            - Confirm dialog: ui-confirmdialog.md
+            - Confirm action: ui-confirmaction.md
+            - Confirm action button: ui-confirmactionbutton.md
     - Menu: ui-menu.md
     - Drop down list:
         - Drop down list: ui-dropdownlist.md

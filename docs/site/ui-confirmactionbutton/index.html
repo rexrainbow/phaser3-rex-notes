@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-confirmactionbutton/">
       
       
-        <link rel="prev" href="../ui-expbar/">
+        <link rel="prev" href="../ui-confirmaction/">
       
       
-        <link rel="next" href="../ui-buttons/">
+        <link rel="next" href="../ui-menu/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
@@ -7795,16 +7795,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
       
       
       
@@ -7813,7 +7811,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_15_4">
           <span class="md-nav__icon md-icon"></span>
           Label
@@ -7913,181 +7911,6 @@
       <a href="../ui-expbar/" class="md-nav__link">
         Exp bar
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Confirm action button
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Confirm action button
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-button-object" class="md-nav__link">
-    Add button object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    Layout children
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-callbacks" class="md-nav__link">
-    Set callbacks
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-display-content-of-confirm-dialog" class="md-nav__link">
-    Set display content of confirm dialog
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-style-of-confirm-dialog" class="md-nav__link">
-    Set style of confirm dialog
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-configuration-of-confirm-dialogs-modal-behavior" class="md-nav__link">
-    Set configuration of confirm dialog's modal behavior
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disalbe-confirm-dialog" class="md-nav__link">
-    Disalbe confirm dialog
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -8450,14 +8273,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9" checked>
       
       
       
@@ -8466,7 +8291,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_9_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_9_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_15_9">
           <span class="md-nav__icon md-icon"></span>
           Dialog
@@ -8491,6 +8316,35 @@
               
   
   
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15_9_2" id="__nav_15_9_2_label" tabindex="0">
+          Confirm dialog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_9_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_15_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          Confirm dialog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
       <a href="../ui-confirmdialog/" class="md-nav__link">
@@ -8510,6 +8364,188 @@
       <a href="../ui-confirmaction/" class="md-nav__link">
         Confirm action
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Confirm action button
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Confirm action button
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-button-object" class="md-nav__link">
+    Add button object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-callbacks" class="md-nav__link">
+    Set callbacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-display-content-of-confirm-dialog" class="md-nav__link">
+    Set display content of confirm dialog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-style-of-confirm-dialog" class="md-nav__link">
+    Set style of confirm dialog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-configuration-of-confirm-dialogs-modal-behavior" class="md-nav__link">
+    Set configuration of confirm dialog's modal behavior
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disalbe-confirm-dialog" class="md-nav__link">
+    Disalbe confirm dialog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
