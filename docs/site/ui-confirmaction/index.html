@@ -9771,18 +9771,14 @@
 
 <span class="w">    </span><span class="c1">// onCreateDialog: function(dialog) { },</span>
 
-<span class="w">    </span><span class="nx">accept</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">    </span><span class="c1">// acceptScope: </span>
-<span class="w">    </span><span class="c1">// acceptButtonIndex: 0,</span>
+<span class="w">    </span><span class="nx">confirm</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="c1">// confirmScope: </span>
+<span class="w">    </span><span class="c1">// confirmButtonIndex: 0,</span>
 
-<span class="w">    </span><span class="c1">// reject: function() {},</span>
-<span class="w">    </span><span class="c1">// rejectScope: </span>
-<span class="w">    </span><span class="c1">// rejectButtonIndex: 1,</span>
+<span class="w">    </span><span class="c1">// cancel: function() {},</span>
+<span class="w">    </span><span class="c1">// cancelScope: </span>
+<span class="w">    </span><span class="c1">// cancelButtonIndex: 1,</span>
 <span class="p">})</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// var buttonIndex = data.index;</span>
-<span class="w">        </span><span class="c1">// var buttonText = data.text;</span>
-<span class="w">    </span><span class="p">})</span>
 </code></pre></div>
 <ul>
 <li>Build confirm dialog<ul>
@@ -9797,10 +9793,10 @@
 </ul>
 </li>
 <li>Callbacks<ul>
-<li><code>accept</code>, <code>acceptScope</code> : Callback invoking when click accept/OK button of Confirm dialog</li>
-<li><code>acceptButtonIndex</code> : Index of accept/OK button on Confirm dialog. Default value is <code>0</code>.</li>
-<li><code>reject</code>, <code>rejectScope</code> : Callback invoking when click reject/cancel button of Confirm dialog</li>
-<li><code>rejectButtonIndex</code> : Index of reject/cancel button on Confirm dialog. Default value is <code>1</code>.</li>
+<li><code>confirm</code>, <code>confirmScope</code> : Callback invoking when click confirm/OK button of Confirm dialog</li>
+<li><code>confirmButtonIndex</code> : Index of confirm/OK button on Confirm dialog. Default value is <code>0</code>.</li>
+<li><code>cancel</code>, <code>cancelScope</code> : Callback invoking when click cancel/cancel button of Confirm dialog</li>
+<li><code>cancelButtonIndex</code> : Index of cancel/cancel button on Confirm dialog. Default value is <code>1</code>.</li>
 </ul>
 </li>
 <li><code>dialog</code> : Confirm dialog will be destroy after clicking any button.</li>

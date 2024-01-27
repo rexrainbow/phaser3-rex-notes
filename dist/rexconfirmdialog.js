@@ -27314,6 +27314,7 @@
     }
   };
 
+  Phaser.Utils.Objects.GetValue;
   var Modal = function Modal(config, onClose) {
     if (IsFunction(config)) {
       onClose = config;
@@ -27329,14 +27330,38 @@
     if (!config.hasOwnProperty('manualClose')) {
       config.manualClose = !zeroButtonMode;
     }
-    ModalMethods$1.modal.call(this, config, onClose);
+    var self = this;
+    var onCloseWrap = function onCloseWrap(data) {
+      var buttonIndex = data.index;
+      if (buttonIndex === self.confirmButtonIndex) {
+        self.emit('confirm', data);
+      } else if (buttonIndex === self.cancelButtonIndex) {
+        self.emit('cancel', data);
+      }
+      if (onClose) {
+        onClose(data);
+      }
+    };
+    ModalMethods$1.modal.call(this, config, onCloseWrap);
     return this;
+  };
+
+  var SetButtonIndexMethods = {
+    setConfirmButtonIndex: function setConfirmButtonIndex(index) {
+      this.confirmButtonIndex = index;
+      return this;
+    },
+    setCancelButtonIndex: function setCancelButtonIndex(index) {
+      this.cancelButtonIndex = index;
+      return this;
+    }
   };
 
   var Methods$2 = {
     resetDisplayContent: ResetDisplayContent,
     modal: Modal
   };
+  Object.assign(Methods$2, SetButtonIndexMethods);
 
   var OnPointerOverCallback = function OnPointerOverCallback(button) {
     if (button.setHoverState) {
@@ -31031,6 +31056,10 @@
 
       // Interactive
       RegisterEvents.call(_assertThisInitialized(_this));
+
+      // Assign button index for comfirm, cancel events
+      _this.setConfirmButtonIndex(GetValue(config, 'confirmButtonIndex', 0));
+      _this.setCancelButtonIndex(GetValue(config, 'cancelButtonIndex', 1));
       return _this;
     }
     return _createClass(ConfirmDialog);

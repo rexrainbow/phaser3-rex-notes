@@ -47424,6 +47424,7 @@
     }
   };
 
+  Phaser.Utils.Objects.GetValue;
   var Modal = function Modal(config, onClose) {
     if (IsFunction(config)) {
       onClose = config;
@@ -47439,14 +47440,38 @@
     if (!config.hasOwnProperty('manualClose')) {
       config.manualClose = !zeroButtonMode;
     }
-    ModalMethods$1.modal.call(this, config, onClose);
+    var self = this;
+    var onCloseWrap = function onCloseWrap(data) {
+      var buttonIndex = data.index;
+      if (buttonIndex === self.confirmButtonIndex) {
+        self.emit('confirm', data);
+      } else if (buttonIndex === self.cancelButtonIndex) {
+        self.emit('cancel', data);
+      }
+      if (onClose) {
+        onClose(data);
+      }
+    };
+    ModalMethods$1.modal.call(this, config, onCloseWrap);
     return this;
+  };
+
+  var SetButtonIndexMethods = {
+    setConfirmButtonIndex: function setConfirmButtonIndex(index) {
+      this.confirmButtonIndex = index;
+      return this;
+    },
+    setCancelButtonIndex: function setCancelButtonIndex(index) {
+      this.cancelButtonIndex = index;
+      return this;
+    }
   };
 
   var Methods$6 = {
     resetDisplayContent: ResetDisplayContent,
     modal: Modal
   };
+  Object.assign(Methods$6, SetButtonIndexMethods);
 
   var OnPointerOverCallback = function OnPointerOverCallback(button) {
     if (button.setHoverState) {
@@ -50973,6 +50998,10 @@
 
       // Interactive
       RegisterEvents.call(_assertThisInitialized(_this));
+
+      // Assign button index for comfirm, cancel events
+      _this.setConfirmButtonIndex(GetValue$13(config, 'confirmButtonIndex', 0));
+      _this.setCancelButtonIndex(GetValue$13(config, 'cancelButtonIndex', 1));
       return _this;
     }
     return _createClass(ConfirmDialog);
@@ -50996,7 +51025,7 @@
       dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
       scene.add.existing(dialog);
     }
-    dialog.resetDisplayContent(config.content).layout();
+    dialog.setConfirmButtonIndex(GetValue$12(config, 'confirmButtonIndex', 0)).setCancelButtonIndex(GetValue$12(config, 'cancelButtonIndex', 1)).resetDisplayContent(config.content).layout();
     if (newDialogMode && config.onCreateDialog) {
       config.onCreateDialog(dialog);
     }
@@ -51004,27 +51033,19 @@
     if (modalConfig && !modalConfig.hasOwnProperty('destroy')) {
       modalConfig.destroy = newDialogMode;
     }
-    var acceptButtonIndex = GetValue$12(config, 'acceptButtonIndex', 0);
-    var rejectButtonIndex = GetValue$12(config, 'rejectButtonIndex', 1);
-    var acceptCallback = config.accept;
-    var rejectCallback = config.reject;
-    var acceptScope = config.acceptScope;
-    var rejectScope = config.rejectScope;
+    var confirmCallback = config.confirm;
+    var cancelCallback = config.cancel;
+    var confirmScope = config.confirmScope;
+    var cancelScope = config.cancelScope;
+    if (confirmCallback) {
+      dialog.once('confirm', confirmCallback, confirmScope);
+    }
+    if (cancelCallback) {
+      dialog.once('cancel', cancelCallback, cancelScope);
+    }
     var onClose = function onClose(data) {
-      var buttonIndex = data.index;
-      if (buttonIndex === acceptButtonIndex) {
-        if (acceptCallback) {
-          acceptCallback.call(acceptScope);
-        }
-      } else if (buttonIndex === rejectButtonIndex) {
-        if (rejectCallback) {
-          rejectCallback.call(rejectScope);
-        }
-      }
-      return {
-        index: data.index,
-        text: data.text
-      };
+      dialog.off('confirm', confirmCallback, confirmScope);
+      dialog.off('cancel', cancelCallback, cancelScope);
     };
     dialog.modal(modalConfig, onClose);
     return dialog;
@@ -51043,11 +51064,11 @@
       _this.type = 'rexConfirmActionButton';
       _this.setConfirmDialogEnable();
       _this.confirmActionConfig = Clone$1(config.confirmDialog || {});
-      if (config.accept) {
-        _this.setAcceptCallback(config.accept, config.acceptScope);
+      if (config.confirm) {
+        _this.setConfirmCallback(config.confirm, config.confirmScope);
       }
-      if (config.reject) {
-        _this.setRejectCallback(config.reject, config.rejectScope);
+      if (config.cancel) {
+        _this.setCancelCallback(config.cancel, config.cancelScope);
       }
       _this.onClickCallback = function () {
         if (this.confirmDialogEnable) {
@@ -51059,7 +51080,7 @@
             this.confirmDialog = undefined;
           }, this);
         } else {
-          this.runAcceptCallback();
+          this.runConfirmCallback();
         }
       };
       _this.onClick(_this.onClickCallback, _assertThisInitialized(_this));
@@ -51081,17 +51102,17 @@
         this.confirmDialog = undefined;
       }
     }, {
-      key: "setAcceptCallback",
-      value: function setAcceptCallback(callback, scope) {
-        this.confirmActionConfig.accept = callback;
-        this.confirmActionConfig.acceptScope = scope;
+      key: "setConfirmCallback",
+      value: function setConfirmCallback(callback, scope) {
+        this.confirmActionConfig.confirm = callback;
+        this.confirmActionConfig.confirmScope = scope;
         return this;
       }
     }, {
-      key: "setRejectCallback",
-      value: function setRejectCallback(callback, scope) {
-        this.confirmActionConfig.reject = callback;
-        this.confirmActionConfig.rejectScope = scope;
+      key: "setCancelCallback",
+      value: function setCancelCallback(callback, scope) {
+        this.confirmActionConfig.cancel = callback;
+        this.confirmActionConfig.cancelScope = scope;
         return this;
       }
     }, {
@@ -51122,10 +51143,10 @@
         return this;
       }
     }, {
-      key: "runAcceptCallback",
-      value: function runAcceptCallback() {
-        var callback = this.confirmActionConfig.accept;
-        var scope = this.confirmActionConfig.acceptScope;
+      key: "runConfirmCallback",
+      value: function runConfirmCallback() {
+        var callback = this.confirmActionConfig.confirm;
+        var scope = this.confirmActionConfig.confirmScope;
         if (callback) {
           callback.call(scope);
         }

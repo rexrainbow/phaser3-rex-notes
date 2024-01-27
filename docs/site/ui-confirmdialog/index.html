@@ -8468,6 +8468,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#button-index" class="md-nav__link">
+    Button index
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -8477,6 +8484,13 @@
           <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -9738,6 +9752,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#button-index" class="md-nav__link">
+    Button index
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -9747,6 +9768,13 @@
           <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -10089,6 +10117,10 @@
 <span class="w">    </span><span class="c1">// draggable: false,</span>
 <span class="w">    </span><span class="c1">// sizerEvents: false,</span>
 <span class="w">    </span><span class="c1">// enableLayer: false,</span>
+
+<span class="w">    </span><span class="c1">// confirmButtonIndex: 0,</span>
+<span class="w">    </span><span class="c1">// cancelButtonIndex: 1,</span>
+
 <span class="p">},</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
@@ -10200,6 +10232,7 @@
 <li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
 </ul>
 </li>
+<li><code>confirmButtonIndex</code>, <code>cancelButtonIndex</code> : Button index for firing <code>'confirm'</code>, <code>'cancel'</code> events. Default values are <code>0</code>, <code>1</code>.</li>
 <li><code>creators</code> : Callbacks for creating components.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -10333,6 +10366,9 @@
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="modal">Modal<a class="headerlink" href="#modal" title="Permanent link">&para;</a></h3>
 <p>Pop this dialog as modal dialog, clicking any action button to close this modal dialog.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">modal</span><span class="p">(</span><span class="nx">onClose</span><span class="p">);</span><span class="w">  </span><span class="c1">// Use default modal config</span>
+</code></pre></div>
+<p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">modal</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// cover: {</span>
 <span class="w">    </span><span class="c1">//     color: 0x0,</span>
@@ -10358,8 +10394,7 @@
 <span class="w">    </span><span class="c1">// transitOut: 0,</span>
 
 <span class="w">    </span><span class="c1">// destroy: true</span>
-<span class="p">});</span>
-<span class="c1">// dialog.modal(config, onClose);</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">onClose</span><span class="p">);</span>
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">dialog</span>
@@ -10402,6 +10437,29 @@
 </ul>
 </li>
 </ul>
+<h3 id="button-index">Button index<a class="headerlink" href="#button-index" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Confirm button<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">confirmButtonIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dialog</span><span class="p">.</span><span class="nx">confirmButtonIndex</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setConfirmButtonIndex</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// dialog.confirmButtonIndex = index;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Cancel button<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cancelButtonIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dialog</span><span class="p">.</span><span class="nx">cancelButtonIndex</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setCancelButtonIndex</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// dialog.cancelButtonIndex = index;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get element<ul>
@@ -10434,6 +10492,33 @@
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-dialog/">dialog</a>, <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Click confirm button
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;confirm&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// var index = data.index;</span>
+<span class="w">      </span><span class="c1">// var text = data.text;</span>
+<span class="w">      </span><span class="c1">// var value = data.value;</span>
+<span class="w">      </span><span class="c1">// var button = data.button;</span>
+<span class="w">      </span><span class="c1">// var dialog = data.dialog;</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>data</code> : See <a href="./#modal">modal</a></li>
+</ul>
+</li>
+<li>Click confirm button
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cancel&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// var index = data.index;</span>
+<span class="w">      </span><span class="c1">// var text = data.text;</span>
+<span class="w">      </span><span class="c1">// var value = data.value;</span>
+<span class="w">      </span><span class="c1">// var button = data.button;</span>
+<span class="w">      </span><span class="c1">// var dialog = data.dialog;</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>data</code> : See <a href="./#modal">modal</a></li>
+</ul>
+</li>
+</ul>
 
 
   

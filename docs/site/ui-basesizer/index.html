@@ -10960,6 +10960,9 @@ i.e. user can invoke <code>sizer.addBackground(gameObject)</code> many times.</p
 </ul>
 </li>
 <li>Pop this modal sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">modal</span><span class="p">(</span><span class="nx">onClose</span><span class="p">);</span><span class="w">  </span><span class="c1">// Use default modal config</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">modal</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// cover: {</span>
 <span class="w">    </span><span class="c1">//     color: 0x0,</span>
@@ -10985,8 +10988,7 @@ i.e. user can invoke <code>sizer.addBackground(gameObject)</code> many times.</p
 <span class="w">    </span><span class="c1">// transitOut: 0,</span>
 
 <span class="w">    </span><span class="c1">// destroy: true</span>
-<span class="p">});</span>
-<span class="c1">// sizer.modal(config, onClose);</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">onClose</span><span class="p">);</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>

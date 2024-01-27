@@ -9935,18 +9935,17 @@ create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invo
 <span class="w">        </span><span class="c1">// modal: confirmDialogModalConfig,</span>
 <span class="w">        </span><span class="c1">// onCreateDialog: function(dialog) { },</span>
 
-<span class="w">        </span><span class="c1">// acceptButtonIndex: 0,</span>
-<span class="w">        </span><span class="c1">// rejectButtonIndex: 1,</span>
+<span class="w">        </span><span class="c1">// confirmButtonIndex: 0,</span>
+<span class="w">        </span><span class="c1">// cancelButtonIndex: 1,</span>
 
 <span class="w">    </span><span class="p">},</span>
 
 <span class="w">    </span><span class="c1">// Callbacks</span>
-<span class="w">    </span><span class="nx">accept</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">    </span><span class="c1">// acceptScope: </span>
-<span class="w">    </span><span class="c1">// </span>
+<span class="w">    </span><span class="nx">confirm</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="c1">// confirmScope:</span>
 
-<span class="w">    </span><span class="c1">// reject: function() {},</span>
-<span class="w">    </span><span class="c1">// rejectScope: </span>
+<span class="w">    </span><span class="c1">// cancel: function() {},</span>
+<span class="w">    </span><span class="c1">// cancelScope: </span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9960,17 +9959,17 @@ create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invo
 
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>confirmDialog.acceptButtonIndex</code> : Index of accept/OK button on Confirm dialog. Default value is <code>0</code>.</li>
-<li><code>confirmDialog.rejectButtonIndex</code> : Index of reject/cancel button on Confirm dialog. Default value is <code>1</code>.</li>
+<li><code>confirmDialog.confirmButtonIndex</code> : Index of confirm/OK button on Confirm dialog. Default value is <code>0</code>.</li>
+<li><code>confirmDialog.cancelButtonIndex</code> : Index of cancel/cancel button on Confirm dialog. Default value is <code>1</code>.</li>
 </ul>
 </li>
 <li>Callbacks<ul>
-<li><code>accept</code>, <code>acceptScope</code> : Callback invoking when click accept/OK button of Confirm dialog    </li>
-<li><code>reject</code>, <code>rejectScope</code> : Callback invoking when click reject/cancel button of Confirm dialog</li>
+<li><code>confirm</code>, <code>confirmScope</code> : Callback invoking when click confirm/OK button of Confirm dialog    </li>
+<li><code>cancel</code>, <code>cancelScope</code> : Callback invoking when click cancel/cancel button of Confirm dialog</li>
 </ul>
 </li>
 </ul>
-<p>Destroy confirm dialog after clicking accept/OK, or reject/cancel button.</p>
+<p>Destroy confirm dialog after clicking confirm/OK, or cancel/cancel button.</p>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
@@ -9996,9 +9995,9 @@ create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invo
 <p>See <a href="../ui-label/#get-element">Get element</a></p>
 <h3 id="set-callbacks">Set callbacks<a class="headerlink" href="#set-callbacks" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Callback after clicking accept/OK button of confirm dialog
-    <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setAcceptCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-<span class="c1">// button.setAcceptCallback(callback, scope);</span>
+<li>Callback after clicking confirm/OK button of confirm dialog
+    <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setConfirmCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// button.setConfirmCallback(callback, scope);</span>
 </code></pre></div><ul>
 <li><code>callback</code> : Any function object
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -10007,9 +10006,9 @@ create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invo
 </code></pre></div></li>
 </ul>
 </li>
-<li>Callback after clicking reject/cancel button of confirm dialog
-    <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setRejectCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-<span class="c1">// button.setRejectCallback(callback, scope);</span>
+<li>Callback after clicking cancel/cancel button of confirm dialog
+    <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setCancelCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// button.setCancelCallback(callback, scope);</span>
 </code></pre></div><ul>
 <li><code>callback</code> : Any function object
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -10115,7 +10114,7 @@ create a <a href="../ui-confirmdialog/">modal confirm dialog</a> temporary, invo
 <li><code>config</code> : See <a href="../ui-confirmdialog/#modal">Config parameter of modal method</a></li>
 </ul>
 <h3 id="disalbe-confirm-dialog">Disalbe confirm dialog<a class="headerlink" href="#disalbe-confirm-dialog" title="Permanent link">&para;</a></h3>
-<p>Run accept callback directly without confirm dialog.</p>
+<p>Run confirm callback directly without confirm dialog.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setConfirmDialogEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
