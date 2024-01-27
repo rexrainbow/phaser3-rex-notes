@@ -92,6 +92,10 @@ class ConfirmDialog extends Dialog {
 
         // Interactive
         RegisterEvents.call(this);
+
+        // Assign button index for comfirm, cancel events
+        this.setConfirmButtonIndex(GetValue(config, 'confirmButtonIndex', 0));
+        this.setCancelButtonIndex(GetValue(config, 'cancelButtonIndex', 1));
     }
 }
 

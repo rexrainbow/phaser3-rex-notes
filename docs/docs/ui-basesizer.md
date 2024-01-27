@@ -681,6 +681,10 @@ sizer.pushIntoBounds(bounds);
         ```
 2. Pop this modal sizer
     ```javascript
+    sizer.modal(onClose);  // Use default modal config
+    ```
+    or
+    ```javascript
     sizer.modal({
         // cover: {
         //     color: 0x0,
@@ -706,8 +710,7 @@ sizer.pushIntoBounds(bounds);
         // transitOut: 0,
     
         // destroy: true
-    });
-    // sizer.modal(config, onClose);
+    }, onClose);
     ```
     or
     ```javascript

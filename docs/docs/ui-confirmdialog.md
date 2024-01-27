@@ -325,6 +325,10 @@ var dialog = scene.rexUI.add.confirmDialog({
     // draggable: false,
     // sizerEvents: false,
     // enableLayer: false,
+
+    // confirmButtonIndex: 0,
+    // cancelButtonIndex: 1,
+
 }, creators);
 ```
 
@@ -396,6 +400,7 @@ var dialog = scene.rexUI.add.confirmDialog({
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+- `confirmButtonIndex`, `cancelButtonIndex` : Button index for firing `'confirm'`, `'cancel'` events. Default values are `0`, `1`.
 - `creators` : Callbacks for creating components.
     ```javascript
     {
@@ -541,6 +546,12 @@ See also - [dirty](ui-basesizer.md#dirty)
 Pop this dialog as modal dialog, clicking any action button to close this modal dialog.
 
 ```javascript
+dialog.modal(onClose);  // Use default modal config
+```
+
+or
+
+```javascript
 dialog.modal({
     // cover: {
     //     color: 0x0,
@@ -566,8 +577,7 @@ dialog.modal({
     // transitOut: 0,
 
     // destroy: true
-});
-// dialog.modal(config, onClose);
+}, onClose);
 ```
 
 or
@@ -603,6 +613,29 @@ dialog
             - `undefined` : Default value
         - `data.button` : Clicked button game object.
         - `data.dialog` : This dialog game object.
+
+### Button index
+
+- Confirm button
+    - Get
+        ```javascript
+        var confirmButtonIndex = dialog.confirmButtonIndex;
+        ```
+    - Set
+        ```javascript
+        dialog.setConfirmButtonIndex(index);
+        // dialog.confirmButtonIndex = index;
+        ```
+- Cancel button
+    - Get
+        ```javascript
+        var cancelButtonIndex = dialog.cancelButtonIndex;
+        ```
+    - Set
+        ```javascript
+        dialog.setCancelButtonIndex(index);
+        // dialog.cancelButtonIndex = index;
+        ```
 
 ### Get element
 
@@ -640,3 +673,28 @@ dialog
 ### Other properties
 
 See [dialog](ui-dialog.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+
+### Events
+
+- Click confirm button
+    ```javascript
+    dialog.on('confirm', function (data) {
+          // var index = data.index;
+          // var text = data.text;
+          // var value = data.value;
+          // var button = data.button;
+          // var dialog = data.dialog;
+      }, scope);
+    ```
+    - `data` : See [modal](ui-confirmdialog.md#modal)
+- Click confirm button
+    ```javascript
+    dialog.on('cancel', function (data) {
+          // var index = data.index;
+          // var text = data.text;
+          // var value = data.value;
+          // var button = data.button;
+          // var dialog = data.dialog;
+    }, scope);
+    ```
+    - `data` : See [modal](ui-confirmdialog.md#modal)

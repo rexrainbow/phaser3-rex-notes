@@ -121,6 +121,12 @@ declare class ConfirmDialog extends Dialog {
         creators?: ConfirmDialog.ICreatorsConfig
     );
 
+    setConfirmButtonIndex(index: number): this;
+    confirmButtonIndex: number;
+
+    setCancelButtonIndex(index: number): this;
+    cancelButtonIndex: number;
+
     resetDisplayContent(
         config?: ConfirmDialog.IResetDisplayContentConfig
     ): this;
