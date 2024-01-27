@@ -75,12 +75,12 @@ class Demo extends Phaser.Scene {
             style: dialogStyle,
             content: dialogContent,
 
-            accept: function () {
-                print.text += 'Accept\n';
+            confirm: function () {
+                print.text += 'confirm\n';
             },
 
-            reject: function () {
-                print.text += 'Reject\n';
+            cancel: function () {
+                print.text += 'cancel\n';
             },
         })
     }

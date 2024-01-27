@@ -14,6 +14,8 @@ var ConfirmAction = function (scene, config) {
     }
 
     dialog
+        .setConfirmButtonIndex(GetValue(config, 'confirmButtonIndex', 0))
+        .setCancelButtonIndex(GetValue(config, 'cancelButtonIndex', 1))
         .resetDisplayContent(config.content)
         .layout()
 
@@ -26,30 +28,23 @@ var ConfirmAction = function (scene, config) {
         modalConfig.destroy = newDialogMode;
     }
 
-    var acceptButtonIndex = GetValue(config, 'acceptButtonIndex', 0);
-    var rejectButtonIndex = GetValue(config, 'rejectButtonIndex', 1);
-    var acceptCallback = config.accept;
-    var rejectCallback = config.reject;
-    var acceptScope = config.acceptScope;
-    var rejectScope = config.rejectScope;
+    var confirmCallback = config.confirm;
+    var cancelCallback = config.cancel;
+    var confirmScope = config.confirmScope;
+    var cancelScope = config.cancelScope;
+
+    if (confirmCallback) {
+        dialog.once('confirm', confirmCallback, confirmScope);
+    }
+    if (cancelCallback) {
+        dialog.once('cancel', cancelCallback, cancelScope);
+    }
 
     var onClose = function (data) {
-        var buttonIndex = data.index;
-        if (buttonIndex === acceptButtonIndex) {
-            if (acceptCallback) {
-                acceptCallback.call(acceptScope);
-            }
-        } else if (buttonIndex === rejectButtonIndex) {
-            if (rejectCallback) {
-                rejectCallback.call(rejectScope);
-            }
-        }
-
-        return {
-            index: data.index,
-            text: data.text
-        }
+        dialog.off('confirm', confirmCallback, confirmScope);
+        dialog.off('cancel', cancelCallback, cancelScope);
     }
+
     dialog.modal(modalConfig, onClose);
 
     return dialog;

@@ -16,13 +16,13 @@ declare namespace ConfirmAction {
         modal?: Dialog.IModalConfig,
         onCreateDialog?: (dialog: ConfirmDialog) => void,
 
-        accept?: Function,
-        acceptScope?: Object,
-        acceptButtonIndex?: number,
+        confirm?: Function,
+        confirmScope?: Object,
+        confirmButtonIndex?: number,
 
-        reject?: Function,
-        rejectScope?: Object,
-        rejectButtonIndex?: number,
+        cancel?: Function,
+        cancelScope?: Object,
+        cancelButtonIndex?: number,
     }
 }
 

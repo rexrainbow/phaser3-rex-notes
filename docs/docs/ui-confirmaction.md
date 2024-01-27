@@ -85,18 +85,14 @@ var dialog = scene.rexUI.confirmAction(scene, {
 
     // onCreateDialog: function(dialog) { },
 
-    accept: function() {},
-    // acceptScope: 
-    // acceptButtonIndex: 0,
+    confirm: function() {},
+    // confirmScope: 
+    // confirmButtonIndex: 0,
 
-    // reject: function() {},
-    // rejectScope: 
-    // rejectButtonIndex: 1,
+    // cancel: function() {},
+    // cancelScope: 
+    // cancelButtonIndex: 1,
 })
-    .then(function(data) {
-        // var buttonIndex = data.index;
-        // var buttonText = data.text;
-    })
 ```
 
 - Build confirm dialog
@@ -110,8 +106,8 @@ var dialog = scene.rexUI.confirmAction(scene, {
         }
         ```
 - Callbacks
-    - `accept`, `acceptScope` : Callback invoking when click accept/OK button of Confirm dialog
-    - `acceptButtonIndex` : Index of accept/OK button on Confirm dialog. Default value is `0`.
-    - `reject`, `rejectScope` : Callback invoking when click reject/cancel button of Confirm dialog
-    - `rejectButtonIndex` : Index of reject/cancel button on Confirm dialog. Default value is `1`.
+    - `confirm`, `confirmScope` : Callback invoking when click confirm/OK button of Confirm dialog
+    - `confirmButtonIndex` : Index of confirm/OK button on Confirm dialog. Default value is `0`.
+    - `cancel`, `cancelScope` : Callback invoking when click cancel/cancel button of Confirm dialog
+    - `cancelButtonIndex` : Index of cancel/cancel button on Confirm dialog. Default value is `1`.
 - `dialog` : Confirm dialog will be destroy after clicking any button.
