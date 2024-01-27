@@ -14,11 +14,11 @@ class ConfirmActionButton extends Label {
         this.setConfirmDialogEnable();
 
         this.confirmActionConfig = Clone(config.confirmDialog || {});
-        if (config.accept) {
-            this.setAcceptCallback(config.accept, config.acceptScope);
+        if (config.confirm) {
+            this.setConfirmCallback(config.confirm, config.confirmScope);
         }
-        if (config.reject) {
-            this.setRejectCallback(config.reject, config.rejectScope);
+        if (config.cancel) {
+            this.setCancelCallback(config.cancel, config.cancelScope);
         }
 
         this.onClickCallback = function () {
@@ -33,7 +33,7 @@ class ConfirmActionButton extends Label {
                 }, this);
 
             } else {
-                this.runAcceptCallback();
+                this.runConfirmCallback();
             }
         }
         this.onClick(this.onClickCallback, this);
@@ -56,15 +56,15 @@ class ConfirmActionButton extends Label {
         this.confirmDialog = undefined;
     }
 
-    setAcceptCallback(callback, scope) {
-        this.confirmActionConfig.accept = callback;
-        this.confirmActionConfig.acceptScope = scope;
+    setConfirmCallback(callback, scope) {
+        this.confirmActionConfig.confirm = callback;
+        this.confirmActionConfig.confirmScope = scope;
         return this;
     }
 
-    setRejectCallback(callback, scope) {
-        this.confirmActionConfig.reject = callback;
-        this.confirmActionConfig.rejectScope = scope;
+    setCancelCallback(callback, scope) {
+        this.confirmActionConfig.cancel = callback;
+        this.confirmActionConfig.cancelScope = scope;
         return this;
     }
 
@@ -92,9 +92,9 @@ class ConfirmActionButton extends Label {
         return this;
     }
 
-    runAcceptCallback() {
-        var callback = this.confirmActionConfig.accept;
-        var scope = this.confirmActionConfig.acceptScope;
+    runConfirmCallback() {
+        var callback = this.confirmActionConfig.confirm;
+        var scope = this.confirmActionConfig.confirmScope;
 
         if (callback) {
             callback.call(scope);

@@ -81,7 +81,7 @@ class Demo extends Phaser.Scene {
                 content: dialogContent,
             },
 
-            accept: function () {
+            confirm: function () {
                 window.open('https://phaser.io/');
             },
         })

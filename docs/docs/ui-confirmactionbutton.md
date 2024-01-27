@@ -129,18 +129,17 @@ var button = scene.rexUI.confirmActionButton({
         // modal: confirmDialogModalConfig,
         // onCreateDialog: function(dialog) { },
 
-        // acceptButtonIndex: 0,
-        // rejectButtonIndex: 1,
+        // confirmButtonIndex: 0,
+        // cancelButtonIndex: 1,
 
     },
     
     // Callbacks
-    accept: function() {},
-    // acceptScope: 
-    // 
+    confirm: function() {},
+    // confirmScope:
 
-    // reject: function() {},
-    // rejectScope: 
+    // cancel: function() {},
+    // cancelScope: 
 });
 ```
 
@@ -155,14 +154,14 @@ var button = scene.rexUI.confirmActionButton({
 
         }
         ```
-    - `confirmDialog.acceptButtonIndex` : Index of accept/OK button on Confirm dialog. Default value is `0`.
-    - `confirmDialog.rejectButtonIndex` : Index of reject/cancel button on Confirm dialog. Default value is `1`.
+    - `confirmDialog.confirmButtonIndex` : Index of confirm/OK button on Confirm dialog. Default value is `0`.
+    - `confirmDialog.cancelButtonIndex` : Index of cancel/cancel button on Confirm dialog. Default value is `1`.
 - Callbacks
-    - `accept`, `acceptScope` : Callback invoking when click accept/OK button of Confirm dialog    
-    - `reject`, `rejectScope` : Callback invoking when click reject/cancel button of Confirm dialog
+    - `confirm`, `confirmScope` : Callback invoking when click confirm/OK button of Confirm dialog    
+    - `cancel`, `cancelScope` : Callback invoking when click cancel/cancel button of Confirm dialog
 
 
-Destroy confirm dialog after clicking accept/OK, or reject/cancel button.
+Destroy confirm dialog after clicking confirm/OK, or cancel/cancel button.
 
 ### Custom class
 
@@ -198,10 +197,10 @@ See [Get element](ui-label.md#get-element)
 
 ### Set callbacks
 
-- Callback after clicking accept/OK button of confirm dialog
+- Callback after clicking confirm/OK button of confirm dialog
     ```javascript
-    button.setAcceptCallback(callback);
-    // button.setAcceptCallback(callback, scope);
+    button.setConfirmCallback(callback);
+    // button.setConfirmCallback(callback, scope);
     ```
     - `callback` : Any function object
         ```javascript
@@ -209,10 +208,10 @@ See [Get element](ui-label.md#get-element)
 
         }
         ```
-- Callback after clicking reject/cancel button of confirm dialog
+- Callback after clicking cancel/cancel button of confirm dialog
     ```javascript
-    button.setRejectCallback(callback);
-    // button.setRejectCallback(callback, scope);
+    button.setCancelCallback(callback);
+    // button.setCancelCallback(callback, scope);
     ```
     - `callback` : Any function object
         ```javascript
@@ -321,7 +320,7 @@ button.setConfitmDialogModalConfig(config);
 
 ### Disalbe confirm dialog
 
-Run accept callback directly without confirm dialog.
+Run confirm callback directly without confirm dialog.
 
 ```javascript
 button.setConfirmDialogEnable(false);

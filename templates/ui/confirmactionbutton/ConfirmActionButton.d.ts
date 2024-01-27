@@ -12,11 +12,11 @@ declare namespace ConfirmActionButton {
     interface IConfig extends Label.IConfig {
         confirmDialog: ConfirmAction.IConfig,
 
-        accept?: Function,
-        acceptScope?: Object,
+        confirm?: Function,
+        confirmScope?: Object,
 
-        reject?: Function,
-        rejectScope?: Object,
+        cancel?: Function,
+        cancelScope?: Object,
     }
 }
 
@@ -38,12 +38,12 @@ declare class ConfirmActionButton extends Label {
         config: Dialog.IModalConfig
     ): this;
 
-    setAcceptCallback(
+    setConfirmCallback(
         callback?: Function,
         scope?: Object
     ): this;
 
-    setRejectCallback(
+    setCancelCallback(
         callback?: Function,
         scope?: Object
     ): this;
@@ -51,6 +51,6 @@ declare class ConfirmActionButton extends Label {
     setConfirmDialogEnable(enable?: boolean): this;
     confirmDialogEnable: boolean;
 
-    runAcceptCallback(): this;
+    runConfirmCallback(): this;
 
 }
