@@ -7,6 +7,7 @@ CheckP3Version();
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const GameObject = Phaser.GameObjects.GameObject;
+const UUID = Phaser.Utils.String.UUID;
 
 class Canvas extends GameObject {
     constructor(scene, x, y, width, height) {
@@ -44,7 +45,9 @@ class Canvas extends GameObject {
         this._crop = this.resetCropObject();
 
         //  Create a Texture for this Text object
-        this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+        this._textureKey = UUID();
+
+        this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
 
         //  Get the frame
         this.frame = this.texture.get();
@@ -63,10 +66,15 @@ class Canvas extends GameObject {
 
     preDestroy() {
         CanvasPool.remove(this.canvas);
-        this.texture.destroy();
 
         this.canvas = null;
         this.context = null;
+
+        var texture = this.texture;
+
+        if (texture) {
+            texture.destroy();
+        }
     }
 
     get width() {

@@ -15,6 +15,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
+const UUID = Phaser.Utils.String.UUID;
 
 // Reuse objects can increase performance
 var SharedPensPools = null;
@@ -98,7 +99,9 @@ class Text extends TextBase {
         this._crop = this.resetCropObject();
 
         //  Create a Texture for this Text object
-        this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+        this._textureKey = UUID();
+
+        this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
 
         //  Get the frame
         this.frame = this.texture.get();
@@ -186,7 +189,11 @@ class Text extends TextBase {
 
         CanvasPool.remove(this.canvas);
 
-        this.texture.destroy();
+        var texture = this.texture;
+
+        if (texture) {
+            texture.destroy();
+        }
     }
 
     set text(value) {
