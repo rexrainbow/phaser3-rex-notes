@@ -58072,6 +58072,7 @@
       if (background) {
         _this.addBackground(background);
       }
+      var spaceConfig = GetValue$z(config, 'space');
 
       // title
       var defaultAlign = _this.orientation === 1 ? 'left' : 'top';
@@ -58080,7 +58081,13 @@
       _this.add(title, {
         proportion: 0,
         align: align,
-        expand: expand
+        expand: expand,
+        padding: {
+          left: GetValue$z(spaceConfig, 'titleLeft', 0),
+          right: GetValue$z(spaceConfig, 'titleRight', 0),
+          top: GetValue$z(spaceConfig, 'titleTop', 0),
+          bottom: GetValue$z(spaceConfig, 'titleBottom', 0)
+        }
       });
       var toggleByTarget = GetValue$z(config, 'toggleByTarget', undefined);
       var toggleClickConfig = GetValue$z(config, 'toggleClickConfig');
@@ -58106,7 +58113,13 @@
       _this.add(child, {
         proportion: proportion,
         align: align,
-        expand: expand
+        expand: expand,
+        padding: {
+          left: GetValue$z(spaceConfig, 'childLeft', 0),
+          right: GetValue$z(spaceConfig, 'childRight', 0),
+          top: GetValue$z(spaceConfig, 'childTop', 0),
+          bottom: GetValue$z(spaceConfig, 'childBottom', 0)
+        }
       });
       _this.addChildrenMap('title', title);
       _this.addChildrenMap('child', child);
