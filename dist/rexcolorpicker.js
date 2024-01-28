@@ -1901,7 +1901,7 @@
 
   var GetValue$K = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
-  var UUID$1 = Phaser.Utils.String.UUID;
+  var UUID$2 = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
@@ -1947,7 +1947,7 @@
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture(scene.sys.textures, UUID$1(), width, height);
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID$2(), width, height);
     }
 
     // Return a renderTexture
@@ -11881,7 +11881,7 @@
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
-  var UUID = Phaser.Utils.String.UUID;
+  var UUID$1 = Phaser.Utils.String.UUID;
   var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
     AddChild.call(this, gameObject);
     if (IsPlainObject$2(childKey)) {
@@ -11901,7 +11901,7 @@
     }
     var hasValidKey = childKey !== undefined;
     if (!hasValidKey) {
-      childKey = UUID();
+      childKey = UUID$1();
     }
     if (typeof align === 'string') {
       align = AlignConst[align];
@@ -12311,6 +12311,7 @@
   CheckP3Version();
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject = Phaser.GameObjects.GameObject;
+  var UUID = Phaser.Utils.String.UUID;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
@@ -12348,7 +12349,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -12367,9 +12369,12 @@
       key: "preDestroy",
       value: function preDestroy() {
         CanvasPool.remove(this.canvas);
-        this.texture.destroy();
         this.canvas = null;
         this.context = null;
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "width",

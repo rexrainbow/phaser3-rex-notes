@@ -3168,6 +3168,7 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
+  var UUID = Phaser.Utils.String.UUID;
 
   // Reuse objects can increase performance
   var SharedPensPools = null;
@@ -3240,7 +3241,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -3316,7 +3318,10 @@
           this._imageManager = undefined;
         }
         CanvasPool.remove(this.canvas);
-        this.texture.destroy();
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "text",

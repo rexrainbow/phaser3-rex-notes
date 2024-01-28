@@ -3415,6 +3415,7 @@
   CheckP3Version();
   var CanvasPool$4 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$3 = Phaser.GameObjects.GameObject;
+  var UUID$4 = Phaser.Utils.String.UUID;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
@@ -3452,7 +3453,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID$4();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -3471,9 +3473,12 @@
       key: "preDestroy",
       value: function preDestroy() {
         CanvasPool$4.remove(this.canvas);
-        this.texture.destroy();
         this.canvas = null;
         this.context = null;
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "width",
@@ -6435,6 +6440,7 @@
   var GetValue$3m = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM$1 = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
+  var UUID$3 = Phaser.Utils.String.UUID;
 
   // Reuse objects can increase performance
   var SharedPensPools = null;
@@ -6507,7 +6513,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID$3();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -6583,7 +6590,10 @@
           this._imageManager = undefined;
         }
         CanvasPool.remove(this.canvas);
-        this.texture.destroy();
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "text",

@@ -1922,7 +1922,7 @@
 
   var GetValue$1Z = Phaser.Utils.Objects.GetValue;
   var DynamicTexture = Phaser.Textures.DynamicTexture;
-  var UUID$2 = Phaser.Utils.String.UUID;
+  var UUID$4 = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
@@ -1968,7 +1968,7 @@
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture(scene.sys.textures, UUID$2(), width, height);
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID$4(), width, height);
     }
 
     // Return a renderTexture
@@ -18576,6 +18576,7 @@
   var GetValue$16 = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
+  var UUID$3 = Phaser.Utils.String.UUID;
 
   // Reuse objects can increase performance
   var SharedPensPools = null;
@@ -18648,7 +18649,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID$3();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -18724,7 +18726,10 @@
           this._imageManager = undefined;
         }
         CanvasPool$1.remove(this.canvas);
-        this.texture.destroy();
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "text",
@@ -19866,6 +19871,7 @@
   CheckP3Version();
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
+  var UUID$2 = Phaser.Utils.String.UUID;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     var _super = _createSuper(Canvas);
@@ -19903,7 +19909,8 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
+      _this._textureKey = UUID$2();
+      _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
       _this.frame = _this.texture.get();
@@ -19922,9 +19929,12 @@
       key: "preDestroy",
       value: function preDestroy() {
         CanvasPool.remove(this.canvas);
-        this.texture.destroy();
         this.canvas = null;
         this.context = null;
+        var texture = this.texture;
+        if (texture) {
+          texture.destroy();
+        }
       }
     }, {
       key: "width",
