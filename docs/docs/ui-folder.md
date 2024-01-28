@@ -108,6 +108,13 @@ var folder = scene.rexUI.add.folder({
         title: true,
         child: true,
     },
+
+    space: { 
+        left: 0, right:0, top:0, bottom:0, item:0,
+
+        titleLeft: 0, titleRight: 0, titleTop: 0, titleBottom: 0,
+        childLeft: 0, childRight: 0, childTop: 0, childBottom: 0,
+    },
     
     transition: {
         duration: 200,

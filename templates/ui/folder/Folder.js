@@ -31,6 +31,8 @@ class Folder extends Sizer {
             this.addBackground(background);
         }
 
+        var spaceConfig = GetValue(config, 'space');
+
         // title
         var defaultAlign = (this.orientation === 1) ? 'left' : 'top';
         var align = GetValue(config, 'align.title', defaultAlign);
@@ -38,7 +40,15 @@ class Folder extends Sizer {
         this.add(
             title,
             {
-                proportion: 0, align: align, expand: expand,
+                proportion: 0,
+                align: align,
+                expand: expand,
+                padding: {
+                    left: GetValue(spaceConfig, 'titleLeft', 0),
+                    right: GetValue(spaceConfig, 'titleRight', 0),
+                    top: GetValue(spaceConfig, 'titleTop', 0),
+                    bottom: GetValue(spaceConfig, 'titleBottom', 0)
+                }
             }
         );
 
@@ -74,8 +84,15 @@ class Folder extends Sizer {
         this.add(
             child,
             {
-                proportion: proportion, align: align, expand: expand,
-
+                proportion: proportion,
+                align: align,
+                expand: expand,
+                padding: {
+                    left: GetValue(spaceConfig, 'childLeft', 0),
+                    right: GetValue(spaceConfig, 'childRight', 0),
+                    top: GetValue(spaceConfig, 'childTop', 0),
+                    bottom: GetValue(spaceConfig, 'childBottom', 0)
+                }
             }
         );
 

@@ -97,26 +97,11 @@ var CreatePanel = function (scene) {
 }
 
 var CreateFolder = function (scene, folderName, buttonNames) {
-    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT);
-    var child = scene.rexUI.add.sizer({
-        orientation: 'y',
-        space: { item: 3 }
-    })
-
-    for (var i = 0, cnt = buttonNames.length; i < cnt; i++) {
-        child.add(
-            CreateLabel(scene, buttonNames[i]),
-            { expand: true }
-        )
-    }
-
-    var title = CreateLabel(scene, folderName);
-
     return scene.rexUI.add.folder({
-        background: background,
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT),
 
-        title: title,
-        child: child,
+        child: CreateFolderChild(scene, buttonNames),
+        title: CreateLabel(scene, folderName),
 
         transition: {
             // duration: 200,
@@ -145,6 +130,21 @@ var CreateFolder = function (scene, folderName, buttonNames) {
         // .expand(0)
         .collapse(0)
 
+}
+
+var CreateFolderChild = function (scene, buttonNames) {
+    var child = scene.rexUI.add.sizer({
+        orientation: 'y',
+        space: { item: 3 }
+    })
+
+    for (var i = 0, cnt = buttonNames.length; i < cnt; i++) {
+        child.add(
+            CreateLabel(scene, buttonNames[i]),
+            { expand: true }
+        )
+    }
+    return child;
 }
 
 var CreateLabel = function (scene, text) {

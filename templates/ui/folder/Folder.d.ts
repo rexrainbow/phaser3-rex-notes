@@ -31,6 +31,14 @@ declare namespace Folder {
             child?: boolean,
         },
 
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+            item?: number,
+
+            titleLeft?: number, titleRight?: number, titleTop?: number, titleBottom?: number,
+            childLeft?: number, childRight?: number, childTop?: number, childBottom?: number,
+        },
+
         transition?: {
             duration?: number,
             expandCallback?: OpenCloseTransition.TransitCallbackType,

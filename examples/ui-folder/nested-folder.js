@@ -19,24 +19,37 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var folderA = CreateFolder(this, 'y', 'FolderA', ['AA0', 'BB0', 'CC0', 'DD0'])
-            .setPosition(200, 200)
-            .layout();
-
-        var folderB = CreateFolder(this, 'x', 'B', ['AA0', 'BB0', 'CC0', 'DD0'])
-            .setPosition(400, 200)
+        var folderA = CreateFolder(this, {
+            title: 'FolderA',
+            children: [
+                {
+                    title: 'FolderB',
+                    children: [
+                        {
+                            title: 'FolderC',
+                            children: ['AAAA', 'BBBB'],
+                        },
+                        'BBB'
+                    ]
+                },
+                'BB',
+                'CC'
+            ],
+        })
+            .setMinWidth(300)
+            .setPosition(200, 100)
             .layout();
     }
 
     update() { }
 }
 
-var CreateFolder = function (scene, orientation, folderName, buttonNames) {
+var CreateFolder = function (scene, { title, children }) {
     return scene.rexUI.add.folder({
-        orientation: orientation,
+        orientation: 'y',
 
-        child: CreateFolderChild(scene, buttonNames),
-        title: CreateLabel(scene, folderName),
+        child: CreateFolderChild(scene, children),
+        title: CreateLabel(scene, title),
         toggleClickConfig: {
             threshold: 10,
         },
@@ -46,36 +59,36 @@ var CreateFolder = function (scene, orientation, folderName, buttonNames) {
         },
 
         expand: {
-            title: false,
+            title: true,
             child: true,
         },
 
         space: {
-            left: 10, right: 10, top: 10, bottom: 10, item: 3
+            childLeft: 30,
         },
     })
         .setOrigin(0)
-        .setDraggable('title')
         .expand(0)
-    //.collapse(0)
 
 }
 
-var CreateFolderChild = function (scene, buttonNames) {
+var CreateFolderChild = function (scene, children) {
     var panel = scene.rexUI.add.sizer({
         orientation: 'y',
-        width: 140,
-        space: { left: 8, right: 8, top: 8, bottom: 8, item: 1 }
     })
         .addBackground(
-            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK).setStrokeStyle(2, COLOR_LIGHT)
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT)
         )
 
-    for (var i = 0, cnt = buttonNames.length; i < cnt; i++) {
-        panel.add(
-            CreateLabel(scene, buttonNames[i]),
-            { expand: true }
-        )
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+        if (typeof (child) === 'string') {
+            child = CreateLabel(scene, child);
+        } else {
+            child = CreateFolder(scene, child);
+        }
+
+        panel.add(child, { expand: true });
     }
 
     return panel;
