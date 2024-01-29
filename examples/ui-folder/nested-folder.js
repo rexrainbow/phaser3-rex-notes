@@ -76,9 +76,6 @@ var CreateFolderChild = function (scene, children) {
     var panel = scene.rexUI.add.sizer({
         orientation: 'y',
     })
-        .addBackground(
-            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT)
-        )
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
@@ -96,7 +93,7 @@ var CreateFolderChild = function (scene, children) {
 
 var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT),
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),
