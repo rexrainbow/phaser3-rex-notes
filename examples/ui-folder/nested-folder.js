@@ -49,7 +49,7 @@ var CreateFolder = function (scene, { title, children }) {
         orientation: 'y',
 
         child: CreateFolderChild(scene, children),
-        title: CreateLabel(scene, title),
+        title: CreateLabel(scene, title, COLOR_MAIN),
         toggleClickConfig: {
             threshold: 10,
         },
@@ -80,7 +80,7 @@ var CreateFolderChild = function (scene, children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
         if (typeof (child) === 'string') {
-            child = CreateLabel(scene, child);
+            child = CreateLabel(scene, child, COLOR_DARK);
         } else {
             child = CreateFolder(scene, child);
         }
@@ -91,9 +91,9 @@ var CreateFolderChild = function (scene, children) {
     return panel;
 }
 
-var CreateLabel = function (scene, text) {
+var CreateLabel = function (scene, text, backgroundColor) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0).setStrokeStyle(2, COLOR_LIGHT),
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, backgroundColor).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),
