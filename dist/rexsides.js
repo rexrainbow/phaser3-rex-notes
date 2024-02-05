@@ -8366,7 +8366,7 @@
       return this;
     },
     disableClick: function disableClick(gameObject) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._click === undefined) {
@@ -8666,7 +8666,7 @@
       return this;
     },
     disableClickOutside: function disableClickOutside(gameObject) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._clickOutside === undefined) {
@@ -8965,7 +8965,7 @@
       return this;
     },
     disableTouching: function disableTouching(gameObject) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._inTouching === undefined) {
