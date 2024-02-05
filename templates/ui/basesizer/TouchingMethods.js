@@ -102,7 +102,7 @@ export default {
     },
 
     disableTouching(gameObject) {
-        if (gameObject && typeof (gameObject) !== 'object') {
+        if (gameObject === undefined) {
             gameObject = this;
         }
 

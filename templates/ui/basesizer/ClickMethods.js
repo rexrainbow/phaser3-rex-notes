@@ -51,7 +51,7 @@ export default {
     },
 
     disableClick(gameObject) {
-        if (gameObject && typeof (gameObject) !== 'object') {
+        if (gameObject === undefined) {
             gameObject = this;
         }
 
