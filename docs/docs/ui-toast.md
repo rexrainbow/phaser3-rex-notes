@@ -8,6 +8,7 @@ Show text message for a short while.
 ## Live demos
 
 - [Toast](https://codepen.io/rexrainbow/pen/KjEgVO)
+- [Set depth](https://codepen.io/rexrainbow/pen/wvOxBbN)
 
 ## Usage
 
