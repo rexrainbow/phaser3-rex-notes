@@ -37,8 +37,13 @@ export default {
     },
 
     enableClick(gameObject, enabled) {
-        if (gameObject && typeof (gameObject) !== 'object') {
+        var gameObjectType = typeof (gameObject);
+        if ((gameObjectType === 'boolean') || (gameObject === 'number')) {
             enabled = gameObject;
+            gameObject = undefined;
+        }
+
+        if (gameObject === undefined) {
             gameObject = this;
         }
 

@@ -97,7 +97,9 @@ class Demo extends Phaser.Scene {
             value: undefined
 
         })
-            .layout();
+            .layout()
+            //.disableClick()
+            //.enableClick()
     }
 
     update() { }
