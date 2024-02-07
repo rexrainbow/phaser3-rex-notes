@@ -155,6 +155,10 @@ class Toast extends Label {
                 0, // time
                 [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
             ],
+            [  // Transit-in event
+                0, // time
+                [this.emit, 'transitin', this, this.transitInTime] // [callback, param, ...]
+            ],
             [ // Hold
                 this.transitInTime,
                 [NOOP]
@@ -162,6 +166,10 @@ class Toast extends Label {
             [ // Transit-out
                 this.displayTime,
                 [this.transitOutCallback, this, this.transitOutTime]
+            ], // Transit-out event
+            [
+                0, // time
+                [this.emit, 'transitout', this, this.transitOutTime] // [callback, param, ...]
             ],
             [ // End
                 this.transitOutTime,
@@ -171,7 +179,8 @@ class Toast extends Label {
                 30, // Add a small delay before complete
                 [NOOP]
             ]
-        ]
+        ];
+
         this.player
             .load(commands, this)
             .once('complete', function () {

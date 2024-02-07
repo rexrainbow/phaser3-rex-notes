@@ -36,6 +36,13 @@ class Demo extends Phaser.Scene {
                 out: 250,
             },
         })
+            .on('transitin', function () {
+                console.log('Transit-in')
+            })
+            .on('transitout', function () {
+                console.log('Transit-out')
+            })
+
             .showMessage('Hello world')
             .showMessage('Phaser 3 is good')
             .showMessage('See you next time')

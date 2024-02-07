@@ -275,6 +275,21 @@ New message will be pending until toast is back to idle.
             }
             ```
 
+### Event
+
+- Transit-in
+    ```javascript
+    toast.on('transitin', function(toast, transitInTime) {
+        // ...
+    })
+    ```
+- Transit-out
+    ```javascript
+    toast.on('transitout', function(toast, transitOutTime) {
+        // ...
+    })
+    ```
+
 ### Other properties
 
 See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
