@@ -88,8 +88,7 @@ export default {
 
 
     enableTouching(gameObject, enabled) {
-        var gameObjectType = typeof (gameObject);
-        if ((gameObjectType === 'boolean') || (gameObject === 'number')) {
+        if (typeof (gameObject) === 'boolean') {
             enabled = gameObject;
             gameObject = undefined;
         }

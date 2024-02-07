@@ -37,8 +37,7 @@ export default {
     },
 
     enableClickOutside(gameObject, enabled) {
-        var gameObjectType = typeof (gameObject);
-        if ((gameObjectType === 'boolean') || (gameObject === 'number')) {
+        if (typeof (gameObject) === 'boolean') {
             enabled = gameObject;
             gameObject = undefined;
         }
