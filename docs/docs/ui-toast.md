@@ -216,6 +216,12 @@ toast.showMessage(message);
 Toast displays message follows these steps : *transit-in*, *hold*, *transit-out*.
 New message will be pending until toast is back to idle.
 
+### Clear messages
+
+```javascript
+toast.removeAllMessages();
+```
+
 ### Display time
 
 - Transit-in time (`duration.in`)

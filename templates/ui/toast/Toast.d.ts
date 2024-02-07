@@ -31,6 +31,8 @@ declare class Toast extends Label {
         message: string | ((toast: Toast) => void)
     ): this;
 
+    removeAllMessages(): this;
+
     transitInTime: number;
     setTransitInTime(time: number): this;
     displayTime: number;

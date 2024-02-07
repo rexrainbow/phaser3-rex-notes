@@ -190,6 +190,11 @@ class Toast extends Label {
 
         return this;
     }
+
+    removeAllMessages() {
+        this.messages.length = 0;
+        return this;
+    }
 }
 
 const TransitionMode = {

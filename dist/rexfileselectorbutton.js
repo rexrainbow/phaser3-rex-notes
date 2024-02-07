@@ -8346,8 +8346,11 @@
       return this;
     },
     enableClick: function enableClick(gameObject, enabled) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (typeof gameObject === 'boolean') {
         enabled = gameObject;
+        gameObject = undefined;
+      }
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._click === undefined) {
@@ -8646,8 +8649,11 @@
       return this;
     },
     enableClickOutside: function enableClickOutside(gameObject, enabled) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (typeof gameObject === 'boolean') {
         enabled = gameObject;
+        gameObject = undefined;
+      }
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._clickOutside === undefined) {
@@ -8945,8 +8951,11 @@
       return this;
     },
     enableTouching: function enableTouching(gameObject, enabled) {
-      if (gameObject && _typeof(gameObject) !== 'object') {
+      if (typeof gameObject === 'boolean') {
         enabled = gameObject;
+        gameObject = undefined;
+      }
+      if (gameObject === undefined) {
         gameObject = this;
       }
       if (gameObject._inTouching === undefined) {
