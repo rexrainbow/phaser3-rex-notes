@@ -1,7 +1,8 @@
 import Label from '../label/Label.js';
-import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
+import ConfigurationMethods from './methods/ConfigurationMethods.js';
+import MessageMethods from './methods/MessageMethods.js';
+import TransitionMode from './methods/TransitionMode.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
-import NOOP from '../../../plugins/utils/object/NOOP.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -43,67 +44,6 @@ class Toast extends Label {
         super.destroy(fromScene);
     }
 
-    setDisplayTime(time) {
-        this.displayTime = time;
-        return this;
-    }
-
-    setTransitOutTime(time) {
-        this.transitOutTime = time;
-        return this;
-    }
-
-    setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
-    }
-
-    setTransitInCallback(callback) {
-        if (typeof (callback) === 'string') {
-            callback = TransitionMode[callback];
-        }
-
-        switch (callback) {
-            case TransitionMode.popUp:
-                callback = DefaultTransitCallbacks.popUp;
-                break;
-            case TransitionMode.fadeIn:
-                callback = DefaultTransitCallbacks.fadeIn;
-                break;
-        }
-
-        if (!callback) {
-            callback = NOOP;
-        }
-
-        this.transitInCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-    }
-
-    setTransitOutCallback(callback) {
-        if (typeof (callback) === 'string') {
-            callback = TransitionMode[callback];
-        }
-
-        switch (callback) {
-            case TransitionMode.scaleDown:
-                callback = DefaultTransitCallbacks.scaleDown;
-                break;
-            case TransitionMode.fadeOut:
-                callback = DefaultTransitCallbacks.fadeOut;
-                break;
-        }
-
-        if (!callback) {
-            callback = NOOP;
-        }
-
-        this.transitOutCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-    }
-
     setScale(scaleX, scaleY) {
         if (scaleY === undefined) {
             scaleY = scaleX;
@@ -116,92 +56,12 @@ class Toast extends Label {
         return this;
     }
 
-    showMessage(callback) {
-        // Remember first scaleX, scaleY as initial scale
-        if (this.scaleX0 === undefined) {
-            this.scaleX0 = this.scaleX;
-        }
-        if (this.scaleY0 === undefined) {
-            this.scaleY0 = this.scaleY;
-        }
-
-        if (callback === undefined) {
-            // Try pop up a pendding message
-            if (this.messages.length === 0) {
-                return this;
-            }
-            callback = this.messages.shift();
-        }
-
-        if (this.player.isPlaying) {
-            // Pend message
-            this.messages.push(callback);
-            return this;
-        }
-
-        // Recover to initial state
-        this
-            .setScale(this.scaleX0, this.scaleY0)
-            .setVisible(true);
-        if (typeof (callback) === 'string') {
-            this.setText(callback);
-        } else {
-            callback(this);
-        }
-        this.layout();
-
-        var commands = [
-            [ // Transit-in
-                0, // time
-                [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
-            ],
-            [  // Transit-in event
-                0, // time
-                [this.emit, 'transitin', this, this.transitInTime] // [callback, param, ...]
-            ],
-            [ // Hold
-                this.transitInTime,
-                [NOOP]
-            ],
-            [ // Transit-out
-                this.displayTime,
-                [this.transitOutCallback, this, this.transitOutTime]
-            ], // Transit-out event
-            [
-                0, // time
-                [this.emit, 'transitout', this, this.transitOutTime] // [callback, param, ...]
-            ],
-            [ // End
-                this.transitOutTime,
-                [this.setVisible, false]
-            ],
-            [ // Complete - show next message
-                30, // Add a small delay before complete
-                [NOOP]
-            ]
-        ];
-
-        this.player
-            .load(commands, this)
-            .once('complete', function () {
-                this.showMessage();
-            }, this)
-            .start();
-
-        return this;
-    }
-
-    removeAllMessages() {
-        this.messages.length = 0;
-        return this;
-    }
 }
 
-const TransitionMode = {
-    popUp: 0,
-    fadeIn: 1,
-    scaleDown: 0,
-    fadeOut: 1,
-}
+Object.assign(
+    Toast.prototype,
+    ConfigurationMethods,
+    MessageMethods,
+)
 
 export default Toast;
