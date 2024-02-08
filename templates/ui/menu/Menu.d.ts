@@ -18,6 +18,8 @@ declare namespace Menu {
     type SubMenuSideTypes = 0 | 1 | 2 | 3 | 'right' | 'down' | 'left' | 'up';
 
     interface IConfig extends Buttons.IConfig {
+        popUp?: boolean,
+
         items: any[],
 
         createBackgroundCallback?: (items: any[]) => Phaser.GameObjects.GameObject,
