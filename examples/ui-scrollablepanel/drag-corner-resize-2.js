@@ -89,10 +89,10 @@ var AddDragCornerController = function (sizer) {
         .on('drag', function (pointer, dragX, dragY) {
             var topX = sizer.left,
                 topY = sizer.top;
-            var width = dragX - topX,
-                height = dragY - topY;
+            var width = Math.max(dragX - topX, 100),
+                height = Math.max(dragY - topY, 100);
 
-            sizer.setChildPosition(bottomRighterController, dragX, dragY);
+            sizer.setChildPosition(bottomRighterController, topX + width, topY + height);
             sizer.setChildPosition(topLeftController, topX, topY);
 
             sizer.setMinSize(width, height).layout();
