@@ -107,16 +107,22 @@ class Scrollable extends Sizer {
     }
 
     postLayout(parent, newWidth, newHeight) {
-        this.resizeController();
-
-        // Set t, s to 0 at first runLayout()
+        var s = 0, t = 0;
         if (!this.runLayoutFlag) {
             this.runLayoutFlag = true;
-            this.setT(0);
+        } else {
+            t = this.t;
 
             if (this.scrollMode === 2) {
-                this.setS(0);
+                s = this.s;
             }
+        }
+
+        this.resizeController();
+
+        this.setT(t);
+        if (this.scrollMode === 2) {
+            this.setS(s);
         }
 
         return this;

@@ -32931,7 +32931,7 @@
     }
   };
 
-  var ConfigurationMethods$1 = {
+  var ConfigurationMethods$2 = {
     setTransitInTime: function setTransitInTime(time) {
       this.transitInTime = time;
       return this;
@@ -33011,7 +33011,7 @@
   };
 
   var methods$s = {};
-  Object.assign(methods$s, DelayCallMethods$1, ConfigurationMethods$1, OpenMethods$1, CloseMethods);
+  Object.assign(methods$s, DelayCallMethods$1, ConfigurationMethods$2, OpenMethods$1, CloseMethods);
 
   var GetValue$2n = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
@@ -49756,15 +49756,20 @@
     _createClass(Scrollable, [{
       key: "postLayout",
       value: function postLayout(parent, newWidth, newHeight) {
-        this.resizeController();
-
-        // Set t, s to 0 at first runLayout()
+        var s = 0,
+          t = 0;
         if (!this.runLayoutFlag) {
           this.runLayoutFlag = true;
-          this.setT(0);
+        } else {
+          t = this.t;
           if (this.scrollMode === 2) {
-            this.setS(0);
+            s = this.s;
           }
+        }
+        this.resizeController();
+        this.setT(t);
+        if (this.scrollMode === 2) {
+          this.setS(s);
         }
         return this;
       }
@@ -58034,7 +58039,7 @@
   var DefaultCollapseCallback = function DefaultCollapseCallback(gameObject, duration) {
     ScaleMethods.scaleDown.call(gameObject, duration, this.expandDirection);
   };
-  var ConfigurationMethods = {
+  var ConfigurationMethods$1 = {
     setTransitionDuration: function setTransitionDuration(duration) {
       this.transitionDuration = duration;
       this.childTransition.setTransitInTime(duration).setTransitOutTime(duration);
@@ -58158,7 +58163,7 @@
     }
     return _createClass(Folder);
   }(Sizer);
-  Object.assign(Folder$1.prototype, ExpandMethods, ConfigurationMethods);
+  Object.assign(Folder$1.prototype, ExpandMethods, ConfigurationMethods$1);
 
   ObjectFactory.register('folder', function (config) {
     var gameObject = new Folder$1(this.scene, config);
@@ -59046,6 +59051,133 @@
     }
   };
 
+  var TransitionMode = {
+    popUp: 0,
+    fadeIn: 1,
+    scaleDown: 0,
+    fadeOut: 1
+  };
+
+  var ConfigurationMethods = {
+    setDisplayTime: function setDisplayTime(time) {
+      this.displayTime = time;
+      return this;
+    },
+    setTransitOutTime: function setTransitOutTime(time) {
+      this.transitOutTime = time;
+      return this;
+    },
+    setTransitInTime: function setTransitInTime(time) {
+      this.transitInTime = time;
+      return this;
+    },
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (typeof callback === 'string') {
+        callback = TransitionMode[callback];
+      }
+      switch (callback) {
+        case TransitionMode.popUp:
+          callback = DefaultTransitCallbacks.popUp;
+          break;
+        case TransitionMode.fadeIn:
+          callback = DefaultTransitCallbacks.fadeIn;
+          break;
+      }
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitInCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    },
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (typeof callback === 'string') {
+        callback = TransitionMode[callback];
+      }
+      switch (callback) {
+        case TransitionMode.scaleDown:
+          callback = DefaultTransitCallbacks.scaleDown;
+          break;
+        case TransitionMode.fadeOut:
+          callback = DefaultTransitCallbacks.fadeOut;
+          break;
+      }
+      if (!callback) {
+        callback = NOOP;
+      }
+      this.transitOutCallback = callback;
+      // callback = function(gameObject, duration) {}
+      return this;
+    }
+  };
+
+  var MessageMethods = {
+    showMessage: function showMessage(callback) {
+      // Remember first scaleX, scaleY as initial scale
+      if (this.scaleX0 === undefined) {
+        this.scaleX0 = this.scaleX;
+      }
+      if (this.scaleY0 === undefined) {
+        this.scaleY0 = this.scaleY;
+      }
+      if (callback === undefined) {
+        // Try pop up a pendding message
+        if (this.messages.length === 0) {
+          return this;
+        }
+        callback = this.messages.shift();
+      }
+      if (this.player.isPlaying) {
+        // Pend message
+        this.messages.push(callback);
+        return this;
+      }
+
+      // Recover to initial state
+      this.setScale(this.scaleX0, this.scaleY0).setVisible(true);
+      if (typeof callback === 'string') {
+        this.setText(callback);
+      } else {
+        callback(this);
+      }
+      this.layout();
+      var commands = [[
+      // Transit-in
+      0,
+      // time
+      [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
+      ], [
+      // Transit-in event
+      0,
+      // time
+      [this.emit, 'transitin', this, this.transitInTime] // [callback, param, ...]
+      ], [
+      // Hold
+      this.transitInTime, [NOOP]], [
+      // Transit-out
+      this.displayTime, [this.transitOutCallback, this, this.transitOutTime]],
+      // Transit-out event
+      [0,
+      // time
+      [this.emit, 'transitout', this, this.transitOutTime] // [callback, param, ...]
+      ], [
+      // End
+      this.transitOutTime, [this.setVisible, false]], [
+      // Complete - show next message
+      30,
+      // Add a small delay before complete
+      [NOOP]]];
+      this.player.load(commands, this).once('complete', function () {
+        this.showMessage();
+      }, this).start();
+      return this;
+    },
+    removeAllMessages: function removeAllMessages() {
+      this.messages.length = 0;
+      return this;
+    }
+  };
+
   var GetValue$v = Phaser.Utils.Objects.GetValue;
   var Toast = /*#__PURE__*/function (_Label) {
     _inherits(Toast, _Label);
@@ -59087,66 +59219,6 @@
         _get(_getPrototypeOf(Toast.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
-      key: "setDisplayTime",
-      value: function setDisplayTime(time) {
-        this.displayTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitOutTime",
-      value: function setTransitOutTime(time) {
-        this.transitOutTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInTime",
-      value: function setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInCallback",
-      value: function setTransitInCallback(callback) {
-        if (typeof callback === 'string') {
-          callback = TransitionMode[callback];
-        }
-        switch (callback) {
-          case TransitionMode.popUp:
-            callback = DefaultTransitCallbacks.popUp;
-            break;
-          case TransitionMode.fadeIn:
-            callback = DefaultTransitCallbacks.fadeIn;
-            break;
-        }
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitInCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setTransitOutCallback",
-      value: function setTransitOutCallback(callback) {
-        if (typeof callback === 'string') {
-          callback = TransitionMode[callback];
-        }
-        switch (callback) {
-          case TransitionMode.scaleDown:
-            callback = DefaultTransitCallbacks.scaleDown;
-            break;
-          case TransitionMode.fadeOut:
-            callback = DefaultTransitCallbacks.fadeOut;
-            break;
-        }
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitOutCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
       key: "setScale",
       value: function setScale(scaleX, scaleY) {
         if (scaleY === undefined) {
@@ -59158,83 +59230,10 @@
         _get(_getPrototypeOf(Toast.prototype), "setScale", this).call(this, scaleX, scaleY);
         return this;
       }
-    }, {
-      key: "showMessage",
-      value: function showMessage(callback) {
-        // Remember first scaleX, scaleY as initial scale
-        if (this.scaleX0 === undefined) {
-          this.scaleX0 = this.scaleX;
-        }
-        if (this.scaleY0 === undefined) {
-          this.scaleY0 = this.scaleY;
-        }
-        if (callback === undefined) {
-          // Try pop up a pendding message
-          if (this.messages.length === 0) {
-            return this;
-          }
-          callback = this.messages.shift();
-        }
-        if (this.player.isPlaying) {
-          // Pend message
-          this.messages.push(callback);
-          return this;
-        }
-
-        // Recover to initial state
-        this.setScale(this.scaleX0, this.scaleY0).setVisible(true);
-        if (typeof callback === 'string') {
-          this.setText(callback);
-        } else {
-          callback(this);
-        }
-        this.layout();
-        var commands = [[
-        // Transit-in
-        0,
-        // time
-        [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
-        ], [
-        // Transit-in event
-        0,
-        // time
-        [this.emit, 'transitin', this, this.transitInTime] // [callback, param, ...]
-        ], [
-        // Hold
-        this.transitInTime, [NOOP]], [
-        // Transit-out
-        this.displayTime, [this.transitOutCallback, this, this.transitOutTime]],
-        // Transit-out event
-        [0,
-        // time
-        [this.emit, 'transitout', this, this.transitOutTime] // [callback, param, ...]
-        ], [
-        // End
-        this.transitOutTime, [this.setVisible, false]], [
-        // Complete - show next message
-        30,
-        // Add a small delay before complete
-        [NOOP]]];
-        this.player.load(commands, this).once('complete', function () {
-          this.showMessage();
-        }, this).start();
-        return this;
-      }
-    }, {
-      key: "removeAllMessages",
-      value: function removeAllMessages() {
-        this.messages.length = 0;
-        return this;
-      }
     }]);
     return Toast;
   }(Label);
-  var TransitionMode = {
-    popUp: 0,
-    fadeIn: 1,
-    scaleDown: 0,
-    fadeOut: 1
-  };
+  Object.assign(Toast.prototype, ConfigurationMethods, MessageMethods);
 
   ObjectFactory.register('toast', function (config) {
     var gameObject = new Toast(this.scene, config);
