@@ -190,7 +190,7 @@ var ninePatch = scene.add.rexNinePatch2({
 - `getFrameNameCallback` : Callback to get frame name of each cell.
     - `undefined` : Use default callback.
         - If `baseFrame` is `'__BASE'` : return `${colIndex},${rowIndex}`
-        - Else : return `${baseFrame}_${colIndex},${rowIndex}`
+        - Else : return `${baseFrame}:${colIndex},${rowIndex}`
     - Function object : Return a string, or `undefined`.
         ```javascript
         function(colIndex, rowIndex, baseFrame) {

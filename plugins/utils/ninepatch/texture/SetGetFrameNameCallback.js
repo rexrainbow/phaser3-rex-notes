@@ -10,7 +10,7 @@ var DefaultGetFrameNameCallback = function (colIndex, rowIndex, baseFrameName) {
     if (baseFrameName === '__BASE') {
         return `${colIndex},${rowIndex}`;
     } else {
-        return `${baseFrameName}_${colIndex},${rowIndex}`;
+        return `${baseFrameName}:${colIndex},${rowIndex}`;
     }
 }
 
