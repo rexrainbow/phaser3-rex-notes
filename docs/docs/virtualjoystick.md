@@ -9,6 +9,7 @@ Simulate cursor keys according to touch events.
 
 - [Virtual joystick](https://codepen.io/rexrainbow/pen/oyqvQY)
 - [Two joySticks](https://codepen.io/rexrainbow/pen/eYdxxOJ)
+- [Toggle visible](https://codepen.io/rexrainbow/pen/vYPQYZQ)
 
 ## Usage
 
