@@ -26,6 +26,20 @@
     });
     return Constructor;
   }
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -116,6 +130,44 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function set(target, property, value, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.set) {
+      set = Reflect.set;
+    } else {
+      set = function set(target, property, value, receiver) {
+        var base = _superPropBase(target, property);
+        var desc;
+        if (base) {
+          desc = Object.getOwnPropertyDescriptor(base, property);
+          if (desc.set) {
+            desc.set.call(receiver, value);
+            return true;
+          } else if (!desc.writable) {
+            return false;
+          }
+        }
+        desc = Object.getOwnPropertyDescriptor(receiver, property);
+        if (desc) {
+          if (!desc.writable) {
+            return false;
+          }
+          desc.value = value;
+          Object.defineProperty(receiver, property, desc);
+        } else {
+          _defineProperty(receiver, property, value);
+        }
+        return true;
+      };
+    }
+    return set(target, property, value, receiver);
+  }
+  function _set(target, property, value, receiver, isStrict) {
+    var s = set(target, property, value, receiver || target);
+    if (!s && isStrict) {
+      throw new TypeError('failed to set property');
+    }
+    return value;
   }
   function _toPrimitive(input, hint) {
     if (typeof input !== "object" || input === null) return input;
@@ -693,6 +745,25 @@
         _get(_getPrototypeOf(TouchCursor.prototype), "shutdown", this).call(this);
       }
     }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      }
+
+      // Override setter of enable
+      ,
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+        if (!e) {
+          this.pointer = undefined; // Release pointer
+        }
+
+        _set(_getPrototypeOf(TouchCursor.prototype), "enable", e, this, true);
+        return this;
+      }
+    }, {
       key: "destroy",
       value: function destroy(fromScene) {
         this.shutdown(fromScene);
@@ -938,6 +1009,7 @@
       set: function set(visible) {
         this.base.visible = visible;
         this.thumb.visible = visible;
+        this.enable = visible;
       }
     }, {
       key: "enable",

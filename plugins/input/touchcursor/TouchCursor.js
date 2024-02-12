@@ -74,6 +74,22 @@ class TouchCursor extends VectorToCursorKeys {
         super.shutdown();
     }
 
+    get enable() {
+        return this._enable;
+    }
+
+    // Override setter of enable
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+        if (!e) {
+            this.pointer = undefined; // Release pointer
+        }
+        super.enable = e;
+        return this;
+    }
+
     destroy(fromScene) {
         this.shutdown(fromScene);
     }

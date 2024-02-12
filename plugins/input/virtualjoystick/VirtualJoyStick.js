@@ -156,6 +156,7 @@ class VirtualJoyStick {
     set visible(visible) {
         this.base.visible = visible;
         this.thumb.visible = visible;
+        this.enable = visible;
     }
 
     get enable() {
