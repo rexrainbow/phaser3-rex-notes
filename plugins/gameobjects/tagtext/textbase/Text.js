@@ -414,7 +414,9 @@ class Text extends TextBase {
 
         if (this.renderer && this.renderer.gl) {
             this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
-            this.frame.glTexture = this.frame.source.glTexture;
+            if (typeof WEBGL_DEBUG) {
+                this.frame.glTexture.spectorMetadata = { textureKey: 'BBCodeText Game Object' };
+            }
         }
 
         this.dirty = true;
