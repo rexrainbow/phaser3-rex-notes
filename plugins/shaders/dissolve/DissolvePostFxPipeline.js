@@ -38,7 +38,7 @@ class DissolvePostFxPipeline extends PostFXPipeline {
     }
 
     onBoot() {
-        this.setTransitionTargetTexture();
+
     }
 
     onPreRender() {
@@ -56,6 +56,10 @@ class DissolvePostFxPipeline extends PostFXPipeline {
 
     onDraw(renderTarget) {
         this.set1f('fromRatio', renderTarget.width / renderTarget.height);
+
+        this.set1f('toRatio', this.toRatio);
+
+        this.set1i('uMainSampler2', 1);
 
         this.bindTexture(this.targetTexture, 1);
 
@@ -93,9 +97,6 @@ class DissolvePostFxPipeline extends PostFXPipeline {
         if (resizeMode !== undefined) {
             this.resizeMode = resizeMode;
         }
-
-        this.set1i('uMainSampler2', 1);
-        this.set1f('toRatio', this.toRatio);
 
         return this;
     }

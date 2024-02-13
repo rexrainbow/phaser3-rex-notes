@@ -18,13 +18,13 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexDissolvePipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
         var postFxPipeline = postFxPlugin.add(gameObject, {
-           
+
         });
 
         var tweenTask;
         this.input.on('pointerdown', function () {
             if (tweenTask) {
-                tweenTask.stop();
+                tweenTask.complete();
             }
 
             var key = gameObject.texture.key;
