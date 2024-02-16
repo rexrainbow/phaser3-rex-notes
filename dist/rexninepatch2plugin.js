@@ -515,7 +515,7 @@
     if (baseFrameName === '__BASE') {
       return "".concat(colIndex, ",").concat(rowIndex);
     } else {
-      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
+      return "".concat(baseFrameName, ":").concat(colIndex, ",").concat(rowIndex);
     }
   };
 

@@ -3271,7 +3271,7 @@
     return width;
   };
 
-  var HasWidthWrap$1 = function HasWidthWrap() {
+  var HasWidthWrap$2 = function HasWidthWrap() {
     var child;
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
@@ -3302,7 +3302,7 @@
   };
 
   // Default method
-  var RunWidthWrap$2 = function RunWidthWrap(parentWidth) {
+  var RunWidthWrap$3 = function RunWidthWrap(parentWidth) {
     var child, expandedChildWidth, childWidth;
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
@@ -3345,7 +3345,7 @@
     return height;
   };
 
-  var HasHeightWrap$1 = function HasHeightWrap() {
+  var HasHeightWrap$2 = function HasHeightWrap() {
     var child;
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
@@ -3377,7 +3377,7 @@
   };
 
   // Default method
-  var RunHeightWrap$2 = function RunHeightWrap(parentHeight) {
+  var RunHeightWrap$3 = function RunHeightWrap(parentHeight) {
     var child, expandedChildHeight, childHeight;
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
@@ -3396,7 +3396,7 @@
     return this;
   };
 
-  var PostResolveSize$1 = function PostResolveSize(width, height) {};
+  var PostResolveSize = function PostResolveSize(width, height) {};
 
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
@@ -3563,14 +3563,15 @@
     if (isTopmostParent) {
       this.preLayout();
     }
+    var size, width, height;
     var runWidthWrap = isTopmostParent && this.hasWidthWrap();
     var runHeightWrap = isTopmostParent && this.hasHeightWrap();
-    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+    size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
       console.error('Can\'t resolve size of ', this);
     }
-    var width = size.width,
-      height = size.height;
+    width = size.width;
+    height = size.height;
 
     // The last chance of resolving size
     this.postResolveSize(width, height);
@@ -10579,14 +10580,14 @@
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
     resolveWidth: ResolveWidth$3,
-    hasWidthWrap: HasWidthWrap$1,
+    hasWidthWrap: HasWidthWrap$2,
     resolveChildrenWidth: ResolveChildrenWidth$1,
-    runWidthWrap: RunWidthWrap$2,
+    runWidthWrap: RunWidthWrap$3,
     resolveHeight: ResolveHeight$3,
-    hasHeightWrap: HasHeightWrap$1,
+    hasHeightWrap: HasHeightWrap$2,
     resolveChildrenHeight: ResolveChildrenHeight$1,
-    runHeightWrap: RunHeightWrap$2,
-    postResolveSize: PostResolveSize$1,
+    runHeightWrap: RunHeightWrap$3,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$3,
@@ -10885,7 +10886,7 @@
     }
     var result = 0;
     var children = this.sizerChildren;
-    var child, proportion, padding, childWidth;
+    var child, sizerConfig, proportion, padding, childWidth;
     var hasUnknownChildWidth = false;
     this.childrenProportion; // To update this.hasProportion0Child member
 
@@ -10896,12 +10897,19 @@
       var isFirstChild = true;
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (child.rexSizer.hidden) {
+        if (!child.hasOwnProperty('rexSizer')) {
           continue;
         }
-        proportion = child.rexSizer.proportion;
+        sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
+          continue;
+        }
+        proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childWidth = this.getChildWidth(child);
+          if (sizerConfig.fitRatio > 0 && childWidth === 0) {
+            childWidth = undefined;
+          }
           if (childWidth === undefined) {
             if (proportion !== 0 && !this.hasProportion0Child) {
               childWidth = 0;
@@ -10931,7 +10939,8 @@
         if (!child.hasOwnProperty('rexSizer')) {
           continue;
         }
-        if (child.rexSizer.hidden) {
+        sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
           continue;
         }
         childWidth = this.getChildWidth(child);
@@ -10941,7 +10950,7 @@
         if (hasUnknownChildWidth) {
           continue;
         }
-        padding = child.rexSizer.padding;
+        padding = sizerConfig.padding;
         childWidth += padding.left + padding.right;
         result = Math.max(childWidth, result);
       }
@@ -10961,7 +10970,7 @@
     }
     var result = 0;
     var children = this.sizerChildren;
-    var child, proportion, padding, childHeight;
+    var child, sizerConfig, proportion, padding, childHeight;
     var hasUnknownChildHeight = false;
     this.childrenProportion; // To update this.hasProportion0Child member
 
@@ -10970,7 +10979,11 @@
       // Get maximun height
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (child.rexSizer.hidden) {
+        if (!child.hasOwnProperty('rexSizer')) {
+          continue;
+        }
+        sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
           continue;
         }
         childHeight = this.getChildHeight(child);
@@ -10980,7 +10993,7 @@
         if (hasUnknownChildHeight) {
           continue;
         }
-        padding = child.rexSizer.padding;
+        padding = sizerConfig.padding;
         childHeight += padding.top + padding.bottom;
         result = Math.max(childHeight, result);
       }
@@ -10993,12 +11006,16 @@
         if (!child.hasOwnProperty('rexSizer')) {
           continue;
         }
-        if (child.rexSizer.hidden) {
+        sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
           continue;
         }
-        proportion = child.rexSizer.proportion;
+        proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childHeight = this.getChildHeight(child);
+          if (sizerConfig.fitRatio > 0 && childHeight === 0) {
+            childHeight = undefined;
+          }
           if (childHeight === undefined) {
             if (proportion !== 0 && !this.hasProportion0Child) {
               childHeight = 0;
@@ -11012,7 +11029,7 @@
         if (hasUnknownChildHeight) {
           continue;
         }
-        padding = child.rexSizer.padding;
+        padding = sizerConfig.padding;
         childHeight += padding.top + padding.bottom;
         if (isFirstChild) {
           isFirstChild = false;
@@ -11098,56 +11115,16 @@
       if (child.rexSizer.hidden) {
         continue;
       }
-      if (!child.rexSizer.fitRatio) {
-        continue;
+      if (child.rexSizer.fitRatio > 0) {
+        ResizeGameObject(child, 0, 0);
+        this.hasRatioFitChild = true;
       }
-      ResizeGameObject(child, 1, 1);
-      this.hasRatioFitChild = true;
     }
     this._childrenProportion = undefined;
     this.hasProportion0Child = false;
     this.proportionLength = undefined;
     PreLayout$3.call(this);
     return this;
-  };
-
-  var PostResolveSize = function PostResolveSize(width, height) {
-    if (this.hasRatioFitChild) {
-      // Resize child for ratio-fit 
-      var innerHeight;
-      if (this.orientation === 0) {
-        innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom');
-      } else {
-        width - this.getInnerPadding('left') - this.getInnerPadding('right');
-      }
-      var children = this.sizerChildren,
-        childWidth,
-        childHeight;
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children[i];
-        if (child.rexSizer.hidden) {
-          continue;
-        }
-        var fitRatio = child.rexSizer.fitRatio;
-        if (!fitRatio) {
-          continue;
-        }
-        if (this.orientation === 0) {
-          childHeight = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
-          childWidth = childHeight * fitRatio;
-        } else {
-          childWidth = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
-          childHeight = childWidth / fitRatio;
-        }
-        ResizeGameObject(child, childWidth, childHeight);
-        if (child.isRexSizer) {
-          child.setMinSize(childWidth, childHeight);
-        }
-      }
-      this.proportionLength = undefined;
-      this._childrenWidth = undefined;
-      this.resolveWidth(width, true);
-    }
   };
 
   var CheckSize = function CheckSize(child, parent) {
@@ -11252,7 +11229,7 @@
     var width = ResolveWidth$3.call(this, width);
 
     // Calculate proportionLength
-    if (this.orientation === 0 && this.proportionLength === undefined) {
+    if (width !== undefined && this.orientation === 0 && this.proportionLength === undefined) {
       var remainder = width - this.childrenWidth;
       if (remainder > 0) {
         remainder = width - this.getChildrenWidth(false);
@@ -11268,7 +11245,7 @@
     var height = ResolveHeight$3.call(this, height);
 
     // Get proportionLength
-    if (this.orientation === 1 && this.proportionLength === undefined) {
+    if (height !== undefined && this.orientation === 1 && this.proportionLength === undefined) {
       var remainder = height - this.childrenHeight;
       if (remainder > 0) {
         remainder = height - this.getChildrenHeight(false);
@@ -11278,6 +11255,80 @@
       }
     }
     return height;
+  };
+
+  var HasWidthWrap$1 = function HasWidthWrap() {
+    if (this.hasRatioFitChild && this.orientation === 1) {
+      return true;
+    }
+    return HasWidthWrap$2.call(this);
+  };
+
+  var ExpandFitRatioChildren = function ExpandFitRatioChildren(width, height) {
+    if (!this.hasRatioFitChild) {
+      return;
+    }
+    var innerHeight;
+    if (this.orientation === 0) {
+      innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom');
+    } else {
+      width - this.getInnerPadding('left') - this.getInnerPadding('right');
+    }
+    var children = this.sizerChildren,
+      childWidth,
+      childHeight;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (child.rexSizer.hidden) {
+        continue;
+      }
+      var fitRatio = child.rexSizer.fitRatio;
+      if (!fitRatio) {
+        continue;
+      }
+      if (this.orientation === 0) {
+        // Set child width by child height 
+        childHeight = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+        childWidth = childHeight * fitRatio;
+      } else {
+        // Set child height by child width
+        childWidth = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+        childHeight = childWidth / fitRatio;
+      }
+      ResizeGameObject(child, childWidth, childHeight);
+      if (child.isRexSizer) {
+        child.setMinSize(childWidth, childHeight);
+      }
+    }
+  };
+
+  var RunWidthWrap$2 = function RunWidthWrap(width) {
+    if (this.wrapResult) {
+      // Already got wrapResult
+      return;
+    }
+    if (this.orientation === 1) {
+      ExpandFitRatioChildren.call(this, width, undefined);
+    }
+    RunWidthWrap$3.call(this, width);
+  };
+
+  var HasHeightWrap$1 = function HasHeightWrap() {
+    if (this.hasRatioFitChild && this.orientation === 0) {
+      return true;
+    }
+    return HasHeightWrap$2.call(this);
+  };
+
+  var RunHeightWrap$2 = function RunHeightWrap(height) {
+    if (this.wrapResult) {
+      // Already got wrapResult
+      return;
+    }
+    if (this.orientation === 0) {
+      ExpandFitRatioChildren.call(this, undefined, height);
+    }
+    RunHeightWrap$3.call(this, height);
   };
 
   var Zone = Phaser.GameObjects.Zone;
@@ -11593,10 +11644,13 @@
     getExpandedChildHeight: GetExpandedChildHeight$2,
     getChildrenSizers: GetChildrenSizers$3,
     preLayout: PreLayout$2,
-    postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren$3,
     resolveWidth: ResolveWidth$1,
     resolveHeight: ResolveHeight$1,
+    hasWidthWrap: HasWidthWrap$1,
+    runWidthWrap: RunWidthWrap$2,
+    hasHeightWrap: HasHeightWrap$1,
+    runHeightWrap: RunHeightWrap$2,
     setChildrenAlignMode: SetChildrenAlignMode
   };
   Object.assign(methods$i, AddChildMethods$6, RemoveChildMethods$5, AlignMethods, ProportionMethods, ExpandMethods$1);
@@ -15339,7 +15393,7 @@
     if (baseFrameName === '__BASE') {
       return "".concat(colIndex, ",").concat(rowIndex);
     } else {
-      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
+      return "".concat(baseFrameName, ":").concat(colIndex, ",").concat(rowIndex);
     }
   };
 
@@ -26036,7 +26090,7 @@
     var width = ResolveWidth$3.call(this, width);
 
     // Calculate proportionLength
-    if (this.proportionWidthLength === undefined) {
+    if (width !== undefined && this.proportionWidthLength === undefined) {
       var totalColumnProportions = this.totalColumnProportions;
       if (totalColumnProportions > 0) {
         var remainder = width - this.getChildrenWidth(false);
@@ -26054,7 +26108,7 @@
     var height = ResolveHeight$3.call(this, height);
 
     // Get proportionLength    
-    if (this.proportionHeightLength === undefined) {
+    if (height !== undefined && this.proportionHeightLength === undefined) {
       var totalRowProportions = this.totalRowProportions;
       if (totalRowProportions > 0) {
         var remainder = height - this.getChildrenHeight(false);
@@ -27539,7 +27593,7 @@
     if (this.orientation === 0) {
       return true;
     }
-    return HasWidthWrap$1.call(this);
+    return HasWidthWrap$2.call(this);
   };
 
   var RunChildrenWrap = function RunChildrenWrap(lineWidth) {
@@ -27681,7 +27735,7 @@
     if (this.orientation === 0) {
       var innerWidth = width - this.space.left - this.space.right;
       this.wrapResult = RunChildrenWrap.call(this, innerWidth);
-      RunWidthWrap$2.call(this, width);
+      RunWidthWrap$3.call(this, width);
     }
   };
 
@@ -27689,7 +27743,7 @@
     if (this.orientation === 1) {
       return true;
     }
-    return HasHeightWrap$1.call(this);
+    return HasHeightWrap$2.call(this);
   };
 
   var RunHeightWrap = function RunHeightWrap(height) {
@@ -27700,7 +27754,7 @@
     if (this.orientation === 1) {
       var innerHeight = height - this.space.top - this.space.bottom;
       this.wrapResult = RunChildrenWrap.call(this, innerHeight);
-      RunHeightWrap$2.call(this, height);
+      RunHeightWrap$3.call(this, height);
     }
   };
 
