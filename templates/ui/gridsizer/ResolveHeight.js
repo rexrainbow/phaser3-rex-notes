@@ -4,7 +4,7 @@ var ResolveHeight = function (height) {
     var height = ResolveHeightBase.call(this, height);
 
     // Get proportionLength    
-    if (this.proportionHeightLength === undefined) {
+    if ((height !== undefined) && (this.proportionHeightLength === undefined)) {
         var totalRowProportions = this.totalRowProportions;
         if (totalRowProportions > 0) {
             var remainder = height - this.getChildrenHeight(false);

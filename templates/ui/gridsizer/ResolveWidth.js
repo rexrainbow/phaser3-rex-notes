@@ -4,7 +4,7 @@ var ResolveWidth = function (width) {
     var width = ResolveWidthBase.call(this, width);
 
     // Calculate proportionLength
-    if (this.proportionWidthLength === undefined) {
+    if ((width !== undefined) && (this.proportionWidthLength === undefined)) {
         var totalColumnProportions = this.totalColumnProportions;
         if (totalColumnProportions > 0) {
             var remainder = width - this.getChildrenWidth(false);

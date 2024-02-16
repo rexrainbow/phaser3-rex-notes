@@ -4,10 +4,13 @@ import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
-import PostResolveSize from './PostResolveSize.js';
 import LayoutChildren from './LayoutChildren.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveHeight from './ResolveHeight.js';
+import HasWidthWrap from './HasWidthWrap.js';
+import RunWidthWrap from './RunWidthWrap.js';
+import HasHeightWrap from './HasHeightWrap.js';
+import RunHeightWrap from './RunHeightWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import AlignMethods from './AlignMethods.js';
@@ -22,10 +25,13 @@ var methods = {
     getExpandedChildHeight: GetExpandedChildHeight,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
-    postResolveSize: PostResolveSize,
     layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight,
+    hasWidthWrap: HasWidthWrap,
+    runWidthWrap: RunWidthWrap,
+    hasHeightWrap: HasHeightWrap,
+    runHeightWrap: RunHeightWrap,
 
     setChildrenAlignMode: SetChildrenAlignMode,
 };

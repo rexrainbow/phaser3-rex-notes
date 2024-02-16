@@ -9,7 +9,7 @@ var GetChildrenWidth = function (minimumMode) {
 
     var result = 0;
     var children = this.sizerChildren;
-    var child, proportion, padding, childWidth;
+    var child, sizerConfig, proportion, padding, childWidth;
     var hasUnknownChildWidth = false;
     var totalProportion = this.childrenProportion; // To update this.hasProportion0Child member
 
@@ -19,13 +19,22 @@ var GetChildrenWidth = function (minimumMode) {
         var isFirstChild = true;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            if (child.rexSizer.hidden) {
+            if (!child.hasOwnProperty('rexSizer')) {
                 continue;
             }
 
-            proportion = child.rexSizer.proportion;
+            sizerConfig = child.rexSizer;
+            if (sizerConfig.hidden) {
+                continue;
+            }
+
+            proportion = sizerConfig.proportion;
             if ((proportion === 0) || minimumMode) {
                 childWidth = this.getChildWidth(child);
+                if ((sizerConfig.fitRatio > 0) && (childWidth === 0)) {
+                    childWidth = undefined;
+                }
+
                 if (childWidth === undefined) {
                     if ((proportion !== 0) && (!this.hasProportion0Child)) {
                         childWidth = 0;
@@ -59,7 +68,9 @@ var GetChildrenWidth = function (minimumMode) {
             if (!child.hasOwnProperty('rexSizer')) {
                 continue;
             }
-            if (child.rexSizer.hidden) {
+
+            sizerConfig = child.rexSizer;
+            if (sizerConfig.hidden) {
                 continue;
             }
 
@@ -72,7 +83,7 @@ var GetChildrenWidth = function (minimumMode) {
                 continue;
             }
 
-            padding = child.rexSizer.padding;
+            padding = sizerConfig.padding;
             childWidth += (padding.left + padding.right);
 
             result = Math.max(childWidth, result);
