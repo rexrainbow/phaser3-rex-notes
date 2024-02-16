@@ -18,6 +18,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - [Set children interactive](https://codepen.io/rexrainbow/pen/vYWdBZQ)
 - [Drag drop child](https://codepen.io/rexrainbow/pen/YzEaRwd)
 - [Bring child to top](https://codepen.io/rexrainbow/pen/gOqNbRr)
+- [Fit-ratio](https://codepen.io/rexrainbow/pen/ZEPwrom)
 
 ## Usage
 
