@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
 
 var AddImage = function (sizer, key) {
     var icon = sizer.scene.add.image(0, 0, key);
-    sizer.add(icon, { fitRatio: icon.width / icon.height })
+    sizer.add(icon, { fitRatio: true })
 }
 
 var config = {

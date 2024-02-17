@@ -80,8 +80,10 @@ var Add = function (
         }
     }
 
-    if (fitRatio === undefined) {
+    if ((fitRatio === undefined) || (fitRatio === false)) {
         fitRatio = 0;
+    } else if (fitRatio === true) {
+        fitRatio = GetDisplayWidth(gameObject) / GetDisplayHeight(gameObject);
     }
 
     var config = this.getSizerConfig(gameObject);

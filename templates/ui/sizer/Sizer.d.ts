@@ -99,7 +99,7 @@ declare class Sizer extends BaseSizer {
         index?: number,
         minWidth?: number,
         minHeight?: number,
-        fitRatio?: number,
+        fitRatio?: number | boolean,
     ): this;
 
     insert(

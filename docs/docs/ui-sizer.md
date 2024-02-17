@@ -236,7 +236,7 @@ sizer.add(child,
         index: undefined,
         minWidth: undefined,
         minHeight: undefined,
-        fitRatio: 0,
+        fitRatio: 0,  // true
     }
 );
 ```
@@ -291,8 +291,10 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     `orientation` is `x`, and `expand` is `true`
     - Default value is current display height.
 - `fitRatio` : Resize child to fit sizer height/width before layout children, when `proportion` is set to `0`.
-    - `0` : Ignore this feature. Default behavior.
+    - `0`, or `false` : Ignore this feature. Default behavior.
+    - `true` : Fit ratio (width/height) from game object's display size.
     - `> 0` : Fit ratio (width/height). `1` is square.
+
 
 ### Insert child
 
