@@ -16,6 +16,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var print = this.add.text(0, 0, '');
+        var clickButtonCallback = function (item) {
+            print.text += `Click ${item.text}\n`;
+        }
+
+        this.input.topOnly = false;
         var panel = this.rexUI.add.scrollablePanel({
             x: 400, y: 300,
             width: 200, height: 300,
@@ -23,7 +29,7 @@ class Demo extends Phaser.Scene {
             scrollMode: 'y',
 
             panel: {
-                child: CreatePanel(this),
+                child: CreatePanel(this, clickButtonCallback),
             },
 
             slider: {
@@ -37,7 +43,7 @@ class Demo extends Phaser.Scene {
                 }),
             },
 
-            scroller: false,
+            scroller: true,
 
             space: {
                 slider: 10,
@@ -50,7 +56,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreatePanel = function (scene) {
+var CreatePanel = function (scene, clickButtonCallback) {
     var panel = scene.rexUI.add.sizer({
         orientation: 'y',
         space: { item: 5 }
@@ -59,7 +65,7 @@ var CreatePanel = function (scene) {
     for (var i = 0; i < 30; i++) {
         panel
             .add(
-                CreateButton(scene, i.toString()),
+                CreateButton(scene, i.toString(), clickButtonCallback),
                 { expand: true }
             )
     }
@@ -67,8 +73,8 @@ var CreatePanel = function (scene) {
     return panel;
 }
 
-var CreateButton = function (scene, text) {
-    return scene.rexUI.add.label({
+var CreateButton = function (scene, text, clickButtonCallback) {
+    var button = scene.rexUI.add.label({
         height: 30,
 
         background: scene.rexUI.add.roundRectangle({
@@ -80,9 +86,16 @@ var CreateButton = function (scene, text) {
         align: 'center'
     })
         .onClick(function () {
-            console.log(`Click ${text}`);
+            clickButtonCallback(button)
         })
 
+    // button
+    //     .setInteractive()
+    //     .on('pointerdown', function () {
+    //         clickButtonCallback(button)
+    //     })
+
+    return button;
 }
 
 var config = {
