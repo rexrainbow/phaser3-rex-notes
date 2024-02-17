@@ -4,7 +4,7 @@ var ResolveWidth = function (width) {
     var width = ResolveWidthBase.call(this, width);
 
     // Calculate proportionLength
-    if ((this.orientation === 0) && (this.proportionLength === undefined)) {
+    if ((width !== undefined) && (this.orientation === 0) && (this.proportionLength === undefined)) {
         var remainder = width - this.childrenWidth;
         if (remainder > 0) {
             remainder = width - this.getChildrenWidth(false);

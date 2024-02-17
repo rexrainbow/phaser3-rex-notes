@@ -17,7 +17,6 @@ import ResolveHeight from './ResolveHeight.js';
 import HasHeightWrap from './HasHeightWrap.js';
 import ResolveChildrenHeight from './ResolveChildrenHeight.js';
 import RunHeightWrap from './RunHeightWrap.js';
-import PostResolveSize from './PostResolveSize.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
@@ -68,7 +67,6 @@ var methods = {
     hasHeightWrap: HasHeightWrap,
     resolveChildrenHeight: ResolveChildrenHeight,
     runHeightWrap: RunHeightWrap,
-    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth,

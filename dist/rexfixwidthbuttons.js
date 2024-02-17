@@ -3375,8 +3375,6 @@
     return this;
   };
 
-  var PostResolveSize = function PostResolveSize(width, height) {};
-
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -3542,17 +3540,15 @@
     if (isTopmostParent) {
       this.preLayout();
     }
+    var size, width, height;
     var runWidthWrap = isTopmostParent && this.hasWidthWrap();
     var runHeightWrap = isTopmostParent && this.hasHeightWrap();
-    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+    size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
       console.error('Can\'t resolve size of ', this);
     }
-    var width = size.width,
-      height = size.height;
-
-    // The last chance of resolving size
-    this.postResolveSize(width, height);
+    width = size.width;
+    height = size.height;
 
     // Resize parent
     this.resize(width, height);
@@ -10565,7 +10561,6 @@
     hasHeightWrap: HasHeightWrap$1,
     resolveChildrenHeight: ResolveChildrenHeight,
     runHeightWrap: RunHeightWrap$1,
-    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth,

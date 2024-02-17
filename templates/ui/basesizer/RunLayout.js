@@ -11,18 +11,18 @@ var RunLayout = function (parent, newWidth, newHeight) {
         this.preLayout();
     }
 
+    var size, width, height;
+
     var runWidthWrap = isTopmostParent && this.hasWidthWrap();
     var runHeightWrap = isTopmostParent && this.hasHeightWrap();
-    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+
+    size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
         console.error('Can\'t resolve size of ', this);
     }
 
-    var width = size.width,
-        height = size.height;
-
-    // The last chance of resolving size
-    this.postResolveSize(width, height);
+    width = size.width;
+    height = size.height;
 
     // Resize parent
     this.resize(width, height);

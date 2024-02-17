@@ -10,12 +10,12 @@ var PreLayout = function () {
         if (child.rexSizer.hidden) {
             continue;
         }
-        if (!child.rexSizer.fitRatio) {
-            continue;
+
+        if (child.rexSizer.fitRatio > 0) {
+            ResizeGameObject(child, 0, 0);
+            this.hasRatioFitChild = true;
         }
 
-        ResizeGameObject(child, 1, 1);
-        this.hasRatioFitChild = true;
     }
 
     this._childrenProportion = undefined;

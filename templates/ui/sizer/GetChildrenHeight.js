@@ -9,7 +9,7 @@ var GetChildrenHeight = function (minimumMode) {
 
     var result = 0;
     var children = this.sizerChildren;
-    var child, proportion, padding, childHeight;
+    var child, sizerConfig, proportion, padding, childHeight;
     var hasUnknownChildHeight = false;
     var totalProportion = this.childrenProportion; // To update this.hasProportion0Child member
 
@@ -17,7 +17,12 @@ var GetChildrenHeight = function (minimumMode) {
         // Get maximun height
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            if (child.rexSizer.hidden) {
+            if (!child.hasOwnProperty('rexSizer')) {
+                continue;
+            }
+
+            sizerConfig = child.rexSizer;
+            if (sizerConfig.hidden) {
                 continue;
             }
 
@@ -30,7 +35,7 @@ var GetChildrenHeight = function (minimumMode) {
                 continue;
             }
 
-            padding = child.rexSizer.padding;
+            padding = sizerConfig.padding;
             childHeight += padding.top + padding.bottom;
             result = Math.max(childHeight, result);
         }
@@ -43,13 +48,19 @@ var GetChildrenHeight = function (minimumMode) {
             if (!child.hasOwnProperty('rexSizer')) {
                 continue;
             }
-            if (child.rexSizer.hidden) {
+
+            sizerConfig = child.rexSizer;
+            if (sizerConfig.hidden) {
                 continue;
             }
 
-            proportion = child.rexSizer.proportion;
+            proportion = sizerConfig.proportion;
             if ((proportion === 0) || minimumMode) {
                 childHeight = this.getChildHeight(child);
+                if ((sizerConfig.fitRatio > 0) && (childHeight === 0)) {
+                    childHeight = undefined;
+                }
+
                 if (childHeight === undefined) {
                     if ((proportion !== 0) && (!this.hasProportion0Child)) {
                         childHeight = 0;
@@ -65,7 +76,7 @@ var GetChildrenHeight = function (minimumMode) {
                 continue;
             }
 
-            padding = child.rexSizer.padding;
+            padding = sizerConfig.padding;
             childHeight += (padding.top + padding.bottom);
 
             if (isFirstChild) {
