@@ -3375,8 +3375,6 @@
     return this;
   };
 
-  var PostResolveSize = function PostResolveSize(width, height) {};
-
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -3551,9 +3549,6 @@
     }
     width = size.width;
     height = size.height;
-
-    // The last chance of resolving size
-    this.postResolveSize(width, height);
 
     // Resize parent
     this.resize(width, height);
@@ -10566,7 +10561,6 @@
     hasHeightWrap: HasHeightWrap,
     resolveChildrenHeight: ResolveChildrenHeight,
     runHeightWrap: RunHeightWrap,
-    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,

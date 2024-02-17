@@ -24,9 +24,6 @@ var RunLayout = function (parent, newWidth, newHeight) {
     width = size.width;
     height = size.height;
 
-    // The last chance of resolving size
-    this.postResolveSize(width, height);
-
     // Resize parent
     this.resize(width, height);
 
