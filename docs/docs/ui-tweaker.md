@@ -85,6 +85,7 @@ var tweaker = scene.rexUI.add.tweaker({
     // height: undefined,
     // orientation: 0,
 
+    // style: { ... }
     styles : {
         itemWidth : 0,
 
@@ -197,7 +198,7 @@ var tweaker = scene.rexUI.add.tweaker({
 - `orientation` : Main orientation of the tweaker.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom. Default value is `1`.
-- `styles` : Styles settings of input rows, separator, folder, and tab. See [Styles chapter](ui-tweaker.md#styles) for more detail.
+- `styles`, or `style` : Styles settings of input rows, separator, folder, and tab. See [Styles chapter](ui-tweaker.md#styles) for more detail.
     - `style.itemWidth` : Width of input row, used if `orientation` is set to `'y'`(`1`).
     - `styles.space` : Pads spaces.
         - `styles.space.left`, `styles.space.right`, `styles.space.top`, `styles.space.bottom` : Space of bounds.
@@ -1254,6 +1255,7 @@ Style of text-area input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -1400,6 +1402,7 @@ Style of text-area input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -1604,6 +1607,7 @@ Style of text/number list input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -1795,6 +1799,7 @@ Style of buttons input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -1928,6 +1933,7 @@ Style of range input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -2121,6 +2127,7 @@ Style of color input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -2357,6 +2364,7 @@ Style of boolean input is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -2494,6 +2502,7 @@ Style of button is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         inputRow: {
             background: {
@@ -2622,6 +2631,7 @@ Style of separator is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         separator: {
             height: 0,
@@ -2648,6 +2658,7 @@ Style of folder is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         folder: {
             title: {
@@ -2736,6 +2747,7 @@ Style of tab is defined in
 
 ```javascript
 {
+    // style: {...}
     styles: {
         tab: {
             tab: {
