@@ -66,17 +66,14 @@ var CreateFolder = function (scene, { title, children }, clickCallback) {
         child: child,
         title: title,
         toggleByTarget: title.getElement('toggleTarget'),
-        toggleClickConfig: {
-            threshold: 10,
-        },
 
         transition: {
             // duration: 200,
         },
 
         expand: {
-            title: true,
-            child: true,
+            // title: true,
+            // child: true,
         },
 
         space: {

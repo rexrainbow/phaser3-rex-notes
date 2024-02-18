@@ -255,11 +255,11 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```
     - Title game object
         ```javascript
-        var icon = folder.getElement('title');
+        var title = folder.getElement('title');
         ```
     - Child game object
         ```javascript
-        var textObject = folder.getElement('child');
+        var child = folder.getElement('child');
         ```    
 - Get by name
     ```javascript
