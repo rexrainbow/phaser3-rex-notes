@@ -55,11 +55,26 @@ class TreeNode extends Folder {
 
         this.addChildrenMap('toggleButton', toggleButton);
         this.addChildrenMap('node', node);
+
+        this
+            .on('expand.start', function () {
+                toggleButton.emit('expand.start', toggleButton)
+            })
+            .on('expand.complete', function () {
+                toggleButton.emit('expand.complete', toggleButton)
+            })
+            .on('collapse.start', function () {
+                toggleButton.emit('collapse.start', toggleButton)
+            })
+            .on('collapse.complete', function () {
+                toggleButton.emit('collapse.complete', toggleButton)
+            })
+
+        this.expand(0);
     }
 
     createTree(config) {
         var tree = new TreeNode(this.scene, Merge(this.configSave, config));
-        tree.expand(0);
         return tree;
     }
 

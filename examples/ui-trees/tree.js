@@ -37,7 +37,13 @@ class Demo extends Phaser.Scene {
                     return scene.rexUI.add.triangle({
                         color: COLOR_LIGHT,
                         padding: 2
-                    });
+                    })
+                        .on('expand.start', function (gameObject) {
+                            gameObject.setDirection('down');
+                        })
+                        .on('collapse.start', function (gameObject) {
+                            gameObject.setDirection('right');
+                        })
                 },
 
                 node: function (scene, { isLeaf }) {
@@ -73,6 +79,7 @@ class Demo extends Phaser.Scene {
             }
 
         })
+            .setOrigin(0)
 
         this.add.existing(trees);
 

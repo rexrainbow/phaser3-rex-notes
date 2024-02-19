@@ -6,6 +6,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 // TODO extend from TreeNode
 class Trees extends Sizer {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        if (!config.hasOwnProperty('orientation')) {
+            config.orientation = 'y';
+        }
+
         super(scene, config);
         this.type = 'rexTrees';
 
