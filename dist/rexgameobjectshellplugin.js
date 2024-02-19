@@ -39775,6 +39775,9 @@
       if (config === undefined) {
         config = {};
       }
+      if (config.hasOwnProperty('style')) {
+        config.styles = config.style;
+      }
       if (config.styles === undefined) {
         config.styles = {}; // TODO: Default styles
       }

@@ -46,6 +46,13 @@ declare class DialogQuest extends Phaser.Events.EventEmitter {
 
     isLast(): boolean;
 
+    removeAll(): this;
+
+    add(
+        questions: QuestManager.QuestionType[] | string,
+        config?: QuestManager.IAddQuestionsConfig
+    ): this;
+
     getData(
         key: string,
         defaultValue?: any
