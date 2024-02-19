@@ -1,4 +1,5 @@
 import IsGameObject from '../../../../plugins/utils/system/IsGameObject';
+import CreateNodeSizer from './CreateNodeSizer';
 import SyncDisplayList from '../methods/SyncDisplayList';
 
 export default {
@@ -37,14 +38,7 @@ export default {
     addNode(gameObject, config) {
         if (!IsGameObject(gameObject)) {
             config = gameObject;
-
-            var callback = this.configSave.node;
-            if (callback) {
-                gameObject = callback(this.scene, { isLeaf: true });
-            } else {
-                // error
-                return this;
-            }
+            gameObject = CreateNodeSizer(this.scene, this.configSave, { isLeaf: true });
         }
 
         if (typeof (config) === 'string') {
@@ -64,14 +58,7 @@ export default {
     insertNode(index, gameObject, config) {
         if (!IsGameObject(gameObject)) {
             config = gameObject;
-
-            var callback = this.configSave.node;
-            if (callback) {
-                gameObject = callback(this.scene, { isLeaf: true });
-            } else {
-                // error
-                return this;
-            }
+            gameObject = CreateNodeSizer(this.scene, this.configSave, { isLeaf: true });
         }
 
         if (typeof (config) === 'string') {

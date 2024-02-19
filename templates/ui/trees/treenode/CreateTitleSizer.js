@@ -1,30 +1,25 @@
-import Sizer from '../../sizer/Sizer.js';
+import CreateNodeSizer from './CreateNodeSizer.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 var CreateTitleSizer = function (scene, config) {
-    var titleSizer = new Sizer(scene, {
-        orientation: 'x'
-    })
-
-    // Optional
-    var titleBackground = GetGameObjectFromConfig(scene, config, 'titleBackground');
+    var nodeSizer = CreateNodeSizer(scene, config, { isLeaf: false });
 
     // Required
-    var toggleButton = GetGameObjectFromConfig(scene, config, 'toggleButton');
+    var toggleButton = GetGameObjectFromConfig(scene, config, 'toggleButton', { isLeaf: false });
 
-    // Required
-    var node = GetGameObjectFromConfig(scene, config, 'node', { isLeaf: false });
+    nodeSizer.insert(0, toggleButton,
+        {
+            padding: {
+                right: GetValue(config, 'space.toggleButton', 0)
+            },
+            fitRatio: 1,
+            key: 'toggleButton'
+        }
+    );
 
-
-    if (titleBackground) {
-        titleSizer.addBackground(titleBackground);
-    }
-
-    titleSizer.add(toggleButton, { fitRatio: 1, key: 'toggleButton' });
-
-    titleSizer.add(node, { proportion: 1, key: 'node' });
-
-    return titleSizer;
+    return nodeSizer;
 }
 
 export default CreateTitleSizer;

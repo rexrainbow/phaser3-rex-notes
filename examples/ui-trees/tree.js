@@ -23,14 +23,8 @@ class Demo extends Phaser.Scene {
             tree: {
                 space: {
                     indent: 30,
-                },
-
-                titleBackground: function (scene) {
-                    return scene.rexUI.add.roundRectangle({
-                        color: COLOR_MAIN,
-                        strokeColor: COLOR_LIGHT,
-                        strokeWidth: 2
-                    })
+                    nodeLeft: 10, nodeRight: 10, nodeTop: 10, nodeBottom: 10,
+                    toggleButton: 5
                 },
 
                 toggleButton: function (scene) {
@@ -46,34 +40,20 @@ class Demo extends Phaser.Scene {
                         })
                 },
 
+                nodeBackground: function (scene, { isLeaf }) {
+                    return scene.rexUI.add.roundRectangle({
+                        color: (isLeaf) ? COLOR_DARK : COLOR_MAIN,
+                        strokeColor: COLOR_LIGHT,
+                        strokeWidth: 2
+                    })
+                },
+
                 node: function (scene, { isLeaf }) {
-                    var node;
-                    if (!isLeaf) {
-                        node = scene.rexUI.add.label({
-                            text: scene.add.text(0, 0, '', {
-                                fontSize: 18
-                            }),
-                        })
-
-                    } else {
-                        node = scene.rexUI.add.label({
-                            background: scene.rexUI.add.roundRectangle({
-                                color: COLOR_DARK,
-                                strokeColor: COLOR_LIGHT,
-                                strokeWidth: 2
-                            }),
-
-                            text: scene.add.text(0, 0, '', {
-                                fontSize: 18
-                            }),
-
-                            space: {
-                                left: 10, right: 10, top: 10, bottom: 10
-                            }
-                        })
-                    }
-
-                    return node;
+                    return scene.rexUI.add.label({
+                        text: scene.add.text(0, 0, '', {
+                            fontSize: 18
+                        }),
+                    });
 
                 },
             }
@@ -90,13 +70,13 @@ class Demo extends Phaser.Scene {
         subTree.getElement('node').text = 'T00';
 
         var node = subTree.addNode('t00n0');
-        node.text = 'T00N0';
+        node.getElement('node').text = 'T00N0';
 
         node = subTree.addNode('t00n1');
-        node.text = 'T00N1';
+        node.getElement('node').text = 'T00N1';
 
         node = subTree.addNode('t00n2');
-        node.text = 'T00N2';
+        node.getElement('node').text = 'T00N2';
 
         trees.layout();
     }
