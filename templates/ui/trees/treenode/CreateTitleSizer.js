@@ -1,24 +1,19 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-var CreateTitleSizer = function (tree, config) {
-    var scene = tree.scene;
+var CreateTitleSizer = function (scene, config) {
     var titleSizer = new Sizer(scene, {
         orientation: 'x'
     })
 
-    tree.syncDisplayList(titleSizer);;
-
     // Optional
-    var titleBackground = GetGameObjectFromConfig(tree, config, 'titleBackground');
+    var titleBackground = GetGameObjectFromConfig(scene, config, 'titleBackground');
 
     // Required
-    var toggleButton = GetGameObjectFromConfig(tree, config, 'toggleButton');
+    var toggleButton = GetGameObjectFromConfig(scene, config, 'toggleButton');
 
     // Required
-    var node = GetGameObjectFromConfig(tree, config, 'node', { isLeaf: false });
+    var node = GetGameObjectFromConfig(scene, config, 'node', { isLeaf: false });
 
 
     if (titleBackground) {

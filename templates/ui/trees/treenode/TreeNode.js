@@ -13,12 +13,11 @@ class TreeNode extends Folder {
             config = {};
         }
 
-        // Bug: no `this` here, before invoking super()
-        var background = GetGameObjectFromConfig(this, config, 'background');
+        var background = GetGameObjectFromConfig(scene, config, 'background');
 
-        var child = CreateChildrenSizer(this, config);
+        var child = CreateChildrenSizer(scene, config);
 
-        var title = CreateTitleSizer(this, config);
+        var title = CreateTitleSizer(scene, config);
         var toggleButton = title.childrenMap.toggleButton;
         var node = title.childrenMap.node;
 
@@ -40,6 +39,7 @@ class TreeNode extends Folder {
 
         super(scene, folderConfig);
         this.type = 'rexTree';
+
         this.rexSizer.treeParent = null;
         this.configSave = config;
 

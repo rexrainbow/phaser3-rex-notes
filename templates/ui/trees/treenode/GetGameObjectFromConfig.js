@@ -1,11 +1,12 @@
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
-var GetGameObjectFromConfig = function (tree, config, key, createCallbackData) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var GetGameObjectFromConfig = function (scene, config, key, createCallbackConfig) {
     var gameObject = GetValue(config, key);
     if (IsFunction(gameObject)) {
         var callback = gameObject;
-        gameObject = callback(tree.scene, createCallbackData);
-        tree.syncDisplayList(gameObject);
+        gameObject = callback(scene, createCallbackConfig);        
     }
 
     return gameObject;

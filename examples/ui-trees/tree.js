@@ -25,6 +25,14 @@ class Demo extends Phaser.Scene {
                     childLeft: 30,
                 },
 
+                titleBackground: function (scene) {
+                    return scene.rexUI.add.roundRectangle({
+                        color: COLOR_MAIN,
+                        strokeColor: COLOR_LIGHT,
+                        strokeWidth: 2
+                    })
+                },
+
                 toggleButton: function (scene) {
                     return scene.rexUI.add.triangle({
                         color: COLOR_LIGHT,
@@ -44,7 +52,7 @@ class Demo extends Phaser.Scene {
                     } else {
                         node = scene.rexUI.add.label({
                             background: scene.rexUI.add.roundRectangle({
-                                color: backgroundColor,
+                                color: COLOR_DARK,
                                 strokeColor: COLOR_LIGHT,
                                 strokeWidth: 2
                             }),

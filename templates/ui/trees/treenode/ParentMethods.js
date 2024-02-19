@@ -1,6 +1,4 @@
 
-import SyncDisplayList from '../methods/SyncDisplayList.js';
-
 export default {
     getTreePatent(gameObject) {
         if (gameObject === undefined) {
@@ -58,9 +56,4 @@ export default {
 
         return false;
     },
-
-    syncDisplayList(gameObject) {
-        SyncDisplayList(this, gameObject);
-        return this;
-    }
 }

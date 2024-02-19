@@ -1,4 +1,5 @@
 import IsGameObject from '../../../../plugins/utils/system/IsGameObject';
+import SyncDisplayList from '../methods/SyncDisplayList';
 
 export default {
     addSubTree(config) {
@@ -11,7 +12,7 @@ export default {
         }
 
         var subTree = this.createTree(config);
-        this.syncDisplayList(subTree);
+        SyncDisplayList(this, subTree);
 
         this.addNode(subTree, { expand: true, key: key });
         return subTree;
@@ -27,7 +28,7 @@ export default {
         }
 
         var subTree = this.createTree(config);
-        this.syncDisplayList(subTree);
+        SyncDisplayList(this, subTree)
 
         this.insertNode(index, subTree, { expand: true, key: key });
         return subTree;
