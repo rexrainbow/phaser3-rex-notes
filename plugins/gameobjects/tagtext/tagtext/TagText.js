@@ -1,12 +1,12 @@
 import Text from '../textbase/Text.js';
-import ParserKlass from './Parser.js';
+import ParserClass from './Parser.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TagText extends Text {
     constructor(scene, x, y, text, style) {
         var tags = GetValue(style, 'tags', undefined);
-        var parser = new ParserKlass(tags);
+        var parser = new ParserClass(tags);
         super(scene, x, y, text, style, 'rexTagText', parser);
     }
 

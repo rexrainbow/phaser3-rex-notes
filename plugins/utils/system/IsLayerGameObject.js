@@ -1,7 +1,7 @@
-const LayerKlass = Phaser.GameObjects.Layer;
+const LayerClass = Phaser.GameObjects.Layer;
 
 var IsLayerGameObject = function (gameObject) {
-    return (gameObject instanceof LayerKlass);
+    return (gameObject instanceof LayerClass);
 }
 
 export default IsLayerGameObject;
