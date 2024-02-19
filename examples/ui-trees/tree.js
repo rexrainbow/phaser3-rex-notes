@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
 
             tree: {
                 space: {
-                    childLeft: 30,
+                    indent: 30,
                 },
 
                 titleBackground: function (scene) {
