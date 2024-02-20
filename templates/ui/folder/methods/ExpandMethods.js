@@ -74,7 +74,8 @@ export default {
     },
 
     setExpandedState(expanded) {
-        this.setDirty(false);
+        var dirtySave = this.dirty;
+        this.dirty = false;
 
         if (expanded === undefined) {
             this.expanded = undefined;
@@ -84,7 +85,7 @@ export default {
             this.collapse(0);
         }
 
-        this.setDirty(true);
+        this.dirty = dirtySave;
 
         return this;
     }
