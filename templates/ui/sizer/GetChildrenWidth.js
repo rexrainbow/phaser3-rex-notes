@@ -31,7 +31,7 @@ var GetChildrenWidth = function (minimumMode) {
             proportion = sizerConfig.proportion;
             if ((proportion === 0) || minimumMode) {
                 childWidth = this.getChildWidth(child);
-                if ((sizerConfig.fitRatio > 0) && (childWidth === 0)) {
+                if ((sizerConfig.fitRatio > 0) && (!sizerConfig.resolved)) {
                     childWidth = undefined;
                 }
 

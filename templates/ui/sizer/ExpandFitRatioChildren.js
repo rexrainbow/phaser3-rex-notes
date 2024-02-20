@@ -12,16 +12,18 @@ var ExpandFitRatioChildren = function (width, height) {
         innerWidth = width - this.getInnerPadding('left') - this.getInnerPadding('right');
     }
 
-    var children = this.sizerChildren,
-        childWidth, childHeight;
+    var child, sizerConfig;
+    var childWidth, childHeight;
+    var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-        if (child.rexSizer.hidden) {
+        var sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
             continue;
         }
 
-        var fitRatio = child.rexSizer.fitRatio;
-        if (!fitRatio) {
+        var fitRatio = sizerConfig.fitRatio;
+        if (!fitRatio || sizerConfig.resolved) {
             continue;
         }
 
@@ -39,6 +41,8 @@ var ExpandFitRatioChildren = function (width, height) {
         if (child.isRexSizer) {
             child.setMinSize(childWidth, childHeight)
         }
+
+        sizerConfig.resolved = true;
     }
 }
 
