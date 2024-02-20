@@ -9,6 +9,9 @@ declare namespace Tree {
     interface ISpaceConfig extends Folder.ISpaceConfig {
         indent?: number,
         indentLeft?: number, indentRight?: number, indentTop?: number, indentBottom?: number,
+
+        nodeLeft?: number, nodeRight?: number, nodeTop?: number, nodeBottom?: number,
+        toggleButton?: number,
     }
 
     interface IConfig {
@@ -36,6 +39,8 @@ declare class Tree extends Folder {
         scene: Phaser.Scene,
         config?: Tree.IConfig
     );
+
+    readonly nodesMap: { [nodeKey: string]: Phaser.GameObjects.GameObject };
 
     addTree(
         config?: Tree.IAddTreeConfig | string

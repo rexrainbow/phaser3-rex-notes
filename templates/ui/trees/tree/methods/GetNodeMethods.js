@@ -9,27 +9,25 @@ export default {
 
         var name = mapNameList.shift();
 
-        var childrenSizer = this.childrenMap.child;
-        var element = childrenSizer.getElement(name);
+        var element = this.nodesMap[name];
 
         if (mapNameList.length === 0) {
             return element;
         } else if (element && this.isTree(element)) {
-            return element.getElement(mapNameList);
+            return element.getNode(mapNameList);
         } else {
             return null;
         }
     },
 
     getNodes(out) {
-        var childrenSizer = this.childrenMap.child;
-        var nodes = childrenSizer.childrenMap.items;
+        var nodesMap = this.nodesMap;
 
         if (!out) {
             out = nodes; // Return internal children array
         } else {
-            for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-                out.push(nodes[i]);
+            for (var nodeKey in nodesMap) {
+                out.push(nodesMap[nodeKey]);
             }
             // Copy children
         }

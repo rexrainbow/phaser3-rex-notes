@@ -10,22 +10,22 @@ export default {
     },
 
     insertTree(index, config) {
-        var key;
+        var nodeKey;
         if (typeof (config) === 'string') {
-            key = config;
+            nodeKey = config;
             config = undefined;
-        } else {
-            key = config.key;
+        } else if (config) {
+            nodeKey = config.nodeKey;
         }
 
-        if (key === undefined) {
-            key = UUID();
+        if (nodeKey === undefined) {
+            nodeKey = UUID();
         }
 
         var tree = this.createTree(config);
         SyncDisplayList(this, tree)
 
-        this.insertNode(index, tree, { expand: true, key: key });
+        this.insertNode(index, tree, { expand: true });
         return tree;
     },
 
@@ -34,19 +34,26 @@ export default {
     },
 
     insertNode(index, gameObject, config) {
+        var nodeKey;
+
         if (!IsGameObject(gameObject)) {
             config = gameObject;
             gameObject = new Node(this.scene, this.configSave, { isLeaf: true });
         }
 
         if (typeof (config) === 'string') {
-            config = { key: config };
-        } else if (!config) {
-            config = {};
+            nodeKey = config;
+            config = undefined;
+        } else if (config) {
+            nodeKey = config.nodeKey;
         }
 
-        if (!config.hasOwnProperty('key')) {
-            config.key = UUID();
+        if (nodeKey === undefined) {
+            nodeKey = UUID();
+        }
+
+        if (config === undefined) {
+            config = {}
         }
 
         if (!config.hasOwnProperty('expand')) {
@@ -56,6 +63,14 @@ export default {
         this.removeNode(gameObject, false);
 
         gameObject.rexSizer.treeParent = this;
+
+        if (this.nodesMap.hasOwnProperty(nodeKey)) {
+            console.error(`[Trees] Duplicate nodeKey '${nodeKey}'`);
+            this.removeNode(this.nodesMap[nodeKey], true);
+        }
+
+        gameObject.nodeKey = nodeKey;
+        this.nodesMap[nodeKey] = gameObject;
 
         var childrenSizer = this.childrenMap.child;
         childrenSizer.insert(index, gameObject, config);

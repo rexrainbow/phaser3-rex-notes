@@ -1,3 +1,5 @@
+import Clear from '../../../../../plugins/utils/object/Clear.js';
+
 export default {
     removeNode(gameObject, destroyChild) {
         if (!gameObject) {
@@ -9,6 +11,8 @@ export default {
             return this;
         }
 
+        delete treeParent.nodesMap[gameObject.nodeKey];
+        gameObject.nodeKey = null;
         gameObject.rexSizer.treeParent = null;
 
         var childrenSizer = treeParent.childrenMap.child;
@@ -23,6 +27,8 @@ export default {
         for (var i = 0, cnt = nodes.length; i < cnt; i++) {
             nodes[i].rexSizer.treeParent = null;
         }
+
+        Clear(this.nodesMap);
 
         childrenSizer.removeAll(destroyChild);
         return this;

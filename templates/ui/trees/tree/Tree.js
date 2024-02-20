@@ -52,6 +52,7 @@ class Tree extends Folder {
         this.type = 'rexTree';
 
         this.rexSizer.treeParent = null;
+        this.nodesMap = {};
         this.configSave = config;
 
         this.addChildrenMap('toggleButton', toggleButton);
@@ -73,6 +74,20 @@ class Tree extends Folder {
             })
 
         this.expand(0);
+    }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
+        this.configSave = undefined;
+
+        Clear(this.nodesMap);
+        this.nodesMap = undefined;
+
+        super.destroy(fromScene);
     }
 
     createTree(config) {
