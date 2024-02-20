@@ -1,12 +1,29 @@
+import IsGameObject from '../../../../plugins/utils/system/IsGameObject.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var GetGameObjectFromConfig = function (scene, config, key, createCallbackConfig) {
-    var gameObject = GetValue(config, key);
-    if (IsFunction(gameObject)) {
-        var callback = gameObject;
-        gameObject = callback(scene, createCallbackConfig);        
+var GetGameObjectFromConfig = function (
+    scene,
+    config, key,
+    createCallbackData,
+    defaultCreateGameObjectCallback
+) {
+
+    var creatorConfig = GetValue(config, key);
+
+    var gameObject;
+
+    if (IsGameObject(creatorConfig)) {
+        gameObject = creatorConfig;
+
+    } else if (IsFunction(creatorConfig)) {
+        gameObject = creatorConfig(scene, createCallbackData);
+        scene.add.existing(gameObject);
+
+    } else if (defaultCreateGameObjectCallback) {
+        gameObject = defaultCreateGameObjectCallback(scene, creatorConfig, createCallbackData);
+        scene.add.existing(gameObject);
     }
 
     return gameObject;

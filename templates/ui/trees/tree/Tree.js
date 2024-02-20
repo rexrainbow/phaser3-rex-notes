@@ -14,7 +14,11 @@ class Tree extends Folder {
             config = {};
         }
 
-        var background = GetGameObjectFromConfig(scene, config, 'background');
+        var background = GetGameObjectFromConfig(
+            scene,
+            config, 'background',
+            { isLeaf: false }
+        );
 
         var child = CreateChildrenSizer(scene, config);
         var childrenNodes = child.childrenMap.items;

@@ -1,5 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
+import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -19,10 +20,19 @@ class Node extends Sizer {
         this.type = 'rexTreeNode';
 
         // Optional
-        var nodeBackground = GetGameObjectFromConfig(scene, config, 'nodeBackground', createCallbackData);
+        var nodeBackground = GetGameObjectFromConfig(
+            scene,
+            config, 'nodeBackground',
+            createCallbackData
+        );
 
         // Required
-        var nodeBody = GetGameObjectFromConfig(scene, config, 'nodeBody', createCallbackData);
+        var nodeBody = GetGameObjectFromConfig(
+            scene,
+            config, 'nodeBody',
+            createCallbackData,
+            DefaultCreateNodeBodyCallback
+        );
 
         if (nodeBackground) {
             this.addBackground(nodeBackground);
@@ -46,6 +56,11 @@ class Node extends Sizer {
         }
         return treeParent.getTreeRoot();
     }
+}
+
+var DefaultCreateNodeBodyCallback = function (scene, config, createCallbackData) {
+    var gameObject = new SimpleLabel(scene, config);
+    return gameObject;
 }
 
 export default Node;
