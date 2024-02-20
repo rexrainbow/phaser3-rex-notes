@@ -23,7 +23,7 @@ var ExpandFitRatioChildren = function (width, height) {
         }
 
         var fitRatio = sizerConfig.fitRatio;
-        if (!fitRatio || sizerConfig.resolved) {
+        if (!fitRatio) {
             continue;
         }
 

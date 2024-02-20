@@ -12,10 +12,10 @@ var GetChildrenWidth = function (minimumMode) {
         if (minimumMode) {
             childrenWidth = this.maxChildWidth;
         } else {
-            childrenWidth = (this.wrapResult) ? this.wrapResult.width : undefined;
+            childrenWidth = (this.rexSizer.resolved) ? this.wrapResult.width : undefined;
         }
     } else {
-        childrenWidth = (this.wrapResult) ? this.wrapResult.width : undefined;
+        childrenWidth = (this.rexSizer.resolved) ? this.wrapResult.width : undefined;
     }
 
     if (childrenWidth === undefined) {
