@@ -3511,6 +3511,11 @@
   };
 
   var Layout = function Layout() {
+    // Skip hidden or !dirty sizer
+    if (this.ignoreLayout) {
+      return this;
+    }
+
     // Save scale
     var scaleXSave = this.scaleX;
     var scaleYSave = this.scaleY;
@@ -10880,7 +10885,7 @@
         proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childWidth = this.getChildWidth(child);
-          if (sizerConfig.fitRatio > 0 && childWidth === 0) {
+          if (sizerConfig.fitRatio > 0 && !sizerConfig.resolved) {
             childWidth = undefined;
           }
           if (childWidth === undefined) {
@@ -10986,7 +10991,7 @@
         proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childHeight = this.getChildHeight(child);
-          if (sizerConfig.fitRatio > 0 && childHeight === 0) {
+          if (sizerConfig.fitRatio > 0 && !sizerConfig.resolved) {
             childHeight = undefined;
           }
           if (childHeight === undefined) {
@@ -11082,14 +11087,17 @@
   var PreLayout$1 = function PreLayout() {
     // Resize child to 1x1 for ratio-fit 
     this.hasRatioFitChild = false;
+    var child, sizerConfig;
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-      if (child.rexSizer.hidden) {
+      child = children[i];
+      sizerConfig = child.rexSizer;
+      if (sizerConfig.hidden) {
         continue;
       }
-      if (child.rexSizer.fitRatio > 0) {
+      if (sizerConfig.fitRatio > 0) {
         ResizeGameObject(child, 0, 0);
+        sizerConfig.resolved = false;
         this.hasRatioFitChild = true;
       }
     }
@@ -11247,15 +11255,16 @@
     } else {
       width - this.getInnerPadding('left') - this.getInnerPadding('right');
     }
-    var children = this.sizerChildren,
-      childWidth,
-      childHeight;
+    var child, sizerConfig;
+    var childWidth, childHeight;
+    var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-      if (child.rexSizer.hidden) {
+      var sizerConfig = child.rexSizer;
+      if (sizerConfig.hidden) {
         continue;
       }
-      var fitRatio = child.rexSizer.fitRatio;
+      var fitRatio = sizerConfig.fitRatio;
       if (!fitRatio) {
         continue;
       }
@@ -11272,6 +11281,7 @@
       if (child.isRexSizer) {
         child.setMinSize(childWidth, childHeight);
       }
+      sizerConfig.resolved = true;
     }
   };
 

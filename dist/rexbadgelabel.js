@@ -3511,6 +3511,11 @@
   };
 
   var Layout = function Layout() {
+    // Skip hidden or !dirty sizer
+    if (this.ignoreLayout) {
+      return this;
+    }
+
     // Save scale
     var scaleXSave = this.scaleX;
     var scaleYSave = this.scaleY;

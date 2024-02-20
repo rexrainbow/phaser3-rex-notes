@@ -30109,6 +30109,11 @@
   };
 
   var Layout = function Layout() {
+    // Skip hidden or !dirty sizer
+    if (this.ignoreLayout) {
+      return this;
+    }
+
     // Save scale
     var scaleXSave = this.scaleX;
     var scaleYSave = this.scaleY;
@@ -40350,7 +40355,7 @@
         proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childWidth = this.getChildWidth(child);
-          if (sizerConfig.fitRatio > 0 && childWidth === 0) {
+          if (sizerConfig.fitRatio > 0 && !sizerConfig.resolved) {
             childWidth = undefined;
           }
           if (childWidth === undefined) {
@@ -40456,7 +40461,7 @@
         proportion = sizerConfig.proportion;
         if (proportion === 0 || minimumMode) {
           childHeight = this.getChildHeight(child);
-          if (sizerConfig.fitRatio > 0 && childHeight === 0) {
+          if (sizerConfig.fitRatio > 0 && !sizerConfig.resolved) {
             childHeight = undefined;
           }
           if (childHeight === undefined) {
@@ -40552,14 +40557,17 @@
   var PreLayout$3 = function PreLayout() {
     // Resize child to 1x1 for ratio-fit 
     this.hasRatioFitChild = false;
+    var child, sizerConfig;
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-      if (child.rexSizer.hidden) {
+      child = children[i];
+      sizerConfig = child.rexSizer;
+      if (sizerConfig.hidden) {
         continue;
       }
-      if (child.rexSizer.fitRatio > 0) {
+      if (sizerConfig.fitRatio > 0) {
         ResizeGameObject(child, 0, 0);
+        sizerConfig.resolved = false;
         this.hasRatioFitChild = true;
       }
     }
@@ -40704,15 +40712,16 @@
     } else {
       width - this.getInnerPadding('left') - this.getInnerPadding('right');
     }
-    var children = this.sizerChildren,
-      childWidth,
-      childHeight;
+    var child, sizerConfig;
+    var childWidth, childHeight;
+    var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-      if (child.rexSizer.hidden) {
+      var sizerConfig = child.rexSizer;
+      if (sizerConfig.hidden) {
         continue;
       }
-      var fitRatio = child.rexSizer.fitRatio;
+      var fitRatio = sizerConfig.fitRatio;
       if (!fitRatio) {
         continue;
       }
@@ -40729,6 +40738,7 @@
       if (child.isRexSizer) {
         child.setMinSize(childWidth, childHeight);
       }
+      sizerConfig.resolved = true;
     }
   };
 
@@ -43260,10 +43270,10 @@
       if (minimumMode) {
         childrenWidth = this.maxChildWidth;
       } else {
-        childrenWidth = this.wrapResult ? this.wrapResult.width : undefined;
+        childrenWidth = this.rexSizer.resolved ? this.wrapResult.width : undefined;
       }
     } else {
-      childrenWidth = this.wrapResult ? this.wrapResult.width : undefined;
+      childrenWidth = this.rexSizer.resolved ? this.wrapResult.width : undefined;
     }
     if (childrenWidth === undefined) {
       return undefined;
@@ -43283,10 +43293,10 @@
       if (minimumMode) {
         childrenHeight = this.maxChildHeight;
       } else {
-        childrenHeight = this.wrapResult ? this.wrapResult.height : undefined;
+        childrenHeight = this.rexSizer.resolved ? this.wrapResult.height : undefined;
       }
     } else {
-      childrenHeight = this.wrapResult ? this.wrapResult.height : undefined;
+      childrenHeight = this.rexSizer.resolved ? this.wrapResult.height : undefined;
     }
     if (childrenHeight === undefined) {
       return undefined;
@@ -43316,6 +43326,7 @@
     this._maxChildWidth = undefined;
     this._maxChildHeight = undefined;
     this.wrapResult = undefined;
+    this.rexSizer.resolved = false;
     PreLayout$4.call(this);
     return this;
   };
@@ -43600,6 +43611,7 @@
     if (this.orientation === 0) {
       var innerWidth = width - this.space.left - this.space.right;
       this.wrapResult = RunChildrenWrap.call(this, innerWidth);
+      this.rexSizer.resolved = true;
       RunWidthWrap$3.call(this, width);
     }
   };
@@ -43619,6 +43631,7 @@
     if (this.orientation === 1) {
       var innerHeight = height - this.space.top - this.space.bottom;
       this.wrapResult = RunChildrenWrap.call(this, innerHeight);
+      this.rexSizer.resolved = true;
       RunHeightWrap$3.call(this, height);
     }
   };
@@ -58080,6 +58093,18 @@
         this.expand(duration);
       }
       return this;
+    },
+    setExpandedState: function setExpandedState(expanded) {
+      this.setDirty(false);
+      if (expanded === undefined) {
+        this.expanded = undefined;
+      } else if (expanded) {
+        this.expand(0);
+      } else {
+        this.collapse(0);
+      }
+      this.setDirty(true);
+      return this;
     }
   };
 
@@ -58209,6 +58234,10 @@
       if (onCollapseComplete) {
         _this.on('collapse.complete', onCollapseComplete);
       }
+      var expanded = GetValue$F(config, 'expanded', undefined);
+      if (expanded !== undefined) {
+        _this.setExpandedState(expanded);
+      }
       return _this;
     }
     return _createClass(Folder);
@@ -58221,18 +58250,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.Folder', Folder$1);
-
-  var Clone$1 = Phaser.Utils.Objects.Clone;
-  var Merge$1 = function Merge(defaultConfig, overrideConfig) {
-    var config = defaultConfig ? Clone$1(defaultConfig) : {};
-    if (!overrideConfig) {
-      return config;
-    }
-    for (var name in overrideConfig) {
-      config[name] = overrideConfig[name];
-    }
-    return config;
-  };
 
   var ParentMethods = {
     getTreePatent: function getTreePatent(gameObject) {
@@ -58331,7 +58348,31 @@
       });
       return _this;
     }
+
+    // Wrap text/setText() from nodeBody
     _createClass(Node, [{
+      key: "text",
+      get: function get() {
+        return this.childrenMap.nodeBody.text;
+      },
+      set: function set(value) {
+        this.childrenMap.nodeBody.setText(value);
+      }
+    }, {
+      key: "setText",
+      value: function setText(text) {
+        this.text = text;
+        return this;
+      }
+
+      // Wrap setTexture() from nodeBody
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        this.childrenMap.nodeBody(key, frame);
+        return this;
+      }
+    }, {
       key: "getTreePatent",
       value: function getTreePatent() {
         return this.rexSizer.treeParent;
@@ -58350,6 +58391,7 @@
   }(Sizer);
   var DefaultCreateNodeBodyCallback = function DefaultCreateNodeBodyCallback(scene, config, createCallbackData) {
     var gameObject = new SimpleLabel(scene, config);
+    gameObject.resetDisplayContent('');
     return gameObject;
   };
 
@@ -58391,6 +58433,7 @@
         config = undefined;
       } else if (config) {
         nodeKey = config.nodeKey;
+        delete config.nodeKey;
       }
       if (nodeKey === undefined) {
         nodeKey = UUID$1();
@@ -58418,6 +58461,7 @@
         config = undefined;
       } else if (config) {
         nodeKey = config.nodeKey;
+        delete config.nodeKey;
       }
       if (nodeKey === undefined) {
         nodeKey = UUID$1();
@@ -58497,7 +58541,7 @@
     var gameObject = new Triangle(scene, config);
     gameObject.on('expand.start', function (gameObject) {
       gameObject.setDirection('down');
-    }).on('collapse.start', function (gameObject) {
+    }).on('collapse.complete', function (gameObject) {
       gameObject.setDirection('right');
     });
     return gameObject;
@@ -58518,6 +58562,18 @@
       childrenSizer.addBackground(childrenBackground);
     }
     return childrenSizer;
+  };
+
+  var Clone$1 = Phaser.Utils.Objects.Clone;
+  var Merge$1 = function Merge(defaultConfig, overrideConfig) {
+    var config = defaultConfig ? Clone$1(defaultConfig) : {};
+    if (!overrideConfig) {
+      return config;
+    }
+    for (var name in overrideConfig) {
+      config[name] = overrideConfig[name];
+    }
+    return config;
   };
 
   var GetValue$A = Phaser.Utils.Objects.GetValue;
@@ -58575,7 +58631,10 @@
       }).on('collapse.complete', function () {
         toggleButton.emit('collapse.complete', toggleButton);
       });
-      _this.expand(0);
+      var expanded = GetValue$A(config, 'expanded', true);
+      if (expanded !== undefined) {
+        _this.setExpandedState(expanded);
+      }
       return _this;
     }
     _createClass(Tree, [{
@@ -58590,11 +58649,34 @@
         this.nodesMap = undefined;
         _get(_getPrototypeOf(Tree.prototype), "destroy", this).call(this, fromScene);
       }
+
+      // Wrap text/setText() from nodeBody
+    }, {
+      key: "text",
+      get: function get() {
+        return this.childrenMap.nodeBody.text;
+      },
+      set: function set(value) {
+        this.childrenMap.nodeBody.setText(value);
+      }
+    }, {
+      key: "setText",
+      value: function setText(text) {
+        this.text = text;
+        return this;
+      }
+
+      // Wrap setTexture() from nodeBody
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        this.childrenMap.nodeBody(key, frame);
+        return this;
+      }
     }, {
       key: "createTree",
       value: function createTree(config) {
-        var tree = new Tree(this.scene, Merge$1(this.configSave, config));
-        return tree;
+        return Tree.CreateTree(this.scene, this.configSave, config);
       }
     }, {
       key: "isTree",
@@ -58603,7 +58685,10 @@
       }
     }]);
     return Tree;
-  }(Folder$1);
+  }(Folder$1); // Static method
+  Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
+    return new Tree(scene, Merge$1(defaultConfig, overrideConfig));
+  };
   Object.assign(Tree.prototype, methods$8);
 
   var UUID = Phaser.Utils.String.UUID;
@@ -58612,13 +58697,13 @@
     if (typeof config === 'string') {
       key = config;
       config = undefined;
-    } else {
+    } else if (config) {
       key = config.key;
     }
     if (key === undefined) {
       key = UUID();
     }
-    var tree = new Tree(this.scene, Merge$1(this.treeConfig, config));
+    var tree = Tree.CreateTree(this.scene, this.treeConfig, config);
     SyncDisplayList(this, tree);
     this.add(tree, {
       expand: true,
