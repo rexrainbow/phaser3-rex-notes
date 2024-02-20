@@ -49,7 +49,7 @@ class Tree extends Folder {
             orientation: orientation,
             space: spaceConfig,
             align: config.align,
-            expand: config.expand
+            expand: config.expand,
         };
 
         super(scene, folderConfig);
@@ -77,7 +77,10 @@ class Tree extends Folder {
                 toggleButton.emit('collapse.complete', toggleButton)
             })
 
-        this.expand(0);
+        var expanded = GetValue(config, 'expanded', true);
+        if (expanded !== undefined) {
+            this.setExpandedState(expanded);
+        }
     }
 
     destroy(fromScene) {
@@ -94,14 +97,39 @@ class Tree extends Folder {
         super.destroy(fromScene);
     }
 
+    // Wrap text/setText() from nodeBody
+    get text() {
+        return this.childrenMap.nodeBody.text;
+    }
+
+    set text(value) {
+        this.childrenMap.nodeBody.setText(value);
+    }
+
+    setText(text) {
+        this.text = text;
+        return this;
+    }
+
+    // Wrap setTexture() from nodeBody
+    setTexture(key, frame) {
+        this.childrenMap.nodeBody(key, frame);
+        return this;
+    }
+
+
     createTree(config) {
-        var tree = new Tree(this.scene, Merge(this.configSave, config));
-        return tree;
+        return Tree.CreateTree(this.scene, this.configSave, config)
     }
 
     isTree(gameObject) {
         return (!!gameObject) && gameObject instanceof (TreeNode);
     }
+}
+
+// Static method
+Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
+    return new Tree(scene, Merge(defaultConfig, overrideConfig));
 }
 
 Object.assign(

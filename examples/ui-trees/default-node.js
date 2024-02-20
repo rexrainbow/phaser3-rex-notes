@@ -15,64 +15,79 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var trees = this.rexUI.add.trees({
-            x: 200, y: 100,
-            width: 300,
-
-            tree: {
-                space: {
-                    indent: 30,
-                    nodeLeft: 10, nodeRight: 10, nodeTop: 10, nodeBottom: 10,
-                    toggleButton: 5
-                },
-
-                toggleButton: {
-                    color: COLOR_LIGHT,
-                    padding: 2
-                },
-
-                nodeBody: {
-                    text: {
-                        fontSize: 18
-                    }
-                },
+        var data = {
+            a: 10,
+            b: 'hello',
+            c: {
+                d: 20,
+                e: 'world'
             }
+        }
 
-        })
+        var trees = CreateTrees(this)
+            .setPosition(200, 100)
+            .setMinWidth(300)
             .setOrigin(0)
 
-        this.add.existing(trees);
+        var root = trees.addTree('root');
+        root.setText('[color=silver]root[/color]');
 
-        var root, subTree, node;
-
-        root = trees.addTree('t0');
-        root.getElement('nodeBody').resetDisplayContent('T0');
-
-        subTree = root.addTree('t00');
-        subTree.getElement('nodeBody').resetDisplayContent('T00');
-
-        node = subTree.addNode('t00n0');
-        node.getElement('nodeBody').resetDisplayContent('T00N0');
-
-        node = subTree.addNode('t00n1');
-        node.getElement('nodeBody').resetDisplayContent('T00N1');
-
-        node = subTree.addNode('t00n2');
-        node.getElement('nodeBody').resetDisplayContent('T00N2');
-
-        subTree = root.addTree('t01');
-        subTree.getElement('nodeBody').resetDisplayContent('T01');
-
-        node = subTree.addNode('t01n0');
-        node.getElement('nodeBody').resetDisplayContent('T01N0');
-
-        node = subTree.addNode('t01n1');
-        node.getElement('nodeBody').resetDisplayContent('T01N1');
+        DisplayData(root, data);
 
         trees.layout();
     }
 
     update() { }
+}
+
+var CreateTrees = function (scene) {
+    return scene.rexUI.add.trees({
+        tree: {
+            space: {
+                indent: 30,
+                nodeLeft: 10, nodeRight: 10, nodeTop: 10, nodeBottom: 10,
+                toggleButton: 5
+            },
+
+            toggleButton: {
+                color: COLOR_LIGHT,
+                padding: 2
+            },
+
+            nodeBody: {
+                text: {
+                    $type: 'bbcodetext',
+                    fontSize: 18
+                }
+            },
+        }
+
+    })
+}
+
+var DisplayData = function (tree, data) {
+    for (var key in data) {
+        var value = data[key];
+        var valueType = typeof (value);
+        switch (valueType) {
+            case 'number':
+                var node = tree.addNode(key);
+                node.setText(`[color=lightgreen]${key}[/color] : [color=white]${value}[/color]`);
+                break;
+
+            case 'string':
+                var node = tree.addNode(key);
+                node.setText(`[color=lightgreen]${key}[/color] : [color=cyan]"${value}"[/color]`);
+                break;
+
+            default:
+                var node = tree.addTree(key);
+                node.setText(`[color=lightgreen]${key}[/color]`);
+                DisplayData(node, value);
+                break;
+        }
+    }
+    return tree;
 }
 
 var config = {

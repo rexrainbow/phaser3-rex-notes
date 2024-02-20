@@ -31,7 +31,7 @@ declare namespace Tree {
     }
 
     interface IAddTreeConfig extends IConfig {
-        key: string
+        nodeKey?: string
     }
 
 }
@@ -94,4 +94,8 @@ declare class Tree extends Folder {
     removeAllNodes(
         destroyChild?: boolean
     ): this;
+
+    createTree(
+        config?: Tree.IConfig | string
+    ): Tree;
 }

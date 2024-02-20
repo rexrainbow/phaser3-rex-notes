@@ -127,6 +127,10 @@ class Folder extends Sizer {
             this.on('collapse.complete', onCollapseComplete);
         }
 
+        var expanded = GetValue(config, 'expanded', undefined);
+        if (expanded !== undefined) {
+            this.setExpandedState(expanded);
+        }
     }
 }
 

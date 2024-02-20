@@ -16,6 +16,7 @@ export default {
             config = undefined;
         } else if (config) {
             nodeKey = config.nodeKey;
+            delete config.nodeKey;
         }
 
         if (nodeKey === undefined) {
@@ -46,6 +47,7 @@ export default {
             config = undefined;
         } else if (config) {
             nodeKey = config.nodeKey;
+            delete config.nodeKey;
         }
 
         if (nodeKey === undefined) {

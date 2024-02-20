@@ -77,4 +77,6 @@ declare class Folder extends Sizer {
     collapse(duration?: number): this;
     toggle(duration?: number): this;
     readonly expanded: boolean;
+
+    setExpandedState(expanded?: boolean): this;
 }

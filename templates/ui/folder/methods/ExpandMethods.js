@@ -71,5 +71,21 @@ export default {
         }
 
         return this;
+    },
+
+    setExpandedState(expanded) {
+        this.setDirty(false);
+
+        if (expanded === undefined) {
+            this.expanded = undefined;
+        } else if (expanded) {
+            this.expand(0);
+        } else {
+            this.collapse(0);
+        }
+
+        this.setDirty(true);
+
+        return this;
     }
 }

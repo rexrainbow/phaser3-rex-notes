@@ -1,4 +1,3 @@
-import Merge from './Merge.js';
 import Tree from '../tree/Tree.js';
 import SyncDisplayList from './SyncDisplayList.js';
 
@@ -9,7 +8,7 @@ var AddTree = function (config) {
     if (typeof (config) === 'string') {
         key = config;
         config = undefined;
-    } else {
+    } else if (config) {
         key = config.key;
     }
 
@@ -17,7 +16,7 @@ var AddTree = function (config) {
         key = UUID();
     }
 
-    var tree = new Tree(this.scene, Merge(this.treeConfig, config));
+    var tree = Tree.CreateTree(this.scene, this.treeConfig, config);
     SyncDisplayList(this, tree);
 
     this.add(tree, { expand: true, key: key });

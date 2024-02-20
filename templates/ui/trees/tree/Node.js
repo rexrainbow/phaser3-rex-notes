@@ -45,6 +45,26 @@ class Node extends Sizer {
 
     }
 
+    // Wrap text/setText() from nodeBody
+    get text() {
+        return this.childrenMap.nodeBody.text;
+    }
+
+    set text(value) {
+        this.childrenMap.nodeBody.setText(value);
+    }
+
+    setText(text) {
+        this.text = text;
+        return this;
+    }
+
+    // Wrap setTexture() from nodeBody
+    setTexture(key, frame) {
+        this.childrenMap.nodeBody(key, frame);
+        return this;
+    }
+
     getTreePatent() {
         return this.rexSizer.treeParent;
     }
@@ -56,10 +76,12 @@ class Node extends Sizer {
         }
         return treeParent.getTreeRoot();
     }
+
 }
 
 var DefaultCreateNodeBodyCallback = function (scene, config, createCallbackData) {
     var gameObject = new SimpleLabel(scene, config);
+    gameObject.resetDisplayContent('');
     return gameObject;
 }
 

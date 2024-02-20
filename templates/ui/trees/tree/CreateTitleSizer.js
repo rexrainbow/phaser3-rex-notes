@@ -37,7 +37,7 @@ var DefaultCreateToggleButtonCallback = function (scene, config, createCallbackD
         .on('expand.start', function (gameObject) {
             gameObject.setDirection('down');
         })
-        .on('collapse.start', function (gameObject) {
+        .on('collapse.complete', function (gameObject) {
             gameObject.setDirection('right');
         });
 

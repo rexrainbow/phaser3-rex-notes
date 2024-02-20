@@ -60,8 +60,6 @@ class Demo extends Phaser.Scene {
         })
             .setOrigin(0)
 
-        this.add.existing(trees);
-
         var root = trees.addTree('t0');
         root.getElement('nodeBody').text = 'T0';
 
