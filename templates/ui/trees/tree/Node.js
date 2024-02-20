@@ -4,7 +4,7 @@ import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Node extends Sizer {
-    constructor(scene, config, createCallbackConfig) {
+    constructor(scene, config, createCallbackData) {
         var spaceConfig = config.space;
 
         super(scene, {
@@ -19,10 +19,10 @@ class Node extends Sizer {
         this.type = 'rexTreeNode';
 
         // Optional
-        var nodeBackground = GetGameObjectFromConfig(scene, config, 'nodeBackground', createCallbackConfig);
+        var nodeBackground = GetGameObjectFromConfig(scene, config, 'nodeBackground', createCallbackData);
 
         // Required
-        var nodeBody = GetGameObjectFromConfig(scene, config, 'node', createCallbackConfig);
+        var nodeBody = GetGameObjectFromConfig(scene, config, 'nodeBody', createCallbackData);
 
         if (nodeBackground) {
             this.addBackground(nodeBackground);

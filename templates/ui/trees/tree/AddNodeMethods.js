@@ -4,19 +4,7 @@ import SyncDisplayList from '../methods/SyncDisplayList';
 
 export default {
     addSubTree(config) {
-        var key;
-        if (typeof (config) === 'string') {
-            key = config;
-            config = undefined;
-        } else {
-            key = config.key;
-        }
-
-        var subTree = this.createTree(config);
-        SyncDisplayList(this, subTree);
-
-        this.addNode(subTree, { expand: true, key: key });
-        return subTree;
+        return this.insertSubTree(undefined, config);
     },
 
     insertSubTree(index, config) {
@@ -36,23 +24,7 @@ export default {
     },
 
     addNode(gameObject, config) {
-        if (!IsGameObject(gameObject)) {
-            config = gameObject;
-            gameObject = new Node(this.scene, this.configSave, { isLeaf: true });
-        }
-
-        if (typeof (config) === 'string') {
-            config = { key: config };
-        }
-
-        this.removeNode(gameObject, false);
-
-        gameObject.rexSizer.treeParent = this;
-
-        var childrenSizer = this.childrenMap.child;
-        childrenSizer.add(gameObject, config);
-
-        return gameObject;
+        return this.insertNode(undefined, gameObject, config)
     },
 
     insertNode(index, gameObject, config) {
@@ -63,6 +35,10 @@ export default {
 
         if (typeof (config) === 'string') {
             config = { key: config };
+        }
+
+        if (!config.hasOwnProperty('expand')) {
+            config.expand = true;
         }
 
         this.removeNode(gameObject, false);

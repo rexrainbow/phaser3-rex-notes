@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
                     })
                 },
 
-                node: function (scene, { isLeaf }) {
+                nodeBody: function (scene, { isLeaf }) {
                     return scene.rexUI.add.label({
                         text: scene.add.text(0, 0, '', {
                             fontSize: 18

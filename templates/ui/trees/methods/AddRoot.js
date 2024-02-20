@@ -14,7 +14,7 @@ var AddRoot = function (config) {
     var tree = new Tree(this.scene, Merge(this.treeConfig, config));
     SyncDisplayList(this, tree);
 
-    this.add(tree, { expend: true, key: key });
+    this.add(tree, { expand: true, key: key });
 
     return tree;
 }
