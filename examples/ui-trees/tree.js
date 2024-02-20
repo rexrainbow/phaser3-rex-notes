@@ -64,19 +64,19 @@ class Demo extends Phaser.Scene {
         this.add.existing(trees);
 
         var root = trees.addRoot('t0');
-        root.getElement('node').text = 'T0';
+        root.getElement('nodeBody').text = 'T0';
 
         var subTree = root.addSubTree('t00');
-        subTree.getElement('node').text = 'T00';
+        subTree.getElement('nodeBody').text = 'T00';
 
         var node = subTree.addNode('t00n0');
-        node.getElement('node').text = 'T00N0';
+        node.getElement('nodeBody').text = 'T00N0';
 
         node = subTree.addNode('t00n1');
-        node.getElement('node').text = 'T00N1';
+        node.getElement('nodeBody').text = 'T00N1';
 
         node = subTree.addNode('t00n2');
-        node.getElement('node').text = 'T00N2';
+        node.getElement('nodeBody').text = 'T00N2';
 
         trees.layout();
     }

@@ -17,10 +17,11 @@ class Tree extends Folder {
         var background = GetGameObjectFromConfig(scene, config, 'background');
 
         var child = CreateChildrenSizer(scene, config);
+        var childrenNodes = child.childrenMap.items;
 
         var title = CreateTitleSizer(scene, config);
         var toggleButton = title.childrenMap.toggleButton;
-        var node = title.childrenMap.node;
+        var nodeBody = title.childrenMap.nodeBody;
 
         var orientation = GetOrientationMode(GetValue(config, 'orientation', 'y'));
 
@@ -54,7 +55,8 @@ class Tree extends Folder {
         this.configSave = config;
 
         this.addChildrenMap('toggleButton', toggleButton);
-        this.addChildrenMap('node', node);
+        this.addChildrenMap('nodeBody', nodeBody);
+        this.addChildrenMap('childrenNodes', childrenNodes);
 
         this
             .on('expand.start', function () {

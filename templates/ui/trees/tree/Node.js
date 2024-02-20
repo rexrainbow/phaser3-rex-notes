@@ -30,7 +30,7 @@ class Node extends Sizer {
 
         this.add(
             nodeBody,
-            { proportion: 1, key: 'node' }
+            { proportion: 1, key: 'nodeBody' }
         );
 
     }
