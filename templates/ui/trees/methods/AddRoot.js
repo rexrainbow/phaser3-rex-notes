@@ -1,5 +1,5 @@
 import Merge from './Merge.js';
-import TreeNode from '../treenode/TreeNode.js';
+import Tree from '../tree/Tree.js';
 import SyncDisplayList from './SyncDisplayList.js';
 
 var AddRoot = function (config) {
@@ -11,7 +11,7 @@ var AddRoot = function (config) {
         key = config.key;
     }
 
-    var tree = new TreeNode(this.scene, Merge(this.treeConfig, config));
+    var tree = new Tree(this.scene, Merge(this.treeConfig, config));
     SyncDisplayList(this, tree);
 
     this.add(tree, { expend: true, key: key });

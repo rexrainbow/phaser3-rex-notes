@@ -8,7 +8,7 @@ import Merge from '../methods/Merge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TreeNode extends Folder {
+class Tree extends Folder {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -74,7 +74,7 @@ class TreeNode extends Folder {
     }
 
     createTree(config) {
-        var tree = new TreeNode(this.scene, Merge(this.configSave, config));
+        var tree = new Tree(this.scene, Merge(this.configSave, config));
         return tree;
     }
 
@@ -84,8 +84,8 @@ class TreeNode extends Folder {
 }
 
 Object.assign(
-    TreeNode.prototype,
+    Tree.prototype,
     Methods
 )
 
-export default TreeNode;
+export default Tree;

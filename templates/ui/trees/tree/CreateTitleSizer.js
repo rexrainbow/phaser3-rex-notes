@@ -1,10 +1,10 @@
-import CreateNodeSizer from './CreateNodeSizer.js';
+import Node from './Node.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateTitleSizer = function (scene, config) {
-    var nodeSizer = CreateNodeSizer(scene, config, { isLeaf: false });
+    var nodeSizer = new Node(scene, config, { isLeaf: false });
 
     // Required
     var toggleButton = GetGameObjectFromConfig(scene, config, 'toggleButton', { isLeaf: false });

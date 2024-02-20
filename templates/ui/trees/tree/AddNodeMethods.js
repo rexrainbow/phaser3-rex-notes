@@ -1,5 +1,5 @@
 import IsGameObject from '../../../../plugins/utils/system/IsGameObject';
-import CreateNodeSizer from './CreateNodeSizer';
+import Node from './Node.js';
 import SyncDisplayList from '../methods/SyncDisplayList';
 
 export default {
@@ -38,7 +38,7 @@ export default {
     addNode(gameObject, config) {
         if (!IsGameObject(gameObject)) {
             config = gameObject;
-            gameObject = CreateNodeSizer(this.scene, this.configSave, { isLeaf: true });
+            gameObject = new Node(this.scene, this.configSave, { isLeaf: true });
         }
 
         if (typeof (config) === 'string') {
@@ -58,7 +58,7 @@ export default {
     insertNode(index, gameObject, config) {
         if (!IsGameObject(gameObject)) {
             config = gameObject;
-            gameObject = CreateNodeSizer(this.scene, this.configSave, { isLeaf: true });
+            gameObject = new Node(this.scene, this.configSave, { isLeaf: true });
         }
 
         if (typeof (config) === 'string') {
