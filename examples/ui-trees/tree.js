@@ -63,10 +63,10 @@ class Demo extends Phaser.Scene {
 
         this.add.existing(trees);
 
-        var root = trees.addRoot('t0');
+        var root = trees.addTree('t0');
         root.getElement('nodeBody').text = 'T0';
 
-        var subTree = root.addSubTree('t00');
+        var subTree = root.addTree('t00');
         subTree.getElement('nodeBody').text = 'T00';
 
         var node = subTree.addNode('t00n0');

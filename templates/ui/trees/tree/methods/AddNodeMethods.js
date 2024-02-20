@@ -1,13 +1,15 @@
-import IsGameObject from '../../../../plugins/utils/system/IsGameObject';
-import Node from './Node.js';
-import SyncDisplayList from '../methods/SyncDisplayList';
+import IsGameObject from '../../../../../plugins/utils/system/IsGameObject.js';
+import Node from '../Node.js';
+import SyncDisplayList from '../../methods/SyncDisplayList.js';
+
+const UUID = Phaser.Utils.String.UUID;
 
 export default {
-    addSubTree(config) {
-        return this.insertSubTree(undefined, config);
+    addTree(config) {
+        return this.insertTree(undefined, config);
     },
 
-    insertSubTree(index, config) {
+    insertTree(index, config) {
         var key;
         if (typeof (config) === 'string') {
             key = config;
@@ -16,11 +18,15 @@ export default {
             key = config.key;
         }
 
-        var subTree = this.createTree(config);
-        SyncDisplayList(this, subTree)
+        if (key === undefined) {
+            key = UUID();
+        }
 
-        this.insertNode(index, subTree, { expand: true, key: key });
-        return subTree;
+        var tree = this.createTree(config);
+        SyncDisplayList(this, tree)
+
+        this.insertNode(index, tree, { expand: true, key: key });
+        return tree;
     },
 
     addNode(gameObject, config) {
@@ -35,6 +41,12 @@ export default {
 
         if (typeof (config) === 'string') {
             config = { key: config };
+        } else if (!config) {
+            config = {};
+        }
+
+        if (!config.hasOwnProperty('key')) {
+            config.key = UUID();
         }
 
         if (!config.hasOwnProperty('expand')) {

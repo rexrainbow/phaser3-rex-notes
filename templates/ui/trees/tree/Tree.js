@@ -1,5 +1,5 @@
 import Folder from '../../folder/Folder.js';
-import Methods from './Methods.js';
+import Methods from './methods/Methods.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 import CreateTitleSizer from './CreateTitleSizer.js';
 import CreateChildrenSizer from './CreateChildrenSizer.js';
@@ -81,7 +81,7 @@ class Tree extends Folder {
     }
 
     isTree(gameObject) {
-        return gameObject instanceof (TreeNode);
+        return (!!gameObject) && gameObject instanceof (TreeNode);
     }
 }
 

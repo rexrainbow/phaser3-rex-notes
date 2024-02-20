@@ -33,6 +33,18 @@ declare namespace Sizer {
             item?: number,
         },
     }
+
+    interface IAddConfig {
+        proportion?: number,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
+        expand?: boolean,
+        key?: string,
+        index?: number,
+        minWidth?: number,
+        minHeight?: number,
+        fitRatio?: number,
+    }
 }
 
 declare class Sizer extends BaseSizer {
@@ -76,17 +88,7 @@ declare class Sizer extends BaseSizer {
 
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: {
-            proportion?: number,
-            align?: Sizer.AlignTypes,
-            padding?: Sizer.PaddingTypes,
-            expand?: boolean,
-            key?: string,
-            index?: number,
-            minWidth?: number,
-            minHeight?: number,
-            fitRatio?: number,
-        }
+        config?: Sizer.IAddConfig
     ): this;
 
     add(
@@ -105,15 +107,7 @@ declare class Sizer extends BaseSizer {
     insert(
         index: number,
         gameObject: Phaser.GameObjects.GameObject,
-        config?: {
-            proportion?: number,
-            align?: Sizer.AlignTypes,
-            padding?: Sizer.PaddingTypes,
-            expand?: boolean,
-            key?: string,
-            minWidth?: number,
-            minHeight?: number
-        }
+        config?: Sizer.IAddConfig
     ): this;
 
     insert(
@@ -130,15 +124,7 @@ declare class Sizer extends BaseSizer {
         x: number,
         y: number,
         gameObject: Phaser.GameObjects.GameObject,
-        config?: {
-            proportion?: number,
-            align?: Sizer.AlignTypes,
-            padding?: Sizer.PaddingTypes,
-            expand?: boolean,
-            key?: string,
-            minWidth?: number,
-            minHeight?: number
-        }
+        config?: Sizer.IAddConfig
     ): this;
 
     insertAtPosition(

@@ -1,7 +1,7 @@
-import AddRoot from './AddRoot.js';
+import AddTree from './AddTree.js';
 
 var methods = {
-    addRoot: AddRoot
+    addTree: AddTree
 }
 
 export default methods;
