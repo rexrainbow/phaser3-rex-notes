@@ -70,6 +70,7 @@ import Pages from './pages/Pages.js';
 import PerspectiveCard from './perspectivecard/PerspectiveCard.js';
 import TabPages from './tabpages/TabPages.js';
 import Folder from './folder/Folder.js';
+import Trees from './trees/Trees.js';
 import TextArea from './textarea/TextArea.js';
 import TextAreaInput from './textareainput/TextAreaInput.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
@@ -199,6 +200,7 @@ export {
     PerspectiveCard,
     TabPages,
     Folder,
+    Trees,
     TextArea,
     TextAreaInput,
     ScrollablePanel,

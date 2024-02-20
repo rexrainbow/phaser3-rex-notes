@@ -280,7 +280,7 @@
   };
 
   var Base = Phaser.Data.DataManager;
-  var EventEmitterKlass = Phaser.Events.EventEmitter;
+  var EventEmitterClass = Phaser.Events.EventEmitter;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DataManager = /*#__PURE__*/function (_Base) {
     _inherits(DataManager, _Base);
@@ -298,7 +298,7 @@
       }
       var useDefaultEventEmitter = eventEmitter === undefined;
       if (useDefaultEventEmitter) {
-        eventEmitter = new EventEmitterKlass();
+        eventEmitter = new EventEmitterClass();
       }
       if (parent === undefined) {
         parent = eventEmitter;

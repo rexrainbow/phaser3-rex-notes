@@ -1496,14 +1496,14 @@
     }
   };
 
-  var ContainerKlass = Phaser.GameObjects.Container;
+  var ContainerClass = Phaser.GameObjects.Container;
   var IsContainerGameObject = function IsContainerGameObject(gameObject) {
-    return gameObject instanceof ContainerKlass;
+    return gameObject instanceof ContainerClass;
   };
 
-  var LayerKlass = Phaser.GameObjects.Layer;
+  var LayerClass = Phaser.GameObjects.Layer;
   var IsLayerGameObject = function IsLayerGameObject(gameObject) {
-    return gameObject instanceof LayerKlass;
+    return gameObject instanceof LayerClass;
   };
 
   var GetValidChildren = function GetValidChildren(parent) {
@@ -23605,14 +23605,14 @@
   }(Canvas$1);
   Object.assign(DynamicText.prototype, Methods$3);
 
-  var BitmapTextKlass = Phaser.GameObjects.BitmapText;
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
   var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextKlass;
+    return gameObject instanceof BitmapTextClass;
   };
 
-  var TextKlass = Phaser.GameObjects.Text;
+  var TextClass = Phaser.GameObjects.Text;
   var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextKlass;
+    return gameObject instanceof TextClass;
   };
 
   var TextRunWidthWrap = function TextRunWidthWrap(textObject) {

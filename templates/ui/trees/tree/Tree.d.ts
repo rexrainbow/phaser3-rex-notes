@@ -1,5 +1,7 @@
 import Folder from '../../folder/Folder';
 import Sizer from '../../sizer/Sizer';
+import Triangle from '../../triangle/Triangle';
+import SimpleLabel from '../../simplelabel/SimpleLabel';
 export default Tree;
 
 declare namespace Tree {
@@ -16,9 +18,9 @@ declare namespace Tree {
 
     interface IConfig {
         background?: GameObjectType,
-        toggleButton?: GameObjectType,
+        toggleButton?: GameObjectType | Triangle.IConfig,
         nodeBackground?: GameObjectType,
-        nodeBody?: GameObjectType,
+        nodeBody?: GameObjectType | SimpleLabel.IConfig,
 
         transition: Folder.ITransitionConfig,
 

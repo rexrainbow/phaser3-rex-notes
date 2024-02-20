@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import Trees from '../../templates/ui/trees/Trees.js';
 
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -16,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var trees = new Trees(this, {
+        var trees = this.rexUI.add.trees({
             x: 200, y: 100,
             width: 300,
 

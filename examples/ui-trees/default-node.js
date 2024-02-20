@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import Trees from '../../templates/ui/trees/Trees.js';
 
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -16,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var trees = new Trees(this, {
+        var trees = this.rexUI.add.trees({
             x: 200, y: 100,
             width: 300,
 
@@ -44,13 +43,15 @@ class Demo extends Phaser.Scene {
 
         this.add.existing(trees);
 
-        var root = trees.addTree('t0');
+        var root, subTree, node;
+
+        root = trees.addTree('t0');
         root.getElement('nodeBody').resetDisplayContent('T0');
 
-        var subTree = root.addTree('t00');
+        subTree = root.addTree('t00');
         subTree.getElement('nodeBody').resetDisplayContent('T00');
 
-        var node = subTree.addNode('t00n0');
+        node = subTree.addNode('t00n0');
         node.getElement('nodeBody').resetDisplayContent('T00N0');
 
         node = subTree.addNode('t00n1');
@@ -58,6 +59,15 @@ class Demo extends Phaser.Scene {
 
         node = subTree.addNode('t00n2');
         node.getElement('nodeBody').resetDisplayContent('T00N2');
+
+        subTree = root.addTree('t01');
+        subTree.getElement('nodeBody').resetDisplayContent('T01');
+
+        node = subTree.addNode('t01n0');
+        node.getElement('nodeBody').resetDisplayContent('T01N0');
+
+        node = subTree.addNode('t01n1');
+        node.getElement('nodeBody').resetDisplayContent('T01N1');
 
         trees.layout();
     }

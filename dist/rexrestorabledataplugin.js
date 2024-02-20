@@ -157,7 +157,7 @@
 
   var Base = Phaser.Data.DataManager;
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var EventEmitterKlass = Phaser.Events.EventEmitter;
+  var EventEmitterClass = Phaser.Events.EventEmitter;
   var DataManager = /*#__PURE__*/function (_Base) {
     _inherits(DataManager, _Base);
     var _super = _createSuper(DataManager);
@@ -166,7 +166,7 @@
       _classCallCheck(this, DataManager);
       var useDefaultEventEmitter = eventEmitter === undefined;
       if (useDefaultEventEmitter) {
-        eventEmitter = new EventEmitterKlass();
+        eventEmitter = new EventEmitterClass();
       }
       _this = _super.call(this, parent, eventEmitter);
       if (useDefaultEventEmitter) {
