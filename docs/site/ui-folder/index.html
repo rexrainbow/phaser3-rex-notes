@@ -10068,23 +10068,26 @@
 </ul>
 <h3 id="expandcollapse">Expand/collapse<a class="headerlink" href="#expandcollapse" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Expand
+<li>Expand, will re=layout from topmost sizer
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">expand</span><span class="p">();</span>
 <span class="c1">// folder.expand(duration);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">expand</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke expandCallback</span>
 </code></pre></div></li>
-<li>Collapse
+<li>Collapse, will re=layout from topmost sizer
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
 <span class="c1">// folder.collapse(duration);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">collapse</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke collapseCallback</span>
 </code></pre></div></li>
-<li>Toggle
+<li>Toggle, will re=layout from topmost sizer
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">toggle</span><span class="p">();</span>
 <span class="c1">// folder.toggle(duration);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke expandCallback/collapseCallback</span>
+</code></pre></div></li>
+<li>Set expanded state without re-layouting
+    <div class="highlight"><pre><span></span><code><span class="nx">folder</span><span class="p">.</span><span class="nx">setExpandedState</span><span class="p">(</span><span class="nx">expanded</span><span class="p">);</span><span class="w">  </span><span class="c1">// true, or false</span>
 </code></pre></div></li>
 <li>Get expanded state
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expanded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">folder</span><span class="p">.</span><span class="nx">expanded</span><span class="p">;</span>

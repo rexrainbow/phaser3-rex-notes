@@ -19,6 +19,7 @@ class Folder extends Sizer {
         super(scene, config);
         this.type = 'rexFolder';
 
+        this.reLayoutEnable = true;
         this.expanded = undefined;
         this.expandDirection = (this.orientation === 1) ? 'y' : 'x';
 

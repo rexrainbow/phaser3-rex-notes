@@ -15,8 +15,10 @@ export default {
 
         this.show(child);
 
-        var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
-        layoutTarget.layout();
+        if (this.reLayoutEnable) {
+            var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
+            layoutTarget.layout();
+        }
 
         title.emit('folder.expand', duration, this);
         child.emit('folder.expand', duration, this);
@@ -53,8 +55,10 @@ export default {
             .once('close', function () {
                 this.setChildScale(child, 1, 1).hide(child);
 
-                var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
-                layoutTarget.layout();
+                if (this.reLayoutEnable) {
+                    var layoutTarget = (this.reLayoutTarget) ? this.reLayoutTarget : this.getTopmostSizer();
+                    layoutTarget.layout();
+                }
 
                 this.emit('collapse.complete', this);
             }, this)
@@ -74,8 +78,7 @@ export default {
     },
 
     setExpandedState(expanded) {
-        var dirtySave = this.dirty;
-        this.dirty = false;
+        this.reLayoutEnable = false;
 
         if (expanded === undefined) {
             this.expanded = undefined;
@@ -85,7 +88,7 @@ export default {
             this.collapse(0);
         }
 
-        this.dirty = dirtySave;
+        this.reLayoutEnable = true;
 
         return this;
     }

@@ -58055,8 +58055,10 @@
       var title = this.childrenMap.title;
       var child = this.childrenMap.child;
       this.show(child);
-      var layoutTarget = this.reLayoutTarget ? this.reLayoutTarget : this.getTopmostSizer();
-      layoutTarget.layout();
+      if (this.reLayoutEnable) {
+        var layoutTarget = this.reLayoutTarget ? this.reLayoutTarget : this.getTopmostSizer();
+        layoutTarget.layout();
+      }
       title.emit('folder.expand', duration, this);
       child.emit('folder.expand', duration, this);
       this.emit('expand.start', this);
@@ -58080,8 +58082,10 @@
       this.emit('collapse.start', this);
       this.childTransition.once('close', function () {
         this.setChildScale(child, 1, 1).hide(child);
-        var layoutTarget = this.reLayoutTarget ? this.reLayoutTarget : this.getTopmostSizer();
-        layoutTarget.layout();
+        if (this.reLayoutEnable) {
+          var layoutTarget = this.reLayoutTarget ? this.reLayoutTarget : this.getTopmostSizer();
+          layoutTarget.layout();
+        }
         this.emit('collapse.complete', this);
       }, this).requestClose(null, duration);
       return this;
@@ -58095,7 +58099,7 @@
       return this;
     },
     setExpandedState: function setExpandedState(expanded) {
-      this.setDirty(false);
+      this.reLayoutEnable = false;
       if (expanded === undefined) {
         this.expanded = undefined;
       } else if (expanded) {
@@ -58103,7 +58107,7 @@
       } else {
         this.collapse(0);
       }
-      this.setDirty(true);
+      this.reLayoutEnable = true;
       return this;
     }
   };
@@ -58151,6 +58155,7 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexFolder';
+      _this.reLayoutEnable = true;
       _this.expanded = undefined;
       _this.expandDirection = _this.orientation === 1 ? 'y' : 'x';
       var background = config.background;
@@ -62330,10 +62335,8 @@
     // Set content
     folder.setTitle(config);
     var expanded = GetValue$l(config, 'expanded', true);
-    if (expanded) {
-      folder.expand(0);
-    } else {
-      folder.collapse(0);
+    if (expanded !== undefined) {
+      folder.setExpandedState(expanded);
     }
     var childTweaker = folder.getElement('child');
     if (config.key) {
