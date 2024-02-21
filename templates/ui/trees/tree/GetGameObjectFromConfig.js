@@ -1,4 +1,3 @@
-import IsGameObject from '../../../../plugins/utils/system/IsGameObject.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,10 +13,7 @@ var GetGameObjectFromConfig = function (
 
     var gameObject;
 
-    if (IsGameObject(creatorConfig)) {
-        gameObject = creatorConfig;
-
-    } else if (IsFunction(creatorConfig)) {
+    if (IsFunction(creatorConfig)) {
         gameObject = creatorConfig(scene, createCallbackData);
         scene.add.existing(gameObject);
 
