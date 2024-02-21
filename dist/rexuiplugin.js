@@ -58370,7 +58370,9 @@
   var GetGameObjectFromConfig = function GetGameObjectFromConfig(scene, config, key, createCallbackData, defaultCreateGameObjectCallback) {
     var creatorConfig = GetValue$E(config, key);
     var gameObject;
-    if (IsFunction(creatorConfig)) {
+    if (IsGameObject(creatorConfig)) {
+      gameObject = creatorConfig;
+    } else if (IsFunction(creatorConfig)) {
       gameObject = creatorConfig(scene, createCallbackData);
       scene.add.existing(gameObject);
     } else if (defaultCreateGameObjectCallback) {

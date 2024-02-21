@@ -5,11 +5,8 @@ import SimpleLabel from '../../simplelabel/SimpleLabel';
 export default Tree;
 
 declare namespace Tree {
-    interface ICreateGameObejctData {
-        isLeaf?: boolean,
-    }
-
-    type CreateGameObjectCallbackType = (scene: Phaser.Scene, data: ICreateGameObejctData) => Phaser.GameObjects.GameObject;
+    type GameObjectType = (scene: Phaser.Scene, data: Object) => Phaser.GameObjects.GameObject |
+        Phaser.GameObjects.GameObject;
 
     interface ISpaceConfig extends Folder.ISpaceConfig {
         indent?: number,
@@ -20,10 +17,10 @@ declare namespace Tree {
     }
 
     interface IConfig {
-        background?: CreateGameObjectCallbackType,
-        toggleButton?: CreateGameObjectCallbackType | Triangle.IConfig,
-        nodeBackground?: CreateGameObjectCallbackType,
-        nodeBody?: CreateGameObjectCallbackType | SimpleLabel.IConfig,
+        background?: GameObjectType,
+        toggleButton?: GameObjectType | Triangle.IConfig,
+        nodeBackground?: GameObjectType,
+        nodeBody?: GameObjectType | SimpleLabel.IConfig,
 
         transition: Folder.ITransitionConfig,
 
