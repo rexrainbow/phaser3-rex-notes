@@ -21,16 +21,10 @@ export default {
     },
 
     removeAllNodes(destroyChild) {
-        var childrenSizer = this.childrenMap.child;
-
-        var nodes = childrenSizer.childrenMap.items;
-        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-            nodes[i].rexSizer.treeParent = null;
+        var nodesMap = this.nodesMap;
+        for (var nodeKey in nodesMap) {
+            this.removeNode(nodesMap[nodeKey], destroyChild);
         }
-
-        Clear(this.nodesMap);
-
-        childrenSizer.removeAll(destroyChild);
         return this;
     }
 }

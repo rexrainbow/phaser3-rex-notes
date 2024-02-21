@@ -105,6 +105,15 @@ declare class Tree extends Folder {
         config?: Sizer.IAddConfig | string
     ): Phaser.GameObjects.GameObject;
 
+    removeNode(
+        gameObject: Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
+
+    removeAllNodes(
+        destroyChild?: boolean
+    ): this;
+
     getNode(
         key: string
     ): Phaser.GameObjects.GameObject;
@@ -128,15 +137,6 @@ declare class Tree extends Folder {
     isGrandsonNode(
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;
-
-    removeNode(
-        gameObject: Phaser.GameObjects.GameObject,
-        destroyChild?: boolean
-    ): this;
-
-    removeAllNodes(
-        destroyChild?: boolean
-    ): this;
 
     createTree(
         config?: Tree.IConfig | string

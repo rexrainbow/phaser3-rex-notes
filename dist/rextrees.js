@@ -24254,19 +24254,50 @@
       return this;
     },
     removeAllNodes: function removeAllNodes(destroyChild) {
-      var childrenSizer = this.childrenMap.child;
-      var nodes = childrenSizer.childrenMap.items;
-      for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-        nodes[i].rexSizer.treeParent = null;
+      var nodesMap = this.nodesMap;
+      for (var nodeKey in nodesMap) {
+        this.removeNode(nodesMap[nodeKey], destroyChild);
       }
-      Clear$1(this.nodesMap);
-      childrenSizer.removeAll(destroyChild);
       return this;
     }
   };
 
+  var GetNodeMethods = {
+    getNode: function getNode(mapNameList) {
+      if (typeof mapNameList === 'string') {
+        mapNameList = mapNameList.split('.');
+      }
+      if (mapNameList.length === 0) {
+        return undefined;
+      }
+      var name = mapNameList.shift();
+      var element = this.nodesMap[name];
+      if (mapNameList.length === 0) {
+        return element;
+      } else if (element && this.isTree(element)) {
+        return element.getNode(mapNameList);
+      } else {
+        return null;
+      }
+    },
+    getNodes: function getNodes(out) {
+      var nodesMap = this.nodesMap;
+      if (!out) {
+        out = nodes; // Return internal children array
+      } else {
+        for (var nodeKey in nodesMap) {
+          out.push(nodesMap[nodeKey]);
+        }
+        // Copy children
+      }
+
+      return out;
+    },
+    getAllNodes: function getAllNodes(out) {}
+  };
+
   var methods$1 = {};
-  Object.assign(methods$1, ParentMethods, AddNodeMethods, RemoveNodeMethods);
+  Object.assign(methods$1, ParentMethods, AddNodeMethods, RemoveNodeMethods, GetNodeMethods);
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
@@ -25889,29 +25920,78 @@
   Object.assign(Tree.prototype, methods$1);
 
   var UUID = Phaser.Utils.String.UUID;
-  var AddTree = function AddTree(config) {
-    var key;
-    if (typeof config === 'string') {
-      key = config;
-      config = undefined;
-    } else if (config) {
-      key = config.key;
+  var AddTreeMethods = {
+    addTree: function addTree(config) {
+      if (IsGameObject(config)) {
+        var nodeBody = config;
+        config = {
+          nodeBody: nodeBody,
+          nodeKey: nodeKey
+        };
+      }
+      return this.insertTree(undefined, config);
+    },
+    insertTree: function insertTree(index, config) {
+      var nodeKey;
+      if (typeof config === 'string') {
+        nodeKey = config;
+        config = undefined;
+      } else if (config) {
+        nodeKey = config.nodeKey;
+        delete config.nodeKey;
+      }
+      if (nodeKey === undefined) {
+        nodeKey = UUID();
+      }
+      var tree = Tree.CreateTree(this.scene, this.treeConfig, config);
+      SyncDisplayList(this, tree);
+      tree.nodeKey = nodeKey;
+      this.treesMap[nodeKey] = tree;
+      this.insert(index, tree, {
+        expand: true
+      });
+      return tree;
     }
-    if (key === undefined) {
-      key = UUID();
-    }
-    var tree = Tree.CreateTree(this.scene, this.treeConfig, config);
-    SyncDisplayList(this, tree);
-    this.add(tree, {
-      expand: true,
-      key: key
-    });
-    return tree;
   };
 
-  var methods = {
-    addTree: AddTree
+  var RemoveTreeMethods = {
+    removeTree: function removeTree(gameObject, destroyChild) {
+      if (!gameObject) {
+        return this;
+      }
+      delete this.treesMap[gameObject.nodeKey];
+      gameObject.nodeKey = null;
+      this.remove(gameObject, destroyChild);
+      return this;
+    },
+    removeAllNodes: function removeAllNodes(destroyChild) {
+      var treesMap = this.treesMap;
+      for (var nodeKey in treesMap) {
+        this.removeTree(treesMap[nodeKey], destroyChild);
+      }
+      return this;
+    }
   };
+
+  var GetTreeMethods = {
+    getTree: function getTree(nodeKey) {
+      return this.treesMap[nodeKey];
+    },
+    getNode: function getNode(nodeKey) {
+      var dotIndex = nodeKey.indexOf('.');
+      if (dotIndex === -1) {
+        return this.getTree(nodeKey);
+      }
+      var tree = this.getTree(nodeKey.substring(0, dotIndex));
+      if (!tree) {
+        return undefined;
+      }
+      return tree.getNode(nodeKey.substring(dotIndex + 1));
+    }
+  };
+
+  var methods = {};
+  Object.assign(methods, AddTreeMethods, RemoveTreeMethods, GetTreeMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -25930,10 +26010,24 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexTrees';
+      _this.treesMap = {};
       _this.treeConfig = GetValue(config, 'tree');
       return _this;
     }
-    return _createClass(Trees);
+    _createClass(Trees, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+          return;
+        }
+        this.treeConfig = undefined;
+        Clear(this.treesMap);
+        this.treesMap = undefined;
+        _get(_getPrototypeOf(Trees.prototype), "destroy", this).call(this, fromScene);
+      }
+    }]);
+    return Trees;
   }(Sizer);
   Object.assign(Trees.prototype, methods);
 

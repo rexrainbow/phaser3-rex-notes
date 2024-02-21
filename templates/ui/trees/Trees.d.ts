@@ -14,7 +14,32 @@ declare class Trees extends Sizer {
         config?: Trees.IConfig
     );
 
+    addTree(): Tree;
+
     addTree(
         config?: Tree.IAddTreeConfig | string
     ): Tree;
+
+    insertTree(
+        index: number,
+        config?: Tree.IAddTreeConfig | string
+    ): Tree;
+
+    removeTree(
+        tree: Tree,
+        destroyChild?: boolean
+    ): this;
+
+    removeAllTrees(
+        destroyChild?: boolean
+    ): this;
+
+    getTree(
+        nodeKey: string
+    ): Tree;
+
+    getNode(
+        nodeKey: string
+    ): Phaser.GameObjects.GameObject;
+
 }

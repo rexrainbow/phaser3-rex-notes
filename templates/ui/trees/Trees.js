@@ -16,7 +16,23 @@ class Trees extends Sizer {
         super(scene, config);
         this.type = 'rexTrees';
 
+        this.treesMap = {};
+
         this.treeConfig = GetValue(config, 'tree');
+    }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene || this.ignoreDestroy) {
+            return;
+        }
+
+        this.treeConfig = undefined;
+
+        Clear(this.treesMap);
+        this.treesMap = undefined;
+
+        super.destroy(fromScene);
     }
 
 }

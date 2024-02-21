@@ -1,6 +1,7 @@
 import ParentMethods from './ParentMethods.js';
 import AddNodeMethods from './AddNodeMethods.js';
 import RemoveNodeMethods from './RemoveNodeMethods.js';
+import GetNodeMethods from './GetNodeMethods.js';
 
 var methods = {
 }
@@ -11,6 +12,7 @@ Object.assign(
     ParentMethods,
     AddNodeMethods,
     RemoveNodeMethods,
+    GetNodeMethods,
 
 )
 
