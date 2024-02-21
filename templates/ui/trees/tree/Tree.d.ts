@@ -98,4 +98,15 @@ declare class Tree extends Folder {
     createTree(
         config?: Tree.IConfig | string
     ): Tree;
+
+
+    setText(text: string): this;
+    text: string;
+
+    setTexture(
+        key: string | Phaser.Textures.Texture,
+        frame?: string | number
+    ): this;
+    readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
+    readonly frame: Phaser.Textures.Frame;
 }

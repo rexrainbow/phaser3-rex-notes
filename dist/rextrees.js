@@ -11753,6 +11753,68 @@
   }(Base$1);
   Object.assign(Sizer.prototype, methods$7);
 
+  var ExtendNodeClass = function ExtendNodeClass(GOClass) {
+    return /*#__PURE__*/function (_GOClass) {
+      _inherits(Base, _GOClass);
+      var _super = _createSuper(Base);
+      function Base() {
+        _classCallCheck(this, Base);
+        return _super.apply(this, arguments);
+      }
+      _createClass(Base, [{
+        key: "setText",
+        value:
+        // Wrap text/setText() from nodeBody
+        function setText(text) {
+          this.text = text;
+          return this;
+        }
+      }, {
+        key: "text",
+        get: function get() {
+          var textObject = this.childrenMap.nodeBody;
+          return textObject.text;
+        },
+        set: function set(value) {
+          var textObject = this.childrenMap.nodeBody;
+          if (textObject.setText) {
+            textObject.setText(value);
+          }
+        }
+
+        // Wrap setTexture() from nodeBody
+      }, {
+        key: "setTexture",
+        value: function setTexture(key, frame) {
+          var imageObject = this.childrenMap.nodeBody;
+          if (imageObject.setTexture) {
+            imageObject.setTexture(key, frame);
+          }
+          return this;
+        }
+      }, {
+        key: "texture",
+        get: function get() {
+          var imageObject = this.childrenMap.nodeBody;
+          if (!imageObject) {
+            return undefined;
+          }
+          return imageObject.texture;
+        }
+      }, {
+        key: "frame",
+        get: function get() {
+          var imageObject = this.childrenMap.nodeBody;
+          if (!imageObject) {
+            return undefined;
+          }
+          return imageObject.frame;
+        }
+      }]);
+      return Base;
+    }(GOClass);
+  };
+
   var Transition = /*#__PURE__*/function (_OpenCloseTransition) {
     _inherits(Transition, _OpenCloseTransition);
     var _super = _createSuper(Transition);
@@ -24021,8 +24083,8 @@
   };
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-  var Node = /*#__PURE__*/function (_Sizer) {
-    _inherits(Node, _Sizer);
+  var Node = /*#__PURE__*/function (_ExtendNodeClass) {
+    _inherits(Node, _ExtendNodeClass);
     var _super = _createSuper(Node);
     function Node(scene, config, createCallbackData) {
       var _this;
@@ -24053,31 +24115,7 @@
       });
       return _this;
     }
-
-    // Wrap text/setText() from nodeBody
     _createClass(Node, [{
-      key: "text",
-      get: function get() {
-        return this.childrenMap.nodeBody.text;
-      },
-      set: function set(value) {
-        this.childrenMap.nodeBody.setText(value);
-      }
-    }, {
-      key: "setText",
-      value: function setText(text) {
-        this.text = text;
-        return this;
-      }
-
-      // Wrap setTexture() from nodeBody
-    }, {
-      key: "setTexture",
-      value: function setTexture(key, frame) {
-        this.childrenMap.nodeBody(key, frame);
-        return this;
-      }
-    }, {
       key: "getTreePatent",
       value: function getTreePatent() {
         return this.rexSizer.treeParent;
@@ -24093,7 +24131,7 @@
       }
     }]);
     return Node;
-  }(Sizer);
+  }(ExtendNodeClass(Sizer));
   var DefaultCreateNodeBodyCallback = function DefaultCreateNodeBodyCallback(scene, config, createCallbackData) {
     var gameObject = new SimpleLabel(scene, config);
     gameObject.resetDisplayContent('');
@@ -25752,8 +25790,8 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Tree = /*#__PURE__*/function (_Folder) {
-    _inherits(Tree, _Folder);
+  var Tree = /*#__PURE__*/function (_ExtendNodeClass) {
+    _inherits(Tree, _ExtendNodeClass);
     var _super = _createSuper(Tree);
     function Tree(scene, config) {
       var _this;
@@ -25824,30 +25862,6 @@
         this.nodesMap = undefined;
         _get(_getPrototypeOf(Tree.prototype), "destroy", this).call(this, fromScene);
       }
-
-      // Wrap text/setText() from nodeBody
-    }, {
-      key: "text",
-      get: function get() {
-        return this.childrenMap.nodeBody.text;
-      },
-      set: function set(value) {
-        this.childrenMap.nodeBody.setText(value);
-      }
-    }, {
-      key: "setText",
-      value: function setText(text) {
-        this.text = text;
-        return this;
-      }
-
-      // Wrap setTexture() from nodeBody
-    }, {
-      key: "setTexture",
-      value: function setTexture(key, frame) {
-        this.childrenMap.nodeBody(key, frame);
-        return this;
-      }
     }, {
       key: "createTree",
       value: function createTree(config) {
@@ -25860,7 +25874,7 @@
       }
     }]);
     return Tree;
-  }(Folder); // Static method
+  }(ExtendNodeClass(Folder)); // Static method
   Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
     return new Tree(scene, Merge(defaultConfig, overrideConfig));
   };

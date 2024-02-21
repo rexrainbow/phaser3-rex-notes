@@ -1,10 +1,11 @@
+import ExtendNodeClass from './NodeBase.js';
 import Sizer from '../../sizer/Sizer.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
 import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Node extends Sizer {
+class Node extends ExtendNodeClass(Sizer) {
     constructor(scene, config, createCallbackData) {
         var spaceConfig = config.space;
 
@@ -43,26 +44,6 @@ class Node extends Sizer {
             { proportion: 1, key: 'nodeBody' }
         );
 
-    }
-
-    // Wrap text/setText() from nodeBody
-    get text() {
-        return this.childrenMap.nodeBody.text;
-    }
-
-    set text(value) {
-        this.childrenMap.nodeBody.setText(value);
-    }
-
-    setText(text) {
-        this.text = text;
-        return this;
-    }
-
-    // Wrap setTexture() from nodeBody
-    setTexture(key, frame) {
-        this.childrenMap.nodeBody(key, frame);
-        return this;
     }
 
     getTreePatent() {

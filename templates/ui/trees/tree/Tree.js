@@ -1,3 +1,4 @@
+import ExtendNodeClass from './NodeBase.js';
 import Folder from '../../folder/Folder.js';
 import Methods from './methods/Methods.js';
 import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
@@ -8,7 +9,7 @@ import Merge from '../methods/Merge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Tree extends Folder {
+class Tree extends ExtendNodeClass(Folder) {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -96,27 +97,6 @@ class Tree extends Folder {
 
         super.destroy(fromScene);
     }
-
-    // Wrap text/setText() from nodeBody
-    get text() {
-        return this.childrenMap.nodeBody.text;
-    }
-
-    set text(value) {
-        this.childrenMap.nodeBody.setText(value);
-    }
-
-    setText(text) {
-        this.text = text;
-        return this;
-    }
-
-    // Wrap setTexture() from nodeBody
-    setTexture(key, frame) {
-        this.childrenMap.nodeBody(key, frame);
-        return this;
-    }
-
 
     createTree(config) {
         return Tree.CreateTree(this.scene, this.configSave, config)
