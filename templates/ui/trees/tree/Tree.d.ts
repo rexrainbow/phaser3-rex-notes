@@ -5,8 +5,11 @@ import SimpleLabel from '../../simplelabel/SimpleLabel';
 export default Tree;
 
 declare namespace Tree {
-    type GameObjectType = (scene: Phaser.Scene, data: Object) => Phaser.GameObjects.GameObject |
-        Phaser.GameObjects.GameObject;
+    interface ICreateGameObjectData {
+        isLeaf?: boolean,
+    }
+
+    type CreateGameObjectCallbackType = (scene: Phaser.Scene, data: ICreateGameObjectData) => Phaser.GameObjects.GameObject;
 
     interface ISpaceConfig extends Folder.ISpaceConfig {
         indent?: number,
@@ -17,10 +20,10 @@ declare namespace Tree {
     }
 
     interface IConfig {
-        background?: GameObjectType,
-        toggleButton?: GameObjectType | Triangle.IConfig,
-        nodeBackground?: GameObjectType,
-        nodeBody?: GameObjectType | SimpleLabel.IConfig,
+        background?: CreateGameObjectCallbackType,
+        toggleButton?: CreateGameObjectCallbackType | Triangle.IConfig,
+        nodeBackground?: CreateGameObjectCallbackType,
+        nodeBody?: CreateGameObjectCallbackType | SimpleLabel.IConfig,
 
         transition: Folder.ITransitionConfig,
 
@@ -30,7 +33,19 @@ declare namespace Tree {
         expand?: Folder.IExpandConfig,
     }
 
-    interface IAddTreeConfig extends IConfig {
+    interface IAddTreeConfig {
+        background?: CreateGameObjectCallbackType | Phaser.GameObjects.GameObject,
+        toggleButton?: CreateGameObjectCallbackType | Triangle.IConfig | Phaser.GameObjects.GameObject,
+        nodeBackground?: CreateGameObjectCallbackType | Phaser.GameObjects.GameObject,
+        nodeBody?: CreateGameObjectCallbackType | SimpleLabel.IConfig | Phaser.GameObjects.GameObject,
+
+        transition: Folder.ITransitionConfig,
+
+        orientation?: Sizer.OrientationTypes,
+        space?: ISpaceConfig,
+        align?: Folder.IAlignConfig,
+        expand?: Folder.IExpandConfig,
+
         nodeKey?: string
     }
 
@@ -44,8 +59,19 @@ declare class Tree extends Folder {
 
     readonly nodesMap: { [nodeKey: string]: Phaser.GameObjects.GameObject };
 
+    addTree(): Tree;
+
     addTree(
-        config?: Tree.IAddTreeConfig | string
+        config: Tree.IAddTreeConfig
+    ): Tree;
+
+    addTree(
+        nodeKey: string
+    ): Tree;
+
+    addTree(
+        nodeBody: Phaser.GameObjects.GameObject,
+        nodeKey?: string
     ): Tree;
 
     insertTree(
@@ -53,12 +79,29 @@ declare class Tree extends Folder {
         config?: Tree.IAddTreeConfig | string
     ): Tree;
 
+    addNode(): Phaser.GameObjects.GameObject;
+
     addNode(
+        config: Sizer.IAddConfig | string
+    ): Phaser.GameObjects.GameObject;
+
+    addNode(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: Sizer.IAddConfig | string
+    ): Phaser.GameObjects.GameObject;
+
+    insertNode(
+        index: number
+    ): Phaser.GameObjects.GameObject;
+
+    insertNode(
+        index: number,
         config?: Sizer.IAddConfig | string
     ): Phaser.GameObjects.GameObject;
 
     insertNode(
         index: number,
+        gameObject: Phaser.GameObjects.GameObject,
         config?: Sizer.IAddConfig | string
     ): Phaser.GameObjects.GameObject;
 

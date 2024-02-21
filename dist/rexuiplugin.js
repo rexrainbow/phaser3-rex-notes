@@ -58372,6 +58372,7 @@
     var gameObject;
     if (IsGameObject(creatorConfig)) {
       gameObject = creatorConfig;
+      delete config[key]; // Remove reference of game object
     } else if (IsFunction(creatorConfig)) {
       gameObject = creatorConfig(scene, createCallbackData);
       scene.add.existing(gameObject);
@@ -58466,7 +58467,14 @@
 
   var UUID$1 = Phaser.Utils.String.UUID;
   var AddNodeMethods = {
-    addTree: function addTree(config) {
+    addTree: function addTree(config, nodeKey) {
+      if (IsGameObject(config)) {
+        var nodeBody = config;
+        config = {
+          nodeBody: nodeBody,
+          nodeKey: nodeKey
+        };
+      }
       return this.insertTree(undefined, config);
     },
     insertTree: function insertTree(index, config) {

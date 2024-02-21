@@ -5,7 +5,14 @@ import SyncDisplayList from '../../methods/SyncDisplayList.js';
 const UUID = Phaser.Utils.String.UUID;
 
 export default {
-    addTree(config) {
+    addTree(config, nodeKey) {
+        if (IsGameObject(config)) {
+            var nodeBody = config;
+            config = {
+                nodeBody: nodeBody,
+                nodeKey: nodeKey
+            }
+        }
         return this.insertTree(undefined, config);
     },
 

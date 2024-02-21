@@ -16,6 +16,7 @@ var GetGameObjectFromConfig = function (
 
     if (IsGameObject(creatorConfig)) {
         gameObject = creatorConfig;
+        delete config[key];  // Remove reference of game object
 
     } else if (IsFunction(creatorConfig)) {
         gameObject = creatorConfig(scene, createCallbackData);
