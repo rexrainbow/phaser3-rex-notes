@@ -159,24 +159,6 @@
         }
       }
     }, {
-      key: "setInteractive",
-      value: function setInteractive() {
-        var hitAreaCallback = function (area, x, y) {
-          var faces = this.faces;
-          for (var i = 0; i < faces.length; i++) {
-            var face = faces[i];
-
-            //  Don't pass a calcMatrix, as the x/y are already transformed
-            if (face.contains(x, y)) {
-              return true;
-            }
-          }
-          return false;
-        }.bind(this);
-        this.scene.sys.input.enable(this, hitAreaCallback);
-        return this;
-      }
-    }, {
       key: "forceUpdate",
       value: function forceUpdate() {
         this.dirtyCache[10] = 1;

@@ -3371,7 +3371,11 @@
       }
       if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
-        this.frame.glTexture = this.frame.source.glTexture;
+        if (typeof WEBGL_DEBUG === "undefined" ? "undefined" : _typeof(WEBGL_DEBUG)) {
+          this.frame.glTexture.spectorMetadata = {
+            textureKey: 'Canvas Game Object'
+          };
+        }
       }
       this.dirty = false;
       var input = this.input;
@@ -6785,7 +6789,11 @@
         context.restore();
         if (this.renderer && this.renderer.gl) {
           this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
-          this.frame.glTexture = this.frame.source.glTexture;
+          if (typeof WEBGL_DEBUG === "undefined" ? "undefined" : _typeof(WEBGL_DEBUG)) {
+            this.frame.glTexture.spectorMetadata = {
+              textureKey: 'BBCodeText Game Object'
+            };
+          }
         }
         this.dirty = true;
         var input = this.input;
@@ -39109,9 +39117,7 @@
       }
     }, {
       key: "onBoot",
-      value: function onBoot() {
-        this.setTransitionTargetTexture();
-      }
+      value: function onBoot() {}
     }, {
       key: "onPreRender",
       value: function onPreRender() {
@@ -39129,6 +39135,8 @@
       key: "onDraw",
       value: function onDraw(renderTarget) {
         this.set1f('fromRatio', renderTarget.width / renderTarget.height);
+        this.set1f('toRatio', this.toRatio);
+        this.set1i('uMainSampler2', 1);
         this.bindTexture(this.targetTexture, 1);
         this.bindAndDraw(renderTarget);
       }
@@ -39162,8 +39170,6 @@
         if (resizeMode !== undefined) {
           this.resizeMode = resizeMode;
         }
-        this.set1i('uMainSampler2', 1);
-        this.set1f('toRatio', this.toRatio);
         return this;
       }
     }, {
@@ -56431,24 +56437,6 @@
         } else {
           return this.vertices[0].color;
         }
-      }
-    }, {
-      key: "setInteractive",
-      value: function setInteractive() {
-        var hitAreaCallback = function (area, x, y) {
-          var faces = this.faces;
-          for (var i = 0; i < faces.length; i++) {
-            var face = faces[i];
-
-            //  Don't pass a calcMatrix, as the x/y are already transformed
-            if (face.contains(x, y)) {
-              return true;
-            }
-          }
-          return false;
-        }.bind(this);
-        this.scene.sys.input.enable(this, hitAreaCallback);
-        return this;
       }
     }, {
       key: "forceUpdate",

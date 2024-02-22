@@ -6172,7 +6172,11 @@
       }
       if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
-        this.frame.glTexture = this.frame.source.glTexture;
+        if (typeof WEBGL_DEBUG === "undefined" ? "undefined" : _typeof(WEBGL_DEBUG)) {
+          this.frame.glTexture.spectorMetadata = {
+            textureKey: 'Canvas Game Object'
+          };
+        }
       }
       this.dirty = false;
       var input = this.input;

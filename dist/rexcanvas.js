@@ -4,6 +4,15 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvas = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -288,7 +297,11 @@
       }
       if (this.renderer && this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
-        this.frame.glTexture = this.frame.source.glTexture;
+        if (typeof WEBGL_DEBUG === "undefined" ? "undefined" : _typeof(WEBGL_DEBUG)) {
+          this.frame.glTexture.spectorMetadata = {
+            textureKey: 'Canvas Game Object'
+          };
+        }
       }
       this.dirty = false;
       var input = this.input;

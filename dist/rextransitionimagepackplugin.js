@@ -7541,9 +7541,7 @@
       }
     }, {
       key: "onBoot",
-      value: function onBoot() {
-        this.setTransitionTargetTexture();
-      }
+      value: function onBoot() {}
     }, {
       key: "onPreRender",
       value: function onPreRender() {
@@ -7561,6 +7559,8 @@
       key: "onDraw",
       value: function onDraw(renderTarget) {
         this.set1f('fromRatio', renderTarget.width / renderTarget.height);
+        this.set1f('toRatio', this.toRatio);
+        this.set1i('uMainSampler2', 1);
         this.bindTexture(this.targetTexture, 1);
         this.bindAndDraw(renderTarget);
       }
@@ -7594,8 +7594,6 @@
         if (resizeMode !== undefined) {
           this.resizeMode = resizeMode;
         }
-        this.set1i('uMainSampler2', 1);
-        this.set1f('toRatio', this.toRatio);
         return this;
       }
     }, {

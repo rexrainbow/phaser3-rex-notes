@@ -10234,7 +10234,7 @@
     // Load texture
     var textures = data.textures;
     for (var i in textures) {
-      this.getRenderer().bindTexture(parseInt(i), textures[i]);
+      this.getRenderer().bindTexture(parseInt(i), textures[i].webGLTexture);
     }
 
     // Stop all motions
