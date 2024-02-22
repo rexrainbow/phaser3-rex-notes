@@ -5,7 +5,7 @@ export default BBCodeText;
 declare namespace BBCodeText {
 
     interface TextStyle extends Text.TextStyle {
-        delimiters: string | string[];
+        delimiters?: string | string[];
     }
 }
 
