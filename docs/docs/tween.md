@@ -320,8 +320,15 @@ tween.resume();
 ### Stop task
 
 ```javascript
+tween.complete();
+```
+
+
+```javascript
 tween.stop();
 ```
+
+Won't invoke `onComplete` callback (`'complete'` event)
 
 ### Play task
 

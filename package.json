@@ -1,6 +1,6 @@
 {
     "name": "phaser3-rex-plugins",
-    "version": "1.60.11",
+    "version": "1.80.0",
     "description": "Plugins of phaser3",
     "author": "Rex",
     "files": [
@@ -58,7 +58,7 @@
         "localforage": "^1.10.0",
         "lokijs": "^1.5.12",
         "pako": "^2.1.0",
-        "phaser": "^3.70.0",
+        "phaser": "v3.80.0",
         "raw-loader": "^0.5.1",
         "rollup": "^3.29.4",
         "rollup-plugin-node-builtins": "^2.1.2",
