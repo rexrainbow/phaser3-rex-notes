@@ -5,6 +5,12 @@ const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+var RootColor = 'silver';
+var KeyColor = 'lightgreen';
+var NumberValueColor = 'white';
+var StringValueColor = 'cyan';
+var ValueColors = { 'number': NumberValueColor, 'string': StringValueColor };
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -30,7 +36,7 @@ class Demo extends Phaser.Scene {
             .setOrigin(0)
 
         var root = trees.addTree('root');
-        root.setText('[color=silver]root[/color]');
+        root.setText(`[color=${RootColor}]root[/color]`);
 
         DisplayData(root, data);
 
@@ -58,6 +64,12 @@ var CreateTrees = function (scene) {
                 text: {
                     $type: 'bbcodetext',
                     fontSize: 18
+                },
+
+                background: {
+                    'hover.strokeColor': 0xffffff,
+                    'hover.strokeAlpha': 0.5,
+                    'hover.strokeWidth': 2
                 }
             },
         }
@@ -68,26 +80,36 @@ var CreateTrees = function (scene) {
 var DisplayData = function (tree, data) {
     for (var key in data) {
         var value = data[key];
-        var valueType = typeof (value);
-        switch (valueType) {
-            case 'number':
-                var node = tree.addNode(key);
-                node.setText(`[color=lightgreen]${key}[/color] : [color=white]${value}[/color]`);
-                break;
 
-            case 'string':
-                var node = tree.addNode(key);
-                node.setText(`[color=lightgreen]${key}[/color] : [color=cyan]"${value}"[/color]`);
-                break;
-
-            default:
-                var node = tree.addTree(key);
-                node.setText(`[color=lightgreen]${key}[/color]`);
-                DisplayData(node, value);
-                break;
+        var node;
+        if (typeof (value) === 'object') {
+            node = tree.addTree(key);
+            DisplayData(node, value);
+        } else {
+            node = tree.addNode(key);
         }
+
+        DecorateNodeBody(node.getElement('nodeBody'), key, value);
     }
     return tree;
+}
+
+var DecorateNodeBody = function (nodeBody, key, value) {
+    var valueColor = ValueColors[typeof (value)];
+    if (valueColor) {
+        nodeBody.setText(`[color=${KeyColor}]${key}[/color] [color=grey]:[/color] [color=${valueColor}]${value}[/color]`)
+    } else {
+        nodeBody.setText(`[color=${KeyColor}]${key}[/color]`);
+    }
+
+    nodeBody
+        .setInteractive()
+        .on('pointerover', function () {
+            nodeBody.setHoverState();
+        })
+        .on('pointerout', function () {
+            nodeBody.setHoverState(false);
+        })
 }
 
 var config = {
