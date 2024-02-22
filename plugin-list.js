@@ -304,8 +304,10 @@ module.exports = {
     'textareainput': './templates/ui/textareainput/TextAreaInput.js',
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
-    'splitpanels':'./templates/ui/splitpanels/SplitPanels.js',
+    'folder': './templates/ui/folder/Folder.js',
+    'trees': './templates/ui/trees/Trees.js',
     'tweaker': './templates/ui/tweaker/Tweaker.js',
+    'splitpanels':'./templates/ui/splitpanels/SplitPanels.js',
     'sides': './templates/ui/sides/Sides.js',
 
     // spinner

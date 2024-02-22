@@ -19,6 +19,7 @@ class Folder extends Sizer {
         super(scene, config);
         this.type = 'rexFolder';
 
+        this.reLayoutEnable = true;
         this.expanded = undefined;
         this.expandDirection = (this.orientation === 1) ? 'y' : 'x';
 
@@ -127,6 +128,10 @@ class Folder extends Sizer {
             this.on('collapse.complete', onCollapseComplete);
         }
 
+        var expanded = GetValue(config, 'expanded', undefined);
+        if (expanded !== undefined) {
+            this.setExpandedState(expanded);
+        }
     }
 }
 

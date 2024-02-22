@@ -1,7 +1,7 @@
 import Extend from './Extend.js';
 
 const Base = Phaser.Data.DataManager;
-const EventEmitterKlass = Phaser.Events.EventEmitter;
+const EventEmitterClass = Phaser.Events.EventEmitter;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class DataManager extends Base {
@@ -17,7 +17,7 @@ class DataManager extends Base {
 
         var useDefaultEventEmitter = (eventEmitter === undefined);
         if (useDefaultEventEmitter) {
-            eventEmitter = new EventEmitterKlass();
+            eventEmitter = new EventEmitterClass();
         }
         if (parent === undefined) {
             parent = eventEmitter;

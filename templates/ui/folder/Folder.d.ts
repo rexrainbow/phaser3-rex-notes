@@ -5,6 +5,29 @@ import OpenCloseTransition from '../../../plugins/behaviors/openclosetransition/
 export default Folder;
 
 declare namespace Folder {
+    interface ITransitionConfig {
+        duration?: number,
+        expandCallback?: OpenCloseTransition.TransitCallbackType,
+        collapseCallback?: OpenCloseTransition.TransitCallbackType,
+    }
+
+    interface IAlignConfig {
+        title?: Sizer.AlignTypes,
+        child?: Sizer.AlignTypes,
+    }
+
+    interface IExpandConfig {
+        title?: boolean,
+        child?: boolean,
+    }
+
+    interface ISpaceConfig {
+        left?: number, right?: number, top?: number, bottom?: number,
+        item?: number,
+
+        titleLeft?: number, titleRight?: number, titleTop?: number, titleBottom?: number,
+        childLeft?: number, childRight?: number, childTop?: number, childBottom?: number,
+    }
 
     interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
@@ -21,29 +44,13 @@ declare namespace Folder {
             threshold?: number,
         },
 
-        align?: {
-            title?: Sizer.AlignTypes,
-            child?: Sizer.AlignTypes,
-        },
+        align?: IAlignConfig,
 
-        expand?: {
-            title?: boolean,
-            child?: boolean,
-        },
+        expand?: IExpandConfig,
 
-        space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
-            item?: number,
+        space?: ISpaceConfig,
 
-            titleLeft?: number, titleRight?: number, titleTop?: number, titleBottom?: number,
-            childLeft?: number, childRight?: number, childTop?: number, childBottom?: number,
-        },
-
-        transition?: {
-            duration?: number,
-            expandCallback?: OpenCloseTransition.TransitCallbackType,
-            collapseCallback?: OpenCloseTransition.TransitCallbackType,
-        },
+        transition?: ITransitionConfig,
 
         reLayoutTarget?: Phaser.GameObjects.GameObject,
 
@@ -70,4 +77,6 @@ declare class Folder extends Sizer {
     collapse(duration?: number): this;
     toggle(duration?: number): this;
     readonly expanded: boolean;
+
+    setExpandedState(expanded?: boolean): this;
 }

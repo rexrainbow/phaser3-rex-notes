@@ -12,7 +12,7 @@ declare namespace ConfirmAction {
     interface IConfig {
         dialog?: ConfirmDialog,
         style?: ConfirmDialog.IConfig,
-        content?: ConfirmDialog.IResetChoiceDisplayContentConfig,
+        content?: ConfirmDialog.IResetDisplayContentConfig,
         modal?: Dialog.IModalConfig,
         onCreateDialog?: (dialog: ConfirmDialog) => void,
 

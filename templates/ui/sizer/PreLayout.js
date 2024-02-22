@@ -4,15 +4,18 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 var PreLayout = function () {
     // Resize child to 1x1 for ratio-fit 
     this.hasRatioFitChild = false;
+    var child, sizerConfig;
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children[i];
-        if (child.rexSizer.hidden) {
+        child = children[i];
+        sizerConfig = child.rexSizer;
+        if (sizerConfig.hidden) {
             continue;
         }
 
-        if (child.rexSizer.fitRatio > 0) {
+        if (sizerConfig.fitRatio > 0) {
             ResizeGameObject(child, 0, 0);
+            sizerConfig.resolved = false;
             this.hasRatioFitChild = true;
         }
 

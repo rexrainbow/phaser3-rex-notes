@@ -10147,7 +10147,7 @@
 <span class="w">        </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">minWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">fitRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">fitRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// true</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -10218,7 +10218,8 @@
 </ul>
 </li>
 <li><code>fitRatio</code> : Resize child to fit sizer height/width before layout children, when <code>proportion</code> is set to <code>0</code>.<ul>
-<li><code>0</code> : Ignore this feature. Default behavior.</li>
+<li><code>0</code>, or <code>false</code> : Ignore this feature. Default behavior.</li>
+<li><code>true</code> : Fit ratio (width/height) from game object's display size.</li>
 <li><code>&gt; 0</code> : Fit ratio (width/height). <code>1</code> is square.</li>
 </ul>
 </li>

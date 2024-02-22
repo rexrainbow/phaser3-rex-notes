@@ -1475,14 +1475,14 @@
     }
   };
 
-  var ContainerKlass = Phaser.GameObjects.Container;
+  var ContainerClass = Phaser.GameObjects.Container;
   var IsContainerGameObject = function IsContainerGameObject(gameObject) {
-    return gameObject instanceof ContainerKlass;
+    return gameObject instanceof ContainerClass;
   };
 
-  var LayerKlass = Phaser.GameObjects.Layer;
+  var LayerClass = Phaser.GameObjects.Layer;
   var IsLayerGameObject = function IsLayerGameObject(gameObject) {
-    return gameObject instanceof LayerKlass;
+    return gameObject instanceof LayerClass;
   };
 
   var GetValidChildren = function GetValidChildren(parent) {
@@ -3511,6 +3511,11 @@
   };
 
   var Layout = function Layout() {
+    // Skip hidden or !dirty sizer
+    if (this.ignoreLayout) {
+      return this;
+    }
+
     // Save scale
     var scaleXSave = this.scaleX;
     var scaleYSave = this.scaleY;
@@ -10862,10 +10867,10 @@
       if (minimumMode) {
         childrenWidth = this.maxChildWidth;
       } else {
-        childrenWidth = this.wrapResult ? this.wrapResult.width : undefined;
+        childrenWidth = this.rexSizer.resolved ? this.wrapResult.width : undefined;
       }
     } else {
-      childrenWidth = this.wrapResult ? this.wrapResult.width : undefined;
+      childrenWidth = this.rexSizer.resolved ? this.wrapResult.width : undefined;
     }
     if (childrenWidth === undefined) {
       return undefined;
@@ -10885,10 +10890,10 @@
       if (minimumMode) {
         childrenHeight = this.maxChildHeight;
       } else {
-        childrenHeight = this.wrapResult ? this.wrapResult.height : undefined;
+        childrenHeight = this.rexSizer.resolved ? this.wrapResult.height : undefined;
       }
     } else {
-      childrenHeight = this.wrapResult ? this.wrapResult.height : undefined;
+      childrenHeight = this.rexSizer.resolved ? this.wrapResult.height : undefined;
     }
     if (childrenHeight === undefined) {
       return undefined;
@@ -10918,6 +10923,7 @@
     this._maxChildWidth = undefined;
     this._maxChildHeight = undefined;
     this.wrapResult = undefined;
+    this.rexSizer.resolved = false;
     PreLayout$1.call(this);
     return this;
   };
@@ -11202,6 +11208,7 @@
     if (this.orientation === 0) {
       var innerWidth = width - this.space.left - this.space.right;
       this.wrapResult = RunChildrenWrap.call(this, innerWidth);
+      this.rexSizer.resolved = true;
       RunWidthWrap$1.call(this, width);
     }
   };
@@ -11221,6 +11228,7 @@
     if (this.orientation === 1) {
       var innerHeight = height - this.space.top - this.space.bottom;
       this.wrapResult = RunChildrenWrap.call(this, innerHeight);
+      this.rexSizer.resolved = true;
       RunHeightWrap$1.call(this, height);
     }
   };

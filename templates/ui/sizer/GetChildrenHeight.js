@@ -57,7 +57,7 @@ var GetChildrenHeight = function (minimumMode) {
             proportion = sizerConfig.proportion;
             if ((proportion === 0) || minimumMode) {
                 childHeight = this.getChildHeight(child);
-                if ((sizerConfig.fitRatio > 0) && (childHeight === 0)) {
+                if ((sizerConfig.fitRatio > 0) && (!sizerConfig.resolved)) {
                     childHeight = undefined;
                 }
 

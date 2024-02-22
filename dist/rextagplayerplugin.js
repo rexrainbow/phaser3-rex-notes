@@ -7017,14 +7017,14 @@
     this.addGameObjectManager(config, SpriteManager);
   };
 
-  var TextKlass = Phaser.GameObjects.Text;
+  var TextClass = Phaser.GameObjects.Text;
   var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextKlass;
+    return gameObject instanceof TextClass;
   };
 
-  var BitmapTextKlass = Phaser.GameObjects.BitmapText;
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
   var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextKlass;
+    return gameObject instanceof BitmapTextClass;
   };
 
   var TextType = 0;

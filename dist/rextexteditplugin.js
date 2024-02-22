@@ -786,9 +786,9 @@
   };
   Object.assign(InputText.prototype, methods$1);
 
-  var TextKlass = Phaser.GameObjects.Text;
+  var TextClass = Phaser.GameObjects.Text;
   var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextKlass;
+    return gameObject instanceof TextClass;
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;

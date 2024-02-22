@@ -10,6 +10,7 @@ var RunHeightWrap = function (height) {
     if (this.orientation === 1) {
         var innerHeight = height - this.space.top - this.space.bottom;
         this.wrapResult = RunChildrenWrap.call(this, innerHeight);
+        this.rexSizer.resolved = true;
         RunChildrenWrapBase.call(this, height);
     }
 }

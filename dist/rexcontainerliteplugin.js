@@ -1475,14 +1475,14 @@
     }
   };
 
-  var ContainerKlass = Phaser.GameObjects.Container;
+  var ContainerClass = Phaser.GameObjects.Container;
   var IsContainerGameObject = function IsContainerGameObject(gameObject) {
-    return gameObject instanceof ContainerKlass;
+    return gameObject instanceof ContainerClass;
   };
 
-  var LayerKlass = Phaser.GameObjects.Layer;
+  var LayerClass = Phaser.GameObjects.Layer;
   var IsLayerGameObject = function IsLayerGameObject(gameObject) {
-    return gameObject instanceof LayerKlass;
+    return gameObject instanceof LayerClass;
   };
 
   var GetValidChildren = function GetValidChildren(parent) {

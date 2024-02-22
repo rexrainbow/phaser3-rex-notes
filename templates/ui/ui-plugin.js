@@ -72,6 +72,7 @@ import PagesFactory from './pages/Factory.js';
 import PerspectiveCardFactory from './perspectivecard/Factory.js';
 import TabPagesFactory from './tabpages/Factory.js';
 import FolderFactory from './folder/Factory.js';
+import TreesFactory from './trees/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import TextAreaInputFactory from './textareainput/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';

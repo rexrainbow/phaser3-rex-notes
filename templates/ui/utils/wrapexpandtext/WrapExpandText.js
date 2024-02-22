@@ -1,4 +1,4 @@
-import DynamicTextKlass from '../../dynamictext/DynamicText.js';
+import DynamicTextClass from '../../dynamictext/DynamicText.js';
 import IsBitmapTextGameObject from '../../../../plugins/utils/bitmaptext/IsBitmapTextGameObject.js';
 import TextRunWidthWrap from './TextRunWidthWrap.js';
 import DynamicTextRunWidthWrap from './DynamicTextRunWidthWrap.js';
@@ -6,7 +6,7 @@ import BitmapTextRunWidthWrap from './BitmapTextRunWidthWrap.js';
 
 
 var IsDynamicTextGameObject = function (gameObject) {
-    return (gameObject instanceof DynamicTextKlass);
+    return (gameObject instanceof DynamicTextClass);
 }
 
 var WrapExpandText = function (textObject, minWidth) {

@@ -9937,6 +9937,40 @@ Next --&gt; EventUpdateChoice</code></pre>
 <li>Is last question
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">quest</span><span class="p">.</span><span class="nx">isLast</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Remove all questions
+    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Add questions
+    <div class="highlight"><pre><span></span><code><span class="nx">quest</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">questions</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>questions</code> : An array of question objects, or a csv string. See <code>questions</code> section in <a href="../quest/#create-question-manager-instance">Create question manager instance</a> section.</li>
+<li><code>config</code> :<ul>
+<li><code>delimiter</code> : Delimiter of csv string. Default value is <code>','</code></li>
+<li><code>types</code> : Define value of row type.<ul>
+<li><code>types.question</code> : Define value of question row. Default value is <code>q</code>.</li>
+<li><code>types.option</code> : Define value of option row. Default value is <code>''</code> (empty string).</li>
+</ul>
+</li>
+<li><code>convert</code> : Convert string values to other types.<ul>
+<li>Default type converting : Convert string to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em><ul>
+<li><code>'0'</code>, <code>'1'</code>, ... (number string) -&gt; number</li>
+<li><code>'true'</code>, or <code>'false'</code> -&gt; <code>true</code> or <code>false</code></li>
+<li><code>''</code> (empty string) -&gt; <code>null</code></li>
+<li>Others : string.</li>
+</ul>
+</li>
+<li>Set <code>false</code> to ignore types converting, i.e. all values are string.</li>
+<li>A custom type converting function :
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">stringValue</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// return value;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="private-data-methods">Private data methods<a class="headerlink" href="#private-data-methods" title="Permanent link">&para;</a></h3>
 <ul>

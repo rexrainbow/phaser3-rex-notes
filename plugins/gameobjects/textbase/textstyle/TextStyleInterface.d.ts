@@ -1,6 +1,6 @@
 interface TextStyle {
     fontFamily?: string,
-    fontSize?: string,
+    fontSize?: string | number,
     fontStyle?: string,
 
     backgroundColor?: null | string | number,

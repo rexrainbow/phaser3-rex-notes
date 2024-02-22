@@ -89,40 +89,43 @@ declare namespace Tweaker {
         value: any
     }
 
-    interface IConfig extends Sizer.IConfig {
-        styles: {
-            itemWidth?: number,
+    interface IStyle {
+        itemWidth?: number,
+
+        background?: CreateBackground.IConfig,
+
+        inputRow?: IInputRowStyle,
+
+        folder?: {
+            title?: SimpleLabel.IConfig,
 
             background?: CreateBackground.IConfig,
-
-            inputRow?: IInputRowStyle,
-
-            folder?: {
-                title?: SimpleLabel.IConfig,
-
-                background?: CreateBackground.IConfig,
-
-                space?: {
-                    left?: number, right?: number, top?: number, bottom?: number,
-                    item?: number
-                },
-            },
-
-            tab?: {
-                tab?: IInteractiveLabelConfig,
-
-                wrapTabs?: boolean,
-                tabs?: Buttons.IConfig | FixWidthButtons.IConfig,
-                pages?: Pages.IConfig,
-            },
-
-            separator?: RoundRectangle.IConfig,
 
             space?: {
                 left?: number, right?: number, top?: number, bottom?: number,
                 item?: number
-            }
+            },
+        },
+
+        tab?: {
+            tab?: IInteractiveLabelConfig,
+
+            wrapTabs?: boolean,
+            tabs?: Buttons.IConfig | FixWidthButtons.IConfig,
+            pages?: Pages.IConfig,
+        },
+
+        separator?: RoundRectangle.IConfig,
+
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+            item?: number
         }
+    }
+
+    interface IConfig extends Sizer.IConfig {
+        styles: IStyle,
+        style: IStyle,
     }
 
     interface IAddInputConfig {

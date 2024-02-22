@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
 
         var quest = new DialogQuest({
             dialog: dialog,
-            questions: Questions,
+            questions: QuestionSetA,
             quest: {
                 shuffleQuestions: true,
                 shuffleOptions: true,
@@ -74,8 +74,11 @@ class Demo extends Phaser.Scene {
                     quest.next();
                 } else {
                     print.text += 'Done\n';
-                    quest.emit('complelte', quest);
+                    quest.emit('complete', quest);
                 }
+            })
+            .once('complete', function () {
+                quest.removeAll().add(QuestionSetB).start();
             })
             .start();
     }
@@ -164,7 +167,7 @@ var CreateButton = function (scene, text, backgroundColor) {
     });
 }
 
-const Questions = `type,key,answer
+const QuestionSetA = `type,key,answer
 q,Q0,A0
 ,A0,
 ,A1,
@@ -174,6 +177,20 @@ q,Q1,A0
 ,A1,
 ,A2,
 q,Q2,A0
+,A0,
+,A1,
+,A2,`;
+
+const QuestionSetB = `type,key,answer
+q,Q3,A0
+,A0,
+,A1,
+,A2,
+q,Q4,A0
+,A0,
+,A1,
+,A2,
+q,Q5,A0
 ,A0,
 ,A1,
 ,A2,`;

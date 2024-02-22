@@ -197,6 +197,33 @@ Next --> EventUpdateChoice
     ```javascript
     var isLast = quest.isLast();
     ```
+- Remove all questions
+    ```javascript
+    quest.removeAll();
+    ```
+- Add questions
+    ```javascript
+    quest.add(questions, config);
+    ```
+    - `questions` : An array of question objects, or a csv string. See `questions` section in [Create question manager instance](quest.md#create-question-manager-instance) section.
+    - `config` :
+        - `delimiter` : Delimiter of csv string. Default value is `','`
+        - `types` : Define value of row type.
+            - `types.question` : Define value of question row. Default value is `q`.
+            - `types.option` : Define value of option row. Default value is `''` (empty string).
+        - `convert` : Convert string values to other types.
+            - Default type converting : Convert string to *number*, *boolean*, *null*, or *string*
+                - `'0'`, `'1'`, ... (number string) -> number
+                - `'true'`, or `'false'` -> `true` or `false`
+                - `''` (empty string) -> `null`
+                - Others : string.
+            - Set `false` to ignore types converting, i.e. all values are string.
+            - A custom type converting function :
+                ```javascript
+                function(stringValue, key) {
+                    // return value;
+                }
+                ```
 
 ### Private data methods
 

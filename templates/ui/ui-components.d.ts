@@ -70,6 +70,7 @@ import Pages from './pages/Pages';
 import PerspectiveCard from './perspectivecard/PerspectiveCard';
 import TabPages from './tabpages/TabPages';
 import Folder from './folder/Folder';
+import Trees from './trees/Trees';
 import TextArea from './textarea/TextArea';
 import TextAreaInput from './textareainput/TextAreaInput';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
@@ -199,6 +200,7 @@ export {
     PerspectiveCard,
     TabPages,
     Folder,
+    Trees,
     TextArea,
     TextAreaInput,
     ScrollablePanel,

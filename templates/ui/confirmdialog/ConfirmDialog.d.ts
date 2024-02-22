@@ -1,4 +1,5 @@
 import Dialog from '../dialog/Dialog';
+import BaseSizer from '../basesizer/BaseSizer';
 import { GeneralCreateGameObjectCallbackType } from '../utils/build/GeneralCreateGameObjectCallbackType';
 import CreateBackground from '../utils/build/CreateBackground';
 import SimpleLabel from '../simplelabel/SimpleLabel';
@@ -15,7 +16,7 @@ declare namespace ConfirmDialog {
         clickInterval?: number
     }
 
-    interface IConfig {
+    interface IConfig extends BaseSizer.IConfig {
         x?: number,
         y?: number,
         width?: number,

@@ -310,12 +310,12 @@
     null != module && (module.exports = LZString);
   })(lzString_min);
   var lzString_minExports = lzString_min.exports;
-  var lzstring = /*@__PURE__*/getDefaultExportFromCjs(lzString_minExports);
+  var lzstringBase = /*@__PURE__*/getDefaultExportFromCjs(lzString_minExports);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
-  var LZStringKlass = /*#__PURE__*/function () {
-    function LZStringKlass(config) {
-      _classCallCheck(this, LZStringKlass);
+  var LZString = /*#__PURE__*/function () {
+    function LZString(config) {
+      _classCallCheck(this, LZString);
       this.resetFromJSON(config);
     }
 
@@ -324,7 +324,7 @@
      * @param {object} o JSON object
      * @returns {object} this object
      */
-    _createClass(LZStringKlass, [{
+    _createClass(LZString, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setEncoding(GetFastValue(o, 'encoding', 0));
@@ -357,16 +357,16 @@
       key: "compress",
       value: function compress(s) {
         var fnName = COMPRESSFNNAME[this.encoding];
-        return lzstring[fnName](s);
+        return lzstringBase[fnName](s);
       }
     }, {
       key: "decompress",
       value: function decompress(s) {
         var fnName = DECOMPRESSFNNAME[this.encoding];
-        return lzstring[fnName](s);
+        return lzstringBase[fnName](s);
       }
     }]);
-    return LZStringKlass;
+    return LZString;
   }();
   var ENCODINGMAP = {
     none: 0,
@@ -384,7 +384,7 @@
       var _this;
       _classCallCheck(this, LZStringPlugin);
       _this = _super.call(this, pluginManager);
-      _this.lzstring = new LZStringKlass();
+      _this.lzstring = new LZString();
       return _this;
     }
     _createClass(LZStringPlugin, [{
@@ -405,7 +405,7 @@
     }, {
       key: "add",
       value: function add(config) {
-        return new LZStringKlass(config);
+        return new LZString(config);
       }
     }]);
     return LZStringPlugin;

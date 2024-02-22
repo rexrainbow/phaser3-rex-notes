@@ -15,4 +15,14 @@ export default {
     isLast() {
         return this.questionManager.isLastQuestion();
     },
+
+    removeAll() {
+        this.questionManager.removeAll();
+        return this;
+    },
+
+    add(questions, config) {
+        this.questionManager.add(questions, config);
+        return this;
+    }
 };

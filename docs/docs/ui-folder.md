@@ -255,11 +255,11 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```
     - Title game object
         ```javascript
-        var icon = folder.getElement('title');
+        var title = folder.getElement('title');
         ```
     - Child game object
         ```javascript
-        var textObject = folder.getElement('child');
+        var child = folder.getElement('child');
         ```    
 - Get by name
     ```javascript
@@ -275,7 +275,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Expand/collapse
 
-- Expand
+- Expand, will re=layout from topmost sizer
     ```javascript
     folder.expand();
     // folder.expand(duration);
@@ -283,7 +283,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     folder.expand(0);  // Immediately, won't invoke expandCallback
     ```
-- Collapse
+- Collapse, will re=layout from topmost sizer
     ```javascript
     folder.collapse();
     // folder.collapse(duration);
@@ -291,13 +291,17 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     folder.collapse(0);  // Immediately, won't invoke collapseCallback
     ```
-- Toggle
+- Toggle, will re=layout from topmost sizer
     ```javascript
     folder.toggle();
     // folder.toggle(duration);
     ```
     ```javascript
     folder.toggle(0);  // Immediately, won't invoke expandCallback/collapseCallback
+    ```
+- Set expanded state without re-layouting
+    ```javascript
+    folder.setExpandedState(expanded);  // true, or false
     ```
 - Get expanded state
     ```javascript

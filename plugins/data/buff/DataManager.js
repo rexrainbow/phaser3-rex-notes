@@ -2,13 +2,13 @@ import methods from './Methods.js';
 import Extend from './Extend.js';
 
 const Base = Phaser.Data.DataManager;
-const EventEmitterKlass = Phaser.Events.EventEmitter;
+const EventEmitterClass = Phaser.Events.EventEmitter;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter) {
         var useDefaultEventEmitter = (eventEmitter === undefined);
         if (useDefaultEventEmitter) {
-            eventEmitter = new EventEmitterKlass();
+            eventEmitter = new EventEmitterClass();
         }
 
         super(parent, eventEmitter);

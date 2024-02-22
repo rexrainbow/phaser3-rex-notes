@@ -24,7 +24,7 @@ declare namespace VirtualJoyStick {
     }
 }
 
-declare class VirtualJoyStick {
+declare class VirtualJoyStick extends Phaser.Events.EventEmitter {
     constructor(
         scene: Phaser.Scene,
         config?: VirtualJoyStick.IConfig

@@ -1,7 +1,7 @@
-const BitmapTextKlass = Phaser.GameObjects.BitmapText;
+const BitmapTextClass = Phaser.GameObjects.BitmapText;
 
 var IsBitmapTextGameObject = function (gameObject) {
-    return (gameObject instanceof BitmapTextKlass);
+    return (gameObject instanceof BitmapTextClass);
 }
 
 export default IsBitmapTextGameObject;
