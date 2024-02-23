@@ -17,6 +17,8 @@ var RunHeightWrap = function (parentHeight) {
             if (childHeight === undefined) {
                 childHeight = expandedChildHeight;
             }
+        } else {
+            childHeight = expandedChildHeight;
         }
         child.runHeightWrap(childHeight);
     }

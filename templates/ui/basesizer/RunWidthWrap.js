@@ -17,6 +17,8 @@ var RunWidthWrap = function (parentWidth) {
             if (childWidth === undefined) {
                 childWidth = expandedChildWidth;
             }
+        } else {
+            childWidth = expandedChildWidth;
         }
         child.runWidthWrap(childWidth);
     }

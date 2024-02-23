@@ -1,3 +1,6 @@
+import HasResizeMethod from './HasResizeMethod.js';
+import CanSetDisplaySize from './CanSetDisplaySize.js';
+
 var ResizeGameObject = function (gameObject, newWidth, newHeight) {
     if (!gameObject || ((newWidth === undefined) && (newHeight === undefined))) {
         return;
@@ -17,42 +20,22 @@ var ResizeGameObject = function (gameObject, newWidth, newHeight) {
             gameObject.setSize(newWidth, newHeight);
         }
     } else { // Set display width/height
+        var canSetDisplaySize = CanSetDisplaySize(gameObject);
         if (newWidth !== undefined) {
-            gameObject.displayWidth = newWidth;
+            if (canSetDisplaySize) {
+                gameObject.displayWidth = newWidth;
+            } else {
+                gameObject.scaleX = newWidth / gameObject.width;
+            }
         }
         if (newHeight !== undefined) {
-            gameObject.displayHeight = newHeight;
+            if (canSetDisplaySize) {
+                gameObject.displayHeight = newHeight;
+            } else {
+                gameObject.scaleY = newHeight / gameObject.height;
+            }
         }
     }
-}
-
-var ExcludeClassList = [
-    Phaser.GameObjects.Image,
-    Phaser.GameObjects.Sprite,
-    Phaser.GameObjects.Mesh,
-    Phaser.GameObjects.Shader,
-    Phaser.GameObjects.Video
-];
-
-var HasResizeMethod = function (gameObject) {
-    // 1st pass : Has `resize` method?
-    if (gameObject.resize) {
-        return true;
-    }
-
-    // 2nd pass : Has `setSize` method?
-    if (!gameObject.setSize) {
-        return false;
-    }
-
-    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
-        var excludeClass = ExcludeClassList[i];
-        if (excludeClass && gameObject instanceof excludeClass) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 export default ResizeGameObject;
