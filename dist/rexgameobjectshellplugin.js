@@ -21370,7 +21370,9 @@
   var GetCloseTagRegString = function GetCloseTagRegString(delimiterLeft, delimiterRight, tagName) {
     return "".concat(delimiterLeft, "/").concat(tagName).concat(delimiterRight);
   };
-  var STR_PARAM = '[^\\]]+';
+  var GenerateStringRegEx = function GenerateStringRegEx(delimiterRight) {
+    return "[^".concat(delimiterRight, "]+");
+  };
   var NUMBER_PARAM = '[-.0-9]+';
   var colorParameterList = ['[a-zA-Z]+',
   // 'white'
@@ -21394,6 +21396,7 @@
     DelimiterRightSave = delimiterRight;
     delimiterLeft = EscapeRegex(delimiterLeft);
     delimiterRight = EscapeRegex(delimiterRight);
+    var STR_PARAM = GenerateStringRegEx(delimiterRight);
     var ESC = 'esc';
     var ESC_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ESC);
     var ESC_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, ESC);

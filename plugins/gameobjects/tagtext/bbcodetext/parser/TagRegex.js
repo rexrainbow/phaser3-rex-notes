@@ -15,7 +15,9 @@ var GetCloseTagRegString = function (delimiterLeft, delimiterRight, tagName) {
     return `${delimiterLeft}\/${tagName}${delimiterRight}`;
 }
 
-var STR_PARAM = '[^\\]]+';
+var GenerateStringRegEx = function (delimiterRight) {
+    return `[^${delimiterRight}]+`
+}
 var NUMBER_PARAM = '[-.0-9]+';
 
 var colorParameterList = [
@@ -41,6 +43,8 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
 
     delimiterLeft = EscapeRegex(delimiterLeft);
     delimiterRight = EscapeRegex(delimiterRight);
+
+    var STR_PARAM = GenerateStringRegEx(delimiterRight);
 
     var ESC = 'esc';
     var ESC_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, ESC);
