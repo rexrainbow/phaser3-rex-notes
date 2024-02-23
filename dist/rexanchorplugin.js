@@ -375,6 +375,40 @@
   };
   var globRect = new Rectangle();
 
+  var HasResizeMethod = function HasResizeMethod(gameObject) {
+    // 1st pass : Has `resize` method?
+    if (gameObject.resize) {
+      return true;
+    }
+
+    // 2nd pass : Has `setSize` method?
+    if (!gameObject.setSize) {
+      return false;
+    }
+    for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
+      var excludeClass = ExcludeClassList$1[i];
+      if (excludeClass && gameObject instanceof excludeClass) {
+        return false;
+      }
+    }
+    return true;
+  };
+  var ExcludeClassList$1 = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
+
+  var CanSetDisplaySize = function CanSetDisplaySize(gameObject) {
+    if (gameObject.displayWidth === undefined) {
+      return false;
+    }
+    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+      var excludeClass = ExcludeClassList[i];
+      if (excludeClass && gameObject instanceof excludeClass) {
+        return false;
+      }
+    }
+    return true;
+  };
+  var ExcludeClassList = [Phaser.GameObjects.BitmapText];
+
   var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {
     if (!gameObject || newWidth === undefined && newHeight === undefined) {
       return;
@@ -394,32 +428,22 @@
       }
     } else {
       // Set display width/height
+      var canSetDisplaySize = CanSetDisplaySize(gameObject);
       if (newWidth !== undefined) {
-        gameObject.displayWidth = newWidth;
+        if (canSetDisplaySize) {
+          gameObject.displayWidth = newWidth;
+        } else {
+          gameObject.scaleX = newWidth / gameObject.width;
+        }
       }
       if (newHeight !== undefined) {
-        gameObject.displayHeight = newHeight;
+        if (canSetDisplaySize) {
+          gameObject.displayHeight = newHeight;
+        } else {
+          gameObject.scaleY = newHeight / gameObject.height;
+        }
       }
     }
-  };
-  var ExcludeClassList = [Phaser.GameObjects.Image, Phaser.GameObjects.Sprite, Phaser.GameObjects.Mesh, Phaser.GameObjects.Shader, Phaser.GameObjects.Video];
-  var HasResizeMethod = function HasResizeMethod(gameObject) {
-    // 1st pass : Has `resize` method?
-    if (gameObject.resize) {
-      return true;
-    }
-
-    // 2nd pass : Has `setSize` method?
-    if (!gameObject.setSize) {
-      return false;
-    }
-    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
-      var excludeClass = ExcludeClassList[i];
-      if (excludeClass && gameObject instanceof excludeClass) {
-        return false;
-      }
-    }
-    return true;
   };
 
   var DefaultResizeCallback = function DefaultResizeCallback(width, height, gameObject, anchor) {
