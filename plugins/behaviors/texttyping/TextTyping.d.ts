@@ -11,7 +11,12 @@ declare namespace TextTyping {
         speed?: number,
         typeMode?: TypeModeType,
         setTextCallback?: SetTextCallbackType,
-        setTextCallbackScope?: Object
+        setTextCallbackScope?: Object,
+        wrap?: boolean,
+
+        text?: string,
+        typingIdx?: number,
+        elapsed?: number | null,
     }
 
     namespace Events {
