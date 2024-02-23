@@ -34,9 +34,9 @@ class WaitEventManager extends WaitEvent {
     }
 
     destroy() {
-        super.destroy();
         this.setClickTarget();
         this.setCameraTarget();
+        super.destroy();
     }
 
     get scene() {

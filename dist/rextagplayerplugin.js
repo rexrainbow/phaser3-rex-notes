@@ -5678,9 +5678,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
         this.setClickTarget();
         this.setCameraTarget();
+        _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
       }
     }, {
       key: "scene",
