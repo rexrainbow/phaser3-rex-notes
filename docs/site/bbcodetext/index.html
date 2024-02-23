@@ -10325,7 +10325,10 @@
 </ul>
 </li>
 <li><code>images</code> : See <a href="./#image">Image</a></li>
-<li><code>delimiters</code> : Delimiters of tags, default value is <code>[]</code>.</li>
+<li><code>delimiters</code> : Delimiters of tags, default value is <code>[]</code>.<ul>
+<li>Don't use <code>()</code> as delimiters, which is preserved for color value.</li>
+</ul>
+</li>
 <li><code>sharedPool</code> : <ul>
 <li><code>true</code> : Use shared resouce pools during game. Default behavior.</li>
 <li><code>false</code> : Use local resource pools, will be free when game object destroying.</li>
@@ -10817,6 +10820,10 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDelimiters</span><span class="p">(</span><span class="nx">delimiterLeft</span><span class="p">,</span><span class="w"> </span><span class="nx">delimiterRight</span><span class="p">);</span><span class="w"> </span><span class="c1">// &#39;&lt;&#39;, &#39;&gt;&#39;</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don't use <code>()</code> as delimiters, which is preserved for color value.</p>
+</div>
 <h3 id="rtl">RTL<a class="headerlink" href="#rtl" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set <code>rtl</code> in style config when creating this text game object</li>
