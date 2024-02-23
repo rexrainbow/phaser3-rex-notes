@@ -266,6 +266,7 @@ var txt = scene.make.rexBBCodeText({
         - `'top'`, `'center'`, `'bottom'`
 - `images` : See [Image](bbcodetext.md#image)
 - `delimiters` : Delimiters of tags, default value is `[]`.
+    - Don't use `()` as delimiters, which is preserved for color value.
 - `sharedPool` : 
     - `true` : Use shared resouce pools during game. Default behavior.
     - `false` : Use local resource pools, will be free when game object destroying.
@@ -758,6 +759,9 @@ or
 ```javascript
 txt.setDelimiters(delimiterLeft, delimiterRight); // '<', '>'
 ```
+
+!!! warning
+    Don't use `()` as delimiters, which is preserved for color value.
 
 ### RTL
 

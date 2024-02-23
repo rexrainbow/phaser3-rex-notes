@@ -26512,7 +26512,14 @@
   };
   var STR_PARAM = '[^\\]]+';
   var NUMBER_PARAM = '[-.0-9]+';
-  var COLOR_PARAM = STR_PARAM; // '[a-z]+|#[0-9abcdef]+'
+  var colorParameterList = ['[a-zA-Z]+',
+  // 'white'
+  '#[0-9abcdef]+',
+  // '#FFFFFF'
+  'rgba?\\(\s*[.0-9]+\s*,\s*[.0-9]+\s*,\s*[.0-9]+\s*(,\s*[.0-9]+\s*)*\\)' // rgb(255,255,255), or rgba(255,255,255,1)
+  ];
+
+  var COLOR_PARAM = colorParameterList.join('|'); // '[a-z]+|#[0-9abcdef]+'
 
   var SetDelimiters = function SetDelimiters(delimiterLeft, delimiterRight) {
     if (delimiterRight === undefined) {
