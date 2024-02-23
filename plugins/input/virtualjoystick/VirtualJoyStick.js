@@ -139,6 +139,14 @@ class VirtualJoyStick {
         return this.base.y;
     }
 
+    get originX() {
+        return 0.5;
+    }
+
+    get originY() {
+        return 0.5;
+    }
+
     setVisible(visible) {
         this.visible = visible;
         return this;
@@ -233,7 +241,7 @@ class VirtualJoyStick {
         var touchCursor = this.touchCursor;
         // Start from (0,0)
         var dx, dy;
-        var dirMode = touchCursor.dirMode;        
+        var dirMode = touchCursor.dirMode;
         if (touchCursor.anyKeyDown) {
             if (touchCursor.force > this.radius) { // Exceed radius
                 var rad = touchCursor.rotation;

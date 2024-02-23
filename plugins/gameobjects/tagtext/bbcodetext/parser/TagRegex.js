@@ -21,7 +21,7 @@ var NUMBER_PARAM = '[-.0-9]+';
 var colorParameterList = [
     '[a-zA-Z]+',      // 'white'
     '#[0-9abcdef]+',  // '#FFFFFF'
-    'rgba?\\(\s*[.0-9]+\s*,\s*[.0-9]+\s*,\s*[.0-9]+\s*(,\s*[.0-9]+\s*)*\\)',  // rgb(255,255,255), or rgba(255,255,255,1)
+    'rgba?\\(\s*[.0-9]+\s*(,\s*[.0-9]+\s*){2,3}\\)',  // rgb(255,255,255), or rgba(255,255,255,1)
 ]
 var COLOR_PARAM = colorParameterList.join('|');  // '[a-z]+|#[0-9abcdef]+'
 
