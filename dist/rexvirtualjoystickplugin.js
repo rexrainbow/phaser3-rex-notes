@@ -990,16 +990,6 @@
         this.thumb.y = value;
       }
     }, {
-      key: "originX",
-      get: function get() {
-        return 0.5;
-      }
-    }, {
-      key: "originY",
-      get: function get() {
-        return 0.5;
-      }
-    }, {
       key: "setVisible",
       value: function setVisible(visible) {
         this.visible = visible;

@@ -1693,7 +1693,8 @@
       var localState = GetLocalState(child);
       var parent = localState.parent;
       var maskVisible = localState.hasOwnProperty('maskVisible') ? localState.maskVisible : true;
-      child.visible = parent.visible && localState.visible && maskVisible;
+      var parentVisible = parent ? parent.visible : true;
+      child.visible = parentVisible && localState.visible && maskVisible;
       return this;
     },
     syncVisible: function syncVisible() {
