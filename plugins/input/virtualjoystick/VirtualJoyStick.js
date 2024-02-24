@@ -139,14 +139,6 @@ class VirtualJoyStick {
         return this.base.y;
     }
 
-    get originX() {
-        return 0.5;
-    }
-
-    get originY() {
-        return 0.5;
-    }
-
     setVisible(visible) {
         this.visible = visible;
         return this;

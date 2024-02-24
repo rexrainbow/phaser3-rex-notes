@@ -51,9 +51,6 @@ declare class VirtualJoyStick extends Phaser.Events.EventEmitter {
     x: number;
     y: number;
 
-    readonly originX: number;
-    readonly originY: number;
-
     setScrollFactor(factor: number): this;
 
     base: Phaser.GameObjects.GameObject;
