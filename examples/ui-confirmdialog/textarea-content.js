@@ -49,6 +49,10 @@ class Demo extends Phaser.Scene {
             content: {
                 space: { left: 5, right: 5, top: 5, bottom: 5, text: 10 },
 
+                text: {
+                    $type: 'bbcodetext'
+                },
+
                 slider: {
                     track: {
                         color: COLOR_DARK,
