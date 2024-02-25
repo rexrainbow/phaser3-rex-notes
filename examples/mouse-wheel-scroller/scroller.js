@@ -12,7 +12,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var circle = this.add.circle(400, 300, 20, 0xffffff);
-        var scroller = this.plugins.get('rexMouseWheelScroller').add(circle, { speed: 0.1 })
+        var scroller = this.plugins.get('rexMouseWheelScroller').add(circle, {
+            focus: false,
+            speed: 0.1
+        })
             .on('scroll', function (inc, gameObject, scroller) {
                 var newX = gameObject.x + inc;
                 gameObject.setX(Phaser.Math.Clamp(newX, 0, 800));
