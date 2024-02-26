@@ -214,6 +214,11 @@ var duration = video.getDuration();  // time in seconds
     video.setLoop(loop);  // loop: true/false
     ```
 
+### Size
+
+- Initial size : 256x265 (`video.setSize(256, 256)`)
+- Size after playing : Size of video from metadata
+
 ### Video key
 
 - Get

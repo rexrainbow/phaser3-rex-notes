@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var video = this.add.video(400, 300, 'test')
-        video.setDisplaySize(640, 360)
+        video.setSize(640, 360);
         console.log('Create GO:', `${video.width}x${video.height}`, `${video.displayWidth}x${video.displayHeight}`)
 
         this.input.once('pointerdown', function () {
