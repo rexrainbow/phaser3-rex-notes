@@ -1,3 +1,6 @@
+!!! note
+    Phaser3.80 can load image by uri (base64 string) in preload stage.
+
 ## Introduction
 
 Load image by uri (base64 string) in preload stage.

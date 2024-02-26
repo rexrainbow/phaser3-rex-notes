@@ -37,12 +37,19 @@ var CreateMainPanel = function (scene, x, y) {
     // Compose elemets
     var mainPanel = scene.rexUI.add.sizer({
         orientation: 'y',
-        x: x,
-        y: y,
+        x: x, y: y,
+
+        space: { left: 20, right: 20, top: 20, bottom: 20, item: 10 }
     })
         .addBackground(background)
-        .add(videoPanel, 0, 'center', { left: 20, right: 20, top: 20, bottom: 10 }, true)
-        .add(controllerPanel, 0, 'center', { left: 20, right: 20, bottom: 20 }, true)
+        .add(
+            videoPanel,
+            { proportion: 0, expand: false }
+        )
+        .add(
+            controllerPanel,
+            { proportion: 0, expand: true }
+        )
 
     return mainPanel;
 }
@@ -76,6 +83,7 @@ var CreateControllerPanel = function (scene) {
 
 var CreateVideoPanel = function (scene) {
     return scene.add.video(0, 0, 'test')
+        .setSize(640, 360)  // Equal to video size
         .setDisplaySize(600, 337.5)
 }
 
