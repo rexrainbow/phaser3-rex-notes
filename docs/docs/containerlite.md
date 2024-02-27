@@ -725,3 +725,6 @@ See [game object](gameobject.md)
 - Mask
     - [Container](container.md) : It has mask property, and it could become a mask object.
     - Container-Lite : It has mask property, but it could not become a mask object.
+- DOM game object
+    - [Container](container.md) : Only 1 level parent container will affect DOM game object. Therefore position of DOM game object in nested container might be incorrect.
+    - Container-Lite : DOM game object can work with nested Container-Lite.
