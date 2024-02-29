@@ -58,6 +58,7 @@ or
         expandParent: true.
         // min: {width: 0, height: 0},
         // max: {width: 0, height: 0},
+        // snap: {width: 0, height: 0},
         // autoRound: false,
         fullscreenTarget: null,
     },

@@ -144,6 +144,8 @@ scene.load.tilemapCSV(key, url);         // CSV
             - `null` : Leave the tiles unchanged
             - Array of indexes : One-to-one mapping `indexes` to `replacements`.
         - `spriteConfig` : The config object to pass into the Sprite creator (i.e. `scene.make.sprite`).
+            - `useSpriteSheet` : Set to `true` to load the tileset as a sprite sheet (not an image), map frame to tile index.
+            - Copy `rotation`, `flipX`, `flipY`, `alpha`, `visible` and `tint` properties from Tile to sprites if these properties are not given.
         - `scene` : The Scene to create the Sprites within.
         - `camera` : The Camera to use when determining the world XY.
         - `layer` : The Tilemap Layer to act upon.

@@ -62,6 +62,7 @@ var game = new Phaser.Game(config);
     - `Phaser.Scale.ENVELOP` : The width and height are automatically adjusted to make the size cover the entire target area while keeping the aspect ratio. This may extend further out than the target size.
     - `Phaser.Scale.WIDTH_CONTROLS_HEIGHT` : The height is automatically adjusted based on the width.
     - `Phaser.Scale.HEIGHT_CONTROLS_WIDTH` : The width is automatically adjusted based on the height.
+    - `Phaser.Scale.EXPAND` : The Canvas's visible area is resized to fit all available parent space like RESIZE mode, and scale canvas size to fit inside the visible area like FIT mode.
     - `Phaser.Scale.RESIZE` : The Canvas is resized to fit all available _parent_ space, regardless of aspect ratio.
 - `scale.autoCenter` :
     - `Phaser.Scale.NO_CENTER` : The game canvas is not centered within the parent by Phaser.

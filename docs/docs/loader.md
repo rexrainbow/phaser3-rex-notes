@@ -125,13 +125,13 @@ loader:{
     scene.load.image(key, url);
     // scene.load.image(key, url, xhrSettings);
     ```
-    - `url` : Url of texture.
+    - `url` : Url of texture, or base64 string of Uri.
 - Image and normal map
     ```javascript
     scene.load.image(key, [url, normalMapUrl]);
     // scene.load.image(key, [url, normalMapUrl], xhrSettings);
     ```
-    - `url` : Url of texture.
+    - `url` : Url of texture, or base64 string of Uri.
     - `normalMapUrl` : Url of normal map.
 - SVG
     ```javascript
@@ -233,7 +233,7 @@ scene.load.audio(key, urls);
 // scene.load.audio(key, urls, {instances: 1}, xhrSettings);
 ```
 
-- `urls` : The absolute or relative URL to load the audio files from, or a blob.
+- `urls` : The absolute or relative URL to load the audio files from, or a blob, or a base64 string of Uri.
 - `config.instances` : Number of audio instances for HTML5Audio. Defaults to `1`.
 
 Get data from cache
