@@ -827,7 +827,7 @@
             if (boundsHitMode.left === 0) {
               gameObject.x += dx;
             } else {
-              gameObject.x = bounds.right - dx - 1;
+              gameObject.x = bounds.right - dx;
             }
             this.emit('hitleft', this.parent, this);
           }
@@ -840,7 +840,7 @@
             if (boundsHitMode.left === 0) {
               gameObject.x += dx;
             } else {
-              gameObject.x = bounds.left - dx + 1;
+              gameObject.x = bounds.left - dx;
             }
             this.emit('hitright', this.parent, this);
           }
@@ -853,7 +853,7 @@
             if (boundsHitMode.left === 0) {
               gameObject.y += dy;
             } else {
-              gameObject.y = bounds.bottom - dy - 1;
+              gameObject.y = bounds.bottom - dy;
             }
             this.emit('hittop', this.parent, this);
           }
@@ -866,7 +866,7 @@
             if (boundsHitMode.left === 0) {
               gameObject.y += dy;
             } else {
-              gameObject.y = bounds.top - dy + 1;
+              gameObject.y = bounds.top - dy;
             }
             this.emit('hitbottom', this.parent, this);
           }
