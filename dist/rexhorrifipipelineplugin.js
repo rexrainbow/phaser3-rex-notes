@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexhorrifipipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,34 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\nuniform float noiseSeed;\n\n// VHS\nuniform float vhsEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float crtEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*noiseSeed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( crtEnable > .5 ) {\n    mainUv = crtCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( vhsEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( crtEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
@@ -299,16 +285,15 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var HorrifiPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(HorrifiPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(HorrifiPostFxPipeline);
     function HorrifiPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, HorrifiPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, HorrifiPostFxPipeline, [{
         name: 'rexHorrifiPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
-      });
+      }]);
       _this.now = 0;
 
       // Bloon
@@ -495,10 +480,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -597,11 +581,10 @@
 
   var HorrifiPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(HorrifiPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(HorrifiPipelinePlugin);
     function HorrifiPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, HorrifiPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, HorrifiPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
       return _this;
     }

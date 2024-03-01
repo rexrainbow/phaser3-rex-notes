@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexoutlineeffectlayerplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,20 +126,6 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var NearestPowerOf2 = function NearestPowerOf2(value) {
     value--;
@@ -157,7 +143,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var EffectLayer = /*#__PURE__*/function (_Shader) {
     _inherits(EffectLayer, _Shader);
-    var _super = _createSuper(EffectLayer);
     function EffectLayer(scene, key, x, y, width, height) {
       var _this;
       _classCallCheck(this, EffectLayer);
@@ -193,7 +178,7 @@
         height: height,
         add: false
       });
-      _this = _super.call(this, scene, key, x, y, width, height);
+      _this = _callSuper(this, EffectLayer, [scene, key, x, y, width, height]);
       _this.type = 'rexEffectLayer';
       _this.setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0).setScrollFactor(0).setOrigin(0);
       _this.rt = rt;
@@ -363,7 +348,6 @@
   var Color = Phaser.Display.Color;
   var OutlineEffectLayer = /*#__PURE__*/function (_EffectLayer) {
     _inherits(OutlineEffectLayer, _EffectLayer);
-    var _super = _createSuper(OutlineEffectLayer);
     function OutlineEffectLayer(scene, config) {
       var _this;
       _classCallCheck(this, OutlineEffectLayer);
@@ -395,7 +379,7 @@
         }
       };
       var baseShader = new BaseShader('Outline', frag, undefined, uniforms);
-      _this = _super.call(this, scene, baseShader, config);
+      _this = _callSuper(this, OutlineEffectLayer, [scene, baseShader, config]);
       _this.type = 'rexOutlineEffectLayer';
       _this._knockout = 0;
       _this._thickness = 0;
@@ -559,11 +543,10 @@
 
   var OutlineEffectLayerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(OutlineEffectLayerPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(OutlineEffectLayerPlugin);
     function OutlineEffectLayerPlugin(pluginManager) {
       var _this;
       _classCallCheck(this, OutlineEffectLayerPlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, OutlineEffectLayerPlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexOutlineEffectLayer', Factory, Creator);

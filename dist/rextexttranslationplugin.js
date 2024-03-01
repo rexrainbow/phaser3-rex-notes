@@ -19,6 +19,31 @@
     return Object.freeze(n);
   }
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf$1(o), _possibleConstructorReturn$1(t, _isNativeReflectConstruct$4() ? Reflect.construct(o, e || [], _getPrototypeOf$1(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct$4() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct$4 = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive$2(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey$2(t) {
+    var i = _toPrimitive$2(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof$4(o) {
     "@babel/helpers - typeof";
 
@@ -79,17 +104,6 @@
     };
     return _setPrototypeOf$1(o, p);
   }
-  function _isNativeReflectConstruct$4() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized$1(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -103,20 +117,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized$1(self);
-  }
-  function _createSuper$4(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct$4();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf$1(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf$1(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn$1(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -141,27 +141,12 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive$2(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey$2(arg) {
-    var key = _toPrimitive$2(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -241,7 +226,6 @@
   var UUID = Phaser.Utils.String.UUID;
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits$1(AwaitFile, _Phaser$Loader$File);
-    var _super = _createSuper$4(AwaitFile);
     function AwaitFile(loader, fileConfig) {
       _classCallCheck$2(this, AwaitFile);
       if (!fileConfig.hasOwnProperty('type')) {
@@ -253,7 +237,7 @@
       if (!fileConfig.hasOwnProperty('key')) {
         fileConfig.key = UUID();
       }
-      return _super.call(this, loader, fileConfig);
+      return _callSuper(this, AwaitFile, [loader, fileConfig]);
     }
     _createClass$2(AwaitFile, [{
       key: "load",
@@ -357,20 +341,20 @@
     }
   }
 
-  function _toPrimitive$1(input, hint) {
-    if (_typeof$3(input) !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (_typeof$3(res) !== "object") return res;
+  function toPrimitive(t, r) {
+    if ("object" != _typeof$3(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != _typeof$3(i)) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return (hint === "string" ? String : Number)(input);
+    return ("string" === r ? String : Number)(t);
   }
 
-  function _toPropertyKey$1(arg) {
-    var key = _toPrimitive$1(arg, "string");
-    return _typeof$3(key) === "symbol" ? key : String(key);
+  function toPropertyKey(t) {
+    var i = toPrimitive(t, "string");
+    return "symbol" == _typeof$3(i) ? i : String(i);
   }
 
   function _defineProperties$1(target, props) {
@@ -379,7 +363,7 @@
       descriptor.enumerable = descriptor.enumerable || false;
       descriptor.configurable = true;
       if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey$1(descriptor.key), descriptor);
+      Object.defineProperty(target, toPropertyKey(descriptor.key), descriptor);
     }
   }
   function _createClass$1(Constructor, protoProps, staticProps) {
@@ -439,8 +423,8 @@
     return _getPrototypeOf(o);
   }
 
-  function _defineProperty$1(obj, key, value) {
-    key = _toPropertyKey$1(key);
+  function _defineProperty$2(obj, key, value) {
+    key = toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -486,7 +470,7 @@
   }
 
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var consoleLogger = {
     type: 'logger',
     log: function log(args) {
@@ -794,7 +778,7 @@
   }
 
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
   function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   var ResourceStore = function (_EventEmitter) {
@@ -965,7 +949,7 @@
   };
 
   function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
   function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   var checkedLoadedFor = {};
@@ -1776,7 +1760,7 @@
   }();
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function deepFindWithDefaults(data, defaultData, key) {
     var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
     var ignoreJSONStructure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
@@ -1981,7 +1965,7 @@
   }();
 
   function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function parseFormatStr(formatStr) {
     var formatName = formatStr.toLowerCase().trim();
     var formatOptions = {};
@@ -2118,8 +2102,8 @@
     return Formatter;
   }();
 
-  function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$1$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$1$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1$1(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
   function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   function removePending(q, name) {
@@ -2348,7 +2332,7 @@
         }
         if (key === undefined || key === null || key === '') return;
         if (this.backend && this.backend.create) {
-          var opts = _objectSpread$1(_objectSpread$1({}, options), {}, {
+          var opts = _objectSpread$1$1(_objectSpread$1$1({}, options), {}, {
             isUpdate: isUpdate
           });
           var fc = this.backend.create.bind(this.backend);
@@ -2455,8 +2439,8 @@
     return options;
   }
 
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty$2(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
   function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   function noop() {}
@@ -2516,9 +2500,9 @@
           }
         }
         var defOpts = get();
-        this.options = _objectSpread(_objectSpread(_objectSpread({}, defOpts), this.options), transformOptions(options));
+        this.options = _objectSpread$7(_objectSpread$7(_objectSpread$7({}, defOpts), this.options), transformOptions(options));
         if (this.options.compatibilityAPI !== 'v1') {
-          this.options.interpolation = _objectSpread(_objectSpread({}, defOpts.interpolation), this.options.interpolation);
+          this.options.interpolation = _objectSpread$7(_objectSpread$7({}, defOpts.interpolation), this.options.interpolation);
         }
         if (options.keySeparator !== undefined) {
           this.options.userDefinedKeySeparator = options.keySeparator;
@@ -2796,7 +2780,7 @@
             }
             options = _this5.options.overloadTranslationOptionHandler([key, opts].concat(rest));
           } else {
-            options = _objectSpread({}, opts);
+            options = _objectSpread$7({}, opts);
           }
           options.lng = options.lng || fixedT.lng;
           options.lngs = options.lngs || fixedT.lngs;
@@ -2923,7 +2907,7 @@
         var _this8 = this;
         var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
-        var mergedOptions = _objectSpread(_objectSpread(_objectSpread({}, this.options), options), {
+        var mergedOptions = _objectSpread$7(_objectSpread$7(_objectSpread$7({}, this.options), options), {
           isClone: true
         });
         var clone = new I18n(mergedOptions);
@@ -2934,7 +2918,7 @@
         membersToCopy.forEach(function (m) {
           clone[m] = _this8[m];
         });
-        clone.services = _objectSpread({}, this.services);
+        clone.services = _objectSpread$7({}, this.services);
         clone.services.utils = {
           hasLoadedNamespace: clone.hasLoadedNamespace.bind(clone)
         };
@@ -2966,7 +2950,7 @@
     }]);
     return I18n;
   }(EventEmitter);
-  _defineProperty$1(I18n, "createInstance", function () {
+  _defineProperty$2(I18n, "createInstance", function () {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var callback = arguments.length > 1 ? arguments[1] : undefined;
     return new I18n(options, callback);
@@ -2990,19 +2974,6 @@
   instance.loadLanguages;
 
   function _typeof$2(o) { "@babel/helpers - typeof"; return _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$2(o); }
-  var arr = [];
-  var each = arr.forEach;
-  var slice = arr.slice;
-  function defaults(obj) {
-    each.call(slice.call(arguments, 1), function (source) {
-      if (source) {
-        for (var prop in source) {
-          if (obj[prop] === undefined) obj[prop] = source[prop];
-        }
-      }
-    });
-    return obj;
-  }
   function hasXMLHttpRequest() {
     return typeof XMLHttpRequest === 'function' || (typeof XMLHttpRequest === "undefined" ? "undefined" : _typeof$2(XMLHttpRequest)) === 'object';
   }
@@ -3719,6 +3690,11 @@
     default: getFetch
   }, [getFetchExports]);
 
+  function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+  function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), !0).forEach(function (r) { _defineProperty$1(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+  function _defineProperty$1(obj, key, value) { key = _toPropertyKey$1(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  function _toPropertyKey$1(t) { var i = _toPrimitive$1(t, "string"); return "symbol" == _typeof$1(i) ? i : String(i); }
+  function _toPrimitive$1(t, r) { if ("object" != _typeof$1(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof$1(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
   function _typeof$1(o) { "@babel/helpers - typeof"; return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof$1(o); }
   var fetchApi;
   if (typeof fetch === 'function') {
@@ -3759,7 +3735,7 @@
     }
     return url;
   };
-  var fetchIt = function fetchIt(url, fetchOptions, callback) {
+  var fetchIt = function fetchIt(url, fetchOptions, callback, altFetch) {
     var resolver = function resolver(response) {
       if (!response.ok) return callback(response.statusText || 'Error', {
         status: response.status
@@ -3771,6 +3747,13 @@
         });
       }).catch(callback);
     };
+    if (altFetch) {
+      var altResponse = altFetch(url, fetchOptions);
+      if (altResponse instanceof Promise) {
+        altResponse.then(resolver).catch(callback);
+        return;
+      }
+    }
     if (typeof fetch === 'function') {
       fetch(url, fetchOptions).then(resolver).catch(callback);
     } else {
@@ -3782,19 +3765,20 @@
     if (options.queryStringParams) {
       url = addQueryString(url, options.queryStringParams);
     }
-    var headers = defaults({}, typeof options.customHeaders === 'function' ? options.customHeaders() : options.customHeaders);
+    var headers = _objectSpread$1({}, typeof options.customHeaders === 'function' ? options.customHeaders() : options.customHeaders);
     if (typeof window === 'undefined' && typeof global$1 !== 'undefined' && typeof global$1.process !== 'undefined' && global$1.process.versions && global$1.process.versions.node) {
       headers['User-Agent'] = "i18next-http-backend (node/".concat(global$1.process.version, "; ").concat(global$1.process.platform, " ").concat(global$1.process.arch, ")");
     }
     if (payload) headers['Content-Type'] = 'application/json';
     var reqOptions = typeof options.requestOptions === 'function' ? options.requestOptions(payload) : options.requestOptions;
-    var fetchOptions = defaults({
+    var fetchOptions = _objectSpread$1({
       method: payload ? 'POST' : 'GET',
       body: payload ? options.stringify(payload) : undefined,
       headers: headers
     }, omitFetchOptions ? {} : reqOptions);
+    var altFetch = typeof options.alternateFetch === 'function' && options.alternateFetch.length >= 1 ? options.alternateFetch : undefined;
     try {
-      fetchIt(url, fetchOptions, callback);
+      fetchIt(url, fetchOptions, callback, altFetch);
     } catch (e) {
       if (!reqOptions || Object.keys(reqOptions).length === 0 || !e.message || e.message.indexOf('not implemented') < 0) {
         return callback(e);
@@ -3803,7 +3787,7 @@
         Object.keys(reqOptions).forEach(function (opt) {
           delete fetchOptions[opt];
         });
-        fetchIt(url, fetchOptions, callback);
+        fetchIt(url, fetchOptions, callback, altFetch);
         omitFetchOptions = true;
       } catch (err) {
         callback(err);
@@ -3869,12 +3853,14 @@
   };
 
   function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+  function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+  function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
   function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-  function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-  function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+  function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+  function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
   var getDefaults = function getDefaults() {
     return {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
@@ -3921,7 +3907,7 @@
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var allOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
         this.services = services;
-        this.options = defaults(options, this.options || {}, getDefaults());
+        this.options = _objectSpread(_objectSpread(_objectSpread({}, getDefaults()), this.options || {}), options);
         this.allOptions = allOptions;
         if (this.services && this.options.reloadInterval) {
           setInterval(function () {
@@ -4141,7 +4127,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -4181,11 +4166,10 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TextTranslation = /*#__PURE__*/function (_ComponentBase) {
     _inherits$1(TextTranslation, _ComponentBase);
-    var _super = _createSuper$4(TextTranslation);
     function TextTranslation(gameObject, config) {
       var _this;
       _classCallCheck$2(this, TextTranslation);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, TextTranslation, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.resetFromJSON(config);
@@ -4270,11 +4254,10 @@
 
   var TextTranslationPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits$1(TextTranslationPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper$4(TextTranslationPlugin);
     function TextTranslationPlugin(pluginManager) {
       var _this;
       _classCallCheck$2(this, TextTranslationPlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, TextTranslationPlugin, [pluginManager]);
 
       // Event emitter
       _this.setEventEmitter();

@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridtableplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -203,20 +203,6 @@
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var MinVersion = 60;
   var IsChecked = false;
@@ -240,7 +226,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Base);
@@ -256,7 +241,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, Base, [scene, x, y, width, height]);
       _this.children = [];
       return _this;
     }
@@ -1048,7 +1033,6 @@
           // Set child's maskVisible to `true`
         }
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -1073,7 +1057,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -1082,7 +1065,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -1268,7 +1250,6 @@
         }
         // Copy children
       }
-
       return out;
     },
     getAllChildren: function getAllChildren(out) {
@@ -1493,7 +1474,6 @@
       // At scene's displayList or at a layer
       !!gameObject.parentContainer; // At a container
     });
-
     return children;
   };
   var AddToContainer = function AddToContainer(p3Container) {
@@ -2151,7 +2131,6 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-    var _super = _createSuper(ContainerLite);
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
       _classCallCheck(this, ContainerLite);
@@ -2160,7 +2139,7 @@
         width = undefined;
         height = undefined;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, ContainerLite, [scene, x, y, width, height]);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
       _this.syncChildrenEnable = true;
@@ -3375,7 +3354,6 @@
         // centerY
         radius + padding // radius
         );
-
         break;
       default:
         // 0|'rectangle'
@@ -3387,7 +3365,6 @@
         // width
         height + padding.top + padding.bottom // height
         );
-
         break;
     }
   };
@@ -3434,7 +3411,6 @@
   var Graphics = Phaser.GameObjects.Graphics;
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
-    var _super = _createSuper(DefaultMaskGraphics);
     function DefaultMaskGraphics(parent, shapeType, padding) {
       var _this;
       _classCallCheck(this, DefaultMaskGraphics);
@@ -3444,7 +3420,7 @@
       if (typeof shapeType === 'string') {
         shapeType = SHAPEMODE[shapeType];
       }
-      _this = _super.call(this, parent.scene);
+      _this = _callSuper(this, DefaultMaskGraphics, [parent.scene]);
       _this.parent = parent;
       _this.shapeType = shapeType;
       _this.padding = GetBoundsConfig(padding);
@@ -4269,14 +4245,13 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GridTable = /*#__PURE__*/function (_ContainerLite) {
     _inherits(GridTable, _ContainerLite);
-    var _super = _createSuper(GridTable);
     function GridTable(scene, x, y, width, height, config) {
       var _this;
       _classCallCheck(this, GridTable);
       if (config === undefined) {
         config = {};
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, GridTable, [scene, x, y, width, height]);
       _this.type = 'rexGridTable';
       _this._tableOX = 0;
       _this._tableOY = 0;
@@ -4290,7 +4265,6 @@
       if (reuseCellContainer) {
         _this.cellContainersPool = new Group(scene); // Don't add Group into update list, I will destroy it manually
       }
-
       var callback = GetValue$1(config, 'cellVisibleCallback', null);
       if (callback !== null) {
         var scope = GetValue$1(config, 'cellVisibleCallbackScope', undefined);
@@ -4325,7 +4299,6 @@
       if (!columns) {
         columns = 1; // Default columns
       }
-
       _this.expandCellSize = cellWidth === undefined;
       if (_this.expandCellSize) {
         var width = scrollY ? _this.width : _this.height;
@@ -4759,11 +4732,10 @@
 
   var GridTablePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(GridTablePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(GridTablePlugin);
     function GridTablePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, GridTablePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, GridTablePlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexGridTable', Factory, Creator);

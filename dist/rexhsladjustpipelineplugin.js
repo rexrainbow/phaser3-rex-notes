@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexhsladjustpipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -89,34 +103,6 @@
     }
     return _assertThisInitialized(self);
   }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var frag$3 = "vec3 RGBToHSL(vec3 color) {\n  vec3 hsl = vec3(0.0, 0.0, 0.0);\n\t\n  float fmin = min(min(color.r, color.g), color.b);\n  float fmax = max(max(color.r, color.g), color.b);\n  float delta = fmax - fmin;\n\n  hsl.z = (fmax + fmin) / 2.0;\n\n  if (delta == 0.0) {\n\t\thsl.x = 0.0;\n\t\thsl.y = 0.0;\n\t} else {\n\t\tif (hsl.z < 0.5) {\n\t\t\thsl.y = delta / (fmax + fmin);\n    } else {\n      hsl.y = delta / (2.0 - fmax - fmin);\n    }\n\t\t\n\t\tfloat dR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;\n\t\tfloat dG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;\n\t\tfloat dB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;\n\n\t\tif (color.r == fmax) {\n\t\t\thsl.x = dB - dG;\n    } else if (color.g == fmax) {\n\t\t\thsl.x = (1.0 / 3.0) + dR - dB;\n\t\t} else if (color.b == fmax) {\n      hsl.x = (2.0 / 3.0) + dG - dR;\n    }\n\n\t\tif (hsl.x < 0.0) {\n\t\t\thsl.x += 1.0;\n    } else if (hsl.x > 1.0) {\n      hsl.x -= 1.0;\n    }\n\t}\n\n\treturn hsl;\n}\n";
 
@@ -130,16 +116,15 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var HslAdjustPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(HslAdjustPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(HslAdjustPostFxPipeline);
     function HslAdjustPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, HslAdjustPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, HslAdjustPostFxPipeline, [{
         name: 'rexHslAdjustPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
-      });
+      }]);
       _this.hueRotate = 0;
       _this.satAdjust = 1;
       _this.lumAdjust = 0.5;
@@ -278,10 +263,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -380,11 +364,10 @@
 
   var HslAdjustPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(HslAdjustPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(HslAdjustPipelinePlugin);
     function HslAdjustPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, HslAdjustPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, HslAdjustPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(HslAdjustPostFxPipeline, 'rexHslAdjustPostFx');
       return _this;
     }

@@ -16,6 +16,7 @@ class Bounds extends TickTask {
         this.bounds = new Rectangle();
         this.boundsTarget = undefined;
         this.boundsEnable = {};
+        this.boundsHitMode = {};
         this.clearHitResult();
         this.resetFromJSON(config);
     }
@@ -28,8 +29,13 @@ class Bounds extends TickTask {
             this.setBoundsTarget();
             this.setBounds(GetValue(o, 'bounds'));
         }
+
         this.setEnable(GetValue(o, 'enable', true));
-        this.setAlignMode(GetValue(o, 'alignMode', 0));
+
+        this.setBoundsHitMode(GetValue(o, 'boundsHitMode'));
+
+
+        this.setAlignMode(GetValue(o, 'alignMode', (!this.hasWrapBoundHitMode) ? 0 : 1));
 
         return this;
     }
@@ -96,6 +102,21 @@ class Bounds extends TickTask {
         return this;
     }
 
+    setBoundsHitMode(mode) {
+        if (mode === undefined) {
+            mode = 0;
+        }
+        var boundsHitMode = this.boundsHitMode;
+        boundsHitMode.left = GetBoundHitMode(GetValue(mode, 'left', mode));
+        boundsHitMode.right = GetBoundHitMode(GetValue(mode, 'right', mode));
+        boundsHitMode.top = GetBoundHitMode(GetValue(mode, 'top', mode));
+        boundsHitMode.bottom = GetBoundHitMode(GetValue(mode, 'bottom', mode));
+
+        this.hasWrapBoundHitMode = (boundsHitMode.left + boundsHitMode.right + boundsHitMode.top + boundsHitMode.bottom) > 0;
+
+        return this;
+    }
+
     setAlignMode(mode) {
         if (typeof (mode) === 'string') {
             mode = AlignMode[mode];
@@ -127,47 +148,83 @@ class Bounds extends TickTask {
 
         var bounds = this.bounds;
         var boundsEnable = this.boundsEnable;
+        var boundsHitMode = this.boundsHitMode;
 
-        var alignToGOBound = (this.alignMode === 0);
-        var gameObjectBounds = (alignToGOBound) ? GetBounds(gameObject, true) : undefined;
+        var gameObjectLeftBound, gameObjectRightBound, gameObjectTopBound, gameObjectBottomBound;
+
+        if (this.alignMode === 0) {
+            var gameObjectBounds = GetBounds(gameObject, true);
+            gameObjectLeftBound = gameObjectBounds.left;
+            gameObjectRightBound = gameObjectBounds.right;
+            gameObjectTopBound = gameObjectBounds.top;
+            gameObjectBottomBound = gameObjectBounds.bottom;
+        } else {
+            gameObjectLeftBound = gameObject.x;
+            gameObjectRightBound = gameObject.x;
+            gameObjectTopBound = gameObject.y;
+            gameObjectBottomBound = gameObject.y;
+        }
 
         if (boundsEnable.left) {
-            var left = (alignToGOBound) ? gameObjectBounds.left : gameObject.x;
-            var dx = bounds.left - left;
+            var dx = bounds.left - gameObjectLeftBound;
             if (dx > 0) {
-                gameObject.x += dx;
                 this.isHitAny = true;
                 this.isHitLeft = true;
+
+                if (boundsHitMode.left === 0) {
+                    gameObject.x += dx;
+                } else {
+                    gameObject.x = bounds.right - dx - 1;
+                }
+
                 this.emit('hitleft', this.parent, this);
             }
         }
+
         if (boundsEnable.right) {
-            var right = (alignToGOBound) ? gameObjectBounds.right : gameObject.x;
-            var dx = bounds.right - right;
+            var dx = bounds.right - gameObjectRightBound;
             if (dx < 0) {
-                gameObject.x += dx;
                 this.isHitAny = true;
                 this.isHitRight = true;
+
+                if (boundsHitMode.left === 0) {
+                    gameObject.x += dx;
+                } else {
+                    gameObject.x = bounds.left - dx + 1;
+                }
+
                 this.emit('hitright', this.parent, this);
             }
         }
+
         if (boundsEnable.top) {
-            var top = (alignToGOBound) ? gameObjectBounds.top : gameObject.y;
-            var dy = bounds.top - top;
+            var dy = bounds.top - gameObjectTopBound;
             if (dy > 0) {
-                gameObject.y += dy;
                 this.isHitAny = true;
                 this.isHitTop = true;
+
+                if (boundsHitMode.left === 0) {
+                    gameObject.y += dy;
+                } else {
+                    gameObject.y = bounds.bottom - dy - 1;
+                }
+
                 this.emit('hittop', this.parent, this);
             }
         }
+
         if (boundsEnable.bottom) {
-            var bottom = (alignToGOBound) ? gameObjectBounds.bottom : gameObject.y;
-            var dy = bounds.bottom - bottom;
+            var dy = bounds.bottom - gameObjectBottomBound;
             if (dy < 0) {
-                gameObject.y += dy;
                 this.isHitAny = true;
                 this.isHitBottom = true;
+
+                if (boundsHitMode.left === 0) {
+                    gameObject.y += dy;
+                } else {
+                    gameObject.y = bounds.top - dy + 1;
+                }
+
                 this.emit('hitbottom', this.parent, this);
             }
         }
@@ -187,9 +244,21 @@ class Bounds extends TickTask {
     }
 }
 
+const BoundHitMode = {
+    clamp: 0,
+    wrap: 1
+}
+
 const AlignMode = {
     bounds: 0,
     origin: 1
+}
+
+var GetBoundHitMode = function (mode) {
+    if (typeof (mode) === 'string') {
+        mode = BoundHitMode[mode];
+    }
+    return mode;
 }
 
 export default Bounds;

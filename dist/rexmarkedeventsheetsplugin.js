@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmarkedeventsheetsplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -150,20 +150,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -517,10 +503,9 @@
 
   var EventEmitter$2 = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
-    var _super = _createSuper(EventEmitter);
     function EventEmitter() {
       _classCallCheck(this, EventEmitter);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EventEmitter, arguments);
     }
     _createClass(EventEmitter, [{
       key: "shutdown",
@@ -1928,7 +1913,6 @@
               }
               return false; // rule action called reject() implying the next rule should be tested instead.
             }
-
             return false;
           },
           // return next match in input
@@ -2156,10 +2140,9 @@
 
   var FormulaParser = /*#__PURE__*/function (_parser$Parser) {
     _inherits(FormulaParser, _parser$Parser);
-    var _super = _createSuper(FormulaParser);
     function FormulaParser() {
       _classCallCheck(this, FormulaParser);
-      return _super.apply(this, arguments);
+      return _callSuper(this, FormulaParser, arguments);
     }
     _createClass(FormulaParser, [{
       key: "getProperty",
@@ -2268,11 +2251,10 @@
 
   var Expression = /*#__PURE__*/function (_BaseExpression) {
     _inherits(Expression, _BaseExpression);
-    var _super = _createSuper(Expression);
     function Expression(expression) {
       var _this;
       _classCallCheck(this, Expression);
-      _this = _super.call(this);
+      _this = _callSuper(this, Expression);
       var callback;
       if (typeof expression === 'number') {
         callback = function callback() {
@@ -2289,10 +2271,9 @@
 
   var BooleanExpression = /*#__PURE__*/function (_Expression) {
     _inherits(BooleanExpression, _Expression);
-    var _super = _createSuper(BooleanExpression);
     function BooleanExpression() {
       _classCallCheck(this, BooleanExpression);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BooleanExpression, arguments);
     }
     _createClass(BooleanExpression, [{
       key: "eval",
@@ -2428,11 +2409,10 @@
 
   var StringTemplateExpression = /*#__PURE__*/function (_BaseExpression) {
     _inherits(StringTemplateExpression, _BaseExpression);
-    var _super = _createSuper(StringTemplateExpression);
     function StringTemplateExpression(expression) {
       var _this;
       _classCallCheck(this, StringTemplateExpression);
-      _this = _super.call(this);
+      _this = _callSuper(this, StringTemplateExpression);
       var callback = Compile(expression);
       _this.setExpressionHandler(callback);
       return _this;
@@ -2660,7 +2640,6 @@
 
   var Action = /*#__PURE__*/function (_BaseNode) {
     _inherits(Action, _BaseNode);
-    var _super = _createSuper(Action);
     function Action() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -2671,12 +2650,12 @@
         services = _ref.services;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Action);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Action, [{
         category: ACTION,
         name: name,
         title: title,
         properties: properties
-      });
+      }]);
       if (services) {
         for (var i = 0, cnt = services.length; i < cnt; i++) {
           _this.addService(services[i], nodePool);
@@ -2717,7 +2696,6 @@
 
   var Composite = /*#__PURE__*/function (_BaseNode) {
     _inherits(Composite, _BaseNode);
-    var _super = _createSuper(Composite);
     function Composite() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -2730,12 +2708,12 @@
         services = _ref.services;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Composite);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Composite, [{
         category: COMPOSITE,
         name: name,
         title: title,
         properties: properties
-      });
+      }]);
       _this.children = [];
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         _this.addChild(children[i], nodePool);
@@ -2816,7 +2794,6 @@
 
   var Decorator = /*#__PURE__*/function (_BaseNode) {
     _inherits(Decorator, _BaseNode);
-    var _super = _createSuper(Decorator);
     function Decorator() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -2828,12 +2805,12 @@
         properties = _ref.properties;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Decorator);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Decorator, [{
         category: DECORATOR,
         name: name,
         title: title,
         properties: properties
-      });
+      }]);
       _this.child = null;
       if (child) {
         _this.addChild(child, nodePool);
@@ -2875,7 +2852,6 @@
 
   var Service = /*#__PURE__*/function (_BaseNode) {
     _inherits(Service, _BaseNode);
-    var _super = _createSuper(Service);
     function Service() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -2893,12 +2869,12 @@
       }
       properties.interval = interval;
       properties.randomDeviation = randomDeviation;
-      _this = _super.call(this, {
+      _this = _callSuper(this, Service, [{
         category: SERVICE,
         name: name,
         title: title,
         properties: properties
-      });
+      }]);
       _this.intervalExpression = _this.addExpression(interval);
       _this.randomDeviationExpression = _this.addExpression(randomDeviation);
       return _this;
@@ -2935,7 +2911,6 @@
 
   var Succeeder = /*#__PURE__*/function (_Action) {
     _inherits(Succeeder, _Action);
-    var _super = _createSuper(Succeeder);
     function Succeeder() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         services = _ref.services,
@@ -2943,11 +2918,11 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Succeeder' : _ref$name;
       _classCallCheck(this, Succeeder);
-      return _super.call(this, {
+      return _callSuper(this, Succeeder, [{
         services: services,
         title: title,
         name: name
-      });
+      }]);
     }
     _createClass(Succeeder, [{
       key: "tick",
@@ -2960,7 +2935,6 @@
 
   var Failer = /*#__PURE__*/function (_Action) {
     _inherits(Failer, _Action);
-    var _super = _createSuper(Failer);
     function Failer() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         services = _ref.services,
@@ -2968,11 +2942,11 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Failer' : _ref$name;
       _classCallCheck(this, Failer);
-      return _super.call(this, {
+      return _callSuper(this, Failer, [{
         services: services,
         title: title,
         name: name
-      });
+      }]);
     }
     _createClass(Failer, [{
       key: "tick",
@@ -2985,7 +2959,6 @@
 
   var Runner = /*#__PURE__*/function (_Action) {
     _inherits(Runner, _Action);
-    var _super = _createSuper(Runner);
     function Runner() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         services = _ref.services,
@@ -2993,11 +2966,11 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Runner' : _ref$name;
       _classCallCheck(this, Runner);
-      return _super.call(this, {
+      return _callSuper(this, Runner, [{
         services: services,
         title: title,
         name: name
-      });
+      }]);
     }
     _createClass(Runner, [{
       key: "tick",
@@ -3010,7 +2983,6 @@
 
   var Error$1 = /*#__PURE__*/function (_Action) {
     _inherits(Error, _Action);
-    var _super = _createSuper(Error);
     function Error() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         services = _ref.services,
@@ -3018,11 +2990,11 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Error' : _ref$name;
       _classCallCheck(this, Error);
-      return _super.call(this, {
+      return _callSuper(this, Error, [{
         services: services,
         title: title,
         name: name
-      });
+      }]);
     }
     _createClass(Error, [{
       key: "tick",
@@ -3035,7 +3007,6 @@
 
   var Wait = /*#__PURE__*/function (_Action) {
     _inherits(Wait, _Action);
-    var _super = _createSuper(Wait);
     function Wait() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3046,14 +3017,14 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Wait' : _ref$name;
       _classCallCheck(this, Wait);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Wait, [{
         title: title,
         name: name,
         properties: {
           duration: duration
         },
         services: services
-      });
+      }]);
       _this.durationExpression = _this.addExpression(duration);
       return _this;
     }
@@ -3082,7 +3053,6 @@
 
   var Abort = /*#__PURE__*/function (_Action) {
     _inherits(Abort, _Action);
-    var _super = _createSuper(Abort);
     function Abort() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         services = _ref.services,
@@ -3090,11 +3060,11 @@
         _ref$name = _ref.name,
         name = _ref$name === void 0 ? 'Abort' : _ref$name;
       _classCallCheck(this, Abort);
-      return _super.call(this, {
+      return _callSuper(this, Abort, [{
         services: services,
         title: title,
         name: name
-      });
+      }]);
     }
     _createClass(Abort, [{
       key: "tick",
@@ -3107,7 +3077,6 @@
 
   var Selector = /*#__PURE__*/function (_Composite) {
     _inherits(Selector, _Composite);
-    var _super = _createSuper(Selector);
     function Selector() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$children = _ref.children,
@@ -3118,12 +3087,12 @@
         name = _ref$name === void 0 ? 'Selector' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Selector);
-      return _super.call(this, {
+      return _callSuper(this, Selector, [{
         children: children,
         services: services,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(Selector, [{
       key: "open",
@@ -3171,7 +3140,6 @@
 
   var Sequence = /*#__PURE__*/function (_Composite) {
     _inherits(Sequence, _Composite);
-    var _super = _createSuper(Sequence);
     function Sequence() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$children = _ref.children,
@@ -3182,12 +3150,12 @@
         name = _ref$name === void 0 ? 'Sequence' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Sequence);
-      return _super.call(this, {
+      return _callSuper(this, Sequence, [{
         children: children,
         services: services,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(Sequence, [{
       key: "open",
@@ -3324,7 +3292,6 @@
 
   var Parallel = /*#__PURE__*/function (_Composite) {
     _inherits(Parallel, _Composite);
-    var _super = _createSuper(Parallel);
     function Parallel() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3340,7 +3307,7 @@
         name = _ref$name === void 0 ? 'Parallel' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Parallel);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Parallel, [{
         children: children,
         services: services,
         title: title,
@@ -3349,7 +3316,7 @@
           finishMode: finishMode,
           returnSuccess: returnSuccess
         }
-      }, nodePool);
+      }, nodePool]);
       _this.finishMode = finishMode;
       _this.returnSuccess = returnSuccess;
       return _this;
@@ -3447,7 +3414,6 @@
 
   var IfSelector = /*#__PURE__*/function (_Composite) {
     _inherits(IfSelector, _Composite);
-    var _super = _createSuper(IfSelector);
     function IfSelector() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3463,7 +3429,7 @@
         name = _ref$name === void 0 ? 'IfSelector' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, IfSelector);
-      _this = _super.call(this, {
+      _this = _callSuper(this, IfSelector, [{
         children: children,
         services: services,
         title: title,
@@ -3472,7 +3438,7 @@
           expression: expression,
           returnPending: returnPending
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
       _this.returnPending = returnPending;
       _this.forceSelectChildIndex = undefined;
@@ -3534,7 +3500,6 @@
 
   var SwitchSelector = /*#__PURE__*/function (_Composite) {
     _inherits(SwitchSelector, _Composite);
-    var _super = _createSuper(SwitchSelector);
     function SwitchSelector() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3556,7 +3521,7 @@
         keys = Object.keys(children);
         children = Object.values(children);
       }
-      _this = _super.call(this, {
+      _this = _callSuper(this, SwitchSelector, [{
         children: children,
         services: services,
         title: title,
@@ -3566,7 +3531,7 @@
           keys: keys,
           returnPending: returnPending
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = _this.addExpression(expression);
       _this.keys = keys; // Index of children
       _this.returnPending = returnPending;
@@ -3640,7 +3605,6 @@
 
   var WeightSelector = /*#__PURE__*/function (_Composite) {
     _inherits(WeightSelector, _Composite);
-    var _super = _createSuper(WeightSelector);
     function WeightSelector() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -3677,7 +3641,7 @@
           weights[i] /= totalWeight;
         }
       }
-      _this = _super.call(this, {
+      _this = _callSuper(this, WeightSelector, [{
         children: children,
         services: services,
         title: title,
@@ -3687,7 +3651,7 @@
           weights: weights,
           returnPending: returnPending
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = expression ? _this.addExpression(expression) : null;
       _this.weights = weights;
       _this.returnPending = returnPending;
@@ -3762,7 +3726,6 @@
 
   var RandomSelector = /*#__PURE__*/function (_Composite) {
     _inherits(RandomSelector, _Composite);
-    var _super = _createSuper(RandomSelector);
     function RandomSelector() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$children = _ref.children,
@@ -3773,12 +3736,12 @@
         name = _ref$name === void 0 ? 'RandomSelector' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, RandomSelector);
-      return _super.call(this, {
+      return _callSuper(this, RandomSelector, [{
         children: children,
         services: services,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(RandomSelector, [{
       key: "open",
@@ -3846,7 +3809,6 @@
 
   var ShuffleSelector = /*#__PURE__*/function (_Composite) {
     _inherits(ShuffleSelector, _Composite);
-    var _super = _createSuper(ShuffleSelector);
     function ShuffleSelector() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$children = _ref.children,
@@ -3857,12 +3819,12 @@
         name = _ref$name === void 0 ? 'ShuffleSelector' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, ShuffleSelector);
-      return _super.call(this, {
+      return _callSuper(this, ShuffleSelector, [{
         children: children,
         services: services,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(ShuffleSelector, [{
       key: "open",
@@ -3911,7 +3873,6 @@
 
   var Bypass = /*#__PURE__*/function (_Decorator) {
     _inherits(Bypass, _Decorator);
-    var _super = _createSuper(Bypass);
     function Bypass() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$child = _ref.child,
@@ -3921,11 +3882,11 @@
         name = _ref$name === void 0 ? 'Bypass' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Bypass);
-      return _super.call(this, {
+      return _callSuper(this, Bypass, [{
         child: child,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(Bypass, [{
       key: "tick",
@@ -3944,7 +3905,6 @@
 
   var ForceSuccess = /*#__PURE__*/function (_Decorator) {
     _inherits(ForceSuccess, _Decorator);
-    var _super = _createSuper(ForceSuccess);
     function ForceSuccess() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$child = _ref.child,
@@ -3954,12 +3914,12 @@
         name = _ref$name === void 0 ? 'ForceSuccess' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, ForceSuccess);
-      return _super.call(this, {
+      return _callSuper(this, ForceSuccess, [{
         child: child,
         title: title,
         name: name,
         properties: {}
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(ForceSuccess, [{
       key: "tick",
@@ -3979,7 +3939,6 @@
 
   var ForceFailure = /*#__PURE__*/function (_Decorator) {
     _inherits(ForceFailure, _Decorator);
-    var _super = _createSuper(ForceFailure);
     function ForceFailure() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$child = _ref.child,
@@ -3989,12 +3948,12 @@
         name = _ref$name === void 0 ? 'ForceFailure' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, ForceFailure);
-      return _super.call(this, {
+      return _callSuper(this, ForceFailure, [{
         child: child,
         title: title,
         name: name,
         properties: {}
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(ForceFailure, [{
       key: "tick",
@@ -4014,7 +3973,6 @@
 
   var Invert = /*#__PURE__*/function (_Decorator) {
     _inherits(Invert, _Decorator);
-    var _super = _createSuper(Invert);
     function Invert() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$child = _ref.child,
@@ -4024,11 +3982,11 @@
         name = _ref$name === void 0 ? 'Invert' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Invert);
-      return _super.call(this, {
+      return _callSuper(this, Invert, [{
         child: child,
         title: title,
         name: name
-      }, nodePool);
+      }, nodePool]);
     }
     _createClass(Invert, [{
       key: "tick",
@@ -4050,7 +4008,6 @@
 
   var TimeLimit = /*#__PURE__*/function (_Decorator) {
     _inherits(TimeLimit, _Decorator);
-    var _super = _createSuper(TimeLimit);
     function TimeLimit() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4065,7 +4022,7 @@
         name = _ref$name === void 0 ? 'TimeLimit' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, TimeLimit);
-      _this = _super.call(this, {
+      _this = _callSuper(this, TimeLimit, [{
         child: child,
         title: title,
         name: name,
@@ -4073,7 +4030,7 @@
           duration: duration,
           returnSuccess: returnSuccess
         }
-      }, nodePool);
+      }, nodePool]);
       _this.durationExpression = _this.addExpression(duration);
       _this.returnSuccess = returnSuccess;
       return _this;
@@ -4109,7 +4066,6 @@
 
   var Cooldown = /*#__PURE__*/function (_Decorator) {
     _inherits(Cooldown, _Decorator);
-    var _super = _createSuper(Cooldown);
     function Cooldown() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4122,14 +4078,14 @@
         name = _ref$name === void 0 ? 'Cooldown' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Cooldown);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Cooldown, [{
         child: child,
         title: title,
         name: name,
         properties: {
           duration: duration
         }
-      }, nodePool);
+      }, nodePool]);
       _this.durationExpression = _this.addExpression(duration);
       return _this;
     }
@@ -4168,7 +4124,6 @@
 
   var Repeat = /*#__PURE__*/function (_Decorator) {
     _inherits(Repeat, _Decorator);
-    var _super = _createSuper(Repeat);
     function Repeat() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4181,14 +4136,14 @@
         name = _ref$name === void 0 ? 'Repeat' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Repeat);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Repeat, [{
         child: child,
         title: title,
         name: name,
         properties: {
           maxLoop: maxLoop
         }
-      }, nodePool);
+      }, nodePool]);
       _this.maxLoopExpression = _this.addExpression(maxLoop);
       return _this;
     }
@@ -4229,7 +4184,6 @@
 
   var RepeatUntilFailure = /*#__PURE__*/function (_Decorator) {
     _inherits(RepeatUntilFailure, _Decorator);
-    var _super = _createSuper(RepeatUntilFailure);
     function RepeatUntilFailure() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4244,7 +4198,7 @@
         name = _ref$name === void 0 ? 'RepeatUntilFailure' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, RepeatUntilFailure);
-      _this = _super.call(this, {
+      _this = _callSuper(this, RepeatUntilFailure, [{
         child: child,
         title: title,
         name: name,
@@ -4252,7 +4206,7 @@
           returnSuccess: returnSuccess,
           maxLoop: maxLoop
         }
-      }, nodePool);
+      }, nodePool]);
       _this.maxLoopExpression = _this.addExpression(maxLoop);
       _this.returnSuccess = returnSuccess;
       return _this;
@@ -4299,7 +4253,6 @@
 
   var RepeatUntilSuccess = /*#__PURE__*/function (_Decorator) {
     _inherits(RepeatUntilSuccess, _Decorator);
-    var _super = _createSuper(RepeatUntilSuccess);
     function RepeatUntilSuccess() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4312,14 +4265,14 @@
         name = _ref$name === void 0 ? 'RepeatUntilSuccess' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, RepeatUntilSuccess);
-      _this = _super.call(this, {
+      _this = _callSuper(this, RepeatUntilSuccess, [{
         child: child,
         title: title,
         name: name,
         properties: {
           maxLoop: maxLoop
         }
-      }, nodePool);
+      }, nodePool]);
       _this.maxLoopExpression = _this.addExpression(maxLoop);
       return _this;
     }
@@ -4362,7 +4315,6 @@
 
   var Limiter = /*#__PURE__*/function (_Decorator) {
     _inherits(Limiter, _Decorator);
-    var _super = _createSuper(Limiter);
     function Limiter() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4375,14 +4327,14 @@
         name = _ref$name === void 0 ? 'Limiter' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, Limiter);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Limiter, [{
         child: child,
         title: title,
         name: name,
         properties: {
           maxLoop: maxLoop
         }
-      }, nodePool);
+      }, nodePool]);
       _this.maxLoopExpression = _this.addExpression(maxLoop);
       return _this;
     }
@@ -4422,7 +4374,6 @@
 
   var If = /*#__PURE__*/function (_Decorator) {
     _inherits(If, _Decorator);
-    var _super = _createSuper(If);
     function If() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4437,7 +4388,7 @@
         name = _ref$name === void 0 ? 'If' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, If);
-      _this = _super.call(this, {
+      _this = _callSuper(this, If, [{
         child: child,
         title: title,
         name: name,
@@ -4445,7 +4396,7 @@
           expression: expression,
           returnPending: returnPending
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
       _this.returnPending = returnPending;
       return _this;
@@ -4476,7 +4427,6 @@
 
   var ContinueIf = /*#__PURE__*/function (_Decorator) {
     _inherits(ContinueIf, _Decorator);
-    var _super = _createSuper(ContinueIf);
     function ContinueIf() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4491,7 +4441,7 @@
         name = _ref$name === void 0 ? 'ContinueIf' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, ContinueIf);
-      _this = _super.call(this, {
+      _this = _callSuper(this, ContinueIf, [{
         child: child,
         title: title,
         name: name,
@@ -4499,7 +4449,7 @@
           expression: expression,
           returnSuccess: returnSuccess
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
       _this.returnSuccess = returnSuccess;
       return _this;
@@ -4527,7 +4477,6 @@
 
   var AbortIf = /*#__PURE__*/function (_Decorator) {
     _inherits(AbortIf, _Decorator);
-    var _super = _createSuper(AbortIf);
     function AbortIf() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -4542,7 +4491,7 @@
         name = _ref$name === void 0 ? 'AbortIf' : _ref$name;
       var nodePool = arguments.length > 1 ? arguments[1] : undefined;
       _classCallCheck(this, AbortIf);
-      _this = _super.call(this, {
+      _this = _callSuper(this, AbortIf, [{
         child: child,
         title: title,
         name: name,
@@ -4550,7 +4499,7 @@
           expression: expression,
           returnSuccess: returnSuccess
         }
-      }, nodePool);
+      }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
       _this.returnSuccess = returnSuccess;
       return _this;
@@ -5119,10 +5068,9 @@
 
   var Blackboard = /*#__PURE__*/function (_Base) {
     _inherits(Blackboard, _Base);
-    var _super = _createSuper(Blackboard);
     function Blackboard() {
       _classCallCheck(this, Blackboard);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Blackboard, arguments);
     }
     _createClass(Blackboard, [{
       key: "getTreeState",
@@ -5916,16 +5864,15 @@
 
   var TaskAction = /*#__PURE__*/function (_Action) {
     _inherits(TaskAction, _Action);
-    var _super = _createSuper(TaskAction);
     function TaskAction(config) {
       var _this;
       _classCallCheck(this, TaskAction);
       // config: {name, parameters:{...} }        
-      _this = _super.call(this, {
+      _this = _callSuper(this, TaskAction, [{
         name: 'TaskAction',
         title: config.name,
         properties: config
-      });
+      }]);
       _this.isRunning = false;
       var sourceParameters = config.parameters;
       var taskParameters = {};
@@ -14446,7 +14393,6 @@
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
     _inherits(EventSheetManager, _EventEmitter);
-    var _super = _createSuper(EventSheetManager);
     function EventSheetManager() {
       var _this;
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -14454,7 +14400,7 @@
         _ref$parallel = _ref.parallel,
         parallel = _ref$parallel === void 0 ? false : _ref$parallel;
       _classCallCheck(this, EventSheetManager);
-      _this = _super.call(this);
+      _this = _callSuper(this, EventSheetManager);
       _this.defaultTreeGroupName = '_';
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
@@ -14482,14 +14428,13 @@
 
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventBehaviorTree, _BehaviorTree);
-    var _super = _createSuper(EventBehaviorTree);
     function EventBehaviorTree(config) {
       var _this;
       _classCallCheck(this, EventBehaviorTree);
       if (config === undefined) {
         config = {};
       }
-      _this = _super.call(this, config);
+      _this = _callSuper(this, EventBehaviorTree, [config]);
       var _config = config,
         _config$parallel = _config.parallel,
         parallel = _config$parallel === void 0 ? false : _config$parallel;
@@ -14502,7 +14447,6 @@
         expression: condition,
         returnPending: true // Always return PENDING instead of RUNNING, or SUCCESS
       });
-
       _this.setRoot(root);
       return _this;
     }
@@ -15682,7 +15626,6 @@
             }
             // Ignore items if out of parents
           }
-
           break;
         case 'paragraph':
         case 'code':
@@ -15703,7 +15646,6 @@
         // Ignore other kinds of items
       }
     }
-
     return tree;
   };
   var CreateNewNode = function CreateNewNode(title) {
@@ -15873,10 +15815,9 @@
 
   var TaskSequence = /*#__PURE__*/function (_Sequence) {
     _inherits(TaskSequence, _Sequence);
-    var _super = _createSuper(TaskSequence);
     function TaskSequence() {
       _classCallCheck(this, TaskSequence);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TaskSequence, arguments);
     }
     _createClass(TaskSequence, [{
       key: "open",
@@ -16119,10 +16060,9 @@
 
   var MarkedEventSheets = /*#__PURE__*/function (_EventSheetManager) {
     _inherits(MarkedEventSheets, _EventSheetManager);
-    var _super = _createSuper(MarkedEventSheets);
     function MarkedEventSheets() {
       _classCallCheck(this, MarkedEventSheets);
-      return _super.apply(this, arguments);
+      return _callSuper(this, MarkedEventSheets, arguments);
     }
     _createClass(MarkedEventSheets, [{
       key: "addEventSheet",
@@ -16161,7 +16101,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -18195,7 +18134,6 @@
         // yoyo
         onComplete // onComplete
         );
-
         bob.getTweenTask(propertyName).once('complete', function () {
           gameObject[propertyName] = null;
         });
@@ -18265,7 +18203,6 @@
         }
       }
     });
-
     Object.defineProperty(gameObject, 'tintR', {
       get: function get() {
         return tintR;
@@ -19046,7 +18983,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -19055,7 +18991,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -19079,7 +19014,6 @@
   var GetValue$f = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
-    var _super = _createSuper(LayerManager);
     function LayerManager(scene, config) {
       var _this;
       _classCallCheck(this, LayerManager);
@@ -19094,7 +19028,7 @@
         config.fade = 0;
       }
       config.viewportCoordinate = false;
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, LayerManager, [scene, config]);
       var initLayers = GetValue$f(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -19308,7 +19242,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -19347,11 +19280,10 @@
   var GetValue$d = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -19475,11 +19407,10 @@
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -19722,11 +19653,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer$1();
       // boot() later 
       return _this;
@@ -19774,10 +19704,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -19918,7 +19847,6 @@
   var Linear = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
-    var _super = _createSuper(Fade);
     function Fade(scene, sound, config) {
       var _this;
       _classCallCheck(this, Fade);
@@ -19930,7 +19858,7 @@
       sound.active = true;
       sound.scene = scene;
       sound.game = sound.manager.game;
-      _this = _super.call(this, sound, config);
+      _this = _callSuper(this, Fade, [sound, config]);
       // this.parent = parent
       // this.timer
 
@@ -20769,11 +20697,10 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
-    var _super = _createSuper(BaseClock);
     function BaseClock(parent, config) {
       var _this;
       _classCallCheck(this, BaseClock);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, BaseClock, [parent, config]);
       _this.resetFromJSON(config);
       _this.boot();
       return _this;
@@ -20840,10 +20767,9 @@
 
   var Clock = /*#__PURE__*/function (_BaseClock) {
     _inherits(Clock, _BaseClock);
-    var _super = _createSuper(Clock);
     function Clock() {
       _classCallCheck(this, Clock);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Clock, arguments);
     }
     _createClass(Clock, [{
       key: "startTicking",
@@ -21057,10 +20983,9 @@
 
   var TimerPool$1 = /*#__PURE__*/function (_Pool) {
     _inherits(TimerPool, _Pool);
-    var _super = _createSuper(TimerPool);
     function TimerPool() {
       _classCallCheck(this, TimerPool);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TimerPool, arguments);
     }
     _createClass(TimerPool, [{
       key: "allocate",
@@ -21089,11 +21014,10 @@
   var TimerPool = new TimerPool$1();
   var Timeline = /*#__PURE__*/function (_Clock) {
     _inherits(Timeline, _Clock);
-    var _super = _createSuper(Timeline);
     function Timeline(parent, config) {
       var _this;
       _classCallCheck(this, Timeline);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, Timeline, [parent, config]);
       _this.addedTimers = [];
       _this.timers = [];
       _this.timerPool = GetValue$2(config, 'pool', TimerPool);
@@ -21201,7 +21125,6 @@
             pendingTimers.push(timer); // Add to timer queue
           }
         }
-
         this.timers = pendingTimers;
         if (this.timers.length === 0 && this.addedTimers.length === 0) {
           this.complete(); // Emit 'complete' event
@@ -21639,11 +21562,10 @@
 
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
-    var _super = _createSuper(WaitEventManager);
     function WaitEventManager(parent, config) {
       var _this;
       _classCallCheck(this, WaitEventManager);
-      _this = _super.call(this, parent);
+      _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$1(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$1(config, 'clickTarget', _this.scene));
       _this.setCameraTarget(GetValue$1(config, 'camera', _this.scene.cameras.main));
@@ -21875,10 +21797,9 @@
   var Extend = function Extend(BaseClass) {
     var Managers = /*#__PURE__*/function (_BaseClass) {
       _inherits(Managers, _BaseClass);
-      var _super = _createSuper(Managers);
       function Managers() {
         _classCallCheck(this, Managers);
-        return _super.apply(this, arguments);
+        return _callSuper(this, Managers, arguments);
       }
       return _createClass(Managers);
     }(BaseClass);
@@ -21895,7 +21816,6 @@
   var EventEmitter = Phaser.Events.EventEmitter;
   var Managers = /*#__PURE__*/function (_Extend) {
     _inherits(Managers, _Extend);
-    var _super = _createSuper(Managers);
     function Managers(scene, config) {
       var _this;
       _classCallCheck(this, Managers);
@@ -21906,7 +21826,7 @@
       if (!config.hasOwnProperty('layers')) {
         config.layers = undefined;
       }
-      _this = _super.call(this);
+      _this = _callSuper(this, Managers);
       _this.scene = scene;
       _this.initManagers(scene, config);
       return _this;
@@ -22835,10 +22755,9 @@
 
   var MarkedEventSheetsPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(MarkedEventSheetsPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(MarkedEventSheetsPlugin);
     function MarkedEventSheetsPlugin(pluginManager) {
       _classCallCheck(this, MarkedEventSheetsPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, MarkedEventSheetsPlugin, [pluginManager]);
     }
     _createClass(MarkedEventSheetsPlugin, [{
       key: "start",

@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdynamictext = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -202,20 +202,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   // copy from Phaser.GameObjects.Text
@@ -464,7 +450,6 @@
   var UUID = Phaser.Utils.String.UUID;
   var Canvas = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
-    var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Canvas);
@@ -480,7 +465,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, 'rexCanvas');
+      _this = _callSuper(this, Canvas, [scene, 'rexCanvas']);
       _this.renderer = scene.sys.game.renderer;
       _this.resolution = 1;
       _this._width = width;
@@ -1011,11 +996,10 @@
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
-    var _super = _createSuper(RenderBase);
     function RenderBase(parent, type) {
       var _this;
       _classCallCheck(this, RenderBase);
-      _this = _super.call(this, parent, type);
+      _this = _callSuper(this, RenderBase, [parent, type]);
       _this.renderable = true;
       _this.scrollFactorX = 1;
       _this.scrollFactorY = 1;
@@ -1467,7 +1451,6 @@
         } else {
           return style; // Not a valid input
         }
-
       default:
         return style;
     }
@@ -1829,11 +1812,10 @@
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var Background = /*#__PURE__*/function (_RenderBase) {
     _inherits(Background, _RenderBase);
-    var _super = _createSuper(Background);
     function Background(parent, config) {
       var _this;
       _classCallCheck(this, Background);
-      _this = _super.call(this, parent, 'background');
+      _this = _callSuper(this, Background, [parent, 'background']);
       _this.setScrollFactor(0);
       _this.setColor(GetValue$6(config, 'color', null), GetValue$6(config, 'color2', null), GetValue$6(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$6(config, 'stroke', null), GetValue$6(config, 'strokeThickness', 2));
@@ -1969,11 +1951,10 @@
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var InnerBounds = /*#__PURE__*/function (_RenderBase) {
     _inherits(InnerBounds, _RenderBase);
-    var _super = _createSuper(InnerBounds);
     function InnerBounds(parent, config) {
       var _this;
       _classCallCheck(this, InnerBounds);
-      _this = _super.call(this, parent, 'innerbounds');
+      _this = _callSuper(this, InnerBounds, [parent, 'innerbounds']);
       _this.setScrollFactor(0);
       _this.setColor(GetValue$5(config, 'color', null), GetValue$5(config, 'color2', null), GetValue$5(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$5(config, 'stroke', null), GetValue$5(config, 'strokeThickness', 2));
@@ -2605,11 +2586,10 @@
 
   var CharData = /*#__PURE__*/function (_RenderBase) {
     _inherits(CharData, _RenderBase);
-    var _super = _createSuper(CharData);
     function CharData(parent, text, style) {
       var _this;
       _classCallCheck(this, CharData);
-      _this = _super.call(this, parent, CharTypeName);
+      _this = _callSuper(this, CharData, [parent, CharTypeName]);
       _this.updateTextFlag = false;
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
       _this.setText(text);
@@ -2997,11 +2977,10 @@
   Phaser.Display.Canvas.CanvasPool;
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
-    var _super = _createSuper(ImageData);
     function ImageData(parent, key, frame) {
       var _this;
       _classCallCheck(this, ImageData);
-      _this = _super.call(this, parent, ImageTypeName);
+      _this = _callSuper(this, ImageData, [parent, ImageTypeName]);
       _this.setTexture(key, frame);
       _this.color = undefined;
       return _this;
@@ -3163,11 +3142,10 @@
 
   var Drawer = /*#__PURE__*/function (_RenderBase) {
     _inherits(Drawer, _RenderBase);
-    var _super = _createSuper(Drawer);
     function Drawer(parent, renderCallback, width, height) {
       var _this;
       _classCallCheck(this, Drawer);
-      _this = _super.call(this, parent, DrawerTypeName);
+      _this = _callSuper(this, Drawer, [parent, DrawerTypeName]);
       _this.setRenderCallback(renderCallback);
       _this.setDrawerSize(width, height);
       return _this;
@@ -3297,11 +3275,10 @@
 
   var Space = /*#__PURE__*/function (_RenderBase) {
     _inherits(Space, _RenderBase);
-    var _super = _createSuper(Space);
     function Space(parent, width) {
       var _this;
       _classCallCheck(this, Space);
-      _this = _super.call(this, parent, SpaceTypeName);
+      _this = _callSuper(this, Space, [parent, SpaceTypeName]);
       _this.setSpaceWidth(width);
       return _this;
     }
@@ -3347,11 +3324,10 @@
 
   var Command = /*#__PURE__*/function (_Base) {
     _inherits(Command, _Base);
-    var _super = _createSuper(Command);
     function Command(parent, name, callback, param, scope) {
       var _this;
       _classCallCheck(this, Command);
-      _this = _super.call(this, parent, CmdTypeName);
+      _this = _callSuper(this, Command, [parent, CmdTypeName]);
       _this.setName(name).setParameter(param).setCallback(callback, scope);
       return _this;
     }
@@ -3710,7 +3686,6 @@
         wrapWidth = Infinity; // No word-wrap
       }
     }
-
     var letterSpacing = GetValue$3(config, 'letterSpacing', 0);
     var hAlign = GetValue$3(config, 'hAlign', 0);
     var vAlign = GetValue$3(config, 'vAlign', 0);
@@ -3932,7 +3907,6 @@
         maxLines = GetValue$2(config, 'maxLines', 0); // Default is show all lines
       }
     }
-
     var showAllLines = maxLines === 0;
 
     // Get fixedCharacterHeight
@@ -3954,7 +3928,6 @@
         wrapHeight = Infinity; // No word-wrap
       }
     }
-
     var letterSpacing = GetValue$2(config, 'letterSpacing', 0);
     var rtl = GetValue$2(config, 'rtl', true);
     var hAlign = GetValue$2(config, 'hAlign', rtl ? 2 : 0);
@@ -4683,7 +4656,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
-    var _super = _createSuper(DynamicText);
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
@@ -4700,7 +4672,7 @@
       }
       var width = fixedWidth === 0 ? 1 : fixedWidth;
       var height = fixedHeight === 0 ? 1 : fixedHeight;
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, DynamicText, [scene, x, y, width, height]);
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
       _this.padding = SetPadding$1();

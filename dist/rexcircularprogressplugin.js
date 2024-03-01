@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcircularprogressplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -150,20 +150,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
@@ -233,7 +219,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var BaseShapes = /*#__PURE__*/function (_Shape) {
     _inherits(BaseShapes, _Shape);
-    var _super = _createSuper(BaseShapes);
     function BaseShapes(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, BaseShapes);
@@ -249,7 +234,7 @@
       if (height === undefined) {
         height = width;
       }
-      _this = _super.call(this, scene, 'rexShapes', []);
+      _this = _callSuper(this, BaseShapes, [scene, 'rexShapes', []]);
       _this._width = -1;
       _this._height = -1;
       _this.dirty = true;
@@ -467,7 +452,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -636,7 +620,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -675,11 +658,10 @@
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -803,11 +785,10 @@
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -1050,11 +1031,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer();
       // boot() later 
       return _this;
@@ -1102,10 +1082,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -1240,11 +1219,10 @@
   var Linear$1 = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
-    var _super = _createSuper(EaseValueTask);
     function EaseValueTask(gameObject, config) {
       var _this;
       _classCallCheck(this, EaseValueTask);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, EaseValueTask, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -1360,10 +1338,9 @@
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
-      var _super = _createSuper(ProgressBase);
       function ProgressBase() {
         _classCallCheck(this, ProgressBase);
-        return _super.apply(this, arguments);
+        return _callSuper(this, ProgressBase, arguments);
       }
       _createClass(ProgressBase, [{
         key: "bootProgressBase",
@@ -1671,11 +1648,10 @@
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var PathBase = /*#__PURE__*/function (_BaseGeom) {
     _inherits(PathBase, _BaseGeom);
-    var _super = _createSuper(PathBase);
     function PathBase() {
       var _this;
       _classCallCheck(this, PathBase);
-      _this = _super.call(this);
+      _this = _callSuper(this, PathBase);
       _this.pathData = [];
       _this.pathIndexes = [];
       _this.closePath = false;
@@ -1767,7 +1743,6 @@
   var DegToRad$2 = Phaser.Math.DegToRad;
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
-    var _super = _createSuper(Arc);
     function Arc(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
       var _this;
       _classCallCheck(this, Arc);
@@ -1795,7 +1770,7 @@
       if (pie === undefined) {
         pie = false;
       }
-      _this = _super.call(this);
+      _this = _callSuper(this, Arc);
       _this.setCenterPosition(x, y);
       _this.setRadius(radiusX, radiusY);
       _this.setAngle(startAngle, endAngle, anticlockwise);
@@ -1978,10 +1953,9 @@
 
   var Circle = /*#__PURE__*/function (_Arc) {
     _inherits(Circle, _Arc);
-    var _super = _createSuper(Circle);
     function Circle(x, y, radius) {
       _classCallCheck(this, Circle);
-      return _super.call(this, x, y, radius, radius, 0, 360);
+      return _callSuper(this, Circle, [x, y, radius, radius, 0, 360]);
     }
     return _createClass(Circle);
   }(Arc);
@@ -2446,11 +2420,10 @@
 
   var Lines = /*#__PURE__*/function (_PathBase) {
     _inherits(Lines, _PathBase);
-    var _super = _createSuper(Lines);
     function Lines() {
       var _this;
       _classCallCheck(this, Lines);
-      _this = _super.call(this);
+      _this = _callSuper(this, Lines);
       _this.builder = new PathDataBuilder(_this.pathData);
       return _this;
     }
@@ -2701,7 +2674,6 @@
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
-    var _super = _createSuper(CircularProgress);
     function CircularProgress(scene, x, y, radius, barColor, value, config) {
       var _this;
       _classCallCheck(this, CircularProgress);
@@ -2717,7 +2689,7 @@
         radius = 1;
       }
       var width = radius * 2;
-      _this = _super.call(this, scene, x, y, width, width);
+      _this = _callSuper(this, CircularProgress, [scene, x, y, width, width]);
       _this.type = 'rexCircularProgress';
       _this.bootProgressBase(config);
       _this.setRadius(radius);
@@ -2940,11 +2912,10 @@
 
   var CircularProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CircularProgressPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(CircularProgressPlugin);
     function CircularProgressPlugin(pluginManager) {
       var _this;
       _classCallCheck(this, CircularProgressPlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, CircularProgressPlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexCircularProgress', Factory, Creator);

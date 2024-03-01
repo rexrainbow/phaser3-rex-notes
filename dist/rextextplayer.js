@@ -4,6 +4,17 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextplayer = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
   function _iterableToArrayLimit(r, l) {
     var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
     if (null != t) {
@@ -30,6 +41,20 @@
       }
       return a;
     }
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
   }
   function _typeof(o) {
     "@babel/helpers - typeof";
@@ -105,17 +130,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -129,20 +143,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -242,27 +242,12 @@
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -2296,7 +2281,6 @@
         // yoyo
         onComplete // onComplete
         );
-
         bob.getTweenTask(propertyName).once('complete', function () {
           gameObject[propertyName] = null;
         });
@@ -2366,7 +2350,6 @@
         }
       }
     });
-
     Object.defineProperty(gameObject, 'tintR', {
       get: function get() {
         return tintR;
@@ -3147,7 +3130,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -3156,7 +3138,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -3180,7 +3161,6 @@
   var GetValue$t = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
-    var _super = _createSuper(LayerManager);
     function LayerManager(scene, config) {
       var _this;
       _classCallCheck(this, LayerManager);
@@ -3195,7 +3175,7 @@
         config.fade = 0;
       }
       config.viewportCoordinate = false;
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, LayerManager, [scene, config]);
       var initLayers = GetValue$t(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -3409,7 +3389,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -3448,11 +3427,10 @@
   var GetValue$r = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -3576,11 +3554,10 @@
   var GetValue$q = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -3823,11 +3800,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer$1();
       // boot() later 
       return _this;
@@ -3875,10 +3851,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -4019,7 +3994,6 @@
   var Linear = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
-    var _super = _createSuper(Fade);
     function Fade(scene, sound, config) {
       var _this;
       _classCallCheck(this, Fade);
@@ -4031,7 +4005,7 @@
       sound.active = true;
       sound.scene = scene;
       sound.game = sound.manager.game;
-      _this = _super.call(this, sound, config);
+      _this = _callSuper(this, Fade, [sound, config]);
       // this.parent = parent
       // this.timer
 
@@ -4870,11 +4844,10 @@
   var GetValue$h = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
-    var _super = _createSuper(BaseClock);
     function BaseClock(parent, config) {
       var _this;
       _classCallCheck(this, BaseClock);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, BaseClock, [parent, config]);
       _this.resetFromJSON(config);
       _this.boot();
       return _this;
@@ -4941,10 +4914,9 @@
 
   var Clock = /*#__PURE__*/function (_BaseClock) {
     _inherits(Clock, _BaseClock);
-    var _super = _createSuper(Clock);
     function Clock() {
       _classCallCheck(this, Clock);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Clock, arguments);
     }
     _createClass(Clock, [{
       key: "startTicking",
@@ -5158,10 +5130,9 @@
 
   var TimerPool$1 = /*#__PURE__*/function (_Pool) {
     _inherits(TimerPool, _Pool);
-    var _super = _createSuper(TimerPool);
     function TimerPool() {
       _classCallCheck(this, TimerPool);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TimerPool, arguments);
     }
     _createClass(TimerPool, [{
       key: "allocate",
@@ -5190,11 +5161,10 @@
   var TimerPool = new TimerPool$1();
   var Timeline = /*#__PURE__*/function (_Clock) {
     _inherits(Timeline, _Clock);
-    var _super = _createSuper(Timeline);
     function Timeline(parent, config) {
       var _this;
       _classCallCheck(this, Timeline);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, Timeline, [parent, config]);
       _this.addedTimers = [];
       _this.timers = [];
       _this.timerPool = GetValue$g(config, 'pool', TimerPool);
@@ -5302,7 +5272,6 @@
             pendingTimers.push(timer); // Add to timer queue
           }
         }
-
         this.timers = pendingTimers;
         if (this.timers.length === 0 && this.addedTimers.length === 0) {
           this.complete(); // Emit 'complete' event
@@ -5740,11 +5709,10 @@
 
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
-    var _super = _createSuper(WaitEventManager);
     function WaitEventManager(parent, config) {
       var _this;
       _classCallCheck(this, WaitEventManager);
-      _this = _super.call(this, parent);
+      _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$f(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$f(config, 'clickTarget', _this.scene));
       _this.setCameraTarget(GetValue$f(config, 'camera', _this.scene.cameras.main));
@@ -5976,10 +5944,9 @@
   var Extend = function Extend(BaseClass) {
     var Managers = /*#__PURE__*/function (_BaseClass) {
       _inherits(Managers, _BaseClass);
-      var _super = _createSuper(Managers);
       function Managers() {
         _classCallCheck(this, Managers);
-        return _super.apply(this, arguments);
+        return _callSuper(this, Managers, arguments);
       }
       return _createClass(Managers);
     }(BaseClass);
@@ -6239,7 +6206,6 @@
   var UUID = Phaser.Utils.String.UUID;
   var Canvas = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
-    var _super = _createSuper(Canvas);
     function Canvas(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Canvas);
@@ -6255,7 +6221,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, 'rexCanvas');
+      _this = _callSuper(this, Canvas, [scene, 'rexCanvas']);
       _this.renderer = scene.sys.game.renderer;
       _this.resolution = 1;
       _this._width = width;
@@ -6736,11 +6702,10 @@
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
-    var _super = _createSuper(RenderBase);
     function RenderBase(parent, type) {
       var _this;
       _classCallCheck(this, RenderBase);
-      _this = _super.call(this, parent, type);
+      _this = _callSuper(this, RenderBase, [parent, type]);
       _this.renderable = true;
       _this.scrollFactorX = 1;
       _this.scrollFactorY = 1;
@@ -7192,7 +7157,6 @@
         } else {
           return style; // Not a valid input
         }
-
       default:
         return style;
     }
@@ -7554,11 +7518,10 @@
   var GetValue$a = Phaser.Utils.Objects.GetValue;
   var Background = /*#__PURE__*/function (_RenderBase) {
     _inherits(Background, _RenderBase);
-    var _super = _createSuper(Background);
     function Background(parent, config) {
       var _this;
       _classCallCheck(this, Background);
-      _this = _super.call(this, parent, 'background');
+      _this = _callSuper(this, Background, [parent, 'background']);
       _this.setScrollFactor(0);
       _this.setColor(GetValue$a(config, 'color', null), GetValue$a(config, 'color2', null), GetValue$a(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$a(config, 'stroke', null), GetValue$a(config, 'strokeThickness', 2));
@@ -7694,11 +7657,10 @@
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var InnerBounds = /*#__PURE__*/function (_RenderBase) {
     _inherits(InnerBounds, _RenderBase);
-    var _super = _createSuper(InnerBounds);
     function InnerBounds(parent, config) {
       var _this;
       _classCallCheck(this, InnerBounds);
-      _this = _super.call(this, parent, 'innerbounds');
+      _this = _callSuper(this, InnerBounds, [parent, 'innerbounds']);
       _this.setScrollFactor(0);
       _this.setColor(GetValue$9(config, 'color', null), GetValue$9(config, 'color2', null), GetValue$9(config, 'horizontalGradient', true));
       _this.setStroke(GetValue$9(config, 'stroke', null), GetValue$9(config, 'strokeThickness', 2));
@@ -8336,11 +8298,10 @@
 
   var CharData = /*#__PURE__*/function (_RenderBase) {
     _inherits(CharData, _RenderBase);
-    var _super = _createSuper(CharData);
     function CharData(parent, text, style) {
       var _this;
       _classCallCheck(this, CharData);
-      _this = _super.call(this, parent, CharTypeName);
+      _this = _callSuper(this, CharData, [parent, CharTypeName]);
       _this.updateTextFlag = false;
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
       _this.setText(text);
@@ -8728,11 +8689,10 @@
   Phaser.Display.Canvas.CanvasPool;
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
-    var _super = _createSuper(ImageData);
     function ImageData(parent, key, frame) {
       var _this;
       _classCallCheck(this, ImageData);
-      _this = _super.call(this, parent, ImageTypeName);
+      _this = _callSuper(this, ImageData, [parent, ImageTypeName]);
       _this.setTexture(key, frame);
       _this.color = undefined;
       return _this;
@@ -8894,11 +8854,10 @@
 
   var Drawer = /*#__PURE__*/function (_RenderBase) {
     _inherits(Drawer, _RenderBase);
-    var _super = _createSuper(Drawer);
     function Drawer(parent, renderCallback, width, height) {
       var _this;
       _classCallCheck(this, Drawer);
-      _this = _super.call(this, parent, DrawerTypeName);
+      _this = _callSuper(this, Drawer, [parent, DrawerTypeName]);
       _this.setRenderCallback(renderCallback);
       _this.setDrawerSize(width, height);
       return _this;
@@ -9028,11 +8987,10 @@
 
   var Space = /*#__PURE__*/function (_RenderBase) {
     _inherits(Space, _RenderBase);
-    var _super = _createSuper(Space);
     function Space(parent, width) {
       var _this;
       _classCallCheck(this, Space);
-      _this = _super.call(this, parent, SpaceTypeName);
+      _this = _callSuper(this, Space, [parent, SpaceTypeName]);
       _this.setSpaceWidth(width);
       return _this;
     }
@@ -9078,11 +9036,10 @@
 
   var Command = /*#__PURE__*/function (_Base) {
     _inherits(Command, _Base);
-    var _super = _createSuper(Command);
     function Command(parent, name, callback, param, scope) {
       var _this;
       _classCallCheck(this, Command);
-      _this = _super.call(this, parent, CmdTypeName);
+      _this = _callSuper(this, Command, [parent, CmdTypeName]);
       _this.setName(name).setParameter(param).setCallback(callback, scope);
       return _this;
     }
@@ -9441,7 +9398,6 @@
         wrapWidth = Infinity; // No word-wrap
       }
     }
-
     var letterSpacing = GetValue$7(config, 'letterSpacing', 0);
     var hAlign = GetValue$7(config, 'hAlign', 0);
     var vAlign = GetValue$7(config, 'vAlign', 0);
@@ -9663,7 +9619,6 @@
         maxLines = GetValue$6(config, 'maxLines', 0); // Default is show all lines
       }
     }
-
     var showAllLines = maxLines === 0;
 
     // Get fixedCharacterHeight
@@ -9685,7 +9640,6 @@
         wrapHeight = Infinity; // No word-wrap
       }
     }
-
     var letterSpacing = GetValue$6(config, 'letterSpacing', 0);
     var rtl = GetValue$6(config, 'rtl', true);
     var hAlign = GetValue$6(config, 'hAlign', rtl ? 2 : 0);
@@ -10375,7 +10329,6 @@
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
-    var _super = _createSuper(DynamicText);
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
@@ -10392,7 +10345,7 @@
       }
       var width = fixedWidth === 0 ? 1 : fixedWidth;
       var height = fixedHeight === 0 ? 1 : fixedHeight;
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, DynamicText, [scene, x, y, width, height]);
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
       _this.padding = SetPadding$1();
@@ -10775,7 +10728,6 @@
 
   var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
     _inherits(BracketParser, _BracketParserBase);
-    var _super = _createSuper(BracketParser);
     function BracketParser(config) {
       var _this;
       _classCallCheck(this, BracketParser);
@@ -10785,7 +10737,7 @@
       if (!config.hasOwnProperty('multipleLinesTag')) {
         config.multipleLinesTag = false;
       }
-      _this = _super.call(this, config);
+      _this = _callSuper(this, BracketParser, [config]);
 
       // Parameters for regex
       _this.setTagExpression(GetValue$f(config, 'regex.tag', undefined));
@@ -11093,7 +11045,6 @@
   var SetTypingSpeed = function SetTypingSpeed(speed) {
     this.typeWriter.setTypingSpeed(speed); // this: textPlayer
   };
-
   var AppendCommand$2 = function AppendCommand(textPlayer, speed) {
     AppendCommand$3.call(textPlayer, 'speed',
     // name
@@ -11116,7 +11067,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11131,7 +11081,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11171,7 +11120,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11186,7 +11134,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11213,7 +11160,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11229,7 +11175,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11257,7 +11202,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11272,7 +11216,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11298,7 +11241,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11313,7 +11255,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11328,7 +11269,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11343,7 +11283,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11377,7 +11316,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       AppendCommand$3.call(textPlayer, 'bgm.stop',
@@ -11388,7 +11326,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
     var tagName = 'bgm2';
@@ -11401,7 +11338,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       AppendCommand$3.call(textPlayer, 'bgm2.stop',
@@ -11412,7 +11348,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11456,7 +11391,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11471,7 +11405,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11498,7 +11431,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11514,7 +11446,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11542,7 +11473,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11557,7 +11487,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11585,7 +11514,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       AppendCommand$3.call(textPlayer, 'bgm.resume',
@@ -11596,7 +11524,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
     var tagName = 'bgm2.pause';
@@ -11609,7 +11536,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       AppendCommand$3.call(textPlayer, 'bgm2.resume',
@@ -11620,7 +11546,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11652,7 +11577,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11667,7 +11591,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11693,7 +11616,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11708,7 +11630,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11723,7 +11644,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11738,7 +11658,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -11772,7 +11691,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11793,7 +11711,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11814,7 +11731,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11835,7 +11751,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11856,7 +11771,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
       AppendCommand$3.call(textPlayer, 'camera.zoom.to',
@@ -11867,7 +11781,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11894,7 +11807,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
       value = DegToRad(value);
@@ -11906,7 +11818,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11934,7 +11845,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on("+".concat(tagName, ".to"), function (x, y, duration, ease) {
       AppendCommand$3.call(textPlayer, 'camera.scroll.to',
@@ -11945,7 +11855,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -11993,7 +11902,6 @@
   var Wait$2 = function Wait(name) {
     this.typeWriter.wait(name); // this: textPlayer
   };
-
   var AppendCommand$1 = function AppendCommand(textPlayer, name) {
     AppendCommand$3.call(textPlayer, 'wait',
     // name
@@ -12135,7 +12043,6 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Parser = /*#__PURE__*/function (_BracketParser) {
     _inherits(Parser, _BracketParser);
-    var _super = _createSuper(Parser);
     function Parser(textPlayer, config) {
       var _this;
       _classCallCheck(this, Parser);
@@ -12145,7 +12052,7 @@
       if (!config.hasOwnProperty('delimiters')) {
         config.delimiters = '[]';
       }
-      _this = _super.call(this, config);
+      _this = _callSuper(this, Parser, [config]);
       AddParseCallbacks(textPlayer, _assertThisInitialized(_this), config);
       _this.setCommentLineStartSymbol(GetValue$3(config, 'comment', '//'));
       _this.setContentOutputEnable();
@@ -12268,7 +12175,6 @@
         }
         break; // Leave this typing loop
       }
-
       if (child.renderable) {
         // Typing this char
         var animationConfig = this.animationConfig;
@@ -12825,10 +12731,9 @@
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
-    var _super = _createSuper(SpriteBob);
     function SpriteBob() {
       _classCallCheck(this, SpriteBob);
-      return _super.apply(this, arguments);
+      return _callSuper(this, SpriteBob, arguments);
     }
     _createClass(SpriteBob, [{
       key: "playAnimation",
@@ -12904,14 +12809,13 @@
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
-    var _super = _createSuper(SpriteManager);
     function SpriteManager(scene, config) {
       _classCallCheck(this, SpriteManager);
       if (config === undefined) {
         config = {};
       }
       config.BobClass = SpriteBob;
-      return _super.call(this, scene, config);
+      return _callSuper(this, SpriteManager, [scene, config]);
     }
     _createClass(SpriteManager, [{
       key: "setCreateGameObjectCallback",
@@ -12976,7 +12880,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on('+', function (tag) {
       if (parser.skipEventFlag) {
@@ -13000,7 +12903,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on('-', function (tag) {
       if (parser.skipEventFlag) {
@@ -13024,7 +12926,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13081,7 +12982,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13124,7 +13024,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13178,7 +13077,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     }).on('-', function (tag) {
       if (parser.skipEventFlag) {
@@ -13202,7 +13100,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13245,7 +13142,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13287,7 +13183,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13368,7 +13263,6 @@
       // params
       textPlayer // scope
       );
-
       parser.skipEvent();
     });
   };
@@ -13645,7 +13539,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TextPlayer = /*#__PURE__*/function (_Extend) {
     _inherits(TextPlayer, _Extend);
-    var _super = _createSuper(TextPlayer);
     function TextPlayer(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, TextPlayer);
@@ -13661,7 +13554,7 @@
       // Don't set text in DynamicText's constructor
       var content = config.text;
       delete config.text;
-      _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
+      _this = _callSuper(this, TextPlayer, [scene, x, y, fixedWidth, fixedHeight, config]);
       _this.type = 'rexTextPlayer';
       _this.initManagers(scene, config);
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue(config, 'parser', undefined));

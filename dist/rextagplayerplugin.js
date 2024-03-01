@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextagplayerplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -151,27 +151,12 @@
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -2205,7 +2190,6 @@
         // yoyo
         onComplete // onComplete
         );
-
         bob.getTweenTask(propertyName).once('complete', function () {
           gameObject[propertyName] = null;
         });
@@ -2275,7 +2259,6 @@
         }
       }
     });
-
     Object.defineProperty(gameObject, 'tintR', {
       get: function get() {
         return tintR;
@@ -3056,7 +3039,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -3065,7 +3047,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -3089,7 +3070,6 @@
   var GetValue$i = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
-    var _super = _createSuper(LayerManager);
     function LayerManager(scene, config) {
       var _this;
       _classCallCheck(this, LayerManager);
@@ -3104,7 +3084,7 @@
         config.fade = 0;
       }
       config.viewportCoordinate = false;
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, LayerManager, [scene, config]);
       var initLayers = GetValue$i(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -3318,7 +3298,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -3357,11 +3336,10 @@
   var GetValue$g = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -3485,11 +3463,10 @@
   var GetValue$f = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -3732,11 +3709,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer$1();
       // boot() later 
       return _this;
@@ -3784,10 +3760,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -3928,7 +3903,6 @@
   var Linear = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
-    var _super = _createSuper(Fade);
     function Fade(scene, sound, config) {
       var _this;
       _classCallCheck(this, Fade);
@@ -3940,7 +3914,7 @@
       sound.active = true;
       sound.scene = scene;
       sound.game = sound.manager.game;
-      _this = _super.call(this, sound, config);
+      _this = _callSuper(this, Fade, [sound, config]);
       // this.parent = parent
       // this.timer
 
@@ -4779,11 +4753,10 @@
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
-    var _super = _createSuper(BaseClock);
     function BaseClock(parent, config) {
       var _this;
       _classCallCheck(this, BaseClock);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, BaseClock, [parent, config]);
       _this.resetFromJSON(config);
       _this.boot();
       return _this;
@@ -4850,10 +4823,9 @@
 
   var Clock = /*#__PURE__*/function (_BaseClock) {
     _inherits(Clock, _BaseClock);
-    var _super = _createSuper(Clock);
     function Clock() {
       _classCallCheck(this, Clock);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Clock, arguments);
     }
     _createClass(Clock, [{
       key: "startTicking",
@@ -5067,10 +5039,9 @@
 
   var TimerPool$1 = /*#__PURE__*/function (_Pool) {
     _inherits(TimerPool, _Pool);
-    var _super = _createSuper(TimerPool);
     function TimerPool() {
       _classCallCheck(this, TimerPool);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TimerPool, arguments);
     }
     _createClass(TimerPool, [{
       key: "allocate",
@@ -5099,11 +5070,10 @@
   var TimerPool = new TimerPool$1();
   var Timeline = /*#__PURE__*/function (_Clock) {
     _inherits(Timeline, _Clock);
-    var _super = _createSuper(Timeline);
     function Timeline(parent, config) {
       var _this;
       _classCallCheck(this, Timeline);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, Timeline, [parent, config]);
       _this.addedTimers = [];
       _this.timers = [];
       _this.timerPool = GetValue$5(config, 'pool', TimerPool);
@@ -5211,7 +5181,6 @@
             pendingTimers.push(timer); // Add to timer queue
           }
         }
-
         this.timers = pendingTimers;
         if (this.timers.length === 0 && this.addedTimers.length === 0) {
           this.complete(); // Emit 'complete' event
@@ -5649,11 +5618,10 @@
 
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
-    var _super = _createSuper(WaitEventManager);
     function WaitEventManager(parent, config) {
       var _this;
       _classCallCheck(this, WaitEventManager);
-      _this = _super.call(this, parent);
+      _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$4(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$4(config, 'clickTarget', _this.scene));
       _this.setCameraTarget(GetValue$4(config, 'camera', _this.scene.cameras.main));
@@ -5885,10 +5853,9 @@
   var Extend = function Extend(BaseClass) {
     var Managers = /*#__PURE__*/function (_BaseClass) {
       _inherits(Managers, _BaseClass);
-      var _super = _createSuper(Managers);
       function Managers() {
         _classCallCheck(this, Managers);
-        return _super.apply(this, arguments);
+        return _callSuper(this, Managers, arguments);
       }
       return _createClass(Managers);
     }(BaseClass);
@@ -6216,7 +6183,6 @@
 
   var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
     _inherits(BracketParser, _BracketParserBase);
-    var _super = _createSuper(BracketParser);
     function BracketParser(config) {
       var _this;
       _classCallCheck(this, BracketParser);
@@ -6226,7 +6192,7 @@
       if (!config.hasOwnProperty('multipleLinesTag')) {
         config.multipleLinesTag = false;
       }
-      _this = _super.call(this, config);
+      _this = _callSuper(this, BracketParser, [config]);
 
       // Parameters for regex
       _this.setTagExpression(GetValue$4(config, 'regex.tag', undefined));
@@ -6738,7 +6704,6 @@
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Parser = /*#__PURE__*/function (_BracketParser) {
     _inherits(Parser, _BracketParser);
-    var _super = _createSuper(Parser);
     function Parser(tagPlayer, config) {
       var _this;
       _classCallCheck(this, Parser);
@@ -6748,7 +6713,7 @@
       if (!config.hasOwnProperty('delimiters')) {
         config.delimiters = '[]';
       }
-      _this = _super.call(this, config);
+      _this = _callSuper(this, Parser, [config]);
       AddParseCallbacks(tagPlayer, _assertThisInitialized(_this), config);
       _this.setCommentLineStartSymbol(GetValue$2(config, 'comment', '//'));
       return _this;
@@ -6771,10 +6736,9 @@
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
-    var _super = _createSuper(SpriteBob);
     function SpriteBob() {
       _classCallCheck(this, SpriteBob);
-      return _super.apply(this, arguments);
+      return _callSuper(this, SpriteBob, arguments);
     }
     _createClass(SpriteBob, [{
       key: "playAnimation",
@@ -6850,14 +6814,13 @@
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
-    var _super = _createSuper(SpriteManager);
     function SpriteManager(scene, config) {
       _classCallCheck(this, SpriteManager);
       if (config === undefined) {
         config = {};
       }
       config.BobClass = SpriteBob;
-      return _super.call(this, scene, config);
+      return _callSuper(this, SpriteManager, [scene, config]);
     }
     _createClass(SpriteManager, [{
       key: "setCreateGameObjectCallback",
@@ -7104,11 +7067,10 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var TextTyping = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextTyping, _ComponentBase);
-    var _super = _createSuper(TextTyping);
     function TextTyping(gameObject, config) {
       var _this;
       _classCallCheck(this, TextTyping);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, TextTyping, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.timer = null;
@@ -7437,10 +7399,9 @@
   var IsTyping = false;
   var TextBob = /*#__PURE__*/function (_BobBase) {
     _inherits(TextBob, _BobBase);
-    var _super = _createSuper(TextBob);
     function TextBob() {
       _classCallCheck(this, TextBob);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TextBob, arguments);
     }
     _createClass(TextBob, [{
       key: "setGO",
@@ -7552,14 +7513,13 @@
 
   var TextManager = /*#__PURE__*/function (_GOManager) {
     _inherits(TextManager, _GOManager);
-    var _super = _createSuper(TextManager);
     function TextManager(scene, config) {
       _classCallCheck(this, TextManager);
       if (config === undefined) {
         config = {};
       }
       config.BobClass = TextBob;
-      return _super.call(this, scene, config);
+      return _callSuper(this, TextManager, [scene, config]);
     }
     _createClass(TextManager, [{
       key: "setCreateGameObjectCallback",
@@ -8116,14 +8076,13 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TagPlayer = /*#__PURE__*/function (_Extend) {
     _inherits(TagPlayer, _Extend);
-    var _super = _createSuper(TagPlayer);
     function TagPlayer(scene, config) {
       var _this;
       _classCallCheck(this, TagPlayer);
       if (config === undefined) {
         config = {};
       }
-      _this = _super.call(this);
+      _this = _callSuper(this, TagPlayer);
       _this.scene = scene;
       _this.initManagers(scene, config);
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue(config, 'parser', undefined));
@@ -8187,10 +8146,9 @@
 
   var TagPlayerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(TagPlayerPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(TagPlayerPlugin);
     function TagPlayerPlugin(pluginManager) {
       _classCallCheck(this, TagPlayerPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, TagPlayerPlugin, [pluginManager]);
     }
     _createClass(TagPlayerPlugin, [{
       key: "start",

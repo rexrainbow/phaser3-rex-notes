@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexarcadetcrpplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,27 +126,12 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -315,7 +300,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -354,11 +338,10 @@
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -482,11 +465,10 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
-    var _super = _createSuper(BaseClock);
     function BaseClock(parent, config) {
       var _this;
       _classCallCheck(this, BaseClock);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, BaseClock, [parent, config]);
       _this.resetFromJSON(config);
       _this.boot();
       return _this;
@@ -553,10 +535,9 @@
 
   var Clock = /*#__PURE__*/function (_BaseClock) {
     _inherits(Clock, _BaseClock);
-    var _super = _createSuper(Clock);
     function Clock() {
       _classCallCheck(this, Clock);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Clock, arguments);
     }
     _createClass(Clock, [{
       key: "startTicking",
@@ -629,11 +610,10 @@
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Recorder$2 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Recorder, _ComponentBase);
-    var _super = _createSuper(Recorder);
     function Recorder(parent, config) {
       var _this;
       _classCallCheck(this, Recorder);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, Recorder, [parent, config]);
       var clock = GetValue$2(config, 'clock', undefined);
       if (!clock) {
         clock = new Clock(parent);
@@ -766,10 +746,9 @@
 
   var ArcadeStepClock = /*#__PURE__*/function (_BaseClock) {
     _inherits(ArcadeStepClock, _BaseClock);
-    var _super = _createSuper(ArcadeStepClock);
     function ArcadeStepClock() {
       _classCallCheck(this, ArcadeStepClock);
-      return _super.apply(this, arguments);
+      return _callSuper(this, ArcadeStepClock, arguments);
     }
     _createClass(ArcadeStepClock, [{
       key: "startTicking",
@@ -802,14 +781,13 @@
 
   var Recorder$1 = /*#__PURE__*/function (_BaseRecorder) {
     _inherits(Recorder, _BaseRecorder);
-    var _super = _createSuper(Recorder);
     function Recorder(parent, config) {
       _classCallCheck(this, Recorder);
       if (config === undefined) {
         config = {};
       }
       config.clock = new ArcadeStepClock(parent);
-      return _super.call(this, parent, config);
+      return _callSuper(this, Recorder, [parent, config]);
     }
     return _createClass(Recorder);
   }(Recorder$2);
@@ -967,11 +945,10 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Player$2 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Player, _ComponentBase);
-    var _super = _createSuper(Player);
     function Player(parent, config) {
       var _this;
       _classCallCheck(this, Player);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, Player, [parent, config]);
       var clock = GetValue(config, 'clock', undefined);
       if (!clock) {
         clock = new Clock(parent);
@@ -1243,7 +1220,6 @@
 
   var Player$1 = /*#__PURE__*/function (_BasePlayer) {
     _inherits(Player, _BasePlayer);
-    var _super = _createSuper(Player);
     function Player(parent, config) {
       _classCallCheck(this, Player);
       if (config === undefined) {
@@ -1252,7 +1228,7 @@
       config.clock = new ArcadeStepClock(parent);
       config.timeUnit = 0; // Force timeUnit to 0
       config.dtMode = 0; // Force dtMode to 0
-      return _super.call(this, parent, config);
+      return _callSuper(this, Player, [parent, config]);
     }
     _createClass(Player, [{
       key: "load",
@@ -1267,13 +1243,12 @@
 
   var StepRunner$1 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(StepRunner, _ComponentBase);
-    var _super = _createSuper(StepRunner);
     function StepRunner(parent) {
       var _this;
       _classCallCheck(this, StepRunner);
-      _this = _super.call(this, parent, {
+      _this = _callSuper(this, StepRunner, [parent, {
         eventEmitter: false
-      });
+      }]);
       // this.parent = gameObject;
 
       _this.commands = [];
@@ -1332,10 +1307,9 @@
   var StepRunner = TCRP.StepRunner;
   var ArcadeTCRPPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ArcadeTCRPPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(ArcadeTCRPPlugin);
     function ArcadeTCRPPlugin(pluginManager) {
       _classCallCheck(this, ArcadeTCRPPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, ArcadeTCRPPlugin, [pluginManager]);
     }
     _createClass(ArcadeTCRPPlugin, [{
       key: "start",

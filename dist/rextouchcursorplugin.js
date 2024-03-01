@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextouchcursorplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -69,17 +94,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -93,20 +107,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -168,20 +168,6 @@
       throw new TypeError('failed to set property');
     }
     return value;
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var Key = Phaser.Input.Keyboard.Key;
@@ -392,11 +378,10 @@
   var GetAngle = Phaser.Math.Angle.Between;
   var VectorToCursorKeys = /*#__PURE__*/function (_CursorKeys) {
     _inherits(VectorToCursorKeys, _CursorKeys);
-    var _super = _createSuper(VectorToCursorKeys);
     function VectorToCursorKeys(scene, config) {
       var _this;
       _classCallCheck(this, VectorToCursorKeys);
-      _this = _super.call(this, scene);
+      _this = _callSuper(this, VectorToCursorKeys, [scene]);
       _this.resetFromJSON(config);
       return _this;
     }
@@ -588,7 +573,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -680,12 +664,11 @@
   var CircleContains = Phaser.Geom.Circle.Contains;
   var TouchCursor = /*#__PURE__*/function (_VectorToCursorKeys) {
     _inherits(TouchCursor, _VectorToCursorKeys);
-    var _super = _createSuper(TouchCursor);
     function TouchCursor(gameObject, config) {
       var _this;
       _classCallCheck(this, TouchCursor);
       var scene = gameObject.scene;
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, TouchCursor, [scene, config]);
       //this.resetFromJSON(config); // this function had been called in super(config)
 
       // Event emitter
@@ -759,7 +742,6 @@
         if (!e) {
           this.pointer = undefined; // Release pointer
         }
-
         _set(_getPrototypeOf(TouchCursor.prototype), "enable", e, this, true);
         return this;
       }
@@ -846,10 +828,9 @@
 
   var TouchCursorPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(TouchCursorPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(TouchCursorPlugin);
     function TouchCursorPlugin(pluginManager) {
       _classCallCheck(this, TouchCursorPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, TouchCursorPlugin, [pluginManager]);
     }
     _createClass(TouchCursorPlugin, [{
       key: "start",

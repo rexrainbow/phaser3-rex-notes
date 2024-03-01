@@ -1,14 +1,15 @@
 ## Introduction
 
-Clamp game object inside target bounds.
+Clamp or wrap position of game object inside target bounds.
 
 - Author: Rex
-- Arcade behavior of game object
+- Behavior of game object
 
 ## Live demos
 
 - [Drag inside bounds](https://codepen.io/rexrainbow/pen/ExEKNaO)
 - [Target bounds](https://codepen.io/rexrainbow/pen/oNqxYRL)
+- [Wrap bounds]()
 
 ## Usage
 
@@ -78,6 +79,15 @@ var bounds = scene.plugins.get('rexBounds').add(gameObject, {
     // target: undefined,
     // bounds: undefined,
     // enable: true,
+
+    // boundsHitMode: 'clamp',  // 'clamp', or 'wrap'
+    // boundsHitMode: {
+    //     left: 'clamp',
+    //     right: 'clamp',
+    //     top: 'clamp',
+    //     bottom: 'clamp' 
+    // },
+
     // alignMode: 0
 });
 ```
@@ -98,9 +108,9 @@ var bounds = scene.plugins.get('rexBounds').add(gameObject, {
         - `width`, `height` : Size of target bounds.
         - `x`, `y`, or `centerX`, `centerY` : Position of target bounds.
 - `enable` :
-    - `true` : Clamp game object at left/right/top/bottom bounds.
-    - `false` : Don't clamp game object at any bound
-    - An objecct : Set `true` to clamp at a bound 
+    - `true` : Clamp or wrap game object's position when game object overlap left/right/top/bottom bounds.
+    - `false` : Don't clamp or wrap game object's position at any bound
+    - An objecct : Set `true` to clamp or wrap game object's position at a bound 
         ```javascript
         {
             left: true,
@@ -109,9 +119,21 @@ var bounds = scene.plugins.get('rexBounds').add(gameObject, {
             bottom: true
         }
         ```
+- `boundsHitMode` : Position mode when game object overlap bounds
+    - `0`, or `'clamp'` : Clamp game object's position when game object overlap left/right/top/bottom bounds.
+    - `1`, or `'wrap'` : Wrap game object's position when game object overlap left/right/top/bottom bounds.
+    - An objecct : Set `0`/`'clamp'`, or `1`/`'wrap'` to clamp or wrap game object's position at a bound 
+        ```javascript
+        {
+            left: 0,   // 0,'clamp',1,'wrap'
+            right: 0,  // 0,'clamp',1,'wrap'
+            top: 0,    // 0,'clamp',1,'wrap'
+            bottom: 0  // 0,'clamp',1,'wrap'
+        }
+        ```
 - `alignMode` : 
-    - `0`, or `'bounds'` : Align bounds of game object to target bound. Default behavior.
-    - `1`, or `'origin'` : Set position of game object to target bound.
+    - `0`, or `'bounds'` : Align bounds of game object to target bound. Default behavior if `boundsHitMode` are all set to *clamp* mode. 
+    - `1`, or `'origin'` : Set position of game object to target bound. Default behavior if `boundsHitMode` has *wrap* mode.
 
 ### Target game object
 
@@ -187,6 +209,31 @@ var bounds = scene.plugins.get('rexBounds').add(gameObject, {
     var enableRightBound = bounds.boundsEnable.right;
     var enableTopBound = bounds.boundsEnable.top;
     var enableBottomBound = bounds.boundsEnable.bottom;
+    ```
+
+### Bound hit mode
+
+- Set
+    ```javascript
+    bounds.setBoundsHitMode(mode);
+    ```
+    - `0`, or `'clamp'` : Clamp game object's position when game object overlap left/right/top/bottom bounds.
+    - `1`, or `'wrap'` : Wrap game object's position when game object overlap left/right/top/bottom bounds.
+    - An objecct : Set `0`/`'clamp'`, or `1`/`'wrap'` to clamp or wrap game object's position at a bound 
+        ```javascript
+        {
+            left: 0,   // 0,'clamp',1,'wrap'
+            right: 0,  // 0,'clamp',1,'wrap'
+            top: 0,    // 0,'clamp',1,'wrap'
+            bottom: 0  // 0,'clamp',1,'wrap'
+        }
+        ```
+- Get
+    ```javascript
+    var leftBoundHitMode = bounds.boundsHitMode.left;
+    var rightBoundHitMode = bounds.boundsHitMode.right;
+    var topBoundHitMode = bounds.boundsHitMode.top;
+    var bottomBoundHitMode = bounds.boundsHitMode.bottom;
     ```
 
 ### Align mond

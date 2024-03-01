@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrestorabledataplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,20 +126,6 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var Clear = function Clear(obj) {
     if (_typeof(obj) !== 'object' || obj === null) {
@@ -160,7 +146,6 @@
   var EventEmitterClass = Phaser.Events.EventEmitter;
   var DataManager = /*#__PURE__*/function (_Base) {
     _inherits(DataManager, _Base);
-    var _super = _createSuper(DataManager);
     function DataManager(parent, eventEmitter, config) {
       var _this;
       _classCallCheck(this, DataManager);
@@ -168,7 +153,7 @@
       if (useDefaultEventEmitter) {
         eventEmitter = new EventEmitterClass();
       }
-      _this = _super.call(this, parent, eventEmitter);
+      _this = _callSuper(this, DataManager, [parent, eventEmitter]);
       if (useDefaultEventEmitter) {
         var parentEventEmitter = parent.events ? parent.events : parent;
         if (parentEventEmitter) {
@@ -370,10 +355,9 @@
 
   var DataManagerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DataManagerPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(DataManagerPlugin);
     function DataManagerPlugin(pluginManager) {
       _classCallCheck(this, DataManagerPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, DataManagerPlugin, [pluginManager]);
     }
     _createClass(DataManagerPlugin, [{
       key: "start",

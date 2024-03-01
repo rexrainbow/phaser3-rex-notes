@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlive2dplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -178,20 +178,6 @@
     }
     return value;
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var MinVersion = 60;
   var IsChecked = false;
@@ -212,10 +198,9 @@
   CheckP3Version();
   var Live2dGameObjectBase = /*#__PURE__*/function (_Phaser$GameObjects$G) {
     _inherits(Live2dGameObjectBase, _Phaser$GameObjects$G);
-    var _super = _createSuper(Live2dGameObjectBase);
     function Live2dGameObjectBase() {
       _classCallCheck(this, Live2dGameObjectBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Live2dGameObjectBase, arguments);
     }
     return _createClass(Live2dGameObjectBase);
   }(Phaser.GameObjects.GameObject);
@@ -2362,7 +2347,7 @@
    * Framework内で使う定数の宣言
    */
   var Constant = Object.freeze({
-      vertexOffset: 0,
+      vertexOffset: 0, // メッシュ頂点のオフセット値
       vertexStep: 2 // メッシュ頂点のステップ値
   });
   function csmDelete(address) {
@@ -9963,10 +9948,9 @@
 
   var ViewMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(ViewMatrix, _CubismMatrix);
-    var _super = _createSuper(ViewMatrix);
     function ViewMatrix() {
       _classCallCheck(this, ViewMatrix);
-      return _super.apply(this, arguments);
+      return _callSuper(this, ViewMatrix, arguments);
     }
     _createClass(ViewMatrix, [{
       key: "copyFrom",
@@ -10025,11 +10009,10 @@
 
   var CanvasMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(CanvasMatrix, _CubismMatrix);
-    var _super = _createSuper(CanvasMatrix);
     function CanvasMatrix() {
       var _this;
       _classCallCheck(this, CanvasMatrix);
-      _this = _super.call(this);
+      _this = _callSuper(this, CanvasMatrix);
       _this.setSize(0, 0);
       return _this;
     }
@@ -10773,11 +10756,10 @@
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
     _inherits(Model, _CubismUserModel);
-    var _super = _createSuper(Model);
     function Model(parent) {
       var _this;
       _classCallCheck(this, Model);
-      _this = _super.call(this);
+      _this = _callSuper(this, Model);
 
       // Initialize Live2d framework, and get shared resources
       _this._globalData = GlobalData.getInstance(parent);
@@ -10824,7 +10806,6 @@
       this.model.release(); // Release old model        
       this.model = new Model(this); // Create new model
     }
-
     this.key = key;
     this.model.setup(data);
     this.setSize(this.model._pixelWidth, this.model._pixelHeight);
@@ -11116,11 +11097,10 @@
 
   var Live2dGameObject = /*#__PURE__*/function (_Live2dGameObjectBase) {
     _inherits(Live2dGameObject, _Live2dGameObjectBase);
-    var _super = _createSuper(Live2dGameObject);
     function Live2dGameObject(scene, x, y, key, config) {
       var _this;
       _classCallCheck(this, Live2dGameObject);
-      _this = _super.call(this, scene, 'rexLive2d');
+      _this = _callSuper(this, Live2dGameObject, [scene, 'rexLive2d']);
       _this.model = new Model(_assertThisInitialized(_this));
       _this.setModel(key, config);
       _this.setOrigin(0.5);
@@ -11210,7 +11190,6 @@
   var UUID = Phaser.Utils.String.UUID;
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(AwaitFile, _Phaser$Loader$File);
-    var _super = _createSuper(AwaitFile);
     function AwaitFile(loader, fileConfig) {
       _classCallCheck(this, AwaitFile);
       if (!fileConfig.hasOwnProperty('type')) {
@@ -11222,7 +11201,7 @@
       if (!fileConfig.hasOwnProperty('key')) {
         fileConfig.key = UUID();
       }
-      return _super.call(this, loader, fileConfig);
+      return _callSuper(this, AwaitFile, [loader, fileConfig]);
     }
     _createClass(AwaitFile, [{
       key: "load",
@@ -11333,7 +11312,6 @@
 
   var Live2dCoreScriptFile = /*#__PURE__*/function (_AwaitFile) {
     _inherits(Live2dCoreScriptFile, _AwaitFile);
-    var _super = _createSuper(Live2dCoreScriptFile);
     function Live2dCoreScriptFile(loader, url) {
       _classCallCheck(this, Live2dCoreScriptFile);
       if (url === undefined) {
@@ -11349,13 +11327,13 @@
       if (IsIdle) {
         SetState(LOADING);
       }
-      return _super.call(this, loader, {
+      return _callSuper(this, Live2dCoreScriptFile, [loader, {
         type: 'live2dcore',
         key: 'live2dcore',
         config: {
           callback: callback
         }
-      });
+      }]);
     }
     return _createClass(Live2dCoreScriptFile);
   }(AwaitFile);
@@ -12231,7 +12209,6 @@
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var Live2dFile = /*#__PURE__*/function (_Phaser$Loader$MultiF) {
     _inherits(Live2dFile, _Phaser$Loader$MultiF);
-    var _super = _createSuper(Live2dFile);
     function Live2dFile(loader, key, url, xhrSettings) {
       var _this;
       _classCallCheck(this, Live2dFile);
@@ -12245,7 +12222,7 @@
 
       // Load setting
       var settingFile = CreateBinaryFile(loader, key, url, xhrSettings, 'setting');
-      _this = _super.call(this, loader, 'live2d', key, [settingFile]);
+      _this = _callSuper(this, Live2dFile, [loader, 'live2d', key, [settingFile]]);
       _this.cache = cache;
       _this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
       return _this;
@@ -12347,11 +12324,10 @@
 
   var Live2dPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(Live2dPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(Live2dPlugin);
     function Live2dPlugin(pluginManager) {
       var _this;
       _classCallCheck(this, Live2dPlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, Live2dPlugin, [pluginManager]);
       var game = pluginManager.game;
       var isWebGL = game.config.renderType === 2;
       if (!isWebGL) {

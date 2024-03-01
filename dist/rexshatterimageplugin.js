@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexshatterimageplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,28 +126,13 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var Mesh = Phaser.GameObjects.Mesh;
   var MeshBase = /*#__PURE__*/function (_Mesh) {
     _inherits(MeshBase, _Mesh);
-    var _super = _createSuper(MeshBase);
     function MeshBase() {
       _classCallCheck(this, MeshBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, MeshBase, arguments);
     }
     _createClass(MeshBase, [{
       key: "tint",
@@ -508,11 +493,10 @@
   var RotateFace = Phaser.Geom.Mesh.RotateFace;
   var Face = /*#__PURE__*/function (_Base) {
     _inherits(Face, _Base);
-    var _super = _createSuper(Face);
     function Face(vertex1, vertex2, vertex3) {
       var _this;
       _classCallCheck(this, Face);
-      _this = _super.call(this, vertex1, vertex2, vertex3);
+      _this = _callSuper(this, Face, [vertex1, vertex2, vertex3]);
       _this._rotation = 0;
       return _this;
     }
@@ -600,7 +584,6 @@
   var DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
   var ShatterImage = /*#__PURE__*/function (_MeshBase) {
     _inherits(ShatterImage, _MeshBase);
-    var _super = _createSuper(ShatterImage);
     function ShatterImage(scene, x, y, key, frame, config) {
       var _this;
       _classCallCheck(this, ShatterImage);
@@ -611,7 +594,7 @@
         key = GetValue$1(config, 'key', null);
         frame = GetValue$1(config, 'frame', null);
       }
-      _this = _super.call(this, scene, x, y, key, frame);
+      _this = _callSuper(this, ShatterImage, [scene, x, y, key, frame]);
       _this.type = 'rexShatterImage';
       _this.hideCCW = false;
       _this.resetImage();
@@ -811,7 +794,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RenderTexture = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
-    var _super = _createSuper(RenderTexture);
     function RenderTexture(scene, x, y, width, height, config) {
       var _this;
       _classCallCheck(this, RenderTexture);
@@ -825,7 +807,7 @@
 
       // dynamic-texture -> quad-image
       var texture = CreateDynamicTexture(scene, width, height);
-      _this = _super.call(this, scene, x, y, texture, null, config);
+      _this = _callSuper(this, RenderTexture, [scene, x, y, texture, null, config]);
       _this.type = 'rexShatterRenderTexture';
       _this.rt = _this.texture;
       return _this;
@@ -932,11 +914,10 @@
 
   var ShatterImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ShatterImagePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(ShatterImagePlugin);
     function ShatterImagePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, ShatterImagePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, ShatterImagePlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexShatterImage', ShatterImageFactory, ShatterImageCreator);

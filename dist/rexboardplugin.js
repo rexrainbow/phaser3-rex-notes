@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexboardplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -202,20 +202,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var ObjectFactory = /*#__PURE__*/function () {
@@ -591,10 +577,9 @@
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
-    var _super = _createSuper(EventEmitter);
     function EventEmitter() {
       _classCallCheck(this, EventEmitter);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EventEmitter, arguments);
     }
     _createClass(EventEmitter, [{
       key: "shutdown",
@@ -773,7 +758,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -942,7 +926,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -1038,13 +1021,12 @@
   var uidKey$1 = ChessBank.uidKey;
   var Chess = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Chess, _ComponentBase);
-    var _super = _createSuper(Chess);
     function Chess(parent, uid) {
       var _this;
       _classCallCheck(this, Chess);
-      _this = _super.call(this, parent, {
+      _this = _callSuper(this, Chess, [parent, {
         eventEmitter: false
-      });
+      }]);
       // this.parent
 
       ChessBank.add(_assertThisInitialized(_this), uid); // uid is stored in `this.$uid`
@@ -1436,7 +1418,6 @@
     this.infinityMode = infinityModeSave;
     return this.angleBetween(tileXY, neighborTileXY); // -PI~PI
   };
-
   var zeroTileXY = {
     x: 0,
     y: 0
@@ -5407,7 +5388,6 @@
             }
           }
         }
-
         break;
     }
     if (direction === this.directions) {
@@ -5533,11 +5513,10 @@
 
   var QuadGrid = /*#__PURE__*/function (_Quad) {
     _inherits(QuadGrid, _Quad);
-    var _super = _createSuper(QuadGrid);
     function QuadGrid(config) {
       var _this;
       _classCallCheck(this, QuadGrid);
-      _this = _super.call(this, config);
+      _this = _callSuper(this, QuadGrid, [config]);
       _this.sides = 4;
       return _this;
     }
@@ -6415,11 +6394,10 @@
 
   var HexagonGrid = /*#__PURE__*/function (_Hexagon) {
     _inherits(HexagonGrid, _Hexagon);
-    var _super = _createSuper(HexagonGrid);
     function HexagonGrid(config) {
       var _this;
       _classCallCheck(this, HexagonGrid);
-      _this = _super.call(this, config);
+      _this = _callSuper(this, HexagonGrid, [config]);
       _this.sides = 6;
       return _this;
     }
@@ -6478,12 +6456,11 @@
 
   var Board$1 = /*#__PURE__*/function (_EE) {
     _inherits(Board, _EE);
-    var _super = _createSuper(Board);
     function Board(scene, config) {
       var _this;
       _classCallCheck(this, Board);
       // scene: scene instance, or undefined
-      _this = _super.call(this);
+      _this = _callSuper(this, Board);
       _this.isShutdown = false;
       _this.scene = scene;
       _this.boardData = new BoardData();
@@ -6607,11 +6584,10 @@
   var Zone$1 = Phaser.GameObjects.Zone;
   var TouchZone = /*#__PURE__*/function (_Zone) {
     _inherits(TouchZone, _Zone);
-    var _super = _createSuper(TouchZone);
     function TouchZone(scene) {
       var _this;
       _classCallCheck(this, TouchZone);
-      _this = _super.call(this, scene, 0, 0, 1, 1);
+      _this = _callSuper(this, TouchZone, [scene, 0, 0, 1, 1]);
       scene.add.existing(_assertThisInitialized(_this)); // Add to scene
       _this.setScrollFactor(0);
       _this.setInteractive({
@@ -6795,11 +6771,10 @@
   var GetValue$a = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -6923,7 +6898,6 @@
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
-    var _super = _createSuper(OnePointerTracer);
     function OnePointerTracer(gameObject, config) {
       var _this;
       _classCallCheck(this, OnePointerTracer);
@@ -6931,7 +6905,7 @@
       if (scene === gameObject) {
         gameObject = undefined;
       }
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, OnePointerTracer, [scene, config]);
       _this.gameObject = gameObject;
       if (gameObject) {
         gameObject.setInteractive(GetValue$9(config, 'inputConfig', undefined));
@@ -7508,10 +7482,9 @@
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-    var _super = _createSuper(FSM);
     function FSM() {
       _classCallCheck(this, FSM);
-      return _super.apply(this, arguments);
+      return _callSuper(this, FSM, arguments);
     }
     _createClass(FSM, [{
       key: "shutdown",
@@ -7652,11 +7625,10 @@
   var DistanceBetween$2 = Phaser.Math.Distance.Between;
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Tap, _OnePointerTracer);
-    var _super = _createSuper(Tap);
     function Tap(gameObject, config) {
       var _this;
       _classCallCheck(this, Tap);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Tap, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -7886,11 +7858,10 @@
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var Press = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Press, _OnePointerTracer);
-    var _super = _createSuper(Press);
     function Press(gameObject, config) {
       var _this;
       _classCallCheck(this, Press);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Press, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -8153,11 +8124,10 @@
   var RadToDeg$1 = Phaser.Math.RadToDeg;
   var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Swipe, _OnePointerTracer);
-    var _super = _createSuper(Swipe);
     function Swipe(gameObject, config) {
       var _this;
       _classCallCheck(this, Swipe);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Swipe, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -8267,7 +8237,6 @@
             break;
           // 4 dir, 8 dir
         }
-
         return velocity;
       }
     }, {
@@ -8474,10 +8443,9 @@
 
   var Board = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
-    var _super = _createSuper(Board);
     function Board() {
       _classCallCheck(this, Board);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Board, arguments);
     }
     _createClass(Board, [{
       key: "touchZone",
@@ -8583,7 +8551,6 @@
   var Base$1 = Phaser.GameObjects.Polygon;
   var Shape = /*#__PURE__*/function (_Base) {
     _inherits(Shape, _Base);
-    var _super = _createSuper(Shape);
     function Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
       var _this;
       _classCallCheck(this, Shape);
@@ -8609,7 +8576,7 @@
       }
       var points = board.getGridPoints(undefined, undefined, true);
       ShiftToO(points);
-      _this = _super.call(this, scene, worldX, worldY, points, fillColor, fillAlpha);
+      _this = _callSuper(this, Shape, [scene, worldX, worldY, points, fillColor, fillAlpha]);
       if (addToBoard) {
         if (isMiniBoard) {
           // Chess-Container
@@ -8654,11 +8621,10 @@
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -9069,11 +9035,10 @@
   var AngleBetween = Phaser.Math.Angle.Between;
   var MoveTo$2 = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-    var _super = _createSuper(MoveTo);
     function MoveTo(gameObject, config) {
       var _this;
       _classCallCheck(this, MoveTo);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, MoveTo, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.resetFromJSON(config);
@@ -9210,11 +9175,10 @@
 
   var MoveTo$1 = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-    var _super = _createSuper(MoveTo);
     function MoveTo(gameObject, config) {
       var _this;
       _classCallCheck(this, MoveTo);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, MoveTo, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.chessData = GetChessData(gameObject);
@@ -9567,11 +9531,10 @@
 
   var MoveTo = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-    var _super = _createSuper(MoveTo);
     function MoveTo(miniBoard, config) {
       var _this;
       _classCallCheck(this, MoveTo);
-      _this = _super.call(this, miniBoard, config);
+      _this = _callSuper(this, MoveTo, [miniBoard, config]);
       // this.parent = miniBoard;
 
       _this.moveToTask = new MoveTo$2(miniBoard, {
@@ -10851,7 +10814,6 @@
   var INFINITY$3 = CONST$2.INFINITY;
   var PathFinder = /*#__PURE__*/function (_ComponentBase) {
     _inherits(PathFinder, _ComponentBase);
-    var _super = _createSuper(PathFinder);
     function PathFinder(gameObject, config) {
       var _this;
       _classCallCheck(this, PathFinder);
@@ -10859,9 +10821,9 @@
         config = gameObject;
         gameObject = undefined;
       }
-      _this = _super.call(this, gameObject, {
+      _this = _callSuper(this, PathFinder, [gameObject, {
         eventEmitter: false
-      });
+      }]);
       _this.setChess(gameObject);
       _this.nodeManager = undefined;
       _this.resetFromJSON(config);
@@ -11312,7 +11274,6 @@
   var INFINITY = CONST$1.INFINITY;
   var FieldOfView = /*#__PURE__*/function (_ComponentBase) {
     _inherits(FieldOfView, _ComponentBase);
-    var _super = _createSuper(FieldOfView);
     function FieldOfView(gameObject, config) {
       var _this;
       _classCallCheck(this, FieldOfView);
@@ -11320,9 +11281,9 @@
         config = gameObject;
         gameObject = undefined;
       }
-      _this = _super.call(this, gameObject, {
+      _this = _callSuper(this, FieldOfView, [gameObject, {
         eventEmitter: false
-      });
+      }]);
       // No event emitter
       // this.parent = gameObject;
 
@@ -11698,13 +11659,12 @@
   var STOP = CONST.STOP;
   var Monopoly = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Monopoly, _ComponentBase);
-    var _super = _createSuper(Monopoly);
     function Monopoly(gameObject, config) {
       var _this;
       _classCallCheck(this, Monopoly);
-      _this = _super.call(this, gameObject, {
+      _this = _callSuper(this, Monopoly, [gameObject, {
         eventEmitter: false
-      });
+      }]);
       // No event emitter
       // this.parent = gameObject;
 
@@ -11820,7 +11780,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Base);
@@ -11836,7 +11795,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, Base, [scene, x, y, width, height]);
       _this.children = [];
       return _this;
     }
@@ -12628,7 +12587,6 @@
           // Set child's maskVisible to `true`
         }
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -12653,7 +12611,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -12662,7 +12619,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -12848,7 +12804,6 @@
         }
         // Copy children
       }
-
       return out;
     },
     getAllChildren: function getAllChildren(out) {
@@ -13073,7 +13028,6 @@
       // At scene's displayList or at a layer
       !!gameObject.parentContainer; // At a container
     });
-
     return children;
   };
   var AddToContainer = function AddToContainer(p3Container) {
@@ -13691,7 +13645,6 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-    var _super = _createSuper(ContainerLite);
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
       _classCallCheck(this, ContainerLite);
@@ -13700,7 +13653,7 @@
         width = undefined;
         height = undefined;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, ContainerLite, [scene, x, y, width, height]);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
       _this.syncChildrenEnable = true;
@@ -13999,7 +13952,6 @@
     if (chessTileXYMap === undefined) {
       chessTileXYMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
-
     var chessTileXYZ, mappedTileXY, isOccupied;
     for (var uid in chessTileXYMap) {
       chessTileXYZ = chessTileXYMap[uid];
@@ -14290,7 +14242,6 @@
       }
     }
   };
-
   var OnDrag = function OnDrag(pointer) {
     var dragData = this.input.drag;
     // Not dragging
@@ -14364,7 +14315,6 @@
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
-
     if (out === undefined) {
       out = {};
     }
@@ -14377,7 +14327,6 @@
     }
     return out; // {uid:{x,y,z}}
   };
-
   var MODE = {
     x: 1,
     y: 2,
@@ -14432,7 +14381,6 @@
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
-
     if (out === undefined) {
       out = {};
     }
@@ -14497,7 +14445,6 @@
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
@@ -14535,7 +14482,6 @@
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
-
     if (out === undefined) {
       out = {};
     }
@@ -14627,11 +14573,10 @@
 
   var MiniBoard = /*#__PURE__*/function (_Container) {
     _inherits(MiniBoard, _Container);
-    var _super = _createSuper(MiniBoard);
     function MiniBoard(scene, x, y, config) {
       var _this;
       _classCallCheck(this, MiniBoard);
-      _this = _super.call(this, scene, x, y, 0, 0);
+      _this = _callSuper(this, MiniBoard, [scene, x, y, 0, 0]);
       _this.type = 'rexMiniBoard';
       var boardConfig = {
         isBoard: false,
@@ -14826,7 +14771,6 @@
         } else {
           return style; // Not a valid input
         }
-
       default:
         return style;
     }
@@ -15053,11 +14997,10 @@
 
   var BoardPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(BoardPlugin, _Phaser$Plugins$Scene);
-    var _super = _createSuper(BoardPlugin);
     function BoardPlugin(scene, pluginManager) {
       var _this;
       _classCallCheck(this, BoardPlugin);
-      _this = _super.call(this, scene, pluginManager);
+      _this = _callSuper(this, BoardPlugin, [scene, pluginManager]);
       _this.add = new ObjectFactory(scene);
 
       // Helper functions

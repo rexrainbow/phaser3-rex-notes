@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextransitionimageplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -203,20 +203,6 @@
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var MinVersion = 60;
   var IsChecked = false;
@@ -240,7 +226,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Base);
@@ -256,7 +241,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, Base, [scene, x, y, width, height]);
       _this.children = [];
       return _this;
     }
@@ -1048,7 +1033,6 @@
           // Set child's maskVisible to `true`
         }
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -1073,7 +1057,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -1082,7 +1065,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -1268,7 +1250,6 @@
         }
         // Copy children
       }
-
       return out;
     },
     getAllChildren: function getAllChildren(out) {
@@ -1493,7 +1474,6 @@
       // At scene's displayList or at a layer
       !!gameObject.parentContainer; // At a container
     });
-
     return children;
   };
   var AddToContainer = function AddToContainer(p3Container) {
@@ -2151,7 +2131,6 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-    var _super = _createSuper(ContainerLite);
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
       _classCallCheck(this, ContainerLite);
@@ -2160,7 +2139,7 @@
         width = undefined;
         height = undefined;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, ContainerLite, [scene, x, y, width, height]);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
       _this.syncChildrenEnable = true;
@@ -2441,7 +2420,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -2610,7 +2588,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -2649,11 +2626,10 @@
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -2777,11 +2753,10 @@
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -3024,11 +2999,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer();
       // boot() later 
       return _this;
@@ -3076,10 +3050,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -3214,11 +3187,10 @@
   var Linear = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
-    var _super = _createSuper(EaseValueTask);
     function EaseValueTask(gameObject, config) {
       var _this;
       _classCallCheck(this, EaseValueTask);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, EaseValueTask, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -3400,7 +3372,6 @@
         // centerY
         radius + padding // radius
         );
-
         break;
       default:
         // 0|'rectangle'
@@ -3412,7 +3383,6 @@
         // width
         height + padding.top + padding.bottom // height
         );
-
         break;
     }
   };
@@ -3459,7 +3429,6 @@
   var Graphics = Phaser.GameObjects.Graphics;
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
-    var _super = _createSuper(DefaultMaskGraphics);
     function DefaultMaskGraphics(parent, shapeType, padding) {
       var _this;
       _classCallCheck(this, DefaultMaskGraphics);
@@ -3469,7 +3438,7 @@
       if (typeof shapeType === 'string') {
         shapeType = SHAPEMODE[shapeType];
       }
-      _this = _super.call(this, parent.scene);
+      _this = _callSuper(this, DefaultMaskGraphics, [parent.scene]);
       _this.parent = parent;
       _this.shapeType = shapeType;
       _this.padding = GetBoundsConfig(padding);
@@ -3864,7 +3833,6 @@
   var Clamp = Phaser.Math.Clamp;
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
-    var _super = _createSuper(TransitionImage);
     function TransitionImage(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, TransitionImage);
@@ -3888,7 +3856,7 @@
       }
       var width = GetValue(config, 'width', frontImage.width);
       var height = GetValue(config, 'height', frontImage.height);
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, TransitionImage, [scene, x, y, width, height]);
       _this.type = 'rexTransitionImage';
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
@@ -4160,11 +4128,10 @@
 
   var TransitionImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(TransitionImagePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(TransitionImagePlugin);
     function TransitionImagePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, TransitionImagePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, TransitionImagePlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexTransitionImage', Factory, Creator);

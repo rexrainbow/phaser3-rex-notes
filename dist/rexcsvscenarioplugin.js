@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcsvscenarioplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -89,41 +103,12 @@
     }
     return _assertThisInitialized(self);
   }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -503,11 +488,10 @@
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
   var CustomCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(CustomCmd, _BaseCmd);
-    var _super = _createSuper(CustomCmd);
     function CustomCmd(scenario) {
       var _this;
       _classCallCheck(this, CustomCmd);
-      _this = _super.call(this, scenario, '-');
+      _this = _callSuper(this, CustomCmd, [scenario, '-']);
       _this.task = undefined;
       _this.lastMethodName = undefined;
       return _this;
@@ -605,10 +589,9 @@
 
   var WaitCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(WaitCmd, _BaseCmd);
-    var _super = _createSuper(WaitCmd);
     function WaitCmd(scenario) {
       _classCallCheck(this, WaitCmd);
-      return _super.call(this, scenario, 'wait');
+      return _callSuper(this, WaitCmd, [scenario, 'wait']);
     }
     _createClass(WaitCmd, [{
       key: "parse",
@@ -669,11 +652,10 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var LabelCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(LabelCmd, _BaseCmd);
-    var _super = _createSuper(LabelCmd);
     function LabelCmd(scenario) {
       var _this;
       _classCallCheck(this, LabelCmd);
-      _this = _super.call(this, scenario, 'label');
+      _this = _callSuper(this, LabelCmd, [scenario, 'label']);
       _this.labels = {};
       _this.prevLabel = '';
       _this.lastLabel = '';
@@ -755,10 +737,9 @@
 
   var ExitCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(ExitCmd, _BaseCmd);
-    var _super = _createSuper(ExitCmd);
     function ExitCmd(scenario) {
       _classCallCheck(this, ExitCmd);
-      return _super.call(this, scenario, 'exit');
+      return _callSuper(this, ExitCmd, [scenario, 'exit']);
     }
     _createClass(ExitCmd, [{
       key: "parse",
@@ -778,10 +759,9 @@
 
   var GotoCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(GotoCmd, _BaseCmd);
-    var _super = _createSuper(GotoCmd);
     function GotoCmd(scenario) {
       _classCallCheck(this, GotoCmd);
-      return _super.call(this, scenario, 'goto');
+      return _callSuper(this, GotoCmd, [scenario, 'goto']);
     }
     _createClass(GotoCmd, [{
       key: "parse",
@@ -814,10 +794,9 @@
 
   var IfCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(IfCmd, _BaseCmd);
-    var _super = _createSuper(IfCmd);
     function IfCmd(scenario) {
       _classCallCheck(this, IfCmd);
-      return _super.call(this, scenario, 'if');
+      return _callSuper(this, IfCmd, [scenario, 'if']);
     }
     _createClass(IfCmd, [{
       key: "parse",
@@ -1323,10 +1302,9 @@
 
   var CSVScenarioPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CSVScenarioPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(CSVScenarioPlugin);
     function CSVScenarioPlugin(pluginManager) {
       _classCallCheck(this, CSVScenarioPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, CSVScenarioPlugin, [pluginManager]);
     }
     _createClass(CSVScenarioPlugin, [{
       key: "start",

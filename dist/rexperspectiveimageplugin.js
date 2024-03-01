@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperspectiveimageplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -203,28 +203,13 @@
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var Mesh = Phaser.GameObjects.Mesh;
   var MeshBase = /*#__PURE__*/function (_Mesh) {
     _inherits(MeshBase, _Mesh);
-    var _super = _createSuper(MeshBase);
     function MeshBase() {
       _classCallCheck(this, MeshBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, MeshBase, arguments);
     }
     _createClass(MeshBase, [{
       key: "tint",
@@ -286,7 +271,6 @@
   var PanZ = 1 + 1 / Math.sin(DegToRad$6(FOV));
   var Image = /*#__PURE__*/function (_MeshBase) {
     _inherits(Image, _MeshBase);
-    var _super = _createSuper(Image);
     function Image(scene, x, y, key, frame, config) {
       var _this;
       _classCallCheck(this, Image);
@@ -297,7 +281,7 @@
         key = GetValue$h(config, 'key', null);
         frame = GetValue$h(config, 'frame', null);
       }
-      _this = _super.call(this, scene, x, y, key, frame);
+      _this = _callSuper(this, Image, [scene, x, y, key, frame]);
       _this.type = 'rexPerspectiveImage';
       _this.setSizeToFrame();
       _this.resetPerspective();
@@ -750,7 +734,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -759,7 +742,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -882,7 +864,6 @@
   var GetValue$f = Phaser.Utils.Objects.GetValue;
   var RenderTexture$1 = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
-    var _super = _createSuper(RenderTexture);
     function RenderTexture(scene, x, y, width, height, config) {
       var _this;
       _classCallCheck(this, RenderTexture);
@@ -896,7 +877,7 @@
 
       // dynamic-texture -> quad-image
       var texture = CreateDynamicTexture(scene, width, height);
-      _this = _super.call(this, scene, x, y, texture, null, config);
+      _this = _callSuper(this, RenderTexture, [scene, x, y, texture, null, config]);
       _this.type = 'rexPerspectiveRenderTexture';
       _this.rt = _this.texture;
       return _this;
@@ -959,7 +940,6 @@
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var Sprite = /*#__PURE__*/function (_PerspectiveImage) {
     _inherits(Sprite, _PerspectiveImage);
-    var _super = _createSuper(Sprite);
     function Sprite(scene, x, y, key, frame, config) {
       var _this;
       _classCallCheck(this, Sprite);
@@ -970,7 +950,7 @@
         key = GetValue$e(config, 'key', null);
         frame = GetValue$e(config, 'frame', null);
       }
-      _this = _super.call(this, scene, x, y, key, frame, config);
+      _this = _callSuper(this, Sprite, [scene, x, y, key, frame, config]);
       _this.type = 'rexPerspectiveSprite';
       _this.anims = new AnimationState(_assertThisInitialized(_this));
       return _this;
@@ -1081,7 +1061,6 @@
   var RemoveItem = Phaser.Utils.Array.Remove;
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Base);
@@ -1097,7 +1076,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, Base, [scene, x, y, width, height]);
       _this.children = [];
       return _this;
     }
@@ -1889,7 +1868,6 @@
           // Set child's maskVisible to `true`
         }
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -2062,7 +2040,6 @@
         }
         // Copy children
       }
-
       return out;
     },
     getAllChildren: function getAllChildren(out) {
@@ -2287,7 +2264,6 @@
       // At scene's displayList or at a layer
       !!gameObject.parentContainer; // At a container
     });
-
     return children;
   };
   var AddToContainer = function AddToContainer(p3Container) {
@@ -2621,7 +2597,6 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-    var _super = _createSuper(ContainerLite);
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
       _classCallCheck(this, ContainerLite);
@@ -2630,7 +2605,7 @@
         width = undefined;
         height = undefined;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, ContainerLite, [scene, x, y, width, height]);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
       _this.syncChildrenEnable = true;
@@ -2928,11 +2903,10 @@
   var DegToRad$3 = Phaser.Math.DegToRad;
   var FaceContainer = /*#__PURE__*/function (_Container) {
     _inherits(FaceContainer, _Container);
-    var _super = _createSuper(FaceContainer);
     function FaceContainer(scene, x, y, width, height, faces) {
       var _this;
       _classCallCheck(this, FaceContainer);
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, FaceContainer, [scene, x, y, width, height]);
       _this.faces = faces; // Face Dictionary, or array
 
       ForEachFace(faces, function (face) {
@@ -3159,7 +3133,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -3328,7 +3301,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -3367,11 +3339,10 @@
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -3495,11 +3466,10 @@
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -3742,11 +3712,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer();
       // boot() later 
       return _this;
@@ -3794,10 +3763,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -3932,11 +3900,10 @@
   var Linear$2 = Phaser.Math.Linear;
   var Flip = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Flip, _EaseValueTaskBase);
-    var _super = _createSuper(Flip);
     function Flip(gameObject, config) {
       var _this;
       _classCallCheck(this, Flip);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Flip, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -4062,7 +4029,6 @@
   var FaceNames = ['back', 'front'];
   var Card = /*#__PURE__*/function (_FaceContainer) {
     _inherits(Card, _FaceContainer);
-    var _super = _createSuper(Card);
     function Card(scene, x, y, config) {
       var _this;
       _classCallCheck(this, Card);
@@ -4088,7 +4054,7 @@
           height = Math.max(frontFaceHeight, backFaceHeight);
         }
       }
-      _this = _super.call(this, scene, x, y, width, height, faces);
+      _this = _callSuper(this, Card, [scene, x, y, width, height, faces]);
       _this.type = 'rexPerspectiveCard';
       _this.frontFaceRotationX = 0;
       _this.frontFaceRotationY = 0;
@@ -4242,11 +4208,10 @@
   var Linear$1 = Phaser.Math.Linear;
   var Roll$1 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Roll, _EaseValueTaskBase);
-    var _super = _createSuper(Roll);
     function Roll(gameObject, config) {
       var _this;
       _classCallCheck(this, Roll);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Roll, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -4373,7 +4338,6 @@
   var Wrap$1 = Phaser.Math.Wrap;
   var Carousel = /*#__PURE__*/function (_FaceContainer) {
     _inherits(Carousel, _FaceContainer);
-    var _super = _createSuper(Carousel);
     function Carousel(scene, x, y, config) {
       var _this;
       _classCallCheck(this, Carousel);
@@ -4396,7 +4360,7 @@
       if (height === undefined) {
         height = firstFace ? firstFace.height : 0;
       }
-      _this = _super.call(this, scene, x, y, width, height, faces);
+      _this = _callSuper(this, Carousel, [scene, x, y, width, height, faces]);
       _this.type = 'rexPerspectiveCarousel';
       _this.face0RotationY = undefined;
       var faceCount = faces.length;
@@ -4503,10 +4467,9 @@
 
   var Roll = /*#__PURE__*/function (_Base) {
     _inherits(Roll, _Base);
-    var _super = _createSuper(Roll);
     function Roll() {
       _classCallCheck(this, Roll);
-      return _super.apply(this, arguments);
+      return _callSuper(this, Roll, arguments);
     }
     _createClass(Roll, [{
       key: "toNext",
@@ -4571,7 +4534,6 @@
   var Wrap = Phaser.Math.Wrap;
   var ImageCarousel = /*#__PURE__*/function (_Carousel) {
     _inherits(ImageCarousel, _Carousel);
-    var _super = _createSuper(ImageCarousel);
     function ImageCarousel(scene, x, y, config) {
       var _this;
       _classCallCheck(this, ImageCarousel);
@@ -4605,7 +4567,7 @@
       }
       config.faces = faces;
       config.rollClass = Roll;
-      _this = _super.call(this, scene, x, y, config);
+      _this = _callSuper(this, ImageCarousel, [scene, x, y, config]);
       _this.type = 'rexPerspectiveImageCarousel';
       _this.images = images;
       _this.indexOffsetMap = GetIndexOffsetMap(faceCount);
@@ -4730,12 +4692,11 @@
   var MeshRenderTextureBase = function MeshRenderTextureBase(RenderTextureOwnerClass) {
     return /*#__PURE__*/function (_RenderTextureOwnerCl) {
       _inherits(Base, _RenderTextureOwnerCl);
-      var _super = _createSuper(Base);
       function Base(parentContainer, config) {
         var _this;
         _classCallCheck(this, Base);
         var scene = parentContainer.scene;
-        _this = _super.call(this, scene, 0, 0, 1, 1, config);
+        _this = _callSuper(this, Base, [scene, 0, 0, 1, 1, config]);
         scene.add.existing(_assertThisInitialized(_this));
         Init(parentContainer, _assertThisInitialized(_this), config);
         return _this;
@@ -4771,10 +4732,9 @@
 
   var ContainerPerspective = /*#__PURE__*/function (_MeshRenderTextureBas) {
     _inherits(ContainerPerspective, _MeshRenderTextureBas);
-    var _super = _createSuper(ContainerPerspective);
     function ContainerPerspective() {
       _classCallCheck(this, ContainerPerspective);
-      return _super.apply(this, arguments);
+      return _callSuper(this, ContainerPerspective, arguments);
     }
     _createClass(ContainerPerspective, [{
       key: "perspectiveState",
@@ -4848,11 +4808,10 @@
 
   var PerspectiveImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(PerspectiveImagePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(PerspectiveImagePlugin);
     function PerspectiveImagePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, PerspectiveImagePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, PerspectiveImagePlugin, [pluginManager]);
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexPerspectiveImage', PerspectiveImageFactory, PerspectiveImageCreator);

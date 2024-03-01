@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfirebase = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -127,20 +127,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var VERSION = '7.19.0';
@@ -363,7 +349,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -541,7 +526,6 @@
     if (message === undefined) {
       return this.sendToRef.remove(); // Promise
     }
-
     var d = {
       message: message,
       senderID: this.userID,
@@ -1160,7 +1144,6 @@
     if (!this.contains(userID)) {
       return Promise.resolve(); // Promise
     }
-
     var itemID = this.userID2ItemID[userID];
     var userRef = this.database.ref(this.rootPath).child(itemID);
     return userRef.remove(); // Promise
@@ -1713,7 +1696,6 @@
         } else {
           this.setChildData(key, value); // Pass data to column-updater
         }
-
         return this;
       }
     }, {
@@ -1794,10 +1776,9 @@
 
   var ColumnUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(ColumnUpdater, _BaseUpdater);
-    var _super = _createSuper(ColumnUpdater);
     function ColumnUpdater() {
       _classCallCheck(this, ColumnUpdater);
-      return _super.apply(this, arguments);
+      return _callSuper(this, ColumnUpdater, arguments);
     }
     _createClass(ColumnUpdater, [{
       key: "startUpdate",
@@ -1885,10 +1866,9 @@
 
   var RowUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(RowUpdater, _BaseUpdater);
-    var _super = _createSuper(RowUpdater);
     function RowUpdater() {
       _classCallCheck(this, RowUpdater);
-      return _super.apply(this, arguments);
+      return _callSuper(this, RowUpdater, arguments);
     }
     _createClass(RowUpdater, [{
       key: "startUpdate",
@@ -1951,10 +1931,9 @@
 
   var PageUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(PageUpdater, _BaseUpdater);
-    var _super = _createSuper(PageUpdater);
     function PageUpdater(config) {
       _classCallCheck(this, PageUpdater);
-      return _super.call(this, config);
+      return _callSuper(this, PageUpdater, [config]);
     }
     _createClass(PageUpdater, [{
       key: "startUpdate",
@@ -2382,7 +2361,6 @@
       }
     });
   };
-
   var CreateRoom = function CreateRoom(config) {
     config = MergeRight(DefaultConfig, config);
     var roomID = config.roomID;
@@ -3650,7 +3628,6 @@
         header = DocToHeader$1(doc);
         self.cacheHeaders[fileID] = header; // Cache it
       }
-
       return Promise.resolve(header);
     });
   };

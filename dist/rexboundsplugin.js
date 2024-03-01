@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexboundsplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,27 +126,12 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -315,7 +300,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -354,11 +338,10 @@
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -482,11 +465,10 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -688,7 +670,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Bounds = /*#__PURE__*/function (_TickTask) {
     _inherits(Bounds, _TickTask);
-    var _super = _createSuper(Bounds);
     function Bounds(gameObject, config) {
       var _this;
       _classCallCheck(this, Bounds);
@@ -696,12 +677,13 @@
         config = {};
       }
       config.tickEventName = 'postupdate';
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Bounds, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.bounds = new Rectangle();
       _this.boundsTarget = undefined;
       _this.boundsEnable = {};
+      _this.boundsHitMode = {};
       _this.clearHitResult();
       _this.resetFromJSON(config);
       return _this;
@@ -717,7 +699,8 @@
           this.setBounds(GetValue(o, 'bounds'));
         }
         this.setEnable(GetValue(o, 'enable', true));
-        this.setAlignMode(GetValue(o, 'alignMode', 0));
+        this.setBoundsHitMode(GetValue(o, 'boundsHitMode'));
+        this.setAlignMode(GetValue(o, 'alignMode', !this.hasWrapBoundHitMode ? 0 : 1));
         return this;
       }
     }, {
@@ -777,6 +760,20 @@
         return this;
       }
     }, {
+      key: "setBoundsHitMode",
+      value: function setBoundsHitMode(mode) {
+        if (mode === undefined) {
+          mode = 0;
+        }
+        var boundsHitMode = this.boundsHitMode;
+        boundsHitMode.left = GetBoundHitMode(GetValue(mode, 'left', mode));
+        boundsHitMode.right = GetBoundHitMode(GetValue(mode, 'right', mode));
+        boundsHitMode.top = GetBoundHitMode(GetValue(mode, 'top', mode));
+        boundsHitMode.bottom = GetBoundHitMode(GetValue(mode, 'bottom', mode));
+        this.hasWrapBoundHitMode = boundsHitMode.left + boundsHitMode.right + boundsHitMode.top + boundsHitMode.bottom > 0;
+        return this;
+      }
+    }, {
       key: "setAlignMode",
       value: function setAlignMode(mode) {
         if (typeof mode === 'string') {
@@ -808,45 +805,69 @@
         }
         var bounds = this.bounds;
         var boundsEnable = this.boundsEnable;
-        var alignToGOBound = this.alignMode === 0;
-        var gameObjectBounds = alignToGOBound ? GetBounds(gameObject, true) : undefined;
+        var boundsHitMode = this.boundsHitMode;
+        var gameObjectLeftBound, gameObjectRightBound, gameObjectTopBound, gameObjectBottomBound;
+        if (this.alignMode === 0) {
+          var gameObjectBounds = GetBounds(gameObject, true);
+          gameObjectLeftBound = gameObjectBounds.left;
+          gameObjectRightBound = gameObjectBounds.right;
+          gameObjectTopBound = gameObjectBounds.top;
+          gameObjectBottomBound = gameObjectBounds.bottom;
+        } else {
+          gameObjectLeftBound = gameObject.x;
+          gameObjectRightBound = gameObject.x;
+          gameObjectTopBound = gameObject.y;
+          gameObjectBottomBound = gameObject.y;
+        }
         if (boundsEnable.left) {
-          var left = alignToGOBound ? gameObjectBounds.left : gameObject.x;
-          var dx = bounds.left - left;
+          var dx = bounds.left - gameObjectLeftBound;
           if (dx > 0) {
-            gameObject.x += dx;
             this.isHitAny = true;
             this.isHitLeft = true;
+            if (boundsHitMode.left === 0) {
+              gameObject.x += dx;
+            } else {
+              gameObject.x = bounds.right - dx - 1;
+            }
             this.emit('hitleft', this.parent, this);
           }
         }
         if (boundsEnable.right) {
-          var right = alignToGOBound ? gameObjectBounds.right : gameObject.x;
-          var dx = bounds.right - right;
+          var dx = bounds.right - gameObjectRightBound;
           if (dx < 0) {
-            gameObject.x += dx;
             this.isHitAny = true;
             this.isHitRight = true;
+            if (boundsHitMode.left === 0) {
+              gameObject.x += dx;
+            } else {
+              gameObject.x = bounds.left - dx + 1;
+            }
             this.emit('hitright', this.parent, this);
           }
         }
         if (boundsEnable.top) {
-          var top = alignToGOBound ? gameObjectBounds.top : gameObject.y;
-          var dy = bounds.top - top;
+          var dy = bounds.top - gameObjectTopBound;
           if (dy > 0) {
-            gameObject.y += dy;
             this.isHitAny = true;
             this.isHitTop = true;
+            if (boundsHitMode.left === 0) {
+              gameObject.y += dy;
+            } else {
+              gameObject.y = bounds.bottom - dy - 1;
+            }
             this.emit('hittop', this.parent, this);
           }
         }
         if (boundsEnable.bottom) {
-          var bottom = alignToGOBound ? gameObjectBounds.bottom : gameObject.y;
-          var dy = bounds.bottom - bottom;
+          var dy = bounds.bottom - gameObjectBottomBound;
           if (dy < 0) {
-            gameObject.y += dy;
             this.isHitAny = true;
             this.isHitBottom = true;
+            if (boundsHitMode.left === 0) {
+              gameObject.y += dy;
+            } else {
+              gameObject.y = bounds.top - dy + 1;
+            }
             this.emit('hitbottom', this.parent, this);
           }
         }
@@ -867,17 +888,26 @@
     }]);
     return Bounds;
   }(SceneUpdateTickTask);
+  var BoundHitMode = {
+    clamp: 0,
+    wrap: 1
+  };
   var AlignMode = {
     bounds: 0,
     origin: 1
   };
+  var GetBoundHitMode = function GetBoundHitMode(mode) {
+    if (typeof mode === 'string') {
+      mode = BoundHitMode[mode];
+    }
+    return mode;
+  };
 
   var BoundsPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BoundsPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BoundsPlugin);
     function BoundsPlugin(pluginManager) {
       _classCallCheck(this, BoundsPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, BoundsPlugin, [pluginManager]);
     }
     _createClass(BoundsPlugin, [{
       key: "start",

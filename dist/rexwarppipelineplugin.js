@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwarppipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,34 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
@@ -157,16 +143,15 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var WarpPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(WarpPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(WarpPostFxPipeline);
     function WarpPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, WarpPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, WarpPostFxPipeline, [{
         name: 'rexWarpPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
-      });
+      }]);
       _this.frequencyX = 10;
       _this.frequencyY = 10;
       _this.amplitudeX = 10;
@@ -389,10 +374,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -491,11 +475,10 @@
 
   var WarpPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(WarpPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(WarpPipelinePlugin);
     function WarpPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, WarpPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, WarpPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(WarpPostFxPipeline, 'rexWarpPostFx');
       return _this;
     }

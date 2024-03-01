@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextagtext = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -150,20 +150,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   /**
@@ -306,10 +292,9 @@
   var GameObject$1 = Phaser.GameObjects.GameObject;
   var TextBase = /*#__PURE__*/function (_GameObject) {
     _inherits(TextBase, _GameObject);
-    var _super = _createSuper(TextBase);
     function TextBase() {
       _classCallCheck(this, TextBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, TextBase, arguments);
     }
     _createClass(TextBase, [{
       key: "setStyle",
@@ -513,7 +498,6 @@
         } else {
           return style; // Not a valid input
         }
-
       default:
         return style;
     }
@@ -898,7 +882,6 @@
           this._font = newFont;
           //this.metrics = MeasureText(this);
         }
-
         return this;
       }
     }, {
@@ -2877,10 +2860,9 @@
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
-    var _super = _createSuper(WrapTextLinesPool);
     function WrapTextLinesPool() {
       _classCallCheck(this, WrapTextLinesPool);
-      return _super.apply(this, arguments);
+      return _callSuper(this, WrapTextLinesPool, arguments);
     }
     _createClass(WrapTextLinesPool, [{
       key: "freeLine",
@@ -3176,7 +3158,6 @@
   var SharedWrapTextLinesPool = null;
   var Text = /*#__PURE__*/function (_TextBase) {
     _inherits(Text, _TextBase);
-    var _super = _createSuper(Text);
     function Text(scene, x, y, text, style, type, parser) {
       var _this;
       _classCallCheck(this, Text);
@@ -3193,7 +3174,7 @@
       if (y === undefined) {
         y = 0;
       }
-      _this = _super.call(this, scene, type);
+      _this = _callSuper(this, Text, [scene, type]);
       _this.renderer = scene.sys.game.renderer;
       _this.setPosition(x, y);
       _this.setOrigin(0, 0);
@@ -3997,12 +3978,11 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TagText = /*#__PURE__*/function (_Text) {
     _inherits(TagText, _Text);
-    var _super = _createSuper(TagText);
     function TagText(scene, x, y, text, style) {
       _classCallCheck(this, TagText);
       var tags = GetValue(style, 'tags', undefined);
       var parser = new Parser(tags);
-      return _super.call(this, scene, x, y, text, style, 'rexTagText', parser);
+      return _callSuper(this, TagText, [scene, x, y, text, style, 'rexTagText', parser]);
     }
     _createClass(TagText, [{
       key: "addTag",

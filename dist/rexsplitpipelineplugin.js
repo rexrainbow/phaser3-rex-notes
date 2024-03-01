@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexsplitpipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -89,34 +103,6 @@
     }
     return _assertThisInitialized(self);
   }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 split;\nuniform float spaceLeft;\nuniform float spaceRight;\nuniform float spaceTop;\nuniform float spaceBottom;\nuniform float angle;\nuniform float shiftEnable;\n\nvec2 rotate(vec2 uv, float angle) {\n  float s = sin(angle);\n  float c = cos(angle);\n  return vec2(\n    uv.x * c + uv.y * s,\n    uv.y * c - uv.x * s\n  );\n}\n\nvoid main (void) {\n  vec2 tc = outTexCoord * texSize;  \n  tc -= split;\n  tc = rotate(tc, -angle);\n\n  if (\n    ((tc.x > -spaceLeft) && (tc.x < spaceRight)) ||\n    ((tc.y > -spaceTop) && (tc.y < spaceBottom))\n  ) {\n    gl_FragColor = vec4(0,0,0,0);\n  } else {\n    if (shiftEnable > 0.0) {\n      tc.x += (tc.x < 0.0)? spaceLeft: -spaceRight;\n      tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;\n    }\n\n    tc = rotate(tc, angle);\n    tc += split;\n    gl_FragColor = texture2D(uMainSampler, tc / texSize);\n  }\n\n}\n";
 
@@ -126,16 +112,15 @@
   var RadToDeg = Phaser.Math.RadToDeg;
   var SplitPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(SplitPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(SplitPostFxPipeline);
     function SplitPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, SplitPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, SplitPostFxPipeline, [{
         name: 'rexSplitPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
-      });
+      }]);
       _this.splitX = 0;
       _this.splitY = 0;
       _this.spaceLeft = 0;
@@ -401,10 +386,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -503,11 +487,10 @@
 
   var SplitPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(SplitPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(SplitPipelinePlugin);
     function SplitPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, SplitPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, SplitPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(SplitPostFxPipeline, 'rexSplitPostFx');
       return _this;
     }

@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexscrollerplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -126,27 +126,12 @@
     }
     return _get.apply(this, arguments);
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var EventEmitterMethods$1 = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -315,7 +300,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -700,10 +684,9 @@
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
-    var _super = _createSuper(EventEmitter);
     function EventEmitter() {
       _classCallCheck(this, EventEmitter);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EventEmitter, arguments);
     }
     _createClass(EventEmitter, [{
       key: "shutdown",
@@ -1105,10 +1088,9 @@
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-    var _super = _createSuper(FSM);
     function FSM() {
       _classCallCheck(this, FSM);
-      return _super.apply(this, arguments);
+      return _callSuper(this, FSM, arguments);
     }
     _createClass(FSM, [{
       key: "shutdown",
@@ -1247,11 +1229,10 @@
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
-    var _super = _createSuper(State);
     function State(parent, config) {
       var _this;
       _classCallCheck(this, State);
-      _this = _super.call(this, config);
+      _this = _callSuper(this, State, [config]);
       _this.parent = parent;
       _this.init();
       return _this;
@@ -1418,11 +1399,10 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var DragSpeed = /*#__PURE__*/function (_ComponentBase) {
     _inherits(DragSpeed, _ComponentBase);
-    var _super = _createSuper(DragSpeed);
     function DragSpeed(gameObject, config) {
       var _this;
       _classCallCheck(this, DragSpeed);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, DragSpeed, [gameObject, config]);
       // this.parent = gameObject;
 
       _this._enable = undefined;
@@ -1796,11 +1776,10 @@
   var Clamp = Phaser.Math.Clamp;
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
-    var _super = _createSuper(Scroller);
     function Scroller(gameObject, config) {
       var _this;
       _classCallCheck(this, Scroller);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Scroller, [gameObject, config]);
       // this.parent = gameObject;
 
       var enable = GetValue(config, 'enable', true);
@@ -2188,10 +2167,9 @@
 
   var ScrollerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ScrollerPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(ScrollerPlugin);
     function ScrollerPlugin(pluginManager) {
       _classCallCheck(this, ScrollerPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, ScrollerPlugin, [pluginManager]);
     }
     _createClass(ScrollerPlugin, [{
       key: "start",

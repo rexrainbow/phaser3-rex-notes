@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdropshadowpipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,20 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -127,20 +127,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag$1 = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float alpha;\nuniform vec3 color;\nuniform vec2 uOffset;\n\nvoid main (void) {\n  vec4 sample = texture2D(uMainSampler, outTexCoord - uOffset);\n\n  // Premultiply alpha\n  sample.rgb = color.rgb * sample.a;\n\n  // alpha user alpha\n  sample *= alpha;\n\n  gl_FragColor = sample;\n}\n";
@@ -210,10 +196,9 @@
 
   var ShadowDrawer = /*#__PURE__*/function (_Drawer) {
     _inherits(ShadowDrawer, _Drawer);
-    var _super = _createSuper(ShadowDrawer);
     function ShadowDrawer() {
       _classCallCheck(this, ShadowDrawer);
-      return _super.apply(this, arguments);
+      return _callSuper(this, ShadowDrawer, arguments);
     }
     _createClass(ShadowDrawer, [{
       key: "draw",
@@ -245,10 +230,9 @@
 
   var KawaseBlurDrawer = /*#__PURE__*/function (_Drawer) {
     _inherits(KawaseBlurDrawer, _Drawer);
-    var _super = _createSuper(KawaseBlurDrawer);
     function KawaseBlurDrawer() {
       _classCallCheck(this, KawaseBlurDrawer);
-      return _super.apply(this, arguments);
+      return _callSuper(this, KawaseBlurDrawer, arguments);
     }
     _createClass(KawaseBlurDrawer, [{
       key: "draw",
@@ -296,11 +280,10 @@
   var Color = Phaser.Display.Color;
   var DropShadowPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(DropShadowPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(DropShadowPostFxPipeline);
     function DropShadowPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, DropShadowPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, DropShadowPostFxPipeline, [{
         name: 'rexDropShadowPostFx',
         game: game,
         shaders: [{
@@ -308,7 +291,7 @@
         }, {
           fragShader: frag
         }]
-      });
+      }]);
       _this.shadowDrawer = new ShadowDrawer(_assertThisInitialized(_this));
       _this.kawaseBlurDrawer = new KawaseBlurDrawer(_assertThisInitialized(_this));
       _this.rotation = 0;
@@ -620,10 +603,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -722,11 +704,10 @@
 
   var DropShadowPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(DropShadowPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(DropShadowPipelinePlugin);
     function DropShadowPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, DropShadowPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, DropShadowPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(DropShadowPostFxPipeline, 'rexDropShadowPostFx');
       return _this;
     }

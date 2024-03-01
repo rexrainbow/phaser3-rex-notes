@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextoonifypipelineplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -64,17 +89,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -88,34 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var frag$4 = "vec3 RGBToHSV(vec3 color) {\n  float minv, maxv, delta;\n  vec3 res;\n  minv = min(min(color.r, color.g), color.b);\n  maxv = max(max(color.r, color.g), color.b);\n  res.z = maxv;            // v\n\n  delta = maxv - minv;\n  if( maxv != 0.0 ) {\n    res.y = delta / maxv;      // s\n  } else {\n    // s = 0, v is undefined\n    res.y = 0.0;\n    res.x = -1.0;\n    return res;\n  }\n\n  if( color.r == maxv ) {\n    res.x = ( color.g - color.b ) / delta;      // between yellow & magenta\n  } else if( color.g == maxv ) {\n    res.x = 2.0 + ( color.b - color.r ) / delta;   // between cyan & yellow\n  } else {\n    res.x = 4.0 + ( color.r - color.g ) / delta;   // between magenta & cyan\n  }\n\n  res.x = res.x * 60.0;            // degrees\n  if( res.x < 0.0 ) {\n    res.x = res.x + 360.0;\n  }\n   \n  return res;\n}\n";
@@ -134,16 +120,15 @@
   var Color = Phaser.Display.Color;
   var ToonifyPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(ToonifyPostFxPipeline, _PostFXPipeline);
-    var _super = _createSuper(ToonifyPostFxPipeline);
     function ToonifyPostFxPipeline(game) {
       var _this;
       _classCallCheck(this, ToonifyPostFxPipeline);
-      _this = _super.call(this, {
+      _this = _callSuper(this, ToonifyPostFxPipeline, [{
         name: 'rexToonifyPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
-      });
+      }]);
       _this.edgeThreshold = 0;
       _this.hueLevels = 0;
       _this._satLevels = 0;
@@ -359,10 +344,9 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(BasePostFxPipelinePlugin);
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _super.apply(this, arguments);
+      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
     }
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
@@ -461,11 +445,10 @@
 
   var ToonifyPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(ToonifyPipelinePlugin, _BasePostFxPipelinePl);
-    var _super = _createSuper(ToonifyPipelinePlugin);
     function ToonifyPipelinePlugin(pluginManager) {
       var _this;
       _classCallCheck(this, ToonifyPipelinePlugin);
-      _this = _super.call(this, pluginManager);
+      _this = _callSuper(this, ToonifyPipelinePlugin, [pluginManager]);
       _this.setPostPipelineClass(ToonifyPostFxPipeline, 'rexToonifyPostFx');
       return _this;
     }

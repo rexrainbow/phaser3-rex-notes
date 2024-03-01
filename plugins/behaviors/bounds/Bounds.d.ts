@@ -15,12 +15,20 @@ declare namespace Bounds {
         top?: boolean, bottom?: boolean,
     }
 
+    type BoundHitModeType = 0 | 1 | 'clamp' | 'wrap';
+
+    type BoundsHitModeType = {
+        left?: BoundHitModeType, right?: BoundHitModeType,
+        top?: BoundHitModeType, bottom?: BoundHitModeType,
+    }
+
     type AlignModeType = 0 | 1 | 'bounds' | 'origin';
 
     interface IConfig {
         target?: Phaser.GameObjects.GameObject;
         bounds?: Phaser.Geom.Rectangle | RectangleLikeType;
         enable?: boolean | BoundsEnableType;
+        boundsHitMode?: BoundsHitModeType;
         alignMode?: AlignModeType;
     }
 }
@@ -40,6 +48,10 @@ declare class Bounds extends TickTask {
     setEnable(enable?: boolean | Bounds.BoundsEnableType): this;
     enable: boolean;
     boundsEnable: { left: boolean, right: boolean, top: boolean, bottom: boolean };
+
+    setBoundsHitMode(mode?: Bounds.BoundsEnableType): this;
+    boundsHitMode: { left: number, right: number, top: number, bottom: number };
+    hasWrapBoundHitMode: boolean;
 
     setAlignMode(mode: Bounds.AlignModeType): this;
     alignMode: number;

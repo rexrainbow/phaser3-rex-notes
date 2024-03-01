@@ -4,6 +4,31 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextarea = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _typeof(o) {
     "@babel/helpers - typeof";
 
@@ -78,17 +103,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -102,20 +116,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
@@ -203,20 +203,6 @@
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
-  }
 
   var MinVersion = 60;
   var IsChecked = false;
@@ -240,7 +226,6 @@
   var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var Base$1 = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, width, height) {
       var _this;
       _classCallCheck(this, Base);
@@ -256,7 +241,7 @@
       if (height === undefined) {
         height = 1;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, Base, [scene, x, y, width, height]);
       _this.children = [];
       return _this;
     }
@@ -1048,7 +1033,6 @@
           // Set child's maskVisible to `true`
         }
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
@@ -1073,7 +1057,6 @@
         // Inside a container
         itemList = gameObject.parentContainer.list; // array
       }
-
       if (itemList) {
         break;
       }
@@ -1082,7 +1065,6 @@
       itemList = gameObject.scene.sys.displayList; // displayList
       // ??
     }
-
     if (itemList.depthSort) {
       // Is a displayList object
       itemList.depthSort();
@@ -1268,7 +1250,6 @@
         }
         // Copy children
       }
-
       return out;
     },
     getAllChildren: function getAllChildren(out) {
@@ -1493,7 +1474,6 @@
       // At scene's displayList or at a layer
       !!gameObject.parentContainer; // At a container
     });
-
     return children;
   };
   var AddToContainer = function AddToContainer(p3Container) {
@@ -2151,7 +2131,6 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-    var _super = _createSuper(ContainerLite);
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
       _classCallCheck(this, ContainerLite);
@@ -2160,7 +2139,7 @@
         width = undefined;
         height = undefined;
       }
-      _this = _super.call(this, scene, x, y, width, height);
+      _this = _callSuper(this, ContainerLite, [scene, x, y, width, height]);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
       _this.syncChildrenEnable = true;
@@ -3648,7 +3627,6 @@
       if (EventEmitterClass === undefined) {
         EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
       }
-
       this._privateEE = eventEmitter === true || eventEmitter === undefined;
       this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
@@ -3817,7 +3795,6 @@
 
           // bob object does not have event emitter
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -3931,13 +3908,12 @@
   var GetValue$V = Phaser.Utils.Objects.GetValue;
   var Anchor = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Anchor, _ComponentBase);
-    var _super = _createSuper(Anchor);
     function Anchor(gameObject, config) {
       var _this;
       _classCallCheck(this, Anchor);
-      _this = _super.call(this, gameObject, {
+      _this = _callSuper(this, Anchor, [gameObject, {
         eventEmitter: false
-      });
+      }]);
       // No event emitter
       // this.parent = gameObject;
 
@@ -4237,11 +4213,10 @@
   var GetValue$U = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-    var _super = _createSuper(TickTask);
     function TickTask(parent, config) {
       var _this;
       _classCallCheck(this, TickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TickTask, [parent, config]);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
@@ -4365,11 +4340,10 @@
   var GetValue$T = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-    var _super = _createSuper(SceneUpdateTickTask);
     function SceneUpdateTickTask(parent, config) {
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, SceneUpdateTickTask, [parent, config]);
 
       // scene update : update, preupdate, postupdate, prerender, render
       // game update : step, poststep, 
@@ -4612,11 +4586,10 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-    var _super = _createSuper(TimerTickTask);
     function TimerTickTask(parent, config) {
       var _this;
       _classCallCheck(this, TimerTickTask);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, TimerTickTask, [parent, config]);
       _this.timer = new Timer();
       // boot() later 
       return _this;
@@ -4664,10 +4637,9 @@
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
     _inherits(EaseValueTaskBase, _TimerTask);
-    var _super = _createSuper(EaseValueTaskBase);
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EaseValueTaskBase, arguments);
     }
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
@@ -4803,11 +4775,10 @@
   var Linear$5 = Phaser.Math.Linear;
   var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
-    var _super = _createSuper(Scale);
     function Scale(gameObject, config) {
       var _this;
       _classCallCheck(this, Scale);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Scale, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -4903,7 +4874,6 @@
           this.parent.destroy();
           // Will also destroy this behavior
         }
-
         return this;
       }
     }]);
@@ -5165,11 +5135,10 @@
   var Linear$4 = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
-    var _super = _createSuper(Fade);
     function Fade(gameObject, config) {
       var _this;
       _classCallCheck(this, Fade);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Fade, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -5231,7 +5200,6 @@
           this.parent.destroy();
           // Will also destroy this behavior
         }
-
         return this;
       }
     }]);
@@ -5366,11 +5334,10 @@
   var Linear$3 = Phaser.Math.Linear;
   var EaseMove = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseMove, _EaseValueTaskBase);
-    var _super = _createSuper(EaseMove);
     function EaseMove(gameObject, config) {
       var _this;
       _classCallCheck(this, EaseMove);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, EaseMove, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -5463,7 +5430,6 @@
           this.parent.destroy();
           // Will also destroy this behavior
         }
-
         return this;
       }
     }]);
@@ -5650,11 +5616,10 @@
   var GetValue$N = Phaser.Utils.Objects.GetValue;
   var ShakePosition = /*#__PURE__*/function (_TickTask) {
     _inherits(ShakePosition, _TickTask);
-    var _super = _createSuper(ShakePosition);
     function ShakePosition(gameObject, config) {
       var _this;
       _classCallCheck(this, ShakePosition);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, ShakePosition, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.timer = new Timer();
@@ -5907,7 +5872,6 @@
 
     // Shake effect won't change position
   };
-
   var ShakeMethods = {
     shake: function shake(duration, magnitude, magnitudeMode) {
       if (IsPlainObject$c(duration)) {
@@ -5945,11 +5909,10 @@
   var Linear$2 = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
-    var _super = _createSuper(EaseValueTask);
     function EaseValueTask(gameObject, config) {
       var _this;
       _classCallCheck(this, EaseValueTask);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, EaseValueTask, [gameObject, config]);
       // this.parent = gameObject;
       // this.timer
 
@@ -5992,11 +5955,10 @@
   var IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
-    var _super = _createSuper(EaseData);
     function EaseData(parent, config) {
       var _this;
       _classCallCheck(this, EaseData);
-      _this = _super.call(this, parent, config);
+      _this = _callSuper(this, EaseData, [parent, config]);
       _this.parent.setDataEnabled();
       _this.easeTasks = {};
       return _this;
@@ -6540,10 +6502,9 @@
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
-    var _super = _createSuper(EventEmitter);
     function EventEmitter() {
       _classCallCheck(this, EventEmitter);
-      return _super.apply(this, arguments);
+      return _callSuper(this, EventEmitter, arguments);
     }
     _createClass(EventEmitter, [{
       key: "shutdown",
@@ -6945,10 +6906,9 @@
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-    var _super = _createSuper(FSM);
     function FSM() {
       _classCallCheck(this, FSM);
-      return _super.apply(this, arguments);
+      return _callSuper(this, FSM, arguments);
     }
     _createClass(FSM, [{
       key: "shutdown",
@@ -7096,11 +7056,10 @@
   */
   var State$1 = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
-    var _super = _createSuper(State);
     function State(parent, config) {
       var _this;
       _classCallCheck(this, State);
-      _this = _super.call(this, config);
+      _this = _callSuper(this, State, [config]);
       _this.parent = parent;
       var initState = config.initState || 'IDLE';
       _this.start(initState);
@@ -7331,11 +7290,10 @@
   var GetValue$K = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
     _inherits(OpenCloseTransition, _ComponentBase);
-    var _super = _createSuper(OpenCloseTransition);
     function OpenCloseTransition(gameObject, config) {
       var _this;
       _classCallCheck(this, OpenCloseTransition);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, OpenCloseTransition, [gameObject, config]);
       // this.parent = gameObject;
       // this.scene
 
@@ -7380,11 +7338,10 @@
   var Rectangle = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
-    var _super = _createSuper(FullWindowRectangle);
     function FullWindowRectangle(scene, color, alpha) {
       var _this;
       _classCallCheck(this, FullWindowRectangle);
-      _this = _super.call(this, scene, 0, 0, 2, 2, color, 1);
+      _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2, color, 1]);
       _this.setAlpha(alpha);
       _this.setScrollFactor(0);
       _this.boot();
@@ -7442,13 +7399,12 @@
   var GetValue$J = Phaser.Utils.Objects.GetValue;
   var TouchEventStop = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TouchEventStop, _ComponentBase);
-    var _super = _createSuper(TouchEventStop);
     function TouchEventStop(gameObject, config) {
       var _this;
       _classCallCheck(this, TouchEventStop);
-      _this = _super.call(this, gameObject, {
+      _this = _callSuper(this, TouchEventStop, [gameObject, {
         eventEmitter: false
-      });
+      }]);
       // No event emitter
       // this.parent = gameObject;
 
@@ -7551,13 +7507,12 @@
   var GetValue$I = Phaser.Utils.Objects.GetValue;
   var Cover = /*#__PURE__*/function (_FullWindowRectangle) {
     _inherits(Cover, _FullWindowRectangle);
-    var _super = _createSuper(Cover);
     function Cover(scene, config) {
       var _this;
       _classCallCheck(this, Cover);
       var fillColor = GetValue$I(config, 'color', 0x0);
       var fillAlpha = GetValue$I(config, 'alpha', 0.8);
-      _this = _super.call(this, scene, fillColor, fillAlpha);
+      _this = _callSuper(this, Cover, [scene, fillColor, fillAlpha]);
       _this.touchEventStop = new TouchEventStop(_assertThisInitialized(_this), {
         hitAreaMode: 1
       });
@@ -7648,7 +7603,6 @@
   var GetValue$H = Phaser.Utils.Objects.GetValue;
   var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
     _inherits(Modal, _OpenCloseTransition);
-    var _super = _createSuper(Modal);
     function Modal(gameObject, config) {
       var _this;
       _classCallCheck(this, Modal);
@@ -7662,7 +7616,7 @@
         config.transitOut = TransitionMode.scaleDown;
       }
       config.destroy = GetValue$H(config, 'destroy', true);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Modal, [gameObject, config]);
       // this.parent = gameObject;
       // this.scene
 
@@ -7784,7 +7738,6 @@
           this // scope
           );
         }
-
         this.emit('open', this.parent, this);
         _get(_getPrototypeOf(Modal.prototype), "onOpen", this).call(this);
       }
@@ -8134,11 +8087,10 @@
   var GetValue$G = Phaser.Utils.Objects.GetValue;
   var Button = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Button, _ComponentBase);
-    var _super = _createSuper(Button);
     function Button(gameObject, config) {
       var _this;
       _classCallCheck(this, Button);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Button, [gameObject, config]);
       // this.parent = gameObject;
 
       _this._enable = undefined;
@@ -8454,11 +8406,10 @@
   var GetValue$F = Phaser.Utils.Objects.GetValue;
   var ClickOutside = /*#__PURE__*/function (_ComponentBase) {
     _inherits(ClickOutside, _ComponentBase);
-    var _super = _createSuper(ClickOutside);
     function ClickOutside(gameObject, config) {
       var _this;
       _classCallCheck(this, ClickOutside);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, ClickOutside, [gameObject, config]);
       // this.parent = gameObject;
 
       _this._enable = undefined;
@@ -8706,13 +8657,12 @@
 
   var Cooldown = /*#__PURE__*/function (_FSM) {
     _inherits(Cooldown, _FSM);
-    var _super = _createSuper(Cooldown);
     function Cooldown() {
       var _this;
       _classCallCheck(this, Cooldown);
-      _this = _super.call(this, {
+      _this = _callSuper(this, Cooldown, [{
         eventEmitter: false
-      });
+      }]);
       _this["goto"]('IDLE');
       return _this;
     }
@@ -8776,11 +8726,10 @@
   var GetValue$E = Phaser.Utils.Objects.GetValue;
   var InTouching = /*#__PURE__*/function (_ComponentBase) {
     _inherits(InTouching, _ComponentBase);
-    var _super = _createSuper(InTouching);
     function InTouching(gameObject, config) {
       var _this;
       _classCallCheck(this, InTouching);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, InTouching, [gameObject, config]);
       // this.parent = gameObject;
 
       _this._enable = undefined;
@@ -9081,7 +9030,6 @@
     }
     this.on('pointermove', OnMove, this).on('pointerover', OnMove, this).on('pointerout', OnOut, this); // pointer-up is included too
   };
-
   var OnMove = function OnMove(pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
     var child = PointToChild(childrenInteractive.targetSizers, pointer.worldX, pointer.worldY);
@@ -9124,7 +9072,6 @@
   var GetValue$z = Phaser.Utils.Objects.GetValue;
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
-    var _super = _createSuper(OnePointerTracer);
     function OnePointerTracer(gameObject, config) {
       var _this;
       _classCallCheck(this, OnePointerTracer);
@@ -9132,7 +9079,7 @@
       if (scene === gameObject) {
         gameObject = undefined;
       }
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, OnePointerTracer, [scene, config]);
       _this.gameObject = gameObject;
       if (gameObject) {
         gameObject.setInteractive(GetValue$z(config, 'inputConfig', undefined));
@@ -9377,11 +9324,10 @@
   var DistanceBetween$3 = Phaser.Math.Distance.Between;
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Tap, _OnePointerTracer);
-    var _super = _createSuper(Tap);
     function Tap(gameObject, config) {
       var _this;
       _classCallCheck(this, Tap);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Tap, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -9583,11 +9529,10 @@
   var GetValue$x = Phaser.Utils.Objects.GetValue;
   var Press = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Press, _OnePointerTracer);
-    var _super = _createSuper(Press);
     function Press(gameObject, config) {
       var _this;
       _classCallCheck(this, Press);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Press, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -9821,11 +9766,10 @@
   var RadToDeg$1 = Phaser.Math.RadToDeg;
   var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Swipe, _OnePointerTracer);
-    var _super = _createSuper(Swipe);
     function Swipe(gameObject, config) {
       var _this;
       _classCallCheck(this, Swipe);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Swipe, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -9935,7 +9879,6 @@
             break;
           // 4 dir, 8 dir
         }
-
         return velocity;
       }
     }, {
@@ -10392,11 +10335,10 @@
   var DegToRad$1 = Phaser.Math.DegToRad;
   var Rotate = /*#__PURE__*/function (_TwoPointersTracer) {
     _inherits(Rotate, _TwoPointersTracer);
-    var _super = _createSuper(Rotate);
     function Rotate(gameObject, config) {
       var _this;
       _classCallCheck(this, Rotate);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Rotate, [gameObject, config]);
       var self = _assertThisInitialized(_this);
       var stateConfig = {
         states: {
@@ -10627,11 +10569,10 @@
   var GetValue$p = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
     _inherits(Base, _Container);
-    var _super = _createSuper(Base);
     function Base(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, Base);
-      _this = _super.call(this, scene, x, y, 1, 1);
+      _this = _callSuper(this, Base, [scene, x, y, 1, 1]);
       _this.isRexSizer = true;
       _this.setMinSize(minWidth, minHeight);
       _this.setName(GetValue$p(config, 'name', ''));
@@ -11346,11 +11287,10 @@
   var Zone = Phaser.GameObjects.Zone;
   var Space = /*#__PURE__*/function (_Zone) {
     _inherits(Space, _Zone);
-    var _super = _createSuper(Space);
     function Space(scene) {
       var _this;
       _classCallCheck(this, Space);
-      _this = _super.call(this, scene, 0, 0, 1, 1);
+      _this = _callSuper(this, Space, [scene, 0, 0, 1, 1]);
       // Don't add Zone into scene
       _this.isRexSpace = true;
       return _this;
@@ -11425,7 +11365,6 @@
       }
       fitRatio = GetValue$o(config, 'fitRatio', 0); // width/height
     }
-
     if (typeof align === 'string') {
       align = AlignConst[align];
     }
@@ -11709,7 +11648,6 @@
   var GetValue$n = Phaser.Utils.Objects.GetValue;
   var Sizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(Sizer, _BaseSizer);
-    var _super = _createSuper(Sizer);
     function Sizer(scene, x, y, minWidth, minHeight, orientation, config) {
       var _this;
       _classCallCheck(this, Sizer);
@@ -11732,7 +11670,7 @@
       if (orientation === undefined) {
         orientation = 0;
       }
-      _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
+      _this = _callSuper(this, Sizer, [scene, x, y, minWidth, minHeight, config]);
       _this.type = 'rexSizer';
       _this.sizerChildren = [];
       _this.setOrientation(orientation);
@@ -12526,7 +12464,6 @@
   var GetValue$k = Phaser.Utils.Objects.GetValue;
   var GridSizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(GridSizer, _BaseSizer);
-    var _super = _createSuper(GridSizer);
     function GridSizer(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
       var _this;
       _classCallCheck(this, GridSizer);
@@ -12559,7 +12496,7 @@
         columnProportions = GetValue$k(config, 'columnProportions', 0);
         rowProportions = GetValue$k(config, 'rowProportions', 0);
       }
-      _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
+      _this = _callSuper(this, GridSizer, [scene, x, y, minWidth, minHeight, config]);
       _this.type = 'rexGridSizer';
       _this.sizerChildren = [];
       _this.addChildrenMap('items', _this.sizerChildren);
@@ -12727,7 +12664,6 @@
         }
       });
     }
-
     topPatent.addChildrenMap('child', child);
   };
 
@@ -13106,7 +13042,6 @@
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
-    var _super = _createSuper(RoundRectangle);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, RoundRectangle);
@@ -13144,7 +13079,7 @@
         shapeType = 0;
       }
       var geom = new RoundRectangle$1(); // Configurate it later
-      _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
+      _this = _callSuper(this, RoundRectangle, [scene, 'rexRoundRectangleShape', geom]);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
         var radius = GetValue$h(radiusConfig, 'radius', radiusConfig);
@@ -13579,11 +13514,10 @@
   var GetValue$g = Phaser.Utils.Objects.GetValue;
   var StyleManager = /*#__PURE__*/function (_ComponentBase) {
     _inherits(StyleManager, _ComponentBase);
-    var _super = _createSuper(StyleManager);
     function StyleManager(gameObject, config) {
       var _this;
       _classCallCheck(this, StyleManager);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, StyleManager, [gameObject, config]);
       // this.parent = gameObject;
 
       _this.style = GetValue$g(config, 'style', _assertThisInitialized(_this));
@@ -13697,14 +13631,13 @@
 
   var StatesRoundRectangle = /*#__PURE__*/function (_RoundRectangle) {
     _inherits(StatesRoundRectangle, _RoundRectangle);
-    var _super = _createSuper(StatesRoundRectangle);
     function StatesRoundRectangle(scene, config) {
       var _this;
       _classCallCheck(this, StatesRoundRectangle);
       if (config === undefined) {
         config = {};
       }
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, StatesRoundRectangle, [scene, config]);
       _this.type = 'rexStatesRoundRectangleShape';
       config.style = _assertThisInitialized(_this);
       config.propertiesMap = PropertiesMap;
@@ -15416,11 +15349,10 @@
 
   var Style$1 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
-    var _super = _createSuper(Style);
     function Style(gameObject, style) {
       var _this;
       _classCallCheck(this, Style);
-      _this = _super.call(this, gameObject);
+      _this = _callSuper(this, Style, [gameObject]);
       // this.parent = gameObject;
 
       return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
@@ -15506,7 +15438,6 @@
   var GetValue$f = Phaser.Utils.Objects.GetValue;
   var StatesNineSlice = /*#__PURE__*/function (_PhaserNineSlice) {
     _inherits(StatesNineSlice, _PhaserNineSlice);
-    var _super = _createSuper(StatesNineSlice);
     function StatesNineSlice(scene, config) {
       var _this;
       _classCallCheck(this, StatesNineSlice);
@@ -15523,7 +15454,7 @@
       var rightWidth = GetValue$f(config, 'rightWidth', 0);
       var topHeight = GetValue$f(config, 'topHeight', 0);
       var bottomHeight = GetValue$f(config, 'bottomHeight', 0);
-      _this = _super.call(this, scene, x, y, key, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight);
+      _this = _callSuper(this, StatesNineSlice, [scene, x, y, key, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight]);
       _this.type = 'rexStatesNineSlice';
       var effectConfig = GetValue$f(config, 'effects', true);
       if (effectConfig) {
@@ -15541,11 +15472,10 @@
 
   var Style = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
-    var _super = _createSuper(Style);
     function Style(gameObject, style) {
       var _this;
       _classCallCheck(this, Style);
-      _this = _super.call(this, gameObject);
+      _this = _callSuper(this, Style, [gameObject]);
       // this.parent = gameObject;
 
       return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
@@ -15603,7 +15533,6 @@
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var StatesImage = /*#__PURE__*/function (_PhaserImage) {
     _inherits(StatesImage, _PhaserImage);
-    var _super = _createSuper(StatesImage);
     function StatesImage(scene, config) {
       var _this;
       _classCallCheck(this, StatesImage);
@@ -15614,7 +15543,7 @@
       var y = GetValue$e(config, 'y', 0);
       var key = GetValue$e(config, 'key', '');
       var frame = GetValue$e(config, 'frame', undefined);
-      _this = _super.call(this, scene, x, y, key, frame);
+      _this = _callSuper(this, StatesImage, [scene, x, y, key, frame]);
       _this.type = 'rexStatesImage';
       var effectConfig = GetValue$e(config, 'effects', true);
       if (effectConfig) {
@@ -15905,7 +15834,6 @@
               imageType = 1; // Draw tile-sprite
             }
           }
-
           if (imageType === 0) {
             this._drawImage(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           } else {
@@ -15987,7 +15915,6 @@
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
       _inherits(NinePatch, _GOClass);
-      var _super = _createSuper(NinePatch);
       function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         var _this;
         _classCallCheck(this, NinePatch);
@@ -16044,7 +15971,7 @@
             rows = [topHeight, undefined, bottomHeight];
           }
         }
-        _this = _super.call(this, scene);
+        _this = _callSuper(this, NinePatch, [scene]);
         _this.type = type;
         _this.setPosition(x, y).setSize(width, height).setOrigin(0.5, 0.5);
         _this.columns = {};
@@ -16139,10 +16066,9 @@
   var RenderTexture = Phaser.GameObjects.RenderTexture;
   var NinePatch = /*#__PURE__*/function (_NinePatchBase) {
     _inherits(NinePatch, _NinePatchBase);
-    var _super = _createSuper(NinePatch);
     function NinePatch() {
       _classCallCheck(this, NinePatch);
-      return _super.apply(this, arguments);
+      return _callSuper(this, NinePatch, arguments);
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture, 'rexNinePatch'));
@@ -16290,10 +16216,9 @@
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
-      var _super = _createSuper(ProgressBase);
       function ProgressBase() {
         _classCallCheck(this, ProgressBase);
-        return _super.apply(this, arguments);
+        return _callSuper(this, ProgressBase, arguments);
       }
       _createClass(ProgressBase, [{
         key: "bootProgressBase",
@@ -16419,7 +16344,6 @@
         out.y = this.innerTop + 1; // Add 1 pixel margin
       }
     }
-
     return out;
   };
   var tmpPoint$1 = {};
@@ -16442,7 +16366,6 @@
         out.y = this.innerBottom - 1; // Add 1 pixel margin
       }
     }
-
     return out;
   };
   var tmpPoint = {};
@@ -16544,12 +16467,11 @@
   var SnapTo = Phaser.Math.Snap.To;
   var Slider = /*#__PURE__*/function (_ProgressBase) {
     _inherits(Slider, _ProgressBase);
-    var _super = _createSuper(Slider);
     function Slider(scene, config) {
       var _this;
       _classCallCheck(this, Slider);
       // Create sizer
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, Slider, [scene, config]);
       _this.type = 'rexSlider';
       _this.bootProgressBase(config);
       _this.reverseAxis = GetValue$a(config, 'reverseAxis', false);
@@ -16582,7 +16504,6 @@
         }
         _this.pin(indicator); // Put into container but not layout it
       }
-
       if (thumb) {
         if (IsPlainObject$1(thumb)) {
           thumb = CreateBackground(scene, thumb);
@@ -16701,12 +16622,11 @@
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var ScrollBar = /*#__PURE__*/function (_Sizer) {
     _inherits(ScrollBar, _Sizer);
-    var _super = _createSuper(ScrollBar);
     function ScrollBar(scene, config) {
       var _this;
       _classCallCheck(this, ScrollBar);
       // Create sizer
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, ScrollBar, [scene, config]);
       _this.type = 'rexScrollBar';
 
       // Add elements
@@ -16911,11 +16831,10 @@
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
-    var _super = _createSuper(State);
     function State(parent, config) {
       var _this;
       _classCallCheck(this, State);
-      _this = _super.call(this, config);
+      _this = _callSuper(this, State, [config]);
       _this.parent = parent;
       _this.init();
       return _this;
@@ -17078,11 +16997,10 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var DragSpeed = /*#__PURE__*/function (_ComponentBase) {
     _inherits(DragSpeed, _ComponentBase);
-    var _super = _createSuper(DragSpeed);
     function DragSpeed(gameObject, config) {
       var _this;
       _classCallCheck(this, DragSpeed);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, DragSpeed, [gameObject, config]);
       // this.parent = gameObject;
 
       _this._enable = undefined;
@@ -17456,11 +17374,10 @@
   var Clamp$1 = Phaser.Math.Clamp;
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
-    var _super = _createSuper(Scroller);
     function Scroller(gameObject, config) {
       var _this;
       _classCallCheck(this, Scroller);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, Scroller, [gameObject, config]);
       // this.parent = gameObject;
 
       var enable = GetValue$6(config, 'enable', true);
@@ -17849,11 +17766,10 @@
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var MouseWheelScroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(MouseWheelScroller, _ComponentBase);
-    var _super = _createSuper(MouseWheelScroller);
     function MouseWheelScroller(gameObject, config) {
       var _this;
       _classCallCheck(this, MouseWheelScroller);
-      _this = _super.call(this, gameObject, config);
+      _this = _callSuper(this, MouseWheelScroller, [gameObject, config]);
       // this.parent = gameObject;
 
       if (_this.parent !== _this.scene) {
@@ -18137,14 +18053,12 @@
         columnProportions[1] = 0; // Calculate parent's width by child's width
       }
     }
-
     if (!parentMinHeight) {
       var expandChildHeight = GetValue$3(config, 'child.expandHeight', true);
       if (!expandChildHeight) {
         rowProportions[1] = 0; // Calculate parent's height by child's height
       }
     }
-
     var scrollableSizer = new GridSizer(scene, {
       column: 3,
       row: 3,
@@ -18362,7 +18276,6 @@
   var Clamp = Phaser.Math.Clamp;
   var Scrollable = /*#__PURE__*/function (_Sizer) {
     _inherits(Scrollable, _Sizer);
-    var _super = _createSuper(Scrollable);
     function Scrollable(scene, config) {
       var _this;
       _classCallCheck(this, Scrollable);
@@ -18373,7 +18286,7 @@
       // Create sizer
       var isRevererXY = scrollMode === 1;
       config.orientation = !isRevererXY ? 1 : 0;
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, Scrollable, [scene, config]);
       _this.type = GetValue$2(config, 'type', 'rexScrollable');
       _this.scrollMode = scrollMode;
 
@@ -18976,7 +18889,6 @@
         // centerY
         radius + padding // radius
         );
-
         break;
       default:
         // 0|'rectangle'
@@ -18988,7 +18900,6 @@
         // width
         height + padding.top + padding.bottom // height
         );
-
         break;
     }
   };
@@ -18996,7 +18907,6 @@
   var Graphics = Phaser.GameObjects.Graphics;
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
-    var _super = _createSuper(DefaultMaskGraphics);
     function DefaultMaskGraphics(parent, shapeType, padding) {
       var _this;
       _classCallCheck(this, DefaultMaskGraphics);
@@ -19006,7 +18916,7 @@
       if (typeof shapeType === 'string') {
         shapeType = SHAPEMODE[shapeType];
       }
-      _this = _super.call(this, parent.scene);
+      _this = _callSuper(this, DefaultMaskGraphics, [parent.scene]);
       _this.parent = parent;
       _this.shapeType = shapeType;
       _this.padding = GetBoundsConfig(padding);
@@ -19344,7 +19254,6 @@
   var ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
   var TextBlock = /*#__PURE__*/function (_BaseSizer) {
     _inherits(TextBlock, _BaseSizer);
-    var _super = _createSuper(TextBlock);
     function TextBlock(scene, x, y, minWidth, minHeight, config) {
       var _this;
       _classCallCheck(this, TextBlock);
@@ -19359,7 +19268,7 @@
         minWidth = GetValue$1(config, 'width', undefined);
         minHeight = GetValue$1(config, 'height', undefined);
       }
-      _this = _super.call(this, scene, x, y, minWidth, minHeight, config);
+      _this = _callSuper(this, TextBlock, [scene, x, y, minWidth, minHeight, config]);
       _this.type = 'rexTextBlock';
       _this.textObject = undefined;
       _this.linesCount = 0;
@@ -19677,7 +19586,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var TextArea = /*#__PURE__*/function (_Scrollable) {
     _inherits(TextArea, _Scrollable);
-    var _super = _createSuper(TextArea);
     function TextArea(scene, config) {
       var _this;
       _classCallCheck(this, TextArea);
@@ -19718,7 +19626,7 @@
       if (spaceConfig) {
         spaceConfig.child = GetValue(spaceConfig, 'text', 0);
       }
-      _this = _super.call(this, scene, config);
+      _this = _callSuper(this, TextArea, [scene, config]);
       _this.addChildrenMap('text', textObject);
       return _this;
     }

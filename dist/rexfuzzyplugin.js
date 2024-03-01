@@ -4,6 +4,38 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfuzzyplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _callSuper(t, o, e) {
+    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
+  }
+  function _construct(t, e, r) {
+    if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
+    var o = [null];
+    o.push.apply(o, e);
+    var p = new (t.bind.apply(t, o))();
+    return r && _setPrototypeOf(p, r.prototype), p;
+  }
+  function _isNativeReflectConstruct() {
+    try {
+      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    } catch (t) {}
+    return (_isNativeReflectConstruct = function () {
+      return !!t;
+    })();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : String(i);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -55,32 +87,6 @@
     };
     return _setPrototypeOf(o, p);
   }
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  function _construct(Parent, args, Class) {
-    if (_isNativeReflectConstruct()) {
-      _construct = Reflect.construct.bind();
-    } else {
-      _construct = function _construct(Parent, args, Class) {
-        var a = [null];
-        a.push.apply(a, args);
-        var Constructor = Function.bind.apply(Parent, a);
-        var instance = new Constructor();
-        if (Class) _setPrototypeOf(instance, Class.prototype);
-        return instance;
-      };
-    }
-    return _construct.apply(null, arguments);
-  }
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -94,20 +100,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-        result;
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-      return _possibleConstructorReturn(this, result);
-    };
   }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -133,20 +125,6 @@
   }
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  function _toPrimitive(input, hint) {
-    if (typeof input !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (typeof res !== "object") return res;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return (hint === "string" ? String : Number)(input);
-  }
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return typeof key === "symbol" ? key : String(key);
   }
 
   var GetVariableName = function GetVariableName(setName) {
@@ -270,7 +248,6 @@
             value = flv.defuzzifyMaxAv();
           // use MaxAv as fallback
         }
-
         return value;
       }
     }, {
@@ -447,13 +424,12 @@
   */
   var LeftShoulderFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(LeftShoulderFuzzySet, _FuzzySet);
-    var _super = _createSuper(LeftShoulderFuzzySet);
     function LeftShoulderFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, LeftShoulderFuzzySet);
       // the representative value is the midpoint of the plateau of the shoulder
       var representativeValue = (midpoint + left) / 2;
-      _this = _super.call(this, representativeValue);
+      _this = _callSuper(this, LeftShoulderFuzzySet, [representativeValue]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -490,13 +466,12 @@
   */
   var LeftSCurveFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(LeftSCurveFuzzySet, _FuzzySet);
-    var _super = _createSuper(LeftSCurveFuzzySet);
     function LeftSCurveFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, LeftSCurveFuzzySet);
       // the representative value is the midpoint of the plateau of the shoulder
       var representativeValue = (midpoint + left) / 2;
-      _this = _super.call(this, representativeValue);
+      _this = _callSuper(this, LeftSCurveFuzzySet, [representativeValue]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -539,13 +514,12 @@
   */
   var RightShoulderFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(RightShoulderFuzzySet, _FuzzySet);
-    var _super = _createSuper(RightShoulderFuzzySet);
     function RightShoulderFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, RightShoulderFuzzySet);
       // the representative value is the midpoint of the plateau of the shoulder
       var representativeValue = (midpoint + right) / 2;
-      _this = _super.call(this, representativeValue);
+      _this = _callSuper(this, RightShoulderFuzzySet, [representativeValue]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -582,13 +556,12 @@
   */
   var RightSCurveFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(RightSCurveFuzzySet, _FuzzySet);
-    var _super = _createSuper(RightSCurveFuzzySet);
     function RightSCurveFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, RightSCurveFuzzySet);
       // the representative value is the midpoint of the plateau of the shoulder
       var representativeValue = (midpoint + right) / 2;
-      _this = _super.call(this, representativeValue);
+      _this = _callSuper(this, RightSCurveFuzzySet, [representativeValue]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -629,11 +602,10 @@
   */
   var TriangularFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(TriangularFuzzySet, _FuzzySet);
-    var _super = _createSuper(TriangularFuzzySet);
     function TriangularFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, TriangularFuzzySet);
-      _this = _super.call(this, midpoint);
+      _this = _callSuper(this, TriangularFuzzySet, [midpoint]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -672,11 +644,10 @@
   */
   var SingletonFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(SingletonFuzzySet, _FuzzySet);
-    var _super = _createSuper(SingletonFuzzySet);
     function SingletonFuzzySet(left, midpoint, right) {
       var _this;
       _classCallCheck(this, SingletonFuzzySet);
-      _this = _super.call(this, midpoint);
+      _this = _callSuper(this, SingletonFuzzySet, [midpoint]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -699,11 +670,10 @@
   */
   var NormalDistFuzzySet = /*#__PURE__*/function (_FuzzySet) {
     _inherits(NormalDistFuzzySet, _FuzzySet);
-    var _super = _createSuper(NormalDistFuzzySet);
     function NormalDistFuzzySet(left, midpoint, right, standardDeviation) {
       var _this;
       _classCallCheck(this, NormalDistFuzzySet);
-      _this = _super.call(this, midpoint);
+      _this = _callSuper(this, NormalDistFuzzySet, [midpoint]);
       _this.left = left;
       _this.midpoint = midpoint;
       _this.right = right;
@@ -763,7 +733,6 @@
       // Right part
       'triangular'; // Middle part
     }
-
     var fuzzySet = _construct(FuzzySetClasses[setType], _toConsumableArray(config.parameters));
     return fuzzySet;
   };
@@ -1458,7 +1427,6 @@
               }
               return false; // rule action called reject() implying the next rule should be tested instead.
             }
-
             return false;
           },
           // return next match in input
@@ -1767,11 +1735,10 @@
   */
   var FuzzyAND = /*#__PURE__*/function (_FuzzyCompositeTerm) {
     _inherits(FuzzyAND, _FuzzyCompositeTerm);
-    var _super = _createSuper(FuzzyAND);
     function FuzzyAND() {
       _classCallCheck(this, FuzzyAND);
       var terms = Array.from(arguments);
-      return _super.call(this, terms);
+      return _callSuper(this, FuzzyAND, [terms]);
     }
     _createClass(FuzzyAND, [{
       key: "getDegreeOfMembership",
@@ -1796,11 +1763,10 @@
   */
   var FuzzyOR = /*#__PURE__*/function (_FuzzyCompositeTerm) {
     _inherits(FuzzyOR, _FuzzyCompositeTerm);
-    var _super = _createSuper(FuzzyOR);
     function FuzzyOR() {
       _classCallCheck(this, FuzzyOR);
       var terms = Array.from(arguments);
-      return _super.call(this, terms);
+      return _callSuper(this, FuzzyOR, [terms]);
     }
     _createClass(FuzzyOR, [{
       key: "getDegreeOfMembership",
@@ -1825,10 +1791,9 @@
   */
   var FuzzyFAIRLY = /*#__PURE__*/function (_FuzzyCompositeTerm) {
     _inherits(FuzzyFAIRLY, _FuzzyCompositeTerm);
-    var _super = _createSuper(FuzzyFAIRLY);
     function FuzzyFAIRLY(fuzzyTerm) {
       _classCallCheck(this, FuzzyFAIRLY);
-      return _super.call(this, [fuzzyTerm]);
+      return _callSuper(this, FuzzyFAIRLY, [[fuzzyTerm]]);
     }
     _createClass(FuzzyFAIRLY, [{
       key: "clearDegreeOfMembership",
@@ -1858,11 +1823,10 @@
   */
   var FuzzyVERY = /*#__PURE__*/function (_FuzzyCompositeTerm) {
     _inherits(FuzzyVERY, _FuzzyCompositeTerm);
-    var _super = _createSuper(FuzzyVERY);
     function FuzzyVERY() {
       var fuzzyTerm = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       _classCallCheck(this, FuzzyVERY);
-      return _super.call(this, [fuzzyTerm]);
+      return _callSuper(this, FuzzyVERY, [[fuzzyTerm]]);
     }
     _createClass(FuzzyVERY, [{
       key: "clearDegreeOfMembership",
@@ -1962,10 +1926,9 @@
 
   var FuzzyPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(FuzzyPlugin, _Phaser$Plugins$BaseP);
-    var _super = _createSuper(FuzzyPlugin);
     function FuzzyPlugin(pluginManager) {
       _classCallCheck(this, FuzzyPlugin);
-      return _super.call(this, pluginManager);
+      return _callSuper(this, FuzzyPlugin, [pluginManager]);
     }
     _createClass(FuzzyPlugin, [{
       key: "start",
