@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/bounds/">
       
       
-        <link rel="prev" href="../interception/">
+        <link rel="prev" href="../shake-position/">
       
       
-        <link rel="next" href="../particles-along-bounds/">
+        <link rel="next" href="../step/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
@@ -2987,14 +2987,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_2" checked>
       
       
       
@@ -3003,7 +3005,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_14_2">
           <span class="md-nav__icon md-icon"></span>
           Position
@@ -3047,6 +3049,160 @@
       <a href="../shake-position/" class="md-nav__link">
         Shake position
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Bounds
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Bounds
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-game-object" class="md-nav__link">
+    Target game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-bounds" class="md-nav__link">
+    Target bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-mond" class="md-nav__link">
+    Align mond
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-result" class="md-nav__link">
+    Hit result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event" class="md-nav__link">
+    Event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3389,160 +3545,6 @@
               
   
   
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Bounds
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Bounds
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#target-game-object" class="md-nav__link">
-    Target game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#target-bounds" class="md-nav__link">
-    Target bounds
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" class="md-nav__link">
-    Enable
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#align-mond" class="md-nav__link">
-    Align mond
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hit-result" class="md-nav__link">
-    Hit result
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event" class="md-nav__link">
-    Event
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
   
     <li class="md-nav__item">
       <a href="../particles-along-bounds/" class="md-nav__link">
@@ -3564,17 +3566,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_17" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_16" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_14_17" id="__nav_4_14_17_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_14_16" id="__nav_4_14_16_label" tabindex="0">
           Modal
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_17_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_14_17">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_16_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_14_16">
           <span class="md-nav__icon md-icon"></span>
           Modal
         </label>
@@ -3640,17 +3642,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_19" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_18" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_14_19" id="__nav_4_14_19_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_14_18" id="__nav_4_14_18_label" tabindex="0">
           Arcade
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_19_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_14_19">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_18_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_14_18">
           <span class="md-nav__icon md-icon"></span>
           Arcade
         </label>
@@ -3667,17 +3669,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_19_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_18_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_14_19_1" id="__nav_4_14_19_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_14_18_1" id="__nav_4_14_18_1_label" tabindex="0">
           Engine
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_14_19_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_14_19_1">
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_14_18_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_14_18_1">
           <span class="md-nav__icon md-icon"></span>
           Engine
         </label>
@@ -3806,17 +3808,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_20" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_19" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_14_20" id="__nav_4_14_20_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_14_19" id="__nav_4_14_19_label" tabindex="0">
           Matter.js
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_20_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_14_20">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_14_19_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_14_19">
           <span class="md-nav__icon md-icon"></span>
           Matter.js
         </label>
@@ -3833,17 +3835,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_20_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14_19_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_14_20_1" id="__nav_4_14_20_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_14_19_1" id="__nav_4_14_19_1_label" tabindex="0">
           Engine
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_14_20_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_14_20_1">
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_14_19_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_14_19_1">
           <span class="md-nav__icon md-icon"></span>
           Engine
         </label>
