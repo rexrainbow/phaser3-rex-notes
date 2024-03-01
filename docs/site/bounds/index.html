@@ -3174,6 +3174,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bound-hit-mode" class="md-nav__link">
+    Bound hit mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#align-mond" class="md-nav__link">
     Align mond
   </a>
@@ -9717,6 +9724,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bound-hit-mode" class="md-nav__link">
+    Bound hit mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#align-mond" class="md-nav__link">
     Align mond
   </a>
@@ -9763,15 +9777,16 @@
   <h1>Bounds</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Clamp game object inside target bounds.</p>
+<p>Clamp or wrap position of game object inside target bounds.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Arcade behavior of game object</li>
+<li>Behavior of game object</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/ExEKNaO">Drag inside bounds</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNqxYRL">Target bounds</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/VwNwEVz">Wrap bounds</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bounds">Sample code</a></p>
@@ -9828,6 +9843,15 @@
 <span class="w">    </span><span class="c1">// target: undefined,</span>
 <span class="w">    </span><span class="c1">// bounds: undefined,</span>
 <span class="w">    </span><span class="c1">// enable: true,</span>
+
+<span class="w">    </span><span class="c1">// boundsHitMode: &#39;clamp&#39;,  // &#39;clamp&#39;, or &#39;wrap&#39;</span>
+<span class="w">    </span><span class="c1">// boundsHitMode: {</span>
+<span class="w">    </span><span class="c1">//     left: &#39;clamp&#39;,</span>
+<span class="w">    </span><span class="c1">//     right: &#39;clamp&#39;,</span>
+<span class="w">    </span><span class="c1">//     top: &#39;clamp&#39;,</span>
+<span class="w">    </span><span class="c1">//     bottom: &#39;clamp&#39; </span>
+<span class="w">    </span><span class="c1">// },</span>
+
 <span class="w">    </span><span class="c1">// alignMode: 0</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -9853,9 +9877,9 @@
 </ul>
 </li>
 <li><code>enable</code> :<ul>
-<li><code>true</code> : Clamp game object at left/right/top/bottom bounds.</li>
-<li><code>false</code> : Don't clamp game object at any bound</li>
-<li>An objecct : Set <code>true</code> to clamp at a bound 
+<li><code>true</code> : Clamp or wrap game object's position when game object overlap left/right/top/bottom bounds.</li>
+<li><code>false</code> : Don't clamp or wrap game object's position at any bound</li>
+<li>An objecct : Set <code>true</code> to clamp or wrap game object's position at a bound 
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -9865,9 +9889,22 @@
 </code></pre></div></li>
 </ul>
 </li>
+<li><code>boundsHitMode</code> : Position mode when game object overlap bounds<ul>
+<li><code>0</code>, or <code>'clamp'</code> : Clamp game object's position when game object overlap left/right/top/bottom bounds.</li>
+<li><code>1</code>, or <code>'wrap'</code> : Wrap game object's position when game object overlap left/right/top/bottom bounds.</li>
+<li>An objecct : Set <code>0</code>/<code>'clamp'</code>, or <code>1</code>/<code>'wrap'</code> to clamp or wrap game object's position at a bound 
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">   </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w">  </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>alignMode</code> : <ul>
-<li><code>0</code>, or <code>'bounds'</code> : Align bounds of game object to target bound. Default behavior.</li>
-<li><code>1</code>, or <code>'origin'</code> : Set position of game object to target bound.</li>
+<li><code>0</code>, or <code>'bounds'</code> : Align bounds of game object to target bound. Default behavior if <code>boundsHitMode</code> are all set to <em>clamp</em> mode. </li>
+<li><code>1</code>, or <code>'origin'</code> : Set position of game object to target bound. Default behavior if <code>boundsHitMode</code> has <em>wrap</em> mode.</li>
 </ul>
 </li>
 </ul>
@@ -9946,6 +9983,30 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">enableRightBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsEnable</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">enableTopBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsEnable</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">enableBottomBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsEnable</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="bound-hit-mode">Bound hit mode<a class="headerlink" href="#bound-hit-mode" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">bounds</span><span class="p">.</span><span class="nx">setBoundsHitMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>0</code>, or <code>'clamp'</code> : Clamp game object's position when game object overlap left/right/top/bottom bounds.</li>
+<li><code>1</code>, or <code>'wrap'</code> : Wrap game object's position when game object overlap left/right/top/bottom bounds.</li>
+<li>An objecct : Set <code>0</code>/<code>'clamp'</code>, or <code>1</code>/<code>'wrap'</code> to clamp or wrap game object's position at a bound 
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">   </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="w">    </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w">  </span><span class="c1">// 0,&#39;clamp&#39;,1,&#39;wrap&#39;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">leftBoundHitMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsHitMode</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">rightBoundHitMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsHitMode</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">topBoundHitMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsHitMode</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bottomBoundHitMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">.</span><span class="nx">boundsHitMode</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="align-mond">Align mond<a class="headerlink" href="#align-mond" title="Permanent link">&para;</a></h3>
