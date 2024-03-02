@@ -11,7 +11,7 @@ import {
   CSM_LOG_LEVEL_ERROR,
   CSM_LOG_LEVEL_INFO,
   CSM_LOG_LEVEL_VERBOSE,
-  CSM_LOG_LEVEL_WARNING
+  CSM_LOG_LEVEL_WARNING,
 } from '../cubismframeworkconfig';
 import { CubismFramework, LogLevel } from '../live2dcubismframework';
 

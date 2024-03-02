@@ -1,143 +1,163 @@
+[English](README.md) / [日本語](README.ja.md)
+
+---
+
 # Cubism Web Framework
 
-Live2D Cubism 4 Editor で出力したモデルをアプリケーションで利用するためのフレームワークです。
+This is a framework for using models output by Live2D Cubism 4 Editor in applications.
 
-モデルを表示、操作するための各種機能を提供します。
-モデルをロードするには Live2D Cubism Core ライブラリと組み合わせて使用します。
+It provides various functions for displaying and manipulating the model.
+It is used in conjunction with the Live2D Cubism Core library to load the model.
 
-ビルドを行うことで、ブラウザで利用可能な JavaScript ライブラリとして利用することができます。
-
-
-## ライセンス
-
-本 SDK を使用する前に、[ライセンス](LICENSE.md)をご確認ください。
+You can use it as a JavaScript library that can be used in the browser by building.
 
 
-## 開発環境
+## License
+
+Please check the [license](LICENSE.md) before using this SDK.
+
+
+## Development environment
 
 ### Node.js
 
-* 17.2.0
-* 16.13.1
-* 14.18.2
-* 12.22.7
+* 20.1.0
+* 18.16.0
+* 16.20.0
 
 ### TypeScript
 
-4.5.2
+5.0.4
 
 
-## 開発環境構築
+## Development environment construction
 
-1. [Node.js] と [Visual Studio Code] をインストールします
-1. Visual Studio Code で本プロジェクトを開き、推奨拡張機能をインストールします
-    * 拡張機能タブから `@recommended` と入力することで確認できます
-1. コマンドパレット（*View > Command Palette...*）で `>Tasks: Run Task` を入力してタスク一覧を表示します
-1. `npm: install` を選択して依存パッケージのダウンロードを行います
+1. Install [Node.js] and [Visual Studio Code]
+1. Open this project in Visual Studio Code and install the recommended extensions
+    * You can check them by typing `@recommended` from the Extensions tab
+1. Enter `>Tasks: Run Task` in the command palette (*View > Command Palette...*) to display the task list
+1. Select `npm: install` to download the dependent packages
 
-コマンドパレットのタスク一覧から各種コマンドを実行することができます。
+You can execute various commands from the task list on the command palette.
 
-NOTE: デバック用の設定は、`.vscode/tasks.json` に記述しています。
+NOTE: Settings for debugging are described in `.vscode/tasks.json`.
 
-## タスク一覧
+## Task list
 
 ### `npm: build`
 
-ソースファイルのビルドを行い、`dist` ディレクトリに出力します。
+Builds the source file and outputs to the `dist` directory.
 
-`tsconfig.json` を編集することで設定内容を変更できます。
+You can change the settings by editing `tsconfig.json`.
 
 ### `npm: test`
 
-TypeScript の型チェックテストを行います。
+Performs a TypeScript type check test.
 
-`tsconfig.json` を編集することで設定内容を変更できます。
+You can change the settings by editing `tsconfig.json`.
 
 ### `npm: lint`
 
-`src` ディレクトリ内の TypeScript ファイルの静的解析を行います。
+Performs static analysis of TypeScript files in the `src` directory.
 
-`.eslintrc.yml` を編集することで設定内容を変更できます。
+You can change the settings by editing `.eslintrc.yml`.
 
 ### `npm: lint:fix`
 
-`src` ディレクトリ内の TypeScript ファイルの静的解析及び自動修正を行います。
+Performs static analysis and automatic modification of TypeScript files in the `src` directory.
 
-`.eslintrc.yml` を編集することで設定内容を変更できます。
+You can change the settings by editing `.eslintrc.yml`.
 
 ### `npm: clean`
 
-ビルド成果物ディレクトリ（`dist`）を削除します。
+Deletes the build deliverable directory (`dist`).
 
 
-## コンポーネント
+## Components
 
 ### effect
 
-自動まばたきやリップシンクなど、モデルに対してモーション情報をエフェクト的に付加する機能を提供します。
+Provides functions such as automatic blinking and lip sync to add motion information as an effect to the model.
 
 ### id
 
-モデルに設定されたパラメータ名・パーツ名・Drawable名を独自の型で管理する機能を提供します。
+Provides functions to manage the parameter name, part name, and Drawable name set in the model with unique types.
 
 ### math
 
-行列計算やベクトル計算など、モデルの操作や描画に必要な算術演算の機能を提供します。
+Provides arithmetic functions required for manipulating and drawing the model, such as matrix and vector calculations.
 
 ### model
 
-モデルを取り扱うための各種機能（生成、更新、破棄）を提供します。
+Provides various functions (generate, update, destroy) for handling the model.
 
 ### motion
 
-モデルにモーションデータを適用するための各種機能（モーション再生、パラメータブレンド）を提供します。
+Provides various functions (motion playback, parameter blending) for applying motion data to the model.
 
 ### physics
 
-モデルに物理演算による変形操作を適用するための機能を提供します。
+Provides functions for applying transformation manipulations due to physics to the model.
 
 ### rendering
 
-モデルを描画するためのグラフィックス命令を実装したレンダラを提供します。
+Provides a renderer that implements graphics instructions for drawing the model.
 
 ### type
 
-フレームワーク内で使用する型定義を提供します。
+Provides type definitions for use within the framework.
 
 ### utils
 
-JSONパーサーやログ出力などのユーティリティ機能を提供します。
+Provides utility functions such as JSON parser and log output.
 
 
 ## Live2D Cubism Core for Web
 
-当リポジトリには Cubism Core for Web は同梱されていません。
+Cubism Core for Web is not included in this repository.
 
-[Cubism SDK for Web] からダウンロードしてください。
+Please download it from the [Cubism SDK for Web].
 
 [Cubism SDK for Web]: https://www.live2d.com/download/cubism-sdk/download-web/
 
 
-## サンプル
+## Samples
 
-標準的なアプリケーションの実装例は [CubismWebSamples] を参照ください。
+Please refer to [CubismWebSamples] for implementation examples of standard applications.
 
 [CubismWebSamples]: https://github.com/Live2D/CubismWebSamples
 
 
-## マニュアル
+## Manual
 
 [Cubism SDK Manual](https://docs.live2d.com/cubism-sdk-manual/top/)
 
 
-## 変更履歴
+## Changelog
 
-当リポジトリの変更履歴については [CHANGELOG.md](CHANGELOG.md) を参照ください。
+Please refer to [CHANGELOG.md](CHANGELOG.md) for the changelog of this repository.
 
 
-## コミュニティ
+## Contributing
 
-ユーザー同士でCubism SDKの活用方法の提案や質問をしたい場合は、是非コミュニティをご活用ください。
+There are many ways to contribute to the project: logging bugs, submitting pull requests on this GitHub, and reporting issues and making suggestions in Live2D Community.
 
-- [Live2D 公式コミュニティ](https://creatorsforum.live2d.com/)
-- [Live2D community(English)](http://community.live2d.com/)
+### Forking And Pull Requests
+
+We very much appreciate your pull requests, whether they bring fixes, improvements, or even new features. Note, however, that the wrapper is designed to be as lightweight and shallow as possible and should therefore only be subject to bug fixes and memory/performance improvements. To keep the main repository as clean as possible, create a personal fork and feature branches there as needed.
+
+### Bugs
+
+We are regularly checking issue-reports and feature requests at Live2D Community. Before filing a bug report, please do a search in Live2D Community to see if the issue-report or feature request has already been posted. If you find your issue already exists, make relevant comments and add your reaction.
+
+### Suggestions
+
+We're also interested in your feedback for the future of the SDK. You can submit a suggestion or feature request at Live2D Community. To make this process more effective, we're asking that you include more information to help define them more clearly.
+
+
+## Community
+
+If you want to suggest or ask questions about how to use the Cubism SDK between users, please use the community.
+
+- [Live2D community](https://community.live2d.com/)
+- [Live2D 公式コミュニティ (Japanese)](https://creatorsforum.live2d.com/)

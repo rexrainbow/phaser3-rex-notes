@@ -73,7 +73,7 @@ enum FrequestNode {
   FrequestNode_Textures, // getRoot().getValueByString(FileReferences).getValueByString(Textures)
   FrequestNode_Physics, // getRoot().getValueByString(FileReferences).getValueByString(Physics)
   FrequestNode_Pose, // getRoot().getValueByString(FileReferences).getValueByString(Pose)
-  FrequestNode_HitAreas // getRoot().getValueByString(HitAreas)
+  FrequestNode_HitAreas, // getRoot().getValueByString(HitAreas)
 }
 
 /**
@@ -183,9 +183,25 @@ export class CubismModelSettingJson extends ICubismModelSetting {
    * @return テクスチャが配置されたディレクトリの名前
    */
   public getTextureDirectory(): string {
-    return this._jsonValue
+    const texturePath = this._jsonValue
       .at(FrequestNode.FrequestNode_Textures)
+      .getValueByIndex(0)
       .getRawString();
+
+    const pathArray = texturePath.split('/');
+    // 最後の要素はテクスチャ名なので不要
+    const arrayLength = pathArray.length - 1;
+    let textureDirectoryStr = '';
+
+    // 分割したパスを結合
+    for (let i = 0; i < arrayLength; i++) {
+      textureDirectoryStr += pathArray[i];
+      if (i < arrayLength - 1) {
+        textureDirectoryStr += '/';
+      }
+    }
+
+    return textureDirectoryStr;
   }
 
   /**
@@ -496,10 +512,7 @@ export class CubismModelSettingJson extends ICubismModelSetting {
       }
 
       if (refI.getValueByString(Name).getRawString() == EyeBlink) {
-        num = refI
-          .getValueByString(Ids)
-          .getVector()
-          .getSize();
+        num = refI.getValueByString(Ids).getVector().getSize();
         break;
       }
     }
@@ -531,10 +544,7 @@ export class CubismModelSettingJson extends ICubismModelSetting {
 
       if (refI.getValueByString(Name).getRawString() == EyeBlink) {
         return CubismFramework.getIdManager().getId(
-          refI
-            .getValueByString(Ids)
-            .getValueByIndex(index)
-            .getRawString()
+          refI.getValueByString(Ids).getValueByIndex(index).getRawString()
         );
       }
     }
@@ -564,10 +574,7 @@ export class CubismModelSettingJson extends ICubismModelSetting {
       }
 
       if (refI.getValueByString(Name).getRawString() == LipSync) {
-        num = refI
-          .getValueByString(Ids)
-          .getVector()
-          .getSize();
+        num = refI.getValueByString(Ids).getVector().getSize();
         break;
       }
     }
@@ -599,10 +606,7 @@ export class CubismModelSettingJson extends ICubismModelSetting {
 
       if (refI.getValueByString(Name).getRawString() == LipSync) {
         return CubismFramework.getIdManager().getId(
-          refI
-            .getValueByString(Ids)
-            .getValueByIndex(index)
-            .getRawString()
+          refI.getValueByString(Ids).getValueByIndex(index).getRawString()
         );
       }
     }

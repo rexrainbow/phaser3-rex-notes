@@ -96,12 +96,7 @@ export class CubismIdManager {
    */
   private findId(id: string): CubismId {
     for (let i = 0; i < this._ids.getSize(); ++i) {
-      if (
-        this._ids
-          .at(i)
-          .getString()
-          .isEqual(id)
-      ) {
+      if (this._ids.at(i).getString().isEqual(id)) {
         return this._ids.at(i);
       }
     }

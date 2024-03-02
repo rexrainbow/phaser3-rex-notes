@@ -214,6 +214,8 @@ export abstract class Value {
 
   public static errorValue: Value; // 一時的な返り値として返すエラー。 CubismFramework::Disposeするまではdeleteしない
   public static nullValue: Value; // 一時的な返り値として返すNULL。   CubismFramework::Disposeするまではdeleteしない
+
+  [key: string]: any; // 明示的に連想配列をany型で指定
 }
 
 /**
@@ -235,7 +237,7 @@ export class CubismJson {
     this._root = null;
 
     if (buffer != undefined) {
-      this.parseBytes(buffer, length);
+      this.parseBytes(buffer, length, this._parseCallback);
     }
   }
 
@@ -248,7 +250,11 @@ export class CubismJson {
    */
   public static create(buffer: ArrayBuffer, size: number) {
     const json = new CubismJson();
-    const succeeded: boolean = json.parseBytes(buffer, size);
+    const succeeded: boolean = json.parseBytes(
+      buffer,
+      size,
+      json._parseCallback
+    );
 
     if (!succeeded) {
       CubismJson.delete(json);
@@ -280,7 +286,7 @@ export class CubismJson {
    * @param buffer 変換するバイナリデータ
    * @return 変換後の文字列
    */
-  public arrayBufferToString(buffer: ArrayBuffer): string {
+  public static arrayBufferToString(buffer: ArrayBuffer): string {
     const uint8Array: Uint8Array = new Uint8Array(buffer);
     let str = '';
 
@@ -295,7 +301,7 @@ export class CubismJson {
   /**
    * エンコード、パディング
    */
-  private pad(n: string): string {
+  private static pad(n: string): string {
     return n.length < 2 ? '0' + n : n;
   }
 
@@ -306,10 +312,20 @@ export class CubismJson {
    * return true : 成功
    * return false: 失敗
    */
-  public parseBytes(buffer: ArrayBuffer, size: number): boolean {
-    const endPos: number[] = new Array(1); // 参照渡しにするため配列
-    const decodeBuffer: string = this.arrayBufferToString(buffer);
-    this._root = this.parseValue(decodeBuffer, size, 0, endPos);
+  public parseBytes(
+    buffer: ArrayBuffer,
+    size: number,
+    parseCallback?: parseJsonObject
+  ): boolean {
+    const endPos: number[] = new Array<number>(1); // 参照渡しにするため配列
+    const decodeBuffer: string = CubismJson.arrayBufferToString(buffer);
+
+    if (parseCallback == undefined) {
+      this._root = this.parseValue(decodeBuffer, size, 0, endPos);
+    } else {
+      // TypeScript標準のJSONパーサを使う
+      this._root = parseCallback(JSON.parse(decodeBuffer), new JsonMap());
+    }
 
     if (this._error) {
       let strbuf = '\0';
@@ -704,9 +720,15 @@ export class CubismJson {
     return null;
   }
 
+  _parseCallback: parseJsonObject = CubismJsonExtension.parseJsonObject; // パース時に使う処理のコールバック関数
+
   _error: string; // パース時のエラー
   _lineCount: number; // エラー報告に用いる行数カウント
   _root: Value; // パースされたルート要素
+}
+
+interface parseJsonObject {
+  (obj: Value, map: JsonMap): JsonMap;
 }
 
 /**
@@ -1230,6 +1252,7 @@ export class JsonMap extends Value {
 
 // Namespace definition for compatibility.
 import * as $ from './cubismjson';
+import { CubismJsonExtension } from './cubismjsonextension';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
   export const CubismJson = $.CubismJson;

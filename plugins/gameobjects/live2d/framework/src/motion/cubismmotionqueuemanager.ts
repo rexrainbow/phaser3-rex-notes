@@ -327,7 +327,8 @@ export interface CubismMotionEventFunction {
  * モーションの識別番号の定義
  */
 export declare type CubismMotionQueueEntryHandle = any;
-export const InvalidMotionQueueEntryHandleValue: CubismMotionQueueEntryHandle = -1;
+export const InvalidMotionQueueEntryHandleValue: CubismMotionQueueEntryHandle =
+  -1;
 
 // Namespace definition for compatibility.
 import * as $ from './cubismmotionqueuemanager';

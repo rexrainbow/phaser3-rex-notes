@@ -60,9 +60,10 @@ export class CubismPose {
       for (let groupIndex = 0; groupIndex < idCount; ++groupIndex) {
         const partInfo: Value = idListInfo.getValueByIndex(groupIndex);
         const partData: PartData = new PartData();
-        const parameterId: CubismIdHandle = CubismFramework.getIdManager().getId(
-          partInfo.getValueByString(Id).getRawString()
-        );
+        const parameterId: CubismIdHandle =
+          CubismFramework.getIdManager().getId(
+            partInfo.getValueByString(Id).getRawString()
+          );
 
         partData.partId = parameterId;
 
@@ -163,10 +164,7 @@ export class CubismPose {
         model.setParameterValueByIndex(paramIndex, j == beginIndex ? 1.0 : 0.0);
 
         for (let k = 0; k < this._partGroups.at(j).link.getSize(); ++k) {
-          this._partGroups
-            .at(j)
-            .link.at(k)
-            .initialize(model);
+          this._partGroups.at(j).link.at(k).initialize(model);
         }
       }
 

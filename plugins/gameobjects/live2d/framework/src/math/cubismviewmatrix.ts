@@ -72,7 +72,7 @@ export class CubismViewMatrix extends CubismMatrix44 {
       x,
       y,
       0.0,
-      1.0
+      1.0,
     ]);
 
     CubismMatrix44.multiply(tr1, this._tr, this._tr);
@@ -117,7 +117,7 @@ export class CubismViewMatrix extends CubismMatrix44 {
       cx,
       cy,
       0.0,
-      1.0
+      1.0,
     ]);
 
     const tr2: Float32Array = new Float32Array([
@@ -136,7 +136,7 @@ export class CubismViewMatrix extends CubismMatrix44 {
       0.0,
       0.0,
       0.0,
-      1.0
+      1.0,
     ]);
 
     const tr3: Float32Array = new Float32Array([
@@ -155,7 +155,7 @@ export class CubismViewMatrix extends CubismMatrix44 {
       -cx,
       -cy,
       0.0,
-      1.0
+      1.0,
     ]);
 
     CubismMatrix44.multiply(tr3, this._tr, this._tr);

@@ -10,7 +10,7 @@ import { CubismRenderer } from './rendering/cubismrenderer';
 import {
   CSM_ASSERT,
   CubismLogInfo,
-  CubismLogWarning
+  CubismLogWarning,
 } from './utils/cubismdebug';
 import { Value } from './utils/cubismjson';
 
@@ -56,7 +56,7 @@ let s_cubismIdManager: CubismIdManager = null;
  */
 export const Constant = Object.freeze<Record<string, number>>({
   vertexOffset: 0, // メッシュ頂点のオフセット値
-  vertexStep: 2 // メッシュ頂点のステップ値
+  vertexStep: 2, // メッシュ頂点のステップ値
 });
 
 export function csmDelete<T>(address: T): void {
@@ -131,8 +131,13 @@ export class CubismFramework {
   /**
    * Cubism Framework内のリソースを初期化してモデルを表示可能な状態にします。<br>
    *     再度Initialize()するには先にDispose()を実行する必要があります。
+   *
+   * @param memorySize 初期化時メモリ量 [byte(s)]
+   *    複数モデル表示時などにモデルが更新されない際に使用してください。
+   *    指定する際は必ず1024*1024*16 byte(16MB)以上の値を指定してください。
+   *    それ以外はすべて1024*1024*16 byteに丸めます。
    */
-  public static initialize(): void {
+  public static initialize(memorySize = 0): void {
     CSM_ASSERT(s_isStarted);
     if (!s_isStarted) {
       CubismLogWarning('CubismFramework is not started.');
@@ -153,6 +158,12 @@ export class CubismFramework {
     Value.staticInitializeNotForClientCall();
 
     s_cubismIdManager = new CubismIdManager();
+
+    // --- HACK: 初期化時メモリ量の拡張(単位byte) ---
+    // 複数モデル表示時などにモデルが更新されない際に使用してください。
+    // 指定する際は必ず1024*1024*16 byte(16MB)以上の値を指定してください。
+    // それ以外はすべて1024*1024*16 byteに丸めます。
+    Live2DCubismCore.Memory.initializeAmountOfMemory(memorySize);
 
     s_isInitialized = true;
 
@@ -263,7 +274,7 @@ export enum LogLevel {
   LogLevel_Info, // Infoログ
   LogLevel_Warning, // 警告ログ
   LogLevel_Error, // エラーログ
-  LogLevel_Off // ログ出力無効
+  LogLevel_Off, // ログ出力無効
 }
 
 // Namespace definition for compatibility.

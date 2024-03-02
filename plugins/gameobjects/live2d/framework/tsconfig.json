@@ -9,7 +9,9 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true
   },
   "include": [
     "src/**/*.ts",

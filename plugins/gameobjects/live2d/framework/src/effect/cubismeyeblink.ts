@@ -219,7 +219,7 @@ export enum EyeState {
   EyeState_Interval, // まばたきしていない状態
   EyeState_Closing, // まぶたが閉じていく途中の状態
   EyeState_Closed, // まぶたが閉じている状態
-  EyeState_Opening // まぶたが開いていく途中の状態
+  EyeState_Opening, // まぶたが開いていく途中の状態
 }
 
 // Namespace definition for compatibility.

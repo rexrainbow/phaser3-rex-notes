@@ -258,6 +258,46 @@ export abstract class ACubismMotion {
    */
   public getFinishedMotionHandler = () => this._onFinishedMotion;
 
+  /**
+   * 透明度のカーブが存在するかどうかを確認する
+   *
+   * @returns true  -> キーが存在する
+   *          false -> キーが存在しない
+   */
+  public isExistModelOpacity(): boolean {
+    return false;
+  }
+
+  /**
+   * 透明度のカーブのインデックスを返す
+   *
+   * @returns success:透明度のカーブのインデックス
+   */
+  public getModelOpacityIndex(): number {
+    return -1;
+  }
+
+  /**
+   * 透明度のIdを返す
+   *
+   * @param index モーションカーブのインデックス
+   * @returns success:透明度のId
+   */
+  public getModelOpacityId(index: number): CubismIdHandle {
+    return null;
+  }
+
+  /**
+   * 指定時間の透明度の値を返す
+   *
+   * @returns success:モーションの現在時間におけるOpacityの値
+   *
+   * @note  更新後の値を取るにはUpdateParameters() の後に呼び出す。
+   */
+  protected getModelOpacityValue(): number {
+    return 1.0;
+  }
+
   public _fadeInSeconds: number; // フェードインにかかる時間[秒]
   public _fadeOutSeconds: number; // フェードアウトにかかる時間[秒]
   public _weight: number; // モーションの重み
@@ -271,6 +311,7 @@ export abstract class ACubismMotion {
 
 // Namespace definition for compatibility.
 import * as $ from './acubismmotion';
+import { CubismIdHandle } from '../id/cubismid';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Live2DCubismFramework {
   export const ACubismMotion = $.ACubismMotion;

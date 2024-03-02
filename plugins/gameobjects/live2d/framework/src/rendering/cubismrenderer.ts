@@ -45,7 +45,11 @@ export abstract class CubismRenderer {
   public drawModel(): void {
     if (this.getModel() == null) return;
 
+    this.saveProfile();
+
     this.doDrawModel();
+
+    this.restoreProfile();
   }
 
   /**
@@ -159,7 +163,7 @@ export abstract class CubismRenderer {
    * @param n パラメータの値
    */
   public setAnisotropy(n: number): void {
-    this._anisortopy = n;
+    this._anisotropy = n;
   }
 
   /**
@@ -167,7 +171,7 @@ export abstract class CubismRenderer {
    * @return 異方性フィルタリングのパラメータ
    */
   public getAnisotropy(): number {
-    return this._anisortopy;
+    return this._anisotropy;
   }
 
   /**
@@ -179,14 +183,36 @@ export abstract class CubismRenderer {
   }
 
   /**
+   * マスク描画の方式を変更する。
+   * falseの場合、マスクを1枚のテクスチャに分割してレンダリングする（デフォルト）
+   * 高速だが、マスク個数の上限が36に限定され、質も荒くなる
+   * trueの場合、パーツ描画の前にその都度必要なマスクを描き直す
+   * レンダリング品質は高いが描画処理負荷は増す
+   * @param high 高精細マスクに切り替えるか？
+   */
+  public useHighPrecisionMask(high: boolean): void {
+    this._useHighPrecisionMask = high;
+  }
+
+  /**
+   * マスクの描画方式を取得する
+   * @return true 高精細方式
+   * @return false デフォルト
+   */
+  public isUsingHighPrecisionMask(): boolean {
+    return this._useHighPrecisionMask;
+  }
+
+  /**
    * コンストラクタ
    */
   protected constructor() {
     this._isCulling = false;
     this._isPremultipliedAlpha = false;
-    this._anisortopy = 0.0;
+    this._anisotropy = 0.0;
     this._model = null;
     this._modelColor = new CubismTextureColor();
+    this._useHighPrecisionMask = false;
 
     // 単位行列に初期化
     this._mvpMatrix4x4 = new CubismMatrix44();
@@ -218,28 +244,41 @@ export abstract class CubismRenderer {
     indexArray: Uint16Array,
     vertexArray: Float32Array,
     uvArray: Float32Array,
+    multiplyColor: CubismTextureColor,
+    screenColor: CubismTextureColor,
     opacity: number,
     colorBlendMode: CubismBlendMode,
     invertedMask: boolean
   ): void;
 
   /**
+   * モデル描画直前のレンダラのステートを保持する
+   */
+  protected abstract saveProfile(): void;
+
+  /**
+   * モデル描画直前のレンダラのステートを復帰する
+   */
+  protected abstract restoreProfile(): void;
+
+  /**
    * レンダラが保持する静的なリソースを開放する
    */
-  public static staticRelease: Function;
+  public static staticRelease: any;
 
   protected _mvpMatrix4x4: CubismMatrix44; // Model-View-Projection 行列
   protected _modelColor: CubismTextureColor; // モデル自体のカラー（RGBA）
   protected _isCulling: boolean; // カリングが有効ならtrue
   protected _isPremultipliedAlpha: boolean; // 乗算済みαならtrue
-  protected _anisortopy: any; // テクスチャの異方性フィルタリングのパラメータ
+  protected _anisotropy: any; // テクスチャの異方性フィルタリングのパラメータ
   protected _model: CubismModel; // レンダリング対象のモデル
+  protected _useHighPrecisionMask: boolean; // falseの場合、マスクを纏めて描画する trueの場合、マスクはパーツ描画ごとに書き直す
 }
 
 export enum CubismBlendMode {
   CubismBlendMode_Normal = 0, // 通常
   CubismBlendMode_Additive = 1, // 加算
-  CubismBlendMode_Multiplicative = 2 // 乗算
+  CubismBlendMode_Multiplicative = 2, // 乗算
 }
 
 /**
@@ -249,11 +288,11 @@ export class CubismTextureColor {
   /**
    * コンストラクタ
    */
-  constructor() {
-    this.R = 1.0;
-    this.G = 1.0;
-    this.B = 1.0;
-    this.A = 1.0;
+  constructor(r = 1.0, g = 1.0, b = 1.0, a = 1.0) {
+    this.R = r;
+    this.G = g;
+    this.B = b;
+    this.A = a;
   }
 
   R: number; // 赤チャンネル

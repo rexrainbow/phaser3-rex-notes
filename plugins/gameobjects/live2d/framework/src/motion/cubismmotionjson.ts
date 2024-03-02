@@ -8,7 +8,7 @@
 import { CubismIdHandle } from '../id/cubismid';
 import { CubismFramework } from '../live2dcubismframework';
 import { csmString } from '../type/csmstring';
-import { CubismJson } from '../utils/cubismjson';
+import { CubismJson, JsonMap } from '../utils/cubismjson';
 
 // JSON keys
 const Meta = 'Meta';
@@ -371,7 +371,7 @@ export class CubismMotionJson {
  * @brief ベジェカーブの解釈方法のフラグタイプ
  */
 export enum EvaluationOptionFlag {
-  EvaluationOptionFlag_AreBeziersRistricted = 0 ///< ベジェハンドルの規制状態
+  EvaluationOptionFlag_AreBeziersRistricted = 0, ///< ベジェハンドルの規制状態
 }
 
 // Namespace definition for compatibility.

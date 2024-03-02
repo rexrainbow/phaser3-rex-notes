@@ -42,69 +42,7 @@ export class CubismExpressionMotion extends ACubismMotion {
     size: number
   ): CubismExpressionMotion {
     const expression: CubismExpressionMotion = new CubismExpressionMotion();
-
-    const json: CubismJson = CubismJson.create(buffer, size);
-    const root: Value = json.getRoot();
-
-    expression.setFadeInTime(
-      root.getValueByString(ExpressionKeyFadeIn).toFloat(DefaultFadeTime)
-    ); // フェードイン
-    expression.setFadeOutTime(
-      root.getValueByString(ExpressionKeyFadeOut).toFloat(DefaultFadeTime)
-    ); // フェードアウト
-
-    // 各パラメータについて
-    const parameterCount = root
-      .getValueByString(ExpressionKeyParameters)
-      .getSize();
-    expression._parameters.prepareCapacity(parameterCount);
-
-    for (let i = 0; i < parameterCount; ++i) {
-      const param: Value = root
-        .getValueByString(ExpressionKeyParameters)
-        .getValueByIndex(i);
-      const parameterId: CubismIdHandle = CubismFramework.getIdManager().getId(
-        param.getValueByString(ExpressionKeyId).getRawString()
-      ); // パラメータID
-
-      const value: number = param
-        .getValueByString(ExpressionKeyValue)
-        .toFloat(); // 値
-
-      // 計算方法の設定
-      let blendType: ExpressionBlendType;
-
-      if (
-        param.getValueByString(ExpressionKeyBlend).isNull() ||
-        param.getValueByString(ExpressionKeyBlend).getString() == BlendValueAdd
-      ) {
-        blendType = ExpressionBlendType.ExpressionBlendType_Add;
-      } else if (
-        param.getValueByString(ExpressionKeyBlend).getString() ==
-        BlendValueMultiply
-      ) {
-        blendType = ExpressionBlendType.ExpressionBlendType_Multiply;
-      } else if (
-        param.getValueByString(ExpressionKeyBlend).getString() ==
-        BlendValueOverwrite
-      ) {
-        blendType = ExpressionBlendType.ExpressionBlendType_Overwrite;
-      } else {
-        // その他 仕様にない値を設定した時は加算モードにすることで復旧
-        blendType = ExpressionBlendType.ExpressionBlendType_Add;
-      }
-
-      // 設定オブジェクトを作成してリストに追加する
-      const item: ExpressionParameter = new ExpressionParameter();
-
-      item.parameterId = parameterId;
-      item.blendType = blendType;
-      item.value = value;
-
-      expression._parameters.pushBack(item);
-    }
-
-    CubismJson.delete(json); // JSONデータは不要になったら削除する
+    expression.parse(buffer, size);
     return expression;
   }
 
@@ -156,10 +94,75 @@ export class CubismExpressionMotion extends ACubismMotion {
     }
   }
 
+  protected parse(buffer: ArrayBuffer, size: number) {
+    const json: CubismJson = CubismJson.create(buffer, size);
+    const root: Value = json.getRoot();
+
+    this.setFadeInTime(
+      root.getValueByString(ExpressionKeyFadeIn).toFloat(DefaultFadeTime)
+    ); // フェードイン
+    this.setFadeOutTime(
+      root.getValueByString(ExpressionKeyFadeOut).toFloat(DefaultFadeTime)
+    ); // フェードアウト
+
+    // 各パラメータについて
+    const parameterCount = root
+      .getValueByString(ExpressionKeyParameters)
+      .getSize();
+    this._parameters.prepareCapacity(parameterCount);
+
+    for (let i = 0; i < parameterCount; ++i) {
+      const param: Value = root
+        .getValueByString(ExpressionKeyParameters)
+        .getValueByIndex(i);
+      const parameterId: CubismIdHandle = CubismFramework.getIdManager().getId(
+        param.getValueByString(ExpressionKeyId).getRawString()
+      ); // パラメータID
+
+      const value: number = param
+        .getValueByString(ExpressionKeyValue)
+        .toFloat(); // 値
+
+      // 計算方法の設定
+      let blendType: ExpressionBlendType;
+
+      if (
+        param.getValueByString(ExpressionKeyBlend).isNull() ||
+        param.getValueByString(ExpressionKeyBlend).getString() == BlendValueAdd
+      ) {
+        blendType = ExpressionBlendType.ExpressionBlendType_Add;
+      } else if (
+        param.getValueByString(ExpressionKeyBlend).getString() ==
+        BlendValueMultiply
+      ) {
+        blendType = ExpressionBlendType.ExpressionBlendType_Multiply;
+      } else if (
+        param.getValueByString(ExpressionKeyBlend).getString() ==
+        BlendValueOverwrite
+      ) {
+        blendType = ExpressionBlendType.ExpressionBlendType_Overwrite;
+      } else {
+        // その他 仕様にない値を設定した時は加算モードにすることで復旧
+        blendType = ExpressionBlendType.ExpressionBlendType_Add;
+      }
+
+      // 設定オブジェクトを作成してリストに追加する
+      const item: ExpressionParameter = new ExpressionParameter();
+
+      item.parameterId = parameterId;
+      item.blendType = blendType;
+      item.value = value;
+
+      this._parameters.pushBack(item);
+    }
+
+    CubismJson.delete(json); // JSONデータは不要になったら削除する
+  }
+
   /**
    * コンストラクタ
    */
-  constructor() {
+  protected constructor() {
     super();
 
     this._parameters = new csmVector<ExpressionParameter>();
@@ -174,7 +177,7 @@ export class CubismExpressionMotion extends ACubismMotion {
 export enum ExpressionBlendType {
   ExpressionBlendType_Add = 0, // 加算
   ExpressionBlendType_Multiply = 1, // 乗算
-  ExpressionBlendType_Overwrite = 2 // 上書き
+  ExpressionBlendType_Overwrite = 2, // 上書き
 }
 
 /**

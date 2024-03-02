@@ -9,6 +9,26 @@ declare namespace Live2DCubismCore {
     type csmVersion = number;
     /** moc3 version identifier. */
     type csmMocVersion = number;
+    /** Parameter type identifier. */
+    type csmParameterType = number;
+    /** Necessary alignment for mocs (in bytes). */
+    const AlignofMoc: number;
+    /** Necessary alignment for models (in bytes). */
+    const AlignofModel: number;
+    /** .moc3 file version Unknown */
+    const MocVersion_Unknown: number;
+    /** .moc3 file version 3.0.00 - 3.2.07 */
+    const MocVersion_30: number;
+    /** .moc3 file version 3.3.00 - 3.3.03 */
+    const MocVersion_33: number;
+    /** .moc3 file version 4.0.00 - 4.1.05 */
+    const MocVersion_40: number;
+    /** .moc3 file version 4.2.00 - */
+    const MocVersion_42: number;
+    /** Normal Parameter. */
+    const ParameterType_Normal: number;
+    /** Parameter for blend shape. */
+    const ParameterType_BlendShape: number;
     /** Log handler.
      *
      * @param message Null-terminated string message to log.
@@ -37,7 +57,7 @@ declare namespace Live2DCubismCore {
          *
          * @return csmMocVersion
          */
-        static csmGetMocVersion(moc: Moc): csmMocVersion;
+        static csmGetMocVersion(moc: Moc, mocBytes: ArrayBuffer): csmMocVersion;
         private constructor();
     }
     /** Cubism logging. */
@@ -67,6 +87,14 @@ declare namespace Live2DCubismCore {
     }
     /** Cubism moc. */
     class Moc {
+        /**
+         * Checks consistency of a moc.
+         *
+         * @param mocBytes Moc bytes.
+         *
+         * @returns '1' if Moc is valid; '0' otherwise.
+         */
+        hasMocConsistency(mocBytes: ArrayBuffer): number;
         /** Creates [[Moc]] from [[ArrayBuffer]].
          *
          * @param buffer Array buffer
@@ -143,6 +171,8 @@ declare namespace Live2DCubismCore {
         ids: Array<string>;
         /** Minimum parameter values. */
         minimumValues: Float32Array;
+        /** Parameter types. */
+        types: Int32Array;
         /** Maximum parameter values. */
         maximumValues: Float32Array;
         /** Default parameter values. */
@@ -209,6 +239,12 @@ declare namespace Live2DCubismCore {
         indexCounts: Int32Array;
         /** Triangle index data for each drawable. */
         indices: Array<Uint16Array>;
+        /** Information multiply color. */
+        multiplyColors: Float32Array;
+        /** Information Screen color. */
+        screenColors: Float32Array;
+        /** Indices of drawables parent part. */
+        parentPartIndices: Int32Array;
         /** Resets all dynamic drawable flags.. */
         resetDynamicFlags(): void;
         /** Native model. */
@@ -302,6 +338,28 @@ declare namespace Live2DCubismCore {
          * @return [[true]] if bit set; [[false]] otherwise
         */
         static hasVertexPositionsDidChangeBit(bitfield: number): boolean;
+        /**
+         * Checks whether flag is set in bitfield.
+         *
+         * @param bitfield Bitfield to query against.
+         *
+         * @return [[true]] if bit set; [[false]] otherwise
+        */
+        static hasBlendColorDidChangeBit(bitfield: number): boolean;
+    }
+    /** Memory functions. */
+    class Memory {
+        /**
+         * HACK:
+         * Extend memory size allocated during module initialization.
+         * If the specified size is less than or equal to 16777216(byte), the default of 16 MB is allocated.
+         *
+         * @see https://github.com/emscripten-core/emscripten/blob/main/src/settings.js#L161
+         *
+         * @param size allocated memory size [byte(s)]
+         */
+        static initializeAmountOfMemory(size: number): void;
+        private constructor();
     }
     /** Emscripten Cubism Core module. */
 }

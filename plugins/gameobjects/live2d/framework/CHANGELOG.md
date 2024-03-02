@@ -4,6 +4,122 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [4-r.7] - 2023-05-25
+
+### Added
+
+* Add compiler options `noImplicitAny` and `useUnknownInCatchVariables` to `tsconfig.json`.
+* Add some function for checking consistency of MOC3.
+  * Add the function of checking consistency on reviving a MOC3. (`CubismMoc::Create`)
+* Add a function to parse the opacity from `.motion3.json`.
+* Add some functions to change Multiply and Screen colors on a per part basis.
+
+### Changed
+
+* Change access specifier for `CubismExpressionMotion`.
+
+### Fixed
+
+* Fix to support added compiler options `noImplicitAny` and `useUnknownInCatchVariables`.
+
+
+## [4-r.6.2] - 2023-03-16
+
+### Fixed
+
+* Fix some problems related to Cubism Core.
+  * See `CHANGELOG.md` in Core.
+
+
+## [4-r.6.1] - 2023-03-10
+
+### Added
+
+* Add function to validate MOC3 files.
+
+
+## [4-r.6] - 2023-02-21
+
+### Added
+
+* Add support for high-precision masks.
+* The number of render textures used can now be increased arbitrarily.
+  * The maximum number of masks when using multiple render textures has been increased to "number of render textures * 32".
+* Add API to allow users to configure culling.
+
+### Changed
+
+* Change to not reference `CubismClippingManager_WebGL` on models that do not use clipping masks.
+
+### Fixed
+
+* Fix a crash when a `WebGLRenderingContext` is not registered with `Cubism Renderer_WebGL`.
+  * It now displays a warning and does not draw models.
+* Fix a bug when displaying a model with culling set, some of the other drawn images are missing.
+* Fix a bug that caused update information for some models not to be updated when multiple models are displayed.
+  * Call the function to extend the initial memory with CubismFramework.initialize(). See `CHANGELOG.md` in Core.
+
+
+## [4-r.5] - 2022-09-08
+
+### Added
+
+* Add the multilingual supported documents.
+* Add immediate stabilization of physics.
+* Implemented a process to switch between `CubismJson` parsing and `JSON.parse()`.
+
+
+## [4-r.5-beta.5] - 2022-08-04
+
+### Fixed
+
+* Fix `csmGetMocVersion` function argument.
+* Fix a bug in which processing was interrupted when an invalid vertex was specified in the middle of a physics operation.
+* Fix crash with exception when reading .moc3 files of unsupported versions.
+* Fix physics system input to be split by the physics setting time.
+
+
+## [4-r.5-beta.4] - 2022-07-07
+
+### Added
+
+* Add a function to get the latest .moc3 Version and the .moc3 Version of the loaded model.
+* Add a function to get the type of parameters of the model.
+* Add a function to get the parent part of the model's Drawable.
+
+
+## [4-r.5-beta.3] - 2022-06-16
+
+### Fixed
+
+* `getDrawableTextureIndices` function in `CubismModel` has been renamed to `getDrawableTextureIndex` because the name was not correct.
+  * `getDrawableTextureIndices` function is marked as deprecated.
+* Fix physics system behaviour when exists Physics Fps Setting in .physics3.json.
+
+
+## [4-r.5-beta.2] - 2022-06-02
+
+### Fixed
+
+* Fixed a bug that caused Multiply Color / Screen Color of different objects to be applied.
+  * See `CHANGELOG.md` in Core.
+  * No modifications to Samples and Framework.
+
+
+## [4-r.5-beta.1] - 2022-05-19
+
+### Added
+
+* Add processing related to Multiply Color / Screen Color added in Cubism 4.2.
+
+### Fixed
+
+* Fix usage of Anisotropy filtering.
+* Fix model was not displayed when the number of masks exceeded the limit.
+* Fix getTextureDirectory() to return the directory name of the 0th texture path.
+
+
 ## [4-r.4] - 2021-12-09
 
 ### Fixed
@@ -66,6 +182,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Reformat code using Prettier and ESLint.
 
 
+[4-r.7]: https://github.com/Live2D/CubismWebFramework/compare/4-r.6.2...4-r.7
+[4-r.6.2]: https://github.com/Live2D/CubismWebFramework/compare/4-r.6.1...4-r.6.2
+[4-r.6.1]: https://github.com/Live2D/CubismWebFramework/compare/4-r.6...4-r.6.1
+[4-r.6]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5...4-r.6
+[4-r.5]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5-beta.5...4-r.5
+[4-r.5-beta.5]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5-beta.4...4-r.5-beta.5
+[4-r.5-beta.4]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5-beta.3...4-r.5-beta.4
+[4-r.5-beta.3]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5-beta.2...4-r.5-beta.3
+[4-r.5-beta.2]: https://github.com/Live2D/CubismWebFramework/compare/4-r.5-beta.1...4-r.5-beta.2
+[4-r.5-beta.1]: https://github.com/Live2D/CubismWebFramework/compare/4-r.4...4-r.5-beta.1
 [4-r.4]: https://github.com/Live2D/CubismWebFramework/compare/4-r.3...4-r.4
 [4-r.3]: https://github.com/Live2D/CubismWebFramework/compare/4-r.3-beta.1...4-r.3
 [4-r.3-beta.1]: https://github.com/Live2D/CubismWebFramework/compare/4-r.2...4-r.3-beta.1

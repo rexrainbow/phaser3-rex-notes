@@ -27,6 +27,7 @@ const PhysicsSettingCount = 'PhysicsSettingCount';
 const Gravity = 'Gravity';
 const Wind = 'Wind';
 const VertexCount = 'VertexCount';
+const Fps = 'Fps';
 
 // PhysicsSettings
 const PhysicsSettings = 'PhysicsSettings';
@@ -118,6 +119,18 @@ export class CubismPhysicsJson {
       .getValueByString(Y)
       .toFloat();
     return ret;
+  }
+
+  /**
+   * 物理演算設定FPSの取得
+   * @return 物理演算設定FPS
+   */
+  public getFps(): number {
+    return this._json
+      .getRoot()
+      .getValueByString(Meta)
+      .getValueByString(Fps)
+      .toFloat(0.0);
   }
 
   /**

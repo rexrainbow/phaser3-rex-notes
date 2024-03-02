@@ -4,7 +4,6 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:@typescript-eslint/recommended-requiring-type-checking
   - plugin:prettier/recommended
-  - prettier/@typescript-eslint
 plugins:
   - '@typescript-eslint'
 parser: '@typescript-eslint/parser'
@@ -16,7 +15,35 @@ rules:
   prettier/prettier:
     - error
     - singleQuote: true
-  '@typescript-eslint/camelcase': warn
+  camelcase: "off"
+  '@typescript-eslint/naming-convention':
+    - warn
+    - selector: default
+      format:
+      - camelCase
+    - selector: variable
+      format:
+      - camelCase
+      - UPPER_CASE
+      leadingUnderscore: allow
+      trailingUnderscore: allow
+    - selector: class
+      format:
+      - PascalCase
+      trailingUnderscore: allow
+    - selector: parameter
+      format:
+      - camelCase
+      leadingUnderscore: allow
+    - selector: memberLike
+      modifiers:
+      - private
+      format:
+      - camelCase
+      leadingUnderscore: require
+    - selector: typeLike
+      format:
+      - PascalCase
   '@typescript-eslint/no-use-before-define': off
   no-empty-function: off
   '@typescript-eslint/no-empty-function':
@@ -25,6 +52,12 @@ rules:
       - constructors
   'no-fallthrough': warn
   '@typescript-eslint/unbound-method': off
+  '@typescript-eslint/no-unsafe-assignment': off
+  '@typescript-eslint/restrict-plus-operands': off
+  '@typescript-eslint/no-unsafe-return': off
+  '@typescript-eslint/no-unsafe-member-access': off
+  '@typescript-eslint/no-unsafe-argument': off
+  '@typescript-eslint/no-unsafe-call': off
   'no-inner-declarations': off
-  '@typescript-eslint/class-name-casing': warn
+  'no-global-assign': off
   'prefer-const': warn

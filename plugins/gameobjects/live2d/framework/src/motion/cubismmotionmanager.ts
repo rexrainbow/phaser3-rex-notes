@@ -9,7 +9,7 @@ import { CubismModel } from '../model/cubismmodel';
 import { ACubismMotion } from './acubismmotion';
 import {
   CubismMotionQueueEntryHandle,
-  CubismMotionQueueManager
+  CubismMotionQueueManager,
 } from './cubismmotionqueuemanager';
 
 /**

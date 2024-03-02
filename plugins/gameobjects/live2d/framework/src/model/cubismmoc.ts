@@ -5,7 +5,7 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-import { CSM_ASSERT } from '../utils/cubismdebug';
+import { CSM_ASSERT, CubismLogError } from '../utils/cubismdebug';
 import { CubismModel } from './cubismmodel';
 
 /**
@@ -17,14 +17,32 @@ export class CubismMoc {
   /**
    * Mocデータの作成
    */
-  public static create(mocBytes: ArrayBuffer): CubismMoc {
+  public static create(
+    mocBytes: ArrayBuffer,
+    shouldCheckMocConsistency: boolean
+  ): CubismMoc {
     let cubismMoc: CubismMoc = null;
-    const moc: Live2DCubismCore.Moc = Live2DCubismCore.Moc.fromArrayBuffer(
-      mocBytes
-    );
+
+    if (shouldCheckMocConsistency) {
+      // .moc3の整合性を確認
+      const consistency = this.hasMocConsistency(mocBytes);
+
+      if (!consistency) {
+        // 整合性が確認できなければ処理しない
+        CubismLogError(`Inconsistent MOC3.`);
+        return cubismMoc;
+      }
+    }
+
+    const moc: Live2DCubismCore.Moc =
+      Live2DCubismCore.Moc.fromArrayBuffer(mocBytes);
 
     if (moc) {
       cubismMoc = new CubismMoc(moc);
+      cubismMoc._mocVersion = Live2DCubismCore.Version.csmGetMocVersion(
+        moc,
+        mocBytes
+      );
     }
 
     return cubismMoc;
@@ -80,6 +98,7 @@ export class CubismMoc {
   private constructor(moc: Live2DCubismCore.Moc) {
     this._moc = moc;
     this._modelCount = 0;
+    this._mocVersion = 0;
   }
 
   /**
@@ -92,8 +111,32 @@ export class CubismMoc {
     this._moc = null;
   }
 
+  /**
+   * 最新の.moc3 Versionを取得
+   */
+  public getLatestMocVersion(): number {
+    return Live2DCubismCore.Version.csmGetLatestMocVersion();
+  }
+
+  /**
+   * 読み込んだモデルの.moc3 Versionを取得
+   */
+  public getMocVersion(): number {
+    return this._mocVersion;
+  }
+
+  /**
+   * .moc3 の整合性を検証する
+   */
+  public static hasMocConsistency(mocBytes: ArrayBuffer): boolean {
+    const isConsistent =
+      Live2DCubismCore.Moc.prototype.hasMocConsistency(mocBytes);
+    return isConsistent === 1 ? true : false;
+  }
+
   _moc: Live2DCubismCore.Moc; // Mocデータ
   _modelCount: number; // Mocデータから作られたモデルの個数
+  _mocVersion: number; // 読み込んだモデルの.moc3 Version
 }
 
 // Namespace definition for compatibility.

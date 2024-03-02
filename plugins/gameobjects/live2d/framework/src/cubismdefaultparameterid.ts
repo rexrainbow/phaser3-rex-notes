@@ -60,7 +60,7 @@ export const CubismDefaultParameterId = Object.freeze<Record<string, string>>({
   ParamBustY: 'ParamBustY',
   ParamBaseX: 'ParamBaseX',
   ParamBaseY: 'ParamBaseY',
-  ParamNONE: 'NONE:'
+  ParamNONE: 'NONE:',
 });
 
 // Namespace definition for compatibility.
