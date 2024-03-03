@@ -876,6 +876,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -947,13 +954,6 @@
           <li class="md-nav__item">
   <a href="#loop" class="md-nav__link">
     Loop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#size" class="md-nav__link">
-    Size
   </a>
   
 </li>
@@ -9767,6 +9767,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9838,13 +9845,6 @@
           <li class="md-nav__item">
   <a href="#loop" class="md-nav__link">
     Loop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#size" class="md-nav__link">
-    Size
   </a>
   
 </li>
@@ -10003,6 +10003,11 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia">navigator.mediaDevices.getUserMedia</a></li>
 </ul>
+<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Initial size : 256x265 (<code>video.setSize(256, 256)</code>)</li>
+<li>Size after playing : Size of video from metadata</li>
+</ul>
 <h3 id="play">Play<a class="headerlink" href="#play" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 <span class="c1">// video.play(loop, markerIn, markerOut);</span>
@@ -10117,11 +10122,6 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
     <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span><span class="w">  </span><span class="c1">// loop: true/false</span>
 </code></pre></div></li>
 </ul>
-<h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Initial size : 256x265 (<code>video.setSize(256, 256)</code>)</li>
-<li>Size after playing : Size of video from metadata</li>
-</ul>
 <h3 id="video-key">Video key<a class="headerlink" href="#video-key" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -10203,6 +10203,11 @@ Using <code>scene.add.video(x, y).loadURL(urls, noAudio, crossOrigin)</code> to 
 </code></pre></div></li>
 <li>A Video tries to play a source that does not exist, or is the wrong file type.
     <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">){</span>
+
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>A Video has access to the metadata.
+    <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
 
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

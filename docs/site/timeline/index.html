@@ -7623,6 +7623,26 @@
     Start
   </a>
   
+    <nav class="md-nav" aria-label="Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restart" class="md-nav__link">
+    Restart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-with-repeat" class="md-nav__link">
+    Start with repeat
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -7635,6 +7655,13 @@
           <li class="md-nav__item">
   <a href="#pause-resume" class="md-nav__link">
     Pause / Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    Reset
   </a>
   
 </li>
@@ -9642,6 +9669,26 @@
     Start
   </a>
   
+    <nav class="md-nav" aria-label="Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restart" class="md-nav__link">
+    Restart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-with-repeat" class="md-nav__link">
+    Start with repeat
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9654,6 +9701,13 @@
           <li class="md-nav__item">
   <a href="#pause-resume" class="md-nav__link">
     Pause / Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    Reset
   </a>
   
 </li>
@@ -9738,7 +9792,6 @@
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">  </span><span class="c1">// false</span>
 <span class="w">        </span><span class="p">},</span>
 
-
 <span class="w">        </span><span class="nx">set</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
@@ -9754,6 +9807,10 @@
 
 <span class="w">        </span><span class="nx">run</span><span class="p">(){</span><span class="w"> </span>
 <span class="w">            </span><span class="c1">// this: target parameter</span>
+<span class="w">        </span><span class="p">},</span>
+
+<span class="w">        </span><span class="nx">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
 <span class="w">        </span><span class="p">},</span>
 
 <span class="w">        </span><span class="nx">sound</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -9788,6 +9845,11 @@
 <span class="w">    </span><span class="c1">// this: target parameter</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>loop</code> : A function which will be called when the Event sequence repeat again.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// this: target parameter</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><code>sound</code> : <ul>
 <li>A string : A key from the Sound Manager to play</li>
 <li>A config object for a sound to play when the Event fires. 
@@ -9808,7 +9870,7 @@
 <li><code>target</code> : The scope (<code>this</code> object) with which to invoke the <code>run</code>.</li>
 </ul>
 </li>
-<li>Control<ul>
+<li>Control    <ul>
 <li><code>once</code> : If set, the Event will be removed from the Timeline when it fires.</li>
 <li><code>stop</code> : If set, the Timeline will stop and enter a complete state when this Event fires, even if there are other events after it.</li>
 </ul>
@@ -9826,9 +9888,29 @@
 <h3 id="start">Start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 </code></pre></div>
-<p>Restart</p>
+<h4 id="restart">Restart<a class="headerlink" href="#restart" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div>
+<h4 id="start-with-repeat">Start with repeat<a class="headerlink" href="#start-with-repeat" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Repeat infinite
+    <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">repeat</span><span class="p">().</span><span class="nx">play</span><span class="p">();</span>
+<span class="c1">// timeline.repeat(true).play();</span>
+<span class="c1">// timeline.repeat(-1).play();</span>
+</code></pre></div></li>
+<li>Amount of times to repeat
+    <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">amount</span><span class="p">).</span><span class="nx">play</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>amount</code> : A positive number</li>
+</ul>
+</li>
+<li>No repeat
+    <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Current loop counter
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">loopCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeline</span><span class="p">.</span><span class="nx">iteration</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
@@ -9839,6 +9921,14 @@
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 <span class="c1">// timeline.paused = false;</span>
 </code></pre></div>
+<h3 id="reset">Reset<a class="headerlink" href="#reset" title="Permanent link">&para;</a></h3>
+<p>Resets this Timeline back to the start, include loop counter.</p>
+<p>If the Timeline had any events that were set to <code>once</code> that have already been removed, 
+they will <strong>not</strong> be present again after calling this method.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+</code></pre></div>
+<p>If the Timeline isn't currently running (i.e. it's paused or complete) then 
+calling this method resets those states, the same as calling <code>Timeline.play(true)</code> (restart).</p>
 <h3 id="add-command">Add command<a class="headerlink" href="#add-command" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
