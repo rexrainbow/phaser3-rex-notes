@@ -125,7 +125,12 @@ var line = new Phaser.Geom.Line(x1, y1, x2, y2);
 
 ```javascript
 Phaser.Actions.PlaceOnLine(gameObjects, line);
+// Phaser.Actions.PlaceOnLine(gameObjects, line, ease);
 ```
+
+- `ease` : 
+    - [A string](tween.md#ease-equations)
+    - A function object.
 
 ```javascript
 Phaser.Actions.RandomLine(gameObjects, line);

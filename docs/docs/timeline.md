@@ -22,7 +22,6 @@ var timeline = scene.add.timeline([
             return true;  // false
         },
 
-
         set: {
             key: value,
         },
@@ -38,6 +37,10 @@ var timeline = scene.add.timeline([
 
         run(){ 
             // this: target parameter
+        },
+
+        loop() {
+
         },
 
         sound: '',
@@ -69,6 +72,12 @@ var timeline = scene.add.timeline([
             // this: target parameter
         }
         ```
+    - `loop` : A function which will be called when the Event sequence repeat again.
+        ```javascript
+        function() {
+            // this: target parameter
+        }
+        ```
     - `sound` : 
         - A string : A key from the Sound Manager to play
         - A config object for a sound to play when the Event fires. 
@@ -85,7 +94,7 @@ var timeline = scene.add.timeline([
         timeline.on(eventName);
         ```
     - `target` : The scope (`this` object) with which to invoke the `run`.
-- Control
+- Control    
     - `once` : If set, the Event will be removed from the Timeline when it fires.
     - `stop` : If set, the Timeline will stop and enter a complete state when this Event fires, even if there are other events after it.
 
@@ -107,11 +116,33 @@ For each tick, for each command :
 timeline.play();
 ```
 
-Restart
+#### Restart
 
 ```javascript
 timeline.play(true);
 ```
+
+#### Start with repeat
+
+- Repeat infinite
+    ```javascript
+    timeline.repeat().play();
+    // timeline.repeat(true).play();
+    // timeline.repeat(-1).play();
+    ```
+- Amount of times to repeat
+    ```javascript
+    timeline.repeat(amount).play();
+    ```
+    - `amount` : A positive number
+- No repeat
+    ```javascript
+    timeline.repeat(false);
+    ```
+- Current loop counter
+    ```javascript
+    var loopCounter = timeline.iteration;
+    ```
 
 ### Stop
 
@@ -130,6 +161,20 @@ timeline.pause();
 timeline.resume();
 // timeline.paused = false;
 ```
+
+### Reset
+
+Resets this Timeline back to the start, include loop counter.
+
+If the Timeline had any events that were set to `once` that have already been removed, 
+they will **not** be present again after calling this method.
+
+```javascript
+timeline.reset();
+```
+
+If the Timeline isn't currently running (i.e. it's paused or complete) then 
+calling this method resets those states, the same as calling `Timeline.play(true)` (restart).
 
 ### Add command
 

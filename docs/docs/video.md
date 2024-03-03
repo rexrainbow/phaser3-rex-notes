@@ -76,6 +76,10 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
 
 - [navigator.mediaDevices.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
 
+#### Size
+
+- Initial size : 256x265 (`video.setSize(256, 256)`)
+- Size after playing : Size of video from metadata
 
 ### Play
 
@@ -214,11 +218,6 @@ var duration = video.getDuration();  // time in seconds
     video.setLoop(loop);  // loop: true/false
     ```
 
-### Size
-
-- Initial size : 256x265 (`video.setSize(256, 256)`)
-- Size after playing : Size of video from metadata
-
 ### Video key
 
 - Get
@@ -305,6 +304,12 @@ var texture = video.saveTexture(key);
 - A Video tries to play a source that does not exist, or is the wrong file type.
     ```javascript
     video.on('error', function(video, error){
+
+    }, scope);
+    ```
+- A Video has access to the metadata.
+    ```javascript
+    video.on('metadata', function(video){
 
     }, scope);
     ```

@@ -22,7 +22,7 @@
 17. [Board/Shape](board-shape.md): Grid (polygon) shape object.
 18. [Board/Tilemap](board-tilemap.md): Create board from [tilemap](tilemap.md).
 19. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture) of tile.
-20. [Bounds](bounds.md): Clamp game object inside target bounds.
+20. [Bounds](bounds.md): Clamp or wrap position of game object inside target bounds.
 21. [Bracket parser](bracketparser.md): A lite-weight bracket parser.
 22. [Bracket parser2](bracketparser2.md): A lite-weight bracket parser.
 23. [Buff data](buffdata.md): Data manager with buffs.

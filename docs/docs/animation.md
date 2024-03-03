@@ -21,7 +21,6 @@ var animationConfig = {
     skipMissedFrames: true,
     randomFrame: false,
 
-
     // time
     delay: 0,
     duration: null,
@@ -52,7 +51,8 @@ scene.anims.create(animationConfig);
             duration: 0
         }
         ```
-        - `duration` : Additional time (in ms) that this frame should appear for during playback.
+        - `duration` : The duration, in ms, of this frame of the animation.
+    - A string : Texture key.
     - Every frame in the atlas
         ```javascript
         scene.anims.generateFrameNames(key);
