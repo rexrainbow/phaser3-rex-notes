@@ -31,47 +31,24 @@ class Demo extends Phaser.Scene {
     create() {
         var btAdd = this.plugins.get('rexBT').add;
 
-        var CreateTask = function (taskName, waitDuration) {
-            if (waitDuration === undefined) {
-                waitDuration = 1000;
-            }
-
-            return btAdd.sequence({
-                children: [
-                    new PrintAction({ text: `${taskName}.Start : {{$currentTime}}` }),
-                    btAdd.wait({ duration: waitDuration }),
-                    new PrintAction({ text: `${taskName}.End : {{$currentTime}}` }),
-                ]
-            });
-        }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.repeat({
-                    maxLoop: 3,
-                    child: btAdd.shuffleSelector({
-                        children: [
-                            btAdd.if({
-                                expression: 'A > 10',
-                                child: CreateTask('TaskA', 500)
-                            }),
-                            btAdd.if({
-                                expression: 'B > 10',
-                                child: CreateTask('TaskB', 500)
-                            }),
-                            btAdd.if({
-                                expression: 'C > 10',
-                                child: CreateTask('TaskC', 500)
-                            }),
-                        ]
-                    })
+                btAdd.sequence({
+                    children: [
+                        new PrintAction({ text: `currentTime = {{$currentTime}}` }),
+                        btAdd.wait({ duration: 100 }),
+                        new PrintAction({ text: `currentTime = {{$currentTime}}` }),
+                        btAdd.wait({ duration: 0 }),
+                        new PrintAction({ text: `currentTime = {{$currentTime}}` }),
+                        btAdd.wait({ duration: 0 }),
+                        new PrintAction({ text: `currentTime = {{$currentTime}}` }),
+                    ]
                 })
-
             )
 
         var blackboard = btAdd.blackboard()
-            .set('A', 20)
-            .set('B', 5)
-            .set('C', 20)
+            .set('name', 'rex')
+            .set('i', 20);
 
         var clock = this.plugins.get('rexClock').add(this);
         clock

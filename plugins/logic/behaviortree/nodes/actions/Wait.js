@@ -35,8 +35,15 @@ class Wait extends Action {
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;
 
-        if ((currTime - startTime) < duration) {
-            return RUNNING;
+        if (duration > 0) {
+            if ((currTime - startTime) < duration) {
+                return RUNNING;
+            }
+
+        } else if (duration === 0) { // Wait 1 tick            
+            if (currTime === startTime) {
+                return RUNNING;
+            }
         }
 
         return SUCCESS;

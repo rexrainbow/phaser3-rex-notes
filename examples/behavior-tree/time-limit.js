@@ -13,7 +13,7 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 
     tick(tick) {
-        var text = this.textExpression.eval(tick.blackboardContext);
+        var text = this.textExpression.eval(tick.getGlobalMemory());
         console.log(`Print: ${text}`);
         return this.SUCCESS;
     }

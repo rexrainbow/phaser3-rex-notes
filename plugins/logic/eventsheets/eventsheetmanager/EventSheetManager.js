@@ -1,10 +1,6 @@
 import EventEmitter from '../../../utils/eventemitter/EventEmitter';
 import { BehaviorTree, Blackboard } from '../../behaviortree';
-import TreeMethods from './methods/TreeMethods.js';
-import DataMethods from './methods/DataMethods.js';
-import StateMethods from './methods/StateMethods';
-import ValueConvertMethods from './methods/ValueConvertMethods';
-import RunMethods from './methods/RunMethods.js';
+import Methods from './methods/Methods.js';
 
 BehaviorTree.setStartIDValue(0);
 
@@ -40,11 +36,7 @@ class EventSheetManager extends EventEmitter {
 
 Object.assign(
     EventSheetManager.prototype,
-    TreeMethods,
-    DataMethods,
-    StateMethods,
-    ValueConvertMethods,
-    RunMethods,
+    Methods
 )
 
 export default EventSheetManager;
