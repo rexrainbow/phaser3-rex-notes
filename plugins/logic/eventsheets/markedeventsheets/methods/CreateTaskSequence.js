@@ -1,4 +1,4 @@
-import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer } from '../../../behaviortree';
+import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer, Wait } from '../../../behaviortree';
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
@@ -110,6 +110,10 @@ var CreateTaskSequence = function (node, config) {
                             actionNode = new Failer({ title: '[break]' });
                             break;
 
+                        case 'next round':
+                            actionNode = new Wait({ title: '[next round]' }); // Wait 1 tick
+                            break;
+
                         default:
                             actionNode = new TaskAction(commandData);
                             break;
@@ -151,11 +155,21 @@ var ParseCommandString = function (commandString, delimiter, {
             return null;
         } else if (lines.length === 1) {
             var line = lines[0];
-            if (IsExitCommand(line)) {
-                return { type: 'exit' };
-            } else if (IsBreakLabelCommand(line)) {
-                return { type: 'break' };
-            } else if (line.indexOf(',') !== -1) {
+
+            // Command action
+            switch (line.trim().toLowerCase()) {
+                case '[exit]':
+                    return { type: 'exit' };
+
+                case '[break]':
+                    return { type: 'break' };
+
+                case '[next round]':
+                case '[next-round]':
+                    return { type: 'next round' };
+            }
+
+            if (line.indexOf(',') !== -1) {
                 lines = commandString.split(',');
             }
         }
@@ -182,11 +196,18 @@ var TrimString = function (s, lineBreak) {
 }
 
 var IsExitCommand = function (s) {
-    return s.trim().toLowerCase() === '[exit]';
+    s = s.trim().toLowerCase();
+    return s === '[exit]';
 }
 
 var IsBreakLabelCommand = function (s) {
-    return s.trim().toLowerCase() === '[break]';
+    s = s.trim().toLowerCase();
+    return s === '[break]';
+}
+
+var IsNextRoundLabelCommand = function (s) {
+    s = s.trim().toLowerCase();
+    return s === '[next round]';
 }
 
 
