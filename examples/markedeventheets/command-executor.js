@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/command-executor.md');
+        this.load.text('eventSheet0', 'assets/markedeventsheet/command-executor/command-executor.md');
 
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
         this.load.image('road', 'assets/images/backgrounds/road.png');

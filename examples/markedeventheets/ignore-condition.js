@@ -1,6 +1,6 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
-import content from 'raw-loader!/assets/markedeventsheet/ignore-condition.md';
+import content from 'raw-loader!/assets/markedeventsheet/ignore-condition/ignore-condition.md';
 
 class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {

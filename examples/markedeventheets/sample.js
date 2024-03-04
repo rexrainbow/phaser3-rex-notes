@@ -1,6 +1,6 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
-import content from 'raw-loader!/assets/markedeventsheet/sample.md';
+import content from 'raw-loader!/assets/markedeventsheet/sample/sample.md';
 
 class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
