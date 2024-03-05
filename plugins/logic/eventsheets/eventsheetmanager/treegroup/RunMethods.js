@@ -1,6 +1,37 @@
 import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
+var OpenEventSheet = function (treeManager, tree) {
+    var blackboard = treeManager.blackboard;
+
+    var status = blackboard.getTreeState(tree.id);
+    if (status !== IDLE) {
+        return;
+    }
+
+    // Break after condition eval, run this tree at next tick
+    TickEventSheet(treeManager, tree);
+
+    if (tree.conditionEvalPassed) {
+        treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
+    } else {
+        treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
+    }
+}
+
+var TickEventSheet = function (treeManager, tree) {
+    var blackboard = treeManager.blackboard;
+    var commandExecutor = treeManager.commandExecutor;
+    var status = tree.tick(blackboard, commandExecutor);
+    return status;
+}
+
+var CloseEventSheet = function (treeManager, tree) {
+    if (tree.conditionEvalPassed) {
+        treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
+    }
+}
+
 export default {
     start() {
         if (this.isRunning) {
@@ -13,7 +44,6 @@ export default {
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
         var blackboard = treeManager.blackboard;
-        var commandExecutor = treeManager.commandExecutor;
 
         pendingTrees.length = 0;
 
@@ -23,15 +53,11 @@ export default {
 
             tree.resetState(blackboard);
             if (tree.isParallel) {
-                // Start ticking
-                var status = tree.tick(blackboard, commandExecutor);
-                // Break after condition eval, run this tree at next tick
-                if (status === RUNNING) {
-                    pendingTrees.push(tree);
-                }
-            } else {
-                pendingTrees.push(tree);
+                // Open all event sheets
+                OpenEventSheet.call(this, treeManager, tree);
             }
+
+            pendingTrees.push(tree);
         }
 
         this.continue();
@@ -48,7 +74,6 @@ export default {
         var trees = this.pendingTrees;
         var closedTrees = this.closedTrees;
         var blackboard = treeManager.blackboard;
-        var commandExecutor = treeManager.commandExecutor;
 
         blackboard.treeGroup = this;  // For TaskAction
         closedTrees.length = 0;
@@ -57,34 +82,22 @@ export default {
             var tree = trees[i];
             var status = blackboard.getTreeState(tree.id);
 
-            if (status === IDLE) {
-                // Break after condition eval, run this tree at next tick
-                status = tree.tick(blackboard, commandExecutor);
+            // Do nothing if event sheet has been opened
+            OpenEventSheet.call(this, treeManager, tree);
 
-                // status = RUNNING, because of `conditionEvalBreak:true` 
-
-                if (tree.conditionEvalPassed) {
-                    treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
-                } else {
-                    treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
-                }
-
-                if (!this.isRunning) {
-                    // Can break here
-                    break;
-                }
+            if (!this.isRunning) {
+                // Can break here
+                break;
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            status = tree.tick(blackboard, commandExecutor);
+            status = TickEventSheet(treeManager, tree);
 
             if (status === RUNNING) {
                 break;
             } else {
                 closedTrees.push(tree);
-                if (tree.conditionEvalPassed) {
-                    treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
-                }
+                CloseEventSheet.call(this, treeManager, tree)
             }
 
             if (!this.isRunning) {
@@ -140,7 +153,6 @@ export default {
         var treeManager = this.parent;
         var pendingTrees = this.pendingTrees;
         var blackboard = treeManager.blackboard;
-        var commandExecutor = treeManager.commandExecutor;
 
         pendingTrees.length = 0;
 
@@ -148,14 +160,11 @@ export default {
 
         tree.setConditionEnable(!ignoreCondition);
 
-        // Start ticking
-        var status = tree.tick(blackboard, commandExecutor);
+        OpenEventSheet.call(this, treeManager, tree);
 
         tree.setConditionEnable(true);
 
-        if (status === RUNNING) {
-            pendingTrees.push(tree);
-        }
+        pendingTrees.push(tree);
 
         this.continue();
 
