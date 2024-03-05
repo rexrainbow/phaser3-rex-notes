@@ -20,7 +20,7 @@ class Tick {
 
         this._currentNode = null;
 
-        this._currentTime = null;
+        this._currentTime = undefined;
     }
 
     // Set members
@@ -42,7 +42,7 @@ class Tick {
     reset() {
         this._openNodes.length = 0;
         this._nodeCount = 0;
-        this._currentTime = (new Date()).getTime();
+        this._currentTime = undefined;
         return this;
     }
 
@@ -63,6 +63,9 @@ class Tick {
             // Inject current-time through blackboard
             return this.blackboard.get(CURRENT_TIME);
         } else {
+            if (this._currentTime === undefined) {
+                this._currentTime = (new Date()).getTime();
+            }
             return this._currentTime;
         }
     }
