@@ -56,25 +56,23 @@ export default {
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
             var status = blackboard.getTreeState(tree.id);
-            var isIdleTree = (status === IDLE);
 
-            if (isIdleTree) {
+            if (status === IDLE) {
                 // Break after condition eval, run this tree at next tick
                 status = tree.tick(blackboard, commandExecutor);
-            }
 
-            var conditionEvalPassed = tree.conditionEvalPassed;
-            if (isIdleTree && (status === RUNNING)) {
-                if (conditionEvalPassed) {
+                // status = RUNNING, because of `conditionEvalBreak:true` 
+
+                if (tree.conditionEvalPassed) {
                     treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
                 } else {
                     treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
                 }
-            }
 
-            if (!this.isRunning) {
-                // Can break here
-                break;
+                if (!this.isRunning) {
+                    // Can break here
+                    break;
+                }
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
@@ -84,7 +82,7 @@ export default {
                 break;
             } else {
                 closedTrees.push(tree);
-                if (conditionEvalPassed) {
+                if (tree.conditionEvalPassed) {
                     treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
                 }
             }

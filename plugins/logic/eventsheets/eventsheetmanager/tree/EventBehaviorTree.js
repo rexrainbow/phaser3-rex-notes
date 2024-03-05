@@ -1,4 +1,4 @@
-import { BehaviorTree, IfSelector } from '../../../behaviortree';
+import { BehaviorTree, IfSelector, IDLE } from '../../../behaviortree';
 
 class EventBehaviorTree extends BehaviorTree {
     constructor(config) {
@@ -17,21 +17,32 @@ class EventBehaviorTree extends BehaviorTree {
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);
+
+        this.conditionEvalPassed = undefined;
     }
 
     get isParallel() {
         return this.properties.parallel;
     }
 
-    get conditionEvalPassed() {
-        var nodeMemory = this.root.getNodeMemory(this.ticker);
-        return (nodeMemory.$runningChild === 0);
-    }
-
     setConditionEnable(enable = true) {
         var selectChildIndex = (enable) ? undefined : 0;
         this.root.setSelectChildIndex(selectChildIndex);
         return this;
+    }
+
+    tick(blackboard, target) {
+        var isIdleState = (blackboard.getTreeState(this.id) === IDLE);
+
+        var state = super.tick(blackboard, target);
+
+        if (isIdleState) {
+            // Run *if* part (pass), or *catch* part (failled)
+            var nodeMemory = this.root.getNodeMemory(this.ticker);
+            this.conditionEvalPassed = (nodeMemory.$runningChild === 0);
+        }
+
+        return state;
     }
 }
 
