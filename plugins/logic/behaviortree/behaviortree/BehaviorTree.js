@@ -150,6 +150,10 @@ class BehaviorTree {
         return IDLE;
     }
 
+    getTreeMemory(tick) {
+        return tick.getTreeMemory(this.id);
+    }
+
     getState(blackboard) {
         return blackboard.get(TREE_STATE, this.id);
     }

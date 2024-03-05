@@ -1,5 +1,7 @@
 import { BehaviorTree, IfSelector, IDLE } from '../../../behaviortree';
 
+const ConditionEvalPassed = '$conditionEvalPassed';
+
 class EventBehaviorTree extends BehaviorTree {
     constructor(config) {
         if (config === undefined) {
@@ -24,8 +26,8 @@ class EventBehaviorTree extends BehaviorTree {
     }
 
     get conditionEvalPassed() {
-        var nodeMemory = this.root.getNodeMemory(this.ticker);
-        return nodeMemory.conditionEvalPassed;
+        var treeMemory = this.getTreeMemory(this.ticker);
+        return treeMemory[ConditionEvalPassed];
     }
 
     setConditionEnable(enable = true) {
@@ -42,7 +44,8 @@ class EventBehaviorTree extends BehaviorTree {
         if (isIdleState) {
             // Run *if* part (pass), or *catch* part (failled)
             var nodeMemory = this.root.getNodeMemory(this.ticker);
-            nodeMemory.conditionEvalPassed = (nodeMemory.$runningChild === 0);
+            var conditionEvalPassed = (nodeMemory.$runningChild === 0);
+            blackboard.set(ConditionEvalPassed, conditionEvalPassed, this.id);
         }
 
         return state;
