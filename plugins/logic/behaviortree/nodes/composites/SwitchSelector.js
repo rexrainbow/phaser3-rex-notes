@@ -6,7 +6,7 @@ class SwitchSelector extends Composite {
         {
             expression = null,
             keys = undefined, // Or [key, ...]
-            returnPending = false,
+            conditionEvalBreak = false,
             children = {},    // Or [child, ...]
             services,
             title,
@@ -29,7 +29,7 @@ class SwitchSelector extends Composite {
                 properties: {
                     expression,
                     keys,
-                    returnPending,
+                    conditionEvalBreak,
                 },
             },
             nodePool
@@ -37,7 +37,7 @@ class SwitchSelector extends Composite {
 
         this.expression = this.addExpression(expression);
         this.keys = keys;  // Index of children
-        this.returnPending = returnPending;
+        this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
     }
 
@@ -79,9 +79,10 @@ class SwitchSelector extends Composite {
             if (childIndex === -1) {
                 return ERROR;
             }
-            if (this.returnPending) {
+            if (this.conditionEvalBreak) {
+                // Resolve runningChild index, but not run child now
                 nodeMemory.$runningChild = childIndex;
-                return PENDING;
+                return RUNNING;
             }
         }
 

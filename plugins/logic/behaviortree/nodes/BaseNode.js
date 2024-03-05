@@ -1,6 +1,6 @@
 import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
-import { TREE, SUCCESS, FAILURE, RUNNING, PENDING, ABORT, ERROR } from '../constants.js';
+import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
 
 export default class BaseNode {
 
@@ -186,10 +186,6 @@ export default class BaseNode {
 
     get RUNNING() {
         return RUNNING;
-    }
-
-    get PENDING() {
-        return PENDING;
     }
 
     get ERROR() {

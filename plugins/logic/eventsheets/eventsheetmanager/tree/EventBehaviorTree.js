@@ -14,7 +14,7 @@ class EventBehaviorTree extends BehaviorTree {
         var root = new IfSelector({
             title: this.title,
             expression: condition,
-            returnPending: true   // Always return PENDING instead of RUNNING, or SUCCESS
+            conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);
     }
@@ -23,7 +23,7 @@ class EventBehaviorTree extends BehaviorTree {
         return this.properties.parallel;
     }
 
-    get eventConditionPassed() {
+    get conditionEvalPassed() {
         var nodeMemory = this.root.getNodeMemory(this.ticker);
         return (nodeMemory.$runningChild === 0);
     }

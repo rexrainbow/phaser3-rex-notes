@@ -7,7 +7,7 @@ class WeightSelector extends Composite {
         {
             expression = null,
             weights = undefined,    // Or [weight, ...]
-            returnPending = false,
+            conditionEvalBreak = false,
             children = [],          // [node, ...], or [{weight, node}, ...]
             services,
             title,
@@ -46,7 +46,7 @@ class WeightSelector extends Composite {
                 properties: {
                     expression,
                     weights,
-                    returnPending,
+                    conditionEvalBreak,
                 },
             },
             nodePool
@@ -54,7 +54,7 @@ class WeightSelector extends Composite {
 
         this.expression = (expression) ? this.addExpression(expression) : null;
         this.weights = weights;
-        this.returnPending = returnPending;
+        this.conditionEvalBreak = conditionEvalBreak;
         this.forceSelectChildIndex = undefined;
     }
 
@@ -98,9 +98,10 @@ class WeightSelector extends Composite {
             if (childIndex === undefined) {
                 childIndex = this.children.length - 1;
             }
-            if (this.returnPending) {
+            if (this.conditionEvalBreak) {
+                // Resolve runningChild index, but not run child now
                 nodeMemory.$runningChild = childIndex;
-                return PENDING;
+                return RUNNING;
             }
         }
 

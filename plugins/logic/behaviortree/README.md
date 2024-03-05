@@ -2,6 +2,14 @@
 
 Reference: https://github.com/behavior3/behavior3js/
 
+## Node/Tree state
+
+- SUCCESS, FAILURE : Return `true`/`false`. Might run next node or child node.
+- RUNNING : Stop ticking, run these nodes at next tick.
+- ERROR : Error in Nodes.
+    - Composites node does not have any child.
+    - Decorator node does not have any child.
+
 ## Nodes
 
 - Composite Nodes:
@@ -34,6 +42,7 @@ Reference: https://github.com/behavior3/behavior3js/
     - Failer
     - Runner
     - Wait
+        - Wait 0 : Wait a tick
     - Error
     - Abort
 

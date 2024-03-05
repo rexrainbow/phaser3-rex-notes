@@ -2,7 +2,6 @@ export const IDLE = 0;
 export const SUCCESS = 1;
 export const FAILURE = 2;
 export const RUNNING = 3;
-export const PENDING = 4;
 export const ABORT = 5;
 export const ERROR = 9;
 
