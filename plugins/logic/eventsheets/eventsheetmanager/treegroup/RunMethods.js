@@ -33,7 +33,19 @@ var CloseEventSheet = function (treeManager, tree) {
 }
 
 export default {
+
+    // A round : All trees run from IDLE->RUNNING (condition-eval-break), end to SUCCESS/FAILURE/ERROR
+
     start() {
+        /*
+        Start a round :
+        
+        - sequence : Add all trees to pendingTrees
+        - parallel : Open all event sheets(tree), add them to pendingTrees
+
+        Then, invoke continue()
+        */
+
         if (this.isRunning) {
             return this;
         }
@@ -66,6 +78,15 @@ export default {
     },
 
     continue() {
+        /*
+        Tick event sheets(tree) until all trees are at SUCCESS/FAILURE/ERROR state
+
+        - Open (if not opened) and tick event sheet(tree)        
+        - TaskAction's complete event will invoke this method to run remainder nodes
+        - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(tree)
+        - Complete this round if pendingTrees is empty. i.e. all trees are return SUCCESS/FAILURE/ERROR.
+        */
+
         if (!this.isRunning) {
             return this;
         }
@@ -139,6 +160,8 @@ export default {
     },
 
     startTree(title, ignoreCondition = true) {
+        // Run a single event sheet(tree)
+
         if (this.isRunning) {
             return this;
         }
