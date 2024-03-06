@@ -9938,8 +9938,14 @@ Shutdown --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;sce
 <li><code>anims</code></li>
 <li><code>physics</code> : <a href="../arcade-world/">ArcadePhysics</a></li>
 <li><code>matter</code> :　 MatterPhysics</li>
-<li><code>registry</code> : Global <a href="../datamanager/">data manager</a></li>
-<li><code>data</code> : Local <a href="../datamanager/">data manager</a></li>
+<li><code>registry</code> : Global <a href="../datamanager/">data manager</a> across all scenes
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
+<li><code>data</code> : Local <a href="../datamanager/">data manager</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
 <li><code>sys</code></li>
 <li><code>game</code></li>
 <li><code>render</code></li>

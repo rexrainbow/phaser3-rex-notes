@@ -253,8 +253,16 @@ scene.scene.start();
 - `anims`
 - `physics` : [ArcadePhysics](arcade-world.md)
 - `matter` :　 MatterPhysics
-- `registry` : Global [data manager](datamanager.md)
+- `registry` : Global [data manager](datamanager.md) across all scenes
+    ```javascript
+    scene.registry.set(key, value);
+    var value = scene.registry.get(key);
+    ```
 - `data` : Local [data manager](datamanager.md)
+    ```javascript
+    scene.data.set(key, value);
+    var value = scene.data.get(key);
+    ```
 - `sys`
 - `game`
 - `render`
