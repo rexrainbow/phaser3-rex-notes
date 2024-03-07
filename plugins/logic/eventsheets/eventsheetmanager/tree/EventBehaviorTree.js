@@ -19,15 +19,12 @@ class EventBehaviorTree extends BehaviorTree {
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);
+
+        this.conditionEvalPassed = undefined;
     }
 
     get isParallel() {
         return this.properties.parallel;
-    }
-
-    get conditionEvalPassed() {
-        var treeMemory = this.getTreeMemory(this.ticker);
-        return treeMemory[ConditionEvalPassed];
     }
 
     setConditionEnable(enable = true) {
@@ -44,8 +41,8 @@ class EventBehaviorTree extends BehaviorTree {
         if (isIdleState) {
             // Run *if* part (pass), or *catch* part (failled)
             var nodeMemory = this.root.getNodeMemory(this.ticker);
-            var conditionEvalPassed = (nodeMemory.$runningChild === 0);
-            blackboard.set(ConditionEvalPassed, conditionEvalPassed, this.id);
+            this.conditionEvalPassed = (nodeMemory.$runningChild === 0);
+            this.setData(blackboard, ConditionEvalPassed, this.conditionEvalPassed);
         }
 
         return state;
