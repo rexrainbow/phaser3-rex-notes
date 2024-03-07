@@ -77,31 +77,26 @@ class EventBehaviorTree extends BehaviorTree {
             return false;
         }
 
-        this.setData(blackboard, RoundState, false);
-
-        var state = this.getState(blackboard);
-        if (state !== RUNNING) {
+        var startFromTop = (this.getState(blackboard) !== RUNNING);
+        if (startFromTop) {
             this.resetState(blackboard);
         }
 
         this.roundState = RoundRun;
 
-        // Condition eval
+        // First tick, condition-eval
         this.tick(blackboard, target);
+
+        if (startFromTop) {
+            var nodeMemory = this.root.getNodeMemory(this.ticker);
+            this.conditionEvalPassed = (nodeMemory.$runningChild === 0);
+        }
 
         return true;
     }
 
     tick(blackboard, target) {
-        var isIdleState = blackboard.getTreeState(this.id) == IDLE;
-
         var state = super.tick(blackboard, target);
-
-        if (isIdleState) {
-            // Run *if* part (pass), or *catch* part (failled)
-            var nodeMemory = this.root.getNodeMemory(this.ticker);
-            this.conditionEvalPassed = (nodeMemory.$runningChild === 0);
-        }
 
         if (state !== RUNNING) {
             this.roundState = RoundComplete;
