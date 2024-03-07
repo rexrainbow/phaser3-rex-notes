@@ -85,7 +85,7 @@ class EventBehaviorTree extends BehaviorTree {
         this.roundState = RoundRun;
 
         // First tick, condition-eval
-        this.tick(blackboard, target);
+        super.tick(blackboard, target);
 
         if (startFromTop) {
             var nodeMemory = this.root.getNodeMemory(this.ticker);
