@@ -49,7 +49,7 @@ manager.on('complete', function () {
     console.log('---- round end ----')
     if (manager.roundCounter < 10) {
         // Run next round
-        manager.incRoundCounter().start();
+        manager.updateRoundCounter().start();
     }
 })
 

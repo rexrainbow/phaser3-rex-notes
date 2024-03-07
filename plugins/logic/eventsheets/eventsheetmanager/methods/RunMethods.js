@@ -51,13 +51,4 @@ export default {
         this.getTreeGroup(groupName).stop();
         return this;
     },
-
-    incRoundCounter() {
-        this.blackboard.incCurrentTime(1);
-        return this;
-    },
-    
-    getRoundCounter() {
-        return this.blackboard.getCurrentTime();
-    }
 }

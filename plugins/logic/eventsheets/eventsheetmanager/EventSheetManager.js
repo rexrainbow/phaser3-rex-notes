@@ -19,9 +19,10 @@ class EventSheetManager extends EventEmitter {
 
         this.blackboard = new Blackboard();
         this.blackboard.treeManager = this; // For TaskAction
-        this.blackboard.setCurrentTime(0);
 
         this.treeGroups = {};
+
+        this.setRoundCounter(0);
     }
 
     get memory() {
@@ -30,6 +31,10 @@ class EventSheetManager extends EventEmitter {
 
     get roundCounter() {
         return this.getRoundCounter();
+    }
+
+    set roundCounter(value) {
+        this.setRoundCounter(value);
     }
 
     setCommandExecutor(commandExecutor) {

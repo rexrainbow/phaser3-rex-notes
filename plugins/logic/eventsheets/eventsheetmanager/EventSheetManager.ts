@@ -65,7 +65,9 @@ declare class EventSheetManager extends EventEmitter {
 
     stop(groupName?: string): this;
 
-    incRoundCounter(): this;
-    readonly roundCounter: number;
+    updateRoundCounter(value?: number): this;
+    getRoundCounter(): number;
+    setRoundCounter(value: number): this;
+    roundCounter: number;
 
 }
