@@ -12,4 +12,3 @@ export const ACTION = 'action';
 export const SERVICE = 'service';
 
 export const TREE_STATE = '$state';
-export const CURRENT_TIME = '$currentTime';

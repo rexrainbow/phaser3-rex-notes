@@ -1,7 +1,14 @@
 import Base from './Base.js';
-import { TREE_STATE, CURRENT_TIME } from '../constants.js';
+import { TREE_STATE } from '../constants.js';
+import GetValue from '../../../utils/object/GetValue.js';
 
 class Blackboard extends Base {
+    constructor(config) {
+        super();
+
+        this.currentTimeKey = GetValue(config, 'currentTimeKey', '$currentTime');
+    }
+
     getTreeState(treeID) {
         return this.get(TREE_STATE, treeID);
     }
@@ -11,19 +18,24 @@ class Blackboard extends Base {
         return this;
     }
 
-    setCurrentTime(time) {
-        this.set(CURRENT_TIME, time);
-        return this;
+    hasValidCurrentTime() {
+        return this.has(this.currentTimeKey)
     }
 
-    incCurrentTime(time) {
-        this.inc(CURRENT_TIME, time);
+    setCurrentTime(time) {
+        this.set(this.currentTimeKey, time);
         return this;
     }
 
     getCurrentTime() {
-        return this.get(CURRENT_TIME);
+        return this.get(this.currentTimeKey);
     }
+
+    incCurrentTime(time) {
+        this.inc(this.currentTimeKey, time);
+        return this;
+    }
+
 
 };
 

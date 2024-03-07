@@ -17,7 +17,9 @@ class EventSheetManager extends EventEmitter {
         this.setCommandExecutor(commandExecutor);
         this.parallel = parallel;
 
-        this.blackboard = new Blackboard();
+        this.blackboard = new Blackboard({
+            currentTimeKey: '$round'
+        });
         this.blackboard.treeManager = this; // For TaskAction
 
         this.treeGroups = {};

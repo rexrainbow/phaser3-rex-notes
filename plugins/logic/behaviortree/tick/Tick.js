@@ -1,5 +1,4 @@
 import RemoveItem from "../../../utils/array/Remove.js";
-import { CURRENT_TIME } from '../constants.js'
 
 class Tick {
 
@@ -59,9 +58,9 @@ class Tick {
     }
 
     get currentTime() {
-        if (this.blackboard.has(CURRENT_TIME)) {
+        if (this.blackboard.hasValidCurrentTime()) {
             // Inject current-time through blackboard
-            return this.blackboard.get(CURRENT_TIME);
+            return this.blackboard.getCurrentTime();
         } else {
             if (this._currentTime === undefined) {
                 this._currentTime = (new Date()).getTime();
