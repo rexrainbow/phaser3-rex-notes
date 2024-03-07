@@ -3,14 +3,12 @@ import RemoveItem from '../../../../utils/array/Remove.js';
 
 var OpenEventSheet = function (treeManager, tree) {
     var blackboard = treeManager.blackboard;
+    var commandExecutor = treeManager.commandExecutor;
+    var result = tree.open(blackboard, commandExecutor);
 
-    var status = blackboard.getTreeState(tree.id);
-    if (status !== IDLE) {
+    if (!result) {
         return;
     }
-
-    // Break after condition eval, run this tree at next tick
-    TickEventSheet(treeManager, tree);
 
     if (tree.conditionEvalPassed) {
         treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
@@ -34,7 +32,7 @@ var CloseEventSheet = function (treeManager, tree) {
 
 export default {
 
-    // A round : All trees run from IDLE->RUNNING (condition-eval-break), end to SUCCESS/FAILURE/ERROR
+    // A round : Start from condition-eval, end to tree.roundComplete
 
     start() {
         /*
@@ -101,7 +99,6 @@ export default {
 
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
-            var status = blackboard.getTreeState(tree.id);
 
             // Do nothing if event sheet has been opened
             OpenEventSheet.call(this, treeManager, tree);
@@ -112,13 +109,14 @@ export default {
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            status = TickEventSheet(treeManager, tree);
+            var status = TickEventSheet(treeManager, tree);
 
-            if (status === RUNNING) {
-                break;
-            } else {
+            if (tree.roundComplete) {
                 closedTrees.push(tree);
-                CloseEventSheet.call(this, treeManager, tree)
+                CloseEventSheet.call(this, treeManager, tree);
+            } else if (status === RUNNING) {
+                // Stall command execution here
+                break;
             }
 
             if (!this.isRunning) {
