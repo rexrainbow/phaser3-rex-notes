@@ -1,5 +1,4 @@
 import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree';
-import GetValue from '../../../../utils/object/GetValue';
 
 const RoundState = '$roundState';
 const ConditionEvalPassed = '$conditionEvalPassed';

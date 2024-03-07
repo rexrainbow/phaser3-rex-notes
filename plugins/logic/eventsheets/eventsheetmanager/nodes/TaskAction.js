@@ -1,4 +1,4 @@
-import { Action, } from '../../../behaviortree';
+import { Action, } from '../../../behaviortree/index.js';
 import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';

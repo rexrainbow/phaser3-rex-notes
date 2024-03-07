@@ -1,4 +1,4 @@
-import CustomNodeMapping from '../tree/CustomNodeMapping.js';
+import CustomNodeMapping from '../nodes/CustomNodeMapping.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 import { BehaviorTree, RUNNING } from '../../../behaviortree';
 import DeepClone from '../../../../utils/object/DeepClone.js';

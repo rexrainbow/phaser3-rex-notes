@@ -2,9 +2,9 @@ import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer, W
 import GetNodeType from './GetNodeType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
-import TaskSequence from '../../eventsheetmanager/tree/TaskSequence.js';
-import TaskAction from '../../eventsheetmanager/tree/TaskAction.js';
-import WaitNextRound from '../../eventsheetmanager/tree/WaitNextRound.js';
+import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
+import TaskAction from '../../eventsheetmanager/nodes/TaskAction.js';
+import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
 
 var TypeNames = ['if', 'else', 'while'];
 
