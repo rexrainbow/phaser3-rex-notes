@@ -4,7 +4,7 @@ import RemoveItem from '../../../../utils/array/Remove.js';
 var OpenEventSheet = function (treeManager, tree) {
     var blackboard = treeManager.blackboard;
     var commandExecutor = treeManager.commandExecutor;
-    var result = tree.open(blackboard, commandExecutor);
+    var result = tree.start(blackboard, commandExecutor);
 
     if (!result) {
         return;

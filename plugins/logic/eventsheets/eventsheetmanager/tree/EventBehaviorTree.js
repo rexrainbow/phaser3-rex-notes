@@ -72,7 +72,7 @@ class EventBehaviorTree extends BehaviorTree {
         return this;
     }
 
-    open(blackboard, target) {
+    start(blackboard, target) {
         if (this.roundState === RoundRun) {
             return false;
         }
