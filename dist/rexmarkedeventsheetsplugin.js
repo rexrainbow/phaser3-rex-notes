@@ -525,7 +525,6 @@
   var SUCCESS$1 = 1;
   var FAILURE = 2;
   var RUNNING$1 = 3;
-  var PENDING$1 = 4;
   var ABORT = 5;
   var ERROR$1 = 9;
   var TREE = 'tree';
@@ -585,6 +584,38 @@
     }
     sn += 1;
     return "".concat(snPrefix).concat(sn);
+  };
+
+  var DataMethods$3 = {
+    getTreeMemory: function getTreeMemory(blackboard) {
+      if (blackboard.blackboard) {
+        // tick
+        blackboard = blackboard.blackboard;
+      }
+      return blackboard.getTreeMemory(this.id);
+    },
+    getData: function getData(blackboard, key) {
+      if (blackboard.blackboard) {
+        // tick
+        blackboard = blackboard.blackboard;
+      }
+      return blackboard.get(key, this.id);
+    },
+    setData: function setData(blackboard, key, value) {
+      if (blackboard.blackboard) {
+        // tick
+        blackboard = blackboard.blackboard;
+      }
+      blackboard.set(key, value, this.id);
+      return this;
+    },
+    getState: function getState(blackboard) {
+      return this.getData(blackboard, TREE_STATE);
+    },
+    resetState: function resetState(blackboard) {
+      this.setData(blackboard, TREE_STATE, IDLE$1);
+      return this;
+    }
   };
 
   var BreadthFirstSearch = function BreadthFirstSearch(root, callback, scope) {
@@ -2625,11 +2656,6 @@
         return RUNNING$1;
       }
     }, {
-      key: "PENDING",
-      get: function get() {
-        return PENDING$1;
-      }
-    }, {
       key: "ERROR",
       get: function get() {
         return ERROR$1;
@@ -3042,8 +3068,15 @@
         var currTime = _tick.currentTime;
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;
-        if (currTime - startTime < duration) {
-          return RUNNING$1;
+        if (duration > 0) {
+          if (currTime - startTime < duration) {
+            return RUNNING$1;
+          }
+        } else if (duration === 0) {
+          // Wait 1 tick            
+          if (currTime === startTime) {
+            return RUNNING$1;
+          }
         }
         return SUCCESS$1;
       }
@@ -3339,7 +3372,6 @@
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
         var hasAnyFinishStatus = false;
-        var hasAnyPendingStatus = false;
         var hasAnyRunningStatus = false;
         var hasAnyAbortStatus = false;
         var hasAnyErrorStatus = false;
@@ -3357,9 +3389,6 @@
               break;
             case RUNNING$1:
               hasAnyRunningStatus = true;
-              break;
-            case PENDING$1:
-              hasAnyPendingStatus = true;
               break;
             case ABORT:
               hasAnyAbortStatus = true;
@@ -3386,8 +3415,6 @@
             return ERROR$1;
           } else if (hasAnyAbortStatus) {
             return ABORT;
-          } else if (hasAnyPendingStatus) {
-            return PENDING$1;
           } else if (hasAnyRunningStatus) {
             return RUNNING$1;
           } else if (this.returnSuccess) {
@@ -3419,8 +3446,8 @@
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$expression = _ref.expression,
         expression = _ref$expression === void 0 ? 'true' : _ref$expression,
-        _ref$returnPending = _ref.returnPending,
-        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
+        _ref$conditionEvalBre = _ref.conditionEvalBreak,
+        conditionEvalBreak = _ref$conditionEvalBre === void 0 ? false : _ref$conditionEvalBre,
         _ref$children = _ref.children,
         children = _ref$children === void 0 ? [] : _ref$children,
         services = _ref.services,
@@ -3436,11 +3463,11 @@
         name: name,
         properties: {
           expression: expression,
-          returnPending: returnPending
+          conditionEvalBreak: conditionEvalBreak
         }
       }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
-      _this.returnPending = returnPending;
+      _this.conditionEvalBreak = conditionEvalBreak;
       _this.forceSelectChildIndex = undefined;
       return _this;
     }
@@ -3474,9 +3501,10 @@
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
           childIndex = this.evalCondition(_tick);
-          if (this.returnPending) {
+          if (this.conditionEvalBreak) {
+            // Resolve runningChild index, but not run child now
             nodeMemory.$runningChild = childIndex;
-            return PENDING$1;
+            return RUNNING$1;
           }
         }
         var child = this.children[childIndex];
@@ -3507,8 +3535,8 @@
         expression = _ref$expression === void 0 ? null : _ref$expression,
         _ref$keys = _ref.keys,
         keys = _ref$keys === void 0 ? undefined : _ref$keys,
-        _ref$returnPending = _ref.returnPending,
-        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
+        _ref$conditionEvalBre = _ref.conditionEvalBreak,
+        conditionEvalBreak = _ref$conditionEvalBre === void 0 ? false : _ref$conditionEvalBre,
         _ref$children = _ref.children,
         children = _ref$children === void 0 ? {} : _ref$children,
         services = _ref.services,
@@ -3529,12 +3557,12 @@
         properties: {
           expression: expression,
           keys: keys,
-          returnPending: returnPending
+          conditionEvalBreak: conditionEvalBreak
         }
       }, nodePool]);
       _this.expression = _this.addExpression(expression);
       _this.keys = keys; // Index of children
-      _this.returnPending = returnPending;
+      _this.conditionEvalBreak = conditionEvalBreak;
       _this.forceSelectChildIndex = undefined;
       return _this;
     }
@@ -3579,9 +3607,10 @@
           if (childIndex === -1) {
             return ERROR$1;
           }
-          if (this.returnPending) {
+          if (this.conditionEvalBreak) {
+            // Resolve runningChild index, but not run child now
             nodeMemory.$runningChild = childIndex;
-            return PENDING;
+            return RUNNING$1;
           }
         }
         var child = this.children[childIndex];
@@ -3612,8 +3641,8 @@
         expression = _ref$expression === void 0 ? null : _ref$expression,
         _ref$weights = _ref.weights,
         weights = _ref$weights === void 0 ? undefined : _ref$weights,
-        _ref$returnPending = _ref.returnPending,
-        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
+        _ref$conditionEvalBre = _ref.conditionEvalBreak,
+        conditionEvalBreak = _ref$conditionEvalBre === void 0 ? false : _ref$conditionEvalBre,
         _ref$children = _ref.children,
         children = _ref$children === void 0 ? [] : _ref$children,
         services = _ref.services,
@@ -3649,12 +3678,12 @@
         properties: {
           expression: expression,
           weights: weights,
-          returnPending: returnPending
+          conditionEvalBreak: conditionEvalBreak
         }
       }, nodePool]);
       _this.expression = expression ? _this.addExpression(expression) : null;
       _this.weights = weights;
-      _this.returnPending = returnPending;
+      _this.conditionEvalBreak = conditionEvalBreak;
       _this.forceSelectChildIndex = undefined;
       return _this;
     }
@@ -3700,9 +3729,10 @@
           if (childIndex === undefined) {
             childIndex = this.children.length - 1;
           }
-          if (this.returnPending) {
+          if (this.conditionEvalBreak) {
+            // Resolve runningChild index, but not run child now
             nodeMemory.$runningChild = childIndex;
-            return PENDING;
+            return RUNNING$1;
           }
         }
         var child = this.children[childIndex];
@@ -4379,8 +4409,8 @@
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         _ref$expression = _ref.expression,
         expression = _ref$expression === void 0 ? 'true' : _ref$expression,
-        _ref$returnPending = _ref.returnPending,
-        returnPending = _ref$returnPending === void 0 ? false : _ref$returnPending,
+        _ref$conditionEvalBre = _ref.conditionEvalBreak,
+        conditionEvalBreak = _ref$conditionEvalBre === void 0 ? false : _ref$conditionEvalBre,
         _ref$child = _ref.child,
         child = _ref$child === void 0 ? null : _ref$child,
         title = _ref.title,
@@ -4394,11 +4424,11 @@
         name: name,
         properties: {
           expression: expression,
-          returnPending: returnPending
+          conditionEvalBreak: conditionEvalBreak
         }
       }, nodePool]);
       _this.expression = _this.addBooleanExpression(expression);
-      _this.returnPending = returnPending;
+      _this.conditionEvalBreak = conditionEvalBreak;
       return _this;
     }
     _createClass(If, [{
@@ -4413,9 +4443,10 @@
           // Return FAILURE to run next node
           if (!_tick.evalExpression(this.expression)) {
             return FAILURE;
-          } else if (this.returnPending) {
-            this.openChild(); // Open child but not run it now
-            return PENDING$1;
+          } else if (this.conditionEvalBreak) {
+            // Open child but not run it now
+            this.openChild();
+            return RUNNING;
           }
         }
         var status = this.child._execute(_tick);
@@ -4624,6 +4655,7 @@
 
       this._nodeCount = 0;
       this._currentNode = null;
+      this._currentTime = undefined;
     }
 
     // Set members
@@ -4650,6 +4682,7 @@
       value: function reset() {
         this._openNodes.length = 0;
         this._nodeCount = 0;
+        this._currentTime = undefined;
         return this;
       }
     }, {
@@ -4674,7 +4707,10 @@
           // Inject current-time through blackboard
           return this.blackboard.get(CURRENT_TIME);
         } else {
-          return new Date().getTime();
+          if (this._currentTime === undefined) {
+            this._currentTime = new Date().getTime();
+          }
+          return this._currentTime;
         }
       }
     }, {
@@ -4845,17 +4881,6 @@
         blackboard.set(TREE_STATE, IDLE$1, this.id);
         return IDLE$1;
       }
-    }, {
-      key: "getState",
-      value: function getState(blackboard) {
-        return blackboard.get(TREE_STATE, this.id);
-      }
-    }, {
-      key: "resetState",
-      value: function resetState(blackboard) {
-        blackboard.set(TREE_STATE, IDLE$1, this.id);
-        return this;
-      }
     }], [{
       key: "setStartIDValue",
       value: function setStartIDValue(value) {
@@ -4874,11 +4899,11 @@
     }]);
     return BehaviorTree;
   }();
-  var Methods$4 = {
+  var Methods$5 = {
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$4);
+  Object.assign(BehaviorTree.prototype, Methods$5, DataMethods$3);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -4971,39 +4996,43 @@
       }
     }, {
       key: "inc",
-      value: function inc(key, _inc, treeID, nodeID) {
-        var value;
-        if (this.has(key, treeID, nodeID)) {
-          value = 0;
+      value: function inc(key, _inc, treeID, nodeID, startValue) {
+        var newValue;
+        if (!this.has(key, treeID, nodeID)) {
+          if (startValue === undefined) {
+            startValue = 0;
+          }
+          newValue = startValue;
         } else {
-          value = this.get(key, treeID, nodeID);
+          newValue = this.get(key, treeID, nodeID) + _inc;
         }
-        value += _inc;
-        this.set(key, value, treeID, nodeID);
+        this.set(key, newValue, treeID, nodeID);
         return this;
       }
     }, {
       key: "incData",
-      value: function incData(key, inc, treeID, nodeID) {
-        return this.inc(key, inc, treeID, nodeID);
+      value: function incData(key, inc, treeID, nodeID, startValue) {
+        return this.inc(key, inc, treeID, nodeID, startValue);
       }
     }, {
       key: "toggle",
-      value: function toggle(key, treeID, nodeID) {
-        var value;
-        if (this.has(key, treeID, nodeID)) {
-          value = false;
+      value: function toggle(key, treeID, nodeID, startValue) {
+        var newValue;
+        if (!this.has(key, treeID, nodeID)) {
+          if (startValue === undefined) {
+            startValue = false;
+          }
+          newValue = startValue;
         } else {
-          value = this.get(key, treeID, nodeID);
+          newValue = !this.get(key, treeID, nodeID);
         }
-        value = !value;
-        this.set(key, value, treeID, nodeID);
+        this.set(key, newValue, treeID, nodeID);
         return this;
       }
     }, {
       key: "toggleData",
-      value: function toggleData(key, treeID, nodeID) {
-        return this.toggle(key, treeID, nodeID);
+      value: function toggleData(key, treeID, nodeID, startValue) {
+        return this.toggle(key, treeID, nodeID, startValue);
       }
     }, {
       key: "removeTree",
@@ -5087,6 +5116,18 @@
       key: "setCurrentTime",
       value: function setCurrentTime(time) {
         this.set(CURRENT_TIME, time);
+        return this;
+      }
+    }, {
+      key: "incCurrentTime",
+      value: function incCurrentTime(time) {
+        this.inc(CURRENT_TIME, time);
+        return this;
+      }
+    }, {
+      key: "getCurrentTime",
+      value: function getCurrentTime() {
+        return this.get(CURRENT_TIME);
       }
     }]);
     return Blackboard;
@@ -5962,8 +6003,42 @@
     return TaskAction;
   }(Action);
 
+  var WaitNextRound = /*#__PURE__*/function (_Wait) {
+    _inherits(WaitNextRound, _Wait);
+    function WaitNextRound() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$duration = _ref.duration,
+        duration = _ref$duration === void 0 ? 1 : _ref$duration,
+        services = _ref.services,
+        title = _ref.title,
+        _ref$name = _ref.name,
+        name = _ref$name === void 0 ? 'NextRound' : _ref$name;
+      _classCallCheck(this, WaitNextRound);
+      return _callSuper(this, WaitNextRound, [{
+        title: title,
+        name: name,
+        properties: {
+          duration: duration
+        },
+        services: services
+      }]);
+    }
+    _createClass(WaitNextRound, [{
+      key: "tick",
+      value: function tick(_tick) {
+        var state = _get(_getPrototypeOf(WaitNextRound.prototype), "tick", this).call(this, _tick);
+        if (state === RUNNING$1) {
+          this.getTree(_tick).roundComplete = true;
+        }
+        return state;
+      }
+    }]);
+    return WaitNextRound;
+  }(Wait);
+
   var CustomNodeMapping = {
-    TaskAction: TaskAction
+    TaskAction: TaskAction,
+    WaitNextRound: WaitNextRound
   };
 
   var TreeMethods$1 = {
@@ -6072,8 +6147,50 @@
     }
   };
 
+  var OpenEventSheet = function OpenEventSheet(treeManager, tree) {
+    var blackboard = treeManager.blackboard;
+    var commandExecutor = treeManager.commandExecutor;
+    var result = tree.start(blackboard, commandExecutor);
+    if (!result) {
+      return;
+    }
+    if (tree.conditionEvalPassed) {
+      treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
+    } else {
+      treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
+    }
+  };
+  var TickEventSheet = function TickEventSheet(treeManager, tree) {
+    var blackboard = treeManager.blackboard;
+    var commandExecutor = treeManager.commandExecutor;
+    var status = tree.tick(blackboard, commandExecutor);
+    return status;
+  };
+  var CloseEventSheet = function CloseEventSheet(treeManager, tree) {
+    if (tree.conditionEvalPassed) {
+      treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
+    }
+  };
   var RunMethods$1 = {
+    /*
+    A round : 
+    
+    - Normal case : 
+        - Start from condition-eval, 
+        - End to tree.roundComplete (SUCCESS/FAILURE/ERROR state)
+    - Cross rounds : 
+        - Start from condition-eval or RUNNING state, 
+        - End to tree.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
+    */
     start: function start() {
+      /*
+      Start a round :
+      
+      - sequence : Add all trees to pendingTrees
+      - parallel : Open all event sheets(tree), add them to pendingTrees
+        Then, invoke continue()
+      */
+
       if (this.isRunning) {
         return this;
       }
@@ -6082,26 +6199,31 @@
       var trees = this.trees;
       var pendingTrees = this.pendingTrees;
       var blackboard = treeManager.blackboard;
-      var commandExecutor = treeManager.commandExecutor;
-      pendingTrees.length = 0;
 
-      // Run parallel tree, will return pending, or failure
+      // pendingTrees.length = 0;
+
+      // Run parallel tree, will return running, or failure
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
         var tree = trees[i];
         tree.resetState(blackboard);
         if (tree.isParallel) {
-          var status = tree.tick(blackboard, commandExecutor);
-          if (status === PENDING$1) {
-            pendingTrees.push(tree);
-          }
-        } else {
-          pendingTrees.push(tree);
+          // Open all event sheets
+          OpenEventSheet.call(this, treeManager, tree);
         }
+        pendingTrees.push(tree);
       }
       this["continue"]();
       return this;
     },
     "continue": function _continue() {
+      /*
+      Tick event sheets(tree) until all trees are at SUCCESS/FAILURE/ERROR state
+        - Open (if not opened) and tick event sheet(tree)        
+      - TaskAction's complete event will invoke this method to run remainder nodes
+      - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(tree)
+      - Complete this round if pendingTrees is empty. i.e. all trees are return SUCCESS/FAILURE/ERROR.
+      */
+
       if (!this.isRunning) {
         return this;
       }
@@ -6109,38 +6231,26 @@
       var trees = this.pendingTrees;
       var closedTrees = this.closedTrees;
       var blackboard = treeManager.blackboard;
-      var commandExecutor = treeManager.commandExecutor;
       blackboard.treeGroup = this; // For TaskAction
       closedTrees.length = 0;
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
         var tree = trees[i];
-        var status = blackboard.getTreeState(tree.id);
-        if (status === IDLE$1) {
-          // Will goto PENDING, or FAILURE/ERROR state
-          status = tree.tick(blackboard, commandExecutor);
-        }
-        var eventConditionPassed = tree.eventConditionPassed;
-        if (status === PENDING$1) {
-          if (eventConditionPassed) {
-            treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
-          } else {
-            treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
-          }
-        }
+
+        // Do nothing if event sheet has been opened
+        OpenEventSheet.call(this, treeManager, tree);
         if (!this.isRunning) {
           // Can break here
           break;
         }
 
         // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-        status = tree.tick(blackboard, commandExecutor);
-        if (status === RUNNING$1) {
-          break;
-        } else {
+        var status = TickEventSheet(treeManager, tree);
+        if (tree.roundComplete) {
           closedTrees.push(tree);
-          if (eventConditionPassed) {
-            treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
-          }
+          CloseEventSheet.call(this, treeManager, tree);
+        } else if (status === RUNNING$1) {
+          // Stall command execution here
+          break;
         }
         if (!this.isRunning) {
           // Can break here
@@ -6172,6 +6282,8 @@
     },
     startTree: function startTree(title) {
       var ignoreCondition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      // Run a single event sheet(tree)
+
       if (this.isRunning) {
         return this;
       }
@@ -6183,15 +6295,12 @@
       var treeManager = this.parent;
       var pendingTrees = this.pendingTrees;
       var blackboard = treeManager.blackboard;
-      var commandExecutor = treeManager.commandExecutor;
       pendingTrees.length = 0;
       tree.resetState(blackboard);
       tree.setConditionEnable(!ignoreCondition);
-      var status = tree.tick(blackboard, commandExecutor);
+      OpenEventSheet.call(this, treeManager, tree);
       tree.setConditionEnable(true);
-      if (status === PENDING$1) {
-        pendingTrees.push(tree);
-      }
+      pendingTrees.push(tree);
       this["continue"]();
       return this;
     }
@@ -14378,17 +14487,31 @@
       }
       return this;
     },
-    "continue": function _continue() {
-      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+    "continue": function _continue(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName)["continue"]();
       return this;
     },
-    stop: function stop() {
-      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+    stop: function stop(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName).stop();
       return this;
+    },
+    incRoundCounter: function incRoundCounter() {
+      this.blackboard.incCurrentTime(1);
+      return this;
+    },
+    getRoundCounter: function getRoundCounter() {
+      return this.blackboard.getCurrentTime();
     }
   };
+
+  var Methods$4 = {};
+  Object.assign(Methods$4, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -14406,7 +14529,7 @@
       _this.parallel = parallel;
       _this.blackboard = new Blackboard();
       _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
-
+      _this.blackboard.setCurrentTime(0);
       _this.treeGroups = {};
       return _this;
     }
@@ -14414,6 +14537,11 @@
       key: "memory",
       get: function get() {
         return this.blackboard.getGlobalMemory();
+      }
+    }, {
+      key: "roundCounter",
+      get: function get() {
+        return this.getRoundCounter();
       }
     }, {
       key: "setCommandExecutor",
@@ -14424,8 +14552,13 @@
     }]);
     return EventSheetManager;
   }(EventEmitter$2);
-  Object.assign(EventSheetManager.prototype, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
+  Object.assign(EventSheetManager.prototype, Methods$4);
 
+  var RoundState = '$roundState';
+  var ConditionEvalPassed = '$conditionEvalPassed';
+  var RoundIdle = 0;
+  var RoundRun = 1;
+  var RoundComplete = 2;
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventBehaviorTree, _BehaviorTree);
     function EventBehaviorTree(config) {
@@ -14445,9 +14578,11 @@
       var root = new IfSelector({
         title: _this.title,
         expression: condition,
-        returnPending: true // Always return PENDING instead of RUNNING, or SUCCESS
+        conditionEvalBreak: true // Return RUNNING instead of SUCCESS for condition eval
       });
       _this.setRoot(root);
+      _this.conditionEvalPassed = undefined;
+      _this.roundState = RoundIdle;
       return _this;
     }
     _createClass(EventBehaviorTree, [{
@@ -14456,10 +14591,36 @@
         return this.properties.parallel;
       }
     }, {
-      key: "eventConditionPassed",
+      key: "conditionEvalPassed",
       get: function get() {
-        var nodeMemory = this.root.getNodeMemory(this.ticker);
-        return nodeMemory.$runningChild === 0;
+        return this._conditionEvalPassed;
+      },
+      set: function set(value) {
+        this._conditionEvalPassed = value;
+        var blackboard = this.ticker.blackboard;
+        if (blackboard) {
+          this.setData(blackboard, ConditionEvalPassed, value);
+        }
+      }
+    }, {
+      key: "roundState",
+      get: function get() {
+        return this._roundState;
+      },
+      set: function set(value) {
+        this._roundState = value;
+        var blackboard = this.ticker.blackboard;
+        if (blackboard) {
+          this.setData(blackboard, RoundState, value);
+        }
+      }
+    }, {
+      key: "roundComplete",
+      get: function get() {
+        return this._roundState === RoundComplete;
+      },
+      set: function set(value) {
+        this.roundState = value ? RoundComplete : RoundRun;
       }
     }, {
       key: "setConditionEnable",
@@ -14468,6 +14629,42 @@
         var selectChildIndex = enable ? undefined : 0;
         this.root.setSelectChildIndex(selectChildIndex);
         return this;
+      }
+    }, {
+      key: "start",
+      value: function start(blackboard, target) {
+        if (this.roundState === RoundRun) {
+          return false;
+        }
+        var startFromTop = this.getState(blackboard) !== RUNNING$1;
+        if (startFromTop) {
+          this.resetState(blackboard);
+        }
+        this.roundState = RoundRun;
+
+        // First tick, condition-eval
+        _get(_getPrototypeOf(EventBehaviorTree.prototype), "tick", this).call(this, blackboard, target);
+        if (startFromTop) {
+          var nodeMemory = this.root.getNodeMemory(this.ticker);
+          this.conditionEvalPassed = nodeMemory.$runningChild === 0;
+        }
+        return true;
+      }
+    }, {
+      key: "tick",
+      value: function tick(blackboard, target) {
+        var state = _get(_getPrototypeOf(EventBehaviorTree.prototype), "tick", this).call(this, blackboard, target);
+        if (state !== RUNNING$1) {
+          // Will remove from pendingTrees
+          this.roundState = RoundComplete;
+        }
+        return state;
+      }
+    }, {
+      key: "abort",
+      value: function abort(blackboard, target) {
+        this.roundState = RoundIdle;
+        _get(_getPrototypeOf(EventBehaviorTree.prototype), "abort", this).call(this, blackboard, target);
       }
     }]);
     return EventBehaviorTree;
@@ -15946,6 +16143,11 @@
                   title: '[break]'
                 });
                 break;
+              case 'next round':
+                actionNode = new WaitNextRound({
+                  title: '[next round]'
+                }); // Wait 1 tick
+                break;
               default:
                 actionNode = new TaskAction(commandData);
                 break;
@@ -15982,15 +16184,24 @@
         return null;
       } else if (lines.length === 1) {
         var line = lines[0];
-        if (IsExitCommand(line)) {
-          return {
-            type: 'exit'
-          };
-        } else if (IsBreakLabelCommand(line)) {
-          return {
-            type: 'break'
-          };
-        } else if (line.indexOf(',') !== -1) {
+
+        // Command action
+        switch (line.trim().toLowerCase()) {
+          case '[exit]':
+            return {
+              type: 'exit'
+            };
+          case '[break]':
+            return {
+              type: 'break'
+            };
+          case '[next round]':
+          case '[next-round]':
+            return {
+              type: 'next round'
+            };
+        }
+        if (line.indexOf(',') !== -1) {
           lines = commandString.split(',');
         }
       }
@@ -16011,12 +16222,6 @@
       s = s.substring(0, s.length - 1);
     }
     return s.trimLeft();
-  };
-  var IsExitCommand = function IsExitCommand(s) {
-    return s.trim().toLowerCase() === '[exit]';
-  };
-  var IsBreakLabelCommand = function IsBreakLabelCommand(s) {
-    return s.trim().toLowerCase() === '[break]';
   };
 
   var Marked2Tree = function Marked2Tree(markedString) {

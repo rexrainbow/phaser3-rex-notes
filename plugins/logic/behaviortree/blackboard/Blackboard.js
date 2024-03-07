@@ -13,6 +13,16 @@ class Blackboard extends Base {
 
     setCurrentTime(time) {
         this.set(CURRENT_TIME, time);
+        return this;
+    }
+
+    incCurrentTime(time) {
+        this.inc(CURRENT_TIME, time);
+        return this;
+    }
+
+    getCurrentTime() {
+        return this.get(CURRENT_TIME);
     }
 
 };

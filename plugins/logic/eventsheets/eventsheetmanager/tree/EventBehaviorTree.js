@@ -99,6 +99,7 @@ class EventBehaviorTree extends BehaviorTree {
         var state = super.tick(blackboard, target);
 
         if (state !== RUNNING) {
+            // Will remove from pendingTrees
             this.roundState = RoundComplete;
         }
 

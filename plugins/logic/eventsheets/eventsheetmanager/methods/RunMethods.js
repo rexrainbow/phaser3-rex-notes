@@ -36,13 +36,28 @@ export default {
         return this;
     },
 
-    continue(groupName = this.defaultTreeGroupName) {
+    continue(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName;
+        }
         this.getTreeGroup(groupName).continue();
         return this;
     },
 
-    stop(groupName = this.defaultTreeGroupName) {
+    stop(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName;
+        }
         this.getTreeGroup(groupName).stop();
         return this;
     },
+
+    incRoundCounter() {
+        this.blackboard.incCurrentTime(1);
+        return this;
+    },
+    
+    getRoundCounter() {
+        return this.blackboard.getCurrentTime();
+    }
 }

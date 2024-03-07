@@ -42,8 +42,17 @@ manager
 
 console.log(manager.dumpTrees())
 
-manager
-    .setData('coin', 3)
-    .start()
-
+manager.setData('coin', 3)
 console.log(manager.memory)
+
+manager.on('complete', function () {
+    console.log('---- round end ----')
+    if (manager.roundCounter < 10) {
+        // Run next round
+        manager.incRoundCounter().start();
+    }
+})
+
+manager.start()
+
+

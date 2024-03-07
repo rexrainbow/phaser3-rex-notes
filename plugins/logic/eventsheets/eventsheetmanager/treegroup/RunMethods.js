@@ -32,7 +32,16 @@ var CloseEventSheet = function (treeManager, tree) {
 
 export default {
 
-    // A round : Start from condition-eval, end to tree.roundComplete
+    /*
+    A round : 
+    
+    - Normal case : 
+        - Start from condition-eval, 
+        - End to tree.roundComplete (SUCCESS/FAILURE/ERROR state)
+    - Cross rounds : 
+        - Start from condition-eval or RUNNING state, 
+        - End to tree.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
+    */
 
     start() {
         /*
@@ -55,7 +64,7 @@ export default {
         var pendingTrees = this.pendingTrees;
         var blackboard = treeManager.blackboard;
 
-        pendingTrees.length = 0;
+        // pendingTrees.length = 0;
 
         // Run parallel tree, will return running, or failure
         for (var i = 0, cnt = trees.length; i < cnt; i++) {

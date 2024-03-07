@@ -4,6 +4,7 @@ import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
 import TaskSequence from '../../eventsheetmanager/tree/TaskSequence.js';
 import TaskAction from '../../eventsheetmanager/tree/TaskAction.js';
+import WaitNextRound from '../../eventsheetmanager/tree/WaitNextRound.js';
 
 var TypeNames = ['if', 'else', 'while'];
 
@@ -111,7 +112,7 @@ var CreateTaskSequence = function (node, config) {
                             break;
 
                         case 'next round':
-                            actionNode = new Wait({ title: '[next round]' }); // Wait 1 tick
+                            actionNode = new WaitNextRound({ title: '[next round]' }); // Wait 1 tick
                             break;
 
                         default:

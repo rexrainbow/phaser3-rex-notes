@@ -86,36 +86,40 @@ class Blackboard {
         return this.has(key, treeID, nodeID);
     }
 
-    inc(key, inc, treeID, nodeID) {
-        var value;
-        if (this.has(key, treeID, nodeID)) {
-            value = 0;
+    inc(key, inc, treeID, nodeID, startValue) {
+        var newValue;
+        if (!this.has(key, treeID, nodeID)) {
+            if (startValue === undefined) {
+                startValue = 0;
+            }
+            newValue = startValue;
         } else {
-            value = this.get(key, treeID, nodeID);
+            newValue = this.get(key, treeID, nodeID) + inc;
         }
-        value += inc;
-        this.set(key, value, treeID, nodeID);
+        this.set(key, newValue, treeID, nodeID);
         return this;
     }
 
-    incData(key, inc, treeID, nodeID) {
-        return this.inc(key, inc, treeID, nodeID);
+    incData(key, inc, treeID, nodeID, startValue) {
+        return this.inc(key, inc, treeID, nodeID, startValue);
     }
 
-    toggle(key, treeID, nodeID) {
-        var value;
-        if (this.has(key, treeID, nodeID)) {
-            value = false;
+    toggle(key, treeID, nodeID, startValue) {
+        var newValue;
+        if (!this.has(key, treeID, nodeID)) {
+            if (startValue === undefined) {
+                startValue = false;
+            }
+            newValue = startValue;
         } else {
-            value = this.get(key, treeID, nodeID);
+            newValue = !this.get(key, treeID, nodeID);
         }
-        value = !value;
-        this.set(key, value, treeID, nodeID);
+        this.set(key, newValue, treeID, nodeID);
         return this;
     }
 
-    toggleData(key, treeID, nodeID) {
-        return this.toggle(key, treeID, nodeID);
+    toggleData(key, treeID, nodeID, startValue) {
+        return this.toggle(key, treeID, nodeID, startValue);
     }
 
     removeTree(treeID) {
