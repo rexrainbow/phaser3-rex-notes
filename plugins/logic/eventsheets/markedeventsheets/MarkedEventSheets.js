@@ -22,11 +22,15 @@ class MarkedEventSheets extends EventSheetManager {
             parallel = this.parallel,
         } = config;
 
-        var tree = Marked2Tree(markedString, {
-            lineBreak,
-            commentLineStart,
-            parallel
-        });
+        var tree = Marked2Tree(
+            this,
+            markedString,
+            {
+                lineBreak,
+                commentLineStart,
+                parallel
+            }
+        );
 
         this.addTree(tree, groupName);
         return this;

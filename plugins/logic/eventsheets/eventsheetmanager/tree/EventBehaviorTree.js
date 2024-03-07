@@ -1,4 +1,5 @@
 import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree';
+import GetValue from '../../../../utils/object/GetValue';
 
 const RoundState = '$roundState';
 const ConditionEvalPassed = '$conditionEvalPassed';
@@ -8,11 +9,14 @@ const RoundRun = 1
 const RoundComplete = 2
 
 class EventBehaviorTree extends BehaviorTree {
-    constructor(config) {
+    constructor(treeManager, config) {
         if (config === undefined) {
             config = {};
         }
         super(config);
+
+        this.treeManager = treeManager;
+        this.blackboard = treeManager.blackboard;
 
         var { parallel = false } = config
         this.properties.parallel = parallel;
@@ -40,10 +44,7 @@ class EventBehaviorTree extends BehaviorTree {
 
     set conditionEvalPassed(value) {
         this._conditionEvalPassed = value;
-        var blackboard = this.ticker.blackboard;
-        if (blackboard) {
-            this.setData(blackboard, ConditionEvalPassed, value);
-        }
+        this.setData(this.blackboard, ConditionEvalPassed, value);
     }
 
     get roundState() {
@@ -52,10 +53,7 @@ class EventBehaviorTree extends BehaviorTree {
 
     set roundState(value) {
         this._roundState = value;
-        var blackboard = this.ticker.blackboard;
-        if (blackboard) {
-            this.setData(blackboard, RoundState, value);
-        }
+        this.setData(this.blackboard, RoundState, value);
     }
 
     get roundComplete() {

@@ -7,11 +7,15 @@ import ParseNodes from './ParseNodes.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateTaskSequence from './CreateTaskSequence.js';
 
-var Marked2Tree = function (markedString, {
-    lineBreak = '\\',
-    commentLineStart = '\/\/',
-    parallel = false,
-} = {}) {
+var Marked2Tree = function (
+    treeManager,
+    markedString,
+    {
+        lineBreak = '\\',
+        commentLineStart = '\/\/',
+        parallel = false,
+    } = {}
+) {
 
     var headingTree = GetHeadingTree(markedString);
     var treeConfig = GetTreeConfig(headingTree.paragraphs);
@@ -20,11 +24,14 @@ var Marked2Tree = function (markedString, {
     var { parallel = parallel } = treeConfig;
     var taskSequenceConfig = { lineBreak, commentLineStart };
 
-    var tree = new EventBehaviorTree({
-        title: headingTree.title,
-        parallel: parallel,
-        condition: GetConditionExpression(conditionNodes)
-    })
+    var tree = new EventBehaviorTree(
+        treeManager,
+        {
+            title: headingTree.title,
+            parallel: parallel,
+            condition: GetConditionExpression(conditionNodes)
+        }
+    );
 
     var rootNode = tree.root;
     rootNode.addChild(CreateTaskSequence(mainTaskNodes, taskSequenceConfig));

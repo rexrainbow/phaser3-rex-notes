@@ -17,38 +17,59 @@ export default {
         return this.treeGroups[name];
     },
 
-    addTree(tree, groupName = this.defaultTreeGroupName) {
+    addTree(tree, groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         this.getTreeGroup(groupName).addTree(tree);
         return this;
     },
 
-    getTreeState(tree, groupName = this.defaultTreeGroupName) {
+    getTreeState(tree, groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         return this.getTreeGroup(groupName).getTreeState(tree);
     },
 
-    removeAllEventSheets(groupName = this.defaultTreeGroupName) {
+    removeAllEventSheets(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         this.getTreeGroup(groupName).removeAllEventSheets();
         return this;
     },
 
-    getEventSheetTitleList(out, groupName = this.defaultTreeGroupName) {
+    getEventSheetTitleList(out, groupName) {
         if (out === undefined) {
             out = [];
+        }
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
         }
         this.getTreeGroup(groupName).getEventSheetTitleList(out);
         return out;
     },
 
-    removeEventSheet(title, groupName = this.defaultTreeGroupName) {
+    removeEventSheet(title, groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         this.getTreeGroup(groupName).removeEventSheet(title);
         return this;
     },
 
-    dumpTrees(groupName = this.defaultTreeGroupName) {
+    dumpTrees(groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         return this.getTreeGroup(groupName).dumpTrees();
     },
 
-    loadTrees(data, groupName = this.defaultTreeGroupName) {
+    loadTrees(data, groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
         this.getTreeGroup(groupName).loadTrees(data);
         return this;
     },
