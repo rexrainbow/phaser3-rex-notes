@@ -1,5 +1,6 @@
-import { TREE, TREE_STATE, IDLE } from '../constants.js'
+import { TREE, TREE_STATE, IDLE } from '../constants.js';
 import { CreateID, SetSerialNumber, SetSerialNumberPrefix, GetSerialNumber } from '../utils/CreateID.js';
+import DataMethods from './DataMethods.js';
 import Dump from './Dump.js';
 import Load from './Load.js';
 import Tick from '../tick/Tick.js';
@@ -150,19 +151,6 @@ class BehaviorTree {
         return IDLE;
     }
 
-    getTreeMemory(tick) {
-        return tick.getTreeMemory(this.id);
-    }
-
-    getState(blackboard) {
-        return blackboard.get(TREE_STATE, this.id);
-    }
-
-    resetState(blackboard) {
-        blackboard.set(TREE_STATE, IDLE, this.id);
-        return this;
-    }
-
     static setStartIDValue(value) {
         SetSerialNumber(value);
     }
@@ -182,7 +170,8 @@ var Methods = {
 }
 Object.assign(
     BehaviorTree.prototype,
-    Methods
+    Methods,
+    DataMethods,
 );
 
 export default BehaviorTree;
