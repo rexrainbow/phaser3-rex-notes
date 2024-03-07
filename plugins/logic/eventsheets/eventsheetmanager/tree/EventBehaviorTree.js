@@ -1,5 +1,6 @@
 import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree';
 
+const Active = '$active';
 const RoundState = '$roundState';
 const ConditionEvalPassed = '$conditionEvalPassed';
 
@@ -31,10 +32,30 @@ class EventBehaviorTree extends BehaviorTree {
         this.conditionEvalPassed = undefined;
 
         this.roundState = RoundIdle;
+
+        var { active = true } = config;
+        this.active = active;
     }
 
     get isParallel() {
         return this.properties.parallel;
+    }
+
+    get active() {
+        return this._active;
+    }
+
+    set active(value) {
+        this._active = value;
+        this.setData(this.blackboard, Active, value);
+    }
+
+    setActive(active) {
+        if (active === undefined) {
+            active = true;
+        }
+        this.active = active;
+        return this;
     }
 
     get conditionEvalPassed() {

@@ -70,6 +70,10 @@ export default {
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
             var tree = trees[i];
 
+            if (!tree.active) {
+                continue;
+            }
+
             tree.resetState(blackboard);
             if (tree.isParallel) {
                 // Open all event sheets
