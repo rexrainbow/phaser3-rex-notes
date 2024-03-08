@@ -1,7 +1,6 @@
 export default {
-    getTreeActiveState(tree) {
-        var treeID = (typeof (tree) === 'string') ? tree : tree.id;
-        tree = this.getTreeByID(treeID);
+    getTreeActiveState(title) {
+        var tree = this.getTree(title);
         if (!tree) {
             return null;
         }
@@ -9,9 +8,8 @@ export default {
         return tree.active;
     },
 
-    setTreeActiveState(tree, active) {
-        var treeID = (typeof (tree) === 'string') ? tree : tree.id;
-        tree = this.getTreeByID(treeID);
+    setTreeActiveState(title, active) {
+        var tree = this.getTree(title);
         if (tree) {
             tree.setActive(active);
         }

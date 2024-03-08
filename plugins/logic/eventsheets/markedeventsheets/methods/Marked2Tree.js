@@ -14,6 +14,7 @@ var Marked2Tree = function (
         lineBreak = '\\',
         commentLineStart = '\/\/',
         parallel = false,
+        active = true,
         once = false,
     } = {}
 ) {
@@ -24,7 +25,7 @@ var Marked2Tree = function (
 
     var {
         parallel = parallel,
-        active = true,
+        active = active,
         once = once,
     } = treeConfig;
     var taskSequenceConfig = { lineBreak, commentLineStart };

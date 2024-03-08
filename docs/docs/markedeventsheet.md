@@ -93,7 +93,9 @@ var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
 eventSheetManager.addEventSheet(content, {
     commentLineStart: '\/\/',
     lineBreak: '\\',
-    parallel: undefined
+    parallel: undefined,
+    active: true,
+    once: false
 })
 ```
 
@@ -103,7 +105,9 @@ or
 eventSheetManager.addEventSheet(content, groupName, {
     commentLineStart: '\/\/',
     lineBreak: '\\',
-    parallel: undefined
+    parallel: undefined,
+    active: true,
+    once: false
 })
 ```
 
@@ -112,6 +116,12 @@ eventSheetManager.addEventSheet(content, groupName, {
 - `lineBreak` : Markdown will use `\` as line break. So the last character `\` will be discarded.
 - `parallel` : 
     - `undefined` : Use default `parallel` property.
+- `active` : 
+    - `true` : Eval condition of this event sheet every round. Default behavior.
+    - `false` : Skip this event sheet.
+- `once` :
+    - `true` : Set `active` of this event sheet to `false` when exection of this event sheet is complete.
+    - `false` : Do nothing when exection of this event sheet is complete. Default behavior.
 - `groupName` : Each event sheet belong a group. Ignore this parameter to use default group.
     - `'_'` : Default group name.
 
@@ -160,6 +170,42 @@ eventSheetManager.addEventSheet(content, groupName, {
     ```javascript
     eventSheetManager.start(title, groupName, false);
     ```
+
+### Round counter
+
+- Increase round counter
+    ```javascript
+    eventSheetManager.updateRoundCounter();
+    ```
+- Set round counter
+    ```javascript
+    eventSheetManager.updateRoundCounter(value);
+    ```
+- Get round counter
+    ```javascript
+    var roundCounter = eventSheetManager.roundCounter;
+    ```
+
+### Active
+
+- Activate state of event sheet (indexed by `title`)
+    ```javascript
+    eventSheetManager.setTreeActiveState(title);
+    // eventSheetManager.setTreeActiveState(title, true);
+    ```
+- Inactivate state of event sheet (indexed by `title`)
+    ```javascript
+    eventSheetManager.setTreeActiveState(title, false);
+    ```
+- Get active state of event sheet (indexed by `title`)
+    ```javascript
+    var active = eventSheetManager.getTreeActiveState(title);
+    ```
+
+!!! note
+    Event sheet which has `once` property will set `active` property to `false`
+    when exection of this event sheet is complete. 
+
 
 ### Stop running
 
@@ -260,6 +306,10 @@ Local memory is shared for all event sheets.
 ```
 # Title
 
+parallel
+active=false
+once
+
 ## [Condition]
 
 coin > 5
@@ -270,8 +320,12 @@ coin > 5
 
 ```
 
-- H1 heading: Title of this event sheet
-- H2 heading with `[Condition]` : Main condition.    
+- H1 heading : Title of this event sheet
+- Content under Title (H1 heading) : Setting of this event sheet, optional.
+    - `parallel` : Set `parallel` property of this event sheet to `true`.
+    - `active=false` : Set `active` property of this event sheet to `false`.
+    - `once` : Set `once` property of this event sheet to `true`.
+- H2 heading with `[Condition]` : Main condition.
     - Each line under `[Condition]` is a boolean equation, composed of `AND` logic.
     - Can have many `[Condition]` heading, each `[Condition]` heading will be composed of `OR` logic.
     - Read data from [local memory](markedeventsheet.md#local-memory)
@@ -340,6 +394,27 @@ loopCount > 0
 ```
 
 - Action line with `[exit]` : Skip remainder label (heading) and actions.
+
+
+##### Next round
+
+```
+
+[next round]
+
+```
+
+- Action line with `[next round]` : Run remainder actions at next round.
+
+
+Invoke 
+
+```javascript
+eventSheetManager.updateRoundCounter().start()
+```
+
+to start next round.
+
 
 #### Custom command
 

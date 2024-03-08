@@ -1,12 +1,12 @@
 export default {
-    getTreeActiveState(tree, groupName) {
+    getTreeActiveState(title, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        return this.getTreeGroup(groupName).getTreeActiveState(tree);
+        return this.getTreeGroup(groupName).getTreeActiveState(title);
     },
 
-    setTreeActiveState(tree, groupName, active) {
+    setTreeActiveState(title, groupName, active) {
         if (typeof (groupName) === 'boolean') {
             active = groupName;
             groupName = undefined;
@@ -14,6 +14,6 @@ export default {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        return this.getTreeGroup(groupName).setTreeActiveState(tree, active);
+        return this.getTreeGroup(groupName).setTreeActiveState(title, active);
     },
 }

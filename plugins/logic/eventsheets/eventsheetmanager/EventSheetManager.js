@@ -18,7 +18,7 @@ class EventSheetManager extends EventEmitter {
         this.parallel = parallel;
 
         this.blackboard = new Blackboard({
-            currentTimeKey: '$round'
+            currentTimeKey: '$roundCounter'
         });
         this.blackboard.treeManager = this; // For TaskAction
 

@@ -1,5 +1,4 @@
 import TreeMethods from './TreeMethods.js';
-import GetTreeMethods from './GetTreeMethods.js';
 import AddTreeMethods from './AddTreeMethods.js';
 import RemoveTreeMethods from './RemoveTreeMethods.js';
 import TreeActiveStateMethods from './TreeActiveStateMethods.js';
@@ -12,7 +11,6 @@ var Methods = {};
 Object.assign(
     Methods,
     TreeMethods,
-    GetTreeMethods,
     AddTreeMethods,
     RemoveTreeMethods,
     TreeActiveStateMethods,
