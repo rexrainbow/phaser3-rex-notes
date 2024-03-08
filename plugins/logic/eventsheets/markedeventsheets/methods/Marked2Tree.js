@@ -24,6 +24,7 @@ var Marked2Tree = function (
 
     var {
         parallel = parallel,
+        active = true,
         once = once,
     } = treeConfig;
     var taskSequenceConfig = { lineBreak, commentLineStart };
@@ -33,6 +34,7 @@ var Marked2Tree = function (
         {
             title: headingTree.title,
             parallel: parallel,
+            active: active,
             once: once,
             condition: GetConditionExpression(conditionNodes)
         }

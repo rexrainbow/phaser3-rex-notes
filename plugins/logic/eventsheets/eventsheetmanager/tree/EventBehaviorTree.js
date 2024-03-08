@@ -17,10 +17,12 @@ class EventBehaviorTree extends BehaviorTree {
 
         var {
             parallel = false,
+            active = true,
             once = false,
             condition = 'true'
         } = config;
 
+        this.active = active;
         this.properties.parallel = parallel;
         this.properties.once = once;
 
@@ -34,9 +36,6 @@ class EventBehaviorTree extends BehaviorTree {
         this.conditionEvalPassed = undefined;
 
         this.roundState = RoundIdle;
-
-        var { active = true } = config;
-        this.active = active;
     }
 
     get isParallel() {

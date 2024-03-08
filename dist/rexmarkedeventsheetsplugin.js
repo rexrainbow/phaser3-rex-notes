@@ -14729,10 +14729,13 @@
       var _config = config,
         _config$parallel = _config.parallel,
         parallel = _config$parallel === void 0 ? false : _config$parallel,
+        _config$active = _config.active,
+        active = _config$active === void 0 ? true : _config$active,
         _config$once = _config.once,
         once = _config$once === void 0 ? false : _config$once,
         _config$condition = _config.condition,
         condition = _config$condition === void 0 ? 'true' : _config$condition;
+      _this.active = active;
       _this.properties.parallel = parallel;
       _this.properties.once = once;
       var root = new IfSelector({
@@ -14743,10 +14746,6 @@
       _this.setRoot(root);
       _this.conditionEvalPassed = undefined;
       _this.roundState = RoundIdle;
-      var _config2 = config,
-        _config2$active = _config2.active,
-        active = _config2$active === void 0 ? true : _config2$active;
-      _this.active = active;
       return _this;
     }
     _createClass(EventBehaviorTree, [{
@@ -16384,6 +16383,8 @@
         catchNodes = _ParseNodes.catchNodes;
       var _treeConfig$parallel = treeConfig.parallel,
         parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel,
+        _treeConfig$active = treeConfig.active,
+        active = _treeConfig$active === void 0 ? true : _treeConfig$active,
         _treeConfig$once = treeConfig.once,
         once = _treeConfig$once === void 0 ? once : _treeConfig$once;
       var taskSequenceConfig = {
@@ -16393,6 +16394,7 @@
       var tree = new EventBehaviorTree(treeManager, {
         title: headingTree.title,
         parallel: parallel,
+        active: active,
         once: once,
         condition: GetConditionExpression(conditionNodes)
       });
