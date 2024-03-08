@@ -32,7 +32,7 @@ module.exports = {
     watch: true,
     plugins: [
         new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),            
+            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
             "typeof WEBGL_DEBUG": JSON.stringify(false),
             WEBGL_DEBUG: JSON.stringify(false),
         }),
@@ -104,7 +104,14 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
         fallback: {
-            fs: false
+            "fs": false,
+            "tls": false,
+            "net": false,
+            "path": false,
+            "zlib": false,
+            "http": false,
+            "https": false,
+            "stream": false,
         }
     }
 }
