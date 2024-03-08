@@ -1,12 +1,13 @@
 import Base from './Base.js';
 import { TREE_STATE } from '../constants.js';
-import GetValue from '../../../utils/object/GetValue.js';
 
 class Blackboard extends Base {
-    constructor(config) {
+    constructor({
+        currentTimeKey = '$currentTime'
+    } = {}) {
         super();
 
-        this.currentTimeKey = GetValue(config, 'currentTimeKey', '$currentTime');
+        this.currentTimeKey = currentTimeKey;
     }
 
     getTreeState(treeID) {
