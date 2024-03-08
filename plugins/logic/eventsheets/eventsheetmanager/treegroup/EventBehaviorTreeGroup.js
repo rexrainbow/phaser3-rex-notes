@@ -1,6 +1,4 @@
-import TreeMethods from './TreeMethods.js';
-import StateMethods from './StateMethods.js';
-import RunMethods from './RunMethods.js';
+import Methods from './Methods.js';
 
 class EventBehaviorTreeGroup {
     constructor(parent, {
@@ -20,9 +18,7 @@ class EventBehaviorTreeGroup {
 
 Object.assign(
     EventBehaviorTreeGroup.prototype,
-    TreeMethods,
-    StateMethods,
-    RunMethods,
+    Methods,
 )
 
 export default EventBehaviorTreeGroup;

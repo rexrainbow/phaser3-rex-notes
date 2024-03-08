@@ -1,28 +1,24 @@
 import TreeMethods from './TreeMethods.js';
+import GetTreeMethods from './GetTreeMethods.js';
 import AddTreeMethods from './AddTreeMethods.js';
 import RemoveTreeMethods from './RemoveTreeMethods.js';
 import TreeActiveStateMethods from './TreeActiveStateMethods.js';
-import SaveLoadTreesMethods from './SaveLoadTreesMethods.js';
-import DataMethods from './DataMethods.js';
-import StateMethods from './StateMethods';
-import ValueConvertMethods from './ValueConvertMethods';
+import SaveLoadTreeMethods from './SaveLoadTreeMethods.js';
+import StateMethods from './StateMethods.js';
 import RunMethods from './RunMethods.js';
-import RoundCounterMethods from './RoundCounterMethods.js';
 
 var Methods = {};
 
 Object.assign(
     Methods,
     TreeMethods,
+    GetTreeMethods,
     AddTreeMethods,
     RemoveTreeMethods,
     TreeActiveStateMethods,
-    SaveLoadTreesMethods,
-    DataMethods,
+    SaveLoadTreeMethods,
     StateMethods,
-    ValueConvertMethods,
     RunMethods,
-    RoundCounterMethods,
 )
 
 export default Methods;

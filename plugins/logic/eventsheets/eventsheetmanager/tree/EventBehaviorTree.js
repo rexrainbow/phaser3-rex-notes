@@ -1,8 +1,5 @@
-import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree';
-
-const Active = '$active';
-const RoundState = '$roundState';
-const ConditionEvalPassed = '$conditionEvalPassed';
+import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree/index.js';
+import { Active, RoundState, ConditionEvalPassed } from './constants.js';
 
 const RoundIdle = 0
 const RoundRun = 1

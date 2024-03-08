@@ -4898,11 +4898,11 @@
     }]);
     return BehaviorTree;
   }();
-  var Methods$5 = {
+  var Methods$6 = {
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$5, DataMethods$3);
+  Object.assign(BehaviorTree.prototype, Methods$6, DataMethods$3);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -5142,6 +5142,100 @@
     }]);
     return Blackboard;
   }(Blackboard$1);
+
+  var TreeMethods$1 = {
+    getTreeState: function getTreeState(tree) {
+      var treeID = typeof tree === 'string' ? tree : tree.id;
+      return this.blackboard.getTreeState(treeID);
+    },
+    getEventSheetTitleList: function getEventSheetTitleList(out) {
+      if (out === undefined) {
+        out = [];
+      }
+      this.trees.forEach(function (tree) {
+        out.push(tree.title);
+      });
+      return out;
+    }
+  };
+
+  var GetTreeMethods = {
+    getTree: function getTree(title) {
+      var trees = this.trees;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        if (tree.title === title) {
+          return tree;
+        }
+      }
+    },
+    getTreeByID: function getTreeByID(treeID) {
+      var trees = this.trees;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        if (tree.id === treeID) {
+          return tree;
+        }
+      }
+    }
+  };
+
+  var AddTreeMethods$1 = {
+    addTree: function addTree(tree) {
+      this.trees.push(tree);
+      return this;
+    }
+  };
+
+  var RemoveTreeMethods$1 = {
+    removeAllEventSheets: function removeAllEventSheets() {
+      this.trees.forEach(function (tree) {
+        this.blackboard.removeTreeData(tree.id);
+      }, this);
+      this.trees.length = 0;
+      this.pendingTrees.length = 0;
+      return this;
+    },
+    removeEventSheet: function removeEventSheet(title) {
+      var removedTrees = [];
+      this.trees.forEach(function (tree) {
+        if (!tree.title === title) {
+          return;
+        }
+        var status = this.getTreeState(tree);
+        if (status === RUNNING) {
+          // Can't remove RUNNING tree
+          return;
+        }
+        removedTrees.push(tree);
+        this.blackboard.removeTreeData(tree.id);
+      }, this);
+      if (removedTrees.length > 0) {
+        Remove(this.trees, removedTrees);
+        Remove(this.pendingTrees, removedTrees);
+      }
+      return this;
+    }
+  };
+
+  var TreeActiveStateMethods$1 = {
+    getTreeActiveState: function getTreeActiveState(tree) {
+      var treeID = typeof tree === 'string' ? tree : tree.id;
+      tree = this.getTreeByID(treeID);
+      if (!tree) {
+        return null;
+      }
+      return tree.active;
+    },
+    setTreeActiveState: function setTreeActiveState(tree, active) {
+      var treeID = typeof tree === 'string' ? tree : tree.id;
+      tree = this.getTreeByID(treeID);
+      if (tree) {
+        tree.setActive(active);
+      }
+      return this;
+    }
+  };
 
   var TaskSequence = /*#__PURE__*/function (_Sequence) {
     _inherits(TaskSequence, _Sequence);
@@ -6090,61 +6184,7 @@
     WaitNextRound: WaitNextRound
   };
 
-  var TreeMethods$1 = {
-    addTree: function addTree(tree) {
-      this.trees.push(tree);
-      return this;
-    },
-    getTree: function getTree(title) {
-      var trees = this.trees;
-      for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        if (tree.title === title) {
-          return tree;
-        }
-      }
-    },
-    getTreeState: function getTreeState(tree) {
-      var treeID = typeof tree === 'string' ? tree : tree.id;
-      return this.blackboard.getTreeState(treeID);
-    },
-    removeAllEventSheets: function removeAllEventSheets() {
-      this.trees.forEach(function (tree) {
-        this.blackboard.removeTreeData(tree.id);
-      }, this);
-      this.trees.length = 0;
-      this.pendingTrees.length = 0;
-      return this;
-    },
-    getEventSheetTitleList: function getEventSheetTitleList(out) {
-      if (out === undefined) {
-        out = [];
-      }
-      this.trees.forEach(function (tree) {
-        out.push(tree.title);
-      });
-      return out;
-    },
-    removeEventSheet: function removeEventSheet(title) {
-      var removedTrees = [];
-      this.trees.forEach(function (tree) {
-        if (!tree.title === title) {
-          return;
-        }
-        var status = this.getTreeState(tree);
-        if (status === RUNNING$1) {
-          // Can't remove RUNNING tree
-          return;
-        }
-        removedTrees.push(tree);
-        this.blackboard.removeTreeData(tree.id);
-      }, this);
-      if (removedTrees.length > 0) {
-        Remove(this.trees, removedTrees);
-        Remove(this.pendingTrees, removedTrees);
-      }
-      return this;
-    },
+  var SaveLoadTreeMethods = {
     dumpTrees: function dumpTrees() {
       return this.trees.map(function (tree) {
         return tree.dump();
@@ -6358,6 +6398,9 @@
     }
   };
 
+  var Methods$5 = {};
+  Object.assign(Methods$5, TreeMethods$1, GetTreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1);
+
   var EventBehaviorTreeGroup = /*#__PURE__*/_createClass(function EventBehaviorTreeGroup(parent) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       _ref$name = _ref.name,
@@ -6372,11 +6415,9 @@
     this.isRunning = false;
     this._threadKey = null;
   });
-  Object.assign(EventBehaviorTreeGroup.prototype, TreeMethods$1, StateMethods$1, RunMethods$1);
+  Object.assign(EventBehaviorTreeGroup.prototype, Methods$5);
 
   var TreeMethods = {
-    // Override it
-    addEventSheet: function addEventSheet(s, groupName, config) {},
     hasTreeGroup: function hasTreeGroup(name) {
       return this.treeGroups.hasOwnProperty(name);
     },
@@ -6388,25 +6429,11 @@
       }
       return this.treeGroups[name];
     },
-    addTree: function addTree(tree, groupName) {
-      if (groupName === undefined) {
-        groupName = this.defaultTreeGroupName;
-      }
-      this.getTreeGroup(groupName).addTree(tree);
-      return this;
-    },
     getTreeState: function getTreeState(tree, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
       return this.getTreeGroup(groupName).getTreeState(tree);
-    },
-    removeAllEventSheets: function removeAllEventSheets(groupName) {
-      if (groupName === undefined) {
-        groupName = this.defaultTreeGroupName;
-      }
-      this.getTreeGroup(groupName).removeAllEventSheets();
-      return this;
     },
     getEventSheetTitleList: function getEventSheetTitleList(out, groupName) {
       if (out === undefined) {
@@ -6417,6 +6444,28 @@
       }
       this.getTreeGroup(groupName).getEventSheetTitleList(out);
       return out;
+    }
+  };
+
+  var AddTreeMethods = {
+    // Override it
+    addEventSheet: function addEventSheet(s, groupName, config) {},
+    addTree: function addTree(tree, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      this.getTreeGroup(groupName).addTree(tree);
+      return this;
+    }
+  };
+
+  var RemoveTreeMethods = {
+    removeAllEventSheets: function removeAllEventSheets(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      this.getTreeGroup(groupName).removeAllEventSheets();
+      return this;
     },
     removeEventSheet: function removeEventSheet(title, groupName) {
       if (groupName === undefined) {
@@ -6424,7 +6473,29 @@
       }
       this.getTreeGroup(groupName).removeEventSheet(title);
       return this;
+    }
+  };
+
+  var TreeActiveStateMethods = {
+    getTreeActiveState: function getTreeActiveState(tree, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      return this.getTreeGroup(groupName).getTreeActiveState(tree);
     },
+    setTreeActiveState: function setTreeActiveState(tree, groupName, active) {
+      if (typeof groupName === 'boolean') {
+        active = groupName;
+        groupName = undefined;
+      }
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      return this.getTreeGroup(groupName).setTreeActiveState(tree, active);
+    }
+  };
+
+  var SaveLoadTreesMethods = {
     dumpTrees: function dumpTrees(groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
@@ -14588,7 +14659,7 @@
   };
 
   var Methods$4 = {};
-  Object.assign(Methods$4, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
+  Object.assign(Methods$4, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -14640,6 +14711,7 @@
   var Active = '$active';
   var RoundState = '$roundState';
   var ConditionEvalPassed = '$conditionEvalPassed';
+
   var RoundIdle = 0;
   var RoundRun = 1;
   var RoundComplete = 2;
