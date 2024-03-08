@@ -18,10 +18,15 @@ class EventBehaviorTree extends BehaviorTree {
         this.treeManager = treeManager;
         this.blackboard = treeManager.blackboard;
 
-        var { parallel = false } = config
-        this.properties.parallel = parallel;
+        var {
+            parallel = false,
+            once = false,
+            condition = 'true'
+        } = config;
 
-        var { condition = 'true' } = config;
+        this.properties.parallel = parallel;
+        this.properties.once = once;
+
         var root = new IfSelector({
             title: this.title,
             expression: condition,
@@ -119,6 +124,10 @@ class EventBehaviorTree extends BehaviorTree {
         if (state !== RUNNING) {
             // Will remove from pendingTrees
             this.roundState = RoundComplete;
+
+            if (this.properties.once) {
+                this.setActive(false);
+            }
         }
 
         return state;

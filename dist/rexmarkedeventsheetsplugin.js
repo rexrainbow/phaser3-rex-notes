@@ -533,7 +533,6 @@
   var ACTION = 'action';
   var SERVICE = 'service';
   var TREE_STATE = '$state';
-  var CURRENT_TIME = '$currentTime';
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -4703,9 +4702,9 @@
     }, {
       key: "currentTime",
       get: function get() {
-        if (this.blackboard.has(CURRENT_TIME)) {
+        if (this.blackboard.hasValidCurrentTime()) {
           // Inject current-time through blackboard
-          return this.blackboard.get(CURRENT_TIME);
+          return this.blackboard.getCurrentTime();
         } else {
           if (this._currentTime === undefined) {
             this._currentTime = new Date().getTime();
@@ -5095,11 +5094,64 @@
     return Blackboard;
   }();
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$h = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
   var Blackboard = /*#__PURE__*/function (_Base) {
     _inherits(Blackboard, _Base);
-    function Blackboard() {
+    function Blackboard(config) {
+      var _this;
       _classCallCheck(this, Blackboard);
-      return _callSuper(this, Blackboard, arguments);
+      _this = _callSuper(this, Blackboard);
+      _this.currentTimeKey = GetValue$h(config, 'currentTimeKey', '$currentTime');
+      return _this;
     }
     _createClass(Blackboard, [{
       key: "getTreeState",
@@ -5113,25 +5165,68 @@
         return this;
       }
     }, {
-      key: "setCurrentTime",
-      value: function setCurrentTime(time) {
-        this.set(CURRENT_TIME, time);
-        return this;
+      key: "hasValidCurrentTime",
+      value: function hasValidCurrentTime() {
+        return this.has(this.currentTimeKey);
       }
     }, {
-      key: "incCurrentTime",
-      value: function incCurrentTime(time) {
-        this.inc(CURRENT_TIME, time);
+      key: "setCurrentTime",
+      value: function setCurrentTime(time) {
+        this.set(this.currentTimeKey, time);
         return this;
       }
     }, {
       key: "getCurrentTime",
       value: function getCurrentTime() {
-        return this.get(CURRENT_TIME);
+        return this.get(this.currentTimeKey);
+      }
+    }, {
+      key: "incCurrentTime",
+      value: function incCurrentTime(time) {
+        this.inc(this.currentTimeKey, time);
+        return this;
       }
     }]);
     return Blackboard;
   }(Blackboard$1);
+
+  var TaskSequence = /*#__PURE__*/function (_Sequence) {
+    _inherits(TaskSequence, _Sequence);
+    function TaskSequence() {
+      _classCallCheck(this, TaskSequence);
+      return _callSuper(this, TaskSequence, arguments);
+    }
+    _createClass(TaskSequence, [{
+      key: "open",
+      value: function open(tick) {
+        _get(_getPrototypeOf(TaskSequence.prototype), "open", this).call(this, tick);
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
+        treeManager.emit('label.enter', this.title, tick.tree.title, treeGroup.name, treeManager);
+      }
+    }, {
+      key: "tick",
+      value: function tick(_tick) {
+        var status = _get(_getPrototypeOf(TaskSequence.prototype), "tick", this).call(this, _tick);
+        // Turn FAILURE by SUCCESS
+        if (status === FAILURE) {
+          status = SUCCESS$1;
+        }
+        return status;
+      }
+    }, {
+      key: "close",
+      value: function close(tick) {
+        _get(_getPrototypeOf(TaskSequence.prototype), "close", this).call(this, tick);
+        var blackboard = tick.blackboard;
+        var treeManager = blackboard.treeManager;
+        var treeGroup = blackboard.treeGroup;
+        treeManager.emit('label.exit', this.title, tick.tree.title, treeGroup.name, treeManager);
+      }
+    }]);
+    return TaskSequence;
+  }(Sequence);
 
   var IsEventEmitter = function IsEventEmitter(obj) {
     if (obj && _typeof(obj) === 'object') {
@@ -6037,6 +6132,7 @@
   }(Wait);
 
   var CustomNodeMapping = {
+    TaskSequence: TaskSequence,
     TaskAction: TaskAction,
     WaitNextRound: WaitNextRound
   };
@@ -6205,6 +6301,9 @@
       // Run parallel tree, will return running, or failure
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
         var tree = trees[i];
+        if (!tree.active) {
+          continue;
+        }
         tree.resetState(blackboard);
         if (tree.isParallel) {
           // Open all event sheets
@@ -6336,39 +6435,53 @@
       }
       return this.treeGroups[name];
     },
-    addTree: function addTree(tree) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    addTree: function addTree(tree, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName).addTree(tree);
       return this;
     },
-    getTreeState: function getTreeState(tree) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    getTreeState: function getTreeState(tree, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       return this.getTreeGroup(groupName).getTreeState(tree);
     },
-    removeAllEventSheets: function removeAllEventSheets() {
-      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+    removeAllEventSheets: function removeAllEventSheets(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName).removeAllEventSheets();
       return this;
     },
-    getEventSheetTitleList: function getEventSheetTitleList(out) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    getEventSheetTitleList: function getEventSheetTitleList(out, groupName) {
       if (out === undefined) {
         out = [];
+      }
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
       }
       this.getTreeGroup(groupName).getEventSheetTitleList(out);
       return out;
     },
-    removeEventSheet: function removeEventSheet(title) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    removeEventSheet: function removeEventSheet(title, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName).removeEventSheet(title);
       return this;
     },
-    dumpTrees: function dumpTrees() {
-      var groupName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.defaultTreeGroupName;
+    dumpTrees: function dumpTrees(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       return this.getTreeGroup(groupName).dumpTrees();
     },
-    loadTrees: function loadTrees(data) {
-      var groupName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.defaultTreeGroupName;
+    loadTrees: function loadTrees(data, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
       this.getTreeGroup(groupName).loadTrees(data);
       return this;
     }
@@ -14500,18 +14613,29 @@
       }
       this.getTreeGroup(groupName).stop();
       return this;
-    },
-    incRoundCounter: function incRoundCounter() {
-      this.blackboard.incCurrentTime(1);
-      return this;
-    },
+    }
+  };
+
+  var RoundCounterMethods = {
     getRoundCounter: function getRoundCounter() {
       return this.blackboard.getCurrentTime();
+    },
+    setRoundCounter: function setRoundCounter(value) {
+      this.blackboard.setCurrentTime(value);
+      return this;
+    },
+    updateRoundCounter: function updateRoundCounter(value) {
+      if (value === undefined) {
+        this.blackboard.incCurrentTime(1);
+      } else {
+        this.blackboard.setCurrentTime(value);
+      }
+      return this;
     }
   };
 
   var Methods$4 = {};
-  Object.assign(Methods$4, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods);
+  Object.assign(Methods$4, TreeMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -14527,10 +14651,13 @@
       _this.defaultTreeGroupName = '_';
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
-      _this.blackboard = new Blackboard();
+      _this.blackboard = new Blackboard({
+        currentTimeKey: '$round'
+      });
       _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
-      _this.blackboard.setCurrentTime(0);
+
       _this.treeGroups = {};
+      _this.setRoundCounter(0);
       return _this;
     }
     _createClass(EventSheetManager, [{
@@ -14542,6 +14669,9 @@
       key: "roundCounter",
       get: function get() {
         return this.getRoundCounter();
+      },
+      set: function set(value) {
+        this.setRoundCounter(value);
       }
     }, {
       key: "setCommandExecutor",
@@ -14554,6 +14684,7 @@
   }(EventEmitter$2);
   Object.assign(EventSheetManager.prototype, Methods$4);
 
+  var Active = '$active';
   var RoundState = '$roundState';
   var ConditionEvalPassed = '$conditionEvalPassed';
   var RoundIdle = 0;
@@ -14561,20 +14692,24 @@
   var RoundComplete = 2;
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventBehaviorTree, _BehaviorTree);
-    function EventBehaviorTree(config) {
+    function EventBehaviorTree(treeManager, config) {
       var _this;
       _classCallCheck(this, EventBehaviorTree);
       if (config === undefined) {
         config = {};
       }
       _this = _callSuper(this, EventBehaviorTree, [config]);
+      _this.treeManager = treeManager;
+      _this.blackboard = treeManager.blackboard;
       var _config = config,
         _config$parallel = _config.parallel,
-        parallel = _config$parallel === void 0 ? false : _config$parallel;
+        parallel = _config$parallel === void 0 ? false : _config$parallel,
+        _config$once = _config.once,
+        once = _config$once === void 0 ? false : _config$once,
+        _config$condition = _config.condition,
+        condition = _config$condition === void 0 ? 'true' : _config$condition;
       _this.properties.parallel = parallel;
-      var _config2 = config,
-        _config2$condition = _config2.condition,
-        condition = _config2$condition === void 0 ? 'true' : _config2$condition;
+      _this.properties.once = once;
       var root = new IfSelector({
         title: _this.title,
         expression: condition,
@@ -14583,6 +14718,10 @@
       _this.setRoot(root);
       _this.conditionEvalPassed = undefined;
       _this.roundState = RoundIdle;
+      var _config2 = config,
+        _config2$active = _config2.active,
+        active = _config2$active === void 0 ? true : _config2$active;
+      _this.active = active;
       return _this;
     }
     _createClass(EventBehaviorTree, [{
@@ -14591,16 +14730,31 @@
         return this.properties.parallel;
       }
     }, {
+      key: "active",
+      get: function get() {
+        return this._active;
+      },
+      set: function set(value) {
+        this._active = value;
+        this.setData(this.blackboard, Active, value);
+      }
+    }, {
+      key: "setActive",
+      value: function setActive(active) {
+        if (active === undefined) {
+          active = true;
+        }
+        this.active = active;
+        return this;
+      }
+    }, {
       key: "conditionEvalPassed",
       get: function get() {
         return this._conditionEvalPassed;
       },
       set: function set(value) {
         this._conditionEvalPassed = value;
-        var blackboard = this.ticker.blackboard;
-        if (blackboard) {
-          this.setData(blackboard, ConditionEvalPassed, value);
-        }
+        this.setData(this.blackboard, ConditionEvalPassed, value);
       }
     }, {
       key: "roundState",
@@ -14609,10 +14763,7 @@
       },
       set: function set(value) {
         this._roundState = value;
-        var blackboard = this.ticker.blackboard;
-        if (blackboard) {
-          this.setData(blackboard, RoundState, value);
-        }
+        this.setData(this.blackboard, RoundState, value);
       }
     }, {
       key: "roundComplete",
@@ -14657,6 +14808,9 @@
         if (state !== RUNNING$1) {
           // Will remove from pendingTrees
           this.roundState = RoundComplete;
+          if (this.properties.once) {
+            this.setActive(false);
+          }
         }
         return state;
       }
@@ -16010,44 +16164,6 @@
     return expression;
   };
 
-  var TaskSequence = /*#__PURE__*/function (_Sequence) {
-    _inherits(TaskSequence, _Sequence);
-    function TaskSequence() {
-      _classCallCheck(this, TaskSequence);
-      return _callSuper(this, TaskSequence, arguments);
-    }
-    _createClass(TaskSequence, [{
-      key: "open",
-      value: function open(tick) {
-        _get(_getPrototypeOf(TaskSequence.prototype), "open", this).call(this, tick);
-        var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
-        var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.enter', this.title, tick.tree.title, treeGroup.name, treeManager);
-      }
-    }, {
-      key: "tick",
-      value: function tick(_tick) {
-        var status = _get(_getPrototypeOf(TaskSequence.prototype), "tick", this).call(this, _tick);
-        // Turn FAILURE by SUCCESS
-        if (status === FAILURE) {
-          status = SUCCESS$1;
-        }
-        return status;
-      }
-    }, {
-      key: "close",
-      value: function close(tick) {
-        _get(_getPrototypeOf(TaskSequence.prototype), "close", this).call(this, tick);
-        var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
-        var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.exit', this.title, tick.tree.title, treeGroup.name, treeManager);
-      }
-    }]);
-    return TaskSequence;
-  }(Sequence);
-
   var TypeNames = ['if', 'else', 'while'];
   var CreateTaskSequence = function CreateTaskSequence(node, config) {
     if (Array.isArray(node)) {
@@ -16224,15 +16340,17 @@
     return s.trimLeft();
   };
 
-  var Marked2Tree = function Marked2Tree(markedString) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+  var Marked2Tree = function Marked2Tree(treeManager, markedString) {
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
       _ref$lineBreak = _ref.lineBreak,
       lineBreak = _ref$lineBreak === void 0 ? '\\' : _ref$lineBreak,
       _ref$commentLineStart = _ref.commentLineStart,
       commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart,
       _ref$parallel = _ref.parallel,
-      parallel = _ref$parallel === void 0 ? false : _ref$parallel;
-    return function (parallel) {
+      parallel = _ref$parallel === void 0 ? false : _ref$parallel,
+      _ref$once = _ref.once,
+      once = _ref$once === void 0 ? false : _ref$once;
+    return function (parallel, once) {
       var headingTree = GetHeadingTree(markedString);
       var treeConfig = GetTreeConfig(headingTree.paragraphs);
       var _ParseNodes = ParseNodes(headingTree.children),
@@ -16240,14 +16358,17 @@
         mainTaskNodes = _ParseNodes.mainTaskNodes,
         catchNodes = _ParseNodes.catchNodes;
       var _treeConfig$parallel = treeConfig.parallel,
-        parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel;
+        parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel,
+        _treeConfig$once = treeConfig.once,
+        once = _treeConfig$once === void 0 ? once : _treeConfig$once;
       var taskSequenceConfig = {
         lineBreak: lineBreak,
         commentLineStart: commentLineStart
       };
-      var tree = new EventBehaviorTree({
+      var tree = new EventBehaviorTree(treeManager, {
         title: headingTree.title,
         parallel: parallel,
+        once: once,
         condition: GetConditionExpression(conditionNodes)
       });
       var rootNode = tree.root;
@@ -16260,7 +16381,7 @@
       }
       rootNode.addChild(forceFailure);
       return tree;
-    }(parallel);
+    }(parallel, once);
   };
 
   var MarkedEventSheets = /*#__PURE__*/function (_EventSheetManager) {
@@ -16289,7 +16410,7 @@
           commentLineStart = _config$commentLineSt === void 0 ? '\/\/' : _config$commentLineSt,
           _config$parallel = _config.parallel,
           parallel = _config$parallel === void 0 ? this.parallel : _config$parallel;
-        var tree = Marked2Tree(markedString, {
+        var tree = Marked2Tree(this, markedString, {
           lineBreak: lineBreak,
           commentLineStart: commentLineStart,
           parallel: parallel
@@ -18949,17 +19070,17 @@
     return output;
   };
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$h(config, 'color');
-      lineWidth = GetValue$h(config, 'lineWidth');
-      fillColor = GetValue$h(config, 'fillColor');
-      fillAlpha = GetValue$h(config, 'fillAlpha', 1);
-      padding = GetValue$h(config, 'padding', 0);
+      strokeColor = GetValue$g(config, 'color');
+      lineWidth = GetValue$g(config, 'lineWidth');
+      fillColor = GetValue$g(config, 'fillColor');
+      fillAlpha = GetValue$g(config, 'fillAlpha', 1);
+      padding = GetValue$g(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -19062,32 +19183,32 @@
   };
   var globRect = new Rectangle();
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$g(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$g(config, 'createGameObject'), GetValue$g(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$g(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$g(config, 'fade', 500);
+      this.BobClass = GetValue$f(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$f(config, 'createGameObject'), GetValue$f(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$f(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue$f(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$g(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$g(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$f(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$f(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$g(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue$f(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$g(config, 'enable', true));
-        this.setViewport(GetValue$g(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue$f(config, 'enable', true));
+        this.setViewport(GetValue$f(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      var effectPropertiesConfig = GetValue$g(config, 'effectProperties', false);
+      var effectPropertiesConfig = GetValue$f(config, 'effectProperties', false);
       this.setEffectPropertiesConfig(effectPropertiesConfig);
-      this.setSymbols(GetValue$g(config, 'symbols'));
+      this.setSymbols(GetValue$f(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -19216,7 +19337,7 @@
     return gameObjects;
   };
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
     function LayerManager(scene, config) {
@@ -19234,7 +19355,7 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
-      var initLayers = GetValue$f(config, 'layers');
+      var initLayers = GetValue$e(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
           _this.add(initLayers[i]);
@@ -19397,7 +19518,7 @@
     }
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -19406,7 +19527,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$e(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$d(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -19482,7 +19603,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     function TickTask(parent, config) {
@@ -19492,7 +19613,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$d(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$c(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -19609,7 +19730,7 @@
     'always': 2
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     function SceneUpdateTickTask(parent, config) {
@@ -19622,7 +19743,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$c(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$b(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -19658,7 +19779,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var Clamp$1 = Phaser.Math.Clamp;
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
@@ -19668,15 +19789,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$b(o, 'state', IDLE);
-        this.timeScale = GetValue$b(o, 'timeScale', 1);
-        this.delay = GetValue$b(o, 'delay', 0);
-        this.repeat = GetValue$b(o, 'repeat', 0);
-        this.repeatCounter = GetValue$b(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$b(o, 'repeatDelay', 0);
-        this.duration = GetValue$b(o, 'duration', 0);
-        this.nowTime = GetValue$b(o, 'nowTime', 0);
-        this.justRestart = GetValue$b(o, 'justRestart', false);
+        this.state = GetValue$a(o, 'state', IDLE);
+        this.timeScale = GetValue$a(o, 'timeScale', 1);
+        this.delay = GetValue$a(o, 'delay', 0);
+        this.repeat = GetValue$a(o, 'repeat', 0);
+        this.repeatCounter = GetValue$a(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$a(o, 'repeatDelay', 0);
+        this.duration = GetValue$a(o, 'duration', 0);
+        this.nowTime = GetValue$a(o, 'nowTime', 0);
+        this.justRestart = GetValue$a(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -19904,7 +20025,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
@@ -19916,13 +20037,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$a(o, 'timer'));
-        this.setEnable(GetValue$a(o, 'enable', true));
-        this.setTarget(GetValue$a(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$9(o, 'timer'));
+        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setTarget(GetValue$9(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$a(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$a(o, 'repeat', 0));
+        this.setEase(GetValue$9(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$9(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -20047,7 +20168,7 @@
     return object instanceof SoundObjectClass;
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
@@ -20075,8 +20196,8 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
-        this.setMode(GetValue$9(o, 'mode', 0));
-        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setMode(GetValue$8(o, 'mode', 0));
+        this.setEnable(GetValue$8(o, 'enable', true));
         this.setVolumeRange(GetAdvancedValue(o, 'volume.start', this.parent.volume), GetAdvancedValue(o, 'volume.end', 0));
         return this;
       }
@@ -20211,7 +20332,7 @@
     return sound;
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var BackgroundMusicMethods$1 = {
     setBackgroundMusicLoop: function setBackgroundMusicLoop(value) {
       if (value === undefined) {
@@ -20255,11 +20376,11 @@
       this.stopBackgroundMusic(); // Stop previous background music
 
       var music = this.sound.add(key, {
-        loop: GetValue$8(config, 'loop', this.backgroundMusicLoop),
-        mute: GetValue$8(config, 'mute', this.backgroundMusicMute),
-        volume: GetValue$8(config, 'volume', this.backgroundMusicVolume),
-        detune: GetValue$8(config, 'detune', 0),
-        rate: GetValue$8(config, 'rate', 1)
+        loop: GetValue$7(config, 'loop', this.backgroundMusicLoop),
+        mute: GetValue$7(config, 'mute', this.backgroundMusicMute),
+        volume: GetValue$7(config, 'volume', this.backgroundMusicVolume),
+        detune: GetValue$7(config, 'detune', 0),
+        rate: GetValue$7(config, 'rate', 1)
       });
       this.setCurrentBackgroundMusic(music);
 
@@ -20337,7 +20458,7 @@
     }
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var BackgroundMusic2Methods$1 = {
     setBackgroundMusic2Loop: function setBackgroundMusic2Loop(value) {
       if (value === undefined) {
@@ -20381,11 +20502,11 @@
       this.stopBackgroundMusic2(); // Stop previous background music
 
       var music = this.sound.add(key, {
-        loop: GetValue$7(config, 'loop', this.backgroundMusicLoop),
-        mute: GetValue$7(config, 'mute', this.backgroundMusic2Mute),
-        volume: GetValue$7(config, 'volume', this.backgroundMusic2Volume),
-        detune: GetValue$7(config, 'detune', 0),
-        rate: GetValue$7(config, 'rate', 1)
+        loop: GetValue$6(config, 'loop', this.backgroundMusicLoop),
+        mute: GetValue$6(config, 'mute', this.backgroundMusic2Mute),
+        volume: GetValue$6(config, 'volume', this.backgroundMusic2Volume),
+        detune: GetValue$6(config, 'detune', 0),
+        rate: GetValue$6(config, 'rate', 1)
       });
       this.setCurrentBackgroundMusic2(music);
 
@@ -20464,7 +20585,7 @@
   };
 
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var SoundEffectsMethods$1 = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
@@ -20474,10 +20595,10 @@
     },
     playSoundEffect: function playSoundEffect(key, config) {
       var music = this.sound.add(key, {
-        mute: GetValue$6(config, 'mute', this.soundEffectsMute),
-        volume: GetValue$6(config, 'volume', this.soundEffectsVolume),
-        detune: GetValue$6(config, 'detune', 0),
-        rate: GetValue$6(config, 'rate', 1)
+        mute: GetValue$5(config, 'mute', this.soundEffectsMute),
+        volume: GetValue$5(config, 'volume', this.soundEffectsVolume),
+        detune: GetValue$5(config, 'detune', 0),
+        rate: GetValue$5(config, 'rate', 1)
       });
       this.soundEffects.push(music);
       music.once('complete', function () {
@@ -20593,7 +20714,7 @@
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var SoundEffects2Methods$1 = {
     getSoundEffects2: function getSoundEffects2() {
       return this.soundEffects2;
@@ -20603,10 +20724,10 @@
     },
     playSoundEffect2: function playSoundEffect2(key, config) {
       var music = this.sound.add(key, {
-        mute: GetValue$5(config, 'mute', this.soundEffects2Mute),
-        volume: GetValue$5(config, 'volume', this.soundEffects2Volume),
-        detune: GetValue$5(config, 'detune', 0),
-        rate: GetValue$5(config, 'rate', 1)
+        mute: GetValue$4(config, 'mute', this.soundEffects2Mute),
+        volume: GetValue$4(config, 'volume', this.soundEffects2Volume),
+        detune: GetValue$4(config, 'detune', 0),
+        rate: GetValue$4(config, 'rate', 1)
       });
       this.soundEffects2.push(music);
       music.once('complete', function () {
@@ -20724,7 +20845,7 @@
   var Methods$2 = {};
   Object.assign(Methods$2, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(game, config) {
       _classCallCheck(this, SoundManager);
@@ -20732,26 +20853,26 @@
 
       // Background music will be (fade out)destroyed when play next one.
       this.backgroundMusic = undefined;
-      this._backgroundMusicVolume = GetValue$4(config, 'bgm.volume', 1);
-      this._backgroundMusicMute = GetValue$4(config, 'bgm.mute', false);
-      this.setBackgroundMusicLoop(GetValue$4(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$4(config, 'bgm.fade', 500));
+      this._backgroundMusicVolume = GetValue$3(config, 'bgm.volume', 1);
+      this._backgroundMusicMute = GetValue$3(config, 'bgm.mute', false);
+      this.setBackgroundMusicLoop(GetValue$3(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$3(config, 'bgm.fade', 500));
       this.backgroundMusic2 = undefined;
-      this._backgroundMusic2Volume = GetValue$4(config, 'bgm2.volume', 1);
-      this._backgroundMusic2Mute = GetValue$4(config, 'bgm2.mute', false);
-      this.setBackgroundMusic2Loop(GetValue$4(config, 'bgm2.loop', true));
-      this.setBackgroundMusic2FadeTime(GetValue$4(config, 'bgm2.fade', 500));
+      this._backgroundMusic2Volume = GetValue$3(config, 'bgm2.volume', 1);
+      this._backgroundMusic2Mute = GetValue$3(config, 'bgm2.mute', false);
+      this.setBackgroundMusic2Loop(GetValue$3(config, 'bgm2.loop', true));
+      this.setBackgroundMusic2FadeTime(GetValue$3(config, 'bgm2.fade', 500));
 
       // Sound effect will be destroyed when completed
       this.soundEffects = [];
-      this._soundEffectsVolume = GetValue$4(config, 'soundEffect.volume', 1);
+      this._soundEffectsVolume = GetValue$3(config, 'soundEffect.volume', 1);
       this.soundEffects2 = [];
-      this._soundEffects2Volume = GetValue$4(config, 'soundEffect2.volume', 1);
-      var initialBackgroundMusic = GetValue$4(config, 'bgm.initial', undefined);
+      this._soundEffects2Volume = GetValue$3(config, 'soundEffect2.volume', 1);
+      var initialBackgroundMusic = GetValue$3(config, 'bgm.initial', undefined);
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
       }
-      var initialBackgroundMusic2 = GetValue$4(config, 'bgm2.initial', undefined);
+      var initialBackgroundMusic2 = GetValue$3(config, 'bgm2.initial', undefined);
       if (initialBackgroundMusic2) {
         this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
       }
@@ -20899,7 +21020,7 @@
   }();
   Object.assign(SoundManager.prototype, Methods$2);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
     function BaseClock(parent, config) {
@@ -20913,9 +21034,9 @@
     _createClass(BaseClock, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$3(o, 'isRunning', false);
-        this.timeScale = GetValue$3(o, 'timeScale', 1);
-        this.now = GetValue$3(o, 'now', 0);
+        this.isRunning = GetValue$2(o, 'isRunning', false);
+        this.timeScale = GetValue$2(o, 'timeScale', 1);
+        this.now = GetValue$2(o, 'now', 0);
         return this;
       }
     }, {
@@ -21215,7 +21336,7 @@
     return TimerPool;
   }(Stack);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var TimerPool = new TimerPool$1();
   var Timeline = /*#__PURE__*/function (_Clock) {
     _inherits(Timeline, _Clock);
@@ -21225,7 +21346,7 @@
       _this = _callSuper(this, Timeline, [parent, config]);
       _this.addedTimers = [];
       _this.timers = [];
-      _this.timerPool = GetValue$2(config, 'pool', TimerPool);
+      _this.timerPool = GetValue$1(config, 'pool', TimerPool);
       return _this;
     }
     _createClass(Timeline, [{
@@ -21715,65 +21836,15 @@
     return this.parent;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue$1 = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue;
-
-      //  Use for loop here so we can break early
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-      return value;
-    } else {
-      return defaultValue;
-    }
-  };
-
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
     function WaitEventManager(parent, config) {
       var _this;
       _classCallCheck(this, WaitEventManager);
       _this = _callSuper(this, WaitEventManager, [parent]);
-      _this.waitCompleteEventName = GetValue$1(config, 'completeEventName', _this.waitCompleteEventName);
-      _this.setClickTarget(GetValue$1(config, 'clickTarget', _this.scene));
-      _this.setCameraTarget(GetValue$1(config, 'camera', _this.scene.cameras.main));
+      _this.waitCompleteEventName = GetValue$h(config, 'completeEventName', _this.waitCompleteEventName);
+      _this.setClickTarget(GetValue$h(config, 'clickTarget', _this.scene));
+      _this.setCameraTarget(GetValue$h(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
     _createClass(WaitEventManager, [{
