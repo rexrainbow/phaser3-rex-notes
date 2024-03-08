@@ -1,7 +1,8 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
-import TaskventSheet from 'raw-loader!/assets/markedeventsheet/next-round/task.md';
 import MainEventSheet from 'raw-loader!/assets/markedeventsheet/next-round/main.md';
+import TaskEventSheet from 'raw-loader!/assets/markedeventsheet/next-round/task.md';
+import TestRoundCounterEventSheet from 'raw-loader!/assets/markedeventsheet/next-round/round-counter.md';
 
 
 class CommandExecutor extends EventEmitter {
@@ -38,7 +39,8 @@ var manager = new MarkedEventSheets({
 });
 manager
     .addEventSheet(MainEventSheet)
-    .addEventSheet(TaskventSheet)
+    .addEventSheet(TaskEventSheet)
+    .addEventSheet(TestRoundCounterEventSheet)
 
 console.log(manager.dumpTrees())
 
@@ -46,10 +48,11 @@ manager.setData('coin', 3)
 console.log(manager.memory)
 
 manager.on('complete', function () {
-    console.log('---- round end ----')
-    if (manager.roundCounter < 10) {
+    if (manager.$roundCounter < 10) {
         // Run next round
-        manager.updateRoundCounter().start();
+        manager.updateRoundCounter();
+        console.log(`---- Round : ${manager.$roundCounter} ----`)
+        manager.start();
     }
 })
 

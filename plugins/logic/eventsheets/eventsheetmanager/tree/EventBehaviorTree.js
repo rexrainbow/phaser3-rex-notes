@@ -121,7 +121,7 @@ class EventBehaviorTree extends BehaviorTree {
             // Will remove from pendingTrees
             this.roundState = RoundComplete;
 
-            if (this.properties.once) {
+            if (this.conditionEvalPassed && this.properties.once) {
                 this.setActive(false);
             }
         }

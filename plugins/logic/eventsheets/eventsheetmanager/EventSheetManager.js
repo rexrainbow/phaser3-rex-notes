@@ -31,11 +31,11 @@ class EventSheetManager extends EventEmitter {
         return this.blackboard.getGlobalMemory();
     }
 
-    get roundCounter() {
+    get $roundCounter() {
         return this.getRoundCounter();
     }
 
-    set roundCounter(value) {
+    set $roundCounter(value) {
         this.setRoundCounter(value);
     }
 

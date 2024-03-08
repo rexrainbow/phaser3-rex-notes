@@ -43,13 +43,16 @@ console.log(manager.dumpTrees())
 console.log(manager.memory)
 
 manager.on('complete', function () {
-    console.log(`Round : ${manager.roundCounter}`)
-    if (manager.roundCounter < 10) {
-        if (manager.roundCounter === 3) {
+    if (manager.$roundCounter < 10) {
+        // Run next round
+        manager.updateRoundCounter();
+        console.log(`---- Round : ${manager.$roundCounter} ----`)
+
+        if (manager.$roundCounter === 3) {
             manager.setTreeActiveState('Task');
         }
-        // Run next round
-        manager.updateRoundCounter().start();
+
+        manager.start()
     }
 })
 

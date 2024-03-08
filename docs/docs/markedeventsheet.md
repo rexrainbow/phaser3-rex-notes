@@ -176,14 +176,17 @@ eventSheetManager.addEventSheet(content, groupName, {
 - Increase round counter
     ```javascript
     eventSheetManager.updateRoundCounter();
+    // eventSheetManager.$roundCounter += 1;
     ```
 - Set round counter
     ```javascript
     eventSheetManager.updateRoundCounter(value);
+    // eventSheetManager.$roundCounter = value;
     ```
 - Get round counter
     ```javascript
-    var roundCounter = eventSheetManager.roundCounter;
+    var roundCounter = eventSheetManager.getRoundCounter();
+    // var roundCounter = eventSheetManager.$roundCounter;
     ```
 
 ### Active
