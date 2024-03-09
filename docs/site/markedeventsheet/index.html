@@ -5777,6 +5777,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#round-counter" class="md-nav__link">
+    Round counter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active" class="md-nav__link">
+    Active
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stop-running" class="md-nav__link">
     Stop running
   </a>
@@ -5858,6 +5872,13 @@
           <li class="md-nav__item">
   <a href="#exit" class="md-nav__link">
     Exit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-round" class="md-nav__link">
+    Next round
   </a>
   
 </li>
@@ -10058,6 +10079,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#round-counter" class="md-nav__link">
+    Round counter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active" class="md-nav__link">
+    Active
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stop-running" class="md-nav__link">
     Stop running
   </a>
@@ -10139,6 +10174,13 @@
           <li class="md-nav__item">
   <a href="#exit" class="md-nav__link">
     Exit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-round" class="md-nav__link">
+    Next round
   </a>
   
 </li>
@@ -10530,14 +10572,18 @@
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addEventSheet</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">commentLineStart</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\/\/&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">lineBreak</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\\&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">parallel</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">    </span><span class="nx">parallel</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">active</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">})</span>
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addEventSheet</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">commentLineStart</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\/\/&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">lineBreak</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\\&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">parallel</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">    </span><span class="nx">parallel</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">active</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -10546,6 +10592,16 @@
 <li><code>lineBreak</code> : Markdown will use <code>\</code> as line break. So the last character <code>\</code> will be discarded.</li>
 <li><code>parallel</code> : <ul>
 <li><code>undefined</code> : Use default <code>parallel</code> property.</li>
+</ul>
+</li>
+<li><code>active</code> : <ul>
+<li><code>true</code> : Eval condition of this event sheet every round. Default behavior.</li>
+<li><code>false</code> : Skip this event sheet.</li>
+</ul>
+</li>
+<li><code>once</code> :<ul>
+<li><code>true</code> : Set <code>active</code> of this event sheet to <code>false</code> when exection of this event sheet is complete.</li>
+<li><code>false</code> : Do nothing when exection of this event sheet is complete. Default behavior.</li>
 </ul>
 </li>
 <li><code>groupName</code> : Each event sheet belong a group. Ignore this parameter to use default group.<ul>
@@ -10589,6 +10645,39 @@
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="round-counter">Round counter<a class="headerlink" href="#round-counter" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Increase round counter
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">();</span>
+<span class="c1">// eventSheetManager.$roundCounter += 1;</span>
+</code></pre></div></li>
+<li>Set round counter
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// eventSheetManager.$roundCounter = value;</span>
+</code></pre></div></li>
+<li>Get round counter
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">roundCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">getRoundCounter</span><span class="p">();</span>
+<span class="c1">// var roundCounter = eventSheetManager.$roundCounter;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="active">Active<a class="headerlink" href="#active" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Activate state of event sheet (indexed by <code>title</code>)
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+<span class="c1">// eventSheetManager.setTreeActiveState(title, true);</span>
+</code></pre></div></li>
+<li>Inactivate state of event sheet (indexed by <code>title</code>)
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get active state of event sheet (indexed by <code>title</code>)
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">getTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Event sheet which has <code>once</code> property will set <code>active</code> property to <code>false</code>
+when exection of this event sheet is complete. </p>
+</div>
 <h3 id="stop-running">Stop running<a class="headerlink" href="#stop-running" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Stop running default group
@@ -10667,6 +10756,10 @@
 <h4 id="main-headings">Main headings<a class="headerlink" href="#main-headings" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code># Title
 
+parallel
+active=false
+once
+
 ## [Condition]
 
 coin &gt; 5
@@ -10676,8 +10769,14 @@ coin &gt; 5
 ## [Catch]
 </code></pre></div>
 <ul>
-<li>H1 heading: Title of this event sheet</li>
-<li>H2 heading with <code>[Condition]</code> : Main condition.    <ul>
+<li>H1 heading : Title of this event sheet</li>
+<li>Content under Title (H1 heading) : Setting of this event sheet, optional.<ul>
+<li><code>parallel</code> : Set <code>parallel</code> property of this event sheet to <code>true</code>.</li>
+<li><code>active=false</code> : Set <code>active</code> property of this event sheet to <code>false</code>.</li>
+<li><code>once</code> : Set <code>once</code> property of this event sheet to <code>true</code>.</li>
+</ul>
+</li>
+<li>H2 heading with <code>[Condition]</code> : Main condition.<ul>
 <li>Each line under <code>[Condition]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
 <li>Can have many <code>[Condition]</code> heading, each <code>[Condition]</code> heading will be composed of <code>OR</code> logic.</li>
 <li>Read data from <a href="./#local-memory">local memory</a></li>
@@ -10737,6 +10836,16 @@ loopCount &gt; 0
 <ul>
 <li>Action line with <code>[exit]</code> : Skip remainder label (heading) and actions.</li>
 </ul>
+<h5 id="next-round">Next round<a class="headerlink" href="#next-round" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>[next round]
+</code></pre></div>
+<ul>
+<li>Action line with <code>[next round]</code> : Run remainder actions at next round.</li>
+</ul>
+<p>Invoke </p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">().</span><span class="nx">start</span><span class="p">()</span>
+</code></pre></div>
+<p>to start next round.</p>
 <h4 id="custom-command">Custom command<a class="headerlink" href="#custom-command" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>commandName
   param0=value

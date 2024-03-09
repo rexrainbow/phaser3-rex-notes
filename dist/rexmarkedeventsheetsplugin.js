@@ -587,24 +587,12 @@
 
   var DataMethods$3 = {
     getTreeMemory: function getTreeMemory(blackboard) {
-      if (blackboard.blackboard) {
-        // tick
-        blackboard = blackboard.blackboard;
-      }
       return blackboard.getTreeMemory(this.id);
     },
     getData: function getData(blackboard, key) {
-      if (blackboard.blackboard) {
-        // tick
-        blackboard = blackboard.blackboard;
-      }
       return blackboard.get(key, this.id);
     },
     setData: function setData(blackboard, key, value) {
-      if (blackboard.blackboard) {
-        // tick
-        blackboard = blackboard.blackboard;
-      }
       blackboard.set(key, value, this.id);
       return this;
     },
@@ -5144,6 +5132,15 @@
   }(Blackboard$1);
 
   var TreeMethods$1 = {
+    getTree: function getTree(title) {
+      var trees = this.trees;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var tree = trees[i];
+        if (tree.title === title) {
+          return tree;
+        }
+      }
+    },
     getTreeState: function getTreeState(tree) {
       var treeID = typeof tree === 'string' ? tree : tree.id;
       return this.blackboard.getTreeState(treeID);
@@ -5156,27 +5153,6 @@
         out.push(tree.title);
       });
       return out;
-    }
-  };
-
-  var GetTreeMethods = {
-    getTree: function getTree(title) {
-      var trees = this.trees;
-      for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        if (tree.title === title) {
-          return tree;
-        }
-      }
-    },
-    getTreeByID: function getTreeByID(treeID) {
-      var trees = this.trees;
-      for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        if (tree.id === treeID) {
-          return tree;
-        }
-      }
     }
   };
 
@@ -5219,17 +5195,15 @@
   };
 
   var TreeActiveStateMethods$1 = {
-    getTreeActiveState: function getTreeActiveState(tree) {
-      var treeID = typeof tree === 'string' ? tree : tree.id;
-      tree = this.getTreeByID(treeID);
+    getTreeActiveState: function getTreeActiveState(title) {
+      var tree = this.getTree(title);
       if (!tree) {
         return null;
       }
       return tree.active;
     },
-    setTreeActiveState: function setTreeActiveState(tree, active) {
-      var treeID = typeof tree === 'string' ? tree : tree.id;
-      tree = this.getTreeByID(treeID);
+    setTreeActiveState: function setTreeActiveState(title, active) {
+      var tree = this.getTree(title);
       if (tree) {
         tree.setActive(active);
       }
@@ -6399,7 +6373,7 @@
   };
 
   var Methods$5 = {};
-  Object.assign(Methods$5, TreeMethods$1, GetTreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1);
+  Object.assign(Methods$5, TreeMethods$1, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1);
 
   var EventBehaviorTreeGroup = /*#__PURE__*/_createClass(function EventBehaviorTreeGroup(parent) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
@@ -6477,13 +6451,13 @@
   };
 
   var TreeActiveStateMethods = {
-    getTreeActiveState: function getTreeActiveState(tree, groupName) {
+    getTreeActiveState: function getTreeActiveState(title, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      return this.getTreeGroup(groupName).getTreeActiveState(tree);
+      return this.getTreeGroup(groupName).getTreeActiveState(title);
     },
-    setTreeActiveState: function setTreeActiveState(tree, groupName, active) {
+    setTreeActiveState: function setTreeActiveState(title, groupName, active) {
       if (typeof groupName === 'boolean') {
         active = groupName;
         groupName = undefined;
@@ -6491,7 +6465,7 @@
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      return this.getTreeGroup(groupName).setTreeActiveState(tree, active);
+      return this.getTreeGroup(groupName).setTreeActiveState(title, active);
     }
   };
 
@@ -14676,7 +14650,7 @@
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
       _this.blackboard = new Blackboard({
-        currentTimeKey: '$round'
+        currentTimeKey: '$roundCounter'
       });
       _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
 
@@ -14690,7 +14664,7 @@
         return this.blackboard.getGlobalMemory();
       }
     }, {
-      key: "roundCounter",
+      key: "$roundCounter",
       get: function get() {
         return this.getRoundCounter();
       },
@@ -14832,7 +14806,7 @@
         if (state !== RUNNING$1) {
           // Will remove from pendingTrees
           this.roundState = RoundComplete;
-          if (this.properties.once) {
+          if (this.conditionEvalPassed && this.properties.once) {
             this.setActive(false);
           }
         }
@@ -16372,9 +16346,11 @@
       commentLineStart = _ref$commentLineStart === void 0 ? '\/\/' : _ref$commentLineStart,
       _ref$parallel = _ref.parallel,
       parallel = _ref$parallel === void 0 ? false : _ref$parallel,
+      _ref$active = _ref.active,
+      active = _ref$active === void 0 ? true : _ref$active,
       _ref$once = _ref.once,
       once = _ref$once === void 0 ? false : _ref$once;
-    return function (parallel, once) {
+    return function (parallel, active, once) {
       var headingTree = GetHeadingTree(markedString);
       var treeConfig = GetTreeConfig(headingTree.paragraphs);
       var _ParseNodes = ParseNodes(headingTree.children),
@@ -16384,7 +16360,7 @@
       var _treeConfig$parallel = treeConfig.parallel,
         parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel,
         _treeConfig$active = treeConfig.active,
-        active = _treeConfig$active === void 0 ? true : _treeConfig$active,
+        active = _treeConfig$active === void 0 ? active : _treeConfig$active,
         _treeConfig$once = treeConfig.once,
         once = _treeConfig$once === void 0 ? once : _treeConfig$once;
       var taskSequenceConfig = {
@@ -16408,7 +16384,7 @@
       }
       rootNode.addChild(forceFailure);
       return tree;
-    }(parallel, once);
+    }(parallel, active, once);
   };
 
   var MarkedEventSheets = /*#__PURE__*/function (_EventSheetManager) {
