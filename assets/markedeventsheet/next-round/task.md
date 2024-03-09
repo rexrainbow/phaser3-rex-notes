@@ -12,7 +12,7 @@ set
 print
   text=[task] 1: Coin++ -> {{coin}}
 
-[next-round]
+[next round]
 
 // round 2
 
@@ -22,7 +22,7 @@ set
 print
   text=[task] 2: Coin++ -> {{coin}}
 
-[next-round]
+[next round]
 
 // round 3
 
@@ -32,7 +32,7 @@ set
 print
   text=[task] 3: Coin++ -> {{coin}}
 
-[next-round]
+[next round]
 
 // round 4
 
@@ -42,7 +42,7 @@ set
 print
   text=[task] 4: Coin++ -> {{coin}}
 
-[next-round]
+[next round]
 
 // round 5
 
@@ -52,7 +52,7 @@ set
 print
   text=[task] 5: Coin++ -> {{coin}}
 
-[next-round]
+[next round]
 
 // round 6
 

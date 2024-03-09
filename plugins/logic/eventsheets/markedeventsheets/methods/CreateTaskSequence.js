@@ -1,13 +1,12 @@
-import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer, Wait } from '../../../behaviortree';
-import GetNodeType from './GetNodeType.js';
+import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Abort, Failer } from '../../../behaviortree';
+import { Level3HeadingCommandTypes, ActionCommandTypes } from './BuiltInCommandTypes.js';
+import ParseType from './ParseType.js';
 import GetConditionExpression from './GetConditionExpression';
 import ParseProperty from './ParseProperty';
 import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
 import TaskAction from '../../eventsheetmanager/nodes/TaskAction.js';
 import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
-
-var TypeNames = ['if', 'else', 'while'];
 
 var CreateTaskSequence = function (node, config) {
 
@@ -50,85 +49,89 @@ var CreateTaskSequence = function (node, config) {
         }
 
     } else {
-        var nodeType = GetNodeType(node, TypeNames);
-        switch (nodeType) {
-            case 'if':
-                var selector = new Selector({
-                    title: '[if]'
-                });
+        var result = ParseType(node.title, Level3HeadingCommandTypes);
+        if (result) {
+            switch (result.type) {
+                case 'if':
+                    var selector = new Selector({
+                        title: '[if]'
+                    });
 
-                var ifDecorator = new If({
-                    expression: GetConditionExpression(node)
-                });
-                ifDecorator.addChild(CreateTaskSequence(node.children, config));
-                selector.addChild(ifDecorator)
+                    var ifDecorator = new If({
+                        expression: GetConditionExpression(node)
+                    });
+                    ifDecorator.addChild(CreateTaskSequence(node.children, config));
+                    selector.addChild(ifDecorator)
 
-                var succeeder = new Succeeder();
-                selector.addChild(succeeder);
+                    var succeeder = new Succeeder();
+                    selector.addChild(succeeder);
 
-                return selector;
+                    return selector;
 
-            case 'else':
-                var ifDecorator = new If({
-                    title: '[else]',
-                    expression: GetConditionExpression(node)
-                });
-                ifDecorator.addChild(CreateTaskSequence(node.children, config));
+                case 'else':
+                    var ifDecorator = new If({
+                        title: '[else]',
+                        expression: GetConditionExpression(node)
+                    });
+                    ifDecorator.addChild(CreateTaskSequence(node.children, config));
 
-                return ifDecorator;
+                    return ifDecorator;
 
-            case 'while':
-                var whileDecorator = new RepeatUntilFailure({
-                    title: '[while]',
-                    returnSuccess: true,
-                })
-                var ifDecorator = new If({
-                    title: '[while]',
-                    expression: GetConditionExpression(node)
-                });
-                ifDecorator.addChild(CreateTaskSequence(node.children, config));
-                whileDecorator.addChild(ifDecorator);
-                return whileDecorator;
+                case 'while':
+                    var whileDecorator = new RepeatUntilFailure({
+                        title: '[while]',
+                        returnSuccess: true,
+                    })
+                    var ifDecorator = new If({
+                        title: '[while]',
+                        expression: GetConditionExpression(node)
+                    });
+                    ifDecorator.addChild(CreateTaskSequence(node.children, config));
+                    whileDecorator.addChild(ifDecorator);
+                    return whileDecorator;
 
-            default:
-                var sequence = new TaskSequence({ title: node.title });
-                var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
-                for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-                    var commandData = GetCommandData(paragraphs[i], config);
-                    if (!commandData) {
-                        continue;
-                    }
-
-                    var commandType = commandData.type;
-                    delete commandData.type;
-
-                    var actionNode;
-                    switch (commandType) {
-                        case 'exit':
-                            actionNode = new Abort({ title: '[exit]' });
-                            break;
-
-                        case 'break':
-                            actionNode = new Failer({ title: '[break]' });
-                            break;
-
-                        case 'next round':
-                            actionNode = new WaitNextRound({ title: '[next round]' }); // Wait 1 tick
-                            break;
-
-                        case 'deactivate':
-                            actionNode = new DeactivateAction({ title: '[deactivate]' });
-                            break;
-
-                        default:
-                            actionNode = new TaskAction(commandData);
-                            break;
-                    }
-
-                    sequence.addChild(actionNode);
-
+                default:
+                    break;
+            }
+        } else {
+            var sequence = new TaskSequence({ title: node.title });
+            var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
+            for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
+                var commandData = GetCommandData(paragraphs[i], config);
+                if (!commandData) {
+                    continue;
                 }
-                return sequence;
+
+                var commandType = commandData.type;
+                delete commandData.type;
+
+                var actionNode;
+                switch (commandType) {
+                    case 'exit':
+                        actionNode = new Abort({ title: '[exit]' });
+                        break;
+
+                    case 'break':
+                        actionNode = new Failer({ title: '[break]' });
+                        break;
+
+                    case 'next round':
+                        actionNode = new WaitNextRound({ title: '[next round]' }); // Wait 1 tick
+                        break;
+
+                    case 'deactivate':
+                        actionNode = new DeactivateAction({ title: '[deactivate]' });
+                        break;
+
+                    default:
+                        actionNode = new TaskAction(commandData);
+                        break;
+                }
+
+                sequence.addChild(actionNode);
+
+            }
+            return sequence;
         }
     }
 }
@@ -144,6 +147,7 @@ var GetCommandData = function (paragraph, config) {
 
     return commandData;
 }
+
 
 var ParseCommandString = function (commandString, delimiter, {
     lineBreak = '\\',
@@ -162,20 +166,9 @@ var ParseCommandString = function (commandString, delimiter, {
         } else if (lines.length === 1) {
             var line = lines[0];
 
-            // Command action
-            switch (line.trim().toLowerCase()) {
-                case '[exit]':
-                    return { type: 'exit' };
-
-                case '[break]':
-                    return { type: 'break' };
-
-                case '[next round]':
-                case '[next-round]':
-                    return { type: 'next round' };
-
-                case '[deactivate]':
-                    return { type: 'deactivate' };
+            var result = ParseType(line, ActionCommandTypes);
+            if (result) {
+                return result;
             }
 
             if (line.indexOf(',') !== -1) {
@@ -203,21 +196,5 @@ var TrimString = function (s, lineBreak) {
     }
     return s.trimLeft();
 }
-
-var IsExitCommand = function (s) {
-    s = s.trim().toLowerCase();
-    return s === '[exit]';
-}
-
-var IsBreakLabelCommand = function (s) {
-    s = s.trim().toLowerCase();
-    return s === '[break]';
-}
-
-var IsNextRoundLabelCommand = function (s) {
-    s = s.trim().toLowerCase();
-    return s === '[next round]';
-}
-
 
 export default CreateTaskSequence;

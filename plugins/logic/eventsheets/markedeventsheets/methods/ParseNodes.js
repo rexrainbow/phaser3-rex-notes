@@ -1,10 +1,9 @@
-import GetNodeType from './GetNodeType.js';
+import { Level2HeadingCommandTypes } from './BuiltInCommandTypes.js';
+import ParseType from './ParseType.js';
 
 const STATE_CONDITION = 1;
 const STATE_TASK = 2;
 const STATE_CATCH = 3;
-
-var TypeNames = ['condition', 'catch'];
 
 var ParseNodes = function (nodes) {
     var conditionNodes = [];
@@ -12,7 +11,8 @@ var ParseNodes = function (nodes) {
     var catchNodes = [];
 
     var state = STATE_CONDITION;
-    var nextNodeType = GetNodeType(nodes[0], TypeNames);
+    var result = ParseType(nodes[0].title, Level2HeadingCommandTypes);
+    var nextNodeType = (result) ? result.type : '';
     for (var i = 0, cnt = nodes.length; i < cnt; i++) {
         var node = nodes[i];
         if (state === STATE_CONDITION) {
@@ -42,7 +42,8 @@ var ParseNodes = function (nodes) {
         }
 
         if ((i + 1) < cnt) {
-            nextNodeType = GetNodeType(nodes[i + 1], TypeNames);
+            result = ParseType(nodes[i + 1].title, Level2HeadingCommandTypes);
+            nextNodeType = (result) ? result.type : '';
         }
     }
 
