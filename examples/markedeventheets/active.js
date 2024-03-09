@@ -1,6 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
 import TaskventSheet from 'raw-loader!/assets/markedeventsheet/active/task.md';
+import DeactivateEventSheet from 'raw-loader!/assets/markedeventsheet/active/deactivate.md';
 
 
 class CommandExecutor extends EventEmitter {
@@ -37,6 +38,7 @@ var manager = new MarkedEventSheets({
 });
 manager
     .addEventSheet(TaskventSheet)
+    .addEventSheet(DeactivateEventSheet)
 
 console.log(manager.dumpTrees())
 

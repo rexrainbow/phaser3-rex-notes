@@ -173,6 +173,8 @@ eventSheetManager.addEventSheet(content, groupName, {
 
 ### Round counter
 
+Round counter is started from `0`.
+
 - Increase round counter
     ```javascript
     eventSheetManager.updateRoundCounter();
@@ -378,6 +380,7 @@ loopCount > 0
     - Read data from [local memory](markedeventsheet.md#local-memory)
 - H3/H4/... heading under `[While]` : Actions running when condition is `true`
 
+
 ##### Break
 
 ```
@@ -387,6 +390,7 @@ loopCount > 0
 ```
 
 - Action line with `[break]` : Ignore remainder actions in current label (heading).
+
 
 ##### Exit
 
@@ -417,6 +421,17 @@ eventSheetManager.updateRoundCounter().start()
 ```
 
 to start next round.
+
+
+##### Deactivate
+
+```
+
+[deactivate]
+
+```
+
+- Action line with `[deactivate]` : Deactivate this event sheet. i.e. Set `active` property of this event shhet to `false`.
 
 
 #### Custom command

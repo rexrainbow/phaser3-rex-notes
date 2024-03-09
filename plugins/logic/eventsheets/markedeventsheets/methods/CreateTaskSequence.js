@@ -5,6 +5,7 @@ import ParseProperty from './ParseProperty';
 import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
 import TaskAction from '../../eventsheetmanager/nodes/TaskAction.js';
 import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
+import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 
 var TypeNames = ['if', 'else', 'while'];
 
@@ -115,6 +116,10 @@ var CreateTaskSequence = function (node, config) {
                             actionNode = new WaitNextRound({ title: '[next round]' }); // Wait 1 tick
                             break;
 
+                        case 'deactivate':
+                            actionNode = new DeactivateAction({ title: '[deactivate]' });
+                            break;
+
                         default:
                             actionNode = new TaskAction(commandData);
                             break;
@@ -168,6 +173,9 @@ var ParseCommandString = function (commandString, delimiter, {
                 case '[next round]':
                 case '[next-round]':
                     return { type: 'next round' };
+
+                case '[deactivate]':
+                    return { type: 'deactivate' };
             }
 
             if (line.indexOf(',') !== -1) {

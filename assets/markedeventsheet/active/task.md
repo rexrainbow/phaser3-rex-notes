@@ -6,4 +6,4 @@ once
 ## Script
 
 print
-  text=Run task
+  text=[Task] Run me
