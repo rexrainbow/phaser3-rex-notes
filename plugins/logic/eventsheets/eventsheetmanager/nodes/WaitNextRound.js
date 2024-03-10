@@ -8,12 +8,10 @@ class WaitNextRound extends Wait {
         name = 'NextRound'
     } = {}) {
         super({
+            duration,
+            services,
             title,
             name,
-            properties: {
-                duration
-            },
-            services,
         });
     }
 

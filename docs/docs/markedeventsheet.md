@@ -443,7 +443,23 @@ actions...
 
 ```
 
-- Action line with `[next round]` : Run remainder actions at next round.
+or
+
+```
+
+[next 3 round]
+
+```
+
+or
+
+```
+
+[next #(n) round]
+
+```
+
+- Action line with `[next round]`, `[next N round]`, `[next #(var) round]` : Run remainder actions at next N round.
 
 
 Invoke 

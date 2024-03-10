@@ -52,12 +52,9 @@ set
 print
   text=[task] 5: Coin++ -> {{coin}}
 
-[next round]
+[next 2 round]
 
-// round 6
-
-set
-  coin=#(coin+1)
+// round 7
 
 print
-  text=[task] 6: Coin++ -> {{coin}}
+  text=[task] 7: Wait 2 rounds

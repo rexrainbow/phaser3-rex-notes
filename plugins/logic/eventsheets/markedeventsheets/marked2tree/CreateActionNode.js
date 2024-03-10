@@ -12,11 +12,8 @@ var CreateActionNode = function (paragraph, config) {
         return;
     }
 
-    var commandType = commandData.type;
-    delete commandData.type;
-
     var actionNode;
-    switch (commandType) {
+    switch (commandData.type) {
         case 'exit':
             actionNode = new Abort({ title: '[exit]' });
             break;
@@ -26,7 +23,14 @@ var CreateActionNode = function (paragraph, config) {
             break;
 
         case 'next round':
-            actionNode = new WaitNextRound({ title: '[next round]' }); // Wait 1 tick
+            var duration = commandData.match[1].trim();
+            if (duration === '') {
+                duration = 1;
+            }
+            actionNode = new WaitNextRound({
+                title: '[next round]',
+                duration: duration
+            });
             break;
 
         case 'deactivate':
@@ -34,6 +38,7 @@ var CreateActionNode = function (paragraph, config) {
             break;
 
         default:
+            delete commandData.type;
             actionNode = new TaskAction(commandData);
             break;
     }
