@@ -20,6 +20,8 @@ class Demo extends Phaser.Scene {
 
         this.add.image(400, 400, 'classroom').setScale(0.5);
 
+        this.cameras.main.setZoom(1.5);
+
         var tween = this.tweens.add({
             duration: 2000,
             targets: this.cameras.main,

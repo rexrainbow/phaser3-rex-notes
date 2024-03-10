@@ -8,9 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
-    }
+    preload() { }
 
     create() {
         var parent = this.add.rexContainerLite(400, 300, 200, 200)
