@@ -7,12 +7,18 @@ export const TopLevelCommandTypes = [
 ];
 
 export const HeadingCommand = [
-    { name: 'if' },
+    {
+        name: 'if',
+        pattern: new RegExp('if\\s*(.*)', 'i')
+    },
     { name: 'else' },
-    { name: 'while' },
+    {
+        name: 'while',
+        pattern: new RegExp('while\\s*(.*)', 'i')
+    },
     {
         name: 'repeat',
-        pattern: new RegExp('repeat\\s*(.+)', 'i')
+        pattern: new RegExp('repeat\\s*(.*)', 'i')
     },
 ];
 

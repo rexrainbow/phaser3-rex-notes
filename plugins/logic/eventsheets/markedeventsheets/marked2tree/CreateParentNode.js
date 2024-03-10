@@ -1,7 +1,7 @@
 import { Sequence, Selector, If, Succeeder, RepeatUntilFailure, Repeat } from '../../../behaviortree/index.js';
 import { HeadingCommand } from './BuiltInCommandTypes.js';
 import ParseType from './ParseType.js';
-import GetConditionExpression from './GetConditionExpression.js';
+import GetConditionExpressionFromNode from './GetConditionExpression.js';
 import CreateActionSequence from './CreateActionSequence.js';
 import ExtraNumberExpression from './ExtraNumberExpression.js';
 
@@ -54,9 +54,13 @@ var CreateParentNode = function (node, config) {
                 });
 
                 var ifDecorator = new If({
-                    expression: GetConditionExpression(node)
+                    expression: GetConditionExpression(result.match[1], node)
                 });
-                ifDecorator.addChild(CreateParentNode(node.children, config));
+                if (node.children.length > 0) {
+                    ifDecorator.addChild(CreateParentNode(node.children, config));
+                } else {
+                    ifDecorator.addChild(CreateActionSequence(node, config));
+                }
                 selector.addChild(ifDecorator)
 
                 var succeeder = new Succeeder();
@@ -67,10 +71,13 @@ var CreateParentNode = function (node, config) {
             case 'else':
                 var ifDecorator = new If({
                     title: '[else]',
-                    expression: GetConditionExpression(node)
+                    expression: 'true'
                 });
-                ifDecorator.addChild(CreateParentNode(node.children, config));
-
+                if (node.children.length > 0) {
+                    ifDecorator.addChild(CreateParentNode(node.children, config));
+                } else {
+                    ifDecorator.addChild(CreateActionSequence(node, config));
+                }
                 return ifDecorator;
 
             case 'while':
@@ -78,11 +85,17 @@ var CreateParentNode = function (node, config) {
                     title: '[while]',
                     returnSuccess: true,
                 });
+
                 var ifDecorator = new If({
                     title: '[while]',
-                    expression: GetConditionExpression(node)
+                    expression: GetConditionExpression(result.match[1], node)
                 });
-                ifDecorator.addChild(CreateParentNode(node.children, config));
+                if (node.children.length > 0) {
+                    ifDecorator.addChild(CreateParentNode(node.children, config));
+                } else {
+                    ifDecorator.addChild(CreateActionSequence(node, config));
+                }
+
                 whileDecorator.addChild(ifDecorator);
                 return whileDecorator;
 
@@ -109,6 +122,14 @@ var CreateParentNode = function (node, config) {
         return CreateActionSequence(node, config);
 
     }
+}
+
+var GetConditionExpression = function (payloadExpression, node) {
+    var expression = payloadExpression.trim();
+    if (expression === '') {
+        expression = GetConditionExpressionFromNode(node)
+    }
+    return expression;
 }
 
 export default CreateParentNode;
