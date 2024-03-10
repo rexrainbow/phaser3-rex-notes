@@ -341,28 +341,45 @@ coin > 5
 
 #### Flow control instructions
 
-##### Simple branch
+##### If, Else
 
 ```
-## [If]
+## [If coin > 5]
+
+actions...
+
+## [Else]
+
+actions...
+```
+
+- H2/H3/... heading with `[If expression]` : If condition with expression
+    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Actions when expression is `true`.
+- H2/H3/... heading with `[Else]` :
+    - Actions when expression is `false`.
+
+
+```
+## [If coin > 5]
 
 coin > 5
 
 ### Label
 
 actions...
+
+## [Else]
+
+### Label
+
+actions...
 ```
 
-- H2/H3/... heading with `[If]` : Internal branch
+- H2/H3/... heading with `[If]` : If condition
     - Each line under `[If]` is a boolean equation, composed of `AND` logic.
     - Read data from [local memory](markedeventsheet.md#local-memory)
 - H3/H4/... heading under `[If]` : Actions when condition is `true`.
-
-##### Complex branch
-
-Does not support complex branch (if... else if ... else) inside an event sheet.  
-User can build complex branch by mutiple event sheets with main condition (`[Condition]` H2 heading).  
-[Example](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet/branch)
 
 
 ##### Repeat loop
@@ -396,6 +413,17 @@ actions...
 
 
 ##### While loop
+
+```
+## [While loopCount > 0]
+
+actions...
+```
+
+- H2/H3/... heading with `[While expression]` : While loop with expression    
+    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Actions when expression is `true`.
+
 
 ```
 ## [While]
