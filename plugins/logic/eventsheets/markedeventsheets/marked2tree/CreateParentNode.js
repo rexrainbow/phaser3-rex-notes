@@ -3,6 +3,7 @@ import { HeadingCommand } from './BuiltInCommandTypes.js';
 import ParseType from './ParseType.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateActionSequence from './CreateActionSequence.js';
+import ExtraNumberExpression from './ExtraNumberExpression.js';
 
 var CreateParentNode = function (node, config) {
     if (Array.isArray(node)) {
@@ -86,7 +87,7 @@ var CreateParentNode = function (node, config) {
                 return whileDecorator;
 
             case 'repeat':
-                var repeatCount = parseInt(result.match[1]);
+                var repeatCount = ExtraNumberExpression(result.match[1]);
                 var repeatDecorator = new Repeat({
                     title: '[repeat]',
                     maxLoop: repeatCount,

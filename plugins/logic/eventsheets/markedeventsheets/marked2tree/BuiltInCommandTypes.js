@@ -12,7 +12,7 @@ export const HeadingCommand = [
     { name: 'while' },
     {
         name: 'repeat',
-        pattern: new RegExp('repeat\\s*(\\d)+', 'i')
+        pattern: new RegExp('repeat\\s*(.+)', 'i')
     },
 ];
 

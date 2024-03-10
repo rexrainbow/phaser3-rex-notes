@@ -376,6 +376,14 @@ actions...
 or
 
 ```
+## [Repeat #(loopCount)]
+
+actions...
+```
+
+or
+
+```
 ## [Repeat 3]
 
 ### Label
@@ -384,7 +392,7 @@ actions...
 ```
 
 
-- H2/H3/... heading with `[Repeat N]` : Repeat loop N times
+- H2/H3/... heading with `[Repeat N]`, or `[Repeat #(var)]` : Repeat loop N times
 
 
 ##### While loop

@@ -1,9 +1,19 @@
 # Title
 
+## Initial
+
+set\
+  loopCount=3
+
 ## [repeat 3]
 
 print\
-  text=repeat
+  text=repeat 3 - 0
+
+## [REPEAT #(loopCount)]
+
+print\
+  text=repeat 3 - 1
 
 ## Before while
 
