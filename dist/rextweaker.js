@@ -514,12 +514,14 @@
       state.syncScale = config;
       state.syncAlpha = config;
       state.syncScrollFactor = config;
+      state.syncCameraFilter = config;
     } else {
       state.syncPosition = GetValue$1_(config, 'syncPosition', true);
       state.syncRotation = GetValue$1_(config, 'syncRotation', true);
       state.syncScale = GetValue$1_(config, 'syncScale', true);
       state.syncAlpha = GetValue$1_(config, 'syncAlpha', true);
       state.syncScrollFactor = GetValue$1_(config, 'syncScrollFactor', true);
+      state.syncCameraFilter = GetValue$1_(config, 'syncCameraFilter', true);
     }
   };
   var AddChild$3 = {
@@ -1006,6 +1008,23 @@
     syncScrollFactor: function syncScrollFactor() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildScrollFactor, this);
+      }
+      return this;
+    }
+  };
+
+  var CameraFilter = {
+    updateCameraFilter: function updateCameraFilter(child) {
+      var state = GetLocalState(child);
+      var parent = state.parent;
+      if (state.syncCameraFilter) {
+        child.cameraFilter = parent.cameraFilter;
+      }
+      return this;
+    },
+    syncCameraFilter: function syncCameraFilter() {
+      if (this.syncChildrenEnable) {
+        this.children.forEach(this.updateCameraFilter, this);
       }
       return this;
     }
@@ -2148,7 +2167,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$m, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
+  Object.assign(methods$m, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2355,6 +2374,18 @@
         }
         this._scrollFactorY = value;
         this.syncScrollFactor();
+      }
+    }, {
+      key: "cameraFilter",
+      get: function get() {
+        return this._cameraFilter;
+      },
+      set: function set(value) {
+        if (this._cameraFilter === value) {
+          return;
+        }
+        this._cameraFilter = value;
+        this.syncCameraFilter();
       }
 
       // Compatiable with container plugin

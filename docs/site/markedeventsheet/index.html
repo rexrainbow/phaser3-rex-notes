@@ -5856,6 +5856,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#repeat-loop" class="md-nav__link">
+    Repeat loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#while-loop" class="md-nav__link">
     While loop
   </a>
@@ -5879,6 +5886,13 @@
           <li class="md-nav__item">
   <a href="#next-round" class="md-nav__link">
     Next round
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deactivate" class="md-nav__link">
+    Deactivate
   </a>
   
 </li>
@@ -10158,6 +10172,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#repeat-loop" class="md-nav__link">
+    Repeat loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#while-loop" class="md-nav__link">
     While loop
   </a>
@@ -10181,6 +10202,13 @@
           <li class="md-nav__item">
   <a href="#next-round" class="md-nav__link">
     Next round
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deactivate" class="md-nav__link">
+    Deactivate
   </a>
   
 </li>
@@ -10646,6 +10674,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="round-counter">Round counter<a class="headerlink" href="#round-counter" title="Permanent link">&para;</a></h3>
+<p>Round counter is started from <code>0</code>.</p>
 <ul>
 <li>Increase round counter
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">();</span>
@@ -10796,6 +10825,8 @@ coin &gt; 5
 coin &gt; 5
 
 ### Label
+
+actions...
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[If]</code> : Internal branch<ul>
@@ -10809,12 +10840,29 @@ coin &gt; 5
 <p>Does not support complex branch (if... else if ... else) inside an event sheet.<br />
 User can build complex branch by mutiple event sheets with main condition (<code>[Condition]</code> H2 heading).<br />
 <a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet/branch">Example</a></p>
+<h5 id="repeat-loop">Repeat loop<a class="headerlink" href="#repeat-loop" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>## [Repeat 3]
+
+actions...
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>## [Repeat 3]
+
+### Label
+
+actions...
+</code></pre></div>
+<ul>
+<li>H2/H3/... heading with <code>[Repeat N]</code> : Repeat loop N times</li>
+</ul>
 <h5 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>## [While]
 
 loopCount &gt; 0
 
 ### Label
+
+actions...
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[While]</code> : While loop<ul>
@@ -10846,6 +10894,12 @@ loopCount &gt; 0
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">().</span><span class="nx">start</span><span class="p">()</span>
 </code></pre></div>
 <p>to start next round.</p>
+<h5 id="deactivate">Deactivate<a class="headerlink" href="#deactivate" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>[deactivate]
+</code></pre></div>
+<ul>
+<li>Action line with <code>[deactivate]</code> : Deactivate this event sheet. i.e. Set <code>active</code> property of this event shhet to <code>false</code>.</li>
+</ul>
 <h4 id="custom-command">Custom command<a class="headerlink" href="#custom-command" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>commandName
   param0=value

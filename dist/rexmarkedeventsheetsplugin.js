@@ -6152,10 +6152,27 @@
     return WaitNextRound;
   }(Wait);
 
+  var DeactivateAction = /*#__PURE__*/function (_Action) {
+    _inherits(DeactivateAction, _Action);
+    function DeactivateAction() {
+      _classCallCheck(this, DeactivateAction);
+      return _callSuper(this, DeactivateAction, arguments);
+    }
+    _createClass(DeactivateAction, [{
+      key: "tick",
+      value: function tick(_tick) {
+        this.getTree(_tick).setActive(false);
+        return this.SUCCESS;
+      }
+    }]);
+    return DeactivateAction;
+  }(Action);
+
   var CustomNodeMapping = {
     TaskSequence: TaskSequence,
     TaskAction: TaskAction,
-    WaitNextRound: WaitNextRound
+    WaitNextRound: WaitNextRound,
+    DeactivateAction: DeactivateAction
   };
 
   var SaveLoadTreeMethods = {
@@ -16059,27 +16076,67 @@
     return config;
   };
 
-  var GetNodeType = function GetNodeType(node, typeNames) {
-    var title = node.title.toLowerCase();
-    for (var i = 0, cnt = typeNames.length; i < cnt; i++) {
-      var typeName = typeNames[i];
-      if (title.indexOf("[".concat(typeName, "]")) > -1) {
-        return typeName;
+  var TopLevelCommandTypes = [{
+    name: 'condition'
+  }, {
+    name: 'catch'
+  }];
+  var HeadingCommand = [{
+    name: 'if'
+  }, {
+    name: 'else'
+  }, {
+    name: 'while'
+  }, {
+    name: 'repeat',
+    pattern: new RegExp('repeat\\s*(\\d)+', 'i')
+  }];
+  var ActionCommandTypes = [{
+    name: 'exit'
+  }, {
+    name: 'break'
+  }, {
+    name: 'next round'
+  }, {
+    name: 'deactivate'
+  }];
+
+  var ParseType = function ParseType(s, patterns) {
+    s = s.trim();
+    if (s[0] === '[' && s[s.length - 1] === ']') {
+      s = s.substring(1, s.length - 1).toLowerCase();
+      for (var i = 0, cnt = patterns.length; i < cnt; i++) {
+        var pattern = patterns[i];
+        var patternName = pattern.name;
+        var testPattern = pattern.pattern;
+        if (testPattern) {
+          var result = s.match(testPattern);
+          if (result) {
+            return {
+              type: patternName,
+              match: result
+            };
+          }
+        } else if (patternName === s) {
+          return {
+            type: patternName
+          };
+        }
       }
     }
-    return '';
+    return null;
   };
 
   var STATE_CONDITION = 1;
   var STATE_TASK = 2;
   var STATE_CATCH = 3;
-  var TypeNames$1 = ['condition', 'catch'];
-  var ParseNodes = function ParseNodes(nodes) {
+  var ParseTopLevelNodes = function ParseTopLevelNodes(nodes) {
     var conditionNodes = [];
     var mainTaskNodes = [];
     var catchNodes = [];
     var state = STATE_CONDITION;
-    var nextNodeType = GetNodeType(nodes[0], TypeNames$1);
+    var result = ParseType(nodes[0].title, TopLevelCommandTypes);
+    var nextNodeType = result ? result.type : '';
     for (var i = 0, cnt = nodes.length; i < cnt; i++) {
       var node = nodes[i];
       if (state === STATE_CONDITION) {
@@ -16105,7 +16162,8 @@
           break;
       }
       if (i + 1 < cnt) {
-        nextNodeType = GetNodeType(nodes[i + 1], TypeNames$1);
+        result = ParseType(nodes[i + 1].title, TopLevelCommandTypes);
+        nextNodeType = result ? result.type : '';
       }
     }
     return {
@@ -16162,115 +16220,40 @@
     return expression;
   };
 
-  var TypeNames = ['if', 'else', 'while'];
-  var CreateTaskSequence = function CreateTaskSequence(node, config) {
-    if (Array.isArray(node)) {
-      var nodes = node;
-      if (nodes.length === 1) {
-        return CreateTaskSequence(nodes[0], config);
-      } else {
-        var sequence = new Sequence({
-          title: '[root]'
-        });
-        var lastIfSelector;
-        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-          var node = nodes[i];
-          var child = CreateTaskSequence(node, config);
-          // Construct if-branch selector
-          switch (child.title) {
-            case '[if]':
-              sequence.addChild(child);
-              lastIfSelector = child;
-              break;
-            case '[else]':
-              if (lastIfSelector) {
-                lastIfSelector.insertChild(child, null, -1);
-              } else {
-                // No [If] heading before this [else] heading
-                console.warn("Can't find [If] heading before '".concat(node.title, "'"));
-              }
-              break;
-            default:
-              // Normal tasks
-              sequence.addChild(child);
-              lastIfSelector = null;
-              break;
-          }
-        }
-        return sequence;
-      }
-    } else {
-      var nodeType = GetNodeType(node, TypeNames);
-      switch (nodeType) {
-        case 'if':
-          var selector = new Selector({
-            title: '[if]'
-          });
-          var ifDecorator = new If({
-            expression: GetConditionExpression(node)
-          });
-          ifDecorator.addChild(CreateTaskSequence(node.children, config));
-          selector.addChild(ifDecorator);
-          var succeeder = new Succeeder();
-          selector.addChild(succeeder);
-          return selector;
-        case 'else':
-          var ifDecorator = new If({
-            title: '[else]',
-            expression: GetConditionExpression(node)
-          });
-          ifDecorator.addChild(CreateTaskSequence(node.children, config));
-          return ifDecorator;
-        case 'while':
-          var whileDecorator = new RepeatUntilFailure({
-            title: '[while]',
-            returnSuccess: true
-          });
-          var ifDecorator = new If({
-            title: '[while]',
-            expression: GetConditionExpression(node)
-          });
-          ifDecorator.addChild(CreateTaskSequence(node.children, config));
-          whileDecorator.addChild(ifDecorator);
-          return whileDecorator;
-        default:
-          var sequence = new TaskSequence({
-            title: node.title
-          });
-          var paragraphs = node.paragraphs; // paragraphs -> TaskAction[]
-          for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
-            var commandData = GetCommandData(paragraphs[i], config);
-            if (!commandData) {
-              continue;
-            }
-            var commandType = commandData.type;
-            delete commandData.type;
-            var actionNode;
-            switch (commandType) {
-              case 'exit':
-                actionNode = new Abort({
-                  title: '[exit]'
-                });
-                break;
-              case 'break':
-                actionNode = new Failer({
-                  title: '[break]'
-                });
-                break;
-              case 'next round':
-                actionNode = new WaitNextRound({
-                  title: '[next round]'
-                }); // Wait 1 tick
-                break;
-              default:
-                actionNode = new TaskAction(commandData);
-                break;
-            }
-            sequence.addChild(actionNode);
-          }
-          return sequence;
-      }
+  var CreateActionNode = function CreateActionNode(paragraph, config) {
+    var commandData = GetCommandData(paragraph, config);
+    if (!commandData) {
+      return;
     }
+    var commandType = commandData.type;
+    delete commandData.type;
+    var actionNode;
+    switch (commandType) {
+      case 'exit':
+        actionNode = new Abort({
+          title: '[exit]'
+        });
+        break;
+      case 'break':
+        actionNode = new Failer({
+          title: '[break]'
+        });
+        break;
+      case 'next round':
+        actionNode = new WaitNextRound({
+          title: '[next round]'
+        }); // Wait 1 tick
+        break;
+      case 'deactivate':
+        actionNode = new DeactivateAction({
+          title: '[deactivate]'
+        });
+        break;
+      default:
+        actionNode = new TaskAction(commandData);
+        break;
+    }
+    return actionNode;
   };
   var GetCommandData = function GetCommandData(paragraph, config) {
     var commandData;
@@ -16298,22 +16281,9 @@
         return null;
       } else if (lines.length === 1) {
         var line = lines[0];
-
-        // Command action
-        switch (line.trim().toLowerCase()) {
-          case '[exit]':
-            return {
-              type: 'exit'
-            };
-          case '[break]':
-            return {
-              type: 'break'
-            };
-          case '[next round]':
-          case '[next-round]':
-            return {
-              type: 'next round'
-            };
+        var result = ParseType(line, ActionCommandTypes);
+        if (result) {
+          return result;
         }
         if (line.indexOf(',') !== -1) {
           lines = commandString.split(',');
@@ -16338,6 +16308,113 @@
     return s.trimLeft();
   };
 
+  var CreateActionSequence = function CreateActionSequence(node, config) {
+    var sequence = new TaskSequence({
+      title: node.title
+    });
+    var paragraphs = node.paragraphs; // paragraphs -> TaskAction[]
+    var actionNode;
+    for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
+      actionNode = CreateActionNode(paragraphs[i], config);
+      if (!actionNode) {
+        continue;
+      }
+      sequence.addChild(actionNode);
+    }
+    return sequence;
+  };
+
+  var CreateParentNode = function CreateParentNode(node, config) {
+    if (Array.isArray(node)) {
+      var nodes = node;
+      if (nodes.length === 1) {
+        return CreateParentNode(nodes[0], config);
+      } else {
+        var sequence = new Sequence();
+        var lastIfSelector;
+        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+          var node = nodes[i];
+          var child = CreateParentNode(node, config);
+          // Construct if-branch selector
+          switch (child.title) {
+            case '[if]':
+              sequence.addChild(child);
+              lastIfSelector = child;
+              break;
+            case '[else]':
+              if (lastIfSelector) {
+                lastIfSelector.insertChild(child, null, -1);
+              } else {
+                // No [If] heading before this [else] heading
+                console.warn("Can't find [If] heading before '".concat(node.title, "'"));
+              }
+              break;
+            default:
+              // Normal tasks
+              sequence.addChild(child);
+              lastIfSelector = null;
+              break;
+          }
+        }
+        return sequence;
+      }
+    }
+    var result = ParseType(node.title, HeadingCommand);
+    if (result) {
+      switch (result.type) {
+        case 'if':
+          var selector = new Selector({
+            title: '[if]'
+          });
+          var ifDecorator = new If({
+            expression: GetConditionExpression(node)
+          });
+          ifDecorator.addChild(CreateParentNode(node.children, config));
+          selector.addChild(ifDecorator);
+          var succeeder = new Succeeder();
+          selector.addChild(succeeder);
+          return selector;
+        case 'else':
+          var ifDecorator = new If({
+            title: '[else]',
+            expression: GetConditionExpression(node)
+          });
+          ifDecorator.addChild(CreateParentNode(node.children, config));
+          return ifDecorator;
+        case 'while':
+          var whileDecorator = new RepeatUntilFailure({
+            title: '[while]',
+            returnSuccess: true
+          });
+          var ifDecorator = new If({
+            title: '[while]',
+            expression: GetConditionExpression(node)
+          });
+          ifDecorator.addChild(CreateParentNode(node.children, config));
+          whileDecorator.addChild(ifDecorator);
+          return whileDecorator;
+        case 'repeat':
+          var repeatCount = parseInt(result.match[1]);
+          var repeatDecorator = new Repeat({
+            title: '[repeat]',
+            maxLoop: repeatCount
+          });
+          if (node.children.length > 0) {
+            repeatDecorator.addChild(CreateParentNode(node.children, config));
+          } else {
+            repeatDecorator.addChild(CreateActionSequence(node, config));
+          }
+          return repeatDecorator;
+        default:
+          // Error
+          console.error("Missing ".concat(result.type, "'s handler"));
+          break;
+      }
+    } else {
+      return CreateActionSequence(node, config);
+    }
+  };
+
   var Marked2Tree = function Marked2Tree(treeManager, markedString) {
     var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
       _ref$lineBreak = _ref.lineBreak,
@@ -16353,10 +16430,10 @@
     return function (parallel, active, once) {
       var headingTree = GetHeadingTree(markedString);
       var treeConfig = GetTreeConfig(headingTree.paragraphs);
-      var _ParseNodes = ParseNodes(headingTree.children),
-        conditionNodes = _ParseNodes.conditionNodes,
-        mainTaskNodes = _ParseNodes.mainTaskNodes,
-        catchNodes = _ParseNodes.catchNodes;
+      var _ParseTopLevelNodes = ParseTopLevelNodes(headingTree.children),
+        conditionNodes = _ParseTopLevelNodes.conditionNodes,
+        mainTaskNodes = _ParseTopLevelNodes.mainTaskNodes,
+        catchNodes = _ParseTopLevelNodes.catchNodes;
       var _treeConfig$parallel = treeConfig.parallel,
         parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel,
         _treeConfig$active = treeConfig.active,
@@ -16375,10 +16452,10 @@
         condition: GetConditionExpression(conditionNodes)
       });
       var rootNode = tree.root;
-      rootNode.addChild(CreateTaskSequence(mainTaskNodes, taskSequenceConfig));
+      rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
       var forceFailure = new ForceFailure();
       if (catchNodes.length > 0) {
-        forceFailure.addChild(CreateTaskSequence(catchNodes[0], taskSequenceConfig));
+        forceFailure.addChild(CreateParentNode(catchNodes[0], taskSequenceConfig));
       } else {
         forceFailure.addChild(new Succeeder());
       }
