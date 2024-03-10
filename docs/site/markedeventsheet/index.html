@@ -5842,15 +5842,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#simple-branch" class="md-nav__link">
-    Simple branch
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#complex-branch" class="md-nav__link">
-    Complex branch
+  <a href="#if-else" class="md-nav__link">
+    If, Else
   </a>
   
 </li>
@@ -10158,15 +10151,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#simple-branch" class="md-nav__link">
-    Simple branch
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#complex-branch" class="md-nav__link">
-    Complex branch
+  <a href="#if-else" class="md-nav__link">
+    If, Else
   </a>
   
 </li>
@@ -10819,27 +10805,48 @@ coin &gt; 5
 <li>H2 heading with <code>[Catch]</code> : Actions when main condition is <code>false</code>.</li>
 </ul>
 <h4 id="flow-control-instructions">Flow control instructions<a class="headerlink" href="#flow-control-instructions" title="Permanent link">&para;</a></h4>
-<h5 id="simple-branch">Simple branch<a class="headerlink" href="#simple-branch" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>## [If]
+<h5 id="if-else">If, Else<a class="headerlink" href="#if-else" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>## [If coin &gt; 5]
+
+actions...
+
+## [Else]
+
+actions...
+</code></pre></div>
+<ul>
+<li>H2/H3/... heading with <code>[If expression]</code> : If condition with expression<ul>
+<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Actions when expression is <code>true</code>.</li>
+</ul>
+</li>
+<li>H2/H3/... heading with <code>[Else]</code> :<ul>
+<li>Actions when expression is <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>## [If coin &gt; 5]
 
 coin &gt; 5
 
 ### Label
 
 actions...
+
+## [Else]
+
+### Label
+
+actions...
 </code></pre></div>
 <ul>
-<li>H2/H3/... heading with <code>[If]</code> : Internal branch<ul>
+<li>H2/H3/... heading with <code>[If]</code> : If condition<ul>
 <li>Each line under <code>[If]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
 <li>Read data from <a href="./#local-memory">local memory</a></li>
 </ul>
 </li>
 <li>H3/H4/... heading under <code>[If]</code> : Actions when condition is <code>true</code>.</li>
 </ul>
-<h5 id="complex-branch">Complex branch<a class="headerlink" href="#complex-branch" title="Permanent link">&para;</a></h5>
-<p>Does not support complex branch (if... else if ... else) inside an event sheet.<br />
-User can build complex branch by mutiple event sheets with main condition (<code>[Condition]</code> H2 heading).<br />
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet/branch">Example</a></p>
 <h5 id="repeat-loop">Repeat loop<a class="headerlink" href="#repeat-loop" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>## [Repeat 3]
 
@@ -10861,6 +10868,17 @@ actions...
 <li>H2/H3/... heading with <code>[Repeat N]</code>, or <code>[Repeat var]</code> : Repeat loop N times</li>
 </ul>
 <h5 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>## [While loopCount &gt; 0]
+
+actions...
+</code></pre></div>
+<ul>
+<li>H2/H3/... heading with <code>[While expression]</code> : While loop with expression    <ul>
+<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Actions when expression is <code>true</code>.</li>
+</ul>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code>## [While]
 
 loopCount &gt; 0

@@ -16080,14 +16080,16 @@
     name: 'catch'
   }];
   var HeadingCommand = [{
-    name: 'if'
+    name: 'if',
+    pattern: new RegExp('if\\s*(.*)', 'i')
   }, {
     name: 'else'
   }, {
-    name: 'while'
+    name: 'while',
+    pattern: new RegExp('while\\s*(.*)', 'i')
   }, {
     name: 'repeat',
-    pattern: new RegExp('repeat\\s*(.+)', 'i')
+    pattern: new RegExp('repeat\\s*(.*)', 'i')
   }];
   var ActionCommandTypes = [{
     name: 'exit'
@@ -16173,7 +16175,7 @@
     };
   };
 
-  var GetConditionExpression = function GetConditionExpression(nodes) {
+  var GetConditionExpression$1 = function GetConditionExpression(nodes) {
     if (!Array.isArray(nodes)) {
       return GetANDExpression(nodes);
     }
@@ -16378,9 +16380,13 @@
             title: '[if]'
           });
           var ifDecorator = new If({
-            expression: GetConditionExpression(node)
+            expression: GetConditionExpression(result.match[1], node)
           });
-          ifDecorator.addChild(CreateParentNode(node.children, config));
+          if (node.children.length > 0) {
+            ifDecorator.addChild(CreateParentNode(node.children, config));
+          } else {
+            ifDecorator.addChild(CreateActionSequence(node, config));
+          }
           selector.addChild(ifDecorator);
           var succeeder = new Succeeder();
           selector.addChild(succeeder);
@@ -16388,9 +16394,13 @@
         case 'else':
           var ifDecorator = new If({
             title: '[else]',
-            expression: GetConditionExpression(node)
+            expression: 'true'
           });
-          ifDecorator.addChild(CreateParentNode(node.children, config));
+          if (node.children.length > 0) {
+            ifDecorator.addChild(CreateParentNode(node.children, config));
+          } else {
+            ifDecorator.addChild(CreateActionSequence(node, config));
+          }
           return ifDecorator;
         case 'while':
           var whileDecorator = new RepeatUntilFailure({
@@ -16399,9 +16409,13 @@
           });
           var ifDecorator = new If({
             title: '[while]',
-            expression: GetConditionExpression(node)
+            expression: GetConditionExpression(result.match[1], node)
           });
-          ifDecorator.addChild(CreateParentNode(node.children, config));
+          if (node.children.length > 0) {
+            ifDecorator.addChild(CreateParentNode(node.children, config));
+          } else {
+            ifDecorator.addChild(CreateActionSequence(node, config));
+          }
           whileDecorator.addChild(ifDecorator);
           return whileDecorator;
         case 'repeat':
@@ -16424,6 +16438,13 @@
     } else {
       return CreateActionSequence(node, config);
     }
+  };
+  var GetConditionExpression = function GetConditionExpression(payloadExpression, node) {
+    var expression = payloadExpression.trim();
+    if (expression === '') {
+      expression = GetConditionExpression$1(node);
+    }
+    return expression;
   };
 
   var Marked2Tree = function Marked2Tree(treeManager, markedString) {
@@ -16460,7 +16481,7 @@
         parallel: parallel,
         active: active,
         once: once,
-        condition: GetConditionExpression(conditionNodes)
+        condition: GetConditionExpression$1(conditionNodes)
       });
       var rootNode = tree.root;
       rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
