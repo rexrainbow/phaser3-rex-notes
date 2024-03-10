@@ -10846,7 +10846,7 @@ User can build complex branch by mutiple event sheets with main condition (<code
 actions...
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code>## [Repeat #(loopCount)]
+<div class="highlight"><pre><span></span><code>## [Repeat loopCount]
 
 actions...
 </code></pre></div>
@@ -10858,7 +10858,7 @@ actions...
 actions...
 </code></pre></div>
 <ul>
-<li>H2/H3/... heading with <code>[Repeat N]</code>, or <code>[Repeat #(var)]</code> : Repeat loop N times</li>
+<li>H2/H3/... heading with <code>[Repeat N]</code>, or <code>[Repeat var]</code> : Repeat loop N times</li>
 </ul>
 <h5 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>## [While]
@@ -10893,13 +10893,13 @@ actions...
 <div class="highlight"><pre><span></span><code>[next round]
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code>[next 3 round]
+<div class="highlight"><pre><span></span><code>[next N round]
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code>[next #(n) round]
+<div class="highlight"><pre><span></span><code>[next var round]
 </code></pre></div>
 <ul>
-<li>Action line with <code>[next round]</code>, <code>[next N round]</code>, <code>[next #(var) round]</code> : Run remainder actions at next N round.</li>
+<li>Action line with <code>[next round]</code>, <code>[next N round]</code>, <code>[next var round]</code> : Run remainder actions at next N round.</li>
 </ul>
 <p>Invoke </p>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">updateRoundCounter</span><span class="p">().</span><span class="nx">start</span><span class="p">()</span>
