@@ -6131,12 +6131,10 @@
         name = _ref$name === void 0 ? 'NextRound' : _ref$name;
       _classCallCheck(this, WaitNextRound);
       return _callSuper(this, WaitNextRound, [{
+        duration: duration,
+        services: services,
         title: title,
-        name: name,
-        properties: {
-          duration: duration
-        },
-        services: services
+        name: name
       }]);
     }
     _createClass(WaitNextRound, [{
@@ -16089,14 +16087,15 @@
     name: 'while'
   }, {
     name: 'repeat',
-    pattern: new RegExp('repeat\\s*(\\d)+', 'i')
+    pattern: new RegExp('repeat\\s*(.+)', 'i')
   }];
   var ActionCommandTypes = [{
     name: 'exit'
   }, {
     name: 'break'
   }, {
-    name: 'next round'
+    name: 'next round',
+    pattern: new RegExp('next\\s*(.*)\\s*round', 'i')
   }, {
     name: 'deactivate'
   }];
@@ -16104,7 +16103,8 @@
   var ParseType = function ParseType(s, patterns) {
     s = s.trim();
     if (s[0] === '[' && s[s.length - 1] === ']') {
-      s = s.substring(1, s.length - 1).toLowerCase();
+      s = s.substring(1, s.length - 1);
+      var lowCaseString = s.toLowerCase();
       for (var i = 0, cnt = patterns.length; i < cnt; i++) {
         var pattern = patterns[i];
         var patternName = pattern.name;
@@ -16117,7 +16117,7 @@
               match: result
             };
           }
-        } else if (patternName === s) {
+        } else if (patternName === lowCaseString) {
           return {
             type: patternName
           };
@@ -16225,10 +16225,8 @@
     if (!commandData) {
       return;
     }
-    var commandType = commandData.type;
-    delete commandData.type;
     var actionNode;
-    switch (commandType) {
+    switch (commandData.type) {
       case 'exit':
         actionNode = new Abort({
           title: '[exit]'
@@ -16240,9 +16238,14 @@
         });
         break;
       case 'next round':
+        var duration = commandData.match[1].trim();
+        if (duration === '') {
+          duration = 1;
+        }
         actionNode = new WaitNextRound({
-          title: '[next round]'
-        }); // Wait 1 tick
+          title: '[next round]',
+          duration: duration
+        });
         break;
       case 'deactivate':
         actionNode = new DeactivateAction({
@@ -16250,6 +16253,7 @@
         });
         break;
       default:
+        delete commandData.type;
         actionNode = new TaskAction(commandData);
         break;
     }
@@ -16324,6 +16328,13 @@
     return sequence;
   };
 
+  var ExtraNumberExpression = function ExtraNumberExpression(s) {
+    if (s.startsWith('#(') && s.endsWith(')')) {
+      return s.substring(2, s.length - 1);
+    }
+    return s;
+  };
+
   var CreateParentNode = function CreateParentNode(node, config) {
     if (Array.isArray(node)) {
       var nodes = node;
@@ -16394,7 +16405,7 @@
           whileDecorator.addChild(ifDecorator);
           return whileDecorator;
         case 'repeat':
-          var repeatCount = parseInt(result.match[1]);
+          var repeatCount = ExtraNumberExpression(result.match[1]);
           var repeatDecorator = new Repeat({
             title: '[repeat]',
             maxLoop: repeatCount
