@@ -23,6 +23,7 @@ declare namespace ContainerLite {
         syncScale?: boolean,
         syncAlpha?: boolean,
         syncScrollFactor?: boolean,
+        syncCameraFilter?: boolean,
 
     }
 

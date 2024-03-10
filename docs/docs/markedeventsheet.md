@@ -350,6 +350,7 @@ coin > 5
 
 ### Label
 
+actions...
 ```
 
 - H2/H3/... heading with `[If]` : Internal branch
@@ -364,6 +365,28 @@ User can build complex branch by mutiple event sheets with main condition (`[Con
 [Example](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet/branch)
 
 
+##### Repeat loop
+
+```
+## [Repeat 3]
+
+actions...
+```
+
+or
+
+```
+## [Repeat 3]
+
+### Label
+
+actions...
+```
+
+
+- H2/H3/... heading with `[Repeat N]` : Repeat loop N times
+
+
 ##### While loop
 
 ```
@@ -373,6 +396,7 @@ loopCount > 0
 
 ### Label
 
+actions...
 ```
 
 - H2/H3/... heading with `[While]` : While loop

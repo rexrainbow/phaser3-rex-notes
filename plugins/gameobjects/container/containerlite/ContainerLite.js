@@ -208,6 +208,19 @@ class ContainerLite extends Base {
         this.syncScrollFactor();
     }
 
+    get cameraFilter() {
+        return this._cameraFilter;
+    }
+
+    set cameraFilter(value) {
+        if (this._cameraFilter === value) {
+            return;
+        }
+
+        this._cameraFilter = value;
+        this.syncCameraFilter();
+    }
+
     // Compatiable with container plugin
     get list() {
         return this.children;

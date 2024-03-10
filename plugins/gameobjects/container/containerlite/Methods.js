@@ -10,6 +10,7 @@ import Visible from './Visible.js';
 import Alpha from './Alpha.js';
 import Active from './Active.js';
 import ScrollFactor from './ScrollFactor.js';
+import CameraFilter from './CameraFilter.js';
 import Mask from './Mask.js';
 import Depth from './Depth.js';
 import Children from './Children.js';
@@ -40,6 +41,7 @@ Object.assign(
     Alpha,
     Active,
     ScrollFactor,
+    CameraFilter,
     Mask,
     Depth,
     Children,

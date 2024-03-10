@@ -171,6 +171,7 @@ container.pin(child, {
     // syncScale : true,
     // syncAlpha: true,
     // syncScrollFactor: true,
+    // syncCameraFilter: true,
 });
 ```
 
@@ -190,7 +191,9 @@ container.pin(child, {
 - `syncScrollFactor` : 
     - `true` : Sync scrollFactor of child, default behavior.
     - `false` : Don't sync scrollFactor of child. 
-
+- `syncCameraFilter` : 
+    - `true` : Sync cameraFilter of child, default behavior.
+    - `false` : Don't sync cameraFilter of child. 
 
 
 Or add(pin) children

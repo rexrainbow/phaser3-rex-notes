@@ -70,12 +70,14 @@ var SetupSyncFlags = function (state, config) {
         state.syncScale = config;
         state.syncAlpha = config;
         state.syncScrollFactor = config;
+        state.syncCameraFilter = config;
     } else {
         state.syncPosition = GetValue(config, 'syncPosition', true);
         state.syncRotation = GetValue(config, 'syncRotation', true);
         state.syncScale = GetValue(config, 'syncScale', true);
         state.syncAlpha = GetValue(config, 'syncAlpha', true);
         state.syncScrollFactor = GetValue(config, 'syncScrollFactor', true);
+        state.syncCameraFilter = GetValue(config, 'syncCameraFilter', true);
     }
 
 }
