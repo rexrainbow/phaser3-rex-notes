@@ -10,7 +10,7 @@ set\
 print\
   text=repeat 3 - 0
 
-## [REPEAT #(loopCount)]
+## [REPEAT loopCount]
 
 print\
   text=repeat 3 - 1

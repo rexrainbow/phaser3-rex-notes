@@ -376,7 +376,7 @@ actions...
 or
 
 ```
-## [Repeat #(loopCount)]
+## [Repeat loopCount]
 
 actions...
 ```
@@ -392,7 +392,7 @@ actions...
 ```
 
 
-- H2/H3/... heading with `[Repeat N]`, or `[Repeat #(var)]` : Repeat loop N times
+- H2/H3/... heading with `[Repeat N]`, or `[Repeat var]` : Repeat loop N times
 
 
 ##### While loop
@@ -447,7 +447,7 @@ or
 
 ```
 
-[next 3 round]
+[next N round]
 
 ```
 
@@ -455,11 +455,11 @@ or
 
 ```
 
-[next #(n) round]
+[next var round]
 
 ```
 
-- Action line with `[next round]`, `[next N round]`, `[next #(var) round]` : Run remainder actions at next N round.
+- Action line with `[next round]`, `[next N round]`, `[next var round]` : Run remainder actions at next N round.
 
 
 Invoke 
