@@ -1,17 +1,17 @@
-import { Level2HeadingCommandTypes } from './BuiltInCommandTypes.js';
+import { TopLevelCommandTypes } from './BuiltInCommandTypes.js';
 import ParseType from './ParseType.js';
 
 const STATE_CONDITION = 1;
 const STATE_TASK = 2;
 const STATE_CATCH = 3;
 
-var ParseNodes = function (nodes) {
+var ParseTopLevelNodes = function (nodes) {
     var conditionNodes = [];
     var mainTaskNodes = [];
     var catchNodes = [];
 
     var state = STATE_CONDITION;
-    var result = ParseType(nodes[0].title, Level2HeadingCommandTypes);
+    var result = ParseType(nodes[0].title, TopLevelCommandTypes);
     var nextNodeType = (result) ? result.type : '';
     for (var i = 0, cnt = nodes.length; i < cnt; i++) {
         var node = nodes[i];
@@ -42,7 +42,7 @@ var ParseNodes = function (nodes) {
         }
 
         if ((i + 1) < cnt) {
-            result = ParseType(nodes[i + 1].title, Level2HeadingCommandTypes);
+            result = ParseType(nodes[i + 1].title, TopLevelCommandTypes);
             nextNodeType = (result) ? result.type : '';
         }
     }
@@ -54,4 +54,4 @@ var ParseNodes = function (nodes) {
     }
 }
 
-export default ParseNodes;
+export default ParseTopLevelNodes;

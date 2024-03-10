@@ -1,5 +1,5 @@
 import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
-import Marked2Tree from './methods/Marked2Tree.js';
+import Marked2Tree from './marked2tree/Marked2Tree.js';
 
 class MarkedEventSheets extends EventSheetManager {
     addEventSheet(markedString, groupName, config) {

@@ -3,9 +3,9 @@ import EventBehaviorTree from '../../eventsheetmanager/tree/EventBehaviorTree.js
 import GetHeadingTree from './GetHeadingTree.js';
 import GetTreeConfig from './GetTreeConfig.js';
 
-import ParseNodes from './ParseNodes.js';
+import ParseTopLevelNodes from './ParseTopLevelNodes.js';
 import GetConditionExpression from './GetConditionExpression.js';
-import CreateTaskSequence from './CreateTaskSequence.js';
+import CreateParentNode from './CreateParentNode.js';
 
 var Marked2Tree = function (
     treeManager,
@@ -21,7 +21,7 @@ var Marked2Tree = function (
 
     var headingTree = GetHeadingTree(markedString);
     var treeConfig = GetTreeConfig(headingTree.paragraphs);
-    var { conditionNodes, mainTaskNodes, catchNodes } = ParseNodes(headingTree.children);
+    var { conditionNodes, mainTaskNodes, catchNodes } = ParseTopLevelNodes(headingTree.children);
 
     var {
         parallel = parallel,
@@ -42,11 +42,11 @@ var Marked2Tree = function (
     );
 
     var rootNode = tree.root;
-    rootNode.addChild(CreateTaskSequence(mainTaskNodes, taskSequenceConfig));
+    rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
 
     var forceFailure = new ForceFailure();
     if (catchNodes.length > 0) {
-        forceFailure.addChild(CreateTaskSequence(catchNodes[0], taskSequenceConfig));
+        forceFailure.addChild(CreateParentNode(catchNodes[0], taskSequenceConfig));
     } else {
         forceFailure.addChild(new Succeeder());
     }
