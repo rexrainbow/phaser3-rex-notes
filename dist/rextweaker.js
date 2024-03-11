@@ -1518,6 +1518,10 @@
   };
   var AddToContainer = function AddToContainer(p3Container) {
     var gameObjects = GetValidChildren(this);
+    // This containerLite parent should be considered.
+    if (gameObjects.indexOf(this) === -1) {
+      gameObjects.push(this);
+    }
     SortGameObjectsByDepth(gameObjects);
     p3Container.add(gameObjects);
   };
