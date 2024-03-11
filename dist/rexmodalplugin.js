@@ -1521,6 +1521,59 @@
   }(ComponentBase);
   Object.assign(OpenCloseTransition.prototype, methods);
 
+  var FullWindow = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(FullWindow, _ComponentBase);
+    function FullWindow(gameObject, config) {
+      var _this;
+      _classCallCheck(this, FullWindow);
+      _this = _callSuper(this, FullWindow, [gameObject]);
+      // this.parent = gameObject;
+
+      gameObject.setOrigin(0.5).setScrollFactor(0);
+      _this.boot();
+      return _this;
+    }
+    _createClass(FullWindow, [{
+      key: "boot",
+      value: function boot() {
+        this.scene.sys.events.on('prerender', this.resize, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        if (!this.scene) {
+          return;
+        }
+        this.scene.sys.events.off('prerender', this.resize, this);
+        _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
+      }
+    }, {
+      key: "resize",
+      value: function resize() {
+        var scene = this.scene;
+        var gameObject = this.parent;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
+        var gameWidth = gameSize.width,
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
+
+        // Origin is fixed to (0.5,0.5)
+        var x = gameWidth / 2,
+          y = gameHeight / 2;
+        var width = gameWidth * scale,
+          height = gameHeight * scale;
+        if (gameObject.x !== x || gameObject.y !== y) {
+          gameObject.setPosition(x, y);
+        }
+        if (gameObject.width !== width || gameObject.height !== height) {
+          gameObject.setSize(width, height);
+        }
+      }
+    }]);
+    return FullWindow;
+  }(ComponentBase);
+
   var Rectangle$1 = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
@@ -1528,55 +1581,17 @@
       var _this;
       _classCallCheck(this, FullWindowRectangle);
       _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2, color, 1]);
+      _this.fullWindow = new FullWindow(_assertThisInitialized(_this));
       _this.setAlpha(alpha);
-      _this.setScrollFactor(0);
-      _this.boot();
       return _this;
     }
     _createClass(FullWindowRectangle, [{
-      key: "boot",
-      value: function boot() {
-        var scene = this.scene;
-        scene.sys.events.on('prerender', this.resize, this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        // preDestroy method does not have fromScene parameter
-        //  This Game Object has already been destroyed
-        if (!this.scene || this.ignoreDestroy) {
-          return;
-        }
-        this.scene.sys.events.off('prerender', this.resize, this);
-        _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
       key: "tint",
       get: function get() {
         return this.fillColor;
       },
       set: function set(value) {
         this.setFillStyle(value, this.fillAlpha);
-      }
-    }, {
-      key: "resize",
-      value: function resize() {
-        var scene = this.scene;
-        var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
-        var gameWidth = gameSize.width,
-          gameHeight = gameSize.height,
-          scale = 1 / camera.zoom;
-        var x = gameWidth / 2,
-          y = gameHeight / 2,
-          width = gameWidth * scale,
-          height = gameHeight * scale;
-        if (this.x !== x || this.y !== y) {
-          this.setPosition(x, y);
-        }
-        if (this.width !== width || this.height !== height) {
-          this.setSize(width, height).setOrigin(0.5);
-        }
       }
     }]);
     return FullWindowRectangle;

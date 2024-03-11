@@ -3260,74 +3260,6 @@
   });
   SetValue(window, 'RexPlugins.GameObjectShell.CursorAtBounds', CursorAtBounds);
 
-  var Rectangle$2 = Phaser.GameObjects.Rectangle;
-  var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
-    _inherits(FullWindowRectangle, _Rectangle);
-    function FullWindowRectangle(scene, color, alpha) {
-      var _this;
-      _classCallCheck(this, FullWindowRectangle);
-      _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2, color, 1]);
-      _this.setAlpha(alpha);
-      _this.setScrollFactor(0);
-      _this.boot();
-      return _this;
-    }
-    _createClass(FullWindowRectangle, [{
-      key: "boot",
-      value: function boot() {
-        var scene = this.scene;
-        scene.sys.events.on('prerender', this.resize, this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        // preDestroy method does not have fromScene parameter
-        //  This Game Object has already been destroyed
-        if (!this.scene || this.ignoreDestroy) {
-          return;
-        }
-        this.scene.sys.events.off('prerender', this.resize, this);
-        _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        return this.fillColor;
-      },
-      set: function set(value) {
-        this.setFillStyle(value, this.fillAlpha);
-      }
-    }, {
-      key: "resize",
-      value: function resize() {
-        var scene = this.scene;
-        var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
-        var gameWidth = gameSize.width,
-          gameHeight = gameSize.height,
-          scale = 1 / camera.zoom;
-        var x = gameWidth / 2,
-          y = gameHeight / 2,
-          width = gameWidth * scale,
-          height = gameHeight * scale;
-        if (this.x !== x || this.y !== y) {
-          this.setPosition(x, y);
-        }
-        if (this.width !== width || this.height !== height) {
-          this.setSize(width, height).setOrigin(0.5);
-        }
-      }
-    }]);
-    return FullWindowRectangle;
-  }(Rectangle$2);
-
-  ObjectFactory.register('fullWindowRectangle', function (fillColor, fillAlpha) {
-    var gameObject = new FullWindowRectangle(this.scene, fillColor, fillAlpha);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue(window, 'RexPlugins.GameObjectShell.FullWindowRectangle', FullWindowRectangle);
-
   var EventEmitterMethods$1 = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -3407,6 +3339,217 @@
       return [];
     }
   };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue$22 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$22(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
+
+  var FullWindow = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(FullWindow, _ComponentBase);
+    function FullWindow(gameObject, config) {
+      var _this;
+      _classCallCheck(this, FullWindow);
+      _this = _callSuper(this, FullWindow, [gameObject]);
+      // this.parent = gameObject;
+
+      gameObject.setOrigin(0.5).setScrollFactor(0);
+      _this.boot();
+      return _this;
+    }
+    _createClass(FullWindow, [{
+      key: "boot",
+      value: function boot() {
+        this.scene.sys.events.on('prerender', this.resize, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        if (!this.scene) {
+          return;
+        }
+        this.scene.sys.events.off('prerender', this.resize, this);
+        _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
+      }
+    }, {
+      key: "resize",
+      value: function resize() {
+        var scene = this.scene;
+        var gameObject = this.parent;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
+        var gameWidth = gameSize.width,
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
+
+        // Origin is fixed to (0.5,0.5)
+        var x = gameWidth / 2,
+          y = gameHeight / 2;
+        var width = gameWidth * scale,
+          height = gameHeight * scale;
+        if (gameObject.x !== x || gameObject.y !== y) {
+          gameObject.setPosition(x, y);
+        }
+        if (gameObject.width !== width || gameObject.height !== height) {
+          gameObject.setSize(width, height);
+        }
+      }
+    }]);
+    return FullWindow;
+  }(ComponentBase);
+
+  var Rectangle$2 = Phaser.GameObjects.Rectangle;
+  var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
+    _inherits(FullWindowRectangle, _Rectangle);
+    function FullWindowRectangle(scene, color, alpha) {
+      var _this;
+      _classCallCheck(this, FullWindowRectangle);
+      _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2, color, 1]);
+      _this.fullWindow = new FullWindow(_assertThisInitialized(_this));
+      _this.setAlpha(alpha);
+      return _this;
+    }
+    _createClass(FullWindowRectangle, [{
+      key: "tint",
+      get: function get() {
+        return this.fillColor;
+      },
+      set: function set(value) {
+        this.setFillStyle(value, this.fillAlpha);
+      }
+    }]);
+    return FullWindowRectangle;
+  }(Rectangle$2);
+
+  ObjectFactory.register('fullWindowRectangle', function (fillColor, fillAlpha) {
+    var gameObject = new FullWindowRectangle(this.scene, fillColor, fillAlpha);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.GameObjectShell.FullWindowRectangle', FullWindowRectangle);
 
   var PropertyMethods$1 = {
     hasProperty: function hasProperty(property) {
@@ -5895,32 +6038,32 @@
   };
   Object.assign(Methods$8, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1);
 
-  var GetValue$22 = Phaser.Utils.Objects.GetValue;
+  var GetValue$21 = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$22(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$22(config, 'createGameObject'), GetValue$22(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$22(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$22(config, 'fade', 500);
+      this.BobClass = GetValue$21(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$21(config, 'createGameObject'), GetValue$21(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$21(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue$21(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$22(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$22(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$21(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$21(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$22(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue$21(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$22(config, 'enable', true));
-        this.setViewport(GetValue$22(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue$21(config, 'enable', true));
+        this.setViewport(GetValue$21(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      var effectPropertiesConfig = GetValue$22(config, 'effectProperties', false);
+      var effectPropertiesConfig = GetValue$21(config, 'effectProperties', false);
       this.setEffectPropertiesConfig(effectPropertiesConfig);
-      this.setSymbols(GetValue$22(config, 'symbols'));
+      this.setSymbols(GetValue$21(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -6004,7 +6147,7 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$8);
 
-  var GetValue$21 = Phaser.Utils.Objects.GetValue;
+  var GetValue$20 = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
     function LayerManager(scene, config) {
@@ -6022,7 +6165,7 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
-      var initLayers = GetValue$21(config, 'layers');
+      var initLayers = GetValue$20(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
           _this.add(initLayers[i]);
@@ -6207,134 +6350,6 @@
     return mouseWheelToUpDown;
   });
   SetValue(window, 'RexPlugins.GameObjectShell.MouseWheelToUpDown', MouseWheelToUpDown);
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var GetValue$20 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
-
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$20(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
-        }
-
-        // bob object does not have event emitter
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
-        }
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
-        return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
   var GetValue$1$ = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {

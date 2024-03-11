@@ -127,6 +127,267 @@
     return _get.apply(this, arguments);
   }
 
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+      return [];
+    }
+  };
+
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var FullWindow = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(FullWindow, _ComponentBase);
+    function FullWindow(gameObject, config) {
+      var _this;
+      _classCallCheck(this, FullWindow);
+      _this = _callSuper(this, FullWindow, [gameObject]);
+      // this.parent = gameObject;
+
+      gameObject.setOrigin(0.5).setScrollFactor(0);
+      _this.boot();
+      return _this;
+    }
+    _createClass(FullWindow, [{
+      key: "boot",
+      value: function boot() {
+        this.scene.sys.events.on('prerender', this.resize, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        if (!this.scene) {
+          return;
+        }
+        this.scene.sys.events.off('prerender', this.resize, this);
+        _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
+      }
+    }, {
+      key: "resize",
+      value: function resize() {
+        var scene = this.scene;
+        var gameObject = this.parent;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
+        var gameWidth = gameSize.width,
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
+
+        // Origin is fixed to (0.5,0.5)
+        var x = gameWidth / 2,
+          y = gameHeight / 2;
+        var width = gameWidth * scale,
+          height = gameHeight * scale;
+        if (gameObject.x !== x || gameObject.y !== y) {
+          gameObject.setPosition(x, y);
+        }
+        if (gameObject.width !== width || gameObject.height !== height) {
+          gameObject.setSize(width, height);
+        }
+      }
+    }]);
+    return FullWindow;
+  }(ComponentBase);
+
   var Rectangle = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
@@ -134,55 +395,17 @@
       var _this;
       _classCallCheck(this, FullWindowRectangle);
       _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2, color, 1]);
+      _this.fullWindow = new FullWindow(_assertThisInitialized(_this));
       _this.setAlpha(alpha);
-      _this.setScrollFactor(0);
-      _this.boot();
       return _this;
     }
     _createClass(FullWindowRectangle, [{
-      key: "boot",
-      value: function boot() {
-        var scene = this.scene;
-        scene.sys.events.on('prerender', this.resize, this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        // preDestroy method does not have fromScene parameter
-        //  This Game Object has already been destroyed
-        if (!this.scene || this.ignoreDestroy) {
-          return;
-        }
-        this.scene.sys.events.off('prerender', this.resize, this);
-        _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
       key: "tint",
       get: function get() {
         return this.fillColor;
       },
       set: function set(value) {
         this.setFillStyle(value, this.fillAlpha);
-      }
-    }, {
-      key: "resize",
-      value: function resize() {
-        var scene = this.scene;
-        var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
-        var gameWidth = gameSize.width,
-          gameHeight = gameSize.height,
-          scale = 1 / camera.zoom;
-        var x = gameWidth / 2,
-          y = gameHeight / 2,
-          width = gameWidth * scale,
-          height = gameHeight * scale;
-        if (this.x !== x || this.y !== y) {
-          this.setPosition(x, y);
-        }
-        if (this.width !== width || this.height !== height) {
-          this.setSize(width, height).setOrigin(0.5);
-        }
       }
     }]);
     return FullWindowRectangle;
