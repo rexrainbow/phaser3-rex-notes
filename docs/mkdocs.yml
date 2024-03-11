@@ -249,9 +249,7 @@ nav:
     - Effects: camera-effects.md
     - Shader effect: camera-shader-effect.md
     - Controllor: camera-controllor.md
-- Tween:
-    - Tween task: tween.md
-    - Timeline: tween-timeline.md
+- Tween: tween.md
 - Shader effects:
     - Built-in shader effects:
         - Effects : shader-builtin.md
