@@ -77,7 +77,7 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
 
     destroy(fromScene?: boolean): this;
 
-    addGameObjectManager(config: Managers.IGameObjectConfig): this;
+    addGameObjectManager(config: Managers.IAddGameObjectManagerConfig): this;
 
     play(commands: string): this;
     playPromise(commands: string): Promise<any>;
