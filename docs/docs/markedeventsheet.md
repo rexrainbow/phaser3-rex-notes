@@ -507,7 +507,37 @@ to start next round.
 
 ```
 
-- Action line with `[deactivate]` : Deactivate this event sheet. i.e. Set `active` property of this event shhet to `false`.
+or
+
+
+```
+
+[deactivate treeTitle]
+
+```
+
+- Action line with `[deactivate]`, or `[deactivate treeTitle]` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
+
+
+
+##### Activate
+
+```
+
+[activate]
+
+```
+
+or
+
+
+```
+
+[activate treeTitle]
+
+```
+
+- Action line with `[activate]`, or `[activate treeTitle]` : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `true`.
 
 
 #### Custom command

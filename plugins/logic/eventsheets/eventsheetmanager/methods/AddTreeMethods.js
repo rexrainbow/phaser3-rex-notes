@@ -1,7 +1,7 @@
 export default {
     // Override it
     addEventSheet(s, groupName, config) {
-
+        return this;
     },
 
     addTree(tree, groupName) {

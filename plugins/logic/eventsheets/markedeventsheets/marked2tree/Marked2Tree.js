@@ -11,6 +11,7 @@ var Marked2Tree = function (
     treeManager,
     markedString,
     {
+        groupName,
         lineBreak = '\\',
         commentLineStart = '\/\/',
         parallel = false,
@@ -33,6 +34,7 @@ var Marked2Tree = function (
     var tree = new EventBehaviorTree(
         treeManager,
         {
+            groupName,
             title: headingTree.title,
             parallel: parallel,
             active: active,

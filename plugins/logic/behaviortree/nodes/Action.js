@@ -9,7 +9,7 @@ class Action extends BaseNode {
             title,
             properties,
             services,
-        } = {},        
+        } = {},
         nodePool
     ) {
 

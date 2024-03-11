@@ -6150,16 +6150,74 @@
     return WaitNextRound;
   }(Wait);
 
+  var ActivateAction = /*#__PURE__*/function (_Action) {
+    _inherits(ActivateAction, _Action);
+    function ActivateAction() {
+      var _this;
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        activateTreeTitle = _ref.activateTreeTitle,
+        services = _ref.services,
+        title = _ref.title,
+        _ref$name = _ref.name,
+        name = _ref$name === void 0 ? 'ActivateTree' : _ref$name;
+      _classCallCheck(this, ActivateAction);
+      _this = _callSuper(this, ActivateAction, [{
+        name: name,
+        title: title,
+        properties: {
+          activateTreeTitle: activateTreeTitle
+        },
+        services: services
+      }]);
+      _this.activateTreeTitle = activateTreeTitle;
+      return _this;
+    }
+    _createClass(ActivateAction, [{
+      key: "tick",
+      value: function tick(_tick) {
+        var tree = this.getTree(_tick);
+        if (!activateTreeTitle || this.activateTreeTitle === '') {
+          tree.setActive(true);
+        } else {
+          tree.treeManager.setTreeActiveState(this.activateTreeTitle, tree.groupName, true);
+        }
+        return this.SUCCESS;
+      }
+    }]);
+    return ActivateAction;
+  }(Action);
+
   var DeactivateAction = /*#__PURE__*/function (_Action) {
     _inherits(DeactivateAction, _Action);
     function DeactivateAction() {
+      var _this;
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        deactivateTreeTitle = _ref.deactivateTreeTitle,
+        services = _ref.services,
+        title = _ref.title,
+        _ref$name = _ref.name,
+        name = _ref$name === void 0 ? 'DeactivateTree' : _ref$name;
       _classCallCheck(this, DeactivateAction);
-      return _callSuper(this, DeactivateAction, arguments);
+      _this = _callSuper(this, DeactivateAction, [{
+        name: name,
+        title: title,
+        properties: {
+          deactivateTreeTitle: deactivateTreeTitle
+        },
+        services: services
+      }]);
+      _this.deactivateTreeTitle = deactivateTreeTitle;
+      return _this;
     }
     _createClass(DeactivateAction, [{
       key: "tick",
       value: function tick(_tick) {
-        this.getTree(_tick).setActive(false);
+        var tree = this.getTree(_tick);
+        if (!this.deactivateTreeTitle || this.deactivateTreeTitle === '') {
+          tree.setActive(false);
+        } else {
+          tree.treeManager.setTreeActiveState(this.deactivateTreeTitle, tree.groupName, false);
+        }
         return this.SUCCESS;
       }
     }]);
@@ -6170,6 +6228,7 @@
     TaskSequence: TaskSequence,
     TaskAction: TaskAction,
     WaitNextRound: WaitNextRound,
+    ActivateAction: ActivateAction,
     DeactivateAction: DeactivateAction
   };
 
@@ -6438,7 +6497,9 @@
 
   var AddTreeMethods = {
     // Override it
-    addEventSheet: function addEventSheet(s, groupName, config) {},
+    addEventSheet: function addEventSheet(s, groupName, config) {
+      return this;
+    },
     addTree: function addTree(tree, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
@@ -14713,9 +14774,8 @@
         config = {};
       }
       _this = _callSuper(this, EventBehaviorTree, [config]);
-      _this.treeManager = treeManager;
-      _this.blackboard = treeManager.blackboard;
       var _config = config,
+        groupName = _config.groupName,
         _config$parallel = _config.parallel,
         parallel = _config$parallel === void 0 ? false : _config$parallel,
         _config$active = _config.active,
@@ -14724,6 +14784,9 @@
         once = _config$once === void 0 ? false : _config$once,
         _config$condition = _config.condition,
         condition = _config$condition === void 0 ? 'true' : _config$condition;
+      _this.treeManager = treeManager;
+      _this.blackboard = treeManager.blackboard;
+      _this.groupName = groupName;
       _this.active = active;
       _this.properties.parallel = parallel;
       _this.properties.once = once;
@@ -16099,7 +16162,11 @@
     name: 'next round',
     pattern: new RegExp('next\\s*(.*)\\s*round', 'i')
   }, {
-    name: 'deactivate'
+    name: 'activate',
+    pattern: new RegExp('activate\\s*(.*)', 'i')
+  }, {
+    name: 'deactivate',
+    pattern: new RegExp('deactivate\\s*(.*)', 'i')
   }];
 
   var ParseType = function ParseType(s, patterns) {
@@ -16249,9 +16316,18 @@
           duration: duration
         });
         break;
+      case 'activate':
+        var activateTreeTitle = commandData.match[1].trim();
+        actionNode = new ActivateAction({
+          title: '[activate]',
+          activateTreeTitle: activateTreeTitle
+        });
+        break;
       case 'deactivate':
+        var deactivateTreeTitle = commandData.match[1].trim();
         actionNode = new DeactivateAction({
-          title: '[deactivate]'
+          title: '[deactivate]',
+          deactivateTreeTitle: deactivateTreeTitle
         });
         break;
       default:
@@ -16449,6 +16525,7 @@
 
   var Marked2Tree = function Marked2Tree(treeManager, markedString) {
     var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+      groupName = _ref.groupName,
       _ref$lineBreak = _ref.lineBreak,
       lineBreak = _ref$lineBreak === void 0 ? '\\' : _ref$lineBreak,
       _ref$commentLineStart = _ref.commentLineStart,
@@ -16477,6 +16554,7 @@
         commentLineStart: commentLineStart
       };
       var tree = new EventBehaviorTree(treeManager, {
+        groupName: groupName,
         title: headingTree.title,
         parallel: parallel,
         active: active,
@@ -16523,6 +16601,7 @@
           _config$parallel = _config.parallel,
           parallel = _config$parallel === void 0 ? this.parallel : _config$parallel;
         var tree = Marked2Tree(this, markedString, {
+          groupName: groupName,
           lineBreak: lineBreak,
           commentLineStart: commentLineStart,
           parallel: parallel

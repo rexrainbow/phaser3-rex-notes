@@ -12,15 +12,17 @@ class EventBehaviorTree extends BehaviorTree {
         }
         super(config);
 
-        this.treeManager = treeManager;
-        this.blackboard = treeManager.blackboard;
-
         var {
+            groupName,
             parallel = false,
             active = true,
             once = false,
             condition = 'true'
         } = config;
+
+        this.treeManager = treeManager;
+        this.blackboard = treeManager.blackboard;
+        this.groupName = groupName;
 
         this.active = active;
         this.properties.parallel = parallel;

@@ -29,5 +29,12 @@ export const ActionCommandTypes = [
         name: 'next round',
         pattern: new RegExp('next\\s*(.*)\\s*round', 'i')
     },
-    { name: 'deactivate' },
+    { 
+        name: 'activate',
+        pattern: new RegExp('activate\\s*(.*)', 'i')
+    },
+    { 
+        name: 'deactivate',
+        pattern: new RegExp('deactivate\\s*(.*)', 'i')
+    },
 ];

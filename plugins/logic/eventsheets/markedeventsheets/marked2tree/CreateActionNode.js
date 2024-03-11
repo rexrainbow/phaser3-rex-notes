@@ -4,6 +4,7 @@ import ParseType from './ParseType.js';
 import ParseProperty from './ParseProperty.js';
 import TaskAction from '../../eventsheetmanager/nodes/TaskAction.js';
 import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
+import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 
 var CreateActionNode = function (paragraph, config) {
@@ -33,8 +34,20 @@ var CreateActionNode = function (paragraph, config) {
             });
             break;
 
+        case 'activate':
+            var activateTreeTitle = commandData.match[1].trim();
+            actionNode = new ActivateAction({
+                title: '[activate]',
+                activateTreeTitle: activateTreeTitle,
+            });
+            break;
+
         case 'deactivate':
-            actionNode = new DeactivateAction({ title: '[deactivate]' });
+            var deactivateTreeTitle = commandData.match[1].trim();
+            actionNode = new DeactivateAction({
+                title: '[deactivate]',
+                deactivateTreeTitle: deactivateTreeTitle,
+            });
             break;
 
         default:

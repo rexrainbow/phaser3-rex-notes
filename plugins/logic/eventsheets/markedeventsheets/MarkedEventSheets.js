@@ -26,6 +26,7 @@ class MarkedEventSheets extends EventSheetManager {
             this,
             markedString,
             {
+                groupName,
                 lineBreak,
                 commentLineStart,
                 parallel

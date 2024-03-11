@@ -1,8 +1,32 @@
 import { Action, } from '../../../behaviortree/index.js';
 
 class DeactivateAction extends Action {
+    constructor({
+        deactivateTreeTitle,
+        services,
+        title,
+        name = 'DeactivateTree'
+    } = {}) {
+
+        super({
+            name,
+            title,
+            properties: {
+                deactivateTreeTitle
+            },
+            services,
+        });
+
+        this.deactivateTreeTitle = deactivateTreeTitle;
+    }
+
     tick(tick) {
-        this.getTree(tick).setActive(false);
+        var tree = this.getTree(tick);
+        if (!this.deactivateTreeTitle || (this.deactivateTreeTitle === '')) {
+            tree.setActive(false);
+        } else {
+            tree.treeManager.setTreeActiveState(this.deactivateTreeTitle, tree.groupName, false);
+        }
         return this.SUCCESS;
     }
 }

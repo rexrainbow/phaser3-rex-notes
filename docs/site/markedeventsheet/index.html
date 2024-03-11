@@ -5890,6 +5890,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#activate" class="md-nav__link">
+    Activate
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10199,6 +10206,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#activate" class="md-nav__link">
+    Activate
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10926,8 +10940,20 @@ actions...
 <h5 id="deactivate">Deactivate<a class="headerlink" href="#deactivate" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>[deactivate]
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>[deactivate treeTitle]
+</code></pre></div>
 <ul>
-<li>Action line with <code>[deactivate]</code> : Deactivate this event sheet. i.e. Set <code>active</code> property of this event shhet to <code>false</code>.</li>
+<li>Action line with <code>[deactivate]</code>, or <code>[deactivate treeTitle]</code> : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>false</code>.</li>
+</ul>
+<h5 id="activate">Activate<a class="headerlink" href="#activate" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>[activate]
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>[activate treeTitle]
+</code></pre></div>
+<ul>
+<li>Action line with <code>[activate]</code>, or <code>[activate treeTitle]</code> : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>true</code>.</li>
 </ul>
 <h4 id="custom-command">Custom command<a class="headerlink" href="#custom-command" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>commandName
