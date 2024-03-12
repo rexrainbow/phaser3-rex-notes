@@ -3472,6 +3472,20 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
+  var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
+    var cameras = scene.sys.cameras.cameras;
+    var camera, cameraFilter, isCameraIgnore;
+    for (var i = 0, cnt = cameras.length; i < cnt; i++) {
+      camera = cameras[i];
+      cameraFilter = gameObject.cameraFilter;
+      isCameraIgnore = cameraFilter !== 0 && cameraFilter & camera.id;
+      if (!isCameraIgnore) {
+        return camera;
+      }
+    }
+    return null;
+  };
+
   var FullWindow = /*#__PURE__*/function (_ComponentBase) {
     _inherits(FullWindow, _ComponentBase);
     function FullWindow(gameObject, config) {
@@ -3481,6 +3495,7 @@
       // this.parent = gameObject;
 
       gameObject.setOrigin(0.5).setScrollFactor(0);
+      _this.targetCamera = undefined;
       _this.boot();
       return _this;
     }
@@ -3499,12 +3514,27 @@
         _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
       }
     }, {
+      key: "getTargetCamera",
+      value: function getTargetCamera() {
+        var gameObject = this.parent;
+        if (this.targetCamera) {
+          var isCameraIgnore = gameObject.cameraFilter !== 0 && gameObject.cameraFilter & this.targetCamera.id;
+          if (isCameraIgnore) {
+            this.targetCamera = undefined;
+          }
+        }
+        if (!this.targetCamera) {
+          this.targetCamera = GetFirstRenderCamera(this.scene, gameObject);
+        }
+        return this.targetCamera;
+      }
+    }, {
       key: "resize",
       value: function resize() {
         var scene = this.scene;
         var gameObject = this.parent;
         var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
+        var camera = this.getTargetCamera();
         var gameWidth = gameSize.width,
           gameHeight = gameSize.height,
           scale = 1 / camera.zoom;

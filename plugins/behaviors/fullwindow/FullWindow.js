@@ -10,6 +10,7 @@ class FullWindow extends ComponentBase {
             .setOrigin(0.5)
             .setScrollFactor(0);
 
+        this.targetCamera = undefined;
         this.boot();
     }
 
@@ -27,12 +28,29 @@ class FullWindow extends ComponentBase {
         super.destroy();
     }
 
+    getTargetCamera() {
+        var gameObject = this.parent;
+
+        if (this.targetCamera) {
+            var isCameraIgnore = (gameObject.cameraFilter !== 0) && (gameObject.cameraFilter & this.targetCamera.id);
+            if (isCameraIgnore) {
+                this.targetCamera = undefined;
+            }
+        }
+
+        if (!this.targetCamera) {
+            this.targetCamera = GetFirstRenderCamera(this.scene, gameObject);
+        }
+
+        return this.targetCamera;
+    }
+
     resize() {
         var scene = this.scene;
         var gameObject = this.parent;
 
         var gameSize = scene.sys.scale.gameSize;
-        var camera = GetFirstRenderCamera(scene, gameObject);
+        var camera = this.getTargetCamera();
 
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
