@@ -18,6 +18,7 @@ class ContainerLite extends Base {
         this._mask = null;
         this._scrollFactorX = 1;
         this._scrollFactorY = 1;
+        this._cameraFilter = 0;
         this.privateRenderLayer = undefined;
 
         if (children) {
