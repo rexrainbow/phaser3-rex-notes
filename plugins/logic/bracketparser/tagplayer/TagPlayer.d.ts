@@ -54,18 +54,14 @@ declare namespace TagPlayer {
 
     type ClickTrgetTypes = Phaser.GameObjects.GameObject | Phaser.Scene;
 
-    interface IConfig {
+    interface IConfig extends Managers.IConfig {
         parser?: IConfigParser,
-
-        sounds?: Managers.IConfigSounds,
 
         sprites?: ISpriteGameObjectConfig | false,
 
         texts?: ITextGameObjectConfig | false,
 
         nextPageInput?: NextPageInputTypes,
-
-        clickTarget?: ClickTrgetTypes,
     }
 }
 

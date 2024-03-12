@@ -19,7 +19,7 @@ export default {
             // Execute next command
 
             if (layer) {
-                var layerManager = sys.getGameObjectManager('layer');
+                var layerManager = sys.layerManager;
                 if (layerManager) {
                     var gameObject = sys.getGameObject(name, id);
                     layerManager.addToLayer(layer, gameObject);

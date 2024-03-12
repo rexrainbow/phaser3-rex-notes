@@ -22132,7 +22132,7 @@
     this.gameObjectManagers = {};
     var layerManagerConfig = GetValue(config, 'layers', false);
     if (layerManagerConfig !== false) {
-      this.gameObjectManagers.layer = new LayerManager(scene, layerManagerConfig);
+      this.layerManager = new LayerManager(scene, layerManagerConfig);
     }
     var soundManagerConfig = GetValue(config, 'sounds');
     if (soundManagerConfig !== false) {
@@ -22161,6 +22161,10 @@
     for (var name in this.gameObjectManagers) {
       this.gameObjectManagers[name].destroy(fromScene);
       delete this.gameObjectManagers[name];
+    }
+    if (this.layerManager) {
+      this.layerManager.destroy(fromScene);
+      this.layerManager = undefined;
     }
     if (this.soundManager) {
       this.soundManager.destroy();
@@ -22449,7 +22453,7 @@
         // Execute next command
 
         if (layer) {
-          var layerManager = sys.getGameObjectManager('layer');
+          var layerManager = sys.layerManager;
           if (layerManager) {
             var gameObject = sys.getGameObject(name, id);
             layerManager.addToLayer(layer, gameObject);

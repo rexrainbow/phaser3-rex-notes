@@ -57,20 +57,16 @@ declare namespace TextPlayer {
 
     type ClickTrgetTypes = Phaser.GameObjects.GameObject | Phaser.Scene;
 
-    interface IConfig extends DynamicText.IConfig {
+    interface IConfig extends DynamicText.IConfig, Managers.IConfig {
         parser?: IConfigParser,
 
         typing?: IConfigTyping,
 
         images?: IConfigImages,
 
-        sounds?: Managers.IConfigSounds,
-
         sprites?: ISpriteGameObjectConfig | false,
 
         nextPageInput?: NextPageInputTypes,
-
-        clickTarget?: ClickTrgetTypes,
 
         text?: string
     }
