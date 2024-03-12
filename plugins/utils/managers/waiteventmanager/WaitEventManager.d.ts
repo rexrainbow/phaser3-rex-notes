@@ -6,7 +6,7 @@ export default WaitEventManager;
 declare namespace WaitEventManager {
     interface IConfig {
         completeEventName?: string,
-        clickTarget?: Phaser.Events.EventEmitter,
+        clickTarget?: Phaser.Scene | Phaser.GameObjects.GameObject;
         camera?: Phaser.Cameras.Scene2D.Camera
     }
 
