@@ -2,6 +2,9 @@ var DestroyManagers = function (fromScene) {
     this.waitEventManager.destroy();
     this.waitEventManager = undefined;
 
+    // Destroy layerManager at last
+    delete this.gameObjectManagers.layer;
+
     for (var name in this.gameObjectManagers) {
         this.gameObjectManagers[name].destroy(fromScene);
         delete this.gameObjectManagers[name];

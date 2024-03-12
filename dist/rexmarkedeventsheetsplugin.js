@@ -22132,7 +22132,9 @@
     this.gameObjectManagers = {};
     var layerManagerConfig = GetValue(config, 'layers', false);
     if (layerManagerConfig !== false) {
-      this.layerManager = new LayerManager(scene, layerManagerConfig);
+      var layerManager = new LayerManager(scene, layerManagerConfig);
+      this.gameObjectManagers.layer = layerManager;
+      this.layerManager = layerManager;
     }
     var soundManagerConfig = GetValue(config, 'sounds');
     if (soundManagerConfig !== false) {
@@ -22158,6 +22160,9 @@
   var DestroyManagers = function DestroyManagers(fromScene) {
     this.waitEventManager.destroy();
     this.waitEventManager = undefined;
+
+    // Destroy layerManager at last
+    delete this.gameObjectManagers.layer;
     for (var name in this.gameObjectManagers) {
       this.gameObjectManagers[name].destroy(fromScene);
       delete this.gameObjectManagers[name];
