@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import GetFirstRenderCamera from '../../utils/camera/GetFirstRenderCamera.js';
 
 class FullWindow extends ComponentBase {
     constructor(gameObject, config) {
@@ -31,7 +32,7 @@ class FullWindow extends ComponentBase {
         var gameObject = this.parent;
 
         var gameSize = scene.sys.scale.gameSize;
-        var camera = scene.sys.cameras.main;
+        var camera = GetFirstRenderCamera(scene, gameObject);
 
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
