@@ -394,10 +394,13 @@
     }, {
       key: "resize",
       value: function resize() {
+        var camera = this.getTargetCamera();
+        if (!camera) {
+          return;
+        }
         var scene = this.scene;
         var gameObject = this.parent;
         var gameSize = scene.sys.scale.gameSize;
-        var camera = this.getTargetCamera();
         var gameWidth = gameSize.width,
           gameHeight = gameSize.height,
           scale = 1 / camera.zoom;

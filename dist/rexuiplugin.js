@@ -28706,6 +28706,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
+      _this._cameraFilter = 0;
       _this.privateRenderLayer = undefined;
       if (children) {
         _this.add(children);
@@ -33030,10 +33031,13 @@
     }, {
       key: "resize",
       value: function resize() {
+        var camera = this.getTargetCamera();
+        if (!camera) {
+          return;
+        }
         var scene = this.scene;
         var gameObject = this.parent;
         var gameSize = scene.sys.scale.gameSize;
-        var camera = this.getTargetCamera();
         var gameWidth = gameSize.width,
           gameHeight = gameSize.height,
           scale = 1 / camera.zoom;

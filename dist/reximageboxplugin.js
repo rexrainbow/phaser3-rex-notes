@@ -2170,6 +2170,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
+      _this._cameraFilter = 0;
       _this.privateRenderLayer = undefined;
       if (children) {
         _this.add(children);
