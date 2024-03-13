@@ -4,8 +4,6 @@ import SortGameObjectsByDepth from '../system/SortGameObjectsByDepth.js';
 import IsGameObject from '../system/IsGameObject.js';
 
 var GetValue = Phaser.Utils.Objects.GetValue;
-var DynamicTexture = Phaser.Textures.DynamicTexture;
-var UUID = Phaser.Utils.String.UUID;
 
 var Snapshot = function (config) {
     if (!config) {
@@ -14,6 +12,7 @@ var Snapshot = function (config) {
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
+    var saveTexture = config.saveTexture;
     var x = GetValue(config, 'x', undefined);
     var y = GetValue(config, 'y', undefined);
     var width = GetValue(config, 'width', undefined);
@@ -21,6 +20,7 @@ var Snapshot = function (config) {
     var originX = GetValue(config, 'originX', 0);
     var originY = GetValue(config, 'originY', 0);
     var padding = GetValue(config, 'padding', 0);
+
     var scrollX, scrollY;
     if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
         // Union bounds of gameObjects
@@ -53,7 +53,6 @@ var Snapshot = function (config) {
 
     var scene = gameObjects[0].scene;
     var textureManager = scene.sys.textures;
-    var saveTexture = config.saveTexture;
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {

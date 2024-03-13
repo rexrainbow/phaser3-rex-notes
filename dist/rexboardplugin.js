@@ -13418,14 +13418,13 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var DynamicTexture = Phaser.Textures.DynamicTexture;
-  var UUID = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
+    var saveTexture = config.saveTexture;
     var x = GetValue$2(config, 'x', undefined);
     var y = GetValue$2(config, 'y', undefined);
     var width = GetValue$2(config, 'width', undefined);
@@ -13462,10 +13461,11 @@
     width += padding * 2;
     height += padding * 2;
     var scene = gameObjects[0].scene;
+    var textureManager = scene.sys.textures;
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
+      renderTexture = textureManager.addDynamicTexture(saveTexture, width, height);
     }
 
     // Return a renderTexture
@@ -13487,24 +13487,12 @@
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
     renderTexture.draw(gameObjects);
 
-    // Save render result to texture    
-    var saveTexture = config.saveTexture;
+    // Save render result to texture
     if (saveTexture) {
       if (IsGameObject(renderTexture)) {
         renderTexture.saveTexture(saveTexture);
-      } else {
-        var dynamicTexture = renderTexture;
-        var textureManager = dynamicTexture.manager;
-        if (textureManager.exists(dynamicTexture.key)) {
-          // Rename texture
-          textureManager.renameTexture(dynamicTexture.key, key);
-        } else {
-          // Add texture to texture manager
-          dynamicTexture.key = key;
-          textureManager.list[key] = dynamicTexture;
-          textureManager.emit('addtexture', key, dynamicTexture);
-          textureManager.emit("addtexture-".concat(key), dynamicTexture);
-        }
+      } else if (renderTexture.key !== saveTexture) {
+        textureManager.renameTexture(renderTexture.key, key);
       }
     }
     return renderTexture;

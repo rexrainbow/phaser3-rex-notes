@@ -3397,7 +3397,7 @@
   CheckP3Version();
   var CanvasPool$4 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$3 = Phaser.GameObjects.GameObject;
-  var UUID$6 = Phaser.Utils.String.UUID;
+  var UUID$5 = Phaser.Utils.String.UUID;
   var Canvas$1 = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
     function Canvas(scene, x, y, width, height) {
@@ -3434,7 +3434,7 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this._textureKey = UUID$6();
+      _this._textureKey = UUID$5();
       _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
@@ -6416,7 +6416,7 @@
   var GetValue$3s = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM$1 = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
-  var UUID$5 = Phaser.Utils.String.UUID;
+  var UUID$4 = Phaser.Utils.String.UUID;
 
   // Reuse objects can increase performance
   var SharedPensPools = null;
@@ -6488,7 +6488,7 @@
       _this._crop = _this.resetCropObject();
 
       //  Create a Texture for this Text object
-      _this._textureKey = UUID$5();
+      _this._textureKey = UUID$4();
       _this.texture = scene.sys.textures.addCanvas(_this._textureKey, _this.canvas);
 
       //  Get the frame
@@ -28522,14 +28522,13 @@
   };
 
   var GetValue$2C = Phaser.Utils.Objects.GetValue;
-  var DynamicTexture$1 = Phaser.Textures.DynamicTexture;
-  var UUID$4 = Phaser.Utils.String.UUID;
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
+    var saveTexture = config.saveTexture;
     var x = GetValue$2C(config, 'x', undefined);
     var y = GetValue$2C(config, 'y', undefined);
     var width = GetValue$2C(config, 'width', undefined);
@@ -28566,10 +28565,11 @@
     width += padding * 2;
     height += padding * 2;
     var scene = gameObjects[0].scene;
+    var textureManager = scene.sys.textures;
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture$1(scene.sys.textures, UUID$4(), width, height);
+      renderTexture = textureManager.addDynamicTexture(saveTexture, width, height);
     }
 
     // Return a renderTexture
@@ -28591,24 +28591,12 @@
     gameObjects = SortGameObjectsByDepth(Clone$2(gameObjects));
     renderTexture.draw(gameObjects);
 
-    // Save render result to texture    
-    var saveTexture = config.saveTexture;
+    // Save render result to texture
     if (saveTexture) {
       if (IsGameObject(renderTexture)) {
         renderTexture.saveTexture(saveTexture);
-      } else {
-        var dynamicTexture = renderTexture;
-        var textureManager = dynamicTexture.manager;
-        if (textureManager.exists(dynamicTexture.key)) {
-          // Rename texture
-          textureManager.renameTexture(dynamicTexture.key, key);
-        } else {
-          // Add texture to texture manager
-          dynamicTexture.key = key;
-          textureManager.list[key] = dynamicTexture;
-          textureManager.emit('addtexture', key, dynamicTexture);
-          textureManager.emit("addtexture-".concat(key), dynamicTexture);
-        }
+      } else if (renderTexture.key !== saveTexture) {
+        textureManager.renameTexture(renderTexture.key, key);
       }
     }
     return renderTexture;
