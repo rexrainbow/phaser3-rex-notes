@@ -274,14 +274,24 @@ declare class ContainerLite extends Base {
     ): this;
 
     bringToTop(): this;
+    bringMeToTop():this;
+
+    sendToBack(): this;
+    sendMeToBack(): this;
 
     moveDepthBelow(
         gameObject: Phaser.GameObjects.GameObject
     ): this;
-
+    moveMyDepthBelow(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
+    
     moveDepthAbove(
         gameObject: Phaser.GameObjects.GameObject
     ): this;
+    moveMyDepthAbove(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;    
 
     bringChildToTop(
         gameObject: Phaser.GameObjects.GameObject

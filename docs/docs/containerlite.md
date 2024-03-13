@@ -545,7 +545,13 @@ scene.tweens.add(tweenConfig);
     ```
 - Bring this container and its children to top
     ```javascript
-    container.bringToTop();
+    container.bringMeToTop();
+    // container.bringToTop();
+    ```
+- Send this container and its children to back
+    ```javascript
+    container.sendMeToBack();
+    // container.sendToBack();
     ```
 - Swap depth with another container
     ```javascript
@@ -557,11 +563,13 @@ scene.tweens.add(tweenConfig);
     ```
 - Move game object below this container and all children
     ```javascript
-    container.moveDepthBelow(gameObject);
+    container.moveMyDepthBelow(gameObject);
+    // container.moveDepthBelow(gameObject);
     ```
 - Move game object above this container and all children
     ```javascript
-    container.moveDepthAbove(gameObject);
+    container.moveMyDepthAbove(gameObject);
+    // container.moveDepthAbove(gameObject);
     ```
 - Bring a child of container to top of this container
     ```javascript

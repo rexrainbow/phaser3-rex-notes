@@ -45,6 +45,27 @@ export default {
         return this;
     },
 
+    bringMeToTop() {
+        return this.bringToTop();
+    },
+
+    sendToBack() {
+        var displayList = this.displayList;
+        var children = this.getAllChildren([this]);
+        SortGameObjectsByDepth(children, true);
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            var child = children[i];
+            if (displayList.exists(child)) {
+                displayList.sendToBack(child);
+            }
+        }
+        return this;
+    },
+
+    sendMeToBack() {
+        return this.sendToBack();
+    },
+
     moveDepthBelow(gameObject) {
         var displayList = this.displayList;
         if (gameObject.displayList !== displayList) {
@@ -64,6 +85,10 @@ export default {
         return this;
     },
 
+    moveMyDepthBelow(gameObject) {
+        return this.moveDepthBelow(gameObject);
+    },
+
     moveDepthAbove(gameObject) {
         var displayList = this.displayList;
         if (gameObject.displayList !== displayList) {
@@ -81,6 +106,10 @@ export default {
             }
         }
         return this;
+    },
+
+    moveMyDepthAbove(gameObject) {
+        return this.moveDepthAbove(gameObject);
     },
 
     bringChildToTop(child) {
