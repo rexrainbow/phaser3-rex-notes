@@ -1167,6 +1167,9 @@
     },
     bringToTop: function bringToTop() {
       var displayList = this.displayList;
+      if (!displayList) {
+        return this;
+      }
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
       for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -1177,8 +1180,32 @@
       }
       return this;
     },
+    bringMeToTop: function bringMeToTop() {
+      return this.bringToTop();
+    },
+    sendToBack: function sendToBack() {
+      var displayList = this.displayList;
+      if (!displayList) {
+        return this;
+      }
+      var children = this.getAllChildren([this]);
+      SortGameObjectsByDepth(children, true);
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+        if (displayList.exists(child)) {
+          displayList.sendToBack(child);
+        }
+      }
+      return this;
+    },
+    sendMeToBack: function sendMeToBack() {
+      return this.sendToBack();
+    },
     moveDepthBelow: function moveDepthBelow(gameObject) {
       var displayList = this.displayList;
+      if (!displayList) {
+        return this;
+      }
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
@@ -1194,8 +1221,14 @@
       }
       return this;
     },
+    moveMyDepthBelow: function moveMyDepthBelow(gameObject) {
+      return this.moveDepthBelow(gameObject);
+    },
     moveDepthAbove: function moveDepthAbove(gameObject) {
       var displayList = this.displayList;
+      if (!displayList) {
+        return this;
+      }
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
@@ -1210,6 +1243,9 @@
         }
       }
       return this;
+    },
+    moveMyDepthAbove: function moveMyDepthAbove(gameObject) {
+      return this.moveDepthAbove(gameObject);
     },
     bringChildToTop: function bringChildToTop(child) {
       var gameObjects;

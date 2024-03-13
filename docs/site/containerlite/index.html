@@ -10644,7 +10644,12 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Bring this container and its children to top
-    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringMeToTop</span><span class="p">();</span>
+<span class="c1">// container.bringToTop();</span>
+</code></pre></div></li>
+<li>Send this container and its children to back
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sendMeToBack</span><span class="p">();</span>
+<span class="c1">// container.sendToBack();</span>
 </code></pre></div></li>
 <li>Swap depth with another container
     <div class="highlight"><pre><span></span><code><span class="nx">containerA</span><span class="p">.</span><span class="nx">swapDepth</span><span class="p">(</span><span class="nx">containerB</span><span class="p">);</span>
@@ -10653,10 +10658,12 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">incDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Move game object below this container and all children
-    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDepthBelow</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveMyDepthBelow</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// container.moveDepthBelow(gameObject);</span>
 </code></pre></div></li>
 <li>Move game object above this container and all children
-    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDepthAbove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveMyDepthAbove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// container.moveDepthAbove(gameObject);</span>
 </code></pre></div></li>
 <li>Bring a child of container to top of this container
     <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringChildToTop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
