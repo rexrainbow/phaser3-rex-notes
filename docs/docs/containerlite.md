@@ -627,7 +627,7 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#render-layer
     - `padding` : 
         - `0` : No extra padding space. Default value.
         - A number : Add extra padding space around this render-texture.
-- Draw all visible children on a texture
+- Draw all visible children on a dynamic-texture
     ```javascript
     container.snapshot({
         padding: 0,

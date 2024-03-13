@@ -52,10 +52,12 @@ var Snapshot = function (config) {
     height += (padding * 2);
 
     var scene = gameObjects[0].scene;
+    var textureManager = scene.sys.textures;
+    var saveTexture = config.saveTexture;
 
     // Snapshot on dynamicTexture directly
     if (saveTexture && !renderTexture) {
-        renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
+        renderTexture = textureManager.addDynamicTexture(saveTexture, width, height);
     }
 
     // Return a renderTexture
@@ -81,24 +83,12 @@ var Snapshot = function (config) {
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
     renderTexture.draw(gameObjects);
 
-    // Save render result to texture    
-    var saveTexture = config.saveTexture;
+    // Save render result to texture
     if (saveTexture) {
         if (IsGameObject(renderTexture)) {
             renderTexture.saveTexture(saveTexture);
-        } else {
-            var dynamicTexture = renderTexture;
-            var textureManager = dynamicTexture.manager;
-            if (textureManager.exists(dynamicTexture.key)) {
-                // Rename texture
-                textureManager.renameTexture(dynamicTexture.key, key);
-            } else {
-                // Add texture to texture manager
-                dynamicTexture.key = key;
-                textureManager.list[key] = dynamicTexture;
-                textureManager.emit('addtexture', key, dynamicTexture);
-                textureManager.emit(`addtexture-${key}`, dynamicTexture);
-            }
+        } else if (renderTexture.key !== saveTexture) {
+            textureManager.renameTexture(renderTexture.key, key);
         }
     }
 

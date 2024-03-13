@@ -1212,6 +1212,7 @@ sizer.pin(gameObject);
 sizer.unpin(child);
 // sizer.unpin(child, destroyChild);
 ```
+
 - `destroyChild` : Set true to destroy child. Default is `false`.
 
 !!! note
