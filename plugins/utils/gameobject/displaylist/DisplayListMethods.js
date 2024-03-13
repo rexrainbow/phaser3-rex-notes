@@ -1,5 +1,5 @@
 export default {
-    bringToTop() {
+    bringMeToTop() {
         var displayList = this.displayList;
         if (!displayList) {
             return this;
@@ -9,11 +9,7 @@ export default {
         return this;
     },
 
-    bringMeToTop() {
-        return this.bringToTop();
-    },
-
-    sendToBack() {
+    sendMeToBack() {
         var displayList = this.displayList;
         if (!displayList) {
             return this;
@@ -23,11 +19,7 @@ export default {
         return this;
     },
 
-    sendMeToBack() {
-        return this.sendToBack();
-    },
-
-    moveDepthBelow(gameObject) {
+    moveMyDepthBelow(gameObject) {
         var displayList = this.displayList;
         if (!displayList) {
             return this;
@@ -41,11 +33,7 @@ export default {
         return this;
     },
 
-    moveMyDepthBelow(gameObject) {
-        return this.moveDepthBelow(gameObject);
-    },
-
-    moveDepthAbove(gameObject) {
+    moveMyDepthAbove(gameObject) {
         var displayList = this.displayList;
         if (!displayList) {
             return this;
@@ -58,8 +46,4 @@ export default {
         displayList.moveAbove(gameObject, this);
         return this;
     },
-
-    moveMyDepthAbove(gameObject) {
-        return this;
-    }
 }

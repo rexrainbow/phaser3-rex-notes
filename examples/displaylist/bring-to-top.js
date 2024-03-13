@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.circle(400, 300, 30, 0xff0000);
         var bg = this.add.image(400, 300, 'classroom');
 
-        gameObject.bringToTop();
+        gameObject.bringMeToTop();
     }
 }
 
