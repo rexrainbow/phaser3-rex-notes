@@ -124,6 +124,7 @@ import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import { OpenFileChooser } from './filechooser/FileChooser';
+import LayerManager from './layermanager/LayerManager';
 
 type FontSizeResize = typeof SetFontSizeToFitWidth;
 
@@ -255,4 +256,5 @@ export {
     SetChildrenInteractive,
     RequestDrag,
     OpenFileChooser,
+    LayerManager,
 }

@@ -692,6 +692,18 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     }
     ```
 
+### Layer manager
+
+[Layer manager](layermanager.md) : A dictionary to store [Layer game objects](layer.md).
+
+```javascript
+var layerManager = scene.rexUI.add.layerManager({
+    // layers: ['layer0', 'layer1', ...]
+});
+
+// layerManager.addToLayer(name, gameObject);
+```
+
 ### Touch input
 
 1. [Click](button.md): Fires 'click' event when touch releasd after pressed.

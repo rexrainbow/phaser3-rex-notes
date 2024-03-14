@@ -125,6 +125,7 @@ import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 import { OpenFileChooser } from './filechooser/FileChooser.js';
+import LayerManager from './layermanager/LayerManager.js';
 
 const FontSizeResize = SetFontSizeToFitWidth;
 
@@ -256,4 +257,5 @@ export {
     SetChildrenInteractive,
     RequestDrag,
     OpenFileChooser,
+    LayerManager,
 }

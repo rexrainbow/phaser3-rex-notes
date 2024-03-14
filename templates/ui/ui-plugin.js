@@ -104,6 +104,7 @@ import AnchorFactory from './anchor/Factory.js';
 import TextTypingFactory from './texttyping/Factory.js';
 import TextPageFactory from './textpage/Factory.js';
 import TextEditFactory from './textedit/Factory.js';
+import LayerManagerFactory from './layermanager/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import RemoveFromParent from './utils/RemoveFromParent.js';
