@@ -5,6 +5,7 @@ export default {
 
     call(methodName, ...parameters) {
         if (!this.hasMethod(methodName)) {
+            console.warn(`[GameObjectManager] Game object '${this.name}' does not have method '${methodName}'`)
             return this;
         }
 

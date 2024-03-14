@@ -268,6 +268,7 @@
     },
     call: function call(methodName) {
       if (!this.hasMethod(methodName)) {
+        console.warn("[GameObjectManager] Game object '".concat(this.name, "' does not have method '").concat(methodName, "'"));
         return this;
       }
       var gameObject = this.gameObject;
