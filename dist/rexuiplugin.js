@@ -64687,6 +64687,11 @@
   });
   SetValue(window, 'RexPlugins.UI.TextEdit', TextEdit);
 
+  ObjectFactory.register('layerManager', function (config) {
+    return new LayerManager(this.scene, config);
+  });
+  SetValue(window, 'RexPlugins.UI.LayerManager', LayerManager);
+
   var MaxTestCount = 65535;
   var FontSizeFit = function FontSizeFit(textObject, width, height) {
     if (width == null) {
