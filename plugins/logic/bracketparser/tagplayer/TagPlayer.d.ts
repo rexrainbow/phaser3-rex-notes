@@ -47,7 +47,9 @@ declare namespace TagPlayer {
         viewportCoordinate?: boolean | {
             enable?: boolean,
             viewport?: Phaser.Geom.Rectangle
-        }
+        },
+
+        defaultLayer?: string,
     }
 
     type NextPageInputTypes = string | ((callback: Function) => void) | null;

@@ -50,7 +50,9 @@ declare namespace TextPlayer {
         viewportCoordinate?: boolean | {
             enable?: boolean,
             viewport?: Phaser.Geom.Rectangle
-        }
+        },
+
+        defaultLayer?: string,
     }
 
     type NextPageInputTypes = string | ((callback: Function) => void) | null;
