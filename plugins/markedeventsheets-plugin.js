@@ -1,5 +1,6 @@
 import MarkedEventSheets from './markedeventsheets.js';
 import CommandExecutor from './commandexecutor.js';
+import CSV2MD from './logic/eventsheets/markedeventsheets/CSV2MD.js';
 
 class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -17,6 +18,10 @@ class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
 
     addCommandExecutor(scene, config) {
         return new CommandExecutor(scene, config);
+    }
+
+    csv2md(csvString) {
+        return CSV2MD(csvString);
     }
 }
 
