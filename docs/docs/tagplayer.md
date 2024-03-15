@@ -101,6 +101,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     }
     // texts: false,
     
+    layers: undefined, // []
+
     sounds: {
         bgm: {
             initial: undefinied,
@@ -193,6 +195,9 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `texts.symbols` : Convert string value to number value when Set or Ease property of game object.    
         - A plain object contains string key and number value.
     - `false`, `null` : No text manager
+- `layers` : 
+    - `undefined` : Don't create [layerManger](layermanager.md).
+    - Array of string : Pre-create [layer](layer.md) game objects in [layerManger](layermanager.md).
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial`, `sounds.bgm2.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
@@ -237,6 +242,8 @@ tagPlayer.addGameObjectManager({
     // viewportCoordinate: false,
     // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },
 
+    // defaultLayer: layerName,
+
     // symbols: undefined,  // { key:value },
 })
 ```
@@ -267,6 +274,7 @@ tagPlayer.addGameObjectManager({
         - `viewport` : 
             - `undefined` : Rectangle of display area under main camera of current scene. Default value.
             - A [rectangle](geom-rectangle.md)
+- `defaultLayer` : Put this game object into layer inside of layerManager.
 - `symbols` : Convert string value to number value when Set or Ease property of game object.    
     - A plain object contains string key and number value.
 

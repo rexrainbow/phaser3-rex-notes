@@ -83,9 +83,11 @@ class Demo extends Phaser.Scene {
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
             sprites: false,
             texts: false,
+            layers: ['bg', 'char']
         })
             .addGameObjectManager({
                 name: 'char',
+                defaultLayer: 'char',
                 createGameObject: CreateGameObject
             })
 

@@ -1,3 +1,4 @@
+import Clone from '../../../../../utils/object/Clone.js';
 import GameObjectManagerMethods from '../../../../../utils/managers/GameObjectManagerMethods.js';
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
@@ -14,12 +15,25 @@ const AddGameObjectManager = GameObjectManagerMethods.addGameObjectManager;
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {
-        if (config === undefined) {
-            config = {};
-        }
+        config = (config) ? Clone(config) : {};
+
         var name = config.name;
         if (!name) {
-            console.warn(`Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method`);
+            console.warn(`[TextPlayer] Parameter 'name' is required in addGameObjectManager(config) method`);
+        }
+
+        var defaultLayer = config.defaultLayer;
+        var createGameObject = config.createGameObject;
+        var layerManager = this.layerManager;
+        config.createGameObject = function (scene, ...args) {
+            var gameObject = createGameObject.call(this, scene, ...args);
+            // this: config.createGameObjectScope
+
+            if (defaultLayer && layerManager) {
+                layerManager.addToLayer(defaultLayer, gameObject);
+            }
+
+            return gameObject;
         }
 
         AddGameObjectManager.call(this, config, GameObjectManagerClass);

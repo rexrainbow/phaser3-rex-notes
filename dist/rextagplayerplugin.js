@@ -3136,7 +3136,7 @@
       value: function addToLayer(name, gameObject) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (gameObject.isRexContainerLite) {
@@ -3151,7 +3151,7 @@
       value: function removeFromLayer(name, gameObject, addToScene) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (addToScene === undefined) {
@@ -7781,8 +7781,23 @@
       }
       var name = config.name;
       if (!name) {
-        console.warn("Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method");
+        console.warn("[TagPlayer] Parameter 'name' is required in addGameObjectManager(config) method");
       }
+      var defaultLayer = config.defaultLayer;
+      var createGameObject = config.createGameObject;
+      var layerManager = this.layerManager;
+      config.createGameObject = function (scene) {
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+        var gameObject = createGameObject.call.apply(createGameObject, [this, scene].concat(args));
+        // this: config.createGameObjectScope
+
+        if (defaultLayer && layerManager) {
+          layerManager.addToLayer(defaultLayer, gameObject);
+        }
+        return gameObject;
+      };
       AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
       // Register parse callbacks

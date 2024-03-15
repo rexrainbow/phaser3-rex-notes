@@ -10007,6 +10007,8 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1">// texts: false,</span>
 
+<span class="w">    </span><span class="nx">layers</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="c1">// []</span>
+
 <span class="w">    </span><span class="nx">sounds</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">bgm</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">initial</span><span class="o">:</span><span class="w"> </span><span class="nx">undefinied</span><span class="p">,</span>
@@ -10140,6 +10142,11 @@
 <li><code>false</code>, <code>null</code> : No text manager</li>
 </ul>
 </li>
+<li><code>layers</code> : <ul>
+<li><code>undefined</code> : Don't create <a href="../layermanager/">layerManger</a>.</li>
+<li>Array of string : Pre-create <a href="../layer/">layer</a> game objects in <a href="../layermanager/">layerManger</a>.</li>
+</ul>
+</li>
 <li><code>sounds</code> : Configuration of sound effect, or background music.<ul>
 <li><code>sounds.bgm.initial</code>, <code>sounds.bgm2.initial</code> : Initial music instance created by <code>scene.sound.add(key)</code> before starting playing content.<ul>
 <li><code>undefined</code> : No initial music instance, default value.</li>
@@ -10190,6 +10197,8 @@
 <span class="w">    </span><span class="c1">// viewportCoordinate: false,</span>
 <span class="w">    </span><span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },</span>
 
+<span class="w">    </span><span class="c1">// defaultLayer: layerName,</span>
+
 <span class="w">    </span><span class="c1">// symbols: undefined,  // { key:value },</span>
 <span class="p">})</span>
 </code></pre></div>
@@ -10233,6 +10242,7 @@
 </li>
 </ul>
 </li>
+<li><code>defaultLayer</code> : Put this game object into layer inside of layerManager.</li>
 <li><code>symbols</code> : Convert string value to number value when Set or Ease property of game object.    <ul>
 <li>A plain object contains string key and number value.</li>
 </ul>

@@ -19597,7 +19597,7 @@
       value: function addToLayer(name, gameObject) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (gameObject.isRexContainerLite) {
@@ -19612,7 +19612,7 @@
       value: function removeFromLayer(name, gameObject, addToScene) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (addToScene === undefined) {

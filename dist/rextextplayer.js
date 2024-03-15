@@ -3227,7 +3227,7 @@
       value: function addToLayer(name, gameObject) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (gameObject.isRexContainerLite) {
@@ -3242,7 +3242,7 @@
       value: function removeFromLayer(name, gameObject, addToScene) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (addToScene === undefined) {
@@ -13057,6 +13057,32 @@
     this.addGameObjectManager(config, SpriteManager);
   };
 
+  /**
+   * Shallow Object Clone. Will not out nested objects.
+   * @param {object} obj JSON object
+   * @param {object} ret JSON object to return, set null to return a new object
+   * @returns {object} this object
+   */
+  var Clone = function Clone(obj, out) {
+    var objIsArray = Array.isArray(obj);
+    if (out === undefined) {
+      out = objIsArray ? [] : {};
+    } else {
+      Clear(out);
+    }
+    if (objIsArray) {
+      out.length = obj.length;
+      for (var i = 0, cnt = obj.length; i < cnt; i++) {
+        out[i] = obj[i];
+      }
+    } else {
+      for (var key in obj) {
+        out[key] = obj[key];
+      }
+    }
+    return out;
+  };
+
   var IsAddGameObjectTag = function IsAddGameObjectTag(tags, goType) {
     // goType.name
     return tags.length === 2 && tags[0] === goType;
@@ -13320,13 +13346,26 @@
   var AddGameObjectManager = GameObjectManagerMethods$1.addGameObjectManager;
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      if (config === undefined) {
-        config = {};
-      }
+      config = config ? Clone(config) : {};
       var name = config.name;
       if (!name) {
-        console.warn("Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method");
+        console.warn("[TextPlayer] Parameter 'name' is required in addGameObjectManager(config) method");
       }
+      var defaultLayer = config.defaultLayer;
+      var createGameObject = config.createGameObject;
+      var layerManager = this.layerManager;
+      config.createGameObject = function (scene) {
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+        var gameObject = createGameObject.call.apply(createGameObject, [this, scene].concat(args));
+        // this: config.createGameObjectScope
+
+        if (defaultLayer && layerManager) {
+          layerManager.addToLayer(defaultLayer, gameObject);
+        }
+        return gameObject;
+      };
       AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
       // Register parse callbacks

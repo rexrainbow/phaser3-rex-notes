@@ -109,12 +109,15 @@ class Demo extends Phaser.Scene {
                 },
 
                 clickTarget: this,
-                nextPageInput: 'click'
+                nextPageInput: 'click',
+
+                layers: ['bg', 'char']
 
             }
         )
             .addGameObjectManager({
                 name: 'char',
+                defaultLayer: 'char',
                 createGameObject: CreateGameObject
             })
             .playPromise(content)

@@ -14403,7 +14403,7 @@
       value: function addToLayer(name, gameObject) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (gameObject.isRexContainerLite) {
@@ -14418,7 +14418,7 @@
       value: function removeFromLayer(name, gameObject, addToScene) {
         var layer = this.getGO(name);
         if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
+          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
           return;
         }
         if (addToScene === undefined) {
@@ -19783,13 +19783,26 @@
   var AddGameObjectManager = GameObjectManagerMethods$1.addGameObjectManager;
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      if (config === undefined) {
-        config = {};
-      }
+      config = config ? Clone$2(config) : {};
       var name = config.name;
       if (!name) {
-        console.warn("Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method");
+        console.warn("[TextPlayer] Parameter 'name' is required in addGameObjectManager(config) method");
       }
+      var defaultLayer = config.defaultLayer;
+      var createGameObject = config.createGameObject;
+      var layerManager = this.layerManager;
+      config.createGameObject = function (scene) {
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+        var gameObject = createGameObject.call.apply(createGameObject, [this, scene].concat(args));
+        // this: config.createGameObjectScope
+
+        if (defaultLayer && layerManager) {
+          layerManager.addToLayer(defaultLayer, gameObject);
+        }
+        return gameObject;
+      };
       AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
       // Register parse callbacks

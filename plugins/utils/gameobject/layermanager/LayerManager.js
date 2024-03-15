@@ -64,7 +64,7 @@ class LayerManager extends GOManager {
     addToLayer(name, gameObject) {
         var layer = this.getGO(name);
         if (!layer) {
-            console.warn(`Can't get layer "${name}"`);
+            console.warn(`[LayerManager] Can't get layer "${name}"`);
             return;
         }
 
@@ -80,7 +80,7 @@ class LayerManager extends GOManager {
     removeFromLayer(name, gameObject, addToScene) {
         var layer = this.getGO(name);
         if (!layer) {
-            console.warn(`Can't get layer "${name}"`);
+            console.warn(`[LayerManager] Can't get layer "${name}"`);
             return;
         }
 

@@ -19,7 +19,21 @@ export default {
         }
         var name = config.name;
         if (!name) {
-            console.warn(`Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method`);
+            console.warn(`[TagPlayer] Parameter 'name' is required in addGameObjectManager(config) method`);
+        }
+
+        var defaultLayer = config.defaultLayer;
+        var createGameObject = config.createGameObject;
+        var layerManager = this.layerManager;
+        config.createGameObject = function (scene, ...args) {
+            var gameObject = createGameObject.call(this, scene, ...args);
+            // this: config.createGameObjectScope
+
+            if (defaultLayer && layerManager) {
+                layerManager.addToLayer(defaultLayer, gameObject);
+            }
+
+            return gameObject;
         }
 
         AddGameObjectManager.call(this, config, GameObjectManagerClass);
