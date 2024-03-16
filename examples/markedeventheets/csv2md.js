@@ -1,6 +1,7 @@
 import { MarkedEventSheets, CSV2MD } from '../../plugins/markedeventsheets';
 import EventEmitter from 'eventemitter3';
 
+// https://docs.google.com/spreadsheets/d/e/2PACX-1vSd670Y0lt9XpWk2HJr1phxD9mGjGXEGjpO_IRoq5KdxG0WQ88flNTRu7VmxnA3xvnFvP4QvcZoutkh/pubhtml
 var csv = `\
 #,Title
 ##,[Condition]

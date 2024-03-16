@@ -814,11 +814,11 @@ Emit these events from eventSheetManager
     });
     ```
     - Resume (run next command)
-         ```javascript
-            eventSheetManager.on('resume.input', function(){ 
-        
-            });
-            ```
+        ```javascript
+        eventSheetManager.on('resume.input', function(){ 
+
+        });
+        ```
 - Wait click only
     ```javascript
     eventSheetManager.on('pause.click', function(){ 

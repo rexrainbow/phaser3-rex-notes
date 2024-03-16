@@ -1,7 +1,7 @@
-import Base from '../../plugins/transitionimage.js';
+import TransitionImage from '../../plugins/transitionimage.js';
 import ModeCallbacks from './transitionmodes/Modes.js';
 
-class TransitionImagePack extends Base {
+class TransitionImagePack extends TransitionImage {
     constructor(scene, x, y, texture, frame, config) {
         super(scene, x, y, texture, frame, config);
 
