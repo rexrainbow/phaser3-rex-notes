@@ -16735,21 +16735,29 @@
         default:
           var names = name.split('.');
           if (names.length === 2) {
+            // GONAME.destroy, GONAME.PROPNAME, GONAME.DATAKEY, GONAME.EVTNAME
+
             var gameObjectName = names[0];
             var propName = names[1];
             var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
             if (!gameObjectManager) {
               continue;
             }
+
+            // GONAME.destroy
             if (propName === 'destroy') {
               return this.waitGameObjectDestroy(undefined, gameObjectName);
             }
+
+            // GONAME.PROPNAME (tween.complete)
             var value = gameObjectManager.getProperty(gameObjectName, propName);
             if (typeof value === 'number') {
               hasAnyWaitEvent = true;
               this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
               continue;
             }
+
+            // GONAME.DATAKEY (boolean)
             var dataKey = propName;
             var matchFalseFlag = dataKey.startsWith('!');
             if (matchFalseFlag) {
@@ -16758,8 +16766,13 @@
             if (gameObjectManager.hasData(gameObjectName, propName)) {
               hasAnyWaitEvent = true;
               this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+              continue;
             }
-          }
+
+            // GONAME.EVTNAME
+            this.waitEvent(gameObject, propName);
+            continue;
+          } else if (names.length === 1) ;
           break;
       }
     }
@@ -27321,7 +27334,8 @@
     .updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
     .updateChildScrollFactor(gameObject) // Apply parent's scroll factor to child
-    .updateChildMask(gameObject); // Apply parent's mask to child
+    .updateChildMask(gameObject) // Apply parent's mask to child
+    .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
     this.addToParentContainer(gameObject);
@@ -39328,8 +39342,8 @@
 
   var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode, AddPixellateMode, AddDissolveMode, AddRevealModes];
 
-  var TransitionImagePack = /*#__PURE__*/function (_Base) {
-    _inherits(TransitionImagePack, _Base);
+  var TransitionImagePack = /*#__PURE__*/function (_TransitionImage) {
+    _inherits(TransitionImagePack, _TransitionImage);
     function TransitionImagePack(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, TransitionImagePack);

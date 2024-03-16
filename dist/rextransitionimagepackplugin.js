@@ -449,7 +449,8 @@
     .updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
     .updateChildScrollFactor(gameObject) // Apply parent's scroll factor to child
-    .updateChildMask(gameObject); // Apply parent's mask to child
+    .updateChildMask(gameObject) // Apply parent's mask to child
+    .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
     this.addToParentContainer(gameObject);
@@ -7798,8 +7799,8 @@
 
   var Modes = [AddSlideAwayModes, AddSlideModes, AddSliderModes, AddZoomModes, AddFadeModes, AddIrisModes, AddPieModes, AddWipeModes, AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode, AddPixellateMode, AddDissolveMode, AddRevealModes];
 
-  var TransitionImagePack = /*#__PURE__*/function (_Base) {
-    _inherits(TransitionImagePack, _Base);
+  var TransitionImagePack = /*#__PURE__*/function (_TransitionImage) {
+    _inherits(TransitionImagePack, _TransitionImage);
     function TransitionImagePack(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, TransitionImagePack);

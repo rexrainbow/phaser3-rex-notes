@@ -5533,21 +5533,29 @@
         default:
           var names = name.split('.');
           if (names.length === 2) {
+            // GONAME.destroy, GONAME.PROPNAME, GONAME.DATAKEY, GONAME.EVTNAME
+
             var gameObjectName = names[0];
             var propName = names[1];
             var gameObjectManager = this.parent.getGameObjectManager(undefined, gameObjectName);
             if (!gameObjectManager) {
               continue;
             }
+
+            // GONAME.destroy
             if (propName === 'destroy') {
               return this.waitGameObjectDestroy(undefined, gameObjectName);
             }
+
+            // GONAME.PROPNAME (tween.complete)
             var value = gameObjectManager.getProperty(gameObjectName, propName);
             if (typeof value === 'number') {
               hasAnyWaitEvent = true;
               this.waitGameObjectTweenComplete(undefined, gameObjectName, propName);
               continue;
             }
+
+            // GONAME.DATAKEY (boolean)
             var dataKey = propName;
             var matchFalseFlag = dataKey.startsWith('!');
             if (matchFalseFlag) {
@@ -5556,8 +5564,13 @@
             if (gameObjectManager.hasData(gameObjectName, propName)) {
               hasAnyWaitEvent = true;
               this.waitGameObjectDataFlag(undefined, gameObjectName, dataKey, !matchFalseFlag);
+              continue;
             }
-          }
+
+            // GONAME.EVTNAME
+            this.waitEvent(gameObject, propName);
+            continue;
+          } else if (names.length === 1) ;
           break;
       }
     }
