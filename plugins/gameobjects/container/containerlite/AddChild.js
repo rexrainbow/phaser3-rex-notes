@@ -15,7 +15,8 @@ var Add = function (gameObject, config) {
         .updateChildVisible(gameObject)        // Apply parent's visible to child
         .updateChildActive(gameObject)         // Apply parent's active to child
         .updateChildScrollFactor(gameObject)   // Apply parent's scroll factor to child
-        .updateChildMask(gameObject);          // Apply parent's mask to child
+        .updateChildMask(gameObject)           // Apply parent's mask to child
+        .updateCameraFilter(gameObject);       // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
 

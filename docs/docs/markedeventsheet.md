@@ -702,6 +702,10 @@ GOTYPE
 
 - Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `id`
 
+
+Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
+
+
 ##### Set properties of custom game object
 
 ```
