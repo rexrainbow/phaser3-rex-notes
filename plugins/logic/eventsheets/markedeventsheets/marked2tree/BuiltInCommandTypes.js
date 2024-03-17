@@ -13,6 +13,10 @@ export const HeadingCommand = [
     },
     { name: 'else' },
     {
+        name: 'else if',
+        pattern: new RegExp('else if\\s*(.*)', 'i')
+    },
+    {
         name: 'while',
         pattern: new RegExp('while\\s*(.*)', 'i')
     },
@@ -29,11 +33,11 @@ export const ActionCommandTypes = [
         name: 'next round',
         pattern: new RegExp('next\\s*(.*)\\s*round', 'i')
     },
-    { 
+    {
         name: 'activate',
         pattern: new RegExp('activate\\s*(.*)', 'i')
     },
-    { 
+    {
         name: 'deactivate',
         pattern: new RegExp('deactivate\\s*(.*)', 'i')
     },

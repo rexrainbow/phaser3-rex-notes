@@ -5,14 +5,15 @@ import GetConditionExpressionFromNode from './GetConditionExpression.js';
 import CreateActionSequence from './CreateActionSequence.js';
 import ExtraNumberExpression from './ExtraNumberExpression.js';
 
-var CreateParentNode = function (node, config) {
+var CreateParentNode = function (node, config, output) {
     if (Array.isArray(node)) {
         var nodes = node;
         if (nodes.length === 1) {
             return CreateParentNode(nodes[0], config);
 
         } else {
-            var sequence = new Sequence();
+            // Create sequence from node.children
+            var sequence = (output) ? output : new Sequence();
             var lastIfSelector;
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
                 var node = nodes[i];
@@ -25,6 +26,7 @@ var CreateParentNode = function (node, config) {
                         break;
 
                     case '[else]':
+                    case '[else if]':
                         if (lastIfSelector) {
                             lastIfSelector.insertChild(child, null, -1);
                         } else {
@@ -69,9 +71,10 @@ var CreateParentNode = function (node, config) {
                 return selector;
 
             case 'else':
+            case 'else if':
                 var ifDecorator = new If({
-                    title: '[else]',
-                    expression: 'true'
+                    title: `[${result.type}]`,
+                    expression: (result.type === 'else') ? 'true' : GetConditionExpression(result.match[1], node)
                 });
                 if (node.children.length > 0) {
                     ifDecorator.addChild(CreateParentNode(node.children, config));
@@ -119,7 +122,21 @@ var CreateParentNode = function (node, config) {
         }
 
     } else {
-        return CreateActionSequence(node, config);
+        var sequence;
+        if (node.children.length > 0) {
+            // A node has paragraphs and children
+            sequence = new Sequence();
+            // Create ActionSequence from paragraphs
+            sequence.addChild(CreateActionSequence(node, config));
+            // Append nodes from node.children
+            CreateParentNode(node.children, config, sequence);
+
+        } else {
+            // A node has paragraphs only
+            sequence = CreateActionSequence(node, config);
+
+        }
+        return sequence;
 
     }
 }

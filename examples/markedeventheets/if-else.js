@@ -37,17 +37,9 @@ var manager = new MarkedEventSheets({
 manager.addEventSheet(content);
 console.log(manager.dumpTrees())
 
-manager.
-    on('label.enter', function (title) {
-        console.log(`Enter label '${title}'`)
-    })
-    .on('label.exit', function (title) {
-        console.log(`Exit label '${title}'`)
-    })
-
 manager
     .setData('name', 'rex')
-    .setData('coin', 1)
+    .setData('coin', 8)
     .setData('hp', 4)
     .start()
 
