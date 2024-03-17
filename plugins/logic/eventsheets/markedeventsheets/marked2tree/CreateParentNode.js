@@ -18,6 +18,10 @@ var CreateParentNode = function (node, config, output) {
             for (var i = 0, cnt = nodes.length; i < cnt; i++) {
                 var node = nodes[i];
                 var child = CreateParentNode(node, config);
+                if (!child) {
+                    continue;
+                }
+
                 // Construct if-branch selector
                 switch (child.title) {
                     case '[if]':
@@ -126,14 +130,20 @@ var CreateParentNode = function (node, config, output) {
         if (node.children.length > 0) {
             // A node has paragraphs and children
             sequence = new Sequence();
-            // Create ActionSequence from paragraphs
-            sequence.addChild(CreateActionSequence(node, config));
+
+            if (node.paragraphs.length > 0) {
+                // Create ActionSequence from paragraphs
+                sequence.addChild(CreateActionSequence(node, config));
+            }
+
             // Append nodes from node.children
             CreateParentNode(node.children, config, sequence);
 
         } else {
-            // A node has paragraphs only
-            sequence = CreateActionSequence(node, config);
+            if (node.paragraphs.length > 0) {
+                // A node has paragraphs only
+                sequence = CreateActionSequence(node, config);
+            }
 
         }
         return sequence;

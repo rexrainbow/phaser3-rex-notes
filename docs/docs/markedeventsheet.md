@@ -341,29 +341,44 @@ coin > 5
 
 #### Flow control instructions
 
-##### If, Else
+##### If, Else if, Else
 
 ```
-## [If coin > 5]
+### [If coin > 10]
 
 actions...
 
-## [Else]
+### [Else If (coin > 5) && (coin <10)]
+
+actions...
+
+### [Else]
 
 actions...
 ```
 
-- H2/H3/... heading with `[If expression]` : If condition with expression
+- H2/H3/... heading with `[If expression]`, or `[Else if expression]` : If/Else If condition with expression
     - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Boolean expression AND/OR : `&&`.
+    - Boolean expression OR : `||`.
     - Actions when expression is `true`.
 - H2/H3/... heading with `[Else]` :
-    - Actions when expression is `false`.
+    - Actions when previous expressions are all `false`.
 
 
 ```
-## [If coin > 5]
+## [If]
+
+coin > 10
+
+### Label
+
+actions...
+
+## [Else If]
 
 coin > 5
+coin < 10
 
 ### Label
 
@@ -376,10 +391,10 @@ actions...
 actions...
 ```
 
-- H2/H3/... heading with `[If]` : If condition
-    - Each line under `[If]` is a boolean equation, composed of `AND` logic.
+- H2/H3/... heading with `[If]`, or `[Else if]` : If, Else If condition
+    - Each line under `[If]`, `[Else If]` is a boolean equation, composed of `AND` logic.
     - Read data from [local memory](markedeventsheet.md#local-memory)
-- H3/H4/... heading under `[If]` : Actions when condition is `true`.
+- H3/H4/... heading under `[If]`, `[Else if]` : - Actions when previous expressions are all `false`.
 
 
 ##### Repeat loop

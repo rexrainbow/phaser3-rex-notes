@@ -5,28 +5,12 @@ import content from 'raw-loader!/assets/markedeventsheet/if-else/if-else.md';
 class CommandExecutor extends EventEmitter {
     print({ text = '' } = {}, manager) {
         console.log(text);
-        this.wait({ duration: 1000 });
-        return this;
-        // Task will be running until 'complete' event fired
     }
 
     set(config, manager) {
         for (var name in config) {
             manager.setData(name, config[name]);
         }
-    }
-
-    wait({ duration = 1000 } = {}, manager) {
-        var self = this;
-        setTimeout(function () {
-            self.complete();
-        }, duration)
-        return this;
-    }
-
-    complete() {
-        this.emit('complete');
-        return this;
     }
 }
 var commandExecutor = new CommandExecutor();
@@ -37,10 +21,6 @@ var manager = new MarkedEventSheets({
 manager.addEventSheet(content);
 console.log(manager.dumpTrees())
 
-manager
-    .setData('name', 'rex')
-    .setData('coin', 8)
-    .setData('hp', 4)
-    .start()
+manager.start()
 
 console.log(manager.memory)
