@@ -20,9 +20,15 @@ class MarkedEventSheetsPlugin extends Phaser.Plugins.BasePlugin {
         return new CommandExecutor(scene, config);
     }
 
-    csv2md(csvString) {
-        return CSV2MD(csvString);
-    }
 }
+
+var methods = {
+    csv2md: CSV2MD
+}
+
+Object.assign(
+    MarkedEventSheetsPlugin.prototype,
+    methods,
+)
 
 export default MarkedEventSheetsPlugin;
