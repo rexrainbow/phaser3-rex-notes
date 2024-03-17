@@ -22,7 +22,7 @@ class ActivateAction extends Action {
 
     tick(tick) {
         var tree = this.getTree(tick);
-        if (!activateTreeTitle || (this.activateTreeTitle === '')) {
+        if (!this.activateTreeTitle || (this.activateTreeTitle === '')) {
             tree.setActive(true);
         } else {
             tree.treeManager.setTreeActiveState(this.activateTreeTitle, tree.groupName, true);
