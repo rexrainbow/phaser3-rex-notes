@@ -6176,7 +6176,7 @@
       key: "tick",
       value: function tick(_tick) {
         var tree = this.getTree(_tick);
-        if (!activateTreeTitle || this.activateTreeTitle === '') {
+        if (!this.activateTreeTitle || this.activateTreeTitle === '') {
           tree.setActive(true);
         } else {
           tree.treeManager.setTreeActiveState(this.activateTreeTitle, tree.groupName, true);
@@ -16148,6 +16148,9 @@
   }, {
     name: 'else'
   }, {
+    name: 'else if',
+    pattern: new RegExp('else if\\s*(.*)', 'i')
+  }, {
     name: 'while',
     pattern: new RegExp('while\\s*(.*)', 'i')
   }, {
@@ -16413,17 +16416,22 @@
     return s;
   };
 
-  var CreateParentNode = function CreateParentNode(node, config) {
+  var CreateParentNode = function CreateParentNode(node, config, output) {
     if (Array.isArray(node)) {
       var nodes = node;
       if (nodes.length === 1) {
         return CreateParentNode(nodes[0], config);
       } else {
-        var sequence = new Sequence();
+        // Create sequence from node.children
+        var sequence = output ? output : new Sequence();
         var lastIfSelector;
         for (var i = 0, cnt = nodes.length; i < cnt; i++) {
           var node = nodes[i];
           var child = CreateParentNode(node, config);
+          if (!child) {
+            continue;
+          }
+
           // Construct if-branch selector
           switch (child.title) {
             case '[if]':
@@ -16431,6 +16439,7 @@
               lastIfSelector = child;
               break;
             case '[else]':
+            case '[else if]':
               if (lastIfSelector) {
                 lastIfSelector.insertChild(child, null, -1);
               } else {
@@ -16468,9 +16477,10 @@
           selector.addChild(succeeder);
           return selector;
         case 'else':
+        case 'else if':
           var ifDecorator = new If({
-            title: '[else]',
-            expression: 'true'
+            title: "[".concat(result.type, "]"),
+            expression: result.type === 'else' ? 'true' : GetConditionExpression(result.match[1], node)
           });
           if (node.children.length > 0) {
             ifDecorator.addChild(CreateParentNode(node.children, config));
@@ -16512,7 +16522,24 @@
           break;
       }
     } else {
-      return CreateActionSequence(node, config);
+      var sequence;
+      if (node.children.length > 0) {
+        // A node has paragraphs and children
+        sequence = new Sequence();
+        if (node.paragraphs.length > 0) {
+          // Create ActionSequence from paragraphs
+          sequence.addChild(CreateActionSequence(node, config));
+        }
+
+        // Append nodes from node.children
+        CreateParentNode(node.children, config, sequence);
+      } else {
+        if (node.paragraphs.length > 0) {
+          // A node has paragraphs only
+          sequence = CreateActionSequence(node, config);
+        }
+      }
+      return sequence;
     }
   };
   var GetConditionExpression = function GetConditionExpression(payloadExpression, node) {
@@ -16630,7 +16657,17 @@
   var CSVParser = /*@__PURE__*/getDefaultExportFromCjs(papaparse_minExports);
 
   var CSV2MD = function CSV2MD(csvString) {
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    if (typeof config === 'string') {
+      config = {
+        title: config
+      };
+    }
+    var _config = config,
+      title = _config.title;
     var arr = CSVParser.parse(csvString).data;
+    var hasH1 = false,
+      hasH2 = false;
     var content = [];
     var row, col0, col1, startChar;
     for (var i = 0, cnt = arr.length; i < cnt; i++) {
@@ -16642,6 +16679,14 @@
         case '#':
         case '/':
           content.push("".concat(col0, " ").concat(col1));
+          switch (col0) {
+            case '#':
+              hasH1 = true;
+              break;
+            case '##':
+              hasH2 = true;
+              break;
+          }
           break;
         default:
           if (col0 !== '' && col1 !== '') {
@@ -16653,6 +16698,12 @@
           }
           break;
       }
+    }
+    if (!hasH2) {
+      content.unshift('## Script');
+    }
+    if (!hasH1) {
+      content.unshift("# ".concat(title));
     }
     return content.join('\n');
   };
@@ -23359,14 +23410,13 @@
       value: function addCommandExecutor(scene, config) {
         return new CommandExecutor(scene, config);
       }
-    }, {
-      key: "csv2md",
-      value: function csv2md(csvString) {
-        return CSV2MD(csvString);
-      }
     }]);
     return MarkedEventSheetsPlugin;
   }(Phaser.Plugins.BasePlugin);
+  var methods = {
+    csv2md: CSV2MD
+  };
+  Object.assign(MarkedEventSheetsPlugin.prototype, methods);
 
   return MarkedEventSheetsPlugin;
 

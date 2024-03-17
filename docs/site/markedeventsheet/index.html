@@ -5794,8 +5794,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#if-else" class="md-nav__link">
-    If, Else
+  <a href="#if-else-if-else" class="md-nav__link">
+    If, Else if, Else
   </a>
   
 </li>
@@ -10110,8 +10110,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#if-else" class="md-nav__link">
-    If, Else
+  <a href="#if-else-if-else" class="md-nav__link">
+    If, Else if, Else
   </a>
   
 </li>
@@ -10771,29 +10771,44 @@ coin &gt; 5
 <li>H2 heading with <code>[Catch]</code> : Actions when main condition is <code>false</code>.</li>
 </ul>
 <h4 id="flow-control-instructions">Flow control instructions<a class="headerlink" href="#flow-control-instructions" title="Permanent link">&para;</a></h4>
-<h5 id="if-else">If, Else<a class="headerlink" href="#if-else" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>## [If coin &gt; 5]
+<h5 id="if-else-if-else">If, Else if, Else<a class="headerlink" href="#if-else-if-else" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>### [If coin &gt; 10]
 
 actions...
 
-## [Else]
+### [Else If (coin &gt; 5) &amp;&amp; (coin &lt;10)]
+
+actions...
+
+### [Else]
 
 actions...
 </code></pre></div>
 <ul>
-<li>H2/H3/... heading with <code>[If expression]</code> : If condition with expression<ul>
+<li>H2/H3/... heading with <code>[If expression]</code>, or <code>[Else if expression]</code> : If/Else If condition with expression<ul>
 <li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Boolean expression AND/OR : <code>&amp;&amp;</code>.</li>
+<li>Boolean expression OR : <code>||</code>.</li>
 <li>Actions when expression is <code>true</code>.</li>
 </ul>
 </li>
 <li>H2/H3/... heading with <code>[Else]</code> :<ul>
-<li>Actions when expression is <code>false</code>.</li>
+<li>Actions when previous expressions are all <code>false</code>.</li>
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code>## [If coin &gt; 5]
+<div class="highlight"><pre><span></span><code>## [If]
+
+coin &gt; 10
+
+### Label
+
+actions...
+
+## [Else If]
 
 coin &gt; 5
+coin &lt; 10
 
 ### Label
 
@@ -10806,12 +10821,12 @@ actions...
 actions...
 </code></pre></div>
 <ul>
-<li>H2/H3/... heading with <code>[If]</code> : If condition<ul>
-<li>Each line under <code>[If]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
+<li>H2/H3/... heading with <code>[If]</code>, or <code>[Else if]</code> : If, Else If condition<ul>
+<li>Each line under <code>[If]</code>, <code>[Else If]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
 <li>Read data from <a href="./#local-memory">local memory</a></li>
 </ul>
 </li>
-<li>H3/H4/... heading under <code>[If]</code> : Actions when condition is <code>true</code>.</li>
+<li>H3/H4/... heading under <code>[If]</code>, <code>[Else if]</code> : - Actions when previous expressions are all <code>false</code>.</li>
 </ul>
 <h5 id="repeat-loop">Repeat loop<a class="headerlink" href="#repeat-loop" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>## [Repeat 3]

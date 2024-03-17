@@ -9954,6 +9954,15 @@
 </code></pre></div></li>
 </ol>
 <h4 id="using-typescript-declaration-file">Using typescript declaration file<a class="headerlink" href="#using-typescript-declaration-file" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s1">&#39;phaser&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<span class="kr">declare</span><span class="w"> </span><span class="nx">module</span><span class="w"> </span><span class="s1">&#39;phaser&#39;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rexUI</span><span class="o">:</span><span class="w"> </span><span class="kt">RexUIPlugin</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>or</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">RexUIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">class</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
