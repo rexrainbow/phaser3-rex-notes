@@ -42,6 +42,18 @@
 #### Using typescript declaration file
 
 ```typescript
+import 'phaser';
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+declare module 'phaser' {
+  interface Scene {
+    rexUI: RexUIPlugin;
+  }
+}
+```
+
+or
+
+```typescript
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 
 class Game extends Phaser.Scene {
