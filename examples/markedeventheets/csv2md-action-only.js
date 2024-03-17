@@ -16,6 +16,10 @@ console.log(md);
 ## Script
 
 print
+text=Hello {{name}}
+
+
+print
 text={{name}} have {{coin}} coin
 */
 
