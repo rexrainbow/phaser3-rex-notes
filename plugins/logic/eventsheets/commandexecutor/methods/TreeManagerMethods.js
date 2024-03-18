@@ -1,8 +1,14 @@
 export default {
     // TODO: More commands
-    set(config, manager) {
+    setData(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     },
+
+    incData(config, eventSheetManager) {
+        for (var name in config) {
+            eventSheetManager.incData(name, config[name]);
+        }
+    }
 }

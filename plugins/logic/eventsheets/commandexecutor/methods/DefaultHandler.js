@@ -1,6 +1,6 @@
 import StringToValues from '../../../../utils/string/StringToValues.js';
 
-var DefaultHandler = function (name, config, manager) {
+var DefaultHandler = function (name, config, eventSheetManager) {
     var tokens = name.split('.');
 
     var gameObjectID = tokens[0];
@@ -12,7 +12,7 @@ var DefaultHandler = function (name, config, manager) {
                 console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
                 return;
             }
-            return this._setGOProperty(config, manager);
+            return this._setGOProperty(config, eventSheetManager);
 
         case 2:
             if (!this.sys.hasGameObject(undefined, gameObjectID)) {
@@ -24,14 +24,14 @@ var DefaultHandler = function (name, config, manager) {
             var commandName = tokens[1]
             switch (tokens[1]) {
                 case 'to':
-                    return this._easeGOProperty(config, manager);
+                    return this._easeGOProperty(config, eventSheetManager);
 
                 case 'yoyo':
                     config.yoyo = true;
-                    return this._easeGOProperty(config, manager);
+                    return this._easeGOProperty(config, eventSheetManager);
 
                 case 'destroy':
-                    return this._destroyGO(config, manager);
+                    return this._destroyGO(config, eventSheetManager);
 
                 default:
                     var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectID);
@@ -52,7 +52,7 @@ var DefaultHandler = function (name, config, manager) {
                     }
                     config.methodName = commandName;
                     config.parameters = (parameters) ? StringToValues(parameters) : [];
-                    return this._runGOMethod(config, manager);
+                    return this._runGOMethod(config, eventSheetManager);
 
             }
     }

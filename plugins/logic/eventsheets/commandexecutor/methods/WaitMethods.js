@@ -15,21 +15,21 @@ export default {
         return this;
     },
 
-    wait(config, manager) {
+    wait(config, eventSheetManager) {
         var { click, key } = config;
 
         if (click) {
-            manager.emit('pause.click');
+            eventSheetManager.emit('pause.click');
         }
 
         if (key) {
-            manager.emit('pause.key', config.key);
+            eventSheetManager.emit('pause.key', config.key);
         }
 
         if (click | key) {
-            manager.emit('pause.input');
+            eventSheetManager.emit('pause.input');
             this.sys.once('complete', function () {
-                manager.emit('resume.input');
+                eventSheetManager.emit('resume.input');
             })
         }
 
@@ -37,7 +37,7 @@ export default {
         return this.sys;
     },
 
-    click(config, manager) {
-        return this.wait({ click: true }, manager);
+    click(config, eventSheetManager) {
+        return this.wait({ click: true }, eventSheetManager);
     }
 }

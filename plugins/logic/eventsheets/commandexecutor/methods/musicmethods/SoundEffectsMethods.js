@@ -1,5 +1,5 @@
 export default {
-    se({ volume, mute, unmute } = {}, manager) {
+    se({ volume, mute, unmute } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -16,7 +16,7 @@ export default {
         }
     },
 
-    'se.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, manager) {
+    'se.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -44,11 +44,11 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ se: true }, manager);
+            return this.wait({ se: true }, eventSheetManager);
         }
     },
 
-    'se.stop'(config, manager) {
+    'se.stop'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -56,7 +56,7 @@ export default {
         soundManager.stopAllSoundEffects();
     },
 
-    'se.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
+    'se.fadeOut'({ duration = 500, stop = true, wait = false }, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -64,11 +64,11 @@ export default {
         soundManager.fadeOutSoundEffect(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true }, manager);
+            return this.wait({ bgm: true }, eventSheetManager);
         }
     },
 
-    'se.mute'(config, manager) {
+    'se.mute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -77,7 +77,7 @@ export default {
         soundManager.setSoundEffectMute(true);
     },
 
-    'se.unmute'(config, manager) {
+    'se.unmute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;

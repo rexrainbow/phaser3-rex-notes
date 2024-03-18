@@ -1,5 +1,5 @@
 export default {
-    bgm2({ volume, mute, unmute } = {}, manager) {
+    bgm2({ volume, mute, unmute } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -16,7 +16,7 @@ export default {
         }
     },
 
-    'bgm2.play'({ key, volume, detune, rate, fadeIn = 0, loop, wait = false } = {}, manager) {
+    'bgm2.play'({ key, volume, detune, rate, fadeIn = 0, loop, wait = false } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -48,11 +48,11 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ bgm: true }, manager);
+            return this.wait({ bgm: true }, eventSheetManager);
         }
     },
 
-    'bgm2.cross'({ key, duration = 500, wait = false }, manager) {
+    'bgm2.cross'({ key, duration = 500, wait = false }, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -64,11 +64,11 @@ export default {
         soundManager.crossFadeBackgroundMusic2(key, duration);
 
         if (wait) {
-            return this.wait({ bgm: true }, manager);
+            return this.wait({ bgm: true }, eventSheetManager);
         }
     },
 
-    'bgm2.stop'(config, manager) {
+    'bgm2.stop'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -76,7 +76,7 @@ export default {
         soundManager.stopBackgroundMusic2();
     },
 
-    'bgm2.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
+    'bgm2.fadeOut'({ duration = 500, stop = true, wait = false }, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -84,11 +84,11 @@ export default {
         soundManager.fadeOutBackgroundMusic2(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true }, manager);
+            return this.wait({ bgm: true }, eventSheetManager);
         }
     },
 
-    'bgm2.fadeIn'({ duration = 500 }, manager) {
+    'bgm2.fadeIn'({ duration = 500 }, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -96,7 +96,7 @@ export default {
         soundManager.fadeInBackgroundMusic2(duration);
     },
 
-    'bgm2.pause'(config, manager) {
+    'bgm2.pause'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -104,7 +104,7 @@ export default {
         soundManager.pauseBackgroundMusic2();
     },
 
-    'bgm2.resume'(config, manager) {
+    'bgm2.resume'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -112,7 +112,7 @@ export default {
         soundManager.resumeBackgroundMusic2();
     },
 
-    'bgm2.mute'(config, manager) {
+    'bgm2.mute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -121,7 +121,7 @@ export default {
         soundManager.setBackgroundMusic2Mute(true);
     },
 
-    'bgm2.unmute'(config, manager) {
+    'bgm2.unmute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;

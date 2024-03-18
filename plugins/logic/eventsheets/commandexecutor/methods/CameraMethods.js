@@ -1,5 +1,5 @@
 export default {
-    camera({ x, y, rotate, zoom } = {}, manager) {
+    camera({ x, y, rotate, zoom } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -17,7 +17,7 @@ export default {
 
     },
 
-    'camera.fadeIn'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
+    'camera.fadeIn'({ duration = 1000, red, green, blue, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -25,11 +25,11 @@ export default {
 
         camera.fadeIn(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'fadeIn' }, manager);
+            return this.wait({ camera: 'fadeIn' }, eventSheetManager);
         }
     },
 
-    'camera.fadeOut'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
+    'camera.fadeOut'({ duration = 1000, red, green, blue, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -37,11 +37,11 @@ export default {
 
         camera.fadeOut(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'fadeOut' }, manager);
+            return this.wait({ camera: 'fadeOut' }, eventSheetManager);
         }
     },
 
-    'camera.flash'({ duration = 1000, red, green, blue, wait = false } = {}, manager) {
+    'camera.flash'({ duration = 1000, red, green, blue, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -49,11 +49,11 @@ export default {
 
         camera.flash(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'flash' }, manager);
+            return this.wait({ camera: 'flash' }, eventSheetManager);
         }
     },
 
-    'camera.shake'({ duration = 1000, intensity, wait = false } = {}, manager) {
+    'camera.shake'({ duration = 1000, intensity, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -61,11 +61,11 @@ export default {
 
         camera.shake(duration, intensity);
         if (wait) {
-            return this.wait({ camera: 'shake' }, manager);
+            return this.wait({ camera: 'shake' }, eventSheetManager);
         }
     },
 
-    'camera.zoomTo'({ duration = 1000, zoom, wait = false } = {}, manager) {
+    'camera.zoomTo'({ duration = 1000, zoom, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -73,11 +73,11 @@ export default {
 
         camera.zoomTo(zoom, duration);
         if (wait) {
-            return this.wait({ camera: 'zoom' }, manager);
+            return this.wait({ camera: 'zoom' }, eventSheetManager);
         }
     },
 
-    'camera.rotateTo'({ duration = 1000, rotate, ease, wait = false } = {}, manager) {
+    'camera.rotateTo'({ duration = 1000, rotate, ease, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -85,11 +85,11 @@ export default {
 
         camera.rotateTo(rotate, false, duration, ease);
         if (wait) {
-            return this.wait({ camera: 'rotate' }, manager);
+            return this.wait({ camera: 'rotate' }, eventSheetManager);
         }
     },
 
-    'camera.scrollTo'({ duration = 1000, x, y, ease, wait = false } = {}, manager) {
+    'camera.scrollTo'({ duration = 1000, x, y, ease, wait = false } = {}, eventSheetManager) {
         var camera = this.sys.cameraTarget;
         if (!camera) {
             return;
@@ -106,7 +106,7 @@ export default {
         camera.pan(x, y, duration, ease);
 
         if (wait) {
-            return this.wait({ camera: 'scroll' }, manager);
+            return this.wait({ camera: 'scroll' }, eventSheetManager);
         }
     },
 

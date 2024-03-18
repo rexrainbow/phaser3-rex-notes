@@ -8,12 +8,12 @@ declare namespace CommandExecutor {
 
     type ImmediatelyCommandCallbackType = (
         config: GeneralConfigType,
-        manager: EventSheetManager,
+        eventSheetManager: EventSheetManager,
     ) => void;
 
     type WaitCommandCallbackType = (
         config: GeneralConfigType,
-        manager: EventSheetManager,
+        eventSheetManager: EventSheetManager,
     ) => Phaser.Events.EventEmitter;
 
     type CommandCallbackType = ImmediatelyCommandCallbackType | WaitCommandCallbackType;
@@ -52,7 +52,7 @@ declare class CommandExecutor {
     defaultHandler(
         name: string,
         config: CommandExecutor.GeneralConfigType,
-        manager: EventSheetManager
+        eventSheetManager: EventSheetManager
     ): void | Phaser.Events.EventEmitter;
 
     waitEvent(

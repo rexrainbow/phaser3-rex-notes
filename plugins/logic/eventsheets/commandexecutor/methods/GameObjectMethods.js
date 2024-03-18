@@ -10,7 +10,7 @@ export default {
         sys.getGameObjectManager(name).commands = commands;
 
         // Add createGameObject command
-        var createGameObjectCallback = function (config, manager) {
+        var createGameObjectCallback = function (config, eventSheetManager) {
             var { id, layer = defaultLayer } = config;
             delete config.id;
             delete config.layer;
@@ -31,7 +31,7 @@ export default {
         return this;
     },
 
-    _setGOProperty(config, manager) {
+    _setGOProperty(config, eventSheetManager) {
         var { id } = config;
         delete config.id;
 
@@ -41,13 +41,13 @@ export default {
         }
 
         for (var prop in config) {
-            var value = manager.evalExpression(config[prop]);
+            var value = eventSheetManager.evalExpression(config[prop]);
             this.sys.setGameObjectProperty(goType, id, prop, value);
         }
         // Execute next command
     },
 
-    _easeGOProperty(config, manager) {
+    _easeGOProperty(config, eventSheetManager) {
         var { id, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.id;
         delete config.duration;
@@ -63,7 +63,7 @@ export default {
 
         var waitProperty;
         for (var prop in config) {
-            var value = manager.evalExpression(config[prop]);
+            var value = eventSheetManager.evalExpression(config[prop]);
             this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
             waitProperty = prop;
         }
@@ -74,7 +74,7 @@ export default {
         // Execute next command
     },
 
-    _destroyGO({ id, wait = false } = {}, manager) {
+    _destroyGO({ id, wait = false } = {}, eventSheetManager) {
         var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;
@@ -86,7 +86,7 @@ export default {
         }
     },
 
-    _runGOMethod(config, manager) {
+    _runGOMethod(config, eventSheetManager) {
         var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;

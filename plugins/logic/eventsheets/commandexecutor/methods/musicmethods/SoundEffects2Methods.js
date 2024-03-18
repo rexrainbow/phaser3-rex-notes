@@ -1,5 +1,5 @@
 export default {
-    se2({ volume, mute, unmute } = {}, manager) {
+    se2({ volume, mute, unmute } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -16,7 +16,7 @@ export default {
         }
     },
 
-    'se2.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, manager) {
+    'se2.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -44,11 +44,11 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ se: true }, manager);
+            return this.wait({ se: true }, eventSheetManager);
         }
     },
 
-    'se2.stop'(config, manager) {
+    'se2.stop'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -56,7 +56,7 @@ export default {
         soundManager.stopAllSoundEffects2();
     },
 
-    'se2.fadeOut'({ duration = 500, stop = true, wait = false }, manager) {
+    'se2.fadeOut'({ duration = 500, stop = true, wait = false }, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -64,11 +64,11 @@ export default {
         soundManager.fadeOutSoundEffect2(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true }, manager);
+            return this.wait({ bgm: true }, eventSheetManager);
         }
     },
 
-    'se2.mute'(config, manager) {
+    'se2.mute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -77,7 +77,7 @@ export default {
         soundManager.setSoundEffect2Mute(true);
     },
 
-    'se2.unmute'(config, manager) {
+    'se2.unmute'(config, eventSheetManager) {
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
