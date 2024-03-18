@@ -90,6 +90,7 @@ Line3...
 
 setData
   hp=5
+  coin=100
 
 Choice.choice
   title=Would you like some...
@@ -108,6 +109,7 @@ Dialog.typing
 
 setData
   hp=#(hp+3)
+  coin=#(coin-10)
 
 ### [IF choiceIndex == 2]
 
@@ -118,6 +120,7 @@ Dialog.typing
 
 incData
   hp=5
+  coin=-10
 
 ### [IF choiceIndex == 3]
 
@@ -128,6 +131,7 @@ Dialog.typing
 
 incData
   hp=10
+  coin=-20
 
 
 ## Section C
