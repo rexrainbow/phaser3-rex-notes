@@ -37,10 +37,10 @@ class Demo extends Phaser.Scene {
 
             choicesType: 'radio',
             choices: [
-                CreateLabel(this, '3', 'btn0'),
-                CreateLabel(this, '4', 'btn1'),
-                CreateLabel(this, '5', 'btn2'),
-                CreateLabel(this, '6', 'btn3')
+                CreateLabel(this, '3', 0),
+                CreateLabel(this, '4', 1),
+                CreateLabel(this, '5', 2),
+                CreateLabel(this, '6', 3)
             ],
             choicesSetValueCallback: function (button, value) {
                 if (value) {
@@ -49,10 +49,6 @@ class Demo extends Phaser.Scene {
                     button.getElement('background').setStrokeStyle();
                 }
             },
-
-            actions: [
-                CreateLabel(this, 'OK'),
-            ],
 
             space: {
                 title: 25,
@@ -75,19 +71,20 @@ class Demo extends Phaser.Scene {
             }
         })
             .layout()
-            //.drawBounds(this.add.graphics(), 0xff0000)
-            .popUp(1000);
 
         var print = this.add.text(0, 0, '');
         dialog
-            .on('button.click', function (button, groupName, index, pointer, event) {
-                print.text += `${groupName}[${index}] = ${button.text}\n`;
-
-                if (groupName === 'actions') {
-                    print.text += `Select: ${dialog.getChoicesSelectButtonName()}\n`;
+            .modalPromise({
+                // defaultBehavior: false,
+                manaulClose: true,
+                duration: {
+                    in: 500,
+                    out: 500
                 }
-
-            }, this)
+            })
+            .then(function (data) {
+                print.text = data.value
+            })
     }
 
     update() { }

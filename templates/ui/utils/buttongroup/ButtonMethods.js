@@ -30,6 +30,10 @@ export default {
         return this.buttons;
     },
 
+    hasAnyButton() {
+        return this.buttons.length > 0;
+    },
+
     setButtonEnable(index, enabled) {
         // buttonGroup and button-sizer have *buttons* member both
         var buttons = this.buttons;

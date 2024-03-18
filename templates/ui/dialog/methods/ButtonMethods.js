@@ -330,4 +330,35 @@ export default {
         return this;
     },
 
+    hasAnyChoice() {
+        var choicesSizer = this.childrenMap.choicesSizer;
+        if (choicesSizer) {
+            return choicesSizer.hasAnyButton();
+        }
+        return false;
+    },
+
+    hasAnyAction() {
+        var actionsSizer = this.childrenMap.actionsSizer;
+        if (actionsSizer) {
+            return actionsSizer.hasAnyButton();
+        }
+        return false;
+    },
+
+    hasAnyToolbar() {
+        var toolbarSizer = this.childrenMap.toolbarSizer;
+        if (toolbarSizer) {
+            return toolbarSizer.hasAnyButton();
+        }
+        return false;
+    },
+
+    hasAnyLeftToolbar() {
+        var leftToolbarSizer = this.childrenMap.leftToolbarSizer;
+        if (leftToolbarSizer) {
+            return leftToolbarSizer.hasAnyButton();
+        }
+        return false;
+    },
 };

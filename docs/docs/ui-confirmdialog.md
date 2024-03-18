@@ -543,7 +543,11 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Modal
 
-Pop this dialog as modal dialog, clicking any action button to close this modal dialog.
+Pop this dialog as modal dialog, close this modal dialog under these conditions : 
+
+- Clicking any action button.
+- Clicking any choice button and no action button on dialog.
+
 
 ```javascript
 dialog.modal(onClose);  // Use default modal config

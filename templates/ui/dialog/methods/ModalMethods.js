@@ -3,7 +3,21 @@ import ModalMethods from '../../basesizer/ModalMethods.js';
 export default {
     onCreateModalBehavior(self) {
         self.on('button.click', function (button, groupName, index, pointer, event) {
-            if (groupName !== 'actions') {
+            var canClose = false;
+            switch (groupName) {
+                case 'actions':
+                    // Click any action button
+                    canClose = true;
+                    break;
+
+                case 'choices':
+                    // Click any choice button, and no action button in this dialog
+                    if (!self.hasAnyAction()) {
+                        canClose = true;
+                    }
+                    break;
+            }
+            if (!canClose) {
                 return;
             }
 

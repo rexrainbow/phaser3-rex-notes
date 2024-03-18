@@ -13,7 +13,16 @@ var Modal = function (config, onClose) {
         config = {};
     }
 
-    var zeroButtonMode = (this.buttonMode === 0);
+    var zeroButtonMode;
+    if (this.buttonMode === 0) {
+        if (this.hasAnyChoice()) {
+            zeroButtonMode = false;
+        } else {
+            zeroButtonMode = true;
+        }
+    } else {
+        zeroButtonMode = false;
+    }
 
     if (!config.hasOwnProperty('anyTouchClose')) {
         config.anyTouchClose = zeroButtonMode;

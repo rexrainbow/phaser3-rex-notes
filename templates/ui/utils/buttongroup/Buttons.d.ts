@@ -22,6 +22,7 @@ export interface IButtons {
     getButton(button: Phaser.GameObjects.GameObject): Phaser.GameObjects.GameObject;
 
     getButtons(): Phaser.GameObjects.GameObject[];
+    hasAnyButton(): boolean;
 
     emitButtonClick(
         index: number | Phaser.GameObjects.GameObject

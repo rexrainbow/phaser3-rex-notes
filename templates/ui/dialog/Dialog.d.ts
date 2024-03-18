@@ -281,6 +281,11 @@ declare class Dialog extends Sizer {
         scop?: unknown
     ): this;
 
+    hasAnyChoice(): boolean;
+    hasAnyAction(): boolean;
+    hasAnyToolbar(): boolean;
+    hasAnyLeftToolbar(): boolean;
+
     setAllButtonsEnable(enable?: boolean): this;
 
     getChoicesButtonState(name: string): boolean;
