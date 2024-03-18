@@ -640,6 +640,32 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 
 - `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
 
+#### Local memory of event sheet manager
+
+- Set value by key
+    ```
+    setData
+      key=value
+    ```
+- Increase value of key
+    ```
+    incData
+      key=value
+    ```
+    or
+    ```
+    setData
+      key=#(key+value)
+    ```
+- Toggle value of key
+    ```
+    toggleData
+      key
+    ```
+
+
+See [Local memory](#local-memory)
+
 #### Game object
 
 ##### Register custom game object

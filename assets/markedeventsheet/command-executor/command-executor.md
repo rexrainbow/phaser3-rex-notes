@@ -1,6 +1,6 @@
 # Title
 
-## Section A
+## Initialize
 
 // Create gameobjects
 
@@ -22,6 +22,8 @@ CHOICE
   id=Choice
   width=500
 
+
+## Section A
 
 // Manipulate gameobjects
 
@@ -84,13 +86,18 @@ Line3...
 
 ## Section B
 
+// Test choice and IF-branch
+
+setData
+  hp=5
+
 Choice.choice
   title=Would you like some...
   resultKey=choiceIndex
   option1=Ice cream
   option2=Burger
   option3=Cola
-  
+// Wait until clicking any chioce button
 
 ### [IF choiceIndex == 1]
 
@@ -99,19 +106,28 @@ Dialog.typing
   text=Too cool
   speed=100
 
-### [ELSE IF choiceIndex == 2]
+incData
+  hp=3
+
+### [IF choiceIndex == 2]
 
 Dialog.typing
   name=Me Me Me
   text=Too fat
   speed=100
 
-### [ELSE IF choiceIndex == 3]
+incData
+  hp=5
+
+### [IF choiceIndex == 3]
 
 Dialog.typing
   name=Me Me Me
   text=Another bottle!
   speed=100
+
+incData
+  hp=10
 
 
 ## Section C

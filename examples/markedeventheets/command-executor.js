@@ -51,6 +51,7 @@ class Demo extends Phaser.Scene {
             })
             .on('complete', function () {
                 print.text = 'Complete';
+                console.log(eventSheetManager.memory)
             })
 
         this.input.once('pointerdown', function () {
