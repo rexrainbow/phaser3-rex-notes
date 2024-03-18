@@ -127,5 +127,32 @@ export default {
         }
 
         return this;
+    },
+
+    addToPatentLayer(gameObject) {
+        // Do nothing if gameObject is not in any displayList
+        if (!gameObject.displayList) {
+            return this;
+        }
+
+        // At the same display list
+        var parentLayer = this.displayList;
+        if (parentLayer === gameObject.displayList) {
+            return this;
+        }
+
+        if (IsLayerGameObject(parentLayer)) {
+            if (gameObject.isRexContainerLite) {
+                // Add containerLite and its children
+                gameObject.addToLayer(parentLayer);
+            } else {
+                // Add gameObject directly
+                parentLayer.add(gameObject);
+            }
+        } else {
+
+        }
+
+        return this;
     }
 }

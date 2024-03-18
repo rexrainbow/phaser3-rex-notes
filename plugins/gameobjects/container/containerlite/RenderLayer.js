@@ -62,6 +62,10 @@ export default {
             return this;
         }
 
+        if (layer === gameObject.displayList) {
+            return this;
+        }
+
         if (gameObject.isRexContainerLite) {
             // Add containerLite and its children
             gameObject.addToLayer(layer);

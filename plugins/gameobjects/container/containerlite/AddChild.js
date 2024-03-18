@@ -20,8 +20,9 @@ var Add = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
-    this.addToParentContainer(gameObject);
-    this.addToRenderLayer(gameObject);
+    this.addToParentContainer(gameObject);     // Sync parent's container to child
+    this.addToPatentLayer(gameObject);         // Sync parent's layer to child
+    this.addToRenderLayer(gameObject);         // Sync parent's render-layer
 
     return this;
 }

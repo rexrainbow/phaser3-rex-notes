@@ -13,7 +13,7 @@ var CreateCover = function (gameObject, config) {
             syncScale: false,
             syncAlpha: false,
             syncScrollFactor: false
-        });        
+        });
         gameObject.moveDepthBelow(cover);
     } else {
         scene.children.moveBelow(cover, gameObject);
