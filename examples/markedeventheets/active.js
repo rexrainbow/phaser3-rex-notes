@@ -5,20 +5,20 @@ import DeactivateEventSheet from 'raw-loader!/assets/markedeventsheet/active/dea
 
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, manager) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, manager) {
+    set(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, manager) {
+    wait({ duration = 1000 } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -33,31 +33,31 @@ class CommandExecutor extends EventEmitter {
 }
 var commandExecutor = new CommandExecutor();
 
-var manager = new MarkedEventSheets({
+var eventSheetManager = new MarkedEventSheets({
     commandExecutor: commandExecutor
 });
-manager
+eventSheetManager
     .addEventSheet(TaskventSheet)
     .addEventSheet(DeactivateEventSheet)
 
-console.log(manager.dumpTrees())
+console.log(eventSheetManager.dumpTrees())
 
-console.log(manager.memory)
+console.log(eventSheetManager.memory)
 
-manager.on('complete', function () {
-    if (manager.$roundCounter < 10) {
+eventSheetManager.on('complete', function () {
+    if (eventSheetManager.$roundCounter < 10) {
         // Run next round
-        manager.updateRoundCounter();
-        console.log(`---- Round : ${manager.$roundCounter} ----`)
+        eventSheetManager.updateRoundCounter();
+        console.log(`---- Round : ${eventSheetManager.$roundCounter} ----`)
 
-        if (manager.$roundCounter === 3) {
-            manager.setTreeActiveState('Task');
+        if (eventSheetManager.$roundCounter === 3) {
+            eventSheetManager.setTreeActiveState('Task');
         }
 
-        manager.start()
+        eventSheetManager.start()
     }
 })
 
-manager.start()
+eventSheetManager.start()
 
 

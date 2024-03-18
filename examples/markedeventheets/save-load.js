@@ -5,19 +5,19 @@ import eventSheet1 from 'raw-loader!/assets/markedeventsheet/save-load/eventshee
 import eventSheet2 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet2.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, manager) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
         // return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, manager) {
+    set(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, manager) {
+    wait({ duration = 1000 } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -32,36 +32,36 @@ class CommandExecutor extends EventEmitter {
 }
 var commandExecutor = new CommandExecutor();
 
-var manager = new MarkedEventSheets({
+var eventSheetManager = new MarkedEventSheets({
     commandExecutor: commandExecutor
 });
-manager
+eventSheetManager
     .addEventSheet(eventSheet0)
     .addEventSheet(eventSheet1)
     .addEventSheet(eventSheet2)
 
-var OnEnterEventSheet = function (title, groupName, manager) {
+var OnEnterEventSheet = function (title, groupName, eventSheetManager) {
     console.log(`eventsheet.enter: '${title}'`);
 
     if (title !== 'Event sheet 1') {
-        manager.once('eventsheet.enter', OnEnterEventSheet)
+        eventSheetManager.once('eventsheet.enter', OnEnterEventSheet)
         return;
     }
 
     // Save state at 'eventsheet.enter' of 'Event sheet 1'
-    var stateData = manager.dumpState();
+    var stateData = eventSheetManager.dumpState();
     console.log(stateData);
     console.log('===save state===')
 
     setTimeout(function () {
         console.log('===load state===')
-        manager.loadState(stateData);
+        eventSheetManager.loadState(stateData);
     }, 2500)
 }
 
-manager.once('eventsheet.enter', OnEnterEventSheet)
+eventSheetManager.once('eventsheet.enter', OnEnterEventSheet)
 
-manager
+eventSheetManager
     .setData('金幣', 1)
     .setData('hp', 4)
     .start()

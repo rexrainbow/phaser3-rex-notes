@@ -3,24 +3,24 @@ import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/if-else/if-else.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, manager) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
     }
 
-    set(config, manager) {
+    set(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     }
 }
 var commandExecutor = new CommandExecutor();
 
-var manager = new MarkedEventSheets({
+var eventSheetManager = new MarkedEventSheets({
     commandExecutor: commandExecutor
 });
-manager.addEventSheet(content);
-console.log(manager.dumpTrees())
+eventSheetManager.addEventSheet(content);
+console.log(eventSheetManager.dumpTrees())
 
-manager.start()
+eventSheetManager.start()
 
-console.log(manager.memory)
+console.log(eventSheetManager.memory)

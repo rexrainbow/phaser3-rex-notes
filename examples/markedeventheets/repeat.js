@@ -3,20 +3,20 @@ import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/repeat/repeat.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, manager) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, manager) {
+    set(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, manager) {
+    wait({ duration = 1000 } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -31,13 +31,13 @@ class CommandExecutor extends EventEmitter {
 }
 var commandExecutor = new CommandExecutor();
 
-var manager = new MarkedEventSheets({
+var eventSheetManager = new MarkedEventSheets({
     commandExecutor: commandExecutor
 });
-manager.addEventSheet(content);
-console.log(manager.dumpTrees())
+eventSheetManager.addEventSheet(content);
+console.log(eventSheetManager.dumpTrees())
 
-manager.
+eventSheetManager.
     on('label.enter', function (title) {
         console.log(`Enter label '${title}'`)
     })
@@ -45,10 +45,10 @@ manager.
         console.log(`Exit label '${title}'`)
     })
 
-manager
+eventSheetManager
     .setData('name', 'rex')
     .setData('coin', 1)
     .setData('hp', 4)
     .start()
 
-console.log(manager.memory)
+console.log(eventSheetManager.memory)

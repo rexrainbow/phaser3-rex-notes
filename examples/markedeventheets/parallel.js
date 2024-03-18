@@ -14,19 +14,19 @@ class CommandExecutor extends EventEmitter {
 
     print({
         text = ''
-    } = {}, manager) {
+    } = {}, eventSheetManager) {
         console.log(text);
     }
 
-    set(config, manager) {
+    set(config, eventSheetManager) {
         for (var name in config) {
-            manager.setData(name, config[name]);
+            eventSheetManager.setData(name, config[name]);
         }
     }
 
     wait({
         duration = this.defaultWaitDuration
-    } = {}, manager) {
+    } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -40,17 +40,17 @@ class CommandExecutor extends EventEmitter {
     }
 }
 
-var manager = new MarkedEventSheets({
+var eventSheetManager = new MarkedEventSheets({
     commandExecutor: new CommandExecutor(),    
 });
 
-manager
+eventSheetManager
     .addEventSheet(eventSheet0)
     .addEventSheet(eventSheet1);
 
-console.log(manager.dumpTrees())
+console.log(eventSheetManager.dumpTrees())
 
-manager
+eventSheetManager
     .setData('coin', 10)
     .on('eventsheet.enter', function (title) {
         console.log(`..Enter event sheet '${title}'..`)
@@ -66,4 +66,4 @@ manager
     })
     .start()
 
-console.log(manager.memory)
+console.log(eventSheetManager.memory)
