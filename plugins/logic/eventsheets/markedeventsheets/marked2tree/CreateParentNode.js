@@ -59,9 +59,21 @@ var CreateParentNode = function (node, config, output) {
                     title: '[if]'
                 });
 
-                var ifDecorator = new If({
-                    expression: GetConditionExpression(result.match[1], node)
-                });
+                var ifDecorator;
+                var expression = GetConditionExpression(result.match[1], node);
+                try {
+                    ifDecorator = new If({
+                        expression: expression
+                    });
+                } catch (e) {
+                    console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
+                    console.error(e);
+
+                    ifDecorator = new If({
+                        expression: 'false'
+                    });
+                }
+
                 if (node.children.length > 0) {
                     ifDecorator.addChild(CreateParentNode(node.children, config));
                 } else {
@@ -76,10 +88,24 @@ var CreateParentNode = function (node, config, output) {
 
             case 'else':
             case 'else if':
-                var ifDecorator = new If({
-                    title: `[${result.type}]`,
-                    expression: (result.type === 'else') ? 'true' : GetConditionExpression(result.match[1], node)
-                });
+                var nodeTypeName = result.type;
+                var ifDecorator;
+                var expression = (nodeTypeName === 'else') ? 'true' : GetConditionExpression(result.match[1], node);
+                try {
+                    ifDecorator = new If({
+                        title: `[${nodeTypeName}]`,
+                        expression: expression
+                    });
+                } catch (e) {
+                    console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
+                    console.error(e);
+
+                    ifDecorator = new If({
+                        title: `[${nodeTypeName}]`,
+                        expression: 'false'
+                    });
+                }
+
                 if (node.children.length > 0) {
                     ifDecorator.addChild(CreateParentNode(node.children, config));
                 } else {
@@ -93,10 +119,23 @@ var CreateParentNode = function (node, config, output) {
                     returnSuccess: true,
                 });
 
-                var ifDecorator = new If({
-                    title: '[while]',
-                    expression: GetConditionExpression(result.match[1], node)
-                });
+                var ifDecorator;
+                var expression = GetConditionExpression(result.match[1], node);
+                try {
+                    ifDecorator = new If({
+                        title: '[while-IF]',
+                        expression: expression
+                    });
+                } catch (e) {
+                    console.error(`[EventSheet] Parse expression '${expression}' at Heading ${node.title} failed, replace expression by 'false'`);
+                    console.error(e);
+
+                    ifDecorator = new If({
+                        title: '[while-IF]',
+                        expression: 'false'
+                    });
+                }
+
                 if (node.children.length > 0) {
                     ifDecorator.addChild(CreateParentNode(node.children, config));
                 } else {
@@ -140,10 +179,9 @@ var CreateParentNode = function (node, config, output) {
             CreateParentNode(node.children, config, sequence);
 
         } else {
-            if (node.paragraphs.length > 0) {
-                // A node has paragraphs only
-                sequence = CreateActionSequence(node, config);
-            }
+            // A node has paragraphs only
+            sequence = CreateActionSequence(node, config);
+            // Always create a sequence no matter has paragraphs or not
 
         }
         return sequence;
