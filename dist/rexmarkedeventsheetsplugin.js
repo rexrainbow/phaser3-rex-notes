@@ -16464,9 +16464,19 @@
           var selector = new Selector({
             title: '[if]'
           });
-          var ifDecorator = new If({
-            expression: GetConditionExpression(result.match[1], node)
-          });
+          var ifDecorator;
+          var expression = GetConditionExpression(result.match[1], node);
+          try {
+            ifDecorator = new If({
+              expression: expression
+            });
+          } catch (e) {
+            console.error("[EventSheet] Parse expression '".concat(expression, "' at Heading ").concat(node.title, " failed, replace expression by 'false'"));
+            console.error(e);
+            ifDecorator = new If({
+              expression: 'false'
+            });
+          }
           if (node.children.length > 0) {
             ifDecorator.addChild(CreateParentNode(node.children, config));
           } else {
@@ -16478,10 +16488,22 @@
           return selector;
         case 'else':
         case 'else if':
-          var ifDecorator = new If({
-            title: "[".concat(result.type, "]"),
-            expression: result.type === 'else' ? 'true' : GetConditionExpression(result.match[1], node)
-          });
+          var nodeTypeName = result.type;
+          var ifDecorator;
+          var expression = nodeTypeName === 'else' ? 'true' : GetConditionExpression(result.match[1], node);
+          try {
+            ifDecorator = new If({
+              title: "[".concat(nodeTypeName, "]"),
+              expression: expression
+            });
+          } catch (e) {
+            console.error("[EventSheet] Parse expression '".concat(expression, "' at Heading ").concat(node.title, " failed, replace expression by 'false'"));
+            console.error(e);
+            ifDecorator = new If({
+              title: "[".concat(nodeTypeName, "]"),
+              expression: 'false'
+            });
+          }
           if (node.children.length > 0) {
             ifDecorator.addChild(CreateParentNode(node.children, config));
           } else {
@@ -16493,10 +16515,21 @@
             title: '[while]',
             returnSuccess: true
           });
-          var ifDecorator = new If({
-            title: '[while]',
-            expression: GetConditionExpression(result.match[1], node)
-          });
+          var ifDecorator;
+          var expression = GetConditionExpression(result.match[1], node);
+          try {
+            ifDecorator = new If({
+              title: '[while-IF]',
+              expression: expression
+            });
+          } catch (e) {
+            console.error("[EventSheet] Parse expression '".concat(expression, "' at Heading ").concat(node.title, " failed, replace expression by 'false'"));
+            console.error(e);
+            ifDecorator = new If({
+              title: '[while-IF]',
+              expression: 'false'
+            });
+          }
           if (node.children.length > 0) {
             ifDecorator.addChild(CreateParentNode(node.children, config));
           } else {
@@ -16534,10 +16567,9 @@
         // Append nodes from node.children
         CreateParentNode(node.children, config, sequence);
       } else {
-        if (node.paragraphs.length > 0) {
-          // A node has paragraphs only
-          sequence = CreateActionSequence(node, config);
-        }
+        // A node has paragraphs only
+        sequence = CreateActionSequence(node, config);
+        // Always create a sequence no matter has paragraphs or not
       }
       return sequence;
     }
@@ -22497,9 +22529,14 @@
 
   var TreeManagerMethods = {
     // TODO: More commands
-    set: function set(config, manager) {
+    setData: function setData(config, eventSheetManager) {
       for (var name in config) {
-        manager.setData(name, config[name]);
+        eventSheetManager.setData(name, config[name]);
+      }
+    },
+    incData: function incData(config, eventSheetManager) {
+      for (var name in config) {
+        eventSheetManager.incData(name, config[name]);
       }
     }
   };
@@ -22518,28 +22555,28 @@
       this.setWaitEventFlag();
       return this;
     },
-    wait: function wait(config, manager) {
+    wait: function wait(config, eventSheetManager) {
       var click = config.click,
         key = config.key;
       if (click) {
-        manager.emit('pause.click');
+        eventSheetManager.emit('pause.click');
       }
       if (key) {
-        manager.emit('pause.key', config.key);
+        eventSheetManager.emit('pause.key', config.key);
       }
       if (click | key) {
-        manager.emit('pause.input');
+        eventSheetManager.emit('pause.input');
         this.sys.once('complete', function () {
-          manager.emit('resume.input');
+          eventSheetManager.emit('resume.input');
         });
       }
       this.sys.waitEventManager.waitAny(config);
       return this.sys;
     },
-    click: function click(config, manager) {
+    click: function click(config, eventSheetManager) {
       return this.wait({
         click: true
-      }, manager);
+      }, eventSheetManager);
     }
   };
 
@@ -22557,7 +22594,7 @@
       sys.getGameObjectManager(name).commands = commands;
 
       // Add createGameObject command
-      var createGameObjectCallback = function createGameObjectCallback(config, manager) {
+      var createGameObjectCallback = function createGameObjectCallback(config, eventSheetManager) {
         var id = config.id,
           _config$layer = config.layer,
           layer = _config$layer === void 0 ? defaultLayer : _config$layer;
@@ -22577,7 +22614,7 @@
       this.addCommand(name, createGameObjectCallback, null);
       return this;
     },
-    _setGOProperty: function _setGOProperty(config, manager) {
+    _setGOProperty: function _setGOProperty(config, eventSheetManager) {
       var id = config.id;
       delete config.id;
       var goType = this.sys.getGameObjectManagerName(id);
@@ -22585,12 +22622,12 @@
         return;
       }
       for (var prop in config) {
-        var value = manager.evalExpression(config[prop]);
+        var value = eventSheetManager.evalExpression(config[prop]);
         this.sys.setGameObjectProperty(goType, id, prop, value);
       }
       // Execute next command
     },
-    _easeGOProperty: function _easeGOProperty(config, manager) {
+    _easeGOProperty: function _easeGOProperty(config, eventSheetManager) {
       var id = config.id,
         duration = config.duration,
         ease = config.ease,
@@ -22610,7 +22647,7 @@
       }
       var waitProperty;
       for (var prop in config) {
-        var value = manager.evalExpression(config[prop]);
+        var value = eventSheetManager.evalExpression(config[prop]);
         this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
         waitProperty = prop;
       }
@@ -22634,7 +22671,7 @@
         return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
       }
     },
-    _runGOMethod: function _runGOMethod(config, manager) {
+    _runGOMethod: function _runGOMethod(config, eventSheetManager) {
       var _this$sys;
       var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
@@ -22675,7 +22712,7 @@
         loop = _ref2.loop,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -22702,10 +22739,10 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm.cross': function bgmCross(_ref3, manager) {
+    'bgm.cross': function bgmCross(_ref3, eventSheetManager) {
       var key = _ref3.key,
         _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
@@ -22722,17 +22759,17 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm.stop': function bgmStop(config, manager) {
+    'bgm.stop': function bgmStop(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopBackgroundMusic();
     },
-    'bgm.fadeOut': function bgmFadeOut(_ref4, manager) {
+    'bgm.fadeOut': function bgmFadeOut(_ref4, eventSheetManager) {
       var _ref4$duration = _ref4.duration,
         duration = _ref4$duration === void 0 ? 500 : _ref4$duration,
         _ref4$stop = _ref4.stop,
@@ -22747,10 +22784,10 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm.fadeIn': function bgmFadeIn(_ref5, manager) {
+    'bgm.fadeIn': function bgmFadeIn(_ref5, eventSheetManager) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
@@ -22759,28 +22796,28 @@
       }
       soundManager.fadeInBackgroundMusic(duration);
     },
-    'bgm.pause': function bgmPause(config, manager) {
+    'bgm.pause': function bgmPause(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.pauseBackgroundMusic();
     },
-    'bgm.resume': function bgmResume(config, manager) {
+    'bgm.resume': function bgmResume(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.resumeBackgroundMusic();
     },
-    'bgm.mute': function bgmMute(config, manager) {
+    'bgm.mute': function bgmMute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setBackgroundMusicMute(true);
     },
-    'bgm.unmute': function bgmUnmute(config, manager) {
+    'bgm.unmute': function bgmUnmute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -22819,7 +22856,7 @@
         loop = _ref2.loop,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -22846,10 +22883,10 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm2.cross': function bgm2Cross(_ref3, manager) {
+    'bgm2.cross': function bgm2Cross(_ref3, eventSheetManager) {
       var key = _ref3.key,
         _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
@@ -22866,17 +22903,17 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm2.stop': function bgm2Stop(config, manager) {
+    'bgm2.stop': function bgm2Stop(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopBackgroundMusic2();
     },
-    'bgm2.fadeOut': function bgm2FadeOut(_ref4, manager) {
+    'bgm2.fadeOut': function bgm2FadeOut(_ref4, eventSheetManager) {
       var _ref4$duration = _ref4.duration,
         duration = _ref4$duration === void 0 ? 500 : _ref4$duration,
         _ref4$stop = _ref4.stop,
@@ -22891,10 +22928,10 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'bgm2.fadeIn': function bgm2FadeIn(_ref5, manager) {
+    'bgm2.fadeIn': function bgm2FadeIn(_ref5, eventSheetManager) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
@@ -22903,28 +22940,28 @@
       }
       soundManager.fadeInBackgroundMusic2(duration);
     },
-    'bgm2.pause': function bgm2Pause(config, manager) {
+    'bgm2.pause': function bgm2Pause(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.pauseBackgroundMusic2();
     },
-    'bgm2.resume': function bgm2Resume(config, manager) {
+    'bgm2.resume': function bgm2Resume(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.resumeBackgroundMusic2();
     },
-    'bgm2.mute': function bgm2Mute(config, manager) {
+    'bgm2.mute': function bgm2Mute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setBackgroundMusic2Mute(true);
     },
-    'bgm2.unmute': function bgm2Unmute(config, manager) {
+    'bgm2.unmute': function bgm2Unmute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -22962,7 +22999,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -22986,17 +23023,17 @@
       if (wait) {
         return this.wait({
           se: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'se.stop': function seStop(config, manager) {
+    'se.stop': function seStop(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopAllSoundEffects();
     },
-    'se.fadeOut': function seFadeOut(_ref3, manager) {
+    'se.fadeOut': function seFadeOut(_ref3, eventSheetManager) {
       var _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
         _ref3$stop = _ref3.stop,
@@ -23011,17 +23048,17 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'se.mute': function seMute(config, manager) {
+    'se.mute': function seMute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setSoundEffectMute(true);
     },
-    'se.unmute': function seUnmute(config, manager) {
+    'se.unmute': function seUnmute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23059,7 +23096,7 @@
         fadeIn = _ref2$fadeIn === void 0 ? 0 : _ref2$fadeIn,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23083,17 +23120,17 @@
       if (wait) {
         return this.wait({
           se: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'se2.stop': function se2Stop(config, manager) {
+    'se2.stop': function se2Stop(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopAllSoundEffects2();
     },
-    'se2.fadeOut': function se2FadeOut(_ref3, manager) {
+    'se2.fadeOut': function se2FadeOut(_ref3, eventSheetManager) {
       var _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
         _ref3$stop = _ref3.stop,
@@ -23108,17 +23145,17 @@
       if (wait) {
         return this.wait({
           bgm: true
-        }, manager);
+        }, eventSheetManager);
       }
     },
-    'se2.mute': function se2Mute(config, manager) {
+    'se2.mute': function se2Mute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setSoundEffect2Mute(true);
     },
-    'se2.unmute': function se2Unmute(config, manager) {
+    'se2.unmute': function se2Unmute(config, eventSheetManager) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23157,7 +23194,7 @@
         blue = _ref2.blue,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23166,7 +23203,7 @@
       if (wait) {
         return this.wait({
           camera: 'fadeIn'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.fadeOut': function cameraFadeOut() {
@@ -23178,7 +23215,7 @@
         blue = _ref3.blue,
         _ref3$wait = _ref3.wait,
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23187,7 +23224,7 @@
       if (wait) {
         return this.wait({
           camera: 'fadeOut'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.flash': function cameraFlash() {
@@ -23199,7 +23236,7 @@
         blue = _ref4.blue,
         _ref4$wait = _ref4.wait,
         wait = _ref4$wait === void 0 ? false : _ref4$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23208,7 +23245,7 @@
       if (wait) {
         return this.wait({
           camera: 'flash'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.shake': function cameraShake() {
@@ -23218,7 +23255,7 @@
         intensity = _ref5.intensity,
         _ref5$wait = _ref5.wait,
         wait = _ref5$wait === void 0 ? false : _ref5$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23227,7 +23264,7 @@
       if (wait) {
         return this.wait({
           camera: 'shake'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.zoomTo': function cameraZoomTo() {
@@ -23237,7 +23274,7 @@
         zoom = _ref6.zoom,
         _ref6$wait = _ref6.wait,
         wait = _ref6$wait === void 0 ? false : _ref6$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23246,7 +23283,7 @@
       if (wait) {
         return this.wait({
           camera: 'zoom'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.rotateTo': function cameraRotateTo() {
@@ -23257,7 +23294,7 @@
         ease = _ref7.ease,
         _ref7$wait = _ref7.wait,
         wait = _ref7$wait === void 0 ? false : _ref7$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23266,7 +23303,7 @@
       if (wait) {
         return this.wait({
           camera: 'rotate'
-        }, manager);
+        }, eventSheetManager);
       }
     },
     'camera.scrollTo': function cameraScrollTo() {
@@ -23278,7 +23315,7 @@
         ease = _ref8.ease,
         _ref8$wait = _ref8.wait,
         wait = _ref8$wait === void 0 ? false : _ref8$wait;
-      var manager = arguments.length > 1 ? arguments[1] : undefined;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
         return;
@@ -23295,7 +23332,7 @@
       if (wait) {
         return this.wait({
           camera: 'scroll'
-        }, manager);
+        }, eventSheetManager);
       }
     }
   };
@@ -23317,7 +23354,7 @@
     return values;
   };
 
-  var DefaultHandler = function DefaultHandler(name, config, manager) {
+  var DefaultHandler = function DefaultHandler(name, config, eventSheetManager) {
     var tokens = name.split('.');
     var gameObjectID = tokens[0];
     config.id = gameObjectID;
@@ -23328,7 +23365,7 @@
           console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
           return;
         }
-        return this._setGOProperty(config, manager);
+        return this._setGOProperty(config, eventSheetManager);
       case 2:
         if (!this.sys.hasGameObject(undefined, gameObjectID)) {
           // TODO
@@ -23338,12 +23375,12 @@
         var commandName = tokens[1];
         switch (tokens[1]) {
           case 'to':
-            return this._easeGOProperty(config, manager);
+            return this._easeGOProperty(config, eventSheetManager);
           case 'yoyo':
             config.yoyo = true;
-            return this._easeGOProperty(config, manager);
+            return this._easeGOProperty(config, eventSheetManager);
           case 'destroy':
-            return this._destroyGO(config, manager);
+            return this._destroyGO(config, eventSheetManager);
           default:
             var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectID);
             if (gameObjectManager) {
@@ -23351,7 +23388,7 @@
               if (command) {
                 var gameObject = gameObjectManager.getGO(gameObjectID);
                 this.clearWaitEventFlag();
-                command(gameObject, config, this);
+                command(gameObject, config, this, eventSheetManager);
                 return this.hasAnyWaitEvent ? this.sys : undefined;
               }
             }
@@ -23362,7 +23399,7 @@
             }
             config.methodName = commandName;
             config.parameters = parameters ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, manager);
+            return this._runGOMethod(config, eventSheetManager);
         }
     }
   };

@@ -10303,7 +10303,11 @@
 </code></pre></div>
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="modal">Modal<a class="headerlink" href="#modal" title="Permanent link">&para;</a></h3>
-<p>Pop this dialog as modal dialog, clicking any action button to close this modal dialog.</p>
+<p>Pop this dialog as modal dialog, close this modal dialog under these conditions : </p>
+<ul>
+<li>Clicking any action button.</li>
+<li>Clicking any choice button and no action button on dialog.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">modal</span><span class="p">(</span><span class="nx">onClose</span><span class="p">);</span><span class="w">  </span><span class="c1">// Use default modal config</span>
 </code></pre></div>
 <p>or</p>

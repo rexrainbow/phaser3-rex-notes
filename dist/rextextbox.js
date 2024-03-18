@@ -1579,8 +1579,10 @@
     .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
-    this.addToParentContainer(gameObject);
-    this.addToRenderLayer(gameObject);
+    this.addToParentContainer(gameObject); // Sync parent's container to child
+    this.addToPatentLayer(gameObject); // Sync parent's layer to child
+    this.addToRenderLayer(gameObject); // Sync parent's render-layer
+
     return this;
   };
   var AddLocal = function AddLocal(gameObject, config) {
@@ -2750,6 +2752,28 @@
         p3Container.add(gameObject);
       }
       return this;
+    },
+    addToPatentLayer: function addToPatentLayer(gameObject) {
+      // Do nothing if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      }
+
+      // At the same display list
+      var parentLayer = this.displayList;
+      if (parentLayer === gameObject.displayList) {
+        return this;
+      }
+      if (IsLayerGameObject(parentLayer)) {
+        if (gameObject.isRexContainerLite) {
+          // Add containerLite and its children
+          gameObject.addToLayer(parentLayer);
+        } else {
+          // Add gameObject directly
+          parentLayer.add(gameObject);
+        }
+      }
+      return this;
     }
   };
 
@@ -2802,6 +2826,9 @@
       // Move gameObject from scene to layer
       var layer = this.getRenderLayer();
       if (!layer) {
+        return this;
+      }
+      if (layer === gameObject.displayList) {
         return this;
       }
       if (gameObject.isRexContainerLite) {

@@ -1,6 +1,6 @@
 # Title
 
-## Script
+## Section A
 
 // Create gameobjects
 
@@ -17,6 +17,10 @@ SPRITE
   id=CharacterA
   key=characters
   frame=A-smile
+
+CHOICE
+  id=Choice
+  width=500
 
 
 // Manipulate gameobjects
@@ -70,7 +74,6 @@ CharacterA.to
   duration=2000
 // Wait until tween complete
 
-
 ```Dialog.typing, name=Me Me Me, speed=100
 Line0...
 Line1...
@@ -78,6 +81,40 @@ Line2...
 Line3...
 ```
 // Wait until typing complete
+
+## Section B
+
+Choice.choice
+  title=Would you like some...
+  resultKey=choiceIndex
+  option1=Ice cream
+  option2=Burger
+  option3=Cola
+  
+
+### [IF choiceIndex == 1]
+
+Dialog.typing
+  name=Me Me Me
+  text=Too cool
+  speed=100
+
+### [ELSE IF choiceIndex == 2]
+
+Dialog.typing
+  name=Me Me Me
+  text=Too fat
+  speed=100
+
+### [ELSE IF choiceIndex == 3]
+
+Dialog.typing
+  name=Me Me Me
+  text=Another bottle!
+  speed=100
+
+
+## Section C
 
 wait
   time=3000

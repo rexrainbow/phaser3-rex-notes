@@ -40,7 +40,7 @@ var DefaultHandler = function (name, config, eventSheetManager) {
                         if (command) {
                             var gameObject = gameObjectManager.getGO(gameObjectID);
                             this.clearWaitEventFlag();
-                            command(gameObject, config, this);
+                            command(gameObject, config, this, eventSheetManager);
                             return (this.hasAnyWaitEvent) ? this.sys : undefined;
                         }
                     }

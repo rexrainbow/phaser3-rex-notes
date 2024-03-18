@@ -11017,7 +11017,7 @@ line2
 <span class="w">    </span><span class="nx">defaultLayer</span><span class="o">:</span><span class="w"> </span><span class="nx">layerName</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">commands</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">commandName</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">commandName</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -11065,7 +11065,7 @@ line2
 </li>
 <li><code>defaultLayer</code> : A layer name defined in <code>layers</code> parameter of <a href="./#create-command-executor-instance"><code>addCommandExecutor</code> method</a></li>
 <li><code>commands</code> : Custom commands, each command is a callback indexed by command name
-    <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -11075,6 +11075,10 @@ line2
 <li><code>commandExecutor</code> : This command executor instance.<ul>
 <li><code>commandExecutor.waitEvent(eventEmitter, eventName)</code> : Invoke this method to 
   Run next command after <code>eventEmitter</code> emitting event <code>eventName</code>.</li>
+</ul>
+</li>
+<li><code>eventSheetManager</code> : This event sheet manager instance.<ul>
+<li>Store variable into blackboard of eventSheetManager : <code>eventSheetManager.setData(key, value)</code></li>
 </ul>
 </li>
 </ul>

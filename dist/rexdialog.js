@@ -453,8 +453,10 @@
     .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
-    this.addToParentContainer(gameObject);
-    this.addToRenderLayer(gameObject);
+    this.addToParentContainer(gameObject); // Sync parent's container to child
+    this.addToPatentLayer(gameObject); // Sync parent's layer to child
+    this.addToRenderLayer(gameObject); // Sync parent's render-layer
+
     return this;
   };
   var AddLocal = function AddLocal(gameObject, config) {
@@ -1624,6 +1626,28 @@
         p3Container.add(gameObject);
       }
       return this;
+    },
+    addToPatentLayer: function addToPatentLayer(gameObject) {
+      // Do nothing if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      }
+
+      // At the same display list
+      var parentLayer = this.displayList;
+      if (parentLayer === gameObject.displayList) {
+        return this;
+      }
+      if (IsLayerGameObject(parentLayer)) {
+        if (gameObject.isRexContainerLite) {
+          // Add containerLite and its children
+          gameObject.addToLayer(parentLayer);
+        } else {
+          // Add gameObject directly
+          parentLayer.add(gameObject);
+        }
+      }
+      return this;
     }
   };
 
@@ -1676,6 +1700,9 @@
       // Move gameObject from scene to layer
       var layer = this.getRenderLayer();
       if (!layer) {
+        return this;
+      }
+      if (layer === gameObject.displayList) {
         return this;
       }
       if (gameObject.isRexContainerLite) {
@@ -12690,6 +12717,9 @@
     getButtons: function getButtons() {
       return this.buttons;
     },
+    hasAnyButton: function hasAnyButton() {
+      return this.buttons.length > 0;
+    },
     setButtonEnable: function setButtonEnable(index, enabled) {
       // buttonGroup and button-sizer have *buttons* member both
       var buttons = this.buttons;
@@ -15045,13 +15075,54 @@
         choicesSizer.setSelectedButtonName(name);
       }
       return this;
+    },
+    hasAnyChoice: function hasAnyChoice() {
+      var choicesSizer = this.childrenMap.choicesSizer;
+      if (choicesSizer) {
+        return choicesSizer.hasAnyButton();
+      }
+      return false;
+    },
+    hasAnyAction: function hasAnyAction() {
+      var actionsSizer = this.childrenMap.actionsSizer;
+      if (actionsSizer) {
+        return actionsSizer.hasAnyButton();
+      }
+      return false;
+    },
+    hasAnyToolbar: function hasAnyToolbar() {
+      var toolbarSizer = this.childrenMap.toolbarSizer;
+      if (toolbarSizer) {
+        return toolbarSizer.hasAnyButton();
+      }
+      return false;
+    },
+    hasAnyLeftToolbar: function hasAnyLeftToolbar() {
+      var leftToolbarSizer = this.childrenMap.leftToolbarSizer;
+      if (leftToolbarSizer) {
+        return leftToolbarSizer.hasAnyButton();
+      }
+      return false;
     }
   };
 
   var ModalMethods = {
     onCreateModalBehavior: function onCreateModalBehavior(self) {
       self.on('button.click', function (button, groupName, index, pointer, event) {
-        if (groupName !== 'actions') {
+        var canClose = false;
+        switch (groupName) {
+          case 'actions':
+            // Click any action button
+            canClose = true;
+            break;
+          case 'choices':
+            // Click any choice button, and no action button in this dialog
+            if (!self.hasAnyAction()) {
+              canClose = true;
+            }
+            break;
+        }
+        if (!canClose) {
           return;
         }
         var closeEventData = {

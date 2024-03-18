@@ -18,15 +18,16 @@ declare namespace CommandExecutor {
 
     type CommandCallbackType = ImmediatelyCommandCallbackType | WaitCommandCallbackType;
 
+    type GameObjectCommandType = (
+        gameObject: Phaser.GameObjects.GameObject,
+        config: GeneralConfigType,
+        commandExecutor: CommandExecutor,
+        eventSheetManager: EventSheetManager,
+    ) => void;
+
     interface IAddGameObjectManagerConfig extends Managers.IAddGameObjectManagerConfig {
         defaultLayer?: string,
-        commands?: {
-            [name: string]: (
-                gameObject: Phaser.GameObjects.GameObject,
-                config: GeneralConfigType,
-                commandExecutor: CommandExecutor,
-            ) => void;
-        }
+        commands?: { [name: string]: GameObjectCommandType; }
     }
 
     interface IConfig extends Managers.IConfig {

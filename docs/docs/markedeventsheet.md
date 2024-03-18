@@ -657,7 +657,7 @@ commandExecutor.addGameObjectManager({
     defaultLayer: layerName,
     
     commands: {
-        commandName(config, eventSheetManager) {
+        commandName(gameObject, config, commandExecutor, eventSheetManager) {
             // commandExecutor.waitEvent(eventEmitter, eventName);
         }
     }
@@ -693,7 +693,7 @@ commandExecutor.addGameObjectManager({
 - `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheet.md#create-command-executor-instance)
 - `commands` : Custom commands, each command is a callback indexed by command name
     ```javascript
-    commandName: function(gameObject, config, commandExecutor) {
+    commandName: function(gameObject, config, commandExecutor, eventSheetManager) {
         // commandExecutor.waitEvent(eventEmitter, eventName);
     }
     ```
@@ -703,6 +703,8 @@ commandExecutor.addGameObjectManager({
     - `commandExecutor` : This command executor instance.
         - `commandExecutor.waitEvent(eventEmitter, eventName)` : Invoke this method to 
           Run next command after `eventEmitter` emitting event `eventName`.
+    - `eventSheetManager` : This event sheet manager instance.
+        - Store variable into blackboard of eventSheetManager : `eventSheetManager.setData(key, value)`
 
 ##### Create custom game object
 
