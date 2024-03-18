@@ -9,6 +9,9 @@ var GetLocalState = function (gameObject) {
             rotation: 0, syncRotation: true,
             scaleX: 0, scaleY: 0, syncScale: true,
             alpha: 0, syncAlpha: true,
+            syncScrollFactor: true,
+            syncCameraFilter: true,
+            syncDisplayList: true,
             visible: true,
             active: true,
         };

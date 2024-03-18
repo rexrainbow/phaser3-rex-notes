@@ -372,6 +372,9 @@
         syncScale: true,
         alpha: 0,
         syncAlpha: true,
+        syncScrollFactor: true,
+        syncCameraFilter: true,
+        syncDisplayList: true,
         visible: true,
         active: true
       };
@@ -453,10 +456,7 @@
     .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
-    this.addToParentContainer(gameObject); // Sync parent's container to child
-    this.addToPatentLayer(gameObject); // Sync parent's layer to child
-    this.addToRenderLayer(gameObject); // Sync parent's render-layer
-
+    SyncDisplayList.call(this, gameObject, state);
     return this;
   };
   var AddLocal = function AddLocal(gameObject, config) {
@@ -483,7 +483,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
-    this.addToRenderLayer(gameObject);
+    SyncDisplayList.call(this, gameObject, state);
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
@@ -497,6 +497,7 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
       state.syncCameraFilter = config;
+      state.syncDisplayList = config;
     } else {
       state.syncPosition = GetValue$d(config, 'syncPosition', true);
       state.syncRotation = GetValue$d(config, 'syncRotation', true);
@@ -504,7 +505,16 @@
       state.syncAlpha = GetValue$d(config, 'syncAlpha', true);
       state.syncScrollFactor = GetValue$d(config, 'syncScrollFactor', true);
       state.syncCameraFilter = GetValue$d(config, 'syncCameraFilter', true);
+      state.syncDisplayList = GetValue$d(config, 'syncDisplayList', true);
     }
+  };
+  var SyncDisplayList = function SyncDisplayList(gameObject, state) {
+    this.addToParentContainer(gameObject); // Sync parent's container to child
+
+    if (state.syncDisplayList) {
+      this.addToPatentLayer(gameObject); // Sync parent's layer to child
+    }
+    this.addToRenderLayer(gameObject); // Sync parent's render-layer
   };
   var AddChild = {
     // Can override this method

@@ -520,7 +520,11 @@ dialog.resetDisplayContent({
 });
 ```
 
-- `title`, `content`,`buttonA`, `buttonB` : Display content
+- `title`, `content` : Display content
+    - A string : Set text of simple lable
+    - Configuration of [`simpleLabel.resetDisplayContent(config)`](ui-simplelabel.md#reset-display-content) : Set icon, text, action icon of simple label.
+    - `null` : Hide `title` or `content` element.
+- `buttonA`, `buttonB` : Display content
     - A string : Set text of simple lable
     - Configuration of [`simpleLabel.resetDisplayContent(config)`](ui-simplelabel.md#reset-display-content) : Set icon, text, action icon of simple label.
 - `choices` : Array of display content

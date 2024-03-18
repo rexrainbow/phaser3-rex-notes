@@ -372,6 +372,9 @@
         syncScale: true,
         alpha: 0,
         syncAlpha: true,
+        syncScrollFactor: true,
+        syncCameraFilter: true,
+        syncDisplayList: true,
         visible: true,
         active: true
       };
@@ -453,10 +456,7 @@
     .updateCameraFilter(gameObject); // Apply parent's cameraFilter to child
 
     BaseAdd.call(this, gameObject);
-    this.addToParentContainer(gameObject); // Sync parent's container to child
-    this.addToPatentLayer(gameObject); // Sync parent's layer to child
-    this.addToRenderLayer(gameObject); // Sync parent's render-layer
-
+    SyncDisplayList.call(this, gameObject, state);
     return this;
   };
   var AddLocal = function AddLocal(gameObject, config) {
@@ -483,7 +483,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
-    this.addToRenderLayer(gameObject);
+    SyncDisplayList.call(this, gameObject, state);
     return this;
   };
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
@@ -497,6 +497,7 @@
       state.syncAlpha = config;
       state.syncScrollFactor = config;
       state.syncCameraFilter = config;
+      state.syncDisplayList = config;
     } else {
       state.syncPosition = GetValue$1v(config, 'syncPosition', true);
       state.syncRotation = GetValue$1v(config, 'syncRotation', true);
@@ -504,7 +505,16 @@
       state.syncAlpha = GetValue$1v(config, 'syncAlpha', true);
       state.syncScrollFactor = GetValue$1v(config, 'syncScrollFactor', true);
       state.syncCameraFilter = GetValue$1v(config, 'syncCameraFilter', true);
+      state.syncDisplayList = GetValue$1v(config, 'syncDisplayList', true);
     }
+  };
+  var SyncDisplayList = function SyncDisplayList(gameObject, state) {
+    this.addToParentContainer(gameObject); // Sync parent's container to child
+
+    if (state.syncDisplayList) {
+      this.addToPatentLayer(gameObject); // Sync parent's layer to child
+    }
+    this.addToRenderLayer(gameObject); // Sync parent's render-layer
   };
   var AddChild$3 = {
     // Can override this method
@@ -27428,17 +27438,29 @@
   };
   var ResetTitle = function ResetTitle(config) {
     var title = this.childrenMap.title;
-    title.resetDisplayContent(config.title);
+    config = config.title;
+    if (config === null) {
+      title.hide();
+    } else {
+      title.show();
+      title.resetDisplayContent(config);
+    }
   };
   var ResetContent = function ResetContent(config) {
     var content = this.childrenMap.content;
-    if (content.resetDisplayContent) {
-      // Label
-      content.resetDisplayContent(config.content);
+    config = config.content;
+    if (config === null) {
+      content.hide();
     } else {
-      // TextArea
-      var text = config.content || '';
-      content.setText(text);
+      content.show();
+      if (content.resetDisplayContent) {
+        // Label
+        content.resetDisplayContent(config);
+      } else {
+        // TextArea
+        var text = config || '';
+        content.setText(text);
+      }
     }
   };
   var ResetActions = function ResetActions(config) {
@@ -27450,11 +27472,21 @@
     if (!buttonContentArray) {
       var buttonA = actionButtons[0];
       if (buttonA) {
-        buttonA.resetDisplayContent(config.buttonA);
+        if (config.buttonA === null) {
+          buttonA.hide();
+        } else {
+          buttonA.show();
+          buttonA.resetDisplayContent(config.buttonA);
+        }
       }
       var buttonB = actionButtons[1];
       if (buttonB) {
-        buttonB.resetDisplayContent(config.buttonB);
+        if (config.buttonB === null) {
+          buttonB.hide();
+        } else {
+          buttonB.show();
+          buttonB.resetDisplayContent(config.buttonB);
+        }
       }
     } else {
       var scene = this.scene;

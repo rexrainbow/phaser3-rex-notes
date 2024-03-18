@@ -15,19 +15,34 @@ var ResetDisplayContent = function (config) {
 
 var ResetTitle = function (config) {
     var title = this.childrenMap.title;
-    title.resetDisplayContent(config.title);
+    config = config.title;
+    if (config === null) {
+        title.hide();
+    } else {
+        title.show();
+
+        title.resetDisplayContent(config);
+    }
 }
 
 var ResetContent = function (config) {
     var content = this.childrenMap.content;
-    if (content.resetDisplayContent) {
-        // Label
-        content.resetDisplayContent(config.content);
+    config = config.content;
+    if (config === null) {
+        content.hide();
     } else {
-        // TextArea
-        var text = config.content || '';
-        content.setText(text)
+        content.show();
+
+        if (content.resetDisplayContent) {
+            // Label
+            content.resetDisplayContent(config);
+        } else {
+            // TextArea
+            var text = config || '';
+            content.setText(text)
+        }
     }
+
 }
 
 var ResetActions = function (config) {
@@ -40,12 +55,22 @@ var ResetActions = function (config) {
     if (!buttonContentArray) {
         var buttonA = actionButtons[0];
         if (buttonA) {
-            buttonA.resetDisplayContent(config.buttonA);
+            if (config.buttonA === null) {
+                buttonA.hide();
+            } else {
+                buttonA.show();
+                buttonA.resetDisplayContent(config.buttonA);
+            }
         }
 
         var buttonB = actionButtons[1];
         if (buttonB) {
-            buttonB.resetDisplayContent(config.buttonB);
+            if (config.buttonB === null) {
+                buttonB.hide();
+            } else {
+                buttonB.show();
+                buttonB.resetDisplayContent(config.buttonB);
+            }
         }
 
     } else {

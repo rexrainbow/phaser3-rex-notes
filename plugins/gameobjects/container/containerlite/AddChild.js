@@ -20,9 +20,7 @@ var Add = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
-    this.addToParentContainer(gameObject);     // Sync parent's container to child
-    this.addToPatentLayer(gameObject);         // Sync parent's layer to child
-    this.addToRenderLayer(gameObject);         // Sync parent's render-layer
+    SyncDisplayList.call(this, gameObject, state);
 
     return this;
 }
@@ -56,7 +54,7 @@ var AddLocal = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
-    this.addToRenderLayer(gameObject);
+    SyncDisplayList.call(this, gameObject, state);
 
     return this;
 }
@@ -73,6 +71,7 @@ var SetupSyncFlags = function (state, config) {
         state.syncAlpha = config;
         state.syncScrollFactor = config;
         state.syncCameraFilter = config;
+        state.syncDisplayList = config;
     } else {
         state.syncPosition = GetValue(config, 'syncPosition', true);
         state.syncRotation = GetValue(config, 'syncRotation', true);
@@ -80,8 +79,19 @@ var SetupSyncFlags = function (state, config) {
         state.syncAlpha = GetValue(config, 'syncAlpha', true);
         state.syncScrollFactor = GetValue(config, 'syncScrollFactor', true);
         state.syncCameraFilter = GetValue(config, 'syncCameraFilter', true);
+        state.syncDisplayList = GetValue(config, 'syncDisplayList', true);
     }
 
+}
+
+var SyncDisplayList = function (gameObject, state) {
+    this.addToParentContainer(gameObject);     // Sync parent's container to child
+
+    if (state.syncDisplayList) {
+        this.addToPatentLayer(gameObject);     // Sync parent's layer to child
+    }
+
+    this.addToRenderLayer(gameObject);         // Sync parent's render-layer
 }
 
 export default {

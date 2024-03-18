@@ -24,6 +24,7 @@ declare namespace ContainerLite {
         syncAlpha?: boolean,
         syncScrollFactor?: boolean,
         syncCameraFilter?: boolean,
+        syncDisplayList?: boolean,
 
     }
 
@@ -274,7 +275,7 @@ declare class ContainerLite extends Base {
     ): this;
 
     bringToTop(): this;
-    bringMeToTop():this;
+    bringMeToTop(): this;
 
     sendToBack(): this;
     sendMeToBack(): this;
@@ -285,13 +286,13 @@ declare class ContainerLite extends Base {
     moveMyDepthBelow(
         gameObject: Phaser.GameObjects.GameObject
     ): this;
-    
+
     moveDepthAbove(
         gameObject: Phaser.GameObjects.GameObject
     ): this;
     moveMyDepthAbove(
         gameObject: Phaser.GameObjects.GameObject
-    ): this;    
+    ): this;
 
     bringChildToTop(
         gameObject: Phaser.GameObjects.GameObject

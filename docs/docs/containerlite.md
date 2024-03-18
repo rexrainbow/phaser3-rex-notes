@@ -172,6 +172,7 @@ container.pin(child, {
     // syncAlpha: true,
     // syncScrollFactor: true,
     // syncCameraFilter: true,
+    // syncDisplayList: true
 });
 ```
 
@@ -194,6 +195,10 @@ container.pin(child, {
 - `syncCameraFilter` : 
     - `true` : Sync cameraFilter of child, default behavior.
     - `false` : Don't sync cameraFilter of child. 
+- `syncDisplayList` :
+    - `true` : Put child into parent's displayList/Layer, default behavior.
+        - Child has to belong to any displayList first.
+    - `false` : Don't change child's displayList.
 
 
 Or add(pin) children

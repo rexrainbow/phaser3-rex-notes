@@ -10326,6 +10326,7 @@
 <span class="w">    </span><span class="c1">// syncAlpha: true,</span>
 <span class="w">    </span><span class="c1">// syncScrollFactor: true,</span>
 <span class="w">    </span><span class="c1">// syncCameraFilter: true,</span>
+<span class="w">    </span><span class="c1">// syncDisplayList: true</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -10358,6 +10359,14 @@
 <li><code>syncCameraFilter</code> : <ul>
 <li><code>true</code> : Sync cameraFilter of child, default behavior.</li>
 <li><code>false</code> : Don't sync cameraFilter of child. </li>
+</ul>
+</li>
+<li><code>syncDisplayList</code> :<ul>
+<li><code>true</code> : Put child into parent's displayList/Layer, default behavior.<ul>
+<li>Child has to belong to any displayList first.</li>
+</ul>
+</li>
+<li><code>false</code> : Don't change child's displayList.</li>
 </ul>
 </li>
 </ul>

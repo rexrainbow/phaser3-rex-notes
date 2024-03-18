@@ -142,8 +142,8 @@ var CreateCommandExecutor = function (scene) {
                 choice(
                     gameObject,
                     {
-                        title = '',
-                        content,
+                        title = null,
+                        content = null,
                         option1, option2, option3,
                         resultKey = 'choiceIndex'
                     } = {},
