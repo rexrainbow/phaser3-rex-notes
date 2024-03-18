@@ -106,8 +106,8 @@ Dialog.typing
   text=Too cool
   speed=100
 
-incData
-  hp=3
+setData
+  hp=#(hp+3)
 
 ### [IF choiceIndex == 2]
 
