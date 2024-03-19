@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import MarkedEventSheetsPlugin from '../../../plugins/markedeventsheets-plugin.js';
-import UIPlugin from '../../../templates/ui/ui-plugin.js';
+import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 
 class Demo extends Phaser.Scene {
