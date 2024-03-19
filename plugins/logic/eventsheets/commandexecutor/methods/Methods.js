@@ -1,5 +1,5 @@
 import AddCommand from './AddCommand.js';
-import TreeManagerMethods from './TreeManagerMethods.js';
+import EventSheetManagerMethods from './EventSheetManagerMethods.js';
 import WaitMethods from './WaitMethods.js';
 import GameObjectMethods from './GameObjectMethods.js';
 import BackgroundMusicMethods from './musicmethods/BackgroundMusicMethods.js';
@@ -16,7 +16,7 @@ var Methods = {
 
 Object.assign(
     Methods,
-    TreeManagerMethods,
+    EventSheetManagerMethods,
     WaitMethods,
     GameObjectMethods,
     BackgroundMusicMethods,
