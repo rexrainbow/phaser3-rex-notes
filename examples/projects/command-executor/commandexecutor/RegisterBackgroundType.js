@@ -11,7 +11,18 @@ var RegisterBackgroundType = function (commandExecutor) {
         defaultLayer: BGLayer,
 
         commands: {
-            cross(gameObject, { key, frame, duration, mode = 'fade', wait = true } = {}, commandExecutor, eventSheetManager) {
+            cross(
+                gameObject,
+                {
+                    key, frame,
+                    duration,
+                    mode = 'fade',
+                    wait = true
+                } = {},
+                commandExecutor,
+                eventSheetManager
+            ) {
+
                 // Wait until transition complete
                 if (wait) {
                     commandExecutor.waitEvent(gameObject, 'complete');
