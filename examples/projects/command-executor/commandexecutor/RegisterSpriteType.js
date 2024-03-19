@@ -11,7 +11,15 @@ var RegisterSpriteType = function (commandExecutor) {
         defaultLayer: GOLayer,
 
         commands: {
-            cross(gameObject, { key, frame } = {}, commandExecutor, eventSheetManager) {
+            cross(
+                gameObject,
+                {
+                    key, frame
+                } = {},
+                commandExecutor,
+                eventSheetManager
+            ) {
+
                 gameObject.setTexture(key, frame);
             }
         }

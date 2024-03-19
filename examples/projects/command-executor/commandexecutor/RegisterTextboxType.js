@@ -9,7 +9,17 @@ var RegisterTextboxType = function (commandExecutor) {
         defaultLayer: UILayer,
 
         commands: {
-            typing(gameObject, { name, text, speed } = {}, commandExecutor, eventSheetManager) {
+            typing(
+                gameObject,
+                {
+                    name,
+                    text,
+                    speed
+                } = {},
+                commandExecutor,
+                eventSheetManager
+            ) {
+
                 if (name) {
                     var title = gameObject.getElement('title').setText(name);
                     gameObject.setChildVisible(title, true);
