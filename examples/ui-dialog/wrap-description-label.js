@@ -93,16 +93,6 @@ class Demo extends Phaser.Scene {
             // .drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000);
 
-        var tween = this.tweens.add({
-            targets: dialog,
-            scaleX: 1,
-            scaleY: 1,
-            ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
-            repeat: 0, // -1: infinity
-            yoyo: false
-        });
-
         this.print = this.add.text(0, 0, '');
         dialog
             .on('button.click', function (button, groupName, index, pointer, event) {
