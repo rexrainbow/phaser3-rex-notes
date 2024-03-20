@@ -41,4 +41,6 @@ declare class BracketParser extends EventEmitter {
 
     setDelimiters(delimiterLeft: string, delimiterRight?: string): this;
     setTranslateTagNameCallback(callback?: BracketParser.TranslateTagNameCallbackType): this;
+
+    readonly lastTagSource: string;
 }

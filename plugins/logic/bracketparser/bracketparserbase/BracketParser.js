@@ -176,7 +176,9 @@ class BracketParser {
             }
 
             // Process current tag
+            this.lastTagSource = regexResult[0];
             this.onTag(regexResult[1]);
+            this.lastTagSource = undefined;
 
             this.progressIndex = matchEnd;
             // Might pause here

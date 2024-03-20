@@ -1,8 +1,12 @@
 import Parser from './parser/Parser';
 
 class BBCodeLog {
-    constructor() {
-        this.parser = new Parser();
+    constructor({
+        delimiters = '[]'
+    } = {}) {
+        this.parser = new Parser({
+            delimiters: delimiters
+        });
     }
 
     log(s, logType = 'log') {

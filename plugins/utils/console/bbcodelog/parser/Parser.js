@@ -1,14 +1,13 @@
 import BracketParser from '../../../../bracketparser.js';
 import ParseHandlers from './ParseHandlers.js';
+import Clone from '../../../object/Clone.js';
 
 class Parser extends BracketParser {
-    constructor() {
-        super({
-            delimiters: '[]'
-        });
+    constructor(config) {
+        super(config);
 
         this.segments = [];
-        this.lastSegment = {};
+        this.lastPropFlags = null;
 
         for (var i = 0, cnt = ParseHandlers.length; i < cnt; i++) {
             ParseHandlers[i](this);
@@ -17,24 +16,42 @@ class Parser extends BracketParser {
 
     clearBuffers() {
         this.segments.length = 0;
-        this.lastSegment = {};
+        this.lastPropFlags = null;
         return this;
     }
 
     addStyle(name, value) {
-        this.lastSegment[name] = value;
+        if (this.lastPropFlags === null) {
+            this.lastPropFlags = {};
+        }
+
+        this.lastPropFlags[name] = value;
         return this;
     }
 
     removeStyle(name) {
-        this.lastSegment[name] = null;
+        if (this.lastPropFlags === null) {
+            return this;
+        }
+
+        this.lastPropFlags[name] = null;
         return this;
     }
 
     addContent(content) {
-        this.lastSegment.text = content;
-        this.segments.push(this.lastSegment);
-        this.lastSegment = {};
+        if (this.lastPropFlags) {
+            this.segments.push(Clone(this.lastPropFlags));
+            this.segments.push(content);
+
+        } else {
+            if (this.segments === 0) {
+                this.segments.push(content);
+            } else {
+                this.segments[this.segments.length - 1] += content;
+            }
+
+        }
+
         return this;
     }
 
@@ -45,23 +62,18 @@ class Parser extends BracketParser {
         var styles = [];
 
         for (var i = 0, cnt = this.segments.length; i < cnt; i++) {
-            var segment = this.segments[i];
-            var text = segment.text;
-            if (!text) {
+            var text = this.segments[i];
+            if (typeof (text) !== 'string') {
                 continue;
             }
-            delete segment.text;
-            var style = [];
-            for (var propName in segment) {
-                var propValue = segment[propName];
-                if (propValue === null) {
-                    propValue = 'inherit';
-                }
-                style.push(`${propName}:${propValue}`)
-            }
 
-            content.push(`%c${text}`);
-            styles.push(style.join(';'));
+            var propFlags = this.segments[i - 1];
+            if (typeof (propFlags) === 'object') {
+                content.push(`%c${text}`);
+                styles.push(PropToStyle(propFlags));
+            } else {
+                content.push(text);
+            }
         }
 
         var result = [content.join(''), ...styles];
@@ -70,6 +82,19 @@ class Parser extends BracketParser {
 
         return result;
     }
+}
+
+var PropToStyle = function (propFlags) {
+    var styles = [];
+    for (var propName in propFlags) {
+        var propValue = propFlags[propName];
+        if (propValue === null) {
+            propValue = 'inherit';
+        }
+        styles.push(`${propName}:${propValue}`)
+    }
+
+    return styles.join(';');
 }
 
 export default Parser;
