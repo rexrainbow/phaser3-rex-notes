@@ -1,35 +1,13 @@
-import BracketParser from '../../../bracketparser.js';
+import Parser from './parser/Parser';
 
 class BBCodeLog {
     constructor() {
-
-        this.lines = [];
-        this.styles = [];
-
-        this.parser = (new BracketParser({
-            delimiters: '[]'
-        }))
-            .on('+color', function (color) {
-                this.lines.push('%c');
-                this.styles.push(`color: ${color};`);
-            }, this)
-            .on('-color', function () {
-                this.lines.push('%c');
-                this.styles.push(`color: inherit;`);
-            }, this)
-            .on('content', function (content) {
-                this.lines.push(content);
-            }, this)
+        this.parser = new Parser();
     }
 
     log(s, logType = 'log') {
-        this.parser.start(s);
-
-        console[logType].apply(console, [this.lines.join(''), ...this.styles]);
-
-        this.lines.length = 0;
-        this.styles.length = 0;
-
+        var result = this.parser.parse(s);
+        console[logType].apply(console, result);
         return this;
     }
 }
