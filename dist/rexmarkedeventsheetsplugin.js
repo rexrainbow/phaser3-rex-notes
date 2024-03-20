@@ -22527,7 +22527,7 @@
     return this;
   };
 
-  var TreeManagerMethods = {
+  var EventSheetManagerMethods = {
     // TODO: More commands
     setData: function setData(config, eventSheetManager) {
       for (var name in config) {
@@ -22537,6 +22537,11 @@
     incData: function incData(config, eventSheetManager) {
       for (var name in config) {
         eventSheetManager.incData(name, config[name]);
+      }
+    },
+    toggleData: function toggleData(config, eventSheetManager) {
+      for (var name in config) {
+        eventSheetManager.toggleData(name, config[name]);
       }
     }
   };
@@ -23408,7 +23413,7 @@
     addCommand: AddCommand,
     defaultHandler: DefaultHandler
   };
-  Object.assign(Methods, TreeManagerMethods, WaitMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods);
+  Object.assign(Methods, EventSheetManagerMethods, WaitMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods);
 
   var CommandExecutor = /*#__PURE__*/function () {
     function CommandExecutor(scene, config) {

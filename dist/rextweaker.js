@@ -3211,12 +3211,38 @@
     if (mapNameList.length === 0) {
       return undefined;
     }
+    if (recursive === undefined) {
+      recursive = false;
+    }
     var name = mapNameList.shift(),
       element = null;
     if (name.charAt(0) === '#') {
       // Get element by name
       name = name.substring(1);
       element = this.getByName(name, recursive);
+    } else if (mapNameList.length === 0 && recursive) {
+      // Get element by single key and recursive        
+      var childrenMap = this.childrenMap;
+      if (childrenMap) {
+        var queue = [childrenMap];
+        var child;
+        while (queue.length) {
+          childrenMap = queue.shift();
+          for (var key in childrenMap) {
+            child = childrenMap[key];
+            if (key === name) {
+              element = child;
+              break; // Leave for-loop
+            } else if (child && _typeof(child) === 'object' && child.childrenMap) {
+              queue.push(child.childrenMap);
+            }
+          }
+          if (element) {
+            // leave while-loop
+            break;
+          }
+        }
+      }
     } else if (name.indexOf('[') === -1) {
       // Get element by key
       if (this.childrenMap) {
