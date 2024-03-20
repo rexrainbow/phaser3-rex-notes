@@ -648,13 +648,22 @@
     }
   };
 
-  var ScreenXYToWorldXY = function ScreenXYToWorldXY(screenX, screenY, camera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+    var camera = pointer.camera;
+    if (!camera) {
+      return null;
+    }
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globalOut;
     }
-    camera.getWorldPoint(screenX, screenY, out);
+    if (camera === mainCamera) {
+      out.x = pointer.worldX;
+      out.y = pointer.worldY;
+    } else {
+      camera.getWorldPoint(pointer.x, pointer.y, out);
+    }
     return out;
   };
   var globalOut = {};
@@ -771,24 +780,15 @@
         if (this.pointer !== pointer) {
           return;
         }
-        var camera = pointer.camera;
-        if (!camera) {
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
           // Pointer is outside of any camera, no worldX/worldY available
           return;
         }
 
         // Vector of world position
+        var camera = pointer.camera;
         var gameObject = this.gameObject;
-        var worldXY = this.end;
-
-        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
-        // if this camera is not main-camera
-        if (camera !== this.mainCamera) {
-          worldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, worldXY);
-        } else {
-          worldXY.x = pointer.worldX;
-          worldXY.y = pointer.worldY;
-        }
         var startX = gameObject.x;
         var startY = gameObject.y;
         if (gameObject.scrollFactorX === 0) {
@@ -798,6 +798,8 @@
           startY += camera.scrollY;
         }
         this.setVector(startX, startY, worldXY.x, worldXY.y);
+        this.end.x = worldXY.x;
+        this.end.y = worldXY.y;
         this.emit('update');
       }
     }, {

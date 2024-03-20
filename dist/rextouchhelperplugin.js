@@ -415,16 +415,46 @@
     return true;
   };
 
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+    var camera = pointer.camera;
+    if (!camera) {
+      return null;
+    }
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalOut;
+    }
+    if (camera === mainCamera) {
+      out.x = pointer.worldX;
+      out.y = pointer.worldY;
+    } else {
+      camera.getWorldPoint(pointer.x, pointer.y, out);
+    }
+    return out;
+  };
+  var globalOut = {};
+
   var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
+    var mainCamera = gameObject.scene.sys.cameras.main,
+      worldXY;
     if (pointer) {
-      return IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest);
+      worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+      if (!worldXY) {
+        return false;
+      }
+      return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
     } else {
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers;
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
-        if (IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest)) {
+        worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+        if (!worldXY) {
+          continue;
+        }
+        if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
           return true;
         }
       }

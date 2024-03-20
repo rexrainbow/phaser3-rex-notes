@@ -1,6 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import IsGameObject from '../../utils/system/IsGameObject.js';
-import ScreenXYToWorldXY from '../../utils/position/ScreenXYToWorldXY.js';
+import GetPointerWorldXY from '../../utils/input/GetPointerWorldXY.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -151,18 +151,6 @@ class DragRotate extends ComponentBase {
         return y;
     }
 
-    getPointerWorldXY(pointer) {
-        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
-        // if this camera is not main-camera
-        if (pointer.camera !== this.mainCamera) {
-            WorldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, WorldXY);
-        } else {
-            WorldXY.x = pointer.worldX;
-            WorldXY.y = pointer.worldY;
-        }
-        return WorldXY;
-    }
-
     containsPointer(pointer) {
         if ((this.minRadius === 0) && (this.maxRadius === undefined)) {
             return true;
@@ -170,7 +158,12 @@ class DragRotate extends ComponentBase {
 
         var originX = this.getOriginX(pointer.camera);
         var originY = this.getOriginY(pointer.camera);
-        var worldXY = this.getPointerWorldXY(pointer);
+
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+            return false;
+        }
+
         var r = DistanceBetween(originX, originY, worldXY.x, worldXY.y);
         return (r >= this.minRadius) &&
             ((this.maxRadius === undefined) || (r <= this.maxRadius));
@@ -229,7 +222,12 @@ class DragRotate extends ComponentBase {
 
     onDragStart(pointer) {
         this.pointer = pointer;
-        var worldXY = this.getPointerWorldXY(pointer);
+
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+            return;
+        }
+
         this.prevPointerX = worldXY.x;
         this.prevPointerY = worldXY.y;
         this.state = STATE_TOUCH1;
@@ -248,7 +246,12 @@ class DragRotate extends ComponentBase {
     onDrag(pointer) {
         var x = this.getOriginX(pointer.camera),
             y = this.getOriginY(pointer.camera);
-        var worldXY = this.getPointerWorldXY(pointer);
+
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+            return;
+        }
+
         var curPointerX = worldXY.x;
         var curPointerY = worldXY.y;
         var a0 = GetAngle(x, y, this.prevPointerX, this.prevPointerY),

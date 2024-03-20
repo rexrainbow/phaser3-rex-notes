@@ -212,6 +212,17 @@ var isRotated = rotate.isRotated;
 
 Return `true` if pinched.
 
+### Is pointer inside another game object
+
+Under any rotate event,
+
+```javascript
+rotate.on('rotate', function(rotate) {
+    var isPointer0InsideGameObject = rotate.isPointer0InGameObject(anotherGameObject);
+    var isPointer1InsideGameObject = rotate.isPointer1InGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Drag threshold

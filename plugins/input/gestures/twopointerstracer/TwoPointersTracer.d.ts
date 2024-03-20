@@ -33,4 +33,16 @@ declare class TwoPointersTracer extends Phaser.Events.EventEmitter {
     readonly movementCenterX: number;
     readonly movementCenterY: number;
     readonly drag1Vector: { x: number, y: number };
+
+    isPointer0InGameObject(
+        gameObject: Phaser.GameObjects.GameObject,
+        preTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+        postTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+    ): boolean;
+
+    isPointer1InGameObject(
+        gameObject: Phaser.GameObjects.GameObject,
+        preTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+        postTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+    ): boolean;
 }

@@ -203,6 +203,17 @@ var isPinched = pinch.isPinched;
 
 Return `true` if pinched.
 
+### Is pointer inside another game object
+
+Under any pinch event,
+
+```javascript
+pinch.on('pinch', function(pinch) {
+    var isPointer0InsideGameObject = pinch.isPointer0InGameObject(anotherGameObject);
+    var isPointer1InsideGameObject = pinch.isPointer1InGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Drag threshold

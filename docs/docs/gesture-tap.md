@@ -176,6 +176,16 @@ var isTapped = tap.isTapped;
 
 Return `true` if tapped end.
 
+### Is pointer inside another game object
+
+Under any tap event,
+
+```javascript
+tap.on('tap', function(tap){
+    var isPointerInsideGameObject = tap.isPointerInGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Hold time

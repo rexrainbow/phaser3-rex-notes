@@ -148,6 +148,16 @@ var isSwiped = swipe.isSwiped;
 
 Return `true` if panning.
 
+### Is pointer inside another game object
+
+Under any swipe event,
+
+```javascript
+swipe.on('swipe', function(swipe){
+    var isPointerInsideGameObject = swipe.isPointerInGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Drag threshold

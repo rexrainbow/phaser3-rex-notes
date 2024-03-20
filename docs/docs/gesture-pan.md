@@ -160,6 +160,16 @@ var isPanned = pan.isPanned;
 
 Return `true` if panned.
 
+### Is pointer inside another game object
+
+Under any pan event,
+
+```javascript
+pan.on('panend', function(pan){
+    var isPointerInsideGameObject = pan.isPointerInGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Drag threshold

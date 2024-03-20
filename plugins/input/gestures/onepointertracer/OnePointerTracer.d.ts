@@ -24,4 +24,10 @@ declare class OnePointerTracer extends Phaser.Events.EventEmitter {
 
     pointer: Phaser.Input.Pointer | undefined;
     lastPointer: Phaser.Input.Pointer | undefined;
+
+    isPointerInGameObject(
+        gameObject: Phaser.GameObjects.GameObject,
+        preTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+        postTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+    ): boolean;
 }

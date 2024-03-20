@@ -146,6 +146,16 @@ var isPressed = press.isPressed;
 
 Return `true` if pressed.
 
+### Is pointer inside another game object
+
+Under any press event,
+
+```javascript
+press.on('pressstart', function(press){
+    var isPointerInsideGameObject = press.isPointerInGameObject(anotherGameObject);
+});
+```
+
 ### Other properties
 
 - Hold time

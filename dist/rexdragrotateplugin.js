@@ -340,13 +340,22 @@
     return object instanceof GameObjectClass;
   };
 
-  var ScreenXYToWorldXY = function ScreenXYToWorldXY(screenX, screenY, camera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+    var camera = pointer.camera;
+    if (!camera) {
+      return null;
+    }
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globalOut;
     }
-    camera.getWorldPoint(screenX, screenY, out);
+    if (camera === mainCamera) {
+      out.x = pointer.worldX;
+      out.y = pointer.worldY;
+    } else {
+      camera.getWorldPoint(pointer.x, pointer.y, out);
+    }
     return out;
   };
   var globalOut = {};
@@ -500,19 +509,6 @@
         return y;
       }
     }, {
-      key: "getPointerWorldXY",
-      value: function getPointerWorldXY(pointer) {
-        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
-        // if this camera is not main-camera
-        if (pointer.camera !== this.mainCamera) {
-          WorldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, WorldXY);
-        } else {
-          WorldXY.x = pointer.worldX;
-          WorldXY.y = pointer.worldY;
-        }
-        return WorldXY;
-      }
-    }, {
       key: "containsPointer",
       value: function containsPointer(pointer) {
         if (this.minRadius === 0 && this.maxRadius === undefined) {
@@ -520,7 +516,10 @@
         }
         var originX = this.getOriginX(pointer.camera);
         var originY = this.getOriginY(pointer.camera);
-        var worldXY = this.getPointerWorldXY(pointer);
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+          return false;
+        }
         var r = DistanceBetween(originX, originY, worldXY.x, worldXY.y);
         return r >= this.minRadius && (this.maxRadius === undefined || r <= this.maxRadius);
       }
@@ -578,7 +577,10 @@
       key: "onDragStart",
       value: function onDragStart(pointer) {
         this.pointer = pointer;
-        var worldXY = this.getPointerWorldXY(pointer);
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+          return;
+        }
         this.prevPointerX = worldXY.x;
         this.prevPointerY = worldXY.y;
         this.state = STATE_TOUCH1;
@@ -599,7 +601,10 @@
       value: function onDrag(pointer) {
         var x = this.getOriginX(pointer.camera),
           y = this.getOriginY(pointer.camera);
-        var worldXY = this.getPointerWorldXY(pointer);
+        var worldXY = GetPointerWorldXY(pointer, this.mainCamera, true);
+        if (!worldXY) {
+          return;
+        }
         var curPointerX = worldXY.x;
         var curPointerY = worldXY.y;
         var a0 = GetAngle(x, y, this.prevPointerX, this.prevPointerY),
@@ -630,7 +635,6 @@
     }]);
     return DragRotate;
   }(ComponentBase);
-  var WorldXY = {};
 
   var DragRotatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DragRotatePlugin, _Phaser$Plugins$BaseP);

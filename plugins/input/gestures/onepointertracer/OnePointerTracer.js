@@ -1,5 +1,6 @@
 import TickTask from '../../../utils/componentbase/TickTask.js';
 import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import IsPointerInBounds from '../../../utils/input/IsPointerInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -249,6 +250,15 @@ class OnePointerTracer extends TickTask {
     cancel() {
         this.state = IDLE;
         return this;
+    }
+
+    isPointerInGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointer;
+        if (!pointer) {
+            return false;
+        }
+
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
     }
 }
 

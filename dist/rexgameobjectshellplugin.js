@@ -6605,6 +6605,71 @@
     'always': 2
   };
 
+  var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
+    // Can't get bounds
+    if (!gameObject) {
+      return false;
+    }
+    if (preTest && !preTest(gameObject, x, y)) {
+      return false;
+    }
+    var boundsRect = GetBounds(gameObject, true);
+    if (!boundsRect.contains(x, y)) {
+      return false;
+    }
+    if (postTest && !postTest(gameObject, x, y)) {
+      return false;
+    }
+    return true;
+  };
+
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+    var camera = pointer.camera;
+    if (!camera) {
+      return null;
+    }
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalOut$1;
+    }
+    if (camera === mainCamera) {
+      out.x = pointer.worldX;
+      out.y = pointer.worldY;
+    } else {
+      camera.getWorldPoint(pointer.x, pointer.y, out);
+    }
+    return out;
+  };
+  var globalOut$1 = {};
+
+  var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
+    var mainCamera = gameObject.scene.sys.cameras.main,
+      worldXY;
+    if (pointer) {
+      worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+      if (!worldXY) {
+        return false;
+      }
+      return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers;
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+        worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+        if (!worldXY) {
+          continue;
+        }
+        if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
+
   var GetValue$1_ = Phaser.Utils.Objects.GetValue;
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
@@ -6848,6 +6913,15 @@
       value: function cancel() {
         this.state = IDLE$7;
         return this;
+      }
+    }, {
+      key: "isPointerInGameObject",
+      value: function isPointerInGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointer;
+        if (!pointer) {
+          return false;
+        }
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
       }
     }]);
     return OnePointerTracer;
@@ -8696,6 +8770,24 @@
       value: function cancel() {
         this.state = IDLE$3;
         return this;
+      }
+    }, {
+      key: "isPointer0InGameObject",
+      value: function isPointer0InGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointers[0];
+        if (!pointer) {
+          return false;
+        }
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
+      }
+    }, {
+      key: "isPointer1InGameObject",
+      value: function isPointer1InGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointers[1];
+        if (!pointer) {
+          return false;
+        }
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
       }
     }]);
     return TwoPointersTracer;
@@ -12780,24 +12872,6 @@
     FadeOutDestroy(cover, duration, false);
   };
 
-  var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
-    // Can't get bounds
-    if (!gameObject) {
-      return false;
-    }
-    if (preTest && !preTest(gameObject, x, y)) {
-      return false;
-    }
-    var boundsRect = GetBounds(gameObject, true);
-    if (!boundsRect.contains(x, y)) {
-      return false;
-    }
-    if (postTest && !postTest(gameObject, x, y)) {
-      return false;
-    }
-    return true;
-  };
-
   var GetValue$1D = Phaser.Utils.Objects.GetValue;
   var Modal$1 = /*#__PURE__*/function (_OpenCloseTransition) {
     _inherits(Modal, _OpenCloseTransition);
@@ -13063,23 +13137,6 @@
     modalClose: function modalClose(closeEventData) {
       ModalClose(this, closeEventData);
       return this;
-    }
-  };
-
-  var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
-    if (pointer) {
-      return IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest);
-    } else {
-      var inputManager = gameObject.scene.input.manager;
-      var pointersTotal = inputManager.pointersTotal;
-      var pointers = inputManager.pointers;
-      for (var i = 0; i < pointersTotal; i++) {
-        pointer = pointers[i];
-        if (IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest)) {
-          return true;
-        }
-      }
-      return false;
     }
   };
 

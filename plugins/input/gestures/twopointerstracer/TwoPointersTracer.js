@@ -1,6 +1,7 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import Clear from '../../../utils/object/Clear.js';
+import IsPointerInBounds from '../../../utils/input/IsPointerInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
@@ -339,6 +340,24 @@ class TwoPointersTracer {
     cancel() {
         this.state = IDLE;
         return this;
+    }
+
+    isPointer0InGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointers[0];
+        if (!pointer) {
+            return false;
+        }
+
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
+    }
+
+    isPointer1InGameObject(gameObject, preTest, postTest) {
+        var pointer = this.pointers[1];
+        if (!pointer) {
+            return false;
+        }
+
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
     }
 }
 
