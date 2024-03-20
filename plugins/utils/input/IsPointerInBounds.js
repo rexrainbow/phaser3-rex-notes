@@ -2,8 +2,7 @@ import IsPointInBounds from '../bounds/IsPointInBounds.js';
 import GetPointerWorldXY from './GetPointerWorldXY.js';
 
 var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
-    var camera,
-        mainCamera = gameObject.scene.sys.cameras.main,
+    var mainCamera = gameObject.scene.sys.cameras.main,
         worldXY;
 
     if (pointer) {

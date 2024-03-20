@@ -1,4 +1,5 @@
-import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+// This class might be used standalone
+import EventEmitterMethods from '../../../utils/eventemitter/StandAloneEventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import EscapeRegex from '../../../utils/string/EscapeRegex.js';
