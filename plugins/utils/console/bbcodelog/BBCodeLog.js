@@ -1,19 +1,29 @@
 import Parser from './parser/Parser';
 
-const RESET_INPUT = "%c ";
-const RESET_CSS = "";
-
 class BBCodeLog {
     constructor({
-        delimiters = '[]'
+        delimiters = '[]',
+        enable = true
     } = {}) {
+
         this.parser = new Parser({
             delimiters: delimiters
         });
+
+        this.enable = enable;
+    }
+
+    setEnable(enable = true) {
+        this.enable = enable;
+        return this;
     }
 
     log(s, logType = 'log') {
-        if (s) {
+        if (!this.enable) {
+            return this;
+        }
+
+        if (typeof (s) == 'string') {
             var inputs = [];
             var modifiers = [];
             this.parser.parse(s).forEach(function (item) {
@@ -24,9 +34,10 @@ class BBCodeLog {
             console[logType].call(console, inputs.join(''), ...modifiers);
 
         } else {
-            console[logType]();
+            console[logType](s);
 
         }
+
         return this;
     }
 }

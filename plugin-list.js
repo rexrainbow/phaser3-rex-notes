@@ -244,7 +244,7 @@ module.exports = {
     'fileselectorbutton': './templates/ui/fileselectorbutton/FileSelectorButton.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
-    'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',    
+    'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',
     'dynamictext': './templates/ui/dynamictext/DynamicText.js',
     'textplayer': './templates/ui/textplayer/TextPlayer.js',
     'circularprogress': './templates/ui/circularprogress/CircularProgress.js',
@@ -307,7 +307,7 @@ module.exports = {
     'folder': './templates/ui/folder/Folder.js',
     'trees': './templates/ui/trees/Trees.js',
     'tweaker': './templates/ui/tweaker/Tweaker.js',
-    'splitpanels':'./templates/ui/splitpanels/SplitPanels.js',
+    'splitpanels': './templates/ui/splitpanels/SplitPanels.js',
     'sides': './templates/ui/sides/Sides.js',
 
     // spinner
@@ -330,5 +330,6 @@ module.exports = {
     'spinner': './templates/spinner/spinner/Spinner.js',
     // others
     'firebase': './plugins/firebase.js',
-    'parse': './plugins/parse.js'
+    'parse': './plugins/parse.js',
+    'bbcodelog': './plugins/bbcodelog.js',
 }
