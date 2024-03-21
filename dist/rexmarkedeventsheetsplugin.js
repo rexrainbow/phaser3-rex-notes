@@ -6179,7 +6179,7 @@
         if (!this.activateTreeTitle || this.activateTreeTitle === '') {
           tree.setActive(true);
         } else {
-          tree.treeManager.setTreeActiveState(this.activateTreeTitle, tree.groupName, true);
+          tree.treeManager.setEventSheetActiveState(this.activateTreeTitle, tree.groupName, true);
         }
         return this.SUCCESS;
       }
@@ -6216,7 +6216,7 @@
         if (!this.deactivateTreeTitle || this.deactivateTreeTitle === '') {
           tree.setActive(false);
         } else {
-          tree.treeManager.setTreeActiveState(this.deactivateTreeTitle, tree.groupName, false);
+          tree.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, tree.groupName, false);
         }
         return this.SUCCESS;
       }
@@ -6257,7 +6257,10 @@
       var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var state = {
         isRunning: this.isRunning,
-        pendingTrees: this.pendingTrees.map(function (tree) {
+        pendingTrees: this.pendingTrees.filter(function (tree) {
+          // roundComplete tree will be removed from pendingTrees
+          return !tree.roundComplete;
+        }).map(function (tree) {
           return tree.id;
         })
       };
@@ -6527,13 +6530,13 @@
   };
 
   var TreeActiveStateMethods = {
-    getTreeActiveState: function getTreeActiveState(title, groupName) {
+    getEventSheetActiveState: function getEventSheetActiveState(title, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
       return this.getTreeGroup(groupName).getTreeActiveState(title);
     },
-    setTreeActiveState: function setTreeActiveState(title, groupName, active) {
+    setEventSheetActiveState: function setEventSheetActiveState(title, groupName, active) {
       if (typeof groupName === 'boolean') {
         active = groupName;
         groupName = undefined;
@@ -16144,18 +16147,18 @@
   }];
   var HeadingCommand = [{
     name: 'if',
-    pattern: new RegExp('if\\s*(.*)', 'i')
+    pattern: new RegExp('^if\\s*(.*)', 'i')
   }, {
     name: 'else'
   }, {
     name: 'else if',
-    pattern: new RegExp('else if\\s*(.*)', 'i')
+    pattern: new RegExp('^else if\\s*(.*)', 'i')
   }, {
     name: 'while',
-    pattern: new RegExp('while\\s*(.*)', 'i')
+    pattern: new RegExp('^while\\s*(.*)', 'i')
   }, {
     name: 'repeat',
-    pattern: new RegExp('repeat\\s*(.*)', 'i')
+    pattern: new RegExp('^repeat\\s*(.*)', 'i')
   }];
   var ActionCommandTypes = [{
     name: 'exit'
@@ -16163,13 +16166,13 @@
     name: 'break'
   }, {
     name: 'next round',
-    pattern: new RegExp('next\\s*(.*)\\s*round', 'i')
+    pattern: new RegExp('^next\\s*(.*)\\s*round', 'i')
   }, {
     name: 'activate',
-    pattern: new RegExp('activate\\s*(.*)', 'i')
+    pattern: new RegExp('^activate\\s*(.*)', 'i')
   }, {
     name: 'deactivate',
-    pattern: new RegExp('deactivate\\s*(.*)', 'i')
+    pattern: new RegExp('^deactivate\\s*(.*)', 'i')
   }];
 
   var ParseType = function ParseType(s, patterns) {

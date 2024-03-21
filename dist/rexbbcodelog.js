@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbracketparser2plugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbbcodelog = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -28,6 +28,15 @@
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
     return "symbol" == typeof i ? i : String(i);
+  }
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -116,6 +125,31 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   function getDefaultExportFromCjs (x) {
@@ -912,121 +946,396 @@
   };
   Object.assign(BracketParser$1.prototype, EventEmitterMethods);
 
-  var ParseValue = function ParseValue(text, valueConverter) {
+  var StringToValues = function StringToValues(text, valueConverter, delimiter) {
     if (text == null) {
-      return null;
+      return [];
     }
-    var lastTextIndex = text.length - 1;
-    var firstChar = text.charAt(0);
-    var lastChar = text.charAt(lastTextIndex);
-    if (firstChar === '"' && lastChar === '"' || firstChar === '"' && lastChar === '"') {
-      // Is a quotes string
-      return text.substring(1, lastTextIndex);
-    } else if (firstChar === '[' && lastChar === ']' || firstChar === '{' && lastChar === '}') {
-      // Is an array or a dictionary
-      try {
-        return JSON.parse(text);
-      } catch (_unused) {
-        return text;
-      }
+    if (valueConverter === undefined) {
+      valueConverter = TypeConvert;
     }
-    return valueConverter(text);
+    if (delimiter === undefined) {
+      delimiter = ',';
+    }
+    var values = text.split(delimiter);
+    for (var i = 0, cnt = values.length; i < cnt; i++) {
+      values[i] = valueConverter(values[i]);
+    }
+    return values;
   };
 
   var BracketParser = /*#__PURE__*/function (_BracketParserBase) {
     _inherits(BracketParser, _BracketParserBase);
     function BracketParser(config) {
+      var _this;
       _classCallCheck(this, BracketParser);
       if (config === undefined) {
         config = {};
       }
       if (!config.hasOwnProperty('multipleLinesTag')) {
-        config.multipleLinesTag = true;
+        config.multipleLinesTag = false;
       }
-      return _callSuper(this, BracketParser, [config]);
+      _this = _callSuper(this, BracketParser, [config]);
+
+      // Parameters for regex
+      _this.setTagExpression(GetValue(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue(config, 'regex.value', undefined));
+      // Brackets and generate regex
+      var delimiters = GetValue(config, 'delimiters', '<>');
+      _this.setDelimiters(delimiters[0], delimiters[1]);
+      return _this;
     }
     _createClass(BracketParser, [{
+      key: "setTagExpression",
+      value: function setTagExpression(express) {
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
+        this.tagExpression = express;
+        return this;
+      }
+    }, {
+      key: "setValueExpression",
+      value: function setValueExpression(express) {
+        if (!express) {
+          express = DefaultTokenExpression;
+        }
+        this.valueExpression = express;
+        return this;
+      }
+    }, {
       key: "setDelimiters",
       value: function setDelimiters(delimiterLeft, delimiterRight) {
         _get(_getPrototypeOf(BracketParser.prototype), "setDelimiters", this).call(this, delimiterLeft, delimiterRight);
-        this.reTagName = RegExp(reTagName, 'i');
-        this.reParamPair = RegExp(reParamPair, 'gi');
+        var tag = "(".concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?");
+        this.reTag = RegExp(tag, 'i');
+        if (this.tagExpression !== DefaultTokenExpression || this.valueExpression !== DefaultTokenExpression) {
+          var startTagExpression = "".concat(this.tagExpression, "(=").concat(this.valueExpression, ")?");
+          var endTagExpression = "/".concat(this.tagExpression);
+          delimiterLeft = EscapeRegex(this.delimiterLeft);
+          delimiterRight = EscapeRegex(this.delimiterRight);
+          var flag = this.multipleLinesTagEnable ? 'gs' : 'gi';
+          this.reSplit = RegExp("".concat(delimiterLeft, "((").concat(startTagExpression, ")|(").concat(endTagExpression, "))").concat(delimiterRight), flag);
+        }
         return this;
       }
     }, {
       key: "onTag",
       value: function onTag(tagContent) {
-        var regexResult = tagContent.match(this.reTagName);
+        var regexResult = tagContent.match(this.reTag);
         var tagName = regexResult[1];
-        if (this.translateTagNameCallback) {
-          tagName = this.translateTagNameCallback(tagName);
-        }
-        this.reParamPair.lastIndex = regexResult.index + regexResult[0].length;
-        var payload = {};
-        while (true) {
-          var regexResult = this.reParamPair.exec(tagContent);
-          if (!regexResult) {
-            break;
-          }
-          payload[regexResult[1]] = ParseValue(regexResult[2], this.valueConverter);
-        }
         var isEndTag = tagName.charAt(0) === '/';
         if (isEndTag) {
           tagName = tagName.substring(1, tagName.length);
         }
-        var eventPrefix = isEndTag ? '-' : '+';
-        this.skipEventFlag = false;
-        this.emit("".concat(eventPrefix).concat(tagName), payload);
-        if (!this.skipEventFlag) {
-          this.emit(eventPrefix, tagName, payload);
+        if (this.translateTagNameCallback) {
+          tagName = this.translateTagNameCallback(tagName);
         }
+        this.skipEventFlag = false;
         if (!isEndTag) {
+          var values = StringToValues(regexResult[3], this.valueConverter);
+          this.emit.apply(this, ["+".concat(tagName)].concat(_toConsumableArray(values)));
+          if (!this.skipEventFlag) {
+            this.emit.apply(this, ['+', tagName].concat(_toConsumableArray(values)));
+          }
           this.lastTagStart = tagName;
         } else {
+          this.emit("-".concat(tagName));
+          if (!this.skipEventFlag) {
+            this.emit('-', tagName);
+          }
           this.lastTagEnd = tagName;
         }
       }
     }]);
     return BracketParser;
   }(BracketParser$1);
-  var CreateQuotesExpression = function CreateQuotesExpression(leftQuote, rightQuote) {
-    if (rightQuote === undefined) {
-      rightQuote = leftQuote;
-    }
-    leftQuote = EscapeRegex(leftQuote);
-    rightQuote = EscapeRegex(rightQuote);
-    return "".concat(leftQuote, "[^").concat(leftQuote).concat(rightQuote, "]+").concat(rightQuote);
-  };
-  var varName = "[^ =\n]+"; // Any character except space ,'=', and '\n'
-  var varStringValue = "".concat(CreateQuotesExpression('"'), "|").concat(CreateQuotesExpression("'"));
-  var varArrayValue = CreateQuotesExpression('[', ']');
-  var varDictionaryValue = CreateQuotesExpression('{', '}');
-  var varValue = "".concat(varStringValue, "|").concat(varArrayValue, "|").concat(varDictionaryValue, "|").concat(varName); // Any character except '='
-  var escapeSpace = "[ \n]*";
-  var reTagName = "".concat(escapeSpace, "(").concat(varName, ")").concat(escapeSpace);
-  var reParamPair = "(".concat(varName, ")").concat(escapeSpace, "=").concat(escapeSpace, "(").concat(varValue, ")").concat(escapeSpace);
+  var DefaultTokenExpression = "[^=]+";
 
-  var BracketParserPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(BracketParserPlugin, _Phaser$Plugins$BaseP);
-    function BracketParserPlugin(pluginManager) {
-      _classCallCheck(this, BracketParserPlugin);
-      return _callSuper(this, BracketParserPlugin, [pluginManager]);
+  var OnParseColorTag = function OnParseColorTag(parser) {
+    parser.on('+color', function (color) {
+      parser.addStyle('color', color);
+      parser.skipEvent();
+    }).on('-color', function () {
+      parser.removeStyle('color');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseBackgroundColorTag = function OnParseBackgroundColorTag(parser) {
+    parser.on('+bgcolor', function (color) {
+      parser.addStyle('background-color', color);
+      parser.skipEvent();
+    }).on('-bgcolor', function () {
+      parser.removeStyle('background-color');
+      parser.skipEvent();
+    });
+  };
+
+  var ParseBoldTag = function ParseBoldTag(parser) {
+    parser.on('+b', function () {
+      parser.addStyle('font-weight', 'bold');
+      parser.skipEvent();
+    }).on('-b', function () {
+      parser.removeStyle('font-weight');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseItalicTag = function OnParseItalicTag(parser) {
+    parser.on('+i', function () {
+      parser.addStyle('font-style', 'italic');
+      parser.skipEvent();
+    }).on('-i', function () {
+      parser.removeStyle('font-style');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseSizeTag = function OnParseSizeTag(parser) {
+    parser.on('+size', function (size) {
+      if (typeof size === 'number') {
+        size = "".concat(size, "px");
+      }
+      parser.addStyle('font-size', size);
+      parser.skipEvent();
+    }).on('-size', function () {
+      parser.removeStyle('font-size');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseUnderlineTag = function OnParseUnderlineTag(parser) {
+    parser.on('+u', function () {
+      parser.addStyle('text-decoration', 'underline');
+      parser.skipEvent();
+    }).on('-u', function () {
+      parser.removeStyle('text-decoration');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseShadowTag = function OnParseShadowTag(parser) {
+    parser.on('+shadow', function (color) {
+      parser.addStyle('text-shadow', "1px 1px 3px ".concat(color));
+      parser.skipEvent();
+    }).on('-shadow', function () {
+      parser.removeStyle('text-shadow');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseRoundBlockTag = function OnParseRoundBlockTag(parser) {
+    parser.on('+round', function (radius, padding) {
+      if (radius === undefined) {
+        radius = 4;
+      }
+      if (padding === undefined) {
+        padding = radius;
+      }
+      if (typeof radius === 'number') {
+        radius = "".concat(radius, "px");
+      }
+      if (typeof padding === 'number') {
+        padding = "".concat(padding, "px");
+      }
+      parser.addStyle('display', 'inline-block');
+      parser.addStyle('border-radius', radius);
+      parser.addStyle('padding', padding);
+      parser.skipEvent();
+    }).on('-round', function () {
+      parser.removeStyle('display');
+      parser.removeStyle('border-radius');
+      parser.removeStyle('padding');
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFontFamilyTag = function OnParseFontFamilyTag(parser) {
+    parser.on('+family', function (family) {
+      parser.addStyle('font-family', family);
+      parser.skipEvent();
+    }).on('-family', function () {
+      parser.removeStyle('font-family');
+      parser.skipEvent();
+    });
+  };
+
+  var ParseContent = function ParseContent(parser) {
+    parser.on('content', function (content) {
+      parser.addContent(content);
+      parser.skipEvent();
+    }).on('+', function () {
+      parser.addContent(parser.lastTagSource);
+      parser.skipEvent();
+    }).on('-', function () {
+      parser.addContent(parser.lastTagSource);
+      parser.skipEvent();
+    });
+  };
+
+  var ParseHandlers = [OnParseColorTag, OnParseBackgroundColorTag, ParseBoldTag, OnParseItalicTag, OnParseSizeTag, OnParseUnderlineTag, OnParseShadowTag, OnParseRoundBlockTag, OnParseFontFamilyTag, ParseContent];
+
+  var Clear = function Clear(obj) {
+    if (_typeof(obj) !== 'object' || obj === null) {
+      return obj;
     }
-    _createClass(BracketParserPlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+    return obj;
+  };
+
+  /**
+   * Shallow Object Clone. Will not out nested objects.
+   * @param {object} obj JSON object
+   * @param {object} ret JSON object to return, set null to return a new object
+   * @returns {object} this object
+   */
+  var Clone = function Clone(obj, out) {
+    var objIsArray = Array.isArray(obj);
+    if (out === undefined) {
+      out = objIsArray ? [] : {};
+    } else {
+      Clear(out);
+    }
+    if (objIsArray) {
+      out.length = obj.length;
+      for (var i = 0, cnt = obj.length; i < cnt; i++) {
+        out[i] = obj[i];
+      }
+    } else {
+      for (var key in obj) {
+        out[key] = obj[key];
+      }
+    }
+    return out;
+  };
+
+  var Parser = /*#__PURE__*/function (_BracketParser) {
+    _inherits(Parser, _BracketParser);
+    function Parser(config) {
+      var _this;
+      _classCallCheck(this, Parser);
+      _this = _callSuper(this, Parser, [config]);
+      _this.segments = [];
+      _this.lastPropFlags = {};
+      for (var i = 0, cnt = ParseHandlers.length; i < cnt; i++) {
+        ParseHandlers[i](_assertThisInitialized(_this));
+      }
+      return _this;
+    }
+    _createClass(Parser, [{
+      key: "clearBuffers",
+      value: function clearBuffers() {
+        this.segments.length = 0;
+        this.lastPropFlags = {};
+        return this;
       }
     }, {
-      key: "add",
-      value: function add(config) {
-        return new BracketParser(config);
+      key: "addStyle",
+      value: function addStyle(name, value) {
+        this.lastPropFlags[name] = value;
+        return this;
+      }
+    }, {
+      key: "removeStyle",
+      value: function removeStyle(name) {
+        delete this.lastPropFlags[name];
+        return this;
+      }
+    }, {
+      key: "addContent",
+      value: function addContent(content) {
+        this.segments.push(Clone(this.lastPropFlags));
+        this.segments.push(content);
+        return this;
+      }
+    }, {
+      key: "parse",
+      value: function parse(s) {
+        this.start(s);
+        var result = [];
+        for (var i = 0, cnt = this.segments.length; i < cnt; i++) {
+          var text = this.segments[i];
+          if (typeof text !== 'string') {
+            continue;
+          }
+          var propFlags = this.segments[i - 1];
+          if (_typeof(propFlags) === 'object') {
+            result.push({
+              value: text,
+              css: PropToStyle(propFlags)
+            });
+          } else {
+            result.push({
+              value: text,
+              css: null
+            });
+          }
+        }
+        this.clearBuffers();
+        return result;
       }
     }]);
-    return BracketParserPlugin;
-  }(Phaser.Plugins.BasePlugin);
+    return Parser;
+  }(BracketParser);
+  var PropToStyle = function PropToStyle(propFlags) {
+    var styles = [];
+    for (var propName in propFlags) {
+      styles.push("".concat(propName, ":").concat(propFlags[propName]));
+    }
+    return styles.join(';');
+  };
 
-  return BracketParserPlugin;
+  var BBCodeLog = /*#__PURE__*/function () {
+    function BBCodeLog() {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        _ref$delimiters = _ref.delimiters,
+        delimiters = _ref$delimiters === void 0 ? '[]' : _ref$delimiters,
+        _ref$enable = _ref.enable,
+        enable = _ref$enable === void 0 ? true : _ref$enable;
+      _classCallCheck(this, BBCodeLog);
+      this.parser = new Parser({
+        delimiters: delimiters
+      });
+      this.enable = enable;
+    }
+    _createClass(BBCodeLog, [{
+      key: "setEnable",
+      value: function setEnable() {
+        var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+        this.enable = enable;
+        return this;
+      }
+    }, {
+      key: "log",
+      value: function log(s) {
+        var logType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'log';
+        if (!this.enable) {
+          return this;
+        }
+        if (typeof s == 'string') {
+          var _console$logType;
+          var inputs = [];
+          var modifiers = [];
+          this.parser.parse(s).forEach(function (item) {
+            inputs.push("%c".concat(item.value));
+            modifiers.push(item.css);
+          });
+          (_console$logType = console[logType]).call.apply(_console$logType, [console, inputs.join('')].concat(modifiers));
+        } else {
+          console[logType](s);
+        }
+        return this;
+      }
+    }]);
+    return BBCodeLog;
+  }();
+
+  return BBCodeLog;
 
 }));
