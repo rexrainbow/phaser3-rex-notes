@@ -2,9 +2,14 @@ export default {
     dumpState(includeTree = false) {
         var state = {
             isRunning: this.isRunning,
-            pendingTrees: this.pendingTrees.map(function (tree) {
-                return tree.id;
-            })
+            pendingTrees: this.pendingTrees
+                .filter(function (tree) {
+                    // roundComplete tree will be removed from pendingTrees
+                    return !tree.roundComplete;
+                })
+                .map(function (tree) {
+                    return tree.id;
+                })
         }
 
         if (includeTree) {
