@@ -4,6 +4,7 @@ import OnParseBoldTag from './OnParseBoldTag.js';
 import OnParseItalicTag from './OnParseItalicTag.js';
 import OnParseSizeTag from './OnParseSizeTag.js';
 import OnParseUnderlineTag from './OnParseUnderlineTag.js';
+import OnParseRoundBlockTag from './OnParseRoundBlockTag.js';
 import OnParseContent from './OnParseContent.js';
 
 var ParseHandlers = [
@@ -13,6 +14,7 @@ var ParseHandlers = [
     OnParseItalicTag,
     OnParseSizeTag,
     OnParseUnderlineTag,
+    OnParseRoundBlockTag,
     OnParseContent
 ]
 

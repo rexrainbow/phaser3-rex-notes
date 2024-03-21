@@ -26,21 +26,13 @@ class Parser extends BracketParser {
     }
 
     removeStyle(name) {
-        this.lastPropFlags[name] = null;
+        delete this.lastPropFlags[name];
         return this;
     }
 
     addContent(content) {
         this.segments.push(Clone(this.lastPropFlags));
         this.segments.push(content);
-
-        // Clear removed flags
-        for (var name in this.lastPropFlags) {
-            if (this.lastPropFlags[name] === null) {
-                delete this.lastPropFlags[name];
-            }
-        }
-
         return this;
     }
 
@@ -77,11 +69,7 @@ class Parser extends BracketParser {
 var PropToStyle = function (propFlags) {
     var styles = [];
     for (var propName in propFlags) {
-        var propValue = propFlags[propName];
-        if (propValue === null) {
-            propValue = 'inherit';
-        }
-        styles.push(`${propName}:${propValue}`)
+        styles.push(`${propName}:${propFlags[propName]}`)
     }
 
     return styles.join(';');
