@@ -1,4 +1,4 @@
-var ParseColorTag = function (parser) {
+var OnParseColorTag = function (parser) {
     parser
         .on('+color', function (color) {
             parser.addStyle('color', color);
@@ -10,4 +10,4 @@ var ParseColorTag = function (parser) {
         })
 }
 
-export default ParseColorTag;
+export default OnParseColorTag;

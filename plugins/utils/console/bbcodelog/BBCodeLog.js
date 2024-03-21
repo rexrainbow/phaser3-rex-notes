@@ -1,5 +1,8 @@
 import Parser from './parser/Parser';
 
+const RESET_INPUT = "%c ";
+const RESET_CSS = "";
+
 class BBCodeLog {
     constructor({
         delimiters = '[]'
@@ -21,7 +24,7 @@ class BBCodeLog {
 
             } else {  // string
                 if (item.css) {
-                    inputs.push('%c' + value);
+                    inputs.push(`%c${value}`);
                     modifiers.push(item.css);
                 } else { // No css
                     inputs.push(value);

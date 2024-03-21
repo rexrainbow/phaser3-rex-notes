@@ -1,4 +1,4 @@
-var ParseItalicTag = function (parser) {
+var OnParseItalicTag = function (parser) {
     parser
         .on('+i', function () {
             parser.addStyle('font-style', 'italic');
@@ -10,4 +10,4 @@ var ParseItalicTag = function (parser) {
         })
 }
 
-export default ParseItalicTag;
+export default OnParseItalicTag;

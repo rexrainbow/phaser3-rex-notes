@@ -1,19 +1,19 @@
-import ParseColorTag from './ParseColorTag.js';
-import ParseBackgroundColorTag from './ParseBackgroundColorTag.js';
-import ParseBoldTag from './ParseBoldTag.js';
-import ParseItalicTag from './ParseItalicTag.js';
-import ParseSizeTag from './ParseSizeTag.js';
-import ParseUnderlineTag from './ParseUnderlineTag.js';
-import ParseContent from './ParseContent.js';
+import ParseColorTag from './OnParseColorTag.js';
+import OnParseBackgroundColorTag from './OnParseBackgroundColorTag.js';
+import OnParseBoldTag from './OnParseBoldTag.js';
+import OnParseItalicTag from './OnParseItalicTag.js';
+import OnParseSizeTag from './OnParseSizeTag.js';
+import OnParseUnderlineTag from './OnParseUnderlineTag.js';
+import OnParseContent from './OnParseContent.js';
 
 var ParseHandlers = [
     ParseColorTag,
-    ParseBackgroundColorTag,
-    ParseBoldTag,
-    ParseItalicTag,
-    ParseSizeTag,
-    ParseUnderlineTag,
-    ParseContent
+    OnParseBackgroundColorTag,
+    OnParseBoldTag,
+    OnParseItalicTag,
+    OnParseSizeTag,
+    OnParseUnderlineTag,
+    OnParseContent
 ]
 
 export default ParseHandlers;

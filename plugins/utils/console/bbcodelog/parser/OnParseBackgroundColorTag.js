@@ -1,4 +1,4 @@
-var ParseBackgroundColorTag = function (parser) {
+var OnParseBackgroundColorTag = function (parser) {
     parser
         .on('+bgcolor', function (color) {
             parser.addStyle('background-color', color);
@@ -10,4 +10,4 @@ var ParseBackgroundColorTag = function (parser) {
         })
 }
 
-export default ParseBackgroundColorTag;
+export default OnParseBackgroundColorTag;
