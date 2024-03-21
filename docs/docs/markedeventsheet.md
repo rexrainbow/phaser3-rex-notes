@@ -195,16 +195,16 @@ Round counter is started from `0`.
 
 - Activate state of event sheet (indexed by `title`)
     ```javascript
-    eventSheetManager.setTreeActiveState(title);
-    // eventSheetManager.setTreeActiveState(title, true);
+    eventSheetManager.setEventSheetActiveState(title);
+    // eventSheetManager.setEventSheetActiveState(title, true);
     ```
 - Inactivate state of event sheet (indexed by `title`)
     ```javascript
-    eventSheetManager.setTreeActiveState(title, false);
+    eventSheetManager.setEventSheetActiveState(title, false);
     ```
 - Get active state of event sheet (indexed by `title`)
     ```javascript
-    var active = eventSheetManager.getTreeActiveState(title);
+    var active = eventSheetManager.getEventSheetActiveState(title);
     ```
 
 !!! note

@@ -25,7 +25,7 @@ class ActivateAction extends Action {
         if (!this.activateTreeTitle || (this.activateTreeTitle === '')) {
             tree.setActive(true);
         } else {
-            tree.treeManager.setTreeActiveState(this.activateTreeTitle, tree.groupName, true);
+            tree.treeManager.setEventSheetActiveState(this.activateTreeTitle, tree.groupName, true);
         }
         return this.SUCCESS;
     }

@@ -51,7 +51,7 @@ eventSheetManager.on('complete', function () {
         console.log(`---- Round : ${eventSheetManager.$roundCounter} ----`)
 
         if (eventSheetManager.$roundCounter === 3) {
-            eventSheetManager.setTreeActiveState('Task');
+            eventSheetManager.setEventSheetActiveState('Task');
         }
 
         eventSheetManager.start()

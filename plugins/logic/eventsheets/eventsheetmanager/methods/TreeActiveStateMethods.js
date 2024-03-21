@@ -1,12 +1,12 @@
 export default {
-    getTreeActiveState(title, groupName) {
+    getEventSheetActiveState(title, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
         return this.getTreeGroup(groupName).getTreeActiveState(title);
     },
 
-    setTreeActiveState(title, groupName, active) {
+    setEventSheetActiveState(title, groupName, active) {
         if (typeof (groupName) === 'boolean') {
             active = groupName;
             groupName = undefined;

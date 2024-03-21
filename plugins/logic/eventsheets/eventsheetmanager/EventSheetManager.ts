@@ -28,10 +28,10 @@ declare class EventSheetManager extends EventEmitter {
 
     getEventSheetTitleList(groupName?: string): string[];
 
-    getTreeActiveState(title: string, groupName?: string): boolean;
+    getEventSheetActiveState(title: string, groupName?: string): boolean;
 
-    setTreeActiveState(title: string, groupName?: string, active?: boolean): this;
-    setTreeActiveState(title: string, active?: boolean): this;
+    setEventSheetActiveState(title: string, groupName?: string, active?: boolean): this;
+    setEventSheetActiveState(title: string, active?: boolean): this;
 
     dumpTrees(groupName?: string): Object[];
 
