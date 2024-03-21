@@ -43,6 +43,13 @@ class Parser extends BracketParser {
             this.segments.push(Clone(this.lastPropFlags));
             this.segments.push(content);
 
+            // Clear removed flags
+            for (var name in this.lastPropFlags) {
+                if (this.lastPropFlags[name] === null) {
+                    delete this.lastPropFlags[name];
+                }
+            }
+
         } else {
             if (this.segments === 0) {
                 this.segments.push(content);
@@ -58,9 +65,7 @@ class Parser extends BracketParser {
     parse(s) {
         this.start(s);
 
-        var content = [];
-        var styles = [];
-
+        var result = [];
         for (var i = 0, cnt = this.segments.length; i < cnt; i++) {
             var text = this.segments[i];
             if (typeof (text) !== 'string') {
@@ -69,14 +74,17 @@ class Parser extends BracketParser {
 
             var propFlags = this.segments[i - 1];
             if (typeof (propFlags) === 'object') {
-                content.push(`%c${text}`);
-                styles.push(PropToStyle(propFlags));
+                result.push({
+                    value: text,
+                    css: PropToStyle(propFlags)
+                })
             } else {
-                content.push(text);
+                result.push({
+                    value: text,
+                    css: null
+                })
             }
         }
-
-        var result = [content.join(''), ...styles];
 
         this.clearBuffers();
 
