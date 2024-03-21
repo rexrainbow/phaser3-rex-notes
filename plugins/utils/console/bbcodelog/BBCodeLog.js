@@ -13,18 +13,20 @@ class BBCodeLog {
     }
 
     log(s, logType = 'log') {
-        var inputs = [];
-        var modifiers = [];
-        this.parser.parse(s).forEach(function (item) {
-            if (item.css) {
+        if (s) {
+            var inputs = [];
+            var modifiers = [];
+            this.parser.parse(s).forEach(function (item) {
                 inputs.push(`%c${item.value}`);
                 modifiers.push(item.css);
-            } else { // No css
-                inputs.push(item.value);
-            }
-        })
+            })
 
-        console[logType].call(console, inputs.join(''), ...modifiers);
+            console[logType].call(console, inputs.join(''), ...modifiers);
+
+        } else {
+            console[logType]();
+
+        }
         return this;
     }
 }
