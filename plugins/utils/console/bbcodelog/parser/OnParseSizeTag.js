@@ -1,4 +1,4 @@
-var ParseSizeTag = function (parser) {
+var OnParseSizeTag = function (parser) {
     parser
         .on('+size', function (size) {
             if (typeof (size) === 'number') {
@@ -13,4 +13,4 @@ var ParseSizeTag = function (parser) {
         })
 }
 
-export default ParseSizeTag;
+export default OnParseSizeTag;

@@ -1,4 +1,4 @@
-var ParseUnderlineTag = function (parser) {
+var OnParseUnderlineTag = function (parser) {
     parser
         .on('+u', function () {
             parser.addStyle('text-decoration', 'underline');
@@ -10,4 +10,4 @@ var ParseUnderlineTag = function (parser) {
         })
 }
 
-export default ParseUnderlineTag;
+export default OnParseUnderlineTag;
