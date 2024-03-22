@@ -6,8 +6,8 @@ class CommandExecutor {
     constructor(scene, config = {}) {
         this.sys = new Managers(scene, config);
 
-        var { delimiters = '[]', enable = true } = config.log || {};
-        this.sys.logger = new BBCodeLog({ delimiters, enable });
+        var { log = {} } = config;
+        this.sys.logger = new BBCodeLog(log);
     }
 
     destroy(fromScene) {

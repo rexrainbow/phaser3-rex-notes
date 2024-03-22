@@ -5889,8 +5889,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#log" class="md-nav__link">
-    Log
+  <a href="#bbcode-log" class="md-nav__link">
+    BBCode Log
   </a>
   
 </li>
@@ -10219,8 +10219,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#log" class="md-nav__link">
-    Log
+  <a href="#bbcode-log" class="md-nav__link">
+    BBCode Log
   </a>
   
 </li>
@@ -11020,7 +11020,12 @@ line2
 <p>A command executor for phaser3 engine.</p>
 <h4 id="create-command-executor-instance">Create command executor instance<a class="headerlink" href="#create-command-executor-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMarkedEventSheets&#39;</span><span class="p">).</span><span class="nx">addCommandExecutor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">layers</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="nx">layers</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+
+<span class="w">    </span><span class="nx">log</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">delimiters</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;[]&#39;</span>
+<span class="w">        </span><span class="nx">enable</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">});</span>
 
 <span class="c1">// Add to event sheet manager</span>
@@ -11030,6 +11035,19 @@ line2
 </code></pre></div>
 <ul>
 <li><code>layers</code> : Pre-create <a href="../layer/">layer</a> game object indexed by array of string names.</li>
+<li><code>log</code> : Configuration of BBCodeLog<ul>
+<li><code>log.delimiters</code> : String of left-delimiter and right-delimiter.<ul>
+<li>A single string with 2 characters. Default value is <code>'[]'</code>.</li>
+<li>A array with 2 strings</li>
+</ul>
+</li>
+<li><code>log.enable</code> :<ul>
+<li><code>true</code> : Can <a href="#bbcode-log">print message on console</a>. Default behavior.</li>
+<li><code>false</code> : Don't print any message on console.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="local-memory-of-event-sheet-manager">Local memory of event sheet manager<a class="headerlink" href="#local-memory-of-event-sheet-manager" title="Permanent link">&para;</a></h4>
 <ul>
@@ -11051,7 +11069,7 @@ line2
 </code></pre></div></li>
 </ul>
 <p>See <a href="#local-memory">Local memory</a></p>
-<h4 id="log">Log<a class="headerlink" href="#log" title="Permanent link">&para;</a></h4>
+<h4 id="bbcode-log">BBCode Log<a class="headerlink" href="#bbcode-log" title="Permanent link">&para;</a></h4>
 <p>Print message on console</p>
 <div class="highlight"><pre><span></span><code>log
   text=...
@@ -11069,7 +11087,8 @@ line2
 <li><code>[color=gold]...[/color]</code></li>
 <li><code>[bgcolor=green]...[/bgcolor]</code></li>
 <li><code>[b]...[/b]</code></li>
-<li><code>[i]...[/i]</code>    </li>
+<li><code>[i]...[/i]</code></li>
+<li><code>[u]...[/u]</code></li>
 </ul>
 </li>
 <li><code>logType</code> : <ul>

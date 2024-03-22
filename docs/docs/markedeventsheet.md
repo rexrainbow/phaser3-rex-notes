@@ -629,7 +629,12 @@ A command executor for phaser3 engine.
 
 ```javascript
 var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
-    layers: []
+    layers: [],
+
+    log: {
+        delimiters: '[]'
+        enable: true
+    }
 });
 
 // Add to event sheet manager
@@ -639,6 +644,13 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 ```
 
 - `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
+- `log` : Configuration of BBCodeLog
+    - `log.delimiters` : String of left-delimiter and right-delimiter.
+        - A single string with 2 characters. Default value is `'[]'`.
+        - A array with 2 strings
+    - `log.enable` :
+        - `true` : Can [print message on console](#bbcode-log). Default behavior.
+        - `false` : Don't print any message on console.
 
 #### Local memory of event sheet manager
 
@@ -667,7 +679,7 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 See [Local memory](#local-memory)
 
 
-#### Log
+#### BBCode Log
 
 Print message on console
 
@@ -691,7 +703,8 @@ log
     - `[color=gold]...[/color]`
     - `[bgcolor=green]...[/bgcolor]`
     - `[b]...[/b]`
-    - `[i]...[/i]`    
+    - `[i]...[/i]`
+    - `[u]...[/u]`
 - `logType` : 
     - `'log'` : `console.log`. Default value.
     - `'warn'`: `console.warn`

@@ -1,4 +1,5 @@
 import Managers from '../../runcommands/managers/Managers';
+import BBCodeLog from '../../../bbcodelog';
 import EventSheetManager from '../eventsheetmanager/EventSheetManager';
 
 export default CommandExecutor;
@@ -31,7 +32,7 @@ declare namespace CommandExecutor {
     }
 
     interface IConfig extends Managers.IConfig {
-
+        log?: BBCodeLog.IConfig
     }
 }
 
