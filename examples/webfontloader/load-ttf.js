@@ -12,10 +12,10 @@ class Demo extends Phaser.Scene {
 
         this.load.rexWebFont({
             custom: {
-              families: ['SEASRN'],
-              urls: ['assets/fonts/SeasideResortNF/fonts.css']
+                families: ['SEASRN'],
+                urls: ['assets/fonts/SeasideResortNF/fonts.css']
             }
-          });
+        });
     }
 
     create() {
@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
