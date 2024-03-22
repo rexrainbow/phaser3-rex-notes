@@ -25,20 +25,20 @@ text={{name}} have {{coin}} coin
 
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager) {
+    print({ text = '' } = {}, eventSheetManager, tree) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, eventSheetManager) {
+    set(config, eventSheetManager, tree) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager) {
+    wait({ duration = 1000 } = {}, eventSheetManager, tree) {
         var self = this;
         setTimeout(function () {
             self.complete();

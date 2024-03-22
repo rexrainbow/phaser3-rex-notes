@@ -20,9 +20,10 @@ class EventBehaviorTree extends BehaviorTree {
             condition = 'true'
         } = config;
 
+        // Store references
         this.treeManager = treeManager;
         this.blackboard = treeManager.blackboard;
-        this.groupName = groupName;
+        this.setTreeGroup(groupName);
 
         this.active = active;
         this.properties.parallel = parallel;
@@ -38,6 +39,12 @@ class EventBehaviorTree extends BehaviorTree {
         this.conditionEvalPassed = undefined;
 
         this.roundState = RoundIdle;
+    }
+
+    setTreeGroup(groupName) {
+        this.groupName = groupName;
+        this.treeGroup = this.treeManager.getTreeGroup(groupName);
+        return this;
     }
 
     get isParallel() {

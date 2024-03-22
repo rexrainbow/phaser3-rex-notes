@@ -5,6 +5,7 @@ export default {
             case 0:
                 this.getTreeGroup(this.defaultTreeGroupName).start();
                 break;
+
             case 1:
                 var name = arguments[0];
                 if (this.hasTreeGroup(name)) {
@@ -13,6 +14,7 @@ export default {
                     this.getTreeGroup(this.defaultTreeGroupName).startTree(name);
                 }
                 break;
+
             case 2:
                 var title = arguments[0];
                 var ignoreCondition, groupName;

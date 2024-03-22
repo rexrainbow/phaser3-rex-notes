@@ -17,20 +17,7 @@ class TaskAction extends Action {
         var sourceParameters = config.parameters;
         var taskParameters = {};
         for (var name in sourceParameters) {
-            var value = sourceParameters[name];
-            if (typeof (value) === 'string') {
-                if (value.startsWith('#(') && value.endsWith(')')) {
-                    // Eval string to get number/boolean
-                    value = Compile(value.substring(2, value.length - 1));
-                } else if ((value.indexOf('{{') > -1) && (value.indexOf('}}') > -1)) {
-                    // Might be a string template
-                    var template = value;
-                    value = function (data) {
-                        return mustache.render(template, data);
-                    }
-                }
-            }
-            taskParameters[name] = value;
+            taskParameters[name] = CompileExpression(sourceParameters[name]);
         }
         this.taskParameters = taskParameters;
     }
@@ -47,7 +34,8 @@ class TaskAction extends Action {
 
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var treeGroup = blackboard.treeGroup;
+        var tree = tick.tree;
+        var treeGroup = tree.treeGroup;
         var memory = treeManager.memory;
 
         var taskParameters = this.taskParameters;
@@ -65,11 +53,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, tree);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, tree);
             }
         }
 
@@ -103,6 +91,22 @@ class TaskAction extends Action {
             this.continueEE = undefined;
         }
     }
+}
+
+var CompileExpression = function (s) {
+    if (typeof (s) === 'string') {
+        if (s.startsWith('#(') && s.endsWith(')')) {
+            // Eval string to get number/boolean
+            s = Compile(s.substring(2, s.length - 1));
+        } else if ((s.indexOf('{{') > -1) && (s.indexOf('}}') > -1)) {
+            // Might be a string template
+            var template = s;
+            s = function (data) {
+                return mustache.render(template, data);
+            }
+        }
+    }
+    return s;
 }
 
 export default TaskAction

@@ -1,4 +1,4 @@
-# Title
+# Example
 
 ## Initialize
 
@@ -26,6 +26,10 @@ CHOICE
 ## Section A
 
 // Manipulate gameobjects
+
+log
+  text=Start...
+
 
 Dialog
   vpy=0.99
@@ -99,6 +103,10 @@ Choice.choice
   option2=Burger
   option3=Cola
 // Wait until clicking any chioce button
+
+
+log
+  text=Select option[color=red]{{choiceIndex}}[/color]
 
 ### [IF choiceIndex == 1]
 

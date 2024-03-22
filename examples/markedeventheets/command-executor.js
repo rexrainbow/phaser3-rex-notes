@@ -78,7 +78,7 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'bgLayer',
 
             commands: {
-                cross(gameObject, { key, frame, duration, mode = 'fade', wait = true } = {}, commandExecutor, eventSheetManager) {
+                cross(gameObject, { key, frame, duration, mode = 'fade', wait = true } = {}, commandExecutor, eventSheetManager, tree) {
                     // Wait until transition complete
                     if (wait) {
                         commandExecutor.waitEvent(gameObject, 'complete');
@@ -101,7 +101,7 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'uiLayer',
 
             commands: {
-                typing(gameObject, { name, text, speed } = {}, commandExecutor, eventSheetManager) {
+                typing(gameObject, { name, text, speed } = {}, commandExecutor, eventSheetManager, tree) {
                     if (name) {
                         var title = gameObject.getElement('title').setText(name);
                         gameObject.setChildVisible(title, true);
@@ -127,7 +127,7 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'gameLayer',
 
             commands: {
-                cross(gameObject, { key, frame } = {}, commandExecutor, eventSheetManager) {
+                cross(gameObject, { key, frame } = {}, commandExecutor, eventSheetManager, tree) {
                     gameObject.setTexture(key, frame);
                 }
             }

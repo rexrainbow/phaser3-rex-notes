@@ -1,5 +1,11 @@
 export default {
-    se2({ volume, mute, unmute } = {}, eventSheetManager) {
+    se2(
+        {
+            volume, mute, unmute
+        } = {},
+        eventSheetManager, tree
+    ) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -16,7 +22,15 @@ export default {
         }
     },
 
-    'se2.play'({ key, volume, detune, rate, fadeIn = 0, wait = false } = {}, eventSheetManager) {
+    'se2.play'(
+        {
+            key,
+            volume, detune, rate, fadeIn = 0,
+            wait = false
+        } = {},
+        eventSheetManager, tree
+    ) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -48,7 +62,8 @@ export default {
         }
     },
 
-    'se2.stop'(config, eventSheetManager) {
+    'se2.stop'(config, eventSheetManager, tree) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -56,7 +71,15 @@ export default {
         soundManager.stopAllSoundEffects2();
     },
 
-    'se2.fadeOut'({ duration = 500, stop = true, wait = false }, eventSheetManager) {
+    'se2.fadeOut'(
+        {
+            duration = 500,
+            stop = true,
+            wait = false
+        },
+        eventSheetManager, tree
+    ) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -68,7 +91,8 @@ export default {
         }
     },
 
-    'se2.mute'(config, eventSheetManager) {
+    'se2.mute'(config, eventSheetManager, tree) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;
@@ -77,7 +101,8 @@ export default {
         soundManager.setSoundEffect2Mute(true);
     },
 
-    'se2.unmute'(config, eventSheetManager) {
+    'se2.unmute'(config, eventSheetManager, tree) {
+
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
             return;

@@ -14,11 +14,11 @@ class CommandExecutor extends EventEmitter {
 
     print({
         text = ''
-    } = {}, eventSheetManager) {
+    } = {}, eventSheetManager, tree) {
         console.log(text);
     }
 
-    set(config, eventSheetManager) {
+    set(config, eventSheetManager, tree) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
@@ -26,7 +26,7 @@ class CommandExecutor extends EventEmitter {
 
     wait({
         duration = this.defaultWaitDuration
-    } = {}, eventSheetManager) {
+    } = {}, eventSheetManager, tree) {
         var self = this;
         setTimeout(function () {
             self.complete();

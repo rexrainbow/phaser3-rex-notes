@@ -666,6 +666,43 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 
 See [Local memory](#local-memory)
 
+
+#### Log
+
+Print message on console
+
+```
+log
+  text=...
+```
+
+or
+
+```
+log
+  text=...
+  logType='log'
+  showTitle=true
+  title
+  titleColor='green'
+```
+
+- `text` : Message with bbcode format.
+    - `[color=gold]...[/color]`
+    - `[bgcolor=green]...[/bgcolor]`
+    - `[b]...[/b]`
+    - `[i]...[/i]`    
+- `logType` : 
+    - `'log'` : `console.log`. Default value.
+    - `'warn'`: `console.warn`
+- `showTitle`
+    - `true` : Show title before text message. Default behavior.
+    - `false` : Don't show title.
+- `title`
+    - `undefined` : Using title of current event sheet. Default behavior.
+    - A string, custom string before text message.
+- `titleColor` : Background color of title block, default value is `'green'`
+
 #### Game object
 
 ##### Register custom game object
@@ -683,7 +720,7 @@ commandExecutor.addGameObjectManager({
     defaultLayer: layerName,
     
     commands: {
-        commandName(gameObject, config, commandExecutor, eventSheetManager) {
+        commandName(gameObject, config, commandExecutor, eventSheetManager, eventSheet) {
             // commandExecutor.waitEvent(eventEmitter, eventName);
         }
     }

@@ -5889,6 +5889,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#log" class="md-nav__link">
+    Log
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#game-object" class="md-nav__link">
     Game object
   </a>
@@ -10212,6 +10219,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#log" class="md-nav__link">
+    Log
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#game-object" class="md-nav__link">
     Game object
   </a>
@@ -10658,14 +10672,14 @@
 <h3 id="active">Active<a class="headerlink" href="#active" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Activate state of event sheet (indexed by <code>title</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
-<span class="c1">// eventSheetManager.setTreeActiveState(title, true);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setEventSheetActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+<span class="c1">// eventSheetManager.setEventSheetActiveState(title, true);</span>
 </code></pre></div></li>
 <li>Inactivate state of event sheet (indexed by <code>title</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">setEventSheetActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get active state of event sheet (indexed by <code>title</code>)
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">getTreeActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">getEventSheetActiveState</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <div class="admonition note">
@@ -11037,6 +11051,44 @@ line2
 </code></pre></div></li>
 </ul>
 <p>See <a href="#local-memory">Local memory</a></p>
+<h4 id="log">Log<a class="headerlink" href="#log" title="Permanent link">&para;</a></h4>
+<p>Print message on console</p>
+<div class="highlight"><pre><span></span><code>log
+  text=...
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>log
+  text=...
+  logType=&#39;log&#39;
+  showTitle=true
+  title
+  titleColor=&#39;green&#39;
+</code></pre></div>
+<ul>
+<li><code>text</code> : Message with bbcode format.<ul>
+<li><code>[color=gold]...[/color]</code></li>
+<li><code>[bgcolor=green]...[/bgcolor]</code></li>
+<li><code>[b]...[/b]</code></li>
+<li><code>[i]...[/i]</code>    </li>
+</ul>
+</li>
+<li><code>logType</code> : <ul>
+<li><code>'log'</code> : <code>console.log</code>. Default value.</li>
+<li><code>'warn'</code>: <code>console.warn</code></li>
+</ul>
+</li>
+<li><code>showTitle</code><ul>
+<li><code>true</code> : Show title before text message. Default behavior.</li>
+<li><code>false</code> : Don't show title.</li>
+</ul>
+</li>
+<li><code>title</code><ul>
+<li><code>undefined</code> : Using title of current event sheet. Default behavior.</li>
+<li>A string, custom string before text message.</li>
+</ul>
+</li>
+<li><code>titleColor</code> : Background color of title block, default value is <code>'green'</code></li>
+</ul>
 <h4 id="game-object">Game object<a class="headerlink" href="#game-object" title="Permanent link">&para;</a></h4>
 <h5 id="register-custom-game-object">Register custom game object<a class="headerlink" href="#register-custom-game-object" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addGameObjectManager</span><span class="p">({</span>
@@ -11051,7 +11103,7 @@ line2
 <span class="w">    </span><span class="nx">defaultLayer</span><span class="o">:</span><span class="w"> </span><span class="nx">layerName</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">commands</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">commandName</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">commandName</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>

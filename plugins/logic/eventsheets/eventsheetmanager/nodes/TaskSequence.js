@@ -6,8 +6,9 @@ class TaskSequence extends Sequence {
 
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.enter', this.title, tick.tree.title, treeGroup.name, treeManager);
+        var tree = tick.tree;
+        var treeGroup = tree.treeGroup;
+        treeManager.emit('label.enter', this.title, tree.title, treeGroup.name, treeManager);
 
     }
 
@@ -25,8 +26,9 @@ class TaskSequence extends Sequence {
 
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var treeGroup = blackboard.treeGroup;
-        treeManager.emit('label.exit', this.title, tick.tree.title, treeGroup.name, treeManager);
+        var tree = tick.tree;
+        var treeGroup = tree.treeGroup;
+        treeManager.emit('label.exit', this.title, tree.title, treeGroup.name, treeManager);
     }
 }
 

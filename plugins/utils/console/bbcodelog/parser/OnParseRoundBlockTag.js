@@ -2,7 +2,7 @@ var OnParseRoundBlockTag = function (parser) {
     parser
         .on('+round', function (radius, padding) {
             if (radius === undefined) {
-                radius = 4;
+                radius = 3;
             }
             if (padding === undefined) {
                 padding = radius;

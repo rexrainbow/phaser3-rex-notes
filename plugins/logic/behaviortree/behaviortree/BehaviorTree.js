@@ -34,7 +34,7 @@ class BehaviorTree {
 
         this._root = root;
 
-        this.ticker = new Tick();
+        this.ticker = (new Tick()).setTree(this);
     }
 
     setTitle(title) {
@@ -115,7 +115,6 @@ class BehaviorTree {
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
-            .setTree(this)
             .setTarget(target)
             .reset();
 
@@ -138,7 +137,6 @@ class BehaviorTree {
         var ticker = this.ticker;
         ticker
             .setBlackBoard(blackboard)
-            .setTree(this)
             .setTarget(target)
             .reset();
 

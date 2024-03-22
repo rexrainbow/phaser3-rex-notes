@@ -107,7 +107,6 @@ export default {
         var closedTrees = this.closedTrees;
         var blackboard = treeManager.blackboard;
 
-        blackboard.treeGroup = this;  // For TaskAction
         closedTrees.length = 0;
 
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
@@ -159,8 +158,6 @@ export default {
         var treeManager = this.parent;
         var blackboard = treeManager.blackboard;
         var commandExecutor = treeManager.commandExecutor;
-
-        blackboard.treeGroup = this;  // For TaskAction
 
         this.pendingTrees.forEach(function (tree) {
             tree.abort(blackboard, commandExecutor);
