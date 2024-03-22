@@ -16,11 +16,12 @@ declare namespace Modal {
             transitOut?: TransitCallbackType | null,
         },
 
-        manualClose?: boolean,
-
-        clickOutsideClose?: boolean,
-
+        touchOutsideClose?: boolean,        
         anyTouchClose?: boolean,
+
+        timeOutClose?: boolean,
+
+        manualClose?: boolean,
 
         duration?: {
             in?: number,
