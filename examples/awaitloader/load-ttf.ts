@@ -37,12 +37,6 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var Delay = function (time) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(resolve, time);
-    });
-};
-
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
