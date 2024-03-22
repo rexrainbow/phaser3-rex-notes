@@ -643,6 +643,20 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 // });
 ```
 
+or
+
+```javascript
+// import MarkedEventSheets from 'phaser3-rex-plugins/plugins/markedeventsheets.js';
+// import CommandExecutor from 'phaser3-rex-plugins/plugins/commandexecutor.js';
+
+var commandExecutor = new CommandExecutor(scene, config);
+
+// var eventSheetManager = new MarkedEventSheets({
+//     commandExecutor: commandExecutor
+// });
+```
+
+
 - `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
 - `log` : Configuration of BBCodeLog
     - `log.delimiters` : String of left-delimiter and right-delimiter.
