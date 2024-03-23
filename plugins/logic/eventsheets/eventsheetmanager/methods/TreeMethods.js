@@ -12,6 +12,13 @@ export default {
         return this.treeGroups[name];
     },
 
+    getTree(tree, groupName) {
+        if (groupName === undefined) {
+            groupName = this.defaultTreeGroupName
+        }
+        return this.getTreeGroup(groupName).getTree(tree);
+    },
+
     getTreeState(tree, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName

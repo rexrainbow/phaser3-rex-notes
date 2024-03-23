@@ -695,7 +695,7 @@ See [Local memory](#local-memory)
 
 #### BBCode Log
 
-Print message on console
+##### Print message on console
 
 ```
 log
@@ -729,6 +729,43 @@ log
     - `undefined` : Using title of current event sheet. Default behavior.
     - A string, custom string before text message.
 - `titleColor` : Background color of title block, default value is `'green'`
+
+
+##### Disable console message
+
+```
+log.disable
+```
+
+- Disable console message of current event sheet.
+
+or
+
+```
+log.disable
+  title=...
+```
+
+- `title` : Disable console message of event sheet by title.
+
+
+##### Enable console message
+
+```
+log.enable
+```
+
+- Enable console message of current event sheet.
+
+or
+
+```
+log.enable
+  title=...
+```
+
+- `title` : Enable console message of event sheet by title.
+
 
 #### Game object
 

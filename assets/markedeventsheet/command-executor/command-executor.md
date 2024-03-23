@@ -27,6 +27,13 @@ CHOICE
 
 // Manipulate gameobjects
 
+log.disable
+
+log
+  text=Test disable
+
+log.enable
+
 log
   text=Start...
 
@@ -96,6 +103,11 @@ setData
   hp=5
   coin=100
 
+
+log.memory
+  text=Befor choice
+
+
 Choice.choice
   title=Would you like some...
   resultKey=choiceIndex
@@ -103,7 +115,6 @@ Choice.choice
   option2=Burger
   option3=Cola
 // Wait until clicking any chioce button
-
 
 log
   text=Select option[color=red]{{choiceIndex}}[/color]
@@ -143,6 +154,9 @@ incData
 
 
 ## Section C
+
+log.memory
+  text=After choice
 
 wait
   time=3000

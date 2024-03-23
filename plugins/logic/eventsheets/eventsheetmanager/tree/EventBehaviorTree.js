@@ -1,17 +1,16 @@
 import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree/index.js';
-import GetValue from '../../../../utils/object/GetFastValue.js';
 
 const RoundIdle = 0;
 const RoundRun = 1;
 const RoundComplete = 2;
 
-const PropertyTable = [
-    ['parallel', false, true],             // Readonly
-    ['active', true, true],                // Readonly
-    ['once', false, true],
-    ['roundState', RoundIdle, false],      // Internal
-    ['conditionPassed', undefined, false], // Internal
-]
+const PropertyTable = {
+    'parallel': { defaultValue: false, rewritable: true },
+    'active': { defaultValue: true, rewritable: true },
+    'once': { defaultValue: false, rewritable: true },
+    'roundState': { defaultValue: RoundIdle, rewritable: false },
+    'conditionPassed': { defaultValue: undefined, rewritable: false },
+}
 
 class EventBehaviorTree extends BehaviorTree {
     constructor(treeManager, config) {
@@ -30,11 +29,29 @@ class EventBehaviorTree extends BehaviorTree {
 
         super(config);
 
-        // Store properties
-        for (var i = 0, cnt = PropertyTable.length; i < cnt; i++) {
-            var [propertyKey, defaultValue, rewritable] = PropertyTable[i];
-            WrapProperty(this, propertyKey);
-            this[propertyKey] = (rewritable) ? GetValue(properties, propertyKey, defaultValue) : defaultValue;
+        // Store default properties
+        for (var propertyKey in PropertyTable) {
+            var { defaultValue, rewritable } = PropertyTable[propertyKey];
+
+            this.wrapProperty(propertyKey);
+
+            if (rewritable) {
+                if (propertyKey in properties) {
+                    this[propertyKey] = properties[propertyKey];
+                    delete properties[propertyKey];
+                } else {
+                    this[propertyKey] = defaultValue;
+                }
+            } else {
+                this[propertyKey] = defaultValue;
+            }
+
+        }
+
+        // Store custom properties
+        for (var propertyKey in properties) {
+            this.wrapProperty(propertyKey);
+            this[propertyKey] = properties[propertyKey];
         }
 
         // Store references
@@ -48,6 +65,22 @@ class EventBehaviorTree extends BehaviorTree {
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);
+    }
+
+    wrapProperty(key) {
+        var treeProperties = this.properties;
+        Object.defineProperty(this, key, {
+            get() {
+                return treeProperties[key];
+            },
+            set(newValue) {
+                treeProperties[key] = newValue;
+            },
+            enumerable: true,
+            configurable: true,
+        });
+
+        return this;
     }
 
     setTreeGroup(groupName) {
@@ -121,20 +154,6 @@ class EventBehaviorTree extends BehaviorTree {
 
         super.abort(blackboard, target);
     }
-}
-
-var WrapProperty = function (tree, key) {
-    var treeProperties = tree.properties;
-    Object.defineProperty(tree, key, {
-        get() {
-            return treeProperties[key];
-        },
-        set(newValue) {
-            treeProperties[key] = newValue;
-        },
-        enumerable: true,
-        configurable: true,
-    });
 }
 
 export default EventBehaviorTree;
