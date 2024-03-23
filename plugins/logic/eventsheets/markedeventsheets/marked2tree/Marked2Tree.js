@@ -21,14 +21,13 @@ var Marked2Tree = function (
 ) {
 
     var headingTree = GetHeadingTree(markedString);
-    var treeConfig = GetTreeConfig(headingTree.paragraphs, commentLineStart);
     var { conditionNodes, mainTaskNodes, catchNodes } = ParseTopLevelNodes(headingTree.children);
 
-    var {
-        parallel = parallel,
-        active = active,
-        once = once,
-    } = treeConfig;
+    var treeConfig = Object.assign(
+        { parallel, active, once },
+        GetTreeConfig(headingTree.paragraphs, commentLineStart)
+    );
+
     var taskSequenceConfig = { lineBreak, commentLineStart };
 
     var tree = new EventBehaviorTree(
@@ -39,11 +38,7 @@ var Marked2Tree = function (
             groupName,
             condition: GetConditionExpression(conditionNodes),
 
-            properties: {
-                parallel: parallel,
-                active: active,
-                once: once,
-            }
+            properties: treeConfig
         }
     );
 
