@@ -767,6 +767,26 @@ log.enable
 - `title` : Enable console message of event sheet by title.
 
 
+##### Dump memory
+
+```
+log.memory
+```
+
+- Dump all key in memory
+
+or
+
+```
+log.memory
+  text=...
+  keys=a,b,c
+```
+
+- `keys` : Dump part of memory by keys.
+- `text` : Message with bbcode format.
+
+
 #### Game object
 
 ##### Register custom game object
