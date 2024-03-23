@@ -6299,7 +6299,7 @@
     if (!result) {
       return;
     }
-    if (tree.conditionEvalPassed) {
+    if (tree.conditionPassed) {
       treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
     } else {
       treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
@@ -6312,7 +6312,7 @@
     return status;
   };
   var CloseEventSheet = function CloseEventSheet(treeManager, tree) {
-    if (tree.conditionEvalPassed) {
+    if (tree.conditionPassed) {
       treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
     }
   };
@@ -6354,7 +6354,7 @@
           continue;
         }
         tree.resetState(blackboard);
-        if (tree.isParallel) {
+        if (tree.parallel) {
           // Open all event sheets
           OpenEventSheet.call(this, treeManager, tree);
         }
@@ -6481,6 +6481,12 @@
         });
       }
       return this.treeGroups[name];
+    },
+    getTree: function getTree(tree, groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      return this.getTreeGroup(groupName).getTree(tree);
     },
     getTreeState: function getTreeState(tree, groupName) {
       if (groupName === undefined) {
@@ -14763,13 +14769,31 @@
   }(EventEmitter$2);
   Object.assign(EventSheetManager.prototype, Methods$4);
 
-  var Active = '$active';
-  var RoundState = '$roundState';
-  var ConditionEvalPassed = '$conditionEvalPassed';
-
   var RoundIdle = 0;
   var RoundRun = 1;
   var RoundComplete = 2;
+  var PropertyTable = {
+    'parallel': {
+      defaultValue: false,
+      rewritable: true
+    },
+    'active': {
+      defaultValue: true,
+      rewritable: true
+    },
+    'once': {
+      defaultValue: false,
+      rewritable: true
+    },
+    'roundState': {
+      defaultValue: RoundIdle,
+      rewritable: false
+    },
+    'conditionPassed': {
+      defaultValue: undefined,
+      rewritable: false
+    }
+  };
   var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventBehaviorTree, _BehaviorTree);
     function EventBehaviorTree(treeManager, config) {
@@ -14778,55 +14802,75 @@
       if (config === undefined) {
         config = {};
       }
-      _this = _callSuper(this, EventBehaviorTree, [config]);
       var _config = config,
-        groupName = _config.groupName,
-        _config$parallel = _config.parallel,
-        parallel = _config$parallel === void 0 ? false : _config$parallel,
-        _config$active = _config.active,
-        active = _config$active === void 0 ? true : _config$active,
-        _config$once = _config.once,
-        once = _config$once === void 0 ? false : _config$once,
-        _config$condition = _config.condition,
-        condition = _config$condition === void 0 ? 'true' : _config$condition;
+        groupName = _config.groupName;
+      delete config.groupName;
+      var _config2 = config,
+        _config2$condition = _config2.condition,
+        condition = _config2$condition === void 0 ? true : _config2$condition;
+      delete config.condition;
+      var properties = config.properties;
+      delete config.properties;
+      _this = _callSuper(this, EventBehaviorTree, [config]);
+
+      // Store default properties
+      for (var propertyKey in PropertyTable) {
+        var _PropertyTable$proper = PropertyTable[propertyKey],
+          defaultValue = _PropertyTable$proper.defaultValue,
+          rewritable = _PropertyTable$proper.rewritable;
+        _this.wrapProperty(propertyKey);
+        if (rewritable) {
+          if (propertyKey in properties) {
+            _this[propertyKey] = properties[propertyKey];
+            delete properties[propertyKey];
+          } else {
+            _this[propertyKey] = defaultValue;
+          }
+        } else {
+          _this[propertyKey] = defaultValue;
+        }
+      }
+
+      // Store custom properties
+      for (var propertyKey in properties) {
+        _this.wrapProperty(propertyKey);
+        _this[propertyKey] = properties[propertyKey];
+      }
 
       // Store references
       _this.treeManager = treeManager;
       _this.blackboard = treeManager.blackboard;
       _this.setTreeGroup(groupName);
-      _this.active = active;
-      _this.properties.parallel = parallel;
-      _this.properties.once = once;
       var root = new IfSelector({
         title: _this.title,
         expression: condition,
         conditionEvalBreak: true // Return RUNNING instead of SUCCESS for condition eval
       });
       _this.setRoot(root);
-      _this.conditionEvalPassed = undefined;
-      _this.roundState = RoundIdle;
       return _this;
     }
     _createClass(EventBehaviorTree, [{
+      key: "wrapProperty",
+      value: function wrapProperty(key) {
+        var treeProperties = this.properties;
+        Object.defineProperty(this, key, {
+          get: function get() {
+            return treeProperties[key];
+          },
+          set: function set(newValue) {
+            treeProperties[key] = newValue;
+          },
+          enumerable: true,
+          configurable: true
+        });
+        return this;
+      }
+    }, {
       key: "setTreeGroup",
       value: function setTreeGroup(groupName) {
         this.groupName = groupName;
         this.treeGroup = this.treeManager.getTreeGroup(groupName);
         return this;
-      }
-    }, {
-      key: "isParallel",
-      get: function get() {
-        return this.properties.parallel;
-      }
-    }, {
-      key: "active",
-      get: function get() {
-        return this._active;
-      },
-      set: function set(value) {
-        this._active = value;
-        this.setData(this.blackboard, Active, value);
       }
     }, {
       key: "setActive",
@@ -14838,27 +14882,9 @@
         return this;
       }
     }, {
-      key: "conditionEvalPassed",
-      get: function get() {
-        return this._conditionEvalPassed;
-      },
-      set: function set(value) {
-        this._conditionEvalPassed = value;
-        this.setData(this.blackboard, ConditionEvalPassed, value);
-      }
-    }, {
-      key: "roundState",
-      get: function get() {
-        return this._roundState;
-      },
-      set: function set(value) {
-        this._roundState = value;
-        this.setData(this.blackboard, RoundState, value);
-      }
-    }, {
       key: "roundComplete",
       get: function get() {
-        return this._roundState === RoundComplete;
+        return this.roundState === RoundComplete;
       },
       set: function set(value) {
         this.roundState = value ? RoundComplete : RoundRun;
@@ -14887,7 +14913,7 @@
         _get(_getPrototypeOf(EventBehaviorTree.prototype), "tick", this).call(this, blackboard, target);
         if (startFromTop) {
           var nodeMemory = this.root.getNodeMemory(this.ticker);
-          this.conditionEvalPassed = nodeMemory.$runningChild === 0;
+          this.conditionPassed = nodeMemory.$runningChild === 0;
         }
         return true;
       }
@@ -14898,7 +14924,7 @@
         if (state !== RUNNING$1) {
           // Will remove from pendingTrees
           this.roundState = RoundComplete;
-          if (this.conditionEvalPassed && this.properties.once) {
+          if (this.conditionPassed && this.properties.once) {
             this.setActive(false);
           }
         }
@@ -16140,11 +16166,15 @@
     return out;
   };
 
-  var GetTreeConfig = function GetTreeConfig(paragraphs) {
+  var GetTreeConfig = function GetTreeConfig(paragraphs, commentLineStart) {
+    // TODO: YAML format? 
     var config = {};
     paragraphs.forEach(function (paragraph) {
       var lines = paragraph.text.split('\n');
       lines.forEach(function (line) {
+        if (line.startsWith(commentLineStart)) {
+          return;
+        }
         ParseProperty(line, config);
       });
     });
@@ -16611,7 +16641,7 @@
       once = _ref$once === void 0 ? false : _ref$once;
     return function (parallel, active, once) {
       var headingTree = GetHeadingTree(markedString);
-      var treeConfig = GetTreeConfig(headingTree.paragraphs);
+      var treeConfig = GetTreeConfig(headingTree.paragraphs, commentLineStart);
       var _ParseTopLevelNodes = ParseTopLevelNodes(headingTree.children),
         conditionNodes = _ParseTopLevelNodes.conditionNodes,
         mainTaskNodes = _ParseTopLevelNodes.mainTaskNodes,
@@ -16627,12 +16657,14 @@
         commentLineStart: commentLineStart
       };
       var tree = new EventBehaviorTree(treeManager, {
-        groupName: groupName,
         title: headingTree.title,
-        parallel: parallel,
-        active: active,
-        once: once,
-        condition: GetConditionExpression$1(conditionNodes)
+        groupName: groupName,
+        condition: GetConditionExpression$1(conditionNodes),
+        properties: {
+          parallel: parallel,
+          active: active,
+          once: once
+        }
       });
       var rootNode = tree.root;
       rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
@@ -24092,6 +24124,9 @@
     }
   };
 
+  var CanLog = function CanLog(tree) {
+    return !tree.hasOwnProperty('logEnable') || tree.logEnable;
+  };
   var LogMethods = {
     log: function log() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24106,6 +24141,9 @@
         _ref$titleColor = _ref.titleColor,
         titleColor = _ref$titleColor === void 0 ? 'green' : _ref$titleColor;
       var tree = arguments.length > 2 ? arguments[2] : undefined;
+      if (!CanLog(tree)) {
+        return;
+      }
       if (showTitle) {
         if (title === undefined) {
           title = tree.title;
@@ -24114,11 +24152,49 @@
       }
       this.sys.logger.log(text, logType);
     },
-    enableLog: function enableLog() {
+    'log.disable': function logDisable() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref2$enable = _ref2.enable,
-        enable = _ref2$enable === void 0 ? true : _ref2$enable;
-      this.sys.logger.setEnable(enable);
+        title = _ref2.title;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
+      var tree = arguments.length > 2 ? arguments[2] : undefined;
+      if (title) {
+        tree = eventSheetManager.getTree(title, tree.groupName);
+      }
+      if (!tree.hasOwnProperty('logEnable')) {
+        tree.wrapProperty('logEnable');
+      }
+      tree.logEnable = false;
+    },
+    'log.enable': function logEnable() {
+      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        title = _ref3.title;
+      var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
+      var tree = arguments.length > 2 ? arguments[2] : undefined;
+      if (title) {
+        tree = eventSheetManager.getTree(title, tree.groupName);
+      }
+      if (!tree.hasOwnProperty('logEnable')) {
+        return;
+      }
+      tree.logEnable = true;
+    },
+    'log.memory': function logMemory(config, eventSheetManager, tree) {
+      if (!CanLog(tree)) {
+        return;
+      }
+      this.log(config, eventSheetManager, tree);
+      var memory = eventSheetManager.memory;
+      var table;
+      var keys = config.keys;
+      if (keys) {
+        table = {};
+        keys.split(',').forEach(function (key) {
+          table[key] = memory[key];
+        });
+      } else {
+        table = memory;
+      }
+      this.sys.logger.log(table, 'table');
     }
   };
 
@@ -24183,15 +24259,9 @@
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       _classCallCheck(this, CommandExecutor);
       this.sys = new Managers(scene, config);
-      var _ref = config.log || {},
-        _ref$delimiters = _ref.delimiters,
-        delimiters = _ref$delimiters === void 0 ? '[]' : _ref$delimiters,
-        _ref$enable = _ref.enable,
-        enable = _ref$enable === void 0 ? true : _ref$enable;
-      this.sys.logger = new BBCodeLog({
-        delimiters: delimiters,
-        enable: enable
-      });
+      var _config$log = config.log,
+        log = _config$log === void 0 ? {} : _config$log;
+      this.sys.logger = new BBCodeLog(log);
     }
     _createClass(CommandExecutor, [{
       key: "destroy",

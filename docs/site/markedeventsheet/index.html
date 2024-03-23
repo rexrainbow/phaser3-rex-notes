@@ -5893,6 +5893,40 @@
     BBCode Log
   </a>
   
+    <nav class="md-nav" aria-label="BBCode Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#print-message-on-console" class="md-nav__link">
+    Print message on console
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-console-message" class="md-nav__link">
+    Disable console message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-console-message" class="md-nav__link">
+    Enable console message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump-memory" class="md-nav__link">
+    Dump memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10223,6 +10257,40 @@
     BBCode Log
   </a>
   
+    <nav class="md-nav" aria-label="BBCode Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#print-message-on-console" class="md-nav__link">
+    Print message on console
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-console-message" class="md-nav__link">
+    Disable console message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-console-message" class="md-nav__link">
+    Enable console message
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump-memory" class="md-nav__link">
+    Dump memory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -11080,7 +11148,7 @@ line2
 </ul>
 <p>See <a href="#local-memory">Local memory</a></p>
 <h4 id="bbcode-log">BBCode Log<a class="headerlink" href="#bbcode-log" title="Permanent link">&para;</a></h4>
-<p>Print message on console</p>
+<h5 id="print-message-on-console">Print message on console<a class="headerlink" href="#print-message-on-console" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>log
   text=...
 </code></pre></div>
@@ -11117,6 +11185,47 @@ line2
 </ul>
 </li>
 <li><code>titleColor</code> : Background color of title block, default value is <code>'green'</code></li>
+</ul>
+<h5 id="disable-console-message">Disable console message<a class="headerlink" href="#disable-console-message" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>log.disable
+</code></pre></div>
+<ul>
+<li>Disable console message of current event sheet.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>log.disable
+  title=...
+</code></pre></div>
+<ul>
+<li><code>title</code> : Disable console message of event sheet by title.</li>
+</ul>
+<h5 id="enable-console-message">Enable console message<a class="headerlink" href="#enable-console-message" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>log.enable
+</code></pre></div>
+<ul>
+<li>Enable console message of current event sheet.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>log.enable
+  title=...
+</code></pre></div>
+<ul>
+<li><code>title</code> : Enable console message of event sheet by title.</li>
+</ul>
+<h5 id="dump-memory">Dump memory<a class="headerlink" href="#dump-memory" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>log.memory
+</code></pre></div>
+<ul>
+<li>Dump all key in memory</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>log.memory
+  text=...
+  keys=a,b,c
+</code></pre></div>
+<ul>
+<li><code>keys</code> : Dump part of memory by keys.</li>
+<li><code>text</code> : Message with bbcode format.</li>
 </ul>
 <h4 id="game-object">Game object<a class="headerlink" href="#game-object" title="Permanent link">&para;</a></h4>
 <h5 id="register-custom-game-object">Register custom game object<a class="headerlink" href="#register-custom-game-object" title="Permanent link">&para;</a></h5>
