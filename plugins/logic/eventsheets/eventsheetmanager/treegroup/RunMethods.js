@@ -10,7 +10,7 @@ var OpenEventSheet = function (treeManager, tree) {
         return;
     }
 
-    if (tree.conditionEvalPassed) {
+    if (tree.conditionPassed) {
         treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
     } else {
         treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
@@ -25,7 +25,7 @@ var TickEventSheet = function (treeManager, tree) {
 }
 
 var CloseEventSheet = function (treeManager, tree) {
-    if (tree.conditionEvalPassed) {
+    if (tree.conditionPassed) {
         treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
     }
 }
@@ -75,7 +75,7 @@ export default {
             }
 
             tree.resetState(blackboard);
-            if (tree.isParallel) {
+            if (tree.parallel) {
                 // Open all event sheets
                 OpenEventSheet.call(this, treeManager, tree);
             }

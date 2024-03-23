@@ -1,33 +1,46 @@
 import { BehaviorTree, IfSelector, IDLE, RUNNING } from '../../../behaviortree/index.js';
-import { Active, RoundState, ConditionEvalPassed } from './constants.js';
+import GetValue from '../../../../utils/object/GetFastValue.js';
 
-const RoundIdle = 0
-const RoundRun = 1
-const RoundComplete = 2
+const RoundIdle = 0;
+const RoundRun = 1;
+const RoundComplete = 2;
+
+const PropertyTable = [
+    ['parallel', false, true],             // Readonly
+    ['active', true, true],                // Readonly
+    ['once', false, true],
+    ['roundState', RoundIdle, false],      // Internal
+    ['conditionPassed', undefined, false], // Internal
+]
 
 class EventBehaviorTree extends BehaviorTree {
     constructor(treeManager, config) {
         if (config === undefined) {
             config = {};
         }
+
+        var { groupName } = config;
+        delete config.groupName;
+
+        var { condition = true } = config;
+        delete config.condition;
+
+        var properties = config.properties;
+        delete config.properties;
+
         super(config);
 
-        var {
-            groupName,
-            parallel = false,
-            active = true,
-            once = false,
-            condition = 'true'
-        } = config;
+        // Store properties
+        for (var i = 0, cnt = PropertyTable.length; i < cnt; i++) {
+            var [propertyKey, defaultValue, rewritable] = PropertyTable[i];
+            WrapProperty(this, propertyKey);
+            this[propertyKey] = (rewritable) ? GetValue(properties, propertyKey, defaultValue) : defaultValue;
+        }
 
         // Store references
         this.treeManager = treeManager;
         this.blackboard = treeManager.blackboard;
         this.setTreeGroup(groupName);
-
-        this.active = active;
-        this.properties.parallel = parallel;
-        this.properties.once = once;
 
         var root = new IfSelector({
             title: this.title,
@@ -35,29 +48,12 @@ class EventBehaviorTree extends BehaviorTree {
             conditionEvalBreak: true   // Return RUNNING instead of SUCCESS for condition eval
         })
         this.setRoot(root);
-
-        this.conditionEvalPassed = undefined;
-
-        this.roundState = RoundIdle;
     }
 
     setTreeGroup(groupName) {
         this.groupName = groupName;
         this.treeGroup = this.treeManager.getTreeGroup(groupName);
         return this;
-    }
-
-    get isParallel() {
-        return this.properties.parallel;
-    }
-
-    get active() {
-        return this._active;
-    }
-
-    set active(value) {
-        this._active = value;
-        this.setData(this.blackboard, Active, value);
     }
 
     setActive(active) {
@@ -68,26 +64,8 @@ class EventBehaviorTree extends BehaviorTree {
         return this;
     }
 
-    get conditionEvalPassed() {
-        return this._conditionEvalPassed;
-    }
-
-    set conditionEvalPassed(value) {
-        this._conditionEvalPassed = value;
-        this.setData(this.blackboard, ConditionEvalPassed, value);
-    }
-
-    get roundState() {
-        return this._roundState;
-    }
-
-    set roundState(value) {
-        this._roundState = value;
-        this.setData(this.blackboard, RoundState, value);
-    }
-
     get roundComplete() {
-        return this._roundState === RoundComplete;
+        return this.roundState === RoundComplete;
     }
 
     set roundComplete(value) {
@@ -117,7 +95,7 @@ class EventBehaviorTree extends BehaviorTree {
 
         if (startFromTop) {
             var nodeMemory = this.root.getNodeMemory(this.ticker);
-            this.conditionEvalPassed = (nodeMemory.$runningChild === 0);
+            this.conditionPassed = (nodeMemory.$runningChild === 0);
         }
 
         return true;
@@ -130,7 +108,7 @@ class EventBehaviorTree extends BehaviorTree {
             // Will remove from pendingTrees
             this.roundState = RoundComplete;
 
-            if (this.conditionEvalPassed && this.properties.once) {
+            if (this.conditionPassed && this.properties.once) {
                 this.setActive(false);
             }
         }
@@ -143,6 +121,20 @@ class EventBehaviorTree extends BehaviorTree {
 
         super.abort(blackboard, target);
     }
+}
+
+var WrapProperty = function (tree, key) {
+    var treeProperties = tree.properties;
+    Object.defineProperty(tree, key, {
+        get() {
+            return treeProperties[key];
+        },
+        set(newValue) {
+            treeProperties[key] = newValue;
+        },
+        enumerable: true,
+        configurable: true,
+    });
 }
 
 export default EventBehaviorTree;
