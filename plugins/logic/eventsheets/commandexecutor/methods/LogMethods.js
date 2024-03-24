@@ -1,5 +1,5 @@
-var CanLog = function (tree) {
-    return !tree.hasOwnProperty('logEnable') || tree.logEnable;
+var CanLog = function (eventsheet) {
+    return !eventsheet.hasOwnProperty('logEnable') || eventsheet.logEnable;
 }
 
 export default {
@@ -10,15 +10,15 @@ export default {
         title = undefined,
         titleColor = 'green'
     } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
-        if (!CanLog(tree)) {
+        if (!CanLog(eventsheet)) {
             return;
         }
 
         if (showTitle) {
             if (title === undefined) {
-                title = tree.title;
+                title = eventsheet.title;
             }
             text = `[round][bgcolor=${titleColor}]${title}[/bgcolor][/round] ${text}`
         }
@@ -29,18 +29,18 @@ export default {
         {
             title
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         if (title) {
-            tree = eventSheetManager.getTree(title, tree.groupName);
+            eventsheet = eventSheetManager.getTree(title, eventsheet.groupName);
         }
 
-        if (!tree.hasOwnProperty('logEnable')) {
-            tree.wrapProperty('logEnable');
+        if (!eventsheet.hasOwnProperty('logEnable')) {
+            eventsheet.wrapProperty('logEnable');
         }
 
-        tree.logEnable = false;
+        eventsheet.logEnable = false;
 
     },
 
@@ -48,27 +48,27 @@ export default {
         {
             title
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         if (title) {
-            tree = eventSheetManager.getTree(title, tree.groupName);
+            eventsheet = eventSheetManager.getTree(title, eventsheet.groupName);
         }
 
-        if (!tree.hasOwnProperty('logEnable')) {
+        if (!eventsheet.hasOwnProperty('logEnable')) {
             return
         }
 
-        tree.logEnable = true;
+        eventsheet.logEnable = true;
 
     },
 
-    'log.memory'(config, eventSheetManager, tree) {
-        if (!CanLog(tree)) {
+    'log.memory'(config, eventSheetManager, eventsheet) {
+        if (!CanLog(eventsheet)) {
             return;
         }
 
-        this.log(config, eventSheetManager, tree);
+        this.log(config, eventSheetManager, eventsheet);
 
         var memory = eventSheetManager.memory;
 

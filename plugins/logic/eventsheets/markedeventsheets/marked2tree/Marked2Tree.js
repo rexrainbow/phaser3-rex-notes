@@ -1,5 +1,5 @@
 import { ForceFailure, Succeeder } from '../../../behaviortree/index.js';
-import EventBehaviorTree from '../../eventsheetmanager/tree/EventBehaviorTree.js';
+import EventSheet from '../../eventsheetmanager/eventsheet/EventSheet.js';
 import GetHeadingTree from './GetHeadingTree.js';
 import GetTreeConfig from './GetTreeConfig.js';
 
@@ -30,7 +30,7 @@ var Marked2Tree = function (
 
     var taskSequenceConfig = { lineBreak, commentLineStart };
 
-    var tree = new EventBehaviorTree(
+    var eventsheet = new EventSheet(
         treeManager,
         {
             title: headingTree.title,
@@ -42,7 +42,7 @@ var Marked2Tree = function (
         }
     );
 
-    var rootNode = tree.root;
+    var rootNode = eventsheet.root;
     rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
 
     var forceFailure = new ForceFailure();
@@ -53,7 +53,7 @@ var Marked2Tree = function (
     }
     rootNode.addChild(forceFailure);
 
-    return tree;
+    return eventsheet;
 }
 
 export default Marked2Tree;

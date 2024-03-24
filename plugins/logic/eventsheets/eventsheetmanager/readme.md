@@ -1,18 +1,18 @@
-# Event sheet manager
+# EventSheet manager
 
 ## Structure
 
 ```mermaid
 graph LR
 
-TreeGroups["Manager.groups<br>TreeGroup {}"] --> TreeGroupDefault["TreeGroup.trees<br>Tree []"]
-TreeGroups --> TreeGroup0["TreeGroup.trees<br>Tree []"]
+EventSheetGroups["Manager.groups<br>EventSheetGroup {}"] --> EventSheetGroupDefault["EventSheetGroup.trees<br>Tree []"]
+EventSheetGroups --> EventSheetGroup0["EventSheetGroup.trees<br>Tree []"]
 
-TreeGroupDefault --> Tree0["tree"]
-TreeGroupDefault --> Tree1["tree"]
+EventSheetGroupDefault --> Tree0["EventSheet<br>Tree"]
+EventSheetGroupDefault --> Tree1["EventSheet<br>Tree"]
 
-TreeGroup0 --> Tree2["tree"]
-TreeGroup0 --> Tree3["tree"]
+EventSheetGroup0 --> Tree2["EventSheet<br>Tree"]
+EventSheetGroup0 --> Tree3["EventSheet<br>Tree"]
 ```
 
 ### Tree

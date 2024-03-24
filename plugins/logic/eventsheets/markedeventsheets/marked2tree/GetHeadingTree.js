@@ -3,7 +3,7 @@ import marked from '../../../../utils/marked/marked.min.js';
 var GetHeadingTree = function (text) {
     var items = marked.lexer(text);
 
-    var tree = null;
+    var eventsheet = null;
     var parents = [];
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
@@ -11,13 +11,13 @@ var GetHeadingTree = function (text) {
             case 'heading':
                 var level = item.depth - 1;
                 // First node
-                if (tree === null) {
+                if (eventsheet === null) {
                     if (level === 0) {
                         var node = CreateNewNode(item.text);
                         parents.push(node);
-                        tree = node;
+                        eventsheet = node;
                     }
-                    // Ignore items if tree is null
+                    // Ignore items if eventsheet is null
                 } else {
                     if (level <= parents.length) {
                         var node = CreateNewNode(item.text);
@@ -48,7 +48,7 @@ var GetHeadingTree = function (text) {
         }
     }
 
-    return tree;
+    return eventsheet;
 }
 
 var CreateNewNode = function (title) {

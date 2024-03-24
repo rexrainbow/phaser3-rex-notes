@@ -4,20 +4,20 @@ import DeepClone from '../../../../utils/object/DeepClone.js';
 
 export default {
     dumpTrees() {
-        return this.trees.map(function (tree) {
-            return tree.dump()
+        return this.trees.map(function (eventsheet) {
+            return eventsheet.dump()
         })
     },
 
     loadTrees(data) {
         data.forEach(function (treeData) {
-            var tree = new BehaviorTree({
+            var eventsheet = new BehaviorTree({
                 id: treeData.id,
                 title: treeData.title,
                 properties: DeepClone(treeData.properties),
             });
-            tree.load(treeData, CustomNodeMapping);
-            this.trees.push(tree);
+            eventsheet.load(treeData, CustomNodeMapping);
+            this.trees.push(eventsheet);
         }, this);
         return this;
     },

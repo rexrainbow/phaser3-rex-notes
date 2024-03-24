@@ -18,7 +18,7 @@ var RegisterChoiceDialogType = function (commandExecutor) {
                     resultKey = 'choiceIndex'
                 } = {},
                 commandExecutor,
-                eventSheetManager
+                eventSheetManager, eventSheet
             ) {
 
                 var choices = [];

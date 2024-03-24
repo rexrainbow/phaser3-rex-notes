@@ -17,7 +17,7 @@ var RegisterTextboxType = function (commandExecutor) {
                     speed
                 } = {},
                 commandExecutor,
-                eventSheetManager
+                eventSheetManager, eventSheet
             ) {
 
                 if (name) {

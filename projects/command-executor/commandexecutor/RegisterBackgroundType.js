@@ -20,7 +20,7 @@ var RegisterBackgroundType = function (commandExecutor) {
                     wait = true
                 } = {},
                 commandExecutor,
-                eventSheetManager
+                eventSheetManager, eventSheet
             ) {
 
                 // Wait until transition complete

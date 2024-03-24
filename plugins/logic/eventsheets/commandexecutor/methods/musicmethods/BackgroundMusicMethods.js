@@ -3,7 +3,7 @@ export default {
         {
             volume, mute, unmute
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -28,7 +28,7 @@ export default {
             volume, detune, rate, fadeIn = 0, loop,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -72,7 +72,7 @@ export default {
             duration = 500,
             wait = false
         },
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -90,7 +90,7 @@ export default {
         }
     },
 
-    'bgm.stop'(config, eventSheetManager, tree) {
+    'bgm.stop'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -122,7 +122,7 @@ export default {
         {
             duration = 500
         },
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -132,7 +132,7 @@ export default {
         soundManager.fadeInBackgroundMusic(duration);
     },
 
-    'bgm.pause'(config, eventSheetManager, tree) {
+    'bgm.pause'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -141,7 +141,7 @@ export default {
         soundManager.pauseBackgroundMusic();
     },
 
-    'bgm.resume'(config, eventSheetManager, tree) {
+    'bgm.resume'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -150,7 +150,7 @@ export default {
         soundManager.resumeBackgroundMusic();
     },
 
-    'bgm.mute'(config, eventSheetManager, tree) {
+    'bgm.mute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -160,7 +160,7 @@ export default {
         soundManager.setBackgroundMusicMute(true);
     },
 
-    'bgm.unmute'(config, eventSheetManager, tree) {
+    'bgm.unmute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {

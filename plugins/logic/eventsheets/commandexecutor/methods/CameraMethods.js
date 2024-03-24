@@ -3,7 +3,7 @@ export default {
         {
             x, y, rotate, zoom
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -30,7 +30,7 @@ export default {
                 red, green, blue,
                 wait = false
             } = {},
-            eventSheetManager, tree
+            eventSheetManager, eventsheet
         ) {
 
         var camera = this.sys.cameraTarget;
@@ -50,7 +50,7 @@ export default {
             red, green, blue,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -70,7 +70,7 @@ export default {
             red, green, blue,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -90,7 +90,7 @@ export default {
             intensity,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -110,7 +110,7 @@ export default {
             zoom,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -129,7 +129,7 @@ export default {
             rotate, ease,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;
@@ -149,7 +149,7 @@ export default {
             x, y, ease,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var camera = this.sys.cameraTarget;

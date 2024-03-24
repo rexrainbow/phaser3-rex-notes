@@ -3,7 +3,7 @@ export default {
         {
             volume, mute, unmute
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -28,7 +28,7 @@ export default {
             volume, detune, rate, fadeIn = 0,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -62,7 +62,7 @@ export default {
         }
     },
 
-    'se2.stop'(config, eventSheetManager, tree) {
+    'se2.stop'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -77,7 +77,7 @@ export default {
             stop = true,
             wait = false
         },
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var soundManager = this.sys.soundManager;
@@ -91,7 +91,7 @@ export default {
         }
     },
 
-    'se2.mute'(config, eventSheetManager, tree) {
+    'se2.mute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
@@ -101,7 +101,7 @@ export default {
         soundManager.setSoundEffect2Mute(true);
     },
 
-    'se2.unmute'(config, eventSheetManager, tree) {
+    'se2.unmute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {

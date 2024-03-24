@@ -3,12 +3,12 @@ export default {
         var state = {
             isRunning: this.isRunning,
             pendingTrees: this.pendingTrees
-                .filter(function (tree) {
-                    // roundComplete tree will be removed from pendingTrees
-                    return !tree.roundComplete;
+                .filter(function (eventsheet) {
+                    // roundComplete eventsheet will be removed from pendingTrees
+                    return !eventsheet.roundComplete;
                 })
-                .map(function (tree) {
-                    return tree.id;
+                .map(function (eventsheet) {
+                    return eventsheet.id;
                 })
         }
 
@@ -31,9 +31,9 @@ export default {
 
         var pendingTrees = this.pendingTrees;
         pendingTrees.length = 0;
-        this.trees.forEach(function (tree) {
-            if (state.pendingTrees.indexOf(tree.id) > -1) {
-                pendingTrees.push(tree);
+        this.trees.forEach(function (eventsheet) {
+            if (state.pendingTrees.indexOf(eventsheet.id) > -1) {
+                pendingTrees.push(eventsheet);
             }
         })
 

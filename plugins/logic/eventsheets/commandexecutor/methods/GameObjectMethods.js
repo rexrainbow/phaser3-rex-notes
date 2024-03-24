@@ -31,7 +31,7 @@ export default {
         return this;
     },
 
-    _setGOProperty(config, eventSheetManager, tree) {
+    _setGOProperty(config, eventSheetManager, eventsheet) {
         var { id } = config;
         delete config.id;
 
@@ -47,7 +47,7 @@ export default {
         // Execute next command
     },
 
-    _easeGOProperty(config, eventSheetManager, tree) {
+    _easeGOProperty(config, eventSheetManager, eventsheet) {
         var { id, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.id;
         delete config.duration;
@@ -79,7 +79,7 @@ export default {
             id,
             wait = false
         } = {},
-        eventSheetManager, tree
+        eventSheetManager, eventsheet
     ) {
 
         var goType = this.sys.getGameObjectManagerName(id);
@@ -93,7 +93,7 @@ export default {
         }
     },
 
-    _runGOMethod(config, eventSheetManager, tree) {
+    _runGOMethod(config, eventSheetManager, eventsheet) {
         var goType = this.sys.getGameObjectManagerName(id);
         if (!goType) {
             return;

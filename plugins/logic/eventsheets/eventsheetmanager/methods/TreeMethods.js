@@ -1,4 +1,4 @@
-import TreeGroup from '../treegroup/EventBehaviorTreeGroup.js';
+import TreeGroup from '../eventsheetgroup/EventBehaviorTreeGroup.js';
 
 export default {
     hasTreeGroup(name) {
@@ -12,18 +12,18 @@ export default {
         return this.treeGroups[name];
     },
 
-    getTree(tree, groupName) {
+    getTree(eventsheet, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        return this.getTreeGroup(groupName).getTree(tree);
+        return this.getTreeGroup(groupName).getTree(eventsheet);
     },
 
-    getTreeState(tree, groupName) {
+    getTreeState(eventsheet, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        return this.getTreeGroup(groupName).getTreeState(tree);
+        return this.getTreeGroup(groupName).getTreeState(eventsheet);
     },
 
     getEventSheetTitleList(out, groupName) {

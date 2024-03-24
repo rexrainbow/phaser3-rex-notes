@@ -17,7 +17,7 @@ var RegisterSpriteType = function (commandExecutor) {
                     key, frame
                 } = {},
                 commandExecutor,
-                eventSheetManager
+                eventSheetManager, eventSheet
             ) {
 
                 gameObject.setTexture(key, frame);

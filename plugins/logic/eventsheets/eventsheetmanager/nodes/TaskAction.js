@@ -34,8 +34,8 @@ class TaskAction extends Action {
 
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var tree = tick.tree;
-        var treeGroup = tree.treeGroup;
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
         var memory = treeManager.memory;
 
         var taskParameters = this.taskParameters;
@@ -53,11 +53,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, tree);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, eventsheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, tree);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, eventsheet);
             }
         }
 
@@ -66,7 +66,7 @@ class TaskAction extends Action {
 
             eventEmitter.once('complete', this.onTaskComplete, this);
 
-            this.continueCallback = treeGroup.continue.bind(treeGroup);
+            this.continueCallback = eventSheetGroup.continue.bind(eventSheetGroup);
             this.continueEE = eventEmitter;
         }
     }

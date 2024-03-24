@@ -21,11 +21,11 @@ class ActivateAction extends Action {
     }
 
     tick(tick) {
-        var tree = this.getTree(tick);
+        var eventsheet = this.getTree(tick);
         if (!this.activateTreeTitle || (this.activateTreeTitle === '')) {
-            tree.setActive(true);
+            eventsheet.setActive(true);
         } else {
-            tree.treeManager.setEventSheetActiveState(this.activateTreeTitle, tree.groupName, true);
+            eventsheet.treeManager.setEventSheetActiveState(this.activateTreeTitle, eventsheet.groupName, true);
         }
         return this.SUCCESS;
     }

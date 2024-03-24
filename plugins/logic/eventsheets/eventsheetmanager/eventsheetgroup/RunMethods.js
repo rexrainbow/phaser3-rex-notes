@@ -1,32 +1,32 @@
 import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
-var OpenEventSheet = function (treeManager, tree) {
+var OpenEventSheet = function (treeManager, eventsheet) {
     var blackboard = treeManager.blackboard;
     var commandExecutor = treeManager.commandExecutor;
-    var result = tree.start(blackboard, commandExecutor);
+    var result = eventsheet.start(blackboard, commandExecutor);
 
     if (!result) {
         return;
     }
 
-    if (tree.conditionPassed) {
-        treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
+    if (eventsheet.conditionPassed) {
+        treeManager.emit('eventsheet.enter', eventsheet.title, this.name, treeManager);
     } else {
-        treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
+        treeManager.emit('eventsheet.catch', eventsheet.title, this.name, treeManager);
     }
 }
 
-var TickEventSheet = function (treeManager, tree) {
+var TickEventSheet = function (treeManager, eventsheet) {
     var blackboard = treeManager.blackboard;
     var commandExecutor = treeManager.commandExecutor;
-    var status = tree.tick(blackboard, commandExecutor);
+    var status = eventsheet.tick(blackboard, commandExecutor);
     return status;
 }
 
-var CloseEventSheet = function (treeManager, tree) {
-    if (tree.conditionPassed) {
-        treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
+var CloseEventSheet = function (treeManager, eventsheet) {
+    if (eventsheet.conditionPassed) {
+        treeManager.emit('eventsheet.exit', eventsheet.title, this.name, treeManager);
     }
 }
 
@@ -37,10 +37,10 @@ export default {
     
     - Normal case : 
         - Start from condition-eval, 
-        - End to tree.roundComplete (SUCCESS/FAILURE/ERROR state)
+        - End to eventsheet.roundComplete (SUCCESS/FAILURE/ERROR state)
     - Cross rounds : 
         - Start from condition-eval or RUNNING state, 
-        - End to tree.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
+        - End to eventsheet.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
     */
 
     start() {
@@ -48,7 +48,7 @@ export default {
         Start a round :
         
         - sequence : Add all trees to pendingTrees
-        - parallel : Open all event sheets(tree), add them to pendingTrees
+        - parallel : Open all event sheets(eventsheet), add them to pendingTrees
 
         Then, invoke continue()
         */
@@ -66,21 +66,21 @@ export default {
 
         // pendingTrees.length = 0;
 
-        // Run parallel tree, will return running, or failure
+        // Run parallel eventsheet, will return running, or failure
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var tree = trees[i];
+            var eventsheet = trees[i];
 
-            if (!tree.active) {
+            if (!eventsheet.active) {
                 continue;
             }
 
-            tree.resetState(blackboard);
-            if (tree.parallel) {
+            eventsheet.resetState(blackboard);
+            if (eventsheet.parallel) {
                 // Open all event sheets
-                OpenEventSheet.call(this, treeManager, tree);
+                OpenEventSheet.call(this, treeManager, eventsheet);
             }
 
-            pendingTrees.push(tree);
+            pendingTrees.push(eventsheet);
         }
 
         this.continue();
@@ -90,11 +90,11 @@ export default {
 
     continue() {
         /*
-        Tick event sheets(tree) until all trees are at SUCCESS/FAILURE/ERROR state
+        Tick event sheets(eventsheet) until all trees are at SUCCESS/FAILURE/ERROR state
 
-        - Open (if not opened) and tick event sheet(tree)        
+        - Open (if not opened) and tick event sheet(eventsheet)        
         - TaskAction's complete event will invoke this method to run remainder nodes
-        - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(tree)
+        - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(eventsheet)
         - Complete this round if pendingTrees is empty. i.e. all trees are return SUCCESS/FAILURE/ERROR.
         */
 
@@ -110,10 +110,10 @@ export default {
         closedTrees.length = 0;
 
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var tree = trees[i];
+            var eventsheet = trees[i];
 
             // Do nothing if event sheet has been opened
-            OpenEventSheet.call(this, treeManager, tree);
+            OpenEventSheet.call(this, treeManager, eventsheet);
 
             if (!this.isRunning) {
                 // Can break here
@@ -121,11 +121,11 @@ export default {
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            var status = TickEventSheet(treeManager, tree);
+            var status = TickEventSheet(treeManager, eventsheet);
 
-            if (tree.roundComplete) {
-                closedTrees.push(tree);
-                CloseEventSheet.call(this, treeManager, tree);
+            if (eventsheet.roundComplete) {
+                closedTrees.push(eventsheet);
+                CloseEventSheet.call(this, treeManager, eventsheet);
             } else if (status === RUNNING) {
                 // Stall command execution here
                 break;
@@ -138,7 +138,7 @@ export default {
 
         }
 
-        blackboard.treeGroup = undefined;
+        blackboard.eventSheetGroup = undefined;
 
         if (closedTrees.length > 0) {
             RemoveItem(trees, closedTrees);
@@ -159,8 +159,8 @@ export default {
         var blackboard = treeManager.blackboard;
         var commandExecutor = treeManager.commandExecutor;
 
-        this.pendingTrees.forEach(function (tree) {
-            tree.abort(blackboard, commandExecutor);
+        this.pendingTrees.forEach(function (eventsheet) {
+            eventsheet.abort(blackboard, commandExecutor);
         })
         this.pendingTrees.length = 0;
 
@@ -168,14 +168,14 @@ export default {
     },
 
     startTree(title, ignoreCondition = true) {
-        // Run a single event sheet(tree)
+        // Run a single event sheet(eventsheet)
 
         if (this.isRunning) {
             return this;
         }
 
-        var tree = this.getTree(title);
-        if (!tree) {
+        var eventsheet = this.getTree(title);
+        if (!eventsheet) {
             return this;
         }
 
@@ -187,15 +187,15 @@ export default {
 
         pendingTrees.length = 0;
 
-        tree.resetState(blackboard);
+        eventsheet.resetState(blackboard);
 
-        tree.setConditionEnable(!ignoreCondition);
+        eventsheet.setConditionEnable(!ignoreCondition);
 
-        OpenEventSheet.call(this, treeManager, tree);
+        OpenEventSheet.call(this, treeManager, eventsheet);
 
-        tree.setConditionEnable(true);
+        eventsheet.setConditionEnable(true);
 
-        pendingTrees.push(tree);
+        pendingTrees.push(eventsheet);
 
         this.continue();
 

@@ -12,7 +12,7 @@ const PropertyTable = {
     'conditionPassed': { defaultValue: undefined, rewritable: false },
 }
 
-class EventBehaviorTree extends BehaviorTree {
+class EventSheet extends BehaviorTree {
     constructor(treeManager, config) {
         if (config === undefined) {
             config = {};
@@ -85,7 +85,7 @@ class EventBehaviorTree extends BehaviorTree {
 
     setTreeGroup(groupName) {
         this.groupName = groupName;
-        this.treeGroup = this.treeManager.getTreeGroup(groupName);
+        this.eventSheetGroup = this.treeManager.getTreeGroup(groupName);
         return this;
     }
 
@@ -156,4 +156,4 @@ class EventBehaviorTree extends BehaviorTree {
     }
 }
 
-export default EventBehaviorTree;
+export default EventSheet;

@@ -2,15 +2,15 @@ export default {
     getTree(title) {
         var trees = this.trees;
         for (var i = 0, cnt = trees.length; i < cnt; i++) {
-            var tree = trees[i];
-            if (tree.title === title) {
-                return tree;
+            var eventsheet = trees[i];
+            if (eventsheet.title === title) {
+                return eventsheet;
             }
         }
     },
 
-    getTreeState(tree) {
-        var treeID = (typeof (tree) === 'string') ? tree : tree.id;
+    getTreeState(eventsheet) {
+        var treeID = (typeof (eventsheet) === 'string') ? eventsheet : eventsheet.id;
         return this.blackboard.getTreeState(treeID);
     },
 
@@ -18,8 +18,8 @@ export default {
         if (out === undefined) {
             out = [];
         }
-        this.trees.forEach(function (tree) {
-            out.push(tree.title);
+        this.trees.forEach(function (eventsheet) {
+            out.push(eventsheet.title);
         })
         return out;
     },

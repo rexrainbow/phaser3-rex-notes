@@ -15,7 +15,7 @@ export default {
         return this;
     },
 
-    wait(config, eventSheetManager, tree) {
+    wait(config, eventSheetManager, eventsheet) {
         var { click, key } = config;
 
         if (click) {
@@ -37,7 +37,7 @@ export default {
         return this.sys;
     },
 
-    click(config, eventSheetManager, tree) {
+    click(config, eventSheetManager, eventsheet) {
         return this.wait({ click: true }, eventSheetManager);
     }
 }

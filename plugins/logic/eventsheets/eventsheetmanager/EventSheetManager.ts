@@ -53,19 +53,19 @@ declare class EventSheetManager extends EventEmitter {
 
     renderString(template: string): string;
 
-    // Start 'default' treeGroup
+    // Start 'default' eventSheetGroup
     start(): this;
 
-    // Start treeGroup, or startTree by title in 'default' treeGroup
+    // Start eventSheetGroup, or startTree by title in 'default' eventSheetGroup
     start(name: string): this;
 
-    // startTree by title in groupName treeGroup 
+    // startTree by title in groupName eventSheetGroup 
     start(title: string, groupName: string): this;
 
-    // startTree by title in 'default' treeGroup
+    // startTree by title in 'default' eventSheetGroup
     start(title: string, ignoreCondition: boolean): this;
 
-    // startTree by title in groupName treeGroup
+    // startTree by title in groupName eventSheetGroup
     start(title: string, groupName: string, ignoreCondition: boolean,): this;
 
     stop(groupName?: string): this;

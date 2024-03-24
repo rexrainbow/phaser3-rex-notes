@@ -22,7 +22,7 @@ class MarkedEventSheets extends EventSheetManager {
             parallel = this.parallel,
         } = config;
 
-        var tree = Marked2Tree(
+        var eventsheet = Marked2Tree(
             this,
             markedString,
             {
@@ -33,7 +33,7 @@ class MarkedEventSheets extends EventSheetManager {
             }
         );
 
-        this.addTree(tree, groupName);
+        this.addTree(eventsheet, groupName);
         return this;
     }
 }

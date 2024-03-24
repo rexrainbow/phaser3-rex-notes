@@ -21,11 +21,11 @@ class DeactivateAction extends Action {
     }
 
     tick(tick) {
-        var tree = this.getTree(tick);
+        var eventsheet = this.getTree(tick);
         if (!this.deactivateTreeTitle || (this.deactivateTreeTitle === '')) {
-            tree.setActive(false);
+            eventsheet.setActive(false);
         } else {
-            tree.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, tree.groupName, false);
+            eventsheet.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
         }
         return this.SUCCESS;
     }

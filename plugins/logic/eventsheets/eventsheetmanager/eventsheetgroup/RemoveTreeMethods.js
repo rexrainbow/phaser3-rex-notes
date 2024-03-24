@@ -2,8 +2,8 @@ import RemoveItem from '../../../../utils/array/Remove.js';
 
 export default {
     removeAllEventSheets() {
-        this.trees.forEach(function (tree) {
-            this.blackboard.removeTreeData(tree.id);
+        this.trees.forEach(function (eventsheet) {
+            this.blackboard.removeTreeData(eventsheet.id);
         }, this)
         this.trees.length = 0;
         this.pendingTrees.length = 0;
@@ -12,18 +12,18 @@ export default {
 
     removeEventSheet(title) {
         var removedTrees = [];
-        this.trees.forEach(function (tree) {
-            if (!tree.title === title) {
+        this.trees.forEach(function (eventsheet) {
+            if (!eventsheet.title === title) {
                 return;
             }
-            var status = this.getTreeState(tree);
+            var status = this.getTreeState(eventsheet);
             if (status === RUNNING) {
-                // Can't remove RUNNING tree
+                // Can't remove RUNNING eventsheet
                 return;
             }
 
-            removedTrees.push(tree);
-            this.blackboard.removeTreeData(tree.id);
+            removedTrees.push(eventsheet);
+            this.blackboard.removeTreeData(eventsheet.id);
         }, this);
 
         if (removedTrees.length > 0) {

@@ -4,11 +4,11 @@ export default {
         return this;
     },
 
-    addTree(tree, groupName) {
+    addTree(eventsheet, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        this.getTreeGroup(groupName).addTree(tree);
+        this.getTreeGroup(groupName).addTree(eventsheet);
         return this;
     },
 

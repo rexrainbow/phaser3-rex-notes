@@ -9,7 +9,7 @@ class EventBehaviorTreeGroup {
 
         this.trees = [];
         this.pendingTrees = [];
-        this.closedTrees = [];  // Temporary tree array
+        this.closedTrees = [];  // Temporary eventsheet array
 
         this.isRunning = false;
         this._threadKey = null;
