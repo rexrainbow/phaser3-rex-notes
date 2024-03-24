@@ -30,6 +30,7 @@ class EventBehaviorTree extends BehaviorTree {
         super(config);
 
         // Store default properties
+        var treeProperties = this.properties;
         for (var propertyKey in PropertyTable) {
             var { defaultValue, rewritable } = PropertyTable[propertyKey];
 
@@ -37,21 +38,20 @@ class EventBehaviorTree extends BehaviorTree {
 
             if (rewritable) {
                 if (propertyKey in properties) {
-                    this[propertyKey] = properties[propertyKey];
+                    treeProperties[propertyKey] = properties[propertyKey];
                     delete properties[propertyKey];
                 } else {
-                    this[propertyKey] = defaultValue;
+                    treeProperties[propertyKey] = defaultValue;
                 }
             } else {
-                this[propertyKey] = defaultValue;
+                treeProperties[propertyKey] = defaultValue;
             }
 
         }
 
         // Store custom properties
         for (var propertyKey in properties) {
-            this.wrapProperty(propertyKey);
-            this[propertyKey] = properties[propertyKey];
+            treeProperties[propertyKey] = properties[propertyKey];
         }
 
         // Store references
