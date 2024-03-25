@@ -48,6 +48,11 @@ export default {
     },
 
     playBackgroundMusic2(key, config) {
+        if (!this.hasAudio(key)) {
+            console.error(`[Sound manager] Audio key'${key}' is not existed`);
+            return this;
+        }
+
         // Don't re-play the same background music
         if (this.backgroundMusic2 && (this.backgroundMusic2.key === key)) {
             return this;
@@ -117,6 +122,11 @@ export default {
     },
 
     crossFadeBackgroundMusic2(key, time) {
+        if (!this.hasAudio(key)) {
+            console.error(`[Sound manager] Audio key'${key}' is not existed`);
+            return this;
+        }
+
         var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
         this.backgroundMusic2FadeTime = 0;
 

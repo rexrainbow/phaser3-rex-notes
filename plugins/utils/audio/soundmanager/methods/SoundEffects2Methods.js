@@ -15,6 +15,11 @@ export default {
     },
 
     playSoundEffect2(key, config) {
+        if (!this.hasAudio(key)) {
+            console.error(`[Sound manager] Audio key'${key}' is not existed`);
+            return this;
+        }
+
         var music = this.sound.add(key, {
             mute: GetValue(config, 'mute', this.soundEffects2Mute),
             volume: GetValue(config, 'volume', this.soundEffects2Volume),

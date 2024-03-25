@@ -31,6 +31,8 @@ declare class SoundManager {
 
     destroy(): this;
 
+    hasAudio(key: string): boolean;
+
     // Background music
     setBackgroundMusicLoop(value?: boolean): this;
 
