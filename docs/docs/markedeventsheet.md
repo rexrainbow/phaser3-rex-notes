@@ -707,10 +707,10 @@ or
 ```
 log
   text=...
-  logType='log'
-  showTitle=true
-  title
-  titleColor='green'
+  // logType='log'
+  // showTitle=true
+  // title
+  // titleColor='green'
 ```
 
 - `text` : Message with bbcode format.
