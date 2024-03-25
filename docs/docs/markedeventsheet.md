@@ -285,13 +285,13 @@ Local memory is shared for all event sheets.
     ```
 - Enter a label (any heading) an event sheet
     ```javascript
-    eventSheetManager.on('label.enter', function(labelTitle, treeTitle, groupName, eventSheetManager){ 
+    eventSheetManager.on('label.enter', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
 
     });
     ```
 - Exit a label (any heading) of an event sheet
     ```javascript
-    eventSheetManager.on('label.exit', function(labelTitle, treeTitle, groupName, eventSheetManager){ 
+    eventSheetManager.on('label.exit', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
 
     });
     ```
@@ -527,11 +527,11 @@ or
 
 ```
 
-[deactivate treeTitle]
+[deactivate title]
 
 ```
 
-- Action line with `[deactivate]`, or `[deactivate treeTitle]` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
+- Action line with `[deactivate]`, or `[deactivate title]` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
 
 
 
@@ -548,11 +548,11 @@ or
 
 ```
 
-[activate treeTitle]
+[activate title]
 
 ```
 
-- Action line with `[activate]`, or `[activate treeTitle]` : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `true`.
+- Action line with `[activate]`, or `[activate title]` : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `true`.
 
 
 #### Custom command

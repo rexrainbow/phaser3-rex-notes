@@ -10813,12 +10813,12 @@ when exection of this event sheet is complete. </p>
 <span class="p">});</span>
 </code></pre></div></li>
 <li>Enter a label (any heading) an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">labelTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">treeTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.enter&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">headingTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
 
 <span class="p">});</span>
 </code></pre></div></li>
 <li>Exit a label (any heading) of an event sheet
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">labelTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">treeTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;label.exit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">headingTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetTitle</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
 
 <span class="p">});</span>
 </code></pre></div></li>
@@ -11004,19 +11004,19 @@ actions...
 <div class="highlight"><pre><span></span><code>[deactivate]
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code>[deactivate treeTitle]
+<div class="highlight"><pre><span></span><code>[deactivate title]
 </code></pre></div>
 <ul>
-<li>Action line with <code>[deactivate]</code>, or <code>[deactivate treeTitle]</code> : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>false</code>.</li>
+<li>Action line with <code>[deactivate]</code>, or <code>[deactivate title]</code> : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>false</code>.</li>
 </ul>
 <h5 id="activate">Activate<a class="headerlink" href="#activate" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>[activate]
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code>[activate treeTitle]
+<div class="highlight"><pre><span></span><code>[activate title]
 </code></pre></div>
 <ul>
-<li>Action line with <code>[activate]</code>, or <code>[activate treeTitle]</code> : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>true</code>.</li>
+<li>Action line with <code>[activate]</code>, or <code>[activate title]</code> : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set <code>active</code> property of this event shhet to <code>true</code>.</li>
 </ul>
 <h4 id="custom-command">Custom command<a class="headerlink" href="#custom-command" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>commandName
