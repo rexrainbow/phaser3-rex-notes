@@ -31,6 +31,11 @@ export default {
         return this;
     },
 
+    addGameObjectCommand(goType, commandName, callback) {
+        this.sys.getGameObjectManager(goType).commands[commandName] = callback;
+        return this;
+    },
+
     _setGOProperty(config, eventSheetManager, eventsheet) {
         var { id } = config;
         delete config.id;

@@ -45,6 +45,12 @@ declare class CommandExecutor {
         config?: CommandExecutor.IAddGameObjectManagerConfig
     ): this;
 
+    addGameObjectCommand(
+        goype: string,
+        commandName: string,
+        callback: CommandExecutor.GameObjectCommandType
+    ): this;
+
     addCommand(
         name: string,
         callback: CommandExecutor.CommandCallbackType,
