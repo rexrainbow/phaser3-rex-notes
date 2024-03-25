@@ -13,10 +13,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        // create() is before game.prestep event
         this.rexScaleOuter.scale();
 
         var viewport = new Phaser.Geom.Rectangle();
         var UpdateViewport = (function () {
+            // rexScaleOuter has 2 kinds of viewport
             var innerViewport = this.rexScaleOuter.innerViewport;
             viewport.setTo(
                 innerViewport.x + 10,
