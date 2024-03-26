@@ -45,6 +45,7 @@ import Space from './space/Space';
 import Label from './label/Label';
 import SimpleLabel from './simplelabel/SimpleLabel';
 import TitleLabel from './titlelabel/TitleLabel';
+import SimpleTitleLabel from './simpletitlelabel/SimpleTitleLabel';
 import NameValueLabel from './namevaluelabel/NameValueLabel';
 import ExpBar from './expbar/ExpBar';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel';
@@ -176,6 +177,7 @@ export {
     Label,
     SimpleLabel,
     TitleLabel,
+    SimpleTitleLabel,
     NameValueLabel,
     ExpBar,
     ImageInputLabel,

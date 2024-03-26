@@ -12,6 +12,7 @@ declare namespace SimpleTitleLabel {
     }
 
     interface IResetDisplayContentConfig extends LabelBase.IResetDisplayContentConfig {
+        title?: string,
     }
 }
 

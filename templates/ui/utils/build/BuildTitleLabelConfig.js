@@ -7,23 +7,32 @@ import WrapExpandText from '../wrapexpandtext/WrapExpandText.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var BuildTitleLabelConfig = function (scene, config, creators) {
-    config = BuildLabelConfig(scene, config, creators);
-
     var createInnerBackground = GetValue(creators, 'innerBackground', DefaultCreateBackground);
     var createSeparator = GetValue(creators, 'separator', DefaultCreateBackground);
     var createTitle = GetValue(creators, 'title', DefaultCreateText);
 
+    var innerBackground, separator;
 
+    // Create innerBackground before background
     if (createInnerBackground) {
-        config.innerBackground = createInnerBackground(scene, config.innerBackground);
+        innerBackground = createInnerBackground(scene, config.innerBackground);
+    }
+
+    // Create separator before background
+    if (createSeparator) {
+        separator = createSeparator(scene, config.separator);
+    }
+
+    config = BuildLabelConfig(scene, config, creators);
+
+    if (innerBackground) {
+        config.innerBackground = innerBackground;
     } else {
         delete config.innerBackground;
     }
 
-    if (createSeparator) {
-        var configSeparator = config.separator || {};
-        configSeparator.height = configSeparator.width;
-        config.separator = createSeparator(scene, configSeparator);
+    if (separator) {
+        config.separator = separator;
     } else {
         delete config.separator;
     }
@@ -48,12 +57,14 @@ var BuildTitleLabelConfig = function (scene, config, creators) {
         delete config.title;
     }
 
-    // Keep config.background as the bottom element
-    // And config.innerBackground is 2nd bottom element
-    if (config.innerBackground && config.background) {
-        var displayList = scene.children;
-        displayList.moveBelow(config.innerBackground, config.background);  // Move child1 below child2
-        displayList.moveBelow(config.background, config.innerBackground);  // Move child1 below child2
+    // Keep background as the bottom element
+    var background = config.background;
+    if (background) {
+        if (innerBackground) {
+            scene.children.moveBelow(background, innerBackground);  // Move child1 below child2
+        } else if (separator) {
+            scene.children.moveBelow(background, separator);  // Move child1 below child2
+        }
     }
 
     return config;

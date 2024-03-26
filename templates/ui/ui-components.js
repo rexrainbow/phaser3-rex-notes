@@ -47,6 +47,7 @@ import Space from './space/Space.js';
 import Label from './label/Label.js';
 import SimpleLabel from './simplelabel/SimpleLabel.js';
 import TitleLabel from './titlelabel/TitleLabel.js';
+import SimpleTitleLabel from './simpletitlelabel/SimpleTitleLabel.js';
 import NameValueLabel from './namevaluelabel/NameValueLabel.js';
 import ExpBar from './expbar/ExpBar.js';
 import Buttons from './buttons/Buttons.js';
@@ -178,6 +179,7 @@ export {
     Label,
     SimpleLabel,
     TitleLabel,
+    SimpleTitleLabel,
     NameValueLabel,
     ExpBar,
     Buttons,

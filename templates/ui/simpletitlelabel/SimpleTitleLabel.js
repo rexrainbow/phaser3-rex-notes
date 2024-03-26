@@ -8,12 +8,6 @@ class SimpleTitleLabel extends TitleLabel {
         this.type = 'rexSimpleTitleLabel';
     }
 
-    resetDisplayContent(config) {
-        // TODO
-        super.resetDisplayContent(config);
-        return this;
-    }
-
     setActiveState(enable) {
         RunMethod(this.getChildren(), 'setActiveState', enable);
         return this;
