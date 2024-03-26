@@ -3,13 +3,13 @@ import { BehaviorTree, RUNNING } from '../../../behaviortree/index.js';
 import DeepClone from '../../../../utils/object/DeepClone.js';
 
 export default {
-    dumpTrees() {
+    dumpEventSheetGroup() {
         return this.trees.map(function (eventsheet) {
             return eventsheet.dump()
         })
     },
 
-    loadTrees(data) {
+    loadEventSheetGroup(data) {
         data.forEach(function (treeData) {
             var eventsheet = new BehaviorTree({
                 id: treeData.id,

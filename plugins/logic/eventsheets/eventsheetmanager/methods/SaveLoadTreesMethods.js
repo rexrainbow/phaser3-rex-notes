@@ -1,16 +1,16 @@
 export default {
-    dumpTrees(groupName) {
+    dumpEventSheetGroup(groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        return this.getTreeGroup(groupName).dumpTrees();
+        return this.getTreeGroup(groupName).dumpEventSheetGroup();
     },
 
-    loadTrees(data, groupName) {
+    loadEventSheetGroup(data, groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName
         }
-        this.getTreeGroup(groupName).loadTrees(data);
+        this.getTreeGroup(groupName).loadEventSheetGroup(data);
         return this;
     },
 }

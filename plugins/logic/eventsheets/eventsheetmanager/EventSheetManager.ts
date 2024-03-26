@@ -33,9 +33,9 @@ declare class EventSheetManager extends EventEmitter {
     setEventSheetActiveState(title: string, groupName?: string, active?: boolean): this;
     setEventSheetActiveState(title: string, active?: boolean): this;
 
-    dumpTrees(groupName?: string): Object[];
+    dumpEventSheetGroup(groupName?: string): Object[];
 
-    loadTrees(data: Object[], groupName?: string): this;
+    loadEventSheetGroup(data: Object[], groupName?: string): this;
 
     setData(key: string, value: any): this;
 

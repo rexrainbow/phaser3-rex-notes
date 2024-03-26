@@ -13,7 +13,7 @@ export default {
         }
 
         if (includeTree) {
-            state.trees = this.dumpTrees();
+            state.trees = this.dumpEventSheetGroup();
         }
 
         return state;
@@ -24,7 +24,7 @@ export default {
 
         if (state.trees) {
             this.trees.length = 0;
-            this.loadTrees(state.trees);
+            this.loadEventSheetGroup(state.trees);
         }
 
         this.isRunning = state.isRunning;
