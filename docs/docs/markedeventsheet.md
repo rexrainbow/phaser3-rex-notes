@@ -630,6 +630,7 @@ A command executor for phaser3 engine.
 ```javascript
 var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
     layers: [],
+    // layerDepth: undefined,
 
     log: {
         delimiters: '[]'
@@ -658,6 +659,8 @@ var commandExecutor = new CommandExecutor(scene, config);
 
 
 - `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
+- `layerDepth` : Set `depth` to each [layer](layer.md) game object.
+    - `undefined` : Keep default `depth` value (`0`)
 - `log` : Configuration of BBCodeLog
     - `log.delimiters` : String of left-delimiter and right-delimiter.
         - A single string with 2 characters. Default value is `'[]'`.

@@ -17,6 +17,8 @@ class GOManager {
         );
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this.setGameObjectDepth(GetValue(config, 'depth', undefined));
+
         var fadeConfig = GetValue(config, 'fade', 500);
         if (typeof (fadeConfig) === 'number') {
             this.setGOFadeMode();
@@ -76,6 +78,11 @@ class GOManager {
     setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
+        return this;
+    }
+
+    setGameObjectDepth(depth) {
+        this.gameObjectDepth = depth;
         return this;
     }
 

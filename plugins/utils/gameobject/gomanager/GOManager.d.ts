@@ -21,6 +21,8 @@ declare namespace GOManager {
 
         createGameObject?: CreateGameObjectCallbackType,
 
+        depth?: number,
+
         fade?: number | {
             mode?: 0 | 1 | 'tint' | 'alpha',
             time?: number
@@ -48,6 +50,8 @@ declare class GOManager extends Phaser.Events.EventEmitter {
 
     setCreateBobCallback(callback?: GOManager.CreateBobCallbackType): this;
     setCreateGameObjectCallback(callback?: GOManager.CreateGameObjectCallbackType): this;
+
+    setGameObjectDepth(depth?: number): this;
 
     setGOFadeTime(time: number): this;
 

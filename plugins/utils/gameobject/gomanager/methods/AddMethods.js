@@ -56,6 +56,10 @@ export default {
         var gameObject = callback.call(scope, this.scene, ...args);
         this.addGO(name, gameObject);
 
+        if (this.gameObjectDepth != null) { // Not undefined, null
+            gameObject.setDepth(this.gameObjectDepth);
+        }
+
         var bob = this.get(name);
         this.fadeBob(bob, 0, 1);
 
