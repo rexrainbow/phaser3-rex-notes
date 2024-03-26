@@ -1,5 +1,6 @@
 import StatesText from '../../statestext/StatesText.js';
 import BBCodeText from '../../bbcodetext/BBCodeText.js';
+import DecorateGameObject from './DecorateGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const PhaserBitmapText = Phaser.GameObjects.BitmapText;
@@ -41,6 +42,7 @@ var CreateText = function (scene, config) {
             break;
     }
 
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
 }

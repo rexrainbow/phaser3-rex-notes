@@ -65,6 +65,7 @@ import Menu from './menu/Menu.js';
 import DropDownList from './dropdownlist/DropDownList.js';
 import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList.js';
 import TextBox from './textbox/TextBox.js';
+import SimpleTextBox from './simpletextbox/SimpleTextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import BadgeLabel from './badgelabel/BadgeLabel.js';
 import Pages from './pages/Pages.js';
@@ -197,6 +198,7 @@ export {
     DropDownList,
     SimpleDropDownList,
     TextBox,
+    SimpleTextBox,
     NumberBar,
     BadgeLabel,
     Pages,

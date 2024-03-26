@@ -64,6 +64,7 @@ import Menu from './menu/Menu';
 import DropDownList from './dropdownlist/DropDownList';
 import SimpleDropDownList from './simpledropdownlist/SimpleDropDownList';
 import TextBox from './textbox/TextBox';
+import SimpleTextBox from './simpletextbox/SimpleTextBox';
 import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';
 import BadgeLabel from './badgelabel/BadgeLabel';
@@ -196,6 +197,7 @@ export {
     DropDownList,
     SimpleDropDownList,
     TextBox,
+    SimpleTextBox,
     NumberBar,
     ScrollBar,
     BadgeLabel,

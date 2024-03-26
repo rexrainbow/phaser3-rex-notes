@@ -1,4 +1,4 @@
-import { TEXT } from '../const/GameObjects.js';
+import { TEXTBOX } from '../const/GameObjects.js';
 import { UILayer } from '../const/Layers.js';
 import { ConfirmDialog } from '../../ui/ui-components.js'
 
@@ -8,7 +8,7 @@ var RegisterTextboxType = function (commandExecutor) {
     
 
     commandExecutor.addGameObjectManager({
-        name: TEXT,
+        name: TEXTBOX,
         createGameObject: CreateTextBox,
         fade: 0,  // No fade-in when creating/destroying gameobject
         viewportCoordinate: true,

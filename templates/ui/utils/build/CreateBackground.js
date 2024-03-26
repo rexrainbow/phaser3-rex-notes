@@ -2,6 +2,7 @@ import StatesRoundRectangle from '../../statesroundrectangle/StatesRoundRectangl
 import StatesNineSlice from '../../statesnineslice/StatesNineSlice.js';
 import StatesImage from '../../statesimage/StatesImage.js';
 import NinePatch from '../../ninepatch/NinePatch.js';
+import DecorateGameObject from './DecorateGameObject.js';
 
 var CreateBackground = function (scene, config) {
     var gameObjectType;
@@ -36,6 +37,7 @@ var CreateBackground = function (scene, config) {
             break;
     }
 
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
 }
