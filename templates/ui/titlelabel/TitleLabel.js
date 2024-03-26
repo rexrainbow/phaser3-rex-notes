@@ -21,6 +21,9 @@ class TitleLabel extends LabelBase {
         var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
         layoutCallback.call(this, config);
 
+        // Elements : title, separator, innerBackground,
+        //            icon, iconMask, text, action, actionMask, background
+        //            innerSizer
         this.addChildrenMap('background', config.background);
 
     }

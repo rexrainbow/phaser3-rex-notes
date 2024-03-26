@@ -100,6 +100,7 @@ var LayoutMode0 = function (config) {
         innerSizer.add(
             separator,
             { expand: true, padding: padding }
+            // Fixed height, expand width
         );
     }
 

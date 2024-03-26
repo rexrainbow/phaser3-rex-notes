@@ -53,6 +53,7 @@ var LayoutMode1 = function (config) {
         this.add(
             separator,
             { proportion: 0, expand: true, padding: padding }
+            // Fixed height, expand width
         );
     }
 
