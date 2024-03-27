@@ -18,10 +18,12 @@ var PropToTagText = function (text, prop, prevProp) {
         var value = prop[k];
 
 
-        if ((prevProp[k] === value) && (
-            (k !== 'img')  // Each 'img' prop will draw an image
-        )) {
-            continue;
+        if (k === 'img') {
+            // Each 'img' prop will draw an image
+        } else {
+            if (prevProp[k] === value) {
+                continue;
+            }
         }
 
         switch (k) {
