@@ -21,6 +21,9 @@ class LayerManager extends GOManager {
 
         super(scene, config);
 
+        var rootLayer = GetValue(config, 'rootLayer')
+        this.setRootLayer(rootLayer);
+
         var initLayers = GetValue(config, 'layers');
         if (initLayers) {
             for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -37,10 +40,31 @@ class LayerManager extends GOManager {
         return this;
     }
 
+    setRootLayer(rootLayer) {
+        if (rootLayer === this.rootLayer) {
+            return this;
+        }
+
+        var currentLayers = this.getAllGO();
+        if (rootLayer) {
+            rootLayer.add(currentLayers);
+        } else {
+            this.scene.displayList.add(currentLayers);
+        }
+
+        this.rootLayer = rootLayer;
+
+        return this;
+    }
+
     // Override
     addGO(name, gameObject) {
         super.addGO(name, gameObject);
         gameObject.name = name;
+
+        if (this.rootLayer) {
+            this.rootLayer.add(gameObject);
+        }
 
         return this;
     }

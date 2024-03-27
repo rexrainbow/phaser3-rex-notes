@@ -61,6 +61,7 @@ declare class GOManager extends Phaser.Events.EventEmitter {
 
     get(name: string): BobBase;
     getGO(name: string): Phaser.GameObjects.GameObject;
+    getAllGO(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.GameObject[];
 
     addGO(
         name: string,

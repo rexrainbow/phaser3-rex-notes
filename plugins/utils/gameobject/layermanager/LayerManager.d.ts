@@ -5,6 +5,7 @@ export default LayerManager;
 declare namespace LayerManager {
     interface IConfig {
         layers?: string[];
+        rootLayer?: Phaser.GameObjects.Layer;
 
         createGameObject?: GOManager.CreateGameObjectCallbackType,
     }
@@ -19,6 +20,8 @@ declare class LayerManager extends GOManager {
         scene: Phaser.Scene,
         config?: string[]
     )
+
+    setRootLayer(rootLayer?: Phaser.GameObjects.Layer): this;
 
     getLayer(name: string): Phaser.GameObjects.Layer;
 

@@ -17,6 +17,7 @@ var InitManagers = function (scene, config) {
     if (layerNames !== false) {
         var layerManager = new LayerManager(scene, {
             layers: layerNames,
+            rootLayer: GetValue(config, 'rootLayer', undefined),
             depth: GetValue(config, 'layerDepth', undefined)
         });
         this.gameObjectManagers.layer = layerManager;

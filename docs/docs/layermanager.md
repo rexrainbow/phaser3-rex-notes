@@ -71,6 +71,8 @@ A dictionary to store [Layer game objects](layer.md).
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, {
     // layers: ['layer0', 'layer1', ...]
+    // depth: undefined,
+    // rootLayer: undefined,
 });
 ```
 
@@ -83,6 +85,9 @@ var layerManager = scene.plugins.get('rexLayerManager').add(scene,
 ```
 
 - `layers` : Add layers by name string array.
+- `depth` : Set `depth` to each [layer](layer.md) game object.
+    - `undefined` : Keep default `depth` value (`0`)
+- `rootLayer` : Add all [layer](layer.md) game object created by layer-manager into this root layer.
 
 ### Destroy
 

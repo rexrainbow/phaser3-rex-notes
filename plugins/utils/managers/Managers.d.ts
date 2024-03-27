@@ -48,6 +48,7 @@ declare namespace Managers {
     interface IConfig extends WaitEventManager.IConfig {
         layers?: LayerManager.IConfig,
         layerDepth?: number,
+        rootLayer?: Phaser.GameObjects.Layer,
 
         sounds?: IConfigSounds,
     }
