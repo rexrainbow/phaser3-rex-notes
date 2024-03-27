@@ -331,7 +331,7 @@ module.exports = {
 
     // markdown-visual-novel
     'markdownvisualnovel': './templates/markdownvisualnovel/MarkdownVisualNovel.js',
-    'markdownvisualnovel-plugin': './templates/markdownvisualnovel/markdownvisualnovel-plugin.js',
+    'markdownvisualnovelplugin': './templates/markdownvisualnovel/markdownvisualnovel-plugin.js',
 
     // network
     'firebase': './plugins/firebase.js',
