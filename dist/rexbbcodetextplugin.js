@@ -3970,9 +3970,10 @@
     }
     for (var k in prop) {
       var value = prop[k];
-      if (prevProp[k] === value && k !== 'img' // Each 'img' prop will draw an image
-      ) {
-        continue;
+      if (k === 'img') ; else {
+        if (prevProp[k] === value) {
+          continue;
+        }
       }
       switch (k) {
         case 'size':

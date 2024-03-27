@@ -15699,7 +15699,7 @@
       key: "setIconTexture",
       value: function setIconTexture(key, frame) {
         var imageObject = this.childrenMap.icon;
-        if (!imageObject) {
+        if (!imageObject || !imageObject.setTexture) {
           return this;
         }
         imageObject.setTexture(key, frame);
@@ -15747,7 +15747,7 @@
       key: "setActionTexture",
       value: function setActionTexture(key, frame) {
         var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
+        if (!imageObject || !imageObject.setTexture) {
           return this;
         }
         imageObject.setTexture(key, frame);
@@ -23235,9 +23235,10 @@
     }
     for (var k in prop) {
       var value = prop[k];
-      if (prevProp[k] === value && k !== 'img' // Each 'img' prop will draw an image
-      ) {
-        continue;
+      if (k === 'img') ; else {
+        if (prevProp[k] === value) {
+          continue;
+        }
       }
       switch (k) {
         case 'size':
@@ -27437,7 +27438,34 @@
   };
 
   var CreateImage = function CreateImage(scene, config) {
-    var gameObject = new StatesImage(scene, config);
+    var gameObjectType;
+    if (config) {
+      if (config.hasOwnProperty('type')) {
+        gameObjectType = config.type;
+      } else {
+        if (config.hasOwnProperty('leftWidth')) {
+          gameObjectType = 'nineSlice';
+        } else if (config.hasOwnProperty('color')) {
+          gameObjectType = 'roundRectangle';
+        }
+      }
+    }
+    var gameObject;
+    switch (gameObjectType) {
+      case 'nineSlice':
+        if (!config.hasOwnProperty('stretchMode')) {
+          gameObject = new StatesNineSlice(scene, config);
+        } else {
+          gameObject = new NinePatch(scene, config);
+        }
+        break;
+      case 'roundRectangle':
+        gameObject = new StatesRoundRectangle(scene, config);
+        break;
+      default:
+        gameObject = new StatesImage(scene, config);
+        break;
+    }
     DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;

@@ -12094,7 +12094,7 @@
       key: "setIconTexture",
       value: function setIconTexture(key, frame) {
         var imageObject = this.childrenMap.icon;
-        if (!imageObject) {
+        if (!imageObject || !imageObject.setTexture) {
           return this;
         }
         imageObject.setTexture(key, frame);
@@ -12142,7 +12142,7 @@
       key: "setActionTexture",
       value: function setActionTexture(key, frame) {
         var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
+        if (!imageObject || !imageObject.setTexture) {
           return this;
         }
         imageObject.setTexture(key, frame);
