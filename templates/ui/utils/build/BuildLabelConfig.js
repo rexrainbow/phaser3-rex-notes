@@ -16,13 +16,13 @@ var BuildLabelConfig = function (scene, config, creators) {
     var createIcon = GetValue(creators, 'icon', DefaultCreateImage);
     var createAction = GetValue(creators, 'action', DefaultCreateImage);
 
-    if (createBackground) {
+    if ((config.background !== null) && createBackground) {
         config.background = createBackground(scene, config.background);
     } else {
         delete config.background;
     }
 
-    if (createText) {
+    if ((config.text !== null) && createText) {
         var wrapText = GetValue(config, 'wrapText', false);
 
         if (wrapText) {
@@ -42,13 +42,13 @@ var BuildLabelConfig = function (scene, config, creators) {
         delete config.text;
     }
 
-    if (createIcon && (config.icon !== null)) {
+    if ((config.icon !== null) && createIcon) {
         config.icon = createIcon(scene, config.icon);
     } else {
         delete config.icon;
     }
 
-    if (createAction && (config.action !== null)) {
+    if ((config.action !== null) && createAction) {
         config.action = createAction(scene, config.action);
     } else {
         delete config.action;

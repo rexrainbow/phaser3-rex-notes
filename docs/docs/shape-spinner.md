@@ -30,23 +30,23 @@ Loading animations on shape.
   ```
 - Add spinner object
   ```javascript
-  var audio = this.rexSpinner.add.audio(config);
-  var ball = this.rexSpinner.add.ball(config);
-  var bars = this.rexSpinner.add.bars(config);
-  var box = this.rexSpinner.add.box(config);
-  var clock = this.rexSpinner.add.clock(config);
-  var cube = this.rexSpinner.add.cube(config);
-  var dots = this.rexSpinner.add.dots(config);
-  var facebook = this.rexSpinner.add.facebook(config);
-  var grid = this.rexSpinner.add.grid(config);
-  var los = this.rexSpinner.add.los(config);
-  var orbit = this.rexSpinner.add.orbit(config);
-  var oval = this.rexSpinner.add.oval(config);
-  var pie = this.rexSpinner.add.pie(config);
-  var puff = this.rexSpinner.add.puff(config);
-  var radio = this.rexSpinner.add.radio(config);
-  var rings = this.rexSpinner.add.rings(config);
-  var spinner = this.rexSpinner.add.spinner(config);
+  var audio = scene.rexSpinner.add.audio(config);
+  var ball = scene.rexSpinner.add.ball(config);
+  var bars = scene.rexSpinner.add.bars(config);
+  var box = scene.rexSpinner.add.box(config);
+  var clock = scene.rexSpinner.add.clock(config);
+  var cube = scene.rexSpinner.add.cube(config);
+  var dots = scene.rexSpinner.add.dots(config);
+  var facebook = scene.rexSpinner.add.facebook(config);
+  var grid = scene.rexSpinner.add.grid(config);
+  var los = scene.rexSpinner.add.los(config);
+  var orbit = scene.rexSpinner.add.orbit(config);
+  var oval = scene.rexSpinner.add.oval(config);
+  var pie = scene.rexSpinner.add.pie(config);
+  var puff = scene.rexSpinner.add.puff(config);
+  var radio = scene.rexSpinner.add.radio(config);
+  var rings = scene.rexSpinner.add.rings(config);
+  var spinner = scene.rexSpinner.add.spinner(config);
   ```
 
 #### Import plugin
@@ -76,23 +76,23 @@ Loading animations on shape.
   ```
 - Add spinner object
   ```javascript
-  var audio = this.rexSpinner.add.audio(config);
-  var ball = this.rexSpinner.add.ball(config);
-  var bars = this.rexSpinner.add.bars(config);
-  var box = this.rexSpinner.add.box(config);
-  var clock = this.rexSpinner.add.clock(config);
-  var cube = this.rexSpinner.add.cube(config);
-  var dots = this.rexSpinner.add.dots(config);
-  var facebook = this.rexSpinner.add.facebook(config);
-  var grid = this.rexSpinner.add.grid(config);
-  var los = this.rexSpinner.add.los(config);
-  var orbit = this.rexSpinner.add.orbit(config);
-  var oval = this.rexSpinner.add.oval(config);
-  var pie = this.rexSpinner.add.pie(config);
-  var puff = this.rexSpinner.add.puff(config);
-  var radio = this.rexSpinner.add.radio(config);
-  var rings = this.rexSpinner.add.rings(config);
-  var spinner = this.rexSpinner.add.spinner(config);
+  var audio = scene.rexSpinner.add.audio(config);
+  var ball = scene.rexSpinner.add.ball(config);
+  var bars = scene.rexSpinner.add.bars(config);
+  var box = scene.rexSpinner.add.box(config);
+  var clock = scene.rexSpinner.add.clock(config);
+  var cube = scene.rexSpinner.add.cube(config);
+  var dots = scene.rexSpinner.add.dots(config);
+  var facebook = scene.rexSpinner.add.facebook(config);
+  var grid = scene.rexSpinner.add.grid(config);
+  var los = scene.rexSpinner.add.los(config);
+  var orbit = scene.rexSpinner.add.orbit(config);
+  var oval = scene.rexSpinner.add.oval(config);
+  var pie = scene.rexSpinner.add.pie(config);
+  var puff = scene.rexSpinner.add.puff(config);
+  var radio = scene.rexSpinner.add.radio(config);
+  var rings = scene.rexSpinner.add.rings(config);
+  var spinner = scene.rexSpinner.add.spinner(config);
   ```
 
 #### Import class
@@ -251,7 +251,7 @@ var isRunning = spinner.isRunning;
 ### Custom spinner
 
 ```javascript
-var customSpinner = this.rexSpinner.add.custom({
+var customSpinner = scene.rexSpinner.add.custom({
     // x: 0,
     // y: 0,
     // width: 64,

@@ -14,12 +14,12 @@ var BuildTitleLabelConfig = function (scene, config, creators) {
     var innerBackground, separator;
 
     // Create innerBackground before background
-    if (createInnerBackground) {
+    if ((config.innerBackground !== null) && createInnerBackground) {
         innerBackground = createInnerBackground(scene, config.innerBackground);
     }
 
     // Create separator before background
-    if (createSeparator) {
+    if ((config.separator !== null) && createSeparator) {
         separator = createSeparator(scene, config.separator);
     }
 
@@ -37,7 +37,7 @@ var BuildTitleLabelConfig = function (scene, config, creators) {
         delete config.separator;
     }
 
-    if (createTitle) {
+    if ((config.title !== null) && createTitle) {
         var wrapTitle = GetValue(config, 'wrapTitle', false);
 
         if (wrapTitle) {

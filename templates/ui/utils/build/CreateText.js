@@ -1,5 +1,6 @@
 import StatesText from '../../statestext/StatesText.js';
 import BBCodeText from '../../bbcodetext/BBCodeText.js';
+import SimpleLabel from '../../simplelabel/SimpleLabel.js';
 import DecorateGameObject from './DecorateGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -34,6 +35,10 @@ var CreateText = function (scene, config) {
         case 'bbcodetext':
         case 'bbcode':
             gameObject = new BBCodeText(scene, 0, 0, '', config);
+            break;
+
+        case 'label':
+            gameObject = new SimpleLabel(scene, config);
             break;
 
         case 'text':
