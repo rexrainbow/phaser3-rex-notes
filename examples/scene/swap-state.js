@@ -7,10 +7,13 @@ class SceneController extends Phaser.Scene {
             key: 'Controller'
         })
     }
-    create() {
+
+    init() {
         this.scene.add('0', Scene0);
         this.scene.add('1', Scene1);
+    }
 
+    create() {
         var scene = this,
             btn0, btn1;
         var stateConfig = {
