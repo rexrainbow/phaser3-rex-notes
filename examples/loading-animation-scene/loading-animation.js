@@ -15,15 +15,14 @@ class Main extends Phaser.Scene {
 
         // Loading task
         this.load.rexAwait(function (successCallback, failureCallback) {
+            setTimeout(successCallback, 1000);
+        });
+        this.load.rexAwait(function (successCallback, failureCallback) {
             setTimeout(successCallback, 1500);
         });
-
-        // Loading task
         this.load.rexAwait(function (successCallback, failureCallback) {
             setTimeout(successCallback, 2000);
         });
-
-        // Loading task
         this.load.rexAwait(function (successCallback, failureCallback) {
             setTimeout(successCallback, 2500);
         });
@@ -33,6 +32,13 @@ class Main extends Phaser.Scene {
                 animationScene.onClose(successCallback);
             }
         );
+
+        var animationScene = this.scene.get('loading-animation')
+        this.load.on('progress', function (progress) {
+            if (animationScene.onProgress) {
+                animationScene.onProgress(progress)
+            }
+        });
     }
 
     create() {
@@ -75,6 +81,11 @@ class LoadingAnimation extends Phaser.Scene {
                 duration: 500,
                 onComplete: onComplete
             })
+        }
+
+        var progressBar = this.add.rectangle(200, 500, 200, 10, 0x880000).setOrigin(0, 0.5)
+        this.onProgress = function (progress) {
+            progressBar.scaleX = progress;
         }
     }
 
