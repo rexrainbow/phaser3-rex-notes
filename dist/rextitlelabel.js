@@ -12480,7 +12480,9 @@
       innerSizer.add(separator, {
         expand: true,
         padding: padding
-      });
+      }
+      // Fixed height, expand width
+      );
     }
     if (text) {
       var align = GetValue$2(config, 'align.text', 'left');
@@ -12595,7 +12597,9 @@
         proportion: 0,
         expand: true,
         padding: padding
-      });
+      }
+      // Fixed height, expand width
+      );
     }
     var orientation = GetValue$1(config, 'orientation', 0);
     var innerSizer = new Sizer(scene, {
@@ -12735,6 +12739,10 @@
       var layoutMode = GetValue(config, 'layoutMode', 0);
       var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
       layoutCallback.call(_assertThisInitialized(_this), config);
+
+      // Elements : title, separator, innerBackground,
+      //            icon, iconMask, text, action, actionMask, background
+      //            innerSizer
       _this.addChildrenMap('background', config.background);
       return _this;
     }

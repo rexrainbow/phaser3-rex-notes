@@ -16332,6 +16332,20 @@
   };
   Object.assign(NinePatch.prototype, Methods$2);
 
+  var Properties = ['alpha', 'tint'];
+  var DecorateGameObject = function DecorateGameObject(gameObject, config) {
+    if (!config) {
+      return gameObject;
+    }
+    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
+      var propertyName = Properties[i];
+      if (propertyName in config && propertyName in gameObject) {
+        gameObject[propertyName] = config[propertyName];
+      }
+    }
+    return gameObject;
+  };
+
   var CreateBackground = function CreateBackground(scene, config) {
     var gameObjectType;
     if (config) {
@@ -16361,6 +16375,7 @@
         gameObject = new StatesRoundRectangle(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -20241,11 +20256,15 @@
       case 'bbcode':
         gameObject = new BBCodeText(scene, 0, 0, '', config);
         break;
+      case 'label':
+        gameObject = new SimpleLabel(scene, config);
+        break;
       case 'text':
       default:
         gameObject = new StatesText(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -24170,6 +24189,7 @@
 
   var CreateImage = function CreateImage(scene, config) {
     var gameObject = new StatesImage(scene, config);
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -24181,12 +24201,12 @@
     var createText = GetValue$6(creators, 'text', CreateText);
     var createIcon = GetValue$6(creators, 'icon', CreateImage);
     var createAction = GetValue$6(creators, 'action', CreateImage);
-    if (createBackground) {
+    if (config.background !== null && createBackground) {
       config.background = createBackground(scene, config.background);
     } else {
       delete config.background;
     }
-    if (createText) {
+    if (config.text !== null && createText) {
       var wrapText = GetValue$6(config, 'wrapText', false);
       if (wrapText) {
         if (wrapText === true) {
@@ -24202,12 +24222,12 @@
     } else {
       delete config.text;
     }
-    if (createIcon && config.icon !== null) {
+    if (config.icon !== null && createIcon) {
       config.icon = createIcon(scene, config.icon);
     } else {
       delete config.icon;
     }
-    if (createAction && config.action !== null) {
+    if (config.action !== null && createAction) {
       config.action = createAction(scene, config.action);
     } else {
       delete config.action;

@@ -18130,6 +18130,20 @@
   };
   Object.assign(NinePatch.prototype, Methods$2);
 
+  var Properties = ['alpha', 'tint'];
+  var DecorateGameObject = function DecorateGameObject(gameObject, config) {
+    if (!config) {
+      return gameObject;
+    }
+    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
+      var propertyName = Properties[i];
+      if (propertyName in config && propertyName in gameObject) {
+        gameObject[propertyName] = config[propertyName];
+      }
+    }
+    return gameObject;
+  };
+
   var CreateBackground = function CreateBackground(scene, config) {
     var gameObjectType;
     if (config) {
@@ -18159,6 +18173,7 @@
         gameObject = new StatesRoundRectangle(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -22011,6 +22026,46 @@
     return BBCodeText;
   }(Text);
 
+  var SimpleLabel = /*#__PURE__*/function (_Label) {
+    _inherits(SimpleLabel, _Label);
+    function SimpleLabel(scene, config, creators) {
+      var _this;
+      _classCallCheck(this, SimpleLabel);
+      config = BuildLabelConfig(scene, config, creators);
+      _this = _callSuper(this, SimpleLabel, [scene, config]);
+      _this.type = 'rexSimpleLabel';
+      return _this;
+    }
+    _createClass(SimpleLabel, [{
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        RunMethod(this.getChildren(), 'setActiveState', enable);
+        return this;
+      }
+    }, {
+      key: "setHoverState",
+      value: function setHoverState(enable) {
+        RunMethod(this.getChildren(), 'setHoverState', enable);
+        return this;
+      }
+    }, {
+      key: "setDisableState",
+      value: function setDisableState(enable) {
+        RunMethod(this.getChildren(), 'setDisableState', enable);
+        return this;
+      }
+    }]);
+    return SimpleLabel;
+  }(Label);
+  var RunMethod = function RunMethod(children, methodName, enable) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var gameObject = children[i];
+      if (gameObject && gameObject[methodName]) {
+        gameObject[methodName](enable);
+      }
+    }
+  };
+
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var CreateText = function CreateText(scene, config) {
@@ -22039,11 +22094,15 @@
       case 'bbcode':
         gameObject = new BBCodeText(scene, 0, 0, '', config);
         break;
+      case 'label':
+        gameObject = new SimpleLabel(scene, config);
+        break;
       case 'text':
       default:
         gameObject = new StatesText(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -25968,6 +26027,7 @@
 
   var CreateImage = function CreateImage(scene, config) {
     var gameObject = new StatesImage(scene, config);
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -25979,12 +26039,12 @@
     var createText = GetValue(creators, 'text', CreateText);
     var createIcon = GetValue(creators, 'icon', CreateImage);
     var createAction = GetValue(creators, 'action', CreateImage);
-    if (createBackground) {
+    if (config.background !== null && createBackground) {
       config.background = createBackground(scene, config.background);
     } else {
       delete config.background;
     }
-    if (createText) {
+    if (config.text !== null && createText) {
       var wrapText = GetValue(config, 'wrapText', false);
       if (wrapText) {
         if (wrapText === true) {
@@ -26000,57 +26060,17 @@
     } else {
       delete config.text;
     }
-    if (createIcon && config.icon !== null) {
+    if (config.icon !== null && createIcon) {
       config.icon = createIcon(scene, config.icon);
     } else {
       delete config.icon;
     }
-    if (createAction && config.action !== null) {
+    if (config.action !== null && createAction) {
       config.action = createAction(scene, config.action);
     } else {
       delete config.action;
     }
     return config;
-  };
-
-  var SimpleLabel = /*#__PURE__*/function (_Label) {
-    _inherits(SimpleLabel, _Label);
-    function SimpleLabel(scene, config, creators) {
-      var _this;
-      _classCallCheck(this, SimpleLabel);
-      config = BuildLabelConfig(scene, config, creators);
-      _this = _callSuper(this, SimpleLabel, [scene, config]);
-      _this.type = 'rexSimpleLabel';
-      return _this;
-    }
-    _createClass(SimpleLabel, [{
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        RunMethod(this.getChildren(), 'setActiveState', enable);
-        return this;
-      }
-    }, {
-      key: "setHoverState",
-      value: function setHoverState(enable) {
-        RunMethod(this.getChildren(), 'setHoverState', enable);
-        return this;
-      }
-    }, {
-      key: "setDisableState",
-      value: function setDisableState(enable) {
-        RunMethod(this.getChildren(), 'setDisableState', enable);
-        return this;
-      }
-    }]);
-    return SimpleLabel;
-  }(Label);
-  var RunMethod = function RunMethod(children, methodName, enable) {
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var gameObject = children[i];
-      if (gameObject && gameObject[methodName]) {
-        gameObject[methodName](enable);
-      }
-    }
   };
 
   var CreateLabel = function CreateLabel(scene, config, creators) {

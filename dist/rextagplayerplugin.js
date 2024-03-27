@@ -393,6 +393,320 @@
     return true;
   };
 
+  var GetMethods = {
+    has: function has(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    exists: function exists(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    get: function get(name) {
+      return this.bobs[name];
+    },
+    getGO: function getGO(name) {
+      var bob = this.get(name);
+      return bob ? bob.gameObject : null;
+    },
+    forEachGO: function forEachGO(callback, scope) {
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        var stopLoop;
+        if (scope) {
+          stopLoop = callback.call(scope, gameObject, name, this);
+        } else {
+          stopLoop = callback(gameObject, name, this);
+        }
+        if (stopLoop) {
+          break;
+        }
+      }
+      return this;
+    },
+    getAllGO: function getAllGO(out) {
+      if (out === undefined) {
+        out = [];
+      }
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        out.push(gameObject);
+      }
+      return out;
+    }
+  };
+
+  var GetR = function GetR(colorInt) {
+    return colorInt >> 16 & 0xff;
+  };
+  var GetG = function GetG(colorInt) {
+    return colorInt >> 8 & 0xff;
+  };
+  var GetB = function GetB(colorInt) {
+    return colorInt & 0xff;
+  };
+
+  var MaskR = ~(0xff << 16) & 0xffffff;
+  var MaskG = ~(0xff << 8) & 0xffffff;
+  var MaskB = ~0xff & 0xffffff;
+  var SetR = function SetR(colorInt, r) {
+    return (r & 0xff) << 16 | colorInt & MaskR;
+  };
+  var SetG = function SetG(colorInt, g) {
+    return (g & 0xff) << 8 | colorInt & MaskG;
+  };
+  var SetB = function SetB(colorInt, b) {
+    return b & 0xff | colorInt & MaskB;
+  };
+  var SetRGB = function SetRGB(colorInt, r, g, b) {
+    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
+  };
+
+  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('tintR')) {
+      return gameObject;
+    }
+    if (tintRGB === undefined) {
+      tintRGB = 0xffffff;
+    }
+    var tintR = GetR(tintRGB);
+    var tintG = GetG(tintRGB);
+    var tintB = GetB(tintRGB);
+
+    // Override tint property
+    Object.defineProperty(gameObject, 'tint', {
+      get: function get() {
+        return tintRGB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xffffff;
+        if (gameObject.setTint) {
+          gameObject.setTint(value);
+        }
+        if (tintRGB !== value) {
+          tintRGB = value;
+          tintR = GetR(tintRGB);
+          tintG = GetG(tintRGB);
+          tintB = GetB(tintRGB);
+          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintR', {
+      get: function get() {
+        return tintR;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value) {
+          tintR = value;
+          gameObject.tint = SetR(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintG', {
+      get: function get() {
+        return tintG;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintG !== value) {
+          tintG = value;
+          gameObject.tint = SetG(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintB', {
+      get: function get() {
+        return tintB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintB !== value) {
+          tintB = value;
+          gameObject.tint = SetB(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintGray', {
+      get: function get() {
+        return Math.floor((tintR + tintG + tintB) / 3);
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value || tintG !== value || tintB !== value) {
+          tintR = value;
+          tintG = value;
+          tintB = value;
+          gameObject.tint = SetRGB(tintRGB, value, value, value);
+        }
+      }
+    });
+    gameObject.tint = tintRGB;
+    return gameObject;
+  };
+
+  var EventEmitter$2 = Phaser.Events.EventEmitter;
+  var MonitorViewport = function MonitorViewport(viewport) {
+    if (viewport.events) {
+      return viewport;
+    }
+    var events = new EventEmitter$2();
+    var x = viewport.x;
+    Object.defineProperty(viewport, 'x', {
+      get: function get() {
+        return x;
+      },
+      set: function set(value) {
+        if (x !== value) {
+          x = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var y = viewport.y;
+    Object.defineProperty(viewport, 'y', {
+      get: function get() {
+        return y;
+      },
+      set: function set(value) {
+        if (y !== value) {
+          y = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var width = viewport.width;
+    Object.defineProperty(viewport, 'width', {
+      get: function get() {
+        return width;
+      },
+      set: function set(value) {
+        if (width !== value) {
+          width = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var height = viewport.height;
+    Object.defineProperty(viewport, 'height', {
+      get: function get() {
+        return height;
+      },
+      set: function set(value) {
+        if (height !== value) {
+          height = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    viewport.events = events;
+    return viewport;
+  };
+
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = GlobXY;
+    }
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
+    return out;
+  };
+  var GlobXY = {};
+
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('vp')) {
+      return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
+    }
+    if (vpx === undefined) {
+      vpx = 0.5;
+    }
+    if (vpy === undefined) {
+      vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
+    }
+    if (transformCallback === undefined) {
+      transformCallback = VPXYToXY;
+    }
+    MonitorViewport(viewport);
+    var events = viewport.events;
+    gameObject.vp = viewport;
+
+    // Set position of game object when view-port changed.
+    var Transform = function Transform() {
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
+    };
+    events.on('update', Transform);
+    gameObject.once('destroy', function () {
+      events.off('update', Transform);
+      gameObject.vp = undefined;
+    });
+    Object.defineProperty(gameObject, 'vpx', {
+      get: function get() {
+        return vpx;
+      },
+      set: function set(value) {
+        if (vpx !== value) {
+          vpx = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpy', {
+      get: function get() {
+        return vpy;
+      },
+      set: function set(value) {
+        if (vpy !== value) {
+          vpy = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
+          Transform();
+        }
+      }
+    });
+    Transform();
+  };
+
   var HasProperty = function HasProperty(obj, prop) {
     if (!obj) {
       return false;
@@ -2083,414 +2397,8 @@
     return gameObject;
   };
 
-  var FadeTint = 0;
-  var FadeAlpha = 1;
-  var FadeRevealUp = 2;
-  var FadeRevealDown = 3;
-  var FadeRevealLeft = 4;
-  var FadeRevealRight = 5;
-  var FadeMode = {
-    tint: FadeTint,
-    alpha: FadeAlpha,
-    revealUp: FadeRevealUp,
-    revealDown: FadeRevealDown,
-    revealLeft: FadeRevealLeft,
-    revealRight: FadeRevealRight
-  };
-  var FadeMethods = {
-    setGOFadeMode: function setGOFadeMode(fadeMode) {
-      if (typeof fadeMode === 'string') {
-        fadeMode = FadeMode[fadeMode];
-      }
-      this.fadeMode = fadeMode;
-      return this;
-    },
-    setGOFadeTime: function setGOFadeTime(time) {
-      this.fadeTime = time;
-      return this;
-    },
-    useTintFadeEffect: function useTintFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
-    },
-    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
-    },
-    useRevealEffect: function useRevealEffect(gameObject) {
-      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
-    },
-    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
-      var gameObject = bob.gameObject;
-      if (this.useTintFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('tintGray', 255 * fromValue);
-        }
-        bob.easeProperty('tintGray',
-        // property
-        Math.floor(255 * toValue),
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useAlphaFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('alpha', fromValue);
-        }
-        bob.easeProperty('alpha',
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useRevealEffect(gameObject)) {
-        AddEffectProperties(gameObject, 'reveal');
-        var propertyName;
-        switch (this.fadeMode) {
-          case FadeRevealUp:
-            propertyName = 'revealUp';
-            break;
-          case FadeRevealDown:
-            propertyName = 'revealDown';
-            break;
-          case FadeRevealLeft:
-            propertyName = 'revealLeft';
-            break;
-          case FadeRevealRight:
-            propertyName = 'revealRight';
-            break;
-        }
-        if (fromValue === undefined) {
-          fromValue = 0;
-        }
-        gameObject[propertyName] = fromValue;
-        bob.easeProperty(propertyName,
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-        bob.getTweenTask(propertyName).once('complete', function () {
-          gameObject[propertyName] = null;
-        });
-      } else {
-        if (onComplete) {
-          onComplete(gameObject);
-        }
-      }
-      return this;
-    }
-  };
-
-  var GetR = function GetR(colorInt) {
-    return colorInt >> 16 & 0xff;
-  };
-  var GetG = function GetG(colorInt) {
-    return colorInt >> 8 & 0xff;
-  };
-  var GetB = function GetB(colorInt) {
-    return colorInt & 0xff;
-  };
-
-  var MaskR = ~(0xff << 16) & 0xffffff;
-  var MaskG = ~(0xff << 8) & 0xffffff;
-  var MaskB = ~0xff & 0xffffff;
-  var SetR = function SetR(colorInt, r) {
-    return (r & 0xff) << 16 | colorInt & MaskR;
-  };
-  var SetG = function SetG(colorInt, g) {
-    return (g & 0xff) << 8 | colorInt & MaskG;
-  };
-  var SetB = function SetB(colorInt, b) {
-    return b & 0xff | colorInt & MaskB;
-  };
-  var SetRGB = function SetRGB(colorInt, r, g, b) {
-    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
-  };
-
-  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('tintR')) {
-      return gameObject;
-    }
-    if (tintRGB === undefined) {
-      tintRGB = 0xffffff;
-    }
-    var tintR = GetR(tintRGB);
-    var tintG = GetG(tintRGB);
-    var tintB = GetB(tintRGB);
-
-    // Override tint property
-    Object.defineProperty(gameObject, 'tint', {
-      get: function get() {
-        return tintRGB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xffffff;
-        if (gameObject.setTint) {
-          gameObject.setTint(value);
-        }
-        if (tintRGB !== value) {
-          tintRGB = value;
-          tintR = GetR(tintRGB);
-          tintG = GetG(tintRGB);
-          tintB = GetB(tintRGB);
-          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintR', {
-      get: function get() {
-        return tintR;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value) {
-          tintR = value;
-          gameObject.tint = SetR(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintG', {
-      get: function get() {
-        return tintG;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintG !== value) {
-          tintG = value;
-          gameObject.tint = SetG(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintB', {
-      get: function get() {
-        return tintB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintB !== value) {
-          tintB = value;
-          gameObject.tint = SetB(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintGray', {
-      get: function get() {
-        return Math.floor((tintR + tintG + tintB) / 3);
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value || tintG !== value || tintB !== value) {
-          tintR = value;
-          tintG = value;
-          tintB = value;
-          gameObject.tint = SetRGB(tintRGB, value, value, value);
-        }
-      }
-    });
-    gameObject.tint = tintRGB;
-    return gameObject;
-  };
-
-  var EventEmitter$2 = Phaser.Events.EventEmitter;
-  var MonitorViewport = function MonitorViewport(viewport) {
-    if (viewport.events) {
-      return viewport;
-    }
-    var events = new EventEmitter$2();
-    var x = viewport.x;
-    Object.defineProperty(viewport, 'x', {
-      get: function get() {
-        return x;
-      },
-      set: function set(value) {
-        if (x !== value) {
-          x = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var y = viewport.y;
-    Object.defineProperty(viewport, 'y', {
-      get: function get() {
-        return y;
-      },
-      set: function set(value) {
-        if (y !== value) {
-          y = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var width = viewport.width;
-    Object.defineProperty(viewport, 'width', {
-      get: function get() {
-        return width;
-      },
-      set: function set(value) {
-        if (width !== value) {
-          width = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var height = viewport.height;
-    Object.defineProperty(viewport, 'height', {
-      get: function get() {
-        return height;
-      },
-      set: function set(value) {
-        if (height !== value) {
-          height = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    viewport.events = events;
-    return viewport;
-  };
-
-  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = GlobXY;
-    }
-    if (typeof vpxOffset !== 'number') {
-      vpxOffset = 0;
-      vpyOffset = 0;
-    }
-    out.x = viewport.x + viewport.width * vpx + vpxOffset;
-    out.y = viewport.y + viewport.height * vpy + vpyOffset;
-    return out;
-  };
-  var GlobXY = {};
-
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('vp')) {
-      return gameObject;
-    }
-    if (typeof vpx === 'function') {
-      transformCallback = vpx;
-      vpx = undefined;
-    }
-    if (typeof vpxOffset === 'function') {
-      transformCallback = vpxOffset;
-      vpxOffset = undefined;
-    }
-    if (vpx === undefined) {
-      vpx = 0.5;
-    }
-    if (vpy === undefined) {
-      vpy = 0.5;
-    }
-    if (vpxOffset === undefined) {
-      vpxOffset = 0;
-    }
-    if (vpyOffset === undefined) {
-      vpyOffset = 0;
-    }
-    if (transformCallback === undefined) {
-      transformCallback = VPXYToXY;
-    }
-    MonitorViewport(viewport);
-    var events = viewport.events;
-    gameObject.vp = viewport;
-
-    // Set position of game object when view-port changed.
-    var Transform = function Transform() {
-      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
-    };
-    events.on('update', Transform);
-    gameObject.once('destroy', function () {
-      events.off('update', Transform);
-      gameObject.vp = undefined;
-    });
-    Object.defineProperty(gameObject, 'vpx', {
-      get: function get() {
-        return vpx;
-      },
-      set: function set(value) {
-        if (vpx !== value) {
-          vpx = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpy', {
-      get: function get() {
-        return vpy;
-      },
-      set: function set(value) {
-        if (vpy !== value) {
-          vpy = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpxOffset', {
-      get: function get() {
-        return vpxOffset;
-      },
-      set: function set(value) {
-        if (vpxOffset !== value) {
-          vpxOffset = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpyOffset', {
-      get: function get() {
-        return vpyOffset;
-      },
-      set: function set(value) {
-        if (vpyOffset !== value) {
-          vpyOffset = value;
-          Transform();
-        }
-      }
-    });
-    Transform();
-  };
-
   var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var AddMethods = {
-    has: function has(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    exists: function exists(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    get: function get(name) {
-      return this.bobs[name];
-    },
-    getGO: function getGO(name) {
-      var bob = this.get(name);
-      return bob ? bob.gameObject : null;
-    },
     addGO: function addGO(name, gameObject) {
       this.remove(name, true);
       if (this.useTintFadeEffect(gameObject)) {
@@ -2520,23 +2428,12 @@
       }
       var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
+      if (this.gameObjectDepth != null) {
+        // Not undefined, null
+        gameObject.setDepth(this.gameObjectDepth);
+      }
       var bob = this.get(name);
       this.fadeBob(bob, 0, 1);
-      return this;
-    },
-    forEachGO: function forEachGO(callback, scope) {
-      for (var name in this.bobs) {
-        var gameObject = this.bobs[name].gameObject;
-        var stopLoop;
-        if (scope) {
-          stopLoop = callback.call(scope, gameObject, name, this);
-        } else {
-          stopLoop = callback(gameObject, name, this);
-        }
-        if (stopLoop) {
-          break;
-        }
-      }
       return this;
     }
   };
@@ -2700,6 +2597,126 @@
         return this;
       }
       this.get(name).setData(dataKey, value);
+      return this;
+    }
+  };
+
+  var FadeTint = 0;
+  var FadeAlpha = 1;
+  var FadeRevealUp = 2;
+  var FadeRevealDown = 3;
+  var FadeRevealLeft = 4;
+  var FadeRevealRight = 5;
+  var FadeMode = {
+    tint: FadeTint,
+    alpha: FadeAlpha,
+    revealUp: FadeRevealUp,
+    revealDown: FadeRevealDown,
+    revealLeft: FadeRevealLeft,
+    revealRight: FadeRevealRight
+  };
+  var FadeMethods = {
+    setGOFadeMode: function setGOFadeMode(fadeMode) {
+      if (typeof fadeMode === 'string') {
+        fadeMode = FadeMode[fadeMode];
+      }
+      this.fadeMode = fadeMode;
+      return this;
+    },
+    setGOFadeTime: function setGOFadeTime(time) {
+      this.fadeTime = time;
+      return this;
+    },
+    useTintFadeEffect: function useTintFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
+    },
+    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+    },
+    useRevealEffect: function useRevealEffect(gameObject) {
+      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
+    },
+    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
+      var gameObject = bob.gameObject;
+      if (this.useTintFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('tintGray', 255 * fromValue);
+        }
+        bob.easeProperty('tintGray',
+        // property
+        Math.floor(255 * toValue),
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useAlphaFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('alpha', fromValue);
+        }
+        bob.easeProperty('alpha',
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useRevealEffect(gameObject)) {
+        AddEffectProperties(gameObject, 'reveal');
+        var propertyName;
+        switch (this.fadeMode) {
+          case FadeRevealUp:
+            propertyName = 'revealUp';
+            break;
+          case FadeRevealDown:
+            propertyName = 'revealDown';
+            break;
+          case FadeRevealLeft:
+            propertyName = 'revealLeft';
+            break;
+          case FadeRevealRight:
+            propertyName = 'revealRight';
+            break;
+        }
+        if (fromValue === undefined) {
+          fromValue = 0;
+        }
+        gameObject[propertyName] = fromValue;
+        bob.easeProperty(propertyName,
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+        bob.getTweenTask(propertyName).once('complete', function () {
+          gameObject[propertyName] = null;
+        });
+      } else {
+        if (onComplete) {
+          onComplete(gameObject);
+        }
+      }
       return this;
     }
   };
@@ -2888,7 +2905,7 @@
   var Methods$5 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$5, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$5, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -2922,6 +2939,7 @@
       this.BobClass = GetValue$j(config, 'BobClass', BobBase);
       this.setCreateGameObjectCallback(GetValue$j(config, 'createGameObject'), GetValue$j(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$j(config, 'eventEmitter', undefined));
+      this.setGameObjectDepth(GetValue$j(config, 'depth', undefined));
       var fadeConfig = GetValue$j(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
@@ -2978,6 +2996,12 @@
       value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
+        return this;
+      }
+    }, {
+      key: "setGameObjectDepth",
+      value: function setGameObjectDepth(depth) {
+        this.gameObjectDepth = depth;
         return this;
       }
     }, {
@@ -3086,6 +3110,8 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
+      var rootLayer = GetValue$i(config, 'rootLayer');
+      _this.setRootLayer(rootLayer);
       var initLayers = GetValue$i(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -3103,6 +3129,21 @@
         _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
         return this;
       }
+    }, {
+      key: "setRootLayer",
+      value: function setRootLayer(rootLayer) {
+        if (rootLayer === this.rootLayer) {
+          return this;
+        }
+        var currentLayers = this.getAllGO();
+        if (rootLayer) {
+          rootLayer.add(currentLayers);
+        } else {
+          this.scene.displayList.add(currentLayers);
+        }
+        this.rootLayer = rootLayer;
+        return this;
+      }
 
       // Override
     }, {
@@ -3110,6 +3151,9 @@
       value: function addGO(name, gameObject) {
         _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
         gameObject.name = name;
+        if (this.rootLayer) {
+          this.rootLayer.add(gameObject);
+        }
         return this;
       }
 
@@ -3209,6 +3253,10 @@
       return game.sys.sound;
     }
     return game.sound;
+  };
+
+  var HasaAudio = function HasaAudio(key) {
+    return this.sound.game.cache.audio.has(key);
   };
 
   var GetSceneObject = function GetSceneObject(object) {
@@ -4100,6 +4148,11 @@
       return this;
     },
     playBackgroundMusic: function playBackgroundMusic(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
+
       // Don't re-play the same background music
       if (this.backgroundMusic && this.backgroundMusic.key === key) {
         return this;
@@ -4158,6 +4211,10 @@
       return this;
     },
     crossFadeBackgroundMusic: function crossFadeBackgroundMusic(key, time) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
       this.backgroundMusicFadeTime = 0;
       this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
@@ -4226,6 +4283,11 @@
       return this;
     },
     playBackgroundMusic2: function playBackgroundMusic2(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
+
       // Don't re-play the same background music
       if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
         return this;
@@ -4284,6 +4346,10 @@
       return this;
     },
     crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
       this.backgroundMusic2FadeTime = 0;
       this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
@@ -4325,6 +4391,10 @@
       return this.soundEffects[this.soundEffects.length - 1];
     },
     playSoundEffect: function playSoundEffect(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var music = this.sound.add(key, {
         mute: GetValue$9(config, 'mute', this.soundEffectsMute),
         volume: GetValue$9(config, 'volume', this.soundEffectsVolume),
@@ -4454,6 +4524,10 @@
       return this.soundEffects2[this.soundEffects2.length - 1];
     },
     playSoundEffect2: function playSoundEffect2(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var music = this.sound.add(key, {
         mute: GetValue$8(config, 'mute', this.soundEffects2Mute),
         volume: GetValue$8(config, 'volume', this.soundEffects2Volume),
@@ -4573,7 +4647,9 @@
     }
   };
 
-  var Methods$4 = {};
+  var Methods$4 = {
+    hasAudio: HasaAudio
+  };
   Object.assign(Methods$4, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
@@ -5683,9 +5759,13 @@
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
-    var layerManagerConfig = GetValue$3(config, 'layers', false);
-    if (layerManagerConfig !== false) {
-      var layerManager = new LayerManager(scene, layerManagerConfig);
+    var layerNames = GetValue$3(config, 'layers', false);
+    if (layerNames !== false) {
+      var layerManager = new LayerManager(scene, {
+        layers: layerNames,
+        rootLayer: GetValue$3(config, 'rootLayer', undefined),
+        depth: GetValue$3(config, 'layerDepth', undefined)
+      });
       this.gameObjectManagers.layer = layerManager;
       this.layerManager = layerManager;
     }

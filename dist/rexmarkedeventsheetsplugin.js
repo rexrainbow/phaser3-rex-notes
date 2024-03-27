@@ -5135,38 +5135,38 @@
     getTree: function getTree(title) {
       var trees = this.trees;
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        if (tree.title === title) {
-          return tree;
+        var eventsheet = trees[i];
+        if (eventsheet.title === title) {
+          return eventsheet;
         }
       }
     },
-    getTreeState: function getTreeState(tree) {
-      var treeID = typeof tree === 'string' ? tree : tree.id;
+    getTreeState: function getTreeState(eventsheet) {
+      var treeID = typeof eventsheet === 'string' ? eventsheet : eventsheet.id;
       return this.blackboard.getTreeState(treeID);
     },
     getEventSheetTitleList: function getEventSheetTitleList(out) {
       if (out === undefined) {
         out = [];
       }
-      this.trees.forEach(function (tree) {
-        out.push(tree.title);
+      this.trees.forEach(function (eventsheet) {
+        out.push(eventsheet.title);
       });
       return out;
     }
   };
 
   var AddTreeMethods$1 = {
-    addTree: function addTree(tree) {
-      this.trees.push(tree);
+    addTree: function addTree(eventsheet) {
+      this.trees.push(eventsheet);
       return this;
     }
   };
 
   var RemoveTreeMethods$1 = {
     removeAllEventSheets: function removeAllEventSheets() {
-      this.trees.forEach(function (tree) {
-        this.blackboard.removeTreeData(tree.id);
+      this.trees.forEach(function (eventsheet) {
+        this.blackboard.removeTreeData(eventsheet.id);
       }, this);
       this.trees.length = 0;
       this.pendingTrees.length = 0;
@@ -5174,17 +5174,17 @@
     },
     removeEventSheet: function removeEventSheet(title) {
       var removedTrees = [];
-      this.trees.forEach(function (tree) {
-        if (!tree.title === title) {
+      this.trees.forEach(function (eventsheet) {
+        if (!eventsheet.title === title) {
           return;
         }
-        var status = this.getTreeState(tree);
+        var status = this.getTreeState(eventsheet);
         if (status === RUNNING) {
-          // Can't remove RUNNING tree
+          // Can't remove RUNNING eventsheet
           return;
         }
-        removedTrees.push(tree);
-        this.blackboard.removeTreeData(tree.id);
+        removedTrees.push(eventsheet);
+        this.blackboard.removeTreeData(eventsheet.id);
       }, this);
       if (removedTrees.length > 0) {
         Remove(this.trees, removedTrees);
@@ -5196,16 +5196,16 @@
 
   var TreeActiveStateMethods$1 = {
     getTreeActiveState: function getTreeActiveState(title) {
-      var tree = this.getTree(title);
-      if (!tree) {
+      var eventsheet = this.getTree(title);
+      if (!eventsheet) {
         return null;
       }
-      return tree.active;
+      return eventsheet.active;
     },
     setTreeActiveState: function setTreeActiveState(title, active) {
-      var tree = this.getTree(title);
-      if (tree) {
-        tree.setActive(active);
+      var eventsheet = this.getTree(title);
+      if (eventsheet) {
+        eventsheet.setActive(active);
       }
       return this;
     }
@@ -5223,9 +5223,9 @@
         _get(_getPrototypeOf(TaskSequence.prototype), "open", this).call(this, tick);
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var tree = tick.tree;
-        var treeGroup = tree.treeGroup;
-        treeManager.emit('label.enter', this.title, tree.title, treeGroup.name, treeManager);
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
+        treeManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
       }
     }, {
       key: "tick",
@@ -5243,9 +5243,9 @@
         _get(_getPrototypeOf(TaskSequence.prototype), "close", this).call(this, tick);
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var tree = tick.tree;
-        var treeGroup = tree.treeGroup;
-        treeManager.emit('label.exit', this.title, tree.title, treeGroup.name, treeManager);
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
+        treeManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
       }
     }]);
     return TaskSequence;
@@ -6052,8 +6052,8 @@
         }
         var blackboard = tick.blackboard;
         var treeManager = blackboard.treeManager;
-        var tree = tick.tree;
-        var treeGroup = tree.treeGroup;
+        var eventsheet = tick.tree;
+        var eventSheetGroup = eventsheet.eventSheetGroup;
         var memory = treeManager.memory;
         var taskParameters = this.taskParameters;
         var parametersCopy = {};
@@ -6068,17 +6068,17 @@
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-          eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, tree);
+          eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, eventsheet);
         } else {
           handler = commandExecutor.defaultHandler;
           if (handler) {
-            eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, tree);
+            eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, eventsheet);
           }
         }
         if (IsEventEmitter(eventEmitter)) {
           this.isRunning = true;
           eventEmitter.once('complete', this.onTaskComplete, this);
-          this.continueCallback = treeGroup["continue"].bind(treeGroup);
+          this.continueCallback = eventSheetGroup["continue"].bind(eventSheetGroup);
           this.continueEE = eventEmitter;
         }
       }
@@ -6180,11 +6180,11 @@
     _createClass(ActivateAction, [{
       key: "tick",
       value: function tick(_tick) {
-        var tree = this.getTree(_tick);
+        var eventsheet = this.getTree(_tick);
         if (!this.activateTreeTitle || this.activateTreeTitle === '') {
-          tree.setActive(true);
+          eventsheet.setActive(true);
         } else {
-          tree.treeManager.setEventSheetActiveState(this.activateTreeTitle, tree.groupName, true);
+          eventsheet.treeManager.setEventSheetActiveState(this.activateTreeTitle, eventsheet.groupName, true);
         }
         return this.SUCCESS;
       }
@@ -6217,11 +6217,11 @@
     _createClass(DeactivateAction, [{
       key: "tick",
       value: function tick(_tick) {
-        var tree = this.getTree(_tick);
+        var eventsheet = this.getTree(_tick);
         if (!this.deactivateTreeTitle || this.deactivateTreeTitle === '') {
-          tree.setActive(false);
+          eventsheet.setActive(false);
         } else {
-          tree.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, tree.groupName, false);
+          eventsheet.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
         }
         return this.SUCCESS;
       }
@@ -6238,20 +6238,20 @@
   };
 
   var SaveLoadTreeMethods = {
-    dumpTrees: function dumpTrees() {
-      return this.trees.map(function (tree) {
-        return tree.dump();
+    dumpEventSheetGroup: function dumpEventSheetGroup() {
+      return this.trees.map(function (eventsheet) {
+        return eventsheet.dump();
       });
     },
-    loadTrees: function loadTrees(data) {
+    loadEventSheetGroup: function loadEventSheetGroup(data) {
       data.forEach(function (treeData) {
-        var tree = new BehaviorTree({
+        var eventsheet = new BehaviorTree({
           id: treeData.id,
           title: treeData.title,
           properties: DeepClone(treeData.properties)
         });
-        tree.load(treeData, CustomNodeMapping);
-        this.trees.push(tree);
+        eventsheet.load(treeData, CustomNodeMapping);
+        this.trees.push(eventsheet);
       }, this);
       return this;
     }
@@ -6262,15 +6262,15 @@
       var includeTree = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var state = {
         isRunning: this.isRunning,
-        pendingTrees: this.pendingTrees.filter(function (tree) {
-          // roundComplete tree will be removed from pendingTrees
-          return !tree.roundComplete;
-        }).map(function (tree) {
-          return tree.id;
+        pendingTrees: this.pendingTrees.filter(function (eventsheet) {
+          // roundComplete eventsheet will be removed from pendingTrees
+          return !eventsheet.roundComplete;
+        }).map(function (eventsheet) {
+          return eventsheet.id;
         })
       };
       if (includeTree) {
-        state.trees = this.dumpTrees();
+        state.trees = this.dumpEventSheetGroup();
       }
       return state;
     },
@@ -6278,42 +6278,42 @@
       this.stop();
       if (state.trees) {
         this.trees.length = 0;
-        this.loadTrees(state.trees);
+        this.loadEventSheetGroup(state.trees);
       }
       this.isRunning = state.isRunning;
       var pendingTrees = this.pendingTrees;
       pendingTrees.length = 0;
-      this.trees.forEach(function (tree) {
-        if (state.pendingTrees.indexOf(tree.id) > -1) {
-          pendingTrees.push(tree);
+      this.trees.forEach(function (eventsheet) {
+        if (state.pendingTrees.indexOf(eventsheet.id) > -1) {
+          pendingTrees.push(eventsheet);
         }
       });
       return this;
     }
   };
 
-  var OpenEventSheet = function OpenEventSheet(treeManager, tree) {
+  var OpenEventSheet = function OpenEventSheet(treeManager, eventsheet) {
     var blackboard = treeManager.blackboard;
     var commandExecutor = treeManager.commandExecutor;
-    var result = tree.start(blackboard, commandExecutor);
+    var result = eventsheet.start(blackboard, commandExecutor);
     if (!result) {
       return;
     }
-    if (tree.conditionPassed) {
-      treeManager.emit('eventsheet.enter', tree.title, this.name, treeManager);
+    if (eventsheet.conditionPassed) {
+      treeManager.emit('eventsheet.enter', eventsheet.title, this.name, treeManager);
     } else {
-      treeManager.emit('eventsheet.catch', tree.title, this.name, treeManager);
+      treeManager.emit('eventsheet.catch', eventsheet.title, this.name, treeManager);
     }
   };
-  var TickEventSheet = function TickEventSheet(treeManager, tree) {
+  var TickEventSheet = function TickEventSheet(treeManager, eventsheet) {
     var blackboard = treeManager.blackboard;
     var commandExecutor = treeManager.commandExecutor;
-    var status = tree.tick(blackboard, commandExecutor);
+    var status = eventsheet.tick(blackboard, commandExecutor);
     return status;
   };
-  var CloseEventSheet = function CloseEventSheet(treeManager, tree) {
-    if (tree.conditionPassed) {
-      treeManager.emit('eventsheet.exit', tree.title, this.name, treeManager);
+  var CloseEventSheet = function CloseEventSheet(treeManager, eventsheet) {
+    if (eventsheet.conditionPassed) {
+      treeManager.emit('eventsheet.exit', eventsheet.title, this.name, treeManager);
     }
   };
   var RunMethods$1 = {
@@ -6322,17 +6322,17 @@
     
     - Normal case : 
         - Start from condition-eval, 
-        - End to tree.roundComplete (SUCCESS/FAILURE/ERROR state)
+        - End to eventsheet.roundComplete (SUCCESS/FAILURE/ERROR state)
     - Cross rounds : 
         - Start from condition-eval or RUNNING state, 
-        - End to tree.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
+        - End to eventsheet.roundComplete (RUNNING/SUCCESS/FAILURE/ERROR state)
     */
     start: function start() {
       /*
       Start a round :
       
       - sequence : Add all trees to pendingTrees
-      - parallel : Open all event sheets(tree), add them to pendingTrees
+      - parallel : Open all event sheets(eventsheet), add them to pendingTrees
         Then, invoke continue()
       */
 
@@ -6347,28 +6347,28 @@
 
       // pendingTrees.length = 0;
 
-      // Run parallel tree, will return running, or failure
+      // Run parallel eventsheet, will return running, or failure
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
-        if (!tree.active) {
+        var eventsheet = trees[i];
+        if (!eventsheet.active) {
           continue;
         }
-        tree.resetState(blackboard);
-        if (tree.parallel) {
+        eventsheet.resetState(blackboard);
+        if (eventsheet.parallel) {
           // Open all event sheets
-          OpenEventSheet.call(this, treeManager, tree);
+          OpenEventSheet.call(this, treeManager, eventsheet);
         }
-        pendingTrees.push(tree);
+        pendingTrees.push(eventsheet);
       }
       this["continue"]();
       return this;
     },
     "continue": function _continue() {
       /*
-      Tick event sheets(tree) until all trees are at SUCCESS/FAILURE/ERROR state
-        - Open (if not opened) and tick event sheet(tree)        
+      Tick event sheets(eventsheet) until all trees are at SUCCESS/FAILURE/ERROR state
+        - Open (if not opened) and tick event sheet(eventsheet)        
       - TaskAction's complete event will invoke this method to run remainder nodes
-      - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(tree)
+      - Close(remove from pendingTrees) SUCCESS/FAILURE/ERROR event sheets(eventsheet)
       - Complete this round if pendingTrees is empty. i.e. all trees are return SUCCESS/FAILURE/ERROR.
       */
 
@@ -6381,20 +6381,20 @@
       var blackboard = treeManager.blackboard;
       closedTrees.length = 0;
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
-        var tree = trees[i];
+        var eventsheet = trees[i];
 
         // Do nothing if event sheet has been opened
-        OpenEventSheet.call(this, treeManager, tree);
+        OpenEventSheet.call(this, treeManager, eventsheet);
         if (!this.isRunning) {
           // Can break here
           break;
         }
 
         // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-        var status = TickEventSheet(treeManager, tree);
-        if (tree.roundComplete) {
-          closedTrees.push(tree);
-          CloseEventSheet.call(this, treeManager, tree);
+        var status = TickEventSheet(treeManager, eventsheet);
+        if (eventsheet.roundComplete) {
+          closedTrees.push(eventsheet);
+          CloseEventSheet.call(this, treeManager, eventsheet);
         } else if (status === RUNNING$1) {
           // Stall command execution here
           break;
@@ -6404,7 +6404,7 @@
           break;
         }
       }
-      blackboard.treeGroup = undefined;
+      blackboard.eventSheetGroup = undefined;
       if (closedTrees.length > 0) {
         Remove(trees, closedTrees);
       }
@@ -6419,21 +6419,21 @@
       var treeManager = this.parent;
       var blackboard = treeManager.blackboard;
       var commandExecutor = treeManager.commandExecutor;
-      this.pendingTrees.forEach(function (tree) {
-        tree.abort(blackboard, commandExecutor);
+      this.pendingTrees.forEach(function (eventsheet) {
+        eventsheet.abort(blackboard, commandExecutor);
       });
       this.pendingTrees.length = 0;
       return this;
     },
     startTree: function startTree(title) {
       var ignoreCondition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      // Run a single event sheet(tree)
+      // Run a single event sheet(eventsheet)
 
       if (this.isRunning) {
         return this;
       }
-      var tree = this.getTree(title);
-      if (!tree) {
+      var eventsheet = this.getTree(title);
+      if (!eventsheet) {
         return this;
       }
       this.isRunning = true;
@@ -6441,11 +6441,11 @@
       var pendingTrees = this.pendingTrees;
       var blackboard = treeManager.blackboard;
       pendingTrees.length = 0;
-      tree.resetState(blackboard);
-      tree.setConditionEnable(!ignoreCondition);
-      OpenEventSheet.call(this, treeManager, tree);
-      tree.setConditionEnable(true);
-      pendingTrees.push(tree);
+      eventsheet.resetState(blackboard);
+      eventsheet.setConditionEnable(!ignoreCondition);
+      OpenEventSheet.call(this, treeManager, eventsheet);
+      eventsheet.setConditionEnable(true);
+      pendingTrees.push(eventsheet);
       this["continue"]();
       return this;
     }
@@ -6463,7 +6463,7 @@
     this.name = name;
     this.trees = [];
     this.pendingTrees = [];
-    this.closedTrees = []; // Temporary tree array
+    this.closedTrees = []; // Temporary eventsheet array
 
     this.isRunning = false;
     this._threadKey = null;
@@ -6482,17 +6482,17 @@
       }
       return this.treeGroups[name];
     },
-    getTree: function getTree(tree, groupName) {
+    getTree: function getTree(eventsheet, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      return this.getTreeGroup(groupName).getTree(tree);
+      return this.getTreeGroup(groupName).getTree(eventsheet);
     },
-    getTreeState: function getTreeState(tree, groupName) {
+    getTreeState: function getTreeState(eventsheet, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      return this.getTreeGroup(groupName).getTreeState(tree);
+      return this.getTreeGroup(groupName).getTreeState(eventsheet);
     },
     getEventSheetTitleList: function getEventSheetTitleList(out, groupName) {
       if (out === undefined) {
@@ -6511,11 +6511,11 @@
     addEventSheet: function addEventSheet(s, groupName, config) {
       return this;
     },
-    addTree: function addTree(tree, groupName) {
+    addTree: function addTree(eventsheet, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      this.getTreeGroup(groupName).addTree(tree);
+      this.getTreeGroup(groupName).addTree(eventsheet);
       return this;
     }
   };
@@ -6557,17 +6557,17 @@
   };
 
   var SaveLoadTreesMethods = {
-    dumpTrees: function dumpTrees(groupName) {
+    dumpEventSheetGroup: function dumpEventSheetGroup(groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      return this.getTreeGroup(groupName).dumpTrees();
+      return this.getTreeGroup(groupName).dumpEventSheetGroup();
     },
-    loadTrees: function loadTrees(data, groupName) {
+    loadEventSheetGroup: function loadEventSheetGroup(data, groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
-      this.getTreeGroup(groupName).loadTrees(data);
+      this.getTreeGroup(groupName).loadEventSheetGroup(data);
       return this;
     }
   };
@@ -14794,11 +14794,11 @@
       rewritable: false
     }
   };
-  var EventBehaviorTree = /*#__PURE__*/function (_BehaviorTree) {
-    _inherits(EventBehaviorTree, _BehaviorTree);
-    function EventBehaviorTree(treeManager, config) {
+  var EventSheet = /*#__PURE__*/function (_BehaviorTree) {
+    _inherits(EventSheet, _BehaviorTree);
+    function EventSheet(treeManager, config) {
       var _this;
-      _classCallCheck(this, EventBehaviorTree);
+      _classCallCheck(this, EventSheet);
       if (config === undefined) {
         config = {};
       }
@@ -14811,7 +14811,7 @@
       delete config.condition;
       var properties = config.properties;
       delete config.properties;
-      _this = _callSuper(this, EventBehaviorTree, [config]);
+      _this = _callSuper(this, EventSheet, [config]);
 
       // Store default properties
       for (var propertyKey in PropertyTable) {
@@ -14849,7 +14849,7 @@
       _this.setRoot(root);
       return _this;
     }
-    _createClass(EventBehaviorTree, [{
+    _createClass(EventSheet, [{
       key: "wrapProperty",
       value: function wrapProperty(key) {
         var treeProperties = this.properties;
@@ -14869,7 +14869,7 @@
       key: "setTreeGroup",
       value: function setTreeGroup(groupName) {
         this.groupName = groupName;
-        this.treeGroup = this.treeManager.getTreeGroup(groupName);
+        this.eventSheetGroup = this.treeManager.getTreeGroup(groupName);
         return this;
       }
     }, {
@@ -14910,7 +14910,7 @@
         this.roundState = RoundRun;
 
         // First tick, condition-eval
-        _get(_getPrototypeOf(EventBehaviorTree.prototype), "tick", this).call(this, blackboard, target);
+        _get(_getPrototypeOf(EventSheet.prototype), "tick", this).call(this, blackboard, target);
         if (startFromTop) {
           var nodeMemory = this.root.getNodeMemory(this.ticker);
           this.conditionPassed = nodeMemory.$runningChild === 0;
@@ -14920,7 +14920,7 @@
     }, {
       key: "tick",
       value: function tick(blackboard, target) {
-        var state = _get(_getPrototypeOf(EventBehaviorTree.prototype), "tick", this).call(this, blackboard, target);
+        var state = _get(_getPrototypeOf(EventSheet.prototype), "tick", this).call(this, blackboard, target);
         if (state !== RUNNING$1) {
           // Will remove from pendingTrees
           this.roundState = RoundComplete;
@@ -14934,10 +14934,10 @@
       key: "abort",
       value: function abort(blackboard, target) {
         this.roundState = RoundIdle;
-        _get(_getPrototypeOf(EventBehaviorTree.prototype), "abort", this).call(this, blackboard, target);
+        _get(_getPrototypeOf(EventSheet.prototype), "abort", this).call(this, blackboard, target);
       }
     }]);
-    return EventBehaviorTree;
+    return EventSheet;
   }(BehaviorTree);
 
   var marked_min = {exports: {}};
@@ -16068,7 +16068,7 @@
 
   var GetHeadingTree = function GetHeadingTree(text) {
     var items = marked.lexer(text);
-    var tree = null;
+    var eventsheet = null;
     var parents = [];
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
@@ -16076,13 +16076,13 @@
         case 'heading':
           var level = item.depth - 1;
           // First node
-          if (tree === null) {
+          if (eventsheet === null) {
             if (level === 0) {
               var node = CreateNewNode(item.text);
               parents.push(node);
-              tree = node;
+              eventsheet = node;
             }
-            // Ignore items if tree is null
+            // Ignore items if eventsheet is null
           } else {
             if (level <= parents.length) {
               var node = CreateNewNode(item.text);
@@ -16113,7 +16113,7 @@
         // Ignore other kinds of items
       }
     }
-    return tree;
+    return eventsheet;
   };
   var CreateNewNode = function CreateNewNode(title) {
     return {
@@ -16639,44 +16639,36 @@
       active = _ref$active === void 0 ? true : _ref$active,
       _ref$once = _ref.once,
       once = _ref$once === void 0 ? false : _ref$once;
-    return function (parallel, active, once) {
-      var headingTree = GetHeadingTree(markedString);
-      var treeConfig = GetTreeConfig(headingTree.paragraphs, commentLineStart);
-      var _ParseTopLevelNodes = ParseTopLevelNodes(headingTree.children),
-        conditionNodes = _ParseTopLevelNodes.conditionNodes,
-        mainTaskNodes = _ParseTopLevelNodes.mainTaskNodes,
-        catchNodes = _ParseTopLevelNodes.catchNodes;
-      var _treeConfig$parallel = treeConfig.parallel,
-        parallel = _treeConfig$parallel === void 0 ? parallel : _treeConfig$parallel,
-        _treeConfig$active = treeConfig.active,
-        active = _treeConfig$active === void 0 ? active : _treeConfig$active,
-        _treeConfig$once = treeConfig.once,
-        once = _treeConfig$once === void 0 ? once : _treeConfig$once;
-      var taskSequenceConfig = {
-        lineBreak: lineBreak,
-        commentLineStart: commentLineStart
-      };
-      var tree = new EventBehaviorTree(treeManager, {
-        title: headingTree.title,
-        groupName: groupName,
-        condition: GetConditionExpression$1(conditionNodes),
-        properties: {
-          parallel: parallel,
-          active: active,
-          once: once
-        }
-      });
-      var rootNode = tree.root;
-      rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
-      var forceFailure = new ForceFailure();
-      if (catchNodes.length > 0) {
-        forceFailure.addChild(CreateParentNode(catchNodes[0], taskSequenceConfig));
-      } else {
-        forceFailure.addChild(new Succeeder());
-      }
-      rootNode.addChild(forceFailure);
-      return tree;
-    }(parallel, active, once);
+    var headingTree = GetHeadingTree(markedString);
+    var _ParseTopLevelNodes = ParseTopLevelNodes(headingTree.children),
+      conditionNodes = _ParseTopLevelNodes.conditionNodes,
+      mainTaskNodes = _ParseTopLevelNodes.mainTaskNodes,
+      catchNodes = _ParseTopLevelNodes.catchNodes;
+    var treeConfig = Object.assign({
+      parallel: parallel,
+      active: active,
+      once: once
+    }, GetTreeConfig(headingTree.paragraphs, commentLineStart));
+    var taskSequenceConfig = {
+      lineBreak: lineBreak,
+      commentLineStart: commentLineStart
+    };
+    var eventsheet = new EventSheet(treeManager, {
+      title: headingTree.title,
+      groupName: groupName,
+      condition: GetConditionExpression$1(conditionNodes),
+      properties: treeConfig
+    });
+    var rootNode = eventsheet.root;
+    rootNode.addChild(CreateParentNode(mainTaskNodes, taskSequenceConfig));
+    var forceFailure = new ForceFailure();
+    if (catchNodes.length > 0) {
+      forceFailure.addChild(CreateParentNode(catchNodes[0], taskSequenceConfig));
+    } else {
+      forceFailure.addChild(new Succeeder());
+    }
+    rootNode.addChild(forceFailure);
+    return eventsheet;
   };
 
   var MarkedEventSheets = /*#__PURE__*/function (_EventSheetManager) {
@@ -16705,13 +16697,13 @@
           commentLineStart = _config$commentLineSt === void 0 ? '\/\/' : _config$commentLineSt,
           _config$parallel = _config.parallel,
           parallel = _config$parallel === void 0 ? this.parallel : _config$parallel;
-        var tree = Marked2Tree(this, markedString, {
+        var eventsheet = Marked2Tree(this, markedString, {
           groupName: groupName,
           lineBreak: lineBreak,
           commentLineStart: commentLineStart,
           parallel: parallel
         });
-        this.addTree(tree, groupName);
+        this.addTree(eventsheet, groupName);
         return this;
       }
     }]);
@@ -17025,6 +17017,320 @@
       return false;
     }
     return true;
+  };
+
+  var GetMethods = {
+    has: function has(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    exists: function exists(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    get: function get(name) {
+      return this.bobs[name];
+    },
+    getGO: function getGO(name) {
+      var bob = this.get(name);
+      return bob ? bob.gameObject : null;
+    },
+    forEachGO: function forEachGO(callback, scope) {
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        var stopLoop;
+        if (scope) {
+          stopLoop = callback.call(scope, gameObject, name, this);
+        } else {
+          stopLoop = callback(gameObject, name, this);
+        }
+        if (stopLoop) {
+          break;
+        }
+      }
+      return this;
+    },
+    getAllGO: function getAllGO(out) {
+      if (out === undefined) {
+        out = [];
+      }
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        out.push(gameObject);
+      }
+      return out;
+    }
+  };
+
+  var GetR = function GetR(colorInt) {
+    return colorInt >> 16 & 0xff;
+  };
+  var GetG = function GetG(colorInt) {
+    return colorInt >> 8 & 0xff;
+  };
+  var GetB = function GetB(colorInt) {
+    return colorInt & 0xff;
+  };
+
+  var MaskR = ~(0xff << 16) & 0xffffff;
+  var MaskG = ~(0xff << 8) & 0xffffff;
+  var MaskB = ~0xff & 0xffffff;
+  var SetR = function SetR(colorInt, r) {
+    return (r & 0xff) << 16 | colorInt & MaskR;
+  };
+  var SetG = function SetG(colorInt, g) {
+    return (g & 0xff) << 8 | colorInt & MaskG;
+  };
+  var SetB = function SetB(colorInt, b) {
+    return b & 0xff | colorInt & MaskB;
+  };
+  var SetRGB = function SetRGB(colorInt, r, g, b) {
+    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
+  };
+
+  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('tintR')) {
+      return gameObject;
+    }
+    if (tintRGB === undefined) {
+      tintRGB = 0xffffff;
+    }
+    var tintR = GetR(tintRGB);
+    var tintG = GetG(tintRGB);
+    var tintB = GetB(tintRGB);
+
+    // Override tint property
+    Object.defineProperty(gameObject, 'tint', {
+      get: function get() {
+        return tintRGB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xffffff;
+        if (gameObject.setTint) {
+          gameObject.setTint(value);
+        }
+        if (tintRGB !== value) {
+          tintRGB = value;
+          tintR = GetR(tintRGB);
+          tintG = GetG(tintRGB);
+          tintB = GetB(tintRGB);
+          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintR', {
+      get: function get() {
+        return tintR;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value) {
+          tintR = value;
+          gameObject.tint = SetR(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintG', {
+      get: function get() {
+        return tintG;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintG !== value) {
+          tintG = value;
+          gameObject.tint = SetG(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintB', {
+      get: function get() {
+        return tintB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintB !== value) {
+          tintB = value;
+          gameObject.tint = SetB(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintGray', {
+      get: function get() {
+        return Math.floor((tintR + tintG + tintB) / 3);
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value || tintG !== value || tintB !== value) {
+          tintR = value;
+          tintG = value;
+          tintB = value;
+          gameObject.tint = SetRGB(tintRGB, value, value, value);
+        }
+      }
+    });
+    gameObject.tint = tintRGB;
+    return gameObject;
+  };
+
+  var EventEmitter$1 = Phaser.Events.EventEmitter;
+  var MonitorViewport = function MonitorViewport(viewport) {
+    if (viewport.events) {
+      return viewport;
+    }
+    var events = new EventEmitter$1();
+    var x = viewport.x;
+    Object.defineProperty(viewport, 'x', {
+      get: function get() {
+        return x;
+      },
+      set: function set(value) {
+        if (x !== value) {
+          x = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var y = viewport.y;
+    Object.defineProperty(viewport, 'y', {
+      get: function get() {
+        return y;
+      },
+      set: function set(value) {
+        if (y !== value) {
+          y = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var width = viewport.width;
+    Object.defineProperty(viewport, 'width', {
+      get: function get() {
+        return width;
+      },
+      set: function set(value) {
+        if (width !== value) {
+          width = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var height = viewport.height;
+    Object.defineProperty(viewport, 'height', {
+      get: function get() {
+        return height;
+      },
+      set: function set(value) {
+        if (height !== value) {
+          height = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    viewport.events = events;
+    return viewport;
+  };
+
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = GlobXY;
+    }
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
+    return out;
+  };
+  var GlobXY = {};
+
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('vp')) {
+      return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
+    }
+    if (vpx === undefined) {
+      vpx = 0.5;
+    }
+    if (vpy === undefined) {
+      vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
+    }
+    if (transformCallback === undefined) {
+      transformCallback = VPXYToXY;
+    }
+    MonitorViewport(viewport);
+    var events = viewport.events;
+    gameObject.vp = viewport;
+
+    // Set position of game object when view-port changed.
+    var Transform = function Transform() {
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
+    };
+    events.on('update', Transform);
+    gameObject.once('destroy', function () {
+      events.off('update', Transform);
+      gameObject.vp = undefined;
+    });
+    Object.defineProperty(gameObject, 'vpx', {
+      get: function get() {
+        return vpx;
+      },
+      set: function set(value) {
+        if (vpx !== value) {
+          vpx = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpy', {
+      get: function get() {
+        return vpy;
+      },
+      set: function set(value) {
+        if (vpy !== value) {
+          vpy = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
+          Transform();
+        }
+      }
+    });
+    Transform();
   };
 
   var HasProperty = function HasProperty(obj, prop) {
@@ -18717,414 +19023,8 @@
     return gameObject;
   };
 
-  var FadeTint = 0;
-  var FadeAlpha = 1;
-  var FadeRevealUp = 2;
-  var FadeRevealDown = 3;
-  var FadeRevealLeft = 4;
-  var FadeRevealRight = 5;
-  var FadeMode = {
-    tint: FadeTint,
-    alpha: FadeAlpha,
-    revealUp: FadeRevealUp,
-    revealDown: FadeRevealDown,
-    revealLeft: FadeRevealLeft,
-    revealRight: FadeRevealRight
-  };
-  var FadeMethods = {
-    setGOFadeMode: function setGOFadeMode(fadeMode) {
-      if (typeof fadeMode === 'string') {
-        fadeMode = FadeMode[fadeMode];
-      }
-      this.fadeMode = fadeMode;
-      return this;
-    },
-    setGOFadeTime: function setGOFadeTime(time) {
-      this.fadeTime = time;
-      return this;
-    },
-    useTintFadeEffect: function useTintFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
-    },
-    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
-    },
-    useRevealEffect: function useRevealEffect(gameObject) {
-      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
-    },
-    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
-      var gameObject = bob.gameObject;
-      if (this.useTintFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('tintGray', 255 * fromValue);
-        }
-        bob.easeProperty('tintGray',
-        // property
-        Math.floor(255 * toValue),
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useAlphaFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('alpha', fromValue);
-        }
-        bob.easeProperty('alpha',
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useRevealEffect(gameObject)) {
-        AddEffectProperties(gameObject, 'reveal');
-        var propertyName;
-        switch (this.fadeMode) {
-          case FadeRevealUp:
-            propertyName = 'revealUp';
-            break;
-          case FadeRevealDown:
-            propertyName = 'revealDown';
-            break;
-          case FadeRevealLeft:
-            propertyName = 'revealLeft';
-            break;
-          case FadeRevealRight:
-            propertyName = 'revealRight';
-            break;
-        }
-        if (fromValue === undefined) {
-          fromValue = 0;
-        }
-        gameObject[propertyName] = fromValue;
-        bob.easeProperty(propertyName,
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-        bob.getTweenTask(propertyName).once('complete', function () {
-          gameObject[propertyName] = null;
-        });
-      } else {
-        if (onComplete) {
-          onComplete(gameObject);
-        }
-      }
-      return this;
-    }
-  };
-
-  var GetR = function GetR(colorInt) {
-    return colorInt >> 16 & 0xff;
-  };
-  var GetG = function GetG(colorInt) {
-    return colorInt >> 8 & 0xff;
-  };
-  var GetB = function GetB(colorInt) {
-    return colorInt & 0xff;
-  };
-
-  var MaskR = ~(0xff << 16) & 0xffffff;
-  var MaskG = ~(0xff << 8) & 0xffffff;
-  var MaskB = ~0xff & 0xffffff;
-  var SetR = function SetR(colorInt, r) {
-    return (r & 0xff) << 16 | colorInt & MaskR;
-  };
-  var SetG = function SetG(colorInt, g) {
-    return (g & 0xff) << 8 | colorInt & MaskG;
-  };
-  var SetB = function SetB(colorInt, b) {
-    return b & 0xff | colorInt & MaskB;
-  };
-  var SetRGB = function SetRGB(colorInt, r, g, b) {
-    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
-  };
-
-  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('tintR')) {
-      return gameObject;
-    }
-    if (tintRGB === undefined) {
-      tintRGB = 0xffffff;
-    }
-    var tintR = GetR(tintRGB);
-    var tintG = GetG(tintRGB);
-    var tintB = GetB(tintRGB);
-
-    // Override tint property
-    Object.defineProperty(gameObject, 'tint', {
-      get: function get() {
-        return tintRGB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xffffff;
-        if (gameObject.setTint) {
-          gameObject.setTint(value);
-        }
-        if (tintRGB !== value) {
-          tintRGB = value;
-          tintR = GetR(tintRGB);
-          tintG = GetG(tintRGB);
-          tintB = GetB(tintRGB);
-          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintR', {
-      get: function get() {
-        return tintR;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value) {
-          tintR = value;
-          gameObject.tint = SetR(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintG', {
-      get: function get() {
-        return tintG;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintG !== value) {
-          tintG = value;
-          gameObject.tint = SetG(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintB', {
-      get: function get() {
-        return tintB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintB !== value) {
-          tintB = value;
-          gameObject.tint = SetB(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintGray', {
-      get: function get() {
-        return Math.floor((tintR + tintG + tintB) / 3);
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value || tintG !== value || tintB !== value) {
-          tintR = value;
-          tintG = value;
-          tintB = value;
-          gameObject.tint = SetRGB(tintRGB, value, value, value);
-        }
-      }
-    });
-    gameObject.tint = tintRGB;
-    return gameObject;
-  };
-
-  var EventEmitter$1 = Phaser.Events.EventEmitter;
-  var MonitorViewport = function MonitorViewport(viewport) {
-    if (viewport.events) {
-      return viewport;
-    }
-    var events = new EventEmitter$1();
-    var x = viewport.x;
-    Object.defineProperty(viewport, 'x', {
-      get: function get() {
-        return x;
-      },
-      set: function set(value) {
-        if (x !== value) {
-          x = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var y = viewport.y;
-    Object.defineProperty(viewport, 'y', {
-      get: function get() {
-        return y;
-      },
-      set: function set(value) {
-        if (y !== value) {
-          y = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var width = viewport.width;
-    Object.defineProperty(viewport, 'width', {
-      get: function get() {
-        return width;
-      },
-      set: function set(value) {
-        if (width !== value) {
-          width = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var height = viewport.height;
-    Object.defineProperty(viewport, 'height', {
-      get: function get() {
-        return height;
-      },
-      set: function set(value) {
-        if (height !== value) {
-          height = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    viewport.events = events;
-    return viewport;
-  };
-
-  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = GlobXY;
-    }
-    if (typeof vpxOffset !== 'number') {
-      vpxOffset = 0;
-      vpyOffset = 0;
-    }
-    out.x = viewport.x + viewport.width * vpx + vpxOffset;
-    out.y = viewport.y + viewport.height * vpy + vpyOffset;
-    return out;
-  };
-  var GlobXY = {};
-
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('vp')) {
-      return gameObject;
-    }
-    if (typeof vpx === 'function') {
-      transformCallback = vpx;
-      vpx = undefined;
-    }
-    if (typeof vpxOffset === 'function') {
-      transformCallback = vpxOffset;
-      vpxOffset = undefined;
-    }
-    if (vpx === undefined) {
-      vpx = 0.5;
-    }
-    if (vpy === undefined) {
-      vpy = 0.5;
-    }
-    if (vpxOffset === undefined) {
-      vpxOffset = 0;
-    }
-    if (vpyOffset === undefined) {
-      vpyOffset = 0;
-    }
-    if (transformCallback === undefined) {
-      transformCallback = VPXYToXY;
-    }
-    MonitorViewport(viewport);
-    var events = viewport.events;
-    gameObject.vp = viewport;
-
-    // Set position of game object when view-port changed.
-    var Transform = function Transform() {
-      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
-    };
-    events.on('update', Transform);
-    gameObject.once('destroy', function () {
-      events.off('update', Transform);
-      gameObject.vp = undefined;
-    });
-    Object.defineProperty(gameObject, 'vpx', {
-      get: function get() {
-        return vpx;
-      },
-      set: function set(value) {
-        if (vpx !== value) {
-          vpx = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpy', {
-      get: function get() {
-        return vpy;
-      },
-      set: function set(value) {
-        if (vpy !== value) {
-          vpy = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpxOffset', {
-      get: function get() {
-        return vpxOffset;
-      },
-      set: function set(value) {
-        if (vpxOffset !== value) {
-          vpxOffset = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpyOffset', {
-      get: function get() {
-        return vpyOffset;
-      },
-      set: function set(value) {
-        if (vpyOffset !== value) {
-          vpyOffset = value;
-          Transform();
-        }
-      }
-    });
-    Transform();
-  };
-
   var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var AddMethods = {
-    has: function has(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    exists: function exists(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    get: function get(name) {
-      return this.bobs[name];
-    },
-    getGO: function getGO(name) {
-      var bob = this.get(name);
-      return bob ? bob.gameObject : null;
-    },
     addGO: function addGO(name, gameObject) {
       this.remove(name, true);
       if (this.useTintFadeEffect(gameObject)) {
@@ -19154,23 +19054,12 @@
       }
       var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
+      if (this.gameObjectDepth != null) {
+        // Not undefined, null
+        gameObject.setDepth(this.gameObjectDepth);
+      }
       var bob = this.get(name);
       this.fadeBob(bob, 0, 1);
-      return this;
-    },
-    forEachGO: function forEachGO(callback, scope) {
-      for (var name in this.bobs) {
-        var gameObject = this.bobs[name].gameObject;
-        var stopLoop;
-        if (scope) {
-          stopLoop = callback.call(scope, gameObject, name, this);
-        } else {
-          stopLoop = callback(gameObject, name, this);
-        }
-        if (stopLoop) {
-          break;
-        }
-      }
       return this;
     }
   };
@@ -19334,6 +19223,126 @@
         return this;
       }
       this.get(name).setData(dataKey, value);
+      return this;
+    }
+  };
+
+  var FadeTint = 0;
+  var FadeAlpha = 1;
+  var FadeRevealUp = 2;
+  var FadeRevealDown = 3;
+  var FadeRevealLeft = 4;
+  var FadeRevealRight = 5;
+  var FadeMode = {
+    tint: FadeTint,
+    alpha: FadeAlpha,
+    revealUp: FadeRevealUp,
+    revealDown: FadeRevealDown,
+    revealLeft: FadeRevealLeft,
+    revealRight: FadeRevealRight
+  };
+  var FadeMethods = {
+    setGOFadeMode: function setGOFadeMode(fadeMode) {
+      if (typeof fadeMode === 'string') {
+        fadeMode = FadeMode[fadeMode];
+      }
+      this.fadeMode = fadeMode;
+      return this;
+    },
+    setGOFadeTime: function setGOFadeTime(time) {
+      this.fadeTime = time;
+      return this;
+    },
+    useTintFadeEffect: function useTintFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
+    },
+    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+    },
+    useRevealEffect: function useRevealEffect(gameObject) {
+      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
+    },
+    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
+      var gameObject = bob.gameObject;
+      if (this.useTintFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('tintGray', 255 * fromValue);
+        }
+        bob.easeProperty('tintGray',
+        // property
+        Math.floor(255 * toValue),
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useAlphaFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('alpha', fromValue);
+        }
+        bob.easeProperty('alpha',
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useRevealEffect(gameObject)) {
+        AddEffectProperties(gameObject, 'reveal');
+        var propertyName;
+        switch (this.fadeMode) {
+          case FadeRevealUp:
+            propertyName = 'revealUp';
+            break;
+          case FadeRevealDown:
+            propertyName = 'revealDown';
+            break;
+          case FadeRevealLeft:
+            propertyName = 'revealLeft';
+            break;
+          case FadeRevealRight:
+            propertyName = 'revealRight';
+            break;
+        }
+        if (fromValue === undefined) {
+          fromValue = 0;
+        }
+        gameObject[propertyName] = fromValue;
+        bob.easeProperty(propertyName,
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+        bob.getTweenTask(propertyName).once('complete', function () {
+          gameObject[propertyName] = null;
+        });
+      } else {
+        if (onComplete) {
+          onComplete(gameObject);
+        }
+      }
       return this;
     }
   };
@@ -19522,7 +19531,7 @@
   var Methods$3 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$3, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$3, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -19556,6 +19565,7 @@
       this.BobClass = GetValue$g(config, 'BobClass', BobBase);
       this.setCreateGameObjectCallback(GetValue$g(config, 'createGameObject'), GetValue$g(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$g(config, 'eventEmitter', undefined));
+      this.setGameObjectDepth(GetValue$g(config, 'depth', undefined));
       var fadeConfig = GetValue$g(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
@@ -19612,6 +19622,12 @@
       value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
+        return this;
+      }
+    }, {
+      key: "setGameObjectDepth",
+      value: function setGameObjectDepth(depth) {
+        this.gameObjectDepth = depth;
         return this;
       }
     }, {
@@ -19720,6 +19736,8 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
+      var rootLayer = GetValue$f(config, 'rootLayer');
+      _this.setRootLayer(rootLayer);
       var initLayers = GetValue$f(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -19737,6 +19755,21 @@
         _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
         return this;
       }
+    }, {
+      key: "setRootLayer",
+      value: function setRootLayer(rootLayer) {
+        if (rootLayer === this.rootLayer) {
+          return this;
+        }
+        var currentLayers = this.getAllGO();
+        if (rootLayer) {
+          rootLayer.add(currentLayers);
+        } else {
+          this.scene.displayList.add(currentLayers);
+        }
+        this.rootLayer = rootLayer;
+        return this;
+      }
 
       // Override
     }, {
@@ -19744,6 +19777,9 @@
       value: function addGO(name, gameObject) {
         _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
         gameObject.name = name;
+        if (this.rootLayer) {
+          this.rootLayer.add(gameObject);
+        }
         return this;
       }
 
@@ -19843,6 +19879,10 @@
       return game.sys.sound;
     }
     return game.sound;
+  };
+
+  var HasaAudio = function HasaAudio(key) {
+    return this.sound.game.cache.audio.has(key);
   };
 
   var GetSceneObject = function GetSceneObject(object) {
@@ -20734,6 +20774,11 @@
       return this;
     },
     playBackgroundMusic: function playBackgroundMusic(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
+
       // Don't re-play the same background music
       if (this.backgroundMusic && this.backgroundMusic.key === key) {
         return this;
@@ -20792,6 +20837,10 @@
       return this;
     },
     crossFadeBackgroundMusic: function crossFadeBackgroundMusic(key, time) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
       this.backgroundMusicFadeTime = 0;
       this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
@@ -20860,6 +20909,11 @@
       return this;
     },
     playBackgroundMusic2: function playBackgroundMusic2(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
+
       // Don't re-play the same background music
       if (this.backgroundMusic2 && this.backgroundMusic2.key === key) {
         return this;
@@ -20918,6 +20972,10 @@
       return this;
     },
     crossFadeBackgroundMusic2: function crossFadeBackgroundMusic2(key, time) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var backgroundMusic2FadeTimeSave = this.backgroundMusic2FadeTime;
       this.backgroundMusic2FadeTime = 0;
       this.fadeOutBackgroundMusic2(time, true).playBackgroundMusic2(key).fadeInBackgroundMusic2(time);
@@ -20959,6 +21017,10 @@
       return this.soundEffects[this.soundEffects.length - 1];
     },
     playSoundEffect: function playSoundEffect(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var music = this.sound.add(key, {
         mute: GetValue$6(config, 'mute', this.soundEffectsMute),
         volume: GetValue$6(config, 'volume', this.soundEffectsVolume),
@@ -21088,6 +21150,10 @@
       return this.soundEffects2[this.soundEffects2.length - 1];
     },
     playSoundEffect2: function playSoundEffect2(key, config) {
+      if (!this.hasAudio(key)) {
+        console.error("[Sound manager] Audio key'".concat(key, "' is not existed"));
+        return this;
+      }
       var music = this.sound.add(key, {
         mute: GetValue$5(config, 'mute', this.soundEffects2Mute),
         volume: GetValue$5(config, 'volume', this.soundEffects2Volume),
@@ -21207,7 +21273,9 @@
     }
   };
 
-  var Methods$2 = {};
+  var Methods$2 = {
+    hasAudio: HasaAudio
+  };
   Object.assign(Methods$2, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
@@ -22317,9 +22385,13 @@
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
-    var layerManagerConfig = GetValue(config, 'layers', false);
-    if (layerManagerConfig !== false) {
-      var layerManager = new LayerManager(scene, layerManagerConfig);
+    var layerNames = GetValue(config, 'layers', false);
+    if (layerNames !== false) {
+      var layerManager = new LayerManager(scene, {
+        layers: layerNames,
+        rootLayer: GetValue(config, 'rootLayer', undefined),
+        depth: GetValue(config, 'layerDepth', undefined)
+      });
       this.gameObjectManagers.layer = layerManager;
       this.layerManager = layerManager;
     }
@@ -23311,17 +23383,17 @@
 
   var EventSheetManagerMethods = {
     // TODO: More commands
-    setData: function setData(config, eventSheetManager, tree) {
+    setData: function setData(config, eventSheetManager, eventsheet) {
       for (var name in config) {
         eventSheetManager.setData(name, config[name]);
       }
     },
-    incData: function incData(config, eventSheetManager, tree) {
+    incData: function incData(config, eventSheetManager, eventsheet) {
       for (var name in config) {
         eventSheetManager.incData(name, config[name]);
       }
     },
-    toggleData: function toggleData(config, eventSheetManager, tree) {
+    toggleData: function toggleData(config, eventSheetManager, eventsheet) {
       for (var name in config) {
         eventSheetManager.toggleData(name, config[name]);
       }
@@ -23342,7 +23414,7 @@
       this.setWaitEventFlag();
       return this;
     },
-    wait: function wait(config, eventSheetManager, tree) {
+    wait: function wait(config, eventSheetManager, eventsheet) {
       var click = config.click,
         key = config.key;
       if (click) {
@@ -23360,7 +23432,7 @@
       this.sys.waitEventManager.waitAny(config);
       return this.sys;
     },
-    click: function click(config, eventSheetManager, tree) {
+    click: function click(config, eventSheetManager, eventsheet) {
       return this.wait({
         click: true
       }, eventSheetManager);
@@ -23401,7 +23473,11 @@
       this.addCommand(name, createGameObjectCallback, null);
       return this;
     },
-    _setGOProperty: function _setGOProperty(config, eventSheetManager, tree) {
+    addGameObjectCommand: function addGameObjectCommand(goType, commandName, callback) {
+      this.sys.getGameObjectManager(goType).commands[commandName] = callback;
+      return this;
+    },
+    _setGOProperty: function _setGOProperty(config, eventSheetManager, eventsheet) {
       var id = config.id;
       delete config.id;
       var goType = this.sys.getGameObjectManagerName(id);
@@ -23414,7 +23490,7 @@
       }
       // Execute next command
     },
-    _easeGOProperty: function _easeGOProperty(config, eventSheetManager, tree) {
+    _easeGOProperty: function _easeGOProperty(config, eventSheetManager, eventsheet) {
       var id = config.id,
         duration = config.duration,
         ease = config.ease,
@@ -23458,7 +23534,7 @@
         return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
       }
     },
-    _runGOMethod: function _runGOMethod(config, eventSheetManager, tree) {
+    _runGOMethod: function _runGOMethod(config, eventSheetManager, eventsheet) {
       var _this$sys;
       var goType = this.sys.getGameObjectManagerName(id);
       if (!goType) {
@@ -23529,7 +23605,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm.cross': function bgmCross(_ref3, eventSheetManager, tree) {
+    'bgm.cross': function bgmCross(_ref3, eventSheetManager, eventsheet) {
       var key = _ref3.key,
         _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
@@ -23549,7 +23625,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm.stop': function bgmStop(config, eventSheetManager, tree) {
+    'bgm.stop': function bgmStop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23574,7 +23650,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm.fadeIn': function bgmFadeIn(_ref5, eventSheetManager, tree) {
+    'bgm.fadeIn': function bgmFadeIn(_ref5, eventSheetManager, eventsheet) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
@@ -23583,28 +23659,28 @@
       }
       soundManager.fadeInBackgroundMusic(duration);
     },
-    'bgm.pause': function bgmPause(config, eventSheetManager, tree) {
+    'bgm.pause': function bgmPause(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.pauseBackgroundMusic();
     },
-    'bgm.resume': function bgmResume(config, eventSheetManager, tree) {
+    'bgm.resume': function bgmResume(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.resumeBackgroundMusic();
     },
-    'bgm.mute': function bgmMute(config, eventSheetManager, tree) {
+    'bgm.mute': function bgmMute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setBackgroundMusicMute(true);
     },
-    'bgm.unmute': function bgmUnmute(config, eventSheetManager, tree) {
+    'bgm.unmute': function bgmUnmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23673,7 +23749,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm2.cross': function bgm2Cross(_ref3, eventSheetManager, tree) {
+    'bgm2.cross': function bgm2Cross(_ref3, eventSheetManager, eventsheet) {
       var key = _ref3.key,
         _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
@@ -23693,7 +23769,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm2.stop': function bgm2Stop(config, eventSheetManager, tree) {
+    'bgm2.stop': function bgm2Stop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23718,7 +23794,7 @@
         }, eventSheetManager);
       }
     },
-    'bgm2.fadeIn': function bgm2FadeIn(_ref5, eventSheetManager, tree) {
+    'bgm2.fadeIn': function bgm2FadeIn(_ref5, eventSheetManager, eventsheet) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
@@ -23727,28 +23803,28 @@
       }
       soundManager.fadeInBackgroundMusic2(duration);
     },
-    'bgm2.pause': function bgm2Pause(config, eventSheetManager, tree) {
+    'bgm2.pause': function bgm2Pause(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.pauseBackgroundMusic2();
     },
-    'bgm2.resume': function bgm2Resume(config, eventSheetManager, tree) {
+    'bgm2.resume': function bgm2Resume(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.resumeBackgroundMusic2();
     },
-    'bgm2.mute': function bgm2Mute(config, eventSheetManager, tree) {
+    'bgm2.mute': function bgm2Mute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setBackgroundMusic2Mute(true);
     },
-    'bgm2.unmute': function bgm2Unmute(config, eventSheetManager, tree) {
+    'bgm2.unmute': function bgm2Unmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23813,14 +23889,14 @@
         }, eventSheetManager);
       }
     },
-    'se.stop': function seStop(config, eventSheetManager, tree) {
+    'se.stop': function seStop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopAllSoundEffects();
     },
-    'se.fadeOut': function seFadeOut(_ref3, eventSheetManager, tree) {
+    'se.fadeOut': function seFadeOut(_ref3, eventSheetManager, eventsheet) {
       var _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
         _ref3$stop = _ref3.stop,
@@ -23838,14 +23914,14 @@
         }, eventSheetManager);
       }
     },
-    'se.mute': function seMute(config, eventSheetManager, tree) {
+    'se.mute': function seMute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setSoundEffectMute(true);
     },
-    'se.unmute': function seUnmute(config, eventSheetManager, tree) {
+    'se.unmute': function seUnmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -23910,14 +23986,14 @@
         }, eventSheetManager);
       }
     },
-    'se2.stop': function se2Stop(config, eventSheetManager, tree) {
+    'se2.stop': function se2Stop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.stopAllSoundEffects2();
     },
-    'se2.fadeOut': function se2FadeOut(_ref3, eventSheetManager, tree) {
+    'se2.fadeOut': function se2FadeOut(_ref3, eventSheetManager, eventsheet) {
       var _ref3$duration = _ref3.duration,
         duration = _ref3$duration === void 0 ? 500 : _ref3$duration,
         _ref3$stop = _ref3.stop,
@@ -23935,14 +24011,14 @@
         }, eventSheetManager);
       }
     },
-    'se2.mute': function se2Mute(config, eventSheetManager, tree) {
+    'se2.mute': function se2Mute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
       }
       soundManager.setSoundEffect2Mute(true);
     },
-    'se2.unmute': function se2Unmute(config, eventSheetManager, tree) {
+    'se2.unmute': function se2Unmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
         return;
@@ -24124,8 +24200,8 @@
     }
   };
 
-  var CanLog = function CanLog(tree) {
-    return !tree.hasOwnProperty('logEnable') || tree.logEnable;
+  var CanLog = function CanLog(eventsheet) {
+    return !eventsheet.hasOwnProperty('logEnable') || eventsheet.logEnable;
   };
   var LogMethods = {
     log: function log() {
@@ -24140,13 +24216,13 @@
         title = _ref$title === void 0 ? undefined : _ref$title,
         _ref$titleColor = _ref.titleColor,
         titleColor = _ref$titleColor === void 0 ? 'green' : _ref$titleColor;
-      var tree = arguments.length > 2 ? arguments[2] : undefined;
-      if (!CanLog(tree)) {
+      var eventsheet = arguments.length > 2 ? arguments[2] : undefined;
+      if (!CanLog(eventsheet)) {
         return;
       }
       if (showTitle) {
         if (title === undefined) {
-          title = tree.title;
+          title = eventsheet.title;
         }
         text = "[round][bgcolor=".concat(titleColor, "]").concat(title, "[/bgcolor][/round] ").concat(text);
       }
@@ -24156,33 +24232,33 @@
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         title = _ref2.title;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var tree = arguments.length > 2 ? arguments[2] : undefined;
+      var eventsheet = arguments.length > 2 ? arguments[2] : undefined;
       if (title) {
-        tree = eventSheetManager.getTree(title, tree.groupName);
+        eventsheet = eventSheetManager.getTree(title, eventsheet.groupName);
       }
-      if (!tree.hasOwnProperty('logEnable')) {
-        tree.wrapProperty('logEnable');
+      if (!eventsheet.hasOwnProperty('logEnable')) {
+        eventsheet.wrapProperty('logEnable');
       }
-      tree.logEnable = false;
+      eventsheet.logEnable = false;
     },
     'log.enable': function logEnable() {
       var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         title = _ref3.title;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var tree = arguments.length > 2 ? arguments[2] : undefined;
+      var eventsheet = arguments.length > 2 ? arguments[2] : undefined;
       if (title) {
-        tree = eventSheetManager.getTree(title, tree.groupName);
+        eventsheet = eventSheetManager.getTree(title, eventsheet.groupName);
       }
-      if (!tree.hasOwnProperty('logEnable')) {
+      if (!eventsheet.hasOwnProperty('logEnable')) {
         return;
       }
-      tree.logEnable = true;
+      eventsheet.logEnable = true;
     },
-    'log.memory': function logMemory(config, eventSheetManager, tree) {
-      if (!CanLog(tree)) {
+    'log.memory': function logMemory(config, eventSheetManager, eventsheet) {
+      if (!CanLog(eventsheet)) {
         return;
       }
-      this.log(config, eventSheetManager, tree);
+      this.log(config, eventSheetManager, eventsheet);
       var memory = eventSheetManager.memory;
       var table;
       var keys = config.keys;
@@ -24198,7 +24274,7 @@
     }
   };
 
-  var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, tree) {
+  var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, eventsheet) {
     var tokens = name.split('.');
     var gameObjectID = tokens[0];
     config.id = gameObjectID;
@@ -24209,7 +24285,7 @@
           console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
           return;
         }
-        return this._setGOProperty(config, eventSheetManager, tree);
+        return this._setGOProperty(config, eventSheetManager, eventsheet);
       case 2:
         if (!this.sys.hasGameObject(undefined, gameObjectID)) {
           // TODO
@@ -24219,12 +24295,12 @@
         var commandName = tokens[1];
         switch (tokens[1]) {
           case 'to':
-            return this._easeGOProperty(config, eventSheetManager, tree);
+            return this._easeGOProperty(config, eventSheetManager, eventsheet);
           case 'yoyo':
             config.yoyo = true;
-            return this._easeGOProperty(config, eventSheetManager, tree);
+            return this._easeGOProperty(config, eventSheetManager, eventsheet);
           case 'destroy':
-            return this._destroyGO(config, eventSheetManager, tree);
+            return this._destroyGO(config, eventSheetManager, eventsheet);
           default:
             var gameObjectManager = this.sys.getGameObjectManager(undefined, gameObjectID);
             if (gameObjectManager) {
@@ -24232,7 +24308,7 @@
               if (command) {
                 var gameObject = gameObjectManager.getGO(gameObjectID);
                 this.clearWaitEventFlag();
-                command(gameObject, config, this, eventSheetManager, tree);
+                command(gameObject, config, this, eventSheetManager, eventsheet);
                 return this.hasAnyWaitEvent ? this.sys : undefined;
               }
             }
@@ -24243,7 +24319,7 @@
             }
             config.methodName = commandName;
             config.parameters = parameters ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, eventSheetManager, tree);
+            return this._runGOMethod(config, eventSheetManager, eventsheet);
         }
     }
   };

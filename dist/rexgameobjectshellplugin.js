@@ -3838,6 +3838,320 @@
     return true;
   };
 
+  var GetMethods = {
+    has: function has(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    exists: function exists(name) {
+      return this.bobs.hasOwnProperty(name);
+    },
+    get: function get(name) {
+      return this.bobs[name];
+    },
+    getGO: function getGO(name) {
+      var bob = this.get(name);
+      return bob ? bob.gameObject : null;
+    },
+    forEachGO: function forEachGO(callback, scope) {
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        var stopLoop;
+        if (scope) {
+          stopLoop = callback.call(scope, gameObject, name, this);
+        } else {
+          stopLoop = callback(gameObject, name, this);
+        }
+        if (stopLoop) {
+          break;
+        }
+      }
+      return this;
+    },
+    getAllGO: function getAllGO(out) {
+      if (out === undefined) {
+        out = [];
+      }
+      for (var name in this.bobs) {
+        var gameObject = this.bobs[name].gameObject;
+        out.push(gameObject);
+      }
+      return out;
+    }
+  };
+
+  var GetR = function GetR(colorInt) {
+    return colorInt >> 16 & 0xff;
+  };
+  var GetG = function GetG(colorInt) {
+    return colorInt >> 8 & 0xff;
+  };
+  var GetB = function GetB(colorInt) {
+    return colorInt & 0xff;
+  };
+
+  var MaskR = ~(0xff << 16) & 0xffffff;
+  var MaskG = ~(0xff << 8) & 0xffffff;
+  var MaskB = ~0xff & 0xffffff;
+  var SetR = function SetR(colorInt, r) {
+    return (r & 0xff) << 16 | colorInt & MaskR;
+  };
+  var SetG = function SetG(colorInt, g) {
+    return (g & 0xff) << 8 | colorInt & MaskG;
+  };
+  var SetB = function SetB(colorInt, b) {
+    return b & 0xff | colorInt & MaskB;
+  };
+  var SetRGB = function SetRGB(colorInt, r, g, b) {
+    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
+  };
+
+  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('tintR')) {
+      return gameObject;
+    }
+    if (tintRGB === undefined) {
+      tintRGB = 0xffffff;
+    }
+    var tintR = GetR(tintRGB);
+    var tintG = GetG(tintRGB);
+    var tintB = GetB(tintRGB);
+
+    // Override tint property
+    Object.defineProperty(gameObject, 'tint', {
+      get: function get() {
+        return tintRGB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xffffff;
+        if (gameObject.setTint) {
+          gameObject.setTint(value);
+        }
+        if (tintRGB !== value) {
+          tintRGB = value;
+          tintR = GetR(tintRGB);
+          tintG = GetG(tintRGB);
+          tintB = GetB(tintRGB);
+          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintR', {
+      get: function get() {
+        return tintR;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value) {
+          tintR = value;
+          gameObject.tint = SetR(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintG', {
+      get: function get() {
+        return tintG;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintG !== value) {
+          tintG = value;
+          gameObject.tint = SetG(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintB', {
+      get: function get() {
+        return tintB;
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintB !== value) {
+          tintB = value;
+          gameObject.tint = SetB(tintRGB, value);
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'tintGray', {
+      get: function get() {
+        return Math.floor((tintR + tintG + tintB) / 3);
+      },
+      set: function set(value) {
+        value = Math.floor(value) & 0xff;
+        if (tintR !== value || tintG !== value || tintB !== value) {
+          tintR = value;
+          tintG = value;
+          tintB = value;
+          gameObject.tint = SetRGB(tintRGB, value, value, value);
+        }
+      }
+    });
+    gameObject.tint = tintRGB;
+    return gameObject;
+  };
+
+  var EventEmitter$1 = Phaser.Events.EventEmitter;
+  var MonitorViewport = function MonitorViewport(viewport) {
+    if (viewport.events) {
+      return viewport;
+    }
+    var events = new EventEmitter$1();
+    var x = viewport.x;
+    Object.defineProperty(viewport, 'x', {
+      get: function get() {
+        return x;
+      },
+      set: function set(value) {
+        if (x !== value) {
+          x = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var y = viewport.y;
+    Object.defineProperty(viewport, 'y', {
+      get: function get() {
+        return y;
+      },
+      set: function set(value) {
+        if (y !== value) {
+          y = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var width = viewport.width;
+    Object.defineProperty(viewport, 'width', {
+      get: function get() {
+        return width;
+      },
+      set: function set(value) {
+        if (width !== value) {
+          width = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var height = viewport.height;
+    Object.defineProperty(viewport, 'height', {
+      get: function get() {
+        return height;
+      },
+      set: function set(value) {
+        if (height !== value) {
+          height = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    viewport.events = events;
+    return viewport;
+  };
+
+  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = GlobXY;
+    }
+    if (typeof vpxOffset !== 'number') {
+      vpxOffset = 0;
+      vpyOffset = 0;
+    }
+    out.x = viewport.x + viewport.width * vpx + vpxOffset;
+    out.y = viewport.y + viewport.height * vpy + vpyOffset;
+    return out;
+  };
+  var GlobXY = {};
+
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('vp')) {
+      return gameObject;
+    }
+    if (typeof vpx === 'function') {
+      transformCallback = vpx;
+      vpx = undefined;
+    }
+    if (typeof vpxOffset === 'function') {
+      transformCallback = vpxOffset;
+      vpxOffset = undefined;
+    }
+    if (vpx === undefined) {
+      vpx = 0.5;
+    }
+    if (vpy === undefined) {
+      vpy = 0.5;
+    }
+    if (vpxOffset === undefined) {
+      vpxOffset = 0;
+    }
+    if (vpyOffset === undefined) {
+      vpyOffset = 0;
+    }
+    if (transformCallback === undefined) {
+      transformCallback = VPXYToXY;
+    }
+    MonitorViewport(viewport);
+    var events = viewport.events;
+    gameObject.vp = viewport;
+
+    // Set position of game object when view-port changed.
+    var Transform = function Transform() {
+      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
+    };
+    events.on('update', Transform);
+    gameObject.once('destroy', function () {
+      events.off('update', Transform);
+      gameObject.vp = undefined;
+    });
+    Object.defineProperty(gameObject, 'vpx', {
+      get: function get() {
+        return vpx;
+      },
+      set: function set(value) {
+        if (vpx !== value) {
+          vpx = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpy', {
+      get: function get() {
+        return vpy;
+      },
+      set: function set(value) {
+        if (vpy !== value) {
+          vpy = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpxOffset', {
+      get: function get() {
+        return vpxOffset;
+      },
+      set: function set(value) {
+        if (vpxOffset !== value) {
+          vpxOffset = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpyOffset', {
+      get: function get() {
+        return vpyOffset;
+      },
+      set: function set(value) {
+        if (vpyOffset !== value) {
+          vpyOffset = value;
+          Transform();
+        }
+      }
+    });
+    Transform();
+  };
+
   var HasProperty = function HasProperty(obj, prop) {
     if (!obj) {
       return false;
@@ -5528,414 +5842,8 @@
     return gameObject;
   };
 
-  var FadeTint = 0;
-  var FadeAlpha = 1;
-  var FadeRevealUp = 2;
-  var FadeRevealDown = 3;
-  var FadeRevealLeft = 4;
-  var FadeRevealRight = 5;
-  var FadeMode = {
-    tint: FadeTint,
-    alpha: FadeAlpha,
-    revealUp: FadeRevealUp,
-    revealDown: FadeRevealDown,
-    revealLeft: FadeRevealLeft,
-    revealRight: FadeRevealRight
-  };
-  var FadeMethods$1 = {
-    setGOFadeMode: function setGOFadeMode(fadeMode) {
-      if (typeof fadeMode === 'string') {
-        fadeMode = FadeMode[fadeMode];
-      }
-      this.fadeMode = fadeMode;
-      return this;
-    },
-    setGOFadeTime: function setGOFadeTime(time) {
-      this.fadeTime = time;
-      return this;
-    },
-    useTintFadeEffect: function useTintFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
-    },
-    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
-      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
-    },
-    useRevealEffect: function useRevealEffect(gameObject) {
-      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
-    },
-    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
-      var gameObject = bob.gameObject;
-      if (this.useTintFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('tintGray', 255 * fromValue);
-        }
-        bob.easeProperty('tintGray',
-        // property
-        Math.floor(255 * toValue),
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useAlphaFadeEffect(gameObject)) {
-        if (fromValue !== undefined) {
-          bob.setProperty('alpha', fromValue);
-        }
-        bob.easeProperty('alpha',
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-      } else if (this.useRevealEffect(gameObject)) {
-        AddEffectProperties(gameObject, 'reveal');
-        var propertyName;
-        switch (this.fadeMode) {
-          case FadeRevealUp:
-            propertyName = 'revealUp';
-            break;
-          case FadeRevealDown:
-            propertyName = 'revealDown';
-            break;
-          case FadeRevealLeft:
-            propertyName = 'revealLeft';
-            break;
-          case FadeRevealRight:
-            propertyName = 'revealRight';
-            break;
-        }
-        if (fromValue === undefined) {
-          fromValue = 0;
-        }
-        gameObject[propertyName] = fromValue;
-        bob.easeProperty(propertyName,
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        onComplete // onComplete
-        );
-        bob.getTweenTask(propertyName).once('complete', function () {
-          gameObject[propertyName] = null;
-        });
-      } else {
-        if (onComplete) {
-          onComplete(gameObject);
-        }
-      }
-      return this;
-    }
-  };
-
-  var GetR = function GetR(colorInt) {
-    return colorInt >> 16 & 0xff;
-  };
-  var GetG = function GetG(colorInt) {
-    return colorInt >> 8 & 0xff;
-  };
-  var GetB = function GetB(colorInt) {
-    return colorInt & 0xff;
-  };
-
-  var MaskR = ~(0xff << 16) & 0xffffff;
-  var MaskG = ~(0xff << 8) & 0xffffff;
-  var MaskB = ~0xff & 0xffffff;
-  var SetR = function SetR(colorInt, r) {
-    return (r & 0xff) << 16 | colorInt & MaskR;
-  };
-  var SetG = function SetG(colorInt, g) {
-    return (g & 0xff) << 8 | colorInt & MaskG;
-  };
-  var SetB = function SetB(colorInt, b) {
-    return b & 0xff | colorInt & MaskB;
-  };
-  var SetRGB = function SetRGB(colorInt, r, g, b) {
-    return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
-  };
-
-  var AddTintRGBProperties = function AddTintRGBProperties(gameObject, tintRGB) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('tintR')) {
-      return gameObject;
-    }
-    if (tintRGB === undefined) {
-      tintRGB = 0xffffff;
-    }
-    var tintR = GetR(tintRGB);
-    var tintG = GetG(tintRGB);
-    var tintB = GetB(tintRGB);
-
-    // Override tint property
-    Object.defineProperty(gameObject, 'tint', {
-      get: function get() {
-        return tintRGB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xffffff;
-        if (gameObject.setTint) {
-          gameObject.setTint(value);
-        }
-        if (tintRGB !== value) {
-          tintRGB = value;
-          tintR = GetR(tintRGB);
-          tintG = GetG(tintRGB);
-          tintB = GetB(tintRGB);
-          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintR', {
-      get: function get() {
-        return tintR;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value) {
-          tintR = value;
-          gameObject.tint = SetR(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintG', {
-      get: function get() {
-        return tintG;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintG !== value) {
-          tintG = value;
-          gameObject.tint = SetG(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintB', {
-      get: function get() {
-        return tintB;
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintB !== value) {
-          tintB = value;
-          gameObject.tint = SetB(tintRGB, value);
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'tintGray', {
-      get: function get() {
-        return Math.floor((tintR + tintG + tintB) / 3);
-      },
-      set: function set(value) {
-        value = Math.floor(value) & 0xff;
-        if (tintR !== value || tintG !== value || tintB !== value) {
-          tintR = value;
-          tintG = value;
-          tintB = value;
-          gameObject.tint = SetRGB(tintRGB, value, value, value);
-        }
-      }
-    });
-    gameObject.tint = tintRGB;
-    return gameObject;
-  };
-
-  var EventEmitter$1 = Phaser.Events.EventEmitter;
-  var MonitorViewport = function MonitorViewport(viewport) {
-    if (viewport.events) {
-      return viewport;
-    }
-    var events = new EventEmitter$1();
-    var x = viewport.x;
-    Object.defineProperty(viewport, 'x', {
-      get: function get() {
-        return x;
-      },
-      set: function set(value) {
-        if (x !== value) {
-          x = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var y = viewport.y;
-    Object.defineProperty(viewport, 'y', {
-      get: function get() {
-        return y;
-      },
-      set: function set(value) {
-        if (y !== value) {
-          y = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var width = viewport.width;
-    Object.defineProperty(viewport, 'width', {
-      get: function get() {
-        return width;
-      },
-      set: function set(value) {
-        if (width !== value) {
-          width = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    var height = viewport.height;
-    Object.defineProperty(viewport, 'height', {
-      get: function get() {
-        return height;
-      },
-      set: function set(value) {
-        if (height !== value) {
-          height = value;
-          events.emit('update', viewport);
-        }
-      }
-    });
-    viewport.events = events;
-    return viewport;
-  };
-
-  var VPXYToXY = function VPXYToXY(vpx, vpy, vpxOffset, vpyOffset, viewport, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = GlobXY;
-    }
-    if (typeof vpxOffset !== 'number') {
-      vpxOffset = 0;
-      vpyOffset = 0;
-    }
-    out.x = viewport.x + viewport.width * vpx + vpxOffset;
-    out.y = viewport.y + viewport.height * vpy + vpyOffset;
-    return out;
-  };
-  var GlobXY = {};
-
-  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, vpxOffset, vpyOffset, transformCallback) {
-    // Don't attach properties again
-    if (gameObject.hasOwnProperty('vp')) {
-      return gameObject;
-    }
-    if (typeof vpx === 'function') {
-      transformCallback = vpx;
-      vpx = undefined;
-    }
-    if (typeof vpxOffset === 'function') {
-      transformCallback = vpxOffset;
-      vpxOffset = undefined;
-    }
-    if (vpx === undefined) {
-      vpx = 0.5;
-    }
-    if (vpy === undefined) {
-      vpy = 0.5;
-    }
-    if (vpxOffset === undefined) {
-      vpxOffset = 0;
-    }
-    if (vpyOffset === undefined) {
-      vpyOffset = 0;
-    }
-    if (transformCallback === undefined) {
-      transformCallback = VPXYToXY;
-    }
-    MonitorViewport(viewport);
-    var events = viewport.events;
-    gameObject.vp = viewport;
-
-    // Set position of game object when view-port changed.
-    var Transform = function Transform() {
-      transformCallback(vpx, vpy, vpxOffset, vpyOffset, viewport, gameObject);
-    };
-    events.on('update', Transform);
-    gameObject.once('destroy', function () {
-      events.off('update', Transform);
-      gameObject.vp = undefined;
-    });
-    Object.defineProperty(gameObject, 'vpx', {
-      get: function get() {
-        return vpx;
-      },
-      set: function set(value) {
-        if (vpx !== value) {
-          vpx = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpy', {
-      get: function get() {
-        return vpy;
-      },
-      set: function set(value) {
-        if (vpy !== value) {
-          vpy = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpxOffset', {
-      get: function get() {
-        return vpxOffset;
-      },
-      set: function set(value) {
-        if (vpxOffset !== value) {
-          vpxOffset = value;
-          Transform();
-        }
-      }
-    });
-    Object.defineProperty(gameObject, 'vpyOffset', {
-      get: function get() {
-        return vpyOffset;
-      },
-      set: function set(value) {
-        if (vpyOffset !== value) {
-          vpyOffset = value;
-          Transform();
-        }
-      }
-    });
-    Transform();
-  };
-
   var RemoveItem$9 = Phaser.Utils.Array.Remove;
   var AddMethods$1 = {
-    has: function has(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    exists: function exists(name) {
-      return this.bobs.hasOwnProperty(name);
-    },
-    get: function get(name) {
-      return this.bobs[name];
-    },
-    getGO: function getGO(name) {
-      var bob = this.get(name);
-      return bob ? bob.gameObject : null;
-    },
     addGO: function addGO(name, gameObject) {
       this.remove(name, true);
       if (this.useTintFadeEffect(gameObject)) {
@@ -5965,23 +5873,12 @@
       }
       var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
+      if (this.gameObjectDepth != null) {
+        // Not undefined, null
+        gameObject.setDepth(this.gameObjectDepth);
+      }
       var bob = this.get(name);
       this.fadeBob(bob, 0, 1);
-      return this;
-    },
-    forEachGO: function forEachGO(callback, scope) {
-      for (var name in this.bobs) {
-        var gameObject = this.bobs[name].gameObject;
-        var stopLoop;
-        if (scope) {
-          stopLoop = callback.call(scope, gameObject, name, this);
-        } else {
-          stopLoop = callback(gameObject, name, this);
-        }
-        if (stopLoop) {
-          break;
-        }
-      }
       return this;
     }
   };
@@ -6149,6 +6046,126 @@
     }
   };
 
+  var FadeTint = 0;
+  var FadeAlpha = 1;
+  var FadeRevealUp = 2;
+  var FadeRevealDown = 3;
+  var FadeRevealLeft = 4;
+  var FadeRevealRight = 5;
+  var FadeMode = {
+    tint: FadeTint,
+    alpha: FadeAlpha,
+    revealUp: FadeRevealUp,
+    revealDown: FadeRevealDown,
+    revealLeft: FadeRevealLeft,
+    revealRight: FadeRevealRight
+  };
+  var FadeMethods$1 = {
+    setGOFadeMode: function setGOFadeMode(fadeMode) {
+      if (typeof fadeMode === 'string') {
+        fadeMode = FadeMode[fadeMode];
+      }
+      this.fadeMode = fadeMode;
+      return this;
+    },
+    setGOFadeTime: function setGOFadeTime(time) {
+      this.fadeTime = time;
+      return this;
+    },
+    useTintFadeEffect: function useTintFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeTint) && this.fadeTime > 0 && gameObject.setTint !== undefined;
+    },
+    useAlphaFadeEffect: function useAlphaFadeEffect(gameObject) {
+      return (this.fadeMode === undefined || this.fadeMode === FadeAlpha) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+    },
+    useRevealEffect: function useRevealEffect(gameObject) {
+      return this.fadeMode >= FadeRevealUp && this.fadeMode <= FadeRevealRight && this.fadeTime > 0 && (gameObject.preFX || gameObject.postFX);
+    },
+    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
+      var gameObject = bob.gameObject;
+      if (this.useTintFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('tintGray', 255 * fromValue);
+        }
+        bob.easeProperty('tintGray',
+        // property
+        Math.floor(255 * toValue),
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useAlphaFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('alpha', fromValue);
+        }
+        bob.easeProperty('alpha',
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.useRevealEffect(gameObject)) {
+        AddEffectProperties(gameObject, 'reveal');
+        var propertyName;
+        switch (this.fadeMode) {
+          case FadeRevealUp:
+            propertyName = 'revealUp';
+            break;
+          case FadeRevealDown:
+            propertyName = 'revealDown';
+            break;
+          case FadeRevealLeft:
+            propertyName = 'revealLeft';
+            break;
+          case FadeRevealRight:
+            propertyName = 'revealRight';
+            break;
+        }
+        if (fromValue === undefined) {
+          fromValue = 0;
+        }
+        gameObject[propertyName] = fromValue;
+        bob.easeProperty(propertyName,
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
+        onComplete // onComplete
+        );
+        bob.getTweenTask(propertyName).once('complete', function () {
+          gameObject[propertyName] = null;
+        });
+      } else {
+        if (onComplete) {
+          onComplete(gameObject);
+        }
+      }
+      return this;
+    }
+  };
+
   var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
     this.forEachGO(function (gameObject) {
       if (gameObject.drawBounds) {
@@ -6163,7 +6180,7 @@
   var Methods$8 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$8, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1);
+  Object.assign(Methods$8, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1, FadeMethods$1);
 
   var GetValue$21 = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
@@ -6173,6 +6190,7 @@
       this.BobClass = GetValue$21(config, 'BobClass', BobBase);
       this.setCreateGameObjectCallback(GetValue$21(config, 'createGameObject'), GetValue$21(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$21(config, 'eventEmitter', undefined));
+      this.setGameObjectDepth(GetValue$21(config, 'depth', undefined));
       var fadeConfig = GetValue$21(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
@@ -6229,6 +6247,12 @@
       value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
+        return this;
+      }
+    }, {
+      key: "setGameObjectDepth",
+      value: function setGameObjectDepth(depth) {
+        this.gameObjectDepth = depth;
         return this;
       }
     }, {
@@ -6292,6 +6316,8 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
+      var rootLayer = GetValue$20(config, 'rootLayer');
+      _this.setRootLayer(rootLayer);
       var initLayers = GetValue$20(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
@@ -6309,6 +6335,21 @@
         _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
         return this;
       }
+    }, {
+      key: "setRootLayer",
+      value: function setRootLayer(rootLayer) {
+        if (rootLayer === this.rootLayer) {
+          return this;
+        }
+        var currentLayers = this.getAllGO();
+        if (rootLayer) {
+          rootLayer.add(currentLayers);
+        } else {
+          this.scene.displayList.add(currentLayers);
+        }
+        this.rootLayer = rootLayer;
+        return this;
+      }
 
       // Override
     }, {
@@ -6316,6 +6357,9 @@
       value: function addGO(name, gameObject) {
         _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
         gameObject.name = name;
+        if (this.rootLayer) {
+          this.rootLayer.add(gameObject);
+        }
         return this;
       }
 
@@ -17840,6 +17884,20 @@
   };
   Object.assign(NinePatch.prototype, Methods$6);
 
+  var Properties = ['alpha', 'tint'];
+  var DecorateGameObject = function DecorateGameObject(gameObject, config) {
+    if (!config) {
+      return gameObject;
+    }
+    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
+      var propertyName = Properties[i];
+      if (propertyName in config && propertyName in gameObject) {
+        gameObject[propertyName] = config[propertyName];
+      }
+    }
+    return gameObject;
+  };
+
   var CreateBackground$2 = function CreateBackground(scene, config) {
     var gameObjectType;
     if (config) {
@@ -17869,6 +17927,7 @@
         gameObject = new StatesRoundRectangle(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -21721,6 +21780,46 @@
     return BBCodeText;
   }(Text);
 
+  var SimpleLabel = /*#__PURE__*/function (_Label) {
+    _inherits(SimpleLabel, _Label);
+    function SimpleLabel(scene, config, creators) {
+      var _this;
+      _classCallCheck(this, SimpleLabel);
+      config = BuildLabelConfig(scene, config, creators);
+      _this = _callSuper(this, SimpleLabel, [scene, config]);
+      _this.type = 'rexSimpleLabel';
+      return _this;
+    }
+    _createClass(SimpleLabel, [{
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        RunMethod(this.getChildren(), 'setActiveState', enable);
+        return this;
+      }
+    }, {
+      key: "setHoverState",
+      value: function setHoverState(enable) {
+        RunMethod(this.getChildren(), 'setHoverState', enable);
+        return this;
+      }
+    }, {
+      key: "setDisableState",
+      value: function setDisableState(enable) {
+        RunMethod(this.getChildren(), 'setDisableState', enable);
+        return this;
+      }
+    }]);
+    return SimpleLabel;
+  }(Label);
+  var RunMethod = function RunMethod(children, methodName, enable) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var gameObject = children[i];
+      if (gameObject && gameObject[methodName]) {
+        gameObject[methodName](enable);
+      }
+    }
+  };
+
   var GetValue$19 = Phaser.Utils.Objects.GetValue;
   var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var CreateText = function CreateText(scene, config) {
@@ -21749,11 +21848,15 @@
       case 'bbcode':
         gameObject = new BBCodeText(scene, 0, 0, '', config);
         break;
+      case 'label':
+        gameObject = new SimpleLabel(scene, config);
+        break;
       case 'text':
       default:
         gameObject = new StatesText(scene, config);
         break;
     }
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -25678,6 +25781,7 @@
 
   var CreateImage = function CreateImage(scene, config) {
     var gameObject = new StatesImage(scene, config);
+    DecorateGameObject(gameObject, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -25689,12 +25793,12 @@
     var createText = GetValue$10(creators, 'text', CreateText);
     var createIcon = GetValue$10(creators, 'icon', CreateImage);
     var createAction = GetValue$10(creators, 'action', CreateImage);
-    if (createBackground) {
+    if (config.background !== null && createBackground) {
       config.background = createBackground(scene, config.background);
     } else {
       delete config.background;
     }
-    if (createText) {
+    if (config.text !== null && createText) {
       var wrapText = GetValue$10(config, 'wrapText', false);
       if (wrapText) {
         if (wrapText === true) {
@@ -25710,12 +25814,12 @@
     } else {
       delete config.text;
     }
-    if (createIcon && config.icon !== null) {
+    if (config.icon !== null && createIcon) {
       config.icon = createIcon(scene, config.icon);
     } else {
       delete config.icon;
     }
-    if (createAction && config.action !== null) {
+    if (config.action !== null && createAction) {
       config.action = createAction(scene, config.action);
     } else {
       delete config.action;
@@ -31126,46 +31230,6 @@
     return _createClass(TabPages);
   }(TabPages$1);
   Object.assign(TabPages.prototype, BindingTargetMethods$2, InputRowTitleWidthMethods);
-
-  var SimpleLabel = /*#__PURE__*/function (_Label) {
-    _inherits(SimpleLabel, _Label);
-    function SimpleLabel(scene, config, creators) {
-      var _this;
-      _classCallCheck(this, SimpleLabel);
-      config = BuildLabelConfig(scene, config, creators);
-      _this = _callSuper(this, SimpleLabel, [scene, config]);
-      _this.type = 'rexSimpleLabel';
-      return _this;
-    }
-    _createClass(SimpleLabel, [{
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        RunMethod(this.getChildren(), 'setActiveState', enable);
-        return this;
-      }
-    }, {
-      key: "setHoverState",
-      value: function setHoverState(enable) {
-        RunMethod(this.getChildren(), 'setHoverState', enable);
-        return this;
-      }
-    }, {
-      key: "setDisableState",
-      value: function setDisableState(enable) {
-        RunMethod(this.getChildren(), 'setDisableState', enable);
-        return this;
-      }
-    }]);
-    return SimpleLabel;
-  }(Label);
-  var RunMethod = function RunMethod(children, methodName, enable) {
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var gameObject = children[i];
-      if (gameObject && gameObject[methodName]) {
-        gameObject[methodName](enable);
-      }
-    }
-  };
 
   var CreateLabel = function CreateLabel(scene, config, creators) {
     var gameObject = new SimpleLabel(scene, config, creators);
