@@ -8,6 +8,9 @@ class SceneController extends Phaser.Scene {
         })
     }
     create() {
+        this.scene.add('0', Scene0);
+        this.scene.add('1', Scene1);
+
         var scene = this,
             btn0, btn1;
         var stateConfig = {
@@ -56,12 +59,6 @@ class SceneController extends Phaser.Scene {
 }
 
 class Scene0 extends Phaser.Scene {
-    constructor() {
-        super({
-            key: '0'
-        })
-    }
-
     preload() {
         console.log('scene-0: preload');
     }
@@ -73,12 +70,6 @@ class Scene0 extends Phaser.Scene {
 
 
 class Scene1 extends Phaser.Scene {
-    constructor() {
-        super({
-            key: '1'
-        })
-    }
-
     preload() {
         console.log('scene-1: preload');
     }
@@ -97,7 +88,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [SceneController, Scene0, Scene1],
+    scene: SceneController,
     plugins: {
         global: [{
             key: 'rexFSM',
