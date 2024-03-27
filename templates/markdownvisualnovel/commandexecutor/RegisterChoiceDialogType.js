@@ -70,7 +70,9 @@ var GenerateDefaultCreateGameObjectCallback = function (style) {
             height = 0
         } = {}
     ) {
-        var dialog = (new ConfirmDialog(scene, style))
+        var dialog = new ConfirmDialog(scene, style);
+
+        dialog
             .setMinSize(width, height)
             .setVisible(false)
 

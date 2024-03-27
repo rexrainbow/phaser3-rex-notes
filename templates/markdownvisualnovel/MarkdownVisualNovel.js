@@ -4,7 +4,9 @@ import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 class MarkdownVisualNovel extends MarkedEventSheets {
     constructor(scene, config = {}) {
         config.commandExecutor = CreateCommandExecutor(scene, config);
-        super(scene, config);
+        super(config);
+
+        // this.commandExecutor;
     }
 }
 

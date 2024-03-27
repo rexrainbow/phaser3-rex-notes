@@ -39,6 +39,8 @@ class Demo extends Phaser.Scene {
 
             title: { fontSize: '24px', },
 
+            icon: { radius: 20, color: COLOR_DARK },
+
             action: {
                 tint: COLOR_LIGHT,
                 alpha: 0
@@ -63,7 +65,7 @@ class Demo extends Phaser.Scene {
 
         var textBox = this.rexUI.add.simpleTextBox(style)
             .resetDisplayContent({
-                icon: null,
+                icon: true,
                 title: 'Title',
                 text: '',
                 action: 'nextPage'

@@ -328,8 +328,15 @@ module.exports = {
     'radiospinner': './templates/spinner/radio/Radio.js',
     'ringsspinner': './templates/spinner/rings/Rings.js',
     'spinner': './templates/spinner/spinner/Spinner.js',
-    // others
+
+    // markdown-visual-novel
+    'markdownvisualnovel': './templates/markdownvisualnovel/MarkdownVisualNovel.js',
+    'markdownvisualnovel-plugin': './templates/markdownvisualnovel/markdownvisualnovel-plugin.js',
+
+    // network
     'firebase': './plugins/firebase.js',
     'parse': './plugins/parse.js',
+
+    // other
     'bbcodelog': './plugins/bbcodelog.js',
 }

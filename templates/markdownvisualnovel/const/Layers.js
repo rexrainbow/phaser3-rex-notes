@@ -1,7 +1,7 @@
 // Layer name
-export const BGLayer = 'bg';
-export const GOLayer = 'gameObject';
-export const UILayer = 'ui';
+export const BGLayer = 'bgLayer';
+export const GOLayer = 'gameObjectLayer';
+export const UILayer = 'uiLayer';
 
 export const BGBottomLayer = `${BGLayer}Bottom`
 export const BGTopLayer = `${BGLayer}Top`

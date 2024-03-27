@@ -14,7 +14,8 @@ declare class EventSheetManager extends EventEmitter {
 
     readonly memory: { [key: string]: any };
 
-    setTaskHandlers(commandExecutor?: Object): this;
+    setCommandExecutor(commandExecutor?: Object): this;
+    commandExecutor: Object;
 
     addEventSheet(
         content: string,
