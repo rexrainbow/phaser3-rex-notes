@@ -9757,6 +9757,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layerManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLayerManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// layers: [&#39;layer0&#39;, &#39;layer1&#39;, ...]</span>
+<span class="w">    </span><span class="c1">// depth: undefined,</span>
+<span class="w">    </span><span class="c1">// rootLayer: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or</p>
@@ -9766,6 +9768,11 @@
 </code></pre></div>
 <ul>
 <li><code>layers</code> : Add layers by name string array.</li>
+<li><code>depth</code> : Set <code>depth</code> to each <a href="../layer/">layer</a> game object.<ul>
+<li><code>undefined</code> : Keep default <code>depth</code> value (<code>0</code>)</li>
+</ul>
+</li>
+<li><code>rootLayer</code> : Add all layer game objects created by this layer-manager into this root layer.</li>
 </ul>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">destroy</span><span class="p">()</span>

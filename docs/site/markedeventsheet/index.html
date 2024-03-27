@@ -11089,6 +11089,8 @@ line2
 <h4 id="create-command-executor-instance">Create command executor instance<a class="headerlink" href="#create-command-executor-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMarkedEventSheets&#39;</span><span class="p">).</span><span class="nx">addCommandExecutor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">layers</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="c1">// layerDepth: undefined,</span>
+<span class="w">    </span><span class="c1">// rootLayer: undefined,</span>
 
 <span class="w">    </span><span class="nx">log</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">delimiters</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;[]&#39;</span>
@@ -11113,6 +11115,11 @@ line2
 </code></pre></div>
 <ul>
 <li><code>layers</code> : Pre-create <a href="../layer/">layer</a> game object indexed by array of string names.</li>
+<li><code>layerDepth</code> : Set <code>depth</code> to each <a href="../layer/">layer</a> game object.<ul>
+<li><code>undefined</code> : Keep default <code>depth</code> value (<code>0</code>)</li>
+</ul>
+</li>
+<li><code>rootLayer</code> : Add all layer game objects created by layer-manager into this root layer.</li>
 <li><code>log</code> : Configuration of BBCodeLog<ul>
 <li><code>log.delimiters</code> : String of left-delimiter and right-delimiter.<ul>
 <li>A single string with 2 characters. Default value is <code>'[]'</code>.</li>

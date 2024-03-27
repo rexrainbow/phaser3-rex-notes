@@ -10,7 +10,22 @@ var newScene = scene.scene.add(key, sceneConfig, autoStart, data);
 ```
 
 - `key` : A unique key used to reference the Scene.
-- `sceneConfig` : The [config for the Scene](scene.md#configuration-of-scene), or a [scene](scene.md#es6-class) class.
+- `sceneConfig` : 
+    - A [scene](scene.md#es6-class) class
+    - A plain object
+        ```javascript
+        {
+            init(data) {},
+            preload() {},
+            create(data) {},
+            update(time, delta) {},
+
+            extend: {
+                data: {},
+                // ...
+            },
+        }
+        ```
 - `autoStart` : Set `true` to start scene immediately after added.
 - `data` : Optional data object. This will be set as `scene.settings.data` and passed to `scene.init`.
 
