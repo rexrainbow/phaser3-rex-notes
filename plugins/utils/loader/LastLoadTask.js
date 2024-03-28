@@ -28,7 +28,12 @@ class LastLoadTask extends Phaser.Events.EventEmitter {
                 }
             }
 
+            var runOnce = false;
             var onProgressComplete = function () {
+                if (runOnce) {
+                    return;
+                }
+                runOnce = true;
                 self.emit('shutdown');
                 loader.off('progress', onProgress);
                 successCallback();

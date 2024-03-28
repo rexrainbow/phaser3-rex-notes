@@ -271,7 +271,12 @@
               }
             }
           };
+          var runOnce = false;
           var onProgressComplete = function onProgressComplete() {
+            if (runOnce) {
+              return;
+            }
+            runOnce = true;
             self.emit('shutdown');
             loader.off('progress', onProgress);
             successCallback();
