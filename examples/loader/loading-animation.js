@@ -2,13 +2,8 @@ import phaser from 'phaser/src/phaser.js';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'Demo'
-        })
-    }
-
+// Extend scene from this BaseScene
+class BaseScene extends Phaser.Scene {
     create() {
         var hasLoadingTask = this._preload();
         if (hasLoadingTask) {
@@ -17,6 +12,26 @@ class Demo extends Phaser.Scene {
         } else {
             this._create();
         }
+    }
+
+    _preload() {
+        return 0;
+    }
+
+    _loadAnimation(onComplete) {
+        if (onComplete) {
+            onComplete();
+        }
+    }
+
+    _create() { }
+}
+
+class Demo extends BaseScene {
+    constructor() {
+        super({
+            key: 'Demo'
+        })
     }
 
     _preload() {
