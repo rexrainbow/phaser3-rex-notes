@@ -19,9 +19,11 @@ class BaseScene extends Phaser.Scene {
     }
 
     _loadAnimation(onComplete) {
-        if (onComplete) {
-            onComplete();
-        }
+        this.load.once('complete', function (loader) {
+            if (onComplete) {
+                onComplete();
+            }
+        });
     }
 
     _create() { }
