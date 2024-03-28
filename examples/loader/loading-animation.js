@@ -6,8 +6,8 @@ import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 class BaseScene extends Phaser.Scene {
     create() {
         this._preload();
-        if (this.load.list.size + this.load.inflight.size > 0) {
-            this._loadAnimation(this._create.bind(this));
+        if ((this.load.list.size + this.load.inflight.size) > 0) {
+            this._loadingAnimation(this._create.bind(this));
             this.load.start();
         } else {
             this._create();
@@ -16,7 +16,7 @@ class BaseScene extends Phaser.Scene {
 
     _preload() { }
 
-    _loadAnimation(onComplete) {
+    _loadingAnimation(onComplete) {
         this.load.once('complete', function (loader) {
             if (onComplete) {
                 onComplete();
@@ -26,6 +26,7 @@ class BaseScene extends Phaser.Scene {
 
     _create() { }
 }
+// ----
 
 class Demo extends BaseScene {
     constructor() {
@@ -55,8 +56,8 @@ class Demo extends BaseScene {
         });
     }
 
-    _loadAnimation(onComplete) {
-        console.log('_loadAnimation()')
+    _loadingAnimation(onComplete) {
+        console.log('_loadingAnimation()')
 
         // loading animation
         var spinner = this.rexSpinner.add.facebook({
@@ -70,14 +71,17 @@ class Demo extends BaseScene {
         });
 
         // loading progress bar
-        var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5)
-        this.load.on('progress', function (progress) {
+        var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5);
+        var onProgress = function (progress) {
             console.log('_loadAnimation().progress', progress)
 
             progressBar.scaleX = progress;
-        });
+        }
+        this.load.on('progress', onProgress);
 
         this.load.once('complete', function (loader) {
+            this.load.off('progress', onProgress);
+
             this.tweens.add({
                 targets: spinner,
                 scale: 0,
