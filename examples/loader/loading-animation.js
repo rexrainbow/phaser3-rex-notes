@@ -55,14 +55,6 @@ class Demo extends Phaser.Scene {
             scale: { start: 0, to: 1 },
             duration: 500
         });
-        this.load.once('complete', function (loader) {
-            this.tweens.add({
-                targets: spinner,
-                scale: 0,
-                duration: 500,
-                onComplete: onComplete
-            })
-        }, this);
 
         // loading progress bar
         var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5)
@@ -71,6 +63,21 @@ class Demo extends Phaser.Scene {
 
             progressBar.scaleX = progress;
         });
+
+        this.load.once('complete', function (loader) {
+            this.tweens.add({
+                targets: spinner,
+                scale: 0,
+                duration: 500,
+                onComplete: function () {
+                    spinner.destroy();
+                    progressBar.destroy();
+                    if (onComplete) {
+                        onComplete();
+                    }
+                }
+            })
+        }, this);
     }
 
     _create() {
