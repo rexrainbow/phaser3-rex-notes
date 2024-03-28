@@ -3,7 +3,7 @@ import PopUp from '../../popup.js';
 import ScaleDown from '../scale/ScaleDown.js';
 import NOOP from '../../utils/object/NOOP.js';
 import AwaitLoader from '../../awaitloader.js';
-import GetProgress from './GetProgress.js';
+import GetProgress from '../../utils/loader/GetProgress.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -62,7 +62,7 @@ class LoadingProgress extends OpenCloseTransition {
     }
 
     onProgress() {
-        var progress = GetProgress(this.scene);
+        var progress = GetProgress(this.scene, 1);
         this.progressCallback(this.parent, progress);
         this.emit('progress', progress);
         if (progress === 1) {

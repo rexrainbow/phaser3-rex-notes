@@ -1,4 +1,5 @@
 import AwaitLoader from '../awaitloader/AwaitLoaderCallback.js';
+import GetProgress from '../../utils/loader/GetProgress.js';
 
 var StartLoadingAnimationScene = function (scene, animationSceneKey, data, onLoadingComplete) {
     if (typeof (data) === 'function') {
@@ -14,9 +15,7 @@ var StartLoadingAnimationScene = function (scene, animationSceneKey, data, onLoa
 
     AwaitLoader.call(loader, function (successCallback, failureCallback) {
         var onProgress = function () {
-            var total = loader.totalToLoad - 1;
-            var remainder = loader.list.size + loader.inflight.size - 1;
-            var progress = 1 - (remainder / total);
+            var progress = GetProgress(loader, 1);
             if (progress === 1) {
                 if (!onLoadingComplete) {
                     onProgressComplete();
