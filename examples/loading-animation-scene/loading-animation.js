@@ -27,18 +27,21 @@ class Main extends Phaser.Scene {
             setTimeout(successCallback, 2500);
         });
 
-        this.plugins.get('rexLoadingAnimationScene').startScene(this, 'loading-animation',
+        this.plugins.get('rexLoadingAnimationScene').startScene(
+            this,
+            'loading-animation',
             function (successCallback, animationScene) {
-                animationScene.onClose(successCallback);
+                if (animationScene.onClose) {
+                    animationScene.onClose(successCallback);
+                }
+            },
+            function (progress, animationScene) {
+                if (animationScene.onProgress) {
+                    console.log(progress)
+                    animationScene.onProgress(progress);
+                }
             }
         );
-
-        var animationScene = this.scene.get('loading-animation')
-        this.load.on('progress', function (progress) {
-            if (animationScene.onProgress) {
-                animationScene.onProgress(progress)
-            }
-        });
     }
 
     create() {
@@ -83,7 +86,7 @@ class LoadingAnimation extends Phaser.Scene {
             })
         }
 
-        var progressBar = this.add.rectangle(200, 500, 200, 10, 0x880000).setOrigin(0, 0.5)
+        var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5)
         this.onProgress = function (progress) {
             progressBar.scaleX = progress;
         }

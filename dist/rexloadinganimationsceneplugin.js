@@ -94,6 +94,29 @@
     }
     return _assertThisInitialized(self);
   }
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+    return object;
+  }
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+        return desc.value;
+      };
+    }
+    return _get.apply(this, arguments);
+  }
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
@@ -196,34 +219,103 @@
     return this;
   };
 
-  var StartLoadingAnimationScene = function StartLoadingAnimationScene(scene, animationSceneKey, data, onLoadingComplete) {
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetLoader = function GetLoader(loader) {
+    if (IsSceneObject(loader)) {
+      var scene = loader;
+      return scene.load;
+    }
+    return loader;
+  };
+
+  var GetProgress = function GetProgress(loader, ignoreTaskCount) {
+    if (ignoreTaskCount === undefined) {
+      ignoreTaskCount = 0;
+    }
+    loader = GetLoader(loader);
+    var total = loader.totalToLoad - ignoreTaskCount;
+    var remainder = loader.list.size + loader.inflight.size - ignoreTaskCount;
+    var progress = 1 - remainder / total;
+    return progress;
+  };
+
+  var LastLoadTask = /*#__PURE__*/function (_Phaser$Events$EventE) {
+    _inherits(LastLoadTask, _Phaser$Events$EventE);
+    function LastLoadTask(scene) {
+      var _this;
+      _classCallCheck(this, LastLoadTask);
+      _this = _callSuper(this, LastLoadTask);
+      _this.scene = scene;
+      _this.boot();
+      return _this;
+    }
+    _createClass(LastLoadTask, [{
+      key: "boot",
+      value: function boot() {
+        var self = this;
+        var loader = this.scene.load;
+        loaderCallback.call(loader, function (successCallback, failureCallback) {
+          var onProgress = function onProgress() {
+            var progress = GetProgress(loader, 1);
+            self.emit('progress', progress);
+            if (progress === 1) {
+              var count = self.listenerCount('complete');
+              if (count === 0) {
+                onProgressComplete();
+              } else {
+                self.emit('complete', onProgressComplete);
+              }
+            }
+          };
+          var onProgressComplete = function onProgressComplete() {
+            self.emit('shutdown');
+            loader.off('progress', onProgress);
+            successCallback();
+            self.destroy();
+          };
+          loader.on('progress', onProgress);
+        });
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.scene = undefined;
+        _get(_getPrototypeOf(LastLoadTask.prototype), "destroy", this).call(this);
+      }
+    }]);
+    return LastLoadTask;
+  }(Phaser.Events.EventEmitter);
+
+  var NOOP = function NOOP() {
+    //  NOOP
+  };
+
+  var StartLoadingAnimationScene = function StartLoadingAnimationScene(scene, animationSceneKey, data, onLoadingComplete, onLoadingProgress) {
     if (typeof data === 'function') {
+      onLoadingProgress = onLoadingComplete;
       onLoadingComplete = data;
       data = undefined;
     }
+    if (!onLoadingProgress) {
+      onLoadingProgress = NOOP;
+    }
     var sceneManager = scene.scene;
-    var loader = scene.load;
     sceneManager.launch(animationSceneKey, data);
-    loaderCallback.call(loader, function (successCallback, failureCallback) {
-      var onProgress = function onProgress() {
-        var total = loader.totalToLoad - 1;
-        var remainder = loader.list.size + loader.inflight.size - 1;
-        var progress = 1 - remainder / total;
-        if (progress === 1) {
-          if (!onLoadingComplete) {
-            onProgressComplete();
-          } else {
-            var animationScene = sceneManager.get(animationSceneKey);
-            onLoadingComplete(onProgressComplete, animationScene);
-          }
-        }
-      };
-      var onProgressComplete = function onProgressComplete() {
-        sceneManager.stop(animationSceneKey);
-        loader.off('progress', onProgress);
-        successCallback();
-      };
-      loader.on('progress', onProgress);
+    var animationScene = sceneManager.get(animationSceneKey);
+    new LastLoadTask(scene).on('progress', function (progress) {
+      onLoadingProgress(progress, animationScene);
+    }).on('complete', function (onProgressComplete) {
+      if (!onLoadingComplete) {
+        onProgressComplete();
+      } else {
+        onLoadingComplete(onProgressComplete, animationScene);
+      }
+    }).on('shutdown', function () {
+      sceneManager.stop(animationSceneKey);
     });
   };
 

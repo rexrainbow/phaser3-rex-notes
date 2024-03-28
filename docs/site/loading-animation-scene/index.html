@@ -9694,8 +9694,8 @@
 <li>Will stop animationScene when preloading complete.</li>
 </ul>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingComplete</span><span class="p">);</span>
-<span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingComplete</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingProgress</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete, onLoadingProgress);</span>
 </code></pre></div>
 <ul>
 <li><code>onLoadingComplete</code> : Custom task 
@@ -9706,6 +9706,11 @@
 <li>Invoke <code>finishLoading()</code> method (later) to finish current loading progress.</li>
 </ul>
 </li>
+<li><code>onLoadingProgress</code> : Callback when loading progress is changing.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">,</span><span class="w"> </span><span class="nx">animationScene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 
 

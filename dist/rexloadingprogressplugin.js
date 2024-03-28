@@ -2380,10 +2380,21 @@
 
   Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
 
-  var GetProgress = function GetProgress(scene) {
-    var loader = scene.load;
-    var total = loader.totalToLoad - 1;
-    var remainder = loader.list.size + loader.inflight.size - 1;
+  var GetLoader = function GetLoader(loader) {
+    if (IsSceneObject(loader)) {
+      var scene = loader;
+      return scene.load;
+    }
+    return loader;
+  };
+
+  var GetProgress = function GetProgress(loader, ignoreTaskCount) {
+    if (ignoreTaskCount === undefined) {
+      ignoreTaskCount = 0;
+    }
+    loader = GetLoader(loader);
+    var total = loader.totalToLoad - ignoreTaskCount;
+    var remainder = loader.list.size + loader.inflight.size - ignoreTaskCount;
     var progress = 1 - remainder / total;
     return progress;
   };
@@ -2448,7 +2459,7 @@
     }, {
       key: "onProgress",
       value: function onProgress() {
-        var progress = GetProgress(this.scene);
+        var progress = GetProgress(this.scene, 1);
         this.progressCallback(this.parent, progress);
         this.emit('progress', progress);
         if (progress === 1) {

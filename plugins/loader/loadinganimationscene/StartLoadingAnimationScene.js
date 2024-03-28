@@ -1,39 +1,41 @@
-import AwaitLoader from '../awaitloader/AwaitLoaderCallback.js';
-import GetProgress from '../../utils/loader/GetProgress.js';
+import LastLoadTask from '../../utils/loader/LastLoadTask.js';
+import NOOP from '../../utils/object/NOOP.js';
 
-var StartLoadingAnimationScene = function (scene, animationSceneKey, data, onLoadingComplete) {
+var StartLoadingAnimationScene = function (
+    scene,
+    animationSceneKey, data,
+    onLoadingComplete,
+    onLoadingProgress
+) {
+
     if (typeof (data) === 'function') {
+        onLoadingProgress = onLoadingComplete;
         onLoadingComplete = data;
         data = undefined;
     }
 
+    if (!onLoadingProgress) {
+        onLoadingProgress = NOOP;
+    }
+
     var sceneManager = scene.scene;
-    var loader = scene.load;
-
     sceneManager.launch(animationSceneKey, data);
+    var animationScene = sceneManager.get(animationSceneKey);
 
-
-    AwaitLoader.call(loader, function (successCallback, failureCallback) {
-        var onProgress = function () {
-            var progress = GetProgress(loader, 1);
-            if (progress === 1) {
-                if (!onLoadingComplete) {
-                    onProgressComplete();
-                } else {
-                    var animationScene = sceneManager.get(animationSceneKey);
-                    onLoadingComplete(onProgressComplete, animationScene);
-                }
+    var lastLoadTask = (new LastLoadTask(scene))
+        .on('progress', function (progress) {
+            onLoadingProgress(progress, animationScene)
+        })
+        .on('complete', function (onProgressComplete) {
+            if (!onLoadingComplete) {
+                onProgressComplete();
+            } else {
+                onLoadingComplete(onProgressComplete, animationScene);
             }
-        }
-
-        var onProgressComplete = function () {
+        })
+        .on('shutdown', function () {
             sceneManager.stop(animationSceneKey);
-            loader.off('progress', onProgress);
-            successCallback();
-        }
-
-        loader.on('progress', onProgress);
-    });
+        })
 
 }
 

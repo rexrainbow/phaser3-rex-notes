@@ -85,8 +85,8 @@ scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKe
 or
 
 ```javascript
-scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, onLoadingComplete);
-// scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete);
+scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, onLoadingComplete, onLoadingProgress);
+// scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete, onLoadingProgress);
 ```
 
 - `onLoadingComplete` : Custom task 
@@ -96,3 +96,9 @@ scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKe
     }
     ```
     - Invoke `finishLoading()` method (later) to finish current loading progress.
+- `onLoadingProgress` : Callback when loading progress is changing.
+    ```javascript
+    function(progress, animationScene) {
+
+    }
+    ```

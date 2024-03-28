@@ -4,18 +4,25 @@ declare namespace StartLoadingAnimationScene {
     type OnLoadingCompleteCallback = (
         finishLoading: Function,
         animationScene: Phaser.Scene
-    ) => void
+    ) => void;
+
+    type OnLoadingProgressCallback = (
+        progress: number,
+        animationScene: Phaser.Scene
+    ) => void;
 }
 
 declare function StartLoadingAnimationScene(
     scene: Phaser.Scene,
     animationSceneKey: string,
     data?: Object,
-    onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback
+    onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback,
+    OnLoadingProgress?: StartLoadingAnimationScene.OnLoadingProgressCallback
 ): void;
 
 declare function StartLoadingAnimationScene(
     scene: Phaser.Scene,
     animationSceneKey: string,
-    onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback
+    onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback,
+    OnLoadingProgress?: StartLoadingAnimationScene.OnLoadingProgressCallback
 ): void;
