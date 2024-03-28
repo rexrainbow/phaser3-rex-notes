@@ -5,8 +5,8 @@ import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 // Extend scene from this BaseScene
 class BaseScene extends Phaser.Scene {
     create() {
-        var hasLoadingTask = this._preload();
-        if (hasLoadingTask) {
+        this._preload();
+        if (this.load.list.size + this.load.inflight.size > 0) {
             this._loadAnimation(this._create.bind(this));
             this.load.start();
         } else {
@@ -14,9 +14,7 @@ class BaseScene extends Phaser.Scene {
         }
     }
 
-    _preload() {
-        return 0;
-    }
+    _preload() { }
 
     _loadAnimation(onComplete) {
         this.load.once('complete', function (loader) {
