@@ -7,8 +7,8 @@ class BaseScene extends Phaser.Scene {
     create() {
         var hasLoadingTask = this._preload();
         if (hasLoadingTask) {
-            this.load.start();
             this._loadAnimation(this._create.bind(this));
+            this.load.start();
         } else {
             this._create();
         }
