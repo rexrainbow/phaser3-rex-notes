@@ -53,8 +53,6 @@ class Demo extends BaseScene {
         this.load.rexAwait(function (successCallback, failureCallback) {
             setTimeout(successCallback, 2500);
         });
-
-        return 1;
     }
 
     _loadAnimation(onComplete) {
