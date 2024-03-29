@@ -1866,6 +1866,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-style/</loc>
+         <lastmod>2024-03-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-tabpages/</loc>
          <lastmod>2024-03-29</lastmod>
          <changefreq>daily</changefreq>
