@@ -1,10 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import StatesBBCodeText from '../../templates/ui/statesbbcodetext/StatesBBCodeText.js';
-
-const COLOR_MAIN = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,27 +9,26 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() { }
+    preload() {
+        this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
+    }
 
     create() {
         var textStyle = {
-            fontSize: 24,
-            padding: { left: 10, right: 10, top: 10, bottom: 10 },
+            font: 'gothic',
 
-            backgroundColor: '#260e04',
-            'active.backgroundColor': '#7b5e57',
+            fontSize: 30,
+            'active.fontSize': 36,
 
-            color: '#FFFFFF',
-            'active.color': '#000000',
+            tint: 0xffffff,
+            'active.tint': 0xff0000,
 
-            backgroundStrokeLineWidth: 0,
-            'hover.backgroundStrokeColor': '#ffffff',
-            'hover.backgroundStrokeLineWidth': 2,
+            letterSpacing: 0,
+            'active.letterSpacing': -2,
         }
 
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,
-            width: 200,
             orientation: 'y',
 
             buttons: [
@@ -67,12 +61,8 @@ class Demo extends Phaser.Scene {
 }
 
 var createButton = function (scene, text, textStyle) {
-    var textObject = new StatesBBCodeText(scene, textStyle);
-    scene.add.existing(textObject);
-
     return scene.rexUI.add.label({
-        text: textObject.setText(text),
-        expandTextWidth: true,
+        text: scene.rexUI.add.statesBitmapText(textStyle).setText(text),
         space: { left: 10, right: 10, top: 10, bottom: 10 },
         name: text
     });

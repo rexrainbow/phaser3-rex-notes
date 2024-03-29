@@ -27,6 +27,7 @@ import Cover from './cover/Cover';
 import InputText from './inputtext/InputText';
 import { FileChooser } from './filechooser/FileChooser';
 import FileDropZone from './filedropzone/FileDropZone';
+import StatesBitmapText from './statesbitmaptext/StatesBitmapText';
 import StatesImage from './statesimage/StatesImage';
 import StateNinePatch from './statesninepatch/StatesNinePatch';
 import StatesNineSlice from './statesnineslice/StatesNineSlice';
@@ -151,6 +152,7 @@ export {
     InputText,
     FileChooser,
     FileDropZone,
+    StatesBitmapText,
     StatesImage,
     StateNinePatch,
     StatesNineSlice,

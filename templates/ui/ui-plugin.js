@@ -37,6 +37,7 @@ import StatesRoundRectangleFactory from './statesroundrectangle/Factory.js';
 import StatesNineSliceFactory from './statesnineslice/Factory.js';
 import StatesNinePatchFactory from './statesninepatch/Factory.js';
 import StatesTextFactory from './statestext/Factory.js';
+import StatesBitmapTextFactory from './statesbitmaptext/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import ContainerFactory from './container/Factory.js';

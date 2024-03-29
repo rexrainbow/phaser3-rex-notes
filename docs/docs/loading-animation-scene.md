@@ -21,7 +21,7 @@ Start loading animation scene, stop this scene when loading complete.
     ```javascript
     scene.load.plugin('rexloadinganimationsceneplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexloadinganimationsceneplugin.min.js', true);
     ```
-- Start loading animation scene
+- In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     ```javascript
     scene.plugins.get('rexloadinganimationsceneplugin').startScene(scene, animationSceneKey);
     ```
@@ -51,7 +51,7 @@ Start loading animation scene, stop this scene when loading complete.
     };
     var game = new Phaser.Game(config);
     ```
-- Start loading animation scene
+- In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     ```javascript
     scene.plugins.get('rexLoadingAnimationScene').startScene(config);
     ```
@@ -67,12 +67,15 @@ Start loading animation scene, stop this scene when loading complete.
     ```javascript
     import StartLoadingAnimationScene from 'phaser3-rex-plugins/plugins/loadinganimationscene.js';
     ```
-- Start loading animation scene
+- In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     ```javascript
     StartLoadingAnimationScene(config);
     ```
 
 ### Start loading animation scene
+
+In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
+
 
 ```javascript
 scene.plugins.get('rexLoadingAnimationScene').startScene({
@@ -86,6 +89,7 @@ scene.plugins.get('rexLoadingAnimationScene').startScene({
 
 - `mainScene` : Scene instaance of main scene.
 - `animationScene` : Scene instance or scene-key of animation scene.
+    - This animation scene will be stopped wheen main scene's loading complete totally.
 - `onLoadingComplete` : Custom task invoked when loading complete.
     ```javascript
     function(finishLoading, animationScene) {

@@ -415,10 +415,10 @@ var label = scene.rexUI.add.simpleLabel({
         'disable.strokeThickness': undefined,
     }
    ```
-- [BBCodetext](bbcodetext.md#add-text-object)
+- [BBCodetext](bbcodetext.md#add-text-object), if set `$type` to `'bbcodetext'`.
    ```javascript
     {
-        // $type: 'bbcodetext', // or 'bbcode'
+        $type: 'bbcodetext', // or 'bbcode'
 
         fontFamily: 'Courier',
         fontSize: '16px',
@@ -461,14 +461,78 @@ var label = scene.rexUI.add.simpleLabel({
         // },
     }
    ```
-- Style of bitmaptext
+- Style of statesBitmapText, if set `$type` to `'bitmaptext'`.
     ```javascript
     {
         // $type: 'bitmaptext',  // or 'bitmap'
-        key: '',
-        size: undefined,
-        color: undefined,
+
+        font: '',
+        fontSize: undefined,
+        align: undefined,
+        tint: undefined,
+        letterSpacing: undefined,
+        lineSpacing: undefined,
+
+        // Style override in active state
+        'active.font': undefined,
+        'active.fontSize': undefined,
+        'active.tint': undefined,
+        'active.letterSpacing': undefined,
+        'active.lineSpacing': undefined,
+
+        // Style override in hover state
+        'hover.font': undefined,
+        'hover.fontSize': undefined,
+        'hover.tint': undefined,
+        'hover.letterSpacing': undefined,
+        'hover.lineSpacing': undefined,
+
+        // Style override in disable state
+        'disable.font': undefined,
+        'disable.fontSize': undefined,
+        'disable.tint': undefined,
+        'disable.letterSpacing': undefined,
+        'disable.lineSpacing': undefined,
+
     }
+    ```
+- Style of simpleLabel, if set `$type` to `'label'`.
+    ```javascript
+    {
+        $type: 'label',
+
+        // width: undefined,
+        // height: undefined,
+    
+        orientation: 0,
+        // rtl: false,
+    
+        background: backgroundStyle,
+    
+        icon: iconStyle,
+        
+        // iconMask: false,
+        // squareFitIcon: false,
+        // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
+    
+        text: testStyle,
+        // wrapText: false,
+        // expandTextWidth: false,
+        // expandTextHeight: false,
+    
+        action: actionStyle,
+    
+        // squareFitAction: false,
+        // actionMask: false,
+        // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
+    
+        space: {
+            left: 0, right: 0, top: 0, bottom:0, 
+            icon: 0, text: 0
+        }
+    
+        align: undefined,  // 'left' | 'top' | 'right' | 'bottom' | 'center
+    }    
     ```
 
 ### Custom class
@@ -508,7 +572,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 Override/restore properties of background game object.
 
 !!! note 
-    Assume that background game object is [states round rectangle game object](ui-statesroundrectangle.md).)
+    Assume that background, icon, text, action game objects are [states round rectangle game object](ui-statesroundrectangle.md).)
 
 #### Active state
 

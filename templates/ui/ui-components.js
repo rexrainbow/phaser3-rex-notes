@@ -31,6 +31,7 @@ import Cover from './cover/Cover.js';
 import InputText from './inputtext/InputText.js';
 import { FileChooser } from './filechooser/FileChooser.js';
 import FileDropZone from './filedropzone/FileDropZone.js';
+import StatesBitmapText from './statesbitmaptext/StatesBitmapText.js';
 import StatesImage from './statesimage/StatesImage.js';
 import StatesNinePatch from './statesninepatch/StatesNinePatch.js';
 import StatesNineSlice from './statesnineslice/StatesNineSlice.js';
@@ -153,6 +154,7 @@ export {
     InputText,
     FileChooser,
     FileDropZone,
+    StatesBitmapText,
     StatesImage,
     StatesNinePatch,
     StatesNineSlice,

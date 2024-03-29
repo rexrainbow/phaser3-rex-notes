@@ -78,6 +78,7 @@ import SkewFactory from './skew/Factory';
 import SliderFactory from './slider/Factory';
 import SpaceFactory from './space/Factory';
 import SplitPanelsFactory from './splitpanels/Factory';
+import StatesBitmapTextFactory from './statesbitmaptext/Factory';
 import StatesImageFactory from './statesimage/Factory';
 import StatesNinePatchFactory from './statesninepatch/Factory.js';
 import StatesNineSliceFactory from './statesnineslice/Factory';
@@ -203,6 +204,7 @@ declare class Factories {
     slider: typeof SliderFactory;
     space: typeof SpaceFactory;
     splitPanels: typeof SplitPanelsFactory;
+    statesBitmapText: typeof StatesBitmapTextFactory
     statesImage: typeof StatesImageFactory;
     statesNinePatch: typeof StatesNinePatchFactory;
     statesNineSlice: typeof StatesNineSliceFactory;
@@ -349,6 +351,7 @@ import SkewClass from './skew/Skew';
 import SliderClass from './slider/Slider';
 import SpaceClass from './space/Space';
 import SplitPanelsClass from './splitpanels/SplitPanels';
+import StatesBitmapTextClass from './statesbitmaptext/StatesBitmapText';
 import StatesImageClass from './statesimage/StatesImage';
 import StatesNinePatchClass from './statesninepatch/StatesNinePatch';
 import StatesNineSliceClass from './statesnineslice/StatesNineSlice';
@@ -454,6 +457,7 @@ declare namespace UIPlugin {
     type Swipe = SwipeClass;
     type Space = SpaceClass;
     type SplitPanels = SplitPanelsClass;
+    type StatesBitmapText = StatesBitmapTextClass;
     type StatesImage = StatesImageClass;
     type StateNinePatch = StatesNinePatchClass;
     type StatesNine = StatesNineSliceClass;
