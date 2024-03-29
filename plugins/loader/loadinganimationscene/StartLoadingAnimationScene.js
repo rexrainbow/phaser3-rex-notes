@@ -2,7 +2,7 @@ import LastLoadTask from '../../utils/loader/LastLoadTask.js';
 import NOOP from '../../utils/object/NOOP.js';
 
 var StartLoadingAnimationScene = function (
-    scene,
+    mainScene,
     animationSceneKey, data,
     onLoadingComplete,
     onLoadingProgress
@@ -18,11 +18,13 @@ var StartLoadingAnimationScene = function (
         onLoadingProgress = NOOP;
     }
 
-    var sceneManager = scene.scene;
-    sceneManager.launch(animationSceneKey, data);
-    var animationScene = sceneManager.get(animationSceneKey);
+    // Don't launch animation scene if it has been started
+    if (mainScene.scene.getStatus(animationSceneKey) < Phaser.Scenes.START) { // Phaser.Scenes.START = 2
+        mainScene.scene.launch(animationSceneKey, data);
+    }
 
-    var lastLoadTask = (new LastLoadTask(scene))
+    var animationScene = mainScene.scene.get(animationSceneKey);
+    var lastLoadTask = (new LastLoadTask(mainScene))
         .on('progress', function (progress) {
             onLoadingProgress(progress, animationScene)
         })
@@ -34,7 +36,7 @@ var StartLoadingAnimationScene = function (
             }
         })
         .on('shutdown', function () {
-            sceneManager.stop(animationSceneKey);
+            animationScene.stop();
         })
 
 }
