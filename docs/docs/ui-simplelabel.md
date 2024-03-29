@@ -92,54 +92,20 @@ var label = scene.rexUI.add.simpleLabel({
     orientation: 0,
     // rtl: false,
 
-    // States-Round-rectangle background
-    background: {...},
+    background: backgroundStyle,
 
-    // Nine-slice background
-    background: {
-        key: ,
-        frame: ,
-        leftWidth: , 
-        rightWidth: ,
-        topHeight: , 
-        bottomHeight: 
-    }
-
-    // States-Image
-    icon: {...},
+    icon: iconStyle,
     
     // iconMask: false,
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
-    // States-Text
-    text: {...},
-    // text: {
-    //     $type: 'text',
-    //     ...
-    // }
-
-    // Create bbcodetext
-    // text: {
-    //     $type: 'bbcodetext',
-    //     ...
-    // },
-
-    // Create bitmaptext
-    // text: {
-    //     $type: 'bitmaptext',
-    //     key: '',
-    //     size: undefined,
-    //     color: undefined,
-    // },
-
+    text: testStyle,
     // wrapText: false,
-
     // expandTextWidth: false,
     // expandTextHeight: false,
 
-    // States-Image
-    action: {...},
+    action: actionStyle,
 
     // squareFitAction: false,
     // actionMask: false,
@@ -159,51 +125,12 @@ var label = scene.rexUI.add.simpleLabel({
 }, creators);
 ```
 
-- `background` : 
-    - [States-round-rectangle](ui-statesroundrectangle.md)
-    - [Nine-slice](nineslice.md)
-        ```javascript
-        {
-            key: ,
-            frame: ,
-            leftWidth: , 
-            rightWidth: ,
-            topHeight: , 
-            bottomHeight: 
-        }
-        ```
-- `icon` : 
-    - [States-Image](ui-statesimage.md#create-image-object)
-- `text` : 
-    - [States-Text](ui-statestext.md#create-text-object), default type of game object.
-       ```javascript
-       {
-           // $type: 'text',
-           // more style setting...
-       }
-       ```
-    - [Style of bbcodetext](bbcodetext.md#add-text-object)
-       ```javascript
-       {
-           // $type: 'bbcodetext',  // or 'bbcode'
-           // more style setting...
-       }
-       ```
-    - Style of bitmaptext
-        ```javascript
-        {
-            // $type: 'bitmaptext',  // or 'bitmap'
-            key: '',
-            size: undefined,
-            color: undefined,
-        }
-        ```
+- `background`, `icon`, `action` : See [Style of Background, Icon, Action](#style-of-background-icon-action)
+- `text` : See [Style of Text](#style-of-text)
 - `wrapText` : Enable WrapExpandText feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
-- `action` : 
-    - [States-Image](ui-statesimage.md#create-image-object)
 - `creators` : A series of callback to create background, text, icon, action icon game object.
     - `creators.background` : Callback to create background. Default behavior is creating a [states round rectangle](ui-statesroundrectangle.md).
         ```javascript
@@ -229,6 +156,320 @@ var label = scene.rexUI.add.simpleLabel({
             return gameObject;
         }
         ```
+
+#### Style of Background, Icon, Action
+
+- Create [States-round-rectangle](ui-statesroundrectangle.md), if style hs `color`, or `strokeColor` key. Default type of Background.
+    ```javascript
+    {
+        // $type: 'roundRectangle',
+
+        // width: 0,
+        // height: 0,
+
+        color: 0xffffff,
+        // alpha: 1,
+        strokeColor: 0xffffff,
+        // strokeAlpha: 1,
+        // strokeWidth: 2,
+        // radius: 0,
+        
+        // Style override in active state
+        // 'active.color': undefined,
+        // 'active.alpha': undefined,
+        // 'active.strokeColor': undefined,
+        // 'active.strokeAlpha': undefined,
+        // 'active.strokeWidth': undefined,
+        // 'active.radius': undefined,
+        // 'active.xxx': ...
+    
+        // Style override in hover state
+        // 'hover.color': undefined,
+        // 'hover.alpha': undefined,
+        // 'hover.strokeColor': undefined,
+        // 'hover.strokeAlpha': undefined,
+        // 'hover.strokeWidth': undefined,
+        // 'hover.radius': undefined,
+        // 'hover.xxx': ...
+    
+        // Style override in disable state
+        // 'disable.color': undefined,
+        // 'disable.alpha': undefined,
+        // 'disable.strokeColor': undefined,
+        // 'disable.strokeAlpha': undefined,
+        // 'disable.strokeWidth': undefined,
+        // 'disable.radius': undefined,
+        // 'disable.xxx': ...
+    }
+    ```
+- Create [States-image](ui-statesimage.md), if style has `key` key. Default type of Icon, Action
+    ```javascript
+    {
+        // $type: 'image',
+
+        key:
+        // frame:
+        // tint: 0xffffff,
+        // alpha: 1,
+        // scale: 1,
+    
+        // effects: true,
+
+        // Style override in active state
+        // 'active.key': undefined,
+        // 'active.frame': undefined,
+        // 'active.tint': undefined,
+        // 'active.alpha': undefined,
+        // 'active.scale': undefined,
+        // 'active.glowColor': null,
+        // ...
+    
+        // Style override in hover state
+        // 'hover.key': undefined,
+        // 'hover.frame': undefined,
+        // 'hover.tint': undefined,
+        // 'hover.alpha': undefined,
+        // 'hover.scale': undefined,
+        // 'hover.glowColor': null,
+        // ...
+    
+        // Style override in disable state
+        // 'disable.key': undefined,
+        // 'disable.frame': undefined,
+        // 'disable.tint': undefined,
+        // 'disable.alpha': undefined,
+        // 'disable.scale': undefined,
+        // 'disable.glowColor': null,
+        // ...    
+    }
+    ```
+- Create [Nine-slice](nineslice.md), if style has `leftWidth` key.
+    ```javascript
+    {
+        // $type: 'nineSlice',
+
+        key: ,
+        frame: ,
+        leftWidth: , 
+        rightWidth: ,
+        topHeight: , 
+        bottomHeight: ,
+        // tint: 0xffffff,
+        // alpha: 1,
+        // scale: 1,
+    
+        // effects: true,
+
+        // Style override in active state
+        // 'active.key': undefined,
+        // 'active.frame': undefined,
+        // 'active.tint': undefined,
+        // 'active.alpha': undefined,
+        // 'active.scale': undefined,
+        // 'active.glowColor': null,
+        // ...
+    
+        // Style override in hover state
+        // 'hover.key': undefined,
+        // 'hover.frame': undefined,
+        // 'hover.tint': undefined,
+        // 'hover.alpha': undefined,
+        // 'hover.scale': undefined,
+        // 'hover.glowColor': null,
+        // ...
+    
+        // Style override in disable state
+        // 'disable.key': undefined,
+        // 'disable.frame': undefined,
+        // 'disable.tint': undefined,
+        // 'disable.alpha': undefined,
+        // 'disable.scale': undefined,
+        // 'disable.glowColor': null,
+        // ...  
+    }
+    ```
+- Create [Nine-patch](ninepatch.md), if style has `leftWidth` and `stretchMode` key.
+    ```javascript
+    {
+        // $type: 'nineSlice',
+
+        key: ,
+        frame: ,
+        leftWidth: , 
+        rightWidth: ,
+        topHeight: , 
+        bottomHeight: ,
+        stretchMode: ,
+        // tint: 0xffffff,
+        // alpha: 1,
+        // scale: 1,
+    
+        // effects: true,
+
+        // Style override in active state
+        // 'active.key': undefined,
+        // 'active.frame': undefined,
+        // 'active.tint': undefined,
+        // 'active.alpha': undefined,
+        // 'active.scale': undefined,
+        // 'active.glowColor': null,
+        // ...
+    
+        // Style override in hover state
+        // 'hover.key': undefined,
+        // 'hover.frame': undefined,
+        // 'hover.tint': undefined,
+        // 'hover.alpha': undefined,
+        // 'hover.scale': undefined,
+        // 'hover.glowColor': null,
+        // ...
+    
+        // Style override in disable state
+        // 'disable.key': undefined,
+        // 'disable.frame': undefined,
+        // 'disable.tint': undefined,
+        // 'disable.alpha': undefined,
+        // 'disable.scale': undefined,
+        // 'disable.glowColor': null,
+        // ...  
+    }
+    ```
+
+#### Style of Text
+
+- [States-Text](ui-statestext.md#create-text-object), default type of Text.
+   ```javascript
+    {
+        // $type: 'text',
+
+        // Normal text-style
+        fontFamily: 'Courier',
+        fontSize: '16px',
+        fontStyle: '',
+        backgroundColor: null,
+        color: '#fff',
+        stroke: '#fff',
+        strokeThickness: 0,
+        shadow: {
+            offsetX: 0,
+            offsetY: 0,
+            color: '#000',
+            blur: 0,
+            stroke: false,
+            fill: false
+        },
+        align: 'left',  // 'left'|'center'|'right'|'justify'
+        padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+        },
+        maxLines: 0,
+        lineSpacing: 0,
+        fixedWidth: 0,
+        fixedHeight: 0,
+        rtl: false,
+        testString: '|MÉqgy',
+        wordWrap: {
+            width: null,
+            callback: null,
+            callbackScope: null,
+            useAdvancedWrap: false
+        },
+        metrics: false,
+        // metrics: {
+        //     ascent: 0,
+        //     descent: 0,
+        //     fontSize: 0
+        // },
+        
+        // Style override in active state
+        'active.fontFamily': undefined,
+        'active.fontSize': undefined,
+        'active.fontStyle': undefined,
+        'active.backgroundColor': undefined,
+        'active.color': undefined,
+        'active.fill': undefined,
+        'active.stroke': undefined,
+        'active.strokeThickness': undefined,
+        
+        // Style override in hover state
+        'hover.fontFamily': undefined,
+        'hover.fontSize': undefined,
+        'hover.fontStyle': undefined,
+        'hover.backgroundColor': undefined,
+        'hover.color': undefined,
+        'hover.fill': undefined,
+        'hover.stroke': undefined,
+        'hover.strokeThickness': undefined,
+        
+        // Style override in disable state
+        'disable.fontFamily': undefined,
+        'disable.fontSize': undefined,
+        'disable.fontStyle': undefined,
+        'disable.backgroundColor': undefined,
+        'disable.color': undefined,
+        'disable.fill': undefined,
+        'disable.stroke': undefined,
+        'disable.strokeThickness': undefined,
+    }
+   ```
+- [BBCodetext](bbcodetext.md#add-text-object)
+   ```javascript
+    {
+        // $type: 'bbcodetext', // or 'bbcode'
+
+        fontFamily: 'Courier',
+        fontSize: '16px',
+        fontStyle: '',
+        backgroundColor: null,
+        color: '#fff',
+        stroke: '#fff',
+        strokeThickness: 0,
+        shadow: {
+            offsetX: 0,
+            offsetY: 0,
+            color: '#000',
+            blur: 0,
+            stroke: false,
+            fill: false
+        },
+        align: 'left',  // 'left'|'center'|'right'|'justify'
+        padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+        },
+        maxLines: 0,
+        lineSpacing: 0,
+        fixedWidth: 0,
+        fixedHeight: 0,
+        rtl: false,
+        testString: '|MÉqgy',
+        wrap: {
+            mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'|3|'mix'
+            width: null
+        },
+        // wordWrap: { width: 0 },   // Compatible with Text game object
+        metrics: false,
+        // metrics: {
+        //     ascent: 0,
+        //     descent: 0,
+        //     fontSize: 0
+        // },
+    }
+   ```
+- Style of bitmaptext
+    ```javascript
+    {
+        // $type: 'bitmaptext',  // or 'bitmap'
+        key: '',
+        size: undefined,
+        color: undefined,
+    }
+    ```
 
 ### Custom class
 
