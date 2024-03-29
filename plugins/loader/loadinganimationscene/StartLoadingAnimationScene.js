@@ -36,7 +36,7 @@ var StartLoadingAnimationScene = function (
             }
         })
         .on('shutdown', function () {
-            animationScene.stop();
+            animationScene.scene.stop();
         })
 
 }
