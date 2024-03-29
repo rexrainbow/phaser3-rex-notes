@@ -126,8 +126,8 @@ var label = scene.rexUI.add.simpleLabel({
 ```
 
 - `background` : Create round-rectangle, nine-slice, or image for background. See [Style of Background](ui-style.md#style-of-background)
-- `text` : Create text, BBCodeText, BitmapText, or SimpleLabel for text. See [Style of Text](#style-of-text)
-- `icon`, `action` : Create image, nine-slice, or round-rectangle for image. See [Style of Icon, Action](ui-style.md#style-of-image)
+- `text` : Create text, BBCodeText, BitmapText, or SimpleLabel for text. See [Style of Text](ui-style.md#style-of-text)
+- `icon`, `action` : Create image, nine-slice, or round-rectangle for image. See [Style of Image](ui-style.md#style-of-image)
 - `wrapText` : Enable WrapExpandText feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
