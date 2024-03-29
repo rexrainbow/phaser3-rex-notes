@@ -17466,7 +17466,7 @@
     return gameObject;
   };
 
-  var Style$2 = /*#__PURE__*/function (_ComponentBase) {
+  var Style$3 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     function Style(gameObject, style) {
       var _this;
@@ -17549,7 +17549,7 @@
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
-      _this.style = new Style$2(_assertThisInitialized(_this), config);
+      _this.style = new Style$3(_assertThisInitialized(_this), config);
       config.style = _this.style;
       _this.addStyleManager(config);
       delete config.style;
@@ -17559,7 +17559,7 @@
   }(PhaserNineSlice);
   Object.assign(StatesNineSlice.prototype, HelperMethods);
 
-  var Style$1 = /*#__PURE__*/function (_ComponentBase) {
+  var Style$2 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     function Style(gameObject, style) {
       var _this;
@@ -17638,7 +17638,7 @@
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
-      _this.style = new Style$1(_assertThisInitialized(_this), config);
+      _this.style = new Style$2(_assertThisInitialized(_this), config);
       config.style = _this.style;
       _this.addStyleManager(config);
       delete config.style;
@@ -18126,7 +18126,7 @@
   };
   Object.assign(NinePatch.prototype, Methods$2);
 
-  var Style = /*#__PURE__*/function (_ComponentBase) {
+  var Style$1 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     function Style(gameObject, style) {
       var _this;
@@ -18198,7 +18198,7 @@
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
-      _this.style = new Style(_assertThisInitialized(_this), config);
+      _this.style = new Style$1(_assertThisInitialized(_this), config);
       config.style = _this.style;
       _this.addStyleManager(config);
       delete config.style;
@@ -22106,6 +22106,116 @@
     return BBCodeText;
   }(Text);
 
+  var Style = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Style, _ComponentBase);
+    function Style(gameObject, style) {
+      var _this;
+      _classCallCheck(this, Style);
+      _this = _callSuper(this, Style, [gameObject]);
+      // this.parent = gameObject;
+
+      return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
+    }
+    _createClass(Style, [{
+      key: "get",
+      value: function get(target, prop) {
+        if (HasProperty(target, prop)) {
+          return target[prop];
+        }
+        var gameObject = target.parent;
+        if (HasProperty(gameObject, prop)) {
+          return gameObject[prop];
+        }
+      }
+    }, {
+      key: "set",
+      value: function set(target, prop, value) {
+        if (HasProperty(target, prop)) {
+          target[prop] = value;
+        } else if (HasProperty(target.parent, prop)) {
+          target.parent[prop] = value;
+        }
+        return true;
+      }
+    }, {
+      key: "key",
+      get: function get() {
+        return this.parent.texture.key;
+      },
+      set: function set(value) {
+        this.parent.setTexture(value, this.frame);
+      }
+    }, {
+      key: "fontSize",
+      get: function get() {
+        return this.parent.fontSize;
+      },
+      set: function set(value) {
+        this.parent.setFontSize(value);
+      }
+    }, {
+      key: "tint",
+      get: function get() {
+        return this.parent.tintTopLeft;
+      },
+      set: function set(value) {
+        this.parent.setTint(value);
+      }
+    }, {
+      key: "letterSpacing",
+      get: function get() {
+        return this.parent.letterSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLetterSpacing(value);
+      }
+    }, {
+      key: "lineSpacing",
+      get: function get() {
+        return this.parent.lineSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLineSpacing(value);
+      }
+    }]);
+    return Style;
+  }(ComponentBase);
+
+  var PhaserBitmapText = Phaser.GameObjects.BitmapText;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var StatesBitmapText = /*#__PURE__*/function (_PhaserBitmapText) {
+    _inherits(StatesBitmapText, _PhaserBitmapText);
+    function StatesBitmapText(scene, config) {
+      var _this;
+      _classCallCheck(this, StatesBitmapText);
+      if (config === undefined) {
+        config = {};
+      }
+      var x = GetValue$9(config, 'x', 0);
+      var y = GetValue$9(config, 'y', 0);
+      var font = GetValue$9(config, 'font', '');
+      var size = GetValue$9(config, 'fontSize', false);
+      var align = GetValue$9(config, 'align', 0);
+      var tint = GetValue$9(config, 'tint');
+      _this = _callSuper(this, StatesBitmapText, [scene, x, y, font, '', size, align]);
+      _this.type = 'rexStatesBitmapText';
+      if (tint !== undefined) {
+        _this.setTint(tint);
+      }
+      var effectConfig = GetValue$9(config, 'effects', true);
+      if (effectConfig) {
+        AddEffectProperties(_assertThisInitialized(_this), effectConfig);
+      }
+      _this.style = new Style(_assertThisInitialized(_this), config);
+      config.style = _this.style;
+      _this.addStyleManager(config);
+      delete config.style;
+      return _this;
+    }
+    return _createClass(StatesBitmapText);
+  }(PhaserBitmapText);
+  Object.assign(StatesBitmapText.prototype, HelperMethods);
+
   var SimpleLabel = /*#__PURE__*/function (_Label) {
     _inherits(SimpleLabel, _Label);
     function SimpleLabel(scene, config, creators) {
@@ -22146,8 +22256,6 @@
     }
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var CreateText = function CreateText(scene, config) {
     var gameObjectType;
     if (config) {
@@ -22163,16 +22271,7 @@
     switch (gameObjectType) {
       case 'bitmaptext':
       case 'bitmap':
-        var key = GetValue$9(config, 'key');
-        var size = GetValue$9(config, 'size');
-        if (size === undefined) {
-          size = GetValue$9(config, 'fontSize');
-        }
-        gameObject = new PhaserBitmapText(scene, 0, 0, key, '', size);
-        var color = GetValue$9(config, 'color');
-        if (color !== undefined) {
-          gameObject.setTint(color);
-        }
+        gameObject = new StatesBitmapText(scene, config);
         break;
       case 'bbcodetext':
       case 'bbcode':

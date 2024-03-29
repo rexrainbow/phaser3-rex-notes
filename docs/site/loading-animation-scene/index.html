@@ -9642,7 +9642,7 @@
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexloadinganimationsceneplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexloadinganimationsceneplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Start loading animation scene
+<li>In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexloadinganimationsceneplugin&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">);</span>
 </code></pre></div></li>
 <li>This plugin will also install <a href="../awaitloader/">AwaitLoader</a>.</li>
@@ -9669,7 +9669,7 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Start loading animation scene
+<li>In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>This plugin will also install <a href="../awaitloader/">AwaitLoader</a>.</li>
@@ -9682,11 +9682,12 @@
 <li>Import class
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">StartLoadingAnimationScene</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/loadinganimationscene.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Start loading animation scene
+<li>In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.
     <div class="highlight"><pre><span></span><code><span class="nx">StartLoadingAnimationScene</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="start-loading-animation-scene">Start loading animation scene<a class="headerlink" href="#start-loading-animation-scene" title="Permanent link">&para;</a></h3>
+<p>In mainScene, start loading animation scene, or in animation scene, monitor loading status of mainScene.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">mainScene</span><span class="o">:</span><span class="w"> </span>
 <span class="w">    </span><span class="nx">animationScene</span><span class="o">:</span>
@@ -9697,7 +9698,10 @@
 </code></pre></div>
 <ul>
 <li><code>mainScene</code> : Scene instaance of main scene.</li>
-<li><code>animationScene</code> : Scene instance or scene-key of animation scene.</li>
+<li><code>animationScene</code> : Scene instance or scene-key of animation scene.<ul>
+<li>This animation scene will be stopped wheen main scene's loading complete totally.</li>
+</ul>
+</li>
 <li><code>onLoadingComplete</code> : Custom task invoked when loading complete.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">finishLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">animationScene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// finishLoading();</span>

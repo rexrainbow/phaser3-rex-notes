@@ -58138,7 +58138,7 @@
   }(DOMElement);
   Object.assign(FileDropZone.prototype, Methods$8);
 
-  var Style$2 = /*#__PURE__*/function (_ComponentBase) {
+  var Style$3 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Style, _ComponentBase);
     function Style(gameObject, style) {
       var _this;
@@ -58178,20 +58178,36 @@
         this.parent.setTexture(value, this.frame);
       }
     }, {
-      key: "frame",
+      key: "fontSize",
       get: function get() {
-        return this.parent.frame.name;
+        return this.parent.fontSize;
       },
       set: function set(value) {
-        this.parent.setFrame(value);
+        this.parent.setFontSize(value);
       }
     }, {
-      key: "scale",
+      key: "tint",
       get: function get() {
-        return this.parent.scaleX;
+        return this.parent.tintTopLeft;
       },
       set: function set(value) {
-        this.parent.setScale(value);
+        this.parent.setTint(value);
+      }
+    }, {
+      key: "letterSpacing",
+      get: function get() {
+        return this.parent.letterSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLetterSpacing(value);
+      }
+    }, {
+      key: "lineSpacing",
+      get: function get() {
+        return this.parent.lineSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLineSpacing(value);
       }
     }]);
     return Style;
@@ -58315,8 +58331,102 @@
     }
   };
 
-  var PhaserImage = Phaser.GameObjects.Image;
+  var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var GetValue$1B = Phaser.Utils.Objects.GetValue;
+  var StatesBitmapText = /*#__PURE__*/function (_PhaserBitmapText) {
+    _inherits(StatesBitmapText, _PhaserBitmapText);
+    function StatesBitmapText(scene, config) {
+      var _this;
+      _classCallCheck(this, StatesBitmapText);
+      if (config === undefined) {
+        config = {};
+      }
+      var x = GetValue$1B(config, 'x', 0);
+      var y = GetValue$1B(config, 'y', 0);
+      var font = GetValue$1B(config, 'font', '');
+      var size = GetValue$1B(config, 'fontSize', false);
+      var align = GetValue$1B(config, 'align', 0);
+      var tint = GetValue$1B(config, 'tint');
+      _this = _callSuper(this, StatesBitmapText, [scene, x, y, font, '', size, align]);
+      _this.type = 'rexStatesBitmapText';
+      if (tint !== undefined) {
+        _this.setTint(tint);
+      }
+      var effectConfig = GetValue$1B(config, 'effects', true);
+      if (effectConfig) {
+        AddEffectProperties(_assertThisInitialized(_this), effectConfig);
+      }
+      _this.style = new Style$3(_assertThisInitialized(_this), config);
+      config.style = _this.style;
+      _this.addStyleManager(config);
+      delete config.style;
+      return _this;
+    }
+    return _createClass(StatesBitmapText);
+  }(PhaserBitmapText);
+  Object.assign(StatesBitmapText.prototype, HelperMethods);
+
+  var Style$2 = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Style, _ComponentBase);
+    function Style(gameObject, style) {
+      var _this;
+      _classCallCheck(this, Style);
+      _this = _callSuper(this, Style, [gameObject]);
+      // this.parent = gameObject;
+
+      return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
+    }
+    _createClass(Style, [{
+      key: "get",
+      value: function get(target, prop) {
+        if (HasProperty(target, prop)) {
+          return target[prop];
+        }
+        var gameObject = target.parent;
+        if (HasProperty(gameObject, prop)) {
+          return gameObject[prop];
+        }
+      }
+    }, {
+      key: "set",
+      value: function set(target, prop, value) {
+        if (HasProperty(target, prop)) {
+          target[prop] = value;
+        } else if (HasProperty(target.parent, prop)) {
+          target.parent[prop] = value;
+        }
+        return true;
+      }
+    }, {
+      key: "key",
+      get: function get() {
+        return this.parent.texture.key;
+      },
+      set: function set(value) {
+        this.parent.setTexture(value, this.frame);
+      }
+    }, {
+      key: "frame",
+      get: function get() {
+        return this.parent.frame.name;
+      },
+      set: function set(value) {
+        this.parent.setFrame(value);
+      }
+    }, {
+      key: "scale",
+      get: function get() {
+        return this.parent.scaleX;
+      },
+      set: function set(value) {
+        this.parent.setScale(value);
+      }
+    }]);
+    return Style;
+  }(ComponentBase);
+
+  var PhaserImage = Phaser.GameObjects.Image;
+  var GetValue$1A = Phaser.Utils.Objects.GetValue;
   var StatesImage = /*#__PURE__*/function (_PhaserImage) {
     _inherits(StatesImage, _PhaserImage);
     function StatesImage(scene, config) {
@@ -58325,13 +58435,13 @@
       if (config === undefined) {
         config = {};
       }
-      var x = GetValue$1B(config, 'x', 0);
-      var y = GetValue$1B(config, 'y', 0);
-      var key = GetValue$1B(config, 'key', '');
-      var frame = GetValue$1B(config, 'frame', undefined);
+      var x = GetValue$1A(config, 'x', 0);
+      var y = GetValue$1A(config, 'y', 0);
+      var key = GetValue$1A(config, 'key', '');
+      var frame = GetValue$1A(config, 'frame', undefined);
       _this = _callSuper(this, StatesImage, [scene, x, y, key, frame]);
       _this.type = 'rexStatesImage';
-      var effectConfig = GetValue$1B(config, 'effects', true);
+      var effectConfig = GetValue$1A(config, 'effects', true);
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
@@ -58402,7 +58512,7 @@
     return Style;
   }(ComponentBase);
 
-  var GetValue$1A = Phaser.Utils.Objects.GetValue;
+  var GetValue$1z = Phaser.Utils.Objects.GetValue;
   var StatesNinePatch = /*#__PURE__*/function (_NinePatch) {
     _inherits(StatesNinePatch, _NinePatch);
     function StatesNinePatch(scene, config) {
@@ -58413,7 +58523,7 @@
       }
       _this = _callSuper(this, StatesNinePatch, [scene, config]);
       _this.type = 'rexStatesNinePatch';
-      var effectConfig = GetValue$1A(config, 'effects', true);
+      var effectConfig = GetValue$1z(config, 'effects', true);
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
@@ -58485,7 +58595,7 @@
   }(ComponentBase);
 
   var PhaserNineSlice = Phaser.GameObjects.NineSlice;
-  var GetValue$1z = Phaser.Utils.Objects.GetValue;
+  var GetValue$1y = Phaser.Utils.Objects.GetValue;
   var StatesNineSlice = /*#__PURE__*/function (_PhaserNineSlice) {
     _inherits(StatesNineSlice, _PhaserNineSlice);
     function StatesNineSlice(scene, config) {
@@ -58494,19 +58604,19 @@
       if (config === undefined) {
         config = {};
       }
-      var x = GetValue$1z(config, 'x', 0);
-      var y = GetValue$1z(config, 'y', 0);
-      var key = GetValue$1z(config, 'key', null);
-      var frame = GetValue$1z(config, 'frame', null);
-      var width = GetValue$1z(config, 'width', 0);
-      var height = GetValue$1z(config, 'height', 0);
-      var leftWidth = GetValue$1z(config, 'leftWidth', 0);
-      var rightWidth = GetValue$1z(config, 'rightWidth', 0);
-      var topHeight = GetValue$1z(config, 'topHeight', 0);
-      var bottomHeight = GetValue$1z(config, 'bottomHeight', 0);
+      var x = GetValue$1y(config, 'x', 0);
+      var y = GetValue$1y(config, 'y', 0);
+      var key = GetValue$1y(config, 'key', null);
+      var frame = GetValue$1y(config, 'frame', null);
+      var width = GetValue$1y(config, 'width', 0);
+      var height = GetValue$1y(config, 'height', 0);
+      var leftWidth = GetValue$1y(config, 'leftWidth', 0);
+      var rightWidth = GetValue$1y(config, 'rightWidth', 0);
+      var topHeight = GetValue$1y(config, 'topHeight', 0);
+      var bottomHeight = GetValue$1y(config, 'bottomHeight', 0);
       _this = _callSuper(this, StatesNineSlice, [scene, x, y, key, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight]);
       _this.type = 'rexStatesNineSlice';
-      var effectConfig = GetValue$1z(config, 'effects', true);
+      var effectConfig = GetValue$1y(config, 'effects', true);
       if (effectConfig) {
         AddEffectProperties(_assertThisInitialized(_this), effectConfig);
       }
@@ -58549,7 +58659,7 @@
   Object.assign(StatesRoundRectangle.prototype, HelperMethods);
 
   var PhaserText = Phaser.GameObjects.Text;
-  var GetValue$1y = Phaser.Utils.Objects.GetValue;
+  var GetValue$1x = Phaser.Utils.Objects.GetValue;
   var StatesText = /*#__PURE__*/function (_PhaserText) {
     _inherits(StatesText, _PhaserText);
     function StatesText(scene, config) {
@@ -58558,9 +58668,9 @@
       if (config === undefined) {
         config = {};
       }
-      var x = GetValue$1y(config, 'x', 0);
-      var y = GetValue$1y(config, 'y', 0);
-      var text = GetValue$1y(config, 'text', '');
+      var x = GetValue$1x(config, 'x', 0);
+      var y = GetValue$1x(config, 'y', 0);
+      var text = GetValue$1x(config, 'text', '');
       _this = _callSuper(this, StatesText, [scene, x, y, text, config]);
       _this.type = 'rexStatesText';
       config.style = _this.style;
@@ -59092,7 +59202,7 @@
   };
 
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1x = Phaser.Utils.Objects.GetValue;
+  var GetValue$1w = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
   var GetEmptyCellIndex = function GetEmptyCellIndex(columnIndex, rowIndex, cells, columnCount, rowCount) {
     if (typeof columnIndex === 'number' || typeof rowIndex === 'number') {
@@ -59141,12 +59251,12 @@
     AddChild$1.call(this, gameObject);
     if (IsPlainObject$d(columnIndex)) {
       var config = columnIndex;
-      columnIndex = GetValue$1x(config, 'column', undefined);
-      rowIndex = GetValue$1x(config, 'row', undefined);
-      align = GetValue$1x(config, 'align', ALIGN_CENTER$1);
-      paddingConfig = GetValue$1x(config, 'padding', 0);
-      expand = GetValue$1x(config, 'expand', false);
-      childKey = GetValue$1x(config, 'key', undefined);
+      columnIndex = GetValue$1w(config, 'column', undefined);
+      rowIndex = GetValue$1w(config, 'row', undefined);
+      align = GetValue$1w(config, 'align', ALIGN_CENTER$1);
+      paddingConfig = GetValue$1w(config, 'padding', 0);
+      expand = GetValue$1w(config, 'expand', false);
+      childKey = GetValue$1w(config, 'key', undefined);
     }
 
     // Get insert index
@@ -59181,8 +59291,8 @@
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
     if (IsPlainObject$d(expand)) {
-      config.expandWidth = GetValue$1x(expand, 'width', false);
-      config.expandHeight = GetValue$1x(expand, 'height', false);
+      config.expandWidth = GetValue$1w(expand, 'width', false);
+      config.expandHeight = GetValue$1w(expand, 'height', false);
     } else {
       config.expandWidth = expand;
       config.expandHeight = expand;
@@ -59287,7 +59397,7 @@
     }
   };
 
-  var GetValue$1w = Phaser.Utils.Objects.GetValue;
+  var GetValue$1v = Phaser.Utils.Objects.GetValue;
   var ResetGrid = function ResetGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
     if (columnProportions === undefined) {
       columnProportions = 0;
@@ -59331,8 +59441,8 @@
     this.rowHeight.length = rowCount;
 
     // space
-    this.setColumnSpace(GetValue$1w(space, 'column', 0));
-    this.setRowSpace(GetValue$1w(space, 'row', 0));
+    this.setColumnSpace(GetValue$1v(space, 'column', 0));
+    this.setRowSpace(GetValue$1v(space, 'row', 0));
     var scene = this.scene;
     var createCellContainerCallback = this.createCellContainerCallback;
     if (createCellContainerCallback) {
@@ -59452,7 +59562,7 @@
   };
 
   var IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1v = Phaser.Utils.Objects.GetValue;
+  var GetValue$1u = Phaser.Utils.Objects.GetValue;
   var GridSizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(GridSizer, _BaseSizer);
     function GridSizer(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
@@ -59460,41 +59570,41 @@
       _classCallCheck(this, GridSizer);
       if (IsPlainObject$c(x)) {
         config = x;
-        x = GetValue$1v(config, 'x', 0);
-        y = GetValue$1v(config, 'y', 0);
-        minWidth = GetValue$1v(config, 'width', undefined);
-        minHeight = GetValue$1v(config, 'height', undefined);
-        columnCount = GetValue$1v(config, 'column', config.col || 0);
-        rowCount = GetValue$1v(config, 'row', 0);
-        columnProportions = GetValue$1v(config, 'columnProportions', 0);
-        rowProportions = GetValue$1v(config, 'rowProportions', 0);
+        x = GetValue$1u(config, 'x', 0);
+        y = GetValue$1u(config, 'y', 0);
+        minWidth = GetValue$1u(config, 'width', undefined);
+        minHeight = GetValue$1u(config, 'height', undefined);
+        columnCount = GetValue$1u(config, 'column', config.col || 0);
+        rowCount = GetValue$1u(config, 'row', 0);
+        columnProportions = GetValue$1u(config, 'columnProportions', 0);
+        rowProportions = GetValue$1u(config, 'rowProportions', 0);
       } else if (IsPlainObject$c(minWidth)) {
         config = minWidth;
-        minWidth = GetValue$1v(config, 'width', undefined);
-        minHeight = GetValue$1v(config, 'height', undefined);
-        columnCount = GetValue$1v(config, 'column', config.col || 0);
-        rowCount = GetValue$1v(config, 'row', 0);
-        columnProportions = GetValue$1v(config, 'columnProportions', 0);
-        rowProportions = GetValue$1v(config, 'rowProportions', 0);
+        minWidth = GetValue$1u(config, 'width', undefined);
+        minHeight = GetValue$1u(config, 'height', undefined);
+        columnCount = GetValue$1u(config, 'column', config.col || 0);
+        rowCount = GetValue$1u(config, 'row', 0);
+        columnProportions = GetValue$1u(config, 'columnProportions', 0);
+        rowProportions = GetValue$1u(config, 'rowProportions', 0);
       } else if (IsPlainObject$c(columnCount)) {
         config = columnCount;
-        columnCount = GetValue$1v(config, 'column', config.col || 0);
-        rowCount = GetValue$1v(config, 'row', 0);
-        columnProportions = GetValue$1v(config, 'columnProportions', 0);
-        rowProportions = GetValue$1v(config, 'rowProportions', 0);
+        columnCount = GetValue$1u(config, 'column', config.col || 0);
+        rowCount = GetValue$1u(config, 'row', 0);
+        columnProportions = GetValue$1u(config, 'columnProportions', 0);
+        rowProportions = GetValue$1u(config, 'rowProportions', 0);
       } else if (IsPlainObject$c(columnProportions)) {
         config = columnProportions;
-        columnProportions = GetValue$1v(config, 'columnProportions', 0);
-        rowProportions = GetValue$1v(config, 'rowProportions', 0);
+        columnProportions = GetValue$1u(config, 'columnProportions', 0);
+        rowProportions = GetValue$1u(config, 'rowProportions', 0);
       }
       _this = _callSuper(this, GridSizer, [scene, x, y, minWidth, minHeight, config]);
       _this.type = 'rexGridSizer';
       _this.sizerChildren = [];
       _this.addChildrenMap('items', _this.sizerChildren);
-      _this.setCreateCellContainerCallback(GetValue$1v(config, 'createCellContainerCallback'));
-      _this.setIndentLeft(GetValue$1v(config, 'space.indentLeftOdd', 0), GetValue$1v(config, 'space.indentLeftEven', 0));
-      _this.setIndentTop(GetValue$1v(config, 'space.indentTopOdd', 0), GetValue$1v(config, 'space.indentTopEven', 0));
-      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$1v(config, 'space', undefined));
+      _this.setCreateCellContainerCallback(GetValue$1u(config, 'createCellContainerCallback'));
+      _this.setIndentLeft(GetValue$1u(config, 'space.indentLeftOdd', 0), GetValue$1u(config, 'space.indentLeftEven', 0));
+      _this.setIndentTop(GetValue$1u(config, 'space.indentTopOdd', 0), GetValue$1u(config, 'space.indentTopEven', 0));
+      _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$1u(config, 'space', undefined));
       return _this;
     }
     _createClass(GridSizer, [{
@@ -60007,7 +60117,7 @@
   };
 
   var IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1u = Phaser.Utils.Objects.GetValue;
+  var GetValue$1t = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
   var Add$3 = function Add(gameObject, paddingConfig, childKey, index) {
     if (gameObject === '\n') {
@@ -60017,9 +60127,9 @@
     AddChild$1.call(this, gameObject);
     if (IsPlainObject$b(paddingConfig)) {
       var config = paddingConfig;
-      paddingConfig = GetValue$1u(config, 'padding', 0);
-      childKey = GetValue$1u(config, 'key', undefined);
-      index = GetValue$1u(config, 'index', undefined);
+      paddingConfig = GetValue$1t(config, 'padding', 0);
+      childKey = GetValue$1t(config, 'key', undefined);
+      index = GetValue$1t(config, 'index', undefined);
     }
     if (paddingConfig === undefined) {
       paddingConfig = 0;
@@ -60158,7 +60268,7 @@
   };
 
   var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1t = Phaser.Utils.Objects.GetValue;
+  var GetValue$1s = Phaser.Utils.Objects.GetValue;
   var FixWidthSizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(FixWidthSizer, _BaseSizer);
     function FixWidthSizer(scene, x, y, minWidth, minHeight, config) {
@@ -60166,26 +60276,26 @@
       _classCallCheck(this, FixWidthSizer);
       if (IsPlainObject$a(x)) {
         config = x;
-        x = GetValue$1t(config, 'x', 0);
-        y = GetValue$1t(config, 'y', 0);
-        minWidth = GetValue$1t(config, 'width', undefined);
-        minHeight = GetValue$1t(config, 'height', undefined);
+        x = GetValue$1s(config, 'x', 0);
+        y = GetValue$1s(config, 'y', 0);
+        minWidth = GetValue$1s(config, 'width', undefined);
+        minHeight = GetValue$1s(config, 'height', undefined);
       } else if (IsPlainObject$a(minWidth)) {
         config = minWidth;
-        minWidth = GetValue$1t(config, 'width', undefined);
-        minHeight = GetValue$1t(config, 'height', undefined);
+        minWidth = GetValue$1s(config, 'width', undefined);
+        minHeight = GetValue$1s(config, 'height', undefined);
       }
       _this = _callSuper(this, FixWidthSizer, [scene, x, y, minWidth, minHeight, config]);
       _this.type = 'rexFixWidthSizer';
       _this.sizerChildren = [];
-      _this.setOrientation(GetValue$1t(config, 'orientation', 0));
-      _this.setItemSpacing(GetValue$1t(config, 'space.item', 0));
-      _this.setLineSpacing(GetValue$1t(config, 'space.line', 0));
-      _this.setIntentLeft(GetValue$1t(config, 'space.indentLeftOdd', 0), GetValue$1t(config, 'space.indentLeftEven', 0));
-      _this.setIntentTop(GetValue$1t(config, 'space.indentTopOdd', 0), GetValue$1t(config, 'space.indentTopEven', 0));
-      _this.setAlign(GetValue$1t(config, 'align', 0));
-      _this.setJustifyPercentage(GetValue$1t(config, 'justifyPercentage', 0.25));
-      _this.setRTL(GetValue$1t(config, 'rtl', false));
+      _this.setOrientation(GetValue$1s(config, 'orientation', 0));
+      _this.setItemSpacing(GetValue$1s(config, 'space.item', 0));
+      _this.setLineSpacing(GetValue$1s(config, 'space.line', 0));
+      _this.setIntentLeft(GetValue$1s(config, 'space.indentLeftOdd', 0), GetValue$1s(config, 'space.indentLeftEven', 0));
+      _this.setIntentTop(GetValue$1s(config, 'space.indentTopOdd', 0), GetValue$1s(config, 'space.indentTopEven', 0));
+      _this.setAlign(GetValue$1s(config, 'align', 0));
+      _this.setJustifyPercentage(GetValue$1s(config, 'justifyPercentage', 0.25));
+      _this.setRTL(GetValue$1s(config, 'rtl', false));
       _this.wrapResult = undefined; // {lines, width, height}
 
       _this.addChildrenMap('items', _this.sizerChildren);
@@ -60329,8 +60439,6 @@
     return gameObject;
   };
 
-  var GetValue$1s = Phaser.Utils.Objects.GetValue;
-  var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var CreateText = function CreateText(scene, config) {
     var gameObjectType;
     if (config) {
@@ -60346,16 +60454,7 @@
     switch (gameObjectType) {
       case 'bitmaptext':
       case 'bitmap':
-        var key = GetValue$1s(config, 'key');
-        var size = GetValue$1s(config, 'size');
-        if (size === undefined) {
-          size = GetValue$1s(config, 'fontSize');
-        }
-        gameObject = new PhaserBitmapText(scene, 0, 0, key, '', size);
-        var color = GetValue$1s(config, 'color');
-        if (color !== undefined) {
-          gameObject.setTint(color);
-        }
+        gameObject = new StatesBitmapText(scene, config);
         break;
       case 'bbcodetext':
       case 'bbcode':
