@@ -28,9 +28,10 @@ class Demo extends Phaser.Scene {
                 radius: 10,
             },
             text: {
-                key: 'gothic',
+                $type: 'bitmaptext',
+                font: 'gothic',
                 fontSize: 24,
-                color: 0x888888,
+                tint: 0x888888,
             }
         }
 
