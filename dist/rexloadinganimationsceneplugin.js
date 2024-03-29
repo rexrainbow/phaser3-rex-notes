@@ -191,7 +191,7 @@
     return obj && typeof obj === 'function';
   };
 
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var loaderCallback = function loaderCallback(key, config) {
     if (IsFunction(key)) {
       var callback = key;
@@ -202,7 +202,7 @@
           scope: scope
         }
       };
-    } else if (IsPlainObject(key)) {
+    } else if (IsPlainObject$1(key)) {
       config = key;
       if (!config.hasOwnProperty('config')) {
         config = {
@@ -295,24 +295,36 @@
     return LastLoadTask;
   }(Phaser.Events.EventEmitter);
 
-  var NOOP = function NOOP() {
-    //  NOOP
-  };
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var StartLoadingAnimationScene = function StartLoadingAnimationScene(mainScene, animationSceneKey, data, onLoadingComplete, onLoadingProgress) {
+    if (IsPlainObject(mainScene)) {
+      var config = mainScene;
+      mainScene = config.mainScene;
+      animationSceneKey = config.animationScene;
+      onLoadingComplete = config.onLoadingComplete;
+      onLoadingProgress = config.onLoadingProgress;
+    } else {
+      if (typeof data === 'function') {
+        onLoadingProgress = onLoadingComplete;
+        onLoadingComplete = data;
+        data = undefined;
+      }
+    }
+    if (IsSceneObject(animationSceneKey)) {
+      var animationScene = animationSceneKey;
+      animationSceneKey = animationScene.sys.settings.key;
+    }
 
-  var StartLoadingAnimationScene = function StartLoadingAnimationScene(scene, animationSceneKey, data, onLoadingComplete, onLoadingProgress) {
-    if (typeof data === 'function') {
-      onLoadingProgress = onLoadingComplete;
-      onLoadingComplete = data;
-      data = undefined;
+    // Don't launch animation scene if it has been started
+    if (mainScene.scene.getStatus(animationSceneKey) < Phaser.Scenes.START) {
+      // Phaser.Scenes.START = 2
+      mainScene.scene.launch(animationSceneKey, data);
     }
-    if (!onLoadingProgress) {
-      onLoadingProgress = NOOP;
-    }
-    var sceneManager = scene.scene;
-    sceneManager.launch(animationSceneKey, data);
-    var animationScene = sceneManager.get(animationSceneKey);
-    new LastLoadTask(scene).on('progress', function (progress) {
-      onLoadingProgress(progress, animationScene);
+    var animationScene = mainScene.scene.get(animationSceneKey);
+    new LastLoadTask(mainScene).on('progress', function (progress) {
+      if (onLoadingProgress) {
+        onLoadingProgress(progress, animationScene);
+      }
     }).on('complete', function (onProgressComplete) {
       if (!onLoadingComplete) {
         onProgressComplete();
@@ -320,7 +332,7 @@
         onLoadingComplete(onProgressComplete, animationScene);
       }
     }).on('shutdown', function () {
-      sceneManager.stop(animationSceneKey);
+      animationScene.scene.stop();
     });
   };
 

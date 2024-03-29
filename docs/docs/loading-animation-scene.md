@@ -53,7 +53,7 @@ Start loading animation scene, stop this scene when loading complete.
     ```
 - Start loading animation scene
     ```javascript
-    scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey);
+    scene.plugins.get('rexLoadingAnimationScene').startScene(config);
     ```
 - This plugin will also install [AwaitLoader](awaitloader.md).
 
@@ -69,33 +69,30 @@ Start loading animation scene, stop this scene when loading complete.
     ```
 - Start loading animation scene
     ```javascript
-    StartLoadingAnimationScene(scene, animationSceneKey);
+    StartLoadingAnimationScene(config);
     ```
 
 ### Start loading animation scene
 
 ```javascript
-scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey);
-// scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData);
+scene.plugins.get('rexLoadingAnimationScene').startScene({
+    mainScene: 
+    animationScene:
+
+    onLoadingComplete: undefined
+    onLoadingProgress: undefined
+});
 ```
 
-- Will stop animationScene when preloading complete.
-
-
-or
-
-```javascript
-scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, onLoadingComplete, onLoadingProgress);
-// scene.plugins.get('rexLoadingAnimationScene').startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete, onLoadingProgress);
-```
-
-- `onLoadingComplete` : Custom task 
+- `mainScene` : Scene instaance of main scene.
+- `animationScene` : Scene instance or scene-key of animation scene.
+- `onLoadingComplete` : Custom task invoked when loading complete.
     ```javascript
     function(finishLoading, animationScene) {
         // finishLoading();
     }
     ```
-    - Invoke `finishLoading()` method (later) to finish current loading progress.
+    - Invoke `finishLoading()` method (later) to finish loading progress totally.
 - `onLoadingProgress` : Callback when loading progress is changing.
     ```javascript
     function(progress, animationScene) {

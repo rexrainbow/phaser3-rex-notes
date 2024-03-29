@@ -28,17 +28,21 @@ class Main extends Phaser.Scene {
         });
 
         this.plugins.get('rexLoadingAnimationScene').startScene(
-            this,
-            'loading-animation',
-            function (successCallback, animationScene) {
-                if (animationScene.onClose) {
-                    animationScene.onClose(successCallback);
-                }
-            },
-            function (progress, animationScene) {
-                if (animationScene.onProgress) {
-                    console.log(progress)
-                    animationScene.onProgress(progress);
+            {
+                mainScene: this,
+                animationScene: 'loading-animation',
+
+                onLoadingComplete(successCallback, animationScene) {
+                    if (animationScene.onClose) {
+                        animationScene.onClose(successCallback);
+                    }
+                },
+
+                onLoadingProgress(progress, animationScene) {
+                    if (animationScene.onProgress) {
+                        console.log(progress)
+                        animationScene.onProgress(progress);
+                    }
                 }
             }
         );

@@ -9670,7 +9670,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Start loading animation scene
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>This plugin will also install <a href="../awaitloader/">AwaitLoader</a>.</li>
 </ul>
@@ -9683,27 +9683,27 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">StartLoadingAnimationScene</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/loadinganimationscene.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Start loading animation scene
-    <div class="highlight"><pre><span></span><code><span class="nx">StartLoadingAnimationScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">StartLoadingAnimationScene</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="start-loading-animation-scene">Start loading animation scene<a class="headerlink" href="#start-loading-animation-scene" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">);</span>
-<span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">mainScene</span><span class="o">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">animationScene</span><span class="o">:</span>
+
+<span class="w">    </span><span class="nx">onLoadingComplete</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">    </span><span class="nx">onLoadingProgress</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
-<li>Will stop animationScene when preloading complete.</li>
-</ul>
-<p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLoadingAnimationScene&#39;</span><span class="p">).</span><span class="nx">startScene</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">animationSceneKey</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingComplete</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoadingProgress</span><span class="p">);</span>
-<span class="c1">// scene.plugins.get(&#39;rexLoadingAnimationScene&#39;).startScene(scene, animationSceneKey, animationSceneData, onLoadingComplete, onLoadingProgress);</span>
-</code></pre></div>
-<ul>
-<li><code>onLoadingComplete</code> : Custom task 
+<li><code>mainScene</code> : Scene instaance of main scene.</li>
+<li><code>animationScene</code> : Scene instance or scene-key of animation scene.</li>
+<li><code>onLoadingComplete</code> : Custom task invoked when loading complete.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">finishLoading</span><span class="p">,</span><span class="w"> </span><span class="nx">animationScene</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// finishLoading();</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li>Invoke <code>finishLoading()</code> method (later) to finish current loading progress.</li>
+<li>Invoke <code>finishLoading()</code> method (later) to finish loading progress totally.</li>
 </ul>
 </li>
 <li><code>onLoadingProgress</code> : Callback when loading progress is changing.

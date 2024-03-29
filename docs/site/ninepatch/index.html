@@ -9917,7 +9917,7 @@
 <span class="w">    </span><span class="c1">// preserveRatio: true,</span>
 <span class="w">    </span><span class="c1">// maxFixedPartScale: 1,</span>
 <span class="w">    </span><span class="c1">// stretchMode: 0,</span>
-<span class="w">    </span><span class="nx">baseFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">baseFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w">  </span><span class="c1">// frame: undefined,</span>
 <span class="w">    </span><span class="nx">getFrameNameCallback</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -9925,7 +9925,7 @@
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>key</code> : Texture key of source image.</li>
-<li><code>baseFrame</code> : Frame name of base texture.<ul>
+<li><code>baseFrame</code>, or <code>frame</code> : Frame name of base texture.<ul>
 <li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
 </ul>
 </li>
@@ -10012,6 +10012,9 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setBaseTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">baseFrame</span><span class="p">,</span><span class="w"> </span><span class="nx">leftWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">rightWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">topHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">bottomHeight</span><span class="p">);</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setBaseTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">baseFrame</span><span class="p">);</span>
+</code></pre></div>
 <ul>
 <li><code>key</code> : Texture key of source image.</li>
 <li><code>baseFrame</code> : Frame name of base texture.<ul>
@@ -10024,6 +10027,7 @@
 <li>Width of even columns (column <code>1</code>, column <code>3</code>, ...) will be stretched.</li>
 </ul>
 </li>
+<li><code>undefined</code> : If <code>columns</code> and <code>rows</code> are <code>undefined</code>, it will use current configuration of columns and rows.</li>
 </ul>
 </li>
 <li><code>rows</code> : Configuration of rows. <ul>
@@ -10032,6 +10036,7 @@
 <li>Height of odd rows (row <code>1</code>, row <code>3</code>, ...) will be stretched.</li>
 </ul>
 </li>
+<li><code>undefined</code> : If <code>columns</code> and <code>rows</code> are <code>undefined</code>, it will use current configuration of columns and rows.</li>
 </ul>
 </li>
 <li><code>leftWidth</code>, <code>rightWidth</code> : Set <code>columns</code> to <code>[leftWidth, undefined, rightWidth]</code>.</li>
