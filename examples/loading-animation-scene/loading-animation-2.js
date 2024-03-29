@@ -61,19 +61,23 @@ class LoadingAnimation extends Phaser.Scene {
         var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5)
 
         this.plugins.get('rexLoadingAnimationScene').startScene(
-            data.mainScene,
-            'loading-animation',
-            function (successCallback, animationScene) {
-                animationScene.tweens.add({
-                    targets: spinner,
-                    scale: 0,
-                    duration: 500,
-                    onComplete: successCallback
-                })
-            },
-            function (progress, animationScene) {
-                console.log(progress)
-                progressBar.scaleX = progress;
+            {
+                mainScene: data.mainScene,
+                animationScene: this,
+
+                onLoadingComplete(successCallback, animationScene) {
+                    animationScene.tweens.add({
+                        targets: spinner,
+                        scale: 0,
+                        duration: 500,
+                        onComplete: successCallback
+                    })
+                },
+
+                onLoadingProgress(progress, animationScene) {
+                    console.log(progress)
+                    progressBar.scaleX = progress;
+                }
             }
         );
     }

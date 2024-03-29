@@ -1,5 +1,7 @@
+import IsSceneObject from '../../utils/system/IsSceneObject.js';
 import LastLoadTask from '../../utils/loader/LastLoadTask.js';
-import NOOP from '../../utils/object/NOOP.js';
+
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 var StartLoadingAnimationScene = function (
     mainScene,
@@ -8,14 +10,23 @@ var StartLoadingAnimationScene = function (
     onLoadingProgress
 ) {
 
-    if (typeof (data) === 'function') {
-        onLoadingProgress = onLoadingComplete;
-        onLoadingComplete = data;
-        data = undefined;
+    if (IsPlainObject(mainScene)) {
+        var config = mainScene;
+        mainScene = config.mainScene;
+        animationSceneKey = config.animationScene;
+        onLoadingComplete = config.onLoadingComplete;
+        onLoadingProgress = config.onLoadingProgress;
+    } else {
+        if (typeof (data) === 'function') {
+            onLoadingProgress = onLoadingComplete;
+            onLoadingComplete = data;
+            data = undefined;
+        }
     }
 
-    if (!onLoadingProgress) {
-        onLoadingProgress = NOOP;
+    if (IsSceneObject(animationSceneKey)) {
+        var animationScene = animationSceneKey;
+        animationSceneKey = animationScene.sys.settings.key;
     }
 
     // Don't launch animation scene if it has been started
@@ -26,7 +37,9 @@ var StartLoadingAnimationScene = function (
     var animationScene = mainScene.scene.get(animationSceneKey);
     var lastLoadTask = (new LastLoadTask(mainScene))
         .on('progress', function (progress) {
-            onLoadingProgress(progress, animationScene)
+            if (onLoadingProgress) {
+                onLoadingProgress(progress, animationScene)
+            }
         })
         .on('complete', function (onProgressComplete) {
             if (!onLoadingComplete) {

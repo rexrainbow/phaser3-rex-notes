@@ -14,7 +14,7 @@ declare namespace StartLoadingAnimationScene {
 
 declare function StartLoadingAnimationScene(
     scene: Phaser.Scene,
-    animationSceneKey: string,
+    animationSceneKey: string | Phaser.Scene,
     data?: Object,
     onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback,
     OnLoadingProgress?: StartLoadingAnimationScene.OnLoadingProgressCallback
@@ -22,7 +22,16 @@ declare function StartLoadingAnimationScene(
 
 declare function StartLoadingAnimationScene(
     scene: Phaser.Scene,
-    animationSceneKey: string,
+    animationSceneKey: string | Phaser.Scene,
     onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback,
     OnLoadingProgress?: StartLoadingAnimationScene.OnLoadingProgressCallback
+): void;
+
+declare function StartLoadingAnimationScene(
+    config?: {
+        mainSceen: Phaser.Scene,
+        animationScene: string | Phaser.Scene,
+        onLoadingComplete?: StartLoadingAnimationScene.OnLoadingCompleteCallback,
+        OnLoadingProgress?: StartLoadingAnimationScene.OnLoadingProgressCallback
+    }
 ): void;
