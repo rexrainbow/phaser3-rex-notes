@@ -8,7 +8,8 @@ declare namespace NinePatch {
         x?: number, y?: number,
         width?: number, height?: number,
 
-        key?: string, baseFrame?: string,
+        key?: string,
+        baseFrame?: string, frame?: string,
         getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
 
         columns?: (number | undefined)[],

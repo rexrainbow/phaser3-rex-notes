@@ -1,3 +1,4 @@
+import NinePatch from '../ninepatch/NinePatch';
 export default StatesNineSlice;
 
 declare namespace StatesNineSlice {
@@ -22,11 +23,10 @@ declare namespace StatesNineSlice {
 
         'disable.key'?: string,
         'disable.frame'?: string,
-
     }
 }
 
-declare class StatesNineSlice extends Phaser.GameObjects.NineSlice {
+declare class StatesNineSlice extends NinePatch {
     constructor(
         scene: Phaser.Scene,
         config?: StatesNineSlice.IConfig

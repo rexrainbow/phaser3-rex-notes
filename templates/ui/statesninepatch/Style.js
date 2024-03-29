@@ -32,25 +32,25 @@ class Style extends ComponentBase {
     }
 
     get key() {
-        return this.parent.texture.key;
+        return this.parent.textureKey;
     }
 
     set key(value) {
         if (this.key === value) {
             return;
         }
-        this.parent.setTexture(value, this.frame);
+        this.parent.setBaseTexture(value, this.baseFrameName);
     }
 
     get frame() {
-        return this.parent.frame.name;
+        return this.parent.baseFrameName;
     }
 
     set frame(value) {
         if (this.frame === value) {
             return;
         }
-        this.parent.setFrame(value);
+        this.parent.setBaseTexture(this.parent.textureKey, value);
     }
 }
 

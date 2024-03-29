@@ -7,15 +7,19 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const PhaserBitmapText = Phaser.GameObjects.BitmapText;
 
 var CreateText = function (scene, config) {
-    var type = GetValue(config, '$type');
-    if (type === undefined) {
-        if (!!GetValue(config, 'key')) {
-            type = 'bitmaptext';
+    var gameObjectType;
+    if (config) {
+        if (config.hasOwnProperty('$type')) {
+            gameObjectType = config.$type;
+        } else {
+            if (config.hasOwnProperty('key')) {
+                gameObjectType = 'bitmaptext';
+            }
         }
     }
 
     var gameObject;
-    switch (type) {
+    switch (gameObjectType) {
         case 'bitmaptext':
         case 'bitmap':
             var key = GetValue(config, 'key');
@@ -41,7 +45,6 @@ var CreateText = function (scene, config) {
             gameObject = new SimpleLabel(scene, config);
             break;
 
-        case 'text':
         default:
             gameObject = new StatesText(scene, config);
             break;

@@ -160,7 +160,7 @@ var ninePatch = scene.add.rexNinePatch({
     // preserveRatio: true,
     // maxFixedPartScale: 1,
     // stretchMode: 0,
-    baseFrame: undefined,
+    baseFrame: undefined,  // frame: undefined,
     getFrameNameCallback: undefined
 });
 ```
@@ -168,7 +168,7 @@ var ninePatch = scene.add.rexNinePatch({
 - `x`, `y` : Position of this object.
 - `width`, `height` : Size of this object.
 - `key` : Texture key of source image.
-- `baseFrame` : Frame name of base texture.
+- `baseFrame`, or `frame` : Frame name of base texture.
     - `undefined` : Use default base frame `'__BASE'`.
 - `columns` : Configuration of columns.
     - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Width of each column. `undefined` value will be replaced by remainder value from texture width.

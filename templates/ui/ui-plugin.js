@@ -35,6 +35,7 @@ import ImageInputLabelFactory from './imageinputlabel/Factory.js';
 import StatesImageFactory from './statesimage/Factory.js';
 import StatesRoundRectangleFactory from './statesroundrectangle/Factory.js';
 import StatesNineSliceFactory from './statesnineslice/Factory.js';
+import StatesNinePatchFactory from './statesninepatch/Factory.js';
 import StatesTextFactory from './statestext/Factory.js';
 import ChartFactory from './chart/Factory.js';
 

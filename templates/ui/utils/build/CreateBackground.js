@@ -1,14 +1,14 @@
 import StatesRoundRectangle from '../../statesroundrectangle/StatesRoundRectangle.js';
 import StatesNineSlice from '../../statesnineslice/StatesNineSlice.js';
 import StatesImage from '../../statesimage/StatesImage.js';
-import NinePatch from '../../ninepatch/NinePatch.js';
+import StatesNinePatch from '../../statesninepatch/StatesNinePatch.js';
 import DecorateGameObject from './DecorateGameObject.js';
 
 var CreateBackground = function (scene, config) {
     var gameObjectType;
     if (config) {
-        if (config.hasOwnProperty('type')) {
-            gameObjectType = config.type;
+        if (config.hasOwnProperty('$type')) {
+            gameObjectType = config.$type;
         } else {
             if (config.hasOwnProperty('leftWidth')) {
                 gameObjectType = 'nineSlice';
@@ -28,7 +28,7 @@ var CreateBackground = function (scene, config) {
             if (!config.hasOwnProperty('stretchMode')) {
                 gameObject = new StatesNineSlice(scene, config);
             } else {
-                gameObject = new NinePatch(scene, config);
+                gameObject = new StatesNinePatch(scene, config);
             }
             break;
 

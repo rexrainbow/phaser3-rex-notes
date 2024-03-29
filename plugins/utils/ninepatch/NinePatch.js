@@ -46,6 +46,10 @@ var NinePatchBase = function (GOClass, type) {
                 rows = GetValue(config, 'rows', undefined);
             }
 
+            if (baseFrame === undefined) {
+                baseFrame = GetValue(config, 'frame', undefined);
+            }
+
             if (columns === undefined) {
                 var leftWidth = GetValue(config, 'leftWidth', undefined);
                 var rightWidth = GetValue(config, 'rightWidth', undefined);
