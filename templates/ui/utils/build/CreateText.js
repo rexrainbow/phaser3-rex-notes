@@ -2,6 +2,7 @@ import StatesText from '../../statestext/StatesText.js';
 import BBCodeText from '../../bbcodetext/BBCodeText.js';
 import StatesBitmapText from '../../statesbitmaptext/StatesBitmapText.js';
 import SimpleLabel from '../../simplelabel/SimpleLabel.js';
+import CreateTextArea from './CreateTextArea.js';
 import DecorateGameObject from './DecorateGameObject.js';
 
 var CreateText = function (scene, config) {
@@ -30,6 +31,10 @@ var CreateText = function (scene, config) {
 
         case 'label':
             gameObject = new SimpleLabel(scene, config);
+            break;
+
+        case 'textarea':
+            gameObject = CreateTextArea(scene, config);
             break;
 
         default:

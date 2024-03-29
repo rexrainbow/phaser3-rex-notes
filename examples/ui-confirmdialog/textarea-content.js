@@ -54,16 +54,8 @@ class Demo extends Phaser.Scene {
                 },
 
                 slider: {
-                    track: {
-                        color: COLOR_DARK,
-                        radius: 8,
-                        width: 16
-                    },
-                    thumb: {
-                        color: COLOR_LIGHT,
-                        radius: 11,
-                        width: 22,
-                    },
+                    track: { color: COLOR_DARK, radius: 8, width: 16 },
+                    thumb: { color: COLOR_LIGHT, radius: 11, width: 22, },
                 }
             },
 
