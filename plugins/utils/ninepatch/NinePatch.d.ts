@@ -97,6 +97,11 @@ declare class NinePatch extends Phaser.GameObjects.RenderTexture {
         bottomHeight: number,
     ): this;
 
+    setBaseTexture(
+        key: string,
+        baseFrame: string | undefined
+    ): this;
+
     setStretchMode(
         mode: 0 | 1 | 'scale' | 'repeat' |
         {
@@ -125,4 +130,10 @@ declare class NinePatch extends Phaser.GameObjects.RenderTexture {
     readonly fixedPartScaleX: number;
 
     readonly fixedPartScaleY: number;
+
+    readonly leftWidth: number;
+    readonly rightWidth: number;
+    readonly topHeight: number;
+    readonly bottomHeight: number;
+
 }

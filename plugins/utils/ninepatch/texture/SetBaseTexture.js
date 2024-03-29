@@ -14,6 +14,14 @@ var SetBaseTexture = function (key, baseFrameName, columns, rows) {
     if ((typeof (columns) === 'number') && (arguments.length >= 6)) {
         columns = [arguments[2], undefined, arguments[3]];
         rows = [arguments[4], undefined, arguments[5]];
+    } else if (
+        (columns === undefined) &&
+        (rows === undefined) &&
+        (this.columns.data !== undefined) &&
+        (this.rows.data !== undefined)
+    ) {
+        columns = this.columns.data;
+        rows = this.rows.data
     } else {
         columns = DeepClone(columns);
         rows = DeepClone(rows);
@@ -55,7 +63,7 @@ var SetBaseTexture = function (key, baseFrameName, columns, rows) {
             remainderTextureWidth -= columns[i].width;
         }
     }
-    var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
+    var unknownColumnWidth = (unknownColumnWidthCount > 0) ? (remainderTextureWidth / unknownColumnWidthCount) : 0;
 
     var remainderTextureHeight = baseFrame.height;
     var unknownRowHeightCount = 0;
@@ -68,7 +76,7 @@ var SetBaseTexture = function (key, baseFrameName, columns, rows) {
             remainderTextureHeight -= rows[i].width;
         }
     }
-    var unknownRowHeight = remainderTextureHeight / unknownRowHeightCount;
+    var unknownRowHeight = (unknownRowHeightCount) ? (remainderTextureHeight / unknownRowHeightCount) : 0;
 
     var row, col, rowHeight, colWidth, frameName;
     var offsetX = 0, offsetY = 0;

@@ -14,14 +14,19 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(100, 100, 'atlas', 'button_green_s_w_slice9');
-        this.add.rexNinePatch({
+        var gameObject = this.add.rexNinePatch({
             x: 400, y: 300,
             width: 300, height: 400,
             key: 'atlas',
             baseFrame: 'button_green_s_w_slice9',
             columns: [30, undefined, 30],
-            rows: [30, undefined, 30]          
+            rows: [30, undefined, 30]
         })
+
+        this.input.once('pointerdown', function () {
+            gameObject.setBaseTexture('atlas', 'button_coral_slice9');
+        })
+
     }
 
     update() {

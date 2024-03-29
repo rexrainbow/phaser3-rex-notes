@@ -247,6 +247,12 @@ or
 ninePatch.setBaseTexture(key, baseFrame, leftWidth, rightWidth, topHeight, bottomHeight);
 ```
 
+or
+
+```javascript
+ninePatch.setBaseTexture(key, baseFrame);
+```
+
 - `key` : Texture key of source image.
 - `baseFrame` : Frame name of base texture.
     - `undefined`, or `null` : Use default base frame `'__BASE'`. Default value.
@@ -254,10 +260,12 @@ ninePatch.setBaseTexture(key, baseFrame, leftWidth, rightWidth, topHeight, botto
     - A number array, like `[20, 20, 20]` : Width of each column.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
         - Width of even columns (column `1`, column `3`, ...) will be stretched.
+    - `undefined` : If `columns` and `rows` are `undefined`, it will use current configuration of columns and rows.
 - `rows` : Configuration of rows. 
     - A number array, like `[20, 20, 20]` : Height of each row.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+    - `undefined` : If `columns` and `rows` are `undefined`, it will use current configuration of columns and rows.
 - `leftWidth`, `rightWidth` : Set `columns` to `[leftWidth, undefined, rightWidth]`.
 - `topHeight`, `bottomHeight` : Set `rows` to `[topHeight, undefined, bottomHeight]`.
 

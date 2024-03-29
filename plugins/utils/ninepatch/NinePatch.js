@@ -118,6 +118,23 @@ var NinePatchBase = function (GOClass, type) {
 
             return this;
         }
+
+        get leftWidth() {
+            return this.columns.data[0];
+        }
+
+        get rightWidth() {
+            return this.columns.data[this.columns.count - 1];
+        }
+
+        get topHeight() {
+            return this.rows.data[0];
+        }
+
+        get bottomHeight() {
+            return this.rows.data[this.rows.count - 1];
+        }
+
     }
 
     Object.assign(
