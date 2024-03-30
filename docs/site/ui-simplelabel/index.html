@@ -7973,6 +7973,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-simpletitlelabel/" class="md-nav__link">
+        Simple title label
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-namevaluelabel/" class="md-nav__link">
         Name value label
       </a>
@@ -8581,10 +8595,58 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_12" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15_12" id="__nav_15_12_label" tabindex="0">
+          Text box
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15_12">
+          <span class="md-nav__icon md-icon"></span>
+          Text box
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../ui-textbox/" class="md-nav__link">
         Text box
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-simpletextbox/" class="md-nav__link">
+        Simple text box
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -9778,6 +9840,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/jOpoqzP">Bitmaptext</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/BaqwOqX">Nine-slice background</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/xxJoJLW">Wrap text</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/OJGxroa">TextArea</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzOxKRM">Buttons</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -9856,7 +9919,7 @@
 <span class="w">    </span><span class="c1">// squareFitIcon: false,</span>
 <span class="w">    </span><span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
-<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">testStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textStyle</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// text: null,</span>
 
 <span class="w">    </span><span class="c1">// wrapText: false,</span>
@@ -9881,7 +9944,7 @@
 <span class="w">    </span><span class="c1">// draggable: false,</span>
 <span class="w">    </span><span class="c1">// sizerEvents: false,</span>
 <span class="w">    </span><span class="c1">// enableLayer: false,</span>
-<span class="p">},</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>background</code> : <ul>
@@ -9903,29 +9966,6 @@
 <li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
 <li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
 <li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
-</ul>
-</li>
-<li><code>creators</code> : A series of callback to create background, text, icon, action icon game object.<ul>
-<li><code>creators.background</code> : Callback to create background. Default behavior is creating a <a href="../ui-statesroundrectangle/">states round rectangle</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>creators.text</code> : Callback to create text. Default behavior is creating a <a href="../bbcodetext/">bbcodetext</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>creators.icon</code> : Callback to create icon. Default behavior is creating a <a href="../image/">image</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li><code>creators.action</code> : Callback for creating action-icon. Default behavior is creating a <a href="../image/">image</a>.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -9953,11 +9993,7 @@
 </code></pre></div>
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="set-state">Set state<a class="headerlink" href="#set-state" title="Permanent link">&para;</a></h3>
-<p>Override/restore properties of background game object.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Assume that background, icon, text, action game objects are <a href="../ui-statesroundrectangle/">states round rectangle game object</a>.)</p>
-</div>
+<p>Override/restore properties of elements.</p>
 <h4 id="active-state">Active state<a class="headerlink" href="#active-state" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Enable active state

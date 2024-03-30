@@ -16,7 +16,7 @@
         <link rel="prev" href="../ui-simplelabel/">
       
       
-        <link rel="next" href="../ui-namevaluelabel/">
+        <link rel="next" href="../ui-simpletitlelabel/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
@@ -7954,6 +7954,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-display-content" class="md-nav__link">
+    Reset display content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -7969,6 +7976,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-simpletitlelabel/" class="md-nav__link">
+        Simple title label
+      </a>
     </li>
   
 
@@ -8588,10 +8609,58 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_12" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15_12" id="__nav_15_12_label" tabindex="0">
+          Text box
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15_12">
+          <span class="md-nav__icon md-icon"></span>
+          Text box
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../ui-textbox/" class="md-nav__link">
         Text box
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-simpletextbox/" class="md-nav__link">
+        Simple text box
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -9749,6 +9818,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-display-content" class="md-nav__link">
+    Reset display content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9852,7 +9928,7 @@
 
 <span class="w">    </span><span class="nx">layoutMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 
-<span class="w">    </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// rtl: false,</span>
 
 <span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundGameObject</span><span class="p">,</span>
 
@@ -10110,6 +10186,43 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">frameName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="reset-display-content">Reset display content<a class="headerlink" href="#reset-display-content" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">iconFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">iconSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">actionFrame</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">actionSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>title</code> : Set title's text string.</li>
+<li><code>text</code> : Set text string.</li>
+<li><code>icon</code>, <code>iconFrame</code><ul>
+<li>A string : Set texture of icon game object.</li>
+<li><code>undefined</code>, or <code>null</code> : Hide icon game object.</li>
+<li><code>true</code> : Show icon game object without change its texture.</li>
+</ul>
+</li>
+<li><code>iconSize</code> : Set display size of icon game object.</li>
+<li><code>action</code>, <code>actionFrame</code><ul>
+<li>A string : Set texture of icon game object.</li>
+<li><code>undefined</code>, or <code>null</code> : Hide action game object.</li>
+<li><code>true</code> : Show action game object without change its texture.</li>
+</ul>
+</li>
+<li><code>actionSize</code> : Set display size of action game object.</li>
+</ul>
+<p>Run <code>label.layout()</code> after this method, to layout children again.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
 

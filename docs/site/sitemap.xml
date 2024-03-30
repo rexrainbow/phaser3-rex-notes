@@ -1836,6 +1836,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-simpletextbox/</loc>
+         <lastmod>2024-03-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-simpletitlelabel/</loc>
+         <lastmod>2024-03-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-sizer/</loc>
          <lastmod>2024-03-30</lastmod>
          <changefreq>daily</changefreq>
