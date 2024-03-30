@@ -225,12 +225,11 @@
 221. [UI/Scroll bar](ui-scrollbar.md): A container with slider, two buttons, and background.
 222. [UI/Simple drop down list](ui-simpledropdownlist.md): Using plain object to create drop down list.
 223. [UI/Simple label](ui-simplelabel.md): Using json style to create label.
+223. [UI/Simple title label](ui-simpletitlelabel.md): Using json style to create title label.
+223. [UI/Simple text box](ui-simpletextbox.md): Using json style to create text box.
 224. [UI/Sizer](ui-sizer.md): Layout children game objects.
 225. [UI/Slider](ui-slider.md): A container with a track, indicator, thumb and background.
 226. [UI/Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background. Drag splitter to resize with left(top) panel, right(bottom) panel. 
-227. [UI/States image](ui-statesimage.md): Using plain object to create image game object, with active, hover, disable styles.
-228. [UI/States round-rectangle](ui-statesroundrectangle.md): Using plain object to create round rectangle game object, with active, hover, disable styles.
-229. [UI/States text](ui-statestext.md): Using plain object to create text game object, with active, hover, disable styles.
 230. [UI/Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 231. [UI/Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 232. [UI/Text area](ui-textarea.md): A container with a text, slider, and scroller.
