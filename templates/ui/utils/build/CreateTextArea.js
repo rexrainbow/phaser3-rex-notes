@@ -26,7 +26,7 @@ var CreateTextArea = function (scene, config, creators) {
     }
 
     var sliderConfig = config.slider;
-    if (sliderConfig !== false) {
+    if ((sliderConfig !== false) && (sliderConfig !== null)) {
         if (sliderConfig === undefined) {
             sliderConfig = {};
         }

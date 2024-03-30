@@ -93,19 +93,24 @@ var label = scene.rexUI.add.simpleLabel({
     // rtl: false,
 
     background: backgroundStyle,
+    // background: null,
 
     icon: iconStyle,
+    // icon: null,
     
     // iconMask: false,
     // squareFitIcon: false,
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
     text: testStyle,
+    // text: null,
+
     // wrapText: false,
     // expandTextWidth: false,
     // expandTextHeight: false,
 
     action: actionStyle,
+    // action: null,
 
     // squareFitAction: false,
     // actionMask: false,
@@ -125,9 +130,15 @@ var label = scene.rexUI.add.simpleLabel({
 }, creators);
 ```
 
-- `background` : Create round-rectangle, nine-slice, or image for background. See [Style of Background](ui-style.md#style-of-background)
-- `text` : Create text, BBCodeText, BitmapText, or SimpleLabel for text. See [Style of Text](ui-style.md#style-of-text)
-- `icon`, `action` : Create image, nine-slice, or round-rectangle for image. See [Style of Image](ui-style.md#style-of-image)
+- `background` : 
+    - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Nine-slice, or Image as background element.
+    - `null` : Don't create any game object.
+- `text` : 
+    - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as text element.
+    - `null` : Don't create any game object.
+- `icon`, `action` : 
+    - [Style of Image](ui-style.md#style-of-image) : Create Image, Nine-slice, or Round-rectangle as image, action element.
+    - `null` : Don't create any game object.
 - `wrapText` : Enable WrapExpandText feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
