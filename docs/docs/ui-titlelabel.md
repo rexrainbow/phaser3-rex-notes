@@ -84,7 +84,7 @@ var label = scene.rexUI.add.titleLabel({
 
     layoutMode: 0,
 
-    rtl: false,
+    // rtl: false,
 
     background: backgroundGameObject,
 
@@ -343,6 +343,45 @@ See also - [dirty](ui-basesizer.md#dirty)
     var textureKey = label.texture.key;
     var frameName = label.frame.name;
     ```
+
+### Reset display content
+
+```javascript
+label.resetDisplayContent({
+    title: '',
+    text: '',
+
+    icon: undefined, 
+    iconFrame: undefined,
+    iconSize: undefined,
+
+    action: undefined, 
+    actionFrame: undefined,
+    actionSize: undefined,
+
+})
+```
+
+or
+
+```javascript
+label.resetDisplayContent(text);
+```
+
+- `title` : Set title's text string.
+- `text` : Set text string.
+- `icon`, `iconFrame`
+    - A string : Set texture of icon game object.
+    - `undefined`, or `null` : Hide icon game object.
+    - `true` : Show icon game object without change its texture.
+- `iconSize` : Set display size of icon game object.
+- `action`, `actionFrame`
+    - A string : Set texture of icon game object.
+    - `undefined`, or `null` : Hide action game object.
+    - `true` : Show action game object without change its texture.
+- `actionSize` : Set display size of action game object.
+
+Run `label.layout()` after this method, to layout children again.
 
 ### Other properties
 

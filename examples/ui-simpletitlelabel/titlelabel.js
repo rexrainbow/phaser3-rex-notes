@@ -86,7 +86,7 @@ class Demo extends Phaser.Scene {
                     .resetDisplayContent({
                         icon: 'pause',
                         title: 'DDD',
-                        text: '---'
+                        text: 'ddd'
                     }),
 
                 { expand: true }

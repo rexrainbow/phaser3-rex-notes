@@ -89,6 +89,8 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+    // width: 0,
+    // height: 0,
 
     // effects: true,
 
@@ -137,6 +139,8 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+    // width: 0,
+    // height: 0,
 
     // effects: true,
 
@@ -175,9 +179,6 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
 {
     // $type: 'roundRectangle',
 
-    // width: 0,
-    // height: 0,
-
     color: 0xffffff,
     // alpha: 1,
     strokeColor: 0xffffff,
@@ -185,7 +186,9 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // strokeWidth: 2,
     // radius: 0,
     // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
-    
+    // width: 0,
+    // height: 0,
+
     // Style override in active state
     // 'active.color': undefined,
     // 'active.alpha': undefined,

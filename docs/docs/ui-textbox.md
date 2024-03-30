@@ -221,6 +221,16 @@ var textBox = scene.rexUI.add.textBox({
     var textBox = new MyTextBox(scene, config);
     ```
 
+### Layout children
+
+Arrange position of all elements.
+
+```javascript
+textBox.layout();
+```
+
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Typing
 
 - Start

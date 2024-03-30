@@ -411,6 +411,7 @@ nav:
         - Label: ui-label.md
         - Simple label: ui-simplelabel.md
         - Title label: ui-titlelabel.md
+        - Simple title label: ui-simpletitlelabel.md
         - Name value label: ui-namevaluelabel.md
         - Badge label: ui-badgelabel.md
         - Image input label: ui-imageinputlabel.md
@@ -444,8 +445,10 @@ nav:
     - Drop down list:
         - Drop down list: ui-dropdownlist.md
         - Simple drop down list: ui-simpledropdownlist.md
-    - Text box: ui-textbox.md   
-    - Toast: ui-toast.md    
+    - Text box:
+        - Text box: ui-textbox.md
+        - Simple text box: ui-simpletextbox.md
+    - Toast: ui-toast.md
     - Tabs: ui-tabs.md
     - Folder: ui-folder.md     
     - Holy grail: ui-holygrail.md

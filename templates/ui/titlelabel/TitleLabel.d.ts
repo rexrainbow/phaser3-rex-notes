@@ -55,6 +55,10 @@ declare namespace TitleLabel {
             text?: number,
         }
     }
+
+    interface IResetDisplayContentConfig extends LabelBase.IResetDisplayContentConfig {
+        title?: string,
+    }
 }
 
 declare class TitleLabel extends LabelBase {
@@ -66,4 +70,8 @@ declare class TitleLabel extends LabelBase {
     title: string;
     setTitle(text: string): this;
     appendTitle(text: string): this;
+
+    resetDisplayContent(
+        config?: string | TitleLabel.IResetDisplayContentConfig
+    ): this;
 }
