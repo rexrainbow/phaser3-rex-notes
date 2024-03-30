@@ -165,10 +165,11 @@ var textBox = scene.rexUI.add.simpleTextBox({
     - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Nine-slice, or Image as background element.
     - `null` : Don't create any game object.
 - `title` : 
-    - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleTextBox, or TextArea as title element.
+    - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as title element.        
     - `null` : Don't create any game object.
 - `text` : 
-    - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleTextBox, or TextArea as text element.
+    - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleLabel as text element.
+        - Don't use TextArea as text element.
     - `null` : Don't create any game object.
 - `separator` : 
     - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Nine-slice, or Image as separator element.
